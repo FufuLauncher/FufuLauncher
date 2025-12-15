@@ -1,6 +1,12 @@
 # 芙芙启动器
 
-一个原神的第三方启动工具，支持游戏注入、自动签到和一些实用小功能。
+![Version](https://img.shields.io/badge/Version-v1.0.2-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-orange)
+
+### 一个原神的第三方启动工具，支持游戏注入、自动签到和一些实用小功能。
+
+![Image](https://youke2.picui.cn/s1/2025/12/16/6940312f3ce5d.png)
 
 ## 主要功能
 
@@ -24,10 +30,6 @@
 2. 游戏路径尽量别用管理员模式选，选完再管理员运行
 3. 注入功能需要以管理员身份运行程序
 4. 自定义背景支持图片和视频文件，动态视频背景不太稳定，图片正常
-
-## 版本
-
-当前版本：1.0.2
 
 ## 说明
 - 请在使用项目前安装 **.NET 8.0** 或以上任意版本和 **Webview2** 运行时
