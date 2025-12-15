@@ -90,7 +90,6 @@
     <value>關於</value>
   </data>
 
-  <!-- 以下资源无需修改（用于代码中ResourceLoader.GetString调用） -->
   <data name="AppDisplayName" xml:space="preserve">
     <value>芙芙啟動器</value>
   </data>
