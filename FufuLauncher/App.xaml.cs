@@ -106,7 +106,10 @@ public partial class App : Application
                     builder.AddDebug();
                     builder.SetMinimumLevel(LogLevel.Information);
                 });
-
+                services.AddSingleton<GenshinApiClient>();
+                services.AddSingleton<IGenshinService, GenshinService>();
+                services.AddTransient<GenshinViewModel>();
+                services.AddTransient<GenshinDataWindow>();
                 services.AddSingleton<IFilePickerService, FilePickerService>();
                 services.AddSingleton<INotificationService, NotificationService>();
                 services.AddTransient<CalculatorViewModel>();

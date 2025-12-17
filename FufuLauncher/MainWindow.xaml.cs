@@ -40,6 +40,8 @@ public sealed partial class MainWindow : WindowEx
         settings = new UISettings();
         settings.ColorValuesChanged += Settings_ColorValuesChanged;
 
+        SetInitialWindowSize();
+
         WeakReferenceMessenger.Default.Register<AgreementAcceptedMessage>(this, (r, m) =>
         {
             dispatcherQueue.TryEnqueue(() =>
@@ -70,11 +72,58 @@ public sealed partial class MainWindow : WindowEx
         this.Activated += OnWindowActivated;
     }
 
-    private void OnWindowActivated(object sender, WindowActivatedEventArgs args)
+
+
+
+
+    private void SetInitialWindowSize()
     {
         try
         {
 
+            var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(
+                this.AppWindow.Id, 
+                Microsoft.UI.Windowing.DisplayAreaFallback.Primary
+            );
+
+            if (displayArea != null)
+            {
+                var screenWidth = displayArea.WorkArea.Width;
+                var screenHeight = displayArea.WorkArea.Height;
+
+                if (screenWidth >= 2560 && screenHeight >= 1440)
+                {
+
+                    this.Width = 1750;
+                    this.Height = 1000;
+                }
+                else
+                {
+
+                    this.Width = 1360;
+                    this.Height = 768;
+                }
+            }
+            else
+            {
+
+                this.Width = 1360;
+                this.Height = 768;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"设置初始窗口大小失败: {ex.Message}");
+
+            this.Width = 1360;
+            this.Height = 768;
+        }
+    }
+
+    private void OnWindowActivated(object sender, WindowActivatedEventArgs args)
+    {
+        try
+        {
             this.SetTitleBar(AppTitleBar);
         
             TitleBarIcon.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(
@@ -332,7 +381,6 @@ public sealed partial class MainWindow : WindowEx
             Debug.WriteLine($"[通知系统] 用户点击关闭按钮");
             try
             {
-
                 if (NotificationPanel.Children.Contains(card))
                 {
                     NotificationPanel.Children.Remove(card);

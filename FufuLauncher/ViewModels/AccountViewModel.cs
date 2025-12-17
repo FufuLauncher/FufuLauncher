@@ -28,10 +28,12 @@ public partial class AccountViewModel : ObservableRecipient
     [ObservableProperty] private GameRolesResponse? _gameRolesInfo;
     [ObservableProperty] private UserFullInfoResponse? _userFullInfo;
     [ObservableProperty] private bool _isLoadingUserInfo;
+    
 
     public IRelayCommand LoginCommand { get; }
     public IRelayCommand LogoutCommand { get; }
     public IRelayCommand LoadUserInfoCommand { get; }
+    public IRelayCommand OpenGenshinDataCommand { get; }
 
     public AccountViewModel(
         ILocalSettingsService localSettingsService,
@@ -45,8 +47,34 @@ public partial class AccountViewModel : ObservableRecipient
         LoginCommand = new AsyncRelayCommand(LoginAsync);
         LogoutCommand = new RelayCommand(Logout);
         LoadUserInfoCommand = new AsyncRelayCommand(LoadUserInfoAsync);
+
+        OpenGenshinDataCommand = new AsyncRelayCommand(OpenGenshinDataAsync);
         
         _ = LoadAccountInfo();
+    }
+
+    private async Task OpenGenshinDataAsync()
+    {
+        try
+        {
+            StatusMessage = "正在打开原神数据窗口...";
+
+            var window = App.GetService<GenshinDataWindow>();
+
+            if (window.Visible)
+            {
+                window.Activate();
+                return;
+            }
+            
+            window.Activate();
+            StatusMessage = "窗口已打开";
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"ERROR: 打开原神数据窗口失败: {ex.Message}");
+            StatusMessage = $"打开失败: {ex.Message}";
+        }
     }
 
     private async Task LoadAccountInfo()

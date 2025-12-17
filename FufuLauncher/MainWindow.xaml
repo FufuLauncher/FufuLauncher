@@ -20,7 +20,15 @@
                         IsSettingsVisible="False"
                         SelectionChanged="NavigationView_SelectionChanged"
                         Loaded="NavigationView_Loaded"
-                        OpenPaneLength="240">
+                        OpenPaneLength="150"
+                        CompactPaneLength="60">
+            
+            <NavigationView.Resources>
+                <Style TargetType="NavigationViewItem">
+                    <Setter Property="MinHeight" Value="48"/>
+                    <Setter Property="Margin" Value="0,1,0,1"/>
+                </Style>
+            </NavigationView.Resources>
             
             <NavigationView.PaneHeader>
                 <TextBlock Text="" 
@@ -31,22 +39,34 @@
             </NavigationView.PaneHeader>
             
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="主页" Tag="FufuLauncher.ViewModels.MainViewModel" Icon="Home" />
+                <NavigationViewItem Content="主页" Tag="FufuLauncher.ViewModels.MainViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE10F;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Content="文件" Tag="FufuLauncher.ViewModels.BlankViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="设置" Tag="FufuLauncher.ViewModels.SettingsViewModel" Icon="Setting" />
-                <NavigationViewItem Content="账户" Tag="FufuLauncher.ViewModels.AccountViewModel" Icon="Contact" />
+                <NavigationViewItem Content="设置" Tag="FufuLauncher.ViewModels.SettingsViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="账户" Tag="FufuLauncher.ViewModels.AccountViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Content="其他" Tag="FufuLauncher.ViewModels.OtherViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE9F5;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE9F5;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="养成计算器" Tag="FufuLauncher.ViewModels.CalculatorViewModel">
+                <NavigationViewItem Content="养成计算" Tag="FufuLauncher.ViewModels.CalculatorViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE835;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE835;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -65,7 +85,7 @@
                         IsHitTestVisible="True"/>
         </Grid>
 
-        <!-- 标题栏内容（叠加在系统标题栏上方，留出汉堡按钮空间） -->
+        <!-- 标题栏内容 -->
         <Grid x:Name="AppTitleBar" 
               Height="40" 
               HorizontalAlignment="Stretch"
@@ -86,7 +106,6 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"/>
             
-            <!-- 软件名称 -->
             <TextBlock x:Name="TitleBarText"
                        Grid.Column="1" 
                        Text="芙芙启动器"

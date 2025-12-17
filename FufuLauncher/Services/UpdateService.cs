@@ -138,6 +138,6 @@ public async Task<UpdateCheckResult> CheckUpdateAsync()
         public string Version { get; set; } = string.Empty;
     
         [JsonPropertyName("updateInfoUrl")]
-        public string UpdateInfoUrl { get; set; } = string.Empty;  // 新增
+        public string UpdateInfoUrl { get; set; } = string.Empty;
     }
 }

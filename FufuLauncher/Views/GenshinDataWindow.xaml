@@ -1,0 +1,236 @@
+﻿<windowex:WindowEx
+    x:Class="FufuLauncher.Views.GenshinDataWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:windowex="using:WinUIEx"
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    Title="旅行札记详细查询"
+    Width="1000"
+    Height="800"
+    MinWidth="900"
+    MinHeight="700">
+    
+    <Grid x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+        <Grid.Resources>
+            <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <helpers:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </Grid.Resources>
+        
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- 标题栏 -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="16" Margin="0,0,0,24">
+                <FontIcon Glyph="&#xE8B9;" FontSize="32"/>
+                <TextBlock Text="旅行札记详细数据" FontSize="28" FontWeight="Bold" 
+                           VerticalAlignment="Center"/>
+                
+                <!-- 保留手动刷新按钮，但可以改为可选 -->
+                <Button Command="{Binding LoadDataCommand}" 
+                        Padding="16,8" CornerRadius="6"
+                        IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}">
+                    <Grid>
+                        <TextBlock Text="重新加载" 
+                                  Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}"/>
+                        <ProgressRing Width="16" Height="16" 
+                                     Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    </Grid>
+                </Button>
+                
+                <TextBlock Text="{Binding StatusMessage}" 
+                           FontSize="13" VerticalAlignment="Center" Margin="16,0,0,0"/>
+            </StackPanel>
+            
+            <!-- 用户信息 -->
+            <StackPanel Grid.Row="1" Spacing="8" Margin="0,0,0,24"
+                        Visibility="{Binding TravelersDiary, Converter={StaticResource NullToVisibilityConverter}}">
+                <TextBlock FontSize="20" FontWeight="Bold">
+                    <Run Text="{Binding Nickname}"/>
+                    <Run Text=" - UID: "/>
+                    <Run Text="{Binding Uid}"/>
+                </TextBlock>
+                <TextBlock FontSize="14" Opacity="0.7">
+                    <Run Text="数据日期: "/>
+                    <Run Text="{Binding TravelersDiary.Data.Date}"/>
+                </TextBlock>
+            </StackPanel>
+            
+            <!-- 数据展示区 -->
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel Spacing="20" 
+                            Visibility="{Binding TravelersDiary, Converter={StaticResource NullToVisibilityConverter}}">
+                    
+                    <!-- 今日数据卡片 -->
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefault}" 
+                            CornerRadius="8" Padding="24">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="今日收入" FontSize="20" FontWeight="SemiBold"/>
+                            <Grid ColumnSpacing="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Grid.Column="0" Spacing="8">
+                                    <TextBlock FontSize="24" FontWeight="Bold">
+                                        <Run Text="{Binding TodayPrimogems}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="18" Opacity="0.9">
+                                        <Run Text="{Binding TodayMora}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Column="1" Spacing="8" HorizontalAlignment="Right">
+                                    <TextBlock Text="昨日对比" FontSize="12" Opacity="0.7" HorizontalAlignment="Right"/>
+                                    <TextBlock FontSize="14" Opacity="0.7" HorizontalAlignment="Right">
+                                        <Run Text="原石: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.DayData.LastPrimogems}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" Opacity="0.7" HorizontalAlignment="Right">
+                                        <Run Text="摩拉: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.DayData.LastMora}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 本月累计卡片 -->
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefault}" 
+                            CornerRadius="8" Padding="24">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="本月累计收入" FontSize="20" FontWeight="SemiBold"/>
+                            <Grid ColumnSpacing="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <StackPanel Grid.Column="0" Spacing="8">
+                                    <TextBlock FontSize="28" FontWeight="Bold">
+                                        <Run Text="本月原石: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.CurrentPrimogems}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="20" Opacity="0.9">
+                                        <Run Text="本月摩拉: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.CurrentMora}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Column="1" Spacing="8">
+                                    <TextBlock FontSize="16" Opacity="0.7">
+                                        <Run Text="上月原石: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.LastPrimogems}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="16" Opacity="0.7">
+                                        <Run Text="上月摩拉: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.LastMora}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Column="2" Spacing="8" Margin="40,0,0,0">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold">
+                                        <Run Text="收入等级: Lv."/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.CurrentPrimogemsLevel}"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" Foreground="#4ECDC4">
+                                        <Run Text="原石增长率: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.PrimogemsRate}"/>
+                                        <Run Text="%"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" Foreground="#4ECDC4">
+                                        <Run Text="摩拉增长率: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.MoraRate}"/>
+                                        <Run Text="%"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 收入来源详细分析 -->
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefault}" 
+                            CornerRadius="8" Padding="24">
+                        <StackPanel Spacing="16">
+                            <TextBlock Text="收入来源分析" FontSize="20" FontWeight="SemiBold"/>
+                            <TextBlock Text="本月原石收入分布" FontSize="14" Opacity="0.7" Margin="0,0,0,8"/>
+                            
+                            <ItemsControl ItemsSource="{Binding IncomeSources}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <!-- 颜色标识 -->
+                                            <Ellipse Grid.Column="0" Width="12" Height="12" 
+                                                     Fill="{Binding Color}" Margin="0,0,12,0"/>
+                                            
+                                            <!-- 来源名称 -->
+                                            <TextBlock Grid.Column="1" Text="{Binding Action}" 
+                                                       FontSize="16" VerticalAlignment="Center"/>
+                                            
+                                            <!-- 数量 -->
+                                            <TextBlock Grid.Column="2" FontSize="14" FontWeight="SemiBold" 
+                                                       Margin="24,0,24,0" VerticalAlignment="Center">
+                                                <Run Text="{Binding Num}"/>
+                                                <Run Text="原石"/>
+                                            </TextBlock>
+                                            
+                                            <!-- 百分比 -->
+                                            <TextBlock Grid.Column="3" FontSize="14" Opacity="0.7" VerticalAlignment="Center">
+                                                <Run Text="{Binding Percent}"/>
+                                                <Run Text="%"/>
+                                            </TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            
+                            <!-- 总计 -->
+                            <Border BorderThickness="1,0,0,0" 
+                                    BorderBrush="{ThemeResource DividerStrokeColorDefault}" 
+                                    Margin="0,16,0,0" Padding="16,0,0,0">
+                                <StackPanel Orientation="Horizontal" Spacing="24">
+                                    <TextBlock FontSize="16" FontWeight="SemiBold">
+                                        <Run Text="总计: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.CurrentPrimogems, Mode=OneWay}"/>
+                                        <Run Text=" 原石"/>
+                                    </TextBlock>
+                                    <TextBlock FontSize="16" FontWeight="SemiBold">
+                                        <Run Text="上月: "/>
+                                        <Run Text="{Binding TravelersDiary.Data.MonthData.LastPrimogems, Mode=OneWay}"/>
+                                        <Run Text=" 原石"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- 数据说明 -->
+                    <Border Background="{ThemeResource CardBackgroundFillColorDefault}" 
+                            CornerRadius="8" Padding="20" Opacity="0.8">
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="数据说明" FontSize="14" FontWeight="SemiBold"/>
+                            <TextBlock Text="• 数据来源于米游社旅行札记" FontSize="12" Opacity="0.7"/>
+                            <TextBlock Text="• 每日数据于次日上午更新" FontSize="12" Opacity="0.7"/>
+                            <TextBlock Text="• 收入等级根据原石获取效率评定" FontSize="12" Opacity="0.7"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+            
+        </Grid>
+    </Grid>
+</windowex:WindowEx>

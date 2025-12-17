@@ -12,7 +12,6 @@
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
             </ResourceDictionary.MergedDictionaries>
             
-            <!-- 转换器 -->
             <helpers:DateTimeConverter x:Key="DateTimeConverter"/>
             <helpers:BoolNegationConverter x:Key="BoolNegationConverter"/>
             <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>

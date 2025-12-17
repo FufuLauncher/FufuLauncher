@@ -6,7 +6,7 @@ namespace FufuLauncher.Views;
 
 public sealed partial class UpdateNotificationWindow : WindowEx
 {
-    // 修改构造函数，接受更新公告URL参数
+
     public UpdateNotificationWindow(string updateInfoUrl)
     {
         InitializeComponent();
@@ -14,7 +14,6 @@ public sealed partial class UpdateNotificationWindow : WindowEx
         this.ExtendsContentIntoTitleBar = true;
         this.SetTitleBar(AppTitleBar);
 
-        // 使用传入的动态URL加载公告
         UpdateWebView.Source = new Uri(updateInfoUrl);
 
         this.CenterOnScreen();

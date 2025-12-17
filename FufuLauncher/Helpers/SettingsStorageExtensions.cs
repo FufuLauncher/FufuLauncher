@@ -5,7 +5,6 @@ using Windows.Storage.Streams;
 
 namespace FufuLauncher.Helpers;
 
-// More details regarding storing and retrieving app data at https://docs.microsoft.com/windows/apps/design/app-settings/store-and-retrieve-app-data
 public static class SettingsStorageExtensions
 {
     private const string FileExtension = ".json";
