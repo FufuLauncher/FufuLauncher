@@ -96,8 +96,7 @@
                         Margin="0,0,24,24"
                         IsHitTestVisible="True"/>
         </Grid>
-
-        <!-- 标题栏内容 -->
+        
         <Grid x:Name="AppTitleBar" 
               Height="40" 
               HorizontalAlignment="Stretch"
