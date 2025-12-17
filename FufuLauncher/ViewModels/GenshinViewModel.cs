@@ -19,6 +19,7 @@ public class GenshinViewModel : INotifyPropertyChanged
 {
     private readonly IGenshinService _genshinService;
     private readonly ILocalSettingsService _localSettingsService;
+    private readonly IUserInfoService _userInfoService;
 
     private string _uid = string.Empty;
     public string Uid
@@ -96,10 +97,14 @@ public class GenshinViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public GenshinViewModel(IGenshinService genshinService, ILocalSettingsService localSettingsService)
+    public GenshinViewModel(
+        IGenshinService genshinService, 
+        ILocalSettingsService localSettingsService,
+        IUserInfoService userInfoService)
     {
         _genshinService = genshinService;
         _localSettingsService = localSettingsService;
+        _userInfoService = userInfoService;
         LoadDataCommand = new AsyncRelayCommand(LoadDataAsync);
     }
 
@@ -131,20 +136,22 @@ public class GenshinViewModel : INotifyPropertyChanged
                 return;
             }
 
-            StatusMessage = "正在查询角色信息...";
-
-            Uid = "141699020";
-            Nickname = "CodeCubist";
-
-            if (string.IsNullOrEmpty(Uid))
+            var cookie = config.Account.Cookie;
+            
+            StatusMessage = "正在获取用户信息...";
+            var rolesResponse = await _userInfoService.GetUserGameRolesAsync(cookie);
+            var role = rolesResponse?.data?.list?.FirstOrDefault();
+            
+            if (role == null)
             {
-                StatusMessage = "错误：未找到UID";
+                StatusMessage = "错误：无法获取角色信息";
                 return;
             }
+            
+            Uid = role.game_uid;
+            Nickname = role.nickname;
 
-            var cookie = config.Account.Cookie;
-            StatusMessage = $"正在加载 {Nickname} 的旅行札记...";
-
+            StatusMessage = "正在加载旅行札记数据...";
             TravelersDiary = await _genshinService.GetTravelersDiarySummaryAsync(Uid, cookie, 12);
 
             OnPropertyChanged(nameof(TodayPrimogems));
@@ -163,6 +170,11 @@ public class GenshinViewModel : INotifyPropertyChanged
         catch (Exception ex)
         {
             Debug.WriteLine($"加载旅行札记失败: {ex.Message}");
+            Debug.WriteLine($"堆栈: {ex.StackTrace}");
+            if (ex.InnerException != null)
+            {
+                Debug.WriteLine($"内部异常: {ex.InnerException.Message}");
+            }
             StatusMessage = $"加载失败: {ex.Message}";
         }
         finally
