@@ -198,12 +198,6 @@ namespace FufuLauncher.Services
                     logBuilder.AppendLine("[启动流程] 游戏进程已启动");
                     await LaunchAdditionalProgramAsync();
                     
-                    if (useInjection)
-                    {
-                        logBuilder.AppendLine("[启动流程] 启动解锁工具");
-                        await LaunchUnlockerAndHideWindowAsync();
-                    }
-                    
                     result.Success = true;
                     result.ErrorMessage = "";
                 }
@@ -222,57 +216,6 @@ namespace FufuLauncher.Services
                 result.DetailLog = $"[启动流程] 💥 未处理异常: {ex}\n{ex.StackTrace}";
                 Debug.WriteLine(result.DetailLog);
                 return result;
-            }
-        }
-
-        private async Task LaunchUnlockerAndHideWindowAsync()
-        {
-            string launcherDirectory = AppContext.BaseDirectory;
-            string unlockerPath = Path.Combine(launcherDirectory, "ControlPanel.exe");
-    
-            if (!File.Exists(unlockerPath))
-            {
-                Trace.WriteLine($"[附加程序] ControlPanel.exe不存在: {unlockerPath}");
-                return;
-            }
-
-            try
-            {
-                Trace.WriteLine($"[附加程序] 启动ControlPanel.exe并隐藏窗口: {unlockerPath}");
-        
-                var unlockerProcess = Process.Start(new ProcessStartInfo
-                {
-                    FileName = unlockerPath,
-                    Arguments = "-run",
-                    WorkingDirectory = launcherDirectory,
-                    UseShellExecute = true
-                });
-
-                if (unlockerProcess != null)
-                {
-                    App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-                    {
-                        App.MainWindow.AppWindow.Hide();
-                    });
-
-                    await Task.Run(() => unlockerProcess.WaitForExit());
-
-                    App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-                    {
-                        App.MainWindow.AppWindow.Show();
-                    });
-
-                    Trace.WriteLine("[附加程序] ControlPanel.exe已退出，窗口已恢复");
-                }
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine($"[附加程序] 启动ControlPanel.exe失败: {ex.Message}");
-        
-                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-                {
-                    App.MainWindow.AppWindow.Show();
-                });
             }
         }
     

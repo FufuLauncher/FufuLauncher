@@ -262,7 +262,7 @@
                     <TextBlock Text="切换后下次启动游戏生效" 
                                FontSize="11" 
                                Opacity="0.6"/>
-                    <TextBlock Text="需要管理员权限" 
+                    <TextBlock Text="短期支持模式下无法使用控制面板！请用键盘方向键来控制Fov！" 
                                FontSize="11" 
                                Opacity="0.6" 
                                Foreground="{ThemeResource SystemFillColorCautionBrush}"/>

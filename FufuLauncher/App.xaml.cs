@@ -98,7 +98,8 @@ public partial class App : Application
                 services.AddSingleton<IUserConfigService, UserConfigService>();
 
                 services.AddSingleton<IUserConfigService, UserConfigService>();
-
+                services.AddSingleton<ControlPanelModel>();
+                services.AddTransient<PanelPage>();
                 services.AddSingleton<Contracts.Services.IUserInfoService, UserInfoService>();
 
                 services.AddLogging(builder =>

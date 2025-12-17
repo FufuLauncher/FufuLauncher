@@ -273,7 +273,44 @@ public sealed partial class MainWindow : WindowEx
         if (args.SelectedItem is NavigationViewItem selectedItem)
         {
             var viewModelTag = selectedItem.Tag?.ToString();
+            
+            if (viewModelTag == "FufuLauncher.ViewModels.SettingsViewModel")
+            {
+                PlaySettingsIconRotationAnimation();
+            }
+        
             if (!string.IsNullOrEmpty(viewModelTag)) NavigateToPage(viewModelTag);
+        }
+    }
+
+    private void PlaySettingsIconRotationAnimation()
+    {
+        try
+        {
+            if (SettingsIcon != null)
+            {
+                if (SettingsIcon.RenderTransform == null || SettingsIcon.RenderTransform is not RotateTransform)
+                {
+                    SettingsIcon.RenderTransform = new RotateTransform { CenterX = 14, CenterY = 14 };
+                }
+                var rotateAnimation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 360,
+                    Duration = TimeSpan.FromMilliseconds(300),
+                    EasingFunction = new CircleEase { EasingMode = EasingMode.EaseInOut }
+                };
+
+                var storyboard = new Storyboard();
+                Storyboard.SetTarget(rotateAnimation, SettingsIcon.RenderTransform);
+                Storyboard.SetTargetProperty(rotateAnimation, "Angle");
+                storyboard.Children.Add(rotateAnimation);
+                storyboard.Begin();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"播放设置图标动画失败: {ex.Message}");
         }
     }
 
@@ -287,6 +324,7 @@ public sealed partial class MainWindow : WindowEx
             "FufuLauncher.ViewModels.AccountViewModel" => typeof(Views.AccountPage),
             "FufuLauncher.ViewModels.OtherViewModel" => typeof(Views.OtherPage),
             "FufuLauncher.ViewModels.CalculatorViewModel" => typeof(Views.CalculatorPage),
+            "FufuLauncher.ViewModels.ControlPanelModel" => typeof(Views.PanelPage),
             _ => null
         };
 

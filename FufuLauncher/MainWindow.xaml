@@ -49,11 +49,6 @@
                         <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="设置" Tag="FufuLauncher.ViewModels.SettingsViewModel">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
                 <NavigationViewItem Content="账户" Tag="FufuLauncher.ViewModels.AccountViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE77B;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
@@ -69,7 +64,24 @@
                         <FontIcon Glyph="&#xE835;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="面板" Tag="FufuLauncher.ViewModels.ControlPanelModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE770;" FontFamily="Segoe MDL2 Assets" FontSize="28"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
+            
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem Content="设置" Tag="FufuLauncher.ViewModels.SettingsViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon x:Name="SettingsIcon" Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="28">
+                            <FontIcon.RenderTransform>
+                                <RotateTransform CenterX="14" CenterY="14"/>
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
 
             <Frame x:Name="ContentFrame" />
         </NavigationView>

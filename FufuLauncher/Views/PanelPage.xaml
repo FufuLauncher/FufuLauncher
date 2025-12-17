@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="FufuLauncher.Views.PanelPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:FufuLauncher.ViewModels"
+    xmlns:models="using:FufuLauncher.Models"
+    xmlns:converters="using:FufuLauncher.Converters"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ControlPanelModel}"
+    mc:Ignorable="d"
+    Background="Transparent">
+    
+    <!-- 资源必须定义在页面最顶部 -->
+    <Page.Resources>
+        <converters:EmptyCountToVisibilityConverter x:Key="EmptyCountToVisibilityConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid Padding="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- 左侧：控制面板 -->
+        <ScrollViewer x:Name="RootScrollViewer" Tapped="RootScrollViewer_Tapped" Grid.Column="0">
+            <StackPanel Spacing="20">
+                <TextBlock Text="游戏控制面板" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10"/>
+
+                <Button Content="启动独立控制面板" 
+                        Click="LaunchControlPanelButton_Click"
+                        HorizontalAlignment="Left"
+                        Width="200"
+                        Margin="0,0,0,10"/>
+
+                <TextBlock Text="{Binding ConnectionStatus}" 
+                           FontSize="14" 
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+                <StackPanel Spacing="10">
+                    <TextBlock Text="FPS 设置" FontWeight="Bold" FontSize="16" />
+                    <ToggleSwitch Header="启用 FPS 覆盖" IsOn="{Binding EnableFpsOverride, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Slider Header="目标 FPS" Value="{Binding TargetFps, Mode=TwoWay}" Minimum="30" Maximum="1000" StepFrequency="10" Width="300" />
+                        <NumberBox x:Name="FpsNumberBox" Value="{Binding TargetFps, Mode=TwoWay}" Minimum="30" Maximum="1000" SpinButtonPlacementMode="Hidden" Width="100" VerticalAlignment="Bottom" Margin="0,0,0,4" GotFocus="NumberBox_GotFocus" LostFocus="NumberBox_LostFocus" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Spacing="10">
+                    <TextBlock Text="FOV 设置" FontWeight="Bold" FontSize="16" />
+                    <ToggleSwitch Header="启用 FOV 覆盖" IsOn="{Binding EnableFovOverride, Mode=TwoWay}" />
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Slider Header="目标 FOV" Value="{Binding TargetFov, Mode=TwoWay}" Minimum="30" Maximum="120" StepFrequency="1" Width="300" />
+                        <NumberBox x:Name="FovNumberBox" Value="{Binding TargetFov, Mode=TwoWay}" Minimum="30" Maximum="120" SpinButtonPlacementMode="Hidden" Width="100" VerticalAlignment="Bottom" Margin="0,0,0,4" GotFocus="NumberBox_GotFocus" LostFocus="NumberBox_LostFocus" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Spacing="10">
+                    <TextBlock Text="其他设置" FontWeight="Bold" FontSize="16" />
+                    <ToggleSwitch Header="启用雾效覆盖" IsOn="{Binding EnableFogOverride, Mode=TwoWay}" />
+                    <ToggleSwitch Header="启用视角覆盖" IsOn="{Binding EnablePerspectiveOverride, Mode=TwoWay}" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- 右侧：游戏时长统计 -->
+        <Border Grid.Column="1" 
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Margin="20,0,0,0"
+                Padding="20">
+            <ScrollViewer>
+                <StackPanel Spacing="15">
+                    <TextBlock Text="本周游戏时长统计" 
+                               FontSize="18" 
+                               FontWeight="Bold"
+                               Margin="0,0,0,5"/>
+                    
+                    <!-- 统计概览 -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="5">
+                            <TextBlock Text="总时长" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding WeeklyStats.DisplayTotalTime}" FontSize="18" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="1" Spacing="5">
+                            <TextBlock Text="平均每日" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding WeeklyStats.DisplayAverageTime}" FontSize="18" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="0" Spacing="5" Margin="0,15,0,0">
+                            <TextBlock Text="游戏状态" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            
+                            <!-- 修复：使用重叠的 TextBlock 代替 DataTrigger -->
+                            <Grid>
+                                <TextBlock Text="未运行" FontSize="16" FontWeight="SemiBold" 
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Visibility="{Binding IsGameRunning, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}"/>
+                                <TextBlock Text="运行中" FontSize="16" FontWeight="SemiBold" 
+                                           Foreground="#10B981"
+                                           Visibility="{Binding IsGameRunning, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!-- 分隔线 -->
+                    <Rectangle Height="1" 
+                               Fill="{ThemeResource CardStrokeColorDefaultBrush}" 
+                               Margin="0,5"/>
+                    
+                    <!-- 每日详情 -->
+                    <TextBlock Text="每日详情" FontWeight="SemiBold" FontSize="14" Margin="0,5,0,0"/>
+                    <ItemsControl ItemsSource="{Binding WeeklyStats.DailyRecords}" Margin="0,5,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="models:GamePlayTimeRecord">
+                                <Grid Margin="0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                                        <TextBlock Text="{Binding DayOfWeek}" FontSize="14" Width="40"/>
+                                        <TextBlock Text="{Binding DisplayDate}" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
+                                    
+                                    <TextBlock Grid.Column="1" Text="{Binding DisplayTime}" FontSize="14" FontWeight="SemiBold"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <!-- 空状态 -->
+                    <TextBlock Text="本周暂无游戏记录" 
+                               FontSize="14" 
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               HorizontalAlignment="Center"
+                               Margin="0,20"
+                               Visibility="{Binding WeeklyStats.DailyRecords.Count, Converter={StaticResource EmptyCountToVisibilityConverter}}"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Page>
