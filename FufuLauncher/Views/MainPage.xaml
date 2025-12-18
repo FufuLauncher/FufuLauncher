@@ -12,7 +12,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
             </ResourceDictionary.MergedDictionaries>
-            
             <helpers:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
             <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <helpers:BoolToGlyphConverter x:Key="BoolToGlyphConverter"/>
@@ -20,24 +19,17 @@
     </Page.Resources>
 
     <Grid>
-        
         <Grid>
-            
-            <ProgressRing Width="60" 
-                          Height="60"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
+            <ProgressRing Width="60" Height="60"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
                           IsActive="{x:Bind ViewModel.IsBackgroundLoading, Mode=OneWay}"
                           Visibility="{x:Bind ViewModel.IsBackgroundLoading, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
     
-            
-            <Image
-                Source="{x:Bind ViewModel.BackgroundImageSource, Mode=OneWay}"
+            <Image Source="{x:Bind ViewModel.BackgroundImageSource, Mode=OneWay}"
                    Stretch="UniformToFill"
-                   Opacity="0.8"
+                   Opacity="1.0"
                    Visibility="{x:Bind ViewModel.ImageVisibility, Mode=OneWay}" />
 
-            
             <MediaPlayerElement x:Name="BackgroundVideo"
                                 Stretch="UniformToFill"
                                 Opacity="0.8"
@@ -45,47 +37,38 @@
                                 IsHitTestVisible="False"
                                 AutoPlay="True"/>
         </Grid>
-
         
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="500"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
             
-            
-            <Grid Grid.Column="0" Margin="16,32,0,32">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" 
+                        Margin="16,0,0,32"
+                        VerticalAlignment="Bottom"
+                        Spacing="8">
                 
-                
-                <Grid Grid.Row="0" 
-                      CornerRadius="12"
+                <Grid CornerRadius="12"
                       BorderThickness="1"
                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                      Margin="0,0,0,8">
-                    
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20" MaxHeight="400">
+                      MinHeight="280" 
+                      MaxHeight="280">
+        
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                                  Padding="20" 
+                                  MaxHeight="456">
                         <StackPanel Spacing="16">
-                            <TextBlock Text="游戏消息" FontSize="24" FontWeight="Bold" Margin="0,0,0,8"/>
-                            
+                            <TextBlock Text="游戏资讯" FontSize="24" FontWeight="Bold" Margin="0,0,0,8"/>
                             
                             <Grid Visibility="{x:Bind ViewModel.Banners.Count, Mode=OneWay, Converter={StaticResource IntToVisibilityConverter}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                
                                 <TextBlock Grid.Row="0" Text="活动轮播" FontSize="14" FontWeight="SemiBold" 
                                            Margin="0,0,0,8" Opacity="0.8"/>
-                                
                                 <Grid Grid.Row="1" Height="120">
                                     <Border CornerRadius="8" Background="#1F1F1F">
                                         <Image Source="{x:Bind ViewModel.CurrentBanner.Image.Url, Mode=OneWay}"
@@ -99,29 +82,23 @@
                                 </Grid>
                             </Grid>
                             
-                            
                             <Grid Visibility="{x:Bind ViewModel.ActivityPosts.Count, Mode=OneWay, Converter={StaticResource IntToVisibilityConverter}}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                
                                 <Grid Grid.Row="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    
                                     <TextBlock Text="活动" FontSize="14" FontWeight="SemiBold" Opacity="0.8"/>
-                                    
-                                    <Button Grid.Column="1" 
-                                            Background="Transparent" BorderThickness="0" Width="32" Height="32" Padding="0"
+                                    <Button Grid.Column="1" Background="Transparent" BorderThickness="0" Width="32" Height="32" Padding="0"
                                             Command="{x:Bind ViewModel.ToggleActivityCommand}">
                                         <FontIcon Glyph="{x:Bind ViewModel.IsActivityPostsExpanded, Mode=OneWay, Converter={StaticResource BoolToGlyphConverter}}" 
                                                   FontSize="12"/>
                                     </Button>
                                 </Grid>
-                                
                                 <ItemsControl Grid.Row="1" Margin="0,8,0,0"
                                               ItemsSource="{x:Bind ViewModel.ActivityPosts}"
                                               Visibility="{x:Bind ViewModel.IsActivityPostsExpanded, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
@@ -136,7 +113,6 @@
                                                         <RowDefinition Height="Auto"/>
                                                         <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
-                                                    
                                                     <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="13" 
                                                                TextWrapping="Wrap" MaxLines="2" Margin="0,0,0,4"/>
                                                     <TextBlock Grid.Row="1" Text="{Binding Date}" FontSize="11" Opacity="0.6"/>
@@ -146,7 +122,6 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </Grid>
-                            
                             
                             <Grid Visibility="{x:Bind ViewModel.AnnouncementPosts.Count, Mode=OneWay, Converter={StaticResource IntToVisibilityConverter}}">
                                 <TextBlock Text="公告" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8" Opacity="0.8"/>
@@ -162,7 +137,6 @@
                                                         <RowDefinition Height="Auto"/>
                                                         <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
-                                                    
                                                     <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="13" 
                                                                TextWrapping="Wrap" MaxLines="2" Margin="0,0,0,4"/>
                                                     <TextBlock Grid.Row="1" Text="{Binding Date}" FontSize="11" Opacity="0.6"/>
@@ -172,7 +146,6 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </Grid>
-                            
                             
                             <Grid Visibility="{x:Bind ViewModel.InfoPosts.Count, Mode=OneWay, Converter={StaticResource IntToVisibilityConverter}}">
                                 <TextBlock Text="资讯" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8" Opacity="0.8"/>
@@ -188,7 +161,6 @@
                                                         <RowDefinition Height="Auto"/>
                                                         <RowDefinition Height="Auto"/>
                                                     </Grid.RowDefinitions>
-                                                    
                                                     <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="13" 
                                                                TextWrapping="Wrap" MaxLines="2" Margin="0,0,0,4"/>
                                                     <TextBlock Grid.Row="1" Text="{Binding Date}" FontSize="11" Opacity="0.6"/>
@@ -198,7 +170,6 @@
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
                             </Grid>
-                            
                             
                             <Grid Visibility="{x:Bind ViewModel.SocialMediaList.Count, Mode=OneWay, Converter={StaticResource IntToVisibilityConverter}}">
                                 <TextBlock Text="社区" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,8" Opacity="0.8"/>
@@ -225,12 +196,8 @@
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
-
                 
-                <Grid Grid.Row="1" 
-                      Padding="16" 
-                      CornerRadius="8" 
-                      BorderThickness="1" 
+                <Grid Padding="16" CornerRadius="8" BorderThickness="1" 
                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                       Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                     <Grid.RowDefinitions>
@@ -238,81 +205,57 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    
                     <TextBlock Grid.Row="0" Text="原神签到" FontSize="16" FontWeight="SemiBold" 
                                Margin="0,0,0,8" Opacity="0.9"/>
-                    
                     <StackPanel Grid.Row="1" Spacing="4" Margin="0,0,0,12">
-                        <TextBlock Text="{x:Bind ViewModel.CheckinStatusText, Mode=OneWay}" 
-                                   FontSize="13" TextWrapping="Wrap"/>
-                        <TextBlock Text="{x:Bind ViewModel.CheckinSummary, Mode=OneWay}" 
-                                   FontSize="11" Opacity="0.7" TextWrapping="Wrap"/>
+                        <TextBlock Text="{x:Bind ViewModel.CheckinStatusText, Mode=OneWay}" FontSize="13" TextWrapping="Wrap"/>
+                        <TextBlock Text="{x:Bind ViewModel.CheckinSummary, Mode=OneWay}" FontSize="11" Opacity="0.7" TextWrapping="Wrap"/>
                     </StackPanel>
-                    
-                    <Button Grid.Row="2" 
-                            Content="{x:Bind ViewModel.CheckinButtonText, Mode=OneWay}"
+                    <Button Grid.Row="2" Content="{x:Bind ViewModel.CheckinButtonText, Mode=OneWay}"
                             Command="{x:Bind ViewModel.ExecuteCheckinCommand}"
                             IsEnabled="{x:Bind ViewModel.IsCheckinButtonEnabled, Mode=OneWay}"
-                            HorizontalAlignment="Stretch" 
-                            CornerRadius="4"
-                            Padding="12,8"
+                            HorizontalAlignment="Stretch" CornerRadius="4" Padding="12,8"
                             Style="{StaticResource AccentButtonStyle}">
                         <Button.Resources>
                             <SolidColorBrush x:Key="ButtonBackground" Color="{ThemeResource SystemAccentColor}"/>
-                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" 
-                                             Color="{ThemeResource SystemAccentColorLight1}"/>
-                            <SolidColorBrush x:Key="ButtonBackgroundPressed" 
-                                             Color="{ThemeResource SystemAccentColorDark1}"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColorLight1}"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}"/>
                         </Button.Resources>
                     </Button>
                 </Grid>
-            </Grid>
-            
+            </StackPanel>
             
             <Grid Grid.Column="1" Margin="32" Background="Transparent">
-                
                 <Button VerticalAlignment="Top" HorizontalAlignment="Right" 
                         Margin="0,0,0,12"
                         Command="{x:Bind ViewModel.ToggleBackgroundTypeCommand}"
                         Content="{x:Bind ViewModel.BackgroundTypeToggleText, Mode=OneWay}"
-                        CornerRadius="6"
-                        Padding="12,6"
+                        CornerRadius="6" Padding="12,6"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                     <Button.Resources>
-                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" 
-                                         Color="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
+                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
                     </Button.Resources>
                 </Button>
             </Grid>
 
-            
-            <StackPanel Grid.Row="1" Grid.Column="1" 
-                        Orientation="Horizontal" 
-                        VerticalAlignment="Bottom" 
-                        HorizontalAlignment="Right"
-                        Margin="0,0,32,88"
-                        Spacing="12">
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" 
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        Margin="0,0,32,88" Spacing="12">
                 <TextBlock Text="注入" FontSize="12" Opacity="0.7" VerticalAlignment="Center"/>
-                <ToggleSwitch Header="" 
-                              IsOn="{x:Bind ViewModel.UseInjection, Mode=TwoWay}"
+                <ToggleSwitch Header="" IsOn="{x:Bind ViewModel.UseInjection, Mode=TwoWay}"
                               IsEnabled="{x:Bind ViewModel.IsInjectionToggleEnabled, Mode=OneWay}"/>
             </StackPanel>
 
-            
             <Button Grid.Row="1" Grid.Column="1"
                     Command="{x:Bind ViewModel.OpenScreenshotFolderCommand}"
                     IsEnabled="{x:Bind ViewModel.IsLaunchButtonEnabled, Mode=OneWay}"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,280,32"
-                    CornerRadius="24"
-                    Padding="18,12"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="0,0,280,32" CornerRadius="24" Padding="18,12"
                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                 <Button.Resources>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" 
-                                     Color="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="{ThemeResource CardBackgroundFillColorSecondaryBrush}"/>
                 </Button.Resources>
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <FontIcon Glyph="&#xE8B7;" FontSize="16"/>
@@ -320,18 +263,13 @@
                 </StackPanel>
             </Button>
 
-            
             <Button Grid.Row="1" Grid.Column="1"
                     Command="{x:Bind ViewModel.LaunchGameCommand}"
                     IsEnabled="{x:Bind ViewModel.IsLaunchButtonEnabled, Mode=OneWay}"
                     Style="{StaticResource AccentButtonStyle}"
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,32,32"
-                    CornerRadius="24"
-                    Padding="36,18"
-                    FontSize="16"
-                    FontWeight="SemiBold">
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                    Margin="0,0,32,32" CornerRadius="24" Padding="36,18"
+                    FontSize="16" FontWeight="SemiBold">
                 <Button.Resources>
                     <SolidColorBrush x:Key="ButtonBackground" Color="#FF00B4FF"/>
                     <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FF20C4FF"/>
@@ -341,12 +279,9 @@
                     <ProgressRing Width="20" Height="20"
                                   IsActive="{x:Bind ViewModel.IsGameLaunching, Mode=OneWay}"
                                   Visibility="{x:Bind ViewModel.IsGameLaunching, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    
                     <FontIcon Glyph="&#xE768;" FontSize="20"/>
-                    
                     <TextBlock Text="{x:Bind ViewModel.LaunchButtonText, Mode=OneWay}"
-                               FontSize="16" FontWeight="SemiBold"
-                               VerticalAlignment="Center"/>
+                               FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
         </Grid>
