@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Microsoft.Web.WebView2.Core;
-using Windows.Graphics;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Web.WebView2.Core;
 using MihoyoBBS;
 
 namespace FufuLauncher.Views;
@@ -23,11 +16,11 @@ public sealed partial class LoginWebViewDialog : Window
     public LoginWebViewDialog()
     {
         InitializeComponent();
-        
+
         var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
         var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
         _appWindow = AppWindow.GetFromWindowId(windowId);
-        
+
         if (_appWindow != null)
         {
 
@@ -47,7 +40,7 @@ public sealed partial class LoginWebViewDialog : Window
     {
         var cookies = await LoginWebView.CoreWebView2.CookieManager.GetCookiesAsync("https://www.miyoushe.com");
         var latestCookieString = string.Join("; ", cookies.Select(c => $"{c.Name}={c.Value}"));
-        
+
         if (!string.IsNullOrEmpty(latestCookieString))
         {
             StatusText.Text = "正在保存...";
@@ -59,7 +52,7 @@ public sealed partial class LoginWebViewDialog : Window
         {
             StatusText.Text = "未检测到登录信息";
         }
-        
+
         await Task.Delay(300);
         Close();
     }
@@ -67,14 +60,14 @@ public sealed partial class LoginWebViewDialog : Window
     private async void LoginWebView_NavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
     {
         LoadingRing.IsActive = false;
-    
+
         try
         {
             if (sender.Source?.AbsoluteUri.Contains("miyoushe.com") == true)
             {
 
                 var cookies = await LoginWebView.CoreWebView2.CookieManager.GetCookiesAsync("https://www.miyoushe.com");
-                
+
                 if (cookies.Count > 0)
                 {
                     StatusText.Text = "检测到登录信息，点击'完成登录'保存";
@@ -120,15 +113,15 @@ public sealed partial class LoginWebViewDialog : Window
                 if (match.Success) config.Account.Stuid = match.Groups[1].Value;
             }
 
-            var options = new JsonSerializerOptions 
-            { 
+            var options = new JsonSerializerOptions
+            {
                 WriteIndented = true,
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
-        
+
             var newJson = JsonSerializer.Serialize(config, options);
             await File.WriteAllTextAsync(path, newJson);
-        
+
             StatusText.Text = "登录信息已保存！";
             Debug.WriteLine($" 文件已保存: {path}");
         }

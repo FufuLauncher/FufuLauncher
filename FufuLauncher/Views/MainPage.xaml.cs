@@ -1,19 +1,23 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
-using Windows.Media.Playback;
-using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace FufuLauncher.Views;
 
 public sealed partial class MainPage : Page
 {
-    public MainViewModel ViewModel { get; }
-    public XamlUICommand OpenLinkCommand { get; }
-    
+    public MainViewModel ViewModel
+    {
+        get;
+    }
+    public XamlUICommand OpenLinkCommand
+    {
+        get;
+    }
+
     private bool _isInitialized = false;
 
     public MainPage()
@@ -41,7 +45,7 @@ public sealed partial class MainPage : Page
                 OpenLink(url);
             }
         };
-        
+
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)

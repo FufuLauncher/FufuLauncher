@@ -1,16 +1,17 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml;
+﻿using System.Diagnostics;
 using FufuLauncher.ViewModels;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
 
 namespace FufuLauncher.Views;
 
 public sealed partial class PanelPage : Page
 {
-    public ControlPanelModel ViewModel { get; }
+    public ControlPanelModel ViewModel
+    {
+        get;
+    }
     private bool _isOnMainPage = true;
 
     public PanelPage()
@@ -18,7 +19,7 @@ public sealed partial class PanelPage : Page
         ViewModel = App.GetService<ControlPanelModel>();
         DataContext = ViewModel;
         InitializeComponent();
-        
+
         SecondaryScrollViewer.IsHitTestVisible = false;
         SecondaryScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Disabled;
     }
@@ -44,7 +45,7 @@ public sealed partial class PanelPage : Page
         try
         {
             string exePath = Path.Combine(AppContext.BaseDirectory, "ControlPanel.exe");
-            
+
             if (File.Exists(exePath))
             {
                 Process.Start(new ProcessStartInfo
@@ -76,7 +77,7 @@ public sealed partial class PanelPage : Page
         };
         await dialog.ShowAsync();
     }
-    
+
     private void NavigateButton_Click(object sender, RoutedEventArgs e)
     {
         if (_isOnMainPage)

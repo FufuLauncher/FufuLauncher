@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace FufuLauncher.Contracts.Services
+﻿namespace FufuLauncher.Contracts.Services
 {
     public interface ILocalSettingsService
     {

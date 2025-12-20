@@ -1,13 +1,8 @@
-﻿
-using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Diagnostics;
-using Microsoft.Extensions.Logging;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
+using Microsoft.Extensions.Logging;
 
 namespace FufuLauncher.Services;
 
@@ -74,10 +69,10 @@ public class UserInfoService : IUserInfoService
         {
             ApplyCommonHeaders(cookie);
             var url = "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn";
-            
+
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
-            
+
             return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -96,10 +91,10 @@ public class UserInfoService : IUserInfoService
         {
             ApplyCommonHeaders(cookie);
             var url = "https://bbs-api.miyoushe.com/user/wapi/getUserFullInfo";
-            
+
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
-            
+
             return JsonSerializer.Deserialize<UserFullInfoResponse>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -123,12 +118,12 @@ public class UserInfoService : IUserInfoService
         {
             var rolesTask = GetUserGameRolesAsync(cookie);
             var userInfoTask = GetUserFullInfoAsync(cookie);
-            
+
             await Task.WhenAll(rolesTask, userInfoTask);
-            
+
             var roles = await rolesTask;
             var userInfo = await userInfoTask;
-            
+
             await SaveAuthConfigAsync(cookie, stuid);
 
             if (roles?.data?.list?.FirstOrDefault() is { } role)
@@ -141,7 +136,7 @@ public class UserInfoService : IUserInfoService
                     AvatarUrl = userInfo?.data?.user_info?.avatar_url ?? "ms-appx:///Assets/DefaultAvatar.png",
                     Level = role.level.ToString()
                 };
-                
+
                 await _userConfigService.SaveDisplayConfigAsync(displayConfig);
             }
         }
@@ -158,7 +153,7 @@ public class UserInfoService : IUserInfoService
         {
             var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
             HoyoverseCheckinConfig oldConfig = new();
-            
+
             if (File.Exists(configPath))
             {
                 var json = await File.ReadAllTextAsync(configPath);
@@ -170,13 +165,13 @@ public class UserInfoService : IUserInfoService
 
             oldConfig.Account.Cookie = cookie;
             oldConfig.Account.Stuid = stuid;
-            
+
             if (cookie.Contains("stoken="))
             {
                 var match = Regex.Match(cookie, @"stoken=([^;]+)");
                 if (match.Success) oldConfig.Account.Stoken = match.Groups[1].Value;
             }
-            
+
             if (cookie.Contains("mid="))
             {
                 var match = Regex.Match(cookie, @"mid=([^;]+)");
@@ -187,7 +182,7 @@ public class UserInfoService : IUserInfoService
             {
                 WriteIndented = true
             });
-            
+
             await File.WriteAllTextAsync(configPath, newJson);
         }
         catch (Exception ex)

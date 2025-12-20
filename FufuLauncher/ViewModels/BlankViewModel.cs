@@ -1,27 +1,19 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.Storage.Pickers;
-using FufuLauncher.Core.Contracts.Services;
-using FufuLauncher.Helpers;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Activation;
-using Microsoft.UI.Dispatching;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Messages;
 using FufuLauncher.Services;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
+using Windows.Storage.Pickers;
 using WinRT.Interop;
 
 namespace FufuLauncher.ViewModels
@@ -31,10 +23,22 @@ namespace FufuLauncher.ViewModels
         public Guid InnerId { get; set; } = Guid.NewGuid();
         public string Name { get; set; } = string.Empty;
         public string MihoyoSDK { get; set; } = string.Empty;
-        public string? Mid { get; set; }
-        public string? MacAddress { get; set; }
-        public bool IsExpired { get; set; }
-        public DateTime? LastUsed { get; set; }
+        public string? Mid
+        {
+            get; set;
+        }
+        public string? MacAddress
+        {
+            get; set;
+        }
+        public bool IsExpired
+        {
+            get; set;
+        }
+        public DateTime? LastUsed
+        {
+            get; set;
+        }
 
         public static GameAccount Create(string name, string sdk, string? mid, string? mac) => new()
         {
@@ -53,7 +57,6 @@ namespace FufuLauncher.ViewModels
         private const string GamePathKey = "GameInstallationPath";
         private const string RegistryKey = @"HKEY_CURRENT_USER\Software\miHoYo\原神";
         private const string RegistryValueName = "MIHOYOSDK_ADL_PROD_CN_h3123967166";
-        private const string HDRValueName = "WINDOWS_HDR_ON_h3132281285";
 
         [ObservableProperty]
         private GameConfig? currentGameConfig;
@@ -68,21 +71,32 @@ namespace FufuLauncher.ViewModels
         private GameAccount? selectedAccount;
 
         [ObservableProperty]
-        private bool isHDREnabled;
-
-        [ObservableProperty]
         private bool canAccessRegistry;
 
         private string? _lastLoadedPath;
         private readonly DispatcherQueue _dispatcherQueue;
         private readonly string _accountsFilePath;
 
-        public ICommand SelectGamePathCommand { get; }
-        public IAsyncRelayCommand LoadAccountsCommand { get; }
-        public IAsyncRelayCommand AddCurrentAccountCommand { get; }
-        public IAsyncRelayCommand<GameAccount> SwitchAccountCommand { get; }
-        public IAsyncRelayCommand<GameAccount> DeleteAccountCommand { get; }
-        public IAsyncRelayCommand ToggleHDRCommand { get; }
+        public ICommand SelectGamePathCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand LoadAccountsCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand AddCurrentAccountCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand<GameAccount> SwitchAccountCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand<GameAccount> DeleteAccountCommand
+        {
+            get;
+        }
 
         public BlankViewModel(IGameConfigService gameConfigService, ILocalSettingsService localSettingsService)
         {
@@ -98,7 +112,6 @@ namespace FufuLauncher.ViewModels
             AddCurrentAccountCommand = new AsyncRelayCommand(AddCurrentAccountAsync);
             SwitchAccountCommand = new AsyncRelayCommand<GameAccount>(SwitchAccountAsync);
             DeleteAccountCommand = new AsyncRelayCommand<GameAccount>(DeleteAccountAsync);
-            ToggleHDRCommand = new AsyncRelayCommand(ToggleHDRAsync);
 
             _ = InitializeAsync();
         }
@@ -107,7 +120,6 @@ namespace FufuLauncher.ViewModels
         {
             try
             {
-
                 var savedPath = await _localSettingsService.ReadSettingAsync(GamePathKey) as string;
                 if (!string.IsNullOrEmpty(savedPath))
                 {
@@ -133,7 +145,7 @@ namespace FufuLauncher.ViewModels
                 {
                     savedPath = savedPath.Trim('"').Trim();
                     Debug.WriteLine($"[游戏信息页] 导航读取路径: '{savedPath}'");
-                    
+
                     if (CurrentGameConfig == null || savedPath != _lastLoadedPath)
                     {
                         await LoadGameInfoAsync(savedPath);
@@ -157,7 +169,7 @@ namespace FufuLauncher.ViewModels
                     Debug.WriteLine("[错误] 不在UI线程上执行");
                     return;
                 }
-                
+
                 var mainWindow = App.MainWindow;
                 if (mainWindow == null)
                 {
@@ -178,7 +190,7 @@ namespace FufuLauncher.ViewModels
                     ViewMode = PickerViewMode.List
                 };
                 folderPicker.FileTypeFilter.Add("*");
-                
+
                 try
                 {
                     InitializeWithWindow.Initialize(folderPicker, hwnd);
@@ -187,9 +199,9 @@ namespace FufuLauncher.ViewModels
                 {
                     Debug.WriteLine($"[警告] InitializeWithWindow失败: {ex.Message}");
                 }
-                
+
                 var folder = await Task.Run(async () => await folderPicker.PickSingleFolderAsync());
-        
+
                 if (folder != null)
                 {
                     var path = folder.Path.Trim('"').Trim();
@@ -214,6 +226,7 @@ namespace FufuLauncher.ViewModels
                 await ShowError($"选择路径失败: {ex.Message}");
             }
         }
+
         private async Task ShowError(string message)
         {
             try
@@ -235,10 +248,11 @@ namespace FufuLauncher.ViewModels
                 Debug.WriteLine($"显示错误对话框失败: {ex.Message}");
             }
         }
+
         private async Task LoadGameInfoAsync(string path)
         {
             if (string.IsNullOrEmpty(path)) return;
-            
+
             IsLoading = true;
             try
             {
@@ -277,7 +291,6 @@ namespace FufuLauncher.ViewModels
 
                 var current = await GetCurrentAccountFromRegistryAsync();
                 SelectedAccount = current;
-                IsHDREnabled = await GetHDREnabledAsync();
             }
             catch (Exception ex)
             {
@@ -291,7 +304,7 @@ namespace FufuLauncher.ViewModels
             try
             {
                 IsLoading = true;
-                
+
                 var current = await GetCurrentAccountFromRegistryAsync();
                 if (current == null)
                 {
@@ -315,7 +328,7 @@ namespace FufuLauncher.ViewModels
 
                 accounts.Add(newAccount);
                 await WriteAccountsToFileAsync(accounts);
-                
+
                 Accounts.Add(newAccount);
                 Debug.WriteLine($"已添加账号: {newAccount.Name}");
             }
@@ -332,14 +345,14 @@ namespace FufuLauncher.ViewModels
         private async Task SwitchAccountAsync(GameAccount account)
         {
             if (account == null) return;
-            
+
             try
             {
                 IsLoading = true;
                 await SetCurrentAccountToRegistryAsync(account);
                 SelectedAccount = account;
                 await LoadAccountsAsync();
-                
+
                 Debug.WriteLine($"已切换到账号: {account.Name}");
             }
             catch (Exception ex)
@@ -355,32 +368,19 @@ namespace FufuLauncher.ViewModels
         private async Task DeleteAccountAsync(GameAccount account)
         {
             if (account == null) return;
-            
+
             try
             {
                 var accounts = await ReadAccountsFromFileAsync();
                 accounts.RemoveAll(a => a.InnerId == account.InnerId);
                 await WriteAccountsToFileAsync(accounts);
-                
+
                 Accounts.Remove(account);
                 Debug.WriteLine($"已删除账号: {account.Name}");
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"删除账号失败: {ex.Message}");
-            }
-        }
-
-        private async Task ToggleHDRAsync()
-        {
-            try
-            {
-                await SetHDREnabledAsync(IsHDREnabled);
-                Debug.WriteLine($"HDR已设置为: {IsHDREnabled}");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"设置HDR失败: {ex.Message}");
             }
         }
         #endregion
@@ -447,23 +447,6 @@ namespace FufuLauncher.ViewModels
             });
         }
 
-        private async Task<bool> GetHDREnabledAsync()
-        {
-            return await Task.Run(() =>
-            {
-                var value = Registry.GetValue(RegistryKey, HDRValueName, 0);
-                return Convert.ToInt32(value) == 1;
-            });
-        }
-
-        private async Task SetHDREnabledAsync(bool enabled)
-        {
-            await Task.Run(() =>
-            {
-                Registry.SetValue(RegistryKey, HDRValueName, enabled ? 1 : 0, RegistryValueKind.DWord);
-            });
-        }
-
         private async Task<List<GameAccount>> ReadAccountsFromFileAsync()
         {
             return await Task.Run(() =>
@@ -484,8 +467,8 @@ namespace FufuLauncher.ViewModels
                 if (!string.IsNullOrEmpty(directory))
                     Directory.CreateDirectory(directory);
 
-                var json = JsonSerializer.Serialize(accounts, new JsonSerializerOptions 
-                { 
+                var json = JsonSerializer.Serialize(accounts, new JsonSerializerOptions
+                {
                     WriteIndented = true,
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });

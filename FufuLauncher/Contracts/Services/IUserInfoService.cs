@@ -1,14 +1,10 @@
-﻿
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace FufuLauncher.Contracts.Services;
+﻿namespace FufuLauncher.Contracts.Services;
 
 public record GameRoleInfo(
-    string game_biz, 
-    string region, 
-    string game_uid, 
-    string nickname, 
+    string game_biz,
+    string region,
+    string game_uid,
+    string nickname,
     int level,
     string region_name
 );

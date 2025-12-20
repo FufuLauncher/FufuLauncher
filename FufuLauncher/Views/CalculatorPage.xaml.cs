@@ -1,17 +1,18 @@
-﻿using System;
-using System.Diagnostics;
-using Microsoft.Web.WebView2.Core;
+﻿using System.Diagnostics;
+using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System.Threading.Tasks;
-using FufuLauncher.ViewModels;
+using Microsoft.Web.WebView2.Core;
 using Timer = System.Timers.Timer;
 
 namespace FufuLauncher.Views
 {
     public sealed partial class CalculatorPage : Page
     {
-        public CalculatorViewModel ViewModel { get; }
+        public CalculatorViewModel ViewModel
+        {
+            get;
+        }
         private Timer _loadingTimeoutTimer;
         private Timer _minDisplayTimer;
         private bool _isNavigationEventsSubscribed = false;
@@ -22,7 +23,7 @@ namespace FufuLauncher.Views
             ViewModel = App.GetService<CalculatorViewModel>();
             DataContext = ViewModel;
             InitializeComponent();
-            
+
             Debug.WriteLine("=== CalculatorPage 初始化 ===");
 
             _ = InitializeWebViewAsync();
@@ -37,7 +38,7 @@ namespace FufuLauncher.Views
                 ViewModel.StatusMessage = "正在初始化 WebView2 运行时...";
 
                 await CalculatorWebView.EnsureCoreWebView2Async();
-                
+
                 Debug.WriteLine("WebView2 初始化成功！");
 
                 CalculatorWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
@@ -52,14 +53,14 @@ namespace FufuLauncher.Views
                     CalculatorWebView.CoreWebView2.NewWindowRequested += OnNewWindowRequested;
 
                     CalculatorWebView.CoreWebView2.DOMContentLoaded += OnDOMContentLoaded;
-                    
+
                     _isNavigationEventsSubscribed = true;
                     Debug.WriteLine("导航事件已订阅");
                 }
-                
+
                 ViewModel.StatusMessage = "正在加载养成计算器...";
 
-                CalculatorWebView.CoreWebView2.Settings.UserAgent = 
+                CalculatorWebView.CoreWebView2.Settings.UserAgent =
                     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
                 LoadCalculatorPage();
@@ -90,7 +91,7 @@ namespace FufuLauncher.Views
                 StartLoadingTimeout();
 
                 StartMinDisplayTimer();
-                
+
                 var targetUri = new Uri("https://act.mihoyo.com/ys/event/calculator/index.html");
                 Debug.WriteLine("导航到: " + targetUri.ToString());
                 CalculatorWebView.Source = targetUri;
@@ -172,13 +173,13 @@ namespace FufuLauncher.Views
         {
             Debug.WriteLine("DOM内容加载完成！页面已可显示");
             _isPageLoaded = true;
-            
+
             DispatcherQueue.TryEnqueue(() =>
             {
 
                 ViewModel.StatusMessage = "";
             });
-            
+
             StopLoadingTimeout();
         }
 
@@ -198,7 +199,7 @@ namespace FufuLauncher.Views
         {
             Debug.WriteLine("[阻止] 新窗口请求: " + args.Uri);
             args.Handled = true;
-            
+
             DispatcherQueue.TryEnqueue(() =>
             {
                 ViewModel.StatusMessage = "已阻止新窗口打开";
@@ -216,12 +217,12 @@ namespace FufuLauncher.Views
 
                 bool isAllowed = uri.Host.Equals(allowedHost, StringComparison.OrdinalIgnoreCase) &&
                                 uri.AbsolutePath.Equals(allowedPath, StringComparison.OrdinalIgnoreCase);
-                
+
                 if (!isAllowed)
                 {
                     Debug.WriteLine("[阻止] 不允许的导航: " + uri.Host + uri.AbsolutePath);
                     args.Cancel = true;
-                    
+
                     DispatcherQueue.TryEnqueue(() =>
                     {
                         ViewModel.StatusMessage = "已阻止外部链接: " + uri.Host;
@@ -242,7 +243,7 @@ namespace FufuLauncher.Views
         private void OnNavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
         {
             StopLoadingTimeout();
-            
+
             if (!args.IsSuccess)
             {
                 Debug.WriteLine("导航失败: " + args.WebErrorStatus.ToString());

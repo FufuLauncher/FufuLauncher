@@ -9,10 +9,10 @@ namespace FufuLauncher.Contracts.Services
         Task SaveGamePathAsync(string path);
         Task<bool> GetUseInjectionAsync();
         Task SetUseInjectionAsync(bool useInjection);
-        
+
         Task<string> GetCustomLaunchParametersAsync();
         Task SetCustomLaunchParametersAsync(string parameters);
-        
+
         Task<LaunchResult> LaunchGameAsync();
         Task StopBetterGIAsync();
     }

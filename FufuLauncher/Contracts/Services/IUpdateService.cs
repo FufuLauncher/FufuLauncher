@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace FufuLauncher.Contracts.Services
+﻿namespace FufuLauncher.Contracts.Services
 {
     public interface IUpdateService
     {
@@ -9,7 +7,10 @@ namespace FufuLauncher.Contracts.Services
 
     public class UpdateCheckResult
     {
-        public bool ShouldShowUpdate { get; set; }
+        public bool ShouldShowUpdate
+        {
+            get; set;
+        }
         public string ServerVersion { get; set; } = string.Empty;
         public string UpdateInfoUrl { get; set; } = string.Empty;
     }

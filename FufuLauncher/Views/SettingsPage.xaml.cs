@@ -1,12 +1,14 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System;
-using FufuLauncher.ViewModels;
+﻿using FufuLauncher.ViewModels;
+using Microsoft.UI.Xaml.Controls;
 
 namespace FufuLauncher.Views;
 
 public sealed partial class SettingsPage : Page
 {
-    public SettingsViewModel ViewModel { get; }
+    public SettingsViewModel ViewModel
+    {
+        get;
+    }
 
     public SettingsPage()
     {

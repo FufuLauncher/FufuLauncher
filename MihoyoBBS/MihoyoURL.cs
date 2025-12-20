@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Security.Cryptography;
-using System.Net;
 using PuppeteerSharp;
 
 namespace MihoyoBBS
@@ -12,17 +12,17 @@ namespace MihoyoBBS
     {
         private static readonly object lockObject = new();
         private static string logFileName = $"log_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
-        
+
         public static void LogInfo(string message)
         {
             Log("INFO", message);
         }
-        
+
         public static void LogError(string message)
         {
             Log("ERROR", message);
         }
-        
+
         public static void LogWarning(string message)
         {
             Log("WARN", message);
@@ -37,7 +37,7 @@ namespace MihoyoBBS
             }
             Log("REQUEST", logMessage);
         }
-        
+
         public static void LogResponse(string url, int statusCode, string headers, string body = "")
         {
             var logMessage = $"[RESPONSE] {url} - Status: {statusCode}\nHeaders:\n{headers}";
@@ -47,7 +47,7 @@ namespace MihoyoBBS
             }
             Log("RESPONSE", logMessage);
         }
-        
+
         private static void Log(string level, string message)
         {
             try
@@ -57,7 +57,7 @@ namespace MihoyoBBS
                     var logEntry = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] [{level}] {message}\n";
                     var fullPath = Path.GetFullPath(logFileName);
                     Console.WriteLine(logEntry.TrimEnd());
-                    
+
                     File.AppendAllText(fullPath, logEntry);
                 }
             }
@@ -66,7 +66,7 @@ namespace MihoyoBBS
                 Console.WriteLine($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] [ERROR] 写入日志失败: {ex.Message}");
             }
         }
-        
+
         public static string GetLogFilePath()
         {
             return Path.GetFullPath(logFileName);
@@ -144,97 +144,166 @@ namespace MihoyoBBS
     public class QrCodeResponse
     {
         [JsonPropertyName("retcode")]
-        public int RetCode { get; set; }
+        public int RetCode
+        {
+            get; set;
+        }
 
         [JsonPropertyName("message")]
-        public string Message { get; set; }
+        public string Message
+        {
+            get; set;
+        }
 
         [JsonPropertyName("data")]
-        public QrCodeData Data { get; set; }
+        public QrCodeData Data
+        {
+            get; set;
+        }
     }
 
     public class QrCodeData
     {
         [JsonPropertyName("url")]
-        public string Url { get; set; }
+        public string Url
+        {
+            get; set;
+        }
 
         [JsonPropertyName("ticket")]
-        public string Ticket { get; set; }
+        public string Ticket
+        {
+            get; set;
+        }
 
         public string AppId { get; set; } = "1";
-        
-        public string Device { get; set; }
-        
-        public string DeviceId { get; set; }
+
+        public string Device
+        {
+            get; set;
+        }
+
+        public string DeviceId
+        {
+            get; set;
+        }
     }
 
     public class CheckQrResponse
     {
         [JsonPropertyName("retcode")]
-        public int RetCode { get; set; }
+        public int RetCode
+        {
+            get; set;
+        }
 
         [JsonPropertyName("message")]
-        public string Message { get; set; }
+        public string Message
+        {
+            get; set;
+        }
 
         [JsonPropertyName("data")]
-        public CheckQrData Data { get; set; }
+        public CheckQrData Data
+        {
+            get; set;
+        }
     }
 
     public class CheckQrData
     {
         [JsonPropertyName("stat")]
-        public string Stat { get; set; }
+        public string Stat
+        {
+            get; set;
+        }
 
         [JsonPropertyName("payload")]
-        public QrPayload Payload { get; set; }
+        public QrPayload Payload
+        {
+            get; set;
+        }
 
         [JsonPropertyName("realname_info")]
-        public object RealnameInfo { get; set; }
+        public object RealnameInfo
+        {
+            get; set;
+        }
     }
 
     public class QrPayload
     {
         [JsonPropertyName("proto")]
-        public string Proto { get; set; }
+        public string Proto
+        {
+            get; set;
+        }
 
         [JsonPropertyName("raw")]
-        public string Raw { get; set; }
+        public string Raw
+        {
+            get; set;
+        }
 
         [JsonPropertyName("ext")]
-        public string Ext { get; set; }
+        public string Ext
+        {
+            get; set;
+        }
     }
 
     public class StokenResponse
     {
         [JsonPropertyName("retcode")]
-        public int RetCode { get; set; }
+        public int RetCode
+        {
+            get; set;
+        }
 
         [JsonPropertyName("message")]
-        public string Message { get; set; }
+        public string Message
+        {
+            get; set;
+        }
 
         [JsonPropertyName("data")]
-        public StokenData Data { get; set; }
+        public StokenData Data
+        {
+            get; set;
+        }
     }
 
     public class StokenData
     {
         [JsonPropertyName("token")]
-        public TokenInfo Token { get; set; }
+        public TokenInfo Token
+        {
+            get; set;
+        }
 
         [JsonPropertyName("user_info")]
-        public UserInfo UserInfo { get; set; }
+        public UserInfo UserInfo
+        {
+            get; set;
+        }
     }
 
     public class TokenInfo
     {
         [JsonPropertyName("token")]
-        public string Token { get; set; }
+        public string Token
+        {
+            get; set;
+        }
     }
 
     public class UserInfo
     {
         [JsonPropertyName("mid")]
-        public string Mid { get; set; }
+        public string Mid
+        {
+            get; set;
+        }
     }
     public static class Tools
     {
@@ -291,9 +360,9 @@ namespace MihoyoBBS
             {
                 return "Mozilla/5.0 (Linux; Android 12; Unspecified Device) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36 miHoYoBBS/2.93.1";
             }
-    
+
             useragent = useragent.Replace("; ", " ").Replace(";", " ");
-    
+
             if (useragent.Contains("miHoYoBBS"))
             {
                 int i = useragent.IndexOf("miHoYoBBS");
@@ -301,7 +370,7 @@ namespace MihoyoBBS
                     i = i - 1;
                 return $"{useragent.Substring(0, i)} miHoYoBBS/2.93.1";
             }
-    
+
             return $"{useragent} miHoYoBBS/2.93.1";
         }
 
@@ -528,54 +597,54 @@ namespace MihoyoBBS
         private IPage _page;
         private Config _config;
         private bool _isHeadless;
-        
+
         public BrowserSimulator(Config config, bool headless = false)
         {
             _config = config;
             _isHeadless = headless;
         }
-        
- public async Task InitializeAsync()
-{
-    try
-    {
-        Logger.LogInfo("正在初始化浏览器模拟环境...");
-        
-        var chromePath = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-        
-        if (!File.Exists(chromePath))
+
+        public async Task InitializeAsync()
         {
-            Logger.LogError($"找不到Chrome浏览器: {chromePath}");
-            Console.WriteLine($"错误: 找不到Chrome浏览器路径: {chromePath}");
-            Console.WriteLine("请确保已安装Google Chrome浏览器");
-            throw new FileNotFoundException($"Chrome浏览器不存在: {chromePath}");
-        }
-        
-        Logger.LogInfo($"使用已安装的Chrome浏览器: {chromePath}");
-        var launchOptions = new LaunchOptions
-        {
-            Headless = _isHeadless,
-            ExecutablePath = chromePath,
-            Args = new[]
+            try
             {
+                Logger.LogInfo("正在初始化浏览器模拟环境...");
+
+                var chromePath = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+
+                if (!File.Exists(chromePath))
+                {
+                    Logger.LogError($"找不到Chrome浏览器: {chromePath}");
+                    Console.WriteLine($"错误: 找不到Chrome浏览器路径: {chromePath}");
+                    Console.WriteLine("请确保已安装Google Chrome浏览器");
+                    throw new FileNotFoundException($"Chrome浏览器不存在: {chromePath}");
+                }
+
+                Logger.LogInfo($"使用已安装的Chrome浏览器: {chromePath}");
+                var launchOptions = new LaunchOptions
+                {
+                    Headless = _isHeadless,
+                    ExecutablePath = chromePath,
+                    Args = new[]
+                    {
                 "--no-sandbox",
                 "--disable-setuid-sandbox",
                 "--disable-web-security",
                 "--disable-features=IsolateOrigins,site-per-process",
                 "--disable-blink-features=AutomationControlled"
             },
-            IgnoredDefaultArgs = new[]
-            {
+                    IgnoredDefaultArgs = new[]
+                    {
                 "--enable-automation",
                 "--disable-popup-blocking"
             }
-        };
-        
-        _browser = await Puppeteer.LaunchAsync(launchOptions);
-        _page = await _browser.NewPageAsync();
-        await SetupUserAgentAsync();
-        await SetupCookiesAsync();
-        await _page.EvaluateExpressionOnNewDocumentAsync(@"
+                };
+
+                _browser = await Puppeteer.LaunchAsync(launchOptions);
+                _page = await _browser.NewPageAsync();
+                await SetupUserAgentAsync();
+                await SetupCookiesAsync();
+                await _page.EvaluateExpressionOnNewDocumentAsync(@"
             Object.defineProperty(navigator, 'webdriver', {
                 get: () => undefined
             });
@@ -586,19 +655,19 @@ namespace MihoyoBBS
                 get: () => ['zh-CN', 'zh', 'en']
             });
         ");
-        
-        Logger.LogInfo("浏览器模拟环境初始化完成");
-    }
-    catch (Exception ex)
-    {
-        Logger.LogError($"初始化浏览器模拟环境失败: {ex.Message}");
-        Console.WriteLine($"初始化浏览器模拟环境失败: {ex.Message}");
-        throw;
-    }
-}
-        
 
-        
+                Logger.LogInfo("浏览器模拟环境初始化完成");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError($"初始化浏览器模拟环境失败: {ex.Message}");
+                Console.WriteLine($"初始化浏览器模拟环境失败: {ex.Message}");
+                throw;
+            }
+        }
+
+
+
         private async Task SetupUserAgentAsync()
         {
             var userAgent = _config.Games.Cn.UserAgent;
@@ -606,7 +675,7 @@ namespace MihoyoBBS
             {
                 userAgent = "Mozilla/5.0 (Linux; Android 12; Unspecified Device) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36";
             }
-            
+
             await _page.SetUserAgentAsync(userAgent);
             await _page.SetViewportAsync(new ViewPortOptions
             {
@@ -618,7 +687,7 @@ namespace MihoyoBBS
                 IsLandscape = false
             });
         }
-        
+
         private async Task SetupCookiesAsync()
         {
             if (!string.IsNullOrEmpty(_config.Account.Cookie))
@@ -635,24 +704,24 @@ namespace MihoyoBBS
                 }
             }
         }
-        
+
         private List<CookieParam> ParseCookies(string cookieString)
         {
             var cookies = new List<CookieParam>();
             var parts = cookieString.Split(';');
-            
+
             foreach (var part in parts)
             {
                 var trimmed = part.Trim();
                 if (string.IsNullOrEmpty(trimmed))
                     continue;
-                    
+
                 var separatorIndex = trimmed.IndexOf('=');
                 if (separatorIndex > 0)
                 {
                     var name = trimmed.Substring(0, separatorIndex);
                     var value = trimmed.Substring(separatorIndex + 1);
-                    
+
                     cookies.Add(new CookieParam
                     {
                         Name = name,
@@ -662,10 +731,10 @@ namespace MihoyoBBS
                     });
                 }
             }
-            
+
             return cookies;
         }
-        
+
         public async Task<string> BrowsePageAsync(string url, bool waitForNetworkIdle = true, int timeoutSeconds = 30)
         {
             try
@@ -686,7 +755,7 @@ namespace MihoyoBBS
                         ["Referer"] = "https://act.mihoyo.com/",
                         ["Origin"] = "https://act.mihoyo.com"
                     };
-                    
+
                     await request.ContinueAsync(new Payload { Headers = headers });
                 };
                 _page.Console += (sender, e) =>
@@ -698,7 +767,7 @@ namespace MihoyoBBS
                     var response = e.Response;
                     var url = response.Url;
                     var status = response.Status;
-                    
+
                     if (url.Contains("mihoyo.com"))
                     {
                         Console.WriteLine($"[响应] {status} {url}");
@@ -707,20 +776,20 @@ namespace MihoyoBBS
                 var navigationOptions = new NavigationOptions
                 {
                     Timeout = timeoutSeconds * 1000,
-                    WaitUntil = new[] 
-                    { 
-                        waitForNetworkIdle ? 
-                        WaitUntilNavigation.Networkidle0 : 
-                        WaitUntilNavigation.Load 
+                    WaitUntil = new[]
+                    {
+                        waitForNetworkIdle ?
+                        WaitUntilNavigation.Networkidle0 :
+                        WaitUntilNavigation.Load
                     }
                 };
-                
+
                 var response = await _page.GoToAsync(url, navigationOptions);
                 await WaitForPageLoadAsync();
                 var content = await _page.GetContentAsync();
-                
+
                 Logger.LogInfo($"页面访问完成: {url}");
-                
+
                 return content;
             }
             catch (Exception ex)
@@ -729,7 +798,7 @@ namespace MihoyoBBS
                 throw;
             }
         }
-        
+
         private async Task WaitForPageLoadAsync()
         {
             await _page.WaitForExpressionAsync(@"
@@ -741,15 +810,15 @@ namespace MihoyoBBS
             ", new WaitForFunctionOptions { Timeout = 10000 });
             await Task.Delay(2000);
         }
-        
+
         public async Task<string> ExecuteJavaScriptAsync(string script)
         {
             try
             {
                 Logger.LogInfo($"执行JavaScript脚本: {script.Substring(0, Math.Min(50, script.Length))}...");
-                
+
                 var result = await _page.EvaluateExpressionAsync<object>(script);
-                
+
                 if (result != null)
                 {
                     var resultJson = JsonSerializer.Serialize(result, new JsonSerializerOptions
@@ -757,10 +826,10 @@ namespace MihoyoBBS
                         WriteIndented = true,
                         Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
                     });
-                    
+
                     return resultJson;
                 }
-                
+
                 return "执行完成，无返回值";
             }
             catch (Exception ex)
@@ -769,7 +838,7 @@ namespace MihoyoBBS
                 return $"执行失败: {ex.Message}";
             }
         }
-        
+
         public async Task ClickElementAsync(string selector)
         {
             try
@@ -785,7 +854,7 @@ namespace MihoyoBBS
                 throw;
             }
         }
-        
+
         public async Task TypeTextAsync(string selector, string text)
         {
             try
@@ -799,7 +868,7 @@ namespace MihoyoBBS
                 throw;
             }
         }
-        
+
         public async Task<string> TakeScreenshotAsync(string fileName = null)
         {
             try
@@ -808,10 +877,10 @@ namespace MihoyoBBS
                 {
                     fileName = $"screenshot_{DateTime.Now:yyyyMMdd_HHmmss}.png";
                 }
-                
+
                 await _page.ScreenshotAsync(fileName);
                 var fullPath = Path.GetFullPath(fileName);
-                
+
                 Logger.LogInfo($"截图已保存: {fullPath}");
                 return fullPath;
             }
@@ -821,14 +890,14 @@ namespace MihoyoBBS
                 return null;
             }
         }
-        
+
         public async Task<Dictionary<string, string>> GetCookiesAsync()
         {
             try
             {
                 var cookies = await _page.GetCookiesAsync();
                 var cookieDict = cookies.ToDictionary(c => c.Name, c => c.Value);
-                
+
                 return cookieDict;
             }
             catch (Exception ex)
@@ -837,7 +906,7 @@ namespace MihoyoBBS
                 return new Dictionary<string, string>();
             }
         }
-        
+
         public async Task CloseAsync()
         {
             try
@@ -853,7 +922,7 @@ namespace MihoyoBBS
                 Logger.LogError($"关闭浏览器失败: {ex.Message}");
             }
         }
-        
+
         public void Dispose()
         {
             CloseAsync().Wait();
@@ -976,7 +1045,7 @@ namespace MihoyoBBS
             {
                 Logger.LogInfo("开始检查登录状态");
                 Console.WriteLine("\n正在等待扫码登录...");
-                
+
                 int checkCount = 0;
                 while (true)
                 {
@@ -1092,7 +1161,7 @@ namespace MihoyoBBS
             try
             {
                 Logger.LogInfo($"开始获取SToken, UID: {uid}");
-                
+
                 var requestBody = new
                 {
                     account_id = int.Parse(uid),
@@ -1145,7 +1214,7 @@ namespace MihoyoBBS
                 }
 
                 var result = JsonSerializer.Deserialize<StokenResponse>(responseText);
-                
+
                 if (result.RetCode != 0)
                 {
                     Logger.LogError($"获取SToken失败: {result.Message} (代码: {result.RetCode})");
@@ -1227,7 +1296,7 @@ namespace MihoyoBBS
                 ["User-Agent"] = userAgent,
                 ["x-rpc-signgame"] = "hk4e"
             };
-            
+
             Logger.LogInfo($"设置请求头完成，DeviceId: {deviceId}");
         }
         private void AddHeadersToRequest(HttpRequestMessage request)
@@ -1268,7 +1337,7 @@ namespace MihoyoBBS
             try
             {
                 Logger.LogInfo($"请求URL: {url}");
-                
+
                 using (var request = new HttpRequestMessage(HttpMethod.Get, url))
                 {
                     AddHeadersToRequest(request);
@@ -1283,7 +1352,7 @@ namespace MihoyoBBS
                     Console.WriteLine($"\n========== 响应信息 ==========");
                     Console.WriteLine($"响应时间: {stopwatch.ElapsedMilliseconds}ms");
                     Console.WriteLine($"状态码: {(int)response.StatusCode} ({response.StatusCode})");
-                    
+
                     Console.WriteLine("\n响应内容:");
                     try
                     {
@@ -1336,7 +1405,7 @@ namespace MihoyoBBS
         {
             Logger.LogInfo("开始请求主页");
             Console.WriteLine("========== 开始请求主页 ==========");
-            
+
             var urls = new string[]
             {
                 "https://api-takumi.mihoyo.com/event/luna/home?act_id=e202311201442471&lang=zh-cn",
@@ -1350,20 +1419,20 @@ namespace MihoyoBBS
                 Console.WriteLine("\n" + new string('-', 80) + "\n");
                 await Task.Delay(2000);
             }
-            
+
             Logger.LogInfo("主页请求完成");
         }
         public async Task TestAccountAPIs()
         {
             Logger.LogInfo("开始测试账号相关API");
             Console.WriteLine("========== 测试账号相关API ==========");
-            
+
             await TestGetAccountInfo();
-            
+
             Console.WriteLine("\n" + new string('=', 80) + "\n");
-            
+
             await TestGetRewardsList();
-            
+
             Logger.LogInfo("账号相关API测试完成");
         }
 
@@ -1388,7 +1457,7 @@ namespace MihoyoBBS
             Console.WriteLine("客户端测试");
             Console.WriteLine("版本: 2.0.0");
             Console.WriteLine("==========");
-            
+
             Logger.LogInfo("程序启动");
             var config = LoadConfig();
 
@@ -1408,10 +1477,10 @@ namespace MihoyoBBS
                 Console.WriteLine("4. 扫码登录获取SToken");
                 Console.WriteLine("5. 浏览器模拟模式");
                 Console.Write("请输入选项 (1-5): ");
-                
+
                 var choice = Console.ReadLine();
                 Logger.LogInfo($"用户选择模式: {choice}");
-                
+
                 switch (choice)
                 {
                     case "1":
@@ -1480,7 +1549,7 @@ namespace MihoyoBBS
             Logger.LogInfo("程序结束");
 
             Console.WriteLine($"\n详细日志已保存到: {Logger.GetLogFilePath()}");
-            
+
             Console.WriteLine("\n按任意键退出...");
             Console.ReadKey();
         }
@@ -1490,12 +1559,12 @@ namespace MihoyoBBS
             Logger.LogInfo("开始扫码登录流程");
             Console.WriteLine("\n========== 扫码登录获取SToken ==========");
             Console.WriteLine("注意: 请确保已安装米游社APP并已登录账号");
-            
+
             var qrLoginHelper = new QRLoginHelper();
             Console.WriteLine("\n正在获取登录二维码...");
             Logger.LogInfo("正在获取登录二维码");
             var qrData = await qrLoginHelper.GetQrCodeAsync();
-            
+
             if (qrData == null)
             {
                 Logger.LogError("获取二维码失败");
@@ -1511,7 +1580,7 @@ namespace MihoyoBBS
             string qrFileName = $"login_qrcode_{DateTime.Now:yyyyMMdd_HHmmss}.html";
             Tools.SaveQrCodeToFile(qrData.Url, qrFileName);
             Tools.GenerateAsciiQrCode(qrData.Url);
-            
+
             Console.WriteLine("\n操作说明:");
             Console.WriteLine($"1. 打开文件: {qrFileName}");
             Console.WriteLine("2. 使用米游社APP扫描二维码");
@@ -1519,14 +1588,14 @@ namespace MihoyoBBS
             Console.WriteLine("注意: 二维码15分钟内有效");
             Logger.LogInfo("开始检查登录状态");
             var (uid, gameToken) = await qrLoginHelper.CheckLoginAsync(qrData);
-            
+
             if (string.IsNullOrEmpty(uid) || string.IsNullOrEmpty(gameToken))
             {
                 Logger.LogError("登录失败");
                 Console.WriteLine("登录失败！");
                 return;
             }
-            
+
             Logger.LogInfo($"登录成功，UID: {uid}, GameToken: {gameToken}");
             Console.WriteLine($"\n登录成功！");
             Console.WriteLine($"UID: {uid}");
@@ -1534,14 +1603,14 @@ namespace MihoyoBBS
             Console.WriteLine("\n正在获取SToken...");
             Logger.LogInfo("正在获取SToken");
             var (mid, stoken) = await qrLoginHelper.GetStokenByGameTokenAsync(uid, gameToken);
-            
+
             if (string.IsNullOrEmpty(mid) || string.IsNullOrEmpty(stoken))
             {
                 Logger.LogError("获取SToken失败");
                 Console.WriteLine("获取SToken失败！");
                 return;
             }
-            
+
             Logger.LogInfo($"获取SToken成功: MID={mid}, SToken={stoken}");
             Console.WriteLine($"获取SToken成功！");
             Console.WriteLine($"MID: {mid}");
@@ -1570,23 +1639,23 @@ namespace MihoyoBBS
                 Console.WriteLine($"Cookie: stuid={uid}; stoken={stoken}; mid={mid}");
             }
         }
-        
+
         static async Task RunBrowserSimulator(Config config)
         {
             Console.WriteLine("\n========== 浏览器模拟模式 ==========");
             Console.WriteLine("1. 无头模式（后台运行）");
             Console.WriteLine("2. 可视化模式（需要图形界面）");
             Console.Write("请选择模式: ");
-            
+
             var modeChoice = Console.ReadLine();
             var isHeadless = modeChoice == "1";
-            
+
             using var browser = new BrowserSimulator(config, isHeadless);
-            
+
             try
             {
                 await browser.InitializeAsync();
-                
+
                 while (true)
                 {
                     Console.WriteLine("\n========== 浏览器操作菜单 ==========");
@@ -1600,9 +1669,9 @@ namespace MihoyoBBS
                     Console.WriteLine("8. 测试米哈游相关页面");
                     Console.WriteLine("0. 退出");
                     Console.Write("请选择操作: ");
-                    
+
                     var actionChoice = Console.ReadLine();
-                    
+
                     switch (actionChoice)
                     {
                         case "1":
@@ -1617,7 +1686,7 @@ namespace MihoyoBBS
                                     Console.WriteLine("... (内容过长，已截断)");
                             }
                             break;
-                            
+
                         case "2":
                             Console.Write("请输入JavaScript代码: ");
                             var js = Console.ReadLine();
@@ -1628,7 +1697,7 @@ namespace MihoyoBBS
                                 Console.WriteLine(result);
                             }
                             break;
-                            
+
                         case "3":
                             Console.Write("请输入CSS选择器: ");
                             var selector = Console.ReadLine();
@@ -1638,7 +1707,7 @@ namespace MihoyoBBS
                                 Console.WriteLine("点击完成");
                             }
                             break;
-                            
+
                         case "4":
                             Console.Write("请输入CSS选择器: ");
                             var inputSelector = Console.ReadLine();
@@ -1650,7 +1719,7 @@ namespace MihoyoBBS
                                 Console.WriteLine("输入完成");
                             }
                             break;
-                            
+
                         case "5":
                             var screenshotPath = await browser.TakeScreenshotAsync();
                             if (!string.IsNullOrEmpty(screenshotPath))
@@ -1658,7 +1727,7 @@ namespace MihoyoBBS
                                 Console.WriteLine($"截图已保存: {screenshotPath}");
                             }
                             break;
-                            
+
                         case "6":
                             var cookies = await browser.GetCookiesAsync();
                             Console.WriteLine($"\n当前Cookie ({cookies.Count}个):");
@@ -1667,7 +1736,7 @@ namespace MihoyoBBS
                                 Console.WriteLine($"{cookie.Key}: {cookie.Value}");
                             }
                             break;
-                            
+
                         case "7":
                             var jsContent = "document.documentElement.outerHTML";
                             var html = await browser.ExecuteJavaScriptAsync(jsContent);
@@ -1676,15 +1745,15 @@ namespace MihoyoBBS
                             if (html.Length > 2000)
                                 Console.WriteLine("... (内容过长，已截断)");
                             break;
-                            
+
                         case "8":
                             await TestMihoyoPages(browser);
                             break;
-                            
+
                         case "0":
                             Console.WriteLine("退出浏览器模拟模式");
                             return;
-                            
+
                         default:
                             Console.WriteLine("无效选项");
                             break;
@@ -1697,11 +1766,11 @@ namespace MihoyoBBS
                 Logger.LogError($"浏览器模拟器错误: {ex.Message}");
             }
         }
-        
+
         static async Task TestMihoyoPages(BrowserSimulator browser)
         {
             Console.WriteLine("\n测试");
-            
+
             var testUrls = new Dictionary<string, string>
             {
                 { "1", "https://bbs.mihoyo.com/ys/" },
@@ -1709,21 +1778,21 @@ namespace MihoyoBBS
                 { "3", "https://api-takumi.mihoyo.com/event/luna/home?act_id=e202311201442471&lang=zh-cn" },
                 { "4", "https://webstatic.mihoyo.com/bbs/event/signin-ys/index.html" }
             };
-            
+
             foreach (var testUrl in testUrls)
             {
                 Console.WriteLine($"{testUrl.Key}. {testUrl.Value}");
             }
-            
+
             Console.Write("\n请选择要测试的页面: ");
             var choice = Console.ReadLine();
-            
+
             if (testUrls.ContainsKey(choice))
             {
                 var url = testUrls[choice];
-                
+
                 Console.WriteLine($"\n正在访问: {url}");
-                
+
                 try
                 {
                     var content = await browser.BrowsePageAsync(url);
@@ -1756,13 +1825,13 @@ namespace MihoyoBBS
                             return info;
                         })();
                     ";
-                    
+
                     var jsResult = await browser.ExecuteJavaScriptAsync(jsToExecute);
                     Console.WriteLine("\n页面JavaScript执行结果:");
                     Console.WriteLine(jsResult);
                     var screenshotPath = await browser.TakeScreenshotAsync($"mihoyo_test_{DateTime.Now:yyyyMMdd_HHmmss}.png");
                     Console.WriteLine($"\n页面截图已保存: {screenshotPath}");
-                    
+
                     Console.WriteLine("\n页面访问完成！");
                 }
                 catch (Exception ex)
@@ -1775,38 +1844,38 @@ namespace MihoyoBBS
                 Console.WriteLine("无效选择");
             }
         }
-        
+
         static async Task RunAutomationTasks(Config config)
         {
             Console.WriteLine("\n========== 自动化任务执行 ==========");
             Console.WriteLine("1. 自动签到任务");
             Console.WriteLine("2. 模拟完整用户流程");
             Console.Write("请选择任务: ");
-            
+
             var taskChoice = Console.ReadLine();
-            
+
             switch (taskChoice)
             {
                 case "1":
                     await RunAutoSignTask(config);
                     break;
-                    
+
                 case "2":
                     await RunFullUserFlow(config);
                     break;
-                    
+
                 default:
                     Console.WriteLine("无效选择");
                     break;
             }
         }
-        
+
         static async Task RunAutoSignTask(Config config)
         {
             Console.WriteLine("\n========== 自动签到任务 ==========");
-            
+
             using var browser = new BrowserSimulator(config, true);
-            
+
             try
             {
                 await browser.InitializeAsync();
@@ -1824,13 +1893,13 @@ namespace MihoyoBBS
                         signedElementText: signedElement ? signedElement.textContent : null
                     };
                 ";
-                
+
                 var signStatus = await browser.ExecuteJavaScriptAsync(checkSignJs);
                 Console.WriteLine($"签到状态: {signStatus}");
                 var parseResult = JsonSerializer.Deserialize<Dictionary<string, object>>(signStatus);
-                if (parseResult != null && 
-                    parseResult.ContainsKey("signButtonExists") && 
-                    bool.TryParse(parseResult["signButtonExists"].ToString(), out var exists) && 
+                if (parseResult != null &&
+                    parseResult.ContainsKey("signButtonExists") &&
+                    bool.TryParse(parseResult["signButtonExists"].ToString(), out var exists) &&
                     exists)
                 {
                     Console.WriteLine("检测到签到按钮，正在点击...");
@@ -1847,7 +1916,7 @@ namespace MihoyoBBS
                         var resultText = document.querySelector('.sign-result, .result-text, .success-text');
                         return resultText ? resultText.textContent : '未找到结果文本';
                     ");
-                    
+
                     Console.WriteLine($"签到结果: {resultCheck}");
                 }
                 else
@@ -1856,7 +1925,7 @@ namespace MihoyoBBS
                 }
                 var screenshotPath = await browser.TakeScreenshotAsync("auto_sign_result.png");
                 Console.WriteLine($"任务截图已保存: {screenshotPath}");
-                
+
                 Console.WriteLine("\n自动签到任务完成！");
             }
             catch (Exception ex)
@@ -1865,13 +1934,13 @@ namespace MihoyoBBS
                 Logger.LogError($"自动签到任务失败: {ex.Message}");
             }
         }
-        
+
         static async Task RunFullUserFlow(Config config)
         {
             Console.WriteLine("\n========== 模拟完整用户流程 ==========");
-            
+
             using var browser = new BrowserSimulator(config, false);
-            
+
             try
             {
                 await browser.InitializeAsync();
@@ -1909,7 +1978,7 @@ namespace MihoyoBBS
                 Console.WriteLine("6. 截图记录...");
                 var screenshotPath = await browser.TakeScreenshotAsync("user_flow_complete.png");
                 Console.WriteLine($"流程截图已保存: {screenshotPath}");
-                
+
                 Console.WriteLine("\n完整用户流程模拟完成！");
             }
             catch (Exception ex)
@@ -1935,17 +2004,17 @@ namespace MihoyoBBS
                     var json = JsonSerializer.Serialize(defaultConfig, options);
                     File.WriteAllText(configPath, json);
                     Logger.LogInfo($"已创建默认配置文件: {configPath}");
-                    
+
                     var fullPath = Path.GetFullPath(configPath);
                     Console.WriteLine("已创建默认配置文件 config.json");
                     Console.WriteLine($"配置文件位置: {fullPath}");
-                    
+
                     return defaultConfig;
                 }
 
                 var jsonText = File.ReadAllText(configPath);
                 jsonText = CleanJsonString(jsonText);
-        
+
                 var config = JsonSerializer.Deserialize<Config>(jsonText);
                 Logger.LogInfo($"配置文件加载成功");
                 return config;
@@ -1958,7 +2027,7 @@ namespace MihoyoBBS
                 return null;
             }
         }
-        
+
         static bool SaveConfig(Config config)
         {
             try
@@ -1981,7 +2050,7 @@ namespace MihoyoBBS
                 return false;
             }
         }
-        
+
         static string CleanJsonString(string jsonText)
         {
             try
@@ -1992,10 +2061,10 @@ namespace MihoyoBBS
             catch (JsonException)
             {
                 Logger.LogWarning("检测到JSON格式问题，正在尝试清理...");
-        
+
                 var pattern = "\"Cookie\"\\s*:\\s*\"([^\"]*)\"";
                 var regex = new System.Text.RegularExpressions.Regex(pattern);
-        
+
                 string cleanedJson = regex.Replace(jsonText, match =>
                 {
                     var cookieValue = match.Groups[1].Value;
@@ -2003,7 +2072,7 @@ namespace MihoyoBBS
                     cookieValue = System.Text.RegularExpressions.Regex.Replace(cookieValue, @"\s+", " ");
                     return $"\"Cookie\": \"{cookieValue}\"";
                 });
-        
+
                 return cleanedJson;
             }
         }

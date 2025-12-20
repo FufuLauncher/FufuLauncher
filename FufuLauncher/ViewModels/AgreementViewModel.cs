@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
@@ -14,8 +13,14 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty]
         private bool _isAgreementChecked;
 
-        public IAsyncRelayCommand ViewAgreementCommand { get; }
-        public IAsyncRelayCommand NextCommand { get; }
+        public IAsyncRelayCommand ViewAgreementCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand NextCommand
+        {
+            get;
+        }
 
         public AgreementViewModel(ILocalSettingsService localSettingsService)
         {

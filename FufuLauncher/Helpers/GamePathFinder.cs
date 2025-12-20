@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System.IO;
 
 namespace FufuLauncher.Helpers
 {
@@ -19,7 +18,7 @@ namespace FufuLauncher.Helpers
                         {
 
                             var exePath = Path.Combine(value, "YuanShen.exe");
-                            if (File.Exists(exePath)) 
+                            if (File.Exists(exePath))
                                 return Path.GetDirectoryName(exePath);
 
                             var subDirPath = Path.Combine(value, "Genshin Impact Game", "YuanShen.exe");
@@ -44,7 +43,7 @@ namespace FufuLauncher.Helpers
                         return Path.GetDirectoryName(exePath);
                 }
             }
-            catch {}
+            catch { }
 
             return null;
         }

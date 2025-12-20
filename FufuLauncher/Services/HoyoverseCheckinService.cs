@@ -1,9 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Text.Json;
-using System.Threading.Tasks;
 using FufuLauncher.Contracts.Services;
 using MihoyoBBS;
 
@@ -35,7 +31,7 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
             Debug.WriteLine($" [签到] Cookie长度: {config?.Account?.Cookie?.Length ?? 0}");
             Debug.WriteLine($" [签到] Enable状态: {config?.Games?.Cn?.Enable}");
             Debug.WriteLine($" [签到] Checkin状态: {config?.Games?.Cn?.Genshin?.Checkin}");
-            
+
             return config ?? new Config();
         }
         catch (Exception ex)
@@ -60,9 +56,9 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 
         var account = genshin.AccountList[0];
         var isSignData = await genshin.IsSignAsync(account.Region, account.GameUid, false).ConfigureAwait(false);
-    
-        return isSignData?.IsSign == true 
-            ? ("今日已签到", $"账号: {account.Nickname}") 
+
+        return isSignData?.IsSign == true
+            ? ("今日已签到", $"账号: {account.Nickname}")
             : ("今日未签到", $"账号: {account.Nickname} (可签到)");
     }
 
@@ -72,7 +68,7 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         Debug.WriteLine($" [签到] 开始执行签到");
 
         var config = await LoadConfigWithLoggingAsync();
-        
+
         if (!config.Games.Cn.Enable || !config.Games.Cn.Genshin.Checkin)
         {
             Debug.WriteLine(" [签到] 功能未启用");
@@ -81,22 +77,22 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 
         Debug.WriteLine(" [签到] 功能已启用，准备初始化Genshin");
         var genshin = new Genshin();
-        
+
         Debug.WriteLine(" [签到] 调用InitializeAsync...");
         await genshin.InitializeAsync(config).ConfigureAwait(false);
 
         Debug.WriteLine($" [签到] 初始化完成，账号数量: {genshin.AccountList.Count}");
-        
+
         Debug.WriteLine(" [签到] 调用SignAccountAsync...");
         var result = await genshin.SignAccountAsync(config).ConfigureAwait(false);
-        
+
         Debug.WriteLine($" [签到] 签到结果:\n{result}");
 
         var isSuccess = !result.Contains("失败") && !result.Contains("异常");
         var summary = string.Join(" | ", result.Split('\n').Take(2));
-        
+
         Debug.WriteLine($" [签到] 执行完成: success={isSuccess}, summary={summary}");
-        
+
         return (isSuccess, summary);
     }
 }

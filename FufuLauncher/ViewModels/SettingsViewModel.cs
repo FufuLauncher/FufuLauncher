@@ -1,26 +1,19 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.UI.Xaml;
-using Windows.ApplicationModel;
-using System.Text.Json;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Globalization;
-using Windows.Storage;
-using Windows.Media.Playback;
-using Windows.Media.Core;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.Services.Background;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Windows.ApplicationModel;
+using Windows.Storage;
 
 namespace FufuLauncher.ViewModels
 {
@@ -59,34 +52,58 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private string _launchArgsPreview = "";
         [ObservableProperty] private string _customBackgroundPath;
         [ObservableProperty] private bool _hasCustomBackground;
-        [ObservableProperty] 
+        [ObservableProperty]
         private string _backgroundCacheFolderPath;
-        [ObservableProperty] 
+        [ObservableProperty]
         private bool _isShortTermSupportEnabled;
         [ObservableProperty]
         private bool _isBetterGIIntegrationEnabled;
         [ObservableProperty]
         private bool _isBetterGICloseOnExitEnabled;
 
-        public IAsyncRelayCommand OpenBackgroundCacheFolderCommand { get; }
+        public IAsyncRelayCommand OpenBackgroundCacheFolderCommand
+        {
+            get;
+        }
 
         [ObservableProperty] private bool _isAcrylicEnabled = true;
-        public ICommand SwitchThemeCommand { get; }
-        public ICommand SwitchLanguageCommand { get; }
-        public ICommand SetResolutionPresetCommand { get; }
-        public IAsyncRelayCommand SelectCustomBackgroundCommand { get; }
-        public IAsyncRelayCommand ClearCustomBackgroundCommand { get; }
+        public ICommand SwitchThemeCommand
+        {
+            get;
+        }
+        public ICommand SwitchLanguageCommand
+        {
+            get;
+        }
+        public ICommand SetResolutionPresetCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand SelectCustomBackgroundCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand ClearCustomBackgroundCommand
+        {
+            get;
+        }
         private bool _isInitializing = false;
 
         [ObservableProperty] private bool _isStartupSoundEnabled;
         [ObservableProperty] private string _startupSoundPath;
         [ObservableProperty] private bool _hasCustomStartupSound;
 
-        public IAsyncRelayCommand SelectStartupSoundCommand { get; }
-        public IAsyncRelayCommand ClearStartupSoundCommand { get; }
+        public IAsyncRelayCommand SelectStartupSoundCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand ClearStartupSoundCommand
+        {
+            get;
+        }
         public SettingsViewModel(
-            IThemeSelectorService themeSelectorService, 
-            IBackgroundRenderer backgroundRenderer, 
+            IThemeSelectorService themeSelectorService,
+            IBackgroundRenderer backgroundRenderer,
             ILocalSettingsService localSettingsService,
             INavigationService navigationService,
             IGameLauncherService gameLauncherService,
@@ -120,7 +137,7 @@ namespace FufuLauncher.ViewModels
                     {
                         int languageCode = System.Convert.ToInt32(param);
                         var language = (AppLanguage)languageCode;
-                        
+
                         if (SelectedLanguage != language)
                         {
                             SelectedLanguage = language;
@@ -197,7 +214,7 @@ namespace FufuLauncher.ViewModels
         public async Task ReloadSettingsAsync()
         {
             _isInitializing = true;
-    
+
             await LoadUserPreferencesAsync();
             await LoadCustomBackgroundSettingsAsync();
             await LoadBackgroundCachePathAsync();
@@ -221,7 +238,7 @@ namespace FufuLauncher.ViewModels
             OnPropertyChanged(nameof(IsShortTermSupportEnabled));
             OnPropertyChanged(nameof(IsBetterGIIntegrationEnabled));
             OnPropertyChanged(nameof(IsBetterGICloseOnExitEnabled));
-    
+
             _isInitializing = false;
         }
 
@@ -250,13 +267,13 @@ namespace FufuLauncher.ViewModels
 
             var acrylicJson = await _localSettingsService.ReadSettingAsync("IsAcrylicEnabled");
             IsAcrylicEnabled = acrylicJson == null ? true : Convert.ToBoolean(acrylicJson);
-            
+
             var shortTermJson = await _localSettingsService.ReadSettingAsync("IsShortTermSupportEnabled");
             IsShortTermSupportEnabled = shortTermJson != null && Convert.ToBoolean(shortTermJson);
-            
+
             var betterGIJson = await _localSettingsService.ReadSettingAsync("IsBetterGIIntegrationEnabled");
             IsBetterGIIntegrationEnabled = betterGIJson != null && Convert.ToBoolean(betterGIJson);
-            
+
             var betterGICloseJson = await _localSettingsService.ReadSettingAsync("IsBetterGICloseOnExitEnabled");
             IsBetterGICloseOnExitEnabled = betterGICloseJson != null && Convert.ToBoolean(betterGICloseJson);
 
@@ -336,7 +353,7 @@ namespace FufuLauncher.ViewModels
             try
             {
                 args = args.Trim('"').Trim();
-                
+
                 if (args.Contains("-popupwindow"))
                 {
                     LaunchArgsWindowMode = WindowModeType.Popup;
@@ -458,7 +475,7 @@ namespace FufuLauncher.ViewModels
         {
             Debug.WriteLine($"SettingsViewModel: 保存服务器设置 {value}");
             _ = _localSettingsService.SaveSettingAsync(LocalSettingsService.BackgroundServerKey, (int)value);
-            
+
             if (IsBackgroundEnabled)
             {
                 _ = RefreshMainPageBackground();
@@ -469,7 +486,7 @@ namespace FufuLauncher.ViewModels
         {
             Debug.WriteLine($"SettingsViewModel: 保存背景开关 {value}");
             _ = _localSettingsService.SaveSettingAsync(LocalSettingsService.IsBackgroundEnabledKey, value);
-            
+
             if (!value)
             {
                 _backgroundRenderer.ClearBackground();
@@ -509,68 +526,68 @@ namespace FufuLauncher.ViewModels
             _ = _localSettingsService.SaveSettingAsync("IsBetterGICloseOnExitEnabled", value);
         }
 
-private async Task SwitchInjectionModuleAsync(bool enableShortTerm)
-{
-    try
-    {
-
-        string appDirectory = AppContext.BaseDirectory;
-        string dllPath = Path.Combine(appDirectory, "Genshin.UnlockerIsland.API.dll");
-        string bakPath = Path.Combine(appDirectory, "Genshin.UnlockerIsland.API.dll.bak");
-        string tempPath = Path.Combine(appDirectory, "Genshin.UnlockerIsland.API.temp");
-
-        if (!File.Exists(dllPath) || !File.Exists(bakPath))
+        private async Task SwitchInjectionModuleAsync(bool enableShortTerm)
         {
-            Debug.WriteLine("错误：找不到必需的模块文件");
-            var errorDialog = new ContentDialog
+            try
             {
-                Title = "切换失败",
-                Content = "找不到注入模块文件，请确保以下文件存在：\n\n" +
-                         "Genshin.UnlockerIsland.API.dll\n" +
-                         "Genshin.UnlockerIsland.API.dll.bak",
-                CloseButtonText = "确定",
-                XamlRoot = App.MainWindow.Content.XamlRoot
-            };
-            await errorDialog.ShowAsync();
-            return;
+
+                string appDirectory = AppContext.BaseDirectory;
+                string dllPath = Path.Combine(appDirectory, "Genshin.UnlockerIsland.API.dll");
+                string bakPath = Path.Combine(appDirectory, "Genshin.UnlockerIsland.API.dll.bak");
+                string tempPath = Path.Combine(appDirectory, "Genshin.UnlockerIsland.API.temp");
+
+                if (!File.Exists(dllPath) || !File.Exists(bakPath))
+                {
+                    Debug.WriteLine("错误：找不到必需的模块文件");
+                    var errorDialog = new ContentDialog
+                    {
+                        Title = "切换失败",
+                        Content = "找不到注入模块文件，请确保以下文件存在：\n\n" +
+                                 "Genshin.UnlockerIsland.API.dll\n" +
+                                 "Genshin.UnlockerIsland.API.dll.bak",
+                        CloseButtonText = "确定",
+                        XamlRoot = App.MainWindow.Content.XamlRoot
+                    };
+                    await errorDialog.ShowAsync();
+                    return;
+                }
+
+
+                File.Move(dllPath, tempPath, true);
+
+                File.Move(bakPath, dllPath, true);
+
+                File.Move(tempPath, bakPath, true);
+
+                string message = enableShortTerm ? "已切换到短期支持版本" : "已切换回标准版本";
+                Debug.WriteLine(message);
+
+                var successDialog = new ContentDialog
+                {
+                    Title = "切换成功",
+                    Content = $"{message}\n\n下次启动游戏时将使用新的注入模块。",
+                    CloseButtonText = "确定",
+                    XamlRoot = App.MainWindow.Content.XamlRoot
+                };
+                await successDialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"切换注入模块失败: {ex.Message}");
+
+                var dialog = new ContentDialog
+                {
+                    Title = "切换失败",
+                    Content = $"无法切换注入模块: {ex.Message}\n\n请确保：\n" +
+                             "1. 程序具有文件操作权限\n" +
+                             "2. 文件未被其他程序占用\n" +
+                             "3. 文件存在于程序目录中",
+                    CloseButtonText = "确定",
+                    XamlRoot = App.MainWindow.Content.XamlRoot
+                };
+                await dialog.ShowAsync();
+            }
         }
-
-
-        File.Move(dllPath, tempPath, true);
-
-        File.Move(bakPath, dllPath, true);
-
-        File.Move(tempPath, bakPath, true);
-
-        string message = enableShortTerm ? "已切换到短期支持版本" : "已切换回标准版本";
-        Debug.WriteLine(message);
-
-        var successDialog = new ContentDialog
-        {
-            Title = "切换成功",
-            Content = $"{message}\n\n下次启动游戏时将使用新的注入模块。",
-            CloseButtonText = "确定",
-            XamlRoot = App.MainWindow.Content.XamlRoot
-        };
-        await successDialog.ShowAsync();
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"切换注入模块失败: {ex.Message}");
-
-        var dialog = new ContentDialog
-        {
-            Title = "切换失败",
-            Content = $"无法切换注入模块: {ex.Message}\n\n请确保：\n" +
-                     "1. 程序具有文件操作权限\n" +
-                     "2. 文件未被其他程序占用\n" +
-                     "3. 文件存在于程序目录中",
-            CloseButtonText = "确定",
-            XamlRoot = App.MainWindow.Content.XamlRoot
-        };
-        await dialog.ShowAsync();
-    }
-}
         partial void OnMinimizeToTrayChanged(bool value)
         {
             Debug.WriteLine($"SettingsViewModel: 保存托盘设置 {value}");
@@ -594,7 +611,7 @@ private async Task SwitchInjectionModuleAsync(bool enableShortTerm)
                     CustomBackgroundPath = path;
                     HasCustomBackground = true;
                     await _localSettingsService.SaveSettingAsync<string>("CustomBackgroundPath", path);
-                    
+
                     await RefreshMainPageBackground();
                 }
             }
@@ -611,7 +628,7 @@ private async Task SwitchInjectionModuleAsync(bool enableShortTerm)
                 await _localSettingsService.SaveSettingAsync<string>("CustomBackgroundPath", null);
                 CustomBackgroundPath = null;
                 HasCustomBackground = false;
-                
+
                 _backgroundRenderer.ClearCustomBackground();
                 await RefreshMainPageBackground();
             }

@@ -1,20 +1,20 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Security.Principal;
-using FufuLauncher.Activation;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Media;
-using Windows.Media.Playback;
+using FufuLauncher.Activation;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.Services.Background;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Windows.Media.Playback;
 
 namespace FufuLauncher.ViewModels
 {
@@ -28,30 +28,30 @@ namespace FufuLauncher.ViewModels
         private readonly INotificationService _notificationService;
         private readonly DispatcherQueue _dispatcherQueue;
         private static bool _isFirstLoad = true;
-        
+
         [ObservableProperty] private bool _isGameNotLaunching;
 
         [ObservableProperty] private ImageSource _backgroundImageSource;
         [ObservableProperty] private MediaPlayer _backgroundVideoPlayer;
         [ObservableProperty] private bool _isVideoBackground;
         [ObservableProperty] private bool _isBackgroundLoading;
-        
+
         [ObservableProperty] private string _customBackgroundPath;
         [ObservableProperty] private bool _hasCustomBackground;
-        
+
         [ObservableProperty] private ObservableCollection<BannerItem> _banners = new();
         [ObservableProperty] private ObservableCollection<PostItem> _activityPosts = new();
         [ObservableProperty] private ObservableCollection<PostItem> _announcementPosts = new();
         [ObservableProperty] private ObservableCollection<PostItem> _infoPosts = new();
         [ObservableProperty] private ObservableCollection<SocialMediaItem> _socialMediaList = new();
-        
+
         private BannerItem _currentBanner;
         public BannerItem CurrentBanner
         {
             get => _currentBanner;
             set => SetProperty(ref _currentBanner, value);
         }
-        
+
         partial void OnIsGameLaunchingChanged(bool value) => IsGameNotLaunching = !value;
 
         [ObservableProperty] private bool _isPanelExpanded = true;
@@ -89,13 +89,34 @@ namespace FufuLauncher.ViewModels
         private CancellationTokenSource _gameMonitoringCts;
         private Task _monitoringTask;
 
-        public IAsyncRelayCommand LoadBackgroundCommand { get; }
-        public IRelayCommand TogglePanelCommand { get; }
-        public IRelayCommand ToggleActivityCommand { get; }
-        public IRelayCommand ToggleBackgroundTypeCommand { get; }
-        public IAsyncRelayCommand ExecuteCheckinCommand { get; }
-        public IAsyncRelayCommand LaunchGameCommand { get; }
-        public IAsyncRelayCommand OpenScreenshotFolderCommand { get; }
+        public IAsyncRelayCommand LoadBackgroundCommand
+        {
+            get;
+        }
+        public IRelayCommand TogglePanelCommand
+        {
+            get;
+        }
+        public IRelayCommand ToggleActivityCommand
+        {
+            get;
+        }
+        public IRelayCommand ToggleBackgroundTypeCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand ExecuteCheckinCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand LaunchGameCommand
+        {
+            get;
+        }
+        public IAsyncRelayCommand OpenScreenshotFolderCommand
+        {
+            get;
+        }
 
         public MainViewModel(
             IHoyoverseBackgroundService backgroundService,
@@ -147,7 +168,7 @@ namespace FufuLauncher.ViewModels
             UseInjection = await _gameLauncherService.GetUseInjectionAsync();
             UpdateLaunchButtonState();
         }
-        
+
         public async Task OnPageReturnedAsync()
         {
             await ForceRefreshGameStateAsync();
@@ -214,7 +235,7 @@ namespace FufuLauncher.ViewModels
 
                 var enabledJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.IsBackgroundEnabledKey);
                 bool isEnabled = enabledJson == null ? true : Convert.ToBoolean(enabledJson);
-                
+
                 if (!isEnabled)
                 {
                     ClearBackground();
@@ -223,7 +244,7 @@ namespace FufuLauncher.ViewModels
 
                 var userPreferVideo = await _localSettingsService.ReadSettingAsync("UserPreferVideoBackground");
                 bool useVideo = false;
-                
+
                 if (userPreferVideo != null && Convert.ToBoolean(userPreferVideo))
                 {
                     useVideo = true;
@@ -234,7 +255,7 @@ namespace FufuLauncher.ViewModels
                 var server = (ServerType)serverValue;
 
                 var result = await _backgroundRenderer.GetBackgroundAsync(server, useVideo);
-                
+
                 if (result == null) return;
 
                 await UpdateUI(() =>
@@ -248,7 +269,7 @@ namespace FufuLauncher.ViewModels
                             IsLoopingEnabled = true,
                             AutoPlay = true
                         };
-                        
+
                         BackgroundVideoPlayer = player;
                         IsVideoBackground = true;
                         BackgroundImageSource = null;
@@ -285,14 +306,14 @@ namespace FufuLauncher.ViewModels
         {
             PreferVideoBackground = !PreferVideoBackground;
             OnPropertyChanged(nameof(BackgroundTypeToggleText));
-            
+
             _ = _localSettingsService.SaveSettingAsync("UserPreferVideoBackground", PreferVideoBackground);
-            
+
             BackgroundVideoPlayer?.Pause();
             BackgroundVideoPlayer = null;
             BackgroundImageSource = null;
             IsVideoBackground = false;
-            
+
             _ = _localSettingsService.SaveSettingAsync("PreferVideoBackground", PreferVideoBackground);
             _ = LoadBackgroundAsync();
         }
@@ -304,7 +325,7 @@ namespace FufuLauncher.ViewModels
                 var serverJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.BackgroundServerKey);
                 int serverValue = serverJson != null ? Convert.ToInt32(serverJson) : 0;
                 var server = (ServerType)serverValue;
-            
+
                 var content = await _contentService.GetGameContentAsync(server);
                 if (content != null)
                 {
@@ -354,7 +375,7 @@ namespace FufuLauncher.ViewModels
                 CurrentBanner = Banners[nextIndex];
             }
         }
-        
+
         public bool IsAdministrator
         {
             get
@@ -373,7 +394,7 @@ namespace FufuLauncher.ViewModels
         {
             _bannerTimer?.Stop();
             _gameMonitoringCts?.Cancel();
-            
+
             if (BackgroundVideoPlayer != null)
             {
                 try
@@ -391,7 +412,7 @@ namespace FufuLauncher.ViewModels
             {
                 Debug.WriteLine($"主界面开始加载签到状态");
                 var (status, summary) = await _checkinService.GetCheckinStatusAsync();
-        
+
                 Debug.WriteLine($"状态更新: {status}, {summary}");
                 CheckinStatusText = status;
                 CheckinSummary = summary;
@@ -413,7 +434,7 @@ namespace FufuLauncher.ViewModels
             try
             {
                 var (success, message) = await _checkinService.ExecuteCheckinAsync();
-        
+
                 Debug.WriteLine($"签到结果: success={success}, message={message}");
                 CheckinStatusText = success ? "签到成功" : "签到失败";
                 CheckinSummary = message;
@@ -438,7 +459,7 @@ namespace FufuLauncher.ViewModels
             var pathTask = _localSettingsService.ReadSettingAsync("GameInstallationPath");
             var savedPath = pathTask.Result as string;
 
-            var hasPath = !string.IsNullOrEmpty(savedPath) && 
+            var hasPath = !string.IsNullOrEmpty(savedPath) &&
                           System.IO.Directory.Exists(savedPath.Trim('"').Trim());
 
             if (IsGameRunning)
@@ -451,10 +472,10 @@ namespace FufuLauncher.ViewModels
                 LaunchButtonText = hasPath ? "点击启动游戏" : "请选择游戏路径";
                 LaunchButtonIcon = "\uE768";
             }
-            
+
             OnPropertyChanged(nameof(LaunchButtonText));
             OnPropertyChanged(nameof(LaunchButtonIcon));
-            
+
             IsLaunchButtonEnabled = true;
         }
 
@@ -513,7 +534,7 @@ namespace FufuLauncher.ViewModels
         {
             var savedPath = await _localSettingsService.ReadSettingAsync("GameInstallationPath");
             var gamePath = savedPath?.ToString()?.Trim('"')?.Trim();
-    
+
             if (string.IsNullOrEmpty(gamePath) || !System.IO.Directory.Exists(gamePath))
             {
                 _notificationService.Show("未设置游戏路径", "请先前往设置页面选择游戏安装路径", NotificationType.Error, 0);
@@ -543,7 +564,7 @@ namespace FufuLauncher.ViewModels
             {
                 if (value && !IsAdministrator)
                 {
-                    await UpdateUI(() => 
+                    await UpdateUI(() =>
                     {
                         UseInjection = false;
                         ShowAdminRequiredDialog();
@@ -601,7 +622,7 @@ namespace FufuLauncher.ViewModels
             {
                 IsGameRunning = isRunning;
                 LaunchButtonIcon = isRunning ? "\uE711" : "\uE768";
-                
+
                 if (temporaryText != null)
                 {
                     LaunchButtonText = temporaryText;
@@ -610,7 +631,7 @@ namespace FufuLauncher.ViewModels
                 {
                     UpdateLaunchButtonState();
                 }
-                
+
                 OnPropertyChanged(nameof(LaunchButtonText));
                 OnPropertyChanged(nameof(LaunchButtonIcon));
                 OnPropertyChanged(nameof(IsGameRunning));
@@ -621,7 +642,7 @@ namespace FufuLauncher.ViewModels
         {
             try
             {
-                return Process.GetProcessesByName(TargetProcessName).Length > 0 || 
+                return Process.GetProcessesByName(TargetProcessName).Length > 0 ||
                        Process.GetProcessesByName(TargetProcessNameAlt).Length > 0;
             }
             catch
@@ -657,7 +678,7 @@ namespace FufuLauncher.ViewModels
                     }
                     catch { }
                 }
-                
+
                 try
                 {
                     await _gameLauncherService.StopBetterGIAsync();
@@ -686,13 +707,13 @@ namespace FufuLauncher.ViewModels
         private async Task StartGameMonitoringLoopAsync(CancellationToken token)
         {
             bool lastState = false;
-            
+
             while (!token.IsCancellationRequested)
             {
                 try
                 {
                     bool currentState = CheckGameProcessRunning();
-                    
+
                     if (currentState != lastState || currentState != IsGameRunning)
                     {
                         await UpdateUI(() =>
@@ -701,14 +722,14 @@ namespace FufuLauncher.ViewModels
                             UpdateLaunchButtonState();
                         });
                     }
-                    
+
                     lastState = currentState;
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"进程监控错误: {ex.Message}");
                 }
-                
+
                 await Task.Delay(3000, token);
             }
         }

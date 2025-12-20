@@ -1,22 +1,16 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Security.Principal;
-using FufuLauncher.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.UI;
-using Microsoft.UI.Text;
-using Microsoft.UI.Dispatching;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Windows.UI.ViewManagement;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
-using Microsoft.UI.Composition.SystemBackdrops;
+using Microsoft.UI;
+using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Windows.UI.ViewManagement;
 
 namespace FufuLauncher;
 
@@ -30,7 +24,7 @@ public sealed partial class MainWindow : WindowEx
         InitializeComponent();
 
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
-    
+
         var localizedTitle = "AppDisplayName".GetLocalized();
         Title = string.IsNullOrWhiteSpace(localizedTitle) ? "芙芙启动器" : localizedTitle;
 
@@ -82,7 +76,7 @@ public sealed partial class MainWindow : WindowEx
         {
 
             var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(
-                this.AppWindow.Id, 
+                this.AppWindow.Id,
                 Microsoft.UI.Windowing.DisplayAreaFallback.Primary
             );
 
@@ -125,7 +119,7 @@ public sealed partial class MainWindow : WindowEx
         try
         {
             this.SetTitleBar(AppTitleBar);
-        
+
             TitleBarIcon.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(
                 new Uri("ms-appx:///Assets/WindowIcon.ico"));
 
@@ -190,7 +184,7 @@ public sealed partial class MainWindow : WindowEx
             var localSettingsService = App.GetService<ILocalSettingsService>();
             var acrylicEnabled = await localSettingsService.ReadSettingAsync("IsAcrylicEnabled");
             bool isEnabled = acrylicEnabled == null ? true : Convert.ToBoolean(acrylicEnabled);
-            
+
             ApplyAcrylicSetting(isEnabled);
         }
         catch (Exception ex)
@@ -219,14 +213,14 @@ public sealed partial class MainWindow : WindowEx
         {
             var localSettingsService = App.GetService<ILocalSettingsService>();
             var accepted = await localSettingsService.ReadSettingAsync("UserAgreementAccepted");
-            
+
             bool isAccepted = false;
             if (accepted != null)
             {
                 try { isAccepted = Convert.ToBoolean(accepted); }
                 catch { isAccepted = false; }
             }
-            
+
             if (!isAccepted) ShowAgreementPage();
             else ShowMainContent();
         }
@@ -258,7 +252,7 @@ public sealed partial class MainWindow : WindowEx
             AgreementFrame.Visibility = Visibility.Collapsed;
             NavigationView.Visibility = Visibility.Visible;
             NavigationView.SelectedItem = NavigationView.MenuItems[0];
-            
+
             if (ContentFrame.CurrentSourcePageType != typeof(Views.MainPage))
                 ContentFrame.Navigate(typeof(Views.MainPage));
         }
@@ -273,12 +267,12 @@ public sealed partial class MainWindow : WindowEx
         if (args.SelectedItem is NavigationViewItem selectedItem)
         {
             var viewModelTag = selectedItem.Tag?.ToString();
-            
+
             if (viewModelTag == "FufuLauncher.ViewModels.SettingsViewModel")
             {
                 PlaySettingsIconRotationAnimation();
             }
-        
+
             if (!string.IsNullOrEmpty(viewModelTag)) NavigateToPage(viewModelTag);
         }
     }
@@ -342,9 +336,9 @@ public sealed partial class MainWindow : WindowEx
         {
             var notificationCard = CreateNotificationCard(message);
             NotificationPanel.Children.Add(notificationCard);
-            
+
             AnimateNotification(notificationCard, 380, 0, 300);
-            
+
             if (message.Duration > 0)
                 SetupAutoDismiss(notificationCard, message.Duration);
         }
@@ -376,9 +370,9 @@ public sealed partial class MainWindow : WindowEx
             Margin = new Thickness(0, 2, 0, 0),
             Foreground = new SolidColorBrush(Colors.White)
         };
-        
+
         var contentPanel = new StackPanel { Spacing = 4, Margin = new Thickness(12, 0, 0, 0) };
-        
+
         var titleText = new TextBlock
         {
             Text = message.Title,
@@ -446,10 +440,10 @@ public sealed partial class MainWindow : WindowEx
             Duration = new Duration(TimeSpan.FromMilliseconds(duration)),
             EasingFunction = new CircleEase { EasingMode = EasingMode.EaseOut }
         };
-        
+
         Storyboard.SetTarget(animation, element.RenderTransform);
         Storyboard.SetTargetProperty(animation, "X");
-        
+
         var storyboard = new Storyboard();
         storyboard.Children.Add(animation);
         storyboard.Begin();
@@ -458,7 +452,7 @@ public sealed partial class MainWindow : WindowEx
     private void SetupAutoDismiss(FrameworkElement card, int duration)
     {
         if (duration <= 0) return;
-        
+
         var timer = dispatcherQueue.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(duration);
         timer.Tick += (s, e) =>

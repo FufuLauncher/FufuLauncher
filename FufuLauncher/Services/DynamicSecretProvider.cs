@@ -1,7 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using System.Diagnostics;
 
 namespace FufuLauncher.Services;
 
@@ -13,17 +12,17 @@ internal static class DynamicSecretProvider
     {
         long t = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         string r = GetRandomString();
-        
-        string bodyStr = body != null ? 
-            JsonSerializer.Serialize(body, new JsonSerializerOptions 
-            { 
+
+        string bodyStr = body != null ?
+            JsonSerializer.Serialize(body, new JsonSerializerOptions
+            {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = false 
-            }) : 
+                WriteIndented = false
+            }) :
             "";
 
         string rawString = $"{t}&{r}&{query}&{bodyStr}&{Salt}";
-        
+
         string c = MD5Hash(rawString);
         return $"{t},{r},{c}";
     }

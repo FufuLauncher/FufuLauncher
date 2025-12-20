@@ -1,9 +1,6 @@
-﻿using Microsoft.UI.Xaml;
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using FufuLauncher.Contracts.Services;
+﻿using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
+using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.Services
 {
@@ -49,7 +46,7 @@ namespace FufuLauncher.Services
         {
 
             var themeObj = await _localSettingsService.ReadSettingAsync(SettingsKey);
-            
+
             if (themeObj != null)
             {
                 string themeName = themeObj.ToString();

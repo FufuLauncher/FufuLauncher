@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using FufuLauncher.Contracts.Services;
 
 namespace FufuLauncher.Services
@@ -81,7 +77,7 @@ namespace FufuLauncher.Services
                             _ => storedValue
                         };
                     }
-                    
+
                     return deserialized;
                 }
                 catch (JsonException)
@@ -104,7 +100,7 @@ namespace FufuLauncher.Services
 
             var json = JsonSerializer.Serialize(value, _jsonOptions);
             _settings[key] = json;
-            
+
             Debug.WriteLine($"LocalSettingsService: 保存 '{key}' -> {json}");
             await SaveSettingsAsync();
         }
@@ -115,18 +111,18 @@ namespace FufuLauncher.Services
             {
                 var filePath = Path.Combine(_applicationDataFolder, _localsettingsFile);
                 Debug.WriteLine($"LocalSettingsService: 尝试加载 {filePath}");
-                
+
                 if (File.Exists(filePath))
                 {
 
                     var data = await File.ReadAllTextAsync(filePath, Encoding.UTF8);
-                    
+
                     var settings = JsonSerializer.Deserialize<Dictionary<string, string>>(data, _jsonOptions) ?? new();
                     Debug.WriteLine($"LocalSettingsService: 成功加载 {settings.Count} 项");
                     Debug.WriteLine($"LocalSettingsService: 文件内容: {data}");
                     return settings;
                 }
-                
+
                 Debug.WriteLine("LocalSettingsService: 文件不存在");
                 return new Dictionary<string, string>();
             }
@@ -143,11 +139,11 @@ namespace FufuLauncher.Services
             {
                 Directory.CreateDirectory(_applicationDataFolder);
                 var filePath = Path.Combine(_applicationDataFolder, _localsettingsFile);
-                
+
                 var data = JsonSerializer.Serialize(_settings, _jsonOptions);
 
                 await File.WriteAllTextAsync(filePath, data, Encoding.UTF8);
-                
+
                 Debug.WriteLine($"LocalSettingsService: 保存到 {filePath}");
                 Debug.WriteLine($"LocalSettingsService: 保存内容: {data}");
             }

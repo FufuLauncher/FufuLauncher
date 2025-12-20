@@ -3,5 +3,7 @@
 
 
 
-    public class AgreementAcceptedMessage { }
+    public class AgreementAcceptedMessage
+    {
+    }
 }

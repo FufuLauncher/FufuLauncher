@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using FufuLauncher.Models;
+﻿using FufuLauncher.Models;
 
 namespace FufuLauncher.Core.Contracts.Services
 {

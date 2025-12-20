@@ -1,16 +1,15 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Text.Json;
-using System.Threading.Tasks;
-using FufuLauncher.Core.Contracts.Services;
 using FufuLauncher.Contracts.Services;
 
 namespace FufuLauncher.Services
 {
     public class LaunchResult
     {
-        public bool Success { get; set; }
+        public bool Success
+        {
+            get; set;
+        }
         public string ErrorMessage { get; set; } = string.Empty;
         public string DetailLog { get; set; } = string.Empty;
     }
@@ -173,7 +172,7 @@ namespace FufuLauncher.Services
                     bool resin107009 = await GetResin107009Async();
                     bool resin107012 = await GetResin107012Async();
                     bool resin220007 = await GetResin220007Async();
-                    
+
                     logBuilder.AppendLine($"[启动流程] 隐藏任务横幅: {hideQuestBanner}");
                     logBuilder.AppendLine($"[启动流程] 禁用伤害文本: {disableDamageText}");
                     logBuilder.AppendLine($"[启动流程] 触屏模式: {useTouchScreen}");
@@ -185,7 +184,7 @@ namespace FufuLauncher.Services
                     logBuilder.AppendLine($"[启动流程] 树脂107009: {resin107009}");
                     logBuilder.AppendLine($"[启动流程] 树脂107012: {resin107012}");
                     logBuilder.AppendLine($"[启动流程] 树脂220007: {resin220007}");
-                    
+
                     _launcherService.UpdateConfig(gameExePath, hideQuestBanner, disableDamageText, useTouchScreen,
                         disableEventCameraMove, removeTeamProgress, redirectCombineEntry,
                         resin106, resin201, resin107009, resin107012, resin220007);
@@ -464,7 +463,7 @@ namespace FufuLauncher.Services
 
             return args.ToString().Trim();
         }
-        
+
         private async Task<bool> GetHideQuestBannerAsync()
         {
             try

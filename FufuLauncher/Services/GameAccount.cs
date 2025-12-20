@@ -1,23 +1,37 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace FufuLauncher.Models
 {
     public class GameAccount
     {
         public Guid InnerId { get; set; } = Guid.NewGuid();
-        
+
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public SchemeType Type { get; set; }
-        
+        public SchemeType Type
+        {
+            get; set;
+        }
+
         public string Name { get; set; } = string.Empty;
         public string MihoyoSDK { get; set; } = string.Empty;
-        public string? Mid { get; set; }
-        public string? MacAddress { get; set; }
-        public bool IsExpired { get; set; }
-        
+        public string? Mid
+        {
+            get; set;
+        }
+        public string? MacAddress
+        {
+            get; set;
+        }
+        public bool IsExpired
+        {
+            get; set;
+        }
+
         [JsonPropertyName("lastUsed")]
-        public DateTime? LastUsed { get; set; }
+        public DateTime? LastUsed
+        {
+            get; set;
+        }
 
         public void UpdateName(string name)
         {

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml.Data;
-using FufuLauncher.ViewModels;
 
 namespace FufuLauncher.Helpers
 {

@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
+using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Security.Cryptography;
-using System.Net;
 
 namespace MihoyoBBS
 {
@@ -338,7 +338,7 @@ namespace MihoyoBBS
             }
 
             useragent = useragent.Replace("; ", " ").Replace(";", " ");
-    
+
             if (useragent.Contains("miHoYoBBS"))
             {
                 int i = useragent.IndexOf("miHoYoBBS");
@@ -346,7 +346,7 @@ namespace MihoyoBBS
                     i = i - 1;
                 return $"{useragent.Substring(0, i)} miHoYoBBS/2.93.1";
             }
-    
+
             return $"{useragent} miHoYoBBS/2.93.1";
         }
 

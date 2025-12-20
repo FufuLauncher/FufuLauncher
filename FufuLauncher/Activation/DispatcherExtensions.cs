@@ -1,6 +1,4 @@
 ﻿using Microsoft.UI.Dispatching;
-using System;
-using System.Threading.Tasks;
 
 namespace FufuLauncher.Activation;
 

@@ -1,10 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Diagnostics;
 using System.Text.Json;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.ViewModels;
@@ -23,13 +22,13 @@ public partial class ControlPanelModel : ObservableObject
     private CancellationTokenSource _cancellationTokenSource;
     private readonly SemaphoreSlim _socketLock = new(1, 1);
     private bool _isConnected;
-    
+
     private DateTime? _gameStartTime;
     private readonly Dictionary<string, long> _playTimeData;
-    
+
     [ObservableProperty]
     private WeeklyPlayTimeStats _weeklyStats = new();
-    
+
     [ObservableProperty]
     private bool _isGameRunning;
 
@@ -41,8 +40,8 @@ public partial class ControlPanelModel : ObservableObject
         _configPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "fufu", "FufuConfig.cfg");
         _cancellationTokenSource = new CancellationTokenSource();
         _playTimeData = new Dictionary<string, long>();
-        
-        try 
+
+        try
         {
             _udpClient = new UdpClient();
             _udpClient.Client.ReceiveTimeout = 3000;
@@ -55,10 +54,10 @@ public partial class ControlPanelModel : ObservableObject
 
         _ = StartConnectionLoopAsync(_cancellationTokenSource.Token);
         LoadConfig();
-        
+
         _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
     }
-    
+
     [ObservableProperty]
     private bool _enableFpsOverride;
 
@@ -76,7 +75,7 @@ public partial class ControlPanelModel : ObservableObject
         SendCommand($"set_fps {value}");
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _enableFovOverride;
 
@@ -103,7 +102,7 @@ public partial class ControlPanelModel : ObservableObject
         SendCommand(value ? "enable_display_fog_override" : "disable_display_fog_override");
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _enablePerspectiveOverride;
 
@@ -112,7 +111,7 @@ public partial class ControlPanelModel : ObservableObject
         SendCommand(value ? "enable_Perspective_override" : "disable_Perspective_override");
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _enableQuestBannerControl = true;
 
@@ -136,7 +135,7 @@ public partial class ControlPanelModel : ObservableObject
     {
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _enableEventCameraMove = true;
 
@@ -144,7 +143,7 @@ public partial class ControlPanelModel : ObservableObject
     {
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _enableTeamProgress = true;
 
@@ -152,7 +151,7 @@ public partial class ControlPanelModel : ObservableObject
     {
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _enableRedirectCombineEntry;
 
@@ -160,7 +159,7 @@ public partial class ControlPanelModel : ObservableObject
     {
         SaveConfig();
     }
-    
+
     [ObservableProperty]
     private bool _resinListItemId000106Allowed;
 
@@ -299,10 +298,10 @@ public partial class ControlPanelModel : ObservableObject
                     }
                     else
                     {
-                         App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-                        {
-                            ConnectionStatus = "等待连接...";
-                        });
+                        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                       {
+                           ConnectionStatus = "等待连接...";
+                       });
                     }
                 }
             }
@@ -319,14 +318,14 @@ public partial class ControlPanelModel : ObservableObject
     private async Task StartGameMonitoringLoopAsync(CancellationToken token)
     {
         bool wasRunning = false;
-        
+
         while (!token.IsCancellationRequested)
         {
             try
             {
                 var processInfo = FindTargetProcess();
                 bool isRunning = processInfo.HasValue;
-                
+
                 if (isRunning && !wasRunning)
                 {
                     _gameStartTime = DateTime.Now;
@@ -344,21 +343,21 @@ public partial class ControlPanelModel : ObservableObject
                         UpdateTodayPlayTime(playTime);
                         Debug.WriteLine($"[GameMonitor] Game stopped. Play time: {playTime}");
                     }
-                    
+
                     App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                     {
                         IsGameRunning = false;
                     });
                     _gameStartTime = null;
                 }
-                
+
                 wasRunning = isRunning;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[GameMonitor] Error: {ex.Message}");
             }
-            
+
             await Task.Delay(5000, token);
         }
     }
@@ -366,21 +365,21 @@ public partial class ControlPanelModel : ObservableObject
     private void UpdateTodayPlayTime(TimeSpan additionalTime)
     {
         var today = DateTime.Now.ToString("yyyy-MM-dd");
-        
+
         if (!_playTimeData.ContainsKey(today))
         {
             _playTimeData[today] = 0;
         }
-        
+
         _playTimeData[today] += (long)additionalTime.TotalSeconds;
-        
+
         var thirtyDaysAgo = DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd");
         var keysToRemove = _playTimeData.Keys.Where(k => string.Compare(k, thirtyDaysAgo) < 0).ToList();
         foreach (var key in keysToRemove)
         {
             _playTimeData.Remove(key);
         }
-        
+
         CalculateWeeklyStats();
         SaveConfig();
     }
@@ -390,12 +389,12 @@ public partial class ControlPanelModel : ObservableObject
         var stats = new WeeklyPlayTimeStats();
         var today = DateTime.Now.Date;
         var startOfWeek = today.AddDays(-(int)today.DayOfWeek);
-        
+
         for (int i = 0; i < 7; i++)
         {
             var date = startOfWeek.AddDays(i);
             var dateKey = date.ToString("yyyy-MM-dd");
-            
+
             if (_playTimeData.TryGetValue(dateKey, out var seconds) && seconds > 0)
             {
                 stats.DailyRecords.Add(new GamePlayTimeRecord
@@ -405,7 +404,7 @@ public partial class ControlPanelModel : ObservableObject
                 });
             }
         }
-        
+
         App.MainWindow.DispatcherQueue.TryEnqueue(() =>
         {
             WeeklyStats = stats;
@@ -450,7 +449,7 @@ public partial class ControlPanelModel : ObservableObject
                     ResinListItemId107009Allowed = config.ResinListItemId107009Allowed;
                     ResinListItemId107012Allowed = config.ResinListItemId107012Allowed;
                     ResinListItemId220007Allowed = config.ResinListItemId220007Allowed;
-                    
+
                     if (config.GamePlayTimeData != null)
                     {
                         foreach (var kvp in config.GamePlayTimeData)
@@ -458,10 +457,10 @@ public partial class ControlPanelModel : ObservableObject
                             _playTimeData[kvp.Key] = kvp.Value;
                         }
                     }
-                    
+
                     _isLoaded = true;
                     CalculateWeeklyStats();
-                    
+
                     if (_isConnected)
                     {
                         ApplyConfig();
@@ -504,7 +503,7 @@ public partial class ControlPanelModel : ObservableObject
                 ResinListItemId107009Allowed = ResinListItemId107009Allowed,
                 ResinListItemId107012Allowed = ResinListItemId107012Allowed,
                 ResinListItemId220007Allowed = ResinListItemId220007Allowed,
-                
+
                 GamePlayTimeData = _playTimeData,
                 LastPlayDate = DateTime.Now.ToString("yyyy-MM-dd")
             };
@@ -524,26 +523,71 @@ public partial class ControlPanelModel : ObservableObject
 
 public class ControlPanelConfig
 {
-    public bool EnableFpsOverride { get; set; }
-    public int TargetFps { get; set; }
-    public bool EnableFovOverride { get; set; }
-    public float TargetFov { get; set; }
-    public bool EnableFogOverride { get; set; }
-    public bool EnablePerspectiveOverride { get; set; }
-    
+    public bool EnableFpsOverride
+    {
+        get; set;
+    }
+    public int TargetFps
+    {
+        get; set;
+    }
+    public bool EnableFovOverride
+    {
+        get; set;
+    }
+    public float TargetFov
+    {
+        get; set;
+    }
+    public bool EnableFogOverride
+    {
+        get; set;
+    }
+    public bool EnablePerspectiveOverride
+    {
+        get; set;
+    }
+
     public bool EnableQuestBannerControl { get; set; } = true;
     public bool EnableDamageTextControl { get; set; } = true;
-    public bool EnableTouchScreenMode { get; set; }
-    
+    public bool EnableTouchScreenMode
+    {
+        get; set;
+    }
+
     public bool EnableEventCameraMove { get; set; } = true;
     public bool EnableTeamProgress { get; set; } = true;
-    public bool EnableRedirectCombineEntry { get; set; }
-    public bool ResinListItemId000106Allowed { get; set; }
-    public bool ResinListItemId000201Allowed { get; set; }
-    public bool ResinListItemId107009Allowed { get; set; }
-    public bool ResinListItemId107012Allowed { get; set; }
-    public bool ResinListItemId220007Allowed { get; set; }
-    
-    public Dictionary<string, long> GamePlayTimeData { get; set; }
-    public string LastPlayDate { get; set; }
+    public bool EnableRedirectCombineEntry
+    {
+        get; set;
+    }
+    public bool ResinListItemId000106Allowed
+    {
+        get; set;
+    }
+    public bool ResinListItemId000201Allowed
+    {
+        get; set;
+    }
+    public bool ResinListItemId107009Allowed
+    {
+        get; set;
+    }
+    public bool ResinListItemId107012Allowed
+    {
+        get; set;
+    }
+    public bool ResinListItemId220007Allowed
+    {
+        get; set;
+    }
+
+    public Dictionary<string, long> GamePlayTimeData
+    {
+        get; set;
+    }
+    public string LastPlayDate
+    {
+        get; set;
+    }
 }

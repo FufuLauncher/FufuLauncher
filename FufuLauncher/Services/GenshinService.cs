@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using FufuLauncher.Models.Genshin;
+﻿using FufuLauncher.Models.Genshin;
 
 namespace FufuLauncher.Services;
 

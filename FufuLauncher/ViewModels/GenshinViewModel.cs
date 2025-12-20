@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Input;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
@@ -25,35 +20,50 @@ public class GenshinViewModel : INotifyPropertyChanged
     public string Uid
     {
         get => _uid;
-        set { _uid = value; OnPropertyChanged(); }
+        set
+        {
+            _uid = value; OnPropertyChanged();
+        }
     }
 
     private string _nickname = string.Empty;
     public string Nickname
     {
         get => _nickname;
-        set { _nickname = value; OnPropertyChanged(); }
+        set
+        {
+            _nickname = value; OnPropertyChanged();
+        }
     }
 
     private TravelersDiarySummary? _travelersDiary;
     public TravelersDiarySummary? TravelersDiary
     {
         get => _travelersDiary;
-        set { _travelersDiary = value; OnPropertyChanged(); }
+        set
+        {
+            _travelersDiary = value; OnPropertyChanged();
+        }
     }
 
     private bool _isLoading;
     public bool IsLoading
     {
         get => _isLoading;
-        set { _isLoading = value; OnPropertyChanged(); }
+        set
+        {
+            _isLoading = value; OnPropertyChanged();
+        }
     }
 
     private string _statusMessage = "等待加载数据...";
     public string StatusMessage
     {
         get => _statusMessage;
-        set { _statusMessage = value; OnPropertyChanged(); }
+        set
+        {
+            _statusMessage = value; OnPropertyChanged();
+        }
     }
 
     public string TodayPrimogems => $"今日原石: {TravelersDiary?.Data.DayData.CurrentPrimogems ?? 0} (+{TravelersDiary?.Data.DayData.CurrentPrimogems ?? 0 - (TravelersDiary?.Data.DayData.LastPrimogems ?? 0)})";
@@ -74,7 +84,7 @@ public class GenshinViewModel : INotifyPropertyChanged
         get
         {
             if (TravelersDiary?.Data.MonthData.GroupBy == null) return new List<IncomeSourceViewModel>();
-            
+
             return TravelersDiary.Data.MonthData.GroupBy
                 .Where(s => s.Num > 0)
                 .OrderByDescending(s => s.Num)
@@ -89,7 +99,10 @@ public class GenshinViewModel : INotifyPropertyChanged
         }
     }
 
-    public IAsyncRelayCommand LoadDataCommand { get; }
+    public IAsyncRelayCommand LoadDataCommand
+    {
+        get;
+    }
 
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -98,7 +111,7 @@ public class GenshinViewModel : INotifyPropertyChanged
     }
 
     public GenshinViewModel(
-        IGenshinService genshinService, 
+        IGenshinService genshinService,
         ILocalSettingsService localSettingsService,
         IUserInfoService userInfoService)
     {
@@ -129,7 +142,7 @@ public class GenshinViewModel : INotifyPropertyChanged
             {
                 PropertyNameCaseInsensitive = true
             });
-            
+
             if (string.IsNullOrEmpty(config?.Account?.Cookie))
             {
                 StatusMessage = "错误：无效的登录信息";
@@ -137,17 +150,17 @@ public class GenshinViewModel : INotifyPropertyChanged
             }
 
             var cookie = config.Account.Cookie;
-            
+
             StatusMessage = "正在获取用户信息...";
             var rolesResponse = await _userInfoService.GetUserGameRolesAsync(cookie);
             var role = rolesResponse?.data?.list?.FirstOrDefault();
-            
+
             if (role == null)
             {
                 StatusMessage = "错误：无法获取角色信息";
                 return;
             }
-            
+
             Uid = role.game_uid;
             Nickname = role.nickname;
 
@@ -202,7 +215,13 @@ public class GenshinViewModel : INotifyPropertyChanged
 public class IncomeSourceViewModel
 {
     public string Action { get; set; } = "";
-    public int Num { get; set; }
-    public int Percent { get; set; }
+    public int Num
+    {
+        get; set;
+    }
+    public int Percent
+    {
+        get; set;
+    }
     public string Color { get; set; } = "#000000";
 }

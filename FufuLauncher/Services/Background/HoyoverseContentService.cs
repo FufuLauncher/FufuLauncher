@@ -1,8 +1,5 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Diagnostics;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Diagnostics;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services.Background
@@ -33,7 +30,7 @@ namespace FufuLauncher.Services.Background
             try
             {
                 Debug.WriteLine($"HoyoverseContentService: 开始请求 {server} 公告内容");
-                
+
                 var apiUrl = server switch
                 {
                     ServerType.CN => CN_CONTENT_API,
@@ -43,15 +40,15 @@ namespace FufuLauncher.Services.Background
 
                 var response = await _httpClient.GetStringAsync(apiUrl);
                 Debug.WriteLine($"HoyoverseContentService: 响应长度 {response.Length}");
-                
+
                 var options = new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = false,
                     ReadCommentHandling = JsonCommentHandling.Skip
                 };
-                
+
                 var result = JsonSerializer.Deserialize<HoyoverseContentResponse>(response, options);
-                
+
                 if (result?.Retcode != 0)
                 {
                     Debug.WriteLine($"HoyoverseContentService: API 错误代码 {result?.Retcode}");

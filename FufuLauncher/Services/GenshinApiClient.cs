@@ -1,12 +1,8 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net.Http;
+﻿using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
 using FufuLauncher.Models.Genshin;
 
 namespace FufuLauncher.Services;
@@ -29,10 +25,10 @@ public class GenshinApiClient
     {
         var region = "cn_gf01";
         var url = $"https://hk4e-api.mihoyo.com/event/ys_ledger/monthInfo?month={month}&bind_uid={uid}&bind_region={region}&bbs_presentation_style=fullscreen&bbs_auth_required=true&utm_source=bbs&utm_medium=mys&utm_campaign=icon";
-        
+
         var request = CreateRequest(HttpMethod.Get, url, cookie);
         request.Headers.Add("X-Requested-With", "com.mihoyo.hyperion");
-        
+
         return await SendAsync<TravelersDiarySummary>(request, cancellationToken);
     }
 
@@ -52,11 +48,12 @@ public class GenshinApiClient
     {
         var response = await _httpClient.SendAsync(request, cancellationToken);
         var content = await response.Content.ReadAsStringAsync(cancellationToken);
-        
+
         Debug.WriteLine($"[API] Request: {request.RequestUri}");
         Debug.WriteLine($"[API] Response: {content}");
-        
-        var options = new JsonSerializerOptions { 
+
+        var options = new JsonSerializerOptions
+        {
             PropertyNameCaseInsensitive = true,
             NumberHandling = JsonNumberHandling.AllowReadingFromString
         };
@@ -68,11 +65,11 @@ public class GenshinApiClient
         var t = DateTimeOffset.Now.ToUnixTimeSeconds().ToString();
         var r = new Random().Next(100000, 200000).ToString();
         var m = $"salt={ApiSalt2}&t={t}&r={r}&b=&q=";
-        
+
         using var md5 = MD5.Create();
         var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(m));
         var check = Convert.ToHexString(hash).ToLower();
-        
+
         return $"{t},{r},{check}";
     }
 }

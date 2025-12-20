@@ -1,6 +1,4 @@
-﻿
-using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
@@ -9,7 +7,10 @@ namespace FufuLauncher.Views;
 
 public sealed partial class AccountPage : Page
 {
-    public AccountViewModel ViewModel { get; }
+    public AccountViewModel ViewModel
+    {
+        get;
+    }
 
     public AccountPage()
     {

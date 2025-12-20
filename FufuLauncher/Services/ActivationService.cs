@@ -1,5 +1,4 @@
-﻿using FufuLauncher.Views;
-using FufuLauncher.Activation;
+﻿using FufuLauncher.Activation;
 using FufuLauncher.Contracts.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;

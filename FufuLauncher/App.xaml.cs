@@ -1,32 +1,30 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
+﻿using System.Diagnostics;
 using System.Text.Json;
-using FufuLauncher.Core.Contracts.Services;
-using FufuLauncher.Core.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.UI.Xaml;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Windows.Media.Playback;
-using Windows.Media.Core;
 using FufuLauncher.Activation;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Core.Contracts.Services;
+using FufuLauncher.Core.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.Services.Background;
 using FufuLauncher.ViewModels;
 using FufuLauncher.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.UI.Xaml;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 
 namespace FufuLauncher;
 
 public partial class App : Application
 {
-    public IHost Host { get; }
+    public IHost Host
+    {
+        get;
+    }
 
     public static T GetService<T>()
         where T : class
@@ -41,7 +39,10 @@ public partial class App : Application
 
     public static WindowEx MainWindow { get; } = new MainWindow();
 
-    public static UIElement? AppTitlebar { get; set; }
+    public static UIElement? AppTitlebar
+    {
+        get; set;
+    }
     private static Microsoft.UI.Dispatching.DispatcherQueue _mainDispatcherQueue;
     public App()
     {
@@ -62,7 +63,7 @@ public partial class App : Application
                 services.AddSingleton<IHoyoverseBackgroundService, HoyoverseBackgroundService>();
                 services.AddSingleton<IHoyoverseContentService, HoyoverseContentService>();
                 services.AddSingleton<IBackgroundRenderer, BackgroundRenderer>();
-    
+
                 services.AddSingleton<IActivationService, ActivationService>();
                 services.AddSingleton<IPageService, PageService>();
                 services.AddSingleton<INavigationService, NavigationService>();
@@ -78,13 +79,13 @@ public partial class App : Application
                 services.AddTransient<BoolToVisibilityConverter>();
                 services.AddTransient<BoolToGlyphConverter>();
                 services.AddTransient<IntToVisibilityConverter>();
-                
+
                 services.AddTransient<AccountViewModel>();
                 services.AddTransient<AccountPage>();
-                
+
                 services.AddSingleton<IGameLauncherService, GameLauncherService>();
                 services.AddSingleton<IGameConfigService, GameConfigService>();
-                
+
                 services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
                 services.AddSingleton<BlankViewModel>();
                 services.AddTransient<BlankPage>();
@@ -118,7 +119,7 @@ public partial class App : Application
                 services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
             })
             .Build();
-            
+
         CleanupOldSettings();
     }
 
@@ -126,7 +127,7 @@ public partial class App : Application
     {
         LogException(e.ExceptionObject as Exception, "CurrentDomain_UnhandledException");
     }
-    
+
     private void CleanupOldSettings()
     {
         try
@@ -135,7 +136,7 @@ public partial class App : Application
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "FufuLauncher", "ApplicationData", "LocalSettings.json"
             );
-        
+
             if (File.Exists(filePath))
             {
                 var content = File.ReadAllText(filePath);
@@ -166,13 +167,13 @@ public partial class App : Application
         {
             var logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "CrashLog.txt");
             Directory.CreateDirectory(Path.GetDirectoryName(logPath));
-            
+
             var log = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {source}\n" +
                      $"Exception: {ex.GetType().Name}\n" +
                      $"Message: {ex.Message}\n" +
                      $"StackTrace: {ex.StackTrace}\n" +
                      new string('-', 80) + "\n";
-            
+
             File.AppendAllText(logPath, log);
         }
         catch
@@ -216,7 +217,7 @@ public partial class App : Application
                 {
                     Debug.WriteLine("[Background] 后台任务开始，等待主窗口渲染...");
                     await Task.Delay(500);
-                
+
                     Debug.WriteLine("[Background] 准备调度到UI线程...");
 
                     await _mainDispatcherQueue.EnqueueAsync(async () =>
@@ -242,68 +243,68 @@ public partial class App : Application
         }
     }
     private async Task PlayStartupSoundAsync()
-{
-    try
     {
-        var localSettingsService = GetService<ILocalSettingsService>();
-
-        var soundEnabled = await localSettingsService.ReadSettingAsync("IsStartupSoundEnabled");
-        bool isSoundEnabled = soundEnabled != null && Convert.ToBoolean(soundEnabled);
-        
-        if (!isSoundEnabled) return;
-
-        var soundPath = await localSettingsService.ReadSettingAsync("StartupSoundPath");
-        if (soundPath == null || string.IsNullOrEmpty(soundPath.ToString())) return;
-
-        string path = soundPath.ToString();
-        if (!File.Exists(path))
+        try
         {
-            Debug.WriteLine($"启动语音文件不存在: {path}");
-            return;
-        }
+            var localSettingsService = GetService<ILocalSettingsService>();
 
-        await _mainDispatcherQueue.EnqueueAsync(() =>
-        {
-            try
+            var soundEnabled = await localSettingsService.ReadSettingAsync("IsStartupSoundEnabled");
+            bool isSoundEnabled = soundEnabled != null && Convert.ToBoolean(soundEnabled);
+
+            if (!isSoundEnabled) return;
+
+            var soundPath = await localSettingsService.ReadSettingAsync("StartupSoundPath");
+            if (soundPath == null || string.IsNullOrEmpty(soundPath.ToString())) return;
+
+            string path = soundPath.ToString();
+            if (!File.Exists(path))
             {
-                var mediaPlayer = new MediaPlayer();
-                mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(path));
-                mediaPlayer.Volume = 0.7;
+                Debug.WriteLine($"启动语音文件不存在: {path}");
+                return;
+            }
 
-                mediaPlayer.MediaEnded += (s, e) => mediaPlayer.Dispose();
-
-                mediaPlayer.MediaFailed += (s, e) =>
+            await _mainDispatcherQueue.EnqueueAsync(() =>
+            {
+                try
                 {
-                    Debug.WriteLine($"启动语音播放失败: {e.ErrorMessage}");
-                    mediaPlayer.Dispose();
-                };
-                
-                mediaPlayer.Play();
+                    var mediaPlayer = new MediaPlayer();
+                    mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(path));
+                    mediaPlayer.Volume = 0.7;
 
-                var timer = _mainDispatcherQueue.CreateTimer();
-                timer.Interval = TimeSpan.FromSeconds(30);
-                timer.Tick += (s, e) =>
-                {
-                    try
+                    mediaPlayer.MediaEnded += (s, e) => mediaPlayer.Dispose();
+
+                    mediaPlayer.MediaFailed += (s, e) =>
                     {
-                        mediaPlayer?.Dispose();
-                    }
-                    catch { }
-                    timer.Stop();
-                };
-                timer.Start();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"启动语音播放异常: {ex.Message}");
-            }
-        });
+                        Debug.WriteLine($"启动语音播放失败: {e.ErrorMessage}");
+                        mediaPlayer.Dispose();
+                    };
+
+                    mediaPlayer.Play();
+
+                    var timer = _mainDispatcherQueue.CreateTimer();
+                    timer.Interval = TimeSpan.FromSeconds(30);
+                    timer.Tick += (s, e) =>
+                    {
+                        try
+                        {
+                            mediaPlayer?.Dispose();
+                        }
+                        catch { }
+                        timer.Stop();
+                    };
+                    timer.Start();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"启动语音播放异常: {ex.Message}");
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"启动语音处理失败: {ex.Message}");
+        }
     }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"启动语音处理失败: {ex.Message}");
-    }
-}
     private async Task CheckAndShowUpdateWindowAsync()
     {
         try
@@ -317,7 +318,7 @@ public partial class App : Application
                 Debug.WriteLine($"[App] 动态更新公告URL: {result.UpdateInfoUrl}");
 
                 MainWindow.Activate();
-                
+
                 var updateWindow = new Views.UpdateNotificationWindow(result.UpdateInfoUrl);
                 updateWindow.Title = $"版本更新公告 - v{result.ServerVersion}";
                 updateWindow.Activate();
@@ -337,7 +338,7 @@ public partial class App : Application
             var loader = Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse();
             var test = loader.GetString("AppDisplayName");
             Debug.WriteLine($"资源加载测试: {test}");
-        
+
             if (string.IsNullOrEmpty(test))
             {
                 Debug.WriteLine("⚠️ 警告：资源文件未找到或为空！");
@@ -358,7 +359,7 @@ public partial class App : Application
         {
             var localSettingsService = GetService<ILocalSettingsService>();
             var languageValue = await localSettingsService.ReadSettingAsync("AppLanguage");
-        
+
             if (languageValue != null && int.TryParse(languageValue.ToString(), out int languageCode))
             {
                 var language = (AppLanguage)languageCode;
@@ -368,7 +369,7 @@ public partial class App : Application
                     AppLanguage.zhTW => "zh-TW",
                     _ => "zh-CN"
                 };
-            
+
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
             }
         }
@@ -380,19 +381,19 @@ public partial class App : Application
         {
             var localSettingsService = GetService<ILocalSettingsService>();
             var languageValue = localSettingsService.ReadSettingAsync("AppLanguage").Result;
-            
+
             if (languageValue != null)
             {
                 var languageCode = JsonSerializer.Deserialize<int>(languageValue.ToString() ?? string.Empty);
                 var language = (AppLanguage)languageCode;
-                
+
                 var culture = language switch
                 {
                     AppLanguage.zhCN => "zh-CN",
                     AppLanguage.zhTW => "zh-TW",
                     _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
                 };
-                
+
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
             }
         }

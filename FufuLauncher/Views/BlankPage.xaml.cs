@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Windows.Storage.Pickers;
-using WinRT.Interop;
 using CommunityToolkit.Mvvm.Messaging;
-using FufuLauncher.ViewModels;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Windows.Storage.Pickers;
+using WinRT.Interop;
 
 public class GameAccountData
 {
-    public Guid Id { get; set; }
+    public Guid Id
+    {
+        get; set;
+    }
     public string Name { get; set; } = string.Empty;
     public string SdkData { get; set; } = string.Empty;
-    public DateTime LastUsed { get; set; }
+    public DateTime LastUsed
+    {
+        get; set;
+    }
 }
 
 public class GameConfigData
@@ -38,6 +39,10 @@ namespace FufuLauncher.Views
 {
     public sealed partial class BlankPage : Page
     {
+        // HdrControl.dll导入声明
+        [DllImport("HdrControl.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        private static extern int SetGameHdrRegistryState(string regSubPath, bool enable);
+
         private GameConfigData? _currentConfig;
         private readonly string _accountsFilePath;
         private readonly ILocalSettingsService _localSettingsService;
@@ -46,13 +51,13 @@ namespace FufuLauncher.Views
         {
             this.InitializeComponent();
             _localSettingsService = App.GetService<ILocalSettingsService>();
-            
+
             var localFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             _accountsFilePath = Path.Combine(localFolder, "FufuLauncher", "game_accounts.json");
-            
+
             this.Loaded += BlankPage_Loaded;
         }
-        
+
         private void PathTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ApplyPathButton != null)
@@ -60,12 +65,12 @@ namespace FufuLauncher.Views
                 ApplyPathButton.IsEnabled = !string.IsNullOrWhiteSpace(PathTextBox.Text);
             }
         }
-        
+
         private async void ApplyPath_Click(object sender, RoutedEventArgs e)
         {
             await ProcessPathInput(PathTextBox.Text.Trim());
         }
-        
+
         private async Task ProcessPathInput(string path)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -81,7 +86,7 @@ namespace FufuLauncher.Views
                     await LoadGameInfoAsync(path);
                     await _localSettingsService.SaveSettingAsync("GameInstallationPath", path);
                     WeakReferenceMessenger.Default.Send(new GamePathChangedMessage(path));
-            
+
                     Debug.WriteLine($"[ApplyPath_Click] 手动输入路径成功: {path}");
                 }
                 else
@@ -94,7 +99,7 @@ namespace FufuLauncher.Views
                         XamlRoot = this.XamlRoot
                     };
                     await dialog.ShowAsync();
-            
+
                     if (await _localSettingsService.ReadSettingAsync("GameInstallationPath") is string savedPath)
                     {
                         PathTextBox.Text = savedPath.Trim('"').Trim();
@@ -107,6 +112,7 @@ namespace FufuLauncher.Views
                 await ShowError($"路径处理失败: {ex.Message}");
             }
         }
+
         private async void PathTextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter && ApplyPathButton.IsEnabled)
@@ -115,13 +121,11 @@ namespace FufuLauncher.Views
                 await ProcessPathInput(PathTextBox.Text.Trim());
             }
         }
-        
 
         private async void BlankPage_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-
                 if (await _localSettingsService.ReadSettingAsync("GameInstallationPath") is string savedPath)
                 {
                     savedPath = savedPath.Trim('"').Trim();
@@ -130,14 +134,13 @@ namespace FufuLauncher.Views
                 }
                 else
                 {
-
                     var foundPath = GamePathFinder.FindGamePath();
                     if (!string.IsNullOrEmpty(foundPath))
                     {
                         await ShowAutoPathDialog(foundPath);
                     }
                 }
-                
+
                 await LoadAccountsAsync();
             }
             catch (Exception ex)
@@ -161,7 +164,7 @@ namespace FufuLauncher.Views
             };
 
             var result = await dialog.ShowAsync();
-            
+
             if (result == ContentDialogResult.Primary)
             {
                 PathTextBox.Text = foundPath;
@@ -189,112 +192,108 @@ namespace FufuLauncher.Views
             };
             folderPicker.FileTypeFilter.Add("*");
             InitializeWithWindow.Initialize(folderPicker, hwnd);
-            
+
             var folder = await folderPicker.PickSingleFolderAsync();
             if (folder != null)
             {
                 var path = folder.Path;
                 PathTextBox.Text = path;
-                
+
                 await _localSettingsService.SaveSettingAsync("GameInstallationPath", path);
                 WeakReferenceMessenger.Default.Send(new GamePathChangedMessage(path));
-                
+
                 await LoadGameInfoAsync(path);
                 return path;
             }
             return null;
         }
 
-private async Task LoadGameInfoAsync(string gamePath)
-{
-    gamePath = gamePath?.Trim('"').Trim();
-    
-    if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
-    {
-        ShowEmptyState();
-        return;
-    }
-
-    LoadingRing.IsActive = true;
-    
-
-    try
-    {
-        var config = new GameConfigData { GamePath = gamePath };
-
-        _currentConfig = config;
-
-        ShowInfo();  
-
-        await Task.Run(async () =>
+        private async Task LoadGameInfoAsync(string gamePath)
         {
-            var configPath = Path.Combine(gamePath, "config.ini");
-            if (!File.Exists(configPath))
+            gamePath = gamePath?.Trim('"').Trim();
+
+            if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
             {
-                configPath = Directory.GetFiles(gamePath, "config.ini", SearchOption.AllDirectories)
-                    .FirstOrDefault();
+                ShowEmptyState();
+                return;
             }
 
-            if (configPath != null && File.Exists(configPath))
+            LoadingRing.IsActive = true;
+
+            try
             {
-                var content = await File.ReadAllTextAsync(configPath);
-                var versionLine = content.Split('\n')
-                    .FirstOrDefault(line => line.StartsWith("game_version=", StringComparison.OrdinalIgnoreCase));
-                if (versionLine != null)
+                var config = new GameConfigData { GamePath = gamePath };
+                _currentConfig = config;
+                ShowInfo();
+
+                await Task.Run(async () =>
                 {
-                    var parts = versionLine.Split('=', 2);
-                    if (parts.Length > 1)
-                        config.Version = parts[1].Trim();
-                }
-                config.ServerType = DetectServerType(content);
+                    var configPath = Path.Combine(gamePath, "config.ini");
+                    if (!File.Exists(configPath))
+                    {
+                        configPath = Directory.GetFiles(gamePath, "config.ini", SearchOption.AllDirectories)
+                            .FirstOrDefault();
+                    }
+
+                    if (configPath != null && File.Exists(configPath))
+                    {
+                        var content = await File.ReadAllTextAsync(configPath);
+                        var versionLine = content.Split('\n')
+                            .FirstOrDefault(line => line.StartsWith("game_version=", StringComparison.OrdinalIgnoreCase));
+                        if (versionLine != null)
+                        {
+                            var parts = versionLine.Split('=', 2);
+                            if (parts.Length > 1)
+                                config.Version = parts[1].Trim();
+                        }
+                        config.ServerType = DetectServerType(content);
+                    }
+                    else
+                    {
+                        config.Version = "未找到版本信息";
+                        config.ServerType = "未知";
+                    }
+
+                    config.DirectorySize = CalculateDirectorySize(gamePath);
+
+                    DispatcherQueue.TryEnqueue(() => ShowInfo());
+                });
+
+                _ = GetGameBranchesInfoAsync();
             }
-            else
+            catch (Exception ex)
             {
-                config.Version = "未找到版本信息";
-                config.ServerType = "未知";
+                Debug.WriteLine($"[LoadGameInfoAsync] 异常: {ex.Message}");
+                ShowEmptyState();
             }
+            finally
+            {
+                LoadingRing.IsActive = false;
+            }
+        }
 
-            config.DirectorySize = CalculateDirectorySize(gamePath);
- 
-            DispatcherQueue.TryEnqueue(() => ShowInfo());
-        });
-
-        _ = GetGameBranchesInfoAsync();
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"[LoadGameInfoAsync] 异常: {ex.Message}");
-        ShowEmptyState();
-    }
-    finally
-    {
-        LoadingRing.IsActive = false;
-    }
-}
-        
         private async Task GetGameBranchesInfoAsync()
         {
             try
             {
                 using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
                 var url = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGameBranches?launcher_id=jGHBHlcOq1&language=zh-cn&game_ids[]=1Z8W5NHUQb";
-            
+
                 var response = await client.GetStringAsync(url);
                 var json = JsonDocument.Parse(response);
-            
+
                 var root = json.RootElement;
                 if (root.GetProperty("retcode").GetInt32() == 0)
                 {
-
                     var gameBranch = root.GetProperty("data").GetProperty("game_branches")[0];
-                
+
                     var mainInfo = gameBranch.GetProperty("main");
                     var latestVersion = mainInfo.GetProperty("tag").GetString();
 
                     var versionText = latestVersion ?? "获取失败";
                     DispatcherQueue.TryEnqueue(() => LatestVersionText.Text = versionText);
-                
-                    if (gameBranch.TryGetProperty("pre_download", out var preDownload) && 
+
+                    if (gameBranch.TryGetProperty("pre_download", out var preDownload) &&
                         preDownload.ValueKind != JsonValueKind.Null)
                     {
                         var preVersion = preDownload.GetProperty("tag").GetString() ?? "未知";
@@ -322,21 +321,21 @@ private async Task LoadGameInfoAsync(string gamePath)
             var webView = new Microsoft.UI.Xaml.Controls.WebView2();
             announcementWindow.Closed += (s, args) => webView.Close();
             announcementWindow.Content = webView;
-        
+
             await webView.EnsureCoreWebView2Async();
             webView.Source = new Uri("https://sdk.mihoyo.com/hk4e/announcement/index.html?auth_appid=announcement&authkey_ver=1&bundle_id=hk4e_cn&channel_id=1&game=hk4e&game_biz=hk4e_cn&lang=zh-cn&level=60&platform=pc&region=cn_gf01&sdk_presentation_style=fullscreen&sdk_screen_transparent=true&sign_type=2&uid=100000000");
-        
+
             announcementWindow.Activate();
         }
 
         private void ShowInfo()
         {
             if (_currentConfig == null) return;
-            
+
             VersionText.Text = _currentConfig.Version;
             ServerText.Text = _currentConfig.ServerType;
             SizeText.Text = _currentConfig.DirectorySize;
-            
+
             InfoPanel.Visibility = Visibility.Visible;
             EmptyPanel.Visibility = Visibility.Collapsed;
         }
@@ -351,14 +350,14 @@ private async Task LoadGameInfoAsync(string gamePath)
         {
             if (configContent.Contains("pcadbdpz") || configContent.Contains("channel=1"))
                 return "中国大陆服务器（官服）";
-            
+
             if (configContent.Contains("channel=14") || configContent.Contains("cps=bilibili"))
                 return "中国大陆服务器（B服）";
-            
-            if (configContent.Contains("os_usa") || configContent.Contains("os_euro") || 
+
+            if (configContent.Contains("os_usa") || configContent.Contains("os_euro") ||
                 configContent.Contains("os_asia") || configContent.Contains("channel=0"))
                 return "国际服务器";
-                
+
             return "未知服务器";
         }
 
@@ -368,7 +367,7 @@ private async Task LoadGameInfoAsync(string gamePath)
             {
                 var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories);
                 long sizeInBytes = files.Sum(file => new FileInfo(file).Length);
-                
+
                 return sizeInBytes switch
                 {
                     >= 1073741824 => $"{sizeInBytes / 1073741824.0:F2} GB",
@@ -430,7 +429,7 @@ private async Task LoadGameInfoAsync(string gamePath)
 
                 var sdkData = key.GetValue("MIHOYOSDK_ADL_PROD_CN_h3123967166") as byte[];
                 if (sdkData == null) { await ShowError("注册表数据无效"); return; }
-                
+
                 int nullIndex = Array.IndexOf(sdkData, (byte)0);
                 int length = nullIndex >= 0 ? nullIndex : sdkData.Length;
                 var sdkString = Encoding.UTF8.GetString(sdkData, 0, length);
@@ -448,7 +447,7 @@ private async Task LoadGameInfoAsync(string gamePath)
 
                 await SaveAccountsToFileAsync(accounts);
                 await LoadAccountsAsync();
-                
+
                 Debug.WriteLine($"[AddAccount_Click] 成功保存账号，SDK长度: {sdkString.Length}");
             }
             catch (Exception ex)
@@ -474,7 +473,7 @@ private async Task LoadGameInfoAsync(string gamePath)
                 target[sdkBytes.Length] = 0;
 
                 key.SetValue("MIHOYOSDK_ADL_PROD_CN_h3123967166", target, Microsoft.Win32.RegistryValueKind.Binary);
-                
+
                 await UpdateAccountLastUsedAsync(account.Id);
                 await LoadAccountsAsync();
 
@@ -486,7 +485,7 @@ private async Task LoadGameInfoAsync(string gamePath)
                     XamlRoot = this.XamlRoot
                 };
                 await successDialog.ShowAsync();
-                
+
                 Debug.WriteLine($"[SwitchAccount_Click] 账号切换成功: {account.Name}");
             }
             catch (Exception ex)
@@ -509,7 +508,7 @@ private async Task LoadGameInfoAsync(string gamePath)
                     CloseButtonText = "取消",
                     XamlRoot = this.XamlRoot
                 };
-                
+
                 if (await dialog.ShowAsync() != ContentDialogResult.Primary) return;
 
                 var accounts = await LoadAccountsFromFileAsync();
@@ -528,16 +527,28 @@ private async Task LoadGameInfoAsync(string gamePath)
             try
             {
                 var isEnabled = (sender as ToggleSwitch)?.IsOn ?? false;
-                Microsoft.Win32.Registry.SetValue(
-                    @"HKEY_CURRENT_USER\Software\miHoYo\原神", 
-                    "WINDOWS_HDR_ON_h3132281285", 
-                    isEnabled ? 1 : 0, 
-                    Microsoft.Win32.RegistryValueKind.DWord);
+                string regPath = @"Software\miHoYo\原神";
+
+                // 调用HdrControl.dll设置HDR状态
+                int result = SetGameHdrRegistryState(regPath, isEnabled);
+
+                if (result != 0)
+                {
+                    Debug.WriteLine($"[HDRToggle_Toggled] HDR设置失败，错误码: {result}");
+                    // 恢复开关状态
+                    HDRToggle.IsOn = !HDRToggle.IsOn;
+                    await ShowError($"HDR设置失败，错误码: {result}");
+                }
+                else
+                {
+                    Debug.WriteLine($"[HDRToggle_Toggled] HDR已设置为: {isEnabled}");
+                }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[HDRToggle_Toggled] 设置失败: {ex.Message}");
                 HDRToggle.IsOn = !HDRToggle.IsOn;
+                await ShowError($"HDR设置失败: {ex.Message}");
             }
         }
 

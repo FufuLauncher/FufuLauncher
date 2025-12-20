@@ -1,21 +1,23 @@
-﻿using System;
-using FufuLauncher.ViewModels;
+﻿using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.Views;
 
 public sealed partial class GenshinDataWindow : WindowEx
 {
-    public GenshinViewModel ViewModel { get; }
+    public GenshinViewModel ViewModel
+    {
+        get;
+    }
     private bool _isFirstActivation = true;
 
     public GenshinDataWindow()
     {
         InitializeComponent();
         ViewModel = App.GetService<GenshinViewModel>();
-        
+
         RootGrid.DataContext = ViewModel;
-        
+
         ExtendsContentIntoTitleBar = true;
         AppWindow.Resize(new Windows.Graphics.SizeInt32(1000, 800));
 

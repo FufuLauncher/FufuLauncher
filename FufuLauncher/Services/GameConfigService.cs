@@ -1,11 +1,4 @@
-﻿
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using FufuLauncher.Core.Contracts.Services;
-using FufuLauncher.Models;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Contracts.Services;
 
 namespace FufuLauncher.Services;
@@ -128,10 +121,10 @@ public class GameConfigService : IGameConfigService
         if (configContent.Contains("channel=14") || configContent.Contains("cps=bilibili"))
             return "中国大陆服务器（B服）";
 
-        if (configContent.Contains("os_usa") || configContent.Contains("os_euro") || 
+        if (configContent.Contains("os_usa") || configContent.Contains("os_euro") ||
             configContent.Contains("os_asia") || configContent.Contains("channel=0"))
             return "国际服务器";
-            
+
         return "未知服务器";
     }
 

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using FufuLauncher.Messages;
+﻿using FufuLauncher.Messages;
 
 namespace FufuLauncher.Contracts.Services
 {

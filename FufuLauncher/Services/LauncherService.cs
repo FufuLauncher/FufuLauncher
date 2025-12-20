@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
 
 namespace FufuLauncher.Services
@@ -40,7 +38,7 @@ namespace FufuLauncher.Services
         private static extern int GetDefaultDllPath(
             [MarshalAs(UnmanagedType.LPWStr)] StringBuilder dllPath,
             int dllPathSize);
-        
+
         [DllImport(DllName, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
         private static extern void UpdateConfig(
             [MarshalAs(UnmanagedType.LPWStr)] string gamePath,
@@ -64,9 +62,9 @@ namespace FufuLauncher.Services
             var errorBuffer = new StringBuilder(1024);
 
             int result = LaunchGameAndInject(gamePath, dllPath ?? "", commandLineArgs ?? "", errorBuffer, errorBuffer.Capacity);
-            
+
             errorMessage = errorBuffer.ToString();
-            
+
             if (result == 0 && int.TryParse(errorMessage, out int pid))
             {
                 processId = pid;
@@ -76,18 +74,18 @@ namespace FufuLauncher.Services
             {
                 processId = 0;
             }
-            
+
             return result;
         }
 
         public string GetDefaultDllPath()
         {
             var pathBuffer = new StringBuilder(1024);
-            return GetDefaultDllPath(pathBuffer, pathBuffer.Capacity) == 0 
-                ? pathBuffer.ToString() 
+            return GetDefaultDllPath(pathBuffer, pathBuffer.Capacity) == 0
+                ? pathBuffer.ToString()
                 : string.Empty;
         }
-        
+
         public void UpdateConfig(string gamePath, bool hideQuestBanner, bool disableDamageText, bool useTouchScreen,
                                 bool disableEventCameraMove, bool removeTeamProgress, bool redirectCombineEntry,
                                 bool resin106, bool resin201, bool resin107009, bool resin107012, bool resin220007)

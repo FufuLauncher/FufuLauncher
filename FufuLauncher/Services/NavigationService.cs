@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using FufuLauncher.Helpers;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Contracts.ViewModels;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 

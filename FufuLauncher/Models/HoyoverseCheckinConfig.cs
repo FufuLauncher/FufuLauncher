@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace FufuLauncher.Models;
 
@@ -78,13 +77,19 @@ public class GameConfig
 public class ApiResponse<T>
 {
     [JsonPropertyName("retcode")]
-    public int RetCode { get; set; }
+    public int RetCode
+    {
+        get; set;
+    }
 
     [JsonPropertyName("message")]
     public string Message { get; set; } = "";
 
     [JsonPropertyName("data")]
-    public T Data { get; set; }
+    public T Data
+    {
+        get; set;
+    }
 }
 
 public class CheckinRewardsData
@@ -96,16 +101,25 @@ public class CheckinRewardsData
 public class IsSignData
 {
     [JsonPropertyName("total_sign_day")]
-    public int TotalSignDay { get; set; }
+    public int TotalSignDay
+    {
+        get; set;
+    }
 
     [JsonPropertyName("today")]
     public string Today { get; set; } = "";
 
     [JsonPropertyName("is_sign")]
-    public bool IsSign { get; set; }
+    public bool IsSign
+    {
+        get; set;
+    }
 
     [JsonPropertyName("first_bind")]
-    public bool FirstBind { get; set; }
+    public bool FirstBind
+    {
+        get; set;
+    }
 }
 
 public class AccountInfoData
@@ -120,7 +134,10 @@ public class RewardItem
     public string Name { get; set; } = "";
 
     [JsonPropertyName("cnt")]
-    public int Count { get; set; }
+    public int Count
+    {
+        get; set;
+    }
 }
 
 public class AccountItem
@@ -138,7 +155,10 @@ public class AccountItem
 public class SignResponseData
 {
     [JsonPropertyName("success")]
-    public int Success { get; set; }
+    public int Success
+    {
+        get; set;
+    }
 
     [JsonPropertyName("gt")]
     public string Gt { get; set; } = "";

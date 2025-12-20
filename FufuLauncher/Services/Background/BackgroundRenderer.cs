@@ -1,24 +1,28 @@
-﻿using Microsoft.UI.Xaml.Media.Imaging;
-using System;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Microsoft.UI.Xaml.Media;
-using Windows.Storage;
-using Windows.Media.Core;
 using FufuLauncher.Models;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Media.Core;
+using Windows.Storage;
 
 namespace FufuLauncher.Services.Background
 {
     public class BackgroundRenderResult
     {
-        public ImageSource ImageSource { get; set; }
-        public MediaSource VideoSource { get; set; }
-        public bool IsVideo { get; set; }
+        public ImageSource ImageSource
+        {
+            get; set;
+        }
+        public MediaSource VideoSource
+        {
+            get; set;
+        }
+        public bool IsVideo
+        {
+            get; set;
+        }
     }
 
     public interface IBackgroundRenderer
@@ -46,7 +50,7 @@ namespace FufuLauncher.Services.Background
         public BackgroundRenderer()
         {
             _cacheFolderPath = Path.Combine(
-                ApplicationData.Current.LocalCacheFolder.Path, 
+                ApplicationData.Current.LocalCacheFolder.Path,
                 "BackgroundCache"
             );
             Directory.CreateDirectory(_cacheFolderPath);
@@ -58,7 +62,7 @@ namespace FufuLauncher.Services.Background
             var backgroundInfo = await backgroundService.GetBackgroundUrlAsync(server, preferVideo);
 
             Debug.WriteLine($"BackgroundRenderer: 获取到 URL = {backgroundInfo?.Url ?? "null"}, IsVideo = {backgroundInfo?.IsVideo ?? false}");
-            
+
             if (backgroundInfo == null || string.IsNullOrEmpty(backgroundInfo.Url))
             {
                 return null;
@@ -76,20 +80,20 @@ namespace FufuLauncher.Services.Background
                 {
                     Debug.WriteLine($"BackgroundRenderer: 处理视频背景");
                     var videoSource = await ProcessVideoBackground(backgroundInfo.Url);
-                    _cachedBackground = new BackgroundRenderResult 
-                    { 
-                        VideoSource = videoSource, 
-                        IsVideo = true 
+                    _cachedBackground = new BackgroundRenderResult
+                    {
+                        VideoSource = videoSource,
+                        IsVideo = true
                     };
                 }
                 else
                 {
                     Debug.WriteLine($"BackgroundRenderer: 处理静态背景");
                     var imageSource = await ProcessImageBackground(backgroundInfo.Url);
-                    _cachedBackground = new BackgroundRenderResult 
-                    { 
-                        ImageSource = imageSource, 
-                        IsVideo = false 
+                    _cachedBackground = new BackgroundRenderResult
+                    {
+                        ImageSource = imageSource,
+                        IsVideo = false
                     };
                 }
 
@@ -118,7 +122,7 @@ namespace FufuLauncher.Services.Background
                 var isVideo = videoExtensions.Contains(extension);
 
                 BackgroundRenderResult result;
-                
+
                 if (isVideo)
                 {
                     var file = await StorageFile.GetFileFromPathAsync(filePath);
@@ -217,7 +221,7 @@ namespace FufuLauncher.Services.Background
         public void ClearBackground()
         {
             Debug.WriteLine("BackgroundRenderer: 清除背景缓存");
-            
+
             if (Directory.Exists(_cacheFolderPath))
             {
                 try
@@ -229,7 +233,7 @@ namespace FufuLauncher.Services.Background
                 }
                 catch { }
             }
-            
+
             _cachedBackground = null;
             _currentBackgroundUrl = null;
         }
