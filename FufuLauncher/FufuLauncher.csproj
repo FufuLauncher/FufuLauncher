@@ -13,7 +13,6 @@
         <UseWinUI>true</UseWinUI>
         <EnableMsixTooling>true</EnableMsixTooling>
         <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-        <PackageCertificateKeyFile>Acrylic_TemporaryKey.pfx</PackageCertificateKeyFile>
         <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
         <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
         <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
@@ -22,6 +21,7 @@
         <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
         <GenerateTestArtifacts>True</GenerateTestArtifacts>
         <AppxBundle>Never</AppxBundle>
+        <PackageCertificateThumbprint>B68A1F5785706052496DAF0F2E23310B945D5D2C</PackageCertificateThumbprint>
     </PropertyGroup>
 
     <ItemGroup>
@@ -78,6 +78,14 @@
 
     <ItemGroup>
         <Compile Remove="Models\GameConfig.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Assets\BadgeLogo.scale-100.png" />
+      <Content Remove="Assets\BadgeLogo.scale-125.png" />
+      <Content Remove="Assets\BadgeLogo.scale-150.png" />
+      <Content Remove="Assets\BadgeLogo.scale-200.png" />
+      <Content Remove="Assets\BadgeLogo.scale-400.png" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

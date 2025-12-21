@@ -8,18 +8,19 @@
         xmlns:genTemplate="http://schemas.microsoft.com/appx/developer/templatestudio"
         xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
         xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
-        IgnorableNamespaces="uap rescap genTemplate">
+        xmlns:uap18="http://schemas.microsoft.com/appx/manifest/uap/windows10/18"
+        IgnorableNamespaces="uap rescap genTemplate uap18">
 
     <Identity
             Name="3a6f3b9a-8c2d-4e1f-9b5a-7c8d9e0f1a2b"
-            Publisher="CN=CodeCubist"
+            Publisher="CN=Administrator"
             Version="1.0.3.0" />
 
     <mp:PhoneIdentity PhoneProductId="3a6f3b9a-8c2d-4e1f-9b5a-7c8d9e0f1a2b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
     <Properties>
-        <DisplayName>Furina</DisplayName>
-        <PublisherDisplayName>Master</PublisherDisplayName>
+        <DisplayName>芙芙启动器</DisplayName>
+        <PublisherDisplayName>CodeCubist</PublisherDisplayName>
         <Logo>Assets\StoreLogo.png</Logo>
     </Properties>
 
@@ -44,6 +45,7 @@
                     Square44x44Logo="Assets\Square44x44Logo.png">
                 <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"  Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
                 <uap:SplashScreen Image="Assets\SplashScreen.png" />
+                <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badgeAndTileText"/>
             </uap:VisualElements>
             <Extensions>
                 <desktop:Extension Category="windows.toastNotificationActivation">
