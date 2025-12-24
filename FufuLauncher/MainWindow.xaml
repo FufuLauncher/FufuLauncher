@@ -21,6 +21,11 @@
                                 AutoPlay="True"
                                 AreTransportControlsEnabled="False"
                                 Visibility="Collapsed"/>
+    
+            <Rectangle x:Name="GlobalBackgroundOverlay"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       Opacity="0.3"/> 
         </Grid>
 
         <Frame x:Name="AgreementFrame" Visibility="Collapsed" Background="Transparent"/>

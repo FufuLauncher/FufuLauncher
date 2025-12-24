@@ -49,10 +49,6 @@ namespace FufuLauncher.Services.Background
 
         public BackgroundRenderer()
         {
-            // ❌ 移除这段导致崩溃的代码:
-            // _cacheFolderPath = Path.Combine(ApplicationData.Current.LocalCacheFolder.Path, "BackgroundCache");
-
-            // ✅ 替换为标准路径 (例如: C:\Users\xxx\AppData\Local\FufuLauncher\BackgroundCache)
             var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             _cacheFolderPath = Path.Combine(localAppData, "FufuLauncher", "BackgroundCache");
 

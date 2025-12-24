@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Security.Principal;
-using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
@@ -74,7 +73,13 @@ public sealed partial class MainWindow : WindowEx
             });
         });
 
-
+        if (Content is FrameworkElement rootElement)
+        {
+            rootElement.ActualThemeChanged += (s, e) => UpdateBackgroundOverlayTheme();
+            // 初始化时执行一次
+            UpdateBackgroundOverlayTheme();
+        }
+        
         Debug.WriteLine("[MainWindow] 开始注册消息监听...");
         WeakReferenceMessenger.Default.Register<ValueChangedMessage<WindowBackdropType>>(this, (r, m) =>
         {
@@ -102,6 +107,36 @@ public sealed partial class MainWindow : WindowEx
         this.Activated += OnWindowActivated;
     }
     
+    private void UpdateBackgroundOverlayTheme()
+    {
+        // 确保在 UI 线程执行
+        if (Content is FrameworkElement rootElement)
+        {
+            // 获取当前主题
+            var currentTheme = rootElement.ActualTheme;
+
+            // 如果是系统默认，则需要判断系统实际状态（通常 ActualTheme 会自动解析，但这里做个保险）
+            if (currentTheme == ElementTheme.Default)
+            {
+                currentTheme = Application.Current.RequestedTheme == ApplicationTheme.Dark 
+                    ? ElementTheme.Dark 
+                    : ElementTheme.Light;
+            }
+
+            //根据主题设置颜色
+            if (currentTheme == ElementTheme.Dark)
+            {
+                // 深色模式：使用黑色滤镜，让背景变暗，确保白字清晰
+                GlobalBackgroundOverlay.Fill = new SolidColorBrush(Colors.Black);
+            }
+            else
+            {
+                // 浅色模式：使用白色滤镜，让背景变亮，确保黑字清晰
+                GlobalBackgroundOverlay.Fill = new SolidColorBrush(Colors.White);
+            }
+        }
+    }
+    
     private async Task LoadAndApplyAcrylicSettingAsync()
     {
         try
@@ -127,7 +162,7 @@ public sealed partial class MainWindow : WindowEx
         catch (Exception ex)
         {
             Debug.WriteLine($"加载背景设置失败: {ex.Message}");
-            ApplyBackdrop(WindowBackdropType.Acrylic); // 出错默认用亚克力
+            ApplyBackdrop(WindowBackdropType.Acrylic);
         }
     }
     private async Task LoadGlobalBackgroundAsync()
