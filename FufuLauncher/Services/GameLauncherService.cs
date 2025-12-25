@@ -406,56 +406,22 @@ namespace FufuLauncher.Services
                 var enabled = await _localSettingsService.ReadSettingAsync("IsBetterGIIntegrationEnabled");
                 if (enabled != null && Convert.ToBoolean(enabled))
                 {
-                    string processDir = null;
-                    try
-                    {
-                        processDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName);
-                    }
-                    catch { /* ignore */ }
+                    // 使用 bettergi://start 协议启动
+                    var betterGIUri = new Uri("bettergi://start");
 
-                    var candidates = new[]
-                    {
-                        Path.Combine(AppContext.BaseDirectory, "BetterGI.exe"),
-                        Path.Combine(AppContext.BaseDirectory, "Assets", "BetterGI.exe"),
-                        Path.Combine(AppContext.BaseDirectory, "BetterGI.lnk"),
-                        Path.Combine(AppContext.BaseDirectory, "Assets", "BetterGI.lnk"),
-                        processDir == null ? null : Path.Combine(processDir, "BetterGI.exe"),
-                        processDir == null ? null : Path.Combine(processDir, "Assets", "BetterGI.exe"),
-                        processDir == null ? null : Path.Combine(processDir, "BetterGI.lnk"),
-                        processDir == null ? null : Path.Combine(processDir, "Assets", "BetterGI.lnk")
-                    };
+                    // 检查 BetterGI 协议是否已注册
+                    var queryResult = await Windows.System.Launcher.QueryUriSupportAsync(
+                        betterGIUri,
+                        Windows.System.LaunchQuerySupportType.Uri);
 
-                    string found = null;
-                    foreach (var c in candidates)
+                    if (queryResult != Windows.System.LaunchQuerySupportStatus.Available)
                     {
-                        if (string.IsNullOrEmpty(c)) continue;
-                        if (File.Exists(c))
-                        {
-                            found = c;
-                            break;
-                        }
+                        Debug.WriteLine("[BetterGI] 协议未注册，请确保 BetterGI 已安装并运行过一次");
+                        return;
                     }
 
-                    Debug.WriteLine($"[BetterGI] 尝试启动，候选路径: {string.Join(", ", candidates.Where(p => !string.IsNullOrEmpty(p)))}");
-
-                    if (!string.IsNullOrEmpty(found))
-                    {
-                        Debug.WriteLine($"[BetterGI] 找到: {found}");
-
-                        var startInfo = new ProcessStartInfo
-                        {
-                            FileName = found,
-                            UseShellExecute = true,
-                            WorkingDirectory = Path.GetDirectoryName(found)
-                        };
-
-                        Process.Start(startInfo);
-                        Debug.WriteLine("[BetterGI] 启动成功");
-                    }
-                    else
-                    {
-                        Debug.WriteLine("[BetterGI] 未找到可用的 BetterGI 可执行或快捷方式");
-                    }
+                    await Windows.System.Launcher.LaunchUriAsync(betterGIUri);
+                    Debug.WriteLine("[BetterGI] 启动成功");
                 }
             }
             catch (Exception ex)
