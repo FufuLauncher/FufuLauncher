@@ -220,6 +220,14 @@
                 </Button.Content>
             </Button>
             
+            <Button Content="打开提瓦特地图" 
+                    Click="OpenMap_Click"
+                    Style="{StaticResource AccentButtonStyle}" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,32,0,0"
+                    Padding="24,12"
+                    MinWidth="200"/>
+            
             <Button Content="查看游戏公告" Click="OpenAnnouncement_Click"
                     Style="{StaticResource AccentButtonStyle}" 
                     HorizontalAlignment="Center" 

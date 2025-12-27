@@ -23,7 +23,6 @@ public sealed partial class LoginWebViewDialog : Window
 
         if (_appWindow != null)
         {
-
             _appWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
         }
 
@@ -56,29 +55,43 @@ public sealed partial class LoginWebViewDialog : Window
         await Task.Delay(300);
         Close();
     }
-
+    
     private async void LoginWebView_NavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)
     {
         LoadingRing.IsActive = false;
 
         try
         {
+            if (args.IsSuccess)
+            {
+                await sender.ExecuteScriptAsync("""
+                    if (window.location.host === 'www.miyoushe.com') {
+                        var openLoginDialogIntervalId = setInterval(function() {
+                            var ele = document.getElementsByClassName('header__avatarwrp');
+                            if (ele.length > 0) {
+                                clearInterval(openLoginDialogIntervalId);
+                                ele[0].click();
+                            }
+                        }, 100);
+                    }
+                """);
+            }
+            
             if (sender.Source?.AbsoluteUri.Contains("miyoushe.com") == true)
             {
-
                 var cookies = await LoginWebView.CoreWebView2.CookieManager.GetCookiesAsync("https://www.miyoushe.com");
 
                 if (cookies.Count > 0)
                 {
-                    StatusText.Text = "检测到登录信息，点击'完成登录'保存";
+                    StatusText.Text = "点击'完成登录'保存";
                     CompleteButton.IsEnabled = true;
                 }
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Cookie检测失败: {ex.Message}");
-            StatusText.Text = "登录检测失败，请手动点击完成";
+            Debug.WriteLine($"操作失败: {ex.Message}");
+            StatusText.Text = "自动操作失败，请手动登录";
             CompleteButton.IsEnabled = true;
         }
     }

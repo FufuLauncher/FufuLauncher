@@ -9,6 +9,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Windows.Storage.Pickers;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using WinRT.Interop;
 
 public class GameAccountData
@@ -100,6 +102,27 @@ namespace FufuLauncher.Views
 
             var downloadWindow = new FufuLauncher.Views.DownloadWindow(targetPath);
             downloadWindow.Activate();
+        }
+        private void OpenMap_Click(object sender, RoutedEventArgs e)
+        {
+            // 1. 创建新窗口
+            var newWindow = new Window();
+            newWindow.Title = "提瓦特大地图";
+
+            // 2. 设置窗口大小为长方形 (例如 1280x800)
+            var hWnd = WindowNative.GetWindowHandle(newWindow);
+            var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            var appWindow = AppWindow.GetFromWindowId(winId);
+            appWindow.Resize(new Windows.Graphics.SizeInt32(1280, 800));
+
+            // 3. 创建 Frame 并导航到 MapPage
+            // 关键点：将 newWindow 作为参数传递给 Navigate，这样 MapPage 内部才能控制这个窗口
+            var rootFrame = new Frame();
+            rootFrame.Navigate(typeof(Views.MapPage), newWindow);
+
+            // 4. 设置窗口内容并激活
+            newWindow.Content = rootFrame;
+            newWindow.Activate();
         }
 
         private async Task ProcessPathInput(string path)
