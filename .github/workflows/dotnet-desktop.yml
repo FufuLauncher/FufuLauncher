@@ -26,10 +26,16 @@ env:
 jobs:
   build:
     runs-on: windows-latest
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
+
+    - name: Install Windows 11 SDK
+      run: |
+        # 安装 Windows App SDK 构建依赖
+        choco install windows-sdk-11-version-26100 -y
+        choco install visualstudio2022-workload-native-desktop -y
+        choco install visualstudio2022-workload-manageddesktop -y
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -160,52 +166,7 @@ jobs:
         if (Test-Path $exePath) {
           Rename-Item -Path $exePath -NewName "FufuLauncher-x64.exe" -Force
         }
-    
-    - name: Build and publish (win-arm64)
-      id: build_arm64
-      continue-on-error: true  # ARM64可能不支持，允许失败继续
-      run: |
-        echo "Building win-arm64 version..."
-        
-        # 构建
-        dotnet build "${{ env.MAIN_PROJECT }}" `
-          --configuration ${{ env.BUILD_CONFIG }} `
-          --runtime win-arm64 `
-          --no-restore `
-          --verbosity minimal
-        
-        if ($LASTEXITCODE -ne 0) {
-          Write-Warning "Build failed for win-arm64 (project may not support ARM64)"
-          exit 0  # 非错误退出，继续流程
-        }
-        
-        # 发布
-        dotnet publish "${{ env.MAIN_PROJECT }}" `
-          --configuration ${{ env.BUILD_CONFIG }} `
-          --runtime win-arm64 `
-          --self-contained true `
-          --output "./publish/win-arm64" `
-          /p:PublishSingleFile=true `
-          /p:IncludeNativeLibrariesForSelfExtract=true `
-          /p:DebugType=None `
-          /p:DebugSymbols=false `
-          /p:EnableCompressionInSingleFile=true `
-          --no-build `
-          --verbosity minimal
-        
-        if ($LASTEXITCODE -ne 0) {
-          Write-Warning "Publish failed for win-arm64"
-          exit 0  # 非错误退出
-        }
-        
-        echo "✓ Published win-arm64 to ./publish/win-arm64"
-        
-        # 重命名可执行文件
-        $projectName = [System.IO.Path]::GetFileNameWithoutExtension("${{ env.MAIN_PROJECT }}")
-        $exePath = "./publish/win-arm64/${projectName}.exe"
-        if (Test-Path $exePath) {
-          Rename-Item -Path $exePath -NewName "FufuLauncher-arm64.exe" -Force
-        }
+
     
     - name: Create build info file
       run: |
