@@ -93,7 +93,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: Build application
-      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform="Any CPU" /m
+      run: msbuild $env:Solution_Name /p:Configuration=$env:Configuration /p:Platform="x64" /m
       env:
         Configuration: ${{ matrix.configuration }}
 
