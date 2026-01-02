@@ -53,13 +53,6 @@
                     Content="取消" Margin="0,0,8,0"
                     Padding="16,8" CornerRadius="6"
                     Click="CancelButton_Click"/>
-            
-            <Button Grid.Column="2" x:Name="CompleteButton" 
-                    Content="完成登录" 
-                    Padding="16,8" CornerRadius="6"
-                    Style="{StaticResource AccentButtonStyle}"
-                    Click="CompleteButton_Click"
-                    IsEnabled="False"/>
         </Grid>
     </Grid>
 </Window>
