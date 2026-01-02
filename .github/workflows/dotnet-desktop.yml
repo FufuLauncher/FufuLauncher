@@ -97,15 +97,22 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-    - name: Zip Build Artifacts
+    - name: Pack build artifacts to ZIP file
       run: |
-        $sourceDir = Join-Path -Path "$env:App_Main_Directory" -ChildPath "bin/${{ matrix.configuration }}"
-        $zipFileName = "App_${{ matrix.configuration }}.zip"
-        Compress-Archive -Path "$sourceDir\*" -DestinationPath $zipFileName -Force
-        Write-Host "压缩完成: $zipFileName"
-
-    - name: Upload ZIP Package
+        $sourceDir = "FufuLauncher/bin/x64/Release/net8.0-windows10.0.26100/win-x64/*"
+        $zipFileName = "FufuLauncher_Release.zip"
+        Compress-Archive -Path $sourceDir -DestinationPath $zipFileName -Force
+        Write-Host "Successfully created zip package: $zipFileName"
+        - name: Upload ZIP package artifact
+        
+    - name: Upload ZIP package artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ matrix.configuration }}_Zip_Package
-        path: App_${{ matrix.configuration }}.zip
+        name: FufuLauncher_Release_ZIP
+        path: FufuLauncher_Release.zip
+        
+    - name: Upload uncompressed build files
+      uses: actions/upload-artifact@v4
+      with:
+        name: FufuLauncher_Release_Files
+        path: FufuLauncher/bin/x64/Release/net8.0-windows10.0.26100/win-x64/
