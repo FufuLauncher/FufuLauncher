@@ -79,12 +79,7 @@ jobs:
         vs-version: 17.8
         msbuild-architecture: x64
         install-vc-build-tools: true
-    
-    # Execute all unit tests in the solution
-    #- name: Execute unit tests
-    #  run: dotnet test $env:Solution_Name --configuration Release --no-restore --filter "Extension!=vcxproj" --verbosity minimal
-
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
+      
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
