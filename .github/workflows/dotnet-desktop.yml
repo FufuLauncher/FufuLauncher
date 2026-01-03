@@ -99,7 +99,7 @@ jobs:
 
     - name: Pack build artifacts to ZIP file
       run: |
-        $sourceDir = "..\FufuLauncher\FufuLauncher\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0\win-x64\"
+        $sourceDir = "D:\a\FufuLauncher\FufuLauncher\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0"
         $zipFileName = "FufuLauncher_Release.zip"
         Compress-Archive -Path $sourceDir -DestinationPath $zipFileName -Force
         Write-Host "Successfully created zip package: $zipFileName"
@@ -114,4 +114,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: FufuLauncher_Release_Files
-        path: ..\FufuLauncher\FufuLauncher\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0\win-x64\
+        path: D:\a\FufuLauncher\FufuLauncher\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0
