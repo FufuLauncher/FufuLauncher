@@ -99,8 +99,7 @@ jobs:
 
     - name: Pack build artifacts to ZIP file
       run: |
-        #万能路径匹配：匹配主目录下所有子目录的文件，不管编译产物在哪层都能找到
-        $sourceDir = "FufuLauncher/bin/x64/Release/**/*"
+        $sourceDir = "FufuLauncher/bin/Release/"
         $zipFileName = "FufuLauncher_Release.zip"
         Compress-Archive -Path $sourceDir -DestinationPath $zipFileName -Force
         Write-Host "Successfully created zip package: $zipFileName"
