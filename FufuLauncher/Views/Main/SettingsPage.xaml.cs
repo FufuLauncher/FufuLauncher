@@ -53,7 +53,12 @@ public sealed partial class SettingsPage : Page
             }
         }
     }
-
+    private async void OnOpenHDRSettingsClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new GenshinHDRLuminanceSettingDialog();
+        dialog.XamlRoot = this.XamlRoot; 
+        await dialog.ShowAsync();
+    }
     private void BringElementIntoView(FrameworkElement element)
     {
         if (element == null) return;

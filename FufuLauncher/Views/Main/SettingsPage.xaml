@@ -309,7 +309,17 @@
                                         Style="{StaticResource PresetButtonStyle}"/>
                             </StackPanel>
                         </StackPanel>
-                        
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
+                            <TextBlock Text="HDR 亮度配置" 
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14"/>
+                            <TextBlock Text="调整游戏内的 HDR 峰值亮度与 UI 亮度"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       Margin="0,2,0,12"/>
+                            <Button Content="打开 HDR 设置" 
+                                    Click="OnOpenHDRSettingsClick"/>
+                        </StackPanel>
                         <TextBlock Text="高级启动参数" 
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
@@ -515,18 +525,6 @@
                         <TextBlock Text="高级选项" 
                                    Style="{ThemeResource SubtitleTextBlockStyle}"
                                    Margin="0,0,0,16"/>
-                        
-                        <ToggleSwitch Header="使用短期支持版本（STS）"
-                                      OffContent="标准版本（推荐）"
-                                      OnContent="短期支持版本"
-                                      IsOn="{x:Bind ViewModel.IsShortTermSupportEnabled, Mode=TwoWay}"/>
-                        
-                        <InfoBar Severity="Warning"
-                                 Title="重要提示"
-                                 Message="短期支持模式下无法使用控制面板功能，请使用键盘方向键控制FOV设置"
-                                 IsOpen="True"
-                                 IsClosable="False"
-                                 Margin="0,12,0,0"/>
                         
                         <ToggleSwitch Header="启用 BetterGI 联动"
                                       OffContent="已禁用"

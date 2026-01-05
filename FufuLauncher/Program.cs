@@ -42,7 +42,6 @@ namespace FufuLauncher
 
         private static void RunElevatedInjection(string[] args)
         {
-            // args: --elevated-inject <gameExePath> <dllPath> <configMask> <commandLineArgs...>
             int exitCode = 1;
             try
             {
@@ -53,30 +52,10 @@ namespace FufuLauncher
 
                 string gameExePath = args[1];
                 string dllPath = args[2];
-                
-                if (!int.TryParse(args[3], out int configMask))
-                {
-                    MessageBox(IntPtr.Zero, "配置参数格式错误", "FufuLauncher 错误", 0x10);
-                    return;
-                }
 
                 string commandLineArgs = args.Length > 4 ? string.Join(' ', args.Skip(4)) : string.Empty;
 
                 var launcher = new LauncherService();
-
-                launcher.UpdateConfig(gameExePath,
-                    (configMask & (1 << 0)) != 0, // hideQuestBanner
-                    (configMask & (1 << 1)) != 0, // disableDamageText
-                    (configMask & (1 << 2)) != 0, // useTouchScreen
-                    (configMask & (1 << 3)) != 0, // disableEventCameraMove
-                    (configMask & (1 << 4)) != 0, // removeTeamProgress
-                    (configMask & (1 << 5)) != 0, // redirectCombineEntry
-                    (configMask & (1 << 6)) != 0, // resin106
-                    (configMask & (1 << 7)) != 0, // resin201
-                    (configMask & (1 << 8)) != 0, // resin107009
-                    (configMask & (1 << 9)) != 0, // resin107012
-                    (configMask & (1 << 10)) != 0 // resin220007
-                );
 
                 var result = launcher.LaunchGameAndInject(gameExePath, dllPath, commandLineArgs, out var errorMessage, out var pid);
 

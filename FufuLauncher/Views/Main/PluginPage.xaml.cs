@@ -49,99 +49,11 @@ public sealed partial class PluginPage : Page
         }
     }
     
-    private async void OnConfigClick(object sender, RoutedEventArgs e)
+    private void OnConfigClick(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is PluginItem item && item.HasConfig)
         {
-            try
-            {
-                var lines = await File.ReadAllLinesAsync(item.ConfigFilePath);
-                
-                var (generalInfo, options) = ParseIniConfig(lines);
-                
-                var rootStack = new StackPanel { Spacing = 20, Padding = new Thickness(4) };
-                
-                if (generalInfo.Items.Count > 0)
-                {
-                    var infoHeader = new TextBlock 
-                    { 
-                        Text = "插件信息 (General)", 
-                        Style = (Style)Application.Current.Resources["BodyStrongTextBlockStyle"],
-                        Opacity = 0.8
-                    };
-                    rootStack.Children.Add(infoHeader);
-
-                    var infoGrid = new Grid 
-                    { 
-                        Padding = new Thickness(12), 
-                        CornerRadius = new CornerRadius(4), 
-                        Background = (Brush)Application.Current.Resources["CardBackgroundFillColorDefaultBrush"] 
-                    };
-                    var infoStack = new StackPanel { Spacing = 4 };
-                    
-                    foreach (var kvp in generalInfo.Items)
-                    {
-                        infoStack.Children.Add(new TextBlock 
-                        { 
-                            Text = $"{kvp.Key}: {kvp.Value}", 
-                            Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"],
-                            Foreground = (Brush)Application.Current.Resources["SystemControlForegroundBaseMediumBrush"]
-                        });
-                    }
-                    infoGrid.Children.Add(infoStack);
-                    rootStack.Children.Add(infoGrid);
-                }
-                
-                if (options.Count > 0)
-                {
-                    rootStack.Children.Add(new MenuFlyoutSeparator());
-                    
-                    foreach (var opt in options)
-                    {
-                        var controlGroup = CreateControlForOption(opt);
-                        rootStack.Children.Add(controlGroup);
-                    }
-                }
-                else
-                {
-                    rootStack.Children.Add(new TextBlock 
-                    { 
-                        Text = "没有可配置的选项", 
-                        Foreground = (Brush)Application.Current.Resources["SystemControlForegroundBaseMediumBrush"] 
-                    });
-                }
-                
-                var scrollViewer = new ScrollViewer { Content = rootStack };
-                ScrollViewer.SetVerticalScrollBarVisibility(scrollViewer, ScrollBarVisibility.Auto);
-
-                var dialog = new ContentDialog
-                {
-                    Title = $"配置: {item.FileName}",
-                    PrimaryButtonText = "保存",
-                    CloseButtonText = "取消",
-                    DefaultButton = ContentDialogButton.Primary,
-                    XamlRoot = this.XamlRoot,
-                    Width = 500,
-                    Content = scrollViewer
-                };
-
-                var result = await dialog.ShowAsync();
-                
-                if (result == ContentDialogResult.Primary)
-                {
-                    foreach (var opt in options)
-                    {
-                        UpdateValueFromControl(opt);
-                    }
-                    
-                    var newContent = BuildIniContent(generalInfo, options);
-                    await ViewModel.SaveConfigAsync(item, newContent);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewModel.StatusMessage = $"配置文件错误: {ex.Message}";
-            }
+            this.Frame.Navigate(typeof(PluginConfigPage), item);
         }
     }
     

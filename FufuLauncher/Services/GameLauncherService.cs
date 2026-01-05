@@ -25,6 +25,8 @@ namespace FufuLauncher.Services
         private const string GamePathKey = "GameInstallationPath";
         private const string UseInjectionKey = "UseInjection";
         private const string CustomLaunchParametersKey = "CustomLaunchParameters";
+        public const string GenshinHDRConfigKey = "IsGenshinHDRForcedEnabled";
+        
         private bool _lastUseInjection;
 
         public GameLauncherService(
@@ -108,6 +110,22 @@ namespace FufuLauncher.Services
             await _localSettingsService.SaveSettingAsync(CustomLaunchParametersKey, parameters);
             Trace.WriteLine($"[启动服务] 保存自定义参数: '{parameters}'");
         }
+        
+        private async Task ApplyGenshinHDRConfigAsync(StringBuilder logBuilder)
+        {
+            try
+            {
+                var obj = await _localSettingsService.ReadSettingAsync(GenshinHDRConfigKey);
+                bool isEnabled = obj != null && Convert.ToBoolean(obj);
+
+                logBuilder.AppendLine($"[启动流程] 强制设置HDR状态: {(isEnabled ? "开启 (1)" : "关闭 (0)")}");
+                GameSettingService.SetGenshinHDRState(isEnabled);
+            }
+            catch (Exception ex)
+            {
+                logBuilder.AppendLine($"[启动流程] ? 设置HDR异常: {ex.Message}");
+            }
+        }
 
         public async Task<LaunchResult> LaunchGameAsync()
         {
@@ -154,6 +172,8 @@ namespace FufuLauncher.Services
                     result.DetailLog = logBuilder.ToString();
                     return result;
                 }
+                
+                await ApplyGenshinHDRConfigAsync(logBuilder);
 
                 string arguments = BuildLaunchArguments(config).ToString();
                 logBuilder.AppendLine($"[启动流程] 启动参数: {arguments}");
@@ -165,55 +185,59 @@ namespace FufuLauncher.Services
 
                 if (useInjection)
                 {
-                    bool removeQuestBanner = _controlPanelModel.RemoveQuestBanner;
-                    bool removeDamageText = _controlPanelModel.RemoveDamageText;
-                    bool useTouchScreen = _controlPanelModel.EnableTouchScreenMode;
-                    bool disableEventCameraMove = _controlPanelModel.DisableEventCameraMove;
-                    bool removeTeamProgress = _controlPanelModel.RemoveTeamProgressLimit;
-                    bool redirectCombineEntry = _controlPanelModel.EnableRedirectCombineEntry;
-                    bool resin106 = _controlPanelModel.ResinListItemId000106Allowed;
-                    bool resin201 = _controlPanelModel.ResinListItemId000201Allowed;
-                    bool resin107009 = _controlPanelModel.ResinListItemId107009Allowed;
-                    bool resin107012 = _controlPanelModel.ResinListItemId107012Allowed;
-                    bool resin220007 = _controlPanelModel.ResinListItemId220007Allowed;
-
-                    logBuilder.AppendLine($"[启动流程] 移除任务横幅: {removeQuestBanner}");
-                    logBuilder.AppendLine($"[启动流程] 移除伤害文本: {removeDamageText}");
-                    logBuilder.AppendLine($"[启动流程] 触屏模式: {useTouchScreen}");
-                    logBuilder.AppendLine($"[启动流程] 禁用事件镜头: {disableEventCameraMove}");
-                    logBuilder.AppendLine($"[启动流程] 移除组队进度: {removeTeamProgress}");
-                    logBuilder.AppendLine($"[启动流程] 重定向合成: {redirectCombineEntry}");
-                    logBuilder.AppendLine($"[启动流程] 树脂106: {resin106}");
-                    logBuilder.AppendLine($"[启动流程] 树脂201: {resin201}");
-                    logBuilder.AppendLine($"[启动流程] 树脂107009: {resin107009}");
-                    logBuilder.AppendLine($"[启动流程] 树脂107012: {resin107012}");
-                    logBuilder.AppendLine($"[启动流程] 树脂220007: {resin220007}");
-
                     int configMask = 0;
-                    if (removeQuestBanner) configMask |= 1 << 0;
-                    if (removeDamageText) configMask |= 1 << 1;
-                    if (useTouchScreen) configMask |= 1 << 2;
-                    if (disableEventCameraMove) configMask |= 1 << 3;
-                    if (removeTeamProgress) configMask |= 1 << 4;
-                    if (redirectCombineEntry) configMask |= 1 << 5;
-                    if (resin106) configMask |= 1 << 6;
-                    if (resin201) configMask |= 1 << 7;
-                    if (resin107009) configMask |= 1 << 8;
-                    if (resin107012) configMask |= 1 << 9;
-                    if (resin220007) configMask |= 1 << 10;
-
+                    
                     logBuilder.AppendLine($"[启动流程] 配置掩码: {configMask}");
-
-                    var dllPath = _launcherService.GetDefaultDllPath();
-                    logBuilder.AppendLine($"[启动流程] 注入DLL路径: {dllPath}");
-
-                    if (File.Exists(dllPath))
+                    
+                    string targetDllPath = null;
+                    string defaultDllPath = _launcherService.GetDefaultDllPath();
+                    
+                    if (!string.IsNullOrEmpty(defaultDllPath) && File.Exists(defaultDllPath))
                     {
-                        gameStarted = await LaunchViaElevatedProcessAsync(gameExePath, dllPath, configMask, arguments, logBuilder);
+                        targetDllPath = defaultDllPath;
+                        logBuilder.AppendLine($"[启动流程] 发现默认DLL: {targetDllPath}");
                     }
                     else
                     {
-                        logBuilder.AppendLine($"[启动流程] DLL不存在，改用普通启动");
+                        try
+                        {
+                            string pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
+                            if (Directory.Exists(pluginsDir))
+                            {
+                                logBuilder.AppendLine($"[启动流程] 在扫描插件目录: {pluginsDir}");
+                                
+                                var pluginDll = Directory.GetFiles(pluginsDir, "*.dll", SearchOption.AllDirectories)
+                                    .FirstOrDefault(f => !f.EndsWith(".disabled", StringComparison.OrdinalIgnoreCase));
+
+                                if (!string.IsNullOrEmpty(pluginDll))
+                                {
+                                    targetDllPath = pluginDll;
+                                    logBuilder.AppendLine($"[启动流程] 扫描到可用插件DLL，将使用: {targetDllPath}");
+                                }
+                                else
+                                {
+                                    logBuilder.AppendLine($"[启动流程] 插件目录中未发现有效DLL");
+                                }
+                            }
+                            else
+                            {
+                                logBuilder.AppendLine($"[启动流程] 插件目录不存在");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            logBuilder.AppendLine($"[启动流程] 扫描插件目录时发生异常: {ex.Message}");
+                        }
+                    }
+                    
+                    if (!string.IsNullOrEmpty(targetDllPath) && File.Exists(targetDllPath))
+                    {
+                        logBuilder.AppendLine($"[启动流程] 准备注入 DLL: {targetDllPath}");
+                        gameStarted = await LaunchViaElevatedProcessAsync(gameExePath, targetDllPath, configMask, arguments, logBuilder);
+                    }
+                    else
+                    {
+                        logBuilder.AppendLine($"[启动流程] 未找到任何可用的注入DLL (默认路径无效且无插件)，降级为普通启动");
                         gameStarted = StartGameNormally(gameExePath, arguments, gamePath, logBuilder);
                     }
                 }

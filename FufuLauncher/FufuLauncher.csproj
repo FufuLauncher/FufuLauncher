@@ -29,6 +29,7 @@
         <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.118" />
         <PackageReference Include="InputSimulatorPlus" Version="1.0.7" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3650-prerelease" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
@@ -42,22 +43,6 @@
         <Content Include="..\FufuLauncher\Launcher.dll">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <Link>Launcher.dll</Link>
-        </Content>
-        <Content Include="..\FufuLauncher\Genshin.UnlockerIsland.API.dll">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <Link>Genshin.UnlockerIsland.API.dll</Link>
-        </Content>
-        <Content Include="..\FufuLauncher\Genshin.UnlockerIsland.API.dll.bak">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <Link>Genshin.UnlockerIsland.API.dll.bak</Link>
-        </Content>
-        <Content Include="..\FufuLauncher\nvhelper.dll">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <Link>nvhelper.dll</Link>
-        </Content>
-        <Content Include="..\FufuLauncher\input_hot_switch.dll">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <Link>input_hot_switch.dll</Link>
         </Content>
         <Content Include="..\FufuLauncher\CaptureApp.exe">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
