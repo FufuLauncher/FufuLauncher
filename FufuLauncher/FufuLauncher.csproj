@@ -48,14 +48,6 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <Link>CaptureApp.exe</Link>
         </Content>
-        <Content Include="..\FufuLauncher\input_hot_switch.dll">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <Link>input_hot_switch.dll</Link>
-        </Content>
-        <Content Include="..\FufuLauncher\CaptureApp.exe">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            <Link>CaptureApp.exe</Link>
-        </Content>
     </ItemGroup>
 
     <ItemGroup>

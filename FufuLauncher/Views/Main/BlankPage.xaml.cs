@@ -26,10 +26,6 @@ public class GameAccountData
     {
         get; set;
     }
-    public string? Remark { get; set; }
-    
-    [System.Text.Json.Serialization.JsonIgnore]
-    public string DisplayName => string.IsNullOrWhiteSpace(Remark) ? Name : Remark;
 }
 public class RedeemCodeItem
 {
@@ -422,11 +418,7 @@ namespace FufuLauncher.Views
                 var dialog = new ContentDialog
                 {
                     Title = "国际服客户端",
-<<<<<<< HEAD
-                    Content = "注意：本启动器的注入功能主要是针对国服设计的。如果在国际服客户端上使用，可能无法生效或导致错误。\n\n是否继续使用此路径？",
-=======
                     Content = "注意：本启动器的注入功能主要是针对国服设计的。在国际服客户端上，此功能可能无法生效或导致未知的错误。\n\n是否继续使用此路径？",
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
                     PrimaryButtonText = "继续使用",
                     CloseButtonText = "放弃并清除",
                     DefaultButton = ContentDialogButton.Primary,
@@ -965,65 +957,6 @@ namespace FufuLauncher.Views
                 XamlRoot = this.XamlRoot
             };
             await dialog.ShowAsync();
-        }
-
-        private async void AccountName_DoubleTapped(object sender, Microsoft.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
-        {
-            try
-            {
-                if ((sender as TextBlock)?.DataContext is not GameAccountData account) return;
-
-                var textBox = new TextBox
-                {
-                    Text = account.Remark ?? account.Name,
-                    PlaceholderText = "输入备注名称",
-                    MaxLength = 30
-                };
-
-                var dialog = new ContentDialog
-                {
-                    Title = "设置备注",
-                    Content = textBox,
-                    PrimaryButtonText = "保存",
-                    SecondaryButtonText = "清除备注",
-                    CloseButtonText = "取消",
-                    DefaultButton = ContentDialogButton.Primary,
-                    XamlRoot = this.XamlRoot
-                };
-
-                var result = await dialog.ShowAsync();
-
-                if (result == ContentDialogResult.Primary)
-                {
-                    var newRemark = textBox.Text.Trim();
-                    if (!string.IsNullOrWhiteSpace(newRemark))
-                    {
-                        var accounts = await LoadAccountsFromFileAsync();
-                        var targetAccount = accounts.FirstOrDefault(a => a.Id == account.Id);
-                        if (targetAccount != null)
-                        {
-                            targetAccount.Remark = newRemark;
-                            await SaveAccountsToFileAsync(accounts);
-                            await LoadAccountsAsync();
-                        }
-                    }
-                }
-                else if (result == ContentDialogResult.Secondary)
-                {
-                    var accounts = await LoadAccountsFromFileAsync();
-                    var targetAccount = accounts.FirstOrDefault(a => a.Id == account.Id);
-                    if (targetAccount != null)
-                    {
-                        targetAccount.Remark = null;
-                        await SaveAccountsToFileAsync(accounts);
-                        await LoadAccountsAsync();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await ShowError($"设置备注失败: {ex.Message}");
-            }
         }
     }
 }

@@ -1,10 +1,6 @@
 # [芙芙启动器](https://github.com/CodeCubist/FufuLauncher)
 
-<<<<<<< HEAD
-![Version](https://img.shields.io/badge/Version-v1.0.4-blue)
-=======
 ![Version](https://img.shields.io/badge/Version-v1.0.6-blue)
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-orange)
 

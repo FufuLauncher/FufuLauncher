@@ -71,8 +71,6 @@ public sealed partial class MainPage : Page
         storyboard.Children.Add(animation);
         storyboard.Begin();
     }
-<<<<<<< HEAD
-=======
     
     private void InfoCard_PointerEntered(object sender, PointerRoutedEventArgs e)
     {
@@ -102,7 +100,6 @@ public sealed partial class MainPage : Page
         storyboard.Children.Add(animation);
         storyboard.Begin();
     }
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
 
     private bool _isInitialized = false;
 
@@ -110,6 +107,18 @@ public sealed partial class MainPage : Page
     {
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
+
+        ViewModel.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(ViewModel.BackgroundVideoPlayer))
+            {
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    BackgroundVideo.SetMediaPlayer(ViewModel.BackgroundVideoPlayer);
+                    Debug.WriteLine($"MainPage: MediaPlayer 已设置");
+                });
+            }
+        };
 
         OpenLinkCommand = new XamlUICommand();
         OpenLinkCommand.ExecuteRequested += (sender, args) =>

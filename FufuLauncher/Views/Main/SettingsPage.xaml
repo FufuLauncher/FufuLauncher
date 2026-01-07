@@ -207,15 +207,6 @@
                                           OnContent="已启用"
                                           IsOn="{x:Bind ViewModel.IsSaveWindowSizeEnabled, Mode=TwoWay}"/>
                         </StackPanel>
-                        
-                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="始终非管理员启动(实验性)" 
-                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
-                            <ToggleSwitch OffContent="已禁用"
-                                          OnContent="已启用"
-                                          IsOn="{x:Bind ViewModel.ForceNonAdmin, Mode=TwoWay}"/>
-                        </StackPanel>
                      </StackPanel>
                  </Border>
                 
@@ -380,8 +371,14 @@
                                       OnContent="已启用"
                                       IsOn="{x:Bind ViewModel.IsBackgroundEnabled, Mode=TwoWay}"/>
                         
+                        <ToggleSwitch Header="将背景应用到所有页面"
+                                      OffContent="仅主页"
+                                      OnContent="所有页面"
+                                      IsOn="{x:Bind ViewModel.IsGlobalBackgroundEnabled, Mode=TwoWay}"
+                                      Margin="0,8,0,0"/>
+                        
                         <StackPanel Margin="0,16,0,0"
-                                    Visibility="{x:Bind ViewModel.IsBackgroundEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                    Visibility="{x:Bind ViewModel.IsBackgroundEnabled, Mode=OneWay}">
                             
                             <TextBlock Text="背景来源" 
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
@@ -403,6 +400,19 @@
                                            Visibility="{x:Bind ViewModel.HasCustomBackground, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
                                 
                                 <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <Button Content="清除自定义背景" 
+                                            Command="{x:Bind ViewModel.ClearCustomBackgroundCommand}"
+                                            HorizontalAlignment="Left"
+                                            Padding="12,6"
+                                            CornerRadius="6"
+                                            Visibility="{x:Bind ViewModel.HasCustomBackground, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+                                                <Setter Property="Background" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    
                                     <Button Content="打开缓存文件夹" 
                                             Command="{x:Bind ViewModel.OpenBackgroundCacheFolderCommand}"
                                             HorizontalAlignment="Left"
@@ -521,16 +531,16 @@
                                       OnContent="已启用"
                                       IsOn="{x:Bind ViewModel.IsBetterGIIntegrationEnabled, Mode=TwoWay}"
                                       Margin="0,16,0,0"/>
-                        <TextBlock Text="启动游戏时的同时打开BetterGI并附加自动启动"
+                        <TextBlock Text="启动游戏时的同时打开BetterGI"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,0,0,0"/>
-                        <ToggleSwitch Header="游戏退出时自动关闭 BetterGI"
+                        <ToggleSwitch Header="退出游戏时关闭 BetterGI"
                                       OffContent="已禁用"
                                       OnContent="已启用"
                                       IsOn="{x:Bind ViewModel.IsBetterGICloseOnExitEnabled, Mode=TwoWay}"
                                       Margin="0,8,0,0"/>
-                        <TextBlock Text="需要启动器在后台才会自动关闭"
+                        <TextBlock Text="点击退出游戏,自动关闭BetterGI"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,0,0,0"/>
@@ -552,11 +562,7 @@
                                                FontSize="18" 
                                                Text="&#xe900;"/>
                                     <TextBlock VerticalAlignment="Center" 
-<<<<<<< HEAD
-                                               Text="芙芙启动器 1.0.6.0"
-=======
                                                Text="芙芙启动器 1.0.5.0"
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
                                                Style="{ThemeResource BodyTextBlockStyle}"/>
                                 </StackPanel>
                             </HyperlinkButton>

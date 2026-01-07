@@ -30,6 +30,11 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private bool _isGameNotLaunching;
 
+        [ObservableProperty] private ImageSource _backgroundImageSource;
+        [ObservableProperty] private MediaPlayer _backgroundVideoPlayer;
+        [ObservableProperty] private bool _isVideoBackground;
+        [ObservableProperty] private bool _isBackgroundLoading;
+
         [ObservableProperty] private string _customBackgroundPath;
         [ObservableProperty] private bool _hasCustomBackground;
 
@@ -41,13 +46,10 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private Brush _panelBackgroundBrush;
         private double _panelOpacityValue = 0.5;
         
-<<<<<<< HEAD
-=======
         [ObservableProperty] private double _infoCardHeight = 310;
         [ObservableProperty] private string _infoExpandIcon = "\uE70E";
         private bool _isInfoCardExpanded = true;
 
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
         private BannerItem _currentBanner;
         public BannerItem CurrentBanner
         {
@@ -64,6 +66,15 @@ namespace FufuLauncher.ViewModels
         
         private DispatcherQueueTimer _bannerTimer;
 
+        public Visibility ImageVisibility => IsVideoBackground ? Visibility.Collapsed : Visibility.Visible;
+        public Visibility VideoVisibility => IsVideoBackground ? Visibility.Visible : Visibility.Collapsed;
+
+        partial void OnIsVideoBackgroundChanged(bool value)
+        {
+            OnPropertyChanged(nameof(ImageVisibility));
+            OnPropertyChanged(nameof(VideoVisibility));
+        }
+
         [ObservableProperty] private string _checkinStatusText = "正在加载状态...";
         [ObservableProperty] private bool _isCheckinButtonEnabled = true;
         [ObservableProperty] private string _checkinButtonText = "一键签到";
@@ -75,6 +86,9 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private bool _useInjection;
 
+        [ObservableProperty] private bool _preferVideoBackground = true;
+        public string BackgroundTypeToggleText => "切换背景";
+
         [ObservableProperty] private bool _isGameRunning;
         [ObservableProperty] private string _launchButtonIcon = "\uE768";
         [ObservableProperty] private bool _isBackgroundToggleEnabled = true;
@@ -84,13 +98,14 @@ namespace FufuLauncher.ViewModels
         private CancellationTokenSource _gameMonitoringCts;
         private Task _monitoringTask;
 
+        public IAsyncRelayCommand LoadBackgroundCommand
+        {
+            get;
+        }
         public IRelayCommand TogglePanelCommand
         {
             get;
         }
-<<<<<<< HEAD
-
-=======
         
         public IRelayCommand ToggleInfoCardCommand
         {
@@ -101,7 +116,6 @@ namespace FufuLauncher.ViewModels
         {
             get;
         }
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
         public IAsyncRelayCommand ExecuteCheckinCommand
         {
             get;
@@ -138,13 +152,10 @@ namespace FufuLauncher.ViewModels
             _bannerTimer.Interval = TimeSpan.FromSeconds(5);
             _bannerTimer.Tick += (s, e) => RotateBanner();
 
+            LoadBackgroundCommand = new AsyncRelayCommand(LoadBackgroundAsync);
             TogglePanelCommand = new RelayCommand(() => IsPanelExpanded = !IsPanelExpanded);
-<<<<<<< HEAD
-            // ToggleActivityCommand = new RelayCommand(() => IsActivityPostsExpanded = !IsActivityPostsExpanded);
-=======
             ToggleInfoCardCommand = new RelayCommand(ToggleInfoCard);
             ToggleBackgroundTypeCommand = new RelayCommand(ToggleBackgroundType);
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
             ExecuteCheckinCommand = new AsyncRelayCommand(ExecuteCheckinAsync);
             LaunchGameCommand = new AsyncRelayCommand(LaunchGameAsync);
             OpenScreenshotFolderCommand = new AsyncRelayCommand(OpenScreenshotFolderAsync);
@@ -186,8 +197,7 @@ namespace FufuLauncher.ViewModels
         {
             await LoadUserPreferencesAsync();
             await LoadCustomBackgroundPathAsync();
-            // Removed: home background loading
-            // await LoadBackgroundAsync();
+            await LoadBackgroundAsync();
             await LoadContentAsync();
             await LoadCheckinStatusAsync();
             UseInjection = await _gameLauncherService.GetUseInjectionAsync();
@@ -257,8 +267,6 @@ namespace FufuLauncher.ViewModels
 
         private async Task LoadUserPreferencesAsync()
         {
-<<<<<<< HEAD
-=======
             var pref = await _localSettingsService.ReadSettingAsync("PreferVideoBackground");
             if (pref != null)
             {
@@ -274,7 +282,6 @@ namespace FufuLauncher.ViewModels
             {
                 _panelOpacityValue = 0.5;
             }
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
         }
         
         public async Task SetPanelOpacityAsync(double opacity)
@@ -299,6 +306,136 @@ namespace FufuLauncher.ViewModels
             }
         }
 
+        private async Task LoadBackgroundAsync()
+        {
+            await UpdateUI(() => IsBackgroundLoading = true);
+            try
+            {
+                var useGlobalBgSetting = await _localSettingsService.ReadSettingAsync("UseGlobalBackground");
+                bool useGlobalBg = useGlobalBgSetting == null ? true : Convert.ToBoolean(useGlobalBgSetting);
+                if (useGlobalBg)
+                {
+                    ClearBackground();
+                    return;
+                }
+
+                if (HasCustomBackground && !string.IsNullOrEmpty(CustomBackgroundPath))
+                {
+                    var customResult = await _backgroundRenderer.GetCustomBackgroundAsync(CustomBackgroundPath);
+                    if (customResult != null)
+                    {
+                        await UpdateUI(() =>
+                        {
+                            if (customResult.IsVideo)
+                            {
+                                BackgroundVideoPlayer = new MediaPlayer
+                                {
+                                    Source = customResult.VideoSource,
+                                    IsMuted = true,
+                                    IsLoopingEnabled = true,
+                                    AutoPlay = true
+                                };
+                                IsVideoBackground = true;
+                                BackgroundImageSource = null;
+                            }
+                            else
+                            {
+                                BackgroundImageSource = customResult.ImageSource;
+                                IsVideoBackground = false;
+                                BackgroundVideoPlayer?.Pause();
+                                BackgroundVideoPlayer = null;
+                            }
+                        });
+                        return;
+                    }
+                }
+
+                var enabledJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.IsBackgroundEnabledKey);
+                bool isEnabled = enabledJson == null ? true : Convert.ToBoolean(enabledJson);
+
+                if (!isEnabled)
+                {
+                    ClearBackground();
+                    return;
+                }
+
+                var userPreferVideo = await _localSettingsService.ReadSettingAsync("UserPreferVideoBackground");
+                bool useVideo = false;
+
+                if (userPreferVideo != null && Convert.ToBoolean(userPreferVideo))
+                {
+                    useVideo = true;
+                }
+
+                var serverJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.BackgroundServerKey);
+                int serverValue = serverJson != null ? Convert.ToInt32(serverJson) : 0;
+                var server = (ServerType)serverValue;
+
+                var result = await _backgroundRenderer.GetBackgroundAsync(server, useVideo);
+
+                if (result == null) return;
+
+                await UpdateUI(() =>
+                {
+                    if (result.IsVideo)
+                    {
+                        var player = new MediaPlayer
+                        {
+                            Source = result.VideoSource,
+                            IsMuted = true,
+                            IsLoopingEnabled = true,
+                            AutoPlay = true
+                        };
+
+                        BackgroundVideoPlayer = player;
+                        IsVideoBackground = true;
+                        BackgroundImageSource = null;
+                    }
+                    else
+                    {
+                        BackgroundImageSource = result.ImageSource;
+                        IsVideoBackground = false;
+                        BackgroundVideoPlayer?.Pause();
+                        BackgroundVideoPlayer = null;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"背景加载失败: {ex.Message}");
+                ClearBackground();
+            }
+            finally
+            {
+                await UpdateUI(() => IsBackgroundLoading = false);
+            }
+        }
+
+        private void ClearBackground()
+        {
+            BackgroundImageSource = null;
+            BackgroundVideoPlayer?.Pause();
+            BackgroundVideoPlayer = null;
+            IsVideoBackground = false;
+        }
+
+        private void ToggleBackgroundType()
+        {
+            PreferVideoBackground = !PreferVideoBackground;
+            OnPropertyChanged(nameof(BackgroundTypeToggleText));
+
+            _ = _localSettingsService.SaveSettingAsync("UserPreferVideoBackground", PreferVideoBackground);
+
+            BackgroundVideoPlayer?.Pause();
+            BackgroundVideoPlayer = null;
+            BackgroundImageSource = null;
+            IsVideoBackground = false;
+
+            _ = _localSettingsService.SaveSettingAsync("PreferVideoBackground", PreferVideoBackground);
+            WeakReferenceMessenger.Default.Send(new BackgroundRefreshMessage());
+            _ = LoadBackgroundAsync();
+        }
+
         private async Task LoadContentAsync()
         {
             if (Banners != null && Banners.Count > 0)
@@ -315,7 +452,6 @@ namespace FufuLauncher.ViewModels
 
             try
             {
-        
                 var serverJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.BackgroundServerKey);
                 int serverValue = serverJson != null ? Convert.ToInt32(serverJson) : 0;
                 var server = (ServerType)serverValue;
@@ -412,6 +548,16 @@ namespace FufuLauncher.ViewModels
         {
             _bannerTimer?.Stop();
             _gameMonitoringCts?.Cancel();
+
+            if (BackgroundVideoPlayer != null)
+            {
+                try
+                {
+                    BackgroundVideoPlayer.Pause();
+                    BackgroundVideoPlayer = null;
+                }
+                catch { }
+            }
         }
 
         private async Task LoadCheckinStatusAsync()
@@ -698,18 +844,6 @@ namespace FufuLauncher.ViewModels
                 try
                 {
                     bool currentState = CheckGameProcessRunning();
-
-                    if (lastState && !currentState)
-                    {
-                        try
-                        {
-                            await _gameLauncherService.StopBetterGIAsync();
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine($"进程监控关闭 BetterGI 失败: {ex.Message}");
-                        }
-                    }
 
                     if (currentState != lastState || currentState != IsGameRunning)
                     {

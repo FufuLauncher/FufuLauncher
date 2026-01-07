@@ -317,24 +317,13 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 
-<<<<<<< HEAD
-                                                <PersonPicture DisplayName="{Binding DisplayName}" 
-=======
                                                 <PersonPicture DisplayName="{Binding Name}" 
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
                                                                Width="36" Height="36" 
                                                                Margin="0,0,12,0"
                                                                HorizontalAlignment="Left"/>
                                                 
                                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-<<<<<<< HEAD
-                                                    <TextBlock Text="{Binding DisplayName}" 
-                                                               FontWeight="SemiBold" 
-                                                               FontSize="13"
-                                                               DoubleTapped="AccountName_DoubleTapped"/>
-=======
                                                     <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="13"/>
->>>>>>> e479bcb4a0327b3eb023564baa2b34cd444bd279
                                                     <TextBlock Text="{Binding SdkData}" FontSize="10" Opacity="0.4" TextTrimming="CharacterEllipsis" MaxLines="1"/>
                                                 </StackPanel>
 
