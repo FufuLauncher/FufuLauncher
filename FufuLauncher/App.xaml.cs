@@ -124,6 +124,7 @@ public partial class App : Application
                 services.AddTransient<PluginPage>();
                 services.AddTransient<GachaViewModel>();
                 services.AddSingleton<GachaService>();
+                services.AddSingleton<IAnnouncementService, AnnouncementService>();
                 services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
             })
             .Build();
@@ -268,6 +269,32 @@ public partial class App : Application
                 catch (Exception ex)
                 {
                     Debug.WriteLine($"启动语音播放失败: {ex.Message}");
+                }
+            });
+            
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    // 等待主窗口稍微加载一下，避免争抢焦点
+                    await Task.Delay(1500);
+
+                    var announcementService = GetService<IAnnouncementService>();
+                    var announcementUrl = await announcementService.CheckForNewAnnouncementAsync();
+
+                    if (!string.IsNullOrEmpty(announcementUrl))
+                    {
+                        // 切回 UI 线程显示窗口
+                        await _mainDispatcherQueue.EnqueueAsync(() =>
+                        {
+                            var announcementWindow = new Views.AnnouncementWindowL(announcementUrl);
+                            announcementWindow.Activate();
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[Announcement] 公告检查失败: {ex.Message}");
                 }
             });
 

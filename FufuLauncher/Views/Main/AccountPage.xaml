@@ -26,6 +26,13 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="24,12,24,24" Spacing="24">
+            
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromVerticalOffset="28" IsStaggeringEnabled="True"/>
+                    <RepositionThemeTransition/>
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
 
             <StackPanel Spacing="24" 
                         Visibility="{x:Bind ViewModel.IsNotLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -42,85 +49,96 @@
 
             <StackPanel Spacing="24" Visibility="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                 
-<Border Style="{StaticResource CardBorderStyle}" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-    <Grid ColumnSpacing="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/> <ColumnDefinition Width="*"/>    <ColumnDefinition Width="Auto"/> </Grid.ColumnDefinitions>
+                <StackPanel.ChildrenTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition FromVerticalOffset="28" IsStaggeringEnabled="True"/>
+                        <RepositionThemeTransition/>
+                    </TransitionCollection>
+                </StackPanel.ChildrenTransitions>
+       
+                <Border Style="{StaticResource CardBorderStyle}" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                    <Grid ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-        <PersonPicture ProfilePicture="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}" 
-                       DisplayName="{x:Bind ViewModel.CurrentAccount.Nickname, Mode=OneWay}"
-                       Width="84" Height="84"/>
+                        <PersonPicture ProfilePicture="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}" 
+                                       DisplayName="{x:Bind ViewModel.CurrentAccount.Nickname, Mode=OneWay}"
+                                       Width="84" Height="84"/>
 
-        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="6">
 
-            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom">
-                <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Nickname, Mode=OneWay}" 
-                           Style="{StaticResource SubtitleTextBlockStyle}"
-                           VerticalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom">
+                                <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Nickname, Mode=OneWay}" 
+                                           Style="{StaticResource SubtitleTextBlockStyle}"
+                                           VerticalAlignment="Center"/>
 
-                <Border Background="{ThemeResource LayerFillColorDefaultBrush}" 
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        CornerRadius="12" 
-                        Padding="8,2"
-                        VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
-                        <FontIcon Glyph="{x:Bind ViewModel.CurrentAccount.GenderIcon, Mode=OneWay}" 
-                                  FontFamily="Segoe Fluent Icons" 
-                                  FontSize="12" 
-                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                        <TextBlock Text="{x:Bind ViewModel.CurrentAccount.GenderText, Mode=OneWay}" 
-                                   FontSize="12" 
-                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                   VerticalAlignment="Center"/>
-                    </StackPanel>
+                                <Border Background="{ThemeResource LayerFillColorDefaultBrush}" 
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="12" 
+                                        Padding="8,2"
+                                        VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                                        <FontIcon Glyph="{x:Bind ViewModel.CurrentAccount.GenderIcon, Mode=OneWay}" 
+                                                  FontFamily="Segoe Fluent Icons" 
+                                                  FontSize="12" 
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        <TextBlock Text="{x:Bind ViewModel.CurrentAccount.GenderText, Mode=OneWay}" 
+                                                   FontSize="12" 
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                
+                                <Border Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="4" Padding="6,2" VerticalAlignment="Center" Margin="4,0,0,0">
+                                    <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Level, Mode=OneWay}" Foreground="White" FontSize="10" FontWeight="Bold"/>
+                                </Border>
+                            </StackPanel>
+
+                            <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Sign, Mode=OneWay}" 
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                       FontSize="13" 
+                                       TextTrimming="CharacterEllipsis" 
+                                       MaxLines="1"/>
+
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <TextBlock Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12">
+                                    <Run Text="UID:"/>
+                                    <Run Text="{x:Bind ViewModel.CurrentAccount.GameUid, Mode=OneWay}" FontWeight="SemiBold"/>
+                                </TextBlock>
+
+                                <Border Width="1" Height="10" Background="{ThemeResource DividerStrokeColorDefaultBrush}"/>
+
+                                <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Server, Mode=OneWay}" 
+                                           Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12"/>
+
+                                <Border Width="1" Height="10" Background="{ThemeResource DividerStrokeColorDefaultBrush}"/>
+
+                                <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                                    <FontIcon Glyph="&#xE81D;" FontSize="10" FontFamily="Segoe Fluent Icons" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                                    <TextBlock Text="{x:Bind ViewModel.CurrentAccount.IpRegion, Mode=OneWay}" 
+                                               Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" VerticalAlignment="Top">
+                            <ProgressRing IsActive="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay}" 
+                                          Visibility="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                                          Width="20" Height="20"/>
+                        </StackPanel>
+                    </Grid>
                 </Border>
-                
-                <Border Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="4" Padding="6,2" VerticalAlignment="Center" Margin="4,0,0,0">
-                    <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Level, Mode=OneWay}" Foreground="White" FontSize="10" FontWeight="Bold"/>
-                </Border>
-            </StackPanel>
 
-            <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Sign, Mode=OneWay}" 
-                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
-                       FontSize="13" 
-                       TextTrimming="CharacterEllipsis" 
-                       MaxLines="1"/>
-
-            <StackPanel Orientation="Horizontal" Spacing="8">
-                <TextBlock Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12">
-                    <Run Text="UID:"/>
-                    <Run Text="{x:Bind ViewModel.CurrentAccount.GameUid, Mode=OneWay}" FontWeight="SemiBold"/>
-                </TextBlock>
-
-                <Border Width="1" Height="10" Background="{ThemeResource DividerStrokeColorDefaultBrush}"/>
-
-                <TextBlock Text="{x:Bind ViewModel.CurrentAccount.Server, Mode=OneWay}" 
-                           Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12"/>
-
-                <Border Width="1" Height="10" Background="{ThemeResource DividerStrokeColorDefaultBrush}"/>
-
-                <StackPanel Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
-                    <FontIcon Glyph="&#xE81D;" FontSize="10" FontFamily="Segoe Fluent Icons" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                    <TextBlock Text="{x:Bind ViewModel.CurrentAccount.IpRegion, Mode=OneWay}" 
-                               Foreground="{ThemeResource TextFillColorTertiaryBrush}" FontSize="12"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" VerticalAlignment="Top">
-            <ProgressRing IsActive="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay}" 
-                          Visibility="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
-                          Width="20" Height="20"/>
-        </StackPanel>
-    </Grid>
-</Border>
-
-<Grid RowSpacing="12" ColumnSpacing="12">
+                <Grid RowSpacing="12" ColumnSpacing="12">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -183,12 +201,13 @@
                         </StackPanel>
                     </Button>
 
-    <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Padding="0,12"
-            Click="OnGachaAnalysisClicked"> <StackPanel Spacing="8" Orientation="Horizontal" HorizontalAlignment="Center">
-            <FontIcon Glyph="&#xE9D2;" FontSize="16"/>
-            <TextBlock Text="抽卡分析"/>
-        </StackPanel>
-    </Button>
+                    <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" Padding="0,12"
+                            Click="OnGachaAnalysisClicked">
+                        <StackPanel Spacing="8" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <FontIcon Glyph="&#xE9D2;" FontSize="16"/>
+                            <TextBlock Text="抽卡分析"/>
+                        </StackPanel>
+                    </Button>
 
                     <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Padding="0,12"
                             Command="{x:Bind ViewModel.LogoutCommand}">

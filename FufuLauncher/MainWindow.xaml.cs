@@ -772,12 +772,11 @@ public sealed partial class MainWindow : WindowEx
             ContentFrame.Navigate(typeof(Views.MainPage));
             
         UpdatePageOverlayState(true);
-
-        // 【修改】主界面加载完成，启动网络检测逻辑
+        
         _isMainUiLoaded = true;
-        SystemMessageBar.Visibility = Visibility.Visible; // 恢复可见性（但不一定弹出，取决于Y轴偏移）
+        SystemMessageBar.Visibility = Visibility.Visible;
         _networkCheckTimer.Start();
-        CheckNetworkAndProxyStatus(); // 立即检测一次
+        CheckNetworkAndProxyStatus();
     }
 
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
