@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using WinRT.Interop;
 using Windows.Graphics;
+using System.Threading.Tasks;
 
 namespace FufuLauncher.Views
 {
@@ -21,35 +22,86 @@ namespace FufuLauncher.Views
         private async void InitializeMap()
         {
             await MapWebView.EnsureCoreWebView2Async();
+            await MapWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(@"
+                if (window.location.hostname === 'act.mihoyo.com') {
+                    localStorage.setItem('user-guide-passed', 'true');
+                    localStorage.setItem('async-announcement-hidden-ts', Date.now().toString());  
+                }
+            ");
+            MapWebView.NavigationStarting += MapWebView_NavigationStarting;
             MapWebView.NavigationCompleted += MapWebView_NavigationCompleted;
             MapWebView.Source = new Uri("https://act.mihoyo.com/ys/app/interactive-map/index.html");
         }
         
+        private async void MapWebView_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
+        {
+            if (args.Uri.Contains("act.mihoyo.com"))
+            {
+                string setStorageScript = @"
+                    localStorage.setItem('user-guide-passed', 'true');
+                    localStorage.setItem('async-announcement-hidden-ts', Date.now().toString());  
+                }";
+                try
+                {
+                    await sender.ExecuteScriptAsync(setStorageScript);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"脚本注入失败: {ex.Message}");
+                }
+            }
+        }
+
         private async void MapWebView_NavigationCompleted(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationCompletedEventArgs args)
         {
             if (args.IsSuccess)
             {
                 string removeQrScript = @"
                     (function() {
+                    const viewport = document.querySelector('meta[name=""viewport""]');
+                    if (viewport) {
+                        viewport.content = 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0';
+                    }
+                    function removeQrCode() {
                         const targetUrlPart = 'e8d52e7e0f4842ec70e9c7b1a22a2ad5_3623455812133914954.png';
-                        function cleanElements() {
-                            const qrCodeDivs = document.querySelectorAll('.bbs-qr');
-                            qrCodeDivs.forEach(el => el.remove());
-                            const allDivs = document.querySelectorAll('div[style*=""background-image""]');
-                            allDivs.forEach(div => {
-                                const style = div.getAttribute('style');
-                                if (style && style.includes(targetUrlPart)) {
-                                    div.style.display = 'none';
-                                    div.remove();
-                                }
-                            });
-                        }
-                        cleanElements();
-                        const observer = new MutationObserver((mutations) => {
-                            cleanElements();
+                        document.querySelectorAll('.bbs-qr').forEach(el => el?.remove());
+                        document.querySelectorAll('div, img, span').forEach(el => {
+                            const style = el?.getAttribute('style');
+                            if (style && style.includes(targetUrlPart)) {
+                                el.remove();
+                            }
                         });
-                        observer.observe(document.body, { childList: true, subtree: true });
-                    })();
+                    }
+                    removeQrCode();
+                    setTimeout(removeQrCode, 1000);
+                    if (!document.getElementById('custom-zoom-style')) {
+                        const styleEl = document.createElement('style');
+                        styleEl.id = 'custom-zoom-style';
+                        styleEl.textContent = `
+                            .leaflet-control-zoomslider.leaflet-bar.leaflet-control {
+                                margin-bottom: -150px !important;
+                            }
+                            .leaflet-bottom .leaflet-control {
+                                margin-bottom: -150px !important;
+                            }
+                        `;
+                        document.head.appendChild(styleEl);
+                    }
+                    const zoomSlider = document.querySelector('.leaflet-control-zoomslider.leaflet-bar.leaflet-control');
+                    if (zoomSlider) {
+                        zoomSlider.setAttribute('style', `margin-bottom: -150px !important; ${zoomSlider.getAttribute('style') || ''}`);
+                    }
+                    const observer = new MutationObserver(() => {
+                        if (zoomSlider) zoomSlider.style.marginBottom = '-150px !important';
+                        removeQrCode();
+                    });
+                    observer.observe(document.body, { 
+                        childList: true, 
+                        subtree: true,
+                        attributes: true,
+                        attributeFilter: ['style', 'class']
+                    });
+                })();
                 ";
 
                 try
@@ -107,6 +159,22 @@ namespace FufuLauncher.Views
                 int posY = (screenHeight - newHeight) / 2 + displayArea.WorkArea.Y;
                 
                 appWindow.MoveAndResize(new RectInt32(posX, posY, newWidth, newHeight));
+            }
+        }
+
+        private void RefreshMapToggle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                RefreshMapToggle.IsEnabled = false;
+                MapWebView.Reload();
+                Task.Delay(1000);
+                RefreshMapToggle.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                RefreshMapToggle.IsEnabled = true;
+                System.Diagnostics.Debug.WriteLine($"刷新地图失败: {ex.Message}");
             }
         }
 
