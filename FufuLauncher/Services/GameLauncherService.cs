@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Text;
 using FufuLauncher.Contracts.Services;
@@ -40,6 +43,12 @@ namespace FufuLauncher.Services
             _launcherService = launcherService;
             _controlPanelModel = controlPanelModel;
         }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
         public bool IsGamePathSelected()
         {
@@ -124,6 +133,24 @@ namespace FufuLauncher.Services
             catch (Exception ex)
             {
                 logBuilder.AppendLine($"[启动流程] ? 设置HDR异常: {ex.Message}");
+            }
+        }
+
+        private async Task WaitGenshinStartAsync()
+        {
+            while (true)
+            {
+                await Task.Delay(500);
+                IntPtr hwid = GetForegroundWindow();
+                if (hwid == IntPtr.Zero) continue;
+                GetWindowThreadProcessId(hwid, out uint pid);
+                var process = Process.GetProcessById((int)pid);
+                if (process.ProcessName.Equals("GenshinImpact", StringComparison.OrdinalIgnoreCase) ||
+                    process.ProcessName.Equals("YuanShen", StringComparison.OrdinalIgnoreCase))
+                {
+                    await Task.Delay(2000);
+                    break;
+                }
             }
         }
 
@@ -471,12 +498,12 @@ namespace FufuLauncher.Services
         {
             try
             {
-                await Task.Delay(5000);
-
                 var enabled = await _localSettingsService.ReadSettingAsync("IsBetterGIIntegrationEnabled");
                 if (enabled != null && Convert.ToBoolean(enabled))
                 {
                     Debug.WriteLine("[BetterGI] 配置已启用，准备通过URL Scheme启动 bettergi://start");
+
+                    await WaitGenshinStartAsync();
 
                     var startInfo = new ProcessStartInfo
                     {
