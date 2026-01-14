@@ -11,11 +11,19 @@
                 <ResourceDictionary Source="/Styles/Thickness.xaml" />
                 <ResourceDictionary Source="/Styles/TextBlock.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="AppGlobalFont">/Assets/zh-cn-l.ttf#SDK_SC_Web</FontFamily>
+
+            <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="AppGlobalFont" />
             
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+            </Style>
             <helpers:DateTimeConverter x:Key="DateTimeConverter"/>
             <helpers:BoolNegationConverter x:Key="BoolNegationConverter"/>
             <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <helpers:BoolToGlyphConverter x:Key="BoolToGlyphConverter"/>
+            
             <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
             <helpers:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
             <Style x:Key="AccentButtonStyle" TargetType="Button" />

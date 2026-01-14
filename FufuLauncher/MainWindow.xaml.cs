@@ -752,7 +752,6 @@ public sealed partial class MainWindow : WindowEx
 
     private void ShowAgreementPage()
     {
-        // 确保协议页面显示时，系统消息条是关闭的
         _isMainUiLoaded = false;
         SystemMessageBar.Visibility = Visibility.Collapsed;
         _networkCheckTimer.Stop();
