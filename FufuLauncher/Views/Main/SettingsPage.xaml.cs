@@ -20,6 +20,11 @@ public sealed partial class SettingsPage : Page
         DataContext = ViewModel;
         InitializeComponent();
     }
+    
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        EntranceStoryboard.Begin();
+    }
 
     protected override async void OnNavigatedTo(Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
     {

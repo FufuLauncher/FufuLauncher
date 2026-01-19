@@ -1,19 +1,20 @@
-﻿using FufuLauncher.ViewModels;
+﻿﻿using FufuLauncher.ViewModels;
+using FufuLauncher.Models;
 using Microsoft.UI.Xaml.Controls;
+using System.Text.Json;
+using System.Diagnostics;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.UI.Xaml.Controls.Primitives; 
+using Microsoft.UI.Xaml; 
+using Microsoft.UI.Input;
+using Microsoft.UI.Xaml.Input;
 
 namespace FufuLauncher.Views;
 
 public sealed partial class PanelPage
 {
-    public ControlPanelModel ViewModel
-    {
-        get;
-    }
-
-    public MainViewModel MainViewModel
-    {
-        get;
-    }
+    public ControlPanelModel ViewModel { get; }
+    public MainViewModel MainViewModel { get; }
 
     public PanelPage()
     {
@@ -21,6 +22,203 @@ public sealed partial class PanelPage
         MainViewModel = App.GetService<MainViewModel>();
         DataContext = ViewModel;
         
+        Loaded += PanelPage_Loaded;
+        
         InitializeComponent();
+        
+        ViewModel.RequestMetadataScrapeAction = async () => await StartScrapingSequenceAsync();
+        
+        _ = InitializeWebViewAsync();
+    }
+    
+    private void OnGachaCardTapped(object sender, TappedRoutedEventArgs e)
+    {
+        if (sender is FrameworkElement element)
+        {
+            FlyoutBase.ShowAttachedFlyout(element);
+        }
+    }
+    
+    private void OnGridPointerEntered(object sender, PointerRoutedEventArgs e)
+    {
+        ProtectedCursor = InputSystemCursor.Create(InputSystemCursorShape.Hand);
+    }
+
+
+    private void OnGridPointerExited(object sender, PointerRoutedEventArgs e)
+    {
+        ProtectedCursor = null; 
+    }
+
+    private async Task InitializeWebViewAsync()
+    {
+        try
+        {
+            await MetadataCrawlerWebView.EnsureCoreWebView2Async();
+            if (MetadataCrawlerWebView.CoreWebView2 != null)
+            {
+                MetadataCrawlerWebView.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"WebView2 初始化失败: {ex.Message}");
+        }
+    }
+    
+    private void PanelPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        EntranceStoryboard.Begin();
+    }
+
+    private async Task StartScrapingSequenceAsync()
+    {
+        if (MetadataCrawlerWebView.CoreWebView2 == null)
+        {
+            Debug.WriteLine("[Scraper] WebView2 未就绪，尝试重新初始化...");
+            await InitializeWebViewAsync();
+            if (MetadataCrawlerWebView.CoreWebView2 == null) return;
+        }
+
+        Debug.WriteLine("[Scraper] 开始爬取");
+        var results = new List<ScrapedMetadata>();
+        
+        var chars = await ScrapeUrlSmartAsync("https://act.mihoyo.com/ys/event/calculator/index.html#/character", true);
+        results.AddRange(chars);
+        
+        var weapons = await ScrapeUrlSmartAsync("https://act.mihoyo.com/ys/event/calculator/index.html#/weapon", false);
+        results.AddRange(weapons);
+
+        Debug.WriteLine($"[Scraper] 流程结束，获取到 {results.Count} 条数据。");
+        ViewModel.UpdateMetadata(results);
+    }
+
+    private async Task<List<ScrapedMetadata>> ScrapeUrlSmartAsync(string url, bool isCharacter)
+    {
+        var typeName = isCharacter ? "角色" : "武器";
+        var list = new List<ScrapedMetadata>();
+
+        await ResetWebViewAsync();
+
+        var navTcs = new TaskCompletionSource<bool>();
+        void NavHandler(WebView2 s, CoreWebView2NavigationCompletedEventArgs e) => navTcs.TrySetResult(e.IsSuccess);
+        
+        MetadataCrawlerWebView.NavigationCompleted += NavHandler;
+        MetadataCrawlerWebView.Source = new Uri(url);
+        
+        var navTask = navTcs.Task;
+        var timeoutTask = Task.Delay(15000); 
+
+        var finishedTask = await Task.WhenAny(navTask, timeoutTask);
+        MetadataCrawlerWebView.NavigationCompleted -= NavHandler;
+
+        if (finishedTask == timeoutTask)
+        {
+            Debug.WriteLine($"[Scraper] {typeName}页面导航超时，但仍尝试注入脚本...");
+        }
+        else if (!navTask.Result)
+        {
+            Debug.WriteLine($"[Scraper] {typeName}页面导航失败。");
+            return list;
+        }
+
+        var script = isCharacter ? 
+            @"
+            (function() {
+                window.scrollTo(0, document.body.scrollHeight);
+                var items = [];
+                var elements = document.querySelectorAll('.character-item');
+                if (elements.length === 0) return JSON.stringify([]); 
+                elements.forEach(el => {
+                    var nameEl = el.querySelector('.gt-mobile-caption-c2-3');
+                    var imgEl = el.querySelector('.gt-avatar-img img');
+                    var eleEl = el.querySelector('.gt-avatar-left-element img');
+                    if(nameEl && imgEl) {
+                        items.push({
+                            Name: nameEl.innerText,
+                            ImgSrc: imgEl.src,
+                            ElementSrc: eleEl ? eleEl.src : '',
+                            Type: 'char'
+                        });
+                    }
+                });
+                return JSON.stringify(items);
+            })();
+            " : 
+            @"
+            (function() {
+                window.scrollTo(0, document.body.scrollHeight);
+                var items = [];
+                var elements = document.querySelectorAll('.weapon-item');
+                if (elements.length === 0) return JSON.stringify([]); 
+                elements.forEach(el => {
+                    var nameEl = el.querySelector('.weapon-name');
+                    var imgEl = el.querySelector('.gt-avatar-img img');
+                    if(nameEl && imgEl) {
+                        items.push({
+                            Name: nameEl.innerText,
+                            ImgSrc: imgEl.src,
+                            ElementSrc: '',
+                            Type: 'weapon'
+                        });
+                    }
+                });
+                return JSON.stringify(items);
+            })();
+            ";
+
+        list = await PollForDataAsync(script, 20, 500);
+        
+        Debug.WriteLine($"[Scraper] {typeName} - 获取到 {list.Count} 条记录");
+        return list;
+    }
+
+    private async Task<List<ScrapedMetadata>> PollForDataAsync(string script, int maxRetries, int intervalMs)
+    {
+        for (var i = 0; i < maxRetries; i++)
+        {
+            try
+            {
+                var json = await MetadataCrawlerWebView.ExecuteScriptAsync(script);
+                if (!string.IsNullOrEmpty(json) && json != "null")
+                {
+                    var outerJson = JsonSerializer.Deserialize<string>(json);
+                    
+                    if (!string.IsNullOrEmpty(outerJson) && outerJson != "[]")
+                    {
+                        var items = JsonSerializer.Deserialize<List<ScrapedMetadata>>(outerJson);
+                        if (items != null && items.Count > 0)
+                        {
+                            return items; 
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Poll] 尝试 {i+1} 失败: {ex.Message}");
+            }
+            await Task.Delay(intervalMs);
+        }
+        return new List<ScrapedMetadata>();
+    }
+
+    private async Task ResetWebViewAsync()
+    {
+        try 
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            void Handler(WebView2 s, CoreWebView2NavigationCompletedEventArgs e) => tcs.TrySetResult(true);
+            
+            MetadataCrawlerWebView.NavigationCompleted += Handler;
+            MetadataCrawlerWebView.Source = new Uri("about:blank");
+            
+            await Task.WhenAny(tcs.Task, Task.Delay(1500)); 
+            MetadataCrawlerWebView.NavigationCompleted -= Handler;
+        }
+        catch
+        {
+            // ignored
+        }
     }
 }

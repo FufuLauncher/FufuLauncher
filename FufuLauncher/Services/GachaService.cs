@@ -24,6 +24,7 @@ public class GachaService
     
     public string ExtractBaseUrl(string fullUrl)
     {
+        if (string.IsNullOrEmpty(fullUrl)) return null;
         var match = Regex.Match(fullUrl, @"(https://.+?/api/getGachaLog\?.+)");
         if (match.Success)
         {
@@ -74,13 +75,13 @@ public class GachaService
                 page++;
                 await Task.Delay(200); 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 break;
             }
         }
         
-        allItems.Reverse(); 
+        allItems.Reverse();
         return allItems;
     }
     
@@ -90,30 +91,50 @@ public class GachaService
         {
             PoolName = GachaTypes.ContainsKey(gachaTypeId) ? GachaTypes[gachaTypeId] : gachaTypeId,
             TotalCount = items.Count,
-            CurrentPity = 0
+            CurrentPity = 0,
+            CurrentPity4 = 0
         };
 
-        int pityCounter = 0;
+        int pityCounter5 = 0;
+        int pityCounter4 = 0;
 
         foreach (var item in items)
         {
-            pityCounter++;
+            pityCounter5++;
+            pityCounter4++;
 
             if (item.RankType == "5")
             {
                 stat.FiveStarRecords.Add(new FiveStarRecord
                 {
                     Name = item.Name,
-                    PityUsed = pityCounter,
-                    Time = item.Time
+                    PityUsed = pityCounter5,
+                    Time = item.Time,
+                    Rank = 5
                 });
                 stat.FiveStarCount++;
-                pityCounter = 0; 
+                pityCounter5 = 0; 
+            }
+            else if (item.RankType == "4")
+            {
+                stat.FourStarRecords.Add(new FiveStarRecord
+                {
+                    Name = item.Name,
+                    PityUsed = pityCounter4,
+                    Time = item.Time,
+                    Rank = 4
+                });
+                stat.FourStarCount++;
+                pityCounter4 = 0;
             }
         }
 
-        stat.CurrentPity = pityCounter;
+        stat.CurrentPity = pityCounter5;
+        stat.CurrentPity4 = pityCounter4;
+        
         stat.FiveStarRecords.Reverse(); 
+        stat.FourStarRecords.Reverse(); 
+
         return stat;
     }
 }

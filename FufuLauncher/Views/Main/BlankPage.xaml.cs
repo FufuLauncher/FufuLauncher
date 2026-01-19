@@ -514,6 +514,7 @@ namespace FufuLauncher.Views
 
         private async void BlankPage_Loaded(object sender, RoutedEventArgs e)
         {
+            EntranceStoryboard.Begin();
             try
             {
 
@@ -712,7 +713,7 @@ namespace FufuLauncher.Views
 
         private void OpenAnnouncement_Click(object sender, RoutedEventArgs e)
         {
-            var announcementWindow = new FufuLauncher.Views.AnnouncementWindow();
+            var announcementWindow = new AnnouncementWindow();
             announcementWindow.Activate();
         }
 
@@ -742,8 +743,8 @@ namespace FufuLauncher.Views
             if (configContent.Contains("channel=14") || configContent.Contains("cps=bilibili"))
                 return "中国大陆服务器";
 
-            if (configContent.Contains("os_usa") || configContent.Contains("os_euro") ||
-                configContent.Contains("os_asia") || configContent.Contains("channel=0"))
+            if (configContent.Contains("os") || configContent.Contains("os") ||
+                configContent.Contains("os") || configContent.Contains("channel=0"))
                 return "国际服务器";
 
             return "未知服务器";
@@ -808,41 +809,72 @@ namespace FufuLauncher.Views
             }
         }
 
-        private async void AddAccount_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\miHoYo\原神");
-                if (key == null) { await ShowError("无法访问注册表"); return; }
+private async void AddAccount_Click(object sender, RoutedEventArgs e)
+{
+    try
+    {
+        using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\miHoYo\原神");
+        if (key == null) { await ShowError("无法访问注册表"); return; }
 
-                var sdkData = key.GetValue("MIHOYOSDK_ADL_PROD_CN_h3123967166") as byte[];
-                if (sdkData == null) { await ShowError("注册表数据无效"); return; }
-
-                int nullIndex = Array.IndexOf(sdkData, (byte)0);
-                int length = nullIndex >= 0 ? nullIndex : sdkData.Length;
-                var sdkString = Encoding.UTF8.GetString(sdkData, 0, length);
-
-                var accounts = await LoadAccountsFromFileAsync();
-                if (accounts.Any(a => a.SdkData == sdkString)) { await ShowError("该账号已存在"); return; }
-
-                accounts.Add(new GameAccountData
-                {
-                    Id = Guid.NewGuid(),
-                    Name = $"账号_{DateTime.Now:MMdd_HHmmss}",
-                    SdkData = sdkString,
-                    LastUsed = DateTime.Now
-                });
-
-                await SaveAccountsToFileAsync(accounts);
-                await LoadAccountsAsync();
-
-                Debug.WriteLine($"[AddAccount_Click] 成功保存账号，SDK长度: {sdkString.Length}");
-            }
-            catch (Exception ex)
-            {
-                await ShowError($"添加失败: {ex.Message}");
-            }
+        var sdkData = key.GetValue("MIHOYOSDK_ADL_PROD_CN_h3123967166") as byte[];
+        if (sdkData == null) { await ShowError("当前没有登录的账号信息（注册表数据为空）"); return; }
+        
+        int nullIndex = Array.IndexOf(sdkData, (byte)0);
+        int length = nullIndex >= 0 ? nullIndex : sdkData.Length;
+        var sdkString = Encoding.UTF8.GetString(sdkData, 0, length);
+        
+        var accounts = await LoadAccountsFromFileAsync();
+        if (accounts.Any(a => a.SdkData == sdkString)) 
+        { 
+            await ShowError("该账号已经保存过了，无需重复保存。"); 
+            return; 
         }
+        
+        var inputTextBox = new TextBox
+        {
+            PlaceholderText = "请输入账号名称 (例如: 大号 / 小号)",
+            MaxLength = 20,
+            VerticalAlignment = VerticalAlignment.Center
+        };
+
+        var dialog = new ContentDialog
+        {
+            Title = "保存新账号",
+            Content = inputTextBox,
+            PrimaryButtonText = "保存",
+            CloseButtonText = "取消",
+            XamlRoot = this.XamlRoot,
+            DefaultButton = ContentDialogButton.Primary
+        };
+        
+        var result = await dialog.ShowAsync();
+        
+        if (result != ContentDialogResult.Primary) return;
+        
+        string accountName = inputTextBox.Text.Trim();
+        if (string.IsNullOrEmpty(accountName))
+        {
+            accountName = $"账号_{DateTime.Now:MMdd_HHmmss}";
+        }
+        
+        accounts.Add(new GameAccountData
+        {
+            Id = Guid.NewGuid(),
+            Name = accountName,
+            SdkData = sdkString,
+            LastUsed = DateTime.Now
+        });
+
+        await SaveAccountsToFileAsync(accounts);
+        await LoadAccountsAsync();
+
+        Debug.WriteLine($"[AddAccount_Click] 成功保存账号: {accountName}");
+    }
+    catch (Exception ex)
+    {
+        await ShowError($"保存失败: {ex.Message}");
+    }
+}
 
         private async void RefreshAccounts_Click(object sender, RoutedEventArgs e) => await LoadAccountsAsync();
 
@@ -881,6 +913,8 @@ namespace FufuLauncher.Views
                 await ShowError($"切换失败: {ex.Message}");
             }
         }
+        
+        
 
         private async void DeleteAccount_Click(object sender, RoutedEventArgs e)
         {
@@ -965,85 +999,126 @@ namespace FufuLauncher.Views
         private StackPanel? _currentStackPanel;
         private GameAccountData? _currentAccount;
 
-        private async void AccountName_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        private void AccountName_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            if (sender is not TextBlock textBlock || textBlock.DataContext is not GameAccountData account)
-                return;
-
-            // If already editing, save the current one first
             if (_currentEditBox != null)
             {
-                await FinalizeEdit();
+                CancelEdit();
             }
 
-            var grid = FindParent<Grid>(textBlock);
-            if (grid == null) return;
-
-            var stackPanel = grid.Children.OfType<StackPanel>().FirstOrDefault(sp => sp.Children.Contains(textBlock));
-            if (stackPanel == null) return;
-
-            // Hide TextBlock, show TextBox for editing
-            textBlock.Visibility = Visibility.Collapsed;
-
-            var editBox = new TextBox
+            if (sender is TextBlock textBlock && 
+                FindParent<StackPanel>(textBlock) is StackPanel stackPanel && 
+                textBlock.DataContext is GameAccountData account)
             {
-                Text = account.Remark ?? account.Name,
-                FontSize = 13,
-                Margin = new Thickness(0, 0, 0, 2),
-                MaxLength = 50
-            };
-
-            _currentEditBox = editBox;
-            _currentTextBlock = textBlock;
-            _currentStackPanel = stackPanel;
-            _currentAccount = account;
-
-            var index = stackPanel.Children.IndexOf(textBlock);
-            stackPanel.Children.Insert(index, editBox);
-            editBox.Focus(FocusState.Programmatic);
-            editBox.SelectAll();
-
-            // Add global pointer pressed handler
-            this.AddHandler(PointerPressedEvent, new PointerEventHandler(Page_PointerPressed), true);
-
-            // Handle save on Enter key
-            editBox.KeyDown += async (s, args) =>
-            {
-                if (args.Key == Windows.System.VirtualKey.Enter)
+                _currentTextBlock = textBlock;
+                _currentStackPanel = stackPanel;
+                _currentAccount = account;
+                
+                _currentTextBlock.Visibility = Visibility.Collapsed;
+                
+                _currentEditBox = new TextBox
                 {
-                    await FinalizeEdit();
-                    args.Handled = true;
-                }
-                else if (args.Key == Windows.System.VirtualKey.Escape)
-                {
-                    CancelEdit();
-                    args.Handled = true;
-                }
-            };
-
-            // Prevent the editBox click from triggering the global handler
-            editBox.AddHandler(PointerPressedEvent, new PointerEventHandler((s, args) =>
-            {
-                args.Handled = true;
-            }), true);
+                    Text = account.Remark ?? account.Name,
+                    MinWidth = 100,
+                    MaxLength = 20,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                
+                _currentEditBox.KeyDown += EditBox_KeyDown;
+                
+                _currentEditBox.LostFocus += (_, _) => CancelEdit(); 
+                
+                int index = stackPanel.Children.IndexOf(textBlock);
+                stackPanel.Children.Insert(index, _currentEditBox);
+                
+                _currentEditBox.Focus(FocusState.Programmatic);
+                _currentEditBox.SelectAll();
+                
+                AddHandler(PointerPressedEvent, new PointerEventHandler(Page_PointerPressed), true);
+            }
         }
-
-        private async void Page_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void EditBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
-            if (_currentEditBox == null) return;
-
-            // Check if the click is outside the edit box
-            var pointer = e.GetCurrentPoint(this);
-            var clickedElement = e.OriginalSource as DependencyObject;
-            
-            // If clicked on the edit box itself, don't save
-            if (clickedElement != null && IsChildOf(clickedElement, _currentEditBox))
+            if (e.Key == Windows.System.VirtualKey.Enter)
             {
-                return;
+                e.Handled = true;
+                CommitEdit();
             }
+            else if (e.Key == Windows.System.VirtualKey.Escape)
+            {
+                e.Handled = true;
+                CancelEdit();
+            }
+        }
+        private async void CommitEdit()
+        {
+            if (_currentEditBox == null || _currentAccount == null) return;
 
-            // Save the edit
-            await FinalizeEdit();
+            string newRemark = _currentEditBox.Text.Trim();
+            
+            if (string.IsNullOrEmpty(newRemark) || newRemark == _currentAccount.Name)
+            {
+                _currentAccount.Remark = null;
+            }
+            else
+            {
+                _currentAccount.Remark = newRemark;
+            }
+            
+            CleanupEditUI();
+            
+            try
+            {
+                var accounts = await LoadAccountsFromFileAsync();
+                
+                var accountToUpdate = accounts.FirstOrDefault(a => a.SdkData == _currentAccount.SdkData);
+                if (accountToUpdate != null)
+                {
+                    accountToUpdate.Remark = _currentAccount.Remark;
+                    await SaveAccountsToFileAsync(accounts);
+                }
+                
+                await LoadAccountsAsync(); 
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"保存备注失败: {ex.Message}");
+            }
+        }
+        private void CleanupEditUI()
+        {
+            if (_currentEditBox == null || _currentStackPanel == null || _currentTextBlock == null) return;
+
+            try
+            {
+                this.RemoveHandler(PointerPressedEvent, new PointerEventHandler(Page_PointerPressed));
+                _currentStackPanel.Children.Remove(_currentEditBox);
+                _currentTextBlock.Visibility = Visibility.Visible;
+            }
+            finally
+            {
+                _currentEditBox = null;
+                _currentTextBlock = null;
+                _currentStackPanel = null;
+                _currentAccount = null;
+            }
+        }
+        private void Page_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            // 如果点击的不是 TextBox 内部，则取消编辑
+            if (_currentEditBox != null)
+            {
+                var ptr = e.GetCurrentPoint(_currentEditBox);
+                if (ptr.Properties.IsLeftButtonPressed)
+                {
+                    // 简单的判定：如果点击位置不在 TextBox 范围内
+                    if (ptr.Position.X < 0 || ptr.Position.Y < 0 || 
+                        ptr.Position.X > _currentEditBox.ActualWidth || ptr.Position.Y > _currentEditBox.ActualHeight)
+                    {
+                        CancelEdit();
+                    }
+                }
+            }
         }
 
         private bool IsChildOf(DependencyObject child, DependencyObject parent)
@@ -1113,24 +1188,7 @@ namespace FufuLauncher.Views
 
         private void CancelEdit()
         {
-            if (_currentEditBox == null || _currentTextBlock == null || _currentStackPanel == null)
-                return;
-
-            try
-            {
-                // Remove global pointer handler
-                this.RemoveHandler(PointerPressedEvent, new PointerEventHandler(Page_PointerPressed));
-
-                _currentStackPanel.Children.Remove(_currentEditBox);
-                _currentTextBlock.Visibility = Visibility.Visible;
-            }
-            finally
-            {
-                _currentEditBox = null;
-                _currentTextBlock = null;
-                _currentStackPanel = null;
-                _currentAccount = null;
-            }
+            CleanupEditUI();
         }
 
         private T? FindParent<T>(DependencyObject child) where T : DependencyObject

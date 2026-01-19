@@ -37,388 +37,462 @@
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
+
+        <Storyboard x:Name="EntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0.9" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="0.9" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-        
-        <Grid Padding="24,12,24,36" HorizontalAlignment="Stretch">
+    <Grid x:Name="RootLayoutGrid" Opacity="0" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="RootLayoutScale" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="LayoutStates">
-                    <VisualState x:Name="WideState">
-                        <VisualState.StateTriggers>
-                            <AdaptiveTrigger MinWindowWidth="900"/>
-                        </VisualState.StateTriggers>
-                    </VisualState>
+            <Grid Padding="24,12,24,36" HorizontalAlignment="Stretch">
+                
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="LayoutStates">
+                        <VisualState x:Name="WideState">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="900"/>
+                            </VisualState.StateTriggers>
+                        </VisualState>
 
-                    <VisualState x:Name="NarrowState">
-                        <VisualState.Setters>
-                            <Setter Target="MainContentGrid.ColumnDefinitions[0].Width" Value="*"/>
-                            <Setter Target="MainContentGrid.ColumnDefinitions[1].Width" Value="0"/>
-                            <Setter Target="MainContentGrid.RowDefinitions[0].Height" Value="Auto"/>
-                            <Setter Target="MainContentGrid.RowDefinitions[1].Height" Value="Auto"/> 
-                            
-                            <Setter Target="AccountSectionContainer.(Grid.Row)" Value="1"/>
-                            <Setter Target="AccountSectionContainer.(Grid.Column)" Value="0"/>
-                            <Setter Target="AccountSectionContainer.Margin" Value="0,24,0,0"/>
-                            
-                            <Setter Target="QuickActionsGrid.ColumnDefinitions[2].Width" Value="0"/>
-                            <Setter Target="QuickActionsGrid.ColumnDefinitions[3].Width" Value="0"/>
-                            <Setter Target="QuickActionsGrid.RowDefinitions[1].Height" Value="*"/>
-                            
-                            <Setter Target="BtnMap.(Grid.Row)" Value="1"/>
-                            <Setter Target="BtnMap.(Grid.Column)" Value="0"/>
-                            <Setter Target="BtnNotice.(Grid.Row)" Value="1"/>
-                            <Setter Target="BtnNotice.(Grid.Column)" Value="1"/>
-
-                            <Setter Target="StatsGrid.ColumnDefinitions[3].Width" Value="0"/>
-                            <Setter Target="StatsGrid.ColumnDefinitions[4].Width" Value="0"/>
-                            <Setter Target="StatsGrid.RowDefinitions[1].Height" Value="Auto"/>
-                            
-                            <Setter Target="StatCard_Latest.(Grid.Row)" Value="1"/>
-                            <Setter Target="StatCard_Latest.(Grid.Column)" Value="0"/>
-                            
-                            <Setter Target="StatCard_PreDownload.(Grid.Row)" Value="1"/>
-                            <Setter Target="StatCard_PreDownload.(Grid.Column)" Value="1"/>
-                            <Setter Target="StatCard_PreDownload.(Grid.ColumnSpan)" Value="2"/>
-                        </VisualState.Setters>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-
-            <StackPanel Spacing="24">
-                <Grid Margin="0,12,0,0">
-                    <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
-                        <Image Source="/Assets/WindowIcon.ico" Width="36" Height="36"/>
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="游戏设置" FontSize="20" FontWeight="SemiBold"/>
-                            <TextBlock Text="FufuLauncher Console" FontSize="12" Opacity="0.5"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-
-                <Grid x:Name="MainContentGrid" ColumnSpacing="24">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.8*" MinWidth="400"/> 
-                        <ColumnDefinition Width="1*" MinWidth="300"/> 
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="0"/> 
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Column="0" Spacing="16">
-                        
-                        <Grid Style="{StaticResource SafeCardStyle}" Padding="24">
-                            <StackPanel Spacing="16">
-                                <StackPanel Orientation="Horizontal" Spacing="10">
-                                    <FontIcon Glyph="&#xE838;" FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
-                                    <TextBlock Text="游戏安装位置" FontSize="16" FontWeight="SemiBold"/>
-                                </StackPanel>
-
-                                <Grid ColumnSpacing="12">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <TextBox x:Name="PathTextBox" 
-                                             PlaceholderText="请选择 YuanShen.exe 所在文件夹..."
-                                             TextChanged="PathTextBox_TextChanged"
-                                             KeyDown="PathTextBox_KeyDown"
-                                             VerticalAlignment="Center"/>
-                                    
-                                    <Button Grid.Column="1" x:Name="ApplyPathButton" Content="应用" Click="ApplyPath_Click" IsEnabled="False"/>
-                                    <Button Grid.Column="2" Click="SelectPath_Click" Style="{StaticResource AccentButtonStyle}">
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <FontIcon Glyph="&#xE8F4;" FontSize="14"/>
-                                            <TextBlock Text="浏览"/>
-                                        </StackPanel>
-                                    </Button>
-                                </Grid>
+                        <VisualState x:Name="NarrowState">
+                            <VisualState.Setters>
+                                <Setter Target="MainContentGrid.ColumnDefinitions[0].Width" Value="*"/>
+                                <Setter Target="MainContentGrid.ColumnDefinitions[1].Width" Value="0"/>
+                                <Setter Target="MainContentGrid.RowDefinitions[0].Height" Value="Auto"/>
+                                <Setter Target="MainContentGrid.RowDefinitions[1].Height" Value="Auto"/> 
                                 
-                                <ProgressRing x:Name="LoadingRing" IsActive="False" HorizontalAlignment="Left" Width="24" Height="24"/>
+                                <Setter Target="AccountSectionContainer.(Grid.Row)" Value="1"/>
+                                <Setter Target="AccountSectionContainer.(Grid.Column)" Value="0"/>
+                                <Setter Target="AccountSectionContainer.Margin" Value="0,24,0,0"/>
+                                
+                                <Setter Target="QuickActionsGrid.ColumnDefinitions[2].Width" Value="0"/>
+                                <Setter Target="QuickActionsGrid.ColumnDefinitions[3].Width" Value="0"/>
+                                <Setter Target="QuickActionsGrid.RowDefinitions[1].Height" Value="*"/>
+                                
+                                <Setter Target="BtnMap.(Grid.Row)" Value="1"/>
+                                <Setter Target="BtnMap.(Grid.Column)" Value="0"/>
+                                <Setter Target="BtnNotice.(Grid.Row)" Value="1"/>
+                                <Setter Target="BtnNotice.(Grid.Column)" Value="1"/>
+
+                                <Setter Target="StatsGrid.ColumnDefinitions[3].Width" Value="0"/>
+                                <Setter Target="StatsGrid.ColumnDefinitions[4].Width" Value="0"/>
+                                <Setter Target="StatsGrid.RowDefinitions[1].Height" Value="Auto"/>
+                                
+                                <Setter Target="StatCard_Latest.(Grid.Row)" Value="1"/>
+                                <Setter Target="StatCard_Latest.(Grid.Column)" Value="0"/>
+                                
+                                <Setter Target="StatCard_PreDownload.(Grid.Row)" Value="1"/>
+                                <Setter Target="StatCard_PreDownload.(Grid.Column)" Value="1"/>
+                                <Setter Target="StatCard_PreDownload.(Grid.ColumnSpan)" Value="2"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+
+                <StackPanel Spacing="24">
+                    <Grid Margin="0,12,0,0">
+                        <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+                            <Image Source="/Assets/WindowIcon.ico" Width="36" Height="36"/>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="游戏设置" FontSize="20" FontWeight="SemiBold"/>
+                                <TextBlock Text="FufuLauncher Console" FontSize="12" Opacity="0.5"/>
                             </StackPanel>
-                        </Grid>
-
-                        <Grid>
-                            <Grid x:Name="EmptyPanel" Style="{StaticResource SafeCardStyle}" Height="140" Visibility="Visible">
-                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
-                                    <FontIcon Glyph="&#xE9CE;" FontSize="40" Opacity="0.3"/>
-                                    <TextBlock Text="请先配置游戏路径" FontSize="14" Opacity="0.6"/>
-                                </StackPanel>
-                            </Grid>
-
-                            <Grid x:Name="InfoPanel" Style="{StaticResource SafeCardStyle}" Padding="20" Visibility="Collapsed">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
-                                <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,16">
-                                    <FontIcon Glyph="&#xE946;" FontSize="18"/>
-                                    <TextBlock Text="客户端状态" FontSize="16" FontWeight="SemiBold"/>
-                                </StackPanel>
-
-                                <Grid x:Name="StatsGrid" Grid.Row="1" ColumnSpacing="8" RowSpacing="8">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="0"/> 
-                                    </Grid.RowDefinitions>
-
-                                    <Border Grid.Column="0" Style="{StaticResource SafeStatCardStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="当前版本" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
-                                            <TextBlock x:Name="VersionText" Text="-" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border Grid.Column="1" Style="{StaticResource SafeStatCardStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="服务器" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
-                                            <TextBlock x:Name="ServerText" Text="-" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border Grid.Column="2" Style="{StaticResource SafeStatCardStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="占用空间" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
-                                            <TextBlock x:Name="SizeText" Text="-" FontSize="13" FontWeight="SemiBold"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border x:Name="StatCard_Latest" Grid.Column="3" Style="{StaticResource SafeStatCardStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="最新版本" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
-                                            <TextBlock x:Name="LatestVersionText" Text="检查中..." FontSize="13" FontWeight="SemiBold"/>
-                                        </StackPanel>
-                                    </Border>
-
-                                    <Border x:Name="StatCard_PreDownload" Grid.Column="4" Style="{StaticResource SafeStatCardStyle}">
-                                        <StackPanel>
-                                            <TextBlock Text="预下载资源" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
-                                            <TextBlock x:Name="PreDownloadText" Text="-" FontSize="13" FontWeight="SemiBold"/>
-                                        </StackPanel>
-                                    </Border>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-
-                        <Grid Style="{StaticResource SafeCardStyle}" Padding="20">
-                            <StackPanel Spacing="16">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                                        <FontIcon Glyph="&#xE8E5;" FontSize="18"/>
-                                        <TextBlock Text="最新兑换码" FontSize="16" FontWeight="SemiBold"/>
-                                        <ProgressRing x:Name="CodesLoadingRing" IsActive="False" Visibility="Collapsed" Width="16" Height="16" Margin="8,0,0,0"/>
-                                    </StackPanel>
-
-                                    <Button Grid.Column="1" Click="ToggleCodes_Click" Background="Transparent" BorderThickness="0" Padding="8,4" Height="32">
-                                        <FontIcon x:Name="RedeemChevron" Glyph="&#xE70D;" FontSize="14" Opacity="0.7"/>
-                                    </Button>
-                                </Grid>
-
-                                <StackPanel x:Name="RedeemContentPanel" Visibility="Collapsed" Spacing="16">
-                                    <ItemsControl x:Name="RedeemCodesList">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Margin="0,0,0,12" Background="#08FFFFFF" CornerRadius="6" Padding="12" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1">
-                                                    <StackPanel Spacing="8">
-                                                        <Grid>
-                                                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="13"/>
-                                                            <TextBlock Text="{Binding Valid}" HorizontalAlignment="Right" FontSize="11" Opacity="0.5"/>
-                                                        </Grid>
-
-                                                        <ItemsControl ItemsSource="{Binding Codes}">
-                                                            <ItemsControl.ItemTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid Margin="0,4,0,0" Background="#0A000000" CornerRadius="4">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="*"/>
-                                                                            <ColumnDefinition Width="Auto"/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <TextBlock Text="{Binding}" VerticalAlignment="Center" FontFamily="Consolas, Monospace" FontSize="12" Margin="8,4"/>
-                                                                        <Button Grid.Column="1" Content="复制" Click="CopyCode_Click" Tag="{Binding}" FontSize="10" Padding="8,2" Height="24" Margin="4" CornerRadius="4"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </ItemsControl.ItemTemplate>
-                                                        </ItemsControl>
-                                                    </StackPanel>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-
-                                    <TextBlock x:Name="NoCodesText" Text="暂无可用兑换码" Visibility="Collapsed" Opacity="0.5" HorizontalAlignment="Center" Margin="0,10"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </Grid>
-
-                    </StackPanel>
-
-                    <Grid x:Name="AccountSectionContainer" Grid.Column="1" Style="{StaticResource SafeCardStyle}" Padding="0" VerticalAlignment="Stretch">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/> 
-                        </Grid.RowDefinitions>
-
-                        <Grid Grid.Row="0" Padding="20,16" Background="#08FFFFFF">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Horizontal" Spacing="10">
-                                <FontIcon Glyph="&#xE77B;" FontSize="18"/>
-                                <TextBlock Text="账号切换" FontSize="16" FontWeight="SemiBold"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
-                                <Button Click="AddAccount_Click" Padding="6" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="从本地读取">
-                                    <FontIcon Glyph="&#xE710;" FontSize="16"/>
-                                </Button>
-                                <Button Click="RefreshAccounts_Click" Padding="6" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="刷新列表">
-                                    <FontIcon Glyph="&#xE72C;" FontSize="16"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        
-                        <Rectangle Grid.Row="1" Height="1" Fill="{StaticResource SafeBorderBrush}"/>
-
-                        <Grid Grid.Row="2" MinHeight="150">
-                            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                <ListView x:Name="AccountsListView" SelectionMode="None" Padding="12">
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="ListViewItem">
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Margin" Value="0,0,0,8"/>
-                                            <Setter Property="Padding" Value="0"/>
-                                            <Setter Property="CornerRadius" Value="6"/>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Padding="12" Background="#0AFFFFFF" CornerRadius="6" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                
-                                                <PersonPicture DisplayName="{Binding Name}" 
-                                                               Width="36" Height="36" 
-                                                               Margin="0,0,12,0"
-                                                               HorizontalAlignment="Left"/>
-                                                
-                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding Remark, TargetNullValue={Binding Name}}" 
-                                                               FontWeight="SemiBold" 
-                                                               FontSize="13"
-                                                               DoubleTapped="AccountName_DoubleTapped"
-                                                               ToolTipService.ToolTip="双击可编辑备注"/>
-                                                    <TextBlock Text="{Binding SdkData}" FontSize="10" Opacity="0.4" TextTrimming="CharacterEllipsis" MaxLines="1"/>
-                                                </StackPanel>
-
-                                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6">
-                                                    <Button Content="切换" Tag="{Binding}" Click="SwitchAccount_Click" FontSize="11" Height="28" Padding="10,4" CornerRadius="4"/>
-                                                    <Button Tag="{Binding}" Click="DeleteAccount_Click" Height="28" Width="28" Padding="0" Background="Transparent" BorderThickness="0">
-                                                        <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="#FF6666"/>
-                                                    </Button>
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </ScrollViewer>
-                        </Grid>
+                        </StackPanel>
                     </Grid>
-                </Grid>
 
-                <StackPanel Spacing="12">
-                    
-                    <Grid x:Name="QuickActionsGrid" ColumnSpacing="16" RowSpacing="16">
+                    <Grid x:Name="MainContentGrid" ColumnSpacing="24">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="1.8*" MinWidth="400"/> 
+                            <ColumnDefinition Width="1*" MinWidth="300"/> 
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="0"/> 
                         </Grid.RowDefinitions>
 
-                        <Button Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Style="{StaticResource AccentButtonStyle}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE896;" FontSize="22" Margin="0,0,16,0"/>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="资源管理" FontWeight="SemiBold"/>
-                                    <TextBlock Text="下载或验证文件" FontSize="11" Opacity="0.7"/>
-                                </StackPanel>
-                            </Grid>
-                        </Button>
+                        <StackPanel Grid.Column="0" Spacing="16">
+                            
+                            <Grid Style="{StaticResource SafeCardStyle}" Padding="24" Translation="0,0,32">
+                                <Grid.Shadow>
+                                    <ThemeShadow/>
+                                </Grid.Shadow>
+                                <StackPanel Spacing="16">
+                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                        <FontIcon Glyph="&#xE838;" FontSize="18" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                                        <TextBlock Text="游戏安装位置" FontSize="16" FontWeight="SemiBold"/>
+                                    </StackPanel>
 
-                        <Button Grid.Column="1" Click="SwitchServer_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE72C;" FontSize="22" Margin="0,0,16,0"/>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="切换服务器" FontWeight="SemiBold"/>
-                                    <TextBlock Text="官服 / B服互转" FontSize="11" Opacity="0.6"/>
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <TextBox x:Name="PathTextBox" 
+                                                 PlaceholderText="请选择 YuanShen.exe 所在文件夹..."
+                                                 TextChanged="PathTextBox_TextChanged"
+                                                 KeyDown="PathTextBox_KeyDown"
+                                                 VerticalAlignment="Center"/>
+                                        
+                                        <Button Grid.Column="1" x:Name="ApplyPathButton" Content="应用" Click="ApplyPath_Click" IsEnabled="False"/>
+                                        <Button Grid.Column="2" Click="SelectPath_Click" Style="{StaticResource AccentButtonStyle}">
+                                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                                <FontIcon Glyph="&#xE8F4;" FontSize="14"/>
+                                                <TextBlock Text="浏览"/>
+                                            </StackPanel>
+                                        </Button>
+                                    </Grid>
+                                    
+                                    <ProgressRing x:Name="LoadingRing" IsActive="False" HorizontalAlignment="Left" Width="24" Height="24"/>
                                 </StackPanel>
                             </Grid>
-                        </Button>
 
-                        <Button x:Name="BtnMap" Grid.Column="2" Click="OpenMap_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1">
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE707;" FontSize="22" Margin="0,0,16,0"/>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="地图工具" FontWeight="SemiBold"/>
-                                    <TextBlock Text="查看提瓦特地图" FontSize="11" Opacity="0.6"/>
-                                </StackPanel>
-                            </Grid>
-                        </Button>
+                                <Grid x:Name="EmptyPanel" Style="{StaticResource SafeCardStyle}" Height="140" Visibility="Visible" Translation="0,0,32">
+                                    <Grid.Shadow>
+                                        <ThemeShadow/>
+                                    </Grid.Shadow>
+                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
+                                        <FontIcon Glyph="&#xE9CE;" FontSize="40" Opacity="0.3"/>
+                                        <TextBlock Text="请先配置游戏路径" FontSize="14" Opacity="0.6"/>
+                                    </StackPanel>
+                                </Grid>
 
-                        <Button x:Name="BtnNotice" Grid.Column="3" Click="OpenAnnouncement_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Glyph="&#xE783;" FontSize="22" Margin="0,0,16,0"/>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock Text="官方公告" FontWeight="SemiBold"/>
-                                    <TextBlock Text="活动与更新资讯" FontSize="11" Opacity="0.6"/>
+                                <Grid x:Name="InfoPanel" Style="{StaticResource SafeCardStyle}" Padding="20" Visibility="Collapsed" Translation="0,0,32">
+                                    <Grid.Shadow>
+                                        <ThemeShadow/>
+                                    </Grid.Shadow>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,16">
+                                        <FontIcon Glyph="&#xE946;" FontSize="18"/>
+                                        <TextBlock Text="客户端状态" FontSize="16" FontWeight="SemiBold"/>
+                                    </StackPanel>
+
+                                    <Grid x:Name="StatsGrid" Grid.Row="1" ColumnSpacing="8" RowSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="0"/> 
+                                        </Grid.RowDefinitions>
+
+                                        <Border Grid.Column="0" Style="{StaticResource SafeStatCardStyle}" Translation="0,0,8">
+                                            <Border.Shadow>
+                                                <ThemeShadow/>
+                                            </Border.Shadow>
+                                            <StackPanel>
+                                                <TextBlock Text="当前版本" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
+                                                <TextBlock x:Name="VersionText" Text="-" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border Grid.Column="1" Style="{StaticResource SafeStatCardStyle}" Translation="0,0,8">
+                                            <Border.Shadow>
+                                                <ThemeShadow/>
+                                            </Border.Shadow>
+                                            <StackPanel>
+                                                <TextBlock Text="服务器" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
+                                                <TextBlock x:Name="ServerText" Text="-" FontSize="13" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border Grid.Column="2" Style="{StaticResource SafeStatCardStyle}" Translation="0,0,8">
+                                            <Border.Shadow>
+                                                <ThemeShadow/>
+                                            </Border.Shadow>
+                                            <StackPanel>
+                                                <TextBlock Text="占用空间" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
+                                                <TextBlock x:Name="SizeText" Text="-" FontSize="13" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border x:Name="StatCard_Latest" Grid.Column="3" Style="{StaticResource SafeStatCardStyle}" Translation="0,0,8">
+                                            <Border.Shadow>
+                                                <ThemeShadow/>
+                                            </Border.Shadow>
+                                            <StackPanel>
+                                                <TextBlock Text="最新版本" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
+                                                <TextBlock x:Name="LatestVersionText" Text="检查中..." FontSize="13" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border x:Name="StatCard_PreDownload" Grid.Column="4" Style="{StaticResource SafeStatCardStyle}" Translation="0,0,8">
+                                            <Border.Shadow>
+                                                <ThemeShadow/>
+                                            </Border.Shadow>
+                                            <StackPanel>
+                                                <TextBlock Text="预下载资源" FontSize="11" Opacity="0.6" Margin="0,0,0,2"/>
+                                                <TextBlock x:Name="PreDownloadText" Text="-" FontSize="13" FontWeight="SemiBold"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Style="{StaticResource SafeCardStyle}" Padding="20" Translation="0,0,32">
+                                <Grid.Shadow>
+                                    <ThemeShadow/>
+                                </Grid.Shadow>
+                                <StackPanel Spacing="16">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                            <FontIcon Glyph="&#xE8E5;" FontSize="18"/>
+                                            <TextBlock Text="最新兑换码" FontSize="16" FontWeight="SemiBold"/>
+                                            <ProgressRing x:Name="CodesLoadingRing" IsActive="False" Visibility="Collapsed" Width="16" Height="16" Margin="8,0,0,0"/>
+                                        </StackPanel>
+
+                                        <Button Grid.Column="1" Click="ToggleCodes_Click" Background="Transparent" BorderThickness="0" Padding="8,4" Height="32">
+                                            <FontIcon x:Name="RedeemChevron" Glyph="&#xE70D;" FontSize="14" Opacity="0.7"/>
+                                        </Button>
+                                    </Grid>
+
+                                    <StackPanel x:Name="RedeemContentPanel" Visibility="Collapsed" Spacing="16">
+                                        <ItemsControl x:Name="RedeemCodesList">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,0,0,12" Background="#08FFFFFF" CornerRadius="6" Padding="12" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,8">
+                                                        <Grid.Shadow>
+                                                            <ThemeShadow/>
+                                                        </Grid.Shadow>
+                                                        <StackPanel Spacing="8">
+                                                            <Grid>
+                                                                <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="13"/>
+                                                                <TextBlock Text="{Binding Valid}" HorizontalAlignment="Right" FontSize="11" Opacity="0.5"/>
+                                                            </Grid>
+
+                                                            <ItemsControl ItemsSource="{Binding Codes}">
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <Grid Margin="0,4,0,0" Background="#0A000000" CornerRadius="4">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="*"/>
+                                                                                <ColumnDefinition Width="Auto"/>
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" FontFamily="Consolas, Monospace" FontSize="12" Margin="8,4"/>
+                                                                            <Button Grid.Column="1" Content="复制" Click="CopyCode_Click" Tag="{Binding}" FontSize="10" Padding="8,2" Height="24" Margin="4" CornerRadius="4"/>
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+
+                                        <TextBlock x:Name="NoCodesText" Text="暂无可用兑换码" Visibility="Collapsed" Opacity="0.5" HorizontalAlignment="Center" Margin="0,10"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </Grid>
-                        </Button>
+
+                        </StackPanel>
+
+                        <Grid x:Name="AccountSectionContainer" Grid.Column="1" Style="{StaticResource SafeCardStyle}" Padding="0" VerticalAlignment="Stretch" Translation="0,0,32">
+                            <Grid.Shadow>
+                                <ThemeShadow/>
+                            </Grid.Shadow>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/> 
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Padding="20,16" Background="#08FFFFFF">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <FontIcon Glyph="&#xE77B;" FontSize="18"/>
+                                    <TextBlock Text="账号切换" FontSize="16" FontWeight="SemiBold"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4">
+                                    <Button Click="AddAccount_Click" Padding="6" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="从本地读取">
+                                        <FontIcon Glyph="&#xE710;" FontSize="16"/>
+                                    </Button>
+                                    <Button Click="RefreshAccounts_Click" Padding="6" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="刷新列表">
+                                        <FontIcon Glyph="&#xE72C;" FontSize="16"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                             
+                            <Rectangle Grid.Row="1" Height="1" Fill="{StaticResource SafeBorderBrush}"/>
+
+                            <Grid Grid.Row="2" MinHeight="150">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <ListView x:Name="AccountsListView" SelectionMode="None" Padding="12">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                <Setter Property="Margin" Value="0,0,0,8"/>
+                                                <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="CornerRadius" Value="6"/>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Padding="12" Background="#0AFFFFFF" CornerRadius="6" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,8">
+                                                    <Grid.Shadow>
+                                                        <ThemeShadow/>
+                                                    </Grid.Shadow>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <PersonPicture DisplayName="{Binding Name}" 
+                                                                   Width="36" Height="36" 
+                                                                   Margin="0,0,12,0"
+                                                                   HorizontalAlignment="Left"/>
+                                                    
+                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="13" DoubleTapped="AccountName_DoubleTapped" ToolTipService.ToolTip="双击可编辑备注"/>
+                                                        <TextBlock Text="{Binding SdkData}" FontSize="10" Opacity="0.4" TextTrimming="CharacterEllipsis" MaxLines="1"/>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6">
+                                                        <Button Content="切换" Tag="{Binding}" Click="SwitchAccount_Click" FontSize="11" Height="28" Padding="10,4" CornerRadius="4"/>
+                                                        <Button Tag="{Binding}" Click="DeleteAccount_Click" Height="28" Width="28" Padding="0" Background="Transparent" BorderThickness="0">
+                                                            <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="#FF6666"/>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
                     </Grid>
-                </StackPanel>
 
-            </StackPanel>
-        </Grid>
-    </ScrollViewer>
+                    <StackPanel Spacing="12">
+                        
+                        <Grid x:Name="QuickActionsGrid" ColumnSpacing="16" RowSpacing="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="0"/> 
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Style="{StaticResource AccentButtonStyle}" Translation="0,0,32">
+                                <Button.Shadow>
+                                    <ThemeShadow/>
+                                </Button.Shadow>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE896;" FontSize="22" Margin="0,0,16,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="资源管理" FontWeight="SemiBold"/>
+                                        <TextBlock Text="下载或验证文件" FontSize="11" Opacity="0.7"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+
+                            <Button Grid.Column="1" Click="SwitchServer_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
+                                <Button.Shadow>
+                                    <ThemeShadow/>
+                                </Button.Shadow>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE72C;" FontSize="22" Margin="0,0,16,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="切换服务器" FontWeight="SemiBold"/>
+                                        <TextBlock Text="官服 / B服互转" FontSize="11" Opacity="0.6"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+
+                            <Button x:Name="BtnMap" Grid.Column="2" Click="OpenMap_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
+                                <Button.Shadow>
+                                    <ThemeShadow/>
+                                </Button.Shadow>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE707;" FontSize="22" Margin="0,0,16,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="地图工具" FontWeight="SemiBold"/>
+                                        <TextBlock Text="查看提瓦特地图" FontSize="11" Opacity="0.6"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+
+                            <Button x:Name="BtnNotice" Grid.Column="3" Click="OpenAnnouncement_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
+                                <Button.Shadow>
+                                    <ThemeShadow/>
+                                </Button.Shadow>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE783;" FontSize="22" Margin="0,0,16,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="官方公告" FontWeight="SemiBold"/>
+                                        <TextBlock Text="活动与更新资讯" FontSize="11" Opacity="0.6"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
 </Page>

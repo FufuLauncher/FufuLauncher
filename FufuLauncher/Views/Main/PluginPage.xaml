@@ -7,13 +7,46 @@
     xmlns:models="using:FufuLauncher.Models"
     xmlns:viewModels="using:FufuLauncher.ViewModels"
     xmlns:converters="using:FufuLauncher.Converters"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
     
     <Page.Resources>
         <converters:BoolInverter x:Key="BoolInverter"/>
+
+        <Storyboard x:Name="EntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0.9" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="0.9" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
     </Page.Resources>
 
-    <Grid Padding="24">
+    <Grid x:Name="RootLayoutGrid" 
+          Padding="24" 
+          Opacity="0" 
+          RenderTransformOrigin="0.5,0.5">
+        
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="RootLayoutScale" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,7 +56,10 @@
 
         <Grid Grid.Row="0" Margin="0,0,0,16">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/> <ColumnDefinition Width="*"/>    <ColumnDefinition Width="Auto"/> </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/> 
+                <ColumnDefinition Width="*"/>    
+                <ColumnDefinition Width="Auto"/> 
+            </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" 
                        Text="插件管理" 

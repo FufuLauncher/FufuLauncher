@@ -59,11 +59,16 @@ public sealed partial class EasterEggPage : Page
 
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        if (BgVideoPlayer.MediaPlayer != null)
+        if (BgVideoPlayer.MediaPlayer != null && BgVideoPlayer.MediaPlayer.PlaybackSession.PlaybackState != MediaPlaybackState.Playing)
         {
             BgVideoPlayer.MediaPlayer.IsLoopingEnabled = true;
             BgVideoPlayer.MediaPlayer.Play();
         }
+    }
+    
+    private void Page_Unloaded(object sender, RoutedEventArgs e)
+    {
+        Cleanup();
     }
 
     private void InitializeMedia()
@@ -79,9 +84,9 @@ public sealed partial class EasterEggPage : Page
                 var source = MediaSource.CreateFromUri(new Uri(videoPath));
                 BgVideoPlayer.Source = source;
                 
-                BgVideoPlayer.MediaPlayer.MediaOpened += (sender, args) =>
+                BgVideoPlayer.MediaPlayer.MediaOpened += (_, _) =>
                 {
-                    this.DispatcherQueue.TryEnqueue(() => 
+                    DispatcherQueue.TryEnqueue(() => 
                     {
                         if (BgVideoPlayer.MediaPlayer != null)
                         {
@@ -186,11 +191,32 @@ public sealed partial class EasterEggPage : Page
         storyboard.Children.Add(anim);
         storyboard.Begin();
     }
-
+    
     public void Cleanup()
     {
-        _typewriterTimer?.Stop();
-        _musicPlayer?.Dispose();
-        BgVideoPlayer?.MediaPlayer?.Dispose();
+        try
+        {
+            _typewriterTimer?.Stop();
+            _typewriterTimer = null;
+
+            if (_musicPlayer != null)
+            {
+                _musicPlayer.Pause();
+                _musicPlayer.Dispose();
+                _musicPlayer = null;
+            }
+
+            if (BgVideoPlayer?.MediaPlayer != null)
+            {
+                BgVideoPlayer.MediaPlayer.Pause();
+                BgVideoPlayer.MediaPlayer.Dispose();
+
+                BgVideoPlayer.Source = null; 
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Cleanup error: {ex.Message}");
+        }
     }
 }

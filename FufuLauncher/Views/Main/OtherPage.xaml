@@ -6,9 +6,34 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Background="Transparent">
+    Background="Transparent"
+    Loaded="Page_Loaded">
 
     <Page.Resources>
+        <Storyboard x:Name="EntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0.9" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="0.9" To="1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
         <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
         <Style x:Key="SettingsCardStyle" TargetType="Grid">
@@ -28,7 +53,11 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="RootLayoutGrid" Opacity="0" RenderTransformOrigin="0.5,0.5">
+        <Grid.RenderTransform>
+            <ScaleTransform x:Name="RootLayoutScale" ScaleX="1" ScaleY="1"/>
+        </Grid.RenderTransform>
+
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="36,24,36,48" 
                         Spacing="24" 
@@ -187,14 +216,14 @@
                                              IsReadOnly="True" 
                                              PlaceholderText="无"
                                              VerticalAlignment="Bottom"/>
-                                             
+                                                      
                                     <Button Grid.Column="1" 
                                             Content="&#xE765;" FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                             ToolTipService.ToolTip="点击录制"
                                             Command="{x:Bind ViewModel.RecordClickKeyCommand}"
                                             VerticalAlignment="Bottom"/>
                                 </Grid>
-                                
+                                 
                                 <InfoBar Grid.Row="1" Grid.ColumnSpan="2"
                                          Severity="Informational"
                                          IsClosable="False"

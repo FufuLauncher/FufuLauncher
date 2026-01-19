@@ -130,7 +130,7 @@ public sealed partial class MainPage : Page
         storyboard.Begin();
     }
 
-    private bool _isInitialized = false;
+    private bool _isInitialized;
 
     public MainPage()
     {
@@ -157,24 +157,12 @@ public sealed partial class MainPage : Page
 
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
+        EntranceStoryboard.Begin();
+
         if (!_isInitialized)
         {
             await ViewModel.InitializeAsync();
             _isInitialized = true;
-        }
-    }
-
-    private void BannerImage_Loaded(object sender, RoutedEventArgs e)
-    {
-        Debug.WriteLine("轮播图加载成功");
-    }
-
-    private void BannerImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
-    {
-        Debug.WriteLine($"轮播图加载失败: {e.ErrorMessage}");
-        if (sender is Image image && image.Parent is Border border)
-        {
-            border.Background = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
         }
     }
 

@@ -20,7 +20,11 @@ public sealed partial class PluginPage : Page
         
         InitializeComponent();
     }
-
+    
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        EntranceStoryboard.Begin();
+    }
 
     private void OnPluginToggled(object sender, RoutedEventArgs e)
     {

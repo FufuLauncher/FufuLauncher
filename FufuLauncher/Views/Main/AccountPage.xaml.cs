@@ -27,8 +27,12 @@ public sealed partial class AccountPage : Page
         base.OnNavigatedTo(e);
         Debug.WriteLine($"=== 页面导航到AccountPage，自动刷新用户信息 ===");
 
-
         await ViewModel.LoadUserInfoAsync();
+    }
+    
+    private void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        EntranceStoryboard.Begin();
     }
     
     private void OnSwitchAccountClicked(object sender, RoutedEventArgs e)
@@ -42,9 +46,7 @@ public sealed partial class AccountPage : Page
     private async void OnGachaAnalysisClicked(object sender, RoutedEventArgs e)
     {
         var dialog = new GachaDialog();
-        
         dialog.XamlRoot = this.XamlRoot; 
-
         await dialog.ShowAsync();
     }
 }

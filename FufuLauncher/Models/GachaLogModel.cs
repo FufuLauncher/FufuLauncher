@@ -1,5 +1,4 @@
-﻿// Models/GachaLogModel.cs
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace FufuLauncher.Models;
 
@@ -59,13 +58,18 @@ public class GachaStatistic
     public string PoolName { get; set; }
     public int TotalCount { get; set; }
     public int FiveStarCount { get; set; }
-    public int CurrentPity { get; set; } // 当前垫了多少抽
+    public int FourStarCount { get; set; }
+    public int CurrentPity { get; set; }
+    public int CurrentPity4 { get; set; }
+    
     public List<FiveStarRecord> FiveStarRecords { get; set; } = new();
+    public List<FiveStarRecord> FourStarRecords { get; set; } = new(); 
 }
 
 public class FiveStarRecord
 {
     public string Name { get; set; }
-    public int PityUsed { get; set; } // 多少抽出的
+    public int PityUsed { get; set; }
     public string Time { get; set; }
+    public int Rank { get; set; }
 }

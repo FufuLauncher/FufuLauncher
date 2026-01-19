@@ -6,7 +6,12 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Black"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    Unloaded="Page_Unloaded">
+
+    <Page.Resources>
+        <FontFamily x:Key="AppGlobalFont">/Assets/zh-cn-l.ttf#SDK_SC_Web</FontFamily>
+    </Page.Resources>
 
     <Grid>
         <MediaPlayerElement x:Name="BgVideoPlayer"
@@ -18,15 +23,21 @@
         
         <Grid Background="Black" Opacity="0.5"/>
 
-        <Grid x:Name="AppTitleBar" VerticalAlignment="Top" Height="32" Background="Transparent" Canvas.ZIndex="999"/>
+        <Grid x:Name="AppTitleBar" 
+              VerticalAlignment="Top" 
+              Height="32" 
+              Background="Transparent" 
+              Canvas.ZIndex="999"/>
 
         <StackPanel VerticalAlignment="Center" 
                     HorizontalAlignment="Left" 
                     Spacing="24" 
-                    Margin="80,0,80,0"> <TextBlock x:Name="WelcomeText"
+                    Margin="80,0,80,0">
+            
+            <TextBlock x:Name="WelcomeText"
                        Foreground="White"
                        FontSize="32"
-                       FontFamily="Consolas, Microsoft YaHei UI"
+                       FontFamily="{StaticResource AppGlobalFont}"
                        FontWeight="Bold"
                        TextAlignment="Left"
                        TextWrapping="Wrap"
@@ -39,6 +50,7 @@
             <TextBlock x:Name="SyaShortText"
                        Foreground="#FFE4E1" 
                        FontSize="22"
+                       FontFamily="{StaticResource AppGlobalFont}"
                        FontStyle="Normal" 
                        FontWeight="Normal"
                        TextAlignment="Left"
