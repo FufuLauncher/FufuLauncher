@@ -343,47 +343,49 @@
                 <ThemeShadow/>
             </Border.Shadow>
             
-            <StackPanel Spacing="15">
-                <TextBlock Text="本周游戏时长统计" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,5"/>
-                
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    
-                    <StackPanel>
-                        <TextBlock Text="总时长" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                        <TextBlock Text="{x:Bind ViewModel.WeeklyStats.TotalHoursFormatted, Mode=OneWay}" FontSize="32" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/>
-                    </StackPanel>
+<StackPanel Spacing="15">
+    <TextBlock Text="近30天游戏时长统计" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,5"/>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel>
+            <TextBlock Text="总时长" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+            <TextBlock Text="{x:Bind ViewModel.WeeklyStats.TotalHoursFormatted, Mode=OneWay}" FontSize="32" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/>
+        </StackPanel>
 
-                    <StackPanel Grid.Row="0" HorizontalAlignment="Right">
-                        <TextBlock Text="日均" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right"/>
-                        <TextBlock Text="{x:Bind ViewModel.WeeklyStats.AverageHoursFormatted, Mode=OneWay}" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,8,0,0"/>
-                    </StackPanel>
-                </Grid>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Right">
+            <TextBlock Text="日均" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right"/>
+            <TextBlock Text="{x:Bind ViewModel.WeeklyStats.AverageHoursFormatted, Mode=OneWay}" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,8,0,0"/>
+        </StackPanel>
+    </Grid>
 
-                <MenuFlyoutSeparator/>
+    <MenuFlyoutSeparator/>
 
-                <ItemsControl ItemsSource="{x:Bind ViewModel.WeeklyStats.DailyRecords, Mode=OneWay}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="models:GamePlayTimeRecord">
-                            <Grid Margin="0,6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
-                                    <TextBlock Text="{x:Bind DayOfWeek}" FontSize="14" Width="40"/>
-                                    <TextBlock Text="{x:Bind DisplayDate}" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                </StackPanel>
-                                <TextBlock Grid.Column="1" Text="{x:Bind DisplayTime}" FontSize="14" FontWeight="SemiBold"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+    <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto" Padding="0,0,12,0">
+        <ItemsControl ItemsSource="{x:Bind ViewModel.WeeklyStats.DailyRecords, Mode=OneWay}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="models:GamePlayTimeRecord">
+                    <Grid Margin="0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+                            <TextBlock Text="{x:Bind DayOfWeek}" FontSize="14" Width="40"/>
+                            <TextBlock Text="{x:Bind DisplayDate}" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" Text="{x:Bind DisplayTime}" FontSize="14" FontWeight="SemiBold"/>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
 
-                <TextBlock Text="本周暂无游戏记录" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" Margin="0,20" Visibility="{x:Bind ViewModel.WeeklyStats.DailyRecords.Count, Converter={StaticResource EmptyCountToVisibilityConverter}, Mode=OneWay}"/>
+    <TextBlock Text="近30天暂无游戏记录" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" Margin="0,20" Visibility="{x:Bind ViewModel.WeeklyStats.DailyRecords.Count, Converter={StaticResource EmptyCountToVisibilityConverter}, Mode=OneWay}"/>
                 <Button Click="OnOpenAchievementsClick" 
                         Style="{StaticResource AccentButtonStyle}" 
                         HorizontalAlignment="Stretch" 

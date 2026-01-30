@@ -48,4 +48,8 @@ public partial class AchievementViewModel : ObservableObject
     [ObservableProperty] private bool _isLoading;
 
     [ObservableProperty] private string _statusMessage;
+    
+    [ObservableProperty] private string _importScriptContent;
+    
+    [ObservableProperty] private bool _isImportPanelVisible;
 }

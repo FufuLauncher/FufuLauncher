@@ -6,12 +6,14 @@ using FufuLauncher.Messages;
 
 namespace FufuLauncher.ViewModels
 {
+    
     public partial class AgreementViewModel : ObservableObject
     {
         private readonly ILocalSettingsService _localSettingsService;
 
         [ObservableProperty]
         private bool _isAgreementChecked;
+        
 
         public IAsyncRelayCommand ViewAgreementCommand
         {
@@ -29,15 +31,12 @@ namespace FufuLauncher.ViewModels
             ViewAgreementCommand = new AsyncRelayCommand(ViewAgreementAsync);
             NextCommand = new AsyncRelayCommand(NextAsync);
         }
-
-
-
+        
         private async Task ViewAgreementAsync()
         {
             await Windows.System.Launcher.LaunchUriAsync(
                 new Uri("https://philia093.cyou/"));
         }
-
 
 
         private async Task NextAsync()

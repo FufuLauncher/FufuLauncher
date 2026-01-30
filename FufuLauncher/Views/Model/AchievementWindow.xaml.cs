@@ -18,6 +18,7 @@ public sealed partial class AchievementWindow : Window
     private AchievementUserData _localData = new();
     private readonly string _saveFolderPath;
     private readonly string _saveFilePath;
+    private bool _isImporting = false;
 
     public AchievementWindow()
     {
@@ -34,7 +35,87 @@ public sealed partial class AchievementWindow : Window
         InitializeCrawler();
     }
     
+    private async void OnExecuteImportScript(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(ViewModel.ImportScriptContent))
+        {
+            ViewModel.StatusMessage = "脚本内容不能为空";
+            return;
+        }
 
+        ViewModel.IsLoading = true;
+        ViewModel.StatusMessage = "正在执行导入脚本...";
+        _isImporting = true; // 标记开始导入流程
+
+        try
+        {
+            // 1. 执行用户输入的 JS 脚本
+            // 注意：通常这些脚本会修改 localStorage，但不会立即更新 UI
+            string result = await _crawlerWebView.ExecuteScriptAsync(ViewModel.ImportScriptContent);
+            
+            Debug.WriteLine($"脚本执行结果: {result}");
+
+            // 2. 脚本执行后，通常需要刷新页面才能让 paimon.moe 读取新的 LocalStorage 并渲染
+            ViewModel.StatusMessage = "脚本执行完毕，正在刷新页面以应用更改...";
+            
+            // 触发刷新，这会再次触发 Crawler_NavigationCompleted
+            _crawlerWebView.Reload();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"脚本执行失败: {ex.Message}");
+            ViewModel.StatusMessage = "脚本执行失败，请检查脚本格式";
+            ViewModel.IsLoading = false;
+            _isImporting = false;
+        }
+    }
+    private async Task LoadCategoryDataAsync(AchievementCategory category)
+    {
+        if (category == null) return;
+
+        // 1. 尝试加载本地数据
+        if (_localData.AchievementData.ContainsKey(category.Name))
+        {
+            var localItems = _localData.AchievementData[category.Name];
+            ViewModel.CurrentAchievements.Clear();
+            foreach (var item in localItems)
+            {
+                ViewModel.CurrentAchievements.Add(item);
+            }
+
+            RegisterItemEvents();
+            UpdateCategoryProgress(category);
+            return;
+        }
+
+        // 2. 本地没有，尝试从网页抓取
+        ViewModel.IsLoading = true;
+
+        string clickScript = $@"
+    (function() {{
+        const cats = document.querySelectorAll('.category > div');
+        for (let c of cats) {{
+            if (c.innerText.includes('{category.Name}')) {{
+                c.click();
+                return true;
+            }}
+        }}
+        return false;
+    }})();";
+
+        string result = await _crawlerWebView.ExecuteScriptAsync(clickScript);
+
+        if (result == "true")
+        {
+            await Task.Delay(1500);
+            await ScrapeCurrentAchievementsAsync();
+        }
+        else
+        {
+            ViewModel.StatusMessage = "同步失败";
+            ViewModel.IsLoading = false;
+        }
+    }
     private void LoadLocalData()
     {
         try
@@ -168,19 +249,37 @@ public sealed partial class AchievementWindow : Window
         if (!args.IsSuccess)
         {
             ViewModel.IsLoading = false;
+            _isImporting = false;
             return;
         }
 
-        if (ViewModel.Categories.Count == 0)
+        if (ViewModel.Categories.Count == 0 || _isImporting)
         {
-            await Task.Delay(2000);
+            if (_isImporting) await Task.Delay(2000); // 导入后的缓冲
+            else await Task.Delay(2000); // 初次加载的缓冲
+
             await ScrapeCategoriesAsync();
+
+            // [修复] 这里不再调用 OnCategorySelectionChanged，而是调用新方法
+            if (_isImporting && ViewModel.SelectedCategory != null)
+            {
+                await LoadCategoryDataAsync(ViewModel.SelectedCategory);
+            }
+
+            _isImporting = false;
         }
         else
         {
             ViewModel.IsLoading = false;
         }
     }
+
+    // [新增] 切换导入面板显示的辅助方法 (绑定到界面上的“导入”按钮)
+    private void ToggleImportPanel(object sender, RoutedEventArgs e)
+    {
+        ViewModel.IsImportPanelVisible = !ViewModel.IsImportPanelVisible;
+    }
+    
     private void OnViewDetailClick(object sender, RoutedEventArgs e)
     {
         if (sender is HyperlinkButton btn && btn.DataContext is AchievementItem item)
@@ -249,50 +348,13 @@ public sealed partial class AchievementWindow : Window
         }
     }
 
+// 修改原有的事件处理函数
     private async void OnCategorySelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (ViewModel.SelectedCategory == null) return;
-        
-        if (_localData.AchievementData.ContainsKey(ViewModel.SelectedCategory.Name))
+        if (ViewModel.SelectedCategory != null)
         {
-            var localItems = _localData.AchievementData[ViewModel.SelectedCategory.Name];
-            ViewModel.CurrentAchievements.Clear();
-            foreach (var item in localItems)
-            {
-                ViewModel.CurrentAchievements.Add(item);
-            }
-
-            RegisterItemEvents();
-            UpdateCategoryProgress(ViewModel.SelectedCategory);
-
-            return;
-        }
-        
-        ViewModel.IsLoading = true;
-
-        string clickScript = $@"
-        (function() {{
-            const cats = document.querySelectorAll('.category > div');
-            for (let c of cats) {{
-                if (c.innerText.includes('{ViewModel.SelectedCategory.Name}')) {{
-                    c.click();
-                    return true;
-                }}
-            }}
-            return false;
-        }})();";
-
-        string result = await _crawlerWebView.ExecuteScriptAsync(clickScript);
-
-        if (result == "true")
-        {
-            await Task.Delay(1500);
-            await ScrapeCurrentAchievementsAsync();
-        }
-        else
-        {
-            ViewModel.StatusMessage = "同步失败";
-            ViewModel.IsLoading = false;
+            // 调用提取出来的方法
+            await LoadCategoryDataAsync(ViewModel.SelectedCategory);
         }
     }
 

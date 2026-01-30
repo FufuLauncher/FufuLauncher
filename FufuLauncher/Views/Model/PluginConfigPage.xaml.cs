@@ -88,8 +88,8 @@ public sealed partial class PluginConfigPage : Page
             {
                 return;
             }
-
-            var lines = await File.ReadAllLinesAsync(_pluginItem.ConfigFilePath);
+            
+            var lines = await File.ReadAllLinesAsync(_pluginItem.ConfigFilePath, Encoding.UTF8);
             var (general, opts) = ParseIniConfig(lines);
 
             _currentGeneralInfo = general;
@@ -215,7 +215,8 @@ public sealed partial class PluginConfigPage : Page
         try
         {
             var content = BuildIniContent(_currentGeneralInfo, _currentOptionsList);
-            await File.WriteAllTextAsync(_pluginItem.ConfigFilePath, content);
+            
+            await File.WriteAllTextAsync(_pluginItem.ConfigFilePath, content, Encoding.UTF8);
         }
         catch (Exception ex)
         {

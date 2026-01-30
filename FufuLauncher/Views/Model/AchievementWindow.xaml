@@ -19,10 +19,6 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
                 <TextBlock Text="成就追踪" 
@@ -43,9 +39,7 @@
                   BorderThickness="0,0,1,0" 
                   Background="{ThemeResource LayerFillColorDefaultBrush}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
 
                 <TextBlock Text="成就分类" 
                            Style="{StaticResource SubtitleTextBlockStyle}" 
@@ -59,50 +53,62 @@
                           Padding="12,0"
                           ScrollViewer.VerticalScrollBarVisibility="Auto"
                           ScrollViewer.VerticalScrollMode="Auto">
-<ListView.ItemTemplate>
-    <DataTemplate x:DataType="models:AchievementCategory">
-        <Grid Padding="12,12" CornerRadius="4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,0,0,6">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <Image Source="https://act-upload.mihoyo.com/wiki-user-upload/2024/10/14/76362111/27ec1c00c5bb06745e16039a10ff3aaa_2149228895435655987.png"
-                       Width="20" Height="20" 
-                       Margin="0,0,8,0"
-                       VerticalAlignment="Center"/>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="models:AchievementCategory">
+                            <Grid Padding="12,12" CornerRadius="4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Image Source="https://act-upload.mihoyo.com/wiki-user-upload/2024/10/14/76362111/27ec1c00c5bb06745e16039a10ff3aaa_2149228895435655987.png"
+                                           Width="20" Height="20" 
+                                           Margin="0,0,8,0"
+                                           VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Column="1" 
-                           Text="{x:Bind Name}" 
-                           Style="{StaticResource BodyStrongTextBlockStyle}" 
-                           FontFamily="{StaticResource AppGlobalFont}" 
-                           VerticalAlignment="Center"
-                           TextTrimming="CharacterEllipsis"/>
-                
-                <TextBlock Grid.Column="2" 
-                           Text="{x:Bind ProgressDisplay, Mode=OneWay}" 
-                           Style="{StaticResource CaptionTextBlockStyle}" 
-                           FontFamily="{StaticResource AppGlobalFont}" 
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
-                           VerticalAlignment="Center"
-                           Margin="8,0,0,0"/>
-            </Grid>
-            <ProgressBar Grid.Row="1" Minimum="0" Height="3"
-                         Maximum="{x:Bind TotalCount, Mode=OneWay}"
-                         Value="{x:Bind CompletedCount, Mode=OneWay}"
-                         Background="{ThemeResource CardStrokeColorDefaultBrush}"
-                         Foreground="{ThemeResource SystemAccentColor}"
-                         HorizontalAlignment="Stretch"/>
-        </Grid>
-    </DataTemplate>
-</ListView.ItemTemplate>
+                                    <TextBlock Grid.Column="1" 
+                                               Text="{x:Bind Name}" 
+                                               Style="{StaticResource BodyStrongTextBlockStyle}" 
+                                               FontFamily="{StaticResource AppGlobalFont}" 
+                                               VerticalAlignment="Center"
+                                               TextTrimming="CharacterEllipsis"/>
+                                    
+                                    <TextBlock Grid.Column="2" 
+                                               Text="{x:Bind ProgressDisplay, Mode=OneWay}" 
+                                               Style="{StaticResource CaptionTextBlockStyle}" 
+                                               FontFamily="{StaticResource AppGlobalFont}" 
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                                               VerticalAlignment="Center"
+                                               Margin="8,0,0,0"/>
+                                </Grid>
+                                <ProgressBar Grid.Row="1" Minimum="0" Height="3"
+                                             Maximum="{x:Bind TotalCount, Mode=OneWay}"
+                                             Value="{x:Bind CompletedCount, Mode=OneWay}"
+                                             Background="{ThemeResource CardStrokeColorDefaultBrush}"
+                                             Foreground="{ThemeResource SystemAccentColor}"
+                                             HorizontalAlignment="Stretch"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
+
+                <Border Grid.Row="2" 
+                        Padding="16" 
+                        BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" 
+                        BorderThickness="0,1,0,0">
+                    <Button Content="导入脚本" 
+                            Click="ToggleImportPanel" 
+                            HorizontalAlignment="Center"
+                            Style="{StaticResource AccentButtonStyle}" 
+                            FontFamily="{StaticResource AppGlobalFont}"
+                            Width="200"/> 
+                </Border>
             </Grid>
 
             <Grid Grid.Column="1" Padding="24,24,24,0">
@@ -207,6 +213,26 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </Grid>
+
+            <Grid Grid.ColumnSpan="2"
+                  Visibility="{x:Bind ViewModel.IsImportPanelVisible, Mode=OneWay}"
+                  Background="{ThemeResource SolidBackgroundFillColorBaseBrush}" IsHitTestVisible="True"
+                  VerticalAlignment="Top" Margin="0,0,0,0" Padding="24"
+                  BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="0,0,0,1">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="导入 Paimon.moe 脚本" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="{StaticResource AppGlobalFont}"/>
+                    <TextBlock Text="请粘贴来自扫描工具的完整 JavaScript 代码：" Style="{StaticResource BodyTextBlockStyle}" FontFamily="{StaticResource AppGlobalFont}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    
+                    <TextBox Text="{x:Bind ViewModel.ImportScriptContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True" Height="180" FontFamily="Consolas" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             PlaceholderText="在此处粘贴代码 (例如: const data = ...)"/>
+                    
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <Button Content="执行并同步" Click="OnExecuteImportScript" Style="{StaticResource AccentButtonStyle}" FontFamily="{StaticResource AppGlobalFont}"/>
+                        <Button Content="取消" Click="ToggleImportPanel" FontFamily="{StaticResource AppGlobalFont}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
 
             <Grid x:Name="WebViewContainer" Opacity="0" IsHitTestVisible="False" 
