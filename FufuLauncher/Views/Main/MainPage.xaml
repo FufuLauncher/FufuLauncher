@@ -111,7 +111,7 @@
                       PointerEntered="InfoCard_PointerEntered"
                       PointerExited="InfoCard_PointerExited"
                       x:Name="InfoCardGrid"
-                      Translation="0,0,48">
+                      Translation="0,0,32">
                     
                     <Grid.Shadow>
                         <ThemeShadow />
@@ -209,7 +209,7 @@
                       BorderThickness="1" 
                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                       Background="{StaticResource IosGlassBrush}"
-                      Translation="0,0,48">
+                      Translation="0,0,32">
                     
                     <Grid.Shadow>
                         <ThemeShadow />

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using FufuLauncher.Models;
@@ -16,6 +17,7 @@ public class PluginViewModel : INotifyPropertyChanged
     private string _statusMessage;
     private bool _isLoading;
     private bool _isEmpty;
+    public event EventHandler<string>? DuplicateDetected;
 
     public ObservableCollection<PluginItem> Plugins
     {
@@ -89,8 +91,6 @@ public class PluginViewModel : INotifyPropertyChanged
         DeletePluginCommand = new RelayCommand<PluginItem>(DeletePlugin);
         SortCommand = new RelayCommand<string>(SortPlugins);
         OpenFolderCommand = new RelayCommand(OpenPluginFolder);
-
-        LoadPlugins();
     }
 
     private void EnsureDirectoryExists()
@@ -159,7 +159,8 @@ public class PluginViewModel : INotifyPropertyChanged
 
             var rootDir = new DirectoryInfo(_pluginsPath);
             var subDirs = rootDir.GetDirectories();
-
+            var nameConflictTracker = new Dictionary<string, List<string>>();
+            
             foreach (var dir in subDirs)
             {
                 var dllFile = dir.GetFiles("*.dll").FirstOrDefault();
@@ -184,6 +185,11 @@ public class PluginViewModel : INotifyPropertyChanged
                     if (!string.IsNullOrEmpty(info.Developer)) developer = info.Developer;
                     if (!string.IsNullOrEmpty(info.Description)) description = info.Description;
                 }
+                if (!nameConflictTracker.ContainsKey(displayName))
+                {
+                    nameConflictTracker[displayName] = new List<string>();
+                }
+                nameConflictTracker[displayName].Add(dir.Name);
 
                 Plugins.Add(new PluginItem
                 {
@@ -200,6 +206,7 @@ public class PluginViewModel : INotifyPropertyChanged
                 });
             }
             StatusMessage = $"加载完成，共 {Plugins.Count} 个插件";
+            CheckForDuplicates(nameConflictTracker);
         }
         catch (Exception ex)
         {
@@ -212,25 +219,28 @@ public class PluginViewModel : INotifyPropertyChanged
             UpdateIsEmpty();
         }
     }
-
-    public async Task SaveConfigAsync(PluginItem item, string content)
+    private void CheckForDuplicates(Dictionary<string, List<string>> tracker)
     {
-        if (item == null || string.IsNullOrEmpty(item.ConfigFilePath)) return;
-        try
+        var duplicates = tracker.Where(kv => kv.Value.Count > 1).ToList();
+
+        if (duplicates.Any())
         {
-            await File.WriteAllTextAsync(item.ConfigFilePath, content);
+            StringBuilder sb = new();
+            sb.AppendLine("检测到以下重复插件：\n");
 
-            var info = GetPluginInfoFromConfig(item.ConfigFilePath);
-            if (!string.IsNullOrEmpty(info.Name)) item.DisplayName = info.Name;
-
-            item.Developer = info.Developer ?? "";
-            item.Description = info.Description ?? "";
-
-            StatusMessage = "配置已保存";
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"保存配置失败: {ex.Message}";
+            foreach (var item in duplicates)
+            {
+                sb.AppendLine($"插件名称：{item.Key}");
+                sb.AppendLine($"   冲突文件夹：");
+                foreach (var folder in item.Value)
+                {
+                    sb.AppendLine($"    - {folder}");
+                }
+                sb.AppendLine();
+            }
+            sb.AppendLine("建议手动删除旧版本插件");
+            
+            DuplicateDetected?.Invoke(this, sb.ToString());
         }
     }
 

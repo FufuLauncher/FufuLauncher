@@ -81,6 +81,7 @@
         </Grid>
 
         <CommandBar Grid.Row="1" DefaultLabelPosition="Right" Background="Transparent" IsOpen="False">
+            <AppBarButton Icon="Download" Label="获取插件" Click="OnGetPluginsClick"/>
             <AppBarButton Icon="Add" Label="添加插件" Command="{x:Bind ViewModel.AddPluginCommand}"/>
             <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind ViewModel.RefreshCommand}"/>
             <AppBarButton Icon="Folder" Label="打开文件夹" Command="{x:Bind ViewModel.OpenFolderCommand}"/>
@@ -163,7 +164,10 @@
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
                                 ToolTipService.ToolTip="编辑配置文件">
-                            <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
+                                <TextBlock Text="插件设置" VerticalAlignment="Center" FontSize="12"/>
+                            </StackPanel>
                         </Button>
 
                         <TextBlock Grid.Column="3" 
