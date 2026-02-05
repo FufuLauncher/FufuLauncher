@@ -114,9 +114,13 @@ public sealed partial class PanelPage
         }
     }
 
-    private void PanelPage_Loaded(object sender, RoutedEventArgs e)
+    private async void PanelPage_Loaded(object sender, RoutedEventArgs e)
     {
         EntranceStoryboard.Begin();
+        
+        await Task.Delay(600);
+        
+        await ViewModel.LoadSavedGachaDataAsync();
     }
 
     private async Task StartScrapingSequenceAsync()

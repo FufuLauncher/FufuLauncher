@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.ComponentModel;
+using System.Diagnostics;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
@@ -264,6 +265,13 @@ private async void SwitchToBilibili_Click(object sender, RoutedEventArgs e)
         ViewModel = App.GetService<MainViewModel>();
         DataContext = ViewModel;
         InitializeComponent();
+        
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+        
+        Loaded += (_, _) => 
+        {
+            LaunchButtonOverlayBorder.Opacity = ViewModel.IsGameRunning ? 0.0 : 1.0;
+        };
 
         OpenLinkCommand = new XamlUICommand();
         OpenLinkCommand.ExecuteRequested += (sender, args) =>
@@ -274,6 +282,35 @@ private async void SwitchToBilibili_Click(object sender, RoutedEventArgs e)
             }
         };
 
+    }
+    
+    private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(MainViewModel.IsGameRunning))
+        {
+            AnimateLaunchButtonOverlay(ViewModel.IsGameRunning ? 0.0 : 1.0);
+        }
+    }
+    
+
+    private void AnimateLaunchButtonOverlay(double toOpacity)
+    {
+        if (LaunchButtonOverlayBorder.Opacity == toOpacity) return;
+
+        var storyboard = new Storyboard();
+        var animation = new DoubleAnimation
+        {
+            To = toOpacity,
+            Duration = new Duration(TimeSpan.FromSeconds(1.5)), 
+            
+            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+        };
+
+        Storyboard.SetTarget(animation, LaunchButtonOverlayBorder);
+        Storyboard.SetTargetProperty(animation, "Opacity");
+
+        storyboard.Children.Add(animation);
+        storyboard.Begin();
     }
 
     protected override void OnNavigatedTo(NavigationEventArgs e)

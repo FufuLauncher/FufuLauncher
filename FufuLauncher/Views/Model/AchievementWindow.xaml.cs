@@ -45,20 +45,15 @@ public sealed partial class AchievementWindow : Window
 
         ViewModel.IsLoading = true;
         ViewModel.StatusMessage = "正在执行导入脚本...";
-        _isImporting = true; // 标记开始导入流程
-
+        _isImporting = true;
         try
         {
-            // 1. 执行用户输入的 JS 脚本
-            // 注意：通常这些脚本会修改 localStorage，但不会立即更新 UI
             string result = await _crawlerWebView.ExecuteScriptAsync(ViewModel.ImportScriptContent);
             
             Debug.WriteLine($"脚本执行结果: {result}");
-
-            // 2. 脚本执行后，通常需要刷新页面才能让 paimon.moe 读取新的 LocalStorage 并渲染
+            
             ViewModel.StatusMessage = "脚本执行完毕，正在刷新页面以应用更改...";
             
-            // 触发刷新，这会再次触发 Crawler_NavigationCompleted
             _crawlerWebView.Reload();
         }
         catch (Exception ex)
@@ -72,8 +67,7 @@ public sealed partial class AchievementWindow : Window
     private async Task LoadCategoryDataAsync(AchievementCategory category)
     {
         if (category == null) return;
-
-        // 1. 尝试加载本地数据
+        
         if (_localData.AchievementData.ContainsKey(category.Name))
         {
             var localItems = _localData.AchievementData[category.Name];
@@ -87,8 +81,7 @@ public sealed partial class AchievementWindow : Window
             UpdateCategoryProgress(category);
             return;
         }
-
-        // 2. 本地没有，尝试从网页抓取
+        
         ViewModel.IsLoading = true;
 
         string clickScript = $@"
@@ -255,12 +248,11 @@ public sealed partial class AchievementWindow : Window
 
         if (ViewModel.Categories.Count == 0 || _isImporting)
         {
-            if (_isImporting) await Task.Delay(2000); // 导入后的缓冲
-            else await Task.Delay(2000); // 初次加载的缓冲
+            if (_isImporting) await Task.Delay(2000);
+            else await Task.Delay(2000);
 
             await ScrapeCategoriesAsync();
-
-            // [修复] 这里不再调用 OnCategorySelectionChanged，而是调用新方法
+            
             if (_isImporting && ViewModel.SelectedCategory != null)
             {
                 await LoadCategoryDataAsync(ViewModel.SelectedCategory);
@@ -273,8 +265,7 @@ public sealed partial class AchievementWindow : Window
             ViewModel.IsLoading = false;
         }
     }
-
-    // [新增] 切换导入面板显示的辅助方法 (绑定到界面上的“导入”按钮)
+    
     private void ToggleImportPanel(object sender, RoutedEventArgs e)
     {
         ViewModel.IsImportPanelVisible = !ViewModel.IsImportPanelVisible;
@@ -347,13 +338,11 @@ public sealed partial class AchievementWindow : Window
             Debug.WriteLine($"Scrape Categories Failed: {ex.Message}");
         }
     }
-
-// 修改原有的事件处理函数
+    
     private async void OnCategorySelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (ViewModel.SelectedCategory != null)
         {
-            // 调用提取出来的方法
             await LoadCategoryDataAsync(ViewModel.SelectedCategory);
         }
     }

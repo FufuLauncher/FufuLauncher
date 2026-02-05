@@ -93,17 +93,17 @@ public partial class ControlPanelModel : ObservableObject
 
         LoadConfig();
 
-        _ = LoadSavedGachaDataAsync();
-
         _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
     }
 
-    private async Task LoadSavedGachaDataAsync()
+    public async Task LoadSavedGachaDataAsync()
     {
         if (!File.Exists(_gachaDataPath)) return;
 
         try
         {
+             if (_cachedCharacterLogs.Count > 0) { RefreshUIFromCache(); return; }
+
             var json = await File.ReadAllTextAsync(_gachaDataPath);
             var data = JsonSerializer.Deserialize<LocalGachaData>(json);
 
@@ -508,12 +508,9 @@ public partial class ControlPanelModel : ObservableObject
         var stats = new WeeklyPlayTimeStats();
         var today = DateTime.Now.Date;
         double totalSeconds = 0;
-
-        // 修改循环：过去30天（包含今天）
-        // 使用倒序 (0 to 29)，这样列表最上方显示的是"今天"，最下方是"30天前"
+        
         for (int i = 0; i < 30; i++)
         {
-            // 这里的 i 代表"几天前"
             var date = today.AddDays(-i);
             var dateKey = date.ToString("yyyy-MM-dd");
 
@@ -529,8 +526,7 @@ public partial class ControlPanelModel : ObservableObject
         }
 
         stats.TotalHours = totalSeconds / 3600.0;
-    
-        // 计算日均：除以实际有游玩记录的天数，或者除以30天（取决于你的业务需求，这里保持原逻辑：除以有记录的天数）
+        
         stats.AverageHours = stats.DailyRecords.Count > 0 ? stats.TotalHours / stats.DailyRecords.Count : 0;
 
         App.MainWindow.DispatcherQueue.TryEnqueue(() => WeeklyStats = stats);

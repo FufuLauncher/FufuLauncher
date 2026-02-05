@@ -111,7 +111,7 @@
                       PointerEntered="InfoCard_PointerEntered"
                       PointerExited="InfoCard_PointerExited"
                       x:Name="InfoCardGrid"
-                      Translation="0,0,32">
+                      Translation="0,0,48">
                     
                     <Grid.Shadow>
                         <ThemeShadow />
@@ -128,9 +128,18 @@
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
-                                        <Image Source="{Binding Image.Url}" Stretch="UniformToFill" 
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <Button Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                        <Image Source="{Binding Image.Url}" 
+                                               Stretch="UniformToFill" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"
+                                               RenderTransformOrigin="0.5,0.5">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleX="1.005" ScaleY="1.005"/>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                        <Button Background="Transparent"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch"
                                                 Command="{Binding ElementName=MainPageRoot, Path=OpenLinkCommand}"
                                                 CommandParameter="{Binding Image.Link}"/>
                                     </Grid>
@@ -200,7 +209,7 @@
                       BorderThickness="1" 
                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                       Background="{StaticResource IosGlassBrush}"
-                      Translation="0,0,32">
+                      Translation="0,0,48">
                     
                     <Grid.Shadow>
                         <ThemeShadow />
@@ -315,7 +324,7 @@
                     BorderThickness="0"
                     PointerEntered="ScreenshotButton_PointerEntered"
                     PointerExited="ScreenshotButton_PointerExited"
-                    Translation="0,0,32">
+                    Translation="0,0,0">
                 
                 <Button.Shadow>
                     <ThemeShadow />
@@ -346,7 +355,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     CornerRadius="24"
-                    Translation="0,0,32">
+                    Translation="0,0,48">
                  
                 <Button.ContextFlyout>
                     <MenuFlyout>
@@ -365,7 +374,7 @@
                             BorderThickness="1"
                             CornerRadius="24"/>
 
-                    <Border CornerRadius="24">
+                    <Border x:Name="LaunchButtonOverlayBorder" CornerRadius="24">
                         <Border.Background>
                             <SolidColorBrush Color="#0078D7" Opacity="0.4"/>
                         </Border.Background>

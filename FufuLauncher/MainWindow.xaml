@@ -144,12 +144,6 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="养成计算" Tag="FufuLauncher.ViewModels.CalculatorViewModel">
-                    <NavigationViewItem.Icon>
-                         <FontIcon Glyph="&#xE8EF;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                
                 <NavigationViewItem Content="插件管理" Tag="FufuLauncher.ViewModels.PluginViewModel">
                     <NavigationViewItem.Icon>
                          <FontIcon Glyph="&#xE7B5;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
