@@ -86,7 +86,7 @@ public sealed partial class PluginPage : Page
     
     private void MoveDirectorySafe(string sourceDir, string destDir)
     {
-        if (Path.GetPathRoot(sourceDir).Equals(Path.GetPathRoot(destDir), StringComparison.OrdinalIgnoreCase))
+        if (Path.GetPathRoot(sourceDir)!.Equals(Path.GetPathRoot(destDir), StringComparison.OrdinalIgnoreCase))
         {
             Directory.Move(sourceDir, destDir);
             return;
@@ -138,7 +138,7 @@ public sealed partial class PluginPage : Page
         
         var stackPanel = new StackPanel { Spacing = 10 };
         
-        var rbLatest = new RadioButton { Content = "下载最新体验版插件(功能最多)", IsChecked = true, GroupName = "PluginSelect", Tag = urlLatest };
+        var rbLatest = new RadioButton { Content = "下载最新体验版插件(功能最多，但是不稳)", IsChecked = true, GroupName = "PluginSelect", Tag = urlLatest };
         var rbOld = new RadioButton { Content = "下载过往长期支持插件(非常建议，稳定！)", GroupName = "PluginSelect", Tag = urlOld };
         var rbHotSwitch = new RadioButton { Content = "下载手柄热切换插件", GroupName = "PluginSelect", Tag = urlHotSwitch };
         
@@ -151,7 +151,7 @@ public sealed partial class PluginPage : Page
         };
         
         rbCustom.Checked += (_, _) => txtCustomUrl.Visibility = Visibility.Visible;
-        rbCustom.Unchecked += (s, args) => txtCustomUrl.Visibility = Visibility.Collapsed;
+        rbCustom.Unchecked += (_, _) => txtCustomUrl.Visibility = Visibility.Collapsed;
 
         stackPanel.Children.Add(new TextBlock { Text = "请选择要下载并安装的插件包：", Margin = new Thickness(0, 0, 0, 5) });
         stackPanel.Children.Add(rbLatest);
@@ -220,7 +220,7 @@ public sealed partial class PluginPage : Page
         {
             rawGithubUrl += "?raw=true";
         }
-
+        
         string tempPath = Path.Combine(Path.GetTempPath(), fileName);
         string extractPath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(fileName) + "_Extract_" + Guid.NewGuid());
         string pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
@@ -249,6 +249,8 @@ public sealed partial class PluginPage : Page
 
         try
         {
+            if (File.Exists(tempPath)) File.Delete(tempPath);
+
             using (var client = new HttpClient { Timeout = TimeSpan.FromMinutes(5) })
             {
                 HttpResponseMessage response;
@@ -278,7 +280,7 @@ public sealed partial class PluginPage : Page
                     var totalRead = 0L;
                     var buffer = new byte[8192];
                     var isMoreToRead = true;
-
+                    
                     using (var stream = await response.Content.ReadAsStreamAsync())
                     using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, true))
                     {
@@ -307,11 +309,13 @@ public sealed partial class PluginPage : Page
             statusText.Text = "正在解压...";
             progressBar.IsIndeterminate = true;
             await Task.Delay(500); 
-
+            
             if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
             Directory.CreateDirectory(extractPath);
 
             await Task.Run(() => ZipFile.ExtractToDirectory(tempPath, extractPath));
+            
+            try { File.Delete(tempPath); } catch { }
             
             statusText.Text = "正在安装...";
             
@@ -341,10 +345,11 @@ public sealed partial class PluginPage : Page
             
             await Task.Run(() => MoveDirectorySafe(sourceDirToMove, finalDestDir));
             
-            if (sourceDirToMove == extractPath)
+            try 
             {
-                extractPath = null;
-            }
+                if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
+            } 
+            catch { }
 
             ViewModel.StatusMessage = $"{targetFolderName} 安装成功！";
             ViewModel.LoadPlugins();
@@ -373,7 +378,7 @@ public sealed partial class PluginPage : Page
             try
             {
                 if (File.Exists(tempPath)) File.Delete(tempPath);
-                if (extractPath != null && Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
+                if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
             }
             catch { }
         }

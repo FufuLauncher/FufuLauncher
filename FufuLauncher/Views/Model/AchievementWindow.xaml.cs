@@ -52,8 +52,7 @@ public sealed partial class AchievementWindow : Window
         if (!Directory.Exists(_archivesDir)) Directory.CreateDirectory(_archivesDir);
     
         _profileRecordPath = Path.Combine(docPath, "current_profile.txt");
-    
-        // 读取当前存档名称
+        
         if (File.Exists(_profileRecordPath))
         {
             CurrentProfileName = File.ReadAllText(_profileRecordPath).Trim();
@@ -1297,7 +1296,7 @@ private void AddToNameMap(Dictionary<string, List<AchievementItem>> map, Achieve
                 WriteIndented = true,
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping 
             };
-            string json = JsonSerializer.Serialize(categoriesToSave, options);
+            var json = JsonSerializer.Serialize(categoriesToSave, options);
             File.WriteAllText(_workFilePath, json);
         }
         catch (Exception ex)

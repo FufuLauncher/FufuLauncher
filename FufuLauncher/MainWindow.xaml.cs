@@ -360,6 +360,10 @@ public sealed partial class MainWindow : WindowEx
 
     private async void CheckAndWarnUacElevation()
     {
+        var ignoreFilePath = Path.Combine(AppContext.BaseDirectory, ".no_uac_warning");
+        
+        if (File.Exists(ignoreFilePath)) return;
+
         if (IsUacElevatedWithConsent())
         {
             if (Content is FrameworkElement rootElement)
@@ -375,15 +379,29 @@ public sealed partial class MainWindow : WindowEx
                     rootElement.Loaded += OnLoaded;
                     if (rootElement.XamlRoot == null) await tcs.Task;
                 }
-
+                
                 ContentDialog dialog = new()
                 {
                     XamlRoot = rootElement.XamlRoot,
                     Title = "权限警告",
                     Content = "程序正以管理员身份运行，可能会影响部分功能。",
+                    PrimaryButtonText = "不再显示",
                     CloseButtonText = "我知道了",
                     DefaultButton = ContentDialogButton.Close
                 };
+                
+                dialog.PrimaryButtonClick += (_, _) =>
+                {
+                    try
+                    {
+                        File.Create(ignoreFilePath).Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"创建忽略文件失败: {ex.Message}");
+                    }
+                };
+
                 try { await dialog.ShowAsync(); } catch { }
             }
         }

@@ -89,6 +89,8 @@
                                           FallbackColor="#E6151515"/>
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
+                    
+                    <FontFamily x:Key="ActionIconFont">Segoe Fluent Icons, Segoe MDL2 Assets, Segoe UI Symbol</FontFamily>
 
                     <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
                     <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
@@ -116,59 +118,60 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="主页" Tag="FufuLauncher.ViewModels.MainViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE80F;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE80F;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
                 <NavigationViewItem Content="控制面板" Tag="FufuLauncher.ViewModels.ControlPanelModel">
                     <NavigationViewItem.Icon>
-                         <FontIcon Glyph="&#xE80A;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE80A;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
                 <NavigationViewItem Content="游戏设置" Tag="FufuLauncher.ViewModels.BlankViewModel">
                     <NavigationViewItem.Icon>
-                         <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE7FC;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
                 <NavigationViewItem Content="账户设置" Tag="FufuLauncher.ViewModels.AccountViewModel">
                     <NavigationViewItem.Icon>
-                         <FontIcon Glyph="&#xE77B;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE77B;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
                 <NavigationViewItem Content="其他功能" Tag="FufuLauncher.ViewModels.OtherViewModel">
                     <NavigationViewItem.Icon>
-                         <FontIcon Glyph="&#xE71D;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE71D;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
                 <NavigationViewItem Content="插件管理" Tag="FufuLauncher.ViewModels.PluginViewModel">
                     <NavigationViewItem.Icon>
-                         <FontIcon Glyph="&#xE7B5;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE7B5;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
                 <NavigationViewItem Content="数据中心" Tag="FufuLauncher.ViewModels.DataViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE9D9;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                        <FontIcon Glyph="&#xE9D9;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem Content="设置中心" Tag="FufuLauncher.ViewModels.SettingsViewModel">
-                     <NavigationViewItem.Icon>
+                    <NavigationViewItem.Icon>
                         <FontIcon x:Name="SettingsIcon" 
-                                  Glyph="&#xE713;" FontFamily="Segoe Fluent Icons" 
+                                  Glyph="&#xE713;"
+                                  FontFamily="{StaticResource ActionIconFont}" 
                                   FontSize="24"
                                   RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <RotateTransform x:Name="SettingsIconRotation" Angle="0"/>
                             </FontIcon.RenderTransform>
                         </FontIcon>
-                     </NavigationViewItem.Icon>
+                    </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.FooterMenuItems>
 
