@@ -215,12 +215,32 @@ public sealed partial class PluginConfigPage : Page
         try
         {
             var content = BuildIniContent(_currentGeneralInfo, _currentOptionsList);
-            
+        
             await File.WriteAllTextAsync(_pluginItem.ConfigFilePath, content, Encoding.UTF8);
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"AutoSave Failed: {ex.Message}");
+            
+            if (Content != null && Content.XamlRoot != null)
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "保存配置失败",
+                    Content = $"无法保存文件，请检查文件是否被占用或只读\n\n错误详情：{ex.Message}",
+                    CloseButtonText = "知道了",
+                    XamlRoot = Content.XamlRoot
+                };
+
+                try
+                {
+                    await dialog.ShowAsync();
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            }
         }
     }
 

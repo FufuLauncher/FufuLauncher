@@ -149,6 +149,12 @@
                          <FontIcon Glyph="&#xE7B5;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                
+                <NavigationViewItem Content="数据中心" Tag="FufuLauncher.ViewModels.DataViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE9D9;" FontFamily="Segoe Fluent Icons" FontSize="24"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>

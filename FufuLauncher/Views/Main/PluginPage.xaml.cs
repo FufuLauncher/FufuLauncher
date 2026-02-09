@@ -76,10 +76,40 @@ public sealed partial class PluginPage : Page
     {
         EntranceStoryboard.Begin();
         
+        GetPluginsBtnAnimation.Begin();
+        
         if (ViewModel.Plugins.Count == 0) 
         {
             ViewModel.LoadPlugins();
         }
+    }
+    
+    private void MoveDirectorySafe(string sourceDir, string destDir)
+    {
+        if (Path.GetPathRoot(sourceDir).Equals(Path.GetPathRoot(destDir), StringComparison.OrdinalIgnoreCase))
+        {
+            Directory.Move(sourceDir, destDir);
+            return;
+        }
+        
+        if (!Directory.Exists(destDir))
+        {
+            Directory.CreateDirectory(destDir);
+        }
+        
+        foreach (var file in Directory.GetFiles(sourceDir))
+        {
+            string destFile = Path.Combine(destDir, Path.GetFileName(file));
+            File.Copy(file, destFile, true);
+        }
+        
+        foreach (var dir in Directory.GetDirectories(sourceDir))
+        {
+            string destSubDir = Path.Combine(destDir, Path.GetFileName(dir));
+            MoveDirectorySafe(dir, destSubDir);
+        }
+        
+        Directory.Delete(sourceDir, true);
     }
 
     private void OnPluginToggled(object sender, RoutedEventArgs e)
@@ -108,8 +138,8 @@ public sealed partial class PluginPage : Page
         
         var stackPanel = new StackPanel { Spacing = 10 };
         
-        var rbLatest = new RadioButton { Content = "下载最新体验版插件", IsChecked = true, GroupName = "PluginSelect", Tag = urlLatest };
-        var rbOld = new RadioButton { Content = "下载过往精简长期支持插件", GroupName = "PluginSelect", Tag = urlOld };
+        var rbLatest = new RadioButton { Content = "下载最新体验版插件(功能最多)", IsChecked = true, GroupName = "PluginSelect", Tag = urlLatest };
+        var rbOld = new RadioButton { Content = "下载过往长期支持插件(非常建议，稳定！)", GroupName = "PluginSelect", Tag = urlOld };
         var rbHotSwitch = new RadioButton { Content = "下载手柄热切换插件", GroupName = "PluginSelect", Tag = urlHotSwitch };
         
         var rbCustom = new RadioButton { Content = "自定义插件链接", GroupName = "PluginSelect", Tag = "Custom" };
@@ -119,9 +149,8 @@ public sealed partial class PluginPage : Page
             Visibility = Visibility.Collapsed,
             Margin = new Thickness(28, 0, 0, 0)
         };
-
-        // 处理自定义输入框的显示/隐藏逻辑
-        rbCustom.Checked += (s, args) => txtCustomUrl.Visibility = Visibility.Visible;
+        
+        rbCustom.Checked += (_, _) => txtCustomUrl.Visibility = Visibility.Visible;
         rbCustom.Unchecked += (s, args) => txtCustomUrl.Visibility = Visibility.Collapsed;
 
         stackPanel.Children.Add(new TextBlock { Text = "请选择要下载并安装的插件包：", Margin = new Thickness(0, 0, 0, 5) });
@@ -310,14 +339,11 @@ public sealed partial class PluginPage : Page
                 Directory.Delete(finalDestDir, true);
             }
             
+            await Task.Run(() => MoveDirectorySafe(sourceDirToMove, finalDestDir));
+            
             if (sourceDirToMove == extractPath)
             {
-                Directory.Move(extractPath, finalDestDir);
                 extractPath = null;
-            }
-            else
-            {
-                Directory.Move(sourceDirToMove, finalDestDir);
             }
 
             ViewModel.StatusMessage = $"{targetFolderName} 安装成功！";

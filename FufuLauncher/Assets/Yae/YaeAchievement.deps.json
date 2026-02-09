@@ -1,0 +1,79 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0/win-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {},
+    ".NETCoreApp,Version=v9.0/win-x64": {
+      "YaeAchievement/1.0.0": {
+        "dependencies": {
+          "Google.Protobuf": "3.30.2",
+          "Sentry": "5.13.0",
+          "Spectre.Console": "0.50.1-preview.0.22"
+        },
+        "runtime": {
+          "YaeAchievement.dll": {}
+        },
+        "resources": {
+          "zh/YaeAchievement.resources.dll": {
+            "locale": "zh"
+          }
+        }
+      },
+      "Google.Protobuf/3.30.2": {
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "assemblyVersion": "3.30.2.0",
+            "fileVersion": "3.30.2.0"
+          }
+        }
+      },
+      "Sentry/5.13.0": {
+        "runtime": {
+          "lib/net9.0/Sentry.dll": {
+            "assemblyVersion": "5.13.0.0",
+            "fileVersion": "5.13.0.0"
+          }
+        }
+      },
+      "Spectre.Console/0.50.1-preview.0.22": {
+        "runtime": {
+          "lib/net9.0/Spectre.Console.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.50.1.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "YaeAchievement/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Google.Protobuf/3.30.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Y2aOVLIt75yeeEWigg9V9YnjsEm53sADtLGq0gLhwaXpk3iu8tYSoauolyhenagA2sWno2TQ2WujI0HQd6s1Vw==",
+      "path": "google.protobuf/3.30.2",
+      "hashPath": "google.protobuf.3.30.2.nupkg.sha512"
+    },
+    "Sentry/5.13.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gmD7k2+EV3Or3ekcYrxNwS6XusZrKdxkWneZ2vFlXgUSCGeXB4I59d4XP/wT/93jc/vSA8xCf4HyI6xU/SZnPw==",
+      "path": "sentry/5.13.0",
+      "hashPath": "sentry.5.13.0.nupkg.sha512"
+    },
+    "Spectre.Console/0.50.1-preview.0.22": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XJMt0YhWGiqLekgG93HIEqHMPfMGZZj7cPgUPSsi3DsdZcc3oQGvGR6q2VAcdOCNQ81h4Q5IAbSxarTPczZP9Q==",
+      "path": "spectre.console/0.50.1-preview.0.22",
+      "hashPath": "spectre.console.0.50.1-preview.0.22.nupkg.sha512"
+    }
+  }
+}

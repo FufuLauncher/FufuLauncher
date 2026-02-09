@@ -6,237 +6,330 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FufuLauncher.Models"
     mc:Ignorable="d"
-    Title="成就追踪">
+    Title="成就管理">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FF1E1E1E">
         <Grid.Resources>
-            <FontFamily x:Key="AppGlobalFont">/Assets/zh-cn-l.ttf#SDK_SC_Web</FontFamily>
+            <SolidColorBrush x:Key="AppBackground" Color="#FF1E1E1E"/>
+            <SolidColorBrush x:Key="CardBackground" Color="#FF2D2D30"/>
+            <SolidColorBrush x:Key="CardBorder" Color="#FF3E3E42"/>
+            <SolidColorBrush x:Key="HighlightColor" Color="#FFECECEC"/>
+            <SolidColorBrush x:Key="SubTextColor" Color="#FFAAAAAA"/>
+            
+            <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Foreground" Value="{StaticResource HighlightColor}"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="CornerRadius" Value="4"/>
+            </Style>
+
+<DataTemplate x:Key="AchievementCardTemplate" x:DataType="models:AchievementItem">
+                <Grid Background="{StaticResource CardBackground}" CornerRadius="6" Padding="12" Opacity="{x:Bind Opacity, Mode=OneWay}" 
+                      BorderBrush="{StaticResource CardBorder}" BorderThickness="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Source="{x:Bind SafeItemIconUrl}" Width="48" Height="48" VerticalAlignment="Center" Margin="0,0,16,0"/>
+
+                    <Border Grid.Column="1" Background="#33000000" CornerRadius="4" Padding="8" VerticalAlignment="Top" Margin="0,0,16,0">
+                        <StackPanel>
+                            <Image Source="{x:Bind SafePrimogemUrl}" Width="20" Height="20" Margin="0,0,0,4"/>
+                            <TextBlock Text="{x:Bind RewardCount}" Foreground="{StaticResource HighlightColor}" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+
+                    <StackPanel Grid.Column="2" Spacing="4" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="{x:Bind Title}" Foreground="{StaticResource HighlightColor}" FontWeight="Bold" FontSize="14"/>
+                            <Border Background="#33FFFF00" CornerRadius="2" Padding="4,0" VerticalAlignment="Center" Visibility="{x:Bind ProgressVisibility, Mode=OneWay}">
+                                <TextBlock Text="{x:Bind ProgressText, Mode=OneWay}" FontSize="10" Foreground="#FFFFCC00"/>
+                            </Border>
+                            <Border Background="#33FFFFFF" CornerRadius="2" Padding="4,0" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind Version}" FontSize="10" Foreground="{StaticResource SubTextColor}"/>
+                            </Border>
+                        </StackPanel>
+                        <TextBlock Text="{x:Bind Description}" Foreground="{StaticResource SubTextColor}" FontSize="12" TextWrapping="Wrap" Margin="0,0,8,0"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                        <Button Content="查看攻略" 
+                                FontSize="12" 
+                                Padding="8,4"
+                                Click="OnSearchGuideClick"
+                                ToolTipService.ToolTip="在米游社搜索此成就获取方式"/>
+                        
+                        <CheckBox IsChecked="{x:Bind IsCompleted, Mode=TwoWay}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </DataTemplate>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
+        <Grid x:Name="AppTitleBar" Background="Transparent">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                <TextBlock Text="成就追踪" 
-                           Style="{StaticResource CaptionTextBlockStyle}" 
-                           FontFamily="{StaticResource AppGlobalFont}" 
-                           VerticalAlignment="Center"/>
+                <TextBlock Text="成就档案" FontSize="12" Foreground="{StaticResource SubTextColor}" VerticalAlignment="Center"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="280"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+<Grid Grid.Row="1" Padding="16,0" BorderBrush="{StaticResource CardBorder}" BorderThickness="0,0,0,1">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/> <ColumnDefinition Width="*"/>    <ColumnDefinition Width="Auto"/> </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0" 
-                  BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" 
-                  BorderThickness="0,0,1,0" 
-                  Background="{ThemeResource LayerFillColorDefaultBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
+    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Spacing="16">
+        <Button Content="{x:Bind ViewModel.ViewToggleIcon, Mode=OneWay}" 
+                FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" 
+                Click="OnToggleViewMode" 
+                Style="{StaticResource ToolbarButtonStyle}" 
+                FontSize="16" 
+                ToolTipService.ToolTip="切换视图"/>
 
-                <TextBlock Text="成就分类" 
-                           Style="{StaticResource SubtitleTextBlockStyle}" 
-                           FontFamily="{StaticResource AppGlobalFont}" 
-                           Margin="20,24,20,16"/>
+        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+            
+            <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="原石：已获得 / 总计">
+                <Image Source="/Assets/Primogem.png" Width="18" Height="18" VerticalAlignment="Center"/> 
+                <TextBlock Text="{x:Bind ViewModel.PrimogemStatText, Mode=OneWay}" Foreground="{StaticResource HighlightColor}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
+            </StackPanel>
 
-                <ListView Grid.Row="1"
+            <Rectangle Width="1" Height="16" Fill="#33FFFFFF" VerticalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="成就进度">
+                <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" Foreground="{StaticResource SubTextColor}" VerticalAlignment="Center" FontSize="14"/>
+                <TextBlock Text="{x:Bind ViewModel.ProgressStatText, Mode=OneWay}" Foreground="{StaticResource SubTextColor}" FontSize="12" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+        </StackPanel>
+    </StackPanel>
+
+    <AutoSuggestBox Grid.Column="1" PlaceholderText="搜索成就名称、描述..." Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" QueryIcon="Find" Margin="20,0" VerticalAlignment="Center" MaxWidth="400"/>
+    
+    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+        <ComboBox ItemsSource="{x:Bind ViewModel.AvailableVersions}" SelectedItem="{x:Bind ViewModel.SelectedVersion, Mode=TwoWay}" PlaceholderText="版本" MinWidth="100" VerticalAlignment="Center"/>
+        <ToggleSwitch IsOn="{x:Bind ViewModel.HideCompleted, Mode=TwoWay}" OnContent="已隐藏完成" OffContent="显示全部" VerticalAlignment="Center" MinWidth="100"/>
+        
+        <Button Click="OnYaeImportClick" VerticalAlignment="Center" Padding="8,5">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon Glyph="&#xE118;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
+                <TextBlock Text="通过Yae导入" FontSize="12"/>
+            </StackPanel>
+        </Button>
+
+        <Button Click="OnYaeImportClick" VerticalAlignment="Center" Padding="8,5">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon Glyph="&#xE11C;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
+                <TextBlock Text="通过Yae导出" FontSize="12"/>
+            </StackPanel>
+        </Button>
+
+        <Button Content="导入记录" Click="OnImportClick" FontSize="12" VerticalAlignment="Center"/>
+
+        <Button Click="OnExportClick" VerticalAlignment="Center" Padding="8,5">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon Glyph="&#xE74E;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
+                <TextBlock Text="手动保存" FontSize="12"/>
+            </StackPanel>
+        </Button>
+        
+        <Border Background="#33FFFFFF" CornerRadius="4" Padding="8,4" Margin="0,0,8,0" VerticalAlignment="Center" ToolTipService.ToolTip="当前存档">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon Glyph="&#xE779;" FontFamily="Segoe Fluent Icons" FontSize="12" Foreground="{StaticResource SubTextColor}"/>
+                <TextBlock Text="{x:Bind CurrentProfileName, Mode=OneWay}" FontSize="12" Foreground="{StaticResource HighlightColor}" MaxWidth="100" TextTrimming="CharacterEllipsis"/>
+            </StackPanel>
+        </Border>
+
+        <Button Click="OnArchiveManageClick" VerticalAlignment="Center" Padding="8,5" Margin="0,0,8,0" ToolTipService.ToolTip="切换或新建存档">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon Glyph="&#xE71C;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
+                <TextBlock Text="存档管理" FontSize="12"/>
+            </StackPanel>
+        </Button>
+        
+        <Button Click="OnUpdateDbClick" ToolTipService.ToolTip="更新数据">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14"/>
+                <TextBlock Text="更新数据" FontSize="12"/>
+            </StackPanel>
+        </Button>
+    </StackPanel>
+</Grid>
+
+        <Grid Grid.Row="2">
+            <GridView x:Name="CategoryGridView"
+                      Visibility="{x:Bind ViewModel.CategoryGridVisibility, Mode=OneWay}"
+                      ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}"
+                      SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnCategoryGridItemClick" Padding="20">
+                <GridView.RenderTransform>
+                    <TranslateTransform x:Name="GridTrans" Y="0"/>
+                </GridView.RenderTransform>
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="models:AchievementCategory">
+                        <Grid Width="200" Height="140" Background="{StaticResource CardBackground}" CornerRadius="8" Padding="16" BorderBrush="{StaticResource CardBorder}" BorderThickness="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{x:Bind SafeIconUrl}" Width="48" Height="48" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock Grid.Row="1" Text="{x:Bind Name}" Foreground="{StaticResource HighlightColor}" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                            <StackPanel Grid.Row="2" Spacing="4">
+                                <ProgressBar Value="{x:Bind ProgressPercent, Mode=OneWay}" Maximum="100" Height="2"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+                                    <TextBlock Text="{x:Bind ProgressDisplay, Mode=OneWay}" FontSize="10" Foreground="{StaticResource SubTextColor}"/>
+                                    <TextBlock Text="{x:Bind ProgressPercentText, Mode=OneWay}" FontSize="10" Foreground="{StaticResource SubTextColor}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <Grid x:Name="DetailView" Visibility="{x:Bind ViewModel.DetailListVisibility, Mode=OneWay}">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="DetailTrans" Y="0"/>
+                </Grid.RenderTransform>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView Grid.Column="0" 
                           ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}"
                           SelectedItem="{x:Bind ViewModel.SelectedCategory, Mode=TwoWay}"
                           SelectionChanged="OnCategorySelectionChanged"
-                          Padding="12,0"
-                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                          ScrollViewer.VerticalScrollMode="Auto">
+                          Background="#FF252526" Padding="0,10">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:AchievementCategory">
-                            <Grid Padding="12,12" CornerRadius="4">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" Margin="0,0,0,6">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <Image Source="https://act-upload.mihoyo.com/wiki-user-upload/2024/10/14/76362111/27ec1c00c5bb06745e16039a10ff3aaa_2149228895435655987.png"
-                                           Width="20" Height="20" 
-                                           Margin="0,0,8,0"
-                                           VerticalAlignment="Center"/>
-
-                                    <TextBlock Grid.Column="1" 
-                                               Text="{x:Bind Name}" 
-                                               Style="{StaticResource BodyStrongTextBlockStyle}" 
-                                               FontFamily="{StaticResource AppGlobalFont}" 
-                                               VerticalAlignment="Center"
-                                               TextTrimming="CharacterEllipsis"/>
-                                    
-                                    <TextBlock Grid.Column="2" 
-                                               Text="{x:Bind ProgressDisplay, Mode=OneWay}" 
-                                               Style="{StaticResource CaptionTextBlockStyle}" 
-                                               FontFamily="{StaticResource AppGlobalFont}" 
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
-                                               VerticalAlignment="Center"
-                                               Margin="8,0,0,0"/>
-                                </Grid>
-                                <ProgressBar Grid.Row="1" Minimum="0" Height="3"
-                                             Maximum="{x:Bind TotalCount, Mode=OneWay}"
-                                             Value="{x:Bind CompletedCount, Mode=OneWay}"
-                                             Background="{ThemeResource CardStrokeColorDefaultBrush}"
-                                             Foreground="{ThemeResource SystemAccentColor}"
-                                             HorizontalAlignment="Stretch"/>
+                            <Grid Padding="8,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{x:Bind SafeIconUrl}" Width="32" Height="32" Margin="0,0,12,0"/>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Name}" Foreground="{StaticResource HighlightColor}" FontSize="13" TextTrimming="CharacterEllipsis"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <TextBlock Text="{x:Bind ProgressDisplay, Mode=OneWay}" Foreground="{StaticResource SubTextColor}" FontSize="11"/>
+                                        <TextBlock Text="{x:Bind ProgressPercentText, Mode=OneWay}" Foreground="{StaticResource SubTextColor}" FontSize="11"/>
+                                    </StackPanel>
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
 
-                <Border Grid.Row="2" 
-                        Padding="16" 
-                        BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" 
-                        BorderThickness="0,1,0,0">
-                    <Button Content="导入脚本" 
-                            Click="ToggleImportPanel" 
-                            HorizontalAlignment="Center"
-                            Style="{StaticResource AccentButtonStyle}" 
-                            FontFamily="{StaticResource AppGlobalFont}"
-                            Width="200"/> 
-                </Border>
-            </Grid>
-
-            <Grid Grid.Column="1" Padding="24,24,24,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,0,0,20">
-                    <TextBlock Text="{x:Bind ViewModel.SelectedCategory.Name, Mode=OneWay, FallbackValue='请选择分类'}" 
-                               Style="{StaticResource TitleTextBlockStyle}"
-                               FontFamily="{StaticResource AppGlobalFont}"/>
-                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                        <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" Width="16" Height="16"/>
-                        <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}" 
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   FontFamily="{StaticResource AppGlobalFont}"
-                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <ListView Grid.Row="1" 
-                          ItemsSource="{x:Bind ViewModel.CurrentAchievements, Mode=OneWay}"
-                          SelectionMode="None"
-                          Padding="0,0,16,24">
+                <ListView Grid.Column="1" 
+                          ItemsSource="{x:Bind ViewModel.FilteredAchievements, Mode=OneWay}"
+                          SelectionMode="None" Padding="20">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Margin" Value="0,0,0,12"/>
+                            <Setter Property="Margin" Value="0,0,0,8"/>
                             <Setter Property="Padding" Value="0"/>
-                            <Setter Property="MinHeight" Value="0"/>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="models:AchievementItem">
-                            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                                    BorderThickness="1" CornerRadius="8" Padding="16">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
+                            <Grid>
+                                <ContentControl 
+                                    Content="{x:Bind}" 
+                                    ContentTemplate="{StaticResource AchievementCardTemplate}"
+                                    Visibility="{x:Bind SingleItemVisibility, Mode=OneWay}"
+                                    HorizontalContentAlignment="Stretch"/>
 
-                                    <Grid Grid.Row="0" Margin="0,0,0,8">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{x:Bind Title}" 
-                                                   Style="{StaticResource SubtitleTextBlockStyle}" 
-                                                   FontFamily="{StaticResource AppGlobalFont}"
-                                                   TextWrapping="Wrap"/>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top" 
-                                                    Background="{ThemeResource LayerFillColorDefaultBrush}"
-                                                    Padding="8,4" CornerRadius="4" BorderThickness="1"
-                                                    BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}">
-                                            <Image Source="https://upload-bbs.mihoyo.com/upload/2022/12/26/300350281/fb334cf8fd21e669ed6e7aa95890e2b5_2523388253479178875.png"
-                                                   Height="16" VerticalAlignment="Center" Margin="0,0,6,0"/>
-                                            <TextBlock Text="{x:Bind RewardCount}" FontWeight="SemiBold" 
-                                                       FontSize="12" VerticalAlignment="Center"
-                                                       FontFamily="{StaticResource AppGlobalFont}"/>
-                                        </StackPanel>
-                                    </Grid>
+                                <Expander 
+                                    Visibility="{x:Bind GroupVisibility, Mode=OneWay}"
+                                    HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Stretch"
+                                    Background="{StaticResource CardBackground}"
+                                    BorderBrush="{StaticResource CardBorder}"
+                                    CornerRadius="6"
+                                    IsExpanded="True">
+                                    
+                                    <Expander.Header>
+                                        <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Image Source="{x:Bind SafeItemIconUrl}" Width="32" Height="32" Margin="0,0,12,0"/>
+                                            
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock Text="{x:Bind Description}" Foreground="#D0D0D0" FontSize="13" TextWrapping="Wrap"/>
+    
+                                                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,2,0,0">
+                                                    <TextBlock FontSize="10" Foreground="#FFFFCC00" Visibility="{x:Bind ProgressVisibility, Mode=OneWay}">
+                                                        <Run Text="进度: "/><Run Text="{x:Bind ProgressText, Mode=OneWay}"/>
+                                                    </TextBlock>
+        
+                                                    <TextBlock FontSize="10" Foreground="#666666">
+                                                        <Run Text="v"/><Run Text="{x:Bind Version}"/>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
 
-                                    <TextBlock Grid.Row="1" Text="{x:Bind Description}" 
-                                               TextWrapping="Wrap" Margin="0,0,0,12"
-                                               Style="{StaticResource BodyTextBlockStyle}"
-                                               FontFamily="{StaticResource AppGlobalFont}"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                            <TextBlock Grid.Column="2" Text="{x:Bind GroupProgressText, Mode=OneWay}" 
+                                                       VerticalAlignment="Center" Foreground="{StaticResource SubTextColor}" FontSize="12" Margin="0,0,16,0"/>
+                                        </Grid>
+                                    </Expander.Header>
 
-                                    <Grid Grid.Row="2">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        
-                                        <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <Border Background="{ThemeResource SolidBackgroundFillColorBaseBrush}" 
-                                                    CornerRadius="4" Padding="6,2" 
-                                                    VerticalAlignment="Center">
-                                                <TextBlock Text="{x:Bind Version}" 
-                                                           Style="{StaticResource CaptionTextBlockStyle}" 
-                                                           FontFamily="{StaticResource AppGlobalFont}"
-                                                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                                            </Border>
-                                            <HyperlinkButton Content="查看详情" 
-                                                             FontSize="12"
-                                                             Padding="4,0"
-                                                             VerticalAlignment="Center"
-                                                             FontFamily="{StaticResource AppGlobalFont}"
-                                                             Click="OnViewDetailClick"/>
-                                        </StackPanel>
+                                     <ItemsControl ItemsSource="{x:Bind Children, Mode=OneWay}" Margin="-12,0,-12,-12">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate x:DataType="models:AchievementItem">
+                                                <Grid Background="#FF252526" Padding="12,8" BorderBrush="#33000000" BorderThickness="0,1,0,0" Opacity="{x:Bind Opacity, Mode=OneWay}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/> 
+                                                        <ColumnDefinition Width="*"/>    
+                                                        <ColumnDefinition Width="Auto"/> 
+                                                    </Grid.ColumnDefinitions>
 
-                                        <CheckBox Grid.Column="1" Content="完成状态" MinWidth="0" Margin="0"
-                                                  IsChecked="{x:Bind IsCompleted, Mode=TwoWay}" 
-                                                  FontFamily="{StaticResource AppGlobalFont}"/>
-                                    </Grid>
-                                </Grid>
-                            </Border>
+                                                    <Border Grid.Column="0" Background="#33000000" CornerRadius="4" Padding="6,4" VerticalAlignment="Center" Margin="0,0,12,0" MinWidth="40">
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+                                                            <Image Source="{x:Bind SafePrimogemUrl}" Width="16" Height="16"/>
+                                                            <TextBlock Text="{x:Bind RewardCount}" Foreground="{StaticResource HighlightColor}" FontSize="12" FontWeight="Bold"/>
+                                                        </StackPanel>
+                                                    </Border>
+
+                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                        <TextBlock Text="{x:Bind Title}" Foreground="{StaticResource HighlightColor}" FontWeight="Bold" FontSize="14" Margin="0,0,0,4"/>
+                                                        <TextBlock Text="{x:Bind Description}" Foreground="#D0D0D0" FontSize="13" TextWrapping="Wrap"/>
+                                                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,2,0,0">
+                                                        </StackPanel>
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                                        <Button Content="查看攻略" 
+                                                                FontSize="11" 
+                                                                Padding="6,3"
+                                                                Click="OnSearchGuideClick"
+                                                                ToolTipService.ToolTip="在米游社搜索此成就获取方式"/>
+
+                                                        <CheckBox IsChecked="{x:Bind IsCompleted, Mode=TwoWay}" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+                                                    
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Expander>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-
-            <Grid Grid.ColumnSpan="2"
-                  Visibility="{x:Bind ViewModel.IsImportPanelVisible, Mode=OneWay}"
-                  Background="{ThemeResource SolidBackgroundFillColorBaseBrush}" IsHitTestVisible="True"
-                  VerticalAlignment="Top" Margin="0,0,0,0" Padding="24"
-                  BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="0,0,0,1">
-                <StackPanel Spacing="16">
-                    <TextBlock Text="导入 Paimon.moe 脚本" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="{StaticResource AppGlobalFont}"/>
-                    <TextBlock Text="请粘贴来自扫描工具的完整 JavaScript 代码：" Style="{StaticResource BodyTextBlockStyle}" FontFamily="{StaticResource AppGlobalFont}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                    
-                    <TextBox Text="{x:Bind ViewModel.ImportScriptContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             AcceptsReturn="True" Height="180" FontFamily="Consolas" ScrollViewer.VerticalScrollBarVisibility="Auto"
-                             PlaceholderText="在此处粘贴代码 (例如: const data = ...)"/>
-                    
-                    <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Button Content="执行并同步" Click="OnExecuteImportScript" Style="{StaticResource AccentButtonStyle}" FontFamily="{StaticResource AppGlobalFont}"/>
-                        <Button Content="取消" Click="ToggleImportPanel" FontFamily="{StaticResource AppGlobalFont}"/>
-                    </StackPanel>
-                </StackPanel>
-            </Grid>
-
-            <Grid x:Name="WebViewContainer" Opacity="0" IsHitTestVisible="False" 
-                  Width="1" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>

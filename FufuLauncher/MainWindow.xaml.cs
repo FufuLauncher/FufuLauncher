@@ -62,6 +62,12 @@ public sealed partial class MainWindow : WindowEx
 
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool CloseHandle(IntPtr hObject);
+    
+    [DllImport("kernel32.dll")]
+    private static extern bool SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
+    
+    private DispatcherTimer _memoryOptimizationTimer;
+    private bool _isSuspended;
 
     private enum TOKEN_INFORMATION_CLASS
     {
@@ -151,6 +157,11 @@ public sealed partial class MainWindow : WindowEx
         {
             dispatcherQueue.TryEnqueue(() => ApplyOverlayOpacity(m.Value));
         });
+        
+        _memoryOptimizationTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+        _memoryOptimizationTimer.Tick += OnMemoryOptimizationTick;
+        
+        AppWindow.Changed += AppWindow_Changed;
 
         WeakReferenceMessenger.Default.Register<FrameBackgroundOpacityChangedMessage>(this, (r, m) =>
         {
@@ -181,6 +192,60 @@ public sealed partial class MainWindow : WindowEx
         _networkCheckTimer.Tick += (s, e) => CheckNetworkAndProxyStatus();
 
     }
+    
+    private void OnMemoryOptimizationTick(object sender, object e)
+    {
+        _memoryOptimizationTimer.Stop();
+        PerformMemoryOptimization();
+    }
+
+    private void PerformMemoryOptimization()
+    {
+        if (_isSuspended) return;
+        _isSuspended = true;
+        
+        if (_globalBackgroundPlayer != null && _globalBackgroundPlayer.PlaybackSession.CanPause)
+        {
+            _globalBackgroundPlayer.Pause();
+        }
+        
+        _networkCheckTimer.Stop();
+        _messageDismissTimer.Stop();
+        
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+
+        try
+        {
+            SetProcessWorkingSetSize(GetCurrentProcess(), -1, -1);
+        }
+        catch
+        {
+            // ignored
+        }
+
+        Debug.WriteLine("应用挂起");
+    }
+
+    private void RestoreFromSuspension()
+    {
+        _memoryOptimizationTimer.Stop();
+
+        if (!_isSuspended) return;
+        _isSuspended = false;
+        
+        if (_isVideoBackground && _globalBackgroundPlayer != null)
+        {
+            _globalBackgroundPlayer.Play();
+        }
+        
+        if (!_networkCheckTimer.IsEnabled)
+        {
+            _networkCheckTimer.Start();
+        }
+        
+        Debug.WriteLine("应用已唤醒");
+    }
 
     private async void CheckNetworkAndProxyStatus()
     {
@@ -195,7 +260,7 @@ public sealed partial class MainWindow : WindowEx
                 try
                 {
                     var proxy = WebRequest.GetSystemWebProxy();
-                    Uri resource = new Uri("https://www.microsoft.com");
+                    Uri resource = new("https://www.microsoft.com");
                     isProxy = !proxy.IsBypassed(resource);
                 }
                 catch { isProxy = false; }
@@ -289,7 +354,7 @@ public sealed partial class MainWindow : WindowEx
     {
         if (!_isOverlayShown)
         {
-            OverlayTranslate.Y = this.Bounds.Height + 100;
+            OverlayTranslate.Y = Bounds.Height + 100;
         }
     }
 
@@ -297,7 +362,7 @@ public sealed partial class MainWindow : WindowEx
     {
         if (IsUacElevatedWithConsent())
         {
-            if (this.Content is FrameworkElement rootElement)
+            if (Content is FrameworkElement rootElement)
             {
                 if (rootElement.XamlRoot == null)
                 {
@@ -311,7 +376,7 @@ public sealed partial class MainWindow : WindowEx
                     if (rootElement.XamlRoot == null) await tcs.Task;
                 }
 
-                ContentDialog dialog = new ContentDialog
+                ContentDialog dialog = new()
                 {
                     XamlRoot = rootElement.XamlRoot,
                     Title = "权限警告",
@@ -370,8 +435,32 @@ public sealed partial class MainWindow : WindowEx
 
     private void ShowWindow()
     {
+        RestoreFromSuspension();
+
         this.Show();
-        this.BringToFront();
+        BringToFront();
+    }
+    
+    private void AppWindow_Changed(AppWindow sender, AppWindowChangedEventArgs args)
+    {
+        if (args.DidPresenterChange)
+        {
+            var presenter = sender.Presenter as OverlappedPresenter;
+            if (presenter != null)
+            {
+                if (presenter.State == OverlappedPresenterState.Minimized)
+                {
+                    if (!_memoryOptimizationTimer.IsEnabled)
+                    {
+                        _memoryOptimizationTimer.Start();
+                    }
+                }
+                else if (presenter.State != OverlappedPresenterState.Minimized)
+                {
+                    RestoreFromSuspension();
+                }
+            }
+        }
     }
 
     private async void ExitApplication()
@@ -382,16 +471,20 @@ public sealed partial class MainWindow : WindowEx
         this.Close();
     }
 
-    private async void AppWindow_Closing(Microsoft.UI.Windowing.AppWindow sender, Microsoft.UI.Windowing.AppWindowClosingEventArgs args)
+    private async void AppWindow_Closing(AppWindow sender, AppWindowClosingEventArgs args)
     {
         if (_isExit) return;
         args.Cancel = true;
-        if (_minimizeToTray) this.Hide();
+        if (_minimizeToTray)
+        {
+            this.Hide();
+            _memoryOptimizationTimer.Start(); 
+        }
         else
         {
             await SaveWindowSizeAsync();
             _isExit = true;
-            this.Close();
+            Close();
         }
     }
 
@@ -403,8 +496,8 @@ public sealed partial class MainWindow : WindowEx
             var saveEnabledObj = await localSettings.ReadSettingAsync("IsSaveWindowSizeEnabled");
             if (saveEnabledObj != null && Convert.ToBoolean(saveEnabledObj))
             {
-                await localSettings.SaveSettingAsync("SavedWindowWidth", this.Width);
-                await localSettings.SaveSettingAsync("SavedWindowHeight", this.Height);
+                await localSettings.SaveSettingAsync("SavedWindowWidth", Width);
+                await localSettings.SaveSettingAsync("SavedWindowHeight", Height);
             }
         }
         catch { }
@@ -484,10 +577,8 @@ public sealed partial class MainWindow : WindowEx
     {
         try
         {
-            // Global background is always enabled now.
-
             var enabledJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.IsBackgroundEnabledKey);
-            bool isCustomEnabled = enabledJson == null ? true : Convert.ToBoolean(enabledJson);
+            var isCustomEnabled = enabledJson == null ? true : Convert.ToBoolean(enabledJson);
 
             if (isCustomEnabled)
             {
@@ -572,10 +663,10 @@ public sealed partial class MainWindow : WindowEx
             switch (type)
             {
                 case WindowBackdropType.Mica:
-                    this.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+                    this.SystemBackdrop = new MicaBackdrop();
                     break;
                 case WindowBackdropType.Acrylic:
-                    this.SystemBackdrop = new Microsoft.UI.Xaml.Media.DesktopAcrylicBackdrop();
+                    this.SystemBackdrop = new DesktopAcrylicBackdrop();
                     break;
             }
         }
@@ -669,7 +760,7 @@ public sealed partial class MainWindow : WindowEx
         {
             using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
             {
-                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                WindowsPrincipal principal = new(identity);
                 return principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
         }
@@ -827,6 +918,7 @@ public sealed partial class MainWindow : WindowEx
             "FufuLauncher.ViewModels.CalculatorViewModel" => typeof(Views.CalculatorPage),
             "FufuLauncher.ViewModels.ControlPanelModel" => typeof(Views.PanelPage),
             "FufuLauncher.ViewModels.PluginViewModel" => typeof(Views.PluginPage),
+            "FufuLauncher.ViewModels.DataViewModel" => typeof(Views.DataPage),
             _ => null
         };
 
@@ -842,7 +934,7 @@ public sealed partial class MainWindow : WindowEx
     {
         try
         {
-            double screenHeight = this.Bounds.Height > 0 ? this.Bounds.Height : 1000;
+            double screenHeight = Bounds.Height > 0 ? Bounds.Height : 1000;
 
             if (isMainPage && _isOverlayShown)
             {

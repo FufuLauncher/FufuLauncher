@@ -36,6 +36,22 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        <Storyboard x:Name="GetPluginsBtnAnimation" AutoReverse="True" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetName="GetPluginsBtnScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="1.0" To="1.2" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="GetPluginsBtnScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="1.0" To="1.2" Duration="0:0:1">
+                <DoubleAnimation.EasingFunction>
+                    <SineEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
     </Page.Resources>
 
     <Grid x:Name="RootLayoutGrid" 
@@ -81,7 +97,20 @@
         </Grid>
 
         <CommandBar Grid.Row="1" DefaultLabelPosition="Right" Background="Transparent" IsOpen="False">
-            <AppBarButton Icon="Download" Label="获取插件" Click="OnGetPluginsClick"/>
+            <AppBarButton x:Name="GetPluginsBtn" 
+                          Icon="Download" 
+                          Label="获取插件" 
+                          Click="OnGetPluginsClick"
+                          Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
+                
+                <AppBarButton.Background>
+                    <SolidColorBrush Color="#1A0078D7"/> 
+                </AppBarButton.Background>
+
+                <AppBarButton.RenderTransform>
+                    <ScaleTransform x:Name="GetPluginsBtnScale" CenterX="24" CenterY="24"/>
+                </AppBarButton.RenderTransform>
+            </AppBarButton>
             <AppBarButton Icon="Add" Label="添加插件" Command="{x:Bind ViewModel.AddPluginCommand}"/>
             <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind ViewModel.RefreshCommand}"/>
             <AppBarButton Icon="Folder" Label="打开文件夹" Command="{x:Bind ViewModel.OpenFolderCommand}"/>
