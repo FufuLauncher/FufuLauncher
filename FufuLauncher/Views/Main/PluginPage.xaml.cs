@@ -99,13 +99,13 @@ public sealed partial class PluginPage : Page
         
         foreach (var file in Directory.GetFiles(sourceDir))
         {
-            string destFile = Path.Combine(destDir, Path.GetFileName(file));
+            var destFile = Path.Combine(destDir, Path.GetFileName(file));
             File.Copy(file, destFile, true);
         }
         
         foreach (var dir in Directory.GetDirectories(sourceDir))
         {
-            string destSubDir = Path.Combine(destDir, Path.GetFileName(dir));
+            var destSubDir = Path.Combine(destDir, Path.GetFileName(dir));
             MoveDirectorySafe(dir, destSubDir);
         }
         
@@ -181,7 +181,7 @@ public sealed partial class PluginPage : Page
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
         {
-            string selectedUrl = urlLatest;
+            var selectedUrl = urlLatest;
 
             if (rbOld.IsChecked == true) selectedUrl = urlOld;
             else if (rbHotSwitch.IsChecked == true) selectedUrl = urlHotSwitch;
@@ -209,21 +209,21 @@ public sealed partial class PluginPage : Page
     
     private async Task DownloadAndInstallPluginAsync(string proxyUrl)
     {
-        string fileName = proxyUrl.Split('/').Last();
+        var fileName = proxyUrl.Split('/').Last();
         if (fileName.Contains("?")) fileName = fileName.Split('?')[0];
         if (string.IsNullOrEmpty(fileName) || !fileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase)) 
             fileName = "CustomPlugin.zip";
         
-        string rawGithubUrl = proxyUrl.Replace("http://kr2-proxy.gitwarp.top:9980/", "");
+        var rawGithubUrl = proxyUrl.Replace("http://kr2-proxy.gitwarp.top:9980/", "");
         
         if (rawGithubUrl.Contains("github.com") && rawGithubUrl.Contains("/blob/") && !rawGithubUrl.Contains("?raw=true"))
         {
             rawGithubUrl += "?raw=true";
         }
         
-        string tempPath = Path.Combine(Path.GetTempPath(), fileName);
-        string extractPath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(fileName) + "_Extract_" + Guid.NewGuid());
-        string pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
+        var tempPath = Path.Combine(Path.GetTempPath(), fileName);
+        var extractPath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(fileName) + "_Extract_" + Guid.NewGuid());
+        var pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
         
         var progressBar = new ProgressBar 
         { 
@@ -297,7 +297,7 @@ public sealed partial class PluginPage : Page
                                     var percent = Math.Round((double)totalRead / totalBytes * 100, 0);
                                     
                                     progressBar.Value = percent;
-                                    string source = usedFallback ? "备用线路" : "主线路";
+                                    var source = usedFallback ? "备用线路" : "主线路";
                                     statusText.Text = $"{source}下载中... {percent}%";
                                 }
                             }
@@ -315,12 +315,16 @@ public sealed partial class PluginPage : Page
 
             await Task.Run(() => ZipFile.ExtractToDirectory(tempPath, extractPath));
             
-            try { File.Delete(tempPath); } catch { }
-            
+            try { File.Delete(tempPath); }
+            catch
+            {
+                // ignored
+            }
+
             statusText.Text = "正在安装...";
             
-            string targetFolderName = Path.GetFileNameWithoutExtension(tempPath); 
-            string finalDestDir = Path.Combine(pluginsDir, targetFolderName);
+            var targetFolderName = Path.GetFileNameWithoutExtension(tempPath); 
+            var finalDestDir = Path.Combine(pluginsDir, targetFolderName);
             
             var subDirs = Directory.GetDirectories(extractPath);
             var files = Directory.GetFiles(extractPath);
@@ -348,8 +352,11 @@ public sealed partial class PluginPage : Page
             try 
             {
                 if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
-            } 
-            catch { }
+            }
+            catch
+            {
+                // ignored
+            }
 
             ViewModel.StatusMessage = $"{targetFolderName} 安装成功！";
             ViewModel.LoadPlugins();
@@ -370,7 +377,11 @@ public sealed partial class PluginPage : Page
             };
             if (await failDialog.ShowAsync() == ContentDialogResult.Primary)
             {
-                try { await Launcher.LaunchUriAsync(new Uri(rawGithubUrl)); } catch { }
+                try { await Launcher.LaunchUriAsync(new Uri(rawGithubUrl)); }
+                catch
+                {
+                    // ignored
+                }
             }
         }
         finally
@@ -380,7 +391,10 @@ public sealed partial class PluginPage : Page
                 if (File.Exists(tempPath)) File.Delete(tempPath);
                 if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
     }
 

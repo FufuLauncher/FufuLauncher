@@ -124,10 +124,28 @@
 
                     <Grid Grid.Row="0" Margin="0" CornerRadius="12,12,0,0" Background="#20000000">
                         <FlipView ItemsSource="{x:Bind ViewModel.Banners, Mode=OneWay}"
-                                  SelectedItem="{x:Bind ViewModel.CurrentBanner, Mode=TwoWay}">
+                                  SelectedItem="{x:Bind ViewModel.CurrentBanner, Mode=TwoWay}"
+                                  Padding="0"
+                                  Margin="0"
+                                  BorderThickness="0"
+                                  Background="Transparent"
+                                  UseSystemFocusVisuals="False">
+    
+                            <FlipView.ItemContainerStyle>
+                                <Style TargetType="FlipViewItem">
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="MinWidth" Value="0"/>
+                                    <Setter Property="MinHeight" Value="0"/>
+                                </Style>
+                            </FlipView.ItemContainerStyle>
+
                             <FlipView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0" Padding="0">
                                         <Image Source="{Binding Image.Url}" 
                                                Stretch="UniformToFill" 
                                                HorizontalAlignment="Center" 
@@ -137,11 +155,15 @@
                                                 <ScaleTransform ScaleX="1.005" ScaleY="1.005"/>
                                             </Image.RenderTransform>
                                         </Image>
+                
                                         <Button Background="Transparent"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Command="{Binding ElementName=MainPageRoot, Path=OpenLinkCommand}"
-                                                CommandParameter="{Binding Image.Link}"/>
+                                                CommandParameter="{Binding Image.Link}"
+                                                Margin="0"
+                                                Padding="0"
+                                                BorderThickness="0"/>
                                     </Grid>
                                 </DataTemplate>
                             </FlipView.ItemTemplate>

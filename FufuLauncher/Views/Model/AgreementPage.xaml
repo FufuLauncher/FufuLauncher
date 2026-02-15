@@ -5,7 +5,40 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="OnPageLoaded">
+
+    <Page.Resources>
+        <Storyboard x:Name="EntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="IconImage" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="IconTransform" Storyboard.TargetProperty="Y" From="30" To="0" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="TitleText" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="Y" From="30" To="0" BeginTime="0:0:0.1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="DescText" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.2" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="DescTransform" Storyboard.TargetProperty="Y" From="30" To="0" BeginTime="0:0:0.2" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="AgreementArea" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.3" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="AgreementTransform" Storyboard.TargetProperty="Y" From="30" To="0" BeginTime="0:0:0.3" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -13,50 +46,73 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        
         <StackPanel Grid.Row="0" 
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Center"
                     Spacing="24"
-                    Padding="48">
-            
-            
-            <Image Source="ms-appx:///Assets/icon.png"
+                    Padding="48"
+                    Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
+
+            <Image x:Name="IconImage"
+                   Source="ms-appx:///Assets/icon.png"
                    Width="64"
                    Height="64"
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,8"/>
-            
-            <TextBlock Text="用户协议"
+                   Margin="0,0,0,8"
+                   Opacity="0">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="IconTransform" Y="30"/>
+                </Image.RenderTransform>
+            </Image>
+
+            <TextBlock x:Name="TitleText"
+                       Text="用户协议"
                        FontSize="28"
                        FontWeight="Bold"
-                       HorizontalAlignment="Center"/>
-            
-            <TextBlock Text="欢迎使用芙芙启动器！在使用本软件之前，请仔细阅读并同意用户协议。"
+                       HorizontalAlignment="Center"
+                       Opacity="0">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform x:Name="TitleTransform" Y="30"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <TextBlock x:Name="DescText"
+                       Text="欢迎使用芙芙启动器！在使用本软件之前，请仔细阅读并同意用户协议。"
                        FontSize="14"
                        TextWrapping="Wrap"
                        MaxWidth="400"
                        HorizontalAlignment="Center"
-                       TextAlignment="Center"/>
-            
-            
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                       TextAlignment="Center"
+                       Opacity="0">
+                <TextBlock.RenderTransform>
+                    <TranslateTransform x:Name="DescTransform" Y="30"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+            <Grid x:Name="AgreementArea" 
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Center"
+                  Opacity="0">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="AgreementTransform" Y="30"/>
+                </Grid.RenderTransform>
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <CheckBox Grid.Column="0"
                           IsChecked="{x:Bind ViewModel.IsAgreementChecked, Mode=TwoWay}"
                           VerticalAlignment="Center"
                           Padding="0"
                           Margin="0"
-                          MinWidth="0"/> 
-                
+                          MinWidth="0"/>
+
                 <StackPanel Grid.Column="1" 
                             Orientation="Horizontal" 
                             VerticalAlignment="Center"
-                            Margin="8,0,0,0"> 
+                            Margin="8,0,0,0">
                     <TextBlock Text="我已阅读并同意" 
                                FontSize="14"
                                VerticalAlignment="Center"/>
@@ -70,11 +126,77 @@
             </Grid>
         </StackPanel>
 
-        
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="32"
+                    Padding="48"
+                    Visibility="{x:Bind ViewModel.IconCheckVisibility, Mode=OneWay}">
+            
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True"/>
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="为了确保显示效果，请确认下方图标是否正常显示"
+                           FontSize="14"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="32,24">
+                <StackPanel Orientation="Horizontal" Spacing="48" HorizontalAlignment="Center">
+                    <StackPanel Spacing="12">
+                        <FontIcon Glyph="&#xE713;" 
+                                  FontSize="40" 
+                                  FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock Text="设置" FontSize="12" HorizontalAlignment="Center" Opacity="0.7"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="12">
+                        <FontIcon Glyph="&#xE80F;" 
+                                  FontSize="40" 
+                                  FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock Text="主页" FontSize="12" HorizontalAlignment="Center" Opacity="0.7"/>
+                    </StackPanel>
+
+                    <StackPanel Spacing="12">
+                        <FontIcon Glyph="&#xE8B7;" 
+                                  FontSize="40" 
+                                  FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock Text="文件" FontSize="12" HorizontalAlignment="Center" Opacity="0.7"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center">
+                <Button Content="无法显示"
+                        Command="{x:Bind ViewModel.TroubleshootIconsCommand}"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        MinWidth="120"/>
+                
+                <Button Content="显示正常"
+                        Command="{x:Bind ViewModel.ConfirmIconsCommand}"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        MinWidth="120"/>
+            </StackPanel>
+        </StackPanel>
+
         <Grid Grid.Row="1" 
               Padding="24"
               BorderThickness="1,1,0,0"
-              BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+              BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+              Background="{ThemeResource LayerFillColorDefaultBrush}"
+              Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
             
             <Button Content="下一步"
                     Command="{x:Bind ViewModel.NextCommand}"

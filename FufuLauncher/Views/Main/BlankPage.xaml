@@ -418,7 +418,7 @@
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="0"/> 
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <Button Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Style="{StaticResource AccentButtonStyle}" Translation="0,0,32">
@@ -485,6 +485,32 @@
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock Text="官方公告" FontWeight="SemiBold"/>
                                         <TextBlock Text="活动与更新资讯" FontSize="11" Opacity="0.6"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                            
+                            <Button Grid.Row="1" 
+                                    Grid.Column="0" 
+                                    Click="CreateShortcut_Click" 
+                                    HorizontalAlignment="Stretch" 
+                                    Padding="16,12" 
+                                    Height="72" 
+                                    Background="{StaticResource SafeCardBrush}" 
+                                    BorderBrush="{StaticResource SafeBorderBrush}" 
+                                    BorderThickness="1" 
+                                    Translation="0,0,32">
+                                <Button.Shadow>
+                                    <ThemeShadow/>
+                                </Button.Shadow>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE71B;" FontSize="22" Margin="0,0,16,0"/>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="创建快捷方式启动" FontWeight="SemiBold"/>
+                                        <TextBlock Text="在桌面生成一键注入快捷启动方式" FontSize="11" Opacity="0.6"/>
                                     </StackPanel>
                                 </Grid>
                             </Button>

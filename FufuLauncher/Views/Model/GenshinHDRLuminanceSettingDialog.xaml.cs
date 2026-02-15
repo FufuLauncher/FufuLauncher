@@ -18,16 +18,16 @@ public sealed partial class GenshinHDRLuminanceSettingDialog : ContentDialog
     public GenshinHDRLuminanceSettingDialog()
     {
         InitializeComponent();
-        this.Loaded += GenshinHDRLuminanceSettingDialog_Loaded;
-        this.Unloaded += GenshinHDRLuminanceSettingDialog_Unloaded;
+        Loaded += GenshinHDRLuminanceSettingDialog_Loaded;
+        Unloaded += GenshinHDRLuminanceSettingDialog_Unloaded;
     }
 
     private async void GenshinHDRLuminanceSettingDialog_Loaded(object sender, RoutedEventArgs e)
     {
         try
         {
-            this.XamlRoot.Changed -= XamlRoot_Changed;
-            this.XamlRoot.Changed += XamlRoot_Changed;
+            XamlRoot.Changed -= XamlRoot_Changed;
+            XamlRoot.Changed += XamlRoot_Changed;
 
             var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
             var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
@@ -81,7 +81,7 @@ public sealed partial class GenshinHDRLuminanceSettingDialog : ContentDialog
             {
                 _displayInformation.AdvancedColorInfoChanged -= _displayInformation_AdvancedColorInfoChanged;
             }
-            this.XamlRoot.Changed -= XamlRoot_Changed;
+            XamlRoot.Changed -= XamlRoot_Changed;
         }
         catch (Exception ex)
         {
@@ -100,7 +100,7 @@ public sealed partial class GenshinHDRLuminanceSettingDialog : ContentDialog
 
     private void _displayInformation_AdvancedColorInfoChanged(DisplayInformation sender, object args)
     {
-        this.DispatcherQueue.TryEnqueue(() => UpdateDisplayInfomation(sender));
+        DispatcherQueue.TryEnqueue(() => UpdateDisplayInfomation(sender));
     }
 
     private void UpdateDisplayInfomation(DisplayInformation display)
@@ -125,9 +125,9 @@ public sealed partial class GenshinHDRLuminanceSettingDialog : ContentDialog
 
             DisplayInfomation = $"""
                 色彩空间: {kind}
-                峰值亮度: {(double)info.MaxLuminanceInNits:F0} nits
-                最大全屏亮度: {(double)info.MaxAverageFullFrameLuminanceInNits:F0} nits
-                SDR白色亮度: {(double)info.SdrWhiteLevelInNits:F0} nits
+                峰值亮度: {info.MaxLuminanceInNits:F0} nits
+                最大全屏亮度: {info.MaxAverageFullFrameLuminanceInNits:F0} nits
+                SDR白色亮度: {info.SdrWhiteLevelInNits:F0} nits
                 """;
         }
         catch
@@ -167,15 +167,18 @@ public sealed partial class GenshinHDRLuminanceSettingDialog : ContentDialog
             var info = _displayInformation.GetAdvancedColorInfo();
             if (info != null)
             {
-                double maxLum = info.MaxLuminanceInNits > 0 ? info.MaxLuminanceInNits : 1000;
-                double sdrWhite = info.SdrWhiteLevelInNits > 0 ? info.SdrWhiteLevelInNits : 200;
+                var maxLum = info.MaxLuminanceInNits > 0 ? info.MaxLuminanceInNits : 1000;
+                var sdrWhite = info.SdrWhiteLevelInNits > 0 ? info.SdrWhiteLevelInNits : 200;
 
                 MaxLuminance = (int)Math.Clamp(maxLum, 300, 2000);
                 SceneLuminance = (int)Math.Clamp(sdrWhite + 20, 100, 500);
-                UILuminance = (int)Math.Clamp(SceneLuminance + 50, 150, 550);
+                UILuminance = Math.Clamp(SceneLuminance + 50, 150, 550);
             }
         }
-        catch { }
+        catch
+        {
+            // ignored
+        }
     }
 
     [RelayCommand]

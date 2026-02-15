@@ -12,10 +12,10 @@ namespace FufuLauncher.Views;
 
 public sealed partial class LoginWebViewDialog : Window
 {
-    private bool _loginCompleted = false;
+    private bool _loginCompleted;
     private AppWindow _appWindow;
     private DispatcherTimer _autoCheckTimer;
-    private bool _isChecking = false;
+    private bool _isChecking;
 
     public LoginWebViewDialog()
     {
@@ -34,23 +34,23 @@ public sealed partial class LoginWebViewDialog : Window
 
     private void InitializeWindowConfiguration(WindowId windowId)
     {
-        this.ExtendsContentIntoTitleBar = true;
-        this.SetTitleBar(AppTitleBar);
+        ExtendsContentIntoTitleBar = true;
+        SetTitleBar(AppTitleBar);
 
-        if (_appWindow != null)
+        if (true)
         {
             _appWindow.SetPresenter(AppWindowPresenterKind.Default);
 
             var displayArea = DisplayArea.GetFromWindowId(windowId, DisplayAreaFallback.Primary);
 
-            int width = (int)(displayArea.WorkArea.Width * 0.6);
-            int height = (int)(displayArea.WorkArea.Height * 0.75);
+            var width = (int)(displayArea.WorkArea.Width * 0.6);
+            var height = (int)(displayArea.WorkArea.Height * 0.75);
 
             width = Math.Max(width, 1024);
             height = Math.Max(height, 768);
 
-            int x = (displayArea.WorkArea.Width - width) / 2;
-            int y = (displayArea.WorkArea.Height - height) / 2;
+            var x = (displayArea.WorkArea.Width - width) / 2;
+            var y = (displayArea.WorkArea.Height - height) / 2;
 
             _appWindow.MoveAndResize(new RectInt32(x, y, width, height));
         }
@@ -217,7 +217,6 @@ public sealed partial class LoginWebViewDialog : Window
                 config = JsonSerializer.Deserialize<Config>(json) ?? new Config();
             }
 
-            if (config.Account == null) config.Account = new AccountConfig();
             config.Account.Cookie = cookieString;
 
             if (cookieString.Contains("account_id="))

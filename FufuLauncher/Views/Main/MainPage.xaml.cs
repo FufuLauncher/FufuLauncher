@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;

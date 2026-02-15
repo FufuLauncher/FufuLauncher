@@ -1,5 +1,6 @@
 ﻿using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml; 
 
 namespace FufuLauncher.Views
 {
@@ -14,6 +15,14 @@ namespace FufuLauncher.Views
         {
             ViewModel = App.GetService<AgreementViewModel>();
             InitializeComponent();
+        }
+
+        private void OnPageLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!ViewModel.IsIconCheckMode)
+            {
+                EntranceStoryboard.Begin();
+            }
         }
     }
 }

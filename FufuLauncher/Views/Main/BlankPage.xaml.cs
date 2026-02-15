@@ -13,6 +13,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Windows.Storage.Pickers;
 using WinRT.Interop;
+using File = System.IO.File;
 
 public class GameAccountData
 {
@@ -83,13 +84,13 @@ namespace FufuLauncher.Views
 
         public BlankPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _localSettingsService = App.GetService<ILocalSettingsService>();
 
             var localFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             _accountsFilePath = Path.Combine(localFolder, "FufuLauncher", "game_accounts.json");
 
-            this.Loaded += BlankPage_Loaded;
+            Loaded += BlankPage_Loaded;
         }
 
         private void PathTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -99,6 +100,158 @@ namespace FufuLauncher.Views
                 ApplyPathButton.IsEnabled = !string.IsNullOrWhiteSpace(PathTextBox.Text);
             }
         }
+        
+private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
+{
+    try
+    {
+        // ==========================================
+        // 1. 基础检查与路径获取 (保持原逻辑)
+        // ==========================================
+        var localSettings = App.GetService<ILocalSettingsService>();
+        var settingObj = await localSettings.ReadSettingAsync("GameInstallationPath");
+        var rawPath = settingObj as string;
+
+        if (string.IsNullOrEmpty(rawPath))
+        {
+            await ShowError("未设置游戏路径。");
+            return;
+        }
+        
+        var finalExePath = rawPath;
+        
+        // 检查原神主程序路径
+        if (Directory.Exists(rawPath))
+        {
+            var cnPath = Path.Combine(rawPath, "YuanShen.exe");
+            var globalPath = Path.Combine(rawPath, "GenshinImpact.exe");
+
+            if (File.Exists(cnPath)) finalExePath = cnPath;
+            else if (File.Exists(globalPath)) finalExePath = globalPath;
+            else
+            {
+                await ShowError($"在文件夹中找不到游戏主程序：\n{rawPath}");
+                return;
+            }
+        }
+        else if (!File.Exists(rawPath))
+        {
+             await ShowError($"路径无效，文件或文件夹不存在：\n{rawPath}");
+             return;
+        }
+
+        // ==========================================
+        // 2. 准备关键数据
+        // ==========================================
+        
+        // 获取当前启动器(FufuLauncher)的完整路径
+        var appPath = Environment.ProcessPath; 
+        
+        // 核心参数部分：--elevated-inject "游戏路径"
+        string argsOnly = $"--elevated-inject \"{finalExePath}\"";
+
+        // 完整命令行： "启动器路径" --elevated-inject "游戏路径"
+        // 注意：给 appPath 也加上引号，防止安装路径带空格导致无法识别
+        string fullCommandLine = $"\"{appPath}\" {argsOnly}";
+
+        // ==========================================
+        // 3. 弹窗询问用户意图
+        // ==========================================
+        var choiceDialog = new ContentDialog
+        {
+            Title = "选择操作",
+            Content = "请选择您想要执行的操作：\n\n• 创建桌面快捷方式：直接在桌面生成图标。\n• 复制启动命令：获取完整命令行，可用于 Steam 或 脚本。",
+            PrimaryButtonText = "创建桌面快捷方式",
+            SecondaryButtonText = "复制启动命令",
+            CloseButtonText = "取消",
+            DefaultButton = ContentDialogButton.Primary,
+            XamlRoot = this.XamlRoot
+        };
+
+        var choiceResult = await choiceDialog.ShowAsync();
+
+        if (choiceResult == ContentDialogResult.None)
+        {
+            return;
+        }
+        
+        if (choiceResult == ContentDialogResult.Primary)
+        {
+            var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            var shortcutPath = Path.Combine(desktopPath, "快捷启动原神.lnk");
+
+            Type shellType = Type.GetTypeFromProgID("WScript.Shell");
+            dynamic shell = Activator.CreateInstance(shellType);
+            
+            var shortcut = shell.CreateShortcut(shortcutPath);
+
+            shortcut.TargetPath = appPath;
+            shortcut.Arguments = argsOnly;
+            
+            shortcut.WorkingDirectory = AppContext.BaseDirectory;
+            shortcut.IconLocation = finalExePath + ",0";
+            shortcut.Description = "通过 FufuLauncher 注入启动原神";
+
+            shortcut.Save();
+            
+            var dialog = new ContentDialog
+            {
+                Title = "快捷方式已创建",
+                Content = "已创建桌面快捷方式，请检查你的电脑桌面",
+                CloseButtonText = "确定",
+                XamlRoot = XamlRoot
+            };
+            await dialog.ShowAsync();
+        }
+        else if (choiceResult == ContentDialogResult.Secondary)
+        {
+            var argTextBox = new TextBox
+            {
+                Text = fullCommandLine,
+                IsReadOnly = true,
+                TextWrapping = TextWrapping.Wrap,
+                Height = 100,
+                AcceptsReturn = true,
+                FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Consolas, Courier New, Monospace")
+            };
+
+            var copyDialog = new ContentDialog
+            {
+                Title = "启动命令",
+                Content = new StackPanel
+                {
+                    Spacing = 10,
+                    Children = 
+                    {
+                        new TextBlock 
+                        { 
+                            Text = "以下是启动命令，您可以直接在 CMD、PowerShell 或 Steam 的“非 Steam 游戏”目标中使用：", 
+                            TextWrapping = TextWrapping.Wrap
+                        },
+                        argTextBox
+                    }
+                },
+                PrimaryButtonText = "复制并关闭",
+                CloseButtonText = "关闭",
+                DefaultButton = ContentDialogButton.Primary,
+                XamlRoot = XamlRoot
+            };
+
+            var copyResult = await copyDialog.ShowAsync();
+
+            if (copyResult == ContentDialogResult.Primary)
+            {
+                var package = new Windows.ApplicationModel.DataTransfer.DataPackage();
+                package.SetText(fullCommandLine);
+                Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        await ShowError($"操作失败: {ex.Message}");
+    }
+}
 
         private async Task LoadRedeemCodesAsync()
         {

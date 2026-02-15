@@ -45,23 +45,21 @@ namespace FufuLauncher
             int exitCode = 1;
             try
             {
-                if (args.Length < 4)
+                if (args.Length < 2)
                 {
                     return;
                 }
 
-                string gameExePath = args[1];
-                string dllPath = args[2];
-
-                string commandLineArgs = args.Length > 4 ? string.Join(' ', args.Skip(4)) : string.Empty;
-
+                var gameExePath = args[1];
+                var tempLauncher = new LauncherService(); 
+                var dllPath = tempLauncher.GetDefaultDllPath();
+                var commandLineArgs = string.Empty; 
                 var launcher = new LauncherService();
-
                 var result = launcher.LaunchGameAndInject(gameExePath, dllPath, commandLineArgs, out var errorMessage, out var pid);
 
                 if (result != 0)
                 {
-                    MessageBox(IntPtr.Zero, $"注入启动失败: {errorMessage} (代码: {result})", "FufuLauncher 错误", 0x10); // MB_ICONERROR
+                    MessageBox(IntPtr.Zero, $"注入启动失败: {errorMessage} (代码: {result})", "FufuLauncher 错误", 0x10);
                 }
 
                 exitCode = result == 0 ? 0 : 1;
