@@ -1,5 +1,9 @@
 # [FufuLauncher](https://github.com/CodeCubist/FufuLauncher)
 
+![Version](https://img.shields.io/badge/Version-v1.0.8-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-orange)
+
 ### A third-party launcher for Genshin Impact, supporting game injection, auto check-in, and various utility features.
 
 #### [Official Website](https://philia093.xyz/)
