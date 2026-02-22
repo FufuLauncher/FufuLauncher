@@ -19,7 +19,11 @@
         <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 
         <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
-
+        
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+        
+        <PublishSingleFile>true</PublishSingleFile>
+        
         <PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
 
