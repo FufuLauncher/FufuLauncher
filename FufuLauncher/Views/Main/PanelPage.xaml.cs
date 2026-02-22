@@ -149,6 +149,8 @@ public sealed partial class PanelPage
             }
             
             todayRecord.PlayTimeSeconds += 5;
+
+            ViewModel.UpdateAndSavePlayTime(5);
         }
     }
 

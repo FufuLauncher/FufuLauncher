@@ -670,64 +670,107 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
 
 
         private async void BlankPage_Loaded(object sender, RoutedEventArgs e)
+{
+    EntranceStoryboard.Begin();
+    Debug.WriteLine("========== [Debug] BlankPage_Loaded 开始 ==========");
+    try
+    {
+        var savedPathObj = await _localSettingsService.ReadSettingAsync("GameInstallationPath");
+        var savedPath = savedPathObj as string;
+        
+        Debug.WriteLine($"[Debug] 读取到的本地保存路径: '{savedPath}'");
+        Debug.WriteLine($"[Debug] IsNullOrWhiteSpace 判断结果: {string.IsNullOrWhiteSpace(savedPath)}");
+
+        if (!string.IsNullOrWhiteSpace(savedPath))
         {
-            EntranceStoryboard.Begin();
-            try
-            {
-
-                if (await _localSettingsService.ReadSettingAsync("GameInstallationPath") is string savedPath)
-                {
-                    savedPath = savedPath.Trim('"').Trim();
-                    PathTextBox.Text = savedPath;
-                    await LoadGameInfoAsync(savedPath);
-                }
-                else
-                {
-
-                    var foundPath = GamePathFinder.FindGamePath();
-                    if (!string.IsNullOrEmpty(foundPath))
-                    {
-                        await ShowAutoPathDialog(foundPath);
-                    }
-                }
-
-                await LoadAccountsAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[BlankPage_Loaded] 加载失败: {ex.Message}");
-            }
-            await LoadRedeemCodesAsync();
+            Debug.WriteLine("[Debug] 路径非空，跳过自动检测，直接加载已有路径。");
+            savedPath = savedPath.Trim('"').Trim();
+            PathTextBox.Text = savedPath;
+            await LoadGameInfoAsync(savedPath);
         }
-
-        private async Task ShowAutoPathDialog(string foundPath)
+        else
         {
-            if (string.IsNullOrEmpty(foundPath) || XamlRoot == null) return;
+            Debug.WriteLine("[Debug] 路径为空，准备调用 GamePathFinder.FindGamePath()...");
+            var foundPath = GamePathFinder.FindGamePath();
+            Debug.WriteLine($"[Debug] GamePathFinder 返回的路径为: '{foundPath}'");
 
-            var dialog = new ContentDialog
+            if (!string.IsNullOrEmpty(foundPath))
             {
-                Title = "自动找到游戏路径",
-                Content = $"检测到可能的《原神》安装路径：\n\n{foundPath}\n\n是否应用此路径？",
-                PrimaryButtonText = "应用",
-                CloseButtonText = "手动选择",
-                DefaultButton = ContentDialogButton.Primary,
-                XamlRoot = XamlRoot
-            };
-
-            var result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                PathTextBox.Text = foundPath;
-                await LoadGameInfoAsync(foundPath);
-                await _localSettingsService.SaveSettingAsync("GameInstallationPath", foundPath);
-                WeakReferenceMessenger.Default.Send(new GamePathChangedMessage(foundPath));
+                Debug.WriteLine("[Debug] 进入 DispatcherQueue，准备调用 ShowAutoPathDialog");
+                DispatcherQueue.TryEnqueue(async () =>
+                {
+                    await ShowAutoPathDialog(foundPath);
+                });
             }
             else
             {
-                await PickGameFolderAsync();
+                Debug.WriteLine("[Debug] 未找到路径，跳过弹窗。");
             }
         }
+
+        await LoadAccountsAsync();
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"[Debug] BlankPage_Loaded 发生异常: {ex.Message}\n{ex.StackTrace}");
+    }
+    await LoadRedeemCodesAsync();
+    Debug.WriteLine("========== [Debug] BlankPage_Loaded 结束 ==========");
+}
+
+private async Task ShowAutoPathDialog(string foundPath)
+{
+    Debug.WriteLine($"========== [Debug] ShowAutoPathDialog 开始 ==========");
+    Debug.WriteLine($"[Debug] 接收到的 foundPath: {foundPath}");
+
+    if (string.IsNullOrEmpty(foundPath)) 
+    {
+        Debug.WriteLine("[Debug] foundPath 为空，已 return。");
+        return;
+    }
+    
+    if (XamlRoot == null)
+    {
+        Debug.WriteLine("[Debug] 严重问题: XamlRoot 为 null！弹窗无法显示，已 return。");
+        return;
+    }
+
+    try
+    {
+        Debug.WriteLine("[Debug] 正在创建 ContentDialog...");
+        var dialog = new ContentDialog
+        {
+            Title = "自动找到游戏路径",
+            Content = $"检测到可能的《原神》安装路径：\n\n{foundPath}\n\n是否应用此路径？",
+            PrimaryButtonText = "应用",
+            CloseButtonText = "手动选择",
+            DefaultButton = ContentDialogButton.Primary,
+            XamlRoot = this.XamlRoot
+        };
+
+        Debug.WriteLine("[Debug] 准备调用 dialog.ShowAsync()...");
+        var result = await dialog.ShowAsync();
+        Debug.WriteLine($"[Debug] 弹窗被关闭，用户的选择是: {result}");
+
+        if (result == ContentDialogResult.Primary)
+        {
+            Debug.WriteLine("[Debug] 用户点击了“应用”，正在保存...");
+            PathTextBox.Text = foundPath;
+            await LoadGameInfoAsync(foundPath);
+            await _localSettingsService.SaveSettingAsync("GameInstallationPath", foundPath);
+            WeakReferenceMessenger.Default.Send(new GamePathChangedMessage(foundPath));
+        }
+        else
+        {
+            Debug.WriteLine("[Debug] 用户点击了“手动选择”，调用 PickGameFolderAsync()");
+            await PickGameFolderAsync();
+        }
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"[Debug] ShowAutoPathDialog 发生异常 (可能是多次弹窗冲突): {ex.Message}\n{ex.StackTrace}");
+    }
+}
 
         private async void SelectPath_Click(object sender, RoutedEventArgs e)
         {

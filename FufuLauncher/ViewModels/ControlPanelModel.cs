@@ -137,6 +137,41 @@ public partial class ControlPanelModel : ObservableObject
             Debug.WriteLine($"加载本地数据失败: {ex.Message}");
         }
     }
+    
+    public void UpdateAndSavePlayTime(int secondsToAdd)
+    {
+        var dateKey = DateTime.Now.ToString("yyyy-MM-dd");
+        
+        if (_playTimeData.ContainsKey(dateKey))
+        {
+            _playTimeData[dateKey] += secondsToAdd;
+        }
+        else
+        {
+            _playTimeData[dateKey] = secondsToAdd;
+        }
+        
+        _ = SaveConfigAsync();
+    }
+    
+    private async Task SaveConfigAsync()
+    {
+        try
+        {
+            var config = new ControlPanelConfig
+            {
+                GamePlayTimeData = _playTimeData,
+                LastPlayDate = DateTime.Now.ToString("yyyy-MM-dd")
+            };
+            
+            var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+            await File.WriteAllTextAsync(_configPath, json);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"保存游戏时间配置失败: {ex.Message}");
+        }
+    }
 
     private async Task SaveGachaDataAsync()
     {
