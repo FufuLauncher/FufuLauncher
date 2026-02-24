@@ -153,8 +153,18 @@ public sealed partial class PluginPage : Page
         rbCustom.Checked += (_, _) => txtCustomUrl.Visibility = Visibility.Visible;
         rbCustom.Unchecked += (_, _) => txtCustomUrl.Visibility = Visibility.Collapsed;
 
+        var warningText = new TextBlock 
+        { 
+            Text = "注意：最新体验版插件已内置手柄热切换，请勿与下方独立的手柄热切换插件同时启用，否则会导致游戏崩溃！稳定版则无此冲突", 
+            Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red),
+            TextWrapping = TextWrapping.Wrap,
+            FontSize = 13,
+            Margin = new Thickness(0, 5, 0, 5)
+        };
+        
         stackPanel.Children.Add(new TextBlock { Text = "请选择要下载并安装的插件包：", Margin = new Thickness(0, 0, 0, 5) });
         stackPanel.Children.Add(rbLatest);
+        stackPanel.Children.Add(warningText);
         stackPanel.Children.Add(rbOld);
         stackPanel.Children.Add(rbHotSwitch);
         stackPanel.Children.Add(rbCustom);
