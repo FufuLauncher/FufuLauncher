@@ -191,21 +191,30 @@ namespace FufuLauncher.Services
                     return result;
                 }
 
-                var gameExePath = Path.Combine(gamePath, "GenshinImpact.exe");
-                if (!File.Exists(gameExePath))
-                {
-                    gameExePath = Path.Combine(gamePath, "YuanShen.exe");
-                    logBuilder.AppendLine($"[启动流程] 尝试备用路径: {gameExePath}");
-                }
+                var genshinExePath = Path.Combine(gamePath, "GenshinImpact.exe");
+                var yuanShenExePath = Path.Combine(gamePath, "YuanShen.exe");
+                
+                var hasGenshin = File.Exists(genshinExePath);
+                var hasYuanShen = File.Exists(yuanShenExePath);
+                var gameExePath = string.Empty;
 
-                if (!File.Exists(gameExePath))
+                if (hasGenshin && hasYuanShen)
                 {
-                    result.ErrorMessage = $"游戏主程序不存在\n查找路径:\n- {Path.Combine(gamePath, "GenshinImpact.exe")}\n- {Path.Combine(gamePath, "YuanShen.exe")}";
+                    result.ErrorMessage = "在当前游戏目录中同时检测到了国际服(GenshinImpact.exe)和国服(YuanShen.exe)程序，启动器无法确定该启动哪一个。请清理多余的客户端文件。";
                     logBuilder.AppendLine($"[启动流程] ? 错误: {result.ErrorMessage}");
                     result.DetailLog = logBuilder.ToString();
                     return result;
                 }
 
+                if (!hasGenshin && !hasYuanShen)
+                {
+                    result.ErrorMessage = $"游戏主程序不存在，请检查路径设置是否正确。\n查找路径:\n- {genshinExePath}\n- {yuanShenExePath}";
+                    logBuilder.AppendLine($"[启动流程] ? 错误: {result.ErrorMessage}");
+                    result.DetailLog = logBuilder.ToString();
+                    return result;
+                }
+                
+                gameExePath = hasGenshin ? genshinExePath : yuanShenExePath;
                 logBuilder.AppendLine($"[启动流程] 找到游戏程序: {gameExePath}");
 
                 var config = await _gameConfigService.LoadGameConfigAsync(gamePath);

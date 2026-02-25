@@ -657,16 +657,18 @@ namespace FufuLauncher.ViewModels
             {
                 var result = await _gameLauncherService.LaunchGameAsync();
 
-// 找到这部分代码并替换：
                 if (result.Success)
                 {
-                    // 优化点：将 3次*1000ms 的低频检测，改为 10次*300ms 的高频检测
                     for (int i = 0; i < 10; i++)
                     {
                         await Task.Delay(300);
                         await ForceRefreshGameStateAsync();
                         if (IsGameRunning) break;
                     }
+                }
+                else
+                {
+                    _notificationService.Show("游戏启动失败", result.ErrorMessage, NotificationType.Error, 0);
                 }
             }
             finally
@@ -682,14 +684,14 @@ namespace FufuLauncher.ViewModels
             var savedPath = await _localSettingsService.ReadSettingAsync("GameInstallationPath");
             var gamePath = savedPath?.ToString()?.Trim('"')?.Trim();
 
-            if (string.IsNullOrEmpty(gamePath) || !System.IO.Directory.Exists(gamePath))
+            if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
             {
                 _notificationService.Show("未设置游戏路径", "请先前往设置页面选择游戏安装路径", NotificationType.Error, 0);
                 return;
             }
 
-            var screenshotPath = System.IO.Path.Combine(gamePath, "ScreenShot");
-            if (!System.IO.Directory.Exists(screenshotPath))
+            var screenshotPath = Path.Combine(gamePath, "ScreenShot");
+            if (!Directory.Exists(screenshotPath))
             {
                 _notificationService.Show("截图文件夹不存在", $"未找到截图文件夹: {screenshotPath}", NotificationType.Error, 0);
                 return;
@@ -733,7 +735,7 @@ namespace FufuLauncher.ViewModels
 
         private async Task ForceRefreshGameStateAsync()
         {
-            bool actualState = await CheckGameProcessRunningAsync(); // 改为 awaited
+            bool actualState = await CheckGameProcessRunningAsync();
             if (actualState != IsGameRunning)
             {
                 await SetGameRunningStateAsync(actualState);
@@ -749,8 +751,7 @@ namespace FufuLauncher.ViewModels
                     .ToList();
 
                 if (processes.Count == 0) return false;
-
-                // 获取当前用户配置的真实游戏路径
+                
                 if (string.IsNullOrEmpty(_cachedGamePath))
                 {
                     var savedPathTask = await _localSettingsService.ReadSettingAsync("GameInstallationPath");
@@ -763,14 +764,12 @@ namespace FufuLauncher.ViewModels
                     try
                     {
                         if (p.HasExited) continue;
-
-                        // 核心：严格校验进程所在的物理路径
+                        
                         if (!string.IsNullOrEmpty(gamePath))
                         {
                             var processPath = p.MainModule?.FileName;
                             if (!string.IsNullOrEmpty(processPath))
                             {
-                                // 如果进程路径不是配置的游戏目录，说明是无关同名进程（如私服/其他工具），直接跳过
                                 if (processPath.StartsWith(gamePath, StringComparison.OrdinalIgnoreCase))
                                 {
                                     return true;
@@ -778,8 +777,7 @@ namespace FufuLauncher.ViewModels
                                 continue; 
                             }
                         }
-
-                        // 如果因为降权获取不到路径但有窗口句柄，也判定为真实运行中
+                        
                         if (p.MainWindowHandle != IntPtr.Zero)
                         {
                             return true;
@@ -789,13 +787,10 @@ namespace FufuLauncher.ViewModels
                     }
                     catch (Win32Exception)
                     {
-                        // Win32Exception 意味着权限不足 (Access Denied)。
-                        // 游戏大概率以管理员运行，而启动器是普通权限。这是正常现象，说明找对了进程。
                         return true;
                     }
                     catch (InvalidOperationException)
                     {
-                        // 进程在此刻恰好结束，引发操作无效，跳过
                         continue;
                     }
                 }
@@ -828,19 +823,6 @@ namespace FufuLauncher.ViewModels
                 OnPropertyChanged(nameof(LaunchButtonIcon));
                 OnPropertyChanged(nameof(IsGameRunning));
             });
-        }
-
-        private bool CheckGameProcessRunning()
-        {
-            try
-            {
-                return Process.GetProcessesByName(TargetProcessName).Length > 0 ||
-                       Process.GetProcessesByName(TargetProcessNameAlt).Length > 0;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         private async Task TerminateGameAsync()

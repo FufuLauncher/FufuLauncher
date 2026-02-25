@@ -1041,32 +1041,98 @@ public sealed partial class MainWindow : WindowEx
             AnimateNotification(notificationCard, 380, 0, 300);
             if (message.Duration > 0) SetupAutoDismiss(notificationCard, message.Duration);
         }
-        catch { }
+        catch
+        {
+            // ignored
+        }
     }
 
     private Grid CreateNotificationCard(NotificationMessage message)
+{
+    var card = new Grid
     {
-        var card = new Grid
-        {
-            Background = GetNotificationBrush(message.Type),
-            CornerRadius = new CornerRadius(8),
-            Padding = new Thickness(16, 12, 16, 12),
-            Height = 80,
-            Width = 360,
-            Margin = new Thickness(0, 0, 0, 8),
-            RenderTransform = new TranslateTransform { X = 380 }
-        };
-        var icon = new FontIcon { FontFamily = new FontFamily("Segoe Fluent Icons"), FontSize = 16, Glyph = GetNotificationIcon(message.Type), VerticalAlignment = VerticalAlignment.Top, Margin = new Thickness(0, 2, 0, 0), Foreground = new SolidColorBrush(Colors.White) };
-        var contentPanel = new StackPanel { Spacing = 4, Margin = new Thickness(12, 0, 0, 0) };
-        contentPanel.Children.Add(new TextBlock { Text = message.Title, FontSize = 14, FontWeight = FontWeights.SemiBold, TextWrapping = TextWrapping.WrapWholeWords, Foreground = new SolidColorBrush(Colors.White) });
-        contentPanel.Children.Add(new TextBlock { Text = message.Message, FontSize = 12, Opacity = 0.9, TextWrapping = TextWrapping.WrapWholeWords, Foreground = new SolidColorBrush(Colors.White) });
+        Background = GetNotificationBrush(message.Type),
+        CornerRadius = new CornerRadius(8),
+        Padding = new Thickness(16, 12, 16, 12),
+        MinHeight = 80, 
+        Width = 360,
+        Margin = new Thickness(0, 0, 0, 8),
+        RenderTransform = new TranslateTransform { X = 380 }
+    };
+    
+    card.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+    card.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+    card.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+    
+    var icon = new FontIcon 
+    { 
+        FontFamily = new FontFamily("Segoe Fluent Icons"), 
+        FontSize = 18, 
+        Glyph = GetNotificationIcon(message.Type), 
+        VerticalAlignment = VerticalAlignment.Top, 
+        Margin = new Thickness(0, 2, 12, 0),
+        Foreground = new SolidColorBrush(Colors.White) 
+    };
+    Grid.SetColumn(icon, 0);
+    
+    var contentPanel = new StackPanel 
+    { 
+        Spacing = 6, 
+        VerticalAlignment = VerticalAlignment.Center 
+    };
+    Grid.SetColumn(contentPanel, 1);
+    
+    contentPanel.Children.Add(new TextBlock 
+    { 
+        Text = message.Title, 
+        FontSize = 14, 
+        FontWeight = FontWeights.SemiBold, 
+        TextWrapping = TextWrapping.WrapWholeWords, 
+        Foreground = new SolidColorBrush(Colors.White) 
+    });
+    
+    contentPanel.Children.Add(new TextBlock 
+    { 
+        Text = message.Message, 
+        FontSize = 12, 
+        Opacity = 0.9, 
+        TextWrapping = TextWrapping.WrapWholeWords, 
+        Foreground = new SolidColorBrush(Colors.White) 
+    });
+    
+    var closeButton = new Button 
+    { 
+        Content = new FontIcon { Glyph = "\uE711", FontSize = 12 }, 
+        Background = new SolidColorBrush(Color.FromArgb(30, 255, 255, 255)),
+        BorderThickness = new Thickness(0),
+        CornerRadius = new CornerRadius(4),
+        Width = 32, 
+        Height = 32, 
+        Margin = new Thickness(12, -4, -4, 0), 
+        HorizontalAlignment = HorizontalAlignment.Right, 
+        VerticalAlignment = VerticalAlignment.Top, 
+        Foreground = new SolidColorBrush(Colors.White) 
+    };
+    Grid.SetColumn(closeButton, 2);
+    closeButton.Click += (s, e) => { try { NotificationPanel.Children.Remove(card); } catch { } };
+    
+    card.Children.Add(icon); 
+    card.Children.Add(contentPanel); 
+    card.Children.Add(closeButton);
+    
+    return card;
+}
 
-        var closeButton = new Button { Content = new FontIcon { Glyph = "\uE711", FontSize = 12 }, Background = new SolidColorBrush(Colors.Transparent), BorderBrush = new SolidColorBrush(Colors.Transparent), Width = 32, Height = 32, Margin = new Thickness(0, -4, -4, 0), HorizontalAlignment = HorizontalAlignment.Right, VerticalAlignment = VerticalAlignment.Top, Foreground = new SolidColorBrush(Colors.White) };
-        closeButton.Click += (s, e) => { try { NotificationPanel.Children.Remove(card); } catch { } };
-
-        card.Children.Add(icon); card.Children.Add(contentPanel); card.Children.Add(closeButton);
-        return card;
-    }
+private string GetNotificationIcon(NotificationType type)
+{
+    return type switch
+    {
+        NotificationType.Success => "\uE930",
+        NotificationType.Warning => "\uE7BA",
+        NotificationType.Error => "\uEA39", 
+        _ => "\uE946"
+    };
+}
 
     private void AnimateNotification(FrameworkElement element, double from, double to, int duration)
     {
@@ -1094,17 +1160,6 @@ public sealed partial class MainWindow : WindowEx
             NotificationType.Warning => new SolidColorBrush(ColorHelper.FromArgb(255, 255, 185, 0)),
             NotificationType.Error => new SolidColorBrush(ColorHelper.FromArgb(255, 232, 17, 35)),
             _ => new SolidColorBrush(ColorHelper.FromArgb(255, 0, 103, 192))
-        };
-    }
-
-    private string GetNotificationIcon(NotificationType type)
-    {
-        return type switch
-        {
-            NotificationType.Success => "\uE930",
-            NotificationType.Warning => "\uE7BA",
-            NotificationType.Error => "\uE711",
-            _ => "\uE946"
         };
     }
 

@@ -12,7 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +63,7 @@
     &quot;发布到文件夹.Publish FufuLauncher to folder.executor&quot;: &quot;Run&quot;
   }
 }</component>
-  <component name="RunManager" selected="发布到文件夹.Publish FufuLauncher to folder">
+  <component name="RunManager" selected=".NET 启动设置配置文件.FufuLauncher">
     <configuration name="Publish FufuLauncher to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" include_all_content_for_self_extract="true" include_native_libs_for_self_extract="true" platform="x64" produce_single_file="true" ready_to_run="true" self_contained="true" target_folder="$PROJECT_DIR$/FufuLauncher/bin/Release/net8.0-windows10.0.26100.0/win-x64/publish" target_framework="net8.0-windows10.0.26100.0" uuid_high="1964370738064323383" uuid_low="-8405170811345767747">
         <runtimes>
@@ -149,7 +152,9 @@
       <workItem from="1771787808678" duration="186000" />
       <workItem from="1771788014548" duration="2989000" />
       <workItem from="1771794283726" duration="7243000" />
-      <workItem from="1771882250313" duration="3834000" />
+      <workItem from="1771882250313" duration="3871000" />
+      <workItem from="1771903827383" duration="3289000" />
+      <workItem from="1771980115327" duration="4348000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -183,7 +188,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771884031780</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1.0.9.0">
+      <option name="closed" value="true" />
+      <created>1771895224285</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1771895224285</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,7 +221,8 @@
     <MESSAGE value="修复问题" />
     <MESSAGE value="小改动" />
     <MESSAGE value="更新版本号，预发布1.0.9.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新版本号，预发布1.0.9.0" />
+    <MESSAGE value="1.0.9.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.0.9.0" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

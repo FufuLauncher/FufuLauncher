@@ -211,15 +211,14 @@
             </StackPanel>
         </Grid>
 
-        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False">
+        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel x:Name="NotificationPanel" 
                         Orientation="Vertical" 
                         Spacing="8"
                         Width="360"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom"
-                        Margin="0,0,24,24"
-                        IsHitTestVisible="True"/>
+                        Margin="0,0,24,24"/>
         </Grid>
 
         <Grid x:Name="AppTitleBar" 
