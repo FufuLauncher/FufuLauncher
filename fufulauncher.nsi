@@ -1,4 +1,4 @@
-!define APP_NAME "芙芙启动器"
+﻿!define APP_NAME "芙芙启动器"
 !define APP_VERSION "1.0.9.0"
 !define APP_PUBLISHER "FufuLauncher"
 !define APP_WEB_SITE "https://github.com/FufuLauncher/FufuLauncher"
@@ -17,15 +17,17 @@ OutFile "${APP_NAME}_Setup_v${APP_VERSION}.exe"
 InstallDir "$PROGRAMFILES64\${APP_NAME}"
 RequestExecutionLevel admin
 
+ManifestDPIAware true
+
 # 界面设置
 !define MUI_ABORTWARNING
-#!define MUI_ICON "install.ico"
-#!define MUI_UNICON "uninstall.ico"
+!define MUI_ICON "install.ico"
+!define MUI_UNICON "uninstall.ico"
 
 # 安装向导页面
 !insertmacro MUI_PAGE_WELCOME
 !insertmacro MUI_PAGE_DIRECTORY
-!insertmacro MUI_PAGE_COMPONENTS    ; 组件选择页面
+!insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 

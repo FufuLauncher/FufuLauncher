@@ -12,10 +12,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/Yae/YaeAchievement.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Models/AccountInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Models/AccountInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AchievementWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AchievementWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +156,8 @@
       <workItem from="1771794283726" duration="7243000" />
       <workItem from="1771882250313" duration="3871000" />
       <workItem from="1771903827383" duration="3289000" />
-      <workItem from="1771980115327" duration="4348000" />
+      <workItem from="1771980115327" duration="9405000" />
+      <workItem from="1772051844346" duration="4111000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -196,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771895224285</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="优化使用体验">
+      <option name="closed" value="true" />
+      <created>1771984537764</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1771984537764</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,7 +233,8 @@
     <MESSAGE value="小改动" />
     <MESSAGE value="更新版本号，预发布1.0.9.0" />
     <MESSAGE value="1.0.9.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.0.9.0" />
+    <MESSAGE value="优化使用体验" />
+    <option name="LAST_COMMIT_MESSAGE" value="优化使用体验" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

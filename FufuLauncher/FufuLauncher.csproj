@@ -80,6 +80,10 @@
         </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Assets\Yae\" />
+    </ItemGroup>
+
     <Target Name="RemoveUnwantedNativeLanguageFolders" AfterTargets="Build;Publish">
         <ItemGroup>
             <AllMuiFiles Include="$(OutDir)*\*.mui" />

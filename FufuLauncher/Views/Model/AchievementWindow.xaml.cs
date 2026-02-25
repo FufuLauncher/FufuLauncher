@@ -910,52 +910,30 @@ private void ApplyFilters()
 
     private async void OnYaeImportClick(object sender, RoutedEventArgs e)
     {
-        try
+        var contentPanel = new StackPanel { Spacing = 12, MaxWidth = 400 };
+    
+        contentPanel.Children.Add(new TextBlock 
+        { 
+            Text = "请按照以下步骤操作：", 
+            TextWrapping = TextWrapping.Wrap 
+        });
+
+        contentPanel.Children.Add(new TextBlock 
+        { 
+            Text = "1. 请自行下载并运行 YaeAchievement 工具。\n2. 在 Yae 中扫描完您的成就后，点击将其导出为 Excel 或 CSV 表格。\n3. 回到本界面，点击【导入记录】按钮，选择刚才导出的文件即可完成导入。", 
+            TextWrapping = TextWrapping.Wrap,
+            Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.LightGray)
+        });
+
+        var dialog = new ContentDialog
         {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string yaePath = Path.Combine(baseDir, "Assets", "Yae", "YaeAchievement.exe");
+            Title = "如何导入 Yae 成就记录",
+            Content = contentPanel,
+            CloseButtonText = "我知道了",
+            XamlRoot = Content.XamlRoot
+        };
 
-            if (!File.Exists(yaePath))
-            {
-                await ShowDialogAsync("找不到文件", $"未在以下路径找到导入工具：\n{yaePath}\n\n请重新安装本软件");
-                return;
-            }
-
-            var psi = new ProcessStartInfo
-            {
-                FileName = yaePath,
-                UseShellExecute = true,
-                WorkingDirectory = Path.GetDirectoryName(yaePath)
-            };
-            
-            var process = Process.Start(psi);
-
-            if (process != null)
-            {
-                _ = Task.Run(async () =>
-                {
-                    try
-                    {
-                        await Task.Delay(1000);
-
-                        process.Refresh();
-
-                        if (process.MainWindowHandle != IntPtr.Zero)
-                        {
-                            SetWindowText(process.MainWindowHandle, "YaeAchievement");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine($"重命名窗口失败: {ex.Message}");
-                    }
-                });
-            }
-        }
-        catch (Exception ex)
-        {
-            await ShowDialogAsync("启动失败", $"无法启动导入工具：\n{ex.Message}");
-        }
+        await dialog.ShowAsync();
     }
     
 private async Task RunImportLogic(string filePath)

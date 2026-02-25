@@ -1114,7 +1114,12 @@ public sealed partial class MainWindow : WindowEx
         Foreground = new SolidColorBrush(Colors.White) 
     };
     Grid.SetColumn(closeButton, 2);
-    closeButton.Click += (s, e) => { try { NotificationPanel.Children.Remove(card); } catch { } };
+    closeButton.Click += (s, e) => { try { NotificationPanel.Children.Remove(card); }
+        catch
+        {
+            // ignored
+        }
+    };
     
     card.Children.Add(icon); 
     card.Children.Add(contentPanel); 
