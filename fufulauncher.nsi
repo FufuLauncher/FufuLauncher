@@ -3,6 +3,7 @@
 !define APP_PUBLISHER "FufuLauncher"
 !define APP_WEB_SITE "https://github.com/FufuLauncher/FufuLauncher"
 !define APP_EXE "FufuLauncher.exe"
+!define SOURCE_DIR ".\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0"
 
 VIProductVersion "${APP_VERSION}"
 VIFileVersion "${APP_VERSION}"
@@ -45,7 +46,7 @@ Section "主程序" SecMain
     SetRegView 64
     SetOutPath "$INSTDIR"
     
-    File /r ".\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0\*"
+    File /r "${SOURCE_DIR}\*"
     
     WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" \
         "DisplayName" "${APP_NAME}"
@@ -117,3 +118,4 @@ Function .onInit
     done:
 
 FunctionEnd
+
