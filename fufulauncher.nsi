@@ -75,6 +75,8 @@ Section "开始菜单快捷方式" SecStartMenu
 SectionEnd
 
 Section "Uninstall"
+    SetRegView 64
+    
     # 删除开始菜单快捷方式
     Delete "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk"
     Delete "$SMPROGRAMS\${APP_NAME}\卸载.lnk"
@@ -95,6 +97,7 @@ Function .onInit
     ${EndIf}
     
     # 如果已安装，提示卸载
+    SetRegView 64
     ReadRegStr $R0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString"
     StrCmp $R0 "" done
     
@@ -112,4 +115,5 @@ Function .onInit
     no_remove_uninstaller:
         # 如果卸载失败，继续安装
     done:
+
 FunctionEnd
