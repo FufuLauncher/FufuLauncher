@@ -86,29 +86,35 @@ public sealed partial class PluginPage : Page
     
     private void MoveDirectorySafe(string sourceDir, string destDir)
     {
+        var parentDir = Path.GetDirectoryName(destDir);
+        if (!string.IsNullOrEmpty(parentDir) && !Directory.Exists(parentDir))
+        {
+            Directory.CreateDirectory(parentDir);
+        }
+
         if (Path.GetPathRoot(sourceDir)!.Equals(Path.GetPathRoot(destDir), StringComparison.OrdinalIgnoreCase))
         {
             Directory.Move(sourceDir, destDir);
             return;
         }
-        
+    
         if (!Directory.Exists(destDir))
         {
             Directory.CreateDirectory(destDir);
         }
-        
+    
         foreach (var file in Directory.GetFiles(sourceDir))
         {
             var destFile = Path.Combine(destDir, Path.GetFileName(file));
             File.Copy(file, destFile, true);
         }
-        
+    
         foreach (var dir in Directory.GetDirectories(sourceDir))
         {
             var destSubDir = Path.Combine(destDir, Path.GetFileName(dir));
             MoveDirectorySafe(dir, destSubDir);
         }
-        
+    
         Directory.Delete(sourceDir, true);
     }
 
@@ -234,6 +240,10 @@ public sealed partial class PluginPage : Page
         var tempPath = Path.Combine(Path.GetTempPath(), fileName);
         var extractPath = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(fileName) + "_Extract_" + Guid.NewGuid());
         var pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
+        if (!Directory.Exists(pluginsDir))
+        {
+            Directory.CreateDirectory(pluginsDir);
+        }
         
         var progressBar = new ProgressBar 
         { 
