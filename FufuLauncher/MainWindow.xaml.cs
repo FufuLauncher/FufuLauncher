@@ -110,6 +110,7 @@ public sealed partial class MainWindow : WindowEx
     public MainWindow()
     {
         InitializeComponent();
+        CheckAndCreatePluginsFolder();
 
         ShowWindowCommand = new RelayCommand(ShowWindow);
         ExitApplicationCommand = new RelayCommand(ExitApplication);
@@ -918,6 +919,24 @@ public sealed partial class MainWindow : WindowEx
         SystemMessageBar.Visibility = Visibility.Visible;
         _networkCheckTimer.Start();
         CheckNetworkAndProxyStatus();
+    }
+    
+    private void CheckAndCreatePluginsFolder()
+    {
+        try
+        {
+            string pluginsPath = Path.Combine(AppContext.BaseDirectory, "Plugins");
+            
+            if (!Directory.Exists(pluginsPath))
+            {
+                Directory.CreateDirectory(pluginsPath);
+                Debug.WriteLine("已自动创建 Plugins 文件夹");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"创建 Plugins 文件夹失败: {ex.Message}");
+        }
     }
 
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
