@@ -11,10 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Assets/freecam.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/AnnouncementService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/AnnouncementService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/LocalSettingsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/LocalSettingsService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginWebViewDialog.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginWebViewDialog.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +34,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e703623710cc408eaac0f2c6feb0a00c81230/e9/78bac74a/ExceptionHelpers.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="SWEA" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -163,7 +168,8 @@
       <workItem from="1772452255305" duration="1945000" />
       <workItem from="1772535561551" duration="84000" />
       <workItem from="1772536626661" duration="1285000" />
-      <workItem from="1772542244606" duration="2188000" />
+      <workItem from="1772542244606" duration="2767000" />
+      <workItem from="1772622261308" duration="4777000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -261,7 +267,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772537272593</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="更新插件获取">
+      <option name="closed" value="true" />
+      <created>1772544457869</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1772544457869</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +307,8 @@
     <MESSAGE value="修复插件下载安装问题" />
     <MESSAGE value="不再弹窗" />
     <MESSAGE value="减少体积" />
-    <option name="LAST_COMMIT_MESSAGE" value="减少体积" />
+    <MESSAGE value="更新插件获取" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新插件获取" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

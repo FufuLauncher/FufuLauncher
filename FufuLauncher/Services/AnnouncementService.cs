@@ -7,13 +7,12 @@ namespace FufuLauncher.Services;
 public class AnnouncementService : IAnnouncementService
 {
     private const string ApiUrl = "https://philia093.cyou/announcement.json";
-    private const string CacheFileName = "announcement_cache.txt";
-    private readonly string _cacheFilePath;
     private readonly HttpClient _httpClient;
-
-    public AnnouncementService()
+    private readonly ILocalSettingsService _localSettingsService;
+    
+    public AnnouncementService(ILocalSettingsService localSettingsService)
     {
-        _cacheFilePath = Path.Combine(AppContext.BaseDirectory, CacheFileName);
+        _localSettingsService = localSettingsService;
         _httpClient = new HttpClient();
         _httpClient.Timeout = TimeSpan.FromSeconds(10);
     }
@@ -31,16 +30,17 @@ public class AnnouncementService : IAnnouncementService
             }
 
             var remoteUrl = data.Info;
-
             string localUrl = string.Empty;
-            if (File.Exists(_cacheFilePath))
+            
+            var cachedUrlObj = await _localSettingsService.ReadSettingAsync(LocalSettingsService.LastAnnouncementUrlKey);
+            if (cachedUrlObj is string cachedUrl)
             {
-                localUrl = await File.ReadAllTextAsync(_cacheFilePath);
+                localUrl = cachedUrl;
             }
 
             if (!string.Equals(remoteUrl, localUrl, StringComparison.OrdinalIgnoreCase))
             {
-                await File.WriteAllTextAsync(_cacheFilePath, remoteUrl);
+                await _localSettingsService.SaveSettingAsync(LocalSettingsService.LastAnnouncementUrlKey, remoteUrl);
                 return remoteUrl;
             }
 

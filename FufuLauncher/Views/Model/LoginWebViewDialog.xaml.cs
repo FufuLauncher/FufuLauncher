@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
 using MihoyoBBS;
 using Windows.Graphics;
+using FufuLauncher.Services;
 
 namespace FufuLauncher.Views;
 
@@ -30,6 +31,88 @@ public sealed partial class LoginWebViewDialog : Window
         _autoCheckTimer = new DispatcherTimer();
         _autoCheckTimer.Interval = TimeSpan.FromSeconds(3);
         _autoCheckTimer.Tick += AutoCheckTimer_Tick;
+        
+        if (LoginWebView != null)
+        {
+            LoginWebView.Loaded += LoginWebView_Loaded;
+        }
+    }
+    
+    private async void LoginWebView_Loaded(object sender, RoutedEventArgs e)
+    {
+        LoginWebView.Loaded -= LoginWebView_Loaded;
+        try
+        {
+            var localSettingsService = new LocalSettingsService();
+            var savedConfigObj = await localSettingsService.ReadSettingAsync("AccountConfig");
+            
+            if (savedConfigObj != null)
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "发现已保存的配置",
+                    Content = "检测到本地数据库存在之前保存的账号配置，是否直接应用并完成登录？",
+                    PrimaryButtonText = "是，直接应用",
+                    CloseButtonText = "否，重新登录",
+                    XamlRoot = LoginWebView.XamlRoot
+                };
+
+                var result = await dialog.ShowAsync();
+                
+                if (result == ContentDialogResult.Primary)
+                {
+                    StatusText.Text = "正在应用本地配置...";
+                    LoadingBar.Visibility = Visibility.Visible;
+                    LoadingBar.IsIndeterminate = true;
+
+                    var options = new JsonSerializerOptions
+                    {
+                        WriteIndented = true,
+                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                    };
+
+                    Config config = null;
+                    if (savedConfigObj is JsonElement jsonElement)
+                    {
+                        config = JsonSerializer.Deserialize<Config>(jsonElement.GetRawText(), options);
+                    }
+                    else if (savedConfigObj is string jsonString)
+                    {
+                        config = JsonSerializer.Deserialize<Config>(jsonString, options);
+                    }
+                    else
+                    {
+                        var json = JsonSerializer.Serialize(savedConfigObj, options);
+                        config = JsonSerializer.Deserialize<Config>(json, options);
+                    }
+
+                    if (config != null)
+                    {
+                        var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+                        var dir = Path.GetDirectoryName(path);
+                        if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                            Directory.CreateDirectory(dir);
+
+                        var newJson = JsonSerializer.Serialize(config, options);
+                        await File.WriteAllTextAsync(path, newJson);
+
+                        Debug.WriteLine($"已应用本地配置并保存至: {path}");
+
+                        _loginCompleted = true;
+                        StatusText.Text = "应用成功";
+                        _autoCheckTimer.Stop();
+
+                        await Task.Delay(1500);
+                        await ClearMiyousheCookiesAsync();
+                        Close();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"检查或应用本地配置失败: {ex.Message}");
+        }
     }
 
     private void InitializeWindowConfiguration(WindowId windowId)
@@ -245,6 +328,17 @@ public sealed partial class LoginWebViewDialog : Window
             await File.WriteAllTextAsync(path, newJson);
 
             Debug.WriteLine($"文件已保存: {path}");
+            
+            try
+            {
+                var localSettingsService = new LocalSettingsService();
+                await localSettingsService.SaveSettingAsync("AccountConfig", config);
+                Debug.WriteLine("已同步将配置数据保存至设置的配置数据库中");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"配置数据库保存失败: {ex.Message}");
+            }
         }
         catch (Exception ex)
         {

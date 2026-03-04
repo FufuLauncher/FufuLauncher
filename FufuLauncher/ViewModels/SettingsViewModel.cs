@@ -69,6 +69,9 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private double _globalBackgroundImageOpacity = 1.0;
 
         [ObservableProperty] private WindowBackdropType _currentWindowBackdrop;
+        [ObservableProperty] private string _webView2CacheSize;
+
+        public IAsyncRelayCommand ClearWebView2CacheCommand { get; }
         public ICommand SwitchThemeCommand
         {
             get;
@@ -128,6 +131,8 @@ namespace FufuLauncher.ViewModels
             CheckUpdateCommand = new RelayCommand(CheckUpdate);
             ElementTheme = _themeSelectorService.Theme;
             _versionDescription = GetVersionDescription();
+            ClearWebView2CacheCommand = new AsyncRelayCommand(ClearWebView2CacheAsync);
+            UpdateWebView2CacheSize();
 
             SwitchThemeCommand = new RelayCommand<ElementTheme>(
                 async (param) =>
@@ -171,6 +176,126 @@ namespace FufuLauncher.ViewModels
                 });
 
             SelectCustomBackgroundCommand = new AsyncRelayCommand(SelectCustomBackgroundAsync);
+        }
+        
+        private string FormatSize(long bytes)
+        {
+            if (bytes == 0) return "0 B";
+    
+            string[] suffixes = { "B", "KB", "MB", "GB", "TB" };
+            int counter = 0;
+            decimal number = bytes;
+    
+            while (Math.Round(number / 1024) >= 1)
+            {
+                number /= 1024;
+                counter++;
+            }
+            return string.Format("{0:n2} {1}", number, suffixes[counter]);
+        }
+        
+        private void UpdateWebView2CacheSize()
+        {
+            try
+            {
+                string cacheFolder = Path.Combine(AppContext.BaseDirectory, "FufuLauncher.exe.WebView2");
+                if (Directory.Exists(cacheFolder))
+                {
+                    long size = GetDirectorySize(new DirectoryInfo(cacheFolder));
+                    WebView2CacheSize = FormatSize(size);
+                }
+                else
+                {
+                    WebView2CacheSize = "0 MB";
+                }
+            }
+            catch
+            {
+                WebView2CacheSize = "未知大小";
+            }
+        }
+
+        private long GetDirectorySize(DirectoryInfo d)
+        {
+            long size = 0;
+            try
+            {
+                FileInfo[] fis = d.GetFiles();
+                foreach (FileInfo fi in fis)
+                {
+                    size += fi.Length;
+                }
+                
+                DirectoryInfo[] dis = d.GetDirectories();
+                foreach (DirectoryInfo di in dis)
+                {
+                    size += GetDirectorySize(di);
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return size;
+        }
+
+        private async Task ClearWebView2CacheAsync()
+        {
+            try
+            {
+                var cacheFolder = Path.Combine(AppContext.BaseDirectory, "FufuLauncher.exe.WebView2");
+        
+                if (Directory.Exists(cacheFolder))
+                {
+                    await Task.Run(() => SafeDeleteDirectory(cacheFolder));
+                }
+                
+                UpdateWebView2CacheSize();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"清除 WebView2 缓存失败: {ex.Message}");
+            }
+        }
+        
+        private void SafeDeleteDirectory(string targetDir)
+        {
+            try
+            {
+                var files = Directory.GetFiles(targetDir);
+                var dirs = Directory.GetDirectories(targetDir);
+                
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        File.SetAttributes(file, FileAttributes.Normal);
+                        File.Delete(file);
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
+                }
+                
+                foreach (var dir in dirs)
+                {
+                    SafeDeleteDirectory(dir);
+                    try
+                    {
+                        Directory.Delete(dir, false);
+                    }
+                    catch
+                    {
+                        // ignored
+                    }
+                }
+            }
+            catch
+            {
+                // ignored
+            }
         }
         
         private void CheckUpdate()

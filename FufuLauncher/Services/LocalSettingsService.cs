@@ -1,39 +1,39 @@
 ﻿using System.Diagnostics;
-using System.Text;
 using System.Text.Json;
 using FufuLauncher.Contracts.Services;
+using Microsoft.Data.Sqlite;
 
 namespace FufuLauncher.Services
 {
     public class LocalSettingsService : ILocalSettingsService
     {
         private const string _defaultApplicationDataFolder = "FufuLauncher/ApplicationData";
-        private const string _defaultLocalSettingsFile = "LocalSettings.json";
+        private const string _defaultLocalSettingsDb = "LocalSettings.db";
 
         private readonly string _localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         private readonly string _applicationDataFolder;
-        private readonly string _localsettingsFile;
+        private readonly string _dbPath;
 
         private Dictionary<string, string> _settings;
         private bool _isInitialized = false;
 
         public const string BackgroundServerKey = "BackgroundServer";
         public const string IsBackgroundEnabledKey = "IsBackgroundEnabled";
-
         public const string LastAnnouncedVersionKey = "LastAnnouncedVersion";
+        
+        public const string LastAnnouncementUrlKey = "LastAnnouncementUrl";
 
         private readonly JsonSerializerOptions _jsonOptions;
 
         public LocalSettingsService()
         {
             _applicationDataFolder = Path.Combine(_localApplicationData, _defaultApplicationDataFolder);
-            _localsettingsFile = _defaultLocalSettingsFile;
+            _dbPath = Path.Combine(_applicationDataFolder, _defaultLocalSettingsDb);
             _settings = new Dictionary<string, string>();
 
             _jsonOptions = new JsonSerializerOptions
             {
                 WriteIndented = true,
-
                 Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             };
         }
@@ -42,8 +42,14 @@ namespace FufuLauncher.Services
         {
             if (!_isInitialized)
             {
-                Debug.WriteLine("LocalSettingsService: 开始初始化");
-                _settings = await LoadSettingsAsync();
+                Debug.WriteLine("LocalSettingsService: 开始初始化数据库");
+                
+                Directory.CreateDirectory(_applicationDataFolder);
+                
+                await InitializeDatabaseAsync();
+                
+                _settings = await LoadSettingsFromDbAsync();
+                
                 _isInitialized = true;
                 Debug.WriteLine($"LocalSettingsService: 初始化完成，加载 {_settings.Count} 项");
             }
@@ -82,7 +88,6 @@ namespace FufuLauncher.Services
                 }
                 catch (JsonException)
                 {
-
                     return storedValue;
                 }
             }
@@ -97,59 +102,97 @@ namespace FufuLauncher.Services
             {
                 await InitializeAsync();
             }
-
+            
             var json = JsonSerializer.Serialize(value, _jsonOptions);
+            
             _settings[key] = json;
 
             Debug.WriteLine($"LocalSettingsService: 保存 '{key}' -> {json}");
-            await SaveSettingsAsync();
+            
+            await SaveSettingToDbAsync(key, json);
         }
 
-        private async Task<Dictionary<string, string>> LoadSettingsAsync()
+        private async Task InitializeDatabaseAsync()
         {
             try
             {
-                var filePath = Path.Combine(_applicationDataFolder, _localsettingsFile);
-                Debug.WriteLine($"LocalSettingsService: 尝试加载 {filePath}");
+                using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                await connection.OpenAsync();
+                
+                var command = connection.CreateCommand();
+                command.CommandText = @"
+                    CREATE TABLE IF NOT EXISTS Settings (
+                        [Key] TEXT PRIMARY KEY,
+                        [Value] TEXT
+                    )";
+                
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"LocalSettingsService: 数据库表初始化失败 - {ex.Message}");
+            }
+        }
 
-                if (File.Exists(filePath))
+        private async Task<Dictionary<string, string>> LoadSettingsFromDbAsync()
+        {
+            var settings = new Dictionary<string, string>();
+            try
+            {
+                Debug.WriteLine($"LocalSettingsService: 尝试从数据库加载 {_dbPath}");
+
+                if (File.Exists(_dbPath))
                 {
+                    using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                    await connection.OpenAsync();
+                    
+                    var command = connection.CreateCommand();
+                    command.CommandText = "SELECT [Key], [Value] FROM Settings";
+                    
+                    using var reader = await command.ExecuteReaderAsync();
+                    while (await reader.ReadAsync())
+                    {
+                        var key = reader.GetString(0);
+                        var value = reader.GetString(1);
+                        settings[key] = value;
+                    }
 
-                    var data = await File.ReadAllTextAsync(filePath, Encoding.UTF8);
-
-                    var settings = JsonSerializer.Deserialize<Dictionary<string, string>>(data, _jsonOptions) ?? new();
-                    Debug.WriteLine($"LocalSettingsService: 成功加载 {settings.Count} 项");
-                    Debug.WriteLine($"LocalSettingsService: 文件内容: {data}");
+                    Debug.WriteLine($"LocalSettingsService: 成功从数据库加载 {settings.Count} 项");
                     return settings;
                 }
 
-                Debug.WriteLine("LocalSettingsService: 文件不存在");
-                return new Dictionary<string, string>();
+                Debug.WriteLine("LocalSettingsService: 数据库文件尚未创建，返回空字典");
+                return settings;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"LocalSettingsService: 加载失败 - {ex.Message}");
-                return new Dictionary<string, string>();
+                Debug.WriteLine($"LocalSettingsService: 数据库加载失败 - {ex.Message}");
+                return settings;
             }
         }
 
-        private async Task SaveSettingsAsync()
+        private async Task SaveSettingToDbAsync(string key, string value)
         {
             try
             {
-                Directory.CreateDirectory(_applicationDataFolder);
-                var filePath = Path.Combine(_applicationDataFolder, _localsettingsFile);
-
-                var data = JsonSerializer.Serialize(_settings, _jsonOptions);
-
-                await File.WriteAllTextAsync(filePath, data, Encoding.UTF8);
-
-                Debug.WriteLine($"LocalSettingsService: 保存到 {filePath}");
-                Debug.WriteLine($"LocalSettingsService: 保存内容: {data}");
+                using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                await connection.OpenAsync();
+                
+                var command = connection.CreateCommand();
+                command.CommandText = @"
+                    INSERT INTO Settings ([Key], [Value])
+                    VALUES ($key, $value)
+                    ON CONFLICT([Key]) DO UPDATE SET [Value] = excluded.[Value]";
+                
+                command.Parameters.AddWithValue("$key", key);
+                command.Parameters.AddWithValue("$value", value);
+                
+                await command.ExecuteNonQueryAsync();
+                Debug.WriteLine($"LocalSettingsService: 已将 '{key}' 保存至数据库");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"LocalSettingsService: 保存失败 - {ex.Message}");
+                Debug.WriteLine($"LocalSettingsService: 数据库保存失败 - {ex.Message}");
             }
         }
     }
