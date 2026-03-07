@@ -31,6 +31,10 @@ ManifestDPIAware true
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_INSTFILES
+
+# ======== 新增：安装完成后运行软件的复选框 ========
+!define MUI_FINISHPAGE_RUN "$INSTDIR\${APP_EXE}"
+# ==================================================
 !insertmacro MUI_PAGE_FINISH
 
 # 卸载向导页面
@@ -98,7 +102,7 @@ Function .onInit
         MessageBox MB_OK|MB_ICONSTOP "此应用不支持32位系统。"
         Abort
     ${EndIf}
-    
+  
     # 如果已安装，提示卸载
     SetRegView 64
 
@@ -118,6 +122,7 @@ Function .onInit
 
     uninst:
         ClearErrors
+    
         ${GetParent} $R0 $R1
 
         ExecWait '$R0 _?=$R1'
@@ -129,5 +134,3 @@ Function .onInit
     done:
 
 FunctionEnd
-
-

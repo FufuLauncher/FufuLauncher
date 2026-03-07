@@ -13,7 +13,7 @@
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/ControlPanelModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/ControlPanelModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +177,8 @@
       <workItem from="1772771404054" duration="6857000" />
       <workItem from="1772799849585" duration="5311000" />
       <workItem from="1772814151437" duration="860000" />
-      <workItem from="1772853632795" duration="3085000" />
+      <workItem from="1772853632795" duration="3644000" />
+      <workItem from="1772857595476" duration="220000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -371,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772854869801</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="修复游戏统计问题">
+      <option name="closed" value="true" />
+      <created>1772856767767</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1772856767767</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,7 +423,8 @@
     <MESSAGE value="修复点小问题" />
     <MESSAGE value="update 1.0.9.4" />
     <MESSAGE value="修复溢出问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复溢出问题" />
+    <MESSAGE value="修复游戏统计问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复游戏统计问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -122,7 +122,6 @@ public partial class ControlPanelModel : ObservableObject
 
                     if (_savedMetadata.Count > 0)
                     {
-                        ApplyMetadataToUI(_savedMetadata);
                         CrawlerStatus = "已加载本地数据和图片缓存";
                     }
                     else
@@ -230,7 +229,8 @@ public partial class ControlPanelModel : ObservableObject
 
         if (_savedMetadata != null && _savedMetadata.Count > 0)
         {
-            ApplyMetadataToUI(_savedMetadata);
+            // 修改这里：使用异步调用
+            _ = ApplyMetadataToUIAsync(_savedMetadata); 
         }
     }
 
@@ -332,48 +332,49 @@ public partial class ControlPanelModel : ObservableObject
             metaDict[item.Name] = item;
         }
         _savedMetadata = metaDict.Values.ToList();
-
-        ApplyMetadataToUI(_savedMetadata);
+        
+        _ = ApplyMetadataToUIAsync(_savedMetadata);
 
         _ = SaveGachaDataAsync();
 
         IsScraping = false;
     }
 
-    private void ApplyMetadataToUI(List<ScrapedMetadata> metadataList)
+    private async Task ApplyMetadataToUIAsync(List<ScrapedMetadata> metadataList)
     {
         if (metadataList == null || metadataList.Count == 0) return;
 
         var metaDict = metadataList
             .GroupBy(x => x.Name)
             .ToDictionary(g => g.Key, g => g.First());
-
-        UpdateCollectionImages(CharacterFiveStars, metaDict);
-        UpdateCollectionImages(CharacterFourStars, metaDict);
-        UpdateCollectionImages(WeaponFiveStars, metaDict);
-        UpdateCollectionImages(WeaponFourStars, metaDict);
-        UpdateCollectionImages(StandardFiveStars, metaDict);
-        UpdateCollectionImages(StandardFourStars, metaDict);
+        
+        await UpdateCollectionImagesAsync(CharacterFiveStars, metaDict);
+        await UpdateCollectionImagesAsync(CharacterFourStars, metaDict);
+        await UpdateCollectionImagesAsync(WeaponFiveStars, metaDict);
+        await UpdateCollectionImagesAsync(WeaponFourStars, metaDict);
+        await UpdateCollectionImagesAsync(StandardFiveStars, metaDict);
+        await UpdateCollectionImagesAsync(StandardFourStars, metaDict);
     }
-
-    private void UpdateCollectionImages(ObservableCollection<GachaDisplayItem> collection, Dictionary<string, ScrapedMetadata> metaDict)
+    private async Task UpdateCollectionImagesAsync(ObservableCollection<GachaDisplayItem> collection, Dictionary<string, ScrapedMetadata> metaDict)
     {
-        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+        var items = collection.ToList();
+
+        foreach (var item in items)
         {
-            foreach (var item in collection)
+            ScrapedMetadata match = null;
+
+            if (metaDict.TryGetValue(item.Name, out var exactMatch))
             {
-                ScrapedMetadata match = null;
+                match = exactMatch;
+            }
+            else
+            {
+                match = metaDict.Values.FirstOrDefault(x => x.Name.Contains(item.Name) || item.Name.Contains(x.Name));
+            }
 
-                if (metaDict.TryGetValue(item.Name, out var exactMatch))
-                {
-                    match = exactMatch;
-                }
-                else
-                {
-                    match = metaDict.Values.FirstOrDefault(x => x.Name.Contains(item.Name) || item.Name.Contains(x.Name));
-                }
-
-                if (match != null)
+            if (match != null)
+            {
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
                     if (!string.IsNullOrEmpty(match.ImgSrc))
                         item.ImageUrl = match.ImgSrc;
@@ -382,11 +383,13 @@ public partial class ControlPanelModel : ObservableObject
                     {
                         item.ElementUrl = match.ElementSrc;
                     }
-                }
+                });
+                
+                await Task.Delay(30); 
             }
-        });
+        }
     }
-    
+
     public class InventoryItem
     {
         public int Id
