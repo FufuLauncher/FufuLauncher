@@ -566,11 +566,46 @@ public partial class ControlPanelModel : ObservableObject
 
         App.MainWindow.DispatcherQueue.TryEnqueue(() => WeeklyStats = stats);
     }
-
+    
     private async Task StartGameMonitoringLoopAsync(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
+            try
+            {
+                var isRunning = Process.GetProcessesByName("YuanShen").Any() || 
+                                Process.GetProcessesByName("GenshinImpact").Any();
+                
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    IsGameRunning = isRunning;
+
+                    if (isRunning)
+                    {
+                        UpdateAndSavePlayTime(5);
+                        
+                        if (WeeklyStats != null)
+                        {
+                            var today = DateTime.Today;
+                            var todayRecord = WeeklyStats.DailyRecords.FirstOrDefault(r => r.Date.Date == today);
+                        
+                            if (todayRecord == null)
+                            {
+                                todayRecord = new GamePlayTimeRecord { Date = today, PlayTimeSeconds = 0 };
+                                WeeklyStats.DailyRecords.Insert(0, todayRecord);
+                            }
+                        
+                            todayRecord.PlayTimeSeconds += 5;
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"后台游戏监控出错: {ex.Message}");
+            }
+
+            // 等待 5 秒后再次检测
             await Task.Delay(5000, token);
         }
     }
