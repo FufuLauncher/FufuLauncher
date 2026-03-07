@@ -32,9 +32,7 @@ ManifestDPIAware true
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_INSTFILES
 
-# ======== 新增：安装完成后运行软件的复选框 ========
 !define MUI_FINISHPAGE_RUN "$INSTDIR\${APP_EXE}"
-# ==================================================
 !insertmacro MUI_PAGE_FINISH
 
 # 卸载向导页面
