@@ -1,4 +1,4 @@
-﻿!define APP_NAME "芙芙启动器"
+﻿!define APP_NAME "FufuLauncher"
 !define APP_VERSION "1.0.9.4"
 !define APP_PUBLISHER "FufuLauncher"
 !define APP_WEB_SITE "https://github.com/FufuLauncher/FufuLauncher"

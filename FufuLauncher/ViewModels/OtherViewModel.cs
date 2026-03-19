@@ -205,8 +205,9 @@ namespace FufuLauncher.ViewModels
 
                 Debug.WriteLine($"[OtherViewModel] 原始配置 - Enabled: {autoClickerEnabled}, TriggerKey: {triggerKey}, ClickKey: {clickKey}");
 
-                IsAutoClickerEnabled = autoClickerEnabled != null && Convert.ToBoolean(autoClickerEnabled);
-                _autoClickerService.IsEnabled = IsAutoClickerEnabled;
+                IsAutoClickerEnabled = false;
+                _autoClickerService.IsEnabled = false;
+                _ = _localSettingsService.SaveSettingAsync("AutoClickerEnabled", false);
 
                 TriggerKey = triggerKey?.ToString()?.Trim('"') ?? "F";
                 ClickKey = clickKey?.ToString()?.Trim('"') ?? "F";
@@ -340,14 +341,22 @@ namespace FufuLauncher.ViewModels
                 StatusMessage = $"错误: {message}";
             }
         }
+        
         partial void OnIsAutoClickerEnabledChanged(bool value)
         {
+            if (value)
+            {
+                Debug.WriteLine("[OtherViewModel] 连点器已被强制禁用，拦截开启请求");
+                _dispatcherQueue.TryEnqueue(() => IsAutoClickerEnabled = false);
+                return;
+            }
+
             if (value && !IsAdministrator())
             {
                 Debug.WriteLine("[OtherViewModel] 尝试启用连点器，但没有管理员权限被拦截");
-                
+        
                 _dispatcherQueue.TryEnqueue(() => IsAutoClickerEnabled = false);
-                
+        
                 _ = ShowAdminRequiredDialogAsync();
                 return;
             }

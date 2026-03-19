@@ -12,6 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/AutoClickerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/AutoClickerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/OtherViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/OtherViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +182,11 @@
       <workItem from="1772857595476" duration="1277000" />
       <workItem from="1773030883365" duration="22000" />
       <workItem from="1773055682944" duration="2286000" />
+      <workItem from="1773377363015" duration="77000" />
+      <workItem from="1773499977288" duration="2046000" />
+      <workItem from="1773592478172" duration="287000" />
+      <workItem from="1773776518248" duration="131000" />
+      <workItem from="1773918488072" duration="637000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -404,7 +412,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772858727671</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="修复注入">
+      <option name="closed" value="true" />
+      <created>1773377409731</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1773377409731</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +441,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="小改动" />
     <MESSAGE value="更新版本号，预发布1.0.9.0" />
     <MESSAGE value="1.0.9.0" />
     <MESSAGE value="fix issue #96" />
@@ -450,7 +465,8 @@
     <MESSAGE value="修复抽卡图片载入卡顿" />
     <MESSAGE value="update" />
     <MESSAGE value="增加回退" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加回退" />
+    <MESSAGE value="修复注入" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复注入" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
