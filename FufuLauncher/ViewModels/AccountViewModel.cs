@@ -271,9 +271,12 @@ public partial class AccountViewModel : ObservableRecipient
         try
         {
             StatusMessage = "正在打开登录窗口...";
-            var loginWindow = new LoginWebViewDialog();
+        
+            // 实例化新的二维码登录窗口
+            var loginWindow = new LoginQrWindow();
             loginWindow.Activate();
 
+            // 等待窗口关闭并获取登录结果
             var tcs = new TaskCompletionSource<bool>();
             loginWindow.Closed += (s, e) => tcs.SetResult(loginWindow.DidLoginSucceed());
             var success = await tcs.Task;

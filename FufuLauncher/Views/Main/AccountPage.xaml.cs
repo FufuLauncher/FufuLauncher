@@ -25,7 +25,6 @@ public sealed partial class AccountPage : Page
     protected override async void OnNavigatedTo(NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
-        Debug.WriteLine($"=== 页面导航到AccountPage，自动刷新用户信息 ===");
 
         await ViewModel.LoadUserInfoAsync();
     }
@@ -46,7 +45,7 @@ public sealed partial class AccountPage : Page
     private async void OnGachaAnalysisClicked(object sender, RoutedEventArgs e)
     {
         var dialog = new GachaDialog();
-        dialog.XamlRoot = this.XamlRoot;
+        dialog.XamlRoot = XamlRoot;
         await dialog.ShowAsync();
     }
 }

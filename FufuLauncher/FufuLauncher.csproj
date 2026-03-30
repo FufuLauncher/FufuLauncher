@@ -43,6 +43,7 @@
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
         <PackageReference Include="PuppeteerSharp" Version="20.2.5" />
+        <PackageReference Include="QRCoder" Version="1.7.0" />
         <PackageReference Include="System.Management" Version="10.0.1" />
         <PackageReference Include="WinUIEx" Version="2.6.0" />
         <PackageReference Include="YamlDotNet" Version="16.3.0" />

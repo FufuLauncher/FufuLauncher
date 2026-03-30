@@ -57,7 +57,7 @@ public sealed partial class PluginConfigPage : Page
     private GeneralInfo _currentGeneralInfo;
     private List<ConfigOption> _currentOptionsList;
 
-    private bool _isInitialized = false;
+    private bool _isInitialized;
 
     public PluginConfigPage()
     {

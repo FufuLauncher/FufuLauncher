@@ -4,6 +4,8 @@ using FufuLauncher.Models;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using FufuLauncher.Contracts.Services;
+using FufuLauncher.Services;
 
 namespace FufuLauncher.Views;
 
@@ -50,18 +52,15 @@ public sealed partial class PluginPage : Page
     {
         try
         {
-            // 构建 Assets 文件夹下图片的路径
             string imagePath = Path.Combine(AppContext.BaseDirectory, "Assets", "freecam.png");
 
             if (File.Exists(imagePath))
             {
-                // 使用 Windows.System.Launcher 打开本地文件
                 var file = await Windows.Storage.StorageFile.GetFileFromPathAsync(imagePath);
                 await Launcher.LaunchFileAsync(file);
             }
             else
             {
-                // 如果文件不存在，给用户一个提示
                 var dialog = new ContentDialog
                 {
                     Title = "文件未找到",
@@ -74,7 +73,6 @@ public sealed partial class PluginPage : Page
         }
         catch (Exception ex)
         {
-            // 捕获可能的文件访问异常
             ViewModel.StatusMessage = $"无法打开说明图: {ex.Message}";
         }
     }
@@ -105,16 +103,60 @@ public sealed partial class PluginPage : Page
         }
     }
 
-    private void Page_Loaded(object sender, RoutedEventArgs e)
+    private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
         EntranceStoryboard.Begin();
-        
+    
         GetPluginsBtnAnimation.Begin();
-        
+    
         if (ViewModel.Plugins.Count == 0) 
         {
             ViewModel.LoadPlugins();
         }
+
+        try
+        {
+            var localSettingsService = App.GetService<ILocalSettingsService>();
+            var hasShownRaw = await localSettingsService.ReadSettingAsync(LocalSettingsService.HasShownSecurityWarningKey);
+        
+            bool hasShown = hasShownRaw is bool b && b;
+
+            if (!hasShown)
+            {
+                await ShowSecurityWarningDialog();
+                await localSettingsService.SaveSettingAsync(LocalSettingsService.HasShownSecurityWarningKey, true);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"读取或保存安全警告配置失败: {ex.Message}");
+        }
+    }
+    
+    private async Task ShowSecurityWarningDialog()
+    {
+        if (XamlRoot == null) return;
+    
+        var textBlock = new TextBlock
+        {
+            Text = "安全软件会阻塞该程序的正常注入运行，如无法使用或者插件消失，请关闭你电脑的安全中心！",
+            Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red),
+            FontWeight = Microsoft.UI.Text.FontWeights.Bold,
+            TextWrapping = TextWrapping.Wrap,
+            FontSize = 16,
+            Margin = new Thickness(0, 10, 0, 0)
+        };
+    
+        var dialog = new ContentDialog
+        {
+            Title = "警告",
+            Content = textBlock,
+            CloseButtonText = "我知道了",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = XamlRoot
+        };
+    
+        await dialog.ShowAsync();
     }
     
     private void MoveDirectorySafe(string sourceDir, string destDir)

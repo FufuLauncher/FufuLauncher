@@ -532,16 +532,10 @@ namespace MihoyoBBS
                     {
                         return result.Data;
                     }
-                    else
-                    {
-                        var msg = result?.Message ?? "未知错误";
 
-                        if (!responseText.Trim().StartsWith("{"))
-                        {
-                        }
+                    if (!responseText.Trim().StartsWith("{")) {}
 
-                        return null;
-                    }
+                    return null;
                 }
             }
             catch (Exception)
@@ -598,7 +592,6 @@ namespace MihoyoBBS
                         {
 
                             await Task.Delay(new Random().Next(6000, 15000));
-                            continue;
                         }
                         else
                         {
@@ -672,7 +665,6 @@ namespace MihoyoBBS
                 }
                 else
                 {
-
                     await Task.Delay(new Random().Next(2000, 8000));
 
                     var req = await CheckIn(account);
@@ -726,8 +718,7 @@ namespace MihoyoBBS
                                 {
                                     s += "原因：验证码\njson 信息：" + responseText;
                                 }
-
-
+                                
                                 returnData += $"\n{account.Nickname}，触发验证码，本次签到失败";
                                 continue;
                             }
@@ -788,11 +779,7 @@ namespace MihoyoBBS
 
     public class Genshin : GameCheckin
     {
-        public Genshin() : base("hk4e_cn", "原神", "e202311201442471", "旅行者")
-        {
-        }
-
-
+        public Genshin() : base("hk4e_cn", "原神", "e202311201442471", "旅行者") {}
         public override async Task InitializeAsync(Config config)
         {
             SetHeaders(config);
@@ -811,24 +798,15 @@ namespace MihoyoBBS
         {
             static async Task Main(string[] args)
             {
-
-
-
                 var config = LoadConfig();
 
                 if (config == null)
                 {
-
                     return;
                 }
 
                 if (string.IsNullOrEmpty(config.Account.Cookie))
                 {
-
-
-
-
-
                     return;
                 }
 
@@ -840,31 +818,13 @@ namespace MihoyoBBS
 
                 if (config.Games.Cn.Enable && config.Games.Cn.Genshin.Checkin)
                 {
-
-
                     try
                     {
                         var genshin = new Genshin();
-
-                        var result = await genshin.SignAccountAsync(config);
-
-
+                        await genshin.SignAccountAsync(config);
                     }
-                    catch (Exception)
-                    {
-
-
-                    }
+                    catch (Exception) {}
                 }
-                else
-                {
-
-                }
-
-
-
-
-
                 Console.ReadKey();
             }
 
@@ -884,13 +844,9 @@ namespace MihoyoBBS
                         };
                         var json = JsonSerializer.Serialize(defaultConfig, options);
                         File.WriteAllText(configPath, json);
-
-
-                        var fullPath = Path.GetFullPath(configPath);
-
-
-
-
+                        
+                        Path.GetFullPath(configPath);
+                        
                         return null;
                     }
 

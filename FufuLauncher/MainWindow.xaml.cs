@@ -992,6 +992,18 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();
             await CheckUserAgreementAsync();
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    var refreshService = new TokenRefreshService();
+                    await refreshService.RefreshCookieAsync();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"启动时刷新 Token 失败: {ex.Message}");
+                }
+            });
         }
         catch { ShowMainContent(); }
     }
