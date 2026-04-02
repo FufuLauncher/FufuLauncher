@@ -122,6 +122,12 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
+                <NavigationViewItem Content="注入设置" Tag="FufuLauncher.ViewModels.PluginSettingsViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEA86;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                
                 <NavigationViewItem Content="控制面板" Tag="FufuLauncher.ViewModels.ControlPanelModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE80A;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
@@ -155,12 +161,6 @@
                 <NavigationViewItem Content="数据中心" Tag="FufuLauncher.ViewModels.DataViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE9D9;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                
-                <NavigationViewItem Content="注入设置" Tag="FufuLauncher.ViewModels.PluginSettingsViewModel">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xEA86;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>

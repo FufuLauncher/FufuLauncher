@@ -11,28 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/AccountPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/AccountPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/OtherPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/OtherPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/UpdateService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/UpdateService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Update.json" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Update.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AgreementPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AgreementPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/BBSWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/BBSWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/DatabaseEditorWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/DatabaseEditorWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/DownloadWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/DownloadWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/GachaDialog.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/GachaDialog.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/InventoryWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/InventoryWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/PlayerInfoWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/PlayerInfoWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AboutPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AboutPage.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +72,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.3318545",
+    "XThreadsFramesViewSplitterKey": "0.49362245",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -263,7 +247,7 @@
       <workItem from="1774959021582" duration="4420000" />
       <workItem from="1774969427623" duration="11689000" />
       <workItem from="1775090698445" duration="595000" />
-      <workItem from="1775142444723" duration="9203000" />
+      <workItem from="1775142444723" duration="18534000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -529,7 +513,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774985459084</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="增加功能，修复部分问题">
+      <option name="closed" value="true" />
+      <created>1775152013819</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1775152013819</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,7 +542,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="成就管理换sql数据库，更新6.4成就数据" />
     <MESSAGE value="修复插件下载安装问题" />
     <MESSAGE value="不再弹窗" />
     <MESSAGE value="减少体积" />
@@ -575,7 +566,8 @@
     <MESSAGE value="增加提示" />
     <MESSAGE value="修复部分功能" />
     <MESSAGE value="修改字体文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改字体文件" />
+    <MESSAGE value="增加功能，修复部分问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加功能，修复部分问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
