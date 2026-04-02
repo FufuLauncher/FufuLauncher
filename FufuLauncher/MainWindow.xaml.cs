@@ -1155,6 +1155,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
             "FufuLauncher.ViewModels.ControlPanelModel" => typeof(Views.PanelPage),
             "FufuLauncher.ViewModels.PluginViewModel" => typeof(Views.PluginPage),
             "FufuLauncher.ViewModels.DataViewModel" => typeof(Views.DataPage),
+            "FufuLauncher.ViewModels.PluginSettingsViewModel" => typeof(Views.PluginSettingsPage),
             _ => null
         };
 

@@ -1,0 +1,124 @@
+﻿<Page
+    x:Class="FufuLauncher.Views.PluginSettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:FufuLauncher.ViewModels"
+    xmlns:selectors="using:FufuLauncher.Selectors"
+    mc:Ignorable="d"
+    Background="Transparent">
+
+    <Page.Resources>
+        <DataTemplate x:Key="BoolTemplate" x:DataType="viewmodels:PluginSettingItem">
+            <StackPanel Width="240" HorizontalAlignment="Left">
+                <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
+                <ToggleSwitch IsOn="{x:Bind BoolValue, Mode=TwoWay}" OnContent="开" OffContent="关" MinWidth="0" Margin="0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="NumberTemplate" x:DataType="viewmodels:PluginSettingItem">
+            <StackPanel Width="240" HorizontalAlignment="Left">
+                <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
+                <NumberBox Value="{x:Bind FloatValue, Mode=TwoWay}" SpinButtonPlacementMode="Compact" Width="200" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="StringTemplate" x:DataType="viewmodels:PluginSettingItem">
+            <StackPanel Width="240" HorizontalAlignment="Left">
+                <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
+                <TextBox Text="{x:Bind StringValue, Mode=TwoWay}" Width="200" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <selectors:SettingTemplateSelector x:Key="SettingSelector"
+                                           BoolTemplate="{StaticResource BoolTemplate}"
+                                           NumberTemplate="{StaticResource NumberTemplate}"
+                                           StringTemplate="{StaticResource StringTemplate}" />
+    </Page.Resources>
+
+    <Grid Padding="32,24,32,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Assets/WindowIcon.ico" Width="42" Height="42" VerticalAlignment="Center" Stretch="Uniform"/>
+
+            <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+                <TextBlock Text="{x:Bind ViewModel.PluginName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                <TextBlock Text="{x:Bind ViewModel.PluginDescription, Mode=OneWay}" FontSize="12" Opacity="0.6" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,24,0">
+                <TextBlock Text="{x:Bind ViewModel.PluginDeveloper, Mode=OneWay}" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,0,4"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="修改日期: " FontSize="12" Opacity="0.6"/>
+                    <TextBlock Text="{x:Bind ViewModel.LastModifiedDate, Mode=OneWay}" FontSize="12" Opacity="0.6"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
+                <Button Content="下载并安装插件" 
+                        Click="OnDownloadPluginClick" 
+                        VerticalAlignment="Center"/>
+
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="启用注入" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    <TextBlock Text="启动游戏时加载插件" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
+                </StackPanel>
+                
+                <ToggleSwitch IsOn="{x:Bind MainVM.UseInjection, Mode=TwoWay}" 
+                              IsEnabled="{x:Bind InvertBool(ControlPanelVM.IsGameRunning), Mode=OneWay}"
+                              OnContent="" OffContent="" 
+                              MinWidth="0"
+                              VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <MenuFlyoutSeparator Grid.Row="1" Margin="0,0,0,24"/>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <GridView ItemsSource="{x:Bind ViewModel.Settings, Mode=OneWay}"
+                      ItemTemplateSelector="{StaticResource SettingSelector}"
+                      SelectionMode="None"
+                      IsItemClickEnabled="False"
+                      HorizontalAlignment="Stretch">
+                
+                <GridView.ItemContainerStyle>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="Margin" Value="0,0,24,24"/>
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="MinHeight" Value="0"/>
+                        <Setter Property="MinWidth" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewItem">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </GridView.ItemContainerStyle>
+
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+            </GridView>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -162,7 +162,7 @@
                                                  VerticalAlignment="Center"/>
                                         
                                         <Button Grid.Column="1" x:Name="ApplyPathButton" Content="应用" Click="ApplyPath_Click" IsEnabled="False"/>
-                                        <Button Grid.Column="2" Click="SelectPath_Click" Style="{StaticResource AccentButtonStyle}">
+                                        <Button Grid.Column="2" Click="SelectPath_Click">
                                             <StackPanel Orientation="Horizontal" Spacing="8">
                                                 <FontIcon Glyph="&#xE8F4;" FontSize="14"/>
                                                 <TextBlock Text="浏览"/>
@@ -421,7 +421,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Button Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Style="{StaticResource AccentButtonStyle}" Translation="0,0,32">
+                            <Button Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Translation="0,0,32">
                                 <Button.Shadow>
                                     <ThemeShadow/>
                                 </Button.Shadow>

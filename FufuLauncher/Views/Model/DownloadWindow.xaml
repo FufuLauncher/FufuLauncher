@@ -73,7 +73,7 @@
                 <ProgressBar x:Name="MainProgressBar" Maximum="100" Height="8" CornerRadius="4"/>
                 <Grid Margin="0,16,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16">
-                        <Button x:Name="StartButton" Content="开始下载" Style="{StaticResource AccentButtonStyle}" Click="StartButton_Click" Width="120" Height="36"/>
+                        <Button x:Name="StartButton" Content="开始下载" Click="StartButton_Click" Width="120" Height="36"/>
                         <Button x:Name="CancelButton" Content="取消" Click="CancelButton_Click" IsEnabled="False" Width="100" Height="36"/>
                     </StackPanel>
                 </Grid>

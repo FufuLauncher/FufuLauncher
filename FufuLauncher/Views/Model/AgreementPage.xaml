@@ -203,8 +203,7 @@
                     IsEnabled="{x:Bind ViewModel.IsAgreementChecked, Mode=OneWay}"
                     HorizontalAlignment="Right"
                     CornerRadius="4"
-                    Padding="24,8"
-                    Style="{StaticResource AccentButtonStyle}"/>
+                    Padding="24,8"/>
         </Grid>
     </Grid>
 </Page>

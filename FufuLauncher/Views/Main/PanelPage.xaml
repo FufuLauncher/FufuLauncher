@@ -255,7 +255,6 @@
                              Margin="0,0,12,0"/>
                     
                     <Button Grid.Column="1" Command="{x:Bind ViewModel.FetchGachaDataCommand}" 
-                            Style="{ThemeResource AccentButtonStyle}"
                             IsEnabled="{x:Bind ViewModel.IsFetching, Mode=OneWay, Converter={StaticResource BoolInverter}}">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <FontIcon Glyph="&#xE72C;"/>
@@ -406,7 +405,6 @@
 
                 <StackPanel Grid.Row="4" Spacing="8">
                     <Button Click="OnOpenAchievementsClick" 
-                            Style="{StaticResource AccentButtonStyle}" 
                             HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Image Source="https://act-upload.mihoyo.com/wiki-user-upload/2024/09/23/24077343/42fd361ea1336daf7cd33bf187e62fa2_7270854542324660900.png" 
@@ -423,7 +421,6 @@
                         </StackPanel>
                     </Button>
                     <Button Click="OnOpenPlayerRolesClick"
-                            Style="{StaticResource AccentButtonStyle}"
                             HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Image Source="https://upload-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerBoy.png" 
@@ -432,7 +429,6 @@
                         </StackPanel>
                     </Button>
                     <Button Click="OnOpenDailyNoteClick"
-                            Style="{StaticResource AccentButtonStyle}"
                             HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Image Source="https://bbs-static.miyoushe.com/static/2024/07/22/19911bcf951e8d3016e7874c52a31474_6112406971940527441.png?x-oss-process=image/resize,s_150/quality,q_80/auto-orient,0/interlace,1/format,png" 
@@ -441,7 +437,6 @@
                         </StackPanel>
                     </Button>
                     <Button Click="OnOpenVideoResourcesClick" 
-                            Style="{StaticResource AccentButtonStyle}"
                             HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Image Source="https://webstatic.mihoyo.com/upload/static-resource/2023/03/06/14e05cd4d8b0babd6c7985fc1f5801e5_689092345277877987.png" 
@@ -450,7 +445,6 @@
                         </StackPanel>
                     </Button>
                     <Button Click="BBSButton_Click" 
-                            Style="{StaticResource AccentButtonStyle}"
                             HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <Image Source="https://bbs-static.miyoushe.com/static/2024/12/16/1024840e3dfdd496bd0c04c01b56c941_7881903508337284972.png?x-oss-process=image/resize,s_150/quality,q_80/auto-orient,0/interlace,1/format,png" 

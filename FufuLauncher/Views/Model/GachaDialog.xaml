@@ -54,7 +54,7 @@
                         Command="{x:Bind ViewModel.ToggleCaptureCommand}"
                         IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"/>
                 
-                <Button Content="开始分析" Style="{ThemeResource AccentButtonStyle}" 
+                <Button Content="开始分析"
                         Command="{x:Bind ViewModel.StartAnalysisCommand}"
                         IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"/>
 

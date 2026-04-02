@@ -35,7 +35,7 @@
                 <ComboBoxItem Content="Type 5" Tag="5"/>
             </ComboBox>
             <TextBox Grid.Column="1" x:Name="UrlTextBox" PlaceholderText="输入网址..." VerticalAlignment="Center" KeyDown="UrlTextBox_KeyDown" InputScope="Url"/>
-            <Button Grid.Column="2" Content="前往" Style="{StaticResource AccentButtonStyle}" Click="GoButton_Click"/>
+            <Button Grid.Column="2" Content="前往" Click="GoButton_Click"/>
         </Grid>
 
         <WebView2 Grid.Row="2" x:Name="BBSWebView" />

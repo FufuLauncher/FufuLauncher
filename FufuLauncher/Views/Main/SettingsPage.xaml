@@ -534,7 +534,6 @@
                         <Button HorizontalAlignment="Center"
                                 Margin="0,20,0,10"
                                 Padding="16,8"
-                                Style="{ThemeResource AccentButtonStyle}"
                                 Click="OnOpenDatabaseEditorClick">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <TextBlock Text="配置编辑"/>

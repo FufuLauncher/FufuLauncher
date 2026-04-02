@@ -59,7 +59,7 @@
 
         <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="2" Margin="0,16,0,0">
             <Button Content="Add" Click="OnAddNewItemClick"/>
-            <Button Content="Save" Click="OnSaveChangesClick" Style="{ThemeResource AccentButtonStyle}"/>
+            <Button Content="Save" Click="OnSaveChangesClick"/>
         </StackPanel>
     </Grid>
 </Window>

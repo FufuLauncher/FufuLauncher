@@ -10,7 +10,6 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
     private async Task<Config> LoadConfigWithLoggingAsync()
     {
         var path = Path.Combine(AppContext.BaseDirectory, "config.json");
-        Debug.WriteLine($"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         Debug.WriteLine($" [签到] 尝试加载配置文件");
         Debug.WriteLine($" [签到] 文件路径: {path}");
         Debug.WriteLine($" [签到] 文件存在: {File.Exists(path)}");
@@ -24,7 +23,6 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         try
         {
             var json = await File.ReadAllTextAsync(path);
-            Debug.WriteLine($" [签到] 文件内容:\n{json}");
 
             var config = JsonSerializer.Deserialize<Config>(json);
             Debug.WriteLine($" [签到] 反序列化成功");
@@ -74,16 +72,13 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
             Debug.WriteLine(" [签到] 功能未启用");
             return (false, "功能未启用");
         }
-
-        Debug.WriteLine(" [签到] 功能已启用，准备初始化Genshin");
+        
         var genshin = new Genshin();
-
-        Debug.WriteLine(" [签到] 调用InitializeAsync...");
+        
         await genshin.InitializeAsync(config).ConfigureAwait(false);
 
         Debug.WriteLine($" [签到] 初始化完成，账号数量: {genshin.AccountList.Count}");
-
-        Debug.WriteLine(" [签到] 调用SignAccountAsync...");
+        
         var result = await genshin.SignAccountAsync(config).ConfigureAwait(false);
 
         Debug.WriteLine($" [签到] 签到结果:\n{result}");

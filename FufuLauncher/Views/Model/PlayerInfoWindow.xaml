@@ -43,7 +43,6 @@
             <Button Grid.Column="1" Content="查询" Click="OnQueryClick" Margin="10,0,0,0"/>
             
             <Button Grid.Column="2" Click="OnRefreshMyDataClick" Margin="10,0,0,0"
-                    Style="{StaticResource AccentButtonStyle}"
                     ToolTipService.ToolTip="更新并保存我的数据">
                 <StackPanel Orientation="Horizontal" Spacing="5">
                     <SymbolIcon Symbol="Refresh" />

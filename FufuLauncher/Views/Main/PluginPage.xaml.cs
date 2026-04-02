@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Services;
+using Microsoft.UI.Xaml.Media;
 
 namespace FufuLauncher.Views;
 
@@ -498,8 +499,42 @@ public sealed partial class PluginPage : Page
     {
         if (sender is Button btn && btn.Tag is PluginItem item && item.HasConfig)
         {
-            Frame.Navigate(typeof(PluginConfigPage), item);
+            var folderName = new DirectoryInfo(item.DirectoryPath).Name;
+            bool isFuFuPlugin = folderName.Contains("FuFuPlugin", StringComparison.OrdinalIgnoreCase);
+
+            if (isFuFuPlugin)
+            {
+                Frame.Navigate(typeof(PluginSettingsPage), item);
+                
+                var navView = FindParentNavigationView(this);
+                if (navView != null)
+                {
+                    foreach (var menuItem in navView.MenuItems)
+                    {
+                        if (menuItem is NavigationViewItem navItem && 
+                            navItem.Tag?.ToString() == "FufuLauncher.ViewModels.PluginSettingsViewModel")
+                        {
+                            navView.SelectedItem = navItem;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Frame.Navigate(typeof(PluginConfigPage), item);
+            }
         }
+    }
+    
+    private NavigationView FindParentNavigationView(DependencyObject child)
+    {
+        DependencyObject parentObject = VisualTreeHelper.GetParent(child);
+        if (parentObject == null) return null;
+        
+        if (parentObject is NavigationView parent) return parent;
+        
+        return FindParentNavigationView(parentObject);
     }
 
     private async void OnRenameClick(object sender, RoutedEventArgs e)

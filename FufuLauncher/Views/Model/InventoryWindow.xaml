@@ -25,7 +25,7 @@
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="12" Margin="0,0,140,0">
                 <TextBlock x:Name="StatusText" VerticalAlignment="Center" Style="{ThemeResource CaptionTextBlockStyle}" 
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                <Button x:Name="RefreshButton" Style="{ThemeResource AccentButtonStyle}" VerticalAlignment="Center" Click="OnRefreshClick">
+                <Button x:Name="RefreshButton" VerticalAlignment="Center" Click="OnRefreshClick">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon Glyph="&#xE72C;" FontSize="12"/>
                         <TextBlock Text="立即更新" FontSize="12"/>

@@ -157,6 +157,12 @@
                         <FontIcon Glyph="&#xE9D9;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                
+                <NavigationViewItem Content="注入设置" Tag="FufuLauncher.ViewModels.PluginSettingsViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xEA86;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
