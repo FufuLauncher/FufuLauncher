@@ -33,6 +33,7 @@
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.34.1" />
         <PackageReference Include="H.NotifyIcon.WinUI" Version="2.0.118" />
         <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
         <PackageReference Include="InputSimulatorPlus" Version="1.0.7" />
@@ -47,6 +48,7 @@
         <PackageReference Include="System.Management" Version="10.0.1" />
         <PackageReference Include="WinUIEx" Version="2.6.0" />
         <PackageReference Include="YamlDotNet" Version="16.3.0" />
+        <PackageReference Include="ZstdSharp.Port" Version="0.8.7" />
     </ItemGroup>
 
     <ItemGroup>

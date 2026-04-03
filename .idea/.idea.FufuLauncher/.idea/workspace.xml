@@ -11,14 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/SophonManifestProto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/SophonManifestProto.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/AdvancedServerSwitchPage.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/AdvancedServerSwitchPage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/LocalSettingsService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/LocalSettingsService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,8 +43,8 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/AdvancedServerSwitchPage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/PluginSettingsPage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Model/AchievementWindow.g.i.cs" root0="SKIP_HIGHLIGHTING" />
@@ -142,6 +142,20 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration default="true" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FufuLauncher" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0-windows10.0.26100.0" />
@@ -236,7 +250,8 @@
       <workItem from="1774969427623" duration="11689000" />
       <workItem from="1775090698445" duration="595000" />
       <workItem from="1775142444723" duration="23925000" />
-      <workItem from="1775179962801" duration="2958000" />
+      <workItem from="1775179962801" duration="3890000" />
+      <workItem from="1775213990268" duration="8148000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -526,7 +541,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775179732427</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="增加功能">
+      <option name="closed" value="true" />
+      <created>1775183042406</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1775183042406</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +570,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="减少体积" />
     <MESSAGE value="更新插件获取" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="修改游戏文件的选择方式" />
@@ -572,7 +594,8 @@
     <MESSAGE value="增加功能，修复部分问题" />
     <MESSAGE value="更新1.1.0.0" />
     <MESSAGE value="增加和修复了一些功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加和修复了一些功能" />
+    <MESSAGE value="增加功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

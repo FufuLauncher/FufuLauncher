@@ -413,59 +413,103 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
             downloadWindow.Activate();
         }
         private async void SwitchServer_Click(object sender, RoutedEventArgs e)
+{
+    if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
+    {
+        await ShowError("未找到游戏路径，请先在设置中指定游戏位置。");
+        return;
+    }
+
+    string gameDir = _currentConfig.GamePath;
+    if (File.Exists(gameDir))
+    {
+        gameDir = Path.GetDirectoryName(gameDir) ?? gameDir;
+    }
+
+    string configPath = Path.Combine(gameDir, "config.ini");
+
+    if (!File.Exists(configPath))
+    {
+        string parentDir = Directory.GetParent(gameDir)?.FullName ?? "";
+        string parentConfig = Path.Combine(parentDir, "config.ini");
+        if (File.Exists(parentConfig))
         {
-            if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
-            {
-                await ShowError("未找到游戏路径，请先在设置中指定游戏位置。");
-                return;
-            }
+            gameDir = parentDir;
+            configPath = parentConfig;
+        }
+        else
+        {
+            await ShowError($"无法找到 config.ini 配置文件。\n\n尝试寻找的路径是：\n{configPath}\n\n请检查您的“游戏路径”设置是否正确指向了游戏安装目录（包含 YuanShen.exe 的文件夹）。");
+            return;
+        }
+    }
+    
+    var stackPanel = new StackPanel { Spacing = 10 };
+    stackPanel.Children.Add(new TextBlock { Text = "请选择你要切换到的服务器：", TextWrapping = TextWrapping.Wrap });
 
-            string gameDir = _currentConfig.GamePath;
+    var dialog = new ContentDialog
+    {
+        Title = "切换服务器",
+        PrimaryButtonText = "切换到 Bilibili 服",
+        SecondaryButtonText = "切换到 官方服务器",
+        CloseButtonText = "取消",
+        XamlRoot = XamlRoot
+    };
 
-            if (File.Exists(gameDir))
-            {
-                gameDir = Path.GetDirectoryName(gameDir) ?? gameDir;
-            }
+    var advancedBtn = new Button 
+    { 
+        Content = "国际服/国服转换", 
+        HorizontalAlignment = HorizontalAlignment.Stretch 
+    };
+    advancedBtn.Click += (s, args) => 
+    {
+        dialog.Hide();
+        OpenAdvancedServerSwitchWindow(gameDir);
+    };
+    stackPanel.Children.Add(advancedBtn);
+    dialog.Content = stackPanel;
 
-            string configPath = Path.Combine(gameDir, "config.ini");
+    var result = await dialog.ShowAsync();
 
-            if (!File.Exists(configPath))
-            {
-                string parentDir = Directory.GetParent(gameDir)?.FullName ?? "";
-                string parentConfig = Path.Combine(parentDir, "config.ini");
+    if (result == ContentDialogResult.Primary)
+    {
+        await PerformServerSwitch(gameDir, configPath, true);
+    }
+    else if (result == ContentDialogResult.Secondary)
+    {
+        await PerformServerSwitch(gameDir, configPath, false);
+    }
+}
+        
+        public class SwitchPageParams
+        {
+            public string GameDir { get; set; }
+            public Window ParentWindow { get; set; }
+        }
+        
+        private void OpenAdvancedServerSwitchWindow(string gameDir)
+        {
+            var newWindow = new Window();
+            
+            newWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+            newWindow.ExtendsContentIntoTitleBar = true;
+            
+            newWindow.Title = "完整端跨服转换";
 
-                if (File.Exists(parentConfig))
-                {
-                    gameDir = parentDir;
-                    configPath = parentConfig;
-                }
-                else
-                {
-                    await ShowError($"无法找到 config.ini 配置文件。\n\n尝试寻找的路径是：\n{configPath}\n\n请检查您的“游戏路径”设置是否正确指向了游戏安装目录（包含 YuanShen.exe 的文件夹）。");
-                    return;
-                }
-            }
+            var hWnd = WindowNative.GetWindowHandle(newWindow);
+            var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            var appWindow = AppWindow.GetFromWindowId(winId);
+            appWindow.Resize(new Windows.Graphics.SizeInt32(600, 400));
 
-            var dialog = new ContentDialog
-            {
-                Title = "切换服务器",
-                Content = "请选择你要切换到的服务器：",
-                PrimaryButtonText = "切换到 Bilibili 服",
-                SecondaryButtonText = "切换到 官方服务器",
-                CloseButtonText = "取消",
-                XamlRoot = XamlRoot
-            };
-
-            var result = await dialog.ShowAsync();
-
-            if (result == ContentDialogResult.Primary)
-            {
-                await PerformServerSwitch(gameDir, configPath, true);
-            }
-            else if (result == ContentDialogResult.Secondary)
-            {
-                await PerformServerSwitch(gameDir, configPath, false);
-            }
+            var rootFrame = new Frame();
+            rootFrame.Navigate(typeof(AdvancedServerSwitchPage), new SwitchPageParams 
+            { 
+                GameDir = gameDir, 
+                ParentWindow = newWindow 
+            });
+    
+            newWindow.Content = rootFrame;
+            newWindow.Activate();
         }
         private async Task PerformServerSwitch(string gameDir, string configPath, bool toBilibili)
         {
