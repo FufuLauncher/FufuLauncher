@@ -55,6 +55,32 @@ public class IniFile
         }
 
         var lines = new List<string>(File.ReadAllLines(_path, Encoding.UTF8));
+        UpdateLinesForKeyValue(lines, section, key, value);
+        SaveToFile(lines);
+    }
+
+    public void UpdateMultiple(Dictionary<string, Dictionary<string, string>> updates)
+    {
+        if (!File.Exists(_path))
+        {
+            throw new FileNotFoundException($"无法保存配置，未找到目标文件: {_path}");
+        }
+
+        var lines = new List<string>(File.ReadAllLines(_path, Encoding.UTF8));
+
+        foreach (var section in updates)
+        {
+            foreach (var kvp in section.Value)
+            {
+                UpdateLinesForKeyValue(lines, section.Key, kvp.Key, kvp.Value);
+            }
+        }
+
+        SaveToFile(lines);
+    }
+
+    private void UpdateLinesForKeyValue(List<string> lines, string section, string key, string value)
+    {
         bool inTargetSection = false;
         bool keyFound = false;
 
@@ -64,7 +90,7 @@ public class IniFile
             if (trimmed.StartsWith("[") && trimmed.EndsWith("]"))
             {
                 var currentSection = trimmed.Substring(1, trimmed.Length - 2).Trim();
-                if (inTargetSection) 
+                if (inTargetSection)
                 {
                     lines.Insert(i, $"{key} = {value}");
                     keyFound = true;
@@ -94,7 +120,10 @@ public class IniFile
         {
             lines.Add($"{key} = {value}");
         }
-        
+    }
+
+    private void SaveToFile(List<string> lines)
+    {
         try
         {
             File.WriteAllLines(_path, lines, Encoding.UTF8);

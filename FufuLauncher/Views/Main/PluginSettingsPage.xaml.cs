@@ -24,6 +24,67 @@ public sealed partial class PluginSettingsPage : Page
 
     public bool InvertBool(bool value) => !value;
 
+    private void OnSwitchPresetClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement element && element.DataContext is PresetModel preset)
+        {
+            if (preset.IsLocked)
+            {
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("操作受限", "此预设针对匹配的插件，因不符合指定插件，已被锁定", NotificationType.Warning));
+                return;
+            }
+            ViewModel.SwitchPreset(preset);
+        }
+    }
+
+    private async void OnCreateNewPresetClick(object sender, RoutedEventArgs e)
+    {
+        var inputTextBox = new TextBox { PlaceholderText = "请输入新预设名称" };
+        var dialog = new ContentDialog
+        {
+            Title = "创建新预设",
+            Content = inputTextBox,
+            PrimaryButtonText = "确认",
+            CloseButtonText = "取消",
+            XamlRoot = XamlRoot
+        };
+
+        if (await dialog.ShowAsync() == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(inputTextBox.Text))
+        {
+            var currentData = ViewModel.CurrentPreset?.ConfigData;
+            var currentHash = ViewModel.CurrentPreset?.DllHash ?? "";
+            
+            if (currentData != null)
+            {
+                var newPreset = ViewModel.CreateNewPreset(inputTextBox.Text.Trim(), currentData, currentHash);
+                ViewModel.SwitchPreset(newPreset);
+            }
+        }
+    }
+
+    private async void OnDeletePresetClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement element && element.DataContext is PresetModel preset)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = "警告",
+                Content = $"确定要删除预设 \"{preset.Name}\" 吗？此操作无法恢复！",
+                PrimaryButtonText = "确认删除",
+                CloseButtonText = "取消",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = XamlRoot
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                ViewModel.DeletePreset(preset);
+            }
+        }
+    }
+
     private async void OnDownloadPluginClick(object sender, RoutedEventArgs e)
     {
         string urlLatest = "http://kr2-proxy.gitwarp.top:9980/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";

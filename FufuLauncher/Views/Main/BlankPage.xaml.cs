@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Windows.Storage.Pickers;
+using FufuLauncher.ViewModels;
 using WinRT.Interop;
 using File = System.IO.File;
 
@@ -136,17 +137,55 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
              return;
         }
         
-        
         var appPath = Environment.ProcessPath; 
         
-        var argsOnly = $"--elevated-inject \"{finalExePath}\"";
-        
-        var fullCommandLine = $"\"{appPath}\" {argsOnly}";
+        var presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets");
+        var presets = new List<PresetModel>();
+        string activeId = null;
+
+        var stateFile = Path.Combine(presetsDir, "active_state.json");
+        if (File.Exists(stateFile))
+        {
+            try { activeId = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(stateFile))?["ActiveId"]; } catch { }
+        }
+
+        if (Directory.Exists(presetsDir))
+        {
+            var files = Directory.GetFiles(presetsDir, "*.json").Where(f => !f.EndsWith("active_state.json"));
+            foreach (var file in files)
+            {
+                try
+                {
+                    var preset = JsonSerializer.Deserialize<PresetModel>(File.ReadAllText(file));
+                    if (preset != null) presets.Add(preset);
+                }
+                catch { }
+            }
+        }
+
+        var presetComboBox = new ComboBox
+        {
+            ItemsSource = presets,
+            DisplayMemberPath = "Name",
+            PlaceholderText = "默认使用当前应用内的预设",
+            Width = 300,
+            Margin = new Thickness(0, 10, 0, 0)
+        };
+
+        if (activeId != null)
+        {
+            presetComboBox.SelectedItem = presets.FirstOrDefault(p => p.Id == activeId);
+        }
+
+        var contentPanel = new StackPanel { Spacing = 10 };
+        contentPanel.Children.Add(new TextBlock { Text = "请选择您想要执行的操作：\n\n• 创建桌面快捷方式：直接在桌面生成图标。\n• 复制启动命令：获取完整命令行，可用于 Steam 或 脚本。", TextWrapping = TextWrapping.Wrap });
+        contentPanel.Children.Add(new TextBlock { Text = "指定注入配置（预设）：", Margin = new Thickness(0, 5, 0, 0) });
+        contentPanel.Children.Add(presetComboBox);
 
         var choiceDialog = new ContentDialog
         {
             Title = "选择操作",
-            Content = "请选择您想要执行的操作：\n\n• 创建桌面快捷方式：直接在桌面生成图标。\n• 复制启动命令：获取完整命令行，可用于 Steam 或 脚本。",
+            Content = contentPanel,
             PrimaryButtonText = "创建桌面快捷方式",
             SecondaryButtonText = "复制启动命令",
             CloseButtonText = "取消",
@@ -161,6 +200,15 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
             return;
         }
         
+        string presetArg = "";
+        if (presetComboBox.SelectedItem is PresetModel selectedPreset)
+        {
+            presetArg = $" --preset \"{selectedPreset.Id}\"";
+        }
+        
+        var argsOnly = $"--elevated-inject \"{finalExePath}\"{presetArg}";
+        var fullCommandLine = $"\"{appPath}\" {argsOnly}";
+
         if (choiceResult == ContentDialogResult.Primary)
         {
             var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -405,7 +453,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
                 PrimaryButtonText = "切换到 Bilibili 服",
                 SecondaryButtonText = "切换到 官方服务器",
                 CloseButtonText = "取消",
-                XamlRoot = this.XamlRoot
+                XamlRoot = XamlRoot
             };
 
             var result = await dialog.ShowAsync();

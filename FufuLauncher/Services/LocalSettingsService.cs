@@ -66,7 +66,7 @@ namespace FufuLauncher.Services
 
             if (_settings.TryGetValue(key, out var storedValue))
             {
-                Debug.WriteLine($"LocalSettingsService: 读取 '{key}' -> {storedValue}");
+                Debug.WriteLine($"LocalSettingsService: 读取 {key}");
 
                 try
                 {
@@ -109,7 +109,7 @@ namespace FufuLauncher.Services
             
             _settings[key] = json;
 
-            Debug.WriteLine($"LocalSettingsService: 保存 '{key}' -> {json}");
+            Debug.WriteLine($"LocalSettingsService: 保存{key}");
             
             await SaveSettingToDbAsync(key, json);
         }
