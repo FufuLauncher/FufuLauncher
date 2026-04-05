@@ -79,22 +79,62 @@ public partial class ControlPanelModel : ObservableObject
 
     public Action RequestMetadataScrapeAction;
 
-    public ControlPanelModel()
+public ControlPanelModel()
+{
+    var baseDocsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+    var folder = Path.Combine(baseDocsFolder, "fufu");
+
+    try
     {
-        var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "fufu");
-        if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-
-        _configPath = Path.Combine(folder, "FufuConfig.cfg");
-        _gachaDataPath = Path.Combine(folder, "gacha_data.json");
-
-        _cancellationTokenSource = new CancellationTokenSource();
-        _playTimeData = new Dictionary<string, long>();
-        _gachaService = new GachaService();
-
-        LoadConfig();
-
-        _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
+        if (File.Exists(folder))
+        {
+            Debug.WriteLine($"[异常标记] 存在与目标文件夹同名的文件: {folder}。将切换到备用路径");
+            folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
+        }
+        
+        if (!Directory.Exists(folder)) 
+        {
+            Directory.CreateDirectory(folder);
+        }
     }
+    catch (FileNotFoundException fnfe)
+    {
+        Debug.WriteLine($"[异常标记] 找不到路径异常(可能文档目录已被移动或云同步故障): {fnfe.Message}");
+        folder = Path.Combine(AppContext.BaseDirectory, "fufu_data");
+    }
+    catch (UnauthorizedAccessException uae)
+    {
+        Debug.WriteLine($"[异常标记] 权限不足，无法创建文件夹: {uae.Message}");
+        folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"[异常标记] 创建 fufu 文件夹时发生未知错误: {ex.Message}");
+        folder = Path.Combine(AppContext.BaseDirectory, "fufu_data"); 
+    }
+    
+    try 
+    {
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+    }
+    catch (Exception ex)
+    {
+         Debug.WriteLine($"[严重异常] 备用文件夹创建依然失败: {ex.Message}");
+         folder = AppContext.BaseDirectory;
+    }
+    
+    _configPath = Path.Combine(folder, "FufuConfig.cfg");
+    _gachaDataPath = Path.Combine(folder, "gacha_data.json");
+    _cancellationTokenSource = new CancellationTokenSource();
+    _playTimeData = new Dictionary<string, long>();
+    _gachaService = new GachaService();
+
+    LoadConfig();
+    _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
+}
 
     public async Task LoadSavedGachaDataAsync()
     {

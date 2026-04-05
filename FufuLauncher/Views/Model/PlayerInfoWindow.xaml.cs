@@ -71,8 +71,49 @@ namespace FufuLauncher.Views
             
             _userConfigPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "user.config.json");
             
-            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            _cacheFilePath = Path.Combine(docPath, "fufu", "player_roles.json");
+            string baseDocsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folder = Path.Combine(baseDocsFolder, "fufu");
+
+            try
+            {
+                if (File.Exists(folder))
+                {
+                    System.Diagnostics.Debug.WriteLine($"[异常标记] 存在与目标文件夹同名的文件: {folder}。将切换到备用路径。");
+                    folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
+                }
+                
+                if (!Directory.Exists(folder)) 
+                {
+                    Directory.CreateDirectory(folder);
+                }
+            }
+            catch (FileNotFoundException fnfe)
+            {
+                System.Diagnostics.Debug.WriteLine($"[异常标记] 找不到路径异常(玩家信息窗口): {fnfe.Message}");
+                folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fufu_data");
+            }
+            catch (UnauthorizedAccessException uae)
+            {
+                System.Diagnostics.Debug.WriteLine($"[异常标记] 权限不足(玩家信息窗口): {uae.Message}");
+                folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[异常标记] 创建 fufu 文件夹发生未知错误(玩家信息窗口): {ex.Message}");
+                folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fufu_data");
+            }
+            
+            try 
+            {
+                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[严重异常] 备用文件夹创建依然失败(玩家信息窗口): {ex.Message}");
+                folder = AppDomain.CurrentDomain.BaseDirectory;
+            }
+            
+            _cacheFilePath = Path.Combine(folder, "player_roles.json");
             
             _ = InitializeAsync();
         }
