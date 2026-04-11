@@ -1,0 +1,99 @@
+name: 软件缺陷报告 (Bug Report)
+description: 提交软件运行过程中出现的异常、崩溃或错误
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 提交须知
+        在提交缺陷报告前，请务必检索现有的 [Issues](https://github.com/FufuLauncher/FufuLauncher/issues) 列表，以避免提交重复的问题
+
+  - type: checkboxes
+    id: pre_checks
+    attributes:
+      label: 前置确认 (Prerequisites)
+      description: 提交前请确认以下各项均已满足
+      options:
+        - label: 已检索现有 Issues，确认此问题未被报告过
+          required: true
+        - label: 当前使用的 FufuLauncher 为最新版本
+          required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: 问题描述 (Description)
+      description: 请准确客观地描述发生的异常情况
+      placeholder: 例如：点击“启动游戏”按钮后，程序主界面无响应，约 5 分钟后进程自动终止，未产生任何错误提示
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: 操作过程 (Steps to Reproduce)
+      description: |
+        **重要提示：请提供详尽的步骤说明**
+        **开发者必须能够根据提供的步骤稳定复现此问题，方可进行有效的排查与修复。若问题无法复现，该报告可能被标记为无法处理**
+      placeholder: |
+        1. 启动 FufuLauncher。
+        2. 导航至 [...] 页面。
+        3. 执行 [...] 操作。
+        4. 观察到 [...] 异常现象。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: 预期行为 (Expected Behavior)
+      description: 描述在此操作下程序应有的正常表现
+      placeholder: 例如：点击按钮后应正常启动游戏进程，而非进程终止
+    validations:
+      required: false
+
+  - type: input
+    id: game_server
+    attributes:
+      label: 游戏服务器 (Game Server)
+      description: 指定发生问题时连接的游戏服务器
+      placeholder: 例如：国服官方服务器 / Bilibili 渠道服 / 国际服
+    validations:
+      required: true
+
+  - type: input
+    id: software_version
+    attributes:
+      label: 软件版本 (Software Version)
+      description: 提供触发此问题时的FufuLauncher完整版本号
+      placeholder: 例如：v1.1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: system_os
+    attributes:
+      label: 操作系统 (Operating System)
+      description: 提供运行该程序的操作系统版本及构建号
+      placeholder: 例如：Windows 11 23H2 (OS Build 22631)
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs_and_screenshots
+    attributes:
+      label: 附加文件 (Attachments: Logs & Screenshots)
+      description: |
+        请在此处上传相关错误截图及崩溃日志以协助定位问题
+        可直接拖拽文件至此区域。崩溃日志文件名“CrashLog.txt”，通常位于程序exe同目录下存放
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: 补充信息 (Additional Context)
+      description: 提供任何有助于排查该问题的额外环境信息（如：复现概率、杀毒软件拦截记录、系统网络环境等）
+    validations:
+      required: false
