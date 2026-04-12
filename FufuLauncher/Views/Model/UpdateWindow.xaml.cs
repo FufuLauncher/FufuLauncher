@@ -25,12 +25,14 @@ namespace FufuLauncher.Views
         private bool _isPwdSubmitted = false;
         private bool _isFileFoundProcessed = false;
         private bool _isDownloadLinkProcessed = false;
+        private string _localVersion = string.Empty;
 
         private DispatcherTimer _timeoutTimer;
 
         public UpdateWindow()
         {
             this.InitializeComponent();
+            LoadLocalVersion();
 
             ExtendsContentIntoTitleBar = true;
             IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
@@ -44,6 +46,27 @@ namespace FufuLauncher.Views
             MiniWebView.Loaded -= MiniWebView_Loaded;
             
             InitializeWebViewAsync();
+        }
+        
+        private void LoadLocalVersion()
+        {
+            try
+            {
+                string jsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Update.json");
+                if (File.Exists(jsonPath))
+                {
+                    string jsonContent = File.ReadAllText(jsonPath);
+                    var updateData = JsonSerializer.Deserialize<JsonElement>(jsonContent);
+                    if (updateData.TryGetProperty("Version", out var versionElement))
+                    {
+                        _localVersion = versionElement.GetString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"读取本地配置异常: {ex.Message}");
+            }
         }
         private async void InitializeWebViewAsync()
         {
@@ -182,6 +205,30 @@ namespace FufuLauncher.Views
                     _targetFileName = msg.name;
                     _targetFileUrl = msg.url;
                     
+                    string cloudVersion = _targetFileName
+                        .Replace("FufuLauncher_Setup_v", "")
+                        .Replace(".exe", "")
+                        .Trim();
+                    
+                    if (cloudVersion == _localVersion)
+                    {
+                        StopTimeout();
+                        this.DispatcherQueue.TryEnqueue(async () => 
+                        {
+                            LoadingPanel.Visibility = Visibility.Collapsed;
+                            var dialog = new ContentDialog
+                            {
+                                Title = "版本检查",
+                                Content = $"当前已是最新版本 (v{_localVersion})，无需更新。",
+                                CloseButtonText = "确定",
+                                XamlRoot = this.Content.XamlRoot
+                            };
+                            await dialog.ShowAsync();
+                            this.Close();
+                        });
+                        return;
+                    }
+    
                     UpdateUIStatus("解析直链中");
                     StartTimeout(45, "获取下载地址超时");
                     MiniWebView.Source = new Uri(_targetFileUrl);
