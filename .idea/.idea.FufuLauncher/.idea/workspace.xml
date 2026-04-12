@@ -11,37 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/FpsOverlayService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/PluginUpdateService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AchievementUpdaterWindow.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AchievementUpdaterWindow.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateWindow.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/App.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/genshin_achievements_linked.json" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Assets/genshin_achievements_linked.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Launcher.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Launcher.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/AnnouncementService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/AnnouncementService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/IAnnouncementService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/IAnnouncementService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AchievementWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AchievementWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,28 +70,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET 启动设置配置文件.FufuLauncher.executor&quot;: &quot;Debug&quot;,
-    &quot;.NET 项目.MihoyoBBS.executor&quot;: &quot;Debug&quot;,
-    &quot;.NET 项目.update.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.91717416&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
-    &quot;发布到文件夹.Publish FufuLauncher to folder.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET 启动设置配置文件.FufuLauncher.executor": "Debug",
+    ".NET 项目.MihoyoBBS.executor": "Debug",
+    ".NET 项目.update.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "XThreadsFramesViewSplitterKey": "0.818514",
+    "git-widget-placeholder": "master",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CodeLensConfigurable",
+    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true",
+    "发布到文件夹.Publish FufuLauncher to folder.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET 启动设置配置文件.FufuLauncher">
     <configuration name="Publish FufuLauncher to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" include_all_content_for_self_extract="true" include_native_libs_for_self_extract="true" platform="x64" produce_single_file="true" ready_to_run="true" self_contained="true" target_folder="$PROJECT_DIR$/FufuLauncher/bin/Release/net8.0-windows10.0.26100.0/win-x64/publish" target_framework="net8.0-windows10.0.26100.0" uuid_high="1964370738064323383" uuid_low="-8405170811345767747">
@@ -283,7 +255,7 @@
       <workItem from="1775893236184" duration="1892000" />
       <workItem from="1775906965415" duration="2374000" />
       <workItem from="1775911915857" duration="12764000" />
-      <workItem from="1775962017628" duration="2003000" />
+      <workItem from="1775962017628" duration="7615000" />
     </task>
     <task id="LOCAL-00001" summary="修复部分功能">
       <option name="closed" value="true" />
@@ -645,7 +617,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775915348905</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="更新1.1.0.1">
+      <option name="closed" value="true" />
+      <created>1775973245645</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1775973245645</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +646,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="修复" />
     <MESSAGE value="修复点小问题" />
     <MESSAGE value="update 1.0.9.4" />
     <MESSAGE value="修复溢出问题" />
@@ -691,7 +670,8 @@
     <MESSAGE value="修改cookie刷新" />
     <MESSAGE value="增加手动输入cookie" />
     <MESSAGE value="增加问题反馈模板" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加问题反馈模板" />
+    <MESSAGE value="更新1.1.0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新1.1.0.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

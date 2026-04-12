@@ -311,12 +311,6 @@ namespace FufuLauncher.Services
                         logBuilder.AppendLine($"[启动流程] 准备注入 DLL: {targetDllPath}");
                         gameStarted = await LaunchViaElevatedProcessAsync(gameExePath, targetDllPath, configMask, arguments, logBuilder);
                     }
-
-                    if (!string.IsNullOrEmpty(targetDllPath) && File.Exists(targetDllPath))
-                    {
-                        logBuilder.AppendLine($"[启动流程] 准备注入 DLL: {targetDllPath}");
-                        gameStarted = await LaunchViaElevatedProcessAsync(gameExePath, targetDllPath, configMask, arguments, logBuilder);
-                    }
                     else
                     {
                         logBuilder.AppendLine($"[启动流程] 未找到任何可用的注入DLL (默认路径无效且无插件)，降级为普通启动");

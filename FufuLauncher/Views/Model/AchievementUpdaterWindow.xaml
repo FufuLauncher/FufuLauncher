@@ -5,11 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="成就数据获取">
+    Title="成就数据更新">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
-            <TextBlock Text="成就数据获取" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
+            <TextBlock Text="成就数据更新" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
             
             <Button x:Name="StartButton" 
                     Content="立即开始获取" 
