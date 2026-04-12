@@ -83,7 +83,7 @@ body:
   - type: textarea
     id: logs_and_screenshots
     attributes:
-      label: 附加文件 (Attachments: Logs & Screenshots)
+      label: "附加文件 (Attachments: Logs & Screenshots)"
       description: |
         请在此处上传相关错误截图及崩溃日志以协助定位问题
         可直接拖拽文件至此区域。崩溃日志文件名“CrashLog.txt”，通常位于程序exe同目录下存放
