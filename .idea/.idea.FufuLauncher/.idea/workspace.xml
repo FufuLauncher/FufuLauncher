@@ -12,12 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/ControlPanelModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/ControlPanelModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.818514",
+    "XThreadsFramesViewSplitterKey": "1.3398294",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -267,15 +265,8 @@
       <workItem from="1775998701844" duration="10000" />
       <workItem from="1776000687418" duration="1050000" />
       <workItem from="1776011891066" duration="641000" />
-      <workItem from="1776054700270" duration="12032000" />
-    </task>
-    <task id="LOCAL-00003" summary="小改动">
-      <option name="closed" value="true" />
-      <created>1771883400602</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1771883400602</updated>
+      <workItem from="1776054700270" duration="12706000" />
+      <workItem from="1776095062396" duration="836000" />
     </task>
     <task id="LOCAL-00004" summary="更新版本号，预发布1.0.9.0">
       <option name="closed" value="true" />
@@ -661,7 +652,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776056253481</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="修复部分问题，增加网页登录">
+      <option name="closed" value="true" />
+      <created>1776093730284</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1776093730284</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -682,7 +681,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="update" />
     <MESSAGE value="增加回退" />
     <MESSAGE value="修复注入" />
     <MESSAGE value="更新部分功能" />
@@ -707,7 +705,8 @@
     <MESSAGE value="增加说明" />
     <MESSAGE value="修复 #120 和 #118 的版本检测问题以及除草提议" />
     <MESSAGE value="修复部分因权限导致的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复部分因权限导致的问题" />
+    <MESSAGE value="修复部分问题，增加网页登录" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复部分问题，增加网页登录" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -5,6 +5,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
+using CommunityToolkit.Mvvm.Messaging;
+using FufuLauncher.Messages;
 
 namespace FufuLauncher.ViewModels;
 
@@ -134,6 +136,56 @@ public ControlPanelModel()
 
     LoadConfig();
     _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
+}
+
+public async Task ClearGachaDataAsync()
+{
+    try
+    {
+        _cachedCharacterLogs.Clear();
+        _cachedWeaponLogs.Clear();
+        _cachedStandardLogs.Clear();
+        
+        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+        {
+            CharacterFiveStars.Clear();
+            CharacterFourStars.Clear();
+            WeaponFiveStars.Clear();
+            WeaponFourStars.Clear();
+            StandardFiveStars.Clear();
+            StandardFourStars.Clear();
+
+            CharacterStats = new GachaStatistic { PoolName = "角色活动" };
+            WeaponStats = new GachaStatistic { PoolName = "武器活动" };
+            StandardStats = new GachaStatistic { PoolName = "常驻祈愿" };
+
+            GachaUrl = string.Empty;
+            CrawlerStatus = "数据已清空";
+        });
+        
+        if (File.Exists(_gachaDataPath))
+        {
+            File.Delete(_gachaDataPath);
+        }
+        
+        WeakReferenceMessenger.Default.Send(new NotificationMessage(
+            "删除成功",
+            "本地抽卡记录已被彻底清除",
+            NotificationType.Success,
+            3000
+        ));
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"删除抽卡记录失败: {ex.Message}");
+        
+        WeakReferenceMessenger.Default.Send(new NotificationMessage(
+            "删除失败",
+            $"无法删除记录文件，可能是由系统权限不足或文件被其他程序占用导致,详细信息: {ex.Message}",
+            NotificationType.Error,
+            5000
+        ));
+    }
 }
 
     public async Task LoadSavedGachaDataAsync()

@@ -97,6 +97,26 @@ public sealed partial class PanelPage
     {
         ProtectedCursor = null;
     }
+    
+    private async void OnDeleteGachaDataClick(object sender, RoutedEventArgs e)
+    {
+        ContentDialog deleteDialog = new()
+        {
+            Title = "警告",
+            Content = "确定要彻底删除本地保存的所有抽卡记录吗？此操作不可逆转！",
+            PrimaryButtonText = "确认删除",
+            CloseButtonText = "取消",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = XamlRoot
+        };
+
+        ContentDialogResult result = await deleteDialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary)
+        {
+            await ViewModel.ClearGachaDataAsync();
+        }
+    }
 
     private async Task InitializeWebViewAsync()
     {
