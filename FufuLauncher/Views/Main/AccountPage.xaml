@@ -298,6 +298,30 @@
                                         <TextBlock Text="抽卡分析"/>
                                     </StackPanel>
                                 </Button>
+                                
+                                <Button Style="{StaticResource ActionButtonStyle}"
+                                        Translation="0,0,32"
+                                        Command="{x:Bind ViewModel.OpenSecurityCenterCommand}">
+                                    <Button.Shadow>
+                                        <ThemeShadow />
+                                    </Button.Shadow>
+                                    <StackPanel Spacing="8" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <FontIcon Glyph="&#xE72E;" FontSize="16"/>
+                                        <TextBlock Text="账号安全"/>
+                                    </StackPanel>
+                                </Button>
+                                
+                                <Button Style="{StaticResource ActionButtonStyle}"
+                                        Translation="0,0,32"
+                                        Command="{x:Bind ViewModel.LockAccountCommand}">
+                                    <Button.Shadow>
+                                        <ThemeShadow />
+                                    </Button.Shadow>
+                                    <StackPanel Spacing="8" Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <FontIcon Glyph="&#xE7BA;" FontSize="16" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                        <TextBlock Text="冻结账号" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                    </StackPanel>
+                                </Button>
 
                                 <Button Style="{StaticResource ActionButtonStyle}"
                                         Translation="0,0,32"

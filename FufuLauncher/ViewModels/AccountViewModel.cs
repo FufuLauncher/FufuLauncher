@@ -23,6 +23,7 @@ public partial class AccountViewModel : ObservableRecipient
 
     public bool IsLoggedIn => CurrentAccount != null;
     public bool IsNotLoggedIn => CurrentAccount == null;
+    public IRelayCommand OpenSecurityCenterCommand { get; }
 
     [ObservableProperty] private string _loginButtonText = "登录米游社";
     [ObservableProperty] private string _statusMessage = "";
@@ -33,6 +34,7 @@ public partial class AccountViewModel : ObservableRecipient
 
     [ObservableProperty] private ObservableCollection<AccountInfo> _savedAccounts = new();
     public bool HasSavedAccounts => SavedAccounts.Count > 0;
+    public IRelayCommand LockAccountCommand { get; }
 
     public IRelayCommand LoginCommand
     {
@@ -76,8 +78,43 @@ public partial class AccountViewModel : ObservableRecipient
         AddAccountCommand = new AsyncRelayCommand(AddNewAccountAsync);
         SwitchAccountCommand = new AsyncRelayCommand<AccountInfo>(SwitchToAccountAsync);
         _navigationService = navigationService;
-
+        OpenSecurityCenterCommand = new AsyncRelayCommand(OpenSecurityCenterAsync);
+        LockAccountCommand = new AsyncRelayCommand(LockAccountAsync);
         _ = LoadAccountInfo();
+    }
+    
+    private async Task LockAccountAsync()
+    {
+        await OpenSecurityWindowInternalAsync("https://user.mihoyo.com/login-platform/index.html?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&steps_bar=1&uc_type=3&redirect_url=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&st=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&succ_back_type=redirect&fail_back_type=reLogin&ux_mode=redirect#/account/lock", "正在打开账号冻结页面...");
+    }
+    
+    private async Task OpenSecurityCenterAsync()
+    {
+        await OpenSecurityWindowInternalAsync("https://user.mihoyo.com/passport/index.html?legacy_env=production#/home/security", "正在打开账号安全中心...");
+    }
+    
+    private async Task OpenSecurityWindowInternalAsync(string url, string loadingMsg)
+    {
+        try
+        {
+            StatusMessage = loadingMsg;
+            var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+            if (!File.Exists(configPath)) return;
+
+            var json = await File.ReadAllTextAsync(configPath);
+            var config = JsonSerializer.Deserialize<HoyoverseCheckinConfig>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (!string.IsNullOrEmpty(config?.Account?.Cookie))
+            {
+                var window = new SecurityWebWindow(config.Account.Cookie, url);
+                window.Activate();
+                StatusMessage = "窗口已打开";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"操作失败: {ex.Message}";
+        }
     }
 
     [RelayCommand]

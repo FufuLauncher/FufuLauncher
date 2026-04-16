@@ -11,13 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Update.json" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Update.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/AccountViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/AccountViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/AccountPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/AccountPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/AccountPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/AccountPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/DataPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/DataPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/DataPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/DataPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AboutPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AboutPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +54,7 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/MainWindow.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
@@ -85,14 +91,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.8135593&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;1.2330276&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CodeLensConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
     &quot;发布到文件夹.Publish FufuLauncher to folder.executor&quot;: &quot;Run&quot;
@@ -151,20 +157,6 @@
       <option name="PROJECT_TFM" value="" />
       <method v="2">
         <option name="Build" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
-      <option name="EXE_PATH" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
-      <option name="MIXED_MODE_DEBUG" value="0" />
-      <method v="2">
-        <option name="Build Solution" enabled="true" />
       </method>
     </configuration>
     <configuration name="FufuLauncher" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -287,15 +279,9 @@
       <workItem from="1776195052222" duration="2735000" />
       <workItem from="1776228139459" duration="6666000" />
       <workItem from="1776258929950" duration="322000" />
-      <workItem from="1776259570609" duration="3255000" />
-    </task>
-    <task id="LOCAL-00006" summary="优化使用体验">
-      <option name="closed" value="true" />
-      <created>1771984537764</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1771984537764</updated>
+      <workItem from="1776259570609" duration="4093000" />
+      <workItem from="1776264146864" duration="4627000" />
+      <workItem from="1776347928210" duration="11709000" />
     </task>
     <task id="LOCAL-00007" summary="fix issue #96">
       <option name="closed" value="true" />
@@ -681,7 +667,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776231554937</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="修复 #123 问题">
+      <option name="closed" value="true" />
+      <created>1776263450877</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1776263450878</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -702,7 +696,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="更新部分功能" />
     <MESSAGE value="增加提示" />
     <MESSAGE value="修复部分功能" />
     <MESSAGE value="修改字体文件" />
@@ -727,7 +720,8 @@
     <MESSAGE value="修复部分问题，增加网页登录" />
     <MESSAGE value="修复部分问题" />
     <MESSAGE value="优化体验" />
-    <option name="LAST_COMMIT_MESSAGE" value="优化体验" />
+    <MESSAGE value="修复 #123 问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复 #123 问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

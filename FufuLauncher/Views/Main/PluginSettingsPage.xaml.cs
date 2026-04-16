@@ -14,6 +14,7 @@ public sealed partial class PluginSettingsPage : Page
     public MainViewModel MainVM { get; }
     public ControlPanelModel ControlPanelVM { get; }
     private FeedbackWindow _feedbackWindow;
+    private Window _prWindow;
 
     public PluginSettingsPage()
     {
@@ -91,6 +92,75 @@ public sealed partial class PluginSettingsPage : Page
             }
         }
     }
+    
+private void OnPullRequestsClick(object sender, RoutedEventArgs e)
+{
+    if (_prWindow == null)
+    {
+        _prWindow = new Window();
+        _prWindow.Title = "Pull Request";
+        _prWindow.Closed += (s, args) => _prWindow = null;
+
+        _prWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+        _prWindow.ExtendsContentIntoTitleBar = true;
+
+        IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(_prWindow);
+        Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+        Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+        appWindow.Resize(new Windows.Graphics.SizeInt32(600, 450));
+        
+        var titleBarGrid = new Grid { Height = 32 };
+        var titleText = new TextBlock
+        {
+            Text = "Pull Request",
+            VerticalAlignment = VerticalAlignment.Center,
+            Margin = new Thickness(16, 0, 0, 0),
+            FontSize = 12
+        };
+        titleBarGrid.Children.Add(titleText);
+        
+        var contentStackPanel = new StackPanel 
+        { 
+            Padding = new Thickness(24, 16, 24, 24),
+            Spacing = 16 
+        };
+
+        var textBlock = new TextBlock
+        {
+            Text = "本项目目前由个人开发者(CodeCubist)独立维护\n我们坚持并积极落实以玩家痛点为核心的开发方向，开放透明和高效的推动更新\n提交Pull Requests是让拥有代码开发编写能力的用户可以协助推进开发进度、优化结构及分摊项目维护压力的核心途径\n如可提供帮助，请通过下方按钮前往代码仓库提交你的贡献",
+            TextWrapping = TextWrapping.Wrap
+        };
+
+        var openLinkBtn = new Button 
+        { 
+            Content = "访问GitHub仓库提交Pull Request", 
+            HorizontalAlignment = HorizontalAlignment.Left 
+        };
+
+        openLinkBtn.Click += async (s, args) => 
+        { 
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/FufuLauncher/FufuLauncher/pulls")); 
+        };
+
+        contentStackPanel.Children.Add(textBlock);
+        contentStackPanel.Children.Add(openLinkBtn);
+        
+        var rootGrid = new Grid();
+        rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
+        rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+
+        Grid.SetRow(titleBarGrid, 0);
+        Grid.SetRow(contentStackPanel, 1);
+
+        rootGrid.Children.Add(titleBarGrid);
+        rootGrid.Children.Add(contentStackPanel);
+
+        _prWindow.Content = rootGrid;
+        
+        _prWindow.SetTitleBar(titleBarGrid);
+    }
+    _prWindow.Activate();
+}
 
     private async void OnDeletePresetClick(object sender, RoutedEventArgs e)
     {

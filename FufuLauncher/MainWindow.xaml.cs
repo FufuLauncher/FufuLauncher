@@ -1065,7 +1065,65 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         SystemMessageBar.Visibility = Visibility.Visible;
         _networkCheckTimer.Start();
         CheckNetworkAndProxyStatus();
+        
+        _ = CheckRedeemCodesForTodayAsync();
     }
+    
+private async Task CheckRedeemCodesForTodayAsync()
+{
+    try
+    {
+        var todayStr = DateTime.Now.ToString("yyyy-MM-dd");
+        var lastRemindedObj = await _localSettingsService.ReadSettingAsync("LastRedeemCodeReminderDate");
+        
+        if (lastRemindedObj != null && lastRemindedObj.ToString() == todayStr)
+        {
+            return; 
+        }
+
+        using var client = new HttpClient();
+        client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
+        var json = await client.GetStringAsync("https://cnb.cool/bettergi/genshin-redeem-code/-/git/raw/main/codes.json");
+
+        var options = new System.Text.Json.JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            AllowTrailingCommas = true,
+            ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip
+        };
+
+        var codesList = System.Text.Json.JsonSerializer.Deserialize<List<RedeemCodeItem>>(json, options);
+
+        if (codesList != null && codesList.Count > 0)
+        {
+            var todaysCodes = codesList.Where(c => 
+                (!string.IsNullOrEmpty(c.Valid) && c.Valid.Contains(todayStr)) || 
+                (!string.IsNullOrEmpty(c.Time) && c.Time.Contains(todayStr))
+            ).ToList();
+
+            if (todaysCodes.Any())
+            {
+                var titles = string.Join("、", todaysCodes.Select(c => c.Title));
+                var codesContent = string.Join("\n", todaysCodes.SelectMany(c => c.Codes));
+                
+                dispatcherQueue.TryEnqueue(() => 
+                {
+                    var msg = new NotificationMessage(
+                        "兑换码失效提醒",
+                        $"活动{titles}包含可用兑换码：\n{codesContent}\n请及时前往游戏内使用，否则将会在今天之后失效！",
+                        NotificationType.Warning,
+                        0 
+                    );
+                    ShowNotification(msg);
+                });
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"[RedeemCodes Reminder] 今日兑换码检查失败: {ex.Message}");
+    }
+}
     
     private void CheckAndCreatePluginsFolder()
     {
@@ -1146,7 +1204,6 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
         if (isMainPage && _isOverlayShown)
         {
-            // 退出时的动画：向下滑动 + 渐隐
             var translateAnim = new DoubleAnimation
             {
                 From = 0,
@@ -1178,9 +1235,8 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         }
         else if (!isMainPage && !_isOverlayShown)
         {
-            // 进入时的动画：向上滑动 + 渐显
             OverlayTranslate.Y = screenHeight;
-            PageBackgroundOverlay.Opacity = 0.0; // 确保初始状态是透明的，为渐显做准备
+            PageBackgroundOverlay.Opacity = 0.0;
 
             var translateAnim = new DoubleAnimation
             {
@@ -1236,11 +1292,10 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
     {
         try
         {
-            // 逻辑更新：如果容器处于隐藏状态，或正处于退场动画过程中，均需重置状态并播放进场动画
             if (NotificationContainer.Visibility == Visibility.Collapsed || 
                 (NotificationContainer.Tag is string state && state == "Closing"))
             {
-                NotificationContainer.Tag = null; // 清除关闭状态标识
+                NotificationContainer.Tag = null;
                 NotificationContainer.Visibility = Visibility.Visible;
                 PlayContainerEntranceAnimation();
             }
@@ -1277,19 +1332,15 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
         infoBar.Closing += (sender, args) =>
         {
-            // 始终拦截系统默认的瞬间移除行为
             args.Cancel = true;
-
-            // 状态校验：如果已经标记为正在关闭，则直接返回，丢弃重复请求
+            
             if (infoBar.Tag is string state && state == "Closing")
             {
                 return;
             }
-
-            // 标记当前状态为正在关闭
+            
             infoBar.Tag = "Closing";
             
-            // 禁用控件的命中测试，彻底阻断用户后续的任何点击交互
             infoBar.IsHitTestVisible = false;
 
             DismissInfoBar(infoBar);
@@ -1339,6 +1390,12 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
     private void DismissInfoBar(FrameworkElement element)
     {
+        if (element is InfoBar infoBar && (infoBar.Title == "兑换码失效提醒" || infoBar.Title == "今日兑换码提醒"))
+        {
+            _ = _localSettingsService.SaveSettingAsync("LastRedeemCodeReminderDate", DateTime.Now.ToString("yyyy-MM-dd"));
+            Debug.WriteLine("[RedeemCodes] 已将关闭状态写入数据库");
+        }
+        
         var transformAnim = new DoubleAnimation
         {
             From = 0,
@@ -1363,8 +1420,6 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         storyboard.Children.Add(transformAnim);
         storyboard.Children.Add(opacityAnim);
         
-        // 核心修改：在动画开始前检查是否为最后一条正在显示的通知
-        // 如果容器内所有子项的 Tag 都被标记为 "Closing"，说明这是最后一条或正处于一键清除流程
         bool isLastNotification = NotificationPanel.Children
             .OfType<FrameworkElement>()
             .All(c => c.Tag is string state && state == "Closing");
@@ -1374,7 +1429,6 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
             PlayContainerExitAnimation();
         }
         
-        // 动画结束后仅移除控件，容器的隐藏由 PlayContainerExitAnimation 负责
         storyboard.Completed += (_, _) =>
         {
             try
@@ -1394,14 +1448,12 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
     {
         try
         {
-            // 将现有子项复制到列表中遍历，避免集合修改引发异常
             var currentNotifications = NotificationPanel.Children.ToList();
             
             foreach (var child in currentNotifications)
             {
                 if (child is InfoBar infoBar)
                 {
-                    // 复用 CreateInfoBar 里的防呆判断
                     if (infoBar.Tag is string state && state == "Closing") continue;
                     
                     infoBar.Tag = "Closing";
@@ -1416,18 +1468,13 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         }
     }
     
-    /// <summary>
-    /// 播放通知容器的放大进场动画
-    /// </summary>
     private void PlayContainerEntranceAnimation()
     {
-        // 确保容器有 ScaleTransform 并且 Opacity 为 0 开始动画
-        NotificationContainer.RenderTransformOrigin = new Point(1, 1); // 设置缩放中心为右下角
+        NotificationContainer.RenderTransformOrigin = new Point(1, 1);
         var scaleTransform = new ScaleTransform { ScaleX = 0.8, ScaleY = 0.8 };
         NotificationContainer.RenderTransform = scaleTransform;
         NotificationContainer.Opacity = 0;
-
-        // 缩放 X 动画
+        
         var scaleXAnim = new DoubleAnimation
         {
             From = 0.8,
@@ -1437,8 +1484,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         };
         Storyboard.SetTarget(scaleXAnim, scaleTransform);
         Storyboard.SetTargetProperty(scaleXAnim, "ScaleX");
-
-        // 缩放 Y 动画
+        
         var scaleYAnim = new DoubleAnimation
         {
             From = 0.8,
@@ -1448,8 +1494,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         };
         Storyboard.SetTarget(scaleYAnim, scaleTransform);
         Storyboard.SetTargetProperty(scaleYAnim, "ScaleY");
-
-        // 透明度动画
+        
         var opacityAnim = new DoubleAnimation
         {
             From = 0,
@@ -1466,16 +1511,11 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         storyboard.Children.Add(opacityAnim);
         storyboard.Begin();
     }
-
-    /// <summary>
-    /// 播放通知容器的缩小退场动画，动画结束后隐藏容器
-    /// </summary>
+    
     private void PlayContainerExitAnimation()
     {
-        // 状态拦截：如果已经在退场中，则丢弃重复的动画请求
         if (NotificationContainer.Tag is string state && state == "Closing") return;
         
-        // 标记容器状态为正在关闭
         NotificationContainer.Tag = "Closing";
 
         if (!(NotificationContainer.RenderTransform is ScaleTransform scaleTransform))
@@ -1506,7 +1546,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
         var opacityAnim = new DoubleAnimation
         {
-            From = NotificationContainer.Opacity, // 从当前透明度开始，保证动画平滑
+            From = NotificationContainer.Opacity,
             To = 0,
             Duration = new Duration(TimeSpan.FromMilliseconds(300)),
             EasingFunction = new CircleEase { EasingMode = EasingMode.EaseIn }
@@ -1521,7 +1561,6 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         
         storyboard.Completed += (_, _) =>
         {
-            // 确保在退场动画完成时，如果状态未被中断（即没有新通知进入），才隐藏容器
             if (NotificationContainer.Tag is string finalState && finalState == "Closing")
             {
                 NotificationContainer.Visibility = Visibility.Collapsed;
@@ -1538,14 +1577,12 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         timer.Tick += (_, _) => 
         {
             timer.Stop();
-
-            // 状态校验：防止手动关闭与自动关闭冲突
+            
             if (element.Tag is string state && state == "Closing")
             {
                 return;
             }
 
-            // 补全关闭状态标识与交互阻断
             element.Tag = "Closing";
             element.IsHitTestVisible = false;
 
