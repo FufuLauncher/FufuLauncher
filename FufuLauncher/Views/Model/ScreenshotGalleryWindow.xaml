@@ -22,14 +22,22 @@
             <CollectionViewSource x:Name="GalleryViewSource" IsSourceGrouped="True" ItemsPath="Items" />
         </Grid.Resources>
 
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Height="32" Background="Transparent">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0" Spacing="8">
+                <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16"/>
+                <TextBlock Text="截图图库" FontSize="12" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
         <GridView x:Name="GalleryGridView" 
                   Grid.Row="1"
                   ItemsSource="{Binding Source={StaticResource GalleryViewSource}}"
+                  Visibility="Collapsed"
                   SelectionMode="None"
                   IsItemClickEnabled="True"
                   ItemClick="GalleryGridView_ItemClick"
                   Padding="24">
-            
+
             <GridView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderContainerStyle>
@@ -72,36 +80,72 @@
             </GridView.ItemTemplate>
         </GridView>
 
-        <Grid x:Name="DetailOverlayGrid" Grid.Row="1" Visibility="Collapsed" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="EmptyStateGrid" Grid.Row="1" Visibility="Visible" Background="Transparent">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16">
+                <TextBlock Text="📁" FontSize="64" TextAlignment="Center"/>
+                <TextBlock Text="暂无游戏截图" FontSize="24" FontWeight="SemiBold" TextAlignment="Center" />
+                <Button Content="打开截图文件夹" Click="OpenEmptyFolder_Click" HorizontalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="DetailOverlayGrid" Grid.Row="1" Visibility="Collapsed" Background="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <CommandBar Grid.Row="0" DefaultLabelPosition="Right" Padding="12,0,12,0">
-                <CommandBar.PrimaryCommands>
-                    <AppBarButton Icon="Back" Label="返回相册" Click="CloseDetailView_Click" />
-                    <AppBarSeparator />
-                    <AppBarButton Icon="Copy" Label="复制" Click="CopyImage_Click" />
-                    <AppBarButton Icon="Cut" Label="剪切" Click="CutImage_Click" />
-                    <AppBarButton Icon="Delete" Label="删除" Click="DeleteImage_Click" />
-                    <AppBarSeparator />
-                    <AppBarButton Icon="OpenFile" Label="使用系统应用打开" Click="OpenWithSystemApp_Click" />
-                </CommandBar.PrimaryCommands>
-            </CommandBar>
+            <Grid Grid.Row="0" Padding="12,0,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <ScrollViewer Grid.Row="1" 
-                          x:Name="DetailScrollViewer"
-                          ZoomMode="Enabled" 
-                          MinZoomFactor="0.1" 
-                          MaxZoomFactor="10.0"
-                          HorizontalScrollMode="Auto" 
-                          VerticalScrollMode="Auto"
-                          HorizontalScrollBarVisibility="Auto" 
-                          VerticalScrollBarVisibility="Auto"
-                          PointerWheelChanged="DetailScrollViewer_PointerWheelChanged">
-                <Image x:Name="DetailImageViewer" Stretch="Uniform" Opacity="1" RenderTransformOrigin="0.5,0.5"/>
-            </ScrollViewer>
+                <CommandBar Grid.Column="0" DefaultLabelPosition="Right">
+                    <CommandBar.PrimaryCommands>
+                        <AppBarButton Icon="Back" Label="返回相册"  Click="CloseDetailView_Click"/>
+                    </CommandBar.PrimaryCommands>
+                </CommandBar>
+
+                <CommandBar Grid.Column="1" DefaultLabelPosition="Right">
+                    <CommandBar.PrimaryCommands>
+                        <AppBarButton Icon="Copy" Label="复制" Click="CopyImage_Click" />
+                        <AppBarButton Icon="Cut" Label="剪切" Click="CutImage_Click" />
+                        <AppBarButton Icon="Delete" Label="删除" Click="DeleteImage_Click" />
+                        <AppBarSeparator />
+                        <AppBarButton Icon="Folder" Label="访问图片文件夹" Click="OpenFolder_Click" />
+                        <AppBarButton Icon="OpenFile" Label="使用系统应用打开" Click="OpenWithSystemApp_Click" />
+                    </CommandBar.PrimaryCommands>
+                </CommandBar>
+            </Grid>
+
+            <FlipView Grid.Row="1"
+                      Margin="12"
+                      x:Name="DetailImageViewer"
+                      Background="Transparent"
+                      SelectionChanged="DetailImageViewer_SelectionChanged">
+                <FlipView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ScreenshotItem">
+                        <ScrollViewer x:Name="DetailScrollViewer"
+                                      ZoomMode="Enabled"
+                                      MinZoomFactor="0.1"
+                                      MaxZoomFactor="10.0"
+                                      HorizontalScrollMode="Auto"
+                                      VerticalScrollMode="Auto"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <!--不再处理滚轮事件，因为ScrollViewer默认支持CTRL+滚轮缩放，且与FlipView切换上下项目冲突-->
+                            <!--PointerWheelChanged="DetailScrollViewer_PointerWheelChanged"-->
+                            <Grid Width="{Binding ElementName=DetailScrollViewer, Path=ViewportWidth}"
+                                  Height="{Binding ElementName=DetailScrollViewer, Path=ViewportHeight}">
+                                <Image x:Name="DetailImage"
+                                       Source="{x:Bind ImageSource}"
+                                       Stretch="Uniform" />
+                            </Grid>
+                        </ScrollViewer>
+                    </DataTemplate>
+                </FlipView.ItemTemplate>
+            </FlipView>
+
         </Grid>
     </Grid>
 </Window>

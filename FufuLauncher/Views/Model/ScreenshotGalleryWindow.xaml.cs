@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using FufuLauncher.Activation;
 using FufuLauncher.Models;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -16,9 +17,12 @@ namespace FufuLauncher.Views;
 public sealed partial class ScreenshotGalleryWindow : Window
 {
     private readonly string _screenshotDirectory;
-    private ObservableCollection<ScreenshotGroup> _galleryData = new();
-    private ScreenshotItem _currentDetailItem;
+    private readonly ObservableCollection<ScreenshotGroup> _galleryData = new();
+    private readonly ObservableCollection<ScreenshotItem> _flatItems = new();
+    private ScreenshotItem? _currentDetailItem;
     private AppWindow _appWindow;
+    private FileSystemWatcher? _fileWatcher;
+    private Timer? _debounceTimer;
 
     private const string ConnectedAnimationKey = "ForwardConnectedAnimation";
 
@@ -26,12 +30,56 @@ public sealed partial class ScreenshotGalleryWindow : Window
     {
         this.InitializeComponent();
         _screenshotDirectory = screenshotDirectory;
-        
+
         ExtendsContentIntoTitleBar = true;
-        SetTitleBar(null); 
+        SetTitleBar(null);
         CustomizeTitleBar();
 
-        RootGrid.Loaded += (s, e) => { _ = LoadScreenshotsAsync(); };
+        DetailImageViewer.ItemsSource = _flatItems;
+
+        RootGrid.Loaded += async (s, e) =>
+        {
+            await RefreshViewAfterDataChangedAsync();
+            _fileWatcher = new FileSystemWatcher(_screenshotDirectory, "*.png")
+            {
+                NotifyFilter = NotifyFilters.FileName | NotifyFilters.CreationTime,
+                EnableRaisingEvents = true
+            };
+
+            _fileWatcher.Created += (s, e) => DebounceRefresh();
+            _fileWatcher.Deleted += (s, e) => DebounceRefresh();
+            _fileWatcher.Renamed += (s, e) => DebounceRefresh();
+        };
+
+        this.Closed += (s, e) =>
+        {
+            _fileWatcher?.Dispose();
+            _debounceTimer?.Dispose();
+        };
+    }
+
+
+    private void DebounceRefresh()
+    {
+        if (_debounceTimer == null)
+        {
+            _debounceTimer = new Timer(
+                async _ =>
+                {
+                    await DispatcherQueue.EnqueueAsync(async () =>
+                    {
+                        await RefreshViewAfterDataChangedAsync();
+                    });
+                },
+                null,
+                TimeSpan.FromMilliseconds(500),
+                Timeout.InfiniteTimeSpan
+            );
+        }
+        else
+        {
+            _debounceTimer.Change(TimeSpan.FromMilliseconds(500), Timeout.InfiniteTimeSpan);
+        }
     }
 
     private void CustomizeTitleBar()
@@ -43,7 +91,7 @@ public sealed partial class ScreenshotGalleryWindow : Window
         if (_appWindow != null)
         {
             AppTitleBarRow.Height = new GridLength(_appWindow.TitleBar.Height);
-            
+
             _appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             _appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             _appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
@@ -53,6 +101,7 @@ public sealed partial class ScreenshotGalleryWindow : Window
     private async Task LoadScreenshotsAsync()
     {
         _galleryData.Clear();
+        _flatItems.Clear();
 
         if (!Directory.Exists(_screenshotDirectory)) return;
 
@@ -82,18 +131,22 @@ public sealed partial class ScreenshotGalleryWindow : Window
             foreach (var file in group)
             {
                 var bitmap = new BitmapImage(new Uri(file.FullName));
-                folderGroup.Items.Add(new ScreenshotItem
+                var item = new ScreenshotItem
                 {
                     FilePath = file.FullName,
                     FileName = file.Name,
                     CreationTime = file.CreationTime,
                     ImageSource = bitmap
-                });
+                };
+                folderGroup.Items.Add(item);
+                _flatItems.Add(item);
+
             }
             _galleryData.Add(folderGroup);
         }
 
         GalleryViewSource.Source = _galleryData;
+
     }
 
     private void GridItem_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -115,13 +168,13 @@ public sealed partial class ScreenshotGalleryWindow : Window
     private void AnimateScale(ScaleTransform target, double toScale)
     {
         var storyboard = new Storyboard();
-        
+
         var animX = new DoubleAnimation { To = toScale, Duration = new Duration(TimeSpan.FromMilliseconds(200)), EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } };
         var animY = new DoubleAnimation { To = toScale, Duration = new Duration(TimeSpan.FromMilliseconds(200)), EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut } };
 
         Storyboard.SetTarget(animX, target);
         Storyboard.SetTargetProperty(animX, "ScaleX");
-        
+
         Storyboard.SetTarget(animY, target);
         Storyboard.SetTargetProperty(animY, "ScaleY");
 
@@ -140,27 +193,30 @@ public sealed partial class ScreenshotGalleryWindow : Window
             if (gridViewItem != null)
             {
                 var imageInGrid = (Image)FindDescendantByName(gridViewItem, "GridImage");
-                
+
                 if (imageInGrid != null)
                 {
                     ConnectedAnimationService.GetForCurrentView().PrepareToAnimate(ConnectedAnimationKey, imageInGrid);
                 }
             }
 
-            DetailImageViewer.Source = item.ImageSource;
-            
-            DetailScrollViewer.ChangeView(null, null, 1.0f, true);
+            DetailImageViewer.SelectedItem = item;
 
+            DetailOverlayGrid.Opacity = 0;
             GalleryGridView.Visibility = Visibility.Collapsed;
             DetailOverlayGrid.Visibility = Visibility.Visible;
+
+            DetailOverlayGrid.UpdateLayout();
+            await Task.Yield();
 
             var anim = ConnectedAnimationService.GetForCurrentView().GetAnimation(ConnectedAnimationKey);
             if (anim != null)
             {
                 anim.Configuration = new BasicConnectedAnimationConfiguration();
-                await Task.Delay(1);
                 anim.TryStart(DetailImageViewer);
             }
+            DetailOverlayGrid.Opacity = 1;
+
         }
     }
 
@@ -183,35 +239,7 @@ public sealed partial class ScreenshotGalleryWindow : Window
         }
 
         _currentDetailItem = null;
-        DetailImageViewer.Source = null;
-    }
-
-    private void DetailScrollViewer_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
-    {
-        var properties = e.GetCurrentPoint(DetailScrollViewer).Properties;
-        if (properties.IsHorizontalMouseWheel) return; 
-
-        e.Handled = true;
-
-        double delta = properties.MouseWheelDelta;
-        double scaleFactor = 1.1; 
-        double currentZoom = DetailScrollViewer.ZoomFactor;
-        float newZoom;
-
-        if (delta > 0)
-        {
-            newZoom = (float)(currentZoom * scaleFactor);
-        }
-        else
-        {
-            newZoom = (float)(currentZoom / scaleFactor);
-        }
-
-        newZoom = Math.Max(0.1f, Math.Min(10.0f, newZoom));
-
-        if (Math.Abs(delta) > 200) newZoom = 1.0f;
-
-        DetailScrollViewer.ChangeView(null, null, newZoom);
+        DetailImageViewer.SelectedItem = null;
     }
 
     private async void CopyImage_Click(object sender, RoutedEventArgs e)
@@ -234,6 +262,7 @@ public sealed partial class ScreenshotGalleryWindow : Window
     {
         try
         {
+            if (_currentDetailItem == null || !File.Exists(_currentDetailItem.FilePath)) return;
             var storageFile = await StorageFile.GetFileFromPathAsync(_currentDetailItem.FilePath);
             var dataPackage = new DataPackage();
             dataPackage.SetStorageItems(new List<IStorageItem> { storageFile });
@@ -255,18 +284,29 @@ public sealed partial class ScreenshotGalleryWindow : Window
             var dialog = new ContentDialog
             {
                 Title = "确认删除",
-                Content = "确定要永久删除此截图吗？此操作无法撤销。",
+                Content = "确定要将此截图移到回收站吗？",
                 PrimaryButtonText = "删除",
                 CloseButtonText = "取消",
                 DefaultButton = ContentDialogButton.Close,
-                XamlRoot = RootGrid.XamlRoot 
+                XamlRoot = RootGrid.XamlRoot
             };
 
             var result = await dialog.ShowAsync();
 
             if (result == ContentDialogResult.Primary)
             {
-                ExecuteDeleteLogic();
+                // 直接移到回收站，不再处理原先逻辑。因为删除操作也会触发FileSystemWatcher喵
+                try
+                {
+                    Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(
+                        _currentDetailItem.FilePath,
+                        Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                        Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"删除文件失败: {ex.Message}");
+                }
             }
         }
         catch (Exception ex)
@@ -275,34 +315,50 @@ public sealed partial class ScreenshotGalleryWindow : Window
         }
     }
 
-    private void ExecuteDeleteLogic()
+    private async Task RefreshViewAfterDataChangedAsync()
     {
-        try
+        await LoadScreenshotsAsync();
+
+        // 根据当前数据状态切换视图
+        var hasItems = _galleryData.Count > 0;
+        EmptyStateGrid.Visibility = hasItems ? Visibility.Collapsed : Visibility.Visible;
+        GalleryGridView.Visibility = hasItems ? Visibility.Visible : Visibility.Collapsed;
+
+
+        // 未显示详情页时，直接返回
+        if (DetailOverlayGrid.Visibility != Visibility.Visible)
         {
-            File.Delete(_currentDetailItem.FilePath);
-            
-            foreach (var group in _galleryData)
-            {
-                if (group.Items.Contains(_currentDetailItem))
-                {
-                    group.Items.Remove(_currentDetailItem);
-                    if (group.Items.Count == 0)
-                    {
-                        _galleryData.Remove(group);
-                    }
-                    break;
-                }
-            }
-            
+            _currentDetailItem = null;
+            DetailImageViewer.SelectedItem = null;
+            return;
+        }
+
+        // 详情页的操作
+
+        // 图片列表空了，返回列表视图喵
+        if (_flatItems.Count == 0)
+        {
             DetailOverlayGrid.Visibility = Visibility.Collapsed;
             GalleryGridView.Visibility = Visibility.Visible;
             _currentDetailItem = null;
-            DetailImageViewer.Source = null;
+            DetailImageViewer.SelectedItem = null;
+            return;
         }
-        catch (Exception ex)
+
+        ScreenshotItem? nextItem = null;
+
+        if (_currentDetailItem is not null && !string.IsNullOrWhiteSpace(_currentDetailItem.FilePath))
         {
-            System.Diagnostics.Debug.WriteLine($"删除文件失败: {ex.Message}");
+            // 要确定下一项的显示喵：如果当前是最后一张，则返回上一张，否则返回下一张
+            var nextIndex = Math.Clamp(_flatItems.IndexOf(_currentDetailItem) + 1, 0, _flatItems.Count - 1);
+            nextItem = _flatItems[nextIndex];
         }
+
+        _currentDetailItem = nextItem;
+        DetailImageViewer.SelectedItem = nextItem;
+
+        DetailOverlayGrid.Visibility = Visibility.Visible;
+        GalleryGridView.Visibility = Visibility.Collapsed;
     }
 
     private async void OpenWithSystemApp_Click(object sender, RoutedEventArgs e)
@@ -318,6 +374,37 @@ public sealed partial class ScreenshotGalleryWindow : Window
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"系统应用打开失败: {ex.Message}");
+            }
+        }
+    }
+
+    private void DetailImageViewer_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        // 切换图片时要重置缩放喵
+        if (DetailImageViewer.SelectedItem is not ScreenshotItem item) return;
+
+        _currentDetailItem = item;
+
+        if (DetailImageViewer.ContainerFromItem(item) is not DependencyObject flipViewItem) return;
+
+        if (FindDescendantByName(flipViewItem, "DetailScrollViewer") is ScrollViewer scrollViewer)
+        {
+            _ = scrollViewer.ChangeView(0, 0, 1.0f, true);
+        }
+    }
+
+    private void OpenFolder_Click(object sender, RoutedEventArgs e)
+    {
+        if (_currentDetailItem != null && File.Exists(_currentDetailItem.FilePath))
+        {
+            try
+            {
+                var argument = $"/select, \"{_currentDetailItem.FilePath}\"";
+                System.Diagnostics.Process.Start("explorer.exe", argument);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"系统文件夹打开失败: {ex.Message}");
             }
         }
     }
@@ -338,5 +425,19 @@ public sealed partial class ScreenshotGalleryWindow : Window
             }
         }
         return null;
+    }
+
+    private void OpenEmptyFolder_Click(object sender, RoutedEventArgs e)
+    {
+        if (!Directory.Exists(_screenshotDirectory)) return;
+
+        try
+        {
+            System.Diagnostics.Process.Start("explorer.exe", _screenshotDirectory);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"系统文件夹打开失败: {ex.Message}");
+        }
     }
 }
