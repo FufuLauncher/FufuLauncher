@@ -40,12 +40,19 @@ namespace FufuLauncher.Views
             Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
             
             MiniWebView.Loaded += MiniWebView_Loaded;
+            this.Closed += UpdateWindow_Closed;
         }
+
         private void MiniWebView_Loaded(object sender, RoutedEventArgs e)
         {
             MiniWebView.Loaded -= MiniWebView_Loaded;
-            
             InitializeWebViewAsync();
+        }
+
+        private void UpdateWindow_Closed(object sender, WindowEventArgs args)
+        {
+            StopTimeout();
+            MiniWebView?.Close();
         }
         
         private void LoadLocalVersion()
@@ -68,121 +75,151 @@ namespace FufuLauncher.Views
                 Debug.WriteLine($"读取本地配置异常: {ex.Message}");
             }
         }
-        private async void InitializeWebViewAsync()
-{
-    try
-    {
-        var envOptions = new CoreWebView2EnvironmentOptions();
-        envOptions.AdditionalBrowserArguments = $"--user-agent=\"{CUSTOM_UA}\" --disable-blink-features=AutomationControlled";
-        
-        string userDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "WebView2Data_Update");
-        
-        var env = await CoreWebView2Environment.CreateWithOptionsAsync(null, userDataFolder, envOptions);
 
-        await MiniWebView.EnsureCoreWebView2Async(env);
-        
-        if (MiniWebView.CoreWebView2 == null)
+        private void CleanupOldWebView2Data(string baseFolder)
         {
-            throw new Exception("WebView2内核加载失败，请检查系统是否已正确安装WebView2 Runtime");
-        }
-
-        MiniWebView.CoreWebView2.Settings.UserAgent = CUSTOM_UA;
-        string injectionScript = @"
-        (function() {
-            Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
-            let linkFound = false;
-
-            function findDownloadLinkInFrames(doc) {
-                if (!doc) return null;
-                try {
-                    var btns = doc.querySelectorAll('a.txt');
-                    for (var j = 0; j < btns.length; j++) {
-                        if (btns[j].innerText.indexOf('普通下载') !== -1) {
-                            return btns[j].href;
+            try
+            {
+                if (Directory.Exists(baseFolder))
+                {
+                    var dirs = Directory.GetDirectories(baseFolder, "WebView2Data_Update_*");
+                    foreach (var dir in dirs)
+                    {
+                        try
+                        {
+                            Directory.Delete(dir, true);
                         }
-                    }
-                    
-                    var frames = doc.querySelectorAll('iframe');
-                    for (var i = 0; i < frames.length; i++) {
-                        try {
-                            var frameDoc = frames[i].contentDocument || frames[i].contentWindow.document;
-                            var link = findDownloadLinkInFrames(frameDoc);
-                            if (link) return link;
-                        } catch (e) {
+                        catch
+                        {
+                            // ignored
                         }
-                    }
-                } catch (e) {}
-                return null;
-            }
-
-            function checkAndReport() {
-                if (linkFound) return;
-
-                try {
-                    var pwdInput = document.getElementById('pwd');
-                    var subBtn = document.getElementById('sub');
-                    var pwdLoad = document.getElementById('pwdload');
-                    if (pwdInput && subBtn && pwdLoad && pwdLoad.style.display !== 'none') {
-                        window.chrome.webview.postMessage(JSON.stringify({ type: 'pwd_found' }));
-                    }
-
-                    var items = document.querySelectorAll('#infos #ready');
-                    if (items.length > 0) {
-                        for(var i=0; i<items.length; i++) {
-                            var link = items[i].querySelector('#name a');
-                            if (link && link.innerText.toLowerCase().indexOf('.exe') !== -1) {
-                                window.chrome.webview.postMessage(JSON.stringify({ 
-                                    type: 'file_found', 
-                                    name: link.innerText.trim(), 
-                                    url: link.href 
-                                }));
-                                return;
-                            }
-                        }
-                    }
-
-                    var finalLink = findDownloadLinkInFrames(document);
-                    if (finalLink) {
-                        linkFound = true;
-                        window.chrome.webview.postMessage(JSON.stringify({ type: 'download_link', url: finalLink }));
-                        return;
-                    }
-
-                } catch (e) { }
-            }
-
-            window.chrome.webview.addEventListener('message', function(e) {
-                if (e.data === 'submit_pwd') {
-                    var pwdInput = document.getElementById('pwd');
-                    var subBtn = document.getElementById('sub');
-                    if (pwdInput && subBtn) {
-                        pwdInput.value = '6hnh';
-                        subBtn.click();
                     }
                 }
-            });
-
-            var observer = new MutationObserver(function(mutations) { checkAndReport(); });
-            if (document.body || document.documentElement) {
-                observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
             }
-            
-            window.addEventListener('DOMContentLoaded', checkAndReport);
-            setInterval(checkAndReport, 1000); 
-        })();
-        ";
+            catch
+            {
+                // ignored
+            }
+        }
 
-        MiniWebView.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
-        await MiniWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(injectionScript);
-        
-        StartTimeout(45, "获取下载地址超时。");
-        MiniWebView.Source = new Uri(_shareUrl);
-    }
-    catch (Exception ex)
-    {
-        UpdateUIStatus(ex.Message, true);
-    }
-}
+        private async void InitializeWebViewAsync()
+        {
+            try
+            {
+                var envOptions = new CoreWebView2EnvironmentOptions();
+                envOptions.AdditionalBrowserArguments = $"--user-agent=\"{CUSTOM_UA}\" --disable-blink-features=AutomationControlled";
+                
+                string baseDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
+                CleanupOldWebView2Data(baseDataFolder);
+                
+                string userDataFolder = Path.Combine(baseDataFolder, $"WebView2Data_Update_{Guid.NewGuid():N}");
+                
+                var env = await CoreWebView2Environment.CreateWithOptionsAsync(null, userDataFolder, envOptions);
+
+                await MiniWebView.EnsureCoreWebView2Async(env);
+                
+                if (MiniWebView.CoreWebView2 == null)
+                {
+                    throw new Exception("WebView2内核加载失败，请检查系统是否已正确安装WebView2 Runtime");
+                }
+
+                MiniWebView.CoreWebView2.Settings.UserAgent = CUSTOM_UA;
+                string injectionScript = @"
+                (function() {
+                    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                    let linkFound = false;
+
+                    function findDownloadLinkInFrames(doc) {
+                        if (!doc) return null;
+                        try {
+                            var btns = doc.querySelectorAll('a.txt');
+                            for (var j = 0; j < btns.length; j++) {
+                                if (btns[j].innerText.indexOf('普通下载') !== -1) {
+                                    return btns[j].href;
+                                }
+                            }
+                            
+                            var frames = doc.querySelectorAll('iframe');
+                            for (var i = 0; i < frames.length; i++) {
+                                try {
+                                    var frameDoc = frames[i].contentDocument || frames[i].contentWindow.document;
+                                    var link = findDownloadLinkInFrames(frameDoc);
+                                    if (link) return link;
+                                } catch (e) {
+                                }
+                            }
+                        } catch (e) {}
+                        return null;
+                    }
+
+                    function checkAndReport() {
+                        if (linkFound) return;
+
+                        try {
+                            var pwdInput = document.getElementById('pwd');
+                            var subBtn = document.getElementById('sub');
+                            var pwdLoad = document.getElementById('pwdload');
+                            if (pwdInput && subBtn && pwdLoad && pwdLoad.style.display !== 'none') {
+                                window.chrome.webview.postMessage(JSON.stringify({ type: 'pwd_found' }));
+                            }
+
+                            var items = document.querySelectorAll('#infos #ready');
+                            if (items.length > 0) {
+                                for(var i=0; i<items.length; i++) {
+                                    var link = items[i].querySelector('#name a');
+                                    if (link && link.innerText.toLowerCase().indexOf('.exe') !== -1) {
+                                        window.chrome.webview.postMessage(JSON.stringify({ 
+                                            type: 'file_found', 
+                                            name: link.innerText.trim(), 
+                                            url: link.href 
+                                        }));
+                                        return;
+                                    }
+                                }
+                            }
+
+                            var finalLink = findDownloadLinkInFrames(document);
+                            if (finalLink) {
+                                linkFound = true;
+                                window.chrome.webview.postMessage(JSON.stringify({ type: 'download_link', url: finalLink }));
+                                return;
+                            }
+
+                        } catch (e) { }
+                    }
+
+                    window.chrome.webview.addEventListener('message', function(e) {
+                        if (e.data === 'submit_pwd') {
+                            var pwdInput = document.getElementById('pwd');
+                            var subBtn = document.getElementById('sub');
+                            if (pwdInput && subBtn) {
+                                pwdInput.value = '6hnh';
+                                subBtn.click();
+                            }
+                        }
+                    });
+
+                    var observer = new MutationObserver(function(mutations) { checkAndReport(); });
+                    if (document.body || document.documentElement) {
+                        observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+                    }
+                    
+                    window.addEventListener('DOMContentLoaded', checkAndReport);
+                    setInterval(checkAndReport, 1000); 
+                })();
+                ";
+
+                MiniWebView.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
+                await MiniWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(injectionScript);
+                
+                StartTimeout(45, "获取下载地址超时。");
+                MiniWebView.Source = new Uri(_shareUrl);
+            }
+            catch (Exception ex)
+            {
+                UpdateUIStatus(ex.Message, true);
+            }
+        }
 
         private void CoreWebView2_WebMessageReceived(CoreWebView2 sender, CoreWebView2WebMessageReceivedEventArgs args)
         {
@@ -357,7 +394,7 @@ namespace FufuLauncher.Views
             }
         }
 
-        #region 状态与超时控制助手
+        #region 状态与超时
         
         private void UpdateUIStatus(string message, bool isError = false)
         {

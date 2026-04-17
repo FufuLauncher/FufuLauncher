@@ -319,101 +319,99 @@ namespace FufuLauncher.Views
             return path;
         }
 
-        private OperationLists GenerateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
+private OperationLists GenerateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
+{
+    var ops = new OperationLists();
+    var localAssetMap = new Dictionary<string, AssetProperty>();
+    
+    foreach (var asset in localManifest.Assets)
+    {
+        string name = asset.AssetName ?? "";
+        localAssetMap[NormalizePath(name)] = asset;
+    }
+
+    var targetAssetMap = new Dictionary<string, AssetProperty>();
+    foreach (var asset in targetManifest.Assets) targetAssetMap[NormalizePath(asset.AssetName ?? "")] = asset;
+
+    foreach (var kvp in localAssetMap)
+    {
+        string normPath = kvp.Key;
+        var localAsset = kvp.Value;
+        string localMd5 = (localAsset.AssetHashMd5 ?? "").ToLowerInvariant();
+        string localName = localAsset.AssetName ?? "";
+
+        bool needsBackup = !targetAssetMap.TryGetValue(normPath, out var targetAsset) || ((targetAsset.AssetHashMd5 ?? "").ToLowerInvariant() != localMd5);
+        if (needsBackup)
         {
-            var ops = new OperationLists();
-            var localAssetMap = new Dictionary<string, AssetProperty>();
-            var localChunkMap = new Dictionary<string, (string name, AssetChunk chunk)>();
-
-            foreach (var asset in localManifest.Assets)
-            {
-                string name = asset.AssetName ?? "";
-                localAssetMap[NormalizePath(name)] = asset;
-                foreach (var chunk in asset.AssetChunks)
-                {
-                    string h = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
-                    if (!string.IsNullOrEmpty(h)) localChunkMap[h] = (name, chunk);
-                }
-            }
-
-            var targetAssetMap = new Dictionary<string, AssetProperty>();
-            foreach (var asset in targetManifest.Assets) targetAssetMap[NormalizePath(asset.AssetName ?? "")] = asset;
-
-            foreach (var kvp in localAssetMap)
-            {
-                string normPath = kvp.Key;
-                var localAsset = kvp.Value;
-                string localMd5 = (localAsset.AssetHashMd5 ?? "").ToLowerInvariant();
-                string localName = localAsset.AssetName ?? "";
-
-                bool needsBackup = !targetAssetMap.TryGetValue(normPath, out var targetAsset) || ((targetAsset.AssetHashMd5 ?? "").ToLowerInvariant() != localMd5);
-                if (needsBackup)
-                {
-                    string srcPath = Path.Combine(gameDir, localName);
-                    string dstPath = Path.Combine(backupLocalDir, localName);
-                    if (File.Exists(srcPath)) ops.Backup.Add((srcPath, dstPath));
-                }
-            }
-
-            var cnSdks = new[] { Path.Combine(GameConstants.CN_DATA_DIR, "Plugins", "PCGameSDK.dll"), "sdk_pkg_version" };
-            var osSdks = new[] { Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "PluginEOSSDK.dll"), Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "EOSSDK-Win64-Shipping.dll") };
-            var localSdks = isCurrentlyCn ? cnSdks : osSdks;
-            var targetSdks = isCurrentlyCn ? osSdks : cnSdks;
-
-            foreach (var sdk in localSdks)
-            {
-                string src = Path.Combine(gameDir, sdk);
-                if (File.Exists(src)) ops.Backup.Add((src, Path.Combine(backupLocalDir, sdk)));
-            }
-
-            foreach (var kvp in targetAssetMap)
-            {
-                string normPath = kvp.Key;
-                var targetAsset = kvp.Value;
-                string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
-                string targetName = targetAsset.AssetName ?? "";
-
-                if (localAssetMap.TryGetValue(normPath, out var localAsset) && (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) continue;
-
-                string backupFilePath = Path.Combine(backupTargetDir, targetName);
-                if (File.Exists(backupFilePath))
-                {
-                    if (HashUtility.Md5File(backupFilePath) == targetMd5)
-                    {
-                        ops.Restore.Add((backupFilePath, Path.Combine(gameDir, targetName)));
-                        continue;
-                    }
-                    else File.Delete(backupFilePath);
-                }
-
-                var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
-                foreach (var chunk in targetAsset.AssetChunks)
-                {
-                    string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
-                    bool reused = false;
-
-                    if (localChunkMap.TryGetValue(chunkHash, out var localMatch) && File.Exists(Path.Combine(gameDir, localMatch.name)))
-                    {
-                        op.Instructions.Add(new AssemblyInstruction("reuse", chunk, localMatch.name, localMatch.chunk));
-                        reused = true;
-                    }
-
-                    if (!reused)
-                    {
-                        op.Instructions.Add(new AssemblyInstruction("download", chunk));
-                        op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
-                    }
-                }
-                ops.Assemble.Add(op);
-            }
-
-            foreach (var sdk in targetSdks)
-            {
-                string src = Path.Combine(backupTargetDir, sdk);
-                if (File.Exists(src)) ops.Restore.Add((src, Path.Combine(gameDir, sdk)));
-            }
-            return ops;
+            string srcPath = Path.Combine(gameDir, localName);
+            string dstPath = Path.Combine(backupLocalDir, localName);
+            if (File.Exists(srcPath)) ops.Backup.Add((srcPath, dstPath));
         }
+    }
+
+    var cnSdks = new[] { Path.Combine(GameConstants.CN_DATA_DIR, "Plugins", "PCGameSDK.dll"), "sdk_pkg_version" };
+    var osSdks = new[] { Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "PluginEOSSDK.dll"), Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "EOSSDK-Win64-Shipping.dll") };
+    var localSdks = isCurrentlyCn ? cnSdks : osSdks;
+    var targetSdks = isCurrentlyCn ? osSdks : cnSdks;
+
+    foreach (var sdk in localSdks)
+    {
+        string src = Path.Combine(gameDir, sdk);
+        if (File.Exists(src)) ops.Backup.Add((src, Path.Combine(backupLocalDir, sdk)));
+    }
+
+    foreach (var kvp in targetAssetMap)
+    {
+        string normPath = kvp.Key;
+        var targetAsset = kvp.Value;
+        string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
+        string targetName = targetAsset.AssetName ?? "";
+
+        if (localAssetMap.TryGetValue(normPath, out var localAsset) && (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) continue;
+
+        string backupFilePath = Path.Combine(backupTargetDir, targetName);
+        if (File.Exists(backupFilePath))
+        {
+            if (HashUtility.Md5File(backupFilePath) == targetMd5)
+            {
+                ops.Restore.Add((backupFilePath, Path.Combine(gameDir, targetName)));
+                continue;
+            }
+            else File.Delete(backupFilePath);
+        }
+
+        var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
+        foreach (var chunk in targetAsset.AssetChunks)
+        {
+            string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
+            bool reused = false;
+            
+            if (localAssetMap.TryGetValue(normPath, out var currentLocalAsset) && File.Exists(Path.Combine(gameDir, currentLocalAsset.AssetName ?? "")))
+            {
+                var oldChunk = currentLocalAsset.AssetChunks.FirstOrDefault(c => (c.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant() == chunkHash);
+                if (oldChunk != null)
+                {
+                    op.Instructions.Add(new AssemblyInstruction("reuse", chunk, currentLocalAsset.AssetName, oldChunk));
+                    reused = true;
+                }
+            }
+
+            if (!reused)
+            {
+                op.Instructions.Add(new AssemblyInstruction("download", chunk));
+                op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
+            }
+        }
+        ops.Assemble.Add(op);
+    }
+
+    foreach (var sdk in targetSdks)
+    {
+        string src = Path.Combine(backupTargetDir, sdk);
+        if (File.Exists(src)) ops.Restore.Add((src, Path.Combine(gameDir, sdk)));
+    }
+    return ops;
+}
 
         private async Task DownloadDiffChunksAsync(List<SophonAssetOperation> assembleOps)
         {
@@ -444,44 +442,59 @@ namespace FufuLauncher.Views
             await File.WriteAllBytesAsync(chunkPath, bytes);
         }
 
-        private void AssembleFiles(List<SophonAssetOperation> assembleOps)
+private void AssembleFiles(List<SophonAssetOperation> assembleOps)
+{
+    int totalOps = assembleOps.Count;
+    if (totalOps == 0) return;
+    
+    byte[] buffer = new byte[81920];
+
+    for (int i = 0; i < totalOps; i++)
+    {
+        var op = assembleOps[i];
+        string targetPath = Path.Combine(targetDir, op.AssetName);
+        Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
+
+        using (var targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write, FileShare.None))
         {
-            int totalOps = assembleOps.Count;
-            if (totalOps == 0) return;
+            targetFile.SetLength(op.Asset.AssetSize);
 
-            for (int i = 0; i < totalOps; i++)
+            foreach (var inst in op.Instructions)
             {
-                var op = assembleOps[i];
-                string targetPath = Path.Combine(targetDir, op.AssetName);
-                Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
+                targetFile.Seek(inst.TargetChunk.ChunkOnFileOffset, SeekOrigin.Begin);
+                long remainingBytes = inst.TargetChunk.ChunkSizeDecompressed;
 
-                using (var targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                if (inst.Action == "reuse")
                 {
-                    foreach (var inst in op.Instructions)
+                    using var localFile = new FileStream(Path.Combine(gameDir, inst.LocalAssetName), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    localFile.Seek(inst.LocalChunk.ChunkOnFileOffset, SeekOrigin.Begin);
+                    
+                    while (remainingBytes > 0)
                     {
-                        targetFile.Seek(inst.TargetChunk.ChunkOnFileOffset, SeekOrigin.Begin);
-
-                        if (inst.Action == "reuse")
-                        {
-                            using var localFile = new FileStream(Path.Combine(gameDir, inst.LocalAssetName), FileMode.Open, FileAccess.Read, FileShare.Read);
-                            localFile.Seek(inst.LocalChunk.ChunkOnFileOffset, SeekOrigin.Begin);
-                            byte[] buffer = new byte[inst.TargetChunk.ChunkSizeDecompressed];
-                            localFile.ReadExactly(buffer, 0, buffer.Length);
-                            targetFile.Write(buffer, 0, buffer.Length);
-                        }
-                        else
-                        {
-                            using var compressedFile = new FileStream(Path.Combine(chunksDir, inst.TargetChunk.ChunkName), FileMode.Open, FileAccess.Read, FileShare.Read);
-                            using var dctx = new DecompressionStream(compressedFile);
-                            byte[] buffer = new byte[inst.TargetChunk.ChunkSizeDecompressed];
-                            dctx.ReadExactly(buffer, 0, buffer.Length);
-                            targetFile.Write(buffer, 0, buffer.Length);
-                        }
+                        int bytesRead = localFile.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
+                        if (bytesRead <= 0) break;
+                        targetFile.Write(buffer, 0, bytesRead);
+                        remainingBytes -= bytesRead;
                     }
                 }
-                print($"合并补丁文件中: {i + 1}/{totalOps}");
+                else
+                {
+                    using var compressedFile = new FileStream(Path.Combine(chunksDir, inst.TargetChunk.ChunkName), FileMode.Open, FileAccess.Read, FileShare.Read);
+                    using var dctx = new DecompressionStream(compressedFile);
+                    
+                    while (remainingBytes > 0)
+                    {
+                        int bytesRead = dctx.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
+                        if (bytesRead <= 0) break;
+                        targetFile.Write(buffer, 0, bytesRead);
+                        remainingBytes -= bytesRead;
+                    }
+                }
             }
         }
+        print($"合并补丁文件中: {i + 1}/{totalOps}");
+    }
+}
 
         private void ReplacePhysicalFiles(OperationLists ops)
         {
