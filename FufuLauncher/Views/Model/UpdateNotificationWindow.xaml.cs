@@ -43,8 +43,16 @@ public sealed partial class UpdateNotificationWindow : WindowEx
         await dialog.ShowAsync();
     }
     
-    private void OnUpdateBtnClicked(object sender, RoutedEventArgs e)
+    private async void OnUpdateBtnClicked(object sender, RoutedEventArgs e)
     {
+        try
+        {
+            UpdateWebView?.Close();
+        }
+        catch { }
+        
+        await System.Threading.Tasks.Task.Delay(400);
+        
         var updateWindow = new UpdateWindow();
         updateWindow.Activate();
         
