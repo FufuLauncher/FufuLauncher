@@ -104,8 +104,6 @@ public class UpdateService : IUpdateService
         }
     }
 
-
-
     private async Task<string> GetWithRetryAsync(string url, int maxRetries)
     {
         for (int i = 0; i < maxRetries; i++)

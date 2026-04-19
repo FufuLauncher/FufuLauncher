@@ -11,16 +11,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Messages/OverlayStyleChangedMessage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/AutoClickerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/AutoClickerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Update.json" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Update.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AboutPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AboutPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateNotificationWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/UpdateService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/UpdateService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +45,8 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/FpsOverlayService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Administrator/Desktop/Acrylic-11.26100.1.0/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Administrator/Desktop/Acrylic-11.26100.1.0/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -300,15 +295,7 @@
       <workItem from="1776401011613" duration="1682000" />
       <workItem from="1776424544704" duration="3609000" />
       <workItem from="1776436539978" duration="3115000" />
-      <workItem from="1776569710386" duration="10908000" />
-    </task>
-    <task id="LOCAL-00010" summary="修复插件下载安装问题">
-      <option name="closed" value="true" />
-      <created>1772452699155</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1772452699155</updated>
+      <workItem from="1776569710386" duration="12175000" />
     </task>
     <task id="LOCAL-00011" summary="不再弹窗">
       <option name="closed" value="true" />
@@ -694,7 +681,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776575160985</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="#130 #131">
+      <option name="closed" value="true" />
+      <created>1776599975426</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1776599975426</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -715,7 +710,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="增加功能，修复部分问题" />
     <MESSAGE value="更新1.1.0.0" />
     <MESSAGE value="增加和修复了一些功能" />
     <MESSAGE value="增加功能" />
@@ -740,7 +734,8 @@
     <MESSAGE value="1.1.0.2" />
     <MESSAGE value="提交" />
     <MESSAGE value="修改公告显示检测" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改公告显示检测" />
+    <MESSAGE value="#130 #131" />
+    <option name="LAST_COMMIT_MESSAGE" value="#130 #131" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

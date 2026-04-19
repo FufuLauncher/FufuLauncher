@@ -1,5 +1,5 @@
 ﻿!define APP_NAME "FufuLauncher"
-!define APP_VERSION "1.1.0.2"
+!define APP_VERSION "1.1.0.3"
 !define APP_PUBLISHER "FufuLauncher"
 !define APP_WEB_SITE "https://github.com/FufuLauncher/FufuLauncher"
 !define APP_EXE "FufuLauncher.exe"
@@ -17,7 +17,7 @@ OutFile "${APP_NAME}_Setup_v${APP_VERSION}.exe"
 !include "FileFunc.nsh"
 !include "LogicLib.nsh"
 
-; 采用标准的 Windows 用户级程序安装路径
+;采用标准的 Windows 用户级程序安装路径
 InstallDir "$LOCALAPPDATA\Programs\${APP_NAME}"
 RequestExecutionLevel user
 
@@ -40,13 +40,13 @@ ManifestDPIAware true
 
 !insertmacro MUI_LANGUAGE "SimpChinese"
 
-; 定义检测并结束进程的宏
+;定义检测并结束进程的宏
 !macro CheckAndKillProcess UN
     LoopCheck_${UN}:
-        ; 使用 tasklist 查找进程，将结果压入堆栈
+        ;使用 tasklist 查找进程，将结果压入堆栈
         nsExec::ExecToStack 'cmd /c tasklist /NH /FI "IMAGENAME eq ${APP_EXE}" | find /I "${APP_EXE}"'
-        Pop $0 ; 获取执行状态（0 表示找到进程，1 表示未找到）
-        Pop $1 ; 获取命令输出内容
+        Pop $0 ;获取执行状态（0 表示找到进程，1 表示未找到）
+        Pop $1 ;获取命令输出内容
         
         StrCmp $0 "0" ProcessFound_${UN} ProcessNotFound_${UN}
 
@@ -54,10 +54,10 @@ ManifestDPIAware true
         MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION "检测到 ${APP_NAME} 正在运行。$\n$\n点击“确定”以终止进程并继续，或点击“取消”退出。" IDOK KillProcess_${UN} IDCANCEL CancelInstall_${UN}
 
     KillProcess_${UN}:
-        ; 终止进程
-        nsExec::ExecToStack 'taskkill /F /IM ${APP_EXE} /T'
-        Sleep 1000 ; 等待进程完全退出
-        Goto LoopCheck_${UN} ; 再次检查以确保进程已结束
+        ;终止进程。移除了 /T 参数，防止主程序作为父进程时，安装程序（子进程）被连带关闭
+        nsExec::ExecToStack 'taskkill /F /IM ${APP_EXE}'
+        Sleep 1000 ;等待进程完全退出
+        Goto LoopCheck_${UN} ;再次检查以确保进程已结束
 
     CancelInstall_${UN}:
         Abort
@@ -116,7 +116,7 @@ Section "Uninstall"
     
     Delete "$DESKTOP\${APP_NAME}.lnk"
     
-    ; 此命令仅移除安装目录（Programs\FufuLauncher），不影响 LocalAppData\FufuLauncher 配置文件
+    ;此命令仅移除安装目录（Programs\FufuLauncher），不影响 LocalAppData\FufuLauncher 配置文件
     RMDir /r "$INSTDIR"
     DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}"
     
@@ -129,16 +129,16 @@ Function .onInit
         Abort
     ${EndIf}
   
-    ; 安装前检测进程
+    ;安装前检测进程
     !insertmacro CheckAndKillProcess ""
 
     SetRegView 64
 
-    ; 仅检测当前用户的注册表键值
+    ;仅检测当前用户的注册表键值
     ReadRegStr $R0 HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${APP_NAME}" "UninstallString"
     StrCmp $R0 "" done
 
-    ; 删除了无用的 FoundInstallation 标签声明
+    ;删除了无用的 FoundInstallation 标签声明
     MessageBox MB_OKCANCEL|MB_ICONEXCLAMATION \
         "${APP_NAME} 已安装。$\n$\n点击“确定”移除旧版本，或“取消”取消安装。" \
         IDOK uninst
@@ -160,6 +160,6 @@ Function .onInit
 FunctionEnd
 
 Function un.onInit
-    ; 卸载前检测进程
+    ;卸载前检测进程
     !insertmacro CheckAndKillProcess "un"
 FunctionEnd
