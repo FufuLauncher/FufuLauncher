@@ -30,6 +30,7 @@ namespace FufuLauncher.ViewModels
         private readonly INotificationService _notificationService;
         private readonly DispatcherQueue _dispatcherQueue;
         private static bool _isFirstLoad = true;
+        private bool _hasAttemptedAutoCheckin = false;
 
         [ObservableProperty] private bool _isGameNotLaunching;
 
@@ -562,8 +563,24 @@ namespace FufuLauncher.ViewModels
                 Debug.WriteLine($"状态更新: {status}, {summary}");
                 CheckinStatusText = status;
                 CheckinSummary = summary;
-                
+        
                 UpdateCheckinIconState(status);
+                
+                if (!_hasAttemptedAutoCheckin)
+                {
+                    var autoCheckinObj = await _localSettingsService.ReadSettingAsync("IsAutoCheckinEnabled");
+                    bool isAutoCheckinEnabled = autoCheckinObj != null && Convert.ToBoolean(autoCheckinObj);
+
+                    bool isSigned = !string.IsNullOrEmpty(status) && 
+                                    (status.Contains("成功") || status.Contains("已"));
+
+                    if (isAutoCheckinEnabled && !isSigned)
+                    {
+                        _hasAttemptedAutoCheckin = true;
+                        Debug.WriteLine("检测到未签到，正在自动执行签到...");
+                        await ExecuteCheckinAsync();
+                    }
+                }
             }
             catch (Exception ex)
             {

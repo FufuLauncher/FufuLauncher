@@ -44,6 +44,7 @@ public sealed partial class MainWindow : WindowEx
     private bool _minimizeToTray;
     private bool _isExit;
     private bool _isOverlayShown;
+    private bool _isAcrylicOverlayEnabled;
 
     private bool _isVideoBackground;
 
@@ -144,6 +145,12 @@ public sealed partial class MainWindow : WindowEx
                 catch (Exception ex) { Debug.WriteLine($"消息处理异常: {ex.Message}"); }
             });
         });
+        
+        WeakReferenceMessenger.Default.Register<OverlayStyleChangedMessage>(this, (_, m) =>
+        {
+            _isAcrylicOverlayEnabled = m.Value;
+            dispatcherQueue.TryEnqueue(() => UpdateBackgroundOverlayTheme());
+        });
 
         if (Content is FrameworkElement rootElement)
         {
@@ -223,6 +230,17 @@ public sealed partial class MainWindow : WindowEx
         _announcementCheckTimer.Tick += async (_, _) => await CheckPeriodicAnnouncementAsync();
         _announcementCheckTimer.Start();
 
+    }
+    
+    private async Task LoadAcrylicOverlaySettingAsync()
+    {
+        try
+        {
+            var valueObj = await _localSettingsService.ReadSettingAsync("IsAcrylicOverlayEnabled");
+            _isAcrylicOverlayEnabled = valueObj != null && Convert.ToBoolean(valueObj);
+            UpdateBackgroundOverlayTheme();
+        }
+        catch { _isAcrylicOverlayEnabled = false; }
     }
     
     #endregion
@@ -711,18 +729,30 @@ private bool IsVCRedistInstalled()
             var currentTheme = rootElement.ActualTheme;
             if (currentTheme == ElementTheme.Default)
                 currentTheme = Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light;
-            
+        
             var themeBgColor = currentTheme == ElementTheme.Dark 
                 ? Color.FromArgb(255, 32, 32, 32) 
                 : Color.FromArgb(255, 243, 243, 243);
 
             GlobalBackgroundOverlay.Fill = new SolidColorBrush(themeBgColor);
-            PageBackgroundOverlay.Background = new SolidColorBrush(themeBgColor);
+            
+            if (_isAcrylicOverlayEnabled && !_isVideoBackground)
+            {
+                PageBackgroundOverlay.Background = new AcrylicBrush
+                {
+                    TintColor = themeBgColor,
+                    TintOpacity = 0.6,
+                    FallbackColor = themeBgColor
+                };
+            }
+            else
+            {
+                PageBackgroundOverlay.Background = new SolidColorBrush(themeBgColor);
+            }
 
             ApplyFrameBackgroundOpacity(_frameBackgroundOpacity);
         }
     }
-
     private async Task LoadAndApplyAcrylicSettingAsync()
     {
         try
@@ -993,6 +1023,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
             await LoadFrameBackgroundOpacityAsync();
             await LoadOverlayOpacityAsync();
+            await LoadAcrylicOverlaySettingAsync();
             await LoadAndApplyAcrylicSettingAsync();
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();

@@ -419,6 +419,16 @@
                                 <ComboBoxItem Content="国际服 (提瓦特)"/>
                             </ComboBox>
                         </StackPanel>
+                        <StackPanel Margin="0,16,0,0">
+                            <ToggleSwitch Header="启用页面亚克力模糊遮罩"
+                                          OffContent="纯色"
+                                          OnContent="亚克力模糊"
+                                          IsOn="{x:Bind ViewModel.IsAcrylicOverlayEnabled, Mode=TwoWay}"/>
+                            <TextBlock Text="注意：当使用视频背景时，为保证性能与显示效果，将自动回退为纯色半透明背景"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       Margin="0,2,0,8"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
                 
@@ -547,6 +557,15 @@
                                 <TextBlock Text="更新成就数据库资源"/>
                             </StackPanel>
                         </Button>
+                        <ToggleSwitch Header="启动时自动签到"
+                                      OffContent="已禁用"
+                                      OnContent="已启用"
+                                      IsOn="{x:Bind ViewModel.IsAutoCheckinEnabled, Mode=TwoWay}"
+                                      Margin="0,16,0,0"/>
+                        <TextBlock Text="开启后，将在应用启动时自动检测并在未签到时执行一键签到"
+                                   Style="{ThemeResource CaptionTextBlockStyle}"
+                                   Opacity="0.7"
+                                   Margin="0,0,0,0"/>
                     </StackPanel>
                 </Border>
                 
@@ -587,7 +606,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Spacing="4">
                                     <TextBlock Text="FufuLauncher" Style="{ThemeResource BodyTextBlockStyle}"/>
-                                    <TextBlock Text="版本 1.1.0.2" 
+                                    <TextBlock Text="版本 1.1.0.3" 
                                                Style="{ThemeResource CaptionTextBlockStyle}" 
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                 </StackPanel>

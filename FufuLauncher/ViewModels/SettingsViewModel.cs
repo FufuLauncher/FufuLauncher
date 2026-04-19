@@ -67,9 +67,17 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private double _contentFrameBackgroundOpacity = 0.5;
         [ObservableProperty] private bool _isSaveWindowSizeEnabled;
         [ObservableProperty] private double _globalBackgroundImageOpacity = 1.0;
+        [ObservableProperty] private bool _isAcrylicOverlayEnabled;
 
         [ObservableProperty] private WindowBackdropType _currentWindowBackdrop;
         [ObservableProperty] private string _webView2CacheSize;
+        [ObservableProperty] private bool _isAutoCheckinEnabled;
+
+        partial void OnIsAutoCheckinEnabledChanged(bool value)
+        {
+            Debug.WriteLine($"SettingsViewModel: 自动签到设置变更为 {value}");
+            _ = _localSettingsService.SaveSettingAsync("IsAutoCheckinEnabled", value);
+        }
 
         public IAsyncRelayCommand ClearWebView2CacheCommand { get; }
         public ICommand SwitchThemeCommand
@@ -213,6 +221,12 @@ namespace FufuLauncher.ViewModels
             {
                 WebView2CacheSize = "未知大小";
             }
+        }
+        
+        partial void OnIsAcrylicOverlayEnabledChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("IsAcrylicOverlayEnabled", value);
+            WeakReferenceMessenger.Default.Send(new OverlayStyleChangedMessage(value));
         }
 
         private long GetDirectorySize(DirectoryInfo d)
@@ -370,6 +384,8 @@ namespace FufuLauncher.ViewModels
                 OnPropertyChanged(nameof(GlobalBackgroundOverlayOpacity));
                 OnPropertyChanged(nameof(ContentFrameBackgroundOpacity));
                 OnPropertyChanged(nameof(IsSaveWindowSizeEnabled));
+                OnPropertyChanged(nameof(IsAcrylicOverlayEnabled));
+                OnPropertyChanged(nameof(IsAutoCheckinEnabled));
             }
             finally
             {
@@ -392,6 +408,9 @@ namespace FufuLauncher.ViewModels
 
             var trayJson = await _localSettingsService.ReadSettingAsync("MinimizeToTray");
             MinimizeToTray = trayJson != null && Convert.ToBoolean(trayJson);
+            
+            var acrylicOverlayJson = await _localSettingsService.ReadSettingAsync("IsAcrylicOverlayEnabled");
+            IsAcrylicOverlayEnabled = acrylicOverlayJson != null && Convert.ToBoolean(acrylicOverlayJson);
 
             var paramsJson = await _localSettingsService.ReadSettingAsync("CustomLaunchParameters");
             if (paramsJson != null)
@@ -421,6 +440,9 @@ namespace FufuLauncher.ViewModels
 
             var soundJson = await _localSettingsService.ReadSettingAsync("IsStartupSoundEnabled");
             IsStartupSoundEnabled = soundJson != null && Convert.ToBoolean(soundJson);
+            
+            var autoCheckinJson = await _localSettingsService.ReadSettingAsync("IsAutoCheckinEnabled");
+            IsAutoCheckinEnabled = autoCheckinJson != null && Convert.ToBoolean(autoCheckinJson);
 
             var soundPathJson = await _localSettingsService.ReadSettingAsync("StartupSoundPath");
             if (soundPathJson != null)

@@ -34,7 +34,6 @@ namespace FufuLauncher.Services
         private VirtualKey _triggerKey = VirtualKey.F8;
         private VirtualKey _clickKey = VirtualKey.F;
         
-        // 增加一把锁，防止异步极速触发时造成状态混乱
         private readonly object _stateLock = new object();
 
         public event EventHandler<bool> IsAutoClickingChanged;
@@ -149,11 +148,8 @@ namespace FufuLauncher.Services
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            // 极限优化：只做最轻量级的判断，拒绝任何阻塞操作
             if (nCode >= 0 && _isEnabled)
             {
-                // 直接从指针偏移量读取结构体数据，避开耗时的 Marshal.PtrToStructure 序列化
-                // 偏移量 0 是 vkCode, 偏移量 8 是 flags
                 int vkCode = Marshal.ReadInt32(lParam);
                 int flags = Marshal.ReadInt32(lParam, 8);
                 
@@ -172,19 +168,16 @@ namespace FufuLauncher.Services
                         if (down && !_isTriggerKeyPressed)
                         {
                             _isTriggerKeyPressed = true;
-                            // 立即把任务扔到线程池，钩子函数瞬间返回！
                             Task.Run(() => StartClicking());
                         }
                         else if (up)
                         {
                             _isTriggerKeyPressed = false;
-                            // 立即把任务扔到线程池，钩子函数瞬间返回！
                             Task.Run(() => StopClicking());
                         }
                     }
                 }
             }
-            // 极速放行
             return CallNextHookEx(IntPtr.Zero, nCode, wParam, lParam);
         }
 
@@ -196,10 +189,8 @@ namespace FufuLauncher.Services
                 IsAutoClicking = true;
                 _clickCts = new CancellationTokenSource();
                 
-                // Task.Run 更现代、开销更小
                 _ = Task.Run(() => ClickLoop(_clickCts.Token), _clickCts.Token);
             }
-            // 在锁外触发事件，防止事件订阅者的耗时操作死锁
             IsAutoClickingChanged?.Invoke(this, true);
         }
 
@@ -209,11 +200,10 @@ namespace FufuLauncher.Services
             {
                 if (!IsAutoClicking) return;
                 _clickCts?.Cancel();
-                _clickCts?.Dispose(); // 养成良好习惯，释放 CancellationTokenSource
+                _clickCts?.Dispose();
                 _clickCts = null;
                 IsAutoClicking = false;
             }
-            // 在锁外触发事件
             IsAutoClickingChanged?.Invoke(this, false);
             Debug.WriteLine("[连点器] 停止");
         }
