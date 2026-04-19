@@ -12,9 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/UpdateWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,28 +73,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET 启动设置配置文件.FufuLauncher.executor": "Debug",
-    ".NET 项目.MihoyoBBS.executor": "Debug",
-    ".NET 项目.update.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "1.2334559",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true",
-    "发布到文件夹.Publish FufuLauncher to folder.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET 启动设置配置文件.FufuLauncher.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET 项目.MihoyoBBS.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET 项目.update.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;1.2330276&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;发布到文件夹.Publish FufuLauncher to folder.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET 启动设置配置文件.FufuLauncher">
     <configuration name="Publish FufuLauncher to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" include_all_content_for_self_extract="true" include_native_libs_for_self_extract="true" platform="x64" produce_single_file="true" ready_to_run="true" self_contained="true" target_folder="$PROJECT_DIR$/FufuLauncher/bin/Release/net8.0-windows10.0.26100.0/win-x64/publish" target_framework="net8.0-windows10.0.26100.0" uuid_high="1964370738064323383" uuid_low="-8405170811345767747">
@@ -150,6 +148,20 @@
       <option name="PROJECT_TFM" value="" />
       <method v="2">
         <option name="Build" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
       </method>
     </configuration>
     <configuration name="FufuLauncher" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -277,15 +289,9 @@
       <workItem from="1776347928210" duration="11709000" />
       <workItem from="1776365460170" duration="804000" />
       <workItem from="1776401011613" duration="1682000" />
-      <workItem from="1776424544704" duration="1294000" />
-    </task>
-    <task id="LOCAL-00008" summary="修复部分功能">
-      <option name="closed" value="true" />
-      <created>1772134171938</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1772134171938</updated>
+      <workItem from="1776424544704" duration="3609000" />
+      <workItem from="1776436539978" duration="3115000" />
+      <workItem from="1776569710386" duration="2372000" />
     </task>
     <task id="LOCAL-00009" summary="成就管理换sql数据库，更新6.4成就数据">
       <option name="closed" value="true" />
@@ -671,7 +677,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776365537213</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="提交">
+      <option name="closed" value="true" />
+      <created>1776425877480</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1776425877480</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -692,7 +706,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="修复部分功能" />
     <MESSAGE value="修改字体文件" />
     <MESSAGE value="增加功能，修复部分问题" />
     <MESSAGE value="更新1.1.0.0" />
@@ -717,7 +730,8 @@
     <MESSAGE value="优化体验" />
     <MESSAGE value="修复 #123 问题" />
     <MESSAGE value="1.1.0.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.1.0.2" />
+    <MESSAGE value="提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -54,6 +54,9 @@ public sealed partial class MainWindow : WindowEx
     private bool _isSystemMessageVisible;
 
     private bool _isMainUiLoaded;
+    
+    private DispatcherTimer _announcementCheckTimer;
+    private readonly IAnnouncementService _announcementService;
 
     [DllImport("advapi32.dll", SetLastError = true)]
     private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
@@ -170,7 +173,7 @@ public sealed partial class MainWindow : WindowEx
         _memoryOptimizationTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
         _memoryOptimizationTimer.Tick += OnMemoryOptimizationTick!;
         
-        _periodicMemoryTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(10) };
+        _periodicMemoryTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
         _periodicMemoryTimer.Tick += (_, _) => FlushMemory();
         _periodicMemoryTimer.Start();
         
@@ -214,6 +217,11 @@ public sealed partial class MainWindow : WindowEx
         _messageDismissTimer.Tick += (_, _) => HideSystemMessage();
         _networkCheckTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
         _networkCheckTimer.Tick += (_, _) => CheckNetworkAndProxyStatus();
+        
+        _announcementService = App.GetService<IAnnouncementService>();
+        _announcementCheckTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
+        _announcementCheckTimer.Tick += async (_, _) => await CheckPeriodicAnnouncementAsync();
+        _announcementCheckTimer.Start();
 
     }
     
@@ -269,6 +277,7 @@ public sealed partial class MainWindow : WindowEx
         _networkCheckTimer.Stop();
         _messageDismissTimer.Stop();
         
+        _announcementCheckTimer.Stop();
         FlushMemory();
 
         Debug.WriteLine("应用挂起");
@@ -289,6 +298,11 @@ public sealed partial class MainWindow : WindowEx
         if (!_networkCheckTimer.IsEnabled)
         {
             _networkCheckTimer.Start();
+        }
+        
+        if (!_announcementCheckTimer.IsEnabled)
+        {
+            _announcementCheckTimer.Start();
         }
         
         Debug.WriteLine("应用已唤醒");
@@ -406,6 +420,26 @@ public sealed partial class MainWindow : WindowEx
         if (!_isOverlayShown)
         {
             OverlayTranslate.Y = Bounds.Height + 100;
+        }
+    }
+    
+    private async Task CheckPeriodicAnnouncementAsync()
+    {
+        try
+        {
+            var announcementUrl = await _announcementService.CheckForNewAnnouncementAsync();
+            if (!string.IsNullOrEmpty(announcementUrl))
+            {
+                dispatcherQueue.TryEnqueue(() =>
+                {
+                    var announcementWindow = new FufuLauncher.Views.AnnouncementWindowL(announcementUrl);
+                    announcementWindow.Activate();
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[Announcement] 定时检查公告失败: {ex.Message}");
         }
     }
     
