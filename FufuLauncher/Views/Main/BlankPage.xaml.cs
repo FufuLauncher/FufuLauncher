@@ -103,6 +103,41 @@ namespace FufuLauncher.Views
             }
         }
         
+        private async void VerifyGame_Click(object sender, RoutedEventArgs e)
+        {
+            if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
+            {
+                await ShowError("未找到游戏路径，请先在设置中指定游戏位置。");
+                return;
+            }
+
+            string gameDir = _currentConfig.GamePath;
+            if (File.Exists(gameDir))
+            {
+                gameDir = Path.GetDirectoryName(gameDir) ?? gameDir;
+            }
+
+            var newWindow = new Window();
+            newWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+            newWindow.ExtendsContentIntoTitleBar = true;
+            newWindow.Title = "校验游戏完整性";
+
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(newWindow);
+            var winId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+            var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(winId);
+            appWindow.Resize(new Windows.Graphics.SizeInt32(600, 400));
+
+            var rootFrame = new Frame();
+            rootFrame.Navigate(typeof(VerifyGamePage), new SwitchPageParams 
+            { 
+                GameDir = gameDir, 
+                ParentWindow = newWindow 
+            });
+
+            newWindow.Content = rootFrame;
+            newWindow.Activate();
+        }
+        
 private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
 {
     try
@@ -138,7 +173,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
              return;
         }
         
-        var appPath = Environment.ProcessPath; 
+        var appPath = Environment.ProcessPath;
         
         var presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets");
         var presets = new List<PresetModel>();
@@ -177,9 +212,14 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
         {
             presetComboBox.SelectedItem = presets.FirstOrDefault(p => p.Id == activeId);
         }
+        
+        var customParamsObj = await localSettings.ReadSettingAsync("CustomLaunchParameters");
+        var customLaunchParams = customParamsObj as string;
+        string customParamsDisplay = string.IsNullOrWhiteSpace(customLaunchParams) ? "无" : customLaunchParams;
 
         var contentPanel = new StackPanel { Spacing = 10 };
-        contentPanel.Children.Add(new TextBlock { Text = "请选择您想要执行的操作：\n\n• 创建桌面快捷方式：直接在桌面生成图标。\n• 复制启动命令：获取完整命令行，可用于 Steam 或 脚本。", TextWrapping = TextWrapping.Wrap });
+        contentPanel.Children.Add(new TextBlock { Text = "请选择您想要执行的操作：\n\n• 创建桌面快捷方式：直接在桌面生成图标（将以管理员权限运行）。\n• 复制启动命令：获取完整命令行，可用于 Steam 或 脚本。", TextWrapping = TextWrapping.Wrap });
+        contentPanel.Children.Add(new TextBlock { Text = $"已导入启动参数：{customParamsDisplay}", Opacity = 0.7, TextWrapping = TextWrapping.Wrap });
         contentPanel.Children.Add(new TextBlock { Text = "指定注入配置（预设）：", Margin = new Thickness(0, 5, 0, 0) });
         contentPanel.Children.Add(presetComboBox);
 
@@ -206,8 +246,14 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
         {
             presetArg = $" --preset \"{selectedPreset.Id}\"";
         }
+
+        string customParamsArg = "";
+        if (!string.IsNullOrWhiteSpace(customLaunchParams))
+        {
+            customParamsArg = $" {customLaunchParams}";
+        }
         
-        var argsOnly = $"--elevated-inject \"{finalExePath}\"{presetArg}";
+        var argsOnly = $"--elevated-inject \"{finalExePath}\"{presetArg}{customParamsArg}";
         var fullCommandLine = $"\"{appPath}\" {argsOnly}";
 
         if (choiceResult == ContentDialogResult.Primary)
@@ -222,17 +268,24 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
 
             shortcut.TargetPath = appPath;
             shortcut.Arguments = argsOnly;
-            
             shortcut.WorkingDirectory = AppContext.BaseDirectory;
             shortcut.IconLocation = finalExePath + ",0";
             shortcut.Description = "通过 FufuLauncher 注入启动原神";
 
             shortcut.Save();
+
+            using (FileStream fs = new FileStream(shortcutPath, FileMode.Open, FileAccess.ReadWrite))
+            {
+                fs.Seek(21, SeekOrigin.Begin);
+                int b = fs.ReadByte();
+                fs.Seek(21, SeekOrigin.Begin);
+                fs.WriteByte((byte)(b | 0x20));
+            }
             
             var dialog = new ContentDialog
             {
                 Title = "快捷方式已创建",
-                Content = "已创建桌面快捷方式，请检查你的电脑桌面",
+                Content = "已创建桌面快捷方式，默认将以管理员权限运行。请检查你的电脑桌面。",
                 CloseButtonText = "确定",
                 XamlRoot = XamlRoot
             };
@@ -286,6 +339,24 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
     {
         await ShowError($"操作失败: {ex.Message}");
     }
+}
+
+private void PreDownloadGame_Click(object sender, RoutedEventArgs e)
+{
+    if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
+    {
+        _ = ShowError("未找到游戏路径，请先在设置中指定游戏位置");
+        return;
+    }
+
+    string gameDir = _currentConfig.GamePath;
+    if (File.Exists(gameDir))
+    {
+        gameDir = Path.GetDirectoryName(gameDir) ?? gameDir;
+    }
+
+    var newWindow = new PreDownloadWindow(gameDir);
+    newWindow.Activate();
 }
 
 private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
@@ -422,7 +493,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                         Title = "路径错误",
                         Content = $"无法创建游戏目录: {targetPath}\n错误: {ex.Message}",
                         CloseButtonText = "确定",
-                        XamlRoot = this.XamlRoot
+                        XamlRoot = XamlRoot
                     };
                     _ = dialog.ShowAsync();
                     return;
@@ -460,7 +531,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
         }
         else
         {
-            await ShowError($"无法找到 config.ini 配置文件。\n\n尝试寻找的路径是：\n{configPath}\n\n请检查您的“游戏路径”设置是否正确指向了游戏安装目录（包含 YuanShen.exe 的文件夹）。");
+            await ShowError($"无法找到 config.ini 配置文件。\n\n尝试寻找的路径是：\n{configPath}\n\n请检查您的“游戏路径”设置是否正确指向了游戏安装目录");
             return;
         }
     }
@@ -507,18 +578,18 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
     {
         if (result == ContentDialogResult.Primary)
         {
-            await PerformServerSwitch(gameDir, configPath, false);
+            OpenAdvancedServerSwitchWindow(gameDir, "CN");
         }
     }
     else
     {
         if (result == ContentDialogResult.Primary)
         {
-            await PerformServerSwitch(gameDir, configPath, true);
+            OpenAdvancedServerSwitchWindow(gameDir, "Bili");
         }
         else if (result == ContentDialogResult.Secondary)
         {
-            await PerformServerSwitch(gameDir, configPath, false);
+            OpenAdvancedServerSwitchWindow(gameDir, "CN");
         }
     }
 }
@@ -527,15 +598,16 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
         {
             public string GameDir { get; set; }
             public Window ParentWindow { get; set; }
+            public string TargetServer { get; set; }
         }
         
-        private void OpenAdvancedServerSwitchWindow(string gameDir)
+        private void OpenAdvancedServerSwitchWindow(string gameDir, string targetServer = "")
         {
             var newWindow = new Window();
-            
+    
             newWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
             newWindow.ExtendsContentIntoTitleBar = true;
-            
+    
             newWindow.Title = "转换";
 
             var hWnd = WindowNative.GetWindowHandle(newWindow);
@@ -547,81 +619,12 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
             rootFrame.Navigate(typeof(AdvancedServerSwitchPage), new SwitchPageParams 
             { 
                 GameDir = gameDir, 
-                ParentWindow = newWindow 
+                ParentWindow = newWindow,
+                TargetServer = targetServer
             });
-    
+
             newWindow.Content = rootFrame;
             newWindow.Activate();
-        }
-        private async Task PerformServerSwitch(string gameDir, string configPath, bool toBilibili)
-        {
-            try
-            {
-                // 官服: channel=1, sub_channel=1, cps=mihoyo
-                // B服: channel=14, sub_channel=0, cps=bilibili
-                string channel = toBilibili ? "14" : "1";
-                string subChannel = toBilibili ? "0" : "1";
-                string cps = toBilibili ? "bilibili" : "mihoyo";
-
-                string[] lines = await File.ReadAllLinesAsync(configPath);
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i].StartsWith("channel=")) lines[i] = $"channel={channel}";
-                    else if (lines[i].StartsWith("sub_channel=")) lines[i] = $"sub_channel={subChannel}";
-                    else if (lines[i].StartsWith("cps=")) lines[i] = $"cps={cps}";
-                }
-                await File.WriteAllLinesAsync(configPath, lines);
-
-                string dataDirName = "YuanShen_Data";
-                if (!Directory.Exists(Path.Combine(gameDir, dataDirName)))
-                {
-                    dataDirName = "GenshinImpact_Data";
-                }
-
-                string pluginsDir = Path.Combine(gameDir, dataDirName, "Plugins");
-                string targetSdkPath = Path.Combine(pluginsDir, "PCGameSDK.dll");
-
-                if (!Directory.Exists(pluginsDir)) Directory.CreateDirectory(pluginsDir);
-
-                if (toBilibili)
-                {
-                    string appBaseDir = AppContext.BaseDirectory;
-                    string sourceSdkPath = Path.Combine(appBaseDir, "Assets", "PCGameSDK.dll");
-
-                    if (File.Exists(sourceSdkPath))
-                    {
-                        File.Copy(sourceSdkPath, targetSdkPath, true);
-                    }
-                    else
-                    {
-                        await ShowError($"缺失核心文件：{sourceSdkPath}\n请确保已将 PCGameSDK.dll 放入软件的 Assets 文件夹。");
-                        return;
-                    }
-                }
-                else
-                {
-                    if (File.Exists(targetSdkPath))
-                    {
-                        File.Delete(targetSdkPath);
-                    }
-                }
-
-                await LoadGameConfig(_currentConfig.GamePath);
-
-                var successDialog = new ContentDialog
-                {
-                    Title = "切换成功",
-                    Content = $"已成功切换至 {(toBilibili ? "Bilibili 服" : "官方服务器")}。\nSDK已{(toBilibili ? "部署" : "清理")}。",
-                    CloseButtonText = "确定",
-                    XamlRoot = this.XamlRoot
-                };
-                await successDialog.ShowAsync();
-
-            }
-            catch (Exception ex)
-            {
-                await ShowError($"切换失败: {ex.Message}");
-            }
         }
 
         private async Task LoadGameConfig(string gameExePath)

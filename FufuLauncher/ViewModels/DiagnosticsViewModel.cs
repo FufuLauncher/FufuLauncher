@@ -23,7 +23,7 @@ public partial class DiagnosticsViewModel : ObservableObject
         }
         catch
         {
-            Info.Suggestion = "初始化诊断服务失败。";
+            Info.Suggestion = "初始化诊断服务失败";
         }
         finally
         {

@@ -211,7 +211,7 @@ public partial class App : Application
             var mainExePath = Environment.ProcessPath;
             if (string.IsNullOrEmpty(mainExePath))
             {
-                Debug.WriteLine("[Updater] 无法获取主程序路径，更新程序启动中止。");
+                Debug.WriteLine("[Updater] 无法获取主程序路径，更新程序启动中止");
                 return;
             }
             

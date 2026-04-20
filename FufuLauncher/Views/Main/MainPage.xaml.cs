@@ -56,7 +56,7 @@ public sealed partial class MainPage : Page
 
                 if (string.IsNullOrEmpty(gameDir) || !Directory.Exists(gameDir))
                 {
-                    await ShowDialog("错误", "未找到有效的游戏路径，请先在设置页设置游戏位置。");
+                    await ShowDialog("错误", "未找到有效的游戏路径，请先在设置页设置游戏位置");
                     return;
                 }
                 
@@ -73,7 +73,7 @@ public sealed partial class MainPage : Page
                     }
                     else
                     {
-                        await ShowDialog("错误", "无法找到 config.ini 配置文件，无法切换服务器。");
+                        await ShowDialog("错误", "无法找到 config.ini 配置文件，无法切换服务器");
                         return;
                     }
                 }
@@ -175,7 +175,7 @@ public sealed partial class MainPage : Page
                     }
                 }
                 
-                await ShowDialog("切换成功", $"已成功切换至 {(toBilibili ? "Bilibili 服" : "官方服务器")}。\nSDK已{(toBilibili ? "部署" : "清理")}。");
+                await ShowDialog("切换成功", $"已成功切换至 {(toBilibili ? "Bilibili 服" : "官方服务器")}\nSDK已{(toBilibili ? "部署" : "清理")}");
             }
             catch (Exception ex)
             {

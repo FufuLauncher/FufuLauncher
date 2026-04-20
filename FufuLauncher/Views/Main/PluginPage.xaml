@@ -240,7 +240,7 @@
                           FontFamily="Segoe MDL2 Assets" 
                           Foreground="{ThemeResource SystemFillColorCautionBrush}"
                           FontSize="14"/>
-                <TextBlock Text="请自行辨别插件安全性，对于因使用插件造成的任何损失，开发者概不负责。" 
+                <TextBlock Text="请自行辨别插件安全性，对于因使用插件造成的任何损失，开发者概不负责" 
                            Style="{StaticResource CaptionTextBlockStyle}"
                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                            VerticalAlignment="Center"/>

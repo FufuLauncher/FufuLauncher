@@ -22,7 +22,7 @@ public sealed partial class AboutPage : Page
 
         TextBlock warningText = new()
         {
-            Text = "请注意：联系时请直入主题，说明来意。\n请不要发送“在吗”、“你好”等无意义的开场白",
+            Text = "请注意：联系时请直入主题，说明来意\n请不要发送“在吗”、“你好”等无意义的开场白",
             TextWrapping = TextWrapping.Wrap,
             Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemControlErrorTextForegroundBrush"]
         };

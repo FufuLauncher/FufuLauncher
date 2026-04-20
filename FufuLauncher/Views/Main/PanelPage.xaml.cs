@@ -72,7 +72,7 @@ public sealed partial class PanelPage
         ContentDialog riskDialog = new()
         {
             Title = "安全提示",
-            Content = "进入战绩信息页面可能会导致您的账户被标注为风险账户，进而导致部分功能（如某些自动化工具或特定网页访问）无法正常使用。是否确认继续？",
+            Content = "进入战绩信息页面可能会导致您的账户被标注为风险账户，进而导致部分功能（如某些自动化工具或特定网页访问）无法正常使用，是否确认继续？",
             PrimaryButtonText = "确认继续",
             CloseButtonText = "取消",
             DefaultButton = ContentDialogButton.Close,
@@ -173,7 +173,7 @@ public sealed partial class PanelPage
         var weapons = await ScrapeUrlSmartAsync("https://act.mihoyo.com/ys/event/calculator/index.html#/weapon", false);
         results.AddRange(weapons);
 
-        Debug.WriteLine($"[Scraper] 流程结束，获取到 {results.Count} 条数据。");
+        Debug.WriteLine($"[Scraper] 流程结束，获取到 {results.Count} 条数据");
         ViewModel.UpdateMetadata(results);
     }
 
@@ -202,7 +202,7 @@ public sealed partial class PanelPage
         }
         else if (!navTask.Result)
         {
-            Debug.WriteLine($"[Scraper] {typeName}页面导航失败。");
+            Debug.WriteLine($"[Scraper] {typeName}页面导航失败");
             return list;
         }
 

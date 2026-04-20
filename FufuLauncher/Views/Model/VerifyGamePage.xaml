@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="FufuLauncher.Views.VerifyGamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="Transparent">
+
+    <Grid Padding="32">
+        <StackPanel VerticalAlignment="Center" Spacing="24">
+            <FontIcon Glyph="&#xE9F5;" FontSize="48" Opacity="0.8"/>
+            <TextBlock Text="游戏文件完整性校验" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+            <TextBlock Text="此操作将校验本地文件，并自动下载修复损坏或缺失的文件。过程可能需要较长时间，请耐心等待" 
+                       TextWrapping="Wrap" HorizontalAlignment="Center" Opacity="0.6" TextAlignment="Center" MaxWidth="400"/>
+            <Button x:Name="StartVerifyBtn" Content="开始校验" Click="StartVerifyBtn_Click" 
+                    HorizontalAlignment="Center" MinWidth="160" Height="40"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -9,6 +9,7 @@ public class SettingTemplateSelector : DataTemplateSelector
     public DataTemplate BoolTemplate { get; set; }
     public DataTemplate NumberTemplate { get; set; }
     public DataTemplate StringTemplate { get; set; }
+    public DataTemplate KeyTemplate { get; set; }
 
     protected override DataTemplate SelectTemplateCore(object item)
     {
@@ -30,6 +31,7 @@ public class SettingTemplateSelector : DataTemplateSelector
                 "bool" => BoolTemplate,
                 "int" => NumberTemplate,
                 "float" => NumberTemplate,
+                "key" => KeyTemplate,
                 _ => StringTemplate
             };
         }

@@ -12,6 +12,7 @@ namespace FufuLauncher.Views
     {
         private string _gameDir = string.Empty;
         private Window _parentWindow;
+        private string _targetServer = string.Empty;
         
         private ContentDialog _progressDialog;
         private TextBlock _statusText;
@@ -28,6 +29,7 @@ namespace FufuLauncher.Views
             {
                 _gameDir = param.GameDir;
                 _parentWindow = param.ParentWindow;
+                _targetServer = param.TargetServer ?? "";
             }
         }
 
@@ -44,18 +46,19 @@ namespace FufuLauncher.Views
                 Content = sp,
                 XamlRoot = XamlRoot
             };
-            
+        
             _ = _progressDialog.ShowAsync();
 
             try
             {
                 string cacheDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "ServerCache");
-                var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText);
                 
+                var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText, _targetServer);
+            
                 await Task.Run(() => converter.ExecuteConversionAsync());
 
                 _progressDialog.Hide();
-                
+            
                 var successDialog = new ContentDialog
                 {
                     Title = "完成",
@@ -63,9 +66,9 @@ namespace FufuLauncher.Views
                     CloseButtonText = "确定",
                     XamlRoot = XamlRoot
                 };
-                
+            
                 await successDialog.ShowAsync();
-                
+            
                 _parentWindow?.Close();
             }
             catch (Exception ex)
@@ -105,6 +108,9 @@ namespace FufuLauncher.Views
         public const string CN_GAME_ID = "1Z8W5NHUQb";
         public const string CN_API = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api";
         public const string CN_SOPHON = "https://downloader-api.mihoyo.com/downloader/sophon_chunk/api";
+        
+        public const string BILI_LAUNCHER_ID = "umfgRO5gh5";
+        public const string BILI_GAME_ID = "T2S0Gz4Dr2";
 
         public const string OS_LAUNCHER_ID = "VYTpXlbWo8";
         public const string OS_GAME_ID = "gopR6Cufr3";
@@ -192,21 +198,47 @@ namespace FufuLauncher.Views
         private readonly string cacheDir;
         private readonly HttpClient httpClient;
         private readonly Action<string> print;
+        private string _savedGameVersion = null;
 
         private readonly string chunksDir;
         private readonly string targetDir;
         private readonly string backupCnDir;
         private readonly string backupOsDir;
+        private readonly string backupBiliDir;
 
         private readonly bool isCurrentlyCn;
         private readonly bool isCurrentlyOs;
         private readonly bool targetIsOversea;
         private readonly string backupLocalDir;
         private readonly string backupTargetDir;
+        private SophonManifestProto _targetManifest;
+        private string _targetChunkPrefix;
+        private string _targetChunkSuffix;
         
-        public string TargetServerName => targetIsOversea ? "国际服 (OS)" : "国服 (CN)";
+        private readonly bool isCurrentlyBili;
+        private readonly bool targetIsBilibili;
+        public string TargetServerName => targetIsOversea ? "国际服 (OS)" : (targetIsBilibili ? "B服 (Bilibili)" : "国服 (CN)");
+        
+        public async Task RunVerificationAsync()
+        {
+            print("正在请求网络分支");
+            var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
+            _targetChunkPrefix = localInfo.chunkPrefix;
+            _targetChunkSuffix = localInfo.chunkSuffix;
 
-        public PackageConverter(string gameDir, string cacheDir, Action<string> logger)
+            print("正在下载并解析最新清单");
+            _targetManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
+            
+            await VerifyAndRepairAsync();
+    
+            print("清理临时数据");
+            if (Directory.Exists(targetDir))
+            {
+                Directory.Delete(targetDir, true);
+            }
+        }
+
+        public PackageConverter(string gameDir, string cacheDir, Action<string> logger, string targetServer = "")
         {
             this.gameDir = gameDir;
             this.cacheDir = cacheDir;
@@ -217,8 +249,9 @@ namespace FufuLauncher.Views
             targetDir = Path.Combine(cacheDir, "Target");
             backupCnDir = Path.Combine(cacheDir, "Backup", "CN");
             backupOsDir = Path.Combine(cacheDir, "Backup", "OS");
+            backupBiliDir = Path.Combine(cacheDir, "Backup", "Bili");
 
-            foreach (var d in new[] { chunksDir, targetDir, backupCnDir, backupOsDir }) Directory.CreateDirectory(d);
+            foreach (var d in new[] { chunksDir, targetDir, backupCnDir, backupOsDir, backupBiliDir }) Directory.CreateDirectory(d);
             if (Directory.Exists(targetDir))
             {
                 Directory.Delete(targetDir, true);
@@ -236,23 +269,51 @@ namespace FufuLauncher.Views
 
             if (!isCurrentlyCn && !isCurrentlyOs) throw new Exception("找不到核心文件，请确认游戏路径！");
 
-            targetIsOversea = isCurrentlyCn;
-            backupLocalDir = isCurrentlyCn ? backupCnDir : backupOsDir;
-            backupTargetDir = isCurrentlyCn ? backupOsDir : backupCnDir;
+            string configPath = Path.Combine(gameDir, "config.ini");
+            if (File.Exists(configPath))
+            {
+                string[] lines = File.ReadAllLines(configPath);
+                foreach (var line in lines)
+                {
+                    string trimmedLine = line.Trim();
+                    // 读取 game_version
+                    if (trimmedLine.StartsWith("game_version="))
+                    {
+                        _savedGameVersion = trimmedLine.Split('=', 2)[1].Trim();
+                    }
+                    // 判断是否为 B服 (原有逻辑优化)
+                    if (trimmedLine.Contains("channel=14"))
+                    {
+                        isCurrentlyBili = true;
+                    }
+                }
+            }
+            isCurrentlyBili = File.Exists(configPath) && File.ReadAllText(configPath).Contains("channel=14");
+
+            if (targetServer == "Bili") { targetIsOversea = false; targetIsBilibili = true; }
+            else if (targetServer == "OS") { targetIsOversea = true; targetIsBilibili = false; }
+            else if (targetServer == "CN") { targetIsOversea = false; targetIsBilibili = false; }
+            else { targetIsOversea = isCurrentlyCn; targetIsBilibili = false; }
+
+            backupLocalDir = isCurrentlyOs ? backupOsDir : (isCurrentlyBili ? backupBiliDir : backupCnDir);
+            backupTargetDir = targetIsOversea ? backupOsDir : (targetIsBilibili ? backupBiliDir : backupCnDir);
         }
 
         public async Task ExecuteConversionAsync()
         {
             print("正在请求网络分支");
-            var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs);
-            var targetInfo = await GetBranchAndManifestUrlAsync(targetIsOversea);
+            var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
+            var targetInfo = await GetBranchAndManifestUrlAsync(targetIsOversea, targetIsBilibili);
+            
+            _targetChunkPrefix = targetInfo.chunkPrefix;
+            _targetChunkSuffix = targetInfo.chunkSuffix;
 
             print("正在下载并解析清单");
             var localManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
-            var targetManifest = await DownloadAndDecodeManifestAsync(targetInfo.manifestUrl);
+            _targetManifest = await DownloadAndDecodeManifestAsync(targetInfo.manifestUrl);
 
             print("正在比对");
-            var ops = GenerateOperations(targetManifest, localManifest, targetInfo.chunkPrefix, targetInfo.chunkSuffix);
+            var ops = GenerateOperations(_targetManifest, localManifest, _targetChunkPrefix, _targetChunkSuffix);
 
             print("正在下载所需的数据块");
             await DownloadDiffChunksAsync(ops.Assemble);
@@ -265,41 +326,252 @@ namespace FufuLauncher.Views
 
             print("清理临时数据");
         }
+        
+        public async Task VerifyAndRepairAsync()
+        {
+            if (_targetManifest == null) throw new Exception("清单数据未初始化，无法进行校验");
 
-        private async Task<(string manifestUrl, string chunkPrefix, string chunkSuffix)> GetBranchAndManifestUrlAsync(bool isOversea)
+            print("正在校验游戏文件完整性，该过程可能需要较长时间");
+            
+            var brokenAssets = new System.Collections.Concurrent.ConcurrentBag<SophonAssetOperation>();
+            int total = _targetManifest.Assets.Count;
+            int current = 0;
+            
+            long totalBytes = Enumerable.Sum(_targetManifest.Assets, a => a.AssetSize);
+            long processedBytes = 0;
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
+            var parallelOptions = new ParallelOptions 
+            { 
+                MaxDegreeOfParallelism = Environment.ProcessorCount 
+            };
+
+            await Parallel.ForEachAsync(_targetManifest.Assets, parallelOptions, async (asset, token) =>
+            {
+                string filePath = Path.Combine(gameDir, asset.AssetName);
+                bool isBroken = false;
+
+                if (!File.Exists(filePath))
+                {
+                    isBroken = true;
+                }
+                else
+                {
+                    await Task.Run(() =>
+                    {
+                        string expectedMd5 = (asset.AssetHashMd5 ?? "").ToLowerInvariant();
+                        string actualMd5 = HashUtility.Md5File(filePath);
+                        if (expectedMd5 != actualMd5)
+                        {
+                            isBroken = true;
+                        }
+                    }, token);
+                }
+
+                if (isBroken)
+                {
+                    var op = new SophonAssetOperation(asset, _targetChunkPrefix, _targetChunkSuffix);
+                    foreach (var chunk in asset.AssetChunks)
+                    {
+                        op.Instructions.Add(new AssemblyInstruction("download", chunk));
+                        op.DiffChunks.Add(new SophonChunk(_targetChunkPrefix, _targetChunkSuffix, chunk));
+                    }
+                    brokenAssets.Add(op);
+                }
+                
+                long currentBytes = Interlocked.Add(ref processedBytes, asset.AssetSize);
+                int currentCount = Interlocked.Increment(ref current);
+                
+                if (currentCount % 10 == 0 || currentCount == total)
+                {
+                    TimeSpan elapsed = stopwatch.Elapsed;
+                    if (elapsed.TotalSeconds > 2 && currentBytes > 0)
+                    {
+                        double bytesPerSecond = currentBytes / elapsed.TotalSeconds;
+                        long remainingBytes = totalBytes - currentBytes;
+                        double remainingSeconds = remainingBytes / bytesPerSecond;
+                        TimeSpan remainingTime = TimeSpan.FromSeconds(remainingSeconds);
+                        
+                        print($"校验中: {currentCount}/{total} - 剩余时间: {remainingTime:hh\\:mm\\:ss}");
+                    }
+                    else
+                    {
+                        print($"校验中: {currentCount}/{total} - 预计剩余时间: N/A");
+                    }
+                }
+            });
+
+            var brokenAssetsList = brokenAssets.ToList();
+            if (brokenAssetsList.Count > 0)
+            {
+                print($"发现 {brokenAssetsList.Count} 个异常或缺失文件，正在修复");
+                
+                if (Directory.Exists(targetDir))
+                {
+                    Directory.Delete(targetDir, true);
+                    Directory.CreateDirectory(targetDir);
+                }
+
+                await DownloadDiffChunksAsync(brokenAssetsList);
+                AssembleFiles(brokenAssetsList);
+                
+                foreach (var file in Directory.GetFiles(targetDir, "*", SearchOption.AllDirectories))
+                {
+                    string relPath = Path.GetRelativePath(targetDir, file);
+                    string dstPath = Path.Combine(gameDir, relPath);
+                    Directory.CreateDirectory(Path.GetDirectoryName(dstPath));
+                    if (File.Exists(dstPath)) File.Delete(dstPath);
+                    File.Move(file, dstPath);
+                }
+                print("异常文件修复完成");
+            }
+            else
+            {
+                print("文件校验通过，游戏数据完整");
+            }
+        }
+
+        private async Task<(string manifestUrl, string chunkPrefix, string chunkSuffix)> GetBranchAndManifestUrlAsync(bool isOversea, bool isBili = false, bool isPreDownload = false)
         {
             string api = isOversea ? GameConstants.OS_API : GameConstants.CN_API;
-            string launcherId = isOversea ? GameConstants.OS_LAUNCHER_ID : GameConstants.CN_LAUNCHER_ID;
-            string gameId = isOversea ? GameConstants.OS_GAME_ID : GameConstants.CN_GAME_ID;
+            string launcherId = isOversea ? GameConstants.OS_LAUNCHER_ID : (isBili ? GameConstants.BILI_LAUNCHER_ID : GameConstants.CN_LAUNCHER_ID);
+            string gameId = isOversea ? GameConstants.OS_GAME_ID : (isBili ? GameConstants.BILI_GAME_ID : GameConstants.CN_GAME_ID);
 
-            string url = $"{api}/getGameBranches?launcher_id={launcherId}&game_ids[]={gameId}";
-            var jsonResp = await httpClient.GetStringAsync(url);
-            using var doc = JsonDocument.Parse(jsonResp);
-            var mainBranch = doc.RootElement.GetProperty("data").GetProperty("game_branches")[0].GetProperty("main");
+    string url = $"{api}/getGameBranches?launcher_id={launcherId}&game_ids[]={gameId}";
+    var jsonResp = await httpClient.GetStringAsync(url);
+    using var doc = JsonDocument.Parse(jsonResp);
+    var branches = doc.RootElement.GetProperty("data").GetProperty("game_branches")[0];
+    
+    JsonElement targetBranch;
+    if (isPreDownload)
+    {
+        if (!branches.TryGetProperty("pre_download", out targetBranch) || targetBranch.ValueKind == JsonValueKind.Null)
+        {
+            throw new Exception("当前未开启预下载");
+        }
+    }
+    else
+    {
+        targetBranch = branches.GetProperty("main");
+    }
 
-            string buildUrl = mainBranch.TryGetProperty("build_url", out var bUrl) && bUrl.ValueKind == JsonValueKind.String ? bUrl.GetString() : null;
+    string buildUrl = targetBranch.TryGetProperty("build_url", out var bUrl) && bUrl.ValueKind == JsonValueKind.String ? bUrl.GetString() : null;
 
-            if (string.IsNullOrEmpty(buildUrl))
+    if (string.IsNullOrEmpty(buildUrl))
+    {
+        string sophonApi = isOversea ? GameConstants.OS_SOPHON : GameConstants.CN_SOPHON;
+        string pkgId = targetBranch.GetProperty("package_id").GetString();
+        string pwd = targetBranch.GetProperty("password").GetString();
+        string branchName = isPreDownload ? "pre_download" : "main";
+        buildUrl = $"{sophonApi}/getBuild?branch={branchName}&package_id={pkgId}&password={pwd}";
+    }
+
+    var buildJson = await httpClient.GetStringAsync(buildUrl);
+    using var buildDoc = JsonDocument.Parse(buildJson);
+    var manifestData = buildDoc.RootElement.GetProperty("data").GetProperty("manifests")[0];
+
+    string manifestId = manifestData.GetProperty("manifest").GetProperty("id").GetString();
+    string urlPrefix = manifestData.GetProperty("manifest_download").GetProperty("url_prefix").GetString();
+    string urlSuffix = manifestData.GetProperty("manifest_download").TryGetProperty("url_suffix", out var sfx) ? sfx.GetString() : "";
+
+    string chunkPrefix = manifestData.GetProperty("chunk_download").GetProperty("url_prefix").GetString();
+    string chunkSuffix = manifestData.GetProperty("chunk_download").TryGetProperty("url_suffix", out var csfx) ? csfx.GetString() : "";
+
+    return ($"{urlPrefix}/{manifestId}{urlSuffix}", chunkPrefix, chunkSuffix);
+}
+
+public async Task ExecutePreDownloadAsync()
+{
+    print("正在请求网络分支 (预下载)");
+    var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili, false);
+    var targetInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili, true);
+
+    _targetChunkPrefix = targetInfo.chunkPrefix;
+    _targetChunkSuffix = targetInfo.chunkSuffix;
+
+    print("正在下载并解析清单");
+    var localManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
+    _targetManifest = await DownloadAndDecodeManifestAsync(targetInfo.manifestUrl);
+
+    print("正在比对预下载资源");
+    var ops = GenerateUpdateOperations(_targetManifest, localManifest, _targetChunkPrefix, _targetChunkSuffix);
+
+    print("正在下载预下载数据块");
+    await DownloadDiffChunksAsync(ops.Assemble);
+
+    print("正在组装预下载文件");
+    AssembleFiles(ops.Assemble);
+
+    print("正在安装预下载文件");
+    ApplyUpdatePhysicalFiles();
+
+    print("清理临时数据");
+    if (Directory.Exists(targetDir))
+    {
+        Directory.Delete(targetDir, true);
+    }
+}
+
+private OperationLists GenerateUpdateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
+{
+    var ops = new OperationLists();
+    var localAssetMap = new Dictionary<string, AssetProperty>();
+    
+    foreach (var asset in localManifest.Assets)
+    {
+        localAssetMap[asset.AssetName ?? ""] = asset;
+    }
+
+    foreach (var targetAsset in targetManifest.Assets)
+    {
+        string targetName = targetAsset.AssetName ?? "";
+        string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
+
+        if (localAssetMap.TryGetValue(targetName, out var localAsset) && 
+            (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && 
+            File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) 
+        {
+            continue;
+        }
+
+        var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
+        foreach (var chunk in targetAsset.AssetChunks)
+        {
+            string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
+            bool reused = false;
+            
+            if (localAssetMap.TryGetValue(targetName, out var currentLocalAsset) && File.Exists(Path.Combine(gameDir, currentLocalAsset.AssetName ?? "")))
             {
-                string sophonApi = isOversea ? GameConstants.OS_SOPHON : GameConstants.CN_SOPHON;
-                string pkgId = mainBranch.GetProperty("package_id").GetString();
-                string pwd = mainBranch.GetProperty("password").GetString();
-                buildUrl = $"{sophonApi}/getBuild?branch=main&package_id={pkgId}&password={pwd}";
+                var oldChunk = currentLocalAsset.AssetChunks.FirstOrDefault(c => (c.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant() == chunkHash);
+                if (oldChunk != null)
+                {
+                    op.Instructions.Add(new AssemblyInstruction("reuse", chunk, currentLocalAsset.AssetName, oldChunk));
+                    reused = true;
+                }
             }
 
-            var buildJson = await httpClient.GetStringAsync(buildUrl);
-            using var buildDoc = JsonDocument.Parse(buildJson);
-            var manifestData = buildDoc.RootElement.GetProperty("data").GetProperty("manifests")[0];
-
-            string manifestId = manifestData.GetProperty("manifest").GetProperty("id").GetString();
-            string urlPrefix = manifestData.GetProperty("manifest_download").GetProperty("url_prefix").GetString();
-            string urlSuffix = manifestData.GetProperty("manifest_download").TryGetProperty("url_suffix", out var sfx) ? sfx.GetString() : "";
-
-            string chunkPrefix = manifestData.GetProperty("chunk_download").GetProperty("url_prefix").GetString();
-            string chunkSuffix = manifestData.GetProperty("chunk_download").TryGetProperty("url_suffix", out var csfx) ? csfx.GetString() : "";
-
-            return ($"{urlPrefix}/{manifestId}{urlSuffix}", chunkPrefix, chunkSuffix);
+            if (!reused)
+            {
+                op.Instructions.Add(new AssemblyInstruction("download", chunk));
+                op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
+            }
         }
+        ops.Assemble.Add(op);
+    }
+    return ops;
+}
+
+private void ApplyUpdatePhysicalFiles()
+{
+    foreach (var file in Directory.GetFiles(targetDir, "*", SearchOption.AllDirectories))
+    {
+        string relPath = Path.GetRelativePath(targetDir, file);
+        string dstPath = Path.Combine(gameDir, relPath);
+        Directory.CreateDirectory(Path.GetDirectoryName(dstPath));
+        if (File.Exists(dstPath)) File.Delete(dstPath);
+        File.Move(file, dstPath);
+    }
+}
 
         private async Task<SophonManifestProto> DownloadAndDecodeManifestAsync(string manifestUrl)
         {
@@ -351,8 +623,8 @@ private OperationLists GenerateOperations(SophonManifestProto targetManifest, So
 
     var cnSdks = new[] { Path.Combine(GameConstants.CN_DATA_DIR, "Plugins", "PCGameSDK.dll"), "sdk_pkg_version" };
     var osSdks = new[] { Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "PluginEOSSDK.dll"), Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "EOSSDK-Win64-Shipping.dll") };
-    var localSdks = isCurrentlyCn ? cnSdks : osSdks;
-    var targetSdks = isCurrentlyCn ? osSdks : cnSdks;
+    var localSdks = isCurrentlyOs ? osSdks : cnSdks;
+    var targetSdks = targetIsOversea ? osSdks : cnSdks;
 
     foreach (var sdk in localSdks)
     {
@@ -428,7 +700,7 @@ private OperationLists GenerateOperations(SophonManifestProto targetManifest, So
             await Parallel.ForEachAsync(chunksMap.Values, parallelOptions, async (chunk, token) =>
             {
                 await DownloadSingleChunkAsync(chunk);
-                int current = System.Threading.Interlocked.Increment(ref downloaded);
+                int current = Interlocked.Increment(ref downloaded);
                 print($"{current}/{totalChunks} - {chunk.ChunkName}");
             });
         }
@@ -504,20 +776,26 @@ private void AssembleFiles(List<SophonAssetOperation> assembleOps)
                 if (File.Exists(dst)) File.Delete(dst);
                 if (File.Exists(src)) File.Move(src, dst);
             }
-
-            string localDataDir = Path.Combine(gameDir, isCurrentlyCn ? GameConstants.CN_DATA_DIR : GameConstants.OS_DATA_DIR);
-            string targetDataDir = Path.Combine(gameDir, isCurrentlyCn ? GameConstants.OS_DATA_DIR : GameConstants.CN_DATA_DIR);
             
-            if (Directory.Exists(localDataDir))
+            string localDataDirName = isCurrentlyOs ? GameConstants.OS_DATA_DIR : GameConstants.CN_DATA_DIR;
+            string targetDataDirName = targetIsOversea ? GameConstants.OS_DATA_DIR : GameConstants.CN_DATA_DIR;
+
+            string localDataDir = Path.Combine(gameDir, localDataDirName);
+            string targetDataDir = Path.Combine(gameDir, targetDataDirName);
+            
+            if (localDataDirName != targetDataDirName && Directory.Exists(localDataDir))
             {
                 if (Directory.Exists(targetDataDir)) Directory.Delete(targetDataDir, true);
                 Directory.Move(localDataDir, targetDataDir);
             }
 
-            string localExe = Path.Combine(gameDir, isCurrentlyCn ? GameConstants.CN_EXE : GameConstants.OS_EXE);
-            string targetExe = Path.Combine(gameDir, isCurrentlyCn ? GameConstants.OS_EXE : GameConstants.CN_EXE);
+            string localExeName = isCurrentlyOs ? GameConstants.OS_EXE : GameConstants.CN_EXE;
+            string targetExeName = targetIsOversea ? GameConstants.OS_EXE : GameConstants.CN_EXE;
+
+            string localExe = Path.Combine(gameDir, localExeName);
+            string targetExe = Path.Combine(gameDir, targetExeName);
             
-            if (File.Exists(localExe))
+            if (localExeName != targetExeName && File.Exists(localExe))
             {
                 if (File.Exists(targetExe)) File.Delete(targetExe);
                 File.Move(localExe, targetExe);
@@ -544,6 +822,45 @@ private void AssembleFiles(List<SophonAssetOperation> assembleOps)
                 : new[] { Path.Combine(targetDataDir, "Plugins", "PluginEOSSDK.dll"), Path.Combine(targetDataDir, "Plugins", "EOSSDK-Win64-Shipping.dll") };
 
             foreach (var f in obsoleteFiles) if (File.Exists(f)) File.Delete(f);
+            
+            string configPath = Path.Combine(gameDir, "config.ini");
+            string configContent = "";
+
+            if (targetIsOversea)
+                configContent = "[General]\r\nchannel=1\r\ncps=mihoyo\r\nsub_channel=0\r\n";
+            else if (targetIsBilibili)
+                configContent = "[General]\r\nchannel=14\r\ncps=bilibili\r\nsub_channel=0\r\n";
+            else
+                configContent = "[General]\r\nchannel=1\r\ncps=mihoyo\r\nsub_channel=1\r\n";
+
+            // 如果保存了版本号，则追加到文件末尾
+            if (!string.IsNullOrEmpty(_savedGameVersion))
+            {
+                configContent += $"game_version={_savedGameVersion}\r\n";
+            }
+
+            File.WriteAllText(configPath, configContent);
+            
+            if (targetIsBilibili)
+            {
+                string pluginsDir = Path.Combine(gameDir, targetDataDirName, "Plugins");
+                string targetSdkPath = Path.Combine(pluginsDir, "PCGameSDK.dll");
+
+                if (!Directory.Exists(pluginsDir)) Directory.CreateDirectory(pluginsDir);
+
+                string appBaseDir = AppContext.BaseDirectory;
+                string sourceSdkPath = Path.Combine(appBaseDir, "Assets", "PCGameSDK.dll");
+
+                if (File.Exists(sourceSdkPath))
+                {
+                    File.Copy(sourceSdkPath, targetSdkPath, true);
+                    print("B服SDK已注入");
+                }
+                else
+                {
+                    print("PCGameSDK.dll不存在");
+                }
+            }
         }
     }
 }

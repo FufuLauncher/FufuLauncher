@@ -78,7 +78,7 @@ namespace FufuLauncher.Views
             {
                 if (File.Exists(folder))
                 {
-                    System.Diagnostics.Debug.WriteLine($"[异常标记] 存在与目标文件夹同名的文件: {folder}。将切换到备用路径。");
+                    System.Diagnostics.Debug.WriteLine($"[异常标记] 存在与目标文件夹同名的文件: {folder}，将切换到备用路径");
                     folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
                 }
                 

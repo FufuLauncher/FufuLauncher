@@ -426,7 +426,7 @@ namespace FufuLauncher.ViewModels
             {
                 var serverJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.BackgroundServerKey);
                 int serverValue = serverJson != null ? Convert.ToInt32(serverJson) : 0;
-                var server = (ServerType)serverValue;
+                var server = (Models.ServerType)serverValue;
 
                 var content = await _contentService.GetGameContentAsync(server);
 

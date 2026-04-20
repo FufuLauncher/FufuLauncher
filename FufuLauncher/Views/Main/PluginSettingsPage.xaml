@@ -16,7 +16,16 @@
                 <ToggleSwitch IsOn="{x:Bind BoolValue, Mode=TwoWay}" OnContent="开" OffContent="关" MinWidth="0" Margin="0"/>
             </StackPanel>
         </DataTemplate>
-
+        <DataTemplate x:Key="KeyTemplate" x:DataType="viewmodels:PluginSettingItem">
+            <StackPanel Width="240" HorizontalAlignment="Left">
+                <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
+                <ComboBox ItemsSource="{x:Bind AvailableKeys}" 
+                          SelectedValuePath="KeyCode" 
+                          DisplayMemberPath="KeyName" 
+                          SelectedValue="{x:Bind KeyValue, Mode=TwoWay}" 
+                          Width="200" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </DataTemplate>
         <DataTemplate x:Key="NumberTemplate" x:DataType="viewmodels:PluginSettingItem">
             <StackPanel Width="240" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
@@ -34,7 +43,8 @@
         <selectors:SettingTemplateSelector x:Key="SettingSelector"
                                            BoolTemplate="{StaticResource BoolTemplate}"
                                            NumberTemplate="{StaticResource NumberTemplate}"
-                                           StringTemplate="{StaticResource StringTemplate}" />
+                                           StringTemplate="{StaticResource StringTemplate}"
+                                           KeyTemplate="{StaticResource KeyTemplate}" />
     </Page.Resources>
 
     <Grid Padding="32,24,32,24">

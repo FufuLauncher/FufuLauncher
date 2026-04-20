@@ -6,8 +6,9 @@
 
     <Grid Padding="32,48,32,32">
         <StackPanel VerticalAlignment="Center" Spacing="24">
-            <TextBlock Text="国际服/国服的转换" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center"/>
-            <TextBlock Text="通过下载差分包进行转换，过程自动" 
+            <FontIcon Glyph="&#xE8AB;" FontSize="48" Opacity="0.8"/>
+            <TextBlock Text="服务器的转换" FontSize="28" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+            <TextBlock Text="注意，哔哩哔哩服务器切换并不是依赖网络下载，所以你需要时刻更新我们的启动器来保证功能的正常运行！" 
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
                        TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
             <Button x:Name="StartBtn" Content="一键转换" Width="200" Height="40" HorizontalAlignment="Center" Click="StartBtn_Click"/>

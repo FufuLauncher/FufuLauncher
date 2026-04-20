@@ -402,6 +402,12 @@ public class PresetModel : ObservableObject
     public bool IsLocked { get; set; }
 }
 
+public class VirtualKeyOption
+{
+    public int KeyCode { get; set; }
+    public string KeyName { get; set; }
+}
+
 public class PluginSettingItem : ObservableObject
 {
     private readonly IniFile _iniFile;
@@ -411,6 +417,36 @@ public class PluginSettingItem : ObservableObject
     public string Type { get; }
 
     private string _rawValue;
+    private static readonly List<VirtualKeyOption> _availableKeys = GetAvailableKeys();
+
+    public List<VirtualKeyOption> AvailableKeys => _availableKeys;
+    
+    private static List<VirtualKeyOption> GetAvailableKeys()
+    {
+        var list = new List<VirtualKeyOption>();
+        foreach (Windows.System.VirtualKey key in Enum.GetValues(typeof(Windows.System.VirtualKey)))
+        {
+            if (key == Windows.System.VirtualKey.None) continue;
+            list.Add(new VirtualKeyOption { KeyCode = (int)key, KeyName = key.ToString() });
+        }
+        return list.GroupBy(k => k.KeyCode).Select(g => g.First()).OrderBy(k => k.KeyCode).ToList();
+    }
+    
+    public int KeyValue
+    {
+        get => int.TryParse(_rawValue, out var result) ? result : 0;
+        set
+        {
+            var targetValue = value.ToString();
+            if (_rawValue != targetValue)
+            {
+                var previousValue = _rawValue;
+                _rawValue = targetValue;
+                OnPropertyChanged();
+                UpdatePhysicalConfig(targetValue, previousValue, nameof(KeyValue));
+            }
+        }
+    }
 
     public PluginSettingItem(IniFile iniFile, string sectionKey, string displayName, string type, string value, Action<string, string, string> onValueChanged)
     {
@@ -483,7 +519,7 @@ public class PluginSettingItem : ObservableObject
             
             WeakReferenceMessenger.Default.Send(new NotificationMessage(
                 "配置保存失败",
-                $"无法应用当前设置修改，可能缺少写入权限。\n详细信息: {ex.Message}",
+                $"无法应用当前设置修改\n详细信息: {ex.Message}",
                 NotificationType.Error,
                 6000
             ));

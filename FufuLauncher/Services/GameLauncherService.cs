@@ -237,6 +237,10 @@ namespace FufuLauncher.Services
                 var useInjection = await GetUseInjectionAsync();
                 logBuilder.AppendLine($"[启动流程] 注入模式: {(useInjection ? "启用" : "禁用")}");
 
+                // 将附加程序启动逻辑提前至此处（游戏启动之前）
+                logBuilder.AppendLine("[启动流程] 正在启动附加程序...");
+                await LaunchAdditionalProgramAsync();
+
                 var gameStarted = false;
 
                 if (useInjection)
@@ -327,7 +331,7 @@ namespace FufuLauncher.Services
                     logBuilder.AppendLine("[启动流程] 游戏进程已启动，正在捕获目标PID...");
                     int gamePid = await WaitGenshinStartAsync();
 
-                    await LaunchAdditionalProgramAsync();
+                    // 原附加程序启动调用位置已被移除
                     await LaunchBetterGIAsync();
 
                     await CheckAndLaunchFpsOverlayAsync(logBuilder, gamePid);
@@ -358,19 +362,19 @@ namespace FufuLauncher.Services
                 {
                     if (!IsAdministrator())
                     {
-                        logBuilder.AppendLine("[启动流程] 检查到系统未以管理员权限运行，不允许启用帧数监控，已自动重置该设置。");
+                        logBuilder.AppendLine("[启动流程] 检查到系统未以管理员权限运行，不允许启用帧数监控，已自动重置该设置");
                         await _localSettingsService.SaveSettingAsync("IsFpsOverlayEnabled", false);
                         return;
                     }
 
                     if (gamePid > 0)
                     {
-                        logBuilder.AppendLine($"[启动流程] 权限校验通过，正在为进程(PID:{gamePid})启动系统性能监控遮罩。");
+                        logBuilder.AppendLine($"[启动流程] 权限校验通过，正在为进程(PID:{gamePid})启动系统性能监控遮罩");
                         FpsOverlayService.Instance.StartOverlay(gamePid);
                     }
                     else
                     {
-                        logBuilder.AppendLine("[启动流程] 无法获取游戏进程PID，帧数监控启动中止。");
+                        logBuilder.AppendLine("[启动流程] 无法获取游戏进程PID，帧数监控启动中止");
                     }
                 }
             }
