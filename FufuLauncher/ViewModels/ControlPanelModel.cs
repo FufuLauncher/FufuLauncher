@@ -1,72 +1,23 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using FufuLauncher.Models;
-using FufuLauncher.Services;
-using CommunityToolkit.Mvvm.Messaging;
-using FufuLauncher.Messages;
 
 namespace FufuLauncher.ViewModels;
-
-public class LocalGachaData
-{
-    public string Url
-    {
-        get; set;
-    }
-    public List<GachaLogItem> CharacterLogs { get; set; } = new();
-    public List<GachaLogItem> WeaponLogs { get; set; } = new();
-    public List<GachaLogItem> StandardLogs { get; set; } = new();
-
-    public List<ScrapedMetadata> CachedMetadata { get; set; } = new();
-}
 
 public partial class ControlPanelModel : ObservableObject
 {
     private readonly string _configPath;
-    private readonly string _gachaDataPath;
     private bool _isLoaded;
     private CancellationTokenSource _cancellationTokenSource;
     private readonly Dictionary<string, long> _playTimeData;
-    private readonly GachaService _gachaService;
-    private List<GachaLogItem> _cachedCharacterLogs = new();
-    private List<GachaLogItem> _cachedWeaponLogs = new();
-    private List<GachaLogItem> _cachedStandardLogs = new();
-    private List<ScrapedMetadata> _savedMetadata = new();
 
     [ObservableProperty] private WeeklyPlayTimeStats _weeklyStats = new();
-
     [ObservableProperty] private bool _isGameRunning;
 
-    [ObservableProperty] private string _gachaUrl;
-
-    [ObservableProperty] private string _crawlerStatus = "等待获取数据...";
-
-    [ObservableProperty] private bool _isFetching;
-
-    [ObservableProperty] private bool _isScraping;
-
-    [ObservableProperty] private GachaStatistic _characterStats = new() { PoolName = "角色活动" };
-
-    [ObservableProperty] private GachaStatistic _weaponStats = new() { PoolName = "武器活动" };
-
-    [ObservableProperty] private GachaStatistic _standardStats = new() { PoolName = "常驻祈愿" };
-
-    [ObservableProperty] private ObservableCollection<GachaDisplayItem> _characterFiveStars = new();
-
-    [ObservableProperty] private ObservableCollection<GachaDisplayItem> _weaponFiveStars = new();
-
-    [ObservableProperty] private ObservableCollection<GachaDisplayItem> _standardFiveStars = new();
-
-    [ObservableProperty] private ObservableCollection<GachaDisplayItem> _characterFourStars = new();
-
-    [ObservableProperty] private ObservableCollection<GachaDisplayItem> _weaponFourStars = new();
-
-    [ObservableProperty] private ObservableCollection<GachaDisplayItem> _standardFourStars = new();
     private List<InventoryItem> _cachedInventory = new();
     private readonly string _inventoryDataPath = Path.Combine(AppContext.BaseDirectory, "inventory.json");
+
     public List<InventoryGroup> GetGroupedInventory()
     {
         if (!_cachedInventory.Any() && File.Exists(_inventoryDataPath))
@@ -79,168 +30,47 @@ public partial class ControlPanelModel : ObservableObject
             .ToList();
     }
 
-    public Action RequestMetadataScrapeAction;
-
-public ControlPanelModel()
-{
-    var baseDocsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-    var folder = Path.Combine(baseDocsFolder, "fufu");
-
-    try
+    public ControlPanelModel()
     {
-        if (File.Exists(folder))
-        {
-            Debug.WriteLine($"[异常标记] 存在与目标文件夹同名的文件: {folder}。将切换到备用路径");
-            folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
-        }
-        
-        if (!Directory.Exists(folder)) 
-        {
-            Directory.CreateDirectory(folder);
-        }
-    }
-    catch (FileNotFoundException fnfe)
-    {
-        Debug.WriteLine($"[异常标记] 找不到路径异常(可能文档目录已被移动或云同步故障): {fnfe.Message}");
-        folder = Path.Combine(AppContext.BaseDirectory, "fufu_data");
-    }
-    catch (UnauthorizedAccessException uae)
-    {
-        Debug.WriteLine($"[异常标记] 权限不足，无法创建文件夹: {uae.Message}");
-        folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"[异常标记] 创建 fufu 文件夹时发生未知错误: {ex.Message}");
-        folder = Path.Combine(AppContext.BaseDirectory, "fufu_data"); 
-    }
-    
-    try 
-    {
-        if (!Directory.Exists(folder))
-        {
-            Directory.CreateDirectory(folder);
-        }
-    }
-    catch (Exception ex)
-    {
-         Debug.WriteLine($"[严重异常] 备用文件夹创建依然失败: {ex.Message}");
-         folder = AppContext.BaseDirectory;
-    }
-    
-    _configPath = Path.Combine(folder, "FufuConfig.cfg");
-    _gachaDataPath = Path.Combine(folder, "gacha_data.json");
-    _cancellationTokenSource = new CancellationTokenSource();
-    _playTimeData = new Dictionary<string, long>();
-    _gachaService = new GachaService();
-
-    LoadConfig();
-    _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
-}
-
-public async Task ClearGachaDataAsync()
-{
-    try
-    {
-        _cachedCharacterLogs.Clear();
-        _cachedWeaponLogs.Clear();
-        _cachedStandardLogs.Clear();
-        
-        App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-        {
-            CharacterFiveStars.Clear();
-            CharacterFourStars.Clear();
-            WeaponFiveStars.Clear();
-            WeaponFourStars.Clear();
-            StandardFiveStars.Clear();
-            StandardFourStars.Clear();
-
-            CharacterStats = new GachaStatistic { PoolName = "角色活动" };
-            WeaponStats = new GachaStatistic { PoolName = "武器活动" };
-            StandardStats = new GachaStatistic { PoolName = "常驻祈愿" };
-
-            GachaUrl = string.Empty;
-            CrawlerStatus = "数据已清空";
-        });
-        
-        if (File.Exists(_gachaDataPath))
-        {
-            File.Delete(_gachaDataPath);
-        }
-        
-        WeakReferenceMessenger.Default.Send(new NotificationMessage(
-            "删除成功",
-            "本地抽卡记录已被彻底清除",
-            NotificationType.Success,
-            3000
-        ));
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"删除抽卡记录失败: {ex.Message}");
-        
-        WeakReferenceMessenger.Default.Send(new NotificationMessage(
-            "删除失败",
-            $"无法删除记录文件，可能是由系统权限不足或文件被其他程序占用导致,详细信息: {ex.Message}",
-            NotificationType.Error,
-            5000
-        ));
-    }
-}
-
-    public async Task LoadSavedGachaDataAsync()
-    {
-        if (!File.Exists(_gachaDataPath)) return;
+        var baseDocsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        var folder = Path.Combine(baseDocsFolder, "fufu");
 
         try
         {
-             if (_cachedCharacterLogs.Count > 0) { RefreshUIFromCache(); return; }
-
-            var json = await File.ReadAllTextAsync(_gachaDataPath);
-            var data = JsonSerializer.Deserialize<LocalGachaData>(json);
-
-            if (data != null)
+            if (File.Exists(folder))
             {
-                GachaUrl = data.Url;
-
-                _cachedCharacterLogs = data.CharacterLogs ?? new();
-                _cachedWeaponLogs = data.WeaponLogs ?? new();
-                _cachedStandardLogs = data.StandardLogs ?? new();
-                _savedMetadata = data.CachedMetadata ?? new();
-
-                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-                {
-                    RefreshUIFromCache();
-
-                    if (_savedMetadata.Count > 0)
-                    {
-                        CrawlerStatus = "已加载本地数据和图片缓存";
-                    }
-                    else
-                    {
-                        CrawlerStatus = "已加载本地历史记录";
-                    }
-                });
+                folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
             }
+            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
         }
-        catch (Exception ex)
+        catch
         {
-            Debug.WriteLine($"加载本地数据失败: {ex.Message}");
+            folder = Path.Combine(AppContext.BaseDirectory, "fufu_data");
         }
+        
+        try 
+        {
+            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+        }
+        catch 
+        {
+             folder = AppContext.BaseDirectory;
+        }
+        
+        _configPath = Path.Combine(folder, "FufuConfig.cfg");
+        _cancellationTokenSource = new CancellationTokenSource();
+        _playTimeData = new Dictionary<string, long>();
+
+        LoadConfig();
+        _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
     }
-    
+
     public void UpdateAndSavePlayTime(int secondsToAdd)
     {
         var dateKey = DateTime.Now.ToString("yyyy-MM-dd");
         
-        if (_playTimeData.ContainsKey(dateKey))
-        {
-            _playTimeData[dateKey] += secondsToAdd;
-        }
-        else
-        {
-            _playTimeData[dateKey] = secondsToAdd;
-        }
+        if (_playTimeData.ContainsKey(dateKey)) _playTimeData[dateKey] += secondsToAdd;
+        else _playTimeData[dateKey] = secondsToAdd;
         
         _ = SaveConfigAsync();
     }
@@ -254,7 +84,6 @@ public async Task ClearGachaDataAsync()
                 GamePlayTimeData = _playTimeData,
                 LastPlayDate = DateTime.Now.ToString("yyyy-MM-dd")
             };
-            
             var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
             await File.WriteAllTextAsync(_configPath, json);
         }
@@ -264,266 +93,6 @@ public async Task ClearGachaDataAsync()
         }
     }
 
-    private async Task SaveGachaDataAsync()
-    {
-        try
-        {
-            var data = new LocalGachaData
-            {
-                Url = GachaUrl,
-                CharacterLogs = _cachedCharacterLogs,
-                WeaponLogs = _cachedWeaponLogs,
-                StandardLogs = _cachedStandardLogs,
-                CachedMetadata = _savedMetadata
-            };
-
-            var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            await File.WriteAllTextAsync(_gachaDataPath, json);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"保存数据失败: {ex.Message}");
-        }
-    }
-
-    private List<GachaLogItem> MergeLogs(List<GachaLogItem> existing, List<GachaLogItem> incoming)
-    {
-        if (existing == null) existing = new List<GachaLogItem>();
-        if (incoming == null || incoming.Count == 0) return existing;
-
-        var dict = existing.ToDictionary(x => x.Id);
-        foreach (var item in incoming)
-        {
-            if (!dict.ContainsKey(item.Id))
-            {
-                dict[item.Id] = item;
-            }
-        }
-
-        return dict.Values.OrderBy(x => x.Id).ToList();
-    }
-
-    private void RefreshUIFromCache()
-    {
-        ClearCollections();
-
-        CharacterStats = _gachaService.AnalyzePool("301", _cachedCharacterLogs.OrderBy(x => x.Id).ToList());
-        PopulateDisplayCollection(CharacterFiveStars, CharacterStats.FiveStarRecords, "角色");
-        PopulateDisplayCollection(CharacterFourStars, CharacterStats.FourStarRecords, "角色");
-
-        WeaponStats = _gachaService.AnalyzePool("302", _cachedWeaponLogs.OrderBy(x => x.Id).ToList());
-        PopulateDisplayCollection(WeaponFiveStars, WeaponStats.FiveStarRecords, "武器");
-        PopulateDisplayCollection(WeaponFourStars, WeaponStats.FourStarRecords, "武器");
-
-        StandardStats = _gachaService.AnalyzePool("200", _cachedStandardLogs.OrderBy(x => x.Id).ToList());
-        PopulateDisplayCollection(StandardFiveStars, StandardStats.FiveStarRecords, "常驻");
-        PopulateDisplayCollection(StandardFourStars, StandardStats.FourStarRecords, "常驻");
-
-        if (_savedMetadata != null && _savedMetadata.Count > 0)
-        {
-            // 修改这里：使用异步调用
-            _ = ApplyMetadataToUIAsync(_savedMetadata); 
-        }
-    }
-
-    [RelayCommand]
-    private async Task FetchGachaDataAsync()
-    {
-        if (string.IsNullOrWhiteSpace(GachaUrl))
-        {
-            CrawlerStatus = "请输入有效的抽卡链接";
-            return;
-        }
-
-        IsFetching = true;
-        CrawlerStatus = "正在解析 API 链接...";
-
-        try
-        {
-            var baseUrl = _gachaService.ExtractBaseUrl(GachaUrl);
-            if (string.IsNullOrEmpty(baseUrl))
-            {
-                CrawlerStatus = "链接格式错误，无法提取 API 地址";
-                IsFetching = false;
-                return;
-            }
-
-            CrawlerStatus = "正在更新角色活动记录...";
-            var newCharLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "301");
-            _cachedCharacterLogs = MergeLogs(_cachedCharacterLogs, newCharLogs);
-
-            CrawlerStatus = "正在更新武器活动记录...";
-            var newWeaponLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "302");
-            _cachedWeaponLogs = MergeLogs(_cachedWeaponLogs, newWeaponLogs);
-
-            CrawlerStatus = "正在更新常驻祈愿记录...";
-            var newStandardLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "200");
-            _cachedStandardLogs = MergeLogs(_cachedStandardLogs, newStandardLogs);
-
-            RefreshUIFromCache();
-
-            await SaveGachaDataAsync();
-
-            CrawlerStatus = "数据更新完成，正在检查图片资源...";
-
-            IsScraping = true;
-            RequestMetadataScrapeAction?.Invoke();
-        }
-        catch (Exception ex)
-        {
-            CrawlerStatus = $"更新失败: {ex.Message}";
-            Debug.WriteLine(ex);
-            IsFetching = false;
-        }
-
-        if (!IsScraping) IsFetching = false;
-    }
-
-    private void ClearCollections()
-    {
-        CharacterFiveStars.Clear();
-        CharacterFourStars.Clear();
-        WeaponFiveStars.Clear();
-        WeaponFourStars.Clear();
-        StandardFiveStars.Clear();
-        StandardFourStars.Clear();
-    }
-
-    private void PopulateDisplayCollection(ObservableCollection<GachaDisplayItem> collection, List<FiveStarRecord> records, string typeHint)
-    {
-        foreach (var record in records)
-        {
-            collection.Add(new GachaDisplayItem
-            {
-                Name = record.Name,
-                Count = record.PityUsed,
-                Time = record.Time,
-                Rank = record.Rank,
-                Type = typeHint,
-                ImageUrl = "ms-appx:///Assets/StoreLogo.png"
-            });
-        }
-    }
-
-    public void UpdateMetadata(List<ScrapedMetadata> scrapedData)
-    {
-        IsFetching = false;
-
-        if (scrapedData == null || scrapedData.Count == 0)
-        {
-            CrawlerStatus = "未找到新图片资源，使用缓存或默认图标";
-            IsScraping = false;
-            return;
-        }
-
-        CrawlerStatus = $"更新了 {scrapedData.Count} 个图片资源";
-
-        var metaDict = _savedMetadata.ToDictionary(x => x.Name);
-        foreach (var item in scrapedData)
-        {
-            metaDict[item.Name] = item;
-        }
-        _savedMetadata = metaDict.Values.ToList();
-        
-        _ = ApplyMetadataToUIAsync(_savedMetadata);
-
-        _ = SaveGachaDataAsync();
-
-        IsScraping = false;
-    }
-
-    private async Task ApplyMetadataToUIAsync(List<ScrapedMetadata> metadataList)
-    {
-        if (metadataList == null || metadataList.Count == 0) return;
-
-        var metaDict = metadataList
-            .GroupBy(x => x.Name)
-            .ToDictionary(g => g.Key, g => g.First());
-        
-        await UpdateCollectionImagesAsync(CharacterFiveStars, metaDict);
-        await UpdateCollectionImagesAsync(CharacterFourStars, metaDict);
-        await UpdateCollectionImagesAsync(WeaponFiveStars, metaDict);
-        await UpdateCollectionImagesAsync(WeaponFourStars, metaDict);
-        await UpdateCollectionImagesAsync(StandardFiveStars, metaDict);
-        await UpdateCollectionImagesAsync(StandardFourStars, metaDict);
-    }
-    private async Task UpdateCollectionImagesAsync(ObservableCollection<GachaDisplayItem> collection, Dictionary<string, ScrapedMetadata> metaDict)
-    {
-        var items = collection.ToList();
-
-        foreach (var item in items)
-        {
-            ScrapedMetadata match = null;
-
-            if (metaDict.TryGetValue(item.Name, out var exactMatch))
-            {
-                match = exactMatch;
-            }
-            else
-            {
-                match = metaDict.Values.FirstOrDefault(x => x.Name.Contains(item.Name) || item.Name.Contains(x.Name));
-            }
-
-            if (match != null)
-            {
-                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
-                {
-                    if (!string.IsNullOrEmpty(match.ImgSrc))
-                        item.ImageUrl = match.ImgSrc;
-
-                    if ((item.Type == "角色" || item.Type == "常驻") && !string.IsNullOrEmpty(match.ElementSrc))
-                    {
-                        item.ElementUrl = match.ElementSrc;
-                    }
-                });
-                
-                await Task.Delay(30); 
-            }
-        }
-    }
-
-    public class InventoryItem
-    {
-        public int Id
-        {
-            get; set;
-        }
-        public string Name
-        {
-            get; set;
-        }
-        public string Category
-        {
-            get; set;
-        }
-        public int OwnedCount
-        {
-            get; set;
-        }
-        public int TotalRequired
-        {
-            get; set;
-        }
-        public int LackCount => Math.Max(0, TotalRequired - OwnedCount);
-        public string IconUrl
-        {
-            get; set;
-        }
-        
-        public string OwnedDisplay => OwnedCount >= 10000 ? $"{OwnedCount / 10000.0:F1}w" : OwnedCount.ToString();
-        public string StatusColor => LackCount > 0 ? "#FF9664" : "#96FF96";
-    }
-    public class InventoryGroup
-    {
-        public string Category
-        {
-            get; set;
-        }
-        public List<InventoryItem> Items
-        {
-            get; set;
-        }
-    }
     public async Task<bool> SyncInventoryFromMihoyoAsync()
     {
         try
@@ -538,7 +107,7 @@ public async Task ClearGachaDataAsync()
 
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Cookie", cookie);
-            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) applewebkit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
             client.DefaultRequestHeaders.Add("Referer", "https://webstatic.mihoyo.com/");
             
             var roleResp = await client.GetStringAsync("https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn");
@@ -551,14 +120,10 @@ public async Task ClearGachaDataAsync()
             var avatarResp = await client.GetStringAsync(avatarUrl);
             using var avatarDoc = JsonDocument.Parse(avatarResp);
             var avatars = avatarDoc.RootElement.GetProperty("data").GetProperty("list");
-            
             var avatarIds = avatars.EnumerateArray().Select(x => x.GetProperty("id").GetInt32()).Take(20).ToList();
             
             var computeUrl = "https://api-takumi.mihoyo.com/event/e20200928calculate/v1/batch_compute";
-            var requestData = new
-            {
-                items = avatarIds.Select(id => new { avatar_id = id, level_current = 1, level_target = 90 }).ToList()
-            };
+            var requestData = new { items = avatarIds.Select(id => new { avatar_id = id, level_current = 1, level_target = 90 }).ToList() };
 
             var content = new StringContent(JsonSerializer.Serialize(requestData), System.Text.Encoding.UTF8, "application/json");
             var computeResp = await client.PostAsync(computeUrl, content);
@@ -568,7 +133,6 @@ public async Task ClearGachaDataAsync()
             var data = computeDoc.RootElement.GetProperty("data");
             
             var newList = new List<InventoryItem>();
-            
             if (data.TryGetProperty("inventory_items", out var invItems))
             {
                 foreach (var item in invItems.EnumerateArray())
@@ -586,14 +150,11 @@ public async Task ClearGachaDataAsync()
             }
             
             _cachedInventory = newList;
-            string savePath = Path.Combine(AppContext.BaseDirectory, "inventory.json");
-            File.WriteAllText(savePath, JsonSerializer.Serialize(_cachedInventory, new JsonSerializerOptions { WriteIndented = true }));
-
+            File.WriteAllText(_inventoryDataPath, JsonSerializer.Serialize(_cachedInventory, new JsonSerializerOptions { WriteIndented = true }));
             return true;
         }
-        catch (Exception ex)
+        catch
         {
-            Debug.WriteLine($"背包同步失败: {ex.Message}");
             return false;
         }
     }
@@ -605,6 +166,7 @@ public async Task ClearGachaDataAsync()
         if (id >= 100000 && id <= 110000) return "角色培养";
         return "其它材料";
     }
+
     private async void LoadConfig()
     {
         try
@@ -626,9 +188,8 @@ public async Task ClearGachaDataAsync()
             }
             else _isLoaded = true;
         }
-        catch (Exception ex)
+        catch
         {
-            Debug.WriteLine($"Error loading config: {ex.Message}");
             _isLoaded = true;
         }
     }
@@ -646,19 +207,13 @@ public async Task ClearGachaDataAsync()
 
             if (_playTimeData.TryGetValue(dateKey, out var seconds) && seconds > 0)
             {
-                stats.DailyRecords.Add(new GamePlayTimeRecord
-                {
-                    Date = date,
-                    PlayTimeSeconds = seconds
-                });
+                stats.DailyRecords.Add(new GamePlayTimeRecord { Date = date, PlayTimeSeconds = seconds });
                 totalSeconds += seconds;
             }
         }
 
         stats.TotalHours = totalSeconds / 3600.0;
-        
         stats.AverageHours = stats.DailyRecords.Count > 0 ? stats.TotalHours / stats.DailyRecords.Count : 0;
-
         App.MainWindow.DispatcherQueue.TryEnqueue(() => WeeklyStats = stats);
     }
     
@@ -668,53 +223,54 @@ public async Task ClearGachaDataAsync()
         {
             try
             {
-                var isRunning = Process.GetProcessesByName("YuanShen").Any() || 
-                                Process.GetProcessesByName("GenshinImpact").Any();
-                
+                var isRunning = Process.GetProcessesByName("YuanShen").Any() || Process.GetProcessesByName("GenshinImpact").Any();
                 App.MainWindow.DispatcherQueue.TryEnqueue(() =>
                 {
                     IsGameRunning = isRunning;
-
                     if (isRunning)
                     {
                         UpdateAndSavePlayTime(5);
-                        
                         if (WeeklyStats != null)
                         {
                             var today = DateTime.Today;
                             var todayRecord = WeeklyStats.DailyRecords.FirstOrDefault(r => r.Date.Date == today);
-                        
                             if (todayRecord == null)
                             {
                                 todayRecord = new GamePlayTimeRecord { Date = today, PlayTimeSeconds = 0 };
                                 WeeklyStats.DailyRecords.Insert(0, todayRecord);
                             }
-                        
                             todayRecord.PlayTimeSeconds += 5;
                         }
                     }
                 });
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"后台游戏监控出错: {ex.Message}");
-            }
-
-            // 等待 5 秒后再次检测
+            catch { }
             await Task.Delay(5000, token);
         }
     }
-}
 
+    public class InventoryItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int OwnedCount { get; set; }
+        public int TotalRequired { get; set; }
+        public int LackCount => Math.Max(0, TotalRequired - OwnedCount);
+        public string IconUrl { get; set; }
+        public string OwnedDisplay => OwnedCount >= 10000 ? $"{OwnedCount / 10000.0:F1}w" : OwnedCount.ToString();
+        public string StatusColor => LackCount > 0 ? "#FF9664" : "#96FF96";
+    }
+
+    public class InventoryGroup
+    {
+        public string Category { get; set; }
+        public List<InventoryItem> Items { get; set; }
+    }
+}
 
 public class ControlPanelConfig
 {
-    public Dictionary<string, long> GamePlayTimeData
-    {
-        get; set;
-    }
-    public string LastPlayDate
-    {
-        get; set;
-    }
+    public Dictionary<string, long> GamePlayTimeData { get; set; }
+    public string LastPlayDate { get; set; }
 }

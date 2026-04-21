@@ -116,7 +116,7 @@
                     <TextBlock Text="我已阅读并同意" 
                                FontSize="14"
                                VerticalAlignment="Center"/>
-                    <HyperlinkButton Content="用户协议" 
+                    <HyperlinkButton Content="用户协议(User Agreement)"
                                      Command="{x:Bind ViewModel.ViewAgreementCommand}" 
                                      Padding="0"
                                      Margin="4,0,0,0"
@@ -179,12 +179,12 @@
             </Border>
 
             <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center">
-                <Button Content="无法显示"
+                <Button Content="无法显示(Cannot Display)"
                         Command="{x:Bind ViewModel.TroubleshootIconsCommand}"
                         Style="{StaticResource DefaultButtonStyle}"
                         MinWidth="120"/>
                 
-                <Button Content="显示正常"
+                <Button Content="显示正常(Display Normal)"
                         Command="{x:Bind ViewModel.ConfirmIconsCommand}"
                         Style="{StaticResource DefaultButtonStyle}"
                         MinWidth="120"/>
@@ -198,7 +198,7 @@
               Background="{ThemeResource LayerFillColorDefaultBrush}"
               Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
             
-            <Button Content="下一步"
+            <Button Content="下一步(Next)"
                     Command="{x:Bind ViewModel.NextCommand}"
                     IsEnabled="{x:Bind ViewModel.IsAgreementChecked, Mode=OneWay}"
                     HorizontalAlignment="Right"

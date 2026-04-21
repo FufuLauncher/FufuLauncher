@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     Title="战绩信息">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" PreviewKeyDown="RootGrid_PreviewKeyDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,7 +23,7 @@
             <TextBlock Grid.Column="1" Text="战绩信息" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1" Padding="12,4,12,8" ColumnSpacing="8">
+        <Grid x:Name="TopBarGrid" Grid.Row="1" Padding="12,4,12,8" ColumnSpacing="8" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

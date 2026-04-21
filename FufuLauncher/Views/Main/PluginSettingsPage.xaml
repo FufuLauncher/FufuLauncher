@@ -85,8 +85,8 @@
 
             <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" Spacing="6">
-                    <Button Content="下载普通插件" Click="OnDownloadPluginClick" HorizontalAlignment="Stretch"/>
-                    <Button Content="下载VMP加密版" Click="OnDownloadVmpPluginClick" HorizontalAlignment="Stretch" ToolTipService.ToolTip="功能完全相同，能显著降低被杀毒软件误判的概率，但会使性能明显下降"/>
+                    <Button Content="下载插件(Download)" Click="OnDownloadPluginClick" HorizontalAlignment="Stretch"/>
+                    <Button Content="下载加密插件(VMP Plugin)" Click="OnDownloadVmpPluginClick" HorizontalAlignment="Stretch" ToolTipService.ToolTip="功能完全相同，能显著降低被杀毒软件误判的概率，但会使性能明显下降"/>
                     <TextBlock Text="若遭杀毒软件误判请使用VMP加密版" FontSize="11" Opacity="0.6" HorizontalAlignment="Center"/>
                 </StackPanel>
 
@@ -101,7 +101,7 @@
 
                 <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="启用注入" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                        <TextBlock Text="启用注入(Injection)" FontWeight="SemiBold" HorizontalAlignment="Right"/>
                         <TextBlock Text="启动游戏时加载插件" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <ToggleSwitch IsOn="{x:Bind MainVM.UseInjection, Mode=TwoWay}" 

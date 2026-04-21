@@ -175,6 +175,7 @@ namespace FufuLauncher.Views
                 BBSWebView.CoreWebView2.SourceChanged += CoreWebView2_SourceChanged;
                 
                 await BBSWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(MiHoYoJSInterfaceScript);
+                await BBSWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(TabKeyInterceptorScript);
 
                 await LoadPageAsync(DefaultUrl);
             }
@@ -183,6 +184,32 @@ namespace FufuLauncher.Views
                 System.Diagnostics.Debug.WriteLine($"WebView Init Failed: {ex.Message}");
             }
         }
+        
+        
+        private void ToggleTopBar()
+        {
+            TopBarGrid.Visibility = TopBarGrid.Visibility == Visibility.Visible
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+        }
+
+        private void RootGrid_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Tab)
+            {
+                ToggleTopBar();
+                e.Handled = true;
+            }
+        }
+
+        private const string TabKeyInterceptorScript = """
+                                                       window.addEventListener('keydown', function(e) {
+                                                           if (e.key === 'Tab') {
+                                                               e.preventDefault();
+                                                               window.chrome.webview.postMessage('{"method":"toggleTopBar"}');
+                                                           }
+                                                       });
+                                                       """;
 
         private void UpdateWebViewSettings()
         {
@@ -283,8 +310,18 @@ namespace FufuLauncher.Views
                 "getCurrentLocale" => new JsResult { Data = new() { ["language"] = "zh-cn", ["timeZone"] = "GMT+8" } },
                 "pushPage" => HandlePushPage(param),
                 "share" => await HandleShareAsync(param),
+                "toggleTopBar" => HandleToggleTopBar(),
                 _ => null
             };
+        }
+        
+        private JsResult? HandleToggleTopBar()
+        {
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                ToggleTopBar();
+            });
+            return null;
         }
 
         private async Task<string> GetJsonBodyAsync(IRandomAccessStream stream)

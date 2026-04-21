@@ -11,22 +11,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/PreDownloadWindow.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/PreDownloadWindow.xaml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/VerifyGamePage.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/VerifyGamePage.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/GachaAnalysisWindow.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/GachaAnalysisWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/GameLauncherService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/ControlPanelModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/ControlPanelModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PanelPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/SecurityWebWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/SecurityWebWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AgreementPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AgreementPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/BBSWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/BBSWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/BBSWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/BBSWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,13 +55,14 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/FpsOverlayService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/GachaAnalysisWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/VerifyGamePage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/PreDownloadWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/SecurityWebWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/MainWindow.g.i.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/GachaAnalysisWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/DataPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
@@ -312,15 +311,9 @@
       <workItem from="1776602077864" duration="888000" />
       <workItem from="1776607793393" duration="1307000" />
       <workItem from="1776611435638" duration="6000" />
-      <workItem from="1776659688857" duration="11210000" />
-    </task>
-    <task id="LOCAL-00013" summary="更新插件获取">
-      <option name="closed" value="true" />
-      <created>1772544457869</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1772544457869</updated>
+      <workItem from="1776659688857" duration="13282000" />
+      <workItem from="1776745519850" duration="2672000" />
+      <workItem from="1776768766757" duration="6503000" />
     </task>
     <task id="LOCAL-00014" summary="修复部分问题">
       <option name="closed" value="true" />
@@ -706,7 +699,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776602966642</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="改了很多东西">
+      <option name="closed" value="true" />
+      <created>1776691281835</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1776691281835</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -727,7 +728,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="增加功能" />
     <MESSAGE value="增加国际服切换" />
     <MESSAGE value="加防呆" />
     <MESSAGE value="修复崩溃问题" />
@@ -752,7 +752,8 @@
     <MESSAGE value="#130 #131" />
     <MESSAGE value="1" />
     <MESSAGE value="修复更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复更新" />
+    <MESSAGE value="改了很多东西" />
+    <option name="LAST_COMMIT_MESSAGE" value="改了很多东西" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -99,7 +99,7 @@
         <CommandBar Grid.Row="1" DefaultLabelPosition="Right" Background="Transparent" IsOpen="False">
             <AppBarButton x:Name="GetPluginsBtn" 
                           Icon="Download" 
-                          Label="获取插件" 
+                          Label="获取插件(Get Plugins)"
                           Click="OnGetPluginsClick"
                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}">
                 

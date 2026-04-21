@@ -276,12 +276,10 @@ namespace FufuLauncher.Views
                 foreach (var line in lines)
                 {
                     string trimmedLine = line.Trim();
-                    // 读取 game_version
                     if (trimmedLine.StartsWith("game_version="))
                     {
                         _savedGameVersion = trimmedLine.Split('=', 2)[1].Trim();
                     }
-                    // 判断是否为 B服 (原有逻辑优化)
                     if (trimmedLine.Contains("channel=14"))
                     {
                         isCurrentlyBili = true;
@@ -832,8 +830,7 @@ private void AssembleFiles(List<SophonAssetOperation> assembleOps)
                 configContent = "[General]\r\nchannel=14\r\ncps=bilibili\r\nsub_channel=0\r\n";
             else
                 configContent = "[General]\r\nchannel=1\r\ncps=mihoyo\r\nsub_channel=1\r\n";
-
-            // 如果保存了版本号，则追加到文件末尾
+            
             if (!string.IsNullOrEmpty(_savedGameVersion))
             {
                 configContent += $"game_version={_savedGameVersion}\r\n";
