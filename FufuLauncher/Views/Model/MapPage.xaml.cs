@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Windows.Graphics;
+using FufuLauncher.Constants;
 using WinRT.Interop;
 
 namespace FufuLauncher.Views
@@ -29,7 +30,7 @@ namespace FufuLauncher.Views
             ");
             MapWebView.NavigationStarting += MapWebView_NavigationStarting;
             MapWebView.NavigationCompleted += MapWebView_NavigationCompleted;
-            MapWebView.Source = new Uri("https://act.mihoyo.com/ys/app/interactive-map/index.html");
+            MapWebView.Source = new Uri(ApiEndpoints.InteractiveMapUrl);
         }
 
         private async void MapWebView_NavigationStarting(WebView2 sender, Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)

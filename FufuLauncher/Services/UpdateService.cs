@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 
 namespace FufuLauncher.Services;
 
 public class UpdateService : IUpdateService
 {
-    private const string UpdateJsonUrl = "https://philia093.cyou/Update.json";
     private const string HardcodedVersion = "1.1.0";
 
     private readonly ILocalSettingsService _localSettingsService;
@@ -48,12 +48,12 @@ public class UpdateService : IUpdateService
                 return new UpdateCheckResult { ShouldShowUpdate = false };
             }
 
-            var json = await GetWithRetryAsync(UpdateJsonUrl, maxRetries: 3);
+            var json = await GetWithRetryAsync(ApiEndpoints.UpdateJsonUrl, maxRetries: 3);
             Debug.WriteLine($"[UpdateService] 服务器响应: {json}");
 
             var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json);
             var serverVersion = updateInfo?.Version ?? HardcodedVersion;
-            var updateInfoUrl = updateInfo?.UpdateInfoUrl ?? "https://philia093.cyou/Update.html";
+            var updateInfoUrl = updateInfo?.UpdateInfoUrl ?? ApiEndpoints.UpdateHtmlUrl;
 
             Debug.WriteLine($"[UpdateService] 解析后的服务器版本: {serverVersion}");
             Debug.WriteLine($"[UpdateService] 更新公告URL: {updateInfoUrl}");
@@ -95,7 +95,7 @@ public class UpdateService : IUpdateService
         try
         {
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
-            var response = await _httpClient.GetAsync("https://philia093.cyou/", HttpCompletionOption.ResponseHeadersRead, cts.Token);
+            var response = await _httpClient.GetAsync(ApiEndpoints.AgreementUrl, HttpCompletionOption.ResponseHeadersRead, cts.Token);
             return response.IsSuccessStatusCode;
         }
         catch

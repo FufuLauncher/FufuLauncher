@@ -80,8 +80,7 @@ public sealed partial class PluginPage : Page
     
     private void OnOpenDiagnosticsClick(object sender, RoutedEventArgs e)
     {
-        // 创建并显示诊断窗口实例
-        var diagnosticsWindow = new FufuLauncher.Views.DiagnosticsWindow();
+        var diagnosticsWindow = new DiagnosticsWindow();
         diagnosticsWindow.Activate();
     }
     
@@ -148,7 +147,7 @@ public sealed partial class PluginPage : Page
         var textBlock = new TextBlock
         {
             Text = "安全软件会阻塞该程序的正常注入运行，如无法使用或者插件消失，请关闭你电脑的安全中心！",
-            Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red),
+            Foreground = new SolidColorBrush(Microsoft.UI.Colors.Red),
             FontWeight = Microsoft.UI.Text.FontWeights.Bold,
             TextWrapping = TextWrapping.Wrap,
             FontSize = 16,
@@ -243,7 +242,7 @@ public sealed partial class PluginPage : Page
         var warningText = new TextBlock 
         { 
             Text = "注意：最新体验版插件已内置手柄热切换和已适配国际服，且功能全面和性能可观", 
-            Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red),
+            Foreground = new SolidColorBrush(Microsoft.UI.Colors.Red),
             TextWrapping = TextWrapping.Wrap,
             FontSize = 13,
             Margin = new Thickness(0, 5, 0, 5)

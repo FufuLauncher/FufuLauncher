@@ -27,6 +27,7 @@ using Windows.Graphics;
 using Windows.Media.Playback;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using FufuLauncher.Constants;
 using Microsoft.Win32;
 
 namespace FufuLauncher;
@@ -343,7 +344,7 @@ public sealed partial class MainWindow : WindowEx
                 try
                 {
                     var proxy = WebRequest.GetSystemWebProxy();
-                    Uri resource = new("https://www.microsoft.com");
+                    Uri resource = new(ApiEndpoints.MicrosoftNetworkCheckUrl);
                     isProxy = !proxy.IsBypassed(resource);
                 }
                 catch { isProxy = false; }
@@ -559,7 +560,7 @@ public sealed partial class MainWindow : WindowEx
                 {
                     Process.Start(new ProcessStartInfo
                     {
-                        FileName = "https://aka.ms/vc14/vc_redist.x64.exe",
+                        FileName = ApiEndpoints.VcRedistDownloadUrl,
                         UseShellExecute = true
                     });
                 }
@@ -1148,7 +1149,7 @@ private async Task CheckRedeemCodesForTodayAsync()
 
         using var client = new HttpClient();
         client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
-        var json = await client.GetStringAsync("https://cnb.cool/bettergi/genshin-redeem-code/-/git/raw/main/codes.json");
+        var json = await client.GetStringAsync(ApiEndpoints.RedeemCodesUrl);
 
         var options = new System.Text.Json.JsonSerializerOptions
         {

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Messages;
 using Microsoft.UI.Xaml;
@@ -47,7 +48,7 @@ namespace FufuLauncher.ViewModels
         private async Task ViewAgreementAsync()
         {
             await Windows.System.Launcher.LaunchUriAsync(
-                new Uri("https://philia093.cyou/"));
+                new Uri(ApiEndpoints.AgreementUrl));
         }
         
         private async Task GoToIconCheckAsync()
@@ -65,7 +66,7 @@ namespace FufuLauncher.ViewModels
         
         private async Task OnIconsMissingAsync()
         {
-            var helpUrl = "https://wwaoi.lanzouu.com/ig75f3hedlaj"; 
+            var helpUrl = ApiEndpoints.IconTroubleshootUrl; 
             
             if (!string.IsNullOrEmpty(helpUrl) && Uri.TryCreate(helpUrl, UriKind.Absolute, out var uri))
             {

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Constants;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services.Background
@@ -30,21 +31,19 @@ namespace FufuLauncher.Services.Background
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
             Debug.WriteLine("HoyoverseBackgroundService: HttpClient 初始化完成");
         }
-
-        private const string CN_API = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getAllGameBasicInfo?launcher_id=jGHBHlcOq1&language=zh-cn&game_id=1Z8W5NHUQb";
-        private const string OS_API = "https://sg-hyp-api.hoyoverse.com/hyp/hyp-connect/api/getAllGameBasicInfo?launcher_id=VYTpXlbWo8&game_id=gopR6Cufr3&language=zh-cn";
+        
 
         public async Task<BackgroundUrlInfo> GetBackgroundUrlAsync(ServerType server, bool preferVideo)
         {
             try
             {
                 Debug.WriteLine($"HoyoverseBackgroundService: 开始请求 {server} 背景");
-
+                
                 var apiUrl = server switch
                 {
-                    ServerType.CN => CN_API,
-                    ServerType.OS => OS_API,
-                    _ => CN_API
+                    ServerType.CN => ApiEndpoints.BackgroundCnApi,
+                    ServerType.OS => ApiEndpoints.BackgroundOsApi,
+                    _ => ApiEndpoints.BackgroundCnApi
                 };
 
                 Debug.WriteLine($"HoyoverseBackgroundService: 请求 URL: {apiUrl}");

@@ -22,20 +22,6 @@
                         <CubicEase EasingMode="EaseOut"/>
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
-                <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
-                                 Storyboard.TargetProperty="ScaleX"
-                                 From="0.9" To="1" Duration="0:0:0.6">
-                    <DoubleAnimation.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
-                    </DoubleAnimation.EasingFunction>
-                </DoubleAnimation>
-                <DoubleAnimation Storyboard.TargetName="RootLayoutScale"
-                                 Storyboard.TargetProperty="ScaleY"
-                                 From="0.9" To="1" Duration="0:0:0.6">
-                    <DoubleAnimation.EasingFunction>
-                        <BackEase EasingMode="EaseOut" Amplitude="0.3"/>
-                    </DoubleAnimation.EasingFunction>
-                </DoubleAnimation>
             </Storyboard>
             
             <Style x:Key="PresetButtonStyle" TargetType="Button">

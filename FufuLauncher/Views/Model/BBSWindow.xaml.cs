@@ -15,6 +15,7 @@ using Windows.Graphics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
+using FufuLauncher.Constants;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace FufuLauncher.Views
@@ -71,8 +72,8 @@ namespace FufuLauncher.Views
         private readonly string _deviceId36;
         private Dictionary<string, string> cookieDic = new();
 
-        private const string DefaultUrl = "https://webstatic.mihoyo.com/app/community-game-records/index.html?bbs_presentation_style=fullscreen&game_id=2";
-
+        private const string DefaultUrl = ApiEndpoints.BbsDefaultUrl;
+        
         private const string HideScrollBarScript = """
             let hideStyle = document.createElement('style');
             hideStyle.innerHTML = '::-webkit-scrollbar{ display:none }';
@@ -476,7 +477,7 @@ namespace FufuLauncher.Views
             {
                 if (url.StartsWith("mihoyobbs://article/"))
                 {
-                    url = url.Replace("mihoyobbs://article/", "https://m.miyoushe.com/ys/#/article/");
+                    url = url.Replace("mihoyobbs://article/", ApiEndpoints.MiyousheArticleUrl);
                 }
                 else if (url.StartsWith("mihoyobbs://webview?link="))
                 {

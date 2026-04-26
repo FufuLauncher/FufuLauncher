@@ -76,7 +76,6 @@ namespace FufuLauncher.Views
             {
                 if (File.Exists(_dbPath))
                 {
-                    // 确保解除占用
                     GC.Collect(); 
                     GC.WaitForPendingFinalizers();
                     

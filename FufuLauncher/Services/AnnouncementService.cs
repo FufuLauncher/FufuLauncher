@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
 
@@ -6,7 +7,6 @@ namespace FufuLauncher.Services;
 
 public class AnnouncementService : IAnnouncementService
 {
-    private const string ApiUrl = "https://philia093.cyou/announcement.json";
     private readonly HttpClient _httpClient;
     private readonly ILocalSettingsService _localSettingsService;
     
@@ -21,7 +21,7 @@ public class AnnouncementService : IAnnouncementService
     {
         try
         {
-            var json = await _httpClient.GetStringAsync(ApiUrl);
+            var json = await _httpClient.GetStringAsync(ApiEndpoints.AnnouncementUrl);
             var data = JsonSerializer.Deserialize<AnnouncementData>(json);
 
             if (data != null && !string.IsNullOrEmpty(data.Info))

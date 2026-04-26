@@ -3,6 +3,7 @@ using System.Text.Json;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.ApplicationModel.DataTransfer;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views;
 
@@ -59,7 +60,7 @@ public sealed partial class AboutPage : Page
             {
                 ProcessStartInfo psi = new()
                 {
-                    FileName = "https://t.me/Adimisra6717",
+                    FileName = ApiEndpoints.TelegramContactUrl,
                     UseShellExecute = true
                 };
                 Process.Start(psi);
@@ -87,7 +88,7 @@ public sealed partial class AboutPage : Page
         httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0");
         try
         {
-            var jsonString = await GetJsonFromUrl("https://api.github.com/repos/CodeCubist/FufuLauncher/actions/workflows");
+            var jsonString = await GetJsonFromUrl(ApiEndpoints.GithubWorkflowsApiUrl);
             var workflows = jsonString.RootElement.GetProperty("workflows").EnumerateArray();
             string workflowBaseUrl = "";
             foreach (var workflow in workflows)

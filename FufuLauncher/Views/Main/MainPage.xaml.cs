@@ -219,6 +219,105 @@ public sealed partial class MainPage : Page
     {
         AnimateBlurOpacity(1.0);
     }
+    
+private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
+{
+    var localSettings = App.GetService<ILocalSettingsService>();
+    var checkinService = App.GetService<IHoyoverseCheckinService>();
+
+    string currentUid = (await localSettings.ReadSettingAsync("CustomCheckinUid"))?.ToString() ?? "";
+
+    var textBox = new TextBox
+    {
+        PlaceholderText = "请输入9位数字UID",
+        Text = currentUid,
+        MaxLength = 9,
+        Margin = new Thickness(0, 10, 0, 0)
+    };
+
+    var statusText = new TextBlock
+    {
+        Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red),
+        Margin = new Thickness(0, 5, 0, 0),
+        Visibility = Visibility.Collapsed
+    };
+
+    var panel = new StackPanel();
+    panel.Children.Add(new TextBlock { Text = "留空表示为所有绑定账号签到。输入指定UID则仅为该账号签到", TextWrapping = TextWrapping.Wrap });
+    panel.Children.Add(textBox);
+    panel.Children.Add(statusText);
+
+    var dialog = new ContentDialog
+    {
+        Title = "配置指定签到UID",
+        Content = panel,
+        PrimaryButtonText = "保存",
+        SecondaryButtonText = "清除限制(全部签到)",
+        CloseButtonText = "取消",
+        XamlRoot = this.XamlRoot
+    };
+
+    dialog.PrimaryButtonClick += async (s, args) =>
+    {
+        var deferral = args.GetDeferral();
+        string input = textBox.Text.Trim();
+        
+        if (string.IsNullOrEmpty(input))
+        {
+            await localSettings.SaveSettingAsync("CustomCheckinUid", "");
+            deferral.Complete();
+            return;
+        }
+
+        if (input.Length != 9 || !long.TryParse(input, out _))
+        {
+            args.Cancel = true;
+            statusText.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red);
+            statusText.Text = "UID必须为9位纯数字";
+            statusText.Visibility = Visibility.Visible;
+            deferral.Complete();
+            return;
+        }
+
+        statusText.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.DarkOrange);
+        statusText.Text = "正在从验证可用性";
+        statusText.Visibility = Visibility.Visible;
+
+        try
+        {
+            var uids = await checkinService.GetBoundUidsAsync();
+            if (!uids.Contains(input))
+            {
+                args.Cancel = true;
+                statusText.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red);
+                statusText.Text = "校验失败：该UID未绑定，请确认Cookie内是否包含该角色。";
+            }
+            else
+            {
+                await localSettings.SaveSettingAsync("CustomCheckinUid", input);
+                _ = ViewModel.InitializeAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            args.Cancel = true;
+            statusText.Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Red);
+            statusText.Text = $"验证请求异常: {ex.Message}";
+        }
+        finally
+        {
+            deferral.Complete();
+        }
+    };
+
+    dialog.SecondaryButtonClick += async (s, args) =>
+    {
+        await localSettings.SaveSettingAsync("CustomCheckinUid", "");
+        _ = ViewModel.InitializeAsync();
+    };
+
+    await dialog.ShowAsync();
+}
 
     private void AnimateBlurOpacity(double toOpacity)
     {

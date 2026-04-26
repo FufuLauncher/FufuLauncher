@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.ViewModels;
 
@@ -420,7 +421,7 @@ public class DataViewModel : INotifyPropertyChanged
         try
         {
             using var client = new HttpClient();
-            var url = "http://154.44.25.230:8080/getRoleAvg";
+            var url = ApiEndpoints.RoleAvgUrl;
             var json = await client.GetStringAsync(url);
             var data = JsonSerializer.Deserialize<RootObject>(json);
 
@@ -492,7 +493,7 @@ public class DataViewModel : INotifyPropertyChanged
         try
         {
             using var client = new HttpClient();
-            var url = "http://154.44.25.230:8080/getAbyssRank2";
+            var url = ApiEndpoints.AbyssRank2Url;
             var json = await client.GetStringAsync(url);
             var data = JsonSerializer.Deserialize<AbyssRootObject>(json);
 
@@ -555,7 +556,7 @@ public class DataViewModel : INotifyPropertyChanged
         try
         {
             using var client = new HttpClient();
-            var url = "http://154.44.25.230:8080/getWishHistory";
+            var url = ApiEndpoints.WishHistoryUrl;
             var json = await client.GetStringAsync(url);
             var data = JsonSerializer.Deserialize<WishRootObject>(json);
 
@@ -586,7 +587,7 @@ public class DataViewModel : INotifyPropertyChanged
         try
         {
             using var client = new HttpClient();
-            var url = "http://154.44.25.230:8080/getAbyssRank";
+            var url = ApiEndpoints.SpiralAbyssRankUrl;
             var json = await client.GetStringAsync(url);
             var data = JsonSerializer.Deserialize<SpiralAbyssRoot>(json);
 
@@ -646,7 +647,7 @@ public class DataViewModel : INotifyPropertyChanged
         IsLoading = true;
         try
         {
-            string url = "http://154.44.25.230:8080/getRerunList";
+            string url = ApiEndpoints.RerunListUrl;
             using var client = new HttpClient();
             var json = await client.GetStringAsync(url);
             

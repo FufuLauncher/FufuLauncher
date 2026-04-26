@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Constants;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services.Background
@@ -21,9 +22,7 @@ namespace FufuLauncher.Services.Background
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36");
             Debug.WriteLine("HoyoverseContentService: HttpClient 初始化完成");
         }
-
-        private const string CN_CONTENT_API = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGameContent?launcher_id=jGHBHlcOq1&game_id=1Z8W5NHUQb&language=zh-cn";
-        private const string OS_CONTENT_API = "https://sg-hyp-api.hoyoverse.com/hyp/hyp-connect/api/getGameContent?launcher_id=VYTpXlbWo8&game_id=gopR6Cufr3&language=zh-cn";
+        
 
         public async Task<ContentInfo> GetGameContentAsync(ServerType server)
         {
@@ -33,9 +32,9 @@ namespace FufuLauncher.Services.Background
 
                 var apiUrl = server switch
                 {
-                    ServerType.CN => CN_CONTENT_API,
-                    ServerType.OS => OS_CONTENT_API,
-                    _ => CN_CONTENT_API
+                    ServerType.CN => ApiEndpoints.ContentCnApi,
+                    ServerType.OS => ApiEndpoints.ContentOsApi,
+                    _ => ApiEndpoints.ContentCnApi
                 };
 
                 var response = await _httpClient.GetStringAsync(apiUrl);

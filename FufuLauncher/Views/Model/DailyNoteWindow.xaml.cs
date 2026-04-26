@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Constants;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
@@ -291,7 +292,7 @@ namespace FufuLauncher.Views
         private async Task<bool> FetchDailyMaterialsAsync()
         {
             StatusText = "获取素材...";
-            string url = "https://baike.mihoyo.com/ys/obc/channel/map/193?bbs_presentation_style=no_header&visit_device=pc";
+            string url = ApiEndpoints.BaikeDailyMaterialsUrl;
 
             try
             {
@@ -433,7 +434,7 @@ namespace FufuLauncher.Views
         private async Task<bool> FetchActivitiesAsync()
         {
             StatusText = "获取活动...";
-            string url = "https://baike.mihoyo.com/ys/obc/channel/position/48/53?bbs_presentation_style=no_header&visit_device=pc&no_page_view=1";
+            string url = ApiEndpoints.BaikeActivitiesUrl;
 
             try
             {

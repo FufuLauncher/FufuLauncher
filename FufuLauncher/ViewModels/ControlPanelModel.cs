@@ -15,21 +15,6 @@ public partial class ControlPanelModel : ObservableObject
     [ObservableProperty] private WeeklyPlayTimeStats _weeklyStats = new();
     [ObservableProperty] private bool _isGameRunning;
 
-    private List<InventoryItem> _cachedInventory = new();
-    private readonly string _inventoryDataPath = Path.Combine(AppContext.BaseDirectory, "inventory.json");
-
-    public List<InventoryGroup> GetGroupedInventory()
-    {
-        if (!_cachedInventory.Any() && File.Exists(_inventoryDataPath))
-        {
-            var json = File.ReadAllText(_inventoryDataPath);
-            _cachedInventory = JsonSerializer.Deserialize<List<InventoryItem>>(json) ?? new();
-        }
-        return _cachedInventory.GroupBy(x => x.Category)
-            .Select(g => new InventoryGroup { Category = g.Key, Items = g.ToList() })
-            .ToList();
-    }
-
     public ControlPanelModel()
     {
         var baseDocsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -91,80 +76,6 @@ public partial class ControlPanelModel : ObservableObject
         {
             Debug.WriteLine($"保存游戏时间配置失败: {ex.Message}");
         }
-    }
-
-    public async Task<bool> SyncInventoryFromMihoyoAsync()
-    {
-        try
-        {
-            string configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
-            if (!File.Exists(configPath)) return false;
-
-            var configJson = JsonDocument.Parse(File.ReadAllText(configPath));
-            if (!configJson.RootElement.TryGetProperty("cookie", out var cookieElement)) return false;
-            string cookie = cookieElement.GetString();
-            if (string.IsNullOrEmpty(cookie)) return false;
-
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Cookie", cookie);
-            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0");
-            client.DefaultRequestHeaders.Add("Referer", "https://webstatic.mihoyo.com/");
-            
-            var roleResp = await client.GetStringAsync("https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn");
-            using var roleDoc = JsonDocument.Parse(roleResp);
-            var role = roleDoc.RootElement.GetProperty("data").GetProperty("list")[0];
-            string uid = role.GetProperty("game_uid").GetString();
-            string region = role.GetProperty("region").GetString();
-            
-            var avatarUrl = $"https://api-takumi.mihoyo.com/event/e20200928calculate/v1/sync/avatar/list?game_biz=hk4e_cn&region={region}&uid={uid}";
-            var avatarResp = await client.GetStringAsync(avatarUrl);
-            using var avatarDoc = JsonDocument.Parse(avatarResp);
-            var avatars = avatarDoc.RootElement.GetProperty("data").GetProperty("list");
-            var avatarIds = avatars.EnumerateArray().Select(x => x.GetProperty("id").GetInt32()).Take(20).ToList();
-            
-            var computeUrl = "https://api-takumi.mihoyo.com/event/e20200928calculate/v1/batch_compute";
-            var requestData = new { items = avatarIds.Select(id => new { avatar_id = id, level_current = 1, level_target = 90 }).ToList() };
-
-            var content = new StringContent(JsonSerializer.Serialize(requestData), System.Text.Encoding.UTF8, "application/json");
-            var computeResp = await client.PostAsync(computeUrl, content);
-            var computeResult = await computeResp.Content.ReadAsStringAsync();
-
-            using var computeDoc = JsonDocument.Parse(computeResult);
-            var data = computeDoc.RootElement.GetProperty("data");
-            
-            var newList = new List<InventoryItem>();
-            if (data.TryGetProperty("inventory_items", out var invItems))
-            {
-                foreach (var item in invItems.EnumerateArray())
-                {
-                    int id = item.GetProperty("id").GetInt32();
-                    newList.Add(new InventoryItem
-                    {
-                        Id = id,
-                        Name = item.GetProperty("name").GetString(),
-                        OwnedCount = item.GetProperty("num").GetInt32(),
-                        IconUrl = item.GetProperty("icon").GetString(),
-                        Category = GetCategoryById(id)
-                    });
-                }
-            }
-            
-            _cachedInventory = newList;
-            File.WriteAllText(_inventoryDataPath, JsonSerializer.Serialize(_cachedInventory, new JsonSerializerOptions { WriteIndented = true }));
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    
-    private string GetCategoryById(int id)
-    {
-        if (id == 202) return "货币";
-        if (id >= 104000 && id <= 104003) return "经验书";
-        if (id >= 100000 && id <= 110000) return "角色培养";
-        return "其它材料";
     }
 
     private async void LoadConfig()

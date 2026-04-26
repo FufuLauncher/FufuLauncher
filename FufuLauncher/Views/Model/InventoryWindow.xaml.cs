@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
+using FufuLauncher.Constants;
 using FufuLauncher.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -34,7 +35,7 @@ namespace FufuLauncher.Views
             if (_httpClient.DefaultRequestHeaders.UserAgent.Count == 0)
             {
                 _httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-                _httpClient.DefaultRequestHeaders.Add("Referer", "https://webstatic.mihoyo.com");
+                _httpClient.DefaultRequestHeaders.Add("Referer", ApiEndpoints.WebstaticRefererUrl);
             }
 
             _ = LoadInitialDataAsync();
@@ -140,7 +141,7 @@ namespace FufuLauncher.Views
 
         private async Task<string?> GetUidAsync(string cookie)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn");
+            var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpoints.MihoyoBbsUserGameRolesUrl); 
             request.Headers.Add("Cookie", cookie);
             var response = await _httpClient.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();
@@ -151,7 +152,7 @@ namespace FufuLauncher.Views
         private async Task<List<InventoryItemModel>> SyncInventoryFromApiAsync(string cookie, string? uid)
         {
             var avatarPayload = new { page = 1, size = 1000, is_all = true };
-            var avatarResp = await PostWithCookieAsync("https://api-takumi.mihoyo.com/event/e20200928calculate/v1/avatar/list", avatarPayload, cookie);
+            var avatarResp = await PostWithCookieAsync(ApiEndpoints.CalculateAvatarListUrl, avatarPayload, cookie); 
             using var avatarDoc = JsonDocument.Parse(avatarResp);
 
             var avatars = new List<(int Id, List<int> SkillIds, int WeaponCatId)>();
@@ -166,7 +167,7 @@ namespace FufuLauncher.Views
             }
 
             var weaponPayload = new { page = 1, size = 1000, weapon_levels = new[] { 1, 2, 3, 4, 5 } };
-            var weaponResp = await PostWithCookieAsync("https://api-takumi.mihoyo.com/event/e20200928calculate/v1/weapon/list", weaponPayload, cookie);
+            var weaponResp = await PostWithCookieAsync(ApiEndpoints.CalculateWeaponListUrl, weaponPayload, cookie);
             using var weaponDoc = JsonDocument.Parse(weaponResp);
             var weaponDict = weaponDoc.RootElement.GetProperty("data").GetProperty("list").EnumerateArray()
                 .GroupBy(w => w.GetProperty("weapon_cat_id").GetInt32()).ToDictionary(g => g.Key, g => g.First());
@@ -186,7 +187,7 @@ namespace FufuLauncher.Views
             }).ToList();
 
             var computePayload = new { items = deltas, region = "cn_gf01", uid };
-            var computeResp = await PostWithCookieAsync("https://api-takumi.mihoyo.com/event/e20200928calculate/v3/batch_compute", computePayload, cookie);
+            var computeResp = await PostWithCookieAsync(ApiEndpoints.CalculateBatchComputeUrl, computePayload, cookie); 
             using var computeDoc = JsonDocument.Parse(computeResp);
 
             var items = new List<InventoryItemModel>();

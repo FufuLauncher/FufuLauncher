@@ -12,6 +12,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Windows.Storage.Pickers;
+using FufuLauncher.Constants;
 using FufuLauncher.Services;
 using FufuLauncher.ViewModels;
 using WinRT.Interop;
@@ -107,7 +108,7 @@ namespace FufuLauncher.Views
         {
             if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
             {
-                await ShowError("未找到游戏路径，请先在设置中指定游戏位置。");
+                await ShowError("未找到游戏路径，请先在设置中指定游戏位置");
                 return;
             }
 
@@ -122,9 +123,9 @@ namespace FufuLauncher.Views
             newWindow.ExtendsContentIntoTitleBar = true;
             newWindow.Title = "校验游戏完整性";
 
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(newWindow);
-            var winId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-            var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(winId);
+            var hWnd = WindowNative.GetWindowHandle(newWindow);
+            var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
+            var appWindow = AppWindow.GetFromWindowId(winId);
             appWindow.Resize(new Windows.Graphics.SizeInt32(600, 400));
 
             var rootFrame = new Frame();
@@ -218,7 +219,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
         string customParamsDisplay = string.IsNullOrWhiteSpace(customLaunchParams) ? "无" : customLaunchParams;
 
         var contentPanel = new StackPanel { Spacing = 10 };
-        contentPanel.Children.Add(new TextBlock { Text = "请选择您想要执行的操作：\n\n• 创建桌面快捷方式：直接在桌面生成图标（将以管理员权限运行）。\n• 复制启动命令：获取完整命令行，可用于 Steam 或 脚本。", TextWrapping = TextWrapping.Wrap });
+        contentPanel.Children.Add(new TextBlock { Text = "请选择您想要执行的操作：\n\n你需要创建桌面快捷方式：直接在桌面生成图标（将以管理员权限运行？\n还是复制启动命令：获取完整命令行，可用于 Steam 或 脚本？", TextWrapping = TextWrapping.Wrap });
         contentPanel.Children.Add(new TextBlock { Text = $"已导入启动参数：{customParamsDisplay}", Opacity = 0.7, TextWrapping = TextWrapping.Wrap });
         contentPanel.Children.Add(new TextBlock { Text = "指定注入配置（预设）：", Margin = new Thickness(0, 5, 0, 0) });
         contentPanel.Children.Add(presetComboBox);
@@ -274,7 +275,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
 
             shortcut.Save();
 
-            using (FileStream fs = new FileStream(shortcutPath, FileMode.Open, FileAccess.ReadWrite))
+            using (FileStream fs = new(shortcutPath, FileMode.Open, FileAccess.ReadWrite))
             {
                 fs.Seek(21, SeekOrigin.Begin);
                 int b = fs.ReadByte();
@@ -285,7 +286,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
             var dialog = new ContentDialog
             {
                 Title = "快捷方式已创建",
-                Content = "已创建桌面快捷方式，默认将以管理员权限运行。请检查你的电脑桌面。",
+                Content = "已创建桌面快捷方式，默认将以管理员权限运行。请检查你的电脑桌面",
                 CloseButtonText = "确定",
                 XamlRoot = XamlRoot
             };
@@ -391,7 +392,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                 using var client = new HttpClient();
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
 
-                var json = await client.GetStringAsync("https://cnb.cool/bettergi/genshin-redeem-code/-/git/raw/main/codes.json");
+                var json = await client.GetStringAsync(ApiEndpoints.RedeemCodesUrl);
 
                 var options = new JsonSerializerOptions
                 {
@@ -771,7 +772,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                         Title = "无效路径",
                         Content = "输入的路径不存在，请检查路径是否正确。",
                         PrimaryButtonText = "确定",
-                        XamlRoot = this.XamlRoot
+                        XamlRoot = XamlRoot
                     };
                     await dialog.ShowAsync();
 
@@ -893,11 +894,11 @@ private async Task ShowAutoPathDialog(string foundPath)
         var dialog = new ContentDialog
         {
             Title = "自动找到游戏路径",
-            Content = $"检测到可能的《原神》安装路径：\n\n{foundPath}\n\n是否应用此路径？",
+            Content = $"检测到可能的安装路径：\n\n{foundPath}\n\n是否应用此路径？",
             PrimaryButtonText = "应用",
             CloseButtonText = "手动选择",
             DefaultButton = ContentDialogButton.Primary,
-            XamlRoot = this.XamlRoot
+            XamlRoot = XamlRoot
         };
 
         Debug.WriteLine("[Debug] 准备调用 dialog.ShowAsync()...");
@@ -1036,7 +1037,7 @@ private async Task LoadGameInfoAsync(string gamePath)
             try
             {
                 using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
-                var url = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGameBranches?launcher_id=jGHBHlcOq1&language=zh-cn&game_ids[]=1Z8W5NHUQb";
+                var url = ApiEndpoints.GameBranchesUrl;
 
                 var response = await client.GetStringAsync(url);
                 var json = JsonDocument.Parse(response);

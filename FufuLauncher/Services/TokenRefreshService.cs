@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
+using FufuLauncher.Constants;
 using MihoyoBBS;
 
 namespace FufuLauncher.Services;
@@ -68,12 +69,12 @@ public class TokenRefreshService
             string webTicket = await CreateWebQrCodeAsync();
             if (string.IsNullOrEmpty(webTicket)) return;
 
-            bool scanResult = await SimulateAppActionAsync("https://passport-api.mihoyo.com/account/ma-cn-passport/app/scanQRLogin", webTicket, authCookie);
+            bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie);
             if (!scanResult) return;
 
             await Task.Delay(500);
             
-            bool confirmResult = await SimulateAppActionAsync("https://passport-api.mihoyo.com/account/ma-cn-passport/app/confirmQRLogin", webTicket, authCookie);
+            bool confirmResult = await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie);
             if (!confirmResult) return;
 
             var v2Cookies = await GetWebQrStatusAndExtractCookiesAsync(webTicket);
@@ -111,7 +112,7 @@ public class TokenRefreshService
     {
         try
         {
-            string url = "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn";
+            string url = ApiEndpoints.MihoyoBbsUserGameRolesUrl;
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
 
             request.Headers.TryAddWithoutValidation("Accept", "application/json, text/plain, */*");
@@ -170,7 +171,7 @@ public class TokenRefreshService
 
     private async Task<string> CreateWebQrCodeAsync()
     {
-        string url = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/createQRLogin";
+        string url = ApiEndpoints.PassportCreateQrLoginUrl;
         var body = new JsonObject();
         string bodyStr = body.ToJsonString(_jsonOptions);
 
@@ -213,7 +214,7 @@ public class TokenRefreshService
 
     private async Task<Dictionary<string, string>> GetWebQrStatusAndExtractCookiesAsync(string ticket)
     {
-        string url = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/queryQRLoginStatus";
+        string url = ApiEndpoints.PassportQueryQrLoginStatusUrl;
         var body = new JsonObject { ["ticket"] = ticket };
         string bodyStr = body.ToJsonString(_jsonOptions);
 

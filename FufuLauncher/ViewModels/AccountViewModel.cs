@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
@@ -85,12 +86,12 @@ public partial class AccountViewModel : ObservableRecipient
     
     private async Task LockAccountAsync()
     {
-        await OpenSecurityWindowInternalAsync("https://user.mihoyo.com/login-platform/index.html?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&steps_bar=1&uc_type=3&redirect_url=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&st=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&succ_back_type=redirect&fail_back_type=reLogin&ux_mode=redirect#/account/lock", "正在打开账号冻结页面...");
+        await OpenSecurityWindowInternalAsync(ApiEndpoints.AccountLockUrl, "正在打开账号冻结页面...");
     }
     
     private async Task OpenSecurityCenterAsync()
     {
-        await OpenSecurityWindowInternalAsync("https://user.mihoyo.com/passport/index.html?legacy_env=production#/home/security", "正在打开账号安全中心...");
+        await OpenSecurityWindowInternalAsync(ApiEndpoints.AccountSecurityUrl, "正在打开账号安全中心...");
     }
     
     private async Task OpenSecurityWindowInternalAsync(string url, string loadingMsg)

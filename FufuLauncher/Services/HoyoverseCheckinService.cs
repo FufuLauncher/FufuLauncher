@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using FufuLauncher.Contracts.Services;
 using MihoyoBBS;
 
@@ -10,37 +9,30 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
     private async Task<Config> LoadConfigWithLoggingAsync()
     {
         var path = Path.Combine(AppContext.BaseDirectory, "config.json");
-        Debug.WriteLine($" [签到] 尝试加载配置文件");
-        Debug.WriteLine($" [签到] 文件路径: {path}");
-        Debug.WriteLine($" [签到] 文件存在: {File.Exists(path)}");
-
-        if (!File.Exists(path))
-        {
-            Debug.WriteLine(" [签到] 配置文件不存在！");
-            return new Config();
-        }
+        if (!File.Exists(path)) return new Config();
 
         try
         {
             var json = await File.ReadAllTextAsync(path);
-
-            var config = JsonSerializer.Deserialize<Config>(json);
-            Debug.WriteLine($" [签到] 反序列化成功");
-            Debug.WriteLine($" [签到] Cookie长度: {config?.Account?.Cookie?.Length ?? 0}");
-            Debug.WriteLine($" [签到] Enable状态: {config?.Games?.Cn?.Enable}");
-            Debug.WriteLine($" [签到] Checkin状态: {config?.Games?.Cn?.Genshin?.Checkin}");
-
-            return config ?? new Config();
+            return JsonSerializer.Deserialize<Config>(json) ?? new Config();
         }
-        catch (Exception ex)
+        catch
         {
-            Debug.WriteLine($" [签到] 反序列化失败: {ex.Message}");
-            Debug.WriteLine($" [签到] 异常详情:\n{ex.StackTrace}");
             return new Config();
         }
     }
 
-    public async Task<(string status, string summary)> GetCheckinStatusAsync()
+    public async Task<List<string>> GetBoundUidsAsync()
+    {
+        var config = await LoadConfigWithLoggingAsync();
+        if (!config.Games.Cn.Enable) return new List<string>();
+
+        var genshin = new Genshin();
+        await genshin.InitializeAsync(config).ConfigureAwait(false);
+        return genshin.AccountList.Select(a => a.GameUid).ToList();
+    }
+
+    public async Task<(string status, string summary)> GetCheckinStatusAsync(string targetUid = null)
     {
         var config = await LoadConfigWithLoggingAsync();
         if (!config.Games.Cn.Enable || !config.Games.Cn.Genshin.Checkin)
@@ -52,7 +44,10 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         if (genshin.AccountList.Count == 0)
             return ("未检测到账号", "请检查Cookie和绑定");
 
-        var account = genshin.AccountList[0];
+        var account = string.IsNullOrEmpty(targetUid) 
+            ? genshin.AccountList[0] 
+            : genshin.AccountList.FirstOrDefault(a => a.GameUid == targetUid) ?? genshin.AccountList[0];
+
         var isSignData = await genshin.IsSignAsync(account.Region, account.GameUid, false).ConfigureAwait(false);
 
         return isSignData?.IsSign == true
@@ -60,33 +55,20 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
             : ("今日未签到", $"账号: {account.Nickname} (可签到)");
     }
 
-    public async Task<(bool success, string message)> ExecuteCheckinAsync()
+    public async Task<(bool success, string message)> ExecuteCheckinAsync(string targetUid = null)
     {
-        Debug.WriteLine($"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-        Debug.WriteLine($" [签到] 开始执行签到");
-
         var config = await LoadConfigWithLoggingAsync();
-
         if (!config.Games.Cn.Enable || !config.Games.Cn.Genshin.Checkin)
         {
-            Debug.WriteLine(" [签到] 功能未启用");
             return (false, "功能未启用");
         }
         
         var genshin = new Genshin();
-        
         await genshin.InitializeAsync(config).ConfigureAwait(false);
-
-        Debug.WriteLine($" [签到] 初始化完成，账号数量: {genshin.AccountList.Count}");
         
-        var result = await genshin.SignAccountAsync(config).ConfigureAwait(false);
-
-        Debug.WriteLine($" [签到] 签到结果:\n{result}");
-
+        var result = await genshin.SignAccountAsync(config, targetUid).ConfigureAwait(false);
         var isSuccess = !result.Contains("失败") && !result.Contains("异常");
         var summary = string.Join("", result.Split('\n').Take(2));
-
-        Debug.WriteLine($" [签到] 执行完成: success={isSuccess}, summary={summary}");
 
         return (isSuccess, summary);
     }

@@ -51,7 +51,7 @@ public sealed partial class UpdateNotificationWindow : WindowEx
         }
         catch { }
         
-        await System.Threading.Tasks.Task.Delay(400);
+        await Task.Delay(400);
         
         var updateWindow = new UpdateWindow();
         updateWindow.Activate();

@@ -10,6 +10,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.Web.WebView2.Core;
 using Windows.System;
 using Windows.UI;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views;
 
@@ -48,8 +49,8 @@ public sealed partial class VideoResourcesWindow : Window, INotifyPropertyChange
 
     public Visibility ToVisibility(bool isLoading) => isLoading ? Visibility.Visible : Visibility.Collapsed;
 
-    private const string CHAR_VIDEO_URL = "https://baike.mihoyo.com/ys/obc/channel/map/80/212?bbs_presentation_style=no_header&visit_device=pc";
-    private const string CUTSCENE_URL = "https://baike.mihoyo.com/ys/obc/channel/map/80/81?bbs_presentation_style=no_header&visit_device=pc";
+    private const string CHAR_VIDEO_URL = ApiEndpoints.CharVideoUrl;
+    private const string CUTSCENE_URL = ApiEndpoints.CutsceneVideoUrl;
 
     public VideoResourcesWindow()
     {

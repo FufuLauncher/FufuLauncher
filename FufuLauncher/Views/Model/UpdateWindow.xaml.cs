@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
 using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views
 {
@@ -15,7 +16,7 @@ namespace FufuLauncher.Views
 
     public sealed partial class UpdateWindow : Window
     {
-        private readonly string _shareUrl = "https://wwaoi.lanzouu.com/b00wnb99ef";
+        private readonly string _shareUrl = ApiEndpoints.UpdateShareUrl;
         private string _targetFileName = string.Empty;
         private string _targetFileUrl = string.Empty;
         private string _directDownloadUrl = string.Empty;

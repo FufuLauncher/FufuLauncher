@@ -1,3 +1,4 @@
+using FufuLauncher.Constants;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
@@ -48,7 +49,7 @@ public sealed partial class DataPage : Page
             TimelineWebView.NavigationCompleted += TimelineWebView_NavigationCompleted;
             TimelineWebView.WebMessageReceived += TimelineWebView_WebMessageReceived;
             
-            TimelineWebView.Source = new Uri("https://paimon.moe/timeline");
+            TimelineWebView.Source = new Uri(ApiEndpoints.PaimonTimelineUrl);
         }
         else
         {

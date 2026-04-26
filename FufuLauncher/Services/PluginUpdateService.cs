@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using System.Text;
+using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 
 namespace FufuLauncher.Services
@@ -28,8 +29,8 @@ namespace FufuLauncher.Services
 
                 logBuilder.AppendLine("[插件更新] 自动更新已启用，开始获取最新普通版插件...");
 
-                string proxyUrl = "http://kr2-proxy.gitwarp.top:9980/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";
-                string rawUrl = "https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip?raw=true";
+                string proxyUrl = ApiEndpoints.PluginProxyUrl;
+                string rawUrl = ApiEndpoints.PluginRawUrl;
                 
                 string tempPath = Path.Combine(Path.GetTempPath(), "FuFuPlugin_AutoUpdate.zip");
                 string extractPath = Path.Combine(Path.GetTempPath(), "FuFuPlugin_AutoUpdate_Extract_" + Guid.NewGuid());

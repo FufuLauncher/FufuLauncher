@@ -271,19 +271,19 @@
                                 CornerRadius="4" 
                                 Padding="12,6"
                                 Margin="0,0,8,0"/>
-
-                        <Border Grid.Column="1"
+                        
+                        <Button Grid.Column="1" 
+                                Click="ChangeUidButton_Click" 
                                 Margin="0,0,8,0" 
-                                Width="32" Height="32" 
+                                Width="32" 
+                                Height="32" 
                                 Background="#1AFFFFFF" 
-                                CornerRadius="4">
-                            <TextBlock Text="{x:Bind ViewModel.CurrentDayText}" 
-                                       FontSize="13" 
-                                       FontWeight="Bold" 
-                                       Foreground="White"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                        </Border>
+                                BorderThickness="0"
+                                CornerRadius="4" 
+                                Padding="0" 
+                                ToolTipService.ToolTip="指定/切换签到UID">
+                            <FontIcon Glyph="&#xE77B;" FontSize="14" Foreground="White"/>
+                        </Button>
 
                         <Border Grid.Column="2" 
                                 Width="32" Height="32" 

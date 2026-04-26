@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Constants;
 using FufuLauncher.Models;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Input;
@@ -98,10 +99,10 @@ public sealed partial class GachaAnalysisWindow : Window
             }
 
             var results = new List<ScrapedMetadata>();
-            var chars = await ScrapeUrlSmartAsync("https://act.mihoyo.com/ys/event/calculator/index.html#/character", true);
+            var chars = await ScrapeUrlSmartAsync(ApiEndpoints.GachaCalculatorCharacterUrl, true); 
             results.AddRange(chars);
 
-            var weapons = await ScrapeUrlSmartAsync("https://act.mihoyo.com/ys/event/calculator/index.html#/weapon", false);
+            var weapons = await ScrapeUrlSmartAsync(ApiEndpoints.GachaCalculatorWeaponUrl, false); 
             results.AddRange(weapons);
 
             ViewModel.UpdateMetadata(results);

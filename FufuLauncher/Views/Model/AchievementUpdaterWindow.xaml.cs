@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views
 {
@@ -66,7 +67,7 @@ namespace FufuLauncher.Views
 
             await _scraperWebView.EnsureCoreWebView2Async();
             _scraperWebView.WebMessageReceived += ScraperWebView_WebMessageReceived;
-            _scraperWebView.Source = new Uri("https://seelie.me/achievements");
+            _scraperWebView.Source = new Uri(ApiEndpoints.SeelieAchievementsUrl);
         }
 
         private void CreateProgressDialog()

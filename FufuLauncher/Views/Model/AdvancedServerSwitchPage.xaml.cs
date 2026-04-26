@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System.Security.Cryptography;
 using System.Text.Json;
+using FufuLauncher.Constants;
 using FufuLauncher.Protobuf;
 using ZstdSharp;
 
@@ -106,16 +107,16 @@ namespace FufuLauncher.Views
 
         public const string CN_LAUNCHER_ID = "jGHBHlcOq1";
         public const string CN_GAME_ID = "1Z8W5NHUQb";
-        public const string CN_API = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api";
-        public const string CN_SOPHON = "https://downloader-api.mihoyo.com/downloader/sophon_chunk/api";
+        public const string CN_API = ApiEndpoints.HypCnApi; 
+        public const string CN_SOPHON = ApiEndpoints.SophonCnApi;
         
         public const string BILI_LAUNCHER_ID = "umfgRO5gh5";
         public const string BILI_GAME_ID = "T2S0Gz4Dr2";
 
         public const string OS_LAUNCHER_ID = "VYTpXlbWo8";
         public const string OS_GAME_ID = "gopR6Cufr3";
-        public const string OS_API = "https://sg-hyp-api.hoyoverse.com/hyp/hyp-connect/api";
-        public const string OS_SOPHON = "https://sg-downloader-api.hoyoverse.com/downloader/sophon_chunk/api";
+        public const string OS_API = ApiEndpoints.HypOsApi; 
+        public const string OS_SOPHON = ApiEndpoints.SophonOsApi; 
     }
 
     public static class HashUtility

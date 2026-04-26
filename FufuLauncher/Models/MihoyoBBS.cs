@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Constants;
 
 namespace MihoyoBBS
 {
@@ -393,11 +394,11 @@ namespace MihoyoBBS
 
         protected List<RewardItem> CheckinRewards;
 
-        protected static readonly string WebApi = "https://api-takumi.mihoyo.com";
-        protected readonly string AccountInfoUrl = $"{WebApi}/binding/api/getUserGameRolesByCookie";
-        protected readonly string CheckinRewardsUrl = $"{WebApi}/event/luna/home";
-        protected readonly string IsSignUrl = $"{WebApi}/event/luna/info";
-        protected readonly string SignUrl = $"{WebApi}/event/luna/sign";
+        protected static readonly string WebApi = ApiEndpoints.MihoyoBbsWebApi;
+        protected readonly string AccountInfoUrl = ApiEndpoints.MihoyoBbsAccountInfoUrl;
+        protected readonly string CheckinRewardsUrl = ApiEndpoints.MihoyoBbsCheckinRewardsUrl;
+        protected readonly string IsSignUrl = ApiEndpoints.MihoyoBbsIsSignUrl;
+        protected readonly string SignUrl = ApiEndpoints.MihoyoBbsSignUrl;
 
         protected GameCheckin(string gameId, string gameName, string actId, string playerName = "玩家")
         {
@@ -609,143 +610,127 @@ namespace MihoyoBBS
 
             return result;
         }
+        
+public async Task<string> SignAccountAsync(Config config, string targetUid = null)
+{
+    var returnData = $"{GameName}: ";
 
-        public async Task<string> SignAccountAsync(Config config)
+    if (AccountList == null || AccountList.Count == 0)
+    {
+        returnData += $"\n并没有绑定任何{GameName}账号";
+        return returnData;
+    }
+
+    foreach (var account in AccountList)
+    {
+        if (config.Games.Cn.Genshin.BlackList.Contains(account.GameUid))
         {
-            var returnData = $"{GameName}: ";
+            continue;
+        }
+        
+        if (!string.IsNullOrEmpty(targetUid) && account.GameUid != targetUid)
+        {
+            continue;
+        }
 
-            if (AccountList == null || AccountList.Count == 0)
+        await Task.Delay(new Random().Next(2000, 8000));
+
+        var isData = await IsSignAsync(account.Region, account.GameUid);
+        if (isData == null)
+        {
+            returnData += $"\n{account.Nickname}，获取签到信息失败";
+            continue;
+        }
+
+        if (isData.FirstBind)
+        {
+            returnData += $"\n{account.Nickname}是第一次绑定米游社，请先手动签到一次";
+            continue;
+        }
+
+        var signDays = isData.TotalSignDay - 1;
+
+        if (isData.IsSign)
+        {
+            if (CheckinRewards != null && CheckinRewards.Count > signDays)
             {
+                returnData += $"\n{account.Nickname}今天已经签到过了";
+                returnData += $"\n今天获得的奖励是{Tools.GetItem(CheckinRewards[signDays])}";
+                signDays += 1;
+            }
+            else
+            {
+                returnData += $"\n{account.Nickname}今天已经签到过了";
+                signDays += 1;
+            }
+        }
+        else
+        {
+            await Task.Delay(new Random().Next(2000, 8000));
 
-                returnData += $"\n并没有绑定任何{GameName}账号";
-                return returnData;
+            var req = await CheckIn(account);
+            if (req == null)
+            {
+                returnData += $"\n{account.Nickname}，本次签到失败";
+                continue;
             }
 
-            foreach (var account in AccountList)
+            if ((int)req.StatusCode != 429)
             {
-                if (config.Games.Cn.Genshin.BlackList.Contains(account.GameUid))
+                var responseText = await req.Content.ReadAsStringAsync();
+                var data = JsonSerializer.Deserialize<ApiResponse<SignResponseData>>(responseText);
+
+                if (data != null)
                 {
-
-                    continue;
-                }
-
-                await Task.Delay(new Random().Next(2000, 8000));
-
-                var isData = await IsSignAsync(account.Region, account.GameUid);
-                if (isData == null)
-                {
-
-                    returnData += $"\n{account.Nickname}，获取签到信息失败";
-                    continue;
-                }
-
-                if (isData.FirstBind)
-                {
-
-                    returnData += $"\n{account.Nickname}是第一次绑定米游社，请先手动签到一次";
-                    continue;
-                }
-
-                var signDays = isData.TotalSignDay - 1;
-
-                if (isData.IsSign)
-                {
-                    if (CheckinRewards != null && CheckinRewards.Count > signDays)
+                    if (data.RetCode == 0 && data.Data != null && data.Data.Success == 0)
                     {
-
-
-                        returnData += $"\n{account.Nickname}今天已经签到过了";
-                        returnData += $"\n今天获得的奖励是{Tools.GetItem(CheckinRewards[signDays])}";
-                        signDays += 1;
-                    }
-                    else
-                    {
-
-                        returnData += $"\n{account.Nickname}今天已经签到过了";
-                        signDays += 1;
-                    }
-                }
-                else
-                {
-                    await Task.Delay(new Random().Next(2000, 8000));
-
-                    var req = await CheckIn(account);
-                    if (req == null)
-                    {
-
-                        returnData += $"\n{account.Nickname}，本次签到失败";
-                        continue;
-                    }
-
-                    if ((int)req.StatusCode != 429)
-                    {
-                        var responseText = await req.Content.ReadAsStringAsync();
-                        var data = JsonSerializer.Deserialize<ApiResponse<SignResponseData>>(responseText);
-
-                        if (data != null)
+                        var rewardIndex = (signDays == 0) ? 0 : signDays + 1;
+                        if (CheckinRewards != null && CheckinRewards.Count > rewardIndex)
                         {
-                            if (data.RetCode == 0 && data.Data != null && data.Data.Success == 0)
-                            {
-
-
-                                var rewardIndex = (signDays == 0) ? 0 : signDays + 1;
-                                if (CheckinRewards != null && CheckinRewards.Count > rewardIndex)
-                                {
-
-                                    returnData += $"\n{account.Nickname}签到成功";
-                                    returnData += $"\n奖励是{Tools.GetItem(CheckinRewards[rewardIndex])}";
-                                    signDays += 2;
-                                }
-                                else
-                                {
-
-                                    returnData += $"\n{account.Nickname}签到成功";
-                                    signDays += 2;
-                                }
-                            }
-                            else if (data.RetCode == -5003)
-                            {
-
-                                if (CheckinRewards != null && CheckinRewards.Count > signDays)
-                                {
-
-                                    returnData += $"\n{account.Nickname}今天已经签到过了";
-                                    returnData += $"\n奖励是{Tools.GetItem(CheckinRewards[signDays])}";
-                                }
-                            }
-                            else
-                            {
-                                var s = "账号签到失败！";
-                                if (data.Data != null && data.Data.Success != -1)
-                                {
-                                    s += "原因：验证码\njson 信息：" + responseText;
-                                }
-                                
-                                returnData += $"\n{account.Nickname}，触发验证码，本次签到失败";
-                                continue;
-                            }
+                            returnData += $"\n{account.Nickname}签到成功";
+                            returnData += $"\n奖励是{Tools.GetItem(CheckinRewards[rewardIndex])}";
+                            signDays += 2;
+                        }
+                        else
+                        {
+                            returnData += $"\n{account.Nickname}签到成功";
+                            signDays += 2;
+                        }
+                    }
+                    else if (data.RetCode == -5003)
+                    {
+                        if (CheckinRewards != null && CheckinRewards.Count > signDays)
+                        {
+                            returnData += $"\n{account.Nickname}今天已经签到过了";
+                            returnData += $"\n奖励是{Tools.GetItem(CheckinRewards[signDays])}";
                         }
                     }
                     else
                     {
-
-                        returnData += $"\n{account.Nickname}，本次签到失败";
+                        returnData += $"\n{account.Nickname}，触发验证码，本次签到失败";
                         continue;
                     }
                 }
-
-                returnData += $"\n{account.Nickname}已签到{signDays}天";
-                LastSignDays = signDays;
-                
-                if (CheckinRewards != null && CheckinRewards.Count > signDays - 1)
-                {
-                    LastRewardItem = Tools.GetItem(CheckinRewards[signDays - 1]);
-                    returnData += $"\n奖励是{LastRewardItem}";
-                }
             }
-
-            return returnData;
+            else
+            {
+                returnData += $"\n{account.Nickname}，本次签到失败";
+                continue;
+            }
         }
+
+        returnData += $"\n{account.Nickname}已签到{signDays}天";
+        LastSignDays = signDays;
+        
+        if (CheckinRewards != null && CheckinRewards.Count > signDays - 1)
+        {
+            LastRewardItem = Tools.GetItem(CheckinRewards[signDays - 1]);
+            returnData += $"\n奖励是{LastRewardItem}";
+        }
+    }
+
+    return returnData;
+}
 
         private void AddHeadersToRequest(HttpRequestMessage request)
         {

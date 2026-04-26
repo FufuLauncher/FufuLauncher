@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using FufuLauncher.Constants;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
@@ -9,8 +10,7 @@ namespace FufuLauncher.Views
     {
         public event Action<double, double> ResizeRequested;
         public event Action CloseRequested;
-        private const string AnnouncementUrl = "https://sdk.mihoyo.com/hk4e/announcement/index.html?auth_appid=announcement&authkey_ver=1&bundle_id=hk4e_cn&channel_id=1&game=hk4e&game_biz=hk4e_cn&lang=zh-cn&level=60&platform=pc&region=cn_gf01&sdk_presentation_style=fullscreen&sdk_screen_transparent=true&sign_type=2&uid=100000000";
-
+        
         public AnnouncementPage()
         {
             InitializeComponent();
@@ -51,7 +51,7 @@ namespace FufuLauncher.Views
                 };
 
                 AnnouncementWebView.NavigationCompleted += AnnouncementWebView_NavigationCompleted;
-                AnnouncementWebView.Source = new Uri(AnnouncementUrl);
+                AnnouncementWebView.Source = new Uri(ApiEndpoints.Hk4eAnnouncementPageUrl);
             }
             catch (Exception ex)
             {

@@ -374,7 +374,6 @@ namespace FufuLauncher.ViewModels
         
         partial void OnIsAutoClickerEnabledChanged(bool value)
         {
-            // 防止在初始化或状态回滚时循环触发
             if (_isInitializing || _isReverting) return;
 
             if (value)

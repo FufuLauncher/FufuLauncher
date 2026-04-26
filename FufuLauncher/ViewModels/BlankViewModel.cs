@@ -139,31 +139,7 @@ namespace FufuLauncher.ViewModels
             }
         }
 
-        public async Task OnNavigatedToAsync()
-        {
-            try
-            {
-                var savedPath = await _localSettingsService.ReadSettingAsync(GamePathKey) as string;
-                if (!string.IsNullOrEmpty(savedPath))
-                {
-                    savedPath = savedPath.Trim('"').Trim();
-                    Debug.WriteLine($"[游戏信息页] 导航读取路径: '{savedPath}'");
-
-                    if (CurrentGameConfig == null || savedPath != _lastLoadedPath)
-                    {
-                        await LoadGameInfoAsync(savedPath);
-                        _lastLoadedPath = savedPath;
-                    }
-                }
-                await LoadAccountsAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"导航时加载失败: {ex.Message}");
-            }
-        }
-
-private async Task SelectGamePathAsync()
+        private async Task SelectGamePathAsync()
 {
     try
     {
@@ -482,10 +458,5 @@ private async Task SelectGamePathAsync()
             });
         }
         #endregion
-
-        public void Cleanup()
-        {
-            Debug.WriteLine("BlankViewModel Cleanup");
-        }
     }
 }

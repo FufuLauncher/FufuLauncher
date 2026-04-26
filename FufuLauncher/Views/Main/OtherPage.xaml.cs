@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -18,19 +20,60 @@ namespace FufuLauncher.Views
         {
             ViewModel = App.GetService<OtherViewModel>();
             InitializeComponent();
+            
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            
+            Unloaded += OtherPage_Unloaded;
+        }
 
+        private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ViewModel.IsRecordingTriggerKey) ||
+                e.PropertyName == nameof(ViewModel.IsRecordingClickKey))
+            {
+                UpdateKeyRegistration();
+            }
+        }
+
+        private void UpdateKeyRegistration()
+        {
             try
             {
                 if (App.MainWindow?.Content is UIElement content)
                 {
                     content.KeyDown -= GlobalKeyDown;
-                    content.KeyDown += GlobalKeyDown;
-                    Debug.WriteLine("[OtherPage] 全局按键事件已注册到Window.Content");
+                    
+                    if (ViewModel.IsRecordingTriggerKey || ViewModel.IsRecordingClickKey)
+                    {
+                        content.KeyDown += GlobalKeyDown;
+                        Debug.WriteLine("[OtherPage] 按键录制配置开启，全局按键事件已注册到Window.Content");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("[OtherPage] 按键录制配置关闭，全局按键事件已注销");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[OtherPage] 注册按键事件失败: {ex.Message}");
+                Debug.WriteLine($"[OtherPage] 注册/注销按键事件失败: {ex.Message}");
+            }
+        }
+
+        private void OtherPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+            
+            try
+            {
+                if (App.MainWindow?.Content is UIElement content)
+                {
+                    content.KeyDown -= GlobalKeyDown;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[OtherPage] 页面卸载清理按键事件失败: {ex.Message}");
             }
         }
 

@@ -1,0 +1,75 @@
+﻿namespace FufuLauncher.Constants
+{
+    public static class ApiEndpoints
+    {
+        public const string RedeemCodesUrl = "https://cnb.cool/bettergi/genshin-redeem-code/-/git/raw/main/codes.json";
+        public const string GameBranchesUrl = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGameBranches?launcher_id=jGHBHlcOq1&language=zh-cn&game_ids[]=1Z8W5NHUQb";
+        public const string AccountLockUrl = "https://user.mihoyo.com/login-platform/index.html?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&steps_bar=1&uc_type=3&redirect_url=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&st=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&succ_back_type=redirect&fail_back_type=reLogin&ux_mode=redirect#/account/lock";
+        public const string AccountSecurityUrl = "https://user.mihoyo.com/passport/index.html?legacy_env=production#/home/security";
+        public const string AgreementUrl = "https://philia093.cyou/";
+        public const string IconTroubleshootUrl = "https://wwaoi.lanzouu.com/ig75f3hedlaj";
+        public const string RoleAvgUrl = "http://154.44.25.230:8080/getRoleAvg";
+        public const string AbyssRank2Url = "http://154.44.25.230:8080/getAbyssRank2";
+        public const string WishHistoryUrl = "http://154.44.25.230:8080/getWishHistory";
+        public const string SpiralAbyssRankUrl = "http://154.44.25.230:8080/getAbyssRank";
+        public const string RerunListUrl = "http://154.44.25.230:8080/getRerunList";
+        public const string TravelersDiaryMonthInfoUrl = "https://hk4e-api.mihoyo.com/event/ys_ledger/monthInfo";
+        public const string BackgroundCnApi = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getAllGameBasicInfo?launcher_id=jGHBHlcOq1&language=zh-cn&game_id=1Z8W5NHUQb";
+        public const string BackgroundOsApi = "https://sg-hyp-api.hoyoverse.com/hyp/hyp-connect/api/getAllGameBasicInfo?launcher_id=VYTpXlbWo8&game_id=gopR6Cufr3&language=zh-cn";
+        public const string ContentCnApi = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getGameContent?launcher_id=jGHBHlcOq1&game_id=1Z8W5NHUQb&language=zh-cn";
+        public const string ContentOsApi = "https://sg-hyp-api.hoyoverse.com/hyp/hyp-connect/api/getGameContent?launcher_id=VYTpXlbWo8&game_id=gopR6Cufr3&language=zh-cn";
+        public const string MihoyoBbsWebApi = "https://api-takumi.mihoyo.com";
+        public const string MihoyoBbsAccountInfoUrl = MihoyoBbsWebApi + "/binding/api/getUserGameRolesByCookie";
+        public const string MihoyoBbsCheckinRewardsUrl = MihoyoBbsWebApi + "/event/luna/home";
+        public const string MihoyoBbsIsSignUrl = MihoyoBbsWebApi + "/event/luna/info";
+        public const string MihoyoBbsSignUrl = MihoyoBbsWebApi + "/event/luna/sign";
+        public const string PluginProxyUrl = "http://kr2-proxy.gitwarp.top:9980/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";
+        public const string PluginRawUrl = "https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip?raw=true";
+        public const string AnnouncementUrl = "https://philia093.cyou/announcement.json";
+        public const string UpdateJsonUrl = "https://philia093.cyou/Update.json";
+        public const string UpdateHtmlUrl = "https://philia093.cyou/Update.html";
+        public const string MihoyoBbsUserGameRolesUrl = "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn";
+        public const string MiyousheUserFullInfoUrl = "https://bbs-api.miyoushe.com/user/wapi/getUserFullInfo";
+        public const string PassportCreateQrLoginUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/createQRLogin";
+        public const string PassportScanQrLoginUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/app/scanQRLogin";
+        public const string PassportConfirmQrLoginUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/app/confirmQRLogin";
+        public const string PassportQueryQrLoginStatusUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/queryQRLoginStatus";
+        public const string BbsDefaultUrl = "https://webstatic.mihoyo.com/app/community-game-records/index.html?bbs_presentation_style=fullscreen&game_id=2";
+        public const string MiyousheArticleUrl = "https://m.miyoushe.com/ys/#/article/";
+        public const string PassportAppCreateQrLoginUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/app/createQRLogin";
+        public const string PassportAppQueryQrLoginStatusUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/app/queryQRLoginStatus";
+        public const string Hk4eQrCodeFetchUrl = "https://hk4e-sdk.mihoyo.com/hk4e_cn/combo/panda/qrcode/fetch";
+        public const string Hk4eQrCodeQueryUrl = "https://hk4e-sdk.mihoyo.com/hk4e_cn/combo/panda/qrcode/query";
+        public const string GetTokenByGameTokenUrl = "https://api-takumi.mihoyo.com/account/ma-cn-session/app/getTokenByGameToken";
+        public const string GetCookieAccountInfoBySTokenUrl = "https://passport-api.mihoyo.com/account/auth/api/getCookieAccountInfoBySToken";
+        public const string UserMihoyoLoginPlatformUrl = "https://user.mihoyo.com/login-platform/index.html";
+        public const string SeelieAchievementsUrl = "https://seelie.me/achievements";
+        public const string HypCnApi = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api";
+        public const string SophonCnApi = "https://downloader-api.mihoyo.com/downloader/sophon_chunk/api";
+        public const string HypOsApi = "https://sg-hyp-api.hoyoverse.com/hyp/hyp-connect/api";
+        public const string SophonOsApi = "https://sg-downloader-api.hoyoverse.com/downloader/sophon_chunk/api";
+        public const string Hk4eAnnouncementPageUrl = "https://sdk.mihoyo.com/hk4e/announcement/index.html?auth_appid=announcement&authkey_ver=1&bundle_id=hk4e_cn&channel_id=1&game=hk4e&game_biz=hk4e_cn&lang=zh-cn&level=60&platform=pc&region=cn_gf01&sdk_presentation_style=fullscreen&sdk_screen_transparent=true&sign_type=2&uid=100000000";
+        public const string BaikeDailyMaterialsUrl = "https://baike.mihoyo.com/ys/obc/channel/map/193?bbs_presentation_style=no_header&visit_device=pc";
+        public const string BaikeActivitiesUrl = "https://baike.mihoyo.com/ys/obc/channel/position/48/53?bbs_presentation_style=no_header&visit_device=pc&no_page_view=1";
+        public const string GithubFeatureRequestUrl = "https://github.com/FufuLauncher/FufuLauncher/issues/new?template=feature_request.yml";
+        public const string GithubBugReportUrl = "https://github.com/FufuLauncher/FufuLauncher/issues/new?template=bug_report.yml";
+        public const string GachaCalculatorCharacterUrl = "https://act.mihoyo.com/ys/event/calculator/index.html#/character";
+        public const string GachaCalculatorWeaponUrl = "https://act.mihoyo.com/ys/event/calculator/index.html#/weapon";
+        public const string WebstaticRefererUrl = "https://webstatic.mihoyo.com";
+        public const string CalculateAvatarListUrl = "https://api-takumi.mihoyo.com/event/e20200928calculate/v1/avatar/list";
+        public const string CalculateWeaponListUrl = "https://api-takumi.mihoyo.com/event/e20200928calculate/v1/weapon/list";
+        public const string CalculateBatchComputeUrl = "https://api-takumi.mihoyo.com/event/e20200928calculate/v3/batch_compute";
+        public const string InteractiveMapUrl = "https://act.mihoyo.com/ys/app/interactive-map/index.html";
+        public const string LelaerPlayerRecordApiUrl = "https://api.lelaer.com/ys/getPlayerRecord.php?uid={0}";
+        public const string TeamWikiUrl = "https://webstatic.mihoyo.com/ys/event/lineup-fe/index.html#/m/index";
+        public const string MiyousheSearchUrl = "https://www.miyoushe.com/ys/search?keyword=";
+        public const string UpdateShareUrl = "https://wwaoi.lanzouu.com/b00wnb99ef";
+        public const string CharVideoUrl = "https://baike.mihoyo.com/ys/obc/channel/map/80/212?bbs_presentation_style=no_header&visit_device=pc";
+        public const string CutsceneVideoUrl = "https://baike.mihoyo.com/ys/obc/channel/map/80/81?bbs_presentation_style=no_header&visit_device=pc";
+        public const string MicrosoftNetworkCheckUrl = "https://www.microsoft.com";
+        public const string VcRedistDownloadUrl = "https://aka.ms/vc14/vc_redist.x64.exe";
+        public const string TelegramContactUrl = "https://t.me/Adimisra6717";
+        public const string GithubWorkflowsApiUrl = "https://api.github.com/repos/CodeCubist/FufuLauncher/actions/workflows";
+        public const string PaimonTimelineUrl = "https://paimon.moe/timeline";
+    }
+}

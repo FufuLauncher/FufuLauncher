@@ -1,5 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Windows.System;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views;
 
@@ -17,11 +18,11 @@ public sealed partial class FeedbackWindow : Window
 
     private async void OnFeatureRequestClick(object sender, RoutedEventArgs e)
     {
-        await Launcher.LaunchUriAsync(new Uri("https://github.com/FufuLauncher/FufuLauncher/issues/new?template=feature_request.yml"));
+        await Launcher.LaunchUriAsync(new Uri(ApiEndpoints.GithubFeatureRequestUrl)); 
     }
 
     private async void OnBugReportClick(object sender, RoutedEventArgs e)
     {
-        await Launcher.LaunchUriAsync(new Uri("https://github.com/FufuLauncher/FufuLauncher/issues/new?template=bug_report.yml"));
+        await Launcher.LaunchUriAsync(new Uri(ApiEndpoints.GithubBugReportUrl)); 
     }
 }

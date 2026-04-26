@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 using CommunityToolkit.Mvvm.Messaging;
+using FufuLauncher.Constants;
 using FufuLauncher.Messages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -325,7 +326,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task<(bool Success, string Url, string Message)> CreateAppQrCodeAsync()
     {
-        string url = "https://passport-api.mihoyo.com/account/ma-cn-passport/app/createQRLogin";
+        string url = ApiEndpoints.PassportAppCreateQrLoginUrl;
         var body = new JsonObject();
         string bodyStr = body.ToJsonString(_jsonOptions);
 
@@ -356,7 +357,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task PollAppLoginStatusAsync(CancellationToken ct)
     {
-        string url = "https://passport-api.mihoyo.com/account/ma-cn-passport/app/queryQRLoginStatus";
+        string url = ApiEndpoints.PassportAppQueryQrLoginStatusUrl;
         int pollInterval = 3000;
         JsonNode confirmedData = null;
 
@@ -456,7 +457,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task<(bool Success, string Url, string Message)> CreateGameQrCodeAsync()
     {
-        string url = "https://hk4e-sdk.mihoyo.com/hk4e_cn/combo/panda/qrcode/fetch";
+        string url = ApiEndpoints.Hk4eQrCodeFetchUrl;
         
         var requestBody = new JsonObject
         {
@@ -504,7 +505,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task PollGameLoginStatusAsync(CancellationToken ct)
     {
-        string url = "https://hk4e-sdk.mihoyo.com/hk4e_cn/combo/panda/qrcode/query";
+        string url = ApiEndpoints.Hk4eQrCodeQueryUrl;
         int pollInterval = 3000;
 
         while (!ct.IsCancellationRequested)
@@ -567,7 +568,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task GetSTokenByGameTokenAsync(string accountId, string gameToken)
     {
-        string url = "https://api-takumi.mihoyo.com/account/ma-cn-session/app/getTokenByGameToken";
+        string url = ApiEndpoints.GetTokenByGameTokenUrl;
         
         var requestBody = new JsonObject
         {
@@ -673,7 +674,7 @@ public sealed partial class LoginQrWindow : Window
 
             string authCookie = $"stoken={stoken}; mid={mid}";
 
-            bool scanResult = await SimulateAppActionAsync("https://passport-api.mihoyo.com/account/ma-cn-passport/app/scanQRLogin", webTicket, authCookie);
+            bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie);
             if (!scanResult)
             {
                 UpdateStatus("扫描请求被拒绝");
@@ -682,7 +683,7 @@ public sealed partial class LoginQrWindow : Window
 
             await Task.Delay(1000);
 
-            bool confirmResult = await SimulateAppActionAsync("https://passport-api.mihoyo.com/account/ma-cn-passport/app/confirmQRLogin", webTicket, authCookie);
+            bool confirmResult = await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie);
             if (!confirmResult)
             {
                 UpdateStatus("请求被拒绝");
@@ -711,7 +712,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task<string> CreateWebQrCodeAsync()
     {
-        string url = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/createQRLogin";
+        string url = ApiEndpoints.PassportCreateQrLoginUrl;
         var body = new JsonObject();
         string bodyStr = body.ToJsonString(_jsonOptions);
 
@@ -753,7 +754,7 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task<Dictionary<string, string>> GetWebQrStatusAndExtractCookiesAsync(string ticket)
     {
-        string url = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/queryQRLoginStatus";
+        string url = ApiEndpoints.PassportQueryQrLoginStatusUrl;
         var body = new JsonObject { ["ticket"] = ticket };
         string bodyStr = body.ToJsonString(_jsonOptions);
 
@@ -797,7 +798,7 @@ public sealed partial class LoginQrWindow : Window
     #region 公共
     private async Task<string> GetCookieAccountInfoBySTokenAsync(string stoken)
     {
-        string url = $"https://passport-api.mihoyo.com/account/auth/api/getCookieAccountInfoBySToken?stoken={stoken}";
+        string url = $"{ApiEndpoints.GetCookieAccountInfoBySTokenUrl}?stoken={stoken}";
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         AddCommonHeaders(request, "", $"stoken={stoken}", "2", "bll8iq97cem8", "2.20.1", "", "https://user.mihoyo.com/");
 
@@ -1132,8 +1133,7 @@ public sealed partial class LoginQrWindow : Window
             PassportWebView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
             
             long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            string url = $"https://user.mihoyo.com/login-platform/index.html?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&ux_mode=popup&iframe_level=1&t={timestamp}#/login";
-            
+            string url = $"{ApiEndpoints.UserMihoyoLoginPlatformUrl}?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&ux_mode=popup&iframe_level=1&t={timestamp}#/login";
             await Task.Delay(100);
             PassportWebView.CoreWebView2.Navigate(url);
 

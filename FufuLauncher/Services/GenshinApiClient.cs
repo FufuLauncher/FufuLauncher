@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Constants;
 using FufuLauncher.Models.Genshin;
 
 namespace FufuLauncher.Services;
@@ -24,7 +25,8 @@ public class GenshinApiClient
     public async Task<TravelersDiarySummary> GetTravelersDiarySummaryAsync(string uid, string cookie, int month = 0, CancellationToken cancellationToken = default)
     {
         var region = "cn_gf01";
-        var url = $"https://hk4e-api.mihoyo.com/event/ys_ledger/monthInfo?month={month}&bind_uid={uid}&bind_region={region}&bbs_presentation_style=fullscreen&bbs_auth_required=true&utm_source=bbs&utm_medium=mys&utm_campaign=icon";
+
+        var url = $"{ApiEndpoints.TravelersDiaryMonthInfoUrl}?month={month}&bind_uid={uid}&bind_region={region}&bbs_presentation_style=fullscreen&bbs_auth_required=true&utm_source=bbs&utm_medium=mys&utm_campaign=icon";
 
         var request = CreateRequest(HttpMethod.Get, url, cookie);
         request.Headers.Add("X-Requested-With", "com.mihoyo.hyperion");

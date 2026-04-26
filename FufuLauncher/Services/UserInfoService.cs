@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.RegularExpressions;
+using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
 using Microsoft.Extensions.Logging;
@@ -68,7 +69,7 @@ public class UserInfoService : IUserInfoService
         try
         {
             ApplyCommonHeaders(cookie);
-            var url = "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn";
+            var url = ApiEndpoints.MihoyoBbsUserGameRolesUrl;
 
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
@@ -90,7 +91,7 @@ public class UserInfoService : IUserInfoService
         try
         {
             ApplyCommonHeaders(cookie);
-            var url = "https://bbs-api.miyoushe.com/user/wapi/getUserFullInfo";
+            var url = ApiEndpoints.MiyousheUserFullInfoUrl;
 
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();

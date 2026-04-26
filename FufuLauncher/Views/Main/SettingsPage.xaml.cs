@@ -84,14 +84,14 @@ public sealed partial class SettingsPage : Page
         var updaterWindow = new AchievementUpdaterWindow();
         updaterWindow.ExtendsContentIntoTitleBar = true;
 
-        IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(updaterWindow);
-        Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-        Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+        IntPtr hWnd = WindowNative.GetWindowHandle(updaterWindow);
+        var windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
+        var appWindow = AppWindow.GetFromWindowId(windowId);
 
         if (appWindow != null)
         {
-            string iconPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico");
-            if (System.IO.File.Exists(iconPath))
+            string iconPath = Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico");
+            if (File.Exists(iconPath))
             {
                 appWindow.SetIcon(iconPath);
             }
@@ -99,7 +99,7 @@ public sealed partial class SettingsPage : Page
             var size = new Windows.Graphics.SizeInt32(1100, 750);
             appWindow.Resize(size);
 
-            var displayArea = Microsoft.UI.Windowing.DisplayArea.GetFromWindowId(windowId, Microsoft.UI.Windowing.DisplayAreaFallback.Primary);
+            var displayArea = DisplayArea.GetFromWindowId(windowId, DisplayAreaFallback.Primary);
             if (displayArea != null)
             {
                 var centeredX = (displayArea.WorkArea.Width - size.Width) / 2;

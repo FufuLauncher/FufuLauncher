@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Media;
 using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
 using Windows.UI;
+using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views
 {
@@ -23,7 +24,6 @@ namespace FufuLauncher.Views
     public sealed partial class PlayerInfoWindow : Window, System.ComponentModel.INotifyPropertyChanged
     {
         private readonly HttpClient _httpClient = new();
-        private const string ApiUrl = "https://api.lelaer.com/ys/getPlayerRecord.php?uid={0}";
         
         private readonly string _cacheFilePath;
         private readonly string _userConfigPath;
@@ -182,7 +182,7 @@ namespace FufuLauncher.Views
 
             try
             {
-                string url = string.Format(ApiUrl, uid);
+                string url = string.Format(ApiEndpoints.LelaerPlayerRecordApiUrl, uid); 
                 string json = await _httpClient.GetStringAsync(url);
 
                 var response = JsonSerializer.Deserialize<PlayerRecordResponse>(json);
@@ -275,7 +275,7 @@ namespace FufuLauncher.Views
         {
             try
             {
-                string url = "https://webstatic.mihoyo.com/ys/event/lineup-fe/index.html#/m/index";
+                string url = ApiEndpoints.TeamWikiUrl; 
                 await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
             }
             catch (Exception ex)
@@ -283,13 +283,14 @@ namespace FufuLauncher.Views
                 System.Diagnostics.Debug.WriteLine($"Launch URL failed: {ex.Message}");
             }
         }
+        
         private async void OnArtifactSearchClick(object sender, RoutedEventArgs e)
         {
             if (sender is FrameworkElement element && element.DataContext is ArtifactDetail artifact)
             {
                 if (!string.IsNullOrEmpty(artifact.Name))
                 {
-                    string url = $"https://www.miyoushe.com/ys/search?keyword={Uri.EscapeDataString(artifact.Name)}";
+                    string url = $"{ApiEndpoints.MiyousheSearchUrl}{Uri.EscapeDataString(artifact.Name)}"; 
                     await Windows.System.Launcher.LaunchUriAsync(new Uri(url));
                 }
             }

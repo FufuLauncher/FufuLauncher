@@ -557,15 +557,16 @@ namespace FufuLauncher.ViewModels
         {
             try
             {
-                Debug.WriteLine($"主界面开始加载签到状态");
-                var (status, summary) = await _checkinService.GetCheckinStatusAsync();
+                var targetUidObj = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
+                string targetUid = targetUidObj?.ToString();
 
-                Debug.WriteLine($"状态更新: {status}, {summary}");
+                var (status, summary) = await _checkinService.GetCheckinStatusAsync(targetUid);
+
                 CheckinStatusText = status;
                 CheckinSummary = summary;
-        
+
                 UpdateCheckinIconState(status);
-                
+        
                 if (!_hasAttemptedAutoCheckin)
                 {
                     var autoCheckinObj = await _localSettingsService.ReadSettingAsync("IsAutoCheckinEnabled");
@@ -577,19 +578,19 @@ namespace FufuLauncher.ViewModels
                     if (isAutoCheckinEnabled && !isSigned)
                     {
                         _hasAttemptedAutoCheckin = true;
-                        Debug.WriteLine("检测到未签到，正在自动执行签到...");
                         await ExecuteCheckinAsync();
                     }
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"加载失败: {ex.Message}");
                 CheckinStatusText = "加载失败";
                 CheckinSummary = ex.Message;
                 UpdateCheckinIconState("Fail");
             }
         }
+        
+        
 
         private async Task ExecuteCheckinAsync()
         {
@@ -598,7 +599,10 @@ namespace FufuLauncher.ViewModels
 
             try
             {
-                var (success, message) = await _checkinService.ExecuteCheckinAsync();
+                var targetUidObj = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
+                string targetUid = targetUidObj?.ToString();
+
+                var (success, message) = await _checkinService.ExecuteCheckinAsync(targetUid);
 
                 int signDays = MihoyoBBS.GameCheckin.LastSignDays;
                 string rewardItem = MihoyoBBS.GameCheckin.LastRewardItem;
@@ -740,7 +744,6 @@ namespace FufuLauncher.ViewModels
 
             try
             {
-                // 实例化并激活新的独立窗口，传入截图目录路径
                 var galleryWindow = new ScreenshotGalleryWindow(screenshotPath);
                 galleryWindow.Activate();
             }
