@@ -17,6 +17,7 @@ using Windows.Media.Playback;
 using Windows.UI;
 using FufuLauncher.Views;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Windows.Media.Core;
 
 namespace FufuLauncher.ViewModels
 {
@@ -304,38 +305,112 @@ namespace FufuLauncher.ViewModels
 
             IsBackgroundToggleEnabled = !HasCustomBackground;
         }
+        
+private async Task LoadBackgroundAsync()
+{
+    await UpdateUI(() => IsBackgroundLoading = true);
+    ClearBackground();
 
-        private async Task LoadBackgroundAsync()
+    try
+    {
+        if (HasCustomBackground && !string.IsNullOrEmpty(CustomBackgroundPath) && File.Exists(CustomBackgroundPath))
         {
-            await UpdateUI(() => IsBackgroundLoading = true);
+            await UpdateUI(() => TryLoadImage(CustomBackgroundPath));
+        }
+        else
+        {
+            var serverJson = await _localSettingsService.ReadSettingAsync("BackgroundServerKey");
+            var server = Models.ServerType.CN;
+            try { if (serverJson != null) server = (Models.ServerType)Convert.ToInt32(serverJson); } catch { }
             
-            ClearBackground();
+            var bgResult = await _backgroundRenderer.GetBackgroundAsync(server, PreferVideoBackground);
 
             await UpdateUI(() =>
             {
-                try
+                if (bgResult != null)
                 {
-                    string targetPath;
-                    
-                    if (HasCustomBackground && !string.IsNullOrEmpty(CustomBackgroundPath) && File.Exists(CustomBackgroundPath))
+                    if (bgResult.IsVideo && bgResult.VideoSource != null)
                     {
-                        targetPath = CustomBackgroundPath;
-                        TryLoadImage(targetPath);
+                        SetupVideoPlayer(bgResult.VideoSource);
+                    }
+                    else if (!bgResult.IsVideo && bgResult.ImageSource != null)
+                    {
+                        BackgroundImageSource = bgResult.ImageSource;
+                        IsVideoBackground = false;
                     }
                     else
                     {
                         LoadFallbackImage();
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine($"背景加载流程发生异常: {ex.Message}");
                     LoadFallbackImage();
                 }
             });
-
-            await UpdateUI(() => IsBackgroundLoading = false);
         }
+    }
+    catch (NotSupportedException ex) when (ex.Message == "IMAGE_DECODE_FAILED")
+    {
+        await UpdateUI(() =>
+        {
+            _notificationService.Show("背景解码失败", "系统缺少 WebP 图像扩展。已回退至静态背景。", NotificationType.Error, 6000);
+            LoadFallbackImage();
+        });
+    }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"背景加载异常: {ex.Message}");
+        await UpdateUI(LoadFallbackImage);
+    }
+    finally
+    {
+        await UpdateUI(() => IsBackgroundLoading = false);
+    }
+}
+
+private void SetupVideoPlayer(MediaSource source)
+{
+    if (BackgroundVideoPlayer == null)
+    {
+        BackgroundVideoPlayer = new MediaPlayer
+        {
+            IsLoopingEnabled = true,
+            IsMuted = true
+        };
+        BackgroundVideoPlayer.MediaFailed += BackgroundVideoPlayer_MediaFailed;
+    }
+    BackgroundVideoPlayer.Source = source; 
+    BackgroundVideoPlayer.Play();
+    IsVideoBackground = true;
+}
+
+private void ClearBackground()
+{
+    BackgroundImageSource = null;
+    if (BackgroundVideoPlayer != null)
+    {
+        BackgroundVideoPlayer.Pause();
+        BackgroundVideoPlayer.MediaFailed -= BackgroundVideoPlayer_MediaFailed;
+        try
+        {
+            BackgroundVideoPlayer.Dispose();
+        }
+        catch { }
+        BackgroundVideoPlayer = null;
+    }
+    IsVideoBackground = false;
+}
+
+private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFailedEventArgs args)
+{
+    _dispatcherQueue.TryEnqueue(() =>
+    {
+        _notificationService.Show("视频解码失败", "系统缺少 VP9/WebM 媒体扩展。已回退至静态背景。", NotificationType.Error, 6000);
+        LoadFallbackImage();
+    });
+}
+
 
         private void TryLoadImage(string path)
         {
@@ -390,14 +465,7 @@ namespace FufuLauncher.ViewModels
                 Debug.WriteLine($"加载默认背景失败: {ex.Message}");
             }
         }
-
-        private void ClearBackground()
-        {
-            BackgroundImageSource = null;
-            BackgroundVideoPlayer?.Pause();
-            BackgroundVideoPlayer = null;
-            IsVideoBackground = false;
-        }
+        
 
         private void ToggleBackgroundType()
         {

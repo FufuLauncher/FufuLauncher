@@ -137,6 +137,10 @@ namespace FufuLauncher.Services.Background
                 _currentBackgroundUrl = backgroundInfo.Url;
                 return _cachedBackground;
             }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine($"BackgroundRenderer: 加载或处理背景失败 - {ex.Message}");
@@ -238,7 +242,15 @@ namespace FufuLauncher.Services.Background
             var bitmap = new BitmapImage();
             using (var stream = new MemoryStream(data))
             {
-                await bitmap.SetSourceAsync(stream.AsRandomAccessStream());
+                try
+                {
+                    await bitmap.SetSourceAsync(stream.AsRandomAccessStream());
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"BackgroundRenderer: 图片解码失败(可能缺少 WebP 扩展): {ex.Message}");
+                    throw new NotSupportedException("IMAGE_DECODE_FAILED", ex);
+                }
             }
 
             Debug.WriteLine("BackgroundRenderer: BitmapImage 从流加载完成");
