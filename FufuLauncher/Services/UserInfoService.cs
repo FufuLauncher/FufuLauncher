@@ -12,13 +12,16 @@ public class UserInfoService : IUserInfoService
     private readonly HttpClient _httpClient;
     private readonly ILogger<UserInfoService> _logger;
     private readonly IUserConfigService _userConfigService;
+    private readonly ILocalSettingsService _localSettingsService;
 
     public UserInfoService(
         ILogger<UserInfoService> logger,
-        IUserConfigService userConfigService)
+        IUserConfigService userConfigService,
+        ILocalSettingsService localSettingsService)
     {
         _logger = logger;
         _userConfigService = userConfigService;
+        _localSettingsService = localSettingsService;
         _httpClient = new HttpClient(new HttpClientHandler
         {
             AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate
@@ -35,9 +38,8 @@ public class UserInfoService : IUserInfoService
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("x-rpc-client_type", "5");
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Referer", "https://act.mihoyo.com/");
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Origin", "https://act.mihoyo.com");
-        _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(
-            "Mozilla/5.0 (Linux; Android 12; Unspecified Device) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36 miHoYoBBS/2.93.1"
-        );
+        _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", 
+            "Mozilla/5.0 (Linux; Android 12; Unspecified Device) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36 miHoYoBBS/2.93.1");
     }
 
     private string GenerateDS()
@@ -63,21 +65,37 @@ public class UserInfoService : IUserInfoService
             return null;
         }
     }
+    
+    private async Task<bool> IsInternationalAsync()
+    {
+        var isOsObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
+        return isOsObj is bool isOs && isOs;
+    }
 
     public async Task<GameRolesResponse> GetUserGameRolesAsync(string cookie)
     {
         try
         {
+            bool isOs = await IsInternationalAsync();
             ApplyCommonHeaders(cookie);
-            var url = ApiEndpoints.MihoyoBbsUserGameRolesUrl;
 
-            var response = await _httpClient.GetAsync(url);
-            var json = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions
+            if (isOs)
             {
-                PropertyNameCaseInsensitive = true
-            }) ?? new GameRolesResponse(-1, "解析失败", null);
+                var uid = ExtractCookieValue(cookie, "account_id_v2") ?? ExtractCookieValue(cookie, "ltuid_v2") ?? ExtractCookieValue(cookie, "account_id");
+                var url = $"https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={uid}";
+            
+                var response = await _httpClient.GetAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+                
+                json = json.Replace("\"game_role_id\"", "\"game_uid\"");
+                return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+            }
+            else
+            {
+                var response = await _httpClient.GetAsync(ApiEndpoints.MihoyoBbsUserGameRolesUrl);
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+            }
         }
         catch (Exception ex)
         {
@@ -85,21 +103,20 @@ public class UserInfoService : IUserInfoService
             return new GameRolesResponse(-1, ex.Message, null);
         }
     }
+    
 
     public async Task<UserFullInfoResponse> GetUserFullInfoAsync(string cookie)
     {
         try
         {
             ApplyCommonHeaders(cookie);
-            var url = ApiEndpoints.MiyousheUserFullInfoUrl;
-
+            bool isOs = await IsInternationalAsync();
+        
+            var url = isOs ? "https://bbs-api-os.hoyolab.com/community/painter/wapi/user/full" : ApiEndpoints.MiyousheUserFullInfoUrl;
+        
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
-
-            return JsonSerializer.Deserialize<UserFullInfoResponse>(json, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            }) ?? new UserFullInfoResponse(-1, "解析失败", null);
+            return JsonSerializer.Deserialize<UserFullInfoResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         }
         catch (Exception ex)
         {
@@ -152,7 +169,10 @@ public class UserInfoService : IUserInfoService
     {
         try
         {
-            var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+            var activeFileObj = await _localSettingsService.ReadSettingAsync("ActiveConfigFile");
+            string activeFile = activeFileObj?.ToString() ?? "config.json";
+            var configPath = Path.Combine(AppContext.BaseDirectory, activeFile);
+
             HoyoverseCheckinConfig oldConfig = new();
 
             if (File.Exists(configPath))

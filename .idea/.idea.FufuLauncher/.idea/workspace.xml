@@ -11,9 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/Background/BackgroundRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/Background/BackgroundRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/UserInfoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/UserInfoService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/AccountViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/AccountViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +53,7 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/VerifyGamePage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -55,6 +61,7 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/BlankPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/DataPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Main/MainPage.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Model/AchievementWindow.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Model/AgreementPage.g.i.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/obj/x64/Debug/net8.0-windows10.0.26100.0/Views/Model/DiagnosticsWindow.g.i.cs" root0="SKIP_HIGHLIGHTING" />
@@ -87,7 +94,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.88646287",
+    "XThreadsFramesViewSplitterKey": "0.49125874",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",

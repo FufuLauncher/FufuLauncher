@@ -32,6 +32,7 @@ namespace FufuLauncher.ViewModels
         private readonly DispatcherQueue _dispatcherQueue;
         private static bool _isFirstLoad = true;
         private bool _hasAttemptedAutoCheckin = false;
+        private bool _isInternationalAccount = false;
 
         [ObservableProperty] private bool _isGameNotLaunching;
 
@@ -267,8 +268,18 @@ namespace FufuLauncher.ViewModels
 
         public async Task OnPageReturnedAsync()
         {
+            Debug.WriteLine("[MainViewModel] 页面已返回，正在刷新服务器配置...");
+            await RefreshSettingsAsync();
             await LoadUserPreferencesAsync();
             await ForceRefreshGameStateAsync();
+            await LoadCheckinStatusAsync();
+        }
+        
+        private async Task RefreshSettingsAsync()
+        {
+            var isInternationalObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
+            _isInternationalAccount = isInternationalObj != null && isInternationalObj.ToString().ToLower() == "true";
+            Debug.WriteLine($"[MainViewModel] 配置刷新: {_isInternationalAccount}");
         }
 
         private async Task LoadUserPreferencesAsync()
@@ -623,7 +634,23 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
         
         private async Task LoadCheckinStatusAsync()
         {
-            try
+            if (_localSettingsService == null) return;
+            
+            var isIntlRaw = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
+            _isInternationalAccount = isIntlRaw != null && isIntlRaw.ToString().ToLower() == "true";
+
+            if (_isInternationalAccount)
+            {
+                Debug.WriteLine("[MainViewModel] 识别为国际服模式，跳过国服 API 请求");
+                await UpdateUI(() => {
+                    CheckinStatusText = "国际服模式";
+                    CheckinSummary = "Hoyoverse 账号已就绪";
+                    UpdateCheckinIconState("Ready");
+                });
+                return;
+            }
+            
+            try 
             {
                 var targetUidObj = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
                 string targetUid = targetUidObj?.ToString();
@@ -660,57 +687,96 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
         
         
 
-        private async Task ExecuteCheckinAsync()
-        {
-            IsCheckinButtonEnabled = false;
-            CheckinButtonText = "签到中...";
+private async Task ExecuteCheckinAsync()
+{
+    IsCheckinButtonEnabled = false;
+    CheckinButtonText = "签到中...";
+    
+    await RefreshSettingsAsync();
 
+    try
+    {
+        if (_isInternationalAccount)
+        {
+            
+            string cookie = "";
             try
             {
-                var targetUidObj = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
-                string targetUid = targetUidObj?.ToString();
-
-                var (success, message) = await _checkinService.ExecuteCheckinAsync(targetUid);
-
-                int signDays = MihoyoBBS.GameCheckin.LastSignDays;
-                string rewardItem = MihoyoBBS.GameCheckin.LastRewardItem;
-
-                bool isActualSuccess = success;
-                
-                if (success && (string.IsNullOrEmpty(rewardItem) || rewardItem == "无/未知"))
+                var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+                if (File.Exists(path))
                 {
-                    isActualSuccess = false;
-                }
-
-                CheckinStatusText = isActualSuccess ? "签到成功" : "签到失败";
-                CheckinSummary = message;
-                UpdateCheckinIconState(isActualSuccess ? "已签到" : "Fail");
-
-                if (isActualSuccess)
-                {
-                    string formattedMsg = $"连续签到: {signDays}天 | 获得奖励: {rewardItem}";
-                    _notificationService.Show("签到成功", formattedMsg, NotificationType.Success, 3000);
-                }
-                else
-                {
-                    string errorMsg = string.IsNullOrEmpty(message) ? "未获取到签到奖励信息" : message;
-                    _notificationService.Show("签到失败", errorMsg, NotificationType.Error, 3000);
+                    var json = await File.ReadAllTextAsync(path);
+                    var config = System.Text.Json.JsonSerializer.Deserialize<MihoyoBBS.Config>(json);
+                    cookie = config?.Account?.Cookie ?? "";
                 }
             }
             catch (Exception ex)
             {
-                CheckinStatusText = "执行失败";
-                CheckinSummary = ex.Message;
-                UpdateCheckinIconState("Fail"); 
-                
-                _notificationService.Show("签到异常", ex.Message, NotificationType.Error, 3000);
+                Debug.WriteLine($"读取 config.json 失败: {ex.Message}");
             }
-            finally
+
+            if (string.IsNullOrEmpty(cookie))
             {
-                await Task.Delay(500);
-                await LoadCheckinStatusAsync();
+                _notificationService.Show("签到失败", "未在 config.json 中找到有效 Cookie", NotificationType.Error, 3000);
+                CheckinStatusText = "缺少 Cookie";
+                return;
+            }
+            
+            await UpdateUI(() =>
+            {
+                var win = new HoyolabCheckinWindow(cookie);
+                win.Activate();
+            });
+
+            CheckinStatusText = "国际服签到已发起";
+            CheckinSummary = "正在通过后台浏览器处理...";
+            _notificationService.Show("国际服签到", "正在启动静默浏览器执行签到", NotificationType.Success, 3000);
+        }
+        else
+        {
+            var targetUidObj = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
+            string targetUid = targetUidObj?.ToString();
+
+            var (success, message) = await _checkinService.ExecuteCheckinAsync(targetUid);
+
+            int signDays = MihoyoBBS.GameCheckin.LastSignDays;
+            string rewardItem = MihoyoBBS.GameCheckin.LastRewardItem;
+
+            bool isActualSuccess = success;
+            if (success && (string.IsNullOrEmpty(rewardItem) || rewardItem == "无/未知"))
+            {
+                isActualSuccess = false;
+            }
+
+            CheckinStatusText = isActualSuccess ? "签到成功" : "签到失败";
+            CheckinSummary = message;
+            UpdateCheckinIconState(isActualSuccess ? "已签到" : "Fail");
+
+            if (isActualSuccess)
+            {
+                string formattedMsg = $"连续签到: {signDays}天 | 获得奖励: {rewardItem}";
+                _notificationService.Show("签到成功", formattedMsg, NotificationType.Success, 3000);
+            }
+            else
+            {
+                string errorMsg = string.IsNullOrEmpty(message) ? "未获取到签到奖励信息" : message;
+                _notificationService.Show("签到失败", errorMsg, NotificationType.Error, 3000);
             }
         }
+    }
+    catch (Exception ex)
+    {
+        CheckinStatusText = "执行失败";
+        CheckinSummary = ex.Message;
+        UpdateCheckinIconState("Fail");
+        _notificationService.Show("签到异常", ex.Message, NotificationType.Error, 3000);
+    }
+    finally
+    {
+        await Task.Delay(2000);
+        await LoadCheckinStatusAsync();
+    }
+}
 
         public void UpdateLaunchButtonState()
         {

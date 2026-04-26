@@ -6,6 +6,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Constants;
+using FufuLauncher.Contracts.Services;
 using FufuLauncher.Messages;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -74,7 +75,7 @@ public sealed partial class LoginQrWindow : Window
 
         try
         {
-            var localSettingsService = new LocalSettingsService();
+            var localSettingsService = App.GetService<ILocalSettingsService>();
             var savedConfigObj = await localSettingsService.ReadSettingAsync("AccountConfig");
             
             if (savedConfigObj != null)
@@ -255,6 +256,13 @@ public sealed partial class LoginQrWindow : Window
                 await StartWebPassportLoginAsync();
                 return;
             }
+            else if (LoginMethodComboBox.SelectedIndex == 3)
+            {
+                PassportWebViewBorder.Visibility = Visibility.Collapsed;
+                QrCodeContainer.Visibility = Visibility.Visible;
+                await StartHoYoLabWebLoginAsync();
+                return;
+            }
             else
             {
                 PassportWebViewBorder.Visibility = Visibility.Collapsed;
@@ -263,6 +271,170 @@ public sealed partial class LoginQrWindow : Window
         }
 
         await RestartLoginFlowAsync();
+    }
+    private async Task StartHoYoLabWebLoginAsync()
+    {
+        if (_pollingCts != null)
+        {
+            _pollingCts.Cancel();
+        }
+
+        UpdateStatus("正在打开HoYoLAB登录窗口...", true);
+
+        try
+        {
+            Window hoyolabWindow = new();
+            hoyolabWindow.Title = "HoYoLAB 登录";
+            
+            var webView = new WebView2();
+            webView.HorizontalAlignment = HorizontalAlignment.Stretch;
+            webView.VerticalAlignment = VerticalAlignment.Stretch;
+            hoyolabWindow.Content = webView;
+
+            await webView.EnsureCoreWebView2Async();
+            
+            webView.CoreWebView2.CookieManager.DeleteAllCookies();
+            try
+            {
+                await webView.CoreWebView2.Profile.ClearBrowsingDataAsync();
+            }
+            catch
+            {
+                // ignored
+            }
+
+            webView.CoreWebView2.WebResourceResponseReceived += async (s, args) =>
+            {
+                string uri = args.Request.Uri;
+                if (uri.Contains("https://passport-api-sg.hoyolab.com/account/ma-passport/api/webLoginByPassword"))
+                {
+                    if (args.Response.StatusCode == 200)
+                    {
+                        var cookies = await webView.CoreWebView2.CookieManager.GetCookiesAsync("https://hoyolab.com");
+                        var cookieDict = new Dictionary<string, string>();
+                        
+                        foreach (var cookie in cookies)
+                        {
+                            if (!string.IsNullOrEmpty(cookie.Value))
+                            {
+                                cookieDict[cookie.Name] = cookie.Value;
+                            }
+                        }
+                        
+                        if (cookieDict.ContainsKey("cookie_token_v2"))
+                        {
+                            DispatcherQueue.TryEnqueue(() =>
+                            {
+                                hoyolabWindow.Close();
+                                UpdateStatus("HoYoLAB凭证提取成功，正在保存", true);
+                                SaveLabCredentials(cookieDict);
+                            });
+                        }
+                    }
+                }
+            };
+            
+            string url = "https://account.hoyolab.com/login-platform/index.html?st=https%3A%2F%2Fwww.hoyolab.com%2FaccountCenter%2FpostList%3Fid%3D468264497&token_type=6&client_type=4&app_id=c9oqaq3s3gu8&game_biz=bbs_oversea&lang=zh-cn&theme=dark-hoyolab&hide_logo=0&ux_mode=popup&iframe_level=1#/password-login";
+            webView.CoreWebView2.Navigate(url);
+
+            hoyolabWindow.Activate();
+            UpdateStatus("请在弹出的独立窗口中完成HoYoLAB登录", false, true);
+        }
+        catch (Exception ex)
+        {
+            UpdateStatus($"打开HoYoLAB窗口失败: {ex.Message}", false);
+        }
+    }
+    
+    private async void SaveLabCredentials(Dictionary<string, string> cookies)
+    {
+        var cookieList = new List<string>();
+        foreach (var kvp in cookies)
+        {
+            cookieList.Add($"{kvp.Key}={kvp.Value}");
+        }
+        string cookieString = string.Join("; ", cookieList);
+
+        await SaveLabConfigForLauncherAsync(cookieString);
+
+        IsLoginSuccessful = true;
+        UpdateStatus("HoYoLAB登录成功", false, true);
+
+        DispatcherQueue.TryEnqueue(() => Close());
+    }
+
+    private async Task SaveLabConfigForLauncherAsync(string cookieString)
+    {
+        try
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, "config.lab.json");
+            var dir = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+
+            var config = new Config(); 
+            if (File.Exists(path))
+            {
+                var json = await File.ReadAllTextAsync(path);
+                config = JsonSerializer.Deserialize<Config>(json) ?? new Config();
+            }
+
+            config.Account.Cookie = cookieString;
+
+            if (cookieString.Contains("account_id_v2="))
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(cookieString, @"account_id_v2=(\d+)");
+                if (match.Success) config.Account.Stuid = match.Groups[1].Value;
+            }
+            else if (cookieString.Contains("ltuid_v2="))
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(cookieString, @"ltuid_v2=(\d+)");
+                if (match.Success) config.Account.Stuid = match.Groups[1].Value;
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
+
+            var newJson = JsonSerializer.Serialize(config, options);
+            await File.WriteAllTextAsync(path, newJson);
+
+            try
+            {
+                var localSettingsService = App.GetService<ILocalSettingsService>();
+                await localSettingsService.SaveSettingAsync("LabAccountConfig", config);
+                await localSettingsService.SaveSettingAsync("ActiveConfigFile", "config.lab.json");
+                await localSettingsService.SaveSettingAsync("IsInternationalAccount", true);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"HoYoLAB配置数据库保存失败: {ex.Message}");
+                
+                WeakReferenceMessenger.Default.Send(
+                    new NotificationMessage(
+                        "保存状态异常",
+                        $"HoYoLAB配置数据库保存失败: {ex.Message}",
+                        NotificationType.Error,
+                        4000
+                    )
+                );
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"HoYoLAB配置保存失败: {ex.Message}");
+            
+            WeakReferenceMessenger.Default.Send(
+                new NotificationMessage(
+                    "写入配置失败",
+                    $"无法保存HoYoLAB配置文件: {ex.Message}",
+                    NotificationType.Error,
+                    4000
+                )
+            );
+        }
     }
 
     private async void GameSelectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -909,8 +1081,10 @@ public sealed partial class LoginQrWindow : Window
 
             try
             {
-                var localSettingsService = new LocalSettingsService();
+                var localSettingsService = App.GetService<ILocalSettingsService>();
                 await localSettingsService.SaveSettingAsync("AccountConfig", config);
+                await localSettingsService.SaveSettingAsync("ActiveConfigFile", "config.json");
+                await localSettingsService.SaveSettingAsync("IsInternationalAccount", false);
             }
             catch (Exception ex)
             {

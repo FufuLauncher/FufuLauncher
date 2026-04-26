@@ -35,6 +35,7 @@
                 <ComboBoxItem Content="米游社APP扫码登录"/>
                 <ComboBoxItem Content="通过游戏二维码登录"/>
                 <ComboBoxItem Content="网页通行证登录"/>
+                <ComboBoxItem Content="HoYoLAB网页登录"/>
             </ComboBox>
 
             <ComboBox x:Name="GameSelectionComboBox" SelectedIndex="0" HorizontalAlignment="Center" Visibility="Collapsed" SelectionChanged="GameSelectionComboBox_SelectionChanged">
