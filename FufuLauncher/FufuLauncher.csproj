@@ -80,10 +80,20 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="Plugins\**\*">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
         <Compile Remove="Models\GameConfig.cs" />
         <Compile Update="Views\Model\BrowserConfig.cs">
             <DependentUpon>BrowserWindow.xaml</DependentUpon>
         </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Plugins\" />
     </ItemGroup>
 
     <Target Name="RemoveUnwantedNativeLanguageFolders" AfterTargets="Build;Publish">

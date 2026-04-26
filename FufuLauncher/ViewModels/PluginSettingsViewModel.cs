@@ -10,12 +10,19 @@ namespace FufuLauncher.ViewModels;
 
 public partial class PluginSettingsViewModel : ObservableObject
 {
-    private readonly string _iniPath;
-    private readonly string _pluginDir;
-    private readonly string _presetsDir;
-    private readonly string _dllPath;
-    private readonly IniFile _iniFile;
+    private string _iniPath;
+    private string _pluginDir;
+    private string _presetsDir;
+    private string _dllPath;
+    private IniFile _iniFile;
     private bool _isAutoUpdatePluginEnabled;
+    
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsDownloadSupported))]
+    private int selectedPluginIndex = 0;
+    
+    public bool IsDownloadSupported => SelectedPluginIndex == 0;
+    
 
     [ObservableProperty]
     private string pluginName;
@@ -36,9 +43,32 @@ public partial class PluginSettingsViewModel : ObservableObject
     private PresetModel currentPreset;
 
     public ObservableCollection<PluginSettingItem> Settings { get; } = new();
+    partial void OnSelectedPluginIndexChanged(int value)
+    {
+        UpdatePaths();
+        LoadConfiguration();
+    }
+    
+    private void UpdatePaths()
+    {
+        string subDir = SelectedPluginIndex == 0 ? "FuFuPlugin" : "FPS";
+        
+        _pluginDir = Path.Combine(AppContext.BaseDirectory, "Plugins", subDir);
+        _iniPath = Path.Combine(_pluginDir, "config.ini");
+        _dllPath = Path.Combine(_pluginDir, subDir == "FuFuPlugin" ? "FufuLauncher.UnlockerIsland.dll" : "FPS_Plugin.dll"); // 假设FPS的DLL名称
+        
+        _presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets", subDir);
 
+        _iniFile = new IniFile(_iniPath);
+
+        if (!Directory.Exists(_presetsDir))
+        {
+            Directory.CreateDirectory(_presetsDir);
+        }
+    }
     public PluginSettingsViewModel()
     {
+        UpdatePaths();
         _pluginDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FuFuPlugin");
         _iniPath = Path.Combine(_pluginDir, "config.ini");
         _dllPath = Path.Combine(_pluginDir, "FufuLauncher.UnlockerIsland.dll");
@@ -123,7 +153,8 @@ public partial class PluginSettingsViewModel : ObservableObject
 
         if (!File.Exists(_iniPath))
         {
-            PluginName = "未安装";
+            PluginName = SelectedPluginIndex == 0 ? "未安装 FuFuPlugin" : "未安装 FPS 插件";
+            PluginDescription = "请确保 Plugins 目录下存在对应的文件夹及 config.ini 文件";
             return;
         }
 

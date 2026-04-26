@@ -49,12 +49,17 @@
 
     <Grid Padding="32,24,32,24">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0,0,0,24">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="0,0,0,16">
+            <TextBlock Text="配置目标:" VerticalAlignment="Center" FontWeight="SemiBold"/>
+            <ComboBox SelectedIndex="{x:Bind ViewModel.SelectedPluginIndex, Mode=TwoWay}" Width="200">
+                <ComboBoxItem Content="FuFuPlugin (主插件)"/>
+                <ComboBoxItem Content="FPS (帧率插件)"/>
+            </ComboBox>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,0,0,24">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -85,8 +90,16 @@
 
             <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center" Spacing="6">
-                    <Button Content="下载插件(Download)" Click="OnDownloadPluginClick" HorizontalAlignment="Stretch"/>
-                    <Button Content="下载加密插件(VMP Plugin)" Click="OnDownloadVmpPluginClick" HorizontalAlignment="Stretch" ToolTipService.ToolTip="功能完全相同，能显著降低被杀毒软件误判的概率，但会使性能明显下降"/>
+                    <Button Content="下载插件(Download)" 
+                            Click="OnDownloadPluginClick" 
+                            HorizontalAlignment="Stretch"
+                            IsEnabled="{x:Bind ViewModel.IsDownloadSupported, Mode=OneWay}"/>
+
+                    <Button Content="下载加密插件(VMP Plugin)" 
+                            Click="OnDownloadVmpPluginClick" 
+                            HorizontalAlignment="Stretch" 
+                            ToolTipService.ToolTip="功能完全相同，能显著降低被杀毒软件误判的概率，但会使性能明显下降"
+                            IsEnabled="{x:Bind ViewModel.IsDownloadSupported, Mode=OneWay}"/>
                     <TextBlock Text="若遭杀毒软件误判请使用VMP加密版" FontSize="11" Opacity="0.6" HorizontalAlignment="Center"/>
                 </StackPanel>
 
@@ -111,9 +124,9 @@
             </StackPanel>
         </Grid>
 
-        <MenuFlyoutSeparator Grid.Row="1" Margin="0,0,0,24"/>
+        <MenuFlyoutSeparator Grid.Row="2" Margin="0,0,0,24"/>
 
-        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel>
                 <Grid Margin="0,0,0,32">
                     <Grid.ColumnDefinitions>

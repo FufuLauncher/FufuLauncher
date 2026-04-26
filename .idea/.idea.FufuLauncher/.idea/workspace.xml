@@ -11,14 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/UserInfoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/UserInfoService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/AccountViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/AccountViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/HoyolabCheckinWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/HoyolabCheckinWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +33,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/.nuget/packages/microsoft.windowsappsdk/1.7.250606001/include/UndockedRegFreeWinRT-AutoInitializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/.nuget/packages/microsoft.windowsappsdk/1.7.250606001/include/WindowsAppRuntimeAutoInitializer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/6eb34e634ec04dbc8be003b21f0a2845238e00/ba/820f5caf/020000A1pdb124.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/c490bd0c56764fc9ad7e424cf225403b21b600/75/ebfc3710/02000059pdb138.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/8f779d9303604d539517de15b58c8ecbc90908/3f/1d95f514/Action.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/95c016b9ad4a4fd28f603079af898a921a6910/cf/d2fc4977/HttpHeaderParser.cs" root0="FORCE_HIGHLIGHTING" />
@@ -42,6 +41,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e703623710cc408eaac0f2c6feb0a00c81230/ef/39b547e2/IDictionaryMethods`2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff6272365c704c4bb2ed9d119a49756b6f7620/9a/735ace2f/ContentDialog.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1510a3e3fe7df8a2681434779ea73bc53713ed9c05689d72495b2b27c87/Path.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cb38a2c7ae5f130718447670b7e2a9fa3374934ed699fa75d2232b59e78a/SHA256.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ddd2e1cb86715125e6335e396ef8b489dcb4f23f331df3e2ba8fb969091bd/Regex.Match.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Constants/ApiEndpoints.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" root0="FORCE_HIGHLIGHTING" />
@@ -53,7 +53,6 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/VerifyGamePage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -85,28 +84,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET 启动设置配置文件.FufuLauncher.executor": "Debug",
-    ".NET 项目.MihoyoBBS.executor": "Debug",
-    ".NET 项目.update.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.49125874",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true",
-    "发布到文件夹.Publish FufuLauncher to folder.executor": "Run"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET 启动设置配置文件.FufuLauncher.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET 项目.MihoyoBBS.executor&quot;: &quot;Debug&quot;,
+    &quot;.NET 项目.update.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.49125874&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Program Files\\JetBrains\\JetBrains Rider 2025.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;发布到文件夹.Publish FufuLauncher to folder.executor&quot;: &quot;Run&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET 启动设置配置文件.FufuLauncher">
     <configuration name="Publish FufuLauncher to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
       <riderPublish configuration="Release" delete_existing_files="true" include_all_content_for_self_extract="true" include_native_libs_for_self_extract="true" platform="x64" produce_single_file="true" ready_to_run="true" self_contained="true" target_folder="$PROJECT_DIR$/FufuLauncher/bin/Release/net8.0-windows10.0.26100.0/win-x64/publish" target_framework="net8.0-windows10.0.26100.0" uuid_high="1964370738064323383" uuid_low="-8405170811345767747">
@@ -313,14 +312,8 @@
       <workItem from="1777004821490" duration="4084000" />
       <workItem from="1777097499939" duration="1535000" />
       <workItem from="1777175046106" duration="10085000" />
-    </task>
-    <task id="LOCAL-00015" summary="修改游戏文件的选择方式">
-      <option name="closed" value="true" />
-      <created>1772627942035</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1772627942035</updated>
+      <workItem from="1777219494697" duration="18000" />
+      <workItem from="1777222383955" duration="2605000" />
     </task>
     <task id="LOCAL-00016" summary="今日的提交解决了issue #104">
       <option name="closed" value="true" />
@@ -706,7 +699,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777181004983</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="增加国际服签到和登录">
+      <option name="closed" value="true" />
+      <created>1777211246634</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1777211246635</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -727,7 +728,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="加防呆" />
     <MESSAGE value="修复崩溃问题" />
     <MESSAGE value="启用按键连点" />
     <MESSAGE value="增加图库" />
@@ -752,7 +752,8 @@
     <MESSAGE value="修复更新" />
     <MESSAGE value="改了很多东西" />
     <MESSAGE value="增加API统一存储" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加API统一存储" />
+    <MESSAGE value="增加国际服签到和登录" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加国际服签到和登录" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
