@@ -48,7 +48,7 @@ public sealed partial class PluginSettingsPage : Page
     
     private async void OnRepairFpsPluginClick(object sender, RoutedEventArgs e)
     {
-        string zipFilePath = Path.Combine(AppContext.BaseDirectory, "Assets", "FPS.zip");
+        string zipFilePath = Path.Combine(AppContext.BaseDirectory, "Assets", "Launcher" , "FPS.zip");
         string pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
         string extractPath = Path.Combine(Path.GetTempPath(), "FPS_Extract_" + Guid.NewGuid());
         string finalDestDir = Path.Combine(pluginsDir, "FPS");
