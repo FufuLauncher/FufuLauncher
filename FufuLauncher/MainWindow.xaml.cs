@@ -1041,6 +1041,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
                     Debug.WriteLine($"启动时刷新 Token 失败: {ex.Message}");
                 }
             });
+            _ = Task.Run(async () => await HashValidationService.ValidateFilesAsync());
         }
         catch { ShowMainContent(); }
     }

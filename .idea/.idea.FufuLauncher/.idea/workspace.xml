@@ -11,11 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/FufuLauncher/Assets/hash.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/HashValidationService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/FPS.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/hash.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +50,7 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Models/ScreenshotItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/FpsOverlayService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/HashValidationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -303,22 +305,7 @@
       <workItem from="1777264876603" duration="615000" />
       <workItem from="1777374262792" duration="3426000" />
       <workItem from="1777378032093" duration="92000" />
-    </task>
-    <task id="LOCAL-00017" summary="fix issue #95">
-      <option name="closed" value="true" />
-      <created>1772633796163</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1772633796163</updated>
-    </task>
-    <task id="LOCAL-00018" summary="fix issue #102">
-      <option name="closed" value="true" />
-      <created>1772635069911</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1772635069911</updated>
+      <workItem from="1777378144041" duration="1520000" />
     </task>
     <task id="LOCAL-00019" summary="增加背景回退">
       <option name="closed" value="true" />
@@ -696,7 +683,23 @@
       <option name="project" value="LOCAL" />
       <updated>1777225136768</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="优化">
+      <option name="closed" value="true" />
+      <created>1777378259840</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1777378259840</updated>
+    </task>
+    <task id="LOCAL-00067" summary="1">
+      <option name="closed" value="true" />
+      <created>1777378272504</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1777378272504</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -717,7 +720,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="启用按键连点" />
     <MESSAGE value="增加图库" />
     <MESSAGE value="修改cookie刷新" />
     <MESSAGE value="增加手动输入cookie" />
@@ -736,13 +738,14 @@
     <MESSAGE value="提交" />
     <MESSAGE value="修改公告显示检测" />
     <MESSAGE value="#130 #131" />
-    <MESSAGE value="1" />
     <MESSAGE value="修复更新" />
     <MESSAGE value="改了很多东西" />
     <MESSAGE value="增加API统一存储" />
     <MESSAGE value="增加国际服签到和登录" />
     <MESSAGE value="增加帧数显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加帧数显示" />
+    <MESSAGE value="优化" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
