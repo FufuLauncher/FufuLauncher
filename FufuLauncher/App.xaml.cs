@@ -41,21 +41,8 @@ public partial class App : Application
                       $"错误来源: {source}\n" +
                       $"错误信息: {ex.Message}\n\n" +
                       $"堆栈信息:\n{ex.StackTrace}";
-
-        var hwnd = IntPtr.Zero;
-        try
-        {
-            if (MainWindow != null)
-            {
-                hwnd = WinRT.Interop.WindowNative.GetWindowHandle(MainWindow);
-            }
-        }
-        catch
-        {
-            // ignored
-        }
         
-        MessageBox(hwnd, message, "芙芙启动器发生了异常", MB_OK | MB_ICONERROR);
+        MessageBox(IntPtr.Zero, message, "芙芙启动器发生了异常", MB_OK | MB_ICONERROR);
     }
 
     public static T GetService<T>()
@@ -92,87 +79,96 @@ public partial class App : Application
         var appInstance = AppInstance.GetCurrent();
         appInstance.Activated += App_Activated!;
 
-        Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
-            .UseContentRoot(AppContext.BaseDirectory)
-            .ConfigureServices((context, services) =>
-            {
-                services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
-
-                services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
-                services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-
-                services.AddSingleton<IHoyoverseBackgroundService, HoyoverseBackgroundService>();
-                services.AddSingleton<IHoyoverseContentService, HoyoverseContentService>();
-                services.AddSingleton<IBackgroundRenderer, BackgroundRenderer>();
-
-                services.AddSingleton<IActivationService, ActivationService>();
-                services.AddSingleton<IPageService, PageService>();
-                services.AddSingleton<INavigationService, NavigationService>();
-                services.AddSingleton<IFileService, FileService>();
-
-                services.AddSingleton<MainViewModel>();
-                services.AddTransient<MainPage>();
-                
-                services.AddTransient<DataViewModel>();
-                services.AddTransient<DataPage>();
-                
-                services.AddTransient<SettingsViewModel>();
-                services.AddTransient<SettingsPage>();
-                services.AddTransient<BlankPage>();
-
-                services.AddTransient<NullToVisibilityConverter>();
-                services.AddTransient<BoolToVisibilityConverter>();
-                services.AddTransient<BoolToGlyphConverter>();
-                services.AddTransient<IntToVisibilityConverter>();
-
-                services.AddTransient<AccountViewModel>();
-                services.AddTransient<AccountPage>();
-
-                services.AddSingleton<IGameLauncherService, GameLauncherService>();
-                services.AddSingleton<IGameConfigService, GameConfigService>();
-
-                services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
-                services.AddSingleton<BlankViewModel>();
-                services.AddTransient<BlankPage>();
-                services.AddSingleton<ILauncherService, LauncherService>();
-                services.AddTransient<OtherViewModel>();
-                services.AddTransient<OtherPage>();
-                services.AddSingleton<IAutoClickerService, AutoClickerService>();
-                services.AddTransient<AgreementViewModel>();
-                services.AddTransient<AgreementPage>();
-                services.AddSingleton<IUpdateService, UpdateService>();
-                services.AddSingleton<IUserConfigService, UserConfigService>();
-
-                services.AddSingleton<IUserConfigService, UserConfigService>();
-                services.AddSingleton<ControlPanelModel>();
-                services.AddTransient<PanelPage>();
-                services.AddSingleton<IUserInfoService, UserInfoService>();
-
-                services.AddLogging(builder =>
+        try
+        {
+            Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
+                .UseContentRoot(AppContext.BaseDirectory)
+                .ConfigureServices((context, services) =>
                 {
-                    builder.AddDebug();
-                    builder.SetMinimumLevel(LogLevel.Information);
-                });
-                services.AddSingleton<GenshinApiClient>();
-                services.AddSingleton<IGenshinService, GenshinService>();
-                services.AddTransient<GenshinViewModel>();
-                services.AddTransient<GenshinDataWindow>();
-                services.AddSingleton<IFilePickerService, FilePickerService>();
-                services.AddSingleton<INotificationService, NotificationService>();
-                services.AddTransient<CalculatorViewModel>();
-                services.AddTransient<CalculatorPage>();
-                services.AddTransient<PluginViewModel>();
-                services.AddTransient<PluginPage>();
-                services.AddTransient<GachaViewModel>();
-                services.AddSingleton<GachaService>();
-                services.AddSingleton<IAnnouncementService, AnnouncementService>();
-                services.AddTransient<IPluginUpdateService, PluginUpdateService>();
-                services.AddTransient<FufuLauncher.ViewModels.GachaAnalysisModel>();
-                services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
-            })
-            .Build();
+                    services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
-        CleanupOldSettings();
+                    services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
+                    services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+
+                    services.AddSingleton<IHoyoverseBackgroundService, HoyoverseBackgroundService>();
+                    services.AddSingleton<IHoyoverseContentService, HoyoverseContentService>();
+                    services.AddSingleton<IBackgroundRenderer, BackgroundRenderer>();
+
+                    services.AddSingleton<IActivationService, ActivationService>();
+                    services.AddSingleton<IPageService, PageService>();
+                    services.AddSingleton<INavigationService, NavigationService>();
+                    services.AddSingleton<IFileService, FileService>();
+
+                    services.AddSingleton<MainViewModel>();
+                    services.AddTransient<MainPage>();
+                    
+                    services.AddTransient<DataViewModel>();
+                    services.AddTransient<DataPage>();
+                    
+                    services.AddTransient<SettingsViewModel>();
+                    services.AddTransient<SettingsPage>();
+                    services.AddTransient<BlankPage>();
+
+                    services.AddTransient<NullToVisibilityConverter>();
+                    services.AddTransient<BoolToVisibilityConverter>();
+                    services.AddTransient<BoolToGlyphConverter>();
+                    services.AddTransient<IntToVisibilityConverter>();
+
+                    services.AddTransient<AccountViewModel>();
+                    services.AddTransient<AccountPage>();
+
+                    services.AddSingleton<IGameLauncherService, GameLauncherService>();
+                    services.AddSingleton<IGameConfigService, GameConfigService>();
+
+                    services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
+                    services.AddSingleton<BlankViewModel>();
+                    services.AddTransient<BlankPage>();
+                    services.AddSingleton<ILauncherService, LauncherService>();
+                    services.AddTransient<OtherViewModel>();
+                    services.AddTransient<OtherPage>();
+                    services.AddSingleton<IAutoClickerService, AutoClickerService>();
+                    services.AddTransient<AgreementViewModel>();
+                    services.AddTransient<AgreementPage>();
+                    services.AddSingleton<IUpdateService, UpdateService>();
+                    services.AddSingleton<IUserConfigService, UserConfigService>();
+
+                    services.AddSingleton<IUserConfigService, UserConfigService>();
+                    services.AddSingleton<ControlPanelModel>();
+                    services.AddTransient<PanelPage>();
+                    services.AddSingleton<IUserInfoService, UserInfoService>();
+
+                    services.AddLogging(builder =>
+                    {
+                        builder.AddDebug();
+                        builder.SetMinimumLevel(LogLevel.Information);
+                    });
+                    services.AddSingleton<GenshinApiClient>();
+                    services.AddSingleton<IGenshinService, GenshinService>();
+                    services.AddTransient<GenshinViewModel>();
+                    services.AddTransient<GenshinDataWindow>();
+                    services.AddSingleton<IFilePickerService, FilePickerService>();
+                    services.AddSingleton<INotificationService, NotificationService>();
+                    services.AddTransient<CalculatorViewModel>();
+                    services.AddTransient<CalculatorPage>();
+                    services.AddTransient<PluginViewModel>();
+                    services.AddTransient<PluginPage>();
+                    services.AddTransient<GachaViewModel>();
+                    services.AddSingleton<GachaService>();
+                    services.AddSingleton<IAnnouncementService, AnnouncementService>();
+                    services.AddTransient<IPluginUpdateService, PluginUpdateService>();
+                    services.AddTransient<FufuLauncher.ViewModels.GachaAnalysisModel>();
+                    services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
+                })
+                .Build();
+
+            CleanupOldSettings();
+        }
+        catch (Exception ex)
+        {
+            LogException(ex, "App Constructor (核心配置初始化异常)");
+            ShowCrashDialog("核心配置及服务初始化异常", ex);
+            Environment.Exit(-1);
+        }
     }
     
     private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
@@ -188,6 +184,7 @@ public partial class App : Application
         e.Handled = true;
         LogException(e.Exception, "App_UnhandledException");
         ShowCrashDialog("UI 界面交互异常", e.Exception);
+        Environment.Exit(-1);
     }
 
     private void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
@@ -195,6 +192,7 @@ public partial class App : Application
         var ex = e.ExceptionObject as Exception;
         LogException(ex, "CurrentDomain_UnhandledException");
         ShowCrashDialog("应用程序域致命异常", ex);
+        Environment.Exit(-1);
     }
 
     private void App_Activated(object sender, AppActivationArguments e)
@@ -388,7 +386,9 @@ public partial class App : Application
         catch (Exception ex)
         {
             Debug.WriteLine($"启动失败: {ex.Message}");
-            MainWindow.Activate();
+            LogException(ex, "OnLaunched (启动流程异常)");
+            ShowCrashDialog("应用启动流程异常", ex);
+            Environment.Exit(-1);
         }
     }
     
