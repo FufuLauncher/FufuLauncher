@@ -48,48 +48,50 @@
     </Page.Resources>
 
     <Grid Padding="32,24,32,24">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Margin="0,0,0,16">
-            <TextBlock Text="配置目标:" VerticalAlignment="Center" FontWeight="SemiBold"/>
-            <ComboBox SelectedIndex="{x:Bind ViewModel.SelectedPluginIndex, Mode=TwoWay}" Width="200">
-                <ComboBoxItem Content="FuFuPlugin (主插件)"/>
-                <ComboBoxItem Content="FPS (帧率插件)"/>
-            </ComboBox>
-        </StackPanel>
-
-        <Grid Grid.Row="1" Margin="0,0,0,24">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Image Source="/Assets/WindowIcon.ico" Width="42" Height="42" VerticalAlignment="Center" Stretch="Uniform"/>
-
-            <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
-                <TextBlock Text="{x:Bind ViewModel.PluginName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
-                <TextBlock Text="{x:Bind ViewModel.PluginDescription, Mode=OneWay}" FontSize="12" Opacity="0.6" TextWrapping="Wrap"/>
-                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
-                    <Button Content="有想法或遇到问题？点此反馈" 
-                            Click="OnFeedbackClick"/>
-                    <Button Content="提交PR" 
-                            Click="OnPullRequestsClick"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel>
+                
+                <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,0,0,16">
+                    <TextBlock Text="配置目标:" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                    <ComboBox SelectedIndex="{x:Bind ViewModel.SelectedPluginIndex, Mode=TwoWay}" Width="200">
+                        <ComboBoxItem Content="FuFuPlugin (主插件)"/>
+                        <ComboBoxItem Content="FPS (帧率插件)"/>
+                    </ComboBox>
                 </StackPanel>
-            </StackPanel>
 
-            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,24,0">
-                <TextBlock Text="{x:Bind ViewModel.PluginDeveloper, Mode=OneWay}" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,0,4"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="修改日期: " FontSize="12" Opacity="0.6"/>
-                    <TextBlock Text="{x:Bind ViewModel.LastModifiedDate, Mode=OneWay}" FontSize="12" Opacity="0.6"/>
-                </StackPanel>
-            </StackPanel>
+                <Grid Margin="0,0,0,24">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
-                <StackPanel VerticalAlignment="Center" Spacing="6">
+                    <Image Source="/Assets/WindowIcon.ico" Width="42" Height="42" VerticalAlignment="Center" Stretch="Uniform"/>
+
+                    <StackPanel Grid.Column="1" Margin="16,0,0,0" VerticalAlignment="Center">
+                        <TextBlock Text="{x:Bind ViewModel.PluginName, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                        <TextBlock Text="{x:Bind ViewModel.PluginDescription, Mode=OneWay}" FontSize="12" Opacity="0.6" TextWrapping="Wrap"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+                            <Button Content="有想法或遇到问题？点此反馈" 
+                                    Click="OnFeedbackClick"/>
+                            <Button Content="提交PR" 
+                                    Click="OnPullRequestsClick"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,24,0">
+                        <TextBlock Text="{x:Bind ViewModel.PluginDeveloper, Mode=OneWay}" FontSize="12" FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,0,4"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <TextBlock Text="修改日期: " FontSize="12" Opacity="0.6"/>
+                            <TextBlock Text="{x:Bind ViewModel.LastModifiedDate, Mode=OneWay}" FontSize="12" Opacity="0.6"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
+    <Button Content="功能(Download/Repair)" VerticalAlignment="Center">
+        <Button.Flyout>
+            <Flyout>
+                <StackPanel Spacing="6" MinWidth="200">
                     <Button Content="下载插件(Download)" 
                             Click="OnDownloadPluginClick" 
                             HorizontalAlignment="Stretch"
@@ -100,122 +102,133 @@
                             HorizontalAlignment="Stretch" 
                             ToolTipService.ToolTip="功能完全相同，能显著降低被杀毒软件误判的概率，但会使性能明显下降"
                             IsEnabled="{x:Bind ViewModel.IsDownloadSupported, Mode=OneWay}"/>
-                    <TextBlock Text="若遭杀毒软件误判请使用VMP加密版" FontSize="11" Opacity="0.6" HorizontalAlignment="Center"/>
+                    
+                    <TextBlock Text="若遭杀毒软件误判请使用VMP加密版" 
+                               FontSize="11" 
+                               Opacity="0.6" 
+                               HorizontalAlignment="Center"/>
+                    
+                    <Button Content="修复FPS显示插件(Repair)" 
+                            Click="OnRepairFpsPluginClick" 
+                            HorizontalAlignment="Stretch" />
                 </StackPanel>
+            </Flyout>
+        </Button.Flyout>
+    </Button>
 
-                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="自动更新插件" FontWeight="SemiBold" HorizontalAlignment="Right"/>
-                        <TextBlock Text="保持你的插件始终最新" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.IsAutoUpdatePluginEnabled, Mode=TwoWay}" 
-                                  OnContent="" OffContent="" MinWidth="0" VerticalAlignment="Center"/>
-                </StackPanel>
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="自动更新插件" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+            <TextBlock Text="保持你的插件始终最新" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <ToggleSwitch IsOn="{x:Bind ViewModel.IsAutoUpdatePluginEnabled, Mode=TwoWay}" 
+                      OnContent="" OffContent="" MinWidth="0" VerticalAlignment="Center"/>
+    </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                    <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="启用注入(Injection)" FontWeight="SemiBold" HorizontalAlignment="Right"/>
-                        <TextBlock Text="启动游戏时加载插件" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
-                    </StackPanel>
-                    <ToggleSwitch IsOn="{x:Bind MainVM.UseInjection, Mode=TwoWay}" 
-                                  IsEnabled="{x:Bind InvertBool(ControlPanelVM.IsGameRunning), Mode=OneWay}"
-                                  OnContent="" OffContent="" MinWidth="0" VerticalAlignment="Center"/>
-                </StackPanel>
-            </StackPanel>
-        </Grid>
-
-        <MenuFlyoutSeparator Grid.Row="2" Margin="0,0,0,24"/>
-
-        <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <StackPanel>
-                <Grid Margin="0,0,0,32">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                        <TextBlock Text="配置预设:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBlock Text="{x:Bind ViewModel.CurrentPreset.Name, Mode=OneWay}" FontSize="12" Opacity="0.8" VerticalAlignment="Center"/>
-                    </StackPanel>
-
-                    <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                        <ItemsControl ItemsSource="{x:Bind ViewModel.AvailablePresets, Mode=OneWay}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" Spacing="8"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate x:DataType="viewmodels:PresetModel">
-                                    <StackPanel Orientation="Horizontal" Spacing="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                                        <Button Content="{x:Bind Name}" 
-                                                Click="OnSwitchPresetClick" 
-                                                Background="Transparent" 
-                                                BorderThickness="0"
-                                                ToolTipService.ToolTip="点击切换至此预设"/>
-                                        <TextBlock Text="[锁定]" 
-                                                   Visibility="{x:Bind IsLocked, Mode=OneWay}" 
-                                                   Foreground="Red" 
-                                                   FontSize="12" 
-                                                   VerticalAlignment="Center" 
-                                                   Margin="4,0,0,0"/>
-                                        <Button Content="&#xE74D;"
-                                                FontFamily="Segoe Fluent Icons" 
-                                                Click="OnDeletePresetClick"
-                                                Background="Transparent" 
-                                                Foreground="Red"
-                                                BorderThickness="0"
-                                                Width="32" Padding="0"
-                                                ToolTipService.ToolTip="删除此预设">
-                                            <Button.Resources>
-                                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
-                                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
-                                                <SolidColorBrush x:Key="ButtonForegroundPressed" Color="DarkRed"/>
-                                                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="Transparent"/>
-                                            </Button.Resources>
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-
-                    <Button Grid.Column="2" Content="新建预设" Click="OnCreateNewPresetClick" VerticalAlignment="Center" Margin="16,0,0,0"/>
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="启用注入(Injection)" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+            <TextBlock Text="启动游戏时加载插件" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <ToggleSwitch IsOn="{x:Bind MainVM.UseInjection, Mode=TwoWay}" 
+                      IsEnabled="{x:Bind InvertBool(ControlPanelVM.IsGameRunning), Mode=OneWay}"
+                      OnContent="" OffContent="" MinWidth="0" VerticalAlignment="Center"/>
+    </StackPanel>
+</StackPanel>
                 </Grid>
 
-                <GridView ItemsSource="{x:Bind ViewModel.Settings, Mode=OneWay}"
-                          ItemTemplateSelector="{StaticResource SettingSelector}"
-                          SelectionMode="None"
-                          IsItemClickEnabled="False"
-                          HorizontalAlignment="Stretch"
-                          ScrollViewer.VerticalScrollMode="Disabled">
-                    <GridView.ItemContainerStyle>
-                        <Style TargetType="GridViewItem">
-                            <Setter Property="Margin" Value="0,0,24,24"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="MinHeight" Value="0"/>
-                            <Setter Property="MinWidth" Value="0"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="GridViewItem">
-                                        <ContentPresenter />
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GridView.ItemContainerStyle>
+                <MenuFlyoutSeparator Margin="0,0,0,24"/>
 
-                    <GridView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </GridView.ItemsPanel>
-                </GridView>
+                <StackPanel>
+                    <Grid Margin="0,0,0,32">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                            <TextBlock Text="配置预设:" FontWeight="SemiBold" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="{x:Bind ViewModel.CurrentPreset.Name, Mode=OneWay}" FontSize="12" Opacity="0.8" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                            <ItemsControl ItemsSource="{x:Bind ViewModel.AvailablePresets, Mode=OneWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" Spacing="8"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate x:DataType="viewmodels:PresetModel">
+                                        <StackPanel Orientation="Horizontal" Spacing="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                                            <Button Content="{x:Bind Name}" 
+                                                    Click="OnSwitchPresetClick" 
+                                                    Background="Transparent" 
+                                                    BorderThickness="0"
+                                                    ToolTipService.ToolTip="点击切换至此预设"/>
+                                            <TextBlock Text="[锁定]" 
+                                                       Visibility="{x:Bind IsLocked, Mode=OneWay}" 
+                                                       Foreground="Red" 
+                                                       FontSize="12" 
+                                                       VerticalAlignment="Center" 
+                                                       Margin="4,0,0,0"/>
+                                            <Button Content="&#xE74D;"
+                                                    FontFamily="Segoe Fluent Icons" 
+                                                    Click="OnDeletePresetClick"
+                                                    Background="Transparent" 
+                                                    Foreground="Red"
+                                                    BorderThickness="0"
+                                                    Width="32" Padding="0"
+                                                    ToolTipService.ToolTip="删除此预设">
+                                                <Button.Resources>
+                                                    <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="Red"/>
+                                                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="Transparent"/>
+                                                    <SolidColorBrush x:Key="ButtonForegroundPressed" Color="DarkRed"/>
+                                                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="Transparent"/>
+                                                </Button.Resources>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+
+                        <Button Grid.Column="2" Content="新建预设" Click="OnCreateNewPresetClick" VerticalAlignment="Center" Margin="16,0,0,0"/>
+                    </Grid>
+
+                    <GridView ItemsSource="{x:Bind ViewModel.Settings, Mode=OneWay}"
+                              ItemTemplateSelector="{StaticResource SettingSelector}"
+                              SelectionMode="None"
+                              IsItemClickEnabled="False"
+                              HorizontalAlignment="Stretch"
+                              ScrollViewer.VerticalScrollMode="Disabled">
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Margin" Value="0,0,24,24"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="MinHeight" Value="0"/>
+                                <Setter Property="MinWidth" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewItem">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

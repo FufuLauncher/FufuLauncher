@@ -1,4 +1,5 @@
 ﻿using System.IO.Compression;
+using System.Security.Cryptography;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using FufuLauncher.ViewModels;
@@ -40,6 +41,116 @@ public sealed partial class PluginSettingsPage : Page
             };
 
             await dialog.ShowAsync();
+        }
+
+        await VerifyFpsPluginHashAsync();
+    }
+    
+    private async void OnRepairFpsPluginClick(object sender, RoutedEventArgs e)
+    {
+        string zipFilePath = Path.Combine(AppContext.BaseDirectory, "Assets", "FPS.zip");
+        string pluginsDir = Path.Combine(AppContext.BaseDirectory, "Plugins");
+        string extractPath = Path.Combine(Path.GetTempPath(), "FPS_Extract_" + Guid.NewGuid());
+        string finalDestDir = Path.Combine(pluginsDir, "FPS");
+
+        if (!File.Exists(zipFilePath))
+        {
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("错误", "未找到文件，请确认启动器文件完整", NotificationType.Error));
+            return;
+        }
+
+        var progressDialog = new ContentDialog
+        {
+            Title = "正在修复FPS插件",
+            Content = new ProgressBar { IsIndeterminate = true, Height = 20, Margin = new Thickness(0, 10, 0, 0) },
+            XamlRoot = XamlRoot
+        };
+
+        _ = progressDialog.ShowAsync();
+
+        try
+        {
+            if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
+            Directory.CreateDirectory(extractPath);
+            
+            await Task.Run(() => ZipFile.ExtractToDirectory(zipFilePath, extractPath));
+            
+            var subDirs = Directory.GetDirectories(extractPath);
+            string sourceDirToMove = (subDirs.Length == 1 && Directory.GetFiles(extractPath).Length == 0) ? subDirs[0] : extractPath;
+
+            if (Directory.Exists(finalDestDir)) Directory.Delete(finalDestDir, true);
+            
+            await Task.Run(() => MoveDirectorySafe(sourceDirToMove, finalDestDir));
+
+            progressDialog.Hide();
+            ViewModel.LoadConfiguration();
+            
+            await VerifyFpsPluginHashAsync();
+
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "FPS显示插件已成功修复并安装", NotificationType.Success));
+        }
+        catch (Exception ex)
+        {
+            progressDialog.Hide();
+            var failDialog = new ContentDialog
+            {
+                Title = "修复失败",
+                Content = ex.Message,
+                CloseButtonText = "关闭",
+                XamlRoot = XamlRoot
+            };
+            await failDialog.ShowAsync();
+        }
+        finally
+        {
+            if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
+        }
+    }
+    
+    private async Task VerifyFpsPluginHashAsync()
+    {
+        try
+        {
+            string hashFilePath = Path.Combine(AppContext.BaseDirectory, "Assets", "hash.txt");
+            string fpsPluginPath = Path.Combine(AppContext.BaseDirectory, "Plugins", "FPS", "FPS.dll");
+
+            if (!File.Exists(hashFilePath) || !File.Exists(fpsPluginPath))
+            {
+                return;
+            }
+
+            string expectedHash = string.Empty;
+            using (var reader = new StreamReader(hashFilePath))
+            {
+                expectedHash = (await reader.ReadLineAsync())?.Trim() ?? string.Empty;
+            }
+
+            if (string.IsNullOrEmpty(expectedHash))
+            {
+                return;
+            }
+
+            string actualHash = string.Empty;
+            using (var sha512 = SHA512.Create())
+            {
+                using (var stream = File.OpenRead(fpsPluginPath))
+                {
+                    byte[] hashBytes = await sha512.ComputeHashAsync(stream);
+                    actualHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
+                }
+            }
+
+            if (!string.Equals(expectedHash, actualHash, StringComparison.OrdinalIgnoreCase))
+            {
+                WeakReferenceMessenger.Default.Send(new NotificationMessage(
+                    "警告", 
+                    "帧数显示插件哈希不匹配，可能已被篡改或损坏，请重新安装启动器", 
+                    NotificationType.Error));
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"FPS插件哈希校验异常: {ex.Message}");
         }
     }
 

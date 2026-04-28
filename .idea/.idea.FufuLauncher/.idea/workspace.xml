@@ -11,12 +11,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Assets/hash.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/FufuLauncher.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/HoyolabCheckinWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/HoyolabCheckinWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/HoyolabCheckinWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.49125874&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;1.3386455&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -159,20 +158,6 @@
       <option name="PROJECT_TFM" value="" />
       <method v="2">
         <option name="Build" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
-      <option name="EXE_PATH" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
-      <option name="MIXED_MODE_DEBUG" value="0" />
-      <method v="2">
-        <option name="Build Solution" enabled="true" />
       </method>
     </configuration>
     <configuration name="FufuLauncher" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -313,15 +298,11 @@
       <workItem from="1777097499939" duration="1535000" />
       <workItem from="1777175046106" duration="10085000" />
       <workItem from="1777219494697" duration="18000" />
-      <workItem from="1777222383955" duration="2605000" />
-    </task>
-    <task id="LOCAL-00016" summary="今日的提交解决了issue #104">
-      <option name="closed" value="true" />
-      <created>1772633346390</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1772633346390</updated>
+      <workItem from="1777222383955" duration="2753000" />
+      <workItem from="1777228011061" duration="356000" />
+      <workItem from="1777264876603" duration="615000" />
+      <workItem from="1777374262792" duration="3426000" />
+      <workItem from="1777378032093" duration="92000" />
     </task>
     <task id="LOCAL-00017" summary="fix issue #95">
       <option name="closed" value="true" />
@@ -707,7 +688,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777211246635</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="增加帧数显示">
+      <option name="closed" value="true" />
+      <created>1777225136767</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1777225136768</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +717,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="修复崩溃问题" />
     <MESSAGE value="启用按键连点" />
     <MESSAGE value="增加图库" />
     <MESSAGE value="修改cookie刷新" />
@@ -753,7 +741,8 @@
     <MESSAGE value="改了很多东西" />
     <MESSAGE value="增加API统一存储" />
     <MESSAGE value="增加国际服签到和登录" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加国际服签到和登录" />
+    <MESSAGE value="增加帧数显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加帧数显示" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

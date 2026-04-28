@@ -67,6 +67,8 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <Link>Update.json</Link>
         </Content>
+        <Content Remove="Assets\hash.txt" />
+        <Content Remove="Assets\FPS.zip" />
     </ItemGroup>
 
     <ItemGroup>
