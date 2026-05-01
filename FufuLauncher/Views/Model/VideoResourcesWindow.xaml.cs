@@ -88,69 +88,80 @@ public sealed partial class VideoResourcesWindow : Window, INotifyPropertyChange
     }
 
     private async Task LoadVideosAsync(string url, ObservableCollection<VideoItem> targetCollection)
+{
+    if (IsLoading) return;
+    IsLoading = true;
+    try
     {
-        if (IsLoading) return;
-        IsLoading = true;
-        try
-        {
-            var tcs = new TaskCompletionSource<bool>();
-            void OnNav(CoreWebView2 s, CoreWebView2NavigationCompletedEventArgs a) => tcs.TrySetResult(true);
+        await CrawlerWebView.EnsureCoreWebView2Async();
 
-            CrawlerWebView.CoreWebView2.NavigationCompleted += OnNav;
-            CrawlerWebView.CoreWebView2.Navigate(url);
-            await tcs.Task;
-            CrawlerWebView.CoreWebView2.NavigationCompleted -= OnNav;
+        var tcs = new TaskCompletionSource<bool>();
+        void OnNav(CoreWebView2 s, CoreWebView2NavigationCompletedEventArgs a) => tcs.TrySetResult(true);
 
-            await Task.Delay(2000);
+        CrawlerWebView.CoreWebView2.NavigationCompleted += OnNav;
+        CrawlerWebView.CoreWebView2.Navigate(url);
+        await tcs.Task;
+        CrawlerWebView.CoreWebView2.NavigationCompleted -= OnNav;
 
-            string jsCode = @"
-                (function() {
-                    var items = [];
-                    var nodes = document.querySelectorAll('.channel-content-container li');
-                    nodes.forEach(function(li) {
-                        var a = li.querySelector('a');
-                        var img = li.querySelector('.item__img');
-                        var title = li.querySelector('h5');
-                        if(a && img && title) {
-                            var link = a.getAttribute('href');
-                            if(link && !link.startsWith('http')) link = 'https://baike.mihoyo.com' + link;
-                            items.push({
-                                Title: title.innerText.trim(),
-                                Cover: img.getAttribute('data-src'),
-                                PageUrl: link
-                            });
-                        }
+        await Task.Delay(4000);
+
+        string jsCode = @"
+    (function() {
+        var items = [];
+        var nodes = document.querySelectorAll('a[href*=""/ys/obc/content/""]');
+        nodes.forEach(function(a) {
+            var img = a.querySelector('.item__img');
+            var title = a.querySelector('h5');
+            if(img && title) {
+                var link = a.getAttribute('href');
+                if(link && !link.startsWith('http')) {
+                    link = 'https://baike.mihoyo.com' + link;
+                }
+                
+                var cover = img.getAttribute('data-src');
+                var text = title.innerText || title.textContent;
+                
+                if(text && link) {
+                    items.push({
+                        Title: text.trim(),
+                        Cover: cover ? cover.trim() : '',
+                        PageUrl: link.trim()
                     });
-                    return JSON.stringify(items);
-                })();
-            ";
-
-            var json = await CrawlerWebView.ExecuteScriptAsync(jsCode);
-            if (!string.IsNullOrEmpty(json) && json != "null")
-            {
-                var unescapedJson = JsonSerializer.Deserialize<string>(json);
-                var items = JsonSerializer.Deserialize<List<VideoItem>>(unescapedJson);
-                if (items != null)
-                {
-                    targetCollection.Clear();
-                    foreach (var item in items) targetCollection.Add(item);
                 }
             }
-        }
-        catch (Exception ex)
+        });
+        return JSON.stringify(items);
+    })();
+";
+
+        var json = await CrawlerWebView.ExecuteScriptAsync(jsCode);
+        if (!string.IsNullOrEmpty(json) && json != "null")
         {
-            Debug.WriteLine($"[VideoResource] Load List Failed: {ex.Message}");
-        }
-        finally
-        {
-            IsLoading = false;
+            var unescapedJson = JsonSerializer.Deserialize<string>(json);
+            var items = JsonSerializer.Deserialize<List<VideoItem>>(unescapedJson);
+            if (items != null)
+            {
+                targetCollection.Clear();
+                foreach (var item in items) targetCollection.Add(item);
+            }
         }
     }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"[VideoResource] Load List Failed: {ex.Message}");
+    }
+    finally
+    {
+        IsLoading = false;
+    }
+}
 
     private async Task<string> GetVideoSourceUrlAsync(string pageUrl)
     {
         try
         {
+            await CrawlerWebView.EnsureCoreWebView2Async();
+            
             var tcs = new TaskCompletionSource<bool>();
             void OnNav(CoreWebView2 s, CoreWebView2NavigationCompletedEventArgs a) => tcs.TrySetResult(true);
 

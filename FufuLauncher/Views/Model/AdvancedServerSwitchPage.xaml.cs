@@ -188,8 +188,6 @@ namespace FufuLauncher.Views
 
     public class OperationLists
     {
-        public List<(string src, string dst)> Backup { get; set; } = new();
-        public List<(string src, string dst)> Restore { get; set; } = new();
         public List<SophonAssetOperation> Assemble { get; set; } = new();
     }
 
@@ -203,15 +201,10 @@ namespace FufuLauncher.Views
 
         private readonly string chunksDir;
         private readonly string targetDir;
-        private readonly string backupCnDir;
-        private readonly string backupOsDir;
-        private readonly string backupBiliDir;
 
         private readonly bool isCurrentlyCn;
         private readonly bool isCurrentlyOs;
         private readonly bool targetIsOversea;
-        private readonly string backupLocalDir;
-        private readonly string backupTargetDir;
         private SophonManifestProto _targetManifest;
         private string _targetChunkPrefix;
         private string _targetChunkSuffix;
@@ -220,25 +213,6 @@ namespace FufuLauncher.Views
         private readonly bool targetIsBilibili;
         public string TargetServerName => targetIsOversea ? "国际服 (OS)" : (targetIsBilibili ? "B服 (Bilibili)" : "国服 (CN)");
         
-        public async Task RunVerificationAsync()
-        {
-            print("正在请求网络分支");
-            var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
-            _targetChunkPrefix = localInfo.chunkPrefix;
-            _targetChunkSuffix = localInfo.chunkSuffix;
-
-            print("正在下载并解析最新清单");
-            _targetManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
-            
-            await VerifyAndRepairAsync();
-    
-            print("清理临时数据");
-            if (Directory.Exists(targetDir))
-            {
-                Directory.Delete(targetDir, true);
-            }
-        }
-
         public PackageConverter(string gameDir, string cacheDir, Action<string> logger, string targetServer = "")
         {
             this.gameDir = gameDir;
@@ -248,11 +222,8 @@ namespace FufuLauncher.Views
 
             chunksDir = Path.Combine(cacheDir, "Chunks");
             targetDir = Path.Combine(cacheDir, "Target");
-            backupCnDir = Path.Combine(cacheDir, "Backup", "CN");
-            backupOsDir = Path.Combine(cacheDir, "Backup", "OS");
-            backupBiliDir = Path.Combine(cacheDir, "Backup", "Bili");
 
-            foreach (var d in new[] { chunksDir, targetDir, backupCnDir, backupOsDir, backupBiliDir }) Directory.CreateDirectory(d);
+            foreach (var d in new[] { chunksDir, targetDir }) Directory.CreateDirectory(d);
             if (Directory.Exists(targetDir))
             {
                 Directory.Delete(targetDir, true);
@@ -293,13 +264,44 @@ namespace FufuLauncher.Views
             else if (targetServer == "OS") { targetIsOversea = true; targetIsBilibili = false; }
             else if (targetServer == "CN") { targetIsOversea = false; targetIsBilibili = false; }
             else { targetIsOversea = isCurrentlyCn; targetIsBilibili = false; }
+        }
 
-            backupLocalDir = isCurrentlyOs ? backupOsDir : (isCurrentlyBili ? backupBiliDir : backupCnDir);
-            backupTargetDir = targetIsOversea ? backupOsDir : (targetIsBilibili ? backupBiliDir : backupCnDir);
+        private void ClearPluginsFolder()
+        {
+            string localDataDirName = isCurrentlyOs ? GameConstants.OS_DATA_DIR : GameConstants.CN_DATA_DIR;
+            string pluginsDir = Path.Combine(gameDir, localDataDirName, "Plugins");
+            if (Directory.Exists(pluginsDir))
+            {
+                Directory.Delete(pluginsDir, true);
+                print("已在校验前清理 Plugins 文件夹");
+            }
+        }
+
+        public async Task RunVerificationAsync()
+        {
+            ClearPluginsFolder();
+
+            print("正在请求网络分支");
+            var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
+            _targetChunkPrefix = localInfo.chunkPrefix;
+            _targetChunkSuffix = localInfo.chunkSuffix;
+
+            print("正在下载并解析最新清单");
+            _targetManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
+            
+            await VerifyAndRepairAsync();
+    
+            print("清理临时数据");
+            if (Directory.Exists(targetDir))
+            {
+                Directory.Delete(targetDir, true);
+            }
         }
 
         public async Task ExecuteConversionAsync()
         {
+            ClearPluginsFolder();
+
             print("正在请求网络分支");
             var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
             var targetInfo = await GetBranchAndManifestUrlAsync(targetIsOversea, targetIsBilibili);
@@ -320,10 +322,14 @@ namespace FufuLauncher.Views
             print("正在组装文件");
             AssembleFiles(ops.Assemble);
 
-            print("正在替换与备份回滚");
+            print("正在替换文件");
             ReplacePhysicalFiles(ops);
 
             print("清理临时数据");
+            if (Directory.Exists(targetDir))
+            {
+                Directory.Delete(targetDir, true);
+            }
         }
         
         public async Task VerifyAndRepairAsync()
@@ -436,141 +442,141 @@ namespace FufuLauncher.Views
             string launcherId = isOversea ? GameConstants.OS_LAUNCHER_ID : (isBili ? GameConstants.BILI_LAUNCHER_ID : GameConstants.CN_LAUNCHER_ID);
             string gameId = isOversea ? GameConstants.OS_GAME_ID : (isBili ? GameConstants.BILI_GAME_ID : GameConstants.CN_GAME_ID);
 
-    string url = $"{api}/getGameBranches?launcher_id={launcherId}&game_ids[]={gameId}";
-    var jsonResp = await httpClient.GetStringAsync(url);
-    using var doc = JsonDocument.Parse(jsonResp);
-    var branches = doc.RootElement.GetProperty("data").GetProperty("game_branches")[0];
-    
-    JsonElement targetBranch;
-    if (isPreDownload)
-    {
-        if (!branches.TryGetProperty("pre_download", out targetBranch) || targetBranch.ValueKind == JsonValueKind.Null)
-        {
-            throw new Exception("当前未开启预下载");
-        }
-    }
-    else
-    {
-        targetBranch = branches.GetProperty("main");
-    }
-
-    string buildUrl = targetBranch.TryGetProperty("build_url", out var bUrl) && bUrl.ValueKind == JsonValueKind.String ? bUrl.GetString() : null;
-
-    if (string.IsNullOrEmpty(buildUrl))
-    {
-        string sophonApi = isOversea ? GameConstants.OS_SOPHON : GameConstants.CN_SOPHON;
-        string pkgId = targetBranch.GetProperty("package_id").GetString();
-        string pwd = targetBranch.GetProperty("password").GetString();
-        string branchName = isPreDownload ? "pre_download" : "main";
-        buildUrl = $"{sophonApi}/getBuild?branch={branchName}&package_id={pkgId}&password={pwd}";
-    }
-
-    var buildJson = await httpClient.GetStringAsync(buildUrl);
-    using var buildDoc = JsonDocument.Parse(buildJson);
-    var manifestData = buildDoc.RootElement.GetProperty("data").GetProperty("manifests")[0];
-
-    string manifestId = manifestData.GetProperty("manifest").GetProperty("id").GetString();
-    string urlPrefix = manifestData.GetProperty("manifest_download").GetProperty("url_prefix").GetString();
-    string urlSuffix = manifestData.GetProperty("manifest_download").TryGetProperty("url_suffix", out var sfx) ? sfx.GetString() : "";
-
-    string chunkPrefix = manifestData.GetProperty("chunk_download").GetProperty("url_prefix").GetString();
-    string chunkSuffix = manifestData.GetProperty("chunk_download").TryGetProperty("url_suffix", out var csfx) ? csfx.GetString() : "";
-
-    return ($"{urlPrefix}/{manifestId}{urlSuffix}", chunkPrefix, chunkSuffix);
-}
-
-public async Task ExecutePreDownloadAsync()
-{
-    print("正在请求网络分支 (预下载)");
-    var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili, false);
-    var targetInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili, true);
-
-    _targetChunkPrefix = targetInfo.chunkPrefix;
-    _targetChunkSuffix = targetInfo.chunkSuffix;
-
-    print("正在下载并解析清单");
-    var localManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
-    _targetManifest = await DownloadAndDecodeManifestAsync(targetInfo.manifestUrl);
-
-    print("正在比对预下载资源");
-    var ops = GenerateUpdateOperations(_targetManifest, localManifest, _targetChunkPrefix, _targetChunkSuffix);
-
-    print("正在下载预下载数据块");
-    await DownloadDiffChunksAsync(ops.Assemble);
-
-    print("正在组装预下载文件");
-    AssembleFiles(ops.Assemble);
-
-    print("正在安装预下载文件");
-    ApplyUpdatePhysicalFiles();
-
-    print("清理临时数据");
-    if (Directory.Exists(targetDir))
-    {
-        Directory.Delete(targetDir, true);
-    }
-}
-
-private OperationLists GenerateUpdateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
-{
-    var ops = new OperationLists();
-    var localAssetMap = new Dictionary<string, AssetProperty>();
-    
-    foreach (var asset in localManifest.Assets)
-    {
-        localAssetMap[asset.AssetName ?? ""] = asset;
-    }
-
-    foreach (var targetAsset in targetManifest.Assets)
-    {
-        string targetName = targetAsset.AssetName ?? "";
-        string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
-
-        if (localAssetMap.TryGetValue(targetName, out var localAsset) && 
-            (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && 
-            File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) 
-        {
-            continue;
-        }
-
-        var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
-        foreach (var chunk in targetAsset.AssetChunks)
-        {
-            string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
-            bool reused = false;
+            string url = $"{api}/getGameBranches?launcher_id={launcherId}&game_ids[]={gameId}";
+            var jsonResp = await httpClient.GetStringAsync(url);
+            using var doc = JsonDocument.Parse(jsonResp);
+            var branches = doc.RootElement.GetProperty("data").GetProperty("game_branches")[0];
             
-            if (localAssetMap.TryGetValue(targetName, out var currentLocalAsset) && File.Exists(Path.Combine(gameDir, currentLocalAsset.AssetName ?? "")))
+            JsonElement targetBranch;
+            if (isPreDownload)
             {
-                var oldChunk = currentLocalAsset.AssetChunks.FirstOrDefault(c => (c.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant() == chunkHash);
-                if (oldChunk != null)
+                if (!branches.TryGetProperty("pre_download", out targetBranch) || targetBranch.ValueKind == JsonValueKind.Null)
                 {
-                    op.Instructions.Add(new AssemblyInstruction("reuse", chunk, currentLocalAsset.AssetName, oldChunk));
-                    reused = true;
+                    throw new Exception("当前未开启预下载");
                 }
             }
-
-            if (!reused)
+            else
             {
-                op.Instructions.Add(new AssemblyInstruction("download", chunk));
-                op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
+                targetBranch = branches.GetProperty("main");
+            }
+
+            string buildUrl = targetBranch.TryGetProperty("build_url", out var bUrl) && bUrl.ValueKind == JsonValueKind.String ? bUrl.GetString() : null;
+
+            if (string.IsNullOrEmpty(buildUrl))
+            {
+                string sophonApi = isOversea ? GameConstants.OS_SOPHON : GameConstants.CN_SOPHON;
+                string pkgId = targetBranch.GetProperty("package_id").GetString();
+                string pwd = targetBranch.GetProperty("password").GetString();
+                string branchName = isPreDownload ? "pre_download" : "main";
+                buildUrl = $"{sophonApi}/getBuild?branch={branchName}&package_id={pkgId}&password={pwd}";
+            }
+
+            var buildJson = await httpClient.GetStringAsync(buildUrl);
+            using var buildDoc = JsonDocument.Parse(buildJson);
+            var manifestData = buildDoc.RootElement.GetProperty("data").GetProperty("manifests")[0];
+
+            string manifestId = manifestData.GetProperty("manifest").GetProperty("id").GetString();
+            string urlPrefix = manifestData.GetProperty("manifest_download").GetProperty("url_prefix").GetString();
+            string urlSuffix = manifestData.GetProperty("manifest_download").TryGetProperty("url_suffix", out var sfx) ? sfx.GetString() : "";
+
+            string chunkPrefix = manifestData.GetProperty("chunk_download").GetProperty("url_prefix").GetString();
+            string chunkSuffix = manifestData.GetProperty("chunk_download").TryGetProperty("url_suffix", out var csfx) ? csfx.GetString() : "";
+
+            return ($"{urlPrefix}/{manifestId}{urlSuffix}", chunkPrefix, chunkSuffix);
+        }
+
+        public async Task ExecutePreDownloadAsync()
+        {
+            print("正在请求网络分支 (预下载)");
+            var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili, false);
+            var targetInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili, true);
+
+            _targetChunkPrefix = targetInfo.chunkPrefix;
+            _targetChunkSuffix = targetInfo.chunkSuffix;
+
+            print("正在下载并解析清单");
+            var localManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
+            _targetManifest = await DownloadAndDecodeManifestAsync(targetInfo.manifestUrl);
+
+            print("正在比对预下载资源");
+            var ops = GenerateUpdateOperations(_targetManifest, localManifest, _targetChunkPrefix, _targetChunkSuffix);
+
+            print("正在下载预下载数据块");
+            await DownloadDiffChunksAsync(ops.Assemble);
+
+            print("正在组装预下载文件");
+            AssembleFiles(ops.Assemble);
+
+            print("正在安装预下载文件");
+            ApplyUpdatePhysicalFiles();
+
+            print("清理临时数据");
+            if (Directory.Exists(targetDir))
+            {
+                Directory.Delete(targetDir, true);
             }
         }
-        ops.Assemble.Add(op);
-    }
-    return ops;
-}
 
-private void ApplyUpdatePhysicalFiles()
-{
-    foreach (var file in Directory.GetFiles(targetDir, "*", SearchOption.AllDirectories))
-    {
-        string relPath = Path.GetRelativePath(targetDir, file);
-        string dstPath = Path.Combine(gameDir, relPath);
-        Directory.CreateDirectory(Path.GetDirectoryName(dstPath));
-        if (File.Exists(dstPath)) File.Delete(dstPath);
-        File.Move(file, dstPath);
-    }
-}
+        private OperationLists GenerateUpdateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
+        {
+            var ops = new OperationLists();
+            var localAssetMap = new Dictionary<string, AssetProperty>();
+            
+            foreach (var asset in localManifest.Assets)
+            {
+                localAssetMap[asset.AssetName ?? ""] = asset;
+            }
+
+            foreach (var targetAsset in targetManifest.Assets)
+            {
+                string targetName = targetAsset.AssetName ?? "";
+                string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
+
+                if (localAssetMap.TryGetValue(targetName, out var localAsset) && 
+                    (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && 
+                    File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) 
+                {
+                    continue;
+                }
+
+                var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
+                foreach (var chunk in targetAsset.AssetChunks)
+                {
+                    string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
+                    bool reused = false;
+                    
+                    if (localAssetMap.TryGetValue(targetName, out var currentLocalAsset) && File.Exists(Path.Combine(gameDir, currentLocalAsset.AssetName ?? "")))
+                    {
+                        var oldChunk = currentLocalAsset.AssetChunks.FirstOrDefault(c => (c.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant() == chunkHash);
+                        if (oldChunk != null)
+                        {
+                            op.Instructions.Add(new AssemblyInstruction("reuse", chunk, currentLocalAsset.AssetName, oldChunk));
+                            reused = true;
+                        }
+                    }
+
+                    if (!reused)
+                    {
+                        op.Instructions.Add(new AssemblyInstruction("download", chunk));
+                        op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
+                    }
+                }
+                ops.Assemble.Add(op);
+            }
+            return ops;
+        }
+
+        private void ApplyUpdatePhysicalFiles()
+        {
+            foreach (var file in Directory.GetFiles(targetDir, "*", SearchOption.AllDirectories))
+            {
+                string relPath = Path.GetRelativePath(targetDir, file);
+                string dstPath = Path.Combine(gameDir, relPath);
+                Directory.CreateDirectory(Path.GetDirectoryName(dstPath));
+                if (File.Exists(dstPath)) File.Delete(dstPath);
+                File.Move(file, dstPath);
+            }
+        }
 
         private async Task<SophonManifestProto> DownloadAndDecodeManifestAsync(string manifestUrl)
         {
@@ -590,99 +596,56 @@ private void ApplyUpdatePhysicalFiles()
             return path;
         }
 
-private OperationLists GenerateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
-{
-    var ops = new OperationLists();
-    var localAssetMap = new Dictionary<string, AssetProperty>();
-    
-    foreach (var asset in localManifest.Assets)
-    {
-        string name = asset.AssetName ?? "";
-        localAssetMap[NormalizePath(name)] = asset;
-    }
-
-    var targetAssetMap = new Dictionary<string, AssetProperty>();
-    foreach (var asset in targetManifest.Assets) targetAssetMap[NormalizePath(asset.AssetName ?? "")] = asset;
-
-    foreach (var kvp in localAssetMap)
-    {
-        string normPath = kvp.Key;
-        var localAsset = kvp.Value;
-        string localMd5 = (localAsset.AssetHashMd5 ?? "").ToLowerInvariant();
-        string localName = localAsset.AssetName ?? "";
-
-        bool needsBackup = !targetAssetMap.TryGetValue(normPath, out var targetAsset) || ((targetAsset.AssetHashMd5 ?? "").ToLowerInvariant() != localMd5);
-        if (needsBackup)
+        private OperationLists GenerateOperations(SophonManifestProto targetManifest, SophonManifestProto localManifest, string urlPrefix, string urlSuffix)
         {
-            string srcPath = Path.Combine(gameDir, localName);
-            string dstPath = Path.Combine(backupLocalDir, localName);
-            if (File.Exists(srcPath)) ops.Backup.Add((srcPath, dstPath));
-        }
-    }
-
-    var cnSdks = new[] { Path.Combine(GameConstants.CN_DATA_DIR, "Plugins", "PCGameSDK.dll"), "sdk_pkg_version" };
-    var osSdks = new[] { Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "PluginEOSSDK.dll"), Path.Combine(GameConstants.OS_DATA_DIR, "Plugins", "EOSSDK-Win64-Shipping.dll") };
-    var localSdks = isCurrentlyOs ? osSdks : cnSdks;
-    var targetSdks = targetIsOversea ? osSdks : cnSdks;
-
-    foreach (var sdk in localSdks)
-    {
-        string src = Path.Combine(gameDir, sdk);
-        if (File.Exists(src)) ops.Backup.Add((src, Path.Combine(backupLocalDir, sdk)));
-    }
-
-    foreach (var kvp in targetAssetMap)
-    {
-        string normPath = kvp.Key;
-        var targetAsset = kvp.Value;
-        string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
-        string targetName = targetAsset.AssetName ?? "";
-
-        if (localAssetMap.TryGetValue(normPath, out var localAsset) && (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) continue;
-
-        string backupFilePath = Path.Combine(backupTargetDir, targetName);
-        if (File.Exists(backupFilePath))
-        {
-            if (HashUtility.Md5File(backupFilePath) == targetMd5)
-            {
-                ops.Restore.Add((backupFilePath, Path.Combine(gameDir, targetName)));
-                continue;
-            }
-            else File.Delete(backupFilePath);
-        }
-
-        var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
-        foreach (var chunk in targetAsset.AssetChunks)
-        {
-            string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
-            bool reused = false;
+            var ops = new OperationLists();
+            var localAssetMap = new Dictionary<string, AssetProperty>();
             
-            if (localAssetMap.TryGetValue(normPath, out var currentLocalAsset) && File.Exists(Path.Combine(gameDir, currentLocalAsset.AssetName ?? "")))
+            foreach (var asset in localManifest.Assets)
             {
-                var oldChunk = currentLocalAsset.AssetChunks.FirstOrDefault(c => (c.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant() == chunkHash);
-                if (oldChunk != null)
+                string name = asset.AssetName ?? "";
+                localAssetMap[NormalizePath(name)] = asset;
+            }
+
+            var targetAssetMap = new Dictionary<string, AssetProperty>();
+            foreach (var asset in targetManifest.Assets) targetAssetMap[NormalizePath(asset.AssetName ?? "")] = asset;
+
+            foreach (var kvp in targetAssetMap)
+            {
+                string normPath = kvp.Key;
+                var targetAsset = kvp.Value;
+                string targetMd5 = (targetAsset.AssetHashMd5 ?? "").ToLowerInvariant();
+                string targetName = targetAsset.AssetName ?? "";
+
+                if (localAssetMap.TryGetValue(normPath, out var localAsset) && (localAsset.AssetHashMd5 ?? "").ToLowerInvariant() == targetMd5 && File.Exists(Path.Combine(gameDir, localAsset.AssetName ?? ""))) continue;
+
+                var op = new SophonAssetOperation(targetAsset, urlPrefix, urlSuffix);
+                foreach (var chunk in targetAsset.AssetChunks)
                 {
-                    op.Instructions.Add(new AssemblyInstruction("reuse", chunk, currentLocalAsset.AssetName, oldChunk));
-                    reused = true;
+                    string chunkHash = (chunk.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant();
+                    bool reused = false;
+                    
+                    if (localAssetMap.TryGetValue(normPath, out var currentLocalAsset) && File.Exists(Path.Combine(gameDir, currentLocalAsset.AssetName ?? "")))
+                    {
+                        var oldChunk = currentLocalAsset.AssetChunks.FirstOrDefault(c => (c.ChunkDecompressedHashMd5 ?? "").ToLowerInvariant() == chunkHash);
+                        if (oldChunk != null)
+                        {
+                            op.Instructions.Add(new AssemblyInstruction("reuse", chunk, currentLocalAsset.AssetName, oldChunk));
+                            reused = true;
+                        }
+                    }
+
+                    if (!reused)
+                    {
+                        op.Instructions.Add(new AssemblyInstruction("download", chunk));
+                        op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
+                    }
                 }
+                ops.Assemble.Add(op);
             }
 
-            if (!reused)
-            {
-                op.Instructions.Add(new AssemblyInstruction("download", chunk));
-                op.DiffChunks.Add(new SophonChunk(urlPrefix, urlSuffix, chunk));
-            }
+            return ops;
         }
-        ops.Assemble.Add(op);
-    }
-
-    foreach (var sdk in targetSdks)
-    {
-        string src = Path.Combine(backupTargetDir, sdk);
-        if (File.Exists(src)) ops.Restore.Add((src, Path.Combine(gameDir, sdk)));
-    }
-    return ops;
-}
 
         private async Task DownloadDiffChunksAsync(List<SophonAssetOperation> assembleOps)
         {
@@ -713,69 +676,62 @@ private OperationLists GenerateOperations(SophonManifestProto targetManifest, So
             await File.WriteAllBytesAsync(chunkPath, bytes);
         }
 
-private void AssembleFiles(List<SophonAssetOperation> assembleOps)
-{
-    int totalOps = assembleOps.Count;
-    if (totalOps == 0) return;
-    
-    byte[] buffer = new byte[81920];
-
-    for (int i = 0; i < totalOps; i++)
-    {
-        var op = assembleOps[i];
-        string targetPath = Path.Combine(targetDir, op.AssetName);
-        Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
-
-        using (var targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write, FileShare.None))
+        private void AssembleFiles(List<SophonAssetOperation> assembleOps)
         {
-            targetFile.SetLength(op.Asset.AssetSize);
+            int totalOps = assembleOps.Count;
+            if (totalOps == 0) return;
+            
+            byte[] buffer = new byte[81920];
 
-            foreach (var inst in op.Instructions)
+            for (int i = 0; i < totalOps; i++)
             {
-                targetFile.Seek(inst.TargetChunk.ChunkOnFileOffset, SeekOrigin.Begin);
-                long remainingBytes = inst.TargetChunk.ChunkSizeDecompressed;
+                var op = assembleOps[i];
+                string targetPath = Path.Combine(targetDir, op.AssetName);
+                Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
 
-                if (inst.Action == "reuse")
+                using (var targetFile = new FileStream(targetPath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
-                    using var localFile = new FileStream(Path.Combine(gameDir, inst.LocalAssetName), FileMode.Open, FileAccess.Read, FileShare.Read);
-                    localFile.Seek(inst.LocalChunk.ChunkOnFileOffset, SeekOrigin.Begin);
-                    
-                    while (remainingBytes > 0)
+                    targetFile.SetLength(op.Asset.AssetSize);
+
+                    foreach (var inst in op.Instructions)
                     {
-                        int bytesRead = localFile.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
-                        if (bytesRead <= 0) break;
-                        targetFile.Write(buffer, 0, bytesRead);
-                        remainingBytes -= bytesRead;
+                        targetFile.Seek(inst.TargetChunk.ChunkOnFileOffset, SeekOrigin.Begin);
+                        long remainingBytes = inst.TargetChunk.ChunkSizeDecompressed;
+
+                        if (inst.Action == "reuse")
+                        {
+                            using var localFile = new FileStream(Path.Combine(gameDir, inst.LocalAssetName), FileMode.Open, FileAccess.Read, FileShare.Read);
+                            localFile.Seek(inst.LocalChunk.ChunkOnFileOffset, SeekOrigin.Begin);
+                            
+                            while (remainingBytes > 0)
+                            {
+                                int bytesRead = localFile.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
+                                if (bytesRead <= 0) break;
+                                targetFile.Write(buffer, 0, bytesRead);
+                                remainingBytes -= bytesRead;
+                            }
+                        }
+                        else
+                        {
+                            using var compressedFile = new FileStream(Path.Combine(chunksDir, inst.TargetChunk.ChunkName), FileMode.Open, FileAccess.Read, FileShare.Read);
+                            using var dctx = new DecompressionStream(compressedFile);
+                            
+                            while (remainingBytes > 0)
+                            {
+                                int bytesRead = dctx.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
+                                if (bytesRead <= 0) break;
+                                targetFile.Write(buffer, 0, bytesRead);
+                                remainingBytes -= bytesRead;
+                            }
+                        }
                     }
                 }
-                else
-                {
-                    using var compressedFile = new FileStream(Path.Combine(chunksDir, inst.TargetChunk.ChunkName), FileMode.Open, FileAccess.Read, FileShare.Read);
-                    using var dctx = new DecompressionStream(compressedFile);
-                    
-                    while (remainingBytes > 0)
-                    {
-                        int bytesRead = dctx.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
-                        if (bytesRead <= 0) break;
-                        targetFile.Write(buffer, 0, bytesRead);
-                        remainingBytes -= bytesRead;
-                    }
-                }
+                print($"合并补丁文件中: {i + 1}/{totalOps}");
             }
         }
-        print($"合并补丁文件中: {i + 1}/{totalOps}");
-    }
-}
 
         private void ReplacePhysicalFiles(OperationLists ops)
         {
-            foreach (var (src, dst) in ops.Backup)
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(dst));
-                if (File.Exists(dst)) File.Delete(dst);
-                if (File.Exists(src)) File.Move(src, dst);
-            }
-            
             string localDataDirName = isCurrentlyOs ? GameConstants.OS_DATA_DIR : GameConstants.CN_DATA_DIR;
             string targetDataDirName = targetIsOversea ? GameConstants.OS_DATA_DIR : GameConstants.CN_DATA_DIR;
 
@@ -800,13 +756,6 @@ private void AssembleFiles(List<SophonAssetOperation> assembleOps)
                 File.Move(localExe, targetExe);
             }
 
-            foreach (var (src, dst) in ops.Restore)
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(dst));
-                if (File.Exists(dst)) File.Delete(dst);
-                if (File.Exists(src)) File.Move(src, dst);
-            }
-
             foreach (var file in Directory.GetFiles(targetDir, "*", SearchOption.AllDirectories))
             {
                 string relPath = Path.GetRelativePath(targetDir, file);
@@ -816,11 +765,11 @@ private void AssembleFiles(List<SophonAssetOperation> assembleOps)
                 File.Move(file, dstPath);
             }
 
-            var obsoleteFiles = targetIsOversea 
-                ? new[] { Path.Combine(targetDataDir, "Plugins", "PCGameSDK.dll"), Path.Combine(gameDir, "sdk_pkg_version") }
-                : new[] { Path.Combine(targetDataDir, "Plugins", "PluginEOSSDK.dll"), Path.Combine(targetDataDir, "Plugins", "EOSSDK-Win64-Shipping.dll") };
-
-            foreach (var f in obsoleteFiles) if (File.Exists(f)) File.Delete(f);
+            string sdkPkgVersionFile = Path.Combine(gameDir, "sdk_pkg_version");
+            if (targetIsOversea && File.Exists(sdkPkgVersionFile))
+            {
+                File.Delete(sdkPkgVersionFile);
+            }
             
             string configPath = Path.Combine(gameDir, "config.ini");
             string configContent = "";
@@ -841,10 +790,10 @@ private void AssembleFiles(List<SophonAssetOperation> assembleOps)
             
             if (targetIsBilibili)
             {
-                string pluginsDir = Path.Combine(gameDir, targetDataDirName, "Plugins");
-                string targetSdkPath = Path.Combine(pluginsDir, "PCGameSDK.dll");
+                string bilibiliPluginsDir = Path.Combine(gameDir, targetDataDirName, "Plugins");
+                string targetSdkPath = Path.Combine(bilibiliPluginsDir, "PCGameSDK.dll");
 
-                if (!Directory.Exists(pluginsDir)) Directory.CreateDirectory(pluginsDir);
+                if (!Directory.Exists(bilibiliPluginsDir)) Directory.CreateDirectory(bilibiliPluginsDir);
 
                 string appBaseDir = AppContext.BaseDirectory;
                 string sourceSdkPath = Path.Combine(appBaseDir, "Assets", "PCGameSDK.dll");
