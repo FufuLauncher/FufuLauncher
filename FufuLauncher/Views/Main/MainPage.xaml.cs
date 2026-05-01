@@ -7,11 +7,14 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Navigation;
+using FufuLauncher.Services.Background;
 
 namespace FufuLauncher.Views;
 
 public sealed partial class MainPage : Page
 {
+    private Microsoft.UI.Xaml.Media.Brush _originalInfoCardBrush;
+    private Microsoft.UI.Xaml.Media.Brush _originalCheckinCardBrush;
     public MainViewModel ViewModel
     {
         get;
@@ -345,6 +348,18 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
     {
         AnimateInfoButtonOpacity(0.0);
     }
+    
+    private void BackgroundGridView_ItemClick(object sender, ItemClickEventArgs e)
+    {
+        if (e.ClickedItem is FufuLauncher.Services.Background.BackgroundUrlInfo info)
+        {
+            // 触发 ViewModel 中的背景切换命令
+            ViewModel.SelectSpecificBackgroundCommand.Execute(info);
+        
+            // 自动关闭 Flyout 弹窗
+            BackgroundFlyout.Hide();
+        }
+    }
 
     private void AnimateInfoButtonOpacity(double toOpacity)
     {
@@ -373,8 +388,11 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
         DataContext = ViewModel;
         InitializeComponent();
         
+        _originalInfoCardBrush = InfoCardGrid.Background;
+        _originalCheckinCardBrush = CheckinCardGrid.Background;
+    
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
-        
+    
         Loaded += (_, _) => 
         {
             LaunchButtonOverlayBorder.Opacity = ViewModel.IsGameRunning ? 0.0 : 1.0;
@@ -388,7 +406,21 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
                 OpenLink(url);
             }
         };
-
+    }
+    
+    private void UpdateCardBackgrounds()
+    {
+        if (ViewModel.IsVideoBackground)
+        {
+            var semiTransparentBrush = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Black) { Opacity = 0.5 };
+            InfoCardGrid.Background = semiTransparentBrush;
+            CheckinCardGrid.Background = semiTransparentBrush;
+        }
+        else
+        {
+            InfoCardGrid.Background = _originalInfoCardBrush;
+            CheckinCardGrid.Background = _originalCheckinCardBrush;
+        }
     }
     
     private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -396,6 +428,10 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
         if (e.PropertyName == nameof(MainViewModel.IsGameRunning))
         {
             AnimateLaunchButtonOverlay(ViewModel.IsGameRunning ? 0.0 : 1.0);
+        }
+        else if (e.PropertyName == nameof(MainViewModel.IsVideoBackground))
+        {
+            UpdateCardBackgrounds();
         }
     }
     
@@ -435,6 +471,8 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
             await ViewModel.InitializeAsync();
             _isInitialized = true;
         }
+    
+        UpdateCardBackgrounds();
     }
 
     private async void OpenLink(string url)

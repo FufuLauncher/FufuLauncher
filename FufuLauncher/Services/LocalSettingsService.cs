@@ -26,6 +26,8 @@ namespace FufuLauncher.Services
         public const string LastAnnouncementUrlKey = "LastAnnouncementUrl";
         
         public const string HasShownSecurityWarningKey = "HasShownSecurityWarning";
+        
+        public const string HasDismissedFpsWarningKey = "HasDismissedFpsWarning";
 
         private readonly JsonSerializerOptions _jsonOptions;
 

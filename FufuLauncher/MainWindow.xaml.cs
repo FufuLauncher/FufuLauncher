@@ -801,7 +801,7 @@ private bool IsVCRedistInstalled()
             var serverJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.BackgroundServerKey);
             var serverValue = serverJson != null ? Convert.ToInt32(serverJson) : 0;
             var server = (ServerType)serverValue;
-
+            
             var result = await _backgroundRenderer.GetBackgroundAsync(server, preferVideo);
             await ApplyGlobalBackgroundAsync(result);
         }

@@ -117,6 +117,11 @@ namespace FufuLauncher.ViewModels
             get;
         }
         
+        public IAsyncRelayCommand ClearCustomBackgroundCommand
+        {
+            get;
+        }
+        
         public SettingsViewModel(
             IThemeSelectorService themeSelectorService,
             IBackgroundRenderer backgroundRenderer,
@@ -141,6 +146,7 @@ namespace FufuLauncher.ViewModels
             _versionDescription = GetVersionDescription();
             ClearWebView2CacheCommand = new AsyncRelayCommand(ClearWebView2CacheAsync);
             UpdateWebView2CacheSize();
+            ClearCustomBackgroundCommand = new AsyncRelayCommand(ClearCustomBackgroundAsync);
 
             SwitchThemeCommand = new RelayCommand<ElementTheme>(
                 async (param) =>
@@ -184,6 +190,22 @@ namespace FufuLauncher.ViewModels
                 });
 
             SelectCustomBackgroundCommand = new AsyncRelayCommand(SelectCustomBackgroundAsync);
+        }
+        
+        private async Task ClearCustomBackgroundAsync()
+        {
+            try
+            {
+                await _localSettingsService.SaveSettingAsync<string>("CustomBackgroundPath", null);
+                CustomBackgroundPath = null;
+                HasCustomBackground = false;
+        
+                WeakReferenceMessenger.Default.Send(new BackgroundRefreshMessage());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"清除自定义背景失败: {ex.Message}");
+            }
         }
         
         private string FormatSize(long bytes)

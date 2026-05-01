@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:helpers="using:FufuLauncher.Helpers"
+    xmlns:bg="using:FufuLauncher.Services.Background"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="MainPageRoot"
@@ -229,7 +230,7 @@
                     </Pivot>
                 </Grid>
  
-                <Grid Padding="16" CornerRadius="8" 
+                <Grid x:Name="CheckinCardGrid" Padding="16" CornerRadius="8" 
                       BorderThickness="1" 
                       BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                       Background="{StaticResource IosGlassBrush}"
@@ -297,14 +298,14 @@
                 </Grid>
             </StackPanel>
             
-            <TextBlock Grid.Column="0"
+            <TextBlock Grid.Column="1"
                        Text="© 2026 FufuLauncher Development Team.All Rights Reserved."
                        FontSize="10"
                        Foreground="White"
                        Opacity="0.05"
                        VerticalAlignment="Bottom"
-                       HorizontalAlignment="Left"
-                       Margin="30,0,0,10"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,32,10"
                        PointerEntered="Copyright_PointerEntered"
                        PointerExited="Copyright_PointerExited"
                        x:Name="CopyrightText"
@@ -317,52 +318,79 @@
             Margin="0,32,32,0" 
             Spacing="12">
     
-    <Button Click="AnnouncementBell_Click"
-            CornerRadius="24" 
-            Padding="0" 
-            Background="Transparent" 
-            BorderThickness="0"
-            HorizontalAlignment="Right">
-        <Grid>
-            <Border Background="{StaticResource IosGlassBrush}" 
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                    BorderThickness="1" 
-                    CornerRadius="24" />
-            <FontIcon Glyph="&#xEA8F;" FontSize="18" Foreground="White" Margin="14,12"/>
-        </Grid>
-    </Button>
+                <Button Click="AnnouncementBell_Click"
+                        CornerRadius="24" 
+                        Padding="0" 
+                        Background="Transparent" 
+                        BorderThickness="0"
+                        HorizontalAlignment="Right">
+                    <Grid>
+                        <Border Background="{StaticResource IosGlassBrush}" 
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
+                                BorderThickness="1" 
+                                CornerRadius="24" />
+                        <FontIcon Glyph="&#xEA8F;" FontSize="18" Foreground="White" Margin="14,12"/>
+                    </Grid>
+                </Button>
+                
+                <Grid Background="Transparent" 
+                      HorizontalAlignment="Right">
+                    <Button IsEnabled="{x:Bind ViewModel.IsBackgroundToggleEnabled, Mode=OneWay}" 
+                            CornerRadius="24" 
+                            Padding="0" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Margin="0">
+        
+                        <Button.Flyout>
+                            <Flyout x:Name="BackgroundFlyout" Placement="BottomEdgeAlignedRight">
+                                <GridView ItemsSource="{x:Bind ViewModel.AvailableBackgrounds, Mode=OneWay}"
+                                          SelectionMode="None"
+                                          IsItemClickEnabled="True"
+                                          ItemClick="BackgroundGridView_ItemClick"
+                                          Width="320" MaxHeight="400">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="bg:BackgroundUrlInfo">
+                                            <Grid Width="140" Height="80" CornerRadius="4" Margin="4">
+                                                <Image Source="{x:Bind ThumbnailUrl}" Stretch="UniformToFill"/>
+                                                <Border Background="#99000000" VerticalAlignment="Bottom" Padding="4,2">
+                                                    <TextBlock Text="{x:Bind TypeText}" Foreground="White" FontSize="10" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            </Flyout>
+                        </Button.Flyout>
 
-    <Grid Background="Transparent" 
-          HorizontalAlignment="Right">
-        <Button Command="{x:Bind ViewModel.ToggleBackgroundTypeCommand}" IsEnabled="True" CornerRadius="24" Padding="0" Background="Transparent" BorderThickness="0" Margin="0">
-            <Grid>
-                <Border x:Name="BackgroundBlurBorder" Background="{StaticResource IosGlassBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="24">
-                </Border>
-                <FontIcon Glyph="&#xE8B9;" FontSize="18" Foreground="White" Margin="14,12"/>
-            </Grid>
-        </Button>
-    </Grid>
+                        <Grid>
+                            <Border x:Name="BackgroundBlurBorder" Background="{StaticResource IosGlassBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="24">
+                            </Border>
+                            <FontIcon Glyph="&#xE8B9;" FontSize="18" Foreground="White" Margin="14,12"/>
+                        </Grid>
+                    </Button>
+                </Grid>
 
-    <Button Command="{Binding OpenScreenshotFolderCommand}"
-            IsEnabled="{Binding ViewModel.IsLaunchButtonEnabled, Mode=OneWay}"
-            HorizontalAlignment="Right"
-            CornerRadius="24" 
-            Padding="0"
-            Background="Transparent"
-            BorderThickness="0"
-            PointerEntered="ScreenshotButton_PointerEntered"
-            PointerExited="ScreenshotButton_PointerExited">
-        <Grid>
-            <Border x:Name="ScreenshotBlurBorder"
-                    Background="{StaticResource IosGlassBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="24"
-                    Opacity="1.0" />
-            <FontIcon Glyph="&#xE8B7;" FontSize="18" Foreground="White" Margin="14,12"/>
-        </Grid>
-    </Button>
-</StackPanel>
+                <Button Command="{Binding OpenScreenshotFolderCommand}"
+                        IsEnabled="{Binding ViewModel.IsLaunchButtonEnabled, Mode=OneWay}"
+                        HorizontalAlignment="Right"
+                        CornerRadius="24" 
+                        Padding="0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        PointerEntered="ScreenshotButton_PointerEntered"
+                        PointerExited="ScreenshotButton_PointerExited">
+                    <Grid>
+                        <Border x:Name="ScreenshotBlurBorder"
+                                Background="{StaticResource IosGlassBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="24"
+                                Opacity="1.0" />
+                        <FontIcon Glyph="&#xE8B7;" FontSize="18" Foreground="White" Margin="14,12"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
             
             <Button Grid.Row="1" Grid.Column="1"
                     Command="{x:Bind ViewModel.LaunchGameCommand}"

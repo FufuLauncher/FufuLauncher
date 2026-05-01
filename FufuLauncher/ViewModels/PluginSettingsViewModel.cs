@@ -45,29 +45,130 @@ public partial class PluginSettingsViewModel : ObservableObject
     public ObservableCollection<PluginSettingItem> Settings { get; } = new();
     partial void OnSelectedPluginIndexChanged(int value)
     {
+        CheckFpsPluginState();
         UpdatePaths();
         LoadConfiguration();
+    
+        OnPropertyChanged(nameof(SettingsOverlayVisibility));
+        OnPropertyChanged(nameof(IsSettingsInteractable));
     }
     
-    private void UpdatePaths()
+    private bool _isFpsPluginEnabled;
+public bool IsFpsPluginEnabled
+{
+    get => _isFpsPluginEnabled;
+    set
     {
-        string subDir = SelectedPluginIndex == 0 ? "FuFuPlugin" : "FPS";
-        
-        _pluginDir = Path.Combine(AppContext.BaseDirectory, "Plugins", subDir);
-        _iniPath = Path.Combine(_pluginDir, "config.ini");
-        _dllPath = Path.Combine(_pluginDir, subDir == "FuFuPlugin" ? "FufuLauncher.UnlockerIsland.dll" : "FPS_Plugin.dll"); // 假设FPS的DLL名称
-        
-        _presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets", subDir);
-
-        _iniFile = new IniFile(_iniPath);
-
-        if (!Directory.Exists(_presetsDir))
+        if (_isFpsPluginEnabled != value)
         {
-            Directory.CreateDirectory(_presetsDir);
+            ChangeFpsPluginState(value);
         }
     }
+}
+
+public Microsoft.UI.Xaml.Visibility SettingsOverlayVisibility => 
+    (!_isFpsPluginEnabled && SelectedPluginIndex == 1) ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;
+
+public bool IsSettingsInteractable => SelectedPluginIndex == 0 || (SelectedPluginIndex == 1 && _isFpsPluginEnabled);
+
+private void CheckFpsPluginState()
+{
+    string fpsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FPS");
+    string enabledPath = Path.Combine(fpsDir, "FPS.dll");
+    string disabledPath = Path.Combine(fpsDir, "FPS.disabled");
+    
+    if (File.Exists(enabledPath) && File.Exists(disabledPath))
+    {
+        try
+        {
+            File.Delete(disabledPath);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"无法删除冲突的禁用文件: {ex.Message}");
+        }
+    }
+    
+    if (File.Exists(enabledPath))
+    {
+        _isFpsPluginEnabled = true;
+    }
+    else if (File.Exists(disabledPath))
+    {
+        _isFpsPluginEnabled = false;
+    }
+    else
+    {
+        _isFpsPluginEnabled = false;
+    }
+    
+    OnPropertyChanged(nameof(IsFpsPluginEnabled));
+    OnPropertyChanged(nameof(SettingsOverlayVisibility));
+    OnPropertyChanged(nameof(IsSettingsInteractable));
+}
+
+private void ChangeFpsPluginState(bool enable)
+{
+    string fpsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FPS");
+    string enabledPath = Path.Combine(fpsDir, "FPS.dll");
+    string disabledPath = Path.Combine(fpsDir, "FPS.disabled");
+
+    try
+    {
+        if (enable && File.Exists(disabledPath))
+        {
+            File.Move(disabledPath, enabledPath);
+        }
+        else if (!enable && File.Exists(enabledPath))
+        {
+            File.Move(enabledPath, disabledPath);
+        }
+        
+        SetProperty(ref _isFpsPluginEnabled, enable, nameof(IsFpsPluginEnabled));
+        OnPropertyChanged(nameof(SettingsOverlayVisibility));
+        OnPropertyChanged(nameof(IsSettingsInteractable));
+        
+        UpdatePaths();
+    }
+    catch (Exception ex)
+    {
+        WeakReferenceMessenger.Default.Send(new NotificationMessage(
+            "状态切换失败",
+            $"无法修改插件文件后缀名。\n详细信息: {ex.Message}",
+            NotificationType.Error,
+            6000
+        ));
+    }
+}
+    
+private void UpdatePaths()
+{
+    string subDir = SelectedPluginIndex == 0 ? "FuFuPlugin" : "FPS";
+    _pluginDir = Path.Combine(AppContext.BaseDirectory, "Plugins", subDir);
+    _iniPath = Path.Combine(_pluginDir, "config.ini");
+    
+    if (subDir == "FuFuPlugin")
+    {
+        _dllPath = Path.Combine(_pluginDir, "FufuLauncher.UnlockerIsland.dll");
+    }
+    else
+    {
+        string fpsEnabledPath = Path.Combine(_pluginDir, "FPS.dll");
+        string fpsDisabledPath = Path.Combine(_pluginDir, "FPS.disabled");
+        _dllPath = File.Exists(fpsDisabledPath) ? fpsDisabledPath : fpsEnabledPath;
+    }
+    
+    _presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets", subDir);
+    _iniFile = new IniFile(_iniPath);
+
+    if (!Directory.Exists(_presetsDir))
+    {
+        Directory.CreateDirectory(_presetsDir);
+    }
+}
     public PluginSettingsViewModel()
     {
+        CheckFpsPluginState();
         UpdatePaths();
         _pluginDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FuFuPlugin");
         _iniPath = Path.Combine(_pluginDir, "config.ini");
@@ -215,7 +316,10 @@ public partial class PluginSettingsViewModel : ObservableObject
                     activePresetId = id;
                 }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         try

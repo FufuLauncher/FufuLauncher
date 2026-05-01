@@ -7,6 +7,14 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Media.Core;
 using Windows.Storage;
 
+public class BackgroundItem
+{
+    public string Url { get; set; }
+    public string PreviewUrl { get; set; }
+    public bool IsVideo { get; set; }
+    public string TypeText => IsVideo ? "视频" : "图片";
+}
+
 namespace FufuLauncher.Services.Background
 {
     public class BackgroundRenderResult
@@ -29,6 +37,7 @@ namespace FufuLauncher.Services.Background
     {
         Task<BackgroundRenderResult> GetBackgroundAsync(ServerType server, bool preferVideo);
         Task<BackgroundRenderResult> GetCustomBackgroundAsync(string filePath);
+        Task<BackgroundRenderResult> GetSpecificOnlineBackgroundAsync(string url, bool isVideo);
         void ClearBackground();
         void ClearCustomBackground();
     }
@@ -37,6 +46,29 @@ namespace FufuLauncher.Services.Background
     {
         private static readonly HttpClient _httpClient;
 
+        
+        public async Task<BackgroundRenderResult> GetSpecificOnlineBackgroundAsync(string url, bool isVideo)
+        {
+            try
+            {
+                if (isVideo)
+                {
+                    var videoSource = await ProcessVideoBackground(url);
+                    return new BackgroundRenderResult { VideoSource = videoSource, IsVideo = true };
+                }
+                else
+                {
+                    var imageSource = await ProcessImageBackground(url);
+                    return new BackgroundRenderResult { ImageSource = imageSource, IsVideo = false };
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"指定背景加载失败: {ex.Message}");
+                return GetFallbackBackground();
+            }
+        }
+        
         static BackgroundRenderer()
         {
             _httpClient = new HttpClient

@@ -16,6 +16,8 @@ public sealed partial class PluginSettingsPage : Page
     public ControlPanelModel ControlPanelVM { get; }
     private FeedbackWindow _feedbackWindow;
     private Window _prWindow;
+    
+    private bool _hasShownFpsWarning = false;
 
     public PluginSettingsPage()
     {
@@ -23,8 +25,10 @@ public sealed partial class PluginSettingsPage : Page
         MainVM = App.GetService<MainViewModel>();
         ControlPanelVM = App.GetService<ControlPanelModel>();
         InitializeComponent();
-        
+    
         Loaded += PluginSettingsPage_Loaded;
+        
+        ViewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
     
     private async void PluginSettingsPage_Loaded(object sender, RoutedEventArgs e)
@@ -44,6 +48,90 @@ public sealed partial class PluginSettingsPage : Page
         }
 
         await VerifyFpsPluginHashAsync();
+        
+        if (ViewModel.SettingsOverlayVisibility == Visibility.Visible)
+        {
+            SettingsOverlay.Visibility = Visibility.Visible;
+            SettingsOverlay.Opacity = 1;
+        }
+    }
+    
+private async void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+{
+    if (e.PropertyName == nameof(ViewModel.SettingsOverlayVisibility))
+    {
+        if (ViewModel.SettingsOverlayVisibility == Visibility.Visible)
+        {
+            SettingsOverlay.Visibility = Visibility.Visible;
+            OverlayFadeIn.Begin();
+        }
+        else
+        {
+            if (SettingsOverlay.Visibility == Visibility.Visible)
+            {
+                OverlayFadeOut.Begin();
+            }
+        }
+    }
+    else if (e.PropertyName == nameof(ViewModel.SelectedPluginIndex))
+    {
+        if (ViewModel.SelectedPluginIndex == 1 && !_hasShownFpsWarning)
+        {
+            _hasShownFpsWarning = true;
+            
+            var localSettings = App.GetService<FufuLauncher.Contracts.Services.ILocalSettingsService>();
+            if (localSettings != null)
+            {
+                var hasDismissedObj = await localSettings.ReadSettingAsync("HasDismissedFpsWarning");
+                bool hasDismissed = hasDismissedObj != null && Convert.ToBoolean(hasDismissedObj);
+                
+                if (hasDismissed)
+                {
+                    return;
+                }
+                
+                var dialog = new ContentDialog
+                {
+                    Title = "兼容性警告",
+                    Content = "如果开启了NVIDIA RTX40系及以上显卡的AI插帧，或者使用了类似于RTSS、微星小飞机等帧数显示软件，都可能会导致游戏画面卡死或者游戏无法正常启动",
+                    PrimaryButtonText = "我知道了",
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = XamlRoot
+                };
+                
+                var checkBox = new CheckBox
+                {
+                    Content = "不再显示此警告",
+                    Margin = new Thickness(0, 16, 0, 0)
+                };
+                
+                var stackPanel = new StackPanel();
+                stackPanel.Children.Add(new TextBlock 
+                { 
+                    Text = dialog.Content.ToString(), 
+                    TextWrapping = TextWrapping.Wrap 
+                });
+                stackPanel.Children.Add(checkBox);
+                
+                dialog.Content = stackPanel;
+                
+                await dialog.ShowAsync();
+                
+                if (checkBox.IsChecked == true)
+                {
+                    await localSettings.SaveSettingAsync("HasDismissedFpsWarning", true);
+                }
+            }
+        }
+    }
+}
+
+    private void OverlayFadeOut_Completed(object sender, object e)
+    {
+        if (ViewModel.SettingsOverlayVisibility == Visibility.Collapsed)
+        {
+            SettingsOverlay.Visibility = Visibility.Collapsed;
+        }
     }
     
     private async void OnRepairFpsPluginClick(object sender, RoutedEventArgs e)

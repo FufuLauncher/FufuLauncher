@@ -383,8 +383,7 @@
                                       OnContent="已启用"
                                       IsOn="{x:Bind ViewModel.IsBackgroundEnabled, Mode=TwoWay}"/>
                         
-                        <StackPanel Margin="0,16,0,0" 
-                                    Visibility="{x:Bind ViewModel.IsBackgroundEnabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <StackPanel Margin="0,16,0,0">
                             <TextBlock Text="背景来源" 
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
@@ -395,8 +394,20 @@
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
                                         CornerRadius="6"/>
-                                </StackPanel>
-                            
+                                <Button Content="清除自定义背景" 
+                                        Command="{x:Bind ViewModel.ClearCustomBackgroundCommand}"
+                                        HorizontalAlignment="Left"
+                                        Padding="12,6"
+                                        CornerRadius="6"
+                                        Visibility="{x:Bind ViewModel.HasCustomBackground, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+                                            <Setter Property="Background" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+    
                             <ComboBox Header="官方背景服务器" 
                                       Margin="0,16,0,0" 
                                       SelectedIndex="{x:Bind ViewModel.SelectedServer, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
@@ -592,7 +603,7 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Spacing="4">
                                     <TextBlock Text="FufuLauncher" Style="{ThemeResource BodyTextBlockStyle}"/>
-                                    <TextBlock Text="版本 1.1.0.3" 
+                                    <TextBlock Text="版本 1.1.0.4" 
                                                Style="{ThemeResource CaptionTextBlockStyle}" 
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                                 </StackPanel>

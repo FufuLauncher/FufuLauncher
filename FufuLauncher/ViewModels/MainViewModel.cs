@@ -52,6 +52,8 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private Brush _panelBackgroundBrush;
         [ObservableProperty] private double _infoCardHeight = 285;
         [ObservableProperty] private string _infoExpandIcon = "\uE70E";
+        [ObservableProperty] private ObservableCollection<BackgroundUrlInfo> _availableBackgrounds = new();
+        public IAsyncRelayCommand<BackgroundUrlInfo> SelectSpecificBackgroundCommand { get; }
         private bool _isInfoCardExpanded = true;
         private double _panelOpacityValue = 0.5;
         private BannerItem _currentBanner;
@@ -166,6 +168,7 @@ namespace FufuLauncher.ViewModels
             ExecuteCheckinCommand = new AsyncRelayCommand(ExecuteCheckinAsync);
             LaunchGameCommand = new AsyncRelayCommand(LaunchGameAsync);
             OpenScreenshotFolderCommand = new AsyncRelayCommand(OpenScreenshotFolderAsync);
+            SelectSpecificBackgroundCommand = new AsyncRelayCommand<BackgroundUrlInfo>(SelectSpecificBackgroundAsync);
 
             WeakReferenceMessenger.Default.Register<GamePathChangedMessage>(this, (r, m) =>
             {
@@ -200,12 +203,48 @@ namespace FufuLauncher.ViewModels
                 InfoExpandIcon = "\uE70D";
             }
         }
+        
+        private async Task LoadAvailableBackgroundsAsync()
+        {
+            try
+            {
+                var serverJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.BackgroundServerKey);
+                int serverValue = serverJson != null ? Convert.ToInt32(serverJson) : 0;
+                var server = (Models.ServerType)serverValue;
+
+                var backgroundService = App.GetService<IHoyoverseBackgroundService>();
+                var backgrounds = await backgroundService.GetAvailableBackgroundsAsync(server);
+
+                await UpdateUI(() =>
+                {
+                    AvailableBackgrounds.Clear();
+                    foreach (var bg in backgrounds)
+                    {
+                        AvailableBackgrounds.Add(bg);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"加载可选背景失败: {ex.Message}");
+            }
+        }
+        
+        private async Task SelectSpecificBackgroundAsync(BackgroundUrlInfo info)
+        {
+            if (info == null) return;
+            await _localSettingsService.SaveSettingAsync("SelectedOnlineBackgroundUrl", info.Url);
+            await _localSettingsService.SaveSettingAsync("SelectedOnlineBackgroundIsVideo", info.IsVideo);
+            
+            WeakReferenceMessenger.Default.Send(new BackgroundRefreshMessage());
+        }
 
         public async Task InitializeAsync()
         {
             await LoadUserPreferencesAsync();
             await LoadCustomBackgroundPathAsync();
             await LoadBackgroundAsync();
+            await LoadAvailableBackgroundsAsync();
             await LoadContentAsync();
             await LoadCheckinStatusAsync();
             UseInjection = await _gameLauncherService.GetUseInjectionAsync();
