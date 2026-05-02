@@ -36,6 +36,8 @@ namespace FufuLauncher.Views
 
         private async void StartBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is Button btn) btn.IsEnabled = false;
+
             _statusText = new TextBlock { Text = "准备中...", TextWrapping = TextWrapping.Wrap };
             var sp = new StackPanel { Spacing = 16, Margin = new Thickness(0, 16, 0, 0) };
             sp.Children.Add(new ProgressBar { IsIndeterminate = true, HorizontalAlignment = HorizontalAlignment.Stretch });
@@ -47,19 +49,19 @@ namespace FufuLauncher.Views
                 Content = sp,
                 XamlRoot = XamlRoot
             };
-        
+
             _ = _progressDialog.ShowAsync();
+
+            string cacheDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "ServerCache", Guid.NewGuid().ToString("N"));
 
             try
             {
-                string cacheDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "ServerCache");
-                
                 var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText, _targetServer);
-            
+    
                 await Task.Run(() => converter.ExecuteConversionAsync());
 
                 _progressDialog.Hide();
-            
+    
                 var successDialog = new ContentDialog
                 {
                     Title = "完成",
@@ -67,9 +69,9 @@ namespace FufuLauncher.Views
                     CloseButtonText = "确定",
                     XamlRoot = XamlRoot
                 };
-            
+    
                 await successDialog.ShowAsync();
-            
+    
                 _parentWindow?.Close();
             }
             catch (Exception ex)
@@ -83,6 +85,11 @@ namespace FufuLauncher.Views
                     XamlRoot = XamlRoot
                 };
                 await errDialog.ShowAsync();
+            }
+            finally
+            {
+                if (Directory.Exists(cacheDir)) Directory.Delete(cacheDir, true);
+                if (sender is Button b) b.IsEnabled = true;
             }
         }
         
@@ -124,7 +131,7 @@ namespace FufuLauncher.Views
         public static string Md5File(string filepath)
         {
             using var md5 = MD5.Create();
-            using var stream = File.OpenRead(filepath);
+            using var stream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             var hashBytes = md5.ComputeHash(stream);
             return BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
         }
@@ -279,8 +286,6 @@ namespace FufuLauncher.Views
 
         public async Task RunVerificationAsync()
         {
-            ClearPluginsFolder();
-
             print("正在请求网络分支");
             var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
             _targetChunkPrefix = localInfo.chunkPrefix;
@@ -288,6 +293,8 @@ namespace FufuLauncher.Views
 
             print("正在下载并解析最新清单");
             _targetManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
+            
+            ClearPluginsFolder();
             
             await VerifyAndRepairAsync();
     
@@ -300,8 +307,6 @@ namespace FufuLauncher.Views
 
         public async Task ExecuteConversionAsync()
         {
-            ClearPluginsFolder();
-
             print("正在请求网络分支");
             var localInfo = await GetBranchAndManifestUrlAsync(isCurrentlyOs, isCurrentlyBili);
             var targetInfo = await GetBranchAndManifestUrlAsync(targetIsOversea, targetIsBilibili);
@@ -312,6 +317,8 @@ namespace FufuLauncher.Views
             print("正在下载并解析清单");
             var localManifest = await DownloadAndDecodeManifestAsync(localInfo.manifestUrl);
             _targetManifest = await DownloadAndDecodeManifestAsync(targetInfo.manifestUrl);
+
+            ClearPluginsFolder();
 
             print("正在比对");
             var ops = GenerateOperations(_targetManifest, localManifest, _targetChunkPrefix, _targetChunkSuffix);
@@ -386,8 +393,8 @@ namespace FufuLauncher.Views
                 
                 long currentBytes = Interlocked.Add(ref processedBytes, asset.AssetSize);
                 int currentCount = Interlocked.Increment(ref current);
-                
-                if (currentCount % 10 == 0 || currentCount == total)
+
+                if (currentCount % 100 == 0 || currentCount == total)
                 {
                     TimeSpan elapsed = stopwatch.Elapsed;
                     if (elapsed.TotalSeconds > 2 && currentBytes > 0)
@@ -396,7 +403,7 @@ namespace FufuLauncher.Views
                         long remainingBytes = totalBytes - currentBytes;
                         double remainingSeconds = remainingBytes / bytesPerSecond;
                         TimeSpan remainingTime = TimeSpan.FromSeconds(remainingSeconds);
-                        
+        
                         print($"校验中: {currentCount}/{total} - 剩余时间: {remainingTime:hh\\:mm\\:ss}");
                     }
                     else
@@ -672,8 +679,46 @@ namespace FufuLauncher.Views
             string chunkPath = Path.Combine(chunksDir, chunk.ChunkName);
             if (File.Exists(chunkPath) && new FileInfo(chunkPath).Length == chunk.ChunkSize) return;
 
-            var bytes = await httpClient.GetByteArrayAsync(chunk.DownloadUrl);
-            await File.WriteAllBytesAsync(chunkPath, bytes);
+            string tempDir = Path.Combine(chunksDir, Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(tempDir);
+            string tempPath = Path.Combine(tempDir, chunk.ChunkName + ".tmp");
+            int maxRetries = 3;
+
+            for (int i = 0; i < maxRetries; i++)
+            {
+                try
+                {
+                    using var response = await httpClient.GetAsync(chunk.DownloadUrl, HttpCompletionOption.ResponseHeadersRead);
+                    response.EnsureSuccessStatusCode();
+
+                    using var contentStream = await response.Content.ReadAsStreamAsync();
+                    using var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true);
+            
+                    await contentStream.CopyToAsync(fileStream);
+                    fileStream.Close();
+
+                    if (new FileInfo(tempPath).Length == chunk.ChunkSize)
+                    {
+                        if (File.Exists(chunkPath)) File.Delete(chunkPath);
+                        File.Move(tempPath, chunkPath);
+                        Directory.Delete(tempDir, true);
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
+                    if (File.Exists(tempPath)) File.Delete(tempPath);
+                    if (i == maxRetries - 1)
+                    {
+                        if (Directory.Exists(tempDir)) Directory.Delete(tempDir, true);
+                        throw;
+                    }
+                    await Task.Delay(1000 * (i + 1));
+                }
+            }
+            
+            if (Directory.Exists(tempDir)) Directory.Delete(tempDir, true);
+            throw new Exception($"数据块 {chunk.ChunkName} 下载失败或大小不匹配。");
         }
 
         private void AssembleFiles(List<SophonAssetOperation> assembleOps)
@@ -697,12 +742,12 @@ namespace FufuLauncher.Views
                     {
                         targetFile.Seek(inst.TargetChunk.ChunkOnFileOffset, SeekOrigin.Begin);
                         long remainingBytes = inst.TargetChunk.ChunkSizeDecompressed;
-
+                        
                         if (inst.Action == "reuse")
                         {
-                            using var localFile = new FileStream(Path.Combine(gameDir, inst.LocalAssetName), FileMode.Open, FileAccess.Read, FileShare.Read);
+                            using var localFile = new FileStream(Path.Combine(gameDir, inst.LocalAssetName), FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                             localFile.Seek(inst.LocalChunk.ChunkOnFileOffset, SeekOrigin.Begin);
-                            
+    
                             while (remainingBytes > 0)
                             {
                                 int bytesRead = localFile.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
@@ -713,15 +758,27 @@ namespace FufuLauncher.Views
                         }
                         else
                         {
-                            using var compressedFile = new FileStream(Path.Combine(chunksDir, inst.TargetChunk.ChunkName), FileMode.Open, FileAccess.Read, FileShare.Read);
-                            using var dctx = new DecompressionStream(compressedFile);
-                            
-                            while (remainingBytes > 0)
+                            string chunkPath = Path.Combine(chunksDir, inst.TargetChunk.ChunkName);
+                            try
                             {
-                                int bytesRead = dctx.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
-                                if (bytesRead <= 0) break;
-                                targetFile.Write(buffer, 0, bytesRead);
-                                remainingBytes -= bytesRead;
+                                using var compressedFile = new FileStream(chunkPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                                using var dctx = new DecompressionStream(compressedFile);
+        
+                                while (remainingBytes > 0)
+                                {
+                                    int bytesRead = dctx.Read(buffer, 0, (int)Math.Min(buffer.Length, remainingBytes));
+                                    if (bytesRead <= 0) break;
+                                    targetFile.Write(buffer, 0, bytesRead);
+                                    remainingBytes -= bytesRead;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                if (File.Exists(chunkPath))
+                                {
+                                    File.Delete(chunkPath);
+                                }
+                                throw new Exception($"数据块 {inst.TargetChunk.ChunkName} 已损坏并被自动清理，请重新执行操作。异常明细: {ex.Message}");
                             }
                         }
                     }
