@@ -379,7 +379,11 @@
                         <Grid>
                             <Border x:Name="BackgroundBlurBorder" Background="{StaticResource IosGlassBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="24">
                             </Border>
-                            <FontIcon Glyph="&#xE8B9;" FontSize="18" Foreground="White" Margin="14,12"/>
+                            <FontIcon Glyph="&#xE8B9;" 
+                                      FontSize="18" 
+                                      Foreground="White" 
+                                      Margin="14,12" 
+                                      Opacity="{x:Bind GetIconOpacity(ViewModel.IsBackgroundToggleEnabled), Mode=OneWay}"/>
                         </Grid>
                     </Button>
                 </Grid>

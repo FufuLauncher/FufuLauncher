@@ -137,6 +137,11 @@ public sealed partial class MainPage : Page
             }
         }
         
+        private double GetIconOpacity(bool isEnabled)
+        {
+            return isEnabled ? 1.0 : 0.4;
+        }
+        
         private async Task PerformServerSwitch(string gameDir, string configPath, bool toBilibili)
         {
             try
