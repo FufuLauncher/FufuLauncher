@@ -864,7 +864,7 @@ private async Task ExecuteCheckinAsync()
 
             if (!_gameLauncherService.IsGamePathSelected())
             {
-                _notificationService.Show("未设置游戏路径", "请先前往设置页面选择游戏安装路径", NotificationType.Error, 0);
+                _notificationService.Show("未设置游戏路径", "请先前往游戏管理页面选择游戏安装路径", NotificationType.Error, 0);
                 return;
             }
 
@@ -904,7 +904,7 @@ private async Task ExecuteCheckinAsync()
 
             if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
             {
-                _notificationService.Show("未设置游戏路径", "请先前往设置页面选择游戏安装路径", NotificationType.Error, 0);
+                _notificationService.Show("未设置游戏路径", "请先前往游戏管理页面选择游戏安装路径", NotificationType.Error, 0);
                 return;
             }
 

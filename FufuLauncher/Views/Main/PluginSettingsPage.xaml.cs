@@ -113,6 +113,29 @@ public sealed partial class PluginSettingsPage : Page
         }
     }
     
+    protected override void OnNavigatedTo(Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
+    {
+        base.OnNavigatedTo(e);
+    
+        if (e.Parameter is Models.PluginItem item)
+        {
+            var folderName = new DirectoryInfo(item.DirectoryPath).Name;
+        
+            if (folderName.Contains("FPS", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewModel.SelectedPluginIndex = 1;
+            }
+            else if (folderName.Contains("Avatar", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewModel.SelectedPluginIndex = 2;
+            }
+            else
+            {
+                ViewModel.SelectedPluginIndex = 0;
+            }
+        }
+    }
+    
     private void AvatarPreview_ImageOpened(object sender, RoutedEventArgs e)
     {
         if (sender is Microsoft.UI.Xaml.Controls.Image image)

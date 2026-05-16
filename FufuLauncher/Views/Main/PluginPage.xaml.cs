@@ -498,13 +498,14 @@ public sealed partial class PluginPage : Page
         {
             var folderName = new DirectoryInfo(item.DirectoryPath).Name;
             bool isFuFuPlugin = folderName.Contains("FuFuPlugin", StringComparison.OrdinalIgnoreCase);
-
-            if (isFuFuPlugin)
+            bool isFpsPlugin = folderName.Contains("FPS", StringComparison.OrdinalIgnoreCase);
+            
+            if (isFuFuPlugin || isFpsPlugin)
             {
                 ExitStoryboard.Begin();
                 await Task.Delay(300);
                 Frame.Navigate(typeof(PluginSettingsPage), item, new Microsoft.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
-                
+            
                 var navView = FindParentNavigationView(this);
                 if (navView != null)
                 {

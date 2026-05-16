@@ -12,8 +12,10 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/Launcher/FPS.zip" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Assets/Launcher/FPS.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +39,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/95c016b9ad4a4fd28f603079af898a921a6910/cf/d2fc4977/HttpHeaderParser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e703623710cc408eaac0f2c6feb0a00c81230/e9/78bac74a/ExceptionHelpers.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e703623710cc408eaac0f2c6feb0a00c81230/ef/39b547e2/IDictionaryMethods`2.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff6272365c704c4bb2ed9d119a49756b6f7620/1c/1381ccde/Page.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff6272365c704c4bb2ed9d119a49756b6f7620/9a/735ace2f/ContentDialog.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ff6272365c704c4bb2ed9d119a49756b6f7620/eb/7559d456/_EventSource_global__Microsoft_UI_Xaml_RoutedEvent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1510a3e3fe7df8a2681434779ea73bc53713ed9c05689d72495b2b27c87/Path.cs" root0="FORCE_HIGHLIGHTING" />
@@ -58,7 +61,6 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/HelpViewModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Administrator/Desktop/Acrylic-11.26100.1.0/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Main/HelpPage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -341,15 +343,7 @@
       <workItem from="1778782689175" duration="1424000" />
       <workItem from="1778849171116" duration="8469000" />
       <workItem from="1778914854243" duration="5912000" />
-      <workItem from="1778933376729" duration="7864000" />
-    </task>
-    <task id="LOCAL-00035" summary="更新1.1.0.0">
-      <option name="closed" value="true" />
-      <created>1775168315996</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1775168315996</updated>
+      <workItem from="1778933376729" duration="9793000" />
     </task>
     <task id="LOCAL-00036" summary="增加和修复了一些功能">
       <option name="closed" value="true" />
@@ -735,7 +729,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778923035186</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="修复部分问题，优化部分功能的体验">
+      <option name="closed" value="true" />
+      <created>1778948174934</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1778948174934</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -756,7 +758,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="修复 #120 和 #118 的版本检测问题以及除草提议" />
     <MESSAGE value="修复部分因权限导致的问题" />
     <MESSAGE value="修复部分问题，增加网页登录" />
     <MESSAGE value="修复部分问题" />
@@ -781,7 +782,8 @@
     <MESSAGE value="1" />
     <MESSAGE value="增加头像替换" />
     <MESSAGE value="修复主题冲突问题，修复警告问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复主题冲突问题，修复警告问题" />
+    <MESSAGE value="修复部分问题，优化部分功能的体验" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复部分问题，优化部分功能的体验" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
