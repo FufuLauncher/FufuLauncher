@@ -85,13 +85,11 @@
                           Icon="Download" 
                           Label="获取插件(Get Plugins)"
                           Click="OnGetPluginsClick" />
-            
+
             <AppBarButton Icon="Help" 
                   Label="自由视角怎么用" 
-                  Click="OnFreeCamHelpClick"
-                  Foreground="White">
-        </AppBarButton>
-            
+                  Click="OnFreeCamHelpClick"/>
+
             <AppBarButton Icon="Add" Label="添加插件" Command="{x:Bind ViewModel.AddPluginCommand}"/>
             <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind ViewModel.RefreshCommand}"/>
             <AppBarButton Icon="Folder" Label="打开文件夹" Command="{x:Bind ViewModel.OpenFolderCommand}"/>
