@@ -788,18 +788,13 @@ private async Task ExecuteCheckinAsync()
             }
 
             CheckinStatusText = isActualSuccess ? "签到成功" : "签到失败";
-            CheckinSummary = message;
+            CheckinSummary = isActualSuccess ? "所有绑定角色已签到完成" : message;
             UpdateCheckinIconState(isActualSuccess ? "已签到" : "Fail");
 
             if (isActualSuccess)
             {
                 string formattedMsg = $"连续签到: {signDays}天 | 获得奖励: {rewardItem}";
                 _notificationService.Show("签到成功", formattedMsg, NotificationType.Success, 3000);
-            }
-            else
-            {
-                string errorMsg = string.IsNullOrEmpty(message) ? "未获取到签到奖励信息" : message;
-                _notificationService.Show("签到失败", errorMsg, NotificationType.Error, 3000);
             }
         }
     }

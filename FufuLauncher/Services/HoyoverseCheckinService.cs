@@ -42,7 +42,12 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         await genshin.InitializeAsync(config).ConfigureAwait(false);
 
         if (genshin.AccountList.Count == 0)
-            return ("未检测到账号", "请检查Cookie和绑定");
+        {
+            string errorSummary = !string.IsNullOrEmpty(GameCheckin.LastApiError) 
+                ? $"初始化失败: {GameCheckin.LastApiError}" 
+                : "请检查Cookie和绑定";
+            return ("未检测到账号", errorSummary);
+        }
 
         var account = string.IsNullOrEmpty(targetUid) 
             ? genshin.AccountList[0] 
@@ -50,7 +55,15 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 
         var isSignData = await genshin.IsSignAsync(account.Region, account.GameUid, false).ConfigureAwait(false);
 
-        return isSignData?.IsSign == true
+        if (isSignData == null)
+        {
+            string errorSummary = !string.IsNullOrEmpty(GameCheckin.LastApiError)
+                ? $"获取状态失败: {GameCheckin.LastApiError}"
+                : "未知网络错误";
+            return ("获取状态失败", errorSummary);
+        }
+
+        return isSignData.IsSign == true
             ? ("今日已签到", $"账号: {account.Nickname}")
             : ("今日未签到", $"账号: {account.Nickname} (可签到)");
     }
@@ -68,7 +81,8 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         
         var result = await genshin.SignAccountAsync(config, targetUid).ConfigureAwait(false);
         var isSuccess = !result.Contains("失败") && !result.Contains("异常");
-        var summary = string.Join("", result.Split('\n').Take(2));
+        
+        var summary = string.Join(" ", result.Split('\n', StringSplitOptions.RemoveEmptyEntries));
 
         return (isSuccess, summary);
     }
