@@ -12,6 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,15 +340,7 @@
       <workItem from="1778782689175" duration="1424000" />
       <workItem from="1778849171116" duration="8469000" />
       <workItem from="1778914854243" duration="5912000" />
-      <workItem from="1778933376729" duration="12002000" />
-    </task>
-    <task id="LOCAL-00038" summary="增加国际服切换">
-      <option name="closed" value="true" />
-      <created>1775224888372</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1775224888372</updated>
+      <workItem from="1778933376729" duration="13615000" />
     </task>
     <task id="LOCAL-00039" summary="加防呆">
       <option name="closed" value="true" />
@@ -733,7 +726,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778952181631</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="增加防呆，修复部分功能">
+      <option name="closed" value="true" />
+      <created>1778952813184</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1778952813184</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,7 +755,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="修复部分问题" />
     <MESSAGE value="修复 #123 问题" />
     <MESSAGE value="1.1.0.2" />
     <MESSAGE value="提交" />
@@ -779,7 +779,8 @@
     <MESSAGE value="修复部分问题，优化部分功能的体验" />
     <MESSAGE value="增加防呆，修复部分已知问题" />
     <MESSAGE value="增加提示" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加提示" />
+    <MESSAGE value="增加防呆，修复部分功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加防呆，修复部分功能" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

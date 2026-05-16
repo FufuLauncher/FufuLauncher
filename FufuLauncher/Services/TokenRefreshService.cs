@@ -5,6 +5,9 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 using FufuLauncher.Constants;
+using CommunityToolkit.Mvvm.Messaging;
+using FufuLauncher.Messages;
+using FufuLauncher.Models;
 using MihoyoBBS;
 
 namespace FufuLauncher.Services;
@@ -52,6 +55,8 @@ public class TokenRefreshService
             }
 
             Debug.WriteLine("当前 Cookie 已失效或角色列表为空，开始执行 Token 刷新...");
+            
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Token刷新", "Cookie已失效，正在执行刷新...", NotificationType.Warning, 3000));
 
             var cookieDict = ParseCookieString(config.Account.Cookie);
             
@@ -99,12 +104,14 @@ public class TokenRefreshService
                 await localSettingsService.SaveSettingAsync("AccountConfig", config);
 
                 Debug.WriteLine("Token刷新成功");
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("Token刷新", "Token自动刷新已完成，新凭据已存盘，请重新启动软件", NotificationType.Success, 3000));
                 return;
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"Token 刷新异常: {ex.Message}");
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Token 刷新失败", $"Token 刷新过程中出现异常: {ex.Message}", NotificationType.Error, 4000));
         }
     }
 
@@ -129,7 +136,7 @@ public class TokenRefreshService
             var response = await _httpClient.SendAsync(request);
             var responseText = await response.Content.ReadAsStringAsync();
 
-            var result = JsonSerializer.Deserialize<ApiResponse<AccountInfoData>>(responseText, _jsonOptions);
+            var result = JsonSerializer.Deserialize<MihoyoBBS.ApiResponse<MihoyoBBS.AccountInfoData>>(responseText, _jsonOptions);
             
             if (result != null && result.RetCode == 0 && result.Data?.List != null && result.Data.List.Count > 0)
             {
