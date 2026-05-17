@@ -485,7 +485,7 @@ namespace MihoyoBBS
                         }
                         else
                         {
-                            LastApiError = $"API错误: {result.Message}";
+                            LastApiError = $"{result.Message}";
                         }
                     }
                     else
@@ -523,6 +523,7 @@ namespace MihoyoBBS
                 }
                 catch (Exception)
                 {
+                    // ignored
                 }
 
                 await Task.Delay(5000);
@@ -553,7 +554,7 @@ namespace MihoyoBBS
                         }
                         else
                         {
-                            LastApiError = $"API错误: {result.Message}";
+                            LastApiError = $"{result.Message}";
                         }
                     }
                     else

@@ -173,7 +173,7 @@ public partial class PluginSettingsViewModel : ObservableObject
             }
         }
     
-        _isMainPluginEnabled = File.Exists(mainEnabledPath);
+        _isMainPluginEnabled = !File.Exists(mainDisabledPath);
         OnPropertyChanged(nameof(IsMainPluginEnabled));
 
         if (File.Exists(fpsEnabledPath) && File.Exists(fpsDisabledPath))
