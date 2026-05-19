@@ -48,6 +48,29 @@ public partial class PluginSettingsViewModel : ObservableObject
     [ObservableProperty]
     private bool hasAvatar;
     
+    
+    [ObservableProperty]
+    private Microsoft.UI.Xaml.Media.ImageSource avatar512Source;
+
+    [ObservableProperty]
+    private Microsoft.UI.Xaml.Media.ImageSource avatar256Source;
+
+    [ObservableProperty]
+    private Microsoft.UI.Xaml.Media.ImageSource avatar128Source;
+
+    [ObservableProperty]
+    private bool hasAvatar512;
+
+    [ObservableProperty]
+    private bool hasAvatar256;
+
+    [ObservableProperty]
+    private bool hasAvatar128;
+
+    public string GetAvatarPath(int size) => Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar", $"avatar{size}.png");
+    public string GetAvatarOriginalPath(int size) => Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar", $"avatar{size}_original.png");
+    
+    
     private bool _isAutoCreatePresetEnabled = true;
 
     public bool IsAutoCreatePresetEnabled
@@ -462,7 +485,19 @@ public partial class PluginSettingsViewModel : ObservableObject
         OnPropertyChanged(nameof(AvatarSettingsVisibility));
         OnPropertyChanged(nameof(MainSettingsVisibility));
         
-        var path = AvatarPath;
+        Avatar512Source = LoadImageSource(512, out bool has512);
+        HasAvatar512 = has512;
+        
+        Avatar256Source = LoadImageSource(256, out bool has256);
+        HasAvatar256 = has256;
+        
+        Avatar128Source = LoadImageSource(128, out bool has128);
+        HasAvatar128 = has128;
+    }
+    
+    private Microsoft.UI.Xaml.Media.Imaging.BitmapImage LoadImageSource(int size, out bool hasAvatar)
+    {
+        var path = GetAvatarPath(size);
         if (File.Exists(path))
         {
             try
@@ -470,20 +505,13 @@ public partial class PluginSettingsViewModel : ObservableObject
                 var bmp = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage();
                 bmp.CreateOptions = Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions.IgnoreImageCache;
                 bmp.UriSource = new Uri(path);
-                CurrentAvatarSource = bmp;
-                HasAvatar = true;
+                hasAvatar = true;
+                return bmp;
             }
-            catch
-            {
-                CurrentAvatarSource = null;
-                HasAvatar = false;
-            }
+            catch { }
         }
-        else
-        {
-            CurrentAvatarSource = null;
-            HasAvatar = false;
-        }
+        hasAvatar = false;
+        return null;
     }
 
     public bool IsPluginCorrupted()

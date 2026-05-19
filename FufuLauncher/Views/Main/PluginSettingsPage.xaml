@@ -316,20 +316,45 @@
                         </GridView>
                         
                         <StackPanel Visibility="{x:Bind ViewModel.AvatarSettingsVisibility, Mode=OneWay}" Margin="0,16,0,0">
-                            <TextBlock Text="头像替换设置" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,16"/>
+                            <TextBlock Text="头像替换设置 (根据需要上传对应尺寸)" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,16"/>
                             <StackPanel Orientation="Horizontal" Spacing="24">
-                                <Border Width="128" Height="128" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-                                    <Image Source="{x:Bind ViewModel.CurrentAvatarSource, Mode=OneWay}" Stretch="UniformToFill" Opacity="0" ImageOpened="AvatarPreview_ImageOpened"/>
-                                </Border>
-                                <StackPanel VerticalAlignment="Center" Spacing="12">
-                                    <StackPanel Orientation="Horizontal" Spacing="12">
-                                        <Button Content="导入新图片" Click="OnImportAvatarClick"/>
-                                        <Button Content="重新裁剪当前头像" Click="OnEditCurrentAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar, Mode=OneWay}"/>
-                                        <Button Content="清除头像" Click="OnClearAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar, Mode=OneWay}"/>
+                                <StackPanel Spacing="12">
+                                    <TextBlock Text="512x512" HorizontalAlignment="Center"/>
+                                    <Border Width="128" Height="128" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                                        <Image Source="{x:Bind ViewModel.Avatar512Source, Mode=OneWay}" Stretch="UniformToFill" Opacity="0" ImageOpened="AvatarPreview_ImageOpened"/>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                        <Button Content="导入" Tag="512" Click="OnImportAvatarClick"/>
+                                        <Button Content="裁剪" Tag="512" Click="OnEditCurrentAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar512, Mode=OneWay}"/>
+                                        <Button Content="清除" Tag="512" Click="OnClearAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar512, Mode=OneWay}"/>
                                     </StackPanel>
-                                    <TextBlock Text="支持格式: PNG, JPG, BMP, WEBP&#x0A;修改后在下次进游戏时生效" FontSize="12" Opacity="0.6"/>
+                                </StackPanel>
+
+                                <StackPanel Spacing="12">
+                                    <TextBlock Text="256x256" HorizontalAlignment="Center"/>
+                                    <Border Width="128" Height="128" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                                        <Image Source="{x:Bind ViewModel.Avatar256Source, Mode=OneWay}" Stretch="UniformToFill" Opacity="0" ImageOpened="AvatarPreview_ImageOpened"/>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                        <Button Content="导入" Tag="256" Click="OnImportAvatarClick"/>
+                                        <Button Content="裁剪" Tag="256" Click="OnEditCurrentAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar256, Mode=OneWay}"/>
+                                        <Button Content="清除" Tag="256" Click="OnClearAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar256, Mode=OneWay}"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Spacing="12">
+                                    <TextBlock Text="128x128" HorizontalAlignment="Center"/>
+                                    <Border Width="128" Height="128" CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                                        <Image Source="{x:Bind ViewModel.Avatar128Source, Mode=OneWay}" Stretch="UniformToFill" Opacity="0" ImageOpened="AvatarPreview_ImageOpened"/>
+                                    </Border>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+                                        <Button Content="导入" Tag="128" Click="OnImportAvatarClick"/>
+                                        <Button Content="裁剪" Tag="128" Click="OnEditCurrentAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar128, Mode=OneWay}"/>
+                                        <Button Content="清除" Tag="128" Click="OnClearAvatarClick" IsEnabled="{x:Bind ViewModel.HasAvatar128, Mode=OneWay}"/>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
+                            <TextBlock Text="支持格式: PNG, JPG, BMP, WEBP.修改后在下次进游戏时生效" Margin="0,16,0,0" FontSize="12" Opacity="0.6"/>
                         </StackPanel>
                         
                     </StackPanel>
@@ -376,14 +401,12 @@
         <ContentDialog x:Name="CropImageDialog" 
                        Grid.RowSpan="2"
                        Title="调整头像" 
-                       PrimaryButtonText="保存" 
+                       PrimaryButtonText="保存当前尺寸" 
+                       SecondaryButtonText="批量应用到全部尺寸"
                        CloseButtonText="取消" 
-                       PrimaryButtonClick="OnCropSaveClick">
+                       PrimaryButtonClick="OnCropSaveClick"
+                       SecondaryButtonClick="OnCropBatchApplyClick">
             <StackPanel Spacing="16">
-                <RadioButtons x:Name="ResolutionSelector" Header="输出分辨率">
-                    <RadioButton x:Name="Radio512" Content="512x512 (高清)" IsChecked="True"/>
-                    <RadioButton x:Name="Radio256" Content="256x256 (标准)"/>
-                </RadioButtons>
                 <Border Width="300" Height="300" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="4">
                     <Grid>
                         <ScrollViewer x:Name="CropScrollViewer" 
@@ -401,7 +424,7 @@
                                       PointerWheelChanged="CropScrollViewer_PointerWheelChanged">
                             <Image x:Name="CropTargetImage" Stretch="Uniform" />
                         </ScrollViewer>
-                        
+                         
                         <Grid IsHitTestVisible="False" Opacity="0.5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />

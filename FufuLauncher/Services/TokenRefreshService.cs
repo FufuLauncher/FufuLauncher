@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -35,28 +35,39 @@ public class TokenRefreshService
         _httpClient = new HttpClient(handler);
     }
     
-    public async Task RefreshCookieAsync()
+    public async Task RefreshCookieAsync(bool isManual = false)
     {
         try
         {
             var path = Path.Combine(AppContext.BaseDirectory, "config.json");
-            if (!File.Exists(path)) return;
+            if (!File.Exists(path))
+            {
+                if (isManual) SendErrorNotification("未找到配置文件");
+                return;
+            }
 
             var json = await File.ReadAllTextAsync(path);
             var config = JsonSerializer.Deserialize<Config>(json);
             
-            if (config == null || string.IsNullOrEmpty(config.Account.Cookie)) return;
-            
-            bool isValid = await CheckCookieValidAsync(config.Account.Cookie);
-            if (isValid)
+            if (config == null || string.IsNullOrEmpty(config.Account.Cookie))
             {
-                Debug.WriteLine("当前 Cookie 仍然有效且获取到了角色列表，无需刷新");
+                if (isManual) SendErrorNotification("配置文件中未找到有效的 Cookie");
                 return;
             }
-
-            Debug.WriteLine("当前 Cookie 已失效或角色列表为空，开始执行 Token 刷新...");
             
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("Token刷新", "Cookie已失效，正在执行刷新...", NotificationType.Warning, 3000));
+            if (!isManual)
+            {
+                bool isValid = await CheckCookieValidAsync(config.Account.Cookie);
+                if (isValid)
+                {
+                    Debug.WriteLine("当前 Cookie 仍然有效且获取到了角色列表，无需刷新");
+                    return;
+                }
+            }
+
+            Debug.WriteLine(isManual ? "用户手动触发 Token 刷新..." : "当前 Cookie 已失效或角色列表为空，开始执行 Token 刷新...");
+            
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Token刷新", isManual ? "正在执行手动刷新..." : "Cookie已失效，正在执行刷新...", NotificationType.Warning, 3000));
 
             var cookieDict = ParseCookieString(config.Account.Cookie);
             
@@ -66,21 +77,34 @@ public class TokenRefreshService
             if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))
             {
                 Debug.WriteLine("本地 Cookie 中缺少 stoken 或 mid，无法刷新");
+                if (isManual) SendErrorNotification("本地 Cookie 中缺少 stoken 或 mid，无法刷新");
                 return;
             }
 
             string authCookie = $"stoken={stoken}; mid={mid}";
             
             string webTicket = await CreateWebQrCodeAsync();
-            if (string.IsNullOrEmpty(webTicket)) return;
+            if (string.IsNullOrEmpty(webTicket))
+            {
+                if (isManual) SendErrorNotification("创建 WebTicket 失败");
+                return;
+            }
 
             bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie);
-            if (!scanResult) return;
+            if (!scanResult)
+            {
+                if (isManual) SendErrorNotification("模拟扫码请求失败");
+                return;
+            }
 
             await Task.Delay(500);
             
             bool confirmResult = await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie);
-            if (!confirmResult) return;
+            if (!confirmResult)
+            {
+                if (isManual) SendErrorNotification("模拟确认登录请求失败");
+                return;
+            }
 
             var v2Cookies = await GetWebQrStatusAndExtractCookiesAsync(webTicket);
             if (v2Cookies != null && v2Cookies.Count > 0)
@@ -104,8 +128,12 @@ public class TokenRefreshService
                 await localSettingsService.SaveSettingAsync("AccountConfig", config);
 
                 Debug.WriteLine("Token刷新成功");
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("Token刷新", "Token自动刷新已完成，新凭据已存盘，请重新启动软件", NotificationType.Success, 3000));
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("Token刷新", isManual ? "Token手动刷新已完成，新凭据已存盘" : "Token自动刷新已完成，新凭据已存盘，请重新启动软件", NotificationType.Success, 3000));
                 return;
+            }
+            else
+            {
+                if (isManual) SendErrorNotification("获取新 Cookie 失败");
             }
         }
         catch (Exception ex)
@@ -113,6 +141,11 @@ public class TokenRefreshService
             Debug.WriteLine($"Token 刷新异常: {ex.Message}");
             WeakReferenceMessenger.Default.Send(new NotificationMessage("Token 刷新失败", $"Token 刷新过程中出现异常: {ex.Message}", NotificationType.Error, 4000));
         }
+    }
+
+    private void SendErrorNotification(string message)
+    {
+        WeakReferenceMessenger.Default.Send(new NotificationMessage("Token 刷新失败", message, NotificationType.Error, 4000));
     }
 
     private async Task<bool> CheckCookieValidAsync(string cookie)

@@ -13,6 +13,12 @@
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FufuLauncher/Plugins/Avatar/Avatar.disabled" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Plugins/Avatar/Avatar.disabled" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/PluginSettingsPage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fufulauncher.nsi" beforeDir="false" afterPath="$PROJECT_DIR$/fufulauncher.nsi" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,20 +175,6 @@
       <option name="PROJECT_TFM" value="" />
       <method v="2">
         <option name="Build" />
-      </method>
-    </configuration>
-    <configuration default="true" type="GODOT_DEBUG_RUN_CONFIGURATION" factoryName="Start and Debug">
-      <option name="EXE_PATH" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="ENV_FILE_PATHS" value="" />
-      <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
-      <option name="MIXED_MODE_DEBUG" value="0" />
-      <method v="2">
-        <option name="Build Solution" enabled="true" />
       </method>
     </configuration>
     <configuration name="FufuLauncher" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -348,15 +340,8 @@
       <workItem from="1779036605655" duration="642000" />
       <workItem from="1779051051254" duration="4556000" />
       <workItem from="1779079020507" duration="3889000" />
-      <workItem from="1779085552573" duration="1247000" />
-    </task>
-    <task id="LOCAL-00044" summary="增加手动输入cookie">
-      <option name="closed" value="true" />
-      <created>1775735900994</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1775735900994</updated>
+      <workItem from="1779085552573" duration="1267000" />
+      <workItem from="1779104140418" duration="5855000" />
     </task>
     <task id="LOCAL-00045" summary="增加问题反馈模板">
       <option name="closed" value="true" />
@@ -742,7 +727,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779081460525</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="修复">
+      <option name="closed" value="true" />
+      <created>1779088476022</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1779088476023</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -763,7 +756,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="修复更新" />
     <MESSAGE value="改了很多东西" />
     <MESSAGE value="增加API统一存储" />
     <MESSAGE value="增加国际服签到和登录" />
@@ -788,7 +780,8 @@
     <MESSAGE value="小修改" />
     <MESSAGE value="1.2.0.0" />
     <MESSAGE value="砍功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="砍功能" />
+    <MESSAGE value="修复" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

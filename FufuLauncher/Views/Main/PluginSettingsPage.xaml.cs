@@ -674,6 +674,11 @@ private async void ViewModel_PropertyChanged(object sender, System.ComponentMode
     {
         try
         {
+            if (sender is FrameworkElement fe && int.TryParse(fe.Tag?.ToString(), out int size))
+            {
+                _currentEditSize = size;
+            }
+
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
             WinRT.Interop.InitializeWithWindow.Initialize(picker, GetActiveWindow());
             picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
@@ -689,7 +694,7 @@ private async void ViewModel_PropertyChanged(object sender, System.ComponentMode
                 string avatarDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar");
                 if (!Directory.Exists(avatarDir)) Directory.CreateDirectory(avatarDir);
 
-                string originalPath = ViewModel.AvatarOriginalPath;
+                string originalPath = ViewModel.GetAvatarOriginalPath(_currentEditSize);
                 File.Copy(file.Path, originalPath, true);
 
                 await LoadImageToCropperAsync(originalPath);
@@ -703,41 +708,86 @@ private async void ViewModel_PropertyChanged(object sender, System.ComponentMode
 
     private async void OnEditCurrentAvatarClick(object sender, RoutedEventArgs e)
     {
-        string targetPath = File.Exists(ViewModel.AvatarOriginalPath) ? ViewModel.AvatarOriginalPath : ViewModel.AvatarPath;
-        if (File.Exists(targetPath))
+        if (sender is FrameworkElement fe && int.TryParse(fe.Tag?.ToString(), out int size))
         {
-            await LoadImageToCropperAsync(targetPath);
-        }
-        else
-        {
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("提示", "未找到可供编辑的头像", NotificationType.Warning));
+            _currentEditSize = size;
+            string originalPath = ViewModel.GetAvatarOriginalPath(size);
+            string normalPath = ViewModel.GetAvatarPath(size);
+            string targetPath = File.Exists(originalPath) ? originalPath : normalPath;
+
+            if (File.Exists(targetPath))
+            {
+                await LoadImageToCropperAsync(targetPath);
+            }
+            else
+            {
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("提示", "未找到可供编辑的头像", NotificationType.Warning));
+            }
         }
     }
 
     private uint _originalImageWidth;
     private uint _originalImageHeight;
     private string _editingImagePath;
-
+    private int _currentEditSize = 512;
+    
     private void OnClearAvatarClick(object sender, RoutedEventArgs e)
     {
         try
         {
-            if (File.Exists(ViewModel.AvatarPath))
+            if (sender is FrameworkElement fe && int.TryParse(fe.Tag?.ToString(), out int size))
             {
-                File.Delete(ViewModel.AvatarPath);
+                string normalPath = ViewModel.GetAvatarPath(size);
+                string originalPath = ViewModel.GetAvatarOriginalPath(size);
+
+                if (File.Exists(normalPath)) File.Delete(normalPath);
+                if (File.Exists(originalPath)) File.Delete(originalPath);
+
+                ViewModel.UpdateAvatarPreview();
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", $"尺寸 {size}x{size} 头像已清除", NotificationType.Success));
             }
-        
-            if (File.Exists(ViewModel.AvatarOriginalPath))
-            {
-                File.Delete(ViewModel.AvatarOriginalPath);
-            }
-        
-            ViewModel.UpdateAvatarPreview();
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "头像已清除，将在下次进入游戏时生效", NotificationType.Success));
         }
         catch (Exception ex)
         {
             WeakReferenceMessenger.Default.Send(new NotificationMessage("清除失败", ex.Message, NotificationType.Error));
+        }
+    }
+    
+    private async Task SaveCroppedImageAsync(int targetSize)
+    {
+        double viewSize = 300.0;
+        double baseScale = Math.Max(viewSize / _originalImageWidth, viewSize / _originalImageHeight);
+        double finalScale = baseScale * CropScrollViewer.ZoomFactor;
+
+        double cropX = CropScrollViewer.HorizontalOffset / finalScale;
+        double cropY = CropScrollViewer.VerticalOffset / finalScale;
+        double cropSize = viewSize / finalScale;
+        
+        int x = Math.Max(0, (int)Math.Floor(cropX));
+        int y = Math.Max(0, (int)Math.Floor(cropY));
+        int size = (int)Math.Ceiling(cropSize);
+        
+        using (var image = await SixLabors.ImageSharp.Image.LoadAsync(_editingImagePath))
+        {
+            int safeX = Math.Min(x, image.Width - 1);
+            int safeY = Math.Min(y, image.Height - 1);
+            int safeWidth = Math.Min(size, image.Width - safeX);
+            int safeHeight = Math.Min(size, image.Height - safeY);
+            int finalCropSize = Math.Max(1, Math.Min(safeWidth, safeHeight));
+
+            image.Mutate(ctx => ctx
+                .Crop(new Rectangle(safeX, safeY, finalCropSize, finalCropSize))
+                .Resize(targetSize, targetSize, KnownResamplers.Bicubic));
+
+            var outputPath = ViewModel.GetAvatarPath(targetSize);
+            var directory = Path.GetDirectoryName(outputPath);
+            
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+            
+            await image.SaveAsPngAsync(outputPath);
         }
     }
     
@@ -777,58 +827,45 @@ private async void ViewModel_PropertyChanged(object sender, System.ComponentMode
         }
     }
 
-private async void OnCropSaveClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-{
-    var deferral = args.GetDeferral();
-    try
+    private async void OnCropSaveClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
-        uint targetSize = Radio512.IsChecked == true ? 512u : 256u;
-
-        double viewSize = 300.0;
-        double baseScale = Math.Max(viewSize / _originalImageWidth, viewSize / _originalImageHeight);
-        double finalScale = baseScale * CropScrollViewer.ZoomFactor;
-
-        double cropX = CropScrollViewer.HorizontalOffset / finalScale;
-        double cropY = CropScrollViewer.VerticalOffset / finalScale;
-        double cropSize = viewSize / finalScale;
-        
-        int x = Math.Max(0, (int)Math.Floor(cropX));
-        int y = Math.Max(0, (int)Math.Floor(cropY));
-        int size = (int)Math.Ceiling(cropSize);
-        
-        using (var image = await SixLabors.ImageSharp.Image.LoadAsync(_editingImagePath))
+        var deferral = args.GetDeferral();
+        try
         {
-            int safeX = Math.Min(x, image.Width - 1);
-            int safeY = Math.Min(y, image.Height - 1);
-            int safeWidth = Math.Min(size, image.Width - safeX);
-            int safeHeight = Math.Min(size, image.Height - safeY);
-            int finalCropSize = Math.Max(1, Math.Min(safeWidth, safeHeight));
-
-            image.Mutate(ctx => ctx
-                .Crop(new Rectangle(safeX, safeY, finalCropSize, finalCropSize))
-                .Resize((int)targetSize, (int)targetSize, KnownResamplers.Bicubic));
-
-            var outputPath = ViewModel.AvatarPath;
-            var directory = Path.GetDirectoryName(outputPath);
-            
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-            
-            await image.SaveAsPngAsync(outputPath);
+            await SaveCroppedImageAsync(_currentEditSize);
+            ViewModel.UpdateAvatarPreview();
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "头像裁切并保存成功", NotificationType.Success));
         }
-
-        ViewModel.UpdateAvatarPreview();
-        WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "头像裁切并保存成功", NotificationType.Success));
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("保存失败", ex.Message, NotificationType.Error));
+        }
+        finally
+        {
+            deferral.Complete();
+        }
     }
-    catch (Exception ex)
+    
+    private async void OnCropBatchApplyClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
-        WeakReferenceMessenger.Default.Send(new NotificationMessage("保存失败", ex.Message, NotificationType.Error));
+        var deferral = args.GetDeferral();
+        try
+        {
+            int[] sizes = { 512, 256, 128 };
+            foreach (var size in sizes)
+            {
+                await SaveCroppedImageAsync(size);
+            }
+            ViewModel.UpdateAvatarPreview();
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "已批量生成并覆盖全部尺寸的头像", NotificationType.Success));
+        }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("批量保存失败", ex.Message, NotificationType.Error));
+        }
+        finally
+        {
+            deferral.Complete();
+        }
     }
-    finally
-    {
-        deferral.Complete();
-    }
-}
 }

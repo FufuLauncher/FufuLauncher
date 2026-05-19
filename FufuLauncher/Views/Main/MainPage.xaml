@@ -284,6 +284,7 @@
                             <ColumnDefinition Width="*"/>    
                             <ColumnDefinition Width="Auto"/> 
                             <ColumnDefinition Width="Auto"/> 
+                            <ColumnDefinition Width="Auto"/> 
                         </Grid.ColumnDefinitions>
 
                         <Button Grid.Column="0" 
@@ -299,6 +300,19 @@
                                 Margin="0,0,8,0"/>
                         
                         <Button Grid.Column="1" 
+                                Click="RefreshTokenButton_Click" 
+                                Margin="0,0,8,0" 
+                                Width="32" 
+                                Height="32" 
+                                Background="#1AFFFFFF" 
+                                BorderThickness="0"
+                                CornerRadius="4" 
+                                Padding="0" 
+                                ToolTipService.ToolTip="刷新Token">
+                            <FontIcon Glyph="&#xE72C;" FontSize="14" Foreground="White"/>
+                        </Button>
+
+                        <Button Grid.Column="2" 
                                 Click="ChangeUidButton_Click" 
                                 Margin="0,0,8,0" 
                                 Width="32" 
@@ -311,7 +325,7 @@
                             <FontIcon Glyph="&#xE77B;" FontSize="14" Foreground="White"/>
                         </Button>
 
-                        <Border Grid.Column="2" 
+                        <Border Grid.Column="3" 
                                 Width="32" Height="32" 
                                 Background="#1AFFFFFF" 
                                 CornerRadius="4">

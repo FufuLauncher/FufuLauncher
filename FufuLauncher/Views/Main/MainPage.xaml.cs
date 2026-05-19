@@ -240,6 +240,12 @@ public sealed partial class MainPage : Page
         AnimateBlurOpacity(1.0);
     }
     
+private async void RefreshTokenButton_Click(object sender, RoutedEventArgs e)
+{
+    var tokenService = new FufuLauncher.Services.TokenRefreshService();
+    await tokenService.RefreshCookieAsync(true);
+}
+
 private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
 {
     var localSettings = App.GetService<ILocalSettingsService>();
