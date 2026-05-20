@@ -12,11 +12,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Helpers/SystemEnvironmentHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/SystemEnvironmentHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/SecurityWebWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/SecurityWebWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/genshin_achievements_linked.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +69,7 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/CommunityViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/HelpViewModel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Administrator/Desktop/Acrylic-11.26100.1.0/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Main/HelpPage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -362,23 +359,7 @@
       <workItem from="1779079020507" duration="3889000" />
       <workItem from="1779085552573" duration="1267000" />
       <workItem from="1779104140418" duration="15853000" />
-      <workItem from="1779256118197" duration="6017000" />
-    </task>
-    <task id="LOCAL-00049" summary="增加说明">
-      <option name="closed" value="true" />
-      <created>1776001735769</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1776001735769</updated>
-    </task>
-    <task id="LOCAL-00050" summary="修复 #120 和 #118 的版本检测问题以及除草提议">
-      <option name="closed" value="true" />
-      <created>1776012358835</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1776012358835</updated>
+      <workItem from="1779256118197" duration="6937000" />
     </task>
     <task id="LOCAL-00051" summary="修复部分因权限导致的问题">
       <option name="closed" value="true" />
@@ -756,7 +737,23 @@
       <option name="project" value="LOCAL" />
       <updated>1779278074587</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="增加认证">
+      <option name="closed" value="true" />
+      <created>1779282103239</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1779282103239</updated>
+    </task>
+    <task id="LOCAL-00099" summary="1">
+      <option name="closed" value="true" />
+      <created>1779282199347</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1779282199347</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -777,7 +774,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="优化" />
     <MESSAGE value="优化体验" />
     <MESSAGE value="#145" />
     <MESSAGE value="增加说明文档" />
@@ -785,7 +781,6 @@
     <MESSAGE value="进一步修复#145" />
     <MESSAGE value="设置中允许自定义启动程序#146" />
     <MESSAGE value="优化界面" />
-    <MESSAGE value="1" />
     <MESSAGE value="增加头像替换" />
     <MESSAGE value="修复主题冲突问题，修复警告问题" />
     <MESSAGE value="修复部分问题，优化部分功能的体验" />
@@ -802,7 +797,9 @@
     <MESSAGE value="增加部分个性化功能" />
     <MESSAGE value="提交文件" />
     <MESSAGE value="针对多个个性化需求 #154" />
-    <option name="LAST_COMMIT_MESSAGE" value="针对多个个性化需求 #154" />
+    <MESSAGE value="增加认证" />
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
