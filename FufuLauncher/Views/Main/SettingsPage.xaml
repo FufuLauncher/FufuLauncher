@@ -266,6 +266,15 @@
                                           OnContent="已启用"
                                           IsOn="{x:Bind ViewModel.IsSaveWindowSizeEnabled, Mode=TwoWay}"/>
                         </StackPanel>
+
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
+                            <TextBlock Text="窗口最小大小限制" 
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14"/>
+                            <ToggleSwitch OffContent="已禁用"
+                                          OnContent="已启用"
+                                          IsOn="{x:Bind ViewModel.IsMinWindowSizeLimitEnabled, Mode=TwoWay}"/>
+                        </StackPanel>
                      </StackPanel>
                  </Border>
                  

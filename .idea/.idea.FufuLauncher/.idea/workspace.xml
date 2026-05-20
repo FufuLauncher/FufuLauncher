@@ -10,7 +10,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="" />
+    <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/PluginFolderHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/SystemEnvironmentHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Helpers/WindowManagerHelper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/MemoryOptimizationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/NetworkMonitorService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FufuLauncher/Services/RedeemCodeReminderService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/SettingsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/SettingsPage.xaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +37,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/.nuget/packages/microsoft.windowsappsdk/1.7.250606001/include/UndockedRegFreeWinRT-AutoInitializer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/.nuget/packages/microsoft.windowsappsdk/1.7.250606001/include/WindowsAppRuntimeAutoInitializer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/SourceGeneratedDocuments/973EFD1D9E5D8845FE0A6317/CommunityToolkit.Mvvm.SourceGenerators/CommunityToolkit.Mvvm.SourceGenerators.ObservablePropertyGenerator/FufuLauncher.Models.SystemDiagnosticsInfo.g.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/6eb34e634ec04dbc8be003b21f0a2845238e00/ba/820f5caf/020000A1pdb124.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/c490bd0c56764fc9ad7e424cf225403b21b600/75/ebfc3710/02000059pdb138.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/dde3a8e264a44d6c9a6c0e7737e9a1ad23c800/d0/98f0d899/02000047pdb133.il" root0="FORCE_HIGHLIGHTING" />
@@ -44,6 +56,9 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Constants/ApiEndpoints.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Helpers/GameExeManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Helpers/IniFile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Helpers/PluginFolderHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Helpers/SystemEnvironmentHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Helpers/WindowManagerHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Messages/OverlayStyleChangedMessage.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Messages/SystemMessageNotification.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Models/DocCategory.cs" root0="FORCE_HIGHLIGHTING" />
@@ -53,6 +68,9 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Selectors/SettingTemplateSelector.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/FpsOverlayService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/HashValidationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/MemoryOptimizationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/NetworkMonitorService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/RedeemCodeReminderService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Services/TokenRefreshService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/CommunityViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/GachaAnalysisModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -331,15 +349,8 @@
       <workItem from="1779051051254" duration="4556000" />
       <workItem from="1779079020507" duration="3889000" />
       <workItem from="1779085552573" duration="1267000" />
-      <workItem from="1779104140418" duration="13448000" />
-    </task>
-    <task id="LOCAL-00047" summary="完工">
-      <option name="closed" value="true" />
-      <created>1775980583796</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1775980583796</updated>
+      <workItem from="1779104140418" duration="15853000" />
+      <workItem from="1779256118197" duration="2346000" />
     </task>
     <task id="LOCAL-00048" summary="修复权限问题">
       <option name="closed" value="true" />
@@ -725,7 +736,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779211132471</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="提交文件">
+      <option name="closed" value="true" />
+      <created>1779211582531</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1779211582531</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -746,7 +765,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="增加国际服签到和登录" />
     <MESSAGE value="增加帧数显示" />
     <MESSAGE value="优化" />
     <MESSAGE value="优化体验" />
@@ -771,7 +789,8 @@
     <MESSAGE value="修复" />
     <MESSAGE value="修改东西" />
     <MESSAGE value="增加部分个性化功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加部分个性化功能" />
+    <MESSAGE value="提交文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="提交文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

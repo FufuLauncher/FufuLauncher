@@ -67,6 +67,7 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private double _globalBackgroundOverlayOpacity = 0.0;
         [ObservableProperty] private double _contentFrameBackgroundOpacity = 0.5;
         [ObservableProperty] private bool _isSaveWindowSizeEnabled;
+        [ObservableProperty] private bool _isMinWindowSizeLimitEnabled = true;
         [ObservableProperty] private double _globalBackgroundImageOpacity = 1.0;
         [ObservableProperty] private bool _isAcrylicOverlayEnabled;
         
@@ -420,6 +421,7 @@ namespace FufuLauncher.ViewModels
                 OnPropertyChanged(nameof(GlobalBackgroundOverlayOpacity));
                 OnPropertyChanged(nameof(ContentFrameBackgroundOpacity));
                 OnPropertyChanged(nameof(IsSaveWindowSizeEnabled));
+                OnPropertyChanged(nameof(IsMinWindowSizeLimitEnabled));
                 OnPropertyChanged(nameof(IsHideGameNewsCardEnabled));
                 OnPropertyChanged(nameof(IsHideCheckinCardEnabled));
                 OnPropertyChanged(nameof(IsAcrylicOverlayEnabled));
@@ -537,6 +539,9 @@ namespace FufuLauncher.ViewModels
 
             var saveWindowSizeJson = await _localSettingsService.ReadSettingAsync("IsSaveWindowSizeEnabled");
             IsSaveWindowSizeEnabled = saveWindowSizeJson != null && Convert.ToBoolean(saveWindowSizeJson);
+
+            var minSizeLimitJson = await _localSettingsService.ReadSettingAsync("IsMinWindowSizeLimitEnabled");
+            IsMinWindowSizeLimitEnabled = minSizeLimitJson == null || Convert.ToBoolean(minSizeLimitJson);
 
             var hideNewsCardJson = await _localSettingsService.ReadSettingAsync("IsHideGameNewsCardEnabled");
             IsHideGameNewsCardEnabled = hideNewsCardJson != null && Convert.ToBoolean(hideNewsCardJson);
@@ -871,6 +876,12 @@ namespace FufuLauncher.ViewModels
         {
             Debug.WriteLine($"SettingsViewModel: 保存窗口大小记忆设置 {value}");
             _ = _localSettingsService.SaveSettingAsync("IsSaveWindowSizeEnabled", value);
+        }
+
+        partial void OnIsMinWindowSizeLimitEnabledChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("IsMinWindowSizeLimitEnabled", value);
+            WeakReferenceMessenger.Default.Send(new MinWindowSizeLimitChangedMessage(value));
         }
 
         partial void OnIsHideGameNewsCardEnabledChanged(bool value)

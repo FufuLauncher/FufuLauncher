@@ -1,9 +1,5 @@
 using System.Diagnostics;
-using System.Net;
-using System.Net.NetworkInformation;
 using System.Numerics;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
 using Windows.Foundation;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -22,12 +18,10 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
-using Windows.Graphics;
 using Windows.Media.Playback;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using FufuLauncher.Constants;
-using Microsoft.Win32;
 
 namespace FufuLauncher;
 
@@ -47,46 +41,19 @@ public sealed partial class MainWindow : WindowEx
     private bool _isAcrylicOverlayEnabled;
 
     private bool _isVideoBackground;
-
-    private DispatcherTimer _networkCheckTimer;
+    
     private DispatcherTimer _messageDismissTimer;
-    private bool? _lastNetworkAvailable;
-    private bool? _lastProxyEnabled;
+    private readonly NetworkMonitorService _networkMonitorService;
     private bool _isSystemMessageVisible;
 
     private bool _isMainUiLoaded;
     
     private DispatcherTimer _announcementCheckTimer;
     private readonly IAnnouncementService _announcementService;
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern IntPtr GetCurrentProcess();
-
-    [DllImport("advapi32.dll", SetLastError = true)]
-    private static extern bool GetTokenInformation(IntPtr TokenHandle, TOKEN_INFORMATION_CLASS TokenInformationClass, IntPtr TokenInformation, uint TokenInformationLength, out uint ReturnLength);
-
-    [DllImport("kernel32.dll", SetLastError = true)]
-    private static extern bool CloseHandle(IntPtr hObject);
-    
-    [DllImport("kernel32.dll")]
-    private static extern bool SetProcessWorkingSetSize(IntPtr process, int minimumWorkingSetSize, int maximumWorkingSetSize);
     
     private DispatcherTimer _memoryOptimizationTimer;
     private DispatcherTimer _periodicMemoryTimer; 
     private bool _isSuspended;
-
-    private enum TOKEN_INFORMATION_CLASS
-    {
-        TokenElevationType = 18
-    }
-
-    private enum TOKEN_ELEVATION_TYPE
-    {
-        TokenElevationTypeFull = 2
-    }
 
     public IRelayCommand ShowWindowCommand
     {
@@ -121,7 +88,7 @@ public sealed partial class MainWindow : WindowEx
     public MainWindow()
     {
         InitializeComponent();
-        CheckAndCreatePluginsFolder();
+        PluginFolderHelper.CheckAndCreatePluginsFolder();
 
         ShowWindowCommand = new RelayCommand(ShowWindow);
         ExitApplicationCommand = new RelayCommand(ExitApplication);
@@ -195,6 +162,12 @@ public sealed partial class MainWindow : WindowEx
         {
             _minimizeToTray = m.Value;
         });
+        
+        WeakReferenceMessenger.Default.Register<MinWindowSizeLimitChangedMessage>(this, (_, m) =>
+        {
+            dispatcherQueue.TryEnqueue(() => ApplyMinWindowSizeLimit(m.Value));
+        });
+        
         WeakReferenceMessenger.Default.Register<BackgroundImageOpacityChangedMessage>(this, (_, m) =>
         {
             dispatcherQueue.TryEnqueue(() => ApplyBackgroundImageOpacity(m.Value));
@@ -222,8 +195,8 @@ public sealed partial class MainWindow : WindowEx
 
         _messageDismissTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(4) };
         _messageDismissTimer.Tick += (_, _) => HideSystemMessage();
-        _networkCheckTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
-        _networkCheckTimer.Tick += (_, _) => CheckNetworkAndProxyStatus();
+        _networkMonitorService = new NetworkMonitorService();
+        _networkMonitorService.NetworkStatusChanged += OnNetworkStatusChanged;
         
         _announcementService = App.GetService<IAnnouncementService>();
         _announcementCheckTimer = new DispatcherTimer { Interval = TimeSpan.FromMinutes(1) };
@@ -256,19 +229,13 @@ public sealed partial class MainWindow : WindowEx
                 ContentFrame.BackStack.Clear();
             }
             
-            GC.Collect(2, GCCollectionMode.Forced, true, true);
-            GC.WaitForPendingFinalizers();
-            GC.Collect(2, GCCollectionMode.Forced, true, true);
-            
             var isMinimized = AppWindow.Presenter.Kind == AppWindowPresenterKind.Overlapped && 
                               ((OverlappedPresenter)AppWindow.Presenter).State == OverlappedPresenterState.Minimized;
             
             var isHidden = !Visible;
 
-            if ((isMinimized || isHidden) && Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                SetProcessWorkingSetSize(GetCurrentProcess(), -1, -1);
-            }
+            var memoryService = new MemoryOptimizationService();
+            memoryService.FlushMemory(isMinimized || isHidden);
         }
         catch (Exception ex)
         {
@@ -292,7 +259,7 @@ public sealed partial class MainWindow : WindowEx
             _globalBackgroundPlayer.Pause();
         }
     
-        _networkCheckTimer.Stop();
+        _networkMonitorService.Stop();
         _messageDismissTimer.Stop();
         
         _announcementCheckTimer.Stop();
@@ -313,9 +280,9 @@ public sealed partial class MainWindow : WindowEx
             _globalBackgroundPlayer.Play();
         }
         
-        if (!_networkCheckTimer.IsEnabled)
+        if (!_networkMonitorService.IsEnabled)
         {
-            _networkCheckTimer.Start();
+            _networkMonitorService.Start();
         }
         
         if (!_announcementCheckTimer.IsEnabled)
@@ -330,54 +297,28 @@ public sealed partial class MainWindow : WindowEx
     
     #region Network & System Messages
 
-    private async void CheckNetworkAndProxyStatus()
+    private void OnNetworkStatusChanged(object? sender, NetworkStatusChangedEventArgs e)
     {
         if (!_isMainUiLoaded) return;
 
-        var (currentNetwork, currentProxy) = await Task.Run(() =>
-        {
-            var isNet = NetworkInterface.GetIsNetworkAvailable();
-            var isProxy = false;
-            if (isNet)
-            {
-                try
-                {
-                    var proxy = WebRequest.GetSystemWebProxy();
-                    Uri resource = new(ApiEndpoints.MicrosoftNetworkCheckUrl);
-                    isProxy = !proxy.IsBypassed(resource);
-                }
-                catch { isProxy = false; }
-            }
-            return (isNet, isProxy);
-        });
-
-        var shouldNotify = false;
         var msg = "";
         var icon = "";
-        Color color = Colors.White;
+        var color = Colors.White;
 
-        if (!currentNetwork && (_lastNetworkAvailable == null || _lastNetworkAvailable == true))
+        if (e.IsNetworkLost)
         {
-            shouldNotify = true;
             msg = "网络连接已断开，请检测你的网络设置";
             icon = "\uEB55";
             color = Colors.OrangeRed;
         }
-        else if (currentNetwork && currentProxy && (_lastProxyEnabled == null || _lastProxyEnabled == false))
+        else if (e.IsProxyNewlyEnabled)
         {
-            shouldNotify = true;
             msg = "正在使用代理网络连接，请注意你的流量消耗";
             icon = "\uE12B";
             color = Colors.DodgerBlue;
         }
 
-        _lastNetworkAvailable = currentNetwork;
-        _lastProxyEnabled = currentProxy;
-
-        if (shouldNotify)
-        {
-            ShowAutoDismissMessage(msg, icon, color);
-        }
+        ShowAutoDismissMessage(msg, icon, color);
     }
 
     private void ShowAutoDismissMessage(string message, string iconGlyph, Color iconColor)
@@ -466,11 +407,11 @@ public sealed partial class MainWindow : WindowEx
     #region Environment Checks
 
     private async Task CheckAndWarnUacElevationAsync()
-{
-    var ignoreFilePath = Path.Combine(AppContext.BaseDirectory, ".no_uac_warning");
-    if (File.Exists(ignoreFilePath)) return;
+    {
+        var ignoreFilePath = Path.Combine(AppContext.BaseDirectory, ".no_uac_warning");
+        if (File.Exists(ignoreFilePath)) return;
 
-    if (IsUacElevatedWithConsent())
+        if (SystemEnvironmentHelper.IsUacElevatedWithConsent())
     {
         try
         {
@@ -519,12 +460,12 @@ public sealed partial class MainWindow : WindowEx
 }
     
     private async Task CheckAndWarnVCRedistAsync()
-{
-    var ignoreFilePath = Path.Combine(AppContext.BaseDirectory, ".no_vc_warning");
-    if (File.Exists(ignoreFilePath)) return;
-
-    if (!IsVCRedistInstalled())
     {
+        var ignoreFilePath = Path.Combine(AppContext.BaseDirectory, ".no_vc_warning");
+        if (File.Exists(ignoreFilePath)) return;
+
+        if (!SystemEnvironmentHelper.IsVCRedistInstalled())
+        {
         try
         {
             if (Content is FrameworkElement rootElement)
@@ -576,56 +517,6 @@ public sealed partial class MainWindow : WindowEx
     }
 }
 
-private bool IsVCRedistInstalled()
-{
-    try
-    {
-        using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64"))
-        {
-            if (key != null && key.GetValue("Installed") is int installed && installed == 1) return true;
-        }
-        
-        using (var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x86"))
-        {
-            if (key != null && key.GetValue("Installed") is int installed && installed == 1) return true;
-        }
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"检查 VC 运行库失败: {ex.Message}");
-    }
-    
-    return false;
-}
-
-    private bool IsUacElevatedWithConsent()
-    {
-        try
-        {
-            if (!IsRunningAsAdministrator()) return false;
-            if (OpenProcessToken(GetCurrentProcess(), 0x0008, out var tokenHandle))
-            {
-                var size = Marshal.SizeOf(typeof(int));
-                var ptr = Marshal.AllocHGlobal(size);
-                try
-                {
-                    if (GetTokenInformation(tokenHandle, TOKEN_INFORMATION_CLASS.TokenElevationType, ptr, (uint)size, out _))
-                    {
-                        var type = (TOKEN_ELEVATION_TYPE)Marshal.ReadInt32(ptr);
-                        return type == TOKEN_ELEVATION_TYPE.TokenElevationTypeFull;
-                    }
-                }
-                finally { Marshal.FreeHGlobal(ptr); if (tokenHandle != IntPtr.Zero) CloseHandle(tokenHandle); }
-            }
-        }
-        catch
-        {
-            // ignored
-        }
-
-        return false;
-    }
-    
     #endregion
     
     #region Window & Background Management
@@ -919,45 +810,20 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
                     Width = w;
                     Height = h;
                     if (!_isOverlayShown) OverlayTranslate.Y = h + 100;
-                    CenterWindowOnScreen();
+                    WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
                     return;
                 }
             }
             Width = 1360;
             Height = 768;
             if (!_isOverlayShown) OverlayTranslate.Y = Height + 100;
-            CenterWindowOnScreen();
+            WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
         }
         catch
         {
             Width = 1360;
             Height = 768;
-            CenterWindowOnScreen();
-        }
-    }
-
-    private void CenterWindowOnScreen()
-    {
-        try
-        {
-            var displayArea = DisplayArea.GetFromWindowId(AppWindow.Id, DisplayAreaFallback.Primary);
-            if (displayArea == null) return;
-
-            var workArea = displayArea.WorkArea;
-            var currentSize = AppWindow.Size;
-            if (currentSize.Width <= 0 || currentSize.Height <= 0)
-            {
-                currentSize = new SizeInt32((int)Math.Round(Width), (int)Math.Round(Height));
-            }
-
-            var targetX = workArea.X + Math.Max(0, (workArea.Width - currentSize.Width) / 2);
-            var targetY = workArea.Y + Math.Max(0, (workArea.Height - currentSize.Height) / 2);
-
-            AppWindow.Move(new PointInt32(targetX, targetY));
-        }
-        catch
-        {
-            // ignored
+            WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
         }
     }
 
@@ -982,7 +848,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
     {
         try
         {
-            var isAdmin = IsRunningAsAdministrator();
+            var isAdmin = SystemEnvironmentHelper.IsRunningAsAdministrator();
             TitleBarText.Text = isAdmin ? "芙芙启动器 [管理员]" : "芙芙启动器";
         }
         catch
@@ -991,19 +857,6 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         }
     }
 
-    private bool IsRunningAsAdministrator()
-    {
-        try
-        {
-            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
-            {
-                WindowsPrincipal principal = new(identity);
-                return principal.IsInRole(WindowsBuiltInRole.Administrator);
-            }
-        }
-        catch { return false; }
-    }
-    
     #endregion
     
     #region Navigation & Layout
@@ -1027,6 +880,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
             await LoadAndApplyAcrylicSettingAsync();
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();
+            await LoadMinWindowSizeLimitSettingAsync();
             await CheckUserAgreementAsync();
             _ = Task.Run(async () =>
             {
@@ -1093,6 +947,31 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         catch { _minimizeToTray = false; }
     }
 
+    private async Task LoadMinWindowSizeLimitSettingAsync()
+    {
+        try
+        {
+            var value = await _localSettingsService.ReadSettingAsync("IsMinWindowSizeLimitEnabled");
+            var enabled = value == null || Convert.ToBoolean(value);
+            ApplyMinWindowSizeLimit(enabled);
+        }
+        catch { ApplyMinWindowSizeLimit(true); }
+    }
+
+    private void ApplyMinWindowSizeLimit(bool enabled)
+    {
+        if (enabled)
+        {
+            MinWidth = 1360;
+            MinHeight = 768;
+        }
+        else
+        {
+            MinWidth = 0;
+            MinHeight = 0;
+        }
+    }
+
     private async Task CheckUserAgreementAsync()
     {
         try
@@ -1109,7 +988,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
     {
         _isMainUiLoaded = false;
         SystemMessageBar.Visibility = Visibility.Collapsed;
-        _networkCheckTimer.Stop();
+        _networkMonitorService.Stop();
 
         AgreementFrame.Visibility = Visibility.Visible;
         NavigationView.Visibility = Visibility.Collapsed;
@@ -1129,84 +1008,14 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
         _isMainUiLoaded = true;
         SystemMessageBar.Visibility = Visibility.Visible;
-        _networkCheckTimer.Start();
-        CheckNetworkAndProxyStatus();
+        _networkMonitorService.Start();
+        _ = _networkMonitorService.CheckNetworkAndProxyStatusAsync();
         
-        _ = CheckRedeemCodesForTodayAsync();
-    }
-    
-private async Task CheckRedeemCodesForTodayAsync()
-{
-    try
-    {
-        var todayStr = DateTime.Now.ToString("yyyy-MM-dd");
-        var lastRemindedObj = await _localSettingsService.ReadSettingAsync("LastRedeemCodeReminderDate");
-        
-        if (lastRemindedObj != null && lastRemindedObj.ToString() == todayStr)
+        var redeemService = new RedeemCodeReminderService(_localSettingsService);
+        _ = redeemService.CheckRedeemCodesForTodayAsync(msg => 
         {
-            return; 
-        }
-
-        using var client = new HttpClient();
-        client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
-        var json = await client.GetStringAsync(ApiEndpoints.RedeemCodesUrl);
-
-        var options = new System.Text.Json.JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            AllowTrailingCommas = true,
-            ReadCommentHandling = System.Text.Json.JsonCommentHandling.Skip
-        };
-
-        var codesList = System.Text.Json.JsonSerializer.Deserialize<List<RedeemCodeItem>>(json, options);
-
-        if (codesList != null && codesList.Count > 0)
-        {
-            var todaysCodes = codesList.Where(c => 
-                (!string.IsNullOrEmpty(c.Valid) && c.Valid.Contains(todayStr)) || 
-                (!string.IsNullOrEmpty(c.Time) && c.Time.Contains(todayStr))
-            ).ToList();
-
-            if (todaysCodes.Any())
-            {
-                var titles = string.Join("、", todaysCodes.Select(c => c.Title));
-                var codesContent = string.Join("\n", todaysCodes.SelectMany(c => c.Codes));
-                
-                dispatcherQueue.TryEnqueue(() => 
-                {
-                    var msg = new NotificationMessage(
-                        "兑换码失效提醒",
-                        $"活动{titles}包含可用兑换码：\n{codesContent}\n请及时前往游戏内使用，否则将会在今天之后失效！",
-                        NotificationType.Warning,
-                        0 
-                    );
-                    ShowNotification(msg);
-                });
-            }
-        }
-    }
-    catch (Exception ex)
-    {
-        Debug.WriteLine($"[RedeemCodes Reminder] 今日兑换码检查失败: {ex.Message}");
-    }
-}
-    
-    private void CheckAndCreatePluginsFolder()
-    {
-        try
-        {
-            var pluginsPath = Path.Combine(AppContext.BaseDirectory, "Plugins");
-            
-            if (!Directory.Exists(pluginsPath))
-            {
-                Directory.CreateDirectory(pluginsPath);
-                Debug.WriteLine("已自动创建 Plugins 文件夹");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"创建 Plugins 文件夹失败: {ex.Message}");
-        }
+            dispatcherQueue.TryEnqueue(() => ShowNotification(msg));
+        });
     }
 
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
