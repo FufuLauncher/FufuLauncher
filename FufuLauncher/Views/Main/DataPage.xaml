@@ -14,6 +14,8 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="IconBackgroundBrush" Color="#4D000000"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#5D000000"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#3D000000"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="IconBackgroundBrush" Color="Transparent"/>
@@ -526,7 +528,7 @@
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
                         ToolTipService.ToolTip="角色数据">
-                    <Image Source="https://paimon.moe/images/home.png" 
+                    <Image Source="/Assets/DataCenterIcons/home.png" 
                            Width="24" Height="24" Stretch="Uniform"/>
                 </Button>
 
@@ -534,7 +536,7 @@
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
                         ToolTipService.ToolTip="幽境危战">
-                    <Image Source="https://paimon.moe/images/calculator.png" 
+                    <Image Source="/Assets/DataCenterIcons/calculator.png" 
                            Width="24" Height="24" Stretch="Uniform"/>
                 </Button>
 
@@ -542,7 +544,7 @@
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
                         ToolTipService.ToolTip="深渊螺旋">
-                    <Image Source="https://paimon.moe/images/todos.png" 
+                    <Image Source="/Assets/DataCenterIcons/todos.png" 
                            Width="24" Height="24" Stretch="Uniform"/>
                 </Button>
 
@@ -550,7 +552,7 @@
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
                         ToolTipService.ToolTip="卡池数据">
-                    <Image Source="https://paimon.moe/images/wish.png" 
+                    <Image Source="/Assets/DataCenterIcons/wish.png" 
                            Width="24" Height="24" Stretch="Uniform"/>
                 </Button>
                 
@@ -558,7 +560,7 @@
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
                         ToolTipService.ToolTip="复刻计时">
-                    <Image Source="https://paimon.moe/images/characters.png" 
+                    <Image Source="/Assets/DataCenterIcons/characters.png" 
                            Width="24" Height="24" Stretch="Uniform"/>
                 </Button>
                 
@@ -566,7 +568,7 @@
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
                         ToolTipService.ToolTip="活动时间轴">
-                    <Image Source="https://paimon.moe/images/timeline.png" 
+                    <Image Source="/Assets/DataCenterIcons/timeline.png" 
                            Width="24" Height="24" Stretch="Uniform"/>
                 </Button>
 

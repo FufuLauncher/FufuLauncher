@@ -58,7 +58,7 @@
                         IsPaneOpen="False"
                         IsBackButtonVisible="Collapsed"
                         IsSettingsVisible="False"
-                        IsPaneToggleButtonVisible="False"
+                        IsPaneToggleButtonVisible="True"
                         SelectionChanged="NavigationView_SelectionChanged"
                         Loaded="NavigationView_Loaded"
                         OpenPaneLength="150"

@@ -166,14 +166,10 @@ namespace FufuLauncher.Views
         {
             try
             {
-                RefreshMapToggle.IsEnabled = false;
                 MapWebView.Reload();
-                Task.Delay(1000);
-                RefreshMapToggle.IsEnabled = true;
             }
             catch (Exception ex)
             {
-                RefreshMapToggle.IsEnabled = true;
                 System.Diagnostics.Debug.WriteLine($"刷新地图失败: {ex.Message}");
             }
         }
