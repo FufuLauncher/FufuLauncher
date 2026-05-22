@@ -537,11 +537,7 @@ private void ClearBackground()
 
 private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFailedEventArgs args)
 {
-    _dispatcherQueue.TryEnqueue(() =>
-    {
-        _notificationService.Show("视频解码失败", "系统缺少 VP9/WebM 媒体扩展。已回退至静态背景。", NotificationType.Error, 6000);
-        LoadFallbackImage();
-    });
+    Debug.WriteLine($"背景视频触发MediaFailed，错误类型: {args.Error}");
 }
 
 

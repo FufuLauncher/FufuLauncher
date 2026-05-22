@@ -12,10 +12,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2e6bf6ba-f1a7-4d7b-8b76-8b03b5df7f33" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FufuLauncher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Assets/PCGameSDK.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/BlankPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Main/MainPage.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Views/Model/AdvancedServerSwitchPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/MainWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/Services/Background/BackgroundRenderer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/Services/Background/BackgroundRenderer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FufuLauncher/ViewModels/MainViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,6 +71,7 @@
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/HelpViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/ViewModels/PluginSettingsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Main/HelpPage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Administrator/Desktop/Acrylic-11.26100.1.0/FufuLauncher/Views/Main/MainPage.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/FeedbackWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/LoginQrWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FufuLauncher/Views/Model/VerifyGamePage.xaml.cs" root0="FORCE_HIGHLIGHTING" />
@@ -128,7 +128,7 @@
 }</component>
   <component name="RunManager" selected=".NET 启动设置配置文件.FufuLauncher">
     <configuration name="Publish FufuLauncher to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" delete_existing_files="true" include_all_content_for_self_extract="true" include_native_libs_for_self_extract="true" platform="x64" produce_single_file="true" ready_to_run="true" self_contained="true" target_folder="$PROJECT_DIR$/FufuLauncher/bin/Release/net8.0-windows10.0.26100.0/win-x64/publish" target_framework="net8.0-windows10.0.26100.0" uuid_high="1964370738064323383" uuid_low="-8405170811345767747">
+      <riderPublish configuration="Release" delete_existing_files="true" platform="x64" self_contained="true" target_folder="$PROJECT_DIR$/FufuLauncher/bin/Release/net8.0-windows10.0.26100.0/win-x64/publish" target_framework="net8.0-windows10.0.26100.0" uuid_high="1964370738064323383" uuid_low="-8405170811345767747">
         <runtimes>
           <item value="win-x64" />
         </runtimes>
@@ -243,6 +243,13 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue=".NET 启动设置配置文件.FufuLauncher" />
+      <item itemvalue=".NET 项目.MihoyoBBS" />
+      <item itemvalue=".NET 项目.update" />
+      <item itemvalue="UWP.FufuLauncher" />
+      <item itemvalue="发布到文件夹.Publish FufuLauncher to folder" />
+    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -364,15 +371,7 @@
       <workItem from="1779364056755" duration="1720000" />
       <workItem from="1779391539995" duration="1281000" />
       <workItem from="1779424916528" duration="52000" />
-      <workItem from="1779450498412" duration="2886000" />
-    </task>
-    <task id="LOCAL-00053" summary="修复部分问题">
-      <option name="closed" value="true" />
-      <created>1776096096662</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1776096096662</updated>
+      <workItem from="1779450498412" duration="7109000" />
     </task>
     <task id="LOCAL-00054" summary="优化体验">
       <option name="closed" value="true" />
@@ -758,7 +757,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779392272126</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="修复服务器切换">
+      <option name="closed" value="true" />
+      <created>1779461226790</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1779461226790</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -779,7 +786,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="增加说明文档" />
     <MESSAGE value="更新版本号 进一步修复#145" />
     <MESSAGE value="进一步修复#145" />
     <MESSAGE value="设置中允许自定义启动程序#146" />
@@ -804,7 +810,8 @@
     <MESSAGE value="1" />
     <MESSAGE value="更新成就数据" />
     <MESSAGE value="养成计算回归" />
-    <option name="LAST_COMMIT_MESSAGE" value="养成计算回归" />
+    <MESSAGE value="修复服务器切换" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复服务器切换" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -132,7 +132,7 @@ namespace FufuLauncher.Services.Background
                 var backgroundInfo = await backgroundService.GetBackgroundUrlAsync(server, preferVideo);
 
                 Debug.WriteLine($"BackgroundRenderer: 获取到 URL = {backgroundInfo?.Url ?? "null"}, IsVideo = {backgroundInfo?.IsVideo ?? false}");
-                
+        
                 if (backgroundInfo == null || string.IsNullOrEmpty(backgroundInfo.Url))
                 {
                     Debug.WriteLine("BackgroundRenderer: 无法获取在线背景，触发回退机制");
@@ -168,10 +168,6 @@ namespace FufuLauncher.Services.Background
 
                 _currentBackgroundUrl = backgroundInfo.Url;
                 return _cachedBackground;
-            }
-            catch (NotSupportedException)
-            {
-                throw;
             }
             catch (Exception ex)
             {
