@@ -14,8 +14,6 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <SolidColorBrush x:Key="IconBackgroundBrush" Color="#4D000000"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#5D000000"/>
-                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#3D000000"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Default">
                     <SolidColorBrush x:Key="IconBackgroundBrush" Color="Transparent"/>
@@ -518,12 +516,28 @@
             <StackPanel Background="{ThemeResource LayerFillColorDefaultBrush}" 
                         HorizontalAlignment="Center"
                         Orientation="Vertical"
-                        CornerRadius="24" 
+                        CornerRadius="22" 
                         Spacing="12"
                         Padding="0,16"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
                         BorderThickness="1">
-                
+                <StackPanel.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.ThemeDictionaries>
+                            <ResourceDictionary x:Key="Light">
+                                <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#5D000000"/>
+                                <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#3D000000"/>
+                            </ResourceDictionary>
+                            <ResourceDictionary x:Key="Default">
+                                
+                            </ResourceDictionary>
+                            <ResourceDictionary x:Key="Dark">
+                                
+                            </ResourceDictionary>
+                        </ResourceDictionary.ThemeDictionaries>
+                    </ResourceDictionary>
+                </StackPanel.Resources>
+
                 <Button Click="OnSwitchToRoleData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
