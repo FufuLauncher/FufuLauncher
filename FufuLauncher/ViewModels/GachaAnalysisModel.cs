@@ -73,6 +73,11 @@ public partial class GachaAnalysisModel : ObservableObject
     [ObservableProperty] private ObservableCollection<string> _uidComboItems = new();
     [ObservableProperty] private string _selectedUid = "";
 
+    // 添加四星视图的控制开关
+    [ObservableProperty] private bool _isCharacterFourStarVisible;
+    [ObservableProperty] private bool _isWeaponFourStarVisible;
+    [ObservableProperty] private bool _isStandardFourStarVisible;
+
     public const string AddNewUserItem = "＋ 添加新用户";
     [ObservableProperty] private bool _hasGachaData;
     [ObservableProperty] private bool _isDataLoaded;
@@ -130,7 +135,6 @@ public partial class GachaAnalysisModel : ObservableObject
         ";
         command.ExecuteNonQuery();
 
-        // 迁移旧表：如果 GachaLogs 表存在但主键只是 Id，则重建表
         try
         {
             using var checkConn = new SqliteConnection(_dbConnectionString);
@@ -176,7 +180,6 @@ public partial class GachaAnalysisModel : ObservableObject
         command.CommandText = "CREATE INDEX IF NOT EXISTS idx_gacha_uid ON GachaLogs(Uid);";
         command.ExecuteNonQuery();
 
-        // Compatibility: add Rank and ItemId columns if they don't exist
         static void AddColumnIfMissing(SqliteConnection conn, string table, string column, string type)
         {
             var cmd = conn.CreateCommand();
@@ -413,7 +416,6 @@ public partial class GachaAnalysisModel : ObservableObject
         _currentUid = uid;
         LoadGachaLogsFromDb(uid);
 
-        // 保存最后选择的 UID
         _ = _localSettingsService.SaveSettingAsync(LastSelectedUidKey, uid);
 
         App.MainWindow.DispatcherQueue.TryEnqueue(() =>
@@ -468,7 +470,6 @@ public partial class GachaAnalysisModel : ObservableObject
 
             var deletedUid = _currentUid;
 
-            // 删除当前 UID 的记录
             using var connection = new SqliteConnection(_dbConnectionString);
             connection.Open();
             var command = connection.CreateCommand();
@@ -476,12 +477,10 @@ public partial class GachaAnalysisModel : ObservableObject
             command.Parameters.AddWithValue("$uid", deletedUid);
             command.ExecuteNonQuery();
 
-            // 查询剩余的 UID
             var remainingUids = QueryKnownUidsFromDb();
 
             if (remainingUids.Count > 0)
             {
-                // 还有其他账号，切换到第一个
                 var switchToUid = remainingUids[0];
                 _currentUid = switchToUid;
                 LoadGachaLogsFromDb(switchToUid);
@@ -499,7 +498,6 @@ public partial class GachaAnalysisModel : ObservableObject
             }
             else
             {
-                // 没有其他账号了
                 _currentUid = "";
                 _cachedCharacterLogs.Clear();
                 _cachedWeaponLogs.Clear();
@@ -532,13 +530,11 @@ public partial class GachaAnalysisModel : ObservableObject
     public async Task LoadSavedGachaDataAsync()
     {
         Debug.WriteLine("[Gacha] LoadSavedGachaDataAsync: 开始加载数据");
-        // All DB work on background thread to avoid blocking UI
         var (uids, metadataCount) = await Task.Run(() =>
         {
             InitializeDatabase();
             LoadMetadataFromDb();
 
-            // Migrate from old JSON file
             if (File.Exists(_gachaDataPath))
             {
                 try
@@ -564,7 +560,6 @@ public partial class GachaAnalysisModel : ObservableObject
             var uids = QueryKnownUidsFromDb();
             Debug.WriteLine($"[Gacha] QueryKnownUids 返回 {uids.Count} 个 UID: [{string.Join(", ", uids)}]");
 
-            // 读取上次选择的 UID
             string lastUid = "";
             try
             {
@@ -575,13 +570,11 @@ public partial class GachaAnalysisModel : ObservableObject
 
             if (uids.Count > 0)
             {
-                // 优先使用上次选择的 UID，如果它存在于数据库中
                 if (!string.IsNullOrEmpty(lastUid) && uids.Contains(lastUid))
                     _currentUid = lastUid;
                 else
                     _currentUid = uids[0];
                 LoadGachaLogsFromDb(_currentUid);
-                // 保存当前选择的 UID
                 _ = _localSettingsService.SaveSettingAsync(LastSelectedUidKey, _currentUid);
             }
             return (uids, _savedMetadata.Count);
@@ -726,7 +719,6 @@ public partial class GachaAnalysisModel : ObservableObject
     [RelayCommand]
     private async Task AddNewUserAsync()
     {
-        // Save current data, then show empty state for new user
         if (!string.IsNullOrEmpty(_currentUid))
             SaveGachaLogsToDb();
 
@@ -995,7 +987,6 @@ public partial class GachaAnalysisModel : ObservableObject
             _currentUid = importUid;
             Debug.WriteLine($"[Gacha] ImportUigf: 设置 _currentUid={importUid}");
 
-            // Ensure metadata is loaded for name/rank mapping
             if (_savedMetadata.Count == 0)
             {
                 CrawlerStatus = "正在获取物品元数据用于名称映射...";
@@ -1028,7 +1019,6 @@ public partial class GachaAnalysisModel : ObservableObject
                 if (string.IsNullOrEmpty(rankType))
                     rankType = "3";
 
-                // Adjust time for timezone: CN server uses UTC+8
                 var time = uigfItem.Time ?? "";
                 if (entryTimezone != 8 && !string.IsNullOrEmpty(time))
                 {

@@ -13,168 +13,46 @@
 
     <Grid x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.Resources>
+            <ThemeShadow x:Key="SharedShadow"/>
+            
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converters:BoolInverter x:Key="BoolInverter"/>
-            <SolidColorBrush x:Key="GridViewItemPointerOverBackground" Color="Transparent"/>
-            <SolidColorBrush x:Key="GridViewItemPressedBackground" Color="Transparent"/>
-            <SolidColorBrush x:Key="GridViewItemPointerOverBorderBrush" Color="Transparent"/>
-            <SolidColorBrush x:Key="GridViewItemSelectedBackground" Color="Transparent"/>
-            <SolidColorBrush x:Key="GridViewItemSelectedBorderBrush" Color="Transparent"/>
-            <SolidColorBrush x:Key="GridViewItemDragBackground" Color="Transparent"/>
+            <converters:CountToColorConverter x:Key="CountToColorConverter"/>
+            <converters:TotalToPrimogemsConverter x:Key="TotalToPrimogemsConverter"/>
 
-            <DataTemplate x:Key="GachaCardTemplate" x:DataType="models:GachaDisplayItem">
-                <Grid Width="110" Height="140" Margin="6" Translation="0,0,8"
-                      Tapped="OnGachaCardTapped" PointerEntered="OnGridPointerEntered" PointerExited="OnGridPointerExited">
-                    <primitives:FlyoutBase.AttachedFlyout>
-                        <Flyout Placement="Right" ShowMode="Transient">
-                            <Flyout.FlyoutPresenterStyle>
-                                <Style TargetType="FlyoutPresenter">
-                                    <Setter Property="Padding" Value="0"/>
-                                    <Setter Property="CornerRadius" Value="8"/>
-                                    <Setter Property="Background" Value="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"/>
-                                </Style>
-                            </Flyout.FlyoutPresenterStyle>
-                            <Grid Width="260" Padding="16">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0" Margin="0,0,0,12">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border CornerRadius="8" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                                        <Grid>
-                                            <Grid.Background>
-                                                <SolidColorBrush Color="{x:Bind RarityBackground.Color}" Opacity="0.3"/>
-                                            </Grid.Background>
-                                            <Image Source="{x:Bind ImageUrl, Mode=OneWay}" Stretch="UniformToFill" Height="60" Width="60"/>
-                                        </Grid>
-                                    </Border>
-                                    <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                                        <TextBlock Text="{x:Bind Name}" FontSize="16" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
-                                        <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,4,0,0">
-                                            <TextBlock Text="{x:Bind Rank}" Foreground="{x:Bind RarityColorHex}" FontWeight="Bold"/>
-                                            <FontIcon Glyph="&#xE735;" FontFamily="Segoe Fluent Icons" FontSize="10" Foreground="{x:Bind RarityColorHex}" VerticalAlignment="Center"/>
-                                            <TextBlock Text="{x:Bind Type}" FontSize="12" Opacity="0.6" Margin="8,0,0,0" VerticalAlignment="Center"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Grid>
-                                <MenuFlyoutSeparator Grid.Row="1" Margin="0,0,0,12"/>
-                                <StackPanel Grid.Row="2" Spacing="8">
-                                    <Grid>
-                                        <TextBlock Text="花费抽数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <TextBlock Text="{x:Bind Count}" FontWeight="Bold" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
-                                            <TextBlock Text="/ 90" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                                        </StackPanel>
-                                    </Grid>
-                                    <Grid Height="16">
-                                        <ProgressBar Value="{x:Bind Count}" Maximum="90" Minimum="0" 
-                                                     Foreground="{x:Bind RarityColorHex}"
-                                                     Background="{ThemeResource ControlStrongFillColorDefaultBrush}"
-                                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-                                    </Grid>
-                                    <Grid Margin="0,4,0,0">
-                                        <TextBlock Text="获取时间" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                        <TextBlock Text="{x:Bind Time}" FontSize="12" HorizontalAlignment="Right"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </Flyout>
-                    </primitives:FlyoutBase.AttachedFlyout>
-
-                    <ToolTipService.ToolTip>
-                        <ToolTip Content="点击查看详细数据"/>
-                    </ToolTipService.ToolTip>
-                    <Grid.Shadow>
-                        <ThemeShadow/>
-                    </Grid.Shadow>
+            <DataTemplate x:Key="GachaRowTemplate" x:DataType="models:GachaDisplayItem">
+                <Grid Margin="0,4,0,4" Padding="12" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="6" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
                     
-                    <Border CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                    <Border Width="48" Height="48" CornerRadius="6" Background="{ThemeResource ControlFillColorDefaultBrush}">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="36"/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.RowSpan="2">
-                                <Grid.Background>
-                                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                                        <GradientStop Color="Transparent" Offset="0.3"/>
-                                        <GradientStop Color="{x:Bind RarityBackground.Color}" Offset="1.1"/>
-                                    </LinearGradientBrush>
-                                </Grid.Background>
-                            </Grid>
-                            <Image Grid.Row="0" Grid.RowSpan="2" Source="{x:Bind ImageUrl, Mode=OneWay}" 
-                                   Stretch="UniformToFill" VerticalAlignment="Bottom" Margin="0,0,0,24"/>
-                            <Image Source="{x:Bind ElementImageSource, Mode=OneWay}" Width="22" Height="22" 
-                                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6"/>
-                            <Grid Grid.Row="1" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" Opacity="0.97">
-                                <StackPanel VerticalAlignment="Center" Padding="8,2">
-                                    <TextBlock Text="{x:Bind Name}" FontSize="11" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
-                                    <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <TextBlock Text="Pity:" FontSize="10" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
-                                        <TextBlock Text="{x:Bind Count}" FontSize="10" FontWeight="Bold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                            <Border HorizontalAlignment="Right" VerticalAlignment="Top" 
-                                    Background="{ThemeResource SystemFillColorSolidNeutralBackgroundBrush}" 
-                                    CornerRadius="0,8,0,4" Padding="6,2">
-                                <StackPanel Orientation="Horizontal" Spacing="2">
-                                    <TextBlock Text="{x:Bind Rank}" FontSize="10" FontWeight="Bold" Foreground="{x:Bind RarityColorHex}"/>
-                                    <FontIcon Glyph="&#xE735;" FontFamily="Segoe Fluent Icons" FontSize="8" Foreground="{x:Bind RarityColorHex}"/>
-                                </StackPanel>
-                            </Border>
+                            <Image Source="{Binding ImageUrl}" Stretch="UniformToFill"/>
+                            <Image Source="{Binding ElementUrl}" Width="16" Height="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="2"/>
                         </Grid>
                     </Border>
+                    
+                    <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                        <Grid Margin="0,0,0,6">
+                            <TextBlock Text="{x:Bind Name}" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Text="{x:Bind Count}" FontWeight="Bold" FontSize="14" Foreground="{Binding Count, Converter={StaticResource CountToColorConverter}}"/>
+                                <TextBlock Text=" 抽" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Bottom" Margin="2,0,0,1"/>
+                            </StackPanel>
+                        </Grid>
+                        <ProgressBar Maximum="90" Value="{x:Bind Count}" Foreground="{Binding Count, Converter={StaticResource CountToColorConverter}}" Height="6" CornerRadius="3"/>
+                    </StackPanel>
                 </Grid>
             </DataTemplate>
-
-            <DataTemplate x:Key="PoolStatsHeaderTemplate" x:DataType="models:GachaStatistic">
-                <Border Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" Translation="0,0,8"
-                        CornerRadius="4" Padding="12,8" Margin="0,0,0,12">
-                    <Border.Shadow>
-                        <ThemeShadow/>
-                    </Border.Shadow>
-                    <Grid>
-                        <StackPanel Orientation="Horizontal" Spacing="16">
-                            <TextBlock VerticalAlignment="Center">
-                                <Run Text="总抽数: " Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <Run Text="{x:Bind TotalCount}" FontWeight="Bold"/>
-                            </TextBlock>
-                            <TextBlock VerticalAlignment="Center">
-                                <Run Text="五星: " Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <Run Text="{x:Bind FiveStarCount}" FontWeight="Bold" Foreground="#FFD700"/>
-                            </TextBlock>
-                            <TextBlock VerticalAlignment="Center">
-                                <Run Text="四星: " Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <Run Text="{x:Bind FourStarCount}" FontWeight="Bold" Foreground="#DDA0DD"/>
-                            </TextBlock>
-                            <TextBlock VerticalAlignment="Center">
-                                <Run Text="五星垫: " Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <Run Text="{x:Bind CurrentPity}" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/>
-                            </TextBlock>
-                            <TextBlock VerticalAlignment="Center">
-                                <Run Text="四星垫: " Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <Run Text="{x:Bind CurrentPity4}" FontWeight="Bold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </Grid>
-                </Border>
-            </DataTemplate>
+            
         </Grid.Resources>
 
         <Grid Margin="24,48,24,24">
-
-            <!-- 加载中 -->
             <ProgressRing x:Name="LoadingRing" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40"
                           IsActive="{Binding ViewModel.IsDataLoaded, Converter={StaticResource BoolInverter}}"/>
 
-            <!-- 空状态：无抽卡记录 -->
             <StackPanel x:Name="EmptyStatePanel" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="24"
                         Visibility="Collapsed">
                 <StackPanel.Transitions>
@@ -189,7 +67,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center">
-                    <Button Click="OnMiYouSheLoginClick" HorizontalAlignment="Stretch" Padding="0">
+                    <Button Click="OnMiYouSheLoginClick" HorizontalAlignment="Stretch" Padding="0" Shadow="{StaticResource SharedShadow}" Translation="0,0,8">
                         <Grid Width="220" Height="160" Padding="20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -207,7 +85,7 @@
                         </Grid>
                     </Button>
 
-                    <Button Click="OnUrlFetchClick" HorizontalAlignment="Stretch" Padding="0">
+                    <Button Click="OnUrlFetchClick" HorizontalAlignment="Stretch" Padding="0" Shadow="{StaticResource SharedShadow}" Translation="0,0,8">
                         <Grid Width="220" Height="160" Padding="20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -221,8 +99,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- 导入 UIGF 文件 -->
-                    <Button Command="{x:Bind ViewModel.ImportUigfCommand}" HorizontalAlignment="Stretch" Padding="0">
+                    <Button Command="{x:Bind ViewModel.ImportUigfCommand}" HorizontalAlignment="Stretch" Padding="0" Shadow="{StaticResource SharedShadow}" Translation="0,0,8">
                         <Grid Width="220" Height="160" Padding="20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -237,7 +114,6 @@
                     </Button>
                 </StackPanel>
 
-                <!-- 状态反馈 -->
                 <StackPanel x:Name="EmptyStateStatusPanel" Spacing="8" HorizontalAlignment="Center"
                             Visibility="{Binding ViewModel.IsFetching, Converter={StaticResource BoolToVisibilityConverter}}">
                     <ProgressBar IsIndeterminate="True" Width="500"/>
@@ -246,14 +122,13 @@
                 </StackPanel>
             </StackPanel>
 
-            <!-- 已有记录：数据操作栏 + 卡池页面 -->
             <Grid Visibility="{Binding ViewModel.HasGachaData, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0" Margin="0,0,0,6">
+                <Grid Grid.Row="0" Margin="0,0,0,16">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -325,64 +200,167 @@
                     </StackPanel>
                 </Grid>
 
-                <Pivot Grid.Row="1">
-                    <PivotItem Header="角色活动">
-                        <ScrollViewer>
-                            <StackPanel Padding="0,12,0,12" Spacing="16">
-                                <ContentControl Content="{x:Bind ViewModel.CharacterStats, Mode=OneWay}" ContentTemplate="{StaticResource PoolStatsHeaderTemplate}"/>
-                                <TextBlock Text="五星记录" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,8"/>
-                                <GridView ItemsSource="{x:Bind ViewModel.CharacterFiveStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaCardTemplate}" SelectionMode="None" IsItemClickEnabled="True"/>
-                                <MenuFlyoutSeparator/>
-                                <TextBlock Text="四星记录" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,8,0,8"/>
-                                <GridView ItemsSource="{x:Bind ViewModel.CharacterFourStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaCardTemplate}" SelectionMode="None" IsItemClickEnabled="True"/>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </PivotItem>
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Padding="0,0,0,16">
+                    <StackPanel Orientation="Horizontal" Spacing="24">
 
-                    <PivotItem Header="武器活动">
-                        <ScrollViewer>
-                            <StackPanel Padding="0,12,0,12" Spacing="16">
-                                <ContentControl Content="{x:Bind ViewModel.WeaponStats, Mode=OneWay}" ContentTemplate="{StaticResource PoolStatsHeaderTemplate}"/>
-                                <TextBlock Text="五星记录" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                <GridView ItemsSource="{x:Bind ViewModel.WeaponFiveStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaCardTemplate}" SelectionMode="None" IsItemClickEnabled="True"/>
-                                <MenuFlyoutSeparator/>
-                                <TextBlock Text="四星记录" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                <GridView ItemsSource="{x:Bind ViewModel.WeaponFourStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaCardTemplate}" SelectionMode="None" IsItemClickEnabled="True"/>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </PivotItem>
+                        <Border Width="380" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel Grid.Row="0" Padding="16" Spacing="12" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8,8,0,0">
+                                    <TextBlock Text="角色活动" FontSize="20" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind ViewModel.CharacterStats.TotalCount, Mode=OneWay}" FontSize="24" FontWeight="Bold"/>
+                                            <TextBlock Text="总抽数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding ViewModel.CharacterStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}" FontSize="24" FontWeight="Bold" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
+                                            <TextBlock Text="耗费原石数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    <StackPanel Orientation="Horizontal" Spacing="16">
+                                        <TextBlock FontSize="13"><Run Text="五星已垫: "/><Run Text="{x:Bind ViewModel.CharacterStats.CurrentPity, Mode=OneWay}" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/></TextBlock>
+                                        <TextBlock FontSize="13"><Run Text="四星已垫: "/><Run Text="{x:Bind ViewModel.CharacterStats.CurrentPity4, Mode=OneWay}" FontWeight="Bold"/></TextBlock>
+                                    </StackPanel>
+                                    
+                                    <ToggleButton Content="显示四星记录" IsChecked="{x:Bind ViewModel.IsCharacterFourStarVisible, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                                </StackPanel>
 
-                    <PivotItem Header="常驻祈愿">
-                        <ScrollViewer>
-                            <StackPanel Padding="0,12,0,12" Spacing="16">
-                                <ContentControl Content="{x:Bind ViewModel.StandardStats, Mode=OneWay}" ContentTemplate="{StaticResource PoolStatsHeaderTemplate}"/>
-                                <TextBlock Text="五星记录" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                <GridView ItemsSource="{x:Bind ViewModel.StandardFiveStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaCardTemplate}" SelectionMode="None" IsItemClickEnabled="True"/>
-                                <MenuFlyoutSeparator/>
-                                <TextBlock Text="四星记录" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                <GridView ItemsSource="{x:Bind ViewModel.StandardFourStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaCardTemplate}" SelectionMode="None" IsItemClickEnabled="True"/>
-                            </StackPanel>
-                        </ScrollViewer>
-                    </PivotItem>
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12">
+                                    <StackPanel Spacing="4">
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.CharacterFiveStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaRowTemplate}"/>
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.CharacterFourStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaRowTemplate}" 
+                                                      Visibility="{Binding ViewModel.IsCharacterFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
 
-                    <PivotItem Header="图片资源库">
-                        <ScrollViewer>
-                            <GridView ItemsSource="{x:Bind ViewModel.AllMetadataPreview, Mode=OneWay}" SelectionMode="None" Margin="0,12,0,0">
-                                <GridView.ItemTemplate>
-                                    <DataTemplate x:DataType="models:ScrapedMetadata">
-                                        <Grid Width="90" Height="110" Margin="4" CornerRadius="6" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                                            <Image Source="{Binding ImgSrc}" Stretch="UniformToFill" Margin="0,0,0,24"/>
-                                            <Image Source="{Binding ElementSrc}" Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4"/>
-                                            <Grid VerticalAlignment="Bottom" Height="24" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
-                                                <TextBlock Text="{x:Bind Name}" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
-                                            </Grid>
-                                        </Grid>
-                                    </DataTemplate>
-                                </GridView.ItemTemplate>
-                            </GridView>
-                        </ScrollViewer>
-                    </PivotItem>
-                </Pivot>
+                        <Border Width="380" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel Grid.Row="0" Padding="16" Spacing="12" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8,8,0,0">
+                                    <TextBlock Text="武器活动" FontSize="20" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind ViewModel.WeaponStats.TotalCount, Mode=OneWay}" FontSize="24" FontWeight="Bold"/>
+                                            <TextBlock Text="总抽数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding ViewModel.WeaponStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}" FontSize="24" FontWeight="Bold" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
+                                            <TextBlock Text="耗费原石数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    <StackPanel Orientation="Horizontal" Spacing="16">
+                                        <TextBlock FontSize="13"><Run Text="五星已垫: "/><Run Text="{x:Bind ViewModel.WeaponStats.CurrentPity, Mode=OneWay}" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/></TextBlock>
+                                        <TextBlock FontSize="13"><Run Text="四星已垫: "/><Run Text="{x:Bind ViewModel.WeaponStats.CurrentPity4, Mode=OneWay}" FontWeight="Bold"/></TextBlock>
+                                    </StackPanel>
+                                    
+                                    <ToggleButton Content="显示四星记录" IsChecked="{x:Bind ViewModel.IsWeaponFourStarVisible, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12">
+                                    <StackPanel Spacing="4">
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.WeaponFiveStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaRowTemplate}"/>
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.WeaponFourStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaRowTemplate}" 
+                                                      Visibility="{Binding ViewModel.IsWeaponFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+
+                        <Border Width="380" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackPanel Grid.Row="0" Padding="16" Spacing="12" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8,8,0,0">
+                                    <TextBlock Text="常驻祈愿" FontSize="20" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{x:Bind ViewModel.StandardStats.TotalCount, Mode=OneWay}" FontSize="24" FontWeight="Bold"/>
+                                            <TextBlock Text="总抽数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding ViewModel.StandardStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}" FontSize="24" FontWeight="Bold" Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
+                                            <TextBlock Text="耗费原石数" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    
+                                    <StackPanel Orientation="Horizontal" Spacing="16">
+                                        <TextBlock FontSize="13"><Run Text="五星已垫: "/><Run Text="{x:Bind ViewModel.StandardStats.CurrentPity, Mode=OneWay}" FontWeight="Bold" Foreground="{ThemeResource AccentFillColorDefaultBrush}"/></TextBlock>
+                                        <TextBlock FontSize="13"><Run Text="四星已垫: "/><Run Text="{x:Bind ViewModel.StandardStats.CurrentPity4, Mode=OneWay}" FontWeight="Bold"/></TextBlock>
+                                    </StackPanel>
+                                    
+                                    <ToggleButton Content="显示四星记录" IsChecked="{x:Bind ViewModel.IsStandardFourStarVisible, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12">
+                                    <StackPanel Spacing="4">
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.StandardFiveStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaRowTemplate}"/>
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.StandardFourStars, Mode=OneWay}" ItemTemplate="{StaticResource GachaRowTemplate}" 
+                                                      Visibility="{Binding ViewModel.IsStandardFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+
+                        <Border Width="380" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Grid.Row="0" Padding="16" Spacing="12" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8,8,0,0">
+                                    <TextBlock Text="图片资源库" FontSize="20" FontWeight="Bold"/>
+                                    <TextBlock Text="已缓存的角色及武器基础图标数据" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+                                </StackPanel>
+
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12">
+                                    <GridView ItemsSource="{x:Bind ViewModel.AllMetadataPreview, Mode=OneWay}" SelectionMode="None">
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:ScrapedMetadata">
+                                                <Grid Width="90" Height="110" Margin="4" CornerRadius="6" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,8">
+                                                    <Image Source="{Binding ImgSrc}" Stretch="UniformToFill" Margin="0,0,0,24"/>
+                                                    <Image Source="{Binding ElementSrc}" Width="18" Height="18" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4"/>
+                                                    <Grid VerticalAlignment="Bottom" Height="24" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}">
+                                                        <TextBlock Text="{x:Bind Name}" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                                    </Grid>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
             </Grid>
         </Grid>
     </Grid>
