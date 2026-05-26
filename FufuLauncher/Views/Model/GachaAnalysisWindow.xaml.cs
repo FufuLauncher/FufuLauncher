@@ -1,14 +1,12 @@
-﻿using System.Diagnostics;
-using System.Text.Json;
-using FufuLauncher.Constants;
-using FufuLauncher.Models;
+﻿using FufuLauncher.Contracts.Services;
+using FufuLauncher.Services;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Input;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
-using Microsoft.Web.WebView2.Core;
+
 
 namespace FufuLauncher.Views;
 
@@ -24,11 +22,70 @@ public sealed partial class GachaAnalysisWindow : Window
         
         RootGrid.DataContext = this;
         ExtendsContentIntoTitleBar = true;
-        
-        ViewModel.RequestMetadataScrapeAction = async () => await StartScrapingSequenceAsync();
-        
-        _ = InitializeWebViewAsync();
-        _ = ViewModel.LoadSavedGachaDataAsync();
+        LoadingRing.IsActive = true;
+
+        ViewModel.GetWindowHandle = () => WinRT.Interop.WindowNative.GetWindowHandle(this);
+        ViewModel.RequestMetadataScrapeAction = async () => await ViewModel.FetchMetadataFromApiAsync();
+        this.Activated += OnWindowFirstActivated;
+        ViewModel.OnUidMismatchAsync = async (currentUid, incomingUid) =>
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            DispatcherQueue.TryEnqueue(async () =>
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "检测到不同账号",
+                    Content = $"当前数据属于 UID: {currentUid}\n即将导入的数据来自 UID: {incomingUid}\n\n是否为 UID {incomingUid} 创建新的数据存档？",
+                    PrimaryButtonText = "创建新存档",
+                    CloseButtonText = "取消",
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = Content.XamlRoot
+                };
+                var result = await dialog.ShowAsync();
+                tcs.TrySetResult(result == ContentDialogResult.Primary);
+            });
+            return await tcs.Task;
+        };
+        ViewModel.OnErrorAction = (msg) =>
+        {
+            DispatcherQueue.TryEnqueue(async () =>
+            {
+                var dialog = new ContentDialog
+                {
+                    Title = "获取失败",
+                    Content = msg,
+                    CloseButtonText = "知道了",
+                    DefaultButton = ContentDialogButton.Close,
+                    XamlRoot = Content.XamlRoot
+                };
+                await dialog.ShowAsync();
+            });
+        };
+
+        ViewModel.PropertyChanged += (s, e) =>
+        {
+            if (e.PropertyName == nameof(ViewModel.IsDataLoaded) && ViewModel.IsDataLoaded)
+            {
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    LoadingRing.IsActive = false;
+                    EmptyStatePanel.Visibility = ViewModel.HasGachaData ? Visibility.Collapsed : Visibility.Visible;
+                    if (!string.IsNullOrEmpty(ViewModel.SelectedUid))
+                        UidComboBox.SelectedItem = ViewModel.SelectedUid;
+                });
+            }
+            else if (e.PropertyName == nameof(ViewModel.HasGachaData))
+            {
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    if (ViewModel.IsDataLoaded)
+                        EmptyStatePanel.Visibility = ViewModel.HasGachaData ? Visibility.Collapsed : Visibility.Visible;
+                });
+            }
+        };
+
+        // 确保初始状态显示 loading
+        ViewModel.IsDataLoaded = false;
     }
 
     private void OnGachaCardTapped(object sender, TappedRoutedEventArgs e)
@@ -56,10 +113,24 @@ public sealed partial class GachaAnalysisWindow : Window
 
     private async void OnDeleteGachaDataClick(object sender, RoutedEventArgs e)
     {
+        if (string.IsNullOrEmpty(ViewModel.SelectedUid))
+        {
+            var noDataDialog = new ContentDialog
+            {
+                Title = "提示",
+                Content = "当前没有选中任何账号，无法删除记录。",
+                CloseButtonText = "知道了",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            await noDataDialog.ShowAsync();
+            return;
+        }
+
         ContentDialog deleteDialog = new()
         {
             Title = "警告",
-            Content = "确定要彻底删除本地保存的所有抽卡记录吗？此操作不可逆转！",
+            Content = $"确定要删除 UID: {ViewModel.SelectedUid} 的所有抽卡记录吗？\n此操作不可逆转！",
             PrimaryButtonText = "确认删除",
             CloseButtonText = "取消",
             DefaultButton = ContentDialogButton.Close,
@@ -70,132 +141,123 @@ public sealed partial class GachaAnalysisWindow : Window
         if (result == ContentDialogResult.Primary) await ViewModel.ClearGachaDataAsync();
     }
 
-    private async Task InitializeWebViewAsync()
+    private async void OnMiYouSheLoginClick(object sender, RoutedEventArgs e)
     {
-        try
-        {
-            await MetadataCrawlerWebView.EnsureCoreWebView2Async();
-            if (MetadataCrawlerWebView.CoreWebView2 != null)
-                MetadataCrawlerWebView.CoreWebView2.Settings.AreDefaultScriptDialogsEnabled = false;
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"WebView2 初始化失败: {ex.Message}");
-        }
-    }
+        var localSettingsService = App.GetService<ILocalSettingsService>();
+        var isOsObj = await localSettingsService.ReadSettingAsync("IsInternationalAccount");
+        bool isInternational = isOsObj is bool isOs && isOs;
 
-    private async Task StartScrapingSequenceAsync()
-    {
-        try
+        if (isInternational)
         {
-            if (MetadataCrawlerWebView.CoreWebView2 == null)
+            var osDialog = new ContentDialog
             {
-                await InitializeWebViewAsync();
-                if (MetadataCrawlerWebView.CoreWebView2 == null)
-                {
-                    ViewModel.UpdateMetadata(null);
-                    return;
-                }
-            }
-
-            var results = new List<ScrapedMetadata>();
-            var chars = await ScrapeUrlSmartAsync(ApiEndpoints.GachaCalculatorCharacterUrl, true); 
-            results.AddRange(chars);
-
-            var weapons = await ScrapeUrlSmartAsync(ApiEndpoints.GachaCalculatorWeaponUrl, false); 
-            results.AddRange(weapons);
-
-            ViewModel.UpdateMetadata(results);
+                Title = "国际服暂不支持",
+                Content = "国际服（HoYoLAB）账号的抽卡记录获取功能正在适配中，敬请期待。\n\n国际服用户可通过「通过URL获取」方式导入抽卡记录。",
+                CloseButtonText = "知道了",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            await osDialog.ShowAsync();
+            return;
         }
-        catch
+
+        var userConfigService = App.GetService<IUserConfigService>();
+        var displayConfig = await userConfigService.LoadDisplayConfigAsync();
+        var isLoggedIn = !string.IsNullOrEmpty(displayConfig.GameUid);
+
+        if (!isLoggedIn)
         {
-            ViewModel.UpdateMetadata(null);
-        }
-    }
-
-    private async Task<List<ScrapedMetadata>> ScrapeUrlSmartAsync(string url, bool isCharacter)
-    {
-        var list = new List<ScrapedMetadata>();
-        await ResetWebViewAsync();
-
-        var navTcs = new TaskCompletionSource<bool>();
-        void NavHandler(WebView2 s, CoreWebView2NavigationCompletedEventArgs e) => navTcs.TrySetResult(e.IsSuccess);
-
-        MetadataCrawlerWebView.NavigationCompleted += NavHandler;
-        MetadataCrawlerWebView.Source = new Uri(url);
-
-        var navTask = navTcs.Task;
-        var timeoutTask = Task.Delay(15000);
-        var finishedTask = await Task.WhenAny(navTask, timeoutTask);
-        MetadataCrawlerWebView.NavigationCompleted -= NavHandler;
-
-        if (finishedTask != timeoutTask && !navTask.Result) return list;
-
-        var script = isCharacter ?
-            @"(function() {
-                window.scrollTo(0, document.body.scrollHeight);
-                var items = [];
-                var elements = document.querySelectorAll('.character-item');
-                if (elements.length === 0) return JSON.stringify([]); 
-                elements.forEach(el => {
-                    var nameEl = el.querySelector('.gt-mobile-caption-c2-3');
-                    var imgEl = el.querySelector('.gt-avatar-img img');
-                    var eleEl = el.querySelector('.gt-avatar-left-element img');
-                    if(nameEl && imgEl) items.push({ Name: nameEl.innerText, ImgSrc: imgEl.src, ElementSrc: eleEl ? eleEl.src : '', Type: 'char' });
-                });
-                return JSON.stringify(items);
-            })();" :
-            @"(function() {
-                window.scrollTo(0, document.body.scrollHeight);
-                var items = [];
-                var elements = document.querySelectorAll('.weapon-item');
-                if (elements.length === 0) return JSON.stringify([]); 
-                elements.forEach(el => {
-                    var nameEl = el.querySelector('.weapon-name');
-                    var imgEl = el.querySelector('.gt-avatar-img img');
-                    if(nameEl && imgEl) items.push({ Name: nameEl.innerText, ImgSrc: imgEl.src, ElementSrc: '', Type: 'weapon' });
-                });
-                return JSON.stringify(items);
-            })();";
-
-        return await PollForDataAsync(script, 20, 500);
-    }
-
-    private async Task<List<ScrapedMetadata>> PollForDataAsync(string script, int maxRetries, int intervalMs)
-    {
-        for (var i = 0; i < maxRetries; i++)
-        {
-            try
+            var dialog = new ContentDialog
             {
-                var json = await MetadataCrawlerWebView.ExecuteScriptAsync(script);
-                if (!string.IsNullOrEmpty(json) && json != "null")
-                {
-                    var outerJson = JsonSerializer.Deserialize<string>(json);
-                    if (!string.IsNullOrEmpty(outerJson) && outerJson != "[]")
-                    {
-                        var items = JsonSerializer.Deserialize<List<ScrapedMetadata>>(outerJson);
-                        if (items != null && items.Count > 0) return items;
-                    }
-                }
-            }
-            catch { }
-            await Task.Delay(intervalMs);
+                Title = "未登录米游社",
+                Content = "检测到尚未登录米游社账号，即将跳转到账户设置页面进行登录。",
+                CloseButtonText = "知道了",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+            await dialog.ShowAsync();
+
+            if (App.MainWindow is MainWindow mainWindow)
+                await mainWindow.NavigateToAccountPageAsync();
+            return;
         }
-        return new List<ScrapedMetadata>();
+
+        ViewModel.FetchFromMiYouSheCommand.Execute(null);
     }
 
-    private async Task ResetWebViewAsync()
+    private async void OnUrlFetchClick(object sender, RoutedEventArgs e)
     {
-        try
+        var urlBox = new TextBox
         {
-            var tcs = new TaskCompletionSource<bool>();
-            void Handler(WebView2 s, CoreWebView2NavigationCompletedEventArgs e) => tcs.TrySetResult(true);
+            AcceptsReturn = true,
+            TextWrapping = TextWrapping.Wrap,
+            Height = 120,
+            Text = ViewModel.GachaUrl ?? "",
+            PlaceholderText = "在此处粘贴抽卡分析链接 (URL)..."
+        };
 
-            MetadataCrawlerWebView.NavigationCompleted += Handler;
-            MetadataCrawlerWebView.Source = new Uri("about:blank");
-            await Task.WhenAny(tcs.Task, Task.Delay(1500));
-            MetadataCrawlerWebView.NavigationCompleted -= Handler;
+        var panel = new StackPanel { Spacing = 12 };
+        panel.Children.Add(new TextBlock
+        {
+            Text = "粘贴从米游社或其他工具获取的抽卡记录链接，链接应包含 authkey 参数。",
+            FontSize = 12,
+            Foreground = (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
+            TextWrapping = TextWrapping.Wrap
+        });
+        panel.Children.Add(urlBox);
+
+        var dialog = new ContentDialog
+        {
+            Title = "通过 URL 获取抽卡记录",
+            Content = panel,
+            PrimaryButtonText = "开始获取",
+            CloseButtonText = "取消",
+            DefaultButton = ContentDialogButton.Primary,
+            XamlRoot = Content.XamlRoot
+        };
+
+        var result = await dialog.ShowAsync();
+        if (result == ContentDialogResult.Primary)
+        {
+            ViewModel.GachaUrl = urlBox.Text;
+            ViewModel.FetchGachaDataCommand.Execute(null);
         }
-        catch { }
     }
+
+    private bool _firstActivated = true;
+
+    private async void OnWindowFirstActivated(object sender, WindowActivatedEventArgs e)
+    {
+        if (!_firstActivated) return;
+        _firstActivated = false;
+        this.Activated -= OnWindowFirstActivated;
+
+        // 延迟加载，确保窗口和 LoadingRing 先完成渲染
+        DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, async () =>
+        {
+            await ViewModel.LoadSavedGachaDataAsync();
+        });
+    }
+
+    private async void OnUidComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (sender is not ComboBox combo) return;
+        if (combo.SelectedItem is not string selected) return;
+
+        System.Diagnostics.Debug.WriteLine($"[Gacha] OnUidComboBoxSelectionChanged: selected={selected}, ViewModel.SelectedUid={ViewModel.SelectedUid}");
+
+        if (selected == GachaAnalysisModel.AddNewUserItem)
+        {
+            // 恢复到当前 UID，避免 ComboBox 显示空白
+            var previous = ViewModel.SelectedUid;
+            combo.SelectedItem = null;
+            await ViewModel.AddNewUserCommand.ExecuteAsync(null);
+            // AddNewUser 会设置 SelectedUid = ""，如果需要恢复可以在此处处理
+        }
+        else
+        {
+            await ViewModel.SwitchUidCommand.ExecuteAsync(selected);
+        }
+    }
+
 }
