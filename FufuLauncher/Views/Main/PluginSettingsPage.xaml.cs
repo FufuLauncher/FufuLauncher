@@ -154,6 +154,37 @@ public sealed partial class PluginSettingsPage : Page
         sponsorWindow.Activate();
     }
     
+    private void HelpImage_ImageOpened(object sender, RoutedEventArgs e)
+    {
+        if (sender is Microsoft.UI.Xaml.Controls.Image img && img.Parent is Grid grid)
+        {
+            if (grid.FindName("LoadingRing") is ProgressRing loadingRing)
+            {
+                loadingRing.IsActive = false;
+                loadingRing.Visibility = Visibility.Collapsed;
+            }
+        }
+    }
+
+    private void HelpImage_ImageFailed(object sender, ExceptionRoutedEventArgs e)
+    {
+        if (sender is Microsoft.UI.Xaml.Controls.Image img && img.Parent is Grid grid)
+        {
+            img.Visibility = Visibility.Collapsed;
+        
+            if (grid.FindName("LoadingRing") is ProgressRing loadingRing)
+            {
+                loadingRing.IsActive = false;
+                loadingRing.Visibility = Visibility.Collapsed;
+            }
+        
+            if (grid.FindName("ErrorText") is TextBlock errorText)
+            {
+                errorText.Visibility = Visibility.Visible;
+            }
+        }
+    }
+    
     protected override void OnNavigatedTo(Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);

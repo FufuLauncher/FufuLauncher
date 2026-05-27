@@ -151,7 +151,7 @@ public partial class PluginSettingsViewModel : ObservableObject
     private static bool _isHwidAuthorized = false;
     private static bool _hasCheckedHwid = false;
 
-private async Task<bool> CheckHwidAuthorizationAsync()
+    private async Task<bool> CheckHwidAuthorizationAsync()
     {
         if (_hasCheckedHwid && _isHwidAuthorized) return true;
 
@@ -731,8 +731,9 @@ private async Task<bool> CheckHwidAuthorizationAsync()
                 var name = dic.GetValueOrDefault("Name", section.Key);
                 var type = dic.GetValueOrDefault("Type", "string");
                 var value = dic.GetValueOrDefault("Value", "");
-
-                var settingItem = new PluginSettingItem(_iniFile, section.Key, name, type, value, OnSettingValueChanged, UseKeyListInput);
+                var help = dic.GetValueOrDefault("help", "");
+                
+                var settingItem = new PluginSettingItem(_iniFile, section.Key, name, type, value, help, OnSettingValueChanged, UseKeyListInput);
                 Settings.Add(settingItem);
             }
         }
@@ -1016,12 +1017,48 @@ public class PluginSettingItem : ObservableObject
     public string SectionKey { get; }
     public string DisplayName { get; }
     public string Type { get; }
+    public string HelpUrl { get; }
 
+    public Microsoft.UI.Xaml.Visibility HelpVisibility => !string.IsNullOrEmpty(HelpUrl) ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;
+    public Microsoft.UI.Xaml.Visibility GifImageVisibility => !string.IsNullOrEmpty(HelpUrl) ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;
+    public Microsoft.UI.Xaml.Visibility GifErrorVisibility => Microsoft.UI.Xaml.Visibility.Collapsed;
     private string _rawValue;
     private static readonly ObservableCollection<VirtualKeyOption> _availableKeys = new ObservableCollection<VirtualKeyOption>(GetAvailableKeys());
     private bool _useKeyListInput;
 
     public ObservableCollection<VirtualKeyOption> AvailableKeys => _availableKeys;
+    
+    public Microsoft.UI.Xaml.Media.ImageSource HelpImageSource
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(HelpUrl)) return null;
+            try
+            {
+                return new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(HelpUrl));
+            }
+            catch
+            {
+                return null;
+            }
+        }
+    }
+    
+    public PluginSettingItem(IniFile iniFile, string sectionKey, string displayName, string type, string value, string helpUrl, Action<string, string, string> onValueChanged, bool useKeyListInput)
+    {
+        _iniFile = iniFile;
+        SectionKey = sectionKey;
+        DisplayName = displayName;
+        Type = type;
+        _rawValue = value;
+        HelpUrl = helpUrl;
+        _onValueChanged = onValueChanged;
+        _useKeyListInput = useKeyListInput;
+        if (string.Equals(Type, "key", StringComparison.OrdinalIgnoreCase) && int.TryParse(_rawValue, out var currentKey))
+        {
+            EnsureKeyOption(currentKey);
+        }
+    }
     
     private static List<VirtualKeyOption> GetAvailableKeys()
     {

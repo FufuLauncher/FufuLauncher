@@ -13,37 +13,137 @@
         <DataTemplate x:Key="BoolTemplate" x:DataType="viewmodels:PluginSettingItem">
             <StackPanel Width="240" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
-                <ToggleSwitch IsOn="{x:Bind BoolValue, Mode=TwoWay}" OnContent="开" OffContent="关" MinWidth="0" Margin="0"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ToggleSwitch IsOn="{x:Bind BoolValue, Mode=TwoWay}" OnContent="开" OffContent="关" MinWidth="0" Margin="0" VerticalAlignment="Center"/>
+                    <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE897;" FontFamily="Segoe Fluent Icons" FontSize="14" Width="24" Height="24" MinWidth="0" MinHeight="0" Padding="0" CornerRadius="12" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" ToolTipService.ToolTip="查看帮助">
+                        <Button.Flyout>
+                            <Flyout Placement="Right">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Padding" Value="4"/>
+                                        <Setter Property="MinHeight" Value="300"/>
+                                        <Setter Property="MinWidth" Value="400"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                        <Setter Property="MaxWidth" Value="640"/>
+                                        <Setter Property="MaxHeight" Value="480"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <Grid>
+                                    <ProgressRing x:Name="LoadingRing" IsActive="True" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="配置的链接非有效GIF格式" Visibility="{x:Bind GifErrorVisibility, Mode=OneWay}" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                    <Image Source="{x:Bind HelpImageSource, Mode=OneWay}" Visibility="{x:Bind GifImageVisibility, Mode=OneWay}" Stretch="Uniform" ImageFailed="HelpImage_ImageFailed" ImageOpened="HelpImage_ImageOpened"/>
+                                    <TextBlock x:Name="ErrorText" Text="GIF资源加载失败" Visibility="Collapsed" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
+        
         <DataTemplate x:Key="KeyTemplate" x:DataType="viewmodels:PluginSettingItem">
             <StackPanel Width="240" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
-                <ComboBox ItemsSource="{x:Bind AvailableKeys}" 
-                          SelectedValuePath="KeyCode" 
-                          DisplayMemberPath="KeyName" 
-                          SelectedValue="{x:Bind KeyValue, Mode=TwoWay}" 
-                          Visibility="{x:Bind KeyListVisibility, Mode=OneWay}"
-                          Width="200" HorizontalAlignment="Left"/>
-                <NumberBox Value="{x:Bind KeyNumberValue, Mode=TwoWay}"
-                          SpinButtonPlacementMode="Inline"
-                          SmallChange="1"
-                          Minimum="1"
-                          Visibility="{x:Bind KeyNumberVisibility, Mode=OneWay}"
-                          Width="200" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Grid>
+                        <ComboBox ItemsSource="{x:Bind AvailableKeys}" 
+                                  SelectedValuePath="KeyCode" 
+                                  DisplayMemberPath="KeyName" 
+                                  SelectedValue="{x:Bind KeyValue, Mode=TwoWay}" 
+                                  Visibility="{x:Bind KeyListVisibility, Mode=OneWay}"
+                                  Width="200" HorizontalAlignment="Left"/>
+                        <NumberBox Value="{x:Bind KeyNumberValue, Mode=TwoWay}"
+                                  SpinButtonPlacementMode="Inline"
+                                  SmallChange="1"
+                                  Minimum="1"
+                                  Visibility="{x:Bind KeyNumberVisibility, Mode=OneWay}"
+                                  Width="200" HorizontalAlignment="Left"/>
+                    </Grid>
+                    <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE897;" FontFamily="Segoe Fluent Icons" FontSize="14" Width="24" Height="24" MinWidth="0" MinHeight="0" Padding="0" CornerRadius="12" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" ToolTipService.ToolTip="查看帮助">
+                        <Button.Flyout>
+                            <Flyout Placement="Right">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Padding" Value="4"/>
+                                        <Setter Property="MinHeight" Value="300"/>
+                                        <Setter Property="MinWidth" Value="400"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                        <Setter Property="MaxWidth" Value="640"/>
+                                        <Setter Property="MaxHeight" Value="480"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <Grid>
+                                    <ProgressRing x:Name="LoadingRing" IsActive="True" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="配置的链接非有效GIF格式" Visibility="{x:Bind GifErrorVisibility, Mode=OneWay}" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                    <Image Source="{x:Bind HelpImageSource, Mode=OneWay}" Visibility="{x:Bind GifImageVisibility, Mode=OneWay}" Stretch="Uniform" ImageFailed="HelpImage_ImageFailed" ImageOpened="HelpImage_ImageOpened"/>
+                                    <TextBlock x:Name="ErrorText" Text="GIF资源加载失败" Visibility="Collapsed" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
+        
         <DataTemplate x:Key="NumberTemplate" x:DataType="viewmodels:PluginSettingItem">
             <StackPanel Width="240" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
-                <NumberBox Value="{x:Bind FloatValue, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="200" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <NumberBox Value="{x:Bind FloatValue, Mode=TwoWay}" SpinButtonPlacementMode="Inline" Width="200" HorizontalAlignment="Left"/>
+                    <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE897;" FontFamily="Segoe Fluent Icons" FontSize="14" Width="24" Height="24" MinWidth="0" MinHeight="0" Padding="0" CornerRadius="12" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" ToolTipService.ToolTip="查看帮助">
+                        <Button.Flyout>
+                            <Flyout Placement="Right">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Padding" Value="4"/>
+                                        <Setter Property="MinHeight" Value="300"/>
+                                        <Setter Property="MinWidth" Value="400"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                        <Setter Property="MaxWidth" Value="640"/>
+                                        <Setter Property="MaxHeight" Value="480"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <Grid>
+                                    <ProgressRing x:Name="LoadingRing" IsActive="True" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="配置的链接非有效GIF格式" Visibility="{x:Bind GifErrorVisibility, Mode=OneWay}" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                    <Image Source="{x:Bind HelpImageSource, Mode=OneWay}" Visibility="{x:Bind GifImageVisibility, Mode=OneWay}" Stretch="Uniform" ImageFailed="HelpImage_ImageFailed" ImageOpened="HelpImage_ImageOpened"/>
+                                    <TextBlock x:Name="ErrorText" Text="GIF资源加载失败" Visibility="Collapsed" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="StringTemplate" x:DataType="viewmodels:PluginSettingItem">
             <StackPanel Width="240" HorizontalAlignment="Left">
                 <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Margin="0,0,0,8" Opacity="0.9"/>
-                <TextBox Text="{x:Bind StringValue, Mode=TwoWay}" Width="200" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBox Text="{x:Bind StringValue, Mode=TwoWay}" Width="200" HorizontalAlignment="Left"/>
+                    <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE897;" FontFamily="Segoe Fluent Icons" FontSize="14" Width="24" Height="24" MinWidth="0" MinHeight="0" Padding="0" CornerRadius="12" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" ToolTipService.ToolTip="查看帮助">
+                        <Button.Flyout>
+                            <Flyout Placement="Right">
+                                <Flyout.FlyoutPresenterStyle>
+                                    <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="Padding" Value="4"/>
+                                        <Setter Property="MinHeight" Value="300"/>
+                                        <Setter Property="MinWidth" Value="400"/>
+                                        <Setter Property="CornerRadius" Value="8"/>
+                                        <Setter Property="MaxWidth" Value="640"/>
+                                        <Setter Property="MaxHeight" Value="480"/>
+                                    </Style>
+                                </Flyout.FlyoutPresenterStyle>
+                                <Grid>
+                                    <ProgressRing x:Name="LoadingRing" IsActive="True" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="配置的链接非有效GIF格式" Visibility="{x:Bind GifErrorVisibility, Mode=OneWay}" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                    <Image Source="{x:Bind HelpImageSource, Mode=OneWay}" Visibility="{x:Bind GifImageVisibility, Mode=OneWay}" Stretch="Uniform" ImageFailed="HelpImage_ImageFailed" ImageOpened="HelpImage_ImageOpened"/>
+                                    <TextBlock x:Name="ErrorText" Text="GIF资源加载失败" Visibility="Collapsed" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
@@ -52,6 +152,7 @@
                                            NumberTemplate="{StaticResource NumberTemplate}"
                                            StringTemplate="{StaticResource StringTemplate}"
                                            KeyTemplate="{StaticResource KeyTemplate}" />
+        
         <Storyboard x:Name="EntranceStoryboard">
             <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
                              Storyboard.TargetProperty="Opacity"
@@ -61,6 +162,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        
         <Storyboard x:Name="ExitStoryboard">
             <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
                              Storyboard.TargetProperty="Opacity"
@@ -116,6 +218,7 @@
                         <TextBlock Text="{x:Bind ViewModel.LastModifiedDate, Mode=OneWay}" FontSize="12" Opacity="0.6"/>
                     </StackPanel>
                 </StackPanel>
+                
                 <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="20" VerticalAlignment="Center">
                     <Button Content="功能(Download/Repair)" VerticalAlignment="Center">
                         <Button.Flyout>
@@ -142,6 +245,7 @@
                                             HorizontalAlignment="Stretch" />
                                     
                                     <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4,0,4" />
+                                    
                                     <StackPanel Orientation="Horizontal" Spacing="8">
                                         <TextBlock Text="主插件启用" VerticalAlignment="Center" FontSize="12" FontWeight="SemiBold"/>
                                         <ToggleSwitch IsOn="{x:Bind ViewModel.IsMainPluginEnabled, Mode=TwoWay}" 
@@ -427,7 +531,7 @@
                                       PointerWheelChanged="CropScrollViewer_PointerWheelChanged">
                             <Image x:Name="CropTargetImage" Stretch="Uniform" />
                         </ScrollViewer>
-                         
+                          
                         <Grid IsHitTestVisible="False" Opacity="0.5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
