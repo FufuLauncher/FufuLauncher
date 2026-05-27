@@ -49,7 +49,7 @@
             
         </Grid.Resources>
 
-        <Grid Margin="24,48,24,24">
+        <Grid Margin="24,48,24,12">
             <ProgressRing x:Name="LoadingRing" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40"
                           IsActive="{Binding ViewModel.IsDataLoaded, Converter={StaticResource BoolInverter}}"/>
 
@@ -200,7 +200,7 @@
                     </StackPanel>
                 </Grid>
 
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Padding="0,0,0,16">
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" Padding="0,0,0,16">
                     <StackPanel Orientation="Horizontal" Spacing="24">
 
                         <Border Width="380" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
@@ -329,7 +329,7 @@
                             </Grid>
                         </Border>
 
-                        <Border Width="380" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
+                        <Border Width="440" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
