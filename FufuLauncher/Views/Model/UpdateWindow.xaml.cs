@@ -94,7 +94,7 @@ namespace FufuLauncher.Views
                 var envOptions = new CoreWebView2EnvironmentOptions();
                 envOptions.AdditionalBrowserArguments = $"--user-agent=\"{CUSTOM_UA}\" --disable-blink-features=AutomationControlled";
                 
-                string baseDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
+                string baseDataFolder = Helpers.AppPaths.CacheDir;
                 CleanupOldWebView2Data(baseDataFolder);
                 
                 string userDataFolder = Path.Combine(baseDataFolder, $"WebView2Data_Update_{Guid.NewGuid():N}");

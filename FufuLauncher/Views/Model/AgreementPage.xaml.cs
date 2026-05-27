@@ -24,5 +24,15 @@ namespace FufuLauncher.Views
                 EntranceStoryboard.Begin();
             }
         }
+
+        private void OnAgreementScrollChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (ViewModel.HasReadAgreement) return;
+            var sv = (ScrollViewer)sender;
+            if (sv.VerticalOffset >= sv.ScrollableHeight - 10)
+            {
+                ViewModel.HasReadAgreement = true;
+            }
+        }
     }
 }

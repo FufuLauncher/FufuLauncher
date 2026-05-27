@@ -90,8 +90,7 @@ namespace FufuLauncher.Views
             InitializeComponent();
             _localSettingsService = App.GetService<ILocalSettingsService>();
 
-            var localFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            _accountsFilePath = Path.Combine(localFolder, "FufuLauncher", "game_accounts.json");
+            _accountsFilePath = Helpers.AppPaths.GameAccountsFile;
 
             Loaded += BlankPage_Loaded;
         }

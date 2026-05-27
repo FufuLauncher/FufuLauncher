@@ -50,7 +50,7 @@ namespace FufuLauncher.Views
 
             try
             {
-                string cacheDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "ServerCache");
+                string cacheDir = Helpers.AppPaths.ServerCacheDir;
                 var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText);
                 
                 await Task.Run(() => converter.ExecutePreDownloadAsync());

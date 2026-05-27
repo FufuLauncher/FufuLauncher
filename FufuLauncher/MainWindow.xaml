@@ -6,9 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windowex="using:WinUIEx"
     xmlns:tb="using:H.NotifyIcon"
-    MinWidth="1360"
-    MinHeight="768"
-    PersistenceId="MainWindow"
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
@@ -54,6 +51,7 @@
         <Frame x:Name="AgreementFrame" Visibility="Collapsed" Background="Transparent"/>
 
         <NavigationView x:Name="NavigationView"
+                        Visibility="Collapsed"
                         PaneDisplayMode="Left"
                         IsPaneOpen="False"
                         IsBackButtonVisible="Collapsed"

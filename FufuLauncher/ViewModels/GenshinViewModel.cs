@@ -127,7 +127,7 @@ public class GenshinViewModel : INotifyPropertyChanged
             IsLoading = true;
             StatusMessage = "正在连接米游社...";
 
-            var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+            var configPath = Helpers.AppPaths.ConfigFile;
             if (!File.Exists(configPath))
             {
                 StatusMessage = "需先登录账号";

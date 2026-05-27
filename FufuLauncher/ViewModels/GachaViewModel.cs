@@ -27,7 +27,7 @@ public partial class GachaViewModel : ObservableRecipient
 
     private List<dynamic> _allGachaLogs = new();
 
-    private readonly string _configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "gacha_config.json");
+    private readonly string _configPath = Path.Combine(Helpers.AppPaths.DataDir, "gacha_config.json");
 
     [ObservableProperty] private string _inputUrl;
     [ObservableProperty] private string _statusMessage = "准备就绪";

@@ -78,7 +78,7 @@ namespace FufuLauncher.Services.Background
             _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36");
         }
 
-        private readonly string _cacheFolderPath;
+        private string _cacheFolderPath => Path.Combine(Helpers.AppPaths.CacheDir, "BackgroundCache");
         private BackgroundRenderResult _cachedBackground;
         private string _currentBackgroundUrl;
 
@@ -87,20 +87,6 @@ namespace FufuLauncher.Services.Background
 
         public BackgroundRenderer()
         {
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            _cacheFolderPath = Path.Combine(localAppData, "FufuLauncher", "BackgroundCache");
-
-            try
-            {
-                if (!Directory.Exists(_cacheFolderPath))
-                {
-                    Directory.CreateDirectory(_cacheFolderPath);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"BackgroundRenderer: 创建缓存目录失败 - {ex.Message}");
-            }
         }
         
         private BackgroundRenderResult GetFallbackBackground()
@@ -254,6 +240,7 @@ namespace FufuLauncher.Services.Background
             Debug.WriteLine($"BackgroundRenderer: 下载完成，大小 {data.Length} bytes");
 
             var tempFile = Path.Combine(_cacheFolderPath, $"{fileName}.tmp");
+            Directory.CreateDirectory(_cacheFolderPath);
             await File.WriteAllBytesAsync(tempFile, data);
             File.Move(tempFile, cachedFilePath, true);
 

@@ -26,11 +26,8 @@ namespace FufuLauncher.Views
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
 
-            var folder = Path.Combine(AppContext.BaseDirectory, "Data");
-            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-
-            _cachePath = Path.Combine(folder, "inventory_cache.json");
-            _configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+            _cachePath = Helpers.AppPaths.InventoryCacheFile;
+            _configPath = Helpers.AppPaths.ConfigFile;
 
             if (_httpClient.DefaultRequestHeaders.UserAgent.Count == 0)
             {

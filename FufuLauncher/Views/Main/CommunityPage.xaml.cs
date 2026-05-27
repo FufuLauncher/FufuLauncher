@@ -176,7 +176,7 @@ public sealed partial class CommunityPage : Page
             var localSettingsService = App.GetService<ILocalSettingsService>();
             var activeFileObj = await localSettingsService.ReadSettingAsync("ActiveConfigFile");
             string activeFile = activeFileObj?.ToString() ?? "config.json";
-            string configPath = Path.Combine(AppContext.BaseDirectory, activeFile);
+            string configPath = Path.Combine(Helpers.AppPaths.DataDir, activeFile);
 
             if (File.Exists(configPath))
             {

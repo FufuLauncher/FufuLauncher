@@ -8,7 +8,7 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 {
     private async Task<Config> LoadConfigWithLoggingAsync()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+        var path = Helpers.AppPaths.ConfigFile;
         if (!File.Exists(path)) return new Config();
 
         try

@@ -10,7 +10,7 @@ namespace FufuLauncher.Views
         public string RewindKey { get; set; } = "ArrowLeft";
 
         [System.Text.Json.Serialization.JsonIgnore]
-        public static string ConfigPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "browser_config.json");
+        public static string ConfigPath => Path.Combine(Helpers.AppPaths.DataDir, "browser_config.json");
 
         public static BrowserConfig Load()
         {

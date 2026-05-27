@@ -106,9 +106,16 @@ public sealed partial class MainWindow : WindowEx
 
         WeakReferenceMessenger.Default.Register<AgreementAcceptedMessage>(this, (_, _) =>
         {
-            dispatcherQueue.TryEnqueue(() =>
+            dispatcherQueue.TryEnqueue(async () =>
             {
-                try { ShowMainContent(); }
+                try
+                {
+                    AgreementFrame.Visibility = Visibility.Collapsed;
+                    AgreementFrame.Content = null;
+                    await ApplyMainWindowSizeAsync();
+                    await Task.Delay(50);
+                    await PerformMainInitAsync();
+                }
                 catch (Exception ex) { Debug.WriteLine($"消息处理异常: {ex.Message}"); }
             });
         });
@@ -582,6 +589,15 @@ public sealed partial class MainWindow : WindowEx
     {
         if (_isExit) return;
         args.Cancel = true;
+
+        if (!_isMainUiLoaded)
+        {
+            _isExit = true;
+            TrayIcon.Dispose();
+            Close();
+            return;
+        }
+
         if (_minimizeToTray)
         {
             this.Hide();
@@ -591,6 +607,7 @@ public sealed partial class MainWindow : WindowEx
         {
             await SaveWindowSizeAsync();
             _isExit = true;
+            TrayIcon.Dispose();
             Close();
         }
     }
@@ -796,6 +813,33 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         try
         {
             var localSettings = App.GetService<ILocalSettingsService>();
+
+            var accepted = await localSettings.ReadSettingAsync("UserAgreementAccepted");
+            if (accepted == null || !Convert.ToBoolean(accepted))
+            {
+                Width = 850;
+                Height = 560;
+                WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
+                AgreementFrame.Visibility = Visibility.Visible;
+                AgreementFrame.Navigate(typeof(Views.AgreementPage));
+                return;
+            }
+
+            await ApplyMainWindowSizeAsync(localSettings);
+        }
+        catch
+        {
+            Width = 850;
+            Height = 560;
+            WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
+        }
+    }
+
+    private async Task ApplyMainWindowSizeAsync(ILocalSettingsService? localSettings = null)
+    {
+        try
+        {
+            localSettings ??= App.GetService<ILocalSettingsService>();
             var saveEnabledObj = await localSettings.ReadSettingAsync("IsSaveWindowSizeEnabled");
 
             if (saveEnabledObj != null && Convert.ToBoolean(saveEnabledObj))
@@ -863,6 +907,24 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
 
     private async void NavigationView_Loaded(object sender, RoutedEventArgs e)
     {
+        bool isAccepted = false;
+        try
+        {
+            var accepted = await _localSettingsService.ReadSettingAsync("UserAgreementAccepted");
+            isAccepted = accepted != null && Convert.ToBoolean(accepted);
+        }
+        catch { }
+
+        if (!isAccepted)
+        {
+            return;
+        }
+
+        await PerformMainInitAsync();
+    }
+
+    private async Task PerformMainInitAsync()
+    {
         try
         {
             foreach (var item in NavigationView.MenuItems)
@@ -881,7 +943,7 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();
             await LoadMinWindowSizeLimitSettingAsync();
-            await CheckUserAgreementAsync();
+            ShowMainContent();
             _ = Task.Run(async () =>
             {
                 try
@@ -972,23 +1034,15 @@ private Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
         }
     }
 
-    private async Task CheckUserAgreementAsync()
-    {
-        try
-        {
-            var accepted = await _localSettingsService.ReadSettingAsync("UserAgreementAccepted");
-            var isAccepted = accepted != null && Convert.ToBoolean(accepted);
-            if (!isAccepted) ShowAgreementPage();
-            else ShowMainContent();
-        }
-        catch { ShowMainContent(); }
-    }
-
     private void ShowAgreementPage()
     {
         _isMainUiLoaded = false;
         SystemMessageBar.Visibility = Visibility.Collapsed;
         _networkMonitorService.Stop();
+
+        Width = 850;
+        Height = 560;
+        WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
 
         AgreementFrame.Visibility = Visibility.Visible;
         NavigationView.Visibility = Visibility.Collapsed;

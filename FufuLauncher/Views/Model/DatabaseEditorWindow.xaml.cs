@@ -36,8 +36,7 @@ namespace FufuLauncher.Views
         {
             InitializeComponent();
             
-            string folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher/ApplicationData");
-            _dbPath = Path.Combine(folderPath, "LocalSettings.db");
+            _dbPath = Helpers.AppPaths.LocalSettingsDb;
             
             SettingsListView.ItemsSource = SettingsItems;
             LoadData();

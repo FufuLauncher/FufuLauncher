@@ -820,7 +820,7 @@ private async Task ExecuteCheckinAsync()
             string cookie = "";
             try
             {
-                var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+                var path = Helpers.AppPaths.ConfigFile;
                 if (File.Exists(path))
                 {
                     var json = await File.ReadAllTextAsync(path);

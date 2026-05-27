@@ -45,7 +45,7 @@ namespace FufuLauncher.Views
 
             try
             {
-                string cacheDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "VerifyCache");
+                string cacheDir = Helpers.AppPaths.VerifyCacheDir;
                 var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText);
                 
                 await Task.Run(() => converter.RunVerificationAsync());

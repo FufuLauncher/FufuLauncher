@@ -106,8 +106,7 @@ namespace FufuLauncher.ViewModels
             _localSettingsService = localSettingsService;
             _dispatcherQueue = App.MainWindow.DispatcherQueue;
 
-            var localFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            _accountsFilePath = Path.Combine(localFolder, "FufuLauncher", "game_accounts.json");
+            _accountsFilePath = Helpers.AppPaths.GameAccountsFile;
 
             SelectGamePathCommand = new AsyncRelayCommand(SelectGamePathAsync);
             LoadAccountsCommand = new AsyncRelayCommand(LoadAccountsAsync);

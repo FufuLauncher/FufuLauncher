@@ -65,8 +65,9 @@ public partial class App : Application
     private static Microsoft.UI.Dispatching.DispatcherQueue _mainDispatcherQueue = null!;
     public App()
     {
-        string userDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "WebView2Data");
-        
+        Helpers.AppPaths.EnsureDirectories();
+
+        string userDataFolder = Path.Combine(Helpers.AppPaths.CacheDir, "WebView2Data");
         Environment.SetEnvironmentVariable("WEBVIEW2_USER_DATA_FOLDER", userDataFolder);
 
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
@@ -280,7 +281,7 @@ public partial class App : Application
 
         try
         {
-            var logPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "CrashLog.txt");
+            var logPath = Path.Combine(Helpers.AppPaths.RootDir, "CrashLog.txt");
             Directory.CreateDirectory(Path.GetDirectoryName(logPath)!);
 
             var log = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] {source}\n" +

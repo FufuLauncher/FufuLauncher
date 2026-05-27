@@ -85,7 +85,7 @@ public partial class AccountViewModel : ObservableRecipient
         {
             var activeFileObj = await _localSettingsService.ReadSettingAsync("ActiveConfigFile");
             string activeFile = activeFileObj?.ToString() ?? "config.json";
-            var configPath = Path.Combine(AppContext.BaseDirectory, activeFile);
+            var configPath = Path.Combine(Helpers.AppPaths.DataDir, activeFile);
 
             if (File.Exists(configPath))
             {
@@ -127,7 +127,7 @@ public partial class AccountViewModel : ObservableRecipient
             StatusMessage = loadingMsg;
             var activeFileObj = await _localSettingsService.ReadSettingAsync("ActiveConfigFile");
             string activeFile = activeFileObj?.ToString() ?? "config.json";
-            var configPath = Path.Combine(AppContext.BaseDirectory, activeFile);
+            var configPath = Path.Combine(Helpers.AppPaths.DataDir, activeFile);
 
             if (!File.Exists(configPath)) return;
 
@@ -240,7 +240,7 @@ public partial class AccountViewModel : ObservableRecipient
     {
         SavedAccounts.Clear();
         _accountFileMap.Clear();
-        var baseDir = AppContext.BaseDirectory;
+        var baseDir = Helpers.AppPaths.DataDir;
         
         var filesToTry = Directory.GetFiles(baseDir, "config*.json").ToList();
         
@@ -299,7 +299,7 @@ public partial class AccountViewModel : ObservableRecipient
     {
         if (CurrentAccount == null || string.IsNullOrEmpty(CurrentAccount.GameUid)) return;
 
-        var baseDir = AppContext.BaseDirectory;
+        var baseDir = Helpers.AppPaths.DataDir;
         var mainConfigPath = Path.Combine(baseDir, "config.json");
 
         if (File.Exists(mainConfigPath))
@@ -338,7 +338,7 @@ public partial class AccountViewModel : ObservableRecipient
         await _localSettingsService.SaveSettingAsync("ActiveConfigFile", "config.json");
         await _localSettingsService.SaveSettingAsync("IsInternationalAccount", false);
         
-        var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+        var configPath = Path.Combine(Helpers.AppPaths.DataDir, "config.json");
         if (File.Exists(configPath)) File.Delete(configPath);
 
         CurrentAccount = null;
@@ -355,7 +355,7 @@ public partial class AccountViewModel : ObservableRecipient
         {
             await ArchiveCurrentAccountAsync();
             
-            var baseDir = AppContext.BaseDirectory;
+            var baseDir = Helpers.AppPaths.DataDir;
             string sourceFile = _accountFileMap[targetAccount.GameUid];
             string sourcePath = Path.Combine(baseDir, sourceFile);
             string mainConfigPath = Path.Combine(baseDir, "config.json");
@@ -412,7 +412,7 @@ public partial class AccountViewModel : ObservableRecipient
 
             var activeFileObj = await _localSettingsService.ReadSettingAsync("ActiveConfigFile");
             string activeFile = activeFileObj?.ToString() ?? "config.json";
-            var configPath = Path.Combine(AppContext.BaseDirectory, activeFile);
+            var configPath = Path.Combine(Helpers.AppPaths.DataDir, activeFile);
             
             Debug.WriteLine($"[LoginAsync] 准备保存数据，当前 ActiveConfigFile: {activeFile}, 路径: {configPath}, 文件是否存在: {File.Exists(configPath)}");
 
@@ -460,7 +460,7 @@ public partial class AccountViewModel : ObservableRecipient
 
         var activeFileObj = await _localSettingsService.ReadSettingAsync("ActiveConfigFile");
         string activeFile = activeFileObj?.ToString() ?? "config.json";
-        var configPath = Path.Combine(AppContext.BaseDirectory, activeFile);
+        var configPath = Path.Combine(Helpers.AppPaths.DataDir, activeFile);
 
         Debug.WriteLine($"========== [LoadUserInfo] 开始加载 ==========");
         Debug.WriteLine($"[LoadUserInfo] 目标配置文件: {activeFile}");
@@ -547,7 +547,7 @@ public partial class AccountViewModel : ObservableRecipient
     {
         try
         {
-            var baseDir = AppContext.BaseDirectory;
+            var baseDir = Helpers.AppPaths.DataDir;
             
             var isOsObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
             bool isOs = isOsObj is bool b && b;

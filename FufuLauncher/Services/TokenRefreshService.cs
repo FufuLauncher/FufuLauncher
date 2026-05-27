@@ -39,7 +39,7 @@ public class TokenRefreshService
     {
         try
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+            var path = Helpers.AppPaths.ConfigFile;
             if (!File.Exists(path))
             {
                 if (isManual) SendErrorNotification("未找到配置文件");

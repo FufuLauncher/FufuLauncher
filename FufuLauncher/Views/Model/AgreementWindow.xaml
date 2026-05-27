@@ -1,0 +1,41 @@
+<windowex:WindowEx
+    x:Class="FufuLauncher.Views.AgreementWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:windowex="using:WinUIEx"
+    Title="用户协议"
+    Width="800"
+    Height="550"
+    MinWidth="800"
+    MinHeight="550"
+    IsMaximizable="False"
+    IsMinimizable="False"
+    IsResizable="False">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Height="32"
+              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+              BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+              BorderThickness="0,0,0,1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Width="16" Height="16" Margin="12,0,0,0"
+                   Source="/Assets/WindowIcon.ico" VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Column="1" Text="用户协议"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       VerticalAlignment="Center" Margin="12,0,0,0"
+                       Opacity="0.8"/>
+        </Grid>
+
+        <Frame x:Name="ContentFrame" Grid.Row="1"/>
+    </Grid>
+</windowex:WindowEx>

@@ -120,7 +120,7 @@ public sealed partial class LoginQrWindow : Window
 
                         if (config != null)
                         {
-                            var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+                            var path = Helpers.AppPaths.ConfigFile;
                             var dir = Path.GetDirectoryName(path);
                             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                                 Directory.CreateDirectory(dir);
@@ -367,7 +367,7 @@ public sealed partial class LoginQrWindow : Window
     {
         try
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "config.lab.json");
+            var path = Helpers.AppPaths.ConfigLabFile;
             var dir = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
@@ -1042,7 +1042,7 @@ public sealed partial class LoginQrWindow : Window
     {
         try
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "config.json");
+            var path = Helpers.AppPaths.ConfigFile;
             var dir = Path.GetDirectoryName(path);
             if (!string.IsNullOrEmpty(dir) && !Directory.Exists(dir))
                 Directory.CreateDirectory(dir);

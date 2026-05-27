@@ -12,9 +12,7 @@ namespace FufuLauncher.Services
         private const string _defaultApplicationDataFolder = "FufuLauncher/ApplicationData";
         private const string _defaultLocalSettingsDb = "LocalSettings.db";
 
-        private readonly string _localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        private readonly string _applicationDataFolder;
-        private readonly string _dbPath;
+        private string _dbPath => Helpers.AppPaths.LocalSettingsDb;
 
         private Dictionary<string, string> _settings;
         private bool _isInitialized = false;
@@ -33,8 +31,6 @@ namespace FufuLauncher.Services
 
         public LocalSettingsService()
         {
-            _applicationDataFolder = Path.Combine(_localApplicationData, _defaultApplicationDataFolder);
-            _dbPath = Path.Combine(_applicationDataFolder, _defaultLocalSettingsDb);
             _settings = new Dictionary<string, string>();
 
             _jsonOptions = new JsonSerializerOptions
@@ -52,7 +48,7 @@ namespace FufuLauncher.Services
                 
                 try
                 {
-                    Directory.CreateDirectory(_applicationDataFolder);
+                    Directory.CreateDirectory(Path.GetDirectoryName(_dbPath)!);
                 }
                 catch (Exception ex)
                 {
@@ -135,7 +131,7 @@ namespace FufuLauncher.Services
         {
             try
             {
-                using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
                 await connection.OpenAsync();
                 
                 var command = connection.CreateCommand();
@@ -177,7 +173,7 @@ namespace FufuLauncher.Services
         {
             try
             {
-                using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
                 await connection.OpenAsync();
         
                 var command = connection.CreateCommand();
@@ -208,7 +204,7 @@ namespace FufuLauncher.Services
 
                 if (File.Exists(_dbPath))
                 {
-                    using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                    using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
                     await connection.OpenAsync();
                     
                     var command = connection.CreateCommand();
@@ -246,7 +242,7 @@ namespace FufuLauncher.Services
         {
             try
             {
-                using var connection = new SqliteConnection($"Data Source={_dbPath}");
+                using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
                 await connection.OpenAsync();
                 
                 var command = connection.CreateCommand();

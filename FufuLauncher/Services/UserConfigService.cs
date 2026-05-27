@@ -16,7 +16,7 @@ public class UserConfigService : IUserConfigService
 
     public UserConfigService()
     {
-        _configPath = Path.Combine(AppContext.BaseDirectory, "user.config.json");
+        _configPath = Path.Combine(Helpers.AppPaths.DataDir, "user.config.json");
     }
 
     public async Task<UserDisplayConfig> LoadDisplayConfigAsync()

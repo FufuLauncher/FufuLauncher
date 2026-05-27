@@ -90,20 +90,9 @@ public partial class GachaAnalysisModel : ObservableObject
     public GachaAnalysisModel(ILocalSettingsService localSettingsService)
     {
         _localSettingsService = localSettingsService;
-        var folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "fufu");
-        try
-        {
-            if (File.Exists(folder)) folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
-            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-        }
-        catch
-        {
-            folder = Path.Combine(AppContext.BaseDirectory, "fufu_data");
-            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-        }
 
-        _gachaDataPath = Path.Combine(folder, "gacha_data.json");
-        _dbConnectionString = $"Data Source={Path.Combine(folder, "metadata.db")}";
+        _gachaDataPath = Helpers.AppPaths.GachaDataFile;
+        _dbConnectionString = $"Data Source={Helpers.AppPaths.MetadataDb}";
         _gachaService = new GachaService();
     }
 
@@ -751,7 +740,7 @@ public partial class GachaAnalysisModel : ObservableObject
     [RelayCommand]
     private async Task FetchFromMiYouSheAsync()
     {
-        var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+        var configPath = Helpers.AppPaths.ConfigFile;
 
         if (!File.Exists(configPath))
         {
@@ -1195,7 +1184,7 @@ public partial class GachaAnalysisModel : ObservableObject
             string? cookie = null;
             try
             {
-                var configPath = Path.Combine(AppContext.BaseDirectory, "config.json");
+                var configPath = Helpers.AppPaths.ConfigFile;
                 if (File.Exists(configPath))
                 {
                     var configJson = await File.ReadAllTextAsync(configPath);

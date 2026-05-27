@@ -17,32 +17,7 @@ public partial class ControlPanelModel : ObservableObject
 
     public ControlPanelModel()
     {
-        var baseDocsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        var folder = Path.Combine(baseDocsFolder, "fufu");
-
-        try
-        {
-            if (File.Exists(folder))
-            {
-                folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
-            }
-            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-        }
-        catch
-        {
-            folder = Path.Combine(AppContext.BaseDirectory, "fufu_data");
-        }
-        
-        try 
-        {
-            if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-        }
-        catch 
-        {
-             folder = AppContext.BaseDirectory;
-        }
-        
-        _configPath = Path.Combine(folder, "FufuConfig.cfg");
+        _configPath = Helpers.AppPaths.FufuConfigFile;
         _cancellationTokenSource = new CancellationTokenSource();
         _playTimeData = new Dictionary<string, long>();
 

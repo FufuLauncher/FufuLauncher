@@ -53,7 +53,7 @@ namespace FufuLauncher.Views
 
             _ = _progressDialog.ShowAsync();
 
-            string cacheDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "ServerCache", Guid.NewGuid().ToString("N"));
+            string cacheDir = Path.Combine(Helpers.AppPaths.ServerCacheDir, Guid.NewGuid().ToString("N"));
 
             try
             {

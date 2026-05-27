@@ -23,7 +23,7 @@ namespace FufuLauncher.Views
     public sealed partial class BBSWindow : Window
     {
         private AppWindow m_AppWindow;
-        private string ConfigPath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
+        private string ConfigPath => Helpers.AppPaths.ConfigFile;
         
         private byte[] _screenshotBytes;
 

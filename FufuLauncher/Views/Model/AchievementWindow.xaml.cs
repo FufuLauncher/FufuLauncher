@@ -47,46 +47,7 @@ public sealed partial class AchievementWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         
-        string docPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "fufu");
-        
-        try
-        {
-            if (File.Exists(docPath))
-            {
-                Debug.WriteLine($"[异常标记] 存在与目标文件夹同名的文件: {docPath}。将切换到备用路径。");
-                docPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
-            }
-
-            if (!Directory.Exists(docPath)) 
-            {
-                Directory.CreateDirectory(docPath);
-            }
-        }
-        catch (FileNotFoundException fnfe)
-        {
-            Debug.WriteLine($"[异常标记] 找不到路径异常(成就窗口): {fnfe.Message}");
-            docPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fufu_data");
-        }
-        catch (UnauthorizedAccessException uae)
-        {
-            Debug.WriteLine($"[异常标记] 权限不足(成就窗口): {uae.Message}");
-            docPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher");
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[异常标记] 创建 fufu 文件夹发生未知错误(成就窗口): {ex.Message}");
-            docPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "fufu_data");
-        }
-        
-        try 
-        {
-            if (!Directory.Exists(docPath)) Directory.CreateDirectory(docPath);
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[严重异常] 备用文件夹创建依然失败: {ex.Message}");
-            docPath = AppDomain.CurrentDomain.BaseDirectory;
-        }
+        string docPath = Helpers.AppPaths.DataDir;
 
         _archivesDir = Path.Combine(docPath, "archives");
         try

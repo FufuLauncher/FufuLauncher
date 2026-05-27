@@ -47,18 +47,19 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     HorizontalAlignment="Center"
-                    Spacing="24"
-                    Padding="48"
+                    Spacing="8"
+                    Padding="24,16"
+                    MaxWidth="650"
                     Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
 
             <Image x:Name="IconImage"
                    Source="ms-appx:///Assets/icon.png"
-                   Width="64"
-                   Height="64"
+                   Width="52"
+                   Height="52"
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,8"
+                   Margin="0,0,0,2"
                    Opacity="0">
                 <Image.RenderTransform>
                     <TranslateTransform x:Name="IconTransform" Y="30"/>
@@ -67,7 +68,7 @@
 
             <TextBlock x:Name="TitleText"
                        Text="用户协议"
-                       FontSize="28"
+                       FontSize="20"
                        FontWeight="Bold"
                        HorizontalAlignment="Center"
                        Opacity="0">
@@ -77,10 +78,9 @@
             </TextBlock>
 
             <TextBlock x:Name="DescText"
-                       Text="欢迎使用芙芙启动器！在使用本软件之前，请仔细阅读并同意用户协议。"
-                       FontSize="14"
+                       Text="欢迎使用芙芙启动器！请仔细阅读以下协议内容。"
+                       FontSize="12"
                        TextWrapping="Wrap"
-                       MaxWidth="400"
                        HorizontalAlignment="Center"
                        TextAlignment="Center"
                        Opacity="0">
@@ -89,40 +89,55 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
 
-            <Grid x:Name="AgreementArea" 
-                  HorizontalAlignment="Center" 
-                  VerticalAlignment="Center"
-                  Opacity="0">
+            <Grid x:Name="AgreementArea" Opacity="0">
                 <Grid.RenderTransform>
                     <TranslateTransform x:Name="AgreementTransform" Y="30"/>
                 </Grid.RenderTransform>
                 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <CheckBox Grid.Column="0"
+                <ComboBox Grid.Row="0"
+                          HorizontalAlignment="Right"
+                          Margin="0,0,0,8"
+                          MinWidth="140"
+                          SelectedIndex="{x:Bind ViewModel.SelectedLanguageIndex, Mode=TwoWay}">
+                    <ComboBoxItem Content="简体中文"/>
+                    <ComboBoxItem Content="English"/>
+                    <ComboBoxItem Content="繁體中文"/>
+                </ComboBox>
+
+                <Border Grid.Row="1"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="6"
+                        Height="220">
+                    <ScrollViewer x:Name="AgreementScrollViewer" Padding="16,12" VerticalScrollBarVisibility="Auto" ViewChanged="OnAgreementScrollChanged">
+                        <TextBlock Text="{x:Bind ViewModel.AgreementText, Mode=OneWay}"
+                                   TextWrapping="Wrap"
+                                   FontSize="12.5"
+                                   LineHeight="20"
+                                   IsTextSelectionEnabled="True"/>
+                    </ScrollViewer>
+                </Border>
+
+                <CheckBox Grid.Row="2"
                           IsChecked="{x:Bind ViewModel.IsAgreementChecked, Mode=TwoWay}"
-                          VerticalAlignment="Center"
-                          Padding="0"
-                          Margin="0"
-                          MinWidth="0"/>
+                          IsEnabled="{x:Bind ViewModel.HasReadAgreement, Mode=OneWay}"
+                          Margin="0,8,0,0"
+                          Content="我已阅读并同意用户协议 (I have read and agree)"/>
 
-                <StackPanel Grid.Column="1" 
-                            Orientation="Horizontal" 
-                            VerticalAlignment="Center"
-                            Margin="8,0,0,0">
-                    <TextBlock Text="我已阅读并同意" 
-                               FontSize="14"
-                               VerticalAlignment="Center"/>
-                    <HyperlinkButton Content="用户协议(User Agreement)"
-                                     Command="{x:Bind ViewModel.ViewAgreementCommand}" 
-                                     Padding="0"
-                                     Margin="4,0,0,0"
-                                     VerticalAlignment="Center"
-                                     FontSize="14"/>
-                </StackPanel>
+                <TextBlock Grid.Row="3"
+                           Text="请滚动阅读完整协议后勾选同意"
+                           FontSize="11"
+                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                           Visibility="{x:Bind ViewModel.HintVisibility, Mode=OneWay}"
+                           Margin="28,2,0,0"/>
             </Grid>
         </StackPanel>
 
@@ -139,7 +154,11 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
-            <StackPanel Spacing="8">
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                <Image Source="ms-appx:///Assets/icon.png"
+                       Width="52" Height="52"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,4"/>
                 <TextBlock Text="为了确保显示效果，请确认下方图标是否正常显示"
                            FontSize="14"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -191,8 +210,70 @@
             </StackPanel>
         </StackPanel>
 
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Spacing="24"
+                    Padding="48"
+                    MaxWidth="560"
+                    Visibility="{x:Bind ViewModel.DataDirVisibility, Mode=OneWay}">
+            
+            <StackPanel.ChildrenTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True"/>
+                </TransitionCollection>
+            </StackPanel.ChildrenTransitions>
+
+            <Image Source="ms-appx:///Assets/icon.png"
+                   Width="52" Height="52"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,0"/>
+
+            <TextBlock Text="数据存储位置"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="您可以自定义数据和缓存的存储目录，或保持默认设置。"
+                       FontSize="12"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="用户数据目录" FontSize="13" FontWeight="SemiBold"/>
+                <Grid ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{x:Bind ViewModel.DataPath, Mode=OneWay}" IsReadOnly="True" FontSize="12"/>
+                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseDataPathCommand}" VerticalAlignment="Bottom" Padding="12,6"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="12">
+                <TextBlock Text="缓存目录" FontSize="13" FontWeight="SemiBold"/>
+                <Grid ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" Text="{x:Bind ViewModel.CachePath, Mode=OneWay}" IsReadOnly="True" FontSize="12"/>
+                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseCachePathCommand}" VerticalAlignment="Bottom" Padding="12,6"/>
+                </Grid>
+            </StackPanel>
+
+            <Button Content="确认并完成(Confirm)"
+                    Command="{x:Bind ViewModel.ConfirmDataDirCommand}"
+                    HorizontalAlignment="Center"
+                    Padding="24,8"
+                    CornerRadius="4"/>
+        </StackPanel>
+
         <Grid Grid.Row="1" 
-              Padding="24"
+              Padding="20,12"
               BorderThickness="1,1,0,0"
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
               Background="{ThemeResource LayerFillColorDefaultBrush}"
