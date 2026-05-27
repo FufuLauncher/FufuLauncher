@@ -28,6 +28,7 @@ public static class AppPaths
     public static string InventoryCacheFile => Path.Combine(DataDir, "inventory_cache.json");
     public static string ServerCacheDir => Path.Combine(CacheDir, "ServerCache");
     public static string VerifyCacheDir => Path.Combine(CacheDir, "VerifyCache");
+    public static string PluginPresetsDir => Path.Combine(DataDir, "PluginPresets");
 
     static AppPaths()
     {

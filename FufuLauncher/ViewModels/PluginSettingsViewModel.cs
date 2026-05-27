@@ -521,7 +521,7 @@ private async Task<bool> CheckHwidAuthorizationAsync()
             }
         }
         
-        _presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets", subDir);
+        _presetsDir = Path.Combine(AppPaths.PluginPresetsDir, subDir);
         
         if (!string.IsNullOrEmpty(_iniPath))
         {
@@ -545,7 +545,7 @@ private async Task<bool> CheckHwidAuthorizationAsync()
         _pluginDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FuFuPlugin");
         _iniPath = Path.Combine(_pluginDir, "config.ini");
         _dllPath = Path.Combine(_pluginDir, "FufuLauncher.UnlockerIsland.dll");
-        _presetsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Presets");
+        _presetsDir = AppPaths.PluginPresetsDir;
     
         _iniFile = new IniFile(_iniPath);
     
