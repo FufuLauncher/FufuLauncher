@@ -17,6 +17,85 @@ public sealed partial class AboutPage : Page
         InitializeComponent();
         var version = System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version;
         VersionText.Text = $"Version {version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}";
+
+        if (!httpClient.DefaultRequestHeaders.UserAgent.Any())
+        {
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0");
+        }
+
+        _ = LoadContributorsAsync();
+    }
+
+    private async Task LoadContributorsAsync()
+    {
+        try
+        {
+            string apiUrl = "https://api.github.com/repos/FufuLauncher/FufuLauncher/contributors";
+            var jsonDocument = await GetJsonFromUrl(apiUrl);
+            
+            if (jsonDocument.RootElement.ValueKind != JsonValueKind.Array)
+            {
+                string errorMessage = "API限制或返回结构异常";
+                if (jsonDocument.RootElement.ValueKind == JsonValueKind.Object &&
+                    jsonDocument.RootElement.TryGetProperty("message", out JsonElement messageElement))
+                {
+                    errorMessage = messageElement.GetString();
+                }
+                
+                Debug.WriteLine($"[LoadContributorsAsync] 获取贡献者失败: {errorMessage}");
+                ContributorsLoadingText.Text = "获取失败";
+                return;
+            }
+
+            var elements = jsonDocument.RootElement.EnumerateArray();
+
+            var allContributors = new List<(string Name, string Url)>();
+            foreach (var element in elements)
+            {
+                string login = element.GetProperty("login").GetString();
+                string url = element.GetProperty("html_url").GetString();
+                allContributors.Add((login, url));
+            }
+
+            var owner = allContributors.FirstOrDefault(c => c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrEmpty(owner.Name))
+            {
+                owner = ("CodeCubist", "https://github.com/CodeCubist");
+            }
+
+            var others = allContributors
+                .Where(c => !c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase))
+                .OrderBy(c => c.Name, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var sortedContributors = new List<(string Name, string Url)> { owner };
+            sortedContributors.AddRange(others);
+
+            ContributorsPanel.Children.Clear();
+
+            for (int i = 0; i < sortedContributors.Count; i++)
+            {
+                var contributor = sortedContributors[i];
+                HyperlinkButton btn = new()
+                {
+                    Content = contributor.Name,
+                    NavigateUri = new Uri(contributor.Url),
+                    HorizontalAlignment = HorizontalAlignment.Left,
+                    FontSize = 14
+                };
+                ContributorsPanel.Children.Add(btn);
+
+                if (i < sortedContributors.Count - 1)
+                {
+                    ContributorsPanel.Children.Add(new MenuFlyoutSeparator());
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[LoadContributorsAsync] 获取贡献者失败: {ex}");
+            ContributorsLoadingText.Text = "获取贡献者失败，请检查网络连接或 API 状态";
+        }
     }
 
     private async void ContactAuthor_Click(object sender, RoutedEventArgs e)
@@ -87,7 +166,7 @@ public sealed partial class AboutPage : Page
     {
         GetBuildFormActionsToggle.IsEnabled = false;
         GetBuildFormActionsToggle.Content = "正在获取...";
-        httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0");
+        
         try
         {
             var jsonString = await GetJsonFromUrl(ApiEndpoints.GithubWorkflowsApiUrl);
@@ -204,6 +283,7 @@ public sealed partial class AboutPage : Page
         Debug.WriteLine("[GetBuildFromActions] 从<" + url + ">获取到: " + responseContent);
         return JsonDocument.Parse(responseContent);
     }
+
     private async Task<string> PromptForTokenAsync()
     {
         TextBox tokenInput = new()
