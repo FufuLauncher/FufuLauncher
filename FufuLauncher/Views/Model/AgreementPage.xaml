@@ -154,7 +154,11 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
-            <StackPanel Spacing="8">
+            <StackPanel Spacing="8" HorizontalAlignment="Center">
+                <Image Source="ms-appx:///Assets/icon.png"
+                       Width="52" Height="52"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,4"/>
                 <TextBlock Text="为了确保显示效果，请确认下方图标是否正常显示"
                            FontSize="14"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -219,6 +223,11 @@
                     <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True"/>
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
+
+            <Image Source="ms-appx:///Assets/icon.png"
+                   Width="52" Height="52"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,0"/>
 
             <TextBlock Text="数据存储位置"
                        FontSize="18"
