@@ -6,9 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:FufuLauncher.Views"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    FontFamily="{StaticResource AppGlobalFont}"> <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
@@ -16,52 +15,42 @@
 
         <Grid x:Name="AppTitleBar" x:FieldModifier="public" Background="Transparent" Grid.Row="0"/>
 
-        <Grid Grid.Row="1" Padding="40 20 40 20">
-            <Grid.RowDefinitions>
+        <Grid Grid.Row="1" Padding="40 20 40 20"> <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="240"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="240"/> <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="16">
                     <Image Source="/Assets/WindowIcon.ico" Width="80" Height="80" HorizontalAlignment="Left"/>
-                    <TextBlock Text="FufuLauncher" FontSize="28" FontWeight="Bold"/>
-                    <TextBlock x:Name="VersionText" Text="Version ..." FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                    <TextBlock Text="FufuLauncher" FontSize="28" FontWeight="Bold"/> <TextBlock x:Name="VersionText" Text="Version ..." FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                     <HyperlinkButton x:Name="GetBuildFormActionsToggle" Content="从Github Actions获取构建" Padding="0" Margin="0" HorizontalAlignment="Left" Click="GetBuildFormActions"/>
                 </StackPanel>
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
+                <Grid Grid.Column="1"> <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Text="贡献者名单" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Left" Margin="0,0,0,16"/>
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <TextBlock Grid.Row="0" Text="贡献者名单" Style="{ThemeResource SubtitleTextBlockStyle}" HorizontalAlignment="Left" Margin="0,0,0,16"/> <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                         <Grid>
                             <ProgressRing x:Name="ContributorsLoadingRing" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <StackPanel x:Name="ContributorsErrorPanel" Orientation="Vertical" Spacing="8" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
-                                <FontIcon Glyph="&#xE783;" FontSize="32" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock x:Name="ContributorsErrorText" Text="加载失败" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            <StackPanel x:Name="ContributorsErrorPanel" Orientation="Vertical" Spacing="8" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"> <FontIcon Glyph="&#xE783;" FontSize="32" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/> <TextBlock x:Name="ContributorsErrorText" Text="加载失败" FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
                             </StackPanel>
                             <StackPanel x:Name="ContributorsContentPanel" HorizontalAlignment="Center" Visibility="Collapsed" Padding="0,0,20,0">
-                                <Grid x:Name="ContributorsContainer"/>
-                            </StackPanel>
+                                <Grid x:Name="ContributorsContainer"/> </StackPanel>
                         </Grid>
-                    </ScrollViewer>
-                </Grid>
+                    </ScrollViewer> </Grid>
             </Grid>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="24" Margin="0,16,0,0">
                 <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/FufuLauncher/FufuLauncher"/>
                 <HyperlinkButton Content="反馈问题" NavigateUri="https://github.com/FufuLauncher/FufuLauncher/issues"/>
-                <HyperlinkButton Content="官方网站" NavigateUri="https://philia093.xyz"/>
-                <HyperlinkButton Content="联系作者" Click="ContactAuthor_Click"/>
+                <HyperlinkButton Content="官方网站" NavigateUri="https://philia093.xyz"/> <HyperlinkButton Content="联系作者" Click="ContactAuthor_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

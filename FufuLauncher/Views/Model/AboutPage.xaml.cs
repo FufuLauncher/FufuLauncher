@@ -1,10 +1,17 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Shapes;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Text;
 using Windows.ApplicationModel.DataTransfer;
 using FufuLauncher.Constants;
@@ -17,6 +24,7 @@ public class ContributorItem
     public string Name { get; set; }
     public string Url { get; set; }
     public string AvatarUrl { get; set; }
+    public int Contributions { get; set; }
 }
 
 public sealed partial class AboutPage : Page
@@ -69,18 +77,24 @@ public sealed partial class AboutPage : Page
                 string login = element.GetProperty("login").GetString();
                 string url = element.GetProperty("html_url").GetString();
                 string avatarUrl = element.GetProperty("avatar_url").GetString();
-                allContributors.Add(new ContributorItem { Name = login, Url = url, AvatarUrl = avatarUrl });
+                
+                int contributions = 0;
+                if (element.TryGetProperty("contributions", out JsonElement contElement))
+                {
+                    contributions = contElement.GetInt32();
+                }
+
+                allContributors.Add(new ContributorItem { Name = login, Url = url, AvatarUrl = avatarUrl, Contributions = contributions });
             }
 
             var owner = allContributors.FirstOrDefault(c => c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase));
             if (owner == null)
             {
-                owner = new ContributorItem { Name = "CodeCubist", Url = "https://github.com/CodeCubist", AvatarUrl = "https://avatars.githubusercontent.com/u/249788103?v=4" };
+                owner = new ContributorItem { Name = "CodeCubist", Url = "https://github.com/CodeCubist", AvatarUrl = "https://avatars.githubusercontent.com/u/249788103?v=4", Contributions = 999 };
             }
 
             var others = allContributors
                 .Where(c => !c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase))
-                //.OrderBy(c => c.Name, StringComparer.OrdinalIgnoreCase)
                 .ToList();
 
             var sortedContributors = new List<ContributorItem> { owner };
@@ -97,11 +111,59 @@ public sealed partial class AboutPage : Page
                 for (int j = i; j < Math.Min(i + 3, sortedContributors.Count); j++)
                 {
                     var contributor = sortedContributors[j];
-                    var button = new HyperlinkButton
+
+                    var flyout = new Flyout();
+                    var flyoutContentPanel = new StackPanel { Spacing = 12, Width = 260, Padding = new Thickness(8) };
+                    
+                    var flyoutHeaderPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
+                    var flyoutAvatar = new Ellipse { Width = 48, Height = 48 };
+                    flyoutAvatar.Fill = new ImageBrush { ImageSource = new BitmapImage(new Uri(contributor.AvatarUrl)), Stretch = Stretch.UniformToFill };
+                    var flyoutName = new TextBlock { Text = contributor.Name, FontSize = 16, FontWeight = FontWeights.Bold, VerticalAlignment = VerticalAlignment.Center };
+                    flyoutHeaderPanel.Children.Add(flyoutAvatar);
+                    flyoutHeaderPanel.Children.Add(flyoutName);
+
+                    var flyoutBio = new TextBlock { Text = "正在获取简介信息...", TextWrapping = TextWrapping.Wrap, Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"] };
+                    
+                    var openBrowserBtn = new Button { Content = "在外部浏览器中打开主页", HorizontalAlignment = HorizontalAlignment.Stretch };
+                    openBrowserBtn.Click += (s, e) =>
                     {
-                        NavigateUri = new Uri(contributor.Url),
+                        Process.Start(new ProcessStartInfo { FileName = contributor.Url, UseShellExecute = true });
+                    };
+
+                    flyoutContentPanel.Children.Add(flyoutHeaderPanel);
+                    flyoutContentPanel.Children.Add(flyoutBio);
+                    flyoutContentPanel.Children.Add(openBrowserBtn);
+                    flyout.Content = flyoutContentPanel;
+
+                    bool isBioLoaded = false;
+                    flyout.Opened += async (s, e) =>
+                    {
+                        if (isBioLoaded) return;
+                        try
+                        {
+                            var userJson = await GetJsonFromUrl($"https://api.github.com/users/{contributor.Name}");
+                            string bioStr = "该用户暂无简介。";
+                            if (userJson.RootElement.TryGetProperty("bio", out JsonElement bioElement) && bioElement.ValueKind != JsonValueKind.Null)
+                            {
+                                string rawBio = bioElement.GetString();
+                                if (!string.IsNullOrWhiteSpace(rawBio)) bioStr = rawBio;
+                            }
+                            flyoutBio.Text = $"贡献次数: {contributor.Contributions} 次\n\n简介: {bioStr}";
+                            isBioLoaded = true;
+                        }
+                        catch
+                        {
+                            flyoutBio.Text = $"贡献次数: {contributor.Contributions} 次\n\n简介加载失败。";
+                        }
+                    };
+
+                    var button = new Button
+                    {
                         Width = 100,
-                        Padding = new Thickness(4)
+                        Padding = new Thickness(4),
+                        Background = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                        BorderBrush = new SolidColorBrush(Microsoft.UI.Colors.Transparent),
+                        Flyout = flyout
                     };
 
                     var innerStackPanel = new StackPanel
@@ -115,7 +177,8 @@ public sealed partial class AboutPage : Page
                     {
                         Width = 48,
                         Height = 48,
-                        HorizontalAlignment = HorizontalAlignment.Center
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Opacity = 0
                     };
 
                     var imageBrush = new ImageBrush
@@ -123,7 +186,23 @@ public sealed partial class AboutPage : Page
                         ImageSource = new BitmapImage(new Uri(contributor.AvatarUrl)),
                         Stretch = Stretch.UniformToFill
                     };
+                    
                     ellipse.Fill = imageBrush;
+
+                    ellipse.Loaded += (s, e) =>
+                    {
+                        var animation = new DoubleAnimation
+                        {
+                            From = 0.0,
+                            To = 1.0,
+                            Duration = new Duration(TimeSpan.FromMilliseconds(500))
+                        };
+                        var storyboard = new Storyboard();
+                        storyboard.Children.Add(animation);
+                        Storyboard.SetTarget(animation, ellipse);
+                        Storyboard.SetTargetProperty(animation, "Opacity");
+                        storyboard.Begin();
+                    };
 
                     var textBlock = new TextBlock
                     {
