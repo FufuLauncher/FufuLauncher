@@ -49,10 +49,12 @@ public partial class GachaAnalysisModel : ObservableObject
     private List<GachaLogItem> _cachedCharacterLogs = new();
     private List<GachaLogItem> _cachedWeaponLogs = new();
     private List<GachaLogItem> _cachedChronicledLogs = new();
+    private List<GachaLogItem> _cachedNoviceLogs = new();
     private List<GachaLogItem> _cachedStandardLogs = new();
     private List<ScrapedMetadata> _savedMetadata = new();
     private string _currentUid = "";
     private int _refreshVersion;
+    private bool _analysisDashboardDirty = true;
 
     [ObservableProperty] private string _gachaUrl;
     [ObservableProperty] private string _crawlerStatus = "等待获取数据...";
@@ -99,6 +101,14 @@ public partial class GachaAnalysisModel : ObservableObject
     public const string AddNewUserItem = "＋ 添加新用户";
     [ObservableProperty] private bool _hasGachaData;
     [ObservableProperty] private bool _isDataLoaded;
+    [ObservableProperty] private bool _isOverviewSelected = true;
+    [ObservableProperty] private bool _isAnalysisLoading;
+    [ObservableProperty] private bool _isAnalysisReady;
+    [ObservableProperty] private GachaAnalysisDashboard _analysisDashboard = GachaAnalysisDashboard.Empty();
+
+    public bool IsAnalysisSelected => !IsOverviewSelected;
+    public bool ShowAnalysisLoading => IsAnalysisSelected && IsAnalysisLoading;
+    public bool ShowAnalysisContent => IsAnalysisSelected && IsAnalysisReady && !IsAnalysisLoading;
 
     public Action RequestMetadataScrapeAction;
     public Action<string> OnErrorAction;
@@ -332,6 +342,7 @@ public partial class GachaAnalysisModel : ObservableObject
         _cachedCharacterLogs.Clear();
         _cachedWeaponLogs.Clear();
         _cachedChronicledLogs.Clear();
+        _cachedNoviceLogs.Clear();
         _cachedStandardLogs.Clear();
 
         if (string.IsNullOrEmpty(uid)) return;
@@ -363,9 +374,10 @@ public partial class GachaAnalysisModel : ObservableObject
                 if (gt == "301") _cachedCharacterLogs.Add(item);
                 else if (gt == "302") _cachedWeaponLogs.Add(item);
                 else if (gt == "500") _cachedChronicledLogs.Add(item);
+                else if (gt == "100") _cachedNoviceLogs.Add(item);
                 else _cachedStandardLogs.Add(item);
             }
-            Debug.WriteLine($"[Gacha] 加载完成 UID={uid}: 角色{_cachedCharacterLogs.Count} 武器{_cachedWeaponLogs.Count} 集录{_cachedChronicledLogs.Count} 常驻{_cachedStandardLogs.Count}");
+            Debug.WriteLine($"[Gacha] 加载完成 UID={uid}: 角色{_cachedCharacterLogs.Count} 武器{_cachedWeaponLogs.Count} 集录{_cachedChronicledLogs.Count} 新手{_cachedNoviceLogs.Count} 常驻{_cachedStandardLogs.Count}");
         }
         catch (Exception ex)
         {
@@ -378,7 +390,7 @@ public partial class GachaAnalysisModel : ObservableObject
         if (string.IsNullOrEmpty(_currentUid)) { Debug.WriteLine("[Gacha] SaveGachaLogsToDb: _currentUid 为空，跳过保存"); return; }
         try
         {
-                var totalBefore = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedStandardLogs.Count;
+                var totalBefore = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
             Debug.WriteLine($"[Gacha] SaveGachaLogsToDb: 开始保存 UID={_currentUid}, 共 {totalBefore} 条记录");
             using var connection = new SqliteConnection(_dbConnectionString);
             connection.Open();
@@ -424,9 +436,10 @@ public partial class GachaAnalysisModel : ObservableObject
             InsertItems(_cachedCharacterLogs);
             InsertItems(_cachedWeaponLogs);
             InsertItems(_cachedChronicledLogs);
+            InsertItems(_cachedNoviceLogs);
             InsertItems(_cachedStandardLogs);
             transaction.Commit();
-            Debug.WriteLine($"[Gacha] 保存完成 UID={_currentUid}: 角色{_cachedCharacterLogs.Count} 武器{_cachedWeaponLogs.Count} 常驻{_cachedStandardLogs.Count}");
+            Debug.WriteLine($"[Gacha] 保存完成 UID={_currentUid}: 角色{_cachedCharacterLogs.Count} 武器{_cachedWeaponLogs.Count} 集录{_cachedChronicledLogs.Count} 新手{_cachedNoviceLogs.Count} 常驻{_cachedStandardLogs.Count}");
         }
         catch (Exception ex)
         {
@@ -448,7 +461,7 @@ public partial class GachaAnalysisModel : ObservableObject
         App.MainWindow.DispatcherQueue.TryEnqueue(() =>
         {
             SelectedUid = uid;
-            if (_cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedStandardLogs.Count > 0)
+            if (_cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedStandardLogs.Count > 0)
             {
                 RefreshUIFromCache();
                 HasGachaData = true;
@@ -459,7 +472,9 @@ public partial class GachaAnalysisModel : ObservableObject
                 ClearCollections();
                 CharacterStats = new GachaStatistic { PoolName = "角色活动" };
                 WeaponStats = new GachaStatistic { PoolName = "武器活动" };
+                ChronicledStats = new GachaStatistic { PoolName = "集录祈愿" };
                 StandardStats = new GachaStatistic { PoolName = "常驻祈愿" };
+                InvalidateAnalysisDashboard();
                 HasGachaData = false;
                 CrawlerStatus = "该账号暂无抽卡记录";
             }
@@ -528,6 +543,8 @@ public partial class GachaAnalysisModel : ObservableObject
                 _currentUid = "";
                 _cachedCharacterLogs.Clear();
                 _cachedWeaponLogs.Clear();
+                _cachedChronicledLogs.Clear();
+                _cachedNoviceLogs.Clear();
                 _cachedStandardLogs.Clear();
 
                 _ = _localSettingsService.SaveSettingAsync(LastSelectedUidKey, "");
@@ -538,7 +555,9 @@ public partial class GachaAnalysisModel : ObservableObject
                     ClearCollections();
                     CharacterStats = new GachaStatistic { PoolName = "角色活动" };
                     WeaponStats = new GachaStatistic { PoolName = "武器活动" };
+                    ChronicledStats = new GachaStatistic { PoolName = "集录祈愿" };
                     StandardStats = new GachaStatistic { PoolName = "常驻祈愿" };
+                    InvalidateAnalysisDashboard();
                     GachaUrl = string.Empty;
                     HasGachaData = false;
                     SelectedUid = "";
@@ -747,6 +766,7 @@ public partial class GachaAnalysisModel : ObservableObject
                 ChronicledFourStars = chronicledFour;
                 StandardFiveStars = standardFive;
                 StandardFourStars = standardFour;
+                InvalidateAnalysisDashboard();
 
                 // 通知相关属性更新
                 OnPropertyChanged(nameof(ShowCharacterNoRecords));
@@ -759,9 +779,391 @@ public partial class GachaAnalysisModel : ObservableObject
                 OnPropertyChanged(nameof(ShowStandardFourDivider));
 
                 if (_savedMetadata != null && _savedMetadata.Count > 0) _ = ApplyMetadataToUIAsync(_savedMetadata);
+                if (IsAnalysisSelected) _ = EnsureAnalysisDashboardAsync();
             });
         });
     }
+
+    public async Task ShowOverviewAsync()
+    {
+        IsOverviewSelected = true;
+        await Task.CompletedTask;
+    }
+
+    public async Task ShowAnalysisAsync()
+    {
+        IsOverviewSelected = false;
+        await EnsureAnalysisDashboardAsync();
+    }
+
+    private async Task EnsureAnalysisDashboardAsync()
+    {
+        if (IsAnalysisLoading) return;
+        if (IsAnalysisReady && !_analysisDashboardDirty) return;
+
+        var version = _refreshVersion;
+        var charLogs = _cachedCharacterLogs.OrderBy(x => x.Id).ToList();
+        var weaponLogs = _cachedWeaponLogs.OrderBy(x => x.Id).ToList();
+        var chronicledLogs = _cachedChronicledLogs.OrderBy(x => x.Id).ToList();
+        var noviceLogs = _cachedNoviceLogs.OrderBy(x => x.Id).ToList();
+        var standardLogs = _cachedStandardLogs.OrderBy(x => x.Id).ToList();
+
+        IsAnalysisLoading = true;
+        IsAnalysisReady = false;
+        AnalysisDashboard = GachaAnalysisDashboard.Empty();
+
+        try
+        {
+            var dashboard = await Task.Run(() => BuildAnalysisDashboard(charLogs, weaponLogs, chronicledLogs, noviceLogs, standardLogs));
+
+            if (_refreshVersion == version)
+            {
+                AnalysisDashboard = dashboard;
+                _analysisDashboardDirty = false;
+                IsAnalysisReady = true;
+            }
+        }
+        finally
+        {
+            IsAnalysisLoading = false;
+        }
+    }
+
+    private void InvalidateAnalysisDashboard()
+    {
+        _analysisDashboardDirty = true;
+        IsAnalysisReady = false;
+        AnalysisDashboard = GachaAnalysisDashboard.Empty();
+    }
+
+    private GachaAnalysisDashboard BuildAnalysisDashboard(
+        List<GachaLogItem> charLogs,
+        List<GachaLogItem> weaponLogs,
+        List<GachaLogItem> chronicledLogs,
+        List<GachaLogItem> noviceLogs,
+        List<GachaLogItem> standardLogs)
+    {
+        var allLogs = charLogs
+            .Concat(weaponLogs)
+            .Concat(chronicledLogs)
+            .Concat(noviceLogs)
+            .Concat(standardLogs)
+            .OrderBy(x => x.Id)
+            .ToList();
+
+        if (allLogs.Count == 0) return GachaAnalysisDashboard.Empty();
+
+        var totalCount = allLogs.Count;
+        var fiveStarCount = allLogs.Count(x => x.RankType == "5");
+        var fourStarCount = allLogs.Count(x => x.RankType == "4");
+        var threeStarCount = totalCount - fiveStarCount - fourStarCount;
+        var primogems = totalCount * 160;
+        var fiveStarRate = FormatRate(fiveStarCount, totalCount);
+        var fourStarRate = FormatRate(fourStarCount, totalCount);
+        var averageCharacterPities = CalculateFiveStarCharacterPities(charLogs, weaponLogs, chronicledLogs, noviceLogs, standardLogs);
+        var averageCharacterPulls = averageCharacterPities.Count == 0 ? 0 : averageCharacterPities.Average();
+        var fiveStarTimeline = BuildFiveStarTimeline(charLogs, "角色活动")
+            .Concat(BuildFiveStarTimeline(weaponLogs, "武器活动"))
+            .Concat(BuildFiveStarTimeline(chronicledLogs, "集录祈愿"))
+            .Concat(BuildFiveStarTimeline(noviceLogs, "新手祈愿"))
+            .Concat(BuildFiveStarTimeline(standardLogs, "常驻祈愿"))
+            .OrderBy(x => x.Time)
+            .ToList();
+        var averageFiveStarPulls = fiveStarTimeline.Count == 0 ? 0 : fiveStarTimeline.Average(x => x.Pity);
+        var bestFiveStar = fiveStarTimeline.OrderBy(x => x.Pity).FirstOrDefault();
+        var worstFiveStar = fiveStarTimeline.OrderByDescending(x => x.Pity).FirstOrDefault();
+
+        var currentPities = new[]
+        {
+            ("角色活动", CalculateCurrentFiveStarPity(charLogs)),
+            ("武器活动", CalculateCurrentFiveStarPity(weaponLogs)),
+            ("集录祈愿", CalculateCurrentFiveStarPity(chronicledLogs)),
+            ("新手祈愿", CalculateCurrentFiveStarPity(noviceLogs)),
+            ("常驻祈愿", CalculateCurrentFiveStarPity(standardLogs))
+        };
+        var deepestPity = currentPities.OrderByDescending(x => x.Item2).First();
+
+        var monthlyGroups = allLogs
+            .Select(x => TryParseTime(x.Time, out var dt) ? dt : (DateTime?)null)
+            .Where(x => x.HasValue)
+            .Select(x => x.Value)
+            .GroupBy(x => x.ToString("yyyy-MM"))
+            .OrderBy(x => x.Key)
+            .ToList();
+        var activeMonthCount = monthlyGroups.Count;
+        var monthlyAveragePulls = activeMonthCount == 0 ? 0 : monthlyGroups.Average(x => x.Count());
+        var busiestMonth = monthlyGroups.OrderByDescending(x => x.Count()).ThenByDescending(x => x.Key).FirstOrDefault();
+
+        var groupedByTime = allLogs
+            .Where(x => !string.IsNullOrWhiteSpace(x.Time))
+            .GroupBy(x => $"{GetNormalizedGachaType(x.GachaType)}|{x.Time}")
+            .ToList();
+        var tenPullGroups = groupedByTime.Where(x => x.Count() >= 10).ToList();
+        var singlePullGroups = groupedByTime.Where(x => x.Count() == 1).ToList();
+        var tenPullGoldCount = tenPullGroups.Count(x => x.Any(i => i.RankType == "5"));
+        var singlePullGoldCount = singlePullGroups.Count(x => x.Any(i => i.RankType == "5"));
+
+        var dashboard = new GachaAnalysisDashboard
+        {
+            TenPullCount = tenPullGroups.Count,
+            TenPullGoldCount = tenPullGoldCount,
+            TenPullGoldRateText = FormatRate(tenPullGoldCount, tenPullGroups.Count),
+            SinglePullCount = singlePullGroups.Count,
+            SinglePullGoldCount = singlePullGoldCount,
+            SinglePullGoldRateText = FormatRate(singlePullGoldCount, singlePullGroups.Count),
+            AverageFiveStarCharacterPulls = averageCharacterPulls,
+            AverageFiveStarCharacterPullsText = averageCharacterPulls <= 0 ? "0" : averageCharacterPulls.ToString("0.#"),
+            AverageFiveStarCharacterPrimogems = (int)Math.Round(averageCharacterPulls * 160),
+            AverageFiveStarCharacterPrimogemsText = averageCharacterPulls <= 0 ? "0" : ((int)Math.Round(averageCharacterPulls * 160)).ToString("N0"),
+            AverageFiveStarPullsText = averageFiveStarPulls <= 0 ? "0" : averageFiveStarPulls.ToString("0.#"),
+            CurrentDeepestPityText = $"{deepestPity.Item2} 抽",
+            CurrentDeepestPityHint = deepestPity.Item2 <= 0 ? "暂无五星垫数" : $"当前最深：{deepestPity.Item1}",
+            BestFiveStarPityText = fiveStarTimeline.Count == 0 ? "0 抽" : $"{bestFiveStar.Pity} 抽",
+            BestFiveStarPityHint = fiveStarTimeline.Count == 0 ? "暂无五星记录" : $"{bestFiveStar.PoolName} · {bestFiveStar.Name}",
+            WorstFiveStarPityText = fiveStarTimeline.Count == 0 ? "0 抽" : $"{worstFiveStar.Pity} 抽",
+            WorstFiveStarPityHint = fiveStarTimeline.Count == 0 ? "暂无五星记录" : $"{worstFiveStar.PoolName} · {worstFiveStar.Name}",
+            ActiveMonthCountText = activeMonthCount.ToString(),
+            MonthlyAveragePullsText = monthlyAveragePulls <= 0 ? "0" : monthlyAveragePulls.ToString("0.#"),
+            BusiestMonthText = busiestMonth == null ? "暂无" : busiestMonth.Key,
+            BusiestMonthPullsText = busiestMonth == null ? "0 抽" : $"{busiestMonth.Count()} 抽",
+            DateRangeText = BuildDateRangeText(allLogs)
+        };
+
+        dashboard.KpiItems = new ObservableCollection<GachaKpiItem>
+        {
+            new GachaKpiItem { Glyph = "\uE8EF", Label = "总抽数", Value = totalCount.ToString(), Hint = $"约 {primogems:N0} 原石" },
+            new GachaKpiItem { Glyph = "\uE8C7", Label = "原石估算", Value = primogems.ToString("N0"), Hint = "按每抽 160 原石" },
+            new GachaKpiItem { Glyph = "\uE735", Label = "五星出货", Value = fiveStarCount.ToString(), Hint = fiveStarRate },
+            new GachaKpiItem { Glyph = "\uE734", Label = "四星出货", Value = fourStarCount.ToString(), Hint = fourStarRate },
+            new GachaKpiItem { Glyph = "\uE7C1", Label = "五星角色均耗", Value = $"{dashboard.AverageFiveStarCharacterPullsText} 抽", Hint = $"约 {dashboard.AverageFiveStarCharacterPrimogemsText} 原石" },
+            new GachaKpiItem { Glyph = "\uE7C1", Label = "五星均抽", Value = $"{dashboard.AverageFiveStarPullsText} 抽", Hint = "全部卡池五星" },
+            new GachaKpiItem { Glyph = "\uE8A5", Label = "当前最深垫数", Value = dashboard.CurrentDeepestPityText, Hint = dashboard.CurrentDeepestPityHint },
+            new GachaKpiItem { Glyph = "\uE74C", Label = "最欧五星", Value = dashboard.BestFiveStarPityText, Hint = dashboard.BestFiveStarPityHint },
+            new GachaKpiItem { Glyph = "\uE7BA", Label = "最非五星", Value = dashboard.WorstFiveStarPityText, Hint = dashboard.WorstFiveStarPityHint },
+            new GachaKpiItem { Glyph = "\uE787", Label = "活跃月份", Value = dashboard.ActiveMonthCountText, Hint = $"月均 {dashboard.MonthlyAveragePullsText} 抽" }
+        };
+
+        dashboard.PoolDistribution = BuildSharePoints(new[]
+        {
+            ("角色活动", (double)charLogs.Count, $"{charLogs.Count} 抽"),
+            ("武器活动", (double)weaponLogs.Count, $"{weaponLogs.Count} 抽"),
+            ("集录祈愿", (double)chronicledLogs.Count, $"{chronicledLogs.Count} 抽"),
+            ("新手祈愿", (double)noviceLogs.Count, $"{noviceLogs.Count} 抽"),
+            ("常驻祈愿", (double)standardLogs.Count, $"{standardLogs.Count} 抽")
+        });
+        dashboard.PoolPieSlices = BuildPieSlices(dashboard.PoolDistribution);
+
+        dashboard.RarityDistribution = BuildSharePoints(new[]
+        {
+            ("五星", (double)fiveStarCount, $"{fiveStarCount} 个"),
+            ("四星", (double)fourStarCount, $"{fourStarCount} 个"),
+            ("三星", (double)threeStarCount, $"{threeStarCount} 个")
+        });
+        dashboard.RarityPieSlices = BuildPieSlices(dashboard.RarityDistribution);
+
+        dashboard.RecentFiveStarPities = BuildRelativePoints(
+            fiveStarTimeline
+                .TakeLast(12)
+                .Select(x => (x.Name, (double)x.Pity, $"{x.Pity} 抽", $"{x.PoolName} · {FormatShortDate(x.TimeText)}")));
+
+        dashboard.FourStarTopItems = BuildRelativePoints(
+            allLogs
+                .Where(x => x.RankType == "4")
+                .GroupBy(x => string.IsNullOrWhiteSpace(x.Name) ? "未知四星" : x.Name)
+                .OrderByDescending(x => x.Count())
+                .ThenBy(x => x.Key)
+                .Take(10)
+                .Select(x => (x.Key, (double)x.Count(), $"{x.Count()} 次", "四星出货")));
+
+        dashboard.PityBuckets = BuildRelativePoints(
+            fiveStarTimeline
+                .GroupBy(x => GetPityBucket(x.Pity))
+                .Select(x => (x.Key.Label, (double)x.Count(), $"{x.Count()} 次", x.Key.Hint))
+                .OrderBy(x => GetPityBucketOrder(x.Item1)));
+
+        dashboard.MonthlyPulls = BuildRelativePoints(
+            monthlyGroups
+                .Select(x => (x.Key, (double)x.Count(), $"{x.Count()} 抽", "1-5星全部记录")));
+
+        return dashboard;
+    }
+
+    private const double AnalysisColumnMaxHeight = 132;
+
+    private static int CalculateCurrentFiveStarPity(List<GachaLogItem> logs)
+    {
+        var pity = 0;
+        foreach (var item in logs.OrderBy(x => x.Id))
+        {
+            pity++;
+            if (item.RankType == "5")
+                pity = 0;
+        }
+
+        return pity;
+    }
+
+    private static ObservableCollection<GachaChartPoint> BuildSharePoints(IEnumerable<(string Label, double Value, string Display)> values)
+    {
+        var list = values.ToList();
+        var total = list.Sum(x => x.Value);
+        return new ObservableCollection<GachaChartPoint>(list.Select((x, index) =>
+        {
+            var percentage = total <= 0 ? 0 : x.Value * 100 / total;
+            return new GachaChartPoint
+            {
+                Label = x.Label,
+                Value = x.Value,
+                Percentage = percentage,
+                BarWidth = ToColumnWidth(percentage),
+                BarHeight = ToColumnHeight(percentage),
+                DisplayValue = total <= 0 ? x.Display : $"{x.Display} · {percentage:0.#}%",
+                ColorIndex = index
+            };
+        }));
+    }
+
+    private static ObservableCollection<GachaChartPoint> BuildRelativePoints(IEnumerable<(string Label, double Value, string Display, string SubLabel)> values)
+    {
+        var list = values.ToList();
+        var max = list.Count == 0 ? 0 : list.Max(x => x.Value);
+        return new ObservableCollection<GachaChartPoint>(list.Select((x, index) =>
+        {
+            var percentage = max <= 0 ? 0 : Math.Max(4, x.Value * 100 / max);
+            return new GachaChartPoint
+            {
+                Label = x.Label,
+                SubLabel = x.SubLabel,
+                Value = x.Value,
+                Percentage = percentage,
+                BarWidth = ToColumnWidth(percentage),
+                BarHeight = ToColumnHeight(percentage),
+                DisplayValue = x.Display,
+                ColorIndex = index
+            };
+        }));
+    }
+
+    private static double ToColumnHeight(double percentage)
+    {
+        if (percentage <= 0) return 0;
+        return Math.Max(8, percentage / 100 * AnalysisColumnMaxHeight);
+    }
+
+    private static double ToColumnWidth(double percentage)
+    {
+        if (percentage <= 0) return 14;
+        return Math.Clamp(14 + percentage * 0.1, 16, 24);
+    }
+
+    private static ObservableCollection<GachaPieSlice> BuildPieSlices(IEnumerable<GachaChartPoint> points)
+    {
+        var slices = new ObservableCollection<GachaPieSlice>();
+        var visiblePoints = points.Where(x => x.Value > 0).ToList();
+        var total = visiblePoints.Sum(x => x.Value);
+        if (total <= 0) return slices;
+
+        double startAngle = -90;
+        for (var i = 0; i < visiblePoints.Count; i++)
+        {
+            var point = visiblePoints[i];
+            var sweepAngle = point.Value / total * 360;
+            if (i == visiblePoints.Count - 1)
+                sweepAngle = 270 - startAngle;
+
+            slices.Add(new GachaPieSlice
+            {
+                Label = point.Label,
+                DisplayValue = point.DisplayValue,
+                Percentage = point.Percentage,
+                StartAngle = startAngle,
+                SweepAngle = sweepAngle,
+                ColorIndex = point.ColorIndex
+            });
+
+            startAngle += sweepAngle;
+        }
+
+        return slices;
+    }
+
+    private static List<double> CalculateFiveStarCharacterPities(params List<GachaLogItem>[] logLists)
+    {
+        var pities = new List<double>();
+        foreach (var logs in logLists)
+        {
+            var pity = 0;
+            foreach (var item in logs.OrderBy(x => x.Id))
+            {
+                pity++;
+                if (item.RankType != "5") continue;
+
+                if (item.ItemType?.Contains("角色") == true
+                    || GetNormalizedGachaType(item.GachaType) is "100" or "301")
+                    pities.Add(pity);
+
+                pity = 0;
+            }
+        }
+        return pities;
+    }
+
+    private static List<(string Name, string PoolName, int Pity, DateTime Time, string TimeText)> BuildFiveStarTimeline(List<GachaLogItem> logs, string poolName)
+    {
+        var result = new List<(string Name, string PoolName, int Pity, DateTime Time, string TimeText)>();
+        var pity = 0;
+        foreach (var item in logs.OrderBy(x => x.Id))
+        {
+            pity++;
+            if (item.RankType != "5") continue;
+
+            result.Add((
+                string.IsNullOrWhiteSpace(item.Name) ? "未知五星" : item.Name,
+                poolName,
+                pity,
+                TryParseTime(item.Time, out var time) ? time : DateTime.MinValue,
+                item.Time ?? ""));
+            pity = 0;
+        }
+        return result;
+    }
+
+    private static string BuildDateRangeText(List<GachaLogItem> logs)
+    {
+        var dates = logs
+            .Select(x => TryParseTime(x.Time, out var dt) ? dt : (DateTime?)null)
+            .Where(x => x.HasValue)
+            .Select(x => x.Value)
+            .OrderBy(x => x)
+            .ToList();
+
+        if (dates.Count == 0) return "暂无时间记录";
+        return $"{dates.First():yyyy.MM.dd} - {dates.Last():yyyy.MM.dd}";
+    }
+
+    private static string FormatRate(int hit, int total) => total <= 0 ? "0%" : $"{hit * 100d / total:0.##}%";
+
+    private static bool TryParseTime(string time, out DateTime dateTime) => DateTime.TryParse(time, out dateTime);
+
+    private static string FormatShortDate(string time) => TryParseTime(time, out var dt) ? dt.ToString("MM.dd") : "未知";
+
+    private static (string Label, string Hint) GetPityBucket(int pity) => pity switch
+    {
+        <= 30 => ("1-30", "欧气区间"),
+        <= 60 => ("31-60", "中段出货"),
+        <= 75 => ("61-75", "接近软保底"),
+        <= 90 => ("76-90", "保底区间"),
+        _ => ("90+", "异常记录")
+    };
+
+    private static int GetPityBucketOrder(string label) => label switch
+    {
+        "1-30" => 0,
+        "31-60" => 1,
+        "61-75" => 2,
+        "76-90" => 3,
+        _ => 4
+    };
 
     [RelayCommand]
     private async Task SwitchUidAsync(string uid)
@@ -780,6 +1182,7 @@ public partial class GachaAnalysisModel : ObservableObject
         _cachedCharacterLogs.Clear();
         _cachedWeaponLogs.Clear();
         _cachedChronicledLogs.Clear();
+        _cachedNoviceLogs.Clear();
         _cachedStandardLogs.Clear();
 
         App.MainWindow.DispatcherQueue.TryEnqueue(() =>
@@ -790,6 +1193,7 @@ public partial class GachaAnalysisModel : ObservableObject
             WeaponStats = new GachaStatistic { PoolName = "武器活动" };
             ChronicledStats = new GachaStatistic { PoolName = "集录祈愿" };
             StandardStats = new GachaStatistic { PoolName = "常驻祈愿" };
+            InvalidateAnalysisDashboard();
             HasGachaData = false;
             CrawlerStatus = "等待获取数据...";
         });
@@ -883,14 +1287,19 @@ public partial class GachaAnalysisModel : ObservableObject
             foreach (var l in chronicledLogs) l.Uid = gameUid;
             _cachedChronicledLogs = MergeLogs(_cachedChronicledLogs, chronicledLogs);
 
-            CrawlerStatus = $"集录祈愿 {chronicledLogs.Count} 条，正在获取常驻祈愿记录...";
+            CrawlerStatus = $"集录祈愿 {chronicledLogs.Count} 条，正在获取新手祈愿记录...";
+            var noviceLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "100", count => OnProgress("新手祈愿", count));
+            foreach (var l in noviceLogs) l.Uid = gameUid;
+            _cachedNoviceLogs = MergeLogs(_cachedNoviceLogs, noviceLogs);
+
+            CrawlerStatus = $"新手祈愿 {noviceLogs.Count} 条，正在获取常驻祈愿记录...";
             var standardLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "200", count => OnProgress("常驻祈愿", count));
             foreach (var l in standardLogs) l.Uid = gameUid;
             _cachedStandardLogs = MergeLogs(_cachedStandardLogs, standardLogs);
 
-            FillMissingFieldsFromMetadata(charLogs, weaponLogs, chronicledLogs, standardLogs);
+            FillMissingFieldsFromMetadata(charLogs, weaponLogs, chronicledLogs, noviceLogs, standardLogs);
 
-            var total = charLogs.Count + weaponLogs.Count + chronicledLogs.Count + standardLogs.Count;
+            var total = charLogs.Count + weaponLogs.Count + chronicledLogs.Count + noviceLogs.Count + standardLogs.Count;
             CrawlerStatus = $"获取完成，共 {total} 条记录，正在检查图片资源...";
 
             RefreshUIFromCache();
@@ -916,7 +1325,12 @@ public partial class GachaAnalysisModel : ObservableObject
     {
         try
         {
-            var allLogs = _cachedCharacterLogs.Concat(_cachedWeaponLogs).Concat(_cachedChronicledLogs).Concat(_cachedStandardLogs).ToList();
+            var allLogs = _cachedCharacterLogs
+                .Concat(_cachedWeaponLogs)
+                .Concat(_cachedChronicledLogs)
+                .Concat(_cachedNoviceLogs)
+                .Concat(_cachedStandardLogs)
+                .ToList();
             if (allLogs.Count == 0)
             {
                 OnErrorAction?.Invoke("没有可导出的抽卡记录");
@@ -1095,13 +1509,14 @@ public partial class GachaAnalysisModel : ObservableObject
             _cachedCharacterLogs = MergeLogs(_cachedCharacterLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "301").ToList());
             _cachedWeaponLogs = MergeLogs(_cachedWeaponLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "302").ToList());
             _cachedChronicledLogs = MergeLogs(_cachedChronicledLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "500").ToList());
-            _cachedStandardLogs = MergeLogs(_cachedStandardLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) != "301" && GetNormalizedGachaType(x.GachaType) != "302" && GetNormalizedGachaType(x.GachaType) != "500").ToList());
+            _cachedNoviceLogs = MergeLogs(_cachedNoviceLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "100").ToList());
+            _cachedStandardLogs = MergeLogs(_cachedStandardLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "200").ToList());
 
             RefreshUIFromCache();
             HasGachaData = true;
             SaveGachaDataAsync();
 
-            var total = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedStandardLogs.Count;
+            var total = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
             CrawlerStatus = $"导入完成，共 {total} 条记录，正在检查图片资源...";
             IsScraping = true;
             RequestMetadataScrapeAction?.Invoke();
@@ -1206,10 +1621,13 @@ public partial class GachaAnalysisModel : ObservableObject
             CrawlerStatus = $"武器活动 {weaponLogs.Count} 条，正在获取集录祈愿记录...";
             var chronicledLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "500", count => OnProgress("集录祈愿", count));
 
-            CrawlerStatus = $"集录祈愿 {chronicledLogs.Count} 条，正在获取常驻祈愿记录...";
+            CrawlerStatus = $"集录祈愿 {chronicledLogs.Count} 条，正在获取新手祈愿记录...";
+            var noviceLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "100", count => OnProgress("新手祈愿", count));
+
+            CrawlerStatus = $"新手祈愿 {noviceLogs.Count} 条，正在获取常驻祈愿记录...";
             var standardLogs = await _gachaService.FetchGachaLogAsync(baseUrl, "200", count => OnProgress("常驻祈愿", count));
 
-            var allFetched = charLogs.Concat(weaponLogs).Concat(chronicledLogs).Concat(standardLogs).ToList();
+            var allFetched = charLogs.Concat(weaponLogs).Concat(chronicledLogs).Concat(noviceLogs).Concat(standardLogs).ToList();
             var fetchedUid = allFetched.FirstOrDefault(l => !string.IsNullOrEmpty(l.Uid))?.Uid ?? "";
 
             if (!await HandleUidMismatchAsync(fetchedUid)) { IsFetching = false; return; }
@@ -1219,11 +1637,12 @@ public partial class GachaAnalysisModel : ObservableObject
             _cachedCharacterLogs = MergeLogs(_cachedCharacterLogs, charLogs);
             _cachedWeaponLogs = MergeLogs(_cachedWeaponLogs, weaponLogs);
             _cachedChronicledLogs = MergeLogs(_cachedChronicledLogs, chronicledLogs);
+            _cachedNoviceLogs = MergeLogs(_cachedNoviceLogs, noviceLogs);
             _cachedStandardLogs = MergeLogs(_cachedStandardLogs, standardLogs);
 
-            FillMissingFieldsFromMetadata(charLogs, weaponLogs, chronicledLogs, standardLogs);
+            FillMissingFieldsFromMetadata(charLogs, weaponLogs, chronicledLogs, noviceLogs, standardLogs);
 
-            var total = charLogs.Count + weaponLogs.Count + chronicledLogs.Count + standardLogs.Count;
+            var total = charLogs.Count + weaponLogs.Count + chronicledLogs.Count + noviceLogs.Count + standardLogs.Count;
             CrawlerStatus = $"获取完成，共 {total} 条记录，正在检查图片资源...";
 
             RefreshUIFromCache();
@@ -1248,8 +1667,11 @@ public partial class GachaAnalysisModel : ObservableObject
         CharacterFourStars = new();
         WeaponFiveStars = new();
         WeaponFourStars = new();
+        ChronicledFiveStars = new();
+        ChronicledFourStars = new();
         StandardFiveStars = new();
         StandardFourStars = new();
+        InvalidateAnalysisDashboard();
     }
 
     private ObservableCollection<GachaDisplayItem> BuildDisplayCollection(List<FiveStarRecord> records, string typeHint, List<GachaPoolMetadata> pools = null)
@@ -1624,5 +2046,24 @@ public partial class GachaAnalysisModel : ObservableObject
     {
         OnPropertyChanged(nameof(ShowStandardNoRecords));
         OnPropertyChanged(nameof(ShowStandardFourDivider));
+    }
+
+    partial void OnIsOverviewSelectedChanged(bool value)
+    {
+        OnPropertyChanged(nameof(IsAnalysisSelected));
+        OnPropertyChanged(nameof(ShowAnalysisLoading));
+        OnPropertyChanged(nameof(ShowAnalysisContent));
+    }
+
+    partial void OnIsAnalysisLoadingChanged(bool value)
+    {
+        OnPropertyChanged(nameof(ShowAnalysisLoading));
+        OnPropertyChanged(nameof(ShowAnalysisContent));
+    }
+
+    partial void OnIsAnalysisReadyChanged(bool value)
+    {
+        OnPropertyChanged(nameof(ShowAnalysisLoading));
+        OnPropertyChanged(nameof(ShowAnalysisContent));
     }
 }
