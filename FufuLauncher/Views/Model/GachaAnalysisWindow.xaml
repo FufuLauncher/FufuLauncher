@@ -647,19 +647,34 @@
                                   ZoomMode="Disabled"
                                   Padding="0,0,16,16"
                                   Visibility="{Binding ViewModel.ShowAnalysisContent, Converter={StaticResource BoolToVisibilityConverter}}">
-                        <StackPanel Spacing="12" HorizontalAlignment="Stretch">
-                        <Grid>
-                            <StackPanel>
-                                <TextBlock Text="祈愿分析" FontSize="22" FontWeight="SemiBold"/>
-                                <TextBlock Text="{x:Bind ViewModel.AnalysisDashboard.DateRangeText, Mode=OneWay}"
-                                           FontSize="12"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                            </StackPanel>
-                            
-                        </Grid>
+                        
+                        <StackPanel x:Name="AnalysisExportTarget" Spacing="12" HorizontalAlignment="Stretch" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="16">
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="祈愿分析" FontSize="22" FontWeight="SemiBold"/>
+                                    <TextBlock Text="{x:Bind ViewModel.AnalysisDashboard.DateRangeText, Mode=OneWay}"
+                                               FontSize="12"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Spacing="8">
+                                    <Button Click="OnCopyAnalysisImageClick">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xE8C8;" FontSize="14"/>
+                                            <TextBlock Text="复制图片"/>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Click="OnSaveAnalysisImageClick">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xE74E;" FontSize="14"/>
+                                            <TextBlock Text="保存图片"/>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
 
-                        <ItemsControl ItemsSource="{x:Bind ViewModel.AnalysisDashboard.KpiItems, Mode=OneWay}"
-                                      ItemTemplate="{StaticResource GachaKpiTemplate}">
+                            <ItemsControl ItemsSource="{x:Bind ViewModel.AnalysisDashboard.KpiItems, Mode=OneWay}"
+                                          ItemTemplate="{StaticResource GachaKpiTemplate}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <views:GachaKpiPanel Columns="5" ColumnSpacing="10" RowSpacing="10"/>

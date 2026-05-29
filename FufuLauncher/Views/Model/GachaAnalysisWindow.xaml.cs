@@ -13,6 +13,12 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Windows.Foundation;
+using Windows.Graphics.Imaging;
+using Windows.Storage.Streams;
+using Windows.Storage.Pickers;
+using Windows.ApplicationModel.DataTransfer;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace FufuLauncher.Converters
 {
@@ -519,6 +525,94 @@ namespace FufuLauncher.Views
             if (sender is ScrollViewer scrollViewer)
             {
                 StretchChartContentToViewport(scrollViewer);
+            }
+        }
+        
+        private async Task<InMemoryRandomAccessStream> RenderElementToStreamAsync(UIElement element)
+        {
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(element);
+
+            var pixels = await renderTargetBitmap.GetPixelsAsync();
+            var stream = new InMemoryRandomAccessStream();
+            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+
+            encoder.SetPixelData(
+                BitmapPixelFormat.Bgra8,
+                BitmapAlphaMode.Premultiplied,
+                (uint)renderTargetBitmap.PixelWidth,
+                (uint)renderTargetBitmap.PixelHeight,
+                96,
+                96,
+                pixels.ToArray());
+
+            await encoder.FlushAsync();
+            return stream;
+        }
+
+        private async void ShowDialogMessage(string title, string content)
+        {
+            var dialog = new ContentDialog
+            {
+                Title = title,
+                Content = content,
+                CloseButtonText = "知道了",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = this.Content.XamlRoot
+            };
+            await dialog.ShowAsync();
+        }
+
+        private async void OnCopyAnalysisImageClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
+                var dataPackage = new DataPackage();
+                dataPackage.SetBitmap(RandomAccessStreamReference.CreateFromStream(stream));
+                Clipboard.SetContent(dataPackage);
+                Clipboard.Flush();
+
+                ShowDialogMessage("复制成功", "祈愿分析图片已复制到剪贴板。");
+            }
+            catch (Exception ex)
+            {
+                ShowDialogMessage("复制失败", $"详细信息: {ex.Message}");
+            }
+        }
+
+        private async void OnSaveAnalysisImageClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var savePicker = new FileSavePicker();
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+                WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+
+                savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+                savePicker.FileTypeChoices.Add("PNG 图片", new List<string> { ".png" });
+                savePicker.SuggestedFileName = $"祈愿分析_{ViewModel.SelectedUid}_{DateTime.Now:yyyyMMddHHmmss}";
+
+                var file = await savePicker.PickSaveFileAsync();
+                if (file == null) return;
+
+                var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
+                using var fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
+                using var reader = new DataReader(stream.GetInputStreamAt(0));
+                await reader.LoadAsync((uint)stream.Size);
+                var buffer = new byte[stream.Size];
+                reader.ReadBytes(buffer);
+                
+                using var dataWriter = new DataWriter(fileStream);
+                dataWriter.WriteBytes(buffer);
+                await dataWriter.StoreAsync();
+                await fileStream.FlushAsync();
+
+                ShowDialogMessage("保存成功", $"祈愿分析图片已保存至文件。");
+            }
+            catch (Exception ex)
+            {
+                ShowDialogMessage("保存失败", $"详细信息: {ex.Message}");
             }
         }
 
