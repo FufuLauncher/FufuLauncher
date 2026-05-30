@@ -41,5 +41,4 @@
 * 请在使用项目前安装 **.NET 8.0** 或以上任意版本和 **Webview2** 运行时
 * 本项目仅供学习交流使用，请支持官方正版游戏。
 
-![FufuLauncher](https://count.getloli.com/@FufuLauncher?name=FufuLauncher&theme=moebooru&padding=8&offset=0&align=top&scale=1&pixelated=1&darkmode=auto)
 [![Star History Chart](https://api.star-history.com/svg?repos=CodeCubist/FufuLauncher&type=date&legend=top-left)](https://www.star-history.com/#CodeCubist/FufuLauncher&type=date&legend=top-left)
