@@ -428,7 +428,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <Button Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Translation="0,0,32">
+                            <Button x:Name="BtnDownloadGame" Grid.Column="0" Click="DownloadGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
                                 <Button.Shadow>
                                     <ThemeShadow/>
                                 </Button.Shadow>
@@ -445,7 +445,7 @@
                                 </Grid>
                             </Button>
 
-                            <Button Grid.Column="1" Click="SwitchServer_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
+                            <Button x:Name="BtnSwitchServer" Grid.Column="1" Click="SwitchServer_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
                                 <Button.Shadow>
                                     <ThemeShadow/>
                                 </Button.Shadow>
@@ -496,7 +496,7 @@
                                 </Grid>
                             </Button>
                             
-                            <Button Grid.Row="1" Grid.Column="1" Click="VerifyGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
+                            <Button x:Name="BtnVerifyGame" Grid.Row="1" Grid.Column="1" Click="VerifyGame_Click" HorizontalAlignment="Stretch" Padding="16,12" Height="72" Background="{StaticResource SafeCardBrush}" BorderBrush="{StaticResource SafeBorderBrush}" BorderThickness="1" Translation="0,0,32">
                                 <Button.Shadow>
                                     <ThemeShadow/>
                                 </Button.Shadow>
