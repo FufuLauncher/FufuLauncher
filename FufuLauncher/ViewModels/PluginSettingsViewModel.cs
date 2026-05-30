@@ -224,7 +224,7 @@ public partial class PluginSettingsViewModel : ObservableObject
         {
             if (SelectedPluginIndex == 0) return "已被禁用，请启用主插件才能调试配置";
             if (SelectedPluginIndex == 1) return "已被禁用，请启用FPS插件才能调试插件配置";
-            if (SelectedPluginIndex == 2) return "已被禁用，开启后可替换千星奇域头像";
+            if (SelectedPluginIndex == 2) return "已被禁用，该插件存在安全风险，无法启用";
             return string.Empty;
         }
     }
@@ -417,7 +417,7 @@ public async Task TriggerBackgroundAuthCheckAsync()
             {
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
                     "认证未通过",
-                    "您需要进行认证后才可以使用头像替换插件",
+                    "已被禁用，该插件存在安全风险，无法启用",
                     NotificationType.Error,
                     6000
                 ));

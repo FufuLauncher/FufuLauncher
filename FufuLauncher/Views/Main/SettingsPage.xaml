@@ -137,7 +137,7 @@
                         <FontIcon Glyph="&#xE897;" FontFamily="Segoe MDL2 Assets"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="安全认证" Tag="SecurityAuthItem">
+                <NavigationViewItem Content="开发者许可认证" Tag="SecurityAuthItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE72E;" FontFamily="Segoe MDL2 Assets"/>
                     </NavigationViewItem.Icon>
@@ -742,10 +742,10 @@
 
                 <Border x:Name="SecurityAuthItem" Style="{StaticResource SettingsCardStyle}">
                     <StackPanel Spacing="10">
-                        <TextBlock Text="安全认证" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Text="通过安全认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.7"/>
+                        <TextBlock Text="开发者许可认证" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
+                        <TextBlock Text="通过开发者许可认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.7"/>
                         
-                        <Button Content="进行安全认证" 
+                        <Button Content="进行开发者许可认证" 
                                 HorizontalAlignment="Left"
                                 Padding="12,6"
                                 CornerRadius="6"
