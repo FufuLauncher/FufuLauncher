@@ -801,127 +801,162 @@ public void LoadConfiguration()
     }
 
     private void ManagePresets(Dictionary<string, Dictionary<string, string>> currentIniData)
-{
-    AvailablePresets.Clear();
-    var currentHash = GetTargetDllHash();
-    var stateFile = Path.Combine(_presetsDir, "active_state.json");
-    string activePresetId = string.Empty;
-
-    if (File.Exists(stateFile))
     {
-        try
+        AvailablePresets.Clear();
+        var currentHash = GetTargetDllHash();
+        var stateFile = Path.Combine(_presetsDir, "active_state.json");
+        string activePresetId = string.Empty;
+
+        if (File.Exists(stateFile))
         {
-            var stateContent = File.ReadAllText(stateFile);
-            var stateDict = JsonSerializer.Deserialize<Dictionary<string, string>>(stateContent);
-            if (stateDict != null && stateDict.TryGetValue("ActiveId", out var id))
+            try
             {
-                activePresetId = id;
+                var stateContent = File.ReadAllText(stateFile);
+                var stateDict = JsonSerializer.Deserialize<Dictionary<string, string>>(stateContent);
+                if (stateDict != null && stateDict.TryGetValue("ActiveId", out var id))
+                {
+                    activePresetId = id;
+                }
+            }
+            catch
+            {
             }
         }
-        catch
-        {
-        }
-    }
 
-    try
-    {
-        if (Directory.Exists(_presetsDir))
+        try
         {
-            var presetFiles = Directory.GetFiles(_presetsDir, "*.json").Where(f => !f.EndsWith("active_state.json"));
-            PresetModel activeModel = null;
-
-            foreach (var file in presetFiles)
+            if (Directory.Exists(_presetsDir))
             {
-                try
+                var presetFiles = Directory.GetFiles(_presetsDir, "*.json").Where(f => !f.EndsWith("active_state.json"));
+                PresetModel activeModel = null;
+
+                foreach (var file in presetFiles)
                 {
-                    var content = File.ReadAllText(file);
-                    var preset = JsonSerializer.Deserialize<PresetModel>(content);
-                    if (preset != null)
+                    try
                     {
-                        preset.FilePath = file;
-                        
-                        if (preset.DllHash != currentHash)
+                        var content = File.ReadAllText(file);
+                        var preset = JsonSerializer.Deserialize<PresetModel>(content);
+                        if (preset != null)
                         {
-                            if (IsAutoCreatePresetEnabled)
+                            preset.FilePath = file;
+                            
+                            bool presetModified = false;
+                            
+                            if (preset.ConfigData.Remove("General"))
                             {
-                                preset.IsLocked = true;
+                                presetModified = true;
+                            }
+                            
+                            foreach (var sectionKey in preset.ConfigData.Keys.ToList())
+                            {
+                                if (currentIniData.TryGetValue(sectionKey, out var currentSectionData))
+                                {
+                                    preset.ConfigData[sectionKey].TryGetValue("Name", out var presetName);
+                                    currentSectionData.TryGetValue("Name", out var currentName);
+                                    
+                                    if (presetName != currentName)
+                                    {
+                                        preset.ConfigData[sectionKey] = new Dictionary<string, string>(currentSectionData, StringComparer.OrdinalIgnoreCase);
+                                        presetModified = true;
+                                    }
+                                }
+                            }
+                            
+                            if (preset.DllHash != currentHash)
+                            {
+                                if (IsAutoCreatePresetEnabled)
+                                {
+                                    preset.IsLocked = true;
+                                }
+                                else
+                                {
+                                    preset.DllHash = currentHash;
+                                    preset.IsLocked = false;
+                                    SavePresetToFile(preset);
+                                }
                             }
                             else
                             {
-                                preset.DllHash = currentHash;
                                 preset.IsLocked = false;
-                                SavePresetToFile(preset);
+                                if (presetModified)
+                                {
+                                    SavePresetToFile(preset);
+                                }
+                            }
+
+                            AvailablePresets.Add(preset);
+
+                            if (preset.Id == activePresetId)
+                            {
+                                activeModel = preset;
                             }
                         }
-                        else
-                        {
-                            preset.IsLocked = false;
-                        }
-
-                        AvailablePresets.Add(preset);
-
-                        if (preset.Id == activePresetId)
-                        {
-                            activeModel = preset;
-                        }
                     }
+                    catch { }
                 }
-                catch { }
-            }
 
-            if (activeModel != null && activeModel.IsLocked)
-            {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "插件变更",
-                    "当前预设与最新插件版本不匹配，已自动生成新预设",
-                    NotificationType.Warning,
-                    5000
-                ));
-                activeModel = null;
-            }
+                if (activeModel != null && activeModel.IsLocked)
+                {
+                    WeakReferenceMessenger.Default.Send(new NotificationMessage(
+                        "插件变更",
+                        "当前预设与最新插件版本不匹配，已自动生成新预设",
+                        NotificationType.Warning,
+                        5000
+                    ));
+                    activeModel = null;
+                }
 
-            if (activeModel == null)
-            {
-                activeModel = CreateNewPreset($"默认预设_{DateTime.Now:yyyyMMdd_HHmmss}", currentIniData, currentHash);
-            }
+                if (activeModel == null)
+                {
+                    activeModel = CreateNewPreset($"默认预设_{DateTime.Now:yyyyMMdd_HHmmss}", currentIniData, currentHash);
+                }
 
-            CurrentPreset = activeModel;
-            SaveActiveState();
+                CurrentPreset = activeModel;
+                SaveActiveState();
 
-            try
-            {
-                _iniFile.UpdateMultiple(CurrentPreset.ConfigData);
-            }
-            catch (Exception ex)
-            {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "配置应用失败",
-                    $"无法将预设写入配置文件，请检查权限\n详细信息: {ex.Message}",
-                    NotificationType.Error,
-                    6000
-                ));
+                try
+                {
+                    _iniFile.UpdateMultiple(CurrentPreset.ConfigData);
+                }
+                catch (Exception ex)
+                {
+                    WeakReferenceMessenger.Default.Send(new NotificationMessage(
+                        "配置应用失败",
+                        $"无法将预设写入配置文件，请检查权限\n详细信息: {ex.Message}",
+                        NotificationType.Error,
+                        6000
+                    ));
+                }
             }
         }
+        catch (Exception ex)
+        {
+            WeakReferenceMessenger.Default.Send(new NotificationMessage(
+                "预设目录访问失败",
+                $"无法访问预设目录\n详细信息: {ex.Message}",
+                NotificationType.Error,
+                6000
+            ));
+        }
     }
-    catch (Exception ex)
-    {
-        WeakReferenceMessenger.Default.Send(new NotificationMessage(
-            "预设目录访问失败",
-            $"无法访问预设目录\n详细信息: {ex.Message}",
-            NotificationType.Error,
-            6000
-        ));
-    }
-}
 
     public PresetModel CreateNewPreset(string name, Dictionary<string, Dictionary<string, string>> data, string hash)
     {
+        var cleanData = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
+        foreach (var kvp in data)
+        {
+            if (!kvp.Key.Equals("General", StringComparison.OrdinalIgnoreCase))
+            {
+                cleanData[kvp.Key] = new Dictionary<string, string>(kvp.Value, StringComparer.OrdinalIgnoreCase);
+            }
+        }
+
         var preset = new PresetModel
         {
             Id = Guid.NewGuid().ToString(),
             Name = name,
             DllHash = hash,
-            ConfigData = data
+            ConfigData = cleanData
         };
 
         preset.FilePath = Path.Combine(_presetsDir, $"{preset.Id}.json");
@@ -972,6 +1007,8 @@ public void LoadConfiguration()
     private void OnSettingValueChanged(string section, string key, string value)
     {
         if (CurrentPreset == null) return;
+        
+        if (section.Equals("General", StringComparison.OrdinalIgnoreCase)) return;
 
         if (!CurrentPreset.ConfigData.ContainsKey(section))
         {
