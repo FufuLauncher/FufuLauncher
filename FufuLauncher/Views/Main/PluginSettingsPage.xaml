@@ -295,9 +295,6 @@
                                     <Button Content="提交PR" 
                                             Click="OnPullRequestsClick" 
                                             HorizontalAlignment="Stretch"/>
-                                    <Button Content="觉得不错？赞助作者"
-                                            Click="OnOpenSponsorWindowClick" 
-                                            HorizontalAlignment="Stretch"/>
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>

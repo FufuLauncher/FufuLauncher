@@ -93,6 +93,7 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private Visibility _showHomeCoin = Visibility.Visible;
         [ObservableProperty] private Visibility _showExpeditions = Visibility.Visible;
         [ObservableProperty] private Visibility _showTransformer = Visibility.Visible;
+        [ObservableProperty] private bool _isDailyNoteLoaded;
 
         private DispatcherQueueTimer _bannerTimer;
 
@@ -1108,7 +1109,7 @@ private async Task ExecuteCheckinAsync()
                 string targetUid = customUid?.ToString()?.Trim();
 
                 var uids = await _checkinService.GetBoundUidsAsync();
-                
+        
                 if (uids.Count == 0)
                 {
                     Debug.WriteLine("[DailyNote] 未找到绑定账号");
@@ -1132,6 +1133,8 @@ private async Task ExecuteCheckinAsync()
                     MaxExpeditionNum = dailyNoteData.MaxExpeditionNum;
                     IsTransformerObtained = dailyNoteData.IsTransformerObtained;
                     TransformerRecoveryTime = dailyNoteData.TransformerRecoveryTime;
+                    
+                    IsDailyNoteLoaded = true;
                 });
 
                 Debug.WriteLine("[DailyNote] 便签数据加载成功");

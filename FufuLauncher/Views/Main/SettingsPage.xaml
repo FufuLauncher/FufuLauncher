@@ -792,20 +792,6 @@
                                 Click="OnOpenSecurityAuthClick"/>
                     </StackPanel>
                 </Border>
-                
-                <Border x:Name="SponsorItem" Style="{StaticResource SettingsCardStyle}">
-                    <StackPanel Spacing="10">
-                        <TextBlock Text="赞赏作者" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Text="如果您觉得该软件对您有帮助，可以自愿赞助支持我" Style="{ThemeResource CaptionTextBlockStyle}" Opacity="0.7"/>
-                        
-                        <Button Content="打开赞赏页面" 
-                                HorizontalAlignment="Left"
-                                Padding="12,6"
-                                CornerRadius="6"
-                                Click="OnOpenSponsorWindowClick"/>
-                    </StackPanel>
-                </Border>
-
             </StackPanel>
         </ScrollViewer>
     </Grid>

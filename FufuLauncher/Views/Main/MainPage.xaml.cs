@@ -458,6 +458,44 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateCardBackgrounds();
         }
+        else if (e.PropertyName == nameof(MainViewModel.IsDailyNoteLoaded))
+        {
+            _ = DispatcherQueue.TryEnqueue(() => AnimateDailyNoteTransition(ViewModel.IsDailyNoteLoaded));
+        }
+    }
+    
+    private void SyncDailyNoteState()
+    {
+        if (DailyNoteDataPanel == null || DailyNoteEmptyText == null) return;
+
+        if (ViewModel.IsDailyNoteLoaded)
+        {
+            DailyNoteDataPanel.Opacity = 1.0;
+            DailyNoteEmptyText.Opacity = 0.0;
+            DailyNoteDataPanel.IsHitTestVisible = true;
+        }
+        else
+        {
+            DailyNoteDataPanel.Opacity = 0.0;
+            DailyNoteEmptyText.Opacity = 0.8;
+            DailyNoteDataPanel.IsHitTestVisible = false;
+        }
+    }
+    
+    private void AnimateDailyNoteTransition(bool isLoaded)
+    {
+        if (DailyNoteDataPanel == null || DailyNoteEmptyText == null) return;
+
+        var storyboard = new Storyboard();
+        var duration = new Duration(TimeSpan.FromMilliseconds(300));
+        var easing = new CubicEase { EasingMode = EasingMode.EaseInOut };
+        
+        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteDataPanel, "Opacity", isLoaded ? 1.0 : 0.0, duration, easing));
+        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteEmptyText, "Opacity", isLoaded ? 0.0 : 0.8, duration, easing));
+    
+        DailyNoteDataPanel.IsHitTestVisible = isLoaded;
+
+        storyboard.Begin();
     }
     
 
@@ -492,7 +530,9 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
         EntranceStoryboard.Begin();
 
         InitializeBannerDisplay();
-        
+    
+        SyncDailyNoteState();
+    
         if (!_hasCardAnimationPlayed)
         {
             _hasCardAnimationPlayed = true;
@@ -502,7 +542,7 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
         {
             UpdateCardBackgrounds();
         }
-        
+    
         if (!_isInitialized)
         {
             await ViewModel.InitializeAsync();

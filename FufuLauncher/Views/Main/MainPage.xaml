@@ -88,7 +88,8 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Title}" FontSize="13" 
                                    Foreground="{Binding ElementName=MainPageRoot, Path=ViewModel.GameNewsCardTextBrush}"
-                                   TextTrimming="CharacterEllipsis" MaxLines="1" Margin="0,0,8,0"/>
+                                   TextTrimming="CharacterEllipsis" MaxLines="1" 
+                                   Margin="0,0,8,0"/>
                         <TextBlock Grid.Column="1" Text="{Binding Date}" FontSize="12" 
                                    Foreground="{Binding ElementName=MainPageRoot, Path=ViewModel.GameNewsCardTextBrush}" Opacity="0.5" 
                                    VerticalAlignment="Center"/>
@@ -150,7 +151,7 @@
                                   PointerReleased="BannerViewport_PointerReleased"
                                   PointerCanceled="BannerViewport_PointerCanceled"
                                   PointerExited="BannerViewport_PointerCanceled">
-                          
+                                
                                 <Grid x:Name="BannerCurrentLayer"
                                       Opacity="1"
                                       IsHitTestVisible="True">
@@ -222,7 +223,7 @@
                                 <SolidColorBrush x:Key="PivotHeaderItemForegroundSelected" Color="White" />
                                 <SolidColorBrush x:Key="PivotHeaderItemForegroundPointerOver" Color="#CCFFFFFF" />
                                 <SolidColorBrush x:Key="PivotHeaderItemForegroundPressed" Color="#99FFFFFF" />
-                                
+                                 
                                 <Style TargetType="PivotHeaderItem">
                                     <Setter Property="FontSize" Value="13"/>
                                     <Setter Property="FontWeight" Value="SemiBold"/>
@@ -334,7 +335,8 @@
                                 </Button>
                             </Grid>
 
-                            <Button Grid.Row="2" Content="{Binding CheckinButtonText}" Command="{Binding ExecuteCheckinCommand}" IsEnabled="{Binding IsCheckinButtonEnabled, Mode=OneWay}" HorizontalAlignment="Stretch" Background="#1AFFFFFF" BorderThickness="0" Foreground="{Binding GameCheckinTextBrush, Mode=OneWay}" CornerRadius="4" Padding="8,6"/>
+                            <Button Grid.Row="2" Content="{Binding CheckinButtonText}" Command="{Binding ExecuteCheckinCommand}" IsEnabled="{Binding IsCheckinButtonEnabled, Mode=OneWay}" HorizontalAlignment="Stretch" Background="#1AFFFFFF" 
+                                    BorderThickness="0" Foreground="{Binding GameCheckinTextBrush, Mode=OneWay}" CornerRadius="4" Padding="8,6"/>
                         </Grid>
                     </Grid>
 
@@ -363,73 +365,84 @@
                             <TextBlock Grid.Row="0" Text="原神便签" FontSize="14" FontWeight="SemiBold" 
                                        Foreground="White" Margin="0,0,0,10" Opacity="0.9"/>
                             
-                            <StackPanel Grid.Row="1" Spacing="8">
-                                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowResin, Mode=OneWay}">
-                                    <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-1.cd77560a.png" 
-                                           Width="24" Height="24" Stretch="Uniform"/>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="树脂" FontSize="11" Foreground="White" Opacity="0.7"/>
-                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
-                                            <Run Text="{x:Bind ViewModel.CurrentResin, Mode=OneWay}"/>
-                                            <Run Text="/"/>
-                                            <Run Text="{x:Bind ViewModel.MaxResin, Mode=OneWay}"/>
-                                        </TextBlock>
-                                    </StackPanel>
-                                </StackPanel>
+                            <Grid Grid.Row="1" MinHeight="80">
+                                <TextBlock x:Name="DailyNoteEmptyText" 
+                                           Text="无数据" 
+                                           FontSize="13" 
+                                           Foreground="White" 
+                                           Opacity="0.8" 
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" 
+                                           IsHitTestVisible="False"/>
 
-                                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowDailyTasks, Mode=OneWay}">
-                                    <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-3.786c15d1.png" 
-                                           Width="24" Height="24" Stretch="Uniform"/>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="每日委托" FontSize="11" Foreground="White" Opacity="0.7"/>
-                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
-                                            <Run Text="{x:Bind ViewModel.FinishedTaskNum, Mode=OneWay}"/>
-                                            <Run Text="/"/>
-                                            <Run Text="{x:Bind ViewModel.TotalTaskNum, Mode=OneWay}"/>
-                                        </TextBlock>
+                                <StackPanel x:Name="DailyNoteDataPanel" Spacing="8" Opacity="0" IsHitTestVisible="False">
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowResin, Mode=OneWay}">
+                                        <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-1.cd77560a.png" 
+                                               Width="24" Height="24" Stretch="Uniform"/>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="树脂" FontSize="11" Foreground="White" Opacity="0.7"/>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
+                                                <Run Text="{x:Bind ViewModel.CurrentResin, Mode=OneWay}"/>
+                                                <Run Text="/"/>
+                                                <Run Text="{x:Bind ViewModel.MaxResin, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowHomeCoin, Mode=OneWay}">
-                                    <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-2.e5225a21.png" 
-                                           Width="24" Height="24" Stretch="Uniform"/>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="洞天宝钱" FontSize="11" Foreground="White" Opacity="0.7"/>
-                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
-                                            <Run Text="{x:Bind ViewModel.CurrentHomeCoin, Mode=OneWay}"/>
-                                            <Run Text="/"/>
-                                            <Run Text="{x:Bind ViewModel.MaxHomeCoin, Mode=OneWay}"/>
-                                        </TextBlock>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowDailyTasks, Mode=OneWay}">
+                                        <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-3.786c15d1.png" 
+                                               Width="24" Height="24" Stretch="Uniform"/>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="每日委托" FontSize="11" Foreground="White" Opacity="0.7"/>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
+                                                <Run Text="{x:Bind ViewModel.FinishedTaskNum, Mode=OneWay}"/>
+                                                <Run Text="/"/>
+                                                <Run Text="{x:Bind ViewModel.TotalTaskNum, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowExpeditions, Mode=OneWay}">
-                                    <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-4.835b640a.png" 
-                                           Width="24" Height="24" Stretch="Uniform"/>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="探索派遣" FontSize="11" Foreground="White" Opacity="0.7"/>
-                                        <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
-                                            <Run Text="{x:Bind ViewModel.CurrentExpeditionNum, Mode=OneWay}"/>
-                                            <Run Text="/"/>
-                                            <Run Text="{x:Bind ViewModel.MaxExpeditionNum, Mode=OneWay}"/>
-                                        </TextBlock>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowHomeCoin, Mode=OneWay}">
+                                        <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-2.e5225a21.png" 
+                                               Width="24" Height="24" Stretch="Uniform"/>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="洞天宝钱" FontSize="11" Foreground="White" Opacity="0.7"/>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
+                                                <Run Text="{x:Bind ViewModel.CurrentHomeCoin, Mode=OneWay}"/>
+                                                <Run Text="/"/>
+                                                <Run Text="{x:Bind ViewModel.MaxHomeCoin, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowTransformer, Mode=OneWay}">
-                                    <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-5.5feb0161.png" 
-                                           Width="24" Height="24" Stretch="Uniform"/>
-                                    <StackPanel VerticalAlignment="Center">
-                                        <TextBlock Text="参量质变仪" FontSize="11" Foreground="White" Opacity="0.7"/>
-                                        <TextBlock Text="{x:Bind ViewModel.TransformerRecoveryTime, Mode=OneWay}" FontSize="13" FontWeight="SemiBold" Foreground="White"/>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowExpeditions, Mode=OneWay}">
+                                        <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-4.835b640a.png" 
+                                               Width="24" Height="24" Stretch="Uniform"/>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="探索派遣" FontSize="11" Foreground="White" Opacity="0.7"/>
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Foreground="White">
+                                                <Run Text="{x:Bind ViewModel.CurrentExpeditionNum, Mode=OneWay}"/>
+                                                <Run Text="/"/>
+                                                <Run Text="{x:Bind ViewModel.MaxExpeditionNum, Mode=OneWay}"/>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind ViewModel.ShowTransformer, Mode=OneWay}">
+                                        <Image Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-5.5feb0161.png" 
+                                               Width="24" Height="24" Stretch="Uniform"/>
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock Text="参量质变仪" FontSize="11" Foreground="White" Opacity="0.7"/>
+                                            <TextBlock Text="{x:Bind ViewModel.TransformerRecoveryTime, Mode=OneWay}" FontSize="13" FontWeight="SemiBold" Foreground="White"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </StackPanel>
-            
+           
             <TextBlock Grid.Column="1"
                        Text="© 2026 FufuLauncher Development Team.All Rights Reserved."
                        FontSize="10"
@@ -498,8 +511,7 @@
                         <Grid>
                             <Border x:Name="BackgroundBlurBorder" Background="{StaticResource IosGlassBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="24">
                             </Border>
-                            <FontIcon Glyph="&#xE8B9;" 
-                                      FontSize="18" 
+                            <FontIcon Glyph="&#xE8B9;" FontSize="18" 
                                       Foreground="White" 
                                       Margin="14,12" 
                                       Opacity="{x:Bind GetIconOpacity(ViewModel.IsBackgroundToggleEnabled), Mode=OneWay}"/>
