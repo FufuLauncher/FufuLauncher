@@ -782,19 +782,16 @@
                                    Style="{ThemeResource SubtitleTextBlockStyle}"
                                    Margin="0,0,0,16"/>
 
-                        <StackPanel Spacing="8">
-                            <TextBlock Text="签到类型"
-                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                        <StackPanel Spacing="12">
 
                             <ToggleSwitch Header="游戏签到"
                                           OffContent="已禁用"
-                                          OnContent="已启用"
+                                          OnContent="已启用" 
                                           IsOn="{x:Bind ViewModel.IsGameCheckinEnabled, Mode=TwoWay}"/>
                             <TextBlock Text="领取米游社每日签到奖励（原石、摩拉等）"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,-4,0,0"/>
+                                       Margin="0,-16,0,0"/>
 
                             <StackPanel>
                                 <StackPanel Orientation="Horizontal" Spacing="4">
@@ -846,7 +843,7 @@
                             <TextBlock Text="领取云游戏签到奖励，需添加云游戏登录凭证"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,-4,0,0"/>
+                                       Margin="0,-16,0,0"/>
 
                             <ToggleSwitch Header="启动时自动签到"
                                           OffContent="已禁用"
@@ -855,7 +852,7 @@
                             <TextBlock Text="开启后，将在应用启动时自动检测并在未签到时执行一键签到"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,-4,0,0"/>
+                                       Margin="0,-16,0,0"/>
                         </StackPanel>
 
                         <!-- 签到账号 -->
