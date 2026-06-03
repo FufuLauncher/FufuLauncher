@@ -315,6 +315,18 @@ public sealed partial class LoginQrWindow : Window
                 if (match.Success) config.Account.Stuid = match.Groups[1].Value;
             }
 
+            if (cookieString.Contains("stoken="))
+            {
+                var stokenMatch = System.Text.RegularExpressions.Regex.Match(cookieString, @"stoken=([^;]+)");
+                if (stokenMatch.Success) config.Account.Stoken = stokenMatch.Groups[1].Value;
+            }
+
+            if (cookieString.Contains("mid="))
+            {
+                var midMatch = System.Text.RegularExpressions.Regex.Match(cookieString, @"mid=([^;]+)");
+                if (midMatch.Success) config.Account.Mid = midMatch.Groups[1].Value;
+            }
+
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
@@ -1032,7 +1044,7 @@ private async Task ExchangeV2TokensAndSaveAsync(string stoken, string mid, strin
             catch (Exception ex)
             {
                 Debug.WriteLine($"配置数据库保存失败: {ex.Message}");
-                
+
                 WeakReferenceMessenger.Default.Send(
                     new NotificationMessage(
                         "保存状态异常",
@@ -1046,7 +1058,7 @@ private async Task ExchangeV2TokensAndSaveAsync(string stoken, string mid, strin
         catch (Exception ex)
         {
             Debug.WriteLine($"兼容配置保存失败: {ex.Message}");
-            
+
             WeakReferenceMessenger.Default.Send(
                 new NotificationMessage(
                     "写入配置失败",

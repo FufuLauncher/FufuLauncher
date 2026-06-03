@@ -187,17 +187,11 @@ public class UserInfoService : IUserInfoService
             oldConfig.Account.Cookie = cookie;
             oldConfig.Account.Stuid = stuid;
 
-            if (cookie.Contains("stoken="))
-            {
-                var match = Regex.Match(cookie, @"stoken=([^;]+)");
-                if (match.Success) oldConfig.Account.Stoken = match.Groups[1].Value;
-            }
+            var stokenMatch = Regex.Match(cookie, @"stoken=([^;]+)");
+            if (stokenMatch.Success) oldConfig.Account.Stoken = stokenMatch.Groups[1].Value;
 
-            if (cookie.Contains("mid="))
-            {
-                var match = Regex.Match(cookie, @"mid=([^;]+)");
-                if (match.Success) oldConfig.Account.Mid = match.Groups[1].Value;
-            }
+            var midMatch = Regex.Match(cookie, @"mid=([^;]+)");
+            if (midMatch.Success) oldConfig.Account.Mid = midMatch.Groups[1].Value;
 
             var newJson = JsonSerializer.Serialize(oldConfig, new JsonSerializerOptions
             {

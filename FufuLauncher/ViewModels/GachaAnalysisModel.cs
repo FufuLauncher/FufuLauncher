@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -1209,60 +1210,81 @@ public partial class GachaAnalysisModel : ObservableObject
         RequestMetadataScrapeAction?.Invoke();
     }
 
+    private async Task<(string stoken, string mid, string stuid, string cookie, string configPath)> FindAccountByGameUidAsync(string targetGameUid)
+    {
+        var baseDir = Helpers.AppPaths.DataDir;
+        var filesToTry = Directory.GetFiles(baseDir, "config*.json")
+            .Concat(Directory.GetFiles(baseDir, "config.lab*.json"))
+            .Distinct()
+            .ToList();
+
+        foreach (var file in filesToTry)
+        {
+            try
+            {
+                var json = await File.ReadAllTextAsync(file);
+                using var doc = JsonDocument.Parse(json);
+                if (!doc.RootElement.TryGetProperty("Display", out var display)) continue;
+                var displayGameUid = display.TryGetProperty("GameUid", out var gu) ? gu.GetString() ?? "" : "";
+                if (string.IsNullOrEmpty(displayGameUid)) continue;
+                if (displayGameUid != targetGameUid) continue;
+
+                var account = doc.RootElement.GetProperty("Account");
+                var stoken = account.TryGetProperty("Stoken", out var st) ? st.GetString() ?? "" : "";
+                var mid = account.TryGetProperty("Mid", out var mi) ? mi.GetString() ?? "" : "";
+                var stuid = account.TryGetProperty("Stuid", out var si) ? si.GetString() ?? "" : "";
+                var cookie = account.TryGetProperty("Cookie", out var ck) ? ck.GetString() ?? "" : "";
+
+                if (string.IsNullOrEmpty(stoken) && !string.IsNullOrEmpty(cookie))
+                {
+                    var stokenMatch = Regex.Match(cookie, @"stoken=([^;]+)");
+                    if (stokenMatch.Success) stoken = stokenMatch.Groups[1].Value;
+                }
+                if (string.IsNullOrEmpty(mid) && !string.IsNullOrEmpty(cookie))
+                {
+                    var midMatch = Regex.Match(cookie, @"mid=([^;]+)");
+                    if (midMatch.Success) mid = midMatch.Groups[1].Value;
+                }
+
+                return (stoken, mid, stuid, cookie, file);
+            }
+            catch { }
+        }
+
+        return (null, null, null, null, null);
+    }
+
     [RelayCommand]
     private async Task FetchFromMiYouSheAsync()
     {
-        var configPath = Helpers.AppPaths.ConfigFile;
-
-        if (!File.Exists(configPath))
+        string gameUid = "";
+        try
         {
-            CrawlerStatus = "未找到登录配置，请先登录米游社账号";
+            var userConfigService = App.GetService<Services.IUserConfigService>();
+            var displayConfig = await userConfigService.LoadDisplayConfigAsync();
+            gameUid = displayConfig.GameUid ?? "";
+        }
+        catch { }
+
+        if (string.IsNullOrEmpty(gameUid))
+        {
+            CrawlerStatus = "当前账号未绑定游戏角色，无法获取祈愿记录";
             OnErrorAction?.Invoke(CrawlerStatus);
             return;
         }
 
-        string stoken = "", mid = "", stuid = "", gameUid = "";
-        try
-        {
-            var json = await File.ReadAllTextAsync(configPath);
-            using var doc = JsonDocument.Parse(json);
-            var account = doc.RootElement.GetProperty("Account");
-            stoken = account.TryGetProperty("Stoken", out var st) ? st.GetString() ?? "" : "";
-            mid = account.TryGetProperty("Mid", out var mi) ? mi.GetString() ?? "" : "";
-            stuid = account.TryGetProperty("Stuid", out var si) ? si.GetString() ?? "" : "";
-            
-            var cookieStr = account.TryGetProperty("Cookie", out var ck) ? ck.GetString() ?? "" : "";
-            if (!string.IsNullOrEmpty(cookieStr))
-            {
-                var cookies = cookieStr.Split(';', StringSplitOptions.RemoveEmptyEntries);
-                foreach (var cookie in cookies)
-                {
-                    var kvp = cookie.Trim();
-                    if (string.IsNullOrEmpty(stoken) && kvp.StartsWith("stoken="))
-                    {
-                        stoken = kvp.Substring(7);
-                    }
-                    if (string.IsNullOrEmpty(mid) && kvp.StartsWith("mid="))
-                    {
-                        mid = kvp.Substring(4);
-                    }
-                }
-            }
+        var (stoken, mid, stuid, cookie, _) = await FindAccountByGameUidAsync(gameUid);
 
-            var userConfigService = App.GetService<Services.IUserConfigService>();
-            var displayConfig = await userConfigService.LoadDisplayConfigAsync();
-            gameUid = displayConfig.GameUid ?? stuid;
-        }
-        catch
+        if (stoken == null)
         {
-            CrawlerStatus = "读取登录配置失败";
+            CrawlerStatus = $"请先登录 UID {gameUid} 对应的米游社账号后重试";
             OnErrorAction?.Invoke(CrawlerStatus);
             return;
         }
 
         if (string.IsNullOrEmpty(stoken))
         {
-            CrawlerStatus = "stoken 为空，请重新登录米游社账号";
+            CrawlerStatus = $"UID {gameUid} 对应账号的 stoken 已失效，请重新登录该账号后重试";
             OnErrorAction?.Invoke(CrawlerStatus);
             return;
         }

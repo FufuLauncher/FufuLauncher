@@ -531,6 +531,24 @@ public partial class AccountViewModel : ObservableRecipient
                 HasBoundRole = hasBoundRole
             };
 
+            if (string.IsNullOrEmpty(config.Account.Stoken) || string.IsNullOrEmpty(config.Account.Mid))
+            {
+                var cookie = config.Account.Cookie;
+                if (!string.IsNullOrEmpty(cookie))
+                {
+                    if (string.IsNullOrEmpty(config.Account.Stoken))
+                    {
+                        var stokenMatch = System.Text.RegularExpressions.Regex.Match(cookie, @"stoken=([^;]+)");
+                        if (stokenMatch.Success) config.Account.Stoken = stokenMatch.Groups[1].Value;
+                    }
+                    if (string.IsNullOrEmpty(config.Account.Mid))
+                    {
+                        var midMatch = System.Text.RegularExpressions.Regex.Match(cookie, @"mid=([^;]+)");
+                        if (midMatch.Success) config.Account.Mid = midMatch.Groups[1].Value;
+                    }
+                }
+            }
+
             var newJson = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
             await File.WriteAllTextAsync(configPath, newJson);
 
@@ -663,22 +681,6 @@ public partial class AccountViewModel : ObservableRecipient
             {
                 File.Delete(mainConfigPath);
             }
-        }
-
-        var gachaPath = Path.Combine(baseDir, "gacha_data.json");
-        if (File.Exists(gachaPath))
-        {
-            try
-            {
-                var gachaJson = await File.ReadAllTextAsync(gachaPath);
-                var gachaDict = JsonSerializer.Deserialize<Dictionary<string, object>>(gachaJson);
-                if (gachaDict != null && gachaDict.ContainsKey(uid))
-                {
-                    gachaDict.Remove(uid);
-                    await File.WriteAllTextAsync(gachaPath, JsonSerializer.Serialize(gachaDict, new JsonSerializerOptions { WriteIndented = true }));
-                }
-            }
-            catch { }
         }
 
         var cloudCredPath = Path.Combine(baseDir, "cloud_credentials.json");
