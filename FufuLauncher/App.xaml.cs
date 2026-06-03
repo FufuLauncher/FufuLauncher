@@ -125,6 +125,9 @@ public partial class App : Application
                     services.AddSingleton<IGameConfigService, GameConfigService>();
 
                     services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
+                    services.AddSingleton<ICommunityCheckinService, CommunityCheckinService>();
+                    services.AddSingleton<ICloudGameCheckinService, CloudGameCheckinService>();
+                    services.AddSingleton<IUnifiedCheckinService, UnifiedCheckinService>();
                     services.AddSingleton<DailyNoteCardService>();
                     services.AddSingleton<BlankViewModel>();
                     services.AddTransient<BlankPage>();
