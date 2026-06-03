@@ -1083,6 +1083,20 @@ private async Task ExchangeV2TokensAndSaveAsync(string stoken, string mid, strin
                 if (match.Success) config.Account.Stuid = match.Groups[1].Value;
             }
 
+            var cookies = cookieString.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var cookie in cookies)
+            {
+                var kvp = cookie.Trim();
+                if (kvp.StartsWith("stoken="))
+                {
+                    config.Account.Stoken = kvp.Substring(7);
+                }
+                else if (kvp.StartsWith("mid="))
+                {
+                    config.Account.Mid = kvp.Substring(4);
+                }
+            }
+
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
