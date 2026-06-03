@@ -35,68 +35,115 @@ namespace FufuLauncher.Views
             }
         }
 
-        private async void StartBtn_Click(object sender, RoutedEventArgs e)
+private async void StartBtn_Click(object sender, RoutedEventArgs e)
+{
+    if (sender is Button btn) btn.IsEnabled = false;
+    StartBtn.IsEnabled = false;
+
+    string cnPlugins = Path.Combine(_gameDir, GameConstants.CN_DATA_DIR, "Plugins");
+    string osPlugins = Path.Combine(_gameDir, GameConstants.OS_DATA_DIR, "Plugins");
+    string pluginDeleteError = null;
+
+    try
+    {
+        if (Directory.Exists(cnPlugins)) Directory.Delete(cnPlugins, true);
+        if (Directory.Exists(osPlugins)) Directory.Delete(osPlugins, true);
+    }
+    catch (Exception ex)
+    {
+        pluginDeleteError = ex.Message;
+    }
+
+    _statusText = new TextBlock { Text = "准备中...", TextWrapping = TextWrapping.Wrap };
+    var sp = new StackPanel { Spacing = 16, Margin = new Thickness(0, 16, 0, 0) };
+    sp.Children.Add(new ProgressBar { IsIndeterminate = true, HorizontalAlignment = HorizontalAlignment.Stretch });
+    sp.Children.Add(_statusText);
+
+    _progressDialog = new ContentDialog
+    {
+        Title = "正在切换服务器",
+        Content = sp,
+        XamlRoot = XamlRoot
+    };
+
+    _ = _progressDialog.ShowAsync();
+
+    if (pluginDeleteError != null)
+    {
+        UpdateProgressText($"清理插件文件夹失败: {pluginDeleteError}");
+    }
+
+    string cacheDir = Path.Combine(Helpers.AppPaths.ServerCacheDir, Guid.NewGuid().ToString("N"));
+    var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText, _targetServer);
+
+    try
+    {
+        await Task.Run(() => converter.ExecuteConversionAsync());
+
+        _progressDialog.Hide();
+
+        var successDialog = new ContentDialog
         {
-            if (sender is Button btn) btn.IsEnabled = false;
-            StartBtn.IsEnabled = false;
-            if (FindName("AlternativeStartBtn") is Button altBtnDisable) altBtnDisable.IsEnabled = false;
+            Title = "完成",
+            Content = $"当前已切换至：{converter.TargetServerName}", 
+            CloseButtonText = "确定",
+            XamlRoot = XamlRoot
+        };
 
-            _statusText = new TextBlock { Text = "准备中...", TextWrapping = TextWrapping.Wrap };
-            var sp = new StackPanel { Spacing = 16, Margin = new Thickness(0, 16, 0, 0) };
-            sp.Children.Add(new ProgressBar { IsIndeterminate = true, HorizontalAlignment = HorizontalAlignment.Stretch });
-            sp.Children.Add(_statusText);
+        await successDialog.ShowAsync();
 
-            _progressDialog = new ContentDialog
+        _parentWindow?.Close();
+    }
+    catch (Exception ex)
+    {
+        _progressDialog.Hide();
+        var errDialog = new ContentDialog
+        {
+            Title = "转换失败",
+            Content = $"切换失败，我们会为你修复游戏，你可能需要等待几分钟！\n错误信息: {ex.Message}",
+            CloseButtonText = "确定",
+            XamlRoot = XamlRoot
+        };
+        await errDialog.ShowAsync();
+
+        _progressDialog.Title = "正在修复游戏";
+        _statusText.Text = "准备修复...";
+        _ = _progressDialog.ShowAsync();
+
+        try
+        {
+            await Task.Run(() => converter.RunVerificationAsync());
+            
+            _progressDialog.Hide();
+            var repairSuccessDialog = new ContentDialog
             {
-                Title = "正在切换服务器",
-                Content = sp,
+                Title = "修复完成",
+                Content = "游戏文件修复完成，您可以尝试重新切换服务器或直接游玩！",
+                CloseButtonText = "确定",
                 XamlRoot = XamlRoot
             };
-
-            _ = _progressDialog.ShowAsync();
-
-            string cacheDir = Path.Combine(Helpers.AppPaths.ServerCacheDir, Guid.NewGuid().ToString("N"));
-
-            try
-            {
-                var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText, _targetServer);
-    
-                await Task.Run(() => converter.ExecuteConversionAsync());
-
-                _progressDialog.Hide();
-    
-                var successDialog = new ContentDialog
-                {
-                    Title = "完成",
-                    Content = $"当前已切换至：{converter.TargetServerName}", 
-                    CloseButtonText = "确定",
-                    XamlRoot = XamlRoot
-                };
-    
-                await successDialog.ShowAsync();
-    
-                _parentWindow?.Close();
-            }
-            catch (Exception ex)
-            {
-                _progressDialog.Hide();
-                var errDialog = new ContentDialog
-                {
-                    Title = "转换失败",
-                    Content = ex.Message,
-                    CloseButtonText = "确定",
-                    XamlRoot = XamlRoot
-                };
-                await errDialog.ShowAsync();
-            }
-            finally
-            {
-                if (Directory.Exists(cacheDir)) Directory.Delete(cacheDir, true);
-                
-                StartBtn.IsEnabled = true;
-                if (FindName("AlternativeStartBtn") is Button altBtnEnable) altBtnEnable.IsEnabled = true;
-            }
+            await repairSuccessDialog.ShowAsync();
         }
+        catch (Exception repairEx)
+        {
+            _progressDialog.Hide();
+            var repairErrDialog = new ContentDialog
+            {
+                Title = "修复失败",
+                Content = $"游戏修复失败，错误信息: {repairEx.Message}",
+                CloseButtonText = "确定",
+                XamlRoot = XamlRoot
+            };
+            await repairErrDialog.ShowAsync();
+        }
+    }
+    finally
+    {
+        if (Directory.Exists(cacheDir)) Directory.Delete(cacheDir, true);
+        
+        StartBtn.IsEnabled = true;
+    }
+}
         
         private async void AlternativeStartBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -106,7 +153,7 @@ namespace FufuLauncher.Views
             var dialog = new ContentDialog
             {
                 Title = "提示",
-                Content = "此方法将在开始时提前清空游戏的组件文件夹，适用于文件被占用导致切换失败的情况，清空后将重新开始一遍完整的切换服务器，确认继续？",
+                Content = "此方法将在开始时提前清空游戏的组件文件夹，适用于文件被占用导致切换失败的情况，清空后将重新开始一遍完整的切换服务器，如果切换服务器失败，你就得修复游戏才能继续游玩！确认继续？",
                 PrimaryButtonText = "确认",
                 CloseButtonText = "取消",
                 XamlRoot = XamlRoot

@@ -12,7 +12,6 @@
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
                        TextWrapping="Wrap" HorizontalAlignment="Center" TextAlignment="Center"/>
             <Button x:Name="StartBtn" Content="一键转换" Width="200" Height="40" HorizontalAlignment="Center" Click="StartBtn_Click"/>
-            <Button x:Name="AlternativeStartBtn" Content="切换失败？选择另一个方法" Width="200" Height="40" HorizontalAlignment="Center" Click="AlternativeStartBtn_Click"/>
         </StackPanel>
     </Grid>
 </Page>

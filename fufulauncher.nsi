@@ -1,5 +1,5 @@
 ﻿!define APP_NAME "FufuLauncher"
-!define APP_VERSION "1.2.1.0b2"
+!define APP_VERSION "1.2.1.0b3"
 !define APP_PUBLISHER "FufuLauncher"
 !define APP_WEB_SITE "https://github.com/FufuLauncher/FufuLauncher"
 !define APP_EXE "FufuLauncher.exe"
