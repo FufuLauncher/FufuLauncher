@@ -143,49 +143,49 @@
                 
                 <Button Click="OnOpenGachaAnalysisClick" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <FontIcon Glyph="&#xE81C;" FontSize="16"/>
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" Width="18" Height="18"/> 
                         <TextBlock Text="抽卡记录分析" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 
                 <Button Click="OnOpenAchievementsClick" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Image Source="https://act-upload.mihoyo.com/wiki-user-upload/2024/09/23/24077343/42fd361ea1336daf7cd33bf187e62fa2_7270854542324660900.png" Width="18" Height="18"/> 
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" Width="18" Height="18"/> 
                         <TextBlock Text="打开成就追踪" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 
                 <Button Click="OnOpenInventoryClick" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Image Source="https://bbs-static.miyoushe.com/static/2024/07/22/0f28a79316923d69f2bccb510ded41e1_2644449957355027896.png?x-oss-process=image/resize,s_150/quality,q_80/auto-orient,0/interlace,1/format,png" Width="18" Height="18"/> 
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" Width="18" Height="18"/> 
                         <TextBlock Text="查看背包物品" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 
                 <Button Click="OnOpenPlayerRolesClick" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Image Source="https://upload-bbs.mihoyo.com/game_record/genshin/character_icon/UI_AvatarIcon_PlayerBoy.png" Width="18" Height="18"/>
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" Width="18" Height="18"/>
                         <TextBlock Text="角色练度查询" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 
                 <Button Click="OnOpenDailyNoteClick" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Image Source="https://bbs-static.miyoushe.com/static/2024/07/22/19911bcf951e8d3016e7874c52a31474_6112406971940527441.png?x-oss-process=image/resize,s_150/quality,q_80/auto-orient,0/interlace,1/format,png" Width="18" Height="18"/>
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" Width="18" Height="18"/>
                         <TextBlock Text="旅行便签" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 
                 <Button Click="OnOpenVideoResourcesClick" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Image Source="https://webstatic.mihoyo.com/upload/static-resource/2023/03/06/14e05cd4d8b0babd6c7985fc1f5801e5_689092345277877987.png" Width="18" Height="18"/>
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" Width="18" Height="18"/>
                         <TextBlock Text="视频资源库" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
                 
                 <Button Click="BBSButton_Click" HorizontalAlignment="Stretch" Height="48">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Image Source="https://bbs-static.miyoushe.com/static/2024/12/16/1024840e3dfdd496bd0c04c01b56c941_7881903508337284972.png?x-oss-process=image/resize,s_150/quality,q_80/auto-orient,0/interlace,1/format,png" Width="18" Height="18"/>
+                        <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" Width="18" Height="18"/>
                         <TextBlock Text="战绩信息" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>

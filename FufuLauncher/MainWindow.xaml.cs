@@ -841,7 +841,7 @@ private async Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
             
             if (_globalBackgroundPlayer == null)
             {
-                _globalBackgroundPlayer = new Windows.Media.Playback.MediaPlayer
+                _globalBackgroundPlayer = new MediaPlayer
                 {
                     IsLoopingEnabled = true,
                     IsMuted = true

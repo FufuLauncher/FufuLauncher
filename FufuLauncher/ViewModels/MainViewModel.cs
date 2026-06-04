@@ -51,6 +51,15 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private string _customBackgroundPath;
         [ObservableProperty] private bool _hasCustomBackground;
+        
+        [ObservableProperty] private Visibility _widgetCardVisibility = Visibility.Collapsed;
+        [ObservableProperty] private Visibility _widgetGachaVisibility = Visibility.Visible;
+        [ObservableProperty] private Visibility _widgetAchievementVisibility = Visibility.Visible;
+        [ObservableProperty] private Visibility _widgetInventoryVisibility = Visibility.Visible;
+        [ObservableProperty] private Visibility _widgetPlayerRoleVisibility = Visibility.Visible;
+        [ObservableProperty] private Visibility _widgetDailyNoteWindowVisibility = Visibility.Visible;
+        [ObservableProperty] private Visibility _widgetVideoVisibility = Visibility.Visible;
+        [ObservableProperty] private Visibility _widgetBBSVisibility = Visibility.Visible;
 
         [ObservableProperty] private ObservableCollection<BannerItem> _banners = new();
         [ObservableProperty] private ObservableCollection<PostItem> _activityPosts = new();
@@ -440,6 +449,31 @@ namespace FufuLauncher.ViewModels
             var showPresetCardJson = await _localSettingsService.ReadSettingAsync("IsShowPresetCardEnabled");
             bool isShowPresetCard = showPresetCardJson != null && Convert.ToBoolean(showPresetCardJson);
             PresetCardVisibility = isShowPresetCard ? Visibility.Visible : Visibility.Collapsed;
+            
+            var isShowWidgetCardJson = await _localSettingsService.ReadSettingAsync("IsShowWidgetCardEnabled");
+            bool isShowWidgetCard = isShowWidgetCardJson != null && Convert.ToBoolean(isShowWidgetCardJson);
+            WidgetCardVisibility = isShowWidgetCard ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetGachaJson = await _localSettingsService.ReadSettingAsync("ShowWidgetGacha");
+            WidgetGachaVisibility = (showWidgetGachaJson == null || Convert.ToBoolean(showWidgetGachaJson)) ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetAchievementJson = await _localSettingsService.ReadSettingAsync("ShowWidgetAchievement");
+            WidgetAchievementVisibility = (showWidgetAchievementJson == null || Convert.ToBoolean(showWidgetAchievementJson)) ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetInventoryJson = await _localSettingsService.ReadSettingAsync("ShowWidgetInventory");
+            WidgetInventoryVisibility = (showWidgetInventoryJson == null || Convert.ToBoolean(showWidgetInventoryJson)) ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetPlayerRoleJson = await _localSettingsService.ReadSettingAsync("ShowWidgetPlayerRole");
+            WidgetPlayerRoleVisibility = (showWidgetPlayerRoleJson == null || Convert.ToBoolean(showWidgetPlayerRoleJson)) ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetDailyNoteWindowJson = await _localSettingsService.ReadSettingAsync("ShowWidgetDailyNoteWindow");
+            WidgetDailyNoteWindowVisibility = (showWidgetDailyNoteWindowJson == null || Convert.ToBoolean(showWidgetDailyNoteWindowJson)) ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetVideoJson = await _localSettingsService.ReadSettingAsync("ShowWidgetVideo");
+            WidgetVideoVisibility = (showWidgetVideoJson == null || Convert.ToBoolean(showWidgetVideoJson)) ? Visibility.Visible : Visibility.Collapsed;
+
+            var showWidgetBBSJson = await _localSettingsService.ReadSettingAsync("ShowWidgetBBS");
+            WidgetBBSVisibility = (showWidgetBBSJson == null || Convert.ToBoolean(showWidgetBBSJson)) ? Visibility.Visible : Visibility.Collapsed;
         }
         
 private async Task OpenPresetManagerAsync()

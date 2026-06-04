@@ -162,10 +162,10 @@
                                         <TranslateTransform x:Name="BannerCurrentTranslate" X="0"/>
                                     </Grid.RenderTransform>
                                     <Image x:Name="BannerCurrentImage"
-                                           Stretch="Fill"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           RenderTransformOrigin="0.5,0.5">
+                                            Stretch="Fill"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            RenderTransformOrigin="0.5,0.5">
                                         <Image.RenderTransform>
                                             <ScaleTransform x:Name="BannerCurrentScale" ScaleX="1" ScaleY="1"/>
                                         </Image.RenderTransform>
@@ -194,10 +194,10 @@
                                         <TranslateTransform x:Name="BannerIncomingTranslate" X="0"/>
                                     </Grid.RenderTransform>
                                     <Image x:Name="BannerIncomingImage"
-                                           Stretch="Fill"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           RenderTransformOrigin="0.5,0.5">
+                                            Stretch="Fill"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            RenderTransformOrigin="0.5,0.5">
                                         <Image.RenderTransform>
                                             <ScaleTransform x:Name="BannerIncomingScale" ScaleX="1" ScaleY="1"/>
                                         </Image.RenderTransform>
@@ -552,51 +552,94 @@
                 </Button>
             </StackPanel>
             
-            <Border Grid.Row="1" Grid.Column="1"
-                    Visibility="{x:Bind ViewModel.PresetCardVisibility, Mode=OneWay}"
-                    Background="{StaticResource IosGlassBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="12"
-                    Width="240"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="0,0,32,105"
-                    Translation="0,0,32">
-                <Border.Shadow>
-                    <ThemeShadow />
-                </Border.Shadow>
-                <StackPanel Spacing="8">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="快速预设" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="White" Opacity="0.9"/>
-                        <Button Grid.Column="1" Command="{x:Bind ViewModel.OpenPresetManagerCommand}" Width="24" Height="24" Padding="0" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="4" ToolTipService.ToolTip="管理">
-                            <FontIcon Glyph="&#xE713;" FontSize="11" Foreground="White"/>
-                        </Button>
-                    </Grid>
-                    <ItemsControl ItemsSource="{x:Bind ViewModel.PinnedPresets, Mode=OneWay}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate x:DataType="viewModels:PresetModel">
-                                <Grid Margin="0,2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="24"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Grid.Column="0" Command="{Binding ElementName=MainPageRoot, Path=ViewModel.QuickSwitchPresetCommand}" CommandParameter="{Binding}" IsEnabled="{x:Bind IsNotActive, Mode=OneWay}" HorizontalAlignment="Stretch" Background="#1AFFFFFF" BorderThickness="0" Foreground="White" CornerRadius="4" Padding="12,6">
-                                        <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Button>
-                                    <FontIcon Grid.Column="1" Glyph="&#xE73E;" FontSize="12" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{x:Bind IsActive, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <TextBlock Text="未固定任何预设" Visibility="{x:Bind ViewModel.IsPinnedPresetsEmpty, Mode=OneWay}" Opacity="0.6" FontSize="12" HorizontalAlignment="Center" Margin="0,8" Foreground="White"/>
-                </StackPanel>
-            </Border>
+            <StackPanel Grid.Row="1" Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,32,105"
+                        Spacing="12">
+                
+                <Border Visibility="{x:Bind ViewModel.WidgetCardVisibility, Mode=OneWay}"
+                        Background="{StaticResource IosGlassBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="12"
+                        Width="240"
+                        Translation="0,0,32">
+                    <Border.Shadow>
+                        <ThemeShadow />
+                    </Border.Shadow>
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="小工具" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="White" Opacity="0.9"/>
+                        
+                        <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="42" ItemHeight="42" MaximumRowsOrColumns="5">
+                            <Button Click="OnOpenGachaAnalysisClick" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="抽卡记录分析" Visibility="{x:Bind ViewModel.WidgetGachaVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png"/>
+                            </Button>
+                            <Button Click="OnOpenAchievementsClick" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="成就追踪" Visibility="{x:Bind ViewModel.WidgetAchievementVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png"/>
+                            </Button>
+                            <Button Click="OnOpenInventoryClick" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="背包物品" Visibility="{x:Bind ViewModel.WidgetInventoryVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png"/>
+                            </Button>
+                            <Button Click="OnOpenPlayerRolesClick" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="角色练度查询" Visibility="{x:Bind ViewModel.WidgetPlayerRoleVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png"/>
+                            </Button>
+                            <Button Click="OnOpenDailyNoteClick" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="旅行便签" Visibility="{x:Bind ViewModel.WidgetDailyNoteWindowVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png"/>
+                            </Button>
+                            <Button Click="OnOpenVideoResourcesClick" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="视频资源库" Visibility="{x:Bind ViewModel.WidgetVideoVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png"/>
+                            </Button>
+                            <Button Click="BBSButton_Click" Width="36" Height="36" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="8" Padding="8" Margin="3" ToolTipService.ToolTip="战绩信息" Visibility="{x:Bind ViewModel.WidgetBBSVisibility, Mode=OneWay}">
+                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png"/>
+                            </Button>
+                        </VariableSizedWrapGrid>
+                    </StackPanel>
+                </Border>
+                
+                <Border Visibility="{x:Bind ViewModel.PresetCardVisibility, Mode=OneWay}"
+                        Background="{StaticResource IosGlassBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Padding="12"
+                        Width="240"
+                        Translation="0,0,32">
+                    <Border.Shadow>
+                        <ThemeShadow />
+                    </Border.Shadow>
+                    <StackPanel Spacing="8">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="快速预设" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="White" Opacity="0.9"/>
+                            <Button Grid.Column="1" Command="{x:Bind ViewModel.OpenPresetManagerCommand}" Width="24" Height="24" Padding="0" Background="#1AFFFFFF" BorderThickness="0" CornerRadius="4" ToolTipService.ToolTip="管理">
+                                <FontIcon Glyph="&#xE713;" FontSize="11" Foreground="White"/>
+                            </Button>
+                        </Grid>
+                        <ItemsControl ItemsSource="{x:Bind ViewModel.PinnedPresets, Mode=OneWay}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="viewModels:PresetModel">
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="24"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0" Command="{Binding ElementName=MainPageRoot, Path=ViewModel.QuickSwitchPresetCommand}" CommandParameter="{Binding}" IsEnabled="{x:Bind IsNotActive, Mode=OneWay}" HorizontalAlignment="Stretch" Background="#1AFFFFFF" BorderThickness="0" Foreground="White" CornerRadius="4" Padding="12,6">
+                                            <TextBlock Text="{x:Bind Name}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Button>
+                                        <FontIcon Grid.Column="1" Glyph="&#xE73E;" FontSize="12" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{x:Bind IsActive, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="未固定任何预设" Visibility="{x:Bind ViewModel.IsPinnedPresetsEmpty, Mode=OneWay}" Opacity="0.6" FontSize="12" HorizontalAlignment="Center" Margin="0,8" Foreground="White"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
             
             <Button Grid.Row="1" Grid.Column="1"
                     Command="{x:Bind ViewModel.LaunchGameCommand}"

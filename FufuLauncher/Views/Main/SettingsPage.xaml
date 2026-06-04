@@ -242,6 +242,29 @@
                                           OffContent="隐藏"
                                           OnContent="显示"
                                           IsOn="{x:Bind ViewModel.IsShowPresetCardEnabled, Mode=TwoWay}"/>
+                            
+                            <ToggleSwitch Header="显示小工具卡片"
+                                          OffContent="隐藏"
+                                          OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.IsShowWidgetCardEnabled, Mode=TwoWay}"/>
+                        </StackPanel>
+                        
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
+                            <TextBlock Text="小工具卡片显示项" 
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14"/>
+                            <TextBlock Text="选择要在小工具卡片中显示的工具"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       Margin="0,2,0,12"/>
+                            
+                            <ToggleSwitch Header="显示抽卡记录分析" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetGacha, Mode=TwoWay}"/>
+                            <ToggleSwitch Header="显示成就追踪" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetAchievement, Mode=TwoWay}"/>
+                            <ToggleSwitch Header="显示背包物品" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetInventory, Mode=TwoWay}"/>
+                            <ToggleSwitch Header="显示角色练度查询" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetPlayerRole, Mode=TwoWay}"/>
+                            <ToggleSwitch Header="显示旅行便签" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetDailyNoteWindow, Mode=TwoWay}"/>
+                            <ToggleSwitch Header="显示视频资源库" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetVideo, Mode=TwoWay}"/>
+                            <ToggleSwitch Header="显示战绩信息" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetBBS, Mode=TwoWay}"/>
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">

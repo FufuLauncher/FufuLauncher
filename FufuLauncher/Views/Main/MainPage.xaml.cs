@@ -342,6 +342,63 @@ private async void ChangeUidButton_Click(object sender, RoutedEventArgs e)
         storyboard.Children.Add(animation);
         storyboard.Begin();
     }
+    
+    private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
+    {
+        var window = new GachaAnalysisWindow();
+        window.Activate();
+    }
+
+    private void OnOpenAchievementsClick(object sender, RoutedEventArgs e)
+    {
+        var window = new AchievementWindow();
+        window.Activate();
+    }
+
+    private void OnOpenInventoryClick(object sender, RoutedEventArgs e)
+    {
+        var window = new InventoryWindow();
+        window.Activate();
+    }
+
+    private void OnOpenPlayerRolesClick(object sender, RoutedEventArgs e)
+    {
+        var window = new PlayerInfoWindow();
+        window.Activate();
+    }
+
+    private void OnOpenDailyNoteClick(object sender, RoutedEventArgs e)
+    {
+        var window = new DailyNoteWindow();
+        window.Activate();
+    }
+
+    private async void BBSButton_Click(object sender, RoutedEventArgs e)
+    {
+        ContentDialog riskDialog = new()
+        {
+            Title = "安全提示",
+            Content = "进入战绩信息页面可能会导致您的账户被标注为风险账户，进而导致部分功能（如某些自动化工具或特定网页访问）无法正常使用，是否确认继续？",
+            PrimaryButtonText = "确认继续",
+            CloseButtonText = "取消",
+            DefaultButton = ContentDialogButton.Close,
+            XamlRoot = XamlRoot
+        };
+        
+        ContentDialogResult result = await riskDialog.ShowAsync();
+        
+        if (result == ContentDialogResult.Primary)
+        {
+            var bbsWindow = new BBSWindow();
+            bbsWindow.Activate();
+        }
+    }
+
+    private void OnOpenVideoResourcesClick(object sender, RoutedEventArgs e)
+    {
+        var window = new VideoResourcesWindow();
+        window.Activate();
+    }
 
     private void InfoCard_PointerEntered(object sender, PointerRoutedEventArgs e)
     {

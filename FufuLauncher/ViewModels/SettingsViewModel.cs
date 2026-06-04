@@ -110,6 +110,56 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private int _launchArgsMonitorIndex = 0;
         
         [ObservableProperty] private bool _isShowPresetCardEnabled;
+        
+        [ObservableProperty] private bool _isShowWidgetCardEnabled;
+        [ObservableProperty] private bool _showWidgetGacha = true;
+        [ObservableProperty] private bool _showWidgetAchievement = true;
+        [ObservableProperty] private bool _showWidgetInventory = true;
+        [ObservableProperty] private bool _showWidgetPlayerRole = true;
+        [ObservableProperty] private bool _showWidgetDailyNoteWindow = true;
+        [ObservableProperty] private bool _showWidgetVideo = true;
+        [ObservableProperty] private bool _showWidgetBBS = true;
+        
+        partial void OnIsShowWidgetCardEnabledChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("IsShowWidgetCardEnabled", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetGachaChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetGacha", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetAchievementChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetAchievement", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetInventoryChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetInventory", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetPlayerRoleChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetPlayerRole", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetDailyNoteWindowChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetDailyNoteWindow", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetVideoChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetVideo", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
+        partial void OnShowWidgetBBSChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("ShowWidgetBBS", value);
+            WeakReferenceMessenger.Default.Send(new CardVisibilityChangedMessage());
+        }
 
         partial void OnIsShowPresetCardEnabledChanged(bool value)
         {
@@ -779,6 +829,30 @@ namespace FufuLauncher.ViewModels
             IsShowPresetCardEnabled = showPresetCardJson != null && Convert.ToBoolean(showPresetCardJson);
     
             _isUpdatingDailyNote = false;
+            
+            var showWidgetCardJson = await _localSettingsService.ReadSettingAsync("IsShowWidgetCardEnabled");
+            IsShowWidgetCardEnabled = showWidgetCardJson != null && Convert.ToBoolean(showWidgetCardJson);
+
+            var showWidgetGachaJson = await _localSettingsService.ReadSettingAsync("ShowWidgetGacha");
+            ShowWidgetGacha = showWidgetGachaJson == null || Convert.ToBoolean(showWidgetGachaJson);
+            
+            var showWidgetAchievementJson = await _localSettingsService.ReadSettingAsync("ShowWidgetAchievement");
+            ShowWidgetAchievement = showWidgetAchievementJson == null || Convert.ToBoolean(showWidgetAchievementJson);
+            
+            var showWidgetInventoryJson = await _localSettingsService.ReadSettingAsync("ShowWidgetInventory");
+            ShowWidgetInventory = showWidgetInventoryJson == null || Convert.ToBoolean(showWidgetInventoryJson);
+            
+            var showWidgetPlayerRoleJson = await _localSettingsService.ReadSettingAsync("ShowWidgetPlayerRole");
+            ShowWidgetPlayerRole = showWidgetPlayerRoleJson == null || Convert.ToBoolean(showWidgetPlayerRoleJson);
+            
+            var showWidgetDailyNoteWindowJson = await _localSettingsService.ReadSettingAsync("ShowWidgetDailyNoteWindow");
+            ShowWidgetDailyNoteWindow = showWidgetDailyNoteWindowJson == null || Convert.ToBoolean(showWidgetDailyNoteWindowJson);
+            
+            var showWidgetVideoJson = await _localSettingsService.ReadSettingAsync("ShowWidgetVideo");
+            ShowWidgetVideo = showWidgetVideoJson == null || Convert.ToBoolean(showWidgetVideoJson);
+            
+            var showWidgetBBSJson = await _localSettingsService.ReadSettingAsync("ShowWidgetBBS");
+            ShowWidgetBBS = showWidgetBBSJson == null || Convert.ToBoolean(showWidgetBBSJson);
 
             var panelOpacityJson = await _localSettingsService.ReadSettingAsync("PanelBackgroundOpacity");
             try
