@@ -570,7 +570,7 @@
                             </Grid>
                         </Border>
 
-                        <Border Width="340" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
+                        <Border Width="345" CornerRadius="8" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" Shadow="{StaticResource SharedShadow}" Translation="0,0,16">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
