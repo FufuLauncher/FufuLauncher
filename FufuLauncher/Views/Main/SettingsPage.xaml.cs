@@ -22,6 +22,25 @@ public sealed partial class SettingsPage : Page
         InitializeComponent();
     }
     
+    private async void OnIndependentDeploymentClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "声明",
+            Content = "该独立部署版本软件由PR贡献者自行开发提供，FufuLauncher无法对该软件的安全性、稳定性或后续维护提供任何保证，您需要自行辨别使用风险\n\n是否继续访问该项目地址？",
+            PrimaryButtonText = "继续访问",
+            CloseButtonText = "取消",
+            XamlRoot = this.XamlRoot
+        };
+
+        var result = await dialog.ShowAsync();
+    
+        if (result == ContentDialogResult.Primary)
+        {
+            _ = Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/Marchen-orz/MiyoQian"));
+        }
+    }
+    
     private void OnIdentifyMonitorsClick(object sender, RoutedEventArgs e)
 {
     var displayAreas = DisplayArea.FindAll();

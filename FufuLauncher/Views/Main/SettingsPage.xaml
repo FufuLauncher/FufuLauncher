@@ -940,10 +940,10 @@
                                     </ToolTipService.ToolTip>
                                 </TextBlock>
                                 <HyperlinkButton Content="独立部署版本"
-                                               NavigateUri="https://github.com/Marchen-orz/MiyoQian"
-                                               FontSize="12"
-                                               Padding="0"
-                                               VerticalAlignment="Center">
+                                                 Click="OnIndependentDeploymentClick"
+                                                 FontSize="12"
+                                                 Padding="0"
+                                                 VerticalAlignment="Center">
                                     <ToolTipService.ToolTip>
                                         <TextBlock Text="游戏签到和社区签到（概率较大）过程中可能会遇到验证码，需要配置真实设备信息降低风控频率，或使用独立部署版本配置打码服务。"
                                                    TextWrapping="Wrap" MaxWidth="300"/>
