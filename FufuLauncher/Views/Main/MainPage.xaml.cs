@@ -24,6 +24,7 @@ public sealed partial class MainPage : Page
     private bool _isBannerPointerPressed;
     private Windows.Foundation.Point _bannerPointerPressedPoint;
     private static bool _hasCardAnimationPlayed = false;
+    private bool _isInfoCardExpanded = true;
     public MainViewModel ViewModel
     {
         get;
@@ -312,11 +313,13 @@ private async void OpenCheckinSettings_Click(object sender, RoutedEventArgs e)
     private void InfoCard_PointerEntered(object sender, PointerRoutedEventArgs e)
     {
         AnimateInfoButtonOpacity(1.0);
+        AnimateBannerArrowsOpacity(1.0);
     }
 
     private void InfoCard_PointerExited(object sender, PointerRoutedEventArgs e)
     {
         AnimateInfoButtonOpacity(0.0);
+        AnimateBannerArrowsOpacity(0.0);
     }
     
     private void BackgroundGridView_ItemClick(object sender, ItemClickEventArgs e)
@@ -348,6 +351,94 @@ private async void OpenCheckinSettings_Click(object sender, RoutedEventArgs e)
         storyboard.Begin();
     }
 
+    private void AnimateBannerArrowsOpacity(double toOpacity)
+    {
+        if (BannerPrevButton == null || BannerNextButton == null) return;
+
+        var sb = new Storyboard();
+        var duration = new Duration(TimeSpan.FromMilliseconds(200));
+
+        var prevAnim = new DoubleAnimation { To = toOpacity, Duration = duration, EnableDependentAnimation = true };
+        Storyboard.SetTarget(prevAnim, BannerPrevButton);
+        Storyboard.SetTargetProperty(prevAnim, "Opacity");
+        sb.Children.Add(prevAnim);
+
+        var nextAnim = new DoubleAnimation { To = toOpacity, Duration = duration, EnableDependentAnimation = true };
+        Storyboard.SetTarget(nextAnim, BannerNextButton);
+        Storyboard.SetTargetProperty(nextAnim, "Opacity");
+        sb.Children.Add(nextAnim);
+
+        BannerPrevButton.IsHitTestVisible = toOpacity > 0;
+        BannerNextButton.IsHitTestVisible = toOpacity > 0;
+
+        sb.Begin();
+    }
+
+    private void BannerPrev_Click(object sender, RoutedEventArgs e)
+    {
+        MoveBannerBy(-1);
+    }
+
+    private void BannerNext_Click(object sender, RoutedEventArgs e)
+    {
+        MoveBannerBy(1);
+    }
+
+    private void OnInfoCardToggledRequested(bool isExpanded)
+    {
+        DispatcherQueue.TryEnqueue(() => AnimateInfoCardToggle(isExpanded));
+    }
+
+    private void AnimateInfoCardToggle(bool isExpanded)
+    {
+        _isInfoCardExpanded = isExpanded;
+        var targetHeight = isExpanded ? 275 : 157;
+        var targetCornerRadius = isExpanded ? new CornerRadius(12, 12, 0, 0) : new CornerRadius(12);
+
+        var sb = new Storyboard();
+        var duration = new Duration(TimeSpan.FromMilliseconds(350));
+        var easing = new CubicEase { EasingMode = EasingMode.EaseInOut };
+
+        var heightAnim = new DoubleAnimation
+        {
+            To = targetHeight,
+            Duration = duration,
+            EasingFunction = easing,
+            EnableDependentAnimation = true
+        };
+        var cardHost = InfoCardGrid.Parent as Grid;
+        Storyboard.SetTarget(heightAnim, cardHost);
+        Storyboard.SetTargetProperty(heightAnim, "Height");
+        sb.Children.Add(heightAnim);
+
+        if (InfoCardPivot != null)
+        {
+            var pivotOpacityAnim = new DoubleAnimation
+            {
+                To = isExpanded ? 1.0 : 0.0,
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = easing,
+                EnableDependentAnimation = true
+            };
+            Storyboard.SetTarget(pivotOpacityAnim, InfoCardPivot);
+            Storyboard.SetTargetProperty(pivotOpacityAnim, "Opacity");
+            sb.Children.Add(pivotOpacityAnim);
+        }
+
+        sb.Completed += (_, _) =>
+        {
+            if (InfoCardPivot != null)
+            {
+                InfoCardPivot.IsHitTestVisible = isExpanded;
+                InfoCardPivot.Opacity = isExpanded ? 1.0 : 0.0;
+            }
+            BannerImageArea.CornerRadius = targetCornerRadius;
+        };
+
+        BannerImageArea.CornerRadius = targetCornerRadius;
+        sb.Begin();
+    }
+
     private bool _isInitialized;
 
     public MainPage()
@@ -357,13 +448,15 @@ private async void OpenCheckinSettings_Click(object sender, RoutedEventArgs e)
         InitializeComponent();
     
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
-        
+
         ActualThemeChanged += (_, _) => UpdateCardBackgrounds();
-    
-        Loaded += (_, _) => 
+
+        Loaded += (_, _) =>
         {
             LaunchButtonOverlayBorder.Opacity = ViewModel.IsGameRunning ? 0.0 : 1.0;
         };
+
+        ViewModel.InfoCardToggledRequested += OnInfoCardToggledRequested;
 
         OpenLinkCommand = new XamlUICommand();
         OpenLinkCommand.ExecuteRequested += (sender, args) =>
@@ -640,7 +733,7 @@ private async void OpenCheckinSettings_Click(object sender, RoutedEventArgs e)
 
         SetBannerImage(BannerIncomingImage, targetBanner);
 
-        BannerIncomingTranslate.X = -offset;
+        BannerIncomingTranslate.X = offset;
         BannerIncomingLayer.Opacity = 0;
         BannerIncomingScale.ScaleX = 1.035;
         BannerIncomingScale.ScaleY = 1.035;
@@ -653,7 +746,7 @@ private async void OpenCheckinSettings_Click(object sender, RoutedEventArgs e)
         var easing = new CubicEase { EasingMode = EasingMode.EaseOut };
         var duration = new Duration(TimeSpan.FromMilliseconds(BannerAnimationMs));
 
-        storyboard.Children.Add(CreateDoubleAnimation(BannerCurrentTranslate, "X", offset, duration, easing));
+        storyboard.Children.Add(CreateDoubleAnimation(BannerCurrentTranslate, "X", -offset, duration, easing));
         storyboard.Children.Add(CreateDoubleAnimation(BannerCurrentLayer, "Opacity", 0.2, duration, easing));
         storyboard.Children.Add(CreateDoubleAnimation(BannerCurrentScale, "ScaleX", 0.97, duration, easing));
         storyboard.Children.Add(CreateDoubleAnimation(BannerCurrentScale, "ScaleY", 0.97, duration, easing));

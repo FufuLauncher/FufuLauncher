@@ -251,19 +251,20 @@ namespace FufuLauncher.ViewModels
             });
         }
 
+        public event Action<bool> InfoCardToggledRequested;
+
         private void ToggleInfoCard()
         {
             _isInfoCardExpanded = !_isInfoCardExpanded;
             if (_isInfoCardExpanded)
             {
-                InfoCardHeight = 275;
                 InfoExpandIcon = "\uE70E";
             }
             else
             {
-                InfoCardHeight = 135;
                 InfoExpandIcon = "\uE70D";
             }
+            InfoCardToggledRequested?.Invoke(_isInfoCardExpanded);
         }
         
         private async Task LoadAvailableBackgroundsAsync()

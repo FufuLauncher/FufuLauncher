@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Numerics;
+using System.Text.Json.Nodes;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -77,7 +78,7 @@ namespace FufuLauncher.Views
                     _isNavigationEventsSubscribed = true;
                 }
 
-                LoadCalculatorPage();
+                await LoadCalculatorPageAsync();
             }
             catch (Exception ex)
             {
@@ -87,7 +88,7 @@ namespace FufuLauncher.Views
             }
         }
 
-        private void LoadCalculatorPage()
+        private async Task LoadCalculatorPageAsync()
         {
             try
             {
@@ -96,11 +97,43 @@ namespace FufuLauncher.Views
                 ViewModel.IsLoading = true;
                 ViewModel.StatusMessage = "正在同步养成数据...";
 
+                var configPath = Helpers.AppPaths.ConfigFile;
+                if (File.Exists(configPath))
+                {
+                    try
+                    {
+                        var json = await File.ReadAllTextAsync(configPath);
+                        var node = JsonNode.Parse(json);
+                        var cookieStr = node?["Account"]?["Cookie"]?.ToString() ?? "";
+
+                        if (!string.IsNullOrWhiteSpace(cookieStr))
+                        {
+                            var manager = CalculatorWebView.CoreWebView2.CookieManager;
+                            var cookies = await manager.GetCookiesAsync("https://act.mihoyo.com");
+                            foreach (var c in cookies) manager.DeleteCookie(c);
+
+                            foreach (var item in cookieStr.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                            {
+                                var kv = item.Split('=', 2);
+                                if (kv.Length == 2)
+                                {
+                                    var cookie = manager.CreateCookie(kv[0].Trim(), kv[1].Trim(), ".mihoyo.com", "/");
+                                    manager.AddOrUpdateCookie(cookie);
+                                }
+                            }
+                            Debug.WriteLine($"已注入 {cookieStr.Split(';').Length} 个 cookie");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine("读取 cookie 失败: " + ex.Message);
+                    }
+                }
+
                 StartLoadingTimeout();
                 StartMinDisplayTimer();
 
-                var targetUri = new Uri("https://act.mihoyo.com/ys/event/calculator/index.html");
-                CalculatorWebView.Source = targetUri;
+                CalculatorWebView.CoreWebView2.Navigate("https://act.mihoyo.com/ys/event/calculator/index.html");
             }
             catch (Exception ex)
             {
