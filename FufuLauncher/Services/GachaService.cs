@@ -95,6 +95,7 @@ public class GachaService
         string endId = "0";
         int page = 1;
         const int maxRetry = 3;
+        int[] retryDelays = { 2000, 4000, 6000 };
 
         var uri = new Uri(baseUrl);
         var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
@@ -116,7 +117,9 @@ public class GachaService
 
             var requestUrl = $"{uri.Scheme}://{uri.Host}{uri.AbsolutePath}?{cleanQuery}";
 
-            bool success = false;
+            bool gotData = false;
+            bool reachedEnd = false;
+
             for (int retry = 0; retry < maxRetry; retry++)
             {
                 try
@@ -129,16 +132,17 @@ public class GachaService
                         Debug.WriteLine($"[Gacha] type={gachaType} page={page} 重试 {retry + 1}/{maxRetry}, retcode={response?.Retcode}, message={response?.Message}");
                         if (retry < maxRetry - 1)
                         {
-                            await Task.Delay(2000 + retry * 1000);
+                            await Task.Delay(retryDelays[retry]);
                             continue;
                         }
+                        Debug.WriteLine($"[Gacha] type={gachaType} page={page} 重试耗尽，跳过");
                         break;
                     }
 
                     if (response?.Data?.List == null || response.Data.List.Count == 0)
                     {
                         Debug.WriteLine($"[Gacha] type={gachaType} page={page} 返回空列表，正常结束");
-                        success = true;
+                        reachedEnd = true;
                         break;
                     }
 
@@ -148,7 +152,7 @@ public class GachaService
                     page++;
                     onPageFetched?.Invoke(allItems.Count);
                     await Task.Delay(500);
-                    success = true;
+                    gotData = true;
                     break;
                 }
                 catch (Exception ex)
@@ -156,13 +160,14 @@ public class GachaService
                     Debug.WriteLine($"[Gacha] type={gachaType} page={page} 重试 {retry + 1}/{maxRetry}, 异常: {ex.GetType().Name}: {ex.Message}");
                     if (retry < maxRetry - 1)
                     {
-                        await Task.Delay(2000 + retry * 1000);
+                        await Task.Delay(retryDelays[retry]);
                         continue;
                     }
+                    Debug.WriteLine($"[Gacha] type={gachaType} page={page} 重试耗尽，跳过");
                 }
             }
 
-            if (!success) break;
+            if (reachedEnd || !gotData) break;
         }
 
         allItems.Reverse();
