@@ -1800,10 +1800,10 @@ public partial class GachaAnalysisModel : ObservableObject
 
     private ObservableCollection<GachaDisplayItem> BuildDisplayCollection(List<FiveStarRecord> records, string typeHint, List<GachaPoolMetadata> pools = null)
     {
-        var items = new GachaDisplayItem[records.Count];
+        var pityStatuses = new PityStatus[records.Count];
         bool wasPreviousLost = false;
 
-        for (var i = 0; i < records.Count; i++)
+        for (var i = records.Count - 1; i >= 0; i--)
         {
             var record = records[i];
 
@@ -1819,12 +1819,18 @@ public partial class GachaAnalysisModel : ObservableObject
                 DeterminePityStatus(logItem, pools, record.PityUsed, wasPreviousLost) :
                 PityStatus.None;
 
-            // 5星物品才影响wasPreviousLost状态
             if (record.Rank == 5)
             {
                 wasPreviousLost = (pityStatus == PityStatus.LostPity);
             }
 
+            pityStatuses[i] = pityStatus;
+        }
+
+        var items = new GachaDisplayItem[records.Count];
+        for (var i = 0; i < records.Count; i++)
+        {
+            var record = records[i];
             items[i] = new GachaDisplayItem
             {
                 Name = record.Name,
@@ -1833,7 +1839,7 @@ public partial class GachaAnalysisModel : ObservableObject
                 Rank = record.Rank,
                 Type = typeHint,
                 ImageUrl = "ms-appx:///Assets/StoreLogo.png",
-                PityStatus = pityStatus
+                PityStatus = pityStatuses[i]
             };
         }
         return new ObservableCollection<GachaDisplayItem>(items);
