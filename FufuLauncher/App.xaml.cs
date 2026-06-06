@@ -147,6 +147,8 @@ public partial class App : Application
 
                     services.AddLogging(builder =>
                     {
+                        builder.ClearProviders(); 
+                        
                         builder.AddDebug();
                         builder.SetMinimumLevel(LogLevel.Information);
                     });

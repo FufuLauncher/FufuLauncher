@@ -267,9 +267,26 @@ public sealed partial class MainWindow : WindowEx
         if (_isSuspended) return;
         _isSuspended = true;
     
-        if (_globalBackgroundPlayer != null && _globalBackgroundPlayer.PlaybackSession.CanPause)
+        try
         {
-            _globalBackgroundPlayer.Pause();
+            if (_globalBackgroundPlayer != null && _globalBackgroundPlayer.PlaybackSession != null)
+            {
+                try
+                {
+                    if (_globalBackgroundPlayer.PlaybackSession.CanPause)
+                    {
+                        _globalBackgroundPlayer.Pause();
+                    }
+                }
+                catch (System.Runtime.InteropServices.COMException)
+                {
+
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"挂起媒体播放时发生异常: {ex.Message}");
         }
     
         _slideshowTimer?.Stop();
@@ -290,9 +307,17 @@ public sealed partial class MainWindow : WindowEx
         if (!_isSuspended) return;
         _isSuspended = false;
         
-        if (_isVideoBackground && _globalBackgroundPlayer != null)
+        try
         {
-            _globalBackgroundPlayer.Play();
+            if (_isVideoBackground && _globalBackgroundPlayer != null)
+            {
+                _globalBackgroundPlayer.Play();
+            }
+        }
+        catch (System.Runtime.InteropServices.COMException) {}
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"恢复媒体播放时发生异常: {ex.Message}");
         }
         
         _slideshowTimer?.Start();

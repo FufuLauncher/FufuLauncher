@@ -42,107 +42,186 @@ private async void StartBtn_Click(object sender, RoutedEventArgs e)
 
     string cnPlugins = Path.Combine(_gameDir, GameConstants.CN_DATA_DIR, "Plugins");
     string osPlugins = Path.Combine(_gameDir, GameConstants.OS_DATA_DIR, "Plugins");
-    string pluginDeleteError = null;
-
-    try
+    
+    bool retryConversion;
+    do
     {
-        if (Directory.Exists(cnPlugins)) Directory.Delete(cnPlugins, true);
-        if (Directory.Exists(osPlugins)) Directory.Delete(osPlugins, true);
-    }
-    catch (Exception ex)
-    {
-        pluginDeleteError = ex.Message;
-    }
-
-    _statusText = new TextBlock { Text = "准备中...", TextWrapping = TextWrapping.Wrap };
-    var sp = new StackPanel { Spacing = 16, Margin = new Thickness(0, 16, 0, 0) };
-    sp.Children.Add(new ProgressBar { IsIndeterminate = true, HorizontalAlignment = HorizontalAlignment.Stretch });
-    sp.Children.Add(_statusText);
-
-    _progressDialog = new ContentDialog
-    {
-        Title = "正在切换服务器",
-        Content = sp,
-        XamlRoot = XamlRoot
-    };
-
-    _ = _progressDialog.ShowAsync();
-
-    if (pluginDeleteError != null)
-    {
-        UpdateProgressText($"清理插件文件夹失败: {pluginDeleteError}");
-    }
-
-    string cacheDir = Path.Combine(Helpers.AppPaths.ServerCacheDir, Guid.NewGuid().ToString("N"));
-    var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText, _targetServer);
-
-    try
-    {
-        await Task.Run(() => converter.ExecuteConversionAsync());
-
-        _progressDialog.Hide();
-
-        var successDialog = new ContentDialog
-        {
-            Title = "完成",
-            Content = $"当前已切换至：{converter.TargetServerName}", 
-            CloseButtonText = "确定",
-            XamlRoot = XamlRoot
-        };
-
-        await successDialog.ShowAsync();
-
-        _parentWindow?.Close();
-    }
-    catch (Exception ex)
-    {
-        _progressDialog.Hide();
-        var errDialog = new ContentDialog
-        {
-            Title = "转换失败",
-            Content = $"切换失败，我们会为你修复游戏，你可能需要等待几分钟！\n错误信息: {ex.Message}",
-            CloseButtonText = "确定",
-            XamlRoot = XamlRoot
-        };
-        await errDialog.ShowAsync();
-
-        _progressDialog.Title = "正在修复游戏";
-        _statusText.Text = "准备修复...";
-        _ = _progressDialog.ShowAsync();
+        retryConversion = false;
+        string pluginDeleteError = null;
 
         try
         {
-            await Task.Run(() => converter.RunVerificationAsync());
-            
+            if (Directory.Exists(cnPlugins)) Directory.Delete(cnPlugins, true);
+            if (Directory.Exists(osPlugins)) Directory.Delete(osPlugins, true);
+        }
+        catch (Exception ex)
+        {
+            pluginDeleteError = ex.Message;
+        }
+
+        _statusText = new TextBlock { Text = "准备中...", TextWrapping = TextWrapping.Wrap };
+        var sp = new StackPanel { Spacing = 16, Margin = new Thickness(0, 16, 0, 0) };
+        sp.Children.Add(new ProgressBar { IsIndeterminate = true, HorizontalAlignment = HorizontalAlignment.Stretch });
+        sp.Children.Add(_statusText);
+
+        _progressDialog = new ContentDialog
+        {
+            Title = "正在切换服务器",
+            Content = sp,
+            XamlRoot = XamlRoot
+        };
+
+        _ = _progressDialog.ShowAsync();
+
+        if (pluginDeleteError != null)
+        {
+            UpdateProgressText($"清理插件文件夹失败: {pluginDeleteError}");
+        }
+
+        string cacheDir = Path.Combine(Helpers.AppPaths.ServerCacheDir, Guid.NewGuid().ToString("N"));
+        var converter = new PackageConverter(_gameDir, cacheDir, UpdateProgressText, _targetServer);
+
+        try
+        {
+            await Task.Run(() => converter.ExecuteConversionAsync());
+
             _progressDialog.Hide();
-            var repairSuccessDialog = new ContentDialog
+
+            var successDialog = new ContentDialog
             {
-                Title = "修复完成",
-                Content = "游戏文件修复完成，您可以尝试重新切换服务器或直接游玩！",
+                Title = "完成",
+                Content = $"当前已切换至：{converter.TargetServerName}", 
                 CloseButtonText = "确定",
                 XamlRoot = XamlRoot
             };
-            await repairSuccessDialog.ShowAsync();
+
+            await successDialog.ShowAsync();
+
+            _parentWindow?.Close();
         }
-        catch (Exception repairEx)
+        catch (Exception ex)
         {
             _progressDialog.Hide();
-            var repairErrDialog = new ContentDialog
+            var errDialog = new ContentDialog
             {
-                Title = "修复失败",
-                Content = $"游戏修复失败，错误信息: {repairEx.Message}",
-                CloseButtonText = "确定",
+                Title = "转换失败",
+                Content = $"切换失败，文件可能被占用\n错误信息: {ex.Message}\n\n请问是放弃切换并修复游戏，还是尝试补救方案？",
+                PrimaryButtonText = "继续尝试",
+                CloseButtonText = "修复游戏",
                 XamlRoot = XamlRoot
             };
-            await repairErrDialog.ShowAsync();
+            
+            var result = await errDialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                string targetPluginDir = Directory.Exists(Path.Combine(_gameDir, GameConstants.OS_DATA_DIR)) 
+                    ? Path.Combine(_gameDir, GameConstants.OS_DATA_DIR, "Plugins") 
+                    : Path.Combine(_gameDir, GameConstants.CN_DATA_DIR, "Plugins");
+
+                if (!Directory.Exists(targetPluginDir)) Directory.CreateDirectory(targetPluginDir);
+
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = targetPluginDir,
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
+
+                var monitorTextBlock = new TextBlock 
+                { 
+                    Text = "请在弹出的文件夹中，手动删除所有文件(可使用快捷键Ctrl+A全选，再按Del键，或自己手动勾选右键删除)\n我们会实时监测，当你清理完毕后可点击确认继续", 
+                    TextWrapping = TextWrapping.Wrap 
+                };
+
+                var manualDeleteDialog = new ContentDialog
+                {
+                    Title = "手动清理插件",
+                    Content = monitorTextBlock,
+                    PrimaryButtonText = "确认并重试",
+                    CloseButtonText = "取消",
+                    XamlRoot = XamlRoot
+                };
+
+                using var cts = new System.Threading.CancellationTokenSource();
+                var monitorTask = Task.Run(async () =>
+                {
+                    try
+                    {
+                        while (!cts.Token.IsCancellationRequested)
+                        {
+                            bool isClean = true;
+                            if (Directory.Exists(cnPlugins) && Directory.GetFileSystemEntries(cnPlugins).Length > 0) isClean = false;
+                            if (Directory.Exists(osPlugins) && Directory.GetFileSystemEntries(osPlugins).Length > 0) isClean = false;
+
+                            if (isClean)
+                            {
+                                DispatcherQueue.TryEnqueue(() =>
+                                {
+                                    monitorTextBlock.Text = "你似乎已经成功了，可以直接确认了";
+                                });
+                                break;
+                            }
+                            await Task.Delay(500, cts.Token);
+                        }
+                    }
+                    catch { }
+                }, cts.Token);
+
+                var manualResult = await manualDeleteDialog.ShowAsync();
+                cts.Cancel();
+
+                if (manualResult == ContentDialogResult.Primary)
+                {
+                    if (Directory.Exists(cacheDir)) Directory.Delete(cacheDir, true);
+                    retryConversion = true;
+                    continue; 
+                }
+            }
+
+            _progressDialog.Title = "正在修复游戏";
+            _statusText.Text = "准备修复...";
+            _ = _progressDialog.ShowAsync();
+
+            try
+            {
+                await Task.Run(() => converter.RunVerificationAsync());
+                
+                _progressDialog.Hide();
+                var repairSuccessDialog = new ContentDialog
+                {
+                    Title = "修复完成",
+                    Content = "游戏文件修复完成，您可以尝试重新切换服务器或直接游玩！",
+                    CloseButtonText = "确定",
+                    XamlRoot = XamlRoot
+                };
+                await repairSuccessDialog.ShowAsync();
+            }
+            catch (Exception repairEx)
+            {
+                _progressDialog.Hide();
+                var repairErrDialog = new ContentDialog
+                {
+                    Title = "修复失败",
+                    Content = $"游戏修复失败，错误信息: {repairEx.Message}",
+                    CloseButtonText = "确定",
+                    XamlRoot = XamlRoot
+                };
+                await repairErrDialog.ShowAsync();
+            }
         }
-    }
-    finally
-    {
-        if (Directory.Exists(cacheDir)) Directory.Delete(cacheDir, true);
-        
-        StartBtn.IsEnabled = true;
-    }
+        finally
+        {
+            if (!retryConversion)
+            {
+                if (Directory.Exists(cacheDir)) Directory.Delete(cacheDir, true);
+                
+                StartBtn.IsEnabled = true;
+                if (sender is Button buttonSender) buttonSender.IsEnabled = true;
+            }
+        }
+
+    } while (retryConversion);
 }
         
         private async void AlternativeStartBtn_Click(object sender, RoutedEventArgs e)
