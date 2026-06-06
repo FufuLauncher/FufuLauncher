@@ -429,6 +429,34 @@ namespace FufuLauncher.Views
             await ViewModel.ShowAnalysisAsync();
             UpdateTabIndicator();
         }
+        
+        private async void OnAboutButtonClick(object sender, RoutedEventArgs e)
+        {
+            var contentPanel = new StackPanel { Spacing = 8 };
+            
+            contentPanel.Children.Add(new TextBlock 
+            { 
+                Text = "该项目使用UIGF v4.0标准格式处理祈愿数据",
+                TextWrapping = TextWrapping.Wrap 
+            });
+
+            contentPanel.Children.Add(new HyperlinkButton
+            {
+                Content = "UIGF-Org",
+                NavigateUri = new Uri("https://uigf.org/")
+            });
+
+            var dialog = new ContentDialog
+            {
+                Title = "关于",
+                Content = contentPanel,
+                CloseButtonText = "关闭",
+                DefaultButton = ContentDialogButton.Close,
+                XamlRoot = Content.XamlRoot
+            };
+
+            await dialog.ShowAsync();
+        }
 
         private void UpdateTabIndicator()
         {

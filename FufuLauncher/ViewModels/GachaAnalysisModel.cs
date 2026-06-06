@@ -1436,7 +1436,7 @@ public partial class GachaAnalysisModel : ObservableObject
         if (!IsScraping) IsFetching = false;
     }
 
-    [RelayCommand]
+[RelayCommand]
     private async Task ExportUigfAsync()
     {
         try
@@ -1456,34 +1456,42 @@ public partial class GachaAnalysisModel : ObservableObject
             var uid = _currentUid;
             if (string.IsNullOrEmpty(uid)) uid = "unknown";
 
-            var uigf = new UIGFJson
+            var finalObj = new
             {
-                Info = new UIGFInfo
+                info = new
                 {
-                    ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
-                    ExportAppVersion = $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Version}"
+                    export_timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                    export_app = "FufuLauncher",
+                    export_app_version = $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Version}",
+                    version = "v4.0"
                 },
-                Hk4e = new List<UIGFEntry>
+                hk4e = new[]
                 {
-                    new()
+                    new
                     {
-                        Uid = uid,
-                        List = allLogs.Select(log => new UIGFItem
+                        uid = uid,
+                        timezone = 8,
+                        lang = "zh-cn",
+                        list = allLogs.Select(log => new
                         {
-                            UigfGachaType = GameToUigfGachaType(log.GachaType),
-                            GachaType = log.GachaType,
-                            ItemId = log.ItemId,
-                            Time = log.Time,
-                            Id = log.Id
+                            uigf_gacha_type = GameToUigfGachaType(log.GachaType),
+                            gacha_type = log.GachaType,
+                            item_id = log.ItemId ?? "",
+                            count = log.Count ?? "1",
+                            time = log.Time ?? "",
+                            name = log.Name ?? "",
+                            item_type = log.ItemType ?? "",
+                            rank_type = log.RankType ?? "",
+                            id = log.Id ?? ""
                         }).ToList()
                     }
                 }
             };
 
-            var json = JsonSerializer.Serialize(uigf, new JsonSerializerOptions
+            var json = JsonSerializer.Serialize(finalObj, new JsonSerializerOptions
             {
                 WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
             });
 
             var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
@@ -1497,7 +1505,7 @@ public partial class GachaAnalysisModel : ObservableObject
             var file = await savePicker.PickSaveFileAsync();
             if (file == null) return;
 
-            await System.IO.File.WriteAllTextAsync(file.Path, json);
+            await File.WriteAllTextAsync(file.Path, json);
             WeakReferenceMessenger.Default.Send(new NotificationMessage("导出成功", $"已导出 {allLogs.Count} 条记录到 {file.Name}", NotificationType.Success, 3000));
         }
         catch (Exception ex)
@@ -1527,7 +1535,7 @@ public partial class GachaAnalysisModel : ObservableObject
             IsFetching = true;
             CrawlerStatus = "正在读取 UIGF 文件...";
 
-            var json = await System.IO.File.ReadAllTextAsync(file.Path);
+            var json = await File.ReadAllTextAsync(file.Path);
             var uigf = JsonSerializer.Deserialize<UIGFJson>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             var version = uigf?.Info?.Version ?? "";

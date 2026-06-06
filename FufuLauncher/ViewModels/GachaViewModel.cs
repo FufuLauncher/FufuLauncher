@@ -140,21 +140,17 @@ public partial class GachaViewModel : ObservableRecipient
                 }
             }
 
-            var exportTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            if (string.IsNullOrEmpty(uid)) uid = "unknown";
 
             var infoObj = new
             {
-                uid = uid,
-                lang = "zh-cn",
-                export_time = exportTime,
+                export_timestamp = DateTimeOffset.Now.ToUnixTimeSeconds(),
                 export_app = "FufuLauncher",
                 export_app_version = "v1.0",
-                uigf_version = "v2.2",
-                export_timestamp = DateTimeOffset.Now.ToUnixTimeSeconds()
+                version = "v4.0"
             };
 
             var uigfList = new List<Dictionary<string, object>>();
-
             long tempIdCounter = 1000000000000000000;
 
             foreach (var entry in _allGachaLogs)
@@ -165,17 +161,14 @@ public partial class GachaViewModel : ObservableRecipient
                 var dict = new Dictionary<string, object>();
 
                 dict["uigf_gacha_type"] = typeCode;
-                dict["gacha_type"] = GetPropValue(item, "GachaType") ?? typeCode;
-                dict["item_id"] = GetPropValue(item, "ItemId") ?? "";
-                dict["count"] = GetPropValue(item, "Count") ?? "1";
-                dict["time"] = GetPropValue(item, "Time") ?? "";
-                dict["name"] = GetPropValue(item, "Name") ?? "";
-                dict["item_type"] = GetPropValue(item, "ItemType") ?? "";
-                dict["rank_type"] = GetPropValue(item, "RankType") ?? "";
-                dict["id"] = GetPropValue(item, "Id") ?? "";
-
-                dict["uid"] = uid;
-                dict["lang"] = "zh-cn";
+                dict["gacha_type"] = GetPropValue(item, "GachaType")?.ToString() ?? typeCode;
+                dict["item_id"] = GetPropValue(item, "ItemId")?.ToString() ?? "";
+                dict["count"] = GetPropValue(item, "Count")?.ToString() ?? "1";
+                dict["time"] = GetPropValue(item, "Time")?.ToString() ?? "";
+                dict["name"] = GetPropValue(item, "Name")?.ToString() ?? "";
+                dict["item_type"] = GetPropValue(item, "ItemType")?.ToString() ?? "";
+                dict["rank_type"] = GetPropValue(item, "RankType")?.ToString() ?? "";
+                dict["id"] = GetPropValue(item, "Id")?.ToString() ?? "";
 
                 if (string.IsNullOrEmpty(dict["id"]?.ToString()))
                 {
@@ -196,11 +189,20 @@ public partial class GachaViewModel : ObservableRecipient
             var finalObj = new
             {
                 info = infoObj,
-                list = uigfList
+                hk4e = new[]
+                {
+                    new
+                    {
+                        uid = uid,
+                        timezone = 8,
+                        lang = "zh-cn",
+                        list = uigfList
+                    }
+                }
             };
 
             var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var fileName = string.IsNullOrEmpty(uid) ? "uigf_export.json" : $"{uid}_uigf.json";
+            var fileName = string.IsNullOrEmpty(uid) || uid == "unknown" ? "uigf_export.json" : $"{uid}_uigf.json";
             var fullPath = Path.Combine(desktopPath, fileName);
 
             var jsonOptions = new JsonSerializerOptions

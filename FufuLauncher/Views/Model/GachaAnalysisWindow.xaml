@@ -146,8 +146,15 @@
             
         </Grid.Resources>
 
-        <Grid Width="288" Height="56" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Transparent">
-            <Pivot x:Name="GachaTabPivot"
+<Grid Height="56" HorizontalAlignment="Stretch" VerticalAlignment="Top" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Pivot Grid.Column="1"
+                   x:Name="GachaTabPivot"
                    Width="288"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
@@ -181,8 +188,21 @@
                     </PivotItem.Header>
                 </PivotItem>
             </Pivot>
-        </Grid>
 
+            <Button Grid.Column="2" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,160,0" 
+                    Background="Transparent" 
+                    BorderThickness="0" 
+                    Click="OnAboutButtonClick">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE946;" FontSize="14"/>
+                    <TextBlock Text="关于"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        
         <Grid Margin="24,64,24,12">
             <ProgressRing x:Name="LoadingRing" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40"
                           IsActive="{Binding ViewModel.IsDataLoaded, Converter={StaticResource BoolInverter}}"/>
@@ -242,7 +262,7 @@
                             <FontIcon Glyph="&#xE8B5;" FontSize="32" HorizontalAlignment="Center"/>
                             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="4">
                                 <TextBlock Text="导入 UIGF 文件" FontWeight="SemiBold" FontSize="14" HorizontalAlignment="Center"/>
-                                <TextBlock Text="从标准 UIGF v4.2 格式&#x0a;JSON 文件导入记录" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" TextAlignment="Center"/>
+                                <TextBlock Text="从标准 UIGF v4.0 格式&#x0a;JSON 文件导入记录" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" TextAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                     </Button>

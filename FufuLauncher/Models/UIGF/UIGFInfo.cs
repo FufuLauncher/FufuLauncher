@@ -14,5 +14,5 @@ public class UIGFInfo
     public string ExportAppVersion { get; set; }
 
     [JsonPropertyName("version")]
-    public string Version { get; set; } = "v4.2";
+    public string Version { get; set; } = "v4.0";
 }
