@@ -156,9 +156,6 @@ public partial class PluginSettingsViewModel : ObservableObject
         if (_hasCheckedHwid && _isHwidAuthorized) return true;
 
         string hwid = await Task.Run(() => SystemEnvironmentHelper.GetHwid());
-        
-        System.Diagnostics.Debug.WriteLine($"[HWID_DEBUG] 本地获取到的HWID: [{hwid}]");
-        File.WriteAllText("hwid_debug.txt", $"[HWID_DEBUG] Time: {DateTime.Now}\nLocal HWID: [{hwid}]\n");
 
         if (string.IsNullOrEmpty(hwid) || hwid == "Unknown") return false;
 
@@ -171,38 +168,20 @@ public partial class PluginSettingsViewModel : ObservableObject
                 System.Text.Encoding.UTF8,
                 "application/json"
             );
-            
-            System.Diagnostics.Debug.WriteLine($"[HWID_DEBUG] 请求的Payload: {await content.ReadAsStringAsync()}");
 
             var response = await client.PostAsync("https://dev.s1ky3.xyz/api/verify-hwid", content);
             if (response.IsSuccessStatusCode)
             {
                 var responseString = await response.Content.ReadAsStringAsync();
-                
-                System.Diagnostics.Debug.WriteLine($"[HWID_DEBUG] 服务器返回的JSON: {responseString}");
-                File.AppendAllText("hwid_debug.txt", $"Response JSON={responseString}\n");
-                
                 var result = JsonDocument.Parse(responseString).RootElement;
                 if (result.TryGetProperty("authorized", out var authElement) && authElement.GetBoolean())
                 {
                     _isHwidAuthorized = true;
-                    System.Diagnostics.Debug.WriteLine("[HWID_DEBUG] 认证状态: 成功 (authorized=true)");
                 }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("[HWID_DEBUG] 认证状态: 失败 (authorized不存在或为false)");
-                }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine($"[HWID_DEBUG] HTTP 请求失败，状态码: {response.StatusCode}");
-                File.AppendAllText("hwid_debug.txt", $"ResponseStatusCode={response.StatusCode}\n");
             }
         }
-        catch (Exception ex)
+        catch
         {
-            System.Diagnostics.Debug.WriteLine($"[HWID_DEBUG] 发生异常: {ex.Message}");
-            File.AppendAllText("hwid", $"Error={ex.Message}\n");
         }
 
         _hasCheckedHwid = true;
