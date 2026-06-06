@@ -905,17 +905,6 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
             var isIntlRaw = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
             _isInternationalAccount = isIntlRaw != null && isIntlRaw.ToString().ToLower() == "true";
 
-            if (_isInternationalAccount)
-            {
-                Debug.WriteLine("[MainViewModel] 识别为国际服模式，跳过国服 API 请求");
-                await UpdateUI(() => {
-                    CheckinStatusText = "国际服模式";
-                    CheckinSummary = "Hoyoverse 账号已就绪";
-                    UpdateCheckinIconState("Ready");
-                });
-                return;
-            }
-            
             try 
             {
                 var targetUidObj = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
@@ -962,59 +951,21 @@ private async Task ExecuteCheckinAsync()
 
     try
     {
-        if (_isInternationalAccount)
+        var progress = new Progress<string>(msg =>
         {
-            string cookie = "";
-            try
+            _dispatcherQueue.TryEnqueue(() =>
             {
-                var path = Helpers.AppPaths.ConfigFile;
-                if (File.Exists(path))
-                {
-                    var json = await File.ReadAllTextAsync(path);
-                    var config = System.Text.Json.JsonSerializer.Deserialize<MihoyoBBS.Config>(json);
-                    cookie = config?.Account?.Cookie ?? "";
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"读取 config.json 失败: {ex.Message}");
-            }
-
-            if (string.IsNullOrEmpty(cookie))
-            {
-                _notificationService.Show("签到失败", "未在 config.json 中找到有效 Cookie", NotificationType.Error, 3000);
-                CheckinStatusText = "缺少 Cookie";
-                return;
-            }
-
-            await UpdateUI(() =>
-            {
-                var win = new HoyolabCheckinWindow(cookie);
-                win.Activate();
+                CheckinButtonText = msg;
             });
+        });
 
-            CheckinStatusText = "国际服签到已发起";
-            CheckinSummary = "正在通过后台浏览器处理...";
-            _notificationService.Show("国际服签到", "正在启动静默浏览器执行签到", NotificationType.Success, 3000);
-        }
-        else
-        {
-            var progress = new Progress<string>(msg =>
-            {
-                _dispatcherQueue.TryEnqueue(() =>
-                {
-                    CheckinButtonText = msg;
-                });
-            });
+        var unifiedResult = await _unifiedCheckinService.ExecuteAllCheckinsAsync(progress);
 
-            var unifiedResult = await _unifiedCheckinService.ExecuteAllCheckinsAsync(progress);
+        CheckinStatusText = unifiedResult.OverallSuccess ? "签到完成" : "签到部分失败";
+        CheckinSummary = unifiedResult.SummaryMessage;
+        UpdateCheckinIconState(unifiedResult.OverallSuccess ? "已签到" : "Fail");
 
-            CheckinStatusText = unifiedResult.OverallSuccess ? "签到完成" : "签到部分失败";
-            CheckinSummary = unifiedResult.SummaryMessage;
-            UpdateCheckinIconState(unifiedResult.OverallSuccess ? "已签到" : "Fail");
-
-            _notificationService.Show("签到完成", unifiedResult.GetDetailedSummary(), unifiedResult.NotificationType, 5000);
-        }
+        _notificationService.Show("签到完成", unifiedResult.GetDetailedSummary(), unifiedResult.NotificationType, 5000);
     }
     catch (Exception ex)
     {

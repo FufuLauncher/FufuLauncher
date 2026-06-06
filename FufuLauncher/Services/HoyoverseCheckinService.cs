@@ -1,5 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Models;
 using MihoyoBBS;
 
 namespace FufuLauncher.Services;
@@ -44,6 +46,36 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         return new HashSet<string>();
     }
 
+    private async Task<(string? cookie, string? configPath)> GetOsConfigAsync()
+    {
+        var activeFileObj = await _localSettingsService.ReadSettingAsync("ActiveConfigFile");
+        var activeFile = activeFileObj?.ToString() ?? "config.lab.json";
+        var paths = new[]
+        {
+            Path.Combine(Helpers.AppPaths.DataDir, "config.lab.json"),
+            Path.Combine(AppContext.BaseDirectory, "config.lab.json"),
+            Path.Combine(Environment.CurrentDirectory, "config.lab.json"),
+        };
+        foreach (var path in paths)
+        {
+            if (!File.Exists(path)) continue;
+            try
+            {
+                var json = await File.ReadAllTextAsync(path);
+                var doc = JsonDocument.Parse(json);
+                var cookie = doc.RootElement.GetProperty("Account").GetProperty("Cookie").GetString();
+                if (!string.IsNullOrEmpty(cookie) && IsOsCookie(cookie)) return (cookie, path);
+            }
+            catch { }
+        }
+        return (null, null);
+    }
+
+    private static bool IsOsCookie(string cookie)
+    {
+        return cookie.Contains("ltuid") || cookie.Contains("ltoken") || cookie.Contains("account_id");
+    }
+
     public async Task<List<string>> GetBoundUidsAsync()
     {
         var config = await LoadConfigWithLoggingAsync();
@@ -56,6 +88,36 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 
     public async Task<(string status, string summary)> GetCheckinStatusAsync(string targetUid = null)
     {
+        var isIntlRaw = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
+        bool isOs = isIntlRaw != null && isIntlRaw.ToString().ToLower() == "true";
+        Debug.WriteLine($"[GetCheckinStatus] isOs={isOs}");
+
+        if (isOs)
+        {
+            var (cookie, cfgPath) = await GetOsConfigAsync();
+            Debug.WriteLine($"[GetCheckinStatus] OS cookie found={!string.IsNullOrEmpty(cookie)} path={cfgPath}");
+            if (string.IsNullOrEmpty(cookie))
+                return ("HoYoLAB 未登录", "请先登录国际服账号");
+
+            var os = new HoyolabCheckinService();
+            await os.InitializeAsync(cookie).ConfigureAwait(false);
+            Debug.WriteLine($"[GetCheckinStatus] OS accounts={os.AccountList.Count} lastError={HoyolabCheckinService.LastApiError}");
+
+            if (os.AccountList.Count == 0)
+                return ("未检测到绑定", HoyolabCheckinService.LastApiError);
+
+            var account = os.AccountList[0];
+            var isData = await os.IsSignAsync(account.Region, account.GameUid).ConfigureAwait(false);
+            Debug.WriteLine($"[GetCheckinStatus] IsSign result={isData != null} lastError={HoyolabCheckinService.LastApiError}");
+
+            if (isData == null)
+                return ("获取状态失败", HoyolabCheckinService.LastApiError);
+
+            var signedText = isData.IsSign ? "今日已签到" : "今日未签到";
+            Debug.WriteLine($"[GetCheckinStatus] signed={isData.IsSign}");
+            return (signedText, $"HoYoLAB: {account.Nickname}");
+        }
+
         var config = await LoadConfigWithLoggingAsync();
         if (!config.Games.Cn.Enable || !config.Games.Cn.Genshin.Checkin)
             return ("签到功能未启用", "config.json中设置Enable=true");
@@ -71,11 +133,11 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
             return ("未检测到账号", errorSummary);
         }
 
-        var account = string.IsNullOrEmpty(targetUid)
+        var cnAccount = string.IsNullOrEmpty(targetUid)
             ? genshin.AccountList[0]
             : genshin.AccountList.FirstOrDefault(a => a.GameUid == targetUid) ?? genshin.AccountList[0];
 
-        var isSignData = await genshin.IsSignAsync(account.Region, account.GameUid, false).ConfigureAwait(false);
+        var isSignData = await genshin.IsSignAsync(cnAccount.Region, cnAccount.GameUid, false).ConfigureAwait(false);
 
         if (isSignData == null)
         {
@@ -86,8 +148,8 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         }
 
         return isSignData.IsSign == true
-            ? ("今日已签到", $"账号: {account.Nickname}")
-            : ("今日未签到", $"账号: {account.Nickname} (可签到)");
+            ? ("今日已签到", $"账号: {cnAccount.Nickname}")
+            : ("今日未签到", $"账号: {cnAccount.Nickname} (可签到)");
     }
 
     public async Task<(bool success, string message)> ExecuteCheckinAsync(string targetUid = null)

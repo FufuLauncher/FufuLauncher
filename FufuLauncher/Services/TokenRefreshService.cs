@@ -40,6 +40,7 @@ public class TokenRefreshService
         try
         {
             var path = Helpers.AppPaths.ConfigFile;
+
             if (!File.Exists(path))
             {
                 if (isManual) SendErrorNotification("未找到配置文件");
@@ -55,6 +56,18 @@ public class TokenRefreshService
                 return;
             }
             
+            var cookieDict = ParseCookieString(config.Account.Cookie);
+            cookieDict.TryGetValue("stoken", out string stoken);
+            cookieDict.TryGetValue("mid", out string mid);
+
+            if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))
+            {
+                Debug.WriteLine("本地Cookie中缺少stoken或mid，无法刷新");
+                if (!isManual) return;
+                SendErrorNotification("本地Cookie中缺少stoken或mid，无法刷新");
+                return;
+            }
+
             if (!isManual)
             {
                 bool isValid = await CheckCookieValidAsync(config.Account.Cookie);
@@ -68,18 +81,6 @@ public class TokenRefreshService
             Debug.WriteLine(isManual ? "用户手动触发Coken刷新..." : "当前Cookie已失效或角色列表为空，开始执行Coken刷新...");
             
             WeakReferenceMessenger.Default.Send(new NotificationMessage("Cookie刷新", isManual ? "正在执行手动刷新..." : "Cookie已失效，正在执行刷新...", NotificationType.Warning, 3000));
-
-            var cookieDict = ParseCookieString(config.Account.Cookie);
-            
-            cookieDict.TryGetValue("stoken", out string stoken);
-            cookieDict.TryGetValue("mid", out string mid);
-
-            if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))
-            {
-                Debug.WriteLine("本地Cookie中缺少stoken或mid，无法刷新");
-                if (isManual) SendErrorNotification("本地Cookie中缺少stoken或mid，无法刷新");
-                return;
-            }
 
             string authCookie = $"stoken={stoken}; mid={mid}";
             
