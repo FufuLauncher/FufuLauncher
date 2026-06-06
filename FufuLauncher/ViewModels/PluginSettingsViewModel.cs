@@ -1284,18 +1284,20 @@ public class PluginSettingItem : ObservableObject
         return list.GroupBy(k => k.KeyCode).Select(g => g.First()).OrderBy(k => k.KeyCode).ToList();
     }
     
-    public int KeyValue
+    public int? KeyValue
     {
         get => int.TryParse(_rawValue, out var result) ? result : 0;
         set
         {
-            var targetValue = value.ToString();
+            if (value == null) return;
+            
+            var targetValue = value.Value.ToString();
             if (_rawValue != targetValue)
             {
                 var previousValue = _rawValue;
                 _rawValue = targetValue;
                 
-                bool isNew = EnsureKeyOption(value);
+                bool isNew = EnsureKeyOption(value.Value);
 
                 if (isNew)
                 {
@@ -1368,8 +1370,12 @@ public class PluginSettingItem : ObservableObject
 
     public double KeyNumberValue
     {
-        get => KeyValue;
-        set => KeyValue = (int)Math.Round(value);
+        get => KeyValue ?? 0;
+        set
+        {
+            if (double.IsNaN(value)) return;
+            KeyValue = (int)Math.Round(value);
+        }
     }
 
     public void SetKeyInputMode(bool useKeyListInput)
