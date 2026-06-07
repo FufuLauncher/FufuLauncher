@@ -1543,8 +1543,9 @@ private async Task ExportUigfAsync(string version)
         });
 
         var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
+        if (hwnd == IntPtr.Zero) hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
         var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-        if (hwnd != IntPtr.Zero) WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+        WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
 
         savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
         savePicker.FileTypeChoices.Add("JSON 文件", new List<string> { ".json" });
@@ -1571,7 +1572,8 @@ private async Task ImportUigfAsync()
     {
         var picker = new Windows.Storage.Pickers.FileOpenPicker();
         var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
-        if (hwnd != IntPtr.Zero) WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+        if (hwnd == IntPtr.Zero) hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
         picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
         picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
@@ -1727,7 +1729,7 @@ private async Task ImportUigfAsync()
     catch (Exception ex)
     {
         Debug.WriteLine($"[Gacha] 导入失败: {ex}");
-        CrawlerStatus = $"导入失败: {ex.Message}";
+        CrawlerStatus = $"导入失败: [{ex.GetType().Name}] {ex.Message}";
         IsFetching = false;
         OnErrorAction?.Invoke(CrawlerStatus);
     }
