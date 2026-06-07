@@ -45,6 +45,7 @@ public sealed partial class EasterEggPage : Page
     private bool _isDeleting = false;
     private bool _isPaused = false;
     private int _pauseTicks = 0;
+    private bool _cleaned = false;
 
     public UIElement AppTitleBarElement => AppTitleBar;
 
@@ -88,7 +89,7 @@ public sealed partial class EasterEggPage : Page
                 {
                     DispatcherQueue.TryEnqueue(() =>
                     {
-                        if (BgVideoPlayer.MediaPlayer != null)
+                        if (!_cleaned && BgVideoPlayer?.MediaPlayer != null)
                         {
                             BgVideoPlayer.MediaPlayer.IsLoopingEnabled = true;
                             BgVideoPlayer.MediaPlayer.Play();
@@ -194,25 +195,37 @@ public sealed partial class EasterEggPage : Page
 
     public void Cleanup()
     {
+        if (_cleaned) return;
+        _cleaned = true;
+
         try
         {
             _typewriterTimer?.Stop();
             _typewriterTimer = null;
 
-            if (_musicPlayer != null)
-            {
-                _musicPlayer.Pause();
-                _musicPlayer.Dispose();
-                _musicPlayer = null;
-            }
-
-            if (BgVideoPlayer?.MediaPlayer != null)
-            {
-                BgVideoPlayer.MediaPlayer.Pause();
-                BgVideoPlayer.MediaPlayer.Dispose();
-
+            var music = _musicPlayer;
+            _musicPlayer = null;
+            var videoPlayer = BgVideoPlayer?.MediaPlayer;
+            if (BgVideoPlayer != null)
                 BgVideoPlayer.Source = null;
-            }
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    if (music != null)
+                    {
+                        music.Pause();
+                        music.Dispose();
+                    }
+                    if (videoPlayer != null)
+                    {
+                        videoPlayer.Pause();
+                        videoPlayer.Dispose();
+                    }
+                }
+                catch { }
+            });
         }
         catch (Exception ex)
         {

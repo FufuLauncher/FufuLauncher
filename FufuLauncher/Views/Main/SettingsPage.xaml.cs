@@ -118,8 +118,16 @@ public sealed partial class SettingsPage : Page
         }
     }
 
+    private Window _easterEggWindow;
+
     private void OnEasterEggClick(object sender, RoutedEventArgs e)
     {
+        if (_easterEggWindow != null)
+        {
+            _easterEggWindow.Activate();
+            return;
+        }
+
         var window = new Window();
         var page = new EasterEggPage();
         window.Content = page;
@@ -156,8 +164,10 @@ public sealed partial class SettingsPage : Page
         window.Closed += (s, args) =>
         {
             page.Cleanup();
+            _easterEggWindow = null;
         };
 
+        _easterEggWindow = window;
         window.Activate();
     }
     
