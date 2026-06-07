@@ -10,6 +10,11 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.Data.Sqlite;
+using System;
+using System.IO;
+using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FufuLauncher.Views;
 
@@ -86,29 +91,53 @@ public sealed partial class AchievementWindow : Window
     private void EnsureDatabaseExists(string dbPath)
     {
         bool isNewDb = !File.Exists(dbPath);
+        using var connection = new SqliteConnection($"Data Source={dbPath}");
+        connection.Open();
+        using var cmd = connection.CreateCommand();
+        
+        cmd.CommandText = @"
+            CREATE TABLE IF NOT EXISTS Categories (
+                Name TEXT PRIMARY KEY,
+                IconUrl TEXT
+            );
+            CREATE TABLE IF NOT EXISTS Achievements (
+                Uid INTEGER PRIMARY KEY AUTOINCREMENT,
+                Id INTEGER,
+                Title TEXT,
+                CategoryName TEXT,
+                RawJson TEXT,
+                IsCompleted INTEGER,
+                CurrentProgress INTEGER,
+                MaxProgress INTEGER,
+                CompletionTimestamp INTEGER DEFAULT 0
+            );
+        ";
+        cmd.ExecuteNonQuery();
+
+        using var checkCmd = connection.CreateCommand();
+        checkCmd.CommandText = "PRAGMA table_info(Achievements);";
+        bool hasTimestamp = false;
+        using (var reader = checkCmd.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                if (reader.GetString(1) == "CompletionTimestamp")
+                {
+                    hasTimestamp = true;
+                    break;
+                }
+            }
+        }
+        
+        if (!hasTimestamp)
+        {
+            using var alterCmd = connection.CreateCommand();
+            alterCmd.CommandText = "ALTER TABLE Achievements ADD COLUMN CompletionTimestamp INTEGER DEFAULT 0;";
+            alterCmd.ExecuteNonQuery();
+        }
+        
         if (isNewDb)
         {
-            using var connection = new SqliteConnection($"Data Source={dbPath}");
-            connection.Open();
-            using var cmd = connection.CreateCommand();
-            cmd.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Categories (
-                    Name TEXT PRIMARY KEY,
-                    IconUrl TEXT
-                );
-                CREATE TABLE IF NOT EXISTS Achievements (
-                    Uid INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Id INTEGER,
-                    Title TEXT,
-                    CategoryName TEXT,
-                    RawJson TEXT,
-                    IsCompleted INTEGER,
-                    CurrentProgress INTEGER,
-                    MaxProgress INTEGER
-                );
-            ";
-            cmd.ExecuteNonQuery();
-            
             string oldJsonPath = Path.Combine(Path.GetDirectoryName(dbPath), "achievements.json");
             if (File.Exists(oldJsonPath))
             {
@@ -135,7 +164,8 @@ public sealed partial class AchievementWindow : Window
         var options = new JsonSerializerOptions { 
             PropertyNameCaseInsensitive = true, 
             NumberHandling = JsonNumberHandling.AllowReadingFromString, 
-            ReadCommentHandling = JsonCommentHandling.Skip 
+            ReadCommentHandling = JsonCommentHandling.Skip,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         var rawCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(jsonContent, options);
         if (rawCategories == null) return;
@@ -145,36 +175,31 @@ public sealed partial class AchievementWindow : Window
 
         foreach (var cat in rawCategories)
         {
+            string categoryName = GetCategoryName(cat);
             using var catCmd = connection.CreateCommand();
             catCmd.Transaction = transaction;
             catCmd.CommandText = "INSERT OR IGNORE INTO Categories (Name, IconUrl) VALUES (@Name, @IconUrl)";
-            catCmd.Parameters.AddWithValue("@Name", cat.Name ?? "未知分类");
+            catCmd.Parameters.AddWithValue("@Name", categoryName);
             catCmd.Parameters.AddWithValue("@IconUrl", cat.IconUrl ?? (object)DBNull.Value);
             catCmd.ExecuteNonQuery();
             
             if (cat.Achievements == null) continue;
 
-            foreach (var masterItem in cat.Achievements)
+            foreach (var item in cat.Achievements)
             {
-                IEnumerable<AchievementItem> targetItems = (masterItem.Children != null && masterItem.Children.Count > 0) 
-                    ? masterItem.Children 
-                    : new[] { masterItem };
-
-                foreach (var item in targetItems)
-                {
-                    using var achCmd = connection.CreateCommand();
-                    achCmd.Transaction = transaction;
-                    achCmd.CommandText = "INSERT INTO Achievements (Id, Title, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress) VALUES (@Id, @Title, @CategoryName, @RawJson, @IsCompleted, @CurrentProgress, @MaxProgress)";
-                    
-                    achCmd.Parameters.AddWithValue("@Id", item.Id);
-                    achCmd.Parameters.AddWithValue("@Title", item.Title ?? "");
-                    achCmd.Parameters.AddWithValue("@CategoryName", cat.Name ?? "未知分类");
-                    achCmd.Parameters.AddWithValue("@RawJson", JsonSerializer.Serialize(item, writeOptions));
-                    achCmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
-                    achCmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
-                    achCmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
-                    achCmd.ExecuteNonQuery();
-                }
+                using var achCmd = connection.CreateCommand();
+                achCmd.Transaction = transaction;
+                achCmd.CommandText = "INSERT INTO Achievements (Id, Title, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress, CompletionTimestamp) VALUES (@Id, @Title, @CategoryName, @RawJson, @IsCompleted, @CurrentProgress, @MaxProgress, @CompletionTimestamp)";
+                
+                achCmd.Parameters.AddWithValue("@Id", item.Id);
+                achCmd.Parameters.AddWithValue("@Title", item.Title ?? "");
+                achCmd.Parameters.AddWithValue("@CategoryName", categoryName);
+                achCmd.Parameters.AddWithValue("@RawJson", JsonSerializer.Serialize(item, writeOptions));
+                achCmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
+                achCmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
+                achCmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
+                achCmd.Parameters.AddWithValue("@CompletionTimestamp", 0);
+                achCmd.ExecuteNonQuery();
             }
         }
         transaction.Commit();
@@ -198,7 +223,7 @@ public sealed partial class AchievementWindow : Window
             }
 
             string masterJson = await File.ReadAllTextAsync(_assetsFilePath);
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, NumberHandling = JsonNumberHandling.AllowReadingFromString, ReadCommentHandling = JsonCommentHandling.Skip };
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, NumberHandling = JsonNumberHandling.AllowReadingFromString, ReadCommentHandling = JsonCommentHandling.Skip, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
             var masterCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(masterJson, options);
 
             EnsureDatabaseExists(_workFilePath);
@@ -206,12 +231,12 @@ public sealed partial class AchievementWindow : Window
             using var connection = new SqliteConnection($"Data Source={_workFilePath}");
             await connection.OpenAsync();
 
-            var existingSignatures = new HashSet<string>();
+            var existingIds = new HashSet<int>();
             using var idCmd = connection.CreateCommand();
-            idCmd.CommandText = "SELECT Id, Title FROM Achievements";
+            idCmd.CommandText = "SELECT Id FROM Achievements";
             using (var reader = await idCmd.ExecuteReaderAsync())
             {
-                while (reader.Read()) existingSignatures.Add($"{reader.GetInt32(0)}_{reader.GetString(1)}");
+                while (reader.Read()) existingIds.Add(reader.GetInt32(0));
             }
 
             using var transaction = connection.BeginTransaction();
@@ -221,40 +246,34 @@ public sealed partial class AchievementWindow : Window
 
             foreach (var masterCat in masterCategories)
             {
+                string categoryName = GetCategoryName(masterCat);
                 using var catCmd = connection.CreateCommand();
                 catCmd.Transaction = transaction;
                 catCmd.CommandText = "INSERT OR IGNORE INTO Categories (Name, IconUrl) VALUES (@Name, @IconUrl)";
-                catCmd.Parameters.AddWithValue("@Name", masterCat.Name ?? "未知分类");
+                catCmd.Parameters.AddWithValue("@Name", categoryName);
                 catCmd.Parameters.AddWithValue("@IconUrl", masterCat.IconUrl ?? (object)DBNull.Value);
                 if (await catCmd.ExecuteNonQueryAsync() > 0) newCategoriesCount++;
 
                 if (masterCat.Achievements == null) continue;
 
-                foreach (var masterItem in masterCat.Achievements)
+                foreach (var item in masterCat.Achievements)
                 {
-                    IEnumerable<AchievementItem> targetItems = (masterItem.Children != null && masterItem.Children.Count > 0) 
-                        ? masterItem.Children 
-                        : new[] { masterItem };
-
-                    foreach (var item in targetItems)
+                    if (!existingIds.Contains(item.Id))
                     {
-                        string sig = $"{item.Id}_{item.Title ?? ""}";
-                        if (!existingSignatures.Contains(sig))
-                        {
-                            using var achCmd = connection.CreateCommand();
-                            achCmd.Transaction = transaction;
-                            achCmd.CommandText = "INSERT INTO Achievements (Id, Title, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress) VALUES (@Id, @Title, @CategoryName, @RawJson, @IsCompleted, @CurrentProgress, @MaxProgress)";
-                            achCmd.Parameters.AddWithValue("@Id", item.Id);
-                            achCmd.Parameters.AddWithValue("@Title", item.Title ?? "");
-                            achCmd.Parameters.AddWithValue("@CategoryName", masterCat.Name ?? "未知分类");
-                            achCmd.Parameters.AddWithValue("@RawJson", JsonSerializer.Serialize(item, writeOptions));
-                            achCmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
-                            achCmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
-                            achCmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
-                            await achCmd.ExecuteNonQueryAsync();
-                            addedCount++;
-                            existingSignatures.Add(sig);
-                        }
+                        using var achCmd = connection.CreateCommand();
+                        achCmd.Transaction = transaction;
+                        achCmd.CommandText = "INSERT INTO Achievements (Id, Title, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress, CompletionTimestamp) VALUES (@Id, @Title, @CategoryName, @RawJson, @IsCompleted, @CurrentProgress, @MaxProgress, @CompletionTimestamp)";
+                        achCmd.Parameters.AddWithValue("@Id", item.Id);
+                        achCmd.Parameters.AddWithValue("@Title", item.Title ?? "");
+                        achCmd.Parameters.AddWithValue("@CategoryName", categoryName);
+                        achCmd.Parameters.AddWithValue("@RawJson", JsonSerializer.Serialize(item, writeOptions));
+                        achCmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
+                        achCmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
+                        achCmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
+                        achCmd.Parameters.AddWithValue("@CompletionTimestamp", 0);
+                        await achCmd.ExecuteNonQueryAsync();
+                        addedCount++;
+                        existingIds.Add(item.Id);
                     }
                 }
             }
@@ -281,6 +300,19 @@ public sealed partial class AchievementWindow : Window
             _isBatchProcessing = false;
             if (_isDataLoaded) CalculateGlobalStats(); 
         }
+    }
+    
+    private string GetCategoryName(AchievementCategory cat)
+    {
+        var props = typeof(AchievementCategory).GetProperties();
+        var titleProp = props.FirstOrDefault(p => p.Name.Equals("Title", StringComparison.OrdinalIgnoreCase));
+        var nameProp = props.FirstOrDefault(p => p.Name.Equals("Name", StringComparison.OrdinalIgnoreCase));
+
+        string name = null;
+        if (titleProp != null) name = titleProp.GetValue(cat) as string;
+        if (string.IsNullOrEmpty(name) && nameProp != null) name = nameProp.GetValue(cat) as string;
+
+        return string.IsNullOrEmpty(name) ? "未知分类" : name;
     }
     
     private async void OnUpdateDbClick(object sender, RoutedEventArgs e)
@@ -736,6 +768,7 @@ public sealed partial class AchievementWindow : Window
                         IconUrl = reader.IsDBNull(1) ? null : reader.GetString(1),
                         Achievements = new ObservableCollection<AchievementItem>()
                     };
+                    SetCategoryTitle(cat, cat.Name);
                     rawCategories.Add(cat);
                     categoryMap[cat.Name] = cat;
                 }
@@ -743,7 +776,7 @@ public sealed partial class AchievementWindow : Window
             _itemUids.Clear();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
             using var achCmd = connection.CreateCommand();
-            achCmd.CommandText = "SELECT Uid, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress FROM Achievements";
+            achCmd.CommandText = "SELECT Uid, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress, CompletionTimestamp FROM Achievements";
             using (var reader = achCmd.ExecuteReader())
             {
                 while (reader.Read())
@@ -754,6 +787,7 @@ public sealed partial class AchievementWindow : Window
                     bool isCompleted = reader.GetInt32(3) == 1;
                     int currentProgress = reader.GetInt32(4);
                     int maxProgress = reader.GetInt32(5);
+                    long completionTimestamp = reader.IsDBNull(6) ? 0 : reader.GetInt64(6);
 
                     var item = JsonSerializer.Deserialize<AchievementItem>(rawJson, options);
                     if (item != null && categoryMap.TryGetValue(catName, out var cat))
@@ -761,6 +795,7 @@ public sealed partial class AchievementWindow : Window
                         item.IsCompleted = isCompleted;
                         item.CurrentProgress = currentProgress;
                         item.MaxProgress = maxProgress;
+                        item.CompletionTimestamp = completionTimestamp;
                         cat.Achievements.Add(item);
                         
                         _itemUids[item] = uid;
@@ -851,6 +886,16 @@ public sealed partial class AchievementWindow : Window
         }
     }
     
+    private void SetCategoryTitle(AchievementCategory cat, string title)
+    {
+        var props = typeof(AchievementCategory).GetProperties();
+        var titleProp = props.FirstOrDefault(p => p.Name.Equals("Title", StringComparison.OrdinalIgnoreCase));
+        if (titleProp != null && titleProp.CanWrite)
+        {
+            titleProp.SetValue(cat, title);
+        }
+    }
+
     private void CalculateGlobalStats()
     {
         if (ViewModel.Categories == null) return;
@@ -909,10 +954,11 @@ public sealed partial class AchievementWindow : Window
             using var connection = new SqliteConnection($"Data Source={_workFilePath}");
             connection.Open();
             using var cmd = connection.CreateCommand();
-            cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress WHERE Uid = @Uid";
+            cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress, CompletionTimestamp = @CompletionTimestamp WHERE Uid = @Uid";
             cmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
             cmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
             cmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
+            cmd.Parameters.AddWithValue("@CompletionTimestamp", item.CompletionTimestamp);
             cmd.Parameters.AddWithValue("@Uid", uid);
             cmd.ExecuteNonQuery();
         }
@@ -929,6 +975,18 @@ public sealed partial class AchievementWindow : Window
                 e.PropertyName == nameof(AchievementItem.CurrentProgress) ||
                 e.PropertyName == nameof(AchievementItem.MaxProgress))
             {
+                if (e.PropertyName == nameof(AchievementItem.IsCompleted))
+                {
+                    if (item.IsCompleted && item.CompletionTimestamp == 0)
+                    {
+                        item.CompletionTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+                    }
+                    else if (!item.IsCompleted)
+                    {
+                        item.CompletionTimestamp = 0;
+                    }
+                }
+
                 parent?.RefreshGroupStatus();
                 cat.RefreshProgress(); 
                 CalculateGlobalStats();
@@ -1175,6 +1233,10 @@ public sealed partial class AchievementWindow : Window
                     if (update.ShouldComplete)
                     {
                         update.Item.IsCompleted = true;
+                        if (update.Item.CompletionTimestamp == 0)
+                        {
+                            update.Item.CompletionTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+                        }
                     }
                 }
                 
@@ -1185,7 +1247,7 @@ public sealed partial class AchievementWindow : Window
                 
                 if (ViewModel.HideCompleted) ApplyFilters();
                 
-                ViewModel.StatusMessage = $"导入成功，导入 {result.UpdatedCount} 个成就";
+                ViewModel.StatusMessage = $"导入成功，同步 {result.UpdatedCount} 个成就进度";
             }
             else
             {
@@ -1220,16 +1282,23 @@ public sealed partial class AchievementWindow : Window
         var stats = new ImportStats();
         var total = lines.Count;
         
-        var nameMap = new Dictionary<string, List<AchievementItem>>();
+        var idMap = new Dictionary<int, AchievementItem>();
 
         foreach (var cat in ViewModel.Categories)
         {
             foreach (var item in cat.Achievements)
             {
                 if (item.IsGroup)
-                    foreach (var child in item.Children) AddToNameMap(nameMap, child);
+                {
+                    foreach (var child in item.Children)
+                    {
+                        idMap[child.Id] = child;
+                    }
+                }
                 else
-                    AddToNameMap(nameMap, item);
+                {
+                    idMap[item.Id] = item;
+                }
             }
         }
 
@@ -1247,34 +1316,16 @@ public sealed partial class AchievementWindow : Window
             else parts = line.Split(',');
 
             if (parts.Length < 7) continue;
-            if (parts[0].Contains("ID") || parts[1].Contains("状态")) continue;
 
-            string nameInCsv = parts[3];
-            string descInCsv = parts[4];
-            
+            if (!int.TryParse(parts[0], out int gameId)) continue; 
+
+            stats.TotalScanned++;
+
             int.TryParse(parts[5], out int currentVal);
             int.TryParse(parts[6], out int maxVal); 
             bool isCompletedInCsv = parts[1].Trim() == "已完成";
 
-            string cleanName = Normalize(nameInCsv);
-            AchievementItem targetItem = null;
-
-            if (!string.IsNullOrEmpty(cleanName) && nameMap.TryGetValue(cleanName, out var candidates))
-            {
-                if (candidates.Count == 1)
-                {
-                    targetItem = candidates[0];
-                }
-                else
-                {
-                    string targetDesc = Normalize(descInCsv);
-                    targetItem = candidates
-                        .OrderBy(c => ComputeLevenshteinDistance(Normalize(c.Description), targetDesc))
-                        .First();
-                }
-            }
-            
-            if (targetItem != null)
+            if (idMap.TryGetValue(gameId, out var targetItem))
             {
                 bool needUpdate = false;
                 
@@ -1300,7 +1351,7 @@ public sealed partial class AchievementWindow : Window
             else
             {
                 stats.FailedCount++;
-                if (stats.Errors.Count < 5) stats.Errors.Add($"[{parts[0]}] {nameInCsv} 匹配失败");
+                if (stats.Errors.Count < 5) stats.Errors.Add($"[ID: {gameId}] 数据库中未找到该成就");
             }
         }
 
@@ -1321,48 +1372,6 @@ public sealed partial class AchievementWindow : Window
         });
 
         return stats;
-    }
-
-    private void AddToNameMap(Dictionary<string, List<AchievementItem>> map, AchievementItem item)
-    {
-        string key = Normalize(item.Title);
-        if (string.IsNullOrEmpty(key)) return;
-        
-        if (!map.ContainsKey(key))
-        {
-            map[key] = new List<AchievementItem>();
-        }
-        map[key].Add(item);
-    }
-
-    private int ComputeLevenshteinDistance(string s, string t)
-    {
-        if (string.IsNullOrEmpty(s)) return string.IsNullOrEmpty(t) ? 0 : t.Length;
-        if (string.IsNullOrEmpty(t)) return s.Length;
-
-        int n = s.Length;
-        int m = t.Length;
-        int[,] d = new int[n + 1, m + 1];
-
-        for (int i = 0; i <= n; i++) d[i, 0] = i;
-        for (int j = 0; j <= m; j++) d[0, j] = j;
-
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j <= m; j++)
-            {
-                int cost = (t[j - 1] == s[i - 1]) ? 0 : 1;
-                d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1), d[i - 1, j - 1] + cost);
-            }
-        }
-        return d[n, m];
-    }
-    
-    private string Normalize(string input)
-    {
-        if (string.IsNullOrEmpty(input)) return "";
-        var chars = input.Where(c => char.IsLetterOrDigit(c)).ToArray();
-        return new string(chars).ToLowerInvariant();
     }
     
     private class ImportStats
@@ -1396,6 +1405,257 @@ public sealed partial class AchievementWindow : Window
         await dialog.ShowAsync();
     }
     
+    // ==========================================
+    // UIAF 1.1 导入与导出逻辑
+    // ==========================================
+
+    private class UiafInfo
+    {
+        [JsonPropertyName("export_app")] 
+        public string ExportApp { get; set; } = "FufuLauncher";
+        
+        [JsonPropertyName("export_app_version")] 
+        public string ExportAppVersion { get; set; } = "1.0.0";
+        
+        [JsonPropertyName("uiaf_version")] 
+        public string UiafVersion { get; set; } = "v1.1";
+        
+        [JsonPropertyName("export_timestamp")] 
+        public long ExportTimestamp { get; set; }
+    }
+
+    private class UiafItem
+    {
+        [JsonPropertyName("id")] 
+        public int Id { get; set; }
+        
+        [JsonPropertyName("current")] 
+        public int Current { get; set; }
+        
+        [JsonPropertyName("status")] 
+        public int Status { get; set; }
+        
+        [JsonPropertyName("timestamp")] 
+        public long Timestamp { get; set; }
+    }
+
+    private class UiafData
+    {
+        [JsonPropertyName("info")] 
+        public UiafInfo Info { get; set; } = new();
+        
+        [JsonPropertyName("list")] 
+        public List<UiafItem> List { get; set; } = new();
+    }
+
+    private async void OnUiafImportClick(object sender, RoutedEventArgs e)
+    {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+        picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
+        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
+        picker.FileTypeFilter.Add(".json");
+
+        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+
+        var file = await picker.PickSingleFileAsync();
+        if (file == null) return;
+
+        if (_isBatchProcessing) return;
+        _isBatchProcessing = true;
+        ViewModel.StatusMessage = "正在读取UIAF数据...";
+
+        try
+        {
+            string jsonContent = await File.ReadAllTextAsync(file.Path);
+            var uiafData = JsonSerializer.Deserialize<UiafData>(jsonContent);
+
+            if (uiafData == null || uiafData.List == null)
+            {
+                await ShowDialogAsync("错误", "无效的UIAF文件格式");
+                return;
+            }
+
+            var idMap = new Dictionary<int, AchievementItem>();
+            foreach (var cat in ViewModel.Categories)
+            {
+                foreach (var item in cat.Achievements)
+                {
+                    if (item.IsGroup)
+                    {
+                        foreach (var child in item.Children)
+                        {
+                            idMap[child.Id] = child;
+                        }
+                    }
+                    else
+                    {
+                        idMap[item.Id] = item;
+                    }
+                }
+            }
+
+            int updatedCount = 0;
+
+            foreach (var uiafItem in uiafData.List)
+            {
+                if (idMap.TryGetValue(uiafItem.Id, out var targetItem))
+                {
+                    bool isCompleted = uiafItem.Status == 2 || uiafItem.Status == 3;
+                    bool needUpdate = false;
+
+                    if (uiafItem.Current > targetItem.CurrentProgress) needUpdate = true;
+                    if (isCompleted && !targetItem.IsCompleted) needUpdate = true;
+
+                    if (needUpdate)
+                    {
+                        targetItem.CurrentProgress = uiafItem.Current;
+                        if (isCompleted)
+                        {
+                            targetItem.IsCompleted = true;
+                            
+                            if (uiafItem.Timestamp > 0)
+                            {
+                                targetItem.CompletionTimestamp = uiafItem.Timestamp;
+                            }
+                            else if (targetItem.CompletionTimestamp == 0)
+                            {
+                                targetItem.CompletionTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+                            }
+                        }
+                        updatedCount++;
+                    }
+                }
+            }
+
+            foreach (var cat in ViewModel.Categories)
+            {
+                foreach (var item in cat.Achievements)
+                {
+                    if (item.IsGroup)
+                    {
+                        item.RefreshGroupStatus();
+                    }
+                }
+                cat.RefreshProgress();
+            }
+
+            CalculateGlobalStats();
+            SaveData();
+
+            if (ViewModel.HideCompleted) ApplyFilters();
+
+            ViewModel.StatusMessage = $"UIAF导入完成，同步了 {updatedCount} 个成就";
+            await ShowDialogAsync("导入数据", $"UIAF导入成功！\n共更新了 {updatedCount} 个成就进度");
+        }
+        catch (Exception ex)
+        {
+            await ShowDialogAsync("导入失败", $"读取或解析过程中发生异常：\n{ex.Message}");
+        }
+        finally
+        {
+            _isBatchProcessing = false;
+        }
+    }
+
+    private async void OnUiafExportClick(object sender, RoutedEventArgs e)
+    {
+        var picker = new Windows.Storage.Pickers.FileSavePicker();
+        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
+        picker.FileTypeChoices.Add("JSON 文件", new List<string>() { ".json" });
+        picker.SuggestedFileName = $"UIAF_Export_{DateTime.Now:yyyyMMdd_HHmmss}";
+
+        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+
+        var file = await picker.PickSaveFileAsync();
+        if (file == null) return;
+
+        ViewModel.StatusMessage = "正在生成UIAF数据...";
+
+        try
+        {
+            long currentTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds();
+
+            var exportData = new UiafData
+            {
+                Info = new UiafInfo
+                {
+                    ExportApp = "FufuLauncher",
+                    ExportAppVersion = $"{System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version}",
+                    UiafVersion = "v1.1",
+                    ExportTimestamp = currentTimestamp
+                },
+                List = new List<UiafItem>()
+            };
+
+            foreach (var cat in ViewModel.Categories)
+            {
+                foreach (var item in cat.Achievements)
+                {
+                    if (item.IsGroup)
+                    {
+                        foreach (var child in item.Children)
+                        {
+                            var uiafItem = CreateUiafItem(child, currentTimestamp);
+                            if (uiafItem != null)
+                            {
+                                exportData.List.Add(uiafItem);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var uiafItem = CreateUiafItem(item, currentTimestamp);
+                        if (uiafItem != null)
+                        {
+                            exportData.List.Add(uiafItem);
+                        }
+                    }
+                }
+            }
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string jsonOutput = JsonSerializer.Serialize(exportData, options);
+
+            await File.WriteAllTextAsync(file.Path, jsonOutput);
+
+            ViewModel.StatusMessage = "UIAF导出完成";
+            await ShowDialogAsync("导出成功", "已成功导出UIAF格式数据。");
+        }
+        catch (Exception ex)
+        {
+            await ShowDialogAsync("导出失败", $"生成文件时发生异常：\n{ex.Message}");
+        }
+    }
+
+    private UiafItem CreateUiafItem(AchievementItem item, long defaultTimestamp)
+    {
+        int status = 1; 
+
+        if (item.IsCompleted)
+        {
+            status = 3; 
+        }
+        else if (item.CurrentProgress >= item.MaxProgress && item.MaxProgress > 0)
+        {
+            status = 2; 
+        }
+
+        if (status == 1 && item.CurrentProgress == 0)
+        {
+            return null;
+        }
+
+        return new UiafItem
+        {
+            Id = item.Id,
+            Current = item.CurrentProgress,
+            Status = status,
+            Timestamp = item.CompletionTimestamp > 0 ? item.CompletionTimestamp : defaultTimestamp
+        };
+    }
+    
     private void SaveData()
     {
         if (!_isDataLoaded) return;
@@ -1417,11 +1677,12 @@ public sealed partial class AchievementWindow : Window
                             {
                                 using var cmd = connection.CreateCommand();
                                 cmd.Transaction = transaction;
-                                cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress WHERE Uid = @Uid";
+                                cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress, CompletionTimestamp = @CompletionTimestamp WHERE Uid = @Uid";
                                 cmd.Parameters.AddWithValue("@Uid", uid);
                                 cmd.Parameters.AddWithValue("@IsCompleted", child.IsCompleted ? 1 : 0);
                                 cmd.Parameters.AddWithValue("@CurrentProgress", child.CurrentProgress);
                                 cmd.Parameters.AddWithValue("@MaxProgress", child.MaxProgress);
+                                cmd.Parameters.AddWithValue("@CompletionTimestamp", child.CompletionTimestamp);
                                 cmd.ExecuteNonQuery();
                             }
                         }
@@ -1432,11 +1693,12 @@ public sealed partial class AchievementWindow : Window
                         {
                             using var cmd = connection.CreateCommand();
                             cmd.Transaction = transaction;
-                            cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress WHERE Uid = @Uid";
+                            cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress, CompletionTimestamp = @CompletionTimestamp WHERE Uid = @Uid";
                             cmd.Parameters.AddWithValue("@Uid", uid);
                             cmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
                             cmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
                             cmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
+                            cmd.Parameters.AddWithValue("@CompletionTimestamp", item.CompletionTimestamp);
                             cmd.ExecuteNonQuery();
                         }
                     }

@@ -207,6 +207,14 @@ public partial class AchievementItem : ObservableObject
             }
         } 
     }
+    
+    private long _completionTimestamp;
+    [JsonPropertyName("completion_timestamp")]
+    public long CompletionTimestamp 
+    { 
+        get => _completionTimestamp; 
+        set => SetProperty(ref _completionTimestamp, value); 
+    }
 
     [JsonIgnore] 
     public ObservableCollection<AchievementItem> Children { get; set; } = new();

@@ -1437,119 +1437,182 @@ public partial class GachaAnalysisModel : ObservableObject
     }
 
 [RelayCommand]
-    private async Task ExportUigfAsync()
+private async Task ExportUigfAsync(string version)
+{
+    if (string.IsNullOrEmpty(version)) version = "v4.2";
+
+    try
     {
-        try
+        var allLogs = _cachedCharacterLogs
+            .Concat(_cachedWeaponLogs)
+            .Concat(_cachedChronicledLogs)
+            .Concat(_cachedNoviceLogs)
+            .Concat(_cachedStandardLogs)
+            .ToList();
+
+        if (allLogs.Count == 0)
         {
-            var allLogs = _cachedCharacterLogs
-                .Concat(_cachedWeaponLogs)
-                .Concat(_cachedChronicledLogs)
-                .Concat(_cachedNoviceLogs)
-                .Concat(_cachedStandardLogs)
-                .ToList();
-            if (allLogs.Count == 0)
+            OnErrorAction?.Invoke("没有可导出的抽卡记录");
+            return;
+        }
+
+        var uid = _currentUid;
+        if (string.IsNullOrEmpty(uid)) uid = "unknown";
+
+        object finalObj;
+
+        if (version.StartsWith("v4"))
+        {
+            var hk4eObj = new
             {
-                OnErrorAction?.Invoke("没有可导出的抽卡记录");
-                return;
+                uid = uid,
+                timezone = 8,
+                lang = "zh-cn",
+                list = allLogs.Select(log => new
+                {
+                    uigf_gacha_type = GameToUigfGachaType(log.GachaType),
+                    gacha_type = log.GachaType,
+                    item_id = log.ItemId ?? "",
+                    count = log.Count ?? "1",
+                    time = log.Time ?? "",
+                    name = log.Name ?? "",
+                    item_type = log.ItemType ?? "",
+                    rank_type = log.RankType ?? "",
+                    id = log.Id ?? ""
+                }).ToList()
+            };
+
+            var infoObj = new
+            {
+                export_timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                export_app = "FufuLauncher",
+                export_app_version = $"{System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version}",
+                version = version
+            };
+
+            if (version == "v4.2")
+            {
+                finalObj = new
+                {
+                    hkrpg = Array.Empty<object>(),
+                    hk4e_ugc = Array.Empty<object>(),
+                    info = infoObj,
+                    hk4e = new[] { hk4eObj }
+                };
             }
-
-            var uid = _currentUid;
-            if (string.IsNullOrEmpty(uid)) uid = "unknown";
-
-            var finalObj = new
+            else
+            {
+                finalObj = new
+                {
+                    info = infoObj,
+                    hk4e = new[] { hk4eObj }
+                };
+            }
+        }
+        else
+        {
+            var exportTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            finalObj = new
             {
                 info = new
                 {
-                    export_timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                    uid = uid,
+                    lang = "zh-cn",
+                    export_time = exportTime,
                     export_app = "FufuLauncher",
-                    export_app_version = $"{System.Reflection.Assembly.GetEntryAssembly().GetName().Version}",
-                    version = "v4.0"
+                    export_app_version = $"{System.Reflection.Assembly.GetEntryAssembly()?.GetName().Version}",
+                    uigf_version = version,
+                    export_timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
                 },
-                hk4e = new[]
+                list = allLogs.Select(log => new
                 {
-                    new
-                    {
-                        uid = uid,
-                        timezone = 8,
-                        lang = "zh-cn",
-                        list = allLogs.Select(log => new
-                        {
-                            uigf_gacha_type = GameToUigfGachaType(log.GachaType),
-                            gacha_type = log.GachaType,
-                            item_id = log.ItemId ?? "",
-                            count = log.Count ?? "1",
-                            time = log.Time ?? "",
-                            name = log.Name ?? "",
-                            item_type = log.ItemType ?? "",
-                            rank_type = log.RankType ?? "",
-                            id = log.Id ?? ""
-                        }).ToList()
-                    }
-                }
+                    uigf_gacha_type = GameToUigfGachaType(log.GachaType),
+                    gacha_type = log.GachaType,
+                    item_id = log.ItemId ?? "",
+                    count = log.Count ?? "1",
+                    time = log.Time ?? "",
+                    name = log.Name ?? "",
+                    item_type = log.ItemType ?? "",
+                    rank_type = log.RankType ?? "",
+                    id = log.Id ?? ""
+                }).ToList()
             };
-
-            var json = JsonSerializer.Serialize(finalObj, new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-            });
-
-            var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
-            var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-            if (hwnd != IntPtr.Zero) WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
-
-            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            savePicker.FileTypeChoices.Add("JSON 文件", new List<string> { ".json" });
-            savePicker.SuggestedFileName = $"UIGF_{uid}_{DateTimeOffset.UtcNow:yyyyMMdd}";
-
-            var file = await savePicker.PickSaveFileAsync();
-            if (file == null) return;
-
-            await File.WriteAllTextAsync(file.Path, json);
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("导出成功", $"已导出 {allLogs.Count} 条记录到 {file.Name}", NotificationType.Success, 3000));
         }
-        catch (Exception ex)
+
+        var json = JsonSerializer.Serialize(finalObj, new JsonSerializerOptions
         {
-            Debug.WriteLine($"[Gacha] 导出失败: {ex}");
-            CrawlerStatus = $"导出失败: {ex.Message}";
-            OnErrorAction?.Invoke(CrawlerStatus);
-        }
+            WriteIndented = true,
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        });
+
+        var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
+        var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+        if (hwnd != IntPtr.Zero) WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+
+        savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+        savePicker.FileTypeChoices.Add("JSON 文件", new List<string> { ".json" });
+        savePicker.SuggestedFileName = $"UIGF_{version.Replace(".", "")}_{uid}_{DateTimeOffset.UtcNow:yyyyMMdd}";
+
+        var file = await savePicker.PickSaveFileAsync();
+        if (file == null) return;
+
+        await File.WriteAllTextAsync(file.Path, json);
+        WeakReferenceMessenger.Default.Send(new NotificationMessage("导出成功", $"已导出 {allLogs.Count} 条记录到 {file.Name} ({version})", NotificationType.Success, 3000));
     }
-
-    [RelayCommand]
-    private async Task ImportUigfAsync()
+    catch (Exception ex)
     {
-        try
+        Debug.WriteLine($"[Gacha] 导出失败: {ex}");
+        CrawlerStatus = $"导出失败: {ex.Message}";
+        OnErrorAction?.Invoke(CrawlerStatus);
+    }
+}
+
+[RelayCommand]
+private async Task ImportUigfAsync()
+{
+    try
+    {
+        var picker = new Windows.Storage.Pickers.FileOpenPicker();
+        var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
+        if (hwnd != IntPtr.Zero) WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+
+        picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
+        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
+        picker.FileTypeFilter.Add(".json");
+
+        var file = await picker.PickSingleFileAsync();
+        if (file == null) return;
+
+        IsFetching = true;
+        CrawlerStatus = "正在读取 UIGF 文件...";
+
+        var json = await File.ReadAllTextAsync(file.Path);
+        using var doc = JsonDocument.Parse(json);
+        var root = doc.RootElement;
+
+        string version = "";
+        if (root.TryGetProperty("info", out var infoNode))
         {
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
-            if (hwnd != IntPtr.Zero) WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+            if (infoNode.TryGetProperty("version", out var vNode)) version = vNode.GetString() ?? "";
+            else if (infoNode.TryGetProperty("uigf_version", out var uvNode)) version = uvNode.GetString() ?? "";
+        }
 
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            picker.FileTypeFilter.Add(".json");
+        if (string.IsNullOrEmpty(version))
+        {
+            CrawlerStatus = "无法识别 UIGF 版本，请确认文件格式正确";
+            IsFetching = false;
+            OnErrorAction?.Invoke(CrawlerStatus);
+            return;
+        }
 
-            var file = await picker.PickSingleFileAsync();
-            if (file == null) return;
+        List<JsonElement> items = new();
+        string importUid = "";
+        int entryTimezone = 8;
+        string entryLang = "zh-cn";
 
-            IsFetching = true;
-            CrawlerStatus = "正在读取 UIGF 文件...";
-
-            var json = await File.ReadAllTextAsync(file.Path);
-            var uigf = JsonSerializer.Deserialize<UIGFJson>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var version = uigf?.Info?.Version ?? "";
-            if (string.IsNullOrEmpty(version) || !version.StartsWith("v4"))
-            {
-                CrawlerStatus = string.IsNullOrEmpty(version)
-                    ? "无法识别 UIGF 版本，请确认文件格式正确"
-                    : $"不支持的 UIGF 版本：{version}，仅支持 v4.x";
-                IsFetching = false;
-                OnErrorAction?.Invoke(CrawlerStatus);
-                return;
-            }
-
-            if (uigf?.Hk4e == null || uigf.Hk4e.Count == 0)
+        if (version.StartsWith("v4"))
+        {
+            if (!root.TryGetProperty("hk4e", out var hk4eList) || hk4eList.GetArrayLength() == 0)
             {
                 CrawlerStatus = "文件中未找到有效的抽卡记录";
                 IsFetching = false;
@@ -1557,104 +1620,123 @@ public partial class GachaAnalysisModel : ObservableObject
                 return;
             }
 
-            var entry = uigf.Hk4e[0];
-            var entryLang = entry.Lang ?? "zh-cn";
-
-            if (entry.List == null || entry.List.Count == 0)
+            var entry = hk4eList.EnumerateArray().FirstOrDefault();
+            importUid = entry.TryGetProperty("uid", out var u) ? u.GetString() ?? "" : "";
+            entryTimezone = entry.TryGetProperty("timezone", out var tz) ? tz.GetInt32() : 8;
+            entryLang = entry.TryGetProperty("lang", out var lg) ? lg.GetString() ?? "zh-cn" : "zh-cn";
+            if (entry.TryGetProperty("list", out var listNode) && listNode.ValueKind == JsonValueKind.Array)
             {
-                CrawlerStatus = "文件中未找到抽卡记录";
+                items = listNode.EnumerateArray().ToList();
+            }
+        }
+        else if (version.StartsWith("v2") || version.StartsWith("v3"))
+        {
+            importUid = infoNode.TryGetProperty("uid", out var u) ? u.GetString() ?? "" : "";
+            entryLang = infoNode.TryGetProperty("lang", out var lg) ? lg.GetString() ?? "zh-cn" : "zh-cn";
+            if (root.TryGetProperty("list", out var listNode) && listNode.ValueKind == JsonValueKind.Array)
+            {
+                items = listNode.EnumerateArray().ToList();
+            }
+        }
+        else
+        {
+            CrawlerStatus = $"不支持的 UIGF 版本：{version}";
+            IsFetching = false;
+            OnErrorAction?.Invoke(CrawlerStatus);
+            return;
+        }
+
+        if (items.Count == 0)
+        {
+            CrawlerStatus = "文件中未找到抽卡记录";
+            IsFetching = false;
+            OnErrorAction?.Invoke(CrawlerStatus);
+            return;
+        }
+
+        foreach (var x in items)
+        {
+            if (!x.TryGetProperty("id", out _) || !x.TryGetProperty("item_id", out _) ||
+                !x.TryGetProperty("time", out _) || !x.TryGetProperty("gacha_type", out _))
+            {
+                CrawlerStatus = "文件中存在不完整的记录（缺少 id/item_id/time/gacha_type），请检查文件格式";
                 IsFetching = false;
                 OnErrorAction?.Invoke(CrawlerStatus);
                 return;
             }
-
-            foreach (var x in entry.List)
-            {
-                if (string.IsNullOrEmpty(x.Id) || string.IsNullOrEmpty(x.ItemId)
-                    || string.IsNullOrEmpty(x.Time) || string.IsNullOrEmpty(x.GachaType))
-                {
-                    CrawlerStatus = "文件中存在不完整的记录（缺少 id/item_id/time/gacha_type），请检查文件格式";
-                    IsFetching = false;
-                    OnErrorAction?.Invoke(CrawlerStatus);
-                    return;
-                }
-            }
-
-            var items = entry.List;
-            var importUid = entry.Uid ?? "";
-            var entryTimezone = entry.Timezone;
-            if (!await HandleUidMismatchAsync(importUid)) { IsFetching = false; return; }
-
-            _currentUid = importUid;
-            Debug.WriteLine($"[Gacha] ImportUigf: 设置 _currentUid={importUid}");
-
-            if (_savedMetadata.Count == 0)
-            {
-                CrawlerStatus = "正在获取物品元数据用于名称映射...";
-                await FetchMetadataFromApiAsync();
-                IsFetching = true;
-            }
-
-            CrawlerStatus = $"正在导入 {items.Count} 条记录...";
-
-            var newLogs = items.Select(uigfItem =>
-            {
-                var gachaType = uigfItem.GachaType;
-
-                var time = uigfItem.Time ?? "";
-                if (entryTimezone != 8 && !string.IsNullOrEmpty(time))
-                {
-                    try
-                    {
-                        if (DateTime.TryParse(time, out var dt))
-                        {
-                            dt = dt.AddHours(8 - entryTimezone);
-                            time = dt.ToString("yyyy-MM-dd HH:mm:ss");
-                        }
-                    }
-                    catch { }
-                }
-
-                return new GachaLogItem
-                {
-                    Id = uigfItem.Id,
-                    Uid = importUid,
-                    GachaType = gachaType,
-                    ItemId = uigfItem.ItemId,
-                    Time = time,
-                    Name = uigfItem.Name,
-                    RankType = uigfItem.RankType,
-                    ItemType = uigfItem.ItemType,
-                    Lang = entryLang
-                };
-            }).ToList();
-
-            FillMissingFieldsFromMetadata(newLogs);
-            _cachedCharacterLogs = MergeLogs(_cachedCharacterLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "301").ToList());
-            _cachedWeaponLogs = MergeLogs(_cachedWeaponLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "302").ToList());
-            _cachedChronicledLogs = MergeLogs(_cachedChronicledLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "500").ToList());
-            _cachedNoviceLogs = MergeLogs(_cachedNoviceLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "100").ToList());
-            _cachedStandardLogs = MergeLogs(_cachedStandardLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "200").ToList());
-
-            RefreshUIFromCache();
-            HasGachaData = true;
-            SaveGachaDataAsync();
-
-            var total = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
-            CrawlerStatus = $"导入完成，共 {total} 条记录，正在检查图片资源...";
-            IsScraping = true;
-            RequestMetadataScrapeAction?.Invoke();
         }
-        catch (Exception ex)
+
+        if (!await HandleUidMismatchAsync(importUid)) { IsFetching = false; return; }
+
+        _currentUid = importUid;
+
+        if (_savedMetadata.Count == 0)
         {
-            Debug.WriteLine($"[Gacha] 导入失败: {ex}");
-            CrawlerStatus = $"导入失败: {ex.Message}";
-            IsFetching = false;
-            OnErrorAction?.Invoke(CrawlerStatus);
+            CrawlerStatus = "正在获取物品元数据用于名称映射...";
+            await FetchMetadataFromApiAsync();
+            IsFetching = true;
         }
 
-        if (!IsScraping) IsFetching = false;
+        CrawlerStatus = $"正在导入 {items.Count} 条记录...";
+
+        var newLogs = items.Select(uigfItem =>
+        {
+            var gachaType = uigfItem.GetProperty("gacha_type").GetString() ?? "";
+            var time = uigfItem.GetProperty("time").GetString() ?? "";
+
+            if (entryTimezone != 8 && !string.IsNullOrEmpty(time))
+            {
+                try
+                {
+                    if (DateTime.TryParse(time, out var dt))
+                    {
+                        dt = dt.AddHours(8 - entryTimezone);
+                        time = dt.ToString("yyyy-MM-dd HH:mm:ss");
+                    }
+                }
+                catch { }
+            }
+
+            return new GachaLogItem
+            {
+                Id = uigfItem.GetProperty("id").GetString() ?? "",
+                Uid = importUid,
+                GachaType = gachaType,
+                ItemId = uigfItem.GetProperty("item_id").GetString() ?? "",
+                Time = time,
+                Name = uigfItem.TryGetProperty("name", out var n) ? n.GetString() ?? "" : "",
+                RankType = uigfItem.TryGetProperty("rank_type", out var rt) ? rt.GetString() ?? "" : "",
+                ItemType = uigfItem.TryGetProperty("item_type", out var it) ? it.GetString() ?? "" : "",
+                Lang = entryLang
+            };
+        }).ToList();
+
+        FillMissingFieldsFromMetadata(newLogs);
+        _cachedCharacterLogs = MergeLogs(_cachedCharacterLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "301").ToList());
+        _cachedWeaponLogs = MergeLogs(_cachedWeaponLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "302").ToList());
+        _cachedChronicledLogs = MergeLogs(_cachedChronicledLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "500").ToList());
+        _cachedNoviceLogs = MergeLogs(_cachedNoviceLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "100").ToList());
+        _cachedStandardLogs = MergeLogs(_cachedStandardLogs, newLogs.Where(x => GetNormalizedGachaType(x.GachaType) == "200").ToList());
+
+        RefreshUIFromCache();
+        HasGachaData = true;
+        SaveGachaDataAsync();
+
+        var total = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
+        CrawlerStatus = $"导入完成，共 {total} 条记录，正在检查图片资源...";
+        IsScraping = true;
+        RequestMetadataScrapeAction?.Invoke();
     }
+    catch (Exception ex)
+    {
+        Debug.WriteLine($"[Gacha] 导入失败: {ex}");
+        CrawlerStatus = $"导入失败: {ex.Message}";
+        IsFetching = false;
+        OnErrorAction?.Invoke(CrawlerStatus);
+    }
+
+    if (!IsScraping) IsFetching = false;
+}
 
     private void FillMissingFieldsFromMetadata(params List<GachaLogItem>[] logLists)
     {

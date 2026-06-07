@@ -1,8 +1,13 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Threading.Tasks;
 using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views
@@ -172,7 +177,7 @@ namespace FufuLauncher.Views
                             sendMsg({ 
                                 type: 'progress', 
                                 val: Math.floor((idx / categories.length) * 100), 
-                                msg: `正在处理分类: ${cat.title} (${idx + 1}/${categories.length})`,
+                                msg: `正在处理主分类: ${cat.title} (${idx + 1}/${categories.length})`,
                                 current: '读取节点数据...' 
                             });
 
@@ -200,7 +205,6 @@ namespace FufuLauncher.Views
                                         let titleEl = row.querySelector('p.font-semibold');
                                         if (!titleEl) continue;
                                         
-                                        // 使用 textContent 提取文本，避免 innerText 因元素隐藏而返回空字符串
                                         let version = titleEl.querySelector('span')?.textContent || '';
                                         let title = titleEl.textContent.replace(version, '').trim();
                                         
@@ -250,7 +254,7 @@ namespace FufuLauncher.Views
             }
         }
 
-        private async void ScraperWebView_WebMessageReceived(object sender, Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
+        private void ScraperWebView_WebMessageReceived(object sender, Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
         {
             try
             {
@@ -273,37 +277,12 @@ namespace FufuLauncher.Views
                 }
                 else if (type == "done")
                 {
-                    _dialogProgressBar.Value = 100;
-                    _dialogStatusText.Text = "数据结构构建完成，正在写入本地磁盘...";
-                    _currentAchievementText.Text = "完成";
+                    _dialogProgressBar.IsIndeterminate = true;
+                    _dialogStatusText.Text = "基础结构抓取完毕，准备从 GitHub 获取详细数据字典...";
+                    _currentAchievementText.Text = "等待网络请求连接";
 
-                    var options = new JsonSerializerOptions { 
-                        WriteIndented = true, 
-                        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping 
-                    };
-                    string finalJsonData = _allCategoriesData.ToJsonString(options);
-
-                    string assetsDir = Path.Combine(AppContext.BaseDirectory, "Assets");
-                    if (!Directory.Exists(assetsDir)) Directory.CreateDirectory(assetsDir);
-                    
-                    string filePath = Path.Combine(assetsDir, "genshin_achievements_linked.json");
-                    await File.WriteAllTextAsync(filePath, finalJsonData);
-
-                    _progressDialog.Hide();
-                    StartButton.IsEnabled = true;
-                    
-                    if (_browserWindow != null)
-                    {
-                        _browserWindow.Close();
-                    }
-                    
-                    var completeDialog = new ContentDialog {
-                        Title = "执行完毕",
-                        Content = "成就数据已成功从网络拉取并覆盖本地文件",
-                        CloseButtonText = "确认退出",
-                        XamlRoot = Content.XamlRoot
-                    };
-                    await completeDialog.ShowAsync();
+                    // 不阻塞主线程，启动异步合并任务
+                    _ = FetchAndMergeGithubDataAsync();
                 }
                 else if (type == "error")
                 {
@@ -311,10 +290,7 @@ namespace FufuLauncher.Views
                     StartButton.IsEnabled = true;
                     string errorMsg = root.GetProperty("msg").GetString();
 
-                    if (_browserWindow != null)
-                    {
-                        _browserWindow.Close();
-                    }
+                    if (_browserWindow != null) _browserWindow.Close();
                     
                     var errorDialog = new ContentDialog {
                         Title = "执行异常",
@@ -322,12 +298,168 @@ namespace FufuLauncher.Views
                         CloseButtonText = "关闭",
                         XamlRoot = Content.XamlRoot
                     };
-                    await errorDialog.ShowAsync();
+                    _ = errorDialog.ShowAsync();
                 }
             }
             catch
             {
                 // ignored
+            }
+        }
+
+        private async Task FetchAndMergeGithubDataAsync()
+        {
+            string apiUrl = "https://api.github.com/repos/dvaJi/genshin-data/contents/src/data/chinese-simplified/achievements";
+            
+            using var client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "FufuLauncher-AchievementUpdater");
+
+            try
+            {
+                // 1. 获取 GitHub 目录
+                var response = await client.GetStringAsync(apiUrl);
+                var files = JsonNode.Parse(response).AsArray();
+
+                var githubDict = new Dictionary<string, List<JsonNode>>();
+                int totalFiles = files.Count;
+                int currentIndex = 0;
+
+                _dialogProgressBar.IsIndeterminate = false;
+
+                // 2. 遍历下载详细数据并建立字典
+                foreach (var fileNode in files)
+                {
+                    string fileName = fileNode["name"]?.ToString();
+                    
+                    if (!string.IsNullOrEmpty(fileName) && fileName.EndsWith(".json"))
+                    {
+                        string downloadUrl = fileNode["download_url"]?.ToString();
+
+                        _dialogStatusText.Text = $"正在拉取 GitHub 详情: {fileName}";
+                        _dialogProgressBar.Value = ((double)currentIndex / totalFiles) * 100;
+                        _currentAchievementText.Text = $"处理进度: {currentIndex + 1} / {totalFiles}";
+
+                        string fileContent = await client.GetStringAsync(downloadUrl);
+                        var categoryData = JsonNode.Parse(fileContent);
+                        var achArray = categoryData["achievements"]?.AsArray();
+                        
+                        if (achArray != null)
+                        {
+                            foreach (var ach in achArray)
+                            {
+                                string name = ach["name"]?.ToString();
+                                if (!string.IsNullOrEmpty(name))
+                                {
+                                    if (!githubDict.ContainsKey(name))
+                                    {
+                                        githubDict[name] = new List<JsonNode>();
+                                    }
+                                    githubDict[name].Add(ach);
+                                }
+                            }
+                        }
+                    }
+                    currentIndex++;
+                }
+
+                _dialogStatusText.Text = "正在整合数据结构并进行多阶段排序...";
+                _dialogProgressBar.IsIndeterminate = true;
+
+                // 3. 针对多阶段同名成就，按照 ID 排序以对应阶段顺序
+                foreach (var list in githubDict.Values)
+                {
+                    list.Sort((a, b) =>
+                    {
+                        int idA = a["id"]?.GetValue<int>() ?? 0;
+                        int idB = b["id"]?.GetValue<int>() ?? 0;
+                        return idA.CompareTo(idB);
+                    });
+                }
+
+                _currentAchievementText.Text = "执行数据字段并入...";
+
+                // 4. 将提取的详细信息合入已存在的 Seelie 节点内，保留图标与版本信息
+                foreach (var category in _allCategoriesData)
+                {
+                    var achs = category["achievements"]?.AsArray();
+                    if (achs != null)
+                    {
+                        var consumedCounts = new Dictionary<string, int>();
+
+                        foreach (var ach in achs)
+                        {
+                            string title = ach["title"]?.ToString();
+                            if (!string.IsNullOrEmpty(title) && githubDict.TryGetValue(title, out var ghList))
+                            {
+                                if (!consumedCounts.ContainsKey(title)) consumedCounts[title] = 0;
+                                
+                                int idx = consumedCounts[title];
+                                if (idx < ghList.Count)
+                                {
+                                    var ghAch = ghList[idx];
+                                    
+                                    // 追加详细字段
+                                    ach["id"] = ghAch["id"]?.GetValue<int>();
+                                    ach["hidden"] = ghAch["hidden"]?.GetValue<bool>();
+                                    ach["order"] = ghAch["order"]?.GetValue<int>();
+                                    
+                                    if (ghAch["preStage"] != null)
+                                    {
+                                        ach["preStage"] = ghAch["preStage"]?.GetValue<int>();
+                                    }
+                                    
+                                    consumedCounts[title]++;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                _dialogProgressBar.IsIndeterminate = false;
+                _dialogProgressBar.Value = 100;
+                _dialogStatusText.Text = "数据结构拼合完成，正在写入本地磁盘...";
+                _currentAchievementText.Text = "完成";
+
+                // 5. 序列化并保存
+                var options = new JsonSerializerOptions { 
+                    WriteIndented = true, 
+                    Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping 
+                };
+                string finalJsonData = _allCategoriesData.ToJsonString(options);
+
+                string assetsDir = Path.Combine(AppContext.BaseDirectory, "Assets");
+                if (!Directory.Exists(assetsDir)) Directory.CreateDirectory(assetsDir);
+                
+                string filePath = Path.Combine(assetsDir, "genshin_achievements_linked.json");
+                await File.WriteAllTextAsync(filePath, finalJsonData);
+
+                _progressDialog.Hide();
+                StartButton.IsEnabled = true;
+                
+                if (_browserWindow != null) _browserWindow.Close();
+                
+                var completeDialog = new ContentDialog {
+                    Title = "执行完毕",
+                    Content = "成就数据已成功从 Web 及 GitHub 双端拉取并完成拼合，本地文件已覆盖。",
+                    CloseButtonText = "确认退出",
+                    XamlRoot = Content.XamlRoot
+                };
+                await completeDialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                _progressDialog.Hide();
+                StartButton.IsEnabled = true;
+
+                if (_browserWindow != null) _browserWindow.Close();
+                
+                var errorDialog = new ContentDialog {
+                    Title = "执行异常",
+                    Content = $"获取或整合数据时发生错误: {ex.Message}",
+                    CloseButtonText = "关闭",
+                    XamlRoot = Content.XamlRoot
+                };
+                await errorDialog.ShowAsync();
             }
         }
     }

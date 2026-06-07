@@ -147,17 +147,17 @@
                     <ComboBox ItemsSource="{x:Bind ViewModel.AvailableVersions}" SelectedItem="{x:Bind ViewModel.SelectedVersion, Mode=TwoWay}" PlaceholderText="版本" MinWidth="100" VerticalAlignment="Center"/>
                     <ToggleSwitch IsOn="{x:Bind ViewModel.HideCompleted, Mode=TwoWay}" OnContent="已隐藏完成" OffContent="显示全部" VerticalAlignment="Center" MinWidth="100"/>
                     
-                    <Button Click="OnYaeImportClick" VerticalAlignment="Center" Padding="8,5">
+                    <Button Click="OnUiafImportClick" VerticalAlignment="Center" Padding="8,5">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE118;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
-                            <TextBlock Text="通过Yae导入" FontSize="12"/>
+                            <TextBlock Text="UIAF导入" FontSize="12"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Click="OnYaeImportClick" VerticalAlignment="Center" Padding="8,5">
+                    <Button Click="OnUiafExportClick" VerticalAlignment="Center" Padding="8,5">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE11C;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
-                            <TextBlock Text="通过Yae导出" FontSize="12"/>
+                            <TextBlock Text="UIAF导出" FontSize="12"/>
                         </StackPanel>
                     </Button>
 

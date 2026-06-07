@@ -8,5 +8,8 @@ public class UIGFJson
     public UIGFInfo Info { get; set; } = new();
 
     [JsonPropertyName("hk4e")]
-    public List<UIGFEntry> Hk4e { get; set; } = new();
+    public List<UIGFEntry> Hk4e { get; set; }
+
+    [JsonPropertyName("list")]
+    public List<UIGFItem> List { get; set; }
 }

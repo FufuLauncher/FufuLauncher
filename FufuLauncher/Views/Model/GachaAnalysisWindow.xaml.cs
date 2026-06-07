@@ -436,7 +436,7 @@ namespace FufuLauncher.Views
             
             contentPanel.Children.Add(new TextBlock 
             { 
-                Text = "该项目使用UIGF v4.0标准格式处理祈愿数据",
+                Text = "该项目使用UIGF v4.0 v4.1 v4.2 v2.2标准格式处理祈愿数据",
                 TextWrapping = TextWrapping.Wrap 
             });
 
