@@ -30,6 +30,7 @@
         <Version>1.2.2.1</Version>
         <AssemblyVersion>1.2.2.1</AssemblyVersion>
         <FileVersion>1.2.2.1</FileVersion>
+        <Copyright>Copyright © FufuLauncher Development Team</Copyright>
     </PropertyGroup>
 
     <ItemGroup>

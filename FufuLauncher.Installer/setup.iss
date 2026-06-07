@@ -3,10 +3,10 @@
 #define AppPublisher  "FufuLauncher"
 #define AppExe        "FufuLauncher.exe"
 #define AppId         "{{A7B2C3D4-E5F6-7890-AB12-CD34EF567890}"
-#define SrcDir        ""
-#define IconFile      ""
+#define SrcDir        "..\FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0"
+#define IconFile      "..\install.ico"
 #define FontName      "Microsoft YaHei UI"
-#define OutDir        ""
+#define OutDir        "installer"
 
 [Setup]
 AppId={#AppId}
@@ -48,7 +48,7 @@ RestartApplications=no
 AllowNoIcons=yes
 
 [Languages]
-Name: "chs"; MessagesFile: "compiler:ChineseSimplified.isl"
+Name: "chs"; MessagesFile: "ChineseSimplified.isl"
 
 [Tasks]
 Name: "desktopicon";   Description: "创建桌面快捷方式";   GroupDescription: "附加快捷方式:"
