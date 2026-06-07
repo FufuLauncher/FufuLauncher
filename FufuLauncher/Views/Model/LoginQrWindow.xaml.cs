@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -24,16 +24,16 @@ public sealed partial class LoginQrWindow : Window
     private const string SaltGame = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
     private readonly string _deviceId;
     private readonly string _deviceFp;
-    private readonly HttpClient _httpClient = new HttpClient(new HttpClientHandler { UseCookies = false });
+    private readonly HttpClient _httpClient;
     
     private string _appTicket;
     private string _gameTicket;
     private string _gameAppId = "7";
     private string _gameDevice;
     
-    private bool _isWindowLoaded = false;
-    
     private CancellationTokenSource _pollingCts;
+
+    private bool _hoYoLabCredentialsExtracted = false;
 
     private ContentDialog _statusDialog;
     private bool _isDialogOpen;
@@ -48,15 +48,18 @@ public sealed partial class LoginQrWindow : Window
 
     public LoginQrWindow()
     {
+        _deviceId = Guid.NewGuid().ToString("N")[..16].ToUpper();
+        _deviceFp = GenerateDeviceFingerprint();
+        _gameDevice = Guid.NewGuid().ToString("N");
+        var handler = new HttpClientHandler { UseCookies = false };
+        _httpClient = new HttpClient(handler);
+
         InitializeComponent();
-    
+
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
     
-        _deviceId = Guid.NewGuid().ToString("N").Substring(0, 16).ToUpper();
-        _deviceFp = GenerateDeviceFingerprint();
         
-        _gameDevice = Guid.NewGuid().ToString("N"); 
     
         if (Content is FrameworkElement rootContent)
         {
@@ -66,31 +69,40 @@ public sealed partial class LoginQrWindow : Window
         Closed += LoginQrWindow_Closed;
     }
 
-    private void RootContent_Loaded(object sender, RoutedEventArgs e)
+    private async void RootContent_Loaded(object sender, RoutedEventArgs e)
     {
         if (sender is FrameworkElement rootContent)
         {
             rootContent.Loaded -= RootContent_Loaded;
         }
 
-        _isWindowLoaded = true;
-        
-        LoginMethodComboBox_SelectionChanged(LoginMethodComboBox, null);
+        await StartLoginFlowAsync(false);
     }
 
     private void LoginQrWindow_Closed(object sender, WindowEventArgs args)
     {
         _pollingCts?.Cancel();
+        if (PassportWebView != null && PassportWebView.CoreWebView2 != null)
+        {
+            PassportWebView.CoreWebView2.WebResourceResponseReceived -= HoYoLab_WebResourceResponseReceived;
+            PassportWebView.CoreWebView2.NavigationCompleted -= HoYoLab_NavigationCompleted;
+        }
     }
     
     public bool DidLoginSucceed() => IsLoginSuccessful;
 
     private async void RefreshButton_Click(object sender, RoutedEventArgs e)
     {
+        if (LoginMethodComboBox.SelectedIndex == 2) 
+        {
+            await StartHoYoLabWebLoginAsync();
+            return;
+        }
+
         bool isGameLogin = GameLoginPanel != null && GameLoginPanel.Visibility == Visibility.Visible;
         await RestartLoginFlowAsync(isGameLogin);
     }
-    
+
     private async void ManualCookieButton_Click(object sender, RoutedEventArgs e)
     {
     TextBox inputTextBox = new()
@@ -163,113 +175,179 @@ public sealed partial class LoginQrWindow : Window
     private async void LoginMethodComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (GameLoginPanel != null)
-        {
             GameLoginPanel.Visibility = Visibility.Collapsed;
-        }
-        
-        if (WebLoginWarningTextBlock != null)
+        if (PassportWebViewBorder != null)
         {
-            WebLoginWarningTextBlock.Visibility = LoginMethodComboBox?.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        if (QrCodeContainer != null && PassportWebView != null)
-        {
-            if (LoginMethodComboBox?.SelectedIndex == 1)
-            {
-                QrCodeContainer.Visibility = Visibility.Collapsed;
-                PassportWebViewBorder.Visibility = Visibility.Visible;
-                if (_isWindowLoaded) await StartWebPassportLoginAsync();
-                return;
-            }
-
-            if (LoginMethodComboBox?.SelectedIndex == 2)
-            {
-                PassportWebViewBorder.Visibility = Visibility.Collapsed;
-                QrCodeContainer.Visibility = Visibility.Visible;
-                if (_isWindowLoaded) await StartHoYoLabWebLoginAsync();
-                return;
-            }
-
             PassportWebViewBorder.Visibility = Visibility.Collapsed;
+            PassportWebViewBorder.MinWidth = 420;      
+            PassportWebViewBorder.MinHeight = 480;
+        }
+        if (QrCodeContainer != null)
             QrCodeContainer.Visibility = Visibility.Visible;
+        if (WebLoginWarningTextBlock != null)
+            WebLoginWarningTextBlock.Visibility = Visibility.Collapsed;
+
+        
+        if (PassportWebView != null && PassportWebView.CoreWebView2 != null)
+        {
+            PassportWebView.CoreWebView2.WebResourceResponseReceived -= HoYoLab_WebResourceResponseReceived;
+            PassportWebView.CoreWebView2.NavigationCompleted -= HoYoLab_NavigationCompleted;
+        }
+        _hoYoLabCredentialsExtracted = false;
+
+        if (LoginMethodComboBox.SelectedIndex == 1)
+        {
+            if (QrCodeContainer != null)
+                QrCodeContainer.Visibility = Visibility.Collapsed;
+            if (PassportWebViewBorder != null)
+                PassportWebViewBorder.Visibility = Visibility.Visible;
+            if (WebLoginWarningTextBlock != null)
+                WebLoginWarningTextBlock.Visibility = Visibility.Visible;
+            await StartWebPassportLoginAsync();
+            return;
         }
 
-        if (_isWindowLoaded) await RestartLoginFlowAsync(false);
+        if (LoginMethodComboBox.SelectedIndex == 2)
+        {
+            if (QrCodeContainer != null)
+                QrCodeContainer.Visibility = Visibility.Collapsed;
+            if (PassportWebViewBorder != null)
+                PassportWebViewBorder.Visibility = Visibility.Visible;
+            await StartHoYoLabWebLoginAsync();
+            return;
+        }
+
+        await RestartLoginFlowAsync(false);
     }
     private async Task StartHoYoLabWebLoginAsync()
     {
-        if (_pollingCts != null)
+        _hoYoLabCredentialsExtracted = false;
+        if (_pollingCts != null) _pollingCts.Cancel();
+
+        UpdateStatus("正在加载HoYoLAB登录页...", true);
+
+        await PassportWebView.EnsureCoreWebView2Async();
+
+       
+        PassportWebView.DefaultBackgroundColor = Microsoft.UI.Colors.Transparent;
+        PassportWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
+
+        PassportWebView.CoreWebView2.ContextMenuRequested -= CoreWebView2_ContextMenuRequested;
+        PassportWebView.CoreWebView2.ContextMenuRequested += CoreWebView2_ContextMenuRequested;
+
+       
+        PassportWebView.CoreWebView2.Stop();
+        PassportWebView.CoreWebView2.Navigate("about:blank");
+
+        
+        PassportWebView.CoreWebView2.WebResourceResponseReceived -= CoreWebView2_WebResourceResponseReceived;
+        PassportWebView.CoreWebView2.WebResourceResponseReceived -= HoYoLab_WebResourceResponseReceived;
+        PassportWebView.CoreWebView2.NavigationCompleted -= CoreWebView2_NavigationCompleted;
+        PassportWebView.CoreWebView2.NavigationCompleted -= HoYoLab_NavigationCompleted;
+
+        var cookieManager = PassportWebView.CoreWebView2.CookieManager;
+        var cookies = await cookieManager.GetCookiesAsync("https://account.hoyolab.com");
+        foreach (var cookie in cookies)
         {
-            _pollingCts.Cancel();
+            if (cookie.Name is "cookie_token_v2" or "ltuid_v2" or "account_id_v2" or "cookie_token")
+                cookieManager.DeleteCookie(cookie);
         }
 
-        UpdateStatus("正在打开HoYoLAB登录窗口...", true);
+    
+        PassportWebView.CoreWebView2.WebResourceResponseReceived += HoYoLab_WebResourceResponseReceived;
+        PassportWebView.CoreWebView2.NavigationCompleted += HoYoLab_NavigationCompleted;
 
-        try
+       
+        if (PassportWebViewBorder != null)
         {
-            Window hoyolabWindow = new();
-            hoyolabWindow.Title = "HoYoLAB 登录";
-            
-            var webView = new WebView2();
-            webView.HorizontalAlignment = HorizontalAlignment.Stretch;
-            webView.VerticalAlignment = VerticalAlignment.Stretch;
-            hoyolabWindow.Content = webView;
-
-            await webView.EnsureCoreWebView2Async();
-            
-            webView.CoreWebView2.CookieManager.DeleteAllCookies();
-            try
-            {
-                await webView.CoreWebView2.Profile.ClearBrowsingDataAsync();
-            }
-            catch
-            {
-                // ignored
-            }
-
-            webView.CoreWebView2.WebResourceResponseReceived += async (s, args) =>
-            {
-                string uri = args.Request.Uri;
-                if (uri.Contains("https://passport-api-sg.hoyolab.com/account/ma-passport/api/webLoginByPassword"))
-                {
-                    if (args.Response.StatusCode == 200)
-                    {
-                        var cookies = await webView.CoreWebView2.CookieManager.GetCookiesAsync("https://hoyolab.com");
-                        var cookieDict = new Dictionary<string, string>();
-                        
-                        foreach (var cookie in cookies)
-                        {
-                            if (!string.IsNullOrEmpty(cookie.Value))
-                            {
-                                cookieDict[cookie.Name] = cookie.Value;
-                            }
-                        }
-                        
-                        if (cookieDict.ContainsKey("cookie_token_v2"))
-                        {
-                            DispatcherQueue.TryEnqueue(() =>
-                            {
-                                hoyolabWindow.Close();
-                                UpdateStatus("HoYoLAB凭证提取成功，正在保存", true);
-                                SaveLabCredentials(cookieDict);
-                            });
-                        }
-                    }
-                }
-            };
-            
-            string url = "https://account.hoyolab.com/login-platform/index.html?st=https%3A%2F%2Fwww.hoyolab.com%2FaccountCenter%2FpostList%3Fid%3D468264497&token_type=6&client_type=4&app_id=c9oqaq3s3gu8&game_biz=bbs_oversea&lang=zh-cn&theme=dark-hoyolab&hide_logo=0&ux_mode=popup&iframe_level=1#/password-login";
-            webView.CoreWebView2.Navigate(url);
-
-            hoyolabWindow.Activate();
-            UpdateStatus("请在弹出的独立窗口中完成HoYoLAB登录", false, true);
+            PassportWebViewBorder.MinWidth = 455;
+            PassportWebViewBorder.MinHeight = 595;
         }
-        catch (Exception ex)
+
+        string url = "https://account.hoyolab.com/login-platform/index.html" +
+                     "?st=https%3A%2F%2Fwww.hoyolab.com%2FaccountCenter%2FpostList%3Fid%3D468264497" +
+                     "&token_type=6&client_type=4&app_id=c9oqaq3s3gu8" +
+                     "&game_biz=bbs_oversea&lang=zh-cn&theme=dark-hoyolab" +
+                     "&hide_logo=0&ux_mode=popup&iframe_level=1#/password-login";
+        PassportWebView.CoreWebView2.Navigate(url);
+
+        UpdateStatus("请在下方页面中完成HoYoLAB登录", false, true);
+        await Task.Delay(2000);
+        UpdateStatus("", false, true);
+    }
+    private async void HoYoLab_WebResourceResponseReceived(object sender, CoreWebView2WebResourceResponseReceivedEventArgs e)
+    {
+        await ExtractHoYoLabCookiesIfReady();
+    }
+
+    private async void HoYoLab_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+    {
+        await ExtractHoYoLabCookiesIfReady();
+    }
+
+    private async Task ExtractHoYoLabCookiesIfReady()
+    {
+        if (_hoYoLabCredentialsExtracted) return;
+
+        var cookieManager = PassportWebView.CoreWebView2.CookieManager;
+        var cookies = await cookieManager.GetCookiesAsync("https://account.hoyolab.com");
+        var dict = new Dictionary<string, string>();
+        foreach (var c in cookies)
         {
-            UpdateStatus($"打开HoYoLAB窗口失败: {ex.Message}", false);
+            if (!string.IsNullOrEmpty(c.Value))
+                dict[c.Name] = c.Value;
+        }
+
+        if (dict.ContainsKey("cookie_token_v2"))
+        {
+            _hoYoLabCredentialsExtracted = true;
+            // 清理事件
+            PassportWebView.CoreWebView2.WebResourceResponseReceived -= HoYoLab_WebResourceResponseReceived;
+            PassportWebView.CoreWebView2.NavigationCompleted -= HoYoLab_NavigationCompleted;
+
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                UpdateStatus("HoYoLAB凭证提取成功，正在保存...", true);
+                SaveLabCredentials(dict);
+                IsLoginSuccessful = true;
+                UpdateStatus("登录成功", false, true);
+                Close();
+            });
         }
     }
-    
+    //private async void HoYoLabWebResourceResponseReceived(object sender, CoreWebView2WebResourceResponseReceivedEventArgs e)
+    //{
+    //    string uri = e.Request.Uri;
+        
+    //    if (uri.Contains("webLoginByPassword") && e.Response.StatusCode == 200)
+    //    {
+            
+    //        PassportWebView.CoreWebView2.WebResourceResponseReceived -= HoYoLabWebResourceResponseReceived;
+
+    //        var cookies = await PassportWebView.CoreWebView2.CookieManager
+    //            .GetCookiesAsync("https://account.hoyolab.com");
+
+    //        var cookieDict = new Dictionary<string, string>();
+    //        foreach (var cookie in cookies)
+    //        {
+    //            if (!string.IsNullOrEmpty(cookie.Value))
+    //                cookieDict[cookie.Name] = cookie.Value;
+    //        }
+
+    //        if (cookieDict.ContainsKey("cookie_token_v2"))
+    //        {
+    //            UpdateStatus("HoYoLAB凭证提取成功，正在保存...", true);
+    //            SaveLabCredentials(cookieDict);
+    //            IsLoginSuccessful = true;
+    //            UpdateStatus("登录成功", false, true);
+    //            DispatcherQueue.TryEnqueue(() => Close());
+    //        }
+    //        else
+    //        {
+    //            UpdateStatus("未能获取完整凭证，请重试", false);
+    //        }
+    //    }
+    //}
     private async void SaveLabCredentials(Dictionary<string, string> cookies)
     {
         var cookieList = new List<string>();
@@ -377,7 +455,7 @@ public sealed partial class LoginQrWindow : Window
         if (LoginMethodComboBox != null && LoginMethodComboBox.SelectedIndex == 1)
         {
             UpdateGameAppIdFromSelection();
-            if (_isWindowLoaded) await RestartLoginFlowAsync();
+            await RestartLoginFlowAsync();
         }
     }
 
@@ -515,6 +593,8 @@ public sealed partial class LoginQrWindow : Window
 
     private async Task<(bool Success, string Url, string Message)> CreateAppQrCodeAsync()
     {
+        
+
         string url = ApiEndpoints.PassportAppCreateQrLoginUrl;
         var body = new JsonObject();
         string bodyStr = body.ToJsonString(_jsonOptions);
