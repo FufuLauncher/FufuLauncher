@@ -811,14 +811,16 @@
                                                       OffContent="已禁用"
                                                       OnContent="已启用"
                                                       IsOn="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=TwoWay}"/>
-                                        <TextBlock Text="?" FontSize="14"
-                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                   VerticalAlignment="Center"
-                                                   Margin="0,16,0,0">
-                                            <ToolTipService.ToolTip>
-                                                <ToolTip Content="由于米游社逐步删除了互动获取米游币渠道，下方选项大概并不能让获取米游币变得更多，等待后续官方更新新策略"/>
-                                            </ToolTipService.ToolTip>
-                                        </TextBlock>
+                                        <Button Background="Transparent"
+                                                BorderThickness="0"
+                                                VerticalAlignment="Center"
+                                                Margin="0,16,0,0"
+                                                Padding="4"
+                                                MinWidth="0" MinHeight="0"
+                                                Click="OnCommunityCheckinInfoClick">
+                                            <FontIcon Glyph="&#xE946;" FontSize="15"
+                                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        </Button>
                                     </StackPanel>
                                     <TextBlock Text="自动完成社区互动任务获取米游币"
                                                Style="{ThemeResource CaptionTextBlockStyle}"
@@ -843,14 +845,16 @@
                                                   OffContent="已禁用"
                                                   OnContent="已启用"
                                                   IsOn="{x:Bind ViewModel.IsCloudGameCheckinEnabled, Mode=TwoWay}"/>
-                                    <TextBlock Text="?" FontSize="14"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               VerticalAlignment="Center"
-                                               Margin="0,16,0,0">
-                                        <ToolTipService.ToolTip>
-                                            <ToolTip Content="开启云游戏签到需要对应账号添加云游戏登录凭证，否则跳过云游戏签到"/>
-                                        </ToolTipService.ToolTip>
-                                    </TextBlock>
+                                    <Button Background="Transparent"
+                                            BorderThickness="0"
+                                            VerticalAlignment="Center"
+                                            Margin="0,16,0,0"
+                                            Padding="4"
+                                            MinWidth="0" MinHeight="0"
+                                            Click="OnCloudGameCheckinInfoClick">
+                                        <FontIcon Glyph="&#xE946;" FontSize="15"
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                    </Button>
                                 </StackPanel>
                                 <TextBlock Text="领取云游戏签到奖励，需在下方账号列表右侧添加云游戏登录凭证"
                                            Style="{ThemeResource CaptionTextBlockStyle}"

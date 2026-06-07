@@ -120,6 +120,30 @@ public sealed partial class SettingsPage : Page
 
     private Window _easterEggWindow;
 
+    private async void OnCommunityCheckinInfoClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "社区签到说明",
+            Content = "由于米游社逐步删除了互动获取米游币渠道，下方选项大概并不能让获取米游币变得更多，等待后续官方更新新策略",
+            CloseButtonText = "我知道了",
+            XamlRoot = this.XamlRoot
+        };
+        await dialog.ShowAsync();
+    }
+
+    private async void OnCloudGameCheckinInfoClick(object sender, RoutedEventArgs e)
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "云游戏签到说明",
+            Content = "开启云游戏签到需要对应账号添加云游戏登录凭证，否则跳过云游戏签到",
+            CloseButtonText = "我知道了",
+            XamlRoot = this.XamlRoot
+        };
+        await dialog.ShowAsync();
+    }
+
     private void OnEasterEggClick(object sender, RoutedEventArgs e)
     {
         if (_easterEggWindow != null)
