@@ -24,7 +24,7 @@ public sealed partial class LoginQrWindow : Window
     private const string SaltGame = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
     private readonly string _deviceId;
     private readonly string _deviceFp;
-    private readonly HttpClient _httpClient;
+    private readonly HttpClient _httpClient = new HttpClient(new HttpClientHandler { UseCookies = false });
     
     private string _appTicket;
     private string _gameTicket;
@@ -55,9 +55,6 @@ public sealed partial class LoginQrWindow : Window
         _deviceFp = GenerateDeviceFingerprint();
         
         _gameDevice = Guid.NewGuid().ToString("N"); 
-    
-        var handler = new HttpClientHandler { UseCookies = false };
-        _httpClient = new HttpClient(handler);
     
         if (Content is FrameworkElement rootContent)
         {
