@@ -143,7 +143,7 @@ private async void StartBtn_Click(object sender, RoutedEventArgs e)
                     XamlRoot = XamlRoot
                 };
 
-                using var cts = new System.Threading.CancellationTokenSource();
+                using var cts = new CancellationTokenSource();
                 var monitorTask = Task.Run(async () =>
                 {
                     try

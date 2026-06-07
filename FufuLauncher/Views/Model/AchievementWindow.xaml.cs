@@ -10,11 +10,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.Data.Sqlite;
-using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace FufuLauncher.Views;
 
@@ -1404,10 +1399,6 @@ public sealed partial class AchievementWindow : Window
         };
         await dialog.ShowAsync();
     }
-    
-    // ==========================================
-    // UIAF 1.1 导入与导出逻辑
-    // ==========================================
 
     private class UiafInfo
     {

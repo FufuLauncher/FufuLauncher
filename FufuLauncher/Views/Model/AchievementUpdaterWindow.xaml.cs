@@ -1,13 +1,8 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
-using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Threading.Tasks;
 using FufuLauncher.Constants;
 
 namespace FufuLauncher.Views
