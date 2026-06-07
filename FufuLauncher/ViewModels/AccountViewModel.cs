@@ -473,6 +473,11 @@ public partial class AccountViewModel : ObservableRecipient
         File.Copy(configPath, backupPath, true);
         Debug.WriteLine($"[ArchiveCurrentAccount] 已备份配置到: {backupName}");
     }
+    public async Task RefreshDataAsync()
+    {
+        await LoadAccountInfo();          
+        await LoadSavedAccountsListAsync(); 
+    }
     #endregion
 
     #region 登录/退出/切换/添加账号
@@ -641,11 +646,6 @@ public partial class AccountViewModel : ObservableRecipient
     #endregion
 
     #region 删除账号
-    private async Task DeleteSavedAccountAsync(AccountInfo? account)
-    {
-        if (account == null) return;
-        await DeleteAccountByUidAsync(account.Stuid);
-    }
 
     private async Task DeleteAccountByUidAsync(string uid)
     {
