@@ -87,9 +87,12 @@
                           Label="获取插件(Get Plugins)"
                           Click="OnGetPluginsClick" />
 
-            <AppBarButton Icon="Help" 
-                  Label="自由视角怎么用" 
-                  Click="OnFreeCamHelpClick"/>
+            <AppBarButton Label="自由视角怎么用" 
+                  Click="OnFreeCamHelpClick">
+                <AppBarButton.Icon>
+                    <FontIcon Glyph="&#xE9CE;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
 
             <AppBarButton Icon="Add" Label="添加插件" Command="{x:Bind ViewModel.AddPluginCommand}"/>
             <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind ViewModel.RefreshCommand}"/>

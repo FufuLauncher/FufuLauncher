@@ -57,8 +57,22 @@ public sealed partial class PluginPage : Page
 
             if (File.Exists(imagePath))
             {
-                var file = await Windows.Storage.StorageFile.GetFileFromPathAsync(imagePath);
-                await Launcher.LaunchFileAsync(file);
+                var bitmap = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(imagePath));
+                var image = new Image
+                {
+                    Source = bitmap,
+                    Stretch = Microsoft.UI.Xaml.Media.Stretch.Uniform
+                };
+
+                var dialog = new ContentDialog
+                {
+                    Title = "自由视角使用说明",
+                    Content = image,
+                    CloseButtonText = "关闭",
+                    XamlRoot = XamlRoot,
+                    Resources = { ["ContentDialogMaxWidth"] = 900.0 }
+                };
+                await dialog.ShowAsync();
             }
             else
             {
