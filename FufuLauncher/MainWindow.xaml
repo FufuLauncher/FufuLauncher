@@ -13,10 +13,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.ThemeDictionaries>
                     <ResourceDictionary x:Key="Light">
-                        <AcrylicBrush x:Key="IosGlassBrush" 
-                                      TintColor="#FFFFFF" 
-                                      TintOpacity="0.1" 
-                                      FallbackColor="#CC000000"/>
+                        <SolidColorBrush x:Key="IosGlassBrush" Color="#FFFFFF" Opacity="0.1"/>
                     </ResourceDictionary>
                     <ResourceDictionary x:Key="Default">
                         <AcrylicBrush x:Key="IosGlassBrush" 
@@ -56,7 +53,7 @@
             <MediaPlayerElement x:Name="GlobalBackgroundVideo"
                                 Stretch="UniformToFill"
                                 Opacity="1"
-                                AutoPlay="True"
+                                AutoPlay="False"
                                 AreTransportControlsEnabled="False"
                                 Visibility="Collapsed"/>
             <Rectangle x:Name="GlobalBackgroundOverlay"

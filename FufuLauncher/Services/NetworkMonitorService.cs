@@ -27,7 +27,7 @@ public class NetworkMonitorService
 
     public NetworkMonitorService()
     {
-        _networkCheckTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+        _networkCheckTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(15) };
         _networkCheckTimer.Tick += async (_, _) => await CheckNetworkAndProxyStatusAsync();
     }
 

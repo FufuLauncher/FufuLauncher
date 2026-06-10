@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace FufuLauncher.Models
 {
@@ -63,6 +64,20 @@ namespace FufuLauncher.Models
         public string IconUrl
         {
             get; set;
+        }
+
+        [JsonIgnore]
+        public BitmapImage? SafeIconImage
+        {
+            get
+            {
+                if (!Uri.TryCreate(IconUrl, UriKind.Absolute, out var uri))
+                {
+                    return null;
+                }
+
+                return new BitmapImage(uri);
+            }
         }
 
         [JsonPropertyName("role_side_img")]

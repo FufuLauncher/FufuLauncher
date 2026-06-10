@@ -767,12 +767,12 @@ public sealed partial class MainWindow : WindowEx
             else
             {
                 var acrylicEnabled = await localSettingsService.ReadSettingAsync("IsAcrylicEnabled");
-                var isEnabled = acrylicEnabled == null ? true : Convert.ToBoolean(acrylicEnabled);
-                backdropType = isEnabled ? WindowBackdropType.Acrylic : WindowBackdropType.None;
+                var isEnabled = acrylicEnabled != null && Convert.ToBoolean(acrylicEnabled);
+                backdropType = isEnabled ? WindowBackdropType.Acrylic : WindowBackdropType.Mica;
             }
             ApplyBackdrop(backdropType);
         }
-        catch { ApplyBackdrop(WindowBackdropType.Acrylic); }
+        catch { ApplyBackdrop(WindowBackdropType.Mica); }
     }
 
     private async Task LoadGlobalBackgroundAsync()
@@ -931,8 +931,15 @@ private async Task ApplyGlobalBackgroundAsync(BackgroundRenderResult? result)
                 };
                 GlobalBackgroundVideo.SetMediaPlayer(_globalBackgroundPlayer);
             }
-            _globalBackgroundPlayer.Source = result.VideoSource;
-            _globalBackgroundPlayer.Play();
+            if (!ReferenceEquals(_globalBackgroundPlayer.Source, result.VideoSource))
+            {
+                _globalBackgroundPlayer.Source = result.VideoSource;
+            }
+
+            if (_globalBackgroundPlayer.PlaybackSession.PlaybackState != MediaPlaybackState.Playing)
+            {
+                _globalBackgroundPlayer.Play();
+            }
             
             GlobalBackgroundVideo.Visibility = Visibility.Visible;
         }

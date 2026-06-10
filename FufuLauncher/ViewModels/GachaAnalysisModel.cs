@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
@@ -735,54 +735,61 @@ public partial class GachaAnalysisModel : ObservableObject
 
         _ = Task.Run(() =>
         {
-            var charPools = LoadPoolMetadataFromDb("301");
-            var weaponPools = LoadPoolMetadataFromDb("302");
-
-            var charStats = _gachaService.AnalyzePool("301", charLogs);
-            var weaponStats = _gachaService.AnalyzePool("302", weaponLogs);
-            var chronicledStats = _gachaService.AnalyzePool("500", chronicledLogs);
-            var standardStats = _gachaService.AnalyzePool("200", standardLogs);
-
-            var charFive = BuildDisplayCollection(charStats.FiveStarRecords, "角色", charPools);
-            var charFour = BuildDisplayCollection(charStats.FourStarRecords, "角色", charPools);
-            var weaponFive = BuildDisplayCollection(weaponStats.FiveStarRecords, "武器", weaponPools);
-            var weaponFour = BuildDisplayCollection(weaponStats.FourStarRecords, "武器", weaponPools);
-            var chronicledFive = BuildDisplayCollection(chronicledStats.FiveStarRecords, "集录");
-            var chronicledFour = BuildDisplayCollection(chronicledStats.FourStarRecords, "集录");
-            var standardFive = BuildDisplayCollection(standardStats.FiveStarRecords, "常驻");
-            var standardFour = BuildDisplayCollection(standardStats.FourStarRecords, "常驻");
-
-            App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+            try
             {
-                if (_refreshVersion != version) return;
+                var charPools = LoadPoolMetadataFromDb("301");
+                var weaponPools = LoadPoolMetadataFromDb("302");
 
-                CharacterStats = charStats;
-                WeaponStats = weaponStats;
-                ChronicledStats = chronicledStats;
-                StandardStats = standardStats;
-                CharacterFiveStars = charFive;
-                CharacterFourStars = charFour;
-                WeaponFiveStars = weaponFive;
-                WeaponFourStars = weaponFour;
-                ChronicledFiveStars = chronicledFive;
-                ChronicledFourStars = chronicledFour;
-                StandardFiveStars = standardFive;
-                StandardFourStars = standardFour;
-                InvalidateAnalysisDashboard();
+                var charStats = _gachaService.AnalyzePool("301", charLogs);
+                var weaponStats = _gachaService.AnalyzePool("302", weaponLogs);
+                var chronicledStats = _gachaService.AnalyzePool("500", chronicledLogs);
+                var standardStats = _gachaService.AnalyzePool("200", standardLogs);
 
-                // 通知相关属性更新
-                OnPropertyChanged(nameof(ShowCharacterNoRecords));
-                OnPropertyChanged(nameof(ShowWeaponNoRecords));
-                OnPropertyChanged(nameof(ShowChronicledNoRecords));
-                OnPropertyChanged(nameof(ShowStandardNoRecords));
-                OnPropertyChanged(nameof(ShowCharacterFourDivider));
-                OnPropertyChanged(nameof(ShowWeaponFourDivider));
-                OnPropertyChanged(nameof(ShowChronicledFourDivider));
-                OnPropertyChanged(nameof(ShowStandardFourDivider));
+                var charFive = BuildDisplayCollection(charStats.FiveStarRecords, "角色", charPools);
+                var charFour = BuildDisplayCollection(charStats.FourStarRecords, "角色", charPools);
+                var weaponFive = BuildDisplayCollection(weaponStats.FiveStarRecords, "武器", weaponPools);
+                var weaponFour = BuildDisplayCollection(weaponStats.FourStarRecords, "武器", weaponPools);
+                var chronicledFive = BuildDisplayCollection(chronicledStats.FiveStarRecords, "集录");
+                var chronicledFour = BuildDisplayCollection(chronicledStats.FourStarRecords, "集录");
+                var standardFive = BuildDisplayCollection(standardStats.FiveStarRecords, "常驻");
+                var standardFour = BuildDisplayCollection(standardStats.FourStarRecords, "常驻");
 
-                if (_savedMetadata != null && _savedMetadata.Count > 0) _ = ApplyMetadataToUIAsync(_savedMetadata);
-                if (IsAnalysisSelected) _ = EnsureAnalysisDashboardAsync();
-            });
+                App.MainWindow.DispatcherQueue.TryEnqueue(() =>
+                {
+                    if (_refreshVersion != version) return;
+
+                    CharacterStats = charStats;
+                    WeaponStats = weaponStats;
+                    ChronicledStats = chronicledStats;
+                    StandardStats = standardStats;
+                    CharacterFiveStars = charFive;
+                    CharacterFourStars = charFour;
+                    WeaponFiveStars = weaponFive;
+                    WeaponFourStars = weaponFour;
+                    ChronicledFiveStars = chronicledFive;
+                    ChronicledFourStars = chronicledFour;
+                    StandardFiveStars = standardFive;
+                    StandardFourStars = standardFour;
+                    InvalidateAnalysisDashboard();
+
+                    // 通知相关属性更新
+                    OnPropertyChanged(nameof(ShowCharacterNoRecords));
+                    OnPropertyChanged(nameof(ShowWeaponNoRecords));
+                    OnPropertyChanged(nameof(ShowChronicledNoRecords));
+                    OnPropertyChanged(nameof(ShowStandardNoRecords));
+                    OnPropertyChanged(nameof(ShowCharacterFourDivider));
+                    OnPropertyChanged(nameof(ShowWeaponFourDivider));
+                    OnPropertyChanged(nameof(ShowChronicledFourDivider));
+                    OnPropertyChanged(nameof(ShowStandardFourDivider));
+
+                    if (_savedMetadata != null && _savedMetadata.Count > 0) _ = ApplyMetadataToUIAsync(_savedMetadata);
+                    if (IsAnalysisSelected) _ = EnsureAnalysisDashboardAsync();
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Gacha] 刷新抽卡分析 UI 失败: {ex.Message}");
+            }
         });
     }
 
@@ -2107,6 +2114,22 @@ private async Task ImportUigfAsync()
         }
     }
 
+    private void EnsurePoolMetadataTable(SqliteConnection connection)
+    {
+        var command = connection.CreateCommand();
+        command.CommandText = @"
+            CREATE TABLE IF NOT EXISTS GachaPoolMetadata (
+                Version TEXT NOT NULL,
+                PoolType TEXT NOT NULL,
+                StartTime TEXT NOT NULL,
+                EndTime TEXT NOT NULL,
+                UpItems TEXT NOT NULL,
+                PRIMARY KEY (Version, PoolType)
+            );
+        ";
+        command.ExecuteNonQuery();
+    }
+
     private async Task FetchGachaPoolMetadataAsync()
     {
         if (_isFetchingPoolMetadata) return;
@@ -2148,6 +2171,7 @@ private async Task ImportUigfAsync()
 
         using var connection = new SqliteConnection(_dbConnectionString);
         connection.Open();
+        EnsurePoolMetadataTable(connection);
         using var transaction = connection.BeginTransaction();
         var command = connection.CreateCommand();
 
@@ -2180,6 +2204,7 @@ private async Task ImportUigfAsync()
         var pools = new List<GachaPoolMetadata>();
         using var connection = new SqliteConnection(_dbConnectionString);
         connection.Open();
+        EnsurePoolMetadataTable(connection);
         var command = connection.CreateCommand();
         command.CommandText = "SELECT Version, StartTime, EndTime, UpItems FROM GachaPoolMetadata WHERE PoolType = $poolType ORDER BY StartTime DESC";
         command.Parameters.AddWithValue("$poolType", poolType);
@@ -2209,6 +2234,7 @@ private async Task ImportUigfAsync()
         {
             using var connection = new SqliteConnection(_dbConnectionString);
             connection.Open();
+            EnsurePoolMetadataTable(connection);
             var command = connection.CreateCommand();
             command.CommandText = "SELECT COUNT(*) FROM GachaPoolMetadata";
             var count = Convert.ToInt32(command.ExecuteScalar());

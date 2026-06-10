@@ -81,7 +81,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Border CornerRadius="30" Width="48" Height="48" Margin="0,0,12,0">
                                         <Border.Background>
-                                            <ImageBrush ImageSource="{x:Bind IconUrl}"/>
+                                            <ImageBrush ImageSource="{x:Bind SafeIconImage, Mode=OneWay}"/>
                                         </Border.Background>
                                     </Border>
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
