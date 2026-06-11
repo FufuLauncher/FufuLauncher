@@ -25,7 +25,11 @@ public class AccountEntry
     public string AvatarUrl
     {
         get; set;
-    }   
+    }
+    public string GameUid
+    {
+        get; set;
+    }
     public DateTime LastLoginTime
     {
         get; set;

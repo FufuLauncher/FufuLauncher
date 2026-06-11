@@ -182,7 +182,7 @@ public class AccountManager
     }
 
    
-    public async Task UpdateAccountMetaAsync(string accountId, string nickname, string avatarUrl)
+    public async Task UpdateAccountMetaAsync(string accountId, string nickname, string avatarUrl, string gameUid = "")
     {
         await _lock.WaitAsync();
         try
@@ -192,6 +192,8 @@ public class AccountManager
             {
                 entry.Nickname = nickname;
                 entry.AvatarUrl = avatarUrl;
+                if (!string.IsNullOrEmpty(gameUid))
+                    entry.GameUid = gameUid;
                 await SaveAccountListAsync();
             }
         }
@@ -361,6 +363,7 @@ public class AccountManager
                         CookieFilePath = cookieFileName,
                         Nickname = config.Display?.Nickname ?? "",
                         AvatarUrl = config.Display?.AvatarUrl ?? "",
+                        GameUid = config.Display?.GameUid ?? "",
                         LastLoginTime = DateTime.Now
                     };
 

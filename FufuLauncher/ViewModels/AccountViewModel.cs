@@ -219,7 +219,7 @@ public partial class AccountViewModel : ObservableRecipient
             var ipRegion = userInfo?.ip_region ?? "未知";
             var gender = userInfo?.gender ?? 0;
 
-            await _accountManager.UpdateAccountMetaAsync(entry.Id, nickname, avatarUrl);
+            await _accountManager.UpdateAccountMetaAsync(entry.Id, nickname, avatarUrl, gameUid);
 
             RunOnUIThread(() =>
             {
@@ -350,6 +350,7 @@ public partial class AccountViewModel : ObservableRecipient
             Nickname = entry.Nickname ?? "未命名",
             Stuid = entry.Stuid,
             AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png",
+            GameUid = entry.GameUid ?? "",
             Server = entry.ServerType
         };
 
@@ -391,7 +392,8 @@ public partial class AccountViewModel : ObservableRecipient
                     AccountId = entry.Id,
                     Nickname = entry.Nickname ?? "未命名",
                     Stuid = entry.Stuid,
-                    AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png"
+                    AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png",
+                    GameUid = entry.GameUid ?? ""
                 });
             }
             OnPropertyChanged(nameof(HasSavedAccounts));
@@ -451,7 +453,7 @@ public partial class AccountViewModel : ObservableRecipient
                     Nickname = entry.Nickname ?? "未命名",
                     Stuid = entry.Stuid,
                     AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png",
-                    GameUid = entry.Stuid,       
+                    GameUid = entry.GameUid ?? entry.Stuid,
                     Server = entry.ServerType,
                     HasBoundRole = false
                 };
