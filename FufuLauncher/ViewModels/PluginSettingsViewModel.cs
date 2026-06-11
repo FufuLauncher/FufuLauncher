@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -992,7 +992,7 @@ public void LoadConfiguration()
 
                 try
                 {
-                    _iniFile.UpdateMultiple(CurrentPreset.ConfigData);
+                    ApplyPresetConfigToIni(CurrentPreset);
                 }
                 catch (Exception ex)
                 {
@@ -1106,6 +1106,15 @@ public void LoadConfiguration()
         }
     }
 
+    private void ApplyPresetConfigToIni(PresetModel preset)
+    {
+        if (preset == null) return;
+
+        var configData = new Dictionary<string, Dictionary<string, string>>(preset.ConfigData, StringComparer.OrdinalIgnoreCase);
+        configData.Remove("General");
+        _iniFile.UpdateMultiple(configData);
+    }
+
     private void OnSettingValueChanged(string section, string key, string value)
     {
         if (CurrentPreset == null) return;
@@ -1129,7 +1138,7 @@ public void LoadConfiguration()
         
         try
         {
-            _iniFile.UpdateMultiple(CurrentPreset.ConfigData);
+            ApplyPresetConfigToIni(CurrentPreset);
         }
         catch (Exception ex)
         {

@@ -126,6 +126,7 @@ private static void ApplyPreset(string presetId)
                 
                 if (dict != null)
                 {
+                    dict.Remove("General");
                     iniFile.UpdateMultiple(dict);
                     
                     var stateFile = Path.Combine(presetsDir, "active_state.json");
