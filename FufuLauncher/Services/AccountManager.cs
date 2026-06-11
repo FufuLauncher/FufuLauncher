@@ -371,6 +371,22 @@ public class AccountManager
                     processed.Add(stuid);
                     migratedCount++;
 
+                    // 迁移云游戏凭证到 LocalSettings
+                    var cloudToken = config.Account.CloudComboToken;
+                    if (!string.IsNullOrWhiteSpace(cloudToken))
+                    {
+                        try
+                        {
+                            var settings = App.GetService<ILocalSettingsService>();
+                            await settings.SaveSettingAsync($"CloudComboToken_{stuid}", cloudToken);
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine(
+                                $"[AccountManager] 迁移云游戏凭证失败: {ex.Message}");
+                        }
+                    }
+
                     System.Diagnostics.Debug.WriteLine(
                         $"[AccountManager] 已迁移账号: {accountId} ({entry.Nickname}) [{serverType}]");
                 }
