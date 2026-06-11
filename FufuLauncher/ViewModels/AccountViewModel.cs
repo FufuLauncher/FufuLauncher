@@ -381,8 +381,11 @@ public partial class AccountViewModel : ObservableRecipient
         RunOnUIThread(() =>
         {
             SavedAccounts.Clear();
+            var activeId = _accountManager.ActiveAccountId;
             foreach (var entry in _accountManager.GetAllAccounts())
             {
+                if (entry.Id == activeId)
+                    continue;
                 SavedAccounts.Add(new AccountInfo
                 {
                     AccountId = entry.Id,

@@ -97,7 +97,7 @@
     </Button>
 
     <StackPanel Spacing="12" Margin="0,32,0,0" Visibility="{x:Bind ViewModel.HasSavedAccounts, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-        <TextBlock Text="或选择已保存的账户登录" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
+        <TextBlock Text="已保存的其他账户" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
         <ListView ItemsSource="{x:Bind ViewModel.SavedAccounts, Mode=OneWay}" SelectionMode="None" Width="320">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:AccountInfo">
@@ -252,32 +252,34 @@
                                                                Foreground="{ThemeResource AccentFillColorDefaultBrush}" FontSize="12" FontWeight="SemiBold"/>
                                                 </Grid>
 
-                                                <TextBlock Text="已保存的账户" Style="{StaticResource BodyStrongTextBlockStyle}" Margin="8,8,0,4"/>
-                                                <ListView ItemsSource="{x:Bind ViewModel.SavedAccounts, Mode=OneWay}" SelectionMode="None">
-                                                    <ListView.ItemTemplate>
-                                                        <DataTemplate x:DataType="models:AccountInfo">
-                                                            <Grid Margin="0,4" Padding="0,4">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="Auto"/>
-                                                                    <ColumnDefinition Width="*"/>
-                                                                    <ColumnDefinition Width="Auto"/>
-                                                                    <ColumnDefinition Width="Auto"/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <PersonPicture ProfilePicture="{x:Bind AvatarUrl}" Width="32" Height="32" Margin="0,0,12,0"/>
-                                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                                    <TextBlock Text="{x:Bind Nickname}" FontSize="14" FontWeight="SemiBold"/>
-                                                                    <TextBlock Text="{x:Bind GameUidDisplay}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                                                </StackPanel>
-                                                                <Button Grid.Column="2" Content="切换" FontSize="12" Margin="0,0,4,0"
-                                                                        Click="OnSwitchAccountClicked"/>
-                                                                <Button Grid.Column="3" Padding="6,4" Background="Transparent" BorderThickness="0"
-                                                                        Click="OnDeleteSavedAccountClicked" Tag="{Binding GameUid}">
-                                                                    <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
-                                                                </Button>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </ListView.ItemTemplate>
-                                                </ListView>
+                                                <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.HasSavedAccounts, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                    <TextBlock Text="已保存的其他账户" Style="{StaticResource BodyStrongTextBlockStyle}" Margin="8,8,0,4"/>
+                                                    <ListView ItemsSource="{x:Bind ViewModel.SavedAccounts, Mode=OneWay}" SelectionMode="None">
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate x:DataType="models:AccountInfo">
+                                                                <Grid Margin="0,4" Padding="0,4">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                        <ColumnDefinition Width="*"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                        <ColumnDefinition Width="Auto"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <PersonPicture ProfilePicture="{x:Bind AvatarUrl}" Width="32" Height="32" Margin="0,0,12,0"/>
+                                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                                        <TextBlock Text="{x:Bind Nickname}" FontSize="14" FontWeight="SemiBold"/>
+                                                                        <TextBlock Text="{x:Bind GameUidDisplay}" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                                                    </StackPanel>
+                                                                    <Button Grid.Column="2" Content="切换" FontSize="12" Margin="0,0,4,0"
+                                                                            Click="OnSwitchAccountClicked"/>
+                                                                    <Button Grid.Column="3" Padding="6,4" Background="Transparent" BorderThickness="0"
+                                                                            Click="OnDeleteSavedAccountClicked" Tag="{Binding GameUid}">
+                                                                        <FontIcon Glyph="&#xE74D;" FontSize="12" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                                                    </Button>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </StackPanel>
                                                 <MenuFlyoutSeparator/>
                                                 <Button Command="{x:Bind ViewModel.AddAccountCommand}" HorizontalAlignment="Stretch">
                                                     <StackPanel Orientation="Horizontal" Spacing="8">
