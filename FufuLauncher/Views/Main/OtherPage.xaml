@@ -10,6 +10,16 @@
     Loaded="Page_Loaded">
 
     <Page.Resources>
+        <AcrylicBrush
+            x:Key="SafeGlassBrush"
+            FallbackColor="#CC000000"
+            TintColor="#000000"
+            TintOpacity="0.15" />
+        <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+        <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+        <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+        <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+
         <Storyboard x:Name="EntranceStoryboard">
             <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
                              Storyboard.TargetProperty="Opacity"
@@ -32,10 +42,10 @@
         <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
         <Style x:Key="SettingsCardStyle" TargetType="Grid">
-            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}"/>
+            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}"/>
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="CornerRadius" Value="14"/>
             <Setter Property="Padding" Value="24"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
         </Style>
@@ -43,7 +53,7 @@
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource SafeSecondaryTextBrush}"/>
             <Setter Property="Margin" Value="4,0,0,8"/>
         </Style>
     </Page.Resources>
@@ -72,7 +82,10 @@
                 <StackPanel>
                     <TextBlock Text="外部程序" Style="{StaticResource SectionHeaderStyle}"/>
                     
-                    <Grid Style="{StaticResource SettingsCardStyle}">
+                    <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
+                        <Grid.Shadow>
+                            <ThemeShadow/>
+                        </Grid.Shadow>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -96,7 +109,7 @@
                             <ToggleSwitch Grid.Column="2" IsOn="{x:Bind ViewModel.IsAdditionalProgramEnabled, Mode=TwoWay}" Margin="0"/>
                         </Grid>
 
-                        <MenuFlyoutSeparator Grid.Row="1" Margin="-24,16,-24,16"/>
+                        <Rectangle Grid.Row="1" Height="1" Fill="{StaticResource SafeBorderBrush}" Margin="-24,16,-24,16"/>
 
                         <ContentControl Grid.Row="2" 
                                         IsEnabled="{x:Bind ViewModel.IsAdditionalProgramEnabled, Mode=OneWay}"
@@ -135,7 +148,7 @@
                                             Content="应用"/>
                                 </Grid>
 
-                                <TextBlock Grid.Row="1" Margin="0,8,0,0" FontSize="12" Opacity="0.6"
+                                <TextBlock Grid.Row="1" Margin="0,8,0,0" FontSize="12" Foreground="{StaticResource SafeSecondaryTextBrush}"
                                            Text="提示：如果选择路径后无反应，请手动粘贴路径并点击应用。"/>
                             </Grid>
                         </ContentControl>
@@ -145,7 +158,10 @@
                 <StackPanel>
                     <TextBlock Text="辅助功能" Style="{StaticResource SectionHeaderStyle}"/>
 
-                    <Grid Style="{StaticResource SettingsCardStyle}">
+                    <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
+                        <Grid.Shadow>
+                            <ThemeShadow/>
+                        </Grid.Shadow>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -170,7 +186,7 @@
                             <ToggleSwitch Grid.Column="2" IsOn="{x:Bind ViewModel.IsAutoClickerEnabled, Mode=TwoWay}" Margin="0"/>
                         </Grid>
 
-                        <MenuFlyoutSeparator Grid.Row="1" Margin="-24,16,-24,16"/>
+                        <Rectangle Grid.Row="1" Height="1" Fill="{StaticResource SafeBorderBrush}" Margin="-24,16,-24,16"/>
 
                         <ContentControl Grid.Row="2" 
                                         IsEnabled="{x:Bind ViewModel.IsAutoClickerEnabled, Mode=OneWay}"
@@ -199,7 +215,7 @@
                                                       IsOn="{x:Bind ViewModel.IsMouseRightClickerEnabled, Mode=TwoWay}"
                                                       Margin="0"/>
                                     </StackPanel>
-                                    <TextBlock Text="两个鼠标模式只能开启一个。开启鼠标模式前必须设置停止快捷键。" FontSize="12" Opacity="0.6"/>
+                                    <TextBlock Text="两个鼠标模式只能开启一个。开启鼠标模式前必须设置停止快捷键。" FontSize="12" Foreground="{StaticResource SafeSecondaryTextBrush}"/>
                                 </StackPanel>
 
                                 <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnSpacing="8">
@@ -273,7 +289,10 @@
                 <StackPanel>
                     <TextBlock Text="实用工具" Style="{StaticResource SectionHeaderStyle}"/>
                     
-                    <Grid Style="{StaticResource SettingsCardStyle}">
+                    <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
+                        <Grid.Shadow>
+                            <ThemeShadow/>
+                        </Grid.Shadow>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>

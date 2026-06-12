@@ -22,7 +22,6 @@ public sealed partial class CommunityPage : Page
 
     private async void CommunityWebView_Loaded(object sender, RoutedEventArgs e)
     {
-        // 检查并显示初次进入页面的提示弹窗
         await CheckAndShowFirstTimeNoticeAsync();
 
         await CommunityWebView.EnsureCoreWebView2Async();

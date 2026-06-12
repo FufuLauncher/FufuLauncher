@@ -12,6 +12,17 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <AcrylicBrush
+            x:Key="SafeGlassBrush"
+            FallbackColor="#CC000000"
+            TintColor="#000000"
+            TintOpacity="0.15" />
+        <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+        <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+        <SolidColorBrush x:Key="SafeHoverBrush" Color="#24FFFFFF" />
+        <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+        <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+
         <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
         <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -19,20 +30,21 @@
         <converters:EmptyCountToVisibilityConverter x:Key="EmptyCountToVisibilityConverter" />
 
         <Style x:Key="CardBorderStyle" TargetType="Border">
-            <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="16" />
+            <Setter Property="CornerRadius" Value="14" />
+            <Setter Property="Padding" Value="20" />
         </Style>
 
         <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="0,12" />
-            <Setter Property="Background" Value="{ThemeResource LayerFillColorDefaultBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="Background" Value="{StaticResource SafeCardBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="CornerRadius" Value="10" />
         </Style>
 
         <Storyboard x:Name="EntranceStoryboard">
@@ -255,7 +267,7 @@
                                                 Padding="6,2"
                                                 VerticalAlignment="Center"
                                                 Background="{ThemeResource AccentFillColorDefaultBrush}"
-                                                CornerRadius="4">
+                                                CornerRadius="10">
                                                 <TextBlock
                                                     FontSize="10"
                                                     FontWeight="Bold"
@@ -604,7 +616,7 @@
                                             Grid.Column="0"
                                             Padding="12"
                                             Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
-                                            CornerRadius="4">
+                                            CornerRadius="10">
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -621,7 +633,7 @@
                                             Grid.Column="1"
                                             Padding="12"
                                             Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
-                                            CornerRadius="4">
+                                            CornerRadius="10">
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -638,7 +650,7 @@
                                             Grid.Column="2"
                                             Padding="12"
                                             Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
-                                            CornerRadius="4">
+                                            CornerRadius="10">
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"

@@ -8,9 +8,37 @@
     xmlns:viewModels="using:FufuLauncher.ViewModels"
     xmlns:converters="using:FufuLauncher.Converters"
     mc:Ignorable="d"
+    Background="Transparent"
     Loaded="Page_Loaded">
     
     <Page.Resources>
+        <AcrylicBrush
+            x:Key="SafeGlassBrush"
+            FallbackColor="#CC000000"
+            TintColor="#000000"
+            TintOpacity="0.15" />
+        <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+        <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+        <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+        <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+
+        <Style x:Key="SafePluginCardStyle" TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <Style x:Key="SafeCommandBarStyle" TargetType="CommandBar">
+            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+
         <converters:BoolInverter x:Key="BoolInverter"/>
 
         <Storyboard x:Name="EntranceStoryboard">
@@ -68,7 +96,7 @@
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="启用注入" FontWeight="SemiBold" HorizontalAlignment="Right"/>
+                    <TextBlock Text="启用注入" FontWeight="SemiBold" Foreground="{StaticResource SafeTextBrush}" HorizontalAlignment="Right"/>
                     <TextBlock Text="启动游戏时加载插件" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right"/>
                 </StackPanel>
                 
@@ -138,7 +166,7 @@
                                   Margin="0,0,16,0" VerticalAlignment="Center"/>
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
-                            <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                            <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{StaticResource SafeTextBrush}"/>
                             
                             <TextBlock Text="{x:Bind Description, Mode=OneWay}" 
                                        Visibility="{x:Bind DescriptionVisibility, Mode=OneWay}"
