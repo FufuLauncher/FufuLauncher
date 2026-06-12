@@ -45,13 +45,13 @@ public static class AppPaths
 
         IsFirstRun = !File.Exists(PathsConfigFile);
 
+        Directory.CreateDirectory(DataDir);
+        Directory.CreateDirectory(CacheDir);
+
         if (IsFirstRun)
         {
             return;
         }
-
-        Directory.CreateDirectory(DataDir);
-        Directory.CreateDirectory(CacheDir);
 
         var defaultData = Path.Combine(RootDir, "Data");
         var defaultCache = Path.Combine(RootDir, "Cache");
