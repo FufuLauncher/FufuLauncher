@@ -112,7 +112,6 @@
                         <TextBlock
                             FontSize="32"
                             FontWeight="SemiBold"
-                            Foreground="{StaticResource PanelTextBrush}"
                             Text="工具箱" />
                     </StackPanel>
                 </Grid>
