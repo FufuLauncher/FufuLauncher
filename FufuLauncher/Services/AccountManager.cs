@@ -267,14 +267,11 @@ public class AccountManager
         if (!Directory.Exists(_dataDir))
             return false;
 
-        return Directory.GetFiles(_dataDir, "config*.json")
-            .Any(f =>
-            {
-                var name = Path.GetFileName(f);
-                return !name.Equals("config.json", StringComparison.OrdinalIgnoreCase) &&
-                       !name.Equals("config.lab.json", StringComparison.OrdinalIgnoreCase) &&
-                       !name.Equals("accounts.json", StringComparison.OrdinalIgnoreCase);
-            });
+        var configFiles = Directory.GetFiles(_dataDir, "config*.json")
+            .Where(f => !Path.GetFileName(f).Equals("accounts.json", StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        return configFiles.Count > 0;
     }
 
     private static string DetermineServerTypeByFileName(string fileName)
@@ -305,6 +302,8 @@ public class AccountManager
                         })
                 );
             }
+
+            bool hasOnlyMainConfig = subAccountFiles.Count == 0;
 
             var processed = new HashSet<string>();
             int migratedCount = 0;
@@ -404,6 +403,98 @@ public class AccountManager
                     $"[AccountManager] 迁移完成，共迁移 {migratedCount} 个账号");
 
                 await MigrateActiveAccountAsync();
+            }
+            else if (hasOnlyMainConfig)
+            {
+                // 没有子账号文件，尝试从主 config.json / config.lab.json 迁移唯一账号
+                var settings = App.GetService<ILocalSettingsService>();
+                bool isInternationalAccount = false;
+                try
+                {
+                    var isOsObj = await settings.ReadSettingAsync("IsInternationalAccount");
+                    isInternationalAccount = isOsObj is bool b && b;
+                }
+                catch { }
+
+                string mainConfigPath = isInternationalAccount
+                    ? Path.Combine(_dataDir, "config.lab.json")
+                    : Path.Combine(_dataDir, "config.json");
+
+                if (File.Exists(mainConfigPath))
+                {
+                    try
+                    {
+                        var json = await File.ReadAllTextAsync(mainConfigPath);
+                        var config = JsonSerializer.Deserialize<Config>(json,
+                            new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                        if (config?.Account != null && !string.IsNullOrWhiteSpace(config.Account.Cookie))
+                        {
+                            var cookieDict = ParseCookieString(config.Account.Cookie);
+                            string stuid = config.Account.Stuid;
+                            if (string.IsNullOrWhiteSpace(stuid))
+                            {
+                                if (cookieDict.TryGetValue("ltuid", out var ltuid))
+                                    stuid = ltuid;
+                                else if (cookieDict.TryGetValue("ltuid_v2", out var ltuidV2))
+                                    stuid = ltuidV2;
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(stuid) && cookieDict.Count > 0)
+                            {
+                                string serverType = isInternationalAccount ? "os" : "cn";
+                                string accountId = $"{serverType}_{stuid}";
+
+                                string cookieFileName = $"{accountId}.json";
+                                string cookiePath = Path.Combine(_cookiesDir, cookieFileName);
+                                await File.WriteAllTextAsync(cookiePath, JsonSerializer.Serialize(cookieDict));
+
+                                var entry = new AccountEntry
+                                {
+                                    Id = accountId,
+                                    Stuid = stuid,
+                                    ServerType = serverType,
+                                    CookieFilePath = cookieFileName,
+                                    Nickname = config.Display?.Nickname ?? "",
+                                    AvatarUrl = config.Display?.AvatarUrl ?? "",
+                                    GameUid = config.Display?.GameUid ?? "",
+                                    LastLoginTime = DateTime.Now
+                                };
+
+                                _accountList.Accounts.Add(entry);
+                                await SetActiveAccountIdAsync(accountId);
+                                await SaveAccountListAsync();
+                                migratedCount = 1;
+
+                                // 迁移云游戏凭证
+                                var cloudToken = config.Account.CloudComboToken;
+                                if (!string.IsNullOrWhiteSpace(cloudToken))
+                                {
+                                    try
+                                    {
+                                        await settings.SaveSettingAsync($"CloudComboToken_{stuid}", cloudToken);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        System.Diagnostics.Debug.WriteLine(
+                                            $"[AccountManager] 迁移云游戏凭证失败: {ex.Message}");
+                                    }
+                                }
+
+                                System.Diagnostics.Debug.WriteLine(
+                                    $"[AccountManager] 已从主配置迁移唯一账号: {accountId} ({entry.Nickname}) [{serverType}]");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(
+                            $"[AccountManager] 从主配置迁移账号失败: {ex.Message}");
+                    }
+                }
+
+                if (migratedCount == 0)
+                    System.Diagnostics.Debug.WriteLine("[AccountManager] 未找到需要迁移的账号");
             }
             else
             {

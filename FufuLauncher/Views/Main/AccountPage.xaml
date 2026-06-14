@@ -202,7 +202,11 @@
                             <ColumnDefinition Width="5.5*" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0" Spacing="24">
+                        <Grid Grid.Column="0" RowSpacing="24">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
                             <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
                                 <Border.Shadow>
                                     <ThemeShadow />
@@ -331,8 +335,27 @@
                                 </Grid>
                             </Border>
 
-                            <StackPanel Spacing="12">
-                                <Button Style="{StaticResource ActionButtonStyle}" Translation="0,0,32">
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0" Style="{StaticResource ActionButtonStyle}" Translation="0,0,32">
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
@@ -449,7 +472,7 @@
                                     </Button.Flyout>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="2"
                                     Command="{x:Bind ViewModel.LoadUserInfoCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -465,7 +488,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="4"
                                     Command="{x:Bind ViewModel.OpenGenshinDataCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -481,7 +504,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="6"
                                     Click="OnGachaAnalysisClicked"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -497,7 +520,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="8"
                                     Command="{x:Bind ViewModel.OpenSecurityCenterCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -513,7 +536,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="10"
                                     Command="{x:Bind ViewModel.LockAccountCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -532,7 +555,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="12"
                                     Command="{x:Bind ViewModel.CopyCookieCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -548,7 +571,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="14"
                                     Click="OnDeleteCurrentAccountClicked"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -567,7 +590,7 @@
                                     </StackPanel>
                                 </Button>
 
-                                <Button
+                                <Button Grid.Row="16"
                                     Command="{x:Bind ViewModel.LogoutCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -585,8 +608,8 @@
                                         <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="退出登录" />
                                     </StackPanel>
                                 </Button>
-                            </StackPanel>
-                        </StackPanel>
+                            </Grid>
+                        </Grid>
 
                         <StackPanel Grid.Column="1" Spacing="24">
                             <Border
