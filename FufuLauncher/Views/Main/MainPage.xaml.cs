@@ -443,7 +443,7 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
     private void AnimateInfoCardToggle(bool isExpanded)
     {
         _isInfoCardExpanded = isExpanded;
-        var targetHeight = isExpanded ? 275 : 157;
+        var targetHeight = isExpanded ? ViewModel.InfoCardHeight : 157;
         var targetCornerRadius = new CornerRadius(12);
 
         var sb = new Storyboard();
