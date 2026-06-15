@@ -1,24 +1,17 @@
 using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
-using System.Threading;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Constants;
-using FufuLauncher.Contracts.Services;
-using FufuLauncher.Messages;
 using FufuLauncher.Services;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.Web.WebView2.Core;
-using MihoyoBBS; 
 using QRCoder;  
  
 namespace FufuLauncher.Views;
