@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using FufuLauncher.Contracts.Services;
+﻿using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
