@@ -13,10 +13,10 @@
             <ResourceDictionary>
                 <ResourceDictionary.ThemeDictionaries>
                     <ResourceDictionary x:Key="Light">
-                        <AcrylicBrush x:Key="IosGlassBrush" 
-                                      TintColor="#000000" 
-                                      TintOpacity="0.15" 
-                                      FallbackColor="#CC000000"/>
+                        <AcrylicBrush x:Key="IosGlassBrush"
+                                      TintColor="#FFFFFF"
+                                      TintOpacity="0.6"
+                                      FallbackColor="#E5FFFFFF"/>
                     </ResourceDictionary>
                     <ResourceDictionary x:Key="Default">
                         <AcrylicBrush x:Key="IosGlassBrush" 
@@ -95,14 +95,14 @@
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary x:Key="Light">
-                            <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" 
-                                          TintColor="#000000" 
-                                          TintOpacity="0.15" 
-                                          FallbackColor="#CC000000"/>
-                            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
-                                          TintColor="#000000" 
-                                          TintOpacity="0.15" 
-                                          FallbackColor="#CC000000"/>
+                            <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
+                                          TintColor="#FFFFFF"
+                                          TintOpacity="0.6"
+                                          FallbackColor="#E5FFFFFF"/>
+                            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
+                                          TintColor="#FFFFFF"
+                                          TintOpacity="0.6"
+                                          FallbackColor="#E5FFFFFF"/>
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="Dark">
                              <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground" 
@@ -129,7 +129,7 @@
                         <Setter Property="Margin" Value="0,1,0,1"/>
                     </Style>
                     <Style TargetType="FontIcon">
-                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}"/>
                     </Style>
                     <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent"/>
                     <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent"/>
@@ -287,18 +287,18 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Padding="16,12,16,8">
-                        <TextBlock Text="通知中心" 
-                                   FontSize="14" 
-                                   FontWeight="SemiBold" 
-                                   VerticalAlignment="Center" 
-                                   Foreground="White"/>
+                        <TextBlock Text="通知中心"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                 
                         <Button Content="全部清除"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Background="Transparent"
                                 BorderThickness="0"
-                                Foreground="#88FFFFFF"
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                 FontSize="12"
                                 Padding="8,4"
                                 Click="ClearAllNotifications_Click"/>
@@ -328,7 +328,7 @@
                     VerticalAlignment="Center" 
                     CornerRadius="8" 
                     Padding="8,4,12,4"
-                    Background="{StaticResource IosGlassBrush}"
+                    Background="{ThemeResource IosGlassBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1">
 

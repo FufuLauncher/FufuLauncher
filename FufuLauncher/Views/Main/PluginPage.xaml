@@ -12,18 +12,26 @@
     Loaded="Page_Loaded">
     
     <Page.Resources>
-        <AcrylicBrush
-            x:Key="SafeGlassBrush"
-            FallbackColor="#CC000000"
-            TintColor="#000000"
-            TintOpacity="0.15" />
-        <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
-        <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
-        <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
-        <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+        <ResourceDictionary>
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Light">
+                <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
+                <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
+                <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
+                <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
+                <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Default">
+                <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000" TintOpacity="0.15" />
+                <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+                <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+                <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+                <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
 
         <Style x:Key="SafePluginCardStyle" TargetType="Grid">
-            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}"/>
+            <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}"/>
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="14"/>
@@ -32,7 +40,7 @@
         </Style>
 
         <Style x:Key="SafeCommandBarStyle" TargetType="CommandBar">
-            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}"/>
+            <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}"/>
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="14"/>
@@ -59,6 +67,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid x:Name="RootLayoutGrid" 
@@ -96,7 +105,7 @@
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="启用注入" FontWeight="SemiBold" Foreground="{StaticResource SafeTextBrush}" HorizontalAlignment="Right"/>
+                    <TextBlock Text="启用注入" FontWeight="SemiBold" Foreground="{ThemeResource SafeTextBrush}" HorizontalAlignment="Right"/>
                     <TextBlock Text="启动游戏时加载插件" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right"/>
                 </StackPanel>
                 
@@ -169,7 +178,7 @@
                                   Margin="0,0,16,0" VerticalAlignment="Center"/>
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
-                            <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{StaticResource SafeTextBrush}"/>
+                            <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" Style="{StaticResource BodyStrongTextBlockStyle}" Foreground="{ThemeResource SafeTextBrush}"/>
                             
                             <TextBlock Text="{x:Bind Description, Mode=OneWay}" 
                                        Visibility="{x:Bind DescriptionVisibility, Mode=OneWay}"

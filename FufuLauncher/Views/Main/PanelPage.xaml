@@ -13,15 +13,11 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <AcrylicBrush
-                        x:Key="PanelGlassBrush"
-                        FallbackColor="#CC000000"
-                        TintColor="#000000"
-                        TintOpacity="0.15" />
-                    <SolidColorBrush x:Key="PanelCardBrush" Color="#14FFFFFF" />
-                    <SolidColorBrush x:Key="PanelCardHoverBrush" Color="#24FFFFFF" />
-                    <SolidColorBrush x:Key="PanelTextBrush" Color="White" />
-                    <SolidColorBrush x:Key="PanelSecondaryTextBrush" Color="#B3FFFFFF" />
+                    <AcrylicBrush x:Key="PanelGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
+                    <SolidColorBrush x:Key="PanelCardBrush" Color="#0A000000" />
+                    <SolidColorBrush x:Key="PanelCardHoverBrush" Color="#14000000" />
+                    <SolidColorBrush x:Key="PanelTextBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="PanelSecondaryTextBrush" Color="#99000000" />
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Default">
@@ -43,10 +39,49 @@
                 <Setter Property="VerticalAlignment" Value="Stretch" />
                 <Setter Property="MinHeight" Value="92" />
                 <Setter Property="Padding" Value="16" />
-                <Setter Property="Background" Value="{StaticResource PanelCardBrush}" />
+                <Setter Property="Background" Value="{ThemeResource PanelGlassBrush}" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                AutomationProperties.AccessibilityView="Raw"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Content="{TemplateBinding Content}"
+                                ContentTransitions="{TemplateBinding ContentTransitions}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed" />
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ContentPresenter>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <Storyboard x:Name="EntranceStoryboard">
@@ -112,7 +147,7 @@
                         <TextBlock
                             FontSize="32"
                             FontWeight="SemiBold"
-                            Foreground="{StaticResource PanelTextBrush}"
+                            Foreground="{ThemeResource PanelTextBrush}"
                             Text="工具箱" />
                     </StackPanel>
                 </Grid>
@@ -120,7 +155,7 @@
                 <Border
                     Grid.Row="1"
                     Padding="18"
-                    Background="{StaticResource PanelGlassBrush}"
+                    Background="{ThemeResource PanelGlassBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="14"
@@ -133,11 +168,11 @@
                             <TextBlock
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="{StaticResource PanelTextBrush}"
+                                Foreground="{ThemeResource PanelTextBrush}"
                                 Text="数据分析" />
                             <TextBlock
                                 FontSize="12"
-                                Foreground="{StaticResource PanelSecondaryTextBrush}"
+                                Foreground="{ThemeResource PanelSecondaryTextBrush}"
                                 Text="记录统计、完成进度与长期数据沉淀" />
                         </StackPanel>
 
@@ -153,12 +188,12 @@
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="抽卡记录分析" />
-                                        <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="分析游戏内的祈愿记录，展示抽卡数据情况" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="抽卡记录分析" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="分析游戏内的祈愿记录，展示抽卡数据情况" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -169,12 +204,12 @@
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="成就追踪" />
-                                        <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="追踪游戏内成就的完成进度，支持导出与导入" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="成就追踪" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="追踪游戏内成就的完成进度，支持导出与导入" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -185,7 +220,7 @@
                 <Border
                     Grid.Row="2"
                     Padding="18"
-                    Background="{StaticResource PanelGlassBrush}"
+                    Background="{ThemeResource PanelGlassBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="14"
@@ -198,11 +233,11 @@
                             <TextBlock
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="{StaticResource PanelTextBrush}"
+                                Foreground="{ThemeResource PanelTextBrush}"
                                 Text="旅行者档案" />
                             <TextBlock
                                 FontSize="12"
-                                Foreground="{StaticResource PanelSecondaryTextBrush}"
+                                Foreground="{ThemeResource PanelSecondaryTextBrush}"
                                 Text="角色、背包、便签与米游社战绩信息" />
                         </StackPanel>
 
@@ -222,12 +257,12 @@
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="背包物品" />
-                                        <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="查看当前账号游戏内背包中的材料" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="背包物品" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="查看当前账号游戏内背包中的材料" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -238,12 +273,12 @@
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="角色练度查询" />
-                                        <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="查询已拥有角色的等级、命座、武器及圣遗物搭配情况" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="角色练度查询" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="查询已拥有角色的等级、命座、武器及圣遗物搭配情况" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -254,12 +289,12 @@
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="旅行便签" />
-                                        <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="独立窗口显示当前开放的角色材料秘境等实时数据" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="旅行便签" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="独立窗口显示当前开放的角色材料秘境等实时数据" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -270,12 +305,12 @@
                                         <ColumnDefinition Width="48" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="战绩信息" />
-                                        <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="查询深渊、幻想真境剧诗等详细战绩数据" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="战绩信息" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="查询深渊、幻想真境剧诗等详细战绩数据" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -286,7 +321,7 @@
                 <Border
                     Grid.Row="3"
                     Padding="18"
-                    Background="{StaticResource PanelGlassBrush}"
+                    Background="{ThemeResource PanelGlassBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="14"
@@ -299,11 +334,11 @@
                             <TextBlock
                                 FontSize="16"
                                 FontWeight="SemiBold"
-                                Foreground="{StaticResource PanelTextBrush}"
+                                Foreground="{ThemeResource PanelTextBrush}"
                                 Text="资源获取" />
                             <TextBlock
                                 FontSize="12"
-                                Foreground="{StaticResource PanelSecondaryTextBrush}"
+                                Foreground="{ThemeResource PanelSecondaryTextBrush}"
                                 Text="管理与资源获取" />
                         </StackPanel>
 
@@ -313,12 +348,12 @@
                                     <ColumnDefinition Width="48" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Border Width="48" Height="48" Background="#1AFFFFFF" CornerRadius="10">
+                                <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}" CornerRadius="10">
                                     <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" Stretch="Uniform" />
                                 </Border>
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource PanelTextBrush}" Text="视频资源库" />
-                                    <TextBlock FontSize="13" Foreground="{StaticResource PanelSecondaryTextBrush}" Text="可查看各类游戏角色PV或者游戏内过场动画" TextWrapping="Wrap" />
+                                    <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="视频资源库" />
+                                    <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="可查看各类游戏角色PV或者游戏内过场动画" TextWrapping="Wrap" />
                                 </StackPanel>
                             </Grid>
                         </Button>

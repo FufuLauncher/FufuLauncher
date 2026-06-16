@@ -120,10 +120,10 @@
                                 <TextBlock Text="{x:Bind CurrentRole.Name, Mode=OneWay}" Style="{StaticResource TitleTextBlockStyle}"/>
                                 <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5,0,0">
                                     <Border Background="#33000000" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}" Foreground="White"/>
+                                        <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                                     </Border>
                                     <Border Background="#33000000" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="{x:Bind CurrentRole.ArtifactsSetSummary, Mode=OneWay}" Foreground="White"/>
+                                        <TextBlock Text="{x:Bind CurrentRole.ArtifactsSetSummary, Mode=OneWay}" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                                     </Border>
                                 </StackPanel>
                             </StackPanel>

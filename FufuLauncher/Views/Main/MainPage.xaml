@@ -20,12 +20,14 @@
 
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <SolidColorBrush x:Key="CustomPanelBackgroundBrush" Color="#D9101010" />
+                    <SolidColorBrush x:Key="CustomPanelBackgroundBrush" Color="#E5FFFFFF" />
                     <AcrylicBrush
                         x:Key="IosGlassBrush"
-                        FallbackColor="#CC000000"
-                        TintColor="#000000"
-                        TintOpacity="0.15" />
+                        FallbackColor="#E5FFFFFF"
+                        TintColor="#FFFFFF"
+                        TintOpacity="0.6" />
+                    <SolidColorBrush x:Key="CardButtonBackgroundBrush" Color="#0D000000" />
+                    <SolidColorBrush x:Key="CardButtonHoverBrush" Color="#14000000" />
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Key="Default">
@@ -35,6 +37,8 @@
                         FallbackColor="#CC000000"
                         TintColor="#000000"
                         TintOpacity="0.15" />
+                    <SolidColorBrush x:Key="CardButtonBackgroundBrush" Color="#1AFFFFFF" />
+                    <SolidColorBrush x:Key="CardButtonHoverBrush" Color="#26FFFFFF" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
@@ -171,7 +175,7 @@
                         Opacity="0.5" />
                     <Border
                         x:Name="InfoCardBlurBg"
-                        Background="{StaticResource IosGlassBrush}"
+                        Background="{ThemeResource IosGlassBrush}"
                         CornerRadius="12"
                         Opacity="0.0" />
 
@@ -269,7 +273,7 @@
                                     Opacity="0">
                                     <FontIcon
                                         FontSize="10"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         Glyph="&#xE76B;" />
                                 </Button>
 
@@ -287,7 +291,7 @@
                                     Opacity="0">
                                     <FontIcon
                                         FontSize="10"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         Glyph="&#xE76C;" />
                                 </Button>
 
@@ -305,7 +309,7 @@
                                     Opacity="0">
                                     <FontIcon
                                         FontSize="10"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         Glyph="{x:Bind ViewModel.InfoExpandIcon, Mode=OneWay}" />
                                 </Button>
                             </Grid>
@@ -316,10 +320,10 @@
                             Grid.Row="1"
                             Margin="2,0,2,2">
                             <Pivot.Resources>
-                                <SolidColorBrush x:Key="PivotHeaderItemForeground" Color="White" />
-                                <SolidColorBrush x:Key="PivotHeaderItemForegroundSelected" Color="White" />
-                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPointerOver" Color="#CCFFFFFF" />
-                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPressed" Color="#99FFFFFF" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForeground" Color="{ThemeResource TextFillColorSecondary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForegroundSelected" Color="{ThemeResource TextFillColorPrimary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPointerOver" Color="{ThemeResource TextFillColorPrimary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPressed" Color="{ThemeResource TextFillColorTertiary}" />
 
                                 <Style TargetType="PivotHeaderItem">
                                     <Setter Property="FontSize" Value="13" />
@@ -327,7 +331,7 @@
                                     <Setter Property="Margin" Value="0" />
                                     <Setter Property="Padding" Value="12,0" />
                                     <Setter Property="MinHeight" Value="32" />
-                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
                                 </Style>
                             </Pivot.Resources>
 
@@ -380,7 +384,7 @@
                             Opacity="0.5" />
                         <Border
                             x:Name="CheckinCardBlurBg"
-                            Background="{StaticResource IosGlassBrush}"
+                            Background="{ThemeResource IosGlassBrush}"
                             CornerRadius="8"
                             Opacity="0.0" />
 
@@ -410,7 +414,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="14"
                                     FontWeight="SemiBold"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Opacity="0.9"
                                     Text="原神签到" />
 
@@ -420,7 +424,7 @@
                                     Height="24"
                                     Margin="6,0,0,0"
                                     Padding="0"
-                                    Background="#1AFFFFFF"
+                                    Background="{ThemeResource CardButtonBackgroundBrush}"
                                     BorderThickness="0"
                                     Click="RefreshTokenButton_Click"
                                     CornerRadius="4"
@@ -436,7 +440,7 @@
                                     Height="24"
                                     Margin="6,0,0,0"
                                     Padding="0"
-                                    Background="#1AFFFFFF"
+                                    Background="{ThemeResource CardButtonBackgroundBrush}"
                                     BorderThickness="0"
                                     Click="OpenCheckinSettings_Click"
                                     CornerRadius="4"
@@ -451,7 +455,7 @@
                                     Width="24"
                                     Height="24"
                                     Margin="6,0,0,0"
-                                    Background="#1AFFFFFF"
+                                    Background="{ThemeResource CardButtonBackgroundBrush}"
                                     CornerRadius="4"
                                     ToolTipService.ToolTip="{Binding CheckinStateTooltip, Mode=OneWay}">
                                     <FontIcon
@@ -474,14 +478,14 @@
                                     Spacing="2">
                                     <TextBlock
                                         FontSize="12"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         MaxLines="2"
                                         Text="{Binding CheckinStatusText}"
                                         TextTrimming="CharacterEllipsis"
                                         TextWrapping="Wrap" />
                                     <TextBlock
                                         FontSize="11"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         MaxLines="2"
                                         Opacity="0.6"
                                         Text="{Binding CheckinSummary}"
@@ -496,14 +500,14 @@
                                     Padding="0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Background="#1AFFFFFF"
+                                    Background="{ThemeResource CardButtonBackgroundBrush}"
                                     BorderThickness="0"
                                     Click="OpenCheckinCalendar_Click"
                                     CornerRadius="6"
                                     ToolTipService.ToolTip="奖励日历">
                                     <FontIcon
                                         FontSize="13"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         Glyph="&#xE787;" />
                                 </Button>
                             </Grid>
@@ -512,7 +516,7 @@
                                 Grid.Row="2"
                                 Padding="8,6"
                                 HorizontalAlignment="Stretch"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Command="{Binding ExecuteCheckinCommand}"
                                 Content="{Binding CheckinButtonText}"
@@ -539,7 +543,7 @@
                             Opacity="0.5" />
                         <Border
                             x:Name="DailyNoteCardBlurBg"
-                            Background="{StaticResource IosGlassBrush}"
+                            Background="{ThemeResource IosGlassBrush}"
                             CornerRadius="8"
                             Opacity="0.0" />
 
@@ -565,7 +569,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="14"
                                     FontWeight="SemiBold"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Opacity="0.9"
                                     Text="原神便签" />
                                 <Button
@@ -573,14 +577,14 @@
                                     Width="24"
                                     Height="24"
                                     Padding="0"
-                                    Background="#1AFFFFFF"
+                                    Background="{ThemeResource CardButtonBackgroundBrush}"
                                     BorderThickness="0"
                                     Click="RefreshDailyNoteButton_Click"
                                     CornerRadius="4"
                                     ToolTipService.ToolTip="刷新便签">
                                     <FontIcon
                                         FontSize="11"
-                                        Foreground="White"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         Glyph="&#xE72C;" />
                                 </Button>
                             </Grid>
@@ -591,7 +595,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     FontSize="13"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     IsHitTestVisible="False"
                                     Opacity="0.8"
                                     Text="无数据" />
@@ -613,13 +617,13 @@
                                         <StackPanel VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="11"
-                                                Foreground="White"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
                                                 Text="树脂" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
-                                                Foreground="White">
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}">
                                                 <Run Text="{x:Bind ViewModel.CurrentResin, Mode=OneWay}" />
                                                 <Run Text="/" />
                                                 <Run Text="{x:Bind ViewModel.MaxResin, Mode=OneWay}" />
@@ -639,13 +643,13 @@
                                         <StackPanel VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="11"
-                                                Foreground="White"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
                                                 Text="每日委托" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
-                                                Foreground="White">
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}">
                                                 <Run Text="{x:Bind ViewModel.FinishedTaskNum, Mode=OneWay}" />
                                                 <Run Text="/" />
                                                 <Run Text="{x:Bind ViewModel.TotalTaskNum, Mode=OneWay}" />
@@ -665,13 +669,13 @@
                                         <StackPanel VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="11"
-                                                Foreground="White"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
                                                 Text="洞天宝钱" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
-                                                Foreground="White">
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}">
                                                 <Run Text="{x:Bind ViewModel.CurrentHomeCoin, Mode=OneWay}" />
                                                 <Run Text="/" />
                                                 <Run Text="{x:Bind ViewModel.MaxHomeCoin, Mode=OneWay}" />
@@ -691,13 +695,13 @@
                                         <StackPanel VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="11"
-                                                Foreground="White"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
                                                 Text="探索派遣" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
-                                                Foreground="White">
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}">
                                                 <Run Text="{x:Bind ViewModel.CurrentExpeditionNum, Mode=OneWay}" />
                                                 <Run Text="/" />
                                                 <Run Text="{x:Bind ViewModel.MaxExpeditionNum, Mode=OneWay}" />
@@ -717,13 +721,13 @@
                                         <StackPanel VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="11"
-                                                Foreground="White"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
                                                 Text="参量质变仪" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
-                                                Foreground="White"
+                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Text="{x:Bind ViewModel.TransformerRecoveryTime, Mode=OneWay}" />
                                         </StackPanel>
                                     </StackPanel>
@@ -741,7 +745,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 FontSize="10"
-                Foreground="White"
+                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                 IsHitTestVisible="True"
                 Opacity="0.05"
                 PointerEntered="Copyright_PointerEntered"
@@ -754,7 +758,7 @@
                 Margin="0,32,32,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Background="{StaticResource IosGlassBrush}"
+                Background="{ThemeResource IosGlassBrush}"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                 BorderThickness="1"
                 CornerRadius="24"
@@ -777,14 +781,14 @@
                                     <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#26FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#15FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent" />
-                                    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="White" />
+                                    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{ThemeResource TextFillColorTertiary}" />
                                     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent" />
                                 </ResourceDictionary>
                                 <ResourceDictionary x:Key="Default">
                                     <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#26FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#15FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent" />
-                                    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="White" />
+                                    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{ThemeResource TextFillColorTertiary}" />
                                     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent" />
                                 </ResourceDictionary>
                             </ResourceDictionary.ThemeDictionaries>
@@ -802,7 +806,7 @@
                         ToolTipService.ToolTip="公告">
                         <FontIcon
                             FontSize="18"
-                            Foreground="White"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Glyph="&#xEA8F;" />
                     </Button>
 
@@ -839,7 +843,7 @@
                                                     <TextBlock
                                                         HorizontalAlignment="Center"
                                                         FontSize="10"
-                                                        Foreground="White"
+                                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                         Text="{x:Bind TypeText}" />
                                                 </Border>
                                             </Grid>
@@ -850,7 +854,7 @@
                         </Button.Flyout>
                         <FontIcon
                             FontSize="18"
-                            Foreground="White"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Glyph="&#xE8B9;"
                             Opacity="{x:Bind GetIconOpacity(ViewModel.IsBackgroundToggleEnabled), Mode=OneWay}" />
                     </Button>
@@ -869,7 +873,7 @@
                         ToolTipService.ToolTip="截图文件夹">
                         <FontIcon
                             FontSize="18"
-                            Foreground="White"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Glyph="&#xE8B7;" />
                     </Button>
                 </StackPanel>
@@ -886,7 +890,7 @@
                 <Border
                     Width="240"
                     Padding="12"
-                    Background="{StaticResource IosGlassBrush}"
+                    Background="{ThemeResource IosGlassBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="8"
@@ -900,7 +904,7 @@
                             VerticalAlignment="Center"
                             FontSize="14"
                             FontWeight="SemiBold"
-                            Foreground="White"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Opacity="0.9"
                             Text="小工具" />
                         <VariableSizedWrapGrid
@@ -914,7 +918,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnOpenGachaAnalysisClick"
                                 CornerRadius="8"
@@ -928,7 +932,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnOpenAchievementsClick"
                                 CornerRadius="8"
@@ -942,7 +946,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnOpenInventoryClick"
                                 CornerRadius="8"
@@ -956,7 +960,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnOpenPlayerRolesClick"
                                 CornerRadius="8"
@@ -970,7 +974,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnOpenDailyNoteClick"
                                 CornerRadius="8"
@@ -984,7 +988,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnOpenVideoResourcesClick"
                                 CornerRadius="8"
@@ -998,7 +1002,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="BBSButton_Click"
                                 CornerRadius="8"
@@ -1012,14 +1016,14 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnWidgetSettingsClick"
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="增加小工具">
                                 <FontIcon
                                     FontSize="14"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE710;" />
                             </Button>
 
@@ -1028,14 +1032,14 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnWidgetSettingsClick"
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="移除小工具">
                                 <FontIcon
                                     FontSize="14"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE738;" />
                             </Button>
 
@@ -1045,7 +1049,7 @@
                                 Height="36"
                                 Margin="3"
                                 Padding="8"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Click="OnToggleWidgetFlyoutModeClick"
                                 CornerRadius="8"
@@ -1053,7 +1057,7 @@
                                 <FontIcon
                                     x:Name="WidgetEyeIcon"
                                     FontSize="14"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE890;" />
                             </Button>
                         </VariableSizedWrapGrid>
@@ -1063,7 +1067,7 @@
                 <Border
                     Width="240"
                     Padding="12"
-                    Background="{StaticResource IosGlassBrush}"
+                    Background="{ThemeResource IosGlassBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="8"
@@ -1083,7 +1087,7 @@
                                 VerticalAlignment="Center"
                                 FontSize="14"
                                 FontWeight="SemiBold"
-                                Foreground="White"
+                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                 Opacity="0.9"
                                 Text="快速预设" />
                             <Button
@@ -1091,14 +1095,14 @@
                                 Width="24"
                                 Height="24"
                                 Padding="0"
-                                Background="#1AFFFFFF"
+                                Background="{ThemeResource CardButtonBackgroundBrush}"
                                 BorderThickness="0"
                                 Command="{x:Bind ViewModel.OpenPresetManagerCommand}"
                                 CornerRadius="4"
                                 ToolTipService.ToolTip="管理">
                                 <FontIcon
                                     FontSize="11"
-                                    Foreground="White"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Glyph="&#xE713;" />
                             </Button>
                         </Grid>
@@ -1114,12 +1118,12 @@
                                             Grid.Column="0"
                                             Padding="12,6"
                                             HorizontalAlignment="Stretch"
-                                            Background="#1AFFFFFF"
+                                            Background="{ThemeResource CardButtonBackgroundBrush}"
                                             BorderThickness="0"
                                             Command="{Binding ElementName=MainPageRoot, Path=ViewModel.QuickSwitchPresetCommand}"
                                             CommandParameter="{Binding}"
                                             CornerRadius="4"
-                                            Foreground="White"
+                                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                             IsEnabled="{x:Bind IsNotActive, Mode=OneWay}">
                                             <TextBlock
                                                 HorizontalAlignment="Center"
@@ -1131,7 +1135,7 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             FontSize="12"
-                                            Foreground="White"
+                                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                             Glyph="&#xE73E;"
                                             Visibility="{x:Bind IsActive, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" />
                                     </Grid>
@@ -1142,7 +1146,7 @@
                             Margin="0,8"
                             HorizontalAlignment="Center"
                             FontSize="12"
-                            Foreground="White"
+                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Opacity="0.6"
                             Text="未固定任何预设"
                             Visibility="{x:Bind ViewModel.IsPinnedPresetsEmpty, Mode=OneWay}" />
@@ -1186,14 +1190,14 @@
 
                 <Grid>
                     <Border
-                        Background="{StaticResource IosGlassBrush}"
+                        Background="{ThemeResource IosGlassBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
                         CornerRadius="24" />
 
                     <Border
                         x:Name="LaunchButtonHoverLayer"
-                        Background="#26FFFFFF"
+                        Background="{ThemeResource CardButtonHoverBrush}"
                         CornerRadius="24"
                         Opacity="0"
                         IsHitTestVisible="False" />

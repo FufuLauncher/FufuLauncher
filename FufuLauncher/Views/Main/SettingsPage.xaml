@@ -10,15 +10,22 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <AcrylicBrush
-                x:Key="SafeGlassBrush"
-                FallbackColor="#CC000000"
-                TintColor="#000000"
-                TintOpacity="0.15" />
-            <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
-            <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
-            <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
-            <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
+                    <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
+                    <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
+                    <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000" TintOpacity="0.15" />
+                    <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+                    <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+                    <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+                    <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
 
             <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
             <helpers:EnumToIntConverter x:Key="EnumToIntConverter"/>
@@ -47,8 +54,8 @@
             </Storyboard>
             
             <Style x:Key="PresetButtonStyle" TargetType="Button">
-                <Setter Property="Background" Value="{StaticResource SafeCardBrush}"/>
-                <Setter Property="Foreground" Value="{StaticResource SafeTextBrush}"/>
+                <Setter Property="Background" Value="{ThemeResource SafeCardBrush}"/>
+                <Setter Property="Foreground" Value="{ThemeResource SafeTextBrush}"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="Padding" Value="12,6"/>
@@ -58,7 +65,7 @@
             </Style>
             
             <Style x:Key="SettingsCardStyle" TargetType="Border">
-                <Setter Property="Background" Value="{StaticResource SafeGlassBrush}"/>
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}"/>
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="CornerRadius" Value="14"/>
@@ -1070,7 +1077,7 @@
                                    Opacity="0.7"
                                    Margin="0,0,0,0"/>
                         <TextBlock Text="浏览器缓存清理" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14" Margin="0,20,0,0"/>
-                        <TextBlock Text="清理内置浏览器 (WebView2) 产生的缓存文件" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{StaticResource SafeSecondaryTextBrush}" Margin="0,2,0,8"/>
+                        <TextBlock Text="清理内置浏览器 (WebView2) 产生的缓存文件" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SafeSecondaryTextBrush}" Margin="0,2,0,8"/>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="16">
                             <TextBlock Text="{x:Bind ViewModel.WebView2CacheSize, Mode=OneWay}" 
                                        VerticalAlignment="Center" 
@@ -1219,7 +1226,7 @@
                     </Border.Shadow>
                     <StackPanel Spacing="10">
                         <TextBlock Text="开发者许可认证" Style="{ThemeResource BodyStrongTextBlockStyle}"/>
-                        <TextBlock Text="通过开发者许可认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{StaticResource SafeSecondaryTextBrush}"/>
+                        <TextBlock Text="通过开发者许可认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SafeSecondaryTextBrush}"/>
                         
                         <Button Content="进行开发者许可认证" 
                                 HorizontalAlignment="Left"

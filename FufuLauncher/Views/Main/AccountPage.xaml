@@ -12,16 +12,25 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <AcrylicBrush
-            x:Key="SafeGlassBrush"
-            FallbackColor="#CC000000"
-            TintColor="#000000"
-            TintOpacity="0.15" />
-        <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
-        <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
-        <SolidColorBrush x:Key="SafeHoverBrush" Color="#24FFFFFF" />
-        <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
-        <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+        <ResourceDictionary>
+        <ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary x:Key="Light">
+                <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
+                <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
+                <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
+                <SolidColorBrush x:Key="SafeHoverBrush" Color="#14000000" />
+                <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
+                <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="Default">
+                <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000" TintOpacity="0.15" />
+                <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+                <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+                <SolidColorBrush x:Key="SafeHoverBrush" Color="#24FFFFFF" />
+                <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+                <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+            </ResourceDictionary>
+        </ResourceDictionary.ThemeDictionaries>
 
         <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
@@ -30,7 +39,7 @@
         <converters:EmptyCountToVisibilityConverter x:Key="EmptyCountToVisibilityConverter" />
 
         <Style x:Key="CardBorderStyle" TargetType="Border">
-            <Setter Property="Background" Value="{StaticResource SafeGlassBrush}" />
+            <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="CornerRadius" Value="14" />
@@ -41,10 +50,49 @@
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="Padding" Value="16" />
-            <Setter Property="Background" Value="{StaticResource SafeCardBrush}" />
+            <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
+            <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter x:Name="ContentPresenter"
+                            AutomationProperties.AccessibilityView="Raw"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Content="{TemplateBinding Content}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="BorderBrush">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Storyboard x:Name="EntranceStoryboard">
@@ -94,6 +142,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid
