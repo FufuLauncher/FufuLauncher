@@ -5,7 +5,15 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        configuration: [Release]
+
     runs-on: windows-latest
+
+    permissions:
+      contents: read
+      actions: write
 
     steps:
     - name: Checkout
@@ -27,39 +35,47 @@ jobs:
         vs-version: 17.8
         msbuild-architecture: x64
         install-vc-build-tools: true
-      
-    - name: Restore FufuLauncher
-      run: msbuild FufuLauncher\FufuLauncher.csproj /t:Restore /p:Configuration=Release /p:Platform="x64"
 
     - name: Build FufuLauncher
-      run: msbuild FufuLauncher\FufuLauncher.csproj /p:Configuration=Release /p:Platform="x64" /m
+      run: dotnet build FufuLauncher\FufuLauncher.csproj -c ${{ matrix.configuration }} /p:Platform="x64"
 
-    - name: Publish UpdateFufuLauncher
-      run: >
-        dotnet publish UpdateFufuLauncher\UpdateFufuLauncher.csproj 
-        -c Release 
-        -r win-x64 
-        --self-contained false 
-        -p:PublishSingleFile=true 
-        -p:IncludeNativeLibrariesForSelfExtract=true 
-        -p:IncludeAllContentForSelfExtract=true
-
-    - name: Move UpdateFufuLauncher Output to FufuLauncher Build Directory
+    - name: Publish UpdateFufuLauncher (Single File)
       run: |
-        $sourcePath = "UpdateFufuLauncher\bin\Release\net8.0-windows\win-x64\publish\*"
-        $destPath = "FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0"
-        
-        if (-Not (Test-Path $destPath)) {
-            New-Item -ItemType Directory -Force -Path $destPath
-        }
-        
-        Copy-Item -Path $sourcePath -Destination $destPath -Recurse -Force
+        dotnet publish UpdateFufuLauncher\UpdateFufuLauncher.csproj -c ${{ matrix.configuration }} /p:Platform="x64" -f net8.0-windows -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true -p:DeleteExistingFiles=true -o PublishOutput
 
-    - name: Build Installer with Inno Setup
-      run: '& "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe" "FufuLauncher.Installer\setup.iss"'
+    - name: Move UpdateFufuLauncher to FufuLauncher build directory
+      shell: pwsh
+      run: |
+        $fufuOutputDir = Get-ChildItem -Path "FufuLauncher\bin" -Recurse -Directory | Where-Object { $_.FullName -match "${{ matrix.configuration }}" -and $_.FullName -match "net8.0-windows" } | Select-Object -First 1
+        
+        if ($fufuOutputDir) {
+            Copy-Item -Path "PublishOutput\*" -Destination $fufuOutputDir.FullName -Force -Recurse
+            Write-Host "已将UpdateFufuLauncher的发布产物移动至$($fufuOutputDir.FullName)"
+        } else {
+            Write-Error "未能定位到FufuLauncher的构建输出目录"
+            exit 1
+        }
+
+    - name: Compile Inno Setup Script
+      run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" FufuLauncher.Installer\setup.iss'
+
+    - name: Rename Workflow Run
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      shell: pwsh
+      run: |
+        $exeFile = Get-ChildItem -Path "FufuLauncher.Installer\installer" -Filter "*.exe" | Select-Object -First 1
+        if ($exeFile) {
+            $exeName = $exeFile.Name
+            gh api -X PATCH repos/${{ github.repository }}/actions/runs/${{ github.run_id }} -f name="$exeName"
+            Write-Host "Workflow名称已重命名为$exeName"
+        } else {
+            Write-Error "目录下未找到已打包的文件"
+            exit 1
+        }
 
     - name: Upload Installer Artifact
       uses: actions/upload-artifact@v4
       with:
         name: FufuLauncher_Installer
-        path: FufuLauncher.Installer\Output\
+        path: FufuLauncher.Installer\installer\*.exe
