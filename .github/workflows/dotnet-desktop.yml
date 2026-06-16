@@ -42,26 +42,17 @@ jobs:
         path: FufuLauncher.UnlockerIsland_Repo
 
     - name: Build FufuLauncher.UnlockerIsland
-      run: msbuild FufuLauncher.UnlockerIsland_Repo\Genshin.Fps.UnlockerIsland.sln /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v145
+      run: msbuild FufuLauncher.UnlockerIsland_Repo\FufuLauncher.UnlockerIsland\FufuLauncher.UnlockerIsland.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v145
 
-    - name: Copy DLLs to FufuLauncher
+    - name: Copy DLL to FufuLauncher
       shell: pwsh
       run: |
         $baseOutputDir = "FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0"
         $pluginOutputDir = "$baseOutputDir\Plugins\FuFuPlugin"
 
-        New-Item -ItemType Directory -Force -Path $baseOutputDir | Out-Null
         New-Item -ItemType Directory -Force -Path $pluginOutputDir | Out-Null
 
-        $launcherDll = Get-ChildItem -Path "FufuLauncher.UnlockerIsland_Repo" -Filter "Launcher.dll" -Recurse | Where-Object { $_.FullName -match "x64" -and $_.FullName -match "Release" } | Select-Object -First 1
         $unlockerDll = Get-ChildItem -Path "FufuLauncher.UnlockerIsland_Repo" -Filter "FufuLauncher.UnlockerIsland.dll" -Recurse | Where-Object { $_.FullName -match "x64" -and $_.FullName -match "Release" } | Select-Object -First 1
-
-        if ($launcherDll) {
-            Copy-Item -Path $launcherDll.FullName -Destination "$baseOutputDir\Launcher.dll" -Force
-        } else {
-            Write-Error "未能定位到Launcher.dll编译产物"
-            exit 1
-        }
 
         if ($unlockerDll) {
             Copy-Item -Path $unlockerDll.FullName -Destination "$pluginOutputDir\FufuLauncher.UnlockerIsland.dll" -Force
