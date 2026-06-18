@@ -672,6 +672,11 @@ public sealed partial class MainWindow : WindowEx
         _announcementCheckTimer?.Stop();
         _slideshowTimer?.Stop();
         _networkMonitorService.Stop();
+
+        // 通知 ViewModel 取消后台任务
+        try { App.GetService<MainViewModel>()?.Cleanup(); } catch { }
+        try { App.GetService<ControlPanelModel>()?.Cleanup(); } catch { }
+
         DisposeGlobalBackgroundPlayer();
         GlobalBackgroundImage.Source = null;
         WeakReferenceMessenger.Default.UnregisterAll(this);
@@ -680,7 +685,13 @@ public sealed partial class MainWindow : WindowEx
 
     private async void ExitApplication()
     {
-        await SaveWindowSizeAsync();
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
+            await SaveWindowSizeAsync().WaitAsync(cts.Token);
+        }
+        catch { }
+
         _isExit = true;
         CleanupWindowResources();
         TrayIcon.Dispose();
@@ -708,7 +719,13 @@ public sealed partial class MainWindow : WindowEx
         }
         else
         {
-            await SaveWindowSizeAsync();
+            try
+            {
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
+                await SaveWindowSizeAsync().WaitAsync(cts.Token);
+            }
+            catch { }
+
             _isExit = true;
             CleanupWindowResources();
             TrayIcon.Dispose();
@@ -914,16 +931,26 @@ public sealed partial class MainWindow : WindowEx
 
     private void DisposeGlobalBackgroundPlayer()
     {
+        var player = _globalBackgroundPlayer;
+        _globalBackgroundPlayer = null;
         try
         {
-            _globalBackgroundPlayer?.Pause();
-            _globalBackgroundPlayer?.Dispose();
+            GlobalBackgroundVideo.SetMediaPlayer(null);
         }
         catch { }
-        finally
+
+        if (player != null)
         {
-            _globalBackgroundPlayer = null;
-            GlobalBackgroundVideo.SetMediaPlayer(null);
+            // 在后台线程释放 MediaPlayer，避免 UI 线程死锁
+            _ = Task.Run(() =>
+            {
+                try
+                {
+                    player.Pause();
+                    player.Dispose();
+                }
+                catch { }
+            });
         }
     }
 
