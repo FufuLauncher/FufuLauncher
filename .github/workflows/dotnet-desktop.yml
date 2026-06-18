@@ -96,7 +96,25 @@ jobs:
         }
 
     - name: Upload Installer Artifact
+      id: upload-unsigned-artifact
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.EXE_NAME }}
         path: FufuLauncher.Installer\installer\*.exe
+
+    - name: Sign with SignPath (Test)
+      uses: signpath/github-action-submit-signing-request@v2
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: '73c13632-948a-4aa1-b946-5d9760dd50e5'
+        project-slug: 'FufuLauncher'
+        signing-policy-slug: 'test-signing'
+        github-artifact-id: '${{ steps.upload-unsigned-artifact.outputs.artifact-id }}'
+        wait-for-completion: true
+        output-artifact-directory: 'signed-output'
+
+    - name: Upload Signed Installer
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.EXE_NAME }}-signed
+        path: signed-output\*.exe

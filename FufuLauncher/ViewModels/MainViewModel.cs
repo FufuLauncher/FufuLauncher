@@ -881,7 +881,12 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
         public void Cleanup()
         {
             _bannerTimer?.Stop();
-            _gameMonitoringCts?.Cancel();
+            try
+            {
+                _gameMonitoringCts?.Cancel();
+                _gameMonitoringCts?.Dispose();
+            }
+            catch { }
 
             if (BackgroundVideoPlayer != null)
             {
@@ -892,6 +897,8 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
                 }
                 catch { }
             }
+
+            WeakReferenceMessenger.Default.UnregisterAll(this);
         }
 
         private void UpdateCheckinIconState(string statusText)

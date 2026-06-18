@@ -25,6 +25,16 @@ public partial class ControlPanelModel : ObservableObject
         _ = StartGameMonitoringLoopAsync(_cancellationTokenSource.Token);
     }
 
+    public void Cleanup()
+    {
+        try
+        {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+        }
+        catch { }
+    }
+
     public void UpdateAndSavePlayTime(int secondsToAdd)
     {
         var dateKey = DateTime.Now.ToString("yyyy-MM-dd");
