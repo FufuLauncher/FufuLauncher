@@ -9,20 +9,6 @@
 
 #### [注入模块开源地址](https://github.com/CodeCubist/FufuLauncher.UnlockerIsland)
 
-## 代码签名策略
-
-#### [<img src="https://avatars.githubusercontent.com/u/34448643" alt="SignPath" width="48" /> 代码签名由 SignPath 提供](https://signpath.org)
-
-免费代码签名由 [SignPath.io](https://about.signpath.io) 提供，证书由 [SignPath Foundation](https://signpath.org) 提供。
-
-**投稿者与审稿人**
-
-<a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
-
-**批准者**
-
-<a href="https://github.com/ky3-git"><img src="https://images.weserv.nl/?url=https://github.com/ky3-git.png&h=50&w=50&fit=cover&mask=circle" /></a>
-
 #### [English](./README-en.md)
 
 ### 提出问题前，请检查你是否更新到了最新版本。以及提问请加上标签！
@@ -56,3 +42,17 @@
 * 本项目仅供学习交流使用，请支持官方正版游戏。
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CodeCubist/FufuLauncher&type=date&legend=top-left)](https://www.star-history.com/#CodeCubist/FufuLauncher&type=date&legend=top-left)
+
+## 代码签名策略
+
+#### [<img src="https://avatars.githubusercontent.com/u/34448643" alt="SignPath" width="48" /> 代码签名由 SignPath 提供](https://signpath.org)
+
+免费代码签名由 [SignPath.io](https://about.signpath.io) 提供，证书由 [SignPath Foundation](https://signpath.org) 提供。
+
+**投稿者与审稿人**
+
+<a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
+
+**批准者**
+
+<a href="https://github.com/ky3-git"><img src="https://images.weserv.nl/?url=https://github.com/ky3-git.png&h=50&w=50&fit=cover&mask=circle" /></a>
