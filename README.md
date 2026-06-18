@@ -52,7 +52,3 @@
 **投稿者与审稿人**
 
 <a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
-
-**批准者**
-
-<a href="https://github.com/ky3-git"><img src="https://images.weserv.nl/?url=https://github.com/ky3-git.png&h=50&w=50&fit=cover&mask=circle" /></a>
