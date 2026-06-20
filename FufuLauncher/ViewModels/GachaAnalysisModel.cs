@@ -1218,7 +1218,7 @@ public partial class GachaAnalysisModel : ObservableObject
     {
         if (IsScraping) return;
         IsScraping = true;
-        CrawlerStatus = "正在预爬取全部图片资源...";
+        CrawlerStatus = "正在刷新角色、武器与卡池元数据...";
         RequestMetadataScrapeAction?.Invoke();
     }
 
@@ -1778,9 +1778,9 @@ private async Task ImportUigfAsync()
     if (!IsScraping) IsFetching = false;
 }
 
-    private void FillMissingFieldsFromMetadata(params List<GachaLogItem>[] logLists)
+    private bool FillMissingFieldsFromMetadata(params List<GachaLogItem>[] logLists)
     {
-        if (_savedMetadata.Count == 0) return;
+        if (_savedMetadata.Count == 0) return false;
         var byName = new Dictionary<string, ScrapedMetadata>();
         var byItemId = new Dictionary<string, ScrapedMetadata>();
         foreach (var m in _savedMetadata)
@@ -1791,24 +1791,42 @@ private async Task ImportUigfAsync()
                 byItemId[m.ItemId] = m;
         }
 
+        var filledItemId = 0;
+        var filledName = 0;
+        var changed = false;
         foreach (var logs in logLists)
         {
             foreach (var log in logs)
             {
                 if (string.IsNullOrEmpty(log.ItemId) && !string.IsNullOrEmpty(log.Name)
                     && byName.TryGetValue(log.Name, out var byNameMeta))
+                {
                     log.ItemId = byNameMeta.ItemId;
+                    filledItemId++;
+                    changed = true;
+                }
 
                 if (string.IsNullOrEmpty(log.Name) && !string.IsNullOrEmpty(log.ItemId)
                     && byItemId.TryGetValue(log.ItemId, out var byIdMeta))
+                {
                     log.Name = byIdMeta.Name;
+                    filledName++;
+                    changed = true;
+                }
 
                 if (string.IsNullOrEmpty(log.RankType) && !string.IsNullOrEmpty(log.ItemId)
                     && byItemId.TryGetValue(log.ItemId, out var byIdRankMeta)
                     && !string.IsNullOrEmpty(byIdRankMeta.Rank))
+                {
                     log.RankType = byIdRankMeta.Rank;
+                    changed = true;
+                }
             }
         }
+
+        Debug.WriteLine($"[Gacha] 通过缓存元数据补全记录：name→id 映射 {byName.Count} 条（补全 {filledItemId} 条）、id→name 映射 {byItemId.Count} 条（补全 {filledName} 条）");
+
+        return changed;
     }
 
     private static long GetNewestLogId(List<GachaLogItem> logs)
@@ -1993,27 +2011,51 @@ private async Task ImportUigfAsync()
 
         try
         {
-            await FetchGachaPoolMetadataAsync();
-
             var cookie = await GetCurrentCookieAsync();
 
             var results = new List<ScrapedMetadata>();
 
-            var chars = await FetchCalculatorListAsync(ApiEndpoints.CalculateAvatarListUrl,
+            var chars = await FetchCalculatorListWithRetryAsync(ApiEndpoints.CalculateAvatarListUrl,
                 new { page = 1, size = 1000, is_all = true }, cookie, "char");
             results.AddRange(chars);
 
-            var weapons = await FetchCalculatorListAsync(ApiEndpoints.CalculateWeaponListUrl,
+            var weapons = await FetchCalculatorListWithRetryAsync(ApiEndpoints.CalculateWeaponListUrl,
                 new { page = 1, size = 1000, weapon_levels = new[] { 1, 2, 3, 4, 5 } }, cookie, "weapon");
             results.AddRange(weapons);
 
             UpdateMetadata(results);
+
+            await FetchGachaPoolMetadataAsync();
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[Gacha] API 元数据获取失败: {ex.Message}");
             UpdateMetadata(null);
         }
+    }
+
+    private async Task<List<ScrapedMetadata>> FetchCalculatorListWithRetryAsync(string url, object payload, string? cookie, string type)
+    {
+        const int maxAttempts = 3;
+        int[] delays = { 1000, 2000, 4000 };
+        var typeName = type == "char" ? "角色" : "武器";
+
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            var result = await FetchCalculatorListAsync(url, payload, cookie, type);
+            if (result.Count > 0) return result;
+
+            if (attempt < maxAttempts)
+            {
+                CrawlerStatus = $"{typeName}元数据获取失败，{delays[attempt - 1] / 1000} 秒后重试（{attempt}/{maxAttempts}）…";
+                await Task.Delay(delays[attempt - 1]);
+            }
+            else
+            {
+                Debug.WriteLine($"[Gacha] {typeName}元数据获取失败，已重试 {maxAttempts} 次仍为空");
+            }
+        }
+        return new List<ScrapedMetadata>();
     }
 
     private async Task<List<ScrapedMetadata>> FetchCalculatorListAsync(string url, object payload, string? cookie, string type)
@@ -2084,6 +2126,7 @@ private async Task ImportUigfAsync()
         if (scrapedData == null || scrapedData.Count == 0)
         {
             CrawlerStatus = "未找到新图片资源，将使用现有缓存或默认图标";
+            EnrichAndPersistCachedLogs();
             return;
         }
 
@@ -2093,6 +2136,25 @@ private async Task ImportUigfAsync()
         LoadMetadataFromDb();
         
         _ = ApplyMetadataToUIAsync(_savedMetadata);
+        EnrichAndPersistCachedLogs();
+    }
+
+    private void EnrichAndPersistCachedLogs()
+    {
+        if (string.IsNullOrEmpty(_currentUid)) return;
+
+        var total = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count
+                  + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
+        if (total == 0) return;
+
+        var changed = FillMissingFieldsFromMetadata(
+            _cachedCharacterLogs, _cachedWeaponLogs, _cachedChronicledLogs, _cachedNoviceLogs, _cachedStandardLogs);
+
+        if (changed)
+        {
+            SaveGachaLogsToDb();
+            RefreshUIFromCache();
+        }
     }
 
     private async Task ApplyMetadataToUIAsync(List<ScrapedMetadata> metadataList)
@@ -2181,10 +2243,9 @@ private async Task ImportUigfAsync()
         {
             CrawlerStatus = "正在获取卡池元数据...";
 
-            if (_charNameToIdMap == null)
-                _charNameToIdMap = await BuildNameToIdMapAsync("char");
-            if (_weaponNameToIdMap == null)
-                _weaponNameToIdMap = await BuildNameToIdMapAsync("weapon");
+            _charNameToIdMap = BuildNameToIdMap("char");
+            _weaponNameToIdMap = BuildNameToIdMap("weapon");
+            Debug.WriteLine($"[Gacha] 卡池数据 name→id 映射：角色 {_charNameToIdMap.Count} 个、武器 {_weaponNameToIdMap.Count} 个");
 
             var response = await _httpClient.GetStringAsync(ApiEndpoints.WishHistoryUrl);
             var data = JsonSerializer.Deserialize<WishHistoryResponse>(response);
@@ -2250,24 +2311,15 @@ private async Task ImportUigfAsync()
         }
     }
 
-    private async Task<Dictionary<string, int>> BuildNameToIdMapAsync(string type)
+    private Dictionary<string, int> BuildNameToIdMap(string type)
     {
-        var url = type == "char"
-            ? ApiEndpoints.CalculateAvatarListUrl
-            : ApiEndpoints.CalculateWeaponListUrl;
-
-        object payload;
-        if (type == "char")
-            payload = new { page = 1, size = 1000, is_all = true };
-        else
-            payload = new { page = 1, size = 1000, weapon_levels = new[] { 1, 2, 3, 4, 5 } };
-
-        var items = await FetchCalculatorListAsync(url, payload, null, type);
         var map = new Dictionary<string, int>();
-        foreach (var i in items)
+        foreach (var m in _savedMetadata)
         {
-            if (!string.IsNullOrEmpty(i.Name) && !map.ContainsKey(i.Name))
-                map[i.Name] = int.Parse(i.ItemId);
+            if (m.Type != type) continue;
+            if (string.IsNullOrEmpty(m.Name) || string.IsNullOrEmpty(m.ItemId)) continue;
+            if (!map.ContainsKey(m.Name) && int.TryParse(m.ItemId, out var id))
+                map[m.Name] = id;
         }
         return map;
     }
@@ -2330,10 +2382,6 @@ private async Task ImportUigfAsync()
                     RankType = 5
                 });
             }
-            else
-            {
-                Debug.WriteLine($"[Gacha] 未找到5星物品映射: {name}");
-            }
         }
 
         foreach (var name in star4Names)
@@ -2347,10 +2395,6 @@ private async Task ImportUigfAsync()
                     ImageUrl = avatarList.TryGetValue(name, out var url) ? url : "",
                     RankType = 4
                 });
-            }
-            else
-            {
-                Debug.WriteLine($"[Gacha] 未找到4星物品映射: {name}");
             }
         }
 

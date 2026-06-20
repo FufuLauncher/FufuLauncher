@@ -452,7 +452,7 @@
                                 IsEnabled="{Binding ViewModel.IsScraping, Converter={StaticResource BoolInverter}}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE8B9;" FontSize="14"/>
-                                <TextBlock Text="预下载图片"/>
+                                <TextBlock Text="刷新元数据"/>
                             </StackPanel>
                         </Button>
                         <Button Click="OnDeleteGachaDataClick"
