@@ -1007,6 +1007,8 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
         {
             IsCheckinButtonEnabled = false;
             CheckinButtonText = "签到中...";
+            CheckinStatusText = "签到中...";
+            CheckinSummary = "正在执行签到任务...";
 
             //await RefreshSettingsAsync();
 
@@ -1016,7 +1018,8 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
                 {
                     _dispatcherQueue.TryEnqueue(() =>
                     {
-                        CheckinButtonText = msg;
+                        CheckinButtonText = "签到中...";
+                        CheckinSummary = msg;
                     });
                 });
 
