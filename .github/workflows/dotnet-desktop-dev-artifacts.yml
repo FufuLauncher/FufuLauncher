@@ -1,0 +1,155 @@
+name: old-wf
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Install Visual C++ Build Tools 14 (MSVC v143)
+      uses: microsoft/setup-msbuild@v2
+      with:
+        vs-version: 17.8
+        msbuild-architecture: x64
+        install-vc-build-tools: true
+
+    - name: Build FufuLauncher
+      run: dotnet build FufuLauncher\FufuLauncher.csproj -c ${{ matrix.configuration }} /p:Platform="x64"
+
+    - name: Checkout FufuLauncher.UnlockerIsland
+      uses: actions/checkout@v4
+      with:
+        repository: FufuLauncher/FufuLauncher.UnlockerIsland
+        path: FufuLauncher.UnlockerIsland_Repo
+
+    - name: Build FufuLauncher.UnlockerIsland
+      run: msbuild FufuLauncher.UnlockerIsland_Repo\FufuLauncher.UnlockerIsland\FufuLauncher.UnlockerIsland.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v145
+
+    - name: Copy DLL to FufuLauncher
+      shell: pwsh
+      run: |
+        $baseOutputDir = "FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0"
+        $pluginOutputDir = "$baseOutputDir\Plugins\FuFuPlugin"
+
+        New-Item -ItemType Directory -Force -Path $pluginOutputDir | Out-Null
+
+        $unlockerDll = Get-ChildItem -Path "FufuLauncher.UnlockerIsland_Repo" -Filter "FufuLauncher.UnlockerIsland.dll" -Recurse | Where-Object { $_.FullName -match "x64" -and $_.FullName -match "Release" } | Select-Object -First 1
+
+        if ($unlockerDll) {
+            Copy-Item -Path $unlockerDll.FullName -Destination "$pluginOutputDir\FufuLauncher.UnlockerIsland.dll" -Force
+        } else {
+            Write-Error "未能定位到FufuLauncher.UnlockerIsland.dll编译产物"
+            exit 1
+        }
+
+    - name: Publish UpdateFufuLauncher (Single File)
+      run: |
+        dotnet publish UpdateFufuLauncher\UpdateFufuLauncher.csproj -c ${{ matrix.configuration }} /p:Platform="x64" -f net8.0-windows -r win-x64 --self-contained false -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true -p:DeleteExistingFiles=true -o PublishOutput
+
+    - name: Move UpdateFufuLauncher to FufuLauncher build directory
+      shell: pwsh
+      run: |
+        $fufuOutputDir = Get-ChildItem -Path "FufuLauncher\bin" -Recurse -Directory | Where-Object { $_.FullName -match "${{ matrix.configuration }}" -and $_.FullName -match "net8.0-windows" } | Select-Object -First 1
+        
+        if ($fufuOutputDir) {
+            Copy-Item -Path "PublishOutput\*" -Destination $fufuOutputDir.FullName -Force -Recurse
+            Write-Host "已将UpdateFufuLauncher的发布产物移动至$($fufuOutputDir.FullName)"
+            "FUFU_OUTPUT_DIR=$($fufuOutputDir.FullName)" >> $env:GITHUB_ENV
+        } else {
+            Write-Error "未能定位到FufuLauncher的构建输出目录"
+            exit 1
+        }
+
+    - name: Pack Raw Build Output
+      shell: pwsh
+      run: |
+        if (-not $env:FUFU_OUTPUT_DIR -or -not (Test-Path $env:FUFU_OUTPUT_DIR)) {
+            Write-Error "未能定位到原始编译结果目录：$env:FUFU_OUTPUT_DIR"
+            exit 1
+        }
+
+        $artifactDir = Join-Path $env:GITHUB_WORKSPACE "artifacts"
+        New-Item -ItemType Directory -Force -Path $artifactDir | Out-Null
+
+        $rawZip = Join-Path $artifactDir "FufuLauncher-${{ matrix.configuration }}-raw-build.zip"
+        if (Test-Path $rawZip) {
+            Remove-Item $rawZip -Force
+        }
+
+        Compress-Archive -Path (Join-Path $env:FUFU_OUTPUT_DIR "*") -DestinationPath $rawZip -Force
+        "RAW_BUILD_ZIP=$rawZip" >> $env:GITHUB_ENV
+        Write-Host "原始编译结果压缩包：$rawZip"
+
+    - name: Compile Inno Setup Script
+      run: '& "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" FufuLauncher.Installer\setup.iss'
+
+    - name: Get Executable Name
+      shell: pwsh
+      run: |
+        $exeFile = Get-ChildItem -Path "FufuLauncher.Installer\installer" -Filter "*.exe" | Select-Object -First 1
+        if ($exeFile) {
+            Write-Output "EXE_NAME=$($exeFile.BaseName)" >> $env:GITHUB_ENV
+            Write-Output "### Build Successful" >> $env:GITHUB_STEP_SUMMARY
+            Write-Output "Generated Installer: **$($exeFile.Name)**" >> $env:GITHUB_STEP_SUMMARY
+            Write-Host "$($exeFile.BaseName)"
+        } else {
+            Write-Error "目录下未找到已打包的exe文件"
+            exit 1
+        }
+
+    - name: Pack Installer
+      shell: pwsh
+      run: |
+        $installerFiles = Get-ChildItem -Path "FufuLauncher.Installer\installer" -Filter "*.exe" -File -Recurse
+        if (-not $installerFiles) {
+            Write-Error "安装包输出目录下未找到安装包"
+            exit 1
+        }
+
+        $artifactDir = Join-Path $env:GITHUB_WORKSPACE "artifacts"
+        New-Item -ItemType Directory -Force -Path $artifactDir | Out-Null
+
+        $installerZip = Join-Path $artifactDir "$($env:EXE_NAME)-installer.zip"
+        if (Test-Path $installerZip) {
+            Remove-Item $installerZip -Force
+        }
+
+        Compress-Archive -Path $installerFiles.FullName -DestinationPath $installerZip -Force
+        "INSTALLER_ZIP=$installerZip" >> $env:GITHUB_ENV
+        Write-Host "安装包压缩包：$installerZip"
+
+    - name: Upload Raw Build Zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: FufuLauncher-${{ matrix.configuration }}-raw-build
+        path: ${{ env.RAW_BUILD_ZIP }}
+        if-no-files-found: error
+
+    - name: Upload Installer Zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.EXE_NAME }}-installer
+        path: ${{ env.INSTALLER_ZIP }}
+        if-no-files-found: error
