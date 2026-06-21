@@ -115,8 +115,8 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
             string cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
             var os = new HoyolabCheckinService();
             await os.InitializeAsync(cookieStr);
-            string osResult = await os.SignAccountAsync(cookieStr, new HashSet<string>());
-            return (!osResult.Contains("失败") && !osResult.Contains("异常"), osResult);
+            var osResult = await os.SignAccountWithResultAsync(cookieStr, new HashSet<string>());
+            return (osResult.Success, osResult.Message);
         }
 
         var config = BuildConfigFromCookies(cookies, serverType);

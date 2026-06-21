@@ -1026,7 +1026,13 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
                 CheckinSummary = unifiedResult.SummaryMessage;
                 UpdateCheckinIconState(unifiedResult.OverallSuccess ? "已签到" : "Fail");
 
-                _notificationService.Show("签到完成", unifiedResult.GetDetailedSummary(), unifiedResult.NotificationType, 5000);
+                var notificationTitle = unifiedResult.NotificationType switch
+                {
+                    NotificationType.Success => "签到完成",
+                    NotificationType.Warning => "签到部分失败",
+                    _ => "签到失败"
+                };
+                _notificationService.Show(notificationTitle, unifiedResult.GetDetailedSummary(), unifiedResult.NotificationType, 5000);
             }
             catch (Exception ex)
             {

@@ -132,21 +132,24 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                         
                         bool isOs = account.ConfigPath.StartsWith("os_");
                         string signResult;
+                        bool success;
 
                         if (isOs)
                         {
                             var os = new HoyolabCheckinService();
                             await os.InitializeAsync(account.Cookie);
-                            signResult = await os.SignAccountAsync(account.Cookie, disabledUids);
+                            var osSignResult = await os.SignAccountWithResultAsync(account.Cookie, disabledUids);
+                            signResult = osSignResult.Message;
+                            success = osSignResult.Success;
                         }
                         else
                         {
                             var genshin = new Genshin();
                             await genshin.InitializeAsync(config);
                             signResult = await genshin.SignAccountAsync(config, null, disabledUids);
+                            success = !signResult.Contains("失败") && !signResult.Contains("异常");
                         }
 
-                        bool success = !signResult.Contains("失败") && !signResult.Contains("异常");
                         if (success) result.GameResult.SuccessCount++;
                         else result.GameResult.FailCount++;
 

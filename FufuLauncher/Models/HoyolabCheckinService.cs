@@ -54,6 +54,15 @@ namespace FufuLauncher.Models
         [JsonPropertyName("first_bind")] public bool FirstBind { get; set; }
     }
 
+    public class HoyolabSignResult
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; } = string.Empty;
+        public int SuccessCount { get; set; }
+        public int FailCount { get; set; }
+        public int SkippedCount { get; set; }
+    }
+
     public class HoyolabCheckinService
     {
       
@@ -297,36 +306,50 @@ namespace FufuLauncher.Models
    
         public async Task<string> SignAccountAsync(string cookie, HashSet<string> disabledUids = null)
         {
+            var signResult = await SignAccountWithResultAsync(cookie, disabledUids);
+            return signResult.Message;
+        }
+
+        public async Task<HoyolabSignResult> SignAccountWithResultAsync(string cookie, HashSet<string> disabledUids = null)
+        {
             LastApiError = string.Empty;
-            var result = "HoYoLAB: ";
+            var message = "HoYoLAB: ";
+            var signResult = new HoyolabSignResult();
 
             if (AccountList.Count == 0)
             {
-                result += "未检测到绑定账号";
+                message += "未检测到绑定账号";
                 if (!string.IsNullOrEmpty(LastApiError))
-                    result += $"，原因: {LastApiError}";
-                return result;
+                    message += $"，原因: {LastApiError}";
+                signResult.FailCount++;
+                signResult.Message = message;
+                return signResult;
             }
 
             foreach (var account in AccountList)
             {
                 if (disabledUids != null && disabledUids.Contains(account.GameUid))
+                {
+                    signResult.SkippedCount++;
                     continue;
+                }
 
                 await Task.Delay(new Random().Next(2000, 8000));
 
                 var isData = await IsSignAsync(account.Region, account.GameUid);
                 if (isData == null)
                 {
-                    result += $"\n{account.Nickname} 获取签到信息失败";
+                    message += $"\n{account.Nickname} 获取签到信息失败";
                     if (!string.IsNullOrEmpty(LastApiError))
-                        result += $"，详情: {LastApiError}";
+                        message += $"，详情: {LastApiError}";
+                    signResult.FailCount++;
                     continue;
                 }
 
                 if (isData.FirstBind)
                 {
-                    result += $"\n{account.Nickname}是第一次绑定HoYoLAB，请先手动签到一次";
+                    message += $"\n{account.Nickname}是第一次绑定HoYoLAB，请先手动签到一次";
+                    signResult.FailCount++;
                     continue;
                 }
 
@@ -334,10 +357,10 @@ namespace FufuLauncher.Models
 
                 if (isData.IsSign)
                 {
-                    result += $"\n{account.Nickname}今天已经签到过了";
+                    message += $"\n{account.Nickname}今天已经签到过了";
                     var idx = signDays - 1;
                     if (_checkinRewards != null && idx >= 0 && idx < _checkinRewards.Count)
-                        result += $"\n今天获得的奖励是{FormatItem(_checkinRewards[idx])}";
+                        message += $"\n今天获得的奖励是{FormatItem(_checkinRewards[idx])}";
                 }
                 else
                 {
@@ -346,15 +369,17 @@ namespace FufuLauncher.Models
                     var req = await DoSignAsync(account);
                     if (req == null)
                     {
-                        result += $"\n{account.Nickname} 本次签到请求失败";
+                        message += $"\n{account.Nickname} 本次签到请求失败";
                         if (!string.IsNullOrEmpty(LastApiError))
-                            result += $"，详情: {LastApiError}";
+                            message += $"，详情: {LastApiError}";
+                        signResult.FailCount++;
                         continue;
                     }
 
                     if ((int)req.StatusCode == 429)
                     {
-                        result += $"\n{account.Nickname} 签到失败，触发 HTTP 429 限流";
+                        message += $"\n{account.Nickname} 签到失败，触发 HTTP 429 限流";
+                        signResult.FailCount++;
                         continue;
                     }
 
@@ -363,38 +388,46 @@ namespace FufuLauncher.Models
 
                     if (data == null)
                     {
-                        result += $"\n{account.Nickname} 解析签到结果失败";
+                        message += $"\n{account.Nickname} 解析签到结果失败";
+                        signResult.FailCount++;
                         continue;
                     }
 
                     if (data.RetCode == 0 && data.Data?.Code == "ok")
                     {
                         signDays++;
-                        result += $"\n{account.Nickname}签到成功";
+                        message += $"\n{account.Nickname}签到成功";
                     }
                     else if (data.RetCode == -5003)
                     {
-                        result += $"\n{account.Nickname}今天已经签到过了";
+                        message += $"\n{account.Nickname}今天已经签到过了";
                     }
                     else
                     {
-                        result += $"\n{account.Nickname} 签到失败，API提示: {data.Message}";
+                        message += $"\n{account.Nickname} 签到失败，API提示: {data.Message}";
+                        signResult.FailCount++;
                         continue;
                     }
                 }
 
-                result += $"\n{account.Nickname}已签到{signDays}天";
+                signResult.SuccessCount++;
+                message += $"\n{account.Nickname}已签到{signDays}天";
                 LastSignDays = signDays;
 
                 var rewardIdx = signDays - 1;
                 if (_checkinRewards != null && rewardIdx >= 0 && rewardIdx < _checkinRewards.Count)
                 {
                     LastRewardItem = FormatItem(_checkinRewards[rewardIdx]);
-                    result += $"\n奖励是{LastRewardItem}";
+                    message += $"\n奖励是{LastRewardItem}";
                 }
             }
 
-            return result;
+            if (signResult.SuccessCount == 0 && signResult.FailCount == 0)
+                message += "\n没有可签到的账号";
+
+            signResult.Success = signResult.SuccessCount > 0 && signResult.FailCount == 0;
+            signResult.Message = message;
+            return signResult;
         }
 
         private string FormatItem(OsRewardItem item)

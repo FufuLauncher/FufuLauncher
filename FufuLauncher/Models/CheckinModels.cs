@@ -4,13 +4,26 @@ namespace FufuLauncher.Models;
 
 public class UnifiedCheckinResult
 {
-    public bool OverallSuccess => GameResult.Success && CommunityResult.Success && CloudGameResult.Success;
+    private IEnumerable<CheckinTypeResult> ExecutedResults =>
+        new[] { GameResult, CommunityResult, CloudGameResult }.Where(r => r.Executed);
+
+    public bool OverallSuccess
+    {
+        get
+        {
+            var executedResults = ExecutedResults.ToList();
+            return executedResults.Count > 0 && executedResults.All(r => r.Success);
+        }
+    }
+
     public NotificationType NotificationType
     {
         get
         {
-            if (OverallSuccess) return NotificationType.Success;
-            if (GameResult.Success || CommunityResult.Success || CloudGameResult.Success)
+            var executedResults = ExecutedResults.ToList();
+            if (executedResults.Count == 0) return NotificationType.Error;
+            if (executedResults.All(r => r.Success)) return NotificationType.Success;
+            if (executedResults.Any(r => r.Success))
                 return NotificationType.Warning;
             return NotificationType.Error;
         }
