@@ -70,7 +70,30 @@ public class GenshinApiClient
             PropertyNameCaseInsensitive = true,
             NumberHandling = JsonNumberHandling.AllowReadingFromString
         };
+        using var document = JsonDocument.Parse(content);
+        if (document.RootElement.TryGetProperty("retcode", out var retcodeElement) &&
+            TryReadRetcode(retcodeElement, out var retcode) &&
+            retcode != 0)
+        {
+            var message = document.RootElement.TryGetProperty("message", out var messageElement)
+                ? messageElement.GetString()
+                : "请求失败";
+            throw new InvalidOperationException(message ?? "请求失败");
+        }
+
         return JsonSerializer.Deserialize<T>(content, options) ?? Activator.CreateInstance<T>();
+    }
+
+    private static bool TryReadRetcode(JsonElement element, out int retcode)
+    {
+        if (element.ValueKind == JsonValueKind.Number)
+            return element.TryGetInt32(out retcode);
+
+        if (element.ValueKind == JsonValueKind.String)
+            return int.TryParse(element.GetString(), out retcode);
+
+        retcode = 0;
+        return false;
     }
 
     private string CreateSecret2(string url, bool isOs)

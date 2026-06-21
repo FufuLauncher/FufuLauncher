@@ -187,11 +187,13 @@ namespace FufuLauncher.Models
         }
 
    
-        public async Task InitializeAsync(string cookie)
+        public async Task InitializeAsync(string cookie, List<OsAccountItem>? fallbackAccounts = null)
         {
             LastApiError = string.Empty;
             SetHeaders(cookie);
             AccountList = await GetAccountListAsync();
+            if (AccountList.Count == 0 && fallbackAccounts != null && fallbackAccounts.Count > 0)
+                AccountList = fallbackAccounts;
             if (AccountList.Count > 0)
                 _checkinRewards = await GetCheckinRewardsAsync();
         }
@@ -310,7 +312,7 @@ namespace FufuLauncher.Models
             return signResult.Message;
         }
 
-        public async Task<HoyolabSignResult> SignAccountWithResultAsync(string cookie, HashSet<string> disabledUids = null)
+        public async Task<HoyolabSignResult> SignAccountWithResultAsync(string cookie, HashSet<string> disabledUids = null, string targetUid = null)
         {
             LastApiError = string.Empty;
             var message = "HoYoLAB: ";
@@ -329,6 +331,12 @@ namespace FufuLauncher.Models
             foreach (var account in AccountList)
             {
                 if (disabledUids != null && disabledUids.Contains(account.GameUid))
+                {
+                    signResult.SkippedCount++;
+                    continue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(targetUid) && account.GameUid != targetUid)
                 {
                     signResult.SkippedCount++;
                     continue;

@@ -9,10 +9,14 @@ namespace FufuLauncher.Services;
 public class HoyoverseCheckinService : IHoyoverseCheckinService
 {
     private readonly ILocalSettingsService _localSettingsService;
+    private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
 
-    public HoyoverseCheckinService(ILocalSettingsService localSettingsService)
+    public HoyoverseCheckinService(
+        ILocalSettingsService localSettingsService,
+        IHoyolabRoleResolverService hoyolabRoleResolverService)
     {
         _localSettingsService = localSettingsService;
+        _hoyolabRoleResolverService = hoyolabRoleResolverService;
     }
 
     private static Config BuildConfigFromCookies(Dictionary<string, string> cookies, string serverType)
@@ -49,9 +53,8 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         if (serverType == "os")
         {
             string cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
-            var os = new HoyolabCheckinService();
-            await os.InitializeAsync(cookieStr);
-            return os.AccountList.Select(a => a.GameUid).ToList();
+            var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(cookieStr);
+            return rolesResult.Roles.Select(a => a.game_uid).ToList();
         }
 
         var config = BuildConfigFromCookies(cookies, serverType);
@@ -81,15 +84,18 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         if (serverType == "os")
         {
             string cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
+            var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(cookieStr);
+            if (!rolesResult.HasRoles)
+                return ("未检测到绑定", rolesResult.Message);
+
+            var role = SelectRole(rolesResult.Roles, targetUid);
             var os = new HoyolabCheckinService();
-            await os.InitializeAsync(cookieStr);
-            if (os.AccountList.Count == 0)
-                return ("未检测到绑定", HoyolabCheckinService.LastApiError);
-            var account = os.AccountList[0];
-            var isData = await os.IsSignAsync(account.Region, account.GameUid);
+            await os.InitializeAsync(cookieStr, rolesResult.Roles.Select(ToOsAccountItem).ToList());
+
+            var isData = await os.IsSignAsync(role.region, role.game_uid);
             if (isData == null)
                 return ("获取状态失败", HoyolabCheckinService.LastApiError);
-            return (isData.IsSign ? "今日已签到" : "今日未签到", $"HoYoLAB: {account.Nickname}");
+            return (isData.IsSign ? "今日已签到" : "今日未签到", $"HoYoLAB: {role.nickname}");
         }
 
         var config = BuildConfigFromCookies(cookies, serverType);
@@ -113,9 +119,13 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         if (serverType == "os")
         {
             string cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
+            var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(cookieStr);
+            if (!rolesResult.HasRoles)
+                return (false, rolesResult.Message);
+
             var os = new HoyolabCheckinService();
-            await os.InitializeAsync(cookieStr);
-            var osResult = await os.SignAccountWithResultAsync(cookieStr, new HashSet<string>());
+            await os.InitializeAsync(cookieStr, rolesResult.Roles.Select(ToOsAccountItem).ToList());
+            var osResult = await os.SignAccountWithResultAsync(cookieStr, new HashSet<string>(), targetUid);
             return (osResult.Success, osResult.Message);
         }
 
@@ -149,5 +159,23 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
         var genshin = new Genshin();
         await genshin.InitializeAsync(config);
         return await genshin.GetCheckinCalendarAsync();
+    }
+
+    private static GameRoleInfo SelectRole(List<GameRoleInfo> roles, string targetUid)
+    {
+        if (string.IsNullOrWhiteSpace(targetUid))
+            return roles[0];
+
+        return roles.FirstOrDefault(r => r.game_uid == targetUid) ?? roles[0];
+    }
+
+    private static OsAccountItem ToOsAccountItem(GameRoleInfo role)
+    {
+        return new OsAccountItem
+        {
+            GameUid = role.game_uid,
+            Region = role.region,
+            Nickname = role.nickname
+        };
     }
 }

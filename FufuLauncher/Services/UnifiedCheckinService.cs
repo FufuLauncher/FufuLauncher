@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
@@ -17,19 +16,22 @@ public class UnifiedCheckinService : IUnifiedCheckinService
     private readonly ICommunityCheckinService _communityCheckinService;
     private readonly ICloudGameCheckinService _cloudGameCheckinService;
     private readonly AccountManager _accountManager;
+    private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
 
     public UnifiedCheckinService(
         ILocalSettingsService localSettingsService,
         IHoyoverseCheckinService gameCheckinService,
         ICommunityCheckinService communityCheckinService,
         ICloudGameCheckinService cloudGameCheckinService,
-        AccountManager accountManager)
+        AccountManager accountManager,
+        IHoyolabRoleResolverService hoyolabRoleResolverService)
     {
         _localSettingsService = localSettingsService;
         _gameCheckinService = gameCheckinService;
         _communityCheckinService = communityCheckinService;
         _cloudGameCheckinService = cloudGameCheckinService;
         _accountManager = accountManager;
+        _hoyolabRoleResolverService = hoyolabRoleResolverService;
     }
 
     public async Task<UnifiedCheckinResult> ExecuteAllCheckinsAsync(IProgress<string>? progress = null)
@@ -136,11 +138,20 @@ public class UnifiedCheckinService : IUnifiedCheckinService
 
                         if (isOs)
                         {
-                            var os = new HoyolabCheckinService();
-                            await os.InitializeAsync(account.Cookie);
-                            var osSignResult = await os.SignAccountWithResultAsync(account.Cookie, disabledUids);
-                            signResult = osSignResult.Message;
-                            success = osSignResult.Success;
+                            var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(account.Cookie);
+                            if (!rolesResult.HasRoles)
+                            {
+                                signResult = rolesResult.Message;
+                                success = false;
+                            }
+                            else
+                            {
+                                var os = new HoyolabCheckinService();
+                                await os.InitializeAsync(account.Cookie, rolesResult.Roles.Select(ToOsAccountItem).ToList());
+                                var osSignResult = await os.SignAccountWithResultAsync(account.Cookie, disabledUids);
+                                signResult = osSignResult.Message;
+                                success = osSignResult.Success;
+                            }
                         }
                         else
                         {
@@ -354,11 +365,14 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         return new HashSet<string>();
     }
 
-    private static string? ExtractCookieValue(string cookie, string key)
+    private static OsAccountItem ToOsAccountItem(GameRoleInfo role)
     {
-        var pattern = $@"(?:^|;)\s*{Regex.Escape(key)}=([^;]+)";
-        var match = Regex.Match(cookie, pattern);
-        return match.Success ? match.Groups[1].Value.Trim() : null;
+        return new OsAccountItem
+        {
+            GameUid = role.game_uid,
+            Region = role.region,
+            Nickname = role.nickname
+        };
     }
 
 }

@@ -1,5 +1,4 @@
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
@@ -12,13 +11,16 @@ public class UserInfoService : IUserInfoService
     private readonly HttpClient _httpClient;
     private readonly ILogger<UserInfoService> _logger;
     private readonly ILocalSettingsService _localSettingsService;
+    private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
 
     public UserInfoService(
         ILogger<UserInfoService> logger,
-        ILocalSettingsService localSettingsService)
+        ILocalSettingsService localSettingsService,
+        IHoyolabRoleResolverService hoyolabRoleResolverService)
     {
         _logger = logger;
         _localSettingsService = localSettingsService;
+        _hoyolabRoleResolverService = hoyolabRoleResolverService;
         _httpClient = new HttpClient(new HttpClientHandler
         {
             AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate
@@ -49,22 +51,21 @@ public class UserInfoService : IUserInfoService
         return $"{t},{r},{BitConverter.ToString(c).Replace("-", "").ToLower()}";
     }
 
-    private string? ExtractCookieValue(string cookie, string key)
+    private async Task<bool> IsInternationalAsync(string cookie)
     {
-        try
+        if (cookie.Contains("ltuid_v2=", StringComparison.OrdinalIgnoreCase) ||
+            cookie.Contains("account_id_v2=", StringComparison.OrdinalIgnoreCase) ||
+            cookie.Contains("cookie_token_v2=", StringComparison.OrdinalIgnoreCase))
         {
-            var pattern = $@"{key}=([^;]+)";
-            var match = Regex.Match(cookie, pattern);
-            return match.Success ? match.Groups[1].Value : null;
+            return true;
         }
-        catch
-        {
-            return null;
-        }
-    }
 
-    private async Task<bool> IsInternationalAsync()
-    {
+        if (cookie.Contains("ltuid=", StringComparison.OrdinalIgnoreCase) ||
+            cookie.Contains("stuid=", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
         var isOsObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
         return isOsObj is bool isOs && isOs;
     }
@@ -73,19 +74,16 @@ public class UserInfoService : IUserInfoService
     {
         try
         {
-            bool isOs = await IsInternationalAsync();
+            bool isOs = await IsInternationalAsync(cookie);
             ApplyCommonHeaders(cookie);
 
             if (isOs)
             {
-                var uid = ExtractCookieValue(cookie, "account_id_v2") ?? ExtractCookieValue(cookie, "ltuid_v2") ?? ExtractCookieValue(cookie, "account_id");
-                var url = $"https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={uid}";
-
-                var response = await _httpClient.GetAsync(url);
-                var json = await response.Content.ReadAsStringAsync();
-
-                json = json.Replace("\"game_role_id\"", "\"game_uid\"");
-                return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+                var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(cookie);
+                return new GameRolesResponse(
+                    rolesResult.RetCode,
+                    rolesResult.Message,
+                    new GameRolesData(rolesResult.Roles));
             }
             else
             {
@@ -107,7 +105,7 @@ public class UserInfoService : IUserInfoService
         try
         {
             ApplyCommonHeaders(cookie);
-            bool isOs = await IsInternationalAsync();
+            bool isOs = await IsInternationalAsync(cookie);
 
             var url = isOs ? "https://bbs-api-os.hoyolab.com/community/painter/wapi/user/full" : ApiEndpoints.MiyousheUserFullInfoUrl;
 

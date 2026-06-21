@@ -127,6 +127,7 @@ public partial class App : Application
                     services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
                     services.AddSingleton<ICommunityCheckinService, CommunityCheckinService>();
                     services.AddSingleton<ICloudGameCheckinService, CloudGameCheckinService>();
+                    services.AddSingleton<IHoyolabRoleResolverService, HoyolabRoleResolverService>();
                     services.AddSingleton<IUnifiedCheckinService, UnifiedCheckinService>();
                     services.AddSingleton<DailyNoteCardService>();
                     services.AddSingleton<BlankViewModel>();
