@@ -33,6 +33,7 @@
         </ResourceDictionary.ThemeDictionaries>
 
         <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        <helpers:NullToOpacityConverter x:Key="NullToOpacityConverter" />
         <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
         <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <helpers:DictionarySafeConverter x:Key="DictionarySafeConverter" />
@@ -158,6 +159,38 @@
                     <CubicEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+        </Storyboard>
+
+        <!-- 按钮动画 -->
+        <Storyboard x:Name="ButtonsStaggerStoryboard">
+            <DoubleAnimation Storyboard.TargetName="BtnSwitchAccountTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnSwitchAccount" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnRefreshInfoTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.07"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnRefreshInfo" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.07"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnGenshinDataTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.14"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnGenshinData" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.14"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnGachaAnalysisTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.21"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnGachaAnalysis" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.21"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnSecurityCenterTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.28"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnSecurityCenter" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.28"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnLockAccountTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.35"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnLockAccount" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.35"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnCopyCookieTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.42"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnCopyCookie" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.42"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnDeleteAccountTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.49"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnDeleteAccount" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.49"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnLogoutTransform" Storyboard.TargetProperty="Y" From="-80" To="0" Duration="0:0:0.55" BeginTime="0:0:0.56"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.35"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BtnLogout" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.55" BeginTime="0:0:0.56"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+        </Storyboard>
+
+       
+        <Storyboard x:Name="RightCardsEntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="CommunityFeedCardTransform" Storyboard.TargetProperty="X" From="50" To="0" Duration="0:0:0.5" BeginTime="0:0:0.3"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="CommunityFeedCard" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.45" BeginTime="0:0:0.3"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BoundRolesCardTransform" Storyboard.TargetProperty="X" From="50" To="0" Duration="0:0:0.5" BeginTime="0:0:0.38"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="BoundRolesCard" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.45" BeginTime="0:0:0.38"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="GameTimeCardTransform" Storyboard.TargetProperty="X" From="50" To="0" Duration="0:0:0.5" BeginTime="0:0:0.46"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="GameTimeCard" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.45" BeginTime="0:0:0.46"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
         </Storyboard>
         </ResourceDictionary>
     </Page.Resources>
@@ -421,17 +454,20 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Button Grid.Row="0" Style="{StaticResource ActionButtonStyle}" Translation="0,0,32">
+                                <Button Grid.Row="0" x:Name="BtnSwitchAccount" Opacity="0" Style="{StaticResource ActionButtonStyle}" Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnSwitchAccountTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE748;" />
                                         <TextBlock Text="切换账户" />
                                     </StackPanel>
+                                    </Grid>
                                     <Button.Flyout>
                                         <Flyout Placement="Bottom">
                                             <StackPanel MinWidth="320" Spacing="8">
@@ -538,150 +574,178 @@
                                     </Button.Flyout>
                                 </Button>
 
-                                <Button Grid.Row="2"
+                                <Button Grid.Row="2" x:Name="BtnRefreshInfo" Opacity="0"
                                     Command="{x:Bind ViewModel.LoadUserInfoCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnRefreshInfoTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE72C;" />
                                         <TextBlock Text="刷新信息" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="4"
+                                <Button Grid.Row="4" x:Name="BtnGenshinData" Opacity="0"
                                     Command="{x:Bind ViewModel.OpenGenshinDataCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnGenshinDataTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xEB9E;" />
                                         <TextBlock Text="旅行札记" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="6"
+                                <Button Grid.Row="6" x:Name="BtnGachaAnalysis" Opacity="0"
                                     Click="OnGachaAnalysisClicked"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnGachaAnalysisTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE9D2;" />
                                         <TextBlock Text="抽卡分析" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="8"
+                                <Button Grid.Row="8" x:Name="BtnSecurityCenter" Opacity="0"
                                     Command="{x:Bind ViewModel.OpenSecurityCenterCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnSecurityCenterTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE72E;" />
                                         <TextBlock Text="账号安全" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="10"
+                                <Button Grid.Row="10" x:Name="BtnLockAccount" Opacity="0"
                                     Command="{x:Bind ViewModel.LockAccountCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnLockAccountTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon
                                             FontSize="16"
                                             Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                             Glyph="&#xE7BA;" />
                                         <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="冻结账号" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="12"
+                                <Button Grid.Row="12" x:Name="BtnCopyCookie" Opacity="0"
                                     Command="{x:Bind ViewModel.CopyCookieCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnCopyCookieTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE8C8;" />
                                         <TextBlock Text="复制 Cookie" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="14"
+                                <Button Grid.Row="14" x:Name="BtnDeleteAccount" Opacity="0"
                                     Click="OnDeleteCurrentAccountClicked"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnDeleteAccountTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon
                                             FontSize="16"
                                             Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                             Glyph="&#xE74D;" />
                                         <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="删除账号" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="16"
+                                <Button Grid.Row="16" x:Name="BtnLogout" Opacity="0"
                                     Command="{x:Bind ViewModel.LogoutCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnLogoutTransform" Y="-80"/>
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
+                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                        <Canvas IsHitTestVisible="False"/>
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon
                                             FontSize="16"
                                             Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                             Glyph="&#xE7E8;" />
                                         <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="退出登录" />
                                     </StackPanel>
+                                    </Grid>
                                 </Button>
                             </Grid>
                         </Grid>
 
                         <StackPanel Grid.Column="1" Spacing="24">
                             <Border
+                                x:Name="CommunityFeedCard"
+                                Opacity="0"
                                 Style="{StaticResource CardBorderStyle}"
-                                Translation="0,0,32"
-                                Visibility="{x:Bind ViewModel.UserFullInfo, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="CommunityFeedCardTransform" X="50"/>
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
@@ -755,7 +819,14 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                            <Border
+                                x:Name="BoundRolesCard"
+                                Opacity="0"
+                                Style="{StaticResource CardBorderStyle}"
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="BoundRolesCardTransform" X="50"/>
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
@@ -860,7 +931,14 @@
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                            <Border
+                                x:Name="GameTimeCard"
+                                Opacity="0"
+                                Style="{StaticResource CardBorderStyle}"
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="GameTimeCardTransform" X="50"/>
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>

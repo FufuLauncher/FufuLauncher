@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Data;
 
 namespace FufuLauncher.Helpers
@@ -7,7 +7,10 @@ namespace FufuLauncher.Helpers
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return value == null ? Visibility.Collapsed : Visibility.Visible;
+            var param = parameter?.ToString().ToLower();
+            var isNull = value == null;
+            var invert = param is "inverse" or "true";
+            return (isNull ^ invert) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

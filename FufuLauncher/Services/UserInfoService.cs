@@ -30,6 +30,12 @@ public class UserInfoService : IUserInfoService
 
     private void ApplyCommonHeaders(string cookie)
     {
+        
+        var keys = new[] { "ltoken", "ltuid", "cookie_token", "account_id", "ltoken_v2", "ltuid_v2", "cookie_token_v2", "account_id_v2" };
+        var found = keys.Where(k => cookie.Contains(k + "=", StringComparison.OrdinalIgnoreCase)).ToArray();
+        var missing = keys.Where(k => !found.Contains(k, StringComparer.OrdinalIgnoreCase)).ToArray();
+        System.Diagnostics.Debug.WriteLine($"[UserInfoService] Cookie length={cookie.Length}, found=[{string.Join(", ", found)}], missing=[{string.Join(", ", missing)}]");
+
         _httpClient.DefaultRequestHeaders.Clear();
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Cookie", cookie);
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("DS", GenerateDS());
@@ -53,18 +59,15 @@ public class UserInfoService : IUserInfoService
 
     private async Task<bool> IsInternationalAsync(string cookie)
     {
-        if (cookie.Contains("ltuid_v2=", StringComparison.OrdinalIgnoreCase) ||
-            cookie.Contains("account_id_v2=", StringComparison.OrdinalIgnoreCase) ||
-            cookie.Contains("cookie_token_v2=", StringComparison.OrdinalIgnoreCase))
-        {
-            return true;
-        }
+        var hasCnFields = cookie.Contains("ltuid=", StringComparison.OrdinalIgnoreCase) ||
+                          cookie.Contains("stuid=", StringComparison.OrdinalIgnoreCase);
+        var hasOsFields = cookie.Contains("ltuid_v2=", StringComparison.OrdinalIgnoreCase) ||
+                          cookie.Contains("account_id_v2=", StringComparison.OrdinalIgnoreCase) ||
+                          cookie.Contains("cookie_token_v2=", StringComparison.OrdinalIgnoreCase);
 
-        if (cookie.Contains("ltuid=", StringComparison.OrdinalIgnoreCase) ||
-            cookie.Contains("stuid=", StringComparison.OrdinalIgnoreCase))
-        {
-            return false;
-        }
+        // 优先国服：同时有国服和国际服 cookie 字段时走国服，避免 region_block
+        if (hasCnFields) return false;
+        if (hasOsFields) return true;
 
         var isOsObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
         return isOsObj is bool isOs && isOs;
@@ -89,6 +92,7 @@ public class UserInfoService : IUserInfoService
             {
                 var response = await _httpClient.GetAsync(ApiEndpoints.MihoyoBbsUserGameRolesUrl);
                 var json = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"[UserInfoService] GameRoles HTTP {response.StatusCode} | Body({json?.Length ?? 0}): {(json?.Length > 300 ? json[..300] : json ?? "(null)")}");
                 return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
             }
         }
@@ -111,6 +115,7 @@ public class UserInfoService : IUserInfoService
 
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"[UserInfoService] UserFullInfo HTTP {response.StatusCode} | URL: {url} | Body({json?.Length ?? 0}): {(json?.Length > 300 ? json[..300] : json ?? "(null)")}");
             return JsonSerializer.Deserialize<UserFullInfoResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         }
         catch (Exception ex)
