@@ -10,6 +10,7 @@ using FufuLauncher.Services;
 using FufuLauncher.Services.Background;
 using FufuLauncher.ViewModels;
 using FufuLauncher.Views;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -87,6 +88,13 @@ public partial class App : Application
         {
             Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
                 .UseContentRoot(AppContext.BaseDirectory)
+                .ConfigureHostConfiguration(config =>
+                {
+                    config.AddInMemoryCollection(new Dictionary<string, string?>
+                    {
+                        ["hostBuilder:reloadConfigOnChange"] = "false"
+                    });
+                })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
