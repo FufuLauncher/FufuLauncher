@@ -216,7 +216,8 @@ public partial class AccountViewModel : ObservableRecipient
             var nickname = userInfo?.nickname ?? role?.nickname ?? $"用户 {entry.Stuid}";
             var avatarUrl = userInfo?.avatar_url ?? "ms-appx:///Assets/DefaultAvatar.png";
             var gameUid = role?.game_uid ?? "";
-            var server = role?.region_name ?? "";
+            var isOs = entry.Id.StartsWith("os_");
+            var server = isOs ? "国际服" : "国服";
             var level = role?.level.ToString() ?? "";
             var sign = string.IsNullOrEmpty(userInfo?.introduce) ? "这个人很懒，什么都没有写..." : userInfo.introduce;
             var ipRegion = userInfo?.ip_region ?? "未知";

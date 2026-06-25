@@ -71,7 +71,7 @@ public class HoyolabRoleResolverService : IHoyolabRoleResolverService
                         r.GameUid,
                         r.Nickname ?? "",
                         0,
-                        r.Region))
+                        FriendlyRegionName(r.Region)))
                     .ToList();
 
                 return new HoyolabRoleResolveResult(0, result.Message ?? "OK", "binding", roles);
@@ -135,6 +135,15 @@ public class HoyolabRoleResolverService : IHoyolabRoleResolverService
             return new HoyolabRoleResolveResult(-1, ex.Message, "game_record_card", new List<GameRoleInfo>());
         }
     }
+
+    private static string FriendlyRegionName(string regionCode) => regionCode switch
+    {
+        "os_asia" => "亚服",
+        "os_usa" => "美服",
+        "os_euro" => "欧服",
+        "os_cht" => "台港澳服",
+        _ => regionCode
+    };
 
     private static string ResolveRegion(GameRecordCardInfo role)
     {
