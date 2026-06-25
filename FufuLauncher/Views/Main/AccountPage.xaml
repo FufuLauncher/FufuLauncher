@@ -842,7 +842,7 @@
                                 <Button
                                     x:Name="BtnLockAccount"
                                     Grid.Row="5"
-                                    Command="{x:Bind ViewModel.LockAccountCommand}"
+                                    Click="OnOpenBattleRecordClick"
                                     Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -858,11 +858,8 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon
-                                                FontSize="16"
-                                                Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                Glyph="&#xE7BA;" />
-                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="冻结账号" />
+                                            <FontIcon FontSize="16" Glyph="&#xE9D2;" />
+                                            <TextBlock Text="实时便签" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>

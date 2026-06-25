@@ -28,7 +28,7 @@ namespace FufuLauncher.Views
         
         private byte[] _screenshotBytes;
 
-        private const string CNVersion = "2.102.1";
+        private const string CNVersion = "2.109.0";
         private const string CNK2 = "lX8m5VO5at5JG7hR8hzqFwzyL5aB1tYo";
         private const string CNLK2 = "yBh10ikxtLPoIhgwgPZSv5dmfaOTSJ6a";
         private const string CNX4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
@@ -255,10 +255,18 @@ namespace FufuLauncher.Views
                     headers.SetHeader("x-rpc-app_version", _currentConfig.AppVersion);
                     headers.SetHeader("x-rpc-device_id", _deviceId36);
                     headers.SetHeader("x-rpc-sdk_version", "2.16.0");
+                    headers.SetHeader("x-rpc-device_name", "Xiaomi_" + _deviceId36[..8]);
+                    headers.SetHeader("x-rpc-sys_version", "12");
+                    headers.SetHeader("x-rpc-tool_verison", "v6.6.1-gr-cn");
+                    headers.SetHeader("x-rpc-page", "v6.6.1-gr-cn_#/ys");
+                    headers.SetHeader("X-Requested-With", "com.mihoyo.hyperion");
+
 
                     if (cookieDic.TryGetValue("DEVICEFP", out var fp) && !string.IsNullOrWhiteSpace(fp))
                     {
-                        headers.SetHeader("x-rpc-device_fp", fp);
+                        var t = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()[^4..];
+                        var h = Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(fp + t))).ToLower()[..13];
+                        headers.SetHeader("x-rpc-device_fp", h);
                     }
                     
                     string ds;
@@ -659,6 +667,35 @@ namespace FufuLauncher.Views
                     cookieDic[kv.Key] = kv.Value;
                 }
             }
+            // 按账号+机器生成DEVICEFP，避免多账号共享被风控
+            if (!cookieDic.ContainsKey("DEVICEFP"))
+            {
+                var accountId = cookieDic.GetValueOrDefault("account_id") ?? cookieDic.GetValueOrDefault("ltuid") ?? activeId;
+                var raw = accountId + "_" + Environment.MachineName + "_" + Environment.UserName + "_fufu_v2";
+                var hash = SHA256.HashData(Encoding.UTF8.GetBytes(raw));
+                cookieDic["DEVICEFP"] = Convert.ToHexString(hash).ToLower()[..13];
+            }
+
+            System.Diagnostics.Debug.WriteLine($"[BBSWindow] Cookie keys: [{string.Join(", ", cookieDic.Keys)}]");
+        }
+
+        private static string? GetOrCreateDeviceFingerprint()
+        {
+            var path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "device_fp.txt");
+            try
+            {
+                if (System.IO.File.Exists(path))
+                    return System.IO.File.ReadAllText(path).Trim();
+
+                // 基于机器名+用户名生成唯一DEVICEFP
+                var raw = Environment.MachineName + Environment.UserName;
+                var hash = MD5.HashData(Encoding.UTF8.GetBytes(raw));
+                var fp = BitConverter.ToString(hash).Replace("-", "").ToLower()[..13];
+                System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
+                System.IO.File.WriteAllText(path, fp);
+                return fp;
+            }
+            catch { return null; }
         }
 
         private void ParseCookie(string cookieStr)
@@ -679,7 +716,7 @@ public static async Task<string> FetchApiJsonAsync(string apiUrl)
     {
         string capturedJson = null;
         var tcs = new TaskCompletionSource<bool>();
-        
+
         var window = new BBSWindow(false);
         window.AppWindow.Hide();
 
@@ -780,6 +817,7 @@ public static async Task<string> FetchApiJsonAsync(string apiUrl)
         _fetchApiSemaphore.Release();
     }
 }
+
         private class JsParam
         {
             [JsonPropertyName("method")] public string Method { get; set; } = "";

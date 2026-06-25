@@ -30,6 +30,12 @@ namespace FufuLauncher.Services
 
             if (retcode != 0)
             {
+                // 5003: 该角色暂无便签数据，返回空卡
+                if (retcode == 5003)
+                {
+                    Debug.WriteLine("[DailyNoteParser] retcode=5003，返回空便签");
+                    return new DailyNoteCardData();
+                }
                 string message = root.TryGetProperty("message", out var msgProp) ? msgProp.GetString() : "未知错误";
                 string error = string.IsNullOrWhiteSpace(message)
                     ? $"接口返回错误，retcode={retcode}"

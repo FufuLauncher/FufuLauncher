@@ -354,6 +354,14 @@ public sealed partial class AccountPage : Page
     }
     #endregion
 
+    #region 便签
+    private void OnOpenBattleRecordClick(object sender, RoutedEventArgs e)
+    {
+        var window = new BBSWindow();
+        window.Activate();
+    }
+    #endregion
+
     #region 其他 UI 操作
     private void OnGachaAnalysisClicked(object sender, RoutedEventArgs e)
     {
