@@ -165,6 +165,16 @@ public class AccountManager
         return JsonSerializer.Deserialize<Dictionary<string, string>>(json);
     }
 
+    public async Task SaveCookiesAsync(string accountId, Dictionary<string, string> cookies)
+    {
+        var entry = _accountList.Accounts.FirstOrDefault(a => a.Id == accountId);
+        if (entry == null) return;
+
+        string path = Path.Combine(_cookiesDir, entry.CookieFilePath);
+        var json = JsonSerializer.Serialize(cookies);
+        await File.WriteAllTextAsync(path, json);
+    }
+
 
     public async Task DeleteAccountAsync(string accountId)
     {

@@ -25,6 +25,8 @@ namespace FufuLauncher.Views
     {
         private AppWindow m_AppWindow;
         private static readonly System.Threading.SemaphoreSlim _fetchApiSemaphore = new System.Threading.SemaphoreSlim(1, 1);
+        private string _lastSeedId = "";
+        private string _lastSeedTime = "";
         
         private byte[] _screenshotBytes;
 
@@ -56,12 +58,12 @@ namespace FufuLauncher.Views
                 SysVersion = "15",
                 UseDS2 = false
             },
-            ["5"] = new ClientConfig 
+            ["5"] = new ClientConfig
             {
                 ClientType = "5",
                 AppVersion = CNVersion,
-                Salt = CNX4, 
-                UserAgent = $"Mozilla/5.0 (Linux; Android 15) Mobile miHoYoBBS/{CNVersion}",
+                Salt = CNX4,
+                UserAgent = $"Mozilla/5.0 (Linux; Android 12; 24031PN0DC Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.154 Safari/537.36 miHoYoBBS/{CNVersion}",
                 DeviceModel = "Mi 10",
                 SysVersion = "15",
                 UseDS2 = true
@@ -113,7 +115,7 @@ namespace FufuLauncher.Views
             _deviceId36 = GetStableGuid();
             _deviceId = GenerateDeviceId40(_deviceId36);
             
-            _currentConfig = _clientConfigs["2"]; 
+            _currentConfig = _clientConfigs["5"]; 
             
             InitializeWindowStyle();
             UrlTextBox.Text = DefaultUrl;
@@ -249,43 +251,81 @@ namespace FufuLauncher.Views
                     headers.RemoveHeader("x-rpc-client_type");
                     headers.RemoveHeader("x-rpc-app_version");
                     headers.RemoveHeader("DS");
-                    
-                    headers.SetHeader("x-rpc-app_id", "bll8iq97cem8");
+                    // 覆盖 WebView2 自动注入的 Client Hints，伪装成 Android WebView
+                    headers.SetHeader("sec-ch-ua", "\"Android WebView\";v=\"110\", \"Chromium\";v=\"110\", \"Not?A_Brand\";v=\"24\"");
+                    headers.SetHeader("sec-ch-ua-mobile", "?1");
+                    headers.SetHeader("sec-ch-ua-platform", "\"Android\"");
+
                     headers.SetHeader("x-rpc-client_type", _currentConfig.ClientType);
                     headers.SetHeader("x-rpc-app_version", _currentConfig.AppVersion);
-                    headers.SetHeader("x-rpc-device_id", _deviceId36);
+                    headers.SetHeader("x-rpc-app_id", "bll8iq97cem8");
                     headers.SetHeader("x-rpc-sdk_version", "2.16.0");
-                    headers.SetHeader("x-rpc-device_name", "Xiaomi_" + _deviceId36[..8]);
+                    // BBS API (client_type=2) 用 hex，Game Record (client_type=5) 用 UUID v3
+                    var deviceIdForApi = uri.Contains("api-takumi") ? GenGameRecordDeviceId() : GenDeviceId();
+                    headers.SetHeader("x-rpc-device_id", deviceIdForApi);
+                    headers.SetHeader("x-rpc-device_name", GenDeviceName());
                     headers.SetHeader("x-rpc-sys_version", "12");
                     headers.SetHeader("x-rpc-tool_verison", "v6.6.1-gr-cn");
                     headers.SetHeader("x-rpc-page", "v6.6.1-gr-cn_#/ys");
                     headers.SetHeader("X-Requested-With", "com.mihoyo.hyperion");
+                    headers.SetHeader("Referer", "https://webstatic.mihoyo.com/");
+                    headers.SetHeader("Origin", "https://webstatic.mihoyo.com");
+                    var deviceFp = GetDeviceFpHeader();
+                    headers.SetHeader("x-rpc-device_fp", deviceFp);
 
+                    // 覆盖 WebView2 浏览器默认的 Accept，伪装成 API 客户端
+                    headers.SetHeader("Accept", "application/json, text/plain, */*");
+                    headers.SetHeader("Accept-Language", "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7");
 
-                    if (cookieDic.TryGetValue("DEVICEFP", out var fp) && !string.IsNullOrWhiteSpace(fp))
-                    {
-                        var t = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()[^4..];
-                        var h = Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(fp + t))).ToLower()[..13];
-                        headers.SetHeader("x-rpc-device_fp", h);
-                    }
-                    
                     string ds;
                     if (_currentConfig.UseDS2)
                     {
-                        string query = GetSortedQuery(uri);
+                        // api-takumi-record（game_record 系列 API）的 DS2 要求 q 和 b 为空
+                        // 参照 GenshinApiClient.CreateSecret2
+                        var isTakumiApi = uri.Contains("api-takumi-record");
+                        string query = isTakumiApi ? "" : GetSortedQuery(uri);
                         string body = "";
-                        if (args.Request.Method == "POST" && args.Request.Content != null)
+                        if (!isTakumiApi && args.Request.Method == "POST" && args.Request.Content != null)
                         {
                             body = await GetJsonBodyAsync(args.Request.Content);
                         }
                         ds = CalculateDS2(_currentConfig.Salt, query, body);
+                        System.Diagnostics.Debug.WriteLine($"[BBSWindow] DS2: {ds} | salt={_currentConfig.Salt[..Math.Min(8, _currentConfig.Salt.Length)]}... | takumi={isTakumiApi} | q={query} | b={body[..Math.Min(50, body.Length)]}");
                     }
                     else
                     {
                         ds = CalculateDS1(_currentConfig.Salt);
+                        System.Diagnostics.Debug.WriteLine($"[BBSWindow] DS1: {ds} | salt={_currentConfig.Salt[..Math.Min(8, _currentConfig.Salt.Length)]}...");
                     }
+                    System.Diagnostics.Debug.WriteLine($"[BBSWindow] API请求: method={args.Request.Method} url={uri[..Math.Min(120, uri.Length)]} client_type={_currentConfig.ClientType} device_id={GenDeviceId()} device_name={GenDeviceName()} device_fp={deviceFp}");
 
                     headers.SetHeader("DS", ds);
+
+                    // === 调试：完整 dump 所有请求头，方便对比抓包 ===
+                    if (uri.Contains("dailyNote"))
+                    {
+                        try
+                        {
+                            var allHeaders = new System.Text.StringBuilder();
+                            allHeaders.AppendLine($"[BBSWindow] === 完整请求 DUMP: {args.Request.Method} {uri} ===");
+                            // 逐个打印已知关键 header
+                            var keyHeaders = new[] {
+                                "DS","x-rpc-client_type","x-rpc-app_version","x-rpc-app_id","x-rpc-sdk_version",
+                                "x-rpc-device_id","x-rpc-device_name","x-rpc-device_fp","x-rpc-sys_version",
+                                "x-rpc-tool_verison","x-rpc-page","X-Requested-With","Referer","Origin",
+                                "User-Agent","Accept","Accept-Language","Accept-Encoding","sec-ch-ua",
+                                "sec-ch-ua-mobile","sec-ch-ua-platform","Sec-Fetch-Site","Sec-Fetch-Mode",
+                                "Sec-Fetch-Dest","Sec-Fetch-User","Cookie","Content-Type","Content-Length"
+                            };
+                            foreach (var name in keyHeaders)
+                            {
+                                try { allHeaders.AppendLine($"  {name}: {headers.GetHeader(name)}"); } catch { }
+                            }
+                            allHeaders.AppendLine("=== DUMP 结束 ===");
+                            System.Diagnostics.Debug.WriteLine(allHeaders.ToString());
+                        }
+                        catch { }
+                    }
                 }
             }
             finally
@@ -387,7 +427,7 @@ namespace FufuLauncher.Views
             return string.Join("&", pairs);
         }
 
-        private string CalculateDS1(string salt)
+        private static string CalculateDS1(string salt)
         {
             var t = (int)DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             var r = GetRandomString(6);
@@ -430,7 +470,7 @@ namespace FufuLauncher.Views
             return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        private string GetMd5(string input)
+        private static string GetMd5(string input)
         {
             var hash = MD5.HashData(Encoding.UTF8.GetBytes(input));
             return Convert.ToHexString(hash).ToLowerInvariant();
@@ -473,10 +513,10 @@ namespace FufuLauncher.Views
                 ["x-rpc-app_id"] = "bll8iq97cem8",
                 ["x-rpc-client_type"] = _currentConfig.ClientType,
                 ["x-rpc-app_version"] = _currentConfig.AppVersion,
-                ["x-rpc-device_id"] = _deviceId36,
+                ["x-rpc-device_id"] = GenDeviceId(),
                 ["x-rpc-sdk_version"] = "2.16.0"
             };
-            if (cookieDic.TryGetValue("DEVICEFP", out var fp)) data["x-rpc-device_fp"] = fp;
+            data["x-rpc-device_fp"] = GetDeviceFpHeader();
             return new JsResult { Data = data };
         }
 
@@ -655,10 +695,18 @@ namespace FufuLauncher.Views
 
             var accountManager = App.GetService<AccountManager>();
             var activeId = accountManager.ActiveAccountId;
-            if (activeId == null) return;
+            if (activeId == null)
+            {
+                System.Diagnostics.Debug.WriteLine("[BBSWindow] LoadCookies: 没有活跃账号");
+                return;
+            }
 
             var cookies = await accountManager.LoadCookiesAsync(activeId);
-            if (cookies == null || cookies.Count == 0) return;
+            if (cookies == null || cookies.Count == 0)
+            {
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] LoadCookies: 账号 {activeId} 无已保存的 Cookie");
+                return;
+            }
 
             foreach (var kv in cookies)
             {
@@ -667,16 +715,342 @@ namespace FufuLauncher.Views
                     cookieDic[kv.Key] = kv.Value;
                 }
             }
-            // 按账号+机器生成DEVICEFP，避免多账号共享被风控
+
+            System.Diagnostics.Debug.WriteLine($"[BBSWindow] LoadCookies: 从文件加载了 {cookieDic.Count} 个 Cookie，账号={activeId}");
+
+            // 判断 DEVICEFP 是服务器签发还是旧版本本地生成：服务器签发会伴随 SEED_ID
+            var hasLocalFp = cookieDic.ContainsKey("DEVICEFP") && !cookieDic.ContainsKey("DEVICEFP_SEED_ID");
+
             if (!cookieDic.ContainsKey("DEVICEFP"))
             {
-                var accountId = cookieDic.GetValueOrDefault("account_id") ?? cookieDic.GetValueOrDefault("ltuid") ?? activeId;
-                var raw = accountId + "_" + Environment.MachineName + "_" + Environment.UserName + "_fufu_v2";
-                var hash = SHA256.HashData(Encoding.UTF8.GetBytes(raw));
-                cookieDic["DEVICEFP"] = Convert.ToHexString(hash).ToLower()[..13];
+                await FetchDeviceFpAndPersistAsync(accountManager, activeId);
+            }
+            else if (hasLocalFp)
+            {
+                // 旧版本本地 SHA256 生成的假指纹，服务器不认，清除后重新获取
+                cookieDic.TryGetValue("DEVICEFP", out var oldFp);
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] DEVICEFP: 检测到旧版本地生成指纹 {oldFp}，清除并重新向服务器获取");
+                cookieDic.Remove("DEVICEFP");
+                await FetchDeviceFpAndPersistAsync(accountManager, activeId);
+            }
+            else if (cookieDic.TryGetValue("DEVICEFP", out var cachedFp))
+            {
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] DEVICEFP: 已有服务器签发值 {cachedFp}");
             }
 
             System.Diagnostics.Debug.WriteLine($"[BBSWindow] Cookie keys: [{string.Join(", ", cookieDic.Keys)}]");
+        }
+
+        private async Task FetchDeviceFpAndPersistAsync(AccountManager accountManager, string activeId)
+        {
+            System.Diagnostics.Debug.WriteLine("[BBSWindow] DEVICEFP: 未缓存，开始向服务器请求设备指纹...");
+            var fp = await FetchDeviceFingerprintAsync();
+            if (!string.IsNullOrEmpty(fp))
+            {
+                cookieDic["DEVICEFP"] = fp;
+                cookieDic["DEVICEFP_SEED_ID"] = _lastSeedId;
+                cookieDic["DEVICEFP_SEED_TIME"] = _lastSeedTime;
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] DEVICEFP: 服务器返回 {fp}，持久化到 Cookie 文件");
+                // 持久化 DEVICEFP 和 seed，避免后续实例重新请求
+                await accountManager.SaveCookiesAsync(activeId, cookieDic);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("[BBSWindow] DEVICEFP: 服务器返回空，将使用本地生成值");
+            }
+        }
+
+        /// <summary>
+        /// 复制 Java UUID.nameUUIDFromBytes() 行为。
+        /// 官方 App: androidId → MD5 → UUID v3 (big-endian)。
+        /// Windows 无 Android ID，用 machine+user 替代做持久化标识。
+        /// </summary>
+        private static Guid NameUuidFromBytes(byte[] name)
+        {
+            byte[] hash = MD5.HashData(name);
+            hash[6] = (byte)((hash[6] & 0x0F) | 0x30); // UUID v3
+            hash[8] = (byte)((hash[8] & 0x3F) | 0x80); // variant
+
+            // Java UUID 用 big-endian，C# Guid(byte[]) 用 mixed-endian
+            // 转换: [0..3] LE, [4..5] LE, [6..7] LE, [8..15] BE
+            return new Guid(new byte[] {
+                hash[3], hash[2], hash[1], hash[0],  // time_low (LE)
+                hash[5], hash[4],                     // time_mid (LE)
+                hash[7], hash[6],                     // time_hi_version (LE)
+                hash[8], hash[9], hash[10], hash[11], hash[12], hash[13], hash[14], hash[15]
+            });
+        }
+
+        private static string GetOrCreatePersistentDeviceId()
+        {
+            var dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "Data");
+            var path = System.IO.Path.Combine(dir, "device_id.txt");
+            try
+            {
+                if (System.IO.File.Exists(path))
+                {
+                    var existing = System.IO.File.ReadAllText(path).Trim();
+                    if (!string.IsNullOrEmpty(existing)) return existing;
+                }
+                // 生成随机 16 位 hex 模拟 Android ID（如 "1d5ae13a85817497"）
+                var bytes = new byte[8];
+                System.Security.Cryptography.RandomNumberGenerator.Fill(bytes);
+                var id = Convert.ToHexString(bytes).ToLower();
+                System.IO.Directory.CreateDirectory(dir);
+                System.IO.File.WriteAllText(path, id);
+                return id;
+            }
+            catch { return Guid.NewGuid().ToString("N")[..16]; }
+        }
+
+        /// <summary>BBS/Community API (client_type=2) 用原始 hex device_id</summary>
+        private string GenDeviceId() => GetOrCreatePersistentDeviceId();
+
+        /// <summary>Game Record API (client_type=5) 用 UUID v3 派生 device_id</summary>
+        private static string GenGameRecordDeviceId()
+        {
+            var hexId = GetOrCreatePersistentDeviceId();
+            return NameUuidFromBytes(Encoding.UTF8.GetBytes(hexId)).ToString();
+        }
+
+        private static readonly string[] XiaomiModels = { "Xiaomi%2013", "Xiaomi%2012", "Xiaomi%20Redmi%20Note%2012", "Xiaomi%20Redmi%20K60" };
+        private string GenDeviceName()
+        {
+            var model = ExtractDeviceModelFromUA();
+            if (!string.IsNullOrEmpty(model))
+            {
+                var brand = "Xiaomi";
+                if (_currentConfig.UserAgent.Contains("Vivo") || _currentConfig.UserAgent.Contains("vivo"))
+                    brand = "Vivo";
+                return $"{brand}%20{model}";
+            }
+            var a = cookieDic.GetValueOrDefault("account_id") ?? "0";
+            var idx = Math.Abs(BitConverter.ToInt32(SHA256.HashData(Encoding.UTF8.GetBytes(a + "_name")), 0)) % XiaomiModels.Length;
+            return XiaomiModels[idx];
+        }
+
+        /// <summary>
+        /// 从 User-Agent 中提取 Android 设备型号。
+        /// UA 格式: "...Linux; Android 12; 24031PN0DC Build/V417IR; wv)..."
+        /// </summary>
+        private string ExtractDeviceModelFromUA()
+        {
+            try
+            {
+                var ua = _currentConfig.UserAgent;
+                // 匹配 "Android <version>; <model> Build/"
+                var androidIdx = ua.IndexOf("Android ");
+                if (androidIdx < 0) return "";
+                var afterAndroid = ua[(androidIdx + "Android ".Length)..];
+                var semicolonIdx = afterAndroid.IndexOf(';');
+                if (semicolonIdx < 0) return "";
+                var afterSemicolon = afterAndroid[(semicolonIdx + 1)..].TrimStart();
+                var buildIdx = afterSemicolon.IndexOf(" Build/");
+                if (buildIdx < 0) return "";
+                return afterSemicolon[..buildIdx];
+            }
+            catch { return ""; }
+        }
+
+        private static string GenDeviceFp()
+        {
+            var rnd = new Random();
+            var sb = new StringBuilder();
+            sb.Append(rnd.Next(1, 10));
+            for (int i = 0; i < 9; i++) sb.Append(rnd.Next(0, 10));
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 获取 x-rpc-device_fp 请求头：DEVICEFP cookie + timestamp 后4位 做 MD5 取前13位
+        /// 注意：不能直接发送 DEVICEFP 原始值，必须经过此派生算法
+        /// </summary>
+        private string GetDeviceFpHeader()
+        {
+            if (cookieDic.TryGetValue("DEVICEFP", out var serverFp) && !string.IsNullOrEmpty(serverFp))
+            {
+                var t = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+                var t4 = t[^Math.Min(4, t.Length)..];
+                var h = Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(serverFp + t4))).ToLower()[..13];
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] device_fp 派生: DEVICEFP={serverFp} ts末4位={t4} → {h}");
+                return h;
+            }
+            var localFp = GenDeviceFp();
+            System.Diagnostics.Debug.WriteLine($"[BBSWindow] device_fp 回退本地: {localFp}");
+            return localFp;
+        }
+
+        private static readonly HttpClient _fpClient = new() { Timeout = TimeSpan.FromSeconds(10) };
+        private async Task<string?> FetchDeviceFingerprintAsync()
+        {
+            try
+            {
+                // Step 1: 获取 ext_list
+                var extResp = await _fpClient.GetStringAsync("https://public-data-api.mihoyo.com/device-fp/api/getExtList?platform=2&app_name=bbs_cn");
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] getExtList (full): {extResp}");
+
+                // 解析 ext_list 并收集对应的设备信息（值使用原生 JSON 类型）
+                var extListNode = JsonNode.Parse(extResp);
+                var extList = extListNode?["data"]?["ext_list"];
+                var extFields = new Dictionary<string, object>();
+                if (extList is JsonArray extArray)
+                {
+                    foreach (var item in extArray)
+                    {
+                        var fieldName = item?.ToString();
+                        if (!string.IsNullOrEmpty(fieldName))
+                        {
+                            extFields[fieldName] = GetExtFieldValue(fieldName);
+                        }
+                    }
+                }
+                var extFieldsJson = JsonSerializer.Serialize(extFields);
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] ext_fields (full): {extFieldsJson}");
+
+                // Step 2: 用 ext_list + seed 请求指纹
+                // SDK 证实：所有参数都是 String，ext_fields 是 JSON 字符串
+                _lastSeedId = Guid.NewGuid().ToString();
+                _lastSeedTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
+                var requestBody = new JsonObject
+                {
+                    ["device_id"] = GenDeviceId(),
+                    ["seed_id"] = _lastSeedId,
+                    ["seed_time"] = _lastSeedTime,
+                    ["platform"] = "2",
+                    ["device_fp"] = GenDeviceFp(),
+                    ["app_name"] = "bbs_cn",
+                    ["bbs_device_id"] = GenGameRecordDeviceId(),
+                    ["ext_fields"] = extFieldsJson
+                };
+                var body = requestBody.ToJsonString();
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] getFp 请求体 (full): {body}");
+
+                var req = new HttpRequestMessage(HttpMethod.Post, "https://public-data-api.mihoyo.com/device-fp/api/getFp")
+                {
+                    Content = new StringContent(body, Encoding.UTF8, "application/json")
+                };
+                req.Headers.Add("User-Agent", _currentConfig.UserAgent);
+                var resp = await _fpClient.SendAsync(req);
+                var result = await resp.Content.ReadAsStringAsync();
+                // SDK 从根节点读取 device_fp；我们的响应嵌套在 data 内，两者都尝试
+                var fpNode = JsonNode.Parse(result);
+                var fp = fpNode?["device_fp"]?.ToString();  // SDK 方式：根节点直接取
+                if (string.IsNullOrEmpty(fp))
+                    fp = fpNode?["data"]?["device_fp"]?.ToString();  // 兼容嵌套格式
+                var fpCode = fpNode?["data"]?["code"]?.ToString();
+                var fpMsg = fpNode?["data"]?["msg"]?.ToString();
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] 服务器下发指纹: {(string.IsNullOrEmpty(fp) ? "失败" : fp)} | HTTP={resp.StatusCode} | code={fpCode} msg={fpMsg} | body={result}");
+                // code!=200 说明服务器拒绝了（如 500 内部错误），应返回 null 而非使用无效值
+                if (fpCode != null && fpCode != "200")
+                {
+                    System.Diagnostics.Debug.WriteLine($"[BBSWindow] getFp 被拒绝: code={fpCode} msg={fpMsg}");
+                    return null;
+                }
+                return string.IsNullOrEmpty(fp) ? null : fp;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] 获取指纹失败: {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 根据 ext_list 返回的字段名收集对应的设备/浏览器信息（与 _currentConfig 保持一致）
+        /// </summary>
+        private object GetExtFieldValue(string fieldName)
+        {
+            return fieldName switch
+            {
+                // ===== WebView/hk4e 字段 (platform=5) =====
+                "userAgent" => _currentConfig.UserAgent,
+                "browserScreenSize" => "412x915",
+                "maxTouchPoints" => 5,
+                "isTouchSupported" => true,
+                "browserLanguage" => "zh-CN",
+                "browserPlat" => "Linux armv8l",
+                "browserTimeZone" => "Asia/Shanghai",
+                "browserPlugins" => "",
+                "browserPlatform" => "Linux armv8l",
+                "webGlRender" => "Adreno (TM) 650",
+                "webglRenderer" => "Adreno (TM) 650",
+                "webGlVendor" => "Qualcomm",
+                "webglVendor" => "Qualcomm",
+                "webgl" => "",
+                "numOfPlugins" => 5,
+                "listOfPlugins" => "Chrome PDF Plugin,Chrome PDF Viewer,Native Client,Chromium PDF Plugin,Microsoft Edge PDF Plugin",
+                "screenRatio" => 2.0,
+                "colorDepth" => 24,
+                "pixelRatio" => 3.0,
+                "hardwareConcurrency" => 8,
+                "deviceMemory" => 8,
+                "cpuClass" => "",
+                "ifNotTrack" => false,
+                "ifAdBlock" => false,
+                "hasLiedLanguage" => false,
+                "hasLiedResolution" => false,
+                "hasLiedOs" => false,
+                "hasLiedBrowser" => false,
+                "canvas" => "",
+                "webDriver" => false,
+
+                // ===== Android 设备字段 (platform=2, bbs_cn) =====
+                "board" => "24031PN0DC",
+                "brand" => "Xiaomi",
+                "hardware" => "Xiaomi",
+                "cpuType" => "arm64-v8a",
+                "deviceType" => "aurora",
+                "display" => "V417IR release-keys",
+                "manufacturer" => "Xiaomi",
+                "productName" => "aurora",
+                "model" => "24031PN0DC",
+                "deviceInfo" => "Xiaomi/aurora/aurora:12/V417IR/1747:user/release-keys",
+                "hostname" => "6b29a8384f29",
+                "sdkVersion" => "32",
+                "osVersion" => "12",
+                "devId" => "REL",
+                "buildTags" => "release-keys",
+                "buildType" => "user",
+                "buildUser" => "abc",
+                "buildTime" => "1779448087000",
+                "screenSize" => "1440x2560",
+                "vendor" => "unknown",
+                "romCapacity" => "512",
+                "romRemain" => "478",
+                "ramCapacity" => "127991",
+                "ramRemain" => "126327",
+                "appMemory" => "512",
+                "sdCapacity" => 127991,
+                "sdRemain" => 119757,
+                "accelerometer" => "0.10001241x9.800007x0.1999938",
+                "gyroscope" => "0.0x0.0x0.0",
+                "magnetometer" => "15.625x-28.25x-32.625",
+                "isRoot" => 1,
+                "debugStatus" => 0,
+                "proxyStatus" => 1,
+                "emulatorStatus" => 0,
+                "isTablet" => 1,
+                "simState" => 5,
+                "ui_mode" => "UI_MODE_TYPE_NORMAL",
+                "hasKeyboard" => 1,
+                "isMockLocation" => 0,
+                "ringMode" => 2,
+                "isAirMode" => 0,
+                "batteryStatus" => 79,
+                "chargeStatus" => 1,
+                "deviceName" => "24031PN0DC",
+                "appInstallTimeDiff" => 1782396402635L,
+                "appUpdateTimeDiff" => 1782396402635L,
+                "networkType" => "WiFi",
+                "oaid" => "error_1008008",
+                "vaid" => "error_1008008",
+                "aaid" => "error_1008008",
+
+                // 应用信息
+                "packageName" => "com.mihoyo.hyperion",
+                "packageVersion" => "2.42.0", // SDK 版本，非 App 版本
+                _ => ""
+            };
         }
 
         private static string? GetOrCreateDeviceFingerprint()
@@ -710,113 +1084,82 @@ namespace FufuLauncher.Views
         }
 
 public static async Task<string> FetchApiJsonAsync(string apiUrl)
-{
-    await _fetchApiSemaphore.WaitAsync();
-    try
     {
-        string capturedJson = null;
-        var tcs = new TaskCompletionSource<bool>();
-
-        var window = new BBSWindow(false);
-        window.AppWindow.Hide();
-
-        await window.BBSWebView.EnsureCoreWebView2Async();
-        window.UpdateWebViewSettings();
-        await window.LoadActiveAccountCookiesAsync();
-        System.Diagnostics.Debug.WriteLine($"[BBSWindow] FetchApiJsonAsync 请求API: {apiUrl}");
-        System.Diagnostics.Debug.WriteLine($"[BBSWindow] 当前账号Cookie数量: {window.cookieDic.Count}");
-
-        window.BBSWebView.CoreWebView2.AddWebResourceRequestedFilter("*://*.mihoyo.com/*", CoreWebView2WebResourceContext.All);
-        window.BBSWebView.CoreWebView2.WebResourceRequested += window.CoreWebView2_WebResourceRequested;
-
-        window.BBSWebView.CoreWebView2.NewWindowRequested += (sender, args) =>
-        {
-            args.Handled = true;
-        };
-
-        window.BBSWebView.CoreWebView2.NavigationCompleted += async (sender, args) =>
-        {
-            try
-            {
-                if (args.IsSuccess && string.IsNullOrEmpty(capturedJson))
-                {
-                    await Task.Delay(800);
-                    
-                    if (!string.IsNullOrEmpty(capturedJson)) return;
-
-                    string json = await window.BBSWebView.CoreWebView2.ExecuteScriptAsync("document.body.innerText;");
-                    if (!string.IsNullOrEmpty(json) && json != "null")
-                    {
-                        var parsedStr = JsonSerializer.Deserialize<string>(json);
-                        if (parsedStr != null && parsedStr.StartsWith("{")) 
-                        {
-                            capturedJson = parsedStr;
-                            tcs.TrySetResult(true);
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                // ignored
-            }
-        };
-
-        window.BBSWebView.CoreWebView2.WebResourceResponseReceived += async (sender, args) =>
-        {
-            if (args.Request.Uri.Contains("api-takumi-record.mihoyo.com") && args.Request.Uri.Contains("dailyNote"))
-            {
-                System.Diagnostics.Debug.WriteLine($"[BBSWindow] 捕获到API响应: {args.Request.Uri}");
-                try
-                {
-                    var content = await args.Response.GetContentAsync();
-                    if (content != null && content.Size > 0)
-                    {
-                        using var reader = new DataReader(content);
-                        reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
-                        await reader.LoadAsync((uint)content.Size);
-                        capturedJson = reader.ReadString((uint)content.Size);
-                        System.Diagnostics.Debug.WriteLine($"[BBSWindow] JSON内容: {capturedJson?.Substring(0, Math.Min(200, capturedJson.Length))}");
-                        tcs.TrySetResult(true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"[BBSWindow] 读取响应失败: {ex.Message}");
-                }
-            }
-        };
-
-        await window.LoadPageAsync(apiUrl);
-
-        var timeoutTask = Task.Delay(15000);
-        var completedTask = await Task.WhenAny(tcs.Task, timeoutTask);
-
+        await _fetchApiSemaphore.WaitAsync();
         try
         {
-            window.BBSWebView.CoreWebView2.Stop();
-            window.BBSWebView.Close();
-        }
-        catch { }
-        window.Close();
+            var accountManager = App.GetService<AccountManager>();
+            var activeId = accountManager.ActiveAccountId;
+            if (activeId == null) throw new InvalidOperationException("无活跃账号");
 
-        if (completedTask == timeoutTask)
+            var cookies = await accountManager.LoadCookiesAsync(activeId);
+            if (cookies == null || cookies.Count == 0) throw new InvalidOperationException("无法加载Cookie");
+
+            // DEVICEFP 缺失时通过 getFp API 获取（使用当前持久化 device_id 注册）
+            if (!cookies.ContainsKey("DEVICEFP"))
+            {
+                var tempWindow = new BBSWindow(false);
+                tempWindow.AppWindow?.Hide();
+                await tempWindow.BBSWebView.EnsureCoreWebView2Async();
+                await tempWindow.LoadActiveAccountCookiesAsync();
+                if (tempWindow.cookieDic.TryGetValue("DEVICEFP", out var newFp) && !string.IsNullOrEmpty(newFp))
+                {
+                    cookies["DEVICEFP"] = newFp;
+                    cookies["DEVICEFP_SEED_ID"] = tempWindow.cookieDic.GetValueOrDefault("DEVICEFP_SEED_ID") ?? "";
+                    cookies["DEVICEFP_SEED_TIME"] = tempWindow.cookieDic.GetValueOrDefault("DEVICEFP_SEED_TIME") ?? "";
+                    await accountManager.SaveCookiesAsync(activeId, cookies);
+                }
+                tempWindow.Close();
+            }
+
+            var gameDeviceId = GenGameRecordDeviceId();
+            var fp = cookies.GetValueOrDefault("DEVICEFP") ?? "";
+
+            var ts = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+            var ts4 = ts[^Math.Min(4, ts.Length)..];
+            var deviceFp = string.IsNullOrEmpty(fp) ? "" : Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(fp + ts4))).ToLower()[..13];
+
+            var t = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString();
+            var r = new Random().Next(100000, 200000).ToString();
+            var dsInput = $"salt={CNX4}&t={t}&r={r}&b=&q=";
+            var c = Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(dsInput))).ToLower();
+            var ds = $"{t},{r},{c}";
+
+            var cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
+
+            using var http = new HttpClient(new HttpClientHandler { UseCookies = false }) { Timeout = TimeSpan.FromSeconds(15) };
+            var req = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+            req.Headers.TryAddWithoutValidation("Cookie", cookieStr);
+            req.Headers.TryAddWithoutValidation("DS", ds);
+            req.Headers.TryAddWithoutValidation("x-rpc-device_id", gameDeviceId);
+            req.Headers.TryAddWithoutValidation("x-rpc-client_type", "5");
+            req.Headers.TryAddWithoutValidation("x-rpc-app_version", CNVersion);
+            req.Headers.TryAddWithoutValidation("x-rpc-device_fp", deviceFp);
+            req.Headers.TryAddWithoutValidation("x-rpc-device_name", "Xiaomi%2024031PN0DC");
+            req.Headers.TryAddWithoutValidation("x-rpc-sys_version", "12");
+            req.Headers.TryAddWithoutValidation("x-rpc-page", "v6.6.1-gr-cn_#/ys");
+            req.Headers.TryAddWithoutValidation("x-rpc-tool_verison", "v6.6.1-gr-cn");
+            req.Headers.TryAddWithoutValidation("Referer", "https://webstatic.mihoyo.com/");
+            req.Headers.TryAddWithoutValidation("Origin", "https://webstatic.mihoyo.com");
+            req.Headers.TryAddWithoutValidation("X-Requested-With", "com.mihoyo.hyperion");
+            req.Headers.TryAddWithoutValidation("User-Agent",
+                "Mozilla/5.0 (Linux; Android 12; 24031PN0DC Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.154 Safari/537.36 miHoYoBBS/2.109.0");
+            req.Headers.TryAddWithoutValidation("Accept", "application/json, text/plain, */*");
+            req.Headers.TryAddWithoutValidation("Accept-Language", "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7");
+
+            System.Diagnostics.Debug.WriteLine($"[BBSWindow] HttpClient[HttpClient] device_id={gameDeviceId} fp_cookie={fp} fp_hdr={deviceFp} ds={ds}");
+
+            var resp = await http.SendAsync(req);
+            var json = await resp.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"[BBSWindow] HttpClient 响应: HTTP={(int)resp.StatusCode} | {json[..Math.Min(500, json.Length)]}");
+
+            return json;
+        }
+        finally
         {
-            throw new TimeoutException("获取API数据超时");
+            _fetchApiSemaphore.Release();
         }
-
-        if (string.IsNullOrEmpty(capturedJson))
-        {
-            throw new InvalidOperationException("未能获取API响应数据");
-        }
-
-        return capturedJson;
     }
-    finally
-    {
-        _fetchApiSemaphore.Release();
-    }
-}
 
         private class JsParam
         {
