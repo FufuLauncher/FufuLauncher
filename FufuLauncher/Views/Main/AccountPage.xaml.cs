@@ -43,6 +43,7 @@ public sealed partial class AccountPage : Page
         ControlPanelViewModel = App.GetService<ControlPanelModel>();
         DataContext = ViewModel;
         InitializeComponent();
+        RegisterRippleHandlers();
         Debug.WriteLine("AccountPage initialized");
     }
     #endregion
@@ -96,6 +97,68 @@ public sealed partial class AccountPage : Page
                 ResetAnimationState();
             }
         }
+    }
+
+    private void RegisterRippleHandlers()
+    {
+        var rippleButtons = new[] { BtnSwitchAccount, BtnRefreshInfo, BtnGenshinData, BtnGachaAnalysis, BtnSecurityCenter, BtnLockAccount, BtnCopyCookie, BtnDeleteAccount, BtnLogout };
+        foreach (var btn in rippleButtons)
+        {
+            btn.AddHandler(UIElement.PointerPressedEvent, new PointerEventHandler(Btn_RipplePressed), true);
+        }
+    }
+
+    private void Btn_RipplePressed(object sender, PointerRoutedEventArgs e)
+    {
+        if (sender is not Button button) return;
+        var host = (button.Content as Grid)?.Children[0] as Canvas;
+        if (host == null || host.ActualWidth <= 0) return;
+
+        var pt = e.GetCurrentPoint(host).Position;
+        double w = host.ActualWidth, h = host.ActualHeight;
+        double x = pt.X, y = pt.Y;
+
+        double targetR = new[]
+        {
+            Math.Sqrt(x * x + y * y),
+            Math.Sqrt((w - x) * (w - x) + y * y),
+            Math.Sqrt(x * x + (h - y) * (h - y)),
+            Math.Sqrt((w - x) * (w - x) + (h - y) * (h - y))
+        }.Max();
+
+        var ripple = new Ellipse
+        {
+            Width = targetR * 2,
+            Height = targetR * 2,
+            Fill = new SolidColorBrush(Color.FromArgb(26, 255, 255, 255)),
+            IsHitTestVisible = false,
+            RenderTransformOrigin = new Point(0.5, 0.5),
+            RenderTransform = new ScaleTransform { ScaleX = 0, ScaleY = 0 }
+        };
+        Canvas.SetLeft(ripple, x - targetR);
+        Canvas.SetTop(ripple, y - targetR);
+        host.Children.Add(ripple);
+
+        var sb = new Storyboard();
+        var ease = new CubicEase { EasingMode = EasingMode.EaseOut };
+
+        var scaleX = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromMilliseconds(400), EasingFunction = ease };
+        var scaleY = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromMilliseconds(400), EasingFunction = ease };
+        var fade = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromMilliseconds(500) };
+
+        Storyboard.SetTarget(scaleX, ripple);
+        Storyboard.SetTargetProperty(scaleX, "(UIElement.RenderTransform).(ScaleTransform.ScaleX)");
+        Storyboard.SetTarget(scaleY, ripple);
+        Storyboard.SetTargetProperty(scaleY, "(UIElement.RenderTransform).(ScaleTransform.ScaleY)");
+        Storyboard.SetTarget(fade, ripple);
+        Storyboard.SetTargetProperty(fade, "Opacity");
+
+        var task = ripple;
+        sb.Completed += (_, _) => { try { host.Children.Remove(task); } catch { } };
+        sb.Children.Add(scaleX);
+        sb.Children.Add(scaleY);
+        sb.Children.Add(fade);
+        sb.Begin();
     }
 
     private void ResetAnimationState()
@@ -210,61 +273,6 @@ public sealed partial class AccountPage : Page
             XamlRoot = this.XamlRoot
         };
         return await dialog.ShowAsync();
-    }
-    #endregion
-
-    #region 动画
-    private void Btn_RipplePressed(object sender, PointerRoutedEventArgs e)
-    {
-        if (sender is not Grid grid) return;
-        var host = grid.Children[0] as Canvas;
-        if (host == null || host.ActualWidth <= 0) return;
-
-        var pt = e.GetCurrentPoint(host).Position;
-        double w = host.ActualWidth, h = host.ActualHeight;
-        double x = pt.X, y = pt.Y;
-
-        double targetR = new[]
-        {
-            Math.Sqrt(x * x + y * y),
-            Math.Sqrt((w - x) * (w - x) + y * y),
-            Math.Sqrt(x * x + (h - y) * (h - y)),
-            Math.Sqrt((w - x) * (w - x) + (h - y) * (h - y))
-        }.Max();
-
-        var ripple = new Ellipse
-        {
-            Width = targetR * 2,
-            Height = targetR * 2,
-            Fill = new SolidColorBrush(Color.FromArgb(26, 255, 255, 255)),
-            IsHitTestVisible = false,
-            RenderTransformOrigin = new Point(0.5, 0.5),
-            RenderTransform = new ScaleTransform { ScaleX = 0, ScaleY = 0 }
-        };
-        Canvas.SetLeft(ripple, x - targetR);
-        Canvas.SetTop(ripple, y - targetR);
-        host.Children.Add(ripple);
-
-        var sb = new Storyboard();
-        var ease = new CubicEase { EasingMode = EasingMode.EaseOut };
-
-        var scaleX = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromMilliseconds(400), EasingFunction = ease };
-        var scaleY = new DoubleAnimation { From = 0, To = 1, Duration = TimeSpan.FromMilliseconds(400), EasingFunction = ease };
-        var fade = new DoubleAnimation { From = 1, To = 0, Duration = TimeSpan.FromMilliseconds(500) };
-
-        Storyboard.SetTarget(scaleX, ripple);
-        Storyboard.SetTargetProperty(scaleX, "(UIElement.RenderTransform).(ScaleTransform.ScaleX)");
-        Storyboard.SetTarget(scaleY, ripple);
-        Storyboard.SetTargetProperty(scaleY, "(UIElement.RenderTransform).(ScaleTransform.ScaleY)");
-        Storyboard.SetTarget(fade, ripple);
-        Storyboard.SetTargetProperty(fade, "Opacity");
-
-        var task = ripple;
-        sb.Completed += (_, _) => { try { host.Children.Remove(task); } catch { } };
-        sb.Children.Add(scaleX);
-        sb.Children.Add(scaleY);
-        sb.Children.Add(fade);
-        sb.Begin();
     }
     #endregion
 

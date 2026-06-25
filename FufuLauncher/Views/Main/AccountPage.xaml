@@ -461,7 +461,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE748;" />
@@ -584,7 +584,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE72C;" />
@@ -603,7 +603,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xEB9E;" />
@@ -622,7 +622,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE9D2;" />
@@ -641,7 +641,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE72E;" />
@@ -660,7 +660,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon
@@ -682,7 +682,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon FontSize="16" Glyph="&#xE8C8;" />
@@ -701,7 +701,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon
@@ -723,7 +723,7 @@
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <Grid PointerPressed="Btn_RipplePressed" Background="Transparent">
+                                    <Grid Background="Transparent">
                                         <Canvas IsHitTestVisible="False"/>
                                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="8">
                                         <FontIcon
