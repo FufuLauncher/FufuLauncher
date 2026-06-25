@@ -998,9 +998,8 @@
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
-                                                FontWeight="SemiBold">
-                                                <Run Text="{x:Bind ViewModel.UserFullInfo.data.user_info.achieve, Mode=OneWay, Converter={StaticResource DictionarySafeConverter}, ConverterParameter=like_num}" />
-                                            </TextBlock>
+                                                FontWeight="SemiBold"
+                                                Text="{x:Bind ViewModel.CommunityLikeCount, Mode=OneWay}" />
                                         </StackPanel>
 
                                         <StackPanel
@@ -1015,9 +1014,8 @@
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
-                                                FontWeight="SemiBold">
-                                                <Run Text="{x:Bind ViewModel.UserFullInfo.data.user_info.achieve, Mode=OneWay, Converter={StaticResource DictionarySafeConverter}, ConverterParameter=post_num}" />
-                                            </TextBlock>
+                                                FontWeight="SemiBold"
+                                                Text="{x:Bind ViewModel.CommunityPostCount, Mode=OneWay}" />
                                         </StackPanel>
 
                                         <StackPanel
@@ -1032,9 +1030,8 @@
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
-                                                FontWeight="SemiBold">
-                                                <Run Text="{x:Bind ViewModel.UserFullInfo.data.user_info.achieve, Mode=OneWay, Converter={StaticResource DictionarySafeConverter}, ConverterParameter=replypost_num}" />
-                                            </TextBlock>
+                                                FontWeight="SemiBold"
+                                                Text="{x:Bind ViewModel.CommunityReplyCount, Mode=OneWay}" />
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>

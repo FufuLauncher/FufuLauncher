@@ -51,6 +51,11 @@ public partial class AccountViewModel : ObservableRecipient
     [ObservableProperty] private ObservableCollection<AccountInfo> _savedAccounts = new();
     public bool HasSavedAccounts => SavedAccounts.Count > 0;
 
+    public bool HasCommunityData => UserFullInfo?.data?.user_info?.achieve != null;
+    public string CommunityLikeCount => UserFullInfo?.data?.user_info?.achieve?["like_num"]?.ToString() ?? "-";
+    public string CommunityPostCount => UserFullInfo?.data?.user_info?.achieve?["post_num"]?.ToString() ?? "-";
+    public string CommunityReplyCount => UserFullInfo?.data?.user_info?.achieve?["replypost_num"]?.ToString() ?? "-";
+
     #endregion
 
     #region 命令
@@ -181,12 +186,18 @@ public partial class AccountViewModel : ObservableRecipient
                 return;
             }
 
-            
+
+            RunOnUIThread(() =>
+            {
+                GameRolesInfo = null;
+                UserFullInfo = null;
+            });
+
             string cookieString = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
 
             Debug.WriteLine($"[LoadUserInfo] 正在调用远程API... (账户: {entry.Id})");
 
-          
+
             var rolesTask = _userInfoService.GetUserGameRolesAsync(cookieString);
             var userInfoTask = _userInfoService.GetUserFullInfoAsync(cookieString);
             await Task.WhenAll(rolesTask, userInfoTask);
@@ -194,14 +205,9 @@ public partial class AccountViewModel : ObservableRecipient
             var newRolesInfo = await rolesTask;
             var newUserFullInfo = await userInfoTask;
 
-           
-            if (JsonSerializer.Serialize(GameRolesInfo) != JsonSerializer.Serialize(newRolesInfo))
-                GameRolesInfo = newRolesInfo;
-            if (JsonSerializer.Serialize(UserFullInfo) != JsonSerializer.Serialize(newUserFullInfo))
-                UserFullInfo = newUserFullInfo;
 
-            Debug.WriteLine($"[LoadUserInfo] API返回状态: RolesRet={GameRolesInfo?.retcode}, UserRet={UserFullInfo?.retcode}");
-
+            GameRolesInfo = newRolesInfo;
+            UserFullInfo = newUserFullInfo;
 
             var userInfo = UserFullInfo?.data?.user_info;
             var hasBoundRole = GameRolesInfo?.data?.list?.Count > 0;
@@ -242,13 +248,26 @@ public partial class AccountViewModel : ObservableRecipient
         catch (Exception ex)
         {
             Debug.WriteLine($"[LoadUserInfo] 异常: {ex.Message}");
-            RunOnUIThread(() => StatusMessage = $"加载失败: {ex.Message}");
+            RunOnUIThread(() =>
+            {
+                StatusMessage = $"加载失败: {ex.Message}";
+                GameRolesInfo = null;
+                UserFullInfo = null;
+            });
         }
         finally
         {
             IsLoadingUserInfo = false;
             Debug.WriteLine("========== [LoadUserInfo] 加载结束 ==========");
         }
+    }
+
+    partial void OnUserFullInfoChanged(UserFullInfoResponse? value)
+    {
+        OnPropertyChanged(nameof(HasCommunityData));
+        OnPropertyChanged(nameof(CommunityLikeCount));
+        OnPropertyChanged(nameof(CommunityPostCount));
+        OnPropertyChanged(nameof(CommunityReplyCount));
     }
 
     #endregion
@@ -547,6 +566,8 @@ public partial class AccountViewModel : ObservableRecipient
     {
         if (targetAccount == null) return;
 
+        // 同步清空，确保 UI 在切换瞬间就不显示旧数据
+        RunOnUIThread(() => { GameRolesInfo = null; UserFullInfo = null; });
         await _accountManager.SwitchAccountAsync(targetAccount.AccountId);
         await LoadActiveAccountAsync(targetAccount.AccountId);
         RefreshSavedAccountsList();
