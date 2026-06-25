@@ -14,7 +14,7 @@
                              Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -23,7 +23,7 @@
                              Storyboard.TargetProperty="Opacity"
                              From="1" To="0" Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn"/>
+                    <CubicEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -32,10 +32,10 @@
     <Grid x:Name="RootLayoutGrid" Padding="24" Opacity="0">
         <Grid.Transitions>
             <TransitionCollection>
-                <EntranceThemeTransition FromVerticalOffset="40"/>
+                <EntranceThemeTransition FromVerticalOffset="40" />
             </TransitionCollection>
         </Grid.Transitions>
-        
+
         <Border x:Name="WebCardContainer"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
@@ -43,7 +43,7 @@
                 Background="{ThemeResource LayerFillColorDefaultBrush}"
                 Translation="0,0,32"
                 SizeChanged="WebCardContainer_SizeChanged">
-            
+
             <Border.Shadow>
                 <ThemeShadow />
             </Border.Shadow>
@@ -52,16 +52,16 @@
                 <WebView2 x:Name="CalculatorWebView"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
-                          DefaultBackgroundColor="Transparent"/>
+                          DefaultBackgroundColor="Transparent" />
 
-                <ProgressBar x:Name="LoadingBar" 
-                             IsIndeterminate="True" 
-                             VerticalAlignment="Top" 
+                <ProgressBar x:Name="LoadingBar"
+                             IsIndeterminate="True"
+                             VerticalAlignment="Top"
                              Height="3"
                              Background="Transparent"
                              Foreground="{ThemeResource SystemAccentColor}"
                              Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
-                             Canvas.ZIndex="100"/>
+                             Canvas.ZIndex="100" />
             </Grid>
         </Border>
     </Grid>

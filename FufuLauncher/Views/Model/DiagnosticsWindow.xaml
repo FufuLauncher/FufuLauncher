@@ -10,104 +10,119 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="48" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="硬件与系统环境" 
+            <TextBlock Text="硬件与系统环境"
                        Grid.Column="1"
-                       VerticalAlignment="Center" 
+                       VerticalAlignment="Center"
                        Margin="24,0,0,0"
-                       FontSize="14" 
-                       FontWeight="SemiBold"/>
+                       FontSize="14"
+                       FontWeight="SemiBold" />
         </Grid>
 
         <Grid Grid.Row="1" Padding="24,0,24,24">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10"
                         Visibility="{x:Bind ToVisible(ViewModel.IsLoading), Mode=OneWay}">
-                <ProgressRing IsActive="True"/>
-                <TextBlock Text="正在收集系统信息..." Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                <ProgressRing IsActive="True" />
+                <TextBlock Text="正在收集系统信息..." Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
             </StackPanel>
 
             <ScrollViewer Visibility="{x:Bind ToCollapsed(ViewModel.IsLoading), Mode=OneWay}">
                 <StackPanel Spacing="20">
-                    <TextBlock Text="显示与图形" Style="{StaticResource SubtitleTextBlockStyle}"/>
-      
+                    <TextBlock Text="显示与图形" Style="{StaticResource SubtitleTextBlockStyle}" />
+
                     <Grid ColumnSpacing="12" RowSpacing="12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="12">
+                        <Border Grid.Column="0" Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                CornerRadius="8" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="分辨率" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.ScreenResolution, Mode=OneWay}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="分辨率" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           FontSize="12" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.ScreenResolution, Mode=OneWay}" FontSize="16"
+                                           FontWeight="SemiBold" />
                             </StackPanel>
                         </Border>
-                        <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="12">
+                        <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                CornerRadius="8" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="刷新率" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.CurrentRefreshRate, Mode=OneWay}" FontSize="16" FontWeight="SemiBold"/>
+                                <TextBlock Text="刷新率" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           FontSize="12" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.CurrentRefreshRate, Mode=OneWay}" FontSize="16"
+                                           FontWeight="SemiBold" />
                             </StackPanel>
                         </Border>
                     </Grid>
 
-                    <TextBlock Text="硬件" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0"/>
+                    <TextBlock Text="硬件" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" />
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="16">
                         <StackPanel Spacing="16">
                             <Grid>
-                                <TextBlock Text="OS" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.OsVersion, Mode=OneWay}" HorizontalAlignment="Right" MaxWidth="300" TextWrapping="Wrap"/>
+                                <TextBlock Text="OS" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.OsVersion, Mode=OneWay}"
+                                           HorizontalAlignment="Right" MaxWidth="300" TextWrapping="Wrap" />
                             </Grid>
-                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}"/>
+                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="CPU" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.CpuName, Mode=OneWay}" HorizontalAlignment="Right" MaxWidth="300" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="CPU" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.CpuName, Mode=OneWay}"
+                                           HorizontalAlignment="Right" MaxWidth="300" TextTrimming="CharacterEllipsis" />
                             </Grid>
-                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}"/>
+                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="GPU" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.GpuName, Mode=OneWay}" HorizontalAlignment="Right" MaxWidth="300" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="GPU" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.GpuName, Mode=OneWay}"
+                                           HorizontalAlignment="Right" MaxWidth="300" TextTrimming="CharacterEllipsis" />
                             </Grid>
-                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}"/>
+                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="RAM" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.TotalMemory, Mode=OneWay}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="RAM" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.TotalMemory, Mode=OneWay}"
+                                           HorizontalAlignment="Right" />
                             </Grid>
                         </StackPanel>
                     </Border>
-                    
-                    <TextBlock Text="安全与网络" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0"/>
+
+                    <TextBlock Text="安全与网络" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" />
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="16">
                         <StackPanel Spacing="16">
                             <Grid>
-                                <TextBlock Text="Windows 安全中心" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.SecurityCenterStatus, Mode=OneWay}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="Windows 安全中心" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.SecurityCenterStatus, Mode=OneWay}"
+                                           HorizontalAlignment="Right" />
                             </Grid>
-                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}"/>
+                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="系统盘剩余空间" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.DiskSpace, Mode=OneWay}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="系统盘剩余空间" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.DiskSpace, Mode=OneWay}"
+                                           HorizontalAlignment="Right" />
                             </Grid>
-                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}"/>
+                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="网络连接状态" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.NetworkStatus, Mode=OneWay}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="网络连接状态" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.NetworkStatus, Mode=OneWay}"
+                                           HorizontalAlignment="Right" />
                             </Grid>
-                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}"/>
+                            <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="网络所属环境" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                <TextBlock Text="{x:Bind ViewModel.Info.NetworkRegion, Mode=OneWay}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="网络所属环境" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{x:Bind ViewModel.Info.NetworkRegion, Mode=OneWay}"
+                                           HorizontalAlignment="Right" />
                             </Grid>
                         </StackPanel>
                     </Border>
-                  
-                    <InfoBar IsOpen="True" IsClosable="False" Severity="Informational" Title="建议" Message="{x:Bind ViewModel.Info.Suggestion, Mode=OneWay}"/>
+
+                    <InfoBar IsOpen="True" IsClosable="False" Severity="Informational" Title="建议"
+                             Message="{x:Bind ViewModel.Info.Suggestion, Mode=OneWay}" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>

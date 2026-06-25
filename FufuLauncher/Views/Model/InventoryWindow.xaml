@@ -17,92 +17,100 @@
             <ResourceDictionary>
                 <ResourceDictionary.ThemeDictionaries>
                     <ResourceDictionary x:Key="Light">
-                        <SolidColorBrush x:Key="AppBackground" Color="#FFF3F3F3"/>
-                        <SolidColorBrush x:Key="SidebarBackground" Color="#FFF9F9F9"/>
-                        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFFFF"/>
-                        <SolidColorBrush x:Key="CardBorder" Color="#FFE5E5E5"/>
-                        <SolidColorBrush x:Key="HighlightColor" Color="#FF000000"/>
-                        <SolidColorBrush x:Key="SubTextColor" Color="#FF666666"/>
-                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#0D000000"/>
-                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#1A000000"/>
-                        <SolidColorBrush x:Key="SeparatorBrush" Color="#1A000000"/>
+                        <SolidColorBrush x:Key="AppBackground" Color="#FFF3F3F3" />
+                        <SolidColorBrush x:Key="SidebarBackground" Color="#FFF9F9F9" />
+                        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFFFF" />
+                        <SolidColorBrush x:Key="CardBorder" Color="#FFE5E5E5" />
+                        <SolidColorBrush x:Key="HighlightColor" Color="#FF000000" />
+                        <SolidColorBrush x:Key="SubTextColor" Color="#FF666666" />
+                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#0D000000" />
+                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#1A000000" />
+                        <SolidColorBrush x:Key="SeparatorBrush" Color="#1A000000" />
                     </ResourceDictionary>
 
                     <ResourceDictionary x:Key="Default">
-                        <SolidColorBrush x:Key="AppBackground" Color="#FF1E1E1E"/>
-                        <SolidColorBrush x:Key="SidebarBackground" Color="#FF252526"/>
-                        <SolidColorBrush x:Key="CardBackground" Color="#FF2D2D30"/>
-                        <SolidColorBrush x:Key="CardBorder" Color="#FF3E3E42"/>
-                        <SolidColorBrush x:Key="HighlightColor" Color="#FFECECEC"/>
-                        <SolidColorBrush x:Key="SubTextColor" Color="#FFAAAAAA"/>
-                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#33000000"/>
-                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#33FFFFFF"/>
-                        <SolidColorBrush x:Key="SeparatorBrush" Color="#33FFFFFF"/>
+                        <SolidColorBrush x:Key="AppBackground" Color="#FF1E1E1E" />
+                        <SolidColorBrush x:Key="SidebarBackground" Color="#FF252526" />
+                        <SolidColorBrush x:Key="CardBackground" Color="#FF2D2D30" />
+                        <SolidColorBrush x:Key="CardBorder" Color="#FF3E3E42" />
+                        <SolidColorBrush x:Key="HighlightColor" Color="#FFECECEC" />
+                        <SolidColorBrush x:Key="SubTextColor" Color="#FFAAAAAA" />
+                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#33000000" />
+                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#33FFFFFF" />
+                        <SolidColorBrush x:Key="SeparatorBrush" Color="#33FFFFFF" />
                     </ResourceDictionary>
                 </ResourceDictionary.ThemeDictionaries>
 
                 <helpers:BoolToVisibilityConverter x:Key="BoolToVis" />
 
                 <Style x:Key="ToolbarButtonStyle" TargetType="Button">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Foreground" Value="{ThemeResource HighlightColor}"/>
-                    <Setter Property="Padding" Value="8,5"/>
-                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Foreground" Value="{ThemeResource HighlightColor}" />
+                    <Setter Property="Padding" Value="8,5" />
+                    <Setter Property="CornerRadius" Value="4" />
                 </Style>
 
                 <Style x:Key="InventoryCardStyle" TargetType="Border">
-                    <Setter Property="Width" Value="128"/>
-                    <Setter Property="Height" Value="154"/>
-                    <Setter Property="Background" Value="{ThemeResource CardBackground}"/>
-                    <Setter Property="BorderBrush" Value="{ThemeResource CardBorder}"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="Width" Value="128" />
+                    <Setter Property="Height" Value="154" />
+                    <Setter Property="Background" Value="{ThemeResource CardBackground}" />
+                    <Setter Property="BorderBrush" Value="{ThemeResource CardBorder}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </ResourceDictionary>
         </Grid.Resources>
 
         <Grid Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="48"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="48" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Grid x:Name="AppTitleBar" Background="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                     <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                    <TextBlock Text="库存档案" FontSize="12" Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center"/>
+                    <TextBlock Text="库存档案" FontSize="12" Foreground="{ThemeResource SubTextColor}"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="1" Padding="16,0" BorderBrush="{ThemeResource CardBorder}" BorderThickness="0,0,0,1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Spacing="12">
-                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4" VerticalAlignment="Center">
+                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4"
+                            VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE8EC;" FontFamily="Segoe Fluent Icons" FontSize="13" Foreground="{ThemeResource SubTextColor}"/>
-                            <TextBlock Text="背包物品与目标规划" FontSize="12" Foreground="{ThemeResource HighlightColor}" FontWeight="SemiBold"/>
+                            <FontIcon Glyph="&#xE8EC;" FontFamily="Segoe Fluent Icons" FontSize="13"
+                                      Foreground="{ThemeResource SubTextColor}" />
+                            <TextBlock Text="背包物品与目标规划" FontSize="12" Foreground="{ThemeResource HighlightColor}"
+                                       FontWeight="SemiBold" />
                         </StackPanel>
                     </Border>
 
-                    <Rectangle Width="1" Height="16" Fill="{ThemeResource SeparatorBrush}" VerticalAlignment="Center"/>
+                    <Rectangle Width="1" Height="16" Fill="{ThemeResource SeparatorBrush}" VerticalAlignment="Center" />
 
-                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center" ToolTipService.ToolTip="当前库存同步状态">
-                        <FontIcon Glyph="&#xE946;" FontFamily="Segoe Fluent Icons" FontSize="13" Foreground="{ThemeResource SubTextColor}"/>
-                        <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center"
+                                ToolTipService.ToolTip="当前库存同步状态">
+                        <FontIcon Glyph="&#xE946;" FontFamily="Segoe Fluent Icons" FontSize="13"
+                                  Foreground="{ThemeResource SubTextColor}" />
+                        <TextBlock x:Name="StatusText" VerticalAlignment="Center" FontSize="12"
+                                   Foreground="{ThemeResource SubTextColor}" />
                     </StackPanel>
                 </StackPanel>
 
-                <Button x:Name="RefreshButton" Grid.Column="1" VerticalAlignment="Center" Click="OnRefreshClick" Style="{StaticResource ToolbarButtonStyle}" ToolTipService.ToolTip="立即刷新背包数据">
+                <Button x:Name="RefreshButton" Grid.Column="1" VerticalAlignment="Center" Click="OnRefreshClick"
+                        Style="{StaticResource ToolbarButtonStyle}" ToolTipService.ToolTip="立即刷新背包数据">
                     <StackPanel Orientation="Horizontal" Spacing="6">
-                        <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14"/>
-                        <TextBlock Text="更新数据" FontSize="12"/>
+                        <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" />
+                        <TextBlock Text="更新数据" FontSize="12" />
                     </StackPanel>
                 </Button>
             </Grid>
@@ -111,32 +119,37 @@
                 <PivotItem Header="我的背包">
                     <Grid Padding="20,12,20,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8" Padding="14,10" Margin="0,0,0,12">
+                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}"
+                                BorderThickness="1" CornerRadius="8" Padding="14,10" Margin="0,0,0,12">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Spacing="2">
-                                    <TextBlock Text="库存总览" Foreground="{ThemeResource HighlightColor}" FontSize="14" FontWeight="SemiBold"/>
-                                    <TextBlock Text="查看当前背包数量，并通过角标快速识别已达成目标的物品。" Foreground="{ThemeResource SubTextColor}" FontSize="12"/>
+                                    <TextBlock Text="库存总览" Foreground="{ThemeResource HighlightColor}" FontSize="14"
+                                               FontWeight="SemiBold" />
+                                    <TextBlock Text="查看当前背包数量，并通过角标快速识别已达成目标的物品。"
+                                               Foreground="{ThemeResource SubTextColor}" FontSize="12" />
                                 </StackPanel>
-                                <Border Grid.Column="1" Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="4" Padding="8,4" VerticalAlignment="Center">
-                                    <TextBlock Text="达成目标后显示勾选" Foreground="{ThemeResource SubTextColor}" FontSize="11"/>
+                                <Border Grid.Column="1" Background="{ThemeResource ImageBackgroundBrush}"
+                                        CornerRadius="4" Padding="8,4" VerticalAlignment="Center">
+                                    <TextBlock Text="达成目标后显示勾选" Foreground="{ThemeResource SubTextColor}" FontSize="11" />
                                 </Border>
                             </Grid>
                         </Border>
 
                         <ScrollViewer Grid.Row="1">
-                            <GridView x:Name="InventoryGridView" SelectionMode="None" IsItemClickEnabled="False" HorizontalAlignment="Center" Padding="0,0,0,12">
+                            <GridView x:Name="InventoryGridView" SelectionMode="None" IsItemClickEnabled="False"
+                                      HorizontalAlignment="Center" Padding="0,0,0,12">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
-                                        <Setter Property="Margin" Value="4"/>
-                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="Margin" Value="4" />
+                                        <Setter Property="Padding" Value="0" />
                                     </Style>
                                 </GridView.ItemContainerStyle>
                                 <GridView.ItemTemplate>
@@ -145,33 +158,54 @@
                                             <Border Style="{StaticResource InventoryCardStyle}">
                                                 <Grid Padding="10">
                                                     <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="*"/>
-                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="*" />
+                                                        <RowDefinition Height="Auto" />
                                                     </Grid.RowDefinitions>
 
                                                     <Grid Grid.Row="0">
-                                                        <Border HorizontalAlignment="Left" Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="4" Padding="5,1" Visibility="{Binding IsTargetMet, Converter={StaticResource BoolToVis}}">
+                                                        <Border HorizontalAlignment="Left"
+                                                                Background="{ThemeResource ImageBackgroundBrush}"
+                                                                CornerRadius="4" Padding="5,1"
+                                                                Visibility="{Binding IsTargetMet, Converter={StaticResource BoolToVis}}">
                                                             <StackPanel Orientation="Horizontal" Spacing="3">
-                                                                <FontIcon Glyph="&#xE73E;" FontFamily="Segoe Fluent Icons" FontSize="11" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
-                                                                <TextBlock Text="完成" Foreground="{ThemeResource SystemFillColorSuccessBrush}" FontSize="10" FontWeight="SemiBold"/>
+                                                                <FontIcon Glyph="&#xE73E;"
+                                                                          FontFamily="Segoe Fluent Icons" FontSize="11"
+                                                                          Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                                                                <TextBlock Text="完成"
+                                                                           Foreground="{ThemeResource SystemFillColorSuccessBrush}"
+                                                                           FontSize="10" FontWeight="SemiBold" />
                                                             </StackPanel>
                                                         </Border>
 
-                                                        <Border HorizontalAlignment="Right" Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="6,1">
-                                                            <TextBlock Text="{Binding ProgressText}" Foreground="{ThemeResource HighlightColor}" FontSize="11" FontWeight="SemiBold"/>
+                                                        <Border HorizontalAlignment="Right"
+                                                                Background="{ThemeResource BadgeBackgroundBrush}"
+                                                                CornerRadius="4" Padding="6,1">
+                                                            <TextBlock Text="{Binding ProgressText}"
+                                                                       Foreground="{ThemeResource HighlightColor}"
+                                                                       FontSize="11" FontWeight="SemiBold" />
                                                         </Border>
                                                     </Grid>
 
-                                                    <Border Grid.Row="1" Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="8" Width="76" Height="76" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                        <Image Width="64" Height="64" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <Border Grid.Row="1"
+                                                            Background="{ThemeResource ImageBackgroundBrush}"
+                                                            CornerRadius="8" Width="76" Height="76"
+                                                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Image Width="64" Height="64" HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center">
                                                             <Image.Source>
-                                                                <BitmapImage UriSource="{Binding IconUrl}" DecodePixelWidth="128" CreateOptions="IgnoreImageCache" />
+                                                                <BitmapImage UriSource="{Binding IconUrl}"
+                                                                             DecodePixelWidth="128"
+                                                                             CreateOptions="IgnoreImageCache" />
                                                             </Image.Source>
                                                         </Image>
                                                     </Border>
 
-                                                    <TextBlock Grid.Row="2" Text="{Binding Name}" TextAlignment="Center" FontSize="12" FontWeight="SemiBold" Margin="2,8,2,0" TextTrimming="CharacterEllipsis" Foreground="{ThemeResource HighlightColor}"/>
+                                                    <TextBlock Grid.Row="2" Text="{Binding Name}"
+                                                               TextAlignment="Center" FontSize="12"
+                                                               FontWeight="SemiBold" Margin="2,8,2,0"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               Foreground="{ThemeResource HighlightColor}" />
                                                 </Grid>
                                             </Border>
                                         </Grid>
@@ -179,7 +213,7 @@
                                 </GridView.ItemTemplate>
                                 <GridView.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Center"/>
+                                        <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Center" />
                                     </ItemsPanelTemplate>
                                 </GridView.ItemsPanel>
                             </GridView>
@@ -190,49 +224,64 @@
                 <PivotItem Header="目标设置">
                     <Grid Padding="20,12,20,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8" Padding="14,10" Margin="0,0,0,12">
+                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}"
+                                BorderThickness="1" CornerRadius="8" Padding="14,10" Margin="0,0,0,12">
                             <StackPanel Spacing="2">
-                                <TextBlock Text="目标规划" Foreground="{ThemeResource HighlightColor}" FontSize="14" FontWeight="SemiBold"/>
-                                <TextBlock Text="为常用材料设置目标数量，背包页会自动展示达成状态。" Foreground="{ThemeResource SubTextColor}" FontSize="12"/>
+                                <TextBlock Text="目标规划" Foreground="{ThemeResource HighlightColor}" FontSize="14"
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="为常用材料设置目标数量，背包页会自动展示达成状态。" Foreground="{ThemeResource SubTextColor}"
+                                           FontSize="12" />
                             </StackPanel>
                         </Border>
 
-                        <ListView x:Name="TargetListView" Grid.Row="1" SelectionMode="None" Background="Transparent" Padding="0,0,0,12">
+                        <ListView x:Name="TargetListView" Grid.Row="1" SelectionMode="None" Background="Transparent"
+                                  Padding="0,0,0,12">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Setter Property="Margin" Value="0,0,0,8"/>
-                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="Margin" Value="0,0,0,8" />
+                                    <Setter Property="Padding" Value="0" />
                                 </Style>
                             </ListView.ItemContainerStyle>
                             <ListView.Header>
-                                <Grid Background="{ThemeResource SidebarBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="6" Padding="12,8" Margin="0,0,0,8">
+                                <Grid Background="{ThemeResource SidebarBackground}"
+                                      BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="6"
+                                      Padding="12,8" Margin="0,0,0,8">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="52"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="170"/>
+                                        <ColumnDefinition Width="52" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="170" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="1" Text="物品名称" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
-                                    <TextBlock Grid.Column="2" Text="目标数量" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
+                                    <TextBlock Grid.Column="1" Text="物品名称" FontSize="12"
+                                               Foreground="{ThemeResource SubTextColor}" />
+                                    <TextBlock Grid.Column="2" Text="目标数量" FontSize="12"
+                                               Foreground="{ThemeResource SubTextColor}" />
                                 </Grid>
                             </ListView.Header>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="6" Padding="12,8">
+                                    <Grid Background="{ThemeResource CardBackground}"
+                                          BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="6"
+                                          Padding="12,8">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="52"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="170"/>
+                                            <ColumnDefinition Width="52" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="170" />
                                         </Grid.ColumnDefinitions>
-                                        <Border Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="5" Width="36" Height="36" HorizontalAlignment="Left">
-                                            <Image Source="{Binding IconUrl}" Width="30" Height="30"/>
+                                        <Border Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="5"
+                                                Width="36" Height="36" HorizontalAlignment="Left">
+                                            <Image Source="{Binding IconUrl}" Width="30" Height="30" />
                                         </Border>
-                                        <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,12,0" Foreground="{ThemeResource HighlightColor}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
-                                        <NumberBox Grid.Column="2" Value="{Binding TargetCount, Mode=TwoWay}" SpinButtonPlacementMode="Compact" SmallChange="1" ValueChanged="OnTargetValueChanged" HorizontalAlignment="Stretch"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"
+                                                   Margin="0,0,12,0" Foreground="{ThemeResource HighlightColor}"
+                                                   FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                        <NumberBox Grid.Column="2" Value="{Binding TargetCount, Mode=TwoWay}"
+                                                   SpinButtonPlacementMode="Compact" SmallChange="1"
+                                                   ValueChanged="OnTargetValueChanged" HorizontalAlignment="Stretch" />
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -241,10 +290,11 @@
                 </PivotItem>
             </Pivot>
 
-            <Border Grid.Row="3" Padding="24,10" Background="{ThemeResource SidebarBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="0,1,0,0">
+            <Border Grid.Row="3" Padding="24,10" Background="{ThemeResource SidebarBackground}"
+                    BorderBrush="{ThemeResource CardBorder}" BorderThickness="0,1,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="6">
-                    <FontIcon Glyph="&#xE946;" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
-                    <TextBlock Text="达成目标后，物品卡片会自动显示完成标记。" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
+                    <FontIcon Glyph="&#xE946;" FontSize="12" Foreground="{ThemeResource SubTextColor}" />
+                    <TextBlock Text="达成目标后，物品卡片会自动显示完成标记。" FontSize="12" Foreground="{ThemeResource SubTextColor}" />
                 </StackPanel>
             </Border>
         </Grid>

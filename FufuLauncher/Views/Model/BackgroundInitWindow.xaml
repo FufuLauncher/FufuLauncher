@@ -5,19 +5,19 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Grid Background="Transparent">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="16">
             <ProgressRing IsActive="True" Width="36" Height="36" HorizontalAlignment="Center" />
-            
+
             <StackPanel Spacing="6" HorizontalAlignment="Center">
-                <TextBlock Text="正在初始化背景资源" 
-                           FontSize="16" 
-                           FontWeight="SemiBold" 
+                <TextBlock Text="正在初始化背景资源"
+                           FontSize="16"
+                           FontWeight="SemiBold"
                            HorizontalAlignment="Center" />
-                <TextBlock Text="缓存可能需要一些时间，请耐心等待..." 
-                           FontSize="12" 
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" 
+                <TextBlock Text="缓存可能需要一些时间，请耐心等待..."
+                           FontSize="12"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                            HorizontalAlignment="Center" />
             </StackPanel>
         </StackPanel>

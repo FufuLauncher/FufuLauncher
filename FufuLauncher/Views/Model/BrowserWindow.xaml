@@ -9,78 +9,85 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="40" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center" Margin="16,0,0,0" Spacing="12">
-                <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16"/>
-                <TextBlock Text="浏览器" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center" Margin="16,0,0,0"
+                        Spacing="12">
+                <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" />
+                <TextBlock Text="浏览器" Style="{StaticResource CaptionTextBlockStyle}" VerticalAlignment="Center" />
             </StackPanel>
 
-            <TextBox x:Name="UrlTextBox" Grid.Column="1" Margin="16,4" 
-                     PlaceholderText="输入网址..." 
+            <TextBox x:Name="UrlTextBox" Grid.Column="1" Margin="16,4"
+                     PlaceholderText="输入网址..."
                      KeyDown="UrlTextBox_KeyDown"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center" />
 
             <StackPanel Orientation="Horizontal" Grid.Column="2" Margin="0,0,140,0" Spacing="8">
-                <Button Click="Refresh_Click" Padding="8,4" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="刷新">
-                    <FontIcon Glyph="&#xE72C;" FontSize="14"/>
+                <Button Click="Refresh_Click" Padding="8,4" Background="Transparent" BorderThickness="0"
+                        ToolTipService.ToolTip="刷新">
+                    <FontIcon Glyph="&#xE72C;" FontSize="14" />
                 </Button>
 
-                <Button Click="Settings_Click" Padding="8,4" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="设置">
-                    <FontIcon Glyph="&#xE713;" FontSize="14"/>
+                <Button Click="Settings_Click" Padding="8,4" Background="Transparent" BorderThickness="0"
+                        ToolTipService.ToolTip="设置">
+                    <FontIcon Glyph="&#xE713;" FontSize="14" />
                 </Button>
 
                 <ToggleButton x:Name="PinButton" Click="PinButton_Click" ToolTipService.ToolTip="窗口置顶">
-                    <FontIcon Glyph="&#xE840;" FontSize="14"/>
+                    <FontIcon Glyph="&#xE840;" FontSize="14" />
                 </ToggleButton>
             </StackPanel>
         </Grid>
 
-        <WebView2 x:Name="WebView" Grid.Row="1"/>
+        <WebView2 x:Name="WebView" Grid.Row="1" />
 
-        <ProgressBar x:Name="LoadingBar" Grid.Row="1" VerticalAlignment="Top" 
-                     IsIndeterminate="True" Visibility="Collapsed" 
-                     Foreground="{ThemeResource SystemControlForegroundAccentBrush}"/>
+        <ProgressBar x:Name="LoadingBar" Grid.Row="1" VerticalAlignment="Top"
+                     IsIndeterminate="True" Visibility="Collapsed"
+                     Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
 
-        <ContentDialog x:Name="SettingsDialog" Title="浏览器设置" 
+        <ContentDialog x:Name="SettingsDialog" Title="浏览器设置"
                        PrimaryButtonText="保存" CloseButtonText="取消"
                        DefaultButton="Primary" Grid.RowSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel Spacing="16" Width="350" Margin="0,0,12,0">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="默认主页 (URL)" FontWeight="SemiBold"/>
-                        <TextBox x:Name="SettingUrlBox" PlaceholderText="https://..."/>
+                        <TextBlock Text="默认主页 (URL)" FontWeight="SemiBold" />
+                        <TextBox x:Name="SettingUrlBox" PlaceholderText="https://..." />
                     </StackPanel>
 
                     <StackPanel Spacing="8">
-                        <TextBlock Text="默认缩放比例" FontWeight="SemiBold"/>
+                        <TextBlock Text="默认缩放比例" FontWeight="SemiBold" />
                         <StackPanel Orientation="Horizontal" Spacing="10">
-                            <Slider x:Name="SettingZoomSlider" Minimum="0.5" Maximum="3.0" StepFrequency="0.1" Width="250" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding ElementName=SettingZoomSlider, Path=Value}" VerticalAlignment="Center"/>
+                            <Slider x:Name="SettingZoomSlider" Minimum="0.5" Maximum="3.0" StepFrequency="0.1"
+                                    Width="250" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding ElementName=SettingZoomSlider, Path=Value}"
+                                       VerticalAlignment="Center" />
                         </StackPanel>
                     </StackPanel>
 
                     <StackPanel Spacing="8">
-                        <TextBlock Text="视频控制快捷键 (JS KeyCode)" FontWeight="SemiBold"/>
+                        <TextBlock Text="视频控制快捷键 (JS KeyCode)" FontWeight="SemiBold" />
                         <Grid ColumnDefinitions="*,10,*">
-                            <TextBox x:Name="SettingRewindBox" Header="后退键" PlaceholderText="ArrowLeft" Grid.Column="0"/>
-                            <TextBox x:Name="SettingForwardBox" Header="快进键" PlaceholderText="ArrowRight" Grid.Column="2"/>
+                            <TextBox x:Name="SettingRewindBox" Header="后退键" PlaceholderText="ArrowLeft" Grid.Column="0" />
+                            <TextBox x:Name="SettingForwardBox" Header="快进键" PlaceholderText="ArrowRight"
+                                     Grid.Column="2" />
                         </Grid>
-                        <TextBlock Text="提示: 常用键为 ArrowLeft, ArrowRight, KeyA, KeyD" FontSize="12" Foreground="Gray" TextWrapping="Wrap"/>
+                        <TextBlock Text="提示: 常用键为 ArrowLeft, ArrowRight, KeyA, KeyD" FontSize="12" Foreground="Gray"
+                                   TextWrapping="Wrap" />
                     </StackPanel>
 
                     <StackPanel Spacing="8">
-                        <TextBlock Text="性能设置" FontWeight="SemiBold"/>
-                        <ToggleSwitch x:Name="SettingHighPriorityToggle" Header="提升进程优先级 (防止游戏内卡顿)"/>
+                        <TextBlock Text="性能设置" FontWeight="SemiBold" />
+                        <ToggleSwitch x:Name="SettingHighPriorityToggle" Header="提升进程优先级 (防止游戏内卡顿)" />
                     </StackPanel>
 
                 </StackPanel>

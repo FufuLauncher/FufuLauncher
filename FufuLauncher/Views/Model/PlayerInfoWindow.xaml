@@ -14,34 +14,34 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                <TextBlock Text="角色信息查询" 
-                           Style="{StaticResource CaptionTextBlockStyle}" 
-                           FontFamily="{StaticResource AppGlobalFont}"/>
+                <TextBlock Text="角色信息查询"
+                           Style="{StaticResource CaptionTextBlockStyle}"
+                           FontFamily="{StaticResource AppGlobalFont}" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1" Margin="20,10,20,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
-            <TextBox x:Name="UidTextBox" 
-                     PlaceholderText="输入UID查询..." 
+
+            <TextBox x:Name="UidTextBox"
+                     PlaceholderText="输入UID查询..."
                      FontFamily="{StaticResource AppGlobalFont}"
-                     VerticalAlignment="Center"/>
-            
-            <Button Grid.Column="1" Content="查询" Click="OnQueryClick" Margin="10,0,0,0"/>
-            
+                     VerticalAlignment="Center" />
+
+            <Button Grid.Column="1" Content="查询" Click="OnQueryClick" Margin="10,0,0,0" />
+
             <Button Grid.Column="2" Click="OnRefreshMyDataClick" Margin="10,0,0,0"
                     ToolTipService.ToolTip="更新并保存我的数据">
                 <StackPanel Orientation="Horizontal" Spacing="5">
@@ -53,22 +53,22 @@
 
         <Grid Grid.Row="2" Margin="0,0,0,20">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="280"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="280" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0" Margin="20,0,10,0" 
-                    Background="{ThemeResource LayerFillColorDefaultBrush}" 
-                    CornerRadius="8" BorderThickness="1" 
+            <Border Grid.Column="0" Margin="20,0,10,0"
+                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                    CornerRadius="8" BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-            
-                    <TextBlock Text="角色列表" Margin="15,10" FontWeight="SemiBold" Opacity="0.7"/>
-                    
+
+                    <TextBlock Text="角色列表" Margin="15,10" FontWeight="SemiBold" Opacity="0.7" />
+
                     <ListView x:Name="RoleListView" Grid.Row="1"
                               SelectionMode="Single"
                               SelectionChanged="OnRoleSelectionChanged">
@@ -76,54 +76,57 @@
                             <DataTemplate x:DataType="models:RoleData">
                                 <Grid Margin="0,5">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Border CornerRadius="30" Width="48" Height="48" Margin="0,0,12,0">
                                         <Border.Background>
-                                            <ImageBrush ImageSource="{x:Bind SafeIconImage, Mode=OneWay}"/>
+                                            <ImageBrush ImageSource="{x:Bind SafeIconImage, Mode=OneWay}" />
                                         </Border.Background>
                                     </Border>
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                        <TextBlock Text="{x:Bind Name}" FontWeight="Bold"/>
-                                        <TextBlock Text="{x:Bind LevelDisplay}" 
-                                                   FontSize="12" Opacity="0.6"/>
+                                        <TextBlock Text="{x:Bind Name}" FontWeight="Bold" />
+                                        <TextBlock Text="{x:Bind LevelDisplay}"
+                                                   FontSize="12" Opacity="0.6" />
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    
-                    <ProgressRing x:Name="LoadingRing" IsActive="False" Grid.RowSpan="2" Width="40" Height="40"/>
+
+                    <ProgressRing x:Name="LoadingRing" IsActive="False" Grid.RowSpan="2" Width="40" Height="40" />
                 </Grid>
             </Border>
 
             <Border Grid.Column="1" Margin="10,0,20,0"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                    CornerRadius="8" BorderThickness="1" 
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    CornerRadius="8" BorderThickness="1"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                
+
                 <Grid>
-                    <TextBlock x:Name="EmptyTipText" Text="请选择左侧角色查看详情" 
-                               HorizontalAlignment="Center" VerticalAlignment="Center" 
-                               Opacity="0.5" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                    <TextBlock x:Name="EmptyTipText" Text="请选择左侧角色查看详情"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Opacity="0.5" Style="{StaticResource SubtitleTextBlockStyle}" />
 
                     <Grid x:Name="DetailContainer" Visibility="Collapsed">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Grid Height="120" Background="{x:Bind CurrentRoleGradient, Mode=OneWay}">
                             <StackPanel Margin="24,0" VerticalAlignment="Center">
-                                <TextBlock Text="{x:Bind CurrentRole.Name, Mode=OneWay}" Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind CurrentRole.Name, Mode=OneWay}"
+                                           Style="{StaticResource TitleTextBlockStyle}" />
                                 <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,5,0,0">
                                     <Border Background="#33000000" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}"
+                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
                                     </Border>
                                     <Border Background="#33000000" CornerRadius="4" Padding="6,2">
-                                        <TextBlock Text="{x:Bind CurrentRole.ArtifactsSetSummary, Mode=OneWay}" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="{x:Bind CurrentRole.ArtifactsSetSummary, Mode=OneWay}"
+                                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
@@ -134,26 +137,69 @@
                                 <ScrollViewer>
                                     <Grid Margin="10,10,20,20" ColumnSpacing="20" RowSpacing="20">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        
+
                                         <StackPanel Spacing="10">
-                                            <TextBlock Text="核心数值" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                            <Grid><TextBlock Text="生命值上限"/><TextBlock Text="{x:Bind CurrentRole.Hp, Mode=OneWay}" HorizontalAlignment="Right"/></Grid>
-                                            <Grid><TextBlock Text="攻击力"/><TextBlock Text="{x:Bind CurrentRole.Attack, Mode=OneWay}" HorizontalAlignment="Right"/></Grid>
-                                            <Grid><TextBlock Text="防御力"/><TextBlock Text="{x:Bind CurrentRole.Defend, Mode=OneWay}" HorizontalAlignment="Right"/></Grid>
-                                            <Grid><TextBlock Text="元素精通"/><TextBlock Text="{x:Bind CurrentRole.ElementMastery, Mode=OneWay}" HorizontalAlignment="Right"/></Grid>
+                                            <TextBlock Text="核心数值" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                            <Grid>
+                                                <TextBlock Text="生命值上限" />
+                                                <TextBlock Text="{x:Bind CurrentRole.Hp, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="攻击力" />
+                                                <TextBlock Text="{x:Bind CurrentRole.Attack, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="防御力" />
+                                                <TextBlock Text="{x:Bind CurrentRole.Defend, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="元素精通" />
+                                                <TextBlock Text="{x:Bind CurrentRole.ElementMastery, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" />
+                                            </Grid>
                                         </StackPanel>
 
                                         <StackPanel Grid.Column="1" Spacing="10">
-                                            <TextBlock Text="进阶属性" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                                            <Grid><TextBlock Text="暴击率"/><TextBlock Text="{x:Bind CurrentRole.CritRate, Mode=OneWay}" HorizontalAlignment="Right" Foreground="#FF6B6B"/></Grid>
-                                            <Grid><TextBlock Text="暴击伤害"/><TextBlock Text="{x:Bind CurrentRole.CritDmg, Mode=OneWay}" HorizontalAlignment="Right" Foreground="#FF6B6B"/></Grid>
-                                            <Grid><TextBlock Text="元素充能效率"/><TextBlock Text="{x:Bind CurrentRole.Recharge, Mode=OneWay}" HorizontalAlignment="Right"/></Grid>
-                                            <Grid><TextBlock Text="火元素伤害"/><TextBlock Text="{x:Bind CurrentRole.FireDmg, Mode=OneWay}" HorizontalAlignment="Right" Visibility="{x:Bind IsNotZero(CurrentRole.FireDmg), Mode=OneWay}"/></Grid>
-                                            <Grid><TextBlock Text="水元素伤害"/><TextBlock Text="{x:Bind CurrentRole.WaterDmg, Mode=OneWay}" HorizontalAlignment="Right" Visibility="{x:Bind IsNotZero(CurrentRole.WaterDmg), Mode=OneWay}"/></Grid>
-                                            <Grid><TextBlock Text="物理伤害"/><TextBlock Text="{x:Bind CurrentRole.PhysicalDmg, Mode=OneWay}" HorizontalAlignment="Right" Visibility="{x:Bind IsNotZero(CurrentRole.PhysicalDmg), Mode=OneWay}"/></Grid>
+                                            <TextBlock Text="进阶属性" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                            <Grid>
+                                                <TextBlock Text="暴击率" />
+                                                <TextBlock Text="{x:Bind CurrentRole.CritRate, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" Foreground="#FF6B6B" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="暴击伤害" />
+                                                <TextBlock Text="{x:Bind CurrentRole.CritDmg, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" Foreground="#FF6B6B" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="元素充能效率" />
+                                                <TextBlock Text="{x:Bind CurrentRole.Recharge, Mode=OneWay}"
+                                                           HorizontalAlignment="Right" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="火元素伤害" />
+                                                <TextBlock Text="{x:Bind CurrentRole.FireDmg, Mode=OneWay}"
+                                                           HorizontalAlignment="Right"
+                                                           Visibility="{x:Bind IsNotZero(CurrentRole.FireDmg), Mode=OneWay}" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="水元素伤害" />
+                                                <TextBlock Text="{x:Bind CurrentRole.WaterDmg, Mode=OneWay}"
+                                                           HorizontalAlignment="Right"
+                                                           Visibility="{x:Bind IsNotZero(CurrentRole.WaterDmg), Mode=OneWay}" />
+                                            </Grid>
+                                            <Grid>
+                                                <TextBlock Text="物理伤害" />
+                                                <TextBlock Text="{x:Bind CurrentRole.PhysicalDmg, Mode=OneWay}"
+                                                           HorizontalAlignment="Right"
+                                                           Visibility="{x:Bind IsNotZero(CurrentRole.PhysicalDmg), Mode=OneWay}" />
+                                            </Grid>
                                         </StackPanel>
                                     </Grid>
                                 </ScrollViewer>
@@ -164,37 +210,45 @@
                                           SelectionMode="None">
                                     <GridView.ItemTemplate>
                                         <DataTemplate x:DataType="models:ArtifactDetail">
-                                            <Grid Width="220" Margin="0,0,10,10" Background="{ThemeResource LayerFillColorDefaultBrush}" 
+                                            <Grid Width="220" Margin="0,0,10,10"
+                                                  Background="{ThemeResource LayerFillColorDefaultBrush}"
                                                   CornerRadius="4" Padding="12">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="Auto"/>
-                                                    <RowDefinition Height="*"/>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="*" />
                                                 </Grid.RowDefinitions>
-                                                
+
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBlock Text="{x:Bind Type}" Opacity="0.5" FontSize="12" VerticalAlignment="Center"/>
-                                                    
-                                                    <HyperlinkButton Grid.Column="1" Content="查看获取" FontSize="12" 
+                                                    <TextBlock Text="{x:Bind Type}" Opacity="0.5" FontSize="12"
+                                                               VerticalAlignment="Center" />
+
+                                                    <HyperlinkButton Grid.Column="1" Content="查看获取" FontSize="12"
                                                                      Margin="0,-5,-5,-5" Padding="5,0"
-                                                                     Click="OnArtifactSearchClick"/>
+                                                                     Click="OnArtifactSearchClick" />
                                                 </Grid>
-                                                
-                                                <TextBlock Grid.Row="1" Text="{x:Bind Name}" FontWeight="Bold" Margin="0,2,0,8" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
-                                                
+
+                                                <TextBlock Grid.Row="1" Text="{x:Bind Name}" FontWeight="Bold"
+                                                           Margin="0,2,0,8" TextWrapping="NoWrap"
+                                                           TextTrimming="CharacterEllipsis" />
+
                                                 <StackPanel Grid.Row="2" Spacing="4">
-                                                    <Border Background="{ThemeResource AccentFillColorDefaultBrush}" CornerRadius="2" Padding="4,2" HorizontalAlignment="Left">
-                                                        <TextBlock Text="{x:Bind MainStatDisplay}" Foreground="White" FontSize="12" FontWeight="Bold"/>
+                                                    <Border Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                                            CornerRadius="2" Padding="4,2" HorizontalAlignment="Left">
+                                                        <TextBlock Text="{x:Bind MainStatDisplay}" Foreground="White"
+                                                                   FontSize="12" FontWeight="Bold" />
                                                     </Border>
-                                                    <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4"/>
-                                                    <TextBlock Text="{x:Bind SubStat1}" FontSize="12"/>
-                                                    <TextBlock Text="{x:Bind SubStat2}" FontSize="12"/>
-                                                    <TextBlock Text="{x:Bind SubStat3}" FontSize="12"/>
-                                                    <TextBlock Text="{x:Bind SubStat4}" FontSize="12"/>
+                                                    <Rectangle Height="1"
+                                                               Fill="{ThemeResource DividerStrokeColorDefaultBrush}"
+                                                               Margin="0,4" />
+                                                    <TextBlock Text="{x:Bind SubStat1}" FontSize="12" />
+                                                    <TextBlock Text="{x:Bind SubStat2}" FontSize="12" />
+                                                    <TextBlock Text="{x:Bind SubStat3}" FontSize="12" />
+                                                    <TextBlock Text="{x:Bind SubStat4}" FontSize="12" />
                                                 </StackPanel>
                                             </Grid>
                                         </DataTemplate>
@@ -204,42 +258,54 @@
 
                             <PivotItem Header="武器与技能">
                                 <StackPanel Margin="10" Spacing="20">
-                                    <Grid Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="16" CornerRadius="8">
+                                    <Grid Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="16"
+                                          CornerRadius="8">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Grid.Column="1">
-                                            <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                                            <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}"
+                                                       Style="{StaticResource SubtitleTextBlockStyle}" />
                                             <TextBlock>
-                                                <Run Text="等级 "/>
-                                                <Run Text="{x:Bind CurrentRole.WeaponLevel, Mode=OneWay}"/>
-                                                <Run Text=" | "/>
-                                                <Run Text="{x:Bind CurrentRole.WeaponRefinement, Mode=OneWay}"/>
+                                                <Run Text="等级 " />
+                                                <Run Text="{x:Bind CurrentRole.WeaponLevel, Mode=OneWay}" />
+                                                <Run Text=" | " />
+                                                <Run Text="{x:Bind CurrentRole.WeaponRefinement, Mode=OneWay}" />
                                             </TextBlock>
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel Spacing="10">
-                                        <TextBlock Text="技能等级" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                                        <TextBlock Text="技能等级" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                         <Grid>
-                                            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
-                                            <Border Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="10" CornerRadius="4" Margin="0,0,5,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition /><ColumnDefinition /><ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                                    Padding="10" CornerRadius="4" Margin="0,0,5,0">
                                                 <StackPanel>
-                                                    <TextBlock Text="普通攻击" Opacity="0.6" FontSize="12"/>
-                                                    <TextBlock Text="{x:Bind CurrentRole.SkillA, Mode=OneWay}" FontSize="20" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="普通攻击" Opacity="0.6" FontSize="12" />
+                                                    <TextBlock Text="{x:Bind CurrentRole.SkillA, Mode=OneWay}"
+                                                               FontSize="20" HorizontalAlignment="Center" />
                                                 </StackPanel>
                                             </Border>
-                                            <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="10" CornerRadius="4" Margin="5,0,5,0">
+                                            <Border Grid.Column="1"
+                                                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                                    Padding="10" CornerRadius="4" Margin="5,0,5,0">
                                                 <StackPanel>
-                                                    <TextBlock Text="元素战技" Opacity="0.6" FontSize="12"/>
-                                                    <TextBlock Text="{x:Bind CurrentRole.SkillE, Mode=OneWay}" FontSize="20" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="元素战技" Opacity="0.6" FontSize="12" />
+                                                    <TextBlock Text="{x:Bind CurrentRole.SkillE, Mode=OneWay}"
+                                                               FontSize="20" HorizontalAlignment="Center" />
                                                 </StackPanel>
                                             </Border>
-                                            <Border Grid.Column="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="10" CornerRadius="4" Margin="5,0,0,0">
+                                            <Border Grid.Column="2"
+                                                    Background="{ThemeResource LayerFillColorDefaultBrush}"
+                                                    Padding="10" CornerRadius="4" Margin="5,0,0,0">
                                                 <StackPanel>
-                                                    <TextBlock Text="元素爆发" Opacity="0.6" FontSize="12"/>
-                                                    <TextBlock Text="{x:Bind CurrentRole.SkillQ, Mode=OneWay}" FontSize="20" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="元素爆发" Opacity="0.6" FontSize="12" />
+                                                    <TextBlock Text="{x:Bind CurrentRole.SkillQ, Mode=OneWay}"
+                                                               FontSize="20" HorizontalAlignment="Center" />
                                                 </StackPanel>
                                             </Border>
                                         </Grid>
@@ -253,8 +319,8 @@
                                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                 <StackPanel Orientation="Horizontal" Spacing="8">
-                                    <SymbolIcon Symbol="People"/>
-                                    <TextBlock Text="查看配队推荐"/>
+                                    <SymbolIcon Symbol="People" />
+                                    <TextBlock Text="查看配队推荐" />
                                 </StackPanel>
                             </Button>
                         </Grid>

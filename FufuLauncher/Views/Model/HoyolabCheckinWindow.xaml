@@ -8,9 +8,9 @@
     Title="Hoyolab Auto Checkin">
 
     <Grid>
-        <WebView2 x:Name="CheckinWebView" 
+        <WebView2 x:Name="CheckinWebView"
                   Source="https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&amp;hyl_auth_required=true&amp;hyl_presentation_style=fullscreen&amp;utm_source=hoyolab&amp;utm_medium=tools&amp;lang=zh-cn&amp;bbs_theme=dark&amp;bbs_theme_device=1"
-                  HorizontalAlignment="Stretch" 
-                  VerticalAlignment="Stretch"/>
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch" />
     </Grid>
 </Window>

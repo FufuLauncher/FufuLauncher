@@ -8,21 +8,22 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-            <StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="8" Margin="12,0,0,0" VerticalAlignment="Center">
-                <TextBlock Text="游戏公告" FontSize="12" VerticalAlignment="Center" Opacity="0.9"/>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Spacing="8" Margin="12,0,0,0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="游戏公告" FontSize="12" VerticalAlignment="Center" Opacity="0.9" />
             </StackPanel>
         </Grid>
 
-        <Frame x:Name="ContentFrame" Grid.Row="1"/>
+        <Frame x:Name="ContentFrame" Grid.Row="1" />
     </Grid>
 </Window>
