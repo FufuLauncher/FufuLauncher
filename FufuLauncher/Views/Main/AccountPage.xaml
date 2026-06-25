@@ -135,19 +135,6 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-        <Storyboard x:Name="AvatarEntranceStoryboard">
-            <DoubleAnimation
-                BeginTime="0:0:0.25"
-                Storyboard.TargetName="AvatarPicture"
-                Storyboard.TargetProperty="Opacity"
-                From="0"
-                To="1"
-                Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
         <Storyboard x:Name="ExitStoryboard">
             <DoubleAnimation
                 Storyboard.TargetName="RootLayoutGrid"
@@ -191,6 +178,19 @@
             <DoubleAnimation Storyboard.TargetName="BoundRolesCard" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.45" BeginTime="0:0:0.38"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
             <DoubleAnimation Storyboard.TargetName="GameTimeCardTransform" Storyboard.TargetProperty="X" From="50" To="0" Duration="0:0:0.5" BeginTime="0:0:0.46"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
             <DoubleAnimation Storyboard.TargetName="GameTimeCard" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.45" BeginTime="0:0:0.46"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Name="ProfileCardEntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="ProfileCardTransform" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.5">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation Storyboard.TargetName="ProfileCard" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.45">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
         </Storyboard>
         </ResourceDictionary>
     </Page.Resources>
@@ -306,7 +306,10 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                            <Border x:Name="ProfileCard" Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="ProfileCardTransform" Y="0"/>
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
@@ -320,9 +323,7 @@
                                     <Ellipse
                                         x:Name="AvatarPicture"
                                         Width="84"
-                                        Height="84"
-                                        Loaded="AvatarPicture_Loaded"
-                                        Opacity="0">
+                                        Height="84">
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}" Stretch="UniformToFill" />
                                         </Ellipse.Fill>

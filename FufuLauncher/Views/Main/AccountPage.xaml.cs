@@ -20,6 +20,7 @@ public sealed partial class AccountPage : Page
     #region 字段
     private bool _isDeleting;
     private bool _hasAnimatedButtons;
+    private bool _hasAnimatedProfileCard;
     private bool _hasAnimatedRightCards;
     private bool _wasLoggedInOnLoad;
     #endregion
@@ -80,21 +81,32 @@ public sealed partial class AccountPage : Page
         {
             if (ViewModel.IsLoggedIn && !_wasLoggedInOnLoad)
             {
-
                 _wasLoggedInOnLoad = true;
                 DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, async () =>
                 {
+
+                    ProfileCard.Opacity = 0;
+                    ProfileCardTransform.Y = -30;
+
+                    // 强制刷新头像
+                    var avatarUrl = ViewModel.CurrentAccount?.AvatarUrl;
+                    if (!string.IsNullOrEmpty(avatarUrl) && AvatarPicture.Fill is ImageBrush brush)
+                    {
+                        brush.ImageSource = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(avatarUrl));
+                    }
+
                     await Task.Delay(150);
                     PlayEntranceAnimations();
                 });
             }
             else if (!ViewModel.IsLoggedIn)
             {
-  
                 _hasAnimatedButtons = false;
+                _hasAnimatedProfileCard = false;
                 _hasAnimatedRightCards = false;
                 _wasLoggedInOnLoad = false;
                 ResetAnimationState();
+                EntranceStoryboard.Begin();
             }
         }
     }
@@ -163,9 +175,10 @@ public sealed partial class AccountPage : Page
 
     private void ResetAnimationState()
     {
-  
+
         ButtonsStaggerStoryboard?.Stop();
         RightCardsEntranceStoryboard?.Stop();
+        ProfileCardEntranceStoryboard?.Stop();
 
         // 按钮复位
         BtnSwitchAccount.Opacity = 0; BtnSwitchAccountTransform.Y = -80;
@@ -178,6 +191,8 @@ public sealed partial class AccountPage : Page
         BtnDeleteAccount.Opacity = 0; BtnDeleteAccountTransform.Y = -80;
         BtnLogout.Opacity = 0; BtnLogoutTransform.Y = -80;
 
+        // 角色卡片复位
+        ProfileCard.Opacity = 0; ProfileCardTransform.Y = -30;
 
         CommunityFeedCard.Opacity = 0; CommunityFeedCardTransform.X = 50;
         BoundRolesCard.Opacity = 0; BoundRolesCardTransform.X = 50;
@@ -192,6 +207,12 @@ public sealed partial class AccountPage : Page
             ButtonsStaggerStoryboard?.Begin();
         }
 
+        if (!_hasAnimatedProfileCard)
+        {
+            _hasAnimatedProfileCard = true;
+            ProfileCardEntranceStoryboard?.Begin();
+        }
+
         if (!_hasAnimatedRightCards)
         {
             _hasAnimatedRightCards = true;
@@ -199,10 +220,6 @@ public sealed partial class AccountPage : Page
         }
     }
 
-    private void AvatarPicture_Loaded(object sender, RoutedEventArgs e)
-    {
-        AvatarEntranceStoryboard.Begin();
-    }
     #endregion
 
     #region 账户切换
