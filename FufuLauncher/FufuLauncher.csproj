@@ -59,6 +59,7 @@
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
         <PackageReference Include="System.Diagnostics.EventLog" Version="11.0.0-preview.4.26230.115" />
         <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
+        <PackageReference Include="System.Drawing.Common" Version="8.0.28" />
         <PackageReference Include="System.Management" Version="10.0.1" />
         <PackageReference Include="WinUIEx" Version="2.6.0" />
         <PackageReference Include="YamlDotNet" Version="16.3.0" />
