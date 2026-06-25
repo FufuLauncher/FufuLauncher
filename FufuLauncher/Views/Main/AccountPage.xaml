@@ -111,8 +111,10 @@
                                         <VisualState x:Name="Pressed" />
                                         <VisualState x:Name="Disabled">
                                             <Storyboard>
-                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{ThemeResource TextFillColorTertiaryBrush}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                             </Storyboard>
                                         </VisualState>
@@ -552,7 +554,8 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Spacing="24" Visibility="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel Spacing="24"
+                            Visibility="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
 
                     <Grid ColumnSpacing="24">
                         <Grid.ColumnDefinitions>
@@ -592,7 +595,9 @@
                                         Width="84"
                                         Height="84">
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}" Stretch="UniformToFill" />
+                                            <ImageBrush
+                                                ImageSource="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}"
+                                                Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>
 
@@ -655,9 +660,11 @@
                                             TextTrimming="CharacterEllipsis" />
 
                                         <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <TextBlock FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}">
+                                            <TextBlock FontSize="12"
+                                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}">
                                                 <Run Text="UID:" />
-                                                <Run FontWeight="SemiBold" Text="{x:Bind ViewModel.CurrentAccount.GameUidDisplay, Mode=OneWay}" />
+                                                <Run FontWeight="SemiBold"
+                                                     Text="{x:Bind ViewModel.CurrentAccount.GameUidDisplay, Mode=OneWay}" />
                                             </TextBlock>
 
                                             <Border
@@ -862,7 +869,8 @@
                                                 FontSize="16"
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                 Glyph="&#xE7BA;" />
-                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="冻结账号" />
+                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                       Text="冻结账号" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -915,7 +923,8 @@
                                                 FontSize="16"
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                 Glyph="&#xE74D;" />
-                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="删除账号" />
+                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                       Text="删除账号" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -943,7 +952,8 @@
                                                 FontSize="16"
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                 Glyph="&#xE7E8;" />
-                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="退出登录" />
+                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                       Text="退出登录" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -1100,7 +1110,8 @@
                                                             Margin="12,0,0,0"
                                                             VerticalAlignment="Center">
                                                             <TextBlock FontWeight="Medium" Text="{Binding nickname}" />
-                                                            <TextBlock FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                                            <TextBlock FontSize="12"
+                                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}">
                                                                 <Run Text="{Binding region_name}" />
                                                                 <Run Text=" | Lv." />
                                                                 <Run Text="{Binding level}" />
@@ -1249,7 +1260,8 @@
 
                                     <Grid Grid.Row="2">
                                         <ScrollViewer Padding="0,0,8,0" VerticalScrollBarVisibility="Auto">
-                                            <ItemsControl ItemsSource="{x:Bind ControlPanelViewModel.WeeklyStats.DailyRecords, Mode=OneWay}">
+                                            <ItemsControl
+                                                ItemsSource="{x:Bind ControlPanelViewModel.WeeklyStats.DailyRecords, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate x:DataType="models:GamePlayTimeRecord">
                                                         <Grid

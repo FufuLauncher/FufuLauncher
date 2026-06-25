@@ -24,12 +24,12 @@
 
         <Grid x:Name="AppTitleBar" Grid.Row="0" Height="32" Background="Transparent">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0,0,0" Spacing="8">
-                <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16"/>
+                <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" />
                 <TextBlock Text="截图图库" FontSize="12" VerticalAlignment="Center" />
             </StackPanel>
         </Grid>
 
-        <GridView x:Name="GalleryGridView" 
+        <GridView x:Name="GalleryGridView"
                   Grid.Row="1"
                   ItemsSource="{Binding Source={StaticResource GalleryViewSource}}"
                   Visibility="Collapsed"
@@ -47,7 +47,7 @@
                                     <ControlTemplate TargetType="GridViewHeaderItem">
                                         <ContentPresenter Content="{TemplateBinding Content}"
                                                           ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                          Margin="0,16,0,8"/>
+                                                          Margin="0,16,0,8" />
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -55,9 +55,9 @@
                     </GroupStyle.HeaderContainerStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate x:DataType="models:ScreenshotGroup">
-                            <TextBlock Text="{x:Bind DateKey}" 
-                                       FontSize="20" 
-                                       FontWeight="SemiBold"/>
+                            <TextBlock Text="{x:Bind DateKey}"
+                                       FontSize="20"
+                                       FontWeight="SemiBold" />
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>
@@ -82,7 +82,7 @@
 
         <Grid x:Name="EmptyStateGrid" Grid.Row="1" Visibility="Visible" Background="Transparent">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16">
-                <TextBlock Text="📁" FontSize="64" TextAlignment="Center"/>
+                <TextBlock Text="📁" FontSize="64" TextAlignment="Center" />
                 <TextBlock Text="暂无游戏截图" FontSize="24" FontWeight="SemiBold" TextAlignment="Center" />
                 <Button Content="打开截图文件夹" Click="OpenEmptyFolder_Click" HorizontalAlignment="Center" />
             </StackPanel>
@@ -102,7 +102,7 @@
 
                 <CommandBar Grid.Column="0" DefaultLabelPosition="Right">
                     <CommandBar.PrimaryCommands>
-                        <AppBarButton Icon="Back" Label="返回相册"  Click="CloseDetailView_Click"/>
+                        <AppBarButton Icon="Back" Label="返回相册" Click="CloseDetailView_Click" />
                     </CommandBar.PrimaryCommands>
                 </CommandBar>
 

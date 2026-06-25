@@ -12,14 +12,16 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
-                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
+                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF"
+                                  TintOpacity="0.6" />
                     <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
                     <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
                     <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
                     <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Default">
-                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000" TintOpacity="0.15" />
+                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000"
+                                  TintOpacity="0.15" />
                     <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
                     <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
                     <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
@@ -27,19 +29,19 @@
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
-            <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
-            <helpers:EnumToIntConverter x:Key="EnumToIntConverter"/>
-            <helpers:LanguageEnumToBooleanConverter x:Key="LanguageEnumToBooleanConverter"/>
-            <helpers:WindowModeEnumToBooleanConverter x:Key="WindowModeEnumToBooleanConverter"/>
-            <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <helpers:StringFormatConverter x:Key="StringFormatConverter"/>
-            
+            <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+            <helpers:EnumToIntConverter x:Key="EnumToIntConverter" />
+            <helpers:LanguageEnumToBooleanConverter x:Key="LanguageEnumToBooleanConverter" />
+            <helpers:WindowModeEnumToBooleanConverter x:Key="WindowModeEnumToBooleanConverter" />
+            <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <helpers:StringFormatConverter x:Key="StringFormatConverter" />
+
             <Storyboard x:Name="EntranceStoryboard">
                 <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
                                  Storyboard.TargetProperty="Opacity"
                                  From="0" To="1" Duration="0:0:0.6">
                     <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseOut"/>
+                        <CubicEase EasingMode="EaseOut" />
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
@@ -48,69 +50,69 @@
                                  Storyboard.TargetProperty="Opacity"
                                  From="1" To="0" Duration="0:0:0.3">
                     <DoubleAnimation.EasingFunction>
-                        <CubicEase EasingMode="EaseIn"/>
+                        <CubicEase EasingMode="EaseIn" />
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
-            
+
             <Style x:Key="PresetButtonStyle" TargetType="Button">
-                <Setter Property="Background" Value="{ThemeResource SafeCardBrush}"/>
-                <Setter Property="Foreground" Value="{ThemeResource SafeTextBrush}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Padding" Value="14,6"/>
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="Height" Value="32"/>
-                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="Background" Value="{ThemeResource SafeCardBrush}" />
+                <Setter Property="Foreground" Value="{ThemeResource SafeTextBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="14,6" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Height" Value="32" />
+                <Setter Property="CornerRadius" Value="10" />
             </Style>
-            
+
             <Style x:Key="SettingsCardStyle" TargetType="Border">
-                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}"/>
-                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="CornerRadius" Value="16"/>
-                <Setter Property="Padding" Value="28,24,28,24"/>
-                <Setter Property="Margin" Value="0,0,0,18"/>
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="16" />
+                <Setter Property="Padding" Value="28,24,28,24" />
+                <Setter Property="Margin" Value="0,0,0,18" />
             </Style>
-            
+
             <Style x:Key="SettingItemStyle" TargetType="StackPanel">
-                <Setter Property="Spacing" Value="8"/>
-                <Setter Property="Margin" Value="0,12,0,0"/>
+                <Setter Property="Spacing" Value="8" />
+                <Setter Property="Margin" Value="0,12,0,0" />
             </Style>
-            
+
             <Style x:Key="SectionTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource SubtitleTextBlockStyle}">
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="SemiBold" />
             </Style>
-            
+
             <Style x:Key="SectionAccentBarStyle" TargetType="Border">
-                <Setter Property="Width" Value="4"/>
-                <Setter Property="Height" Value="22"/>
-                <Setter Property="CornerRadius" Value="2"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
-                <Setter Property="Background" Value="{ThemeResource AccentFillColorDefaultBrush}"/>
+                <Setter Property="Width" Value="4" />
+                <Setter Property="Height" Value="22" />
+                <Setter Property="CornerRadius" Value="2" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Background" Value="{ThemeResource AccentFillColorDefaultBrush}" />
             </Style>
-            
+
             <Style x:Key="SectionHeaderPanelStyle" TargetType="StackPanel">
-                <Setter Property="Orientation" Value="Horizontal"/>
-                <Setter Property="Spacing" Value="12"/>
-                <Setter Property="Margin" Value="0,0,0,20"/>
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Spacing" Value="12" />
+                <Setter Property="Margin" Value="0,0,0,20" />
             </Style>
-            
+
             <Style x:Key="SettingLabelStyle" TargetType="TextBlock" BasedOn="{StaticResource BodyStrongTextBlockStyle}">
-                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontSize" Value="14" />
             </Style>
-            
+
             <Style x:Key="SettingCaptionStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
-                <Setter Property="Opacity" Value="0.7"/>
-                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="Opacity" Value="0.7" />
+                <Setter Property="TextWrapping" Value="Wrap" />
             </Style>
-            
+
             <Style x:Key="SettingDividerStyle" TargetType="Border">
-                <Setter Property="Height" Value="1"/>
-                <Setter Property="Margin" Value="0,20,0,4"/>
-                <Setter Property="Background" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
-                <Setter Property="Opacity" Value="0.6"/>
+                <Setter Property="Height" Value="1" />
+                <Setter Property="Margin" Value="0,20,0,4" />
+                <Setter Property="Background" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="Opacity" Value="0.6" />
             </Style>
         </ResourceDictionary>
     </Page.Resources>
@@ -118,16 +120,16 @@
     <Grid x:Name="RootLayoutGrid" Opacity="0" RenderTransformOrigin="0.5,0.5">
         <Grid.Transitions>
             <TransitionCollection>
-                <EntranceThemeTransition FromVerticalOffset="40"/>
+                <EntranceThemeTransition FromVerticalOffset="40" />
             </TransitionCollection>
         </Grid.Transitions>
         <Grid.RenderTransform>
-            <ScaleTransform x:Name="RootLayoutScale" ScaleX="1" ScaleY="1"/>
+            <ScaleTransform x:Name="RootLayoutScale" ScaleX="1" ScaleY="1" />
         </Grid.RenderTransform>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <NavigationView x:Name="SettingsNavigationView"
@@ -139,67 +141,66 @@
                         IsPaneOpen="True"
                         SelectionChanged="SettingsNavigationView_SelectionChanged"
                         Margin="0,0,0,0"
-                        Width="220"
-                        >
+                        Width="220">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="外观与个性化" Tag="AppearanceItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE771;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE771;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="主页文字样式" Tag="HomeTextItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE790;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE790;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="语言与区域" Tag="LanguageItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xF2B7;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xF2B7;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="游戏启动配置" Tag="LaunchConfigItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="背景与视觉效果" Tag="BackgroundItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE771;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE771;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="窗口效果" Tag="WindowEffectsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8B3;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE8B3;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="启动音效" Tag="StartupSoundItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8D6;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE8D6;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="签到配置" Tag="CheckinSettingsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE73E;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE73E;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="高级选项" Tag="AdvancedOptionsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="检查更新" Tag="UpdateItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE895;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE895;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="关于" Tag="AboutItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE897;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE897;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="开发者许可认证" Tag="SecurityAuthItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE72E;" FontFamily="Segoe MDL2 Assets"/>
+                        <FontIcon Glyph="&#xE72E;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -212,27 +213,27 @@
                       HorizontalScrollMode="Disabled"
                       ViewChanged="SettingsScrollViewer_ViewChanged">
             <StackPanel Spacing="0" MaxWidth="860" HorizontalAlignment="Stretch">
-                
+
                 <Border x:Name="AppearanceItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="外观与个性化" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="外观与个性化" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="应用主题" 
+
+                        <TextBlock Text="应用主题"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
+                                   FontSize="14" />
                         <TextBlock Text="选择应用程序的显示主题"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,12"/>
-                        
+                                   Margin="0,2,0,12" />
+
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <RadioButton Content="浅色模式" 
+                            <RadioButton Content="浅色模式"
                                          FontSize="14"
                                          GroupName="AppTheme"
                                          Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -241,7 +242,7 @@
                                     <ElementTheme>Light</ElementTheme>
                                 </RadioButton.CommandParameter>
                             </RadioButton>
-                            <RadioButton Content="深色模式" 
+                            <RadioButton Content="深色模式"
                                          FontSize="14"
                                          GroupName="AppTheme"
                                          Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -250,7 +251,7 @@
                                     <ElementTheme>Dark</ElementTheme>
                                 </RadioButton.CommandParameter>
                             </RadioButton>
-                            <RadioButton Content="跟随系统设置" 
+                            <RadioButton Content="跟随系统设置"
                                          FontSize="14"
                                          GroupName="AppTheme"
                                          Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -260,462 +261,490 @@
                                 </RadioButton.CommandParameter>
                             </RadioButton>
                         </StackPanel>
-                        
+
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="自定义软件主题颜色" 
-                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                        FontSize="14"/>
-                             <TextBlock Text="选择或输入Hex颜色代码。留空并重启应用可恢复默认颜色"
-                                        Style="{ThemeResource CaptionTextBlockStyle}"
-                                        Opacity="0.7"
-                                        Margin="0,2,0,8"/>
-                            
+                            <TextBlock Text="自定义软件主题颜色"
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14" />
+                            <TextBlock Text="选择或输入Hex颜色代码。留空并重启应用可恢复默认颜色"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       Margin="0,2,0,8" />
+
                             <StackPanel Orientation="Horizontal" Spacing="16">
                                 <TextBox Text="{x:Bind ViewModel.AppThemeColor, Mode=TwoWay}"
                                          PlaceholderText="#FFB6C1"
                                          Width="150"
-                                         VerticalAlignment="Center"/>
+                                         VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
-                        
+
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="主页卡片显示" 
+                            <TextBlock Text="主页卡片显示"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="允许隐藏主页的游戏资讯卡片或签到卡片"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
-                            
+                                       Margin="0,2,0,12" />
+
                             <ToggleSwitch Header="隐藏游戏资讯卡片"
                                           OffContent="显示"
                                           OnContent="隐藏"
-                                          IsOn="{x:Bind ViewModel.IsHideGameNewsCardEnabled, Mode=TwoWay}"/>
-                                          
+                                          IsOn="{x:Bind ViewModel.IsHideGameNewsCardEnabled, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="隐藏签到卡片"
                                           OffContent="显示"
                                           OnContent="隐藏"
-                                          IsOn="{x:Bind ViewModel.IsHideCheckinCardEnabled, Mode=TwoWay}"/>
-                                          
+                                          IsOn="{x:Bind ViewModel.IsHideCheckinCardEnabled, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="隐藏便签卡片"
                                           OffContent="显示"
                                           OnContent="隐藏"
-                                          IsOn="{x:Bind ViewModel.IsHideDailyNoteCardEnabled, Mode=TwoWay}"/>
-                            
+                                          IsOn="{x:Bind ViewModel.IsHideDailyNoteCardEnabled, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="显示快速预设卡片"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.IsShowPresetCardEnabled, Mode=TwoWay}"/>
-                            
+                                          IsOn="{x:Bind ViewModel.IsShowPresetCardEnabled, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="显示小工具卡片"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.IsShowWidgetCardEnabled, Mode=TwoWay}"/>
+                                          IsOn="{x:Bind ViewModel.IsShowWidgetCardEnabled, Mode=TwoWay}" />
                         </StackPanel>
-                        
+
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="小工具卡片显示项" 
+                            <TextBlock Text="小工具卡片显示项"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="选择要在小工具卡片中显示的工具"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
-                            
-                            <ToggleSwitch Header="显示抽卡记录分析" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetGacha, Mode=TwoWay}"/>
-                            <ToggleSwitch Header="显示成就追踪" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetAchievement, Mode=TwoWay}"/>
-                            <ToggleSwitch Header="显示背包物品" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetInventory, Mode=TwoWay}"/>
-                            <ToggleSwitch Header="显示角色练度查询" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetPlayerRole, Mode=TwoWay}"/>
-                            <ToggleSwitch Header="显示旅行便签" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetDailyNoteWindow, Mode=TwoWay}"/>
-                            <ToggleSwitch Header="显示视频资源库" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetVideo, Mode=TwoWay}"/>
-                            <ToggleSwitch Header="显示战绩信息" OffContent="隐藏" OnContent="显示" IsOn="{x:Bind ViewModel.ShowWidgetBBS, Mode=TwoWay}"/>
+                                       Margin="0,2,0,12" />
+
+                            <ToggleSwitch Header="显示抽卡记录分析" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetGacha, Mode=TwoWay}" />
+                            <ToggleSwitch Header="显示成就追踪" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetAchievement, Mode=TwoWay}" />
+                            <ToggleSwitch Header="显示背包物品" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetInventory, Mode=TwoWay}" />
+                            <ToggleSwitch Header="显示角色练度查询" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetPlayerRole, Mode=TwoWay}" />
+                            <ToggleSwitch Header="显示旅行便签" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetDailyNoteWindow, Mode=TwoWay}" />
+                            <ToggleSwitch Header="显示视频资源库" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetVideo, Mode=TwoWay}" />
+                            <ToggleSwitch Header="显示战绩信息" OffContent="隐藏" OnContent="显示"
+                                          IsOn="{x:Bind ViewModel.ShowWidgetBBS, Mode=TwoWay}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="启动按钮背景颜色" 
+
+                        <TextBlock Text="启动按钮背景颜色"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
-                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12" Margin="0,8,0,24">
-                            <TextBox Header="颜色 (Hex)" Width="150" Text="{x:Bind ViewModel.LaunchButtonOverlayColor, Mode=TwoWay}" PlaceholderText="#0078D7"/>
+                                   FontSize="14" />
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
+                                    Margin="0,8,0,24">
+                            <TextBox Header="颜色 (Hex)" Width="150"
+                                     Text="{x:Bind ViewModel.LaunchButtonOverlayColor, Mode=TwoWay}"
+                                     PlaceholderText="#0078D7" />
                             <Button Content="恢复默认"
                                     Command="{x:Bind ViewModel.ResetLaunchButtonOverlayColorCommand}"
                                     Style="{StaticResource PresetButtonStyle}"
-                                    VerticalAlignment="Bottom"/>
+                                    VerticalAlignment="Bottom" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="便签卡片显示项" 
+                            <TextBlock Text="便签卡片显示项"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="选择要在便签卡片中显示的项目，最多选择3个！"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
-                            
+                                       Margin="0,2,0,12" />
+
                             <ToggleSwitch Header="显示树脂"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.ShowDailyNoteResin, Mode=TwoWay}"/>
-                                          
+                                          IsOn="{x:Bind ViewModel.ShowDailyNoteResin, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="显示每日委托"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.ShowDailyNoteDailyTasks, Mode=TwoWay}"/>
-                                          
+                                          IsOn="{x:Bind ViewModel.ShowDailyNoteDailyTasks, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="显示洞天宝钱"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.ShowDailyNoteHomeCoin, Mode=TwoWay}"/>
-                                          
+                                          IsOn="{x:Bind ViewModel.ShowDailyNoteHomeCoin, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="显示探索派遣"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.ShowDailyNoteExpeditions, Mode=TwoWay}"/>
-                                          
+                                          IsOn="{x:Bind ViewModel.ShowDailyNoteExpeditions, Mode=TwoWay}" />
+
                             <ToggleSwitch Header="显示参量质变仪"
                                           OffContent="隐藏"
                                           OnContent="显示"
-                                          IsOn="{x:Bind ViewModel.ShowDailyNoteTransformer, Mode=TwoWay}"/>
+                                          IsOn="{x:Bind ViewModel.ShowDailyNoteTransformer, Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="背景遮罩透明度" 
+                            <TextBlock Text="背景遮罩透明度"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                                <Slider x:Name="OverlayOpacitySlider" Width="260" Minimum="0" Maximum="1" StepFrequency="0.05"
-                                        Value="{x:Bind ViewModel.GlobalBackgroundOverlayOpacity, Mode=TwoWay}"/>
-                                <TextBlock Text="{Binding Value, ElementName=OverlayOpacitySlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:P0}'}"
-                                           VerticalAlignment="Center"/>
+                                <Slider x:Name="OverlayOpacitySlider" Width="260" Minimum="0" Maximum="1"
+                                        StepFrequency="0.05"
+                                        Value="{x:Bind ViewModel.GlobalBackgroundOverlayOpacity, Mode=TwoWay}" />
+                                <TextBlock
+                                    Text="{Binding Value, ElementName=OverlayOpacitySlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:P0}'}"
+                                    VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="Frame 背景透明度" 
+                            <TextBlock Text="Frame 背景透明度"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                                <Slider x:Name="FrameOpacitySlider" Width="260" Minimum="0" Maximum="1" StepFrequency="0.05"
-                                        Value="{x:Bind ViewModel.ContentFrameBackgroundOpacity, Mode=TwoWay}"/>
-                                <TextBlock Text="{Binding Value, ElementName=FrameOpacitySlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:P0}'}"
-                                           VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </StackPanel>
-                        
-                        
-                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="背景图片透明度" 
-                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
-                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                                <Slider x:Name="BgImageOpacitySlider" Width="260" Minimum="0" Maximum="1" StepFrequency="0.05"
-                                        Value="{x:Bind ViewModel.GlobalBackgroundImageOpacity, Mode=TwoWay}"/>
-                                <TextBlock Text="{Binding Value, ElementName=BgImageOpacitySlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:P0}'}"
-                                           VerticalAlignment="Center"/>
+                                <Slider x:Name="FrameOpacitySlider" Width="260" Minimum="0" Maximum="1"
+                                        StepFrequency="0.05"
+                                        Value="{x:Bind ViewModel.ContentFrameBackgroundOpacity, Mode=TwoWay}" />
+                                <TextBlock
+                                    Text="{Binding Value, ElementName=FrameOpacitySlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:P0}'}"
+                                    VerticalAlignment="Center" />
                             </StackPanel>
                         </StackPanel>
 
+
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="关闭后最小化至系统托盘" 
+                            <TextBlock Text="背景图片透明度"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
-                            <ToggleSwitch OffContent="已禁用"
-                                          OnContent="已启用"
-                                          IsOn="{x:Bind ViewModel.MinimizeToTray, Mode=TwoWay}"/>
-                                  
+                                       FontSize="14" />
+                            <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                                <Slider x:Name="BgImageOpacitySlider" Width="260" Minimum="0" Maximum="1"
+                                        StepFrequency="0.05"
+                                        Value="{x:Bind ViewModel.GlobalBackgroundImageOpacity, Mode=TwoWay}" />
+                                <TextBlock
+                                    Text="{Binding Value, ElementName=BgImageOpacitySlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='{}{0:P0}'}"
+                                    VerticalAlignment="Center" />
+                            </StackPanel>
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="记住窗口大小" 
+                            <TextBlock Text="关闭后最小化至系统托盘"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <ToggleSwitch OffContent="已禁用"
                                           OnContent="已启用"
-                                          IsOn="{x:Bind ViewModel.IsSaveWindowSizeEnabled, Mode=TwoWay}"/>
+                                          IsOn="{x:Bind ViewModel.MinimizeToTray, Mode=TwoWay}" />
+
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="窗口最小大小限制" 
+                            <TextBlock Text="记住窗口大小"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <ToggleSwitch OffContent="已禁用"
                                           OnContent="已启用"
-                                          IsOn="{x:Bind ViewModel.IsMinWindowSizeLimitEnabled, Mode=TwoWay}"/>
+                                          IsOn="{x:Bind ViewModel.IsSaveWindowSizeEnabled, Mode=TwoWay}" />
                         </StackPanel>
-                     </StackPanel>
-                 </Border>
-                 
+
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
+                            <TextBlock Text="窗口最小大小限制"
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14" />
+                            <ToggleSwitch OffContent="已禁用"
+                                          OnContent="已启用"
+                                          IsOn="{x:Bind ViewModel.IsMinWindowSizeLimitEnabled, Mode=TwoWay}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
                 <Border x:Name="HomeTextItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="主页文字样式" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="主页文字样式" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="游戏资讯卡片文字颜色与透明度" 
+
+                        <TextBlock Text="游戏资讯卡片文字颜色与透明度"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
-                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12" Margin="0,8,0,24">
-                            <TextBox Header="颜色 (Hex)" Width="120" Text="{x:Bind ViewModel.GameNewsCardTextColor, Mode=TwoWay}" PlaceholderText="#FFFFFF"/>
+                                   FontSize="14" />
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
+                                    Margin="0,8,0,24">
+                            <TextBox Header="颜色 (Hex)" Width="120"
+                                     Text="{x:Bind ViewModel.GameNewsCardTextColor, Mode=TwoWay}"
+                                     PlaceholderText="#FFFFFF" />
                             <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="透明度" Margin="0,0,0,4"/>
-                                <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05" Value="{x:Bind ViewModel.GameNewsCardTextOpacity, Mode=TwoWay}"/>
+                                <TextBlock Text="透明度" Margin="0,0,0,4" />
+                                <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05"
+                                        Value="{x:Bind ViewModel.GameNewsCardTextOpacity, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
 
-                        <TextBlock Text="启动按钮文字颜色与透明度" 
+                        <TextBlock Text="启动按钮文字颜色与透明度"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
-                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12" Margin="0,8,0,24">
-                            <TextBox Header="颜色 (Hex)" Width="120" Text="{x:Bind ViewModel.LaunchButtonTextColor, Mode=TwoWay}" PlaceholderText="#FFFFFF"/>
+                                   FontSize="14" />
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
+                                    Margin="0,8,0,24">
+                            <TextBox Header="颜色 (Hex)" Width="120"
+                                     Text="{x:Bind ViewModel.LaunchButtonTextColor, Mode=TwoWay}"
+                                     PlaceholderText="#FFFFFF" />
                             <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="透明度" Margin="0,0,0,4"/>
-                                <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05" Value="{x:Bind ViewModel.LaunchButtonTextOpacity, Mode=TwoWay}"/>
+                                <TextBlock Text="透明度" Margin="0,0,0,4" />
+                                <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05"
+                                        Value="{x:Bind ViewModel.LaunchButtonTextOpacity, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
 
-                        <TextBlock Text="游戏签到文字颜色与透明度" 
+                        <TextBlock Text="游戏签到文字颜色与透明度"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
-                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12" Margin="0,8,0,8">
-                            <TextBox Header="颜色 (Hex)" Width="120" Text="{x:Bind ViewModel.GameCheckinTextColor, Mode=TwoWay}" PlaceholderText="#FFFFFF"/>
+                                   FontSize="14" />
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
+                                    Margin="0,8,0,8">
+                            <TextBox Header="颜色 (Hex)" Width="120"
+                                     Text="{x:Bind ViewModel.GameCheckinTextColor, Mode=TwoWay}"
+                                     PlaceholderText="#FFFFFF" />
                             <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="透明度" Margin="0,0,0,4"/>
-                                <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05" Value="{x:Bind ViewModel.GameCheckinTextOpacity, Mode=TwoWay}"/>
+                                <TextBlock Text="透明度" Margin="0,0,0,4" />
+                                <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05"
+                                        Value="{x:Bind ViewModel.GameCheckinTextOpacity, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                
+
                 <Border x:Name="LanguageItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="语言与区域" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="语言与区域" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="应用显示语言" 
+
+                        <TextBlock Text="应用显示语言"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
+                                   FontSize="14" />
                         <TextBlock Text="重启应用后生效"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,12"/>
-                        
+                                   Margin="0,2,0,12" />
+
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <RadioButton Content="简体中文（推荐）" 
+                            <RadioButton Content="简体中文（推荐）"
                                          FontSize="14"
                                          GroupName="AppLanguage"
                                          CommandParameter="1"
                                          IsChecked="{x:Bind ViewModel.SelectedLanguage, Converter={StaticResource LanguageEnumToBooleanConverter}, ConverterParameter=1}"
-                                         Command="{x:Bind ViewModel.SwitchLanguageCommand}"/>
-                            <RadioButton Content="使用系统默认语言" 
+                                         Command="{x:Bind ViewModel.SwitchLanguageCommand}" />
+                            <RadioButton Content="使用系统默认语言"
                                          FontSize="14"
                                          GroupName="AppLanguage"
                                          CommandParameter="0"
                                          IsChecked="{x:Bind ViewModel.SelectedLanguage, Converter={StaticResource LanguageEnumToBooleanConverter}, ConverterParameter=0}"
-                                         Command="{x:Bind ViewModel.SwitchLanguageCommand}"/>
+                                         Command="{x:Bind ViewModel.SwitchLanguageCommand}" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                
+
                 <Border x:Name="LaunchConfigItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="游戏启动配置" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="游戏启动配置" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="启动窗口模式" 
+
+                        <TextBlock Text="启动窗口模式"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
+                                   FontSize="14" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Spacing="12">
-                            <RadioButton Content="普通窗口" 
+                            <RadioButton Content="普通窗口"
                                          FontSize="14"
                                          GroupName="LaunchWindowMode"
-                                         IsChecked="{x:Bind ViewModel.LaunchArgsWindowMode, Mode=TwoWay, Converter={StaticResource WindowModeEnumToBooleanConverter}, ConverterParameter=Normal}"/>
-                            <RadioButton Content="弹出窗口（无边框）" 
+                                         IsChecked="{x:Bind ViewModel.LaunchArgsWindowMode, Mode=TwoWay, Converter={StaticResource WindowModeEnumToBooleanConverter}, ConverterParameter=Normal}" />
+                            <RadioButton Content="弹出窗口（无边框）"
                                          FontSize="14"
                                          GroupName="LaunchWindowMode"
-                                         IsChecked="{x:Bind ViewModel.LaunchArgsWindowMode, Mode=TwoWay, Converter={StaticResource WindowModeEnumToBooleanConverter}, ConverterParameter=Popup}"/>
+                                         IsChecked="{x:Bind ViewModel.LaunchArgsWindowMode, Mode=TwoWay, Converter={StaticResource WindowModeEnumToBooleanConverter}, ConverterParameter=Popup}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="游戏分辨率" 
+
+                        <TextBlock Text="游戏分辨率"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
-                                   Margin="0,20,0,0"/>
+                                   Margin="0,20,0,0" />
                         <TextBlock Text="设置游戏启动时的窗口大小"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,12"/>
-                        
+                                   Margin="0,2,0,12" />
+
                         <StackPanel Style="{StaticResource SettingItemStyle}" Spacing="12">
                             <StackPanel Orientation="Horizontal" Spacing="12">
-                                <TextBox Header="宽度（像素）" 
+                                <TextBox Header="宽度（像素）"
                                          Width="110"
                                          Text="{x:Bind ViewModel.LaunchArgsWidth, Mode=TwoWay}"
-                                         PlaceholderText="1920"/>
-                                <TextBlock Text="×" 
-                                           VerticalAlignment="Bottom" 
-                                           Margin="0,0,0,8" 
-                                           FontSize="16"/>
-                                <TextBox Header="高度（像素）" 
+                                         PlaceholderText="1920" />
+                                <TextBlock Text="×"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,0,0,8"
+                                           FontSize="16" />
+                                <TextBox Header="高度（像素）"
                                          Width="110"
                                          Text="{x:Bind ViewModel.LaunchArgsHeight, Mode=TwoWay}"
-                                         PlaceholderText="1080"/>
+                                         PlaceholderText="1080" />
                             </StackPanel>
-                            
-                            <TextBlock Text="快速预设" 
+
+                            <TextBlock Text="快速预设"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,4,0,4"/>
+                                       Margin="0,4,0,4" />
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <Button Content="1280×720 (HD)" 
+                                <Button Content="1280×720 (HD)"
                                         Command="{x:Bind ViewModel.SetResolutionPresetCommand}"
                                         CommandParameter="1280 720"
-                                        Style="{StaticResource PresetButtonStyle}"/>
-                                <Button Content="1920×1080 (FHD)" 
+                                        Style="{StaticResource PresetButtonStyle}" />
+                                <Button Content="1920×1080 (FHD)"
                                         Command="{x:Bind ViewModel.SetResolutionPresetCommand}"
                                         CommandParameter="1920 1080"
-                                        Style="{StaticResource PresetButtonStyle}"/>
-                                <Button Content="2560×1440 (QHD)" 
+                                        Style="{StaticResource PresetButtonStyle}" />
+                                <Button Content="2560×1440 (QHD)"
                                         Command="{x:Bind ViewModel.SetResolutionPresetCommand}"
                                         CommandParameter="2560 1440"
-                                        Style="{StaticResource PresetButtonStyle}"/>
-                                <Button Content="3840×2160 (4K)" 
+                                        Style="{StaticResource PresetButtonStyle}" />
+                                <Button Content="3840×2160 (4K)"
                                         Command="{x:Bind ViewModel.SetResolutionPresetCommand}"
                                         CommandParameter="3840 2160"
-                                        Style="{StaticResource PresetButtonStyle}"/>
-                                <Button Content="1440×900" 
-                                        Command="{x:Bind ViewModel.SetResolutionPresetCommand}" 
-                                        CommandParameter="1440 900" 
-                                        Style="{StaticResource PresetButtonStyle}"/>
-                                <Button Content="1920×1200" 
-                                        Command="{x:Bind ViewModel.SetResolutionPresetCommand}" 
-                                        CommandParameter="1920 1200" 
-                                        Style="{StaticResource PresetButtonStyle}"/>
+                                        Style="{StaticResource PresetButtonStyle}" />
+                                <Button Content="1440×900"
+                                        Command="{x:Bind ViewModel.SetResolutionPresetCommand}"
+                                        CommandParameter="1440 900"
+                                        Style="{StaticResource PresetButtonStyle}" />
+                                <Button Content="1920×1200"
+                                        Command="{x:Bind ViewModel.SetResolutionPresetCommand}"
+                                        CommandParameter="1920 1200"
+                                        Style="{StaticResource PresetButtonStyle}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="HDR 亮度配置" 
+                            <TextBlock Text="HDR 亮度配置"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="调整游戏内的 HDR 峰值亮度与 UI 亮度"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
-                            <Button Content="打开 HDR 设置" 
-                                    Click="OnOpenHDRSettingsClick"/>
+                                       Margin="0,2,0,12" />
+                            <Button Content="打开 HDR 设置"
+                                    Click="OnOpenHDRSettingsClick" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="目标显示器" 
+                            <TextBlock Text="目标显示器"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="指定游戏启动时所在的显示器"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
+                                       Margin="0,2,0,12" />
                             <StackPanel Orientation="Horizontal" Spacing="12">
                                 <ComboBox ItemsSource="{x:Bind ViewModel.AvailableMonitors, Mode=OneWay}"
                                           SelectedItem="{x:Bind ViewModel.SelectedMonitor, Mode=TwoWay}"
                                           DisplayMemberPath="DisplayName"
-                                          Width="250"/>
-                                <Button Content="识别显示器" 
-                                        Click="OnIdentifyMonitorsClick" 
-                                        Style="{StaticResource PresetButtonStyle}"/>
+                                          Width="250" />
+                                <Button Content="识别显示器"
+                                        Click="OnIdentifyMonitorsClick"
+                                        Style="{StaticResource PresetButtonStyle}" />
                             </StackPanel>
                         </StackPanel>
-                        <TextBlock Text="高级启动参数" 
+                        <TextBlock Text="高级启动参数"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
-                                   Margin="0,20,0,0"/>
+                                   Margin="0,20,0,0" />
                         <TextBlock Text="自定义参数将追加到启动命令后"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,8"/>
+                                   Margin="0,2,0,8" />
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <TextBox Header="自定义启动参数" 
+                            <TextBox Header="自定义启动参数"
                                      Text="{x:Bind ViewModel.CustomLaunchParameters, Mode=TwoWay}"
                                      PlaceholderText="例如：-fullscreen -high"
                                      MaxWidth="400"
-                                     HorizontalAlignment="Left"/>
+                                     HorizontalAlignment="Left" />
                             <InfoBar Severity="Informational"
                                      Message="提示：参数将以空格追加到游戏启动命令后，请勿输入游戏路径 如果点了没反应，请多按几下预设选项按钮"
                                      IsOpen="True"
                                      IsClosable="False"
                                      Margin="0,8,0,0"
-                                     FontSize="12"/>
+                                     FontSize="12" />
                         </StackPanel>
-                        <TextBlock Text="自定义游戏主程序名称" 
+                        <TextBlock Text="自定义游戏主程序名称"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
-                                   Margin="0,20,0,0"/>
+                                   Margin="0,20,0,0" />
                         <TextBlock Text="修改此项可自定义检测和启动时的 exe 文件名。留空则使用默认值 (YuanShen.exe / GenshinImpact.exe)"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,8"/>
+                                   Margin="0,2,0,8" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="16">
                             <TextBox Text="{x:Bind ViewModel.CustomGameExeName, Mode=TwoWay}"
                                      PlaceholderText="例如: YuanShen.exe"
                                      Width="250"
-                                     VerticalAlignment="Center"/>
+                                     VerticalAlignment="Center" />
                             <Button Content="恢复默认"
                                     Command="{x:Bind ViewModel.ResetGameExeNameCommand}"
-                                    Style="{StaticResource PresetButtonStyle}"/>
+                                    Style="{StaticResource PresetButtonStyle}" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,24,0,0">
                             <TextBlock Text="兑换码提醒"
                                        Style="{StaticResource SectionTitleStyle}"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" />
                             <ToggleSwitch Header="新兑换码发布时即时提醒"
                                           OffContent="已禁用"
                                           OnContent="已启用"
-                                          IsOn="{x:Bind ViewModel.IsRedeemCodeNotificationEnabled, Mode=TwoWay}"/>
+                                          IsOn="{x:Bind ViewModel.IsRedeemCodeNotificationEnabled, Mode=TwoWay}" />
                             <TextBlock Text="开启后，当有新的兑换码发布时，将在第一时间推送通知并显示有效期倒计时。每期兑换码仅通知一次。"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        TextWrapping="Wrap"
-                                       Margin="0,4,0,0"/>
+                                       Margin="0,4,0,0" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                
+
                 <Border x:Name="BackgroundItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="背景与视觉效果" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="背景与视觉效果" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
+
                         <ToggleSwitch Header="启用自定义背景"
                                       OffContent="已禁用"
                                       OnContent="已启用"
-                                      IsOn="{x:Bind ViewModel.IsBackgroundEnabled, Mode=TwoWay}"/>
-                        
+                                      IsOn="{x:Bind ViewModel.IsBackgroundEnabled, Mode=TwoWay}" />
+
                         <StackPanel Margin="0,16,0,0">
-                            <TextBlock Text="背景来源" 
+                            <TextBlock Text="背景来源"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
-                                       Margin="0,0,0,8"/>
+                                       Margin="0,0,0,8" />
                             <StackPanel Spacing="8">
-                                <Button Content="选择自定义背景图片..." 
+                                <Button Content="选择自定义背景图片..."
                                         Command="{x:Bind ViewModel.SelectCustomBackgroundCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
-                                        CornerRadius="6"/>
-                                <Button Content="清除自定义背景" 
+                                        CornerRadius="6" />
+                                <Button Content="清除自定义背景"
                                         Command="{x:Bind ViewModel.ClearCustomBackgroundCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
@@ -723,29 +752,31 @@
                                         Visibility="{x:Bind ViewModel.HasCustomBackground, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
-                                            <Setter Property="Background" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                            <Setter Property="Background"
+                                                    Value="{ThemeResource SystemFillColorCriticalBrush}" />
                                         </Style>
                                     </Button.Style>
                                 </Button>
                             </StackPanel>
 
-                            <TextBlock Text="背景轮播模式" 
+                            <TextBlock Text="背景轮播模式"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
-                                       Margin="0,16,0,8"/>
+                                       Margin="0,16,0,8" />
                             <ToggleSwitch OffContent="已禁用"
                                           OnContent="已启用"
-                                          IsOn="{x:Bind ViewModel.IsBackgroundSlideshowEnabled, Mode=TwoWay}"/>
-                            <StackPanel Spacing="8" Visibility="{x:Bind ViewModel.IsBackgroundSlideshowEnabled, Mode=OneWay}">
-                                <Button Content="选择轮播图片文件夹..." 
+                                          IsOn="{x:Bind ViewModel.IsBackgroundSlideshowEnabled, Mode=TwoWay}" />
+                            <StackPanel Spacing="8"
+                                        Visibility="{x:Bind ViewModel.IsBackgroundSlideshowEnabled, Mode=OneWay}">
+                                <Button Content="选择轮播图片文件夹..."
                                         Command="{x:Bind ViewModel.SelectBackgroundSlideshowFolderCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
-                                        CornerRadius="6"/>
-                                <TextBlock Text="{x:Bind ViewModel.BackgroundSlideshowFolder, Mode=OneWay}" 
+                                        CornerRadius="6" />
+                                <TextBlock Text="{x:Bind ViewModel.BackgroundSlideshowFolder, Mode=OneWay}"
                                            FontSize="12" Opacity="0.7" TextWrapping="Wrap" MaxWidth="400"
-                                           Visibility="{x:Bind ViewModel.HasBackgroundSlideshowFolder, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                                <Button Content="清除轮播图片文件夹" 
+                                           Visibility="{x:Bind ViewModel.HasBackgroundSlideshowFolder, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                <Button Content="清除轮播图片文件夹"
                                         Command="{x:Bind ViewModel.ClearBackgroundSlideshowFolderCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
@@ -753,7 +784,8 @@
                                         Visibility="{x:Bind ViewModel.HasBackgroundSlideshowFolder, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                                     <Button.Style>
                                         <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
-                                            <Setter Property="Background" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                            <Setter Property="Background"
+                                                    Value="{ThemeResource SystemFillColorCriticalBrush}" />
                                         </Style>
                                     </Button.Style>
                                 </Button>
@@ -764,93 +796,94 @@
                                            SpinButtonPlacementMode="Inline"
                                            Width="200"
                                            HorizontalAlignment="Left"
-                                           Margin="0,8,0,0"/>
+                                           Margin="0,8,0,0" />
                             </StackPanel>
-    
-                            <ComboBox Header="官方背景服务器" 
-                                      Margin="0,16,0,0" 
+
+                            <ComboBox Header="官方背景服务器"
+                                      Margin="0,16,0,0"
                                       SelectedIndex="{x:Bind ViewModel.SelectedServer, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
                                       MinWidth="200">
-                                <ComboBoxItem Content="国服 (天空岛)"/>
-                                <ComboBoxItem Content="国际服 (提瓦特)"/>
+                                <ComboBoxItem Content="国服 (天空岛)" />
+                                <ComboBoxItem Content="国际服 (提瓦特)" />
                             </ComboBox>
 
                             <StackPanel Margin="0,16,0,0" Spacing="8">
-                                <TextBlock Text="官方背景 API" 
+                                <TextBlock Text="官方背景 API"
                                            Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                           FontSize="14"/>
+                                           FontSize="14" />
                                 <TextBlock Text="留空使用当前服务器的默认 API。自定义 API 需要返回与官方 getAllGameBasicInfo 一致的数据结构。"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
-                                           TextWrapping="Wrap"/>
-                                <TextBox Text="{x:Bind ViewModel.CustomBackgroundApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                         PlaceholderText="输入自定义官方背景 API 地址"
-                                         MaxWidth="640"
-                                         HorizontalAlignment="Left"/>
+                                           TextWrapping="Wrap" />
+                                <TextBox
+                                    Text="{x:Bind ViewModel.CustomBackgroundApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    PlaceholderText="输入自定义官方背景 API 地址"
+                                    MaxWidth="640"
+                                    HorizontalAlignment="Left" />
                                 <TextBlock Text="{x:Bind ViewModel.CurrentBackgroundApiUrl, Mode=OneWay}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
-                                           TextWrapping="Wrap"/>
+                                           TextWrapping="Wrap" />
                                 <Button Content="重置为默认 API"
                                         Command="{x:Bind ViewModel.ResetBackgroundApiCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
-                                        CornerRadius="6"/>
+                                        CornerRadius="6" />
                             </StackPanel>
 
-                            <TextBlock Text="获取官方背景资源" 
+                            <TextBlock Text="获取官方背景资源"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
-                                       Margin="0,16,0,8"/>
+                                       Margin="0,16,0,8" />
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <Button Content="下载最新背景图片" 
+                                <Button Content="下载最新背景图片"
                                         Command="{x:Bind ViewModel.DownloadLatestBackgroundImageCommand}"
                                         Padding="12,6"
-                                        CornerRadius="6"/>
-                                <Button Content="下载最新背景视频" 
+                                        CornerRadius="6" />
+                                <Button Content="下载最新背景视频"
                                         Command="{x:Bind ViewModel.DownloadLatestBackgroundVideoCommand}"
                                         Padding="12,6"
-                                        CornerRadius="6"/>
+                                        CornerRadius="6" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Margin="0,16,0,0">
                             <ToggleSwitch Header="启用页面亚克力模糊遮罩"
                                           OffContent="纯色"
                                           OnContent="亚克力模糊"
-                                          IsOn="{x:Bind ViewModel.IsAcrylicOverlayEnabled, Mode=TwoWay}"/>
+                                          IsOn="{x:Bind ViewModel.IsAcrylicOverlayEnabled, Mode=TwoWay}" />
                             <TextBlock Text="注意：当使用视频背景时，为保证性能与显示效果，将自动回退为纯色半透明背景"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,8"/>
+                                       Margin="0,2,0,8" />
                         </StackPanel>
                     </StackPanel>
                 </Border>
-                
+
                 <Border x:Name="WindowEffectsItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="窗口效果" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="窗口效果" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
-                        <TextBlock Text="窗口背景材质" 
+
+                        <TextBlock Text="窗口背景材质"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
+                                   FontSize="14" />
                         <TextBlock Text="选择窗口背景的视觉效果"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,12"/>
-                        
+                                   Margin="0,2,0,12" />
+
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <RadioButton Content="Mica (云母)" 
+                            <RadioButton Content="Mica (云母)"
                                          FontSize="14"
                                          GroupName="WindowBackdrop"
                                          IsChecked="{Binding CurrentWindowBackdrop, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Mica}">
                             </RadioButton>
-                            <RadioButton Content="Acrylic (亚克力)" 
+                            <RadioButton Content="Acrylic (亚克力)"
                                          FontSize="14"
                                          GroupName="WindowBackdrop"
                                          IsChecked="{Binding CurrentWindowBackdrop, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Acrylic}">
@@ -860,37 +893,37 @@
                                  Message="注意：Mica 效果仅在 Windows 11 上可用，旧版本系统可能会回退到纯色。"
                                  IsOpen="True"
                                  IsClosable="False"
-                                 Margin="0,12,0,0"/>
+                                 Margin="0,12,0,0" />
                     </StackPanel>
                 </Border>
-                
+
                 <Border x:Name="StartupSoundItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="启动音效" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="启动音效" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
+
                         <ToggleSwitch Header="启用游戏启动音效"
                                       OffContent="已禁用"
                                       OnContent="已启用"
-                                      IsOn="{x:Bind ViewModel.IsStartupSoundEnabled, Mode=TwoWay}"/>
-                        
-                        <StackPanel Margin="0,16,0,0" 
+                                      IsOn="{x:Bind ViewModel.IsStartupSoundEnabled, Mode=TwoWay}" />
+
+                        <StackPanel Margin="0,16,0,0"
                                     Visibility="{x:Bind ViewModel.IsStartupSoundEnabled, Mode=OneWay}">
-                            <Button Content="选择音频文件..." 
+                            <Button Content="选择音频文件..."
                                     Command="{x:Bind ViewModel.SelectStartupSoundCommand}"
                                     HorizontalAlignment="Left"
                                     Padding="12,6"
-                                    CornerRadius="6"/>
-                            <TextBlock Text="{x:Bind ViewModel.StartupSoundPath, Mode=OneWay}" 
+                                    CornerRadius="6" />
+                            <TextBlock Text="{x:Bind ViewModel.StartupSoundPath, Mode=OneWay}"
                                        FontSize="12" Opacity="0.7" TextWrapping="Wrap" MaxWidth="400"
                                        Margin="0,8,0,0"
-                                       Visibility="{x:Bind ViewModel.HasCustomStartupSound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                            <Button Content="清除音频文件" 
+                                       Visibility="{x:Bind ViewModel.HasCustomStartupSound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                            <Button Content="清除音频文件"
                                     Command="{x:Bind ViewModel.ClearStartupSoundCommand}"
                                     HorizontalAlignment="Left"
                                     Padding="12,6"
@@ -899,7 +932,8 @@
                                     Visibility="{x:Bind ViewModel.HasCustomStartupSound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Button.Style>
                                     <Style TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
-                                        <Setter Property="Background" Value="{ThemeResource SystemFillColorCriticalBrush}"/>
+                                        <Setter Property="Background"
+                                                Value="{ThemeResource SystemFillColorCriticalBrush}" />
                                     </Style>
                                 </Button.Style>
                             </Button>
@@ -909,31 +943,31 @@
 
                 <Border x:Name="CheckinSettingsItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Spacing="12">
                             <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                                <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                                <TextBlock Text="签到配置" Style="{StaticResource SectionTitleStyle}"/>
+                                <Border Style="{StaticResource SectionAccentBarStyle}" />
+                                <TextBlock Text="签到配置" Style="{StaticResource SectionTitleStyle}" />
                             </StackPanel>
 
                             <StackPanel Spacing="12">
                                 <ToggleSwitch Header="游戏签到"
                                               OffContent="已禁用"
                                               OnContent="已启用"
-                                              IsOn="{x:Bind ViewModel.IsGameCheckinEnabled, Mode=TwoWay}"/>
+                                              IsOn="{x:Bind ViewModel.IsGameCheckinEnabled, Mode=TwoWay}" />
                                 <TextBlock Text="领取米游社每日签到奖励（原石、摩拉等）"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
-                                           Margin="0,-16,0,0"/>
+                                           Margin="0,-16,0,0" />
 
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Spacing="4">
                                         <ToggleSwitch Header="社区签到"
                                                       OffContent="已禁用"
                                                       OnContent="已启用"
-                                                      IsOn="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=TwoWay}"/>
+                                                      IsOn="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=TwoWay}" />
                                         <Button Background="Transparent"
                                                 BorderThickness="0"
                                                 VerticalAlignment="Center"
@@ -942,24 +976,24 @@
                                                 MinWidth="0" MinHeight="0"
                                                 Click="OnCommunityCheckinInfoClick">
                                             <FontIcon Glyph="&#xE946;" FontSize="15"
-                                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </Button>
                                     </StackPanel>
                                     <TextBlock Text="自动完成社区互动任务获取米游币"
                                                Style="{ThemeResource CaptionTextBlockStyle}"
                                                Opacity="0.7"
-                                               Margin="0,-4,0,0"/>
+                                               Margin="0,-4,0,0" />
                                     <StackPanel Margin="32,4,0,0"
                                                 Orientation="Horizontal"
                                                 Visibility="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=OneWay}">
                                         <CheckBox Content="点赞"
                                                   IsChecked="{x:Bind ViewModel.IsCommunityLikeEnabled, Mode=TwoWay}"
-                                                  Margin="0,0,16,0"/>
+                                                  Margin="0,0,16,0" />
                                         <CheckBox Content="看帖"
                                                   IsChecked="{x:Bind ViewModel.IsCommunityReadEnabled, Mode=TwoWay}"
-                                                  Margin="0,0,16,0"/>
+                                                  Margin="0,0,16,0" />
                                         <CheckBox Content="分享"
-                                                  IsChecked="{x:Bind ViewModel.IsCommunityShareEnabled, Mode=TwoWay}"/>
+                                                  IsChecked="{x:Bind ViewModel.IsCommunityShareEnabled, Mode=TwoWay}" />
                                     </StackPanel>
                                 </StackPanel>
 
@@ -967,7 +1001,7 @@
                                     <ToggleSwitch Header="云游戏签到"
                                                   OffContent="已禁用"
                                                   OnContent="已启用"
-                                                  IsOn="{x:Bind ViewModel.IsCloudGameCheckinEnabled, Mode=TwoWay}"/>
+                                                  IsOn="{x:Bind ViewModel.IsCloudGameCheckinEnabled, Mode=TwoWay}" />
                                     <Button Background="Transparent"
                                             BorderThickness="0"
                                             VerticalAlignment="Center"
@@ -976,45 +1010,45 @@
                                             MinWidth="0" MinHeight="0"
                                             Click="OnCloudGameCheckinInfoClick">
                                         <FontIcon Glyph="&#xE946;" FontSize="15"
-                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </Button>
                                 </StackPanel>
                                 <TextBlock Text="领取云游戏签到奖励，需在下方账号列表右侧添加云游戏登录凭证"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
-                                           Margin="0,-16,0,0"/>
+                                           Margin="0,-16,0,0" />
 
                                 <ToggleSwitch Header="启动时自动签到"
                                               OffContent="已禁用"
                                               OnContent="已启用"
-                                              IsOn="{x:Bind ViewModel.IsAutoCheckinEnabled, Mode=TwoWay}"/>
+                                              IsOn="{x:Bind ViewModel.IsAutoCheckinEnabled, Mode=TwoWay}" />
                                 <TextBlock Text="开启后，将在应用启动时自动检测并在未签到时执行签到"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
-                                           Margin="0,-16,0,0"/>
+                                           Margin="0,-16,0,0" />
 
                                 <ToggleSwitch Header="批量签到"
                                               OffContent="已禁用"
                                               OnContent="已启用"
-                                              IsOn="{x:Bind ViewModel.IsBatchCheckinEnabled, Mode=TwoWay}"/>
+                                              IsOn="{x:Bind ViewModel.IsBatchCheckinEnabled, Mode=TwoWay}" />
                                 <TextBlock Text="打开此开关则可为所有勾选的账号执行指定的签到任务，否则仅为当前账号执行"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
-                                           Margin="0,-16,0,0"/>
+                                           Margin="0,-16,0,0" />
                             </StackPanel>
                         </StackPanel>
 
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0" Margin="0,8,0,0">
                                 <TextBlock Text="账号列表"
                                            Style="{ThemeResource BodyStrongTextBlockStyle}"
                                            FontSize="14"
-                                           Margin="0,0,0,8"/>
+                                           Margin="0,0,0,8" />
 
                                 <Border CornerRadius="8"
                                         Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
@@ -1031,16 +1065,16 @@
                                                 <DataTemplate x:DataType="models:CheckinAccountItem">
                                                     <Grid Padding="0,4" ColumnSpacing="12">
                                                         <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto"/>
-                                                            <ColumnDefinition Width="*"/>
-                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
                                                         <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
                                                                   IsEnabled="{Binding DataContext.IsBatchCheckinEnabled, ElementName=SettingsPageRoot, Mode=OneWay}"
-                                                                  VerticalAlignment="Center"/>
+                                                                  VerticalAlignment="Center" />
                                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                            <TextBlock Text="{Binding Nickname}" FontSize="14"/>
-                                                            <TextBlock Text="{Binding Uid}" FontSize="12" Opacity="0.7"/>
+                                                            <TextBlock Text="{Binding Nickname}" FontSize="14" />
+                                                            <TextBlock Text="{Binding Uid}" FontSize="12" Opacity="0.7" />
                                                         </StackPanel>
                                                         <Button Grid.Column="2"
                                                                 Click="OnCloudCredentialClick"
@@ -1049,15 +1083,15 @@
                                                                 Background="Transparent"
                                                                 BorderThickness="0">
                                                             <ToolTipService.ToolTip>
-                                                                <ToolTip Content="添加云游戏凭证"/>
+                                                                <ToolTip Content="添加云游戏凭证" />
                                                             </ToolTipService.ToolTip>
                                                             <Grid>
                                                                 <FontIcon Glyph="&#xE753;" FontSize="14"
                                                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                                          Visibility="{Binding HasCloudCredential, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>
+                                                                          Visibility="{Binding HasCloudCredential, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}" />
                                                                 <FontIcon Glyph="&#xE753;" FontSize="14"
                                                                           Foreground="{ThemeResource SystemAccentColor}"
-                                                                          Visibility="{Binding HasCloudCredential, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                                                          Visibility="{Binding HasCloudCredential, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
                                                             </Grid>
                                                         </Button>
                                                     </Grid>
@@ -1068,13 +1102,14 @@
                                 </Border>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="12,8,0,0" Orientation="Horizontal" Spacing="4">
+                            <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="12,8,0,0"
+                                        Orientation="Horizontal" Spacing="4">
                                 <TextBlock Text="遇到验证码？"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.6" VerticalAlignment="Center">
                                     <ToolTipService.ToolTip>
                                         <TextBlock Text="游戏签到和社区签到（概率较大）过程中可能会遇到验证码，需要配置真实设备信息降低风控频率，或使用独立部署版本配置打码服务。"
-                                                   TextWrapping="Wrap" MaxWidth="300"/>
+                                                   TextWrapping="Wrap" MaxWidth="300" />
                                     </ToolTipService.ToolTip>
                                 </TextBlock>
                                 <HyperlinkButton Content="独立部署版本"
@@ -1084,7 +1119,7 @@
                                                  VerticalAlignment="Center">
                                     <ToolTipService.ToolTip>
                                         <TextBlock Text="游戏签到和社区签到（概率较大）过程中可能会遇到验证码，需要配置真实设备信息降低风控频率，或使用独立部署版本配置打码服务。"
-                                                   TextWrapping="Wrap" MaxWidth="300"/>
+                                                   TextWrapping="Wrap" MaxWidth="300" />
                                     </ToolTipService.ToolTip>
                                 </HyperlinkButton>
                             </StackPanel>
@@ -1094,23 +1129,23 @@
 
                 <Border x:Name="AdvancedOptionsItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="高级选项" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="高级选项" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        
+
                         <ToggleSwitch Header="启用 BetterGI 联动"
                                       OffContent="已禁用"
                                       OnContent="已启用"
                                       IsOn="{x:Bind ViewModel.IsBetterGIIntegrationEnabled, Mode=TwoWay}"
-                                      Margin="0,16,0,0"/>
+                                      Margin="0,16,0,0" />
                         <TextBlock Text="启动游戏时的同时打开BetterGI"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,0,0,0"/>
+                                   Margin="0,0,0,0" />
                         <NumberBox Header="BetterGI启动延迟 (秒)"
                                    Width="180"
                                    HorizontalAlignment="Left"
@@ -1120,62 +1155,66 @@
                                    LargeChange="1"
                                    SpinButtonPlacementMode="Compact"
                                    Value="{x:Bind ViewModel.BetterGIStartupDelaySeconds, Mode=TwoWay}"
-                                   Margin="0,8,0,0"/>
+                                   Margin="0,8,0,0" />
                         <TextBlock Text="设为0可关闭延迟；延迟只影响BetterGI"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,0,0,0"/>
-                                   
+                                   Margin="0,0,0,0" />
+
                         <ToggleSwitch Header="退出游戏时关闭BetterGI"
                                       OffContent="已禁用"
                                       OnContent="已启用"
                                       IsOn="{x:Bind ViewModel.IsBetterGICloseOnExitEnabled, Mode=TwoWay}"
-                                      Margin="0,8,0,0"/>
+                                      Margin="0,8,0,0" />
                         <TextBlock Text="点击退出游戏,自动关闭BetterGI"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,0,0,0"/>
-                        <TextBlock Text="浏览器缓存清理" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14" Margin="0,20,0,0"/>
-                        <TextBlock Text="清理内置浏览器 (WebView2) 产生的缓存文件" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SafeSecondaryTextBrush}" Margin="0,2,0,8"/>
+                                   Margin="0,0,0,0" />
+                        <TextBlock Text="浏览器缓存清理" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
+                                   Margin="0,20,0,0" />
+                        <TextBlock Text="清理内置浏览器 (WebView2) 产生的缓存文件" Style="{ThemeResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource SafeSecondaryTextBrush}" Margin="0,2,0,8" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="16">
-                            <TextBlock Text="{x:Bind ViewModel.WebView2CacheSize, Mode=OneWay}" 
-                                       VerticalAlignment="Center" 
-                                       FontSize="16" 
-                                       FontWeight="SemiBold"/>
-                            <Button Content="清除缓存" 
-                                    Command="{x:Bind ViewModel.ClearWebView2CacheCommand}" 
+                            <TextBlock Text="{x:Bind ViewModel.WebView2CacheSize, Mode=OneWay}"
+                                       VerticalAlignment="Center"
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+                            <Button Content="清除缓存"
+                                    Command="{x:Bind ViewModel.ClearWebView2CacheCommand}"
                                     Style="{StaticResource PresetButtonStyle}" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="程序性能优先级" 
+                            <TextBlock Text="程序性能优先级"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="调整启动器在系统中的CPU调度优先级（过高可能影响系统其他进程）"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
-                            
-                            <ComboBox SelectedIndex="{x:Bind ViewModel.AppProcessPriority, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
-                                      MinWidth="200">
-                                <ComboBoxItem Content="正常 (默认)"/>
-                                <ComboBoxItem Content="高于正常"/>
-                                <ComboBoxItem Content="高"/>
+                                       Margin="0,2,0,12" />
+
+                            <ComboBox
+                                SelectedIndex="{x:Bind ViewModel.AppProcessPriority, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
+                                MinWidth="200">
+                                <ComboBoxItem Content="正常 (默认)" />
+                                <ComboBoxItem Content="高于正常" />
+                                <ComboBoxItem Content="高" />
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="CPU 占用异常警告" 
+                            <TextBlock Text="CPU 占用异常警告"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                       FontSize="14"/>
+                                       FontSize="14" />
                             <TextBlock Text="当启动器 CPU 占用持续超过阈值 5 分钟，且未检测到 OBS 时弹出置顶提示。默认开启。"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12"/>
+                                       Margin="0,2,0,12" />
                             <ToggleSwitch Header="启用 CPU 占用异常警告"
                                           OffContent="已禁用"
                                           OnContent="已启用"
                                           IsOn="{x:Bind ViewModel.IsCpuUsageWarningEnabled, Mode=TwoWay}"
-                                          Toggled="OnCpuUsageWarningToggled"/>
-                            <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,12,0,0" VerticalAlignment="Center">
+                                          Toggled="OnCpuUsageWarningToggled" />
+                            <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,12,0,0"
+                                        VerticalAlignment="Center">
                                 <NumberBox Header="警告阈值 (%)"
                                            Width="180"
                                            HorizontalAlignment="Left"
@@ -1184,11 +1223,11 @@
                                            SmallChange="1"
                                            LargeChange="5"
                                            SpinButtonPlacementMode="Compact"
-                                           Value="{x:Bind ViewModel.CpuUsageWarningThreshold, Mode=TwoWay}"/>
+                                           Value="{x:Bind ViewModel.CpuUsageWarningThreshold, Mode=TwoWay}" />
                                 <Button Content="恢复默认"
                                         Command="{x:Bind ViewModel.ResetCpuUsageWarningSettingsCommand}"
                                         Style="{StaticResource PresetButtonStyle}"
-                                        VerticalAlignment="Bottom"/>
+                                        VerticalAlignment="Bottom" />
                             </StackPanel>
                         </StackPanel>
                         <Button HorizontalAlignment="Center"
@@ -1196,7 +1235,7 @@
                                 Padding="16,8"
                                 Click="OnOpenDatabaseEditorClick">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock Text="配置编辑"/>
+                                <TextBlock Text="配置编辑" />
                             </StackPanel>
                         </Button>
                         <Button HorizontalAlignment="Center"
@@ -1204,69 +1243,69 @@
                                 Padding="16,8"
                                 Click="OnOpenAchievementUpdaterClick">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock Text="更新成就数据库资源"/>
+                                <TextBlock Text="更新成就数据库资源" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
                 </Border>
-                
+
                 <Border x:Name="UpdateItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="检查更新" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="检查更新" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-        
-                        <TextBlock Text="版本更新" 
+
+                        <TextBlock Text="版本更新"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                                   FontSize="14"/>
+                                   FontSize="14" />
                         <TextBlock Text="检查并获取最新版本。点击后将启动更新程序"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
-                                   Margin="0,2,0,12"/>
-        
+                                   Margin="0,2,0,12" />
+
                         <Button x:Name="CheckUpdateButton"
-                                Content="检查更新" 
-                                Command="{x:Bind ViewModel.CheckUpdateCommand}" 
-                                HorizontalAlignment="Left" 
-                                Padding="12,6" 
+                                Content="检查更新"
+                                Command="{x:Bind ViewModel.CheckUpdateCommand}"
+                                HorizontalAlignment="Left"
+                                Padding="12,6"
                                 CornerRadius="6" />
                     </StackPanel>
                 </Border>
 
                 <Border x:Name="AboutItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel Spacing="10">
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="关于" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="关于" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
-                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                                BorderThickness="1" 
+                        <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
                                 CornerRadius="10"
                                 Padding="16">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock Text="FufuLauncher" Style="{ThemeResource BodyTextBlockStyle}"/>
+                                    <TextBlock Text="FufuLauncher" Style="{ThemeResource BodyTextBlockStyle}" />
                                     <TextBlock Text="{x:Bind ViewModel.AppVersion, Mode=OneWay}"
-                                               Style="{ThemeResource CaptionTextBlockStyle}" 
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                               Style="{ThemeResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
-                                
-                                <Button Grid.Column="1" 
-                                        Content="关于我们" 
+
+                                <Button Grid.Column="1"
+                                        Content="关于我们"
                                         VerticalAlignment="Center"
-                                        Click="OnOpenAboutWindowClick"/>
+                                        Click="OnOpenAboutWindowClick" />
                             </Grid>
                         </Border>
                         <Button x:Name="EasterEggButton"
@@ -1275,10 +1314,11 @@
                                 Background="Transparent"
                                 BorderThickness="0"
                                 Click="OnEasterEggClick"
-                                ToolTipService.ToolTip="???"> 
+                                ToolTipService.ToolTip="???">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <FontIcon Glyph="&#xEB52;" FontFamily="Segoe MDL2 Assets" Foreground="#FFB6C1"/>
-                                <TextBlock Text="Remember me" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/>
+                                <FontIcon Glyph="&#xEB52;" FontFamily="Segoe MDL2 Assets" Foreground="#FFB6C1" />
+                                <TextBlock Text="Remember me" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           FontSize="12" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -1286,20 +1326,21 @@
 
                 <Border x:Name="SecurityAuthItem" Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                     <Border.Shadow>
-                        <ThemeShadow/>
+                        <ThemeShadow />
                     </Border.Shadow>
                     <StackPanel Spacing="10">
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
-                            <Border Style="{StaticResource SectionAccentBarStyle}"/>
-                            <TextBlock Text="开发者许可认证" Style="{StaticResource SectionTitleStyle}"/>
+                            <Border Style="{StaticResource SectionAccentBarStyle}" />
+                            <TextBlock Text="开发者许可认证" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        <TextBlock Text="通过开发者许可认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource SafeSecondaryTextBrush}"/>
-                        
-                        <Button Content="进行开发者许可认证" 
+                        <TextBlock Text="通过开发者许可认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource SafeSecondaryTextBrush}" />
+
+                        <Button Content="进行开发者许可认证"
                                 HorizontalAlignment="Left"
                                 Padding="12,6"
                                 CornerRadius="6"
-                                Click="OnOpenSecurityAuthClick"/>
+                                Click="OnOpenSecurityAuthClick" />
                     </StackPanel>
                 </Border>
             </StackPanel>

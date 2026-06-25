@@ -17,98 +17,106 @@
             <ResourceDictionary>
                 <ResourceDictionary.ThemeDictionaries>
                     <ResourceDictionary x:Key="Light">
-                        <SolidColorBrush x:Key="AppBackground" Color="#FFF3F3F3"/>
-                        <SolidColorBrush x:Key="SidebarBackground" Color="#FFF9F9F9"/>
-                        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFFFF"/>
-                        <SolidColorBrush x:Key="CardBorder" Color="#FFE5E5E5"/>
-                        <SolidColorBrush x:Key="HighlightColor" Color="#FF000000"/>
-                        <SolidColorBrush x:Key="SubTextColor" Color="#FF666666"/>
-                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#0D000000"/>
-                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#1A000000"/>
-                        <SolidColorBrush x:Key="SeparatorBrush" Color="#1A000000"/>
+                        <SolidColorBrush x:Key="AppBackground" Color="#FFF3F3F3" />
+                        <SolidColorBrush x:Key="SidebarBackground" Color="#FFF9F9F9" />
+                        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFFFF" />
+                        <SolidColorBrush x:Key="CardBorder" Color="#FFE5E5E5" />
+                        <SolidColorBrush x:Key="HighlightColor" Color="#FF000000" />
+                        <SolidColorBrush x:Key="SubTextColor" Color="#FF666666" />
+                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#0D000000" />
+                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#1A000000" />
+                        <SolidColorBrush x:Key="SeparatorBrush" Color="#1A000000" />
                     </ResourceDictionary>
 
                     <ResourceDictionary x:Key="Default">
-                        <SolidColorBrush x:Key="AppBackground" Color="#FF1E1E1E"/>
-                        <SolidColorBrush x:Key="SidebarBackground" Color="#FF252526"/>
-                        <SolidColorBrush x:Key="CardBackground" Color="#FF2D2D30"/>
-                        <SolidColorBrush x:Key="CardBorder" Color="#FF3E3E42"/>
-                        <SolidColorBrush x:Key="HighlightColor" Color="#FFECECEC"/>
-                        <SolidColorBrush x:Key="SubTextColor" Color="#FFAAAAAA"/>
-                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#33000000"/>
-                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#33FFFFFF"/>
-                        <SolidColorBrush x:Key="SeparatorBrush" Color="#33FFFFFF"/>
+                        <SolidColorBrush x:Key="AppBackground" Color="#FF1E1E1E" />
+                        <SolidColorBrush x:Key="SidebarBackground" Color="#FF252526" />
+                        <SolidColorBrush x:Key="CardBackground" Color="#FF2D2D30" />
+                        <SolidColorBrush x:Key="CardBorder" Color="#FF3E3E42" />
+                        <SolidColorBrush x:Key="HighlightColor" Color="#FFECECEC" />
+                        <SolidColorBrush x:Key="SubTextColor" Color="#FFAAAAAA" />
+                        <SolidColorBrush x:Key="ImageBackgroundBrush" Color="#33000000" />
+                        <SolidColorBrush x:Key="BadgeBackgroundBrush" Color="#33FFFFFF" />
+                        <SolidColorBrush x:Key="SeparatorBrush" Color="#33FFFFFF" />
                     </ResourceDictionary>
                 </ResourceDictionary.ThemeDictionaries>
 
                 <Style x:Key="ToolbarButtonStyle" TargetType="Button">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Foreground" Value="{ThemeResource HighlightColor}"/>
-                    <Setter Property="Padding" Value="8,5"/>
-                    <Setter Property="CornerRadius" Value="4"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Foreground" Value="{ThemeResource HighlightColor}" />
+                    <Setter Property="Padding" Value="8,5" />
+                    <Setter Property="CornerRadius" Value="4" />
                 </Style>
 
                 <Style x:Key="MaterialCardStyle" TargetType="Border">
-                    <Setter Property="Width" Value="240"/>
-                    <Setter Property="MinHeight" Value="270"/>
-                    <Setter Property="Background" Value="{ThemeResource CardBackground}"/>
-                    <Setter Property="BorderBrush" Value="{ThemeResource CardBorder}"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="Width" Value="240" />
+                    <Setter Property="MinHeight" Value="270" />
+                    <Setter Property="Background" Value="{ThemeResource CardBackground}" />
+                    <Setter Property="BorderBrush" Value="{ThemeResource CardBorder}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
 
                 <Style x:Key="ActivityCardStyle" TargetType="Border">
-                    <Setter Property="Width" Value="420"/>
-                    <Setter Property="Height" Value="136"/>
-                    <Setter Property="Background" Value="{ThemeResource CardBackground}"/>
-                    <Setter Property="BorderBrush" Value="{ThemeResource CardBorder}"/>
-                    <Setter Property="BorderThickness" Value="1"/>
-                    <Setter Property="CornerRadius" Value="8"/>
+                    <Setter Property="Width" Value="420" />
+                    <Setter Property="Height" Value="136" />
+                    <Setter Property="Background" Value="{ThemeResource CardBackground}" />
+                    <Setter Property="BorderBrush" Value="{ThemeResource CardBorder}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="CornerRadius" Value="8" />
                 </Style>
             </ResourceDictionary>
         </Grid.Resources>
 
         <Grid Background="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="48"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="48" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid x:Name="AppTitleBar" Background="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
-                    <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0"/>
-                    <TextBlock Text="提瓦特日程" FontSize="12" Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center"/>
+                    <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
+                    <TextBlock Text="提瓦特日程" FontSize="12" Foreground="{ThemeResource SubTextColor}"
+                               VerticalAlignment="Center" />
                 </StackPanel>
             </Grid>
 
             <Grid Grid.Row="1" Padding="16,0" BorderBrush="{ThemeResource CardBorder}" BorderThickness="0,0,0,1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4" VerticalAlignment="Center">
+                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4"
+                            VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE823;" FontFamily="Segoe Fluent Icons" FontSize="13" Foreground="{ThemeResource SubTextColor}"/>
-                            <TextBlock Text="今日素材与近期活动" FontSize="12" Foreground="{ThemeResource HighlightColor}" FontWeight="SemiBold"/>
+                            <FontIcon Glyph="&#xE823;" FontFamily="Segoe Fluent Icons" FontSize="13"
+                                      Foreground="{ThemeResource SubTextColor}" />
+                            <TextBlock Text="今日素材与近期活动" FontSize="12" Foreground="{ThemeResource HighlightColor}"
+                                       FontWeight="SemiBold" />
                         </StackPanel>
                     </Border>
 
-                    <Rectangle Width="1" Height="16" Fill="{ThemeResource SeparatorBrush}" VerticalAlignment="Center"/>
+                    <Rectangle Width="1" Height="16" Fill="{ThemeResource SeparatorBrush}" VerticalAlignment="Center" />
 
-                    <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="当前刷新状态" VerticalAlignment="Center">
-                        <FontIcon Glyph="&#xE946;" FontFamily="Segoe Fluent Icons" FontSize="13" Foreground="{ThemeResource SubTextColor}"/>
-                        <TextBlock Text="{x:Bind StatusText, Mode=OneWay}" FontSize="12" Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="当前刷新状态"
+                                VerticalAlignment="Center">
+                        <FontIcon Glyph="&#xE946;" FontFamily="Segoe Fluent Icons" FontSize="13"
+                                  Foreground="{ThemeResource SubTextColor}" />
+                        <TextBlock Text="{x:Bind StatusText, Mode=OneWay}" FontSize="12"
+                                   Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center" />
                     </StackPanel>
                 </StackPanel>
 
-                <Button Grid.Column="1" Click="OnRefreshClick" Style="{StaticResource ToolbarButtonStyle}" ToolTipService.ToolTip="刷新日程数据">
+                <Button Grid.Column="1" Click="OnRefreshClick" Style="{StaticResource ToolbarButtonStyle}"
+                        ToolTipService.ToolTip="刷新日程数据">
                     <StackPanel Orientation="Horizontal" Spacing="6">
-                        <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14"/>
-                        <TextBlock Text="刷新数据" FontSize="12"/>
+                        <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14" />
+                        <TextBlock Text="刷新数据" FontSize="12" />
                     </StackPanel>
                 </Button>
             </Grid>
@@ -117,30 +125,42 @@
                 <PivotItem Header="今日素材">
                     <Grid Padding="20,12,20,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,12">
+                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}"
+                                BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,12">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Spacing="3">
-                                    <TextBlock Text="{x:Bind TodayDate, Mode=OneWay}" Foreground="{ThemeResource HighlightColor}" FontSize="20" FontWeight="SemiBold"/>
-                                    <TextBlock Text="每日采集、天赋书、武器突破素材掉落提醒" Foreground="{ThemeResource SubTextColor}" FontSize="12"/>
+                                    <TextBlock Text="{x:Bind TodayDate, Mode=OneWay}"
+                                               Foreground="{ThemeResource HighlightColor}" FontSize="20"
+                                               FontWeight="SemiBold" />
+                                    <TextBlock Text="每日采集、天赋书、武器突破素材掉落提醒" Foreground="{ThemeResource SubTextColor}"
+                                               FontSize="12" />
                                 </StackPanel>
 
-                                <Border Grid.Column="1" Visibility="{x:Bind BirthdayInfoVisibility, Mode=OneWay}" Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="6" Padding="8,5" VerticalAlignment="Center">
+                                <Border Grid.Column="1" Visibility="{x:Bind BirthdayInfoVisibility, Mode=OneWay}"
+                                        Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="6"
+                                        Padding="8,5" VerticalAlignment="Center">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <Border Width="28" Height="28" Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="5" BorderBrush="{ThemeResource SeparatorBrush}" BorderThickness="1">
-                                            <Image Source="{x:Bind BirthdayRoleIcon, Mode=OneWay}" Stretch="UniformToFill"/>
+                                        <Border Width="28" Height="28"
+                                                Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="5"
+                                                BorderBrush="{ThemeResource SeparatorBrush}" BorderThickness="1">
+                                            <Image Source="{x:Bind BirthdayRoleIcon, Mode=OneWay}"
+                                                   Stretch="UniformToFill" />
                                         </Border>
                                         <StackPanel VerticalAlignment="Center">
-                                            <TextBlock Text="今日生日" Foreground="{ThemeResource SubTextColor}" FontSize="10"/>
-                                            <TextBlock Text="{x:Bind BirthdayRoleName, Mode=OneWay}" Foreground="{ThemeResource HighlightColor}" FontSize="12" FontWeight="SemiBold"/>
+                                            <TextBlock Text="今日生日" Foreground="{ThemeResource SubTextColor}"
+                                                       FontSize="10" />
+                                            <TextBlock Text="{x:Bind BirthdayRoleName, Mode=OneWay}"
+                                                       Foreground="{ThemeResource HighlightColor}" FontSize="12"
+                                                       FontWeight="SemiBold" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -152,59 +172,96 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Margin="0,0,0,24">
-                                            <Border Background="{ThemeResource BadgeBackgroundBrush}" HorizontalAlignment="Left" CornerRadius="4" Padding="10,4" Margin="0,0,0,12">
+                                            <Border Background="{ThemeResource BadgeBackgroundBrush}"
+                                                    HorizontalAlignment="Left" CornerRadius="4" Padding="10,4"
+                                                    Margin="0,0,0,12">
                                                 <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <FontIcon Glyph="&#xE8EC;" FontFamily="Segoe Fluent Icons" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
-                                                    <TextBlock Text="{Binding CategoryName}" Foreground="{ThemeResource HighlightColor}" FontSize="14" FontWeight="Bold"/>
+                                                    <FontIcon Glyph="&#xE8EC;" FontFamily="Segoe Fluent Icons"
+                                                              FontSize="12" Foreground="{ThemeResource SubTextColor}" />
+                                                    <TextBlock Text="{Binding CategoryName}"
+                                                               Foreground="{ThemeResource HighlightColor}"
+                                                               FontSize="14" FontWeight="Bold" />
                                                 </StackPanel>
                                             </Border>
 
-                                            <GridView ItemsSource="{Binding Items}" SelectionMode="None" IsItemClickEnabled="False">
+                                            <GridView ItemsSource="{Binding Items}" SelectionMode="None"
+                                                      IsItemClickEnabled="False">
                                                 <GridView.ItemContainerStyle>
                                                     <Style TargetType="GridViewItem">
-                                                        <Setter Property="Margin" Value="0,0,10,10"/>
-                                                        <Setter Property="Padding" Value="0"/>
+                                                        <Setter Property="Margin" Value="0,0,10,10" />
+                                                        <Setter Property="Padding" Value="0" />
                                                     </Style>
                                                 </GridView.ItemContainerStyle>
                                                 <GridView.ItemTemplate>
                                                     <DataTemplate>
-                                                        <Border Style="{StaticResource MaterialCardStyle}" ToolTipService.ToolTip="{Binding Name}">
+                                                        <Border Style="{StaticResource MaterialCardStyle}"
+                                                                ToolTipService.ToolTip="{Binding Name}">
                                                             <Grid Padding="12">
                                                                 <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="Auto"/>
-                                                                    <RowDefinition Height="Auto"/>
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="Auto" />
                                                                 </Grid.RowDefinitions>
 
-                                                                <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="10">
-                                                                    <Border Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="8" Width="52" Height="52" Padding="4">
-                                                                        <Image Source="{Binding IconImage}" Stretch="UniformToFill"/>
+                                                                <StackPanel Grid.Row="0" Orientation="Horizontal"
+                                                                            Spacing="10">
+                                                                    <Border
+                                                                        Background="{ThemeResource ImageBackgroundBrush}"
+                                                                        CornerRadius="8" Width="52" Height="52"
+                                                                        Padding="4">
+                                                                        <Image Source="{Binding IconImage}"
+                                                                               Stretch="UniformToFill" />
                                                                     </Border>
                                                                     <StackPanel VerticalAlignment="Center">
-                                                                        <TextBlock Text="{Binding Name}" Foreground="{ThemeResource HighlightColor}" FontSize="13" FontWeight="SemiBold" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" MaxWidth="130"/>
-                                                                        <TextBlock Text="角色/武器" Foreground="{ThemeResource SubTextColor}" FontSize="10" Margin="0,2,0,0"/>
+                                                                        <TextBlock Text="{Binding Name}"
+                                                                                Foreground="{ThemeResource HighlightColor}"
+                                                                                FontSize="13" FontWeight="SemiBold"
+                                                                                TextWrapping="Wrap" MaxLines="2"
+                                                                                TextTrimming="CharacterEllipsis"
+                                                                                MaxWidth="130" />
+                                                                        <TextBlock Text="角色/武器"
+                                                                                Foreground="{ThemeResource SubTextColor}"
+                                                                                FontSize="10" Margin="0,2,0,0" />
                                                                     </StackPanel>
                                                                 </StackPanel>
 
-                                                                <Border Grid.Row="1" Background="{ThemeResource ImageBackgroundBrush}" CornerRadius="8" Margin="0,14" Padding="10" MinHeight="112" HorizontalAlignment="Stretch">
-                                                                    <ItemsControl ItemsSource="{Binding Materials}" Width="184" HorizontalAlignment="Center">
+                                                                <Border Grid.Row="1"
+                                                                        Background="{ThemeResource ImageBackgroundBrush}"
+                                                                        CornerRadius="8" Margin="0,14" Padding="10"
+                                                                        MinHeight="112" HorizontalAlignment="Stretch">
+                                                                    <ItemsControl ItemsSource="{Binding Materials}"
+                                                                            Width="184" HorizontalAlignment="Center">
                                                                         <ItemsControl.ItemsPanel>
                                                                             <ItemsPanelTemplate>
-                                                                                <ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" ItemWidth="46" ItemHeight="46"/>
+                                                                                <ItemsWrapGrid Orientation="Horizontal"
+                                                                                    MaximumRowsOrColumns="4"
+                                                                                    ItemWidth="46" ItemHeight="46" />
                                                                             </ItemsPanelTemplate>
                                                                         </ItemsControl.ItemsPanel>
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
-                                                                                <Border Width="42" Height="42" Margin="2" Background="{ThemeResource CardBackground}" CornerRadius="6" BorderBrush="{ThemeResource CardBackground}" BorderThickness="2">
-                                                                                    <Image Source="{Binding}" Stretch="UniformToFill"/>
+                                                                                <Border Width="42" Height="42"
+                                                                                    Margin="2"
+                                                                                    Background="{ThemeResource CardBackground}"
+                                                                                    CornerRadius="6"
+                                                                                    BorderBrush="{ThemeResource CardBackground}"
+                                                                                    BorderThickness="2">
+                                                                                    <Image Source="{Binding}"
+                                                                                        Stretch="UniformToFill" />
                                                                                 </Border>
                                                                             </DataTemplate>
                                                                         </ItemsControl.ItemTemplate>
                                                                     </ItemsControl>
                                                                 </Border>
 
-                                                                <Border Grid.Row="2" Background="{ThemeResource BadgeBackgroundBrush}" Padding="8,4" CornerRadius="4">
-                                                                    <TextBlock Text="{Binding DomainName}" Foreground="{ThemeResource SubTextColor}" FontSize="11" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                                                <Border Grid.Row="2"
+                                                                        Background="{ThemeResource BadgeBackgroundBrush}"
+                                                                        Padding="8,4" CornerRadius="4">
+                                                                    <TextBlock Text="{Binding DomainName}"
+                                                                               Foreground="{ThemeResource SubTextColor}"
+                                                                               FontSize="11"
+                                                                               HorizontalAlignment="Center"
+                                                                               TextTrimming="CharacterEllipsis" />
                                                                 </Border>
                                                             </Grid>
                                                         </Border>
@@ -217,11 +274,16 @@
                             </ItemsControl>
                         </ScrollViewer>
 
-                        <Grid Grid.RowSpan="2" Visibility="{x:Bind IsLoadingMaterials, Mode=OneWay}" Background="{ThemeResource AppBackground}" Opacity="0.92">
-                            <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8" Padding="28,22" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Grid.RowSpan="2" Visibility="{x:Bind IsLoadingMaterials, Mode=OneWay}"
+                              Background="{ThemeResource AppBackground}" Opacity="0.92">
+                            <Border Background="{ThemeResource CardBackground}"
+                                    BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8"
+                                    Padding="28,22" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel Spacing="12" HorizontalAlignment="Center">
-                                    <ProgressRing IsActive="True" Width="44" Height="44"/>
-                                    <TextBlock Text="{x:Bind StatusText, Mode=OneWay}" Foreground="{ThemeResource SubTextColor}" FontSize="12" HorizontalAlignment="Center"/>
+                                    <ProgressRing IsActive="True" Width="44" Height="44" />
+                                    <TextBlock Text="{x:Bind StatusText, Mode=OneWay}"
+                                               Foreground="{ThemeResource SubTextColor}" FontSize="12"
+                                               HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -231,45 +293,63 @@
                 <PivotItem Header="近期活动">
                     <Grid Padding="20,12,20,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,12">
+                        <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}"
+                                BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,12">
                             <StackPanel Spacing="3">
-                                <TextBlock Text="活动速览" Foreground="{ThemeResource HighlightColor}" FontSize="16" FontWeight="SemiBold"/>
-                                <TextBlock Text="集中查看当前版本活动与剩余时间。" Foreground="{ThemeResource SubTextColor}" FontSize="12"/>
+                                <TextBlock Text="活动速览" Foreground="{ThemeResource HighlightColor}" FontSize="16"
+                                           FontWeight="SemiBold" />
+                                <TextBlock Text="集中查看当前版本活动与剩余时间。" Foreground="{ThemeResource SubTextColor}"
+                                           FontSize="12" />
                             </StackPanel>
                         </Border>
 
-                        <GridView Grid.Row="1" ItemsSource="{x:Bind Activities, Mode=OneWay}" SelectionMode="None" IsItemClickEnabled="False" Padding="0,0,0,12">
+                        <GridView Grid.Row="1" ItemsSource="{x:Bind Activities, Mode=OneWay}" SelectionMode="None"
+                                  IsItemClickEnabled="False" Padding="0,0,0,12">
                             <GridView.ItemContainerStyle>
                                 <Style TargetType="GridViewItem">
-                                    <Setter Property="Margin" Value="0,0,12,12"/>
-                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="0,0,12,12" />
+                                    <Setter Property="Padding" Value="0" />
                                 </Style>
                             </GridView.ItemContainerStyle>
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Style="{StaticResource ActivityCardStyle}" ToolTipService.ToolTip="{Binding Title}">
+                                    <Border Style="{StaticResource ActivityCardStyle}"
+                                            ToolTipService.ToolTip="{Binding Title}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="210"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="210" />
+                                                <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
                                             <Grid CornerRadius="8,0,0,8">
-                                                <Image Source="{Binding Image}" Stretch="UniformToFill" Width="210" Height="136"/>
+                                                <Image Source="{Binding Image}" Stretch="UniformToFill" Width="210"
+                                                       Height="136" />
                                             </Grid>
 
                                             <StackPanel Grid.Column="1" Padding="14,12" Spacing="6">
-                                                <TextBlock Text="{Binding Title}" Foreground="{ThemeResource HighlightColor}" FontSize="14" FontWeight="Bold" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
-                                                <TextBlock Text="{Binding Subtitle}" Foreground="{ThemeResource SubTextColor}" FontSize="12" TextWrapping="Wrap" MaxLines="2" TextTrimming="CharacterEllipsis" Height="36"/>
+                                                <TextBlock Text="{Binding Title}"
+                                                           Foreground="{ThemeResource HighlightColor}" FontSize="14"
+                                                           FontWeight="Bold" TextWrapping="NoWrap"
+                                                           TextTrimming="CharacterEllipsis" />
+                                                <TextBlock Text="{Binding Subtitle}"
+                                                           Foreground="{ThemeResource SubTextColor}" FontSize="12"
+                                                           TextWrapping="Wrap" MaxLines="2"
+                                                           TextTrimming="CharacterEllipsis" Height="36" />
 
-                                                <Border Background="{ThemeResource BadgeBackgroundBrush}" HorizontalAlignment="Left" CornerRadius="4" Padding="8,3" Margin="0,4,0,0">
+                                                <Border Background="{ThemeResource BadgeBackgroundBrush}"
+                                                        HorizontalAlignment="Left" CornerRadius="4" Padding="8,3"
+                                                        Margin="0,4,0,0">
                                                     <StackPanel Orientation="Horizontal" Spacing="5">
-                                                        <FontIcon Glyph="&#xE823;" FontSize="11" Foreground="{ThemeResource SystemAccentColor}" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
-                                                        <TextBlock Text="{Binding Countdown}" FontSize="11" Foreground="{ThemeResource SystemAccentColor}" FontWeight="Bold"/>
+                                                        <FontIcon Glyph="&#xE823;" FontSize="11"
+                                                                  Foreground="{ThemeResource SystemAccentColor}"
+                                                                  FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                                                        <TextBlock Text="{Binding Countdown}" FontSize="11"
+                                                                   Foreground="{ThemeResource SystemAccentColor}"
+                                                                   FontWeight="Bold" />
                                                     </StackPanel>
                                                 </Border>
                                             </StackPanel>
@@ -279,11 +359,16 @@
                             </GridView.ItemTemplate>
                         </GridView>
 
-                        <Grid Grid.RowSpan="2" Visibility="{x:Bind IsLoadingActivities, Mode=OneWay}" Background="{ThemeResource AppBackground}" Opacity="0.92">
-                            <Border Background="{ThemeResource CardBackground}" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8" Padding="28,22" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid Grid.RowSpan="2" Visibility="{x:Bind IsLoadingActivities, Mode=OneWay}"
+                              Background="{ThemeResource AppBackground}" Opacity="0.92">
+                            <Border Background="{ThemeResource CardBackground}"
+                                    BorderBrush="{ThemeResource CardBorder}" BorderThickness="1" CornerRadius="8"
+                                    Padding="28,22" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <StackPanel Spacing="12" HorizontalAlignment="Center">
-                                    <ProgressRing IsActive="True" Width="44" Height="44"/>
-                                    <TextBlock Text="{x:Bind StatusText, Mode=OneWay}" Foreground="{ThemeResource SubTextColor}" FontSize="12" HorizontalAlignment="Center"/>
+                                    <ProgressRing IsActive="True" Width="44" Height="44" />
+                                    <TextBlock Text="{x:Bind StatusText, Mode=OneWay}"
+                                               Foreground="{ThemeResource SubTextColor}" FontSize="12"
+                                               HorizontalAlignment="Center" />
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -296,7 +381,7 @@
                                Width="1" Height="1"
                                Opacity="0"
                                IsHitTestVisible="False"
-                               DefaultBackgroundColor="Transparent"/>
+                               DefaultBackgroundColor="Transparent" />
         </Grid>
     </Grid>
 </Window>

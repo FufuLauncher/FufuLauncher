@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Window
     x:Class="FufuLauncher.Views.LoginQrWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -9,7 +10,7 @@
     Title="扫码登录">
 
     <Window.SystemBackdrop>
-        <MicaBackdrop Kind="BaseAlt"/>
+        <MicaBackdrop Kind="BaseAlt" />
     </Window.SystemBackdrop>
 
     <Grid PreviewKeyDown="RootGrid_PreviewKeyDown">
@@ -22,62 +23,68 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" x:FieldModifier="public" Grid.Row="0" Background="Transparent">
-            <TextBlock Text="扫码登录" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="14" Opacity="0.8"/>
+            <TextBlock Text="扫码登录" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="14" Opacity="0.8" />
         </Grid>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-            <ComboBox x:Name="LoginMethodComboBox" SelectedIndex="0" HorizontalAlignment="Center" SelectionChanged="LoginMethodComboBox_SelectionChanged">
-                <ComboBoxItem Content="米游社APP扫码登录"/>
-                <ComboBoxItem Content="网页通行证登录"/>
-                <ComboBoxItem Content="HoYoLAB网页登录"/>
+            <ComboBox x:Name="LoginMethodComboBox" SelectedIndex="0" HorizontalAlignment="Center"
+                      SelectionChanged="LoginMethodComboBox_SelectionChanged">
+                <ComboBoxItem Content="米游社APP扫码登录" />
+                <ComboBoxItem Content="网页通行证登录" />
+                <ComboBoxItem Content="HoYoLAB网页登录" />
             </ComboBox>
 
-            <StackPanel x:Name="GameLoginPanel" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center" Visibility="Collapsed">
-                <TextBlock Text="游戏App ID:" VerticalAlignment="Center"/>
-                <TextBox x:Name="GameAppIdTextBox" Text="7" Width="100" PlaceholderText="输入AppID"/>
-                <Button Content="确认生成" Click="GameLoginButton_Click"/>
+            <StackPanel x:Name="GameLoginPanel" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center"
+                        Visibility="Collapsed">
+                <TextBlock Text="游戏App ID:" VerticalAlignment="Center" />
+                <TextBox x:Name="GameAppIdTextBox" Text="7" Width="100" PlaceholderText="输入AppID" />
+                <Button Content="确认生成" Click="GameLoginButton_Click" />
             </StackPanel>
 
             <StackPanel x:Name="QrCodeContainer" Spacing="20">
-                <Border Width="220" Height="220" Background="White" CornerRadius="8" Padding="10" HorizontalAlignment="Center">
-                    <Image x:Name="QrCodeImage" Stretch="Uniform" Opacity="0"/>
+                <Border Width="220" Height="220" Background="White" CornerRadius="8" Padding="10"
+                        HorizontalAlignment="Center">
+                    <Image x:Name="QrCodeImage" Stretch="Uniform" Opacity="0" />
                 </Border>
-                <Button x:Name="RefreshButton" Content="刷新二维码" Click="RefreshButton_Click" HorizontalAlignment="Center"/>
+                <Button x:Name="RefreshButton" Content="刷新二维码" Click="RefreshButton_Click" HorizontalAlignment="Center" />
             </StackPanel>
 
-            <Grid x:Name="PassportWebViewBorder" Visibility="Collapsed" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="420" MinHeight="480">
-    
-                <WebView2 x:Name="PassportWebView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Grid x:Name="PassportWebViewBorder" Visibility="Collapsed" HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch" MinWidth="420" MinHeight="480">
+
+                <WebView2 x:Name="PassportWebView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
                 <Grid IsHitTestVisible="False">
-                    <Path Data="M 0,12 A 12,12 0 0 1 12,0 L 0,0 Z" 
-                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                          HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <Path Data="M 0,0 A 12,12 0 0 1 12,12 L 12,0 Z" 
-                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                          HorizontalAlignment="Right" VerticalAlignment="Top"/>
-                    <Path Data="M 12,12 A 12,12 0 0 1 0,0 L 0,12 Z" 
-                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                    <Path Data="M 12,0 A 12,12 0 0 1 0,12 L 12,12 Z" 
-                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-                          HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Path Data="M 0,12 A 12,12 0 0 1 12,0 L 0,0 Z"
+                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                          HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Path Data="M 0,0 A 12,12 0 0 1 12,12 L 12,0 Z"
+                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                          HorizontalAlignment="Right" VerticalAlignment="Top" />
+                    <Path Data="M 12,12 A 12,12 0 0 1 0,0 L 0,12 Z"
+                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                          HorizontalAlignment="Left" VerticalAlignment="Bottom" />
+                    <Path Data="M 12,0 A 12,12 0 0 1 0,12 L 12,12 Z"
+                          Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                          HorizontalAlignment="Right" VerticalAlignment="Bottom" />
                 </Grid>
             </Grid>
-            
-            <TextBlock x:Name="WebLoginWarningTextBlock" 
-                       Text="注意：网页通行证登录无法获取到Stoken，部分功能会无法使用" 
-                       Foreground="DarkOrange" 
-                       HorizontalAlignment="Center" 
-                       Visibility="Collapsed"/>
-            
-            <Button x:Name="ManualCookieButton" Content="手动输入Cookie" Click="ManualCookieButton_Click" HorizontalAlignment="Center"/>
-            <Button x:Name="ClearCacheButton" Content="清除历史登录数据" Click="ClearCacheButton_Click" HorizontalAlignment="Center"/>
+
+            <TextBlock x:Name="WebLoginWarningTextBlock"
+                       Text="注意：网页通行证登录无法获取到Stoken，部分功能会无法使用"
+                       Foreground="DarkOrange"
+                       HorizontalAlignment="Center"
+                       Visibility="Collapsed" />
+
+            <Button x:Name="ManualCookieButton" Content="手动输入Cookie" Click="ManualCookieButton_Click"
+                    HorizontalAlignment="Center" />
+            <Button x:Name="ClearCacheButton" Content="清除历史登录数据" Click="ClearCacheButton_Click"
+                    HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>
 </Window>

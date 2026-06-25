@@ -12,49 +12,49 @@
     IsMaximizable="False"
     IsMinimizable="False"
     IsResizable="True">
-    
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/> 
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <Grid x:Name="AppTitleBar" Grid.Row="0" Height="32" 
+
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Height="32"
               Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
               BorderThickness="0,0,0,1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
+
             <Image Grid.Column="0" Width="16" Height="16" Margin="12,0,0,0"
-                   Source="/Assets/WindowIcon.ico" VerticalAlignment="Center"/>
-            
-            <TextBlock Grid.Column="1" Text="版本更新公告" 
+                   Source="/Assets/WindowIcon.ico" VerticalAlignment="Center" />
+
+            <TextBlock Grid.Column="1" Text="版本更新公告"
                        Style="{StaticResource BodyTextBlockStyle}"
                        VerticalAlignment="Center" Margin="12,0,0,0"
-                       Opacity="0.8"/>
-        </Grid>
-        
-        <Grid Grid.Row="1">
-            <WebView2 x:Name="UpdateWebView" 
-                      Margin="0,0,0,0"
-                      DefaultBackgroundColor="Transparent"/>
+                       Opacity="0.8" />
         </Grid>
 
-        <Grid Grid.Row="2" 
+        <Grid Grid.Row="1">
+            <WebView2 x:Name="UpdateWebView"
+                      Margin="0,0,0,0"
+                      DefaultBackgroundColor="Transparent" />
+        </Grid>
+
+        <Grid Grid.Row="2"
               Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-              BorderThickness="0,1,0,0" 
+              BorderThickness="0,1,0,0"
               Padding="16,12">
-            <Button Content="立即更新" 
-                    HorizontalAlignment="Right" 
+            <Button Content="立即更新"
+                    HorizontalAlignment="Right"
                     Width="120"
-                    Click="OnUpdateBtnClicked"/>
+                    Click="OnUpdateBtnClicked" />
         </Grid>
-        
+
     </Grid>
 </windowex:WindowEx>

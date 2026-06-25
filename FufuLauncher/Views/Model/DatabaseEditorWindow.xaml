@@ -11,55 +11,55 @@
                 <Button.ContentTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon Glyph="&#xE149;" FontFamily="Segoe MDL2 Assets" FontSize="14"/>
+                            <FontIcon Glyph="&#xE149;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
                             <TextBlock Text="Refresh" />
                         </StackPanel>
                     </DataTemplate>
                 </Button.ContentTemplate>
             </Button>
-            <Button Content="DeleteDb" Click="OnDeleteDbClick" Foreground="Red" BorderBrush="Red"/>
+            <Button Content="DeleteDb" Click="OnDeleteDbClick" Foreground="Red" BorderBrush="Red" />
         </StackPanel>
-        
+
         <ListView x:Name="SettingsListView" Grid.Row="1" SelectionMode="None"
                   BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" CornerRadius="4">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:SettingItem">
                     <Grid Margin="0,8" ColumnSpacing="12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBox Grid.Column="0" 
-                                 Text="{x:Bind Key, Mode=TwoWay}" 
-                                 Header="Key" 
+
+                        <TextBox Grid.Column="0"
+                                 Text="{x:Bind Key, Mode=TwoWay}"
+                                 Header="Key"
                                  VerticalAlignment="Top" />
-                        
-                        <TextBox Grid.Column="1" 
-                                 Text="{x:Bind Value, Mode=TwoWay}" 
-                                 Header="Value" 
-                                 AcceptsReturn="True" 
-                                 TextWrapping="Wrap" 
+
+                        <TextBox Grid.Column="1"
+                                 Text="{x:Bind Value, Mode=TwoWay}"
+                                 Header="Value"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
                                  MinHeight="64"
                                  MaxHeight="200"
                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                                  VerticalAlignment="Top" />
-                                 
-                        <Button Grid.Column="2" 
-                                Content="Delete" 
-                                Click="OnDeleteItemClick" 
-                                VerticalAlignment="Top" 
-                                Margin="0,32,0,0" 
-                                Foreground="#FF8A8A"/>
+
+                        <Button Grid.Column="2"
+                                Content="Delete"
+                                Click="OnDeleteItemClick"
+                                VerticalAlignment="Top"
+                                Margin="0,32,0,0"
+                                Foreground="#FF8A8A" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
         <StackPanel Orientation="Horizontal" Spacing="12" Grid.Row="2" Margin="0,16,0,0">
-            <Button Content="Add" Click="OnAddNewItemClick"/>
-            <Button Content="Save" Click="OnSaveChangesClick"/>
+            <Button Content="Add" Click="OnAddNewItemClick" />
+            <Button Content="Save" Click="OnSaveChangesClick" />
         </StackPanel>
     </Grid>
 </Window>

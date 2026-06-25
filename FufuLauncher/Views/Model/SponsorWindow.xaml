@@ -10,32 +10,32 @@
 
     <Grid x:Name="RootGrid" Padding="32" Loaded="RootGrid_Loaded">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <TextBlock Text="赞赏作者" 
+
+        <TextBlock Text="赞赏作者"
                    FontFamily="{StaticResource AppGlobalFont}"
-                   Style="{ThemeResource TitleTextBlockStyle}" 
-                   Grid.Row="0" 
-                   Margin="0,0,0,16"/>
-        
-        <TextBlock Text="目前仅支持微信，不支持支付宝或其他赞赏方式" 
+                   Style="{ThemeResource TitleTextBlockStyle}"
+                   Grid.Row="0"
+                   Margin="0,0,0,16" />
+
+        <TextBlock Text="目前仅支持微信，不支持支付宝或其他赞赏方式"
                    FontFamily="{StaticResource AppGlobalFont}"
-                   Foreground="{ThemeResource SystemFillColorCriticalBrush}" 
+                   Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                    Style="{ThemeResource BodyStrongTextBlockStyle}"
-                   Grid.Row="1" 
-                   Margin="0,0,0,16"/>
-                
-        <Border Grid.Row="2" 
-                CornerRadius="12" 
-                HorizontalAlignment="Center" 
+                   Grid.Row="1"
+                   Margin="0,0,0,16" />
+
+        <Border Grid.Row="2"
+                CornerRadius="12"
+                HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Margin="0,0,0,24">
-            <Image x:Name="QrCodeImage" 
-                   Stretch="Uniform" 
+            <Image x:Name="QrCodeImage"
+                   Stretch="Uniform"
                    Opacity="0">
                 <Image.Resources>
                     <Storyboard x:Name="FadeInStoryboard">
@@ -43,29 +43,29 @@
                                          Storyboard.TargetProperty="Opacity"
                                          From="0" To="1" Duration="0:0:0.6">
                             <DoubleAnimation.EasingFunction>
-                                <CubicEase EasingMode="EaseOut"/>
+                                <CubicEase EasingMode="EaseOut" />
                             </DoubleAnimation.EasingFunction>
                         </DoubleAnimation>
                     </Storyboard>
                 </Image.Resources>
             </Image>
         </Border>
-        
-        <TextBlock x:Name="ErrorText" 
+
+        <TextBlock x:Name="ErrorText"
                    Grid.Row="2"
-                   Text="二维码加载失败" 
+                   Text="二维码加载失败"
                    FontFamily="{StaticResource AppGlobalFont}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                   Visibility="Collapsed"/>
-                   
-        <TextBlock Text="支付即视为知晓并同意：赞助如无特殊原因概不退款" 
+                   Visibility="Collapsed" />
+
+        <TextBlock Text="支付即视为知晓并同意：赞助如无特殊原因概不退款"
                    FontFamily="{StaticResource AppGlobalFont}"
                    Style="{ThemeResource CaptionTextBlockStyle}"
                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                    TextWrapping="Wrap"
                    HorizontalAlignment="Center"
-                   Grid.Row="3"/>
+                   Grid.Row="3" />
     </Grid>
 </Window>

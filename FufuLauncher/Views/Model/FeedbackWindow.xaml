@@ -9,29 +9,35 @@
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" Background="Transparent">
-            <TextBlock Text="提交反馈" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" Opacity="0.8"/>
+            <TextBlock Text="提交反馈" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" Opacity="0.8" />
         </Grid>
 
         <Grid Grid.Row="1" Padding="32,16,32,32">
             <StackPanel Spacing="16" VerticalAlignment="Center">
-                <TextBlock Text="请选择您要提交的反馈类型：" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8"/>
-                
-                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16" Click="OnFeatureRequestClick" BorderThickness="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+                <TextBlock Text="请选择您要提交的反馈类型：" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+
+                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16"
+                        Click="OnFeatureRequestClick" BorderThickness="0"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                     <StackPanel>
-                        <TextBlock Text="提交新想法 / 功能请求" FontWeight="Bold" FontSize="14"/>
-                        <TextBlock Text="如果您有新的点子或希望增加新功能，请点击此处通过GitHub提交" FontSize="12" Opacity="0.7" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        <TextBlock Text="提交新想法 / 功能请求" FontWeight="Bold" FontSize="14" />
+                        <TextBlock Text="如果您有新的点子或希望增加新功能，请点击此处通过GitHub提交" FontSize="12" Opacity="0.7" Margin="0,4,0,0"
+                                   TextWrapping="Wrap" />
                     </StackPanel>
                 </Button>
-                
-                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16" Click="OnBugReportClick" BorderThickness="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+
+                <Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="16"
+                        Click="OnBugReportClick" BorderThickness="0"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                     <StackPanel>
-                        <TextBlock Text="报告问题 / Bug" FontWeight="Bold" FontSize="14"/>
-                        <TextBlock Text="如果您在运行过程中遇到报错或功能异常，请点击此处通过GitHub提交错误报告" FontSize="12" Opacity="0.7" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        <TextBlock Text="报告问题 / Bug" FontWeight="Bold" FontSize="14" />
+                        <TextBlock Text="如果您在运行过程中遇到报错或功能异常，请点击此处通过GitHub提交错误报告" FontSize="12" Opacity="0.7"
+                                   Margin="0,4,0,0" TextWrapping="Wrap" />
                     </StackPanel>
                 </Button>
             </StackPanel>

@@ -16,68 +16,69 @@
     Loaded="GachaDialog_Loaded">
 
     <ContentDialog.Resources>
-        <helpers:BoolNegationConverter x:Key="BoolNegationConverter"/>
-        <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
+        <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
         <Style TargetType="TextBlock" x:Key="LabelStyle">
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,0,8,0" />
         </Style>
 
-        <SolidColorBrush x:Key="PityProgressBarForeground" Color="#FFD700"/>
+        <SolidColorBrush x:Key="PityProgressBarForeground" Color="#FFD700" />
     </ContentDialog.Resources>
 
     <Grid MinHeight="500">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,24" ColumnSpacing="12" RowSpacing="12">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBox Grid.Row="0" Grid.Column="0" 
-                     Header="抽卡记录链接" 
-                     PlaceholderText="在此粘贴带 authkey 的 URL" 
-                     Text="{x:Bind ViewModel.InputUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox Grid.Row="0" Grid.Column="0"
+                     Header="抽卡记录链接"
+                     PlaceholderText="在此粘贴带 authkey 的 URL"
+                     Text="{x:Bind ViewModel.InputUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom" Margin="0,0,0,2">
-                <Button Content="{x:Bind ViewModel.CaptureButtonText, Mode=OneWay}" 
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom"
+                        Margin="0,0,0,2">
+                <Button Content="{x:Bind ViewModel.CaptureButtonText, Mode=OneWay}"
                         Command="{x:Bind ViewModel.ToggleCaptureCommand}"
-                        IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"/>
-                
+                        IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
+
                 <Button Content="开始分析"
                         Command="{x:Bind ViewModel.StartAnalysisCommand}"
-                        IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}"/>
+                        IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
 
-                <Button Content="导出 UIGF" 
+                <Button Content="导出 UIGF"
                         Command="{x:Bind ViewModel.ExportUigfCommand}"
                         IsEnabled="{x:Bind ViewModel.CanExport, Mode=OneWay}"
-                        ToolTipService.ToolTip="导出标准 UIGF Json 格式到桌面"/>
+                        ToolTipService.ToolTip="导出标准 UIGF Json 格式到桌面" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="12">
-                <ProgressRing IsActive="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay}" Width="20" Height="20"/>
-                <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}" 
-                           VerticalAlignment="Center" 
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                <ProgressRing IsActive="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay}" Width="20" Height="20" />
+                <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+                           VerticalAlignment="Center"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
             </StackPanel>
         </Grid>
 
         <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.Statistics, Mode=OneWay}" SelectionMode="None">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    <Setter Property="Margin" Value="0,0,0,12"/>
-                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0,0,0,12" />
+                    <Setter Property="Padding" Value="0" />
                 </Style>
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
@@ -86,43 +87,55 @@
                         <Expander.Header>
                             <Grid HorizontalAlignment="Stretch" Margin="0,8">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="3*"/>
-                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="1.5*" />
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                    <TextBlock Text="{x:Bind PoolName}" FontSize="18" FontWeight="Bold"/>
+                                    <TextBlock Text="{x:Bind PoolName}" FontSize="18" FontWeight="Bold" />
                                     <StackPanel Orientation="Horizontal" Margin="0,4,0,0" Spacing="4">
-                                        <FontIcon Glyph="&#xE9D2;" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                            <Run Text="共投入"/>
-                                            <Run Text="{x:Bind TotalCount}" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                                            <Run Text="抽"/>
+                                        <FontIcon Glyph="&#xE9D2;" FontSize="12"
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                        <TextBlock FontSize="13"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                            <Run Text="共投入" />
+                                            <Run Text="{x:Bind TotalCount}" FontWeight="SemiBold"
+                                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
+                                            <Run Text="抽" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="24,0">
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="当前垫底" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                        <TextBlock Text="当前垫底" FontSize="12"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         <TextBlock HorizontalAlignment="Right" FontSize="12">
-                                            <Run Text="{x:Bind CurrentPity}" Foreground="{ThemeResource SystemFillColorCautionBrush}" FontWeight="Bold"/>
-                                            <Run Text="/ 90" Foreground="{ThemeResource TextFillColorTertiaryBrush}"/>
+                                            <Run Text="{x:Bind CurrentPity}"
+                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                                                 FontWeight="Bold" />
+                                            <Run Text="/ 90" Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                                         </TextBlock>
                                     </Grid>
-                                    <ProgressBar Value="{x:Bind CurrentPity}" Maximum="90" Height="6" 
-                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}"/>
+                                    <ProgressBar Value="{x:Bind CurrentPity}" Maximum="90" Height="6"
+                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}" />
                                 </StackPanel>
 
-                                <Border Grid.Column="2" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" 
+                                <Border Grid.Column="2"
+                                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                         CornerRadius="4" Padding="12,8">
                                     <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="五星数量" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2,0,0">
-                                            <TextBlock Text="{x:Bind FiveStarCount}" FontSize="24" FontWeight="Bold" Foreground="#FFD700" Margin="0,-4,4,0"/>
-                                            <FontIcon Glyph="&#xE735;" FontFamily="Segoe Fluent Icons" FontSize="14" Foreground="#FFD700" VerticalAlignment="Center"/>
+                                        <TextBlock Text="五星数量" FontSize="11"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   HorizontalAlignment="Center" />
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                                    Margin="0,2,0,0">
+                                            <TextBlock Text="{x:Bind FiveStarCount}" FontSize="24" FontWeight="Bold"
+                                                       Foreground="#FFD700" Margin="0,-4,4,0" />
+                                            <FontIcon Glyph="&#xE735;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                                      Foreground="#FFD700" VerticalAlignment="Center" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Border>
@@ -131,31 +144,44 @@
 
                         <Grid Padding="16,8">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            
-                            <TextBlock Text="五星获取记录" Style="{StaticResource BodyStrongTextBlockStyle}" Margin="0,0,0,12"/>
+
+                            <TextBlock Text="五星获取记录" Style="{StaticResource BodyStrongTextBlockStyle}"
+                                       Margin="0,0,0,12" />
 
                             <ListView Grid.Row="1" ItemsSource="{x:Bind FiveStarRecords}" SelectionMode="None">
                                 <ListView.ItemTemplate>
                                     <DataTemplate x:DataType="models:FiveStarRecord">
-                                        <Grid Margin="0,6" Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" CornerRadius="4" Padding="12,8">
+                                        <Grid Margin="0,6"
+                                              Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                              CornerRadius="4" Padding="12,8">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="80"/>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="80" />
                                             </Grid.ColumnDefinitions>
 
                                             <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{x:Bind Name}" Foreground="#DAA520" FontWeight="SemiBold" FontSize="15"/>
-                                                <TextBlock Text="{x:Bind Time}" FontSize="11" Foreground="{ThemeResource TextFillColorTertiaryBrush}" Margin="0,2,0,0"/>
+                                                <TextBlock Text="{x:Bind Name}" Foreground="#DAA520"
+                                                           FontWeight="SemiBold" FontSize="15" />
+                                                <TextBlock Text="{x:Bind Time}" FontSize="11"
+                                                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                                           Margin="0,2,0,0" />
                                             </StackPanel>
 
-                                            <Border Grid.Column="2" Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}" CornerRadius="12" Padding="0,4" HorizontalAlignment="Right" Width="60">
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="2">
-                                                    <TextBlock Text="{x:Bind PityUsed}" FontWeight="Bold" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
-                                                    <TextBlock Text="抽" FontSize="10" VerticalAlignment="Bottom" Margin="0,0,0,2" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                            <Border Grid.Column="2"
+                                                    Background="{ThemeResource SystemFillColorAttentionBackgroundBrush}"
+                                                    CornerRadius="12" Padding="0,4" HorizontalAlignment="Right"
+                                                    Width="60">
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                                                            Spacing="2">
+                                                    <TextBlock Text="{x:Bind PityUsed}" FontWeight="Bold"
+                                                               Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
+                                                    <TextBlock Text="抽" FontSize="10" VerticalAlignment="Bottom"
+                                                               Margin="0,0,0,2"
+                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 </StackPanel>
                                             </Border>
                                         </Grid>
@@ -168,21 +194,21 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Border Grid.Row="2" Margin="0,12,0,0" 
-                Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}" 
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" 
-                BorderThickness="1" 
-                CornerRadius="4" 
+        <Border Grid.Row="2" Margin="0,12,0,0"
+                Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                BorderThickness="1"
+                CornerRadius="4"
                 Padding="12,8">
             <StackPanel Orientation="Horizontal" Spacing="8">
-                <FontIcon Glyph="&#xE946;" FontSize="16" 
-                          Foreground="{ThemeResource AccentFillColorDefaultBrush}" 
-                          VerticalAlignment="Center"/>
-                
-                <TextBlock Text="本功能相对简陋，建议使用其他专用软件查看抽卡记录" 
-                           VerticalAlignment="Center" 
-                           Style="{ThemeResource CaptionTextBlockStyle}" 
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                <FontIcon Glyph="&#xE946;" FontSize="16"
+                          Foreground="{ThemeResource AccentFillColorDefaultBrush}"
+                          VerticalAlignment="Center" />
+
+                <TextBlock Text="本功能相对简陋，建议使用其他专用软件查看抽卡记录"
+                           VerticalAlignment="Center"
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
             </StackPanel>
         </Border>
 
