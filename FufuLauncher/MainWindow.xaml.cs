@@ -34,6 +34,10 @@ public sealed partial class MainWindow : WindowEx
     private readonly IBackgroundRenderer _backgroundRenderer;
     private readonly ILocalSettingsService _localSettingsService;
     private MediaPlayer? _globalBackgroundPlayer;
+    private IMediaPlaybackSource? _suspendedVideoSource;
+    private DispatcherTimer _bgFallbackTimer;
+    private RoutedEventHandler _bgImageOpenedHandler;
+    private ExceptionRoutedEventHandler _bgImageFailedHandler;
     private double _frameBackgroundOpacity;
     private bool _minimizeToTray;
     private bool _isExit;
@@ -329,6 +333,8 @@ public sealed partial class MainWindow : WindowEx
                     {
                         _globalBackgroundPlayer.Pause();
                     }
+                    _suspendedVideoSource = _globalBackgroundPlayer.Source;
+                    _globalBackgroundPlayer.Source = null;
                 }
                 catch (System.Runtime.InteropServices.COMException)
                 {
@@ -363,6 +369,11 @@ public sealed partial class MainWindow : WindowEx
         {
             if (_isVideoBackground && _globalBackgroundPlayer != null)
             {
+                if (_suspendedVideoSource != null)
+                {
+                    _globalBackgroundPlayer.Source = _suspendedVideoSource;
+                    _suspendedVideoSource = null;
+                }
                 _globalBackgroundPlayer.Play();
             }
         }
@@ -933,6 +944,7 @@ public sealed partial class MainWindow : WindowEx
     {
         var player = _globalBackgroundPlayer;
         _globalBackgroundPlayer = null;
+        _suspendedVideoSource = null;
         try
         {
             GlobalBackgroundVideo.SetMediaPlayer(null);
@@ -941,15 +953,11 @@ public sealed partial class MainWindow : WindowEx
 
         if (player != null)
         {
-            // 在后台线程释放 MediaPlayer，避免 UI 线程死锁
+            player.Pause();
+            player.Source = null;
             _ = Task.Run(() =>
             {
-                try
-                {
-                    player.Pause();
-                    player.Dispose();
-                }
-                catch { }
+                try { player.Dispose(); } catch { }
             });
         }
     }
@@ -1032,40 +1040,27 @@ public sealed partial class MainWindow : WindowEx
             {
                 if (isAnimationStarted) return;
                 isAnimationStarted = true;
+                CleanupBgImageHandlers();
                 storyboard.Begin();
             }
 
-            RoutedEventHandler imageOpenedHandler = null!;
-            imageOpenedHandler = (s, e) =>
-            {
-                GlobalBackgroundImage.ImageOpened -= imageOpenedHandler;
-                StartFadeInAnimation();
-            };
-            
-            ExceptionRoutedEventHandler imageFailedHandler = null!;
-            imageFailedHandler = (s, e) =>
-            {
-                GlobalBackgroundImage.ImageFailed -= imageFailedHandler;
-                StartFadeInAnimation();
-            };
+            CleanupBgImageHandlers();
 
-            GlobalBackgroundImage.ImageOpened += imageOpenedHandler;
-            GlobalBackgroundImage.ImageFailed += imageFailedHandler;
+            _bgImageOpenedHandler = (s, e) => StartFadeInAnimation();
+            _bgImageFailedHandler = (s, e) => StartFadeInAnimation();
+
+            GlobalBackgroundImage.ImageOpened += _bgImageOpenedHandler;
+            GlobalBackgroundImage.ImageFailed += _bgImageFailedHandler;
             
             GlobalBackgroundImage.Source = result.ImageSource;
 
-            var fallbackTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(600) };
-            fallbackTimer.Tick += (s, e) =>
+            _bgFallbackTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(600) };
+            _bgFallbackTimer.Tick += (s, e) =>
             {
-                fallbackTimer.Stop();
-                if (!isAnimationStarted)
-                {
-                    GlobalBackgroundImage.ImageOpened -= imageOpenedHandler;
-                    GlobalBackgroundImage.ImageFailed -= imageFailedHandler;
-                    StartFadeInAnimation();
-                }
+                _bgFallbackTimer.Stop();
+                StartFadeInAnimation();
             };
-            fallbackTimer.Start();
+            _bgFallbackTimer.Start();
 
             if (wasVideoBackground)
             {
@@ -1076,6 +1071,21 @@ public sealed partial class MainWindow : WindowEx
         UpdateBackgroundOverlayTheme();
     });
 }
+
+    private void CleanupBgImageHandlers()
+    {
+        _bgFallbackTimer?.Stop();
+        if (_bgImageOpenedHandler != null)
+        {
+            GlobalBackgroundImage.ImageOpened -= _bgImageOpenedHandler;
+            _bgImageOpenedHandler = null;
+        }
+        if (_bgImageFailedHandler != null)
+        {
+            GlobalBackgroundImage.ImageFailed -= _bgImageFailedHandler;
+            _bgImageFailedHandler = null;
+        }
+    }
 
     private Task ClearGlobalBackgroundAsync()
     {

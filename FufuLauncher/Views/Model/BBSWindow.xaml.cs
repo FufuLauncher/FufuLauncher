@@ -755,6 +755,12 @@ public static async Task<string> FetchApiJsonAsync(string apiUrl)
         var timeoutTask = Task.Delay(15000);
         var completedTask = await Task.WhenAny(tcs.Task, timeoutTask);
 
+        try
+        {
+            window.BBSWebView.CoreWebView2.Stop();
+            window.BBSWebView.Close();
+        }
+        catch { }
         window.Close();
 
         if (completedTask == timeoutTask)

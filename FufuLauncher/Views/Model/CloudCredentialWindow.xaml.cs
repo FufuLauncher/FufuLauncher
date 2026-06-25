@@ -27,6 +27,7 @@ public sealed partial class CloudCredentialWindow : Window
         AppWindow.Resize(new SizeInt32(1280, 720));
 
         TitleText.Text = $"添加云游戏凭证 - {_uid}";
+        Closed += OnWindowClosed;
         InitializeWebViewAsync();
     }
 
@@ -82,5 +83,19 @@ public sealed partial class CloudCredentialWindow : Window
     private void CoreWebView2_ContextMenuRequested(object sender, CoreWebView2ContextMenuRequestedEventArgs e)
     {
         e.Handled = true;
+    }
+
+    private void OnWindowClosed(object sender, WindowEventArgs args)
+    {
+        try
+        {
+            if (CloudWebView.CoreWebView2 != null)
+            {
+                CloudWebView.CoreWebView2.ContextMenuRequested -= CoreWebView2_ContextMenuRequested;
+                CloudWebView.CoreWebView2.WebResourceRequested -= CoreWebView2_WebResourceRequested;
+            }
+            CloudWebView.Close();
+        }
+        catch { }
     }
 }

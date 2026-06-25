@@ -725,7 +725,7 @@ namespace FufuLauncher.Views
         {
             try
             {
-                var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
+                using var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
                 var dataPackage = new DataPackage();
                 dataPackage.SetBitmap(RandomAccessStreamReference.CreateFromStream(stream));
                 Clipboard.SetContent(dataPackage);
@@ -754,7 +754,7 @@ namespace FufuLauncher.Views
                 var file = await savePicker.PickSaveFileAsync();
                 if (file == null) return;
 
-                var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
+                using var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
                 using var fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
                 using var reader = new DataReader(stream.GetInputStreamAt(0));
                 await reader.LoadAsync((uint)stream.Size);
