@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using System;
@@ -98,3 +102,4 @@ namespace FufuLauncher.Helpers
         }
     }
 }
+

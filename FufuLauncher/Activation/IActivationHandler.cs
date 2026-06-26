@@ -1,4 +1,8 @@
-﻿namespace FufuLauncher.Activation;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+namespace FufuLauncher.Activation;
 
 public interface IActivationHandler
 {
@@ -6,3 +10,4 @@ public interface IActivationHandler
 
     Task HandleAsync(object args);
 }
+

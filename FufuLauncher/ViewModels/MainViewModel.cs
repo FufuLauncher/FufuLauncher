@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -1503,3 +1507,4 @@ private void QuickSwitchPreset(PresetModel targetPreset)
         }
     }
 }
+

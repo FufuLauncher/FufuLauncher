@@ -1,4 +1,8 @@
-﻿using System.Text.Json;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Text.Json;
 
 namespace FufuLauncher.Views
 {

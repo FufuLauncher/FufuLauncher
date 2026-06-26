@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -220,3 +224,4 @@ public class HoyolabRoleResolverService : IHoyolabRoleResolverService
         return $"{result.Source}: {result.Message}";
     }
 }
+

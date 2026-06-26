@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using FufuLauncher.Contracts.Services;
@@ -547,3 +551,4 @@ namespace FufuLauncher.Services
         #endregion
     }
 }
+

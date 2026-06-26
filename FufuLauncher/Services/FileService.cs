@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Text;
 using FufuLauncher.Contracts.Services;
 using Newtonsoft.Json;
@@ -37,3 +41,4 @@ public class FileService : IFileService
         }
     }
 }
+

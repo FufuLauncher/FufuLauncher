@@ -1,4 +1,8 @@
-﻿namespace FufuLauncher.Contracts.ViewModels;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+namespace FufuLauncher.Contracts.ViewModels;
 
 public interface INavigationAware
 {
@@ -6,3 +10,4 @@ public interface INavigationAware
 
     void OnNavigatedFrom();
 }
+

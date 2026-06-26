@@ -1,4 +1,8 @@
-﻿using FufuLauncher.Models.Genshin;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using FufuLauncher.Models.Genshin;
 
 namespace FufuLauncher.Services;
 

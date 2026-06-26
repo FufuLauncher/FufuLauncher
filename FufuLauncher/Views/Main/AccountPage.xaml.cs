@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.ComponentModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
@@ -381,3 +385,4 @@ public sealed partial class AccountPage : Page
     }
     #endregion
 }
+

@@ -50,7 +50,7 @@
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="24" Margin="0,16,0,0">
                 <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/FufuLauncher/FufuLauncher"/>
                 <HyperlinkButton Content="反馈问题" NavigateUri="https://github.com/FufuLauncher/FufuLauncher/issues"/>
-                <HyperlinkButton Content="官方网站" NavigateUri="https://philia093.xyz"/> <HyperlinkButton Content="联系作者" Click="ContactAuthor_Click"/>
+                <HyperlinkButton Content="官方网站" NavigateUri="https://fu1.fun/"/> <HyperlinkButton Content="联系作者" Click="ContactAuthor_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

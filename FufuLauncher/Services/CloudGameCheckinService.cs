@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Diagnostics;
 using System.Net;
 using System.Text.Json;
@@ -196,3 +200,4 @@ public class CloudGameCheckinService : ICloudGameCheckinService
         catch { return null; }
     }
 }
+

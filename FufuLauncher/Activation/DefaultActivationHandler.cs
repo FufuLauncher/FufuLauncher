@@ -1,4 +1,8 @@
-﻿using FufuLauncher.Contracts.Services;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using FufuLauncher.Contracts.Services;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 
@@ -26,3 +30,4 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
         await Task.CompletedTask;
     }
 }
+

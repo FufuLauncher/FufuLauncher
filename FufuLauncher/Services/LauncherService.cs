@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Diagnostics;
 

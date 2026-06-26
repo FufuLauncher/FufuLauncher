@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Text.Json;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
@@ -130,3 +134,4 @@ public class UserInfoService : IUserInfoService
         return await Task.FromResult(new GameRecordCardResponse(-1, "功能已移除", null));
     }
 }
+

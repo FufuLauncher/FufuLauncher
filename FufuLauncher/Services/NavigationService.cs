@@ -1,4 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Diagnostics.CodeAnalysis;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Contracts.ViewModels;
 using FufuLauncher.Helpers;
@@ -121,3 +125,4 @@ public class NavigationService : INavigationService
         }
     }
 }
+

@@ -1,4 +1,8 @@
-﻿using FufuLauncher.Services;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using FufuLauncher.Services;
 
 namespace FufuLauncher.Contracts.Services
 {

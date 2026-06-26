@@ -1,4 +1,8 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.Json;
 using FufuLauncher.Models;
 using Microsoft.UI;

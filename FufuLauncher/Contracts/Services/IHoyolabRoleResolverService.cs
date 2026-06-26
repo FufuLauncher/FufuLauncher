@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 namespace FufuLauncher.Contracts.Services;
 
 public record HoyolabRoleResolveResult(
@@ -13,3 +17,4 @@ public interface IHoyolabRoleResolverService
 {
     Task<HoyolabRoleResolveResult> ResolveRolesAsync(string cookie, CancellationToken cancellationToken = default);
 }
+

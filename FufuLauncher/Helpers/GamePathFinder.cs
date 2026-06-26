@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace FufuLauncher.Helpers

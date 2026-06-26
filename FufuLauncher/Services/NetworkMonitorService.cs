@@ -1,4 +1,8 @@
-﻿using System.Net.NetworkInformation;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Net.NetworkInformation;
 using Microsoft.UI.Xaml;
 using Microsoft.Win32;
 

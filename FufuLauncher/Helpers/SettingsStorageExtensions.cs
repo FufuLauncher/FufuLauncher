@@ -1,4 +1,8 @@
-﻿using Windows.Storage;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using Windows.Storage;
 using Windows.Storage.Streams;
 
 namespace FufuLauncher.Helpers;
@@ -106,3 +110,4 @@ public static class SettingsStorageExtensions
         return string.Concat(name, FileExtension);
     }
 }
+

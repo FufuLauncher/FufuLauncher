@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using FufuLauncher.Messages;
 
 namespace FufuLauncher.Models;
@@ -96,3 +100,4 @@ public class AccountCredentials
 
     public string GetStokenCookie() => $"stuid={Stuid};stoken={Stoken};mid={Mid}";
 }
+
