@@ -1212,22 +1212,35 @@ private void QuickSwitchPreset(PresetModel targetPreset)
             var savedPath = await _localSettingsService.ReadSettingAsync("GameInstallationPath");
             var gamePath = savedPath?.ToString()?.Trim('"')?.Trim();
 
-            if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
+            var gameScreenshotPath = "";
+            if (!string.IsNullOrEmpty(gamePath) && Directory.Exists(gamePath))
             {
-                _notificationService.Show("未设置游戏路径", "请先前往游戏管理页面选择游戏安装路径", NotificationType.Error, 0);
-                return;
+                gameScreenshotPath = Path.Combine(gamePath, "ScreenShot");
             }
-
-            var screenshotPath = Path.Combine(gamePath, "ScreenShot");
-            if (!Directory.Exists(screenshotPath))
+            
+            var customPathObj = await _localSettingsService.ReadSettingAsync("ScreenshotSavePath");
+            var customScreenshotPath = customPathObj?.ToString()?.Trim('"')?.Trim();
+            if (string.IsNullOrEmpty(customScreenshotPath))
             {
-                _notificationService.Show("截图文件夹不存在", $"未找到截图文件夹: {screenshotPath}", NotificationType.Error, 0);
+                customScreenshotPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    "FufuScreenshots");
+            }
+            
+            bool gameExists = !string.IsNullOrEmpty(gameScreenshotPath) && Directory.Exists(gameScreenshotPath);
+            bool customExists = Directory.Exists(customScreenshotPath);
+
+            if (!gameExists && !customExists)
+            {
+                _notificationService.Show("截图文件夹不存在", "请先在游戏中截图或通过启动器截图功能获取截图", NotificationType.Error, 0);
                 return;
             }
 
             try
             {
-                var galleryWindow = new ScreenshotGalleryWindow(screenshotPath);
+                var galleryWindow = new ScreenshotGalleryWindow(
+                    gameScreenshotPath ?? "",
+                    customScreenshotPath ?? "");
                 galleryWindow.Activate();
             }
             catch (Exception ex)

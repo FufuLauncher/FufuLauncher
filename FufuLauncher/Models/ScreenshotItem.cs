@@ -13,6 +13,7 @@ public class ScreenshotItem
     public string FileName { get; set; }
     public DateTime CreationTime { get; set; }
     public BitmapImage ImageSource { get; set; }
+    public string SourceLabel { get; set; } = "";
 }
 
 public class ScreenshotGroup
