@@ -27,7 +27,7 @@ namespace FufuLauncher.Views
         
         private byte[] _screenshotBytes;
 
-        private const string CNVersion = "2.102.1";
+        private const string CNVersion = "2.109.0";
         private const string CNK2 = "lX8m5VO5at5JG7hR8hzqFwzyL5aB1tYo";
         private const string CNLK2 = "yBh10ikxtLPoIhgwgPZSv5dmfaOTSJ6a";
         private const string CNX4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";

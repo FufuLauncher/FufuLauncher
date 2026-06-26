@@ -12,23 +12,27 @@ namespace FufuLauncher.Services;
 
 public sealed class DailyNoteService
 {
-    private const string CNVersion = "2.95.1";
+    private const string CNVersion = "2.109.0";
     private const string CNX4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
     private const string CNX6 = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
-    private const string ToolVersion = "v5.0.1-ys";
-    private const string MobileUserAgent = $"Mozilla/5.0 (Linux; Android 15) Mobile miHoYoBBS/{CNVersion}";
+    private const string ToolVersion = "v6.6.1-gr-cn";
+    private const string Page = "v6.6.1-gr-cn_#/ys";
+    private const string SysVersion = "12";
+    private const string DeviceName = "Xiaomi%2024031PN0DC";
+    private const string MobileUserAgent = $"Mozilla/5.0 (Linux; Android 12; 24031PN0DC Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.154 Safari/537.36 miHoYoBBS/{CNVersion}";
     private const string Referer = "https://webstatic.mihoyo.com";
+    private const string Origin = "https://webstatic.mihoyo.com";
 
     private const string DailyNoteUrl = "https://api-takumi-record.mihoyo.com/game_record/app/genshin/api/dailyNote";
     private const string WidgetUrl = "https://api-takumi-record.mihoyo.com/game_record/app/genshin/aapi/widget/v2?game_id=2";
     private const string GetFpUrl = "https://public-data-api.mihoyo.com/device-fp/api/getFp";
 
-    private static readonly string DeviceId = Guid.NewGuid().ToString();
+    private static readonly string DeviceId = GetPersistentDeviceId();
     private static string _registeredDeviceFp;
     private static bool _fpRegistered;
 
     private static readonly SemaphoreSlim _semaphore = new(1, 1);
-    private static readonly HttpClient _httpClient = new();
+    private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
 
     public async Task<DailyNoteCardData> GetDailyNoteAsync(string roleId, string server)
     {
@@ -45,7 +49,7 @@ public sealed class DailyNoteService
                 throw new InvalidOperationException("无法加载Cookie");
 
             if (!_fpRegistered)
-                await RegisterDeviceFpAsync();
+                await RegisterDeviceFpAsync(cookies, accountManager, activeId);
 
             string apiUrl = $"{DailyNoteUrl}?server={server}&role_id={roleId}";
             string json = await RequestDailyNoteAsync(apiUrl, cookies, null);
@@ -87,78 +91,83 @@ public sealed class DailyNoteService
         }
     }
 
-    private static async Task RegisterDeviceFpAsync()
+    /// <summary>
+    /// 向 getFp 注册设备指纹，参数与 BBSWindow 保持一致。
+    /// 注册成功后写入 cookies 并持久化，与 BBSWindow 共享绑定关系。
+    /// </summary>
+    private static async Task RegisterDeviceFpAsync(Dictionary<string, string> cookies, AccountManager accountManager, string activeId)
     {
         string localFp = GenerateHexString(13);
-        string device = GenerateAlphaNumString(12);
-        string product = GenerateAlphaNumString(6);
+        string seedId = Guid.NewGuid().ToString();
+        string seedTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
 
+        // extFields 与 BBSWindow.GetExtFieldValue() 的 bbs_cn (platform=2) 对齐
         Dictionary<string, object> extFields = new()
         {
-            { "proxyStatus", 0 },
-            { "isRoot", 0 },
+            { "proxyStatus", 1 },
+            { "isRoot", 1 },
             { "romCapacity", "512" },
-            { "deviceName", device },
-            { "productName", product },
-            { "romRemain", "512" },
-            { "hostname", "dg02-pool03-kvm87" },
-            { "screenSize", "1440x2905" },
-            { "isTablet", 0 },
-            { "aaid", "" },
-            { "model", device },
-            { "brand", "XiaoMi" },
-            { "hardware", "qcom" },
-            { "deviceType", "OP5913L1" },
+            { "deviceName", "24031PN0DC" },
+            { "productName", "aurora" },
+            { "romRemain", "478" },
+            { "hostname", "6b29a8384f29" },
+            { "screenSize", "1440x2560" },
+            { "isTablet", 1 },
+            { "aaid", "error_1008008" },
+            { "model", "24031PN0DC" },
+            { "brand", "Xiaomi" },
+            { "hardware", "Xiaomi" },
+            { "deviceType", "aurora" },
             { "devId", "REL" },
             { "serialNumber", "unknown" },
-            { "sdCapacity", 512215 },
-            { "buildTime", "1693626947000" },
-            { "buildUser", "android-build" },
+            { "sdCapacity", 127991 },
+            { "buildTime", "1779448087000" },
+            { "buildUser", "abc" },
             { "simState", 5 },
-            { "ramRemain", "239814" },
-            { "appUpdateTimeDiff", 1702604034482 },
-            { "deviceInfo", $"XiaoMi/{product}/OP5913L1:14/SKQ1.221119.001/T.118e6c7-5aa23-73911:user/release-keys" },
-            { "vaid", "" },
+            { "ramRemain", "126327" },
+            { "appUpdateTimeDiff", 1782396402635L },
+            { "deviceInfo", "Xiaomi/aurora/aurora:12/V417IR/1747:user/release-keys" },
+            { "vaid", "error_1008008" },
             { "buildType", "user" },
-            { "sdkVersion", "34" },
+            { "sdkVersion", "32" },
             { "ui_mode", "UI_MODE_TYPE_NORMAL" },
             { "isMockLocation", 0 },
             { "cpuType", "arm64-v8a" },
             { "isAirMode", 0 },
             { "ringMode", 2 },
             { "chargeStatus", 1 },
-            { "manufacturer", "XiaoMi" },
+            { "manufacturer", "Xiaomi" },
             { "emulatorStatus", 0 },
             { "appMemory", "512" },
-            { "osVersion", "14" },
+            { "osVersion", "12" },
             { "vendor", "unknown" },
-            { "accelerometer", "1.4883357x7.1712894x6.2847486" },
-            { "sdRemain", 239600 },
+            { "accelerometer", "0.10001241x9.800007x0.1999938" },
+            { "sdRemain", 119757 },
             { "buildTags", "release-keys" },
             { "packageName", "com.mihoyo.hyperion" },
             { "networkType", "WiFi" },
-            { "oaid", "" },
-            { "debugStatus", 1 },
-            { "ramCapacity", "469679" },
-            { "magnetometer", "20.081251x-27.487501x2.1937501" },
-            { "display", $"{product}_14.1.0.181(CN01)" },
-            { "appInstallTimeDiff", 1688455751496 },
-            { "packageVersion", "2.20.1" },
-            { "gyroscope", "0.030226856x0.014647375x0.010652636" },
-            { "batteryStatus", 100 },
-            { "hasKeyboard", 0 },
-            { "board", "taro" },
+            { "oaid", "error_1008008" },
+            { "debugStatus", 0 },
+            { "ramCapacity", "127991" },
+            { "magnetometer", "15.625x-28.25x-32.625" },
+            { "display", "V417IR release-keys" },
+            { "appInstallTimeDiff", 1782396402635L },
+            { "packageVersion", "2.42.0" },
+            { "gyroscope", "0.0x0.0x0.0" },
+            { "batteryStatus", 79 },
+            { "hasKeyboard", 1 },
+            { "board", "24031PN0DC" },
         };
 
         DeviceFpRequest fpData = new()
         {
-            DeviceId = GenerateHexString(16),
-            SeedId = Guid.NewGuid().ToString(),
+            DeviceId = DeviceId,              // 持久化 hex，与 x-rpc-device_id 原始标识一致
+            SeedId = seedId,
             Platform = "2",
-            SeedTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString(),
+            SeedTime = seedTime,
             ExtFields = JsonSerializer.Serialize(extFields),
             AppName = "bbs_cn",
-            BbsDeviceId = DeviceId,
+            BbsDeviceId = GenGameRecordDeviceId(), // UUID v3，与 api-takumi 请求头一致
             DeviceFp = localFp
         };
 
@@ -166,6 +175,7 @@ public sealed class DailyNoteService
 
         using HttpRequestMessage req = new(HttpMethod.Post, GetFpUrl);
         req.Content = new StringContent(bodyJson, Encoding.UTF8, "application/json");
+        req.Headers.Add("User-Agent", MobileUserAgent);
 
         try
         {
@@ -173,21 +183,35 @@ public sealed class DailyNoteService
             string json = await resp.Content.ReadAsStringAsync();
             using JsonDocument doc = JsonDocument.Parse(json);
 
-            if (doc.RootElement.TryGetProperty("data", out JsonElement data)
-                && data.TryGetProperty("device_fp", out JsonElement fp))
+            // 优先从根级读取（SDK 方式），其次 data 嵌套
+            string serverFp = null;
+            if (doc.RootElement.TryGetProperty("device_fp", out JsonElement rootFp))
+                serverFp = rootFp.GetString();
+            else if (doc.RootElement.TryGetProperty("data", out JsonElement data)
+                     && data.TryGetProperty("device_fp", out JsonElement nestedFp))
+                serverFp = nestedFp.GetString();
+
+            if (!string.IsNullOrEmpty(serverFp))
             {
-                _registeredDeviceFp = fp.GetString();
-                _fpRegistered = true;
+                _registeredDeviceFp = serverFp;
+
+                // 写入 cookies 并持久化，与 BBSWindow 共享绑定关系
+                cookies["DEVICEFP"] = serverFp;
+                cookies["DEVICEFP_SEED_ID"] = seedId;
+                cookies["DEVICEFP_SEED_TIME"] = seedTime;
+                await accountManager.UpdateCookiesAsync(activeId, cookies);
             }
             else
             {
                 _registeredDeviceFp = localFp;
-                _fpRegistered = true;
             }
         }
         catch
         {
             _registeredDeviceFp = localFp;
+        }
+        finally
+        {
             _fpRegistered = true;
         }
     }
@@ -203,13 +227,20 @@ public sealed class DailyNoteService
         req.Headers.Add("Cookie", cookieStr);
         req.Headers.Add("x-rpc-app_version", CNVersion);
         req.Headers.Add("x-rpc-client_type", "5");
-        req.Headers.Add("x-rpc-device_id", DeviceId);
+        req.Headers.Add("x-rpc-device_id", GenGameRecordDeviceId());
+        req.Headers.Add("x-rpc-device_name", DeviceName);
         req.Headers.Add("x-rpc-device_fp", GetDeviceFp(cookies));
+        req.Headers.Add("x-rpc-sys_version", SysVersion);
         req.Headers.Add("x-rpc-tool_verison", ToolVersion);
+        req.Headers.Add("x-rpc-page", Page);
+        req.Headers.Add("X-Requested-With", "com.mihoyo.hyperion");
+        req.Headers.Add("Origin", Origin);
         if (!string.IsNullOrEmpty(xrpcChallenge))
             req.Headers.Add("x-rpc-challenge", xrpcChallenge);
         req.Headers.Add("DS", ds);
         req.Headers.Add("Referer", Referer);
+        req.Headers.Add("Accept", "application/json, text/plain, */*");
+        req.Headers.Add("Accept-Language", "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7");
         req.Headers.UserAgent.ParseAdd(MobileUserAgent);
 
         HttpResponseMessage resp = await _httpClient.SendAsync(req);
@@ -226,10 +257,17 @@ public sealed class DailyNoteService
         req.Headers.Add("Cookie", cookieStr);
         req.Headers.Add("x-rpc-app_version", CNVersion);
         req.Headers.Add("x-rpc-client_type", "5");
-        req.Headers.Add("x-rpc-device_id", DeviceId);
+        req.Headers.Add("x-rpc-device_id", GenGameRecordDeviceId());
+        req.Headers.Add("x-rpc-device_name", DeviceName);
         req.Headers.Add("x-rpc-device_fp", GetDeviceFp(cookies));
+        req.Headers.Add("x-rpc-sys_version", SysVersion);
+        req.Headers.Add("x-rpc-page", Page);
+        req.Headers.Add("X-Requested-With", "com.mihoyo.hyperion");
+        req.Headers.Add("Origin", Origin);
         req.Headers.Add("DS", ds);
         req.Headers.Add("Referer", Referer);
+        req.Headers.Add("Accept", "application/json, text/plain, */*");
+        req.Headers.Add("Accept-Language", "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7");
         req.Headers.UserAgent.ParseAdd(MobileUserAgent);
 
         HttpResponseMessage resp = await _httpClient.SendAsync(req);
@@ -287,9 +325,72 @@ public sealed class DailyNoteService
         return GenerateHexString(13);
     }
 
+    /// <summary>返回持久化 hex device_id（getFp 注册用）</summary>
     internal static string GetDeviceId()
     {
         return DeviceId;
+    }
+
+    /// <summary>返回 Game Record API 请求使用的 UUID v3 device_id</summary>
+    internal static string GetGameRecordDeviceId()
+    {
+        return GenGameRecordDeviceId();
+    }
+
+    /// <summary>
+    /// 复制 Java UUID.nameUUIDFromBytes() 行为，与 BBSWindow.NameUuidFromBytes 一致。
+    /// </summary>
+    private static Guid NameUuidFromBytes(byte[] name)
+    {
+        byte[] hash = MD5.HashData(name);
+        hash[6] = (byte)((hash[6] & 0x0F) | 0x30); // UUID v3
+        hash[8] = (byte)((hash[8] & 0x3F) | 0x80); // variant
+
+        return new Guid(new byte[] {
+            hash[3], hash[2], hash[1], hash[0],
+            hash[5], hash[4],
+            hash[7], hash[6],
+            hash[8], hash[9], hash[10], hash[11], hash[12], hash[13], hash[14], hash[15]
+        });
+    }
+
+    /// <summary>Game Record API (client_type=5) 用 UUID v3 派生 device_id</summary>
+    private static string GenGameRecordDeviceId()
+    {
+        return NameUuidFromBytes(Encoding.UTF8.GetBytes(DeviceId)).ToString();
+    }
+
+    /// <summary>
+    /// 持久化 device_id，由机器名+用户名确定性派生（与 BBSWindow 逻辑一致）。
+    /// 文件删除后也能还原为相同值。
+    /// </summary>
+    private static string GetPersistentDeviceId()
+    {
+        var dir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FufuLauncher", "Data");
+        var path = System.IO.Path.Combine(dir, "device_id.txt");
+        try
+        {
+            if (System.IO.File.Exists(path))
+            {
+                var existing = System.IO.File.ReadAllText(path).Trim();
+                if (!string.IsNullOrEmpty(existing)) return existing;
+            }
+        }
+        catch { }
+
+        // 文件不存在或为空 → 由机器特征确定性生成，删了也能还原
+        string raw = Environment.MachineName + Environment.UserName + "FufuLauncher";
+        byte[] hash = MD5.HashData(Encoding.UTF8.GetBytes(raw));
+        string id = Convert.ToHexString(hash).ToLower()[..16];
+
+        try
+        {
+            System.IO.Directory.CreateDirectory(dir);
+            System.IO.File.WriteAllText(path, id);
+        }
+        catch { }
+
+        return id;
     }
 
     private static string GenerateHexString(int length)
