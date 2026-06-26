@@ -25,8 +25,9 @@ public sealed class GeetestService
 
     private const string CNVersion = "2.109.0";
     private const string CNX4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
-    private const string MobileUserAgent = $"Mozilla/5.0 (Linux; Android 12; 24031PN0DC Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.154 Safari/537.36 miHoYoBBS/{CNVersion}";
     private const string Referer = "https://webstatic.mihoyo.com";
+
+    private static string MobileUserAgent => DailyNoteService.GetCurrentUserAgent();
 
     private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
 
