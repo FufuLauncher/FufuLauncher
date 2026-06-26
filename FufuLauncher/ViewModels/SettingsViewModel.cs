@@ -175,6 +175,56 @@ namespace FufuLauncher.ViewModels
             _ = _localSettingsService.SaveSettingAsync("PostLaunchBehavior", value.Value.ToString());
         }
 
+
+
+        public ObservableCollection<NavItemConfig> NavItems { get; } = new();
+
+        public async Task InitializeNavItemsAsync()
+        {
+            var allItems = new List<NavItemConfig>
+            {
+                new() { ViewModelKey = "FufuLauncher.ViewModels.MainViewModel",       DisplayName = "主页",           IconGlyph = "\uE80F", IsForceVisible = true },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.PluginSettingsViewModel", DisplayName = "注入设置",    IconGlyph = "\uEA86" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.ControlPanelModel",   DisplayName = "控制面板",       IconGlyph = "\uE80A" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.BlankViewModel",      DisplayName = "游戏设置",       IconGlyph = "\uE7FC" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.AccountViewModel",    DisplayName = "账户设置",       IconGlyph = "\uE77B" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.OtherViewModel",      DisplayName = "其他功能",       IconGlyph = "\uE71D" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.PluginViewModel",     DisplayName = "插件管理",       IconGlyph = "\uE7B5" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.DataViewModel",       DisplayName = "数据中心",       IconGlyph = "\uE9D9" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.HelpViewModel",       DisplayName = "帮助文档",       IconGlyph = "\uE82D" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.CommunityViewModel",  DisplayName = "VanillaBBS",     IconGlyph = "\uE716" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.CalculatorViewModel",  DisplayName = "养成计算",      IconGlyph = "\uE1D0" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.SettingsViewModel",   DisplayName = "设置中心",       IconGlyph = "\uE713", IsForceVisible = true },
+            };
+
+            foreach (var item in allItems)
+            {
+                var val = await _localSettingsService.ReadSettingAsync($"NavVisible_{SanitizeKey(item.ViewModelKey)}");
+                if (val is bool b)
+                    item.IsUserVisible = b;
+                else if (val is string str && bool.TryParse(str, out var parsed))
+                    item.IsUserVisible = parsed;
+
+        
+                var captured = item;
+                item.VisibilityChanged += async (_, _) =>
+                {
+                    var key = $"NavVisible_{SanitizeKey(captured.ViewModelKey)}";
+                    await _localSettingsService.SaveSettingAsync(key, captured.IsUserVisible);
+                    WeakReferenceMessenger.Default.Send(new NavigationVisibilityChangedMessage(captured));
+                };
+
+                NavItems.Add(item);
+            }
+        }
+
+        private static string SanitizeKey(string viewModelKey)
+        {
+
+            var parts = viewModelKey.Split('.');
+            return parts[^1];
+        }
+
         partial void OnIsRedeemCodeNotificationEnabledChanged(bool value)
         {
             _ = _localSettingsService.SaveSettingAsync("IsRedeemCodeNotificationEnabled", value);
@@ -824,6 +874,7 @@ namespace FufuLauncher.ViewModels
             {
                 await LoadUserPreferencesAsync();
                 await LoadCustomBackgroundSettingsAsync();
+                await InitializeNavItemsAsync();
                 
                 OnPropertyChanged(nameof(IsStartupSoundEnabled));
                 OnPropertyChanged(nameof(StartupSoundPath));

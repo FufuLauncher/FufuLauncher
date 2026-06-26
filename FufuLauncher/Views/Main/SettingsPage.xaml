@@ -5,6 +5,7 @@
       xmlns:helpers="using:FufuLauncher.Helpers"
       xmlns:models="using:FufuLauncher.Models"
       xmlns:viewModels="using:FufuLauncher.ViewModels"
+      xmlns:converters="using:FufuLauncher.Converters"
       Background="Transparent"
       Loaded="Page_Loaded">
 
@@ -35,6 +36,7 @@
             <helpers:WindowModeEnumToBooleanConverter x:Key="WindowModeEnumToBooleanConverter" />
             <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <helpers:StringFormatConverter x:Key="StringFormatConverter" />
+            <converters:BoolInverter x:Key="BoolInverter" />
 
             <Storyboard x:Name="EntranceStoryboard">
                 <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
@@ -393,6 +395,28 @@
                                           OffContent="隐藏"
                                           OnContent="显示"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteTransformer, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
+                            <TextBlock Text="导航栏显示项"
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14" />
+                            <TextBlock Text="选择要在左侧导航栏中显示的项目。隐藏后不会影响功能使用，可在设置中重新开启。主页和设置中心不可隐藏。"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       Margin="0,2,0,12" />
+
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.NavItems}">
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="models:NavItemConfig">
+                                        <ToggleSwitch Header="{x:Bind DisplayName}"
+                                                      IsOn="{x:Bind IsUserVisible, Mode=TwoWay}"
+                                                      IsEnabled="{x:Bind IsForceVisible, Converter={StaticResource BoolInverter}}"
+                                                      OffContent="隐藏" OnContent="显示"
+                                                      Margin="0,4,0,4" />
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
