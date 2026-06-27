@@ -6,6 +6,7 @@ Licensed under the MIT License.
 // By kyxsan.
 // Licensed under the MIT License.
 
+using System.Diagnostics;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
@@ -113,6 +114,23 @@ public sealed class DailyNoteService
             BuildDisplay:  "AP3A.240805.005 release-keys",
             BuildTime:     1720000000000L,
             Hostname:      "6b29a8384f29"
+        ),
+
+        new(
+            DeviceModel:   "V2366GA",
+            ProductName:   "PD2366",
+            Brand:         "vivo",
+            Board:         "V2366GA",
+            Hardware:      "vivo",
+            DeviceType:    "PD2366",
+            Manufacturer:  "vivo",
+            DeviceInfo:    "vivo/PD2366/PD2366:12/V417IR/1747:user/release-keys",
+            OsVersion:     "12",
+            SdkVersion:    "32",
+            BuildId:       "V417IR",
+            BuildDisplay:  "V417IR release-keys",
+            BuildTime:     1779448087000L,
+            Hostname:      "6b29a8384f29"
         )
     };
 
@@ -196,13 +214,26 @@ public sealed class DailyNoteService
     /// </summary>
     private static async Task RegisterDeviceFpAsync(Dictionary<string, string> cookies, AccountManager accountManager, string activeId)
     {
-        string localFp = GenerateHexString(13);
+        // 首次 getFp 时发送的初始 device_fp，与 SDK 的 DeviceFingerprintSharedPreferences.newDefaultDeviceId() 一致：
+        // Random(10) = 首位 1~9 + 9 位 0~9，共 10 位纯数字
+        string localFp = new string(new[] { (char)('1' + Random.Shared.Next(9)) }
+            .Concat(Enumerable.Range(0, 9).Select(_ => (char)('0' + Random.Shared.Next(10))))
+            .ToArray());
+        // seedId 和 seedTime 在 SDK 中以 JSON {"seedId":"uuid","seedTime":"ms"} 存入 SharedPreferences，
+        // 解析后作为独立参数传入 fetchFingerprint，这里直接生成
         string seedId = Guid.NewGuid().ToString();
         string seedTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString();
 
+        // 先向服务端请求当前需要的 ext_fields 列表（SDK 在 generateFingerprint 第一步调用 loadPropertiesList）
+        var extList = await FetchExtListAsync();
+        Debug.WriteLine($"[DailyNoteService] RegisterDeviceFp: 服务端 ext_list 共 {extList.Count} 个字段");
+
         // extFields 由当前账号的设备档案派生，与 BBSWindow.GetExtFieldValue() 的 bbs_cn (platform=2) 对齐
         var variant = GetCurrentVariant();
-        var extFields = BuildExtFields(variant);
+        var allExtFields = BuildExtFields(variant);
+        // 只保留服务端要求的字段，不多发不少发
+        var extFields = allExtFields.Where(kv => extList.Contains(kv.Key))
+                                    .ToDictionary(kv => kv.Key, kv => kv.Value);
 
         DeviceFpRequest fpData = new()
         {
@@ -220,7 +251,7 @@ public sealed class DailyNoteService
 
         using HttpRequestMessage req = new(HttpMethod.Post, GetFpUrl);
         req.Content = new StringContent(bodyJson, Encoding.UTF8, "application/json");
-        req.Headers.Add("User-Agent", _currentUserAgent);
+        req.Headers.Add("User-Agent", "okhttp/4.9.3");
 
         try
         {
@@ -239,6 +270,7 @@ public sealed class DailyNoteService
             if (!string.IsNullOrEmpty(serverFp))
             {
                 _registeredDeviceFp = serverFp;
+                Debug.WriteLine($"[DailyNoteService] RegisterDeviceFp: 服务端返回指纹 device_fp={serverFp}");
 
                 // 写入 cookies 并持久化，与 BBSWindow 共享绑定关系
                 cookies["DEVICEFP"] = serverFp;
@@ -252,6 +284,7 @@ public sealed class DailyNoteService
             else
             {
                 _registeredDeviceFp = localFp;
+                Debug.WriteLine($"[DailyNoteService] RegisterDeviceFp: 服务端未返回指纹，使用本地生成 localFp={localFp}");
             }
         }
         catch
@@ -270,6 +303,8 @@ public sealed class DailyNoteService
         string query = new Uri(apiUrl).Query.TrimStart('?');
         string sortedQuery = string.Join("&", query.Split('&').OrderBy(s => s, StringComparer.Ordinal));
         string ds = CalculateDS2(CNX4, sortedQuery, "");
+        string fp = GetDeviceFp(cookies);
+        Debug.WriteLine($"[DailyNoteService] RequestDailyNote: device_fp={fp}");
 
         using HttpRequestMessage req = new(HttpMethod.Get, apiUrl);
         req.Headers.Add("Cookie", cookieStr);
@@ -277,7 +312,7 @@ public sealed class DailyNoteService
         req.Headers.Add("x-rpc-client_type", "5");
         req.Headers.Add("x-rpc-device_id", GenGameRecordDeviceId());
         req.Headers.Add("x-rpc-device_name", _currentDeviceName);
-        req.Headers.Add("x-rpc-device_fp", GetDeviceFp(cookies));
+        req.Headers.Add("x-rpc-device_fp", fp);
         req.Headers.Add("x-rpc-sys_version", _currentSysVersion);
         req.Headers.Add("x-rpc-tool_verison", ToolVersion);
         req.Headers.Add("x-rpc-page", Page);
@@ -300,6 +335,8 @@ public sealed class DailyNoteService
         string cookieStr = BuildCookieString(cookies, CookieMode.SToken);
         string sortedQuery = string.Join("&", WidgetUrl.Split('?', 2)[1].Split('&').OrderBy(s => s, StringComparer.Ordinal));
         string ds = CalculateDS2(CNX6, sortedQuery, "");
+        string fp = GetDeviceFp(cookies);
+        Debug.WriteLine($"[DailyNoteService] RequestWidget: device_fp={fp}");
 
         using HttpRequestMessage req = new(HttpMethod.Get, WidgetUrl);
         req.Headers.Add("Cookie", cookieStr);
@@ -307,7 +344,7 @@ public sealed class DailyNoteService
         req.Headers.Add("x-rpc-client_type", "5");
         req.Headers.Add("x-rpc-device_id", GenGameRecordDeviceId());
         req.Headers.Add("x-rpc-device_name", _currentDeviceName);
-        req.Headers.Add("x-rpc-device_fp", GetDeviceFp(cookies));
+        req.Headers.Add("x-rpc-device_fp", fp);
         req.Headers.Add("x-rpc-sys_version", _currentSysVersion);
         req.Headers.Add("x-rpc-page", Page);
         req.Headers.Add("X-Requested-With", "com.mihoyo.hyperion");
@@ -367,10 +404,18 @@ public sealed class DailyNoteService
     internal static string GetDeviceFp(Dictionary<string, string> cookies)
     {
         if (!string.IsNullOrEmpty(_registeredDeviceFp))
+        {
+            Debug.WriteLine($"[DailyNoteService] GetDeviceFp: 使用已注册的服务端指纹 _registeredDeviceFp={_registeredDeviceFp}");
             return _registeredDeviceFp;
+        }
         if (cookies.TryGetValue("DEVICEFP", out string fp) && !string.IsNullOrEmpty(fp))
+        {
+            Debug.WriteLine($"[DailyNoteService] GetDeviceFp: 从Cookie读取指纹 DEVICEFP={fp}");
             return fp;
-        return GenerateHexString(13);
+        }
+        string fallback = GenerateHexString(13);
+        Debug.WriteLine($"[DailyNoteService] GetDeviceFp: 无可用指纹，生成本地回退指纹={fallback}");
+        return fallback;
     }
 
     /// <summary>返回当前账号的持久化 hex device_id</summary>
@@ -442,11 +487,6 @@ public sealed class DailyNoteService
             var settings = GetSettings();
             var seedTimeObj = await settings.ReadSettingAsync($"DeviceFpSeedTime_{accountId}");
             if (seedTimeObj is not string seedTimeStr || !long.TryParse(seedTimeStr, out var seedTimeMs))
-                return false;
-
-            // 检查是否过期
-            var age = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - seedTimeMs;
-            if (age > TimeSpan.FromDays(DeviceFpMaxAgeDays).TotalMilliseconds)
                 return false;
 
             // 从 cookies 中恢复 DEVICEFP
@@ -547,25 +587,28 @@ public sealed class DailyNoteService
         long sessionSeed = DateTimeOffset.UtcNow.ToUnixTimeSeconds() / 3600;
         var rng = new Random((int)(sessionSeed & 0x7FFFFFFF));
 
-        int battery = rng.Next(20, 100);
-        int ramRemain = rng.Next(80000, 240000);
-        int romRemain = rng.Next(100000, 500000);
-        int sdRemain = rng.Next(100000, 400000);
+        int battery = rng.Next(70, 100);
+        int ramRemain = rng.Next(120000, 130000);
+        int sdRemain = rng.Next(110000, 130000);
 
-        string accelerometer = $"{rng.NextDouble() * 10:F8}x{rng.NextDouble() * 10:F8}x{rng.NextDouble() * 10:F8}";
-        string magnetometer = $"{rng.Next(-30, 30) + rng.NextDouble():F6}x{rng.Next(-30, 30) + rng.NextDouble():F6}x{rng.Next(-30, 30) + rng.NextDouble():F6}";
-        string gyroscope = $"{rng.NextDouble() * 0.05:F9}x{rng.NextDouble() * 0.05:F9}x{rng.NextDouble() * 0.05:F9}";
+        // 物理传感器：手机平放静止状态
+        string accelerometer = $"{0.1 + rng.NextDouble() * 0.05:F8}x{9.78 + rng.NextDouble() * 0.04:F8}x{0.15 + rng.NextDouble() * 0.1:F8}";
+        string magnetometer = $"{15 + rng.NextDouble() * 2:F3}x{-28 + rng.NextDouble() * -1:F3}x{-32 + rng.NextDouble() * -1:F3}";
+        string gyroscope = "0.0x0.0x0.0";
+
+        // timeDiff：同一账号每次 getFp 使用同一个差值
+        long timeDiff = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - 1782425023662L;
 
         return new Dictionary<string, object>
         {
-            { "proxyStatus", rng.Next(2) },
+            { "proxyStatus", 1 },
             { "isRoot", 0 },
             { "romCapacity", "512" },
             { "deviceName", v.DeviceModel },
             { "productName", v.ProductName },
-            { "romRemain", romRemain },
+            { "romRemain", rng.Next(400, 600).ToString() },
             { "hostname", v.Hostname },
-            { "screenSize", "1440x2560" },
+            { "screenSize", "1080x1920" },
             { "isTablet", 1 },
             { "aaid", "error_1008008" },
             { "model", v.DeviceModel },
@@ -573,13 +616,12 @@ public sealed class DailyNoteService
             { "hardware", v.Hardware },
             { "deviceType", v.DeviceType },
             { "devId", "REL" },
-            { "serialNumber", "unknown" },
-            { "sdCapacity", 512215 },
+            { "sdCapacity", rng.Next(127000, 129000) },
             { "buildTime", v.BuildTime.ToString() },
             { "buildUser", "abc" },
             { "simState", 5 },
-            { "ramRemain", ramRemain },
-            { "appUpdateTimeDiff", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - rng.Next(100000, 86400000) },
+            { "ramRemain", ramRemain.ToString() },
+            { "appUpdateTimeDiff", timeDiff },
             { "deviceInfo", v.DeviceInfo },
             { "vaid", "error_1008008" },
             { "buildType", "user" },
@@ -589,7 +631,7 @@ public sealed class DailyNoteService
             { "cpuType", "arm64-v8a" },
             { "isAirMode", 0 },
             { "ringMode", 2 },
-            { "chargeStatus", battery > 50 ? 1 : 0 },
+            { "chargeStatus", 1 },
             { "manufacturer", v.Manufacturer },
             { "emulatorStatus", 0 },
             { "appMemory", "512" },
@@ -602,15 +644,62 @@ public sealed class DailyNoteService
             { "networkType", "WiFi" },
             { "oaid", "error_1008008" },
             { "debugStatus", 0 },
-            { "ramCapacity", ramRemain + rng.Next(10000, 50000) },
+            { "ramCapacity", (ramRemain + rng.Next(500, 1500)).ToString() },
             { "magnetometer", magnetometer },
             { "display", v.BuildDisplay },
-            { "appInstallTimeDiff", DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - rng.NextInt64(86400L, 86400L * 30) * 1000L },
+            { "appInstallTimeDiff", timeDiff },
             { "packageVersion", "2.42.0" },
             { "gyroscope", gyroscope },
             { "batteryStatus", battery },
-            { "hasKeyboard", rng.Next(2) },
+            { "hasKeyboard", 1 },
             { "board", v.Board },
+        };
+    }
+
+  
+    /// 调 /device-fp/api/getExtList 获取服务端要求的 ext_fields 字段列表。
+    /// 对齐 SDK: AbstractDeviceUniqueIdentifier.generateFingerprint() → loadPropertiesList()
+    
+    private static async Task<HashSet<string>> FetchExtListAsync()
+    {
+        try
+        {
+            string url = $"{GetFpUrl.Replace("/api/getFp", "/api/getExtList")}?platform=2&app_name=bbs_cn";
+            using HttpRequestMessage req = new(HttpMethod.Get, url);
+            req.Headers.Add("User-Agent", "okhttp/4.9.3");
+
+            HttpResponseMessage resp = await _httpClient.SendAsync(req);
+            string json = await resp.Content.ReadAsStringAsync();
+
+            using JsonDocument doc = JsonDocument.Parse(json);
+            if (doc.RootElement.TryGetProperty("data", out JsonElement data)
+                && data.TryGetProperty("ext_list", out JsonElement extList))
+            {
+                var list = new HashSet<string>();
+                foreach (var item in extList.EnumerateArray())
+                {
+                    string name = item.GetString();
+                    if (name != null) list.Add(name);
+                }
+                return list;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[DailyNoteService] FetchExtListAsync 异常: {ex.Message}");
+        }
+
+        // 请求失败时使用硬编码的已知完整列表，确保 getFp 仍能正常进行
+        return new HashSet<string>
+        {
+            "oaid","vaid","aaid","board","brand","hardware","cpuType","deviceType","display",
+            "hostname","manufacturer","productName","model","deviceInfo","sdkVersion","osVersion",
+            "devId","buildTags","buildType","buildUser","buildTime","screenSize","vendor",
+            "romCapacity","romRemain","ramCapacity","ramRemain","appMemory","accelerometer",
+            "gyroscope","magnetometer","isRoot","debugStatus","proxyStatus","emulatorStatus",
+            "isTablet","simState","ui_mode","sdCapacity","sdRemain","hasKeyboard","isMockLocation",
+            "ringMode","isAirMode","batteryStatus","chargeStatus","deviceName",
+            "appInstallTimeDiff","appUpdateTimeDiff","packageName","packageVersion","networkType"
         };
     }
 

@@ -5,6 +5,7 @@ Licensed under the MIT License.
 
 // By kyxsan.
 
+using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -41,10 +42,14 @@ public sealed class GeetestService
         {
             int retcode = doc.RootElement.TryGetProperty("retcode", out JsonElement rc) ? rc.GetInt32() : -1;
             if (retcode != 0 || !doc.RootElement.TryGetProperty("data", out JsonElement data))
+            {
+                Debug.WriteLine($"[GeetestService] TryVerifyForDailyNote: createVerification 失败 retcode={retcode}");
                 return null;
+            }
 
             gt = data.TryGetProperty("gt", out JsonElement gtProp) ? gtProp.GetString() : null;
             challenge = data.TryGetProperty("challenge", out JsonElement chProp) ? chProp.GetString() : null;
+            Debug.WriteLine($"[GeetestService] TryVerifyForDailyNote: createVerification 成功 gt={gt}, challenge={challenge}");
         }
 
         if (string.IsNullOrEmpty(gt) || string.IsNullOrEmpty(challenge))
@@ -52,16 +57,25 @@ public sealed class GeetestService
 
         GeetestResult result = await ShowGeetestWebViewAsync(gt, challenge);
         if (result == null || string.IsNullOrEmpty(result.Validate))
+        {
+            Debug.WriteLine($"[GeetestService] TryVerifyForDailyNote: 用户未完成验证 (result=null) 或 validate 为空");
             return null;
+        }
+        Debug.WriteLine($"[GeetestService] TryVerifyForDailyNote: 验证码完成 challenge={result.Challenge}, validate={result.Validate}");
 
         string verifyJson = await CallVerifyVerificationAsync(cookies, result.Challenge, result.Validate);
         using (JsonDocument doc = JsonDocument.Parse(verifyJson))
         {
             int retcode = doc.RootElement.TryGetProperty("retcode", out JsonElement rc) ? rc.GetInt32() : -1;
             if (retcode != 0 || !doc.RootElement.TryGetProperty("data", out JsonElement data))
+            {
+                Debug.WriteLine($"[GeetestService] TryVerifyForDailyNote: verifyVerification 失败 retcode={retcode}");
                 return null;
+            }
 
-            return data.TryGetProperty("challenge", out JsonElement chProp) ? chProp.GetString() : null;
+            string finalChallenge = data.TryGetProperty("challenge", out JsonElement chProp) ? chProp.GetString() : null;
+            Debug.WriteLine($"[GeetestService] TryVerifyForDailyNote: verifyVerification 成功 xrpc_challenge={finalChallenge}");
+            return finalChallenge;
         }
     }
 
@@ -69,13 +83,15 @@ public sealed class GeetestService
     {
         string cookieStr = DailyNoteService.BuildCookieString(cookies, DailyNoteService.CookieMode.Cookie);
         string ds = DailyNoteService.CalculateDS2(CNX4, "is_high=true", "");
+        string fp = DailyNoteService.GetDeviceFp(cookies);
+        Debug.WriteLine($"[GeetestService] CallCreateVerification: device_fp={fp}");
 
         using HttpRequestMessage req = new(HttpMethod.Get, CreateVerificationUrl);
         req.Headers.Add("Cookie", cookieStr);
         req.Headers.Add("x-rpc-app_version", CNVersion);
         req.Headers.Add("x-rpc-client_type", "5");
         req.Headers.Add("x-rpc-device_id", DailyNoteService.GetGameRecordDeviceId());
-        req.Headers.Add("x-rpc-device_fp", DailyNoteService.GetDeviceFp(cookies));
+        req.Headers.Add("x-rpc-device_fp", fp);
         req.Headers.Add("x-rpc-challenge_game", "2");
         req.Headers.Add("x-rpc-challenge_path", DailyNoteChallengePath);
         req.Headers.Add("DS", ds);
@@ -97,6 +113,8 @@ public sealed class GeetestService
         };
         string bodyJson = JsonSerializer.Serialize(body);
         string ds = DailyNoteService.CalculateDS2(CNX4, "", bodyJson);
+        string fp = DailyNoteService.GetDeviceFp(cookies);
+        Debug.WriteLine($"[GeetestService] CallVerifyVerification: device_fp={fp}");
 
         using HttpRequestMessage req = new(HttpMethod.Post, VerifyVerificationUrl);
         req.Content = new StringContent(bodyJson, Encoding.UTF8, "application/json");
@@ -104,7 +122,7 @@ public sealed class GeetestService
         req.Headers.Add("x-rpc-app_version", CNVersion);
         req.Headers.Add("x-rpc-client_type", "5");
         req.Headers.Add("x-rpc-device_id", DailyNoteService.GetGameRecordDeviceId());
-        req.Headers.Add("x-rpc-device_fp", DailyNoteService.GetDeviceFp(cookies));
+        req.Headers.Add("x-rpc-device_fp", fp);
         req.Headers.Add("x-rpc-challenge_game", "2");
         req.Headers.Add("x-rpc-challenge_path", DailyNoteChallengePath);
         req.Headers.Add("DS", ds);

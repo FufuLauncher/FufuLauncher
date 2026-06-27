@@ -136,7 +136,7 @@ public partial class AccountViewModel : ObservableRecipient
         SwitchAccountCommand = new AsyncRelayCommand<AccountInfo>(SwitchToAccountAsync);
         OpenSecurityCenterCommand = new AsyncRelayCommand(OpenSecurityCenterAsync);
         LockAccountCommand = new AsyncRelayCommand(LockAccountAsync);
-        _ = LoadAccountInfo();
+        // 不在此处加载 — OnNavigatedTo 会触发 RefreshDataAsync
     }
     #endregion
 
@@ -518,10 +518,8 @@ public partial class AccountViewModel : ObservableRecipient
 
             Debug.WriteLine($"[LoadAccountInfo] 已加载账户: {entry.Nickname} ({entry.Id})");
 
-
-            _ = LoadUserInfoAsync();
-
-            RefreshSavedAccountsList();
+            // LoadUserInfoAsync 已在 LoadActiveAccountAsync 中被调用
+            RefreshSavedAccountsList(); 
         }
         catch (Exception ex)
         {
