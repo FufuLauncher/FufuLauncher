@@ -230,6 +230,11 @@ public sealed partial class MainWindow : WindowEx
         {
             _minimizeToTray = m.Value;
         });
+
+        WeakReferenceMessenger.Default.Register<NavigationVisibilityChangedMessage>(this, (_, m) =>
+        {
+            dispatcherQueue.TryEnqueue(() => ApplyNavItemVisibility(m.Value));
+        });
         
         WeakReferenceMessenger.Default.Register<MinWindowSizeLimitChangedMessage>(this, (_, m) =>
         {
@@ -1271,6 +1276,7 @@ public sealed partial class MainWindow : WindowEx
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();
             await LoadMinWindowSizeLimitSettingAsync();
+            await LoadNavItemVisibilityAsync();
             ShowMainContent();
             
             _ = Task.Run(async () => 
@@ -1452,8 +1458,17 @@ public sealed partial class MainWindow : WindowEx
         }
     }
 
-    private async void NavigateToPage(string viewModelTag)
+    internal async void NavigateToPage(string viewModelTag)
     {
+     
+        if (!IsNavItemVisible(viewModelTag))
+        {
+            ShowNotification(new NotificationMessage("无法访问", "该功能已被隐藏，请在设置中重新开启", NotificationType.Warning, 3000));
+            NavigationView.SelectedItem = null; 
+            ContentFrame.Navigate(typeof(Views.HiddenPage), null, new SuppressNavigationTransitionInfo());
+            return;
+        }
+
         var pageType = viewModelTag switch
         {
             "FufuLauncher.ViewModels.MainViewModel" => typeof(Views.MainPage),
@@ -1486,6 +1501,13 @@ public sealed partial class MainWindow : WindowEx
             ContentFrame.Navigate(pageType, null, new SuppressNavigationTransitionInfo());
             var isMainPage = pageType == typeof(Views.MainPage);
             UpdatePageOverlayState(isMainPage);
+
+            if (isMainPage)
+            {
+                var mainItem = GetAllNavItems().FirstOrDefault(i => i.Tag?.ToString() == "FufuLauncher.ViewModels.MainViewModel");
+                if (mainItem != null)
+                    NavigationView.SelectedItem = mainItem;
+            }
         }
     }
 
@@ -1574,6 +1596,65 @@ public sealed partial class MainWindow : WindowEx
             NavigationView.SelectedItem = accountItem;
         else
             NavigateToPage("FufuLauncher.ViewModels.AccountViewModel");
+    }
+
+
+
+    private readonly Dictionary<string, bool> _navItemVisibility = new();
+
+    public async Task LoadNavItemVisibilityAsync()
+    {
+        var settings = App.GetService<ILocalSettingsService>();
+        var allKeys = new[]
+        {
+            "MainViewModel", "PluginSettingsViewModel", "ControlPanelModel",
+            "BlankViewModel", "AccountViewModel", "OtherViewModel",
+            "PluginViewModel", "DataViewModel", "HelpViewModel",
+            "CommunityViewModel", "CalculatorViewModel", "SettingsViewModel"
+        };
+
+        foreach (var key in allKeys)
+        {
+            var val = await settings.ReadSettingAsync($"NavVisible_{key}");
+            bool visible = val is bool b ? b : (val is string s && bool.TryParse(s, out var p) ? p : true);
+            _navItemVisibility[$"FufuLauncher.ViewModels.{key}"] = visible;
+        }
+
+  
+        foreach (var item in GetAllNavItems())
+        {
+            var tag = item.Tag?.ToString();
+            if (tag != null && _navItemVisibility.TryGetValue(tag, out var visible))
+            {
+                item.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+    }
+
+    private bool IsNavItemVisible(string viewModelKey)
+    {
+        return _navItemVisibility.TryGetValue(viewModelKey, out var visible) ? visible : true;
+    }
+
+    private void ApplyNavItemVisibility(NavItemConfig config)
+    {
+        _navItemVisibility[config.ViewModelKey] = config.IsUserVisible;
+
+        foreach (var item in GetAllNavItems())
+        {
+            if (item.Tag?.ToString() == config.ViewModelKey)
+            {
+                item.Visibility = config.IsUserVisible ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            }
+        }
+    }
+
+    private IEnumerable<NavigationViewItem> GetAllNavItems()
+    {
+        return NavigationView.MenuItems
+            .Concat(NavigationView.FooterMenuItems)
+            .OfType<NavigationViewItem>();
     }
 
     private void UpdatePageOverlayState(bool isMainPage)

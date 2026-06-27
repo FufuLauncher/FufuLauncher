@@ -1,0 +1,54 @@
+<Page
+    x:Class="FufuLauncher.Views.HiddenPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="Transparent"
+    Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <Storyboard x:Name="EntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="ExitStoryboard">
+            <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseIn" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid x:Name="RootLayoutGrid" Opacity="0">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16" MaxWidth="400">
+            <FontIcon Glyph="&#xE783;" FontSize="48"
+                      Foreground="{ThemeResource SystemAccentColor}"
+                      HorizontalAlignment="Center" />
+
+            <TextBlock Text="功能已隐藏"
+                       Style="{ThemeResource SubtitleTextBlockStyle}"
+                       HorizontalAlignment="Center" />
+
+            <TextBlock Text="此功能已在设置中被隐藏。如需使用，请前往设置 → 外观与个性化 → 导航栏显示项 重新开启。"
+                       Style="{ThemeResource BodyTextBlockStyle}"
+                       TextWrapping="Wrap"
+                       Opacity="0.7"
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center" />
+
+            <Button Content="返回主页"
+                    HorizontalAlignment="Center"
+                    Margin="0,8,0,0"
+                    Padding="24,8"
+                    CornerRadius="6"
+                    Click="OnBackToHomeClick" />
+        </StackPanel>
+    </Grid>
+</Page>

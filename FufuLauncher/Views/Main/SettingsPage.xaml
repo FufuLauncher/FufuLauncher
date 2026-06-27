@@ -5,6 +5,7 @@
       xmlns:helpers="using:FufuLauncher.Helpers"
       xmlns:models="using:FufuLauncher.Models"
       xmlns:viewModels="using:FufuLauncher.ViewModels"
+      xmlns:converters="using:FufuLauncher.Converters"
       Background="Transparent"
       Loaded="Page_Loaded">
 
@@ -35,6 +36,7 @@
             <helpers:WindowModeEnumToBooleanConverter x:Key="WindowModeEnumToBooleanConverter" />
             <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <helpers:StringFormatConverter x:Key="StringFormatConverter" />
+            <converters:BoolInverter x:Key="BoolInverter" />
 
             <Storyboard x:Name="EntranceStoryboard">
                 <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
@@ -303,11 +305,6 @@
                                           OnContent="隐藏"
                                           IsOn="{x:Bind ViewModel.IsHideCheckinCardEnabled, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="隐藏便签卡片"
-                                          OffContent="显示"
-                                          OnContent="隐藏"
-                                          IsOn="{x:Bind ViewModel.IsHideDailyNoteCardEnabled, Mode=TwoWay}" />
-
                             <ToggleSwitch Header="显示快速预设卡片"
                                           OffContent="隐藏"
                                           OnContent="显示"
@@ -365,7 +362,19 @@
                             <TextBlock Text="选择要在便签卡片中显示的项目，最多选择3个！"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
-                                       Margin="0,2,0,12" />
+                                       Margin="0,2,0,8" />
+
+                            <InfoBar Severity="Warning"
+                                     Title="注意"
+                                     Message="便签数据来自米游社游戏记录接口，频繁刷新可能触发人机验证，严重时风控可能导致战绩页面暂时无法访问。如遇此情况，请降低刷新频率，等待一段时间后重试。"
+                                     IsOpen="True"
+                                     IsClosable="False"
+                                     Margin="0,0,0,8" />
+
+                            <ToggleSwitch Header="隐藏便签卡片"
+                                          OffContent="显示"
+                                          OnContent="隐藏"
+                                          IsOn="{x:Bind ViewModel.IsHideDailyNoteCardEnabled, Mode=TwoWay}" />
 
                             <ToggleSwitch Header="显示树脂"
                                           OffContent="隐藏"
@@ -391,6 +400,28 @@
                                           OffContent="隐藏"
                                           OnContent="显示"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteTransformer, Mode=TwoWay}" />
+                        </StackPanel>
+
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
+                            <TextBlock Text="导航栏显示项"
+                                       Style="{ThemeResource BodyStrongTextBlockStyle}"
+                                       FontSize="14" />
+                            <TextBlock Text="选择要在左侧导航栏中显示的项目。隐藏后不会影响功能使用，可在设置中重新开启。主页和设置中心不可隐藏。"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       Margin="0,2,0,12" />
+
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.NavItems}">
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="models:NavItemConfig">
+                                        <ToggleSwitch Header="{x:Bind DisplayName}"
+                                                      IsOn="{x:Bind IsUserVisible, Mode=TwoWay}"
+                                                      IsEnabled="{x:Bind IsForceVisible, Converter={StaticResource BoolInverter}}"
+                                                      OffContent="隐藏" OnContent="显示"
+                                                      Margin="0,4,0,4" />
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
@@ -715,6 +746,22 @@
                                           OnContent="已启用"
                                           IsOn="{x:Bind ViewModel.IsRedeemCodeNotificationEnabled, Mode=TwoWay}" />
                             <TextBlock Text="开启后，当有新的兑换码发布时，将在第一时间推送通知并显示有效期倒计时。每期兑换码仅通知一次。"
+                                       Style="{ThemeResource CaptionTextBlockStyle}"
+                                       Opacity="0.7"
+                                       TextWrapping="Wrap"
+                                       Margin="0,4,0,0" />
+                        </StackPanel>
+
+                        <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,24,0,0">
+                            <TextBlock Text="启动后行为"
+                                       Style="{StaticResource SectionTitleStyle}"
+                                       VerticalAlignment="Center" />
+                            <ComboBox Header="游戏启动后执行"
+                                      ItemsSource="{x:Bind ViewModel.PostLaunchBehaviorItems}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedPostLaunchBehaviorItem, Mode=TwoWay}"
+                                      DisplayMemberPath="DisplayName"
+                                      Width="220" />
+                            <TextBlock Text="选择启动游戏后启动器的行为：最小化到系统托盘继续运行，或保存状态后完全退出。"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        TextWrapping="Wrap"

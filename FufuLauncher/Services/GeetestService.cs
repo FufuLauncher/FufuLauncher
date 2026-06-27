@@ -23,12 +23,13 @@ public sealed class GeetestService
     private const string VerifyVerificationUrl = "https://api-takumi-record.mihoyo.com/game_record/app/card/wapi/verifyVerification";
     private const string DailyNoteChallengePath = "/game_record/app/genshin/api/dailyNote";
 
-    private const string CNVersion = "2.95.1";
+    private const string CNVersion = "2.109.0";
     private const string CNX4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
-    private const string MobileUserAgent = $"Mozilla/5.0 (Linux; Android 15) Mobile miHoYoBBS/{CNVersion}";
     private const string Referer = "https://webstatic.mihoyo.com";
 
-    private static readonly HttpClient _httpClient = new();
+    private static string MobileUserAgent => DailyNoteService.GetCurrentUserAgent();
+
+    private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
 
     public async Task<string> TryVerifyForDailyNoteAsync(Dictionary<string, string> cookies)
     {
@@ -73,7 +74,7 @@ public sealed class GeetestService
         req.Headers.Add("Cookie", cookieStr);
         req.Headers.Add("x-rpc-app_version", CNVersion);
         req.Headers.Add("x-rpc-client_type", "5");
-        req.Headers.Add("x-rpc-device_id", DailyNoteService.GetDeviceId());
+        req.Headers.Add("x-rpc-device_id", DailyNoteService.GetGameRecordDeviceId());
         req.Headers.Add("x-rpc-device_fp", DailyNoteService.GetDeviceFp(cookies));
         req.Headers.Add("x-rpc-challenge_game", "2");
         req.Headers.Add("x-rpc-challenge_path", DailyNoteChallengePath);
@@ -102,7 +103,7 @@ public sealed class GeetestService
         req.Headers.Add("Cookie", cookieStr);
         req.Headers.Add("x-rpc-app_version", CNVersion);
         req.Headers.Add("x-rpc-client_type", "5");
-        req.Headers.Add("x-rpc-device_id", DailyNoteService.GetDeviceId());
+        req.Headers.Add("x-rpc-device_id", DailyNoteService.GetGameRecordDeviceId());
         req.Headers.Add("x-rpc-device_fp", DailyNoteService.GetDeviceFp(cookies));
         req.Headers.Add("x-rpc-challenge_game", "2");
         req.Headers.Add("x-rpc-challenge_path", DailyNoteChallengePath);
