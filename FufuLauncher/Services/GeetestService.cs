@@ -1,11 +1,10 @@
-﻿/*
-Copyright (c) FufuLauncher Dev Team. All rights reserved.
-Licensed under the MIT License.
-*/
-
+// Copyright (c) FufuLauncher Dev Team. All rights reserved.
 // By kyxsan.
+// Licensed under the MIT License.
 
 using System.Diagnostics;
+using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,6 +13,7 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Web.WebView2.Core;
 using Windows.Graphics;
 
 namespace FufuLauncher.Services;
@@ -187,7 +187,15 @@ public sealed class GeetestService
             appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
             appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent;
             appWindow.TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            appWindow.Resize(new SizeInt32(1280, 720));
+            appWindow.Resize(new SizeInt32(1270, 720));
+
+            AppWindow mainAppWindow = App.MainWindow.AppWindow;
+            PointInt32 mainPos = mainAppWindow.Position;
+            SizeInt32 mainSize = mainAppWindow.Size;
+            appWindow.Move(new PointInt32(
+                mainPos.X + (mainSize.Width - 400) / 2,
+                mainPos.Y + (mainSize.Height - 450) / 2));
+
             geetestWindow.SetTitleBar(titleBar);
 
             await webView.EnsureCoreWebView2Async();
@@ -292,4 +300,3 @@ public sealed class GeetestResult
     [JsonPropertyName("geetest_validate")]
     public string Validate { get; set; }
 }
-

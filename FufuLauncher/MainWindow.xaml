@@ -267,14 +267,14 @@
               HorizontalAlignment="Right"
               VerticalAlignment="Bottom"
               Margin="0,0,24,24"
-              Width="380"
+              Width="390"
               MaxHeight="450"
               Visibility="Collapsed"
               Canvas.ZIndex="3000">
 
-            <Border CornerRadius="10">
+            <Border CornerRadius="10" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                 <Border.Background>
-                    <AcrylicBrush TintColor="#1E1E1E" TintOpacity="0.85" FallbackColor="#EE1E1E1E"/>
+                    <ThemeResource ResourceKey="IosGlassBrush"/>
                 </Border.Background>
                 <Border.Shadow>
                     <ThemeShadow/>

@@ -236,6 +236,12 @@ namespace FufuLauncher.ViewModels
                 await LoadCardVisibilityAsync();
             });
 
+            WeakReferenceMessenger.Default.Register<AccountChangedMessage>(this, async (r, m) =>
+            {
+                await ClearDailyNoteDataAsync();
+                await LoadDailyNoteAsync();
+            });
+
             _bannerTimer = _dispatcherQueue.CreateTimer();
             _bannerTimer.Interval = TimeSpan.FromSeconds(5);
             _bannerTimer.Tick += (s, e) => RotateBanner();
@@ -1374,12 +1380,17 @@ private void QuickSwitchPreset(PresetModel targetPreset)
                 if (activeId == null)
                 {
                     Debug.WriteLine("[DailyNote] 未找到绑定账号");
+                    await ClearDailyNoteDataAsync();
                     return;
                 }
 
                 var cookies = await accountManager.LoadCookiesAsync(activeId);
                 var entry = accountManager.GetActiveAccountEntry();
-                if (cookies == null || entry == null) return;
+                if (cookies == null || entry == null)
+                {
+                    await ClearDailyNoteDataAsync();
+                    return;
+                }
 
                 var customUid = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
                 string targetUid = customUid?.ToString()?.Trim();
@@ -1423,6 +1434,24 @@ private void QuickSwitchPreset(PresetModel targetPreset)
             {
                 Debug.WriteLine($"[DailyNote] 加载便签数据失败: {ex.Message}");
             }
+        }
+
+        private async Task ClearDailyNoteDataAsync()
+        {
+            await UpdateUI(() =>
+            {
+                CurrentResin = 0;
+                MaxResin = 0;
+                FinishedTaskNum = 0;
+                TotalTaskNum = 0;
+                CurrentHomeCoin = 0;
+                MaxHomeCoin = 0;
+                CurrentExpeditionNum = 0;
+                MaxExpeditionNum = 0;
+                IsTransformerObtained = false;
+                TransformerRecoveryTime = "";
+                IsDailyNoteLoaded = false;
+            });
         }
 
         private static bool HasRunningProcess(string processName)

@@ -743,35 +743,6 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         await DownloadAndInstallPluginAsync(urlLatest);
     }
 
-    private async void OnDownloadVmpPluginClick(object sender, RoutedEventArgs e)
-    {
-        var confirmDialog = new ContentDialog
-        {
-            Title = "选择加密版本",
-            Content = "加密版插件与普通版功能完全相同，主要用于降低被杀毒软件误判的概率\n请选择您要下载的加密强度：\n\n" +
-                      "1. 标准加密版（推荐）：使用低加密模式，理论上足以防误判，对性能影响较小\n" +
-                      "2. 高强度加密版：使用高强度的混淆保护，能最大程度防杀软，但会导致插件运行性能严重下降\n\n" +
-                      "总而言之，加密强度越高，游戏和插件的性能就越差，但是防误判就越好，自行决策使用\n\n" +
-                      "请确认您的选择：",
-            PrimaryButtonText = "下载标准加密版",
-            SecondaryButtonText = "下载高强度加密版",
-            CloseButtonText = "取消",
-            XamlRoot = XamlRoot
-        };
-
-        var result = await confirmDialog.ShowAsync();
-        
-        if (result == ContentDialogResult.Primary)
-        {
-            string urlVmp = "http://kr2-proxy.gitwarp.top:9980/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.vmp.zip";
-            await DownloadAndInstallPluginAsync(urlVmp);
-        }
-        else if (result == ContentDialogResult.Secondary)
-        {
-            string urlVmp2 = "http://kr2-proxy.gitwarp.top:9980/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.vmp2.zip";
-            await DownloadAndInstallPluginAsync(urlVmp2);
-        }
-    }
 
     private async Task DownloadAndInstallPluginAsync(string proxyUrl)
     {

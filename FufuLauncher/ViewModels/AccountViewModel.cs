@@ -581,6 +581,7 @@ public partial class AccountViewModel : ObservableRecipient
     
             Interlocked.Increment(ref _loadVersion);
             await _accountManager.LogoutAsync();
+            WeakReferenceMessenger.Default.Send(new AccountChangedMessage());
 
 
             RunOnUIThread(() =>
@@ -608,6 +609,7 @@ public partial class AccountViewModel : ObservableRecipient
         // 同步清空，确保 UI 在切换瞬间就不显示旧数据
         RunOnUIThread(() => { GameRolesInfo = null; UserFullInfo = null; });
         await _accountManager.SwitchAccountAsync(targetAccount.AccountId);
+        WeakReferenceMessenger.Default.Send(new AccountChangedMessage());
         await LoadActiveAccountAsync(targetAccount.AccountId);
 
 
