@@ -333,7 +333,7 @@ namespace FufuLauncher.Views
             WindowManagerHelper.CenterWindowOnScreen(AppWindow, 1120, 720);
             LoadingRing.IsActive = true;
 
-            ViewModel.GetWindowHandle = () => WinRT.Interop.WindowNative.GetWindowHandle(this);
+            ViewModel.GetWindow = () => this;
             ViewModel.RequestMetadataScrapeAction = async () => await ViewModel.FetchMetadataFromApiAsync();
             this.Activated += OnWindowFirstActivated;
             ViewModel.OnUidMismatchAsync = async (currentUid, incomingUid) =>

@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using FufuLauncher.ViewModels;
+using FufuLauncher.Services;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Messages;
 using Windows.System;
@@ -31,9 +32,6 @@ public sealed partial class PluginSettingsPage : Page
     private bool _isInitializing = true;
     private FileSystemWatcher _mainPluginWatcher;
     private bool _hasShownMainPluginMissingWarning = false;
-
-    [DllImport("user32.dll")]
-    private static extern IntPtr GetActiveWindow();
 
     public PluginSettingsPage()
     {
@@ -894,7 +892,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
             }
 
             var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, GetActiveWindow());
+            FilePickerService.InitializeWithValidWindow(picker);
             picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
             picker.FileTypeFilter.Add(".png");
             picker.FileTypeFilter.Add(".jpg");

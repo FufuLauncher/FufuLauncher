@@ -1012,16 +1012,14 @@ private async Task ShowAutoPathDialog(string foundPath)
 
         private async Task PickGameFolderAsync()
         {
-            var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
-            
             var filePicker = new FileOpenPicker
             {
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
-            
+
             filePicker.FileTypeFilter.Add(".exe");
-    
-            InitializeWithWindow.Initialize(filePicker, hwnd);
+
+            FilePickerService.InitializeWithValidWindow(filePicker);
             
             var file = await filePicker.PickSingleFileAsync();
             if (file != null)
