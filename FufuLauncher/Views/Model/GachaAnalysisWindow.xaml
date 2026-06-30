@@ -1334,8 +1334,8 @@
                                   Padding="0,0,16,16"
                                   Visibility="{Binding ViewModel.ShowAnalysisContent, Converter={StaticResource BoolToVisibilityConverter}}">
 
-                        <StackPanel x:Name="AnalysisExportTarget" Spacing="12" HorizontalAlignment="Stretch"
-                                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="16">
+                        <Border x:Name="AnalysisExportTarget" CornerRadius="8" Padding="20" Margin="0,0,16,16">
+                        <StackPanel Spacing="12" HorizontalAlignment="Stretch">
                             <Grid>
                                 <StackPanel>
                                     <TextBlock Text="祈愿分析" FontSize="22" FontWeight="SemiBold" />
@@ -1344,7 +1344,7 @@
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
 
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                                <StackPanel x:Name="AnalysisExportButtons" Orientation="Horizontal" HorizontalAlignment="Right"
                                             VerticalAlignment="Top" Spacing="8">
                                     <Button Click="OnCopyAnalysisImageClick">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
@@ -1358,6 +1358,13 @@
                                             <TextBlock Text="保存图片" />
                                         </StackPanel>
                                     </Button>
+                                </StackPanel>
+
+                                <StackPanel x:Name="AnalysisExportLogo" Orientation="Horizontal" HorizontalAlignment="Right"
+                                            VerticalAlignment="Top" Spacing="8" Visibility="Collapsed">
+                                    <Image Source="ms-appx:///Assets/icon.png" Width="28" Height="28" />
+                                    <TextBlock Text="FuFuLauncher" FontSize="20" FontWeight="SemiBold"
+                                               VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
                             </Grid>
 
@@ -1769,6 +1776,7 @@
                                 </Border>
                             </Grid>
                         </StackPanel>
+                        </Border>
                     </ScrollViewer>
                 </Grid>
             </Grid>

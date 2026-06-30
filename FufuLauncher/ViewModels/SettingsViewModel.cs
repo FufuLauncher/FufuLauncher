@@ -726,8 +726,11 @@ namespace FufuLauncher.ViewModels
         private async Task DownloadAndSaveFileAsync(string url, string typeName, string extension)
         {
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
-            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+            if (!FilePickerService.InitializeWithValidWindow(savePicker, out var saveErr))
+            {
+                ShowDialogMessage("错误", saveErr ?? "无法打开文件选择器");
+                return;
+            }
 
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
             if (extension == ".mp4")
