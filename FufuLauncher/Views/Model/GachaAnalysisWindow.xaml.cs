@@ -333,7 +333,7 @@ namespace FufuLauncher.Views
             WindowManagerHelper.CenterWindowOnScreen(AppWindow, 1120, 720);
             LoadingRing.IsActive = true;
 
-            ViewModel.GetWindowHandle = () => WinRT.Interop.WindowNative.GetWindowHandle(this);
+            ViewModel.GetWindow = () => this;
             ViewModel.RequestMetadataScrapeAction = async () => await ViewModel.FetchMetadataFromApiAsync();
             this.Activated += OnWindowFirstActivated;
             ViewModel.OnUidMismatchAsync = async (currentUid, incomingUid) =>
@@ -696,6 +696,21 @@ namespace FufuLauncher.Views
             await renderTargetBitmap.RenderAsync(element);
 
             var pixels = await renderTargetBitmap.GetPixelsAsync();
+            var pixelArray = pixels.ToArray();
+
+            // 将透明像素替换为白色底色，避免在微信/QQ等不支持alpha的场景中显示黑底
+            for (var i = 0; i < pixelArray.Length; i += 4)
+            {
+                var alpha = pixelArray[i + 3];
+                if (alpha == 0)
+                {
+                    pixelArray[i] = 255;     // B
+                    pixelArray[i + 1] = 255;  // G
+                    pixelArray[i + 2] = 255;  // R
+                    pixelArray[i + 3] = 255;  // A
+                }
+            }
+
             var stream = new InMemoryRandomAccessStream();
             var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
 
@@ -706,7 +721,7 @@ namespace FufuLauncher.Views
                 (uint)renderTargetBitmap.PixelHeight,
                 96,
                 96,
-                pixels.ToArray());
+                pixelArray);
 
             await encoder.FlushAsync();
             return stream;

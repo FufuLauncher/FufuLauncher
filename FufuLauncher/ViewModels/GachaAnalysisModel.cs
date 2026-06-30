@@ -16,6 +16,7 @@ using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using Microsoft.Data.Sqlite;
+using Microsoft.UI.Xaml;
 using MihoyoBBS;
 
 namespace FufuLauncher.ViewModels;
@@ -117,7 +118,7 @@ public partial class GachaAnalysisModel : ObservableObject
 
     public Action RequestMetadataScrapeAction;
     public Action<string> OnErrorAction;
-    public Func<IntPtr> GetWindowHandle;
+    public Func<Window> GetWindow;
     public Func<string, string, Task<bool>> OnUidMismatchAsync;
     public Func<string, string, string, Task> OnShowConfirmDialogAsync;
     public Func<string, Task> OnRequireReLoginAsync;
@@ -1590,10 +1591,8 @@ private async Task ExportUigfAsync(string version)
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         });
 
-        var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
-        if (hwnd == IntPtr.Zero) hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
         var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-        WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+        if (!FilePickerService.InitializeWithValidWindow(savePicker, GetWindow?.Invoke())) return;
 
         savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
         savePicker.FileTypeChoices.Add("JSON 文件", new List<string> { ".json" });
@@ -1619,9 +1618,7 @@ private async Task ImportUigfAsync()
     try
     {
         var picker = new Windows.Storage.Pickers.FileOpenPicker();
-        var hwnd = GetWindowHandle?.Invoke() ?? IntPtr.Zero;
-        if (hwnd == IntPtr.Zero) hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+        if (!FilePickerService.InitializeWithValidWindow(picker, GetWindow?.Invoke())) return;
 
         picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
         picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;

@@ -152,38 +152,21 @@ namespace FufuLauncher.ViewModels
             return;
         }
 
-        var mainWindow = App.MainWindow;
-        if (mainWindow == null)
-        {
-            await ShowError("无法获取主窗口句柄");
-            return;
-        }
-
-        var hwnd = WindowNative.GetWindowHandle(mainWindow);
-        if (hwnd == IntPtr.Zero)
-        {
-            await ShowError("窗口句柄无效，请以普通用户模式运行");
-            return;
-        }
-        
         var filePicker = new FileOpenPicker
         {
             SuggestedStartLocation = PickerLocationId.ComputerFolder,
             ViewMode = PickerViewMode.List
         };
-        
+
         filePicker.FileTypeFilter.Add(".exe");
 
-        try
+        if (!FilePickerService.InitializeWithValidWindow(filePicker))
         {
-            InitializeWithWindow.Initialize(filePicker, hwnd);
+            await ShowError("窗口句柄无效，请以普通用户模式运行");
+            return;
         }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[警告] InitializeWithWindow失败: {ex.Message}");
-        }
-        
-        var file = await Task.Run(async () => await filePicker.PickSingleFileAsync());
+
+        var file = await filePicker.PickSingleFileAsync();
 
         if (file != null)
         {

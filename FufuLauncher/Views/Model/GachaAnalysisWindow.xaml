@@ -1335,7 +1335,7 @@
                                   Visibility="{Binding ViewModel.ShowAnalysisContent, Converter={StaticResource BoolToVisibilityConverter}}">
 
                         <StackPanel x:Name="AnalysisExportTarget" Spacing="12" HorizontalAlignment="Stretch"
-                                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="16">
+                                    Padding="16">
                             <Grid>
                                 <StackPanel>
                                     <TextBlock Text="祈愿分析" FontSize="22" FontWeight="SemiBold" />
