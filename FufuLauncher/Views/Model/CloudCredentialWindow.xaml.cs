@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Diagnostics;
 using System.Text.Json;
 using Windows.Graphics;
@@ -27,6 +31,7 @@ public sealed partial class CloudCredentialWindow : Window
         AppWindow.Resize(new SizeInt32(1280, 720));
 
         TitleText.Text = $"添加云游戏凭证 - {_uid}";
+        Closed += OnWindowClosed;
         InitializeWebViewAsync();
     }
 
@@ -83,4 +88,19 @@ public sealed partial class CloudCredentialWindow : Window
     {
         e.Handled = true;
     }
+
+    private void OnWindowClosed(object sender, WindowEventArgs args)
+    {
+        try
+        {
+            if (CloudWebView.CoreWebView2 != null)
+            {
+                CloudWebView.CoreWebView2.ContextMenuRequested -= CoreWebView2_ContextMenuRequested;
+                CloudWebView.CoreWebView2.WebResourceRequested -= CoreWebView2_WebResourceRequested;
+            }
+            CloudWebView.Close();
+        }
+        catch { }
+    }
 }
+

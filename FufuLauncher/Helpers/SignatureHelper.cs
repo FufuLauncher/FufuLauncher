@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Security.Cryptography;
 using System.Text;
 
@@ -36,3 +40,4 @@ public static class SignatureHelper
         return new string(result);
     }
 }
+

@@ -6,45 +6,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="战绩信息">
-    
+
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
-    
+
     <Grid x:Name="RootGrid" Background="Transparent" PreviewKeyDown="RootGrid_PreviewKeyDown">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image Source="/Assets/WindowIcon.ico" Height="16" Width="16" Margin="16,0,12,0"/>
-            <TextBlock Grid.Column="1" Text="战绩信息" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+            <Image Source="/Assets/WindowIcon.ico" Height="16" Width="16" Margin="16,0,12,0" />
+            <TextBlock Grid.Column="1" Text="战绩信息" VerticalAlignment="Center"
+                       Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
 
         <Grid x:Name="TopBarGrid" Grid.Row="1" Padding="12,4,12,8" ColumnSpacing="8" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="ClientTypeComboBox" SelectionChanged="ClientTypeComboBox_SelectionChanged" Width="120" SelectedIndex="0" ToolTipService.ToolTip="切换标识">
-                <ComboBoxItem Content="Type 2" Tag="2"/>
-                <ComboBoxItem Content="Type 4" Tag="4"/>
-                <ComboBoxItem Content="Type 5" Tag="5"/>
+            <ComboBox x:Name="ClientTypeComboBox" SelectionChanged="ClientTypeComboBox_SelectionChanged" Width="120"
+                      SelectedIndex="0" ToolTipService.ToolTip="切换标识">
+                <ComboBoxItem Content="Type 2" Tag="2" />
+                <ComboBoxItem Content="Type 4" Tag="4" />
+                <ComboBoxItem Content="Type 5" Tag="5" />
             </ComboBox>
-            <TextBox Grid.Column="1" x:Name="UrlTextBox" PlaceholderText="输入网址..." VerticalAlignment="Center" KeyDown="UrlTextBox_KeyDown" InputScope="Url"/>
-            <Button Grid.Column="2" Content="前往" Click="GoButton_Click"/>
+            <TextBox Grid.Column="1" x:Name="UrlTextBox" PlaceholderText="输入网址..." VerticalAlignment="Center"
+                     KeyDown="UrlTextBox_KeyDown" InputScope="Url" />
+            <Button Grid.Column="2" Content="前往" Click="GoButton_Click" />
         </Grid>
 
         <WebView2 Grid.Row="2" x:Name="BBSWebView" />
 
-        <Grid Grid.Row="2" x:Name="ScreenshotGrid" Visibility="Collapsed" Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
+        <Grid Grid.Row="2" x:Name="ScreenshotGrid" Visibility="Collapsed"
+              Background="{ThemeResource SolidBackgroundFillColorBaseBrush}">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled"
                           HorizontalScrollMode="Disabled"
                           VerticalScrollBarVisibility="Hidden"
@@ -58,16 +62,18 @@
                   CornerRadius="8,8,0,0"
                   BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
                   BorderThickness="0,1,0,0">
-                
+
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <Button Click="SaveScreenshot_Click" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon FontSize="16" Glyph="&#xE74E;" /> <TextBlock VerticalAlignment="Center" Text="保存" />
+                            <FontIcon FontSize="16" Glyph="&#xE74E;" />
+                            <TextBlock VerticalAlignment="Center" Text="保存" />
                         </StackPanel>
                     </Button>
                     <Button Click="CopyScreenshot_Click" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon FontSize="16" Glyph="&#xE8C8;" /> <TextBlock VerticalAlignment="Center" Text="复制" />
+                            <FontIcon FontSize="16" Glyph="&#xE8C8;" />
+                            <TextBlock VerticalAlignment="Center" Text="复制" />
                         </StackPanel>
                     </Button>
                 </StackPanel>
@@ -75,7 +81,8 @@
                 <Button HorizontalAlignment="Right"
                         Click="CloseScreenshot_Click"
                         Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
-                    <FontIcon FontSize="16" Glyph="&#xE711;" /> </Button>
+                    <FontIcon FontSize="16" Glyph="&#xE711;" />
+                </Button>
             </Grid>
         </Grid>
     </Grid>

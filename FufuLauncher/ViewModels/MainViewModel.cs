@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -232,6 +236,12 @@ namespace FufuLauncher.ViewModels
                 await LoadCardVisibilityAsync();
             });
 
+            WeakReferenceMessenger.Default.Register<AccountChangedMessage>(this, async (r, m) =>
+            {
+                await ClearDailyNoteDataAsync();
+                await LoadDailyNoteAsync();
+            });
+
             _bannerTimer = _dispatcherQueue.CreateTimer();
             _bannerTimer.Interval = TimeSpan.FromSeconds(5);
             _bannerTimer.Tick += (s, e) => RotateBanner();
@@ -251,22 +261,6 @@ namespace FufuLauncher.ViewModels
             WeakReferenceMessenger.Default.Register<GamePathChangedMessage>(this, (r, m) =>
             {
                 _dispatcherQueue?.TryEnqueue(() => UpdateLaunchButtonState());
-            });
-
-            WeakReferenceMessenger.Default.Register<PluginUpdateStateMessage>(this, (r, m) =>
-            {
-                _dispatcherQueue?.TryEnqueue(() =>
-                {
-                    if (m.Value)
-                    {
-                        LaunchButtonText = "插件更新中...";
-                        OnPropertyChanged(nameof(LaunchButtonText));
-                    }
-                    else
-                    {
-                        UpdateLaunchButtonState();
-                    }
-                });
             });
 
             _gameMonitoringCts = new CancellationTokenSource();
@@ -1007,6 +1001,8 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
         {
             IsCheckinButtonEnabled = false;
             CheckinButtonText = "签到中...";
+            CheckinStatusText = "签到中...";
+            CheckinSummary = "正在执行签到任务...";
 
             //await RefreshSettingsAsync();
 
@@ -1016,7 +1012,8 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
                 {
                     _dispatcherQueue.TryEnqueue(() =>
                     {
-                        CheckinButtonText = msg;
+                        CheckinButtonText = "签到中...";
+                        CheckinSummary = msg;
                     });
                 });
 
@@ -1026,7 +1023,13 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
                 CheckinSummary = unifiedResult.SummaryMessage;
                 UpdateCheckinIconState(unifiedResult.OverallSuccess ? "已签到" : "Fail");
 
-                _notificationService.Show("签到完成", unifiedResult.GetDetailedSummary(), unifiedResult.NotificationType, 5000);
+                var notificationTitle = unifiedResult.NotificationType switch
+                {
+                    NotificationType.Success => "签到完成",
+                    NotificationType.Warning => "签到部分失败",
+                    _ => "签到失败"
+                };
+                _notificationService.Show(notificationTitle, unifiedResult.GetDetailedSummary(), unifiedResult.NotificationType, 5000);
             }
             catch (Exception ex)
             {
@@ -1196,6 +1199,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
                 if (result.Success)
                 {
                     await ForceRefreshGameStateAsync();
+                    await ApplyPostLaunchBehaviorAsync();
                 }
                 else
                 {
@@ -1210,27 +1214,86 @@ private void QuickSwitchPreset(PresetModel targetPreset)
             }
         }
 
+        private async Task ApplyPostLaunchBehaviorAsync()
+        {
+            var obj = await _localSettingsService.ReadSettingAsync("PostLaunchBehavior");
+            if (obj is not string s || !Enum.TryParse<PostLaunchBehavior>(s, out var behavior))
+                return;
+
+            switch (behavior)
+            {
+                case PostLaunchBehavior.MinimizeToTray:
+                    _dispatcherQueue.TryEnqueue(() =>
+                    {
+                        App.MainWindow.Hide();
+                    });
+                    break;
+
+                case PostLaunchBehavior.Exit:
+                    await SaveStateBeforeExitAsync();
+                    _dispatcherQueue.TryEnqueue(() =>
+                    {
+                        Application.Current.Exit();
+                    });
+                    break;
+            }
+        }
+
+        private async Task SaveStateBeforeExitAsync()
+        {
+            try
+            {               
+                var windowSaveService = App.GetService<ILocalSettingsService>();
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
+                var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
+                var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+                if (appWindow != null)
+                {
+                    var size = appWindow.Size;
+                    await windowSaveService.SaveSettingAsync("WindowWidth", size.Width);
+                    await windowSaveService.SaveSettingAsync("WindowHeight", size.Height);
+                }
+            }
+            catch
+            {
+                // 保存状态失败不影响退出
+            }
+        }
+
         private async Task OpenScreenshotFolderAsync()
         {
             var savedPath = await _localSettingsService.ReadSettingAsync("GameInstallationPath");
             var gamePath = savedPath?.ToString()?.Trim('"')?.Trim();
 
-            if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
+            var gameScreenshotPath = "";
+            if (!string.IsNullOrEmpty(gamePath) && Directory.Exists(gamePath))
             {
-                _notificationService.Show("未设置游戏路径", "请先前往游戏管理页面选择游戏安装路径", NotificationType.Error, 0);
-                return;
+                gameScreenshotPath = Path.Combine(gamePath, "ScreenShot");
             }
-
-            var screenshotPath = Path.Combine(gamePath, "ScreenShot");
-            if (!Directory.Exists(screenshotPath))
+            
+            var customPathObj = await _localSettingsService.ReadSettingAsync("ScreenshotSavePath");
+            var customScreenshotPath = customPathObj?.ToString()?.Trim('"')?.Trim();
+            if (string.IsNullOrEmpty(customScreenshotPath))
             {
-                _notificationService.Show("截图文件夹不存在", $"未找到截图文件夹: {screenshotPath}", NotificationType.Error, 0);
+                customScreenshotPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    "FufuScreenshots");
+            }
+            
+            bool gameExists = !string.IsNullOrEmpty(gameScreenshotPath) && Directory.Exists(gameScreenshotPath);
+            bool customExists = Directory.Exists(customScreenshotPath);
+
+            if (!gameExists && !customExists)
+            {
+                _notificationService.Show("截图文件夹不存在", "请先在游戏中截图或通过启动器截图功能获取截图", NotificationType.Error, 0);
                 return;
             }
 
             try
             {
-                var galleryWindow = new ScreenshotGalleryWindow(screenshotPath);
+                var galleryWindow = new ScreenshotGalleryWindow(
+                    gameScreenshotPath ?? "",
+                    customScreenshotPath ?? "");
                 galleryWindow.Activate();
             }
             catch (Exception ex)
@@ -1300,6 +1363,15 @@ private void QuickSwitchPreset(PresetModel targetPreset)
 
         public async Task LoadDailyNoteAsync()
         {
+            // 便签卡片隐藏时不发起任何 API 请求
+            var hideJson = await _localSettingsService.ReadSettingAsync("IsHideDailyNoteCardEnabled");
+            if (hideJson != null && Convert.ToBoolean(hideJson))
+            {
+                IsDailyNoteLoaded = false;
+                Debug.WriteLine("[DailyNote] 便签卡片已隐藏，跳过API请求");
+                return;
+            }
+
             try
             {
                 var accountManager = App.GetService<AccountManager>();
@@ -1308,12 +1380,17 @@ private void QuickSwitchPreset(PresetModel targetPreset)
                 if (activeId == null)
                 {
                     Debug.WriteLine("[DailyNote] 未找到绑定账号");
+                    await ClearDailyNoteDataAsync();
                     return;
                 }
 
                 var cookies = await accountManager.LoadCookiesAsync(activeId);
                 var entry = accountManager.GetActiveAccountEntry();
-                if (cookies == null || entry == null) return;
+                if (cookies == null || entry == null)
+                {
+                    await ClearDailyNoteDataAsync();
+                    return;
+                }
 
                 var customUid = await _localSettingsService.ReadSettingAsync("CustomCheckinUid");
                 string targetUid = customUid?.ToString()?.Trim();
@@ -1357,6 +1434,24 @@ private void QuickSwitchPreset(PresetModel targetPreset)
             {
                 Debug.WriteLine($"[DailyNote] 加载便签数据失败: {ex.Message}");
             }
+        }
+
+        private async Task ClearDailyNoteDataAsync()
+        {
+            await UpdateUI(() =>
+            {
+                CurrentResin = 0;
+                MaxResin = 0;
+                FinishedTaskNum = 0;
+                TotalTaskNum = 0;
+                CurrentHomeCoin = 0;
+                MaxHomeCoin = 0;
+                CurrentExpeditionNum = 0;
+                MaxExpeditionNum = 0;
+                IsTransformerObtained = false;
+                TransformerRecoveryTime = "";
+                IsDailyNoteLoaded = false;
+            });
         }
 
         private static bool HasRunningProcess(string processName)
@@ -1510,3 +1605,4 @@ private void QuickSwitchPreset(PresetModel targetPreset)
         }
     }
 }
+

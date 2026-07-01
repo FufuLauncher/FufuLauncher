@@ -11,43 +11,46 @@
     <Page.Resources>
         <ThemeShadow x:Name="SharedShadow" />
 
-        <AcrylicBrush x:Key="CardAcrylicBrush" 
-                      TintColor="{ThemeResource SolidBackgroundFillColorBase}" 
-                      TintOpacity="0.6" 
+        <AcrylicBrush x:Key="CardAcrylicBrush"
+                      TintColor="{ThemeResource SolidBackgroundFillColorBase}"
+                      TintOpacity="0.6"
                       FallbackColor="{ThemeResource SolidBackgroundFillColorBase}" />
     </Page.Resources>
 
     <Grid Padding="36,32,36,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    </Grid.RowDefinitions>
+            <RowDefinition Height="Auto" /> <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Spacing="8" Margin="0,0,0,24">
             <StackPanel Orientation="Horizontal" Spacing="16">
-                <Button Click="OnBackClick" Style="{StaticResource NavigationBackButtonNormalStyle}"/>
+                <Button Click="OnBackClick" Style="{StaticResource NavigationBackButtonNormalStyle}" />
                 <StackPanel Spacing="2">
-                    <TextBlock x:Name="TitleTextBlock" Text="插件配置" Style="{StaticResource TitleTextBlockStyle}"/>
-                    <TextBlock Text="调整插件的运行参数" Style="{StaticResource CaptionTextBlockStyle}" Opacity="0.6"/>
+                    <TextBlock x:Name="TitleTextBlock" Text="插件配置" Style="{StaticResource TitleTextBlockStyle}" />
+                    <TextBlock Text="调整插件的运行参数" Style="{StaticResource CaptionTextBlockStyle}" Opacity="0.6" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="0,0,16,32">
             <StackPanel Spacing="24">
-                
-                <Grid x:Name="InfoBanner" 
+
+                <Grid x:Name="InfoBanner"
                       Background="{ThemeResource LayerFillColorAltBrush}"
                       CornerRadius="8" Padding="16">
                     <StackPanel Spacing="12">
                         <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                            <FontIcon Glyph="&#xE946;" FontSize="16" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-                            <TextBlock Text="插件信息" Style="{StaticResource BodyStrongTextBlockStyle}"/>
+                            <FontIcon Glyph="&#xE946;" FontSize="16"
+                                      Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Text="插件信息" Style="{StaticResource BodyStrongTextBlockStyle}" />
                         </StackPanel>
                         <ItemsControl x:Name="InfoItemsControl">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="0,2">
-                                        <TextBlock Text="{Binding}" Style="{StaticResource BodyTextBlockStyle}" 
-                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="13"/>
+                                        <TextBlock Text="{Binding}" Style="{StaticResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                   FontSize="13" />
                                     </Grid>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -58,9 +61,9 @@
                 <GridView x:Name="ConfigGridView" SelectionMode="None" IsItemClickEnabled="False">
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
-                            <Setter Property="Margin" Value="0,0,16,16"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="CornerRadius" Value="12"/>
+                            <Setter Property="Margin" Value="0,0,16,16" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="CornerRadius" Value="12" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="GridViewItem">
@@ -73,13 +76,13 @@
 
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <ItemsWrapGrid Orientation="Horizontal" ItemWidth="340" MaximumRowsOrColumns="-1"/>
+                            <ItemsWrapGrid Orientation="Horizontal" ItemWidth="340" MaximumRowsOrColumns="-1" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
 
                     <GridView.ItemTemplate>
                         <DataTemplate x:DataType="local:ConfigOption">
-                            <Grid CornerRadius="12" 
+                            <Grid CornerRadius="12"
                                   Background="{StaticResource CardAcrylicBrush}"
                                   BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                   BorderThickness="1"
@@ -99,22 +102,22 @@
 
                                 <Grid x:Name="RootGrid" Padding="20" MinHeight="130">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Text="{x:Bind NameDisplay}" 
-                                               Style="{StaticResource BodyStrongTextBlockStyle}" 
+                                    <TextBlock Text="{x:Bind NameDisplay}"
+                                               Style="{StaticResource BodyStrongTextBlockStyle}"
                                                TextTrimming="CharacterEllipsis"
                                                ToolTipService.ToolTip="{x:Bind NameDisplay}"
-                                               FontSize="15"/>
+                                               FontSize="15" />
 
-                                    <ContentControl Grid.Row="2" 
+                                    <ContentControl Grid.Row="2"
                                                     Margin="0,16,0,0"
-                                                    Content="{x:Bind EditControl}" 
+                                                    Content="{x:Bind EditControl}"
                                                     HorizontalContentAlignment="Stretch"
-                                                    VerticalAlignment="Bottom"/>
+                                                    VerticalAlignment="Bottom" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>

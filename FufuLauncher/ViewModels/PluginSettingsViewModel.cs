@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -15,7 +19,6 @@ public partial class PluginSettingsViewModel : ObservableObject
     private string _presetsDir;
     private string _dllPath;
     private IniFile _iniFile;
-    private bool _isAutoUpdatePluginEnabled;
     private bool _useKeyListInput = true;
     
     [ObservableProperty]
@@ -530,10 +533,6 @@ public async Task TriggerBackgroundAuthCheckAsync()
         var localSettings = App.GetService<FufuLauncher.Contracts.Services.ILocalSettingsService>();
         if (localSettings != null)
         {
-            var task = localSettings.ReadSettingAsync("IsAutoUpdatePluginEnabled");
-            task.Wait();
-            _isAutoUpdatePluginEnabled = task.Result != null && Convert.ToBoolean(task.Result);
-
             var keyInputTask = localSettings.ReadSettingAsync("UseKeyListInput");
             keyInputTask.Wait();
             _useKeyListInput = keyInputTask.Result == null || Convert.ToBoolean(keyInputTask.Result);
@@ -631,22 +630,6 @@ public async Task TriggerBackgroundAuthCheckAsync()
             return fileInfo.Length < 10 * 1024;
         }
         return false; 
-    }
-    
-    public bool IsAutoUpdatePluginEnabled
-    {
-        get => _isAutoUpdatePluginEnabled;
-        set
-        {
-            if (SetProperty(ref _isAutoUpdatePluginEnabled, value))
-            {
-                var localSettings = App.GetService<FufuLauncher.Contracts.Services.ILocalSettingsService>();
-                if (localSettings != null)
-                {
-                    _ = localSettings.SaveSettingAsync("IsAutoUpdatePluginEnabled", value);
-                }
-            }
-        }
     }
 
     public bool UseKeyListInput

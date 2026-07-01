@@ -1,4 +1,8 @@
-﻿using FufuLauncher.Messages;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using FufuLauncher.Messages;
 
 namespace FufuLauncher.Contracts.Services
 {

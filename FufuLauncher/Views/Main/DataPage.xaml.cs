@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using FufuLauncher.Constants;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -226,4 +230,5 @@ public class BooleanToVisibilityConverter : IValueConverter
         return value is Visibility v && v == Visibility.Visible;
     }
 }
+
 

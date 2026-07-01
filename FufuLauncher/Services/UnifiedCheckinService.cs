@@ -1,7 +1,10 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
@@ -17,19 +20,22 @@ public class UnifiedCheckinService : IUnifiedCheckinService
     private readonly ICommunityCheckinService _communityCheckinService;
     private readonly ICloudGameCheckinService _cloudGameCheckinService;
     private readonly AccountManager _accountManager;
+    private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
 
     public UnifiedCheckinService(
         ILocalSettingsService localSettingsService,
         IHoyoverseCheckinService gameCheckinService,
         ICommunityCheckinService communityCheckinService,
         ICloudGameCheckinService cloudGameCheckinService,
-        AccountManager accountManager)
+        AccountManager accountManager,
+        IHoyolabRoleResolverService hoyolabRoleResolverService)
     {
         _localSettingsService = localSettingsService;
         _gameCheckinService = gameCheckinService;
         _communityCheckinService = communityCheckinService;
         _cloudGameCheckinService = cloudGameCheckinService;
         _accountManager = accountManager;
+        _hoyolabRoleResolverService = hoyolabRoleResolverService;
     }
 
     public async Task<UnifiedCheckinResult> ExecuteAllCheckinsAsync(IProgress<string>? progress = null)
@@ -109,6 +115,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         
         if (gameEnabled)
         {
+            var gameSw = Stopwatch.StartNew();
             result.GameResult.Executed = true;
             try
             {
@@ -132,21 +139,33 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                         
                         bool isOs = account.ConfigPath.StartsWith("os_");
                         string signResult;
+                        bool success;
 
                         if (isOs)
                         {
-                            var os = new HoyolabCheckinService();
-                            await os.InitializeAsync(account.Cookie);
-                            signResult = await os.SignAccountAsync(account.Cookie, disabledUids);
+                            var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(account.Cookie);
+                            if (!rolesResult.HasRoles)
+                            {
+                                signResult = rolesResult.Message;
+                                success = false;
+                            }
+                            else
+                            {
+                                var os = new HoyolabCheckinService();
+                                await os.InitializeAsync(account.Cookie, rolesResult.Roles.Select(ToOsAccountItem).ToList());
+                                var osSignResult = await os.SignAccountWithResultAsync(account.Cookie, disabledUids);
+                                signResult = osSignResult.Message;
+                                success = osSignResult.Success;
+                            }
                         }
                         else
                         {
                             var genshin = new Genshin();
                             await genshin.InitializeAsync(config);
                             signResult = await genshin.SignAccountAsync(config, null, disabledUids);
+                            success = !signResult.Contains("失败") && !signResult.Contains("异常");
                         }
 
-                        bool success = !signResult.Contains("失败") && !signResult.Contains("异常");
                         if (success) result.GameResult.SuccessCount++;
                         else result.GameResult.FailCount++;
 
@@ -165,7 +184,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                             Items = { ("游戏签到", false, ex.Message) }
                         });
                     }
-                    await Task.Delay(new Random().Next(2000, 5000));
+                    if (activeAccounts.Count > 1)
+                        await Task.Delay(new Random().Next(2000, 5000));
                 }
 
                 result.GameResult.Success = result.GameResult.FailCount == 0;
@@ -185,11 +205,14 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 result.GameResult.Message = $"异常: {ex.Message}";
                 Debug.WriteLine($"[统一签到] 游戏签到异常: {ex.Message}");
             }
+            gameSw.Stop();
+            Debug.WriteLine($"[统一签到] 游戏签到耗时 {gameSw.ElapsedMilliseconds}ms");
         }
 
         // ===================== 社区签到 =====================
         if (communityEnabled)
         {
+            var communitySw = Stopwatch.StartNew();
             result.CommunityResult.Executed = true;
             try
             {
@@ -231,7 +254,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                             Items = { ("社区签到", success, success ? "完成" : "失败") }
                         });
 
-                    await Task.Delay(new Random().Next(2000, 5000));
+                    if (activeAccounts.Count > 1)
+                        await Task.Delay(new Random().Next(2000, 5000));
                 }
 
                 result.CommunityResult.Success = result.CommunityResult.FailCount == 0;
@@ -248,11 +272,14 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 result.CommunityResult.Message = $"异常: {ex.Message}";
                 Debug.WriteLine($"[统一签到] 社区签到异常: {ex.Message}");
             }
+            communitySw.Stop();
+            Debug.WriteLine($"[统一签到] 社区签到耗时 {communitySw.ElapsedMilliseconds}ms");
         }
 
         // ===================== 云游戏签到 =====================
         if (cloudGameEnabled)
         {
+            var cloudSw = Stopwatch.StartNew();
             result.CloudGameResult.Executed = true;
             try
             {
@@ -297,7 +324,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                                 Items = { ("云游戏签到", success, success ? "完成" : "失败") }
                             });
 
-                        await Task.Delay(new Random().Next(2000, 5000));
+                        if (activeAccounts.Count > 1)
+                            await Task.Delay(new Random().Next(2000, 5000));
                     }
 
                     result.CloudGameResult.Success = result.CloudGameResult.FailCount == 0;
@@ -313,6 +341,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 result.CloudGameResult.Message = $"异常: {ex.Message}";
                 Debug.WriteLine($"[统一签到] 云原神签到异常: {ex.Message}");
             }
+            cloudSw.Stop();
+            Debug.WriteLine($"[统一签到] 云游戏签到耗时 {cloudSw.ElapsedMilliseconds}ms");
         }
 
         int successAccounts = result.AccountResults.Count(a => a.Items.Any(i => i.Success == true));
@@ -351,11 +381,15 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         return new HashSet<string>();
     }
 
-    private static string? ExtractCookieValue(string cookie, string key)
+    private static OsAccountItem ToOsAccountItem(GameRoleInfo role)
     {
-        var pattern = $@"(?:^|;)\s*{Regex.Escape(key)}=([^;]+)";
-        var match = Regex.Match(cookie, pattern);
-        return match.Success ? match.Groups[1].Value.Trim() : null;
+        return new OsAccountItem
+        {
+            GameUid = role.game_uid,
+            Region = role.region,
+            Nickname = role.nickname
+        };
     }
 
 }
+

@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
@@ -313,3 +317,4 @@ namespace FufuLauncher.Services
         private string FormatSize(long bytes) => $"{bytes / 1024.0 / 1024.0:F2} MB";
     }
 }
+

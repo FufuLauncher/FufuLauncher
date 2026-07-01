@@ -7,7 +7,7 @@
     mc:Ignorable="d">
 
     <Window.SystemBackdrop>
-        <MicaBackdrop Kind="BaseAlt"/>
+        <MicaBackdrop Kind="BaseAlt" />
     </Window.SystemBackdrop>
 
     <Grid>
@@ -16,30 +16,30 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" Background="Transparent">
-            <TextBlock Text="公告" 
-                       VerticalAlignment="Center" 
-                       Margin="16,0,0,0" 
+            <TextBlock Text="公告"
+                       VerticalAlignment="Center"
+                       Margin="16,0,0,0"
                        Style="{ThemeResource CaptionTextBlockStyle}"
-                       Opacity="0.8"/>
+                       Opacity="0.8" />
         </Grid>
 
-        <WebView2 x:Name="AnnouncementWebView" 
+        <WebView2 x:Name="AnnouncementWebView"
                   Grid.Row="1"
                   NavigationStarting="AnnouncementWebView_NavigationStarting"
-                  NavigationCompleted="AnnouncementWebView_NavigationCompleted"/>
+                  NavigationCompleted="AnnouncementWebView_NavigationCompleted" />
 
-        <Grid x:Name="LoadingOverlay" 
-              Grid.Row="1" 
+        <Grid x:Name="LoadingOverlay"
+              Grid.Row="1"
               Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
               Visibility="Collapsed"
-              HorizontalAlignment="Stretch" 
+              HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
-                <ProgressRing IsActive="True" Width="50" Height="50"/>
-                <TextBlock Text="正在加载公告..." 
-                           HorizontalAlignment="Center" 
+                <ProgressRing IsActive="True" Width="50" Height="50" />
+                <TextBlock Text="正在加载公告..."
+                           HorizontalAlignment="Center"
                            Style="{ThemeResource BodyTextBlockStyle}"
-                           Opacity="0.7"/>
+                           Opacity="0.7" />
             </StackPanel>
         </Grid>
     </Grid>

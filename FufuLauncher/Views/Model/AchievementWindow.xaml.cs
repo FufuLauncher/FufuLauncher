@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
@@ -657,7 +661,11 @@ public sealed partial class AchievementWindow : Window
                     try
                     {
                         var context = await _listener.GetContextAsync();
-                        _ = HandleIncomingFile(context);
+                        _ = HandleIncomingFile(context).ContinueWith(t =>
+                        {
+                            if (t.IsFaulted)
+                                Debug.WriteLine($"处理请求异常: {t.Exception?.InnerException?.Message}");
+                        }, TaskContinuationOptions.OnlyOnFaulted);
                     }
                     catch { break; }
                 }

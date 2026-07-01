@@ -1,4 +1,9 @@
-﻿using Microsoft.UI.Xaml;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using Windows.Foundation;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 using Windows.Media.Core;
@@ -40,6 +45,7 @@ public sealed partial class EasterEggPage : Page
 
     private DispatcherTimer _typewriterTimer;
     private MediaPlayer _musicPlayer;
+    private TypedEventHandler<MediaPlayer, object> _mediaOpenedHandler;
     private int _currentWelcomeIndex = 0;
     private int _charIndex = 0;
     private bool _isDeleting = false;
@@ -85,7 +91,7 @@ public sealed partial class EasterEggPage : Page
                 var source = MediaSource.CreateFromUri(new Uri(videoPath));
                 BgVideoPlayer.Source = source;
 
-                BgVideoPlayer.MediaPlayer.MediaOpened += (_, _) =>
+                _mediaOpenedHandler = (_, _) =>
                 {
                     DispatcherQueue.TryEnqueue(() =>
                     {
@@ -96,6 +102,7 @@ public sealed partial class EasterEggPage : Page
                         }
                     });
                 };
+                BgVideoPlayer.MediaPlayer.MediaOpened += _mediaOpenedHandler;
 
                 BgVideoPlayer.AutoPlay = true;
             }
@@ -206,6 +213,13 @@ public sealed partial class EasterEggPage : Page
             var music = _musicPlayer;
             _musicPlayer = null;
             var videoPlayer = BgVideoPlayer?.MediaPlayer;
+
+            if (videoPlayer != null && _mediaOpenedHandler != null)
+            {
+                videoPlayer.MediaOpened -= _mediaOpenedHandler;
+                _mediaOpenedHandler = null;
+            }
+
             if (BgVideoPlayer != null)
                 BgVideoPlayer.Source = null;
 
@@ -213,16 +227,10 @@ public sealed partial class EasterEggPage : Page
             {
                 try
                 {
-                    if (music != null)
-                    {
-                        music.Pause();
-                        music.Dispose();
-                    }
-                    if (videoPlayer != null)
-                    {
-                        videoPlayer.Pause();
-                        videoPlayer.Dispose();
-                    }
+                    music?.Pause();
+                    music?.Dispose();
+                    videoPlayer?.Pause();
+                    videoPlayer?.Dispose();
                 }
                 catch { }
             });

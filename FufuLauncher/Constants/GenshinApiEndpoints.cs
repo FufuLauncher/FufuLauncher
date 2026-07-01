@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 namespace FufuLauncher.Constants;
 
 public static class GenshinApiEndpoints
@@ -34,3 +38,4 @@ public static class GenshinApiEndpoints
     public const string PassportAppId = "bll8iq97cem8";
     public const string BbsVersion = "2.99.1";
 }
+

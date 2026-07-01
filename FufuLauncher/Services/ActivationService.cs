@@ -1,4 +1,8 @@
-﻿using FufuLauncher.Activation;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using FufuLauncher.Activation;
 using FufuLauncher.Contracts.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -63,3 +67,4 @@ public class ActivationService : IActivationService
         await Task.CompletedTask;
     }
 }
+

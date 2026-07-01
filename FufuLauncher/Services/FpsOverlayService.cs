@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using Microsoft.Diagnostics.Tracing.Session;

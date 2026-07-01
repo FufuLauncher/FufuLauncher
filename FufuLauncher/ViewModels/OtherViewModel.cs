@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Diagnostics;
 using System.Security.Principal;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -315,21 +319,6 @@ namespace FufuLauncher.ViewModels
                     return;
                 }
 
-                var mainWindow = App.MainWindow;
-                if (mainWindow == null)
-                {
-                    await ShowErrorAsync("无法获取主窗口句柄");
-                    return;
-                }
-
-                var hwnd = WindowNative.GetWindowHandle(mainWindow);
-                if (hwnd == IntPtr.Zero)
-                {
-                    StatusMessage = "错误：窗口句柄无效";
-                    await ShowErrorAsync("窗口句柄无效，请以普通用户模式运行");
-                    return;
-                }
-
                 var picker = new FileOpenPicker
                 {
                     ViewMode = PickerViewMode.List,
@@ -337,13 +326,11 @@ namespace FufuLauncher.ViewModels
                     FileTypeFilter = { ".exe" }
                 };
 
-                try
+                if (!FilePickerService.InitializeWithValidWindow(picker, out var browseErr))
                 {
-                    InitializeWithWindow.Initialize(picker, hwnd);
-                }
-                catch (Exception initEx)
-                {
-                    Debug.WriteLine($"[警告] InitializeWithWindow失败: {initEx.Message}");
+                    StatusMessage = browseErr ?? "无法打开文件选择器";
+                    await ShowErrorAsync(browseErr ?? "无法打开文件选择器");
+                    return;
                 }
 
                 var file = await picker.PickSingleFileAsync();
@@ -632,3 +619,4 @@ namespace FufuLauncher.ViewModels
         }
     }
 }
+

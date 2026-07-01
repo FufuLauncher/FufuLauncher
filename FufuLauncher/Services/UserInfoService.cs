@@ -1,5 +1,8 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Text.Json;
-using System.Text.RegularExpressions;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
@@ -12,13 +15,16 @@ public class UserInfoService : IUserInfoService
     private readonly HttpClient _httpClient;
     private readonly ILogger<UserInfoService> _logger;
     private readonly ILocalSettingsService _localSettingsService;
+    private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
 
     public UserInfoService(
         ILogger<UserInfoService> logger,
-        ILocalSettingsService localSettingsService)
+        ILocalSettingsService localSettingsService,
+        IHoyolabRoleResolverService hoyolabRoleResolverService)
     {
         _logger = logger;
         _localSettingsService = localSettingsService;
+        _hoyolabRoleResolverService = hoyolabRoleResolverService;
         _httpClient = new HttpClient(new HttpClientHandler
         {
             AutomaticDecompression = System.Net.DecompressionMethods.GZip | System.Net.DecompressionMethods.Deflate
@@ -28,6 +34,12 @@ public class UserInfoService : IUserInfoService
 
     private void ApplyCommonHeaders(string cookie)
     {
+        
+        var keys = new[] { "ltoken", "ltuid", "cookie_token", "account_id", "ltoken_v2", "ltuid_v2", "cookie_token_v2", "account_id_v2" };
+        var found = keys.Where(k => cookie.Contains(k + "=", StringComparison.OrdinalIgnoreCase)).ToArray();
+        var missing = keys.Where(k => !found.Contains(k, StringComparer.OrdinalIgnoreCase)).ToArray();
+        System.Diagnostics.Debug.WriteLine($"[UserInfoService] Cookie length={cookie.Length}, found=[{string.Join(", ", found)}], missing=[{string.Join(", ", missing)}]");
+
         _httpClient.DefaultRequestHeaders.Clear();
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Cookie", cookie);
         _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("DS", GenerateDS());
@@ -49,22 +61,18 @@ public class UserInfoService : IUserInfoService
         return $"{t},{r},{BitConverter.ToString(c).Replace("-", "").ToLower()}";
     }
 
-    private string? ExtractCookieValue(string cookie, string key)
+    private async Task<bool> IsInternationalAsync(string cookie)
     {
-        try
-        {
-            var pattern = $@"{key}=([^;]+)";
-            var match = Regex.Match(cookie, pattern);
-            return match.Success ? match.Groups[1].Value : null;
-        }
-        catch
-        {
-            return null;
-        }
-    }
+        var hasCnFields = cookie.Contains("ltuid=", StringComparison.OrdinalIgnoreCase) ||
+                          cookie.Contains("stuid=", StringComparison.OrdinalIgnoreCase);
+        var hasOsFields = cookie.Contains("ltuid_v2=", StringComparison.OrdinalIgnoreCase) ||
+                          cookie.Contains("account_id_v2=", StringComparison.OrdinalIgnoreCase) ||
+                          cookie.Contains("cookie_token_v2=", StringComparison.OrdinalIgnoreCase);
 
-    private async Task<bool> IsInternationalAsync()
-    {
+        // 优先国服：同时有国服和国际服 cookie 字段时走国服，避免 region_block
+        if (hasCnFields) return false;
+        if (hasOsFields) return true;
+
         var isOsObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
         return isOsObj is bool isOs && isOs;
     }
@@ -73,24 +81,22 @@ public class UserInfoService : IUserInfoService
     {
         try
         {
-            bool isOs = await IsInternationalAsync();
+            bool isOs = await IsInternationalAsync(cookie);
             ApplyCommonHeaders(cookie);
 
             if (isOs)
             {
-                var uid = ExtractCookieValue(cookie, "account_id_v2") ?? ExtractCookieValue(cookie, "ltuid_v2") ?? ExtractCookieValue(cookie, "account_id");
-                var url = $"https://bbs-api-os.hoyolab.com/game_record/card/wapi/getGameRecordCard?uid={uid}";
-
-                var response = await _httpClient.GetAsync(url);
-                var json = await response.Content.ReadAsStringAsync();
-
-                json = json.Replace("\"game_role_id\"", "\"game_uid\"");
-                return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+                var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(cookie);
+                return new GameRolesResponse(
+                    rolesResult.RetCode,
+                    rolesResult.Message,
+                    new GameRolesData(rolesResult.Roles));
             }
             else
             {
                 var response = await _httpClient.GetAsync(ApiEndpoints.MihoyoBbsUserGameRolesUrl);
                 var json = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine($"[UserInfoService] GameRoles HTTP {response.StatusCode} | Body({json?.Length ?? 0}): {(json?.Length > 300 ? json[..300] : json ?? "(null)")}");
                 return JsonSerializer.Deserialize<GameRolesResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
             }
         }
@@ -107,12 +113,13 @@ public class UserInfoService : IUserInfoService
         try
         {
             ApplyCommonHeaders(cookie);
-            bool isOs = await IsInternationalAsync();
+            bool isOs = await IsInternationalAsync(cookie);
 
             var url = isOs ? "https://bbs-api-os.hoyolab.com/community/painter/wapi/user/full" : ApiEndpoints.MiyousheUserFullInfoUrl;
 
             var response = await _httpClient.GetAsync(url);
             var json = await response.Content.ReadAsStringAsync();
+            System.Diagnostics.Debug.WriteLine($"[UserInfoService] UserFullInfo HTTP {response.StatusCode} | URL: {url} | Body({json?.Length ?? 0}): {(json?.Length > 300 ? json[..300] : json ?? "(null)")}");
             return JsonSerializer.Deserialize<UserFullInfoResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         }
         catch (Exception ex)
@@ -127,3 +134,4 @@ public class UserInfoService : IUserInfoService
         return await Task.FromResult(new GameRecordCardResponse(-1, "功能已移除", null));
     }
 }
+

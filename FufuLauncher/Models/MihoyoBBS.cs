@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -576,9 +580,12 @@ namespace MihoyoBBS
         public virtual async Task InitializeAsync(Config config)
         {
             SetHeaders(config);
-            AccountList = await GetAccountListAsync(config).ConfigureAwait(false);
+            // 并行获取账号列表和签到奖励，省一个 HTTP 往返
+            var accountTask = GetAccountListAsync(config);
+            var rewardsTask = GetCheckinRewardsAsync();
+            AccountList = await accountTask.ConfigureAwait(false);
             if (AccountList?.Count > 0)
-                CheckinRewards = await GetCheckinRewardsAsync().ConfigureAwait(false);
+                CheckinRewards = await rewardsTask.ConfigureAwait(false);
         }
 
         protected async Task<List<AccountItem>> GetAccountListAsync(Config config)
@@ -642,7 +649,7 @@ namespace MihoyoBBS
                     // ignored
                 }
 
-                await Task.Delay(5000);
+                await Task.Delay(1500);
             }
 
             return new List<RewardItem>();
@@ -767,6 +774,13 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
             return returnData;
         }
 
+        // 统计需要签到的角色数，只有多角色时才加延时
+        var activeAccounts = AccountList
+            .Where(a => disabledUids == null || !disabledUids.Contains(a.GameUid))
+            .Where(a => string.IsNullOrEmpty(targetUid) || a.GameUid == targetUid)
+            .ToList();
+        var isFirstActive = true;
+
         foreach (var account in AccountList)
         {
             if (disabledUids != null && disabledUids.Contains(account.GameUid))
@@ -779,7 +793,10 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
                 continue;
             }
 
-            await Task.Delay(new Random().Next(2000, 8000));
+            if (!isFirstActive)
+                await Task.Delay(new Random().Next(2000, 8000));
+            else
+                isFirstActive = false;
 
             var isData = await IsSignAsync(account.Region, account.GameUid);
             if (isData == null)
@@ -816,7 +833,8 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
             }
             else
             {
-                await Task.Delay(new Random().Next(2000, 8000));
+                if (activeAccounts.Count > 1)
+                    await Task.Delay(new Random().Next(2000, 8000));
 
                 var req = await CheckIn(account);
                 if (req == null)

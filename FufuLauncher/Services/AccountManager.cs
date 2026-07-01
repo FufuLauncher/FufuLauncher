@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Text.Json;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Models;
@@ -23,7 +27,18 @@ public class AccountManager
         _cookiesDir = Path.Combine(_dataDir, "cookies");
         _accountsFilePath = Path.Combine(_dataDir, "accounts.json");
 
-        Directory.CreateDirectory(_cookiesDir);
+        try
+        {
+            Directory.CreateDirectory(_cookiesDir);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[AccountManager] 无法创建 cookies 目录: {ex.Message}");
+        }
+        catch (IOException ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[AccountManager] 创建 cookies 目录时发生IO异常: {ex.Message}");
+        }
         _accountList = new AccountList();
     }
 

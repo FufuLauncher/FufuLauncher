@@ -9,156 +9,450 @@
     xmlns:models="using:FufuLauncher.Models"
     x:Name="RootPage"
     Loaded="Page_Loaded"
+    Unloaded="Page_Unloaded"
     mc:Ignorable="d">
 
     <Page.Resources>
         <ResourceDictionary>
-        <ResourceDictionary.ThemeDictionaries>
-            <ResourceDictionary x:Key="Light">
-                <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
-                <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
-                <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
-                <SolidColorBrush x:Key="SafeHoverBrush" Color="#14000000" />
-                <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
-                <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
-            </ResourceDictionary>
-            <ResourceDictionary x:Key="Default">
-                <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000" TintOpacity="0.15" />
-                <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
-                <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
-                <SolidColorBrush x:Key="SafeHoverBrush" Color="#24FFFFFF" />
-                <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
-                <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
-            </ResourceDictionary>
-        </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush
+                        x:Key="SafeGlassBrush"
+                        FallbackColor="#E5FFFFFF"
+                        TintColor="#FFFFFF"
+                        TintOpacity="0.6" />
+                    <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
+                    <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
+                    <SolidColorBrush x:Key="SafeHoverBrush" Color="#14000000" />
+                    <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush
+                        x:Key="SafeGlassBrush"
+                        FallbackColor="#CC000000"
+                        TintColor="#000000"
+                        TintOpacity="0.15" />
+                    <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+                    <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+                    <SolidColorBrush x:Key="SafeHoverBrush" Color="#24FFFFFF" />
+                    <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+                    <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
 
-        <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-        <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
-        <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <helpers:DictionarySafeConverter x:Key="DictionarySafeConverter" />
-        <converters:EmptyCountToVisibilityConverter x:Key="EmptyCountToVisibilityConverter" />
+            <helpers:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <helpers:NullToOpacityConverter x:Key="NullToOpacityConverter" />
+            <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
+            <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <helpers:DictionarySafeConverter x:Key="DictionarySafeConverter" />
+            <converters:EmptyCountToVisibilityConverter x:Key="EmptyCountToVisibilityConverter" />
 
-        <Style x:Key="CardBorderStyle" TargetType="Border">
-            <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="14" />
-            <Setter Property="Padding" Value="20" />
-        </Style>
+            <Style x:Key="CardBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="Padding" Value="20" />
+            </Style>
 
-        <Style x:Key="ActionButtonStyle" TargetType="Button">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="16" />
-            <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
-            <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
-            <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <ContentPresenter x:Name="ContentPresenter"
-                                AutomationProperties.AccessibilityView="Raw"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Content="{TemplateBinding Content}"
-                                ContentTransitions="{TemplateBinding ContentTransitions}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                Padding="{TemplateBinding Padding}"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
-                            <Border x:Name="HighlightBorder"
-                                BorderBrush="{ThemeResource TextFillColorPrimaryBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                IsHitTestVisible="False"
-                                Opacity="0" />
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                Storyboard.TargetName="HighlightBorder"
-                                                Storyboard.TargetProperty="Opacity"
-                                                To="0"
-                                                Duration="0:0:0.25" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="PointerOver">
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                Storyboard.TargetName="HighlightBorder"
-                                                Storyboard.TargetProperty="Opacity"
-                                                To="1"
-                                                Duration="0:0:0.25" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed" />
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="Foreground">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource TextFillColorTertiaryBrush}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <Style x:Key="ActionButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Padding" Value="16" />
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    Padding="{TemplateBinding Padding}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    AutomationProperties.AccessibilityView="Raw"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Content="{TemplateBinding Content}"
+                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                    CornerRadius="{TemplateBinding CornerRadius}" />
+                                <Border
+                                    x:Name="HighlightBorder"
+                                    BorderBrush="{ThemeResource TextFillColorPrimaryBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    IsHitTestVisible="False"
+                                    Opacity="0" />
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="HighlightBorder"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="0"
+                                                    Duration="0:0:0.25" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="HighlightBorder"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="1"
+                                                    Duration="0:0:0.25" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed" />
+                                        <VisualState x:Name="Disabled">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter"
+                                                                               Storyboard.TargetProperty="Foreground">
+                                                    <DiscreteObjectKeyFrame KeyTime="0"
+                                                                            Value="{ThemeResource TextFillColorTertiaryBrush}" />
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-        <Storyboard x:Name="EntranceStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="RootLayoutGrid"
-                Storyboard.TargetProperty="Opacity"
-                From="0"
-                To="1"
-                Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation
-                Storyboard.TargetName="RootLayoutTranslate"
-                Storyboard.TargetProperty="Y"
-                From="40"
-                To="0"
-                Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="AvatarEntranceStoryboard">
-            <DoubleAnimation
-                BeginTime="0:0:0.25"
-                Storyboard.TargetName="AvatarPicture"
-                Storyboard.TargetProperty="Opacity"
-                From="0"
-                To="1"
-                Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <Storyboard x:Name="ExitStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="RootLayoutGrid"
-                Storyboard.TargetProperty="Opacity"
-                From="1"
-                To="0"
-                Duration="0:0:0.3">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
+            <Storyboard x:Name="EntranceStoryboard">
+                <DoubleAnimation
+                    Storyboard.TargetName="RootLayoutGrid"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.6">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    Storyboard.TargetName="RootLayoutTranslate"
+                    Storyboard.TargetProperty="Y"
+                    From="40"
+                    To="0"
+                    Duration="0:0:0.6">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Name="ExitStoryboard">
+                <DoubleAnimation
+                    Storyboard.TargetName="RootLayoutGrid"
+                    Storyboard.TargetProperty="Opacity"
+                    From="1"
+                    To="0"
+                    Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseIn" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+            <!--  按钮动画  -->
+            <Storyboard x:Name="ButtonsStaggerStoryboard">
+                <DoubleAnimation
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="BtnSwitchAccountTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="BtnSwitchAccount"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.07"
+                    Storyboard.TargetName="BtnRefreshInfoTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.07"
+                    Storyboard.TargetName="BtnRefreshInfo"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.14"
+                    Storyboard.TargetName="BtnGenshinDataTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.14"
+                    Storyboard.TargetName="BtnGenshinData"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.21"
+                    Storyboard.TargetName="BtnGachaAnalysisTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.21"
+                    Storyboard.TargetName="BtnGachaAnalysis"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.28"
+                    Storyboard.TargetName="BtnSecurityCenterTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.28"
+                    Storyboard.TargetName="BtnSecurityCenter"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.35"
+                    Storyboard.TargetName="BtnLockAccountTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.35"
+                    Storyboard.TargetName="BtnLockAccount"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.42"
+                    Storyboard.TargetName="BtnCopyCookieTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.42"
+                    Storyboard.TargetName="BtnCopyCookie"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.49"
+                    Storyboard.TargetName="BtnDeleteAccountTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.49"
+                    Storyboard.TargetName="BtnDeleteAccount"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.56"
+                    Storyboard.TargetName="BtnLogoutTransform"
+                    Storyboard.TargetProperty="Y"
+                    From="-80"
+                    To="0"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase Amplitude="0.35" EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.56"
+                    Storyboard.TargetName="BtnLogout"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.55">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+
+            <Storyboard x:Name="RightCardsEntranceStoryboard">
+                <DoubleAnimation
+                    BeginTime="0:0:0.3"
+                    Storyboard.TargetName="CommunityFeedCardTransform"
+                    Storyboard.TargetProperty="X"
+                    From="50"
+                    To="0"
+                    Duration="0:0:0.5">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.3"
+                    Storyboard.TargetName="CommunityFeedCard"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.45">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.38"
+                    Storyboard.TargetName="BoundRolesCardTransform"
+                    Storyboard.TargetProperty="X"
+                    From="50"
+                    To="0"
+                    Duration="0:0:0.5">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.38"
+                    Storyboard.TargetName="BoundRolesCard"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.45">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.46"
+                    Storyboard.TargetName="GameTimeCardTransform"
+                    Storyboard.TargetProperty="X"
+                    From="50"
+                    To="0"
+                    Duration="0:0:0.5">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    BeginTime="0:0:0.46"
+                    Storyboard.TargetName="GameTimeCard"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:0.45">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+
+            <Storyboard x:Name="ProfileCardEntranceStoryboard">
+                <DoubleAnimation
+                    Storyboard.TargetName="ProfileCardTransform"
+                    Storyboard.TargetProperty="Y"
+                    To="0"
+                    Duration="0:0:0.5">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation
+                    Storyboard.TargetName="ProfileCard"
+                    Storyboard.TargetProperty="Opacity"
+                    To="1"
+                    Duration="0:0:0.45">
+                    <DoubleAnimation.EasingFunction>
+                        <CubicEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
         </ResourceDictionary>
     </Page.Resources>
 
@@ -260,7 +554,8 @@
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Spacing="24" Visibility="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel Spacing="24"
+                            Visibility="{x:Bind ViewModel.IsLoggedIn, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
 
                     <Grid ColumnSpacing="24">
                         <Grid.ColumnDefinitions>
@@ -268,12 +563,23 @@
                             <ColumnDefinition Width="5.5*" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" RowSpacing="24">
+                        <Grid
+                            x:Name="LeftColumnGrid"
+                            Grid.Column="0"
+                            VerticalAlignment="Top"
+                            RowSpacing="24"
+                            SizeChanged="LeftColumnGrid_SizeChanged">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                            <Border
+                                x:Name="ProfileCard"
+                                Style="{StaticResource CardBorderStyle}"
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="ProfileCardTransform" Y="0" />
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
@@ -287,11 +593,11 @@
                                     <Ellipse
                                         x:Name="AvatarPicture"
                                         Width="84"
-                                        Height="84"
-                                        Loaded="AvatarPicture_Loaded"
-                                        Opacity="0">
+                                        Height="84">
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}" Stretch="UniformToFill" />
+                                            <ImageBrush
+                                                ImageSource="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}"
+                                                Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>
 
@@ -354,9 +660,11 @@
                                             TextTrimming="CharacterEllipsis" />
 
                                         <StackPanel Orientation="Horizontal" Spacing="8">
-                                            <TextBlock FontSize="12" Foreground="{ThemeResource TextFillColorTertiaryBrush}">
+                                            <TextBlock FontSize="12"
+                                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}">
                                                 <Run Text="UID:" />
-                                                <Run FontWeight="SemiBold" Text="{x:Bind ViewModel.CurrentAccount.GameUidDisplay, Mode=OneWay}" />
+                                                <Run FontWeight="SemiBold"
+                                                     Text="{x:Bind ViewModel.CurrentAccount.GameUidDisplay, Mode=OneWay}" />
                                             </TextBlock>
 
                                             <Border
@@ -401,287 +709,275 @@
                                 </Grid>
                             </Border>
 
-                            <Grid Grid.Row="1">
+                            <Grid Grid.Row="1" RowSpacing="20">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Button Grid.Row="0" Style="{StaticResource ActionButtonStyle}" Translation="0,0,32">
+                                <Button
+                                    x:Name="BtnSwitchAccount"
+                                    Grid.Row="0"
+                                    Click="OnCheckinClicked"
+                                    Opacity="0"
+                                    Style="{StaticResource ActionButtonStyle}"
+                                    Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnSwitchAccountTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon FontSize="16" Glyph="&#xE748;" />
-                                        <TextBlock Text="切换账户" />
-                                    </StackPanel>
-                                    <Button.Flyout>
-                                        <Flyout Placement="Bottom">
-                                            <StackPanel MinWidth="320" Spacing="8">
-                                                <TextBlock
-                                                    Margin="8,4,0,4"
-                                                    Style="{StaticResource BodyStrongTextBlockStyle}"
-                                                    Text="当前登录" />
-                                                <Grid
-                                                    Margin="0,6"
-                                                    Padding="8,8"
-                                                    Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
-                                                    CornerRadius="8">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto" />
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
-                                                    <PersonPicture
-                                                        Width="32"
-                                                        Height="32"
-                                                        Margin="0,0,12,0"
-                                                        ProfilePicture="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}" />
-                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                        <TextBlock
-                                                            FontSize="14"
-                                                            FontWeight="SemiBold"
-                                                            Text="{x:Bind ViewModel.CurrentAccount.Nickname, Mode=OneWay}" />
-                                                        <TextBlock
-                                                            FontSize="12"
-                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                            Text="{x:Bind ViewModel.CurrentAccount.GameUidDisplay, Mode=OneWay}" />
-                                                    </StackPanel>
-                                                    <TextBlock
-                                                        Grid.Column="2"
-                                                        VerticalAlignment="Center"
-                                                        FontSize="12"
-                                                        FontWeight="SemiBold"
-                                                        Foreground="{ThemeResource AccentFillColorDefaultBrush}"
-                                                        Text="当前" />
-                                                </Grid>
-
-                                                <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.HasSavedAccounts, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-                                                    <TextBlock
-                                                        Margin="8,8,0,4"
-                                                        Style="{StaticResource BodyStrongTextBlockStyle}"
-                                                        Text="已保存的其他账户" />
-                                                    <ListView ItemsSource="{x:Bind ViewModel.SavedAccounts, Mode=OneWay}" SelectionMode="None">
-                                                        <ListView.ItemTemplate>
-                                                            <DataTemplate x:DataType="models:AccountInfo">
-                                                                <Grid Margin="0,4" Padding="0,4">
-                                                                    <Grid.ColumnDefinitions>
-                                                                        <ColumnDefinition Width="Auto" />
-                                                                        <ColumnDefinition Width="*" />
-                                                                        <ColumnDefinition Width="Auto" />
-                                                                        <ColumnDefinition Width="Auto" />
-                                                                    </Grid.ColumnDefinitions>
-                                                                    <PersonPicture
-                                                                        Width="32"
-                                                                        Height="32"
-                                                                        Margin="0,0,12,0"
-                                                                        ProfilePicture="{x:Bind AvatarUrl}" />
-                                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                                        <TextBlock
-                                                                            FontSize="14"
-                                                                            FontWeight="SemiBold"
-                                                                            Text="{x:Bind Nickname}" />
-                                                                        <TextBlock
-                                                                            FontSize="12"
-                                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                                            Text="{x:Bind GameUidDisplay}" />
-                                                                    </StackPanel>
-                                                                    <Button
-                                                                        Grid.Column="2"
-                                                                        Margin="0,0,4,0"
-                                                                        Click="OnSwitchAccountClicked"
-                                                                        Content="切换"
-                                                                        FontSize="12" />
-                                                                    <Button
-                                                                        Grid.Column="3"
-                                                                        Padding="6,4"
-                                                                        Background="Transparent"
-                                                                        BorderThickness="0"
-                                                                        Click="OnDeleteSavedAccountClicked"
-                                                                        Tag="{Binding GameUid}">
-                                                                        <FontIcon
-                                                                            FontSize="12"
-                                                                            Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                                            Glyph="&#xE74D;" />
-                                                                    </Button>
-                                                                </Grid>
-                                                            </DataTemplate>
-                                                        </ListView.ItemTemplate>
-                                                    </ListView>
-                                                </StackPanel>
-                                                <MenuFlyoutSeparator />
-                                                <Button HorizontalAlignment="Stretch" Command="{x:Bind ViewModel.AddAccountCommand}">
-                                                    <StackPanel Orientation="Horizontal" Spacing="8">
-                                                        <FontIcon FontSize="12" Glyph="&#xE710;" />
-                                                        <TextBlock Text="添加新账户" />
-                                                    </StackPanel>
-                                                </Button>
-                                            </StackPanel>
-                                        </Flyout>
-                                    </Button.Flyout>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontSize="16" Glyph="&#xE916;" />
+                                            <TextBlock x:Name="BtnCheckinText" Text="每日签到" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="2"
+                                <Button
+                                    x:Name="BtnRefreshInfo"
+                                    Grid.Row="1"
                                     Command="{x:Bind ViewModel.LoadUserInfoCommand}"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnRefreshInfoTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon FontSize="16" Glyph="&#xE72C;" />
-                                        <TextBlock Text="刷新信息" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontSize="16" Glyph="&#xE72C;" />
+                                            <TextBlock Text="刷新信息" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="4"
+                                <Button
+                                    x:Name="BtnGenshinData"
+                                    Grid.Row="2"
                                     Command="{x:Bind ViewModel.OpenGenshinDataCommand}"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnGenshinDataTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon FontSize="16" Glyph="&#xEB9E;" />
-                                        <TextBlock Text="旅行札记" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontSize="16" Glyph="&#xEB9E;" />
+                                            <TextBlock Text="旅行札记" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="6"
+                                <Button
+                                    x:Name="BtnGachaAnalysis"
+                                    Grid.Row="3"
                                     Click="OnGachaAnalysisClicked"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnGachaAnalysisTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon FontSize="16" Glyph="&#xE9D2;" />
-                                        <TextBlock Text="抽卡分析" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontSize="16" Glyph="&#xE9D2;" />
+                                            <TextBlock Text="抽卡分析" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="8"
+                                <Button
+                                    x:Name="BtnSecurityCenter"
+                                    Grid.Row="4"
                                     Command="{x:Bind ViewModel.OpenSecurityCenterCommand}"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnSecurityCenterTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon FontSize="16" Glyph="&#xE72E;" />
-                                        <TextBlock Text="账号安全" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontSize="16" Glyph="&#xE72E;" />
+                                            <TextBlock Text="账号安全" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="10"
+                                <Button
+                                    x:Name="BtnLockAccount"
+                                    Grid.Row="5"
                                     Command="{x:Bind ViewModel.LockAccountCommand}"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnLockAccountTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon
-                                            FontSize="16"
-                                            Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                            Glyph="&#xE7BA;" />
-                                        <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="冻结账号" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon
+                                                FontSize="16"
+                                                Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                Glyph="&#xE7BA;" />
+                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                       Text="冻结账号" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="12"
+                                <Button
+                                    x:Name="BtnCopyCookie"
+                                    Grid.Row="6"
                                     Command="{x:Bind ViewModel.CopyCookieCommand}"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnCopyCookieTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon FontSize="16" Glyph="&#xE8C8;" />
-                                        <TextBlock Text="复制 Cookie" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontSize="16" Glyph="&#xE8C8;" />
+                                            <TextBlock Text="复制 Cookie" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="14"
+                                <Button
+                                    x:Name="BtnDeleteAccount"
+                                    Grid.Row="7"
                                     Click="OnDeleteCurrentAccountClicked"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnDeleteAccountTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon
-                                            FontSize="16"
-                                            Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                            Glyph="&#xE74D;" />
-                                        <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="删除账号" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon
+                                                FontSize="16"
+                                                Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                Glyph="&#xE74D;" />
+                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                       Text="删除账号" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
 
-                                <Button Grid.Row="16"
+                                <Button
+                                    x:Name="BtnLogout"
+                                    Grid.Row="8"
                                     Command="{x:Bind ViewModel.LogoutCommand}"
+                                    Opacity="0"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
+                                    <Button.RenderTransform>
+                                        <TranslateTransform x:Name="BtnLogoutTransform" Y="-80" />
+                                    </Button.RenderTransform>
                                     <Button.Shadow>
                                         <ThemeShadow />
                                     </Button.Shadow>
-                                    <StackPanel
-                                        HorizontalAlignment="Center"
-                                        Orientation="Horizontal"
-                                        Spacing="8">
-                                        <FontIcon
-                                            FontSize="16"
-                                            Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                            Glyph="&#xE7E8;" />
-                                        <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}" Text="退出登录" />
-                                    </StackPanel>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon
+                                                FontSize="16"
+                                                Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                Glyph="&#xE7E8;" />
+                                            <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                       Text="退出登录" />
+                                        </StackPanel>
+                                    </Grid>
                                 </Button>
                             </Grid>
                         </Grid>
 
-                        <StackPanel Grid.Column="1" Spacing="24">
+                        <Grid
+                            x:Name="RightGrid"
+                            Grid.Column="1"
+                            RowSpacing="24">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" MaxHeight="240" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
                             <Border
+                                x:Name="CommunityFeedCard"
+                                Grid.Row="0"
+                                Opacity="0"
                                 Style="{StaticResource CardBorderStyle}"
-                                Translation="0,0,32"
-                                Visibility="{x:Bind ViewModel.UserFullInfo, Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}}">
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="CommunityFeedCardTransform" X="50" />
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
@@ -713,9 +1009,8 @@
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
-                                                FontWeight="SemiBold">
-                                                <Run Text="{x:Bind ViewModel.UserFullInfo.data.user_info.achieve, Mode=OneWay, Converter={StaticResource DictionarySafeConverter}, ConverterParameter=like_num}" />
-                                            </TextBlock>
+                                                FontWeight="SemiBold"
+                                                Text="{x:Bind ViewModel.CommunityLikeCount, Mode=OneWay}" />
                                         </StackPanel>
 
                                         <StackPanel
@@ -730,9 +1025,8 @@
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
-                                                FontWeight="SemiBold">
-                                                <Run Text="{x:Bind ViewModel.UserFullInfo.data.user_info.achieve, Mode=OneWay, Converter={StaticResource DictionarySafeConverter}, ConverterParameter=post_num}" />
-                                            </TextBlock>
+                                                FontWeight="SemiBold"
+                                                Text="{x:Bind ViewModel.CommunityPostCount, Mode=OneWay}" />
                                         </StackPanel>
 
                                         <StackPanel
@@ -747,20 +1041,34 @@
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
-                                                FontWeight="SemiBold">
-                                                <Run Text="{x:Bind ViewModel.UserFullInfo.data.user_info.achieve, Mode=OneWay, Converter={StaticResource DictionarySafeConverter}, ConverterParameter=replypost_num}" />
-                                            </TextBlock>
+                                                FontWeight="SemiBold"
+                                                Text="{x:Bind ViewModel.CommunityReplyCount, Mode=OneWay}" />
                                         </StackPanel>
                                     </Grid>
                                 </StackPanel>
                             </Border>
 
-                            <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                            <Border
+                                x:Name="BoundRolesCard"
+                                Grid.Row="1"
+                                Opacity="0"
+                                Style="{StaticResource CardBorderStyle}"
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="BoundRolesCardTransform" X="50" />
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
-                                <StackPanel Spacing="16">
-                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Grid RowSpacing="16">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel
+                                        Grid.Row="0"
+                                        Orientation="Horizontal"
+                                        Spacing="8">
                                         <FontIcon
                                             FontSize="16"
                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
@@ -768,8 +1076,12 @@
                                         <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="绑定角色" />
                                     </StackPanel>
 
-                                    <StackPanel Spacing="12" Visibility="{x:Bind ViewModel.CurrentAccount.HasBoundRole, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-                                        <ItemsControl ItemsSource="{x:Bind ViewModel.GameRolesInfo.data.list, Mode=OneWay}">
+                                    <ScrollViewer
+                                        Grid.Row="1"
+                                        VerticalScrollBarVisibility="Auto"
+                                        Visibility="{x:Bind ViewModel.CurrentAccount.HasBoundRole, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <ItemsControl ItemsSource="{x:Bind ViewModel.BoundRoles, Mode=OneWay}">
+
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="0,0,0,12">
@@ -798,7 +1110,8 @@
                                                             Margin="12,0,0,0"
                                                             VerticalAlignment="Center">
                                                             <TextBlock FontWeight="Medium" Text="{Binding nickname}" />
-                                                            <TextBlock FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}">
+                                                            <TextBlock FontSize="12"
+                                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}">
                                                                 <Run Text="{Binding region_name}" />
                                                                 <Run Text=" | Lv." />
                                                                 <Run Text="{Binding level}" />
@@ -834,9 +1147,10 @@
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
-                                    </StackPanel>
+                                    </ScrollViewer>
 
                                     <StackPanel
+                                        Grid.Row="1"
                                         Padding="12"
                                         Orientation="Horizontal"
                                         Spacing="12"
@@ -857,15 +1171,28 @@
                                                 Text="请在米游社或游戏中绑定角色后刷新" />
                                         </StackPanel>
                                     </StackPanel>
-                                </StackPanel>
+                                </Grid>
                             </Border>
 
-                            <Border Style="{StaticResource CardBorderStyle}" Translation="0,0,32">
+                            <Border
+                                x:Name="GameTimeCard"
+                                Grid.Row="2"
+                                Opacity="0"
+                                Style="{StaticResource CardBorderStyle}"
+                                Translation="0,0,32">
+                                <Border.RenderTransform>
+                                    <TranslateTransform x:Name="GameTimeCardTransform" X="50" />
+                                </Border.RenderTransform>
                                 <Border.Shadow>
                                     <ThemeShadow />
                                 </Border.Shadow>
-                                <StackPanel Spacing="18">
-                                    <Grid>
+                                <Grid RowSpacing="18">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
@@ -891,8 +1218,7 @@
                                                 Text="游戏中" />
                                         </Border>
                                     </Grid>
-
-                                    <Grid ColumnSpacing="12">
+                                    <Grid Grid.Row="1" ColumnSpacing="12">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
@@ -932,12 +1258,10 @@
                                         </Border>
                                     </Grid>
 
-                                    <Grid MinHeight="120">
-                                        <ScrollViewer
-                                            MaxHeight="220"
-                                            Padding="0,0,8,0"
-                                            VerticalScrollBarVisibility="Auto">
-                                            <ItemsControl ItemsSource="{x:Bind ControlPanelViewModel.WeeklyStats.DailyRecords, Mode=OneWay}">
+                                    <Grid Grid.Row="2">
+                                        <ScrollViewer Padding="0,0,8,0" VerticalScrollBarVisibility="Auto">
+                                            <ItemsControl
+                                                ItemsSource="{x:Bind ControlPanelViewModel.WeeklyStats.DailyRecords, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate x:DataType="models:GamePlayTimeRecord">
                                                         <Grid
@@ -982,9 +1306,9 @@
                                             Text="近 30 天暂无游戏记录"
                                             Visibility="{x:Bind ControlPanelViewModel.WeeklyStats.DailyRecords.Count, Converter={StaticResource EmptyCountToVisibilityConverter}, Mode=OneWay}" />
                                     </Grid>
-                                </StackPanel>
+                                </Grid>
                             </Border>
-                        </StackPanel>
+                        </Grid>
                     </Grid>
                 </StackPanel>
             </StackPanel>

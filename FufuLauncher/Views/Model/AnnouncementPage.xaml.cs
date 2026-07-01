@@ -1,4 +1,9 @@
-﻿using System.Text.Json;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Text.Json;
+using Windows.Foundation;
 using FufuLauncher.Constants;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -10,11 +15,16 @@ namespace FufuLauncher.Views
     {
         public event Action<double, double> ResizeRequested;
         public event Action CloseRequested;
-        
+
+        private TypedEventHandler<CoreWebView2, CoreWebView2NavigationStartingEventArgs> _frameNavHandler;
+        private TypedEventHandler<CoreWebView2, CoreWebView2NavigationStartingEventArgs> _navStartHandler;
+        private TypedEventHandler<CoreWebView2, CoreWebView2NewWindowRequestedEventArgs> _newWindowHandler;
+
         public AnnouncementPage()
         {
             InitializeComponent();
             Loaded += AnnouncementPage_Loaded;
+            Unloaded += AnnouncementPage_Unloaded;
         }
 
         private async void AnnouncementPage_Loaded(object sender, RoutedEventArgs e)
@@ -26,29 +36,26 @@ namespace FufuLauncher.Views
 
                 var core = AnnouncementWebView.CoreWebView2;
 
-                core.FrameNavigationStarting += (s, args) =>
+                _frameNavHandler = (s, args) =>
                 {
                     if (HandleUniWebView(args.Uri))
-                    {
                         args.Cancel = true;
-                    }
                 };
+                core.FrameNavigationStarting += _frameNavHandler;
 
-                core.NavigationStarting += (s, args) =>
+                _navStartHandler = (s, args) =>
                 {
                     if (HandleUniWebView(args.Uri))
-                    {
                         args.Cancel = true;
-                    }
                 };
+                core.NavigationStarting += _navStartHandler;
 
-                core.NewWindowRequested += (s, args) =>
+                _newWindowHandler = (s, args) =>
                 {
                     if (HandleUniWebView(args.Uri))
-                    {
                         args.Handled = true;
-                    }
                 };
+                core.NewWindowRequested += _newWindowHandler;
 
                 AnnouncementWebView.NavigationCompleted += AnnouncementWebView_NavigationCompleted;
                 AnnouncementWebView.Source = new Uri(ApiEndpoints.Hk4eAnnouncementPageUrl);
@@ -86,6 +93,23 @@ namespace FufuLauncher.Views
             }
 
             return false;
+        }
+
+        private void AnnouncementPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var core = AnnouncementWebView.CoreWebView2;
+                if (core != null)
+                {
+                    core.FrameNavigationStarting -= _frameNavHandler;
+                    core.NavigationStarting -= _navStartHandler;
+                    core.NewWindowRequested -= _newWindowHandler;
+                }
+                AnnouncementWebView.NavigationCompleted -= AnnouncementWebView_NavigationCompleted;
+                AnnouncementWebView.Close();
+            }
+            catch { }
         }
 
         private async void AnnouncementWebView_NavigationCompleted(WebView2 sender, CoreWebView2NavigationCompletedEventArgs args)

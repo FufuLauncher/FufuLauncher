@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
   using System.Diagnostics;
 using System.Numerics;
 using Windows.Foundation;
@@ -34,6 +38,10 @@ public sealed partial class MainWindow : WindowEx
     private readonly IBackgroundRenderer _backgroundRenderer;
     private readonly ILocalSettingsService _localSettingsService;
     private MediaPlayer? _globalBackgroundPlayer;
+    private IMediaPlaybackSource? _suspendedVideoSource;
+    private DispatcherTimer _bgFallbackTimer;
+    private RoutedEventHandler _bgImageOpenedHandler;
+    private ExceptionRoutedEventHandler _bgImageFailedHandler;
     private double _frameBackgroundOpacity;
     private bool _minimizeToTray;
     private bool _isExit;
@@ -222,6 +230,11 @@ public sealed partial class MainWindow : WindowEx
         {
             _minimizeToTray = m.Value;
         });
+
+        WeakReferenceMessenger.Default.Register<NavigationVisibilityChangedMessage>(this, (_, m) =>
+        {
+            dispatcherQueue.TryEnqueue(() => ApplyNavItemVisibility(m.Value));
+        });
         
         WeakReferenceMessenger.Default.Register<MinWindowSizeLimitChangedMessage>(this, (_, m) =>
         {
@@ -329,6 +342,8 @@ public sealed partial class MainWindow : WindowEx
                     {
                         _globalBackgroundPlayer.Pause();
                     }
+                    _suspendedVideoSource = _globalBackgroundPlayer.Source;
+                    _globalBackgroundPlayer.Source = null;
                 }
                 catch (System.Runtime.InteropServices.COMException)
                 {
@@ -363,6 +378,11 @@ public sealed partial class MainWindow : WindowEx
         {
             if (_isVideoBackground && _globalBackgroundPlayer != null)
             {
+                if (_suspendedVideoSource != null)
+                {
+                    _globalBackgroundPlayer.Source = _suspendedVideoSource;
+                    _suspendedVideoSource = null;
+                }
                 _globalBackgroundPlayer.Play();
             }
         }
@@ -933,6 +953,7 @@ public sealed partial class MainWindow : WindowEx
     {
         var player = _globalBackgroundPlayer;
         _globalBackgroundPlayer = null;
+        _suspendedVideoSource = null;
         try
         {
             GlobalBackgroundVideo.SetMediaPlayer(null);
@@ -941,15 +962,11 @@ public sealed partial class MainWindow : WindowEx
 
         if (player != null)
         {
-            // 在后台线程释放 MediaPlayer，避免 UI 线程死锁
+            player.Pause();
+            player.Source = null;
             _ = Task.Run(() =>
             {
-                try
-                {
-                    player.Pause();
-                    player.Dispose();
-                }
-                catch { }
+                try { player.Dispose(); } catch { }
             });
         }
     }
@@ -1032,40 +1049,27 @@ public sealed partial class MainWindow : WindowEx
             {
                 if (isAnimationStarted) return;
                 isAnimationStarted = true;
+                CleanupBgImageHandlers();
                 storyboard.Begin();
             }
 
-            RoutedEventHandler imageOpenedHandler = null!;
-            imageOpenedHandler = (s, e) =>
-            {
-                GlobalBackgroundImage.ImageOpened -= imageOpenedHandler;
-                StartFadeInAnimation();
-            };
-            
-            ExceptionRoutedEventHandler imageFailedHandler = null!;
-            imageFailedHandler = (s, e) =>
-            {
-                GlobalBackgroundImage.ImageFailed -= imageFailedHandler;
-                StartFadeInAnimation();
-            };
+            CleanupBgImageHandlers();
 
-            GlobalBackgroundImage.ImageOpened += imageOpenedHandler;
-            GlobalBackgroundImage.ImageFailed += imageFailedHandler;
+            _bgImageOpenedHandler = (s, e) => StartFadeInAnimation();
+            _bgImageFailedHandler = (s, e) => StartFadeInAnimation();
+
+            GlobalBackgroundImage.ImageOpened += _bgImageOpenedHandler;
+            GlobalBackgroundImage.ImageFailed += _bgImageFailedHandler;
             
             GlobalBackgroundImage.Source = result.ImageSource;
 
-            var fallbackTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(600) };
-            fallbackTimer.Tick += (s, e) =>
+            _bgFallbackTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(600) };
+            _bgFallbackTimer.Tick += (s, e) =>
             {
-                fallbackTimer.Stop();
-                if (!isAnimationStarted)
-                {
-                    GlobalBackgroundImage.ImageOpened -= imageOpenedHandler;
-                    GlobalBackgroundImage.ImageFailed -= imageFailedHandler;
-                    StartFadeInAnimation();
-                }
+                _bgFallbackTimer.Stop();
+                StartFadeInAnimation();
             };
-            fallbackTimer.Start();
+            _bgFallbackTimer.Start();
 
             if (wasVideoBackground)
             {
@@ -1076,6 +1080,21 @@ public sealed partial class MainWindow : WindowEx
         UpdateBackgroundOverlayTheme();
     });
 }
+
+    private void CleanupBgImageHandlers()
+    {
+        _bgFallbackTimer?.Stop();
+        if (_bgImageOpenedHandler != null)
+        {
+            GlobalBackgroundImage.ImageOpened -= _bgImageOpenedHandler;
+            _bgImageOpenedHandler = null;
+        }
+        if (_bgImageFailedHandler != null)
+        {
+            GlobalBackgroundImage.ImageFailed -= _bgImageFailedHandler;
+            _bgImageFailedHandler = null;
+        }
+    }
 
     private Task ClearGlobalBackgroundAsync()
     {
@@ -1257,6 +1276,7 @@ public sealed partial class MainWindow : WindowEx
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();
             await LoadMinWindowSizeLimitSettingAsync();
+            await LoadNavItemVisibilityAsync();
             ShowMainContent();
             
             _ = Task.Run(async () => 
@@ -1383,7 +1403,7 @@ public sealed partial class MainWindow : WindowEx
         AgreementFrame.Navigate(typeof(Views.AgreementPage));
     }
 
-    private void ShowMainContent()
+    private async void ShowMainContent()
     {
         AgreementFrame.Visibility = Visibility.Collapsed;
         NavigationView.Visibility = Visibility.Visible;
@@ -1399,11 +1419,15 @@ public sealed partial class MainWindow : WindowEx
         _networkMonitorService.Start();
         _ = _networkMonitorService.CheckNetworkAndProxyStatusAsync();
         
-        var redeemService = new RedeemCodeReminderService(_localSettingsService);
-        _ = redeemService.CheckRedeemCodesForTodayAsync(msg => 
+        var notifyEnabledObj = await _localSettingsService.ReadSettingAsync("IsRedeemCodeNotificationEnabled");
+        if (notifyEnabledObj == null || Convert.ToBoolean(notifyEnabledObj))
         {
-            dispatcherQueue.TryEnqueue(() => ShowNotification(msg));
-        });
+            var redeemService = new RedeemCodeReminderService(_localSettingsService);
+            _ = redeemService.CheckRedeemCodesAsync(msg =>
+            {
+                dispatcherQueue.TryEnqueue(() => ShowNotification(msg));
+            });
+        }
     }
 
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -1434,8 +1458,17 @@ public sealed partial class MainWindow : WindowEx
         }
     }
 
-    private async void NavigateToPage(string viewModelTag)
+    internal async void NavigateToPage(string viewModelTag)
     {
+     
+        if (!IsNavItemVisible(viewModelTag))
+        {
+            ShowNotification(new NotificationMessage("无法访问", "该功能已被隐藏，请在设置中重新开启", NotificationType.Warning, 3000));
+            NavigationView.SelectedItem = null; 
+            ContentFrame.Navigate(typeof(Views.HiddenPage), null, new SuppressNavigationTransitionInfo());
+            return;
+        }
+
         var pageType = viewModelTag switch
         {
             "FufuLauncher.ViewModels.MainViewModel" => typeof(Views.MainPage),
@@ -1468,6 +1501,13 @@ public sealed partial class MainWindow : WindowEx
             ContentFrame.Navigate(pageType, null, new SuppressNavigationTransitionInfo());
             var isMainPage = pageType == typeof(Views.MainPage);
             UpdatePageOverlayState(isMainPage);
+
+            if (isMainPage)
+            {
+                var mainItem = GetAllNavItems().FirstOrDefault(i => i.Tag?.ToString() == "FufuLauncher.ViewModels.MainViewModel");
+                if (mainItem != null)
+                    NavigationView.SelectedItem = mainItem;
+            }
         }
     }
 
@@ -1556,6 +1596,65 @@ public sealed partial class MainWindow : WindowEx
             NavigationView.SelectedItem = accountItem;
         else
             NavigateToPage("FufuLauncher.ViewModels.AccountViewModel");
+    }
+
+
+
+    private readonly Dictionary<string, bool> _navItemVisibility = new();
+
+    public async Task LoadNavItemVisibilityAsync()
+    {
+        var settings = App.GetService<ILocalSettingsService>();
+        var allKeys = new[]
+        {
+            "MainViewModel", "PluginSettingsViewModel", "ControlPanelModel",
+            "BlankViewModel", "AccountViewModel", "OtherViewModel",
+            "PluginViewModel", "DataViewModel", "HelpViewModel",
+            "CommunityViewModel", "CalculatorViewModel", "SettingsViewModel"
+        };
+
+        foreach (var key in allKeys)
+        {
+            var val = await settings.ReadSettingAsync($"NavVisible_{key}");
+            bool visible = val is bool b ? b : (val is string s && bool.TryParse(s, out var p) ? p : true);
+            _navItemVisibility[$"FufuLauncher.ViewModels.{key}"] = visible;
+        }
+
+  
+        foreach (var item in GetAllNavItems())
+        {
+            var tag = item.Tag?.ToString();
+            if (tag != null && _navItemVisibility.TryGetValue(tag, out var visible))
+            {
+                item.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
+            }
+        }
+    }
+
+    private bool IsNavItemVisible(string viewModelKey)
+    {
+        return _navItemVisibility.TryGetValue(viewModelKey, out var visible) ? visible : true;
+    }
+
+    private void ApplyNavItemVisibility(NavItemConfig config)
+    {
+        _navItemVisibility[config.ViewModelKey] = config.IsUserVisible;
+
+        foreach (var item in GetAllNavItems())
+        {
+            if (item.Tag?.ToString() == config.ViewModelKey)
+            {
+                item.Visibility = config.IsUserVisible ? Visibility.Visible : Visibility.Collapsed;
+                break;
+            }
+        }
+    }
+
+    private IEnumerable<NavigationViewItem> GetAllNavItems()
+    {
+        return NavigationView.MenuItems
+            .Concat(NavigationView.FooterMenuItems)
+            .OfType<NavigationViewItem>();
     }
 
     private void UpdatePageOverlayState(bool isMainPage)
@@ -1752,7 +1851,7 @@ public sealed partial class MainWindow : WindowEx
 
     private void DismissInfoBar(FrameworkElement element)
     {
-        if (element is InfoBar infoBar && (infoBar.Title == "兑换码失效提醒" || infoBar.Title == "今日兑换码提醒"))
+        if (element is InfoBar infoBar && (infoBar.Title == "兑换码失效提醒" || infoBar.Title == "今日兑换码提醒" || infoBar.Title == "新兑换码已发布" || infoBar.Title == "兑换码即将失效"))
         {
             _ = _localSettingsService.SaveSettingAsync("LastRedeemCodeReminderDate", DateTime.Now.ToString("yyyy-MM-dd"));
             Debug.WriteLine("[RedeemCodes] 已将关闭状态写入数据库");

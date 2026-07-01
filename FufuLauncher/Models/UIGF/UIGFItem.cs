@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Text.Json.Serialization;
 
 namespace FufuLauncher.Models.UIGF;
@@ -36,3 +40,4 @@ public class UIGFItem
     [JsonConverter(typeof(JsonStringOrNumberConverter))]
     public string RankType { get; set; }
 }
+

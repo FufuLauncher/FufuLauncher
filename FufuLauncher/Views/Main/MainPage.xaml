@@ -322,10 +322,14 @@
                             Grid.Row="1"
                             Margin="2,0,2,2">
                             <Pivot.Resources>
-                                <SolidColorBrush x:Key="PivotHeaderItemForeground" Color="{ThemeResource TextFillColorSecondary}" />
-                                <SolidColorBrush x:Key="PivotHeaderItemForegroundSelected" Color="{ThemeResource TextFillColorPrimary}" />
-                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPointerOver" Color="{ThemeResource TextFillColorPrimary}" />
-                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPressed" Color="{ThemeResource TextFillColorTertiary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForeground"
+                                                 Color="{ThemeResource TextFillColorSecondary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForegroundSelected"
+                                                 Color="{ThemeResource TextFillColorPrimary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPointerOver"
+                                                 Color="{ThemeResource TextFillColorPrimary}" />
+                                <SolidColorBrush x:Key="PivotHeaderItemForegroundPressed"
+                                                 Color="{ThemeResource TextFillColorTertiary}" />
 
                                 <Style TargetType="PivotHeaderItem">
                                     <Setter Property="FontSize" Value="13" />
@@ -783,14 +787,16 @@
                                     <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#26FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#15FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent" />
-                                    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{ThemeResource TextFillColorTertiary}" />
+                                    <SolidColorBrush x:Key="ButtonForegroundDisabled"
+                                                     Color="{ThemeResource TextFillColorTertiary}" />
                                     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent" />
                                 </ResourceDictionary>
                                 <ResourceDictionary x:Key="Default">
                                     <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#26FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#15FFFFFF" />
                                     <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent" />
-                                    <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{ThemeResource TextFillColorTertiary}" />
+                                    <SolidColorBrush x:Key="ButtonForegroundDisabled"
+                                                     Color="{ThemeResource TextFillColorTertiary}" />
                                     <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent" />
                                 </ResourceDictionary>
                             </ResourceDictionary.ThemeDictionaries>
@@ -926,7 +932,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="抽卡记录分析"
                                 Visibility="{x:Bind ViewModel.WidgetGachaVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetAchievement"
@@ -940,7 +947,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="成就追踪"
                                 Visibility="{x:Bind ViewModel.WidgetAchievementVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetInventory"
@@ -954,7 +962,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="背包物品"
                                 Visibility="{x:Bind ViewModel.WidgetInventoryVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetPlayerRole"
@@ -968,7 +977,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="角色练度查询"
                                 Visibility="{x:Bind ViewModel.WidgetPlayerRoleVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetDailyNote"
@@ -982,7 +992,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="旅行便签"
                                 Visibility="{x:Bind ViewModel.WidgetDailyNoteWindowVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetVideo"
@@ -996,7 +1007,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="视频资源库"
                                 Visibility="{x:Bind ViewModel.WidgetVideoVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetBBS"
@@ -1010,7 +1022,8 @@
                                 CornerRadius="8"
                                 ToolTipService.ToolTip="战绩信息"
                                 Visibility="{x:Bind ViewModel.WidgetBBSVisibility, Mode=OneWay}">
-                                <Image Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" />
+                                <Image
+                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" />
                             </Button>
 
                             <Button

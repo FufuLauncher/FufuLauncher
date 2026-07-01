@@ -9,13 +9,13 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
-            <TextBlock Text="成就数据更新" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
-            
-            <Button x:Name="StartButton" 
-                    Content="立即开始获取" 
-                    Click="OnStartClick" 
+            <TextBlock Text="成就数据更新" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" />
+
+            <Button x:Name="StartButton"
+                    Content="立即开始获取"
+                    Click="OnStartClick"
                     HorizontalAlignment="Center"
-                    Padding="32,8"/>
+                    Padding="32,8" />
         </StackPanel>
     </Grid>
 </Window>

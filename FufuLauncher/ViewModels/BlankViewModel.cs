@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
@@ -148,38 +152,21 @@ namespace FufuLauncher.ViewModels
             return;
         }
 
-        var mainWindow = App.MainWindow;
-        if (mainWindow == null)
-        {
-            await ShowError("无法获取主窗口句柄");
-            return;
-        }
-
-        var hwnd = WindowNative.GetWindowHandle(mainWindow);
-        if (hwnd == IntPtr.Zero)
-        {
-            await ShowError("窗口句柄无效，请以普通用户模式运行");
-            return;
-        }
-        
         var filePicker = new FileOpenPicker
         {
             SuggestedStartLocation = PickerLocationId.ComputerFolder,
             ViewMode = PickerViewMode.List
         };
-        
+
         filePicker.FileTypeFilter.Add(".exe");
 
-        try
+        if (!FilePickerService.InitializeWithValidWindow(filePicker, out var pathErr))
         {
-            InitializeWithWindow.Initialize(filePicker, hwnd);
+            await ShowError(pathErr ?? "无法打开文件选择器");
+            return;
         }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[警告] InitializeWithWindow失败: {ex.Message}");
-        }
-        
-        var file = await Task.Run(async () => await filePicker.PickSingleFileAsync());
+
+        var file = await filePicker.PickSingleFileAsync();
 
         if (file != null)
         {

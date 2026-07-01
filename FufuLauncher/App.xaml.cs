@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text.Json;
@@ -10,6 +14,7 @@ using FufuLauncher.Services;
 using FufuLauncher.Services.Background;
 using FufuLauncher.ViewModels;
 using FufuLauncher.Views;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -17,6 +22,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppLifecycle;
 using Windows.Media.Core;
 using Windows.Media.Playback;
+using System.Net.Sockets;
 using Sentry;
 
 namespace FufuLauncher;
@@ -87,6 +93,13 @@ public partial class App : Application
         {
             Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
                 .UseContentRoot(AppContext.BaseDirectory)
+                .ConfigureHostConfiguration(config =>
+                {
+                    config.AddInMemoryCollection(new Dictionary<string, string?>
+                    {
+                        ["hostBuilder:reloadConfigOnChange"] = "false"
+                    });
+                })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
@@ -127,14 +140,17 @@ public partial class App : Application
                     services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
                     services.AddSingleton<ICommunityCheckinService, CommunityCheckinService>();
                     services.AddSingleton<ICloudGameCheckinService, CloudGameCheckinService>();
+                    services.AddSingleton<IHoyolabRoleResolverService, HoyolabRoleResolverService>();
                     services.AddSingleton<IUnifiedCheckinService, UnifiedCheckinService>();
                     services.AddSingleton<DailyNoteCardService>();
+                    services.AddSingleton<IDeviceFingerprintService, Services.MiHoYo.DeviceFingerprintService>();
                     services.AddSingleton<BlankViewModel>();
                     services.AddTransient<BlankPage>();
                     services.AddSingleton<ILauncherService, LauncherService>();
                     services.AddTransient<OtherViewModel>();
                     services.AddTransient<OtherPage>();
                     services.AddSingleton<IAutoClickerService, AutoClickerService>();
+                    services.AddSingleton<IScreenshotService, ScreenshotService>();
                     services.AddTransient<AgreementViewModel>();
                     services.AddTransient<AgreementPage>();
                     services.AddSingleton<IUpdateService, UpdateService>();
@@ -185,8 +201,17 @@ public partial class App : Application
     private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         e.SetObserved();
-        LogException(e.Exception, "UnobservedTaskException");
         
+        var baseEx = e.Exception?.GetBaseException();
+        if (baseEx is SocketException
+            || baseEx is ObjectDisposedException
+            || baseEx is OperationCanceledException)
+        {
+            System.Diagnostics.Debug.WriteLine($"[UnobservedTask] 已忽略的后台异常: {baseEx.GetType().Name}: {baseEx.Message}");
+            return;
+        }
+
+        LogException(e.Exception, "UnobservedTaskException");
         ShowCrashDialog("后台异步任务异常", e.Exception);
     }
     
@@ -486,26 +511,25 @@ public partial class App : Application
                     mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(path));
                     mediaPlayer.Volume = 0.7;
 
-                    mediaPlayer.MediaEnded += (s, e) => mediaPlayer.Dispose();
-
-                    mediaPlayer.MediaFailed += (s, e) =>
+                    int disposed = 0;
+                    void DisposeOnce()
                     {
-                        Debug.WriteLine($"启动语音播放失败: {e.ErrorMessage}");
-                        mediaPlayer.Dispose();
-                    };
+                        if (Interlocked.Exchange(ref disposed, 1) == 0)
+                        {
+                            try { mediaPlayer.Dispose(); } catch { }
+                        }
+                    }
 
+                    mediaPlayer.MediaEnded += (s, e) => DisposeOnce();
+                    mediaPlayer.MediaFailed += (s, e) => DisposeOnce();
                     mediaPlayer.Play();
 
                     var timer = _mainDispatcherQueue.CreateTimer();
                     timer.Interval = TimeSpan.FromSeconds(30);
                     timer.Tick += (s, e) =>
                     {
-                        try
-                        {
-                            mediaPlayer?.Dispose();
-                        }
-                        catch { }
                         timer.Stop();
+                        DisposeOnce();
                     };
                     timer.Start();
                 }
@@ -620,3 +644,4 @@ public partial class App : Application
         }
     }
 }
+

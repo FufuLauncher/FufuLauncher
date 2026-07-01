@@ -10,31 +10,39 @@
 
     <Page.Resources>
         <Storyboard x:Name="EntranceStoryboard">
-            <DoubleAnimation Storyboard.TargetName="IconImage" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="IconTransform" Storyboard.TargetProperty="Y" From="30" To="0" Duration="0:0:0.6">
+            <DoubleAnimation Storyboard.TargetName="IconImage" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="IconTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
 
-            <DoubleAnimation Storyboard.TargetName="TitleText" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.1" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="Y" From="30" To="0" BeginTime="0:0:0.1" Duration="0:0:0.6">
+            <DoubleAnimation Storyboard.TargetName="TitleText" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             BeginTime="0:0:0.1" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             BeginTime="0:0:0.1" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
 
-            <DoubleAnimation Storyboard.TargetName="DescText" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.2" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="DescTransform" Storyboard.TargetProperty="Y" From="30" To="0" BeginTime="0:0:0.2" Duration="0:0:0.6">
+            <DoubleAnimation Storyboard.TargetName="DescText" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             BeginTime="0:0:0.2" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="DescTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             BeginTime="0:0:0.2" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
 
-            <DoubleAnimation Storyboard.TargetName="AgreementArea" Storyboard.TargetProperty="Opacity" From="0" To="1" BeginTime="0:0:0.3" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="AgreementTransform" Storyboard.TargetProperty="Y" From="30" To="0" BeginTime="0:0:0.3" Duration="0:0:0.6">
+            <DoubleAnimation Storyboard.TargetName="AgreementArea" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             BeginTime="0:0:0.3" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="AgreementTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             BeginTime="0:0:0.3" Duration="0:0:0.6">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -42,12 +50,12 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" 
-                    VerticalAlignment="Top" 
+        <StackPanel Grid.Row="0"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Spacing="8"
                     Padding="24,16"
@@ -62,7 +70,7 @@
                    Margin="0,0,0,2"
                    Opacity="0">
                 <Image.RenderTransform>
-                    <TranslateTransform x:Name="IconTransform" Y="30"/>
+                    <TranslateTransform x:Name="IconTransform" Y="30" />
                 </Image.RenderTransform>
             </Image>
 
@@ -73,7 +81,7 @@
                        HorizontalAlignment="Center"
                        Opacity="0">
                 <TextBlock.RenderTransform>
-                    <TranslateTransform x:Name="TitleTransform" Y="30"/>
+                    <TranslateTransform x:Name="TitleTransform" Y="30" />
                 </TextBlock.RenderTransform>
             </TextBlock>
 
@@ -85,20 +93,20 @@
                        TextAlignment="Center"
                        Opacity="0">
                 <TextBlock.RenderTransform>
-                    <TranslateTransform x:Name="DescTransform" Y="30"/>
+                    <TranslateTransform x:Name="DescTransform" Y="30" />
                 </TextBlock.RenderTransform>
             </TextBlock>
 
             <Grid x:Name="AgreementArea" Opacity="0">
                 <Grid.RenderTransform>
-                    <TranslateTransform x:Name="AgreementTransform" Y="30"/>
+                    <TranslateTransform x:Name="AgreementTransform" Y="30" />
                 </Grid.RenderTransform>
-                
+
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <ComboBox Grid.Row="0"
@@ -106,9 +114,9 @@
                           Margin="0,0,0,8"
                           MinWidth="140"
                           SelectedIndex="{x:Bind ViewModel.SelectedLanguageIndex, Mode=TwoWay}">
-                    <ComboBoxItem Content="简体中文"/>
-                    <ComboBoxItem Content="English"/>
-                    <ComboBoxItem Content="繁體中文"/>
+                    <ComboBoxItem Content="简体中文" />
+                    <ComboBoxItem Content="English" />
+                    <ComboBoxItem Content="繁體中文" />
                 </ComboBox>
 
                 <Border Grid.Row="1"
@@ -117,12 +125,13 @@
                         BorderThickness="1"
                         CornerRadius="6"
                         Height="220">
-                    <ScrollViewer x:Name="AgreementScrollViewer" Padding="16,12" VerticalScrollBarVisibility="Auto" ViewChanged="OnAgreementScrollChanged">
+                    <ScrollViewer x:Name="AgreementScrollViewer" Padding="16,12" VerticalScrollBarVisibility="Auto"
+                                  ViewChanged="OnAgreementScrollChanged">
                         <TextBlock Text="{x:Bind ViewModel.AgreementText, Mode=OneWay}"
                                    TextWrapping="Wrap"
                                    FontSize="12.5"
                                    LineHeight="20"
-                                   IsTextSelectionEnabled="True"/>
+                                   IsTextSelectionEnabled="True" />
                     </ScrollViewer>
                 </Border>
 
@@ -130,14 +139,14 @@
                           IsChecked="{x:Bind ViewModel.IsAgreementChecked, Mode=TwoWay}"
                           IsEnabled="{x:Bind ViewModel.HasReadAgreement, Mode=OneWay}"
                           Margin="0,8,0,0"
-                          Content="我已阅读并同意用户协议 (I have read and agree)"/>
+                          Content="我已阅读并同意用户协议 (I have read and agree)" />
 
                 <TextBlock Grid.Row="3"
                            Text="请滚动阅读完整协议后勾选同意"
                            FontSize="11"
                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                            Visibility="{x:Bind ViewModel.HintVisibility, Mode=OneWay}"
-                           Margin="28,2,0,0"/>
+                           Margin="28,2,0,0" />
             </Grid>
         </StackPanel>
 
@@ -147,10 +156,10 @@
                     Spacing="32"
                     Padding="48"
                     Visibility="{x:Bind ViewModel.IconCheckVisibility, Mode=OneWay}">
-            
+
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True"/>
+                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True" />
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
@@ -158,11 +167,11 @@
                 <Image Source="ms-appx:///Assets/icon.png"
                        Width="52" Height="52"
                        HorizontalAlignment="Center"
-                       Margin="0,0,0,4"/>
+                       Margin="0,0,0,4" />
                 <TextBlock Text="为了确保显示效果，请确认下方图标是否正常显示"
                            FontSize="14"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           HorizontalAlignment="Center"/>
+                           HorizontalAlignment="Center" />
             </StackPanel>
 
             <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
@@ -172,27 +181,27 @@
                     Padding="32,24">
                 <StackPanel Orientation="Horizontal" Spacing="48" HorizontalAlignment="Center">
                     <StackPanel Spacing="12">
-                        <FontIcon Glyph="&#xE713;" 
-                                  FontSize="40" 
+                        <FontIcon Glyph="&#xE713;"
+                                  FontSize="40"
                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
-                                  HorizontalAlignment="Center"/>
-                        <TextBlock Text="设置" FontSize="12" HorizontalAlignment="Center" Opacity="0.7"/>
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Text="设置" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
                     </StackPanel>
 
                     <StackPanel Spacing="12">
-                        <FontIcon Glyph="&#xE80F;" 
-                                  FontSize="40" 
+                        <FontIcon Glyph="&#xE80F;"
+                                  FontSize="40"
                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
-                                  HorizontalAlignment="Center"/>
-                        <TextBlock Text="主页" FontSize="12" HorizontalAlignment="Center" Opacity="0.7"/>
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Text="主页" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
                     </StackPanel>
 
                     <StackPanel Spacing="12">
-                        <FontIcon Glyph="&#xE8B7;" 
-                                  FontSize="40" 
+                        <FontIcon Glyph="&#xE8B7;"
+                                  FontSize="40"
                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
-                                  HorizontalAlignment="Center"/>
-                        <TextBlock Text="文件" FontSize="12" HorizontalAlignment="Center" Opacity="0.7"/>
+                                  HorizontalAlignment="Center" />
+                        <TextBlock Text="文件" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -201,12 +210,12 @@
                 <Button Content="无法显示(Cannot Display)"
                         Command="{x:Bind ViewModel.TroubleshootIconsCommand}"
                         Style="{StaticResource DefaultButtonStyle}"
-                        MinWidth="120"/>
-                
+                        MinWidth="120" />
+
                 <Button Content="显示正常(Display Normal)"
                         Command="{x:Bind ViewModel.ConfirmIconsCommand}"
                         Style="{StaticResource DefaultButtonStyle}"
-                        MinWidth="120"/>
+                        MinWidth="120" />
             </StackPanel>
         </StackPanel>
 
@@ -217,51 +226,55 @@
                     Padding="48"
                     MaxWidth="560"
                     Visibility="{x:Bind ViewModel.DataDirVisibility, Mode=OneWay}">
-            
+
             <StackPanel.ChildrenTransitions>
                 <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True"/>
+                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True" />
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
             <Image Source="ms-appx:///Assets/icon.png"
                    Width="52" Height="52"
                    HorizontalAlignment="Center"
-                   Margin="0,0,0,0"/>
+                   Margin="0,0,0,0" />
 
             <TextBlock Text="数据存储位置"
                        FontSize="18"
                        FontWeight="SemiBold"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center" />
 
             <TextBlock Text="您可以自定义数据和缓存的存储目录，或保持默认设置。"
                        FontSize="12"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        HorizontalAlignment="Center"
                        TextWrapping="Wrap"
-                       TextAlignment="Center"/>
+                       TextAlignment="Center" />
 
             <StackPanel Spacing="12">
-                <TextBlock Text="用户数据目录" FontSize="13" FontWeight="SemiBold"/>
+                <TextBlock Text="用户数据目录" FontSize="13" FontWeight="SemiBold" />
                 <Grid ColumnSpacing="8">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{x:Bind ViewModel.DataPath, Mode=OneWay}" IsReadOnly="True" FontSize="12"/>
-                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseDataPathCommand}" VerticalAlignment="Bottom" Padding="12,6"/>
+                    <TextBox Grid.Column="0" Text="{x:Bind ViewModel.DataPath, Mode=OneWay}" IsReadOnly="True"
+                             FontSize="12" />
+                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseDataPathCommand}"
+                            VerticalAlignment="Bottom" Padding="12,6" />
                 </Grid>
             </StackPanel>
 
             <StackPanel Spacing="12">
-                <TextBlock Text="缓存目录" FontSize="13" FontWeight="SemiBold"/>
+                <TextBlock Text="缓存目录" FontSize="13" FontWeight="SemiBold" />
                 <Grid ColumnSpacing="8">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" Text="{x:Bind ViewModel.CachePath, Mode=OneWay}" IsReadOnly="True" FontSize="12"/>
-                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseCachePathCommand}" VerticalAlignment="Bottom" Padding="12,6"/>
+                    <TextBox Grid.Column="0" Text="{x:Bind ViewModel.CachePath, Mode=OneWay}" IsReadOnly="True"
+                             FontSize="12" />
+                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseCachePathCommand}"
+                            VerticalAlignment="Bottom" Padding="12,6" />
                 </Grid>
             </StackPanel>
 
@@ -269,29 +282,29 @@
                     Command="{x:Bind ViewModel.ConfirmDataDirCommand}"
                     HorizontalAlignment="Center"
                     Padding="24,8"
-                    CornerRadius="4"/>
+                    CornerRadius="4" />
 
             <TextBlock Text="{x:Bind ViewModel.PathError, Mode=OneWay}"
                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                        FontSize="12"
                        HorizontalAlignment="Center"
                        Visibility="{x:Bind ViewModel.PathErrorVisibility, Mode=OneWay}"
-                       Margin="0,4,0,0"/>
+                       Margin="0,4,0,0" />
         </StackPanel>
 
-        <Grid Grid.Row="1" 
+        <Grid Grid.Row="1"
               Padding="20,12"
               BorderThickness="1,1,0,0"
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
               Background="{ThemeResource LayerFillColorDefaultBrush}"
               Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
-            
+
             <Button Content="下一步(Next)"
                     Command="{x:Bind ViewModel.NextCommand}"
                     IsEnabled="{x:Bind ViewModel.IsAgreementChecked, Mode=OneWay}"
                     HorizontalAlignment="Right"
                     CornerRadius="4"
-                    Padding="24,8"/>
+                    Padding="24,8" />
         </Grid>
     </Grid>
 </Page>

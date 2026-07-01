@@ -8,12 +8,12 @@
     mc:Ignorable="d">
 
     <Grid>
-        <ProgressBar x:Name="LoadingBar" 
-                     IsIndeterminate="True" 
-                     VerticalAlignment="Top" 
-                     Visibility="Visible" 
-                     Canvas.ZIndex="10"/>
+        <ProgressBar x:Name="LoadingBar"
+                     IsIndeterminate="True"
+                     VerticalAlignment="Top"
+                     Visibility="Visible"
+                     Canvas.ZIndex="10" />
 
-        <controls:WebView2 x:Name="AnnouncementWebView"/>
+        <controls:WebView2 x:Name="AnnouncementWebView" />
     </Grid>
 </Page>

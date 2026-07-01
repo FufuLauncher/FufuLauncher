@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace FufuLauncher.Models;
@@ -9,3 +13,4 @@ public partial class CheckinAccountItem : ObservableObject
     [ObservableProperty] private bool _isSelected = true;
     [ObservableProperty] private bool _hasCloudCredential;
 }
+

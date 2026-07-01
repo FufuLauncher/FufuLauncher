@@ -1,4 +1,8 @@
-﻿using System.Net.Http.Json;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Net.Http.Json;
 using System.Text.Json;
 using FufuLauncher.Constants;
 using FufuLauncher.Models;

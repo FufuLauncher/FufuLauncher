@@ -1,5 +1,5 @@
 #define AppName       "FufuLauncher"
-#define AppVersion    "1.3.0.0"
+#define AppVersion    "1.4.0.0"
 #define AppPublisher  "FufuLauncher"
 #define AppExe        "FufuLauncher.exe"
 #define AppId         "{{A7B2C3D4-E5F6-7890-AB12-CD34EF567890}"
@@ -28,7 +28,7 @@ ShowLanguageDialog=no
 
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
-PrivilegesRequired=lowest
+PrivilegesRequired=admin
 MinVersion=10.0.14393
 
 OutputDir={#OutDir}
@@ -56,7 +56,7 @@ Name: "startmenu";     Description: "创建开始菜单快捷方式"; GroupDescr
 Name: "autostart";     Description: "开机自启动";         GroupDescription: "其他:"; Flags: unchecked
 
 [Files]
-Source: "{#SrcDir}\{#AppExe}";  DestDir: "{app}"; Flags: ignoreversion
+Source: "{#SrcDir}\{#AppExe}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#SrcDir}\*";          DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "*.pdb,*.lib,*.exp,*.xml,BuildHost-*,obj\*"
 
 [Icons]
@@ -94,12 +94,16 @@ begin
   DesktopPath := ExpandConstant('{autodesktop}');
   ShortcutPath := AddBackslash(DesktopPath) + ExpandConstant('{#AppName}') + '.lnk';
   GDesktopIconExists := FileExists(ShortcutPath);
+
   if GDesktopIconExists and IsTaskSelected('desktopicon') = False then
     WizardSelectTasks('desktopicon');
+
   UninstKey := 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' +
                ExpandConstant('{#SetupSetting("AppId")}') + '_is1';
+
   if not RegQueryStringValue(HKCU, UninstKey, 'UninstallString', UninstStr) then
     RegQueryStringValue(HKLM, UninstKey, 'UninstallString', UninstStr);
+
   if UninstStr <> '' then
   begin
     UninstStr := RemoveQuotes(UninstStr);
@@ -126,6 +130,7 @@ begin
   else if C is TButton        then TButton(C).Font.Name := F
   else if C is TNewProgressBar then
   else if C is TForm          then TForm(C).Font.Name := F;
+
   if C is TWinControl then
     for I := 0 to TWinControl(C).ControlCount - 1 do
       ApplyCustomFontToControl(TWinControl(C).Controls[I]);

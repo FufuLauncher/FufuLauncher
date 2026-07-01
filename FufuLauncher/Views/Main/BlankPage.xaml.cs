@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Diagnostics;
 using System.Text;
 using System.Text.Json;
@@ -1008,17 +1012,19 @@ private async Task ShowAutoPathDialog(string foundPath)
 
         private async Task PickGameFolderAsync()
         {
-            var hwnd = WindowNative.GetWindowHandle(App.MainWindow);
-            
             var filePicker = new FileOpenPicker
             {
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
-            
+
             filePicker.FileTypeFilter.Add(".exe");
-    
-            InitializeWithWindow.Initialize(filePicker, hwnd);
-            
+
+            if (!FilePickerService.InitializeWithValidWindow(filePicker, out var blankErr))
+            {
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("错误", blankErr ?? "无法打开文件选择器", NotificationType.Error));
+                return;
+            }
+
             var file = await filePicker.PickSingleFileAsync();
             if (file != null)
             {

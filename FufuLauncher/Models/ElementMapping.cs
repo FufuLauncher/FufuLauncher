@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 namespace FufuLauncher.Models;
 
 public static class ElementMapping
@@ -28,3 +32,4 @@ public static class ElementMapping
         return Elements.TryGetValue(elementId, out var element) ? element : (null, null);
     }
 }
+

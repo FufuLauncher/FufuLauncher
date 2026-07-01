@@ -9,21 +9,22 @@
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="32" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
-            <TextBlock Text="预设管理" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12"/>
+            <TextBlock Text="预设管理" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" />
         </Grid>
-        
-        <TextBlock Grid.Row="1" Text="选择要固定在首页的预设 (最多5个)" FontSize="16" FontWeight="SemiBold" Margin="20,10,20,10"/>
-        
+
+        <TextBlock Grid.Row="1" Text="选择要固定在首页的预设 (最多5个)" FontSize="16" FontWeight="SemiBold" Margin="20,10,20,10" />
+
         <ListView Grid.Row="2" ItemsSource="{x:Bind AllPresets}" Margin="20,0,20,20" SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:PresetWrapper">
-                    <CheckBox Content="{x:Bind Name}" Tag="{x:Bind Id}" IsChecked="{x:Bind IsPinned, Mode=TwoWay}" Click="PresetCheckBox_Click" Margin="0,4"/>
+                    <CheckBox Content="{x:Bind Name}" Tag="{x:Bind Id}" IsChecked="{x:Bind IsPinned, Mode=TwoWay}"
+                              Click="PresetCheckBox_Click" Margin="0,4" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

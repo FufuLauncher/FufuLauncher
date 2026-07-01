@@ -19,21 +19,21 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             AreTransportControlsEnabled="False"
-                            AutoPlay="True"/>
-        
-        <Grid Background="Black" Opacity="0.5"/>
+                            AutoPlay="True" />
 
-        <Grid x:Name="AppTitleBar" 
-              VerticalAlignment="Top" 
-              Height="32" 
-              Background="Transparent" 
-              Canvas.ZIndex="999"/>
+        <Grid Background="Black" Opacity="0.5" />
 
-        <StackPanel VerticalAlignment="Center" 
-                    HorizontalAlignment="Left" 
-                    Spacing="24" 
+        <Grid x:Name="AppTitleBar"
+              VerticalAlignment="Top"
+              Height="32"
+              Background="Transparent"
+              Canvas.ZIndex="999" />
+
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Spacing="24"
                     Margin="80,0,80,0">
-            
+
             <TextBlock x:Name="WelcomeText"
                        Foreground="White"
                        FontSize="32"
@@ -43,21 +43,21 @@
                        TextWrapping="Wrap"
                        Opacity="1">
                 <TextBlock.Shadow>
-                    <ThemeShadow/>
+                    <ThemeShadow />
                 </TextBlock.Shadow>
             </TextBlock>
 
             <TextBlock x:Name="SyaShortText"
-                       Foreground="#FFE4E1" 
+                       Foreground="#FFE4E1"
                        FontSize="22"
                        FontFamily="{StaticResource AppGlobalFont}"
-                       FontStyle="Normal" 
+                       FontStyle="Normal"
                        FontWeight="Normal"
                        TextAlignment="Left"
                        TextWrapping="Wrap"
                        Opacity="0">
                 <TextBlock.Shadow>
-                    <ThemeShadow/>
+                    <ThemeShadow />
                 </TextBlock.Shadow>
             </TextBlock>
         </StackPanel>

@@ -1,4 +1,8 @@
-﻿using System.Security.Cryptography;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Security.Cryptography;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Messages;
 

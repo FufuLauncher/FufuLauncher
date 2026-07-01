@@ -1,4 +1,8 @@
-﻿using Microsoft.Windows.ApplicationModel.Resources;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace FufuLauncher.Helpers;
 

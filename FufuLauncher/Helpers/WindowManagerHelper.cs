@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System;
 using System.Runtime.InteropServices;
 using Microsoft.UI.Windowing;
 using Windows.Graphics;

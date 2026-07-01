@@ -7,7 +7,7 @@
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Title="视频资源库">
-    
+
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
@@ -18,17 +18,17 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                <TextBlock Text="视频资源库" 
-                           Style="{StaticResource CaptionTextBlockStyle}" 
+                <TextBlock Text="视频资源库"
+                           Style="{StaticResource CaptionTextBlockStyle}"
                            FontFamily="{StaticResource AppGlobalFont}"
-                           FontWeight="SemiBold"/>
+                           FontWeight="SemiBold" />
             </StackPanel>
         </Grid>
 
@@ -36,25 +36,32 @@
             <Pivot SelectionChanged="OnPivotSelectionChanged">
                 <PivotItem Header="角色视频" Tag="Character">
                     <Grid>
-                        <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" 
-                                     Visibility="{x:Bind ToVisibility(IsLoading), Mode=OneWay}"/>
+                        <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
+                                     Visibility="{x:Bind ToVisibility(IsLoading), Mode=OneWay}" />
                         <GridView ItemsSource="{x:Bind CharacterVideos}"
                                   SelectionMode="None"
                                   Padding="12">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="240" Height="200" Margin="8" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="0,0,0,8">
+                                    <Grid Width="240" Height="200" Margin="8"
+                                          Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8"
+                                          Padding="0,0,0,8">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Image Source="{Binding Cover}" Stretch="UniformToFill" VerticalAlignment="Top" Height="135"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding Title}" TextWrapping="Wrap" MaxLines="2" Margin="8,4" FontSize="12" FontWeight="Bold"/>
-                                        
-                                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,8,0" Spacing="8">
-                                            <Button Content="播放" Click="OnPlayClick" Tag="{Binding}" FontSize="10" Padding="8,4" Height="28"/>
-                                            <Button Content="下载" Click="OnDownloadClick" Tag="{Binding}" FontSize="10" Padding="8,4" Height="28"/>
+                                        <Image Source="{Binding Cover}" Stretch="UniformToFill" VerticalAlignment="Top"
+                                               Height="135" />
+                                        <TextBlock Grid.Row="1" Text="{Binding Title}" TextWrapping="Wrap" MaxLines="2"
+                                                   Margin="8,4" FontSize="12" FontWeight="Bold" />
+
+                                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right"
+                                                    Margin="0,4,8,0" Spacing="8">
+                                            <Button Content="播放" Click="OnPlayClick" Tag="{Binding}" FontSize="10"
+                                                    Padding="8,4" Height="28" />
+                                            <Button Content="下载" Click="OnDownloadClick" Tag="{Binding}" FontSize="10"
+                                                    Padding="8,4" Height="28" />
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -65,25 +72,32 @@
 
                 <PivotItem Header="过场动画" Tag="Cutscene">
                     <Grid>
-                        <ProgressBar IsIndeterminate="True" VerticalAlignment="Top" 
-                                     Visibility="{x:Bind ToVisibility(IsLoading), Mode=OneWay}"/>
+                        <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
+                                     Visibility="{x:Bind ToVisibility(IsLoading), Mode=OneWay}" />
                         <GridView ItemsSource="{x:Bind CutsceneVideos}"
                                   SelectionMode="None"
                                   Padding="12">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="240" Height="200" Margin="8" Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="0,0,0,8">
+                                    <Grid Width="240" Height="200" Margin="8"
+                                          Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8"
+                                          Padding="0,0,0,8">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Image Source="{Binding Cover}" Stretch="UniformToFill" VerticalAlignment="Top" Height="135"/>
-                                        <TextBlock Grid.Row="1" Text="{Binding Title}" TextWrapping="Wrap" MaxLines="2" Margin="8,4" FontSize="12" FontWeight="Bold"/>
+                                        <Image Source="{Binding Cover}" Stretch="UniformToFill" VerticalAlignment="Top"
+                                               Height="135" />
+                                        <TextBlock Grid.Row="1" Text="{Binding Title}" TextWrapping="Wrap" MaxLines="2"
+                                                   Margin="8,4" FontSize="12" FontWeight="Bold" />
 
-                                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,4,8,0" Spacing="8">
-                                            <Button Content="播放" Click="OnPlayClick" Tag="{Binding}" FontSize="10" Padding="8,4" Height="28"/>
-                                            <Button Content="下载" Click="OnDownloadClick" Tag="{Binding}" FontSize="10" Padding="8,4" Height="28"/>
+                                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right"
+                                                    Margin="0,4,8,0" Spacing="8">
+                                            <Button Content="播放" Click="OnPlayClick" Tag="{Binding}" FontSize="10"
+                                                    Padding="8,4" Height="28" />
+                                            <Button Content="下载" Click="OnDownloadClick" Tag="{Binding}" FontSize="10"
+                                                    Padding="8,4" Height="28" />
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -93,7 +107,7 @@
                 </PivotItem>
             </Pivot>
 
-            <controls:WebView2 x:Name="CrawlerWebView" Width="0" Height="0" Visibility="Collapsed"/>
+            <controls:WebView2 x:Name="CrawlerWebView" Width="0" Height="0" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Window>

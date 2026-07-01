@@ -1,4 +1,8 @@
-﻿namespace FufuLauncher.Models;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+namespace FufuLauncher.Models;
 
 public class LocalSettingsOptions
 {
@@ -12,3 +16,4 @@ public class LocalSettingsOptions
         get; set;
     }
 }
+

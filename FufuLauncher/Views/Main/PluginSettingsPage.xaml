@@ -221,16 +221,6 @@
                                             HorizontalAlignment="Stretch"
                                             IsEnabled="{x:Bind ViewModel.IsDownloadSupported, Mode=OneWay}"/>
 
-                                    <Button Content="下载加密插件(VMP Plugin)" 
-                                            Click="OnDownloadVmpPluginClick" 
-                                            HorizontalAlignment="Stretch" 
-                                            ToolTipService.ToolTip="功能完全相同，能显著降低被杀毒软件误判的概率，但会使性能明显下降"
-                                            IsEnabled="{x:Bind ViewModel.IsDownloadSupported, Mode=OneWay}"/>
-                                    
-                                    <TextBlock Text="若遭杀毒软件误判请使用VMP加密版" 
-                                               FontSize="11" 
-                                               Opacity="0.6" 
-                                               HorizontalAlignment="Center"/>
                                     
                                     <Button Content="修复FPS显示插件(Repair)" 
                                             Click="OnRepairFpsPluginClick" 
@@ -299,15 +289,6 @@
                             </Flyout>
                         </Button.Flyout>
                     </Button>
-
-                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="自动更新插件" FontWeight="SemiBold" HorizontalAlignment="Right"/>
-                            <TextBlock Text="保持你的插件始终最新" FontSize="11" Opacity="0.6" HorizontalAlignment="Right"/>
-                        </StackPanel>
-                        <ToggleSwitch IsOn="{x:Bind ViewModel.IsAutoUpdatePluginEnabled, Mode=TwoWay}" 
-                                      OnContent="" OffContent="" MinWidth="0" VerticalAlignment="Center"/>
-                    </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                         <StackPanel VerticalAlignment="Center">

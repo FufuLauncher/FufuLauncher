@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
@@ -152,7 +156,112 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private string _launchButtonOverlayColor = "#0078D7";
         [ObservableProperty] private bool _isCpuUsageWarningEnabled = true;
         [ObservableProperty] private double _cpuUsageWarningThreshold = ProcessCpuUsageMonitor.DefaultCpuThreshold;
+
+        [ObservableProperty] private bool _isRedeemCodeNotificationEnabled = true;
         
+        [ObservableProperty] private bool _isScreenshotEnabled;
+        [ObservableProperty] private string _screenshotHotkey = "F12";
+        [ObservableProperty] private string _screenshotSavePath;
+        [ObservableProperty] private bool _hasScreenshotSavePath;
+
+        partial void OnIsScreenshotEnabledChanged(bool value)
+        {
+            if (_isInitializing) return;
+            _ = _localSettingsService.SaveSettingAsync("IsScreenshotEnabled", value);
+        }
+
+        partial void OnScreenshotHotkeyChanged(string value)
+        {
+            if (_isInitializing) return;
+            _ = _localSettingsService.SaveSettingAsync("ScreenshotHotkey", value);
+        }
+
+        partial void OnScreenshotSavePathChanged(string value)
+        {
+            if (_isInitializing) return;
+            HasScreenshotSavePath = !string.IsNullOrEmpty(value);
+            _ = _localSettingsService.SaveSettingAsync("ScreenshotSavePath", value);
+        }
+
+        public IAsyncRelayCommand SelectScreenshotFolderCommand { get; }
+        public IAsyncRelayCommand ClearScreenshotFolderCommand { get; }
+        public IAsyncRelayCommand OpenScreenshotFolderCommand { get; }
+
+        [ObservableProperty] private PostLaunchBehavior _postLaunchBehavior;
+
+        public record PostLaunchBehaviorItem(string DisplayName, PostLaunchBehavior Value);
+
+        public List<PostLaunchBehaviorItem> PostLaunchBehaviorItems { get; } = new()
+        {
+            new("不变", Models.PostLaunchBehavior.None),
+            new("最小化到托盘", Models.PostLaunchBehavior.MinimizeToTray),
+            new("保存状态并退出", Models.PostLaunchBehavior.Exit)
+        };
+
+        [ObservableProperty] private PostLaunchBehaviorItem _selectedPostLaunchBehaviorItem = null!;
+
+        partial void OnSelectedPostLaunchBehaviorItemChanged(PostLaunchBehaviorItem value)
+        {
+            if (value == null) return;
+            _postLaunchBehavior = value.Value;
+            _ = _localSettingsService.SaveSettingAsync("PostLaunchBehavior", value.Value.ToString());
+        }
+
+
+
+        public ObservableCollection<NavItemConfig> NavItems { get; } = new();
+
+        public async Task InitializeNavItemsAsync()
+        {
+            var allItems = new List<NavItemConfig>
+            {
+                new() { ViewModelKey = "FufuLauncher.ViewModels.MainViewModel",       DisplayName = "主页",           IconGlyph = "\uE80F", IsForceVisible = true },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.PluginSettingsViewModel", DisplayName = "注入设置",    IconGlyph = "\uEA86" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.ControlPanelModel",   DisplayName = "控制面板",       IconGlyph = "\uE80A" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.BlankViewModel",      DisplayName = "游戏设置",       IconGlyph = "\uE7FC" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.AccountViewModel",    DisplayName = "账户设置",       IconGlyph = "\uE77B" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.OtherViewModel",      DisplayName = "其他功能",       IconGlyph = "\uE71D" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.PluginViewModel",     DisplayName = "插件管理",       IconGlyph = "\uE7B5" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.DataViewModel",       DisplayName = "数据中心",       IconGlyph = "\uE9D9" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.HelpViewModel",       DisplayName = "帮助文档",       IconGlyph = "\uE82D" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.CommunityViewModel",  DisplayName = "VanillaBBS",     IconGlyph = "\uE716" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.CalculatorViewModel",  DisplayName = "养成计算",      IconGlyph = "\uE1D0" },
+                new() { ViewModelKey = "FufuLauncher.ViewModels.SettingsViewModel",   DisplayName = "设置中心",       IconGlyph = "\uE713", IsForceVisible = true },
+            };
+
+            foreach (var item in allItems)
+            {
+                var val = await _localSettingsService.ReadSettingAsync($"NavVisible_{SanitizeKey(item.ViewModelKey)}");
+                if (val is bool b)
+                    item.IsUserVisible = b;
+                else if (val is string str && bool.TryParse(str, out var parsed))
+                    item.IsUserVisible = parsed;
+
+        
+                var captured = item;
+                item.VisibilityChanged += async (_, _) =>
+                {
+                    var key = $"NavVisible_{SanitizeKey(captured.ViewModelKey)}";
+                    await _localSettingsService.SaveSettingAsync(key, captured.IsUserVisible);
+                    WeakReferenceMessenger.Default.Send(new NavigationVisibilityChangedMessage(captured));
+                };
+
+                NavItems.Add(item);
+            }
+        }
+
+        private static string SanitizeKey(string viewModelKey)
+        {
+
+            var parts = viewModelKey.Split('.');
+            return parts[^1];
+        }
+
+        partial void OnIsRedeemCodeNotificationEnabledChanged(bool value)
+        {
+            _ = _localSettingsService.SaveSettingAsync("IsRedeemCodeNotificationEnabled", value);
+        }
+
         partial void OnIsShowWidgetCardEnabledChanged(bool value)
         {
             _ = _localSettingsService.SaveSettingAsync("IsShowWidgetCardEnabled", value);
@@ -497,6 +606,10 @@ namespace FufuLauncher.ViewModels
 
             DownloadLatestBackgroundImageCommand = new AsyncRelayCommand(DownloadLatestBackgroundImageAsync);
             DownloadLatestBackgroundVideoCommand = new AsyncRelayCommand(DownloadLatestBackgroundVideoAsync);
+
+            SelectScreenshotFolderCommand = new AsyncRelayCommand(SelectScreenshotFolderAsync);
+            ClearScreenshotFolderCommand = new AsyncRelayCommand(ClearScreenshotFolderAsync);
+            OpenScreenshotFolderCommand = new AsyncRelayCommand(OpenScreenshotFolderAsync);
         }
         
         private async Task ClearCustomBackgroundAsync()
@@ -513,6 +626,59 @@ namespace FufuLauncher.ViewModels
             {
                 Debug.WriteLine($"清除自定义背景失败: {ex.Message}");
             }
+        }
+
+        private async Task SelectScreenshotFolderAsync()
+        {
+            try
+            {
+                var folder = await _filePickerService.PickFolderAsync();
+                if (!string.IsNullOrEmpty(folder))
+                {
+                    ScreenshotSavePath = folder;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"选择截图文件夹失败: {ex.Message}");
+            }
+        }
+
+        private async Task ClearScreenshotFolderAsync()
+        {
+            ScreenshotSavePath = null;
+            HasScreenshotSavePath = false;
+            await _localSettingsService.SaveSettingAsync<string>("ScreenshotSavePath", null);
+        }
+
+        private async Task OpenScreenshotFolderAsync()
+        {
+            var path = ScreenshotSavePath;
+            if (string.IsNullOrEmpty(path))
+            {
+                path = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    "FufuScreenshots");
+            }
+
+            if (Directory.Exists(path))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = path,
+                    UseShellExecute = true
+                });
+            }
+            else
+            {
+                Directory.CreateDirectory(path);
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = path,
+                    UseShellExecute = true
+                });
+            }
+            await Task.CompletedTask;
         }
 
         private async Task DownloadLatestBackgroundImageAsync()
@@ -560,8 +726,11 @@ namespace FufuLauncher.ViewModels
         private async Task DownloadAndSaveFileAsync(string url, string typeName, string extension)
         {
             var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
-            WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
+            if (!FilePickerService.InitializeWithValidWindow(savePicker, out var saveErr))
+            {
+                ShowDialogMessage("错误", saveErr ?? "无法打开文件选择器");
+                return;
+            }
 
             savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
             if (extension == ".mp4")
@@ -797,6 +966,7 @@ namespace FufuLauncher.ViewModels
             {
                 await LoadUserPreferencesAsync();
                 await LoadCustomBackgroundSettingsAsync();
+                await InitializeNavItemsAsync();
                 
                 OnPropertyChanged(nameof(IsStartupSoundEnabled));
                 OnPropertyChanged(nameof(StartupSoundPath));
@@ -835,6 +1005,7 @@ namespace FufuLauncher.ViewModels
                 OnPropertyChanged(nameof(AppProcessPriority));
                 OnPropertyChanged(nameof(IsCpuUsageWarningEnabled));
                 OnPropertyChanged(nameof(CpuUsageWarningThreshold));
+                OnPropertyChanged(nameof(IsRedeemCodeNotificationEnabled));
                 LoadMonitors();
             }
             finally
@@ -923,11 +1094,32 @@ namespace FufuLauncher.ViewModels
             var cpuWarningEnabledJson = await _localSettingsService.ReadSettingAsync(ProcessCpuUsageMonitor.IsEnabledSettingKey);
             IsCpuUsageWarningEnabled = cpuWarningEnabledJson == null || Convert.ToBoolean(cpuWarningEnabledJson);
 
-            var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(ProcessCpuUsageMonitor.ThresholdSettingKey);
+var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(ProcessCpuUsageMonitor.ThresholdSettingKey);
             CpuUsageWarningThreshold = cpuWarningThresholdJson != null
                 ? Math.Clamp(Convert.ToDouble(cpuWarningThresholdJson), 5.0, 100.0)
                 : ProcessCpuUsageMonitor.DefaultCpuThreshold;
-            
+
+            var redeemNotifyJson = await _localSettingsService.ReadSettingAsync("IsRedeemCodeNotificationEnabled");
+            IsRedeemCodeNotificationEnabled = redeemNotifyJson == null || Convert.ToBoolean(redeemNotifyJson);
+
+            var behaviorJson = await _localSettingsService.ReadSettingAsync("PostLaunchBehavior");
+            PostLaunchBehavior postLaunchBehavior = PostLaunchBehavior.None;
+            if (behaviorJson is string behaviorStr && Enum.TryParse<PostLaunchBehavior>(behaviorStr, out var parsed))
+                postLaunchBehavior = parsed;
+            _postLaunchBehavior = postLaunchBehavior;
+            SelectedPostLaunchBehaviorItem = PostLaunchBehaviorItems.First(i => i.Value == postLaunchBehavior);
+
+            // 截图设置
+            var screenshotEnabledJson = await _localSettingsService.ReadSettingAsync("IsScreenshotEnabled");
+            IsScreenshotEnabled = screenshotEnabledJson != null && Convert.ToBoolean(screenshotEnabledJson);
+
+            var screenshotHotkeyJson = await _localSettingsService.ReadSettingAsync("ScreenshotHotkey");
+            ScreenshotHotkey = screenshotHotkeyJson?.ToString() ?? "F12";
+
+            var screenshotPathJson = await _localSettingsService.ReadSettingAsync("ScreenshotSavePath");
+            ScreenshotSavePath = screenshotPathJson?.ToString();
+            HasScreenshotSavePath = !string.IsNullOrEmpty(ScreenshotSavePath);
+
             var customExeJson = await _localSettingsService.ReadSettingAsync(GameExeManager.CustomExeNameKey);
             CustomGameExeName = customExeJson?.ToString() ?? string.Empty;
 
@@ -1759,3 +1951,4 @@ namespace FufuLauncher.ViewModels
         }
     }
 }
+

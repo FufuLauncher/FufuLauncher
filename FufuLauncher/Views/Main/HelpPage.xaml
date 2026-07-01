@@ -12,7 +12,7 @@
                              Storyboard.TargetProperty="Opacity"
                              From="0" To="1" Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -21,7 +21,7 @@
                              Storyboard.TargetProperty="Opacity"
                              From="1" To="0" Duration="0:0:0.3">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn"/>
+                    <CubicEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
@@ -29,19 +29,19 @@
 
     <Grid x:Name="RootLayoutGrid" Opacity="0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="320" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="0,0,1,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TextBox x:Name="SearchBox" 
-                     PlaceholderText="搜索标题、文件名或内容..." 
-                     TextChanged="SearchBox_TextChanged" 
+            <TextBox x:Name="SearchBox"
+                     PlaceholderText="搜索标题、文件名或内容..."
+                     TextChanged="SearchBox_TextChanged"
                      Margin="16,16,16,8">
                 <FlyoutBase.AttachedFlyout>
                     <Flyout x:Name="DocSearchResultsFlyout"
@@ -62,14 +62,14 @@
                                 CornerRadius="8">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <TextBlock x:Name="SearchFlyoutSummary"
                                            Grid.Row="0"
                                            Margin="16,8,16,4"
                                            FontSize="12"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <ListView x:Name="SearchHitsList"
                                           Grid.Row="1"
                                           MaxHeight="380"
@@ -90,17 +90,17 @@
                                             <StackPanel Padding="12,10" Spacing="4">
                                                 <TextBlock Text="{x:Bind Title}"
                                                            FontWeight="SemiBold"
-                                                           TextWrapping="Wrap"/>
+                                                           TextWrapping="Wrap" />
                                                 <TextBlock Text="{x:Bind Subtitle}"
                                                            FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                           TextWrapping="Wrap"/>
+                                                           TextWrapping="Wrap" />
                                                 <TextBlock Text="{x:Bind Preview}"
                                                            FontSize="12"
                                                            Opacity="0.92"
                                                            TextWrapping="Wrap"
                                                            MaxLines="4"
-                                                           TextTrimming="CharacterEllipsis"/>
+                                                           TextTrimming="CharacterEllipsis" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -111,7 +111,7 @@
                 </FlyoutBase.AttachedFlyout>
             </TextBox>
 
-            <TreeView x:Name="DirectoryTreeView" 
+            <TreeView x:Name="DirectoryTreeView"
                       Grid.Row="1"
                       SelectionMode="Single"
                       ItemInvoked="DirectoryTreeView_ItemInvoked"
@@ -123,11 +123,11 @@
                     </DataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
-            
-            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}" 
+
+            <ProgressRing IsActive="{x:Bind ViewModel.IsLoading, Mode=OneWay}"
                           Grid.Row="1"
-                          HorizontalAlignment="Center" 
-                          VerticalAlignment="Center"/>
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center" />
         </Grid>
 
         <ScrollViewer Grid.Column="1"
@@ -136,17 +136,17 @@
                       VerticalScrollBarVisibility="Auto">
             <Grid Padding="40,32,40,40" MaxWidth="1200" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0"
-                           Text="{x:Bind ViewModel.CurrentTitle, Mode=OneWay}" 
-                           FontSize="28" 
-                           FontWeight="Bold" 
-                           TextWrapping="Wrap" 
-                           Margin="0,0,0,12"/>
+                           Text="{x:Bind ViewModel.CurrentTitle, Mode=OneWay}"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,12" />
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="16" Margin="0,0,0,24" Opacity="0.6">
                     <TextBlock Text="{x:Bind ViewModel.CurrentAuthor, Mode=OneWay}" />
@@ -154,35 +154,35 @@
                 </StackPanel>
 
                 <controls:MarkdownTextBlock x:Name="HelpMarkdown"
-                    Grid.Row="2"
-                    Text="{x:Bind ViewModel.MarkdownContent, Mode=OneWay}"
-                    UriPrefix="{x:Bind ViewModel.MarkdownUriPrefix, Mode=OneWay}"
-                    FontSize="14"
-                    Background="Transparent"
-                    TextWrapping="Wrap"
-                    HorizontalAlignment="Stretch"
-                    IsTextSelectionEnabled="False"
-                    UseSyntaxHighlighting="True"
-                    WrapCodeBlock="True"
-                    ImageStretch="Uniform"
-                    ImageMaxWidth="800"
-                    ImageMaxHeight="1600"
-                    SizeChanged="HelpMarkdown_SizeChanged"
-                    LinkClicked="HelpMarkdown_LinkClicked"
-                    
-                    CodeBackground="{ThemeResource ControlFillColorDefaultBrush}"
-                    CodeBorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    CodeBorderThickness="1"
-                    CodePadding="16"
-                    CodeMargin="0,12,0,12"
-                    CodeForeground="{ThemeResource TextFillColorPrimaryBrush}"
-                    CodeFontFamily="Consolas, Courier New, monospace"
-                    
-                    InlineCodeBackground="{ThemeResource ControlFillColorDefaultBrush}"
-                    InlineCodeBorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    InlineCodeBorderThickness="1"
-                    InlineCodePadding="6,2,6,2"
-                    InlineCodeFontFamily="Consolas, Courier New, monospace"/>
+                                            Grid.Row="2"
+                                            Text="{x:Bind ViewModel.MarkdownContent, Mode=OneWay}"
+                                            UriPrefix="{x:Bind ViewModel.MarkdownUriPrefix, Mode=OneWay}"
+                                            FontSize="14"
+                                            Background="Transparent"
+                                            TextWrapping="Wrap"
+                                            HorizontalAlignment="Stretch"
+                                            IsTextSelectionEnabled="False"
+                                            UseSyntaxHighlighting="True"
+                                            WrapCodeBlock="True"
+                                            ImageStretch="Uniform"
+                                            ImageMaxWidth="800"
+                                            ImageMaxHeight="1600"
+                                            SizeChanged="HelpMarkdown_SizeChanged"
+                                            LinkClicked="HelpMarkdown_LinkClicked"
+
+                                            CodeBackground="{ThemeResource ControlFillColorDefaultBrush}"
+                                            CodeBorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                            CodeBorderThickness="1"
+                                            CodePadding="16"
+                                            CodeMargin="0,12,0,12"
+                                            CodeForeground="{ThemeResource TextFillColorPrimaryBrush}"
+                                            CodeFontFamily="Consolas, Courier New, monospace"
+
+                                            InlineCodeBackground="{ThemeResource ControlFillColorDefaultBrush}"
+                                            InlineCodeBorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                            InlineCodeBorderThickness="1"
+                                            InlineCodePadding="6,2,6,2"
+                                            InlineCodeFontFamily="Consolas, Courier New, monospace" />
             </Grid>
         </ScrollViewer>
     </Grid>

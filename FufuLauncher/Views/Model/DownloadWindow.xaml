@@ -8,73 +8,77 @@
     Title="资源下载器">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> 
-            <RowDefinition Height="*"/>    
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="40" Background="Transparent">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0" Spacing="8">
-                <TextBlock Text="资源下载器" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                <TextBlock Text="资源下载器" VerticalAlignment="Center" FontWeight="SemiBold" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1" Margin="32,12,32,32">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/> <RowDefinition Height="Auto"/> <RowDefinition Height="*"/>    <RowDefinition Height="Auto"/> </Grid.RowDefinitions>
+                <RowDefinition Height="Auto" /> <RowDefinition Height="Auto" /> <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Margin="0,0,0,24">
-                <TextBlock Text="游戏资源更新" FontWeight="Bold" FontSize="28"/>
-                <TextBlock Text="在下载中卡是正常的" Opacity="0.6" FontSize="14"/>
+                <TextBlock Text="游戏资源更新" FontWeight="Bold" FontSize="28" />
+                <TextBlock Text="在下载中卡是正常的" Opacity="0.6" FontSize="14" />
             </StackPanel>
 
             <Grid Grid.Row="1" Margin="0,0,0,24" ColumnSpacing="16" RowSpacing="12">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                
-                <TextBox x:Name="PathBox" Grid.Row="0" Grid.Column="0" Header="安装目录" IsReadOnly="True"/>
-                <ComboBox x:Name="LanguageCombo" Grid.Row="0" Grid.Column="1" Header="语音包语言" SelectedIndex="0" HorizontalAlignment="Stretch">
-                    <ComboBoxItem Content="简体中文 (zh-cn)" Tag="zh-cn"/>
-                    <ComboBoxItem Content="English (en-us)" Tag="en-us"/>
-                    <ComboBoxItem Content="日本語 (ja-jp)" Tag="ja-jp"/>
-                    <ComboBoxItem Content="한국어 (ko-kr)" Tag="ko-kr"/>
+
+                <TextBox x:Name="PathBox" Grid.Row="0" Grid.Column="0" Header="安装目录" IsReadOnly="True" />
+                <ComboBox x:Name="LanguageCombo" Grid.Row="0" Grid.Column="1" Header="语音包语言" SelectedIndex="0"
+                          HorizontalAlignment="Stretch">
+                    <ComboBoxItem Content="简体中文 (zh-cn)" Tag="zh-cn" />
+                    <ComboBoxItem Content="English (en-us)" Tag="en-us" />
+                    <ComboBoxItem Content="日本語 (ja-jp)" Tag="ja-jp" />
+                    <ComboBoxItem Content="한국어 (ko-kr)" Tag="ko-kr" />
                 </ComboBox>
 
                 <CheckBox x:Name="BaseGameCheck" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                           IsChecked="True" Content="下载游戏本体数据 (Base Game)"
-                          ToolTipService.ToolTip="取消勾选则只更新语音包"/>
+                          ToolTipService.ToolTip="取消勾选则只更新语音包" />
             </Grid>
 
             <Grid Grid.Row="2" Margin="0,0,0,16">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <ToggleButton x:Name="LogToggle" Content="显示详细日志" Click="LogToggle_Click" Height="32" Margin="0,0,0,8"/>
+                <ToggleButton x:Name="LogToggle" Content="显示详细日志" Click="LogToggle_Click" Height="32" Margin="0,0,0,8" />
                 <Border x:Name="LogBorder" Grid.Row="1" Visibility="Collapsed"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="4"
                         Background="{ThemeResource LayerFillColorDefaultBrush}">
                     <ScrollViewer x:Name="LogScroller" Padding="8">
-                        <TextBlock x:Name="LogBlock" FontFamily="Consolas" FontSize="12" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="LogBlock" FontFamily="Consolas" FontSize="12" TextWrapping="Wrap" />
                     </ScrollViewer>
                 </Border>
             </Grid>
 
             <StackPanel Grid.Row="3" Spacing="8">
                 <Grid>
-                    <TextBlock x:Name="StatusText" Text="准备就绪" FontWeight="SemiBold"/>
-                    <TextBlock x:Name="ProgressText" Text="0%" HorizontalAlignment="Right" Opacity="0.7"/>
+                    <TextBlock x:Name="StatusText" Text="准备就绪" FontWeight="SemiBold" />
+                    <TextBlock x:Name="ProgressText" Text="0%" HorizontalAlignment="Right" Opacity="0.7" />
                 </Grid>
-                <ProgressBar x:Name="MainProgressBar" Maximum="100" Height="8" CornerRadius="4"/>
+                <ProgressBar x:Name="MainProgressBar" Maximum="100" Height="8" CornerRadius="4" />
                 <Grid Margin="0,16,0,0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="16">
-                        <Button x:Name="StartButton" Content="开始下载" Click="StartButton_Click" Width="120" Height="36"/>
-                        <Button x:Name="CancelButton" Content="取消" Click="CancelButton_Click" IsEnabled="False" Width="100" Height="36"/>
+                        <Button x:Name="StartButton" Content="开始下载" Click="StartButton_Click" Width="120" Height="36" />
+                        <Button x:Name="CancelButton" Content="取消" Click="CancelButton_Click" IsEnabled="False"
+                                Width="100" Height="36" />
                     </StackPanel>
                 </Grid>
             </StackPanel>

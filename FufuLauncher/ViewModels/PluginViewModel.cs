@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -6,6 +10,7 @@ using System.Text;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using FufuLauncher.Models;
+using FufuLauncher.Services;
 using Windows.Storage.Pickers;
 
 namespace FufuLauncher.ViewModels;
@@ -249,8 +254,11 @@ public class PluginViewModel : INotifyPropertyChanged
         try
         {
             var picker = new FileOpenPicker();
-            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
-            WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
+            if (!FilePickerService.InitializeWithValidWindow(picker, out var pluginErr))
+            {
+                StatusMessage = pluginErr ?? "无法打开文件选择器";
+                return;
+            }
 
             picker.ViewMode = PickerViewMode.List;
             picker.SuggestedStartLocation = PickerLocationId.ComputerFolder;

@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
+using System.Collections.ObjectModel;
 using FufuLauncher.Activation;
 using FufuLauncher.Models;
 using Microsoft.UI;
@@ -16,20 +20,23 @@ namespace FufuLauncher.Views;
 
 public sealed partial class ScreenshotGalleryWindow : Window
 {
-    private readonly string _screenshotDirectory;
+    private readonly string _gameScreenshotDirectory;
+    private readonly string _customScreenshotDirectory;
     private readonly ObservableCollection<ScreenshotGroup> _galleryData = new();
     private readonly ObservableCollection<ScreenshotItem> _flatItems = new();
     private ScreenshotItem? _currentDetailItem;
     private AppWindow _appWindow;
-    private FileSystemWatcher? _fileWatcher;
+    private FileSystemWatcher? _gameFileWatcher;
+    private FileSystemWatcher? _customFileWatcher;
     private Timer? _debounceTimer;
 
     private const string ConnectedAnimationKey = "ForwardConnectedAnimation";
 
-    public ScreenshotGalleryWindow(string screenshotDirectory)
+    public ScreenshotGalleryWindow(string gameScreenshotDirectory, string customScreenshotDirectory)
     {
         this.InitializeComponent();
-        _screenshotDirectory = screenshotDirectory;
+        _gameScreenshotDirectory = gameScreenshotDirectory;
+        _customScreenshotDirectory = customScreenshotDirectory;
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(null);
@@ -40,20 +47,36 @@ public sealed partial class ScreenshotGalleryWindow : Window
         RootGrid.Loaded += async (s, e) =>
         {
             await RefreshViewAfterDataChangedAsync();
-            _fileWatcher = new FileSystemWatcher(_screenshotDirectory, "*.png")
-            {
-                NotifyFilter = NotifyFilters.FileName | NotifyFilters.CreationTime,
-                EnableRaisingEvents = true
-            };
 
-            _fileWatcher.Created += (s, e) => DebounceRefresh();
-            _fileWatcher.Deleted += (s, e) => DebounceRefresh();
-            _fileWatcher.Renamed += (s, e) => DebounceRefresh();
+            if (Directory.Exists(_gameScreenshotDirectory))
+            {
+                _gameFileWatcher = new FileSystemWatcher(_gameScreenshotDirectory, "*.png")
+                {
+                    NotifyFilter = NotifyFilters.FileName | NotifyFilters.CreationTime,
+                    EnableRaisingEvents = true
+                };
+                _gameFileWatcher.Created += (s, e) => DebounceRefresh();
+                _gameFileWatcher.Deleted += (s, e) => DebounceRefresh();
+                _gameFileWatcher.Renamed += (s, e) => DebounceRefresh();
+            }
+
+            if (Directory.Exists(_customScreenshotDirectory))
+            {
+                _customFileWatcher = new FileSystemWatcher(_customScreenshotDirectory, "*.png")
+                {
+                    NotifyFilter = NotifyFilters.FileName | NotifyFilters.CreationTime,
+                    EnableRaisingEvents = true
+                };
+                _customFileWatcher.Created += (s, e) => DebounceRefresh();
+                _customFileWatcher.Deleted += (s, e) => DebounceRefresh();
+                _customFileWatcher.Renamed += (s, e) => DebounceRefresh();
+            }
         };
 
         this.Closed += (s, e) =>
         {
-            _fileWatcher?.Dispose();
+            _gameFileWatcher?.Dispose();
+            _customFileWatcher?.Dispose();
             _debounceTimer?.Dispose();
         };
     }
@@ -103,32 +126,47 @@ public sealed partial class ScreenshotGalleryWindow : Window
         _galleryData.Clear();
         _flatItems.Clear();
 
-        if (!Directory.Exists(_screenshotDirectory)) return;
-
-        var filesInfo = await Task.Run(() =>
+        var allFiles = new List<(FileInfo file, string sourceLabel)>();
+        
+        if (Directory.Exists(_gameScreenshotDirectory))
         {
-            try
+            var gameFiles = await Task.Run(() =>
             {
-                return Directory.GetFiles(_screenshotDirectory, "*.png", SearchOption.TopDirectoryOnly)
-                    .Select(f => new FileInfo(f))
-                    .OrderByDescending(f => f.CreationTime)
-                    .ToList();
-            }
-            catch (Exception ex)
+                try
+                {
+                    return Directory.GetFiles(_gameScreenshotDirectory, "*.png", SearchOption.TopDirectoryOnly)
+                        .Select(f => new FileInfo(f))
+                        .ToList();
+                }
+                catch { return new List<FileInfo>(); }
+            });
+            allFiles.AddRange(gameFiles.Select(f => (f, "游戏截图")));
+        }
+        
+        if (Directory.Exists(_customScreenshotDirectory))
+        {
+            var customFiles = await Task.Run(() =>
             {
-                System.Diagnostics.Debug.WriteLine($"读取目录失败: {ex.Message}");
-                return new List<FileInfo>();
-            }
-        });
+                try
+                {
+                    return Directory.GetFiles(_customScreenshotDirectory, "*.png", SearchOption.TopDirectoryOnly)
+                        .Select(f => new FileInfo(f))
+                        .ToList();
+                }
+                catch { return new List<FileInfo>(); }
+            });
+            allFiles.AddRange(customFiles.Select(f => (f, "启动器截图")));
+        }
 
-        if (!filesInfo.Any()) return;
-
-        var groupedFiles = filesInfo.GroupBy(f => f.CreationTime.ToString("yyyy年MM月dd日"));
+        if (!allFiles.Any()) return;
+        
+        var sorted = allFiles.OrderByDescending(x => x.file.CreationTime).ToList();
+        var groupedFiles = sorted.GroupBy(x => x.file.CreationTime.ToString("yyyy年MM月dd日"));
 
         foreach (var group in groupedFiles)
         {
             var folderGroup = new ScreenshotGroup { DateKey = group.Key };
-            foreach (var file in group)
+            foreach (var (file, sourceLabel) in group)
             {
                 var bitmap = new BitmapImage(new Uri(file.FullName));
                 var item = new ScreenshotItem
@@ -136,17 +174,16 @@ public sealed partial class ScreenshotGalleryWindow : Window
                     FilePath = file.FullName,
                     FileName = file.Name,
                     CreationTime = file.CreationTime,
-                    ImageSource = bitmap
+                    ImageSource = bitmap,
+                    SourceLabel = sourceLabel
                 };
                 folderGroup.Items.Add(item);
                 _flatItems.Add(item);
-
             }
             _galleryData.Add(folderGroup);
         }
 
         GalleryViewSource.Source = _galleryData;
-
     }
 
     private void GridItem_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -319,23 +356,28 @@ public sealed partial class ScreenshotGalleryWindow : Window
     {
         await LoadScreenshotsAsync();
 
-        // 根据当前数据状态切换视图
+        bool gameExists = Directory.Exists(_gameScreenshotDirectory);
+        bool customExists = Directory.Exists(_customScreenshotDirectory);
+        
+        if (!gameExists && !customExists)
+        {
+            EmptyStateGrid.Visibility = Visibility.Visible;
+            GalleryGridView.Visibility = Visibility.Collapsed;
+            return;
+        }
+        
         var hasItems = _galleryData.Count > 0;
         EmptyStateGrid.Visibility = hasItems ? Visibility.Collapsed : Visibility.Visible;
         GalleryGridView.Visibility = hasItems ? Visibility.Visible : Visibility.Collapsed;
 
-
-        // 未显示详情页时，直接返回
+        
         if (DetailOverlayGrid.Visibility != Visibility.Visible)
         {
             _currentDetailItem = null;
             DetailImageViewer.SelectedItem = null;
             return;
         }
-
-        // 详情页的操作
-
-        // 图片列表空了，返回列表视图喵
+        
         if (_flatItems.Count == 0)
         {
             DetailOverlayGrid.Visibility = Visibility.Collapsed;
@@ -349,7 +391,6 @@ public sealed partial class ScreenshotGalleryWindow : Window
 
         if (_currentDetailItem is not null && !string.IsNullOrWhiteSpace(_currentDetailItem.FilePath))
         {
-            // 要确定下一项的显示喵：如果当前是最后一张，则返回上一张，否则返回下一张
             var nextIndex = Math.Clamp(_flatItems.IndexOf(_currentDetailItem) + 1, 0, _flatItems.Count - 1);
             nextItem = _flatItems[nextIndex];
         }
@@ -429,15 +470,14 @@ public sealed partial class ScreenshotGalleryWindow : Window
 
     private void OpenEmptyFolder_Click(object sender, RoutedEventArgs e)
     {
-        if (!Directory.Exists(_screenshotDirectory)) return;
-
-        try
+        if (Directory.Exists(_gameScreenshotDirectory))
         {
-            System.Diagnostics.Process.Start("explorer.exe", _screenshotDirectory);
+            try { System.Diagnostics.Process.Start("explorer.exe", _gameScreenshotDirectory); } catch { }
+            return;
         }
-        catch (Exception ex)
+        if (Directory.Exists(_customScreenshotDirectory))
         {
-            System.Diagnostics.Debug.WriteLine($"系统文件夹打开失败: {ex.Message}");
+            try { System.Diagnostics.Process.Start("explorer.exe", _customScreenshotDirectory); } catch { }
         }
     }
 }

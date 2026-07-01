@@ -1,3 +1,7 @@
+﻿/*
+Copyright (c) FufuLauncher Dev Team. All rights reserved.
+Licensed under the MIT License.
+*/
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,71 +20,87 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using FufuLauncher.Constants;
+using FufuLauncher.Contracts.Services;
 using FufuLauncher.Services;
+using FufuLauncher.Services.MiHoYo;
 using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace FufuLauncher.Views
 {
     public sealed partial class BBSWindow : Window
     {
+        #region 
         private AppWindow m_AppWindow;
-        private static readonly System.Threading.SemaphoreSlim _fetchApiSemaphore = new System.Threading.SemaphoreSlim(1, 1);
-        
+
         private byte[] _screenshotBytes;
 
-        private const string CNVersion = "2.102.1";
+        private const string CNVersion = "2.109.0";
         private const string CNK2 = "lX8m5VO5at5JG7hR8hzqFwzyL5aB1tYo";
         private const string CNLK2 = "yBh10ikxtLPoIhgwgPZSv5dmfaOTSJ6a";
         private const string CNX4 = "xV8v4Qu54lUKrEYFZkJhB8cuOh9Asafs";
+        private const string CNX6 = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
+        private const string ToolVersion = "v6.6.1-gr-cn";
+        private const string Page = "v6.6.1-gr-cn_#/ys";
 
         private class ClientConfig
         {
-            public string ClientType { get; set; }     
-            public string AppVersion { get; set; }     
-            public string Salt { get; set; }           
-            public string UserAgent { get; set; }      
-            public string DeviceModel { get; set; }    
-            public string SysVersion { get; set; }     
-            public bool UseDS2 { get; set; }           
+            public string ClientType { get; set; }
+            public string AppVersion { get; set; }
+            public string Salt { get; set; }
+            public string UserAgent { get; set; }
+            public bool UseDS2 { get; set; }
         }
-        
+
         private readonly Dictionary<string, ClientConfig> _clientConfigs = new()
         {
-            ["2"] = new ClientConfig 
+            ["2"] = new ClientConfig
             {
                 ClientType = "2",
-                AppVersion = CNVersion, 
-                Salt = CNLK2, 
-                UserAgent = $"Mozilla/5.0 (Linux; Android 15) Mobile miHoYoBBS/{CNVersion}",
-                DeviceModel = "Mi 10",
-                SysVersion = "15",
+                AppVersion = CNVersion,
+                Salt = CNLK2,
+                UserAgent = "",
                 UseDS2 = false
             },
-            ["5"] = new ClientConfig 
+            ["5"] = new ClientConfig
             {
                 ClientType = "5",
                 AppVersion = CNVersion,
-                Salt = CNX4, 
-                UserAgent = $"Mozilla/5.0 (Linux; Android 15) Mobile miHoYoBBS/{CNVersion}",
-                DeviceModel = "Mi 10",
-                SysVersion = "15",
+                Salt = CNX4,
+                UserAgent = "",
                 UseDS2 = true
             }
         };
 
+       
+        private static readonly (string prefix, string clientType)[] ApiRouteMap =
+        {
+            ("/game_record/app/genshin/api/", "5"),
+            ("/record/", "5"),
+            ("/game_record/", "5"),
+            ("/event/", "2"),
+            ("/community/", "2"),
+        };
+
         private ClientConfig _currentConfig;
-        private readonly string _deviceId;
-        private readonly string _deviceId36;
+        private string _deviceId = "";          
         private Dictionary<string, string> cookieDic = new();
 
-        private const string DefaultUrl = ApiEndpoints.BbsDefaultUrl;
+        private readonly IDeviceFingerprintService _fingerprintService;
+        private static readonly DeviceProfileService _deviceProfileService = new();
+        private string _deviceName = "";
+        private string _sysVersion = "";
+        private string _deviceUserAgent = "";
+
+        private string _activeDeviceFp = string.Empty;
         
+        private const string DefaultUrl = ApiEndpoints.BbsDefaultUrl;
+
         private const string HideScrollBarScript = """
             let hideStyle = document.createElement('style');
             hideStyle.innerHTML = '::-webkit-scrollbar{ display:none }';
             document.querySelector('body').appendChild(hideStyle);
             """;
-        
+
         private const string MiHoYoJSInterfaceScript = """
             if (typeof window.MiHoYoJSInterface === 'undefined') {
                 window.MiHoYoJSInterface = {
@@ -102,6 +122,13 @@ namespace FufuLauncher.Views
             document.addEventListener('mousedown', mouseDownListener);
             """;
 
+        private const string HideWebViewTracesScript = """
+            Object.defineProperty(navigator, 'webdriver', { get: () => false });
+            Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+            """;
+        #endregion
+
+        #region
         public BBSWindow() : this(true)
         {
         }
@@ -109,12 +136,37 @@ namespace FufuLauncher.Views
         private BBSWindow(bool autoInitialize)
         {
             InitializeComponent();
-            
-            _deviceId36 = GetStableGuid();
-            _deviceId = GenerateDeviceId40(_deviceId36);
-            
-            _currentConfig = _clientConfigs["2"]; 
-            
+
+            _fingerprintService = App.GetService<IDeviceFingerprintService>();
+
+            // 统一设备档案：和 DailyNoteService 使用同一套
+            var accountManager = App.GetService<AccountManager>();
+            var activeId = accountManager.ActiveAccountId;
+            if (!string.IsNullOrEmpty(activeId))
+            {
+                _deviceId = DeviceProfileService.GetDeviceIdForAccount(activeId);
+                var profile = _deviceProfileService.SelectProfile(activeId);
+                _deviceName = profile.DeviceName;
+                _sysVersion = profile.SysVersion;
+                _deviceUserAgent = profile.UserAgent;
+            }
+            else
+            {
+                
+                _deviceId = Guid.NewGuid().ToString();
+                _deviceName = "Xiaomi%2024031PN0DC";
+                _sysVersion = "12";
+                _deviceUserAgent = $"Mozilla/5.0 (Linux; Android 12; 24031PN0DC Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/110.0.5481.154 Safari/537.36 miHoYoBBS/{CNVersion}";
+            }
+
+          
+            foreach (var config in _clientConfigs.Values)
+            {
+                config.UserAgent = _deviceUserAgent;
+            }
+
+            _currentConfig = _clientConfigs["2"];
+
             InitializeWindowStyle();
             UrlTextBox.Text = DefaultUrl;
 
@@ -122,27 +174,6 @@ namespace FufuLauncher.Views
             {
                 _ = InitializeWebViewAsync();
             }
-        }
-
-        private string GetStableGuid()
-        {
-            string machineName = Environment.MachineName;
-            string userName = Environment.UserName;
-            byte[] hash = MD5.HashData(Encoding.UTF8.GetBytes(machineName + userName + "FufuBBS"));
-            return new Guid(hash).ToString();
-        }
-
-        private static string GenerateDeviceId40(string baseGuid)
-        {
-            byte[] namespaceBytes = Guid.Parse("9450ea74-be9c-35c0-9568-f97407856768").ToByteArray();
-            byte[] nameBytes = Encoding.UTF8.GetBytes(baseGuid);
-            byte[] hash = SHA1.HashData(namespaceBytes.Concat(nameBytes).ToArray());
-            Array.Resize(ref hash, 16);
-            hash[7] = (byte)((hash[7] & 0x0F) | 0x50);
-            hash[8] = (byte)((hash[8] & 0x3F) | 0x80);
-            
-            byte[] finalHash = SHA1.HashData(hash);
-            return Convert.ToHexString(finalHash).ToLowerInvariant();
         }
 
         private void InitializeWindowStyle()
@@ -153,7 +184,7 @@ namespace FufuLauncher.Views
             {
                 var targetHeight = (int)(displayArea.WorkArea.Height * 0.8);
                 var targetWidth = (int)(targetHeight * 9.0 / 16.0);
-                
+
                 m_AppWindow.Resize(new SizeInt32(targetWidth, targetHeight));
                 m_AppWindow.Move(new PointInt32(
                     (displayArea.WorkArea.Width - targetWidth) / 2 + displayArea.WorkArea.X,
@@ -169,23 +200,29 @@ namespace FufuLauncher.Views
             }
         }
 
+        #endregion
+
         private async Task InitializeWebViewAsync()
         {
             try
             {
+               
+                await EnsureDeviceFpAsync();
+
                 await BBSWebView.EnsureCoreWebView2Async();
                 UpdateWebViewSettings();
-                
+
                 BBSWebView.CoreWebView2.AddWebResourceRequestedFilter("*://*.mihoyo.com/*", CoreWebView2WebResourceContext.All);
                 BBSWebView.CoreWebView2.AddWebResourceRequestedFilter("*://*.hoyolab.com/*", CoreWebView2WebResourceContext.All);
-                
+
                 BBSWebView.CoreWebView2.WebResourceRequested += CoreWebView2_WebResourceRequested;
                 BBSWebView.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
                 BBSWebView.CoreWebView2.DOMContentLoaded += CoreWebView2_DOMContentLoaded;
                 BBSWebView.CoreWebView2.SourceChanged += CoreWebView2_SourceChanged;
-                
+
                 await BBSWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(MiHoYoJSInterfaceScript);
                 await BBSWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(TabKeyInterceptorScript);
+                await BBSWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(HideWebViewTracesScript);
 
                 await LoadPageAsync(DefaultUrl);
             }
@@ -194,8 +231,52 @@ namespace FufuLauncher.Views
                 System.Diagnostics.Debug.WriteLine($"WebView Init Failed: {ex.Message}");
             }
         }
-        
-        
+
+
+        private async Task EnsureDeviceFpAsync()
+        {
+            try
+            {
+                var accountManager = App.GetService<AccountManager>();
+                var activeId = accountManager.ActiveAccountId;
+                if (string.IsNullOrEmpty(activeId))
+                {
+                    System.Diagnostics.Debug.WriteLine("[BBSWindow] 无活跃账号，跳过指纹获取");
+                    return;
+                }
+
+                var cookies = await accountManager.LoadCookiesAsync(activeId);
+                if (cookies == null || cookies.Count == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine("[BBSWindow] 无可用 Cookies，跳过指纹获取");
+                    return;
+                }
+
+                _activeDeviceFp = await _fingerprintService.GetOrRegisterFingerprintAsync(activeId, cookies);
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] 活跃账号指纹已获取: {_activeDeviceFp}");
+
+                if (!string.IsNullOrEmpty(_activeDeviceFp))
+                {
+                    cookieDic["DEVICEFP"] = _activeDeviceFp;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[BBSWindow] EnsureDeviceFpAsync 失败: {ex.Message}");
+            }
+        }
+
+        private void UpdateWebViewSettings()
+        {
+            if (BBSWebView?.CoreWebView2 != null)
+            {
+                BBSWebView.CoreWebView2.Settings.UserAgent = _currentConfig.UserAgent;
+                BBSWebView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+                BBSWebView.CoreWebView2.Settings.IsStatusBarEnabled = false;
+                BBSWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
+            }
+        }
+
         private void ToggleTopBar()
         {
             TopBarGrid.Visibility = TopBarGrid.Visibility == Visibility.Visible
@@ -221,14 +302,17 @@ namespace FufuLauncher.Views
                                                        });
                                                        """;
 
-        private void UpdateWebViewSettings()
+
+        private ClientConfig SelectConfig(string uri)
         {
-            if (BBSWebView?.CoreWebView2 != null)
+            foreach (var (prefix, clientType) in ApiRouteMap)
             {
-                BBSWebView.CoreWebView2.Settings.UserAgent = _currentConfig.UserAgent;
+                if (uri.Contains(prefix))
+                    return _clientConfigs[clientType];
             }
+            return _clientConfigs["2"]; // 默认 DS1
         }
-        
+
         private async void CoreWebView2_WebResourceRequested(CoreWebView2 sender, CoreWebView2WebResourceRequestedEventArgs args)
         {
             var deferral = args.GetDeferral();
@@ -240,29 +324,49 @@ namespace FufuLauncher.Views
                 }
 
                 var uri = args.Request.Uri;
-                
                 bool isApiRequest = uri.Contains("/api/") || uri.Contains("/community/") || uri.Contains("/record/") || uri.Contains("/event/");
 
                 if (isApiRequest && (uri.Contains("mihoyo.com") || uri.Contains("hoyolab.com")))
                 {
                     var headers = args.Request.Headers;
+                    var config = SelectConfig(uri);
+
+                   
                     headers.RemoveHeader("x-rpc-client_type");
                     headers.RemoveHeader("x-rpc-app_version");
                     headers.RemoveHeader("DS");
-                    
-                    headers.SetHeader("x-rpc-app_id", "bll8iq97cem8");
-                    headers.SetHeader("x-rpc-client_type", _currentConfig.ClientType);
-                    headers.SetHeader("x-rpc-app_version", _currentConfig.AppVersion);
-                    headers.SetHeader("x-rpc-device_id", _deviceId36);
-                    headers.SetHeader("x-rpc-sdk_version", "2.16.0");
+                    headers.RemoveHeader("x-rpc-device_id");
+                    headers.RemoveHeader("x-rpc-device_fp");
+                    headers.RemoveHeader("x-rpc-device_name");
+                    headers.RemoveHeader("x-rpc-sys_version");
+                    headers.RemoveHeader("x-rpc-tool_verison");
+                    headers.RemoveHeader("x-rpc-page");
+                    headers.RemoveHeader("x-rpc-sdk_version");
+                    headers.RemoveHeader("X-Requested-With");
 
-                    if (cookieDic.TryGetValue("DEVICEFP", out var fp) && !string.IsNullOrWhiteSpace(fp))
+                  
+                    headers.SetHeader("x-rpc-client_type", config.ClientType);
+                    headers.SetHeader("x-rpc-app_version", config.AppVersion);
+                    headers.SetHeader("x-rpc-device_id", _deviceId);
+                    headers.SetHeader("x-rpc-device_name", _deviceName);
+                    headers.SetHeader("x-rpc-sys_version", _sysVersion);
+                    headers.SetHeader("x-rpc-tool_verison", ToolVersion);
+                    headers.SetHeader("x-rpc-page", Page);
+                    headers.SetHeader("x-rpc-app_id", "bll8iq97cem8");
+                    headers.SetHeader("x-rpc-sdk_version", "2.16.0");
+                    headers.SetHeader("X-Requested-With", "com.mihoyo.hyperion");
+
+                    string fp = _activeDeviceFp;
+                    if (string.IsNullOrEmpty(fp))
                     {
-                        headers.SetHeader("x-rpc-device_fp", fp);
+                        System.Diagnostics.Debug.WriteLine("[BBSWindow] 警告：_activeDeviceFp 为空，使用临时随机值");
+                        fp = Convert.ToHexString(RandomNumberGenerator.GetBytes(7)).ToLowerInvariant();
                     }
-                    
+                    headers.SetHeader("x-rpc-device_fp", fp);
+
+
                     string ds;
-                    if (_currentConfig.UseDS2)
+                    if (config.UseDS2)
                     {
                         string query = GetSortedQuery(uri);
                         string body = "";
@@ -270,14 +374,19 @@ namespace FufuLauncher.Views
                         {
                             body = await GetJsonBodyAsync(args.Request.Content);
                         }
-                        ds = CalculateDS2(_currentConfig.Salt, query, body);
+                        ds = CalculateDS2(config.Salt, query, body);
                     }
                     else
                     {
-                        ds = CalculateDS1(_currentConfig.Salt);
+                        ds = CalculateDS1(config.Salt);
                     }
-
                     headers.SetHeader("DS", ds);
+
+                   
+                    headers.SetHeader("Origin", "https://webstatic.mihoyo.com");
+                    headers.SetHeader("Referer", "https://webstatic.mihoyo.com/");
+                    headers.SetHeader("Accept", "application/json, text/plain, */*");
+                    headers.SetHeader("Accept-Language", "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7");
                 }
             }
             finally
@@ -285,7 +394,7 @@ namespace FufuLauncher.Views
                 deferral.Complete();
             }
         }
-        
+
         private async Task<JsResult?> HandleJsMessageAsync(JsParam param)
         {
             if (param.Method == "getDS" || param.Method == "getDS2")
@@ -313,7 +422,7 @@ namespace FufuLauncher.Views
             {
                 "closePage" => HandleClosePage(),
                 "getHTTPRequestHeaders" => GetHttpRequestHeader(),
-                "getCookieInfo" => new JsResult { Data = cookieDic.ToDictionary(x => x.Key, x => (object)x.Value) },
+                "getCookieInfo" => GetCookieInfoMinimal(),
                 "getCookieToken" => new JsResult { Data = new() { ["cookie_token"] = cookieDic.GetValueOrDefault("cookie_token") ?? "" } },
                 "getStatusBarHeight" => new JsResult { Data = new() { ["statusBarHeight"] = 0 } },
                 "getUserInfo" => GetUserInfo(),
@@ -324,7 +433,7 @@ namespace FufuLauncher.Views
                 _ => null
             };
         }
-        
+
         private JsResult? HandleToggleTopBar()
         {
             DispatcherQueue.TryEnqueue(() =>
@@ -332,6 +441,30 @@ namespace FufuLauncher.Views
                 ToggleTopBar();
             });
             return null;
+        }
+        private JsResult GetCookieInfoMinimal()
+        {
+            string fp = _activeDeviceFp;
+            if (string.IsNullOrEmpty(fp))
+            {
+                System.Diagnostics.Debug.WriteLine("[BBSWindow] GetCookieInfoMinimal: _activeDeviceFp 为空，使用随机回退");
+                fp = Convert.ToHexString(RandomNumberGenerator.GetBytes(7)).ToLowerInvariant();
+            }
+            return new JsResult
+            {
+                Data = new Dictionary<string, object>
+                {
+                    ["ltuid"] = cookieDic.GetValueOrDefault("ltuid") ?? "",
+                    ["ltoken"] = cookieDic.GetValueOrDefault("ltoken") ?? "",
+                    ["cookie_token"] = cookieDic.GetValueOrDefault("cookie_token") ?? "",
+                    ["account_id"] = cookieDic.GetValueOrDefault("account_id") ?? "",
+                    ["ltuid_v2"] = cookieDic.GetValueOrDefault("ltuid_v2") ?? "",
+                    ["ltoken_v2"] = cookieDic.GetValueOrDefault("ltoken_v2") ?? "",
+                    ["account_mid_v2"] = cookieDic.GetValueOrDefault("account_mid_v2") ?? "",
+                    ["cookie_token_v2"] = cookieDic.GetValueOrDefault("cookie_token_v2") ?? "",
+                    ["DEVICEFP"] = fp 
+                }
+            };
         }
 
         private async Task<string> GetJsonBodyAsync(IRandomAccessStream stream)
@@ -397,13 +530,13 @@ namespace FufuLauncher.Views
 
         private string GetSortedQuery(string url)
         {
-            try 
+            try
             {
                 var uriObj = new Uri(url);
                 var query = uriObj.Query.TrimStart('?');
                 if (string.IsNullOrEmpty(query)) return "";
                 var dict = System.Web.HttpUtility.ParseQueryString(query);
-                
+
                 var sortedKeys = dict.AllKeys.Where(k => k != null).OrderBy(k => k, StringComparer.Ordinal).ToList();
                 var pairs = new List<string>();
                 foreach (var key in sortedKeys)
@@ -460,15 +593,21 @@ namespace FufuLauncher.Views
 
         private JsResult GetHttpRequestHeader()
         {
+            string fp = _activeDeviceFp;
+            if (string.IsNullOrEmpty(fp))
+            {
+                System.Diagnostics.Debug.WriteLine("[BBSWindow] GetHttpRequestHeader: _activeDeviceFp 为空，使用随机回退");
+                fp = Convert.ToHexString(RandomNumberGenerator.GetBytes(7)).ToLowerInvariant();
+            }
             var data = new Dictionary<string, object>
             {
                 ["x-rpc-app_id"] = "bll8iq97cem8",
                 ["x-rpc-client_type"] = _currentConfig.ClientType,
                 ["x-rpc-app_version"] = _currentConfig.AppVersion,
-                ["x-rpc-device_id"] = _deviceId36,
-                ["x-rpc-sdk_version"] = "2.16.0"
+                ["x-rpc-device_id"] = _deviceId,
+                ["x-rpc-sdk_version"] = "2.16.0",
+                ["x-rpc-device_fp"] = fp   
             };
-            if (cookieDic.TryGetValue("DEVICEFP", out var fp)) data["x-rpc-device_fp"] = fp;
             return new JsResult { Data = data };
         }
 
@@ -478,7 +617,7 @@ namespace FufuLauncher.Views
             else Close();
             return null;
         }
-        
+
         private JsResult? HandlePushPage(JsParam param)
         {
             string? url = param.Payload?["page"]?.ToString();
@@ -496,7 +635,7 @@ namespace FufuLauncher.Views
             }
             return null;
         }
-        
+
         private async Task<JsResult?> HandleShareAsync(JsParam param)
         {
             string type = param.Payload?["type"]?.ToString();
@@ -516,7 +655,7 @@ namespace FufuLauncher.Views
                 string base64 = param.Payload?["content"]?["image_base64"]?.ToString();
                 if (!string.IsNullOrEmpty(base64)) await ShowScreenshotAsync(base64);
             }
-            return new JsResult { Data = new() { ["type"] = type } }; 
+            return new JsResult { Data = new() { ["type"] = type } };
         }
 
         private async Task ShowScreenshotAsync(string base64)
@@ -583,9 +722,9 @@ namespace FufuLauncher.Views
         private JsResult GetUserInfo()
         {
             var uid = cookieDic.GetValueOrDefault("ltuid_v2") ?? cookieDic.GetValueOrDefault("ltuid") ?? "";
-            return new JsResult 
-            { 
-                Data = new() { ["id"] = uid, ["gender"] = 0, ["nickname"] = "", ["introduce"] = "", ["avatar_url"] = "" } 
+            return new JsResult
+            {
+                Data = new() { ["id"] = uid, ["gender"] = 0, ["nickname"] = "", ["introduce"] = "", ["avatar_url"] = "" }
             };
         }
 
@@ -598,8 +737,8 @@ namespace FufuLauncher.Views
 
         private void GoButton_Click(object sender, RoutedEventArgs e) => NavigateToUrl();
         private void UrlTextBox_KeyDown(object sender, KeyRoutedEventArgs e) { if (e.Key == Windows.System.VirtualKey.Enter) NavigateToUrl(); }
-        
-        private void NavigateToUrl() 
+
+        private void NavigateToUrl()
         {
             var url = UrlTextBox.Text;
             if (!string.IsNullOrEmpty(url) && !url.StartsWith("http")) url = "https://" + url;
@@ -624,14 +763,14 @@ namespace FufuLauncher.Views
         {
             System.Diagnostics.Debug.WriteLine($"[BBSWindow] LoadPageAsync called with URL: {url}");
             await LoadActiveAccountCookiesAsync();
-            
+
             var manager = BBSWebView.CoreWebView2.CookieManager;
             if (BBSWebView.Source == null || BBSWebView.Source.ToString() == "about:blank")
             {
                 var cookies = await manager.GetCookiesAsync("https://webstatic.mihoyo.com");
                 foreach (var c in cookies) manager.DeleteCookie(c);
             }
-            
+
             foreach (var kv in cookieDic)
             {
                 var cookie = manager.CreateCookie(kv.Key, kv.Value, ".mihoyo.com", "/");
@@ -672,123 +811,22 @@ namespace FufuLauncher.Views
             }
         }
 
-public static async Task<string> FetchApiJsonAsync(string apiUrl)
-{
-    await _fetchApiSemaphore.WaitAsync();
-    try
-    {
-        string capturedJson = null;
-        var tcs = new TaskCompletionSource<bool>();
-        
-        var window = new BBSWindow(false);
-        window.AppWindow.Hide();
-
-        await window.BBSWebView.EnsureCoreWebView2Async();
-        window.UpdateWebViewSettings();
-        await window.LoadActiveAccountCookiesAsync();
-        System.Diagnostics.Debug.WriteLine($"[BBSWindow] FetchApiJsonAsync 请求API: {apiUrl}");
-        System.Diagnostics.Debug.WriteLine($"[BBSWindow] 当前账号Cookie数量: {window.cookieDic.Count}");
-
-        window.BBSWebView.CoreWebView2.AddWebResourceRequestedFilter("*://*.mihoyo.com/*", CoreWebView2WebResourceContext.All);
-        window.BBSWebView.CoreWebView2.WebResourceRequested += window.CoreWebView2_WebResourceRequested;
-
-        window.BBSWebView.CoreWebView2.NewWindowRequested += (sender, args) =>
-        {
-            args.Handled = true;
-        };
-
-        window.BBSWebView.CoreWebView2.NavigationCompleted += async (sender, args) =>
-        {
-            try
-            {
-                if (args.IsSuccess && string.IsNullOrEmpty(capturedJson))
-                {
-                    await Task.Delay(800);
-                    
-                    if (!string.IsNullOrEmpty(capturedJson)) return;
-
-                    string json = await window.BBSWebView.CoreWebView2.ExecuteScriptAsync("document.body.innerText;");
-                    if (!string.IsNullOrEmpty(json) && json != "null")
-                    {
-                        var parsedStr = JsonSerializer.Deserialize<string>(json);
-                        if (parsedStr != null && parsedStr.StartsWith("{")) 
-                        {
-                            capturedJson = parsedStr;
-                            tcs.TrySetResult(true);
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                // ignored
-            }
-        };
-
-        window.BBSWebView.CoreWebView2.WebResourceResponseReceived += async (sender, args) =>
-        {
-            if (args.Request.Uri.Contains("api-takumi-record.mihoyo.com") && args.Request.Uri.Contains("dailyNote"))
-            {
-                System.Diagnostics.Debug.WriteLine($"[BBSWindow] 捕获到API响应: {args.Request.Uri}");
-                try
-                {
-                    var content = await args.Response.GetContentAsync();
-                    if (content != null && content.Size > 0)
-                    {
-                        using var reader = new DataReader(content);
-                        reader.UnicodeEncoding = Windows.Storage.Streams.UnicodeEncoding.Utf8;
-                        await reader.LoadAsync((uint)content.Size);
-                        capturedJson = reader.ReadString((uint)content.Size);
-                        System.Diagnostics.Debug.WriteLine($"[BBSWindow] JSON内容: {capturedJson?.Substring(0, Math.Min(200, capturedJson.Length))}");
-                        tcs.TrySetResult(true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine($"[BBSWindow] 读取响应失败: {ex.Message}");
-                }
-            }
-        };
-
-        await window.LoadPageAsync(apiUrl);
-
-        var timeoutTask = Task.Delay(15000);
-        var completedTask = await Task.WhenAny(tcs.Task, timeoutTask);
-
-        window.Close();
-
-        if (completedTask == timeoutTask)
-        {
-            throw new TimeoutException("获取API数据超时");
-        }
-
-        if (string.IsNullOrEmpty(capturedJson))
-        {
-            throw new InvalidOperationException("未能获取API响应数据");
-        }
-
-        return capturedJson;
-    }
-    finally
-    {
-        _fetchApiSemaphore.Release();
-    }
-}
         private class JsParam
         {
             [JsonPropertyName("method")] public string Method { get; set; } = "";
             [JsonPropertyName("payload")] public JsonNode? Payload { get; set; }
             [JsonPropertyName("callback")] public string? Callback { get; set; }
         }
-        
+
         private class JsResult
         {
             [JsonPropertyName("retcode")] public int Code { get; set; } = 0;
             [JsonPropertyName("message")] public string Message { get; set; } = "";
             [JsonPropertyName("data")] public Dictionary<string, object> Data { get; set; } = new();
         }
-        
-        public class AppConfig { public AccountConfig Account { get; set; } }
+
+        public class AppConfig { public AccountConfig Account { get; set; }
+ }
         public class AccountConfig { public string Cookie { get; set; } }
     }
 }
