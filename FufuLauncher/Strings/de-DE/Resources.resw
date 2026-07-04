@@ -63,7 +63,7 @@
   <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>Reisenotizen anzeigen</value></data>
   <data name="WidgetVideo" xml:space="preserve"><value>Videobibliothek anzeigen</value></data>
   <data name="WidgetBBS" xml:space="preserve"><value>Kampfstatistiken anzeigen</value></data>
-  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>Hintergrundfarbe des Start-Buttons</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>Farbe des Start-Buttons</value></data>
   <data name="NotesItemsTitle" xml:space="preserve"><value>Notizkarten-Elemente</value></data>
   <data name="NotesItemsCaption" xml:space="preserve"><value>Wähle die Elemente aus, die auf der Notizkarte angezeigt werden sollen – maximal 3!</value></data>
   <data name="NotesWarningTitle" xml:space="preserve"><value>Hinweis</value></data>
@@ -83,7 +83,7 @@
   <data name="RememberWindowSizeTitle" xml:space="preserve"><value>Fenstergröße merken</value></data>
   <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>Minimale Fenstergröße</value></data>
   <data name="GameNewsTextColorTitle" xml:space="preserve"><value>Textfarbe &amp; Deckkraft der Spielnews-Karte</value></data>
-  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>Textfarbe &amp; Deckkraft des Start-Buttons</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>Start-Button: Textfarbe</value></data>
   <data name="CheckinTextColorTitle" xml:space="preserve"><value>Textfarbe &amp; Deckkraft des Check-ins</value></data>
   <data name="AppLangTitle" xml:space="preserve"><value>Anzeigesprache</value></data>
   <data name="AppLangCaption" xml:space="preserve"><value>Wird nach einem Neustart wirksam</value></data>
@@ -101,7 +101,7 @@
   <data name="LangId" xml:space="preserve"><value>Indonesisch</value></data>
   <data name="LangPt" xml:space="preserve"><value>Portugiesisch (Brasilien)</value></data>
   <data name="LangDefault" xml:space="preserve"><value>System-Standardsprache verwenden</value></data>
-  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>Startfenster-Modus</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>Fenstermodus</value></data>
   <data name="WindowModeNormal" xml:space="preserve"><value>Normales Fenster</value></data>
   <data name="WindowModePopup" xml:space="preserve"><value>Popup-Fenster (rahmenlos)</value></data>
   <data name="ResolutionTitle" xml:space="preserve"><value>Spielauflösung</value></data>
@@ -115,11 +115,11 @@
   <data name="TargetMonitorTitle" xml:space="preserve"><value>Zielmonitor</value></data>
   <data name="TargetMonitorCaption" xml:space="preserve"><value>Gib den Monitor an, auf dem das Spiel gestartet werden soll</value></data>
   <data name="IdentifyMonitors" xml:space="preserve"><value>Monitore identifizieren</value></data>
-  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>Erweiterte Startparameter</value></data>
-  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>Benutzerdefinierte Parameter werden an den Startbefehl angehängt</value></data>
-  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>Benutzerdefinierte Startparameter</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>Erweiterte Parameter</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>Zusätzliche Parameter für den Startbefehl</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>Eigene Startparameter</value></data>
   <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>z.B.: -fullscreen -high</value></data>
-  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>Hinweis: Die Parameter werden mit Leerzeichen an den Startbefehl angehängt. Gib keinen Spielpfad ein. Wenn nichts passiert, klicke mehrmals auf die Vorlagen-Schaltfläche.</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>Hinweis: Parameter werden mit Leerzeichen angehängt. Keinen Spielpfad eingeben. Bei Problemen mehrfach auf die Vorlagen-Schaltfläche klicken.</value></data>
   <data name="CustomExeNameTitle" xml:space="preserve"><value>Benutzerdefinierter Spielprogrammname</value></data>
   <data name="CustomExeNameCaption" xml:space="preserve"><value>Ändere den Namen der exe-Datei für Erkennung und Start. Leer lassen, um den Standardwert zu verwenden (YuanShen.exe / GenshinImpact.exe).</value></data>
   <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>z.B.: YuanShen.exe</value></data>
@@ -131,9 +131,9 @@
   <data name="RedeemReminderTitle" xml:space="preserve"><value>Code-Erinnerung</value></data>
   <data name="RedeemReminderToggle" xml:space="preserve"><value>Sofortige Benachrichtigung bei neuen Codes</value></data>
   <data name="RedeemReminderCaption" xml:space="preserve"><value>Wenn aktiviert, werden bei neuen Codes sofort Benachrichtigungen mit Ablauf-Countdown angezeigt. Jeder Code wird nur einmal gemeldet.</value></data>
-  <data name="PostLaunchTitle" xml:space="preserve"><value>Verhalten nach dem Start</value></data>
-  <data name="PostLaunchHeader" xml:space="preserve"><value>Ausführen nach Spielstart</value></data>
-  <data name="PostLaunchCaption" xml:space="preserve"><value>Wähle das Verhalten des Launchers nach dem Spielstart: In die Taskleiste minimieren und weiterlaufen oder den Zustand speichern und vollständig beenden.</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>Nach dem Start</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>Nach Spielstart</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>Verhalten des Launchers nach Spielstart: In Taskleiste minimieren oder vollständig beenden.</value></data>
   <data name="EnableCustomBg" xml:space="preserve"><value>Benutzerdefinierten Hintergrund aktivieren</value></data>
   <data name="BgSourceTitle" xml:space="preserve"><value>Hintergrundquelle</value></data>
   <data name="SelectCustomBgImage" xml:space="preserve"><value>Benutzerdefiniertes Hintergrundbild auswählen...</value></data>
@@ -180,7 +180,7 @@
   <data name="Share" xml:space="preserve"><value>Teilen</value></data>
   <data name="CloudGameCheckin" xml:space="preserve"><value>Cloud-Spiel-Check-in</value></data>
   <data name="CloudGameCheckinCaption" xml:space="preserve"><value>Cloud-Spiel-Check-in-Belohnungen abholen. Füge in der Kontoliste rechts die Cloud-Spiel-Anmeldedaten hinzu.</value></data>
-  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>Automatischer Check-in beim Start</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>Auto-Check-in beim Start</value></data>
   <data name="AutoCheckinCaption" xml:space="preserve"><value>Wenn aktiviert, wird beim App-Start automatisch geprüft und ein Check-in ausgeführt, falls noch nicht geschehen.</value></data>
   <data name="BatchCheckin" xml:space="preserve"><value>Batch-Check-in</value></data>
   <data name="BatchCheckinCaption" xml:space="preserve"><value>Wenn aktiviert, wird der Check-in für alle ausgewählten Konten ausgeführt, andernfalls nur für das aktuelle Konto.</value></data>
@@ -487,7 +487,7 @@ Jetzt zur Microsoft-Website gehen und herunterladen?</value></data>
   <data name="HomeTab_Events" xml:space="preserve"><value>Events</value></data>
   <data name="HomeTab_Announcements" xml:space="preserve"><value>Ankündigungen</value></data>
   <data name="HomeTab_News" xml:space="preserve"><value>Neuigkeiten</value></data>
-  <data name="Home_CheckinCard" xml:space="preserve"><value>Genshin Check-in</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>Check-in</value></data>
   <data name="Home_RefreshToken" xml:space="preserve"><value>Token aktualisieren</value></data>
   <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>Zu den Check-in-Einstellungen</value></data>
   <data name="Home_RewardsCalendar" xml:space="preserve"><value>Belohnungskalender</value></data>
@@ -635,14 +635,14 @@ Jetzt zur Microsoft-Website gehen und herunterladen?</value></data>
   <data name="Panel_TravelerProfileDesc" xml:space="preserve"><value>Charaktere, Inventar, Notizen und MiHoYo-Kampfdaten</value></data>
   <data name="Panel_Resources" xml:space="preserve"><value>Ressourcenbeschaffung</value></data>
   <data name="Panel_ResourcesDesc" xml:space="preserve"><value>Verwaltung und Ressourcenbeschaffung</value></data>
-  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>Bitte Spielpfad auswählen</value></data>
-  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>Klicken, um das Spiel zu beenden</value></data>
-  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>Klicken, um das Spiel zu starten</value></data>
-  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>Spiel wird beendet...</value></data>
+  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>Spielpfad wählen</value></data>
+  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>Spiel beenden</value></data>
+  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>Spiel starten</value></data>
+  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>Wird beendet...</value></data>
   <data name="Checkin_Signed" xml:space="preserve"><value>Spiel-Check-in erledigt</value></data>
   <data name="Checkin_Unsigned" xml:space="preserve"><value>Spiel-Check-in ausstehend</value></data>
   <data name="LaunchErr_NoGamePath" xml:space="preserve"><value>Kein Spielpfad festgelegt</value></data>
-  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>Bitte wähle zuerst den Spielinstallationspfad auf der Spielverwaltungsseite aus.</value></data>
+  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>Bitte zuerst den Spielpfad in der Spielverwaltung auswählen.</value></data>
   <data name="LaunchErr_LaunchFailed" xml:space="preserve"><value>Spielstart fehlgeschlagen</value></data>
   <data name="Screenshot_FolderNotFound" xml:space="preserve"><value>Screenshot-Ordner existiert nicht</value></data>
   <data name="Screenshot_FolderNotFoundMsg" xml:space="preserve"><value>Bitte erstelle zuerst einen Screenshot im Spiel oder über die Launcher-Screenshot-Funktion.</value></data>
@@ -1098,10 +1098,10 @@ Jetzt zur Microsoft-Website gehen und herunterladen?</value></data>
   <data name="LaunchErr_ExeNotFound" xml:space="preserve"><value>Spielprogramm existiert nicht. Bitte überprüfe die Pfadeinstellungen.
 Gesuchte Datei:
 {0}</value></data>
-  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>Im aktuellen Spielverzeichnis wurden mehrere ausführbare Programme erkannt. Der Launcher kann nicht bestimmen, welches gestartet werden soll. Bitte entferne überflüssige Client-Dateien oder lege einen benutzerdefinierten Startnamen in den Einstellungen fest.</value></data>
+  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>Mehrere ausführbare Programme im Spielverzeichnis erkannt. Der Launcher kann nicht bestimmen, welches gestartet werden soll. Bitte überflüssige Client-Dateien entfernen oder benutzerdefinierten Startnamen in den Einstellungen festlegen.</value></data>
   <data name="LaunchErr_CannotLoadConfig" xml:space="preserve"><value>Spielkonfigurationsdatei kann nicht geladen werden</value></data>
-  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>Start-Zeitüberschreitung, bitte erneut versuchen</value></data>
-  <data name="LaunchErr_FatalError" xml:space="preserve"><value>Schwerwiegender Fehler beim Start: {0}</value></data>
+  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>Zeitüberschreitung, bitte erneut versuchen</value></data>
+  <data name="LaunchErr_FatalError" xml:space="preserve"><value>Schwerer Startfehler: {0}</value></data>
   <data name="LaunchErr_PluginDamagedTitle" xml:space="preserve"><value>Plugin möglicherweise beschädigt</value></data>
   <data name="LaunchErr_PluginDamagedMsg" xml:space="preserve"><value>Die Plugin-Datei wurde von der Antivirensoftware beschädigt oder blockiert. Die Funktion ist möglicherweise beeinträchtigt oder funktioniert gar nicht. Es wird empfohlen, das Plugin neu zu installieren.</value></data>
   <data name="Status_Success" xml:space="preserve"><value>Erfolg</value></data>

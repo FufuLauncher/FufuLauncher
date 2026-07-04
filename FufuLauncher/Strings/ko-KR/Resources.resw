@@ -487,7 +487,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
   <data name="HomeTab_Events" xml:space="preserve"><value>이벤트</value></data>
   <data name="HomeTab_Announcements" xml:space="preserve"><value>공지사항</value></data>
   <data name="HomeTab_News" xml:space="preserve"><value>소식</value></data>
-  <data name="Home_CheckinCard" xml:space="preserve"><value>출석 체크</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>출석체크</value></data>
   <data name="Home_RefreshToken" xml:space="preserve"><value>토큰 새로고침</value></data>
   <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>출석 체크 설정으로 이동</value></data>
   <data name="Home_RewardsCalendar" xml:space="preserve"><value>보상 달력</value></data>

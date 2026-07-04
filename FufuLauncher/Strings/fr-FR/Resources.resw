@@ -487,7 +487,7 @@ Voulez-vous accéder au site officiel de Microsoft pour la télécharger et l'in
   <data name="HomeTab_Events" xml:space="preserve"><value>Événements</value></data>
   <data name="HomeTab_Announcements" xml:space="preserve"><value>Annonces</value></data>
   <data name="HomeTab_News" xml:space="preserve"><value>Actualités</value></data>
-  <data name="Home_CheckinCard" xml:space="preserve"><value>Check-in Genshin</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>Check-in</value></data>
   <data name="Home_RefreshToken" xml:space="preserve"><value>Actualiser le Token</value></data>
   <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>Configurer le check-in</value></data>
   <data name="Home_RewardsCalendar" xml:space="preserve"><value>Calendrier des récompenses</value></data>
