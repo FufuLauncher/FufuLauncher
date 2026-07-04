@@ -11,6 +11,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Activation;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
@@ -1329,8 +1330,8 @@ private void QuickSwitchPreset(PresetModel targetPreset)
         {
             AvailableInjectionModules = new ObservableCollection<InjectionModuleInfo>
             {
-                new() { Id = "DLL", Name = "内置注入", Description = "使用内置引擎注入插件", IsSelected = true },
-                new() { Id = "EXE", Name = "独立注入", Description = "使用外部程序启动并注入", IsSelected = false }
+                new() { Id = "DLL", Name = "InjectionBuiltIn".GetLocalized(), Description = "InjectionBuiltInDesc".GetLocalized(), IsSelected = true },
+                new() { Id = "EXE", Name = "InjectionStandalone".GetLocalized(), Description = "InjectionStandaloneDesc".GetLocalized(), IsSelected = false }
             };
         }
 

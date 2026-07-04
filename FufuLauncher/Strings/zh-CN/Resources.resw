@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>语言已更改</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>语言设置已更改。由于技术限制，部分UI需要重启才能完全生效。</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>立即重启</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>稍后手动重启</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>版本 {0}</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>注入设置</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>使用内置引擎注入插件</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>使用外部程序启动并注入</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>芙芙启动器</value></data>
+  <data name="Show" xml:space="preserve"><value>显示</value></data>
+  <data name="Hide" xml:space="preserve"><value>隐藏</value></data>
+  <data name="Enabled" xml:space="preserve"><value>已启用</value></data>
+  <data name="Disabled" xml:space="preserve"><value>已禁用</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>颜色 (Hex)</value></data>
+  <data name="Opacity" xml:space="preserve"><value>透明度</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>恢复默认</value></data>
+  <data name="Browse" xml:space="preserve"><value>浏览</value></data>
+  <data name="Clear" xml:space="preserve"><value>清除</value></data>
+  <data name="High" xml:space="preserve"><value>高</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>外观与个性化</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>主页文字样式</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>语言与区域</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>游戏启动配置</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>背景与视觉效果</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>窗口效果</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>启动音效</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>签到配置</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>高级选项</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>截图设置</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>检查更新</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>关于</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>开发者许可认证</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>应用主题</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>选择应用程序的显示主题</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>浅色模式</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>深色模式</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>跟随系统设置</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>自定义软件主题颜色</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>选择或输入Hex颜色代码。留空并重启应用可恢复默认颜色</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>主页卡片显示</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>允许隐藏主页的游戏资讯卡片或签到卡片</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>隐藏游戏资讯卡片</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>隐藏签到卡片</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>显示快速预设卡片</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>显示小工具卡片</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>小工具卡片显示项</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>选择要在小工具卡片中显示的工具</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>显示抽卡记录分析</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>显示成就追踪</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>显示背包物品</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>显示角色练度查询</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>显示旅行便签</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>显示视频资源库</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>显示战绩信息</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>启动按钮背景颜色</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>便签卡片显示项</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>选择要在便签卡片中显示的项目，最多选择3个！</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>注意</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>便签数据来自米游社游戏记录接口，频繁刷新可能触发人机验证，严重时风控可能导致战绩页面暂时无法访问。如遇此情况，请降低刷新频率，等待一段时间后重试。</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>隐藏便签卡片</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>显示树脂</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>显示每日委托</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>显示洞天宝钱</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>显示探索派遣</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>显示参量质变仪</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>导航栏显示项</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>选择要在左侧导航栏中显示的项目。隐藏后不会影响功能使用，可在设置中重新开启。主页和设置中心不可隐藏。</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>背景遮罩透明度</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>Frame 背景透明度</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>背景图片透明度</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>关闭后最小化至系统托盘</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>记住窗口大小</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>窗口最小大小限制</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>游戏资讯卡片文字颜色与透明度</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>启动按钮文字颜色与透明度</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>游戏签到文字颜色与透明度</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>应用显示语言</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>重启应用后生效</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>简体中文（推荐）</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>使用系统默认语言</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>启动窗口模式</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>普通窗口</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>弹出窗口（无边框）</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>游戏分辨率</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>设置游戏启动时的窗口大小</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>宽度（像素）</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>高度（像素）</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>快速预设</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>HDR 亮度配置</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>调整游戏内的 HDR 峰值亮度与 UI 亮度</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>打开 HDR 设置</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>目标显示器</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>指定游戏启动时所在的显示器</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>识别显示器</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>高级启动参数</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>自定义参数将追加到启动命令后</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>自定义启动参数</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>例如：-fullscreen -high</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>提示：参数将以空格追加到游戏启动命令后，请勿输入游戏路径 如果点了没反应，请多按几下预设选项按钮</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>自定义游戏主程序名称</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>修改此项可自定义检测和启动时的 exe 文件名。留空则使用默认值 (YuanShen.exe / GenshinImpact.exe)</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>例如: YuanShen.exe</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>注入模块</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>选择注入模块</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>内置注入</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>独立注入</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>内置注入通过启动器自身引擎加载插件；独立注入使用独立程序启动游戏并加载插件，适用于内置模式不兼容的情况。</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>兑换码提醒</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>新兑换码发布时即时提醒</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>开启后，当有新的兑换码发布时，将在第一时间推送通知并显示有效期倒计时。每期兑换码仅通知一次。</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>启动后行为</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>游戏启动后执行</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>选择启动游戏后启动器的行为：最小化到系统托盘继续运行，或保存状态后完全退出。</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>启用自定义背景</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>背景来源</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>选择自定义背景图片...</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>清除自定义背景</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>背景轮播模式</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>选择轮播图片文件夹...</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>清除轮播图片文件夹</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>轮播间隔 (秒)</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>官方背景服务器</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>国服 (天空岛)</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>国际服 (提瓦特)</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>官方背景 API</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>留空使用当前服务器的默认 API。自定义 API 需要返回与官方 getAllGameBasicInfo 一致的数据结构。</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>输入自定义官方背景 API 地址</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>重置为默认 API</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>获取官方背景资源</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>下载最新背景图片</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>下载最新背景视频</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>启用页面亚克力模糊遮罩</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>纯色</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>亚克力模糊</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>注意：当使用视频背景时，为保证性能与显示效果，将自动回退为纯色半透明背景</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>页面遮罩半透明模式</value></data>
+  <data name="Opaque" xml:space="preserve"><value>不透明</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>半透明</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>开启后页面遮罩将以半透明方式显示，可透出背景图片</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>遮罩透明度</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>窗口背景材质</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>选择窗口背景的视觉效果</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica (云母)</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrylic (亚克力)</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>注意：Mica 效果仅在 Windows 11 上可用，旧版本系统可能会回退到纯色。</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>显示侧边栏汉堡按钮</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>开启后侧边栏顶部显示展开/收起按钮，可展开侧边栏查看完整菜单文字</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>启用游戏启动音效</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>选择音频文件...</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>清除音频文件</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>游戏签到</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>领取米游社每日签到奖励（原石、摩拉等）</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>社区签到</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>自动完成社区互动任务获取米游币</value></data>
+  <data name="Like" xml:space="preserve"><value>点赞</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>看帖</value></data>
+  <data name="Share" xml:space="preserve"><value>分享</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>云游戏签到</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>领取云游戏签到奖励，需在下方账号列表右侧添加云游戏登录凭证</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>启动时自动签到</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>开启后，将在应用启动时自动检测并在未签到时执行签到</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>批量签到</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>打开此开关则可为所有勾选的账号执行指定的签到任务，否则仅为当前账号执行</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>账号列表</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>添加云游戏凭证</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>遇到验证码？</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>游戏签到和社区签到（概率较大）过程中可能会遇到验证码，需要配置真实设备信息降低风控频率，或使用独立部署版本配置打码服务。</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>独立部署版本</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>启用 BetterGI 联动</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>启动游戏时的同时打开BetterGI</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>BetterGI启动延迟 (秒)</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>设为0可关闭延迟；延迟只影响BetterGI</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>退出游戏时关闭BetterGI</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>点击退出游戏,自动关闭BetterGI</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>浏览器缓存清理</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>清理内置浏览器 (WebView2) 产生的缓存文件</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>清除缓存</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>程序性能优先级</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>调整启动器在系统中的CPU调度优先级（过高可能影响系统其他进程）</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>正常 (默认)</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>高于正常</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>CPU 占用异常警告</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>当启动器 CPU 占用持续超过阈值 5 分钟，且未检测到 OBS 时弹出置顶提示。默认开启。</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>启用 CPU 占用异常警告</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>警告阈值 (%)</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>配置编辑</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>更新成就数据库资源</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>启用游戏内截图</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>启动游戏后通过快捷键截取游戏窗口画面，不会包含其他窗口内容</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>截图快捷键</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>点击下方按钮后按下想要的快捷键组合（支持 Ctrl/Alt/Shift + 按键）</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>正在录制，请按下快捷键...</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>截图保存位置</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>自定义截图文件的保存目录，默认保存到 文档/FufuScreenshots</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>打开截图文件夹</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>版本更新</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>检查并获取最新版本。点击后将启动更新程序</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>关于我们</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>通过开发者许可认证获取部分特殊功能的使用权限</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>进行开发者许可认证</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>插件管理</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>启用注入</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>启动游戏时加载插件</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>获取插件(Get Plugins)</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>自由视角怎么用</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>添加插件</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>刷新</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>打开文件夹</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>排序</value></data>
+  <data name="SortByName" xml:space="preserve"><value>按名称</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>按状态 (启用优先)</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>按大小</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>按修改时间</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>重命名文件夹</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>删除</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>编辑配置文件</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>插件设置</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>插件库空空如也</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>请自行辨别插件安全性，对于因使用插件造成的任何损失，开发者概不负责</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>如果遇到问题，请先点击诊断电脑</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>诊断电脑</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>查看帮助</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>配置的链接非有效GIF格式</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>GIF资源加载失败</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>开</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>关</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>配置目标:</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin (主插件)</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS (帧率插件)</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar (千星头像插件)</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>修改日期: </value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>功能(Download/Repair)</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>下载插件(Download)</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>修复FPS显示插件(Repair)</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>主插件启用</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>FPS插件启用</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>头像插件启用</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>键位输入模式(列表)</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>列表</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>数字</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>自动创建预设</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>显示开发者功能</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>有想法或遇到问题？点此反馈</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>提交PR</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>启用注入(Injection)</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>配置预设:</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>点击切换至此预设</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[锁定]</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>删除此预设</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>新建预设</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>重置全部</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>头像替换设置 (根据需要上传对应尺寸)</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>导入</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>裁剪</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>支持格式: PNG, JPG, BMP, WEBP.修改后在下次进游戏时生效</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>调整头像</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>保存当前尺寸</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>批量应用到全部尺寸</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>取消</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* 请在方框内拖动或使用Ctrl+鼠标滚轮缩放调整裁切位置</value></data>
+</root>

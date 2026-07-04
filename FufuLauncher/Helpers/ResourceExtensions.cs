@@ -23,7 +23,7 @@ public static class ResourceExtensions
             }
 
 
-            var candidate = _resourceManager.MainResourceMap.GetValue(resourceKey);
+            var candidate = _resourceManager.MainResourceMap.GetValue($"Resources/{resourceKey}");
             return candidate != null ? candidate.ValueAsString : resourceKey;
         }
         catch

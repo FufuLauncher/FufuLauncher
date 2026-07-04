@@ -7,6 +7,7 @@
     xmlns:models="using:FufuLauncher.Models"
     xmlns:viewModels="using:FufuLauncher.ViewModels"
     xmlns:converters="using:FufuLauncher.Converters"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Background="Transparent"
     Loaded="Page_Loaded">
@@ -99,15 +100,15 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" 
-                       Text="插件管理" 
+                       Text="{helpers:Loc Key=PluginMgmtTitle}" 
                        Style="{StaticResource TitleTextBlockStyle}" 
                        VerticalAlignment="Center"
                        FontFamily="{StaticResource AppGlobalFont}"/>
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="启用注入" FontWeight="SemiBold" Foreground="{ThemeResource SafeTextBrush}" HorizontalAlignment="Right" FontFamily="{StaticResource AppGlobalFont}"/>
-                    <TextBlock Text="启动游戏时加载插件" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" FontFamily="{StaticResource AppGlobalFont}"/>
+                    <TextBlock Text="{helpers:Loc Key=EnableInjectionTitle}" FontWeight="SemiBold" Foreground="{ThemeResource SafeTextBrush}" HorizontalAlignment="Right" FontFamily="{StaticResource AppGlobalFont}"/>
+                    <TextBlock Text="{helpers:Loc Key=InjectionLoadCaption}" FontSize="11" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Right" FontFamily="{StaticResource AppGlobalFont}"/>
                 </StackPanel>
                 
                 <ToggleSwitch IsOn="{x:Bind MainViewModel.UseInjection, Mode=OneWay}" 
@@ -122,27 +123,27 @@
         <CommandBar Grid.Row="1" DefaultLabelPosition="Right" Background="Transparent" IsOpen="False">
             <AppBarButton x:Name="GetPluginsBtn" 
                           Icon="Download" 
-                          Label="获取插件(Get Plugins)"
+                          Label="{helpers:Loc Key=GetPluginsLabel}"
                           Click="OnGetPluginsClick" />
 
-            <AppBarButton Label="自由视角怎么用" 
+            <AppBarButton Label="{helpers:Loc Key=FreeCamHelpLabel}" 
                           Click="OnFreeCamHelpClick">
                  <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE9CE;"/>
                 </AppBarButton.Icon>
             </AppBarButton>
 
-            <AppBarButton Icon="Add" Label="添加插件" Command="{x:Bind ViewModel.AddPluginCommand}"/>
-            <AppBarButton Icon="Refresh" Label="刷新" Command="{x:Bind ViewModel.RefreshCommand}"/>
-            <AppBarButton Icon="Folder" Label="打开文件夹" Command="{x:Bind ViewModel.OpenFolderCommand}"/>
+            <AppBarButton Icon="Add" Label="{helpers:Loc Key=AddPluginLabel}" Command="{x:Bind ViewModel.AddPluginCommand}"/>
+            <AppBarButton Icon="Refresh" Label="{helpers:Loc Key=RefreshLabel}" Command="{x:Bind ViewModel.RefreshCommand}"/>
+            <AppBarButton Icon="Folder" Label="{helpers:Loc Key=OpenFolderLabel}" Command="{x:Bind ViewModel.OpenFolderCommand}"/>
             
-            <AppBarButton Icon="Sort" Label="排序">
+            <AppBarButton Icon="Sort" Label="{helpers:Loc Key=SortLabel}">
                 <AppBarButton.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="按名称" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Name"/>
-                        <MenuFlyoutItem Text="按状态 (启用优先)" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Status"/>
-                        <MenuFlyoutItem Text="按大小" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Size"/>
-                        <MenuFlyoutItem Text="按修改时间" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Date"/>
+                        <MenuFlyoutItem Text="{helpers:Loc Key=SortByName}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Name"/>
+                        <MenuFlyoutItem Text="{helpers:Loc Key=SortByStatus}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Status"/>
+                        <MenuFlyoutItem Text="{helpers:Loc Key=SortBySize}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Size"/>
+                        <MenuFlyoutItem Text="{helpers:Loc Key=SortByDate}" Command="{x:Bind ViewModel.SortCommand}" CommandParameter="Date"/>
                     </MenuFlyout>
                 </AppBarButton.Flyout>
             </AppBarButton>
@@ -160,8 +161,8 @@
                         </Grid.Shadow>
                         <Grid.ContextFlyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Text="重命名文件夹" Click="OnRenameClick" Tag="{x:Bind}"/>
-                                <MenuFlyoutItem Text="删除" Click="OnDeleteClick" Icon="Delete" Tag="{x:Bind}"/>
+                                <MenuFlyoutItem Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick" Tag="{x:Bind}"/>
+                                <MenuFlyoutItem Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick" Icon="Delete" Tag="{x:Bind}"/>
                             </MenuFlyout>
                         </Grid.ContextFlyout>
                         
@@ -217,10 +218,10 @@
                                 BorderThickness="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                ToolTipService.ToolTip="编辑配置文件">
+                                ToolTipService.ToolTip="{helpers:Loc Key=EditConfigTooltip}">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16"/>
-                                <TextBlock Text="插件设置" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource AppGlobalFont}"/>
+                                <TextBlock Text="{helpers:Loc Key=PluginSettingsLabel}" VerticalAlignment="Center" FontSize="12" FontFamily="{StaticResource AppGlobalFont}"/>
                             </StackPanel>
                         </Button>
 
@@ -245,7 +246,7 @@
         </ListView>
         
         <TextBlock Grid.Row="2" 
-                   Text="插件库空空如也" 
+                   Text="{helpers:Loc Key=EmptyPluginLibrary}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                    Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -259,7 +260,7 @@
                 <FontIcon Glyph="&#xE7BA;" FontFamily="Segoe MDL2 Assets" 
                           Foreground="{ThemeResource SystemFillColorCautionBrush}"
                           FontSize="14"/>
-                <TextBlock Text="请自行辨别插件安全性，对于因使用插件造成的任何损失，开发者概不负责" 
+                <TextBlock Text="{helpers:Loc Key=PluginSafetyDisclaimer}" 
                            Style="{StaticResource CaptionTextBlockStyle}"
                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                            VerticalAlignment="Center"
@@ -270,12 +271,12 @@
                         HorizontalAlignment="Right" 
                         VerticalAlignment="Bottom" 
                         Spacing="8">
-                <TextBlock Text="如果遇到问题，请先点击诊断电脑" 
+                <TextBlock Text="{helpers:Loc Key=DiagnosticsHint}" 
                            VerticalAlignment="Center" 
                            Style="{StaticResource CaptionTextBlockStyle}" 
                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                            FontFamily="{StaticResource AppGlobalFont}"/>
-                <Button Content="诊断电脑" 
+                <Button Content="{helpers:Loc Key=DiagnosticsBtn}" 
                         Click="OnOpenDiagnosticsClick"
                         VerticalAlignment="Center"/>
             </StackPanel>

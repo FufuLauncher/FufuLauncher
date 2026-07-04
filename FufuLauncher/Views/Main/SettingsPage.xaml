@@ -145,67 +145,67 @@
                         Margin="0,0,0,0"
                         Width="220">
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="外观与个性化" Tag="AppearanceItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionAppearance}" Tag="AppearanceItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE771;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="主页文字样式" Tag="HomeTextItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionHomeText}" Tag="HomeTextItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE790;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="语言与区域" Tag="LanguageItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionLanguage}" Tag="LanguageItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF2B7;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="游戏启动配置" Tag="LaunchConfigItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionLaunchConfig}" Tag="LaunchConfigItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7FC;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="背景与视觉效果" Tag="BackgroundItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionBackground}" Tag="BackgroundItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE771;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="窗口效果" Tag="WindowEffectsItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionWindowEffects}" Tag="WindowEffectsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE8B3;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="启动音效" Tag="StartupSoundItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionStartupSound}" Tag="StartupSoundItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE8D6;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="签到配置" Tag="CheckinSettingsItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionCheckinSettings}" Tag="CheckinSettingsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE73E;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="高级选项" Tag="AdvancedOptionsItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionAdvancedOptions}" Tag="AdvancedOptionsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="截图设置" Tag="ScreenshotSettingsItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionScreenshotSettings}" Tag="ScreenshotSettingsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE722;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="检查更新" Tag="UpdateItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionUpdate}" Tag="UpdateItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE895;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="关于" Tag="AboutItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionAbout}" Tag="AboutItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE897;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="开发者许可认证" Tag="SecurityAuthItem">
+                <NavigationViewItem Content="{helpers:Loc Key=SectionSecurityAuth}" Tag="SecurityAuthItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE72E;" FontFamily="Segoe MDL2 Assets" />
                     </NavigationViewItem.Icon>
@@ -228,19 +228,19 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="外观与个性化" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionAppearance}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <TextBlock Text="应用主题"
+                        <TextBlock Text="{helpers:Loc Key=ThemeTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
-                        <TextBlock Text="选择应用程序的显示主题"
+                        <TextBlock Text="{helpers:Loc Key=ThemeCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,12" />
 
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <RadioButton Content="浅色模式"
+                            <RadioButton Content="{helpers:Loc Key=ThemeLight}"
                                          FontSize="14"
                                          GroupName="AppTheme"
                                          Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -249,7 +249,7 @@
                                     <ElementTheme>Light</ElementTheme>
                                 </RadioButton.CommandParameter>
                             </RadioButton>
-                            <RadioButton Content="深色模式"
+                            <RadioButton Content="{helpers:Loc Key=ThemeDark}"
                                          FontSize="14"
                                          GroupName="AppTheme"
                                          Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -258,7 +258,7 @@
                                     <ElementTheme>Dark</ElementTheme>
                                 </RadioButton.CommandParameter>
                             </RadioButton>
-                            <RadioButton Content="跟随系统设置"
+                            <RadioButton Content="{helpers:Loc Key=ThemeSystem}"
                                          FontSize="14"
                                          GroupName="AppTheme"
                                          Command="{x:Bind ViewModel.SwitchThemeCommand}"
@@ -270,10 +270,10 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="自定义软件主题颜色"
+                            <TextBlock Text="{helpers:Loc Key=CustomThemeColorTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="选择或输入Hex颜色代码。留空并重启应用可恢复默认颜色"
+                            <TextBlock Text="{helpers:Loc Key=CustomThemeColorCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,8" />
@@ -287,126 +287,126 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="主页卡片显示"
+                            <TextBlock Text="{helpers:Loc Key=HomeCardDisplayTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="允许隐藏主页的游戏资讯卡片或签到卡片"
+                            <TextBlock Text="{helpers:Loc Key=HomeCardDisplayCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
 
-                            <ToggleSwitch Header="隐藏游戏资讯卡片"
-                                          OffContent="显示"
-                                          OnContent="隐藏"
+                            <ToggleSwitch Header="{helpers:Loc Key=HideGameNewsCard}"
+                                          OffContent="{helpers:Loc Key=Show}"
+                                          OnContent="{helpers:Loc Key=Hide}"
                                           IsOn="{x:Bind ViewModel.IsHideGameNewsCardEnabled, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="隐藏签到卡片"
-                                          OffContent="显示"
-                                          OnContent="隐藏"
+                            <ToggleSwitch Header="{helpers:Loc Key=HideCheckinCard}"
+                                          OffContent="{helpers:Loc Key=Show}"
+                                          OnContent="{helpers:Loc Key=Hide}"
                                           IsOn="{x:Bind ViewModel.IsHideCheckinCardEnabled, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示快速预设卡片"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowPresetCard}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.IsShowPresetCardEnabled, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示小工具卡片"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowWidgetCard}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.IsShowWidgetCardEnabled, Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="小工具卡片显示项"
+                            <TextBlock Text="{helpers:Loc Key=WidgetItemsTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="选择要在小工具卡片中显示的工具"
+                            <TextBlock Text="{helpers:Loc Key=WidgetItemsCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
 
-                            <ToggleSwitch Header="显示抽卡记录分析" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetGacha}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetGacha, Mode=TwoWay}" />
-                            <ToggleSwitch Header="显示成就追踪" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetAchievement}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetAchievement, Mode=TwoWay}" />
-                            <ToggleSwitch Header="显示背包物品" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetInventory}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetInventory, Mode=TwoWay}" />
-                            <ToggleSwitch Header="显示角色练度查询" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetPlayerRole}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetPlayerRole, Mode=TwoWay}" />
-                            <ToggleSwitch Header="显示旅行便签" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetDailyNoteWindow}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetDailyNoteWindow, Mode=TwoWay}" />
-                            <ToggleSwitch Header="显示视频资源库" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetVideo}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetVideo, Mode=TwoWay}" />
-                            <ToggleSwitch Header="显示战绩信息" OffContent="隐藏" OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=WidgetBBS}" OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowWidgetBBS, Mode=TwoWay}" />
                         </StackPanel>
 
-                        <TextBlock Text="启动按钮背景颜色"
+                        <TextBlock Text="{helpers:Loc Key=LaunchButtonBgColorTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
                                     Margin="0,8,0,24">
-                            <TextBox Header="颜色 (Hex)" Width="150"
+                            <TextBox Header="{helpers:Loc Key=ColorHex}" Width="150"
                                      Text="{x:Bind ViewModel.LaunchButtonOverlayColor, Mode=TwoWay}"
                                      PlaceholderText="#0078D7" />
-                            <Button Content="恢复默认"
+                            <Button Content="{helpers:Loc Key=RestoreDefault}"
                                     Command="{x:Bind ViewModel.ResetLaunchButtonOverlayColorCommand}"
                                     Style="{StaticResource PresetButtonStyle}"
                                     VerticalAlignment="Bottom" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="便签卡片显示项"
+                            <TextBlock Text="{helpers:Loc Key=NotesItemsTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="选择要在便签卡片中显示的项目，最多选择3个！"
+                            <TextBlock Text="{helpers:Loc Key=NotesItemsCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,8" />
 
                             <InfoBar Severity="Warning"
-                                     Title="注意"
-                                     Message="便签数据来自米游社游戏记录接口，频繁刷新可能触发人机验证，严重时风控可能导致战绩页面暂时无法访问。如遇此情况，请降低刷新频率，等待一段时间后重试。"
+                                     Title="{helpers:Loc Key=NotesWarningTitle}"
+                                     Message="{helpers:Loc Key=NotesWarningMessage}"
                                      IsOpen="True"
                                      IsClosable="False"
                                      Margin="0,0,0,8" />
 
-                            <ToggleSwitch Header="隐藏便签卡片"
-                                          OffContent="显示"
-                                          OnContent="隐藏"
+                            <ToggleSwitch Header="{helpers:Loc Key=HideNotesCard}"
+                                          OffContent="{helpers:Loc Key=Show}"
+                                          OnContent="{helpers:Loc Key=Hide}"
                                           IsOn="{x:Bind ViewModel.IsHideDailyNoteCardEnabled, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示树脂"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowResin}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteResin, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示每日委托"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowDailyTasks}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteDailyTasks, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示洞天宝钱"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowHomeCoin}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteHomeCoin, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示探索派遣"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowExpeditions}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteExpeditions, Mode=TwoWay}" />
 
-                            <ToggleSwitch Header="显示参量质变仪"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowTransformer}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.ShowDailyNoteTransformer, Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="导航栏显示项"
+                            <TextBlock Text="{helpers:Loc Key=NavItemsTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="选择要在左侧导航栏中显示的项目。隐藏后不会影响功能使用，可在设置中重新开启。主页和设置中心不可隐藏。"
+                            <TextBlock Text="{helpers:Loc Key=NavItemsCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
@@ -417,7 +417,7 @@
                                         <ToggleSwitch Header="{x:Bind DisplayName}"
                                                       IsOn="{x:Bind IsUserVisible, Mode=TwoWay}"
                                                       IsEnabled="{x:Bind IsForceVisible, Converter={StaticResource BoolInverter}}"
-                                                      OffContent="隐藏" OnContent="显示"
+                                                      OffContent="{helpers:Loc Key=Hide}" OnContent="{helpers:Loc Key=Show}"
                                                       Margin="0,4,0,4" />
                                     </DataTemplate>
                                 </ItemsRepeater.ItemTemplate>
@@ -425,7 +425,7 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="背景遮罩透明度"
+                            <TextBlock Text="{helpers:Loc Key=BgOverlayOpacityTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
                             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
@@ -439,7 +439,7 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="Frame 背景透明度"
+                            <TextBlock Text="{helpers:Loc Key=FrameOpacityTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
                             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
@@ -454,7 +454,7 @@
 
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="背景图片透明度"
+                            <TextBlock Text="{helpers:Loc Key=BgImageOpacityTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
                             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
@@ -468,30 +468,30 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="关闭后最小化至系统托盘"
+                            <TextBlock Text="{helpers:Loc Key=MinimizeToTrayTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <ToggleSwitch OffContent="已禁用"
-                                          OnContent="已启用"
+                            <ToggleSwitch OffContent="{helpers:Loc Key=Disabled}"
+                                          OnContent="{helpers:Loc Key=Enabled}"
                                           IsOn="{x:Bind ViewModel.MinimizeToTray, Mode=TwoWay}" />
 
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="记住窗口大小"
+                            <TextBlock Text="{helpers:Loc Key=RememberWindowSizeTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <ToggleSwitch OffContent="已禁用"
-                                          OnContent="已启用"
+                            <ToggleSwitch OffContent="{helpers:Loc Key=Disabled}"
+                                          OnContent="{helpers:Loc Key=Enabled}"
                                           IsOn="{x:Bind ViewModel.IsSaveWindowSizeEnabled, Mode=TwoWay}" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,12,0,0">
-                            <TextBlock Text="窗口最小大小限制"
+                            <TextBlock Text="{helpers:Loc Key=MinWindowSizeLimitTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <ToggleSwitch OffContent="已禁用"
-                                          OnContent="已启用"
+                            <ToggleSwitch OffContent="{helpers:Loc Key=Disabled}"
+                                          OnContent="{helpers:Loc Key=Enabled}"
                                           IsOn="{x:Bind ViewModel.IsMinWindowSizeLimitEnabled, Mode=TwoWay}" />
                         </StackPanel>
                     </StackPanel>
@@ -504,49 +504,49 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="主页文字样式" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionHomeText}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <TextBlock Text="游戏资讯卡片文字颜色与透明度"
+                        <TextBlock Text="{helpers:Loc Key=GameNewsTextColorTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
                                     Margin="0,8,0,24">
-                            <TextBox Header="颜色 (Hex)" Width="120"
+                            <TextBox Header="{helpers:Loc Key=ColorHex}" Width="120"
                                      Text="{x:Bind ViewModel.GameNewsCardTextColor, Mode=TwoWay}"
                                      PlaceholderText="#FFFFFF" />
                             <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="透明度" Margin="0,0,0,4" />
+                                <TextBlock Text="{helpers:Loc Key=Opacity}" Margin="0,0,0,4" />
                                 <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05"
                                         Value="{x:Bind ViewModel.GameNewsCardTextOpacity, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
 
-                        <TextBlock Text="启动按钮文字颜色与透明度"
+                        <TextBlock Text="{helpers:Loc Key=LaunchBtnTextColorTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
                                     Margin="0,8,0,24">
-                            <TextBox Header="颜色 (Hex)" Width="120"
+                            <TextBox Header="{helpers:Loc Key=ColorHex}" Width="120"
                                      Text="{x:Bind ViewModel.LaunchButtonTextColor, Mode=TwoWay}"
                                      PlaceholderText="#FFFFFF" />
                             <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="透明度" Margin="0,0,0,4" />
+                                <TextBlock Text="{helpers:Loc Key=Opacity}" Margin="0,0,0,4" />
                                 <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05"
                                         Value="{x:Bind ViewModel.LaunchButtonTextOpacity, Mode=TwoWay}" />
                             </StackPanel>
                         </StackPanel>
 
-                        <TextBlock Text="游戏签到文字颜色与透明度"
+                        <TextBlock Text="{helpers:Loc Key=CheckinTextColorTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="12"
                                     Margin="0,8,0,8">
-                            <TextBox Header="颜色 (Hex)" Width="120"
+                            <TextBox Header="{helpers:Loc Key=ColorHex}" Width="120"
                                      Text="{x:Bind ViewModel.GameCheckinTextColor, Mode=TwoWay}"
                                      PlaceholderText="#FFFFFF" />
                             <StackPanel VerticalAlignment="Bottom">
-                                <TextBlock Text="透明度" Margin="0,0,0,4" />
+                                <TextBlock Text="{helpers:Loc Key=Opacity}" Margin="0,0,0,4" />
                                 <Slider Width="200" Minimum="0" Maximum="1" StepFrequency="0.05"
                                         Value="{x:Bind ViewModel.GameCheckinTextOpacity, Mode=TwoWay}" />
                             </StackPanel>
@@ -561,25 +561,31 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="语言与区域" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionLanguage}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <TextBlock Text="应用显示语言"
+                        <TextBlock Text="{helpers:Loc Key=AppLangTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
-                        <TextBlock Text="重启应用后生效"
+                        <TextBlock Text="{helpers:Loc Key=AppLangCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,12" />
 
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <RadioButton Content="简体中文（推荐）"
+                            <RadioButton Content="{helpers:Loc Key=LangZhCN}"
                                          FontSize="14"
                                          GroupName="AppLanguage"
                                          CommandParameter="1"
                                          IsChecked="{x:Bind ViewModel.SelectedLanguage, Converter={StaticResource LanguageEnumToBooleanConverter}, ConverterParameter=1}"
                                          Command="{x:Bind ViewModel.SwitchLanguageCommand}" />
-                            <RadioButton Content="使用系统默认语言"
+                            <RadioButton Content="English"
+                                         FontSize="14"
+                                         GroupName="AppLanguage"
+                                         CommandParameter="3"
+                                         IsChecked="{x:Bind ViewModel.SelectedLanguage, Converter={StaticResource LanguageEnumToBooleanConverter}, ConverterParameter=3}"
+                                         Command="{x:Bind ViewModel.SwitchLanguageCommand}" />
+                            <RadioButton Content="{helpers:Loc Key=LangDefault}"
                                          FontSize="14"
                                          GroupName="AppLanguage"
                                          CommandParameter="0"
@@ -596,35 +602,35 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="游戏启动配置" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionLaunchConfig}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <TextBlock Text="启动窗口模式"
+                        <TextBlock Text="{helpers:Loc Key=LaunchWindowModeTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Spacing="12">
-                            <RadioButton Content="普通窗口"
+                            <RadioButton Content="{helpers:Loc Key=WindowModeNormal}"
                                          FontSize="14"
                                          GroupName="LaunchWindowMode"
                                          IsChecked="{x:Bind ViewModel.LaunchArgsWindowMode, Mode=TwoWay, Converter={StaticResource WindowModeEnumToBooleanConverter}, ConverterParameter=Normal}" />
-                            <RadioButton Content="弹出窗口（无边框）"
+                            <RadioButton Content="{helpers:Loc Key=WindowModePopup}"
                                          FontSize="14"
                                          GroupName="LaunchWindowMode"
                                          IsChecked="{x:Bind ViewModel.LaunchArgsWindowMode, Mode=TwoWay, Converter={StaticResource WindowModeEnumToBooleanConverter}, ConverterParameter=Popup}" />
                         </StackPanel>
 
-                        <TextBlock Text="游戏分辨率"
+                        <TextBlock Text="{helpers:Loc Key=ResolutionTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
                                    Margin="0,20,0,0" />
-                        <TextBlock Text="设置游戏启动时的窗口大小"
+                        <TextBlock Text="{helpers:Loc Key=ResolutionCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,12" />
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Spacing="12">
                             <StackPanel Orientation="Horizontal" Spacing="12">
-                                <TextBox Header="宽度（像素）"
+                                <TextBox Header="{helpers:Loc Key=WidthLabel}"
                                          Width="110"
                                          Text="{x:Bind ViewModel.LaunchArgsWidth, Mode=TwoWay}"
                                          PlaceholderText="1920" />
@@ -632,13 +638,13 @@
                                            VerticalAlignment="Bottom"
                                            Margin="0,0,0,8"
                                            FontSize="16" />
-                                <TextBox Header="高度（像素）"
+                                <TextBox Header="{helpers:Loc Key=HeightLabel}"
                                          Width="110"
                                          Text="{x:Bind ViewModel.LaunchArgsHeight, Mode=TwoWay}"
                                          PlaceholderText="1080" />
                             </StackPanel>
 
-                            <TextBlock Text="快速预设"
+                            <TextBlock Text="{helpers:Loc Key=QuickPresetsLabel}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,4,0,4" />
@@ -670,21 +676,21 @@
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="HDR 亮度配置"
+                            <TextBlock Text="{helpers:Loc Key=HdrTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="调整游戏内的 HDR 峰值亮度与 UI 亮度"
+                            <TextBlock Text="{helpers:Loc Key=HdrCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
-                            <Button Content="打开 HDR 设置"
+                            <Button Content="{helpers:Loc Key=OpenHdrSettings}"
                                     Click="OnOpenHDRSettingsClick" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="目标显示器"
+                            <TextBlock Text="{helpers:Loc Key=TargetMonitorTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="指定游戏启动时所在的显示器"
+                            <TextBlock Text="{helpers:Loc Key=TargetMonitorCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
@@ -693,62 +699,62 @@
                                           SelectedItem="{x:Bind ViewModel.SelectedMonitor, Mode=TwoWay}"
                                           DisplayMemberPath="DisplayName"
                                           Width="250" />
-                                <Button Content="识别显示器"
+                                <Button Content="{helpers:Loc Key=IdentifyMonitors}"
                                         Click="OnIdentifyMonitorsClick"
                                         Style="{StaticResource PresetButtonStyle}" />
                             </StackPanel>
                         </StackPanel>
-                        <TextBlock Text="高级启动参数"
+                        <TextBlock Text="{helpers:Loc Key=AdvLaunchArgsTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
                                    Margin="0,20,0,0" />
-                        <TextBlock Text="自定义参数将追加到启动命令后"
+                        <TextBlock Text="{helpers:Loc Key=AdvLaunchArgsCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,8" />
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <TextBox Header="自定义启动参数"
+                            <TextBox Header="{helpers:Loc Key=CustomLaunchArgsLabel}"
                                      Text="{x:Bind ViewModel.CustomLaunchParameters, Mode=TwoWay}"
-                                     PlaceholderText="例如：-fullscreen -high"
+                                     PlaceholderText="{helpers:Loc Key=CustomLaunchArgsPlaceholder}"
                                      MaxWidth="400"
                                      HorizontalAlignment="Left" />
                             <InfoBar Severity="Informational"
-                                     Message="提示：参数将以空格追加到游戏启动命令后，请勿输入游戏路径 如果点了没反应，请多按几下预设选项按钮"
+                                     Message="{helpers:Loc Key=CustomLaunchArgsInfo}"
                                      IsOpen="True"
                                      IsClosable="False"
                                      Margin="0,8,0,0"
                                      FontSize="12" />
                         </StackPanel>
-                        <TextBlock Text="自定义游戏主程序名称"
+                        <TextBlock Text="{helpers:Loc Key=CustomExeNameTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14"
                                    Margin="0,20,0,0" />
-                        <TextBlock Text="修改此项可自定义检测和启动时的 exe 文件名。留空则使用默认值 (YuanShen.exe / GenshinImpact.exe)"
+                        <TextBlock Text="{helpers:Loc Key=CustomExeNameCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,8" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="16">
                             <TextBox Text="{x:Bind ViewModel.CustomGameExeName, Mode=TwoWay}"
-                                     PlaceholderText="例如: YuanShen.exe"
+                                     PlaceholderText="{helpers:Loc Key=CustomExeNamePlaceholder}"
                                      Width="250"
                                      VerticalAlignment="Center" />
-                            <Button Content="恢复默认"
+                            <Button Content="{helpers:Loc Key=RestoreDefault}"
                                     Command="{x:Bind ViewModel.ResetGameExeNameCommand}"
                                     Style="{StaticResource PresetButtonStyle}" />
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,24,0,0">
-                            <TextBlock Text="注入模块"
+                            <TextBlock Text="{helpers:Loc Key=InjectionModuleTitle}"
                                        Style="{StaticResource SectionTitleStyle}"
                                        VerticalAlignment="Center" />
-                            <ComboBox Header="选择注入模块"
+                            <ComboBox Header="{helpers:Loc Key=InjectionModuleHeader}"
                                       x:Name="InjectionModuleComboBox"
                                       Width="220"
                                       SelectionChanged="InjectionModuleComboBox_SelectionChanged">
-                                <ComboBoxItem Content="内置注入" Tag="DLL" />
-                                <ComboBoxItem Content="独立注入" Tag="EXE" />
+                                <ComboBoxItem Content="{helpers:Loc Key=InjectionBuiltIn}" Tag="DLL" />
+                                <ComboBoxItem Content="{helpers:Loc Key=InjectionStandalone}" Tag="EXE" />
                             </ComboBox>
-                            <TextBlock Text="内置注入通过启动器自身引擎加载插件；独立注入使用独立程序启动游戏并加载插件，适用于内置模式不兼容的情况。"
+                            <TextBlock Text="{helpers:Loc Key=InjectionCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        TextWrapping="Wrap"
@@ -756,14 +762,14 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,24,0,0">
-                            <TextBlock Text="兑换码提醒"
+                            <TextBlock Text="{helpers:Loc Key=RedeemReminderTitle}"
                                        Style="{StaticResource SectionTitleStyle}"
                                        VerticalAlignment="Center" />
-                            <ToggleSwitch Header="新兑换码发布时即时提醒"
-                                          OffContent="已禁用"
-                                          OnContent="已启用"
+                            <ToggleSwitch Header="{helpers:Loc Key=RedeemReminderToggle}"
+                                          OffContent="{helpers:Loc Key=Disabled}"
+                                          OnContent="{helpers:Loc Key=Enabled}"
                                           IsOn="{x:Bind ViewModel.IsRedeemCodeNotificationEnabled, Mode=TwoWay}" />
-                            <TextBlock Text="开启后，当有新的兑换码发布时，将在第一时间推送通知并显示有效期倒计时。每期兑换码仅通知一次。"
+                            <TextBlock Text="{helpers:Loc Key=RedeemReminderCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        TextWrapping="Wrap"
@@ -771,15 +777,15 @@
                         </StackPanel>
 
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,24,0,0">
-                            <TextBlock Text="启动后行为"
+                            <TextBlock Text="{helpers:Loc Key=PostLaunchTitle}"
                                        Style="{StaticResource SectionTitleStyle}"
                                        VerticalAlignment="Center" />
-                            <ComboBox Header="游戏启动后执行"
+                            <ComboBox Header="{helpers:Loc Key=PostLaunchHeader}"
                                       ItemsSource="{x:Bind ViewModel.PostLaunchBehaviorItems}"
                                       SelectedItem="{x:Bind ViewModel.SelectedPostLaunchBehaviorItem, Mode=TwoWay}"
                                       DisplayMemberPath="DisplayName"
                                       Width="220" />
-                            <TextBlock Text="选择启动游戏后启动器的行为：最小化到系统托盘继续运行，或保存状态后完全退出。"
+                            <TextBlock Text="{helpers:Loc Key=PostLaunchCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        TextWrapping="Wrap"
@@ -795,26 +801,26 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="背景与视觉效果" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionBackground}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <ToggleSwitch Header="启用自定义背景"
-                                      OffContent="已禁用"
-                                      OnContent="已启用"
+                        <ToggleSwitch Header="{helpers:Loc Key=EnableCustomBg}"
+                                      OffContent="{helpers:Loc Key=Disabled}"
+                                      OnContent="{helpers:Loc Key=Enabled}"
                                       IsOn="{x:Bind ViewModel.IsBackgroundEnabled, Mode=TwoWay}" />
 
                         <StackPanel Margin="0,16,0,0">
-                            <TextBlock Text="背景来源"
+                            <TextBlock Text="{helpers:Loc Key=BgSourceTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
                                        Margin="0,0,0,8" />
                             <StackPanel Spacing="8">
-                                <Button Content="选择自定义背景图片..."
+                                <Button Content="{helpers:Loc Key=SelectCustomBgImage}"
                                         Command="{x:Bind ViewModel.SelectCustomBackgroundCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
                                         CornerRadius="6" />
-                                <Button Content="清除自定义背景"
+                                <Button Content="{helpers:Loc Key=ClearCustomBg}"
                                         Command="{x:Bind ViewModel.ClearCustomBackgroundCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
@@ -829,16 +835,16 @@
                                 </Button>
                             </StackPanel>
 
-                            <TextBlock Text="背景轮播模式"
+                            <TextBlock Text="{helpers:Loc Key=BgSlideshowTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
                                        Margin="0,16,0,8" />
-                            <ToggleSwitch OffContent="已禁用"
-                                          OnContent="已启用"
+                            <ToggleSwitch OffContent="{helpers:Loc Key=Disabled}"
+                                          OnContent="{helpers:Loc Key=Enabled}"
                                           IsOn="{x:Bind ViewModel.IsBackgroundSlideshowEnabled, Mode=TwoWay}" />
                             <StackPanel Spacing="8"
                                         Visibility="{x:Bind ViewModel.IsBackgroundSlideshowEnabled, Mode=OneWay}">
-                                <Button Content="选择轮播图片文件夹..."
+                                <Button Content="{helpers:Loc Key=SelectSlideshowFolder}"
                                         Command="{x:Bind ViewModel.SelectBackgroundSlideshowFolderCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
@@ -846,7 +852,7 @@
                                 <TextBlock Text="{x:Bind ViewModel.BackgroundSlideshowFolder, Mode=OneWay}"
                                            FontSize="12" Opacity="0.7" TextWrapping="Wrap" MaxWidth="400"
                                            Visibility="{x:Bind ViewModel.HasBackgroundSlideshowFolder, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
-                                <Button Content="清除轮播图片文件夹"
+                                <Button Content="{helpers:Loc Key=ClearSlideshowFolder}"
                                         Command="{x:Bind ViewModel.ClearBackgroundSlideshowFolderCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
@@ -859,7 +865,7 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                <NumberBox Header="轮播间隔 (秒)"
+                                <NumberBox Header="{helpers:Loc Key=SlideshowInterval}"
                                            Value="{x:Bind ViewModel.BackgroundSlideshowInterval, Mode=TwoWay}"
                                            Minimum="1"
                                            Maximum="86400"
@@ -869,75 +875,75 @@
                                            Margin="0,8,0,0" />
                             </StackPanel>
 
-                            <ComboBox Header="官方背景服务器"
+                            <ComboBox Header="{helpers:Loc Key=OfficialBgServerTitle}"
                                       Margin="0,16,0,0"
                                       SelectedIndex="{x:Bind ViewModel.SelectedServer, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
                                       MinWidth="200">
-                                <ComboBoxItem Content="国服 (天空岛)" />
-                                <ComboBoxItem Content="国际服 (提瓦特)" />
+                                <ComboBoxItem Content="{helpers:Loc Key=ServerCN}" />
+                                <ComboBoxItem Content="{helpers:Loc Key=ServerGlobal}" />
                             </ComboBox>
 
                             <StackPanel Margin="0,16,0,0" Spacing="8">
-                                <TextBlock Text="官方背景 API"
+                                <TextBlock Text="{helpers:Loc Key=OfficialBgApiTitle}"
                                            Style="{ThemeResource BodyStrongTextBlockStyle}"
                                            FontSize="14" />
-                                <TextBlock Text="留空使用当前服务器的默认 API。自定义 API 需要返回与官方 getAllGameBasicInfo 一致的数据结构。"
+                                <TextBlock Text="{helpers:Loc Key=OfficialBgApiCaption}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
                                            TextWrapping="Wrap" />
                                 <TextBox
                                     Text="{x:Bind ViewModel.CustomBackgroundApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    PlaceholderText="输入自定义官方背景 API 地址"
+                                    PlaceholderText="{helpers:Loc Key=OfficialBgApiPlaceholder}"
                                     MaxWidth="640"
                                     HorizontalAlignment="Left" />
                                 <TextBlock Text="{x:Bind ViewModel.CurrentBackgroundApiUrl, Mode=OneWay}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
                                            TextWrapping="Wrap" />
-                                <Button Content="重置为默认 API"
+                                <Button Content="{helpers:Loc Key=ResetBgApi}"
                                         Command="{x:Bind ViewModel.ResetBackgroundApiCommand}"
                                         HorizontalAlignment="Left"
                                         Padding="12,6"
                                         CornerRadius="6" />
                             </StackPanel>
 
-                            <TextBlock Text="获取官方背景资源"
+                            <TextBlock Text="{helpers:Loc Key=FetchBgAssetsTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14"
                                        Margin="0,16,0,8" />
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <Button Content="下载最新背景图片"
+                                <Button Content="{helpers:Loc Key=DownloadBgImage}"
                                         Command="{x:Bind ViewModel.DownloadLatestBackgroundImageCommand}"
                                         Padding="12,6"
                                         CornerRadius="6" />
-                                <Button Content="下载最新背景视频"
+                                <Button Content="{helpers:Loc Key=DownloadBgVideo}"
                                         Command="{x:Bind ViewModel.DownloadLatestBackgroundVideoCommand}"
                                         Padding="12,6"
                                         CornerRadius="6" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Margin="0,16,0,0">
-                            <ToggleSwitch Header="启用页面亚克力模糊遮罩"
-                                          OffContent="纯色"
-                                          OnContent="亚克力模糊"
+                            <ToggleSwitch Header="{helpers:Loc Key=EnableAcrylicOverlay}"
+                                          OffContent="{helpers:Loc Key=SolidColor}"
+                                          OnContent="{helpers:Loc Key=AcrylicBlur}"
                                           IsOn="{x:Bind ViewModel.IsAcrylicOverlayEnabled, Mode=TwoWay}" />
-                            <TextBlock Text="注意：当使用视频背景时，为保证性能与显示效果，将自动回退为纯色半透明背景"
+                            <TextBlock Text="{helpers:Loc Key=AcrylicOverlayNote}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,8" />
                         </StackPanel>
                         <StackPanel Margin="0,16,0,0">
-                            <ToggleSwitch Header="页面遮罩半透明模式"
-                                          OffContent="不透明"
-                                          OnContent="半透明"
+                            <ToggleSwitch Header="{helpers:Loc Key=SemiTransparentOverlay}"
+                                          OffContent="{helpers:Loc Key=Opaque}"
+                                          OnContent="{helpers:Loc Key=SemiTransparent}"
                                           IsOn="{x:Bind ViewModel.IsPageOverlaySemiTransparentEnabled, Mode=TwoWay}" />
-                            <TextBlock Text="开启后页面遮罩将以半透明方式显示，可透出背景图片"
+                            <TextBlock Text="{helpers:Loc Key=SemiTransparentCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,4" />
                             <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center"
                                         Visibility="{x:Bind ViewModel.IsPageOverlaySemiTransparentEnabled, Mode=OneWay}">
-                                <TextBlock Text="遮罩透明度"
+                                <TextBlock Text="{helpers:Loc Key=OverlayOpacityTitle}"
                                            Style="{ThemeResource BodyStrongTextBlockStyle}"
                                            FontSize="14"
                                            VerticalAlignment="Center" />
@@ -959,41 +965,41 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="窗口效果" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionWindowEffects}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <TextBlock Text="窗口背景材质"
+                        <TextBlock Text="{helpers:Loc Key=BackdropTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
-                        <TextBlock Text="选择窗口背景的视觉效果"
+                        <TextBlock Text="{helpers:Loc Key=BackdropCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,12" />
 
                         <StackPanel Style="{StaticResource SettingItemStyle}">
-                            <RadioButton Content="Mica (云母)"
+                            <RadioButton Content="{helpers:Loc Key=MicaOption}"
                                          FontSize="14"
                                          GroupName="WindowBackdrop"
                                          IsChecked="{Binding CurrentWindowBackdrop, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Mica}">
                             </RadioButton>
-                            <RadioButton Content="Acrylic (亚克力)"
+                            <RadioButton Content="{helpers:Loc Key=AcrylicOption}"
                                          FontSize="14"
                                          GroupName="WindowBackdrop"
                                          IsChecked="{Binding CurrentWindowBackdrop, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Acrylic}">
                             </RadioButton>
                         </StackPanel>
                         <InfoBar Severity="Warning"
-                                 Message="注意：Mica 效果仅在 Windows 11 上可用，旧版本系统可能会回退到纯色。"
+                                 Message="{helpers:Loc Key=MicaWarning}"
                                  IsOpen="True"
                                  IsClosable="False"
                                  Margin="0,12,0,0" />
 
                         <StackPanel Margin="0,16,0,0">
-                            <ToggleSwitch Header="显示侧边栏汉堡按钮"
-                                          OffContent="隐藏"
-                                          OnContent="显示"
+                            <ToggleSwitch Header="{helpers:Loc Key=ShowHamburger}"
+                                          OffContent="{helpers:Loc Key=Hide}"
+                                          OnContent="{helpers:Loc Key=Show}"
                                           IsOn="{x:Bind ViewModel.IsHamburgerButtonEnabled, Mode=TwoWay}" />
-                            <TextBlock Text="开启后侧边栏顶部显示展开/收起按钮，可展开侧边栏查看完整菜单文字"
+                            <TextBlock Text="{helpers:Loc Key=ShowHamburgerCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,8" />
@@ -1008,17 +1014,17 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="启动音效" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionStartupSound}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <ToggleSwitch Header="启用游戏启动音效"
-                                      OffContent="已禁用"
-                                      OnContent="已启用"
+                        <ToggleSwitch Header="{helpers:Loc Key=EnableStartupSound}"
+                                      OffContent="{helpers:Loc Key=Disabled}"
+                                      OnContent="{helpers:Loc Key=Enabled}"
                                       IsOn="{x:Bind ViewModel.IsStartupSoundEnabled, Mode=TwoWay}" />
 
                         <StackPanel Margin="0,16,0,0"
                                     Visibility="{x:Bind ViewModel.IsStartupSoundEnabled, Mode=OneWay}">
-                            <Button Content="选择音频文件..."
+                            <Button Content="{helpers:Loc Key=SelectAudioFile}"
                                     Command="{x:Bind ViewModel.SelectStartupSoundCommand}"
                                     HorizontalAlignment="Left"
                                     Padding="12,6"
@@ -1027,7 +1033,7 @@
                                        FontSize="12" Opacity="0.7" TextWrapping="Wrap" MaxWidth="400"
                                        Margin="0,8,0,0"
                                        Visibility="{x:Bind ViewModel.HasCustomStartupSound, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
-                            <Button Content="清除音频文件"
+                            <Button Content="{helpers:Loc Key=ClearAudioFile}"
                                     Command="{x:Bind ViewModel.ClearStartupSoundCommand}"
                                     HorizontalAlignment="Left"
                                     Padding="12,6"
@@ -1053,24 +1059,24 @@
                         <StackPanel Spacing="12">
                             <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                                 <Border Style="{StaticResource SectionAccentBarStyle}" />
-                                <TextBlock Text="签到配置" Style="{StaticResource SectionTitleStyle}" />
+                                <TextBlock Text="{helpers:Loc Key=SectionCheckinSettings}" Style="{StaticResource SectionTitleStyle}" />
                             </StackPanel>
 
                             <StackPanel Spacing="12">
-                                <ToggleSwitch Header="游戏签到"
-                                              OffContent="已禁用"
-                                              OnContent="已启用"
+                                <ToggleSwitch Header="{helpers:Loc Key=GameCheckin}"
+                                              OffContent="{helpers:Loc Key=Disabled}"
+                                              OnContent="{helpers:Loc Key=Enabled}"
                                               IsOn="{x:Bind ViewModel.IsGameCheckinEnabled, Mode=TwoWay}" />
-                                <TextBlock Text="领取米游社每日签到奖励（原石、摩拉等）"
+                                <TextBlock Text="{helpers:Loc Key=GameCheckinCaption}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
                                            Margin="0,-16,0,0" />
 
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal" Spacing="4">
-                                        <ToggleSwitch Header="社区签到"
-                                                      OffContent="已禁用"
-                                                      OnContent="已启用"
+                                        <ToggleSwitch Header="{helpers:Loc Key=CommunityCheckin}"
+                                                      OffContent="{helpers:Loc Key=Disabled}"
+                                                      OnContent="{helpers:Loc Key=Enabled}"
                                                       IsOn="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=TwoWay}" />
                                         <Button Background="Transparent"
                                                 BorderThickness="0"
@@ -1083,28 +1089,28 @@
                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </Button>
                                     </StackPanel>
-                                    <TextBlock Text="自动完成社区互动任务获取米游币"
+                                    <TextBlock Text="{helpers:Loc Key=CommunityCheckinCaption}"
                                                Style="{ThemeResource CaptionTextBlockStyle}"
                                                Opacity="0.7"
                                                Margin="0,-4,0,0" />
                                     <StackPanel Margin="32,4,0,0"
                                                 Orientation="Horizontal"
                                                 Visibility="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=OneWay}">
-                                        <CheckBox Content="点赞"
+                                        <CheckBox Content="{helpers:Loc Key=Like}"
                                                   IsChecked="{x:Bind ViewModel.IsCommunityLikeEnabled, Mode=TwoWay}"
                                                   Margin="0,0,16,0" />
-                                        <CheckBox Content="看帖"
+                                        <CheckBox Content="{helpers:Loc Key=ReadPosts}"
                                                   IsChecked="{x:Bind ViewModel.IsCommunityReadEnabled, Mode=TwoWay}"
                                                   Margin="0,0,16,0" />
-                                        <CheckBox Content="分享"
+                                        <CheckBox Content="{helpers:Loc Key=Share}"
                                                   IsChecked="{x:Bind ViewModel.IsCommunityShareEnabled, Mode=TwoWay}" />
                                     </StackPanel>
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Spacing="4">
-                                    <ToggleSwitch Header="云游戏签到"
-                                                  OffContent="已禁用"
-                                                  OnContent="已启用"
+                                    <ToggleSwitch Header="{helpers:Loc Key=CloudGameCheckin}"
+                                                  OffContent="{helpers:Loc Key=Disabled}"
+                                                  OnContent="{helpers:Loc Key=Enabled}"
                                                   IsOn="{x:Bind ViewModel.IsCloudGameCheckinEnabled, Mode=TwoWay}" />
                                     <Button Background="Transparent"
                                             BorderThickness="0"
@@ -1117,25 +1123,25 @@
                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </Button>
                                 </StackPanel>
-                                <TextBlock Text="领取云游戏签到奖励，需在下方账号列表右侧添加云游戏登录凭证"
+                                <TextBlock Text="{helpers:Loc Key=CloudGameCheckinCaption}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
                                            Margin="0,-16,0,0" />
 
-                                <ToggleSwitch Header="启动时自动签到"
-                                              OffContent="已禁用"
-                                              OnContent="已启用"
+                                <ToggleSwitch Header="{helpers:Loc Key=AutoCheckinOnLaunch}"
+                                              OffContent="{helpers:Loc Key=Disabled}"
+                                              OnContent="{helpers:Loc Key=Enabled}"
                                               IsOn="{x:Bind ViewModel.IsAutoCheckinEnabled, Mode=TwoWay}" />
-                                <TextBlock Text="开启后，将在应用启动时自动检测并在未签到时执行签到"
+                                <TextBlock Text="{helpers:Loc Key=AutoCheckinCaption}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
                                            Margin="0,-16,0,0" />
 
-                                <ToggleSwitch Header="批量签到"
-                                              OffContent="已禁用"
-                                              OnContent="已启用"
+                                <ToggleSwitch Header="{helpers:Loc Key=BatchCheckin}"
+                                              OffContent="{helpers:Loc Key=Disabled}"
+                                              OnContent="{helpers:Loc Key=Enabled}"
                                               IsOn="{x:Bind ViewModel.IsBatchCheckinEnabled, Mode=TwoWay}" />
-                                <TextBlock Text="打开此开关则可为所有勾选的账号执行指定的签到任务，否则仅为当前账号执行"
+                                <TextBlock Text="{helpers:Loc Key=BatchCheckinCaption}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.7"
                                            Margin="0,-16,0,0" />
@@ -1149,7 +1155,7 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0" Margin="0,8,0,0">
-                                <TextBlock Text="账号列表"
+                                <TextBlock Text="{helpers:Loc Key=AccountListTitle}"
                                            Style="{ThemeResource BodyStrongTextBlockStyle}"
                                            FontSize="14"
                                            Margin="0,0,0,8" />
@@ -1187,7 +1193,7 @@
                                                                 Background="Transparent"
                                                                 BorderThickness="0">
                                                             <ToolTipService.ToolTip>
-                                                                <ToolTip Content="添加云游戏凭证" />
+                                                                <ToolTip Content="{helpers:Loc Key=AddCloudCredentialTooltip}" />
                                                             </ToolTipService.ToolTip>
                                                             <Grid>
                                                                 <FontIcon Glyph="&#xE753;" FontSize="14"
@@ -1208,21 +1214,21 @@
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Bottom" Margin="12,8,0,0"
                                         Orientation="Horizontal" Spacing="4">
-                                <TextBlock Text="遇到验证码？"
+                                <TextBlock Text="{helpers:Loc Key=CaptchaQuestion}"
                                            Style="{ThemeResource CaptionTextBlockStyle}"
                                            Opacity="0.6" VerticalAlignment="Center">
                                     <ToolTipService.ToolTip>
-                                        <TextBlock Text="游戏签到和社区签到（概率较大）过程中可能会遇到验证码，需要配置真实设备信息降低风控频率，或使用独立部署版本配置打码服务。"
+                                        <TextBlock Text="{helpers:Loc Key=CaptchaTooltip}"
                                                    TextWrapping="Wrap" MaxWidth="300" />
                                     </ToolTipService.ToolTip>
                                 </TextBlock>
-                                <HyperlinkButton Content="独立部署版本"
+                                <HyperlinkButton Content="{helpers:Loc Key=SelfHostedVersion}"
                                                  Click="OnIndependentDeploymentClick"
                                                  FontSize="12"
                                                  Padding="0"
                                                  VerticalAlignment="Center">
                                     <ToolTipService.ToolTip>
-                                        <TextBlock Text="游戏签到和社区签到（概率较大）过程中可能会遇到验证码，需要配置真实设备信息降低风控频率，或使用独立部署版本配置打码服务。"
+                                        <TextBlock Text="{helpers:Loc Key=CaptchaTooltip}"
                                                    TextWrapping="Wrap" MaxWidth="300" />
                                     </ToolTipService.ToolTip>
                                 </HyperlinkButton>
@@ -1238,19 +1244,19 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="高级选项" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionAdvancedOptions}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <ToggleSwitch Header="启用 BetterGI 联动"
-                                      OffContent="已禁用"
-                                      OnContent="已启用"
+                        <ToggleSwitch Header="{helpers:Loc Key=EnableBetterGI}"
+                                      OffContent="{helpers:Loc Key=Disabled}"
+                                      OnContent="{helpers:Loc Key=Enabled}"
                                       IsOn="{x:Bind ViewModel.IsBetterGIIntegrationEnabled, Mode=TwoWay}"
                                       Margin="0,16,0,0" />
-                        <TextBlock Text="启动游戏时的同时打开BetterGI"
+                        <TextBlock Text="{helpers:Loc Key=BetterGICaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,0,0,0" />
-                        <NumberBox Header="BetterGI启动延迟 (秒)"
+                        <NumberBox Header="{helpers:Loc Key=BetterGIDelayLabel}"
                                    Width="180"
                                    HorizontalAlignment="Left"
                                    Minimum="0"
@@ -1260,38 +1266,38 @@
                                    SpinButtonPlacementMode="Compact"
                                    Value="{x:Bind ViewModel.BetterGIStartupDelaySeconds, Mode=TwoWay}"
                                    Margin="0,8,0,0" />
-                        <TextBlock Text="设为0可关闭延迟；延迟只影响BetterGI"
+                        <TextBlock Text="{helpers:Loc Key=BetterGIDelayCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,0,0,0" />
 
-                        <ToggleSwitch Header="退出游戏时关闭BetterGI"
-                                      OffContent="已禁用"
-                                      OnContent="已启用"
+                        <ToggleSwitch Header="{helpers:Loc Key=BetterGICloseOnExit}"
+                                      OffContent="{helpers:Loc Key=Disabled}"
+                                      OnContent="{helpers:Loc Key=Enabled}"
                                       IsOn="{x:Bind ViewModel.IsBetterGICloseOnExitEnabled, Mode=TwoWay}"
                                       Margin="0,8,0,0" />
-                        <TextBlock Text="点击退出游戏,自动关闭BetterGI"
+                        <TextBlock Text="{helpers:Loc Key=BetterGICloseOnExitCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,0,0,0" />
-                        <TextBlock Text="浏览器缓存清理" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
+                        <TextBlock Text="{helpers:Loc Key=BrowserCacheTitle}" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
                                    Margin="0,20,0,0" />
-                        <TextBlock Text="清理内置浏览器 (WebView2) 产生的缓存文件" Style="{ThemeResource CaptionTextBlockStyle}"
+                        <TextBlock Text="{helpers:Loc Key=BrowserCacheCaption}" Style="{ThemeResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" Margin="0,2,0,8" />
                         <StackPanel Style="{StaticResource SettingItemStyle}" Orientation="Horizontal" Spacing="16">
                             <TextBlock Text="{x:Bind ViewModel.WebView2CacheSize, Mode=OneWay}"
                                        VerticalAlignment="Center"
                                        FontSize="16"
                                        FontWeight="SemiBold" />
-                            <Button Content="清除缓存"
+                            <Button Content="{helpers:Loc Key=ClearCacheBtn}"
                                     Command="{x:Bind ViewModel.ClearWebView2CacheCommand}"
                                     Style="{StaticResource PresetButtonStyle}" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="程序性能优先级"
+                            <TextBlock Text="{helpers:Loc Key=ProcessPriorityTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="调整启动器在系统中的CPU调度优先级（过高可能影响系统其他进程）"
+                            <TextBlock Text="{helpers:Loc Key=ProcessPriorityCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
@@ -1299,27 +1305,27 @@
                             <ComboBox
                                 SelectedIndex="{x:Bind ViewModel.AppProcessPriority, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}"
                                 MinWidth="200">
-                                <ComboBoxItem Content="正常 (默认)" />
-                                <ComboBoxItem Content="高于正常" />
-                                <ComboBoxItem Content="高" />
+                                <ComboBoxItem Content="{helpers:Loc Key=PriorityNormal}" />
+                                <ComboBoxItem Content="{helpers:Loc Key=PriorityAboveNormal}" />
+                                <ComboBoxItem Content="{helpers:Loc Key=High}" />
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Style="{StaticResource SettingItemStyle}" Margin="0,20,0,0">
-                            <TextBlock Text="CPU 占用异常警告"
+                            <TextBlock Text="{helpers:Loc Key=CpuWarningTitle}"
                                        Style="{ThemeResource BodyStrongTextBlockStyle}"
                                        FontSize="14" />
-                            <TextBlock Text="当启动器 CPU 占用持续超过阈值 5 分钟，且未检测到 OBS 时弹出置顶提示。默认开启。"
+                            <TextBlock Text="{helpers:Loc Key=CpuWarningCaption}"
                                        Style="{ThemeResource CaptionTextBlockStyle}"
                                        Opacity="0.7"
                                        Margin="0,2,0,12" />
-                            <ToggleSwitch Header="启用 CPU 占用异常警告"
-                                          OffContent="已禁用"
-                                          OnContent="已启用"
+                            <ToggleSwitch Header="{helpers:Loc Key=EnableCpuWarning}"
+                                          OffContent="{helpers:Loc Key=Disabled}"
+                                          OnContent="{helpers:Loc Key=Enabled}"
                                           IsOn="{x:Bind ViewModel.IsCpuUsageWarningEnabled, Mode=TwoWay}"
                                           Toggled="OnCpuUsageWarningToggled" />
                             <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,12,0,0"
                                         VerticalAlignment="Center">
-                                <NumberBox Header="警告阈值 (%)"
+                                <NumberBox Header="{helpers:Loc Key=CpuWarningThreshold}"
                                            Width="180"
                                            HorizontalAlignment="Left"
                                            Minimum="5"
@@ -1328,7 +1334,7 @@
                                            LargeChange="5"
                                            SpinButtonPlacementMode="Compact"
                                            Value="{x:Bind ViewModel.CpuUsageWarningThreshold, Mode=TwoWay}" />
-                                <Button Content="恢复默认"
+                                <Button Content="{helpers:Loc Key=RestoreDefault}"
                                         Command="{x:Bind ViewModel.ResetCpuUsageWarningSettingsCommand}"
                                         Style="{StaticResource PresetButtonStyle}"
                                         VerticalAlignment="Bottom" />
@@ -1339,7 +1345,7 @@
                                 Padding="16,8"
                                 Click="OnOpenDatabaseEditorClick">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock Text="配置编辑" />
+                                <TextBlock Text="{helpers:Loc Key=ConfigEditorBtn}" />
                             </StackPanel>
                         </Button>
                         <Button HorizontalAlignment="Center"
@@ -1347,7 +1353,7 @@
                                 Padding="16,8"
                                 Click="OnOpenAchievementUpdaterClick">
                             <StackPanel Orientation="Horizontal" Spacing="8">
-                                <TextBlock Text="更新成就数据库资源" />
+                                <TextBlock Text="{helpers:Loc Key=UpdateAchievementDbBtn}" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -1360,22 +1366,22 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="截图设置" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionScreenshotSettings}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <ToggleSwitch Header="启用游戏内截图"
-                                      OffContent="已禁用"
-                                      OnContent="已启用"
+                        <ToggleSwitch Header="{helpers:Loc Key=EnableInGameScreenshot}"
+                                      OffContent="{helpers:Loc Key=Disabled}"
+                                      OnContent="{helpers:Loc Key=Enabled}"
                                       IsOn="{x:Bind ViewModel.IsScreenshotEnabled, Mode=TwoWay}"
                                       Margin="0,16,0,0" />
-                        <TextBlock Text="启动游戏后通过快捷键截取游戏窗口画面，不会包含其他窗口内容"
+                        <TextBlock Text="{helpers:Loc Key=ScreenshotCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,0,0,0" />
 
-                        <TextBlock Text="截图快捷键" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
+                        <TextBlock Text="{helpers:Loc Key=ScreenshotHotkeyTitle}" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
                                    Margin="0,20,0,0" />
-                        <TextBlock Text="点击下方按钮后按下想要的快捷键组合（支持 Ctrl/Alt/Shift + 按键）"
+                        <TextBlock Text="{helpers:Loc Key=ScreenshotHotkeyCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,8" />
@@ -1386,15 +1392,15 @@
                                     MinWidth="120"
                                     Style="{StaticResource PresetButtonStyle}" />
                             <TextBlock x:Name="HotkeyRecordingHint"
-                                       Text="正在录制，请按下快捷键..."
+                                       Text="{helpers:Loc Key=RecordingHint}"
                                        VerticalAlignment="Center"
                                        Visibility="Collapsed"
                                        Foreground="{ThemeResource SystemAccentColor}" />
                         </StackPanel>
 
-                        <TextBlock Text="截图保存位置" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
+                        <TextBlock Text="{helpers:Loc Key=ScreenshotSaveLocTitle}" Style="{ThemeResource BodyStrongTextBlockStyle}" FontSize="14"
                                    Margin="0,20,0,0" />
-                        <TextBlock Text="自定义截图文件的保存目录，默认保存到 文档/FufuScreenshots"
+                        <TextBlock Text="{helpers:Loc Key=ScreenshotSaveLocCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,8" />
@@ -1404,16 +1410,16 @@
                                        MaxWidth="300"
                                        TextTrimming="CharacterEllipsis"
                                        Opacity="0.8" />
-                            <Button Content="浏览"
+                            <Button Content="{helpers:Loc Key=Browse}"
                                     Command="{x:Bind ViewModel.SelectScreenshotFolderCommand}"
                                     Style="{StaticResource PresetButtonStyle}" />
-                            <Button Content="清除"
+                            <Button Content="{helpers:Loc Key=Clear}"
                                     Command="{x:Bind ViewModel.ClearScreenshotFolderCommand}"
                                     Visibility="{x:Bind ViewModel.HasScreenshotSavePath, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                                     Style="{StaticResource PresetButtonStyle}" />
                         </StackPanel>
 
-                        <Button Content="打开截图文件夹"
+                        <Button Content="{helpers:Loc Key=OpenScreenshotFolder}"
                                 Command="{x:Bind ViewModel.OpenScreenshotFolderCommand}"
                                 Margin="0,16,0,0"
                                 Style="{StaticResource PresetButtonStyle}" />
@@ -1427,19 +1433,19 @@
                     <StackPanel>
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="检查更新" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionUpdate}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
 
-                        <TextBlock Text="版本更新"
+                        <TextBlock Text="{helpers:Loc Key=VersionUpdateTitle}"
                                    Style="{ThemeResource BodyStrongTextBlockStyle}"
                                    FontSize="14" />
-                        <TextBlock Text="检查并获取最新版本。点击后将启动更新程序"
+                        <TextBlock Text="{helpers:Loc Key=VersionUpdateCaption}"
                                    Style="{ThemeResource CaptionTextBlockStyle}"
                                    Opacity="0.7"
                                    Margin="0,2,0,12" />
 
                         <Button x:Name="CheckUpdateButton"
-                                Content="检查更新"
+                                Content="{helpers:Loc Key=SectionUpdate}"
                                 Command="{x:Bind ViewModel.CheckUpdateCommand}"
                                 HorizontalAlignment="Left"
                                 Padding="12,6"
@@ -1454,7 +1460,7 @@
                     <StackPanel Spacing="10">
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="关于" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionAbout}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
                         <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -1474,7 +1480,7 @@
                                 </StackPanel>
 
                                 <Button Grid.Column="1"
-                                        Content="关于我们"
+                                        Content="{helpers:Loc Key=AboutUsBtn}"
                                         VerticalAlignment="Center"
                                         Click="OnOpenAboutWindowClick" />
                             </Grid>
@@ -1502,12 +1508,12 @@
                     <StackPanel Spacing="10">
                         <StackPanel Style="{StaticResource SectionHeaderPanelStyle}">
                             <Border Style="{StaticResource SectionAccentBarStyle}" />
-                            <TextBlock Text="开发者许可认证" Style="{StaticResource SectionTitleStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=SectionSecurityAuth}" Style="{StaticResource SectionTitleStyle}" />
                         </StackPanel>
-                        <TextBlock Text="通过开发者许可认证获取部分特殊功能的使用权限" Style="{ThemeResource CaptionTextBlockStyle}"
+                        <TextBlock Text="{helpers:Loc Key=SecurityAuthCaption}" Style="{ThemeResource CaptionTextBlockStyle}"
                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" />
 
-                        <Button Content="进行开发者许可认证"
+                        <Button Content="{helpers:Loc Key=SecurityAuthBtn}"
                                 HorizontalAlignment="Left"
                                 Padding="12,6"
                                 CornerRadius="6"

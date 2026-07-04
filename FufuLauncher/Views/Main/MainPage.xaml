@@ -893,7 +893,7 @@
                         Background="Transparent"
                         BorderThickness="0"
                         CornerRadius="22"
-                        ToolTipService.ToolTip="注入模块">
+                        ToolTipService.ToolTip="{helpers:Loc Key=InjectionModuleTitle}">
                         <Button.Flyout>
                             <Flyout x:Name="InjectionModuleFlyout" Placement="BottomEdgeAlignedRight">
                                 <ListView

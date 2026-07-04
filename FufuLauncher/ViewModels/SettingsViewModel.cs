@@ -37,7 +37,8 @@ namespace FufuLauncher.ViewModels
     {
         Default = 0,
         zhCN = 1,
-        zhTW = 2
+        zhTW = 2,
+        enUS = 3
     }
 
     public enum WindowModeType
@@ -66,7 +67,7 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private ElementTheme _elementTheme;
         [ObservableProperty] private string _versionDescription;
-        public string AppVersion => $"版本 {Assembly.GetEntryAssembly()?.GetName().Version}";
+        public string AppVersion => string.Format("AppVersionFormat".GetLocalized(), Assembly.GetEntryAssembly()?.GetName().Version);
         [ObservableProperty] private ServerType _selectedServer;
         [ObservableProperty] private bool _isBackgroundEnabled = true;
         [ObservableProperty] private AppLanguage _selectedLanguage;
@@ -1704,15 +1705,21 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
             try
             {
                 await _localSettingsService.SaveSettingAsync("AppLanguage", (int)language);
-                var culture = language == AppLanguage.zhCN ? "zh-CN" : "zh-TW";
+                var culture = language switch
+                {
+                    AppLanguage.zhCN => "zh-CN",
+                    AppLanguage.zhTW => "zh-TW",
+                    AppLanguage.enUS => "en-US",
+                    _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
+                };
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
 
                 var dialog = new ContentDialog
                 {
-                    Title = "语言已更改",
-                    Content = "语言设置已更改。由于技术限制，部分UI需要重启才能完全生效。",
-                    PrimaryButtonText = "立即重启",
-                    CloseButtonText = "稍后手动重启",
+                    Title = "LanguageChangedTitle".GetLocalized(),
+                    Content = "LanguageChangedMessage".GetLocalized(),
+                    PrimaryButtonText = "RestartNowBtn".GetLocalized(),
+                    CloseButtonText = "RestartLaterBtn".GetLocalized(),
                     XamlRoot = App.MainWindow.Content.XamlRoot
                 };
 
