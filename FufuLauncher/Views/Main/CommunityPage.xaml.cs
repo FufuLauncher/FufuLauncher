@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
 using FufuLauncher.ViewModels;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Services;
 
 namespace FufuLauncher.Views;
@@ -79,9 +80,9 @@ public sealed partial class CommunityPage : Page
             {
                 var dialog = new ContentDialog
                 {
-                    Title = "欢迎访问VanillaBBS，请仔细阅读以下说明",
+                    Title = "CommunityPage_WelcomeTitle".GetLocalized(),
                     Content = "该论坛由CodeCubist和Vanilla联合策划，FufuLauncher作为平台发布。\n\n它不同于QQ频道和米游社，不是为了替代它们而生，它的目的是为了更方便玩家的分享和更快的解答疑问，你可以在这里发布你的游戏内容，也可以询问一切关于软件的问题，或者是分享你的生活，只要遵守社区规定，我们都欢迎进行发帖交流。\n\n对于软件更新我们也会在这里发布通知，同时你也可以直接与我们的开发者交流。\n\n目前网站仅在试运行，如实际表现效果较好，我们会进行正式的人工重构上线。",
-                    CloseButtonText = "我知道了",
+                    CloseButtonText = "GotItBtn".GetLocalized(),
                     XamlRoot = Content.XamlRoot
                 };
 
@@ -111,17 +112,17 @@ public sealed partial class CommunityPage : Page
                 var userData = await RetrieveUserDataAsync();
                 
                 string dialogContent = $"当前网页请求访问您的以下数据：\n\n" +
-                                       $"MID: {(string.IsNullOrEmpty(userData.Mid) ? "未知" : userData.Mid)}\n" +
-                                       $"UID: {(string.IsNullOrEmpty(userData.Uid) ? "未知" : userData.Uid)}\n" +
-                                       $"账户昵称: {(string.IsNullOrEmpty(userData.Nickname) ? "未知" : userData.Nickname)}\n\n" +
-                                       $"是否同意提供？";
+                                       $"MID: {(string.IsNullOrEmpty(userData.Mid) ? "CommunityPage_Unknown".GetLocalized() : userData.Mid)}\n" +
+                                       $"UID: {(string.IsNullOrEmpty(userData.Uid) ? "CommunityPage_Unknown".GetLocalized() : userData.Uid)}\n" +
+                                       $"账户昵称: {(string.IsNullOrEmpty(userData.Nickname) ? "CommunityPage_Unknown".GetLocalized() : userData.Nickname)}\n\n" +
+                                       $"CommunityPage_ConsentPrompt".GetLocalized();
                 
                 var dialog = new ContentDialog
                 {
-                    Title = "授权请求",
+                    Title = "CommunityPage_AuthTitle".GetLocalized(),
                     Content = dialogContent,
-                    PrimaryButtonText = "同意",
-                    CloseButtonText = "拒绝",
+                    PrimaryButtonText = "CommunityPage_Agree".GetLocalized(),
+                    CloseButtonText = "CommunityPage_Deny".GetLocalized(),
                     XamlRoot = Content.XamlRoot
                 };
 

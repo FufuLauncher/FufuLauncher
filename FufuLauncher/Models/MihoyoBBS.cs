@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 
 namespace MihoyoBBS
 {
@@ -349,14 +350,14 @@ namespace MihoyoBBS
         {
             get;
             set;
-        } = "这个人很懒，什么都没有写...";
+        } = "Status_None".GetLocalized();
 
         [JsonPropertyName("IpRegion")]
         public string IpRegion
         {
             get;
             set;
-        } = "未知";
+        } = "Status_Unknown".GetLocalized();
 
         [JsonPropertyName("Gender")]
         public int Gender
@@ -483,7 +484,7 @@ namespace MihoyoBBS
         protected Dictionary<string, string> Headers;
         public static string LastApiError { get; set; } = string.Empty;
         public static int LastSignDays { get; set; } = 0;
-        public static string LastRewardItem { get; set; } = "无/未知";
+        public static string LastRewardItem { get; set; } = "Status_None".GetLocalized();
 
         public List<AccountItem> AccountList
         {
@@ -532,7 +533,7 @@ namespace MihoyoBBS
             }
             catch (Exception ex)
             {
-                LastApiError = $"获取奖励日历异常: {ex.Message}";
+                LastApiError = string.Format("Checkin_GetCalendarException".GetLocalized(), ex.Message);
             }
             return null;
         }
@@ -613,13 +614,13 @@ namespace MihoyoBBS
                     }
                     else
                     {
-                        LastApiError = "解析账号列表响应数据失败";
+                        LastApiError = "Checkin_ParseResponseDataFailed".GetLocalized();
                     }
                 }
             }
             catch (Exception ex)
             {
-                LastApiError = $"网络请求异常: {ex.Message}";
+                LastApiError = string.Format("Checkin_NetworkRequestException".GetLocalized(), ex.Message);
             }
 
             return new List<AccountItem>();
@@ -682,7 +683,7 @@ namespace MihoyoBBS
                     }
                     else
                     {
-                        LastApiError = "解析签到状态响应数据失败";
+                        LastApiError = "Checkin_ParseSignStatusFailed".GetLocalized();
                     }
 
                     return null;
@@ -690,7 +691,7 @@ namespace MihoyoBBS
             }
             catch (Exception ex)
             {
-                LastApiError = $"请求签到状态异常: {ex.Message}";
+                LastApiError = string.Format("Checkin_RequestSignStatusException".GetLocalized(), ex.Message);
                 return null;
             }
         }
@@ -766,10 +767,10 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
 
         if (AccountList == null || AccountList.Count == 0)
         {
-            returnData += "未检测到绑定账号";
+            returnData += "Checkin_NoBoundAccount".GetLocalized();
             if (!string.IsNullOrEmpty(LastApiError))
             {
-                returnData += $"，原因: {LastApiError}";
+                returnData += string.Format("Checkin_Reason".GetLocalized(), LastApiError);
             }
             return returnData;
         }
@@ -801,17 +802,17 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
             var isData = await IsSignAsync(account.Region, account.GameUid);
             if (isData == null)
             {
-                returnData += $"\n{account.Nickname} 获取签到信息失败";
+                returnData += "\n" + account.Nickname + "Checkin_GetInfoFailed".GetLocalized();
                 if (!string.IsNullOrEmpty(LastApiError))
                 {
-                    returnData += $"，详情: {LastApiError}";
+                    returnData += string.Format("Checkin_Detail".GetLocalized(), LastApiError);
                 }
                 continue;
             }
 
             if (isData.FirstBind)
             {
-                returnData += $"\n{account.Nickname}是第一次绑定米游社，请先手动签到一次";
+                returnData += "\n" + account.Nickname + "Checkin_FirstBindWarning".GetLocalized();
                 continue;
             }
 
@@ -821,13 +822,13 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
             {
                 if (CheckinRewards != null && CheckinRewards.Count > signDays)
                 {
-                    returnData += $"\n{account.Nickname}今天已经签到过了";
-                    returnData += $"\n今天获得的奖励是{Tools.GetItem(CheckinRewards[signDays])}";
+                    returnData += "\n" + account.Nickname + "Checkin_AlreadySignedToday".GetLocalized();
+                    returnData += "\n" + string.Format("Checkin_TodayReward".GetLocalized(), Tools.GetItem(CheckinRewards[signDays]));
                     signDays += 1;
                 }
                 else
                 {
-                    returnData += $"\n{account.Nickname}今天已经签到过了";
+                    returnData += "\n" + account.Nickname + "Checkin_AlreadySignedToday".GetLocalized();
                     signDays += 1;
                 }
             }
@@ -839,10 +840,10 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
                 var req = await CheckIn(account);
                 if (req == null)
                 {
-                    returnData += $"\n{account.Nickname} 本次签到请求失败";
+                    returnData += "\n" + account.Nickname + "Checkin_SignRequestFailed".GetLocalized();
                     if (!string.IsNullOrEmpty(LastApiError))
                     {
-                        returnData += $"，详情: {LastApiError}";
+                        returnData += string.Format("Checkin_Detail".GetLocalized(), LastApiError);
                     }
                     continue;
                 }
@@ -859,13 +860,13 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
                             var rewardIndex = (signDays == 0) ? 0 : signDays + 1;
                             if (CheckinRewards != null && CheckinRewards.Count > rewardIndex)
                             {
-                                returnData += $"\n{account.Nickname}签到成功";
-                                returnData += $"\n奖励是{Tools.GetItem(CheckinRewards[rewardIndex])}";
+                                returnData += "\n" + account.Nickname + "Checkin_SignSuccess".GetLocalized();
+                                returnData += "\n" + string.Format("Checkin_RewardIs".GetLocalized(), Tools.GetItem(CheckinRewards[rewardIndex]));
                                 signDays += 2;
                             }
                             else
                             {
-                                returnData += $"\n{account.Nickname}签到成功";
+                                returnData += "\n" + account.Nickname + "Checkin_SignSuccess".GetLocalized();
                                 signDays += 2;
                             }
                         }
@@ -873,36 +874,36 @@ public async Task<string> SignAccountAsync(Config config, string targetUid = nul
                         {
                             if (CheckinRewards != null && CheckinRewards.Count > signDays)
                             {
-                                returnData += $"\n{account.Nickname}今天已经签到过了";
-                                returnData += $"\n奖励是{Tools.GetItem(CheckinRewards[signDays])}";
+                                returnData += "\n" + account.Nickname + "Checkin_AlreadySignedToday".GetLocalized();
+                                returnData += "\n" + string.Format("Checkin_RewardIs".GetLocalized(), Tools.GetItem(CheckinRewards[signDays]));
                             }
                         }
                         else
                         {
-                            returnData += $"\n{account.Nickname} 签到失败，API提示: {data.Message}";
+                            returnData += "\n" + account.Nickname + string.Format("Checkin_SignFailedApi".GetLocalized(), data.Message);
                             continue;
                         }
                     }
                     else
                     {
-                        returnData += $"\n{account.Nickname} 解析签到结果失败";
+                        returnData += "\n" + account.Nickname + "Checkin_ParseResultFailed".GetLocalized();
                         continue;
                     }
                 }
                 else
                 {
-                    returnData += $"\n{account.Nickname} 签到失败，触发 HTTP 429 限流";
+                    returnData += "\n" + account.Nickname + "Checkin_SignRateLimited".GetLocalized();
                     continue;
                 }
             }
 
-            returnData += $"\n{account.Nickname}已签到{signDays}天";
+            returnData += "\n" + account.Nickname + string.Format("Checkin_SignedDays".GetLocalized(), signDays);
             LastSignDays = signDays;
             
             if (CheckinRewards != null && CheckinRewards.Count > signDays - 1)
             {
                 LastRewardItem = Tools.GetItem(CheckinRewards[signDays - 1]);
-                returnData += $"\n奖励是{LastRewardItem}";
+                returnData += "\n" + string.Format("Checkin_RewardIs".GetLocalized(), LastRewardItem);
             }
         }
 

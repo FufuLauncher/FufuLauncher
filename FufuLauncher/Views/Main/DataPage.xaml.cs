@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Data;
@@ -76,9 +77,9 @@ public sealed partial class DataPage : Page
             var dialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
-                Title = item.Version + " 卡池图片",
+                Title = item.Version + "WishBannerImage".GetLocalized(),
                 Content = image,
-                CloseButtonText = "关闭",
+                CloseButtonText = "CloseBtn".GetLocalized(),
                 DefaultButton = ContentDialogButton.Close,
                 MaxWidth = double.PositiveInfinity
             };

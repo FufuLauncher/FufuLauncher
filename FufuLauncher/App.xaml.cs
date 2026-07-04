@@ -45,12 +45,9 @@ public partial class App : Application
 
         SentrySdk.FlushAsync(TimeSpan.FromSeconds(2)).Wait();
 
-        var message = $"程序遇到了一个错误\n\n" +
-                      $"错误来源: {source}\n" +
-                      $"错误信息: {ex.Message}\n\n" +
-                      $"堆栈信息:\n{ex.StackTrace}";
+        var message = string.Format("Crash_Message".GetLocalized(), source, ex.Message, ex.StackTrace);
         
-        MessageBox(IntPtr.Zero, message, "芙芙启动器发生了异常", MB_OK | MB_ICONERROR);
+        MessageBox(IntPtr.Zero, message, "Crash_Title".GetLocalized(), MB_OK | MB_ICONERROR);
     }
 
     public static T GetService<T>()

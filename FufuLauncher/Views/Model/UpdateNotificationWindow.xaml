@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:windowex="using:WinUIEx"
     xmlns:media="using:Microsoft.UI.Xaml.Media"
-    Title="版本更新公告"
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    Title="{helpers:Loc Key=UpdateNotification_Title}"
     Width="510"
     Height="730"
     MinWidth="510"
@@ -33,7 +34,7 @@
             <Image Grid.Column="0" Width="16" Height="16" Margin="12,0,0,0"
                    Source="/Assets/WindowIcon.ico" VerticalAlignment="Center" />
 
-            <TextBlock Grid.Column="1" Text="版本更新公告"
+            <TextBlock Grid.Column="1" Text="{helpers:Loc Key=UpdateNotification_Title}"
                        Style="{StaticResource BodyTextBlockStyle}"
                        VerticalAlignment="Center" Margin="12,0,0,0"
                        Opacity="0.8" />
@@ -50,7 +51,7 @@
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
               BorderThickness="0,1,0,0"
               Padding="16,12">
-            <Button Content="立即更新"
+            <Button Content="{helpers:Loc Key=UpdateNotification_UpdateNow}"
                     HorizontalAlignment="Right"
                     Width="120"
                     Click="OnUpdateBtnClicked" />

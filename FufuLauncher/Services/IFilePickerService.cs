@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 using System.Diagnostics;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.Services
@@ -32,7 +33,7 @@ namespace FufuLauncher.Services
             var mainWindow = App.MainWindow;
             if (mainWindow == null)
             {
-                errorMessage = "主窗口不存在，无法打开文件选择器";
+                errorMessage = "FilePicker_MainWindowNull".GetLocalized();
                 Debug.WriteLine($"[FilePickerService] {errorMessage}");
                 return false;
             }
@@ -40,7 +41,7 @@ namespace FufuLauncher.Services
             var mainHwnd = WinRT.Interop.WindowNative.GetWindowHandle(mainWindow);
             if (mainHwnd == IntPtr.Zero)
             {
-                errorMessage = "窗口句柄无效，请以普通用户模式运行或重试";
+                errorMessage = "FilePicker_InvalidWindowHandle".GetLocalized();
                 Debug.WriteLine($"[FilePickerService] {errorMessage}");
                 return false;
             }

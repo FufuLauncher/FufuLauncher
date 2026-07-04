@@ -75,7 +75,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 Stuid = entry.Stuid,
                 Stoken = stoken ?? "",
                 Mid = mid ?? "",
-                Nickname = entry.Nickname ?? $"用户{entry.Stuid}",
+                Nickname = entry.Nickname ?? string.Format("Checkin_DefaultUser".GetLocalized(), entry.Stuid),
                 ConfigPath = entry.Id,          
                 CloudComboToken = cloudComboToken
             });
@@ -83,7 +83,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
 
         if (credentialsList.Count == 0)
         {
-            result.SummaryMessage = "未检测到绑定账号";
+            result.SummaryMessage = "Checkin_NoBoundAccount".GetLocalized();
             result.GameResult.Executed = true;
             return result;
         }
@@ -104,7 +104,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
 
         if (activeAccounts.Count == 0)
         {
-            result.SummaryMessage = isBatchCheckinEnabled ? "所有账号已被禁用" : "未找到当前账号";
+            result.SummaryMessage = isBatchCheckinEnabled ? "Checkin_AllDisabled".GetLocalized() : "Checkin_AccountNotFound".GetLocalized();
             result.GameResult.Message = result.SummaryMessage;
             result.GameResult.Executed = true;
             return result;
@@ -121,7 +121,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
             {
                 foreach (var account in activeAccounts)
                 {
-                    Report($"[{account.Nickname}] 正在游戏签到...");
+                    Report($"[{account.Nickname}] {"Checkin_GameCheckinProgress".GetLocalized()}");
                     try
                     {
                         
@@ -163,7 +163,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                             var genshin = new Genshin();
                             await genshin.InitializeAsync(config);
                             signResult = await genshin.SignAccountAsync(config, null, disabledUids);
-                            success = !signResult.Contains("失败") && !signResult.Contains("异常");
+                            success = string.IsNullOrEmpty(GameCheckin.LastApiError);
                         }
 
                         if (success) result.GameResult.SuccessCount++;
@@ -172,7 +172,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                         result.AccountResults.Add(new AccountCheckinDetail
                         {
                             Nickname = account.Nickname,
-                            Items = { ("游戏签到", success, success ? "完成" : signResult) }
+                            Items = { ("Checkin_GameCheckin".GetLocalized(), success, success ? "Status_Completed".GetLocalized() : signResult) }
                         });
                     }
                     catch (Exception ex)
@@ -181,7 +181,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                         result.AccountResults.Add(new AccountCheckinDetail
                         {
                             Nickname = account.Nickname,
-                            Items = { ("游戏签到", false, ex.Message) }
+                            Items = { ("Checkin_GameCheckin".GetLocalized(), false, ex.Message) }
                         });
                     }
                     if (activeAccounts.Count > 1)
@@ -196,13 +196,13 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 result.GameRewardItem = rewardItem;
 
                 result.GameResult.Message = result.GameResult.Success
-                    ? $"连续{signDays}天 | 获得{rewardItem}"
-                    : $"{result.GameResult.SuccessCount}成功，{result.GameResult.FailCount}失败";
+                    ? string.Format("Checkin_ConsecutiveDays".GetLocalized(), signDays, rewardItem)
+                    : string.Format("Checkin_SuccessFailCount".GetLocalized(), result.GameResult.SuccessCount, result.GameResult.FailCount);
             }
             catch (Exception ex)
             {
                 result.GameResult.Success = false;
-                result.GameResult.Message = $"异常: {ex.Message}";
+                result.GameResult.Message = string.Format("CheckinGame_Exception".GetLocalized(), ex.Message);
                 Debug.WriteLine($"[统一签到] 游戏签到异常: {ex.Message}");
             }
             gameSw.Stop();
@@ -221,20 +221,20 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     // 国际服跳过社区签到
                     if (account.ConfigPath.StartsWith("os_"))
                     {
-                        Report($"[{account.Nickname}] OS 账号跳过社区签到");
+                        Report($"[{account.Nickname}] {"Checkin_OSAccountSkippedCommunity".GetLocalized()}");
                         var acct = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
                         if (acct != null)
-                            acct.Items.Add(("社区签到", null, "OS 账号跳过"));
+                            acct.Items.Add(("Checkin_CommunityCheckin".GetLocalized(), null, "Checkin_OSAccountSkipped".GetLocalized()));
                         else
                             result.AccountResults.Add(new AccountCheckinDetail
                             {
                                 Nickname = account.Nickname,
-                                Items = { ("社区签到", null, "OS 账号跳过") }
+                                Items = { ("Checkin_CommunityCheckin".GetLocalized(), null, "Checkin_OSAccountSkipped".GetLocalized()) }
                             });
                         continue;
                     }
 
-                    Report($"[{account.Nickname}] 正在社区签到...");
+                    Report($"[{account.Nickname}] {"Checkin_CommunityCheckinProgress".GetLocalized()}");
                     var communityResult = await _communityCheckinService.ExecuteCheckinAsync(
                         account, true, communityRead, communityLike, communityShare);
 
@@ -246,12 +246,12 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     bool success = communityResult.FailCount == 0;
                     var detail = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
                     if (detail != null)
-                        detail.Items.Add(("社区签到", success, success ? "完成" : "失败"));
+                        detail.Items.Add(("Checkin_CommunityCheckin".GetLocalized(), success, success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized()));
                     else
                         result.AccountResults.Add(new AccountCheckinDetail
                         {
                             Nickname = account.Nickname,
-                            Items = { ("社区签到", success, success ? "完成" : "失败") }
+                            Items = { ("Checkin_CommunityCheckin".GetLocalized(), success, success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized()) }
                         });
 
                     if (activeAccounts.Count > 1)
@@ -259,17 +259,14 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 }
 
                 result.CommunityResult.Success = result.CommunityResult.FailCount == 0;
-                var gainedMsgs = result.CommunityResult.Details
-                    .Where(d => d.Contains("获得") && d.Contains("米游币"))
-                    .ToList();
-                result.CommunityResult.Message = gainedMsgs.Count > 0
-                    ? string.Join("; ", gainedMsgs)
-                    : result.CommunityResult.Success ? "全部完成" : $"{result.CommunityResult.FailCount}个失败";
+                result.CommunityResult.Message = result.CommunityResult.Success
+                    ? "Checkin_AllDone".GetLocalized()
+                    : string.Format("Checkin_CountFailed".GetLocalized(), result.CommunityResult.FailCount);
             }
             catch (Exception ex)
             {
                 result.CommunityResult.Success = false;
-                result.CommunityResult.Message = $"异常: {ex.Message}";
+                result.CommunityResult.Message = string.Format("CheckinCommunity_Exception".GetLocalized(), ex.Message);
                 Debug.WriteLine($"[统一签到] 社区签到异常: {ex.Message}");
             }
             communitySw.Stop();
@@ -287,7 +284,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 if (!hasAnyCredential)
                 {
                     result.CloudGameResult.Success = false;
-                    result.CloudGameResult.Message = "未配置云游戏凭证";
+                    result.CloudGameResult.Message = "Checkin_NoCloudCredential".GetLocalized();
                 }
                 else
                 {
@@ -302,11 +299,11 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                         {
                             result.CloudGameResult.SkippedCount++;
                             var cd = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
-                            if (cd != null) cd.Items.Add(("云游戏签到", null, "未配置凭证"));
+                            if (cd != null) cd.Items.Add(("Checkin_CloudGameCheckin".GetLocalized(), null, "Checkin_NotConfiguredCredential".GetLocalized()));
                             continue;
                         }
 
-                        Report($"[{account.Nickname}] 正在云游戏签到...");
+                        Report($"[{account.Nickname}] {"Checkin_CloudGameCheckinProgress".GetLocalized()}");
                         var cloudResult = await _cloudGameCheckinService.ExecuteCheckinAsync(account.Uid, account.CloudComboToken);
                         result.CloudGameResult.SuccessCount += cloudResult.SuccessCount;
                         result.CloudGameResult.FailCount += cloudResult.FailCount;
@@ -316,12 +313,12 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                         bool success = cloudResult.FailCount == 0;
                         var cdd = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
                         if (cdd != null)
-                            cdd.Items.Add(("云游戏签到", success, success ? "完成" : "失败"));
+                            cdd.Items.Add(("Checkin_CloudGameCheckin".GetLocalized(), success, success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized()));
                         else
                             result.AccountResults.Add(new AccountCheckinDetail
                             {
                                 Nickname = account.Nickname,
-                                Items = { ("云游戏签到", success, success ? "完成" : "失败") }
+                                Items = { ("Checkin_CloudGameCheckin".GetLocalized(), success, success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized()) }
                             });
 
                         if (activeAccounts.Count > 1)
@@ -329,16 +326,15 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     }
 
                     result.CloudGameResult.Success = result.CloudGameResult.FailCount == 0;
-                    var gainedMsgs = result.CloudGameResult.Details.Where(d => d.Contains("获得")).ToList();
-                    result.CloudGameResult.Message = gainedMsgs.Count > 0
-                        ? string.Join("; ", gainedMsgs)
-                        : result.CloudGameResult.Success ? "全部完成" : $"{result.CloudGameResult.FailCount}个失败";
+                    result.CloudGameResult.Message = result.CloudGameResult.Success
+                        ? "Checkin_AllDone".GetLocalized()
+                        : string.Format("Checkin_CountFailed".GetLocalized(), result.CloudGameResult.FailCount);
                 }
             }
             catch (Exception ex)
             {
                 result.CloudGameResult.Success = false;
-                result.CloudGameResult.Message = $"异常: {ex.Message}";
+                result.CloudGameResult.Message = string.Format("CheckinCloud_Exception".GetLocalized(), ex.Message);
                 Debug.WriteLine($"[统一签到] 云原神签到异常: {ex.Message}");
             }
             cloudSw.Stop();
@@ -349,10 +345,10 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         int failAccounts = result.AccountResults.Count(a => a.Items.Any(i => i.Success == false));
 
         result.SummaryMessage = failAccounts == 0
-            ? $"签到完成，{successAccounts}个账号全部成功"
+            ? string.Format("Checkin_AllAccountsSuccess".GetLocalized(), successAccounts)
             : successAccounts > 0
-                ? $"签到完成，{successAccounts}个成功，{failAccounts}个失败"
-                : $"签到失败，共{failAccounts}个账号出错";
+                ? string.Format("Checkin_PartialSuccess".GetLocalized(), successAccounts, failAccounts)
+                : string.Format("Checkin_AllFailed".GetLocalized(), failAccounts);
 
         Debug.WriteLine($"[统一签到] {result.SummaryMessage}");
         return result;

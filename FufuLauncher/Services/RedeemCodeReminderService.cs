@@ -146,7 +146,7 @@ namespace FufuLauncher.Helpers
         private static string FormatRemainingTime(string? validStr)
         {
             if (string.IsNullOrEmpty(validStr))
-                return "未知";
+                return "Status_Unknown".GetLocalized();
 
             // 尝试解析日期范围，例如 "2024-01-01 ~ 2024-01-03" 或 "2024-01-01"
             var match = System.Text.RegularExpressions.Regex.Match(validStr, @"(\d{4}[-/]\d{1,2}[-/]\d{1,2})");
@@ -166,15 +166,15 @@ namespace FufuLauncher.Helpers
 
                 var remaining = endDate.Date - DateTime.Now.Date;
                 if (remaining.TotalDays < 0)
-                    return "已过期";
+                    return "RedeemCode_Expired".GetLocalized();
                 else if (remaining.TotalDays == 0)
-                    return "今天到期";
+                    return "RedeemCode_ExpiringToday".GetLocalized();
                 else if (remaining.TotalDays < 1)
-                    return $"剩余 {remaining.Hours} 小时";
+                    return string.Format("RedeemCode_HoursLeft".GetLocalized(), remaining.Hours);
                 else if (remaining.TotalDays < 30)
-                    return $"剩余 {(int)remaining.TotalDays} 天";
+                    return string.Format("RedeemCode_DaysLeft".GetLocalized(), (int)remaining.TotalDays);
                 else
-                    return $"剩余 {(int)remaining.TotalDays} 天";
+                    return string.Format("RedeemCode_DaysLeft".GetLocalized(), (int)remaining.TotalDays);
             }
 
             return validStr;
@@ -198,12 +198,12 @@ namespace FufuLauncher.Helpers
 
             if (codes.Count > 5)
             {
-                lines.Add($"……以及另外 {codes.Count - 5} 个活动");
+                lines.Add(string.Format("RedeemCode_MoreEvents".GetLocalized(), codes.Count - 5));
             }
 
             var msg = new NotificationMessage(
-                "新兑换码已发布",
-                "发现新的兑换码活动：\n" + string.Join("\n", lines) + "\n请及时前往游戏内兑换！",
+                "RedeemCode_NewPublished".GetLocalized(),
+                string.Format("RedeemCode_NewContent".GetLocalized(), string.Join("\n", lines)),
                 NotificationType.Information,
                 0
             );
@@ -234,8 +234,8 @@ namespace FufuLauncher.Helpers
                 var codesContent = string.Join("\n", todaysCodes.SelectMany(c => c.Codes));
 
                 var msg = new NotificationMessage(
-                    "兑换码即将失效",
-                    $"活动 {titles} 包含可用兑换码：\n{codesContent}\n请尽快前往游戏内使用，将在今天之后失效！",
+                    "RedeemCode_ExpiringTitle".GetLocalized(),
+                    string.Format("RedeemCode_ExpiringContent".GetLocalized(), titles, codesContent),
                     NotificationType.Warning,
                     0
                 );

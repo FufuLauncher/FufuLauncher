@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FufuLauncher.Models"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="成就管理">
+    Title="{helpers:Loc Key=AchievementWindow_Title}">
     
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -86,11 +87,11 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                            <Button Content="查看攻略" 
+                            <Button Content="{helpers:Loc Key=AchievementWindow_ViewGuide}" 
                                     FontSize="12" 
                                     Padding="8,4"
                                     Click="OnSearchGuideClick"
-                                    ToolTipService.ToolTip="在米游社搜索此成就获取方式"/>
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_SearchGuideTooltip}"/>
                             
                             <CheckBox IsChecked="{x:Bind IsCompleted, Mode=TwoWay}" VerticalAlignment="Center"/>
                         </StackPanel>
@@ -109,7 +110,7 @@
             <Grid x:Name="AppTitleBar" Background="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                     <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                    <TextBlock Text="成就档案" FontSize="12" Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center"/>
+                    <TextBlock Text="{helpers:Loc Key=AchievementWindow_Archive}" FontSize="12" Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center"/>
                 </StackPanel>
             </Grid>
 
@@ -126,18 +127,18 @@
                             Click="OnToggleViewMode" 
                             Style="{StaticResource ToolbarButtonStyle}" 
                             FontSize="16" 
-                            ToolTipService.ToolTip="切换视图"/>
+                            ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_SwitchView}"/>
 
                     <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
                         
-                        <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="原石：已获得 / 总计">
+                        <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_PrimogemTooltip}">
                             <Image Source="/Assets/Primogem.png" Width="18" Height="18" VerticalAlignment="Center"/> 
                             <TextBlock Text="{x:Bind ViewModel.PrimogemStatText, Mode=OneWay}" Foreground="{ThemeResource HighlightColor}" FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <Rectangle Width="1" Height="16" Fill="{ThemeResource SeparatorBrush}" VerticalAlignment="Center"/>
 
-                        <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="成就进度">
+                        <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_ProgressTooltip}">
                             <TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource SubTextColor}" VerticalAlignment="Center" FontSize="14"/>
                             <TextBlock Text="{x:Bind ViewModel.ProgressStatText, Mode=OneWay}" Foreground="{ThemeResource SubTextColor}" FontSize="12" VerticalAlignment="Center"/>
                         </StackPanel>
@@ -145,53 +146,53 @@
                     </StackPanel>
                 </StackPanel>
 
-                <AutoSuggestBox Grid.Column="1" PlaceholderText="搜索成就名称、描述..." Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" QueryIcon="Find" Margin="20,0" VerticalAlignment="Center" MaxWidth="400"/>
+                <AutoSuggestBox Grid.Column="1" PlaceholderText="{helpers:Loc Key=AchievementWindow_SearchPlaceholder}" Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" QueryIcon="Find" Margin="20,0" VerticalAlignment="Center" MaxWidth="400"/>
                 
                 <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                    <ComboBox ItemsSource="{x:Bind ViewModel.AvailableVersions}" SelectedItem="{x:Bind ViewModel.SelectedVersion, Mode=TwoWay}" PlaceholderText="版本" MinWidth="100" VerticalAlignment="Center"/>
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.HideCompleted, Mode=TwoWay}" OnContent="已隐藏完成" OffContent="显示全部" VerticalAlignment="Center" MinWidth="100"/>
+                    <ComboBox ItemsSource="{x:Bind ViewModel.AvailableVersions}" SelectedItem="{x:Bind ViewModel.SelectedVersion, Mode=TwoWay}" PlaceholderText="{helpers:Loc Key=AchievementWindow_Version}" MinWidth="100" VerticalAlignment="Center"/>
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.HideCompleted, Mode=TwoWay}" OnContent="{helpers:Loc Key=AchievementWindow_HiddenComplete}" OffContent="{helpers:Loc Key=AchievementWindow_ShowAll}" VerticalAlignment="Center" MinWidth="100"/>
                     
                     <Button Click="OnUiafImportClick" VerticalAlignment="Center" Padding="8,5">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE118;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
-                            <TextBlock Text="UIAF导入" FontSize="12"/>
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_UIAFImport}" FontSize="12"/>
                         </StackPanel>
                     </Button>
 
                     <Button Click="OnUiafExportClick" VerticalAlignment="Center" Padding="8,5">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE11C;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
-                            <TextBlock Text="UIAF导出" FontSize="12"/>
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_UIAFExport}" FontSize="12"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Content="导入记录" Click="OnImportClick" FontSize="12" VerticalAlignment="Center"/>
+                    <Button Content="{helpers:Loc Key=AchievementWindow_ImportRecords}" Click="OnImportClick" FontSize="12" VerticalAlignment="Center"/>
 
                     <Button Click="OnExportClick" VerticalAlignment="Center" Padding="8,5">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE74E;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
-                            <TextBlock Text="手动保存" FontSize="12"/>
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_ManualSave}" FontSize="12"/>
                         </StackPanel>
                     </Button>
                     
-                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0" VerticalAlignment="Center" ToolTipService.ToolTip="当前存档">
+                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4" Margin="0,0,8,0" VerticalAlignment="Center" ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_CurrentProfile}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE779;" FontFamily="Segoe Fluent Icons" FontSize="12" Foreground="{ThemeResource SubTextColor}"/>
                             <TextBlock Text="{x:Bind CurrentProfileName, Mode=OneWay}" FontSize="12" Foreground="{ThemeResource HighlightColor}" MaxWidth="100" TextTrimming="CharacterEllipsis"/>
                         </StackPanel>
                     </Border>
 
-                    <Button Click="OnArchiveManageClick" VerticalAlignment="Center" Padding="8,5" Margin="0,0,8,0" ToolTipService.ToolTip="切换或新建存档">
+                    <Button Click="OnArchiveManageClick" VerticalAlignment="Center" Padding="8,5" Margin="0,0,8,0" ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_ManageArchive}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE71C;" FontFamily="Segoe Fluent Icons" FontSize="14"/>
-                            <TextBlock Text="存档管理" FontSize="12"/>
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_ArchiveManagement}" FontSize="12"/>
                         </StackPanel>
                     </Button>
                     
-                    <Button Click="OnUpdateDbClick" ToolTipService.ToolTip="更新数据">
+                    <Button Click="OnUpdateDbClick" ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_UpdateData}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="14"/>
-                            <TextBlock Text="更新数据" FontSize="12"/>
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_UpdateData}" FontSize="12"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
@@ -305,7 +306,7 @@
         
                                                     <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,2,0,0">
                                                         <TextBlock FontSize="10" Foreground="#FFFFCC00" Visibility="{x:Bind ProgressVisibility, Mode=OneWay}">
-                                                            <Run Text="进度: "/><Run Text="{x:Bind ProgressText, Mode=OneWay}"/>
+                                                            <Run Text="{helpers:Loc Key=AchievementWindow_Progress}"/><Run Text="{x:Bind ProgressText, Mode=OneWay}"/>
                                                         </TextBlock>
             
                                                         <TextBlock FontSize="10" Foreground="{ThemeResource SubTextColor}">
@@ -348,11 +349,11 @@
                                                         </StackPanel>
 
                                                         <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                                                            <Button Content="查看攻略" 
+                                                            <Button Content="{helpers:Loc Key=AchievementWindow_ViewGuide}" 
                                                                     FontSize="11" 
                                                                     Padding="6,3"
                                                                     Click="OnSearchGuideClick"
-                                                                    ToolTipService.ToolTip="在米游社搜索此成就获取方式"/>
+                                                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_SearchGuideTooltip}"/>
 
                                                             <CheckBox IsChecked="{x:Bind IsCompleted, Mode=TwoWay}" VerticalAlignment="Center"/>
                                                         </StackPanel>

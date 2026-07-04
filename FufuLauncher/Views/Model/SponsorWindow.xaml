@@ -2,7 +2,8 @@
     x:Class="FufuLauncher.Views.SponsorWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="赞赏作者">
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    Title="{helpers:Loc Key=SponsorWindow_Title}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -16,13 +17,13 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="赞赏作者"
+        <TextBlock Text="{helpers:Loc Key=SponsorWindow_Title}"
                    FontFamily="{StaticResource AppGlobalFont}"
                    Style="{ThemeResource TitleTextBlockStyle}"
                    Grid.Row="0"
                    Margin="0,0,0,16" />
 
-        <TextBlock Text="目前仅支持微信，不支持支付宝或其他赞赏方式"
+        <TextBlock Text="{helpers:Loc Key=SponsorWindow_OnlyWeChat}"
                    FontFamily="{StaticResource AppGlobalFont}"
                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                    Style="{ThemeResource BodyStrongTextBlockStyle}"
@@ -53,14 +54,14 @@
 
         <TextBlock x:Name="ErrorText"
                    Grid.Row="2"
-                   Text="二维码加载失败"
+                   Text="{helpers:Loc Key=SponsorWindow_QrCodeFailed}"
                    FontFamily="{StaticResource AppGlobalFont}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                    Visibility="Collapsed" />
 
-        <TextBlock Text="支付即视为知晓并同意：赞助如无特殊原因概不退款"
+        <TextBlock Text="{helpers:Loc Key=SponsorWindow_Disclaimer}"
                    FontFamily="{StaticResource AppGlobalFont}"
                    Style="{ThemeResource CaptionTextBlockStyle}"
                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"

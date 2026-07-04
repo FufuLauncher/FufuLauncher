@@ -2,6 +2,7 @@
     x:Class="FufuLauncher.Views.HiddenPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     Background="Transparent"
     Loaded="Page_Loaded">
 
@@ -32,18 +33,18 @@
                       Foreground="{ThemeResource SystemAccentColor}"
                       HorizontalAlignment="Center" />
 
-            <TextBlock Text="功能已隐藏"
+            <TextBlock Text="{helpers:Loc Key=HiddenPage_Title}"
                        Style="{ThemeResource SubtitleTextBlockStyle}"
                        HorizontalAlignment="Center" />
 
-            <TextBlock Text="此功能已在设置中被隐藏。如需使用，请前往设置 → 外观与个性化 → 导航栏显示项 重新开启。"
+            <TextBlock Text="{helpers:Loc Key=HiddenPage_Message}"
                        Style="{ThemeResource BodyTextBlockStyle}"
                        TextWrapping="Wrap"
                        Opacity="0.7"
                        HorizontalAlignment="Center"
                        TextAlignment="Center" />
 
-            <Button Content="返回主页"
+            <Button Content="{helpers:Loc Key=HiddenPage_BackToHome}"
                     HorizontalAlignment="Center"
                     Margin="0,8,0,0"
                     Padding="24,8"

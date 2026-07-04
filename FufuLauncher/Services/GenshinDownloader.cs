@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 using System.Collections.Concurrent;
 using System.Security.Cryptography;
+using FufuLauncher.Helpers;
 using Newtonsoft.Json.Linq;
 using ProtoBuf;
 using ZstdSharp;
@@ -68,14 +69,14 @@ namespace FufuLauncher.Services
         {
             try
             {
-                Log?.Invoke("正在连接米哈游服务器...");
+                Log?.Invoke("Download_Connecting".GetLocalized());
                 var buildJson = await GetJsonAsync(BuildApiUrl, token);
                 var manifests = buildJson["data"]["manifests"];
                 string versionTag = buildJson["data"]["tag"].ToString();
 
                 var targetAssets = new List<string>();
                 if (downloadBaseGame) targetAssets.Add("game");
-                else Log?.Invoke(">> 跳过游戏本体，仅下载语音包模式");
+                else Log?.Invoke("Download_VoiceOnly".GetLocalized());
 
                 targetAssets.Add(lang);
 
@@ -91,10 +92,10 @@ namespace FufuLauncher.Services
                     string mDownloadPrefix = config["manifest_download"]["url_prefix"].ToString();
                     string chunkDownloadPrefix = config["chunk_download"]["url_prefix"].ToString();
 
-                    Log?.Invoke($"正在获取清单文件: {asset}...");
+                    Log?.Invoke(string.Format("Download_FetchingManifest".GetLocalized(), asset));
 
                     byte[] manifestBytes = await DownloadAndDecompressManifestAsync(mDownloadPrefix, mId, mChecksum, token);
-                    if (manifestBytes == null) throw new Exception($"清单下载失败: {asset}");
+                    if (manifestBytes == null) throw new Exception(string.Format("Download_ManifestFailed".GetLocalized(), asset));
 
                     using var ms = new MemoryStream(manifestBytes);
                     var protoManifest = Serializer.Deserialize<Manifest>(ms);
@@ -106,7 +107,7 @@ namespace FufuLauncher.Services
                 int processedFiles = 0;
                 long processedBytes = 0;
 
-                Log?.Invoke($"校验/下载任务开始。总计: {totalFiles} 文件, {FormatSize(totalBytes)}");
+                Log?.Invoke(string.Format("Download_TaskStart".GetLocalized(), totalFiles, FormatSize(totalBytes)));
 
                 string stagingPath = Path.Combine(installPath, "staging");
                 if (!Directory.Exists(stagingPath)) Directory.CreateDirectory(stagingPath);
@@ -129,14 +130,14 @@ namespace FufuLauncher.Services
 
                     if (!success)
                     {
-                        Log?.Invoke($"文件无法修复或用户取消操作: {item.File.Path}");
+                        Log?.Invoke(string.Format("Download_FileUnfixable".GetLocalized(), item.File.Path));
                     }
 
                     Interlocked.Increment(ref processedFiles);
                     ReportProgress(Interlocked.Read(ref processedBytes), totalBytes, processedFiles, totalFiles, force: true);
                 });
 
-                Log?.Invoke("下载校验完毕，正在移动文件...");
+                Log?.Invoke("Download_MovingFiles".GetLocalized());
                 MoveFilesRecursively(new DirectoryInfo(stagingPath), new DirectoryInfo(installPath));
                 try { Directory.Delete(stagingPath, true); } catch { }
 
@@ -156,9 +157,9 @@ namespace FufuLauncher.Services
                     await File.WriteAllTextAsync(configPath, configContent, token);
                 }
 
-                Log?.Invoke("全部完成！");
+                Log?.Invoke("Download_AllDone".GetLocalized());
             }
-            catch (OperationCanceledException) { Log?.Invoke("用户取消操作。"); throw; }
+            catch (OperationCanceledException) { Log?.Invoke("Download_UserCancelled".GetLocalized()); throw; }
             catch (Exception ex) { ErrorOccurred?.Invoke(ex.Message); throw; }
         }
 
@@ -201,7 +202,7 @@ namespace FufuLauncher.Services
                 string finalMd5 = await ComputeFileMd5Async(localPath, token);
                 if (!finalMd5.Equals(file.Checksum, StringComparison.OrdinalIgnoreCase))
                 {
-                    Log?.Invoke($"[校验不通过] {file.Path} (服务器:{file.Checksum} vs 本地:{finalMd5})");
+                    Log?.Invoke(string.Format("Download_VerifyFailed".GetLocalized(), file.Path, file.Checksum, finalMd5));
                     if (File.Exists(localPath)) File.Delete(localPath);
                     return false;
                 }
@@ -210,7 +211,7 @@ namespace FufuLauncher.Services
             }
             catch (Exception ex)
             {
-                Log?.Invoke($"[文件处理异常] {file.Path}: {ex.Message}");
+                Log?.Invoke(string.Format("Download_FileException".GetLocalized(), file.Path, ex.Message));
                 return false;
             }
         }
@@ -250,7 +251,7 @@ namespace FufuLauncher.Services
                     if (ComputeMd5(data).Equals(expectedMd5, StringComparison.OrdinalIgnoreCase))
                         return data;
 
-                    Log?.Invoke($"Manifest MD5校验失败，重试中...");
+                    Log?.Invoke("Download_ManifestMd5Retry".GetLocalized());
                 }
                 catch { }
                 retry--;
@@ -296,7 +297,7 @@ namespace FufuLauncher.Services
                 }
                 catch { retry--; await Task.Delay(1000); }
             }
-            throw new Exception("无法连接到米哈游 API");
+            throw new Exception("Download_CannotConnectApi".GetLocalized());
         }
 
         private void MoveFilesRecursively(DirectoryInfo source, DirectoryInfo target)

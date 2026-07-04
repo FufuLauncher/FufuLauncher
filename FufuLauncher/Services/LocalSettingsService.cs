@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using Microsoft.Data.Sqlite;
 
@@ -64,8 +65,8 @@ namespace FufuLauncher.Services
                 {
                     Debug.WriteLine($"LocalSettingsService: 创建配置目录失败 - {ex.Message}");
                     WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                        "目录创建失败",
-                        $"无法创建应用数据目录，请检查权限: {ex.Message}",
+                        "Settings_DirCreateFailed".GetLocalized(),
+                        string.Format("Settings_DirCreateFailedMsg".GetLocalized(), ex.Message),
                         NotificationType.Error,
                         4000
                     ));
@@ -173,8 +174,8 @@ namespace FufuLauncher.Services
             {
                 Debug.WriteLine($"LocalSettingsService: 数据库表初始化失败 - {ex.Message}");
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "数据库初始化失败",
-                    $"无法创建或初始化设置数据库: {ex.Message}",
+                    "Settings_DbInitFailed".GetLocalized(),
+                    string.Format("Settings_DbInitFailedMsg".GetLocalized(), ex.Message),
                     NotificationType.Error,
                     4000
                 ));
@@ -213,8 +214,8 @@ namespace FufuLauncher.Services
             {
                 Debug.WriteLine($"LocalSettingsService: 数据库删除失败 - {ex.Message}");
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "配置删除失败",
-                    $"无法从数据库删除设置: {ex.Message}",
+                    "Settings_ConfigDeleteFailed".GetLocalized(),
+                    string.Format("Settings_ConfigDeleteFailedMsg".GetLocalized(), ex.Message),
                     NotificationType.Error,
                     4000
                 ));
@@ -255,8 +256,8 @@ namespace FufuLauncher.Services
             {
                 Debug.WriteLine($"LocalSettingsService: 数据库加载失败 - {ex.Message}");
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "配置读取失败",
-                    $"无法从数据库加载设置: {ex.Message}",
+                    "Settings_ConfigReadFailed".GetLocalized(),
+                    string.Format("Settings_ConfigReadFailedMsg".GetLocalized(), ex.Message),
                     NotificationType.Error,
                     4000
                 ));
@@ -287,8 +288,8 @@ namespace FufuLauncher.Services
             {
                 Debug.WriteLine($"LocalSettingsService: 数据库保存失败 - {ex.Message}");
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "配置保存失败",
-                    $"无法将设置保存到数据库: {ex.Message}",
+                    "Settings_ConfigSaveFailed".GetLocalized(),
+                    string.Format("Settings_ConfigSaveFailedMsg".GetLocalized(), ex.Message),
                     NotificationType.Error,
                     4000
                 ));

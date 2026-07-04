@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:FufuLauncher.ViewModels"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="系统诊断">
+    Title="{helpers:Loc Key=Diagnostics_Title}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -19,7 +20,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="硬件与系统环境"
+            <TextBlock Text="{helpers:Loc Key=Diagnostics_HardwareAndSystem}"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        Margin="24,0,0,0"
@@ -31,12 +32,12 @@
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10"
                         Visibility="{x:Bind ToVisible(ViewModel.IsLoading), Mode=OneWay}">
                 <ProgressRing IsActive="True" />
-                <TextBlock Text="正在收集系统信息..." Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock Text="{helpers:Loc Key=Diagnostics_CollectingInfo}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
             </StackPanel>
 
             <ScrollViewer Visibility="{x:Bind ToCollapsed(ViewModel.IsLoading), Mode=OneWay}">
                 <StackPanel Spacing="20">
-                    <TextBlock Text="显示与图形" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock Text="{helpers:Loc Key=Diagnostics_DisplayAndGraphics}" Style="{StaticResource SubtitleTextBlockStyle}" />
 
                     <Grid ColumnSpacing="12" RowSpacing="12">
                         <Grid.ColumnDefinitions>
@@ -46,7 +47,7 @@
                         <Border Grid.Column="0" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 CornerRadius="8" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="分辨率" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                <TextBlock Text="{helpers:Loc Key=Diagnostics_Resolution}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            FontSize="12" />
                                 <TextBlock Text="{x:Bind ViewModel.Info.ScreenResolution, Mode=OneWay}" FontSize="16"
                                            FontWeight="SemiBold" />
@@ -55,7 +56,7 @@
                         <Border Grid.Column="1" Background="{ThemeResource LayerFillColorDefaultBrush}"
                                 CornerRadius="8" Padding="12">
                             <StackPanel>
-                                <TextBlock Text="刷新率" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                <TextBlock Text="{helpers:Loc Key=Diagnostics_RefreshRate}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            FontSize="12" />
                                 <TextBlock Text="{x:Bind ViewModel.Info.CurrentRefreshRate, Mode=OneWay}" FontSize="16"
                                            FontWeight="SemiBold" />
@@ -63,7 +64,7 @@
                         </Border>
                     </Grid>
 
-                    <TextBlock Text="硬件" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" />
+                    <TextBlock Text="{helpers:Loc Key=Diagnostics_Hardware}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" />
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="16">
                         <StackPanel Spacing="16">
                             <Grid>
@@ -92,36 +93,36 @@
                         </StackPanel>
                     </Border>
 
-                    <TextBlock Text="安全与网络" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" />
+                    <TextBlock Text="{helpers:Loc Key=Diagnostics_SecurityAndNetwork}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,10,0,0" />
                     <Border Background="{ThemeResource LayerFillColorDefaultBrush}" CornerRadius="8" Padding="16">
                         <StackPanel Spacing="16">
                             <Grid>
-                                <TextBlock Text="Windows 安全中心" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{helpers:Loc Key=Diagnostics_WindowsSecurity}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <TextBlock Text="{x:Bind ViewModel.Info.SecurityCenterStatus, Mode=OneWay}"
                                            HorizontalAlignment="Right" />
                             </Grid>
                             <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="系统盘剩余空间" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{helpers:Loc Key=Diagnostics_DiskSpace}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <TextBlock Text="{x:Bind ViewModel.Info.DiskSpace, Mode=OneWay}"
                                            HorizontalAlignment="Right" />
                             </Grid>
                             <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="网络连接状态" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{helpers:Loc Key=Diagnostics_NetworkStatus}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <TextBlock Text="{x:Bind ViewModel.Info.NetworkStatus, Mode=OneWay}"
                                            HorizontalAlignment="Right" />
                             </Grid>
                             <Border Height="1" Background="{ThemeResource SurfaceStrokeColorDefaultBrush}" />
                             <Grid>
-                                <TextBlock Text="网络所属环境" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock Text="{helpers:Loc Key=Diagnostics_NetworkRegion}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <TextBlock Text="{x:Bind ViewModel.Info.NetworkRegion, Mode=OneWay}"
                                            HorizontalAlignment="Right" />
                             </Grid>
                         </StackPanel>
                     </Border>
 
-                    <InfoBar IsOpen="True" IsClosable="False" Severity="Informational" Title="建议"
+                    <InfoBar IsOpen="True" IsClosable="False" Severity="Informational" Title="{helpers:Loc Key=Diagnostics_Suggestion}"
                              Message="{x:Bind ViewModel.Info.Suggestion, Mode=OneWay}" />
                 </StackPanel>
             </ScrollViewer>

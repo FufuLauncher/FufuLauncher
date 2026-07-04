@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 using CommunityToolkit.Mvvm.ComponentModel;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models;
 
@@ -20,8 +21,8 @@ public partial class AccountInfo : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(LevelDisplay))]
     private string _level = "";
-    [ObservableProperty] private string _sign = "这个人很懒，什么都没有写...";
-    [ObservableProperty] private string _ipRegion = "未知";
+    [ObservableProperty] private string _sign = "User_DefaultSignature".GetLocalized();
+    [ObservableProperty] private string _ipRegion = "Status_Unknown".GetLocalized();
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(LevelDisplay))]
     [NotifyPropertyChangedFor(nameof(GameUidDisplay))]
@@ -40,12 +41,12 @@ public partial class AccountInfo : ObservableObject
 
     public string GenderText => _gender switch
     {
-        1 => "男",
-        2 => "女",
-        _ => "保密"
+        1 => "User_GenderMale".GetLocalized(),
+        2 => "User_GenderFemale".GetLocalized(),
+        _ => "User_GenderPrivate".GetLocalized()
     };
 
-    public string LevelDisplay => HasBoundRole && !string.IsNullOrEmpty(Level) ? Level : "暂无";
+    public string LevelDisplay => HasBoundRole && !string.IsNullOrEmpty(Level) ? Level : "Status_None".GetLocalized();
 
-    public string GameUidDisplay => string.IsNullOrEmpty(Stuid) ? "暂无" : Stuid;
+    public string GameUidDisplay => string.IsNullOrEmpty(Stuid) ? "Status_None".GetLocalized() : Stuid;
 }

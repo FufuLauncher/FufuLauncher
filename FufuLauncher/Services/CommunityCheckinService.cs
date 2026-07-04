@@ -35,12 +35,12 @@ public class CommunityCheckinService : ICommunityCheckinService
         bool likeEnabled,
         bool shareEnabled)
     {
-        var result = new CheckinTypeResult { TypeName = "社区签到", Executed = true };
+        var result = new CheckinTypeResult { TypeName = "CheckinCommunity_Title".GetLocalized(), Executed = true };
 
         if (string.IsNullOrEmpty(account.Stoken) || string.IsNullOrEmpty(account.Mid))
         {
             result.Success = false;
-            result.Message = "缺少 stoken 或 mid";
+            result.Message = "CheckinCommunity_MissingToken".GetLocalized();
             return result;
         }
 
@@ -55,7 +55,7 @@ public class CommunityCheckinService : ICommunityCheckinService
             if (taskState == null)
             {
                 result.Success = false;
-                result.Message = "获取任务状态失败，请检查 cookie";
+                result.Message = "CheckinCommunity_GetTaskFailed".GetLocalized();
                 return result;
             }
 
@@ -70,7 +70,7 @@ public class CommunityCheckinService : ICommunityCheckinService
             {
                 result.Success = true;
                 result.SkippedCount++;
-                result.Message = $"今日已完成 ({received}米游币)";
+                result.Message = string.Format("CheckinCommunity_TodayDone".GetLocalized(), received);
                 return result;
             }
 
@@ -87,7 +87,7 @@ public class CommunityCheckinService : ICommunityCheckinService
             }
             else if (taskFlags["sign"] != 0)
             {
-                result.Details.Add("社区签到已完成，跳过");
+                result.Details.Add("CheckinCommunity_SignDoneSkipped".GetLocalized());
                 result.SkippedCount++;
             }
 
@@ -95,7 +95,7 @@ public class CommunityCheckinService : ICommunityCheckinService
             var posts = await GetPostsAsync(headers);
             if (posts == null || posts.Count == 0)
             {
-                result.Details.Add("获取帖子列表失败，无法执行看帖/点赞/分享");
+                result.Details.Add("CheckinCommunity_GetPostsFailed".GetLocalized());
             }
             else
             {
@@ -112,7 +112,7 @@ public class CommunityCheckinService : ICommunityCheckinService
                 }
                 else if (taskFlags["read"] != 0)
                 {
-                    result.Details.Add("看帖已完成，跳过");
+                    result.Details.Add("CheckinCommunity_ReadDoneSkipped".GetLocalized());
                     result.SkippedCount++;
                 }
 
@@ -129,7 +129,7 @@ public class CommunityCheckinService : ICommunityCheckinService
                 }
                 else if (taskFlags["like"] != 0)
                 {
-                    result.Details.Add("点赞已完成，跳过");
+                    result.Details.Add("CheckinCommunity_LikeDoneSkipped".GetLocalized());
                     result.SkippedCount++;
                 }
 
@@ -144,7 +144,7 @@ public class CommunityCheckinService : ICommunityCheckinService
                 }
                 else if (taskFlags["share"] != 0)
                 {
-                    result.Details.Add("分享已完成，跳过");
+                    result.Details.Add("CheckinCommunity_ShareDoneSkipped".GetLocalized());
                     result.SkippedCount++;
                 }
             }
@@ -157,8 +157,8 @@ public class CommunityCheckinService : ICommunityCheckinService
                 int gained = finalReceived - received;
                 result.Success = result.FailCount == 0;
                 result.Message = gained > 0
-                    ? $"获得 {gained} 米游币 (当前 {finalReceived})"
-                    : $"{finalReceived} 米游币";
+                    ? string.Format("CheckinCommunity_GainedCoins".GetLocalized(), gained, finalReceived)
+                    : string.Format("CheckinCommunity_CurrentCoins".GetLocalized(), finalReceived);
             }
             else
             {
@@ -168,7 +168,7 @@ public class CommunityCheckinService : ICommunityCheckinService
         catch (Exception ex)
         {
             result.Success = false;
-            result.Message = $"异常: {ex.Message}";
+            result.Message = string.Format("CheckinCommunity_Exception".GetLocalized(), ex.Message);
             Debug.WriteLine($"[社区签到] 账号 {account.Uid} 异常: {ex.Message}");
         }
 
@@ -324,28 +324,28 @@ public class CommunityCheckinService : ICommunityCheckinService
             var data = await PostJsonAsync(GenshinApiEndpoints.BbsSignUrl, body, headers);
             if (data == null)
             {
-                details.Add("原神社区签到: 请求失败");
+                details.Add("CheckinCommunity_GenshinSignRequestFailed".GetLocalized());
                 success = false;
             }
             else if (GetIntValue(data, "retcode") == 0)
             {
-                details.Add("原神社区签到成功");
+                details.Add("CheckinCommunity_GenshinSignSuccess".GetLocalized());
             }
             else if (GetIntValue(data, "retcode") == 1034)
             {
-                details.Add("原神社区签到: 触发验证码，已跳过");
+                details.Add("CheckinCommunity_GenshinSignCaptcha".GetLocalized());
                 success = false;
             }
             else
             {
                 var msg = TryGetString(data, "message");
-                details.Add($"原神社区签到失败: {msg}");
+                details.Add(string.Format("CheckinCommunity_GenshinSignFailed".GetLocalized(), msg));
                 success = false;
             }
         }
         catch (Exception ex)
         {
-            details.Add($"原神社区签到异常: {ex.Message}");
+            details.Add(string.Format("CheckinCommunity_GenshinSignException".GetLocalized(), ex.Message));
             success = false;
         }
 
@@ -411,17 +411,17 @@ public class CommunityCheckinService : ICommunityCheckinService
 
                 if (TryGetString(json.RootElement, "message") == "OK")
                 {
-                    details.Add($"阅读成功: {title}");
+                    details.Add(string.Format("CheckinCommunity_ReadSuccess".GetLocalized(), title));
                 }
                 else
                 {
-                    details.Add($"阅读失败: {title}");
+                    details.Add(string.Format("CheckinCommunity_ReadFailed".GetLocalized(), title));
                     success = false;
                 }
             }
             catch (Exception ex)
             {
-                details.Add($"阅读异常: {title} ({ex.Message})");
+                details.Add(string.Format("CheckinCommunity_ReadException".GetLocalized(), title, ex.Message));
                 success = false;
             }
             await DelayAsync();
@@ -444,7 +444,7 @@ public class CommunityCheckinService : ICommunityCheckinService
                 var data = await PostJsonAsync(GenshinApiEndpoints.BbsLikeUrl, likeBody, headers);
                 if (data != null && TryGetString(data, "message") == "OK")
                 {
-                    details.Add($"点赞成功: {title}");
+                    details.Add(string.Format("CheckinCommunity_LikeSuccess".GetLocalized(), title));
                     // Cancel like
                     await DelayAsync();
                     var cancelBody = JsonSerializer.Serialize(new { post_id = postId, is_cancel = true });
@@ -452,14 +452,14 @@ public class CommunityCheckinService : ICommunityCheckinService
                 }
                 else
                 {
-                    var msg = data != null ? TryGetString(data, "message") : "请求失败";
-                    details.Add($"点赞失败: {title} ({msg})");
+                    var msg = data != null ? TryGetString(data, "message") : "Status_RequestFailed".GetLocalized();
+                    details.Add(string.Format("CheckinCommunity_LikeFailed".GetLocalized(), title, msg));
                     success = false;
                 }
             }
             catch (Exception ex)
             {
-                details.Add($"点赞异常: {title} ({ex.Message})");
+                details.Add(string.Format("CheckinCommunity_LikeException".GetLocalized(), title, ex.Message));
                 success = false;
             }
             await DelayAsync();
@@ -483,19 +483,19 @@ public class CommunityCheckinService : ICommunityCheckinService
 
             if (TryGetString(json.RootElement, "message") == "OK")
             {
-                details.Add($"分享成功: {post.Title}");
+                details.Add(string.Format("CheckinCommunity_ShareSuccess".GetLocalized(), post.Title));
                 return (true, details);
             }
             else
             {
                 var msg = TryGetString(json.RootElement, "message");
-                details.Add($"分享失败: {post.Title} ({msg})");
+                details.Add(string.Format("CheckinCommunity_ShareFailed".GetLocalized(), post.Title, msg));
                 return (false, details);
             }
         }
         catch (Exception ex)
         {
-            details.Add($"分享异常: {post.Title} ({ex.Message})");
+            details.Add(string.Format("CheckinCommunity_ShareException".GetLocalized(), post.Title, ex.Message));
             return (false, details);
         }
     }

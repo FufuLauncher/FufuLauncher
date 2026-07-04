@@ -3,7 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:windowex="using:WinUIEx"
-    Title="支持 FufuLauncher">
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    Title="Support FufuLauncher">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -12,7 +13,7 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Grid.Row="0" IsHitTestVisible="False" Margin="16,0,0,0">
-            <TextBlock Text="支持 FufuLauncher" VerticalAlignment="Center" FontSize="12" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
+            <TextBlock Text="Support FufuLauncher" VerticalAlignment="Center" FontSize="12" Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
         </Grid>
 
         <Grid Grid.Row="1" Padding="24,10,24,24">
@@ -24,20 +25,20 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" Spacing="12" VerticalAlignment="Center">
                 <FontIcon Glyph="&#xE734;" Foreground="#FFD700" FontSize="24"/>
-                <TextBlock Text="支持" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                <TextBlock Text="{helpers:Loc Key=StarPrompt_Support}" FontSize="18" FontWeight="SemiBold" VerticalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,24,0,24" VerticalAlignment="Center">
-                <TextBlock Text="如果您觉得FufuLauncher帮助到了您，不妨前往GitHub为项目点亮一个免费的Star，您的支持是开发的最大动力" 
+                <TextBlock Text="{helpers:Loc Key=StarPrompt_Message}" 
                            TextWrapping="Wrap" LineHeight="24" FontSize="14" Opacity="0.9"/>
-                <HyperlinkButton Content="点击前往GitHub" 
+                <HyperlinkButton Content="{helpers:Loc Key=StarPrompt_GoToGitHub}" 
                                  NavigateUri="https://github.com/FufuLauncher/FufuLauncher"
                                  Margin="0,16,0,0"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="12">
-                <Button Content="下次再说" Click="RemindLater_Click" Width="100"/>
-                <Button Content="我知道了" Click="GotIt_Click" Style="{StaticResource AccentButtonStyle}" Width="100"/>
+                <Button Content="{helpers:Loc Key=StarPrompt_Later}" Click="RemindLater_Click" Width="100"/>
+                <Button Content="{helpers:Loc Key=StarPrompt_GotIt}" Click="GotIt_Click" Style="{StaticResource AccentButtonStyle}" Width="100"/>
             </StackPanel>
         </Grid>
     </Grid>

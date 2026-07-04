@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="视频资源库">
+    Title="{helpers:Loc Key=VideoResources_Title}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -25,7 +26,7 @@
         <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                <TextBlock Text="视频资源库"
+                <TextBlock Text="{helpers:Loc Key=VideoResources_Title}"
                            Style="{StaticResource CaptionTextBlockStyle}"
                            FontFamily="{StaticResource AppGlobalFont}"
                            FontWeight="SemiBold" />
@@ -34,7 +35,7 @@
 
         <Grid Grid.Row="1">
             <Pivot SelectionChanged="OnPivotSelectionChanged">
-                <PivotItem Header="角色视频" Tag="Character">
+                <PivotItem Header="{helpers:Loc Key=VideoResources_CharacterVideos}" Tag="Character">
                     <Grid>
                         <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
                                      Visibility="{x:Bind ToVisibility(IsLoading), Mode=OneWay}" />
@@ -58,9 +59,9 @@
 
                                         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right"
                                                     Margin="0,4,8,0" Spacing="8">
-                                            <Button Content="播放" Click="OnPlayClick" Tag="{Binding}" FontSize="10"
+                                            <Button Content="{helpers:Loc Key=VideoResources_Play}" Click="OnPlayClick" Tag="{Binding}" FontSize="10"
                                                     Padding="8,4" Height="28" />
-                                            <Button Content="下载" Click="OnDownloadClick" Tag="{Binding}" FontSize="10"
+                                            <Button Content="{helpers:Loc Key=VideoResources_Download}" Click="OnDownloadClick" Tag="{Binding}" FontSize="10"
                                                     Padding="8,4" Height="28" />
                                         </StackPanel>
                                     </Grid>
@@ -70,7 +71,7 @@
                     </Grid>
                 </PivotItem>
 
-                <PivotItem Header="过场动画" Tag="Cutscene">
+                <PivotItem Header="{helpers:Loc Key=VideoResources_CutsceneVideos}" Tag="Cutscene">
                     <Grid>
                         <ProgressBar IsIndeterminate="True" VerticalAlignment="Top"
                                      Visibility="{x:Bind ToVisibility(IsLoading), Mode=OneWay}" />
@@ -94,9 +95,9 @@
 
                                         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right"
                                                     Margin="0,4,8,0" Spacing="8">
-                                            <Button Content="播放" Click="OnPlayClick" Tag="{Binding}" FontSize="10"
+                                            <Button Content="{helpers:Loc Key=VideoResources_Play}" Click="OnPlayClick" Tag="{Binding}" FontSize="10"
                                                     Padding="8,4" Height="28" />
-                                            <Button Content="下载" Click="OnDownloadClick" Tag="{Binding}" FontSize="10"
+                                            <Button Content="{helpers:Loc Key=VideoResources_Download}" Click="OnDownloadClick" Tag="{Binding}" FontSize="10"
                                                     Padding="8,4" Height="28" />
                                         </StackPanel>
                                     </Grid>

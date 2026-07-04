@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="战绩信息">
+    Title="{helpers:Loc Key=BBSWindow_Title}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -24,7 +25,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image Source="/Assets/WindowIcon.ico" Height="16" Width="16" Margin="16,0,12,0" />
-            <TextBlock Grid.Column="1" Text="战绩信息" VerticalAlignment="Center"
+            <TextBlock Grid.Column="1" Text="{helpers:Loc Key=BBSWindow_Title}" VerticalAlignment="Center"
                        Style="{StaticResource CaptionTextBlockStyle}" />
         </Grid>
 
@@ -35,14 +36,14 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="ClientTypeComboBox" SelectionChanged="ClientTypeComboBox_SelectionChanged" Width="120"
-                      SelectedIndex="0" ToolTipService.ToolTip="切换标识">
+                      SelectedIndex="0" ToolTipService.ToolTip="{helpers:Loc Key=BBSWindow_SwitchIdentity}">
                 <ComboBoxItem Content="Type 2" Tag="2" />
                 <ComboBoxItem Content="Type 4" Tag="4" />
                 <ComboBoxItem Content="Type 5" Tag="5" />
             </ComboBox>
-            <TextBox Grid.Column="1" x:Name="UrlTextBox" PlaceholderText="输入网址..." VerticalAlignment="Center"
+            <TextBox Grid.Column="1" x:Name="UrlTextBox" PlaceholderText="{helpers:Loc Key=BBSWindow_EnterUrl}" VerticalAlignment="Center"
                      KeyDown="UrlTextBox_KeyDown" InputScope="Url" />
-            <Button Grid.Column="2" Content="前往" Click="GoButton_Click" />
+            <Button Grid.Column="2" Content="{helpers:Loc Key=BBSWindow_Go}" Click="GoButton_Click" />
         </Grid>
 
         <WebView2 Grid.Row="2" x:Name="BBSWebView" />
@@ -67,13 +68,13 @@
                     <Button Click="SaveScreenshot_Click" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontSize="16" Glyph="&#xE74E;" />
-                            <TextBlock VerticalAlignment="Center" Text="保存" />
+                            <TextBlock VerticalAlignment="Center" Text="{helpers:Loc Key=BBSWindow_Save}" />
                         </StackPanel>
                     </Button>
                     <Button Click="CopyScreenshot_Click" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
                         <StackPanel Orientation="Horizontal" Spacing="6">
                             <FontIcon FontSize="16" Glyph="&#xE8C8;" />
-                            <TextBlock VerticalAlignment="Center" Text="复制" />
+                            <TextBlock VerticalAlignment="Center" Text="{helpers:Loc Key=BBSWindow_Copy}" />
                         </StackPanel>
                     </Button>
                 </StackPanel>

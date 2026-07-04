@@ -5,6 +5,7 @@ Licensed under the MIT License.
 using System.Text.Json;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using Microsoft.Extensions.Logging;
 
@@ -131,7 +132,7 @@ public class UserInfoService : IUserInfoService
 
     public async Task<GameRecordCardResponse> GetGameRecordCardAsync(string stuid, string cookie)
     {
-        return await Task.FromResult(new GameRecordCardResponse(-1, "功能已移除", null));
+        return await Task.FromResult(new GameRecordCardResponse(-1, "UserInfo_FeatureRemoved".GetLocalized(), null));
     }
 }
 

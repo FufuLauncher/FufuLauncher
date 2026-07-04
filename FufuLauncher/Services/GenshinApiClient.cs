@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models.Genshin;
 
 namespace FufuLauncher.Services;
@@ -81,8 +82,8 @@ public class GenshinApiClient
         {
             var message = document.RootElement.TryGetProperty("message", out var messageElement)
                 ? messageElement.GetString()
-                : "请求失败";
-            throw new InvalidOperationException(message ?? "请求失败");
+                : "Status_RequestFailed".GetLocalized();
+            throw new InvalidOperationException(message ?? "Status_RequestFailed".GetLocalized());
         }
 
         return JsonSerializer.Deserialize<T>(content, options) ?? Activator.CreateInstance<T>();

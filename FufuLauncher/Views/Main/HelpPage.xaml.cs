@@ -8,6 +8,7 @@ using FufuLauncher.ViewModels;
 using FufuLauncher.Models;
 using Windows.System;
 using CommunityToolkit.WinUI.UI.Controls;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Views;
 
@@ -123,8 +124,8 @@ public sealed partial class HelpPage : Page
         ViewModel.UpdateSearchHits(trimmed);
         var n = ViewModel.SearchHits.Count;
         SearchFlyoutSummary.Text = n > 0
-            ? $"找到 {n} 个结果，点击条目打开"
-            : "未找到匹配的文档";
+            ? string.Format("HelpPage_SearchResults".GetLocalized(), n)
+            : "HelpPage_NoResults".GetLocalized();
 
         global::Microsoft.UI.Xaml.Controls.Primitives.FlyoutBase.ShowAttachedFlyout(SearchBox);
     }

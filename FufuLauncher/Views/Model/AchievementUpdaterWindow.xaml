@@ -4,15 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="成就数据更新">
+    Title="{helpers:Loc Key=AchievementUpdater_Title}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="20">
-            <TextBlock Text="成就数据更新" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" />
+            <TextBlock Text="{helpers:Loc Key=AchievementUpdater_Title}" Style="{ThemeResource TitleTextBlockStyle}" HorizontalAlignment="Center" />
 
             <Button x:Name="StartButton"
-                    Content="立即开始获取"
+                    Content="{helpers:Loc Key=AchievementUpdater_StartFetch}"
                     Click="OnStartClick"
                     HorizontalAlignment="Center"
                     Padding="32,8" />

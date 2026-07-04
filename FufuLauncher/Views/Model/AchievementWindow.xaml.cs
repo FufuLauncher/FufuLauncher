@@ -9,6 +9,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -30,7 +31,7 @@ public sealed partial class AchievementWindow : Window
     private bool _isBatchProcessing;
     private readonly string _archivesDir;
     private readonly string _profileRecordPath;
-    private string _currentProfileName = "默认存档";
+    private string _currentProfileName = "AchievementWindow_DefaultProfile".GetLocalized();
     public string CurrentProfileName
     {
         get => _currentProfileName;
@@ -75,7 +76,7 @@ public sealed partial class AchievementWindow : Window
         }
         else
         {
-            CurrentProfileName = "未命名存档";
+            CurrentProfileName = "AchievementWindow_UnnamedProfile".GetLocalized();
         }
         
         _workFilePath = Path.Combine(docPath, "achievements.db");
@@ -217,7 +218,7 @@ public sealed partial class AchievementWindow : Window
         {
             if (!File.Exists(_assetsFilePath))
             {
-                await ShowDialogAsync("错误", "找不到内置数据库文件");
+                await ShowDialogAsync("ErrorTitle".GetLocalized(), "找不到内置数据库文件");
                 return;
             }
 
@@ -311,17 +312,17 @@ public sealed partial class AchievementWindow : Window
         if (titleProp != null) name = titleProp.GetValue(cat) as string;
         if (string.IsNullOrEmpty(name) && nameProp != null) name = nameProp.GetValue(cat) as string;
 
-        return string.IsNullOrEmpty(name) ? "未知分类" : name;
+        return string.IsNullOrEmpty(name) ? "AchievementWindow_UnknownCategory".GetLocalized() : name;
     }
     
     private async void OnUpdateDbClick(object sender, RoutedEventArgs e)
     {
         var confirmDialog = new ContentDialog
         {
-            Title = "更新成就数据库",
+            Title = "AchievementWindow_UpdateDb".GetLocalized(),
             Content = "此操作将读取软件内置的最新成就列表，并将缺失的新成就添加到您当前的存档中。\n\n您的现有进度（已完成的成就）将保留不会丢失。\n\n是否继续？",
-            PrimaryButtonText = "开始更新",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "AchievementWindow_StartUpdate".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = Content.XamlRoot
         };
@@ -336,7 +337,7 @@ public sealed partial class AchievementWindow : Window
     
     private async void OnArchiveManageClick(object sender, RoutedEventArgs e)
     {
-        if (!File.Exists(_profileRecordPath) || CurrentProfileName == "未命名存档")
+        if (!File.Exists(_profileRecordPath) || CurrentProfileName == "AchievementWindow_UnnamedProfile".GetLocalized())
         {
             var nameResult = await ShowInputAsync("保存当前存档", "检测到当前存档未命名，在切换或新建前，请先为当前进度取一个名字：");
             if (string.IsNullOrWhiteSpace(nameResult)) return;
@@ -365,10 +366,10 @@ public sealed partial class AchievementWindow : Window
         
         var btnContent = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8, HorizontalAlignment = HorizontalAlignment.Center };
         btnContent.Children.Add(new FontIcon { Glyph = "\uE710", FontFamily = new Microsoft.UI.Xaml.Media.FontFamily("Segoe Fluent Icons"), FontSize = 12 });
-        btnContent.Children.Add(new TextBlock { Text = "新建空白存档" });
+        btnContent.Children.Add(new TextBlock { Text = "AchievementWindow_NewBlank".GetLocalized() });
         var createBtn = new Button { Content = btnContent, HorizontalAlignment = HorizontalAlignment.Stretch };
 
-        var listHeader = new TextBlock { Text = "现有存档列表:", Opacity = 0.7, FontSize = 12, Margin = new Thickness(0, 10, 0, 0) };
+        var listHeader = new TextBlock { Text = "AchievementWindow_ExistingProfiles".GetLocalized(), Opacity = 0.7, FontSize = 12, Margin = new Thickness(0, 10, 0, 0) };
 
         var listContainer = new StackPanel { Spacing = 8 };
         var scrollViewer = new ScrollViewer { Content = listContainer, MaxHeight = 250, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
@@ -379,9 +380,9 @@ public sealed partial class AchievementWindow : Window
 
         var dialog = new ContentDialog
         {
-            Title = "存档管理",
+            Title = "AchievementWindow_ArchiveManagement".GetLocalized(),
             Content = rootPanel,
-            CloseButtonText = "关闭",
+            CloseButtonText = "CloseBtn".GetLocalized(),
             XamlRoot = Content.XamlRoot
         };
 
@@ -398,7 +399,7 @@ public sealed partial class AchievementWindow : Window
             {
                 listContainer.Children.Add(new TextBlock 
                 { 
-                    Text = "暂无备份存档", 
+                    Text = "AchievementWindow_NoBackup".GetLocalized(), 
                     Opacity = 0.5, 
                     HorizontalAlignment = HorizontalAlignment.Center, 
                     Margin = new Thickness(0, 20, 0, 0) 
@@ -470,7 +471,7 @@ public sealed partial class AchievementWindow : Window
                 else
                 {
                     var confirmPanel = new StackPanel { Spacing = 10, Padding = new Thickness(10) };
-                    confirmPanel.Children.Add(new TextBlock { Text = "确定要永久删除吗？", FontSize = 12 });
+                    confirmPanel.Children.Add(new TextBlock { Text = "AchievementWindow_ConfirmDeleteMsg".GetLocalized(), FontSize = 12 });
 
                     var confirmDeleteBtn = new Button 
                     { 
@@ -524,7 +525,7 @@ public sealed partial class AchievementWindow : Window
             
             if (File.Exists(Path.Combine(_archivesDir, $"{newName}.db")))
             {
-                await ShowDialogAsync("错误", "该存档名称已存在！");
+                await ShowDialogAsync("ErrorTitle".GetLocalized(), "该存档名称已存在！");
                 return;
             }
 
@@ -539,7 +540,7 @@ public sealed partial class AchievementWindow : Window
         try
         {
             ViewModel.IsLoading = true;
-            ViewModel.StatusMessage = "正在切换存档...";
+            ViewModel.StatusMessage = "AchievementWindow_SwitchingProfile".GetLocalized();
             
             SqliteConnection.ClearAllPools();
             
@@ -553,7 +554,7 @@ public sealed partial class AchievementWindow : Window
                 string sourceArchive = Path.Combine(_archivesDir, $"{profileName}.db");
                 if (!File.Exists(sourceArchive))
                 {
-                    await ShowDialogAsync("错误", "找不到目标存档文件！");
+                    await ShowDialogAsync("ErrorTitle".GetLocalized(), "找不到目标存档文件！");
                     return;
                 }
                 File.Copy(sourceArchive, _workFilePath, true);
@@ -583,7 +584,7 @@ public sealed partial class AchievementWindow : Window
     {
         var inputTextBox = new TextBox 
         { 
-            PlaceholderText = "请输入名称...",
+            PlaceholderText = "AchievementWindow_EnterName".GetLocalized(),
             MaxLength = 20
         };
         var dialog = new ContentDialog
@@ -594,8 +595,8 @@ public sealed partial class AchievementWindow : Window
                 Spacing = 10,
                 Children = { new TextBlock { Text = instruction }, inputTextBox }
             },
-            PrimaryButtonText = "确定",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "OkBtn".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = Content.XamlRoot
         };
@@ -746,7 +747,7 @@ public sealed partial class AchievementWindow : Window
     private void LoadData()
     {
         ViewModel.IsLoading = true;
-        ViewModel.StatusMessage = "正在读取数据...";
+        ViewModel.StatusMessage = "AchievementWindow_ReadingData".GetLocalized();
         _isDataLoaded = false;
 
         try
@@ -851,7 +852,7 @@ public sealed partial class AchievementWindow : Window
                 ViewModel.Categories.Add(cat);
             }
             
-            var versions = new HashSet<string> { "所有版本" };
+            var versions = new HashSet<string> { "AchievementWindow_AllVersions".GetLocalized() };
             foreach (var cat in ViewModel.Categories)
             {
                 foreach (var item in cat.Achievements)
@@ -875,7 +876,7 @@ public sealed partial class AchievementWindow : Window
             ViewModel.StatusMessage = $"共 {ViewModel.Categories.Sum(c => c.TotalCount)} 个成就";
             CalculateGlobalStats();
         
-            ViewModel.StatusMessage = $"数据加载完成";
+            ViewModel.StatusMessage = $"AchievementWindow_DataLoaded".GetLocalized();
             _isDataLoaded = true;
         }
         catch (Exception ex)
@@ -1022,7 +1023,7 @@ public sealed partial class AchievementWindow : Window
         }
         
         var resultList = new List<AchievementItem>();
-        bool isFilterVer = ViewModel.SelectedVersion != "所有版本" && !string.IsNullOrEmpty(ViewModel.SelectedVersion);
+        bool isFilterVer = ViewModel.SelectedVersion != "AchievementWindow_AllVersions".GetLocalized() && !string.IsNullOrEmpty(ViewModel.SelectedVersion);
         
         foreach (var item in sourceList)
         {
@@ -1091,9 +1092,9 @@ public sealed partial class AchievementWindow : Window
     
     private void OnExportClick(object sender, RoutedEventArgs e)
     {
-        ViewModel.StatusMessage = "正在保存...";
+        ViewModel.StatusMessage = "AchievementWindow_Saving".GetLocalized();
         SaveData();
-        ViewModel.StatusMessage = "数据已保存到文档目录";
+        ViewModel.StatusMessage = "AchievementWindow_SavedToDocs".GetLocalized();
     }
     
     private void OnSearchGuideClick(object sender, RoutedEventArgs e)
@@ -1113,7 +1114,7 @@ public sealed partial class AchievementWindow : Window
             }
             catch (Exception ex)
             {
-                ViewModel.StatusMessage = "无法打开浏览器: " + ex.Message;
+                ViewModel.StatusMessage = "AchievementWindow_CannotOpenBrowser".GetLocalized() + ": " + ex.Message;
             }
         }
     }
@@ -1158,7 +1159,7 @@ public sealed partial class AchievementWindow : Window
         {
             Title = "如何导入 Yae 成就记录",
             Content = contentPanel,
-            CloseButtonText = "我知道了",
+            CloseButtonText = "GotItBtn".GetLocalized(),
             XamlRoot = Content.XamlRoot
         };
 
@@ -1171,14 +1172,14 @@ public sealed partial class AchievementWindow : Window
         _isBatchProcessing = true;
         
         var progressBar = new ProgressBar { Value = 0, Maximum = 100, Height = 10, Margin = new Thickness(0, 15, 0, 5) };
-        var statusText = new TextBlock { Text = "正在准备读取数据...", FontSize = 13, Opacity = 0.8 };
+        var statusText = new TextBlock { Text = "AchievementWindow_PreparingRead".GetLocalized(), FontSize = 13, Opacity = 0.8 };
         var stackPanel = new StackPanel { Width = 380, Spacing = 5 };
         stackPanel.Children.Add(statusText);
         stackPanel.Children.Add(progressBar);
 
         var progressDialog = new ContentDialog
         {
-            Title = "正在导入成就",
+            Title = "AchievementWindow_Importing".GetLocalized(),
             Content = stackPanel,
             CloseButtonText = null,
             XamlRoot = Content.XamlRoot
@@ -1226,7 +1227,7 @@ public sealed partial class AchievementWindow : Window
             
             if (result.PendingUpdates.Count > 0)
             {
-                statusText.Text = "正在应用更改";
+                statusText.Text = "AchievementWindow_ApplyingChanges".GetLocalized();
 
                 foreach (var update in result.PendingUpdates)
                 {
@@ -1272,7 +1273,7 @@ public sealed partial class AchievementWindow : Window
         catch (Exception ex)
         {
             progressDialog.Hide();
-            await ShowDialogAsync("错误", $"导入过程中发生异常：\n{ex.Message}");
+            await ShowDialogAsync("ErrorTitle".GetLocalized(), $"导入过程中发生异常：\n{ex.Message}");
         }
         finally
         {
@@ -1358,7 +1359,7 @@ public sealed partial class AchievementWindow : Window
             }
         }
 
-        reportProgress(95, "正在刷新界面状态...");
+        reportProgress(95, "AchievementWindow_RefreshingUI".GetLocalized());
         
         DispatcherQueue.TryEnqueue(() =>
         {
@@ -1402,7 +1403,7 @@ public sealed partial class AchievementWindow : Window
         {
             Title = title,
             Content = new TextBlock { Text = content, TextWrapping = TextWrapping.Wrap, MaxWidth = 400 },
-            CloseButtonText = "确定",
+            CloseButtonText = "OkBtn".GetLocalized(),
             XamlRoot = Content.XamlRoot
         };
         await dialog.ShowAsync();
@@ -1462,7 +1463,7 @@ public sealed partial class AchievementWindow : Window
 
         if (_isBatchProcessing) return;
         _isBatchProcessing = true;
-        ViewModel.StatusMessage = "正在读取UIAF数据...";
+        ViewModel.StatusMessage = "AchievementWindow_ReadingUIAF".GetLocalized();
 
         try
         {
@@ -1471,7 +1472,7 @@ public sealed partial class AchievementWindow : Window
 
             if (uiafData == null || uiafData.List == null)
             {
-                await ShowDialogAsync("错误", "无效的UIAF文件格式");
+                await ShowDialogAsync("ErrorTitle".GetLocalized(), "无效的UIAF文件格式");
                 return;
             }
 
@@ -1570,7 +1571,7 @@ public sealed partial class AchievementWindow : Window
         var file = await picker.PickSaveFileAsync();
         if (file == null) return;
 
-        ViewModel.StatusMessage = "正在生成UIAF数据...";
+        ViewModel.StatusMessage = "AchievementWindow_GeneratingUIAF".GetLocalized();
 
         try
         {
@@ -1619,7 +1620,7 @@ public sealed partial class AchievementWindow : Window
 
             await File.WriteAllTextAsync(file.Path, jsonOutput);
 
-            ViewModel.StatusMessage = "UIAF导出完成";
+            ViewModel.StatusMessage = "AchievementWindow_UIAFExportDone".GetLocalized();
             await ShowDialogAsync("导出成功", "已成功导出UIAF格式数据。");
         }
         catch (Exception ex)
@@ -1707,7 +1708,7 @@ public sealed partial class AchievementWindow : Window
         }
         catch (Exception ex)
         {
-            ViewModel.StatusMessage = "保存异常";
+            ViewModel.StatusMessage = "AchievementWindow_SaveException".GetLocalized();
             Debug.WriteLine(ex);
         }
     }

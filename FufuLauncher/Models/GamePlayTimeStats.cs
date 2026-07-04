@@ -5,6 +5,7 @@ Licensed under the MIT License.
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models
 {
@@ -60,13 +61,13 @@ namespace FufuLauncher.Models
         {
             return dayOfWeek switch
             {
-                System.DayOfWeek.Sunday => "周日",
-                System.DayOfWeek.Monday => "周一",
-                System.DayOfWeek.Tuesday => "周二",
-                System.DayOfWeek.Wednesday => "周三",
-                System.DayOfWeek.Thursday => "周四",
-                System.DayOfWeek.Friday => "周五",
-                System.DayOfWeek.Saturday => "周六",
+                System.DayOfWeek.Sunday => "Day_Sunday".GetLocalized(),
+                System.DayOfWeek.Monday => "Day_Monday".GetLocalized(),
+                System.DayOfWeek.Tuesday => "Day_Tuesday".GetLocalized(),
+                System.DayOfWeek.Wednesday => "Day_Wednesday".GetLocalized(),
+                System.DayOfWeek.Thursday => "Day_Thursday".GetLocalized(),
+                System.DayOfWeek.Friday => "Day_Friday".GetLocalized(),
+                System.DayOfWeek.Saturday => "Day_Saturday".GetLocalized(),
                 _ => ""
             };
         }

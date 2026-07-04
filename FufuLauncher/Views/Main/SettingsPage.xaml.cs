@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using FufuLauncher.Helpers;
 using FufuLauncher.ViewModels;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -33,10 +34,10 @@ public sealed partial class SettingsPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = "声明",
+            Title = "Settings_Disclaimer".GetLocalized(),
             Content = "该独立部署版本软件由PR贡献者自行开发提供，FufuLauncher无法对该软件的安全性、稳定性或后续维护提供任何保证，您需要自行辨别使用风险\n\n是否继续访问该项目地址？",
-            PrimaryButtonText = "继续访问",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "Settings_ContinueVisit".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
         };
 
@@ -150,9 +151,9 @@ public sealed partial class SettingsPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = "社区签到说明",
+            Title = "Settings_CommunityCheckinNote".GetLocalized(),
             Content = "由于米游社逐步删除了互动获取米游币渠道，下方选项大概并不能让获取米游币变得更多，等待后续官方更新新策略",
-            CloseButtonText = "我知道了",
+            CloseButtonText = "GotItBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
         };
         await dialog.ShowAsync();
@@ -162,9 +163,9 @@ public sealed partial class SettingsPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = "云游戏签到说明",
+            Title = "Settings_CloudCheckinNote".GetLocalized(),
             Content = "开启云游戏签到需要对应账号添加云游戏登录凭证，否则跳过云游戏签到",
-            CloseButtonText = "我知道了",
+            CloseButtonText = "GotItBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
         };
         await dialog.ShowAsync();
@@ -385,9 +386,9 @@ public sealed partial class SettingsPage : Page
                 {
                     await new ContentDialog
                     {
-                        Title = "提示",
+                        Title = "Settings_Notice".GetLocalized(),
                         Content = "您的开发者认证已通过，请勿重复提交申请",
-                        CloseButtonText = "确定",
+                        CloseButtonText = "OkBtn".GetLocalized(),
                         XamlRoot = this.XamlRoot
                     }.ShowAsync();
                     return;
@@ -418,8 +419,8 @@ public sealed partial class SettingsPage : Page
         {
             Title = "开发者认证申请",
             Content = panel,
-            PrimaryButtonText = "提交申请",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "Settings_SubmitApp".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
         };
 
@@ -434,9 +435,9 @@ public sealed partial class SettingsPage : Page
         {
             await new ContentDialog
             {
-                Title = "错误",
+                Title = "ErrorTitle".GetLocalized(),
                 Content = "UID 和用户名不能为空",
-                CloseButtonText = "确定",
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
             }.ShowAsync();
             return;
@@ -446,9 +447,9 @@ public sealed partial class SettingsPage : Page
         {
             await new ContentDialog
             {
-                Title = "错误",
+                Title = "ErrorTitle".GetLocalized(),
                 Content = "UID 必须为9位或10位数字",
-                CloseButtonText = "确定",
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
             }.ShowAsync();
             return;
@@ -458,9 +459,9 @@ public sealed partial class SettingsPage : Page
         {
             await new ContentDialog
             {
-                Title = "错误",
+                Title = "ErrorTitle".GetLocalized(),
                 Content = "请输入正确的GitHub地址",
-                CloseButtonText = "确定",
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
             }.ShowAsync();
             return;
@@ -483,9 +484,9 @@ public sealed partial class SettingsPage : Page
 
             await new ContentDialog
             {
-                Title = response.IsSuccessStatusCode ? "成功" : "失败",
+                Title = response.IsSuccessStatusCode ? "Success".GetLocalized() : "Failure".GetLocalized(),
                 Content = msg,
-                CloseButtonText = "确定",
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
             }.ShowAsync();
         }
@@ -493,9 +494,9 @@ public sealed partial class SettingsPage : Page
         {
             await new ContentDialog
             {
-                Title = "网络错误",
+                Title = "Settings_NetworkError".GetLocalized(),
                 Content = ex.Message,
-                CloseButtonText = "确定",
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
             }.ShowAsync();
         }
@@ -517,7 +518,7 @@ public sealed partial class SettingsPage : Page
             {
                 Title = "已关闭 CPU 占用异常警告",
                 Content = "关闭后，启动器即使长期高 CPU 占用也不会再主动提示。若遇到卡顿、发热或异常耗电，请自行留意并及时反馈问题。",
-                CloseButtonText = "我知道了",
+                CloseButtonText = "GotItBtn".GetLocalized(),
                 XamlRoot = XamlRoot
             };
             await dialog.ShowAsync();

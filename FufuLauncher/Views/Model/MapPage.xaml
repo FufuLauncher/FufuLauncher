@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -29,7 +30,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                <TextBlock Text="提瓦特大地图" 
+                <TextBlock Text="{helpers:Loc Key=MapPage_Title}" 
                            Style="{StaticResource CaptionTextBlockStyle}"
                            VerticalAlignment="Center" 
                            FontWeight="SemiBold"/>
@@ -37,19 +38,19 @@
 
             <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                 <Button x:Name="RefreshMapToggle" 
-                              Content="刷新" 
+                              Content="{helpers:Loc Key=MapPage_Refresh}" 
                               FontSize="12"
                               Height="32"
                               Click="RefreshMapToggle_Click"/>
                 
                 <ToggleButton x:Name="LockMapToggle" 
-                              Content="锁定地图 (关)" 
+                              Content="{helpers:Loc Key=MapPage_LockMapOff}" 
                               FontSize="12"
                               Height="32"
                               Click="LockMapToggle_Click"/>
 
                 <ToggleButton x:Name="TopMostToggle" 
-                              Content="窗口置顶 (关)" 
+                              Content="{helpers:Loc Key=MapPage_TopMostOff}" 
                               FontSize="12"
                               Height="32"
                               Click="TopMostToggle_Click"/>

@@ -7,8 +7,8 @@
     xmlns:models="using:FufuLauncher.Models"
     xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="抽卡统计分析"
-    CloseButtonText="关闭"
+    Title="{helpers:Loc Key=GachaDialog_Title}"
+    CloseButtonText="{helpers:Loc Key=GachaDialog_Close}"
     DefaultButton="Close"
     Style="{ThemeResource DefaultContentDialogStyle}"
     MinWidth="850"
@@ -45,8 +45,8 @@
             </Grid.RowDefinitions>
 
             <TextBox Grid.Row="0" Grid.Column="0"
-                     Header="抽卡记录链接"
-                     PlaceholderText="在此粘贴带 authkey 的 URL"
+                     Header="{helpers:Loc Key=GachaDialog_GachaRecordLink}"
+                     PlaceholderText="{helpers:Loc Key=GachaDialog_PasteUrl}"
                      Text="{x:Bind ViewModel.InputUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
             <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Bottom"
@@ -55,14 +55,14 @@
                         Command="{x:Bind ViewModel.ToggleCaptureCommand}"
                         IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
 
-                <Button Content="开始分析"
+                <Button Content="{helpers:Loc Key=GachaDialog_StartAnalysis}"
                         Command="{x:Bind ViewModel.StartAnalysisCommand}"
                         IsEnabled="{x:Bind ViewModel.IsAnalyzing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}" />
 
-                <Button Content="导出 UIGF"
+                <Button Content="{helpers:Loc Key=GachaDialog_ExportUigf}"
                         Command="{x:Bind ViewModel.ExportUigfCommand}"
                         IsEnabled="{x:Bind ViewModel.CanExport, Mode=OneWay}"
-                        ToolTipService.ToolTip="导出标准 UIGF Json 格式到桌面" />
+                        ToolTipService.ToolTip="{helpers:Loc Key=GachaDialog_ExportUigfTooltip}" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Spacing="12">
@@ -99,17 +99,17 @@
                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         <TextBlock FontSize="13"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}">
-                                            <Run Text="共投入" />
+                                            <Run Text="{helpers:Loc Key=GachaDialog_TotalInvested}" />
                                             <Run Text="{x:Bind TotalCount}" FontWeight="SemiBold"
                                                  Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                            <Run Text="抽" />
+                                            <Run Text="{helpers:Loc Key=GachaDialog_Pulls}" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="24,0">
                                     <Grid Margin="0,0,0,6">
-                                        <TextBlock Text="当前垫底" FontSize="12"
+                                        <TextBlock Text="{helpers:Loc Key=GachaDialog_CurrentPity}" FontSize="12"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         <TextBlock HorizontalAlignment="Right" FontSize="12">
                                             <Run Text="{x:Bind CurrentPity}"
@@ -127,7 +127,7 @@
                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                         CornerRadius="4" Padding="12,8">
                                     <StackPanel HorizontalAlignment="Center">
-                                        <TextBlock Text="五星数量" FontSize="11"
+                                        <TextBlock Text="{helpers:Loc Key=GachaDialog_FiveStarCount}" FontSize="11"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                    HorizontalAlignment="Center" />
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
@@ -148,7 +148,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="五星获取记录" Style="{StaticResource BodyStrongTextBlockStyle}"
+                            <TextBlock Text="{helpers:Loc Key=GachaDialog_FiveStarRecords}" Style="{StaticResource BodyStrongTextBlockStyle}"
                                        Margin="0,0,0,12" />
 
                             <ListView Grid.Row="1" ItemsSource="{x:Bind FiveStarRecords}" SelectionMode="None">
@@ -179,7 +179,7 @@
                                                             Spacing="2">
                                                     <TextBlock Text="{x:Bind PityUsed}" FontWeight="Bold"
                                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-                                                    <TextBlock Text="抽" FontSize="10" VerticalAlignment="Bottom"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaDialog_Pulls}" FontSize="10" VerticalAlignment="Bottom"
                                                                Margin="0,0,0,2"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 </StackPanel>
@@ -205,7 +205,7 @@
                           Foreground="{ThemeResource AccentFillColorDefaultBrush}"
                           VerticalAlignment="Center" />
 
-                <TextBlock Text="本功能相对简陋，建议使用其他专用软件查看抽卡记录"
+                <TextBlock Text="{helpers:Loc Key=GachaDialog_BasicFeatureNote}"
                            VerticalAlignment="Center"
                            Style="{ThemeResource CaptionTextBlockStyle}"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />

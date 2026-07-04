@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.Models;
@@ -134,7 +135,7 @@ public class PluginItem : INotifyPropertyChanged
     }
 
     public string FileSizeDisplay => $"{(FileSize / 1024.0):F2} KB";
-    public string StatusText => IsEnabled ? "已启用" : "已禁用";
+    public string StatusText => IsEnabled ? "Enabled".GetLocalized() : "Disabled".GetLocalized();
     public string StatusColor => IsEnabled ? "#00CC6A" : "#999999";
 
     public void RefreshState()

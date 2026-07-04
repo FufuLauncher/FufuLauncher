@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using Windows.Graphics;
 using Windows.Graphics.Capture;
@@ -279,12 +280,12 @@ public class ScreenshotService : IScreenshotService, IDisposable
             {
                 Debug.WriteLine($"[截图服务] 截图已保存: {filePath}");
                 WeakReferenceMessenger.Default.Send(new ScreenshotTakenMessage(filePath, true));
-                _notificationService.Show("截图已保存", fileName, NotificationType.Success, 0);
+                _notificationService.Show("Screenshot_Saved".GetLocalized(), fileName, NotificationType.Success, 0);
             }
             else
             {
                 Debug.WriteLine("[截图服务] 截图失败");
-                WeakReferenceMessenger.Default.Send(new ScreenshotTakenMessage("", false, "截图捕获失败"));
+                WeakReferenceMessenger.Default.Send(new ScreenshotTakenMessage("", false, "Screenshot_CaptureFailed".GetLocalized()));
             }
         }
         catch (Exception ex)

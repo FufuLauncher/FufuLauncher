@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services
 {
@@ -34,16 +35,16 @@ namespace FufuLauncher.Services
 
             if (retcode != 0)
             {
-                string message = root.TryGetProperty("message", out var msgProp) ? msgProp.GetString() : "未知错误";
+                string message = root.TryGetProperty("message", out var msgProp) ? msgProp.GetString() : "Status_UnknownError".GetLocalized();
                 string error = string.IsNullOrWhiteSpace(message)
-                    ? $"接口返回错误，retcode={retcode}"
+                    ? string.Format("DailyNote_ApiError".GetLocalized(), retcode)
                     : $"{message}，retcode={retcode}";
-                throw new InvalidOperationException($"获取便签数据失败: {error}");
+                throw new InvalidOperationException(string.Format("DailyNote_GetFailed".GetLocalized(), error));
             }
 
             if (!root.TryGetProperty("data", out var data))
             {
-                throw new InvalidOperationException("获取便签数据失败: 响应格式错误");
+                throw new InvalidOperationException("DailyNote_InvalidResponse".GetLocalized());
             }
 
             var result = new DailyNoteCardData
@@ -70,11 +71,11 @@ namespace FufuLauncher.Services
                         int day = recoveryTime.TryGetProperty("Day", out var d) ? d.GetInt32() : 0;
                         int hour = recoveryTime.TryGetProperty("Hour", out var h) ? h.GetInt32() : 0;
                         int minute = recoveryTime.TryGetProperty("Minute", out var m) ? m.GetInt32() : 0;
-                        result.TransformerRecoveryTime = $"{day}天 {hour}时 {minute}分";
+                        result.TransformerRecoveryTime = string.Format("DailyNote_TransformerTime".GetLocalized(), day, hour, minute);
                     }
                     else
                     {
-                        result.TransformerRecoveryTime = result.IsTransformerObtained ? "已获取" : "未获取";
+                        result.TransformerRecoveryTime = result.IsTransformerObtained ? "DailyNote_Claimed".GetLocalized() : "DailyNote_Unclaimed".GetLocalized();
                     }
                 }
             }

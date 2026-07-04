@@ -13,6 +13,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using MihoyoBBS;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
@@ -45,7 +46,7 @@ public class TokenRefreshService
         {
             if (currentCookies == null || currentCookies.Count == 0)
             {
-                if (isManual) SendErrorNotification("未提供有效的 Cookie");
+                if (isManual) SendErrorNotification("Token_InvalidCookie".GetLocalized());
                 return null;
             }
 
@@ -56,7 +57,7 @@ public class TokenRefreshService
             if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))
             {
                 Debug.WriteLine("传入的Cookie中缺少stoken或mid，无法刷新");
-                if (isManual) SendErrorNotification("本地Cookie中缺少stoken或mid，无法刷新");
+                if (isManual) SendErrorNotification("Token_MissingStokenOrMid".GetLocalized());
                 return null;
             }
 
@@ -76,8 +77,8 @@ public class TokenRefreshService
             Debug.WriteLine(isManual ? "用户手动触发Cookie刷新..." : "当前Cookie已失效，开始执行Cookie刷新...");
 
             WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                "Cookie刷新",
-                isManual ? "正在执行手动刷新..." : "Cookie已失效，正在执行刷新...",
+                "Token_RefreshTitle".GetLocalized(),
+                isManual ? "Token_ManualRefreshProgress".GetLocalized() : "Token_AutoRefreshProgress".GetLocalized(),
                 NotificationType.Warning, 3000));
 
             string authCookie = $"stoken={stoken}; mid={mid}";
@@ -85,14 +86,14 @@ public class TokenRefreshService
             string webTicket = await CreateWebQrCodeAsync();
             if (string.IsNullOrEmpty(webTicket))
             {
-                if (isManual) SendErrorNotification("创建 WebTicket 失败");
+                if (isManual) SendErrorNotification("Token_WebTicketFailed".GetLocalized());
                 return null;
             }
 
             bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie);
             if (!scanResult)
             {
-                if (isManual) SendErrorNotification("模拟扫码请求失败");
+                if (isManual) SendErrorNotification("Token_QRScanFailed".GetLocalized());
                 return null;
             }
 
@@ -101,7 +102,7 @@ public class TokenRefreshService
             bool confirmResult = await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie);
             if (!confirmResult)
             {
-                if (isManual) SendErrorNotification("模拟确认登录请求失败");
+                if (isManual) SendErrorNotification("Token_ConfirmLoginFailed".GetLocalized());
                 return null;
             }
 
@@ -116,14 +117,14 @@ public class TokenRefreshService
 
                 Debug.WriteLine("Cookie刷新成功");
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "Cookie刷新",
-                    isManual ? "Cookie手动刷新已完成，新凭据已生效" : "Cookie自动刷新已完成，新凭据已生效",
+                    "Token_RefreshTitle".GetLocalized(),
+                    isManual ? "Token_ManualRefreshDone".GetLocalized() : "Token_AutoRefreshDone".GetLocalized(),
                     NotificationType.Success, 3000));
                 return currentCookies; 
             }
             else
             {
-                if (isManual) SendErrorNotification("获取新 Cookie 失败");
+                if (isManual) SendErrorNotification("Token_GetNewCookieFailed".GetLocalized());
                 return null;
             }
         }
@@ -131,8 +132,8 @@ public class TokenRefreshService
         {
             Debug.WriteLine($"Cookie刷新异常: {ex.Message}");
             WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                "Cookie刷新失败",
-                $"Cookie刷新过程中出现异常: {ex.Message}",
+                "Token_RefreshFailed".GetLocalized(),
+                string.Format("Token_RefreshException".GetLocalized(), ex.Message),
                 NotificationType.Error, 4000));
             return null;
         }
@@ -140,7 +141,7 @@ public class TokenRefreshService
 
     private void SendErrorNotification(string message)
     {
-        WeakReferenceMessenger.Default.Send(new NotificationMessage("Cookie刷新失败", message, NotificationType.Error, 4000));
+        WeakReferenceMessenger.Default.Send(new NotificationMessage("Token_RefreshFailed".GetLocalized(), message, NotificationType.Error, 4000));
     }
 
     private async Task<bool> CheckCookieValidAsync(string cookie)

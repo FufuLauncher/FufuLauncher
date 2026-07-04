@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="开发者许可认证">
+    Title="{helpers:Loc Key=SecurityWeb_Title}">
 
     <Grid x:Name="RootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -14,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <Border x:Name="AppTitleBar" Height="32" VerticalAlignment="Top" Background="Transparent">
-            <TextBlock Text="开发者许可认证" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" />
+            <TextBlock Text="{helpers:Loc Key=SecurityWeb_Title}" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" />
         </Border>
 
         <WebView2 x:Name="SecurityWebView" Grid.Row="1" Source="about:blank" />

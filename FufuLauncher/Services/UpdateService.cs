@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
@@ -147,7 +148,7 @@ public class UpdateService : IUpdateService
             }
         }
 
-        throw new Exception("所有重试均失败");
+        throw new Exception("Update_AllRetriesFailed".GetLocalized());
     }
 
     private class UpdateInfo

@@ -5,6 +5,7 @@
     xmlns:local="using:FufuLauncher.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d">
 
     <Grid Background="Transparent">
@@ -15,10 +16,10 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
-            <TextBlock Text="预设管理" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" />
+            <TextBlock Text="{helpers:Loc Key=PresetManager_Title}" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12" />
         </Grid>
 
-        <TextBlock Grid.Row="1" Text="选择要固定在首页的预设 (最多5个)" FontSize="16" FontWeight="SemiBold" Margin="20,10,20,10" />
+        <TextBlock Grid.Row="1" Text="{helpers:Loc Key=PresetManager_SelectHint}" FontSize="16" FontWeight="SemiBold" Margin="20,10,20,10" />
 
         <ListView Grid.Row="2" ItemsSource="{x:Bind AllPresets}" Margin="20,0,20,20" SelectionMode="None">
             <ListView.ItemTemplate>

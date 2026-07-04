@@ -12,9 +12,9 @@
     BorderThickness="1"
     BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
     Style="{ThemeResource DefaultContentDialogStyle}"
-    PrimaryButtonText="保存并生效"
+    PrimaryButtonText="{helpers:Loc Key=HDR_SaveAndApply}"
     PrimaryButtonCommand="{x:Bind SaveCommand}"
-    CloseButtonText="取消"
+    CloseButtonText="{helpers:Loc Key=CancelBtn}"
     CloseButtonCommand="{x:Bind CloseCommand}"
     mc:Ignorable="d">
 
@@ -32,19 +32,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="HDR 亮度配置" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,20" />
+        <TextBlock Grid.Row="0" Text="{helpers:Loc Key=HDR_BrightnessConfig}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,20" />
 
         <StackPanel Grid.Row="1" Spacing="8" Margin="0,0,0,12">
-            <InfoBar IsOpen="{x:Bind HDRNotSupported}" Severity="Warning" Title="不支持 HDR" Message="当前显示器报告不支持 HDR。"
+            <InfoBar IsOpen="{x:Bind HDRNotSupported}" Severity="Warning" Title="{helpers:Loc Key=HDR_NotSupported}" Message="{helpers:Loc Key=HDR_NotSupportedMsg}"
                      IsClosable="False" />
-            <InfoBar IsOpen="{x:Bind HDRNotEnabled}" Severity="Informational" Title="HDR 未开启"
-                     Message="Windows HDR 模式未开启，自动调整可能不准确。" IsClosable="False" />
+            <InfoBar IsOpen="{x:Bind HDRNotEnabled}" Severity="Informational" Title="{helpers:Loc Key=HDR_NotEnabled}"
+                     Message="{helpers:Loc Key=HDR_NotEnabledMsg}" IsClosable="False" />
 
             <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="4"
                     Padding="12">
                 <StackPanel>
-                    <TextBlock Text="显示器信息" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,8" />
+                    <TextBlock Text="{helpers:Loc Key=HDR_DisplayInfo}" Style="{ThemeResource BodyStrongTextBlockStyle}" Margin="0,0,0,8" />
                     <TextBlock Text="{x:Bind DisplayInfomation}" Style="{ThemeResource CaptionTextBlockStyle}"
                                TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                 </StackPanel>
@@ -54,12 +54,12 @@
         <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Padding="0,0,12,0">
             <StackPanel Spacing="24" Padding="0,8">
                 <StackPanel>
-                    <TextBlock Text="HDR 开关设置 (每次启动时强制应用)" Style="{ThemeResource BodyStrongTextBlockStyle}"
+                    <TextBlock Text="{helpers:Loc Key=HDR_SwitchSetting}" Style="{ThemeResource BodyStrongTextBlockStyle}"
                                Margin="0,0,0,8" />
                     <ToggleSwitch IsOn="{x:Bind IsGenshinHDRForceEnabled, Mode=TwoWay}"
-                                  OffContent="关闭 HDR (注册表值为 0)"
-                                  OnContent="开启 HDR (注册表值为 1)" />
-                    <TextBlock Text="注意：保存后会立即修改注册表，且下次启动游戏时会自动重新应用此设置。"
+                                  OffContent="{helpers:Loc Key=HDR_OffContent}"
+                                  OnContent="{helpers:Loc Key=HDR_OnContent}" />
+                    <TextBlock Text="{helpers:Loc Key=HDR_RegistryNote}"
                                Style="{ThemeResource CaptionTextBlockStyle}"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                TextWrapping="Wrap" Margin="0,4,0,0" />
@@ -69,7 +69,7 @@
 
                 <StackPanel>
                     <Grid Margin="0,0,0,4">
-                        <TextBlock Text="峰值亮度 (Max Luminosity)" VerticalAlignment="Center" />
+                        <TextBlock Text="{helpers:Loc Key=HDR_MaxLuminance}" VerticalAlignment="Center" />
                         <NumberBox HorizontalAlignment="Right" Width="100" Value="{x:Bind MaxLuminance, Mode=TwoWay}"
                                    Minimum="300" Maximum="2000" SpinButtonPlacementMode="Compact" />
                     </Grid>
@@ -78,7 +78,7 @@
 
                 <StackPanel>
                     <Grid Margin="0,0,0,4">
-                        <TextBlock Text="场景亮度 (Paper White)" VerticalAlignment="Center" />
+                        <TextBlock Text="{helpers:Loc Key=HDR_SceneLuminance}" VerticalAlignment="Center" />
                         <NumberBox HorizontalAlignment="Right" Width="100" Value="{x:Bind SceneLuminance, Mode=TwoWay}"
                                    Minimum="100" Maximum="500" SpinButtonPlacementMode="Compact" />
                     </Grid>
@@ -87,7 +87,7 @@
 
                 <StackPanel>
                     <Grid Margin="0,0,0,4">
-                        <TextBlock Text="UI 亮度 (UI White)" VerticalAlignment="Center" />
+                        <TextBlock Text="{helpers:Loc Key=HDR_UILuminance}" VerticalAlignment="Center" />
                         <NumberBox HorizontalAlignment="Right" Width="100" Value="{x:Bind UILuminance, Mode=TwoWay}"
                                    Minimum="150" Maximum="550" SpinButtonPlacementMode="Compact" />
                     </Grid>
@@ -101,9 +101,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="重置默认" Command="{x:Bind ResetCommand}" HorizontalAlignment="Stretch" />
-            <Button Grid.Column="1" Content="自动调整" Command="{x:Bind AutoAdjustCommand}" HorizontalAlignment="Stretch"
-                    ToolTipService.ToolTip="根据显示器数据自动推算" />
+            <Button Grid.Column="0" Content="{helpers:Loc Key=HDR_ResetDefault}" Command="{x:Bind ResetCommand}" HorizontalAlignment="Stretch" />
+            <Button Grid.Column="1" Content="{helpers:Loc Key=HDR_AutoAdjust}" Command="{x:Bind AutoAdjustCommand}" HorizontalAlignment="Stretch"
+                    ToolTipService.ToolTip="{helpers:Loc Key=HDR_AutoAdjustTooltip}" />
         </Grid>
     </Grid>
 </ContentDialog>

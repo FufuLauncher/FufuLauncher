@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 using CommunityToolkit.Mvvm.ComponentModel;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
 using System.Collections.ObjectModel;
@@ -100,9 +101,9 @@ public partial class GachaDisplayItem : ObservableObject
 
     public string PityStatusText => PityStatus switch
     {
-        PityStatus.LostPity => "歪",
-        PityStatus.Guaranteed => "大保底",
-        PityStatus.SmallPity => "小保底",
+        PityStatus.LostPity => "Gacha_Won5050".GetLocalized(),
+        PityStatus.Guaranteed => "Gacha_Guaranteed".GetLocalized(),
+        PityStatus.SmallPity => "Gacha_FiftyFifty".GetLocalized(),
         PityStatus.Up => "UP",
         _ => ""
     };
@@ -196,32 +197,32 @@ public class GachaAnalysisDashboard
     public int AverageFiveStarCharacterPrimogems { get; set; }
     public string AverageFiveStarCharacterPrimogemsText { get; set; } = "0";
     public string AverageFiveStarPullsText { get; set; } = "0";
-    public string CurrentDeepestPityText { get; set; } = "0 抽";
-    public string CurrentDeepestPityHint { get; set; } = "暂无五星垫数";
-    public string BestFiveStarPityText { get; set; } = "0 抽";
-    public string BestFiveStarPityHint { get; set; } = "暂无五星记录";
-    public string WorstFiveStarPityText { get; set; } = "0 抽";
-    public string WorstFiveStarPityHint { get; set; } = "暂无五星记录";
+    public string CurrentDeepestPityText { get; set; } = "Gacha_ZeroPulls".GetLocalized();
+    public string CurrentDeepestPityHint { get; set; } = "Gacha_No5StarPity".GetLocalized();
+    public string BestFiveStarPityText { get; set; } = "Gacha_ZeroPulls".GetLocalized();
+    public string BestFiveStarPityHint { get; set; } = "Gacha_No5StarRecord".GetLocalized();
+    public string WorstFiveStarPityText { get; set; } = "Gacha_ZeroPulls".GetLocalized();
+    public string WorstFiveStarPityHint { get; set; } = "Gacha_No5StarRecord".GetLocalized();
     public string ActiveMonthCountText { get; set; } = "0";
     public string MonthlyAveragePullsText { get; set; } = "0";
-    public string BusiestMonthText { get; set; } = "暂无";
-    public string BusiestMonthPullsText { get; set; } = "0 抽";
-    public string DateRangeText { get; set; } = "暂无记录";
+    public string BusiestMonthText { get; set; } = "Status_None".GetLocalized();
+    public string BusiestMonthPullsText { get; set; } = "Gacha_ZeroPulls".GetLocalized();
+    public string DateRangeText { get; set; } = "Gacha_NoRecords".GetLocalized();
 
     public static GachaAnalysisDashboard Empty() => new()
     {
         KpiItems =
         {
-            new GachaKpiItem { Glyph = "\uE8EF", Label = "总抽数", Value = "0", Hint = "暂无祈愿记录" },
-            new GachaKpiItem { Glyph = "\uE8C7", Label = "原石估算", Value = "0", Hint = "按每抽 160 原石" },
-            new GachaKpiItem { Glyph = "\uE735", Label = "五星出货", Value = "0", Hint = "0%" },
-            new GachaKpiItem { Glyph = "\uE734", Label = "四星出货", Value = "0", Hint = "0%" },
-            new GachaKpiItem { Glyph = "\uE7C1", Label = "五星角色均耗", Value = "0 抽", Hint = "暂无五星角色" },
-            new GachaKpiItem { Glyph = "\uE7C1", Label = "五星均抽", Value = "0 抽", Hint = "暂无五星记录" },
-            new GachaKpiItem { Glyph = "\uE8A5", Label = "当前最深垫数", Value = "0 抽", Hint = "暂无五星垫数" },
-            new GachaKpiItem { Glyph = "\uE74C", Label = "最欧五星", Value = "0 抽", Hint = "暂无五星记录" },
-            new GachaKpiItem { Glyph = "\uE7BA", Label = "最非五星", Value = "0 抽", Hint = "暂无五星记录" },
-            new GachaKpiItem { Glyph = "\uE787", Label = "活跃月份", Value = "0", Hint = "月均 0 抽" }
+            new GachaKpiItem { Glyph = "\uE8EF", Label = "Gacha_TotalPulls".GetLocalized(), Value = "0", Hint = "Gacha_NoWishRecord".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE8C7", Label = "Gacha_PrimogemEstimate".GetLocalized(), Value = "0", Hint = "Gacha_PerPull".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE735", Label = "Gacha_5StarDrop".GetLocalized(), Value = "0", Hint = "0%" },
+            new GachaKpiItem { Glyph = "\uE734", Label = "Gacha_4StarDrop".GetLocalized(), Value = "0", Hint = "0%" },
+            new GachaKpiItem { Glyph = "\uE7C1", Label = "Gacha_Avg5StarCharCost".GetLocalized(), Value = "Gacha_ZeroPulls".GetLocalized(), Hint = "Gacha_No5StarChar".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE7C1", Label = "Gacha_Avg5StarPulls".GetLocalized(), Value = "Gacha_ZeroPulls".GetLocalized(), Hint = "Gacha_No5StarRecord".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE8A5", Label = "Gacha_DeepestPity".GetLocalized(), Value = "Gacha_ZeroPulls".GetLocalized(), Hint = "Gacha_No5StarPity".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE74C", Label = "Gacha_Best5Star".GetLocalized(), Value = "Gacha_ZeroPulls".GetLocalized(), Hint = "Gacha_No5StarRecord".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE7BA", Label = "Gacha_Worst5Star".GetLocalized(), Value = "Gacha_ZeroPulls".GetLocalized(), Hint = "Gacha_No5StarRecord".GetLocalized() },
+            new GachaKpiItem { Glyph = "\uE787", Label = "Gacha_ActiveMonths".GetLocalized(), Value = "0", Hint = "Gacha_MonthlyAvg0".GetLocalized() }
         }
     };
 }
