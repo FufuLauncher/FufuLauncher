@@ -38,7 +38,9 @@ namespace FufuLauncher.ViewModels
         Default = 0,
         zhCN = 1,
         zhTW = 2,
-        enUS = 3
+        enUS = 3,
+        fr = 4,
+        de = 5
     }
 
     public enum WindowModeType
