@@ -24,27 +24,21 @@ public class HashValidationService
             }
 
             string[] hashLines = await File.ReadAllLinesAsync(hashFilePath);
-            if (hashLines.Length < 3)
+            if (hashLines.Length < 2)
             {
                 SendNotification("校验失败", "格式错误", NotificationType.Error);
                 return;
             }
 
             string expectedCaptureAppHash = hashLines[1].Trim();
-            string expectedLauncherHash = hashLines[2].Trim();
 
             string captureAppPath = Path.Combine(baseDirectory, "CaptureApp.exe");
-            string launcherPath = Path.Combine(baseDirectory, "Launcher.dll");
 
             bool captureAppValid = await VerifyFileHashAsync(captureAppPath, expectedCaptureAppHash);
-            bool launcherValid = await VerifyFileHashAsync(launcherPath, expectedLauncherHash);
 
-            if (!captureAppValid || !launcherValid)
+            if (!captureAppValid)
             {
-                string errorMessage = "发现组件被修改或缺失，请检查：\n";
-                if (!captureAppValid) errorMessage += "CaptureApp\n";
-                if (!launcherValid) errorMessage += "Launcher\n";
-
+                string errorMessage = "发现组件被修改或缺失，请检查：\nCaptureApp\n";
                 SendNotification("校验未通过", errorMessage.TrimEnd(), NotificationType.Warning);
             }
         }

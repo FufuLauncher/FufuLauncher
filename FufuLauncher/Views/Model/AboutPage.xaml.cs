@@ -54,51 +54,81 @@ public sealed partial class AboutPage : Page
     {
         try
         {
-            string apiUrl = "https://api.github.com/repos/FufuLauncher/FufuLauncher/contributors";
-            var jsonDocument = await GetJsonFromUrl(apiUrl);
-
-            if (jsonDocument.RootElement.ValueKind != JsonValueKind.Array)
+            string[] apiUrls = new[]
             {
-                string errorMessage = "API限制或返回结构异常";
-                if (jsonDocument.RootElement.ValueKind == JsonValueKind.Object &&
-                    jsonDocument.RootElement.TryGetProperty("message", out JsonElement messageElement))
-                {
-                    errorMessage = messageElement.GetString();
-                }
+                "https://api.github.com/repos/FufuLauncher/FufuLauncher/contributors",
+                "https://api.github.com/repos/FufuLauncher/FufuLauncher.UnlockerIsland/contributors"
+            };
 
-                Debug.WriteLine($"[LoadContributorsAsync] 获取贡献者失败: {errorMessage}");
+            var allContributors = new Dictionary<string, ContributorItem>(StringComparer.OrdinalIgnoreCase);
+            bool anySuccess = false;
+
+            foreach (var apiUrl in apiUrls)
+            {
+                try
+                {
+                    var jsonDocument = await GetJsonFromUrl(apiUrl);
+
+                    if (jsonDocument.RootElement.ValueKind != JsonValueKind.Array)
+                    {
+                        string errorMessage = "API限制或返回结构异常";
+                        if (jsonDocument.RootElement.ValueKind == JsonValueKind.Object &&
+                            jsonDocument.RootElement.TryGetProperty("message", out JsonElement messageElement))
+                        {
+                            errorMessage = messageElement.GetString();
+                        }
+                        Debug.WriteLine($"[LoadContributorsAsync] 获取贡献者失败 ({apiUrl}): {errorMessage}");
+                        continue;
+                    }
+
+                    anySuccess = true;
+                    var elements = jsonDocument.RootElement.EnumerateArray();
+
+                    foreach (var element in elements)
+                    {
+                        string login = element.GetProperty("login").GetString();
+                        string url = element.GetProperty("html_url").GetString();
+                        string avatarUrl = element.GetProperty("avatar_url").GetString();
+
+                        int contributions = 0;
+                        if (element.TryGetProperty("contributions", out JsonElement contElement))
+                        {
+                            contributions = contElement.GetInt32();
+                        }
+
+                        if (allContributors.TryGetValue(login, out var existing))
+                        {
+                            existing.Contributions += contributions;
+                        }
+                        else
+                        {
+                            allContributors[login] = new ContributorItem { Name = login, Url = url, AvatarUrl = avatarUrl, Contributions = contributions };
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[LoadContributorsAsync] 获取贡献者失败 ({apiUrl}): {ex.Message}");
+                }
+            }
+
+            if (!anySuccess)
+            {
                 ContributorsLoadingRing.IsActive = false;
                 ContributorsErrorPanel.Visibility = Visibility.Visible;
                 ContributorsErrorText.Text = "获取失败";
                 return;
             }
 
-            var elements = jsonDocument.RootElement.EnumerateArray();
-
-            var allContributors = new List<ContributorItem>();
-            foreach (var element in elements)
-            {
-                string login = element.GetProperty("login").GetString();
-                string url = element.GetProperty("html_url").GetString();
-                string avatarUrl = element.GetProperty("avatar_url").GetString();
-                
-                int contributions = 0;
-                if (element.TryGetProperty("contributions", out JsonElement contElement))
-                {
-                    contributions = contElement.GetInt32();
-                }
-
-                allContributors.Add(new ContributorItem { Name = login, Url = url, AvatarUrl = avatarUrl, Contributions = contributions });
-            }
-
-            var owner = allContributors.FirstOrDefault(c => c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase));
+            var owner = allContributors.Values.FirstOrDefault(c => c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase));
             if (owner == null)
             {
                 owner = new ContributorItem { Name = "CodeCubist", Url = "https://github.com/CodeCubist", AvatarUrl = "https://avatars.githubusercontent.com/u/249788103?v=4", Contributions = 999 };
             }
 
-            var others = allContributors
+            var others = allContributors.Values
                 .Where(c => !c.Name.Equals("CodeCubist", StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(c => c.Contributions)
                 .ToList();
 
             var sortedContributors = new List<ContributorItem> { owner };
@@ -108,11 +138,11 @@ public sealed partial class AboutPage : Page
 
             var stackPanel = new StackPanel { Spacing = 12 };
 
-            for (int i = 0; i < sortedContributors.Count; i += 3)
+            for (int i = 0; i < sortedContributors.Count; i += 5)
             {
                 var rowPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
 
-                for (int j = i; j < Math.Min(i + 3, sortedContributors.Count); j++)
+                for (int j = i; j < Math.Min(i + 5, sortedContributors.Count); j++)
                 {
                     var contributor = sortedContributors[j];
 

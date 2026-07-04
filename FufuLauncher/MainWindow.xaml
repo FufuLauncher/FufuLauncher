@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:windowex="using:WinUIEx"
     xmlns:tb="using:H.NotifyIcon"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d">
 
     <Grid x:Name="RootGrid">
@@ -85,6 +86,8 @@
                         IsPaneToggleButtonVisible="False"
                         SelectionChanged="NavigationView_SelectionChanged"
                         Loaded="NavigationView_Loaded"
+                        PaneOpened="NavigationView_PaneOpened"
+                        PaneClosed="NavigationView_PaneClosed"
                         OpenPaneLength="150"
                         CompactPaneLength="60"
                         Background="{x:Null}"
@@ -151,7 +154,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="注入设置" Tag="FufuLauncher.ViewModels.PluginSettingsViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=InjectionSettingsNav}" Tag="FufuLauncher.ViewModels.PluginSettingsViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEA86;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>

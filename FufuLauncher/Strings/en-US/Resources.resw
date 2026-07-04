@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>Language Changed</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>The language setting has been changed. Due to technical limitations, some UI requires a restart to fully take effect.</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>Restart Now</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>Restart Later</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>Version {0}</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>Injection Settings</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>Inject plugins using the built-in engine</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>Launch and inject using an external program</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>FufuLauncher</value></data>
+  <data name="Show" xml:space="preserve"><value>Show</value></data>
+  <data name="Hide" xml:space="preserve"><value>Hide</value></data>
+  <data name="Enabled" xml:space="preserve"><value>Enabled</value></data>
+  <data name="Disabled" xml:space="preserve"><value>Disabled</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>Color (Hex)</value></data>
+  <data name="Opacity" xml:space="preserve"><value>Opacity</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>Restore Default</value></data>
+  <data name="Browse" xml:space="preserve"><value>Browse</value></data>
+  <data name="Clear" xml:space="preserve"><value>Clear</value></data>
+  <data name="High" xml:space="preserve"><value>High</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>Appearance &amp; Personalization</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>Home Text Style</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>Language &amp; Region</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>Game Launch Configuration</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>Background &amp; Visual Effects</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>Window Effects</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>Startup Sound</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>Check-in Configuration</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>Advanced Options</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>Screenshot Settings</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>Check for Updates</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>About</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>Developer License Authentication</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>App Theme</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>Choose the app&apos;s display theme</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>Light Mode</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>Dark Mode</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>Follow System Setting</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>Custom App Theme Color</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>Choose or enter a hex color code. Leave blank and restart the app to restore the default color</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>Home Card Display</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>Allow hiding the game news card or check-in card on the home page</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>Hide Game News Card</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>Hide Check-in Card</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>Show Quick Preset Card</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>Show Widget Card</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>Widget Card Display Items</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>Choose which tools to show in the widget card</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>Show Wish History Analysis</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>Show Achievement Tracking</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>Show Inventory Items</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>Show Character Build Lookup</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>Show Traveler&apos;s Notes</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>Show Video Library</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>Show Battle Record Info</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>Launch Button Background Color</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>Notes Card Display Items</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>Choose which items to show in the notes card, up to 3!</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>Notice</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>Notes data comes from the Miyoushe game records API. Frequent refreshing may trigger a CAPTCHA, and in severe cases risk control may temporarily block access to the battle record page. If this happens, reduce the refresh frequency and try again later.</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>Hide Notes Card</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>Show Resin</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>Show Daily Commissions</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>Show Realm Currency</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>Show Expeditions</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>Show Parametric Transformer</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>Navigation Bar Display Items</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>Choose which items to show in the left navigation bar. Hiding an item does not affect its functionality and it can be re-enabled in Settings. Home and Settings cannot be hidden.</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>Background Overlay Opacity</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>Frame Background Opacity</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>Background Image Opacity</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>Minimize to System Tray on Close</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>Remember Window Size</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>Minimum Window Size Limit</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>Game News Card Text Color &amp; Opacity</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>Launch Button Text Color &amp; Opacity</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>Game Check-in Text Color &amp; Opacity</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>App Display Language</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>Takes effect after restarting the app</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>Simplified Chinese (Recommended)</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>Use System Default Language</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>Launch Window Mode</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>Normal Window</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>Popup Window (Borderless)</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>Game Resolution</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>Set the window size when launching the game</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>Width (pixels)</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>Height (pixels)</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>Quick Presets</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>HDR Brightness Configuration</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>Adjust in-game HDR peak brightness and UI brightness</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>Open HDR Settings</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>Target Monitor</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>Specify which monitor the game launches on</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>Identify Monitors</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>Advanced Launch Parameters</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>Custom parameters will be appended after the launch command</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>Custom Launch Parameters</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>e.g. -fullscreen -high</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>Tip: Parameters are appended to the game launch command separated by spaces; do not enter the game path here. If clicking doesn&apos;t seem to work, try clicking the preset buttons a few more times.</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>Custom Game Executable Name</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>Change this to customize the exe filename used for detection and launch. Leave blank to use the default (YuanShen.exe / GenshinImpact.exe)</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>e.g. YuanShen.exe</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>Injection Module</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>Select Injection Module</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>Built-in Injection</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>Standalone Injection</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>Built-in injection loads plugins through the launcher&apos;s own engine; standalone injection uses a separate program to launch the game and load plugins, for cases where the built-in mode is incompatible.</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>Redeem Code Reminder</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>Instant Alert on New Redeem Code Release</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>When enabled, you&apos;ll be notified immediately when a new redeem code is released, with a countdown to its expiration. Each code is only notified once.</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>Post-Launch Behavior</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>After Game Launch</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>Choose what the launcher does after launching the game: minimize to the system tray and keep running, or save state and exit completely.</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>Enable Custom Background</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>Background Source</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>Select Custom Background Image...</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>Clear Custom Background</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>Background Slideshow Mode</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>Select Slideshow Image Folder...</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>Clear Slideshow Image Folder</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>Slideshow Interval (seconds)</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>Official Background Server</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>CN Server (Skyisland)</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>Global Server (Teyvat)</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>Official Background API</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>Leave blank to use the current server&apos;s default API. A custom API must return a data structure identical to the official getAllGameBasicInfo.</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>Enter a custom official background API URL</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>Reset to Default API</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>Fetch Official Background Assets</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>Download Latest Background Image</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>Download Latest Background Video</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>Enable Acrylic Blur Overlay</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>Solid Color</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>Acrylic Blur</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>Note: When using a video background, it will automatically fall back to a solid semi-transparent background to ensure performance and visual quality</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>Page Overlay Semi-Transparent Mode</value></data>
+  <data name="Opaque" xml:space="preserve"><value>Opaque</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>Semi-Transparent</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>When enabled, the page overlay will display semi-transparently, allowing the background image to show through</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>Overlay Opacity</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>Window Backdrop Material</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>Choose the visual effect for the window background</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrylic</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>Note: Mica effect is only available on Windows 11; older systems may fall back to a solid color.</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>Show Sidebar Hamburger Button</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>When enabled, an expand/collapse button appears at the top of the sidebar, letting you expand it to see the full menu text</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>Enable Game Launch Sound</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>Select Audio File...</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>Clear Audio File</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>Game Check-in</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>Claim Miyoushe daily check-in rewards (Primogems, Mora, etc.)</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>Community Check-in</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>Automatically complete community interaction tasks to earn Miyoushe Coins</value></data>
+  <data name="Like" xml:space="preserve"><value>Like</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>Read Posts</value></data>
+  <data name="Share" xml:space="preserve"><value>Share</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>Cloud Game Check-in</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>Claim cloud gaming check-in rewards. Requires adding cloud gaming login credentials on the right side of the account list below</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>Auto Check-in on Launch</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>When enabled, the app automatically checks in on launch if you haven&apos;t already checked in</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>Batch Check-in</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>When enabled, the specified check-in tasks run for all checked accounts; otherwise only the current account is used</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>Account List</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>Add Cloud Gaming Credential</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>Encountering CAPTCHAs?</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>Game check-in and community check-in (more likely) may trigger CAPTCHAs. Configure real device info to reduce risk-control frequency, or use the self-hosted version to configure a CAPTCHA-solving service.</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>Self-Hosted Version</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>Enable BetterGI Integration</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>Launch BetterGI alongside the game</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>BetterGI Launch Delay (seconds)</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>Set to 0 to disable the delay; the delay only affects BetterGI</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>Close BetterGI When Game Exits</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>Automatically close BetterGI when you exit the game</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>Browser Cache Cleanup</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>Clean up cache files generated by the built-in browser (WebView2)</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>Clear Cache</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>Process Priority</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>Adjust the launcher&apos;s CPU scheduling priority (setting it too high may affect other system processes)</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>Normal (Default)</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>Above Normal</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>Abnormal CPU Usage Warning</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>Shows a topmost alert when the launcher&apos;s CPU usage stays above the threshold for 5 minutes and OBS is not detected. Enabled by default.</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>Enable Abnormal CPU Usage Warning</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>Warning Threshold (%)</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>Configuration Editor</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>Update Achievement Database Resources</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>Enable In-Game Screenshots</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>After launching the game, capture the game window using a hotkey; other windows won&apos;t be included</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>Screenshot Hotkey</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>Click the button below, then press the key combination you want (supports Ctrl/Alt/Shift + key)</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>Recording... press your hotkey combination</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>Screenshot Save Location</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>Customize where screenshots are saved. Defaults to Documents/FufuScreenshots</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>Open Screenshot Folder</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>Version Update</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>Check for and download the latest version. Clicking this launches the updater</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>About Us</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>Complete developer license authentication to unlock certain special features</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>Start Developer License Authentication</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>Plugin Management</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>Enable Injection</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>Load plugins when launching the game</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>Get Plugins</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>How to Use Free Camera</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>Add Plugin</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>Refresh</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>Open Folder</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>Sort</value></data>
+  <data name="SortByName" xml:space="preserve"><value>By Name</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>By Status (Enabled First)</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>By Size</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>By Modified Date</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>Rename Folder</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>Delete</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>Edit Configuration File</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>Plugin Settings</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>The plugin library is empty</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>Please assess plugin safety yourself. The developers are not responsible for any losses caused by using plugins.</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>If you run into problems, please click Diagnose Computer first</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>Diagnose Computer</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>View Help</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>The configured link is not a valid GIF format</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>Failed to load GIF resource</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>On</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>Off</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>Configuration Target:</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin (Main Plugin)</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS (Frame Rate Plugin)</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar (QianXing Avatar Plugin)</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>Modified: </value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>Functions (Download/Repair)</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>Download Plugin</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>Repair FPS Display Plugin</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>Main Plugin Enabled</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>FPS Plugin Enabled</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>Avatar Plugin Enabled</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>Key Input Mode (List)</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>List</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>Number</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>Auto-Create Preset</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>Show Developer Features</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>Have feedback or ran into an issue? Click here</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>Submit a PR</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>Enable Injection</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>Configuration Preset:</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>Click to switch to this preset</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[Locked]</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>Delete This Preset</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>New Preset</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>Reset All</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>Avatar Replacement Settings (upload matching sizes as needed)</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>Import</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>Crop</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>Supported formats: PNG, JPG, BMP, WEBP. Changes take effect the next time you enter the game.</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>Adjust Avatar</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>Save Current Size</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>Apply to All Sizes</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>Cancel</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* Drag within the box or use Ctrl + mouse wheel to zoom and adjust the crop position</value></data>
+  <data name="Plugin_FpsUnlock" xml:space="preserve"><value>Unlock Frame Rate Limit</value></data>
+  <data name="Plugin_TargetFps" xml:space="preserve"><value>Target Frame Rate</value></data>
+  <data name="Plugin_VSync" xml:space="preserve"><value>Disable V-Sync</value></data>
+  <data name="Plugin_TouchScreen" xml:space="preserve"><value>Enable Mobile UI Mode</value></data>
+  <data name="Plugin_FovUnlock" xml:space="preserve"><value>Enable FOV Modification</value></data>
+  <data name="Plugin_FovValue" xml:space="preserve"><value>Custom FOV Value</value></data>
+  <data name="Plugin_DisableDamageText" xml:space="preserve"><value>Disable Damage Numbers</value></data>
+  <data name="Plugin_DisableCameraMove" xml:space="preserve"><value>Disable Camera Movement (Ultimate Animation)</value></data>
+  <data name="Plugin_DisableFog" xml:space="preserve"><value>Disable Fog Effect</value></data>
+  <data name="Plugin_DisableCharFade" xml:space="preserve"><value>Disable Character Blur</value></data>
+  <data name="Plugin_RedirectCraft" xml:space="preserve"><value>Enable Crafting Bench Redirect</value></data>
+  <data name="Plugin_RemoveTeamAnim" xml:space="preserve"><value>Remove Team Menu Loading Bar</value></data>
+  <data name="Plugin_HideGrass" xml:space="preserve"><value>Hide Grass</value></data>
+  <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>Hide All Grass Indiscriminately</value></data>
+  <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>Enable Custom Window Title</value></data>
+  <data name="Plugin_CustomTitleText" xml:space="preserve"><value>Custom Title Text</value></data>
+  <data name="Plugin_ToggleKey" xml:space="preserve"><value>Config Reload Hotkey</value></data>
+  <data name="Plugin_CraftKey" xml:space="preserve"><value>Crafting Bench Hotkey</value></data>
+  <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>Hide Quest Banner</value></data>
+  <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>Fix Special FOV Camera Angles</value></data>
+  <data name="Plugin_HideUID" xml:space="preserve"><value>Hide UID in Bottom-Right Corner</value></data>
+  <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>Quick Time Adjustment</value></data>
+  <data name="Plugin_AutoCook" xml:space="preserve"><value>Quick-Open Cooking Menu</value></data>
+  <data name="Plugin_AutoExpedition" xml:space="preserve"><value>Quick-Open Expedition Menu</value></data>
+  <data name="Plugin_AutoCookKey" xml:space="preserve"><value>Open Cooking Menu Hotkey</value></data>
+  <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>Open Expedition Menu Hotkey</value></data>
+  <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>Disable Underwater Overlay</value></data>
+  <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>Enable Damage Number Color Customization</value></data>
+  <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0 = Cycling, 1 = Fixed Color</value></data>
+  <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>Fixed Color Index (0-7)</value></data>
+  <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>Game Network Disconnect Hotkey (DEV)</value></data>
+  <data name="Plugin_BlockNetwork" xml:space="preserve"><value>Game Network Disconnect Quick Mode (DEV)</value></data>
+  <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>Game Network Disconnect (DEV)</value></data>
+  <data name="Plugin_DebugConsole" xml:space="preserve"><value>Enable Debug Console (DEV)</value></data>
+  <data name="Plugin_DumpOffsets" xml:space="preserve"><value>Dump Offsets (DEV)</value></data>
+  <data name="PageTitle_GameSettings" xml:space="preserve"><value>Game Settings</value></data>
+  <data name="SectionGameInstallPath" xml:space="preserve"><value>Game Install Location</value></data>
+  <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>Select the folder containing YuanShen.exe...</value></data>
+  <data name="ApplyBtn" xml:space="preserve"><value>Apply</value></data>
+  <data name="ClearGamePathTooltip" xml:space="preserve"><value>Clear the configured game directory</value></data>
+  <data name="ConfigureGamePathFirst" xml:space="preserve"><value>Please configure the game path first</value></data>
+  <data name="ClientStatusTitle" xml:space="preserve"><value>Client Status</value></data>
+  <data name="CurrentVersionLabel" xml:space="preserve"><value>Current Version</value></data>
+  <data name="ServerLabel" xml:space="preserve"><value>Server</value></data>
+  <data name="DiskUsageLabel" xml:space="preserve"><value>Disk Usage</value></data>
+  <data name="LatestVersionLabel" xml:space="preserve"><value>Latest Version</value></data>
+  <data name="CheckingEllipsis" xml:space="preserve"><value>Checking...</value></data>
+  <data name="PreDownloadLabel" xml:space="preserve"><value>Pre-Download Resources</value></data>
+  <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>Latest Redeem Codes</value></data>
+  <data name="CopyBtn" xml:space="preserve"><value>Copy</value></data>
+  <data name="NoCodesAvailable" xml:space="preserve"><value>No redeem codes available right now</value></data>
+  <data name="AccountSwitchTitle" xml:space="preserve"><value>Account Switching</value></data>
+  <data name="ReadFromLocalTooltip" xml:space="preserve"><value>Read from Local</value></data>
+  <data name="RefreshListTooltip" xml:space="preserve"><value>Refresh List</value></data>
+  <data name="DoubleClickToEditTooltip" xml:space="preserve"><value>Double-click to edit note</value></data>
+  <data name="SwitchBtn" xml:space="preserve"><value>Switch</value></data>
+  <data name="ResourceMgmtTitle" xml:space="preserve"><value>Resource Management</value></data>
+  <data name="DownloadOrVerifyFiles" xml:space="preserve"><value>Download or verify files</value></data>
+  <data name="SwitchServerTitle" xml:space="preserve"><value>Switch Server</value></data>
+  <data name="ServerSwitchCaption" xml:space="preserve"><value>Official / Bilibili / Global server switching</value></data>
+  <data name="MapToolsTitle" xml:space="preserve"><value>Map Tools</value></data>
+  <data name="ViewTeyvatMap" xml:space="preserve"><value>View the Teyvat map</value></data>
+  <data name="OfficialAnnouncementsTitle" xml:space="preserve"><value>Official Announcements</value></data>
+  <data name="EventsAndUpdatesCaption" xml:space="preserve"><value>Events and update news</value></data>
+  <data name="VerifyGameTitle" xml:space="preserve"><value>Verify Game Files</value></data>
+  <data name="VerifyAndRepairCaption" xml:space="preserve"><value>Verify and repair game files</value></data>
+  <data name="CreateShortcutTitle" xml:space="preserve"><value>Create Launch Shortcut</value></data>
+  <data name="CreateShortcutCaption" xml:space="preserve"><value>Create a one-click injection shortcut on the desktop</value></data>
+  <data name="FpsMonitorTitle" xml:space="preserve"><value>In-Game FPS Monitor</value></data>
+  <data name="FpsMonitorCaption" xml:space="preserve"><value>When enabled, shows real-time FPS in the top-left corner while the game is running (requires administrator privileges)</value></data>
+  <data name="Err_GamePathNotFound" xml:space="preserve"><value>Game path not found. Please specify the game location in Settings first.</value></data>
+  <data name="Title_VerifyGameIntegrity" xml:space="preserve"><value>Verify Game Integrity</value></data>
+  <data name="Err_GamePathNotSet" xml:space="preserve"><value>Game path not set.</value></data>
+  <data name="Err_ExeNotFoundInFolder_Format" xml:space="preserve"><value>Game executable not found in folder:
+{0}</value></data>
+  <data name="Placeholder_DefaultUseCurrentPreset" xml:space="preserve"><value>Use the app&apos;s current preset by default</value></data>
+  <data name="None_Value" xml:space="preserve"><value>None</value></data>
+  <data name="Msg_ChooseShortcutAction" xml:space="preserve"><value>Please choose what you&apos;d like to do:
+
+Create a desktop shortcut: generates an icon directly on the desktop (will run as administrator)?
+Or copy the launch command: get the full command line, usable with Steam or scripts?</value></data>
+  <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve"><value>Imported launch parameters: {0}</value></data>
+  <data name="Label_SpecifyInjectionPreset" xml:space="preserve"><value>Specify injection configuration (preset):</value></data>
+  <data name="Title_ChooseAction" xml:space="preserve"><value>Choose an Action</value></data>
+  <data name="Btn_CreateDesktopShortcut" xml:space="preserve"><value>Create Desktop Shortcut</value></data>
+  <data name="Btn_CopyLaunchCommand" xml:space="preserve"><value>Copy Launch Command</value></data>
+  <data name="FileName_ShortcutName" xml:space="preserve"><value>Launch Genshin Impact.lnk</value></data>
+  <data name="Desc_ShortcutDescription" xml:space="preserve"><value>Launch Genshin Impact via FufuLauncher injection</value></data>
+  <data name="Title_ShortcutCreated" xml:space="preserve"><value>Shortcut Created</value></data>
+  <data name="Msg_ShortcutCreated" xml:space="preserve"><value>Desktop shortcut created. It will run as administrator by default. Check your desktop.</value></data>
+  <data name="Title_LaunchCommand" xml:space="preserve"><value>Launch Command</value></data>
+  <data name="Msg_LaunchCommandInstructions" xml:space="preserve"><value>Below is the launch command. You can use it directly in CMD, PowerShell, or as a Steam non-Steam game target:</value></data>
+  <data name="Btn_CopyAndClose" xml:space="preserve"><value>Copy and Close</value></data>
+  <data name="CloseBtn" xml:space="preserve"><value>Close</value></data>
+  <data name="Err_OperationFailed_Format" xml:space="preserve"><value>Operation failed: {0}</value></data>
+  <data name="Err_FpsMonitorNeedsAdmin" xml:space="preserve"><value>Failed to enable FPS monitoring: this feature requires running the launcher as administrator.</value></data>
+  <data name="Msg_NoNewRedeemCodes" xml:space="preserve"><value>No new redeem codes right now</value></data>
+  <data name="Err_FetchFailedCheckNetwork" xml:space="preserve"><value>Failed to fetch. Please check your network connection.</value></data>
+  <data name="Btn_Copied" xml:space="preserve"><value>Copied</value></data>
+  <data name="Title_PathError" xml:space="preserve"><value>Path Error</value></data>
+  <data name="Err_CannotCreateGameDir_Format" xml:space="preserve"><value>Failed to create game directory: {0}
+Error: {1}</value></data>
+  <data name="Err_ConfigIniNotFound_Format" xml:space="preserve"><value>Could not find the config.ini file.
+
+The path that was checked:
+{0}
+
+Please check that your Game Path setting correctly points to the game installation directory</value></data>
+  <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve"><value>This is a Global client. Switching to the Bilibili server isn&apos;t allowed here -- use server conversion to switch to a China server instead!</value></data>
+  <data name="Btn_SwitchToOfficialServer" xml:space="preserve"><value>Switch to Official Server</value></data>
+  <data name="Label_ChooseTargetServer" xml:space="preserve"><value>Please choose the server to switch to:</value></data>
+  <data name="Btn_SwitchToBiliServer" xml:space="preserve"><value>Switch to Bilibili Server</value></data>
+  <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve"><value>Convert Between Global and CN Servers</value></data>
+  <data name="Title_Convert" xml:space="preserve"><value>Convert</value></data>
+  <data name="ServerType_Unknown" xml:space="preserve"><value>Unknown Server</value></data>
+  <data name="ServerType_Global" xml:space="preserve"><value>Global Server</value></data>
+  <data name="ServerType_Bilibili" xml:space="preserve"><value>Bilibili Server</value></data>
+  <data name="ServerType_Official" xml:space="preserve"><value>Official Server</value></data>
+  <data name="ServerType_CustomOther_Format" xml:space="preserve"><value>Custom/Other (Channel: {0})</value></data>
+  <data name="Err_ReadConfigFailed" xml:space="preserve"><value>Failed to read configuration file</value></data>
+  <data name="Title_TeyvatMap" xml:space="preserve"><value>Teyvat Map</value></data>
+  <data name="Title_GlobalClient" xml:space="preserve"><value>Global Client</value></data>
+  <data name="Msg_GlobalClientInjectionWarning" xml:space="preserve"><value>Note: This launcher&apos;s injection feature is primarily designed for the China server. On a Global client, it may not work or could cause unexpected errors.
+
+Continue using this path anyway?</value></data>
+  <data name="Btn_ContinueUsing" xml:space="preserve"><value>Continue Using</value></data>
+  <data name="Btn_DiscardAndClear" xml:space="preserve"><value>Discard and Clear</value></data>
+  <data name="Title_InvalidGamePath" xml:space="preserve"><value>Invalid Game Path</value></data>
+  <data name="Err_ExeNotFoundAtPath_Format" xml:space="preserve"><value>Game executable not found at this path ({0}).
+
+Please confirm you selected the installation directory containing the game executable, or configure a custom name in Settings.</value></data>
+  <data name="Title_InvalidPath" xml:space="preserve"><value>Invalid Path</value></data>
+  <data name="Msg_PathDoesNotExist" xml:space="preserve"><value>The entered path does not exist. Please check that it&apos;s correct.</value></data>
+  <data name="OkBtn" xml:space="preserve"><value>OK</value></data>
+  <data name="Err_PathProcessingFailed_Format" xml:space="preserve"><value>Path processing failed: {0}</value></data>
+  <data name="Title_AutoFoundGamePath" xml:space="preserve"><value>Game Path Automatically Found</value></data>
+  <data name="Msg_DetectedPossiblePath_Format" xml:space="preserve"><value>A possible installation path was detected:
+
+{0}
+
+Apply this path?</value></data>
+  <data name="Btn_SelectManually" xml:space="preserve"><value>Select Manually</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>Error</value></data>
+  <data name="Err_CannotOpenFilePicker" xml:space="preserve"><value>Unable to open the file picker</value></data>
+  <data name="Msg_VersionInfoNotFound" xml:space="preserve"><value>Version info not found</value></data>
+  <data name="UnknownGeneric" xml:space="preserve"><value>Unknown</value></data>
+  <data name="FetchFailedShort" xml:space="preserve"><value>Fetch Failed</value></data>
+  <data name="Msg_HasVersion_Format" xml:space="preserve"><value>Available (version {0})</value></data>
+  <data name="NotAvailableGeneric" xml:space="preserve"><value>None</value></data>
+  <data name="ServerType_MainlandChina" xml:space="preserve"><value>Mainland China Server</value></data>
+  <data name="Msg_CannotCalculate" xml:space="preserve"><value>Unable to calculate</value></data>
+  <data name="Err_CannotAccessRegistry" xml:space="preserve"><value>Unable to access the registry</value></data>
+  <data name="Err_NoLoggedInAccount" xml:space="preserve"><value>No logged-in account found (registry data is empty)</value></data>
+  <data name="Err_AccountAlreadySaved" xml:space="preserve"><value>This account has already been saved.</value></data>
+  <data name="Placeholder_EnterAccountName" xml:space="preserve"><value>Enter an account name (e.g. Main / Alt)</value></data>
+  <data name="Title_SaveNewAccount" xml:space="preserve"><value>Save New Account</value></data>
+  <data name="SaveBtn" xml:space="preserve"><value>Save</value></data>
+  <data name="Prefix_Account_Format" xml:space="preserve"><value>Account_{0}</value></data>
+  <data name="Err_SaveFailed_Format" xml:space="preserve"><value>Save failed: {0}</value></data>
+  <data name="Title_SwitchSuccess" xml:space="preserve"><value>Switch Successful</value></data>
+  <data name="Msg_SwitchedToAccount_Format" xml:space="preserve"><value>Switched to: {0}
+
+You must restart the game for this to take effect!</value></data>
+  <data name="Btn_GotIt" xml:space="preserve"><value>Got It</value></data>
+  <data name="Err_SwitchFailed_Format" xml:space="preserve"><value>Switch failed: {0}</value></data>
+  <data name="Title_ConfirmDelete" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Msg_DeleteAccountConfirm_Format" xml:space="preserve"><value>Delete account &apos;{0}&apos;?</value></data>
+  <data name="Err_DeleteFailed_Format" xml:space="preserve"><value>Delete failed: {0}</value></data>
+  <data name="Title_OperationFailed" xml:space="preserve"><value>Operation Failed</value></data>
+</root>

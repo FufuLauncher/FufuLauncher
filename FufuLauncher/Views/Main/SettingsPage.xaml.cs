@@ -120,6 +120,28 @@ public sealed partial class SettingsPage : Page
         {
             await ViewModel.ReloadSettingsAsync();
         }
+
+        await LoadInjectionModuleSelectionAsync();
+    }
+
+    private async Task LoadInjectionModuleSelectionAsync()
+    {
+        try
+        {
+            var settingsService = App.GetService<FufuLauncher.Contracts.Services.ILocalSettingsService>();
+            var saved = await settingsService.ReadSettingAsync("InjectionModule");
+            var moduleId = saved?.ToString() ?? "DLL";
+
+            for (int i = 0; i < InjectionModuleComboBox.Items.Count; i++)
+            {
+                if (InjectionModuleComboBox.Items[i] is ComboBoxItem item && item.Tag?.ToString() == moduleId)
+                {
+                    InjectionModuleComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+        catch { }
     }
 
     private Window _easterEggWindow;
@@ -754,5 +776,23 @@ public sealed partial class SettingsPage : Page
         HotkeyRecordingHint.Visibility = Visibility.Collapsed;
         ScreenshotHotkeyButton.KeyDown -= OnHotkeyRecordKeyDown;
         e.Handled = true;
+    }
+
+    private bool _injectionModuleLoaded = false;
+
+    private async void InjectionModuleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!_injectionModuleLoaded)
+        {
+            _injectionModuleLoaded = true;
+            return;
+        }
+
+        if (sender is ComboBox comboBox && comboBox.SelectedItem is ComboBoxItem selectedItem)
+        {
+            var moduleId = selectedItem.Tag?.ToString() ?? "DLL";
+            var settingsService = App.GetService<FufuLauncher.Contracts.Services.ILocalSettingsService>();
+            await settingsService.SaveSettingAsync("InjectionModule", moduleId);
+        }
     }
 }

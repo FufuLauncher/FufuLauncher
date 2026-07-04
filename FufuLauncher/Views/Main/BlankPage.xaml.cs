@@ -138,7 +138,7 @@ namespace FufuLauncher.Views
         {
             if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
             {
-                await ShowError("未找到游戏路径，请先在设置中指定游戏位置");
+                await ShowError("Err_GamePathNotFound".GetLocalized());
                 return;
             }
 
@@ -151,7 +151,7 @@ namespace FufuLauncher.Views
             var newWindow = new Window();
             newWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
             newWindow.ExtendsContentIntoTitleBar = true;
-            newWindow.Title = "校验游戏完整性";
+            newWindow.Title = "Title_VerifyGameIntegrity".GetLocalized();
 
             var hWnd = WindowNative.GetWindowHandle(newWindow);
             var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
@@ -179,7 +179,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
 
         if (string.IsNullOrEmpty(rawPath))
         {
-            await ShowError("未设置游戏路径。");
+            await ShowError("Err_GamePathNotSet".GetLocalized());
             return;
         }
         
@@ -201,7 +201,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
             }
             if (!found)
             {
-                await ShowError($"在文件夹中找不到游戏主程序：\n{rawPath}");
+                await ShowError(string.Format("Err_ExeNotFoundInFolder_Format".GetLocalized(), rawPath));
                 return;
             }
         }
@@ -236,7 +236,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
         {
             ItemsSource = presets,
             DisplayMemberPath = "Name",
-            PlaceholderText = "默认使用当前应用内的预设",
+            PlaceholderText = "Placeholder_DefaultUseCurrentPreset".GetLocalized(),
             Width = 300,
             Margin = new Thickness(0, 10, 0, 0)
         };
@@ -248,21 +248,21 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
         
         var customParamsObj = await localSettings.ReadSettingAsync("CustomLaunchParameters");
         var customLaunchParams = customParamsObj as string;
-        string customParamsDisplay = string.IsNullOrWhiteSpace(customLaunchParams) ? "无" : customLaunchParams;
+        string customParamsDisplay = string.IsNullOrWhiteSpace(customLaunchParams) ? "None_Value".GetLocalized() : customLaunchParams;
 
         var contentPanel = new StackPanel { Spacing = 10 };
-        contentPanel.Children.Add(new TextBlock { Text = "请选择您想要执行的操作：\n\n你需要创建桌面快捷方式：直接在桌面生成图标（将以管理员权限运行？\n还是复制启动命令：获取完整命令行，可用于 Steam 或 脚本？", TextWrapping = TextWrapping.Wrap });
-        contentPanel.Children.Add(new TextBlock { Text = $"已导入启动参数：{customParamsDisplay}", Opacity = 0.7, TextWrapping = TextWrapping.Wrap });
-        contentPanel.Children.Add(new TextBlock { Text = "指定注入配置（预设）：", Margin = new Thickness(0, 5, 0, 0) });
+        contentPanel.Children.Add(new TextBlock { Text = "Msg_ChooseShortcutAction".GetLocalized(), TextWrapping = TextWrapping.Wrap });
+        contentPanel.Children.Add(new TextBlock { Text = string.Format("Msg_ImportedLaunchParams_Format".GetLocalized(), customParamsDisplay), Opacity = 0.7, TextWrapping = TextWrapping.Wrap });
+        contentPanel.Children.Add(new TextBlock { Text = "Label_SpecifyInjectionPreset".GetLocalized(), Margin = new Thickness(0, 5, 0, 0) });
         contentPanel.Children.Add(presetComboBox);
 
         var choiceDialog = new ContentDialog
         {
-            Title = "选择操作",
+            Title = "Title_ChooseAction".GetLocalized(),
             Content = contentPanel,
-            PrimaryButtonText = "创建桌面快捷方式",
-            SecondaryButtonText = "复制启动命令",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "Btn_CreateDesktopShortcut".GetLocalized(),
+            SecondaryButtonText = "Btn_CopyLaunchCommand".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = XamlRoot
         };
@@ -292,7 +292,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
         if (choiceResult == ContentDialogResult.Primary)
         {
             var desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            var shortcutPath = Path.Combine(desktopPath, "快捷启动原神.lnk");
+            var shortcutPath = Path.Combine(desktopPath, "FileName_ShortcutName".GetLocalized());
 
             Type shellType = Type.GetTypeFromProgID("WScript.Shell");
             dynamic shell = Activator.CreateInstance(shellType);
@@ -303,7 +303,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
             shortcut.Arguments = argsOnly;
             shortcut.WorkingDirectory = AppContext.BaseDirectory;
             shortcut.IconLocation = finalExePath + ",0";
-            shortcut.Description = "通过 FufuLauncher 注入启动原神";
+            shortcut.Description = "Desc_ShortcutDescription".GetLocalized();
 
             shortcut.Save();
 
@@ -317,9 +317,9 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
             
             var dialog = new ContentDialog
             {
-                Title = "快捷方式已创建",
-                Content = "已创建桌面快捷方式，默认将以管理员权限运行。请检查你的电脑桌面",
-                CloseButtonText = "确定",
+                Title = "Title_ShortcutCreated".GetLocalized(),
+                Content = "Msg_ShortcutCreated".GetLocalized(),
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = XamlRoot
             };
             await dialog.ShowAsync();
@@ -338,22 +338,22 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
 
             var copyDialog = new ContentDialog
             {
-                Title = "启动命令",
+                Title = "Title_LaunchCommand".GetLocalized(),
                 Content = new StackPanel
                 {
                     Spacing = 10,
-                    Children = 
+                    Children =
                     {
-                        new TextBlock 
-                        { 
-                            Text = "以下是启动命令，您可以直接在 CMD、PowerShell 或 Steam 的“非 Steam 游戏”目标中使用：", 
+                        new TextBlock
+                        {
+                            Text = "Msg_LaunchCommandInstructions".GetLocalized(),
                             TextWrapping = TextWrapping.Wrap
                         },
                         argTextBox
                     }
                 },
-                PrimaryButtonText = "复制并关闭",
-                CloseButtonText = "关闭",
+                PrimaryButtonText = "Btn_CopyAndClose".GetLocalized(),
+                CloseButtonText = "CloseBtn".GetLocalized(),
                 DefaultButton = ContentDialogButton.Primary,
                 XamlRoot = XamlRoot
             };
@@ -370,7 +370,7 @@ private async void CreateShortcut_Click(object sender, RoutedEventArgs e)
     }
     catch (Exception ex)
     {
-        await ShowError($"操作失败: {ex.Message}");
+        await ShowError(string.Format("Err_OperationFailed_Format".GetLocalized(), ex.Message));
     }
 }
 
@@ -378,7 +378,7 @@ private void PreDownloadGame_Click(object sender, RoutedEventArgs e)
 {
     if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
     {
-        _ = ShowError("未找到游戏路径，请先在设置中指定游戏位置");
+        _ = ShowError("Err_GamePathNotFound".GetLocalized());
         return;
     }
 
@@ -399,7 +399,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
         if (!FpsOverlayService.Instance.IsAdministrator())
         {
             FpsOverlayToggle.IsOn = false;
-            await ShowError("开启帧数监控失败：该功能需要以管理员身份运行启动器。");
+            await ShowError("Err_FpsMonitorNeedsAdmin".GetLocalized());
             return;
         }
                 
@@ -468,14 +468,14 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                 }
                 else
                 {
-                    NoCodesText.Text = "当前没有新的兑换码";
+                    NoCodesText.Text = "Msg_NoNewRedeemCodes".GetLocalized();
                     NoCodesText.Visibility = Visibility.Visible;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[RedeemCodes] 获取失败: {ex.Message}");
-                NoCodesText.Text = "获取失败，请检查网络";
+                NoCodesText.Text = "Err_FetchFailedCheckNetwork".GetLocalized();
                 NoCodesText.Visibility = Visibility.Visible;
             }
             finally
@@ -508,7 +508,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                 Windows.ApplicationModel.DataTransfer.Clipboard.SetContent(package);
 
                 var originalContent = btn.Content;
-                btn.Content = "已复制";
+                btn.Content = "Btn_Copied".GetLocalized();
                 btn.IsEnabled = false;
 
                 Task.Delay(1000).ContinueWith(_ =>
@@ -549,9 +549,9 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                 {
                     var dialog = new ContentDialog
                     {
-                        Title = "路径错误",
-                        Content = $"无法创建游戏目录: {targetPath}\n错误: {ex.Message}",
-                        CloseButtonText = "确定",
+                        Title = "Title_PathError".GetLocalized(),
+                        Content = string.Format("Err_CannotCreateGameDir_Format".GetLocalized(), targetPath, ex.Message),
+                        CloseButtonText = "OkBtn".GetLocalized(),
                         XamlRoot = XamlRoot
                     };
                     _ = dialog.ShowAsync();
@@ -567,7 +567,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
 {
     if (_currentConfig == null || string.IsNullOrEmpty(_currentConfig.GamePath))
     {
-        await ShowError("未找到游戏路径，请先在设置中指定游戏位置。");
+        await ShowError("Err_GamePathNotFound".GetLocalized());
         return;
     }
 
@@ -590,7 +590,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
         }
         else
         {
-            await ShowError($"无法找到 config.ini 配置文件。\n\n尝试寻找的路径是：\n{configPath}\n\n请检查您的“游戏路径”设置是否正确指向了游戏安装目录");
+            await ShowError(string.Format("Err_ConfigIniNotFound_Format".GetLocalized(), configPath));
             return;
         }
     }
@@ -601,27 +601,27 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
     
     var dialog = new ContentDialog
     {
-        Title = "切换服务器",
-        CloseButtonText = "取消",
+        Title = "SwitchServerTitle".GetLocalized(),
+        CloseButtonText = "CancelBtn".GetLocalized(),
         XamlRoot = XamlRoot
     };
 
     if (isGlobalExe)
     {
-        stackPanel.Children.Add(new TextBlock { Text = "当前为国际服客户端，不允许切换到B服，请通过服务器转换来切换到中国服务器！", TextWrapping = TextWrapping.Wrap });
-        dialog.PrimaryButtonText = "切换到 官方服务器";
+        stackPanel.Children.Add(new TextBlock { Text = "Msg_GlobalClientNoSwitchToBili".GetLocalized(), TextWrapping = TextWrapping.Wrap });
+        dialog.PrimaryButtonText = "Btn_SwitchToOfficialServer".GetLocalized();
     }
     else
     {
-        stackPanel.Children.Add(new TextBlock { Text = "请选择你要切换到的服务器：", TextWrapping = TextWrapping.Wrap });
-        dialog.PrimaryButtonText = "切换到B服";
-        dialog.SecondaryButtonText = "切换到官方服务器";
+        stackPanel.Children.Add(new TextBlock { Text = "Label_ChooseTargetServer".GetLocalized(), TextWrapping = TextWrapping.Wrap });
+        dialog.PrimaryButtonText = "Btn_SwitchToBiliServer".GetLocalized();
+        dialog.SecondaryButtonText = "Btn_SwitchToOfficialServer".GetLocalized();
     }
 
-    var advancedBtn = new Button 
-    { 
-        Content = "国际服和国服互相转换", 
-        HorizontalAlignment = HorizontalAlignment.Stretch 
+    var advancedBtn = new Button
+    {
+        Content = "Btn_ConvertBetweenGlobalAndCN".GetLocalized(),
+        HorizontalAlignment = HorizontalAlignment.Stretch
     };
     advancedBtn.Click += (s, args) => 
     {
@@ -667,7 +667,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
             newWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
             newWindow.ExtendsContentIntoTitleBar = true;
     
-            newWindow.Title = "转换";
+            newWindow.Title = "Title_Convert".GetLocalized();
 
             var hWnd = WindowNative.GetWindowHandle(newWindow);
             var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
@@ -699,13 +699,13 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
             if (!Directory.Exists(gameDir)) return;
 
             var configPath = Path.Combine(gameDir, "config.ini");
-            var serverType = "未知服务器";
+            var serverType = "ServerType_Unknown".GetLocalized();
 
             bool isGlobalExe = File.Exists(Path.Combine(gameDir, "GenshinImpact.exe"));
 
             if (isGlobalExe)
             {
-                serverType = "国际服务器";
+                serverType = "ServerType_Global".GetLocalized();
             }
             else if (File.Exists(configPath))
             {
@@ -723,13 +723,13 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                         }
                     }
 
-                    if (channel == "14") serverType = "Bilibili 服";
-                    else if (channel == "1") serverType = "官方服务器";
-                    else serverType = $"自定义/其他 (Channel: {channel})";
+                    if (channel == "14") serverType = "ServerType_Bilibili".GetLocalized();
+                    else if (channel == "1") serverType = "ServerType_Official".GetLocalized();
+                    else serverType = string.Format("ServerType_CustomOther_Format".GetLocalized(), channel);
                 }
                 catch
                 {
-                    serverType = "读取配置文件失败";
+                    serverType = "Err_ReadConfigFailed".GetLocalized();
                 }
             }
 
@@ -743,7 +743,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
         private void OpenMap_Click(object sender, RoutedEventArgs e)
         {
             var newWindow = new Window();
-            newWindow.Title = "提瓦特大地图";
+            newWindow.Title = "Title_TeyvatMap".GetLocalized();
             var hWnd = WindowNative.GetWindowHandle(newWindow);
             var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
             var appWindow = AppWindow.GetFromWindowId(winId);
@@ -779,10 +779,10 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
             {
                 var dialog = new ContentDialog
                 {
-                    Title = "国际服客户端",
-                    Content = "注意：本启动器的注入功能主要是针对国服设计的。在国际服客户端上，此功能可能无法生效或导致未知的错误。\n\n是否继续使用此路径？",
-                    PrimaryButtonText = "继续使用",
-                    CloseButtonText = "放弃并清除",
+                    Title = "Title_GlobalClient".GetLocalized(),
+                    Content = "Msg_GlobalClientInjectionWarning".GetLocalized(),
+                    PrimaryButtonText = "Btn_ContinueUsing".GetLocalized(),
+                    CloseButtonText = "Btn_DiscardAndClear".GetLocalized(),
                     DefaultButton = ContentDialogButton.Primary,
                     XamlRoot = XamlRoot
                 };
@@ -798,9 +798,9 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
             {
                 var dialog = new ContentDialog
                 {
-                    Title = "无效的游戏路径",
-                    Content = $"在该路径下未找到游戏主程序 ({string.Join(" 或 ", exeNames)})。\n\n请确认您选择的是包含游戏可执行文件的安装目录，或前往设置中配置自定义名称。",
-                    CloseButtonText = "确定",
+                    Title = "Title_InvalidGamePath".GetLocalized(),
+                    Content = string.Format("Err_ExeNotFoundAtPath_Format".GetLocalized(), string.Join(" / ", exeNames)),
+                    CloseButtonText = "OkBtn".GetLocalized(),
                     XamlRoot = XamlRoot
                 };
                 await dialog.ShowAsync();
@@ -840,9 +840,9 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
                 {
                     var dialog = new ContentDialog
                     {
-                        Title = "无效路径",
-                        Content = "输入的路径不存在，请检查路径是否正确。",
-                        PrimaryButtonText = "确定",
+                        Title = "Title_InvalidPath".GetLocalized(),
+                        Content = "Msg_PathDoesNotExist".GetLocalized(),
+                        PrimaryButtonText = "OkBtn".GetLocalized(),
                         XamlRoot = XamlRoot
                     };
                     await dialog.ShowAsync();
@@ -860,7 +860,7 @@ private async void FpsOverlayToggle_Toggled(object sender, RoutedEventArgs e)
             catch (Exception ex)
             {
                 Debug.WriteLine($"[ProcessPathInput] 处理失败: {ex.Message}");
-                await ShowError($"路径处理失败: {ex.Message}");
+                await ShowError(string.Format("Err_PathProcessingFailed_Format".GetLocalized(), ex.Message));
 
                 PathTextBox.Text = string.Empty;
                 ShowEmptyState();
@@ -964,10 +964,10 @@ private async Task ShowAutoPathDialog(string foundPath)
         Debug.WriteLine("[Debug] 正在创建 ContentDialog...");
         var dialog = new ContentDialog
         {
-            Title = "自动找到游戏路径",
-            Content = $"检测到可能的安装路径：\n\n{foundPath}\n\n是否应用此路径？",
-            PrimaryButtonText = "应用",
-            CloseButtonText = "手动选择",
+            Title = "Title_AutoFoundGamePath".GetLocalized(),
+            Content = string.Format("Msg_DetectedPossiblePath_Format".GetLocalized(), foundPath),
+            PrimaryButtonText = "ApplyBtn".GetLocalized(),
+            CloseButtonText = "Btn_SelectManually".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = XamlRoot
         };
@@ -1021,7 +1021,7 @@ private async Task ShowAutoPathDialog(string foundPath)
 
             if (!FilePickerService.InitializeWithValidWindow(filePicker, out var blankErr))
             {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("错误", blankErr ?? "无法打开文件选择器", NotificationType.Error));
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("ErrorTitle".GetLocalized(), blankErr ?? "Err_CannotOpenFilePicker".GetLocalized(), NotificationType.Error));
                 return;
             }
 
@@ -1083,7 +1083,7 @@ private async Task LoadGameInfoAsync(string gamePath)
                 
                 if (isGlobalExe)
                 {
-                    config.ServerType = "国际服务器";
+                    config.ServerType = "ServerType_Global".GetLocalized();
                 }
                 else
                 {
@@ -1092,8 +1092,8 @@ private async Task LoadGameInfoAsync(string gamePath)
             }
             else
             {
-                config.Version = "未找到版本信息";
-                config.ServerType = isGlobalExe ? "国际服务器" : "未知";
+                config.Version = "Msg_VersionInfoNotFound".GetLocalized();
+                config.ServerType = isGlobalExe ? "ServerType_Global".GetLocalized() : "UnknownGeneric".GetLocalized();
             }
 
             config.DirectorySize = CalculateDirectorySize(gamePath);
@@ -1133,18 +1133,18 @@ private async Task LoadGameInfoAsync(string gamePath)
                     var mainInfo = gameBranch.GetProperty("main");
                     var latestVersion = mainInfo.GetProperty("tag").GetString();
 
-                    var versionText = latestVersion ?? "获取失败";
+                    var versionText = latestVersion ?? "FetchFailedShort".GetLocalized();
                     DispatcherQueue.TryEnqueue(() => LatestVersionText.Text = versionText);
 
                     if (gameBranch.TryGetProperty("pre_download", out var preDownload) &&
                         preDownload.ValueKind != JsonValueKind.Null)
                     {
-                        var preVersion = preDownload.GetProperty("tag").GetString() ?? "未知";
-                        DispatcherQueue.TryEnqueue(() => PreDownloadText.Text = $"有 (版本 {preVersion})");
+                        var preVersion = preDownload.GetProperty("tag").GetString() ?? "UnknownGeneric".GetLocalized();
+                        DispatcherQueue.TryEnqueue(() => PreDownloadText.Text = string.Format("Msg_HasVersion_Format".GetLocalized(), preVersion));
                     }
                     else
                     {
-                        DispatcherQueue.TryEnqueue(() => PreDownloadText.Text = "暂无");
+                        DispatcherQueue.TryEnqueue(() => PreDownloadText.Text = "NotAvailableGeneric".GetLocalized());
                     }
                 }
             }
@@ -1152,8 +1152,8 @@ private async Task LoadGameInfoAsync(string gamePath)
             {
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    LatestVersionText.Text = "获取失败";
-                    PreDownloadText.Text = "获取失败";
+                    LatestVersionText.Text = "FetchFailedShort".GetLocalized();
+                    PreDownloadText.Text = "FetchFailedShort".GetLocalized();
                 });
             }
         }
@@ -1186,16 +1186,16 @@ private async Task LoadGameInfoAsync(string gamePath)
         private string DetectServerType(string configContent)
         {
             if (configContent.Contains("pcadbdpz") || configContent.Contains("channel=1"))
-                return "中国大陆服务器";
+                return "ServerType_MainlandChina".GetLocalized();
 
             if (configContent.Contains("channel=14") || configContent.Contains("cps=bilibili"))
-                return "中国大陆服务器";
+                return "ServerType_MainlandChina".GetLocalized();
 
             if (configContent.Contains("os") || configContent.Contains("os") ||
                 configContent.Contains("os") || configContent.Contains("channel=0"))
-                return "国际服务器";
+                return "ServerType_Global".GetLocalized();
 
-            return "未知服务器";
+            return "ServerType_Unknown".GetLocalized();
         }
 
         private string CalculateDirectorySize(string path)
@@ -1225,7 +1225,7 @@ private async Task LoadGameInfoAsync(string gamePath)
             }
             catch
             {
-                return "无法计算";
+                return "Msg_CannotCalculate".GetLocalized();
             }
         }
 
@@ -1277,10 +1277,10 @@ private async Task LoadGameInfoAsync(string gamePath)
             try
             {
                 using var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\miHoYo\原神");
-                if (key == null) { await ShowError("无法访问注册表"); return; }
+                if (key == null) { await ShowError("Err_CannotAccessRegistry".GetLocalized()); return; }
 
                 var sdkData = key.GetValue("MIHOYOSDK_ADL_PROD_CN_h3123967166") as byte[];
-                if (sdkData == null) { await ShowError("当前没有登录的账号信息（注册表数据为空）"); return; }
+                if (sdkData == null) { await ShowError("Err_NoLoggedInAccount".GetLocalized()); return; }
 
                 int nullIndex = Array.IndexOf(sdkData, (byte)0);
                 int length = nullIndex >= 0 ? nullIndex : sdkData.Length;
@@ -1289,23 +1289,23 @@ private async Task LoadGameInfoAsync(string gamePath)
                 var accounts = await LoadAccountsFromFileAsync();
                 if (accounts.Any(a => a.SdkData == sdkString))
                 {
-                    await ShowError("该账号已经保存过了，无需重复保存。");
+                    await ShowError("Err_AccountAlreadySaved".GetLocalized());
                     return;
                 }
 
                 var inputTextBox = new TextBox
                 {
-                    PlaceholderText = "请输入账号名称 (例如: 大号 / 小号)",
+                    PlaceholderText = "Placeholder_EnterAccountName".GetLocalized(),
                     MaxLength = 20,
                     VerticalAlignment = VerticalAlignment.Center
                 };
 
                 var dialog = new ContentDialog
                 {
-                    Title = "保存新账号",
+                    Title = "Title_SaveNewAccount".GetLocalized(),
                     Content = inputTextBox,
-                    PrimaryButtonText = "保存",
-                    CloseButtonText = "取消",
+                    PrimaryButtonText = "SaveBtn".GetLocalized(),
+                    CloseButtonText = "CancelBtn".GetLocalized(),
                     XamlRoot = XamlRoot,
                     DefaultButton = ContentDialogButton.Primary
                 };
@@ -1317,7 +1317,7 @@ private async Task LoadGameInfoAsync(string gamePath)
                 string accountName = inputTextBox.Text.Trim();
                 if (string.IsNullOrEmpty(accountName))
                 {
-                    accountName = $"账号_{DateTime.Now:MMdd_HHmmss}";
+                    accountName = string.Format("Prefix_Account_Format".GetLocalized(), DateTime.Now.ToString("MMdd_HHmmss"));
                 }
 
                 accounts.Add(new GameAccountData
@@ -1335,7 +1335,7 @@ private async Task LoadGameInfoAsync(string gamePath)
             }
             catch (Exception ex)
             {
-                await ShowError($"保存失败: {ex.Message}");
+                await ShowError(string.Format("Err_SaveFailed_Format".GetLocalized(), ex.Message));
             }
         }
 
@@ -1348,7 +1348,7 @@ private async Task LoadGameInfoAsync(string gamePath)
                 if ((sender as Button)?.Tag is not GameAccountData account) return;
 
                 using var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\miHoYo\原神");
-                if (key == null) { await ShowError("无法访问注册表"); return; }
+                if (key == null) { await ShowError("Err_CannotAccessRegistry".GetLocalized()); return; }
 
                 var sdkBytes = Encoding.UTF8.GetBytes(account.SdkData);
                 var target = new byte[sdkBytes.Length + 1];
@@ -1362,9 +1362,9 @@ private async Task LoadGameInfoAsync(string gamePath)
 
                 var successDialog = new ContentDialog
                 {
-                    Title = "切换成功",
-                    Content = $"已切换到: {account.Name}\n\n必须重启游戏才能生效！",
-                    PrimaryButtonText = "我知道了",
+                    Title = "Title_SwitchSuccess".GetLocalized(),
+                    Content = string.Format("Msg_SwitchedToAccount_Format".GetLocalized(), account.Name),
+                    PrimaryButtonText = "Btn_GotIt".GetLocalized(),
                     XamlRoot = this.XamlRoot
                 };
                 await successDialog.ShowAsync();
@@ -1373,7 +1373,7 @@ private async Task LoadGameInfoAsync(string gamePath)
             }
             catch (Exception ex)
             {
-                await ShowError($"切换失败: {ex.Message}");
+                await ShowError(string.Format("Err_SwitchFailed_Format".GetLocalized(), ex.Message));
             }
         }
 
@@ -1387,10 +1387,10 @@ private async Task LoadGameInfoAsync(string gamePath)
 
                 var dialog = new ContentDialog
                 {
-                    Title = "确认删除",
-                    Content = $"删除账号 '{account.Name}'？",
-                    PrimaryButtonText = "删除",
-                    CloseButtonText = "取消",
+                    Title = "Title_ConfirmDelete".GetLocalized(),
+                    Content = string.Format("Msg_DeleteAccountConfirm_Format".GetLocalized(), account.Name),
+                    PrimaryButtonText = "DeleteLabel".GetLocalized(),
+                    CloseButtonText = "CancelBtn".GetLocalized(),
                     XamlRoot = this.XamlRoot
                 };
 
@@ -1403,7 +1403,7 @@ private async Task LoadGameInfoAsync(string gamePath)
             }
             catch (Exception ex)
             {
-                await ShowError($"删除失败: {ex.Message}");
+                await ShowError(string.Format("Err_DeleteFailed_Format".GetLocalized(), ex.Message));
             }
         }
 
@@ -1449,9 +1449,9 @@ private async Task LoadGameInfoAsync(string gamePath)
         {
             var dialog = new ContentDialog
             {
-                Title = "操作失败",
+                Title = "Title_OperationFailed".GetLocalized(),
                 Content = message,
-                CloseButtonText = "确定",
+                CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
             };
             await dialog.ShowAsync();

@@ -577,7 +577,7 @@ public partial class App : Application
 
             var resourceMap = resourceManager.MainResourceMap;
 
-            var resourceCandidate = resourceMap.GetValue("AppDisplayName");
+            var resourceCandidate = resourceMap.GetValue("Resources/AppDisplayName");
 
             if (resourceCandidate != null)
             {
@@ -608,7 +608,8 @@ public partial class App : Application
                 {
                     AppLanguage.zhCN => "zh-CN",
                     AppLanguage.zhTW => "zh-TW",
-                    _ => "zh-CN"
+                    AppLanguage.enUS => "en-US",
+                    _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
                 };
 
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
@@ -632,6 +633,7 @@ public partial class App : Application
                 {
                     AppLanguage.zhCN => "zh-CN",
                     AppLanguage.zhTW => "zh-TW",
+                    AppLanguage.enUS => "en-US",
                     _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
                 };
 

@@ -47,6 +47,9 @@ public sealed partial class MainWindow : WindowEx
     private bool _isExit;
     private bool _isOverlayShown;
     private bool _isAcrylicOverlayEnabled;
+    private bool _isPageOverlaySemiTransparent;
+    private double _pageOverlayTargetOpacity = 1.0;
+    private bool _isHamburgerButtonEnabled;
 
     private bool _isVideoBackground;
     
@@ -187,6 +190,36 @@ public sealed partial class MainWindow : WindowEx
             dispatcherQueue.TryEnqueue(() => UpdateBackgroundOverlayTheme());
         });
 
+        WeakReferenceMessenger.Default.Register<PageOverlayOpacityModeChangedMessage>(this, (_, m) =>
+        {
+            _isPageOverlaySemiTransparent = m.Value;
+            dispatcherQueue.TryEnqueue(() =>
+            {
+                if (_isOverlayShown)
+                {
+                    PageBackgroundOverlay.Opacity = _isPageOverlaySemiTransparent ? _pageOverlayTargetOpacity : 1.0;
+                }
+            });
+        });
+
+        WeakReferenceMessenger.Default.Register<PageOverlayTargetOpacityChangedMessage>(this, (_, m) =>
+        {
+            _pageOverlayTargetOpacity = Math.Clamp(m.Value, 0.1, 1.0);
+            dispatcherQueue.TryEnqueue(() =>
+            {
+                if (_isOverlayShown && _isPageOverlaySemiTransparent)
+                {
+                    PageBackgroundOverlay.Opacity = _pageOverlayTargetOpacity;
+                }
+            });
+        });
+
+        WeakReferenceMessenger.Default.Register<HamburgerButtonVisibilityChangedMessage>(this, (_, m) =>
+        {
+            _isHamburgerButtonEnabled = m.Value;
+            dispatcherQueue.TryEnqueue(() => ApplyHamburgerButtonVisibility(_isHamburgerButtonEnabled));
+        });
+
         if (Content is FrameworkElement rootElement)
         {
             rootElement.ActualThemeChanged += (_, _) => UpdateBackgroundOverlayTheme();
@@ -293,6 +326,54 @@ public sealed partial class MainWindow : WindowEx
             UpdateBackgroundOverlayTheme();
         }
         catch { _isAcrylicOverlayEnabled = false; }
+    }
+
+    private async Task LoadPageOverlayOpacitySettingAsync()
+    {
+        try
+        {
+            var modeObj = await _localSettingsService.ReadSettingAsync("IsPageOverlaySemiTransparentEnabled");
+            _isPageOverlaySemiTransparent = modeObj != null && Convert.ToBoolean(modeObj);
+
+            var opacityObj = await _localSettingsService.ReadSettingAsync("PageOverlayTargetOpacity");
+            if (opacityObj != null && double.TryParse(opacityObj.ToString(), out var parsed))
+                _pageOverlayTargetOpacity = Math.Clamp(parsed, 0.1, 1.0);
+            else
+                _pageOverlayTargetOpacity = 0.7;
+        }
+        catch
+        {
+            _isPageOverlaySemiTransparent = false;
+            _pageOverlayTargetOpacity = 0.7;
+        }
+    }
+
+    private async Task LoadHamburgerButtonSettingAsync()
+    {
+        try
+        {
+            var valueObj = await _localSettingsService.ReadSettingAsync("IsHamburgerButtonEnabled");
+            _isHamburgerButtonEnabled = valueObj != null && Convert.ToBoolean(valueObj);
+            ApplyHamburgerButtonVisibility(_isHamburgerButtonEnabled);
+        }
+        catch { _isHamburgerButtonEnabled = false; }
+    }
+
+    private void ApplyHamburgerButtonVisibility(bool isEnabled)
+    {
+        NavigationView.IsPaneToggleButtonVisible = isEnabled;
+        if (!isEnabled)
+        {
+            NavigationView.IsPaneOpen = false;
+        }
+    }
+
+    private void NavigationView_PaneOpened(NavigationView sender, object args)
+    {
+    }
+
+    private void NavigationView_PaneClosed(NavigationView sender, object args)
+    {
     }
     
     #endregion
@@ -1272,6 +1353,8 @@ public sealed partial class MainWindow : WindowEx
             await LoadFrameBackgroundOpacityAsync();
             await LoadOverlayOpacityAsync();
             await LoadAcrylicOverlaySettingAsync();
+            await LoadPageOverlayOpacitySettingAsync();
+            await LoadHamburgerButtonSettingAsync();
             await LoadAndApplyAcrylicSettingAsync();
             await LoadGlobalBackgroundAsync();
             await LoadMinimizeToTraySettingAsync();
@@ -1662,6 +1745,7 @@ public sealed partial class MainWindow : WindowEx
     try
     {
         var screenHeight = Bounds.Height > 0 ? Bounds.Height : 1000;
+        var targetOpacity = _isPageOverlaySemiTransparent ? _pageOverlayTargetOpacity : 1.0;
 
         if (isMainPage && _isOverlayShown)
         {
@@ -1675,7 +1759,7 @@ public sealed partial class MainWindow : WindowEx
 
             var opacityAnim = new DoubleAnimation
             {
-                From = 1.0,
+                From = targetOpacity,
                 To = 0.0,
                 Duration = TimeSpan.FromMilliseconds(400),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
@@ -1710,7 +1794,7 @@ public sealed partial class MainWindow : WindowEx
             var opacityAnim = new DoubleAnimation
             {
                 From = 0.0,
-                To = 1.0,
+                To = targetOpacity,
                 Duration = TimeSpan.FromMilliseconds(500),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
@@ -1731,7 +1815,7 @@ public sealed partial class MainWindow : WindowEx
         else if (!isMainPage && _isOverlayShown)
         {
             OverlayTranslate.Y = 0;
-            PageBackgroundOverlay.Opacity = 1.0;
+            PageBackgroundOverlay.Opacity = targetOpacity;
         }
     }
     catch (Exception ex)

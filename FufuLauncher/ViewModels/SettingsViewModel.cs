@@ -37,7 +37,8 @@ namespace FufuLauncher.ViewModels
     {
         Default = 0,
         zhCN = 1,
-        zhTW = 2
+        zhTW = 2,
+        enUS = 3
     }
 
     public enum WindowModeType
@@ -66,7 +67,7 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private ElementTheme _elementTheme;
         [ObservableProperty] private string _versionDescription;
-        public string AppVersion => $"版本 {Assembly.GetEntryAssembly()?.GetName().Version}";
+        public string AppVersion => string.Format("AppVersionFormat".GetLocalized(), Assembly.GetEntryAssembly()?.GetName().Version);
         [ObservableProperty] private ServerType _selectedServer;
         [ObservableProperty] private bool _isBackgroundEnabled = true;
         [ObservableProperty] private AppLanguage _selectedLanguage;
@@ -110,6 +111,9 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private bool _isMinWindowSizeLimitEnabled = true;
         [ObservableProperty] private double _globalBackgroundImageOpacity = 1.0;
         [ObservableProperty] private bool _isAcrylicOverlayEnabled;
+        [ObservableProperty] private bool _isPageOverlaySemiTransparentEnabled;
+        [ObservableProperty] private double _pageOverlayTargetOpacity = 0.7;
+        [ObservableProperty] private bool _isHamburgerButtonEnabled;
         
         [ObservableProperty] private bool _isHideGameNewsCardEnabled;
         [ObservableProperty] private bool _isHideCheckinCardEnabled;
@@ -818,6 +822,33 @@ namespace FufuLauncher.ViewModels
             WeakReferenceMessenger.Default.Send(new OverlayStyleChangedMessage(value));
         }
 
+        partial void OnIsPageOverlaySemiTransparentEnabledChanged(bool value)
+        {
+            if (_isInitializing) return;
+            _ = _localSettingsService.SaveSettingAsync("IsPageOverlaySemiTransparentEnabled", value);
+            WeakReferenceMessenger.Default.Send(new PageOverlayOpacityModeChangedMessage(value));
+        }
+
+        partial void OnPageOverlayTargetOpacityChanged(double value)
+        {
+            if (_isInitializing) return;
+            var clamped = Math.Clamp(value, 0.1, 1.0);
+            if (Math.Abs(clamped - value) > 0.0001)
+            {
+                PageOverlayTargetOpacity = clamped;
+                return;
+            }
+            _ = _localSettingsService.SaveSettingAsync("PageOverlayTargetOpacity", clamped);
+            WeakReferenceMessenger.Default.Send(new PageOverlayTargetOpacityChangedMessage(clamped));
+        }
+
+        partial void OnIsHamburgerButtonEnabledChanged(bool value)
+        {
+            if (_isInitializing) return;
+            _ = _localSettingsService.SaveSettingAsync("IsHamburgerButtonEnabled", value);
+            WeakReferenceMessenger.Default.Send(new HamburgerButtonVisibilityChangedMessage(value));
+        }
+
         private long GetDirectorySize(DirectoryInfo d)
         {
             long size = 0;
@@ -1042,6 +1073,18 @@ namespace FufuLauncher.ViewModels
             
             var acrylicOverlayJson = await _localSettingsService.ReadSettingAsync("IsAcrylicOverlayEnabled");
             IsAcrylicOverlayEnabled = acrylicOverlayJson != null && Convert.ToBoolean(acrylicOverlayJson);
+
+            var pageOverlaySemiTransparentJson = await _localSettingsService.ReadSettingAsync("IsPageOverlaySemiTransparentEnabled");
+            IsPageOverlaySemiTransparentEnabled = pageOverlaySemiTransparentJson != null && Convert.ToBoolean(pageOverlaySemiTransparentJson);
+
+            var pageOverlayTargetOpacityJson = await _localSettingsService.ReadSettingAsync("PageOverlayTargetOpacity");
+            if (pageOverlayTargetOpacityJson != null && double.TryParse(pageOverlayTargetOpacityJson.ToString(), out var pageOverlayOpacity))
+                PageOverlayTargetOpacity = Math.Clamp(pageOverlayOpacity, 0.1, 1.0);
+            else
+                PageOverlayTargetOpacity = 0.7;
+
+            var hamburgerButtonJson = await _localSettingsService.ReadSettingAsync("IsHamburgerButtonEnabled");
+            IsHamburgerButtonEnabled = hamburgerButtonJson != null && Convert.ToBoolean(hamburgerButtonJson);
             
             var launchOverlayColorJson = await _localSettingsService.ReadSettingAsync("LaunchButtonOverlayColor");
             LaunchButtonOverlayColor = launchOverlayColorJson?.ToString() ?? "#0078D7";
@@ -1662,15 +1705,21 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
             try
             {
                 await _localSettingsService.SaveSettingAsync("AppLanguage", (int)language);
-                var culture = language == AppLanguage.zhCN ? "zh-CN" : "zh-TW";
+                var culture = language switch
+                {
+                    AppLanguage.zhCN => "zh-CN",
+                    AppLanguage.zhTW => "zh-TW",
+                    AppLanguage.enUS => "en-US",
+                    _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
+                };
                 Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
 
                 var dialog = new ContentDialog
                 {
-                    Title = "语言已更改",
-                    Content = "语言设置已更改。由于技术限制，部分UI需要重启才能完全生效。",
-                    PrimaryButtonText = "立即重启",
-                    CloseButtonText = "稍后手动重启",
+                    Title = "LanguageChangedTitle".GetLocalized(),
+                    Content = "LanguageChangedMessage".GetLocalized(),
+                    PrimaryButtonText = "RestartNowBtn".GetLocalized(),
+                    CloseButtonText = "RestartLaterBtn".GetLocalized(),
                     XamlRoot = App.MainWindow.Content.XamlRoot
                 };
 

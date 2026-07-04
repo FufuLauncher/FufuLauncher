@@ -11,6 +11,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Activation;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
@@ -145,6 +146,10 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private bool _useInjection;
 
+        [ObservableProperty] private string _injectionModule = "DLL";
+        [ObservableProperty] private ObservableCollection<InjectionModuleInfo> _availableInjectionModules = new();
+        public IRelayCommand<InjectionModuleInfo> SelectInjectionModuleCommand { get; }
+
         [ObservableProperty] private bool _preferVideoBackground = true;
 
         [ObservableProperty] private SolidColorBrush _gameNewsCardTextBrush = new(Microsoft.UI.Colors.White);
@@ -257,6 +262,9 @@ namespace FufuLauncher.ViewModels
             
             OpenPresetManagerCommand = new AsyncRelayCommand(OpenPresetManagerAsync);
             QuickSwitchPresetCommand = new RelayCommand<PresetModel>(QuickSwitchPreset);
+            SelectInjectionModuleCommand = new RelayCommand<InjectionModuleInfo>(SelectInjectionModule);
+
+            InitializeInjectionModules();
 
             WeakReferenceMessenger.Default.Register<GamePathChangedMessage>(this, (r, m) =>
             {
@@ -359,6 +367,7 @@ namespace FufuLauncher.ViewModels
             );
 
             UseInjection = getInjectionTask.Result;
+            await LoadInjectionModuleAsync();
             
             try
             {
@@ -1317,6 +1326,48 @@ private void QuickSwitchPreset(PresetModel targetPreset)
             });
         }
 
+        private void InitializeInjectionModules()
+        {
+            AvailableInjectionModules = new ObservableCollection<InjectionModuleInfo>
+            {
+                new() { Id = "DLL", Name = "InjectionBuiltIn".GetLocalized(), Description = "InjectionBuiltInDesc".GetLocalized(), IsSelected = true },
+                new() { Id = "EXE", Name = "InjectionStandalone".GetLocalized(), Description = "InjectionStandaloneDesc".GetLocalized(), IsSelected = false }
+            };
+        }
+
+        private void SelectInjectionModule(InjectionModuleInfo module)
+        {
+            if (module == null) return;
+
+            InjectionModule = module.Id;
+
+            foreach (var m in AvailableInjectionModules)
+            {
+                m.IsSelected = m.Id == module.Id;
+            }
+
+            _ = _localSettingsService.SaveSettingAsync("InjectionModule", module.Id);
+        }
+
+        private async Task LoadInjectionModuleAsync()
+        {
+            try
+            {
+                var saved = await _localSettingsService.ReadSettingAsync("InjectionModule");
+                var moduleId = saved?.ToString() ?? "DLL";
+                InjectionModule = moduleId;
+
+                foreach (var m in AvailableInjectionModules)
+                {
+                    m.IsSelected = m.Id == moduleId;
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
         private Task UpdateUI(Action uiAction)
         {
             if (_dispatcherQueue == null)
@@ -1340,7 +1391,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
         private async Task<bool> CheckGameProcessRunningAsync(bool forceRefresh = false)
         {
             var now = DateTimeOffset.UtcNow;
-            var currentInterval = IsGameRunning ? TimeSpan.FromSeconds(15) : TimeSpan.FromSeconds(1);
+            var currentInterval = IsGameRunning ? TimeSpan.FromSeconds(1) : TimeSpan.FromSeconds(1);
 
             if (!forceRefresh && now - _lastGameProcessCheck < currentInterval)
             {
@@ -1599,7 +1650,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
                     Debug.WriteLine($"进程监控错误: {ex.Message}");
                 }
                 
-                int checkDelay = IsGameRunning ? 15000 : 1000;
+                int checkDelay = IsGameRunning ? 1000 : 1000;
                 await Task.Delay(checkDelay, token);
             }
         }

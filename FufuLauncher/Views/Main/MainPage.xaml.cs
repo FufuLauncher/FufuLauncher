@@ -410,6 +410,16 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
         }
     }
 
+    private void InjectionModuleListView_ItemClick(object sender, ItemClickEventArgs e)
+    {
+        if (e.ClickedItem is InjectionModuleInfo module)
+        {
+            ViewModel.SelectInjectionModuleCommand.Execute(module);
+
+            InjectionModuleFlyout.Hide();
+        }
+    }
+
     private void AnimateInfoButtonOpacity(double toOpacity)
     {
         if (InfoExpandButton == null) return;

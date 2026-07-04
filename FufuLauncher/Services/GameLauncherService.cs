@@ -249,6 +249,16 @@ public async Task<LaunchResult> LaunchGameAsync()
 
                 if (useInjection)
                 {
+                    var injectionModuleObj = await _localSettingsService.ReadSettingAsync("InjectionModule");
+                    var injectionModule = injectionModuleObj?.ToString() ?? "DLL";
+                    logBuilder.AppendLine($"[启动流程] 注入模块: {injectionModule}");
+
+                    if (injectionModule == "EXE")
+                    {
+                        gameStarted = await LaunchViaExeModuleAsync(gameExePath, logBuilder);
+                    }
+                    else
+                    {
                     int configMask = 0;
 
                     logBuilder.AppendLine($"[启动流程] 配置掩码: {configMask}");
@@ -321,6 +331,7 @@ public async Task<LaunchResult> LaunchGameAsync()
                     {
                         logBuilder.AppendLine($"[启动流程] 未找到任何可用的注入DLL (默认路径无效且无插件)，降级为普通启动");
                         gameStarted = StartGameNormally(gameExePath, arguments, gamePath, logBuilder);
+                    }
                     }
                 }
                 else
@@ -461,6 +472,46 @@ public async Task<LaunchResult> LaunchGameAsync()
             catch (Exception ex)
             {
                 log.AppendLine($"[普通启动] ? 异常: {ex.Message}");
+                return false;
+            }
+        }
+
+        private async Task<bool> LaunchViaExeModuleAsync(string gameExePath, StringBuilder log)
+        {
+            try
+            {
+                var launcher2Path = Path.Combine(AppContext.BaseDirectory, "Launcher_2.exe");
+                if (!File.Exists(launcher2Path))
+                {
+                    log.AppendLine($"[EXE注入] 错误: Launcher_2.exe 不存在于: {launcher2Path}");
+                    return false;
+                }
+
+                log.AppendLine($"[EXE注入] 使用 Launcher_2.exe 注入模式");
+                log.AppendLine($"[EXE注入] 路径: {launcher2Path}");
+                log.AppendLine($"[EXE注入] 游戏: {gameExePath}");
+
+                var psi = new ProcessStartInfo
+                {
+                    FileName = launcher2Path,
+                    Arguments = QuoteArgument(gameExePath),
+                    UseShellExecute = true,
+                    Verb = "runas",
+                    WorkingDirectory = Path.GetDirectoryName(launcher2Path)
+                };
+
+                Process.Start(psi);
+                log.AppendLine("[EXE注入] Launcher_2.exe 已启动");
+                return true;
+            }
+            catch (Win32Exception ex) when (ex.NativeErrorCode == 1223)
+            {
+                log.AppendLine("[EXE注入] 管理员授权被用户取消");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.AppendLine($"[EXE注入] 异常: {ex.Message}");
                 return false;
             }
         }

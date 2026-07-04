@@ -724,7 +724,18 @@ public void LoadConfiguration()
                 }
 
                 var dic = section.Value;
-                var name = dic.GetValueOrDefault("Name", section.Key);
+                var iniName = dic.GetValueOrDefault("Name", section.Key);
+                var name = iniName;
+                if (SelectedPluginIndex == 0)
+                {
+                    // Translations under "Plugin_<SectionKey>" were authored specifically for
+                    // FuFuPlugin's config.ini. Other plugins (FPS, Avatar) can reuse the same
+                    // section names for unrelated settings, so only apply this lookup for
+                    // FuFuPlugin to avoid showing a mistranslated label on another plugin's setting.
+                    var localizationKey = $"Plugin_{section.Key}";
+                    var localizedName = localizationKey.GetLocalized();
+                    name = localizedName != localizationKey ? localizedName : iniName;
+                }
                 var type = dic.GetValueOrDefault("Type", "string");
                 var value = dic.GetValueOrDefault("Value", "");
                 var help = dic.GetValueOrDefault("help", "");
