@@ -10,6 +10,7 @@
   <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>사용할 언어를 선택하세요</value></data>
   <data name="LanguageSelection_Confirm" xml:space="preserve"><value>확인</value></data>
   <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>시스템 기본값</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>선택됨</value></data>
   <data name="RestartNowBtn" xml:space="preserve"><value>지금 다시 시작</value></data>
   <data name="RestartLaterBtn" xml:space="preserve"><value>나중에 다시 시작</value></data>
   <data name="AppVersionFormat" xml:space="preserve"><value>버전 {0}</value></data>

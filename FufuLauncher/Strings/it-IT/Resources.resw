@@ -885,6 +885,7 @@ Dettagli: {0}</value></data>
   <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>Seleziona la tua lingua preferita per continuare</value></data>
   <data name="LanguageSelection_Confirm" xml:space="preserve"><value>Conferma</value></data>
   <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>Predefinito di sistema</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>Selezionato</value></data>
   <data name="LanguageChangedTitle" xml:space="preserve"><value>Lingua Modificata</value></data>
   <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>Ultimi Codici Riscatto</value></data>
   <data name="LatestVersionLabel" xml:space="preserve"><value>Ultima Versione</value></data>

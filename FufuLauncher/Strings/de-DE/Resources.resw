@@ -10,6 +10,7 @@
   <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>Wähle deine bevorzugte Sprache aus, um fortzufahren</value></data>
   <data name="LanguageSelection_Confirm" xml:space="preserve"><value>Bestätigen</value></data>
   <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>Systemstandard</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>Ausgewählt</value></data>
   <data name="RestartNowBtn" xml:space="preserve"><value>Jetzt neustarten</value></data>
   <data name="RestartLaterBtn" xml:space="preserve"><value>Später manuell neustarten</value></data>
   <data name="AppVersionFormat" xml:space="preserve"><value>Version {0}</value></data>

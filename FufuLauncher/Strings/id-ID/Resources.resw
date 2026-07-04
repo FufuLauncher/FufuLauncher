@@ -10,6 +10,7 @@
   <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>Pilih bahasa pilihan Anda untuk melanjutkan</value></data>
   <data name="LanguageSelection_Confirm" xml:space="preserve"><value>Konfirmasi</value></data>
   <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>Default Sistem</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>Terpilih</value></data>
   <data name="RestartNowBtn" xml:space="preserve"><value>Mulai Ulang Sekarang</value></data>
   <data name="RestartLaterBtn" xml:space="preserve"><value>Mulai Ulang Nanti</value></data>
   <data name="AppVersionFormat" xml:space="preserve"><value>Versi {0}</value></data>

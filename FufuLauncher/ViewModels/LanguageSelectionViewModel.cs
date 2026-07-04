@@ -27,9 +27,26 @@ namespace FufuLauncher.ViewModels
 
         public Microsoft.UI.Xaml.Visibility FlagImageVisibility =>
             !IsFontIcon ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;
+        
+        public Microsoft.UI.Xaml.Visibility NormalContentVisibility =>
+            IsSelected ? Microsoft.UI.Xaml.Visibility.Collapsed : Microsoft.UI.Xaml.Visibility.Visible;
+
+        public Microsoft.UI.Xaml.Visibility SelectedContentVisibility =>
+            IsSelected ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;
+
+        public double NormalOpacity => IsSelected ? 0.0 : 1.0;
+        public double SelectedOpacity => IsSelected ? 1.0 : 0.0;
 
         [ObservableProperty]
         private bool _isSelected;
+
+        partial void OnIsSelectedChanged(bool value)
+        {
+            OnPropertyChanged(nameof(NormalContentVisibility));
+            OnPropertyChanged(nameof(SelectedContentVisibility));
+            OnPropertyChanged(nameof(NormalOpacity));
+            OnPropertyChanged(nameof(SelectedOpacity));
+        }
     }
 
     public partial class LanguageSelectionViewModel : ObservableObject

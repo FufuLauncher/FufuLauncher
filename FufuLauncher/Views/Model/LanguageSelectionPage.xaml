@@ -49,7 +49,7 @@
             </DoubleAnimation>
         </Storyboard>
         
-        <DataTemplate x:Key="LanguageCardTemplate" x:DataType="viewmodels:LanguageOption">
+        <DataTemplate x:Key="LanguageCardTemplate">
             <Border x:Name="CardBorder"
                     Width="135"
                     Height="95"
@@ -60,7 +60,8 @@
                     Padding="12,10"
                     Margin="4"
                     PointerEntered="OnCardPointerEntered"
-                    PointerExited="OnCardPointerExited">
+                    PointerExited="OnCardPointerExited"
+                    Loaded="OnCardLoaded">
                 <Border.Resources>
                     <Storyboard x:Key="HoverInStoryboard">
                         <DoubleAnimation Storyboard.TargetName="CardScale"
@@ -99,50 +100,72 @@
                 <Border.RenderTransform>
                     <ScaleTransform x:Name="CardScale" CenterX="67.5" CenterY="47.5" ScaleX="1.0" ScaleY="1.0" />
                 </Border.RenderTransform>
+                
+                <Grid>
+                    <Grid RowSpacing="2"
+                          Opacity="{Binding NormalOpacity}"
+                          Loaded="OnCardLoaded">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <FontIcon Grid.Row="0"
+                                  Glyph="{Binding Glyph}"
+                                  FontSize="20"
+                                  FontFamily="Segoe Fluent Icons"
+                                  Visibility="{Binding FontIconVisibility}"
+                                  HorizontalAlignment="Center"
+                                  Margin="0,1,0,2"
+                                  Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
 
-                <Grid RowSpacing="2">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    
-                    <FontIcon Grid.Row="0"
-                              Glyph="{x:Bind Glyph}"
-                              FontSize="20"
-                              FontFamily="Segoe Fluent Icons"
-                              Visibility="{x:Bind FontIconVisibility, Mode=OneWay}"
-                              HorizontalAlignment="Center"
-                              Margin="0,1,0,2"
-                              Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
-
-                    <Image Grid.Row="0"
-                           Source="{Binding FlagImagePath}"
-                           Visibility="{x:Bind FlagImageVisibility, Mode=OneWay}"
-                           Width="40" Height="26"
-                           HorizontalAlignment="Center"
-                           Stretch="Uniform"
-                           Margin="0,1,0,2" />
-                    
-                    <!-- Native name: primary, prominent -->
-                    <TextBlock Grid.Row="1"
-                               Text="{x:Bind NativeName}"
-                               FontSize="12"
-                               FontWeight="SemiBold"
+                        <Image Grid.Row="0"
+                               Source="{Binding FlagImagePath}"
+                               Visibility="{Binding FlagImageVisibility}"
+                               Width="40" Height="26"
                                HorizontalAlignment="Center"
-                               TextAlignment="Center"
-                               TextWrapping="NoWrap"
-                               Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
+                               Stretch="Uniform"
+                               Margin="0,1,0,2" />
+                        
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding NativeName}"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap"
+                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
 
-                    <!-- English name: secondary, faded -->
-                    <TextBlock Grid.Row="2"
-                               Text="{x:Bind CountryName}"
-                               FontSize="9.5"
-                               HorizontalAlignment="Center"
-                               TextAlignment="Center"
-                               TextWrapping="NoWrap"
-                               Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                               Opacity="0.6" />
+                        <TextBlock Grid.Row="2"
+                                   Text="{Binding CountryName}"
+                                   FontSize="9.5"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap"
+                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                   Opacity="0.6" />
+                    </Grid>
+                    
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Opacity="{Binding SelectedOpacity}"
+                          Loaded="OnCardLoaded">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Spacing="4">
+                            <FontIcon Glyph="&#xE73E;"
+                                      FontSize="22"
+                                      FontFamily="Segoe Fluent Icons"
+                                      HorizontalAlignment="Center"
+                                      Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                            <TextBlock Text="{helpers:Loc Key=LanguageSelection_Selected}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                        </StackPanel>
+                    </Grid>
                 </Grid>
             </Border>
         </DataTemplate>
