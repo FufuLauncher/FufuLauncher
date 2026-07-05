@@ -688,11 +688,7 @@ private void SetupVideoPlayer(MediaSource source, InMemoryRandomAccessStream str
 
     if (BackgroundVideoPlayer == null)
     {
-        BackgroundVideoPlayer = new MediaPlayer
-        {
-            IsLoopingEnabled = true,
-            IsMuted = true
-        };
+        BackgroundVideoPlayer = MediaPlayerHelper.CreateLoopingMutedPlayer();
         BackgroundVideoPlayer.MediaFailed += BackgroundVideoPlayer_MediaFailed;
     }
     BackgroundVideoPlayer.Source = source; 

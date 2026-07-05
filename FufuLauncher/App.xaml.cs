@@ -517,6 +517,7 @@ public partial class App : Application
                 try
                 {
                     var mediaPlayer = new MediaPlayer();
+                    MediaPlayerHelper.DisableSystemMediaControls(mediaPlayer);
                     mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(path));
                     mediaPlayer.Volume = 0.7;
 

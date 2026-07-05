@@ -1082,11 +1082,7 @@ public sealed partial class MainWindow : WindowEx
             
             if (_globalBackgroundPlayer == null)
             {
-                _globalBackgroundPlayer = new MediaPlayer
-                {
-                    IsLoopingEnabled = true,
-                    IsMuted = true
-                };
+                _globalBackgroundPlayer = MediaPlayerHelper.CreateLoopingMutedPlayer();
                 GlobalBackgroundVideo.SetMediaPlayer(_globalBackgroundPlayer);
             }
             if (!ReferenceEquals(_globalBackgroundPlayer.Source, result.VideoSource))
