@@ -319,25 +319,15 @@ namespace FufuLauncher.ViewModels
                     return;
                 }
 
-                var picker = new FileOpenPicker
-                {
-                    ViewMode = PickerViewMode.List,
-                    SuggestedStartLocation = PickerLocationId.Desktop,
-                    FileTypeFilter = { ".exe" }
-                };
+                var path = await FilePickerService.PickOpenFileAsync(
+                    null,
+                    new[] { ("可执行文件", new[] { ".exe" }) },
+                    PickerLocationId.Desktop,
+                    async msg => { StatusMessage = msg; await ShowErrorAsync(msg); });
 
-                if (!FilePickerService.InitializeWithValidWindow(picker, out var browseErr))
+                if (!string.IsNullOrEmpty(path))
                 {
-                    StatusMessage = browseErr ?? "无法打开文件选择器";
-                    await ShowErrorAsync(browseErr ?? "无法打开文件选择器");
-                    return;
-                }
-
-                var file = await picker.PickSingleFileAsync();
-
-                if (file != null)
-                {
-                    var path = file.Path.Trim('"');
+                    path = path.Trim('"');
                     Debug.WriteLine($"[OtherViewModel] 用户选择程序: '{path}'");
 
                     if (File.Exists(path))

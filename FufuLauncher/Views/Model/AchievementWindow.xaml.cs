@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
+using FufuLauncher.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -1121,20 +1122,15 @@ public sealed partial class AchievementWindow : Window
     
     private async void OnImportClick(object sender, RoutedEventArgs e)
     {
-        var picker = new Windows.Storage.Pickers.FileOpenPicker();
-        picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
-        picker.FileTypeFilter.Add(".csv");
-        picker.FileTypeFilter.Add(".txt");
+        var path = await FilePickerService.PickOpenFileAsync(
+            this,
+            new[] { ("CSV/文本文件", new[] { ".csv", ".txt" }) },
+            Windows.Storage.Pickers.PickerLocationId.Desktop,
+            msg => _ = ShowDialogAsync("错误", msg));
 
-        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
-
-        var file = await picker.PickSingleFileAsync();
-        
-        if (file != null)
+        if (!string.IsNullOrEmpty(path))
         {
-            await RunImportLogic(file.Path);
+            await RunImportLogic(path);
         }
     }
 
@@ -1450,16 +1446,12 @@ public sealed partial class AchievementWindow : Window
 
     private async void OnUiafImportClick(object sender, RoutedEventArgs e)
     {
-        var picker = new Windows.Storage.Pickers.FileOpenPicker();
-        picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
-        picker.FileTypeFilter.Add(".json");
-
-        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
-
-        var file = await picker.PickSingleFileAsync();
-        if (file == null) return;
+        var path = await FilePickerService.PickOpenFileAsync(
+            this,
+            new[] { ("JSON 文件", new[] { ".json" }) },
+            Windows.Storage.Pickers.PickerLocationId.Desktop,
+            msg => _ = ShowDialogAsync("错误", msg));
+        if (string.IsNullOrEmpty(path)) return;
 
         if (_isBatchProcessing) return;
         _isBatchProcessing = true;
@@ -1467,7 +1459,7 @@ public sealed partial class AchievementWindow : Window
 
         try
         {
-            string jsonContent = await File.ReadAllTextAsync(file.Path);
+            string jsonContent = await File.ReadAllTextAsync(path);
             var uiafData = JsonSerializer.Deserialize<UiafData>(jsonContent);
 
             if (uiafData == null || uiafData.List == null)
@@ -1560,16 +1552,13 @@ public sealed partial class AchievementWindow : Window
 
     private async void OnUiafExportClick(object sender, RoutedEventArgs e)
     {
-        var picker = new Windows.Storage.Pickers.FileSavePicker();
-        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.Desktop;
-        picker.FileTypeChoices.Add("JSON 文件", new List<string>() { ".json" });
-        picker.SuggestedFileName = $"UIAF_Export_{DateTime.Now:yyyyMMdd_HHmmss}";
-
-        var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-        WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
-
-        var file = await picker.PickSaveFileAsync();
-        if (file == null) return;
+        var path = await FilePickerService.PickSaveFileAsync(
+            this,
+            new[] { ("JSON 文件", new[] { ".json" }) },
+            $"UIAF_Export_{DateTime.Now:yyyyMMdd_HHmmss}",
+            Windows.Storage.Pickers.PickerLocationId.Desktop,
+            msg => _ = ShowDialogAsync("错误", msg));
+        if (string.IsNullOrEmpty(path)) return;
 
         ViewModel.StatusMessage = "AchievementWindow_GeneratingUIAF".GetLocalized();
 
@@ -1618,7 +1607,7 @@ public sealed partial class AchievementWindow : Window
             var options = new JsonSerializerOptions { WriteIndented = true };
             string jsonOutput = JsonSerializer.Serialize(exportData, options);
 
-            await File.WriteAllTextAsync(file.Path, jsonOutput);
+            await File.WriteAllTextAsync(path, jsonOutput);
 
             ViewModel.StatusMessage = "AchievementWindow_UIAFExportDone".GetLocalized();
             await ShowDialogAsync("导出成功", "已成功导出UIAF格式数据。");

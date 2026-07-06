@@ -152,35 +152,25 @@ namespace FufuLauncher.ViewModels
             return;
         }
 
-        var filePicker = new FileOpenPicker
+        var path = await FilePickerService.PickOpenFileAsync(
+            null,
+            new[] { ("可执行文件", new[] { ".exe" }) },
+            PickerLocationId.ComputerFolder,
+            msg => _ = ShowError(msg));
+
+        if (!string.IsNullOrEmpty(path))
         {
-            SuggestedStartLocation = PickerLocationId.ComputerFolder,
-            ViewMode = PickerViewMode.List
-        };
+            var folder = Path.GetDirectoryName(path)?.Trim('"').Trim();
 
-        filePicker.FileTypeFilter.Add(".exe");
-
-        if (!FilePickerService.InitializeWithValidWindow(filePicker, out var pathErr))
-        {
-            await ShowError(pathErr ?? "无法打开文件选择器");
-            return;
-        }
-
-        var file = await filePicker.PickSingleFileAsync();
-
-        if (file != null)
-        {
-            var path = Path.GetDirectoryName(file.Path)?.Trim('"').Trim();
-            
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(folder))
             {
-                Debug.WriteLine($"[游戏信息页] 用户选择程序文件: '{file.Path}', 提取目录路径: '{path}'");
+                Debug.WriteLine($"[游戏信息页] 用户选择程序文件: '{path}', 提取目录路径: '{folder}'");
 
-                await LoadGameInfoAsync(path);
-                await _localSettingsService.SaveSettingAsync(GamePathKey, path);
-                _lastLoadedPath = path;
+                await LoadGameInfoAsync(folder);
+                await _localSettingsService.SaveSettingAsync(GamePathKey, folder);
+                _lastLoadedPath = folder;
 
-                WeakReferenceMessenger.Default.Send(new GamePathChangedMessage(path));
+                WeakReferenceMessenger.Default.Send(new GamePathChangedMessage(folder));
                 Debug.WriteLine("[游戏信息页] 已发送路径变更消息");
             }
         }

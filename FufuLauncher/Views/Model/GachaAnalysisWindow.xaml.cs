@@ -8,6 +8,7 @@ using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.ViewModels;
 using System.Diagnostics;
+using System.IO;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -781,28 +782,17 @@ namespace FufuLauncher.Views
         {
             try
             {
-                var savePicker = new FileSavePicker();
-                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-                WinRT.Interop.InitializeWithWindow.Initialize(savePicker, hwnd);
-
-                savePicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-                savePicker.FileTypeChoices.Add("PNG 图片", new List<string> { ".png" });
-                savePicker.SuggestedFileName = $"祈愿分析_{ViewModel.SelectedUid}_{DateTime.Now:yyyyMMddHHmmss}";
-
-                var file = await savePicker.PickSaveFileAsync();
-                if (file == null) return;
+                var path = await FilePickerService.PickSaveFileAsync(
+                    this,
+                    new[] { ("PNG 图片", new[] { ".png" }) },
+                    $"祈愿分析_{ViewModel.SelectedUid}_{DateTime.Now:yyyyMMddHHmmss}",
+                    PickerLocationId.PicturesLibrary,
+                    msg => ShowDialogMessage("错误", msg));
+                if (string.IsNullOrEmpty(path)) return;
 
                 using var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
-                using var fileStream = await file.OpenAsync(Windows.Storage.FileAccessMode.ReadWrite);
-                using var reader = new DataReader(stream.GetInputStreamAt(0));
-                await reader.LoadAsync((uint)stream.Size);
-                var buffer = new byte[stream.Size];
-                reader.ReadBytes(buffer);
-                
-                using var dataWriter = new DataWriter(fileStream);
-                dataWriter.WriteBytes(buffer);
-                await dataWriter.StoreAsync();
-                await fileStream.FlushAsync();
+                using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
+                stream.AsStream().CopyTo(fileStream);
 
                 ShowDialogMessage("保存成功", $"祈愿分析图片已保存至文件。");
             }
