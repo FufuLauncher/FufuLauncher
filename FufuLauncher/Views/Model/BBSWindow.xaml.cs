@@ -2,6 +2,7 @@
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
+using System.Diagnostics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Text;
@@ -679,21 +680,21 @@ namespace FufuLauncher.Views
             if (_screenshotBytes == null) return;
             try
             {
-                var picker = new FileSavePicker();
-                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-                WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
-                picker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-                picker.FileTypeChoices.Add("PNG Image", new List<string>() { ".png" });
-                picker.SuggestedFileName = $"mihoyo_bbs_{DateTime.Now:yyyyMMddHHmmss}";
-
-                StorageFile file = await picker.PickSaveFileAsync();
-                if (file != null)
+                var path = await FilePickerService.PickSaveFileAsync(
+                    this,
+                    new[] { ("PNG Image", new[] { ".png" }) },
+                    $"mihoyo_bbs_{DateTime.Now:yyyyMMddHHmmss}",
+                    PickerLocationId.PicturesLibrary);
+                if (!string.IsNullOrEmpty(path))
                 {
-                    await File.WriteAllBytesAsync(file.Path, _screenshotBytes);
+                    await File.WriteAllBytesAsync(path, _screenshotBytes);
                     CloseScreenshot_Click(null, null);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[BBSWindow] 保存截图失败: {ex.Message}");
+            }
         }
 
         private async void CopyScreenshot_Click(object sender, RoutedEventArgs e)

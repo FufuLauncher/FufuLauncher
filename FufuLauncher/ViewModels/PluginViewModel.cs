@@ -253,23 +253,17 @@ public class PluginViewModel : INotifyPropertyChanged
     {
         try
         {
-            var picker = new FileOpenPicker();
-            if (!FilePickerService.InitializeWithValidWindow(picker, out var pluginErr))
-            {
-                StatusMessage = pluginErr ?? "无法打开文件选择器";
-                return;
-            }
-
-            picker.ViewMode = PickerViewMode.List;
-            picker.SuggestedStartLocation = PickerLocationId.ComputerFolder;
-            picker.FileTypeFilter.Add(".dll");
-
-            var file = await picker.PickSingleFileAsync();
-            if (file != null)
+            var path = await FilePickerService.PickOpenFileAsync(
+                null,
+                new[] { ("插件文件", new[] { ".dll" }) },
+                PickerLocationId.ComputerFolder,
+                msg => StatusMessage = msg);
+            if (!string.IsNullOrEmpty(path))
             {
                 EnsureDirectoryExists();
 
-                var folderName = Path.GetFileNameWithoutExtension(file.Name);
+                var fileName = Path.GetFileName(path);
+                var folderName = Path.GetFileNameWithoutExtension(fileName);
                 var destFolderPath = Path.Combine(_pluginsPath, folderName);
 
                 if (!Directory.Exists(destFolderPath))
@@ -277,8 +271,8 @@ public class PluginViewModel : INotifyPropertyChanged
                     Directory.CreateDirectory(destFolderPath);
                 }
 
-                var destPath = Path.Combine(destFolderPath, file.Name);
-                File.Copy(file.Path, destPath, true);
+                var destPath = Path.Combine(destFolderPath, fileName);
+                File.Copy(path, destPath, true);
 
                 StatusMessage = $"已添加插件: {folderName}";
                 LoadPlugins();

@@ -34,6 +34,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+    </ItemGroup>
+
+    <ItemGroup>
         <Manifest Include="$(ApplicationManifest)" />
     </ItemGroup>
 

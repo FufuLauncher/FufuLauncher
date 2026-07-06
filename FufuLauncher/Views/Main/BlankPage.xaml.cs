@@ -1012,29 +1012,18 @@ private async Task ShowAutoPathDialog(string foundPath)
 
         private async Task PickGameFolderAsync()
         {
-            var filePicker = new FileOpenPicker
-            {
-                SuggestedStartLocation = PickerLocationId.ComputerFolder
-            };
+            var path = await FilePickerService.PickOpenFileAsync(
+                null,
+                new[] { ("可执行文件", new[] { ".exe" }) },
+                PickerLocationId.ComputerFolder,
+                msg => WeakReferenceMessenger.Default.Send(new NotificationMessage("ErrorTitle".GetLocalized(), msg, NotificationType.Error)));
+            if (string.IsNullOrEmpty(path)) return;
 
-            filePicker.FileTypeFilter.Add(".exe");
-
-            if (!FilePickerService.InitializeWithValidWindow(filePicker, out var blankErr))
+            var folder = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(folder))
             {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("ErrorTitle".GetLocalized(), blankErr ?? "Err_CannotOpenFilePicker".GetLocalized(), NotificationType.Error));
-                return;
-            }
-
-            var file = await filePicker.PickSingleFileAsync();
-            if (file != null)
-            {
-                var path = Path.GetDirectoryName(file.Path);
-        
-                if (!string.IsNullOrEmpty(path))
-                {
-                    PathTextBox.Text = path;
-                    await ProcessPathInput(path);
-                }
+                PathTextBox.Text = folder;
+                await ProcessPathInput(folder);
             }
         }
 

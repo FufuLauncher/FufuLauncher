@@ -891,27 +891,18 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                 _currentEditSize = size;
             }
 
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            if (!FilePickerService.InitializeWithValidWindow(picker, out var avatarErr))
-            {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("导入失败", avatarErr ?? "无法打开文件选择器", NotificationType.Error));
-                return;
-            }
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.FileTypeFilter.Add(".png");
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".bmp");
-            picker.FileTypeFilter.Add(".webp");
-
-            var file = await picker.PickSingleFileAsync();
-            if (file != null)
+            var path = await FilePickerService.PickOpenFileAsync(
+                null,
+                new[] { ("图片文件", new[] { ".png", ".jpg", ".jpeg", ".bmp", ".webp" }) },
+                Windows.Storage.Pickers.PickerLocationId.PicturesLibrary,
+                msg => WeakReferenceMessenger.Default.Send(new NotificationMessage("导入失败", msg, NotificationType.Error)));
+            if (!string.IsNullOrEmpty(path))
             {
                 string avatarDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar");
                 if (!Directory.Exists(avatarDir)) Directory.CreateDirectory(avatarDir);
 
                 string originalPath = ViewModel.GetAvatarOriginalPath(_currentEditSize);
-                File.Copy(file.Path, originalPath, true);
+                File.Copy(path, originalPath, true);
 
                 await LoadImageToCropperAsync(originalPath);
             }
