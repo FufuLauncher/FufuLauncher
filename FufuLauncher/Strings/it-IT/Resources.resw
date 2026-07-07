@@ -181,6 +181,16 @@
   <data name="AvatarFormatsNote" xml:space="preserve"><value>Formati supportati: PNG, JPG, BMP, WEBP. Le modifiche avranno effetto al prossimo accesso al gioco.</value></data>
   <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>Plugin Avatar Abilitato</value></data>
   <data name="AvatarSettingsTitle" xml:space="preserve"><value>Impostazioni Sostituzione Avatar (carica dimensioni corrispondenti se necessario)</value></data>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>Batch Save Failed</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>Batch generated and overwrote all avatar sizes</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>Clear Failed</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>Avatar size {0}x{0} cleared</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>Avatar cropped and saved successfully</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>No avatar found to edit</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>Notice</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>Import Failed</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>Load Failed</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>Save Failed</value></data>
   <data name="BBSWindow_Copy" xml:space="preserve"><value>Copia</value></data>
   <data name="BBSWindow_EnterUrl" xml:space="preserve"><value>Inserisci URL...</value></data>
   <data name="BBSWindow_Go" xml:space="preserve"><value>Vai</value></data>
@@ -578,6 +588,13 @@ Conferma di aver selezionato la directory di installazione contenente l'eseguibi
   <data name="FpsMonitorCaption" xml:space="preserve"><value>Mostra FPS in tempo reale nell'angolo in alto a sinistra mentre il gioco è in esecuzione (richiede privilegi di amministratore)</value></data>
   <data name="FpsMonitorTitle" xml:space="preserve"><value>Monitor FPS In-Game</value></data>
   <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>Plugin FPS Abilitato</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>If you have NVIDIA RTX 40-series or newer AI frame generation enabled, or use frame display software such as RTSS or MSI Afterburner, it may cause the game to freeze or fail to start normally.</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>Don&apos;t show this warning again</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>Compatibility Warning</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>The frame rate display plugin hash does not match. It may have been tampered with or corrupted. Please reinstall the launcher.</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>Repair Failed</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS display plugin has been successfully repaired and installed</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>Repairing FPS Plugin</value></data>
   <data name="FrameOpacityTitle" xml:space="preserve"><value>Opacità Sfondo Frame</value></data>
   <data name="FreeCamHelpLabel" xml:space="preserve"><value>Come Usare la Telecamera Libera</value></data>
   <data name="FunctionsMenuBtn" xml:space="preserve"><value>Funzioni (Download/Riparazione)</value></data>
@@ -1032,6 +1049,12 @@ Devi riavviare il gioco per applicare la modifica!</value></data>
   <data name="OtherPage_UsageInstructions" xml:space="preserve"><value>Istruzioni d'Uso</value></data>
   <data name="OtherPage_UtilityTools" xml:space="preserve"><value>Strumenti Utilità</value></data>
   <data name="OverlayOpacityTitle" xml:space="preserve"><value>Opacità Sovrapposizione</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>This project is currently maintained by an individual developer (CodeCubist).
+We adhere to a player pain-point-driven development direction, promoting open, transparent, and efficient updates.
+Submitting Pull Requests is the core way for users with coding skills to help advance development, optimize structure, and share project maintenance responsibilities.
+If you can help, please use the button below to visit the code repository and submit your contribution.</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>Visit GitHub Repository to Submit Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
   <data name="PageTitle_GameSettings" xml:space="preserve"><value>Impostazioni Gioco</value></data>
   <data name="Panel_DataAnalysis" xml:space="preserve"><value>Analisi Dati</value></data>
   <data name="Panel_DataAnalysisDesc" xml:space="preserve"><value>Traccia statistiche, progressi e dati a lungo termine</value></data>
@@ -1079,12 +1102,22 @@ Devi riavviare il gioco per applicare la modifica!</value></data>
   <data name="PluginMgmtTitle" xml:space="preserve"><value>Gestione Plugin</value></data>
   <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>Usa i plugin a tuo rischio. Gli sviluppatori non sono responsabili per eventuali danni.</value></data>
   <data name="PluginSettingsLabel" xml:space="preserve"><value>Impostazioni Plugin</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>Your computer may be ARM-based. The injection feature is not available on ARM-based computers. Are you sure you want to continue enabling it?</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>Continue Enabling</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>Architecture Compatibility Warning</value></data>
   <data name="Plugin_AutoCook" xml:space="preserve"><value>Apertura Rapida Menu Cucina</value></data>
   <data name="Plugin_AutoCookKey" xml:space="preserve"><value>Tasto Rapido Apri Menu Cucina</value></data>
   <data name="Plugin_AutoExpedition" xml:space="preserve"><value>Apertura Rapida Menu Spedizioni</value></data>
   <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>Tasto Rapido Apri Menu Spedizioni</value></data>
   <data name="Plugin_BlockNetwork" xml:space="preserve"><value>Modalità Rapida Disconnessione Rete Gioco (DEV)</value></data>
   <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>Regolazione Rapida Ora</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>Plugin files are abnormal.
+This is usually because the plugin was falsely flagged and blocked by antivirus software (such as Windows Defender) or has been damaged.
+
+Recommendations:
+1. Add the software directory to the antivirus whitelist
+2. Re-download and install the plugin on this page</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>Plugin May Be Corrupted</value></data>
   <data name="Plugin_CraftKey" xml:space="preserve"><value>Tasto Rapido Banco Crafting</value></data>
   <data name="Plugin_CustomTitleText" xml:space="preserve"><value>Testo Titolo Personalizzato</value></data>
   <data name="Plugin_DebugConsole" xml:space="preserve"><value>Abilita Console Debug (DEV)</value></data>
@@ -1093,10 +1126,21 @@ Devi riavviare il gioco per applicare la modifica!</value></data>
   <data name="Plugin_DisableDamageText" xml:space="preserve"><value>Disabilita Numeri Danno</value></data>
   <data name="Plugin_DisableFog" xml:space="preserve"><value>Disabilita Effetto Nebbia</value></data>
   <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>Disabilita Sovrapposizione Subacquea</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>Backup</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>Extracting and installing...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>Installation failed: {0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>Connection failed, trying backup line...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>Main</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>Manual Download</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0} line downloading... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>Plugin installed and refreshed</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>Getting Plugin</value></data>
   <data name="Plugin_DumpOffsets" xml:space="preserve"><value>Dump Offset (DEV)</value></data>
   <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>Abilita Titolo Finestra Personalizzato</value></data>
   <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>Disconnessione Rete Gioco (DEV)</value></data>
   <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>Abilita Personalizzazione Colori Danno</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>File not found, please confirm launcher files are complete</value></data>
   <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>Correggi Angoli FOV Speciali</value></data>
   <data name="Plugin_FovUnlock" xml:space="preserve"><value>Abilita Modifica FOV</value></data>
   <data name="Plugin_FovValue" xml:space="preserve"><value>Valore FOV Personalizzato</value></data>
@@ -1105,6 +1149,8 @@ Devi riavviare il gioco per applicare la modifica!</value></data>
   <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>Nascondi Tutta l'Erba Indiscriminatamente</value></data>
   <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>Nascondi Banner Missione</value></data>
   <data name="Plugin_HideUID" xml:space="preserve"><value>Nascondi UID in Basso a Destra</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>Main plugin DLL file not found. The plugin may not be installed, was accidentally deleted, or was blocked by antivirus software. Please re-download the plugin, or add the launcher directory to the antivirus whitelist and try again.</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>Main Plugin Missing</value></data>
   <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>Tasto Disconnessione Rete Gioco (DEV)</value></data>
   <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0 = Ciclico, 1 = Colore Fisso</value></data>
   <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>Indice Colore Fisso (0-7)</value></data>
@@ -1124,6 +1170,18 @@ Devi riavviare il gioco per applicare la modifica!</value></data>
   <data name="Prefix_Account_Format" xml:space="preserve"><value>Account_{0}</value></data>
   <data name="PresetManager_SelectHint" xml:space="preserve"><value>Seleziona i predefiniti da fissare nella home (max 5)</value></data>
   <data name="PresetManager_Title" xml:space="preserve"><value>Gestore Predefiniti</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>Enter new preset name</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>Create New Preset</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>Are you sure you want to delete the preset &quot;{0}&quot;? This action cannot be undone!</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>Lock reason: {0}
+
+If you continue, this warning will be ignored and the preset&apos;s Hash will be updated to the current plugin Hash, unlocking the preset. Continue?</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>Continue and Unlock</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>Configuration Preset Locked</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>Confirm Reset</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>Remove all presets for the current plugin and re-download the defaults? This action cannot be undone!</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>Reset All Presets</value></data>
   <data name="PriorityAboveNormal" xml:space="preserve"><value>Sopra Normale</value></data>
   <data name="PriorityNormal" xml:space="preserve"><value>Normale (Predefinito)</value></data>
   <data name="ProcessPriorityCaption" xml:space="preserve"><value>Regola la priorità di scheduling CPU del launcher (impostarla troppo alta potrebbe influire su altri processi)</value></data>

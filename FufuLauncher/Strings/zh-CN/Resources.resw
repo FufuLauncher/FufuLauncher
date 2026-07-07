@@ -257,6 +257,13 @@
   <data name="RepairFpsPluginBtn" xml:space="preserve"><value>修复FPS显示插件(Repair)</value></data>
   <data name="MainPluginEnabledLabel" xml:space="preserve"><value>主插件启用</value></data>
   <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>FPS插件启用</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>如果开启了NVIDIA RTX40系及以上显卡的AI插帧，或者使用了类似于RTSS、微星小飞机等帧数显示软件，都可能会导致游戏画面卡死或者游戏无法正常启动</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>不再显示此警告</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>兼容性警告</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>帧数显示插件哈希不匹配，可能已被篡改或损坏，请重新安装启动器</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>修复失败</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS显示插件已成功修复并安装</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>正在修复FPS插件</value></data>
   <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>头像插件启用</value></data>
   <data name="KeyInputModeLabel" xml:space="preserve"><value>键位输入模式(列表)</value></data>
   <data name="ListLabel" xml:space="preserve"><value>列表</value></data>
@@ -276,6 +283,16 @@
   <data name="ImportBtn" xml:space="preserve"><value>导入</value></data>
   <data name="CropBtn" xml:space="preserve"><value>裁剪</value></data>
   <data name="AvatarFormatsNote" xml:space="preserve"><value>支持格式: PNG, JPG, BMP, WEBP.修改后在下次进游戏时生效</value></data>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>批量保存失败</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>已批量生成并覆盖全部尺寸的头像</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>清除失败</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>尺寸 {0}x{0} 头像已清除</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>头像裁切并保存成功</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>未找到可供编辑的头像</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>提示</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>导入失败</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>加载失败</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>保存失败</value></data>
   <data name="CropAvatarTitle" xml:space="preserve"><value>调整头像</value></data>
   <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>保存当前尺寸</value></data>
   <data name="BatchApplyAllBtn" xml:space="preserve"><value>批量应用到全部尺寸</value></data>
@@ -316,6 +333,24 @@
   <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>游戏网络中断(DEV)</value></data>
   <data name="Plugin_DebugConsole" xml:space="preserve"><value>启用调试窗口(DEV)</value></data>
   <data name="Plugin_DumpOffsets" xml:space="preserve"><value>DumpOffsets(DEV)</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>您的电脑可能为ARM架构，注入功能在ARM架构的电脑中不可用，是否确认继续开启？</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>继续开启</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>架构兼容性警告</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>插件文件异常\n这通常是因为插件被杀毒软件（如 Windows Defender）误判拦截或遭到破坏\n\n建议您：\n1. 将本软件目录加入杀毒软件白名单\n2. 在本页面重新下载并安装插件</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>插件可能已损坏</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>正在连接...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>正在解压并安装...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>安装失败：{0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>连接失败，正在尝试备用线路...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>主</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>备用</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>手动下载</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0}线路下载中... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>插件已安装并刷新</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>正在获取插件</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>未找到文件，请确认启动器文件完整</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>未找到主插件 DLL 文件，插件可能未安装、被误删或被杀毒软件拦截。请重新下载插件，或将启动器目录加入杀毒软件白名单后再试。</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>主插件缺失</value></data>
   <data name="PageTitle_GameSettings" xml:space="preserve"><value>游戏设置</value></data>
   <data name="SectionGameInstallPath" xml:space="preserve"><value>游戏安装位置</value></data>
   <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>请选择 YuanShen.exe 所在文件夹...</value></data>
@@ -686,6 +721,19 @@
   <data name="PreDownload_Start" xml:space="preserve"><value>开始预下载</value></data>
   <data name="PresetManager_Title" xml:space="preserve"><value>预设管理</value></data>
   <data name="PresetManager_SelectHint" xml:space="preserve"><value>选择要固定在首页的预设 (最多5个)</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>请输入新预设名称</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>创建新预设</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>确定要删除预设 \"{0}\" 吗？此操作无法恢复！</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>确认删除</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>锁定原因：{0}\n\n如果继续使用，将忽略该警告并把此预设的 Hash 更新为当前插件 Hash，从而重新解锁该预设。是否继续？</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>继续使用并解锁</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>配置预设已锁定</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>确认重置</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>确定要移除当前插件的所有预设并重新下载恢复默认吗？此操作无法恢复！</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>重置全部预设</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>本项目目前由个人开发者(CodeCubist)独立维护\n我们坚持并积极落实以玩家痛点为核心的开发方向，开放透明和高效的推动更新\n提交Pull Requests是让拥有代码开发编写能力的用户可以协助推进开发进度、优化结构及分摊项目维护压力的核心途径\n如可提供帮助，请通过下方按钮前往代码仓库提交你的贡献</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>访问GitHub仓库提交Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
   <data name="SecurityWeb_Title" xml:space="preserve"><value>开发者许可认证</value></data>
   <data name="VerifyGame_Title" xml:space="preserve"><value>游戏文件完整性校验</value></data>
   <data name="VerifyGame_Description" xml:space="preserve"><value>此操作将校验本地文件，并自动下载修复损坏或缺失的文件。过程可能需要较长时间，请耐心等待</value></data>
