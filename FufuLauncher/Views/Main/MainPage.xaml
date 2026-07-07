@@ -173,15 +173,8 @@
                     </Grid.Shadow>
 
                     <Border
-                        x:Name="InfoCardSolidBg"
-                        Background="Transparent"
-                        CornerRadius="12"
-                        Opacity="0.5" />
-                    <Border
-                        x:Name="InfoCardBlurBg"
                         Background="{ThemeResource IosGlassBrush}"
-                        CornerRadius="12"
-                        Opacity="0.0" />
+                        CornerRadius="12" />
 
                     <Grid
                         x:Name="InfoCardGrid"
@@ -386,15 +379,8 @@
                         </Grid.Shadow>
 
                         <Border
-                            x:Name="CheckinCardSolidBg"
-                            Background="Transparent"
-                            CornerRadius="8"
-                            Opacity="0.5" />
-                        <Border
-                            x:Name="CheckinCardBlurBg"
                             Background="{ThemeResource IosGlassBrush}"
-                            CornerRadius="8"
-                            Opacity="0.0" />
+                            CornerRadius="8" />
 
                         <Grid
                             x:Name="CheckinCardGrid"
@@ -545,15 +531,8 @@
                         </Grid.Shadow>
 
                         <Border
-                            x:Name="DailyNoteCardSolidBg"
-                            Background="Transparent"
-                            CornerRadius="8"
-                            Opacity="0.5" />
-                        <Border
-                            x:Name="DailyNoteCardBlurBg"
                             Background="{ThemeResource IosGlassBrush}"
-                            CornerRadius="8"
-                            Opacity="0.0" />
+                            CornerRadius="8" />
 
                         <Grid
                             x:Name="DailyNoteCardGrid"

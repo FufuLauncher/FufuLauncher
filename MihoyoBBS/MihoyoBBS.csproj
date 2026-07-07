@@ -8,10 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Playwright" Version="1.57.0" />
-      <PackageReference Include="PuppeteerSharp" Version="20.2.5" />
-      <PackageReference Include="System.Text.Json" Version="10.0.0" />
-      <PackageReference Include="YamlDotNet" Version="16.3.0" />
+      <PackageReference Include="Microsoft.Playwright" Version="1.61.0" />
+      <PackageReference Include="PuppeteerSharp" Version="25.3.1" />
+      <PackageReference Include="System.Text.Json" Version="10.0.9" />
+      <PackageReference Include="YamlDotNet" Version="18.1.0" />
     </ItemGroup>
 
 </Project>

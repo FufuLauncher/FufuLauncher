@@ -32,7 +32,6 @@ public sealed partial class MainPage : Page
     private bool _isBannerTransitioning;
     private bool _isBannerPointerPressed;
     private Windows.Foundation.Point _bannerPointerPressedPoint;
-    private static bool _hasCardAnimationPlayed = false;
     private bool _isInfoCardExpanded = true;
     private bool _isWidgetFlyoutEnabled = false;
     public MainViewModel ViewModel
@@ -539,8 +538,6 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
     
         ViewModel.PropertyChanged += ViewModel_PropertyChanged;
 
-        ActualThemeChanged += (_, _) => UpdateCardBackgrounds();
-
         Loaded += (_, _) =>
         {
             LaunchButtonOverlayBorder.Opacity = ViewModel.IsGameRunning ? 0.0 : 1.0;
@@ -558,57 +555,6 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
         };
     }
     
-    private void UpdateCardBackgrounds()
-    {
-        if (InfoCardSolidBg == null || CheckinCardSolidBg == null || DailyNoteCardSolidBg == null) return;
-
-        var transparentBrush = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
-        InfoCardSolidBg.Background = transparentBrush;
-        CheckinCardSolidBg.Background = transparentBrush;
-        DailyNoteCardSolidBg.Background = transparentBrush;
-
-        if (ViewModel.IsVideoBackground)
-        {
-            InfoCardBlurBg.Opacity = 0.5;
-            CheckinCardBlurBg.Opacity = 0.5;
-            DailyNoteCardBlurBg.Opacity = 0.5;
-        }
-        else
-        {
-            InfoCardBlurBg.Opacity = 1.0;
-            CheckinCardBlurBg.Opacity = 1.0;
-            DailyNoteCardBlurBg.Opacity = 1.0;
-        }
-    }
-    
-    private async Task TransitionCardBackgroundsAsync()
-    {
-        if (InfoCardSolidBg == null || CheckinCardSolidBg == null || DailyNoteCardSolidBg == null) return;
-        
-        var transparentBrush = new SolidColorBrush(Microsoft.UI.Colors.Transparent);
-        InfoCardSolidBg.Background = transparentBrush;
-        CheckinCardSolidBg.Background = transparentBrush;
-        DailyNoteCardSolidBg.Background = transparentBrush;
-        
-        InfoCardBlurBg.Opacity = 0.65;
-        CheckinCardBlurBg.Opacity = 0.65;
-        DailyNoteCardBlurBg.Opacity = 0.65;
-        
-        await Task.Delay(500);
-
-        if (ViewModel.IsVideoBackground) return;
-
-        var storyboard = new Storyboard();
-        var duration = new Duration(TimeSpan.FromMilliseconds(400));
-        var easing = new CubicEase { EasingMode = EasingMode.EaseInOut };
-        
-        storyboard.Children.Add(CreateDoubleAnimation(InfoCardBlurBg, "Opacity", 1.0, duration, easing));
-        storyboard.Children.Add(CreateDoubleAnimation(CheckinCardBlurBg, "Opacity", 1.0, duration, easing));
-        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteCardBlurBg, "Opacity", 1.0, duration, easing));
-
-        storyboard.Begin();
-    }
-    
     private void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(MainViewModel.IsGameRunning))
@@ -618,10 +564,6 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
         else if (e.PropertyName == nameof(MainViewModel.CurrentBanner))
         {
             _ = DispatcherQueue.TryEnqueue(() => TransitionToBanner(ViewModel.CurrentBanner));
-        }
-        else if (e.PropertyName == nameof(MainViewModel.IsVideoBackground))
-        {
-            UpdateCardBackgrounds();
         }
         else if (e.PropertyName == nameof(MainViewModel.IsDailyNoteLoaded))
         {
@@ -689,36 +631,8 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
         base.OnNavigatedTo(e);
         if (_isInitialized)
         {
-            RefreshCardAcrylicBrushes();
             _ = ViewModel.OnPageReturnedAsync();
         }
-    }
-
-    private void RefreshCardAcrylicBrushes()
-    {
-        if (InfoCardBlurBg == null || CheckinCardBlurBg == null || DailyNoteCardBlurBg == null) return;
-        
-        if (Resources.ThemeDictionaries != null)
-        {
-            var themeKey = ActualTheme == ElementTheme.Light ? "Light" : "Default";
-            if (Resources.ThemeDictionaries.TryGetValue(themeKey, out var dict) &&
-                dict is ResourceDictionary rd &&
-                rd.TryGetValue("IosGlassBrush", out var brush) &&
-                brush is AcrylicBrush acrylicBrush)
-            {
-                var newBrush = new AcrylicBrush
-                {
-                    TintColor = acrylicBrush.TintColor,
-                    TintOpacity = acrylicBrush.TintOpacity,
-                    FallbackColor = acrylicBrush.FallbackColor
-                };
-                InfoCardBlurBg.Background = newBrush;
-                CheckinCardBlurBg.Background = newBrush;
-                DailyNoteCardBlurBg.Background = newBrush;
-            }
-        }
-
-        UpdateCardBackgrounds();
     }
 
     private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -726,19 +640,9 @@ private void OnOpenGachaAnalysisClick(object sender, RoutedEventArgs e)
         EntranceStoryboard.Begin();
 
         InitializeBannerDisplay();
-    
+
         SyncDailyNoteState();
-    
-        if (!_hasCardAnimationPlayed)
-        {
-            _hasCardAnimationPlayed = true;
-            _ = TransitionCardBackgroundsAsync();
-        }
-        else
-        {
-            UpdateCardBackgrounds();
-        }
-    
+
         if (!_isInitialized)
         {
             if (Helpers.AppPaths.IsFirstRun) return;
