@@ -113,7 +113,6 @@
                 
                 <ToggleSwitch IsOn="{x:Bind MainViewModel.UseInjection, Mode=OneWay}" 
                               Toggled="OnInjectionToggled"
-                              IsEnabled="{x:Bind ControlPanelViewModel.IsGameRunning, Converter={StaticResource BoolInverter}, Mode=OneWay}"
                               OnContent="" OffContent="" 
                               MinWidth="0"
                               VerticalAlignment="Center"/>

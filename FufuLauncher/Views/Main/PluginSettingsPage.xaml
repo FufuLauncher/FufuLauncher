@@ -298,7 +298,6 @@
                         </StackPanel>
                         <ToggleSwitch IsOn="{x:Bind MainVM.UseInjection, Mode=OneWay}" 
                                       Toggled="OnInjectionToggled"
-                                      IsEnabled="{x:Bind InvertBool(ControlPanelVM.IsGameRunning), Mode=OneWay}"
                                       OnContent="" OffContent="" MinWidth="0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
