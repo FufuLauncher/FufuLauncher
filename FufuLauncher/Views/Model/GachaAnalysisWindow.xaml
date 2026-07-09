@@ -11,7 +11,7 @@
     xmlns:helpers="using:FufuLauncher.Helpers"
     xmlns:primitives="using:Microsoft.UI.Xaml.Controls.Primitives"
     mc:Ignorable="d"
-    Title="抽卡记录分析">
+    Title="{helpers:Loc Key=GachaAnalysis_Title}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -85,7 +85,7 @@
                                             VerticalAlignment="Center">
                                     <TextBlock Text="{x:Bind Count}" FontWeight="Bold" FontSize="14"
                                                Foreground="{Binding Count, Converter={StaticResource CountToColorConverter}}" />
-                                    <TextBlock Text=" 抽" FontSize="12"
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                VerticalAlignment="Bottom" Margin="2,0,0,1" />
                                 </StackPanel>
@@ -238,7 +238,7 @@
                                         <StackPanel Orientation="Horizontal" Spacing="2" VerticalAlignment="Center">
                                             <TextBlock Text="{x:Bind Count}" FontWeight="Bold" FontSize="14"
                                                        Foreground="{Binding Count, Converter={StaticResource CountToColorConverter}}" />
-                                            <TextBlock Text="抽" FontSize="10" Foreground="#CCFFFFFF"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Pulls}" FontSize="10" Foreground="#CCFFFFFF"
                                                        VerticalAlignment="Bottom" Margin="0,0,0,1" />
                                         </StackPanel>
                                     </Border>
@@ -292,7 +292,7 @@
                     <PivotItem.Header>
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <FontIcon Glyph="&#xE9D2;" FontSize="15" />
-                            <TextBlock Text="祈愿总览" />
+                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_WishOverview}" />
                         </StackPanel>
                     </PivotItem.Header>
                 </PivotItem>
@@ -300,7 +300,7 @@
                     <PivotItem.Header>
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <FontIcon Glyph="&#xE9D9;" FontSize="15" />
-                            <TextBlock Text="祈愿分析" />
+                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_WishAnalysis}" />
                         </StackPanel>
                     </PivotItem.Header>
                 </PivotItem>
@@ -315,7 +315,7 @@
                     Click="OnAboutButtonClick">
                 <StackPanel Orientation="Horizontal" Spacing="8">
                     <FontIcon Glyph="&#xE946;" FontSize="14" />
-                    <TextBlock Text="关于" />
+                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_About}" />
                 </StackPanel>
             </Button>
         </Grid>
@@ -335,8 +335,8 @@
                 <StackPanel HorizontalAlignment="Center" Spacing="8">
                     <FontIcon Glyph="&#xE9D2;" FontSize="48" HorizontalAlignment="Center"
                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
-                    <TextBlock Text="获取抽卡记录" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" />
-                    <TextBlock Text="选择一种方式导入你的祈愿记录，开始分析你的抽卡数据" FontSize="13"
+                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_GetRecords}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" />
+                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ImportHint}" FontSize="13"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center"
                                TextAlignment="Center" />
                 </StackPanel>
@@ -354,15 +354,15 @@
                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
                             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                                         Spacing="4">
-                                <TextBlock Text="通过米游社账号获取" FontWeight="SemiBold" FontSize="14"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_GetViaMiyoushe}" FontWeight="SemiBold" FontSize="14"
                                            HorizontalAlignment="Center" />
-                                <TextBlock Text="通过当前登录的米游社&#x0a;账号直接获取记录" FontSize="12"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_MiyousheDesc}" FontSize="12"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center" TextAlignment="Center" />
                             </StackPanel>
                             <Border Grid.Row="2" Background="{ThemeResource AccentFillColorDefaultBrush}"
                                     CornerRadius="4" Padding="8,2" HorizontalAlignment="Center">
-                                <TextBlock Text="推荐" FontSize="11" Foreground="White" FontWeight="SemiBold" />
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Recommended}" FontSize="11" Foreground="White" FontWeight="SemiBold" />
                             </Border>
                         </Grid>
                     </Button>
@@ -377,9 +377,9 @@
                             <FontIcon Glyph="&#xE71B;" FontSize="32" HorizontalAlignment="Center" />
                             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                                         Spacing="4">
-                                <TextBlock Text="通过 URL 获取" FontWeight="SemiBold" FontSize="14"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_GetViaUrl}" FontWeight="SemiBold" FontSize="14"
                                            HorizontalAlignment="Center" />
-                                <TextBlock Text="粘贴抽卡分析链接&#x0a;从 API 拉取记录" FontSize="12"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_UrlDesc}" FontSize="12"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center" TextAlignment="Center" />
                             </StackPanel>
@@ -396,9 +396,9 @@
                             <FontIcon Glyph="&#xE8B5;" FontSize="32" HorizontalAlignment="Center" />
                             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                                         Spacing="4">
-                                <TextBlock Text="导入 UIGF 文件" FontWeight="SemiBold" FontSize="14"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ImportUigf}" FontWeight="SemiBold" FontSize="14"
                                            HorizontalAlignment="Center" />
-                                <TextBlock Text="从标准UIGF格式&#x0a;JSON文件导入记录&#x0a;UIGF v4.x/3.0/2.x" FontSize="12"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_UigfDesc}" FontSize="12"
                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                            HorizontalAlignment="Center" TextAlignment="Center" />
                             </StackPanel>
@@ -447,7 +447,7 @@
                                               Click="OnListViewModeClick"
                                               Padding="8,4" MinWidth="0"
                                               Background="Transparent" BorderThickness="0"
-                                              ToolTipService.ToolTip="列表视图">
+                                              ToolTipService.ToolTip="{helpers:Loc Key=GachaAnalysis_ListView}">
                                     <FontIcon Glyph="&#xE8FD;" FontSize="15" />
                                 </ToggleButton>
                                 <ToggleButton x:Name="CardViewModeButton"
@@ -455,7 +455,7 @@
                                               Click="OnCardViewModeClick"
                                               Padding="8,4" MinWidth="0"
                                               Background="Transparent" BorderThickness="0"
-                                              ToolTipService.ToolTip="卡片视图">
+                                              ToolTipService.ToolTip="{helpers:Loc Key=GachaAnalysis_CardView}">
                                     <FontIcon Glyph="&#xE80A;" FontSize="15" />
                                 </ToggleButton>
                             </StackPanel>
@@ -464,35 +464,35 @@
                         <Button IsEnabled="{Binding ViewModel.IsFetching, Converter={StaticResource BoolInverter}}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE72C;" FontSize="14" />
-                                <TextBlock Text="更新数据" />
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_UpdateData}" />
                                 <FontIcon Glyph="&#xE70D;" FontSize="10" Margin="2,0,0,0" />
                             </StackPanel>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutSubItem Text="通过米游社账号获取">
+                                    <MenuFlyoutSubItem Text="{helpers:Loc Key=GachaAnalysis_GetViaMiyoushe}">
                                         <MenuFlyoutSubItem.Icon>
                                             <FontIcon Glyph="&#xE77B;" FontSize="14" />
                                         </MenuFlyoutSubItem.Icon>
-                                        <MenuFlyoutItem Text="增量更新（推荐）" Click="OnMiYouSheIncrementalUpdateClick"
+                                        <MenuFlyoutItem Text="{helpers:Loc Key=GachaAnalysis_IncrementalUpdate}" Click="OnMiYouSheIncrementalUpdateClick"
                                                         ToolTipService.ToolTip="仅获取本地没有的新增祈愿记录，速度快，推荐日常使用">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE710;" FontSize="14" />
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
-                                        <MenuFlyoutItem Text="全量更新" Click="OnMiYouSheFullUpdateClick"
+                                        <MenuFlyoutItem Text="{helpers:Loc Key=GachaAnalysis_FullUpdate}" Click="OnMiYouSheFullUpdateClick"
                                                         ToolTipService.ToolTip="重新拉取全部祈愿记录，耗时较长，可用于修复缺失的数据">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE72C;" FontSize="14" />
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
                                     </MenuFlyoutSubItem>
-                                    <MenuFlyoutItem Text="通过 URL 获取" Click="OnUrlFetchClick">
+                                    <MenuFlyoutItem Text="{helpers:Loc Key=GachaAnalysis_GetViaUrl}" Click="OnUrlFetchClick">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE71B;" FontSize="14" />
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
                                     <MenuFlyoutSeparator />
-                                    <MenuFlyoutItem Text="导入 UIGF 文件" Command="{x:Bind ViewModel.ImportUigfCommand}">
+                                    <MenuFlyoutItem Text="{helpers:Loc Key=GachaAnalysis_ImportUigf}" Command="{x:Bind ViewModel.ImportUigfCommand}">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE8B5;" FontSize="14" />
                                         </MenuFlyoutItem.Icon>
@@ -504,23 +504,23 @@
                             IsEnabled="{Binding ViewModel.IsFetching, Converter={StaticResource BoolInverter}}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE8B7;" FontSize="14" />
-                                <TextBlock Text="导出 UIGF" />
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ExportUigf}" />
                             </StackPanel>
                             <DropDownButton.Flyout>
                                 <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem Text="导出为 v4.2" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v4.2" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v4.2" />
-                                    <MenuFlyoutItem Text="导出为 v4.1" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v4.1" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v4.1" />
-                                    <MenuFlyoutItem Text="导出为 v4.0" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v4.0" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v4.0" />
-                                    <MenuFlyoutItem Text="导出为 v3.0" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v3.0" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v3.0" />
-                                    <MenuFlyoutItem Text="导出为 v2.4" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v2.4" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v2.4" />
-                                    <MenuFlyoutItem Text="导出为 v2.3" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v2.3" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v2.3" />
-                                    <MenuFlyoutItem Text="导出为 v2.2" Command="{x:Bind ViewModel.ExportUigfCommand}"
+                                    <MenuFlyoutItem Text="Export as v2.2" Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v2.2" />
                                 </MenuFlyout>
                             </DropDownButton.Flyout>
@@ -529,14 +529,14 @@
                                 IsEnabled="{Binding ViewModel.IsScraping, Converter={StaticResource BoolInverter}}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE8B9;" FontSize="14" />
-                                <TextBlock Text="刷新元数据" />
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_RefreshMetadata}" />
                             </StackPanel>
                         </Button>
                         <Button Click="OnDeleteGachaDataClick"
                                 IsEnabled="{Binding ViewModel.IsFetching, Converter={StaticResource BoolInverter}}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE74D;" FontSize="14" />
-                                <TextBlock Text="删除记录" />
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_DeleteRecords}" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -583,7 +583,7 @@
                                 <StackPanel Grid.Row="0" Padding="16" Spacing="12"
                                             Background="{ThemeResource LayerFillColorDefaultBrush}"
                                             CornerRadius="8,8,0,0">
-                                    <TextBlock Text="角色活动" FontSize="20" FontWeight="Bold" />
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_CharacterEvent}" FontSize="20" FontWeight="Bold" />
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -592,7 +592,7 @@
                                         <StackPanel>
                                             <TextBlock Text="{x:Bind ViewModel.CharacterStats.TotalCount, Mode=OneWay}"
                                                        FontSize="24" FontWeight="Bold" />
-                                            <TextBlock Text="总抽数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_TotalPulls}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                         <StackPanel Grid.Column="1">
@@ -600,26 +600,26 @@
                                                 Text="{Binding ViewModel.CharacterStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}"
                                                 FontSize="24" FontWeight="Bold"
                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}" />
-                                            <TextBlock Text="耗费原石数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PrimogemsSpent}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel Orientation="Horizontal" Spacing="16">
                                         <TextBlock FontSize="13">
-                                            <Run Text="五星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5Star}" />
                                             <Run Text="{x:Bind ViewModel.CharacterStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="13">
-                                            <Run Text="四星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4Star}" />
                                             <Run Text="{x:Bind ViewModel.CharacterStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
 
-                                    <ToggleButton Content="显示四星记录"
+                                    <ToggleButton Content="{helpers:Loc Key=GachaAnalysis_Show4Star}"
                                                   IsChecked="{x:Bind ViewModel.IsCharacterFourStarVisible, Mode=TwoWay}"
                                                   HorizontalAlignment="Stretch" />
                                 </StackPanel>
@@ -639,7 +639,7 @@
                                                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                                     Padding="12,2" HorizontalAlignment="Center"
                                                     VerticalAlignment="Center" CornerRadius="4">
-                                                    <TextBlock Text="四星" FontSize="14"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_4Star}" FontSize="14"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 </Border>
                                             </Grid>
@@ -652,7 +652,7 @@
                                                     Visibility="{Binding ViewModel.ShowCharacterNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                             <FontIcon Glyph="&#xE9D2;" FontSize="32"
                                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                            <TextBlock Text="暂无记录" FontSize="13"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                                        Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                                         </StackPanel>
                                     </Grid>
@@ -673,7 +673,7 @@
                                 <StackPanel Grid.Row="0" Padding="16" Spacing="12"
                                             Background="{ThemeResource LayerFillColorDefaultBrush}"
                                             CornerRadius="8,8,0,0">
-                                    <TextBlock Text="武器活动" FontSize="20" FontWeight="Bold" />
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_WeaponEvent}" FontSize="20" FontWeight="Bold" />
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -682,7 +682,7 @@
                                         <StackPanel>
                                             <TextBlock Text="{x:Bind ViewModel.WeaponStats.TotalCount, Mode=OneWay}"
                                                        FontSize="24" FontWeight="Bold" />
-                                            <TextBlock Text="总抽数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_TotalPulls}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                         <StackPanel Grid.Column="1">
@@ -690,26 +690,26 @@
                                                 Text="{Binding ViewModel.WeaponStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}"
                                                 FontSize="24" FontWeight="Bold"
                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}" />
-                                            <TextBlock Text="耗费原石数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PrimogemsSpent}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel Orientation="Horizontal" Spacing="16">
                                         <TextBlock FontSize="13">
-                                            <Run Text="五星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5Star}" />
                                             <Run Text="{x:Bind ViewModel.WeaponStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="13">
-                                            <Run Text="四星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4Star}" />
                                             <Run Text="{x:Bind ViewModel.WeaponStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
 
-                                    <ToggleButton Content="显示四星记录"
+                                    <ToggleButton Content="{helpers:Loc Key=GachaAnalysis_Show4Star}"
                                                   IsChecked="{x:Bind ViewModel.IsWeaponFourStarVisible, Mode=TwoWay}"
                                                   HorizontalAlignment="Stretch" />
                                 </StackPanel>
@@ -728,7 +728,7 @@
                                                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                                     Padding="12,2" HorizontalAlignment="Center"
                                                     VerticalAlignment="Center" CornerRadius="4">
-                                                    <TextBlock Text="四星" FontSize="14"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_4Star}" FontSize="14"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 </Border>
                                             </Grid>
@@ -740,7 +740,7 @@
                                                     Visibility="{Binding ViewModel.ShowWeaponNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                             <FontIcon Glyph="&#xE9D2;" FontSize="32"
                                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                            <TextBlock Text="暂无记录" FontSize="13"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                                        Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                                         </StackPanel>
                                     </Grid>
@@ -761,7 +761,7 @@
                                 <StackPanel Grid.Row="0" Padding="16" Spacing="12"
                                             Background="{ThemeResource LayerFillColorDefaultBrush}"
                                             CornerRadius="8,8,0,0">
-                                    <TextBlock Text="集录祈愿" FontSize="20" FontWeight="Bold" />
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ChronicledWish}" FontSize="20" FontWeight="Bold" />
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -771,7 +771,7 @@
                                             <TextBlock
                                                 Text="{x:Bind ViewModel.ChronicledStats.TotalCount, Mode=OneWay}"
                                                 FontSize="24" FontWeight="Bold" />
-                                            <TextBlock Text="总抽数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_TotalPulls}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                         <StackPanel Grid.Column="1">
@@ -779,26 +779,26 @@
                                                 Text="{Binding ViewModel.ChronicledStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}"
                                                 FontSize="24" FontWeight="Bold"
                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}" />
-                                            <TextBlock Text="耗费原石数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PrimogemsSpent}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel Orientation="Horizontal" Spacing="16">
                                         <TextBlock FontSize="13">
-                                            <Run Text="五星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5Star}" />
                                             <Run Text="{x:Bind ViewModel.ChronicledStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="13">
-                                            <Run Text="四星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4Star}" />
                                             <Run Text="{x:Bind ViewModel.ChronicledStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
 
-                                    <ToggleButton Content="显示四星记录"
+                                    <ToggleButton Content="{helpers:Loc Key=GachaAnalysis_Show4Star}"
                                                   IsChecked="{x:Bind ViewModel.IsChronicledFourStarVisible, Mode=TwoWay}"
                                                   HorizontalAlignment="Stretch" />
                                 </StackPanel>
@@ -818,7 +818,7 @@
                                                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                                     Padding="12,2" HorizontalAlignment="Center"
                                                     VerticalAlignment="Center" CornerRadius="4">
-                                                    <TextBlock Text="四星" FontSize="14"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_4Star}" FontSize="14"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 </Border>
                                             </Grid>
@@ -831,7 +831,7 @@
                                                     Visibility="{Binding ViewModel.ShowChronicledNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                             <FontIcon Glyph="&#xE9D2;" FontSize="32"
                                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                            <TextBlock Text="暂无记录" FontSize="13"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                                        Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                                         </StackPanel>
                                     </Grid>
@@ -852,7 +852,7 @@
                                 <StackPanel Grid.Row="0" Padding="16" Spacing="12"
                                             Background="{ThemeResource LayerFillColorDefaultBrush}"
                                             CornerRadius="8,8,0,0">
-                                    <TextBlock Text="常驻祈愿" FontSize="20" FontWeight="Bold" />
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_StandardWish}" FontSize="20" FontWeight="Bold" />
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
@@ -861,7 +861,7 @@
                                         <StackPanel>
                                             <TextBlock Text="{x:Bind ViewModel.StandardStats.TotalCount, Mode=OneWay}"
                                                        FontSize="24" FontWeight="Bold" />
-                                            <TextBlock Text="总抽数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_TotalPulls}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                         <StackPanel Grid.Column="1">
@@ -869,27 +869,27 @@
                                                 Text="{Binding ViewModel.StandardStats.TotalCount, Converter={StaticResource TotalToPrimogemsConverter}}"
                                                 FontSize="24" FontWeight="Bold"
                                                 Foreground="{ThemeResource SystemFillColorCautionBrush}" />
-                                            <TextBlock Text="耗费原石数" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PrimogemsSpent}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                     </Grid>
 
                                     <StackPanel Orientation="Horizontal" Spacing="16">
                                         <TextBlock FontSize="13">
-                                            <Run Text="五星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5Star}" />
                                             <Run Text="{x:Bind ViewModel.StandardStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="13">
-                                            <Run Text="四星已垫: " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4Star}" />
                                             <Run Text="{x:Bind ViewModel.StandardStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
 
 
-                                    <ToggleButton Content="显示四星记录"
+                                    <ToggleButton Content="{helpers:Loc Key=GachaAnalysis_Show4Star}"
                                                   IsChecked="{x:Bind ViewModel.IsStandardFourStarVisible, Mode=TwoWay}"
                                                   HorizontalAlignment="Stretch" />
                                 </StackPanel>
@@ -909,7 +909,7 @@
                                                     Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                                                     Padding="12,2" HorizontalAlignment="Center"
                                                     VerticalAlignment="Center" CornerRadius="4">
-                                                    <TextBlock Text="四星" FontSize="14"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_4Star}" FontSize="14"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                                 </Border>
                                             </Grid>
@@ -922,7 +922,7 @@
                                                     Visibility="{Binding ViewModel.ShowStandardNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                             <FontIcon Glyph="&#xE9D2;" FontSize="32"
                                                       Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
-                                            <TextBlock Text="暂无记录" FontSize="13"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                                        Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
                                         </StackPanel>
                                     </Grid>
@@ -943,15 +943,15 @@
                                 <StackPanel Grid.Row="0" Padding="16" Spacing="12"
                                             Background="{ThemeResource LayerFillColorDefaultBrush}"
                                             CornerRadius="8,8,0,0">
-                                    <TextBlock Text="图片资源库" FontSize="20" FontWeight="Bold" />
-                                    <TextBlock Text="已缓存的角色及武器基础图标数据" FontSize="12"
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ImageLibrary}" FontSize="20" FontWeight="Bold" />
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_CachedIconData}" FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                TextWrapping="Wrap" />
                                 </StackPanel>
 
                                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12,12,24,12">
                                     <StackPanel Spacing="8">
-                                        <TextBlock Text="角色" FontSize="14" FontWeight="SemiBold"
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Characters}" FontSize="14" FontWeight="SemiBold"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         <GridView
                                             ItemsSource="{x:Bind ViewModel.CharacterMetadataPreview, Mode=OneWay}"
@@ -983,7 +983,7 @@
                                         <Border Height="1" Background="{ThemeResource DividerStrokeColorDefaultBrush}"
                                                 Margin="0,4" />
 
-                                        <TextBlock Text="武器" FontSize="14" FontWeight="SemiBold"
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Weapons}" FontSize="14" FontWeight="SemiBold"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         <GridView ItemsSource="{x:Bind ViewModel.WeaponMetadataPreview, Mode=OneWay}"
                                                   SelectionMode="None">
@@ -1041,28 +1041,28 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="2">
-                                    <TextBlock Text="角色活动" FontSize="18" FontWeight="Bold"
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_CharacterEvent}" FontSize="18" FontWeight="Bold"
                                                Foreground="{ThemeResource SafeTextBrush}" />
                                     <StackPanel Orientation="Horizontal" Spacing="14">
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="共 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Total}" />
                                             <Run Text="{x:Bind ViewModel.CharacterStats.TotalCount, Mode=OneWay}" />
-                                            <Run Text=" 抽" />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="五星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5StarShort}" />
                                             <Run Text="{x:Bind ViewModel.CharacterStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="四星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4StarShort}" />
                                             <Run Text="{x:Bind ViewModel.CharacterStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <ToggleButton Grid.Column="1" Content="显示四星" VerticalAlignment="Center"
+                                <ToggleButton Grid.Column="1" Content="{helpers:Loc Key=GachaAnalysis_Show4StarShort}" VerticalAlignment="Center"
                                               IsChecked="{x:Bind ViewModel.IsCharacterFourStarVisible, Mode=TwoWay}" />
                             </Grid>
                             <GridView ItemsSource="{x:Bind ViewModel.CharacterFiveStars, Mode=OneWay}"
@@ -1094,7 +1094,7 @@
                                         Visibility="{Binding ViewModel.ShowCharacterNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                 <FontIcon Glyph="&#xE9D2;" FontSize="28"
                                           Foreground="{ThemeResource SafeSecondaryTextBrush}" />
-                                <TextBlock Text="暂无记录" FontSize="13"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                            Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                             </StackPanel>
                         </StackPanel>
@@ -1109,28 +1109,28 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="2">
-                                    <TextBlock Text="武器活动" FontSize="18" FontWeight="Bold"
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_WeaponEvent}" FontSize="18" FontWeight="Bold"
                                                Foreground="{ThemeResource SafeTextBrush}" />
                                     <StackPanel Orientation="Horizontal" Spacing="14">
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="共 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Total}" />
                                             <Run Text="{x:Bind ViewModel.WeaponStats.TotalCount, Mode=OneWay}" />
-                                            <Run Text=" 抽" />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="五星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5StarShort}" />
                                             <Run Text="{x:Bind ViewModel.WeaponStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="四星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4StarShort}" />
                                             <Run Text="{x:Bind ViewModel.WeaponStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <ToggleButton Grid.Column="1" Content="显示四星" VerticalAlignment="Center"
+                                <ToggleButton Grid.Column="1" Content="{helpers:Loc Key=GachaAnalysis_Show4StarShort}" VerticalAlignment="Center"
                                               IsChecked="{x:Bind ViewModel.IsWeaponFourStarVisible, Mode=TwoWay}" />
                             </Grid>
                             <GridView ItemsSource="{x:Bind ViewModel.WeaponFiveStars, Mode=OneWay}"
@@ -1162,7 +1162,7 @@
                                         Visibility="{Binding ViewModel.ShowWeaponNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                 <FontIcon Glyph="&#xE9D2;" FontSize="28"
                                           Foreground="{ThemeResource SafeSecondaryTextBrush}" />
-                                <TextBlock Text="暂无记录" FontSize="13"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                            Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                             </StackPanel>
                         </StackPanel>
@@ -1177,28 +1177,28 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="2">
-                                    <TextBlock Text="集录祈愿" FontSize="18" FontWeight="Bold"
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ChronicledWish}" FontSize="18" FontWeight="Bold"
                                                Foreground="{ThemeResource SafeTextBrush}" />
                                     <StackPanel Orientation="Horizontal" Spacing="14">
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="共 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Total}" />
                                             <Run Text="{x:Bind ViewModel.ChronicledStats.TotalCount, Mode=OneWay}" />
-                                            <Run Text=" 抽" />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="五星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5StarShort}" />
                                             <Run Text="{x:Bind ViewModel.ChronicledStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="四星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4StarShort}" />
                                             <Run Text="{x:Bind ViewModel.ChronicledStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <ToggleButton Grid.Column="1" Content="显示四星" VerticalAlignment="Center"
+                                <ToggleButton Grid.Column="1" Content="{helpers:Loc Key=GachaAnalysis_Show4StarShort}" VerticalAlignment="Center"
                                               IsChecked="{x:Bind ViewModel.IsChronicledFourStarVisible, Mode=TwoWay}" />
                             </Grid>
                             <GridView ItemsSource="{x:Bind ViewModel.ChronicledFiveStars, Mode=OneWay}"
@@ -1230,7 +1230,7 @@
                                         Visibility="{Binding ViewModel.ShowChronicledNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                 <FontIcon Glyph="&#xE9D2;" FontSize="28"
                                           Foreground="{ThemeResource SafeSecondaryTextBrush}" />
-                                <TextBlock Text="暂无记录" FontSize="13"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                            Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                             </StackPanel>
                         </StackPanel>
@@ -1245,28 +1245,28 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="2">
-                                    <TextBlock Text="常驻祈愿" FontSize="18" FontWeight="Bold"
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_StandardWish}" FontSize="18" FontWeight="Bold"
                                                Foreground="{ThemeResource SafeTextBrush}" />
                                     <StackPanel Orientation="Horizontal" Spacing="14">
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="共 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Total}" />
                                             <Run Text="{x:Bind ViewModel.StandardStats.TotalCount, Mode=OneWay}" />
-                                            <Run Text=" 抽" />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="五星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity5StarShort}" />
                                             <Run Text="{x:Bind ViewModel.StandardStats.CurrentPity, Mode=OneWay}"
                                                  FontWeight="Bold"
                                                  Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                                         </TextBlock>
                                         <TextBlock FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}">
-                                            <Run Text="四星已垫 " />
+                                            <Run Text="{helpers:Loc Key=GachaAnalysis_Pity4StarShort}" />
                                             <Run Text="{x:Bind ViewModel.StandardStats.CurrentPity4, Mode=OneWay}"
                                                  FontWeight="Bold" />
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <ToggleButton Grid.Column="1" Content="显示四星" VerticalAlignment="Center"
+                                <ToggleButton Grid.Column="1" Content="{helpers:Loc Key=GachaAnalysis_Show4StarShort}" VerticalAlignment="Center"
                                               IsChecked="{x:Bind ViewModel.IsStandardFourStarVisible, Mode=TwoWay}" />
                             </Grid>
                             <GridView ItemsSource="{x:Bind ViewModel.StandardFiveStars, Mode=OneWay}"
@@ -1298,7 +1298,7 @@
                                         Visibility="{Binding ViewModel.ShowStandardNoRecords, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                                 <FontIcon Glyph="&#xE9D2;" FontSize="28"
                                           Foreground="{ThemeResource SafeSecondaryTextBrush}" />
-                                <TextBlock Text="暂无记录" FontSize="13"
+                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_NoRecords}" FontSize="13"
                                            Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                             </StackPanel>
                         </StackPanel>
@@ -1319,7 +1319,7 @@
                                 Visibility="{Binding ViewModel.ShowAnalysisLoading, Converter={StaticResource BoolToVisibilityConverter}}">
                         <ProgressRing Width="36" Height="36"
                                       IsActive="{x:Bind ViewModel.IsAnalysisLoading, Mode=OneWay}" />
-                        <TextBlock Text="正在生成祈愿分析..."
+                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_GeneratingAnalysis}"
                                    FontSize="12"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                    HorizontalAlignment="Center" />
@@ -1338,7 +1338,7 @@
                         <StackPanel Spacing="12" HorizontalAlignment="Stretch">
                             <Grid>
                                 <StackPanel>
-                                    <TextBlock Text="祈愿分析" FontSize="22" FontWeight="SemiBold" />
+                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_WishAnalysis}" FontSize="22" FontWeight="SemiBold" />
                                     <TextBlock Text="{x:Bind ViewModel.AnalysisDashboard.DateRangeText, Mode=OneWay}"
                                                FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -1349,13 +1349,13 @@
                                     <Button Click="OnCopyAnalysisImageClick">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon Glyph="&#xE8C8;" FontSize="14" />
-                                            <TextBlock Text="复制图片" />
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_CopyImage}" />
                                         </StackPanel>
                                     </Button>
                                     <Button Click="OnSaveAnalysisImageClick">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon Glyph="&#xE74E;" FontSize="14" />
-                                            <TextBlock Text="保存图片" />
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_SaveImage}" />
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
@@ -1398,8 +1398,8 @@
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <StackPanel>
-                                            <TextBlock Text="出金抽卡方式统计" FontSize="16" FontWeight="SemiBold" />
-                                            <TextBlock Text="同一卡池同一时间的记录按一组抽卡计算" FontSize="12"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_GoldPullStats}" FontSize="16" FontWeight="SemiBold" />
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_GoldPullStatsDesc}" FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>
                                         <Grid Grid.Row="1" ColumnSpacing="18" RowSpacing="14"
@@ -1414,7 +1414,7 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <StackPanel Spacing="5" HorizontalAlignment="Center">
-                                                <TextBlock Text="十连出金率" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_TenPullGoldRate}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                            HorizontalAlignment="Center" />
                                                 <TextBlock
@@ -1428,11 +1428,11 @@
                                                     <Run Text="/" />
                                                     <Run
                                                         Text="{x:Bind ViewModel.AnalysisDashboard.TenPullCount, Mode=OneWay}" />
-                                                    <Run Text=" 组含五星" />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_GroupsWith5Star}" />
                                                 </TextBlock>
                                             </StackPanel>
                                             <StackPanel Grid.Column="1" Spacing="5" HorizontalAlignment="Center">
-                                                <TextBlock Text="单抽出金率" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_SinglePullGoldRate}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                            HorizontalAlignment="Center" />
                                                 <TextBlock
@@ -1446,30 +1446,30 @@
                                                     <Run Text="/" />
                                                     <Run
                                                         Text="{x:Bind ViewModel.AnalysisDashboard.SinglePullCount, Mode=OneWay}" />
-                                                    <Run Text=" 次含五星" />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_TimesWith5Star}" />
                                                 </TextBlock>
                                             </StackPanel>
                                             <StackPanel Grid.Column="2" Spacing="5" HorizontalAlignment="Center">
-                                                <TextBlock Text="五星角色均耗" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Avg5StarCost}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                            HorizontalAlignment="Center" />
                                                 <TextBlock FontSize="24" FontWeight="SemiBold"
                                                            HorizontalAlignment="Center">
                                                     <Run
                                                         Text="{x:Bind ViewModel.AnalysisDashboard.AverageFiveStarCharacterPullsText, Mode=OneWay}" />
-                                                    <Run Text=" 抽" />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                                 </TextBlock>
                                                 <TextBlock FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                                            HorizontalAlignment="Center">
-                                                    <Run Text="约 " />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_Approx}" />
                                                     <Run
                                                         Text="{x:Bind ViewModel.AnalysisDashboard.AverageFiveStarCharacterPrimogemsText, Mode=OneWay}" />
-                                                    <Run Text=" 原石" />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_PrimogemsUnit}" />
                                                 </TextBlock>
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Spacing="5" HorizontalAlignment="Center">
-                                                <TextBlock Text="活跃月份" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_ActiveMonths}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                            HorizontalAlignment="Center" />
                                                 <TextBlock
@@ -1478,15 +1478,15 @@
                                                 <TextBlock FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                                            HorizontalAlignment="Center">
-                                                    <Run Text="月均 " />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_MonthlyAvg}" />
                                                     <Run
                                                         Text="{x:Bind ViewModel.AnalysisDashboard.MonthlyAveragePullsText, Mode=OneWay}" />
-                                                    <Run Text=" 抽" />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                                 </TextBlock>
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Grid.Column="1" Spacing="5"
                                                         HorizontalAlignment="Center">
-                                                <TextBlock Text="峰值月份" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PeakMonth}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                            HorizontalAlignment="Center" />
                                                 <TextBlock
@@ -1500,16 +1500,16 @@
                                             </StackPanel>
                                             <StackPanel Grid.Row="1" Grid.Column="2" Spacing="5"
                                                         HorizontalAlignment="Center">
-                                                <TextBlock Text="五星平均" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_5StarAvg}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                            HorizontalAlignment="Center" />
                                                 <TextBlock FontSize="22" FontWeight="SemiBold"
                                                            HorizontalAlignment="Center">
                                                     <Run
                                                         Text="{x:Bind ViewModel.AnalysisDashboard.AverageFiveStarPullsText, Mode=OneWay}" />
-                                                    <Run Text=" 抽" />
+                                                    <Run Text="{helpers:Loc Key=GachaAnalysis_PullsUnit}" />
                                                 </TextBlock>
-                                                <TextBlock Text="全部卡池五星" FontSize="12"
+                                                <TextBlock Text="{helpers:Loc Key=GachaAnalysis_AllPools5Star}" FontSize="12"
                                                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                                                            HorizontalAlignment="Center" />
                                             </StackPanel>
@@ -1525,7 +1525,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="稀有度构成" FontSize="16" FontWeight="SemiBold" />
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_RarityComposition}" FontSize="16" FontWeight="SemiBold" />
                                         <Grid Grid.Row="1" ColumnSpacing="22" VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -1557,10 +1557,10 @@
                                                          Stroke="{ThemeResource CardStrokeColorDefaultBrush}"
                                                          StrokeThickness="1" />
                                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <TextBlock Text="稀有度" FontSize="13"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Rarity}" FontSize="13"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                                HorizontalAlignment="Center" />
-                                                    <TextBlock Text="占比" FontSize="18" FontWeight="SemiBold"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Proportion}" FontSize="18" FontWeight="SemiBold"
                                                                HorizontalAlignment="Center" />
                                                 </StackPanel>
                                             </Grid>
@@ -1580,7 +1580,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="卡池抽数分布" FontSize="16" FontWeight="SemiBold" />
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PoolPullDistribution}" FontSize="16" FontWeight="SemiBold" />
                                         <Grid Grid.Row="1" ColumnSpacing="22" VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -1612,10 +1612,10 @@
                                                          Stroke="{ThemeResource CardStrokeColorDefaultBrush}"
                                                          StrokeThickness="1" />
                                                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <TextBlock Text="卡池" FontSize="13"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Pool}" FontSize="13"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                                HorizontalAlignment="Center" />
-                                                    <TextBlock Text="分布" FontSize="18" FontWeight="SemiBold"
+                                                    <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Distribution}" FontSize="18" FontWeight="SemiBold"
                                                                HorizontalAlignment="Center" />
                                                 </StackPanel>
                                             </Grid>
@@ -1635,7 +1635,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="最近五星出货抽数" FontSize="16" FontWeight="SemiBold" />
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_Recent5StarPulls}" FontSize="16" FontWeight="SemiBold" />
                                         <ScrollViewer Grid.Row="1"
                                                       HorizontalScrollBarVisibility="Auto"
                                                       HorizontalScrollMode="Enabled"
@@ -1671,7 +1671,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="四星出货 Top10" FontSize="16" FontWeight="SemiBold" />
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_4StarTop10}" FontSize="16" FontWeight="SemiBold" />
                                         <ScrollViewer Grid.Row="1"
                                                       HorizontalScrollBarVisibility="Auto"
                                                       HorizontalScrollMode="Enabled"
@@ -1707,7 +1707,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="五星垫数区间" FontSize="16" FontWeight="SemiBold" />
+                                        <TextBlock Text="{helpers:Loc Key=GachaAnalysis_PityInterval}" FontSize="16" FontWeight="SemiBold" />
                                         <ScrollViewer Grid.Row="1"
                                                       HorizontalScrollBarVisibility="Disabled"
                                                       HorizontalScrollMode="Disabled"
@@ -1743,8 +1743,8 @@
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <StackPanel>
-                                            <TextBlock Text="月度抽卡趋势" FontSize="16" FontWeight="SemiBold" />
-                                            <TextBlock Text="全部卡池 1-5 星按月份统计"
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_MonthlyTrend}" FontSize="16" FontWeight="SemiBold" />
+                                            <TextBlock Text="{helpers:Loc Key=GachaAnalysis_MonthlyTrendDesc}"
                                                        FontSize="12"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                         </StackPanel>

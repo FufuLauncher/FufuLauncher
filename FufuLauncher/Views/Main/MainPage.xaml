@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:FufuLauncher.ViewModels"
     x:Name="MainPageRoot"
+    NavigationCacheMode="Required"
     Background="Transparent"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
@@ -172,15 +173,8 @@
                     </Grid.Shadow>
 
                     <Border
-                        x:Name="InfoCardSolidBg"
-                        Background="Transparent"
-                        CornerRadius="12"
-                        Opacity="0.5" />
-                    <Border
-                        x:Name="InfoCardBlurBg"
                         Background="{ThemeResource IosGlassBrush}"
-                        CornerRadius="12"
-                        Opacity="0.0" />
+                        CornerRadius="12" />
 
                     <Grid
                         x:Name="InfoCardGrid"
@@ -342,7 +336,7 @@
                                 </Style>
                             </Pivot.Resources>
 
-                            <PivotItem Header="活动">
+                            <PivotItem Header="{helpers:Loc Key=HomeTab_Events}">
                                 <ListView
                                     Padding="4,0,4,4"
                                     ItemTemplate="{StaticResource NewsItemTemplate}"
@@ -350,7 +344,7 @@
                                     SelectionMode="None" />
                             </PivotItem>
 
-                            <PivotItem Header="公告">
+                            <PivotItem Header="{helpers:Loc Key=HomeTab_Announcements}">
                                 <ListView
                                     Padding="4,0,4,4"
                                     ItemTemplate="{StaticResource NewsItemTemplate}"
@@ -358,7 +352,7 @@
                                     SelectionMode="None" />
                             </PivotItem>
 
-                            <PivotItem Header="资讯">
+                            <PivotItem Header="{helpers:Loc Key=HomeTab_News}">
                                 <ListView
                                     Padding="4,0,4,4"
                                     ItemTemplate="{StaticResource NewsItemTemplate}"
@@ -385,15 +379,8 @@
                         </Grid.Shadow>
 
                         <Border
-                            x:Name="CheckinCardSolidBg"
-                            Background="Transparent"
-                            CornerRadius="8"
-                            Opacity="0.5" />
-                        <Border
-                            x:Name="CheckinCardBlurBg"
                             Background="{ThemeResource IosGlassBrush}"
-                            CornerRadius="8"
-                            Opacity="0.0" />
+                            CornerRadius="8" />
 
                         <Grid
                             x:Name="CheckinCardGrid"
@@ -423,7 +410,7 @@
                                     FontWeight="SemiBold"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Opacity="0.9"
-                                    Text="原神签到" />
+                                    Text="{helpers:Loc Key=Home_CheckinCard}" />
 
                                 <Button
                                     Grid.Column="1"
@@ -435,7 +422,7 @@
                                     BorderThickness="0"
                                     Click="RefreshTokenButton_Click"
                                     CornerRadius="4"
-                                    ToolTipService.ToolTip="刷新Token">
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RefreshToken}">
                                     <FontIcon
                                         FontSize="11"
                                         Foreground="{Binding GameCheckinTextBrush, Mode=OneWay}"
@@ -451,7 +438,7 @@
                                     BorderThickness="0"
                                     Click="OpenCheckinSettings_Click"
                                     CornerRadius="4"
-                                    ToolTipService.ToolTip="进入签到配置">
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_GoToCheckinConfig}">
                                     <FontIcon
                                         FontSize="11"
                                         Foreground="{Binding GameCheckinTextBrush, Mode=OneWay}"
@@ -511,7 +498,7 @@
                                     BorderThickness="0"
                                     Click="OpenCheckinCalendar_Click"
                                     CornerRadius="6"
-                                    ToolTipService.ToolTip="奖励日历">
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RewardsCalendar}">
                                     <FontIcon
                                         FontSize="13"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -544,15 +531,8 @@
                         </Grid.Shadow>
 
                         <Border
-                            x:Name="DailyNoteCardSolidBg"
-                            Background="Transparent"
-                            CornerRadius="8"
-                            Opacity="0.5" />
-                        <Border
-                            x:Name="DailyNoteCardBlurBg"
                             Background="{ThemeResource IosGlassBrush}"
-                            CornerRadius="8"
-                            Opacity="0.0" />
+                            CornerRadius="8" />
 
                         <Grid
                             x:Name="DailyNoteCardGrid"
@@ -578,7 +558,7 @@
                                     FontWeight="SemiBold"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     Opacity="0.9"
-                                    Text="原神便签" />
+                                    Text="{helpers:Loc Key=Home_DailyNotesCard}" />
                                 <Button
                                     Grid.Column="1"
                                     Width="24"
@@ -588,7 +568,7 @@
                                     BorderThickness="0"
                                     Click="RefreshDailyNoteButton_Click"
                                     CornerRadius="4"
-                                    ToolTipService.ToolTip="刷新便签">
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RefreshNotes}">
                                     <FontIcon
                                         FontSize="11"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -605,7 +585,7 @@
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                     IsHitTestVisible="False"
                                     Opacity="0.8"
-                                    Text="无数据" />
+                                    Text="{helpers:Loc Key=Home_NoData}" />
 
                                 <StackPanel
                                     x:Name="DailyNoteDataPanel"
@@ -626,7 +606,7 @@
                                                 FontSize="11"
                                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
-                                                Text="树脂" />
+                                                Text="{helpers:Loc Key=Home_Resin}" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
@@ -652,7 +632,7 @@
                                                 FontSize="11"
                                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
-                                                Text="每日委托" />
+                                                Text="{helpers:Loc Key=Home_DailyQuests}" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
@@ -678,7 +658,7 @@
                                                 FontSize="11"
                                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
-                                                Text="洞天宝钱" />
+                                                Text="{helpers:Loc Key=Home_RealmCurrency}" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
@@ -704,7 +684,7 @@
                                                 FontSize="11"
                                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
-                                                Text="探索派遣" />
+                                                Text="{helpers:Loc Key=Home_Expeditions}" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
@@ -730,7 +710,7 @@
                                                 FontSize="11"
                                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                                 Opacity="0.7"
-                                                Text="参量质变仪" />
+                                                Text="{helpers:Loc Key=Home_Transformer}" />
                                             <TextBlock
                                                 FontSize="13"
                                                 FontWeight="SemiBold"
@@ -812,7 +792,7 @@
                         BorderThickness="0"
                         Click="AnnouncementBell_Click"
                         CornerRadius="22"
-                        ToolTipService.ToolTip="公告">
+                        ToolTipService.ToolTip="{helpers:Loc Key=HomeTab_Announcements}">
                         <FontIcon
                             FontSize="18"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -827,7 +807,7 @@
                         BorderThickness="0"
                         CornerRadius="22"
                         IsEnabled="{x:Bind ViewModel.IsBackgroundToggleEnabled, Mode=OneWay}"
-                        ToolTipService.ToolTip="切换背景">
+                        ToolTipService.ToolTip="{helpers:Loc Key=Home_ToggleBg}">
                         <Button.Flyout>
                             <Flyout x:Name="BackgroundFlyout" Placement="BottomEdgeAlignedRight">
                                 <GridView
@@ -879,7 +859,7 @@
                         IsEnabled="{x:Bind ViewModel.IsLaunchButtonEnabled, Mode=OneWay}"
                         PointerEntered="ScreenshotButton_PointerEntered"
                         PointerExited="ScreenshotButton_PointerExited"
-                        ToolTipService.ToolTip="截图文件夹">
+                        ToolTipService.ToolTip="{helpers:Loc Key=Home_ScreenshotFolder}">
                         <FontIcon
                             FontSize="18"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -962,7 +942,7 @@
                             FontWeight="SemiBold"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Opacity="0.9"
-                            Text="小工具" />
+                            Text="{helpers:Loc Key=Home_Widgets}" />
                         <VariableSizedWrapGrid
                             ItemHeight="42"
                             ItemWidth="42"
@@ -978,7 +958,7 @@
                                 BorderThickness="0"
                                 Click="OnOpenGachaAnalysisClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="抽卡记录分析"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetGacha}"
                                 Visibility="{x:Bind ViewModel.WidgetGachaVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" />
@@ -993,7 +973,7 @@
                                 BorderThickness="0"
                                 Click="OnOpenAchievementsClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="成就追踪"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetAchievement}"
                                 Visibility="{x:Bind ViewModel.WidgetAchievementVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" />
@@ -1008,7 +988,7 @@
                                 BorderThickness="0"
                                 Click="OnOpenInventoryClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="背包物品"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetInventory}"
                                 Visibility="{x:Bind ViewModel.WidgetInventoryVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" />
@@ -1023,7 +1003,7 @@
                                 BorderThickness="0"
                                 Click="OnOpenPlayerRolesClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="角色练度查询"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetPlayerRole}"
                                 Visibility="{x:Bind ViewModel.WidgetPlayerRoleVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" />
@@ -1038,7 +1018,7 @@
                                 BorderThickness="0"
                                 Click="OnOpenDailyNoteClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="旅行便签"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetNotes}"
                                 Visibility="{x:Bind ViewModel.WidgetDailyNoteWindowVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" />
@@ -1053,7 +1033,7 @@
                                 BorderThickness="0"
                                 Click="OnOpenVideoResourcesClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="视频资源库"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetVideo}"
                                 Visibility="{x:Bind ViewModel.WidgetVideoVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" />
@@ -1068,7 +1048,7 @@
                                 BorderThickness="0"
                                 Click="BBSButton_Click"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="战绩信息"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetBBS}"
                                 Visibility="{x:Bind ViewModel.WidgetBBSVisibility, Mode=OneWay}">
                                 <Image
                                     Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" />
@@ -1083,7 +1063,7 @@
                                 BorderThickness="0"
                                 Click="OnWidgetSettingsClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="增加小工具">
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_AddWidget}">
                                 <FontIcon
                                     FontSize="14"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -1099,7 +1079,7 @@
                                 BorderThickness="0"
                                 Click="OnWidgetSettingsClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="移除小工具">
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_RemoveWidget}">
                                 <FontIcon
                                     FontSize="14"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -1116,7 +1096,7 @@
                                 BorderThickness="0"
                                 Click="OnToggleWidgetFlyoutModeClick"
                                 CornerRadius="8"
-                                ToolTipService.ToolTip="切换详细功能提示">
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_ToggleTooltip}">
                                 <FontIcon
                                     x:Name="WidgetEyeIcon"
                                     FontSize="14"
@@ -1152,7 +1132,7 @@
                                 FontWeight="SemiBold"
                                 Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                 Opacity="0.9"
-                                Text="快速预设" />
+                                Text="{helpers:Loc Key=Home_QuickPresets}" />
                             <Button
                                 Grid.Column="1"
                                 Width="24"
@@ -1162,7 +1142,7 @@
                                 BorderThickness="0"
                                 Command="{x:Bind ViewModel.OpenPresetManagerCommand}"
                                 CornerRadius="4"
-                                ToolTipService.ToolTip="管理">
+                                ToolTipService.ToolTip="{helpers:Loc Key=Home_ManagePresets}">
                                 <FontIcon
                                     FontSize="11"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -1211,7 +1191,7 @@
                             FontSize="12"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                             Opacity="0.6"
-                            Text="未固定任何预设"
+                            Text="{helpers:Loc Key=Home_NoPresetsPinned}"
                             Visibility="{x:Bind ViewModel.IsPinnedPresetsEmpty, Mode=OneWay}" />
                     </StackPanel>
                 </Border>
@@ -1239,11 +1219,11 @@
                         <MenuFlyoutItem
                             Click="SwitchToBilibili_Click"
                             Icon="Switch"
-                            Text="切换到 Bilibili 服" />
+                            Text="{helpers:Loc Key=Home_SwitchBilibili}" />
                         <MenuFlyoutItem
                             Click="SwitchToOfficial_Click"
                             Icon="Switch"
-                            Text="切换到 官方服务器" />
+                            Text="{helpers:Loc Key=Home_SwitchOfficial}" />
                     </MenuFlyout>
                 </Button.ContextFlyout>
 

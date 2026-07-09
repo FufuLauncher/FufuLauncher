@@ -45,12 +45,9 @@ public partial class App : Application
 
         SentrySdk.FlushAsync(TimeSpan.FromSeconds(2)).Wait();
 
-        var message = $"程序遇到了一个错误\n\n" +
-                      $"错误来源: {source}\n" +
-                      $"错误信息: {ex.Message}\n\n" +
-                      $"堆栈信息:\n{ex.StackTrace}";
+        var message = string.Format("Crash_Message".GetLocalized(), source, ex.Message, ex.StackTrace);
         
-        MessageBox(IntPtr.Zero, message, "芙芙启动器发生了异常", MB_OK | MB_ICONERROR);
+        MessageBox(IntPtr.Zero, message, "Crash_Title".GetLocalized(), MB_OK | MB_ICONERROR);
     }
 
     public static T GetService<T>()
@@ -65,6 +62,12 @@ public partial class App : Application
     }
 
     public static WindowEx MainWindow { get; private set; }
+
+    /// <summary>
+    /// Tracks the language selected on the first-run language selection page,
+    /// so the AgreementPage can show the appropriate agreement text.
+    /// </summary>
+    public static ViewModels.AppLanguage? FirstRunSelectedLanguage { get; set; }
 
     public static UIElement? AppTitlebar
     {
@@ -151,6 +154,8 @@ public partial class App : Application
                     services.AddTransient<OtherPage>();
                     services.AddSingleton<IAutoClickerService, AutoClickerService>();
                     services.AddSingleton<IScreenshotService, ScreenshotService>();
+                    services.AddTransient<LanguageSelectionViewModel>();
+                    services.AddTransient<LanguageSelectionPage>();
                     services.AddTransient<AgreementViewModel>();
                     services.AddTransient<AgreementPage>();
                     services.AddSingleton<IUpdateService, UpdateService>();
@@ -356,6 +361,10 @@ public partial class App : Application
             }
             else
             {
+                // On first run, apply system default language so the language
+                // selection page shows in the user's OS language.
+                await ApplyLanguageSettingAsync();
+
                 WeakReferenceMessenger.Default.Register<Messages.AgreementAcceptedMessage>(this, (r, m) =>
                 {
                     WeakReferenceMessenger.Default.Unregister<Messages.AgreementAcceptedMessage>(r);
@@ -508,6 +517,7 @@ public partial class App : Application
                 try
                 {
                     var mediaPlayer = new MediaPlayer();
+                    MediaPlayerHelper.DisableSystemMediaControls(mediaPlayer);
                     mediaPlayer.Source = MediaSource.CreateFromUri(new Uri(path));
                     mediaPlayer.Volume = 0.7;
 
@@ -601,6 +611,8 @@ public partial class App : Application
             var localSettingsService = GetService<ILocalSettingsService>();
             var languageValue = await localSettingsService.ReadSettingAsync("AppLanguage");
 
+            Debug.WriteLine($"[App] ApplyLanguageSettingAsync: raw value='{languageValue}' (type={languageValue?.GetType().Name ?? "null"})");
+
             if (languageValue != null && int.TryParse(languageValue.ToString(), out int languageCode))
             {
                 var language = (AppLanguage)languageCode;
@@ -609,13 +621,35 @@ public partial class App : Application
                     AppLanguage.zhCN => "zh-CN",
                     AppLanguage.zhTW => "zh-TW",
                     AppLanguage.enUS => "en-US",
+                    AppLanguage.fr => "fr-FR",
+                    AppLanguage.de => "de-DE",
+                    AppLanguage.ru => "ru-RU",
+                    AppLanguage.ja => "ja-JP",
+                    AppLanguage.es => "es-ES",
+                    AppLanguage.esMX => "es-MX",
+                    AppLanguage.ko => "ko-KR",
+                    AppLanguage.it => "it-IT",
+                    AppLanguage.id => "id-ID",
+                    AppLanguage.pt => "pt-BR",
                     _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
                 };
 
-                Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
+                Debug.WriteLine($"[App] ApplyLanguageSettingAsync: language={language}, culture='{culture}'");
+
+                // PrimaryLanguageOverride is NOT available for unpackaged apps.
+                // Use ResourceExtensions.SetLanguage to control MRT via ResourceContext instead.
+                Helpers.ResourceExtensions.SetLanguage(
+                    language == AppLanguage.Default ? null : culture);
+            }
+            else
+            {
+                Debug.WriteLine($"[App] ApplyLanguageSettingAsync: skipped (languageValue is null or unparseable)");
             }
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[App] ApplyLanguageSettingAsync ERROR: {ex.Message}");
+        }
     }
     private void ApplyLanguageSetting()
     {
@@ -634,6 +668,16 @@ public partial class App : Application
                     AppLanguage.zhCN => "zh-CN",
                     AppLanguage.zhTW => "zh-TW",
                     AppLanguage.enUS => "en-US",
+                    AppLanguage.fr => "fr-FR",
+                    AppLanguage.de => "de-DE",
+                    AppLanguage.ru => "ru-RU",
+                    AppLanguage.ja => "ja-JP",
+                    AppLanguage.es => "es-ES",
+                    AppLanguage.esMX => "es-MX",
+                    AppLanguage.ko => "ko-KR",
+                    AppLanguage.it => "it-IT",
+                    AppLanguage.id => "id-ID",
+                    AppLanguage.pt => "pt-BR",
                     _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
                 };
 

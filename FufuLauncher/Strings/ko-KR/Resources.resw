@@ -1,0 +1,1418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>Batch Save Failed</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>Batch generated and overwrote all avatar sizes</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>Clear Failed</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>Avatar size {0}x{0} cleared</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>Avatar cropped and saved successfully</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>No avatar found to edit</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>Notice</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>Import Failed</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>Load Failed</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>Save Failed</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>If you have NVIDIA RTX 40-series or newer AI frame generation enabled, or use frame display software such as RTSS or MSI Afterburner, it may cause the game to freeze or fail to start normally.</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>Don&apos;t show this warning again</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>Compatibility Warning</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>The frame rate display plugin hash does not match. It may have been tampered with or corrupted. Please reinstall the launcher.</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>Repair Failed</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS display plugin has been successfully repaired and installed</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>Repairing FPS Plugin</value></data>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>언어 변경됨</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>언어가 변경되었습니다. 일부 UI 요소는 완전히 적용되려면 다시 시작해야 합니다.</value></data>
+  <data name="LanguageSelection_Title" xml:space="preserve"><value>언어 선택</value></data>
+  <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>사용할 언어를 선택하세요</value></data>
+  <data name="LanguageSelection_Confirm" xml:space="preserve"><value>확인</value></data>
+  <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>시스템 기본값</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>선택됨</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>This project is currently maintained by an individual developer (CodeCubist).
+We adhere to a player pain-point-driven development direction, promoting open, transparent, and efficient updates.
+Submitting Pull Requests is the core way for users with coding skills to help advance development, optimize structure, and share project maintenance responsibilities.
+If you can help, please use the button below to visit the code repository and submit your contribution.</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>Visit GitHub Repository to Submit Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>Your computer may be ARM-based. The injection feature is not available on ARM-based computers. Are you sure you want to continue enabling it?</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>Continue Enabling</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>Architecture Compatibility Warning</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>Plugin files are abnormal.
+This is usually because the plugin was falsely flagged and blocked by antivirus software (such as Windows Defender) or has been damaged.
+
+Recommendations:
+1. Add the software directory to the antivirus whitelist
+2. Re-download and install the plugin on this page</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>Plugin May Be Corrupted</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>Backup</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>Extracting and installing...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>Installation failed: {0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>Connection failed, trying backup line...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>Main</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>Manual Download</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0} line downloading... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>Plugin installed and refreshed</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>Getting Plugin</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>File not found, please confirm launcher files are complete</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>Main plugin DLL file not found. The plugin may not be installed, was accidentally deleted, or was blocked by antivirus software. Please re-download the plugin, or add the launcher directory to the antivirus whitelist and try again.</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>Main Plugin Missing</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>Enter new preset name</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>Create New Preset</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>Are you sure you want to delete the preset &quot;{0}&quot;? This action cannot be undone!</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>Lock reason: {0}
+
+If you continue, this warning will be ignored and the preset&apos;s Hash will be updated to the current plugin Hash, unlocking the preset. Continue?</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>Continue and Unlock</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>Configuration Preset Locked</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>Confirm Reset</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>Remove all presets for the current plugin and re-download the defaults? This action cannot be undone!</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>Reset All Presets</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>지금 다시 시작</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>나중에 다시 시작</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>버전 {0}</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>인젝션 설정</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>내장 엔진을 통해 플러그인 인젝션</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>외부 프로그램으로 실행 및 인젝션</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>FufuLauncher</value></data>
+  <data name="Show" xml:space="preserve"><value>표시</value></data>
+  <data name="Hide" xml:space="preserve"><value>숨기기</value></data>
+  <data name="Enabled" xml:space="preserve"><value>활성화됨</value></data>
+  <data name="Disabled" xml:space="preserve"><value>비활성화됨</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>색상 (Hex)</value></data>
+  <data name="Opacity" xml:space="preserve"><value>불투명도</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>기본값 복원</value></data>
+  <data name="Browse" xml:space="preserve"><value>찾아보기</value></data>
+  <data name="Clear" xml:space="preserve"><value>지우기</value></data>
+  <data name="High" xml:space="preserve"><value>높음</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>외관 및 개인 설정</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>홈 텍스트 스타일</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>언어 및 지역</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>게임 실행 설정</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>배경 및 시각 효과</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>창 효과</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>시작 사운드</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>출석 체크 설정</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>고급 옵션</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>스크린샷 설정</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>업데이트 확인</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>정보</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>개발자 라이선스 인증</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>앱 테마</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>앱의 표시 테마를 선택하세요</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>라이트 모드</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>다크 모드</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>시스템 설정 따르기</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>사용자 지정 앱 테마 색상</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>Hex 색상 코드를 입력하세요. 비워 두고 다시 시작하면 기본값으로 복원됩니다.</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>홈 카드 표시</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>홈 페이지에서 게임 소식 및 출석 체크 카드 표시/숨기기</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>게임 소식 카드 숨기기</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>출석 체크 카드 숨기기</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>빠른 프리셋 카드 표시</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>위젯 카드 표시</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>위젯 카드 표시 항목</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>위젯 카드에 표시할 도구를 선택하세요</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>기원 기록 분석 표시</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>업적 추적 표시</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>인벤토리 아이템 표시</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>캐릭터 육성 조회 표시</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>여행자 노트 표시</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>비디오 라이브러리 표시</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>전투 기록 표시</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>실행 버튼 배경 색상</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>노트 카드 표시 항목</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>표시할 항목을 선택하세요 (최대 3개)</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>알림</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>노트 데이터는 HoYoLAB 게임 기록 API에서 가져옵니다. 너무 자주 새로고침하면 CAPTCHA가 발생할 수 있으며, 심한 경우 위험 관리로 일시적으로 접근이 차단될 수 있습니다. 새로고침 빈도를 줄이고 나중에 다시 시도하세요.</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>노트 카드 숨기기</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>레진 표시</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>일일 의뢰 표시</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>선계 재화 표시</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>탐사 표시</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>매개 변수 변환기 표시</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>내비게이션 바 표시 항목</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>왼쪽 사이드바에 표시할 항목을 선택하세요. 항목을 숨겨도 비활성화되지 않으며 설정에서 다시 활성화할 수 있습니다. 홈과 설정은 숨길 수 없습니다.</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>배경 오버레이 불투명도</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>프레임 배경 불투명도</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>배경 이미지 불투명도</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>닫을 때 트레이로 최소화</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>창 크기 기억</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>최소 창 크기 제한</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>게임 소식 카드 텍스트 색상 및 불투명도</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>실행 버튼 텍스트 색상 및 불투명도</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>게임 출석 체크 텍스트 색상 및 불투명도</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>앱 표시 언어</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>앱을 다시 시작하면 적용됩니다</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>중국어 간체 (권장)</value></data>
+  <data name="LangZhTW" xml:space="preserve"><value>중국어 번체</value></data>
+  <data name="LangEnUS" xml:space="preserve"><value>English</value></data>
+  <data name="LangFr" xml:space="preserve"><value>Français</value></data>
+  <data name="LangDe" xml:space="preserve"><value>Deutsch</value></data>
+  <data name="LangRu" xml:space="preserve"><value>Русский</value></data>
+  <data name="LangJa" xml:space="preserve"><value>日本語</value></data>
+  <data name="LangEs" xml:space="preserve"><value>Español</value></data>
+  <data name="LangEsMX" xml:space="preserve"><value>스페인어 (멕시코)</value></data>
+  <data name="LangKo" xml:space="preserve"><value>한국어</value></data>
+  <data name="LangIt" xml:space="preserve"><value>이탈리아어</value></data>
+  <data name="LangId" xml:space="preserve"><value>인도네시아어</value></data>
+  <data name="LangPt" xml:space="preserve"><value>포르투갈어 (브라질)</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>시스템 기본 언어 사용</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>실행 창 모드</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>일반 창</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>팝업 창 (테두리 없음)</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>게임 해상도</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>게임 실행 시 창 크기를 설정하세요</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>너비 (픽셀)</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>높이 (픽셀)</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>빠른 프리셋</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>HDR 밝기 설정</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>게임 내 HDR 최대 밝기 및 UI 밝기 조정</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>HDR 설정 열기</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>대상 모니터</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>게임을 실행할 모니터를 지정하세요</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>모니터 식별</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>고급 실행 매개변수</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>사용자 지정 매개변수가 실행 명령 뒤에 추가됩니다</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>사용자 지정 실행 매개변수</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>예: -fullscreen -high</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>팁: 매개변수는 실행 명령 뒤에 추가됩니다. 게임 경로를 입력하지 마세요. 응답이 없으면 프리셋 버튼을 몇 번 더 클릭해 보세요.</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>사용자 지정 게임 실행 파일 이름</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>감지 및 실행에 사용할 .exe 파일 이름을 사용자 지정하세요. 비워 두면 기본값(YuanShen.exe / GenshinImpact.exe)을 사용합니다.</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>예: YuanShen.exe</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>인젝션 모듈</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>인젝션 모듈 선택</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>내장 인젝션</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>독립형 인젝션</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>내장은 런처 엔진으로 플러그인을 로드하며, 독립형은 외부 프로그램을 사용합니다. 내장 방식이 호환되지 않을 때 유용합니다.</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>리딤 코드 알림</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>새 리딤 코드 공개 시 즉시 알림</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>새로운 리딤 코드에 대한 즉시 알림을 만료 카운트다운과 함께 받습니다. 각 코드는 한 번만 알립니다.</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>실행 후 동작</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>게임 실행 후</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>트레이로 최소화하고 계속 실행하거나, 게임 실행 후 상태를 저장하고 종료합니다.</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>사용자 지정 배경 사용</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>배경 소스</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>사용자 지정 배경 이미지 선택...</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>사용자 지정 배경 지우기</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>배경 슬라이드쇼 모드</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>슬라이드쇼 이미지 폴더 선택...</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>슬라이드쇼 이미지 폴더 지우기</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>슬라이드쇼 간격 (초)</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>공식 배경 서버</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>중국 서버 (Skyisland)</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>글로벌 서버 (Teyvat)</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>공식 배경 API</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>비워 두면 현재 서버의 기본 API를 사용합니다. 사용자 지정 API는 공식 getAllGameBasicInfo와 동일한 데이터 구조를 반환해야 합니다.</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>사용자 지정 공식 배경 API URL 입력</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>기본 API로 초기화</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>공식 배경 에셋 가져오기</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>최신 배경 이미지 다운로드</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>최신 배경 비디오 다운로드</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>아크릴 블러 오버레이 사용</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>단색</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>아크릴 블러</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>참고: 비디오 배경은 성능을 위해 반투명 단색 오버레이로 대체됩니다.</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>페이지 오버레이 반투명 모드</value></data>
+  <data name="Opaque" xml:space="preserve"><value>불투명</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>반투명</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>활성화하면 페이지 오버레이가 반투명해져 배경이 비쳐 보입니다.</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>오버레이 불투명도</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>창 배경 소재</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>창 배경의 시각 효과를 선택하세요</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrylic</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>참고: Mica는 Windows 11에서만 사용할 수 있습니다.</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>사이드바 햄버거 버튼 표시</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>사이드바 상단에 확장/축소 버튼을 표시합니다.</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>게임 실행 사운드 사용</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>오디오 파일 선택...</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>오디오 파일 지우기</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>게임 출석 체크</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>미호요 커뮤니티 일일 출석 보상 수령 (원석, 모라 등)</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>커뮤니티 출석 체크</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>커뮤니티 상호작용 작업을 자동으로 완료하여 미호요 코인 획득</value></data>
+  <data name="Like" xml:space="preserve"><value>좋아요</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>게시물 읽기</value></data>
+  <data name="Share" xml:space="preserve"><value>공유</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>클라우드 게임 출석 체크</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>클라우드 게임 출석 보상을 수령합니다. 계정 목록에 클라우드 게임 자격 증명을 추가해야 합니다.</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>실행 시 자동 출석 체크</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>오늘 아직 출석 체크하지 않았다면 실행 시 자동으로 체크합니다</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>일괄 출석 체크</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>체크된 모든 계정에 대해 출석 작업 실행, 그렇지 않으면 현재 계정만 사용</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>계정 목록</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>클라우드 게임 자격 증명 추가</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>CAPTCHA가 발생하나요?</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>게임 및 커뮤니티 출석 체크 시 CAPTCHA가 발생할 수 있습니다. 실제 기기 정보를 설정하여 위험을 줄이거나, CAPTCHA 서비스가 있는 자체 호스팅 버전을 사용하세요.</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>자체 호스팅 버전</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>BetterGI 통합 사용</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>게임과 함께 BetterGI 실행</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>BetterGI 실행 지연 (초)</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>지연을 비활성화하려면 0으로 설정, BetterGI에만 적용됩니다</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>게임 종료 시 BetterGI 닫기</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>게임을 종료하면 BetterGI를 자동으로 닫습니다</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>브라우저 캐시 정리</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>내장 브라우저(WebView2)에서 생성된 캐시 파일 정리</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>캐시 지우기</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>프로세스 우선순위</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>런처의 CPU 스케줄링 우선순위 조정 (너무 높게 설정하면 다른 프로세스에 영향을 줄 수 있습니다)</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>보통 (기본값)</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>보통 이상</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>비정상 CPU 사용량 경고</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>OBS가 감지되지 않고 런처의 CPU 사용량이 5분 동안 임계값을 초과하면 최상위 경고를 표시합니다. 기본적으로 활성화됩니다.</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>비정상 CPU 사용량 경고 사용</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>경고 임계값 (%)</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>설정 편집기</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>업적 데이터베이스 리소스 업데이트</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>게임 내 스크린샷 사용</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>단축키로 게임 창 캡처, 다른 창은 포함되지 않습니다</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>스크린샷 단축키</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>아래 버튼을 클릭한 후 원하는 키 조합을 누르세요 (Ctrl/Alt/Shift + 키 지원)</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>기록 중... 단축키 조합을 누르세요</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>스크린샷 저장 위치</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>스크린샷 저장 위치를 사용자 지정하세요. 기본값은 Documents/FufuScreenshots입니다</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>스크린샷 폴더 열기</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>버전 업데이트</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>최신 버전 확인 및 다운로드</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>소개</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>개발자 라이선스 인증을 완료하여 특정 기능을 잠금 해제하세요</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>개발자 라이선스 인증 시작</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>플러그인 관리</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>인젝션 활성화</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>게임 실행 시 플러그인 로드</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>플러그인 받기</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>자유 카메라 사용법</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>플러그인 추가</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>새로고침</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>폴더 열기</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>정렬</value></data>
+  <data name="SortByName" xml:space="preserve"><value>이름순</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>상태순 (활성화 우선)</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>크기순</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>수정 날짜순</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>폴더 이름 변경</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>삭제</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>설정 파일 편집</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>플러그인 설정</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>설치된 플러그인이 없습니다</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>플러그인 사용은 본인의 책임입니다. 개발자는 어떠한 손해에 대해서도 책임을 지지 않습니다.</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>문제가 있나요? 먼저 시스템 진단을 시도해 보세요.</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>컴퓨터 진단</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>도움말 보기</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>설정된 링크가 유효한 GIF 형식이 아닙니다</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>GIF 리소스를 로드하지 못했습니다</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>켜짐</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>꺼짐</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>설정 대상:</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin (메인 플러그인)</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS (프레임 레이트 플러그인)</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar (QianXing 아바타 플러그인)</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>수정일: </value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>기능 (다운로드/복구)</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>플러그인 다운로드</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>FPS 표시 플러그인 복구</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>메인 플러그인 활성화됨</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>FPS 플러그인 활성화됨</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>아바타 플러그인 활성화됨</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>키 입력 모드 (목록)</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>목록</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>숫자</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>프리셋 자동 생성</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>개발자 기능 표시</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>피드백이나 문제가 있으신가요? 여기를 클릭하세요</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>PR 제출</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>인젝션 활성화</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>설정 프리셋:</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>클릭하여 이 프리셋으로 전환</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[잠김]</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>이 프리셋 삭제</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>새 프리셋</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>모두 초기화</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>아바타 교체 설정 (필요에 따라 일치하는 크기 업로드)</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>가져오기</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>자르기</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>지원 형식: PNG, JPG, BMP, WEBP. 변경 사항은 다음 게임 진입 시 적용됩니다.</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>아바타 조정</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>현재 크기 저장</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>모든 크기에 적용</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>취소</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* 상자 안에서 드래그하거나 Ctrl + 마우스 휠로 확대/축소하여 자르기 위치 조정</value></data>
+  <data name="Plugin_FpsUnlock" xml:space="preserve"><value>프레임 레이트 제한 해제</value></data>
+  <data name="Plugin_TargetFps" xml:space="preserve"><value>목표 프레임 레이트</value></data>
+  <data name="Plugin_VSync" xml:space="preserve"><value>V-Sync 비활성화</value></data>
+  <data name="Plugin_TouchScreen" xml:space="preserve"><value>모바일 UI 모드 활성화</value></data>
+  <data name="Plugin_FovUnlock" xml:space="preserve"><value>FOV 수정 활성화</value></data>
+  <data name="Plugin_FovValue" xml:space="preserve"><value>사용자 지정 FOV 값</value></data>
+  <data name="Plugin_DisableDamageText" xml:space="preserve"><value>대미지 숫자 비활성화</value></data>
+  <data name="Plugin_DisableCameraMove" xml:space="preserve"><value>카메라 움직임 비활성화 (원소폭발 애니메이션)</value></data>
+  <data name="Plugin_DisableFog" xml:space="preserve"><value>안개 효과 비활성화</value></data>
+  <data name="Plugin_DisableCharFade" xml:space="preserve"><value>캐릭터 블러 비활성화</value></data>
+  <data name="Plugin_RedirectCraft" xml:space="preserve"><value>합성대 리디렉션 활성화</value></data>
+  <data name="Plugin_RemoveTeamAnim" xml:space="preserve"><value>파티 메뉴 로딩 바 제거</value></data>
+  <data name="Plugin_HideGrass" xml:space="preserve"><value>풀 숨기기</value></data>
+  <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>모든 풀 무차별 숨기기</value></data>
+  <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>사용자 지정 창 제목 활성화</value></data>
+  <data name="Plugin_CustomTitleText" xml:space="preserve"><value>사용자 지정 제목 텍스트</value></data>
+  <data name="Plugin_ToggleKey" xml:space="preserve"><value>설정 다시 로드 단축키</value></data>
+  <data name="Plugin_CraftKey" xml:space="preserve"><value>합성대 단축키</value></data>
+  <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>의뢰 배너 숨기기</value></data>
+  <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>특수 FOV 카메라 각도 수정</value></data>
+  <data name="Plugin_HideUID" xml:space="preserve"><value>오른쪽 아래 UID 숨기기</value></data>
+  <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>빠른 시간 조정</value></data>
+  <data name="Plugin_AutoCook" xml:space="preserve"><value>요리 메뉴 빠른 열기</value></data>
+  <data name="Plugin_AutoExpedition" xml:space="preserve"><value>탐사 메뉴 빠른 열기</value></data>
+  <data name="Plugin_AutoCookKey" xml:space="preserve"><value>요리 메뉴 열기 단축키</value></data>
+  <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>탐사 메뉴 열기 단축키</value></data>
+  <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>수중 오버레이 비활성화</value></data>
+  <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>대미지 숫자 색상 사용자 지정 활성화</value></data>
+  <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0 = 순환, 1 = 고정 색상</value></data>
+  <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>고정 색상 인덱스 (0-7)</value></data>
+  <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>게임 네트워크 연결 해제 단축키 (DEV)</value></data>
+  <data name="Plugin_BlockNetwork" xml:space="preserve"><value>게임 네트워크 연결 해제 빠른 모드 (DEV)</value></data>
+  <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>게임 네트워크 연결 해제 (DEV)</value></data>
+  <data name="Plugin_DebugConsole" xml:space="preserve"><value>디버그 콘솔 활성화 (DEV)</value></data>
+  <data name="Plugin_DumpOffsets" xml:space="preserve"><value>오프셋 덤프 (DEV)</value></data>
+  <data name="PageTitle_GameSettings" xml:space="preserve"><value>게임 설정</value></data>
+  <data name="SectionGameInstallPath" xml:space="preserve"><value>게임 설치 위치</value></data>
+  <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>YuanShen.exe가 있는 폴더 선택...</value></data>
+  <data name="ApplyBtn" xml:space="preserve"><value>적용</value></data>
+  <data name="ClearGamePathTooltip" xml:space="preserve"><value>설정된 게임 디렉토리 지우기</value></data>
+  <data name="ConfigureGamePathFirst" xml:space="preserve"><value>먼저 게임 경로를 설정하세요</value></data>
+  <data name="ClientStatusTitle" xml:space="preserve"><value>클라이언트 상태</value></data>
+  <data name="CurrentVersionLabel" xml:space="preserve"><value>현재 버전</value></data>
+  <data name="ServerLabel" xml:space="preserve"><value>서버</value></data>
+  <data name="DiskUsageLabel" xml:space="preserve"><value>디스크 사용량</value></data>
+  <data name="LatestVersionLabel" xml:space="preserve"><value>최신 버전</value></data>
+  <data name="CheckingEllipsis" xml:space="preserve"><value>확인 중...</value></data>
+  <data name="PreDownloadLabel" xml:space="preserve"><value>사전 다운로드 리소스</value></data>
+  <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>최신 리딤 코드</value></data>
+  <data name="CopyBtn" xml:space="preserve"><value>복사</value></data>
+  <data name="NoCodesAvailable" xml:space="preserve"><value>현재 사용 가능한 리딤 코드가 없습니다</value></data>
+  <data name="AccountSwitchTitle" xml:space="preserve"><value>계정 전환</value></data>
+  <data name="ReadFromLocalTooltip" xml:space="preserve"><value>로컬에서 읽기</value></data>
+  <data name="RefreshListTooltip" xml:space="preserve"><value>목록 새로고침</value></data>
+  <data name="DoubleClickToEditTooltip" xml:space="preserve"><value>더블 클릭하여 메모 편집</value></data>
+  <data name="SwitchBtn" xml:space="preserve"><value>전환</value></data>
+  <data name="ResourceMgmtTitle" xml:space="preserve"><value>리소스 관리</value></data>
+  <data name="DownloadOrVerifyFiles" xml:space="preserve"><value>파일 다운로드 또는 검증</value></data>
+  <data name="SwitchServerTitle" xml:space="preserve"><value>서버 전환</value></data>
+  <data name="ServerSwitchCaption" xml:space="preserve"><value>공식 / Bilibili / 글로벌 서버 전환</value></data>
+  <data name="MapToolsTitle" xml:space="preserve"><value>맵 도구</value></data>
+  <data name="ViewTeyvatMap" xml:space="preserve"><value>티바트 맵 보기</value></data>
+  <data name="OfficialAnnouncementsTitle" xml:space="preserve"><value>공식 공지</value></data>
+  <data name="EventsAndUpdatesCaption" xml:space="preserve"><value>이벤트 및 업데이트 소식</value></data>
+  <data name="VerifyGameTitle" xml:space="preserve"><value>게임 파일 검증</value></data>
+  <data name="VerifyAndRepairCaption" xml:space="preserve"><value>게임 파일 검증 및 복구</value></data>
+  <data name="CreateShortcutTitle" xml:space="preserve"><value>실행 바로가기 만들기</value></data>
+  <data name="CreateShortcutCaption" xml:space="preserve"><value>바탕 화면에 원클릭 인젝션 바로가기 만들기</value></data>
+  <data name="FpsMonitorTitle" xml:space="preserve"><value>게임 내 FPS 모니터</value></data>
+  <data name="FpsMonitorCaption" xml:space="preserve"><value>게임 실행 중 왼쪽 상단에 실시간 FPS 표시 (관리자 권한 필요)</value></data>
+  <data name="Err_GamePathNotFound" xml:space="preserve"><value>게임 경로를 찾을 수 없습니다. 먼저 설정에서 게임 위치를 지정하세요.</value></data>
+  <data name="Title_VerifyGameIntegrity" xml:space="preserve"><value>게임 무결성 검증</value></data>
+  <data name="Err_GamePathNotSet" xml:space="preserve"><value>게임 경로가 설정되지 않았습니다.</value></data>
+  <data name="Err_ExeNotFoundInFolder_Format" xml:space="preserve"><value>폴더에서 게임 실행 파일을 찾을 수 없습니다:
+{0}</value></data>
+  <data name="Placeholder_DefaultUseCurrentPreset" xml:space="preserve"><value>기본적으로 앱의 현재 프리셋 사용</value></data>
+  <data name="None_Value" xml:space="preserve"><value>없음</value></data>
+  <data name="Msg_ChooseShortcutAction" xml:space="preserve"><value>작업을 선택하세요:
+
+바탕 화면 바로가기 만들기 (관리자 권한으로 실행)?
+아니면 Steam이나 스크립트에서 사용할 실행 명령 복사?</value></data>
+  <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve"><value>가져온 실행 매개변수: {0}</value></data>
+  <data name="Label_SpecifyInjectionPreset" xml:space="preserve"><value>인젝션 설정 지정 (프리셋):</value></data>
+  <data name="Title_ChooseAction" xml:space="preserve"><value>작업 선택</value></data>
+  <data name="Btn_CreateDesktopShortcut" xml:space="preserve"><value>바탕 화면 바로가기 만들기</value></data>
+  <data name="Btn_CopyLaunchCommand" xml:space="preserve"><value>실행 명령 복사</value></data>
+  <data name="FileName_ShortcutName" xml:space="preserve"><value>Genshin Impact 실행.lnk</value></data>
+  <data name="Desc_ShortcutDescription" xml:space="preserve"><value>FufuLauncher 인젝션을 통해 Genshin Impact 실행</value></data>
+  <data name="Title_ShortcutCreated" xml:space="preserve"><value>바로가기 생성됨</value></data>
+  <data name="Msg_ShortcutCreated" xml:space="preserve"><value>바탕 화면 바로가기가 생성되었습니다. 기본적으로 관리자 권한으로 실행됩니다. 바탕 화면을 확인하세요.</value></data>
+  <data name="Title_LaunchCommand" xml:space="preserve"><value>실행 명령</value></data>
+  <data name="Msg_LaunchCommandInstructions" xml:space="preserve"><value>아래는 실행 명령입니다. CMD, PowerShell에서 직접 사용하거나 Steam 비 Steam 게임 대상으로 사용하세요:</value></data>
+  <data name="Btn_CopyAndClose" xml:space="preserve"><value>복사 후 닫기</value></data>
+  <data name="CloseBtn" xml:space="preserve"><value>닫기</value></data>
+  <data name="Err_OperationFailed_Format" xml:space="preserve"><value>작업 실패: {0}</value></data>
+  <data name="Err_FpsMonitorNeedsAdmin" xml:space="preserve"><value>FPS 모니터링을 활성화하지 못했습니다: 이 기능은 런처를 관리자 권한으로 실행해야 합니다.</value></data>
+  <data name="Msg_NoNewRedeemCodes" xml:space="preserve"><value>현재 새로운 리딤 코드가 없습니다</value></data>
+  <data name="Err_FetchFailedCheckNetwork" xml:space="preserve"><value>가져오기에 실패했습니다. 네트워크 연결을 확인하세요.</value></data>
+  <data name="Btn_Copied" xml:space="preserve"><value>복사됨</value></data>
+  <data name="Title_PathError" xml:space="preserve"><value>경로 오류</value></data>
+  <data name="Err_CannotCreateGameDir_Format" xml:space="preserve"><value>게임 디렉토리를 생성하지 못했습니다: {0}
+오류: {1}</value></data>
+  <data name="Err_ConfigIniNotFound_Format" xml:space="preserve"><value>config.ini 파일을 찾을 수 없습니다.
+
+확인된 경로:
+{0}
+
+게임 경로 설정이 게임 설치 디렉토리를 올바르게 가리키는지 확인하세요</value></data>
+  <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve"><value>이것은 글로벌 클라이언트입니다. Bilibili 서버로 전환할 수 없습니다. 대신 서버 변환을 사용하여 중국 서버로 전환하세요.</value></data>
+  <data name="Btn_SwitchToOfficialServer" xml:space="preserve"><value>공식 서버로 전환</value></data>
+  <data name="Label_ChooseTargetServer" xml:space="preserve"><value>전환할 서버를 선택하세요:</value></data>
+  <data name="Btn_SwitchToBiliServer" xml:space="preserve"><value>Bilibili 서버로 전환</value></data>
+  <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve"><value>글로벌과 중국 서버 간 변환</value></data>
+  <data name="Title_Convert" xml:space="preserve"><value>변환</value></data>
+  <data name="ServerType_Unknown" xml:space="preserve"><value>알 수 없는 서버</value></data>
+  <data name="ServerType_Global" xml:space="preserve"><value>글로벌 서버</value></data>
+  <data name="ServerType_Bilibili" xml:space="preserve"><value>Bilibili 서버</value></data>
+  <data name="ServerType_Official" xml:space="preserve"><value>공식 서버</value></data>
+  <data name="ServerType_CustomOther_Format" xml:space="preserve"><value>사용자 지정/기타 (채널: {0})</value></data>
+  <data name="Err_ReadConfigFailed" xml:space="preserve"><value>설정 파일을 읽지 못했습니다</value></data>
+  <data name="Title_TeyvatMap" xml:space="preserve"><value>티바트 맵</value></data>
+  <data name="Title_GlobalClient" xml:space="preserve"><value>글로벌 클라이언트</value></data>
+  <data name="Msg_GlobalClientInjectionWarning" xml:space="preserve"><value>참고: 이 런처의 인젝션 기능은 주로 중국 서버용으로 설계되었습니다. 글로벌 클라이언트에서는 작동하지 않거나 예기치 않은 오류가 발생할 수 있습니다.
+
+그래도 이 경로를 계속 사용하시겠습니까?</value></data>
+  <data name="Btn_ContinueUsing" xml:space="preserve"><value>계속 사용</value></data>
+  <data name="Btn_DiscardAndClear" xml:space="preserve"><value>폐기 및 지우기</value></data>
+  <data name="Title_InvalidGamePath" xml:space="preserve"><value>잘못된 게임 경로</value></data>
+  <data name="Err_ExeNotFoundAtPath_Format" xml:space="preserve"><value>이 경로({0})에서 게임 실행 파일을 찾을 수 없습니다.
+
+게임 실행 파일이 포함된 설치 디렉토리를 선택했는지 확인하거나 설정에서 사용자 지정 이름을 구성하세요.</value></data>
+  <data name="Title_InvalidPath" xml:space="preserve"><value>잘못된 경로</value></data>
+  <data name="Msg_PathDoesNotExist" xml:space="preserve"><value>경로가 존재하지 않습니다. 올바른지 확인하세요.</value></data>
+  <data name="OkBtn" xml:space="preserve"><value>확인</value></data>
+  <data name="Err_PathProcessingFailed_Format" xml:space="preserve"><value>경로 처리 실패: {0}</value></data>
+  <data name="Title_AutoFoundGamePath" xml:space="preserve"><value>게임 경로 자동 발견</value></data>
+  <data name="Msg_DetectedPossiblePath_Format" xml:space="preserve"><value>가능한 설치 경로가 감지되었습니다:
+
+{0}
+
+이 경로를 적용하시겠습니까?</value></data>
+  <data name="Btn_SelectManually" xml:space="preserve"><value>수동으로 선택</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>오류</value></data>
+  <data name="Err_CannotOpenFilePicker" xml:space="preserve"><value>파일 선택기를 열 수 없습니다</value></data>
+  <data name="Msg_VersionInfoNotFound" xml:space="preserve"><value>버전 정보를 찾을 수 없습니다</value></data>
+  <data name="UnknownGeneric" xml:space="preserve"><value>알 수 없음</value></data>
+  <data name="FetchFailedShort" xml:space="preserve"><value>가져오기 실패</value></data>
+  <data name="Msg_HasVersion_Format" xml:space="preserve"><value>사용 가능 (버전 {0})</value></data>
+  <data name="NotAvailableGeneric" xml:space="preserve"><value>없음</value></data>
+  <data name="ServerType_MainlandChina" xml:space="preserve"><value>중국 본토 서버</value></data>
+  <data name="Msg_CannotCalculate" xml:space="preserve"><value>계산할 수 없습니다</value></data>
+  <data name="Err_CannotAccessRegistry" xml:space="preserve"><value>레지스트리에 접근할 수 없습니다</value></data>
+  <data name="Err_NoLoggedInAccount" xml:space="preserve"><value>로그인된 계정을 찾을 수 없습니다 (레지스트리 데이터가 비어 있음)</value></data>
+  <data name="Err_AccountAlreadySaved" xml:space="preserve"><value>이 계정은 이미 저장되었습니다.</value></data>
+  <data name="Placeholder_EnterAccountName" xml:space="preserve"><value>계정 이름 입력 (예: 본계정 / 부계정)</value></data>
+  <data name="Title_SaveNewAccount" xml:space="preserve"><value>새 계정 저장</value></data>
+  <data name="SaveBtn" xml:space="preserve"><value>저장</value></data>
+  <data name="Prefix_Account_Format" xml:space="preserve"><value>계정_{0}</value></data>
+  <data name="Err_SaveFailed_Format" xml:space="preserve"><value>저장 실패: {0}</value></data>
+  <data name="Title_SwitchSuccess" xml:space="preserve"><value>전환 성공</value></data>
+  <data name="Msg_SwitchedToAccount_Format" xml:space="preserve"><value>전환됨: {0}
+
+적용하려면 게임을 다시 시작해야 합니다!</value></data>
+  <data name="Btn_GotIt" xml:space="preserve"><value>확인했습니다</value></data>
+  <data name="Err_SwitchFailed_Format" xml:space="preserve"><value>전환 실패: {0}</value></data>
+  <data name="Title_ConfirmDelete" xml:space="preserve"><value>삭제 확인</value></data>
+  <data name="Msg_DeleteAccountConfirm_Format" xml:space="preserve"><value>&apos;{0}&apos; 계정을 삭제하시겠습니까?</value></data>
+  <data name="Err_DeleteFailed_Format" xml:space="preserve"><value>삭제 실패: {0}</value></data>
+  <data name="Title_OperationFailed" xml:space="preserve"><value>작업 실패</value></data>
+  <data name="NavHome" xml:space="preserve"><value>홈</value></data>
+  <data name="NavControlPanel" xml:space="preserve"><value>제어판</value></data>
+  <data name="NavAccountSettings" xml:space="preserve"><value>계정 설정</value></data>
+  <data name="NavOtherFeatures" xml:space="preserve"><value>기타 기능</value></data>
+  <data name="NavDataCenter" xml:space="preserve"><value>데이터 센터</value></data>
+  <data name="NavHelpDocs" xml:space="preserve"><value>도움말 문서</value></data>
+  <data name="NavCalculator" xml:space="preserve"><value>계산기</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>설정</value></data>
+  <data name="NavCommunity" xml:space="preserve"><value>커뮤니티</value></data>
+  <data name="TrayShowWindow" xml:space="preserve"><value>메인 창 표시</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>종료</value></data>
+  <data name="SysStatusChecking" xml:space="preserve"><value>네트워크 상태 확인 중...</value></data>
+  <data name="NotificationCenter" xml:space="preserve"><value>알림</value></data>
+  <data name="ClearAllBtn" xml:space="preserve"><value>모두 지우기</value></data>
+  <data name="NetDisconnected" xml:space="preserve"><value>네트워크 연결이 끊어졌습니다. 네트워크 설정을 확인하세요.</value></data>
+  <data name="NetProxyWarning" xml:space="preserve"><value>프록시 연결을 사용 중입니다. 데이터 사용량에 유의하세요.</value></data>
+  <data name="AdminWarningTitle" xml:space="preserve"><value>경고</value></data>
+  <data name="AdminWarningContent" xml:space="preserve"><value>관리자 권한으로 실행하면 파일 선택기 등 일부 기능에 영향을 줄 수 있습니다.</value></data>
+  <data name="DontShowAgain" xml:space="preserve"><value>다시 표시하지 않음</value></data>
+  <data name="GotItBtn" xml:space="preserve"><value>확인했습니다</value></data>
+  <data name="VcRuntimeMissingTitle" xml:space="preserve"><value>C++ 런타임 누락</value></data>
+  <data name="VcRuntimeMissingContent" xml:space="preserve"><value>시스템에 C++ VC14 런타임 라이브러리가 없습니다. 인젝션 기능에 필요합니다.
+
+Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까?</value></data>
+  <data name="GoToDownload" xml:space="preserve"><value>다운로드로 이동 (X64)</value></data>
+  <data name="DontRemindAgain" xml:space="preserve"><value>다시 알림 안 함</value></data>
+  <data name="IgnoreWarning" xml:space="preserve"><value>경고 무시</value></data>
+  <data name="AppDisplayNameAdmin" xml:space="preserve"><value>FufuLauncher [관리자]</value></data>
+  <data name="HiddenFeatureTitle" xml:space="preserve"><value>접근 불가</value></data>
+  <data name="HiddenFeatureMessage" xml:space="preserve"><value>이 기능은 숨겨져 있습니다. 설정에서 다시 활성화하세요.</value></data>
+  <data name="RedeemCodeExpired" xml:space="preserve"><value>리딤 코드 만료 알림</value></data>
+  <data name="RedeemCodeToday" xml:space="preserve"><value>오늘의 리딤 코드 알림</value></data>
+  <data name="RedeemCodeNew" xml:space="preserve"><value>새 리딤 코드 공개됨</value></data>
+  <data name="RedeemCodeExpiring" xml:space="preserve"><value>리딤 코드 곧 만료</value></data>
+  <data name="HomeTab_Events" xml:space="preserve"><value>이벤트</value></data>
+  <data name="HomeTab_Announcements" xml:space="preserve"><value>공지사항</value></data>
+  <data name="HomeTab_News" xml:space="preserve"><value>소식</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>출석체크</value></data>
+  <data name="Home_RefreshToken" xml:space="preserve"><value>토큰 새로고침</value></data>
+  <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>출석 체크 설정으로 이동</value></data>
+  <data name="Home_RewardsCalendar" xml:space="preserve"><value>보상 달력</value></data>
+  <data name="Home_DailyNotesCard" xml:space="preserve"><value>원신 노트</value></data>
+  <data name="Home_RefreshNotes" xml:space="preserve"><value>노트 새로고침</value></data>
+  <data name="Home_NoData" xml:space="preserve"><value>데이터 없음</value></data>
+  <data name="Home_Resin" xml:space="preserve"><value>레진</value></data>
+  <data name="Home_DailyQuests" xml:space="preserve"><value>일일 의뢰</value></data>
+  <data name="Home_RealmCurrency" xml:space="preserve"><value>선계 재화</value></data>
+  <data name="Home_Expeditions" xml:space="preserve"><value>탐사</value></data>
+  <data name="Home_Transformer" xml:space="preserve"><value>매개 변수 변환기</value></data>
+  <data name="Home_ToggleBg" xml:space="preserve"><value>배경 전환</value></data>
+  <data name="Home_ScreenshotFolder" xml:space="preserve"><value>스크린샷 폴더</value></data>
+  <data name="Home_Widgets" xml:space="preserve"><value>위젯</value></data>
+  <data name="Home_WidgetGacha" xml:space="preserve"><value>기원 기록 분석</value></data>
+  <data name="Home_WidgetAchievement" xml:space="preserve"><value>업적 추적</value></data>
+  <data name="Home_WidgetInventory" xml:space="preserve"><value>인벤토리 아이템</value></data>
+  <data name="Home_WidgetPlayerRole" xml:space="preserve"><value>캐릭터 육성 조회</value></data>
+  <data name="Home_WidgetNotes" xml:space="preserve"><value>여행자 노트</value></data>
+  <data name="Home_WidgetVideo" xml:space="preserve"><value>비디오 라이브러리</value></data>
+  <data name="Home_WidgetBBS" xml:space="preserve"><value>전투 기록</value></data>
+  <data name="Home_AddWidget" xml:space="preserve"><value>위젯 추가</value></data>
+  <data name="Home_RemoveWidget" xml:space="preserve"><value>위젯 제거</value></data>
+  <data name="Home_ToggleTooltip" xml:space="preserve"><value>상세 툴팁 전환</value></data>
+  <data name="Home_QuickPresets" xml:space="preserve"><value>빠른 프리셋</value></data>
+  <data name="Home_ManagePresets" xml:space="preserve"><value>관리</value></data>
+  <data name="Home_NoPresetsPinned" xml:space="preserve"><value>고정된 프리셋 없음</value></data>
+  <data name="Home_SwitchServer" xml:space="preserve"><value>{0} 서버로 전환</value></data>
+  <data name="Home_SwitchOfficial" xml:space="preserve"><value>공식 서버로 전환</value></data>
+  <data name="Home_SwitchBilibili" xml:space="preserve"><value>Bilibili 서버로 전환</value></data>
+  <data name="Home_SwitchSuccess" xml:space="preserve"><value>전환 성공</value></data>
+  <data name="Home_SwitchedTo_Format" xml:space="preserve"><value>{0} 서버로 성공적으로 전환되었습니다. {1}</value></data>
+  <data name="Home_SwitchFailed" xml:space="preserve"><value>전환 실패</value></data>
+  <data name="Home_RefreshFailed" xml:space="preserve"><value>새로고침 실패</value></data>
+  <data name="Home_NoActiveAccount" xml:space="preserve"><value>활성 계정 없음</value></data>
+  <data name="Home_CannotLoadCredentials" xml:space="preserve"><value>계정 자격 증명을 로드할 수 없습니다</value></data>
+  <data name="Home_BBSSecurityTitle" xml:space="preserve"><value>보안 알림</value></data>
+  <data name="Home_BBSSecurityMessage" xml:space="preserve"><value>전투 기록 페이지에 접근하면 계정이 위험 계정으로 표시되어 일부 기능이 제대로 작동하지 않을 수 있습니다. 계속하시겠습니까?</value></data>
+  <data name="Home_BBSConfirm" xml:space="preserve"><value>확인</value></data>
+  <data name="Home_ErrNoGamePath" xml:space="preserve"><value>유효한 게임 경로를 찾을 수 없습니다. 먼저 설정에서 게임 위치를 지정하세요.</value></data>
+  <data name="Home_ErrConfigNotFound" xml:space="preserve"><value>config.ini 설정 파일을 찾을 수 없습니다. 서버 전환을 사용할 수 없습니다.</value></data>
+  <data name="Home_ErrSwitchException" xml:space="preserve"><value>서버 전환 준비 중 오류가 발생했습니다.</value></data>
+  <data name="Home_OfficialServer" xml:space="preserve"><value>공식 서버</value></data>
+  <data name="Home_BilibiliServer" xml:space="preserve"><value>Bilibili 서버</value></data>
+  <data name="Home_Deployed" xml:space="preserve"><value>배포됨</value></data>
+  <data name="Home_Cleaned" xml:space="preserve"><value>정리됨</value></data>
+  <data name="Home_OpenLink" xml:space="preserve"><value>링크 열기</value></data>
+  <data name="Home_OpenLinkFailed" xml:space="preserve"><value>링크를 열지 못했습니다</value></data>
+  <data name="Home_GachaTooltip" xml:space="preserve"><value>기원 기록 분석: 기원 기록을 분석하고 뽑기 통계를 확인하세요</value></data>
+  <data name="Home_AchievementTooltip" xml:space="preserve"><value>업적 추적: 업적 진행 상황을 추적하고 내보내기 및 가져오기를 지원합니다</value></data>
+  <data name="Home_InventoryTooltip" xml:space="preserve"><value>인벤토리 아이템: 현재 계정의 인벤토리에 있는 재료를 확인하세요</value></data>
+  <data name="Home_PlayerRoleTooltip" xml:space="preserve"><value>캐릭터 육성 조회: 캐릭터의 레벨, 운명의 자리, 무기, 성유물 빌드를 확인하세요</value></data>
+  <data name="Home_NotesTooltip" xml:space="preserve"><value>여행자 노트: 별도 창에서 캐릭터 육성 재료 도메인 등 실시간 데이터를 확인하세요</value></data>
+  <data name="Home_VideoTooltip" xml:space="preserve"><value>비디오 라이브러리: 캐릭터 데모 및 게임 내 컷신을 감상하세요</value></data>
+  <data name="Home_BBSTooltip" xml:space="preserve"><value>전투 기록: 나선비경, 환상극장 등 상세 전투 기록을 확인하세요</value></data>
+  <data name="OtherPage_Title" xml:space="preserve"><value>기타 설정</value></data>
+  <data name="OtherPage_ExternalPrograms" xml:space="preserve"><value>외부 프로그램</value></data>
+  <data name="OtherPage_AdditionalProgramLaunch" xml:space="preserve"><value>추가 프로그램 실행</value></data>
+  <data name="OtherPage_AutostartExeDesc" xml:space="preserve"><value>게임과 함께 지정된 .exe 프로그램을 자동으로 실행합니다</value></data>
+  <data name="OtherPage_ProgramPath" xml:space="preserve"><value>프로그램 경로</value></data>
+  <data name="OtherPage_PathPlaceholder" xml:space="preserve"><value>예: C:\Tools\MapTool.exe</value></data>
+  <data name="OtherPage_PathHint" xml:space="preserve"><value>팁: 경로 선택 후 아무 반응이 없으면 수동으로 붙여넣고 적용을 클릭하세요.</value></data>
+  <data name="OtherPage_AccessibilityTools" xml:space="preserve"><value>접근성 도구</value></data>
+  <data name="OtherPage_AutoClicker" xml:space="preserve"><value>자동 클릭</value></data>
+  <data name="OtherPage_AutoClickerDesc" xml:space="preserve"><value>트리거 키 또는 마우스 버튼을 길게 눌러 고빈도 클릭 시뮬레이션</value></data>
+  <data name="OtherPage_ClickMode" xml:space="preserve"><value>클릭 모드</value></data>
+  <data name="OtherPage_MouseLeft" xml:space="preserve"><value>마우스 왼쪽 버튼</value></data>
+  <data name="OtherPage_MouseRight" xml:space="preserve"><value>마우스 오른쪽 버튼</value></data>
+  <data name="OtherPage_MouseModeHint" xml:space="preserve"><value>한 번에 하나의 마우스 모드만 활성화할 수 있습니다. 마우스 모드를 활성화하기 전에 중지 단축키를 설정하세요.</value></data>
+  <data name="OtherPage_TriggerKeyHeader" xml:space="preserve"><value>트리거 키 (이 키를 길게 누름)</value></data>
+  <data name="OtherPage_RecordClick" xml:space="preserve"><value>클릭하여 기록</value></data>
+  <data name="OtherPage_StopKeyHeader" xml:space="preserve"><value>중지 단축키 (필수)</value></data>
+  <data name="OtherPage_ClickKeyHeader" xml:space="preserve"><value>키보드 클릭 키 (키보드 모드 전용)</value></data>
+  <data name="OtherPage_UsageInstructions" xml:space="preserve"><value>사용 방법</value></data>
+  <data name="OtherPage_UsageHint" xml:space="preserve"><value>아이콘을 클릭하여 기록을 시작한 후 아무 키나 누르세요. 왼쪽 및 오른쪽 마우스 버튼 모드는 상호 배타적입니다. 먼저 중지 단축키를 설정해야 합니다.</value></data>
+  <data name="OtherPage_UtilityTools" xml:space="preserve"><value>유틸리티 도구</value></data>
+  <data name="OtherPage_Browser" xml:space="preserve"><value>브라우저</value></data>
+  <data name="OtherPage_BrowserDesc" xml:space="preserve"><value>항상 위에 표시되는 독립형 플로팅 브라우저 열기</value></data>
+  <data name="OtherPage_Open" xml:space="preserve"><value>열기</value></data>
+  <data name="OtherPage_SaveConfig" xml:space="preserve"><value>설정 저장</value></data>
+  <data name="OtherPage_KeyRecorderEnabled" xml:space="preserve"><value>키 레코더 활성화됨. 글로벌 키 이벤트 등록 대상: {0}</value></data>
+  <data name="OtherPage_KeyRecorderDisabled" xml:space="preserve"><value>키 레코더 비활성화됨. 글로벌 키 이벤트 등록 해제됨.</value></data>
+  <data name="OtherPage_KeyEventError" xml:space="preserve"><value>키 이벤트 등록/해제 실패</value></data>
+  <data name="OtherPage_UnloadCleanupError" xml:space="preserve"><value>페이지 언로드 시 키 이벤트 정리 실패</value></data>
+  <data name="OtherPage_CapturingKey" xml:space="preserve"><value>키 캡처 중...</value></data>
+  <data name="OtherPage_TriggerKeySet" xml:space="preserve"><value>트리거 키 설정됨</value></data>
+  <data name="OtherPage_ClickKeySet" xml:space="preserve"><value>클릭 키 설정됨</value></data>
+  <data name="OtherPage_StopKeySet" xml:space="preserve"><value>중지 단축키 설정됨</value></data>
+  <data name="OtherPage_KeyProcessError" xml:space="preserve"><value>키 처리 오류</value></data>
+  <data name="Account_NotLoggedIn" xml:space="preserve"><value>로그인하지 않음</value></data>
+  <data name="Account_SavedAccounts" xml:space="preserve"><value>저장된 계정</value></data>
+  <data name="Account_Login" xml:space="preserve"><value>로그인</value></data>
+  <data name="Account_DailyCheckin" xml:space="preserve"><value>일일 출석 체크</value></data>
+  <data name="Account_RefreshInfo" xml:space="preserve"><value>정보 새로고침</value></data>
+  <data name="Account_TravelJournal" xml:space="preserve"><value>여행 일지</value></data>
+  <data name="Account_GachaAnalysis" xml:space="preserve"><value>기원 분석</value></data>
+  <data name="Account_AccountSecurity" xml:space="preserve"><value>계정 보안</value></data>
+  <data name="Account_FreezeAccount" xml:space="preserve"><value>계정 동결</value></data>
+  <data name="Account_CopyCookie" xml:space="preserve"><value>쿠키 복사</value></data>
+  <data name="Account_DeleteAccount" xml:space="preserve"><value>계정 삭제</value></data>
+  <data name="Account_Logout" xml:space="preserve"><value>로그아웃</value></data>
+  <data name="Account_CommunityFeed" xml:space="preserve"><value>커뮤니티 피드</value></data>
+  <data name="Account_Likes" xml:space="preserve"><value>좋아요</value></data>
+  <data name="Account_Posts" xml:space="preserve"><value>게시물</value></data>
+  <data name="Account_Replies" xml:space="preserve"><value>댓글</value></data>
+  <data name="Account_BoundCharacters" xml:space="preserve"><value>연동된 캐릭터</value></data>
+  <data name="Account_NoCharacters" xml:space="preserve"><value>연동된 캐릭터 없음</value></data>
+  <data name="Account_BindHint" xml:space="preserve"><value>미호요 커뮤니티 또는 게임 내에서 캐릭터를 연동한 후 새로고침하세요</value></data>
+  <data name="Account_PlayTime" xml:space="preserve"><value>플레이 시간</value></data>
+  <data name="Account_RecentDays_Format" xml:space="preserve"><value>최근 {0}일</value></data>
+  <data name="Account_InGame" xml:space="preserve"><value>게임 내</value></data>
+  <data name="Account_TotalTime" xml:space="preserve"><value>총 시간</value></data>
+  <data name="Account_DailyAvg" xml:space="preserve"><value>일일 평균</value></data>
+  <data name="Account_NoRecentRecords_Format" xml:space="preserve"><value>최근 {0}일 동안 게임 기록이 없습니다</value></data>
+  <data name="Account_DeleteAccountConfirm_Format" xml:space="preserve"><value>&quot;{0}&quot; 계정을 삭제하시겠습니까? 자격 증명, 기원 기록, 클라우드 게임 자격 증명을 포함한 모든 관련 데이터가 삭제됩니다. 이 작업은 되돌릴 수 없습니다.</value></data>
+  <data name="Account_DeleteComplete" xml:space="preserve"><value>&quot;{0}&quot; 계정이 삭제되었습니다.</value></data>
+  <data name="Account_DeleteException" xml:space="preserve"><value>계정 삭제 오류</value></data>
+  <data name="Account_DeleteBtn" xml:space="preserve"><value>삭제</value></data>
+  <data name="Account_CheckingIn" xml:space="preserve"><value>출석 체크 중...</value></data>
+  <data name="Account_CheckinComplete" xml:space="preserve"><value>출석 체크 완료</value></data>
+  <data name="Account_CheckinFailed" xml:space="preserve"><value>출석 체크 실패</value></data>
+  <data name="Account_CheckinException" xml:space="preserve"><value>출석 체크 오류</value></data>
+  <data name="Account_LoginFailed" xml:space="preserve"><value>로그인 실패</value></data>
+  <data name="Account_OtherOperations" xml:space="preserve"><value>기타 작업</value></data>
+  <data name="Account_RecentDays30" xml:space="preserve"><value>최근 30일</value></data>
+  <data name="Account_NoRecentRecords30" xml:space="preserve"><value>최근 30일 동안 게임 기록이 없습니다</value></data>
+  <data name="Account_CopyUID" xml:space="preserve"><value>UID 복사</value></data>
+  <data name="Account_DeleteCurrent" xml:space="preserve"><value>현재 계정 삭제</value></data>
+  <data name="Account_DeleteCurrentConfirm_Format" xml:space="preserve"><value>현재 계정 {0} ({1})을(를) 삭제하시겠습니까? 모든 관련 데이터가 삭제되며 되돌릴 수 없습니다.</value></data>
+  <data name="LoginQR_Title" xml:space="preserve"><value>QR 코드 로그인</value></data>
+  <data name="LoginQR_MiyousheQR" xml:space="preserve"><value>미호요 커뮤니티 앱 QR 로그인</value></data>
+  <data name="LoginQR_WebPassport" xml:space="preserve"><value>웹 패스포트 로그인</value></data>
+  <data name="LoginQR_HoYoLABWeb" xml:space="preserve"><value>HoYoLAB 웹 로그인</value></data>
+  <data name="LoginQR_GameAppId" xml:space="preserve"><value>게임 앱 ID:</value></data>
+  <data name="LoginQR_EnterAppId" xml:space="preserve"><value>앱 ID 입력</value></data>
+  <data name="LoginQR_ConfirmGenerate" xml:space="preserve"><value>생성</value></data>
+  <data name="LoginQR_RefreshQR" xml:space="preserve"><value>QR 코드 새로고침</value></data>
+  <data name="LoginQR_WebLoginWarning" xml:space="preserve"><value>참고: 웹 패스포트 로그인은 Stoken을 얻을 수 없어 일부 기능을 사용할 수 없습니다.</value></data>
+  <data name="LoginQR_ManualCookie" xml:space="preserve"><value>수동으로 쿠키 입력</value></data>
+  <data name="LoginQR_ClearHistory" xml:space="preserve"><value>로그인 기록 지우기</value></data>
+  <data name="Panel_Toolbox" xml:space="preserve"><value>도구 상자</value></data>
+  <data name="Panel_DataAnalysis" xml:space="preserve"><value>데이터 분석</value></data>
+  <data name="Panel_DataAnalysisDesc" xml:space="preserve"><value>통계, 완료 진행률 및 장기 데이터 추적</value></data>
+  <data name="Panel_TravelerProfile" xml:space="preserve"><value>여행자 프로필</value></data>
+  <data name="Panel_TravelerProfileDesc" xml:space="preserve"><value>캐릭터, 인벤토리, 노트 및 미호요 커뮤니티 전투 기록</value></data>
+  <data name="Panel_Resources" xml:space="preserve"><value>리소스</value></data>
+  <data name="Panel_ResourcesDesc" xml:space="preserve"><value>미디어 및 리소스 라이브러리</value></data>
+  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>게임 경로 선택</value></data>
+  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>게임 종료</value></data>
+  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>게임 실행</value></data>
+  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>게임 종료 중...</value></data>
+  <data name="Checkin_Signed" xml:space="preserve"><value>오늘 출석 완료</value></data>
+  <data name="Checkin_Unsigned" xml:space="preserve"><value>출석 미완료</value></data>
+  <data name="LaunchErr_NoGamePath" xml:space="preserve"><value>게임 경로가 설정되지 않음</value></data>
+  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>게임 관리 페이지로 이동하여 먼저 게임 설치 경로를 설정하세요.</value></data>
+  <data name="LaunchErr_LaunchFailed" xml:space="preserve"><value>게임 실행 실패</value></data>
+  <data name="Screenshot_FolderNotFound" xml:space="preserve"><value>스크린샷 폴더를 찾을 수 없습니다</value></data>
+  <data name="Screenshot_FolderNotFoundMsg" xml:space="preserve"><value>먼저 게임 내에서 스크린샷을 찍거나 런처 스크린샷 기능을 사용하세요.</value></data>
+  <data name="Announcement_Title" xml:space="preserve"><value>공지사항</value></data>
+  <data name="Announcement_Loading" xml:space="preserve"><value>공지사항 로딩 중...</value></data>
+  <data name="CommunityPage_Back" xml:space="preserve"><value>뒤로</value></data>
+  <data name="CommunityPage_Forward" xml:space="preserve"><value>앞으로</value></data>
+  <data name="CommunityPage_Refresh" xml:space="preserve"><value>새로고침</value></data>
+  <data name="HelpPage_SearchPlaceholder" xml:space="preserve"><value>제목, 파일명 또는 내용 검색...</value></data>
+  <data name="AboutPage_GetBuildFromActions" xml:space="preserve"><value>GitHub Actions에서 빌드 받기</value></data>
+  <data name="AboutPage_Contributors" xml:space="preserve"><value>기여자</value></data>
+  <data name="AboutPage_LoadFailed" xml:space="preserve"><value>로드 실패</value></data>
+  <data name="AboutPage_ReportIssue" xml:space="preserve"><value>문제 보고</value></data>
+  <data name="AboutPage_OfficialWebsite" xml:space="preserve"><value>공식 웹사이트</value></data>
+  <data name="AboutPage_ContactAuthor" xml:space="preserve"><value>제작자에게 연락</value></data>
+  <data name="SponsorWindow_Title" xml:space="preserve"><value>후원</value></data>
+  <data name="SponsorWindow_OnlyWeChat" xml:space="preserve"><value>현재 WeChat만 지원됩니다. Alipay 및 기타 결제 수단은 사용할 수 없습니다.</value></data>
+  <data name="SponsorWindow_QrCodeFailed" xml:space="preserve"><value>QR 코드 로드 실패</value></data>
+  <data name="SponsorWindow_Disclaimer" xml:space="preserve"><value>후원 시 후원금은 환불되지 않음을 인정하는 것으로 간주됩니다.</value></data>
+  <data name="StarPrompt_Support" xml:space="preserve"><value>후원하기</value></data>
+  <data name="StarPrompt_Message" xml:space="preserve"><value>FufuLauncher가 마음에 드시나요? GitHub에서 ⭐를 남겨주세요 — 큰 힘이 됩니다!</value></data>
+  <data name="StarPrompt_GoToGitHub" xml:space="preserve"><value>GitHub에서 Star</value></data>
+  <data name="StarPrompt_Later" xml:space="preserve"><value>나중에 알림</value></data>
+  <data name="StarPrompt_GotIt" xml:space="preserve"><value>확인</value></data>
+  <data name="AchievementUpdater_Title" xml:space="preserve"><value>업적 데이터 업데이트</value></data>
+  <data name="AchievementUpdater_StartFetch" xml:space="preserve"><value>가져오기 시작</value></data>
+  <data name="AdvancedServerSwitch_Title" xml:space="preserve"><value>서버 전환</value></data>
+  <data name="AdvancedServerSwitch_Warning" xml:space="preserve"><value>참고: 게임 실행 중에는 전환이 적용되지 않습니다!</value></data>
+  <data name="AdvancedServerSwitch_Convert" xml:space="preserve"><value>원클릭 변환</value></data>
+  <data name="Agreement_Title" xml:space="preserve"><value>사용자 약관</value></data>
+  <data name="BackgroundInit_Initializing" xml:space="preserve"><value>배경 리소스 초기화 중...</value></data>
+  <data name="BackgroundInit_PleaseWait" xml:space="preserve"><value>캐싱에 시간이 걸릴 수 있습니다. 잠시만 기다려 주세요...</value></data>
+  <data name="CheckinCalendar_Title" xml:space="preserve"><value>출석 보상 달력</value></data>
+  <data name="CloudCredential_Title" xml:space="preserve"><value>클라우드 게임 자격 증명</value></data>
+  <data name="CloudCredential_AddTitle" xml:space="preserve"><value>클라우드 게임 자격 증명 추가</value></data>
+  <data name="HiddenPage_Title" xml:space="preserve"><value>기능 숨겨짐</value></data>
+  <data name="HiddenPage_Message" xml:space="preserve"><value>이 기능은 숨겨져 있습니다. 사용하려면 설정 → 외관 및 개인 설정 → 내비게이션 바 항목으로 이동하여 다시 활성화하세요.</value></data>
+  <data name="HiddenPage_BackToHome" xml:space="preserve"><value>홈으로 돌아가기</value></data>
+  <data name="PreDownload_Title" xml:space="preserve"><value>게임 사전 다운로드</value></data>
+  <data name="PreDownload_Description" xml:space="preserve"><value>새 버전 업데이트 데이터를 미리 받으세요, 자동 진행</value></data>
+  <data name="PreDownload_Start" xml:space="preserve"><value>사전 다운로드 시작</value></data>
+  <data name="PresetManager_Title" xml:space="preserve"><value>프리셋 관리자</value></data>
+  <data name="PresetManager_SelectHint" xml:space="preserve"><value>홈 페이지에 고정할 프리셋 선택 (최대 5개)</value></data>
+  <data name="SecurityWeb_Title" xml:space="preserve"><value>개발자 라이선스 인증</value></data>
+  <data name="VerifyGame_Title" xml:space="preserve"><value>게임 파일 무결성 검사</value></data>
+  <data name="VerifyGame_Description" xml:space="preserve"><value>로컬 파일을 검증하고 손상되거나 누락된 파일을 자동으로 복구합니다. 시간이 걸릴 수 있습니다 — 잠시만 기다려 주세요.</value></data>
+  <data name="VerifyGame_Start" xml:space="preserve"><value>검증 시작</value></data>
+  <data name="FeedbackWindow_Title" xml:space="preserve"><value>피드백 제출</value></data>
+  <data name="FeedbackWindow_SelectType" xml:space="preserve"><value>제출할 피드백 유형을 선택하세요:</value></data>
+  <data name="FeedbackWindow_FeatureRequest" xml:space="preserve"><value>아이디어 / 기능 요청 제출</value></data>
+  <data name="FeedbackWindow_FeatureRequestDesc" xml:space="preserve"><value>새로운 아이디어나 기능 요청이 있나요? GitHub를 통해 제출하세요.</value></data>
+  <data name="FeedbackWindow_BugReport" xml:space="preserve"><value>문제 / 버그 보고</value></data>
+  <data name="FeedbackWindow_BugReportDesc" xml:space="preserve"><value>오류나 예상치 못한 동작을 발견했나요? GitHub를 통해 버그 보고서를 제출하세요.</value></data>
+  <data name="AnnouncementWindow_GameAnnouncement" xml:space="preserve"><value>게임 공지사항</value></data>
+  <data name="DownloadWindow_Title" xml:space="preserve"><value>리소스 다운로더</value></data>
+  <data name="DownloadWindow_GameResourceUpdate" xml:space="preserve"><value>게임 리소스 업데이트</value></data>
+  <data name="DownloadWindow_StuckIsNormal" xml:space="preserve"><value>다운로드 중 멈춤 현상은 정상입니다</value></data>
+  <data name="DownloadWindow_InstallDir" xml:space="preserve"><value>설치 디렉토리</value></data>
+  <data name="DownloadWindow_VoiceLanguage" xml:space="preserve"><value>음성 팩 언어</value></data>
+  <data name="DownloadWindow_DownloadBaseGame" xml:space="preserve"><value>기본 게임 데이터 다운로드</value></data>
+  <data name="DownloadWindow_BaseGameTooltip" xml:space="preserve"><value>체크 해제 시 음성 팩만 업데이트</value></data>
+  <data name="DownloadWindow_ShowDetailLog" xml:space="preserve"><value>상세 로그 표시</value></data>
+  <data name="DownloadWindow_Ready" xml:space="preserve"><value>준비 완료</value></data>
+  <data name="DownloadWindow_StartDownload" xml:space="preserve"><value>다운로드 시작</value></data>
+  <data name="DownloadWindow_Cancel" xml:space="preserve"><value>취소</value></data>
+  <data name="BBSWindow_Title" xml:space="preserve"><value>전투 기록</value></data>
+  <data name="BBSWindow_SwitchIdentity" xml:space="preserve"><value>신원 전환</value></data>
+  <data name="BBSWindow_EnterUrl" xml:space="preserve"><value>URL 입력...</value></data>
+  <data name="BBSWindow_Go" xml:space="preserve"><value>이동</value></data>
+  <data name="BBSWindow_Save" xml:space="preserve"><value>저장</value></data>
+  <data name="BBSWindow_Copy" xml:space="preserve"><value>복사</value></data>
+  <data name="BrowserWindow_Title" xml:space="preserve"><value>브라우저</value></data>
+  <data name="BrowserWindow_EnterUrl" xml:space="preserve"><value>URL 입력...</value></data>
+  <data name="BrowserWindow_Refresh" xml:space="preserve"><value>새로고침</value></data>
+  <data name="BrowserWindow_Settings" xml:space="preserve"><value>설정</value></data>
+  <data name="BrowserWindow_PinWindow" xml:space="preserve"><value>창 고정</value></data>
+  <data name="BrowserWindow_SettingsTitle" xml:space="preserve"><value>브라우저 설정</value></data>
+  <data name="BrowserWindow_DefaultHomepage" xml:space="preserve"><value>기본 홈페이지 (URL)</value></data>
+  <data name="BrowserWindow_DefaultZoom" xml:space="preserve"><value>기본 확대/축소</value></data>
+  <data name="BrowserWindow_VideoHotkeys" xml:space="preserve"><value>비디오 제어 단축키 (JS KeyCode)</value></data>
+  <data name="BrowserWindow_RewindKey" xml:space="preserve"><value>되감기 키</value></data>
+  <data name="BrowserWindow_ForwardKey" xml:space="preserve"><value>빨리 감기 키</value></data>
+  <data name="BrowserWindow_HotkeyHint" xml:space="preserve"><value>팁: 일반적인 키는 ArrowLeft, ArrowRight, KeyA, KeyD입니다</value></data>
+  <data name="BrowserWindow_PerformanceSettings" xml:space="preserve"><value>성능 설정</value></data>
+  <data name="BrowserWindow_RaisePriority" xml:space="preserve"><value>프로세스 우선순위 높이기 (게임 내 렉 방지)</value></data>
+  <data name="MapPage_Title" xml:space="preserve"><value>티바트 맵</value></data>
+  <data name="MapPage_Refresh" xml:space="preserve"><value>새로고침</value></data>
+  <data name="MapPage_LockMapOff" xml:space="preserve"><value>맵 잠금 (해제)</value></data>
+  <data name="MapPage_TopMostOff" xml:space="preserve"><value>항상 위 (해제)</value></data>
+  <data name="PluginConfigPage_Title" xml:space="preserve"><value>플러그인 설정</value></data>
+  <data name="PluginConfigPage_AdjustParams" xml:space="preserve"><value>플러그인 매개변수 조정</value></data>
+  <data name="PluginConfigPage_PluginInfo" xml:space="preserve"><value>플러그인 정보</value></data>
+  <data name="UpdateNotification_Title" xml:space="preserve"><value>버전 업데이트 알림</value></data>
+  <data name="UpdateNotification_UpdateNow" xml:space="preserve"><value>지금 업데이트</value></data>
+  <data name="VideoResources_Title" xml:space="preserve"><value>비디오 리소스 라이브러리</value></data>
+  <data name="VideoResources_CharacterVideos" xml:space="preserve"><value>캐릭터 비디오</value></data>
+  <data name="VideoResources_Play" xml:space="preserve"><value>재생</value></data>
+  <data name="VideoResources_Download" xml:space="preserve"><value>다운로드</value></data>
+  <data name="VideoResources_CutsceneVideos" xml:space="preserve"><value>컷신 비디오</value></data>
+  <data name="ScreenshotGallery_Title" xml:space="preserve"><value>스크린샷 갤러리</value></data>
+  <data name="ScreenshotGallery_BackToGallery" xml:space="preserve"><value>갤러리로 돌아가기</value></data>
+  <data name="ScreenshotGallery_Copy" xml:space="preserve"><value>복사</value></data>
+  <data name="ScreenshotGallery_Cut" xml:space="preserve"><value>자르기</value></data>
+  <data name="ScreenshotGallery_Delete" xml:space="preserve"><value>삭제</value></data>
+  <data name="ScreenshotGallery_OpenFolder" xml:space="preserve"><value>이미지 폴더 열기</value></data>
+  <data name="ScreenshotGallery_OpenWithApp" xml:space="preserve"><value>시스템 앱으로 열기</value></data>
+  <data name="ScreenshotGallery_NoScreenshots" xml:space="preserve"><value>아직 스크린샷이 없습니다</value></data>
+  <data name="ScreenshotGallery_OpenScreenshotFolder" xml:space="preserve"><value>스크린샷 폴더 열기</value></data>
+  <data name="GachaDialog_Title" xml:space="preserve"><value>기원 통계 분석</value></data>
+  <data name="GachaDialog_Close" xml:space="preserve"><value>닫기</value></data>
+  <data name="GachaDialog_GachaRecordLink" xml:space="preserve"><value>기원 기록 링크</value></data>
+  <data name="GachaDialog_PasteUrl" xml:space="preserve"><value>authkey가 포함된 URL을 여기에 붙여넣으세요</value></data>
+  <data name="GachaDialog_StartAnalysis" xml:space="preserve"><value>분석 시작</value></data>
+  <data name="GachaDialog_ExportUigf" xml:space="preserve"><value>UIGF 내보내기</value></data>
+  <data name="GachaDialog_ExportUigfTooltip" xml:space="preserve"><value>표준 UIGF JSON 형식을 바탕 화면으로 내보내기</value></data>
+  <data name="GachaDialog_TotalInvested" xml:space="preserve"><value>합계: </value></data>
+  <data name="GachaDialog_Pulls" xml:space="preserve"><value> 뽑기</value></data>
+  <data name="GachaDialog_CurrentPity" xml:space="preserve"><value>현재 천장</value></data>
+  <data name="GachaDialog_FiveStarCount" xml:space="preserve"><value>5★ 개수</value></data>
+  <data name="GachaDialog_FiveStarRecords" xml:space="preserve"><value>5★ 기록</value></data>
+  <data name="GachaDialog_BasicFeatureNote" xml:space="preserve"><value>이 기능은 기본적인 분석만 제공합니다. 상세 분석은 전용 기원 도구 사용을 권장합니다.</value></data>
+  <data name="HighCpuUsage_Title" xml:space="preserve"><value>성능 이상 경고</value></data>
+  <data name="HighCpuUsage_Detected" xml:space="preserve"><value>비정상적인 장기 리소스 사용 감지됨</value></data>
+  <data name="HighCpuUsage_Description" xml:space="preserve"><value>OBS가 감지되지 않은 상태에서 FufuLauncher의 CPU 사용량이 5분 동안 30% 이상 유지되었습니다. 이는 일반적으로 정상이 아닙니다.</value></data>
+  <data name="HighCpuUsage_SuggestedAction" xml:space="preserve"><value>권장 조치</value></data>
+  <data name="HighCpuUsage_SuggestionText" xml:space="preserve"><value>문제 진단을 위해 보고해 주세요. 문제가 지속되면 종료하고 최신 버전으로 업데이트하세요.</value></data>
+  <data name="HighCpuUsage_Dismiss" xml:space="preserve"><value>무시</value></data>
+  <data name="HighCpuUsage_Report" xml:space="preserve"><value>문제 보고</value></data>
+  <data name="HighCpuUsage_ExitLauncher" xml:space="preserve"><value>런처 종료</value></data>
+  <data name="Diagnostics_Title" xml:space="preserve"><value>시스템 진단</value></data>
+  <data name="Diagnostics_HardwareAndSystem" xml:space="preserve"><value>하드웨어 및 시스템 환경</value></data>
+  <data name="Diagnostics_CollectingInfo" xml:space="preserve"><value>시스템 정보 수집 중...</value></data>
+  <data name="Diagnostics_DisplayAndGraphics" xml:space="preserve"><value>디스플레이 및 그래픽</value></data>
+  <data name="Diagnostics_Resolution" xml:space="preserve"><value>해상도</value></data>
+  <data name="Diagnostics_RefreshRate" xml:space="preserve"><value>재생 빈도</value></data>
+  <data name="Diagnostics_Hardware" xml:space="preserve"><value>하드웨어</value></data>
+  <data name="Diagnostics_SecurityAndNetwork" xml:space="preserve"><value>보안 및 네트워크</value></data>
+  <data name="Diagnostics_WindowsSecurity" xml:space="preserve"><value>Windows 보안 센터</value></data>
+  <data name="Diagnostics_DiskSpace" xml:space="preserve"><value>시스템 디스크 공간</value></data>
+  <data name="Diagnostics_NetworkStatus" xml:space="preserve"><value>네트워크 상태</value></data>
+  <data name="Diagnostics_NetworkRegion" xml:space="preserve"><value>네트워크 지역</value></data>
+  <data name="Diagnostics_Suggestion" xml:space="preserve"><value>제안</value></data>
+  <data name="DailyNote_Title" xml:space="preserve"><value>티바트 일정</value></data>
+  <data name="DailyNote_TodayMaterials" xml:space="preserve"><value>오늘의 재료</value></data>
+  <data name="DailyNote_RefreshStatus" xml:space="preserve"><value>현재 새로고침 상태</value></data>
+  <data name="DailyNote_RefreshData" xml:space="preserve"><value>데이터 새로고침</value></data>
+  <data name="DailyNote_MaterialDropHint" xml:space="preserve"><value>일일 수집, 특성 책, 무기 돌파 재료 드롭 알림</value></data>
+  <data name="DailyNote_TodayBirthday" xml:space="preserve"><value>오늘의 생일</value></data>
+  <data name="DailyNote_CharacterWeapon" xml:space="preserve"><value>캐릭터 / 무기</value></data>
+  <data name="DailyNote_RecentActivities" xml:space="preserve"><value>최근 활동</value></data>
+  <data name="DailyNote_ActivityOverview" xml:space="preserve"><value>활동 개요</value></data>
+  <data name="DailyNote_ActivityDesc" xml:space="preserve"><value>현재 이벤트와 남은 시간을 한눈에 확인하세요.</value></data>
+  <data name="GenshinData_Title" xml:space="preserve"><value>여행 일지 - 티바트 재무 보고서</value></data>
+  <data name="GenshinData_TravelJournal" xml:space="preserve"><value>여행 일지</value></data>
+  <data name="GenshinData_DataUpdated" xml:space="preserve"><value>데이터 업데이트: </value></data>
+  <data name="GenshinData_TodayEarnings" xml:space="preserve"><value>오늘의 수입</value></data>
+  <data name="GenshinData_Primogems" xml:space="preserve"><value>원석</value></data>
+  <data name="GenshinData_Mora" xml:space="preserve"><value>모라</value></data>
+  <data name="GenshinData_MonthTotal" xml:space="preserve"><value>월간 합계</value></data>
+  <data name="GenshinData_PrimogemsEarned" xml:space="preserve"><value>획득 원석</value></data>
+  <data name="GenshinData_Mom" xml:space="preserve"><value>전월 대비 </value></data>
+  <data name="GenshinData_LastMonth" xml:space="preserve"><value>(지난달 </value></data>
+  <data name="GenshinData_MoraEarned" xml:space="preserve"><value>획득 모라</value></data>
+  <data name="GenshinData_DataNote" xml:space="preserve"><value>• 일일 데이터는 보통 다음 날 아침에 업데이트됩니다&#x0a;• 수입 수준은 원석 획득 효율을 기준으로 계산됩니다</value></data>
+  <data name="GenshinData_MonthlySourceAnalysis" xml:space="preserve"><value>월간 원석 출처 분석</value></data>
+  <data name="GenshinData_Total" xml:space="preserve"><value>합계</value></data>
+  <data name="DataPage_SearchRole" xml:space="preserve"><value>캐릭터 검색...</value></data>
+  <data name="DataPage_AllRoles" xml:space="preserve"><value>모든 캐릭터</value></data>
+  <data name="DataPage_Only5Star" xml:space="preserve"><value>5★만</value></data>
+  <data name="DataPage_Only4Star" xml:space="preserve"><value>4★만</value></data>
+  <data name="DataPage_StarUnit" xml:space="preserve"><value>★</value></data>
+  <data name="DataPage_Talents" xml:space="preserve"><value>특성</value></data>
+  <data name="DataPage_ConstellationDist" xml:space="preserve"><value>운명의 자리 (C0/C1/C2)</value></data>
+  <data name="DataPage_AvgDmg" xml:space="preserve"><value>평균 대미지</value></data>
+  <data name="DataPage_TopWeapons" xml:space="preserve"><value>인기 무기</value></data>
+  <data name="DataPage_TopArtifacts" xml:space="preserve"><value>인기 성유물</value></data>
+  <data name="DataPage_AvgInterval" xml:space="preserve"><value>평균 간격:</value></data>
+  <data name="DataPage_MinInterval" xml:space="preserve"><value>최소 간격:</value></data>
+  <data name="DataPage_HistoryRerun" xml:space="preserve"><value>기록:</value></data>
+  <data name="DataPage_LoadingTimeline" xml:space="preserve"><value>타임라인 데이터 로딩 중, 잠시만 기다려 주세요...</value></data>
+  <data name="DataPage_UsageRate" xml:space="preserve"><value>사용률</value></data>
+  <data name="DataPage_SpeedrunTime" xml:space="preserve"><value>스피드런 시간</value></data>
+  <data name="DataPage_OwnRate" xml:space="preserve"><value>보유율</value></data>
+  <data name="DataPage_AvgConstellation" xml:space="preserve"><value>평균 운명의 자리</value></data>
+  <data name="DataPage_AvgTime" xml:space="preserve"><value>평균 시간</value></data>
+  <data name="DataPage_ClickToView" xml:space="preserve"><value>클릭하여 확대</value></data>
+  <data name="DataPage_5Star" xml:space="preserve"><value>5★</value></data>
+  <data name="DataPage_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="DataPage_RoleData" xml:space="preserve"><value>캐릭터 데이터</value></data>
+  <data name="DataPage_AbyssData" xml:space="preserve"><value>나선비경</value></data>
+  <data name="DataPage_SpiralAbyss" xml:space="preserve"><value>나선비경</value></data>
+  <data name="DataPage_WishData" xml:space="preserve"><value>기원 데이터</value></data>
+  <data name="DataPage_RerunTimer" xml:space="preserve"><value>복각 타이머</value></data>
+  <data name="DataPage_Timeline" xml:space="preserve"><value>타임라인</value></data>
+  <data name="DataPage_DataProvidedBy" xml:space="preserve"><value>캐릭터 데이터 제공: Teyvat Assistant. 타임라인 제공: Paimon.moe.</value></data>
+  <data name="HDR_SaveAndApply" xml:space="preserve"><value>저장 및 적용</value></data>
+  <data name="HDR_BrightnessConfig" xml:space="preserve"><value>HDR 밝기 설정</value></data>
+  <data name="HDR_NotSupported" xml:space="preserve"><value>HDR 미지원</value></data>
+  <data name="HDR_NotSupportedMsg" xml:space="preserve"><value>현재 모니터가 HDR을 지원하지 않는 것으로 보고됩니다.</value></data>
+  <data name="HDR_NotEnabled" xml:space="preserve"><value>HDR 활성화 안 됨</value></data>
+  <data name="HDR_NotEnabledMsg" xml:space="preserve"><value>Windows HDR 모드가 활성화되지 않았습니다. 자동 조정이 부정확할 수 있습니다.</value></data>
+  <data name="HDR_DisplayInfo" xml:space="preserve"><value>디스플레이 정보</value></data>
+  <data name="HDR_SwitchSetting" xml:space="preserve"><value>HDR 스위치 설정 (매 실행 시 강제 적용)</value></data>
+  <data name="HDR_OffContent" xml:space="preserve"><value>HDR 비활성화 (레지스트리 값 0)</value></data>
+  <data name="HDR_OnContent" xml:space="preserve"><value>HDR 활성화 (레지스트리 값 1)</value></data>
+  <data name="HDR_RegistryNote" xml:space="preserve"><value>참고: 저장하면 즉시 레지스트리가 수정되며, 다음 게임 실행 시 이 설정이 자동으로 다시 적용됩니다.</value></data>
+  <data name="HDR_MaxLuminance" xml:space="preserve"><value>최대 휘도</value></data>
+  <data name="HDR_SceneLuminance" xml:space="preserve"><value>페이퍼 화이트</value></data>
+  <data name="HDR_UILuminance" xml:space="preserve"><value>UI 화이트</value></data>
+  <data name="HDR_ResetDefault" xml:space="preserve"><value>기본값 초기화</value></data>
+  <data name="HDR_AutoAdjust" xml:space="preserve"><value>자동 조정</value></data>
+  <data name="HDR_AutoAdjustTooltip" xml:space="preserve"><value>디스플레이 데이터를 기반으로 자동 계산</value></data>
+  <data name="InventoryWindow_Title" xml:space="preserve"><value>인벤토리 및 목표 계획</value></data>
+  <data name="InventoryWindow_ArchiveTitle" xml:space="preserve"><value>인벤토리 아카이브</value></data>
+  <data name="InventoryWindow_SyncStatus" xml:space="preserve"><value>현재 동기화 상태</value></data>
+  <data name="InventoryWindow_RefreshData" xml:space="preserve"><value>데이터 업데이트</value></data>
+  <data name="InventoryWindow_MyBag" xml:space="preserve"><value>내 가방</value></data>
+  <data name="InventoryWindow_InventoryOverview" xml:space="preserve"><value>인벤토리 개요</value></data>
+  <data name="InventoryWindow_OverviewDesc" xml:space="preserve"><value>현재 인벤토리 수량을 확인하고 배지를 통해 목표 달성 아이템을 빠르게 식별하세요.</value></data>
+  <data name="InventoryWindow_GoalCheckHint" xml:space="preserve"><value>목표 달성 시 체크 표시</value></data>
+  <data name="InventoryWindow_Complete" xml:space="preserve"><value>완료</value></data>
+  <data name="InventoryWindow_GoalSetting" xml:space="preserve"><value>목표 설정</value></data>
+  <data name="InventoryWindow_GoalPlanning" xml:space="preserve"><value>목표 계획</value></data>
+  <data name="InventoryWindow_GoalDesc" xml:space="preserve"><value>일반 재료의 목표 수량을 설정하면 인벤토리 페이지에 완료 상태가 표시됩니다.</value></data>
+  <data name="InventoryWindow_ItemName" xml:space="preserve"><value>아이템 이름</value></data>
+  <data name="InventoryWindow_TargetCount" xml:space="preserve"><value>목표 수량</value></data>
+  <data name="InventoryWindow_GoalMetHint" xml:space="preserve"><value>목표가 달성되면 아이템 카드에 완료 배지가 표시됩니다.</value></data>
+  <data name="AchievementWindow_Title" xml:space="preserve"><value>업적 관리자</value></data>
+  <data name="AchievementWindow_Archive" xml:space="preserve"><value>업적 아카이브</value></data>
+  <data name="AchievementWindow_ViewGuide" xml:space="preserve"><value>가이드 보기</value></data>
+  <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve"><value>미호요 커뮤니티에서 이 업적 가이드 검색</value></data>
+  <data name="AchievementWindow_SwitchView" xml:space="preserve"><value>보기 전환</value></data>
+  <data name="AchievementWindow_PrimogemTooltip" xml:space="preserve"><value>원석: 획득 / 총계</value></data>
+  <data name="AchievementWindow_ProgressTooltip" xml:space="preserve"><value>업적 진행률</value></data>
+  <data name="AchievementWindow_SearchPlaceholder" xml:space="preserve"><value>업적 이름, 설명 검색...</value></data>
+  <data name="AchievementWindow_Version" xml:space="preserve"><value>버전</value></data>
+  <data name="AchievementWindow_HiddenComplete" xml:space="preserve"><value>완료 숨기기</value></data>
+  <data name="AchievementWindow_ShowAll" xml:space="preserve"><value>모두 표시</value></data>
+  <data name="AchievementWindow_UIAFImport" xml:space="preserve"><value>UIAF 가져오기</value></data>
+  <data name="AchievementWindow_UIAFExport" xml:space="preserve"><value>UIAF 내보내기</value></data>
+  <data name="AchievementWindow_ImportRecords" xml:space="preserve"><value>기록 가져오기</value></data>
+  <data name="AchievementWindow_ManualSave" xml:space="preserve"><value>수동 저장</value></data>
+  <data name="AchievementWindow_CurrentProfile" xml:space="preserve"><value>현재 프로필</value></data>
+  <data name="AchievementWindow_ManageArchive" xml:space="preserve"><value>아카이브 전환 또는 생성</value></data>
+  <data name="AchievementWindow_ArchiveManagement" xml:space="preserve"><value>아카이브 관리</value></data>
+  <data name="AchievementWindow_UpdateData" xml:space="preserve"><value>데이터 업데이트</value></data>
+  <data name="AchievementWindow_Progress" xml:space="preserve"><value>진행률: </value></data>
+  <data name="AgreementPage_Title" xml:space="preserve"><value>사용자 약관</value></data>
+  <data name="AgreementPage_Welcome" xml:space="preserve"><value>FufuLauncher에 오신 것을 환영합니다! 다음 약관을 주의 깊게 읽어주세요.</value></data>
+  <data name="AgreementPage_AgreeCheck" xml:space="preserve"><value>사용자 약관을 읽고 동의합니다</value></data>
+  <data name="AgreementPage_ScrollHint" xml:space="preserve"><value>동의하기 전에 전체 약관을 스크롤하여 읽어주세요</value></data>
+  <data name="AgreementPage_IconCheckHint" xml:space="preserve"><value>표시 품질을 확인하려면 아래 아이콘이 올바르게 표시되는지 확인하세요</value></data>
+  <data name="AgreementPage_Settings" xml:space="preserve"><value>설정</value></data>
+  <data name="AgreementPage_Home" xml:space="preserve"><value>홈</value></data>
+  <data name="AgreementPage_Files" xml:space="preserve"><value>파일</value></data>
+  <data name="AgreementPage_CannotDisplay" xml:space="preserve"><value>표시할 수 없음</value></data>
+  <data name="AgreementPage_DisplayNormal" xml:space="preserve"><value>정상 표시</value></data>
+  <data name="AgreementPage_DataStorage" xml:space="preserve"><value>데이터 저장 위치</value></data>
+  <data name="AgreementPage_DataDirDesc" xml:space="preserve"><value>데이터 및 캐시의 저장 디렉토리를 사용자 지정하거나 기본 설정을 유지할 수 있습니다.</value></data>
+  <data name="AgreementPage_UserDataDir" xml:space="preserve"><value>사용자 데이터 디렉토리</value></data>
+  <data name="AgreementPage_Change" xml:space="preserve"><value>변경</value></data>
+  <data name="AgreementPage_CacheDir" xml:space="preserve"><value>캐시 디렉토리</value></data>
+  <data name="AgreementPage_ConfirmAndComplete" xml:space="preserve"><value>확인 및 완료</value></data>
+  <data name="AgreementPage_Next" xml:space="preserve"><value>다음</value></data>
+  <data name="PlayerInfo_Title" xml:space="preserve"><value>캐릭터 정보 조회</value></data>
+  <data name="PlayerInfo_SearchUid" xml:space="preserve"><value>검색할 UID 입력...</value></data>
+  <data name="PlayerInfo_Query" xml:space="preserve"><value>검색</value></data>
+  <data name="PlayerInfo_RefreshMyData" xml:space="preserve"><value>내 데이터 새로고침</value></data>
+  <data name="PlayerInfo_RoleList" xml:space="preserve"><value>캐릭터 목록</value></data>
+  <data name="PlayerInfo_SelectRoleHint" xml:space="preserve"><value>왼쪽에서 캐릭터를 선택하여 세부 정보 확인</value></data>
+  <data name="PlayerInfo_BasicStats" xml:space="preserve"><value>기본 스탯</value></data>
+  <data name="PlayerInfo_CoreStats" xml:space="preserve"><value>핵심 스탯</value></data>
+  <data name="PlayerInfo_Hp" xml:space="preserve"><value>최대 HP</value></data>
+  <data name="PlayerInfo_Attack" xml:space="preserve"><value>공격력</value></data>
+  <data name="PlayerInfo_Defense" xml:space="preserve"><value>방어력</value></data>
+  <data name="PlayerInfo_ElementalMastery" xml:space="preserve"><value>원소 마스터리</value></data>
+  <data name="PlayerInfo_AdvancedStats" xml:space="preserve"><value>고급 스탯</value></data>
+  <data name="PlayerInfo_CritRate" xml:space="preserve"><value>치명타 확률</value></data>
+  <data name="PlayerInfo_CritDmg" xml:space="preserve"><value>치명타 피해</value></data>
+  <data name="PlayerInfo_Recharge" xml:space="preserve"><value>원소 충전 효율</value></data>
+  <data name="PlayerInfo_FireDmg" xml:space="preserve"><value>불 원소 피해</value></data>
+  <data name="PlayerInfo_WaterDmg" xml:space="preserve"><value>물 원소 피해</value></data>
+  <data name="PlayerInfo_PhysicalDmg" xml:space="preserve"><value>물리 피해</value></data>
+  <data name="PlayerInfo_ArtifactDetails" xml:space="preserve"><value>성유물 세부 정보</value></data>
+  <data name="PlayerInfo_ViewSource" xml:space="preserve"><value>출처 보기</value></data>
+  <data name="PlayerInfo_WeaponAndSkills" xml:space="preserve"><value>무기 및 스킬</value></data>
+  <data name="PlayerInfo_Level" xml:space="preserve"><value>Lv. </value></data>
+  <data name="PlayerInfo_SkillLevels" xml:space="preserve"><value>스킬 레벨</value></data>
+  <data name="PlayerInfo_NormalAttack" xml:space="preserve"><value>일반 공격</value></data>
+  <data name="PlayerInfo_ElementalSkill" xml:space="preserve"><value>원소 스킬</value></data>
+  <data name="PlayerInfo_ElementalBurst" xml:space="preserve"><value>원소 폭발</value></data>
+  <data name="PlayerInfo_ViewTeamRecommend" xml:space="preserve"><value>파티 추천 보기</value></data>
+  <data name="GachaAnalysis_Title" xml:space="preserve"><value>기원 기록 분석</value></data>
+  <data name="GachaAnalysis_Pulls" xml:space="preserve"><value> 뽑기</value></data>
+  <data name="GachaAnalysis_NoRecords" xml:space="preserve"><value>기록 없음</value></data>
+  <data name="GachaAnalysis_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="GachaAnalysis_TotalPulls" xml:space="preserve"><value>총 뽑기</value></data>
+  <data name="GachaAnalysis_PrimogemsSpent" xml:space="preserve"><value>사용 원석</value></data>
+  <data name="GachaAnalysis_Show4Star" xml:space="preserve"><value>4★ 기록 표시</value></data>
+  <data name="GachaAnalysis_Show4StarShort" xml:space="preserve"><value>4★ 표시</value></data>
+  <data name="GachaAnalysis_Total" xml:space="preserve"><value>합계: </value></data>
+  <data name="GachaAnalysis_Pity5Star" xml:space="preserve"><value>5★ 천장: </value></data>
+  <data name="GachaAnalysis_Pity4Star" xml:space="preserve"><value>4★ 천장: </value></data>
+  <data name="GachaAnalysis_Pity5StarShort" xml:space="preserve"><value>5★ 천장 </value></data>
+  <data name="GachaAnalysis_Pity4StarShort" xml:space="preserve"><value>4★ 천장 </value></data>
+  <data name="GachaAnalysis_CharacterEvent" xml:space="preserve"><value>캐릭터 이벤트</value></data>
+  <data name="GachaAnalysis_WeaponEvent" xml:space="preserve"><value>무기 이벤트</value></data>
+  <data name="GachaAnalysis_ChronicledWish" xml:space="preserve"><value>집록 기원</value></data>
+  <data name="GachaAnalysis_StandardWish" xml:space="preserve"><value>상시 기원</value></data>
+  <data name="GachaAnalysis_WishOverview" xml:space="preserve"><value>기원 개요</value></data>
+  <data name="GachaAnalysis_WishAnalysis" xml:space="preserve"><value>기원 분석</value></data>
+  <data name="GachaAnalysis_GetRecords" xml:space="preserve"><value>기원 기록 가져오기</value></data>
+  <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve"><value>미호요 커뮤니티 계정으로 가져오기</value></data>
+  <data name="GachaAnalysis_GetViaUrl" xml:space="preserve"><value>URL로 가져오기</value></data>
+  <data name="GachaAnalysis_ImportUigf" xml:space="preserve"><value>UIGF 파일 가져오기</value></data>
+  <data name="GachaAnalysis_UpdateData" xml:space="preserve"><value>데이터 업데이트</value></data>
+  <data name="GachaAnalysis_About" xml:space="preserve"><value>정보</value></data>
+  <data name="GachaAnalysis_ImageLibrary" xml:space="preserve"><value>이미지 리소스 라이브러리</value></data>
+  <data name="GachaAnalysis_ListView" xml:space="preserve"><value>목록 보기</value></data>
+  <data name="GachaAnalysis_CardView" xml:space="preserve"><value>카드 보기</value></data>
+  <data name="GachaAnalysis_ExportUigf" xml:space="preserve"><value>UIGF 내보내기</value></data>
+  <data name="GachaAnalysis_RefreshMetadata" xml:space="preserve"><value>메타데이터 새로고침</value></data>
+  <data name="GachaAnalysis_DeleteRecords" xml:space="preserve"><value>기록 삭제</value></data>
+  <data name="GachaAnalysis_PullsUnit" xml:space="preserve"><value> 뽑기</value></data>
+  <data name="GachaAnalysis_ImportHint" xml:space="preserve"><value>기원 기록을 가져올 방법을 선택하고 기원 데이터 분석을 시작하세요</value></data>
+  <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve"><value>로그인된 미호요 커뮤니티&#x0a;계정을 통해 직접 가져오기</value></data>
+  <data name="GachaAnalysis_Recommended" xml:space="preserve"><value>권장</value></data>
+  <data name="GachaAnalysis_UrlDesc" xml:space="preserve"><value>기원 분석 링크를 붙여넣어&#x0a;API에서 기록 가져오기</value></data>
+  <data name="GachaAnalysis_UigfDesc" xml:space="preserve"><value>표준 UIGF 형식 JSON 파일에서&#x0a;기록 가져오기&#x0a;UIGF v4.x/3.0/2.x</value></data>
+  <data name="GachaAnalysis_IncrementalUpdate" xml:space="preserve"><value>증분 업데이트 (권장)</value></data>
+  <data name="GachaAnalysis_FullUpdate" xml:space="preserve"><value>전체 업데이트</value></data>
+  <data name="GachaAnalysis_Characters" xml:space="preserve"><value>캐릭터</value></data>
+  <data name="GachaAnalysis_Weapons" xml:space="preserve"><value>무기</value></data>
+  <data name="GachaAnalysis_CachedIconData" xml:space="preserve"><value>캐시된 캐릭터 및 무기 아이콘 데이터</value></data>
+  <data name="GachaAnalysis_GeneratingAnalysis" xml:space="preserve"><value>기원 분석 생성 중...</value></data>
+  <data name="GachaAnalysis_CopyImage" xml:space="preserve"><value>이미지 복사</value></data>
+  <data name="GachaAnalysis_SaveImage" xml:space="preserve"><value>이미지 저장</value></data>
+  <data name="GachaAnalysis_GoldPullStats" xml:space="preserve"><value>골드 뽑기 방식 통계</value></data>
+  <data name="GachaAnalysis_GoldPullStatsDesc" xml:space="preserve"><value>동일 기원에서 동시에 기록된 항목은 하나의 그룹으로 계산됩니다</value></data>
+  <data name="GachaAnalysis_TenPullGoldRate" xml:space="preserve"><value>10연차 5★ 확률</value></data>
+  <data name="GachaAnalysis_GroupsWith5Star" xml:space="preserve"><value> 그룹에서 5★</value></data>
+  <data name="GachaAnalysis_SinglePullGoldRate" xml:space="preserve"><value>단차 5★ 확률</value></data>
+  <data name="GachaAnalysis_TimesWith5Star" xml:space="preserve"><value> 회 5★</value></data>
+  <data name="GachaAnalysis_Avg5StarCost" xml:space="preserve"><value>평균 5★ 비용</value></data>
+  <data name="GachaAnalysis_Approx" xml:space="preserve"><value>약 </value></data>
+  <data name="GachaAnalysis_PrimogemsUnit" xml:space="preserve"><value> 원석</value></data>
+  <data name="GachaAnalysis_ActiveMonths" xml:space="preserve"><value>활동 개월</value></data>
+  <data name="GachaAnalysis_MonthlyAvg" xml:space="preserve"><value>월 평균 </value></data>
+  <data name="GachaAnalysis_PeakMonth" xml:space="preserve"><value>최고 월</value></data>
+  <data name="GachaAnalysis_5StarAvg" xml:space="preserve"><value>5★ 평균</value></data>
+  <data name="GachaAnalysis_AllPools5Star" xml:space="preserve"><value>전체 기원 5★</value></data>
+  <data name="GachaAnalysis_RarityComposition" xml:space="preserve"><value>등급 구성</value></data>
+  <data name="GachaAnalysis_Rarity" xml:space="preserve"><value>등급</value></data>
+  <data name="GachaAnalysis_Proportion" xml:space="preserve"><value>비율</value></data>
+  <data name="GachaAnalysis_PoolPullDistribution" xml:space="preserve"><value>기원별 뽑기 분포</value></data>
+  <data name="GachaAnalysis_Pool" xml:space="preserve"><value>기원</value></data>
+  <data name="GachaAnalysis_Distribution" xml:space="preserve"><value>분포</value></data>
+  <data name="GachaAnalysis_Recent5StarPulls" xml:space="preserve"><value>최근 5★ 뽑기 횟수</value></data>
+  <data name="GachaAnalysis_4StarTop10" xml:space="preserve"><value>4★ 뽑기 Top 10</value></data>
+  <data name="GachaAnalysis_PityInterval" xml:space="preserve"><value>5★ 천장 간격</value></data>
+  <data name="GachaAnalysis_MonthlyTrend" xml:space="preserve"><value>월별 뽑기 추세</value></data>
+  <data name="GachaAnalysis_MonthlyTrendDesc" xml:space="preserve"><value>월별 전체 기원 1-5★</value></data>
+  <data name="WishBannerImage" xml:space="preserve"><value> 기원 배너 이미지</value></data>
+  <data name="HelpPage_SearchResults" xml:space="preserve"><value>{0}개의 결과를 찾았습니다. 클릭하여 열기</value></data>
+  <data name="HelpPage_NoResults" xml:space="preserve"><value>일치하는 문서를 찾을 수 없습니다</value></data>
+  <data name="Success" xml:space="preserve"><value>성공</value></data>
+  <data name="Failure" xml:space="preserve"><value>실패</value></data>
+  <data name="Settings_Disclaimer" xml:space="preserve"><value>면책 조항</value></data>
+  <data name="Settings_ContinueVisit" xml:space="preserve"><value>계속</value></data>
+  <data name="Settings_CommunityCheckinNote" xml:space="preserve"><value>커뮤니티 출석 체크 정보</value></data>
+  <data name="Settings_CloudCheckinNote" xml:space="preserve"><value>클라우드 게임 출석 체크 정보</value></data>
+  <data name="Settings_Notice" xml:space="preserve"><value>알림</value></data>
+  <data name="Settings_SubmitApp" xml:space="preserve"><value>제출</value></data>
+  <data name="Settings_NetworkError" xml:space="preserve"><value>네트워크 오류</value></data>
+  <data name="DownloadWindow_Success" xml:space="preserve"><value>다운로드 성공</value></data>
+  <data name="DownloadWindow_Complete" xml:space="preserve"><value>완료</value></data>
+  <data name="DownloadWindow_Cancelled" xml:space="preserve"><value>작업 취소됨</value></data>
+  <data name="DownloadWindow_Error" xml:space="preserve"><value>오류 발생</value></data>
+  <data name="DownloadWindow_HideDetailLog" xml:space="preserve"><value>상세 로그 숨기기</value></data>
+  <data name="DownloadWindow_AllDone" xml:space="preserve"><value>모든 파일이 다운로드, 검증 및 배포되었습니다.</value></data>
+  <data name="DownloadWindow_Processing" xml:space="preserve"><value>처리 중: {0}/{1} 파일</value></data>
+  <data name="DownloadWindow_InitTask" xml:space="preserve"><value>작업 초기화 중...</value></data>
+  <data name="CommunityPage_WelcomeTitle" xml:space="preserve"><value>VanillaBBS에 오신 것을 환영합니다. 다음 내용을 읽어주세요</value></data>
+  <data name="CommunityPage_AuthTitle" xml:space="preserve"><value>권한 요청</value></data>
+  <data name="CommunityPage_Agree" xml:space="preserve"><value>동의</value></data>
+  <data name="CommunityPage_Deny" xml:space="preserve"><value>거부</value></data>
+  <data name="CommunityPage_Unknown" xml:space="preserve"><value>알 수 없음</value></data>
+  <data name="CommunityPage_DataRequest" xml:space="preserve"><value>현재 페이지에서 다음 데이터에 대한 접근을 요청합니다:</value></data>
+  <data name="CommunityPage_ConsentPrompt" xml:space="preserve"><value>제공에 동의하시겠습니까?</value></data>
+  <data name="AboutPage_FetchFailed" xml:space="preserve"><value>가져오기 실패</value></data>
+  <data name="AboutPage_LoadingBio" xml:space="preserve"><value>소개 로딩 중...</value></data>
+  <data name="AboutPage_OpenInBrowser" xml:space="preserve"><value>외부 브라우저에서 홈페이지 열기</value></data>
+  <data name="AboutPage_NoBio" xml:space="preserve"><value>이 사용자는 소개가 없습니다.</value></data>
+  <data name="AboutPage_ConfirmNav" xml:space="preserve"><value>이동 확인 / 복사</value></data>
+  <data name="AboutPage_GitHubToken" xml:space="preserve"><value>GitHub 토큰</value></data>
+  <data name="AboutPage_FetchSuccess" xml:space="preserve"><value>가져오기 성공! 다운로드 스크립트가 생성되었습니다.</value></data>
+  <data name="AboutPage_EnterToken" xml:space="preserve"><value>토큰을 입력하세요!</value></data>
+  <data name="AboutPage_FetchFailedArtifact" xml:space="preserve"><value>가져오기 실패 (아티팩트를 찾을 수 없음)</value></data>
+  <data name="AboutPage_FetchFailedRun" xml:space="preserve"><value>가져오기 실패 (성공적인 실행을 찾을 수 없음)</value></data>
+  <data name="AboutPage_FetchFailedWorkflow" xml:space="preserve"><value>가져오기 실패 (워크플로우를 찾을 수 없음)</value></data>
+  <data name="AboutPage_Exception" xml:space="preserve"><value>예외 발생</value></data>
+  <data name="AboutPage_GitHubTokenPlaceholder" xml:space="preserve"><value>GitHub 토큰을 입력하세요</value></data>
+  <data name="AboutPage_SelectContact" xml:space="preserve"><value>연락 방법 선택</value></data>
+  <data name="AboutPage_DiscordCopied" xml:space="preserve"><value>Discord ID가 복사되었습니다!</value></data>
+  <data name="AboutPage_Loading" xml:space="preserve"><value>로딩 중...</value></data>
+  <data name="AchievementWindow_DefaultProfile" xml:space="preserve"><value>기본 프로필</value></data>
+  <data name="AchievementWindow_UnnamedProfile" xml:space="preserve"><value>이름 없는 프로필</value></data>
+  <data name="AchievementWindow_UnknownCategory" xml:space="preserve"><value>알 수 없는 카테고리</value></data>
+  <data name="AchievementWindow_AllVersions" xml:space="preserve"><value>모든 버전</value></data>
+  <data name="AchievementWindow_CurrentSuffix" xml:space="preserve"><value> (현재)</value></data>
+  <data name="AchievementWindow_EnterName" xml:space="preserve"><value>이름 입력...</value></data>
+  <data name="AchievementWindow_DbNotFound" xml:space="preserve"><value>내장 데이터베이스 파일을 찾을 수 없습니다</value></data>
+  <data name="AchievementWindow_AlreadyLatest" xml:space="preserve"><value>아카이브가 이미 최신 버전입니다. 업데이트가 필요하지 않습니다.</value></data>
+  <data name="AchievementWindow_UpdateDb" xml:space="preserve"><value>업적 데이터베이스 업데이트</value></data>
+  <data name="AchievementWindow_StartUpdate" xml:space="preserve"><value>업데이트 시작</value></data>
+  <data name="AchievementWindow_SaveCurrent" xml:space="preserve"><value>현재 프로필 저장</value></data>
+  <data name="AchievementWindow_NewProfile" xml:space="preserve"><value>새 프로필</value></data>
+  <data name="AchievementWindow_DuplicateName" xml:space="preserve"><value>이 프로필 이름은 이미 존재합니다!</value></data>
+  <data name="AchievementWindow_ProfileNotFound" xml:space="preserve"><value>대상 프로필 파일을 찾을 수 없습니다!</value></data>
+  <data name="AchievementWindow_InvalidChars" xml:space="preserve"><value>이름에 유효하지 않은 문자가 포함되어 있습니다. 다시 시도하세요.</value></data>
+  <data name="AchievementWindow_EmptyContent" xml:space="preserve"><value>파일에 내용이 없습니다.</value></data>
+  <data name="AchievementWindow_NoBackup" xml:space="preserve"><value>백업 프로필이 없습니다</value></data>
+  <data name="AchievementWindow_ConfirmDeleteMsg" xml:space="preserve"><value>영구적으로 삭제하시겠습니까?</value></data>
+  <data name="AchievementWindow_NewBlank" xml:space="preserve"><value>새 빈 프로필</value></data>
+  <data name="AchievementWindow_ExistingProfiles" xml:space="preserve"><value>기존 프로필:</value></data>
+  <data name="AchievementWindow_ImportData" xml:space="preserve"><value>데이터 가져오기</value></data>
+  <data name="AchievementWindow_ImportFailed" xml:space="preserve"><value>가져오기 실패</value></data>
+  <data name="AchievementWindow_ExportSuccess" xml:space="preserve"><value>내보내기 성공</value></data>
+  <data name="AchievementWindow_ExportFailed" xml:space="preserve"><value>내보내기 실패</value></data>
+  <data name="AchievementWindow_InvalidName" xml:space="preserve"><value>유효하지 않은 이름</value></data>
+  <data name="AchievementWindow_ReadFailed" xml:space="preserve"><value>읽기 실패</value></data>
+  <data name="AchievementWindow_EmptyFile" xml:space="preserve"><value>빈 파일</value></data>
+  <data name="AchievementWindow_SwitchFailed" xml:space="preserve"><value>전환 실패</value></data>
+  <data name="AchievementWindow_SaveSuccess" xml:space="preserve"><value>저장 성공</value></data>
+  <data name="AchievementWindow_ConfirmDelete" xml:space="preserve"><value>삭제 확인</value></data>
+  <data name="AchievementWindow_Importing" xml:space="preserve"><value>업적 가져오는 중</value></data>
+  <data name="AchievementWindow_TotalAchievements" xml:space="preserve"><value>총 {0}개 업적</value></data>
+  <data name="AchievementWindow_DataLoaded" xml:space="preserve"><value>데이터 로드됨</value></data>
+  <data name="AchievementWindow_Saving" xml:space="preserve"><value>저장 중...</value></data>
+  <data name="AchievementWindow_SavedToDocs" xml:space="preserve"><value>데이터가 문서 폴더에 저장되었습니다</value></data>
+  <data name="AchievementWindow_ReadingData" xml:space="preserve"><value>데이터 읽는 중...</value></data>
+  <data name="AchievementWindow_SwitchingProfile" xml:space="preserve"><value>프로필 전환 중...</value></data>
+  <data name="AchievementWindow_PreparingRead" xml:space="preserve"><value>데이터 읽기 준비 중...</value></data>
+  <data name="AchievementWindow_ApplyingChanges" xml:space="preserve"><value>변경 사항 적용 중</value></data>
+  <data name="AchievementWindow_RefreshingUI" xml:space="preserve"><value>인터페이스 새로고침 중...</value></data>
+  <data name="AchievementWindow_ReadingUIAF" xml:space="preserve"><value>UIAF 데이터 읽는 중...</value></data>
+  <data name="AchievementWindow_GeneratingUIAF" xml:space="preserve"><value>UIAF 데이터 생성 중...</value></data>
+  <data name="AchievementWindow_UIAFExportDone" xml:space="preserve"><value>UIAF 내보내기 완료</value></data>
+  <data name="AchievementWindow_SaveException" xml:space="preserve"><value>저장 예외</value></data>
+  <data name="AchievementWindow_CannotOpenBrowser" xml:space="preserve"><value>브라우저를 열 수 없습니다</value></data>
+  <data name="LaunchErr_UnknownError" xml:space="preserve"><value>알 수 없는 오류</value></data>
+  <data name="LaunchErr_InvalidGamePath" xml:space="preserve"><value>게임 경로가 유효하지 않거나 존재하지 않습니다</value></data>
+  <data name="LaunchErr_ExeNotFound" xml:space="preserve"><value>게임 실행 파일을 찾을 수 없습니다. 경로 설정을 확인하세요.
+검색된 파일:
+{0}</value></data>
+  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>게임 디렉토리에서 여러 실행 파일이 감지되었습니다. 런처가 시작할 파일을 결정할 수 없습니다. 추가 클라이언트 파일을 정리하거나 설정에서 실행 파일 이름을 사용자 지정하세요.</value></data>
+  <data name="LaunchErr_CannotLoadConfig" xml:space="preserve"><value>게임 설정 파일을 로드할 수 없습니다</value></data>
+  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>실행 시간 초과, 다시 시도하세요</value></data>
+  <data name="LaunchErr_FatalError" xml:space="preserve"><value>실행 중 치명적 오류 발생: {0}</value></data>
+  <data name="LaunchErr_PluginDamagedTitle" xml:space="preserve"><value>플러그인이 손상되었을 수 있습니다</value></data>
+  <data name="LaunchErr_PluginDamagedMsg" xml:space="preserve"><value>플러그인 파일이 손상되었거나 바이러스 백신 소프트웨어에 의해 차단되었습니다. 기능이 제대로 작동하지 않을 수 있습니다. 플러그인을 다시 설치하세요.</value></data>
+  <data name="Status_Success" xml:space="preserve"><value>성공</value></data>
+  <data name="Status_Failure" xml:space="preserve"><value>실패</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>건너뜀</value></data>
+  <data name="Status_Completed" xml:space="preserve"><value>완료됨</value></data>
+  <data name="Status_Unknown" xml:space="preserve"><value>알 수 없음</value></data>
+  <data name="Status_None" xml:space="preserve"><value>없음</value></data>
+  <data name="Status_Exception" xml:space="preserve"><value>예외</value></data>
+  <data name="Status_RequestFailed" xml:space="preserve"><value>요청 실패</value></data>
+  <data name="Status_UnknownError" xml:space="preserve"><value>알 수 없는 오류</value></data>
+  <data name="CheckinCloud_Title" xml:space="preserve"><value>클라우드 원신 출석 체크</value></data>
+  <data name="CheckinCloud_MissingCredential" xml:space="preserve"><value>클라우드 게임 자격 증명(x-rpc-combo_token) 누락</value></data>
+  <data name="CheckinCloud_TokenExpired" xml:space="preserve"><value>토큰이 만료되었거나 계정이 제한되었습니다</value></data>
+  <data name="CheckinCloud_GainedTime" xml:space="preserve"><value>{0}분의 무료 시간 획득</value></data>
+  <data name="CheckinCloud_CurrentFreeTime" xml:space="preserve"><value>현재 무료 시간: {0}</value></data>
+  <data name="CheckinCloud_AlreadyCheckedIn" xml:space="preserve"><value>오늘 이미 출석했거나 한도에 도달했습니다</value></data>
+  <data name="CheckinCloud_PlayCardStatus" xml:space="preserve"><value>플레이 카드 상태: {0}, 미호요 코인: {1}</value></data>
+  <data name="CheckinCloud_Exception" xml:space="preserve"><value>예외: {0}</value></data>
+  <data name="CheckinCloud_HoursMinutes" xml:space="preserve"><value>{0}시간 {1}분</value></data>
+  <data name="CheckinCloud_HoursOnly" xml:space="preserve"><value>{0}시간</value></data>
+  <data name="CheckinCloud_MinutesOnly" xml:space="preserve"><value>{0}분</value></data>
+  <data name="CheckinCommunity_Title" xml:space="preserve"><value>커뮤니티 출석 체크</value></data>
+  <data name="CheckinCommunity_MissingToken" xml:space="preserve"><value>stoken 또는 mid 누락</value></data>
+  <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve"><value>작업 상태를 가져오지 못했습니다. 쿠키를 확인하세요.</value></data>
+  <data name="CheckinCommunity_TodayDone" xml:space="preserve"><value>오늘 완료 ({0} 미호요 코인)</value></data>
+  <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve"><value>커뮤니티 출석 이미 완료, 건너뜀</value></data>
+  <data name="CheckinCommunity_GetPostsFailed" xml:space="preserve"><value>게시물 목록을 가져오지 못했습니다. 읽기/좋아요/공유를 수행할 수 없습니다.</value></data>
+  <data name="CheckinCommunity_ReadDoneSkipped" xml:space="preserve"><value>읽기 이미 완료, 건너뜀</value></data>
+  <data name="CheckinCommunity_LikeDoneSkipped" xml:space="preserve"><value>좋아요 이미 완료, 건너뜀</value></data>
+  <data name="CheckinCommunity_ShareDoneSkipped" xml:space="preserve"><value>공유 이미 완료, 건너뜀</value></data>
+  <data name="CheckinCommunity_GainedCoins" xml:space="preserve"><value>{0} 미호요 코인 획득 (현재 {1})</value></data>
+  <data name="CheckinCommunity_CurrentCoins" xml:space="preserve"><value>{0} 미호요 코인</value></data>
+  <data name="CheckinCommunity_GenshinSignRequestFailed" xml:space="preserve"><value>원신 커뮤니티 출석: 요청 실패</value></data>
+  <data name="CheckinCommunity_GenshinSignSuccess" xml:space="preserve"><value>원신 커뮤니티 출석 성공</value></data>
+  <data name="CheckinCommunity_GenshinSignCaptcha" xml:space="preserve"><value>원신 커뮤니티 출석: CAPTCHA 발생, 건너뜀</value></data>
+  <data name="CheckinCommunity_GenshinSignFailed" xml:space="preserve"><value>원신 커뮤니티 출석 실패: {0}</value></data>
+  <data name="CheckinCommunity_GenshinSignException" xml:space="preserve"><value>원신 커뮤니티 출석 예외: {0}</value></data>
+  <data name="CheckinCommunity_ReadSuccess" xml:space="preserve"><value>읽기 성공: {0}</value></data>
+  <data name="CheckinCommunity_ReadFailed" xml:space="preserve"><value>읽기 실패: {0}</value></data>
+  <data name="CheckinCommunity_ReadException" xml:space="preserve"><value>읽기 예외: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeSuccess" xml:space="preserve"><value>좋아요 성공: {0}</value></data>
+  <data name="CheckinCommunity_LikeFailed" xml:space="preserve"><value>좋아요 실패: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeException" xml:space="preserve"><value>좋아요 예외: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareSuccess" xml:space="preserve"><value>공유 성공: {0}</value></data>
+  <data name="CheckinCommunity_ShareFailed" xml:space="preserve"><value>공유 실패: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareException" xml:space="preserve"><value>공유 예외: {0} ({1})</value></data>
+  <data name="CheckinCommunity_Exception" xml:space="preserve"><value>예외: {0}</value></data>
+  <data name="Checkin_NoBoundAccount" xml:space="preserve"><value>연동된 계정이 감지되지 않았습니다</value></data>
+  <data name="Checkin_Reason" xml:space="preserve"><value>, 사유: {0}</value></data>
+  <data name="Checkin_Detail" xml:space="preserve"><value>, 세부 정보: {0}</value></data>
+  <data name="Checkin_GetInfoFailed" xml:space="preserve"><value>출석 정보를 가져오지 못했습니다</value></data>
+  <data name="Checkin_FirstBindWarning" xml:space="preserve"><value>처음 연동되었습니다. 먼저 수동으로 한 번 출석 체크해 주세요.</value></data>
+  <data name="Checkin_AlreadySignedToday" xml:space="preserve"><value>오늘 이미 출석했습니다</value></data>
+  <data name="Checkin_TodayReward" xml:space="preserve"><value>오늘의 보상은 {0}입니다</value></data>
+  <data name="Checkin_SignRequestFailed" xml:space="preserve"><value>이 출석 요청이 실패했습니다</value></data>
+  <data name="Checkin_SignRateLimited" xml:space="preserve"><value>출석 실패, HTTP 429 속도 제한</value></data>
+  <data name="Checkin_ParseResultFailed" xml:space="preserve"><value>출석 결과를 구문 분석하지 못했습니다</value></data>
+  <data name="Checkin_SignSuccess" xml:space="preserve"><value>출석 성공</value></data>
+  <data name="Checkin_SignFailedApi" xml:space="preserve"><value>출석 실패, API 응답: {0}</value></data>
+  <data name="Checkin_SignedDays" xml:space="preserve"><value>{0}일 연속 출석</value></data>
+  <data name="Checkin_RewardIs" xml:space="preserve"><value>보상은 {0}입니다</value></data>
+  <data name="Checkin_NoAccountToSign" xml:space="preserve"><value>출석할 계정이 없습니다</value></data>
+  <data name="Checkin_ParseAccountListFailed" xml:space="preserve"><value>계정 목록을 구문 분석하지 못했습니다</value></data>
+  <data name="Checkin_GetAccountListException" xml:space="preserve"><value>계정 목록 가져오기 예외: {0}</value></data>
+  <data name="Checkin_ParseSignStatusFailed" xml:space="preserve"><value>출석 상태를 구문 분석하지 못했습니다</value></data>
+  <data name="Checkin_RequestSignStatusException" xml:space="preserve"><value>출석 상태 요청 예외: {0}</value></data>
+  <data name="Checkin_ParseResponseDataFailed" xml:space="preserve"><value>계정 목록 응답 데이터를 구문 분석하지 못했습니다</value></data>
+  <data name="Checkin_NetworkRequestException" xml:space="preserve"><value>네트워크 요청 예외: {0}</value></data>
+  <data name="Checkin_GetCalendarException" xml:space="preserve"><value>보상 달력 가져오기 예외: {0}</value></data>
+  <data name="Checkin_AllAccountsSuccess" xml:space="preserve"><value>출석 완료. {0}개 계정 모두 성공.</value></data>
+  <data name="Checkin_PartialSuccess" xml:space="preserve"><value>출석 완료. {0} 성공, {1} 실패.</value></data>
+  <data name="Checkin_AllFailed" xml:space="preserve"><value>출석 실패. {0}개 계정에서 오류 발생.</value></data>
+  <data name="Checkin_AllDisabled" xml:space="preserve"><value>모든 계정이 비활성화되었습니다</value></data>
+  <data name="Checkin_AccountNotFound" xml:space="preserve"><value>현재 계정을 찾을 수 없습니다</value></data>
+  <data name="Checkin_AllDone" xml:space="preserve"><value>모두 완료</value></data>
+  <data name="Checkin_CountFailed" xml:space="preserve"><value>{0} 실패</value></data>
+  <data name="Checkin_AccountsSuccess" xml:space="preserve"><value>{0}개 계정 성공</value></data>
+  <data name="Checkin_AccountsFailed" xml:space="preserve"><value>{0} 실패</value></data>
+  <data name="Checkin_GameCheckin" xml:space="preserve"><value>게임 출석 체크</value></data>
+  <data name="Checkin_CloudGameCheckin" xml:space="preserve"><value>클라우드 게임 출석 체크</value></data>
+  <data name="Checkin_CommunityCheckin" xml:space="preserve"><value>커뮤니티 출석 체크</value></data>
+  <data name="Checkin_OSAccountSkipped" xml:space="preserve"><value>OS 계정 건너뜀</value></data>
+  <data name="Checkin_NoCloudCredential" xml:space="preserve"><value>클라우드 게임 자격 증명이 구성되지 않음</value></data>
+  <data name="Checkin_NotConfiguredCredential" xml:space="preserve"><value>자격 증명이 구성되지 않음</value></data>
+  <data name="Checkin_ConsecutiveDays" xml:space="preserve"><value>{0}일 연속 | 보상: {1}</value></data>
+  <data name="Checkin_SuccessFailCount" xml:space="preserve"><value>{0} 성공, {1} 실패</value></data>
+  <data name="Checkin_GetStatusFailed" xml:space="preserve"><value>상태를 가져오지 못했습니다</value></data>
+  <data name="Checkin_SignedToday" xml:space="preserve"><value>오늘 출석 완료</value></data>
+  <data name="Checkin_UnsignedToday" xml:space="preserve"><value>오늘 출석 안 함</value></data>
+  <data name="Checkin_NotEnabled" xml:space="preserve"><value>출석 기능이 활성화되지 않음</value></data>
+  <data name="Checkin_NotDetected" xml:space="preserve"><value>연동 감지되지 않음</value></data>
+  <data name="Checkin_NotDetectedAccount" xml:space="preserve"><value>계정이 감지되지 않음</value></data>
+  <data name="Checkin_FeatureNotEnabled" xml:space="preserve"><value>기능이 활성화되지 않음</value></data>
+  <data name="Checkin_EnableInConfig" xml:space="preserve"><value>config.json에서 Enable=true로 설정하세요</value></data>
+  <data name="Checkin_DefaultUser" xml:space="preserve"><value>사용자{0}</value></data>
+  <data name="Checkin_GameCheckinProgress" xml:space="preserve"><value>게임 출석 체크 중...</value></data>
+  <data name="Checkin_OSAccountSkippedCommunity" xml:space="preserve"><value>OS 계정 커뮤니티 출석 건너뜀</value></data>
+  <data name="Checkin_CommunityCheckinProgress" xml:space="preserve"><value>커뮤니티 출석 체크 중...</value></data>
+  <data name="Checkin_CloudGameCheckinProgress" xml:space="preserve"><value>클라우드 게임 출석 체크 중...</value></data>
+  <data name="CheckinGame_Exception" xml:space="preserve"><value>예외: {0}</value></data>
+  <data name="Token_InvalidCookie" xml:space="preserve"><value>유효한 쿠키가 제공되지 않았습니다</value></data>
+  <data name="Token_MissingStokenOrMid" xml:space="preserve"><value>로컬 쿠키에 Stoken 또는 mid가 누락되어 새로고침할 수 없습니다</value></data>
+  <data name="Token_RefreshTitle" xml:space="preserve"><value>쿠키 새로고침</value></data>
+  <data name="Token_ManualRefreshProgress" xml:space="preserve"><value>수동 새로고침 수행 중...</value></data>
+  <data name="Token_AutoRefreshProgress" xml:space="preserve"><value>쿠키 만료, 새로고침 수행 중...</value></data>
+  <data name="Token_WebTicketFailed" xml:space="preserve"><value>WebTicket 생성 실패</value></data>
+  <data name="Token_QRScanFailed" xml:space="preserve"><value>시뮬레이션된 QR 스캔 요청 실패</value></data>
+  <data name="Token_ConfirmLoginFailed" xml:space="preserve"><value>시뮬레이션된 로그인 확인 요청 실패</value></data>
+  <data name="Token_ManualRefreshDone" xml:space="preserve"><value>수동 쿠키 새로고침 완료. 새 자격 증명이 활성화되었습니다.</value></data>
+  <data name="Token_AutoRefreshDone" xml:space="preserve"><value>자동 쿠키 새로고침 완료. 새 자격 증명이 활성화되었습니다.</value></data>
+  <data name="Token_GetNewCookieFailed" xml:space="preserve"><value>새 쿠키를 가져오지 못했습니다</value></data>
+  <data name="Token_RefreshFailed" xml:space="preserve"><value>쿠키 새로고침 실패</value></data>
+  <data name="Token_RefreshException" xml:space="preserve"><value>쿠키 새로고침 중 예외 발생: {0}</value></data>
+  <data name="RedeemCode_Expired" xml:space="preserve"><value>만료됨</value></data>
+  <data name="RedeemCode_ExpiringToday" xml:space="preserve"><value>오늘 만료</value></data>
+  <data name="RedeemCode_HoursLeft" xml:space="preserve"><value>{0}시간 남음</value></data>
+  <data name="RedeemCode_DaysLeft" xml:space="preserve"><value>{0}일 남음</value></data>
+  <data name="RedeemCode_MoreEvents" xml:space="preserve"><value>...외 {0}개 이벤트</value></data>
+  <data name="RedeemCode_NewPublished" xml:space="preserve"><value>새 리딤 코드 공개됨</value></data>
+  <data name="RedeemCode_NewContent" xml:space="preserve"><value>새 리딤 코드 이벤트 발견:\n{0}\n게임 내에서 빠르게 교환하세요!</value></data>
+  <data name="RedeemCode_ExpiringTitle" xml:space="preserve"><value>리딤 코드 곧 만료</value></data>
+  <data name="RedeemCode_ExpiringContent" xml:space="preserve"><value>이벤트 {0}에 사용 가능한 코드:\n{1}\n가능한 빨리 게임 내에서 사용하세요. 오늘 이후 만료됩니다!</value></data>
+  <data name="HashCheck_Failed" xml:space="preserve"><value>검증 실패</value></data>
+  <data name="HashCheck_FileNotFound" xml:space="preserve"><value>검증 파일을 찾을 수 없습니다. 클라이언트 무결성을 확인하세요.</value></data>
+  <data name="HashCheck_FormatError" xml:space="preserve"><value>형식 오류</value></data>
+  <data name="HashCheck_ComponentModified" xml:space="preserve"><value>구성 요소가 수정되었거나 누락되었습니다. 확인하세요:\nCaptureApp\n</value></data>
+  <data name="HashCheck_NotPassed" xml:space="preserve"><value>검증 통과 안 됨</value></data>
+  <data name="HashCheck_Exception" xml:space="preserve"><value>검증 예외</value></data>
+  <data name="HashCheck_ExceptionMsg" xml:space="preserve"><value>해시 검증 중 오류: {0}</value></data>
+  <data name="Settings_DirCreateFailed" xml:space="preserve"><value>디렉토리 생성 실패</value></data>
+  <data name="Settings_DirCreateFailedMsg" xml:space="preserve"><value>앱 데이터 디렉토리를 만들 수 없습니다. 권한을 확인하세요: {0}</value></data>
+  <data name="Settings_DbInitFailed" xml:space="preserve"><value>데이터베이스 초기화 실패</value></data>
+  <data name="Settings_DbInitFailedMsg" xml:space="preserve"><value>설정 데이터베이스를 생성하거나 초기화할 수 없습니다: {0}</value></data>
+  <data name="Settings_ConfigDeleteFailed" xml:space="preserve"><value>설정 삭제 실패</value></data>
+  <data name="Settings_ConfigDeleteFailedMsg" xml:space="preserve"><value>데이터베이스에서 설정을 삭제할 수 없습니다: {0}</value></data>
+  <data name="Settings_ConfigReadFailed" xml:space="preserve"><value>설정 읽기 실패</value></data>
+  <data name="Settings_ConfigReadFailedMsg" xml:space="preserve"><value>데이터베이스에서 설정을 로드할 수 없습니다: {0}</value></data>
+  <data name="Settings_ConfigSaveFailed" xml:space="preserve"><value>설정 저장 실패</value></data>
+  <data name="Settings_ConfigSaveFailedMsg" xml:space="preserve"><value>데이터베이스에 설정을 저장할 수 없습니다: {0}</value></data>
+  <data name="Diagnostics_Connected" xml:space="preserve"><value>연결됨</value></data>
+  <data name="Diagnostics_Disconnected" xml:space="preserve"><value>연결 끊김</value></data>
+  <data name="Diagnostics_Domestic" xml:space="preserve"><value>국내</value></data>
+  <data name="Diagnostics_Overseas" xml:space="preserve"><value>해외</value></data>
+  <data name="Diagnostics_DomesticSystem" xml:space="preserve"><value>국내 (시스템)</value></data>
+  <data name="Diagnostics_OverseasSystem" xml:space="preserve"><value>해외 (시스템)</value></data>
+  <data name="Diagnostics_NoNetwork" xml:space="preserve"><value>네트워크 없음</value></data>
+  <data name="Diagnostics_UnknownCpu" xml:space="preserve"><value>알 수 없는 CPU</value></data>
+  <data name="Diagnostics_UnknownGpu" xml:space="preserve"><value>알 수 없는 GPU</value></data>
+  <data name="Diagnostics_ReadFailed" xml:space="preserve"><value>읽기 실패</value></data>
+  <data name="Diagnostics_Enabled" xml:space="preserve"><value>활성화됨</value></data>
+  <data name="Diagnostics_Disabled" xml:space="preserve"><value>비활성화됨</value></data>
+  <data name="Diagnostics_NotInstalled" xml:space="preserve"><value>설치되지 않음 또는 제거됨</value></data>
+  <data name="Diagnostics_CannotDetect" xml:space="preserve"><value>감지할 수 없음</value></data>
+  <data name="Diagnostics_PartialError" xml:space="preserve"><value>진단 중 오류가 발생했습니다. 일부 정보가 부정확할 수 있습니다.</value></data>
+  <data name="Diagnostics_SuggestNoNetwork" xml:space="preserve"><value>네트워크가 연결되지 않았습니다. 네트워크 설정을 확인하세요.</value></data>
+  <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve"><value>현재 국내 네트워크에 있습니다. 서버 접근이 느릴 수 있습니다.</value></data>
+  <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve"><value>Windows 보안 센터가 활성화되어 있어 플러그인 인젝션이 실패할 수 있습니다. 비활성화하는 것이 좋습니다.</value></data>
+  <data name="Diagnostics_SuggestLowMemory" xml:space="preserve"><value>현재 실제 메모리가 {0}GB로 최소 12GB 요구 사항에 미치지 못합니다.</value></data>
+  <data name="Diagnostics_SuggestLowDisk" xml:space="preserve"><value>시스템 디스크 여유 공간이 {0}GB로 최소 1GB 요구 사항에 미치지 못합니다.</value></data>
+  <data name="Diagnostics_SuggestRefreshRate" xml:space="preserve"><value>모니터가 {0}Hz를 지원하지만 현재 {1}Hz로 실행 중입니다.</value></data>
+  <data name="Diagnostics_AllNormal" xml:space="preserve"><value>정상. 시스템 및 네트워크 환경이 요구 사항을 충족합니다.</value></data>
+  <data name="User_DefaultSignature" xml:space="preserve"><value>이 사용자는 게으름이 많아 아무것도 쓰지 않았습니다...</value></data>
+  <data name="User_GenderMale" xml:space="preserve"><value>남성</value></data>
+  <data name="User_GenderFemale" xml:space="preserve"><value>여성</value></data>
+  <data name="User_GenderPrivate" xml:space="preserve"><value>비공개</value></data>
+  <data name="Gacha_Won5050" xml:space="preserve"><value>50/50 실패</value></data>
+  <data name="Gacha_Guaranteed" xml:space="preserve"><value>확정 천장</value></data>
+  <data name="Gacha_FiftyFifty" xml:space="preserve"><value>50/50</value></data>
+  <data name="Gacha_ZeroPulls" xml:space="preserve"><value>0 뽑기</value></data>
+  <data name="Gacha_No5StarPity" xml:space="preserve"><value>5★ 천장 없음</value></data>
+  <data name="Gacha_No5StarRecord" xml:space="preserve"><value>5★ 기록 없음</value></data>
+  <data name="Gacha_TotalPulls" xml:space="preserve"><value>총 뽑기</value></data>
+  <data name="Gacha_PrimogemEstimate" xml:space="preserve"><value>원석 추정</value></data>
+  <data name="Gacha_5StarDrop" xml:space="preserve"><value>5★ 드롭</value></data>
+  <data name="Gacha_4StarDrop" xml:space="preserve"><value>4★ 드롭</value></data>
+  <data name="Gacha_Avg5StarCharCost" xml:space="preserve"><value>평균 5★ 캐릭터 비용</value></data>
+  <data name="Gacha_Avg5StarPulls" xml:space="preserve"><value>평균 5★ 뽑기</value></data>
+  <data name="Gacha_DeepestPity" xml:space="preserve"><value>최대 천장</value></data>
+  <data name="Gacha_Best5Star" xml:space="preserve"><value>최고 5★</value></data>
+  <data name="Gacha_Worst5Star" xml:space="preserve"><value>최악 5★</value></data>
+  <data name="Gacha_ActiveMonths" xml:space="preserve"><value>활동 개월</value></data>
+  <data name="Gacha_NoWishRecord" xml:space="preserve"><value>기원 기록 없음</value></data>
+  <data name="Gacha_PerPull" xml:space="preserve"><value>뽑기당 160 원석 기준</value></data>
+  <data name="Gacha_No5StarChar" xml:space="preserve"><value>5★ 캐릭터 없음</value></data>
+  <data name="Gacha_MonthlyAvg0" xml:space="preserve"><value>월 평균 0 뽑기</value></data>
+  <data name="Gacha_NoRecords" xml:space="preserve"><value>기록 없음</value></data>
+  <data name="Day_Sunday" xml:space="preserve"><value>일</value></data>
+  <data name="Day_Monday" xml:space="preserve"><value>월</value></data>
+  <data name="Day_Tuesday" xml:space="preserve"><value>화</value></data>
+  <data name="Day_Wednesday" xml:space="preserve"><value>수</value></data>
+  <data name="Day_Thursday" xml:space="preserve"><value>목</value></data>
+  <data name="Day_Friday" xml:space="preserve"><value>금</value></data>
+  <data name="Day_Saturday" xml:space="preserve"><value>토</value></data>
+  <data name="Element_Pyro" xml:space="preserve"><value>불</value></data>
+  <data name="Element_Anemo" xml:space="preserve"><value>바람</value></data>
+  <data name="Element_Geo" xml:space="preserve"><value>바위</value></data>
+  <data name="Element_Dendro" xml:space="preserve"><value>풀</value></data>
+  <data name="Element_Electro" xml:space="preserve"><value>번개</value></data>
+  <data name="Element_Hydro" xml:space="preserve"><value>물</value></data>
+  <data name="Element_Cryo" xml:space="preserve"><value>얼음</value></data>
+  <data name="Download_Connecting" xml:space="preserve"><value>미호요 서버에 연결 중...</value></data>
+  <data name="Download_VoiceOnly" xml:space="preserve"><value>>> 기본 게임 건너뜀, 음성 팩 전용 모드</value></data>
+  <data name="Download_FetchingManifest" xml:space="preserve"><value>매니페스트 파일 가져오는 중: {0}...</value></data>
+  <data name="Download_ManifestFailed" xml:space="preserve"><value>매니페스트 다운로드 실패: {0}</value></data>
+  <data name="Download_TaskStart" xml:space="preserve"><value>검증/다운로드 시작됨. 총 {0}개 파일, {1}</value></data>
+  <data name="Download_FileUnfixable" xml:space="preserve"><value>파일을 복구할 수 없거나 사용자가 취소했습니다: {0}</value></data>
+  <data name="Download_MovingFiles" xml:space="preserve"><value>다운로드 검증 완료, 파일 이동 중...</value></data>
+  <data name="Download_AllDone" xml:space="preserve"><value>모두 완료!</value></data>
+  <data name="Download_UserCancelled" xml:space="preserve"><value>사용자가 취소했습니다.</value></data>
+  <data name="Download_VerifyFailed" xml:space="preserve"><value>[검증 실패] {0} (서버:{1} vs 로컬:{2})</value></data>
+  <data name="Download_FileException" xml:space="preserve"><value>[파일 예외] {0}: {1}</value></data>
+  <data name="Download_ManifestMd5Retry" xml:space="preserve"><value>매니페스트 MD5 검증 실패, 재시도 중...</value></data>
+  <data name="Download_CannotConnectApi" xml:space="preserve"><value>미호요 API에 연결할 수 없습니다</value></data>
+  <data name="DailyNote_ApiError" xml:space="preserve"><value>API 오류 반환, retcode={0}</value></data>
+  <data name="DailyNote_GetFailed" xml:space="preserve"><value>일일 노트 데이터를 가져오지 못했습니다: {0}</value></data>
+  <data name="DailyNote_InvalidResponse" xml:space="preserve"><value>일일 노트 데이터를 가져오지 못했습니다: 잘못된 응답 형식</value></data>
+  <data name="DailyNote_TransformerTime" xml:space="preserve"><value>{0}일 {1}시간 {2}분</value></data>
+  <data name="DailyNote_Claimed" xml:space="preserve"><value>수령 완료</value></data>
+  <data name="DailyNote_Unclaimed" xml:space="preserve"><value>미수령</value></data>
+  <data name="DailyNote_NoFingerprint" xml:space="preserve"><value>기기 지문 서비스를 가져올 수 없습니다</value></data>
+  <data name="DailyNote_NoActiveAccount" xml:space="preserve"><value>활성 계정 없음</value></data>
+  <data name="DailyNote_CannotLoadCookie" xml:space="preserve"><value>쿠키를 로드할 수 없습니다</value></data>
+  <data name="DailyNote_FetchFailed" xml:space="preserve"><value>노트를 가져오지 못했습니다: {0} (retcode={1})</value></data>
+  <data name="Geetest_NoFingerprintService" xml:space="preserve"><value>기기 지문 서비스를 가져올 수 없습니다</value></data>
+  <data name="Geetest_NoAccountService" xml:space="preserve"><value>계정 관리 서비스를 가져올 수 없습니다</value></data>
+  <data name="Geetest_NoActiveAccount" xml:space="preserve"><value>활성 계정 없음</value></data>
+  <data name="Geetest_CaptchaTitle" xml:space="preserve"><value>CAPTCHA 인증</value></data>
+  <data name="Launcher_DllNotLoaded" xml:space="preserve"><value>C++ 런타임 누락 또는 바이러스 백신 차단으로 Launcher.dll을 로드하지 못했습니다. 시작할 수 없습니다.</value></data>
+  <data name="Screenshot_Saved" xml:space="preserve"><value>스크린샷 저장됨</value></data>
+  <data name="Screenshot_CaptureFailed" xml:space="preserve"><value>스크린샷 캡처 실패</value></data>
+  <data name="Update_AllRetriesFailed" xml:space="preserve"><value>모든 재시도 실패</value></data>
+  <data name="UserInfo_FeatureRemoved" xml:space="preserve"><value>기능 제거됨</value></data>
+  <data name="Hoyolab_AsiaServer" xml:space="preserve"><value>아시아 서버</value></data>
+  <data name="Hoyolab_USAServer" xml:space="preserve"><value>미국 서버</value></data>
+  <data name="Hoyolab_EuroServer" xml:space="preserve"><value>유럽 서버</value></data>
+  <data name="Hoyolab_CHTServer" xml:space="preserve"><value>TW/HK/MO 서버</value></data>
+  <data name="FilePicker_MainWindowNull" xml:space="preserve"><value>메인 창이 존재하지 않아 파일 선택기를 열 수 없습니다</value></data>
+  <data name="FilePicker_InvalidWindowHandle" xml:space="preserve"><value>창 핸들이 유효하지 않습니다. 일반 사용자 모드로 실행하거나 다시 시도하세요.</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>FufuLauncher에서 오류가 발생했습니다</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>애플리케이션에서 오류가 발생했습니다
+
+오류 출처: {0}
+오류 메시지: {1}
+
+스택 추적:
+{2}</value></data>
+  <data name="Program_InjectionFailed" xml:space="preserve"><value>인젝션 실행 실패: {0} (코드: {1})</value></data>
+  <data name="Program_InjectionException" xml:space="preserve"><value>인젝션 프로세스 예외: {0}</value></data>
+  <data name="Program_ErrorTitle" xml:space="preserve"><value>FufuLauncher 오류</value></data>
+  <data name="IniFile_AccessDenied" xml:space="preserve"><value>접근이 거부되었습니다. 파일 또는 폴더가 &quot;읽기 전용&quot;으로 설정되어 있는지 확인하거나 런처를 관리자 권한으로 실행해 보세요.</value></data>
+  <data name="IniFile_WriteFailed" xml:space="preserve"><value>쓰기 실패: 파일이 게임 또는 다른 프로그램에서 사용 중일 수 있습니다.
+세부 정보: {0}</value></data>
+  <data name="IniFile_WriteError" xml:space="preserve"><value>설정을 쓰는 중 오류가 발생했습니다.
+세부 정보: {0}</value></data>
+</root>

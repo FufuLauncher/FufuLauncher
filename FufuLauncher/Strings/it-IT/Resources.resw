@@ -1,0 +1,1429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="AboutPage_ConfirmNav" xml:space="preserve"><value>Conferma Navigazione / Copia</value></data>
+  <data name="AboutPage_ContactAuthor" xml:space="preserve"><value>Contatta l'Autore</value></data>
+  <data name="AboutPage_Contributors" xml:space="preserve"><value>Collaboratori</value></data>
+  <data name="AboutPage_DiscordCopied" xml:space="preserve"><value>ID Discord Copiato!</value></data>
+  <data name="AboutPage_EnterToken" xml:space="preserve"><value>Inserisci il tuo Token!</value></data>
+  <data name="AboutPage_Exception" xml:space="preserve"><value>Si è Verificata un'Eccezione</value></data>
+  <data name="AboutPage_FetchFailed" xml:space="preserve"><value>Recupero Fallito</value></data>
+  <data name="AboutPage_FetchFailedArtifact" xml:space="preserve"><value>Recupero fallito (artifact non trovato)</value></data>
+  <data name="AboutPage_FetchFailedRun" xml:space="preserve"><value>Recupero fallito (esecuzione riuscita non trovata)</value></data>
+  <data name="AboutPage_FetchFailedWorkflow" xml:space="preserve"><value>Recupero fallito (workflow non trovato)</value></data>
+  <data name="AboutPage_FetchSuccess" xml:space="preserve"><value>Recupero riuscito! Script di download generato.</value></data>
+  <data name="AboutPage_GetBuildFromActions" xml:space="preserve"><value>Ottieni Build da GitHub Actions</value></data>
+  <data name="AboutPage_GitHubToken" xml:space="preserve"><value>Token GitHub</value></data>
+  <data name="AboutPage_GitHubTokenPlaceholder" xml:space="preserve"><value>Inserisci il tuo Token GitHub</value></data>
+  <data name="AboutPage_LoadFailed" xml:space="preserve"><value>Caricamento Fallito</value></data>
+  <data name="AboutPage_Loading" xml:space="preserve"><value>Caricamento in corso...</value></data>
+  <data name="AboutPage_LoadingBio" xml:space="preserve"><value>Caricamento biografia...</value></data>
+  <data name="AboutPage_NoBio" xml:space="preserve"><value>Questo utente non ha una biografia.</value></data>
+  <data name="AboutPage_OfficialWebsite" xml:space="preserve"><value>Sito Ufficiale</value></data>
+  <data name="AboutPage_OpenInBrowser" xml:space="preserve"><value>Apri la pagina principale nel browser esterno</value></data>
+  <data name="AboutPage_ReportIssue" xml:space="preserve"><value>Segnala un Problema</value></data>
+  <data name="AboutPage_SelectContact" xml:space="preserve"><value>Seleziona Metodo di Contatto</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>Chi Siamo</value></data>
+  <data name="Account_BindHint" xml:space="preserve"><value>Associa un personaggio su HoYoLAB o in gioco, poi aggiorna</value></data>
+  <data name="Account_BoundCharacters" xml:space="preserve"><value>Personaggi Associati</value></data>
+  <data name="Account_CheckingIn" xml:space="preserve"><value>Check-in in corso...</value></data>
+  <data name="Account_CheckinComplete" xml:space="preserve"><value>Check-in completato</value></data>
+  <data name="Account_CheckinException" xml:space="preserve"><value>Errore check-in</value></data>
+  <data name="Account_CheckinFailed" xml:space="preserve"><value>Check-in fallito</value></data>
+  <data name="Account_CommunityFeed" xml:space="preserve"><value>Feed Community</value></data>
+  <data name="Account_CopyCookie" xml:space="preserve"><value>Copia Cookie</value></data>
+  <data name="Account_CopyUID" xml:space="preserve"><value>Copia UID</value></data>
+  <data name="Account_DailyAvg" xml:space="preserve"><value>Media Giornaliera</value></data>
+  <data name="Account_DailyCheckin" xml:space="preserve"><value>Check-in Giornaliero</value></data>
+  <data name="Account_DeleteAccount" xml:space="preserve"><value>Elimina Account</value></data>
+  <data name="Account_DeleteAccountConfirm_Format" xml:space="preserve"><value>Eliminare l'account &quot;{0}&quot;? Verranno cancellati tutti i dati associati, incluse credenziali, cronologia desideri e credenziali di cloud gaming. Questa azione è irreversibile.</value></data>
+  <data name="Account_DeleteBtn" xml:space="preserve"><value>Elimina</value></data>
+  <data name="Account_DeleteComplete" xml:space="preserve"><value>Account &quot;{0}&quot; eliminato.</value></data>
+  <data name="Account_DeleteCurrent" xml:space="preserve"><value>Elimina Account Corrente</value></data>
+  <data name="Account_DeleteCurrentConfirm_Format" xml:space="preserve"><value>Sei sicuro di voler eliminare l'account corrente {0} ({1})? Verranno cancellati tutti i dati associati. Questa azione è irreversibile.</value></data>
+  <data name="Account_DeleteException" xml:space="preserve"><value>Errore eliminazione account</value></data>
+  <data name="Account_FreezeAccount" xml:space="preserve"><value>Congela Account</value></data>
+  <data name="Account_GachaAnalysis" xml:space="preserve"><value>Analisi Desideri</value></data>
+  <data name="Account_InGame" xml:space="preserve"><value>In Gioco</value></data>
+  <data name="Account_Likes" xml:space="preserve"><value>Mi Piace</value></data>
+  <data name="Account_Login" xml:space="preserve"><value>Accedi</value></data>
+  <data name="Account_LoginFailed" xml:space="preserve"><value>Accesso fallito</value></data>
+  <data name="Account_Logout" xml:space="preserve"><value>Disconnetti</value></data>
+  <data name="Account_NoCharacters" xml:space="preserve"><value>Nessun personaggio associato</value></data>
+  <data name="Account_NoRecentRecords30" xml:space="preserve"><value>Nessun record di gioco negli ultimi 30 giorni</value></data>
+  <data name="Account_NoRecentRecords_Format" xml:space="preserve"><value>Nessun record di gioco negli ultimi {0} giorni</value></data>
+  <data name="Account_NotLoggedIn" xml:space="preserve"><value>Non connesso</value></data>
+  <data name="Account_OtherOperations" xml:space="preserve"><value>Altre Operazioni</value></data>
+  <data name="Account_PlayTime" xml:space="preserve"><value>Tempo di Gioco</value></data>
+  <data name="Account_Posts" xml:space="preserve"><value>Post</value></data>
+  <data name="Account_RecentDays30" xml:space="preserve"><value>Ultimi 30 Giorni</value></data>
+  <data name="Account_RecentDays_Format" xml:space="preserve"><value>Ultimi {0} Giorni</value></data>
+  <data name="Account_RefreshInfo" xml:space="preserve"><value>Aggiorna Info</value></data>
+  <data name="Account_Replies" xml:space="preserve"><value>Risposte</value></data>
+  <data name="Account_SavedAccounts" xml:space="preserve"><value>Account Salvati</value></data>
+  <data name="Account_TotalTime" xml:space="preserve"><value>Tempo Totale</value></data>
+  <data name="Account_TravelJournal" xml:space="preserve"><value>Diario di Viaggio</value></data>
+  <data name="Account_AccountSecurity" xml:space="preserve"><value>Sicurezza Account</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>Elenco Account</value></data>
+  <data name="AchievementUpdater_StartFetch" xml:space="preserve"><value>Avvia Recupero</value></data>
+  <data name="AchievementUpdater_Title" xml:space="preserve"><value>Aggiornamento Dati Obiettivi</value></data>
+  <data name="AchievementWindow_AllVersions" xml:space="preserve"><value>Tutte le Versioni</value></data>
+  <data name="AchievementWindow_AlreadyLatest" xml:space="preserve"><value>Il tuo archivio è già alla versione più recente, nessun aggiornamento necessario.</value></data>
+  <data name="AchievementWindow_ApplyingChanges" xml:space="preserve"><value>Applicazione modifiche</value></data>
+  <data name="AchievementWindow_Archive" xml:space="preserve"><value>Archivio Obiettivi</value></data>
+  <data name="AchievementWindow_ArchiveManagement" xml:space="preserve"><value>Gestione Archivio</value></data>
+  <data name="AchievementWindow_CannotOpenBrowser" xml:space="preserve"><value>Impossibile aprire il browser</value></data>
+  <data name="AchievementWindow_ConfirmDelete" xml:space="preserve"><value>Conferma Eliminazione</value></data>
+  <data name="AchievementWindow_ConfirmDeleteMsg" xml:space="preserve"><value>Sei sicuro di voler eliminare definitivamente?</value></data>
+  <data name="AchievementWindow_CurrentProfile" xml:space="preserve"><value>Profilo Corrente</value></data>
+  <data name="AchievementWindow_CurrentSuffix" xml:space="preserve"><value> (corrente)</value></data>
+  <data name="AchievementWindow_DataLoaded" xml:space="preserve"><value>Dati caricati</value></data>
+  <data name="AchievementWindow_DbNotFound" xml:space="preserve"><value>File database integrato non trovato</value></data>
+  <data name="AchievementWindow_DefaultProfile" xml:space="preserve"><value>Profilo Predefinito</value></data>
+  <data name="AchievementWindow_DuplicateName" xml:space="preserve"><value>Questo nome profilo esiste già!</value></data>
+  <data name="AchievementWindow_EmptyContent" xml:space="preserve"><value>Il file è vuoto.</value></data>
+  <data name="AchievementWindow_EmptyFile" xml:space="preserve"><value>File Vuoto</value></data>
+  <data name="AchievementWindow_EnterName" xml:space="preserve"><value>Inserisci nome...</value></data>
+  <data name="AchievementWindow_ExistingProfiles" xml:space="preserve"><value>Profili Esistenti:</value></data>
+  <data name="AchievementWindow_ExportFailed" xml:space="preserve"><value>Esportazione Fallita</value></data>
+  <data name="AchievementWindow_ExportSuccess" xml:space="preserve"><value>Esportazione Riuscita</value></data>
+  <data name="AchievementWindow_GeneratingUIAF" xml:space="preserve"><value>Generazione dati UIAF...</value></data>
+  <data name="AchievementWindow_HiddenComplete" xml:space="preserve"><value>Nascondi Completati</value></data>
+  <data name="AchievementWindow_ImportData" xml:space="preserve"><value>Importa Dati</value></data>
+  <data name="AchievementWindow_ImportFailed" xml:space="preserve"><value>Importazione Fallita</value></data>
+  <data name="AchievementWindow_ImportRecords" xml:space="preserve"><value>Importa Record</value></data>
+  <data name="AchievementWindow_Importing" xml:space="preserve"><value>Importazione Obiettivi</value></data>
+  <data name="AchievementWindow_InvalidChars" xml:space="preserve"><value>Il nome contiene caratteri non validi, riprova.</value></data>
+  <data name="AchievementWindow_InvalidName" xml:space="preserve"><value>Nome Non Valido</value></data>
+  <data name="AchievementWindow_ManageArchive" xml:space="preserve"><value>Cambia o crea archivio</value></data>
+  <data name="AchievementWindow_ManualSave" xml:space="preserve"><value>Salvataggio Manuale</value></data>
+  <data name="AchievementWindow_NewBlank" xml:space="preserve"><value>Nuovo Profilo Vuoto</value></data>
+  <data name="AchievementWindow_NewProfile" xml:space="preserve"><value>Nuovo Profilo</value></data>
+  <data name="AchievementWindow_NoBackup" xml:space="preserve"><value>Nessun profilo di backup</value></data>
+  <data name="AchievementWindow_PreparingRead" xml:space="preserve"><value>Preparazione lettura dati...</value></data>
+  <data name="AchievementWindow_PrimogemTooltip" xml:space="preserve"><value>Primogemme: Ottenute / Totali</value></data>
+  <data name="AchievementWindow_ProfileNotFound" xml:space="preserve"><value>File profilo di destinazione non trovato!</value></data>
+  <data name="AchievementWindow_Progress" xml:space="preserve"><value>Progresso: </value></data>
+  <data name="AchievementWindow_ProgressTooltip" xml:space="preserve"><value>Progresso Obiettivi</value></data>
+  <data name="AchievementWindow_ReadFailed" xml:space="preserve"><value>Lettura Fallita</value></data>
+  <data name="AchievementWindow_ReadingData" xml:space="preserve"><value>Lettura dati...</value></data>
+  <data name="AchievementWindow_ReadingUIAF" xml:space="preserve"><value>Lettura dati UIAF...</value></data>
+  <data name="AchievementWindow_RefreshingUI" xml:space="preserve"><value>Aggiornamento interfaccia...</value></data>
+  <data name="AchievementWindow_SaveCurrent" xml:space="preserve"><value>Salva Profilo Corrente</value></data>
+  <data name="AchievementWindow_SaveException" xml:space="preserve"><value>Eccezione salvataggio</value></data>
+  <data name="AchievementWindow_SaveSuccess" xml:space="preserve"><value>Salvataggio Riuscito</value></data>
+  <data name="AchievementWindow_SavedToDocs" xml:space="preserve"><value>Dati salvati nella cartella Documenti</value></data>
+  <data name="AchievementWindow_Saving" xml:space="preserve"><value>Salvataggio...</value></data>
+  <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve"><value>Cerca la guida per questo obiettivo su HoYoLAB</value></data>
+  <data name="AchievementWindow_SearchPlaceholder" xml:space="preserve"><value>Cerca nome obiettivo, descrizione...</value></data>
+  <data name="AchievementWindow_ShowAll" xml:space="preserve"><value>Mostra Tutto</value></data>
+  <data name="AchievementWindow_StartUpdate" xml:space="preserve"><value>Avvia Aggiornamento</value></data>
+  <data name="AchievementWindow_SwitchFailed" xml:space="preserve"><value>Cambio Fallito</value></data>
+  <data name="AchievementWindow_SwitchView" xml:space="preserve"><value>Cambia Vista</value></data>
+  <data name="AchievementWindow_SwitchingProfile" xml:space="preserve"><value>Cambio profilo...</value></data>
+  <data name="AchievementWindow_Title" xml:space="preserve"><value>Gestore Obiettivi</value></data>
+  <data name="AchievementWindow_TotalAchievements" xml:space="preserve"><value>{0} obiettivi totali</value></data>
+  <data name="AchievementWindow_UIAFExport" xml:space="preserve"><value>Esporta UIAF</value></data>
+  <data name="AchievementWindow_UIAFExportDone" xml:space="preserve"><value>Esportazione UIAF completata</value></data>
+  <data name="AchievementWindow_UIAFImport" xml:space="preserve"><value>Importa UIAF</value></data>
+  <data name="AchievementWindow_UnknownCategory" xml:space="preserve"><value>Categoria Sconosciuta</value></data>
+  <data name="AchievementWindow_UnnamedProfile" xml:space="preserve"><value>Profilo Senza Nome</value></data>
+  <data name="AchievementWindow_UpdateData" xml:space="preserve"><value>Aggiorna Dati</value></data>
+  <data name="AchievementWindow_UpdateDb" xml:space="preserve"><value>Aggiorna Database Obiettivi</value></data>
+  <data name="AchievementWindow_Version" xml:space="preserve"><value>Versione</value></data>
+  <data name="AchievementWindow_ViewGuide" xml:space="preserve"><value>Visualizza Guida</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>Sfocatura Acrilica</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrilico</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>Nota: Gli sfondi video utilizzeranno una sovrapposizione semitrasparente solida per motivi di prestazioni.</value></data>
+  <data name="AccountSwitchTitle" xml:space="preserve"><value>Cambio Account</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>Aggiungi Credenziali Cloud Gaming</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>Aggiungi Plugin</value></data>
+  <data name="AdminWarningContent" xml:space="preserve"><value>L'esecuzione come amministratore potrebbe influire su alcune funzionalità, come il selettore file.</value></data>
+  <data name="AdminWarningTitle" xml:space="preserve"><value>Attenzione</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>I parametri personalizzati verranno aggiunti dopo il comando di avvio</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>Parametri di Avvio Avanzati</value></data>
+  <data name="AdvancedServerSwitch_Convert" xml:space="preserve"><value>Conversione One-Click</value></data>
+  <data name="AdvancedServerSwitch_Title" xml:space="preserve"><value>Cambio Server</value></data>
+  <data name="AdvancedServerSwitch_Warning" xml:space="preserve"><value>Nota: Il cambio non ha effetto mentre il gioco è in esecuzione!</value></data>
+  <data name="AgreementPage_AgreeCheck" xml:space="preserve"><value>Ho letto e accetto il Contratto di Licenza</value></data>
+  <data name="AgreementPage_CacheDir" xml:space="preserve"><value>Directory Cache</value></data>
+  <data name="AgreementPage_CannotDisplay" xml:space="preserve"><value>Impossibile Visualizzare</value></data>
+  <data name="AgreementPage_Change" xml:space="preserve"><value>Modifica</value></data>
+  <data name="AgreementPage_ConfirmAndComplete" xml:space="preserve"><value>Conferma e Completa</value></data>
+  <data name="AgreementPage_DataDirDesc" xml:space="preserve"><value>Puoi personalizzare la directory di archiviazione per dati e cache, o mantenere le impostazioni predefinite.</value></data>
+  <data name="AgreementPage_DataStorage" xml:space="preserve"><value>Posizione Archiviazione Dati</value></data>
+  <data name="AgreementPage_DisplayNormal" xml:space="preserve"><value>Visualizzazione Normale</value></data>
+  <data name="AgreementPage_Files" xml:space="preserve"><value>File</value></data>
+  <data name="AgreementPage_Home" xml:space="preserve"><value>Home</value></data>
+  <data name="AgreementPage_IconCheckHint" xml:space="preserve"><value>Per garantire la qualità di visualizzazione, conferma che le icone sottostanti siano mostrate correttamente</value></data>
+  <data name="AgreementPage_Next" xml:space="preserve"><value>Avanti</value></data>
+  <data name="AgreementPage_ScrollHint" xml:space="preserve"><value>Scorri per leggere l'intero contratto prima di accettare</value></data>
+  <data name="AgreementPage_Settings" xml:space="preserve"><value>Impostazioni</value></data>
+  <data name="AgreementPage_Title" xml:space="preserve"><value>Contratto di Licenza</value></data>
+  <data name="AgreementPage_UserDataDir" xml:space="preserve"><value>Directory Dati Utente</value></data>
+  <data name="AgreementPage_Welcome" xml:space="preserve"><value>Benvenuto su FufuLauncher! Leggi attentamente il seguente contratto.</value></data>
+  <data name="Agreement_Title" xml:space="preserve"><value>Contratto di Licenza</value></data>
+  <data name="AnnouncementWindow_GameAnnouncement" xml:space="preserve"><value>Annuncio di Gioco</value></data>
+  <data name="Announcement_Loading" xml:space="preserve"><value>Caricamento annuncio...</value></data>
+  <data name="Announcement_Title" xml:space="preserve"><value>Annuncio</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>FufuLauncher</value></data>
+  <data name="AppDisplayNameAdmin" xml:space="preserve"><value>FufuLauncher [Amministratore]</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>Ha effetto dopo il riavvio dell'app</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>Lingua di Visualizzazione</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>Versione {0}</value></data>
+  <data name="ApplyBtn" xml:space="preserve"><value>Applica</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>Esegui automaticamente il check-in all'avvio se non ancora fatto oggi</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>Check-in Automatico all'Avvio</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>Crea Automaticamente Predefiniti</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>Formati supportati: PNG, JPG, BMP, WEBP. Le modifiche avranno effetto al prossimo accesso al gioco.</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>Plugin Avatar Abilitato</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>Impostazioni Sostituzione Avatar (carica dimensioni corrispondenti se necessario)</value></data>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>Batch Save Failed</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>Batch generated and overwrote all avatar sizes</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>Clear Failed</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>Avatar size {0}x{0} cleared</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>Avatar cropped and saved successfully</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>No avatar found to edit</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>Notice</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>Import Failed</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>Load Failed</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>Save Failed</value></data>
+  <data name="BBSWindow_Copy" xml:space="preserve"><value>Copia</value></data>
+  <data name="BBSWindow_EnterUrl" xml:space="preserve"><value>Inserisci URL...</value></data>
+  <data name="BBSWindow_Go" xml:space="preserve"><value>Vai</value></data>
+  <data name="BBSWindow_Save" xml:space="preserve"><value>Salva</value></data>
+  <data name="BBSWindow_SwitchIdentity" xml:space="preserve"><value>Cambia Identità</value></data>
+  <data name="BBSWindow_Title" xml:space="preserve"><value>Registri di Battaglia</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>Scegli l'effetto visivo per lo sfondo della finestra</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>Materiale Sfondo Finestra</value></data>
+  <data name="BackgroundInit_Initializing" xml:space="preserve"><value>Inizializzazione risorse di sfondo...</value></data>
+  <data name="BackgroundInit_PleaseWait" xml:space="preserve"><value>La cache potrebbe richiedere del tempo, attendere...</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>Applica a Tutte le Dimensioni</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>Check-in Multiplo</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>Esegui check-in per tutti gli account selezionati; altrimenti solo l'account corrente</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>Avvia BetterGI insieme al gioco</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>Chiudi BetterGI all'Uscita dal Gioco</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>Chiudi automaticamente BetterGI quando esci dal gioco</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>Imposta a 0 per disabilitare il ritardo; riguarda solo BetterGI</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>Ritardo Avvio BetterGI (secondi)</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>Opacità Immagine di Sfondo</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>Opacità Sovrapposizione Sfondo</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>Modalità Presentazione Sfondi</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>Origine Sfondo</value></data>
+  <data name="Browse" xml:space="preserve"><value>Sfoglia</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>Pulisci i file cache generati dal browser integrato (WebView2)</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>Pulizia Cache Browser</value></data>
+  <data name="BrowserWindow_DefaultHomepage" xml:space="preserve"><value>Homepage Predefinita (URL)</value></data>
+  <data name="BrowserWindow_DefaultZoom" xml:space="preserve"><value>Zoom Predefinito</value></data>
+  <data name="BrowserWindow_EnterUrl" xml:space="preserve"><value>Inserisci URL...</value></data>
+  <data name="BrowserWindow_ForwardKey" xml:space="preserve"><value>Tasto Avanti</value></data>
+  <data name="BrowserWindow_HotkeyHint" xml:space="preserve"><value>Suggerimento: I tasti comuni sono ArrowLeft, ArrowRight, KeyA, KeyD</value></data>
+  <data name="BrowserWindow_PerformanceSettings" xml:space="preserve"><value>Impostazioni Prestazioni</value></data>
+  <data name="BrowserWindow_PinWindow" xml:space="preserve"><value>Fissa Finestra</value></data>
+  <data name="BrowserWindow_RaisePriority" xml:space="preserve"><value>Aumenta Priorità Processo (previeni lag in gioco)</value></data>
+  <data name="BrowserWindow_Refresh" xml:space="preserve"><value>Aggiorna</value></data>
+  <data name="BrowserWindow_RewindKey" xml:space="preserve"><value>Tasto Indietro</value></data>
+  <data name="BrowserWindow_Settings" xml:space="preserve"><value>Impostazioni</value></data>
+  <data name="BrowserWindow_SettingsTitle" xml:space="preserve"><value>Impostazioni Browser</value></data>
+  <data name="BrowserWindow_Title" xml:space="preserve"><value>Browser</value></data>
+  <data name="BrowserWindow_VideoHotkeys" xml:space="preserve"><value>Tasti Rapidi Controllo Video (JS KeyCode)</value></data>
+  <data name="Btn_CopyAndClose" xml:space="preserve"><value>Copia e Chiudi</value></data>
+  <data name="Btn_CopyLaunchCommand" xml:space="preserve"><value>Copia Comando di Avvio</value></data>
+  <data name="Btn_CreateDesktopShortcut" xml:space="preserve"><value>Crea Collegamento sul Desktop</value></data>
+  <data name="Btn_GotIt" xml:space="preserve"><value>Ho Capito</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>Annulla</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>Problemi di CAPTCHA?</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>I check-in di gioco e community possono attivare CAPTCHA. Configura informazioni reali del dispositivo per ridurre il rischio, o usa la versione self-hosted con un servizio CAPTCHA.</value></data>
+  <data name="CheckinCalendar_Title" xml:space="preserve"><value>Calendario Ricompense Check-in</value></data>
+  <data name="CheckinCloud_AlreadyCheckedIn" xml:space="preserve"><value>Check-in già effettuato oggi o limite raggiunto</value></data>
+  <data name="CheckinCloud_CurrentFreeTime" xml:space="preserve"><value>Tempo gratuito attuale: {0}</value></data>
+  <data name="CheckinCloud_Exception" xml:space="preserve"><value>Eccezione: {0}</value></data>
+  <data name="CheckinCloud_GainedTime" xml:space="preserve"><value>Ottenuti {0} minuti di tempo gratuito</value></data>
+  <data name="CheckinCloud_HoursMinutes" xml:space="preserve"><value>{0}h {1}m</value></data>
+  <data name="CheckinCloud_HoursOnly" xml:space="preserve"><value>{0}h</value></data>
+  <data name="CheckinCloud_MinutesOnly" xml:space="preserve"><value>{0}m</value></data>
+  <data name="CheckinCloud_MissingCredential" xml:space="preserve"><value>Credenziale cloud game mancante (x-rpc-combo_token)</value></data>
+  <data name="CheckinCloud_PlayCardStatus" xml:space="preserve"><value>Stato carta gioco: {0}, Monete Miyou: {1}</value></data>
+  <data name="CheckinCloud_Title" xml:space="preserve"><value>Check-in Cloud Genshin</value></data>
+  <data name="CheckinCloud_TokenExpired" xml:space="preserve"><value>Token scaduto o account limitato</value></data>
+  <data name="CheckinCommunity_CurrentCoins" xml:space="preserve"><value>{0} Monete Miyou</value></data>
+  <data name="CheckinCommunity_Exception" xml:space="preserve"><value>Eccezione: {0}</value></data>
+  <data name="CheckinCommunity_GainedCoins" xml:space="preserve"><value>Ottenute {0} Monete Miyou (attuali {1})</value></data>
+  <data name="CheckinCommunity_GenshinSignCaptcha" xml:space="preserve"><value>Firma Community Genshin: CAPTCHA attivato, saltato</value></data>
+  <data name="CheckinCommunity_GenshinSignException" xml:space="preserve"><value>Eccezione firma Community Genshin: {0}</value></data>
+  <data name="CheckinCommunity_GenshinSignFailed" xml:space="preserve"><value>Firma Community Genshin fallita: {0}</value></data>
+  <data name="CheckinCommunity_GenshinSignRequestFailed" xml:space="preserve"><value>Firma Community Genshin: richiesta fallita</value></data>
+  <data name="CheckinCommunity_GenshinSignSuccess" xml:space="preserve"><value>Firma Community Genshin riuscita</value></data>
+  <data name="CheckinCommunity_GetPostsFailed" xml:space="preserve"><value>Recupero elenco post fallito. Impossibile eseguire lettura/mi piace/condivisione.</value></data>
+  <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve"><value>Recupero stato attività fallito. Verifica il tuo cookie.</value></data>
+  <data name="CheckinCommunity_LikeDoneSkipped" xml:space="preserve"><value>Mi piace già fatto, saltato</value></data>
+  <data name="CheckinCommunity_LikeException" xml:space="preserve"><value>Eccezione mi piace: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeFailed" xml:space="preserve"><value>Mi piace fallito: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeSuccess" xml:space="preserve"><value>Mi piace riuscito: {0}</value></data>
+  <data name="CheckinCommunity_MissingToken" xml:space="preserve"><value>Stoken o mid mancante</value></data>
+  <data name="CheckinCommunity_ReadDoneSkipped" xml:space="preserve"><value>Lettura già fatta, saltata</value></data>
+  <data name="CheckinCommunity_ReadException" xml:space="preserve"><value>Eccezione lettura: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ReadFailed" xml:space="preserve"><value>Lettura fallita: {0}</value></data>
+  <data name="CheckinCommunity_ReadSuccess" xml:space="preserve"><value>Lettura riuscita: {0}</value></data>
+  <data name="CheckinCommunity_ShareDoneSkipped" xml:space="preserve"><value>Condivisione già fatta, saltata</value></data>
+  <data name="CheckinCommunity_ShareException" xml:space="preserve"><value>Eccezione condivisione: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareFailed" xml:space="preserve"><value>Condivisione fallita: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareSuccess" xml:space="preserve"><value>Condivisione riuscita: {0}</value></data>
+  <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve"><value>Firma community già fatta, saltata</value></data>
+  <data name="CheckinCommunity_Title" xml:space="preserve"><value>Check-in Community</value></data>
+  <data name="CheckinCommunity_TodayDone" xml:space="preserve"><value>Completato oggi ({0} Monete Miyou)</value></data>
+  <data name="CheckinGame_Exception" xml:space="preserve"><value>Eccezione: {0}</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>Colore e Opacità Testo Check-in</value></data>
+  <data name="Checkin_AccountNotFound" xml:space="preserve"><value>Account corrente non trovato</value></data>
+  <data name="Checkin_AccountsFailed" xml:space="preserve"><value>{0} falliti</value></data>
+  <data name="Checkin_AccountsSuccess" xml:space="preserve"><value>{0} account riusciti</value></data>
+  <data name="Checkin_AllAccountsSuccess" xml:space="preserve"><value>Check-in completato. Tutti i {0} account riusciti.</value></data>
+  <data name="Checkin_AllDisabled" xml:space="preserve"><value>Tutti gli account sono disabilitati</value></data>
+  <data name="Checkin_AllDone" xml:space="preserve"><value>Tutto completato</value></data>
+  <data name="Checkin_AllFailed" xml:space="preserve"><value>Check-in fallito. {0} account hanno avuto errori.</value></data>
+  <data name="Checkin_AlreadySignedToday" xml:space="preserve"><value>Check-in già effettuato oggi</value></data>
+  <data name="Checkin_CloudGameCheckin" xml:space="preserve"><value>Check-in Cloud Game</value></data>
+  <data name="Checkin_CloudGameCheckinProgress" xml:space="preserve"><value>Check-in cloud game in corso...</value></data>
+  <data name="Checkin_CommunityCheckin" xml:space="preserve"><value>Check-in Community</value></data>
+  <data name="Checkin_CommunityCheckinProgress" xml:space="preserve"><value>Check-in community in corso...</value></data>
+  <data name="Checkin_ConsecutiveDays" xml:space="preserve"><value>{0} giorni consecutivi | Ricompensa: {1}</value></data>
+  <data name="Checkin_CountFailed" xml:space="preserve"><value>{0} falliti</value></data>
+  <data name="Checkin_DefaultUser" xml:space="preserve"><value>Utente{0}</value></data>
+  <data name="Checkin_Detail" xml:space="preserve"><value>, dettaglio: {0}</value></data>
+  <data name="Checkin_EnableInConfig" xml:space="preserve"><value>Imposta Enable=true in config.json</value></data>
+  <data name="Checkin_FeatureNotEnabled" xml:space="preserve"><value>Funzionalità non abilitata</value></data>
+  <data name="Checkin_FirstBindWarning" xml:space="preserve"><value>è associato per la prima volta. Effettua il check-in manualmente una volta.</value></data>
+  <data name="Checkin_GameCheckin" xml:space="preserve"><value>Check-in Gioco</value></data>
+  <data name="Checkin_GameCheckinProgress" xml:space="preserve"><value>Check-in gioco in corso...</value></data>
+  <data name="Checkin_GetAccountListException" xml:space="preserve"><value>Eccezione recupero elenco account: {0}</value></data>
+  <data name="Checkin_GetCalendarException" xml:space="preserve"><value>Eccezione recupero calendario ricompense: {0}</value></data>
+  <data name="Checkin_GetInfoFailed" xml:space="preserve"><value>Recupero informazioni check-in fallito</value></data>
+  <data name="Checkin_GetStatusFailed" xml:space="preserve"><value>Recupero stato fallito</value></data>
+  <data name="Checkin_NetworkRequestException" xml:space="preserve"><value>Eccezione richiesta di rete: {0}</value></data>
+  <data name="Checkin_NoAccountToSign" xml:space="preserve"><value>Nessun account disponibile per il check-in</value></data>
+  <data name="Checkin_NoBoundAccount" xml:space="preserve"><value>Nessun account associato rilevato</value></data>
+  <data name="Checkin_NoCloudCredential" xml:space="preserve"><value>Nessuna credenziale cloud game configurata</value></data>
+  <data name="Checkin_NotConfiguredCredential" xml:space="preserve"><value>Credenziale non configurata</value></data>
+  <data name="Checkin_NotDetected" xml:space="preserve"><value>Nessuna associazione rilevata</value></data>
+  <data name="Checkin_NotDetectedAccount" xml:space="preserve"><value>Nessun account rilevato</value></data>
+  <data name="Checkin_NotEnabled" xml:space="preserve"><value>Funzionalità check-in non abilitata</value></data>
+  <data name="Checkin_OSAccountSkipped" xml:space="preserve"><value>Account OS saltato</value></data>
+  <data name="Checkin_OSAccountSkippedCommunity" xml:space="preserve"><value>Account OS saltato check-in community</value></data>
+  <data name="Checkin_ParseAccountListFailed" xml:space="preserve"><value>Analisi elenco account fallita</value></data>
+  <data name="Checkin_ParseResponseDataFailed" xml:space="preserve"><value>Analisi dati risposta elenco account fallita</value></data>
+  <data name="Checkin_ParseResultFailed" xml:space="preserve"><value>Analisi risultato check-in fallita</value></data>
+  <data name="Checkin_ParseSignStatusFailed" xml:space="preserve"><value>Analisi stato firma fallita</value></data>
+  <data name="Checkin_PartialSuccess" xml:space="preserve"><value>Check-in completato. {0} riusciti, {1} falliti.</value></data>
+  <data name="Checkin_Reason" xml:space="preserve"><value>, motivo: {0}</value></data>
+  <data name="Checkin_RequestSignStatusException" xml:space="preserve"><value>Eccezione richiesta stato firma: {0}</value></data>
+  <data name="Checkin_RewardIs" xml:space="preserve"><value>La ricompensa è {0}</value></data>
+  <data name="Checkin_SignFailedApi" xml:space="preserve"><value>Check-in fallito, API dice: {0}</value></data>
+  <data name="Checkin_SignRateLimited" xml:space="preserve"><value>Check-in fallito, HTTP 429 limite richieste</value></data>
+  <data name="Checkin_SignRequestFailed" xml:space="preserve"><value>Richiesta check-in fallita</value></data>
+  <data name="Checkin_SignSuccess" xml:space="preserve"><value>Check-in riuscito</value></data>
+  <data name="Checkin_Signed" xml:space="preserve"><value>Check-in effettuato oggi</value></data>
+  <data name="Checkin_SignedDays" xml:space="preserve"><value>Firmato per {0} giorni</value></data>
+  <data name="Checkin_SignedToday" xml:space="preserve"><value>Firmato oggi</value></data>
+  <data name="Checkin_SuccessFailCount" xml:space="preserve"><value>{0} riusciti, {1} falliti</value></data>
+  <data name="Checkin_TodayReward" xml:space="preserve"><value>La ricompensa di oggi è {0}</value></data>
+  <data name="Checkin_Unsigned" xml:space="preserve"><value>Check-in non effettuato</value></data>
+  <data name="Checkin_UnsignedToday" xml:space="preserve"><value>Non firmato oggi</value></data>
+  <data name="CheckingEllipsis" xml:space="preserve"><value>Verifica in corso...</value></data>
+  <data name="Clear" xml:space="preserve"><value>Cancella</value></data>
+  <data name="ClearAllBtn" xml:space="preserve"><value>Cancella Tutto</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>Cancella File Audio</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>Cancella Cache</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>Cancella Sfondo Personalizzato</value></data>
+  <data name="ClearGamePathTooltip" xml:space="preserve"><value>Cancella la directory di gioco configurata</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>Cancella Cartella Presentazione</value></data>
+  <data name="ClientStatusTitle" xml:space="preserve"><value>Stato Client</value></data>
+  <data name="CloseBtn" xml:space="preserve"><value>Chiudi</value></data>
+  <data name="CloudCredential_AddTitle" xml:space="preserve"><value>Aggiungi Credenziali Cloud Game</value></data>
+  <data name="CloudCredential_Title" xml:space="preserve"><value>Credenziali Cloud Game</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>Check-in Cloud Game</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>Riscatta le ricompense check-in cloud gaming. Richiede l'aggiunta di credenziali cloud gaming nell'elenco account.</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>Colore (Hex)</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>Check-in Community</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>Completa automaticamente le attività di interazione community per guadagnare Monete MiYouShe</value></data>
+  <data name="CommunityPage_Agree" xml:space="preserve"><value>Accetto</value></data>
+  <data name="CommunityPage_AuthTitle" xml:space="preserve"><value>Richiesta di Autorizzazione</value></data>
+  <data name="CommunityPage_Back" xml:space="preserve"><value>Indietro</value></data>
+  <data name="CommunityPage_ConsentPrompt" xml:space="preserve"><value>Accetti di fornire i dati?</value></data>
+  <data name="CommunityPage_DataRequest" xml:space="preserve"><value>Questa pagina richiede l'accesso ai seguenti dati:</value></data>
+  <data name="CommunityPage_Deny" xml:space="preserve"><value>Nega</value></data>
+  <data name="CommunityPage_Forward" xml:space="preserve"><value>Avanti</value></data>
+  <data name="CommunityPage_Refresh" xml:space="preserve"><value>Aggiorna</value></data>
+  <data name="CommunityPage_Unknown" xml:space="preserve"><value>Sconosciuto</value></data>
+  <data name="CommunityPage_WelcomeTitle" xml:space="preserve"><value>Benvenuto su VanillaBBS, leggi quanto segue</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>Editor di Configurazione</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>Predefinito Configurazione:</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>Destinazione Configurazione:</value></data>
+  <data name="ConfigureGamePathFirst" xml:space="preserve"><value>Configura prima il percorso di gioco</value></data>
+  <data name="CopyBtn" xml:space="preserve"><value>Copia</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>Mostra un avviso in primo piano quando l'uso CPU del launcher supera la soglia per 5 minuti e OBS non è rilevato. Abilitato per impostazione predefinita.</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>Soglia di Avviso (%)</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>Avviso Uso Anomalo CPU</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>L'applicazione ha riscontrato un errore
+
+Origine errore: {0}
+Messaggio errore: {1}
+
+Stack trace:
+{2}</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>FufuLauncher ha riscontrato un errore</value></data>
+  <data name="CreateShortcutCaption" xml:space="preserve"><value>Crea un collegamento injection one-click sul desktop</value></data>
+  <data name="CreateShortcutTitle" xml:space="preserve"><value>Crea Collegamento di Avvio</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>Regola Avatar</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>Ritaglia</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* Trascina nel riquadro o usa Ctrl + rotella mouse per zoomare e regolare la posizione di ritaglio</value></data>
+  <data name="CurrentVersionLabel" xml:space="preserve"><value>Versione Corrente</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>Personalizza il nome file .exe usato per rilevamento e avvio. Lascia vuoto per usare il predefinito (YuanShen.exe / GenshinImpact.exe).</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>es. YuanShen.exe</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>Nome Eseguibile Gioco Personalizzato</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>Suggerimento: I parametri sono aggiunti dopo il comando di avvio. Non inserire il percorso del gioco. Se non risponde, prova a cliccare il pulsante predefinito ancora qualche volta.</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>Parametri di Avvio Personalizzati</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>es. -fullscreen -high</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>Inserisci un codice colore esadecimale. Lascia vuoto e riavvia per ripristinare il predefinito.</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>Colore Tema Personalizzato</value></data>
+  <data name="DailyNote_ApiError" xml:space="preserve"><value>API ha restituito errore, retcode={0}</value></data>
+  <data name="DailyNote_Claimed" xml:space="preserve"><value>Riscattato</value></data>
+  <data name="DailyNote_FetchFailed" xml:space="preserve"><value>Recupero note fallito: {0} (retcode={1})</value></data>
+  <data name="DailyNote_GetFailed" xml:space="preserve"><value>Recupero dati note giornaliere fallito: {0}</value></data>
+  <data name="DailyNote_InvalidResponse" xml:space="preserve"><value>Recupero dati note giornaliere fallito: Formato risposta non valido</value></data>
+  <data name="DailyNote_NoActiveAccount" xml:space="preserve"><value>Nessun account attivo</value></data>
+  <data name="DailyNote_NoFingerprint" xml:space="preserve"><value>Impossibile ottenere il servizio impronta dispositivo</value></data>
+  <data name="DailyNote_RefreshData" xml:space="preserve"><value>Aggiorna Dati</value></data>
+  <data name="DailyNote_RefreshStatus" xml:space="preserve"><value>Stato Aggiornamento Corrente</value></data>
+  <data name="DailyNote_Title" xml:space="preserve"><value>Agenda di Teyvat</value></data>
+  <data name="DailyNote_TransformerTime" xml:space="preserve"><value>{0}g {1}o {2}m</value></data>
+  <data name="DailyNote_Unclaimed" xml:space="preserve"><value>Non riscattato</value></data>
+  <data name="DailyNote_ActivityDesc" xml:space="preserve"><value>Visualizza eventi correnti e tempo rimanente a colpo d'occhio.</value></data>
+  <data name="DailyNote_ActivityOverview" xml:space="preserve"><value>Panoramica Attività</value></data>
+  <data name="DailyNote_CannotLoadCookie" xml:space="preserve"><value>Impossibile caricare cookie</value></data>
+  <data name="DailyNote_CharacterWeapon" xml:space="preserve"><value>Personaggio / Arma</value></data>
+  <data name="DailyNote_MaterialDropHint" xml:space="preserve"><value>Promemoria raccolta giornaliera, libri talenti e materiali ascensione armi</value></data>
+  <data name="DailyNote_RecentActivities" xml:space="preserve"><value>Attività Recenti</value></data>
+  <data name="DailyNote_TodayBirthday" xml:space="preserve"><value>Compleanno di Oggi</value></data>
+  <data name="DailyNote_TodayMaterials" xml:space="preserve"><value>Materiali di Oggi</value></data>
+  <data name="DataPage_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="DataPage_5Star" xml:space="preserve"><value>5★</value></data>
+  <data name="DataPage_AbyssData" xml:space="preserve"><value>Abisso</value></data>
+  <data name="DataPage_AllRoles" xml:space="preserve"><value>Tutti i Personaggi</value></data>
+  <data name="DataPage_AvgConstellation" xml:space="preserve"><value>Costellazione Media</value></data>
+  <data name="DataPage_AvgDmg" xml:space="preserve"><value>DMG Medio</value></data>
+  <data name="DataPage_AvgInterval" xml:space="preserve"><value>Intervallo Medio:</value></data>
+  <data name="DataPage_AvgTime" xml:space="preserve"><value>Tempo Medio</value></data>
+  <data name="DataPage_ClickToView" xml:space="preserve"><value>Clicca per ingrandire</value></data>
+  <data name="DataPage_ConstellationDist" xml:space="preserve"><value>Costellazione (C0/C1/C2)</value></data>
+  <data name="DataPage_DataProvidedBy" xml:space="preserve"><value>Dati personaggi di Teyvat Assistant. Cronologia di Paimon.moe.</value></data>
+  <data name="DataPage_HistoryRerun" xml:space="preserve"><value>Cronologia:</value></data>
+  <data name="DataPage_LoadingTimeline" xml:space="preserve"><value>Caricamento dati cronologia, attendere...</value></data>
+  <data name="DataPage_MinInterval" xml:space="preserve"><value>Intervallo Min:</value></data>
+  <data name="DataPage_Only4Star" xml:space="preserve"><value>Solo 4★</value></data>
+  <data name="DataPage_Only5Star" xml:space="preserve"><value>Solo 5★</value></data>
+  <data name="DataPage_OwnRate" xml:space="preserve"><value>Tasso di Possesso</value></data>
+  <data name="DataPage_RerunTimer" xml:space="preserve"><value>Timer Rerun</value></data>
+  <data name="DataPage_RoleData" xml:space="preserve"><value>Dati Personaggio</value></data>
+  <data name="DataPage_SearchRole" xml:space="preserve"><value>Cerca personaggi...</value></data>
+  <data name="DataPage_SpeedrunTime" xml:space="preserve"><value>Tempo Speedrun</value></data>
+  <data name="DataPage_SpiralAbyss" xml:space="preserve"><value>Abisso a Spirale</value></data>
+  <data name="DataPage_StarUnit" xml:space="preserve"><value>★</value></data>
+  <data name="DataPage_Talents" xml:space="preserve"><value>Talenti</value></data>
+  <data name="DataPage_Timeline" xml:space="preserve"><value>Cronologia</value></data>
+  <data name="DataPage_TopArtifacts" xml:space="preserve"><value>Migliori Artefatti</value></data>
+  <data name="DataPage_TopWeapons" xml:space="preserve"><value>Migliori Armi</value></data>
+  <data name="DataPage_UsageRate" xml:space="preserve"><value>Tasso di Utilizzo</value></data>
+  <data name="DataPage_WishData" xml:space="preserve"><value>Dati Desideri</value></data>
+  <data name="Day_Friday" xml:space="preserve"><value>Ven</value></data>
+  <data name="Day_Monday" xml:space="preserve"><value>Lun</value></data>
+  <data name="Day_Saturday" xml:space="preserve"><value>Sab</value></data>
+  <data name="Day_Sunday" xml:space="preserve"><value>Dom</value></data>
+  <data name="Day_Thursday" xml:space="preserve"><value>Gio</value></data>
+  <data name="Day_Tuesday" xml:space="preserve"><value>Mar</value></data>
+  <data name="Day_Wednesday" xml:space="preserve"><value>Mer</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>Elimina</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>Elimina Questo Predefinito</value></data>
+  <data name="Desc_ShortcutDescription" xml:space="preserve"><value>Avvia Genshin Impact tramite injection FufuLauncher</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>Diagnostica Computer</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>Hai problemi? Prova a diagnosticare il tuo sistema prima.</value></data>
+  <data name="Diagnostics_AllNormal" xml:space="preserve"><value>Normale. L'ambiente di sistema e rete soddisfa i requisiti.</value></data>
+  <data name="Diagnostics_CannotDetect" xml:space="preserve"><value>Impossibile rilevare</value></data>
+  <data name="Diagnostics_CollectingInfo" xml:space="preserve"><value>Raccolta informazioni di sistema...</value></data>
+  <data name="Diagnostics_Connected" xml:space="preserve"><value>Connesso</value></data>
+  <data name="Diagnostics_Disabled" xml:space="preserve"><value>Disabilitato</value></data>
+  <data name="Diagnostics_Disconnected" xml:space="preserve"><value>Disconnesso</value></data>
+  <data name="Diagnostics_DiskSpace" xml:space="preserve"><value>Spazio Disco di Sistema</value></data>
+  <data name="Diagnostics_DisplayAndGraphics" xml:space="preserve"><value>Schermo e Grafica</value></data>
+  <data name="Diagnostics_Domestic" xml:space="preserve"><value>Nazionale</value></data>
+  <data name="Diagnostics_DomesticSystem" xml:space="preserve"><value>Nazionale (Sistema)</value></data>
+  <data name="Diagnostics_Enabled" xml:space="preserve"><value>Abilitato</value></data>
+  <data name="Diagnostics_Hardware" xml:space="preserve"><value>Hardware</value></data>
+  <data name="Diagnostics_HardwareAndSystem" xml:space="preserve"><value>Hardware e Ambiente di Sistema</value></data>
+  <data name="Diagnostics_NetworkRegion" xml:space="preserve"><value>Regione di Rete</value></data>
+  <data name="Diagnostics_NetworkStatus" xml:space="preserve"><value>Stato Rete</value></data>
+  <data name="Diagnostics_NoNetwork" xml:space="preserve"><value>Nessuna Rete</value></data>
+  <data name="Diagnostics_NotInstalled" xml:space="preserve"><value>Non installato o disinstallato</value></data>
+  <data name="Diagnostics_Overseas" xml:space="preserve"><value>Estero</value></data>
+  <data name="Diagnostics_OverseasSystem" xml:space="preserve"><value>Estero (Sistema)</value></data>
+  <data name="Diagnostics_PartialError" xml:space="preserve"><value>Si è verificato un errore durante la diagnostica. Alcune informazioni potrebbero essere imprecise.</value></data>
+  <data name="Diagnostics_ReadFailed" xml:space="preserve"><value>Lettura Fallita</value></data>
+  <data name="Diagnostics_RefreshRate" xml:space="preserve"><value>Frequenza Aggiornamento</value></data>
+  <data name="Diagnostics_Resolution" xml:space="preserve"><value>Risoluzione</value></data>
+  <data name="Diagnostics_SecurityAndNetwork" xml:space="preserve"><value>Sicurezza e Rete</value></data>
+  <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve"><value>Attualmente su rete nazionale. L'accesso al server potrebbe essere lento.</value></data>
+  <data name="Diagnostics_SuggestLowDisk" xml:space="preserve"><value>Lo spazio libero sul disco di sistema è {0}GB, sotto il requisito minimo di 1GB.</value></data>
+  <data name="Diagnostics_SuggestLowMemory" xml:space="preserve"><value>La memoria fisica attuale è {0}GB, sotto il requisito minimo di 12GB.</value></data>
+  <data name="Diagnostics_SuggestNoNetwork" xml:space="preserve"><value>Rete non connessa. Verifica le impostazioni di rete.</value></data>
+  <data name="Diagnostics_SuggestRefreshRate" xml:space="preserve"><value>Il tuo monitor supporta {0}Hz, ma attualmente funziona a {1}Hz.</value></data>
+  <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve"><value>Windows Security Center è abilitato, potrebbe causare il fallimento dell'injection dei plugin. Si consiglia di disabilitarlo.</value></data>
+  <data name="Diagnostics_Suggestion" xml:space="preserve"><value>Suggerimento</value></data>
+  <data name="Diagnostics_Title" xml:space="preserve"><value>Diagnostica di Sistema</value></data>
+  <data name="Diagnostics_UnknownCpu" xml:space="preserve"><value>CPU Sconosciuta</value></data>
+  <data name="Diagnostics_UnknownGpu" xml:space="preserve"><value>GPU Sconosciuta</value></data>
+  <data name="Diagnostics_WindowsSecurity" xml:space="preserve"><value>Windows Security Center</value></data>
+  <data name="Disabled" xml:space="preserve"><value>Disabilitato</value></data>
+  <data name="DiskUsageLabel" xml:space="preserve"><value>Utilizzo Disco</value></data>
+  <data name="DontRemindAgain" xml:space="preserve"><value>Non ricordarmelo più</value></data>
+  <data name="DontShowAgain" xml:space="preserve"><value>Non mostrare più</value></data>
+  <data name="DoubleClickToEditTooltip" xml:space="preserve"><value>Doppio clic per modificare nota</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>Scarica Ultima Immagine di Sfondo</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>Scarica Ultimo Video di Sfondo</value></data>
+  <data name="DownloadOrVerifyFiles" xml:space="preserve"><value>Scarica o verifica file</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>Scarica Plugin</value></data>
+  <data name="DownloadWindow_AllDone" xml:space="preserve"><value>Tutti i file scaricati, verificati e distribuiti.</value></data>
+  <data name="DownloadWindow_BaseGameTooltip" xml:space="preserve"><value>Deseleziona per aggiornare solo il pacchetto vocale</value></data>
+  <data name="DownloadWindow_Cancel" xml:space="preserve"><value>Annulla</value></data>
+  <data name="DownloadWindow_Cancelled" xml:space="preserve"><value>Operazione Annullata</value></data>
+  <data name="DownloadWindow_Complete" xml:space="preserve"><value>Completato</value></data>
+  <data name="DownloadWindow_DownloadBaseGame" xml:space="preserve"><value>Scarica Dati Base Gioco</value></data>
+  <data name="DownloadWindow_Error" xml:space="preserve"><value>Errore Verificato</value></data>
+  <data name="DownloadWindow_GameResourceUpdate" xml:space="preserve"><value>Aggiornamento Risorse Gioco</value></data>
+  <data name="DownloadWindow_HideDetailLog" xml:space="preserve"><value>Nascondi Log Dettagliato</value></data>
+  <data name="DownloadWindow_InitTask" xml:space="preserve"><value>Inizializzazione operazione...</value></data>
+  <data name="DownloadWindow_InstallDir" xml:space="preserve"><value>Directory Installazione</value></data>
+  <data name="DownloadWindow_Processing" xml:space="preserve"><value>Elaborazione: {0}/{1} file</value></data>
+  <data name="DownloadWindow_Ready" xml:space="preserve"><value>Pronto</value></data>
+  <data name="DownloadWindow_ShowDetailLog" xml:space="preserve"><value>Mostra Log Dettagliato</value></data>
+  <data name="DownloadWindow_StartDownload" xml:space="preserve"><value>Avvia Download</value></data>
+  <data name="DownloadWindow_StuckIsNormal" xml:space="preserve"><value>Bloccarsi durante il download è normale</value></data>
+  <data name="DownloadWindow_Success" xml:space="preserve"><value>Download Riuscito</value></data>
+  <data name="DownloadWindow_Title" xml:space="preserve"><value>Downloader Risorse</value></data>
+  <data name="DownloadWindow_VoiceLanguage" xml:space="preserve"><value>Lingua Pacchetto Vocale</value></data>
+  <data name="Download_AllDone" xml:space="preserve"><value>Tutto completato!</value></data>
+  <data name="Download_CannotConnectApi" xml:space="preserve"><value>Impossibile connettersi all'API Mihoyo</value></data>
+  <data name="Download_Connecting" xml:space="preserve"><value>Connessione ai server Mihoyo...</value></data>
+  <data name="Download_FetchingManifest" xml:space="preserve"><value>Recupero file manifest: {0}...</value></data>
+  <data name="Download_FileException" xml:space="preserve"><value>[Eccezione File] {0}: {1}</value></data>
+  <data name="Download_FileUnfixable" xml:space="preserve"><value>File non riparabile o utente ha annullato: {0}</value></data>
+  <data name="Download_ManifestFailed" xml:space="preserve"><value>Download manifest fallito: {0}</value></data>
+  <data name="Download_ManifestMd5Retry" xml:space="preserve"><value>Verifica MD5 manifest fallita, nuovo tentativo...</value></data>
+  <data name="Download_MovingFiles" xml:space="preserve"><value>Verifica download completata, spostamento file...</value></data>
+  <data name="Download_TaskStart" xml:space="preserve"><value>Verifica/Download avviato. Totale: {0} file, {1}</value></data>
+  <data name="Download_UserCancelled" xml:space="preserve"><value>Utente ha annullato.</value></data>
+  <data name="Download_VerifyFailed" xml:space="preserve"><value>[Verifica Fallita] {0} (Server:{1} vs Locale:{2})</value></data>
+  <data name="Download_VoiceOnly" xml:space="preserve"><value>>> Saltando gioco base, solo modalità pacchetto vocale</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>Modifica File di Configurazione</value></data>
+  <data name="Element_Anemo" xml:space="preserve"><value>Anemo</value></data>
+  <data name="Element_Cryo" xml:space="preserve"><value>Cryo</value></data>
+  <data name="Element_Dendro" xml:space="preserve"><value>Dendro</value></data>
+  <data name="Element_Electro" xml:space="preserve"><value>Electro</value></data>
+  <data name="Element_Geo" xml:space="preserve"><value>Geo</value></data>
+  <data name="Element_Hydro" xml:space="preserve"><value>Hydro</value></data>
+  <data name="Element_Pyro" xml:space="preserve"><value>Pyro</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>Nessun plugin installato</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>Abilita Sovrapposizione Sfocatura Acrilica</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>Abilita Integrazione BetterGI</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>Abilita Avviso Uso Anomalo CPU</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>Abilita Sfondo Personalizzato</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>Abilita Screenshot In-Game</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>Abilita Injection</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>Abilita Injection</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>Abilita Suono di Avvio Gioco</value></data>
+  <data name="Enabled" xml:space="preserve"><value>Abilitato</value></data>
+  <data name="Err_AccountAlreadySaved" xml:space="preserve"><value>Questo account è già stato salvato.</value></data>
+  <data name="Err_CannotAccessRegistry" xml:space="preserve"><value>Impossibile accedere al registro di sistema</value></data>
+  <data name="Err_CannotCreateGameDir_Format" xml:space="preserve"><value>Creazione directory di gioco fallita: {0}
+Errore: {1}</value></data>
+  <data name="Err_CannotOpenFilePicker" xml:space="preserve"><value>Impossibile aprire il selettore file</value></data>
+  <data name="Err_ConfigIniNotFound_Format" xml:space="preserve"><value>File config.ini non trovato.
+
+Percorso verificato:
+{0}
+
+Verifica che il percorso di gioco punti correttamente alla directory di installazione</value></data>
+  <data name="Err_DeleteFailed_Format" xml:space="preserve"><value>Eliminazione fallita: {0}</value></data>
+  <data name="Err_ExeNotFoundAtPath_Format" xml:space="preserve"><value>Eseguibile del gioco non trovato in questo percorso ({0}).
+
+Conferma di aver selezionato la directory di installazione contenente l'eseguibile, o configura un nome personalizzato nelle Impostazioni.</value></data>
+  <data name="Err_ExeNotFoundInFolder_Format" xml:space="preserve"><value>Eseguibile del gioco non trovato nella cartella:
+{0}</value></data>
+  <data name="Err_FetchFailedCheckNetwork" xml:space="preserve"><value>Recupero fallito. Verifica la connessione di rete.</value></data>
+  <data name="Err_FpsMonitorNeedsAdmin" xml:space="preserve"><value>Attivazione monitoraggio FPS fallita: questa funzione richiede l'esecuzione del launcher come amministratore.</value></data>
+  <data name="Err_GamePathNotFound" xml:space="preserve"><value>Percorso di gioco non trovato. Imposta prima la posizione del gioco nelle Impostazioni.</value></data>
+  <data name="Err_GamePathNotSet" xml:space="preserve"><value>Percorso di gioco non impostato.</value></data>
+  <data name="Err_NoLoggedInAccount" xml:space="preserve"><value>Nessun account connesso trovato (dati registro vuoti)</value></data>
+  <data name="Err_OperationFailed_Format" xml:space="preserve"><value>Operazione fallita: {0}</value></data>
+  <data name="Err_PathProcessingFailed_Format" xml:space="preserve"><value>Elaborazione percorso fallita: {0}</value></data>
+  <data name="Err_ReadConfigFailed" xml:space="preserve"><value>Lettura file di configurazione fallita</value></data>
+  <data name="Err_SaveFailed_Format" xml:space="preserve"><value>Salvataggio fallito: {0}</value></data>
+  <data name="Err_SwitchFailed_Format" xml:space="preserve"><value>Cambio fallito: {0}</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>Errore</value></data>
+  <data name="EventsAndUpdatesCaption" xml:space="preserve"><value>Eventi e notizie sugli aggiornamenti</value></data>
+  <data name="Failure" xml:space="preserve"><value>Fallimento</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>Hai feedback o riscontrato un problema? Clicca qui</value></data>
+  <data name="FeedbackWindow_BugReport" xml:space="preserve"><value>Segnala Problema / Bug</value></data>
+  <data name="FeedbackWindow_BugReportDesc" xml:space="preserve"><value>Riscontrato un errore o comportamento imprevisto? Invia una segnalazione bug tramite GitHub.</value></data>
+  <data name="FeedbackWindow_FeatureRequest" xml:space="preserve"><value>Invia Idea / Richiesta Funzionalità</value></data>
+  <data name="FeedbackWindow_FeatureRequestDesc" xml:space="preserve"><value>Hai una nuova idea o richiesta di funzionalità? Inviala tramite GitHub.</value></data>
+  <data name="FeedbackWindow_SelectType" xml:space="preserve"><value>Seleziona il tipo di feedback da inviare:</value></data>
+  <data name="FeedbackWindow_Title" xml:space="preserve"><value>Invia Feedback</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>Recupera Risorse Sfondo Ufficiali</value></data>
+  <data name="FetchFailedShort" xml:space="preserve"><value>Recupero Fallito</value></data>
+  <data name="FilePicker_InvalidWindowHandle" xml:space="preserve"><value>L'handle della finestra non è valido. Esegui in modalità utente normale o riprova.</value></data>
+  <data name="FilePicker_MainWindowNull" xml:space="preserve"><value>La finestra principale non esiste, impossibile aprire il selettore file</value></data>
+  <data name="FileName_ShortcutName" xml:space="preserve"><value>Avvia Genshin Impact.lnk</value></data>
+  <data name="FpsMonitorCaption" xml:space="preserve"><value>Mostra FPS in tempo reale nell'angolo in alto a sinistra mentre il gioco è in esecuzione (richiede privilegi di amministratore)</value></data>
+  <data name="FpsMonitorTitle" xml:space="preserve"><value>Monitor FPS In-Game</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>Plugin FPS Abilitato</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>If you have NVIDIA RTX 40-series or newer AI frame generation enabled, or use frame display software such as RTSS or MSI Afterburner, it may cause the game to freeze or fail to start normally.</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>Don&apos;t show this warning again</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>Compatibility Warning</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>The frame rate display plugin hash does not match. It may have been tampered with or corrupted. Please reinstall the launcher.</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>Repair Failed</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS display plugin has been successfully repaired and installed</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>Repairing FPS Plugin</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>Opacità Sfondo Frame</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>Come Usare la Telecamera Libera</value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>Funzioni (Download/Riparazione)</value></data>
+  <data name="GachaAnalysis_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="GachaAnalysis_4StarTop10" xml:space="preserve"><value>Top 10 Pull 4★</value></data>
+  <data name="GachaAnalysis_5StarAvg" xml:space="preserve"><value>Media 5★</value></data>
+  <data name="GachaAnalysis_About" xml:space="preserve"><value>Informazioni</value></data>
+  <data name="GachaAnalysis_ActiveMonths" xml:space="preserve"><value>Mesi Attivi</value></data>
+  <data name="GachaAnalysis_AllPools5Star" xml:space="preserve"><value>Tutti i Pool 5★</value></data>
+  <data name="GachaAnalysis_Approx" xml:space="preserve"><value>Circa </value></data>
+  <data name="GachaAnalysis_Avg5StarCost" xml:space="preserve"><value>Costo Medio 5★</value></data>
+  <data name="GachaAnalysis_CachedIconData" xml:space="preserve"><value>Dati icone personaggi e armi in cache</value></data>
+  <data name="GachaAnalysis_CardView" xml:space="preserve"><value>Vista Schede</value></data>
+  <data name="GachaAnalysis_CharacterEvent" xml:space="preserve"><value>Evento Personaggio</value></data>
+  <data name="GachaAnalysis_Characters" xml:space="preserve"><value>Personaggi</value></data>
+  <data name="GachaAnalysis_ChronicledWish" xml:space="preserve"><value>Desiderio Cronologico</value></data>
+  <data name="GachaAnalysis_CopyImage" xml:space="preserve"><value>Copia Immagine</value></data>
+  <data name="GachaAnalysis_DeleteRecords" xml:space="preserve"><value>Elimina Record</value></data>
+  <data name="GachaAnalysis_Distribution" xml:space="preserve"><value>Distribuzione</value></data>
+  <data name="GachaAnalysis_ExportUigf" xml:space="preserve"><value>Esporta UIGF</value></data>
+  <data name="GachaAnalysis_FullUpdate" xml:space="preserve"><value>Aggiornamento Completo</value></data>
+  <data name="GachaAnalysis_GeneratingAnalysis" xml:space="preserve"><value>Generazione analisi desideri...</value></data>
+  <data name="GachaAnalysis_GetRecords" xml:space="preserve"><value>Ottieni Record Desideri</value></data>
+  <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve"><value>Ottieni tramite Account MiYouShe</value></data>
+  <data name="GachaAnalysis_GetViaUrl" xml:space="preserve"><value>Ottieni tramite URL</value></data>
+  <data name="GachaAnalysis_GoldPullStats" xml:space="preserve"><value>Statistiche Metodo Pull Oro</value></data>
+  <data name="GachaAnalysis_GoldPullStatsDesc" xml:space="preserve"><value>I record dello stesso pool allo stesso momento sono contati come un gruppo</value></data>
+  <data name="GachaAnalysis_GroupsWith5Star" xml:space="preserve"><value> gruppi con 5★</value></data>
+  <data name="GachaAnalysis_ImageLibrary" xml:space="preserve"><value>Libreria Risorse Immagini</value></data>
+  <data name="GachaAnalysis_ImportHint" xml:space="preserve"><value>Scegli un metodo per importare i tuoi record desideri e avvia l'analisi dei dati gacha</value></data>
+  <data name="GachaAnalysis_ImportUigf" xml:space="preserve"><value>Importa File UIGF</value></data>
+  <data name="GachaAnalysis_IncrementalUpdate" xml:space="preserve"><value>Aggiornamento Incrementale (Consigliato)</value></data>
+  <data name="GachaAnalysis_ListView" xml:space="preserve"><value>Vista Elenco</value></data>
+  <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve"><value>Ottieni record direttamente tramite il tuo
+account MiYouShe connesso</value></data>
+  <data name="GachaAnalysis_MonthlyAvg" xml:space="preserve"><value>Media Mensile </value></data>
+  <data name="GachaAnalysis_MonthlyTrend" xml:space="preserve"><value>Tendenza Pull Mensili</value></data>
+  <data name="GachaAnalysis_MonthlyTrendDesc" xml:space="preserve"><value>Tutti i pool 1-5★ per mese</value></data>
+  <data name="GachaAnalysis_NoRecords" xml:space="preserve"><value>Nessun Record</value></data>
+  <data name="GachaAnalysis_PeakMonth" xml:space="preserve"><value>Mese di Picco</value></data>
+  <data name="GachaAnalysis_Pity4Star" xml:space="preserve"><value>Pity 4★: </value></data>
+  <data name="GachaAnalysis_Pity4StarShort" xml:space="preserve"><value>Pity 4★ </value></data>
+  <data name="GachaAnalysis_Pity5Star" xml:space="preserve"><value>Pity 5★: </value></data>
+  <data name="GachaAnalysis_Pity5StarShort" xml:space="preserve"><value>Pity 5★ </value></data>
+  <data name="GachaAnalysis_PityInterval" xml:space="preserve"><value>Intervallo Pity 5★</value></data>
+  <data name="GachaAnalysis_Pool" xml:space="preserve"><value>Pool</value></data>
+  <data name="GachaAnalysis_PoolPullDistribution" xml:space="preserve"><value>Distribuzione Pull per Pool</value></data>
+  <data name="GachaAnalysis_PrimogemsSpent" xml:space="preserve"><value>Primogemme Spese</value></data>
+  <data name="GachaAnalysis_PrimogemsUnit" xml:space="preserve"><value> Primogemme</value></data>
+  <data name="GachaAnalysis_Proportion" xml:space="preserve"><value>Proporzione</value></data>
+  <data name="GachaAnalysis_Pulls" xml:space="preserve"><value> Pull</value></data>
+  <data name="GachaAnalysis_PullsUnit" xml:space="preserve"><value> Pull</value></data>
+  <data name="GachaAnalysis_Rarity" xml:space="preserve"><value>Rarità</value></data>
+  <data name="GachaAnalysis_RarityComposition" xml:space="preserve"><value>Composizione Rarità</value></data>
+  <data name="GachaAnalysis_Recent5StarPulls" xml:space="preserve"><value>Pull 5★ Recenti</value></data>
+  <data name="GachaAnalysis_Recommended" xml:space="preserve"><value>Consigliato</value></data>
+  <data name="GachaAnalysis_RefreshMetadata" xml:space="preserve"><value>Aggiorna Metadati</value></data>
+  <data name="GachaAnalysis_SaveImage" xml:space="preserve"><value>Salva Immagine</value></data>
+  <data name="GachaAnalysis_Show4Star" xml:space="preserve"><value>Mostra Record 4★</value></data>
+  <data name="GachaAnalysis_Show4StarShort" xml:space="preserve"><value>Mostra 4★</value></data>
+  <data name="GachaAnalysis_SinglePullGoldRate" xml:space="preserve"><value>Tasso 5★ Pull Singolo</value></data>
+  <data name="GachaAnalysis_StandardWish" xml:space="preserve"><value>Desiderio Standard</value></data>
+  <data name="GachaAnalysis_TenPullGoldRate" xml:space="preserve"><value>Tasso 5★ 10-Pull</value></data>
+  <data name="GachaAnalysis_TimesWith5Star" xml:space="preserve"><value> volte con 5★</value></data>
+  <data name="GachaAnalysis_Title" xml:space="preserve"><value>Analisi Record Desideri</value></data>
+  <data name="GachaAnalysis_Total" xml:space="preserve"><value>Totale: </value></data>
+  <data name="GachaAnalysis_TotalPulls" xml:space="preserve"><value>Pull Totali</value></data>
+  <data name="GachaAnalysis_UigfDesc" xml:space="preserve"><value>Importa record da un file JSON
+formato UIGF standard
+UIGF v4.x/3.0/2.x</value></data>
+  <data name="GachaAnalysis_UpdateData" xml:space="preserve"><value>Aggiorna Dati</value></data>
+  <data name="GachaAnalysis_UrlDesc" xml:space="preserve"><value>Incolla il link di analisi gacha
+per recuperare i record dall'API</value></data>
+  <data name="GachaAnalysis_WeaponEvent" xml:space="preserve"><value>Evento Arma</value></data>
+  <data name="GachaAnalysis_Weapons" xml:space="preserve"><value>Armi</value></data>
+  <data name="GachaAnalysis_WishAnalysis" xml:space="preserve"><value>Analisi Desideri</value></data>
+  <data name="GachaAnalysis_WishOverview" xml:space="preserve"><value>Panoramica Desideri</value></data>
+  <data name="GachaDialog_BasicFeatureNote" xml:space="preserve"><value>Questa funzione è di base. Per analisi dettagliate, considera l'uso di strumenti gacha dedicati.</value></data>
+  <data name="GachaDialog_Close" xml:space="preserve"><value>Chiudi</value></data>
+  <data name="GachaDialog_CurrentPity" xml:space="preserve"><value>Pity Corrente</value></data>
+  <data name="GachaDialog_ExportUigf" xml:space="preserve"><value>Esporta UIGF</value></data>
+  <data name="GachaDialog_ExportUigfTooltip" xml:space="preserve"><value>Esporta formato JSON UIGF standard sul desktop</value></data>
+  <data name="GachaDialog_FiveStarCount" xml:space="preserve"><value>Conteggio 5★</value></data>
+  <data name="GachaDialog_FiveStarRecords" xml:space="preserve"><value>Record 5★</value></data>
+  <data name="GachaDialog_GachaRecordLink" xml:space="preserve"><value>Link Record Desideri</value></data>
+  <data name="GachaDialog_PasteUrl" xml:space="preserve"><value>Incolla URL con authkey qui</value></data>
+  <data name="GachaDialog_Pulls" xml:space="preserve"><value> Pull</value></data>
+  <data name="GachaDialog_StartAnalysis" xml:space="preserve"><value>Avvia Analisi</value></data>
+  <data name="GachaDialog_Title" xml:space="preserve"><value>Analisi Statistiche Gacha</value></data>
+  <data name="GachaDialog_TotalInvested" xml:space="preserve"><value>Totale: </value></data>
+  <data name="Gacha_Best5Star" xml:space="preserve"><value>Miglior 5★</value></data>
+  <data name="Gacha_DeepestPity" xml:space="preserve"><value>Pity Più Profondo</value></data>
+  <data name="Gacha_FiftyFifty" xml:space="preserve"><value>50/50</value></data>
+  <data name="Gacha_Guaranteed" xml:space="preserve"><value>Garantito</value></data>
+  <data name="Gacha_No5StarPity" xml:space="preserve"><value>Nessun pity 5★</value></data>
+  <data name="Gacha_No5StarRecord" xml:space="preserve"><value>Nessun record 5★</value></data>
+  <data name="Gacha_Won5050" xml:space="preserve"><value>50/50 Perso</value></data>
+  <data name="Gacha_ZeroPulls" xml:space="preserve"><value>0 Pull</value></data>
+  <data name="Gacha_4StarDrop" xml:space="preserve"><value>Drop 4★</value></data>
+  <data name="Gacha_5StarDrop" xml:space="preserve"><value>Drop 5★</value></data>
+  <data name="Gacha_ActiveMonths" xml:space="preserve"><value>Mesi Attivi</value></data>
+  <data name="Gacha_Avg5StarCharCost" xml:space="preserve"><value>Costo Medio Personaggio 5★</value></data>
+  <data name="Gacha_Avg5StarPulls" xml:space="preserve"><value>Pull Medi 5★</value></data>
+  <data name="Gacha_MonthlyAvg0" xml:space="preserve"><value>0 pull/mese in media</value></data>
+  <data name="Gacha_No5StarChar" xml:space="preserve"><value>Nessun personaggio 5★</value></data>
+  <data name="Gacha_NoRecords" xml:space="preserve"><value>Nessun record</value></data>
+  <data name="Gacha_NoWishRecord" xml:space="preserve"><value>Nessun record desideri</value></data>
+  <data name="Gacha_PerPull" xml:space="preserve"><value>A 160 primogemme/pull</value></data>
+  <data name="Gacha_PrimogemEstimate" xml:space="preserve"><value>Stima Primogemme</value></data>
+  <data name="Gacha_TotalPulls" xml:space="preserve"><value>Pull Totali</value></data>
+  <data name="Gacha_Worst5Star" xml:space="preserve"><value>Peggior 5★</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>Check-in Gioco</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>Riscatta le ricompense giornaliere MiYouShe (Primogemme, Mora, ecc.)</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>Colore e Opacità Testo Notizie Gioco</value></data>
+  <data name="Geetest_CaptchaTitle" xml:space="preserve"><value>Verifica CAPTCHA</value></data>
+  <data name="Geetest_NoAccountService" xml:space="preserve"><value>Impossibile ottenere il servizio gestione account</value></data>
+  <data name="Geetest_NoActiveAccount" xml:space="preserve"><value>Nessun account attivo</value></data>
+  <data name="Geetest_NoFingerprintService" xml:space="preserve"><value>Impossibile ottenere il servizio impronta dispositivo</value></data>
+  <data name="GenshinData_DataNote" xml:space="preserve"><value>• I dati giornalieri sono generalmente aggiornati la mattina successiva
+• Il livello di reddito è calcolato in base all'efficienza di guadagno primogemme</value></data>
+  <data name="GenshinData_DataUpdated" xml:space="preserve"><value>Dati aggiornati: </value></data>
+  <data name="GenshinData_LastMonth" xml:space="preserve"><value>(Mese scorso </value></data>
+  <data name="GenshinData_Mom" xml:space="preserve"><value>SuM </value></data>
+  <data name="GenshinData_MonthTotal" xml:space="preserve"><value>Totale Mese</value></data>
+  <data name="GenshinData_MonthlySourceAnalysis" xml:space="preserve"><value>Analisi Mensile Fonti Primogemme</value></data>
+  <data name="GenshinData_Mora" xml:space="preserve"><value>Mora</value></data>
+  <data name="GenshinData_MoraEarned" xml:space="preserve"><value>Mora Guadagnati</value></data>
+  <data name="GenshinData_Primogems" xml:space="preserve"><value>Primogemme</value></data>
+  <data name="GenshinData_PrimogemsEarned" xml:space="preserve"><value>Primogemme Guadagnate</value></data>
+  <data name="GenshinData_Title" xml:space="preserve"><value>Diario di Viaggio - Rapporto Finanziario di Teyvat</value></data>
+  <data name="GenshinData_TodayEarnings" xml:space="preserve"><value>Guadagni di Oggi</value></data>
+  <data name="GenshinData_Total" xml:space="preserve"><value>Totale</value></data>
+  <data name="GenshinData_TravelJournal" xml:space="preserve"><value>Diario di Viaggio</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>Ottieni Plugin</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>Il link configurato non è un formato GIF valido</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>Caricamento risorsa GIF fallito</value></data>
+  <data name="GoToDownload" xml:space="preserve"><value>Vai al Download (X64)</value></data>
+  <data name="GotItBtn" xml:space="preserve"><value>Ho Capito</value></data>
+  <data name="HDR_AutoAdjust" xml:space="preserve"><value>Regolazione Automatica</value></data>
+  <data name="HDR_AutoAdjustTooltip" xml:space="preserve"><value>Calcolo automatico basato sui dati del display</value></data>
+  <data name="HDR_BrightnessConfig" xml:space="preserve"><value>Configurazione Luminosità HDR</value></data>
+  <data name="HDR_DisplayInfo" xml:space="preserve"><value>Informazioni Display</value></data>
+  <data name="HDR_MaxLuminance" xml:space="preserve"><value>Luminosità Massima</value></data>
+  <data name="HDR_NotEnabled" xml:space="preserve"><value>HDR Non Abilitato</value></data>
+  <data name="HDR_NotEnabledMsg" xml:space="preserve"><value>La modalità HDR di Windows non è abilitata; la regolazione automatica potrebbe essere imprecisa.</value></data>
+  <data name="HDR_NotSupported" xml:space="preserve"><value>HDR Non Supportato</value></data>
+  <data name="HDR_NotSupportedMsg" xml:space="preserve"><value>Il monitor corrente segnala che l'HDR non è supportato.</value></data>
+  <data name="HDR_OffContent" xml:space="preserve"><value>Disabilita HDR (Valore registro 0)</value></data>
+  <data name="HDR_OnContent" xml:space="preserve"><value>Abilita HDR (Valore registro 1)</value></data>
+  <data name="HDR_RegistryNote" xml:space="preserve"><value>Nota: Il salvataggio modificherà immediatamente il registro e questa impostazione sarà riapplicata automaticamente al prossimo avvio del gioco.</value></data>
+  <data name="HDR_ResetDefault" xml:space="preserve"><value>Ripristina Predefinito</value></data>
+  <data name="HDR_SaveAndApply" xml:space="preserve"><value>Salva e Applica</value></data>
+  <data name="HDR_SceneLuminance" xml:space="preserve"><value>Bianco Carta</value></data>
+  <data name="HDR_SwitchSetting" xml:space="preserve"><value>Impostazione Interruttore HDR (Forza applicazione a ogni avvio)</value></data>
+  <data name="HDR_UILuminance" xml:space="preserve"><value>Bianco UI</value></data>
+  <data name="HashCheck_ComponentModified" xml:space="preserve"><value>Componente modificato o mancante, verifica:
+CaptureApp
+</value></data>
+  <data name="HashCheck_Exception" xml:space="preserve"><value>Eccezione Verifica</value></data>
+  <data name="HashCheck_ExceptionMsg" xml:space="preserve"><value>Errore durante la verifica hash: {0}</value></data>
+  <data name="HashCheck_Failed" xml:space="preserve"><value>Verifica Fallita</value></data>
+  <data name="HashCheck_FileNotFound" xml:space="preserve"><value>File di verifica non trovato. Controlla l'integrità del client.</value></data>
+  <data name="HashCheck_FormatError" xml:space="preserve"><value>Errore di Formato</value></data>
+  <data name="HashCheck_NotPassed" xml:space="preserve"><value>Verifica Non Superata</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>Regola la luminosità di picco HDR e la luminosità dell'interfaccia in gioco</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>Configurazione Luminosità HDR</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>Altezza (pixel)</value></data>
+  <data name="HelpPage_NoResults" xml:space="preserve"><value>Nessun documento corrispondente trovato</value></data>
+  <data name="HelpPage_SearchPlaceholder" xml:space="preserve"><value>Cerca titolo, nome file o contenuto...</value></data>
+  <data name="HelpPage_SearchResults" xml:space="preserve"><value>Trovati {0} risultati, clicca per aprire</value></data>
+  <data name="HiddenFeatureMessage" xml:space="preserve"><value>Questa funzione è nascosta. Riabilitala nelle Impostazioni.</value></data>
+  <data name="HiddenFeatureTitle" xml:space="preserve"><value>Inaccessibile</value></data>
+  <data name="HiddenPage_BackToHome" xml:space="preserve"><value>Torna alla Home</value></data>
+  <data name="HiddenPage_Message" xml:space="preserve"><value>Questa funzione è stata nascosta. Per usarla, vai su Impostazioni → Aspetto e Personalizzazione → Elementi Barra Navigazione e riabilitala.</value></data>
+  <data name="HiddenPage_Title" xml:space="preserve"><value>Funzione Nascosta</value></data>
+  <data name="Hide" xml:space="preserve"><value>Nascondi</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>Nascondi Scheda Check-in</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>Nascondi Scheda Notizie Gioco</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>Nascondi Scheda Note</value></data>
+  <data name="High" xml:space="preserve"><value>Alto</value></data>
+  <data name="HighCpuUsage_Description" xml:space="preserve"><value>Senza OBS rilevato, l'uso CPU di FufuLauncher è rimasto sopra il 30% per 5 minuti. Questo di solito non è normale.</value></data>
+  <data name="HighCpuUsage_Detected" xml:space="preserve"><value>Rilevato Uso Anomalo di Risorse a Lungo Termine</value></data>
+  <data name="HighCpuUsage_Dismiss" xml:space="preserve"><value>Ignora</value></data>
+  <data name="HighCpuUsage_ExitLauncher" xml:space="preserve"><value>Esci dal Launcher</value></data>
+  <data name="HighCpuUsage_Report" xml:space="preserve"><value>Segnala Problema</value></data>
+  <data name="HighCpuUsage_SuggestedAction" xml:space="preserve"><value>Azione Consigliata</value></data>
+  <data name="HighCpuUsage_SuggestionText" xml:space="preserve"><value>Segnala il problema per aiutare a diagnosticarlo. Se il problema persiste, esci e aggiorna all'ultima versione.</value></data>
+  <data name="HighCpuUsage_Title" xml:space="preserve"><value>Avviso Anomalia Prestazioni</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>Mostra o nascondi le schede notizie e check-in nella pagina principale</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>Visualizzazione Schede Home</value></data>
+  <data name="HomeTab_Announcements" xml:space="preserve"><value>Annunci</value></data>
+  <data name="HomeTab_Events" xml:space="preserve"><value>Eventi</value></data>
+  <data name="HomeTab_News" xml:space="preserve"><value>Notizie</value></data>
+  <data name="Home_AddWidget" xml:space="preserve"><value>Aggiungi Widget</value></data>
+  <data name="Home_BBSConfirm" xml:space="preserve"><value>Conferma</value></data>
+  <data name="Home_BBSSecurityMessage" xml:space="preserve"><value>L'accesso alla pagina Cronache di Battaglia potrebbe contrassegnare il tuo account come account a rischio, impedendo il corretto funzionamento di alcune funzionalità. Continuare comunque?</value></data>
+  <data name="Home_BBSSecurityTitle" xml:space="preserve"><value>Avviso di Sicurezza</value></data>
+  <data name="Home_BBSTooltip" xml:space="preserve"><value>Cronache di Battaglia: Visualizza registri di battaglia dettagliati come Abisso a Spirale e Teatro Immaginario</value></data>
+  <data name="Home_BilibiliServer" xml:space="preserve"><value>Server Bilibili</value></data>
+  <data name="Home_CannotLoadCredentials" xml:space="preserve"><value>Impossibile caricare le credenziali dell'account</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>Check-in</value></data>
+  <data name="Home_Cleaned" xml:space="preserve"><value>Pulito</value></data>
+  <data name="Home_DailyNotesCard" xml:space="preserve"><value>Note di Genshin</value></data>
+  <data name="Home_DailyQuests" xml:space="preserve"><value>Commissioni Giornaliere</value></data>
+  <data name="Home_Deployed" xml:space="preserve"><value>Distribuito</value></data>
+  <data name="Home_ErrConfigNotFound" xml:space="preserve"><value>Impossibile trovare il file di configurazione config.ini. Il cambio server non è disponibile.</value></data>
+  <data name="Home_ErrNoGamePath" xml:space="preserve"><value>Nessun percorso di gioco valido trovato. Imposta prima la posizione del gioco nelle Impostazioni.</value></data>
+  <data name="Home_ErrSwitchException" xml:space="preserve"><value>Si è verificato un errore durante la preparazione del cambio server.</value></data>
+  <data name="Home_Expeditions" xml:space="preserve"><value>Spedizioni</value></data>
+  <data name="Home_GachaTooltip" xml:space="preserve"><value>Analisi Cronologia Desideri: Analizza i tuoi record desideri e visualizza le statistiche dei pull</value></data>
+  <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>Vai alla Configurazione Check-in</value></data>
+  <data name="Home_InventoryTooltip" xml:space="preserve"><value>Oggetti Inventario: Visualizza i materiali nell'inventario del tuo account corrente</value></data>
+  <data name="Home_ManagePresets" xml:space="preserve"><value>Gestisci</value></data>
+  <data name="Home_NoActiveAccount" xml:space="preserve"><value>Nessun account attivo</value></data>
+  <data name="Home_NoData" xml:space="preserve"><value>Nessun Dato</value></data>
+  <data name="Home_NoPresetsPinned" xml:space="preserve"><value>Nessun predefinito fissato</value></data>
+  <data name="Home_NotesTooltip" xml:space="preserve"><value>Note del Viaggiatore: Visualizza dati in tempo reale come i domini dei materiali dei personaggi in una finestra separata</value></data>
+  <data name="Home_OfficialServer" xml:space="preserve"><value>Server Ufficiale</value></data>
+  <data name="Home_OpenLink" xml:space="preserve"><value>Apri Link</value></data>
+  <data name="Home_OpenLinkFailed" xml:space="preserve"><value>Apertura link fallita</value></data>
+  <data name="Home_PlayerRoleTooltip" xml:space="preserve"><value>Ricerca Build Personaggi: Visualizza livello, costellazione, armi e build artefatti dei personaggi</value></data>
+  <data name="Home_QuickPresets" xml:space="preserve"><value>Predefiniti Rapidi</value></data>
+  <data name="Home_RealmCurrency" xml:space="preserve"><value>Moneta del Regno</value></data>
+  <data name="Home_RefreshFailed" xml:space="preserve"><value>Aggiornamento Fallito</value></data>
+  <data name="Home_RefreshNotes" xml:space="preserve"><value>Aggiorna Note</value></data>
+  <data name="Home_RefreshToken" xml:space="preserve"><value>Aggiorna Token</value></data>
+  <data name="Home_RemoveWidget" xml:space="preserve"><value>Rimuovi Widget</value></data>
+  <data name="Home_Resin" xml:space="preserve"><value>Resina</value></data>
+  <data name="Home_RewardsCalendar" xml:space="preserve"><value>Calendario Ricompense</value></data>
+  <data name="Home_ScreenshotFolder" xml:space="preserve"><value>Cartella Screenshot</value></data>
+  <data name="Home_SwitchBilibili" xml:space="preserve"><value>Passa al Server Bilibili</value></data>
+  <data name="Home_SwitchFailed" xml:space="preserve"><value>Cambio Fallito</value></data>
+  <data name="Home_SwitchOfficial" xml:space="preserve"><value>Passa al Server Ufficiale</value></data>
+  <data name="Home_SwitchServer" xml:space="preserve"><value>Passa al Server {0}</value></data>
+  <data name="Home_SwitchSuccess" xml:space="preserve"><value>Cambio Riuscito</value></data>
+  <data name="Home_SwitchedTo_Format" xml:space="preserve"><value>Passato con successo al server {0}. {1}</value></data>
+  <data name="Home_ToggleBg" xml:space="preserve"><value>Attiva/Disattiva Sfondo</value></data>
+  <data name="Home_ToggleTooltip" xml:space="preserve"><value>Attiva/Disattiva Tooltip Dettagliato</value></data>
+  <data name="Home_Transformer" xml:space="preserve"><value>Trasformatore Parametrico</value></data>
+  <data name="Home_VideoTooltip" xml:space="preserve"><value>Libreria Video: Sfoglia demo personaggi e cutscene di gioco</value></data>
+  <data name="Home_WidgetAchievement" xml:space="preserve"><value>Tracciamento Obiettivi</value></data>
+  <data name="Home_WidgetBBS" xml:space="preserve"><value>Cronache di Battaglia</value></data>
+  <data name="Home_WidgetGacha" xml:space="preserve"><value>Analisi Cronologia Desideri</value></data>
+  <data name="Home_WidgetInventory" xml:space="preserve"><value>Oggetti Inventario</value></data>
+  <data name="Home_WidgetNotes" xml:space="preserve"><value>Note del Viaggiatore</value></data>
+  <data name="Home_WidgetPlayerRole" xml:space="preserve"><value>Ricerca Build Personaggi</value></data>
+  <data name="Home_WidgetVideo" xml:space="preserve"><value>Libreria Video</value></data>
+  <data name="Home_Widgets" xml:space="preserve"><value>Widget</value></data>
+  <data name="Home_AchievementTooltip" xml:space="preserve"><value>Tracciamento Obiettivi: Tieni traccia dei tuoi progressi obiettivi, con supporto esportazione e importazione</value></data>
+  <data name="Hoyolab_AsiaServer" xml:space="preserve"><value>Server Asia</value></data>
+  <data name="Hoyolab_CHTServer" xml:space="preserve"><value>Server TW/HK/MO</value></data>
+  <data name="Hoyolab_EuroServer" xml:space="preserve"><value>Server Europa</value></data>
+  <data name="Hoyolab_USAServer" xml:space="preserve"><value>Server America</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>Identifica Monitor</value></data>
+  <data name="IgnoreWarning" xml:space="preserve"><value>Ignora Avviso</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>Importa</value></data>
+  <data name="IniFile_AccessDenied" xml:space="preserve"><value>Accesso negato. Verifica se il file o la cartella è impostato su &quot;sola lettura&quot;, o prova a eseguire il launcher come amministratore.</value></data>
+  <data name="IniFile_WriteError" xml:space="preserve"><value>Si è verificato un errore durante la scrittura della configurazione.
+Dettagli: {0}</value></data>
+  <data name="IniFile_WriteFailed" xml:space="preserve"><value>Scrittura fallita: il file potrebbe essere in uso dal gioco o da un altro programma.
+Dettagli: {0}</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>Injection Integrata</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>Inietta plugin tramite motore integrato</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>Integrata usa il motore del launcher per caricare i plugin; Esterna usa un programma esterno — utile quando l'integrata è incompatibile.</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>Carica plugin all'avvio del gioco</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>Seleziona Modulo Injection</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>Modulo Injection</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>Impostazioni Injection</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>Injection Esterna</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>Avvia e inietta tramite programma esterno</value></data>
+  <data name="InventoryWindow_ArchiveTitle" xml:space="preserve"><value>Archivio Inventario</value></data>
+  <data name="InventoryWindow_Complete" xml:space="preserve"><value>Completato</value></data>
+  <data name="InventoryWindow_GoalCheckHint" xml:space="preserve"><value>Segno di spunta mostrato quando l'obiettivo è raggiunto</value></data>
+  <data name="InventoryWindow_GoalDesc" xml:space="preserve"><value>Imposta quantità obiettivo per materiali comuni; la pagina inventario mostrerà lo stato di completamento.</value></data>
+  <data name="InventoryWindow_GoalMetHint" xml:space="preserve"><value>Una volta raggiunto l'obiettivo, la scheda oggetto mostrerà un badge di completamento.</value></data>
+  <data name="InventoryWindow_GoalPlanning" xml:space="preserve"><value>Pianificazione Obiettivi</value></data>
+  <data name="InventoryWindow_GoalSetting" xml:space="preserve"><value>Impostazione Obiettivi</value></data>
+  <data name="InventoryWindow_InventoryOverview" xml:space="preserve"><value>Panoramica Inventario</value></data>
+  <data name="InventoryWindow_ItemName" xml:space="preserve"><value>Nome Oggetto</value></data>
+  <data name="InventoryWindow_MyBag" xml:space="preserve"><value>Mio Zaino</value></data>
+  <data name="InventoryWindow_OverviewDesc" xml:space="preserve"><value>Visualizza le quantità attuali dell'inventario e identifica rapidamente gli oggetti con obiettivo raggiunto tramite badge.</value></data>
+  <data name="InventoryWindow_RefreshData" xml:space="preserve"><value>Aggiorna Dati</value></data>
+  <data name="InventoryWindow_SyncStatus" xml:space="preserve"><value>Stato sincronizzazione corrente</value></data>
+  <data name="InventoryWindow_TargetCount" xml:space="preserve"><value>Qtà Obiettivo</value></data>
+  <data name="InventoryWindow_Title" xml:space="preserve"><value>Inventario e Pianificazione Obiettivi</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>Modalità Input Tasti (Elenco)</value></data>
+  <data name="Label_ChooseTargetServer" xml:space="preserve"><value>Scegli il server a cui passare:</value></data>
+  <data name="Label_SpecifyInjectionPreset" xml:space="preserve"><value>Specifica configurazione injection (predefinito):</value></data>
+  <data name="LangDe" xml:space="preserve"><value>Deutsch</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>Usa Lingua Predefinita di Sistema</value></data>
+  <data name="LangEnUS" xml:space="preserve"><value>English</value></data>
+  <data name="LangEs" xml:space="preserve"><value>Español</value></data>
+  <data name="LangEsMX" xml:space="preserve"><value>Spagnolo (Messico)</value></data>
+  <data name="LangFr" xml:space="preserve"><value>Français</value></data>
+  <data name="LangIt" xml:space="preserve"><value>Italiano</value></data>
+  <data name="LangId" xml:space="preserve"><value>Indonesiano</value></data>
+  <data name="LangPt" xml:space="preserve"><value>Portoghese (Brasile)</value></data>
+  <data name="LangJa" xml:space="preserve"><value>日本語</value></data>
+  <data name="LangKo" xml:space="preserve"><value>한국어</value></data>
+  <data name="LangRu" xml:space="preserve"><value>Русский</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>Cinese Semplificato (Consigliato)</value></data>
+  <data name="LangZhTW" xml:space="preserve"><value>Cinese Tradizionale</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>Lingua modificata. Alcuni elementi dell'interfaccia richiedono un riavvio per essere applicati completamente.</value></data>
+  <data name="LanguageSelection_Title" xml:space="preserve"><value>Scegli la lingua</value></data>
+  <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>Seleziona la tua lingua preferita per continuare</value></data>
+  <data name="LanguageSelection_Confirm" xml:space="preserve"><value>Conferma</value></data>
+  <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>Predefinito di sistema</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>Selezionato</value></data>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>Lingua Modificata</value></data>
+  <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>Ultimi Codici Riscatto</value></data>
+  <data name="LatestVersionLabel" xml:space="preserve"><value>Ultima Versione</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>Colore e Opacità Testo Pulsante Avvio</value></data>
+  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>Esci dal Gioco</value></data>
+  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>Seleziona Percorso Gioco</value></data>
+  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>Avvia Gioco</value></data>
+  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>Chiusura gioco in corso...</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>Colore Sfondo Pulsante Avvio</value></data>
+  <data name="LaunchErr_CannotLoadConfig" xml:space="preserve"><value>Impossibile caricare il file di configurazione del gioco</value></data>
+  <data name="LaunchErr_ExeNotFound" xml:space="preserve"><value>Eseguibile del gioco non trovato. Verifica le impostazioni del percorso.
+File cercati:
+{0}</value></data>
+  <data name="LaunchErr_FatalError" xml:space="preserve"><value>Si è verificato un errore critico durante l'avvio: {0}</value></data>
+  <data name="LaunchErr_InvalidGamePath" xml:space="preserve"><value>Il percorso del gioco non è valido o non esiste</value></data>
+  <data name="LaunchErr_LaunchFailed" xml:space="preserve"><value>Avvio del gioco fallito</value></data>
+  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>Timeout avvio, riprova</value></data>
+  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>Rilevati più eseguibili nella directory del gioco. Il launcher non può determinare quale avviare. Pulisci i file client extra o personalizza il nome eseguibile nelle Impostazioni.</value></data>
+  <data name="LaunchErr_NoGamePath" xml:space="preserve"><value>Percorso gioco non impostato</value></data>
+  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>Vai alla pagina Gestione Gioco e imposta prima il percorso di installazione.</value></data>
+  <data name="LaunchErr_PluginDamagedMsg" xml:space="preserve"><value>I file del plugin sono stati danneggiati o bloccati dall'antivirus. Le funzionalità potrebbero non funzionare correttamente. Reinstalla il plugin.</value></data>
+  <data name="LaunchErr_PluginDamagedTitle" xml:space="preserve"><value>Il plugin potrebbe essere danneggiato</value></data>
+  <data name="LaunchErr_UnknownError" xml:space="preserve"><value>Errore sconosciuto</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>Modalità Finestra di Avvio</value></data>
+  <data name="Launcher_DllNotLoaded" xml:space="preserve"><value>Launcher.dll non è stato caricato a causa della mancanza del runtime C++ o del blocco antivirus. Impossibile avviare.</value></data>
+  <data name="Like" xml:space="preserve"><value>Mi Piace</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>Elenco</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[Bloccato]</value></data>
+  <data name="LoginQR_ClearHistory" xml:space="preserve"><value>Cancella Cronologia Accessi</value></data>
+  <data name="LoginQR_ConfirmGenerate" xml:space="preserve"><value>Genera</value></data>
+  <data name="LoginQR_EnterAppId" xml:space="preserve"><value>Inserisci ID App</value></data>
+  <data name="LoginQR_GameAppId" xml:space="preserve"><value>ID App Gioco:</value></data>
+  <data name="LoginQR_HoYoLABWeb" xml:space="preserve"><value>Accesso Web HoYoLAB</value></data>
+  <data name="LoginQR_ManualCookie" xml:space="preserve"><value>Inserisci Cookie Manualmente</value></data>
+  <data name="LoginQR_MiyousheQR" xml:space="preserve"><value>Accesso QR App MiYouShe</value></data>
+  <data name="LoginQR_RefreshQR" xml:space="preserve"><value>Aggiorna QR Code</value></data>
+  <data name="LoginQR_Title" xml:space="preserve"><value>Accesso QR Code</value></data>
+  <data name="LoginQR_WebLoginWarning" xml:space="preserve"><value>Nota: L'accesso web passport non può ottenere uno Stoken; alcune funzioni non saranno disponibili.</value></data>
+  <data name="LoginQR_WebPassport" xml:space="preserve"><value>Accesso Web Passport</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>Plugin Principale Abilitato</value></data>
+  <data name="MapPage_LockMapOff" xml:space="preserve"><value>Blocca Mappa (Off)</value></data>
+  <data name="MapPage_Refresh" xml:space="preserve"><value>Aggiorna</value></data>
+  <data name="MapPage_Title" xml:space="preserve"><value>Mappa di Teyvat</value></data>
+  <data name="MapPage_TopMostOff" xml:space="preserve"><value>Sempre in Primo Piano (Off)</value></data>
+  <data name="MapToolsTitle" xml:space="preserve"><value>Strumenti Mappa</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>Nota: Mica è disponibile solo su Windows 11.</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>Limite Dimensione Minima Finestra</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>Minimizza nella Barra delle Applicazioni alla Chiusura</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>Modificato: </value></data>
+  <data name="Msg_CannotCalculate" xml:space="preserve"><value>Impossibile calcolare</value></data>
+  <data name="Msg_ChooseShortcutAction" xml:space="preserve"><value>Scegli un'azione:
+
+Creare un collegamento sul desktop (esegue come amministratore)?
+O copiare il comando di avvio per l'uso con Steam o script?</value></data>
+  <data name="Msg_DeleteAccountConfirm_Format" xml:space="preserve"><value>Eliminare l'account '{0}'?</value></data>
+  <data name="Msg_DetectedPossiblePath_Format" xml:space="preserve"><value>Rilevato un possibile percorso di installazione:
+
+{0}
+
+Applicare questo percorso?</value></data>
+  <data name="Msg_GlobalClientInjectionWarning" xml:space="preserve"><value>Nota: La funzione di injection di questo launcher è progettata principalmente per il server cinese. Su un client globale, potrebbe non funzionare o causare errori imprevisti.
+
+Continuare comunque con questo percorso?</value></data>
+  <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve"><value>Questo è un client globale. Il passaggio al server Bilibili non è consentito qui — usa la conversione server per passare a un server cinese.</value></data>
+  <data name="Msg_HasVersion_Format" xml:space="preserve"><value>Disponibile (versione {0})</value></data>
+  <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve"><value>Parametri di avvio importati: {0}</value></data>
+  <data name="Msg_LaunchCommandInstructions" xml:space="preserve"><value>Di seguito il comando di avvio. Usalo direttamente in CMD, PowerShell, o come destinazione gioco non-Steam in Steam:</value></data>
+  <data name="Msg_NoNewRedeemCodes" xml:space="preserve"><value>Nessun nuovo codice riscatto al momento</value></data>
+  <data name="Msg_PathDoesNotExist" xml:space="preserve"><value>Il percorso non esiste. Verifica che sia corretto.</value></data>
+  <data name="Msg_ShortcutCreated" xml:space="preserve"><value>Collegamento sul desktop creato. Viene eseguito come amministratore per impostazione predefinita. Controlla il desktop.</value></data>
+  <data name="Msg_SwitchedToAccount_Format" xml:space="preserve"><value>Passato a: {0}
+
+Devi riavviare il gioco per applicare la modifica!</value></data>
+  <data name="Msg_VersionInfoNotFound" xml:space="preserve"><value>Informazioni versione non trovate</value></data>
+  <data name="NavAccountSettings" xml:space="preserve"><value>Impostazioni Account</value></data>
+  <data name="NavCalculator" xml:space="preserve"><value>Calcolatore</value></data>
+  <data name="NavCommunity" xml:space="preserve"><value>Community</value></data>
+  <data name="NavControlPanel" xml:space="preserve"><value>Pannello di Controllo</value></data>
+  <data name="NavDataCenter" xml:space="preserve"><value>Centro Dati</value></data>
+  <data name="NavHelpDocs" xml:space="preserve"><value>Documenti Aiuto</value></data>
+  <data name="NavHome" xml:space="preserve"><value>Home</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>Scegli quali elementi appaiono nella barra laterale sinistra. Nascondere un elemento non lo disabilita — può essere riabilitato nelle Impostazioni. Home e Impostazioni non possono essere nascosti.</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>Elementi Barra di Navigazione</value></data>
+  <data name="NavOtherFeatures" xml:space="preserve"><value>Altre Funzionalità</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Impostazioni</value></data>
+  <data name="NetDisconnected" xml:space="preserve"><value>Rete disconnessa. Verifica le impostazioni di rete.</value></data>
+  <data name="NetProxyWarning" xml:space="preserve"><value>Connessione proxy in uso. Fai attenzione al consumo dati.</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>Nuovo Predefinito</value></data>
+  <data name="NoCodesAvailable" xml:space="preserve"><value>Nessun codice riscatto disponibile al momento</value></data>
+  <data name="None_Value" xml:space="preserve"><value>Nessuno</value></data>
+  <data name="NotAvailableGeneric" xml:space="preserve"><value>Nessuno</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>Scegli quali elementi visualizzare (max 3)</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>Elementi Scheda Note</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>I dati delle note provengono dall'API dei registri di gioco HoYoLAB. Aggiornamenti frequenti possono attivare CAPTCHA; in casi gravi, il controllo del rischio potrebbe bloccare temporaneamente l'accesso. Riduci la frequenza di aggiornamento e riprova più tardi.</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>Avviso</value></data>
+  <data name="NotificationCenter" xml:space="preserve"><value>Notifiche</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>Numero</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>Off</value></data>
+  <data name="OfficialAnnouncementsTitle" xml:space="preserve"><value>Annunci Ufficiali</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>Lascia vuoto per usare l'API predefinita del server corrente. Un'API personalizzata deve restituire una struttura dati identica a getAllGameBasicInfo ufficiale.</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>Inserisci un URL API sfondo ufficiale personalizzato</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>API Sfondo Ufficiale</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>Server Sfondo Ufficiale</value></data>
+  <data name="OkBtn" xml:space="preserve"><value>OK</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>On</value></data>
+  <data name="Opacity" xml:space="preserve"><value>Opacità</value></data>
+  <data name="Opaque" xml:space="preserve"><value>Opaco</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>Apri Cartella</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>Apri Impostazioni HDR</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>Apri Cartella Screenshot</value></data>
+  <data name="OtherPage_AccessibilityTools" xml:space="preserve"><value>Strumenti Accessibilità</value></data>
+  <data name="OtherPage_AdditionalProgramLaunch" xml:space="preserve"><value>Avvio Programma Aggiuntivo</value></data>
+  <data name="OtherPage_AutostartExeDesc" xml:space="preserve"><value>Avvia automaticamente il programma .exe specificato insieme al gioco</value></data>
+  <data name="OtherPage_AutoClicker" xml:space="preserve"><value>Click Automatico</value></data>
+  <data name="OtherPage_AutoClickerDesc" xml:space="preserve"><value>Tieni premuto un tasto o pulsante mouse per simulare clic ad alta frequenza</value></data>
+  <data name="OtherPage_Browser" xml:space="preserve"><value>Browser</value></data>
+  <data name="OtherPage_BrowserDesc" xml:space="preserve"><value>Apri un browser fluttuante indipendente con supporto sempre in primo piano</value></data>
+  <data name="OtherPage_CapturingKey" xml:space="preserve"><value>Cattura tasto...</value></data>
+  <data name="OtherPage_ClickKeyHeader" xml:space="preserve"><value>Tasto Click Tastiera (solo modalità tastiera)</value></data>
+  <data name="OtherPage_ClickKeySet" xml:space="preserve"><value>Tasto click impostato</value></data>
+  <data name="OtherPage_ClickMode" xml:space="preserve"><value>Modalità Click</value></data>
+  <data name="OtherPage_ExternalPrograms" xml:space="preserve"><value>Programmi Esterni</value></data>
+  <data name="OtherPage_KeyEventError" xml:space="preserve"><value>Registrazione/annullamento eventi tasti fallita</value></data>
+  <data name="OtherPage_KeyProcessError" xml:space="preserve"><value>Errore elaborazione tasto</value></data>
+  <data name="OtherPage_KeyRecorderDisabled" xml:space="preserve"><value>Registratore tasti disabilitato. Eventi tasti globali non registrati.</value></data>
+  <data name="OtherPage_KeyRecorderEnabled" xml:space="preserve"><value>Registratore tasti abilitato. Eventi tasti globali registrati su: {0}</value></data>
+  <data name="OtherPage_MouseLeft" xml:space="preserve"><value>Tasto Sinistro Mouse</value></data>
+  <data name="OtherPage_MouseModeHint" xml:space="preserve"><value>Solo una modalità mouse può essere abilitata alla volta. Imposta un tasto di arresto prima di abilitare una modalità mouse.</value></data>
+  <data name="OtherPage_MouseRight" xml:space="preserve"><value>Tasto Destro Mouse</value></data>
+  <data name="OtherPage_Open" xml:space="preserve"><value>Apri</value></data>
+  <data name="OtherPage_PathHint" xml:space="preserve"><value>Suggerimento: Se non succede nulla dopo aver selezionato un percorso, incollalo manualmente e clicca Applica.</value></data>
+  <data name="OtherPage_PathPlaceholder" xml:space="preserve"><value>es. C:\Strumenti\Mappa.exe</value></data>
+  <data name="OtherPage_ProgramPath" xml:space="preserve"><value>Percorso Programma</value></data>
+  <data name="OtherPage_RecordClick" xml:space="preserve"><value>Clicca per Registrare</value></data>
+  <data name="OtherPage_SaveConfig" xml:space="preserve"><value>Salva Configurazione</value></data>
+  <data name="OtherPage_StopKeyHeader" xml:space="preserve"><value>Tasto Arresto (obbligatorio)</value></data>
+  <data name="OtherPage_StopKeySet" xml:space="preserve"><value>Tasto arresto impostato</value></data>
+  <data name="OtherPage_Title" xml:space="preserve"><value>Altre Impostazioni</value></data>
+  <data name="OtherPage_TriggerKeyHeader" xml:space="preserve"><value>Tasto Trigger (tieni premuto questo tasto)</value></data>
+  <data name="OtherPage_TriggerKeySet" xml:space="preserve"><value>Tasto trigger impostato</value></data>
+  <data name="OtherPage_UnloadCleanupError" xml:space="preserve"><value>Pulizia eventi tasti al cambio pagina fallita</value></data>
+  <data name="OtherPage_UsageHint" xml:space="preserve"><value>Clicca l'icona per avviare la registrazione, poi premi qualsiasi tasto. Le modalità tasto sinistro e destro mouse si escludono a vicenda. Devi impostare prima un tasto di arresto.</value></data>
+  <data name="OtherPage_UsageInstructions" xml:space="preserve"><value>Istruzioni d'Uso</value></data>
+  <data name="OtherPage_UtilityTools" xml:space="preserve"><value>Strumenti Utilità</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>Opacità Sovrapposizione</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>This project is currently maintained by an individual developer (CodeCubist).
+We adhere to a player pain-point-driven development direction, promoting open, transparent, and efficient updates.
+Submitting Pull Requests is the core way for users with coding skills to help advance development, optimize structure, and share project maintenance responsibilities.
+If you can help, please use the button below to visit the code repository and submit your contribution.</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>Visit GitHub Repository to Submit Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
+  <data name="PageTitle_GameSettings" xml:space="preserve"><value>Impostazioni Gioco</value></data>
+  <data name="Panel_DataAnalysis" xml:space="preserve"><value>Analisi Dati</value></data>
+  <data name="Panel_DataAnalysisDesc" xml:space="preserve"><value>Traccia statistiche, progressi e dati a lungo termine</value></data>
+  <data name="Panel_Resources" xml:space="preserve"><value>Risorse</value></data>
+  <data name="Panel_ResourcesDesc" xml:space="preserve"><value>Libreria media e risorse</value></data>
+  <data name="Panel_Toolbox" xml:space="preserve"><value>Cassetta degli Attrezzi</value></data>
+  <data name="Panel_TravelerProfile" xml:space="preserve"><value>Profilo Viaggiatore</value></data>
+  <data name="Panel_TravelerProfileDesc" xml:space="preserve"><value>Personaggi, inventario, note e registri di battaglia MiYouShe</value></data>
+  <data name="Placeholder_DefaultUseCurrentPreset" xml:space="preserve"><value>Usa il predefinito corrente dell'app per impostazione predefinita</value></data>
+  <data name="Placeholder_EnterAccountName" xml:space="preserve"><value>Inserisci un nome account (es. Principale / Alt)</value></data>
+  <data name="PlayerInfo_AdvancedStats" xml:space="preserve"><value>Statistiche Avanzate</value></data>
+  <data name="PlayerInfo_ArtifactDetails" xml:space="preserve"><value>Dettagli Artefatti</value></data>
+  <data name="PlayerInfo_Attack" xml:space="preserve"><value>ATT</value></data>
+  <data name="PlayerInfo_BasicStats" xml:space="preserve"><value>Statistiche Base</value></data>
+  <data name="PlayerInfo_CoreStats" xml:space="preserve"><value>Statistiche Principali</value></data>
+  <data name="PlayerInfo_CritDmg" xml:space="preserve"><value>DAN CRIT</value></data>
+  <data name="PlayerInfo_CritRate" xml:space="preserve"><value>Tasso CRIT</value></data>
+  <data name="PlayerInfo_Defense" xml:space="preserve"><value>DIF</value></data>
+  <data name="PlayerInfo_ElementalBurst" xml:space="preserve"><value>Tripudio Elementale</value></data>
+  <data name="PlayerInfo_ElementalMastery" xml:space="preserve"><value>Maestria Elementale</value></data>
+  <data name="PlayerInfo_ElementalSkill" xml:space="preserve"><value>Abilità Elementale</value></data>
+  <data name="PlayerInfo_FireDmg" xml:space="preserve"><value>DAN Pyro</value></data>
+  <data name="PlayerInfo_Hp" xml:space="preserve"><value>HP Max</value></data>
+  <data name="PlayerInfo_Level" xml:space="preserve"><value>Liv. </value></data>
+  <data name="PlayerInfo_NormalAttack" xml:space="preserve"><value>Attacco Normale</value></data>
+  <data name="PlayerInfo_PhysicalDmg" xml:space="preserve"><value>DAN Fisico</value></data>
+  <data name="PlayerInfo_Query" xml:space="preserve"><value>Cerca</value></data>
+  <data name="PlayerInfo_Recharge" xml:space="preserve"><value>Ricarica Energia</value></data>
+  <data name="PlayerInfo_RefreshMyData" xml:space="preserve"><value>Aggiorna Miei Dati</value></data>
+  <data name="PlayerInfo_RoleList" xml:space="preserve"><value>Elenco Personaggi</value></data>
+  <data name="PlayerInfo_SearchUid" xml:space="preserve"><value>Inserisci UID da cercare...</value></data>
+  <data name="PlayerInfo_SelectRoleHint" xml:space="preserve"><value>Seleziona un personaggio a sinistra per vedere i dettagli</value></data>
+  <data name="PlayerInfo_SkillLevels" xml:space="preserve"><value>Livelli Abilità</value></data>
+  <data name="PlayerInfo_Title" xml:space="preserve"><value>Ricerca Info Personaggio</value></data>
+  <data name="PlayerInfo_ViewSource" xml:space="preserve"><value>Visualizza Fonte</value></data>
+  <data name="PlayerInfo_ViewTeamRecommend" xml:space="preserve"><value>Visualizza Consigli Squadra</value></data>
+  <data name="PlayerInfo_WaterDmg" xml:space="preserve"><value>DAN Hydro</value></data>
+  <data name="PlayerInfo_WeaponAndSkills" xml:space="preserve"><value>Arma e Abilità</value></data>
+  <data name="PluginConfigPage_AdjustParams" xml:space="preserve"><value>Regola parametri plugin</value></data>
+  <data name="PluginConfigPage_PluginInfo" xml:space="preserve"><value>Info Plugin</value></data>
+  <data name="PluginConfigPage_Title" xml:space="preserve"><value>Configurazione Plugin</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin (Plugin Principale)</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar (Plugin Avatar QianXing)</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS (Plugin Frame Rate)</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>Gestione Plugin</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>Usa i plugin a tuo rischio. Gli sviluppatori non sono responsabili per eventuali danni.</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>Impostazioni Plugin</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>Your computer may be ARM-based. The injection feature is not available on ARM-based computers. Are you sure you want to continue enabling it?</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>Continue Enabling</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>Architecture Compatibility Warning</value></data>
+  <data name="Plugin_AutoCook" xml:space="preserve"><value>Apertura Rapida Menu Cucina</value></data>
+  <data name="Plugin_AutoCookKey" xml:space="preserve"><value>Tasto Rapido Apri Menu Cucina</value></data>
+  <data name="Plugin_AutoExpedition" xml:space="preserve"><value>Apertura Rapida Menu Spedizioni</value></data>
+  <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>Tasto Rapido Apri Menu Spedizioni</value></data>
+  <data name="Plugin_BlockNetwork" xml:space="preserve"><value>Modalità Rapida Disconnessione Rete Gioco (DEV)</value></data>
+  <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>Regolazione Rapida Ora</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>Plugin files are abnormal.
+This is usually because the plugin was falsely flagged and blocked by antivirus software (such as Windows Defender) or has been damaged.
+
+Recommendations:
+1. Add the software directory to the antivirus whitelist
+2. Re-download and install the plugin on this page</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>Plugin May Be Corrupted</value></data>
+  <data name="Plugin_CraftKey" xml:space="preserve"><value>Tasto Rapido Banco Crafting</value></data>
+  <data name="Plugin_CustomTitleText" xml:space="preserve"><value>Testo Titolo Personalizzato</value></data>
+  <data name="Plugin_DebugConsole" xml:space="preserve"><value>Abilita Console Debug (DEV)</value></data>
+  <data name="Plugin_DisableCameraMove" xml:space="preserve"><value>Disabilita Movimento Telecamera (Animazione Ultimate)</value></data>
+  <data name="Plugin_DisableCharFade" xml:space="preserve"><value>Disabilita Sfocatura Personaggio</value></data>
+  <data name="Plugin_DisableDamageText" xml:space="preserve"><value>Disabilita Numeri Danno</value></data>
+  <data name="Plugin_DisableFog" xml:space="preserve"><value>Disabilita Effetto Nebbia</value></data>
+  <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>Disabilita Sovrapposizione Subacquea</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>Backup</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>Extracting and installing...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>Installation failed: {0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>Connection failed, trying backup line...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>Main</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>Manual Download</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0} line downloading... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>Plugin installed and refreshed</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>Getting Plugin</value></data>
+  <data name="Plugin_DumpOffsets" xml:space="preserve"><value>Dump Offset (DEV)</value></data>
+  <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>Abilita Titolo Finestra Personalizzato</value></data>
+  <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>Disconnessione Rete Gioco (DEV)</value></data>
+  <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>Abilita Personalizzazione Colori Danno</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>File not found, please confirm launcher files are complete</value></data>
+  <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>Correggi Angoli FOV Speciali</value></data>
+  <data name="Plugin_FovUnlock" xml:space="preserve"><value>Abilita Modifica FOV</value></data>
+  <data name="Plugin_FovValue" xml:space="preserve"><value>Valore FOV Personalizzato</value></data>
+  <data name="Plugin_FpsUnlock" xml:space="preserve"><value>Sblocca Limite Frame Rate</value></data>
+  <data name="Plugin_HideGrass" xml:space="preserve"><value>Nascondi Erba</value></data>
+  <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>Nascondi Tutta l'Erba Indiscriminatamente</value></data>
+  <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>Nascondi Banner Missione</value></data>
+  <data name="Plugin_HideUID" xml:space="preserve"><value>Nascondi UID in Basso a Destra</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>Main plugin DLL file not found. The plugin may not be installed, was accidentally deleted, or was blocked by antivirus software. Please re-download the plugin, or add the launcher directory to the antivirus whitelist and try again.</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>Main Plugin Missing</value></data>
+  <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>Tasto Disconnessione Rete Gioco (DEV)</value></data>
+  <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0 = Ciclico, 1 = Colore Fisso</value></data>
+  <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>Indice Colore Fisso (0-7)</value></data>
+  <data name="Plugin_RedirectCraft" xml:space="preserve"><value>Abilita Reindirizzamento Banco Crafting</value></data>
+  <data name="Plugin_RemoveTeamAnim" xml:space="preserve"><value>Rimuovi Barra Caricamento Menu Squadra</value></data>
+  <data name="Plugin_TargetFps" xml:space="preserve"><value>Frame Rate Obiettivo</value></data>
+  <data name="Plugin_ToggleKey" xml:space="preserve"><value>Tasto Ricarica Configurazione</value></data>
+  <data name="Plugin_TouchScreen" xml:space="preserve"><value>Abilita Modalità UI Mobile</value></data>
+  <data name="Plugin_VSync" xml:space="preserve"><value>Disabilita V-Sync</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>Minimizza nella barra e continua l'esecuzione, o salva lo stato ed esci dopo aver avviato il gioco.</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>Dopo l'Avvio del Gioco</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>Comportamento Post-Avvio</value></data>
+  <data name="PreDownload_Description" xml:space="preserve"><value>Ottieni in anticipo i dati di aggiornamento della nuova versione, processo automatico</value></data>
+  <data name="PreDownloadLabel" xml:space="preserve"><value>Risorse Pre-Download</value></data>
+  <data name="PreDownload_Start" xml:space="preserve"><value>Avvia Pre-Download</value></data>
+  <data name="PreDownload_Title" xml:space="preserve"><value>Pre-Download Gioco</value></data>
+  <data name="Prefix_Account_Format" xml:space="preserve"><value>Account_{0}</value></data>
+  <data name="PresetManager_SelectHint" xml:space="preserve"><value>Seleziona i predefiniti da fissare nella home (max 5)</value></data>
+  <data name="PresetManager_Title" xml:space="preserve"><value>Gestore Predefiniti</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>Enter new preset name</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>Create New Preset</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>Are you sure you want to delete the preset &quot;{0}&quot;? This action cannot be undone!</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>Lock reason: {0}
+
+If you continue, this warning will be ignored and the preset&apos;s Hash will be updated to the current plugin Hash, unlocking the preset. Continue?</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>Continue and Unlock</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>Configuration Preset Locked</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>Confirm Reset</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>Remove all presets for the current plugin and re-download the defaults? This action cannot be undone!</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>Reset All Presets</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>Sopra Normale</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>Normale (Predefinito)</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>Regola la priorità di scheduling CPU del launcher (impostarla troppo alta potrebbe influire su altri processi)</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>Priorità Processo</value></data>
+  <data name="Program_ErrorTitle" xml:space="preserve"><value>Errore FufuLauncher</value></data>
+  <data name="Program_InjectionException" xml:space="preserve"><value>Eccezione processo injection: {0}</value></data>
+  <data name="Program_InjectionFailed" xml:space="preserve"><value>Avvio injection fallito: {0} (codice: {1})</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>Predefiniti Rapidi</value></data>
+  <data name="ReadFromLocalTooltip" xml:space="preserve"><value>Leggi da Locale</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>Leggi Post</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>Registrazione... premi la tua combinazione di tasti</value></data>
+  <data name="RedeemCode_DaysLeft" xml:space="preserve"><value>{0} giorni rimanenti</value></data>
+  <data name="RedeemCode_Expired" xml:space="preserve"><value>Scaduto</value></data>
+  <data name="RedeemCode_ExpiringContent" xml:space="preserve"><value>L'evento {0} ha codici disponibili:
+{1}
+Usali in gioco il prima possibile. Scadranno dopo oggi!</value></data>
+  <data name="RedeemCode_ExpiringTitle" xml:space="preserve"><value>Codice Riscatto in Scadenza</value></data>
+  <data name="RedeemCode_ExpiringToday" xml:space="preserve"><value>Scade oggi</value></data>
+  <data name="RedeemCode_HoursLeft" xml:space="preserve"><value>{0} ore rimanenti</value></data>
+  <data name="RedeemCode_MoreEvents" xml:space="preserve"><value>...e altri {0} eventi</value></data>
+  <data name="RedeemCode_NewContent" xml:space="preserve"><value>Nuovo evento codice riscatto trovato:
+{0}
+Riscattalo in gioco tempestivamente!</value></data>
+  <data name="RedeemCode_NewPublished" xml:space="preserve"><value>Nuovo Codice Riscatto Pubblicato</value></data>
+  <data name="RedeemCodeExpired" xml:space="preserve"><value>Promemoria Scadenza Codice Riscatto</value></data>
+  <data name="RedeemCodeExpiring" xml:space="preserve"><value>Codice Riscatto in Scadenza</value></data>
+  <data name="RedeemCodeNew" xml:space="preserve"><value>Nuovo Codice Riscatto Pubblicato</value></data>
+  <data name="RedeemCodeToday" xml:space="preserve"><value>Promemoria Codice Riscatto di Oggi</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>Ricevi notifiche istantanee per i nuovi codici riscatto con conto alla rovescia per la scadenza. Ogni codice notifica una sola volta.</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>Promemoria Codici Riscatto</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>Avviso Immediato al Rilascio di Nuovi Codici</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>Aggiorna</value></data>
+  <data name="RefreshListTooltip" xml:space="preserve"><value>Aggiorna Elenco</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>Ricorda Dimensione Finestra</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>Rinomina Cartella</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>Ripara Plugin Visualizzazione FPS</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>Ripristina Tutto</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>Ripristina API Predefinita</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>Imposta la dimensione della finestra all'avvio del gioco</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>Risoluzione Gioco</value></data>
+  <data name="ResourceMgmtTitle" xml:space="preserve"><value>Gestione Risorse</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>Riavvia Dopo</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>Riavvia Ora</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>Ripristina Predefinito</value></data>
+  <data name="SaveBtn" xml:space="preserve"><value>Salva</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>Salva Dimensione Corrente</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>Cattura la finestra di gioco tramite tasto rapido; altre finestre non saranno incluse</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>Clicca il pulsante sotto, poi premi la combinazione di tasti desiderata (supporta Ctrl/Alt/Shift + tasto)</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>Tasto Rapido Screenshot</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>Personalizza dove salvare gli screenshot. Predefinito: Documenti/FufuScreenshots</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>Posizione Salvataggio Screenshot</value></data>
+  <data name="Screenshot_CaptureFailed" xml:space="preserve"><value>Cattura screenshot fallita</value></data>
+  <data name="Screenshot_FolderNotFound" xml:space="preserve"><value>Cartella screenshot non trovata</value></data>
+  <data name="Screenshot_FolderNotFoundMsg" xml:space="preserve"><value>Fai prima uno screenshot in gioco o usa la funzione screenshot del launcher.</value></data>
+  <data name="Screenshot_Saved" xml:space="preserve"><value>Screenshot salvato</value></data>
+  <data name="ScreenshotGallery_BackToGallery" xml:space="preserve"><value>Torna alla Galleria</value></data>
+  <data name="ScreenshotGallery_Copy" xml:space="preserve"><value>Copia</value></data>
+  <data name="ScreenshotGallery_Cut" xml:space="preserve"><value>Taglia</value></data>
+  <data name="ScreenshotGallery_Delete" xml:space="preserve"><value>Elimina</value></data>
+  <data name="ScreenshotGallery_NoScreenshots" xml:space="preserve"><value>Nessuno screenshot ancora</value></data>
+  <data name="ScreenshotGallery_OpenFolder" xml:space="preserve"><value>Apri Cartella Immagini</value></data>
+  <data name="ScreenshotGallery_OpenScreenshotFolder" xml:space="preserve"><value>Apri Cartella Screenshot</value></data>
+  <data name="ScreenshotGallery_OpenWithApp" xml:space="preserve"><value>Apri con App di Sistema</value></data>
+  <data name="ScreenshotGallery_Title" xml:space="preserve"><value>Galleria Screenshot</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>Informazioni</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>Opzioni Avanzate</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>Aspetto e Personalizzazione</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>Sfondo ed Effetti Visivi</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>Configurazione Check-in</value></data>
+  <data name="SectionGameInstallPath" xml:space="preserve"><value>Posizione Installazione Gioco</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>Stile Testo Home</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>Lingua e Regione</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>Configurazione Avvio Gioco</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>Impostazioni Screenshot</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>Autenticazione Licenza Sviluppatore</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>Suono di Avvio</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>Verifica Aggiornamenti</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>Effetti Finestra</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>Avvia Autenticazione Licenza Sviluppatore</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>Completa l'autenticazione della licenza sviluppatore per sbloccare determinate funzionalità</value></data>
+  <data name="SecurityWeb_Title" xml:space="preserve"><value>Verifica Licenza Sviluppatore</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>Seleziona File Audio...</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>Seleziona Immagine Sfondo Personalizzata...</value></data>
+  <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>Seleziona la cartella contenente YuanShen.exe...</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>Seleziona Cartella Immagini Presentazione...</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>Versione Self-Hosted</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>Semi-Trasparente</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>Quando abilitato, la sovrapposizione della pagina diventa semi-trasparente, lasciando intravedere lo sfondo.</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>Modalità Sovrapposizione Pagina Semi-Trasparente</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>Server CN (Skyisland)</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>Server Globale (Teyvat)</value></data>
+  <data name="ServerLabel" xml:space="preserve"><value>Server</value></data>
+  <data name="ServerSwitchCaption" xml:space="preserve"><value>Cambio server Ufficiale / Bilibili / Globale</value></data>
+  <data name="ServerType_Bilibili" xml:space="preserve"><value>Server Bilibili</value></data>
+  <data name="ServerType_CustomOther_Format" xml:space="preserve"><value>Personalizzato/Altro (Canale: {0})</value></data>
+  <data name="ServerType_Global" xml:space="preserve"><value>Server Globale</value></data>
+  <data name="ServerType_MainlandChina" xml:space="preserve"><value>Server Cina Continentale</value></data>
+  <data name="ServerType_Official" xml:space="preserve"><value>Server Ufficiale</value></data>
+  <data name="ServerType_Unknown" xml:space="preserve"><value>Server Sconosciuto</value></data>
+  <data name="Settings_CloudCheckinNote" xml:space="preserve"><value>Info Check-in Cloud Game</value></data>
+  <data name="Settings_CommunityCheckinNote" xml:space="preserve"><value>Info Check-in Community</value></data>
+  <data name="Settings_ConfigDeleteFailed" xml:space="preserve"><value>Eliminazione Configurazione Fallita</value></data>
+  <data name="Settings_ConfigDeleteFailedMsg" xml:space="preserve"><value>Impossibile eliminare impostazione dal database: {0}</value></data>
+  <data name="Settings_ConfigReadFailed" xml:space="preserve"><value>Lettura Configurazione Fallita</value></data>
+  <data name="Settings_ConfigReadFailedMsg" xml:space="preserve"><value>Impossibile caricare impostazioni dal database: {0}</value></data>
+  <data name="Settings_ConfigSaveFailed" xml:space="preserve"><value>Salvataggio Configurazione Fallito</value></data>
+  <data name="Settings_ConfigSaveFailedMsg" xml:space="preserve"><value>Impossibile salvare impostazioni nel database: {0}</value></data>
+  <data name="Settings_ContinueVisit" xml:space="preserve"><value>Continua</value></data>
+  <data name="Settings_DbInitFailed" xml:space="preserve"><value>Inizializzazione Database Fallita</value></data>
+  <data name="Settings_DbInitFailedMsg" xml:space="preserve"><value>Impossibile creare o inizializzare il database impostazioni: {0}</value></data>
+  <data name="Settings_DirCreateFailed" xml:space="preserve"><value>Creazione Directory Fallita</value></data>
+  <data name="Settings_DirCreateFailedMsg" xml:space="preserve"><value>Impossibile creare la directory dati app. Verifica i permessi: {0}</value></data>
+  <data name="Settings_Disclaimer" xml:space="preserve"><value>Disclaimer</value></data>
+  <data name="Settings_NetworkError" xml:space="preserve"><value>Errore di Rete</value></data>
+  <data name="Settings_Notice" xml:space="preserve"><value>Avviso</value></data>
+  <data name="Settings_SubmitApp" xml:space="preserve"><value>Invia</value></data>
+  <data name="Share" xml:space="preserve"><value>Condividi</value></data>
+  <data name="Show" xml:space="preserve"><value>Mostra</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>Mostra Commissioni Giornaliere</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>Mostra Funzionalità Sviluppatore</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>Mostra Spedizioni</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>Mostra Pulsante Hamburger Barra Laterale</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>Mostra un pulsante espandi/comprimi in cima alla barra laterale.</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>Mostra Moneta del Regno</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>Mostra Scheda Predefiniti Rapidi</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>Mostra Resina</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>Mostra Trasformatore Parametrico</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>Mostra Scheda Widget</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>Intervallo Presentazione (secondi)</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>Colore Solido</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>Per Data Modifica</value></data>
+  <data name="SortByName" xml:space="preserve"><value>Per Nome</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>Per Dimensione</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>Per Stato (Abilitati Prima)</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>Ordina</value></data>
+  <data name="SponsorWindow_Disclaimer" xml:space="preserve"><value>Donando, riconosci che le sponsorizzazioni non sono rimborsabili.</value></data>
+  <data name="SponsorWindow_OnlyWeChat" xml:space="preserve"><value>Al momento solo WeChat è supportato. Alipay e altri metodi di pagamento non sono disponibili.</value></data>
+  <data name="SponsorWindow_QrCodeFailed" xml:space="preserve"><value>Caricamento QR Code Fallito</value></data>
+  <data name="SponsorWindow_Title" xml:space="preserve"><value>Sponsor</value></data>
+  <data name="StarPrompt_GotIt" xml:space="preserve"><value>Ho Capito</value></data>
+  <data name="StarPrompt_GoToGitHub" xml:space="preserve"><value>Stella su GitHub</value></data>
+  <data name="StarPrompt_Later" xml:space="preserve"><value>Ricordamelo Dopo</value></data>
+  <data name="StarPrompt_Message" xml:space="preserve"><value>Ti piace FufuLauncher? Lasciaci una ⭐ su GitHub — significa moltissimo per noi!</value></data>
+  <data name="StarPrompt_Support" xml:space="preserve"><value>Sostienici</value></data>
+  <data name="Status_Completed" xml:space="preserve"><value>Completato</value></data>
+  <data name="Status_Exception" xml:space="preserve"><value>Eccezione</value></data>
+  <data name="Status_Failure" xml:space="preserve"><value>Fallimento</value></data>
+  <data name="Status_None" xml:space="preserve"><value>Nessuno</value></data>
+  <data name="Status_RequestFailed" xml:space="preserve"><value>Richiesta fallita</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>Saltato</value></data>
+  <data name="Status_Success" xml:space="preserve"><value>Successo</value></data>
+  <data name="Status_Unknown" xml:space="preserve"><value>Sconosciuto</value></data>
+  <data name="Status_UnknownError" xml:space="preserve"><value>Errore sconosciuto</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>Invia una PR</value></data>
+  <data name="Success" xml:space="preserve"><value>Successo</value></data>
+  <data name="SwitchBtn" xml:space="preserve"><value>Cambia</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>Clicca per passare a questo predefinito</value></data>
+  <data name="SwitchServerTitle" xml:space="preserve"><value>Cambia Server</value></data>
+  <data name="SysStatusChecking" xml:space="preserve"><value>Verifica stato rete...</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>Specifica su quale monitor avviare il gioco</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>Monitor Destinazione</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>Scegli il tema di visualizzazione dell'app</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>Modalità Scura</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>Modalità Chiara</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>Segui Impostazioni di Sistema</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>Tema App</value></data>
+  <data name="Title_AutoFoundGamePath" xml:space="preserve"><value>Percorso Gioco Trovato Automaticamente</value></data>
+  <data name="Title_ChooseAction" xml:space="preserve"><value>Scegli un'Azione</value></data>
+  <data name="Title_ConfirmDelete" xml:space="preserve"><value>Conferma Eliminazione</value></data>
+  <data name="Title_Convert" xml:space="preserve"><value>Converti</value></data>
+  <data name="Title_GlobalClient" xml:space="preserve"><value>Client Globale</value></data>
+  <data name="Title_InvalidGamePath" xml:space="preserve"><value>Percorso Gioco Non Valido</value></data>
+  <data name="Title_InvalidPath" xml:space="preserve"><value>Percorso Non Valido</value></data>
+  <data name="Title_LaunchCommand" xml:space="preserve"><value>Comando di Avvio</value></data>
+  <data name="Title_OperationFailed" xml:space="preserve"><value>Operazione Fallita</value></data>
+  <data name="Title_PathError" xml:space="preserve"><value>Errore Percorso</value></data>
+  <data name="Title_SaveNewAccount" xml:space="preserve"><value>Salva Nuovo Account</value></data>
+  <data name="Title_ShortcutCreated" xml:space="preserve"><value>Collegamento Creato</value></data>
+  <data name="Title_SwitchSuccess" xml:space="preserve"><value>Cambio Riuscito</value></data>
+  <data name="Title_TeyvatMap" xml:space="preserve"><value>Mappa di Teyvat</value></data>
+  <data name="Title_VerifyGameIntegrity" xml:space="preserve"><value>Verifica Integrità Gioco</value></data>
+  <data name="Token_AutoRefreshDone" xml:space="preserve"><value>Aggiornamento automatico cookie completato. Le nuove credenziali sono attive.</value></data>
+  <data name="Token_AutoRefreshProgress" xml:space="preserve"><value>Cookie scaduto, aggiornamento in corso...</value></data>
+  <data name="Token_ConfirmLoginFailed" xml:space="preserve"><value>Richiesta conferma accesso simulata fallita</value></data>
+  <data name="Token_GetNewCookieFailed" xml:space="preserve"><value>Recupero nuovo cookie fallito</value></data>
+  <data name="Token_InvalidCookie" xml:space="preserve"><value>Nessun cookie valido fornito</value></data>
+  <data name="Token_ManualRefreshDone" xml:space="preserve"><value>Aggiornamento manuale cookie completato. Le nuove credenziali sono attive.</value></data>
+  <data name="Token_ManualRefreshProgress" xml:space="preserve"><value>Aggiornamento manuale in corso...</value></data>
+  <data name="Token_MissingStokenOrMid" xml:space="preserve"><value>Stoken o mid mancante dal cookie locale, impossibile aggiornare</value></data>
+  <data name="Token_QRScanFailed" xml:space="preserve"><value>Richiesta scansione QR simulata fallita</value></data>
+  <data name="Token_RefreshException" xml:space="preserve"><value>Si è verificata un'eccezione durante l'aggiornamento cookie: {0}</value></data>
+  <data name="Token_RefreshFailed" xml:space="preserve"><value>Aggiornamento Cookie Fallito</value></data>
+  <data name="Token_RefreshTitle" xml:space="preserve"><value>Aggiornamento Cookie</value></data>
+  <data name="Token_WebTicketFailed" xml:space="preserve"><value>Creazione WebTicket fallita</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>Esci</value></data>
+  <data name="TrayShowWindow" xml:space="preserve"><value>Mostra Finestra Principale</value></data>
+  <data name="UnknownGeneric" xml:space="preserve"><value>Sconosciuto</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>Aggiorna Risorse Database Obiettivi</value></data>
+  <data name="UpdateNotification_Title" xml:space="preserve"><value>Avviso Aggiornamento Versione</value></data>
+  <data name="UpdateNotification_UpdateNow" xml:space="preserve"><value>Aggiorna Ora</value></data>
+  <data name="Update_AllRetriesFailed" xml:space="preserve"><value>Tutti i tentativi falliti</value></data>
+  <data name="UserInfo_FeatureRemoved" xml:space="preserve"><value>Funzionalità rimossa</value></data>
+  <data name="User_DefaultSignature" xml:space="preserve"><value>Questo utente è pigro e non ha scritto nulla...</value></data>
+  <data name="User_GenderFemale" xml:space="preserve"><value>Femmina</value></data>
+  <data name="User_GenderMale" xml:space="preserve"><value>Maschio</value></data>
+  <data name="User_GenderPrivate" xml:space="preserve"><value>Privato</value></data>
+  <data name="VcRuntimeMissingContent" xml:space="preserve"><value>Il sistema non dispone della libreria runtime C++ VC14, necessaria per la funzione injection.
+
+Andare al sito Microsoft per scaricarla e installarla?</value></data>
+  <data name="VcRuntimeMissingTitle" xml:space="preserve"><value>Runtime C++ Mancante</value></data>
+  <data name="VerifyAndRepairCaption" xml:space="preserve"><value>Verifica e ripara i file di gioco</value></data>
+  <data name="VerifyGameTitle" xml:space="preserve"><value>Verifica File di Gioco</value></data>
+  <data name="VerifyGame_Description" xml:space="preserve"><value>Questo verificherà i file locali e riparerà automaticamente eventuali file corrotti o mancanti. Potrebbe richiedere tempo — sii paziente.</value></data>
+  <data name="VerifyGame_Start" xml:space="preserve"><value>Avvia Verifica</value></data>
+  <data name="VerifyGame_Title" xml:space="preserve"><value>Verifica Integrità File di Gioco</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>Verifica e scarica l'ultima versione</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>Aggiornamento Versione</value></data>
+  <data name="VideoResources_CharacterVideos" xml:space="preserve"><value>Video Personaggi</value></data>
+  <data name="VideoResources_CutsceneVideos" xml:space="preserve"><value>Video Cutscene</value></data>
+  <data name="VideoResources_Download" xml:space="preserve"><value>Scarica</value></data>
+  <data name="VideoResources_Play" xml:space="preserve"><value>Riproduci</value></data>
+  <data name="VideoResources_Title" xml:space="preserve"><value>Libreria Risorse Video</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>Visualizza Aiuto</value></data>
+  <data name="ViewTeyvatMap" xml:space="preserve"><value>Visualizza la mappa di Teyvat</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>Mostra Tracciamento Obiettivi</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>Mostra Cronache di Battaglia</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>Mostra Note del Viaggiatore</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>Mostra Analisi Cronologia Desideri</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>Mostra Oggetti Inventario</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>Scegli quali strumenti mostrare nella scheda widget</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>Elementi Scheda Widget</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>Mostra Ricerca Build Personaggi</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>Mostra Libreria Video</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>Larghezza (pixel)</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>Finestra Normale</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>Finestra Popup (Senza Bordi)</value></data>
+  <data name="WishBannerImage" xml:space="preserve"><value> Immagine Banner Desiderio</value></data>
+  <data name="Btn_ContinueUsing" xml:space="preserve"><value>Continua a Usare</value></data>
+  <data name="Btn_DiscardAndClear" xml:space="preserve"><value>Scarta e Cancella</value></data>
+  <data name="Btn_Copied" xml:space="preserve"><value>Copiato</value></data>
+  <data name="Btn_SelectManually" xml:space="preserve"><value>Seleziona Manualmente</value></data>
+  <data name="Btn_SwitchToBiliServer" xml:space="preserve"><value>Passa al Server Bilibili</value></data>
+  <data name="Btn_SwitchToOfficialServer" xml:space="preserve"><value>Passa al Server Ufficiale</value></data>
+  <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve"><value>Converti tra Server Globali e CN</value></data>
+</root>

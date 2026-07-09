@@ -5,6 +5,7 @@ Licensed under the MIT License.
 using System.Diagnostics;
 using System.Management;
 using System.Runtime.InteropServices;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services;
@@ -64,7 +65,7 @@ public class SystemDiagnosticsService
         try
         {
             isNetworkAvailable = System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable();
-            info.NetworkStatus = isNetworkAvailable ? "已连接" : "未连接";
+            info.NetworkStatus = isNetworkAvailable ? "Diagnostics_Connected".GetLocalized() : "Diagnostics_Disconnected".GetLocalized();
 
             if (isNetworkAvailable)
             {
@@ -73,17 +74,17 @@ public class SystemDiagnosticsService
                     using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(3) };
                     regionCode = await client.GetStringAsync("http://ip-api.com/line/?fields=countryCode");
                     regionCode = regionCode.Trim();
-                    info.NetworkRegion = regionCode == "CN" ? "国内" : "海外";
+                    info.NetworkRegion = regionCode == "CN" ? "Diagnostics_Domestic".GetLocalized() : "Diagnostics_Overseas".GetLocalized();
                 }
                 catch
                 {
                     regionCode = System.Globalization.RegionInfo.CurrentRegion.TwoLetterISORegionName;
-                    info.NetworkRegion = regionCode == "CN" ? "国内 (按系统设置)" : "海外 (按系统设置)";
+                    info.NetworkRegion = regionCode == "CN" ? "Diagnostics_DomesticSystem".GetLocalized() : "Diagnostics_OverseasSystem".GetLocalized();
                 }
             }
             else
             {
-                info.NetworkRegion = "无网络";
+                info.NetworkRegion = "Diagnostics_NoNetwork".GetLocalized();
             }
         }
         catch (Exception ex)
@@ -101,7 +102,7 @@ public class SystemDiagnosticsService
                 {
                     foreach (var item in searcher.Get())
                     {
-                        info.CpuName = item["Name"]?.ToString() ?? "未知处理器";
+                        info.CpuName = item["Name"]?.ToString() ?? "Diagnostics_UnknownCpu".GetLocalized();
                         break;
                     }
                 }
@@ -124,7 +125,7 @@ public class SystemDiagnosticsService
                 {
                     foreach (var item in searcher.Get())
                     {
-                        info.GpuName = item["Name"]?.ToString() ?? "未知显卡";
+                        info.GpuName = item["Name"]?.ToString() ?? "Diagnostics_UnknownGpu".GetLocalized();
                         if (info.GpuName.Contains("NVIDIA") || info.GpuName.Contains("AMD")) break;
                     }
                 }
@@ -141,7 +142,7 @@ public class SystemDiagnosticsService
                 }
                 catch
                 {
-                    info.DiskSpace = "读取失败";
+                    info.DiskSpace = "Diagnostics_ReadFailed".GetLocalized();
                 }
 
                 try
@@ -151,16 +152,16 @@ public class SystemDiagnosticsService
                         bool found = false;
                         foreach (var item in searcher.Get())
                         {
-                            info.SecurityCenterStatus = item["State"]?.ToString() == "Running" ? "已开启" : "未开启";
+                            info.SecurityCenterStatus = item["State"]?.ToString() == "Running" ? "Diagnostics_Enabled".GetLocalized() : "Diagnostics_Disabled".GetLocalized();
                             found = true;
                             break;
                         }
-                        if (!found) info.SecurityCenterStatus = "未安装或已卸载";
+                        if (!found) info.SecurityCenterStatus = "Diagnostics_NotInstalled".GetLocalized();
                     }
                 }
                 catch
                 {
-                    info.SecurityCenterStatus = "读取失败";
+                    info.SecurityCenterStatus = "Diagnostics_ReadFailed".GetLocalized();
                 }
 
                 DEVMODE dm = new();
@@ -182,14 +183,14 @@ public class SystemDiagnosticsService
                     }
                     i++;
                 }
-                info.MaxRefreshRate = maxHz > 0 ? $"{maxHz} Hz" : "无法检测";
+                info.MaxRefreshRate = maxHz > 0 ? $"{maxHz} Hz" : "Diagnostics_CannotDetect".GetLocalized();
 
                 info.Suggestion = GenerateSuggestion(info, totalMemoryGB, freeDiskGB, isNetworkAvailable, regionCode);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[Diagnostics] Error: {ex.Message}");
-                info.Suggestion = "诊断过程中发生错误，部分信息可能不准确";
+                info.Suggestion = "Diagnostics_PartialError".GetLocalized();
             }
 
             return info;
@@ -202,26 +203,26 @@ public class SystemDiagnosticsService
 
         if (!isNetworkAvailable)
         {
-            suggestions.Add("网络未连接，请检查系统网络设置");
+            suggestions.Add("Diagnostics_SuggestNoNetwork".GetLocalized());
         }
         else if (regionCode == "CN")
         {
-            suggestions.Add("当前处于国内网络环境，访问服务器可能存在缓慢情况");
+            suggestions.Add("Diagnostics_SuggestDomesticSlow".GetLocalized());
         }
         
-        if (info.SecurityCenterStatus == "已开启")
+        if (info.SecurityCenterStatus == "Diagnostics_Enabled".GetLocalized())
         {
-            suggestions.Add("Windows 安全中心已开启，这可能会导致插件注入失败，建议关闭 Windows 安全中心");
+            suggestions.Add("Diagnostics_SuggestSecurityCenter".GetLocalized());
         }
 
         if (totalMemoryGB >= 0 && totalMemoryGB < 12)
         {
-            suggestions.Add($"当前物理内存为 {totalMemoryGB}GB，不符合最低 12GB 的要求");
+            suggestions.Add(string.Format("Diagnostics_SuggestLowMemory".GetLocalized(), totalMemoryGB));
         }
 
         if (freeDiskGB >= 0 && freeDiskGB < 1)
         {
-            suggestions.Add($"系统盘剩余空间为 {freeDiskGB}GB，不符合最低 1GB 的要求");
+            suggestions.Add(string.Format("Diagnostics_SuggestLowDisk".GetLocalized(), freeDiskGB));
         }
 
         if (int.TryParse(info.CurrentRefreshRate.Replace(" Hz", ""), out int currentHz) &&
@@ -229,11 +230,11 @@ public class SystemDiagnosticsService
         {
             if (currentHz < maxHz)
             {
-                suggestions.Add($"您的显示器支持 {maxHz}Hz，但当前仅运行在 {currentHz}Hz");
+                suggestions.Add(string.Format("Diagnostics_SuggestRefreshRate".GetLocalized(), maxHz, currentHz));
             }
         }
 
-        if (suggestions.Count == 0) return "正常，系统与网络环境符合运行要求";
+        if (suggestions.Count == 0) return "Diagnostics_AllNormal".GetLocalized();
 
         return string.Join("\n", suggestions);
     }

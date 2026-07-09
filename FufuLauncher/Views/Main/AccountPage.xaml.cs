@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
 using Windows.Foundation;
 using Windows.UI;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Views;
 
@@ -250,7 +251,7 @@ public sealed partial class AccountPage : Page
             }
             catch (Exception ex)
             {
-                _notificationService.Show("登录失败", ex.Message, NotificationType.Error, 3000);
+                _notificationService.Show("Account_LoginFailed".GetLocalized(), ex.Message, NotificationType.Error, 3000);
             }
         }
     }
@@ -280,10 +281,10 @@ public sealed partial class AccountPage : Page
         _isDeleting = true;
         try
         {
-            string title = isCurrentAccount ? "删除当前账号" : "删除账号";
+            string title = isCurrentAccount ? "Account_DeleteCurrent".GetLocalized() : "Account_DeleteAccount".GetLocalized();
             string content = isCurrentAccount
-                ? $"确定要删除当前账号 {account.Nickname} ({account.GameUid}) 吗？\n此操作将删除该账号的所有相关数据，且无法恢复。"
-                : $"确定要删除账号 {account.Nickname} ({account.GameUid}) 吗？\n\n此操作将删除该账号的所有相关数据，包括凭证、祈愿记录和云游戏凭证，且无法恢复。";
+                ? string.Format("Account_DeleteCurrentConfirm_Format".GetLocalized(), account.Nickname, account.GameUid)
+                : string.Format("Account_DeleteAccountConfirm_Format".GetLocalized(), account.Nickname, account.GameUid);
 
             var result = await ShowDeleteConfirmationDialogAsync(title, content);
             if (result == ContentDialogResult.Primary)
@@ -308,8 +309,8 @@ public sealed partial class AccountPage : Page
         {
             Title = title,
             Content = content,
-            PrimaryButtonText = "删除",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "DeleteLabel".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = this.XamlRoot
         };
@@ -321,7 +322,7 @@ public sealed partial class AccountPage : Page
     private async void OnCheckinClicked(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn) btn.IsEnabled = false;
-        BtnCheckinText.Text = "签到中...";
+        BtnCheckinText.Text = "Account_CheckingIn".GetLocalized();
         try
         {
             var progress = new Progress<string>(msg =>
@@ -329,18 +330,18 @@ public sealed partial class AccountPage : Page
                 DispatcherQueue.TryEnqueue(() => BtnCheckinText.Text = msg);
             });
             var result = await _unifiedCheckinService.ExecuteAllCheckinsAsync(progress);
-            BtnCheckinText.Text = result.OverallSuccess ? "签到完成" : "签到失败";
+            BtnCheckinText.Text = result.OverallSuccess ? "Account_CheckinComplete".GetLocalized() : "Account_CheckinFailed".GetLocalized();
 
             _notificationService.Show(
-                result.OverallSuccess ? "签到完成" : "签到失败",
+                result.OverallSuccess ? "Account_CheckinComplete".GetLocalized() : "Account_CheckinFailed".GetLocalized(),
                 result.SummaryMessage,
                 result.OverallSuccess ? NotificationType.Success : NotificationType.Warning,
                 5000);
         }
         catch (Exception ex)
         {
-            BtnCheckinText.Text = "签到异常";
-            _notificationService.Show("签到异常", ex.Message, NotificationType.Error, 3000);
+            BtnCheckinText.Text = "Account_CheckinException".GetLocalized();
+            _notificationService.Show("Account_CheckinException".GetLocalized(), ex.Message, NotificationType.Error, 3000);
             Debug.WriteLine($"签到异常: {ex.Message}");
         }
         finally

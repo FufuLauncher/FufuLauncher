@@ -25,7 +25,7 @@ public class AnnouncementService : IAnnouncementService
     {
         try
         {
-            var json = await _httpClient.GetStringAsync(ApiEndpoints.AnnouncementUrl);
+            var json = await GetAnnouncementJsonAsync();
             var data = JsonSerializer.Deserialize<AnnouncementData>(json);
 
             if (data != null && !string.IsNullOrEmpty(data.Info))
@@ -39,6 +39,18 @@ public class AnnouncementService : IAnnouncementService
         {
             System.Diagnostics.Debug.WriteLine($"[AnnouncementService] 获取当前公告URL异常: {ex.Message}");
             return null;
+        }
+    }
+
+    private async Task<string> GetAnnouncementJsonAsync()
+    {
+        try
+        {
+            return await _httpClient.GetStringAsync(ApiEndpoints.AnnouncementUrl);
+        }
+        catch
+        {
+            return await _httpClient.GetStringAsync(ApiEndpoints.AnnouncementFallbackUrl);
         }
     }
     

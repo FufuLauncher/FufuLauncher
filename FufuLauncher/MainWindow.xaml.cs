@@ -125,7 +125,7 @@ public sealed partial class MainWindow : WindowEx
         ExitApplicationCommand = new RelayCommand(ExitApplication);
 
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
-        Title = "芙芙启动器";
+        Title = "AppDisplayName".GetLocalized();
         ExtendsContentIntoTitleBar = true;
         AppWindow.Closing += AppWindow_Closing;
 
@@ -502,13 +502,13 @@ public sealed partial class MainWindow : WindowEx
 
         if (e.IsNetworkLost)
         {
-            msg = "网络连接已断开，请检测你的网络设置";
+            msg = "NetDisconnected".GetLocalized();
             icon = "\uEB55";
             color = Colors.OrangeRed;
         }
         else if (e.IsProxyNewlyEnabled)
         {
-            msg = "正在使用代理网络连接，请注意你的流量消耗";
+            msg = "NetProxyWarning".GetLocalized();
             icon = "\uE12B";
             color = Colors.DodgerBlue;
         }
@@ -628,10 +628,10 @@ public sealed partial class MainWindow : WindowEx
                 ContentDialog dialog = new()
                 {
                     XamlRoot = rootElement.XamlRoot,
-                    Title = "警告",
-                    Content = "程序正以管理员身份运行，可能会影响部分功能，例如你的文件选择有问题",
-                    PrimaryButtonText = "不再显示",
-                    CloseButtonText = "我知道了",
+                    Title = "AdminWarningTitle".GetLocalized(),
+                    Content = "AdminWarningContent".GetLocalized(),
+                    PrimaryButtonText = "DontShowAgain".GetLocalized(),
+                    CloseButtonText = "GotItBtn".GetLocalized(),
                     DefaultButton = ContentDialogButton.Close
                 };
                 
@@ -681,11 +681,11 @@ public sealed partial class MainWindow : WindowEx
                 ContentDialog dialog = new()
                 {
                     XamlRoot = rootElement.XamlRoot,
-                    Title = "缺少 C++ 运行库",
-                    Content = "系统未安装 C++ VC14 运行库，这会导致本程序的注入功能无法正常使用\n\n是否前往微软官网下载并安装？",
-                    PrimaryButtonText = "前往下载(X64)",
-                    SecondaryButtonText = "不再提示",
-                    CloseButtonText = "忽略警告",
+                    Title = "VcRuntimeMissingTitle".GetLocalized(),
+                    Content = "VcRuntimeMissingContent".GetLocalized(),
+                    PrimaryButtonText = "GoToDownload".GetLocalized(),
+                    SecondaryButtonText = "DontRemindAgain".GetLocalized(),
+                    CloseButtonText = "IgnoreWarning".GetLocalized(),
                     DefaultButton = ContentDialogButton.Primary
                 };
 
@@ -1082,11 +1082,7 @@ public sealed partial class MainWindow : WindowEx
             
             if (_globalBackgroundPlayer == null)
             {
-                _globalBackgroundPlayer = new MediaPlayer
-                {
-                    IsLoopingEnabled = true,
-                    IsMuted = true
-                };
+                _globalBackgroundPlayer = MediaPlayerHelper.CreateLoopingMutedPlayer();
                 GlobalBackgroundVideo.SetMediaPlayer(_globalBackgroundPlayer);
             }
             if (!ReferenceEquals(_globalBackgroundPlayer.Source, result.VideoSource))
@@ -1218,10 +1214,10 @@ public sealed partial class MainWindow : WindowEx
             {
                 IsAgreementShowing = true;
                 Width = 850;
-                Height = 560;
+                Height = 640;
                 WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
                 AgreementFrame.Visibility = Visibility.Visible;
-                AgreementFrame.Navigate(typeof(Views.AgreementPage));
+                AgreementFrame.Navigate(typeof(Views.LanguageSelectionPage));
                 return;
             }
 
@@ -1232,10 +1228,10 @@ public sealed partial class MainWindow : WindowEx
             {
                 IsAgreementShowing = true;
                 Width = 850;
-                Height = 560;
+                Height = 640;
                 WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
                 AgreementFrame.Visibility = Visibility.Visible;
-                AgreementFrame.Navigate(typeof(Views.AgreementPage));
+                AgreementFrame.Navigate(typeof(Views.LanguageSelectionPage));
                 return;
             }
 
@@ -1307,7 +1303,7 @@ public sealed partial class MainWindow : WindowEx
         try
         {
             var isAdmin = SystemEnvironmentHelper.IsRunningAsAdministrator();
-            TitleBarText.Text = isAdmin ? "芙芙启动器 [管理员]" : "芙芙启动器";
+            TitleBarText.Text = isAdmin ? "AppDisplayNameAdmin".GetLocalized() : "AppDisplayName".GetLocalized();
         }
         catch
         {
@@ -1546,7 +1542,7 @@ public sealed partial class MainWindow : WindowEx
      
         if (!IsNavItemVisible(viewModelTag))
         {
-            ShowNotification(new NotificationMessage("无法访问", "该功能已被隐藏，请在设置中重新开启", NotificationType.Warning, 3000));
+            ShowNotification(new NotificationMessage("HiddenFeatureTitle".GetLocalized(), "HiddenFeatureMessage".GetLocalized(), NotificationType.Warning, 3000));
             NavigationView.SelectedItem = null; 
             ContentFrame.Navigate(typeof(Views.HiddenPage), null, new SuppressNavigationTransitionInfo());
             return;
@@ -1935,7 +1931,7 @@ public sealed partial class MainWindow : WindowEx
 
     private void DismissInfoBar(FrameworkElement element)
     {
-        if (element is InfoBar infoBar && (infoBar.Title == "兑换码失效提醒" || infoBar.Title == "今日兑换码提醒" || infoBar.Title == "新兑换码已发布" || infoBar.Title == "兑换码即将失效"))
+        if (element is InfoBar infoBar && (infoBar.Title == "RedeemCodeExpired".GetLocalized() || infoBar.Title == "RedeemCodeToday".GetLocalized() || infoBar.Title == "RedeemCodeNew".GetLocalized() || infoBar.Title == "RedeemCodeExpiring".GetLocalized()))
         {
             _ = _localSettingsService.SaveSettingAsync("LastRedeemCodeReminderDate", DateTime.Now.ToString("yyyy-MM-dd"));
             Debug.WriteLine("[RedeemCodes] 已将关闭状态写入数据库");

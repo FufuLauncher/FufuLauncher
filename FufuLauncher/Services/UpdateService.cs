@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using FufuLauncher.Constants;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
@@ -53,7 +54,7 @@ public class UpdateService : IUpdateService
                 return new UpdateCheckResult { ShouldShowUpdate = false };
             }
 
-            var json = await GetWithRetryAsync(ApiEndpoints.UpdateJsonUrl, maxRetries: 3);
+            var json = await GetWithRetryAsync(ApiEndpoints.UpdateJsonUrl, ApiEndpoints.UpdateJsonFallbackUrl, maxRetries: 3);
             Debug.WriteLine($"[UpdateService] 服务器响应: {json}");
 
             var updateInfo = JsonSerializer.Deserialize<UpdateInfo>(json);
@@ -120,6 +121,14 @@ public class UpdateService : IUpdateService
         {
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             var response = await _httpClient.GetAsync(ApiEndpoints.AgreementUrl, HttpCompletionOption.ResponseHeadersRead, cts.Token);
+            if (response.IsSuccessStatusCode) return true;
+        }
+        catch { }
+
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+            var response = await _httpClient.GetAsync(ApiEndpoints.AgreementFallbackUrl, HttpCompletionOption.ResponseHeadersRead, cts.Token);
             return response.IsSuccessStatusCode;
         }
         catch
@@ -130,24 +139,41 @@ public class UpdateService : IUpdateService
 
     private async Task<string> GetWithRetryAsync(string url, int maxRetries)
     {
+        return await GetWithRetryAsync(url, null, maxRetries);
+    }
+
+    private async Task<string> GetWithRetryAsync(string url, string? fallbackUrl, int maxRetries)
+    {
+        Exception? lastException = null;
+
         for (int i = 0; i < maxRetries; i++)
         {
             try
             {
-                Debug.WriteLine($"[UpdateService] 请求尝试 {i + 1}/{maxRetries}");
+                Debug.WriteLine($"[UpdateService] 请求尝试 {i + 1}/{maxRetries}: {url}");
                 return await _httpClient.GetStringAsync(url);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[UpdateService] 尝试 {i + 1} 失败: {ex.Message}");
+                lastException = ex;
 
-                if (i == maxRetries - 1) throw;
+                if (i == 0 && fallbackUrl != null)
+                {
+                    Debug.WriteLine($"[UpdateService] 切换到备用地址: {fallbackUrl}");
+                    url = fallbackUrl;
+                    fallbackUrl = null;
+                    continue;
+                }
 
-                await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, i)));
+                if (i < maxRetries - 1)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(Math.Pow(2, i)));
+                }
             }
         }
 
-        throw new Exception("所有重试均失败");
+        throw lastException ?? new Exception("Update_AllRetriesFailed".GetLocalized());
     }
 
     private class UpdateInfo

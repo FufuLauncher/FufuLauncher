@@ -88,12 +88,12 @@
                         VerticalAlignment="Top">
 
                 <StackPanel Spacing="4" Margin="0,0,0,12">
-                    <TextBlock Text="其他设置" Style="{StaticResource TitleTextBlockStyle}"
+                    <TextBlock Text="{helpers:Loc Key=OtherPage_Title}" Style="{StaticResource TitleTextBlockStyle}"
                                FontFamily="{StaticResource AppGlobalFont}" />
                 </StackPanel>
 
                 <StackPanel>
-                    <TextBlock Text="外部程序" Style="{StaticResource SectionHeaderStyle}" />
+                    <TextBlock Text="{helpers:Loc Key=OtherPage_ExternalPrograms}" Style="{StaticResource SectionHeaderStyle}" />
 
                     <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                         <Grid.Shadow>
@@ -116,9 +116,9 @@
                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Margin="0,0,16,0" />
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="附加程序启动" Style="{StaticResource BodyStrongTextBlockStyle}"
+                                <TextBlock Text="{helpers:Loc Key=OtherPage_AdditionalProgramLaunch}" Style="{StaticResource BodyStrongTextBlockStyle}"
                                            FontFamily="{StaticResource AppGlobalFont}" />
-                                <TextBlock Text="随游戏自动启动指定的 .exe 程序" Style="{StaticResource CaptionTextBlockStyle}"
+                                <TextBlock Text="{helpers:Loc Key=OtherPage_AutostartExeDesc}" Style="{StaticResource CaptionTextBlockStyle}"
                                            Opacity="0.6" FontFamily="{StaticResource AppGlobalFont}" />
                             </StackPanel>
 
@@ -147,14 +147,14 @@
                                     </Grid.ColumnDefinitions>
 
                                     <TextBox Grid.Column="0"
-                                             Header="程序路径"
-                                             PlaceholderText="例如：C:\Tools\MapTool.exe"
+                                             Header="{helpers:Loc Key=OtherPage_ProgramPath}"
+                                             PlaceholderText="{helpers:Loc Key=OtherPage_PathPlaceholder}"
                                              Text="{x:Bind ViewModel.AdditionalProgramPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                              LostFocus="TextBox_LostFocus"
                                              KeyDown="ProgramPath_KeyDown" />
 
                                     <Button Grid.Column="1"
-                                            Content="浏览"
+                                            Content="{helpers:Loc Key=Browse}"
                                             Command="{x:Bind ViewModel.BrowseProgramCommand}"
                                             VerticalAlignment="Bottom"
                                             Margin="0,0,0,0" />
@@ -163,19 +163,19 @@
                                             Command="{x:Bind ViewModel.ApplyProgramPathCommand}"
                                             IsEnabled="{x:Bind ViewModel.IsApplyButtonEnabled, Mode=OneWay}"
                                             VerticalAlignment="Bottom"
-                                            Content="应用" />
+                                            Content="{helpers:Loc Key=ApplyBtn}" />
                                 </Grid>
 
                                 <TextBlock Grid.Row="1" Margin="0,8,0,0" FontSize="12"
                                            Foreground="{ThemeResource SafeSecondaryTextBrush}"
-                                           Text="提示：如果选择路径后无反应，请手动粘贴路径并点击应用。" />
+                                           Text="{helpers:Loc Key=OtherPage_PathHint}" />
                             </Grid>
                         </ContentControl>
                     </Grid>
                 </StackPanel>
 
                 <StackPanel>
-                    <TextBlock Text="辅助功能" Style="{StaticResource SectionHeaderStyle}" />
+                    <TextBlock Text="{helpers:Loc Key=OtherPage_AccessibilityTools}" Style="{StaticResource SectionHeaderStyle}" />
 
                     <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                         <Grid.Shadow>
@@ -199,9 +199,9 @@
                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Margin="0,0,16,0" />
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="连点器" Style="{StaticResource BodyStrongTextBlockStyle}"
+                                <TextBlock Text="{helpers:Loc Key=OtherPage_AutoClicker}" Style="{StaticResource BodyStrongTextBlockStyle}"
                                            FontFamily="{StaticResource AppGlobalFont}" />
-                                <TextBlock Text="按住触发键、鼠标左键或鼠标右键以模拟高频点击" Style="{StaticResource CaptionTextBlockStyle}"
+                                <TextBlock Text="{helpers:Loc Key=OtherPage_AutoClickerDesc}" Style="{StaticResource CaptionTextBlockStyle}"
                                            Opacity="0.6" FontFamily="{StaticResource AppGlobalFont}" />
                             </StackPanel>
 
@@ -229,17 +229,17 @@
                                 </Grid.RowDefinitions>
 
                                 <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Spacing="8">
-                                    <TextBlock Text="连点模式" Style="{StaticResource BodyStrongTextBlockStyle}"
+                                    <TextBlock Text="{helpers:Loc Key=OtherPage_ClickMode}" Style="{StaticResource BodyStrongTextBlockStyle}"
                                                FontFamily="{StaticResource AppGlobalFont}" />
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <ToggleSwitch Header="鼠标左键"
+                                        <ToggleSwitch Header="{helpers:Loc Key=OtherPage_MouseLeft}"
                                                       IsOn="{x:Bind ViewModel.IsMouseLeftClickerEnabled, Mode=TwoWay}"
                                                       Margin="0" />
-                                        <ToggleSwitch Header="鼠标右键"
+                                        <ToggleSwitch Header="{helpers:Loc Key=OtherPage_MouseRight}"
                                                       IsOn="{x:Bind ViewModel.IsMouseRightClickerEnabled, Mode=TwoWay}"
                                                       Margin="0" />
                                     </StackPanel>
-                                    <TextBlock Text="两个鼠标模式只能开启一个。开启鼠标模式前必须设置停止快捷键。" FontSize="12"
+                                    <TextBlock Text="{helpers:Loc Key=OtherPage_MouseModeHint}" FontSize="12"
                                                Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                 </StackPanel>
 
@@ -249,16 +249,16 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Header="触发键 (按住此键)"
+                                    <TextBox Header="{helpers:Loc Key=OtherPage_TriggerKeyHeader}"
                                              Text="{x:Bind ViewModel.TriggerKey, Mode=TwoWay}"
                                              IsReadOnly="True"
-                                             PlaceholderText="无"
+                                             PlaceholderText="{helpers:Loc Key=None_Value}"
                                              VerticalAlignment="Bottom" />
 
                                     <Button Grid.Column="1"
                                             Content="&#xE765;"
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                            ToolTipService.ToolTip="点击录制"
+                                            ToolTipService.ToolTip="{helpers:Loc Key=OtherPage_RecordClick}"
                                             Command="{x:Bind ViewModel.RecordTriggerKeyCommand}"
                                             VerticalAlignment="Bottom" />
                                 </Grid>
@@ -269,16 +269,16 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Header="停止快捷键 (必须设置)"
+                                    <TextBox Header="{helpers:Loc Key=OtherPage_StopKeyHeader}"
                                              Text="{x:Bind ViewModel.StopKey, Mode=TwoWay}"
                                              IsReadOnly="True"
-                                             PlaceholderText="无"
+                                             PlaceholderText="{helpers:Loc Key=None_Value}"
                                              VerticalAlignment="Bottom" />
 
                                     <Button Grid.Column="1"
                                             Content="&#xE765;"
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                            ToolTipService.ToolTip="点击录制"
+                                            ToolTipService.ToolTip="{helpers:Loc Key=OtherPage_RecordClick}"
                                             Command="{x:Bind ViewModel.RecordStopKeyCommand}"
                                             VerticalAlignment="Bottom" />
                                 </Grid>
@@ -289,16 +289,16 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Header="键盘连点键 (仅键盘模式)"
+                                    <TextBox Header="{helpers:Loc Key=OtherPage_ClickKeyHeader}"
                                              Text="{x:Bind ViewModel.ClickKey, Mode=TwoWay}"
                                              IsReadOnly="True"
-                                             PlaceholderText="无"
+                                             PlaceholderText="{helpers:Loc Key=None_Value}"
                                              VerticalAlignment="Bottom" />
 
                                     <Button Grid.Column="1"
                                             Content="&#xE765;"
                                             FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                            ToolTipService.ToolTip="点击录制"
+                                            ToolTipService.ToolTip="{helpers:Loc Key=OtherPage_RecordClick}"
                                             Command="{x:Bind ViewModel.RecordClickKeyCommand}"
                                             VerticalAlignment="Bottom" />
                                 </Grid>
@@ -307,15 +307,15 @@
                                          Severity="Informational"
                                          IsClosable="False"
                                          IsOpen="True"
-                                         Title="使用说明"
-                                         Message="点击右侧图标进行录制，然后按下键盘上任意键。鼠标左键和右键模式互斥，且必须先设置停止快捷键。" />
+                                         Title="{helpers:Loc Key=OtherPage_UsageInstructions}"
+                                         Message="{helpers:Loc Key=OtherPage_UsageHint}" />
                             </Grid>
                         </ContentControl>
                     </Grid>
                 </StackPanel>
 
                 <StackPanel>
-                    <TextBlock Text="实用工具" Style="{StaticResource SectionHeaderStyle}" />
+                    <TextBlock Text="{helpers:Loc Key=OtherPage_UtilityTools}" Style="{StaticResource SectionHeaderStyle}" />
 
                     <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
                         <Grid.Shadow>
@@ -331,16 +331,16 @@
                                   Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Margin="0,0,16,0" />
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="浏览器" Style="{StaticResource BodyStrongTextBlockStyle}"
+                            <TextBlock Text="{helpers:Loc Key=OtherPage_Browser}" Style="{StaticResource BodyStrongTextBlockStyle}"
                                        FontFamily="{StaticResource AppGlobalFont}" />
-                            <TextBlock Text="打开一个支持置顶的独立悬浮浏览器" Style="{StaticResource CaptionTextBlockStyle}"
+                            <TextBlock Text="{helpers:Loc Key=OtherPage_BrowserDesc}" Style="{StaticResource CaptionTextBlockStyle}"
                                        Opacity="0.6" FontFamily="{StaticResource AppGlobalFont}" />
                         </StackPanel>
 
                         <Button Grid.Column="2" Command="{x:Bind ViewModel.OpenBrowserCommand}">
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE8A7;" FontSize="14" />
-                                <TextBlock Text="打开" />
+                                <TextBlock Text="{helpers:Loc Key=OtherPage_Open}" />
                             </StackPanel>
                         </Button>
                     </Grid>
@@ -357,7 +357,7 @@
                             Padding="32,10">
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <FontIcon Glyph="&#xE74E;" FontSize="16" />
-                            <TextBlock Text="保存配置" />
+                            <TextBlock Text="{helpers:Loc Key=OtherPage_SaveConfig}" />
                         </StackPanel>
                     </Button>
                 </StackPanel>

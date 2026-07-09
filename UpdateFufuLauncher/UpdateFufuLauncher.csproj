@@ -9,7 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Downloader" Version="5.8.0" />
+      <PackageReference Include="Downloader" Version="5.9.0" />
       <PackageReference Include="ModernWpfUI" Version="0.9.7-preview.2" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
     </ItemGroup>

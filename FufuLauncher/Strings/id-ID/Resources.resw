@@ -1,0 +1,1418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>Batch Save Failed</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>Batch generated and overwrote all avatar sizes</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>Clear Failed</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>Avatar size {0}x{0} cleared</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>Avatar cropped and saved successfully</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>No avatar found to edit</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>Notice</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>Import Failed</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>Load Failed</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>Save Failed</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>If you have NVIDIA RTX 40-series or newer AI frame generation enabled, or use frame display software such as RTSS or MSI Afterburner, it may cause the game to freeze or fail to start normally.</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>Don&apos;t show this warning again</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>Compatibility Warning</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>The frame rate display plugin hash does not match. It may have been tampered with or corrupted. Please reinstall the launcher.</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>Repair Failed</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS display plugin has been successfully repaired and installed</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>Repairing FPS Plugin</value></data>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>Bahasa Telah Diubah</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>Bahasa telah diubah. Beberapa elemen UI memerlukan mulai ulang agar diterapkan sepenuhnya.</value></data>
+  <data name="LanguageSelection_Title" xml:space="preserve"><value>Pilih Bahasa</value></data>
+  <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>Pilih bahasa pilihan Anda untuk melanjutkan</value></data>
+  <data name="LanguageSelection_Confirm" xml:space="preserve"><value>Konfirmasi</value></data>
+  <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>Default Sistem</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>Terpilih</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>This project is currently maintained by an individual developer (CodeCubist).
+We adhere to a player pain-point-driven development direction, promoting open, transparent, and efficient updates.
+Submitting Pull Requests is the core way for users with coding skills to help advance development, optimize structure, and share project maintenance responsibilities.
+If you can help, please use the button below to visit the code repository and submit your contribution.</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>Visit GitHub Repository to Submit Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>Your computer may be ARM-based. The injection feature is not available on ARM-based computers. Are you sure you want to continue enabling it?</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>Continue Enabling</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>Architecture Compatibility Warning</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>Plugin files are abnormal.
+This is usually because the plugin was falsely flagged and blocked by antivirus software (such as Windows Defender) or has been damaged.
+
+Recommendations:
+1. Add the software directory to the antivirus whitelist
+2. Re-download and install the plugin on this page</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>Plugin May Be Corrupted</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>Backup</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>Extracting and installing...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>Installation failed: {0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>Connection failed, trying backup line...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>Main</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>Manual Download</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0} line downloading... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>Plugin installed and refreshed</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>Getting Plugin</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>File not found, please confirm launcher files are complete</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>Main plugin DLL file not found. The plugin may not be installed, was accidentally deleted, or was blocked by antivirus software. Please re-download the plugin, or add the launcher directory to the antivirus whitelist and try again.</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>Main Plugin Missing</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>Enter new preset name</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>Create New Preset</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>Are you sure you want to delete the preset &quot;{0}&quot;? This action cannot be undone!</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>Lock reason: {0}
+
+If you continue, this warning will be ignored and the preset&apos;s Hash will be updated to the current plugin Hash, unlocking the preset. Continue?</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>Continue and Unlock</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>Configuration Preset Locked</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>Confirm Reset</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>Remove all presets for the current plugin and re-download the defaults? This action cannot be undone!</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>Reset All Presets</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>Mulai Ulang Sekarang</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>Mulai Ulang Nanti</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>Versi {0}</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>Pengaturan Injeksi</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>Injeksi plugin melalui mesin bawaan</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>Luncurkan dan injeksi melalui program eksternal</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>FufuLauncher</value></data>
+  <data name="Show" xml:space="preserve"><value>Tampilkan</value></data>
+  <data name="Hide" xml:space="preserve"><value>Sembunyikan</value></data>
+  <data name="Enabled" xml:space="preserve"><value>Aktif</value></data>
+  <data name="Disabled" xml:space="preserve"><value>Nonaktif</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>Warna (Hex)</value></data>
+  <data name="Opacity" xml:space="preserve"><value>Opasitas</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>Kembalikan Default</value></data>
+  <data name="Browse" xml:space="preserve"><value>Telusuri</value></data>
+  <data name="Clear" xml:space="preserve"><value>Hapus</value></data>
+  <data name="High" xml:space="preserve"><value>Tinggi</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>Tampilan &amp; Personalisasi</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>Gaya Teks Beranda</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>Bahasa &amp; Wilayah</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>Konfigurasi Peluncuran Game</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>Latar Belakang &amp; Efek Visual</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>Efek Jendela</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>Suara Startup</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>Konfigurasi Check-in</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>Opsi Lanjutan</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>Pengaturan Screenshot</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>Periksa Pembaruan</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>Tentang</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>Autentikasi Lisensi Developer</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>Tema Aplikasi</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>Pilih tema tampilan aplikasi</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>Mode Terang</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>Mode Gelap</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>Ikuti Pengaturan Sistem</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>Warna Tema Aplikasi Kustom</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>Masukkan kode warna hex. Kosongkan dan mulai ulang untuk mengembalikan default.</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>Tampilan Kartu Beranda</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>Tampilkan atau sembunyikan kartu berita game dan check-in di halaman beranda</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>Sembunyikan Kartu Berita Game</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>Sembunyikan Kartu Check-in</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>Tampilkan Kartu Preset Cepat</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>Tampilkan Kartu Widget</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>Item Tampilan Kartu Widget</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>Pilih alat yang ingin ditampilkan di kartu widget</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>Tampilkan Analisis Riwayat Wish</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>Tampilkan Pelacakan Achievement</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>Tampilkan Item Inventori</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>Tampilkan Pencarian Build Karakter</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>Tampilkan Catatan Perjalanan</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>Tampilkan Perpustakaan Video</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>Tampilkan Battle Chronicle</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>Warna Latar Tombol Luncurkan</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>Item Tampilan Kartu Catatan</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>Pilih item yang ingin ditampilkan (maks 3)</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>Pemberitahuan</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>Data catatan berasal dari API catatan game HoYoLAB. Penyegaran terlalu sering dapat memicu CAPTCHA; dalam kasus parah, kontrol risiko dapat memblokir akses sementara. Kurangi frekuensi penyegaran dan coba lagi nanti.</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>Sembunyikan Kartu Catatan</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>Tampilkan Resin</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>Tampilkan Komisi Harian</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>Tampilkan Mata Uang Alam</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>Tampilkan Ekspedisi</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>Tampilkan Parametric Transformer</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>Item Tampilan Bilah Navigasi</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>Pilih item yang muncul di bilah sisi kiri. Menyembunyikan item tidak menonaktifkannya — dapat diaktifkan kembali di Pengaturan. Beranda dan Pengaturan tidak dapat disembunyikan.</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>Opasitas Overlay Latar</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>Opasitas Latar Frame</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>Opasitas Gambar Latar</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>Minimalkan ke Tray Saat Ditutup</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>Ingat Ukuran Jendela</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>Batas Ukuran Minimum Jendela</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>Warna Teks &amp; Opasitas Kartu Berita Game</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>Warna Teks &amp; Opasitas Tombol Luncurkan</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>Warna Teks &amp; Opasitas Check-in Game</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>Bahasa Tampilan Aplikasi</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>Efek berlaku setelah memulai ulang aplikasi</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>简体中文（推荐）</value></data>
+  <data name="LangZhTW" xml:space="preserve"><value>繁體中文</value></data>
+  <data name="LangEnUS" xml:space="preserve"><value>English</value></data>
+  <data name="LangFr" xml:space="preserve"><value>Français</value></data>
+  <data name="LangDe" xml:space="preserve"><value>Deutsch</value></data>
+  <data name="LangRu" xml:space="preserve"><value>Русский</value></data>
+  <data name="LangJa" xml:space="preserve"><value>日本語</value></data>
+  <data name="LangEs" xml:space="preserve"><value>Español</value></data>
+  <data name="LangEsMX" xml:space="preserve"><value>Spanyol (Meksiko)</value></data>
+  <data name="LangKo" xml:space="preserve"><value>한국어</value></data>
+  <data name="LangIt" xml:space="preserve"><value>Italiano</value></data>
+  <data name="LangId" xml:space="preserve"><value>Bahasa Indonesia</value></data>
+  <data name="LangPt" xml:space="preserve"><value>Bahasa Portugis (Brasil)</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>Gunakan Bahasa Default Sistem</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>Mode Jendela Peluncuran</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>Jendela Normal</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>Jendela Popup (Tanpa Bingkai)</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>Resolusi Game</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>Atur ukuran jendela saat meluncurkan game</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>Lebar (piksel)</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>Tinggi (piksel)</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>Preset Cepat</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>Konfigurasi Kecerahan HDR</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>Sesuaikan kecerahan puncak HDR dan kecerahan UI dalam game</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>Buka Pengaturan HDR</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>Monitor Target</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>Tentukan monitor mana yang digunakan game saat diluncurkan</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>Identifikasi Monitor</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>Parameter Peluncuran Lanjutan</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>Parameter kustom akan ditambahkan setelah perintah peluncuran</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>Parameter Peluncuran Kustom</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>mis. -fullscreen -high</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>Tips: Parameter ditambahkan setelah perintah peluncuran. Jangan masukkan path game. Jika tidak merespons, coba klik tombol preset beberapa kali lagi.</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>Nama File Exe Game Kustom</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>Sesuaikan nama file .exe yang digunakan untuk deteksi dan peluncuran. Kosongkan untuk menggunakan default (YuanShen.exe / GenshinImpact.exe).</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>mis. YuanShen.exe</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>Modul Injeksi</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>Pilih Modul Injeksi</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>Injeksi Bawaan</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>Injeksi Standalone</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>Bawaan menggunakan mesin launcher untuk memuat plugin; Standalone menggunakan program eksternal — berguna saat bawaan tidak kompatibel.</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>Pengingat Kode Redeem</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>Peringatan Instan Saat Kode Redeem Baru Dirilis</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>Dapatkan notifikasi instan untuk kode redeem baru dengan hitung mundur kedaluwarsa. Setiap kode hanya memberi notifikasi sekali.</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>Perilaku Setelah Peluncuran</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>Setelah Game Diluncurkan</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>Minimalkan ke tray dan tetap berjalan, atau simpan status dan keluar setelah meluncurkan game.</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>Aktifkan Latar Kustom</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>Sumber Latar Belakang</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>Pilih Gambar Latar Kustom...</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>Hapus Latar Kustom</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>Mode Slideshow Latar</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>Pilih Folder Gambar Slideshow...</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>Hapus Folder Gambar Slideshow</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>Interval Slideshow (detik)</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>Server Latar Resmi</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>Server CN (Skyisland)</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>Server Global (Teyvat)</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>API Latar Resmi</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>Kosongkan untuk menggunakan API default server saat ini. API kustom harus mengembalikan struktur data yang identik dengan getAllGameBasicInfo resmi.</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>Masukkan URL API latar resmi kustom</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>Reset ke API Default</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>Ambil Aset Latar Resmi</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>Unduh Gambar Latar Terbaru</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>Unduh Video Latar Terbaru</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>Aktifkan Overlay Blur Acrylic</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>Warna Solid</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>Blur Acrylic</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>Catatan: Latar video akan fallback ke overlay semi-transparan solid untuk performa.</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>Mode Semi-Transparan Overlay Halaman</value></data>
+  <data name="Opaque" xml:space="preserve"><value>Opaque</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>Semi-Transparan</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>Saat diaktifkan, overlay halaman menjadi semi-transparan, membiarkan latar terlihat.</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>Opasitas Overlay</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>Material Latar Jendela</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>Pilih efek visual untuk latar jendela</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrylic</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>Catatan: Mica hanya tersedia di Windows 11.</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>Tampilkan Tombol Hamburger Sidebar</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>Menampilkan tombol expand/collapse di bagian atas sidebar.</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>Aktifkan Suara Peluncuran Game</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>Pilih File Audio...</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>Hapus File Audio</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>Check-in Game</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>Klaim hadiah check-in harian MiYouShe (Primogem, Mora, dll.)</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>Check-in Komunitas</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>Selesaikan tugas interaksi komunitas secara otomatis untuk mendapatkan Koin MiYouShe</value></data>
+  <data name="Like" xml:space="preserve"><value>Suka</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>Baca Postingan</value></data>
+  <data name="Share" xml:space="preserve"><value>Bagikan</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>Check-in Cloud Game</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>Klaim hadiah check-in cloud gaming. Memerlukan penambahan kredensial cloud gaming di daftar akun.</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>Check-in Otomatis Saat Peluncuran</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>Otomatis check-in saat peluncuran jika Anda belum melakukannya hari ini</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>Check-in Massal</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>Jalankan tugas check-in untuk semua akun yang dicentang; jika tidak, hanya akun saat ini yang digunakan</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>Daftar Akun</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>Tambah Kredensial Cloud Gaming</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>Mengalami CAPTCHA?</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>Check-in game dan komunitas dapat memicu CAPTCHA. Konfigurasikan info perangkat asli untuk mengurangi risiko, atau gunakan versi self-hosted dengan layanan CAPTCHA.</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>Versi Self-Hosted</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>Aktifkan Integrasi BetterGI</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>Luncurkan BetterGI bersamaan dengan game</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>Jeda Peluncuran BetterGI (detik)</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>Setel ke 0 untuk menonaktifkan jeda; hanya memengaruhi BetterGI</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>Tutup BetterGI Saat Game Keluar</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>Otomatis tutup BetterGI saat Anda keluar dari game</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>Pembersihan Cache Browser</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>Bersihkan file cache yang dihasilkan oleh browser bawaan (WebView2)</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>Hapus Cache</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>Prioritas Proses</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>Sesuaikan prioritas penjadwalan CPU launcher (mengaturnya terlalu tinggi dapat memengaruhi proses lain)</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>Normal (Default)</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>Di Atas Normal</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>Peringatan Penggunaan CPU Abnormal</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>Menampilkan peringatan selalu di atas saat penggunaan CPU launcher tetap di atas ambang selama 5 menit dan OBS tidak terdeteksi. Aktif secara default.</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>Aktifkan Peringatan Penggunaan CPU Abnormal</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>Ambang Peringatan (%)</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>Editor Konfigurasi</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>Perbarui Sumber Daya Database Achievement</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>Aktifkan Screenshot Dalam Game</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>Tangkap jendela game melalui hotkey; jendela lain tidak akan disertakan</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>Hotkey Screenshot</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>Klik tombol di bawah, lalu tekan kombinasi tombol yang diinginkan (mendukung Ctrl/Alt/Shift + tombol)</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>Merekam... tekan kombinasi hotkey Anda</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>Lokasi Penyimpanan Screenshot</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>Sesuaikan lokasi penyimpanan screenshot. Default ke Documents/FufuScreenshots</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>Buka Folder Screenshot</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>Pembaruan Versi</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>Periksa dan unduh versi terbaru</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>Tentang Kami</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>Selesaikan autentikasi lisensi developer untuk membuka fitur tertentu</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>Mulai Autentikasi Lisensi Developer</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>Manajemen Plugin</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>Aktifkan Injeksi</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>Muat plugin saat meluncurkan game</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>Dapatkan Plugin</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>Cara Menggunakan Free Camera</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>Tambah Plugin</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>Segarkan</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>Buka Folder</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>Urutkan</value></data>
+  <data name="SortByName" xml:space="preserve"><value>Berdasarkan Nama</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>Berdasarkan Status (Aktif Dulu)</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>Berdasarkan Ukuran</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>Berdasarkan Tanggal Modifikasi</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>Ganti Nama Folder</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>Hapus</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>Edit File Konfigurasi</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>Pengaturan Plugin</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>Tidak ada plugin terinstal</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>Gunakan plugin dengan risiko Anda sendiri. Developer tidak bertanggung jawab atas kerusakan apa pun.</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>Mengalami masalah? Coba diagnosis sistem Anda terlebih dahulu.</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>Diagnosa Komputer</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>Lihat Bantuan</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>Tautan yang dikonfigurasi bukan format GIF yang valid</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>Gagal memuat sumber daya GIF</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>Nyala</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>Mati</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>Target Konfigurasi:</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin (Plugin Utama)</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS (Plugin Frame Rate)</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar (Plugin Avatar QianXing)</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>Dimodifikasi: </value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>Fungsi (Unduh/Perbaiki)</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>Unduh Plugin</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>Perbaiki Plugin Tampilan FPS</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>Plugin Utama Aktif</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>Plugin FPS Aktif</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>Plugin Avatar Aktif</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>Mode Input Tombol (Daftar)</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>Daftar</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>Angka</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>Buat Preset Otomatis</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>Tampilkan Fitur Developer</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>Punya masukan atau mengalami masalah? Klik di sini</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>Kirim PR</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>Aktifkan Injeksi</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>Preset Konfigurasi:</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>Klik untuk beralih ke preset ini</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[Dikunci]</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>Hapus Preset Ini</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>Preset Baru</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>Reset Semua</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>Pengaturan Penggantian Avatar (unggah ukuran yang sesuai sesuai kebutuhan)</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>Impor</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>Potong</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>Format yang didukung: PNG, JPG, BMP, WEBP. Perubahan berlaku saat berikutnya Anda masuk game.</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>Sesuaikan Avatar</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>Simpan Ukuran Saat Ini</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>Terapkan ke Semua Ukuran</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>Batal</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* Seret dalam kotak atau gunakan Ctrl + roda mouse untuk zoom dan sesuaikan posisi potong</value></data>
+  <data name="Plugin_FpsUnlock" xml:space="preserve"><value>Buka Batas Frame Rate</value></data>
+  <data name="Plugin_TargetFps" xml:space="preserve"><value>Target Frame Rate</value></data>
+  <data name="Plugin_VSync" xml:space="preserve"><value>Nonaktifkan V-Sync</value></data>
+  <data name="Plugin_TouchScreen" xml:space="preserve"><value>Aktifkan Mode UI Mobile</value></data>
+  <data name="Plugin_FovUnlock" xml:space="preserve"><value>Aktifkan Modifikasi FOV</value></data>
+  <data name="Plugin_FovValue" xml:space="preserve"><value>Nilai FOV Kustom</value></data>
+  <data name="Plugin_DisableDamageText" xml:space="preserve"><value>Nonaktifkan Angka Damage</value></data>
+  <data name="Plugin_DisableCameraMove" xml:space="preserve"><value>Nonaktifkan Pergerakan Kamera (Animasi Ultimate)</value></data>
+  <data name="Plugin_DisableFog" xml:space="preserve"><value>Nonaktifkan Efek Kabut</value></data>
+  <data name="Plugin_DisableCharFade" xml:space="preserve"><value>Nonaktifkan Blur Karakter</value></data>
+  <data name="Plugin_RedirectCraft" xml:space="preserve"><value>Aktifkan Pengalihan Meja Crafting</value></data>
+  <data name="Plugin_RemoveTeamAnim" xml:space="preserve"><value>Hapus Loading Bar Menu Tim</value></data>
+  <data name="Plugin_HideGrass" xml:space="preserve"><value>Sembunyikan Rumput</value></data>
+  <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>Sembunyikan Semua Rumput Tanpa Pandang Bulu</value></data>
+  <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>Aktifkan Judul Jendela Kustom</value></data>
+  <data name="Plugin_CustomTitleText" xml:space="preserve"><value>Teks Judul Kustom</value></data>
+  <data name="Plugin_ToggleKey" xml:space="preserve"><value>Hotkey Muat Ulang Konfigurasi</value></data>
+  <data name="Plugin_CraftKey" xml:space="preserve"><value>Hotkey Meja Crafting</value></data>
+  <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>Sembunyikan Banner Quest</value></data>
+  <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>Perbaiki Sudut Kamera FOV Khusus</value></data>
+  <data name="Plugin_HideUID" xml:space="preserve"><value>Sembunyikan UID di Pojok Kanan Bawah</value></data>
+  <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>Penyesuaian Waktu Cepat</value></data>
+  <data name="Plugin_AutoCook" xml:space="preserve"><value>Buka Cepat Menu Memasak</value></data>
+  <data name="Plugin_AutoExpedition" xml:space="preserve"><value>Buka Cepat Menu Ekspedisi</value></data>
+  <data name="Plugin_AutoCookKey" xml:space="preserve"><value>Hotkey Buka Menu Memasak</value></data>
+  <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>Hotkey Buka Menu Ekspedisi</value></data>
+  <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>Nonaktifkan Overlay Bawah Air</value></data>
+  <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>Aktifkan Kustomisasi Warna Angka Damage</value></data>
+  <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0 = Berputar, 1 = Warna Tetap</value></data>
+  <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>Indeks Warna Tetap (0-7)</value></data>
+  <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>Hotkey Putus Jaringan Game (DEV)</value></data>
+  <data name="Plugin_BlockNetwork" xml:space="preserve"><value>Mode Cepat Putus Jaringan Game (DEV)</value></data>
+  <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>Putus Jaringan Game (DEV)</value></data>
+  <data name="Plugin_DebugConsole" xml:space="preserve"><value>Aktifkan Konsol Debug (DEV)</value></data>
+  <data name="Plugin_DumpOffsets" xml:space="preserve"><value>Dump Offsets (DEV)</value></data>
+  <data name="PageTitle_GameSettings" xml:space="preserve"><value>Pengaturan Game</value></data>
+  <data name="SectionGameInstallPath" xml:space="preserve"><value>Lokasi Instalasi Game</value></data>
+  <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>Pilih folder yang berisi YuanShen.exe...</value></data>
+  <data name="ApplyBtn" xml:space="preserve"><value>Terapkan</value></data>
+  <data name="ClearGamePathTooltip" xml:space="preserve"><value>Hapus direktori game yang dikonfigurasi</value></data>
+  <data name="ConfigureGamePathFirst" xml:space="preserve"><value>Harap konfigurasikan path game terlebih dahulu</value></data>
+  <data name="ClientStatusTitle" xml:space="preserve"><value>Status Klien</value></data>
+  <data name="CurrentVersionLabel" xml:space="preserve"><value>Versi Saat Ini</value></data>
+  <data name="ServerLabel" xml:space="preserve"><value>Server</value></data>
+  <data name="DiskUsageLabel" xml:space="preserve"><value>Penggunaan Disk</value></data>
+  <data name="LatestVersionLabel" xml:space="preserve"><value>Versi Terbaru</value></data>
+  <data name="CheckingEllipsis" xml:space="preserve"><value>Memeriksa...</value></data>
+  <data name="PreDownloadLabel" xml:space="preserve"><value>Sumber Daya Pra-Unduh</value></data>
+  <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>Kode Redeem Terbaru</value></data>
+  <data name="CopyBtn" xml:space="preserve"><value>Salin</value></data>
+  <data name="NoCodesAvailable" xml:space="preserve"><value>Tidak ada kode redeem tersedia saat ini</value></data>
+  <data name="AccountSwitchTitle" xml:space="preserve"><value>Pergantian Akun</value></data>
+  <data name="ReadFromLocalTooltip" xml:space="preserve"><value>Baca dari Lokal</value></data>
+  <data name="RefreshListTooltip" xml:space="preserve"><value>Segarkan Daftar</value></data>
+  <data name="DoubleClickToEditTooltip" xml:space="preserve"><value>Klik dua kali untuk mengedit catatan</value></data>
+  <data name="SwitchBtn" xml:space="preserve"><value>Ganti</value></data>
+  <data name="ResourceMgmtTitle" xml:space="preserve"><value>Manajemen Sumber Daya</value></data>
+  <data name="DownloadOrVerifyFiles" xml:space="preserve"><value>Unduh atau verifikasi file</value></data>
+  <data name="SwitchServerTitle" xml:space="preserve"><value>Ganti Server</value></data>
+  <data name="ServerSwitchCaption" xml:space="preserve"><value>Pergantian server Official / Bilibili / Global</value></data>
+  <data name="MapToolsTitle" xml:space="preserve"><value>Alat Peta</value></data>
+  <data name="ViewTeyvatMap" xml:space="preserve"><value>Lihat peta Teyvat</value></data>
+  <data name="OfficialAnnouncementsTitle" xml:space="preserve"><value>Pengumuman Resmi</value></data>
+  <data name="EventsAndUpdatesCaption" xml:space="preserve"><value>Event dan berita pembaruan</value></data>
+  <data name="VerifyGameTitle" xml:space="preserve"><value>Verifikasi File Game</value></data>
+  <data name="VerifyAndRepairCaption" xml:space="preserve"><value>Verifikasi dan perbaiki file game</value></data>
+  <data name="CreateShortcutTitle" xml:space="preserve"><value>Buat Pintasan Peluncuran</value></data>
+  <data name="CreateShortcutCaption" xml:space="preserve"><value>Buat pintasan injeksi satu klik di desktop</value></data>
+  <data name="FpsMonitorTitle" xml:space="preserve"><value>Monitor FPS Dalam Game</value></data>
+  <data name="FpsMonitorCaption" xml:space="preserve"><value>Menampilkan FPS real-time di pojok kiri atas saat game berjalan (memerlukan hak administrator)</value></data>
+  <data name="Err_GamePathNotFound" xml:space="preserve"><value>Path game tidak ditemukan. Silakan atur lokasi game di Pengaturan terlebih dahulu.</value></data>
+  <data name="Title_VerifyGameIntegrity" xml:space="preserve"><value>Verifikasi Integritas Game</value></data>
+  <data name="Err_GamePathNotSet" xml:space="preserve"><value>Path game belum diatur.</value></data>
+  <data name="Err_ExeNotFoundInFolder_Format" xml:space="preserve"><value>File executable game tidak ditemukan di folder:
+{0}</value></data>
+  <data name="Placeholder_DefaultUseCurrentPreset" xml:space="preserve"><value>Gunakan preset aplikasi saat ini secara default</value></data>
+  <data name="None_Value" xml:space="preserve"><value>Tidak Ada</value></data>
+  <data name="Msg_ChooseShortcutAction" xml:space="preserve"><value>Pilih tindakan:
+
+Buat pintasan desktop (berjalan sebagai admin)?
+Atau salin perintah peluncuran untuk digunakan dengan Steam atau skrip?</value></data>
+  <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve"><value>Parameter peluncuran diimpor: {0}</value></data>
+  <data name="Label_SpecifyInjectionPreset" xml:space="preserve"><value>Tentukan konfigurasi injeksi (preset):</value></data>
+  <data name="Title_ChooseAction" xml:space="preserve"><value>Pilih Tindakan</value></data>
+  <data name="Btn_CreateDesktopShortcut" xml:space="preserve"><value>Buat Pintasan Desktop</value></data>
+  <data name="Btn_CopyLaunchCommand" xml:space="preserve"><value>Salin Perintah Peluncuran</value></data>
+  <data name="FileName_ShortcutName" xml:space="preserve"><value>Luncurkan Genshin Impact.lnk</value></data>
+  <data name="Desc_ShortcutDescription" xml:space="preserve"><value>Luncurkan Genshin Impact melalui injeksi FufuLauncher</value></data>
+  <data name="Title_ShortcutCreated" xml:space="preserve"><value>Pintasan Dibuat</value></data>
+  <data name="Msg_ShortcutCreated" xml:space="preserve"><value>Pintasan desktop dibuat. Berjalan sebagai administrator secara default. Periksa desktop Anda.</value></data>
+  <data name="Title_LaunchCommand" xml:space="preserve"><value>Perintah Peluncuran</value></data>
+  <data name="Msg_LaunchCommandInstructions" xml:space="preserve"><value>Berikut adalah perintah peluncuran. Gunakan langsung di CMD, PowerShell, atau sebagai target game non-Steam di Steam:</value></data>
+  <data name="Btn_CopyAndClose" xml:space="preserve"><value>Salin dan Tutup</value></data>
+  <data name="CloseBtn" xml:space="preserve"><value>Tutup</value></data>
+  <data name="Err_OperationFailed_Format" xml:space="preserve"><value>Operasi gagal: {0}</value></data>
+  <data name="Err_FpsMonitorNeedsAdmin" xml:space="preserve"><value>Gagal mengaktifkan pemantauan FPS: fitur ini memerlukan menjalankan launcher sebagai administrator.</value></data>
+  <data name="Msg_NoNewRedeemCodes" xml:space="preserve"><value>Tidak ada kode redeem baru saat ini</value></data>
+  <data name="Err_FetchFailedCheckNetwork" xml:space="preserve"><value>Gagal mengambil data. Periksa koneksi jaringan Anda.</value></data>
+  <data name="Btn_Copied" xml:space="preserve"><value>Tersalin</value></data>
+  <data name="Title_PathError" xml:space="preserve"><value>Kesalahan Path</value></data>
+  <data name="Err_CannotCreateGameDir_Format" xml:space="preserve"><value>Gagal membuat direktori game: {0}
+Kesalahan: {1}</value></data>
+  <data name="Err_ConfigIniNotFound_Format" xml:space="preserve"><value>Tidak dapat menemukan file config.ini.
+
+Path yang diperiksa:
+{0}
+
+Harap periksa bahwa pengaturan Game Path Anda benar-benar mengarah ke direktori instalasi game</value></data>
+  <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve"><value>Ini adalah klien Global. Beralih ke server Bilibili tidak diizinkan di sini — gunakan konversi server untuk beralih ke server China.</value></data>
+  <data name="Btn_SwitchToOfficialServer" xml:space="preserve"><value>Ganti ke Server Official</value></data>
+  <data name="Label_ChooseTargetServer" xml:space="preserve"><value>Silakan pilih server tujuan:</value></data>
+  <data name="Btn_SwitchToBiliServer" xml:space="preserve"><value>Ganti ke Server Bilibili</value></data>
+  <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve"><value>Konversi Antara Server Global dan CN</value></data>
+  <data name="Title_Convert" xml:space="preserve"><value>Konversi</value></data>
+  <data name="ServerType_Unknown" xml:space="preserve"><value>Server Tidak Dikenal</value></data>
+  <data name="ServerType_Global" xml:space="preserve"><value>Server Global</value></data>
+  <data name="ServerType_Bilibili" xml:space="preserve"><value>Server Bilibili</value></data>
+  <data name="ServerType_Official" xml:space="preserve"><value>Server Official</value></data>
+  <data name="ServerType_CustomOther_Format" xml:space="preserve"><value>Kustom/Lainnya (Channel: {0})</value></data>
+  <data name="Err_ReadConfigFailed" xml:space="preserve"><value>Gagal membaca file konfigurasi</value></data>
+  <data name="Title_TeyvatMap" xml:space="preserve"><value>Peta Teyvat</value></data>
+  <data name="Title_GlobalClient" xml:space="preserve"><value>Klien Global</value></data>
+  <data name="Msg_GlobalClientInjectionWarning" xml:space="preserve"><value>Catatan: Fitur injeksi launcher ini terutama dirancang untuk server China. Pada klien Global, mungkin tidak berfungsi atau dapat menyebabkan kesalahan tak terduga.
+
+Tetap gunakan path ini?</value></data>
+  <data name="Btn_ContinueUsing" xml:space="preserve"><value>Lanjutkan Menggunakan</value></data>
+  <data name="Btn_DiscardAndClear" xml:space="preserve"><value>Buang dan Hapus</value></data>
+  <data name="Title_InvalidGamePath" xml:space="preserve"><value>Path Game Tidak Valid</value></data>
+  <data name="Err_ExeNotFoundAtPath_Format" xml:space="preserve"><value>File executable game tidak ditemukan di path ini ({0}).
+
+Harap konfirmasi Anda memilih direktori instalasi yang berisi file executable game, atau konfigurasikan nama kustom di Pengaturan.</value></data>
+  <data name="Title_InvalidPath" xml:space="preserve"><value>Path Tidak Valid</value></data>
+  <data name="Msg_PathDoesNotExist" xml:space="preserve"><value>Path tidak ada. Harap periksa kebenarannya.</value></data>
+  <data name="OkBtn" xml:space="preserve"><value>OK</value></data>
+  <data name="Err_PathProcessingFailed_Format" xml:space="preserve"><value>Pemrosesan path gagal: {0}</value></data>
+  <data name="Title_AutoFoundGamePath" xml:space="preserve"><value>Path Game Ditemukan Otomatis</value></data>
+  <data name="Msg_DetectedPossiblePath_Format" xml:space="preserve"><value>Path instalasi yang mungkin terdeteksi:
+
+{0}
+
+Gunakan path ini?</value></data>
+  <data name="Btn_SelectManually" xml:space="preserve"><value>Pilih Manual</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>Kesalahan</value></data>
+  <data name="Err_CannotOpenFilePicker" xml:space="preserve"><value>Tidak dapat membuka pemilih file</value></data>
+  <data name="Msg_VersionInfoNotFound" xml:space="preserve"><value>Info versi tidak ditemukan</value></data>
+  <data name="UnknownGeneric" xml:space="preserve"><value>Tidak Dikenal</value></data>
+  <data name="FetchFailedShort" xml:space="preserve"><value>Gagal Mengambil</value></data>
+  <data name="Msg_HasVersion_Format" xml:space="preserve"><value>Tersedia (versi {0})</value></data>
+  <data name="NotAvailableGeneric" xml:space="preserve"><value>Tidak Ada</value></data>
+  <data name="ServerType_MainlandChina" xml:space="preserve"><value>Server China Daratan</value></data>
+  <data name="Msg_CannotCalculate" xml:space="preserve"><value>Tidak dapat menghitung</value></data>
+  <data name="Err_CannotAccessRegistry" xml:space="preserve"><value>Tidak dapat mengakses registry</value></data>
+  <data name="Err_NoLoggedInAccount" xml:space="preserve"><value>Tidak ada akun yang login ditemukan (data registry kosong)</value></data>
+  <data name="Err_AccountAlreadySaved" xml:space="preserve"><value>Akun ini sudah disimpan.</value></data>
+  <data name="Placeholder_EnterAccountName" xml:space="preserve"><value>Masukkan nama akun (mis. Utama / Alt)</value></data>
+  <data name="Title_SaveNewAccount" xml:space="preserve"><value>Simpan Akun Baru</value></data>
+  <data name="SaveBtn" xml:space="preserve"><value>Simpan</value></data>
+  <data name="Prefix_Account_Format" xml:space="preserve"><value>Akun_{0}</value></data>
+  <data name="Err_SaveFailed_Format" xml:space="preserve"><value>Penyimpanan gagal: {0}</value></data>
+  <data name="Title_SwitchSuccess" xml:space="preserve"><value>Pergantian Berhasil</value></data>
+  <data name="Msg_SwitchedToAccount_Format" xml:space="preserve"><value>Beralih ke: {0}
+
+Anda harus memulai ulang game agar perubahan berlaku!</value></data>
+  <data name="Btn_GotIt" xml:space="preserve"><value>Mengerti</value></data>
+  <data name="Err_SwitchFailed_Format" xml:space="preserve"><value>Pergantian gagal: {0}</value></data>
+  <data name="Title_ConfirmDelete" xml:space="preserve"><value>Konfirmasi Hapus</value></data>
+  <data name="Msg_DeleteAccountConfirm_Format" xml:space="preserve"><value>Hapus akun &apos;{0}&apos;?</value></data>
+  <data name="Err_DeleteFailed_Format" xml:space="preserve"><value>Penghapusan gagal: {0}</value></data>
+  <data name="Title_OperationFailed" xml:space="preserve"><value>Operasi Gagal</value></data>
+  <data name="NavHome" xml:space="preserve"><value>Beranda</value></data>
+  <data name="NavControlPanel" xml:space="preserve"><value>Panel Kontrol</value></data>
+  <data name="NavAccountSettings" xml:space="preserve"><value>Pengaturan Akun</value></data>
+  <data name="NavOtherFeatures" xml:space="preserve"><value>Fitur Lainnya</value></data>
+  <data name="NavDataCenter" xml:space="preserve"><value>Pusat Data</value></data>
+  <data name="NavHelpDocs" xml:space="preserve"><value>Dokumen Bantuan</value></data>
+  <data name="NavCalculator" xml:space="preserve"><value>Kalkulator</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Pengaturan</value></data>
+  <data name="NavCommunity" xml:space="preserve"><value>Komunitas</value></data>
+  <data name="TrayShowWindow" xml:space="preserve"><value>Tampilkan Jendela Utama</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>Keluar</value></data>
+  <data name="SysStatusChecking" xml:space="preserve"><value>Memeriksa status jaringan...</value></data>
+  <data name="NotificationCenter" xml:space="preserve"><value>Notifikasi</value></data>
+  <data name="ClearAllBtn" xml:space="preserve"><value>Hapus Semua</value></data>
+  <data name="NetDisconnected" xml:space="preserve"><value>Jaringan terputus. Silakan periksa pengaturan jaringan Anda.</value></data>
+  <data name="NetProxyWarning" xml:space="preserve"><value>Menggunakan koneksi proxy. Harap perhatikan penggunaan data Anda.</value></data>
+  <data name="AdminWarningTitle" xml:space="preserve"><value>Peringatan</value></data>
+  <data name="AdminWarningContent" xml:space="preserve"><value>Menjalankan sebagai administrator dapat memengaruhi beberapa fitur, seperti pemilih file.</value></data>
+  <data name="DontShowAgain" xml:space="preserve"><value>Jangan tampilkan lagi</value></data>
+  <data name="GotItBtn" xml:space="preserve"><value>Mengerti</value></data>
+  <data name="VcRuntimeMissingTitle" xml:space="preserve"><value>C++ Runtime Tidak Ada</value></data>
+  <data name="VcRuntimeMissingContent" xml:space="preserve"><value>Sistem tidak memiliki library runtime C++ VC14, yang diperlukan untuk fitur injeksi.
+
+Buka situs web Microsoft untuk mengunduh dan menginstalnya?</value></data>
+  <data name="GoToDownload" xml:space="preserve"><value>Buka Unduhan (X64)</value></data>
+  <data name="DontRemindAgain" xml:space="preserve"><value>Jangan ingatkan lagi</value></data>
+  <data name="IgnoreWarning" xml:space="preserve"><value>Abaikan Peringatan</value></data>
+  <data name="AppDisplayNameAdmin" xml:space="preserve"><value>FufuLauncher [Administrator]</value></data>
+  <data name="HiddenFeatureTitle" xml:space="preserve"><value>Tidak Dapat Diakses</value></data>
+  <data name="HiddenFeatureMessage" xml:space="preserve"><value>Fitur ini disembunyikan. Aktifkan kembali di Pengaturan.</value></data>
+  <data name="RedeemCodeExpired" xml:space="preserve"><value>Pengingat Kode Redeem Kedaluwarsa</value></data>
+  <data name="RedeemCodeToday" xml:space="preserve"><value>Pengingat Kode Redeem Hari Ini</value></data>
+  <data name="RedeemCodeNew" xml:space="preserve"><value>Kode Redeem Baru Diterbitkan</value></data>
+  <data name="RedeemCodeExpiring" xml:space="preserve"><value>Kode Redeem Segera Kedaluwarsa</value></data>
+  <data name="HomeTab_Events" xml:space="preserve"><value>Event</value></data>
+  <data name="HomeTab_Announcements" xml:space="preserve"><value>Pengumuman</value></data>
+  <data name="HomeTab_News" xml:space="preserve"><value>Berita</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>Check-in</value></data>
+  <data name="Home_RefreshToken" xml:space="preserve"><value>Segarkan Token</value></data>
+  <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>Buka Konfigurasi Check-in</value></data>
+  <data name="Home_RewardsCalendar" xml:space="preserve"><value>Kalender Hadiah</value></data>
+  <data name="Home_DailyNotesCard" xml:space="preserve"><value>Catatan Genshin</value></data>
+  <data name="Home_RefreshNotes" xml:space="preserve"><value>Segarkan Catatan</value></data>
+  <data name="Home_NoData" xml:space="preserve"><value>Tidak Ada Data</value></data>
+  <data name="Home_Resin" xml:space="preserve"><value>Resin</value></data>
+  <data name="Home_DailyQuests" xml:space="preserve"><value>Komisi Harian</value></data>
+  <data name="Home_RealmCurrency" xml:space="preserve"><value>Mata Uang Alam</value></data>
+  <data name="Home_Expeditions" xml:space="preserve"><value>Ekspedisi</value></data>
+  <data name="Home_Transformer" xml:space="preserve"><value>Parametric Transformer</value></data>
+  <data name="Home_ToggleBg" xml:space="preserve"><value>Toggle Latar</value></data>
+  <data name="Home_ScreenshotFolder" xml:space="preserve"><value>Folder Screenshot</value></data>
+  <data name="Home_Widgets" xml:space="preserve"><value>Widget</value></data>
+  <data name="Home_WidgetGacha" xml:space="preserve"><value>Analisis Riwayat Wish</value></data>
+  <data name="Home_WidgetAchievement" xml:space="preserve"><value>Pelacakan Achievement</value></data>
+  <data name="Home_WidgetInventory" xml:space="preserve"><value>Item Inventori</value></data>
+  <data name="Home_WidgetPlayerRole" xml:space="preserve"><value>Pencarian Build Karakter</value></data>
+  <data name="Home_WidgetNotes" xml:space="preserve"><value>Catatan Perjalanan</value></data>
+  <data name="Home_WidgetVideo" xml:space="preserve"><value>Perpustakaan Video</value></data>
+  <data name="Home_WidgetBBS" xml:space="preserve"><value>Battle Chronicle</value></data>
+  <data name="Home_AddWidget" xml:space="preserve"><value>Tambah Widget</value></data>
+  <data name="Home_RemoveWidget" xml:space="preserve"><value>Hapus Widget</value></data>
+  <data name="Home_ToggleTooltip" xml:space="preserve"><value>Toggle Tooltip Detail</value></data>
+  <data name="Home_QuickPresets" xml:space="preserve"><value>Preset Cepat</value></data>
+  <data name="Home_ManagePresets" xml:space="preserve"><value>Kelola</value></data>
+  <data name="Home_NoPresetsPinned" xml:space="preserve"><value>Tidak ada preset yang disematkan</value></data>
+  <data name="Home_SwitchServer" xml:space="preserve"><value>Ganti ke Server {0}</value></data>
+  <data name="Home_SwitchOfficial" xml:space="preserve"><value>Ganti ke Server Official</value></data>
+  <data name="Home_SwitchBilibili" xml:space="preserve"><value>Ganti ke Server Bilibili</value></data>
+  <data name="Home_SwitchSuccess" xml:space="preserve"><value>Pergantian Berhasil</value></data>
+  <data name="Home_SwitchedTo_Format" xml:space="preserve"><value>Berhasil beralih ke server {0}. {1}</value></data>
+  <data name="Home_SwitchFailed" xml:space="preserve"><value>Pergantian Gagal</value></data>
+  <data name="Home_RefreshFailed" xml:space="preserve"><value>Penyegaran Gagal</value></data>
+  <data name="Home_NoActiveAccount" xml:space="preserve"><value>Tidak ada akun aktif</value></data>
+  <data name="Home_CannotLoadCredentials" xml:space="preserve"><value>Tidak dapat memuat kredensial akun</value></data>
+  <data name="Home_BBSSecurityTitle" xml:space="preserve"><value>Pemberitahuan Keamanan</value></data>
+  <data name="Home_BBSSecurityMessage" xml:space="preserve"><value>Mengakses halaman Battle Chronicle dapat menandai akun Anda sebagai akun berisiko, yang dapat mencegah beberapa fitur berfungsi dengan baik. Tetap lanjutkan?</value></data>
+  <data name="Home_BBSConfirm" xml:space="preserve"><value>Konfirmasi</value></data>
+  <data name="Home_ErrNoGamePath" xml:space="preserve"><value>Tidak ada path game valid yang ditemukan. Silakan atur lokasi game di Pengaturan terlebih dahulu.</value></data>
+  <data name="Home_ErrConfigNotFound" xml:space="preserve"><value>Tidak dapat menemukan file konfigurasi config.ini. Pergantian server tidak tersedia.</value></data>
+  <data name="Home_ErrSwitchException" xml:space="preserve"><value>Terjadi kesalahan saat mempersiapkan pergantian server.</value></data>
+  <data name="Home_OfficialServer" xml:space="preserve"><value>Server Official</value></data>
+  <data name="Home_BilibiliServer" xml:space="preserve"><value>Server Bilibili</value></data>
+  <data name="Home_Deployed" xml:space="preserve"><value>Diterapkan</value></data>
+  <data name="Home_Cleaned" xml:space="preserve"><value>Dibersihkan</value></data>
+  <data name="Home_OpenLink" xml:space="preserve"><value>Buka Tautan</value></data>
+  <data name="Home_OpenLinkFailed" xml:space="preserve"><value>Gagal membuka tautan</value></data>
+  <data name="Home_GachaTooltip" xml:space="preserve"><value>Analisis Riwayat Wish: Analisis catatan wish Anda dan lihat statistik pull</value></data>
+  <data name="Home_AchievementTooltip" xml:space="preserve"><value>Pelacakan Achievement: Lacak progres achievement Anda, dengan dukungan ekspor &amp; impor</value></data>
+  <data name="Home_InventoryTooltip" xml:space="preserve"><value>Item Inventori: Lihat material di inventori akun Anda saat ini</value></data>
+  <data name="Home_PlayerRoleTooltip" xml:space="preserve"><value>Pencarian Build Karakter: Lihat level, konstelasi, senjata, dan build artefak karakter</value></data>
+  <data name="Home_NotesTooltip" xml:space="preserve"><value>Catatan Perjalanan: Lihat data real-time seperti domain material karakter yang tersedia di jendela terpisah</value></data>
+  <data name="Home_VideoTooltip" xml:space="preserve"><value>Perpustakaan Video: Jelajahi demo karakter dan cutscene dalam game</value></data>
+  <data name="Home_BBSTooltip" xml:space="preserve"><value>Battle Chronicle: Lihat catatan pertempuran detail seperti Spiral Abyss dan Imaginarium Theater</value></data>
+  <data name="OtherPage_Title" xml:space="preserve"><value>Pengaturan Lainnya</value></data>
+  <data name="OtherPage_ExternalPrograms" xml:space="preserve"><value>Program Eksternal</value></data>
+  <data name="OtherPage_AdditionalProgramLaunch" xml:space="preserve"><value>Peluncuran Program Tambahan</value></data>
+  <data name="OtherPage_AutostartExeDesc" xml:space="preserve"><value>Luncurkan program .exe yang ditentukan bersamaan dengan game secara otomatis</value></data>
+  <data name="OtherPage_ProgramPath" xml:space="preserve"><value>Path Program</value></data>
+  <data name="OtherPage_PathPlaceholder" xml:space="preserve"><value>mis. C:\Tools\MapTool.exe</value></data>
+  <data name="OtherPage_PathHint" xml:space="preserve"><value>Tips: Jika tidak terjadi apa-apa setelah memilih path, tempelkan secara manual dan klik Terapkan.</value></data>
+  <data name="OtherPage_AccessibilityTools" xml:space="preserve"><value>Alat Aksesibilitas</value></data>
+  <data name="OtherPage_AutoClicker" xml:space="preserve"><value>Klik Otomatis</value></data>
+  <data name="OtherPage_AutoClickerDesc" xml:space="preserve"><value>Tahan tombol pemicu atau mouse untuk mensimulasikan klik frekuensi tinggi</value></data>
+  <data name="OtherPage_ClickMode" xml:space="preserve"><value>Mode Klik</value></data>
+  <data name="OtherPage_MouseLeft" xml:space="preserve"><value>Tombol Kiri Mouse</value></data>
+  <data name="OtherPage_MouseRight" xml:space="preserve"><value>Tombol Kanan Mouse</value></data>
+  <data name="OtherPage_MouseModeHint" xml:space="preserve"><value>Hanya satu mode mouse yang dapat diaktifkan dalam satu waktu. Atur hotkey berhenti sebelum mengaktifkan mode mouse.</value></data>
+  <data name="OtherPage_TriggerKeyHeader" xml:space="preserve"><value>Tombol Pemicu (tahan tombol ini)</value></data>
+  <data name="OtherPage_RecordClick" xml:space="preserve"><value>Klik untuk Merekam</value></data>
+  <data name="OtherPage_StopKeyHeader" xml:space="preserve"><value>Hotkey Berhenti (wajib)</value></data>
+  <data name="OtherPage_ClickKeyHeader" xml:space="preserve"><value>Tombol Klik Keyboard (hanya mode keyboard)</value></data>
+  <data name="OtherPage_UsageInstructions" xml:space="preserve"><value>Petunjuk Penggunaan</value></data>
+  <data name="OtherPage_UsageHint" xml:space="preserve"><value>Klik ikon untuk mulai merekam, lalu tekan tombol apa saja. Mode tombol kiri dan kanan mouse saling eksklusif. Anda harus mengatur hotkey berhenti terlebih dahulu.</value></data>
+  <data name="OtherPage_UtilityTools" xml:space="preserve"><value>Alat Utilitas</value></data>
+  <data name="OtherPage_Browser" xml:space="preserve"><value>Browser</value></data>
+  <data name="OtherPage_BrowserDesc" xml:space="preserve"><value>Buka browser mengambang mandiri dengan dukungan selalu di atas</value></data>
+  <data name="OtherPage_Open" xml:space="preserve"><value>Buka</value></data>
+  <data name="OtherPage_SaveConfig" xml:space="preserve"><value>Simpan Konfigurasi</value></data>
+  <data name="OtherPage_KeyRecorderEnabled" xml:space="preserve"><value>Perekam tombol diaktifkan. Event tombol global terdaftar ke: {0}</value></data>
+  <data name="OtherPage_KeyRecorderDisabled" xml:space="preserve"><value>Perekam tombol dinonaktifkan. Event tombol global tidak terdaftar.</value></data>
+  <data name="OtherPage_KeyEventError" xml:space="preserve"><value>Gagal mendaftarkan/membatalkan pendaftaran event tombol</value></data>
+  <data name="OtherPage_UnloadCleanupError" xml:space="preserve"><value>Gagal membersihkan event tombol saat halaman ditutup</value></data>
+  <data name="OtherPage_CapturingKey" xml:space="preserve"><value>Menangkap tombol...</value></data>
+  <data name="OtherPage_TriggerKeySet" xml:space="preserve"><value>Tombol pemicu diatur</value></data>
+  <data name="OtherPage_ClickKeySet" xml:space="preserve"><value>Tombol klik diatur</value></data>
+  <data name="OtherPage_StopKeySet" xml:space="preserve"><value>Hotkey berhenti diatur</value></data>
+  <data name="OtherPage_KeyProcessError" xml:space="preserve"><value>Kesalahan pemrosesan tombol</value></data>
+  <data name="Account_NotLoggedIn" xml:space="preserve"><value>Belum login</value></data>
+  <data name="Account_SavedAccounts" xml:space="preserve"><value>Akun Tersimpan</value></data>
+  <data name="Account_Login" xml:space="preserve"><value>Login</value></data>
+  <data name="Account_DailyCheckin" xml:space="preserve"><value>Check-in Harian</value></data>
+  <data name="Account_RefreshInfo" xml:space="preserve"><value>Segarkan Info</value></data>
+  <data name="Account_TravelJournal" xml:space="preserve"><value>Jurnal Perjalanan</value></data>
+  <data name="Account_GachaAnalysis" xml:space="preserve"><value>Analisis Wish</value></data>
+  <data name="Account_AccountSecurity" xml:space="preserve"><value>Keamanan Akun</value></data>
+  <data name="Account_FreezeAccount" xml:space="preserve"><value>Bekukan Akun</value></data>
+  <data name="Account_CopyCookie" xml:space="preserve"><value>Salin Cookie</value></data>
+  <data name="Account_DeleteAccount" xml:space="preserve"><value>Hapus Akun</value></data>
+  <data name="Account_Logout" xml:space="preserve"><value>Keluar</value></data>
+  <data name="Account_CommunityFeed" xml:space="preserve"><value>Feed Komunitas</value></data>
+  <data name="Account_Likes" xml:space="preserve"><value>Suka</value></data>
+  <data name="Account_Posts" xml:space="preserve"><value>Postingan</value></data>
+  <data name="Account_Replies" xml:space="preserve"><value>Balasan</value></data>
+  <data name="Account_BoundCharacters" xml:space="preserve"><value>Karakter Terikat</value></data>
+  <data name="Account_NoCharacters" xml:space="preserve"><value>Tidak ada karakter terikat</value></data>
+  <data name="Account_BindHint" xml:space="preserve"><value>Silakan ikat karakter di MiYouShe atau dalam game, lalu segarkan</value></data>
+  <data name="Account_PlayTime" xml:space="preserve"><value>Waktu Bermain</value></data>
+  <data name="Account_RecentDays_Format" xml:space="preserve"><value>{0} Hari Terakhir</value></data>
+  <data name="Account_InGame" xml:space="preserve"><value>Dalam Game</value></data>
+  <data name="Account_TotalTime" xml:space="preserve"><value>Total Waktu</value></data>
+  <data name="Account_DailyAvg" xml:space="preserve"><value>Rata-rata Harian</value></data>
+  <data name="Account_NoRecentRecords_Format" xml:space="preserve"><value>Tidak ada catatan game selama {0} hari terakhir</value></data>
+  <data name="Account_DeleteAccountConfirm_Format" xml:space="preserve"><value>Hapus akun &quot;{0}&quot;? Ini akan menghapus semua data terkait termasuk kredensial, riwayat wish, dan kredensial cloud gaming. Ini tidak dapat dibatalkan.</value></data>
+  <data name="Account_DeleteComplete" xml:space="preserve"><value>Akun &quot;{0}&quot; dihapus.</value></data>
+  <data name="Account_DeleteException" xml:space="preserve"><value>Kesalahan penghapusan akun</value></data>
+  <data name="Account_DeleteBtn" xml:space="preserve"><value>Hapus</value></data>
+  <data name="Account_CheckingIn" xml:space="preserve"><value>Sedang check-in...</value></data>
+  <data name="Account_CheckinComplete" xml:space="preserve"><value>Check-in selesai</value></data>
+  <data name="Account_CheckinFailed" xml:space="preserve"><value>Check-in gagal</value></data>
+  <data name="Account_CheckinException" xml:space="preserve"><value>Kesalahan check-in</value></data>
+  <data name="Account_LoginFailed" xml:space="preserve"><value>Login gagal</value></data>
+  <data name="Account_OtherOperations" xml:space="preserve"><value>Operasi Lainnya</value></data>
+  <data name="Account_RecentDays30" xml:space="preserve"><value>30 Hari Terakhir</value></data>
+  <data name="Account_NoRecentRecords30" xml:space="preserve"><value>Tidak ada catatan game selama 30 hari terakhir</value></data>
+  <data name="Account_CopyUID" xml:space="preserve"><value>Salin UID</value></data>
+  <data name="Account_DeleteCurrent" xml:space="preserve"><value>Hapus Akun Saat Ini</value></data>
+  <data name="Account_DeleteCurrentConfirm_Format" xml:space="preserve"><value>Apakah Anda yakin ingin menghapus akun saat ini {0} ({1})? Ini akan menghapus semua data terkait dan tidak dapat dibatalkan.</value></data>
+  <data name="LoginQR_Title" xml:space="preserve"><value>Login QR Code</value></data>
+  <data name="LoginQR_MiyousheQR" xml:space="preserve"><value>Login QR Aplikasi MiYouShe</value></data>
+  <data name="LoginQR_WebPassport" xml:space="preserve"><value>Login Web Passport</value></data>
+  <data name="LoginQR_HoYoLABWeb" xml:space="preserve"><value>Login Web HoYoLAB</value></data>
+  <data name="LoginQR_GameAppId" xml:space="preserve"><value>Game App ID:</value></data>
+  <data name="LoginQR_EnterAppId" xml:space="preserve"><value>Masukkan App ID</value></data>
+  <data name="LoginQR_ConfirmGenerate" xml:space="preserve"><value>Generate</value></data>
+  <data name="LoginQR_RefreshQR" xml:space="preserve"><value>Segarkan QR Code</value></data>
+  <data name="LoginQR_WebLoginWarning" xml:space="preserve"><value>Catatan: Login web passport tidak dapat memperoleh Stoken; beberapa fitur tidak akan tersedia.</value></data>
+  <data name="LoginQR_ManualCookie" xml:space="preserve"><value>Masukkan Cookie Manual</value></data>
+  <data name="LoginQR_ClearHistory" xml:space="preserve"><value>Hapus Riwayat Login</value></data>
+  <data name="Panel_Toolbox" xml:space="preserve"><value>Kotak Alat</value></data>
+  <data name="Panel_DataAnalysis" xml:space="preserve"><value>Analisis Data</value></data>
+  <data name="Panel_DataAnalysisDesc" xml:space="preserve"><value>Lacak statistik, progres penyelesaian, dan data jangka panjang</value></data>
+  <data name="Panel_TravelerProfile" xml:space="preserve"><value>Profil Traveler</value></data>
+  <data name="Panel_TravelerProfileDesc" xml:space="preserve"><value>Karakter, inventori, catatan, dan catatan pertempuran MiYouShe</value></data>
+  <data name="Panel_Resources" xml:space="preserve"><value>Sumber Daya</value></data>
+  <data name="Panel_ResourcesDesc" xml:space="preserve"><value>Media dan perpustakaan sumber daya</value></data>
+  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>Pilih Path Game</value></data>
+  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>Keluar Game</value></data>
+  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>Luncurkan Game</value></data>
+  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>Mengakhiri game...</value></data>
+  <data name="Checkin_Signed" xml:space="preserve"><value>Sudah check-in hari ini</value></data>
+  <data name="Checkin_Unsigned" xml:space="preserve"><value>Belum check-in</value></data>
+  <data name="LaunchErr_NoGamePath" xml:space="preserve"><value>Path game belum diatur</value></data>
+  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>Silakan buka halaman Manajemen Game dan atur path instalasi game terlebih dahulu.</value></data>
+  <data name="LaunchErr_LaunchFailed" xml:space="preserve"><value>Peluncuran game gagal</value></data>
+  <data name="Screenshot_FolderNotFound" xml:space="preserve"><value>Folder screenshot tidak ditemukan</value></data>
+  <data name="Screenshot_FolderNotFoundMsg" xml:space="preserve"><value>Silakan ambil screenshot dalam game atau gunakan fitur screenshot launcher terlebih dahulu.</value></data>
+  <data name="Announcement_Title" xml:space="preserve"><value>Pengumuman</value></data>
+  <data name="Announcement_Loading" xml:space="preserve"><value>Memuat pengumuman...</value></data>
+  <data name="CommunityPage_Back" xml:space="preserve"><value>Kembali</value></data>
+  <data name="CommunityPage_Forward" xml:space="preserve"><value>Maju</value></data>
+  <data name="CommunityPage_Refresh" xml:space="preserve"><value>Segarkan</value></data>
+  <data name="HelpPage_SearchPlaceholder" xml:space="preserve"><value>Cari judul, nama file, atau konten...</value></data>
+  <data name="AboutPage_GetBuildFromActions" xml:space="preserve"><value>Dapatkan Build dari GitHub Actions</value></data>
+  <data name="AboutPage_Contributors" xml:space="preserve"><value>Kontributor</value></data>
+  <data name="AboutPage_LoadFailed" xml:space="preserve"><value>Gagal Memuat</value></data>
+  <data name="AboutPage_ReportIssue" xml:space="preserve"><value>Laporkan Masalah</value></data>
+  <data name="AboutPage_OfficialWebsite" xml:space="preserve"><value>Situs Resmi</value></data>
+  <data name="AboutPage_ContactAuthor" xml:space="preserve"><value>Hubungi Penulis</value></data>
+  <data name="SponsorWindow_Title" xml:space="preserve"><value>Sponsor</value></data>
+  <data name="SponsorWindow_OnlyWeChat" xml:space="preserve"><value>Saat ini hanya WeChat yang didukung. Alipay dan metode pembayaran lainnya tidak tersedia.</value></data>
+  <data name="SponsorWindow_QrCodeFailed" xml:space="preserve"><value>QR Code Gagal Dimuat</value></data>
+  <data name="SponsorWindow_Disclaimer" xml:space="preserve"><value>Dengan berdonasi, Anda mengakui bahwa sponsor tidak dapat dikembalikan.</value></data>
+  <data name="StarPrompt_Support" xml:space="preserve"><value>Dukung Kami</value></data>
+  <data name="StarPrompt_Message" xml:space="preserve"><value>Menikmati FufuLauncher? Beri kami ⭐ di GitHub — sangat berarti bagi kami!</value></data>
+  <data name="StarPrompt_GoToGitHub" xml:space="preserve"><value>Star di GitHub</value></data>
+  <data name="StarPrompt_Later" xml:space="preserve"><value>Ingatkan Nanti</value></data>
+  <data name="StarPrompt_GotIt" xml:space="preserve"><value>Mengerti</value></data>
+  <data name="AchievementUpdater_Title" xml:space="preserve"><value>Pembaruan Data Achievement</value></data>
+  <data name="AchievementUpdater_StartFetch" xml:space="preserve"><value>Mulai Mengambil</value></data>
+  <data name="AdvancedServerSwitch_Title" xml:space="preserve"><value>Ganti Server</value></data>
+  <data name="AdvancedServerSwitch_Warning" xml:space="preserve"><value>Catatan: Pergantian tidak efektif saat game sedang berjalan!</value></data>
+  <data name="AdvancedServerSwitch_Convert" xml:space="preserve"><value>Konversi Satu Klik</value></data>
+  <data name="Agreement_Title" xml:space="preserve"><value>Perjanjian Pengguna</value></data>
+  <data name="BackgroundInit_Initializing" xml:space="preserve"><value>Menginisialisasi sumber daya latar...</value></data>
+  <data name="BackgroundInit_PleaseWait" xml:space="preserve"><value>Caching mungkin memerlukan waktu, harap tunggu...</value></data>
+  <data name="CheckinCalendar_Title" xml:space="preserve"><value>Kalender Hadiah Check-in</value></data>
+  <data name="CloudCredential_Title" xml:space="preserve"><value>Kredensial Cloud Game</value></data>
+  <data name="CloudCredential_AddTitle" xml:space="preserve"><value>Tambah Kredensial Cloud Game</value></data>
+  <data name="HiddenPage_Title" xml:space="preserve"><value>Fitur Disembunyikan</value></data>
+  <data name="HiddenPage_Message" xml:space="preserve"><value>Fitur ini telah disembunyikan. Untuk menggunakannya, buka Pengaturan → Tampilan &amp; Personalisasi → Item Bilah Navigasi dan aktifkan kembali.</value></data>
+  <data name="HiddenPage_BackToHome" xml:space="preserve"><value>Kembali ke Beranda</value></data>
+  <data name="PreDownload_Title" xml:space="preserve"><value>Pra-Unduh Game</value></data>
+  <data name="PreDownload_Description" xml:space="preserve"><value>Dapatkan data pembaruan versi baru lebih awal, proses otomatis</value></data>
+  <data name="PreDownload_Start" xml:space="preserve"><value>Mulai Pra-Unduh</value></data>
+  <data name="PresetManager_Title" xml:space="preserve"><value>Manajer Preset</value></data>
+  <data name="PresetManager_SelectHint" xml:space="preserve"><value>Pilih preset untuk disematkan di halaman beranda (maks 5)</value></data>
+  <data name="SecurityWeb_Title" xml:space="preserve"><value>Verifikasi Lisensi Developer</value></data>
+  <data name="VerifyGame_Title" xml:space="preserve"><value>Pemeriksaan Integritas File Game</value></data>
+  <data name="VerifyGame_Description" xml:space="preserve"><value>Ini akan memverifikasi file lokal dan otomatis memperbaiki file yang rusak atau hilang. Ini mungkin memerlukan waktu — harap bersabar.</value></data>
+  <data name="VerifyGame_Start" xml:space="preserve"><value>Mulai Verifikasi</value></data>
+  <data name="FeedbackWindow_Title" xml:space="preserve"><value>Kirim Masukan</value></data>
+  <data name="FeedbackWindow_SelectType" xml:space="preserve"><value>Silakan pilih jenis masukan yang akan dikirim:</value></data>
+  <data name="FeedbackWindow_FeatureRequest" xml:space="preserve"><value>Kirim Ide / Permintaan Fitur</value></data>
+  <data name="FeedbackWindow_FeatureRequestDesc" xml:space="preserve"><value>Punya ide baru atau permintaan fitur? Kirim melalui GitHub.</value></data>
+  <data name="FeedbackWindow_BugReport" xml:space="preserve"><value>Laporkan Masalah / Bug</value></data>
+  <data name="FeedbackWindow_BugReportDesc" xml:space="preserve"><value>Mengalami kesalahan atau perilaku tak terduga? Kirim laporan bug melalui GitHub.</value></data>
+  <data name="AnnouncementWindow_GameAnnouncement" xml:space="preserve"><value>Pengumuman Game</value></data>
+  <data name="DownloadWindow_Title" xml:space="preserve"><value>Pengunduh Sumber Daya</value></data>
+  <data name="DownloadWindow_GameResourceUpdate" xml:space="preserve"><value>Pembaruan Sumber Daya Game</value></data>
+  <data name="DownloadWindow_StuckIsNormal" xml:space="preserve"><value>Tersendat saat mengunduh adalah normal</value></data>
+  <data name="DownloadWindow_InstallDir" xml:space="preserve"><value>Direktori Instalasi</value></data>
+  <data name="DownloadWindow_VoiceLanguage" xml:space="preserve"><value>Bahasa Voice Pack</value></data>
+  <data name="DownloadWindow_DownloadBaseGame" xml:space="preserve"><value>Unduh Data Game Dasar</value></data>
+  <data name="DownloadWindow_BaseGameTooltip" xml:space="preserve"><value>Hapus centang untuk hanya memperbarui voice pack</value></data>
+  <data name="DownloadWindow_ShowDetailLog" xml:space="preserve"><value>Tampilkan Log Detail</value></data>
+  <data name="DownloadWindow_Ready" xml:space="preserve"><value>Siap</value></data>
+  <data name="DownloadWindow_StartDownload" xml:space="preserve"><value>Mulai Unduh</value></data>
+  <data name="DownloadWindow_Cancel" xml:space="preserve"><value>Batal</value></data>
+  <data name="BBSWindow_Title" xml:space="preserve"><value>Catatan Pertempuran</value></data>
+  <data name="BBSWindow_SwitchIdentity" xml:space="preserve"><value>Ganti Identitas</value></data>
+  <data name="BBSWindow_EnterUrl" xml:space="preserve"><value>Masukkan URL...</value></data>
+  <data name="BBSWindow_Go" xml:space="preserve"><value>Buka</value></data>
+  <data name="BBSWindow_Save" xml:space="preserve"><value>Simpan</value></data>
+  <data name="BBSWindow_Copy" xml:space="preserve"><value>Salin</value></data>
+  <data name="BrowserWindow_Title" xml:space="preserve"><value>Browser</value></data>
+  <data name="BrowserWindow_EnterUrl" xml:space="preserve"><value>Masukkan URL...</value></data>
+  <data name="BrowserWindow_Refresh" xml:space="preserve"><value>Segarkan</value></data>
+  <data name="BrowserWindow_Settings" xml:space="preserve"><value>Pengaturan</value></data>
+  <data name="BrowserWindow_PinWindow" xml:space="preserve"><value>Sematkan Jendela</value></data>
+  <data name="BrowserWindow_SettingsTitle" xml:space="preserve"><value>Pengaturan Browser</value></data>
+  <data name="BrowserWindow_DefaultHomepage" xml:space="preserve"><value>Halaman Utama Default (URL)</value></data>
+  <data name="BrowserWindow_DefaultZoom" xml:space="preserve"><value>Zoom Default</value></data>
+  <data name="BrowserWindow_VideoHotkeys" xml:space="preserve"><value>Hotkey Kontrol Video (JS KeyCode)</value></data>
+  <data name="BrowserWindow_RewindKey" xml:space="preserve"><value>Tombol Mundur</value></data>
+  <data name="BrowserWindow_ForwardKey" xml:space="preserve"><value>Tombol Maju</value></data>
+  <data name="BrowserWindow_HotkeyHint" xml:space="preserve"><value>Tips: Tombol umum adalah ArrowLeft, ArrowRight, KeyA, KeyD</value></data>
+  <data name="BrowserWindow_PerformanceSettings" xml:space="preserve"><value>Pengaturan Performa</value></data>
+  <data name="BrowserWindow_RaisePriority" xml:space="preserve"><value>Tingkatkan Prioritas Proses (cegah lag dalam game)</value></data>
+  <data name="MapPage_Title" xml:space="preserve"><value>Peta Teyvat</value></data>
+  <data name="MapPage_Refresh" xml:space="preserve"><value>Segarkan</value></data>
+  <data name="MapPage_LockMapOff" xml:space="preserve"><value>Kunci Peta (Mati)</value></data>
+  <data name="MapPage_TopMostOff" xml:space="preserve"><value>Selalu di Atas (Mati)</value></data>
+  <data name="PluginConfigPage_Title" xml:space="preserve"><value>Konfigurasi Plugin</value></data>
+  <data name="PluginConfigPage_AdjustParams" xml:space="preserve"><value>Sesuaikan parameter plugin</value></data>
+  <data name="PluginConfigPage_PluginInfo" xml:space="preserve"><value>Info Plugin</value></data>
+  <data name="UpdateNotification_Title" xml:space="preserve"><value>Pemberitahuan Pembaruan Versi</value></data>
+  <data name="UpdateNotification_UpdateNow" xml:space="preserve"><value>Perbarui Sekarang</value></data>
+  <data name="VideoResources_Title" xml:space="preserve"><value>Perpustakaan Sumber Daya Video</value></data>
+  <data name="VideoResources_CharacterVideos" xml:space="preserve"><value>Video Karakter</value></data>
+  <data name="VideoResources_Play" xml:space="preserve"><value>Putar</value></data>
+  <data name="VideoResources_Download" xml:space="preserve"><value>Unduh</value></data>
+  <data name="VideoResources_CutsceneVideos" xml:space="preserve"><value>Video Cutscene</value></data>
+  <data name="ScreenshotGallery_Title" xml:space="preserve"><value>Galeri Screenshot</value></data>
+  <data name="ScreenshotGallery_BackToGallery" xml:space="preserve"><value>Kembali ke Galeri</value></data>
+  <data name="ScreenshotGallery_Copy" xml:space="preserve"><value>Salin</value></data>
+  <data name="ScreenshotGallery_Cut" xml:space="preserve"><value>Potong</value></data>
+  <data name="ScreenshotGallery_Delete" xml:space="preserve"><value>Hapus</value></data>
+  <data name="ScreenshotGallery_OpenFolder" xml:space="preserve"><value>Buka Folder Gambar</value></data>
+  <data name="ScreenshotGallery_OpenWithApp" xml:space="preserve"><value>Buka dengan Aplikasi Sistem</value></data>
+  <data name="ScreenshotGallery_NoScreenshots" xml:space="preserve"><value>Belum ada screenshot</value></data>
+  <data name="ScreenshotGallery_OpenScreenshotFolder" xml:space="preserve"><value>Buka Folder Screenshot</value></data>
+  <data name="GachaDialog_Title" xml:space="preserve"><value>Analisis Statistik Gacha</value></data>
+  <data name="GachaDialog_Close" xml:space="preserve"><value>Tutup</value></data>
+  <data name="GachaDialog_GachaRecordLink" xml:space="preserve"><value>Tautan Catatan Gacha</value></data>
+  <data name="GachaDialog_PasteUrl" xml:space="preserve"><value>Tempel URL dengan authkey di sini</value></data>
+  <data name="GachaDialog_StartAnalysis" xml:space="preserve"><value>Mulai Analisis</value></data>
+  <data name="GachaDialog_ExportUigf" xml:space="preserve"><value>Ekspor UIGF</value></data>
+  <data name="GachaDialog_ExportUigfTooltip" xml:space="preserve"><value>Ekspor format JSON UIGF standar ke desktop</value></data>
+  <data name="GachaDialog_TotalInvested" xml:space="preserve"><value>Total: </value></data>
+  <data name="GachaDialog_Pulls" xml:space="preserve"><value> Pull</value></data>
+  <data name="GachaDialog_CurrentPity" xml:space="preserve"><value>Pity Saat Ini</value></data>
+  <data name="GachaDialog_FiveStarCount" xml:space="preserve"><value>Jumlah 5★</value></data>
+  <data name="GachaDialog_FiveStarRecords" xml:space="preserve"><value>Catatan 5★</value></data>
+  <data name="GachaDialog_BasicFeatureNote" xml:space="preserve"><value>Fitur ini bersifat dasar. Untuk analisis detail, pertimbangkan menggunakan alat gacha khusus.</value></data>
+  <data name="HighCpuUsage_Title" xml:space="preserve"><value>Peringatan Anomali Performa</value></data>
+  <data name="HighCpuUsage_Detected" xml:space="preserve"><value>Penggunaan Sumber Daya Jangka Panjang Abnormal Terdeteksi</value></data>
+  <data name="HighCpuUsage_Description" xml:space="preserve"><value>Tanpa OBS terdeteksi, penggunaan CPU FufuLauncher tetap di atas 30% selama 5 menit. Ini biasanya tidak normal.</value></data>
+  <data name="HighCpuUsage_SuggestedAction" xml:space="preserve"><value>Tindakan yang Disarankan</value></data>
+  <data name="HighCpuUsage_SuggestionText" xml:space="preserve"><value>Silakan laporkan masalah ini untuk membantu diagnosis. Jika masalah berlanjut, keluar dan perbarui ke versi terbaru.</value></data>
+  <data name="HighCpuUsage_Dismiss" xml:space="preserve"><value>Abaikan</value></data>
+  <data name="HighCpuUsage_Report" xml:space="preserve"><value>Laporkan Masalah</value></data>
+  <data name="HighCpuUsage_ExitLauncher" xml:space="preserve"><value>Keluar Launcher</value></data>
+  <data name="Diagnostics_Title" xml:space="preserve"><value>Diagnostik Sistem</value></data>
+  <data name="Diagnostics_HardwareAndSystem" xml:space="preserve"><value>Hardware &amp; Lingkungan Sistem</value></data>
+  <data name="Diagnostics_CollectingInfo" xml:space="preserve"><value>Mengumpulkan informasi sistem...</value></data>
+  <data name="Diagnostics_DisplayAndGraphics" xml:space="preserve"><value>Tampilan &amp; Grafis</value></data>
+  <data name="Diagnostics_Resolution" xml:space="preserve"><value>Resolusi</value></data>
+  <data name="Diagnostics_RefreshRate" xml:space="preserve"><value>Refresh Rate</value></data>
+  <data name="Diagnostics_Hardware" xml:space="preserve"><value>Hardware</value></data>
+  <data name="Diagnostics_SecurityAndNetwork" xml:space="preserve"><value>Keamanan &amp; Jaringan</value></data>
+  <data name="Diagnostics_WindowsSecurity" xml:space="preserve"><value>Windows Security Center</value></data>
+  <data name="Diagnostics_DiskSpace" xml:space="preserve"><value>Ruang Disk Sistem</value></data>
+  <data name="Diagnostics_NetworkStatus" xml:space="preserve"><value>Status Jaringan</value></data>
+  <data name="Diagnostics_NetworkRegion" xml:space="preserve"><value>Wilayah Jaringan</value></data>
+  <data name="Diagnostics_Suggestion" xml:space="preserve"><value>Saran</value></data>
+  <data name="DailyNote_Title" xml:space="preserve"><value>Jadwal Teyvat</value></data>
+  <data name="DailyNote_TodayMaterials" xml:space="preserve"><value>Material Hari Ini</value></data>
+  <data name="DailyNote_RefreshStatus" xml:space="preserve"><value>Status Penyegaran Saat Ini</value></data>
+  <data name="DailyNote_RefreshData" xml:space="preserve"><value>Segarkan Data</value></data>
+  <data name="DailyNote_MaterialDropHint" xml:space="preserve"><value>Pengingat drop material koleksi harian, buku bakat, dan ascension senjata</value></data>
+  <data name="DailyNote_TodayBirthday" xml:space="preserve"><value>Ulang Tahun Hari Ini</value></data>
+  <data name="DailyNote_CharacterWeapon" xml:space="preserve"><value>Karakter / Senjata</value></data>
+  <data name="DailyNote_RecentActivities" xml:space="preserve"><value>Aktivitas Terbaru</value></data>
+  <data name="DailyNote_ActivityOverview" xml:space="preserve"><value>Ringkasan Aktivitas</value></data>
+  <data name="DailyNote_ActivityDesc" xml:space="preserve"><value>Lihat event saat ini dan waktu tersisa sekilas.</value></data>
+  <data name="GenshinData_Title" xml:space="preserve"><value>Jurnal Perjalanan - Laporan Keuangan Teyvat</value></data>
+  <data name="GenshinData_TravelJournal" xml:space="preserve"><value>Jurnal Perjalanan</value></data>
+  <data name="GenshinData_DataUpdated" xml:space="preserve"><value>Data diperbarui: </value></data>
+  <data name="GenshinData_TodayEarnings" xml:space="preserve"><value>Pendapatan Hari Ini</value></data>
+  <data name="GenshinData_Primogems" xml:space="preserve"><value>Primogem</value></data>
+  <data name="GenshinData_Mora" xml:space="preserve"><value>Mora</value></data>
+  <data name="GenshinData_MonthTotal" xml:space="preserve"><value>Total Bulanan</value></data>
+  <data name="GenshinData_PrimogemsEarned" xml:space="preserve"><value>Primogem Diperoleh</value></data>
+  <data name="GenshinData_Mom" xml:space="preserve"><value>MoM </value></data>
+  <data name="GenshinData_LastMonth" xml:space="preserve"><value>(Bulan lalu </value></data>
+  <data name="GenshinData_MoraEarned" xml:space="preserve"><value>Mora Diperoleh</value></data>
+  <data name="GenshinData_DataNote" xml:space="preserve"><value>• Data harian biasanya diperbarui keesokan paginya&#x0a;• Tingkat pendapatan dihitung berdasarkan efisiensi perolehan primogem</value></data>
+  <data name="GenshinData_MonthlySourceAnalysis" xml:space="preserve"><value>Analisis Sumber Primogem Bulanan</value></data>
+  <data name="GenshinData_Total" xml:space="preserve"><value>Total</value></data>
+  <data name="DataPage_SearchRole" xml:space="preserve"><value>Cari karakter...</value></data>
+  <data name="DataPage_AllRoles" xml:space="preserve"><value>Semua Karakter</value></data>
+  <data name="DataPage_Only5Star" xml:space="preserve"><value>5★ Saja</value></data>
+  <data name="DataPage_Only4Star" xml:space="preserve"><value>4★ Saja</value></data>
+  <data name="DataPage_StarUnit" xml:space="preserve"><value>★</value></data>
+  <data name="DataPage_Talents" xml:space="preserve"><value>Bakat</value></data>
+  <data name="DataPage_ConstellationDist" xml:space="preserve"><value>Konstelasi (C0/C1/C2)</value></data>
+  <data name="DataPage_AvgDmg" xml:space="preserve"><value>DMG Rata-rata</value></data>
+  <data name="DataPage_TopWeapons" xml:space="preserve"><value>Senjata Teratas</value></data>
+  <data name="DataPage_TopArtifacts" xml:space="preserve"><value>Artefak Teratas</value></data>
+  <data name="DataPage_AvgInterval" xml:space="preserve"><value>Interval Rata-rata:</value></data>
+  <data name="DataPage_MinInterval" xml:space="preserve"><value>Interval Min:</value></data>
+  <data name="DataPage_HistoryRerun" xml:space="preserve"><value>Riwayat:</value></data>
+  <data name="DataPage_LoadingTimeline" xml:space="preserve"><value>Memuat data timeline, harap tunggu...</value></data>
+  <data name="DataPage_UsageRate" xml:space="preserve"><value>Tingkat Penggunaan</value></data>
+  <data name="DataPage_SpeedrunTime" xml:space="preserve"><value>Waktu Speedrun</value></data>
+  <data name="DataPage_OwnRate" xml:space="preserve"><value>Tingkat Kepemilikan</value></data>
+  <data name="DataPage_AvgConstellation" xml:space="preserve"><value>Konstelasi Rata-rata</value></data>
+  <data name="DataPage_AvgTime" xml:space="preserve"><value>Waktu Rata-rata</value></data>
+  <data name="DataPage_ClickToView" xml:space="preserve"><value>Klik untuk memperbesar</value></data>
+  <data name="DataPage_5Star" xml:space="preserve"><value>5★</value></data>
+  <data name="DataPage_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="DataPage_RoleData" xml:space="preserve"><value>Data Peran</value></data>
+  <data name="DataPage_AbyssData" xml:space="preserve"><value>Abyss</value></data>
+  <data name="DataPage_SpiralAbyss" xml:space="preserve"><value>Spiral Abyss</value></data>
+  <data name="DataPage_WishData" xml:space="preserve"><value>Data Wish</value></data>
+  <data name="DataPage_RerunTimer" xml:space="preserve"><value>Timer Rerun</value></data>
+  <data name="DataPage_Timeline" xml:space="preserve"><value>Timeline</value></data>
+  <data name="DataPage_DataProvidedBy" xml:space="preserve"><value>Data karakter oleh Teyvat Assistant. Timeline oleh Paimon.moe.</value></data>
+  <data name="HDR_SaveAndApply" xml:space="preserve"><value>Simpan &amp; Terapkan</value></data>
+  <data name="HDR_BrightnessConfig" xml:space="preserve"><value>Konfigurasi Kecerahan HDR</value></data>
+  <data name="HDR_NotSupported" xml:space="preserve"><value>HDR Tidak Didukung</value></data>
+  <data name="HDR_NotSupportedMsg" xml:space="preserve"><value>Monitor saat ini melaporkan bahwa HDR tidak didukung.</value></data>
+  <data name="HDR_NotEnabled" xml:space="preserve"><value>HDR Tidak Aktif</value></data>
+  <data name="HDR_NotEnabledMsg" xml:space="preserve"><value>Mode HDR Windows tidak aktif; penyesuaian otomatis mungkin tidak akurat.</value></data>
+  <data name="HDR_DisplayInfo" xml:space="preserve"><value>Informasi Tampilan</value></data>
+  <data name="HDR_SwitchSetting" xml:space="preserve"><value>Pengaturan Saklar HDR (Paksa terapkan setiap peluncuran)</value></data>
+  <data name="HDR_OffContent" xml:space="preserve"><value>Nonaktifkan HDR (Nilai registry 0)</value></data>
+  <data name="HDR_OnContent" xml:space="preserve"><value>Aktifkan HDR (Nilai registry 1)</value></data>
+  <data name="HDR_RegistryNote" xml:space="preserve"><value>Catatan: Menyimpan akan segera mengubah registry, dan pengaturan ini akan diterapkan ulang secara otomatis saat game diluncurkan berikutnya.</value></data>
+  <data name="HDR_MaxLuminance" xml:space="preserve"><value>Luminositas Maks</value></data>
+  <data name="HDR_SceneLuminance" xml:space="preserve"><value>Paper White</value></data>
+  <data name="HDR_UILuminance" xml:space="preserve"><value>UI White</value></data>
+  <data name="HDR_ResetDefault" xml:space="preserve"><value>Reset Default</value></data>
+  <data name="HDR_AutoAdjust" xml:space="preserve"><value>Sesuaikan Otomatis</value></data>
+  <data name="HDR_AutoAdjustTooltip" xml:space="preserve"><value>Hitung otomatis berdasarkan data tampilan</value></data>
+  <data name="InventoryWindow_Title" xml:space="preserve"><value>Inventori &amp; Perencanaan Target</value></data>
+  <data name="InventoryWindow_ArchiveTitle" xml:space="preserve"><value>Arsip Inventori</value></data>
+  <data name="InventoryWindow_SyncStatus" xml:space="preserve"><value>Status sinkronisasi saat ini</value></data>
+  <data name="InventoryWindow_RefreshData" xml:space="preserve"><value>Perbarui Data</value></data>
+  <data name="InventoryWindow_MyBag" xml:space="preserve"><value>Tas Saya</value></data>
+  <data name="InventoryWindow_InventoryOverview" xml:space="preserve"><value>Ringkasan Inventori</value></data>
+  <data name="InventoryWindow_OverviewDesc" xml:space="preserve"><value>Lihat jumlah inventori saat ini dan cepat identifikasi item yang mencapai target melalui lencana.</value></data>
+  <data name="InventoryWindow_GoalCheckHint" xml:space="preserve"><value>Tanda centang ditampilkan saat target terpenuhi</value></data>
+  <data name="InventoryWindow_Complete" xml:space="preserve"><value>Selesai</value></data>
+  <data name="InventoryWindow_GoalSetting" xml:space="preserve"><value>Pengaturan Target</value></data>
+  <data name="InventoryWindow_GoalPlanning" xml:space="preserve"><value>Perencanaan Target</value></data>
+  <data name="InventoryWindow_GoalDesc" xml:space="preserve"><value>Atur jumlah target untuk material umum; halaman inventori akan menampilkan status penyelesaian.</value></data>
+  <data name="InventoryWindow_ItemName" xml:space="preserve"><value>Nama Item</value></data>
+  <data name="InventoryWindow_TargetCount" xml:space="preserve"><value>Jumlah Target</value></data>
+  <data name="InventoryWindow_GoalMetHint" xml:space="preserve"><value>Setelah target tercapai, kartu item akan menampilkan lencana selesai.</value></data>
+  <data name="AchievementWindow_Title" xml:space="preserve"><value>Manajer Achievement</value></data>
+  <data name="AchievementWindow_Archive" xml:space="preserve"><value>Arsip Achievement</value></data>
+  <data name="AchievementWindow_ViewGuide" xml:space="preserve"><value>Lihat Panduan</value></data>
+  <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve"><value>Cari panduan achievement ini di MiYouShe</value></data>
+  <data name="AchievementWindow_SwitchView" xml:space="preserve"><value>Ganti Tampilan</value></data>
+  <data name="AchievementWindow_PrimogemTooltip" xml:space="preserve"><value>Primogem: Diperoleh / Total</value></data>
+  <data name="AchievementWindow_ProgressTooltip" xml:space="preserve"><value>Progres Achievement</value></data>
+  <data name="AchievementWindow_SearchPlaceholder" xml:space="preserve"><value>Cari nama achievement, deskripsi...</value></data>
+  <data name="AchievementWindow_Version" xml:space="preserve"><value>Versi</value></data>
+  <data name="AchievementWindow_HiddenComplete" xml:space="preserve"><value>Sembunyikan Selesai</value></data>
+  <data name="AchievementWindow_ShowAll" xml:space="preserve"><value>Tampilkan Semua</value></data>
+  <data name="AchievementWindow_UIAFImport" xml:space="preserve"><value>Impor UIAF</value></data>
+  <data name="AchievementWindow_UIAFExport" xml:space="preserve"><value>Ekspor UIAF</value></data>
+  <data name="AchievementWindow_ImportRecords" xml:space="preserve"><value>Impor Catatan</value></data>
+  <data name="AchievementWindow_ManualSave" xml:space="preserve"><value>Simpan Manual</value></data>
+  <data name="AchievementWindow_CurrentProfile" xml:space="preserve"><value>Profil Saat Ini</value></data>
+  <data name="AchievementWindow_ManageArchive" xml:space="preserve"><value>Ganti atau buat arsip</value></data>
+  <data name="AchievementWindow_ArchiveManagement" xml:space="preserve"><value>Manajemen Arsip</value></data>
+  <data name="AchievementWindow_UpdateData" xml:space="preserve"><value>Perbarui Data</value></data>
+  <data name="AchievementWindow_Progress" xml:space="preserve"><value>Progres: </value></data>
+  <data name="AgreementPage_Title" xml:space="preserve"><value>Perjanjian Pengguna</value></data>
+  <data name="AgreementPage_Welcome" xml:space="preserve"><value>Selamat datang di FufuLauncher! Harap baca perjanjian berikut dengan saksama.</value></data>
+  <data name="AgreementPage_AgreeCheck" xml:space="preserve"><value>Saya telah membaca dan menyetujui Perjanjian Pengguna</value></data>
+  <data name="AgreementPage_ScrollHint" xml:space="preserve"><value>Harap gulir untuk membaca seluruh perjanjian sebelum menyetujui</value></data>
+  <data name="AgreementPage_IconCheckHint" xml:space="preserve"><value>Untuk memastikan kualitas tampilan, harap konfirmasi ikon di bawah ini ditampilkan dengan benar</value></data>
+  <data name="AgreementPage_Settings" xml:space="preserve"><value>Pengaturan</value></data>
+  <data name="AgreementPage_Home" xml:space="preserve"><value>Beranda</value></data>
+  <data name="AgreementPage_Files" xml:space="preserve"><value>File</value></data>
+  <data name="AgreementPage_CannotDisplay" xml:space="preserve"><value>Tidak Dapat Ditampilkan</value></data>
+  <data name="AgreementPage_DisplayNormal" xml:space="preserve"><value>Tampilan Normal</value></data>
+  <data name="AgreementPage_DataStorage" xml:space="preserve"><value>Lokasi Penyimpanan Data</value></data>
+  <data name="AgreementPage_DataDirDesc" xml:space="preserve"><value>Anda dapat menyesuaikan direktori penyimpanan untuk data dan cache, atau mempertahankan pengaturan default.</value></data>
+  <data name="AgreementPage_UserDataDir" xml:space="preserve"><value>Direktori Data Pengguna</value></data>
+  <data name="AgreementPage_Change" xml:space="preserve"><value>Ubah</value></data>
+  <data name="AgreementPage_CacheDir" xml:space="preserve"><value>Direktori Cache</value></data>
+  <data name="AgreementPage_ConfirmAndComplete" xml:space="preserve"><value>Konfirmasi &amp; Selesai</value></data>
+  <data name="AgreementPage_Next" xml:space="preserve"><value>Selanjutnya</value></data>
+  <data name="PlayerInfo_Title" xml:space="preserve"><value>Pencarian Info Karakter</value></data>
+  <data name="PlayerInfo_SearchUid" xml:space="preserve"><value>Masukkan UID untuk mencari...</value></data>
+  <data name="PlayerInfo_Query" xml:space="preserve"><value>Cari</value></data>
+  <data name="PlayerInfo_RefreshMyData" xml:space="preserve"><value>Segarkan Data Saya</value></data>
+  <data name="PlayerInfo_RoleList" xml:space="preserve"><value>Daftar Karakter</value></data>
+  <data name="PlayerInfo_SelectRoleHint" xml:space="preserve"><value>Pilih karakter di sebelah kiri untuk melihat detail</value></data>
+  <data name="PlayerInfo_BasicStats" xml:space="preserve"><value>Stat Dasar</value></data>
+  <data name="PlayerInfo_CoreStats" xml:space="preserve"><value>Stat Inti</value></data>
+  <data name="PlayerInfo_Hp" xml:space="preserve"><value>Max HP</value></data>
+  <data name="PlayerInfo_Attack" xml:space="preserve"><value>ATK</value></data>
+  <data name="PlayerInfo_Defense" xml:space="preserve"><value>DEF</value></data>
+  <data name="PlayerInfo_ElementalMastery" xml:space="preserve"><value>Elemental Mastery</value></data>
+  <data name="PlayerInfo_AdvancedStats" xml:space="preserve"><value>Stat Lanjutan</value></data>
+  <data name="PlayerInfo_CritRate" xml:space="preserve"><value>Crit Rate</value></data>
+  <data name="PlayerInfo_CritDmg" xml:space="preserve"><value>Crit DMG</value></data>
+  <data name="PlayerInfo_Recharge" xml:space="preserve"><value>Energy Recharge</value></data>
+  <data name="PlayerInfo_FireDmg" xml:space="preserve"><value>Pyro DMG</value></data>
+  <data name="PlayerInfo_WaterDmg" xml:space="preserve"><value>Hydro DMG</value></data>
+  <data name="PlayerInfo_PhysicalDmg" xml:space="preserve"><value>Physical DMG</value></data>
+  <data name="PlayerInfo_ArtifactDetails" xml:space="preserve"><value>Detail Artefak</value></data>
+  <data name="PlayerInfo_ViewSource" xml:space="preserve"><value>Lihat Sumber</value></data>
+  <data name="PlayerInfo_WeaponAndSkills" xml:space="preserve"><value>Senjata &amp; Skill</value></data>
+  <data name="PlayerInfo_Level" xml:space="preserve"><value>Lv. </value></data>
+  <data name="PlayerInfo_SkillLevels" xml:space="preserve"><value>Level Skill</value></data>
+  <data name="PlayerInfo_NormalAttack" xml:space="preserve"><value>Normal Attack</value></data>
+  <data name="PlayerInfo_ElementalSkill" xml:space="preserve"><value>Elemental Skill</value></data>
+  <data name="PlayerInfo_ElementalBurst" xml:space="preserve"><value>Elemental Burst</value></data>
+  <data name="PlayerInfo_ViewTeamRecommend" xml:space="preserve"><value>Lihat Rekomendasi Tim</value></data>
+  <data name="GachaAnalysis_Title" xml:space="preserve"><value>Analisis Catatan Gacha</value></data>
+  <data name="GachaAnalysis_Pulls" xml:space="preserve"><value> Pull</value></data>
+  <data name="GachaAnalysis_NoRecords" xml:space="preserve"><value>Tidak Ada Catatan</value></data>
+  <data name="GachaAnalysis_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="GachaAnalysis_TotalPulls" xml:space="preserve"><value>Total Pull</value></data>
+  <data name="GachaAnalysis_PrimogemsSpent" xml:space="preserve"><value>Primogem Dihabiskan</value></data>
+  <data name="GachaAnalysis_Show4Star" xml:space="preserve"><value>Tampilkan Catatan 4★</value></data>
+  <data name="GachaAnalysis_Show4StarShort" xml:space="preserve"><value>Tampilkan 4★</value></data>
+  <data name="GachaAnalysis_Total" xml:space="preserve"><value>Total: </value></data>
+  <data name="GachaAnalysis_Pity5Star" xml:space="preserve"><value>Pity 5★: </value></data>
+  <data name="GachaAnalysis_Pity4Star" xml:space="preserve"><value>Pity 4★: </value></data>
+  <data name="GachaAnalysis_Pity5StarShort" xml:space="preserve"><value>Pity 5★ </value></data>
+  <data name="GachaAnalysis_Pity4StarShort" xml:space="preserve"><value>Pity 4★ </value></data>
+  <data name="GachaAnalysis_CharacterEvent" xml:space="preserve"><value>Event Karakter</value></data>
+  <data name="GachaAnalysis_WeaponEvent" xml:space="preserve"><value>Event Senjata</value></data>
+  <data name="GachaAnalysis_ChronicledWish" xml:space="preserve"><value>Chronicled Wish</value></data>
+  <data name="GachaAnalysis_StandardWish" xml:space="preserve"><value>Standard Wish</value></data>
+  <data name="GachaAnalysis_WishOverview" xml:space="preserve"><value>Ringkasan Wish</value></data>
+  <data name="GachaAnalysis_WishAnalysis" xml:space="preserve"><value>Analisis Wish</value></data>
+  <data name="GachaAnalysis_GetRecords" xml:space="preserve"><value>Dapatkan Catatan Gacha</value></data>
+  <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve"><value>Dapatkan via Akun MiYouShe</value></data>
+  <data name="GachaAnalysis_GetViaUrl" xml:space="preserve"><value>Dapatkan via URL</value></data>
+  <data name="GachaAnalysis_ImportUigf" xml:space="preserve"><value>Impor File UIGF</value></data>
+  <data name="GachaAnalysis_UpdateData" xml:space="preserve"><value>Perbarui Data</value></data>
+  <data name="GachaAnalysis_About" xml:space="preserve"><value>Tentang</value></data>
+  <data name="GachaAnalysis_ImageLibrary" xml:space="preserve"><value>Perpustakaan Sumber Daya Gambar</value></data>
+  <data name="GachaAnalysis_ListView" xml:space="preserve"><value>Tampilan Daftar</value></data>
+  <data name="GachaAnalysis_CardView" xml:space="preserve"><value>Tampilan Kartu</value></data>
+  <data name="GachaAnalysis_ExportUigf" xml:space="preserve"><value>Ekspor UIGF</value></data>
+  <data name="GachaAnalysis_RefreshMetadata" xml:space="preserve"><value>Segarkan Metadata</value></data>
+  <data name="GachaAnalysis_DeleteRecords" xml:space="preserve"><value>Hapus Catatan</value></data>
+  <data name="GachaAnalysis_PullsUnit" xml:space="preserve"><value> Pull</value></data>
+  <data name="GachaAnalysis_ImportHint" xml:space="preserve"><value>Pilih metode untuk mengimpor catatan wish Anda dan mulai menganalisis data gacha Anda</value></data>
+  <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve"><value>Dapatkan catatan langsung melalui&#x0a;akun MiYouShe yang login</value></data>
+  <data name="GachaAnalysis_Recommended" xml:space="preserve"><value>Direkomendasikan</value></data>
+  <data name="GachaAnalysis_UrlDesc" xml:space="preserve"><value>Tempel tautan analisis gacha&#x0a;untuk mengambil catatan dari API</value></data>
+  <data name="GachaAnalysis_UigfDesc" xml:space="preserve"><value>Impor catatan dari file JSON&#x0a;format UIGF standar&#x0a;UIGF v4.x/3.0/2.x</value></data>
+  <data name="GachaAnalysis_IncrementalUpdate" xml:space="preserve"><value>Pembaruan Inkremental (Direkomendasikan)</value></data>
+  <data name="GachaAnalysis_FullUpdate" xml:space="preserve"><value>Pembaruan Penuh</value></data>
+  <data name="GachaAnalysis_Characters" xml:space="preserve"><value>Karakter</value></data>
+  <data name="GachaAnalysis_Weapons" xml:space="preserve"><value>Senjata</value></data>
+  <data name="GachaAnalysis_CachedIconData" xml:space="preserve"><value>Data ikon karakter dan senjata yang di-cache</value></data>
+  <data name="GachaAnalysis_GeneratingAnalysis" xml:space="preserve"><value>Menghasilkan analisis wish...</value></data>
+  <data name="GachaAnalysis_CopyImage" xml:space="preserve"><value>Salin Gambar</value></data>
+  <data name="GachaAnalysis_SaveImage" xml:space="preserve"><value>Simpan Gambar</value></data>
+  <data name="GachaAnalysis_GoldPullStats" xml:space="preserve"><value>Statistik Metode Pull Gold</value></data>
+  <data name="GachaAnalysis_GoldPullStatsDesc" xml:space="preserve"><value>Catatan dari pool yang sama pada waktu yang sama dihitung sebagai satu grup</value></data>
+  <data name="GachaAnalysis_TenPullGoldRate" xml:space="preserve"><value>Tingkat 5★ per 10-Pull</value></data>
+  <data name="GachaAnalysis_GroupsWith5Star" xml:space="preserve"><value> grup dengan 5★</value></data>
+  <data name="GachaAnalysis_SinglePullGoldRate" xml:space="preserve"><value>Tingkat 5★ per Pull Tunggal</value></data>
+  <data name="GachaAnalysis_TimesWith5Star" xml:space="preserve"><value> kali dengan 5★</value></data>
+  <data name="GachaAnalysis_Avg5StarCost" xml:space="preserve"><value>Biaya Rata-rata 5★</value></data>
+  <data name="GachaAnalysis_Approx" xml:space="preserve"><value>Kira-kira </value></data>
+  <data name="GachaAnalysis_PrimogemsUnit" xml:space="preserve"><value> Primogem</value></data>
+  <data name="GachaAnalysis_ActiveMonths" xml:space="preserve"><value>Bulan Aktif</value></data>
+  <data name="GachaAnalysis_MonthlyAvg" xml:space="preserve"><value>Rata-rata Bulanan </value></data>
+  <data name="GachaAnalysis_PeakMonth" xml:space="preserve"><value>Bulan Puncak</value></data>
+  <data name="GachaAnalysis_5StarAvg" xml:space="preserve"><value>Rata-rata 5★</value></data>
+  <data name="GachaAnalysis_AllPools5Star" xml:space="preserve"><value>5★ Semua Pool</value></data>
+  <data name="GachaAnalysis_RarityComposition" xml:space="preserve"><value>Komposisi Rarity</value></data>
+  <data name="GachaAnalysis_Rarity" xml:space="preserve"><value>Rarity</value></data>
+  <data name="GachaAnalysis_Proportion" xml:space="preserve"><value>Proporsi</value></data>
+  <data name="GachaAnalysis_PoolPullDistribution" xml:space="preserve"><value>Distribusi Pull per Pool</value></data>
+  <data name="GachaAnalysis_Pool" xml:space="preserve"><value>Pool</value></data>
+  <data name="GachaAnalysis_Distribution" xml:space="preserve"><value>Distribusi</value></data>
+  <data name="GachaAnalysis_Recent5StarPulls" xml:space="preserve"><value>Jumlah Pull 5★ Terbaru</value></data>
+  <data name="GachaAnalysis_4StarTop10" xml:space="preserve"><value>Top 10 Pull 4★</value></data>
+  <data name="GachaAnalysis_PityInterval" xml:space="preserve"><value>Interval Pity 5★</value></data>
+  <data name="GachaAnalysis_MonthlyTrend" xml:space="preserve"><value>Tren Pull Bulanan</value></data>
+  <data name="GachaAnalysis_MonthlyTrendDesc" xml:space="preserve"><value>Semua pool 1-5★ per bulan</value></data>
+  <data name="WishBannerImage" xml:space="preserve"><value> Gambar Banner Wish</value></data>
+  <data name="HelpPage_SearchResults" xml:space="preserve"><value>Ditemukan {0} hasil, klik untuk membuka</value></data>
+  <data name="HelpPage_NoResults" xml:space="preserve"><value>Tidak ada dokumen yang cocok ditemukan</value></data>
+  <data name="Success" xml:space="preserve"><value>Berhasil</value></data>
+  <data name="Failure" xml:space="preserve"><value>Gagal</value></data>
+  <data name="Settings_Disclaimer" xml:space="preserve"><value>Penyangkalan</value></data>
+  <data name="Settings_ContinueVisit" xml:space="preserve"><value>Lanjutkan</value></data>
+  <data name="Settings_CommunityCheckinNote" xml:space="preserve"><value>Info Check-in Komunitas</value></data>
+  <data name="Settings_CloudCheckinNote" xml:space="preserve"><value>Info Check-in Cloud Game</value></data>
+  <data name="Settings_Notice" xml:space="preserve"><value>Pemberitahuan</value></data>
+  <data name="Settings_SubmitApp" xml:space="preserve"><value>Kirim</value></data>
+  <data name="Settings_NetworkError" xml:space="preserve"><value>Kesalahan Jaringan</value></data>
+  <data name="DownloadWindow_Success" xml:space="preserve"><value>Unduhan Berhasil</value></data>
+  <data name="DownloadWindow_Complete" xml:space="preserve"><value>Selesai</value></data>
+  <data name="DownloadWindow_Cancelled" xml:space="preserve"><value>Tugas Dibatalkan</value></data>
+  <data name="DownloadWindow_Error" xml:space="preserve"><value>Terjadi Kesalahan</value></data>
+  <data name="DownloadWindow_HideDetailLog" xml:space="preserve"><value>Sembunyikan Log Detail</value></data>
+  <data name="DownloadWindow_AllDone" xml:space="preserve"><value>Semua file diunduh, diverifikasi, dan diterapkan.</value></data>
+  <data name="DownloadWindow_Processing" xml:space="preserve"><value>Memproses: {0}/{1} file</value></data>
+  <data name="DownloadWindow_InitTask" xml:space="preserve"><value>Menginisialisasi tugas...</value></data>
+  <data name="CommunityPage_WelcomeTitle" xml:space="preserve"><value>Selamat datang di VanillaBBS, harap baca berikut ini</value></data>
+  <data name="CommunityPage_AuthTitle" xml:space="preserve"><value>Permintaan Otorisasi</value></data>
+  <data name="CommunityPage_Agree" xml:space="preserve"><value>Setuju</value></data>
+  <data name="CommunityPage_Deny" xml:space="preserve"><value>Tolak</value></data>
+  <data name="CommunityPage_Unknown" xml:space="preserve"><value>Tidak Dikenal</value></data>
+  <data name="CommunityPage_DataRequest" xml:space="preserve"><value>Halaman ini meminta akses ke data Anda berikut:</value></data>
+  <data name="CommunityPage_ConsentPrompt" xml:space="preserve"><value>Apakah Anda setuju untuk memberikannya?</value></data>
+  <data name="AboutPage_FetchFailed" xml:space="preserve"><value>Gagal Mengambil</value></data>
+  <data name="AboutPage_LoadingBio" xml:space="preserve"><value>Memuat bio...</value></data>
+  <data name="AboutPage_OpenInBrowser" xml:space="preserve"><value>Buka halaman utama di browser eksternal</value></data>
+  <data name="AboutPage_NoBio" xml:space="preserve"><value>Pengguna ini tidak memiliki bio.</value></data>
+  <data name="AboutPage_ConfirmNav" xml:space="preserve"><value>Konfirmasi Navigasi / Salin</value></data>
+  <data name="AboutPage_GitHubToken" xml:space="preserve"><value>GitHub Token</value></data>
+  <data name="AboutPage_FetchSuccess" xml:space="preserve"><value>Pengambilan berhasil! Skrip unduhan dibuat.</value></data>
+  <data name="AboutPage_EnterToken" xml:space="preserve"><value>Harap masukkan Token Anda!</value></data>
+  <data name="AboutPage_FetchFailedArtifact" xml:space="preserve"><value>Pengambilan gagal (artefak tidak ditemukan)</value></data>
+  <data name="AboutPage_FetchFailedRun" xml:space="preserve"><value>Pengambilan gagal (run berhasil tidak ditemukan)</value></data>
+  <data name="AboutPage_FetchFailedWorkflow" xml:space="preserve"><value>Pengambilan gagal (workflow tidak ditemukan)</value></data>
+  <data name="AboutPage_Exception" xml:space="preserve"><value>Terjadi Exception</value></data>
+  <data name="AboutPage_GitHubTokenPlaceholder" xml:space="preserve"><value>Harap masukkan GitHub Token Anda</value></data>
+  <data name="AboutPage_SelectContact" xml:space="preserve"><value>Pilih Metode Kontak</value></data>
+  <data name="AboutPage_DiscordCopied" xml:space="preserve"><value>Discord ID Tersalin!</value></data>
+  <data name="AboutPage_Loading" xml:space="preserve"><value>Memuat...</value></data>
+  <data name="AchievementWindow_DefaultProfile" xml:space="preserve"><value>Profil Default</value></data>
+  <data name="AchievementWindow_UnnamedProfile" xml:space="preserve"><value>Profil Tanpa Nama</value></data>
+  <data name="AchievementWindow_UnknownCategory" xml:space="preserve"><value>Kategori Tidak Dikenal</value></data>
+  <data name="AchievementWindow_AllVersions" xml:space="preserve"><value>Semua Versi</value></data>
+  <data name="AchievementWindow_CurrentSuffix" xml:space="preserve"><value> (saat ini)</value></data>
+  <data name="AchievementWindow_EnterName" xml:space="preserve"><value>Masukkan nama...</value></data>
+  <data name="AchievementWindow_DbNotFound" xml:space="preserve"><value>File database bawaan tidak ditemukan</value></data>
+  <data name="AchievementWindow_AlreadyLatest" xml:space="preserve"><value>Arsip Anda sudah versi terbaru, tidak perlu pembaruan.</value></data>
+  <data name="AchievementWindow_UpdateDb" xml:space="preserve"><value>Perbarui Database Achievement</value></data>
+  <data name="AchievementWindow_StartUpdate" xml:space="preserve"><value>Mulai Pembaruan</value></data>
+  <data name="AchievementWindow_SaveCurrent" xml:space="preserve"><value>Simpan Profil Saat Ini</value></data>
+  <data name="AchievementWindow_NewProfile" xml:space="preserve"><value>Profil Baru</value></data>
+  <data name="AchievementWindow_DuplicateName" xml:space="preserve"><value>Nama profil ini sudah ada!</value></data>
+  <data name="AchievementWindow_ProfileNotFound" xml:space="preserve"><value>File profil target tidak ditemukan!</value></data>
+  <data name="AchievementWindow_InvalidChars" xml:space="preserve"><value>Nama mengandung karakter tidak valid, silakan coba lagi.</value></data>
+  <data name="AchievementWindow_EmptyContent" xml:space="preserve"><value>File tidak memiliki konten.</value></data>
+  <data name="AchievementWindow_NoBackup" xml:space="preserve"><value>Tidak ada profil cadangan</value></data>
+  <data name="AchievementWindow_ConfirmDeleteMsg" xml:space="preserve"><value>Apakah Anda yakin ingin menghapus permanen?</value></data>
+  <data name="AchievementWindow_NewBlank" xml:space="preserve"><value>Profil Kosong Baru</value></data>
+  <data name="AchievementWindow_ExistingProfiles" xml:space="preserve"><value>Profil yang Ada:</value></data>
+  <data name="AchievementWindow_ImportData" xml:space="preserve"><value>Impor Data</value></data>
+  <data name="AchievementWindow_ImportFailed" xml:space="preserve"><value>Impor Gagal</value></data>
+  <data name="AchievementWindow_ExportSuccess" xml:space="preserve"><value>Ekspor Berhasil</value></data>
+  <data name="AchievementWindow_ExportFailed" xml:space="preserve"><value>Ekspor Gagal</value></data>
+  <data name="AchievementWindow_InvalidName" xml:space="preserve"><value>Nama Tidak Valid</value></data>
+  <data name="AchievementWindow_ReadFailed" xml:space="preserve"><value>Gagal Membaca</value></data>
+  <data name="AchievementWindow_EmptyFile" xml:space="preserve"><value>File Kosong</value></data>
+  <data name="AchievementWindow_SwitchFailed" xml:space="preserve"><value>Pergantian Gagal</value></data>
+  <data name="AchievementWindow_SaveSuccess" xml:space="preserve"><value>Penyimpanan Berhasil</value></data>
+  <data name="AchievementWindow_ConfirmDelete" xml:space="preserve"><value>Konfirmasi Hapus</value></data>
+  <data name="AchievementWindow_Importing" xml:space="preserve"><value>Mengimpor Achievement</value></data>
+  <data name="AchievementWindow_TotalAchievements" xml:space="preserve"><value>{0} achievement total</value></data>
+  <data name="AchievementWindow_DataLoaded" xml:space="preserve"><value>Data dimuat</value></data>
+  <data name="AchievementWindow_Saving" xml:space="preserve"><value>Menyimpan...</value></data>
+  <data name="AchievementWindow_SavedToDocs" xml:space="preserve"><value>Data disimpan ke folder Documents</value></data>
+  <data name="AchievementWindow_ReadingData" xml:space="preserve"><value>Membaca data...</value></data>
+  <data name="AchievementWindow_SwitchingProfile" xml:space="preserve"><value>Mengganti profil...</value></data>
+  <data name="AchievementWindow_PreparingRead" xml:space="preserve"><value>Mempersiapkan pembacaan data...</value></data>
+  <data name="AchievementWindow_ApplyingChanges" xml:space="preserve"><value>Menerapkan perubahan</value></data>
+  <data name="AchievementWindow_RefreshingUI" xml:space="preserve"><value>Menyegarkan antarmuka...</value></data>
+  <data name="AchievementWindow_ReadingUIAF" xml:space="preserve"><value>Membaca data UIAF...</value></data>
+  <data name="AchievementWindow_GeneratingUIAF" xml:space="preserve"><value>Menghasilkan data UIAF...</value></data>
+  <data name="AchievementWindow_UIAFExportDone" xml:space="preserve"><value>Ekspor UIAF selesai</value></data>
+  <data name="AchievementWindow_SaveException" xml:space="preserve"><value>Exception penyimpanan</value></data>
+  <data name="AchievementWindow_CannotOpenBrowser" xml:space="preserve"><value>Tidak dapat membuka browser</value></data>
+  <data name="LaunchErr_UnknownError" xml:space="preserve"><value>Kesalahan tidak dikenal</value></data>
+  <data name="LaunchErr_InvalidGamePath" xml:space="preserve"><value>Path game tidak valid atau tidak ada</value></data>
+  <data name="LaunchErr_ExeNotFound" xml:space="preserve"><value>File executable game tidak ditemukan. Harap periksa pengaturan path Anda.
+File yang dicari:
+{0}</value></data>
+  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>Beberapa executable terdeteksi di direktori game. Launcher tidak dapat menentukan mana yang akan dijalankan. Harap bersihkan file klien tambahan atau sesuaikan nama executable di Pengaturan.</value></data>
+  <data name="LaunchErr_CannotLoadConfig" xml:space="preserve"><value>Tidak dapat memuat file konfigurasi game</value></data>
+  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>Waktu peluncuran habis, silakan coba lagi</value></data>
+  <data name="LaunchErr_FatalError" xml:space="preserve"><value>Terjadi kesalahan kritis saat peluncuran: {0}</value></data>
+  <data name="LaunchErr_PluginDamagedTitle" xml:space="preserve"><value>Plugin mungkin rusak</value></data>
+  <data name="LaunchErr_PluginDamagedMsg" xml:space="preserve"><value>File plugin rusak atau diblokir oleh antivirus. Fitur mungkin tidak berfungsi dengan baik. Harap instal ulang plugin.</value></data>
+  <data name="Status_Success" xml:space="preserve"><value>Berhasil</value></data>
+  <data name="Status_Failure" xml:space="preserve"><value>Gagal</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>Dilewati</value></data>
+  <data name="Status_Completed" xml:space="preserve"><value>Selesai</value></data>
+  <data name="Status_Unknown" xml:space="preserve"><value>Tidak Dikenal</value></data>
+  <data name="Status_None" xml:space="preserve"><value>Tidak Ada</value></data>
+  <data name="Status_Exception" xml:space="preserve"><value>Exception</value></data>
+  <data name="Status_RequestFailed" xml:space="preserve"><value>Permintaan gagal</value></data>
+  <data name="Status_UnknownError" xml:space="preserve"><value>Kesalahan tidak dikenal</value></data>
+  <data name="CheckinCloud_Title" xml:space="preserve"><value>Check-in Cloud Genshin</value></data>
+  <data name="CheckinCloud_MissingCredential" xml:space="preserve"><value>Kredensial cloud game tidak ada (x-rpc-combo_token)</value></data>
+  <data name="CheckinCloud_TokenExpired" xml:space="preserve"><value>Token kedaluwarsa atau akun dibatasi</value></data>
+  <data name="CheckinCloud_GainedTime" xml:space="preserve"><value>Mendapatkan {0} menit waktu gratis</value></data>
+  <data name="CheckinCloud_CurrentFreeTime" xml:space="preserve"><value>Waktu gratis saat ini: {0}</value></data>
+  <data name="CheckinCloud_AlreadyCheckedIn" xml:space="preserve"><value>Sudah check-in hari ini atau batas tercapai</value></data>
+  <data name="CheckinCloud_PlayCardStatus" xml:space="preserve"><value>Status kartu main: {0}, Koin Miyou: {1}</value></data>
+  <data name="CheckinCloud_Exception" xml:space="preserve"><value>Exception: {0}</value></data>
+  <data name="CheckinCloud_HoursMinutes" xml:space="preserve"><value>{0}j{1}m</value></data>
+  <data name="CheckinCloud_HoursOnly" xml:space="preserve"><value>{0}j</value></data>
+  <data name="CheckinCloud_MinutesOnly" xml:space="preserve"><value>{0}m</value></data>
+  <data name="CheckinCommunity_Title" xml:space="preserve"><value>Check-in Komunitas</value></data>
+  <data name="CheckinCommunity_MissingToken" xml:space="preserve"><value>Stoken atau mid tidak ada</value></data>
+  <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve"><value>Gagal mendapatkan status tugas. Harap periksa cookie Anda.</value></data>
+  <data name="CheckinCommunity_TodayDone" xml:space="preserve"><value>Selesai hari ini ({0} Koin Miyou)</value></data>
+  <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve"><value>Check-in komunitas sudah selesai, dilewati</value></data>
+  <data name="CheckinCommunity_GetPostsFailed" xml:space="preserve"><value>Gagal mendapatkan daftar postingan. Tidak dapat melakukan baca/suka/bagikan.</value></data>
+  <data name="CheckinCommunity_ReadDoneSkipped" xml:space="preserve"><value>Baca sudah selesai, dilewati</value></data>
+  <data name="CheckinCommunity_LikeDoneSkipped" xml:space="preserve"><value>Suka sudah selesai, dilewati</value></data>
+  <data name="CheckinCommunity_ShareDoneSkipped" xml:space="preserve"><value>Bagikan sudah selesai, dilewati</value></data>
+  <data name="CheckinCommunity_GainedCoins" xml:space="preserve"><value>Mendapatkan {0} Koin Miyou (saat ini {1})</value></data>
+  <data name="CheckinCommunity_CurrentCoins" xml:space="preserve"><value>{0} Koin Miyou</value></data>
+  <data name="CheckinCommunity_GenshinSignRequestFailed" xml:space="preserve"><value>Check-in Komunitas Genshin: permintaan gagal</value></data>
+  <data name="CheckinCommunity_GenshinSignSuccess" xml:space="preserve"><value>Check-in Komunitas Genshin berhasil</value></data>
+  <data name="CheckinCommunity_GenshinSignCaptcha" xml:space="preserve"><value>Check-in Komunitas Genshin: CAPTCHA terpicu, dilewati</value></data>
+  <data name="CheckinCommunity_GenshinSignFailed" xml:space="preserve"><value>Check-in Komunitas Genshin gagal: {0}</value></data>
+  <data name="CheckinCommunity_GenshinSignException" xml:space="preserve"><value>Exception Check-in Komunitas Genshin: {0}</value></data>
+  <data name="CheckinCommunity_ReadSuccess" xml:space="preserve"><value>Baca berhasil: {0}</value></data>
+  <data name="CheckinCommunity_ReadFailed" xml:space="preserve"><value>Baca gagal: {0}</value></data>
+  <data name="CheckinCommunity_ReadException" xml:space="preserve"><value>Exception baca: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeSuccess" xml:space="preserve"><value>Suka berhasil: {0}</value></data>
+  <data name="CheckinCommunity_LikeFailed" xml:space="preserve"><value>Suka gagal: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeException" xml:space="preserve"><value>Exception suka: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareSuccess" xml:space="preserve"><value>Bagikan berhasil: {0}</value></data>
+  <data name="CheckinCommunity_ShareFailed" xml:space="preserve"><value>Bagikan gagal: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareException" xml:space="preserve"><value>Exception bagikan: {0} ({1})</value></data>
+  <data name="CheckinCommunity_Exception" xml:space="preserve"><value>Exception: {0}</value></data>
+  <data name="Checkin_NoBoundAccount" xml:space="preserve"><value>Tidak ada akun terikat terdeteksi</value></data>
+  <data name="Checkin_Reason" xml:space="preserve"><value>, alasan: {0}</value></data>
+  <data name="Checkin_Detail" xml:space="preserve"><value>, detail: {0}</value></data>
+  <data name="Checkin_GetInfoFailed" xml:space="preserve"><value>Gagal mendapatkan info check-in</value></data>
+  <data name="Checkin_FirstBindWarning" xml:space="preserve"><value>pertama kali diikat. Harap check-in manual sekali terlebih dahulu.</value></data>
+  <data name="Checkin_AlreadySignedToday" xml:space="preserve"><value>Sudah check-in hari ini</value></data>
+  <data name="Checkin_TodayReward" xml:space="preserve"><value>Hadiah hari ini adalah {0}</value></data>
+  <data name="Checkin_SignRequestFailed" xml:space="preserve"><value>Permintaan check-in ini gagal</value></data>
+  <data name="Checkin_SignRateLimited" xml:space="preserve"><value>Check-in gagal, HTTP 429 rate limited</value></data>
+  <data name="Checkin_ParseResultFailed" xml:space="preserve"><value>Gagal mengurai hasil check-in</value></data>
+  <data name="Checkin_SignSuccess" xml:space="preserve"><value>Check-in berhasil</value></data>
+  <data name="Checkin_SignFailedApi" xml:space="preserve"><value>Check-in gagal, API mengatakan: {0}</value></data>
+  <data name="Checkin_SignedDays" xml:space="preserve"><value>Sudah check-in selama {0} hari</value></data>
+  <data name="Checkin_RewardIs" xml:space="preserve"><value>Hadiah adalah {0}</value></data>
+  <data name="Checkin_NoAccountToSign" xml:space="preserve"><value>Tidak ada akun tersedia untuk check-in</value></data>
+  <data name="Checkin_ParseAccountListFailed" xml:space="preserve"><value>Gagal mengurai daftar akun</value></data>
+  <data name="Checkin_GetAccountListException" xml:space="preserve"><value>Exception mendapatkan daftar akun: {0}</value></data>
+  <data name="Checkin_ParseSignStatusFailed" xml:space="preserve"><value>Gagal mengurai status check-in</value></data>
+  <data name="Checkin_RequestSignStatusException" xml:space="preserve"><value>Exception permintaan status check-in: {0}</value></data>
+  <data name="Checkin_ParseResponseDataFailed" xml:space="preserve"><value>Gagal mengurai data respons daftar akun</value></data>
+  <data name="Checkin_NetworkRequestException" xml:space="preserve"><value>Exception permintaan jaringan: {0}</value></data>
+  <data name="Checkin_GetCalendarException" xml:space="preserve"><value>Exception mendapatkan kalender hadiah: {0}</value></data>
+  <data name="Checkin_AllAccountsSuccess" xml:space="preserve"><value>Check-in selesai. Semua {0} akun berhasil.</value></data>
+  <data name="Checkin_PartialSuccess" xml:space="preserve"><value>Check-in selesai. {0} berhasil, {1} gagal.</value></data>
+  <data name="Checkin_AllFailed" xml:space="preserve"><value>Check-in gagal. {0} akun mengalami kesalahan.</value></data>
+  <data name="Checkin_AllDisabled" xml:space="preserve"><value>Semua akun dinonaktifkan</value></data>
+  <data name="Checkin_AccountNotFound" xml:space="preserve"><value>Akun saat ini tidak ditemukan</value></data>
+  <data name="Checkin_AllDone" xml:space="preserve"><value>Semua selesai</value></data>
+  <data name="Checkin_CountFailed" xml:space="preserve"><value>{0} gagal</value></data>
+  <data name="Checkin_AccountsSuccess" xml:space="preserve"><value>{0} akun berhasil</value></data>
+  <data name="Checkin_AccountsFailed" xml:space="preserve"><value>{0} gagal</value></data>
+  <data name="Checkin_GameCheckin" xml:space="preserve"><value>Check-in Game</value></data>
+  <data name="Checkin_CloudGameCheckin" xml:space="preserve"><value>Check-in Cloud Game</value></data>
+  <data name="Checkin_CommunityCheckin" xml:space="preserve"><value>Check-in Komunitas</value></data>
+  <data name="Checkin_OSAccountSkipped" xml:space="preserve"><value>Akun OS dilewati</value></data>
+  <data name="Checkin_NoCloudCredential" xml:space="preserve"><value>Tidak ada kredensial cloud game yang dikonfigurasi</value></data>
+  <data name="Checkin_NotConfiguredCredential" xml:space="preserve"><value>Kredensial tidak dikonfigurasi</value></data>
+  <data name="Checkin_ConsecutiveDays" xml:space="preserve"><value>{0} hari berturut-turut | Hadiah: {1}</value></data>
+  <data name="Checkin_SuccessFailCount" xml:space="preserve"><value>{0} berhasil, {1} gagal</value></data>
+  <data name="Checkin_GetStatusFailed" xml:space="preserve"><value>Gagal mendapatkan status</value></data>
+  <data name="Checkin_SignedToday" xml:space="preserve"><value>Sudah check-in hari ini</value></data>
+  <data name="Checkin_UnsignedToday" xml:space="preserve"><value>Belum check-in hari ini</value></data>
+  <data name="Checkin_NotEnabled" xml:space="preserve"><value>Fitur check-in tidak diaktifkan</value></data>
+  <data name="Checkin_NotDetected" xml:space="preserve"><value>Tidak ada ikatan terdeteksi</value></data>
+  <data name="Checkin_NotDetectedAccount" xml:space="preserve"><value>Tidak ada akun terdeteksi</value></data>
+  <data name="Checkin_FeatureNotEnabled" xml:space="preserve"><value>Fitur tidak diaktifkan</value></data>
+  <data name="Checkin_EnableInConfig" xml:space="preserve"><value>Atur Enable=true di config.json</value></data>
+  <data name="Checkin_DefaultUser" xml:space="preserve"><value>Pengguna{0}</value></data>
+  <data name="Checkin_GameCheckinProgress" xml:space="preserve"><value>Sedang check-in game...</value></data>
+  <data name="Checkin_OSAccountSkippedCommunity" xml:space="preserve"><value>Akun OS melewati check-in komunitas</value></data>
+  <data name="Checkin_CommunityCheckinProgress" xml:space="preserve"><value>Sedang check-in komunitas...</value></data>
+  <data name="Checkin_CloudGameCheckinProgress" xml:space="preserve"><value>Sedang check-in cloud game...</value></data>
+  <data name="CheckinGame_Exception" xml:space="preserve"><value>Exception: {0}</value></data>
+  <data name="Token_InvalidCookie" xml:space="preserve"><value>Tidak ada cookie valid yang diberikan</value></data>
+  <data name="Token_MissingStokenOrMid" xml:space="preserve"><value>Stoken atau mid tidak ada dari cookie lokal, tidak dapat menyegarkan</value></data>
+  <data name="Token_RefreshTitle" xml:space="preserve"><value>Penyegaran Cookie</value></data>
+  <data name="Token_ManualRefreshProgress" xml:space="preserve"><value>Melakukan penyegaran manual...</value></data>
+  <data name="Token_AutoRefreshProgress" xml:space="preserve"><value>Cookie kedaluwarsa, melakukan penyegaran...</value></data>
+  <data name="Token_WebTicketFailed" xml:space="preserve"><value>Gagal membuat WebTicket</value></data>
+  <data name="Token_QRScanFailed" xml:space="preserve"><value>Permintaan simulasi pemindaian QR gagal</value></data>
+  <data name="Token_ConfirmLoginFailed" xml:space="preserve"><value>Permintaan simulasi konfirmasi login gagal</value></data>
+  <data name="Token_ManualRefreshDone" xml:space="preserve"><value>Penyegaran cookie manual selesai. Kredensial baru aktif.</value></data>
+  <data name="Token_AutoRefreshDone" xml:space="preserve"><value>Penyegaran cookie otomatis selesai. Kredensial baru aktif.</value></data>
+  <data name="Token_GetNewCookieFailed" xml:space="preserve"><value>Gagal mendapatkan cookie baru</value></data>
+  <data name="Token_RefreshFailed" xml:space="preserve"><value>Penyegaran Cookie Gagal</value></data>
+  <data name="Token_RefreshException" xml:space="preserve"><value>Terjadi exception saat penyegaran cookie: {0}</value></data>
+  <data name="RedeemCode_Expired" xml:space="preserve"><value>Kedaluwarsa</value></data>
+  <data name="RedeemCode_ExpiringToday" xml:space="preserve"><value>Kedaluwarsa hari ini</value></data>
+  <data name="RedeemCode_HoursLeft" xml:space="preserve"><value>{0} jam tersisa</value></data>
+  <data name="RedeemCode_DaysLeft" xml:space="preserve"><value>{0} hari tersisa</value></data>
+  <data name="RedeemCode_MoreEvents" xml:space="preserve"><value>...dan {0} event lainnya</value></data>
+  <data name="RedeemCode_NewPublished" xml:space="preserve"><value>Kode Redeem Baru Diterbitkan</value></data>
+  <data name="RedeemCode_NewContent" xml:space="preserve"><value>Event kode redeem baru ditemukan:\n{0}\nHarap redeem dalam game segera!</value></data>
+  <data name="RedeemCode_ExpiringTitle" xml:space="preserve"><value>Kode Redeem Segera Kedaluwarsa</value></data>
+  <data name="RedeemCode_ExpiringContent" xml:space="preserve"><value>Event {0} memiliki kode tersedia:\n{1}\nHarap gunakan dalam game sesegera mungkin. Kode akan kedaluwarsa setelah hari ini!</value></data>
+  <data name="HashCheck_Failed" xml:space="preserve"><value>Verifikasi Gagal</value></data>
+  <data name="HashCheck_FileNotFound" xml:space="preserve"><value>File verifikasi tidak ditemukan. Harap periksa integritas klien.</value></data>
+  <data name="HashCheck_FormatError" xml:space="preserve"><value>Kesalahan Format</value></data>
+  <data name="HashCheck_ComponentModified" xml:space="preserve"><value>Komponen dimodifikasi atau hilang, harap periksa:\nCaptureApp\n</value></data>
+  <data name="HashCheck_NotPassed" xml:space="preserve"><value>Verifikasi Tidak Lulus</value></data>
+  <data name="HashCheck_Exception" xml:space="preserve"><value>Exception Verifikasi</value></data>
+  <data name="HashCheck_ExceptionMsg" xml:space="preserve"><value>Kesalahan saat verifikasi hash: {0}</value></data>
+  <data name="Settings_DirCreateFailed" xml:space="preserve"><value>Pembuatan Direktori Gagal</value></data>
+  <data name="Settings_DirCreateFailedMsg" xml:space="preserve"><value>Tidak dapat membuat direktori data aplikasi. Harap periksa izin: {0}</value></data>
+  <data name="Settings_DbInitFailed" xml:space="preserve"><value>Inisialisasi Database Gagal</value></data>
+  <data name="Settings_DbInitFailedMsg" xml:space="preserve"><value>Tidak dapat membuat atau menginisialisasi database pengaturan: {0}</value></data>
+  <data name="Settings_ConfigDeleteFailed" xml:space="preserve"><value>Penghapusan Konfigurasi Gagal</value></data>
+  <data name="Settings_ConfigDeleteFailedMsg" xml:space="preserve"><value>Tidak dapat menghapus pengaturan dari database: {0}</value></data>
+  <data name="Settings_ConfigReadFailed" xml:space="preserve"><value>Pembacaan Konfigurasi Gagal</value></data>
+  <data name="Settings_ConfigReadFailedMsg" xml:space="preserve"><value>Tidak dapat memuat pengaturan dari database: {0}</value></data>
+  <data name="Settings_ConfigSaveFailed" xml:space="preserve"><value>Penyimpanan Konfigurasi Gagal</value></data>
+  <data name="Settings_ConfigSaveFailedMsg" xml:space="preserve"><value>Tidak dapat menyimpan pengaturan ke database: {0}</value></data>
+  <data name="Diagnostics_Connected" xml:space="preserve"><value>Terhubung</value></data>
+  <data name="Diagnostics_Disconnected" xml:space="preserve"><value>Terputus</value></data>
+  <data name="Diagnostics_Domestic" xml:space="preserve"><value>Domestik</value></data>
+  <data name="Diagnostics_Overseas" xml:space="preserve"><value>Luar Negeri</value></data>
+  <data name="Diagnostics_DomesticSystem" xml:space="preserve"><value>Domestik (Sistem)</value></data>
+  <data name="Diagnostics_OverseasSystem" xml:space="preserve"><value>Luar Negeri (Sistem)</value></data>
+  <data name="Diagnostics_NoNetwork" xml:space="preserve"><value>Tidak Ada Jaringan</value></data>
+  <data name="Diagnostics_UnknownCpu" xml:space="preserve"><value>CPU Tidak Dikenal</value></data>
+  <data name="Diagnostics_UnknownGpu" xml:space="preserve"><value>GPU Tidak Dikenal</value></data>
+  <data name="Diagnostics_ReadFailed" xml:space="preserve"><value>Gagal Membaca</value></data>
+  <data name="Diagnostics_Enabled" xml:space="preserve"><value>Aktif</value></data>
+  <data name="Diagnostics_Disabled" xml:space="preserve"><value>Nonaktif</value></data>
+  <data name="Diagnostics_NotInstalled" xml:space="preserve"><value>Tidak terinstal atau dihapus</value></data>
+  <data name="Diagnostics_CannotDetect" xml:space="preserve"><value>Tidak dapat mendeteksi</value></data>
+  <data name="Diagnostics_PartialError" xml:space="preserve"><value>Terjadi kesalahan saat diagnostik. Beberapa informasi mungkin tidak akurat.</value></data>
+  <data name="Diagnostics_SuggestNoNetwork" xml:space="preserve"><value>Jaringan tidak terhubung. Harap periksa pengaturan jaringan Anda.</value></data>
+  <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve"><value>Saat ini di jaringan domestik. Akses server mungkin lambat.</value></data>
+  <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve"><value>Windows Security Center aktif, yang dapat menyebabkan injeksi plugin gagal. Disarankan untuk menonaktifkannya.</value></data>
+  <data name="Diagnostics_SuggestLowMemory" xml:space="preserve"><value>Memori fisik saat ini {0}GB, di bawah persyaratan minimum 12GB.</value></data>
+  <data name="Diagnostics_SuggestLowDisk" xml:space="preserve"><value>Ruang kosong disk sistem {0}GB, di bawah persyaratan minimum 1GB.</value></data>
+  <data name="Diagnostics_SuggestRefreshRate" xml:space="preserve"><value>Monitor Anda mendukung {0}Hz, tetapi saat ini berjalan pada {1}Hz.</value></data>
+  <data name="Diagnostics_AllNormal" xml:space="preserve"><value>Normal. Lingkungan sistem dan jaringan memenuhi persyaratan.</value></data>
+  <data name="User_DefaultSignature" xml:space="preserve"><value>Pengguna ini malas dan tidak menulis apa pun...</value></data>
+  <data name="User_GenderMale" xml:space="preserve"><value>Pria</value></data>
+  <data name="User_GenderFemale" xml:space="preserve"><value>Wanita</value></data>
+  <data name="User_GenderPrivate" xml:space="preserve"><value>Privat</value></data>
+  <data name="Gacha_Won5050" xml:space="preserve"><value>50/50 Kalah</value></data>
+  <data name="Gacha_Guaranteed" xml:space="preserve"><value>Garansi</value></data>
+  <data name="Gacha_FiftyFifty" xml:space="preserve"><value>50/50</value></data>
+  <data name="Gacha_ZeroPulls" xml:space="preserve"><value>0 Pull</value></data>
+  <data name="Gacha_No5StarPity" xml:space="preserve"><value>Tidak ada pity 5★</value></data>
+  <data name="Gacha_No5StarRecord" xml:space="preserve"><value>Tidak ada catatan 5★</value></data>
+  <data name="Gacha_TotalPulls" xml:space="preserve"><value>Total Pull</value></data>
+  <data name="Gacha_PrimogemEstimate" xml:space="preserve"><value>Estimasi Primogem</value></data>
+  <data name="Gacha_5StarDrop" xml:space="preserve"><value>Drop 5★</value></data>
+  <data name="Gacha_4StarDrop" xml:space="preserve"><value>Drop 4★</value></data>
+  <data name="Gacha_Avg5StarCharCost" xml:space="preserve"><value>Biaya Rata-rata Karakter 5★</value></data>
+  <data name="Gacha_Avg5StarPulls" xml:space="preserve"><value>Pull Rata-rata 5★</value></data>
+  <data name="Gacha_DeepestPity" xml:space="preserve"><value>Pity Terdalam</value></data>
+  <data name="Gacha_Best5Star" xml:space="preserve"><value>5★ Terbaik</value></data>
+  <data name="Gacha_Worst5Star" xml:space="preserve"><value>5★ Terburuk</value></data>
+  <data name="Gacha_ActiveMonths" xml:space="preserve"><value>Bulan Aktif</value></data>
+  <data name="Gacha_NoWishRecord" xml:space="preserve"><value>Tidak ada catatan wish</value></data>
+  <data name="Gacha_PerPull" xml:space="preserve"><value>Pada 160 primogem/pull</value></data>
+  <data name="Gacha_No5StarChar" xml:space="preserve"><value>Tidak ada karakter 5★</value></data>
+  <data name="Gacha_MonthlyAvg0" xml:space="preserve"><value>Rata-rata 0 pull/bulan</value></data>
+  <data name="Gacha_NoRecords" xml:space="preserve"><value>Tidak ada catatan</value></data>
+  <data name="Day_Sunday" xml:space="preserve"><value>Min</value></data>
+  <data name="Day_Monday" xml:space="preserve"><value>Sen</value></data>
+  <data name="Day_Tuesday" xml:space="preserve"><value>Sel</value></data>
+  <data name="Day_Wednesday" xml:space="preserve"><value>Rab</value></data>
+  <data name="Day_Thursday" xml:space="preserve"><value>Kam</value></data>
+  <data name="Day_Friday" xml:space="preserve"><value>Jum</value></data>
+  <data name="Day_Saturday" xml:space="preserve"><value>Sab</value></data>
+  <data name="Element_Pyro" xml:space="preserve"><value>Pyro</value></data>
+  <data name="Element_Anemo" xml:space="preserve"><value>Anemo</value></data>
+  <data name="Element_Geo" xml:space="preserve"><value>Geo</value></data>
+  <data name="Element_Dendro" xml:space="preserve"><value>Dendro</value></data>
+  <data name="Element_Electro" xml:space="preserve"><value>Electro</value></data>
+  <data name="Element_Hydro" xml:space="preserve"><value>Hydro</value></data>
+  <data name="Element_Cryo" xml:space="preserve"><value>Cryo</value></data>
+  <data name="Download_Connecting" xml:space="preserve"><value>Menghubungkan ke server Mihoyo...</value></data>
+  <data name="Download_VoiceOnly" xml:space="preserve"><value>>> Melewati game dasar, hanya mode voice pack</value></data>
+  <data name="Download_FetchingManifest" xml:space="preserve"><value>Mengambil file manifes: {0}...</value></data>
+  <data name="Download_ManifestFailed" xml:space="preserve"><value>Unduhan manifes gagal: {0}</value></data>
+  <data name="Download_TaskStart" xml:space="preserve"><value>Verifikasi/Unduhan dimulai. Total: {0} file, {1}</value></data>
+  <data name="Download_FileUnfixable" xml:space="preserve"><value>File tidak dapat diperbaiki atau pengguna membatalkan: {0}</value></data>
+  <data name="Download_MovingFiles" xml:space="preserve"><value>Verifikasi unduhan selesai, memindahkan file...</value></data>
+  <data name="Download_AllDone" xml:space="preserve"><value>Semua selesai!</value></data>
+  <data name="Download_UserCancelled" xml:space="preserve"><value>Pengguna membatalkan.</value></data>
+  <data name="Download_VerifyFailed" xml:space="preserve"><value>[Verifikasi Gagal] {0} (Server:{1} vs Lokal:{2})</value></data>
+  <data name="Download_FileException" xml:space="preserve"><value>[Exception File] {0}: {1}</value></data>
+  <data name="Download_ManifestMd5Retry" xml:space="preserve"><value>Verifikasi MD5 manifes gagal, mencoba lagi...</value></data>
+  <data name="Download_CannotConnectApi" xml:space="preserve"><value>Tidak dapat terhubung ke API Mihoyo</value></data>
+  <data name="DailyNote_ApiError" xml:space="preserve"><value>API mengembalikan kesalahan, retcode={0}</value></data>
+  <data name="DailyNote_GetFailed" xml:space="preserve"><value>Gagal mendapatkan data catatan harian: {0}</value></data>
+  <data name="DailyNote_InvalidResponse" xml:space="preserve"><value>Gagal mendapatkan data catatan harian: Format respons tidak valid</value></data>
+  <data name="DailyNote_TransformerTime" xml:space="preserve"><value>{0}h {1}j {2}m</value></data>
+  <data name="DailyNote_Claimed" xml:space="preserve"><value>Diklaim</value></data>
+  <data name="DailyNote_Unclaimed" xml:space="preserve"><value>Belum Diklaim</value></data>
+  <data name="DailyNote_NoFingerprint" xml:space="preserve"><value>Tidak dapat memperoleh layanan sidik jari perangkat</value></data>
+  <data name="DailyNote_NoActiveAccount" xml:space="preserve"><value>Tidak ada akun aktif</value></data>
+  <data name="DailyNote_CannotLoadCookie" xml:space="preserve"><value>Tidak dapat memuat cookie</value></data>
+  <data name="DailyNote_FetchFailed" xml:space="preserve"><value>Gagal mendapatkan catatan: {0} (retcode={1})</value></data>
+  <data name="Geetest_NoFingerprintService" xml:space="preserve"><value>Tidak dapat memperoleh layanan sidik jari perangkat</value></data>
+  <data name="Geetest_NoAccountService" xml:space="preserve"><value>Tidak dapat memperoleh layanan manajemen akun</value></data>
+  <data name="Geetest_NoActiveAccount" xml:space="preserve"><value>Tidak ada akun aktif</value></data>
+  <data name="Geetest_CaptchaTitle" xml:space="preserve"><value>Verifikasi CAPTCHA</value></data>
+  <data name="Launcher_DllNotLoaded" xml:space="preserve"><value>Launcher.dll gagal dimuat karena runtime C++ tidak ada atau diblokir antivirus. Tidak dapat memulai.</value></data>
+  <data name="Screenshot_Saved" xml:space="preserve"><value>Screenshot disimpan</value></data>
+  <data name="Screenshot_CaptureFailed" xml:space="preserve"><value>Pengambilan screenshot gagal</value></data>
+  <data name="Update_AllRetriesFailed" xml:space="preserve"><value>Semua percobaan ulang gagal</value></data>
+  <data name="UserInfo_FeatureRemoved" xml:space="preserve"><value>Fitur dihapus</value></data>
+  <data name="Hoyolab_AsiaServer" xml:space="preserve"><value>Server Asia</value></data>
+  <data name="Hoyolab_USAServer" xml:space="preserve"><value>Server Amerika</value></data>
+  <data name="Hoyolab_EuroServer" xml:space="preserve"><value>Server Eropa</value></data>
+  <data name="Hoyolab_CHTServer" xml:space="preserve"><value>Server TW/HK/MO</value></data>
+  <data name="FilePicker_MainWindowNull" xml:space="preserve"><value>Jendela utama tidak ada, tidak dapat membuka pemilih file</value></data>
+  <data name="FilePicker_InvalidWindowHandle" xml:space="preserve"><value>Handle jendela tidak valid. Harap jalankan dalam mode pengguna normal atau coba lagi.</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>FufuLauncher mengalami kesalahan</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>Aplikasi mengalami kesalahan
+
+Sumber kesalahan: {0}
+Pesan kesalahan: {1}
+
+Stack trace:
+{2}</value></data>
+  <data name="Program_InjectionFailed" xml:space="preserve"><value>Peluncuran injeksi gagal: {0} (kode: {1})</value></data>
+  <data name="Program_InjectionException" xml:space="preserve"><value>Exception proses injeksi: {0}</value></data>
+  <data name="Program_ErrorTitle" xml:space="preserve"><value>Kesalahan FufuLauncher</value></data>
+  <data name="IniFile_AccessDenied" xml:space="preserve"><value>Akses ditolak. Harap periksa apakah file atau folder diatur ke &quot;read-only&quot;, atau coba jalankan launcher sebagai administrator.</value></data>
+  <data name="IniFile_WriteFailed" xml:space="preserve"><value>Penulisan gagal: file mungkin sedang digunakan oleh game atau program lain.
+Detail: {0}</value></data>
+  <data name="IniFile_WriteError" xml:space="preserve"><value>Terjadi kesalahan saat menulis konfigurasi.
+Detail: {0}</value></data>
+</root>

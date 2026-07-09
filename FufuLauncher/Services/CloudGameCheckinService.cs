@@ -7,6 +7,7 @@ using System.Net;
 using System.Text.Json;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services;
@@ -26,12 +27,12 @@ public class CloudGameCheckinService : ICloudGameCheckinService
 
     public async Task<CheckinTypeResult> ExecuteCheckinAsync(string uid, string comboToken)
     {
-        var result = new CheckinTypeResult { TypeName = "云原神签到", Executed = true };
+        var result = new CheckinTypeResult { TypeName = "CheckinCloud_Title".GetLocalized(), Executed = true };
 
         if (string.IsNullOrEmpty(comboToken))
         {
             result.Success = false;
-            result.Message = "缺少云游戏凭证 (x-rpc-combo_token)";
+            result.Message = "CheckinCloud_MissingCredential".GetLocalized();
             return result;
         }
 
@@ -47,7 +48,7 @@ public class CloudGameCheckinService : ICloudGameCheckinService
             catch (Exception)
             {
                 result.Success = false;
-                result.Message = "请求失败";
+                result.Message = "Status_RequestFailed".GetLocalized();
                 return result;
             }
 
@@ -55,12 +56,12 @@ public class CloudGameCheckinService : ICloudGameCheckinService
             if (retcode == -100)
             {
                 result.Success = false;
-                result.Message = "token 失效或账号状态受限";
+                result.Message = "CheckinCloud_TokenExpired".GetLocalized();
                 return result;
             }
             if (retcode != 0)
             {
-                var msg = TryGetString(data, "message") ?? "未知错误";
+                var msg = TryGetString(data, "message") ?? "Status_UnknownError".GetLocalized();
                 result.Success = false;
                 result.Message = $"{msg}({retcode})";
                 return result;
@@ -80,25 +81,25 @@ public class CloudGameCheckinService : ICloudGameCheckinService
             {
                 result.Success = true;
                 result.SuccessCount++;
-                result.Message = $"获得 {gained} 分钟免费时长";
-                result.Details.Add($"当前免费时长: {FormatMinutes(freeTime + gained)}");
+                result.Message = string.Format("CheckinCloud_GainedTime".GetLocalized(), gained);
+                result.Details.Add(string.Format("CheckinCloud_CurrentFreeTime".GetLocalized(), FormatMinutes(freeTime + gained)));
             }
             else
             {
                 result.Success = true;
                 result.SkippedCount++;
-                result.Message = "今日已签到或已达上限";
-                result.Details.Add($"当前免费时长: {FormatMinutes(freeTime)}");
+                result.Message = "CheckinCloud_AlreadyCheckedIn".GetLocalized();
+                result.Details.Add(string.Format("CheckinCloud_CurrentFreeTime".GetLocalized(), FormatMinutes(freeTime)));
             }
 
             if (wallet.HasValue)
             {
-                var playCardMsg = TryGetString(wallet.Value, "play_card", "short_msg") ?? "未知";
+                var playCardMsg = TryGetString(wallet.Value, "play_card", "short_msg") ?? "Status_Unknown".GetLocalized();
                 int coinNum = 0;
                 var coinProp = TryGetProperty(wallet.Value, "coin");
                 if (coinProp != null)
                     coinNum = TryGetInt(coinProp.Value, "coin_num");
-                result.Details.Add($"畅玩卡状态: {playCardMsg}，米游币: {coinNum}");
+                result.Details.Add(string.Format("CheckinCloud_PlayCardStatus".GetLocalized(), playCardMsg, coinNum));
             }
 
             Debug.WriteLine($"[云原神签到] 账号 {uid}: {result.Message}");
@@ -106,7 +107,7 @@ public class CloudGameCheckinService : ICloudGameCheckinService
         catch (Exception ex)
         {
             result.Success = false;
-            result.Message = $"异常: {ex.Message}";
+            result.Message = string.Format("CheckinCloud_Exception".GetLocalized(), ex.Message);
             Debug.WriteLine($"[云原神签到] 账号 {uid} 异常: {ex.Message}");
         }
 
@@ -167,9 +168,9 @@ public class CloudGameCheckinService : ICloudGameCheckinService
         minutes = Math.Max(minutes, 0);
         int hours = minutes / 60;
         int mins = minutes % 60;
-        if (hours > 0 && mins > 0) return $"{hours}小时{mins}分钟";
-        if (hours > 0) return $"{hours}小时";
-        return $"{mins}分钟";
+        if (hours > 0 && mins > 0) return string.Format("CheckinCloud_HoursMinutes".GetLocalized(), hours, mins);
+        if (hours > 0) return string.Format("CheckinCloud_HoursOnly".GetLocalized(), hours);
+        return string.Format("CheckinCloud_MinutesOnly".GetLocalized(), mins);
     }
 
     private static int TryGetInt(JsonElement element, string propertyName)

@@ -38,7 +38,17 @@ namespace FufuLauncher.ViewModels
         Default = 0,
         zhCN = 1,
         zhTW = 2,
-        enUS = 3
+        enUS = 3,
+        fr = 4,
+        de = 5,
+        ru = 6,
+        ja = 7,
+        es = 8,
+        ko = 9,
+        it = 10,
+        id = 11,
+        pt = 12,
+        esMX = 13
     }
 
     public enum WindowModeType
@@ -581,11 +591,13 @@ namespace FufuLauncher.ViewModels
                         int languageCode = Convert.ToInt32(param);
                         var language = (AppLanguage)languageCode;
 
-                        if (SelectedLanguage != language)
-                        {
-                            SelectedLanguage = language;
-                            await ApplyLanguageChangeAsync(language);
-                        }
+                        Debug.WriteLine($"[SettingsVM] SwitchLanguageCommand: param={param}, language={language}, current SelectedLanguage={SelectedLanguage}");
+
+                        // Always apply - the TwoWay binding on IsChecked may have already
+                        // updated SelectedLanguage, so the old guard was incorrectly
+                        // preventing ApplyLanguageChangeAsync from being called.
+                        SelectedLanguage = language;
+                        await ApplyLanguageChangeAsync(language);
                     }
                     catch (Exception ex)
                     {
@@ -729,37 +741,28 @@ namespace FufuLauncher.ViewModels
 
         private async Task DownloadAndSaveFileAsync(string url, string typeName, string extension)
         {
-            var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-            if (!FilePickerService.InitializeWithValidWindow(savePicker, out var saveErr))
-            {
-                ShowDialogMessage("错误", saveErr ?? "无法打开文件选择器");
-                return;
-            }
+            var filters = extension == ".mp4"
+                ? new[] { ("视频文件", new[] { ".mp4" }) }
+                : new[] { ("图片文件", new[] { ".png", ".jpg" }) };
+            var startLocation = extension == ".mp4"
+                ? Windows.Storage.Pickers.PickerLocationId.VideosLibrary
+                : Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            var defaultName = $"FufuLauncher_{typeName}_{DateTime.Now:yyyyMMddHHmmss}";
 
-            savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
-            if (extension == ".mp4")
-            {
-                savePicker.FileTypeChoices.Add("视频文件", new List<string> { ".mp4" });
-                savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.VideosLibrary;
-            }
-            else
-            {
-                savePicker.FileTypeChoices.Add("图片文件", new List<string> { ".png", ".jpg" });
-            }
-            savePicker.SuggestedFileName = $"FufuLauncher_{typeName}_{DateTime.Now:yyyyMMddHHmmss}";
-
-            var file = await savePicker.PickSaveFileAsync();
-            if (file == null) return;
+            var path = await FilePickerService.PickSaveFileAsync(
+                null, filters, defaultName, startLocation,
+                msg => ShowDialogMessage("错误", msg));
+            if (string.IsNullOrEmpty(path)) return;
 
             using var httpClient = new HttpClient();
             var response = await httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
 
             using var stream = await response.Content.ReadAsStreamAsync();
-            using var fileStream = await file.OpenStreamForWriteAsync();
+            await using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
             await stream.CopyToAsync(fileStream);
 
-            ShowDialogMessage("下载成功", $"{typeName} 已保存至：\n{file.Path}");
+            ShowDialogMessage("下载成功", $"{typeName} 已保存至：\n{path}");
         }
 
         private async void ShowDialogMessage(string title, string content)
@@ -1704,15 +1707,32 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
         {
             try
             {
+                Debug.WriteLine($"[SettingsVM] ApplyLanguageChangeAsync: language={language}, enumValue={(int)language}");
+
                 await _localSettingsService.SaveSettingAsync("AppLanguage", (int)language);
                 var culture = language switch
                 {
                     AppLanguage.zhCN => "zh-CN",
                     AppLanguage.zhTW => "zh-TW",
                     AppLanguage.enUS => "en-US",
+                    AppLanguage.fr => "fr-FR",
+                    AppLanguage.de => "de-DE",
+                    AppLanguage.ru => "ru-RU",
+                    AppLanguage.ja => "ja-JP",
+                    AppLanguage.es => "es-ES",
+                    AppLanguage.ko => "ko-KR",
+                    AppLanguage.it => "it-IT",
+                    AppLanguage.id => "id-ID",
+                    AppLanguage.pt => "pt-BR",
                     _ => Windows.System.UserProfile.GlobalizationPreferences.Languages.FirstOrDefault() ?? "zh-CN"
                 };
-                Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture;
+
+                Debug.WriteLine($"[SettingsVM] ApplyLanguageChangeAsync: culture='{culture}'");
+
+                // PrimaryLanguageOverride is NOT available for unpackaged apps.
+                // Use ResourceExtensions.SetLanguage to control MRT via ResourceContext instead.
+                Helpers.ResourceExtensions.SetLanguage(
+                    language == AppLanguage.Default ? null : culture);
 
                 var dialog = new ContentDialog
                 {
@@ -1748,7 +1768,8 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
                     }
                 };
                 process.Start();
-                App.MainWindow.Close();
+                
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {

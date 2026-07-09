@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services.MiHoYo;
 
@@ -39,7 +40,7 @@ public sealed class DailyNoteService
     public DailyNoteService()
     {
         _fingerprintService = App.GetService<IDeviceFingerprintService>()
-            ?? throw new InvalidOperationException("无法获取设备指纹服务");
+            ?? throw new InvalidOperationException("DailyNote_NoFingerprint".GetLocalized());
         _currentInstance = this;
     }
 
@@ -49,9 +50,9 @@ public sealed class DailyNoteService
         try
         {
             AccountManager accountManager = App.GetService<AccountManager>();
-            string activeId = accountManager.ActiveAccountId ?? throw new InvalidOperationException("无活跃账号");
+            string activeId = accountManager.ActiveAccountId ?? throw new InvalidOperationException("DailyNote_NoActiveAccount".GetLocalized());
             Dictionary<string, string> cookies = await accountManager.LoadCookiesAsync(activeId)
-                ?? throw new InvalidOperationException("无法加载Cookie");
+                ?? throw new InvalidOperationException("DailyNote_CannotLoadCookie".GetLocalized());
 
         
             if (_currentAccountId != activeId)
@@ -89,7 +90,7 @@ public sealed class DailyNoteService
             }
 
             if (retcode != 0)
-                throw new InvalidOperationException($"获取便签失败: {ExtractMessage(json)} (retcode={retcode})");
+                throw new InvalidOperationException(string.Format("DailyNote_FetchFailed".GetLocalized(), ExtractMessage(json), retcode));
 
             return DailyNoteParser.Parse(json);
         }
@@ -211,7 +212,7 @@ public sealed class DailyNoteService
     }
     private static string ExtractMessage(string json)
     {
-        using var doc = JsonDocument.Parse(json); return doc.RootElement.TryGetProperty("message", out var m) ? m.GetString() ?? "未知错误" : "未知错误";
+        using var doc = JsonDocument.Parse(json); return doc.RootElement.TryGetProperty("message", out var m) ? m.GetString() ?? "Status_UnknownError".GetLocalized() : "Status_UnknownError".GetLocalized();
     }
 
     internal enum CookieMode

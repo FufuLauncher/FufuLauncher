@@ -2,6 +2,8 @@
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
+
+using FufuLauncher.Helpers;
 using FufuLauncher.Services;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -68,7 +70,7 @@ namespace FufuLauncher.Views
                     double percent = (double)downloaded / total * 100;
                     MainProgressBar.Value = percent;
 
-                    StatusText.Text = $"正在处理: {doneFiles}/{totalFiles} 文件";
+                    StatusText.Text = string.Format("DownloadWindow_Processing".GetLocalized(), doneFiles, totalFiles);
                     double dMB = downloaded / 1024.0 / 1024.0;
                     double tMB = total / 1024.0 / 1024.0;
                     ProgressText.Text = $"{dMB:F1} MB / {tMB:F1} MB ({percent:F1}%)";
@@ -85,15 +87,15 @@ namespace FufuLauncher.Views
                 DispatcherQueue.TryEnqueue(async () =>
                 {
                     MainProgressBar.Value = 100;
-                    StatusText.Text = "下载成功";
+                    StatusText.Text = "DownloadWindow_Success".GetLocalized();
                     StatusText.Foreground = new SolidColorBrush(Colors.Green);
-                    CancelButton.Content = "关闭";
+                    CancelButton.Content = "CloseBtn".GetLocalized();
 
                     var dialog = new ContentDialog
                     {
-                        Title = "完成",
-                        Content = "所有文件下载、校验、部署已完成。",
-                        CloseButtonText = "确定",
+                        Title = "DownloadWindow_Complete".GetLocalized(),
+                        Content = "DownloadWindow_AllDone".GetLocalized(),
+                        CloseButtonText = "OkBtn".GetLocalized(),
                         XamlRoot = Content.XamlRoot
                     };
                     await dialog.ShowAsync();
@@ -101,19 +103,19 @@ namespace FufuLauncher.Views
             }
             catch (OperationCanceledException)
             {
-                DispatcherQueue.TryEnqueue(() => StatusText.Text = "任务已取消");
+                DispatcherQueue.TryEnqueue(() => StatusText.Text = "DownloadWindow_Cancelled".GetLocalized());
             }
             catch (Exception ex)
             {
                 DispatcherQueue.TryEnqueue(async () =>
                 {
-                    StatusText.Text = "发生错误";
+                    StatusText.Text = "DownloadWindow_Error".GetLocalized();
                     StatusText.Foreground = new SolidColorBrush(Colors.Red);
                     var dialog = new ContentDialog
                     {
-                        Title = "错误",
+                        Title = "ErrorTitle".GetLocalized(),
                         Content = ex.Message,
-                        CloseButtonText = "关闭",
+                        CloseButtonText = "CloseBtn".GetLocalized(),
                         XamlRoot = Content.XamlRoot
                     };
                     await dialog.ShowAsync();
@@ -136,7 +138,7 @@ namespace FufuLauncher.Views
         private void LogToggle_Click(object sender, RoutedEventArgs e)
         {
             LogBorder.Visibility = LogToggle.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;
-            LogToggle.Content = LogToggle.IsChecked == true ? "隐藏详细日志" : "显示详细日志";
+            LogToggle.Content = LogToggle.IsChecked == true ? "DownloadWindow_HideDetailLog".GetLocalized() : "DownloadWindow_ShowDetailLog".GetLocalized();
         }
 
         private void SetUIState(bool enabled)
@@ -146,7 +148,7 @@ namespace FufuLauncher.Views
             BaseGameCheck.IsEnabled = enabled;
             PathBox.IsEnabled = enabled;
             CancelButton.IsEnabled = !enabled;
-            CancelButton.Content = enabled ? "关闭" : "取消";
+            CancelButton.Content = enabled ? "CloseBtn".GetLocalized() : "CancelBtn".GetLocalized();
         }
     }
 }

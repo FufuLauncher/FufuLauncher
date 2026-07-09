@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:models="using:FufuLauncher.Models"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     Background="Transparent">
 
     <Page.Resources>
@@ -40,7 +41,7 @@
             </Grid.RowDefinitions>
 
             <TextBox x:Name="SearchBox"
-                     PlaceholderText="搜索标题、文件名或内容..."
+                     PlaceholderText="{helpers:Loc Key=HelpPage_SearchPlaceholder}"
                      TextChanged="SearchBox_TextChanged"
                      Margin="16,16,16,8">
                 <FlyoutBase.AttachedFlyout>

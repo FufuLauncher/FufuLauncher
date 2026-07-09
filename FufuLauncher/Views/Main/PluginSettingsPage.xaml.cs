@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using FufuLauncher.ViewModels;
 using FufuLauncher.Services;
+using FufuLauncher.Helpers;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Messages;
 using Windows.System;
@@ -87,10 +88,10 @@ public sealed partial class PluginSettingsPage : Page
                 {
                     var dialog = new ContentDialog
                     {
-                        Title = "架构兼容性警告",
-                        Content = "您的电脑可能为ARM架构，注入功能在ARM架构的电脑中不可用，是否确认继续开启？",
-                        PrimaryButtonText = "继续开启",
-                        CloseButtonText = "取消",
+                        Title = "Plugin_ArchWarning_Title".GetLocalized(),
+                        Content = "Plugin_ArchWarning_Content".GetLocalized(),
+                        PrimaryButtonText = "Plugin_ArchWarning_Continue".GetLocalized(),
+                        CloseButtonText = "CancelBtn".GetLocalized(),
                         XamlRoot = XamlRoot
                     };
 
@@ -138,9 +139,9 @@ public sealed partial class PluginSettingsPage : Page
         {
             var dialog = new ContentDialog
             {
-                Title = "插件可能已损坏",
-                Content = "插件文件异常\n这通常是因为插件被杀毒软件（如 Windows Defender）误判拦截或遭到破坏\n\n建议您：\n1. 将本软件目录加入杀毒软件白名单\n2. 在本页面重新下载并安装插件",
-                PrimaryButtonText = "我知道了",
+                Title = "Plugin_Corrupted_Title".GetLocalized(),
+                Content = "Plugin_Corrupted_Content".GetLocalized(),
+                PrimaryButtonText = "GotItBtn".GetLocalized(),
                 DefaultButton = ContentDialogButton.Primary,
                 XamlRoot = XamlRoot
             };
@@ -212,8 +213,8 @@ public sealed partial class PluginSettingsPage : Page
 
         _hasShownMainPluginMissingWarning = true;
         WeakReferenceMessenger.Default.Send(new NotificationMessage(
-            "主插件缺失",
-            "未找到主插件 DLL 文件，插件可能未安装、被误删或被杀毒软件拦截。请重新下载插件，或将启动器目录加入杀毒软件白名单后再试。",
+            "Plugin_MainMissing_Title".GetLocalized(),
+            "Plugin_MainMissing_Content".GetLocalized(),
             NotificationType.Error,
             6000));
     }
@@ -384,16 +385,16 @@ public sealed partial class PluginSettingsPage : Page
                 
                 var dialog = new ContentDialog
                 {
-                    Title = "兼容性警告",
-                    Content = "如果开启了NVIDIA RTX40系及以上显卡的AI插帧，或者使用了类似于RTSS、微星小飞机等帧数显示软件，都可能会导致游戏画面卡死或者游戏无法正常启动",
-                    PrimaryButtonText = "我知道了",
+                    Title = "Fps_CompatWarning_Title".GetLocalized(),
+                    Content = "Fps_CompatWarning_Content".GetLocalized(),
+                    PrimaryButtonText = "GotItBtn".GetLocalized(),
                     DefaultButton = ContentDialogButton.Primary,
                     XamlRoot = XamlRoot
                 };
-                
+
                 var checkBox = new CheckBox
                 {
-                    Content = "不再显示此警告",
+                    Content = "Fps_CompatWarning_DontShow".GetLocalized(),
                     Margin = new Thickness(0, 16, 0, 0)
                 };
                 
@@ -472,7 +473,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
 
     if (!File.Exists(zipFilePath))
     {
-        if (showUI) WeakReferenceMessenger.Default.Send(new NotificationMessage("错误", "未找到文件，请确认启动器文件完整", NotificationType.Error));
+        if (showUI) WeakReferenceMessenger.Default.Send(new NotificationMessage("ErrorTitle".GetLocalized(), "Plugin_FileNotFound".GetLocalized(), NotificationType.Error));
         return;
     }
 
@@ -481,7 +482,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
     {
         progressDialog = new ContentDialog
         {
-            Title = "正在修复FPS插件",
+            Title = "Fps_Repair_Title".GetLocalized(),
             Content = new ProgressBar { IsIndeterminate = true, Height = 20, Margin = new Thickness(0, 10, 0, 0) },
             XamlRoot = XamlRoot
         };
@@ -504,10 +505,19 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
 
         if (progressDialog != null) progressDialog.Hide();
         ViewModel.LoadConfiguration();
-        
+
         await VerifyFpsPluginHashAsync();
 
-        if (showUI) WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "FPS显示插件已成功修复并安装", NotificationType.Success));
+        if (showUI) WeakReferenceMessenger.Default.Send(new NotificationMessage("Success".GetLocalized(), "Fps_Repair_Success".GetLocalized(), NotificationType.Success));
+        
+        try
+        {
+            Frame?.Navigate(typeof(PluginSettingsPage), null, new Microsoft.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"刷新插件设置页面失败: {ex.Message}");
+        }
     }
     catch (Exception ex)
     {
@@ -516,9 +526,9 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         {
             var failDialog = new ContentDialog
             {
-                Title = "修复失败",
+                Title = "Fps_Repair_Fail_Title".GetLocalized(),
                 Content = ex.Message,
-                CloseButtonText = "关闭",
+                CloseButtonText = "CloseBtn".GetLocalized(),
                 XamlRoot = XamlRoot
             };
             await failDialog.ShowAsync();
@@ -566,8 +576,8 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
             if (!string.Equals(expectedHash, actualHash, StringComparison.OrdinalIgnoreCase))
             {
                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "警告", 
-                    "帧数显示插件哈希不匹配，可能已被篡改或损坏，请重新安装启动器", 
+                    "AdminWarningTitle".GetLocalized(),
+                    "Fps_HashMismatch_Content".GetLocalized(),
                     NotificationType.Error));
             }
         }
@@ -598,10 +608,10 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                 var reason = ViewModel.GetPresetLockReason(preset);
                 var dialog = new ContentDialog
                 {
-                    Title = "配置预设已锁定",
-                    Content = $"锁定原因：{reason}\n\n如果继续使用，将忽略该警告并把此预设的 Hash 更新为当前插件 Hash，从而重新解锁该预设。是否继续？",
-                    PrimaryButtonText = "继续使用并解锁",
-                    CloseButtonText = "取消",
+                    Title = "Preset_Locked_Title".GetLocalized(),
+                    Content = string.Format("Preset_Locked_Content_Format".GetLocalized(), reason),
+                    PrimaryButtonText = "Preset_Locked_Continue".GetLocalized(),
+                    CloseButtonText = "CancelBtn".GetLocalized(),
                     DefaultButton = ContentDialogButton.Close,
                     XamlRoot = XamlRoot
                 };
@@ -620,13 +630,13 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
 
     private async void OnCreateNewPresetClick(object sender, RoutedEventArgs e)
     {
-        var inputTextBox = new TextBox { PlaceholderText = "请输入新预设名称" };
+        var inputTextBox = new TextBox { PlaceholderText = "Preset_Create_Placeholder".GetLocalized() };
         var dialog = new ContentDialog
         {
-            Title = "创建新预设",
+            Title = "Preset_Create_Title".GetLocalized(),
             Content = inputTextBox,
-            PrimaryButtonText = "确认",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "LanguageSelection_Confirm".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = XamlRoot
         };
 
@@ -648,7 +658,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         if (_prWindow == null)
         {
             _prWindow = new Window();
-            _prWindow.Title = "Pull Request";
+            _prWindow.Title = "PR_Window_Title".GetLocalized();
             _prWindow.Closed += (s, args) => _prWindow = null;
 
             _prWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
@@ -662,7 +672,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
             var titleBarGrid = new Grid { Height = 32 };
             var titleText = new TextBlock
             {
-                Text = "Pull Request",
+                Text = "PR_Window_Title".GetLocalized(),
                 VerticalAlignment = VerticalAlignment.Center,
                 Margin = new Thickness(16, 0, 0, 0),
                 FontSize = 12
@@ -677,14 +687,14 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
 
             var textBlock = new TextBlock
             {
-                Text = "本项目目前由个人开发者(CodeCubist)独立维护\n我们坚持并积极落实以玩家痛点为核心的开发方向，开放透明和高效的推动更新\n提交Pull Requests是让拥有代码开发编写能力的用户可以协助推进开发进度、优化结构及分摊项目维护压力的核心途径\n如可提供帮助，请通过下方按钮前往代码仓库提交你的贡献",
+                Text = "PR_Description".GetLocalized(),
                 TextWrapping = TextWrapping.Wrap
             };
 
-            var openLinkBtn = new Button 
-            { 
-                Content = "访问GitHub仓库提交Pull Request", 
-                HorizontalAlignment = HorizontalAlignment.Left 
+            var openLinkBtn = new Button
+            {
+                Content = "PR_GitHubButton".GetLocalized(),
+                HorizontalAlignment = HorizontalAlignment.Left
             };
 
             openLinkBtn.Click += async (s, args) => 
@@ -718,10 +728,10 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         {
             var dialog = new ContentDialog
             {
-                Title = "警告",
-                Content = $"确定要删除预设 \"{preset.Name}\" 吗？此操作无法恢复！",
-                PrimaryButtonText = "确认删除",
-                CloseButtonText = "取消",
+                Title = "AdminWarningTitle".GetLocalized(),
+                Content = string.Format("Preset_Delete_Confirm_Format".GetLocalized(), preset.Name),
+                PrimaryButtonText = "Preset_Delete_ConfirmBtn".GetLocalized(),
+                CloseButtonText = "CancelBtn".GetLocalized(),
                 DefaultButton = ContentDialogButton.Close,
                 XamlRoot = XamlRoot
             };
@@ -762,14 +772,14 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         if (!Directory.Exists(pluginsDir)) Directory.CreateDirectory(pluginsDir);
         
         var progressBar = new ProgressBar { Minimum = 0, Maximum = 100, Value = 0, Height = 20, Margin = new Thickness(0, 10, 0, 0) };
-        var statusText = new TextBlock { Text = "正在连接...", HorizontalAlignment = HorizontalAlignment.Center };
+        var statusText = new TextBlock { Text = "Plugin_Download_Connecting".GetLocalized(), HorizontalAlignment = HorizontalAlignment.Center };
         var stackPanel = new StackPanel();
         stackPanel.Children.Add(statusText);
         stackPanel.Children.Add(progressBar);
 
         var progressDialog = new ContentDialog
         {
-            Title = $"正在获取插件",
+            Title = "Plugin_Download_Title".GetLocalized(),
             Content = stackPanel,
             XamlRoot = XamlRoot
         };
@@ -792,7 +802,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                 }
                 catch
                 {
-                    statusText.Text = "连接失败，正在尝试备用线路...";
+                    statusText.Text = "Plugin_Download_Fallback".GetLocalized();
                     usedFallback = true;
                     response = await client.GetAsync(rawGithubUrl, HttpCompletionOption.ResponseHeadersRead);
                     if (!response.IsSuccessStatusCode) throw new Exception($"下载失败 (HTTP {response.StatusCode})");
@@ -815,14 +825,15 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                             if (totalBytes != -1)
                             {
                                 progressBar.Value = Math.Round((double)totalRead / totalBytes * 100, 0);
-                                statusText.Text = $"{(usedFallback ? "备用" : "主")}线路下载中... {progressBar.Value}%";
+                                var lineName = usedFallback ? "Plugin_Download_BackupLine".GetLocalized() : "Plugin_Download_MainLine".GetLocalized();
+                                statusText.Text = string.Format("Plugin_Download_Progress_Format".GetLocalized(), lineName, progressBar.Value);
                             }
                         }
                     }
                 }
             }
             
-            statusText.Text = "正在解压并安装...";
+            statusText.Text = "Plugin_Download_Extracting".GetLocalized();
             progressBar.IsIndeterminate = true;
             
             if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
@@ -842,18 +853,27 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
             
             progressDialog.Hide();
             ViewModel.LoadConfiguration();
+
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Success".GetLocalized(), "Plugin_Download_Success".GetLocalized(), NotificationType.Success));
             
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "插件已安装并刷新", NotificationType.Success));
+            try
+            {
+                Frame?.Navigate(typeof(PluginSettingsPage), null, new Microsoft.UI.Xaml.Media.Animation.SuppressNavigationTransitionInfo());
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"刷新插件设置页面失败: {ex.Message}");
+            }
         }
         catch (Exception ex)
         {
             progressDialog.Hide();
             var failDialog = new ContentDialog
             {
-                Title = "错误",
-                Content = $"安装失败：{ex.Message}",
-                PrimaryButtonText = "手动下载",
-                CloseButtonText = "关闭",
+                Title = "ErrorTitle".GetLocalized(),
+                Content = string.Format("Plugin_Download_Fail_Content_Format".GetLocalized(), ex.Message),
+                PrimaryButtonText = "Plugin_Download_Manual".GetLocalized(),
+                CloseButtonText = "CloseBtn".GetLocalized(),
                 XamlRoot = XamlRoot
             };
             if (await failDialog.ShowAsync() == ContentDialogResult.Primary)
@@ -891,34 +911,25 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                 _currentEditSize = size;
             }
 
-            var picker = new Windows.Storage.Pickers.FileOpenPicker();
-            if (!FilePickerService.InitializeWithValidWindow(picker, out var avatarErr))
-            {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("导入失败", avatarErr ?? "无法打开文件选择器", NotificationType.Error));
-                return;
-            }
-            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.Thumbnail;
-            picker.FileTypeFilter.Add(".png");
-            picker.FileTypeFilter.Add(".jpg");
-            picker.FileTypeFilter.Add(".jpeg");
-            picker.FileTypeFilter.Add(".bmp");
-            picker.FileTypeFilter.Add(".webp");
-
-            var file = await picker.PickSingleFileAsync();
-            if (file != null)
+            var path = await FilePickerService.PickOpenFileAsync(
+                null,
+                new[] { ("图片文件", new[] { ".png", ".jpg", ".jpeg", ".bmp", ".webp" }) },
+                Windows.Storage.Pickers.PickerLocationId.PicturesLibrary,
+                msg => WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_ImportFail_Title".GetLocalized(), msg, NotificationType.Error)));
+            if (!string.IsNullOrEmpty(path))
             {
                 string avatarDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar");
                 if (!Directory.Exists(avatarDir)) Directory.CreateDirectory(avatarDir);
 
                 string originalPath = ViewModel.GetAvatarOriginalPath(_currentEditSize);
-                File.Copy(file.Path, originalPath, true);
+                File.Copy(path, originalPath, true);
 
                 await LoadImageToCropperAsync(originalPath);
             }
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("导入失败", ex.Message, NotificationType.Error));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_ImportFail_Title".GetLocalized(), ex.Message, NotificationType.Error));
         }
     }
 
@@ -937,7 +948,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
             }
             else
             {
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("提示", "未找到可供编辑的头像", NotificationType.Warning));
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_EditNotFound_Title".GetLocalized(), "Avatar_EditNotFound_Content".GetLocalized(), NotificationType.Warning));
             }
         }
     }
@@ -960,12 +971,12 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                 if (File.Exists(originalPath)) File.Delete(originalPath);
 
                 ViewModel.UpdateAvatarPreview();
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", $"尺寸 {size}x{size} 头像已清除", NotificationType.Success));
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("Success".GetLocalized(), string.Format("Avatar_Clear_Success_Format".GetLocalized(), size), NotificationType.Success));
             }
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("清除失败", ex.Message, NotificationType.Error));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_Clear_Fail_Title".GetLocalized(), ex.Message, NotificationType.Error));
         }
     }
     
@@ -1039,7 +1050,7 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("加载失败", ex.Message, NotificationType.Error));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_LoadFail_Title".GetLocalized(), ex.Message, NotificationType.Error));
         }
     }
 
@@ -1050,11 +1061,11 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
         {
             await SaveCroppedImageAsync(_currentEditSize);
             ViewModel.UpdateAvatarPreview();
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "头像裁切并保存成功", NotificationType.Success));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Success".GetLocalized(), "Avatar_Crop_Success".GetLocalized(), NotificationType.Success));
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("保存失败", ex.Message, NotificationType.Error));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_SaveFail_Title".GetLocalized(), ex.Message, NotificationType.Error));
         }
         finally
         {
@@ -1066,10 +1077,10 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
     {
         var dialog = new ContentDialog
         {
-            Title = "重置全部预设",
-            Content = "确定要移除当前插件的所有预设并重新下载恢复默认吗？此操作无法恢复！",
-            PrimaryButtonText = "确认重置",
-            CloseButtonText = "取消",
+            Title = "Preset_ResetAll_Title".GetLocalized(),
+            Content = "Preset_ResetAll_Content".GetLocalized(),
+            PrimaryButtonText = "Preset_ResetAll_ConfirmBtn".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = XamlRoot
         };
@@ -1101,11 +1112,11 @@ private async Task PerformFpsPluginRepairAsync(bool showUI)
                 await SaveCroppedImageAsync(size);
             }
             ViewModel.UpdateAvatarPreview();
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("成功", "已批量生成并覆盖全部尺寸的头像", NotificationType.Success));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Success".GetLocalized(), "Avatar_Batch_Success".GetLocalized(), NotificationType.Success));
         }
         catch (Exception ex)
         {
-            WeakReferenceMessenger.Default.Send(new NotificationMessage("批量保存失败", ex.Message, NotificationType.Error));
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("Avatar_Batch_Fail_Title".GetLocalized(), ex.Message, NotificationType.Error));
         }
         finally
         {

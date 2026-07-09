@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="旅行札记 - 提瓦特财务报表"
+    Title="{helpers:Loc Key=GenshinData_Title}"
     Width="1100"
     Height="720"
     MinWidth="900"
@@ -44,7 +44,7 @@
 
                 <StackPanel Orientation="Horizontal" Spacing="12">
                     <FontIcon Glyph="&#xE8B9;" FontSize="24" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="旅行札记" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <TextBlock Text="{helpers:Loc Key=GenshinData_TravelJournal}" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
                     
                     <Border Margin="12,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="{Binding StatusMessage}" Opacity="0.6" FontSize="12"/>
@@ -74,7 +74,7 @@
                                     <TextBlock Text="{Binding Nickname}" FontSize="18" FontWeight="SemiBold"/>
                                     <TextBlock Text="{Binding Uid}" FontSize="12" Opacity="0.6"/>
                                     <TextBlock FontSize="10" Opacity="0.4" Margin="0,4,0,0">
-                                        <Run Text="数据更新于: "/><Run Text="{Binding FormattedDate}"/>
+                                        <Run Text="{helpers:Loc Key=GenshinData_DataUpdated}"/><Run Text="{Binding FormattedDate}"/>
                                     </TextBlock>
                                 </StackPanel>
                             </Grid>
@@ -82,7 +82,7 @@
 
                         <Border Style="{StaticResource DashboardCardStyle}">
                             <StackPanel Spacing="12">
-                                <TextBlock Text="今日收益" FontSize="14" Opacity="0.7"/>
+                                <TextBlock Text="{helpers:Loc Key=GenshinData_TodayEarnings}" FontSize="14" Opacity="0.7"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
@@ -93,7 +93,7 @@
                                     <StackPanel Grid.Column="0">
                                         <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,4">
                                             <FontIcon Glyph="&#xE735;" FontFamily="Segoe MDL2 Assets" Foreground="#FF6B6B" FontSize="12"/>
-                                            <TextBlock Text="原石" FontSize="12" Opacity="0.6"/>
+                                            <TextBlock Text="{helpers:Loc Key=GenshinData_Primogems}" FontSize="12" Opacity="0.6"/>
                                         </StackPanel>
                                         <TextBlock Text="{Binding TravelersDiary.Data.DayData.CurrentPrimogems}" 
                                                    FontSize="28" FontWeight="Bold"/>
@@ -104,7 +104,7 @@
                                     <StackPanel Grid.Column="2">
                                         <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,4">
                                             <FontIcon Glyph="&#xE825;" FontFamily="Segoe MDL2 Assets" Foreground="#FFD700" FontSize="12"/>
-                                            <TextBlock Text="摩拉" FontSize="12" Opacity="0.6"/>
+                                            <TextBlock Text="{helpers:Loc Key=GenshinData_Mora}" FontSize="12" Opacity="0.6"/>
                                         </StackPanel>
                                         <TextBlock Text="{Binding TravelersDiary.Data.DayData.CurrentMora}" 
                                                    FontSize="20" FontWeight="SemiBold" VerticalAlignment="Bottom"/>
@@ -116,7 +116,7 @@
                         <Border Style="{StaticResource DashboardCardStyle}">
                             <StackPanel Spacing="16">
                                 <Grid>
-                                    <TextBlock Text="本月累计" FontSize="14" Opacity="0.7" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{helpers:Loc Key=GenshinData_MonthTotal}" FontSize="14" Opacity="0.7" VerticalAlignment="Center"/>
                                     <Border Background="#1A4ECDC4" CornerRadius="4" HorizontalAlignment="Right" Padding="8,2">
                                         <TextBlock FontSize="12" Foreground="#00B894" FontWeight="Bold">
                                             <Run Text="Lv."/><Run Text="{Binding TravelersDiary.Data.MonthData.CurrentPrimogemsLevel}"/>
@@ -125,16 +125,16 @@
                                 </Grid>
 
                                 <StackPanel>
-                                    <TextBlock Text="获得原石" FontSize="12" Opacity="0.5"/>
+                                    <TextBlock Text="{helpers:Loc Key=GenshinData_PrimogemsEarned}" FontSize="12" Opacity="0.5"/>
                                     <TextBlock Text="{Binding FormattedMonthPrimogems}" 
                                                FontSize="36" FontWeight="Bold" Foreground="{ThemeResource SystemAccentColor}"/>
                                     
                                     <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
                                         <TextBlock FontSize="12" Foreground="#00B894">
-                                            <Run Text="环比 "/><Run Text="{Binding TravelersDiary.Data.MonthData.PrimogemsRate}"/><Run Text="%"/>
+                                            <Run Text="{helpers:Loc Key=GenshinData_Mom}"/><Run Text="{Binding TravelersDiary.Data.MonthData.PrimogemsRate}"/><Run Text="%"/>
                                         </TextBlock>
                                         <TextBlock FontSize="12" Opacity="0.4">
-                                            <Run Text="(上月 "/><Run Text="{Binding TravelersDiary.Data.MonthData.LastPrimogems}"/><Run Text=")"/>
+                                            <Run Text="{helpers:Loc Key=GenshinData_LastMonth}"/><Run Text="{Binding TravelersDiary.Data.MonthData.LastPrimogems}"/><Run Text=")"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
@@ -142,19 +142,19 @@
                                 <MenuFlyoutSeparator/>
 
                                 <StackPanel>
-                                    <TextBlock Text="获得摩拉" FontSize="12" Opacity="0.5"/>
+                                    <TextBlock Text="{helpers:Loc Key=GenshinData_MoraEarned}" FontSize="12" Opacity="0.5"/>
                                     <TextBlock Text="{Binding FormattedMonthMora}" 
                                                FontSize="24" FontWeight="SemiBold"/>
                                      <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,4,0,0">
                                         <TextBlock FontSize="12" Foreground="#00B894">
-                                            <Run Text="环比 "/><Run Text="{Binding TravelersDiary.Data.MonthData.MoraRate}"/><Run Text="%"/>
+                                            <Run Text="{helpers:Loc Key=GenshinData_Mom}"/><Run Text="{Binding TravelersDiary.Data.MonthData.MoraRate}"/><Run Text="%"/>
                                         </TextBlock>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
 
-                        <TextBlock Text="• 每日数据通常在次日上午更新&#x0a;• 收入等级基于原石获取效率计算" 
+                        <TextBlock Text="{helpers:Loc Key=GenshinData_DataNote}" 
                                    FontSize="11" Opacity="0.4" LineHeight="16" Margin="4,0,0,0"/>
                     </StackPanel>
                 </ScrollViewer>
@@ -168,7 +168,7 @@
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0" Padding="24,20,24,10" Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}" CornerRadius="8,8,0,0">
-                            <TextBlock Text="本月原石收入来源分析" FontSize="16" FontWeight="SemiBold"/>
+                            <TextBlock Text="{helpers:Loc Key=GenshinData_MonthlySourceAnalysis}" FontSize="16" FontWeight="SemiBold"/>
                         </Grid>
 
                         <ListView Grid.Row="1" ItemsSource="{Binding IncomeSources}" 
@@ -212,10 +212,10 @@
                         
                         <Grid Grid.Row="2" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="0,1,0,0" Padding="24,16">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
-                                <TextBlock Text="共计" Opacity="0.6" VerticalAlignment="Center"/>
+                                <TextBlock Text="{helpers:Loc Key=GenshinData_Total}" Opacity="0.6" VerticalAlignment="Center"/>
                                 <TextBlock Text="{Binding TravelersDiary.Data.MonthData.CurrentPrimogems}" 
                                            FontSize="20" FontWeight="Bold" Foreground="{ThemeResource SystemAccentColor}"/>
-                                <TextBlock Text="原石" Opacity="0.6" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
+                                <TextBlock Text="{helpers:Loc Key=GenshinData_Primogems}" Opacity="0.6" VerticalAlignment="Bottom" Margin="0,0,0,3"/>
                             </StackPanel>
                         </Grid>
                     </Grid>

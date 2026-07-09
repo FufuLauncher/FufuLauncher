@@ -2,6 +2,7 @@
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 
 namespace FufuLauncher.Models;
@@ -32,9 +33,9 @@ public class UnifiedCheckinResult
             return NotificationType.Error;
         }
     }
-    public CheckinTypeResult GameResult { get; set; } = new() { TypeName = "游戏签到" };
-    public CheckinTypeResult CommunityResult { get; set; } = new() { TypeName = "社区签到" };
-    public CheckinTypeResult CloudGameResult { get; set; } = new() { TypeName = "云原神签到" };
+    public CheckinTypeResult GameResult { get; set; } = new() { TypeName = "Checkin_GameCheckin".GetLocalized() };
+    public CheckinTypeResult CommunityResult { get; set; } = new() { TypeName = "Checkin_CommunityCheckin".GetLocalized() };
+    public CheckinTypeResult CloudGameResult { get; set; } = new() { TypeName = "CheckinCloud_Title".GetLocalized() };
     public string SummaryMessage { get; set; } = "";
     public string GameSignDays { get; set; } = "";
     public string GameRewardItem { get; set; } = "";
@@ -48,8 +49,8 @@ public class UnifiedCheckinResult
             sb.AppendLine($"[{account.Nickname}]");
             foreach (var item in account.Items)
             {
-                string status = item.Success == true ? "完成" :
-                                item.Success == false ? "失败" : "跳过";
+                string status = item.Success == true ? "Status_Completed".GetLocalized() :
+                                item.Success == false ? "Status_Failure".GetLocalized() : "Status_Skipped".GetLocalized();
                 string extra = string.IsNullOrEmpty(item.Message) ? "" : $" - {item.Message}";
                 sb.AppendLine($"  {item.TypeName}: {status}{extra}");
             }
@@ -72,8 +73,8 @@ public class CheckinTypeResult
 
     public string GetSummary()
     {
-        var countMsg = SuccessCount > 0 ? $"{SuccessCount}个账号成功" : "";
-        var failMsg = FailCount > 0 ? $"{FailCount}个失败" : "";
+        var countMsg = SuccessCount > 0 ? string.Format("Checkin_AccountsSuccess".GetLocalized(), SuccessCount) : "";
+        var failMsg = FailCount > 0 ? string.Format("Checkin_AccountsFailed".GetLocalized(), FailCount) : "";
         var sep = string.IsNullOrEmpty(countMsg) || string.IsNullOrEmpty(failMsg) ? "" : "，";
         var msg = string.Join("，", new[] { countMsg, failMsg }.Where(s => !string.IsNullOrEmpty(s)));
         if (!string.IsNullOrEmpty(Message)) msg += $" | {Message}";

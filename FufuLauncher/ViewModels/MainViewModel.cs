@@ -140,7 +140,7 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private SolidColorBrush _checkinStateBrush = new(Microsoft.UI.Colors.Gray);
         [ObservableProperty] private string _checkinStateTooltip = "\u6E38\u620F\u7B7E\u5230\u72B6\u6001\u52A0\u8F7D\u4E2D";
         
-        [ObservableProperty] private string _launchButtonText = "请选择游戏路径";
+        [ObservableProperty] private string _launchButtonText = "LaunchBtn_SelectPath".GetLocalized();
         [ObservableProperty] private bool _isLaunchButtonEnabled = true;
         [ObservableProperty] private bool _isGameLaunching;
 
@@ -688,11 +688,7 @@ private void SetupVideoPlayer(MediaSource source, InMemoryRandomAccessStream str
 
     if (BackgroundVideoPlayer == null)
     {
-        BackgroundVideoPlayer = new MediaPlayer
-        {
-            IsLoopingEnabled = true,
-            IsMuted = true
-        };
+        BackgroundVideoPlayer = MediaPlayerHelper.CreateLoopingMutedPlayer();
         BackgroundVideoPlayer.MediaFailed += BackgroundVideoPlayer_MediaFailed;
     }
     BackgroundVideoPlayer.Source = source; 
@@ -929,13 +925,13 @@ private void BackgroundVideoPlayer_MediaFailed(MediaPlayer sender, MediaPlayerFa
             {
                 CheckinStateGlyph = "";
                 CheckinStateBrush = new SolidColorBrush(Microsoft.UI.Colors.LightGreen);
-                CheckinStateTooltip = "游戏已签到";
+                CheckinStateTooltip = "Checkin_Signed".GetLocalized();
             }
             else
             {
                 CheckinStateGlyph = "";
                 CheckinStateBrush = new SolidColorBrush(Microsoft.UI.Colors.Gray) { Opacity = 0.8 };
-                CheckinStateTooltip = "游戏未签到";
+                CheckinStateTooltip = "Checkin_Unsigned".GetLocalized();
             }
 
             IsCheckinButtonEnabled = true;
@@ -1157,18 +1153,18 @@ private void QuickSwitchPreset(PresetModel targetPreset)
 
             if (IsGameRunning)
             {
-                LaunchButtonText = "点击退出游戏";
+                LaunchButtonText = "LaunchBtn_ExitGame".GetLocalized();
                 LaunchButtonIcon = "\uE711";
             }
             else
             {
                 if (hasPath)
                 {
-                    LaunchButtonText = "点击启动游戏";
+                    LaunchButtonText = "LaunchBtn_StartGame".GetLocalized();
                 }
                 else
                 {
-                    LaunchButtonText = "请选择游戏路径";
+                    LaunchButtonText = "LaunchBtn_SelectPath".GetLocalized();
                 }
 
                 LaunchButtonIcon = "\uE768";
@@ -1194,7 +1190,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
 
             if (!_gameLauncherService.IsGamePathSelected())
             {
-                _notificationService.Show("未设置游戏路径", "请先前往游戏管理页面选择游戏安装路径", NotificationType.Error, 0);
+                _notificationService.Show("LaunchErr_NoGamePath".GetLocalized(), "LaunchErr_NoGamePathMsg".GetLocalized(), NotificationType.Error, 0);
                 return;
             }
 
@@ -1212,7 +1208,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
                 }
                 else
                 {
-                    _notificationService.Show("游戏启动失败", result.ErrorMessage, NotificationType.Error, 0);
+                    _notificationService.Show("LaunchErr_LaunchFailed".GetLocalized(), result.ErrorMessage, NotificationType.Error, 0);
                 }
             }
             finally
@@ -1294,7 +1290,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
 
             if (!gameExists && !customExists)
             {
-                _notificationService.Show("截图文件夹不存在", "请先在游戏中截图或通过启动器截图功能获取截图", NotificationType.Error, 0);
+                _notificationService.Show("Screenshot_FolderNotFound".GetLocalized(), "Screenshot_FolderNotFoundMsg".GetLocalized(), NotificationType.Error, 0);
                 return;
             }
 
@@ -1543,7 +1539,7 @@ private void QuickSwitchPreset(PresetModel targetPreset)
         private async Task TerminateGameAsync()
 {
     IsLaunchButtonEnabled = false;
-    await SetGameRunningStateAsync(true, "正在终止游戏...");
+    await SetGameRunningStateAsync(true, "LaunchBtn_Terminating".GetLocalized());
 
     try
     {

@@ -45,6 +45,23 @@ namespace FufuLauncher
             }
 
             var key = "FufuLauncher";
+            
+            if (args.Length > 0 && string.Equals(args[0], "restart", StringComparison.OrdinalIgnoreCase))
+            {
+                const int maxRetries = 50;
+                const int retryDelayMs = 100;
+                for (int i = 0; i < maxRetries; i++)
+                {
+                    var instance = AppInstance.FindOrRegisterForKey(key);
+                    if (instance.IsCurrent)
+                    {
+                        goto startApp;
+                    }
+                    instance.UnregisterKey();
+                    Thread.Sleep(retryDelayMs);
+                }
+            }
+
             var mainInstance = AppInstance.FindOrRegisterForKey(key);
 
             if (!mainInstance.IsCurrent)
@@ -55,6 +72,7 @@ namespace FufuLauncher
                 return;
             }
 
+            startApp:
             Application.Start((p) =>
             {
                 var context = new DispatcherQueueSynchronizationContext(
@@ -93,14 +111,14 @@ private static void RunElevatedInjection(string[] args)
 
         if (result != 0)
         {
-            MessageBox(IntPtr.Zero, $"注入启动失败: {errorMessage} (代码: {result})", "FufuLauncher 错误", 0x10);
+            MessageBox(IntPtr.Zero, string.Format("Program_InjectionFailed".GetLocalized(), errorMessage, result), "Program_ErrorTitle".GetLocalized(), 0x10);
         }
 
         exitCode = result == 0 ? 0 : 1;
     }
     catch (Exception ex)
     {
-        MessageBox(IntPtr.Zero, $"注入进程发生异常: {ex.Message}", "FufuLauncher 错误", 0x10);
+        MessageBox(IntPtr.Zero, string.Format("Program_InjectionException".GetLocalized(), ex.Message), "Program_ErrorTitle".GetLocalized(), 0x10);
     }
     finally
     {

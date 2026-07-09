@@ -1591,22 +1591,16 @@ private async Task ExportUigfAsync(string version)
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         });
 
-        var savePicker = new Windows.Storage.Pickers.FileSavePicker();
-        if (!FilePickerService.InitializeWithValidWindow(savePicker, out var exportErr, GetWindow?.Invoke()))
-        {
-            OnErrorAction?.Invoke(exportErr ?? "无法打开文件选择器");
-            return;
-        }
+        var path = await FilePickerService.PickSaveFileAsync(
+            GetWindow?.Invoke(),
+            new[] { ("JSON 文件", new[] { ".json" }) },
+            $"UIGF_{version.Replace(".", "")}_{uid}_{DateTimeOffset.UtcNow:yyyyMMdd}",
+            Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary,
+            msg => OnErrorAction?.Invoke(msg));
+        if (string.IsNullOrEmpty(path)) return;
 
-        savePicker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-        savePicker.FileTypeChoices.Add("JSON 文件", new List<string> { ".json" });
-        savePicker.SuggestedFileName = $"UIGF_{version.Replace(".", "")}_{uid}_{DateTimeOffset.UtcNow:yyyyMMdd}";
-
-        var file = await savePicker.PickSaveFileAsync();
-        if (file == null) return;
-
-        await File.WriteAllTextAsync(file.Path, json);
-        WeakReferenceMessenger.Default.Send(new NotificationMessage("导出成功", $"已导出 {allLogs.Count} 条记录到 {file.Name} ({version})", NotificationType.Success, 3000));
+        await File.WriteAllTextAsync(path, json);
+        WeakReferenceMessenger.Default.Send(new NotificationMessage("导出成功", $"已导出 {allLogs.Count} 条记录到 {Path.GetFileName(path)} ({version})", NotificationType.Success, 3000));
     }
     catch (Exception ex)
     {
@@ -1621,24 +1615,17 @@ private async Task ImportUigfAsync()
 {
     try
     {
-        var picker = new Windows.Storage.Pickers.FileOpenPicker();
-        if (!FilePickerService.InitializeWithValidWindow(picker, out var importErr, GetWindow?.Invoke()))
-        {
-            OnErrorAction?.Invoke(importErr ?? "无法打开文件选择器");
-            return;
-        }
-
-        picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
-        picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-        picker.FileTypeFilter.Add(".json");
-
-        var file = await picker.PickSingleFileAsync();
-        if (file == null) return;
+        var path = await FilePickerService.PickOpenFileAsync(
+            GetWindow?.Invoke(),
+            new[] { ("JSON 文件", new[] { ".json" }) },
+            Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary,
+            msg => OnErrorAction?.Invoke(msg));
+        if (string.IsNullOrEmpty(path)) return;
 
         IsFetching = true;
         CrawlerStatus = "正在读取 UIGF 文件...";
 
-        var json = await File.ReadAllTextAsync(file.Path);
+        var json = await File.ReadAllTextAsync(path);
         using var doc = JsonDocument.Parse(json);
         var root = doc.RootElement;
 

@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 using System.Security.Cryptography;
 using CommunityToolkit.Mvvm.Messaging;
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 
 namespace FufuLauncher.Services;
@@ -19,14 +20,14 @@ public class HashValidationService
 
             if (!File.Exists(hashFilePath))
             {
-                SendNotification("校验失败", "找不到校验文件，请检查客户端完整性", NotificationType.Error);
+                SendNotification("HashCheck_Failed".GetLocalized(), "HashCheck_FileNotFound".GetLocalized(), NotificationType.Error);
                 return;
             }
 
             string[] hashLines = await File.ReadAllLinesAsync(hashFilePath);
             if (hashLines.Length < 2)
             {
-                SendNotification("校验失败", "格式错误", NotificationType.Error);
+                SendNotification("HashCheck_Failed".GetLocalized(), "HashCheck_FormatError".GetLocalized(), NotificationType.Error);
                 return;
             }
 
@@ -38,13 +39,13 @@ public class HashValidationService
 
             if (!captureAppValid)
             {
-                string errorMessage = "发现组件被修改或缺失，请检查：\nCaptureApp\n";
-                SendNotification("校验未通过", errorMessage.TrimEnd(), NotificationType.Warning);
+                string errorMessage = "HashCheck_ComponentModified".GetLocalized();
+                SendNotification("HashCheck_NotPassed".GetLocalized(), errorMessage.TrimEnd(), NotificationType.Warning);
             }
         }
         catch (Exception ex)
         {
-            SendNotification("校验组件异常", $"执行哈希校验时发生错误: {ex.Message}", NotificationType.Error);
+            SendNotification("HashCheck_Exception".GetLocalized(), string.Format("HashCheck_ExceptionMsg".GetLocalized(), ex.Message), NotificationType.Error);
         }
     }
 

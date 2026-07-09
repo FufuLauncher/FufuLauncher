@@ -12,6 +12,7 @@ namespace FufuLauncher.Constants
         public const string AccountLockUrl = "https://user.mihoyo.com/login-platform/index.html?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&steps_bar=1&uc_type=3&redirect_url=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&st=https%253A%252F%252Fuser.mihoyo.com%252Fpassport%252Findex.html%253Flegacy_env%253Dproduction%2523%252Fhome%252Fsecurity&succ_back_type=redirect&fail_back_type=reLogin&ux_mode=redirect#/account/lock";
         public const string AccountSecurityUrl = "https://user.mihoyo.com/passport/index.html?legacy_env=production#/home/security";
         public const string AgreementUrl = "https://philia093.cyou/";
+        public const string AgreementFallbackUrl = "https://fu1.fun/";
         public const string IconTroubleshootUrl = "https://wwaoi.lanzouu.com/ig75f3hedlaj";
         public const string RoleAvgUrl = "http://154.44.25.230:8080/getRoleAvg";
         public const string AbyssRank2Url = "http://154.44.25.230:8080/getAbyssRank2";
@@ -32,8 +33,11 @@ namespace FufuLauncher.Constants
         public const string PluginProxyUrl = "http://kr2-proxy.gitwarp.top:9980/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";
         public const string PluginRawUrl = "https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip?raw=true";
         public const string AnnouncementUrl = "https://philia093.cyou/announcement.json";
+        public const string AnnouncementFallbackUrl = "https://fu1.fun/announcement.json";
         public const string UpdateJsonUrl = "https://philia093.cyou/Update.json";
+        public const string UpdateJsonFallbackUrl = "https://fu1.fun/Update.json";
         public const string UpdateHtmlUrl = "https://philia093.cyou/Update.html";
+        public const string UpdateHtmlFallbackUrl = "https://fu1.fun/Update.html";
         public const string MihoyoBbsUserGameRolesUrl = "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn";
         public const string MiyousheUserFullInfoUrl = "https://bbs-api.miyoushe.com/user/wapi/getUserFullInfo";
         public const string PassportCreateQrLoginUrl = "https://passport-api.mihoyo.com/account/ma-cn-passport/web/createQRLogin";

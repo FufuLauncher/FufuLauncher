@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:FufuLauncher.ViewModels"
     xmlns:views="using:FufuLauncher.Views"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Background="Transparent">
 
@@ -105,15 +106,15 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="16,12,16,0" Spacing="12"
                         HorizontalAlignment="Right">
                 <AutoSuggestBox x:Name="RoleSearchBox"
-                                PlaceholderText="搜索角色..."
+                                PlaceholderText="{helpers:Loc Key=DataPage_SearchRole}"
                                 QueryIcon="Find"
                                 Width="160"
                                 TextChanged="OnRoleSearchTextChanged" />
 
                 <ComboBox SelectedIndex="0" SelectionChanged="OnRoleFilterChanged" Width="120">
-                    <ComboBoxItem Content="全部角色" />
-                    <ComboBoxItem Content="仅看 5星" />
-                    <ComboBoxItem Content="仅看 4星" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_AllRoles}" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_Only5Star}" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_Only4Star}" />
                 </ComboBox>
             </StackPanel>
 
@@ -165,7 +166,7 @@
                                         </Border>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{x:Bind Star}" Foreground="#FFB13B" FontWeight="Bold" />
-                                            <TextBlock Text="星" Foreground="#FFB13B" />
+                                            <TextBlock Text="{helpers:Loc Key=DataPage_StarUnit}" Foreground="#FFB13B" />
                                         </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
@@ -179,16 +180,16 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Spacing="4">
-                                    <TextBlock Text="天赋 (TALENTS)" FontSize="10"
+                                    <TextBlock Text="{helpers:Loc Key=DataPage_Talents}" FontSize="10"
                                                Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                     <TextBlock Text="{x:Bind TalentsDisplay}" FontSize="12" FontWeight="SemiBold" />
-                                    <TextBlock Text="命座分布 (C0/C1/C2)" Margin="0,6,0,0" FontSize="10"
+                                    <TextBlock Text="{helpers:Loc Key=DataPage_ConstellationDist}" Margin="0,6,0,0" FontSize="10"
                                                Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                     <TextBlock Text="{x:Bind ConstellationSummary}" FontSize="11"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Spacing="4">
-                                    <TextBlock Text="平均伤害 (AVG DMG)" FontSize="10"
+                                    <TextBlock Text="{helpers:Loc Key=DataPage_AvgDmg}" FontSize="10"
                                                Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                     <TextBlock Text="{x:Bind DamageDisplay}" FontSize="16" FontWeight="Bold"
                                                Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
@@ -199,7 +200,7 @@
                             </Grid>
 
                             <StackPanel Grid.Row="3" Margin="0,12,0,0">
-                                <TextBlock Text="热门武器 (TOP WEAPONS)" FontSize="10" FontWeight="Bold" Opacity="0.6"
+                                <TextBlock Text="{helpers:Loc Key=DataPage_TopWeapons}" FontSize="10" FontWeight="Bold" Opacity="0.6"
                                            Margin="0,0,0,4" />
                                 <ItemsControl ItemsSource="{x:Bind TopWeapons}">
                                     <ItemsControl.ItemsPanel>
@@ -233,7 +234,7 @@
                             </StackPanel>
 
                             <StackPanel Grid.Row="4" Margin="0,12,0,0">
-                                <TextBlock Text="热门圣遗物 (TOP ARTIFACTS)" FontSize="10" FontWeight="Bold" Opacity="0.6"
+                                <TextBlock Text="{helpers:Loc Key=DataPage_TopArtifacts}" FontSize="10" FontWeight="Bold" Opacity="0.6"
                                            Margin="0,0,0,4" />
                                 <ItemsControl ItemsSource="{x:Bind TopArtifacts}">
                                     <ItemsControl.ItemsPanel>
@@ -328,15 +329,15 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="平均间隔:" FontSize="12"
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{helpers:Loc Key=DataPage_AvgInterval}" FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind AvgDaysString}" FontSize="12" />
 
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="最短间隔:" FontSize="12"
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{helpers:Loc Key=DataPage_MinInterval}" FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind MinGapPool}" FontSize="12" />
 
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="历史复刻:" FontSize="12"
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{helpers:Loc Key=DataPage_HistoryRerun}" FontSize="12"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                VerticalAlignment="Top" />
                                     <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind HistoryString}" FontSize="12"
@@ -357,7 +358,7 @@
                         Spacing="10"
                         Visibility="Collapsed">
                 <ProgressRing IsActive="True" Width="50" Height="50" />
-                <TextBlock Text="正在获取时间轴数据，请稍候..."
+                <TextBlock Text="{helpers:Loc Key=DataPage_LoadingTimeline}"
                            HorizontalAlignment="Center"
                            Style="{ThemeResource SubtitleTextBlockStyle}" />
             </StackPanel>
@@ -380,14 +381,14 @@
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="16,12,16,0" Spacing="12"
                         HorizontalAlignment="Right">
                 <ComboBox SelectedIndex="0" SelectionChanged="OnAbyssSortChanged" Width="120">
-                    <ComboBoxItem Content="使用率 (↓)" />
-                    <ComboBoxItem Content="竞速耗时 (↑)" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_UsageRate}" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_SpeedrunTime}" />
                 </ComboBox>
 
                 <ComboBox SelectedIndex="0" SelectionChanged="OnAbyssFilterChanged" Width="120">
-                    <ComboBoxItem Content="全部角色" />
-                    <ComboBoxItem Content="仅看 5星" />
-                    <ComboBoxItem Content="仅看 4星" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_AllRoles}" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_Only5Star}" />
+                    <ComboBoxItem Content="{helpers:Loc Key=DataPage_Only4Star}" />
                 </ComboBox>
             </StackPanel>
 
@@ -439,7 +440,7 @@
                                     <TextBlock Text="{x:Bind Star}"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
                                                VerticalAlignment="Center" />
-                                    <TextBlock Text="星" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                    <TextBlock Text="{helpers:Loc Key=DataPage_StarUnit}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                FontSize="12" VerticalAlignment="Center" />
                                 </StackPanel>
 
@@ -452,26 +453,26 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Grid.Column="0">
-                                        <TextBlock Text="使用率" FontSize="10"
+                                        <TextBlock Text="{helpers:Loc Key=DataPage_UsageRate}" FontSize="10"
                                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                         <TextBlock Text="{x:Bind UseRateStr}" FontSize="13" FontWeight="SemiBold"
                                                    Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="1">
-                                        <TextBlock Text="持有率" FontSize="10"
+                                        <TextBlock Text="{helpers:Loc Key=DataPage_OwnRate}" FontSize="10"
                                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                         <TextBlock Text="{x:Bind OwnRateStr}" FontSize="13" />
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="2">
-                                        <TextBlock Text="平均命座" FontSize="10"
+                                        <TextBlock Text="{helpers:Loc Key=DataPage_AvgConstellation}" FontSize="10"
                                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                         <TextBlock Text="{x:Bind CollectionStr}" FontSize="13" />
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="3">
-                                        <TextBlock Text="平均耗时" FontSize="10"
+                                        <TextBlock Text="{helpers:Loc Key=DataPage_AvgTime}" FontSize="10"
                                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                         <TextBlock Text="{x:Bind TimeStr}" FontSize="13" />
                                     </StackPanel>
@@ -514,7 +515,7 @@
 
                             <Border Grid.Row="0" CornerRadius="12,12,0,0" Height="190"
                                     Tapped="OnWishImageTapped"
-                                    ToolTipService.ToolTip="点击查看大图">
+                                    ToolTipService.ToolTip="{helpers:Loc Key=DataPage_ClickToView}">
                                 <Image Source="{x:Bind Avatar}" Stretch="UniformToFill" VerticalAlignment="Top" />
                             </Border>
                             <StackPanel Grid.Row="1" Padding="16,12">
@@ -529,7 +530,7 @@
                                 <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,0,0,6">
                                     <Border Background="#26FFB13B" CornerRadius="4" Padding="6,2"
                                             VerticalAlignment="Center">
-                                        <TextBlock Text="5星" Foreground="#E6951A" FontWeight="Bold" FontSize="11" />
+                                        <TextBlock Text="{helpers:Loc Key=DataPage_5Star}" Foreground="#E6951A" FontWeight="Bold" FontSize="11" />
                                     </Border>
                                     <TextBlock Text="{x:Bind Star5Display}" FontSize="15" FontWeight="SemiBold"
                                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -539,7 +540,7 @@
                                 <StackPanel Orientation="Horizontal" Spacing="6">
                                     <Border Background="#26D6ADFF" CornerRadius="4" Padding="6,2"
                                             VerticalAlignment="Center">
-                                        <TextBlock Text="4星" Foreground="#9E6ADB" FontWeight="Bold" FontSize="11" />
+                                        <TextBlock Text="{helpers:Loc Key=DataPage_4Star}" Foreground="#9E6ADB" FontWeight="Bold" FontSize="11" />
                                     </Border>
                                     <TextBlock Text="{x:Bind Star4Display}" FontSize="13"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -631,7 +632,7 @@
                 <Button Click="OnSwitchToRoleData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
-                        ToolTipService.ToolTip="角色数据">
+                        ToolTipService.ToolTip="{helpers:Loc Key=DataPage_RoleData}">
                     <Image Source="/Assets/DataCenterIcons/home.png"
                            Width="24" Height="24" Stretch="Uniform" />
                 </Button>
@@ -639,7 +640,7 @@
                 <Button Click="OnSwitchToAbyssData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
-                        ToolTipService.ToolTip="幽境危战">
+                        ToolTipService.ToolTip="{helpers:Loc Key=DataPage_AbyssData}">
                     <Image Source="/Assets/DataCenterIcons/calculator.png"
                            Width="24" Height="24" Stretch="Uniform" />
                 </Button>
@@ -647,7 +648,7 @@
                 <Button Click="OnSwitchToSpiralAbyssData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
-                        ToolTipService.ToolTip="深渊螺旋">
+                        ToolTipService.ToolTip="{helpers:Loc Key=DataPage_SpiralAbyss}">
                     <Image Source="/Assets/DataCenterIcons/todos.png"
                            Width="24" Height="24" Stretch="Uniform" />
                 </Button>
@@ -655,7 +656,7 @@
                 <Button Click="OnSwitchToWishData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
-                        ToolTipService.ToolTip="卡池数据">
+                        ToolTipService.ToolTip="{helpers:Loc Key=DataPage_WishData}">
                     <Image Source="/Assets/DataCenterIcons/wish.png"
                            Width="24" Height="24" Stretch="Uniform" />
                 </Button>
@@ -663,7 +664,7 @@
                 <Button Click="OnSwitchToRerunData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
-                        ToolTipService.ToolTip="复刻计时">
+                        ToolTipService.ToolTip="{helpers:Loc Key=DataPage_RerunTimer}">
                     <Image Source="/Assets/DataCenterIcons/characters.png"
                            Width="24" Height="24" Stretch="Uniform" />
                 </Button>
@@ -671,7 +672,7 @@
                 <Button Click="OnSwitchToTimelineData"
                         Width="44" Height="44" CornerRadius="22"
                         Background="{ThemeResource IconBackgroundBrush}" BorderThickness="0"
-                        ToolTipService.ToolTip="活动时间轴">
+                        ToolTipService.ToolTip="{helpers:Loc Key=DataPage_Timeline}">
                     <Image Source="/Assets/DataCenterIcons/timeline.png"
                            Width="24" Height="24" Stretch="Uniform" />
                 </Button>
@@ -683,7 +684,7 @@
             </Grid.Shadow>
         </Grid>
         <TextBlock Grid.Column="0"
-                   Text="数据由提瓦特小助手提供 活动时间轴由Paimon.moe提供"
+                   Text="{helpers:Loc Key=DataPage_DataProvidedBy}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
                    Margin="0,0,0,12"

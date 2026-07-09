@@ -6,6 +6,7 @@ using Windows.Foundation;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
+using FufuLauncher.Helpers;
 using Windows.Media.Core;
 using Windows.Media.Playback;
 
@@ -44,8 +45,9 @@ public sealed partial class EasterEggPage : Page
     };
 
     private DispatcherTimer _typewriterTimer;
-    private MediaPlayer _musicPlayer;
-    private TypedEventHandler<MediaPlayer, object> _mediaOpenedHandler;
+    private MediaPlayer? _musicPlayer;
+    private MediaPlayer? _videoPlayer;
+    private TypedEventHandler<MediaPlayer, object>? _mediaOpenedHandler;
     private int _currentWelcomeIndex = 0;
     private int _charIndex = 0;
     private bool _isDeleting = false;
@@ -66,10 +68,10 @@ public sealed partial class EasterEggPage : Page
 
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        if (BgVideoPlayer.MediaPlayer != null && BgVideoPlayer.MediaPlayer.PlaybackSession.PlaybackState != MediaPlaybackState.Playing)
+        if (_videoPlayer != null && _videoPlayer.PlaybackSession.PlaybackState != MediaPlaybackState.Playing)
         {
-            BgVideoPlayer.MediaPlayer.IsLoopingEnabled = true;
-            BgVideoPlayer.MediaPlayer.Play();
+            _videoPlayer.IsLoopingEnabled = true;
+            _videoPlayer.Play();
         }
     }
 
@@ -88,29 +90,32 @@ public sealed partial class EasterEggPage : Page
             string videoPath = Path.Combine(assetsDir, VideoFileName);
             if (File.Exists(videoPath))
             {
-                var source = MediaSource.CreateFromUri(new Uri(videoPath));
-                BgVideoPlayer.Source = source;
+                _videoPlayer = new MediaPlayer();
+                MediaPlayerHelper.DisableSystemMediaControls(_videoPlayer);
+                _videoPlayer.Source = MediaSource.CreateFromUri(new Uri(videoPath));
+                _videoPlayer.IsLoopingEnabled = true;
+                BgVideoPlayer.SetMediaPlayer(_videoPlayer);
 
                 _mediaOpenedHandler = (_, _) =>
                 {
                     DispatcherQueue.TryEnqueue(() =>
                     {
-                        if (!_cleaned && BgVideoPlayer?.MediaPlayer != null)
+                        if (!_cleaned && _videoPlayer != null)
                         {
-                            BgVideoPlayer.MediaPlayer.IsLoopingEnabled = true;
-                            BgVideoPlayer.MediaPlayer.Play();
+                            _videoPlayer.Play();
                         }
                     });
                 };
-                BgVideoPlayer.MediaPlayer.MediaOpened += _mediaOpenedHandler;
+                _videoPlayer.MediaOpened += _mediaOpenedHandler;
 
-                BgVideoPlayer.AutoPlay = true;
+                _videoPlayer.Play();
             }
 
             string musicPath = Path.Combine(assetsDir, MusicFileName);
             if (File.Exists(musicPath))
             {
                 _musicPlayer = new MediaPlayer();
+                MediaPlayerHelper.DisableSystemMediaControls(_musicPlayer);
                 _musicPlayer.Source = MediaSource.CreateFromUri(new Uri(musicPath));
                 _musicPlayer.IsLoopingEnabled = true;
                 _musicPlayer.Play();
@@ -212,7 +217,8 @@ public sealed partial class EasterEggPage : Page
 
             var music = _musicPlayer;
             _musicPlayer = null;
-            var videoPlayer = BgVideoPlayer?.MediaPlayer;
+            var videoPlayer = _videoPlayer;
+            _videoPlayer = null;
 
             if (videoPlayer != null && _mediaOpenedHandler != null)
             {
@@ -221,7 +227,7 @@ public sealed partial class EasterEggPage : Page
             }
 
             if (BgVideoPlayer != null)
-                BgVideoPlayer.Source = null;
+                BgVideoPlayer.SetMediaPlayer(null);
 
             Task.Run(() =>
             {

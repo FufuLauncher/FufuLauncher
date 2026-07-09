@@ -20,6 +20,23 @@ public partial class PluginSettingsViewModel : ObservableObject
     private string _dllPath;
     private IniFile _iniFile;
     private bool _useKeyListInput = true;
+    private bool _isAutoDisableFpsOff = false;
+    
+    public bool IsAutoDisableFpsOff
+    {
+        get => _isAutoDisableFpsOff;
+        set
+        {
+            if (SetProperty(ref _isAutoDisableFpsOff, value))
+            {
+                var localSettings = App.GetService<FufuLauncher.Contracts.Services.ILocalSettingsService>();
+                if (localSettings != null)
+                {
+                    _ = localSettings.SaveSettingAsync("IsAutoDisableFpsOff", value);
+                }
+            }
+        }
+    }
     
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsDownloadSupported))]
@@ -209,63 +226,71 @@ public partial class PluginSettingsViewModel : ObservableObject
         }
     }
 
-    private void CheckPluginStates()
-    {
-        string fpsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FPS");
-        string fpsEnabledPath = Path.Combine(fpsDir, "FPS.dll");
-        string fpsDisabledPath = Path.Combine(fpsDir, "FPS.disabled");
-        
-        string avatarDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar");
-        string avatarEnabledPath = Path.Combine(avatarDir, "Avatar.dll");
-        string avatarDisabledPath = Path.Combine(avatarDir, "Avatar.disabled");
-        
-        string mainDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FuFuPlugin");
-        string mainEnabledPath = Path.Combine(mainDir, "FufuLauncher.UnlockerIsland.dll");
-        string mainDisabledPath = Path.Combine(mainDir, "FufuLauncher.UnlockerIsland.disabled");
-
-        if (File.Exists(mainEnabledPath) && File.Exists(mainDisabledPath))
-        {
-            try { File.Delete(mainDisabledPath); } catch { }
-        }
+private void CheckPluginStates()
+{
+    string fpsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FPS");
+    string fpsEnabledPath = Path.Combine(fpsDir, "FPS.dll");
+    string fpsDisabledPath = Path.Combine(fpsDir, "FPS.disabled");
     
-        _isMainPluginEnabled = File.Exists(mainEnabledPath);
-        OnPropertyChanged(nameof(IsMainPluginEnabled));
+    string avatarDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "Avatar");
+    string avatarEnabledPath = Path.Combine(avatarDir, "Avatar.dll");
+    string avatarDisabledPath = Path.Combine(avatarDir, "Avatar.disabled");
+    
+    string mainDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FuFuPlugin");
+    string mainEnabledPath = Path.Combine(mainDir, "FufuLauncher.UnlockerIsland.dll");
+    string mainDisabledPath = Path.Combine(mainDir, "FufuLauncher.UnlockerIsland.disabled");
 
-        if (File.Exists(fpsEnabledPath) && File.Exists(fpsDisabledPath))
-        {
-            try { File.Delete(fpsDisabledPath); } catch { }
-        }
-        
-        if (File.Exists(avatarEnabledPath) && File.Exists(avatarDisabledPath))
-        {
-            try { File.Delete(avatarDisabledPath); } catch { }
-        }
-
-        bool fpsEnabled = File.Exists(fpsEnabledPath);
-        bool avatarEnabled = File.Exists(avatarEnabledPath);
-
-        if (fpsEnabled && avatarEnabled)
-        {
-            try
-            {
-                File.Move(fpsEnabledPath, fpsDisabledPath);
-                File.Move(avatarEnabledPath, avatarDisabledPath);
-            }
-            catch { }
-            
-            _isFpsPluginEnabled = false;
-            _isAvatarPluginEnabled = false;
-        }
-        else
-        {
-            _isFpsPluginEnabled = fpsEnabled;
-            _isAvatarPluginEnabled = avatarEnabled;
-        }
-
-        OnPropertyChanged(nameof(IsFpsPluginEnabled));
-        OnPropertyChanged(nameof(IsAvatarPluginEnabled));
-        RefreshUIState();
+    if (File.Exists(mainEnabledPath) && File.Exists(mainDisabledPath))
+    {
+        try { File.Delete(mainDisabledPath); } catch { }
     }
+
+    _isMainPluginEnabled = File.Exists(mainEnabledPath);
+    OnPropertyChanged(nameof(IsMainPluginEnabled));
+
+    if (File.Exists(fpsEnabledPath) && File.Exists(fpsDisabledPath))
+    {
+        try { File.Delete(fpsDisabledPath); } catch { }
+    }
+    
+    if (File.Exists(avatarEnabledPath) && File.Exists(avatarDisabledPath))
+    {
+        try { File.Delete(avatarDisabledPath); } catch { }
+    }
+
+    bool fpsEnabled = File.Exists(fpsEnabledPath);
+    bool avatarEnabled = File.Exists(avatarEnabledPath);
+    
+    bool newFpsState = fpsEnabled;
+    bool newAvatarState = avatarEnabled;
+
+    if (fpsEnabled && avatarEnabled)
+    {
+        try
+        {
+            File.Move(fpsEnabledPath, fpsDisabledPath);
+            File.Move(avatarEnabledPath, avatarDisabledPath);
+        }
+        catch { }
+        
+        newFpsState = false;
+        newAvatarState = false;
+    }
+
+    if (_isFpsPluginEnabled != newFpsState)
+    {
+        _isFpsPluginEnabled = newFpsState;
+        OnPropertyChanged(nameof(IsFpsPluginEnabled));
+    }
+
+    if (_isAvatarPluginEnabled != newAvatarState)
+    {
+        _isAvatarPluginEnabled = newAvatarState;
+        OnPropertyChanged(nameof(IsAvatarPluginEnabled));
+    }
+
+    RefreshUIState();
+}
 
 public async Task TriggerBackgroundAuthCheckAsync()
 {
@@ -540,6 +565,10 @@ public async Task TriggerBackgroundAuthCheckAsync()
             var autoCreateTask = localSettings.ReadSettingAsync("IsAutoCreatePresetEnabled");
             autoCreateTask.Wait();
             _isAutoCreatePresetEnabled = autoCreateTask.Result != null && Convert.ToBoolean(autoCreateTask.Result);
+            
+            var autoDisableFpsTask = localSettings.ReadSettingAsync("IsAutoDisableFpsOff");
+            autoDisableFpsTask.Wait();
+            _isAutoDisableFpsOff = autoDisableFpsTask.Result != null && Convert.ToBoolean(autoDisableFpsTask.Result);
             
             var devFeaturesTask = localSettings.ReadSettingAsync("IsDevFeaturesEnabled");
             devFeaturesTask.Wait();

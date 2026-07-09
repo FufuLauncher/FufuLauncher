@@ -5,6 +5,7 @@ Licensed under the MIT License.
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Diagnostics;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services
 {
@@ -119,7 +120,7 @@ namespace FufuLauncher.Services
         {
             if (!IsLauncherDllLoaded)
             {
-                errorMessage = "由于系统缺少 C++ 运行库或核心文件被杀毒软件拦截，Launcher.dll 未加载成功，无法启动。";
+                errorMessage = "Launcher_DllNotLoaded".GetLocalized();
                 processId = 0;
                 return -1;
             }

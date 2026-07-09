@@ -482,7 +482,7 @@
                     <TextBlock
                         HorizontalAlignment="Center"
                         Style="{StaticResource SubtitleTextBlockStyle}"
-                        Text="尚未登录" />
+                        Text="{helpers:Loc Key=Account_NotLoggedIn}" />
                     <Button
                         Padding="32,12"
                         HorizontalAlignment="Center"
@@ -500,7 +500,7 @@
                         <TextBlock
                             HorizontalAlignment="Center"
                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                            Text="已保存的其他账户" />
+                            Text="{helpers:Loc Key=Account_SavedAccounts}" />
                         <ListView
                             Width="320"
                             ItemsSource="{x:Bind ViewModel.SavedAccounts, Mode=OneWay}"
@@ -533,7 +533,7 @@
                                             Grid.Column="2"
                                             Margin="0,0,4,0"
                                             Click="OnSwitchAccountClicked"
-                                            Content="登录"
+                                            Content="{helpers:Loc Key=Account_Login}"
                                             FontSize="12" />
                                         <Button
                                             Grid.Column="3"
@@ -709,7 +709,7 @@
                                 </Grid>
                             </Border>
 
-                            <Grid Grid.Row="1" RowSpacing="20">
+                            <Grid Grid.Row="1" RowSpacing="8">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -741,7 +741,7 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontSize="16" Glyph="&#xE916;" />
-                                            <TextBlock x:Name="BtnCheckinText" Text="每日签到" />
+                                            <TextBlock x:Name="BtnCheckinText" Text="{helpers:Loc Key=Account_DailyCheckin}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -766,7 +766,7 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontSize="16" Glyph="&#xE72C;" />
-                                            <TextBlock Text="刷新信息" />
+                                            <TextBlock Text="{helpers:Loc Key=Account_RefreshInfo}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -791,7 +791,7 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontSize="16" Glyph="&#xEB9E;" />
-                                            <TextBlock Text="旅行札记" />
+                                            <TextBlock Text="{helpers:Loc Key=Account_TravelJournal}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -816,7 +816,7 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontSize="16" Glyph="&#xE9D2;" />
-                                            <TextBlock Text="抽卡分析" />
+                                            <TextBlock Text="{helpers:Loc Key=Account_GachaAnalysis}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -841,7 +841,7 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontSize="16" Glyph="&#xE72E;" />
-                                            <TextBlock Text="账号安全" />
+                                            <TextBlock Text="{helpers:Loc Key=Account_AccountSecurity}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -870,7 +870,7 @@
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                 Glyph="&#xE7BA;" />
                                             <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                       Text="冻结账号" />
+                                                       Text="{helpers:Loc Key=Account_FreezeAccount}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -895,7 +895,7 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontSize="16" Glyph="&#xE8C8;" />
-                                            <TextBlock Text="复制 Cookie" />
+                                            <TextBlock Text="{helpers:Loc Key=Account_CopyCookie}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -924,7 +924,7 @@
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                 Glyph="&#xE74D;" />
                                             <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                       Text="删除账号" />
+                                                       Text="{helpers:Loc Key=Account_DeleteAccount}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -953,7 +953,7 @@
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                 Glyph="&#xE7E8;" />
                                             <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                       Text="退出登录" />
+                                                       Text="{helpers:Loc Key=Account_Logout}" />
                                         </StackPanel>
                                     </Grid>
                                 </Button>
@@ -987,7 +987,7 @@
                                             FontSize="16"
                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
                                             Glyph="&#xE90A;" />
-                                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="社区动态" />
+                                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{helpers:Loc Key=Account_CommunityFeed}" />
                                     </StackPanel>
 
                                     <Grid ColumnSpacing="8">
@@ -1005,7 +1005,7 @@
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                Text="获赞数" />
+                                                Text="{helpers:Loc Key=Account_Likes}" />
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
@@ -1021,7 +1021,7 @@
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                Text="发帖数" />
+                                                Text="{helpers:Loc Key=Account_Posts}" />
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
@@ -1037,7 +1037,7 @@
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                Text="回复数" />
+                                                Text="{helpers:Loc Key=Account_Replies}" />
                                             <TextBlock
                                                 Margin="0,4,0,0"
                                                 FontSize="20"
@@ -1073,7 +1073,7 @@
                                             FontSize="16"
                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
                                             Glyph="&#xE7FC;" />
-                                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="绑定角色" />
+                                        <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{helpers:Loc Key=Account_BoundCharacters}" />
                                     </StackPanel>
 
                                     <ScrollViewer
@@ -1137,7 +1137,7 @@
                                                             BorderThickness="0"
                                                             Click="OnCopyGameUidClicked"
                                                             Tag="{Binding game_uid}"
-                                                            ToolTipService.ToolTip="复制 UID">
+                                                            ToolTipService.ToolTip="{helpers:Loc Key=Account_CopyUID}">
                                                             <FontIcon
                                                                 FontSize="12"
                                                                 Foreground="{ThemeResource TextFillColorTertiaryBrush}"
@@ -1164,11 +1164,11 @@
                                             <TextBlock
                                                 FontSize="14"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                Text="暂无绑定角色" />
+                                                Text="{helpers:Loc Key=Account_NoCharacters}" />
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                                Text="请在米游社或游戏中绑定角色后刷新" />
+                                                Text="{helpers:Loc Key=Account_BindHint}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
@@ -1198,11 +1198,11 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Spacing="4">
-                                            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="游戏时长" />
+                                            <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}" Text="{helpers:Loc Key=Account_PlayTime}" />
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                Text="近 30 天游玩统计" />
+                                                Text="{helpers:Loc Key=Account_RecentDays30}" />
                                         </StackPanel>
                                         <Border
                                             Grid.Column="1"
@@ -1215,7 +1215,7 @@
                                                 FontSize="11"
                                                 FontWeight="SemiBold"
                                                 Foreground="White"
-                                                Text="游戏中" />
+                                                Text="{helpers:Loc Key=Account_InGame}" />
                                         </Border>
                                     </Grid>
                                     <Grid Grid.Row="1" ColumnSpacing="12">
@@ -1232,7 +1232,7 @@
                                                 <TextBlock
                                                     FontSize="12"
                                                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                    Text="总时长" />
+                                                    Text="{helpers:Loc Key=Account_TotalTime}" />
                                                 <TextBlock
                                                     FontSize="28"
                                                     FontWeight="SemiBold"
@@ -1249,7 +1249,7 @@
                                                 <TextBlock
                                                     FontSize="12"
                                                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                    Text="日均时长" />
+                                                    Text="{helpers:Loc Key=Account_DailyAvg}" />
                                                 <TextBlock
                                                     FontSize="28"
                                                     FontWeight="SemiBold"
@@ -1303,7 +1303,7 @@
                                             VerticalAlignment="Center"
                                             FontSize="14"
                                             Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                            Text="近 30 天暂无游戏记录"
+                                            Text="{helpers:Loc Key=Account_NoRecentRecords30}"
                                             Visibility="{x:Bind ControlPanelViewModel.WeeklyStats.DailyRecords.Count, Converter={StaticResource EmptyCountToVisibilityConverter}, Mode=OneWay}" />
                                     </Grid>
                                 </Grid>

@@ -1,0 +1,1418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>Batch Save Failed</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>Batch generated and overwrote all avatar sizes</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>Clear Failed</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>Avatar size {0}x{0} cleared</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>Avatar cropped and saved successfully</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>No avatar found to edit</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>Notice</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>Import Failed</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>Load Failed</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>Save Failed</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>If you have NVIDIA RTX 40-series or newer AI frame generation enabled, or use frame display software such as RTSS or MSI Afterburner, it may cause the game to freeze or fail to start normally.</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>Don&apos;t show this warning again</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>Compatibility Warning</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>The frame rate display plugin hash does not match. It may have been tampered with or corrupted. Please reinstall the launcher.</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>Repair Failed</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS display plugin has been successfully repaired and installed</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>Repairing FPS Plugin</value></data>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>Язык изменён</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>Язык изменён. Некоторые элементы интерфейса требуют перезапуска для полного применения.</value></data>
+  <data name="LanguageSelection_Title" xml:space="preserve"><value>Выберите язык</value></data>
+  <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>Выберите предпочитаемый язык, чтобы продолжить</value></data>
+  <data name="LanguageSelection_Confirm" xml:space="preserve"><value>Подтвердить</value></data>
+  <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>По умолчанию</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>Выбрано</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>This project is currently maintained by an individual developer (CodeCubist).
+We adhere to a player pain-point-driven development direction, promoting open, transparent, and efficient updates.
+Submitting Pull Requests is the core way for users with coding skills to help advance development, optimize structure, and share project maintenance responsibilities.
+If you can help, please use the button below to visit the code repository and submit your contribution.</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>Visit GitHub Repository to Submit Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>Your computer may be ARM-based. The injection feature is not available on ARM-based computers. Are you sure you want to continue enabling it?</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>Continue Enabling</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>Architecture Compatibility Warning</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>Plugin files are abnormal.
+This is usually because the plugin was falsely flagged and blocked by antivirus software (such as Windows Defender) or has been damaged.
+
+Recommendations:
+1. Add the software directory to the antivirus whitelist
+2. Re-download and install the plugin on this page</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>Plugin May Be Corrupted</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>Backup</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>Extracting and installing...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>Installation failed: {0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>Connection failed, trying backup line...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>Main</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>Manual Download</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0} line downloading... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>Plugin installed and refreshed</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>Getting Plugin</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>File not found, please confirm launcher files are complete</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>Main plugin DLL file not found. The plugin may not be installed, was accidentally deleted, or was blocked by antivirus software. Please re-download the plugin, or add the launcher directory to the antivirus whitelist and try again.</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>Main Plugin Missing</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>Enter new preset name</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>Create New Preset</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>Are you sure you want to delete the preset &quot;{0}&quot;? This action cannot be undone!</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>Lock reason: {0}
+
+If you continue, this warning will be ignored and the preset&apos;s Hash will be updated to the current plugin Hash, unlocking the preset. Continue?</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>Continue and Unlock</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>Configuration Preset Locked</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>Confirm Reset</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>Remove all presets for the current plugin and re-download the defaults? This action cannot be undone!</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>Reset All Presets</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>Перезапустить сейчас</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>Перезапустить позже</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>Версия {0}</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>Настройки инжекта</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>Внедрение плагинов через встроенный движок</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>Запуск и внедрение через внешнюю программу</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>FufuLauncher</value></data>
+  <data name="Show" xml:space="preserve"><value>Показать</value></data>
+  <data name="Hide" xml:space="preserve"><value>Скрыть</value></data>
+  <data name="Enabled" xml:space="preserve"><value>Включено</value></data>
+  <data name="Disabled" xml:space="preserve"><value>Отключено</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>Цвет (Hex)</value></data>
+  <data name="Opacity" xml:space="preserve"><value>Прозрачность</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>По умолчанию</value></data>
+  <data name="Browse" xml:space="preserve"><value>Обзор</value></data>
+  <data name="Clear" xml:space="preserve"><value>Очистить</value></data>
+  <data name="High" xml:space="preserve"><value>Высокий</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>Внешний вид и персонализация</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>Стиль текста главной страницы</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>Язык и регион</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>Конфигурация запуска игры</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>Фон и визуальные эффекты</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>Эффекты окна</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>Звук запуска</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>Настройки отметок</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>Расширенные параметры</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>Настройки скриншотов</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>Проверка обновлений</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>О программе</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>Аутентификация лицензии разработчика</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>Тема приложения</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>Выберите тему оформления</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>Светлая тема</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>Тёмная тема</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>Системная тема</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>Свой цвет темы</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>Введите Hex-код. Оставьте пустым и перезапустите для сброса.</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>Отображение карточек</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>Показать или скрыть карточки новостей и отметок</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>Скрыть карточку новостей</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>Скрыть карточку отметок</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>Показать карточку пресетов</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>Показать карточку виджетов</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>Элементы виджетов</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>Выберите инструменты для отображения в виджетах</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>Анализ истории молитв</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>Отслеживание достижений</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>Предметы инвентаря</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>Информация о персонажах</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>Заметки путешественника</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>Видеотека</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>Боевая хроника</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>Цвет фона кнопки запуска</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>Элементы заметок</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>Выберите элементы для отображения (макс. 3)</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>Внимание</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>Данные заметок из API HoYoLAB. Частые обновления могут вызвать капчу; при серьёзных случаях возможна временная блокировка. Снизьте частоту и повторите позже.</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>Скрыть заметки</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>Показать смолу</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>Показать ежедневные поручения</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>Показать валюту обители</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>Показать экспедиции</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>Показать параметрический преобразователь</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>Элементы навигации</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>Выберите элементы боковой панели. Скрытие не отключает функцию — её можно включить в настройках. Главная и Настройки не скрываются.</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>Прозрачность фона</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>Прозрачность рамки</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>Прозрачность изображения</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>Сворачивать в трей при закрытии</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>Запоминать размер окна</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>Мин. размер окна</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>Цвет текста новостей</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>Цвет текста кнопки запуска</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>Цвет текста отметок</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>Язык интерфейса</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>Вступает в силу после перезапуска</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>简体中文 (Рекомендуется)</value></data>
+  <data name="LangZhTW" xml:space="preserve"><value>Традиционный китайский</value></data>
+  <data name="LangEnUS" xml:space="preserve"><value>English</value></data>
+  <data name="LangFr" xml:space="preserve"><value>Français</value></data>
+  <data name="LangDe" xml:space="preserve"><value>Deutsch</value></data>
+  <data name="LangRu" xml:space="preserve"><value>Русский</value></data>
+  <data name="LangJa" xml:space="preserve"><value>日本語</value></data>
+  <data name="LangEs" xml:space="preserve"><value>Испанский</value></data>
+  <data name="LangEsMX" xml:space="preserve"><value>Испанский (Мексика)</value></data>
+  <data name="LangKo" xml:space="preserve"><value>Корейский</value></data>
+  <data name="LangIt" xml:space="preserve"><value>Итальянский</value></data>
+  <data name="LangId" xml:space="preserve"><value>Индонезийский</value></data>
+  <data name="LangPt" xml:space="preserve"><value>Португальский (Бразилия)</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>Язык системы</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>Режим окна запуска</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>Обычное окно</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>Всплывающее окно (без рамки)</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>Разрешение игры</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>Установите размер окна при запуске</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>Ширина (пикс.)</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>Высота (пикс.)</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>Быстрые пресеты</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>Настройка яркости HDR</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>Настройте пиковую яркость HDR и яркость интерфейса в игре</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>Открыть настройки HDR</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>Целевой монитор</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>Укажите монитор для запуска игры</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>Определить мониторы</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>Расширенные параметры запуска</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>Пользовательские параметры добавляются после команды запуска</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>Свои параметры запуска</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>напр. -fullscreen -high</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>Подсказка: Параметры добавляются после команды запуска. Не вводите путь к игре. Если не реагирует, нажмите кнопку пресета ещё раз.</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>Имя исполняемого файла</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>Настройте имя .exe для обнаружения и запуска. Пусто — по умолчанию (YuanShen.exe / GenshinImpact.exe).</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>напр. YuanShen.exe</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>Модуль инжекта</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>Выберите модуль инжекта</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>Встроенный инжект</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>Внешний инжект</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>Встроенный использует движок лаунчера; Внешний — отдельную программу. Полезно при несовместимости встроенного.</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>Напоминание о промокодах</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>Мгновенное оповещение о новых промокодах</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>Мгновенные уведомления о новых промокодах с обратным отсчётом. Каждый код — одно уведомление.</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>Действие после запуска</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>После запуска игры</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>Свернуть в трей и продолжить работу, или сохранить состояние и выйти после запуска игры.</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>Включить свой фон</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>Источник фона</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>Выбрать изображение фона...</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>Очистить фон</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>Слайд-шоу фона</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>Выбрать папку для слайдов...</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>Очистить папку слайдов</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>Интервал слайдов (сек.)</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>Официальный сервер фона</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>Сервер Китая (Skyisland)</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>Глобальный сервер (Teyvat)</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>API официального фона</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>Пусто — API по умолчанию. Свой API должен возвращать структуру getAllGameBasicInfo.</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>Введите URL API фона</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>Сбросить API</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>Загрузить ресурсы фона</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>Скачать последнее изображение</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>Скачать последнее видео</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>Включить акриловый фон</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>Сплошной цвет</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>Акриловое размытие</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>Примечание: Видео-фон переключится на полупрозрачный для производительности.</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>Полупрозрачный режим</value></data>
+  <data name="Opaque" xml:space="preserve"><value>Непрозрачный</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>Полупрозрачный</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>При включении фон страницы становится полупрозрачным.</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>Прозрачность наложения</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>Материал фона окна</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>Выберите визуальный эффект фона окна</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica (Слюда)</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrylic (Акрил)</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>Примечание: Mica доступен только в Windows 11.</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>Показать кнопку меню</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>Показывает кнопку свёртки/развёртки боковой панели.</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>Включить звук запуска</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>Выбрать аудиофайл...</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>Очистить аудио</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>Отметка в игре</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>Получение ежедневных наград (Камни Истока, Мора и т.д.)</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>Отметка сообщества</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>Автовыполнение заданий сообщества для получения монет</value></data>
+  <data name="Like" xml:space="preserve"><value>Нравится</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>Читать посты</value></data>
+  <data name="Share" xml:space="preserve"><value>Поделиться</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>Отметка облачной игры</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>Получение наград облачной игры. Добавьте учётные данные в списке аккаунтов.</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>Автоотметка при запуске</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>Автоматическая отметка при запуске, если ещё не сделана сегодня</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>Пакетная отметка</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>Отметка для всех отмеченных аккаунтов; иначе только для текущего</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>Список аккаунтов</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>Добавить данные облачной игры</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>Капча?</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>Отметки могут вызывать капчу. Настройте данные устройства для снижения риска, или используйте отдельную версию с сервисом капчи.</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>Автономная версия</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>Включить интеграцию BetterGI</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>Запускать BetterGI вместе с игрой</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>Задержка BetterGI (сек.)</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>0 — без задержки; только для BetterGI</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>Закрывать BetterGI при выходе</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>Автоматически закрывать BetterGI при выходе из игры</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>Очистка кэша браузера</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>Очистить кэш WebView2</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>Очистить кэш</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>Приоритет процесса</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>Настройка приоритета ЦП (высокий может влиять на систему)</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>Обычный (по умолчанию)</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>Выше обычного</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>Предупреждение о нагрузке ЦП</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>Оповещение при высокой загрузке ЦП &gt;5 мин без OBS. Включено по умолчанию.</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>Включить предупреждение ЦП</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>Порог предупреждения (%)</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>Редактор конфигурации</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>Обновить базу достижений</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>Включить скриншоты в игре</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>Снимок игрового окна по горячей клавише</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>Горячая клавиша скриншота</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>Нажмите кнопку и задайте сочетание клавиш (Ctrl/Alt/Shift + клавиша)</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>Запись... нажмите сочетание клавиш</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>Папка скриншотов</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>По умолчанию: Документы/FufuScreenshots</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>Открыть папку скриншотов</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>Обновление</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>Проверить и загрузить последнюю версию</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>О нас</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>Аутентификация лицензии разработчика для доступа к функциям</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>Пройти аутентификацию</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>Управление плагинами</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>Включить инжект</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>Загружать плагины при запуске игры</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>Получить плагины</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>Как использовать свободную камеру</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>Добавить плагин</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>Обновить</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>Сортировка</value></data>
+  <data name="SortByName" xml:space="preserve"><value>По имени</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>По статусу (включено сначала)</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>По размеру</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>По дате изменения</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>Переименовать папку</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>Удалить</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>Редактировать конфигурацию</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>Настройки плагинов</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>Нет установленных плагинов</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>Используйте плагины на свой риск. Разработчики не несут ответственности.</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>Проблемы? Попробуйте диагностику системы.</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>Диагностика</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>Помощь</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>Ссылка не является GIF</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>Не удалось загрузить GIF</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>Вкл</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>Выкл</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>Цель конфигурации:</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin (Основной)</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS (Плагин частоты кадров)</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar (Плагин аватаров)</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>Изменён: </value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>Функции (Скачать/Восстановить)</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>Скачать плагин</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>Восстановить FPS плагин</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>Основной плагин включён</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>FPS плагин включён</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>Аватар плагин включён</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>Режим ввода (Список)</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>Список</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>Число</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>Автосоздание пресета</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>Показать функции разработчика</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>Есть идеи или проблемы? Напишите здесь</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>Отправить PR</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>Включить инжект</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>Пресет конфигурации:</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>Переключиться на этот пресет</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[Заблокировано]</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>Удалить пресет</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>Новый пресет</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>Сбросить всё</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>Замена аватаров (загрузите нужный размер)</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>Импорт</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>Обрезать</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>Форматы: PNG, JPG, BMP, WEBP. Вступает в силу при следующем входе в игру.</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>Настроить аватар</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>Сохранить размер</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>Применить ко всем размерам</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>Отмена</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* Перетаскивайте или Ctrl+колёсико для настройки</value></data>
+  <data name="Plugin_FpsUnlock" xml:space="preserve"><value>Разблокировать FPS</value></data>
+  <data name="Plugin_TargetFps" xml:space="preserve"><value>Целевой FPS</value></data>
+  <data name="Plugin_VSync" xml:space="preserve"><value>Отключить V-Sync</value></data>
+  <data name="Plugin_TouchScreen" xml:space="preserve"><value>Мобильный интерфейс</value></data>
+  <data name="Plugin_FovUnlock" xml:space="preserve"><value>Изменить угол обзора</value></data>
+  <data name="Plugin_FovValue" xml:space="preserve"><value>Значение FOV</value></data>
+  <data name="Plugin_DisableDamageText" xml:space="preserve"><value>Скрыть числа урона</value></data>
+  <data name="Plugin_DisableCameraMove" xml:space="preserve"><value>Отключить движение камеры (ульты)</value></data>
+  <data name="Plugin_DisableFog" xml:space="preserve"><value>Отключить туман</value></data>
+  <data name="Plugin_DisableCharFade" xml:space="preserve"><value>Отключить размытие персонажей</value></data>
+  <data name="Plugin_RedirectCraft" xml:space="preserve"><value>Перенаправление верстака</value></data>
+  <data name="Plugin_RemoveTeamAnim" xml:space="preserve"><value>Убрать анимацию загрузки отряда</value></data>
+  <data name="Plugin_HideGrass" xml:space="preserve"><value>Скрыть траву</value></data>
+  <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>Скрыть всю траву</value></data>
+  <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>Свой заголовок окна</value></data>
+  <data name="Plugin_CustomTitleText" xml:space="preserve"><value>Текст заголовка</value></data>
+  <data name="Plugin_ToggleKey" xml:space="preserve"><value>Горячая клавиша перезагрузки конфига</value></data>
+  <data name="Plugin_CraftKey" xml:space="preserve"><value>Горячая клавиша верстака</value></data>
+  <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>Скрыть баннер заданий</value></data>
+  <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>Исправление FOV в особых ракурсах</value></data>
+  <data name="Plugin_HideUID" xml:space="preserve"><value>Скрыть UID</value></data>
+  <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>Быстрая настройка времени</value></data>
+  <data name="Plugin_AutoCook" xml:space="preserve"><value>Быстрое открытие готовки</value></data>
+  <data name="Plugin_AutoExpedition" xml:space="preserve"><value>Быстрое открытие экспедиций</value></data>
+  <data name="Plugin_AutoCookKey" xml:space="preserve"><value>Клавиша готовки</value></data>
+  <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>Клавиша экспедиций</value></data>
+  <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>Отключить подводный фильтр</value></data>
+  <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>Настройка цвета чисел урона</value></data>
+  <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0 = Цикл, 1 = Фикс. цвет</value></data>
+  <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>Индекс фикс. цвета (0-7)</value></data>
+  <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>Отключение сети (DEV)</value></data>
+  <data name="Plugin_BlockNetwork" xml:space="preserve"><value>Быстрое отключение сети (DEV)</value></data>
+  <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>Отключение сети в игре (DEV)</value></data>
+  <data name="Plugin_DebugConsole" xml:space="preserve"><value>Консоль отладки (DEV)</value></data>
+  <data name="Plugin_DumpOffsets" xml:space="preserve"><value>Дамп смещений (DEV)</value></data>
+  <data name="PageTitle_GameSettings" xml:space="preserve"><value>Настройки игры</value></data>
+  <data name="SectionGameInstallPath" xml:space="preserve"><value>Путь установки игры</value></data>
+  <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>Выберите папку с YuanShen.exe...</value></data>
+  <data name="ApplyBtn" xml:space="preserve"><value>Применить</value></data>
+  <data name="ClearGamePathTooltip" xml:space="preserve"><value>Очистить путь к игре</value></data>
+  <data name="ConfigureGamePathFirst" xml:space="preserve"><value>Сначала укажите путь к игре</value></data>
+  <data name="ClientStatusTitle" xml:space="preserve"><value>Статус клиента</value></data>
+  <data name="CurrentVersionLabel" xml:space="preserve"><value>Текущая версия</value></data>
+  <data name="ServerLabel" xml:space="preserve"><value>Сервер</value></data>
+  <data name="DiskUsageLabel" xml:space="preserve"><value>Занято места</value></data>
+  <data name="LatestVersionLabel" xml:space="preserve"><value>Последняя версия</value></data>
+  <data name="CheckingEllipsis" xml:space="preserve"><value>Проверка...</value></data>
+  <data name="PreDownloadLabel" xml:space="preserve"><value>Предзагрузка</value></data>
+  <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>Последние промокоды</value></data>
+  <data name="CopyBtn" xml:space="preserve"><value>Копировать</value></data>
+  <data name="NoCodesAvailable" xml:space="preserve"><value>Нет доступных кодов</value></data>
+  <data name="AccountSwitchTitle" xml:space="preserve"><value>Смена аккаунта</value></data>
+  <data name="ReadFromLocalTooltip" xml:space="preserve"><value>Читать локально</value></data>
+  <data name="RefreshListTooltip" xml:space="preserve"><value>Обновить список</value></data>
+  <data name="DoubleClickToEditTooltip" xml:space="preserve"><value>Двойной клик для заметки</value></data>
+  <data name="SwitchBtn" xml:space="preserve"><value>Сменить</value></data>
+  <data name="ResourceMgmtTitle" xml:space="preserve"><value>Управление ресурсами</value></data>
+  <data name="DownloadOrVerifyFiles" xml:space="preserve"><value>Скачать или проверить файлы</value></data>
+  <data name="SwitchServerTitle" xml:space="preserve"><value>Сменить сервер</value></data>
+  <data name="ServerSwitchCaption" xml:space="preserve"><value>Переключение между офиц. / Bilibili / Global</value></data>
+  <data name="MapToolsTitle" xml:space="preserve"><value>Карта</value></data>
+  <data name="ViewTeyvatMap" xml:space="preserve"><value>Открыть карту Тейвата</value></data>
+  <data name="OfficialAnnouncementsTitle" xml:space="preserve"><value>Официальные объявления</value></data>
+  <data name="EventsAndUpdatesCaption" xml:space="preserve"><value>События и обновления</value></data>
+  <data name="VerifyGameTitle" xml:space="preserve"><value>Проверить игру</value></data>
+  <data name="VerifyAndRepairCaption" xml:space="preserve"><value>Проверить и восстановить файлы игры</value></data>
+  <data name="CreateShortcutTitle" xml:space="preserve"><value>Создать ярлык</value></data>
+  <data name="CreateShortcutCaption" xml:space="preserve"><value>Создать ярлык быстрого запуска на рабочем столе</value></data>
+  <data name="FpsMonitorTitle" xml:space="preserve"><value>Монитор FPS в игре</value></data>
+  <data name="FpsMonitorCaption" xml:space="preserve"><value>Показывает FPS в углу экрана (требуются права администратора)</value></data>
+  <data name="Err_GamePathNotFound" xml:space="preserve"><value>Путь к игре не найден. Укажите путь в настройках.</value></data>
+  <data name="Title_VerifyGameIntegrity" xml:space="preserve"><value>Проверка целостности игры</value></data>
+  <data name="Err_GamePathNotSet" xml:space="preserve"><value>Путь к игре не задан.</value></data>
+  <data name="Err_ExeNotFoundInFolder_Format" xml:space="preserve"><value>В папке не найден исполняемый файл игры:
+{0}</value></data>
+  <data name="Placeholder_DefaultUseCurrentPreset" xml:space="preserve"><value>По умолчанию использовать текущий пресет</value></data>
+  <data name="None_Value" xml:space="preserve"><value>Нет</value></data>
+  <data name="Msg_ChooseShortcutAction" xml:space="preserve"><value>Выберите действие:
+
+Создать ярлык на рабочем столе (запуск от имени администратора)?
+Или скопировать команду запуска для Steam или скриптов?</value></data>
+  <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve"><value>Импортированы параметры запуска: {0}</value></data>
+  <data name="Label_SpecifyInjectionPreset" xml:space="preserve"><value>Укажите пресет инжекта:</value></data>
+  <data name="Title_ChooseAction" xml:space="preserve"><value>Выберите действие</value></data>
+  <data name="Btn_CreateDesktopShortcut" xml:space="preserve"><value>Создать ярлык</value></data>
+  <data name="Btn_CopyLaunchCommand" xml:space="preserve"><value>Скопировать команду</value></data>
+  <data name="FileName_ShortcutName" xml:space="preserve"><value>Запуск Genshin Impact.lnk</value></data>
+  <data name="Desc_ShortcutDescription" xml:space="preserve"><value>Запуск Genshin Impact через FufuLauncher</value></data>
+  <data name="Title_ShortcutCreated" xml:space="preserve"><value>Ярлык создан</value></data>
+  <data name="Msg_ShortcutCreated" xml:space="preserve"><value>Ярлык создан на рабочем столе. Запускается с правами администратора.</value></data>
+  <data name="Title_LaunchCommand" xml:space="preserve"><value>Команда запуска</value></data>
+  <data name="Msg_LaunchCommandInstructions" xml:space="preserve"><value>Команда запуска. Можно использовать в CMD, PowerShell или Steam:</value></data>
+  <data name="Btn_CopyAndClose" xml:space="preserve"><value>Копировать и закрыть</value></data>
+  <data name="CloseBtn" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="Err_OperationFailed_Format" xml:space="preserve"><value>Ошибка: {0}</value></data>
+  <data name="Err_FpsMonitorNeedsAdmin" xml:space="preserve"><value>Не удалось включить FPS монитор: нужны права администратора.</value></data>
+  <data name="Msg_NoNewRedeemCodes" xml:space="preserve"><value>Нет новых промокодов</value></data>
+  <data name="Err_FetchFailedCheckNetwork" xml:space="preserve"><value>Ошибка загрузки. Проверьте сеть.</value></data>
+  <data name="Btn_Copied" xml:space="preserve"><value>Скопировано</value></data>
+  <data name="Title_PathError" xml:space="preserve"><value>Ошибка пути</value></data>
+  <data name="Err_CannotCreateGameDir_Format" xml:space="preserve"><value>Не удалось создать папку игры: {0}
+Ошибка: {1}</value></data>
+  <data name="Err_ConfigIniNotFound_Format" xml:space="preserve"><value>Не удалось найти файл config.ini.
+
+Проверенный путь:
+{0}
+
+Проверьте, что путь к игре указывает на папку установки.</value></data>
+  <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve"><value>Глобальный клиент. Переключение на Bilibili невозможно — используйте конвертацию сервера.</value></data>
+  <data name="Btn_SwitchToOfficialServer" xml:space="preserve"><value>На официальный сервер</value></data>
+  <data name="Label_ChooseTargetServer" xml:space="preserve"><value>Выберите сервер:</value></data>
+  <data name="Btn_SwitchToBiliServer" xml:space="preserve"><value>На сервер Bilibili</value></data>
+  <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve"><value>Конвертация между Global и Китаем</value></data>
+  <data name="Title_Convert" xml:space="preserve"><value>Конвертация</value></data>
+  <data name="ServerType_Unknown" xml:space="preserve"><value>Неизвестный сервер</value></data>
+  <data name="ServerType_Global" xml:space="preserve"><value>Глобальный сервер</value></data>
+  <data name="ServerType_Bilibili" xml:space="preserve"><value>Сервер Bilibili</value></data>
+  <data name="ServerType_Official" xml:space="preserve"><value>Официальный сервер</value></data>
+  <data name="ServerType_CustomOther_Format" xml:space="preserve"><value>Другой (Канал: {0})</value></data>
+  <data name="Err_ReadConfigFailed" xml:space="preserve"><value>Не удалось прочитать конфигурацию</value></data>
+  <data name="Title_TeyvatMap" xml:space="preserve"><value>Карта Тейвата</value></data>
+  <data name="Title_GlobalClient" xml:space="preserve"><value>Глобальный клиент</value></data>
+  <data name="Msg_GlobalClientInjectionWarning" xml:space="preserve"><value>Внимание: Инжект в основном для китайского сервера. На глобальном клиенте может не работать.
+
+Продолжить?</value></data>
+  <data name="Btn_ContinueUsing" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="Btn_DiscardAndClear" xml:space="preserve"><value>Отменить и очистить</value></data>
+  <data name="Title_InvalidGamePath" xml:space="preserve"><value>Неверный путь</value></data>
+  <data name="Err_ExeNotFoundAtPath_Format" xml:space="preserve"><value>Исполняемый файл не найден ({0}).
+
+Проверьте папку установки или настройте имя в настройках.</value></data>
+  <data name="Title_InvalidPath" xml:space="preserve"><value>Неверный путь</value></data>
+  <data name="Msg_PathDoesNotExist" xml:space="preserve"><value>Путь не существует. Проверьте правильность.</value></data>
+  <data name="OkBtn" xml:space="preserve"><value>ОК</value></data>
+  <data name="Err_PathProcessingFailed_Format" xml:space="preserve"><value>Ошибка обработки пути: {0}</value></data>
+  <data name="Title_AutoFoundGamePath" xml:space="preserve"><value>Путь найден автоматически</value></data>
+  <data name="Msg_DetectedPossiblePath_Format" xml:space="preserve"><value>Обнаружен возможный путь:
+
+{0}
+
+Применить?</value></data>
+  <data name="Btn_SelectManually" xml:space="preserve"><value>Выбрать вручную</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>Ошибка</value></data>
+  <data name="Err_CannotOpenFilePicker" xml:space="preserve"><value>Не удалось открыть выбор файла</value></data>
+  <data name="Msg_VersionInfoNotFound" xml:space="preserve"><value>Информация о версии не найдена</value></data>
+  <data name="UnknownGeneric" xml:space="preserve"><value>Неизвестно</value></data>
+  <data name="FetchFailedShort" xml:space="preserve"><value>Ошибка загрузки</value></data>
+  <data name="Msg_HasVersion_Format" xml:space="preserve"><value>Доступна (версия {0})</value></data>
+  <data name="NotAvailableGeneric" xml:space="preserve"><value>Нет</value></data>
+  <data name="ServerType_MainlandChina" xml:space="preserve"><value>Сервер Китая</value></data>
+  <data name="Msg_CannotCalculate" xml:space="preserve"><value>Невозможно вычислить</value></data>
+  <data name="Err_CannotAccessRegistry" xml:space="preserve"><value>Нет доступа к реестру</value></data>
+  <data name="Err_NoLoggedInAccount" xml:space="preserve"><value>Нет активного аккаунта (данные реестра пусты)</value></data>
+  <data name="Err_AccountAlreadySaved" xml:space="preserve"><value>Аккаунт уже сохранён.</value></data>
+  <data name="Placeholder_EnterAccountName" xml:space="preserve"><value>Введите имя аккаунта (напр. Основной / Альт)</value></data>
+  <data name="Title_SaveNewAccount" xml:space="preserve"><value>Сохранить аккаунт</value></data>
+  <data name="SaveBtn" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="Prefix_Account_Format" xml:space="preserve"><value>Аккаунт_{0}</value></data>
+  <data name="Err_SaveFailed_Format" xml:space="preserve"><value>Ошибка сохранения: {0}</value></data>
+  <data name="Title_SwitchSuccess" xml:space="preserve"><value>Смена успешна</value></data>
+  <data name="Msg_SwitchedToAccount_Format" xml:space="preserve"><value>Переключено на: {0}
+
+Перезапустите игру для применения!</value></data>
+  <data name="Btn_GotIt" xml:space="preserve"><value>Понятно</value></data>
+  <data name="Err_SwitchFailed_Format" xml:space="preserve"><value>Ошибка смены: {0}</value></data>
+  <data name="Title_ConfirmDelete" xml:space="preserve"><value>Подтвердить удаление</value></data>
+  <data name="Msg_DeleteAccountConfirm_Format" xml:space="preserve"><value>Удалить аккаунт '{0}'?</value></data>
+  <data name="Err_DeleteFailed_Format" xml:space="preserve"><value>Ошибка удаления: {0}</value></data>
+  <data name="Title_OperationFailed" xml:space="preserve"><value>Ошибка операции</value></data>
+  <data name="NavHome" xml:space="preserve"><value>Главная</value></data>
+  <data name="NavControlPanel" xml:space="preserve"><value>Панель управления</value></data>
+  <data name="NavAccountSettings" xml:space="preserve"><value>Аккаунты</value></data>
+  <data name="NavOtherFeatures" xml:space="preserve"><value>Другие функции</value></data>
+  <data name="NavDataCenter" xml:space="preserve"><value>Данные</value></data>
+  <data name="NavHelpDocs" xml:space="preserve"><value>Справка</value></data>
+  <data name="NavCalculator" xml:space="preserve"><value>Калькулятор</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="NavCommunity" xml:space="preserve"><value>Сообщество</value></data>
+  <data name="TrayShowWindow" xml:space="preserve"><value>Показать окно</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>Выход</value></data>
+  <data name="SysStatusChecking" xml:space="preserve"><value>Проверка сети...</value></data>
+  <data name="NotificationCenter" xml:space="preserve"><value>Уведомления</value></data>
+  <data name="ClearAllBtn" xml:space="preserve"><value>Очистить всё</value></data>
+  <data name="NetDisconnected" xml:space="preserve"><value>Сеть отключена. Проверьте настройки.</value></data>
+  <data name="NetProxyWarning" xml:space="preserve"><value>Используется прокси. Следите за трафиком.</value></data>
+  <data name="AdminWarningTitle" xml:space="preserve"><value>Предупреждение</value></data>
+  <data name="AdminWarningContent" xml:space="preserve"><value>Запуск от админа может повлиять на некоторые функции.</value></data>
+  <data name="DontShowAgain" xml:space="preserve"><value>Не показывать снова</value></data>
+  <data name="GotItBtn" xml:space="preserve"><value>Понятно</value></data>
+  <data name="VcRuntimeMissingTitle" xml:space="preserve"><value>Нет C++ Runtime</value></data>
+  <data name="VcRuntimeMissingContent" xml:space="preserve"><value>В системе отсутствует библиотека C++ VC14, необходимая для инжекта.
+
+Перейти на сайт Microsoft для загрузки и установки?</value></data>
+  <data name="GoToDownload" xml:space="preserve"><value>Скачать (X64)</value></data>
+  <data name="DontRemindAgain" xml:space="preserve"><value>Не напоминать</value></data>
+  <data name="IgnoreWarning" xml:space="preserve"><value>Игнорировать</value></data>
+  <data name="AppDisplayNameAdmin" xml:space="preserve"><value>FufuLauncher [Администратор]</value></data>
+  <data name="HiddenFeatureTitle" xml:space="preserve"><value>Недоступно</value></data>
+  <data name="HiddenFeatureMessage" xml:space="preserve"><value>Функция скрыта. Включите в настройках.</value></data>
+  <data name="RedeemCodeExpired" xml:space="preserve"><value>Код истёк</value></data>
+  <data name="RedeemCodeToday" xml:space="preserve"><value>Код на сегодня</value></data>
+  <data name="RedeemCodeNew" xml:space="preserve"><value>Новый код</value></data>
+  <data name="RedeemCodeExpiring" xml:space="preserve"><value>Код истекает</value></data>
+  <data name="HomeTab_Events" xml:space="preserve"><value>События</value></data>
+  <data name="HomeTab_Announcements" xml:space="preserve"><value>Объявления</value></data>
+  <data name="HomeTab_News" xml:space="preserve"><value>Новости</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>Отметка</value></data>
+  <data name="Home_RefreshToken" xml:space="preserve"><value>Обновить токен</value></data>
+  <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>Настройки отметок</value></data>
+  <data name="Home_RewardsCalendar" xml:space="preserve"><value>Календарь наград</value></data>
+  <data name="Home_DailyNotesCard" xml:space="preserve"><value>Заметки</value></data>
+  <data name="Home_RefreshNotes" xml:space="preserve"><value>Обновить заметки</value></data>
+  <data name="Home_NoData" xml:space="preserve"><value>Нет данных</value></data>
+  <data name="Home_Resin" xml:space="preserve"><value>Смола</value></data>
+  <data name="Home_DailyQuests" xml:space="preserve"><value>Поручения</value></data>
+  <data name="Home_RealmCurrency" xml:space="preserve"><value>Валюта обители</value></data>
+  <data name="Home_Expeditions" xml:space="preserve"><value>Экспедиции</value></data>
+  <data name="Home_Transformer" xml:space="preserve"><value>Преобразователь</value></data>
+  <data name="Home_ToggleBg" xml:space="preserve"><value>Сменить фон</value></data>
+  <data name="Home_ScreenshotFolder" xml:space="preserve"><value>Скриншоты</value></data>
+  <data name="Home_Widgets" xml:space="preserve"><value>Виджеты</value></data>
+  <data name="Home_WidgetGacha" xml:space="preserve"><value>Анализ молитв</value></data>
+  <data name="Home_WidgetAchievement" xml:space="preserve"><value>Достижения</value></data>
+  <data name="Home_WidgetInventory" xml:space="preserve"><value>Инвентарь</value></data>
+  <data name="Home_WidgetPlayerRole" xml:space="preserve"><value>Персонажи</value></data>
+  <data name="Home_WidgetNotes" xml:space="preserve"><value>Заметки</value></data>
+  <data name="Home_WidgetVideo" xml:space="preserve"><value>Видео</value></data>
+  <data name="Home_WidgetBBS" xml:space="preserve"><value>Хроника</value></data>
+  <data name="Home_AddWidget" xml:space="preserve"><value>Добавить виджет</value></data>
+  <data name="Home_RemoveWidget" xml:space="preserve"><value>Убрать виджет</value></data>
+  <data name="Home_ToggleTooltip" xml:space="preserve"><value>Подсказки</value></data>
+  <data name="Home_QuickPresets" xml:space="preserve"><value>Пресеты</value></data>
+  <data name="Home_ManagePresets" xml:space="preserve"><value>Управление</value></data>
+  <data name="Home_NoPresetsPinned" xml:space="preserve"><value>Нет закреплённых пресетов</value></data>
+  <data name="Home_SwitchServer" xml:space="preserve"><value>Сменить сервер на {0}</value></data>
+  <data name="Home_SwitchOfficial" xml:space="preserve"><value>На официальный сервер</value></data>
+  <data name="Home_SwitchBilibili" xml:space="preserve"><value>На сервер Bilibili</value></data>
+  <data name="Home_SwitchSuccess" xml:space="preserve"><value>Смена успешна</value></data>
+  <data name="Home_SwitchedTo_Format" xml:space="preserve"><value>Успешно переключено на {0}. {1}</value></data>
+  <data name="Home_SwitchFailed" xml:space="preserve"><value>Смена не удалась</value></data>
+  <data name="Home_RefreshFailed" xml:space="preserve"><value>Ошибка обновления</value></data>
+  <data name="Home_NoActiveAccount" xml:space="preserve"><value>Нет активного аккаунта</value></data>
+  <data name="Home_CannotLoadCredentials" xml:space="preserve"><value>Не удалось загрузить данные аккаунта</value></data>
+  <data name="Home_BBSSecurityTitle" xml:space="preserve"><value>Безопасность</value></data>
+  <data name="Home_BBSSecurityMessage" xml:space="preserve"><value>Доступ к боевой хронике может пометить аккаунт как рискованный. Продолжить?</value></data>
+  <data name="Home_BBSConfirm" xml:space="preserve"><value>Подтвердить</value></data>
+  <data name="Home_ErrNoGamePath" xml:space="preserve"><value>Путь к игре не задан. Укажите в настройках.</value></data>
+  <data name="Home_ErrConfigNotFound" xml:space="preserve"><value>config.ini не найден. Смена сервера недоступна.</value></data>
+  <data name="Home_ErrSwitchException" xml:space="preserve"><value>Ошибка при подготовке смены сервера.</value></data>
+  <data name="Home_OfficialServer" xml:space="preserve"><value>Офиц. сервер</value></data>
+  <data name="Home_BilibiliServer" xml:space="preserve"><value>Сервер Bilibili</value></data>
+  <data name="Home_Deployed" xml:space="preserve"><value>Развёрнуто</value></data>
+  <data name="Home_Cleaned" xml:space="preserve"><value>Очищено</value></data>
+  <data name="Home_OpenLink" xml:space="preserve"><value>Открыть ссылку</value></data>
+  <data name="Home_OpenLinkFailed" xml:space="preserve"><value>Не удалось открыть ссылку</value></data>
+  <data name="Home_GachaTooltip" xml:space="preserve"><value>Анализ молитв: статистика и история молитв</value></data>
+  <data name="Home_AchievementTooltip" xml:space="preserve"><value>Достижения: отслеживание прогресса, экспорт и импорт</value></data>
+  <data name="Home_InventoryTooltip" xml:space="preserve"><value>Инвентарь: просмотр материалов аккаунта</value></data>
+  <data name="Home_PlayerRoleTooltip" xml:space="preserve"><value>Персонажи: уровень, созвездия, оружие, артефакты</value></data>
+  <data name="Home_NotesTooltip" xml:space="preserve"><value>Заметки: реальное время, доступные данжи материалов</value></data>
+  <data name="Home_VideoTooltip" xml:space="preserve"><value>Видеотека: ролики персонажей и катсцены</value></data>
+  <data name="Home_BBSTooltip" xml:space="preserve"><value>Хроника: Витой Бездны, Театр воображения и др.</value></data>
+  <data name="OtherPage_Title" xml:space="preserve"><value>Другие настройки</value></data>
+  <data name="OtherPage_ExternalPrograms" xml:space="preserve"><value>Внешние программы</value></data>
+  <data name="OtherPage_AdditionalProgramLaunch" xml:space="preserve"><value>Дополнительный запуск</value></data>
+  <data name="OtherPage_AutostartExeDesc" xml:space="preserve"><value>Автозапуск .exe вместе с игрой</value></data>
+  <data name="OtherPage_ProgramPath" xml:space="preserve"><value>Путь к программе</value></data>
+  <data name="OtherPage_PathPlaceholder" xml:space="preserve"><value>напр. C:\Tools\MapTool.exe</value></data>
+  <data name="OtherPage_PathHint" xml:space="preserve"><value>Если не реагирует — вставьте путь вручную и нажмите Применить.</value></data>
+  <data name="OtherPage_AccessibilityTools" xml:space="preserve"><value>Специальные возможности</value></data>
+  <data name="OtherPage_AutoClicker" xml:space="preserve"><value>Автокликер</value></data>
+  <data name="OtherPage_AutoClickerDesc" xml:space="preserve"><value>Удерживайте клавишу или кнопку мыши для быстрых кликов</value></data>
+  <data name="OtherPage_ClickMode" xml:space="preserve"><value>Режим клика</value></data>
+  <data name="OtherPage_MouseLeft" xml:space="preserve"><value>Левая кнопка мыши</value></data>
+  <data name="OtherPage_MouseRight" xml:space="preserve"><value>Правая кнопка мыши</value></data>
+  <data name="OtherPage_MouseModeHint" xml:space="preserve"><value>Только один режим мыши. Сначала задайте стоп-клавишу.</value></data>
+  <data name="OtherPage_TriggerKeyHeader" xml:space="preserve"><value>Клавиша запуска (удерживать)</value></data>
+  <data name="OtherPage_RecordClick" xml:space="preserve"><value>Запись клика</value></data>
+  <data name="OtherPage_StopKeyHeader" xml:space="preserve"><value>Стоп-клавиша (обязательно)</value></data>
+  <data name="OtherPage_ClickKeyHeader" xml:space="preserve"><value>Клавиша клика (только клавиатура)</value></data>
+  <data name="OtherPage_UsageInstructions" xml:space="preserve"><value>Инструкция</value></data>
+  <data name="OtherPage_UsageHint" xml:space="preserve"><value>Нажмите иконку для записи, затем нажмите клавишу. Режимы мыши взаимоисключающие.</value></data>
+  <data name="OtherPage_UtilityTools" xml:space="preserve"><value>Утилиты</value></data>
+  <data name="OtherPage_Browser" xml:space="preserve"><value>Браузер</value></data>
+  <data name="OtherPage_BrowserDesc" xml:space="preserve"><value>Плавающий браузер с закреплением поверх окон</value></data>
+  <data name="OtherPage_Open" xml:space="preserve"><value>Открыть</value></data>
+  <data name="OtherPage_SaveConfig" xml:space="preserve"><value>Сохранить конфигурацию</value></data>
+  <data name="OtherPage_KeyRecorderEnabled" xml:space="preserve"><value>Запись клавиш включена, события зарегистрированы для {0}</value></data>
+  <data name="OtherPage_KeyRecorderDisabled" xml:space="preserve"><value>Запись клавиш отключена, события отменены</value></data>
+  <data name="OtherPage_KeyEventError" xml:space="preserve"><value>Ошибка регистрации событий клавиш</value></data>
+  <data name="OtherPage_UnloadCleanupError" xml:space="preserve"><value>Ошибка очистки событий клавиш</value></data>
+  <data name="OtherPage_CapturingKey" xml:space="preserve"><value>Запись клавиши...</value></data>
+  <data name="OtherPage_TriggerKeySet" xml:space="preserve"><value>Клавиша запуска задана</value></data>
+  <data name="OtherPage_ClickKeySet" xml:space="preserve"><value>Клавиша клика задана</value></data>
+  <data name="OtherPage_StopKeySet" xml:space="preserve"><value>Стоп-клавиша задана</value></data>
+  <data name="OtherPage_KeyProcessError" xml:space="preserve"><value>Ошибка обработки клавиши</value></data>
+  <data name="Account_NotLoggedIn" xml:space="preserve"><value>Не в сети</value></data>
+  <data name="Account_SavedAccounts" xml:space="preserve"><value>Сохранённые аккаунты</value></data>
+  <data name="Account_Login" xml:space="preserve"><value>Войти</value></data>
+  <data name="Account_DailyCheckin" xml:space="preserve"><value>Ежедневная отметка</value></data>
+  <data name="Account_RefreshInfo" xml:space="preserve"><value>Обновить</value></data>
+  <data name="Account_TravelJournal" xml:space="preserve"><value>Дневник путешествий</value></data>
+  <data name="Account_GachaAnalysis" xml:space="preserve"><value>Анализ молитв</value></data>
+  <data name="Account_AccountSecurity" xml:space="preserve"><value>Безопасность</value></data>
+  <data name="Account_FreezeAccount" xml:space="preserve"><value>Заморозить аккаунт</value></data>
+  <data name="Account_CopyCookie" xml:space="preserve"><value>Копировать Cookie</value></data>
+  <data name="Account_DeleteAccount" xml:space="preserve"><value>Удалить аккаунт</value></data>
+  <data name="Account_Logout" xml:space="preserve"><value>Выйти</value></data>
+  <data name="Account_CommunityFeed" xml:space="preserve"><value>Лента сообщества</value></data>
+  <data name="Account_Likes" xml:space="preserve"><value>Лайки</value></data>
+  <data name="Account_Posts" xml:space="preserve"><value>Посты</value></data>
+  <data name="Account_Replies" xml:space="preserve"><value>Ответы</value></data>
+  <data name="Account_BoundCharacters" xml:space="preserve"><value>Привязанные персонажи</value></data>
+  <data name="Account_NoCharacters" xml:space="preserve"><value>Нет персонажей</value></data>
+  <data name="Account_BindHint" xml:space="preserve"><value>Привяжите персонажа в MiYouShe или игре, затем обновите</value></data>
+  <data name="Account_PlayTime" xml:space="preserve"><value>Время игры</value></data>
+  <data name="Account_RecentDays_Format" xml:space="preserve"><value>Последние {0} дн.</value></data>
+  <data name="Account_InGame" xml:space="preserve"><value>В игре</value></data>
+  <data name="Account_TotalTime" xml:space="preserve"><value>Всего</value></data>
+  <data name="Account_DailyAvg" xml:space="preserve"><value>Среднее в день</value></data>
+  <data name="Account_NoRecentRecords_Format" xml:space="preserve"><value>Нет записей за последние {0} дн.</value></data>
+  <data name="Account_DeleteAccountConfirm_Format" xml:space="preserve"><value>Удалить аккаунт &quot;{0}&quot;? Все данные будут удалены безвозвратно.</value></data>
+  <data name="Account_DeleteComplete" xml:space="preserve"><value>Аккаунт &quot;{0}&quot; удалён.</value></data>
+  <data name="Account_DeleteException" xml:space="preserve"><value>Ошибка удаления аккаунта</value></data>
+  <data name="Account_DeleteBtn" xml:space="preserve"><value>Удалить</value></data>
+  <data name="Account_CheckingIn" xml:space="preserve"><value>Отметка...</value></data>
+  <data name="Account_CheckinComplete" xml:space="preserve"><value>Отметка завершена</value></data>
+  <data name="Account_CheckinFailed" xml:space="preserve"><value>Отметка не удалась</value></data>
+  <data name="Account_CheckinException" xml:space="preserve"><value>Ошибка отметки</value></data>
+  <data name="Account_LoginFailed" xml:space="preserve"><value>Ошибка входа</value></data>
+  <data name="Account_OtherOperations" xml:space="preserve"><value>Другие операции</value></data>
+  <data name="Account_RecentDays30" xml:space="preserve"><value>Последние 30 дней</value></data>
+  <data name="Account_NoRecentRecords30" xml:space="preserve"><value>Нет записей за 30 дней</value></data>
+  <data name="Account_CopyUID" xml:space="preserve"><value>Копировать UID</value></data>
+  <data name="Account_DeleteCurrent" xml:space="preserve"><value>Удалить текущий аккаунт</value></data>
+  <data name="Account_DeleteCurrentConfirm_Format" xml:space="preserve"><value>Удалить текущий аккаунт {0} ({1})? Данные будут удалены безвозвратно.</value></data>
+  <data name="LoginQR_Title" xml:space="preserve"><value>Вход по QR</value></data>
+  <data name="LoginQR_MiyousheQR" xml:space="preserve"><value>QR-код MiYouShe</value></data>
+  <data name="LoginQR_WebPassport" xml:space="preserve"><value>Веб-паспорт</value></data>
+  <data name="LoginQR_HoYoLABWeb" xml:space="preserve"><value>Веб-вход HoYoLAB</value></data>
+  <data name="LoginQR_GameAppId" xml:space="preserve"><value>ID приложения:</value></data>
+  <data name="LoginQR_EnterAppId" xml:space="preserve"><value>Введите App ID</value></data>
+  <data name="LoginQR_ConfirmGenerate" xml:space="preserve"><value>Создать</value></data>
+  <data name="LoginQR_RefreshQR" xml:space="preserve"><value>Обновить QR</value></data>
+  <data name="LoginQR_WebLoginWarning" xml:space="preserve"><value>Примечание: вход через веб не даёт Stoken, часть функций недоступна.</value></data>
+  <data name="LoginQR_ManualCookie" xml:space="preserve"><value>Ввести Cookie вручную</value></data>
+  <data name="LoginQR_ClearHistory" xml:space="preserve"><value>Очистить историю</value></data>
+  <data name="Panel_Toolbox" xml:space="preserve"><value>Инструменты</value></data>
+  <data name="Panel_DataAnalysis" xml:space="preserve"><value>Анализ данных</value></data>
+  <data name="Panel_DataAnalysisDesc" xml:space="preserve"><value>Статистика, прогресс и долгосрочные данные</value></data>
+  <data name="Panel_TravelerProfile" xml:space="preserve"><value>Профиль путешественника</value></data>
+  <data name="Panel_TravelerProfileDesc" xml:space="preserve"><value>Персонажи, инвентарь, заметки и боевая хроника</value></data>
+  <data name="Panel_Resources" xml:space="preserve"><value>Ресурсы</value></data>
+  <data name="Panel_ResourcesDesc" xml:space="preserve"><value>Управление и получение ресурсов</value></data>
+  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>Выберите путь к игре</value></data>
+  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>Выйти из игры</value></data>
+  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>Запустить игру</value></data>
+  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>Завершение игры...</value></data>
+  <data name="Checkin_Signed" xml:space="preserve"><value>Отметка пройдена</value></data>
+  <data name="Checkin_Unsigned" xml:space="preserve"><value>Отметка не пройдена</value></data>
+  <data name="LaunchErr_NoGamePath" xml:space="preserve"><value>Путь не задан</value></data>
+  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>Укажите путь к игре в настройках</value></data>
+  <data name="LaunchErr_LaunchFailed" xml:space="preserve"><value>Ошибка запуска</value></data>
+  <data name="Screenshot_FolderNotFound" xml:space="preserve"><value>Папка скриншотов не найдена</value></data>
+  <data name="Screenshot_FolderNotFoundMsg" xml:space="preserve"><value>Сделайте скриншот в игре или через лаунчер</value></data>
+  <data name="Announcement_Title" xml:space="preserve"><value>Объявления</value></data>
+  <data name="Announcement_Loading" xml:space="preserve"><value>Загрузка объявлений...</value></data>
+  <data name="CommunityPage_Back" xml:space="preserve"><value>Назад</value></data>
+  <data name="CommunityPage_Forward" xml:space="preserve"><value>Вперёд</value></data>
+  <data name="CommunityPage_Refresh" xml:space="preserve"><value>Обновить</value></data>
+  <data name="HelpPage_SearchPlaceholder" xml:space="preserve"><value>Поиск по названию или содержимому...</value></data>
+  <data name="AboutPage_GetBuildFromActions" xml:space="preserve"><value>Сборка из Github Actions</value></data>
+  <data name="AboutPage_Contributors" xml:space="preserve"><value>Контрибьюторы</value></data>
+  <data name="AboutPage_LoadFailed" xml:space="preserve"><value>Ошибка загрузки</value></data>
+  <data name="AboutPage_ReportIssue" xml:space="preserve"><value>Сообщить о проблеме</value></data>
+  <data name="AboutPage_OfficialWebsite" xml:space="preserve"><value>Официальный сайт</value></data>
+  <data name="AboutPage_ContactAuthor" xml:space="preserve"><value>Связаться с автором</value></data>
+  <data name="SponsorWindow_Title" xml:space="preserve"><value>Поддержать автора</value></data>
+  <data name="SponsorWindow_OnlyWeChat" xml:space="preserve"><value>Только WeChat, другие способы не поддерживаются</value></data>
+  <data name="SponsorWindow_QrCodeFailed" xml:space="preserve"><value>Ошибка загрузки QR</value></data>
+  <data name="SponsorWindow_Disclaimer" xml:space="preserve"><value>Оплата означает согласие: возврат не предусмотрен</value></data>
+  <data name="StarPrompt_Support" xml:space="preserve"><value>Поддержка</value></data>
+  <data name="StarPrompt_Message" xml:space="preserve"><value>Если FufuLauncher вам помог, поставьте звезду на GitHub!</value></data>
+  <data name="StarPrompt_GoToGitHub" xml:space="preserve"><value>Перейти на GitHub</value></data>
+  <data name="StarPrompt_Later" xml:space="preserve"><value>Позже</value></data>
+  <data name="StarPrompt_GotIt" xml:space="preserve"><value>Понятно</value></data>
+  <data name="AchievementUpdater_Title" xml:space="preserve"><value>Обновление достижений</value></data>
+  <data name="AchievementUpdater_StartFetch" xml:space="preserve"><value>Начать загрузку</value></data>
+  <data name="AdvancedServerSwitch_Title" xml:space="preserve"><value>Конвертация сервера</value></data>
+  <data name="AdvancedServerSwitch_Warning" xml:space="preserve"><value>Внимание: не работает во время игры!</value></data>
+  <data name="AdvancedServerSwitch_Convert" xml:space="preserve"><value>Конвертировать</value></data>
+  <data name="Agreement_Title" xml:space="preserve"><value>Пользовательское соглашение</value></data>
+  <data name="BackgroundInit_Initializing" xml:space="preserve"><value>Инициализация фона</value></data>
+  <data name="BackgroundInit_PleaseWait" xml:space="preserve"><value>Кэширование может занять время, подождите...</value></data>
+  <data name="CheckinCalendar_Title" xml:space="preserve"><value>Календарь наград</value></data>
+  <data name="CloudCredential_Title" xml:space="preserve"><value>Учётные данные облачной игры</value></data>
+  <data name="CloudCredential_AddTitle" xml:space="preserve"><value>Добавить учётные данные</value></data>
+  <data name="HiddenPage_Title" xml:space="preserve"><value>Функция скрыта</value></data>
+  <data name="HiddenPage_Message" xml:space="preserve"><value>Функция скрыта в настройках. Включите в Настройки → Внешний вид → Навигация.</value></data>
+  <data name="HiddenPage_BackToHome" xml:space="preserve"><value>На главную</value></data>
+  <data name="PreDownload_Title" xml:space="preserve"><value>Предзагрузка игры</value></data>
+  <data name="PreDownload_Description" xml:space="preserve"><value>Загрузка обновления заранее, автоматически</value></data>
+  <data name="PreDownload_Start" xml:space="preserve"><value>Начать предзагрузку</value></data>
+  <data name="PresetManager_Title" xml:space="preserve"><value>Управление пресетами</value></data>
+  <data name="PresetManager_SelectHint" xml:space="preserve"><value>Выберите пресеты для закрепления (макс. 5)</value></data>
+  <data name="SecurityWeb_Title" xml:space="preserve"><value>Аутентификация разработчика</value></data>
+  <data name="VerifyGame_Title" xml:space="preserve"><value>Проверка файлов игры</value></data>
+  <data name="VerifyGame_Description" xml:space="preserve"><value>Проверка локальных файлов и автоматическое восстановление. Может занять время.</value></data>
+  <data name="VerifyGame_Start" xml:space="preserve"><value>Начать проверку</value></data>
+  <data name="FeedbackWindow_Title" xml:space="preserve"><value>Обратная связь</value></data>
+  <data name="FeedbackWindow_SelectType" xml:space="preserve"><value>Тип обратной связи:</value></data>
+  <data name="FeedbackWindow_FeatureRequest" xml:space="preserve"><value>Предложить идею / функцию</value></data>
+  <data name="FeedbackWindow_FeatureRequestDesc" xml:space="preserve"><value>Есть идея? Отправьте запрос функции через GitHub.</value></data>
+  <data name="FeedbackWindow_BugReport" xml:space="preserve"><value>Сообщить о проблеме / баге</value></data>
+  <data name="FeedbackWindow_BugReportDesc" xml:space="preserve"><value>Нашли ошибку? Отправьте баг-репорт через GitHub.</value></data>
+  <data name="AnnouncementWindow_GameAnnouncement" xml:space="preserve"><value>Игровые объявления</value></data>
+  <data name="DownloadWindow_Title" xml:space="preserve"><value>Загрузчик ресурсов</value></data>
+  <data name="DownloadWindow_GameResourceUpdate" xml:space="preserve"><value>Обновление ресурсов игры</value></data>
+  <data name="DownloadWindow_StuckIsNormal" xml:space="preserve"><value>Зависание при загрузке — нормально</value></data>
+  <data name="DownloadWindow_InstallDir" xml:space="preserve"><value>Папка установки</value></data>
+  <data name="DownloadWindow_VoiceLanguage" xml:space="preserve"><value>Язык озвучки</value></data>
+  <data name="DownloadWindow_DownloadBaseGame" xml:space="preserve"><value>Скачать основные данные игры</value></data>
+  <data name="DownloadWindow_BaseGameTooltip" xml:space="preserve"><value>Снять для обновления только голосового пакета</value></data>
+  <data name="DownloadWindow_ShowDetailLog" xml:space="preserve"><value>Показать подробный лог</value></data>
+  <data name="DownloadWindow_Ready" xml:space="preserve"><value>Готово</value></data>
+  <data name="DownloadWindow_StartDownload" xml:space="preserve"><value>Начать загрузку</value></data>
+  <data name="DownloadWindow_Cancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="BBSWindow_Title" xml:space="preserve"><value>Боевые записи</value></data>
+  <data name="BBSWindow_SwitchIdentity" xml:space="preserve"><value>Сменить личность</value></data>
+  <data name="BBSWindow_EnterUrl" xml:space="preserve"><value>Введите URL...</value></data>
+  <data name="BBSWindow_Go" xml:space="preserve"><value>Перейти</value></data>
+  <data name="BBSWindow_Save" xml:space="preserve"><value>Сохранить</value></data>
+  <data name="BBSWindow_Copy" xml:space="preserve"><value>Копировать</value></data>
+  <data name="BrowserWindow_Title" xml:space="preserve"><value>Браузер</value></data>
+  <data name="BrowserWindow_EnterUrl" xml:space="preserve"><value>Введите URL...</value></data>
+  <data name="BrowserWindow_Refresh" xml:space="preserve"><value>Обновить</value></data>
+  <data name="BrowserWindow_Settings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="BrowserWindow_PinWindow" xml:space="preserve"><value>Закрепить окно</value></data>
+  <data name="BrowserWindow_SettingsTitle" xml:space="preserve"><value>Настройки браузера</value></data>
+  <data name="BrowserWindow_DefaultHomepage" xml:space="preserve"><value>Домашняя страница по умолчанию (URL)</value></data>
+  <data name="BrowserWindow_DefaultZoom" xml:space="preserve"><value>Масштаб по умолчанию</value></data>
+  <data name="BrowserWindow_VideoHotkeys" xml:space="preserve"><value>Горячие клавиши видео (JS KeyCode)</value></data>
+  <data name="BrowserWindow_RewindKey" xml:space="preserve"><value>Клавиша назад</value></data>
+  <data name="BrowserWindow_ForwardKey" xml:space="preserve"><value>Клавиша вперёд</value></data>
+  <data name="BrowserWindow_HotkeyHint" xml:space="preserve"><value>Подсказка: частые клавиши - ArrowLeft, ArrowRight, KeyA, KeyD</value></data>
+  <data name="BrowserWindow_PerformanceSettings" xml:space="preserve"><value>Настройки производительности</value></data>
+  <data name="BrowserWindow_RaisePriority" xml:space="preserve"><value>Повысить приоритет (предотвратить лаги в игре)</value></data>
+  <data name="MapPage_Title" xml:space="preserve"><value>Карта Тейвата</value></data>
+  <data name="MapPage_Refresh" xml:space="preserve"><value>Обновить</value></data>
+  <data name="MapPage_LockMapOff" xml:space="preserve"><value>Блокировка карты (Выкл)</value></data>
+  <data name="MapPage_TopMostOff" xml:space="preserve"><value>Поверх всех (Выкл)</value></data>
+  <data name="PluginConfigPage_Title" xml:space="preserve"><value>Конфигурация плагина</value></data>
+  <data name="PluginConfigPage_AdjustParams" xml:space="preserve"><value>Настройка параметров плагина</value></data>
+  <data name="PluginConfigPage_PluginInfo" xml:space="preserve"><value>Информация о плагине</value></data>
+  <data name="UpdateNotification_Title" xml:space="preserve"><value>Уведомление об обновлении</value></data>
+  <data name="UpdateNotification_UpdateNow" xml:space="preserve"><value>Обновить сейчас</value></data>
+  <data name="VideoResources_Title" xml:space="preserve"><value>Видеотека</value></data>
+  <data name="VideoResources_CharacterVideos" xml:space="preserve"><value>Видео персонажей</value></data>
+  <data name="VideoResources_Play" xml:space="preserve"><value>Воспроизвести</value></data>
+  <data name="VideoResources_Download" xml:space="preserve"><value>Скачать</value></data>
+  <data name="VideoResources_CutsceneVideos" xml:space="preserve"><value>Касцены</value></data>
+  <data name="ScreenshotGallery_Title" xml:space="preserve"><value>Галерея скриншотов</value></data>
+  <data name="ScreenshotGallery_BackToGallery" xml:space="preserve"><value>Назад в галерею</value></data>
+  <data name="ScreenshotGallery_Copy" xml:space="preserve"><value>Копировать</value></data>
+  <data name="ScreenshotGallery_Cut" xml:space="preserve"><value>Обрезать</value></data>
+  <data name="ScreenshotGallery_Delete" xml:space="preserve"><value>Удалить</value></data>
+  <data name="ScreenshotGallery_OpenFolder" xml:space="preserve"><value>Открыть папку</value></data>
+  <data name="ScreenshotGallery_OpenWithApp" xml:space="preserve"><value>Открыть в системном приложении</value></data>
+  <data name="ScreenshotGallery_NoScreenshots" xml:space="preserve"><value>Скриншотов пока нет</value></data>
+  <data name="ScreenshotGallery_OpenScreenshotFolder" xml:space="preserve"><value>Открыть папку скриншотов</value></data>
+  <data name="GachaDialog_Title" xml:space="preserve"><value>Статистика молитв</value></data>
+  <data name="GachaDialog_Close" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="GachaDialog_GachaRecordLink" xml:space="preserve"><value>Ссылка записей молитв</value></data>
+  <data name="GachaDialog_PasteUrl" xml:space="preserve"><value>Вставьте URL с authkey</value></data>
+  <data name="GachaDialog_StartAnalysis" xml:space="preserve"><value>Начать анализ</value></data>
+  <data name="GachaDialog_ExportUigf" xml:space="preserve"><value>Экспорт UIGF</value></data>
+  <data name="GachaDialog_ExportUigfTooltip" xml:space="preserve"><value>Экспорт в стандартном формате UIGF JSON на рабочий стол</value></data>
+  <data name="GachaDialog_TotalInvested" xml:space="preserve"><value>Всего: </value></data>
+  <data name="GachaDialog_Pulls" xml:space="preserve"><value> Молитв</value></data>
+  <data name="GachaDialog_CurrentPity" xml:space="preserve"><value>Текущий Pity</value></data>
+  <data name="GachaDialog_FiveStarCount" xml:space="preserve"><value>Кол-во 5★</value></data>
+  <data name="GachaDialog_FiveStarRecords" xml:space="preserve"><value>Записи 5★</value></data>
+  <data name="GachaDialog_BasicFeatureNote" xml:space="preserve"><value>Базовая функция. Для детального анализа используйте специализированные инструменты.</value></data>
+  <data name="HighCpuUsage_Title" xml:space="preserve"><value>Предупреждение о производительности</value></data>
+  <data name="HighCpuUsage_Detected" xml:space="preserve"><value>Обнаружена аномальная долгосрочная загрузка ресурсов</value></data>
+  <data name="HighCpuUsage_Description" xml:space="preserve"><value>Без обнаружения OBS, загрузка CPU FufuLauncher держится выше 30% в течение 5 минут. Обычно это ненормально.</value></data>
+  <data name="HighCpuUsage_SuggestedAction" xml:space="preserve"><value>Рекомендуемое действие</value></data>
+  <data name="HighCpuUsage_SuggestionText" xml:space="preserve"><value>Пожалуйста, сообщите о проблеме. Если проблема повторяется, выйдите и обновитесь до последней версии.</value></data>
+  <data name="HighCpuUsage_Dismiss" xml:space="preserve"><value>Закрыть</value></data>
+  <data name="HighCpuUsage_Report" xml:space="preserve"><value>Сообщить</value></data>
+  <data name="HighCpuUsage_ExitLauncher" xml:space="preserve"><value>Выйти из лаунчера</value></data>
+  <data name="Diagnostics_Title" xml:space="preserve"><value>Диагностика системы</value></data>
+  <data name="Diagnostics_HardwareAndSystem" xml:space="preserve"><value>Оборудование и система</value></data>
+  <data name="Diagnostics_CollectingInfo" xml:space="preserve"><value>Сбор информации о системе...</value></data>
+  <data name="Diagnostics_DisplayAndGraphics" xml:space="preserve"><value>Дисплей и графика</value></data>
+  <data name="Diagnostics_Resolution" xml:space="preserve"><value>Разрешение</value></data>
+  <data name="Diagnostics_RefreshRate" xml:space="preserve"><value>Частота обновления</value></data>
+  <data name="Diagnostics_Hardware" xml:space="preserve"><value>Оборудование</value></data>
+  <data name="Diagnostics_SecurityAndNetwork" xml:space="preserve"><value>Безопасность и сеть</value></data>
+  <data name="Diagnostics_WindowsSecurity" xml:space="preserve"><value>Центр безопасности Windows</value></data>
+  <data name="Diagnostics_DiskSpace" xml:space="preserve"><value>Место на диске</value></data>
+  <data name="Diagnostics_NetworkStatus" xml:space="preserve"><value>Статус сети</value></data>
+  <data name="Diagnostics_NetworkRegion" xml:space="preserve"><value>Регион сети</value></data>
+  <data name="Diagnostics_Suggestion" xml:space="preserve"><value>Рекомендация</value></data>
+  <data name="DailyNote_Title" xml:space="preserve"><value>Расписание Тейвата</value></data>
+  <data name="DailyNote_TodayMaterials" xml:space="preserve"><value>Сегодняшние материалы</value></data>
+  <data name="DailyNote_RefreshStatus" xml:space="preserve"><value>Текущий статус обновления</value></data>
+  <data name="DailyNote_RefreshData" xml:space="preserve"><value>Обновить данные</value></data>
+  <data name="DailyNote_MaterialDropHint" xml:space="preserve"><value>Напоминания о ежедневных материалах, книгах талантов и возвышения оружия</value></data>
+  <data name="DailyNote_TodayBirthday" xml:space="preserve"><value>День рождения сегодня</value></data>
+  <data name="DailyNote_CharacterWeapon" xml:space="preserve"><value>Персонаж / Оружие</value></data>
+  <data name="DailyNote_RecentActivities" xml:space="preserve"><value>Недавняя активность</value></data>
+  <data name="DailyNote_ActivityOverview" xml:space="preserve"><value>Обзор активности</value></data>
+  <data name="DailyNote_ActivityDesc" xml:space="preserve"><value>Просмотр текущих событий и оставшегося времени.</value></data>
+  <data name="GenshinData_Title" xml:space="preserve"><value>Дневник путешествий - Финансовый отчёт Тейвата</value></data>
+  <data name="GenshinData_TravelJournal" xml:space="preserve"><value>Дневник путешествий</value></data>
+  <data name="GenshinData_DataUpdated" xml:space="preserve"><value>Данные обновлены: </value></data>
+  <data name="GenshinData_TodayEarnings" xml:space="preserve"><value>Сегодняшний доход</value></data>
+  <data name="GenshinData_Primogems" xml:space="preserve"><value>Камни Истока</value></data>
+  <data name="GenshinData_Mora" xml:space="preserve"><value>Мора</value></data>
+  <data name="GenshinData_MonthTotal" xml:space="preserve"><value>Итого за месяц</value></data>
+  <data name="GenshinData_PrimogemsEarned" xml:space="preserve"><value>Заработано камней</value></data>
+  <data name="GenshinData_Mom" xml:space="preserve"><value>К прошлому месяцу </value></data>
+  <data name="GenshinData_LastMonth" xml:space="preserve"><value>(Прошлый месяц </value></data>
+  <data name="GenshinData_MoraEarned" xml:space="preserve"><value>Заработано моры</value></data>
+  <data name="GenshinData_DataNote" xml:space="preserve"><value>• Дневные данные обычно обновляются на следующее утро&#x0a;• Уровень дохода рассчитан по эффективности получения камней</value></data>
+  <data name="GenshinData_MonthlySourceAnalysis" xml:space="preserve"><value>Анализ источников камней за месяц</value></data>
+  <data name="GenshinData_Total" xml:space="preserve"><value>Всего</value></data>
+  <data name="DataPage_SearchRole" xml:space="preserve"><value>Поиск персонажей...</value></data>
+  <data name="DataPage_AllRoles" xml:space="preserve"><value>Все персонажи</value></data>
+  <data name="DataPage_Only5Star" xml:space="preserve"><value>Только 5★</value></data>
+  <data name="DataPage_Only4Star" xml:space="preserve"><value>Только 4★</value></data>
+  <data name="DataPage_StarUnit" xml:space="preserve"><value>★</value></data>
+  <data name="DataPage_Talents" xml:space="preserve"><value>Таланты</value></data>
+  <data name="DataPage_ConstellationDist" xml:space="preserve"><value>Созвездия (C0/C1/C2)</value></data>
+  <data name="DataPage_AvgDmg" xml:space="preserve"><value>Средний урон</value></data>
+  <data name="DataPage_TopWeapons" xml:space="preserve"><value>Топ оружия</value></data>
+  <data name="DataPage_TopArtifacts" xml:space="preserve"><value>Топ артефактов</value></data>
+  <data name="DataPage_AvgInterval" xml:space="preserve"><value>Средний интервал:</value></data>
+  <data name="DataPage_MinInterval" xml:space="preserve"><value>Мин. интервал:</value></data>
+  <data name="DataPage_HistoryRerun" xml:space="preserve"><value>История:</value></data>
+  <data name="DataPage_LoadingTimeline" xml:space="preserve"><value>Загрузка таймлайна, подождите...</value></data>
+  <data name="DataPage_UsageRate" xml:space="preserve"><value>Процент использования</value></data>
+  <data name="DataPage_SpeedrunTime" xml:space="preserve"><value>Время спидрана</value></data>
+  <data name="DataPage_OwnRate" xml:space="preserve"><value>Процент владения</value></data>
+  <data name="DataPage_AvgConstellation" xml:space="preserve"><value>Среднее созвездие</value></data>
+  <data name="DataPage_AvgTime" xml:space="preserve"><value>Среднее время</value></data>
+  <data name="DataPage_ClickToView" xml:space="preserve"><value>Нажмите для увеличения</value></data>
+  <data name="DataPage_5Star" xml:space="preserve"><value>5★</value></data>
+  <data name="DataPage_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="DataPage_RoleData" xml:space="preserve"><value>Данные персонажей</value></data>
+  <data name="DataPage_AbyssData" xml:space="preserve"><value>Бездна</value></data>
+  <data name="DataPage_SpiralAbyss" xml:space="preserve"><value>Витая Бездна</value></data>
+  <data name="DataPage_WishData" xml:space="preserve"><value>Данные молитв</value></data>
+  <data name="DataPage_RerunTimer" xml:space="preserve"><value>Таймер рерана</value></data>
+  <data name="DataPage_Timeline" xml:space="preserve"><value>Таймлайн</value></data>
+  <data name="DataPage_DataProvidedBy" xml:space="preserve"><value>Данные от Teyvat Assistant. Таймлайн от Paimon.moe.</value></data>
+  <data name="HDR_SaveAndApply" xml:space="preserve"><value>Сохранить и применить</value></data>
+  <data name="HDR_BrightnessConfig" xml:space="preserve"><value>Конфигурация яркости HDR</value></data>
+  <data name="HDR_NotSupported" xml:space="preserve"><value>HDR не поддерживается</value></data>
+  <data name="HDR_NotSupportedMsg" xml:space="preserve"><value>Монитор сообщает, что HDR не поддерживается.</value></data>
+  <data name="HDR_NotEnabled" xml:space="preserve"><value>HDR не включён</value></data>
+  <data name="HDR_NotEnabledMsg" xml:space="preserve"><value>Режим HDR Windows не включён; автонастройка может быть неточной.</value></data>
+  <data name="HDR_DisplayInfo" xml:space="preserve"><value>Информация о дисплее</value></data>
+  <data name="HDR_SwitchSetting" xml:space="preserve"><value>Переключатель HDR (принудительно при каждом запуске)</value></data>
+  <data name="HDR_OffContent" xml:space="preserve"><value>Отключить HDR (значение реестра 0)</value></data>
+  <data name="HDR_OnContent" xml:space="preserve"><value>Включить HDR (значение реестра 1)</value></data>
+  <data name="HDR_RegistryNote" xml:space="preserve"><value>Примечание: Сохранение немедленно изменит реестр, и настройка будет автоматически применена при следующем запуске игры.</value></data>
+  <data name="HDR_MaxLuminance" xml:space="preserve"><value>Макс. яркость</value></data>
+  <data name="HDR_SceneLuminance" xml:space="preserve"><value>Бумажный белый</value></data>
+  <data name="HDR_UILuminance" xml:space="preserve"><value>UI белый</value></data>
+  <data name="HDR_ResetDefault" xml:space="preserve"><value>Сбросить</value></data>
+  <data name="HDR_AutoAdjust" xml:space="preserve"><value>Автонастройка</value></data>
+  <data name="HDR_AutoAdjustTooltip" xml:space="preserve"><value>Авторасчёт на основе данных дисплея</value></data>
+  <data name="InventoryWindow_Title" xml:space="preserve"><value>Инвентарь и планирование целей</value></data>
+  <data name="InventoryWindow_ArchiveTitle" xml:space="preserve"><value>Архив инвентаря</value></data>
+  <data name="InventoryWindow_SyncStatus" xml:space="preserve"><value>Статус синхронизации</value></data>
+  <data name="InventoryWindow_RefreshData" xml:space="preserve"><value>Обновить данные</value></data>
+  <data name="InventoryWindow_MyBag" xml:space="preserve"><value>Мой инвентарь</value></data>
+  <data name="InventoryWindow_InventoryOverview" xml:space="preserve"><value>Обзор инвентаря</value></data>
+  <data name="InventoryWindow_OverviewDesc" xml:space="preserve"><value>Просмотр текущего количества и быстрый поиск выполненных целей по значкам.</value></data>
+  <data name="InventoryWindow_GoalCheckHint" xml:space="preserve"><value>Галочка показывается при достижении цели</value></data>
+  <data name="InventoryWindow_Complete" xml:space="preserve"><value>Готово</value></data>
+  <data name="InventoryWindow_GoalSetting" xml:space="preserve"><value>Установка целей</value></data>
+  <data name="InventoryWindow_GoalPlanning" xml:space="preserve"><value>Планирование целей</value></data>
+  <data name="InventoryWindow_GoalDesc" xml:space="preserve"><value>Установите целевые количества материалов; на странице инвентаря будет отображаться статус.</value></data>
+  <data name="InventoryWindow_ItemName" xml:space="preserve"><value>Название</value></data>
+  <data name="InventoryWindow_TargetCount" xml:space="preserve"><value>Цель</value></data>
+  <data name="InventoryWindow_GoalMetHint" xml:space="preserve"><value>При достижении цели на карточке появится значок выполнения.</value></data>
+  <data name="AchievementWindow_Title" xml:space="preserve"><value>Менеджер достижений</value></data>
+  <data name="AchievementWindow_Archive" xml:space="preserve"><value>Архив достижений</value></data>
+  <data name="AchievementWindow_ViewGuide" xml:space="preserve"><value>Смотреть руководство</value></data>
+  <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve"><value>Найти руководство по достижению на MiYouShe</value></data>
+  <data name="AchievementWindow_SwitchView" xml:space="preserve"><value>Сменить вид</value></data>
+  <data name="AchievementWindow_PrimogemTooltip" xml:space="preserve"><value>Камни Истока: заработано / всего</value></data>
+  <data name="AchievementWindow_ProgressTooltip" xml:space="preserve"><value>Прогресс достижений</value></data>
+  <data name="AchievementWindow_SearchPlaceholder" xml:space="preserve"><value>Поиск по названию, описанию...</value></data>
+  <data name="AchievementWindow_Version" xml:space="preserve"><value>Версия</value></data>
+  <data name="AchievementWindow_HiddenComplete" xml:space="preserve"><value>Скрыть выполненные</value></data>
+  <data name="AchievementWindow_ShowAll" xml:space="preserve"><value>Показать все</value></data>
+  <data name="AchievementWindow_UIAFImport" xml:space="preserve"><value>Импорт UIAF</value></data>
+  <data name="AchievementWindow_UIAFExport" xml:space="preserve"><value>Экспорт UIAF</value></data>
+  <data name="AchievementWindow_ImportRecords" xml:space="preserve"><value>Импорт записей</value></data>
+  <data name="AchievementWindow_ManualSave" xml:space="preserve"><value>Ручное сохранение</value></data>
+  <data name="AchievementWindow_CurrentProfile" xml:space="preserve"><value>Текущий профиль</value></data>
+  <data name="AchievementWindow_ManageArchive" xml:space="preserve"><value>Сменить или создать архив</value></data>
+  <data name="AchievementWindow_ArchiveManagement" xml:space="preserve"><value>Управление архивом</value></data>
+  <data name="AchievementWindow_UpdateData" xml:space="preserve"><value>Обновить данные</value></data>
+  <data name="AchievementWindow_Progress" xml:space="preserve"><value>Прогресс: </value></data>
+  <data name="AgreementPage_Title" xml:space="preserve"><value>Пользовательское соглашение</value></data>
+  <data name="AgreementPage_Welcome" xml:space="preserve"><value>Добро пожаловать в FufuLauncher! Пожалуйста, внимательно прочтите соглашение.</value></data>
+  <data name="AgreementPage_AgreeCheck" xml:space="preserve"><value>Я прочитал и согласен с Пользовательским соглашением</value></data>
+  <data name="AgreementPage_ScrollHint" xml:space="preserve"><value>Прокрутите для прочтения соглашения перед подтверждением</value></data>
+  <data name="AgreementPage_IconCheckHint" xml:space="preserve"><value>Для обеспечения качества проверьте корректность иконок ниже</value></data>
+  <data name="AgreementPage_Settings" xml:space="preserve"><value>Настройки</value></data>
+  <data name="AgreementPage_Home" xml:space="preserve"><value>Главная</value></data>
+  <data name="AgreementPage_Files" xml:space="preserve"><value>Файлы</value></data>
+  <data name="AgreementPage_CannotDisplay" xml:space="preserve"><value>Невозможно отобразить</value></data>
+  <data name="AgreementPage_DisplayNormal" xml:space="preserve"><value>Отображение нормальное</value></data>
+  <data name="AgreementPage_DataStorage" xml:space="preserve"><value>Расположение данных</value></data>
+  <data name="AgreementPage_DataDirDesc" xml:space="preserve"><value>Вы можете настроить папку хранения данных и кэша или оставить по умолчанию.</value></data>
+  <data name="AgreementPage_UserDataDir" xml:space="preserve"><value>Папка данных пользователя</value></data>
+  <data name="AgreementPage_Change" xml:space="preserve"><value>Изменить</value></data>
+  <data name="AgreementPage_CacheDir" xml:space="preserve"><value>Папка кэша</value></data>
+  <data name="AgreementPage_ConfirmAndComplete" xml:space="preserve"><value>Подтвердить и завершить</value></data>
+  <data name="AgreementPage_Next" xml:space="preserve"><value>Далее</value></data>
+  <data name="PlayerInfo_Title" xml:space="preserve"><value>Просмотр информации о персонаже</value></data>
+  <data name="PlayerInfo_SearchUid" xml:space="preserve"><value>Введите UID для поиска...</value></data>
+  <data name="PlayerInfo_Query" xml:space="preserve"><value>Поиск</value></data>
+  <data name="PlayerInfo_RefreshMyData" xml:space="preserve"><value>Обновить мои данные</value></data>
+  <data name="PlayerInfo_RoleList" xml:space="preserve"><value>Список персонажей</value></data>
+  <data name="PlayerInfo_SelectRoleHint" xml:space="preserve"><value>Выберите персонажа слева для просмотра</value></data>
+  <data name="PlayerInfo_BasicStats" xml:space="preserve"><value>Основные статы</value></data>
+  <data name="PlayerInfo_CoreStats" xml:space="preserve"><value>Основные параметры</value></data>
+  <data name="PlayerInfo_Hp" xml:space="preserve"><value>Макс. HP</value></data>
+  <data name="PlayerInfo_Attack" xml:space="preserve"><value>АТК</value></data>
+  <data name="PlayerInfo_Defense" xml:space="preserve"><value>ЗАЩ</value></data>
+  <data name="PlayerInfo_ElementalMastery" xml:space="preserve"><value>Мастерство стихий</value></data>
+  <data name="PlayerInfo_AdvancedStats" xml:space="preserve"><value>Расширенные статы</value></data>
+  <data name="PlayerInfo_CritRate" xml:space="preserve"><value>Крит. шанс</value></data>
+  <data name="PlayerInfo_CritDmg" xml:space="preserve"><value>Крит. урон</value></data>
+  <data name="PlayerInfo_Recharge" xml:space="preserve"><value>Восст. энергии</value></data>
+  <data name="PlayerInfo_FireDmg" xml:space="preserve"><value>Пиро урон</value></data>
+  <data name="PlayerInfo_WaterDmg" xml:space="preserve"><value>Гидро урон</value></data>
+  <data name="PlayerInfo_PhysicalDmg" xml:space="preserve"><value>Физ. урон</value></data>
+  <data name="PlayerInfo_ArtifactDetails" xml:space="preserve"><value>Детали артефактов</value></data>
+  <data name="PlayerInfo_ViewSource" xml:space="preserve"><value>Источник</value></data>
+  <data name="PlayerInfo_WeaponAndSkills" xml:space="preserve"><value>Оружие и навыки</value></data>
+  <data name="PlayerInfo_Level" xml:space="preserve"><value>Ур. </value></data>
+  <data name="PlayerInfo_SkillLevels" xml:space="preserve"><value>Уровни навыков</value></data>
+  <data name="PlayerInfo_NormalAttack" xml:space="preserve"><value>Обычная атака</value></data>
+  <data name="PlayerInfo_ElementalSkill" xml:space="preserve"><value>Элем. навык</value></data>
+  <data name="PlayerInfo_ElementalBurst" xml:space="preserve"><value>Взрыв стихии</value></data>
+  <data name="PlayerInfo_ViewTeamRecommend" xml:space="preserve"><value>Рекомендации отряда</value></data>
+  <data name="GachaAnalysis_Title" xml:space="preserve"><value>Анализ записей молитв</value></data>
+  <data name="GachaAnalysis_Pulls" xml:space="preserve"><value> Молитв</value></data>
+  <data name="GachaAnalysis_NoRecords" xml:space="preserve"><value>Нет записей</value></data>
+  <data name="GachaAnalysis_4Star" xml:space="preserve"><value>4★</value></data>
+  <data name="GachaAnalysis_TotalPulls" xml:space="preserve"><value>Всего молитв</value></data>
+  <data name="GachaAnalysis_PrimogemsSpent" xml:space="preserve"><value>Потрачено камней</value></data>
+  <data name="GachaAnalysis_Show4Star" xml:space="preserve"><value>Показать 4★</value></data>
+  <data name="GachaAnalysis_Show4StarShort" xml:space="preserve"><value>4★</value></data>
+  <data name="GachaAnalysis_Total" xml:space="preserve"><value>Всего: </value></data>
+  <data name="GachaAnalysis_Pity5Star" xml:space="preserve"><value>★5 Pity: </value></data>
+  <data name="GachaAnalysis_Pity4Star" xml:space="preserve"><value>★4 Pity: </value></data>
+  <data name="GachaAnalysis_Pity5StarShort" xml:space="preserve"><value>★5 Pity </value></data>
+  <data name="GachaAnalysis_Pity4StarShort" xml:space="preserve"><value>★4 Pity </value></data>
+  <data name="GachaAnalysis_CharacterEvent" xml:space="preserve"><value>Ивент персонажа</value></data>
+  <data name="GachaAnalysis_WeaponEvent" xml:space="preserve"><value>Ивент оружия</value></data>
+  <data name="GachaAnalysis_ChronicledWish" xml:space="preserve"><value>Хроника желаний</value></data>
+  <data name="GachaAnalysis_StandardWish" xml:space="preserve"><value>Стандартный баннер</value></data>
+  <data name="GachaAnalysis_WishOverview" xml:space="preserve"><value>Обзор молитв</value></data>
+  <data name="GachaAnalysis_WishAnalysis" xml:space="preserve"><value>Анализ молитв</value></data>
+  <data name="GachaAnalysis_GetRecords" xml:space="preserve"><value>Получить записи молитв</value></data>
+  <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve"><value>Через аккаунт MiYouShe</value></data>
+  <data name="GachaAnalysis_GetViaUrl" xml:space="preserve"><value>Через URL</value></data>
+  <data name="GachaAnalysis_ImportUigf" xml:space="preserve"><value>Импорт файла UIGF</value></data>
+  <data name="GachaAnalysis_UpdateData" xml:space="preserve"><value>Обновить данные</value></data>
+  <data name="GachaAnalysis_About" xml:space="preserve"><value>О программе</value></data>
+  <data name="GachaAnalysis_ImageLibrary" xml:space="preserve"><value>Библиотека изображений</value></data>
+  <data name="GachaAnalysis_ListView" xml:space="preserve"><value>Список</value></data>
+  <data name="GachaAnalysis_CardView" xml:space="preserve"><value>Карточки</value></data>
+  <data name="GachaAnalysis_ExportUigf" xml:space="preserve"><value>Экспорт UIGF</value></data>
+  <data name="GachaAnalysis_RefreshMetadata" xml:space="preserve"><value>Обновить метаданные</value></data>
+  <data name="GachaAnalysis_DeleteRecords" xml:space="preserve"><value>Удалить записи</value></data>
+  <data name="GachaAnalysis_PullsUnit" xml:space="preserve"><value> Молитв</value></data>
+  <data name="GachaAnalysis_ImportHint" xml:space="preserve"><value>Выберите способ импорта записей молитв для анализа</value></data>
+  <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve"><value>Получить записи напрямую через&#x0a;аккаунт MiYouShe</value></data>
+  <data name="GachaAnalysis_Recommended" xml:space="preserve"><value>Рекомендуется</value></data>
+  <data name="GachaAnalysis_UrlDesc" xml:space="preserve"><value>Вставьте ссылку анализа молитв&#x0a;для получения записей из API</value></data>
+  <data name="GachaAnalysis_UigfDesc" xml:space="preserve"><value>Импорт из стандартного JSON&#x0a;формата UIGF&#x0a;UIGF v4.x/3.0/2.x</value></data>
+  <data name="GachaAnalysis_IncrementalUpdate" xml:space="preserve"><value>Инкрементальное обновление (рекомендуется)</value></data>
+  <data name="GachaAnalysis_FullUpdate" xml:space="preserve"><value>Полное обновление</value></data>
+  <data name="GachaAnalysis_Characters" xml:space="preserve"><value>Персонажи</value></data>
+  <data name="GachaAnalysis_Weapons" xml:space="preserve"><value>Оружие</value></data>
+  <data name="GachaAnalysis_CachedIconData" xml:space="preserve"><value>Кэшированные данные иконок</value></data>
+  <data name="GachaAnalysis_GeneratingAnalysis" xml:space="preserve"><value>Генерация анализа молитв...</value></data>
+  <data name="GachaAnalysis_CopyImage" xml:space="preserve"><value>Копировать изображение</value></data>
+  <data name="GachaAnalysis_SaveImage" xml:space="preserve"><value>Сохранить изображение</value></data>
+  <data name="GachaAnalysis_GoldPullStats" xml:space="preserve"><value>Статистика золотых молитв</value></data>
+  <data name="GachaAnalysis_GoldPullStatsDesc" xml:space="preserve"><value>Записи из одного пула за одно время считаются одной группой</value></data>
+  <data name="GachaAnalysis_TenPullGoldRate" xml:space="preserve"><value>Шанс 5★ за 10</value></data>
+  <data name="GachaAnalysis_GroupsWith5Star" xml:space="preserve"><value> групп с 5★</value></data>
+  <data name="GachaAnalysis_SinglePullGoldRate" xml:space="preserve"><value>Шанс 5★ за одну</value></data>
+  <data name="GachaAnalysis_TimesWith5Star" xml:space="preserve"><value> раз с 5★</value></data>
+  <data name="GachaAnalysis_Avg5StarCost" xml:space="preserve"><value>Средняя стоимость 5★</value></data>
+  <data name="GachaAnalysis_Approx" xml:space="preserve"><value>Прим. </value></data>
+  <data name="GachaAnalysis_PrimogemsUnit" xml:space="preserve"><value> Камней</value></data>
+  <data name="GachaAnalysis_ActiveMonths" xml:space="preserve"><value>Активные месяцы</value></data>
+  <data name="GachaAnalysis_MonthlyAvg" xml:space="preserve"><value>Среднее в месяц </value></data>
+  <data name="GachaAnalysis_PeakMonth" xml:space="preserve"><value>Пиковый месяц</value></data>
+  <data name="GachaAnalysis_5StarAvg" xml:space="preserve"><value>Среднее 5★</value></data>
+  <data name="GachaAnalysis_AllPools5Star" xml:space="preserve"><value>Все пулы 5★</value></data>
+  <data name="GachaAnalysis_RarityComposition" xml:space="preserve"><value>Состав редкости</value></data>
+  <data name="GachaAnalysis_Rarity" xml:space="preserve"><value>Редкость</value></data>
+  <data name="GachaAnalysis_Proportion" xml:space="preserve"><value>Доля</value></data>
+  <data name="GachaAnalysis_PoolPullDistribution" xml:space="preserve"><value>Распределение молитв по пулам</value></data>
+  <data name="GachaAnalysis_Pool" xml:space="preserve"><value>Пул</value></data>
+  <data name="GachaAnalysis_Distribution" xml:space="preserve"><value>Распределение</value></data>
+  <data name="GachaAnalysis_Recent5StarPulls" xml:space="preserve"><value>Последние молитвы 5★</value></data>
+  <data name="GachaAnalysis_4StarTop10" xml:space="preserve"><value>Топ-10 4★</value></data>
+  <data name="GachaAnalysis_PityInterval" xml:space="preserve"><value>Интервал 5★ Pity</value></data>
+  <data name="GachaAnalysis_MonthlyTrend" xml:space="preserve"><value>Месячный тренд молитв</value></data>
+  <data name="GachaAnalysis_MonthlyTrendDesc" xml:space="preserve"><value>Все пулы 1-5★ по месяцам</value></data>
+  <data name="WishBannerImage" xml:space="preserve"><value> Изображение баннера молитв</value></data>
+  <data name="HelpPage_SearchResults" xml:space="preserve"><value>Найдено {0} результатов, нажмите для открытия</value></data>
+  <data name="HelpPage_NoResults" xml:space="preserve"><value>Документы не найдены</value></data>
+  <data name="Success" xml:space="preserve"><value>Успешно</value></data>
+  <data name="Failure" xml:space="preserve"><value>Ошибка</value></data>
+  <data name="Settings_Disclaimer" xml:space="preserve"><value>Отказ от ответственности</value></data>
+  <data name="Settings_ContinueVisit" xml:space="preserve"><value>Продолжить</value></data>
+  <data name="Settings_CommunityCheckinNote" xml:space="preserve"><value>Информация об отметке сообщества</value></data>
+  <data name="Settings_CloudCheckinNote" xml:space="preserve"><value>Информация об отметке облачной игры</value></data>
+  <data name="Settings_Notice" xml:space="preserve"><value>Уведомление</value></data>
+  <data name="Settings_SubmitApp" xml:space="preserve"><value>Отправить</value></data>
+  <data name="Settings_NetworkError" xml:space="preserve"><value>Ошибка сети</value></data>
+  <data name="DownloadWindow_Success" xml:space="preserve"><value>Загрузка успешна</value></data>
+  <data name="DownloadWindow_Complete" xml:space="preserve"><value>Завершено</value></data>
+  <data name="DownloadWindow_Cancelled" xml:space="preserve"><value>Задача отменена</value></data>
+  <data name="DownloadWindow_Error" xml:space="preserve"><value>Произошла ошибка</value></data>
+  <data name="DownloadWindow_HideDetailLog" xml:space="preserve"><value>Скрыть подробный лог</value></data>
+  <data name="DownloadWindow_AllDone" xml:space="preserve"><value>Все файлы загружены, проверены и развёрнуты.</value></data>
+  <data name="DownloadWindow_Processing" xml:space="preserve"><value>Обработка: {0}/{1} файлов</value></data>
+  <data name="DownloadWindow_InitTask" xml:space="preserve"><value>Инициализация задачи...</value></data>
+  <data name="CommunityPage_WelcomeTitle" xml:space="preserve"><value>Добро пожаловать в VanillaBBS, прочтите следующее</value></data>
+  <data name="CommunityPage_AuthTitle" xml:space="preserve"><value>Запрос авторизации</value></data>
+  <data name="CommunityPage_Agree" xml:space="preserve"><value>Согласен</value></data>
+  <data name="CommunityPage_Deny" xml:space="preserve"><value>Отказать</value></data>
+  <data name="CommunityPage_Unknown" xml:space="preserve"><value>Неизвестно</value></data>
+  <data name="CommunityPage_DataRequest" xml:space="preserve"><value>Страница запрашивает доступ к вашим данным:</value></data>
+  <data name="CommunityPage_ConsentPrompt" xml:space="preserve"><value>Вы согласны предоставить?</value></data>
+  <data name="AboutPage_FetchFailed" xml:space="preserve"><value>Ошибка получения</value></data>
+  <data name="AboutPage_LoadingBio" xml:space="preserve"><value>Загрузка bio...</value></data>
+  <data name="AboutPage_OpenInBrowser" xml:space="preserve"><value>Открыть во внешнем браузере</value></data>
+  <data name="AboutPage_NoBio" xml:space="preserve"><value>У пользователя нет bio.</value></data>
+  <data name="AboutPage_ConfirmNav" xml:space="preserve"><value>Подтвердить навигацию / Копировать</value></data>
+  <data name="AboutPage_GitHubToken" xml:space="preserve"><value>Токен GitHub</value></data>
+  <data name="AboutPage_FetchSuccess" xml:space="preserve"><value>Успешно! Скрипт загрузки создан.</value></data>
+  <data name="AboutPage_EnterToken" xml:space="preserve"><value>Введите ваш токен!</value></data>
+  <data name="AboutPage_FetchFailedArtifact" xml:space="preserve"><value>Ошибка получения (артефакт не найден)</value></data>
+  <data name="AboutPage_FetchFailedRun" xml:space="preserve"><value>Ошибка получения (успешный запуск не найден)</value></data>
+  <data name="AboutPage_FetchFailedWorkflow" xml:space="preserve"><value>Ошибка получения (workflow не найден)</value></data>
+  <data name="AboutPage_Exception" xml:space="preserve"><value>Произошло исключение</value></data>
+  <data name="AboutPage_GitHubTokenPlaceholder" xml:space="preserve"><value>Введите ваш токен GitHub</value></data>
+  <data name="AboutPage_SelectContact" xml:space="preserve"><value>Выберите способ связи</value></data>
+  <data name="AboutPage_DiscordCopied" xml:space="preserve"><value>Discord ID скопирован!</value></data>
+  <data name="AboutPage_Loading" xml:space="preserve"><value>Загрузка...</value></data>
+  <data name="AchievementWindow_DefaultProfile" xml:space="preserve"><value>Профиль по умолчанию</value></data>
+  <data name="AchievementWindow_UnnamedProfile" xml:space="preserve"><value>Безымянный профиль</value></data>
+  <data name="AchievementWindow_UnknownCategory" xml:space="preserve"><value>Неизвестная категория</value></data>
+  <data name="AchievementWindow_AllVersions" xml:space="preserve"><value>Все версии</value></data>
+  <data name="AchievementWindow_CurrentSuffix" xml:space="preserve"><value> (текущий)</value></data>
+  <data name="AchievementWindow_EnterName" xml:space="preserve"><value>Введите имя...</value></data>
+  <data name="AchievementWindow_DbNotFound" xml:space="preserve"><value>Встроенный файл базы данных не найден</value></data>
+  <data name="AchievementWindow_AlreadyLatest" xml:space="preserve"><value>Ваш архив уже последней версии, обновление не требуется.</value></data>
+  <data name="AchievementWindow_UpdateDb" xml:space="preserve"><value>Обновить базу достижений</value></data>
+  <data name="AchievementWindow_StartUpdate" xml:space="preserve"><value>Начать обновление</value></data>
+  <data name="AchievementWindow_SaveCurrent" xml:space="preserve"><value>Сохранить текущий профиль</value></data>
+  <data name="AchievementWindow_NewProfile" xml:space="preserve"><value>Новый профиль</value></data>
+  <data name="AchievementWindow_DuplicateName" xml:space="preserve"><value>Это имя профиля уже существует!</value></data>
+  <data name="AchievementWindow_ProfileNotFound" xml:space="preserve"><value>Целевой файл профиля не найден!</value></data>
+  <data name="AchievementWindow_InvalidChars" xml:space="preserve"><value>Имя содержит недопустимые символы, попробуйте снова.</value></data>
+  <data name="AchievementWindow_EmptyContent" xml:space="preserve"><value>Файл пуст.</value></data>
+  <data name="AchievementWindow_NoBackup" xml:space="preserve"><value>Нет резервных профилей</value></data>
+  <data name="AchievementWindow_ConfirmDeleteMsg" xml:space="preserve"><value>Вы уверены, что хотите удалить навсегда?</value></data>
+  <data name="AchievementWindow_NewBlank" xml:space="preserve"><value>Новый пустой профиль</value></data>
+  <data name="AchievementWindow_ExistingProfiles" xml:space="preserve"><value>Существующие профили:</value></data>
+  <data name="AchievementWindow_ImportData" xml:space="preserve"><value>Импорт данных</value></data>
+  <data name="AchievementWindow_ImportFailed" xml:space="preserve"><value>Ошибка импорта</value></data>
+  <data name="AchievementWindow_ExportSuccess" xml:space="preserve"><value>Экспорт успешен</value></data>
+  <data name="AchievementWindow_ExportFailed" xml:space="preserve"><value>Ошибка экспорта</value></data>
+  <data name="AchievementWindow_InvalidName" xml:space="preserve"><value>Недопустимое имя</value></data>
+  <data name="AchievementWindow_ReadFailed" xml:space="preserve"><value>Ошибка чтения</value></data>
+  <data name="AchievementWindow_EmptyFile" xml:space="preserve"><value>Пустой файл</value></data>
+  <data name="AchievementWindow_SwitchFailed" xml:space="preserve"><value>Ошибка переключения</value></data>
+  <data name="AchievementWindow_SaveSuccess" xml:space="preserve"><value>Сохранение успешно</value></data>
+  <data name="AchievementWindow_ConfirmDelete" xml:space="preserve"><value>Подтвердить удаление</value></data>
+  <data name="AchievementWindow_Importing" xml:space="preserve"><value>Импорт достижений</value></data>
+  <data name="AchievementWindow_TotalAchievements" xml:space="preserve"><value>Всего достижений: {0}</value></data>
+  <data name="AchievementWindow_DataLoaded" xml:space="preserve"><value>Данные загружены</value></data>
+  <data name="AchievementWindow_Saving" xml:space="preserve"><value>Сохранение...</value></data>
+  <data name="AchievementWindow_SavedToDocs" xml:space="preserve"><value>Данные сохранены в папку Документы</value></data>
+  <data name="AchievementWindow_ReadingData" xml:space="preserve"><value>Чтение данных...</value></data>
+  <data name="AchievementWindow_SwitchingProfile" xml:space="preserve"><value>Переключение профиля...</value></data>
+  <data name="AchievementWindow_PreparingRead" xml:space="preserve"><value>Подготовка чтения данных...</value></data>
+  <data name="AchievementWindow_ApplyingChanges" xml:space="preserve"><value>Применение изменений</value></data>
+  <data name="AchievementWindow_RefreshingUI" xml:space="preserve"><value>Обновление интерфейса...</value></data>
+  <data name="AchievementWindow_ReadingUIAF" xml:space="preserve"><value>Чтение данных UIAF...</value></data>
+  <data name="AchievementWindow_GeneratingUIAF" xml:space="preserve"><value>Генерация данных UIAF...</value></data>
+  <data name="AchievementWindow_UIAFExportDone" xml:space="preserve"><value>Экспорт UIAF завершён</value></data>
+  <data name="AchievementWindow_SaveException" xml:space="preserve"><value>Исключение при сохранении</value></data>
+  <data name="AchievementWindow_CannotOpenBrowser" xml:space="preserve"><value>Невозможно открыть браузер</value></data>
+  <data name="LaunchErr_UnknownError" xml:space="preserve"><value>Неизвестная ошибка</value></data>
+  <data name="LaunchErr_InvalidGamePath" xml:space="preserve"><value>Путь к игре недействителен или не существует</value></data>
+  <data name="LaunchErr_ExeNotFound" xml:space="preserve"><value>Исполняемый файл игры не найден. Проверьте настройки пути.
+Искомые файлы:
+{0}</value></data>
+  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>Обнаружено несколько исполняемых файлов. Лаунчер не может определить, какой запустить. Очистите лишние файлы или настройте имя в настройках.</value></data>
+  <data name="LaunchErr_CannotLoadConfig" xml:space="preserve"><value>Не удалось загрузить конфигурацию игры</value></data>
+  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>Таймаут запуска, попробуйте снова</value></data>
+  <data name="LaunchErr_FatalError" xml:space="preserve"><value>Критическая ошибка при запуске: {0}</value></data>
+  <data name="LaunchErr_PluginDamagedTitle" xml:space="preserve"><value>Плагин может быть повреждён</value></data>
+  <data name="LaunchErr_PluginDamagedMsg" xml:space="preserve"><value>Файлы плагина повреждены или заблокированы антивирусом. Переустановите плагин.</value></data>
+  <data name="Status_Success" xml:space="preserve"><value>Успешно</value></data>
+  <data name="Status_Failure" xml:space="preserve"><value>Ошибка</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>Пропущено</value></data>
+  <data name="Status_Completed" xml:space="preserve"><value>Завершено</value></data>
+  <data name="Status_Unknown" xml:space="preserve"><value>Неизвестно</value></data>
+  <data name="Status_None" xml:space="preserve"><value>Нет</value></data>
+  <data name="Status_Exception" xml:space="preserve"><value>Исключение</value></data>
+  <data name="Status_RequestFailed" xml:space="preserve"><value>Ошибка запроса</value></data>
+  <data name="Status_UnknownError" xml:space="preserve"><value>Неизвестная ошибка</value></data>
+  <data name="CheckinCloud_Title" xml:space="preserve"><value>Отметка облачного Genshin</value></data>
+  <data name="CheckinCloud_MissingCredential" xml:space="preserve"><value>Отсутствуют данные облачной игры (x-rpc-combo_token)</value></data>
+  <data name="CheckinCloud_TokenExpired" xml:space="preserve"><value>Токен истёк или аккаунт ограничен</value></data>
+  <data name="CheckinCloud_GainedTime" xml:space="preserve"><value>Получено {0} минут свободного времени</value></data>
+  <data name="CheckinCloud_CurrentFreeTime" xml:space="preserve"><value>Текущее свободное время: {0}</value></data>
+  <data name="CheckinCloud_AlreadyCheckedIn" xml:space="preserve"><value>Уже отмечен сегодня или лимит исчерпан</value></data>
+  <data name="CheckinCloud_PlayCardStatus" xml:space="preserve"><value>Статус карты: {0}, Монеты: {1}</value></data>
+  <data name="CheckinCloud_Exception" xml:space="preserve"><value>Исключение: {0}</value></data>
+  <data name="CheckinCloud_HoursMinutes" xml:space="preserve"><value>{0}ч{1}м</value></data>
+  <data name="CheckinCloud_HoursOnly" xml:space="preserve"><value>{0}ч</value></data>
+  <data name="CheckinCloud_MinutesOnly" xml:space="preserve"><value>{0}м</value></data>
+  <data name="CheckinCommunity_Title" xml:space="preserve"><value>Отметка сообщества</value></data>
+  <data name="CheckinCommunity_MissingToken" xml:space="preserve"><value>Отсутствует stoken или mid</value></data>
+  <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve"><value>Не удалось получить статус задачи. Проверьте cookie.</value></data>
+  <data name="CheckinCommunity_TodayDone" xml:space="preserve"><value>Выполнено сегодня ({0} монет)</value></data>
+  <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve"><value>Отметка сообщества уже выполнена, пропущено</value></data>
+  <data name="CheckinCommunity_GetPostsFailed" xml:space="preserve"><value>Не удалось получить список постов. Нельзя выполнить чтение/лайк/репост.</value></data>
+  <data name="CheckinCommunity_ReadDoneSkipped" xml:space="preserve"><value>Чтение уже выполнено, пропущено</value></data>
+  <data name="CheckinCommunity_LikeDoneSkipped" xml:space="preserve"><value>Лайк уже сделан, пропущено</value></data>
+  <data name="CheckinCommunity_ShareDoneSkipped" xml:space="preserve"><value>Репост уже сделан, пропущено</value></data>
+  <data name="CheckinCommunity_GainedCoins" xml:space="preserve"><value>Получено {0} монет (текущий баланс {1})</value></data>
+  <data name="CheckinCommunity_CurrentCoins" xml:space="preserve"><value>{0} монет</value></data>
+  <data name="CheckinCommunity_GenshinSignRequestFailed" xml:space="preserve"><value>Отметка сообщества: ошибка запроса</value></data>
+  <data name="CheckinCommunity_GenshinSignSuccess" xml:space="preserve"><value>Отметка сообщества успешна</value></data>
+  <data name="CheckinCommunity_GenshinSignCaptcha" xml:space="preserve"><value>Отметка сообщества: капча, пропущено</value></data>
+  <data name="CheckinCommunity_GenshinSignFailed" xml:space="preserve"><value>Ошибка отметки сообщества: {0}</value></data>
+  <data name="CheckinCommunity_GenshinSignException" xml:space="preserve"><value>Исключение отметки сообщества: {0}</value></data>
+  <data name="CheckinCommunity_ReadSuccess" xml:space="preserve"><value>Чтение успешно: {0}</value></data>
+  <data name="CheckinCommunity_ReadFailed" xml:space="preserve"><value>Ошибка чтения: {0}</value></data>
+  <data name="CheckinCommunity_ReadException" xml:space="preserve"><value>Исключение чтения: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeSuccess" xml:space="preserve"><value>Лайк успешен: {0}</value></data>
+  <data name="CheckinCommunity_LikeFailed" xml:space="preserve"><value>Ошибка лайка: {0} ({1})</value></data>
+  <data name="CheckinCommunity_LikeException" xml:space="preserve"><value>Исключение лайка: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareSuccess" xml:space="preserve"><value>Репост успешен: {0}</value></data>
+  <data name="CheckinCommunity_ShareFailed" xml:space="preserve"><value>Ошибка репоста: {0} ({1})</value></data>
+  <data name="CheckinCommunity_ShareException" xml:space="preserve"><value>Исключение репоста: {0} ({1})</value></data>
+  <data name="CheckinCommunity_Exception" xml:space="preserve"><value>Исключение: {0}</value></data>
+  <data name="Checkin_NoBoundAccount" xml:space="preserve"><value>Привязанный аккаунт не обнаружен</value></data>
+  <data name="Checkin_Reason" xml:space="preserve"><value>, причина: {0}</value></data>
+  <data name="Checkin_Detail" xml:space="preserve"><value>, детали: {0}</value></data>
+  <data name="Checkin_GetInfoFailed" xml:space="preserve"><value>Не удалось получить информацию об отметке</value></data>
+  <data name="Checkin_FirstBindWarning" xml:space="preserve"><value>привязан впервые. Сначала выполните отметку вручную.</value></data>
+  <data name="Checkin_AlreadySignedToday" xml:space="preserve"><value>Уже отмечен сегодня</value></data>
+  <data name="Checkin_TodayReward" xml:space="preserve"><value>Сегодняшняя награда: {0}</value></data>
+  <data name="Checkin_SignRequestFailed" xml:space="preserve"><value>Запрос отметки не удался</value></data>
+  <data name="Checkin_SignRateLimited" xml:space="preserve"><value>Ошибка отметки, HTTP 429 ограничение</value></data>
+  <data name="Checkin_ParseResultFailed" xml:space="preserve"><value>Не удалось разобрать результат отметки</value></data>
+  <data name="Checkin_SignSuccess" xml:space="preserve"><value>Отметка успешна</value></data>
+  <data name="Checkin_SignFailedApi" xml:space="preserve"><value>Ошибка отметки, API: {0}</value></data>
+  <data name="Checkin_SignedDays" xml:space="preserve"><value>Отмечено дней: {0}</value></data>
+  <data name="Checkin_RewardIs" xml:space="preserve"><value>Награда: {0}</value></data>
+  <data name="Checkin_NoAccountToSign" xml:space="preserve"><value>Нет аккаунтов для отметки</value></data>
+  <data name="Checkin_ParseAccountListFailed" xml:space="preserve"><value>Не удалось разобрать список аккаунтов</value></data>
+  <data name="Checkin_GetAccountListException" xml:space="preserve"><value>Исключение получения списка аккаунтов: {0}</value></data>
+  <data name="Checkin_ParseSignStatusFailed" xml:space="preserve"><value>Не удалось разобрать статус отметки</value></data>
+  <data name="Checkin_RequestSignStatusException" xml:space="preserve"><value>Исключение запроса статуса отметки: {0}</value></data>
+  <data name="Checkin_ParseResponseDataFailed" xml:space="preserve"><value>Не удалось разобрать данные ответа списка аккаунтов</value></data>
+  <data name="Checkin_NetworkRequestException" xml:space="preserve"><value>Исключение сетевого запроса: {0}</value></data>
+  <data name="Checkin_GetCalendarException" xml:space="preserve"><value>Исключение получения календаря наград: {0}</value></data>
+  <data name="Checkin_AllAccountsSuccess" xml:space="preserve"><value>Отметка завершена. Все {0} аккаунтов успешно.</value></data>
+  <data name="Checkin_PartialSuccess" xml:space="preserve"><value>Отметка завершена. {0} успешно, {1} с ошибкой.</value></data>
+  <data name="Checkin_AllFailed" xml:space="preserve"><value>Отметка не удалась. {0} аккаунтов с ошибками.</value></data>
+  <data name="Checkin_AllDisabled" xml:space="preserve"><value>Все аккаунты отключены</value></data>
+  <data name="Checkin_AccountNotFound" xml:space="preserve"><value>Текущий аккаунт не найден</value></data>
+  <data name="Checkin_AllDone" xml:space="preserve"><value>Всё готово</value></data>
+  <data name="Checkin_CountFailed" xml:space="preserve"><value>{0} с ошибкой</value></data>
+  <data name="Checkin_AccountsSuccess" xml:space="preserve"><value>{0} аккаунтов успешно</value></data>
+  <data name="Checkin_AccountsFailed" xml:space="preserve"><value>{0} с ошибкой</value></data>
+  <data name="Checkin_GameCheckin" xml:space="preserve"><value>Игровая отметка</value></data>
+  <data name="Checkin_CloudGameCheckin" xml:space="preserve"><value>Отметка облачной игры</value></data>
+  <data name="Checkin_CommunityCheckin" xml:space="preserve"><value>Отметка сообщества</value></data>
+  <data name="Checkin_OSAccountSkipped" xml:space="preserve"><value>OS аккаунт пропущен</value></data>
+  <data name="Checkin_NoCloudCredential" xml:space="preserve"><value>Не настроены данные облачной игры</value></data>
+  <data name="Checkin_NotConfiguredCredential" xml:space="preserve"><value>Учётные данные не настроены</value></data>
+  <data name="Checkin_ConsecutiveDays" xml:space="preserve"><value>{0} дн. подряд | Награда: {1}</value></data>
+  <data name="Checkin_SuccessFailCount" xml:space="preserve"><value>{0} успешно, {1} с ошибкой</value></data>
+  <data name="Checkin_GetStatusFailed" xml:space="preserve"><value>Не удалось получить статус</value></data>
+  <data name="Checkin_SignedToday" xml:space="preserve"><value>Отмечен сегодня</value></data>
+  <data name="Checkin_UnsignedToday" xml:space="preserve"><value>Не отмечен сегодня</value></data>
+  <data name="Checkin_NotEnabled" xml:space="preserve"><value>Функция отметки не включена</value></data>
+  <data name="Checkin_NotDetected" xml:space="preserve"><value>Привязка не обнаружена</value></data>
+  <data name="Checkin_NotDetectedAccount" xml:space="preserve"><value>Аккаунт не обнаружен</value></data>
+  <data name="Checkin_FeatureNotEnabled" xml:space="preserve"><value>Функция не включена</value></data>
+  <data name="Checkin_EnableInConfig" xml:space="preserve"><value>Установите Enable=true в config.json</value></data>
+  <data name="Checkin_DefaultUser" xml:space="preserve"><value>Пользователь{0}</value></data>
+  <data name="Checkin_GameCheckinProgress" xml:space="preserve"><value>Игровая отметка...</value></data>
+  <data name="Checkin_OSAccountSkippedCommunity" xml:space="preserve"><value>OS аккаунт пропущен (отметка сообщества)</value></data>
+  <data name="Checkin_CommunityCheckinProgress" xml:space="preserve"><value>Отметка сообщества...</value></data>
+  <data name="Checkin_CloudGameCheckinProgress" xml:space="preserve"><value>Отметка облачной игры...</value></data>
+  <data name="CheckinGame_Exception" xml:space="preserve"><value>Исключение: {0}</value></data>
+  <data name="Token_InvalidCookie" xml:space="preserve"><value>Нет действительного cookie</value></data>
+  <data name="Token_MissingStokenOrMid" xml:space="preserve"><value>Stoken или mid отсутствует в локальном cookie, обновление невозможно</value></data>
+  <data name="Token_RefreshTitle" xml:space="preserve"><value>Обновление cookie</value></data>
+  <data name="Token_ManualRefreshProgress" xml:space="preserve"><value>Выполняется ручное обновление...</value></data>
+  <data name="Token_AutoRefreshProgress" xml:space="preserve"><value>Cookie истекли, выполняется обновление...</value></data>
+  <data name="Token_WebTicketFailed" xml:space="preserve"><value>Не удалось создать WebTicket</value></data>
+  <data name="Token_QRScanFailed" xml:space="preserve"><value>Ошибка запроса симуляции QR-сканирования</value></data>
+  <data name="Token_ConfirmLoginFailed" xml:space="preserve"><value>Ошибка запроса подтверждения входа</value></data>
+  <data name="Token_ManualRefreshDone" xml:space="preserve"><value>Ручное обновление cookie завершено. Новые учётные данные активны.</value></data>
+  <data name="Token_AutoRefreshDone" xml:space="preserve"><value>Автообновление cookie завершено. Новые учётные данные активны.</value></data>
+  <data name="Token_GetNewCookieFailed" xml:space="preserve"><value>Не удалось получить новый cookie</value></data>
+  <data name="Token_RefreshFailed" xml:space="preserve"><value>Ошибка обновления cookie</value></data>
+  <data name="Token_RefreshException" xml:space="preserve"><value>Исключение при обновлении cookie: {0}</value></data>
+  <data name="RedeemCode_Expired" xml:space="preserve"><value>Истёк</value></data>
+  <data name="RedeemCode_ExpiringToday" xml:space="preserve"><value>Истекает сегодня</value></data>
+  <data name="RedeemCode_HoursLeft" xml:space="preserve"><value>Осталось {0} ч.</value></data>
+  <data name="RedeemCode_DaysLeft" xml:space="preserve"><value>Осталось {0} дн.</value></data>
+  <data name="RedeemCode_MoreEvents" xml:space="preserve"><value>...и ещё {0} событий</value></data>
+  <data name="RedeemCode_NewPublished" xml:space="preserve"><value>Опубликован новый код</value></data>
+  <data name="RedeemCode_NewContent" xml:space="preserve"><value>Новый код:\n{0}\nАктивируйте в игре!</value></data>
+  <data name="RedeemCode_ExpiringTitle" xml:space="preserve"><value>Код скоро истекает</value></data>
+  <data name="RedeemCode_ExpiringContent" xml:space="preserve"><value>Событие {0} имеет коды:\n{1}\nИспользуйте их как можно скорее. Срок истекает сегодня!</value></data>
+  <data name="HashCheck_Failed" xml:space="preserve"><value>Проверка не пройдена</value></data>
+  <data name="HashCheck_FileNotFound" xml:space="preserve"><value>Файл проверки не найден. Проверьте целостность клиента.</value></data>
+  <data name="HashCheck_FormatError" xml:space="preserve"><value>Ошибка формата</value></data>
+  <data name="HashCheck_ComponentModified" xml:space="preserve"><value>Компонент изменён или отсутствует:\nCaptureApp\n</value></data>
+  <data name="HashCheck_NotPassed" xml:space="preserve"><value>Проверка не пройдена</value></data>
+  <data name="HashCheck_Exception" xml:space="preserve"><value>Исключение проверки</value></data>
+  <data name="HashCheck_ExceptionMsg" xml:space="preserve"><value>Ошибка хеш-проверки: {0}</value></data>
+  <data name="Settings_DirCreateFailed" xml:space="preserve"><value>Ошибка создания папки</value></data>
+  <data name="Settings_DirCreateFailedMsg" xml:space="preserve"><value>Не удалось создать папку данных. Проверьте права: {0}</value></data>
+  <data name="Settings_DbInitFailed" xml:space="preserve"><value>Ошибка инициализации базы данных</value></data>
+  <data name="Settings_DbInitFailedMsg" xml:space="preserve"><value>Не удалось создать или инициализировать базу: {0}</value></data>
+  <data name="Settings_ConfigDeleteFailed" xml:space="preserve"><value>Ошибка удаления конфигурации</value></data>
+  <data name="Settings_ConfigDeleteFailedMsg" xml:space="preserve"><value>Не удалось удалить настройку из базы: {0}</value></data>
+  <data name="Settings_ConfigReadFailed" xml:space="preserve"><value>Ошибка чтения конфигурации</value></data>
+  <data name="Settings_ConfigReadFailedMsg" xml:space="preserve"><value>Не удалось загрузить настройки из базы: {0}</value></data>
+  <data name="Settings_ConfigSaveFailed" xml:space="preserve"><value>Ошибка сохранения конфигурации</value></data>
+  <data name="Settings_ConfigSaveFailedMsg" xml:space="preserve"><value>Не удалось сохранить настройки в базу: {0}</value></data>
+  <data name="Diagnostics_Connected" xml:space="preserve"><value>Подключено</value></data>
+  <data name="Diagnostics_Disconnected" xml:space="preserve"><value>Отключено</value></data>
+  <data name="Diagnostics_Domestic" xml:space="preserve"><value>Китай</value></data>
+  <data name="Diagnostics_Overseas" xml:space="preserve"><value>Зарубежный</value></data>
+  <data name="Diagnostics_DomesticSystem" xml:space="preserve"><value>Китай (Система)</value></data>
+  <data name="Diagnostics_OverseasSystem" xml:space="preserve"><value>Зарубежный (Система)</value></data>
+  <data name="Diagnostics_NoNetwork" xml:space="preserve"><value>Нет сети</value></data>
+  <data name="Diagnostics_UnknownCpu" xml:space="preserve"><value>Неизвестный CPU</value></data>
+  <data name="Diagnostics_UnknownGpu" xml:space="preserve"><value>Неизвестный GPU</value></data>
+  <data name="Diagnostics_ReadFailed" xml:space="preserve"><value>Ошибка чтения</value></data>
+  <data name="Diagnostics_Enabled" xml:space="preserve"><value>Включено</value></data>
+  <data name="Diagnostics_Disabled" xml:space="preserve"><value>Отключено</value></data>
+  <data name="Diagnostics_NotInstalled" xml:space="preserve"><value>Не установлено или удалено</value></data>
+  <data name="Diagnostics_CannotDetect" xml:space="preserve"><value>Невозможно определить</value></data>
+  <data name="Diagnostics_PartialError" xml:space="preserve"><value>Ошибка при диагностике. Информация может быть неточной.</value></data>
+  <data name="Diagnostics_SuggestNoNetwork" xml:space="preserve"><value>Сеть не подключена. Проверьте настройки сети.</value></data>
+  <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve"><value>Китайская сеть. Доступ к серверу может быть медленным.</value></data>
+  <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve"><value>Центр безопасности Windows включён, может мешать инжекту. Рекомендуется отключить.</value></data>
+  <data name="Diagnostics_SuggestLowMemory" xml:space="preserve"><value>Физическая память {0}ГБ, меньше минимума 12ГБ.</value></data>
+  <data name="Diagnostics_SuggestLowDisk" xml:space="preserve"><value>Свободно {0}ГБ на диске, меньше минимума 1ГБ.</value></data>
+  <data name="Diagnostics_SuggestRefreshRate" xml:space="preserve"><value>Монитор поддерживает {0}Гц, но работает на {1}Гц.</value></data>
+  <data name="Diagnostics_AllNormal" xml:space="preserve"><value>Норма. Система и сеть соответствуют требованиям.</value></data>
+  <data name="User_DefaultSignature" xml:space="preserve"><value>Этот пользователь ленив и ничего не написал...</value></data>
+  <data name="User_GenderMale" xml:space="preserve"><value>Мужской</value></data>
+  <data name="User_GenderFemale" xml:space="preserve"><value>Женский</value></data>
+  <data name="User_GenderPrivate" xml:space="preserve"><value>Скрыто</value></data>
+  <data name="Gacha_Won5050" xml:space="preserve"><value>Проигрыш 50/50</value></data>
+  <data name="Gacha_Guaranteed" xml:space="preserve"><value>Гарант</value></data>
+  <data name="Gacha_FiftyFifty" xml:space="preserve"><value>50/50</value></data>
+  <data name="Gacha_ZeroPulls" xml:space="preserve"><value>0 молитв</value></data>
+  <data name="Gacha_No5StarPity" xml:space="preserve"><value>Нет 5★ pity</value></data>
+  <data name="Gacha_No5StarRecord" xml:space="preserve"><value>Нет записей 5★</value></data>
+  <data name="Gacha_TotalPulls" xml:space="preserve"><value>Всего молитв</value></data>
+  <data name="Gacha_PrimogemEstimate" xml:space="preserve"><value>Оценка камней</value></data>
+  <data name="Gacha_5StarDrop" xml:space="preserve"><value>5★ дропы</value></data>
+  <data name="Gacha_4StarDrop" xml:space="preserve"><value>4★ дропы</value></data>
+  <data name="Gacha_Avg5StarCharCost" xml:space="preserve"><value>Средняя стоимость 5★ персонажа</value></data>
+  <data name="Gacha_Avg5StarPulls" xml:space="preserve"><value>Среднее молитв до 5★</value></data>
+  <data name="Gacha_DeepestPity" xml:space="preserve"><value>Максимальный Pity</value></data>
+  <data name="Gacha_Best5Star" xml:space="preserve"><value>Лучший 5★</value></data>
+  <data name="Gacha_Worst5Star" xml:space="preserve"><value>Худший 5★</value></data>
+  <data name="Gacha_ActiveMonths" xml:space="preserve"><value>Активные месяцы</value></data>
+  <data name="Gacha_NoWishRecord" xml:space="preserve"><value>Нет записей молитв</value></data>
+  <data name="Gacha_PerPull" xml:space="preserve"><value>Из расчёта 160 камней/молитва</value></data>
+  <data name="Gacha_No5StarChar" xml:space="preserve"><value>Нет 5★ персонажа</value></data>
+  <data name="Gacha_MonthlyAvg0" xml:space="preserve"><value>0 молитв/мес в среднем</value></data>
+  <data name="Gacha_NoRecords" xml:space="preserve"><value>Нет записей</value></data>
+  <data name="Day_Sunday" xml:space="preserve"><value>Вс</value></data>
+  <data name="Day_Monday" xml:space="preserve"><value>Пн</value></data>
+  <data name="Day_Tuesday" xml:space="preserve"><value>Вт</value></data>
+  <data name="Day_Wednesday" xml:space="preserve"><value>Ср</value></data>
+  <data name="Day_Thursday" xml:space="preserve"><value>Чт</value></data>
+  <data name="Day_Friday" xml:space="preserve"><value>Пт</value></data>
+  <data name="Day_Saturday" xml:space="preserve"><value>Сб</value></data>
+  <data name="Element_Pyro" xml:space="preserve"><value>Пиро</value></data>
+  <data name="Element_Anemo" xml:space="preserve"><value>Анемо</value></data>
+  <data name="Element_Geo" xml:space="preserve"><value>Гео</value></data>
+  <data name="Element_Dendro" xml:space="preserve"><value>Дендро</value></data>
+  <data name="Element_Electro" xml:space="preserve"><value>Электро</value></data>
+  <data name="Element_Hydro" xml:space="preserve"><value>Гидро</value></data>
+  <data name="Element_Cryo" xml:space="preserve"><value>Крио</value></data>
+  <data name="Download_Connecting" xml:space="preserve"><value>Подключение к серверам Mihoyo...</value></data>
+  <data name="Download_VoiceOnly" xml:space="preserve"><value>&gt;&gt; Пропуск игры, только озвучка</value></data>
+  <data name="Download_FetchingManifest" xml:space="preserve"><value>Получение манифеста: {0}...</value></data>
+  <data name="Download_ManifestFailed" xml:space="preserve"><value>Ошибка загрузки манифеста: {0}</value></data>
+  <data name="Download_TaskStart" xml:space="preserve"><value>Проверка/загрузка начата. Всего: {0} файлов, {1}</value></data>
+  <data name="Download_FileUnfixable" xml:space="preserve"><value>Файл не подлежит восстановлению или отменён: {0}</value></data>
+  <data name="Download_MovingFiles" xml:space="preserve"><value>Проверка завершена, перемещение файлов...</value></data>
+  <data name="Download_AllDone" xml:space="preserve"><value>Всё готово!</value></data>
+  <data name="Download_UserCancelled" xml:space="preserve"><value>Отменено пользователем.</value></data>
+  <data name="Download_VerifyFailed" xml:space="preserve"><value>[Ошибка проверки] {0} (Сервер:{1} vs Локально:{2})</value></data>
+  <data name="Download_FileException" xml:space="preserve"><value>[Исключение файла] {0}: {1}</value></data>
+  <data name="Download_ManifestMd5Retry" xml:space="preserve"><value>Ошибка MD5 манифеста, повтор...</value></data>
+  <data name="Download_CannotConnectApi" xml:space="preserve"><value>Не удалось подключиться к API Mihoyo</value></data>
+  <data name="DailyNote_ApiError" xml:space="preserve"><value>API вернул ошибку, retcode={0}</value></data>
+  <data name="DailyNote_GetFailed" xml:space="preserve"><value>Не удалось получить данные заметок: {0}</value></data>
+  <data name="DailyNote_InvalidResponse" xml:space="preserve"><value>Неверный формат ответа заметок</value></data>
+  <data name="DailyNote_TransformerTime" xml:space="preserve"><value>{0}д {1}ч {2}м</value></data>
+  <data name="DailyNote_Claimed" xml:space="preserve"><value>Получено</value></data>
+  <data name="DailyNote_Unclaimed" xml:space="preserve"><value>Не получено</value></data>
+  <data name="DailyNote_NoFingerprint" xml:space="preserve"><value>Не удалось получить сервис отпечатка устройства</value></data>
+  <data name="DailyNote_NoActiveAccount" xml:space="preserve"><value>Нет активного аккаунта</value></data>
+  <data name="DailyNote_CannotLoadCookie" xml:space="preserve"><value>Невозможно загрузить cookie</value></data>
+  <data name="DailyNote_FetchFailed" xml:space="preserve"><value>Не удалось получить заметки: {0} (retcode={1})</value></data>
+  <data name="Geetest_NoFingerprintService" xml:space="preserve"><value>Не удалось получить сервис отпечатка устройства</value></data>
+  <data name="Geetest_NoAccountService" xml:space="preserve"><value>Не удалось получить сервис управления аккаунтом</value></data>
+  <data name="Geetest_NoActiveAccount" xml:space="preserve"><value>Нет активного аккаунта</value></data>
+  <data name="Geetest_CaptchaTitle" xml:space="preserve"><value>Проверка CAPTCHA</value></data>
+  <data name="Launcher_DllNotLoaded" xml:space="preserve"><value>Launcher.dll не загружена из-за отсутствия C++ runtime или блокировки антивирусом. Запуск невозможен.</value></data>
+  <data name="Screenshot_Saved" xml:space="preserve"><value>Скриншот сохранён</value></data>
+  <data name="Screenshot_CaptureFailed" xml:space="preserve"><value>Не удалось сделать скриншот</value></data>
+  <data name="Update_AllRetriesFailed" xml:space="preserve"><value>Все попытки не удались</value></data>
+  <data name="UserInfo_FeatureRemoved" xml:space="preserve"><value>Функция удалена</value></data>
+  <data name="Hoyolab_AsiaServer" xml:space="preserve"><value>Азия</value></data>
+  <data name="Hoyolab_USAServer" xml:space="preserve"><value>Америка</value></data>
+  <data name="Hoyolab_EuroServer" xml:space="preserve"><value>Европа</value></data>
+  <data name="Hoyolab_CHTServer" xml:space="preserve"><value>TW/HK/MO</value></data>
+  <data name="FilePicker_MainWindowNull" xml:space="preserve"><value>Главное окно не существует, выбор файла невозможен</value></data>
+  <data name="FilePicker_InvalidWindowHandle" xml:space="preserve"><value>Недопустимый дескриптор окна. Запустите в обычном режиме.</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>Ошибка FufuLauncher</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>В приложении произошла ошибка
+
+Источник: {0}
+Сообщение: {1}
+
+Стек вызовов:
+{2}</value></data>
+  <data name="Program_InjectionFailed" xml:space="preserve"><value>Ошибка запуска инжекта: {0} (код: {1})</value></data>
+  <data name="Program_InjectionException" xml:space="preserve"><value>Исключение процесса инжекта: {0}</value></data>
+  <data name="Program_ErrorTitle" xml:space="preserve"><value>Ошибка FufuLauncher</value></data>
+  <data name="IniFile_AccessDenied" xml:space="preserve"><value>Доступ запрещён. Проверьте, не установлен ли атрибут «только чтение», или запустите от администратора.</value></data>
+  <data name="IniFile_WriteFailed" xml:space="preserve"><value>Ошибка записи: файл может быть занят игрой или другой программой.
+Подробности: {0}</value></data>
+  <data name="IniFile_WriteError" xml:space="preserve"><value>Ошибка записи конфигурации.
+Подробности: {0}</value></data>
+</root>

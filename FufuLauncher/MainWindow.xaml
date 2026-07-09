@@ -37,13 +37,13 @@
 
         <tb:TaskbarIcon x:Name="TrayIcon"
                         IconSource="/Assets/WindowIcon.ico"
-                        ToolTipText="芙芙启动器"
+                        ToolTipText="{helpers:Loc Key=AppDisplayName}"
                         LeftClickCommand="{x:Bind ShowWindowCommand}" 
                         DoubleClickCommand="{x:Bind ShowWindowCommand}">
             <tb:TaskbarIcon.ContextFlyout>
                 <MenuFlyout>
-                    <MenuFlyoutItem Text="显示主界面" Command="{x:Bind ShowWindowCommand}" />
-                    <MenuFlyoutItem Text="退出" Command="{x:Bind ExitApplicationCommand}" />
+                    <MenuFlyoutItem Text="{helpers:Loc Key=TrayShowWindow}" Command="{x:Bind ShowWindowCommand}" />
+                    <MenuFlyoutItem Text="{helpers:Loc Key=TrayExit}" Command="{x:Bind ExitApplicationCommand}" />
                 </MenuFlyout>
             </tb:TaskbarIcon.ContextFlyout>
         </tb:TaskbarIcon>
@@ -148,7 +148,7 @@
             </NavigationView.PaneHeader>
 
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="主页" Tag="FufuLauncher.ViewModels.MainViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavHome}" Tag="FufuLauncher.ViewModels.MainViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE80F;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
@@ -160,43 +160,43 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="控制面板" Tag="FufuLauncher.ViewModels.ControlPanelModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavControlPanel}" Tag="FufuLauncher.ViewModels.ControlPanelModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE80A;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="游戏设置" Tag="FufuLauncher.ViewModels.BlankViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=PageTitle_GameSettings}" Tag="FufuLauncher.ViewModels.BlankViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7FC;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="账户设置" Tag="FufuLauncher.ViewModels.AccountViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavAccountSettings}" Tag="FufuLauncher.ViewModels.AccountViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE77B;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="其他功能" Tag="FufuLauncher.ViewModels.OtherViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavOtherFeatures}" Tag="FufuLauncher.ViewModels.OtherViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE71D;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="插件管理" Tag="FufuLauncher.ViewModels.PluginViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=PluginMgmtTitle}" Tag="FufuLauncher.ViewModels.PluginViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE7B5;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="数据中心" Tag="FufuLauncher.ViewModels.DataViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavDataCenter}" Tag="FufuLauncher.ViewModels.DataViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE9D9;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="帮助文档" Tag="FufuLauncher.ViewModels.HelpViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavHelpDocs}" Tag="FufuLauncher.ViewModels.HelpViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE82D;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
@@ -208,7 +208,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 
-                <NavigationViewItem Content="养成计算" Tag="FufuLauncher.ViewModels.CalculatorViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavCalculator}" Tag="FufuLauncher.ViewModels.CalculatorViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE1D0;" FontFamily="{StaticResource ActionIconFont}" FontSize="24"/>
                     </NavigationViewItem.Icon>
@@ -216,7 +216,7 @@
             </NavigationView.MenuItems>
 
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="设置中心" Tag="FufuLauncher.ViewModels.SettingsViewModel">
+                <NavigationViewItem Content="{helpers:Loc Key=NavSettings}" Tag="FufuLauncher.ViewModels.SettingsViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon x:Name="SettingsIcon" 
                                   Glyph="&#xE713;" FontFamily="{StaticResource ActionIconFont}" 
@@ -262,7 +262,7 @@
 
             <StackPanel Orientation="Horizontal" Spacing="8" Padding="16,0,16,0" VerticalAlignment="Center">
                 <FontIcon x:Name="SystemMessageIcon" Glyph="&#xE774;" FontSize="16"/>
-                <TextBlock x:Name="SystemMessageText" Text="网络状态检测中..." FontSize="13" FontWeight="Medium"/>
+                <TextBlock x:Name="SystemMessageText" Text="{helpers:Loc Key=SysStatusChecking}" FontSize="13" FontWeight="Medium"/>
             </StackPanel>
         </Grid>
 
@@ -290,13 +290,13 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Padding="16,12,16,8">
-                        <TextBlock Text="通知中心"
+                        <TextBlock Text="{helpers:Loc Key=NotificationCenter}"
                                    FontSize="14"
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Center"
                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"/>
                 
-                        <Button Content="全部清除"
+                        <Button Content="{helpers:Loc Key=ClearAllBtn}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Background="Transparent"
@@ -338,7 +338,7 @@
                 <StackPanel Orientation="Horizontal" Spacing="0">
                     <Image x:Name="TitleBarIcon" Width="20" Height="20" Margin="0,0,8,0" VerticalAlignment="Center"/>
                     <TextBlock x:Name="TitleBarText"
-                               Text="芙芙启动器"
+                               Text="{helpers:Loc Key=AppDisplayName}"
                                FontSize="12"
                                FontWeight="SemiBold"
                                VerticalAlignment="Center"

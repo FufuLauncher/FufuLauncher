@@ -19,7 +19,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             AreTransportControlsEnabled="False"
-                            AutoPlay="True" />
+                            AutoPlay="False" />
 
         <Grid Background="Black" Opacity="0.5" />
 

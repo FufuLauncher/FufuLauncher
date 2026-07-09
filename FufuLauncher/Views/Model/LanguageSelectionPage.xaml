@@ -1,0 +1,284 @@
+<Page
+    x:Class="FufuLauncher.Views.LanguageSelectionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    xmlns:viewmodels="using:FufuLauncher.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="OnPageLoaded">
+
+    <Page.Resources>
+        <Storyboard x:Name="EntranceStoryboard">
+            <DoubleAnimation Storyboard.TargetName="IconImage" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="IconTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="TitleText" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             BeginTime="0:0:0.1" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             BeginTime="0:0:0.1" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="SubtitleText" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             BeginTime="0:0:0.2" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="SubtitleTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             BeginTime="0:0:0.2" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="LanguageGridArea" Storyboard.TargetProperty="Opacity" From="0" To="1"
+                             BeginTime="0:0:0.3" Duration="0:0:0.6" />
+            <DoubleAnimation Storyboard.TargetName="LanguageGridTransform" Storyboard.TargetProperty="Y" From="30" To="0"
+                             BeginTime="0:0:0.3" Duration="0:0:0.6">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        
+        <DataTemplate x:Key="LanguageCardTemplate">
+            <Border x:Name="CardBorder"
+                    Width="135"
+                    Height="95"
+                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1.5"
+                    CornerRadius="8"
+                    Padding="12,10"
+                    Margin="4"
+                    PointerEntered="OnCardPointerEntered"
+                    PointerExited="OnCardPointerExited"
+                    Loaded="OnCardLoaded">
+                <Border.Resources>
+                    <Storyboard x:Key="HoverInStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="CardScale"
+                                         Storyboard.TargetProperty="ScaleX"
+                                         To="1.05" Duration="0:0:0.15">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetName="CardScale"
+                                         Storyboard.TargetProperty="ScaleY"
+                                         To="1.05" Duration="0:0:0.15">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                    <Storyboard x:Key="HoverOutStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="CardScale"
+                                         Storyboard.TargetProperty="ScaleX"
+                                         To="1.0" Duration="0:0:0.15">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation Storyboard.TargetName="CardScale"
+                                         Storyboard.TargetProperty="ScaleY"
+                                         To="1.0" Duration="0:0:0.15">
+                            <DoubleAnimation.EasingFunction>
+                                <CubicEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </Border.Resources>
+
+                <Border.RenderTransform>
+                    <ScaleTransform x:Name="CardScale" CenterX="67.5" CenterY="47.5" ScaleX="1.0" ScaleY="1.0" />
+                </Border.RenderTransform>
+                
+                <Grid>
+                    <Grid RowSpacing="2"
+                          Opacity="{Binding NormalOpacity}"
+                          Loaded="OnCardLoaded">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <FontIcon Grid.Row="0"
+                                  Glyph="{Binding Glyph}"
+                                  FontSize="20"
+                                  FontFamily="Segoe Fluent Icons"
+                                  Visibility="{Binding FontIconVisibility}"
+                                  HorizontalAlignment="Center"
+                                  Margin="0,1,0,2"
+                                  Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
+
+                        <Image Grid.Row="0"
+                               Source="{Binding FlagImagePath}"
+                               Visibility="{Binding FlagImageVisibility}"
+                               Width="40" Height="26"
+                               HorizontalAlignment="Center"
+                               Stretch="Uniform"
+                               Margin="0,1,0,2" />
+                        
+                        <TextBlock Grid.Row="1"
+                                   Text="{Binding NativeName}"
+                                   FontSize="12"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap"
+                                   Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
+
+                        <TextBlock Grid.Row="2"
+                                   Text="{Binding CountryName}"
+                                   FontSize="9.5"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="NoWrap"
+                                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                   Opacity="0.6" />
+                    </Grid>
+                    
+                    <Grid VerticalAlignment="Center"
+                          HorizontalAlignment="Center"
+                          Opacity="{Binding SelectedOpacity}"
+                          Loaded="OnCardLoaded">
+                        <StackPanel HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Spacing="4">
+                            <FontIcon Glyph="&#xE73E;"
+                                      FontSize="22"
+                                      FontFamily="Segoe Fluent Icons"
+                                      HorizontalAlignment="Center"
+                                      Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                            <TextBlock Text="{helpers:Loc Key=LanguageSelection_Selected}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        
+        <Style x:Key="GridViewItemCardStyle" TargetType="GridViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewItem">
+                        <Grid>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0"
+                      VerticalScrollBarVisibility="Auto"
+                      VerticalScrollMode="Auto">
+            <StackPanel VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Spacing="8"
+                        Padding="24,16"
+                        MaxWidth="680">
+                
+                <Image x:Name="IconImage"
+                       Source="ms-appx:///Assets/icon.png"
+                       Width="48"
+                       Height="48"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,2"
+                       Opacity="0">
+                    <Image.RenderTransform>
+                        <TranslateTransform x:Name="IconTransform" Y="30" />
+                    </Image.RenderTransform>
+                </Image>
+                
+                <TextBlock x:Name="TitleText"
+                           Text="{helpers:Loc Key=LanguageSelection_Title}"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Opacity="0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform x:Name="TitleTransform" Y="30" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                
+                <TextBlock x:Name="SubtitleText"
+                           Text="{helpers:Loc Key=LanguageSelection_Subtitle}"
+                           FontSize="12"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"
+                           TextWrapping="Wrap"
+                           Opacity="0">
+                    <TextBlock.RenderTransform>
+                        <TranslateTransform x:Name="SubtitleTransform" Y="30" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                
+                <Grid x:Name="LanguageGridArea" Opacity="0" Margin="0,8,0,0">
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="LanguageGridTransform" Y="30" />
+                    </Grid.RenderTransform>
+
+                    <GridView ItemsSource="{x:Bind ViewModel.Languages}"
+                              ItemTemplate="{StaticResource LanguageCardTemplate}"
+                              ItemContainerStyle="{StaticResource GridViewItemCardStyle}"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True"
+                              ItemClick="OnLanguageItemClick"
+                              HorizontalAlignment="Center"
+                              MaxWidth="660">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal"
+                                               MaximumRowsOrColumns="4"
+                                               HorizontalAlignment="Center" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Grid Grid.Row="1"
+              Padding="20,12"
+              BorderThickness="1,1,0,0"
+              BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+              Background="{ThemeResource LayerFillColorDefaultBrush}">
+            <Button Content="{helpers:Loc Key=LanguageSelection_Confirm}"
+                    x:Name="ConfirmButton"
+                    IsEnabled="{x:Bind ViewModel.IsLanguageSelected, Mode=OneWay}"
+                    Click="OnConfirmClick"
+                    HorizontalAlignment="Right"
+                    CornerRadius="4"
+                    Padding="24,8"
+                    Style="{StaticResource AccentButtonStyle}" />
+        </Grid>
+    </Grid>
+</Page>

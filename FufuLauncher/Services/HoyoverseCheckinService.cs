@@ -5,6 +5,7 @@ Licensed under the MIT License.
 using System.Diagnostics;
 using System.Text.Json;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using MihoyoBBS;
 
@@ -90,7 +91,7 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
             string cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
             var rolesResult = await _hoyolabRoleResolverService.ResolveRolesAsync(cookieStr);
             if (!rolesResult.HasRoles)
-                return ("未检测到绑定", rolesResult.Message);
+                return ("Checkin_NotDetected".GetLocalized(), rolesResult.Message);
 
             var role = SelectRole(rolesResult.Roles, targetUid);
             var os = new HoyolabCheckinService();
@@ -98,24 +99,24 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 
             var isData = await os.IsSignAsync(role.region, role.game_uid);
             if (isData == null)
-                return ("获取状态失败", HoyolabCheckinService.LastApiError);
-            return (isData.IsSign ? "今日已签到" : "今日未签到", $"HoYoLAB: {role.nickname}");
+                return ("Checkin_GetStatusFailed".GetLocalized(), HoyolabCheckinService.LastApiError);
+            return (isData.IsSign ? "Checkin_SignedToday".GetLocalized() : "Checkin_UnsignedToday".GetLocalized(), $"HoYoLAB: {role.nickname}");
         }
 
         var config = BuildConfigFromCookies(cookies, serverType);
         if (!config.Games.Cn.Enable || !config.Games.Cn.Genshin.Checkin)
-            return ("签到功能未启用", "config.json中设置Enable=true");
+            return ("Checkin_NotEnabled".GetLocalized(), "Checkin_EnableInConfig".GetLocalized());
         var genshin = new Genshin();
         await genshin.InitializeAsync(config);
         if (genshin.AccountList.Count == 0)
-            return ("未检测到账号", GameCheckin.LastApiError);
+            return ("Checkin_NotDetectedAccount".GetLocalized(), GameCheckin.LastApiError);
         var cnAccount = string.IsNullOrEmpty(targetUid)
             ? genshin.AccountList[0]
             : genshin.AccountList.FirstOrDefault(a => a.GameUid == targetUid) ?? genshin.AccountList[0];
         var isSignData = await genshin.IsSignAsync(cnAccount.Region, cnAccount.GameUid, false);
         if (isSignData == null)
-            return ("获取状态失败", GameCheckin.LastApiError);
-        return (isSignData.IsSign == true ? "今日已签到" : "今日未签到", $"账号: {cnAccount.Nickname}");
+            return ("Checkin_GetStatusFailed".GetLocalized(), GameCheckin.LastApiError);
+        return (isSignData.IsSign == true ? "Checkin_SignedToday".GetLocalized() : "Checkin_UnsignedToday".GetLocalized(), $"账号: {cnAccount.Nickname}");
     }
 
     public async Task<(bool success, string message)> ExecuteCheckinAsync(string targetUid, Dictionary<string, string> cookies, string serverType)
@@ -135,12 +136,14 @@ public class HoyoverseCheckinService : IHoyoverseCheckinService
 
         var config = BuildConfigFromCookies(cookies, serverType);
         if (!config.Games.Cn.Enable || !config.Games.Cn.Genshin.Checkin)
-            return (false, "功能未启用");
+            return (false, "Checkin_FeatureNotEnabled".GetLocalized());
         var genshin = new Genshin();
         await genshin.InitializeAsync(config);
         var disabledUids = await GetDisabledUidsAsync();
         string result = await genshin.SignAccountAsync(config, targetUid, disabledUids);
-        bool success = !result.Contains("失败") && !result.Contains("异常");
+        var failKey = "Status_Failure".GetLocalized();
+        var excKey = "Status_Exception".GetLocalized();
+        bool success = !result.Contains(failKey) && !result.Contains(excKey);
         return (success, result);
     }
 

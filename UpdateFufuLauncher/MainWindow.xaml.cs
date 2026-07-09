@@ -52,7 +52,7 @@ namespace Updater
             public int AnimationId;
         }
         
-        private const string AppVersion = "1.4.0.2";
+        private const string AppVersion = "1.4.1.0";
 
         private static readonly HttpClient _httpClient = new(new HttpClientHandler
         {
@@ -174,6 +174,7 @@ namespace Updater
                 string localJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Update.json");
                 SubtitleText.Text = "请求API更新配置...";
                 string apiUrl = "https://philia093.cyou/Update.json";
+                string fallbackUrl = "https://fu1.fun/Update.json";
                 string updateContent;
                 try
                 {
@@ -181,13 +182,20 @@ namespace Updater
                 }
                 catch (HttpRequestException)
                 {
-                    if (!File.Exists(localJsonPath))
+                    try
                     {
-                        throw;
+                        updateContent = await _httpClient.GetStringAsync(fallbackUrl);
                     }
+                    catch (HttpRequestException)
+                    {
+                        if (!File.Exists(localJsonPath))
+                        {
+                            throw;
+                        }
 
-                    SubtitleText.Text = "API请求失败，读取本地更新配置...";
-                    updateContent = await File.ReadAllTextAsync(localJsonPath);
+                        SubtitleText.Text = "API请求失败，读取本地更新配置...";
+                        updateContent = await File.ReadAllTextAsync(localJsonPath);
+                    }
                 }
                 
                 JObject updateJson = JObject.Parse(updateContent);

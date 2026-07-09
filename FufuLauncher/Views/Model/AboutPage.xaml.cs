@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Text;
 using Windows.ApplicationModel.DataTransfer;
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 using Path = System.IO.Path;
 
 namespace FufuLauncher.Views;
@@ -116,7 +117,7 @@ public sealed partial class AboutPage : Page
             {
                 ContributorsLoadingRing.IsActive = false;
                 ContributorsErrorPanel.Visibility = Visibility.Visible;
-                ContributorsErrorText.Text = "获取失败";
+                ContributorsErrorText.Text = "AboutPage_FetchFailed".GetLocalized();
                 return;
             }
 
@@ -156,9 +157,9 @@ public sealed partial class AboutPage : Page
                     flyoutHeaderPanel.Children.Add(flyoutAvatar);
                     flyoutHeaderPanel.Children.Add(flyoutName);
 
-                    var flyoutBio = new TextBlock { Text = "正在获取简介信息...", TextWrapping = TextWrapping.Wrap, Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"] };
+                    var flyoutBio = new TextBlock { Text = "AboutPage_LoadingBio".GetLocalized(), TextWrapping = TextWrapping.Wrap, Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"] };
                     
-                    var openBrowserBtn = new Button { Content = "在外部浏览器中打开主页", HorizontalAlignment = HorizontalAlignment.Stretch };
+                    var openBrowserBtn = new Button { Content = "AboutPage_OpenInBrowser".GetLocalized(), HorizontalAlignment = HorizontalAlignment.Stretch };
                     openBrowserBtn.Click += (s, e) =>
                     {
                         Process.Start(new ProcessStartInfo { FileName = contributor.Url, UseShellExecute = true });
@@ -176,7 +177,7 @@ public sealed partial class AboutPage : Page
                         try
                         {
                             var userJson = await GetJsonFromUrl($"https://api.github.com/users/{contributor.Name}");
-                            string bioStr = "该用户暂无简介。";
+                            string bioStr = "AboutPage_NoBio".GetLocalized();
                             if (userJson.RootElement.TryGetProperty("bio", out JsonElement bioElement) && bioElement.ValueKind != JsonValueKind.Null)
                             {
                                 string rawBio = bioElement.GetString();
@@ -286,7 +287,7 @@ public sealed partial class AboutPage : Page
 
         ComboBox platformCombo = new()
         {
-            Header = "选择联系方式",
+            Header = "AboutPage_SelectContact".GetLocalized(),
             HorizontalAlignment = HorizontalAlignment.Stretch,
             SelectedIndex = 0
         };
@@ -298,10 +299,10 @@ public sealed partial class AboutPage : Page
 
         ContentDialog contactDialog = new()
         {
-            Title = "联系作者",
+            Title = "AboutPage_ContactAuthor".GetLocalized(),
             Content = contentPanel,
-            PrimaryButtonText = "确认跳转/复制",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "AboutPage_ConfirmNav".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = XamlRoot
         };
@@ -328,7 +329,7 @@ public sealed partial class AboutPage : Page
                 Clipboard.SetContent(dataPackage);
 
                 var originalContent = (sender as HyperlinkButton).Content;
-                (sender as HyperlinkButton).Content = "Discord ID 已复制!";
+                (sender as HyperlinkButton).Content = "AboutPage_DiscordCopied".GetLocalized();
                 (sender as HyperlinkButton).IsEnabled = false;
                 await Task.Delay(2000);
                 (sender as HyperlinkButton).Content = originalContent;
@@ -340,7 +341,7 @@ public sealed partial class AboutPage : Page
     private async void GetBuildFormActions(object sender, RoutedEventArgs e)
     {
         GetBuildFormActionsToggle.IsEnabled = false;
-        GetBuildFormActionsToggle.Content = "正在获取...";
+        GetBuildFormActionsToggle.Content = "AboutPage_Loading".GetLocalized();
         
         try
         {
@@ -399,7 +400,7 @@ public sealed partial class AboutPage : Page
                             DownloadShell += $"del \"{Environment.CurrentDirectory}\\FufuLauncher_Build.zip\" /f /s /q\n";
                             DownloadShell += $"start {Environment.CurrentDirectory}\\FufuLauncher.exe\n";
                             DownloadShell += $"del %0";
-                            GetBuildFormActionsToggle.Content = "获取成功! 已生成下载脚本.";
+                            GetBuildFormActionsToggle.Content = "AboutPage_FetchSuccess".GetLocalized();
                             Debug.WriteLine("[GetBuildFromActions] 生成的下载脚本内容: \n" + DownloadShell);
                             Debug.WriteLine("[GetBuildFromActions] 下载脚本路径: " + batchFilePath);
                             File.WriteAllText(batchFilePath, DownloadShell, System.Text.Encoding.UTF8);
@@ -415,9 +416,9 @@ public sealed partial class AboutPage : Page
                         }
                         else
                         {
-                            GetBuildFormActionsToggle.Content = "请输入Token! ";
+                            GetBuildFormActionsToggle.Content = "AboutPage_EnterToken".GetLocalized();
                             await Task.Delay(1000);
-                            GetBuildFormActionsToggle.Content = "从Github Actions获取构建";
+                            GetBuildFormActionsToggle.Content = "AboutPage_GetBuildFromActions".GetLocalized();
                             GetBuildFormActionsToggle.IsEnabled = true;
                         }
                     }
@@ -447,7 +448,7 @@ public sealed partial class AboutPage : Page
     {
         GetBuildFormActionsToggle.Content = msg;
         await Task.Delay(1000);
-        GetBuildFormActionsToggle.Content = "从Github Actions获取构建";
+        GetBuildFormActionsToggle.Content = "AboutPage_GetBuildFromActions".GetLocalized();
         GetBuildFormActionsToggle.IsEnabled = true;
     }
 
@@ -463,16 +464,16 @@ public sealed partial class AboutPage : Page
     {
         TextBox tokenInput = new()
         {
-            PlaceholderText = "请输入你的 GitHub Token",
+            PlaceholderText = "AboutPage_GitHubTokenPlaceholder".GetLocalized(),
             AcceptsReturn = false,
             TextWrapping = TextWrapping.NoWrap
         };
         ContentDialog tokenDialog = new()
         {
-            Title = "GitHub Token",
+            Title = "AboutPage_GitHubToken".GetLocalized(),
             Content = tokenInput,
-            PrimaryButtonText = "确认",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "OkBtn".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary
         };
 

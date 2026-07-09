@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     Loaded="OnPageLoaded">
@@ -75,7 +76,7 @@
             </Image>
 
             <TextBlock x:Name="TitleText"
-                       Text="用户协议"
+                       Text="{helpers:Loc Key=AgreementPage_Title}"
                        FontSize="20"
                        FontWeight="Bold"
                        HorizontalAlignment="Center"
@@ -86,7 +87,7 @@
             </TextBlock>
 
             <TextBlock x:Name="DescText"
-                       Text="欢迎使用芙芙启动器！请仔细阅读以下协议内容。"
+                       Text="{helpers:Loc Key=AgreementPage_Welcome}"
                        FontSize="12"
                        TextWrapping="Wrap"
                        HorizontalAlignment="Center"
@@ -103,23 +104,12 @@
                 </Grid.RenderTransform>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <ComboBox Grid.Row="0"
-                          HorizontalAlignment="Right"
-                          Margin="0,0,0,8"
-                          MinWidth="140"
-                          SelectedIndex="{x:Bind ViewModel.SelectedLanguageIndex, Mode=TwoWay}">
-                    <ComboBoxItem Content="简体中文" />
-                    <ComboBoxItem Content="English" />
-                    <ComboBoxItem Content="繁體中文" />
-                </ComboBox>
-
-                <Border Grid.Row="1"
+                <Border Grid.Row="0"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
@@ -135,14 +125,14 @@
                     </ScrollViewer>
                 </Border>
 
-                <CheckBox Grid.Row="2"
+                <CheckBox Grid.Row="1"
                           IsChecked="{x:Bind ViewModel.IsAgreementChecked, Mode=TwoWay}"
                           IsEnabled="{x:Bind ViewModel.HasReadAgreement, Mode=OneWay}"
                           Margin="0,8,0,0"
-                          Content="我已阅读并同意用户协议 (I have read and agree)" />
+                          Content="{helpers:Loc Key=AgreementPage_AgreeCheck}" />
 
-                <TextBlock Grid.Row="3"
-                           Text="请滚动阅读完整协议后勾选同意"
+                <TextBlock Grid.Row="2"
+                           Text="{helpers:Loc Key=AgreementPage_ScrollHint}"
                            FontSize="11"
                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                            Visibility="{x:Bind ViewModel.HintVisibility, Mode=OneWay}"
@@ -168,7 +158,7 @@
                        Width="52" Height="52"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,4" />
-                <TextBlock Text="为了确保显示效果，请确认下方图标是否正常显示"
+                <TextBlock Text="{helpers:Loc Key=AgreementPage_IconCheckHint}"
                            FontSize="14"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                            HorizontalAlignment="Center" />
@@ -185,7 +175,7 @@
                                   FontSize="40"
                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
                                   HorizontalAlignment="Center" />
-                        <TextBlock Text="设置" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
+                        <TextBlock Text="{helpers:Loc Key=AgreementPage_Settings}" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
                     </StackPanel>
 
                     <StackPanel Spacing="12">
@@ -193,7 +183,7 @@
                                   FontSize="40"
                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
                                   HorizontalAlignment="Center" />
-                        <TextBlock Text="主页" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
+                        <TextBlock Text="{helpers:Loc Key=AgreementPage_Home}" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
                     </StackPanel>
 
                     <StackPanel Spacing="12">
@@ -201,18 +191,18 @@
                                   FontSize="40"
                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"
                                   HorizontalAlignment="Center" />
-                        <TextBlock Text="文件" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
+                        <TextBlock Text="{helpers:Loc Key=AgreementPage_Files}" FontSize="12" HorizontalAlignment="Center" Opacity="0.7" />
                     </StackPanel>
                 </StackPanel>
             </Border>
 
             <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center">
-                <Button Content="无法显示(Cannot Display)"
+                <Button Content="{helpers:Loc Key=AgreementPage_CannotDisplay}"
                         Command="{x:Bind ViewModel.TroubleshootIconsCommand}"
                         Style="{StaticResource DefaultButtonStyle}"
                         MinWidth="120" />
 
-                <Button Content="显示正常(Display Normal)"
+                <Button Content="{helpers:Loc Key=AgreementPage_DisplayNormal}"
                         Command="{x:Bind ViewModel.ConfirmIconsCommand}"
                         Style="{StaticResource DefaultButtonStyle}"
                         MinWidth="120" />
@@ -238,12 +228,12 @@
                    HorizontalAlignment="Center"
                    Margin="0,0,0,0" />
 
-            <TextBlock Text="数据存储位置"
+            <TextBlock Text="{helpers:Loc Key=AgreementPage_DataStorage}"
                        FontSize="18"
                        FontWeight="SemiBold"
                        HorizontalAlignment="Center" />
 
-            <TextBlock Text="您可以自定义数据和缓存的存储目录，或保持默认设置。"
+            <TextBlock Text="{helpers:Loc Key=AgreementPage_DataDirDesc}"
                        FontSize="12"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        HorizontalAlignment="Center"
@@ -251,7 +241,7 @@
                        TextAlignment="Center" />
 
             <StackPanel Spacing="12">
-                <TextBlock Text="用户数据目录" FontSize="13" FontWeight="SemiBold" />
+                <TextBlock Text="{helpers:Loc Key=AgreementPage_UserDataDir}" FontSize="13" FontWeight="SemiBold" />
                 <Grid ColumnSpacing="8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -259,13 +249,13 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Text="{x:Bind ViewModel.DataPath, Mode=OneWay}" IsReadOnly="True"
                              FontSize="12" />
-                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseDataPathCommand}"
+                    <Button Grid.Column="1" Content="{helpers:Loc Key=AgreementPage_Change}" Command="{x:Bind ViewModel.BrowseDataPathCommand}"
                             VerticalAlignment="Bottom" Padding="12,6" />
                 </Grid>
             </StackPanel>
 
             <StackPanel Spacing="12">
-                <TextBlock Text="缓存目录" FontSize="13" FontWeight="SemiBold" />
+                <TextBlock Text="{helpers:Loc Key=AgreementPage_CacheDir}" FontSize="13" FontWeight="SemiBold" />
                 <Grid ColumnSpacing="8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -273,12 +263,12 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Grid.Column="0" Text="{x:Bind ViewModel.CachePath, Mode=OneWay}" IsReadOnly="True"
                              FontSize="12" />
-                    <Button Grid.Column="1" Content="更改" Command="{x:Bind ViewModel.BrowseCachePathCommand}"
+                    <Button Grid.Column="1" Content="{helpers:Loc Key=AgreementPage_Change}" Command="{x:Bind ViewModel.BrowseCachePathCommand}"
                             VerticalAlignment="Bottom" Padding="12,6" />
                 </Grid>
             </StackPanel>
 
-            <Button Content="确认并完成(Confirm)"
+            <Button Content="{helpers:Loc Key=AgreementPage_ConfirmAndComplete}"
                     Command="{x:Bind ViewModel.ConfirmDataDirCommand}"
                     HorizontalAlignment="Center"
                     Padding="24,8"
@@ -299,7 +289,7 @@
               Background="{ThemeResource LayerFillColorDefaultBrush}"
               Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
 
-            <Button Content="下一步(Next)"
+            <Button Content="{helpers:Loc Key=AgreementPage_Next}"
                     Command="{x:Bind ViewModel.NextCommand}"
                     IsEnabled="{x:Bind ViewModel.IsAgreementChecked, Mode=OneWay}"
                     HorizontalAlignment="Right"

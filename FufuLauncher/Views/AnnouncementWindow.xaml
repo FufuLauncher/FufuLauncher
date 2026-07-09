@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d">
 
     <Window.SystemBackdrop>
@@ -16,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Height="32" Background="Transparent">
-            <TextBlock Text="公告"
+            <TextBlock Text="{helpers:Loc Key=Announcement_Title}"
                        VerticalAlignment="Center"
                        Margin="16,0,0,0"
                        Style="{ThemeResource CaptionTextBlockStyle}"
@@ -36,7 +37,7 @@
               VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
                 <ProgressRing IsActive="True" Width="50" Height="50" />
-                <TextBlock Text="正在加载公告..."
+                <TextBlock Text="{helpers:Loc Key=Announcement_Loading}"
                            HorizontalAlignment="Center"
                            Style="{ThemeResource BodyTextBlockStyle}"
                            Opacity="0.7" />

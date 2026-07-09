@@ -185,7 +185,7 @@ namespace FufuLauncher.Services
 
 public async Task<LaunchResult> LaunchGameAsync()
         {
-            var result = new LaunchResult { Success = false, ErrorMessage = "未知错误", DetailLog = "" };
+            var result = new LaunchResult { Success = false, ErrorMessage = "LaunchErr_UnknownError".GetLocalized(), DetailLog = "" };
             var logBuilder = new StringBuilder();
 
             try
@@ -197,7 +197,7 @@ public async Task<LaunchResult> LaunchGameAsync()
 
                 if (string.IsNullOrEmpty(gamePath) || !Directory.Exists(gamePath))
                 {
-                    result.ErrorMessage = "游戏路径无效或不存在";
+                    result.ErrorMessage = "LaunchErr_InvalidGamePath".GetLocalized();
                     logBuilder.AppendLine($"[启动流程] ? 错误: {result.ErrorMessage}");
                     result.DetailLog = logBuilder.ToString();
                     return result;
@@ -208,7 +208,7 @@ public async Task<LaunchResult> LaunchGameAsync()
 
                 if (foundExes.Count == 0)
                 {
-                    result.ErrorMessage = $"游戏主程序不存在，请检查路径设置是否正确\n查找的文件:\n" + string.Join("\n", exeNames);
+                    result.ErrorMessage = string.Format("LaunchErr_ExeNotFound".GetLocalized(), string.Join("\n", exeNames));
                     logBuilder.AppendLine($"[启动流程] 错误: {result.ErrorMessage}");
                     result.DetailLog = logBuilder.ToString();
                     return result;
@@ -216,7 +216,7 @@ public async Task<LaunchResult> LaunchGameAsync()
 
                 if (foundExes.Count > 1 && exeNames.Count > 1)
                 {
-                    result.ErrorMessage = "在当前游戏目录中同时检测到了多个可执行程序，启动器无法确定该启动哪一个，请清理多余的客户端文件，或者在设置中自定义启动名称";
+                    result.ErrorMessage = "LaunchErr_MultipleExeFound".GetLocalized();
                     logBuilder.AppendLine($"[启动流程] 错误: {result.ErrorMessage}");
                     result.DetailLog = logBuilder.ToString();
                     return result;
@@ -228,7 +228,7 @@ public async Task<LaunchResult> LaunchGameAsync()
                 var config = await _gameConfigService.LoadGameConfigAsync(gamePath);
                 if (config == null)
                 {
-                    result.ErrorMessage = "无法加载游戏配置文件";
+                    result.ErrorMessage = "LaunchErr_CannotLoadConfig".GetLocalized();
                     logBuilder.AppendLine($"[启动流程] ? 错误: {result.ErrorMessage}");
                     result.DetailLog = logBuilder.ToString();
                     return result;
@@ -313,8 +313,8 @@ public async Task<LaunchResult> LaunchGameAsync()
                             {
                                 logBuilder.AppendLine($"[启动流程] ! 警告: 插件文件({fileInfo.Length} bytes)大小异常，可能已经损坏");
                                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                                    "插件可能已损坏",
-                                    "插件文件被杀毒软件破坏或拦截，功能可能失效或者直接无法运行，建议重新安装插件",
+                                    "LaunchErr_PluginDamagedTitle".GetLocalized(),
+                                    "LaunchErr_PluginDamagedMsg".GetLocalized(),
                                     NotificationType.Warning,
                                     6000));
                             }
@@ -356,7 +356,7 @@ public async Task<LaunchResult> LaunchGameAsync()
                     else
                     {
                         result.Success = false;
-                        result.ErrorMessage = "启动超时，请重新启动";
+                        result.ErrorMessage = "LaunchErr_LaunchTimeout".GetLocalized();
                     }
                 }
 
@@ -366,7 +366,7 @@ public async Task<LaunchResult> LaunchGameAsync()
             }
             catch (Exception ex)
             {
-                result.ErrorMessage = $"启动过程中发生严重异常: {ex.Message}";
+                result.ErrorMessage = string.Format("LaunchErr_FatalError".GetLocalized(), ex.Message);
                 result.DetailLog = $"[启动流程] ?? 未处理异常: {ex}\n{ex.StackTrace}";
                 Debug.WriteLine(result.DetailLog);
                 return result;

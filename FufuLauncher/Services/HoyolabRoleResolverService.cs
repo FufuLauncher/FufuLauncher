@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services;
@@ -46,7 +47,7 @@ public class HoyolabRoleResolverService : IHoyolabRoleResolverService
 
         return new HoyolabRoleResolveResult(
             cardResult.RetCode != 0 ? cardResult.RetCode : bindingResult.RetCode,
-            string.IsNullOrWhiteSpace(message) ? "未检测到绑定账号" : message,
+            string.IsNullOrWhiteSpace(message) ? "Checkin_NoBoundAccount".GetLocalized() : message,
             "none",
             new List<GameRoleInfo>());
     }
@@ -142,10 +143,10 @@ public class HoyolabRoleResolverService : IHoyolabRoleResolverService
 
     private static string FriendlyRegionName(string regionCode) => regionCode switch
     {
-        "os_asia" => "亚服",
-        "os_usa" => "美服",
-        "os_euro" => "欧服",
-        "os_cht" => "台港澳服",
+        "os_asia" => "Hoyolab_AsiaServer".GetLocalized(),
+        "os_usa" => "Hoyolab_USAServer".GetLocalized(),
+        "os_euro" => "Hoyolab_EuroServer".GetLocalized(),
+        "os_cht" => "Hoyolab_CHTServer".GetLocalized(),
         _ => regionCode
     };
 

@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
@@ -90,8 +91,8 @@ public class GameConfigService : IGameConfigService
             }
             else
             {
-                config.Version = "未找到版本信息";
-                config.ServerType = "未知";
+                config.Version = "Msg_VersionInfoNotFound".GetLocalized();
+                config.ServerType = "Status_Unknown".GetLocalized();
             }
 
             config.DirectorySize = CalculateDirectorySize(gamePath);
@@ -120,16 +121,16 @@ public class GameConfigService : IGameConfigService
     {
 
         if (configContent.Contains("pcadbdpz") || configContent.Contains("channel=1"))
-            return "中国大陆服务器";
+            return "ServerType_MainlandChina".GetLocalized();
 
         if (configContent.Contains("channel=14") || configContent.Contains("cps=bilibili"))
-            return "中国大陆服务器";
+            return "ServerType_MainlandChina".GetLocalized();
 
         if (configContent.Contains("os_usa") || configContent.Contains("os_euro") ||
             configContent.Contains("os_asia") || configContent.Contains("channel=0"))
-            return "国际服务器";
+            return "ServerType_Global".GetLocalized();
 
-        return "未知服务器";
+        return "ServerType_Unknown".GetLocalized();
     }
 
     private string CalculateDirectorySize(string path)
@@ -149,7 +150,7 @@ public class GameConfigService : IGameConfigService
         }
         catch
         {
-            return "无法计算";
+            return "Msg_CannotCalculate".GetLocalized();
         }
     }
 }

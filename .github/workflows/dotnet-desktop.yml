@@ -178,3 +178,23 @@ jobs:
       with:
         name: ${{ env.EXE_NAME }}-signed
         path: signed-output\*.exe
+
+    - name: Package FuFuPlugin
+      shell: pwsh
+      run: |
+        $pluginDir = "FufuLauncher\bin\x64\Release\net8.0-windows10.0.26100.0\Plugins\FuFuPlugin"
+        $stagingDir = "PluginStaging"
+        New-Item -ItemType Directory -Force -Path $stagingDir | Out-Null
+        
+        Compress-Archive -Path "$pluginDir\*" -DestinationPath "$stagingDir\FuFuPlugin.zip" -Force
+        Copy-Item -Path "$stagingDir\FuFuPlugin.zip" -Destination "$stagingDir\FuFuPlugin-old.zip" -Force
+        Copy-Item -Path "$stagingDir\FuFuPlugin.zip" -Destination "$stagingDir\FuFuPlugin.vmp.zip" -Force
+        Copy-Item -Path "$stagingDir\FuFuPlugin.zip" -Destination "$stagingDir\FuFuPlugin.vmp2.zip" -Force
+        
+        Compress-Archive -Path "$stagingDir\*.zip" -DestinationPath "FuFuPlugin_Bundle.zip" -Force
+
+    - name: Upload FuFuPlugin Bundle
+      uses: actions/upload-artifact@v4
+      with:
+        name: FuFuPlugin-Bundle
+        path: FuFuPlugin_Bundle.zip

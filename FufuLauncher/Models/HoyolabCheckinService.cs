@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models
 {
@@ -81,7 +82,7 @@ namespace FufuLauncher.Models
 
         public static string LastApiError { get; set; } = string.Empty;
         public static int LastSignDays { get; set; } = 0;
-        public static string LastRewardItem { get; set; } = "无/未知";
+        public static string LastRewardItem { get; set; } = "Status_None".GetLocalized();
 
         public List<OsAccountItem> AccountList { get; private set; } = new();
         private List<OsRewardItem> _checkinRewards;
@@ -217,11 +218,11 @@ namespace FufuLauncher.Models
                 var result = JsonSerializer.Deserialize<OsApiResponse<OsAccountInfoData>>(text);
                 if (result != null && result.RetCode == 0 && result.Data?.List != null)
                     return result.Data.List;
-                LastApiError = result?.Message ?? "解析账号列表失败";
+                LastApiError = result?.Message ?? "Checkin_ParseAccountListFailed".GetLocalized();
             }
             catch (Exception ex)
             {
-                LastApiError = $"获取账号列表异常: {ex.Message}";
+                LastApiError = string.Format("Checkin_GetAccountListException".GetLocalized(), ex.Message);
             }
             return new List<OsAccountItem>();
         }
@@ -265,11 +266,11 @@ namespace FufuLauncher.Models
                 var result = JsonSerializer.Deserialize<OsApiResponse<OsIsSignData>>(text);
                 if (result != null && result.RetCode == 0 && result.Data != null)
                     return result.Data;
-                LastApiError = result?.Message ?? "解析签到状态失败";
+                LastApiError = result?.Message ?? "Checkin_ParseSignStatusFailed".GetLocalized();
             }
             catch (Exception ex)
             {
-                LastApiError = $"请求签到状态异常: {ex.Message}";
+                LastApiError = string.Format("Checkin_RequestSignStatusException".GetLocalized(), ex.Message);
             }
             return null;
         }
@@ -324,9 +325,9 @@ namespace FufuLauncher.Models
 
             if (AccountList.Count == 0)
             {
-                message += "未检测到绑定账号";
+                message += "Checkin_NoBoundAccount".GetLocalized();
                 if (!string.IsNullOrEmpty(LastApiError))
-                    message += $"，原因: {LastApiError}";
+                    message += string.Format("Checkin_Reason".GetLocalized(), LastApiError);
                 signResult.FailCount++;
                 signResult.Message = message;
                 return signResult;
@@ -351,16 +352,16 @@ namespace FufuLauncher.Models
                 var isData = await IsSignAsync(account.Region, account.GameUid);
                 if (isData == null)
                 {
-                    message += $"\n{account.Nickname} 获取签到信息失败";
+                    message += "\n" + account.Nickname + "Checkin_GetInfoFailed".GetLocalized();
                     if (!string.IsNullOrEmpty(LastApiError))
-                        message += $"，详情: {LastApiError}";
+                        message += string.Format("Checkin_Detail".GetLocalized(), LastApiError);
                     signResult.FailCount++;
                     continue;
                 }
 
                 if (isData.FirstBind)
                 {
-                    message += $"\n{account.Nickname}是第一次绑定HoYoLAB，请先手动签到一次";
+                    message += "\n" + account.Nickname + "Checkin_FirstBindWarning".GetLocalized();
                     signResult.FailCount++;
                     continue;
                 }
@@ -369,10 +370,10 @@ namespace FufuLauncher.Models
 
                 if (isData.IsSign)
                 {
-                    message += $"\n{account.Nickname}今天已经签到过了";
+                    message += "\n" + account.Nickname + "Checkin_AlreadySignedToday".GetLocalized();
                     var idx = signDays - 1;
                     if (_checkinRewards != null && idx >= 0 && idx < _checkinRewards.Count)
-                        message += $"\n今天获得的奖励是{FormatItem(_checkinRewards[idx])}";
+                        message += "\n" + string.Format("Checkin_TodayReward".GetLocalized(), FormatItem(_checkinRewards[idx]));
                 }
                 else
                 {
@@ -381,16 +382,16 @@ namespace FufuLauncher.Models
                     var req = await DoSignAsync(account);
                     if (req == null)
                     {
-                        message += $"\n{account.Nickname} 本次签到请求失败";
+                        message += "\n" + account.Nickname + "Checkin_SignRequestFailed".GetLocalized();
                         if (!string.IsNullOrEmpty(LastApiError))
-                            message += $"，详情: {LastApiError}";
+                            message += string.Format("Checkin_Detail".GetLocalized(), LastApiError);
                         signResult.FailCount++;
                         continue;
                     }
 
                     if ((int)req.StatusCode == 429)
                     {
-                        message += $"\n{account.Nickname} 签到失败，触发 HTTP 429 限流";
+                        message += "\n" + account.Nickname + "Checkin_SignRateLimited".GetLocalized();
                         signResult.FailCount++;
                         continue;
                     }
@@ -400,7 +401,7 @@ namespace FufuLauncher.Models
 
                     if (data == null)
                     {
-                        message += $"\n{account.Nickname} 解析签到结果失败";
+                        message += "\n" + account.Nickname + "Checkin_ParseResultFailed".GetLocalized();
                         signResult.FailCount++;
                         continue;
                     }
@@ -408,34 +409,34 @@ namespace FufuLauncher.Models
                     if (data.RetCode == 0 && data.Data?.Code == "ok")
                     {
                         signDays++;
-                        message += $"\n{account.Nickname}签到成功";
+                        message += "\n" + account.Nickname + "Checkin_SignSuccess".GetLocalized();
                     }
                     else if (data.RetCode == -5003)
                     {
-                        message += $"\n{account.Nickname}今天已经签到过了";
+                        message += "\n" + account.Nickname + "Checkin_AlreadySignedToday".GetLocalized();
                     }
                     else
                     {
-                        message += $"\n{account.Nickname} 签到失败，API提示: {data.Message}";
+                        message += "\n" + account.Nickname + string.Format("Checkin_SignFailedApi".GetLocalized(), data.Message);
                         signResult.FailCount++;
                         continue;
                     }
                 }
 
                 signResult.SuccessCount++;
-                message += $"\n{account.Nickname}已签到{signDays}天";
+                message += "\n" + account.Nickname + string.Format("Checkin_SignedDays".GetLocalized(), signDays);
                 LastSignDays = signDays;
 
                 var rewardIdx = signDays - 1;
                 if (_checkinRewards != null && rewardIdx >= 0 && rewardIdx < _checkinRewards.Count)
                 {
                     LastRewardItem = FormatItem(_checkinRewards[rewardIdx]);
-                    message += $"\n奖励是{LastRewardItem}";
+                    message += "\n" + string.Format("Checkin_RewardIs".GetLocalized(), LastRewardItem);
                 }
             }
 
             if (signResult.SuccessCount == 0 && signResult.FailCount == 0)
-                message += "\n没有可签到的账号";
+                message += "\n" + "Checkin_NoAccountToSign".GetLocalized();
 
             signResult.Success = signResult.SuccessCount > 0 && signResult.FailCount == 0;
             signResult.Message = message;

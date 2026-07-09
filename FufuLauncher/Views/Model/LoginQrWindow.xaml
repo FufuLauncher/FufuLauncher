@@ -6,8 +6,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="扫码登录">
+    Title="{helpers:Loc Key=LoginQR_Title}">
 
     <Window.SystemBackdrop>
         <MicaBackdrop Kind="BaseAlt" />
@@ -28,22 +29,22 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" x:FieldModifier="public" Grid.Row="0" Background="Transparent">
-            <TextBlock Text="扫码登录" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="14" Opacity="0.8" />
+            <TextBlock Text="{helpers:Loc Key=LoginQR_Title}" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="14" Opacity="0.8" />
         </Grid>
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
             <ComboBox x:Name="LoginMethodComboBox" SelectedIndex="0" HorizontalAlignment="Center"
                       SelectionChanged="LoginMethodComboBox_SelectionChanged">
-                <ComboBoxItem Content="米游社APP扫码登录" />
-                <ComboBoxItem Content="网页通行证登录" />
-                <ComboBoxItem Content="HoYoLAB网页登录" />
+                <ComboBoxItem Content="{helpers:Loc Key=LoginQR_MiyousheQR}" />
+                <ComboBoxItem Content="{helpers:Loc Key=LoginQR_WebPassport}" />
+                <ComboBoxItem Content="{helpers:Loc Key=LoginQR_HoYoLABWeb}" />
             </ComboBox>
 
             <StackPanel x:Name="GameLoginPanel" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center"
                         Visibility="Collapsed">
-                <TextBlock Text="游戏App ID:" VerticalAlignment="Center" />
-                <TextBox x:Name="GameAppIdTextBox" Text="7" Width="100" PlaceholderText="输入AppID" />
-                <Button Content="确认生成" Click="GameLoginButton_Click" />
+                <TextBlock Text="{helpers:Loc Key=LoginQR_GameAppId}" VerticalAlignment="Center" />
+                <TextBox x:Name="GameAppIdTextBox" Text="7" Width="100" PlaceholderText="{helpers:Loc Key=LoginQR_EnterAppId}" />
+                <Button Content="{helpers:Loc Key=LoginQR_ConfirmGenerate}" Click="GameLoginButton_Click" />
             </StackPanel>
 
             <StackPanel x:Name="QrCodeContainer" Spacing="20">
@@ -51,7 +52,7 @@
                         HorizontalAlignment="Center">
                     <Image x:Name="QrCodeImage" Stretch="Uniform" Opacity="0" />
                 </Border>
-                <Button x:Name="RefreshButton" Content="刷新二维码" Click="RefreshButton_Click" HorizontalAlignment="Center" />
+                <Button x:Name="RefreshButton" Content="{helpers:Loc Key=LoginQR_RefreshQR}" Click="RefreshButton_Click" HorizontalAlignment="Center" />
             </StackPanel>
 
             <Grid x:Name="PassportWebViewBorder" Visibility="Collapsed" HorizontalAlignment="Stretch"
@@ -76,14 +77,14 @@
             </Grid>
 
             <TextBlock x:Name="WebLoginWarningTextBlock"
-                       Text="注意：网页通行证登录无法获取到Stoken，部分功能会无法使用"
+                       Text="{helpers:Loc Key=LoginQR_WebLoginWarning}"
                        Foreground="DarkOrange"
                        HorizontalAlignment="Center"
                        Visibility="Collapsed" />
 
-            <Button x:Name="ManualCookieButton" Content="手动输入Cookie" Click="ManualCookieButton_Click"
+            <Button x:Name="ManualCookieButton" Content="{helpers:Loc Key=LoginQR_ManualCookie}" Click="ManualCookieButton_Click"
                     HorizontalAlignment="Center" />
-            <Button x:Name="ClearCacheButton" Content="清除历史登录数据" Click="ClearCacheButton_Click"
+            <Button x:Name="ClearCacheButton" Content="{helpers:Loc Key=LoginQR_ClearHistory}" Click="ClearCacheButton_Click"
                     HorizontalAlignment="Center" />
         </StackPanel>
     </Grid>

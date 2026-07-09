@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:FufuLauncher.ViewModels"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     d:DataContext="{d:DesignInstance Type=viewmodels:ControlPanelModel}"
     mc:Ignorable="d"
     Background="Transparent">
@@ -165,7 +166,7 @@
                             FontSize="32"
                             FontWeight="SemiBold"
                             Foreground="{ThemeResource PanelTextBrush}"
-                            Text="工具箱" />
+                            Text="{helpers:Loc Key=Panel_Toolbox}" />
                     </StackPanel>
                 </Grid>
 
@@ -186,11 +187,11 @@
                                 FontSize="16"
                                 FontWeight="SemiBold"
                                 Foreground="{ThemeResource PanelTextBrush}"
-                                Text="数据分析" />
+                                Text="{helpers:Loc Key=Panel_DataAnalysis}" />
                             <TextBlock
                                 FontSize="12"
                                 Foreground="{ThemeResource PanelSecondaryTextBrush}"
-                                Text="记录统计、完成进度与长期数据沉淀" />
+                                Text="{helpers:Loc Key=Panel_DataAnalysisDesc}" />
                         </StackPanel>
 
                         <Grid ColumnSpacing="12">
@@ -209,8 +210,8 @@
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="抽卡记录分析" />
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="分析游戏内的祈愿记录，展示抽卡数据情况" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetGacha}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_GachaTooltip}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -225,8 +226,8 @@
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="成就追踪" />
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="追踪游戏内成就的完成进度，支持导出与导入" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetAchievement}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_AchievementTooltip}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -251,11 +252,11 @@
                                 FontSize="16"
                                 FontWeight="SemiBold"
                                 Foreground="{ThemeResource PanelTextBrush}"
-                                Text="旅行者档案" />
+                                Text="{helpers:Loc Key=Panel_TravelerProfile}" />
                             <TextBlock
                                 FontSize="12"
                                 Foreground="{ThemeResource PanelSecondaryTextBrush}"
-                                Text="角色、背包、便签与米游社战绩信息" />
+                                Text="{helpers:Loc Key=Panel_TravelerProfileDesc}" />
                         </StackPanel>
 
                         <Grid ColumnSpacing="12" RowSpacing="12">
@@ -278,8 +279,8 @@
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="背包物品" />
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="查看当前账号游戏内背包中的材料" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetInventory}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_InventoryTooltip}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -294,8 +295,8 @@
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="角色练度查询" />
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="查询已拥有角色的等级、命座、武器及圣遗物搭配情况" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetPlayerRole}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_PlayerRoleTooltip}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -310,8 +311,8 @@
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="旅行便签" />
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="独立窗口显示当前开放的角色材料秘境等实时数据" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetNotes}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_NotesTooltip}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -326,8 +327,8 @@
                                         <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" Stretch="Uniform" />
                                     </Border>
                                     <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="战绩信息" />
-                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="查询深渊、幻想真境剧诗等详细战绩数据" TextWrapping="Wrap" />
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetBBS}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_BBSTooltip}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -352,11 +353,11 @@
                                 FontSize="16"
                                 FontWeight="SemiBold"
                                 Foreground="{ThemeResource PanelTextBrush}"
-                                Text="资源获取" />
+                                Text="{helpers:Loc Key=Panel_Resources}" />
                             <TextBlock
                                 FontSize="12"
                                 Foreground="{ThemeResource PanelSecondaryTextBrush}"
-                                Text="管理与资源获取" />
+                                Text="{helpers:Loc Key=Panel_ResourcesDesc}" />
                         </StackPanel>
 
                         <Button Style="{StaticResource ToolCardButtonStyle}" Click="OnOpenVideoResourcesClick">
@@ -369,8 +370,8 @@
                                     <Image Margin="9" Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" Stretch="Uniform" />
                                 </Border>
                                 <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="视频资源库" />
-                                    <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="可查看各类游戏角色PV或者游戏内过场动画" TextWrapping="Wrap" />
+                                    <TextBlock FontSize="17" FontWeight="SemiBold" Foreground="{ThemeResource PanelTextBrush}" Text="{helpers:Loc Key=Home_WidgetVideo}" />
+                                    <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}" Text="{helpers:Loc Key=Home_VideoTooltip}" TextWrapping="Wrap" />
                                 </StackPanel>
                             </Grid>
                         </Button>

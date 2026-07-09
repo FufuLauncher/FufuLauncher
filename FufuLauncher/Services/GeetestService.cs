@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Services.MiHoYo;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
@@ -40,9 +41,9 @@ public sealed class GeetestService
     public GeetestService()
     {
         _fingerprintService = App.GetService<IDeviceFingerprintService>()
-            ?? throw new InvalidOperationException("无法获取设备指纹服务");
+            ?? throw new InvalidOperationException("Geetest_NoFingerprintService".GetLocalized());
         _accountManager = App.GetService<AccountManager>()
-            ?? throw new InvalidOperationException("无法获取账号管理服务");
+            ?? throw new InvalidOperationException("Geetest_NoAccountService".GetLocalized());
     }
 
     public async Task<string> TryVerifyForDailyNoteAsync(Dictionary<string, string> cookies)
@@ -94,7 +95,7 @@ public sealed class GeetestService
 
     private async Task<string> CallCreateVerificationAsync(Dictionary<string, string> cookies)
     {
-        string activeId = _accountManager.ActiveAccountId ?? throw new InvalidOperationException("无活跃账号");
+        string activeId = _accountManager.ActiveAccountId ?? throw new InvalidOperationException("Geetest_NoActiveAccount".GetLocalized());
         string cookieStr = DailyNoteService.BuildCookieString(cookies, DailyNoteService.CookieMode.Cookie);
         string ds = DailyNoteService.CalculateDS2(CNX4, "is_high=true", "");
         string fp = await _fingerprintService.GetOrRegisterFingerprintAsync(activeId, cookies);
@@ -118,7 +119,7 @@ public sealed class GeetestService
 
     private async Task<string> CallVerifyVerificationAsync(Dictionary<string, string> cookies, string challenge, string validate)
     {
-        string activeId = _accountManager.ActiveAccountId ?? throw new InvalidOperationException("无活跃账号");
+        string activeId = _accountManager.ActiveAccountId ?? throw new InvalidOperationException("Geetest_NoActiveAccount".GetLocalized());
         string cookieStr = DailyNoteService.BuildCookieString(cookies, DailyNoteService.CookieMode.Cookie);
         GeetestWebResponse body = new()
         {
@@ -157,7 +158,7 @@ public sealed class GeetestService
         {
             Window geetestWindow = new();
             geetestWindow.SystemBackdrop = new MicaBackdrop();
-            geetestWindow.Title = "人机验证";
+            geetestWindow.Title = "Geetest_CaptchaTitle".GetLocalized();
 
             Grid rootGrid = new() { Background = new SolidColorBrush(Colors.Transparent) };
             rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(32) });
@@ -179,7 +180,7 @@ public sealed class GeetestService
 
             TextBlock titleText = new()
             {
-                Text = "人机验证",
+                Text = "Geetest_CaptchaTitle".GetLocalized(),
                 VerticalAlignment = VerticalAlignment.Center,
                 Style = (Style)Application.Current.Resources["CaptionTextBlockStyle"]
             };
@@ -248,11 +249,12 @@ public sealed class GeetestService
 
     private static string GetGeetestHtml(string gt, string challenge)
     {
+        var captchaTitle = "Geetest_CaptchaTitle".GetLocalized();
         return $$"""
             <html>
                 <head>
                     <meta charset="utf-8"/>
-                    <title>人机验证</title>
+                    <title>{{captchaTitle}}</title>
                     <style>
                         * { margin:0; padding:0; box-sizing:border-box; }
                         body {

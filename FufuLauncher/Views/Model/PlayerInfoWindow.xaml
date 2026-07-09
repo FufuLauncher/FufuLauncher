@@ -5,8 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="using:FufuLauncher.Models"
+    xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Title="角色信息查询">
+    Title="{helpers:Loc Key=PlayerInfo_Title}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.Resources>
@@ -22,7 +23,7 @@
         <Grid x:Name="AppTitleBar" Height="32" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="16,0,0,0">
                 <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" Margin="0,0,12,0" />
-                <TextBlock Text="角色信息查询"
+                <TextBlock Text="{helpers:Loc Key=PlayerInfo_Title}"
                            Style="{StaticResource CaptionTextBlockStyle}"
                            FontFamily="{StaticResource AppGlobalFont}" />
             </StackPanel>
@@ -36,17 +37,17 @@
             </Grid.ColumnDefinitions>
 
             <TextBox x:Name="UidTextBox"
-                     PlaceholderText="输入UID查询..."
+                     PlaceholderText="{helpers:Loc Key=PlayerInfo_SearchUid}"
                      FontFamily="{StaticResource AppGlobalFont}"
                      VerticalAlignment="Center" />
 
-            <Button Grid.Column="1" Content="查询" Click="OnQueryClick" Margin="10,0,0,0" />
+            <Button Grid.Column="1" Content="{helpers:Loc Key=PlayerInfo_Query}" Click="OnQueryClick" Margin="10,0,0,0" />
 
             <Button Grid.Column="2" Click="OnRefreshMyDataClick" Margin="10,0,0,0"
-                    ToolTipService.ToolTip="更新并保存我的数据">
+                    ToolTipService.ToolTip="{helpers:Loc Key=PlayerInfo_RefreshMyData}">
                 <StackPanel Orientation="Horizontal" Spacing="5">
                     <SymbolIcon Symbol="Refresh" />
-                    <TextBlock Text="刷新我的数据" />
+                    <TextBlock Text="{helpers:Loc Key=PlayerInfo_RefreshMyData}" />
                 </StackPanel>
             </Button>
         </Grid>
@@ -67,7 +68,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="角色列表" Margin="15,10" FontWeight="SemiBold" Opacity="0.7" />
+                    <TextBlock Text="{helpers:Loc Key=PlayerInfo_RoleList}" Margin="15,10" FontWeight="SemiBold" Opacity="0.7" />
 
                     <ListView x:Name="RoleListView" Grid.Row="1"
                               SelectionMode="Single"
@@ -104,7 +105,7 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
 
                 <Grid>
-                    <TextBlock x:Name="EmptyTipText" Text="请选择左侧角色查看详情"
+                    <TextBlock x:Name="EmptyTipText" Text="{helpers:Loc Key=PlayerInfo_SelectRoleHint}"
                                HorizontalAlignment="Center" VerticalAlignment="Center"
                                Opacity="0.5" Style="{StaticResource SubtitleTextBlockStyle}" />
 
@@ -133,7 +134,7 @@
                         </Grid>
 
                         <Pivot Grid.Row="1" Margin="12,0">
-                            <PivotItem Header="基础属性">
+                            <PivotItem Header="{helpers:Loc Key=PlayerInfo_BasicStats}">
                                 <ScrollViewer>
                                     <Grid Margin="10,10,20,20" ColumnSpacing="20" RowSpacing="20">
                                         <Grid.ColumnDefinitions>
@@ -142,60 +143,60 @@
                                         </Grid.ColumnDefinitions>
 
                                         <StackPanel Spacing="10">
-                                            <TextBlock Text="核心数值" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                            <TextBlock Text="{helpers:Loc Key=PlayerInfo_CoreStats}" Style="{StaticResource SubtitleTextBlockStyle}" />
                                             <Grid>
-                                                <TextBlock Text="生命值上限" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_Hp}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.Hp, Mode=OneWay}"
                                                            HorizontalAlignment="Right" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="攻击力" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_Attack}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.Attack, Mode=OneWay}"
                                                            HorizontalAlignment="Right" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="防御力" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_Defense}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.Defend, Mode=OneWay}"
                                                            HorizontalAlignment="Right" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="元素精通" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_ElementalMastery}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.ElementMastery, Mode=OneWay}"
                                                            HorizontalAlignment="Right" />
                                             </Grid>
                                         </StackPanel>
 
                                         <StackPanel Grid.Column="1" Spacing="10">
-                                            <TextBlock Text="进阶属性" Style="{StaticResource SubtitleTextBlockStyle}" />
+                                            <TextBlock Text="{helpers:Loc Key=PlayerInfo_AdvancedStats}" Style="{StaticResource SubtitleTextBlockStyle}" />
                                             <Grid>
-                                                <TextBlock Text="暴击率" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_CritRate}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.CritRate, Mode=OneWay}"
                                                            HorizontalAlignment="Right" Foreground="#FF6B6B" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="暴击伤害" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_CritDmg}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.CritDmg, Mode=OneWay}"
                                                            HorizontalAlignment="Right" Foreground="#FF6B6B" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="元素充能效率" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_Recharge}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.Recharge, Mode=OneWay}"
                                                            HorizontalAlignment="Right" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="火元素伤害" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_FireDmg}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.FireDmg, Mode=OneWay}"
                                                            HorizontalAlignment="Right"
                                                            Visibility="{x:Bind IsNotZero(CurrentRole.FireDmg), Mode=OneWay}" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="水元素伤害" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_WaterDmg}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.WaterDmg, Mode=OneWay}"
                                                            HorizontalAlignment="Right"
                                                            Visibility="{x:Bind IsNotZero(CurrentRole.WaterDmg), Mode=OneWay}" />
                                             </Grid>
                                             <Grid>
-                                                <TextBlock Text="物理伤害" />
+                                                <TextBlock Text="{helpers:Loc Key=PlayerInfo_PhysicalDmg}" />
                                                 <TextBlock Text="{x:Bind CurrentRole.PhysicalDmg, Mode=OneWay}"
                                                            HorizontalAlignment="Right"
                                                            Visibility="{x:Bind IsNotZero(CurrentRole.PhysicalDmg), Mode=OneWay}" />
@@ -205,7 +206,7 @@
                                 </ScrollViewer>
                             </PivotItem>
 
-                            <PivotItem Header="圣遗物详情">
+                            <PivotItem Header="{helpers:Loc Key=PlayerInfo_ArtifactDetails}">
                                 <GridView ItemsSource="{x:Bind CurrentRole.Artifacts, Mode=OneWay}"
                                           SelectionMode="None">
                                     <GridView.ItemTemplate>
@@ -227,7 +228,7 @@
                                                     <TextBlock Text="{x:Bind Type}" Opacity="0.5" FontSize="12"
                                                                VerticalAlignment="Center" />
 
-                                                    <HyperlinkButton Grid.Column="1" Content="查看获取" FontSize="12"
+                                                    <HyperlinkButton Grid.Column="1" Content="{helpers:Loc Key=PlayerInfo_ViewSource}" FontSize="12"
                                                                      Margin="0,-5,-5,-5" Padding="5,0"
                                                                      Click="OnArtifactSearchClick" />
                                                 </Grid>
@@ -256,7 +257,7 @@
                                 </GridView>
                             </PivotItem>
 
-                            <PivotItem Header="武器与技能">
+                            <PivotItem Header="{helpers:Loc Key=PlayerInfo_WeaponAndSkills}">
                                 <StackPanel Margin="10" Spacing="20">
                                     <Grid Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="16"
                                           CornerRadius="8">
@@ -268,7 +269,7 @@
                                             <TextBlock Text="{x:Bind CurrentRole.WeaponName, Mode=OneWay}"
                                                        Style="{StaticResource SubtitleTextBlockStyle}" />
                                             <TextBlock>
-                                                <Run Text="等级 " />
+                                                <Run Text="{helpers:Loc Key=PlayerInfo_Level}" />
                                                 <Run Text="{x:Bind CurrentRole.WeaponLevel, Mode=OneWay}" />
                                                 <Run Text=" | " />
                                                 <Run Text="{x:Bind CurrentRole.WeaponRefinement, Mode=OneWay}" />
@@ -277,7 +278,7 @@
                                     </Grid>
 
                                     <StackPanel Spacing="10">
-                                        <TextBlock Text="技能等级" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                                        <TextBlock Text="{helpers:Loc Key=PlayerInfo_SkillLevels}" Style="{StaticResource BodyStrongTextBlockStyle}" />
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition /><ColumnDefinition /><ColumnDefinition />
@@ -285,7 +286,7 @@
                                             <Border Background="{ThemeResource LayerFillColorDefaultBrush}"
                                                     Padding="10" CornerRadius="4" Margin="0,0,5,0">
                                                 <StackPanel>
-                                                    <TextBlock Text="普通攻击" Opacity="0.6" FontSize="12" />
+                                                    <TextBlock Text="{helpers:Loc Key=PlayerInfo_NormalAttack}" Opacity="0.6" FontSize="12" />
                                                     <TextBlock Text="{x:Bind CurrentRole.SkillA, Mode=OneWay}"
                                                                FontSize="20" HorizontalAlignment="Center" />
                                                 </StackPanel>
@@ -294,7 +295,7 @@
                                                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                                                     Padding="10" CornerRadius="4" Margin="5,0,5,0">
                                                 <StackPanel>
-                                                    <TextBlock Text="元素战技" Opacity="0.6" FontSize="12" />
+                                                    <TextBlock Text="{helpers:Loc Key=PlayerInfo_ElementalSkill}" Opacity="0.6" FontSize="12" />
                                                     <TextBlock Text="{x:Bind CurrentRole.SkillE, Mode=OneWay}"
                                                                FontSize="20" HorizontalAlignment="Center" />
                                                 </StackPanel>
@@ -303,7 +304,7 @@
                                                     Background="{ThemeResource LayerFillColorDefaultBrush}"
                                                     Padding="10" CornerRadius="4" Margin="5,0,0,0">
                                                 <StackPanel>
-                                                    <TextBlock Text="元素爆发" Opacity="0.6" FontSize="12" />
+                                                    <TextBlock Text="{helpers:Loc Key=PlayerInfo_ElementalBurst}" Opacity="0.6" FontSize="12" />
                                                     <TextBlock Text="{x:Bind CurrentRole.SkillQ, Mode=OneWay}"
                                                                FontSize="20" HorizontalAlignment="Center" />
                                                 </StackPanel>
@@ -320,7 +321,7 @@
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                                 <StackPanel Orientation="Horizontal" Spacing="8">
                                     <SymbolIcon Symbol="People" />
-                                    <TextBlock Text="查看配队推荐" />
+                                    <TextBlock Text="{helpers:Loc Key=PlayerInfo_ViewTeamRecommend}" />
                                 </StackPanel>
                             </Button>
                         </Grid>

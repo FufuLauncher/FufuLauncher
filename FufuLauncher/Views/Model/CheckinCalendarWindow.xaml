@@ -2,7 +2,8 @@
     x:Class="FufuLauncher.Views.CheckinCalendarWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:models="using:MihoyoBBS">
+    xmlns:models="using:MihoyoBBS"
+    xmlns:helpers="using:FufuLauncher.Helpers">
 
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
@@ -11,7 +12,7 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent" IsHitTestVisible="True">
-            <TextBlock x:Name="TitleText" Text="签到奖励日历" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="14" FontWeight="SemiBold"/>
+            <TextBlock x:Name="TitleText" Text="{helpers:Loc Key=CheckinCalendar_Title}" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="14" FontWeight="SemiBold"/>
         </Grid>
 
         <GridView Grid.Row="1" x:Name="CalendarGridView" Padding="16,0,16,16" SelectionMode="None" HorizontalAlignment="Center">

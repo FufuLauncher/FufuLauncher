@@ -1,0 +1,1418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="Avatar_Batch_Fail_Title" xml:space="preserve"><value>Batch Save Failed</value></data>
+  <data name="Avatar_Batch_Success" xml:space="preserve"><value>Batch generated and overwrote all avatar sizes</value></data>
+  <data name="Avatar_Clear_Fail_Title" xml:space="preserve"><value>Clear Failed</value></data>
+  <data name="Avatar_Clear_Success_Format" xml:space="preserve"><value>Avatar size {0}x{0} cleared</value></data>
+  <data name="Avatar_Crop_Success" xml:space="preserve"><value>Avatar cropped and saved successfully</value></data>
+  <data name="Avatar_EditNotFound_Content" xml:space="preserve"><value>No avatar found to edit</value></data>
+  <data name="Avatar_EditNotFound_Title" xml:space="preserve"><value>Notice</value></data>
+  <data name="Avatar_ImportFail_Title" xml:space="preserve"><value>Import Failed</value></data>
+  <data name="Avatar_LoadFail_Title" xml:space="preserve"><value>Load Failed</value></data>
+  <data name="Avatar_SaveFail_Title" xml:space="preserve"><value>Save Failed</value></data>
+  <data name="Fps_CompatWarning_Content" xml:space="preserve"><value>If you have NVIDIA RTX 40-series or newer AI frame generation enabled, or use frame display software such as RTSS or MSI Afterburner, it may cause the game to freeze or fail to start normally.</value></data>
+  <data name="Fps_CompatWarning_DontShow" xml:space="preserve"><value>Don&apos;t show this warning again</value></data>
+  <data name="Fps_CompatWarning_Title" xml:space="preserve"><value>Compatibility Warning</value></data>
+  <data name="Fps_HashMismatch_Content" xml:space="preserve"><value>The frame rate display plugin hash does not match. It may have been tampered with or corrupted. Please reinstall the launcher.</value></data>
+  <data name="Fps_Repair_Fail_Title" xml:space="preserve"><value>Repair Failed</value></data>
+  <data name="Fps_Repair_Success" xml:space="preserve"><value>FPS display plugin has been successfully repaired and installed</value></data>
+  <data name="Fps_Repair_Title" xml:space="preserve"><value>Repairing FPS Plugin</value></data>
+  <data name="LanguageChangedTitle" xml:space="preserve"><value>言語が変更されました</value></data>
+  <data name="LanguageChangedMessage" xml:space="preserve"><value>言語設定が変更されました。一部のUIは再起動が必要です。</value></data>
+<data name="LanguageSelection_Title" xml:space="preserve"><value>言語を選択</value></data>
+  <data name="LanguageSelection_Subtitle" xml:space="preserve"><value>使用する言語を選択してください</value></data>
+  <data name="LanguageSelection_Confirm" xml:space="preserve"><value>確認</value></data>
+  <data name="LanguageSelection_SystemDefault" xml:space="preserve"><value>システム既定</value></data>
+  <data name="LanguageSelection_Selected" xml:space="preserve"><value>選択済み</value></data>
+  <data name="PR_Description" xml:space="preserve"><value>This project is currently maintained by an individual developer (CodeCubist).
+We adhere to a player pain-point-driven development direction, promoting open, transparent, and efficient updates.
+Submitting Pull Requests is the core way for users with coding skills to help advance development, optimize structure, and share project maintenance responsibilities.
+If you can help, please use the button below to visit the code repository and submit your contribution.</value></data>
+  <data name="PR_GitHubButton" xml:space="preserve"><value>Visit GitHub Repository to Submit Pull Request</value></data>
+  <data name="PR_Window_Title" xml:space="preserve"><value>Pull Request</value></data>
+  <data name="Plugin_ArchWarning_Content" xml:space="preserve"><value>Your computer may be ARM-based. The injection feature is not available on ARM-based computers. Are you sure you want to continue enabling it?</value></data>
+  <data name="Plugin_ArchWarning_Continue" xml:space="preserve"><value>Continue Enabling</value></data>
+  <data name="Plugin_ArchWarning_Title" xml:space="preserve"><value>Architecture Compatibility Warning</value></data>
+  <data name="Plugin_Corrupted_Content" xml:space="preserve"><value>Plugin files are abnormal.
+This is usually because the plugin was falsely flagged and blocked by antivirus software (such as Windows Defender) or has been damaged.
+
+Recommendations:
+1. Add the software directory to the antivirus whitelist
+2. Re-download and install the plugin on this page</value></data>
+  <data name="Plugin_Corrupted_Title" xml:space="preserve"><value>Plugin May Be Corrupted</value></data>
+  <data name="Plugin_Download_BackupLine" xml:space="preserve"><value>Backup</value></data>
+  <data name="Plugin_Download_Connecting" xml:space="preserve"><value>Connecting...</value></data>
+  <data name="Plugin_Download_Extracting" xml:space="preserve"><value>Extracting and installing...</value></data>
+  <data name="Plugin_Download_Fail_Content_Format" xml:space="preserve"><value>Installation failed: {0}</value></data>
+  <data name="Plugin_Download_Fallback" xml:space="preserve"><value>Connection failed, trying backup line...</value></data>
+  <data name="Plugin_Download_MainLine" xml:space="preserve"><value>Main</value></data>
+  <data name="Plugin_Download_Manual" xml:space="preserve"><value>Manual Download</value></data>
+  <data name="Plugin_Download_Progress_Format" xml:space="preserve"><value>{0} line downloading... {1}%</value></data>
+  <data name="Plugin_Download_Success" xml:space="preserve"><value>Plugin installed and refreshed</value></data>
+  <data name="Plugin_Download_Title" xml:space="preserve"><value>Getting Plugin</value></data>
+  <data name="Plugin_FileNotFound" xml:space="preserve"><value>File not found, please confirm launcher files are complete</value></data>
+  <data name="Plugin_MainMissing_Content" xml:space="preserve"><value>Main plugin DLL file not found. The plugin may not be installed, was accidentally deleted, or was blocked by antivirus software. Please re-download the plugin, or add the launcher directory to the antivirus whitelist and try again.</value></data>
+  <data name="Plugin_MainMissing_Title" xml:space="preserve"><value>Main Plugin Missing</value></data>
+  <data name="Preset_Create_Placeholder" xml:space="preserve"><value>Enter new preset name</value></data>
+  <data name="Preset_Create_Title" xml:space="preserve"><value>Create New Preset</value></data>
+  <data name="Preset_Delete_ConfirmBtn" xml:space="preserve"><value>Confirm Delete</value></data>
+  <data name="Preset_Delete_Confirm_Format" xml:space="preserve"><value>Are you sure you want to delete the preset &quot;{0}&quot;? This action cannot be undone!</value></data>
+  <data name="Preset_Locked_Content_Format" xml:space="preserve"><value>Lock reason: {0}
+
+If you continue, this warning will be ignored and the preset&apos;s Hash will be updated to the current plugin Hash, unlocking the preset. Continue?</value></data>
+  <data name="Preset_Locked_Continue" xml:space="preserve"><value>Continue and Unlock</value></data>
+  <data name="Preset_Locked_Title" xml:space="preserve"><value>Configuration Preset Locked</value></data>
+  <data name="Preset_ResetAll_ConfirmBtn" xml:space="preserve"><value>Confirm Reset</value></data>
+  <data name="Preset_ResetAll_Content" xml:space="preserve"><value>Remove all presets for the current plugin and re-download the defaults? This action cannot be undone!</value></data>
+  <data name="Preset_ResetAll_Title" xml:space="preserve"><value>Reset All Presets</value></data>
+  <data name="RestartNowBtn" xml:space="preserve"><value>今すぐ再起動</value></data>
+  <data name="RestartLaterBtn" xml:space="preserve"><value>後で再起動</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>バージョン {0}</value></data>
+  <data name="InjectionSettingsNav" xml:space="preserve"><value>注入設定</value></data>
+  <data name="InjectionBuiltInDesc" xml:space="preserve"><value>内蔵エンジンでプラグインを注入</value></data>
+  <data name="InjectionStandaloneDesc" xml:space="preserve"><value>外部プログラムで起動・注入</value></data>
+  <data name="AppDisplayName" xml:space="preserve"><value>FufuLauncher</value></data>
+  <data name="Show" xml:space="preserve"><value>表示</value></data>
+  <data name="Hide" xml:space="preserve"><value>非表示</value></data>
+  <data name="Enabled" xml:space="preserve"><value>有効</value></data>
+  <data name="Disabled" xml:space="preserve"><value>無効</value></data>
+  <data name="ColorHex" xml:space="preserve"><value>色 (Hex)</value></data>
+  <data name="Opacity" xml:space="preserve"><value>不透明度</value></data>
+  <data name="RestoreDefault" xml:space="preserve"><value>デフォルトに戻す</value></data>
+  <data name="Browse" xml:space="preserve"><value>参照</value></data>
+  <data name="Clear" xml:space="preserve"><value>クリア</value></data>
+  <data name="High" xml:space="preserve"><value>高</value></data>
+  <data name="SectionAppearance" xml:space="preserve"><value>外観と個人設定</value></data>
+  <data name="SectionHomeText" xml:space="preserve"><value>ホームテキストスタイル</value></data>
+  <data name="SectionLanguage" xml:space="preserve"><value>言語と地域</value></data>
+  <data name="SectionLaunchConfig" xml:space="preserve"><value>ゲーム起動設定</value></data>
+  <data name="SectionBackground" xml:space="preserve"><value>背景と視覚効果</value></data>
+  <data name="SectionWindowEffects" xml:space="preserve"><value>ウィンドウ効果</value></data>
+  <data name="SectionStartupSound" xml:space="preserve"><value>起動音</value></data>
+  <data name="SectionCheckinSettings" xml:space="preserve"><value>チェックイン設定</value></data>
+  <data name="SectionAdvancedOptions" xml:space="preserve"><value>詳細オプション</value></data>
+  <data name="SectionScreenshotSettings" xml:space="preserve"><value>スクリーンショット設定</value></data>
+  <data name="SectionUpdate" xml:space="preserve"><value>アップデート確認</value></data>
+  <data name="SectionAbout" xml:space="preserve"><value>について</value></data>
+  <data name="SectionSecurityAuth" xml:space="preserve"><value>開発者ライセンス認証</value></data>
+  <data name="ThemeTitle" xml:space="preserve"><value>アプリテーマ</value></data>
+  <data name="ThemeCaption" xml:space="preserve"><value>表示テーマを選択</value></data>
+  <data name="ThemeLight" xml:space="preserve"><value>ライトモード</value></data>
+  <data name="ThemeDark" xml:space="preserve"><value>ダークモード</value></data>
+  <data name="ThemeSystem" xml:space="preserve"><value>システム設定に従う</value></data>
+  <data name="CustomThemeColorTitle" xml:space="preserve"><value>カスタムテーマ色</value></data>
+  <data name="CustomThemeColorCaption" xml:space="preserve"><value>Hexカラーコードを入力。空欄で再起動するとデフォルトに戻ります。</value></data>
+  <data name="HomeCardDisplayTitle" xml:space="preserve"><value>ホームカード表示</value></data>
+  <data name="HomeCardDisplayCaption" xml:space="preserve"><value>お知らせカードやチェックインカードの表示/非表示</value></data>
+  <data name="HideGameNewsCard" xml:space="preserve"><value>お知らせカードを非表示</value></data>
+  <data name="HideCheckinCard" xml:space="preserve"><value>チェックインカードを非表示</value></data>
+  <data name="ShowPresetCard" xml:space="preserve"><value>クイックプリセットを表示</value></data>
+  <data name="ShowWidgetCard" xml:space="preserve"><value>ウィジェットカードを表示</value></data>
+  <data name="WidgetItemsTitle" xml:space="preserve"><value>ウィジェット表示項目</value></data>
+  <data name="WidgetItemsCaption" xml:space="preserve"><value>ウィジェットに表示するツールを選択</value></data>
+  <data name="WidgetGacha" xml:space="preserve"><value>祈願履歴分析を表示</value></data>
+  <data name="WidgetAchievement" xml:space="preserve"><value>アチーブメント追跡を表示</value></data>
+  <data name="WidgetInventory" xml:space="preserve"><value>所持品を表示</value></data>
+  <data name="WidgetPlayerRole" xml:space="preserve"><value>キャラクター育成状況を表示</value></data>
+  <data name="WidgetDailyNoteWindow" xml:space="preserve"><value>旅人のメモを表示</value></data>
+  <data name="WidgetVideo" xml:space="preserve"><value>動画ライブラリを表示</value></data>
+  <data name="WidgetBBS" xml:space="preserve"><value>戦績情報を表示</value></data>
+  <data name="LaunchButtonBgColorTitle" xml:space="preserve"><value>起動ボタン背景色</value></data>
+  <data name="NotesItemsTitle" xml:space="preserve"><value>メモ表示項目</value></data>
+  <data name="NotesItemsCaption" xml:space="preserve"><value>表示する項目を選択（最大3つ）</value></data>
+  <data name="NotesWarningTitle" xml:space="preserve"><value>注意</value></data>
+  <data name="NotesWarningMessage" xml:space="preserve"><value>メモデータはHoYoLAB APIから取得。頻繁な更新はCAPTCHAを引き起こす可能性があります。</value></data>
+  <data name="HideNotesCard" xml:space="preserve"><value>メモカードを非表示</value></data>
+  <data name="ShowResin" xml:space="preserve"><value>樹脂を表示</value></data>
+  <data name="ShowDailyTasks" xml:space="preserve"><value>デイリー依頼を表示</value></data>
+  <data name="ShowHomeCoin" xml:space="preserve"><value>洞天宝銭を表示</value></data>
+  <data name="ShowExpeditions" xml:space="preserve"><value>探索派遣を表示</value></data>
+  <data name="ShowTransformer" xml:space="preserve"><value>参量質変器を表示</value></data>
+  <data name="NavItemsTitle" xml:space="preserve"><value>ナビゲーションバー表示項目</value></data>
+  <data name="NavItemsCaption" xml:space="preserve"><value>サイドバーに表示する項目を選択。非表示でも機能は無効になりません。ホームと設定は非表示不可。</value></data>
+  <data name="BgOverlayOpacityTitle" xml:space="preserve"><value>背景オーバーレイ不透明度</value></data>
+  <data name="FrameOpacityTitle" xml:space="preserve"><value>フレーム背景不透明度</value></data>
+  <data name="BgImageOpacityTitle" xml:space="preserve"><value>背景画像不透明度</value></data>
+  <data name="MinimizeToTrayTitle" xml:space="preserve"><value>閉じる時にトレイに最小化</value></data>
+  <data name="RememberWindowSizeTitle" xml:space="preserve"><value>ウィンドウサイズを記憶</value></data>
+  <data name="MinWindowSizeLimitTitle" xml:space="preserve"><value>最小ウィンドウサイズ制限</value></data>
+  <data name="GameNewsTextColorTitle" xml:space="preserve"><value>お知らせカードの文字色と不透明度</value></data>
+  <data name="LaunchBtnTextColorTitle" xml:space="preserve"><value>起動ボタンの文字色と不透明度</value></data>
+  <data name="CheckinTextColorTitle" xml:space="preserve"><value>チェックイン文字色と不透明度</value></data>
+  <data name="AppLangTitle" xml:space="preserve"><value>表示言語</value></data>
+  <data name="AppLangCaption" xml:space="preserve"><value>再起動後に反映されます</value></data>
+  <data name="LangZhCN" xml:space="preserve"><value>简体中文（推奨）</value></data>
+  <data name="LangZhTW" xml:space="preserve"><value>繁体字中国語</value></data>
+  <data name="LangEnUS" xml:space="preserve"><value>English</value></data>
+  <data name="LangFr" xml:space="preserve"><value>Français</value></data>
+  <data name="LangDe" xml:space="preserve"><value>Deutsch</value></data>
+  <data name="LangRu" xml:space="preserve"><value>Русский</value></data>
+  <data name="LangJa" xml:space="preserve"><value>日本語</value></data>
+  <data name="LangEs" xml:space="preserve"><value>スペイン語</value></data>
+  <data name="LangEsMX" xml:space="preserve"><value>スペイン語（メキシコ）</value></data>
+  <data name="LangKo" xml:space="preserve"><value>韓国語</value></data>
+  <data name="LangIt" xml:space="preserve"><value>イタリア語</value></data>
+  <data name="LangId" xml:space="preserve"><value>インドネシア語</value></data>
+  <data name="LangPt" xml:space="preserve"><value>ポルトガル語（ブラジル）</value></data>
+  <data name="LangDefault" xml:space="preserve"><value>システムのデフォルト言語</value></data>
+  <data name="LaunchWindowModeTitle" xml:space="preserve"><value>起動ウィンドウモード</value></data>
+  <data name="WindowModeNormal" xml:space="preserve"><value>通常ウィンドウ</value></data>
+  <data name="WindowModePopup" xml:space="preserve"><value>ポップアップウィンドウ（枠なし）</value></data>
+  <data name="ResolutionTitle" xml:space="preserve"><value>ゲーム解像度</value></data>
+  <data name="ResolutionCaption" xml:space="preserve"><value>起動時のウィンドウサイズを設定</value></data>
+  <data name="WidthLabel" xml:space="preserve"><value>幅（ピクセル）</value></data>
+  <data name="HeightLabel" xml:space="preserve"><value>高さ（ピクセル）</value></data>
+  <data name="QuickPresetsLabel" xml:space="preserve"><value>クイックプリセット</value></data>
+  <data name="HdrTitle" xml:space="preserve"><value>HDR輝度設定</value></data>
+  <data name="HdrCaption" xml:space="preserve"><value>ゲーム内のHDRピーク輝度とUI輝度を調整</value></data>
+  <data name="OpenHdrSettings" xml:space="preserve"><value>HDR設定を開く</value></data>
+  <data name="TargetMonitorTitle" xml:space="preserve"><value>対象モニター</value></data>
+  <data name="TargetMonitorCaption" xml:space="preserve"><value>ゲームを起動するモニターを指定</value></data>
+  <data name="IdentifyMonitors" xml:space="preserve"><value>モニターを識別</value></data>
+  <data name="AdvLaunchArgsTitle" xml:space="preserve"><value>高度な起動引数</value></data>
+  <data name="AdvLaunchArgsCaption" xml:space="preserve"><value>カスタム引数は起動コマンドの後に追加されます</value></data>
+  <data name="CustomLaunchArgsLabel" xml:space="preserve"><value>カスタム起動引数</value></data>
+  <data name="CustomLaunchArgsPlaceholder" xml:space="preserve"><value>例: -fullscreen -high</value></data>
+  <data name="CustomLaunchArgsInfo" xml:space="preserve"><value>ヒント: 引数はスペース区切りで追加されます。ゲームパスを入力しないでください。</value></data>
+  <data name="CustomExeNameTitle" xml:space="preserve"><value>カスタム実行ファイル名</value></data>
+  <data name="CustomExeNameCaption" xml:space="preserve"><value>検出・起動用のexeファイル名。空欄でデフォルト。</value></data>
+  <data name="CustomExeNamePlaceholder" xml:space="preserve"><value>例: YuanShen.exe</value></data>
+  <data name="InjectionModuleTitle" xml:space="preserve"><value>注入モジュール</value></data>
+  <data name="InjectionModuleHeader" xml:space="preserve"><value>注入モジュールを選択</value></data>
+  <data name="InjectionBuiltIn" xml:space="preserve"><value>内蔵注入</value></data>
+  <data name="InjectionStandalone" xml:space="preserve"><value>スタンドアロン注入</value></data>
+  <data name="InjectionCaption" xml:space="preserve"><value>内蔵はランチャーのエンジンを使用。スタンドアロンは外部プログラム。互換性がない場合に使用。</value></data>
+  <data name="RedeemReminderTitle" xml:space="preserve"><value>コードリマインダー</value></data>
+  <data name="RedeemReminderToggle" xml:space="preserve"><value>新コード公開時に即時通知</value></data>
+  <data name="RedeemReminderCaption" xml:space="preserve"><value>新しいコードが公開されたら有効期限カウントダウン付きで通知。各コード1回のみ。</value></data>
+  <data name="PostLaunchTitle" xml:space="preserve"><value>起動後の動作</value></data>
+  <data name="PostLaunchHeader" xml:space="preserve"><value>ゲーム起動後に実行</value></data>
+  <data name="PostLaunchCaption" xml:space="preserve"><value>トレイに最小化して実行継続、または状態を保存して終了。</value></data>
+  <data name="EnableCustomBg" xml:space="preserve"><value>カスタム背景を有効化</value></data>
+  <data name="BgSourceTitle" xml:space="preserve"><value>背景ソース</value></data>
+  <data name="SelectCustomBgImage" xml:space="preserve"><value>カスタム背景画像を選択...</value></data>
+  <data name="ClearCustomBg" xml:space="preserve"><value>カスタム背景をクリア</value></data>
+  <data name="BgSlideshowTitle" xml:space="preserve"><value>背景スライドショー</value></data>
+  <data name="SelectSlideshowFolder" xml:space="preserve"><value>スライドショー画像フォルダを選択...</value></data>
+  <data name="ClearSlideshowFolder" xml:space="preserve"><value>スライドショーフォルダをクリア</value></data>
+  <data name="SlideshowInterval" xml:space="preserve"><value>スライドショー間隔（秒）</value></data>
+  <data name="OfficialBgServerTitle" xml:space="preserve"><value>公式背景サーバー</value></data>
+  <data name="ServerCN" xml:space="preserve"><value>中国サーバー（天空島）</value></data>
+  <data name="ServerGlobal" xml:space="preserve"><value>グローバルサーバー（テイワット）</value></data>
+  <data name="OfficialBgApiTitle" xml:space="preserve"><value>公式背景API</value></data>
+  <data name="OfficialBgApiCaption" xml:space="preserve"><value>空欄で現在のサーバーのデフォルトAPIを使用。</value></data>
+  <data name="OfficialBgApiPlaceholder" xml:space="preserve"><value>カスタム公式背景APIのURLを入力</value></data>
+  <data name="ResetBgApi" xml:space="preserve"><value>デフォルトAPIにリセット</value></data>
+  <data name="FetchBgAssetsTitle" xml:space="preserve"><value>公式背景アセットを取得</value></data>
+  <data name="DownloadBgImage" xml:space="preserve"><value>最新の背景画像をダウンロード</value></data>
+  <data name="DownloadBgVideo" xml:space="preserve"><value>最新の背景動画をダウンロード</value></data>
+  <data name="EnableAcrylicOverlay" xml:space="preserve"><value>アクリルぼかしオーバーレイを有効化</value></data>
+  <data name="SolidColor" xml:space="preserve"><value>単色</value></data>
+  <data name="AcrylicBlur" xml:space="preserve"><value>アクリルぼかし</value></data>
+  <data name="AcrylicOverlayNote" xml:space="preserve"><value>注意: 動画背景の場合、パフォーマンスのため半透明単色にフォールバック。</value></data>
+  <data name="SemiTransparentOverlay" xml:space="preserve"><value>ページオーバーレイ半透明モード</value></data>
+  <data name="Opaque" xml:space="preserve"><value>不透明</value></data>
+  <data name="SemiTransparent" xml:space="preserve"><value>半透明</value></data>
+  <data name="SemiTransparentCaption" xml:space="preserve"><value>有効時、ページオーバーレイが半透明になり背景が透けて見えます。</value></data>
+  <data name="OverlayOpacityTitle" xml:space="preserve"><value>オーバーレイ不透明度</value></data>
+  <data name="BackdropTitle" xml:space="preserve"><value>ウィンドウ背景素材</value></data>
+  <data name="BackdropCaption" xml:space="preserve"><value>ウィンドウ背景の視覚効果を選択</value></data>
+  <data name="MicaOption" xml:space="preserve"><value>Mica（雲母）</value></data>
+  <data name="AcrylicOption" xml:space="preserve"><value>Acrylic（アクリル）</value></data>
+  <data name="MicaWarning" xml:space="preserve"><value>注意: Mica効果はWindows 11のみ利用可能です。</value></data>
+  <data name="ShowHamburger" xml:space="preserve"><value>サイドバーハンバーガーボタンを表示</value></data>
+  <data name="ShowHamburgerCaption" xml:space="preserve"><value>サイドバー上部に展開/折りたたみボタンを表示します。</value></data>
+  <data name="EnableStartupSound" xml:space="preserve"><value>ゲーム起動音を有効化</value></data>
+  <data name="SelectAudioFile" xml:space="preserve"><value>音声ファイルを選択...</value></data>
+  <data name="ClearAudioFile" xml:space="preserve"><value>音声ファイルをクリア</value></data>
+  <data name="GameCheckin" xml:space="preserve"><value>ゲームチェックイン</value></data>
+  <data name="GameCheckinCaption" xml:space="preserve"><value>毎日のチェックイン報酬を受け取る（原石、モラ等）</value></data>
+  <data name="CommunityCheckin" xml:space="preserve"><value>コミュニティチェックイン</value></data>
+  <data name="CommunityCheckinCaption" xml:space="preserve"><value>コミュニティ交流タスクを自動完了してコインを獲得</value></data>
+  <data name="Like" xml:space="preserve"><value>いいね</value></data>
+  <data name="ReadPosts" xml:space="preserve"><value>投稿を読む</value></data>
+  <data name="Share" xml:space="preserve"><value>共有</value></data>
+  <data name="CloudGameCheckin" xml:space="preserve"><value>クラウドゲームチェックイン</value></data>
+  <data name="CloudGameCheckinCaption" xml:space="preserve"><value>クラウドゲームチェックイン報酬。アカウントリストで認証情報を追加してください。</value></data>
+  <data name="AutoCheckinOnLaunch" xml:space="preserve"><value>起動時に自動チェックイン</value></data>
+  <data name="AutoCheckinCaption" xml:space="preserve"><value>起動時に未チェックインの場合自動実行</value></data>
+  <data name="BatchCheckin" xml:space="preserve"><value>一括チェックイン</value></data>
+  <data name="BatchCheckinCaption" xml:space="preserve"><value>チェックした全アカウントで実行。オフの場合は現在のアカウントのみ。</value></data>
+  <data name="AccountListTitle" xml:space="preserve"><value>アカウントリスト</value></data>
+  <data name="AddCloudCredentialTooltip" xml:space="preserve"><value>クラウドゲーム認証情報を追加</value></data>
+  <data name="CaptchaQuestion" xml:space="preserve"><value>CAPTCHAについて</value></data>
+  <data name="CaptchaTooltip" xml:space="preserve"><value>チェックインでCAPTCHAが表示される場合があります。実デバイス情報の設定でリスク軽減。</value></data>
+  <data name="SelfHostedVersion" xml:space="preserve"><value>自己ホスト版</value></data>
+  <data name="EnableBetterGI" xml:space="preserve"><value>BetterGI連携を有効化</value></data>
+  <data name="BetterGICaption" xml:space="preserve"><value>ゲーム起動時にBetterGIも起動</value></data>
+  <data name="BetterGIDelayLabel" xml:space="preserve"><value>BetterGI起動遅延（秒）</value></data>
+  <data name="BetterGIDelayCaption" xml:space="preserve"><value>0で遅延無効。BetterGIのみに影響</value></data>
+  <data name="BetterGICloseOnExit" xml:space="preserve"><value>ゲーム終了時にBetterGIを閉じる</value></data>
+  <data name="BetterGICloseOnExitCaption" xml:space="preserve"><value>ゲーム終了時にBetterGIを自動終了</value></data>
+  <data name="BrowserCacheTitle" xml:space="preserve"><value>ブラウザキャッシュクリア</value></data>
+  <data name="BrowserCacheCaption" xml:space="preserve"><value>内蔵ブラウザ（WebView2）のキャッシュを削除</value></data>
+  <data name="ClearCacheBtn" xml:space="preserve"><value>キャッシュをクリア</value></data>
+  <data name="ProcessPriorityTitle" xml:space="preserve"><value>プロセス優先度</value></data>
+  <data name="ProcessPriorityCaption" xml:space="preserve"><value>ランチャーのCPU優先度を調整（高すぎると他プロセスに影響）</value></data>
+  <data name="PriorityNormal" xml:space="preserve"><value>通常（デフォルト）</value></data>
+  <data name="PriorityAboveNormal" xml:space="preserve"><value>通常より高</value></data>
+  <data name="CpuWarningTitle" xml:space="preserve"><value>CPU使用率異常警告</value></data>
+  <data name="CpuWarningCaption" xml:space="preserve"><value>CPU使用率が閾値を5分間超えた場合に警告表示。デフォルト有効。</value></data>
+  <data name="EnableCpuWarning" xml:space="preserve"><value>CPU使用率異常警告を有効化</value></data>
+  <data name="CpuWarningThreshold" xml:space="preserve"><value>警告閾値（%）</value></data>
+  <data name="ConfigEditorBtn" xml:space="preserve"><value>設定エディタ</value></data>
+  <data name="UpdateAchievementDbBtn" xml:space="preserve"><value>アチーブメントデータベースを更新</value></data>
+  <data name="EnableInGameScreenshot" xml:space="preserve"><value>ゲーム内スクリーンショットを有効化</value></data>
+  <data name="ScreenshotCaption" xml:space="preserve"><value>ホットキーでゲームウィンドウをキャプチャ</value></data>
+  <data name="ScreenshotHotkeyTitle" xml:space="preserve"><value>スクリーンショットホットキー</value></data>
+  <data name="ScreenshotHotkeyCaption" xml:space="preserve"><value>下のボタンをクリックし希望のキーを押下（Ctrl/Alt/Shift対応）</value></data>
+  <data name="RecordingHint" xml:space="preserve"><value>記録中...ホットキーを押してください</value></data>
+  <data name="ScreenshotSaveLocTitle" xml:space="preserve"><value>スクリーンショット保存場所</value></data>
+  <data name="ScreenshotSaveLocCaption" xml:space="preserve"><value>保存先をカスタマイズ。デフォルト: ドキュメント/FufuScreenshots</value></data>
+  <data name="OpenScreenshotFolder" xml:space="preserve"><value>スクリーンショットフォルダを開く</value></data>
+  <data name="VersionUpdateTitle" xml:space="preserve"><value>バージョン更新</value></data>
+  <data name="VersionUpdateCaption" xml:space="preserve"><value>最新バージョンを確認してダウンロード</value></data>
+  <data name="AboutUsBtn" xml:space="preserve"><value>私たちについて</value></data>
+  <data name="SecurityAuthCaption" xml:space="preserve"><value>開発者ライセンス認証で一部機能の使用権限を取得</value></data>
+  <data name="SecurityAuthBtn" xml:space="preserve"><value>開発者ライセンス認証を実行</value></data>
+  <data name="PluginMgmtTitle" xml:space="preserve"><value>プラグイン管理</value></data>
+  <data name="EnableInjectionTitle" xml:space="preserve"><value>注入を有効化</value></data>
+  <data name="InjectionLoadCaption" xml:space="preserve"><value>ゲーム起動時にプラグインを読み込み</value></data>
+  <data name="GetPluginsLabel" xml:space="preserve"><value>プラグインを入手</value></data>
+  <data name="FreeCamHelpLabel" xml:space="preserve"><value>自由視点の使い方</value></data>
+  <data name="AddPluginLabel" xml:space="preserve"><value>プラグインを追加</value></data>
+  <data name="RefreshLabel" xml:space="preserve"><value>更新</value></data>
+  <data name="OpenFolderLabel" xml:space="preserve"><value>フォルダを開く</value></data>
+  <data name="SortLabel" xml:space="preserve"><value>並べ替え</value></data>
+  <data name="SortByName" xml:space="preserve"><value>名前順</value></data>
+  <data name="SortByStatus" xml:space="preserve"><value>状態順（有効優先）</value></data>
+  <data name="SortBySize" xml:space="preserve"><value>サイズ順</value></data>
+  <data name="SortByDate" xml:space="preserve"><value>更新日時順</value></data>
+  <data name="RenameFolderLabel" xml:space="preserve"><value>フォルダ名変更</value></data>
+  <data name="DeleteLabel" xml:space="preserve"><value>削除</value></data>
+  <data name="EditConfigTooltip" xml:space="preserve"><value>設定ファイルを編集</value></data>
+  <data name="PluginSettingsLabel" xml:space="preserve"><value>プラグイン設定</value></data>
+  <data name="EmptyPluginLibrary" xml:space="preserve"><value>プラグインがインストールされていません</value></data>
+  <data name="PluginSafetyDisclaimer" xml:space="preserve"><value>プラグインの安全性は自己判断で。開発者は一切の責任を負いません。</value></data>
+  <data name="DiagnosticsHint" xml:space="preserve"><value>問題がある場合はまず診断を実行してください。</value></data>
+  <data name="DiagnosticsBtn" xml:space="preserve"><value>PC診断</value></data>
+  <data name="ViewHelpTooltip" xml:space="preserve"><value>ヘルプを見る</value></data>
+  <data name="GifInvalidError" xml:space="preserve"><value>設定されたリンクは有効なGIF形式ではありません</value></data>
+  <data name="GifLoadFailedError" xml:space="preserve"><value>GIFリソースの読み込みに失敗</value></data>
+  <data name="OnLabel" xml:space="preserve"><value>オン</value></data>
+  <data name="OffLabel" xml:space="preserve"><value>オフ</value></data>
+  <data name="ConfigTargetLabel" xml:space="preserve"><value>設定対象:</value></data>
+  <data name="PluginFuFuMain" xml:space="preserve"><value>FuFuPlugin（メイン）</value></data>
+  <data name="PluginFPS" xml:space="preserve"><value>FPS（フレームレート）</value></data>
+  <data name="PluginAvatar" xml:space="preserve"><value>Avatar（千星アバター）</value></data>
+  <data name="ModifiedDateLabel" xml:space="preserve"><value>更新日: </value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>機能（ダウンロード/修復）</value></data>
+  <data name="DownloadPluginBtn" xml:space="preserve"><value>プラグインをダウンロード</value></data>
+  <data name="RepairFpsPluginBtn" xml:space="preserve"><value>FPS表示プラグインを修復</value></data>
+  <data name="MainPluginEnabledLabel" xml:space="preserve"><value>メインプラグイン有効</value></data>
+  <data name="FpsPluginEnabledLabel" xml:space="preserve"><value>FPSプラグイン有効</value></data>
+  <data name="AvatarPluginEnabledLabel" xml:space="preserve"><value>アバタープラグイン有効</value></data>
+  <data name="KeyInputModeLabel" xml:space="preserve"><value>キー入力モード（リスト）</value></data>
+  <data name="ListLabel" xml:space="preserve"><value>リスト</value></data>
+  <data name="NumberLabel" xml:space="preserve"><value>数字</value></data>
+  <data name="AutoCreatePresetLabel" xml:space="preserve"><value>プリセット自動作成</value></data>
+  <data name="ShowDevFeaturesLabel" xml:space="preserve"><value>開発者機能を表示</value></data>
+  <data name="FeedbackBtn" xml:space="preserve"><value>アイデアや問題はこちらまで</value></data>
+  <data name="SubmitPRBtn" xml:space="preserve"><value>PRを提出</value></data>
+  <data name="EnableInjectionParenLabel" xml:space="preserve"><value>注入を有効化</value></data>
+  <data name="ConfigPresetLabel" xml:space="preserve"><value>設定プリセット:</value></data>
+  <data name="SwitchPresetTooltip" xml:space="preserve"><value>このプリセットに切り替え</value></data>
+  <data name="LockedTag" xml:space="preserve"><value>[ロック中]</value></data>
+  <data name="DeletePresetTooltip" xml:space="preserve"><value>このプリセットを削除</value></data>
+  <data name="NewPresetBtn" xml:space="preserve"><value>新規プリセット</value></data>
+  <data name="ResetAllBtn" xml:space="preserve"><value>すべてリセット</value></data>
+  <data name="AvatarSettingsTitle" xml:space="preserve"><value>アバター置換設定（必要なサイズをアップロード）</value></data>
+  <data name="ImportBtn" xml:space="preserve"><value>インポート</value></data>
+  <data name="CropBtn" xml:space="preserve"><value>切り抜き</value></data>
+  <data name="AvatarFormatsNote" xml:space="preserve"><value>対応形式: PNG, JPG, BMP, WEBP。次回ゲーム起動時に反映。</value></data>
+  <data name="CropAvatarTitle" xml:space="preserve"><value>アバター調整</value></data>
+  <data name="SaveCurrentSizeBtn" xml:space="preserve"><value>現在のサイズを保存</value></data>
+  <data name="BatchApplyAllBtn" xml:space="preserve"><value>全サイズに適用</value></data>
+  <data name="CancelBtn" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="CropHint" xml:space="preserve"><value>* 枠内ドラッグまたはCtrl+マウスホイールで調整</value></data>
+  <data name="Plugin_FpsUnlock" xml:space="preserve"><value>フレームレート制限解除</value></data>
+  <data name="Plugin_TargetFps" xml:space="preserve"><value>目標FPS</value></data>
+  <data name="Plugin_VSync" xml:space="preserve"><value>V-Sync無効化</value></data>
+  <data name="Plugin_TouchScreen" xml:space="preserve"><value>モバイルUIモード有効化</value></data>
+  <data name="Plugin_FovUnlock" xml:space="preserve"><value>視野角変更有効化</value></data>
+  <data name="Plugin_FovValue" xml:space="preserve"><value>カスタムFOV値</value></data>
+  <data name="Plugin_DisableDamageText" xml:space="preserve"><value>ダメージ数値非表示</value></data>
+  <data name="Plugin_DisableCameraMove" xml:space="preserve"><value>カメラ移動無効化（必殺技演出）</value></data>
+  <data name="Plugin_DisableFog" xml:space="preserve"><value>霧効果無効化</value></data>
+  <data name="Plugin_DisableCharFade" xml:space="preserve"><value>キャラクターぼかし防止</value></data>
+  <data name="Plugin_RedirectCraft" xml:space="preserve"><value>合成台リダイレクト有効化</value></data>
+  <data name="Plugin_RemoveTeamAnim" xml:space="preserve"><value>チーム読み込みアニメーション除去</value></data>
+  <data name="Plugin_HideGrass" xml:space="preserve"><value>草非表示</value></data>
+  <data name="Plugin_HideGrassIndiscriminate" xml:space="preserve"><value>無差別草非表示</value></data>
+  <data name="Plugin_EnableCustomTitle" xml:space="preserve"><value>カスタムウィンドウタイトル有効化</value></data>
+  <data name="Plugin_CustomTitleText" xml:space="preserve"><value>カスタムタイトル内容</value></data>
+  <data name="Plugin_ToggleKey" xml:space="preserve"><value>設定再読み込みホットキー</value></data>
+  <data name="Plugin_CraftKey" xml:space="preserve"><value>合成台ホットキー</value></data>
+  <data name="Plugin_HideQuestBanner" xml:space="preserve"><value>クエストバナー非表示</value></data>
+  <data name="Plugin_FovLimitCheck" xml:space="preserve"><value>特殊視野角修正</value></data>
+  <data name="Plugin_HideUID" xml:space="preserve"><value>右下UID非表示</value></data>
+  <data name="Plugin_ClockSpeedup" xml:space="preserve"><value>時刻クイック調整</value></data>
+  <data name="Plugin_AutoCook" xml:space="preserve"><value>料理画面クイック表示</value></data>
+  <data name="Plugin_AutoExpedition" xml:space="preserve"><value>探索派遣画面クイック表示</value></data>
+  <data name="Plugin_AutoCookKey" xml:space="preserve"><value>料理画面ホットキー</value></data>
+  <data name="Plugin_AutoExpeditionKey" xml:space="preserve"><value>探索派遣画面ホットキー</value></data>
+  <data name="Plugin_DisableUnderwaterMask" xml:space="preserve"><value>水中マスク無効化</value></data>
+  <data name="Plugin_EnableRainbowDamage" xml:space="preserve"><value>ダメージ数値色変更有効化</value></data>
+  <data name="Plugin_RainbowDamageMode" xml:space="preserve"><value>0=動的循環 1=固定色</value></data>
+  <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve"><value>固定色インデックス（0-7）</value></data>
+  <data name="Plugin_NetworkToggleKey" xml:space="preserve"><value>ネットワーク切断ホットキー（DEV）</value></data>
+  <data name="Plugin_BlockNetwork" xml:space="preserve"><value>ネットワーク切断クイックモード（DEV）</value></data>
+  <data name="Plugin_EnableNetworkToggle" xml:space="preserve"><value>ネットワーク切断（DEV）</value></data>
+  <data name="Plugin_DebugConsole" xml:space="preserve"><value>デバッグコンソール有効化（DEV）</value></data>
+  <data name="Plugin_DumpOffsets" xml:space="preserve"><value>DumpOffsets（DEV）</value></data>
+  <data name="PageTitle_GameSettings" xml:space="preserve"><value>ゲーム設定</value></data>
+  <data name="SectionGameInstallPath" xml:space="preserve"><value>ゲームインストール場所</value></data>
+  <data name="SelectExeFolderPlaceholder" xml:space="preserve"><value>YuanShen.exeのあるフォルダを選択...</value></data>
+  <data name="ApplyBtn" xml:space="preserve"><value>適用</value></data>
+  <data name="ClearGamePathTooltip" xml:space="preserve"><value>設定済みゲームディレクトリをクリア</value></data>
+  <data name="ConfigureGamePathFirst" xml:space="preserve"><value>先にゲームパスを設定してください</value></data>
+  <data name="ClientStatusTitle" xml:space="preserve"><value>クライアント状態</value></data>
+  <data name="CurrentVersionLabel" xml:space="preserve"><value>現在のバージョン</value></data>
+  <data name="ServerLabel" xml:space="preserve"><value>サーバー</value></data>
+  <data name="DiskUsageLabel" xml:space="preserve"><value>占有容量</value></data>
+  <data name="LatestVersionLabel" xml:space="preserve"><value>最新バージョン</value></data>
+  <data name="CheckingEllipsis" xml:space="preserve"><value>確認中...</value></data>
+  <data name="PreDownloadLabel" xml:space="preserve"><value>事前ダウンロード</value></data>
+  <data name="LatestRedeemCodesTitle" xml:space="preserve"><value>最新コード</value></data>
+  <data name="CopyBtn" xml:space="preserve"><value>コピー</value></data>
+  <data name="NoCodesAvailable" xml:space="preserve"><value>現在利用可能なコードはありません</value></data>
+  <data name="AccountSwitchTitle" xml:space="preserve"><value>アカウント切替</value></data>
+  <data name="ReadFromLocalTooltip" xml:space="preserve"><value>ローカルから読み取り</value></data>
+  <data name="RefreshListTooltip" xml:space="preserve"><value>リスト更新</value></data>
+  <data name="DoubleClickToEditTooltip" xml:space="preserve"><value>ダブルクリックでメモ編集</value></data>
+  <data name="SwitchBtn" xml:space="preserve"><value>切替</value></data>
+  <data name="ResourceMgmtTitle" xml:space="preserve"><value>リソース管理</value></data>
+  <data name="DownloadOrVerifyFiles" xml:space="preserve"><value>ファイルのダウンロードまたは検証</value></data>
+  <data name="SwitchServerTitle" xml:space="preserve"><value>サーバー切替</value></data>
+  <data name="ServerSwitchCaption" xml:space="preserve"><value>公式/Bilibili/グローバル間の切替</value></data>
+  <data name="MapToolsTitle" xml:space="preserve"><value>マップツール</value></data>
+  <data name="ViewTeyvatMap" xml:space="preserve"><value>テイワットマップを見る</value></data>
+  <data name="OfficialAnnouncementsTitle" xml:space="preserve"><value>公式お知らせ</value></data>
+  <data name="EventsAndUpdatesCaption" xml:space="preserve"><value>イベントと更新情報</value></data>
+  <data name="VerifyGameTitle" xml:space="preserve"><value>ゲーム検証</value></data>
+  <data name="VerifyAndRepairCaption" xml:space="preserve"><value>ゲームファイルを検証して修復</value></data>
+  <data name="CreateShortcutTitle" xml:space="preserve"><value>ショートカット作成</value></data>
+  <data name="CreateShortcutCaption" xml:space="preserve"><value>デスクトップにワンクリック起動ショートカットを作成</value></data>
+  <data name="FpsMonitorTitle" xml:space="preserve"><value>ゲーム内FPSモニター</value></data>
+  <data name="FpsMonitorCaption" xml:space="preserve"><value>ゲーム実行中に画面左上にFPS表示（管理者権限が必要）</value></data>
+  <data name="Err_GamePathNotFound" xml:space="preserve"><value>ゲームパスが見つかりません。設定でゲームの場所を指定してください。</value></data>
+  <data name="Title_VerifyGameIntegrity" xml:space="preserve"><value>ゲーム整合性検証</value></data>
+  <data name="Err_GamePathNotSet" xml:space="preserve"><value>ゲームパスが設定されていません。</value></data>
+  <data name="Err_ExeNotFoundInFolder_Format" xml:space="preserve"><value>フォルダ内にゲーム実行ファイルが見つかりません:
+{0}</value></data>
+  <data name="Placeholder_DefaultUseCurrentPreset" xml:space="preserve"><value>デフォルトで現在のプリセットを使用</value></data>
+  <data name="None_Value" xml:space="preserve"><value>なし</value></data>
+  <data name="Msg_ChooseShortcutAction" xml:space="preserve"><value>操作を選択してください:
+	
+	デスクトップショートカットを作成（管理者権限で実行）しますか？
+	それともSteamやスクリプト用に起動コマンドをコピーしますか？</value></data>
+  <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve"><value>起動パラメータをインポートしました: {0}</value></data>
+  <data name="Label_SpecifyInjectionPreset" xml:space="preserve"><value>注入設定（プリセット）を指定:</value></data>
+  <data name="Title_ChooseAction" xml:space="preserve"><value>操作を選択</value></data>
+  <data name="Btn_CreateDesktopShortcut" xml:space="preserve"><value>デスクトップショートカットを作成</value></data>
+  <data name="Btn_CopyLaunchCommand" xml:space="preserve"><value>起動コマンドをコピー</value></data>
+  <data name="FileName_ShortcutName" xml:space="preserve"><value>原神を起動.lnk</value></data>
+  <data name="Desc_ShortcutDescription" xml:space="preserve"><value>FufuLauncherの注入で原神を起動</value></data>
+  <data name="Title_ShortcutCreated" xml:space="preserve"><value>ショートカット作成完了</value></data>
+  <data name="Msg_ShortcutCreated" xml:space="preserve"><value>デスクトップショートカットを作成しました。デフォルトで管理者権限で実行されます。デスクトップをご確認ください。</value></data>
+  <data name="Title_LaunchCommand" xml:space="preserve"><value>起動コマンド</value></data>
+  <data name="Msg_LaunchCommandInstructions" xml:space="preserve"><value>以下は起動コマンドです。CMD、PowerShell、またはSteamの非Steamゲームのターゲットとして使用できます:</value></data>
+  <data name="Btn_CopyAndClose" xml:space="preserve"><value>コピーして閉じる</value></data>
+  <data name="CloseBtn" xml:space="preserve"><value>閉じる</value></data>
+  <data name="Err_OperationFailed_Format" xml:space="preserve"><value>操作に失敗しました: {0}</value></data>
+  <data name="Err_FpsMonitorNeedsAdmin" xml:space="preserve"><value>FPSモニターを有効にできませんでした。この機能には管理者権限での実行が必要です。</value></data>
+  <data name="Msg_NoNewRedeemCodes" xml:space="preserve"><value>現在新しいコードはありません</value></data>
+  <data name="Err_FetchFailedCheckNetwork" xml:space="preserve"><value>取得に失敗しました。ネットワーク接続を確認してください。</value></data>
+  <data name="Btn_Copied" xml:space="preserve"><value>コピー済み</value></data>
+  <data name="Title_PathError" xml:space="preserve"><value>パスエラー</value></data>
+  <data name="Err_CannotCreateGameDir_Format" xml:space="preserve"><value>ゲームディレクトリを作成できませんでした: {0}
+エラー: {1}</value></data>
+  <data name="Err_ConfigIniNotFound_Format" xml:space="preserve"><value>config.iniファイルが見つかりませんでした。
+
+確認したパス:
+{0}
+
+ゲームパス設定が正しくゲームインストールディレクトリを指しているか確認してください</value></data>
+  <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve"><value>これはグローバルクライアントです。Bilibiliサーバーへの切替はここでは許可されていません。サーバー変換を使用して中国サーバーに切り替えてください。</value></data>
+  <data name="Btn_SwitchToOfficialServer" xml:space="preserve"><value>公式サーバーに切替</value></data>
+  <data name="Label_ChooseTargetServer" xml:space="preserve"><value>切り替え先のサーバーを選択してください:</value></data>
+  <data name="Btn_SwitchToBiliServer" xml:space="preserve"><value>Bilibiliサーバーに切替</value></data>
+  <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve"><value>グローバル/中国サーバー間で変換</value></data>
+  <data name="Title_Convert" xml:space="preserve"><value>変換</value></data>
+  <data name="ServerType_Unknown" xml:space="preserve"><value>不明なサーバー</value></data>
+  <data name="ServerType_Global" xml:space="preserve"><value>グローバルサーバー</value></data>
+  <data name="ServerType_Bilibili" xml:space="preserve"><value>Bilibiliサーバー</value></data>
+  <data name="ServerType_Official" xml:space="preserve"><value>公式サーバー</value></data>
+  <data name="ServerType_CustomOther_Format" xml:space="preserve"><value>カスタム/その他（チャンネル: {0}）</value></data>
+  <data name="Err_ReadConfigFailed" xml:space="preserve"><value>設定ファイルの読み取りに失敗しました</value></data>
+  <data name="Title_TeyvatMap" xml:space="preserve"><value>テイワットマップ</value></data>
+  <data name="Title_GlobalClient" xml:space="preserve"><value>グローバルクライアント</value></data>
+  <data name="Msg_GlobalClientInjectionWarning" xml:space="preserve"><value>注意: このランチャーの注入機能は主に中国サーバー向けに設計されています。グローバルクライアントでは動作しないか、予期しないエラーが発生する可能性があります。
+
+続行しますか？</value></data>
+  <data name="Btn_ContinueUsing" xml:space="preserve"><value>続行</value></data>
+  <data name="Btn_DiscardAndClear" xml:space="preserve"><value>破棄してクリア</value></data>
+  <data name="Title_InvalidGamePath" xml:space="preserve"><value>無効なゲームパス</value></data>
+  <data name="Err_ExeNotFoundAtPath_Format" xml:space="preserve"><value>このパスにゲーム実行ファイルが見つかりません ({0})。
+
+ゲーム実行ファイルを含むインストールディレクトリを選択したか確認するか、設定でカスタム名を設定してください。</value></data>
+  <data name="Title_InvalidPath" xml:space="preserve"><value>無効なパス</value></data>
+  <data name="Msg_PathDoesNotExist" xml:space="preserve"><value>パスが存在しません。正しいか確認してください。</value></data>
+  <data name="OkBtn" xml:space="preserve"><value>OK</value></data>
+  <data name="Err_PathProcessingFailed_Format" xml:space="preserve"><value>パス処理に失敗しました: {0}</value></data>
+  <data name="Title_AutoFoundGamePath" xml:space="preserve"><value>ゲームパスを自動検出</value></data>
+  <data name="Msg_DetectedPossiblePath_Format" xml:space="preserve"><value>インストールパスの候補を検出しました:
+
+{0}
+
+このパスを適用しますか？</value></data>
+  <data name="Btn_SelectManually" xml:space="preserve"><value>手動で選択</value></data>
+  <data name="ErrorTitle" xml:space="preserve"><value>エラー</value></data>
+  <data name="Err_CannotOpenFilePicker" xml:space="preserve"><value>ファイル選択を開けません</value></data>
+  <data name="Msg_VersionInfoNotFound" xml:space="preserve"><value>バージョン情報が見つかりません</value></data>
+  <data name="UnknownGeneric" xml:space="preserve"><value>不明</value></data>
+  <data name="FetchFailedShort" xml:space="preserve"><value>取得失敗</value></data>
+  <data name="Msg_HasVersion_Format" xml:space="preserve"><value>利用可能（バージョン {0}）</value></data>
+  <data name="NotAvailableGeneric" xml:space="preserve"><value>なし</value></data>
+  <data name="ServerType_MainlandChina" xml:space="preserve"><value>中国本土サーバー</value></data>
+  <data name="Msg_CannotCalculate" xml:space="preserve"><value>計算できません</value></data>
+  <data name="Err_CannotAccessRegistry" xml:space="preserve"><value>レジストリにアクセスできません</value></data>
+  <data name="Err_NoLoggedInAccount" xml:space="preserve"><value>ログイン済みアカウントが見つかりません（レジストリデータが空です）</value></data>
+  <data name="Err_AccountAlreadySaved" xml:space="preserve"><value>このアカウントは既に保存されています。</value></data>
+  <data name="Placeholder_EnterAccountName" xml:space="preserve"><value>アカウント名を入力（例: メイン / サブ）</value></data>
+  <data name="Title_SaveNewAccount" xml:space="preserve"><value>新規アカウントを保存</value></data>
+  <data name="SaveBtn" xml:space="preserve"><value>保存</value></data>
+  <data name="Prefix_Account_Format" xml:space="preserve"><value>アカウント_{0}</value></data>
+  <data name="Err_SaveFailed_Format" xml:space="preserve"><value>保存に失敗しました: {0}</value></data>
+  <data name="Title_SwitchSuccess" xml:space="preserve"><value>切替成功</value></data>
+  <data name="Msg_SwitchedToAccount_Format" xml:space="preserve"><value>{0} に切り替えました。
+
+反映にはゲームの再起動が必要です！</value></data>
+  <data name="Btn_GotIt" xml:space="preserve"><value>了解</value></data>
+  <data name="Err_SwitchFailed_Format" xml:space="preserve"><value>切替に失敗しました: {0}</value></data>
+  <data name="Title_ConfirmDelete" xml:space="preserve"><value>削除確認</value></data>
+  <data name="Msg_DeleteAccountConfirm_Format" xml:space="preserve"><value>アカウント '{0}' を削除しますか？</value></data>
+  <data name="Err_DeleteFailed_Format" xml:space="preserve"><value>削除に失敗しました: {0}</value></data>
+  <data name="Title_OperationFailed" xml:space="preserve"><value>操作失敗</value></data>
+  <data name="NavHome" xml:space="preserve"><value>ホーム</value></data>
+  <data name="NavControlPanel" xml:space="preserve"><value>コントロールパネル</value></data>
+  <data name="NavAccountSettings" xml:space="preserve"><value>アカウント設定</value></data>
+  <data name="NavOtherFeatures" xml:space="preserve"><value>その他の機能</value></data>
+  <data name="NavDataCenter" xml:space="preserve"><value>データセンター</value></data>
+  <data name="NavHelpDocs" xml:space="preserve"><value>ヘルプ</value></data>
+  <data name="NavCalculator" xml:space="preserve"><value>計算機</value></data>
+  <data name="NavSettings" xml:space="preserve"><value>設定</value></data>
+  <data name="NavCommunity" xml:space="preserve"><value>コミュニティ</value></data>
+  <data name="TrayShowWindow" xml:space="preserve"><value>メインウィンドウを表示</value></data>
+  <data name="TrayExit" xml:space="preserve"><value>終了</value></data>
+  <data name="SysStatusChecking" xml:space="preserve"><value>ネットワーク状態を確認中...</value></data>
+  <data name="NotificationCenter" xml:space="preserve"><value>通知</value></data>
+  <data name="ClearAllBtn" xml:space="preserve"><value>すべてクリア</value></data>
+  <data name="NetDisconnected" xml:space="preserve"><value>ネットワークが切断されました。ネットワーク設定を確認してください。</value></data>
+  <data name="NetProxyWarning" xml:space="preserve"><value>プロキシ接続を使用中です。データ通信量にご注意ください。</value></data>
+  <data name="AdminWarningTitle" xml:space="preserve"><value>警告</value></data>
+  <data name="AdminWarningContent" xml:space="preserve"><value>管理者として実行すると、ファイル選択などの一部の機能に影響する場合があります。</value></data>
+  <data name="DontShowAgain" xml:space="preserve"><value>今後表示しない</value></data>
+  <data name="GotItBtn" xml:space="preserve"><value>了解</value></data>
+  <data name="VcRuntimeMissingTitle" xml:space="preserve"><value>C++ ランタイム不足</value></data>
+  <data name="VcRuntimeMissingContent" xml:space="preserve"><value>システムにC++ VC14 ランタイムライブラリがありません。注入機能に必要です。
+
+MicrosoftのWebサイトからダウンロードしてインストールしますか？</value></data>
+  <data name="GoToDownload" xml:space="preserve"><value>ダウンロードへ (X64)</value></data>
+  <data name="DontRemindAgain" xml:space="preserve"><value>今後通知しない</value></data>
+  <data name="IgnoreWarning" xml:space="preserve"><value>警告を無視</value></data>
+  <data name="AppDisplayNameAdmin" xml:space="preserve"><value>FufuLauncher [Administrator]</value></data>
+  <data name="HiddenFeatureTitle" xml:space="preserve"><value>アクセス不可</value></data>
+  <data name="HiddenFeatureMessage" xml:space="preserve"><value>この機能は非表示です。設定で再度有効にしてください。</value></data>
+  <data name="RedeemCodeExpired" xml:space="preserve"><value>コード期限切れ通知</value></data>
+  <data name="RedeemCodeToday" xml:space="preserve"><value>本日のコード通知</value></data>
+  <data name="RedeemCodeNew" xml:space="preserve"><value>新コード公開</value></data>
+  <data name="RedeemCodeExpiring" xml:space="preserve"><value>コード期限切れ間近</value></data>
+  <data name="HomeTab_Events" xml:space="preserve"><value>イベント</value></data>
+  <data name="HomeTab_Announcements" xml:space="preserve"><value>お知らせ</value></data>
+  <data name="HomeTab_News" xml:space="preserve"><value>ニュース</value></data>
+  <data name="Home_CheckinCard" xml:space="preserve"><value>チェックイン</value></data>
+  <data name="Home_RefreshToken" xml:space="preserve"><value>トークンを更新</value></data>
+  <data name="Home_GoToCheckinConfig" xml:space="preserve"><value>チェックイン設定へ</value></data>
+  <data name="Home_RewardsCalendar" xml:space="preserve"><value>報酬カレンダー</value></data>
+  <data name="Home_DailyNotesCard" xml:space="preserve"><value>原神メモ</value></data>
+  <data name="Home_RefreshNotes" xml:space="preserve"><value>メモを更新</value></data>
+  <data name="Home_NoData" xml:space="preserve"><value>データなし</value></data>
+  <data name="Home_Resin" xml:space="preserve"><value>樹脂</value></data>
+  <data name="Home_DailyQuests" xml:space="preserve"><value>デイリー依頼</value></data>
+  <data name="Home_RealmCurrency" xml:space="preserve"><value>洞天宝銭</value></data>
+  <data name="Home_Expeditions" xml:space="preserve"><value>探索派遣</value></data>
+  <data name="Home_Transformer" xml:space="preserve"><value>参量質変器</value></data>
+  <data name="Home_ToggleBg" xml:space="preserve"><value>背景切替</value></data>
+  <data name="Home_ScreenshotFolder" xml:space="preserve"><value>スクリーンショットフォルダ</value></data>
+  <data name="Home_Widgets" xml:space="preserve"><value>ウィジェット</value></data>
+  <data name="Home_WidgetGacha" xml:space="preserve"><value>祈願履歴分析</value></data>
+  <data name="Home_WidgetAchievement" xml:space="preserve"><value>アチーブメント追跡</value></data>
+  <data name="Home_WidgetInventory" xml:space="preserve"><value>所持品</value></data>
+  <data name="Home_WidgetPlayerRole" xml:space="preserve"><value>キャラクター育成確認</value></data>
+  <data name="Home_WidgetNotes" xml:space="preserve"><value>旅人のメモ</value></data>
+  <data name="Home_WidgetVideo" xml:space="preserve"><value>動画ライブラリ</value></data>
+  <data name="Home_WidgetBBS" xml:space="preserve"><value>戦績</value></data>
+  <data name="Home_AddWidget" xml:space="preserve"><value>ウィジェット追加</value></data>
+  <data name="Home_RemoveWidget" xml:space="preserve"><value>ウィジェット削除</value></data>
+  <data name="Home_ToggleTooltip" xml:space="preserve"><value>詳細ツールチップ切替</value></data>
+  <data name="Home_QuickPresets" xml:space="preserve"><value>クイックプリセット</value></data>
+  <data name="Home_ManagePresets" xml:space="preserve"><value>管理</value></data>
+  <data name="Home_NoPresetsPinned" xml:space="preserve"><value>固定されたプリセットなし</value></data>
+  <data name="Home_SwitchServer" xml:space="preserve"><value>{0} サーバーに切替</value></data>
+  <data name="Home_SwitchOfficial" xml:space="preserve"><value>公式サーバーに切替</value></data>
+  <data name="Home_SwitchBilibili" xml:space="preserve"><value>Bilibiliサーバーに切替</value></data>
+  <data name="Home_SwitchSuccess" xml:space="preserve"><value>切替成功</value></data>
+  <data name="Home_SwitchedTo_Format" xml:space="preserve"><value>{0} サーバーに正常に切り替えました。{1}</value></data>
+  <data name="Home_SwitchFailed" xml:space="preserve"><value>切替失敗</value></data>
+  <data name="Home_RefreshFailed" xml:space="preserve"><value>更新失敗</value></data>
+  <data name="Home_NoActiveAccount" xml:space="preserve"><value>アクティブアカウントなし</value></data>
+  <data name="Home_CannotLoadCredentials" xml:space="preserve"><value>アカウント認証情報を読み込めません</value></data>
+  <data name="Home_BBSSecurityTitle" xml:space="preserve"><value>セキュリティ通知</value></data>
+  <data name="Home_BBSSecurityMessage" xml:space="preserve"><value>戦績ページにアクセスすると、アカウントがリスクアカウントとしてフラグされ、一部機能が正常に動作しなくなる可能性があります。続行しますか？</value></data>
+  <data name="Home_BBSConfirm" xml:space="preserve"><value>確認</value></data>
+  <data name="Home_ErrNoGamePath" xml:space="preserve"><value>有効なゲームパスが見つかりません。設定でゲームの場所を指定してください。</value></data>
+  <data name="Home_ErrConfigNotFound" xml:space="preserve"><value>config.ini設定ファイルが見つかりません。サーバー切替が利用できません。</value></data>
+  <data name="Home_ErrSwitchException" xml:space="preserve"><value>サーバー切替準備中にエラーが発生しました。</value></data>
+  <data name="Home_OfficialServer" xml:space="preserve"><value>公式サーバー</value></data>
+  <data name="Home_BilibiliServer" xml:space="preserve"><value>Bilibiliサーバー</value></data>
+  <data name="Home_Deployed" xml:space="preserve"><value>展開済み</value></data>
+  <data name="Home_Cleaned" xml:space="preserve"><value>クリーン済み</value></data>
+  <data name="Home_OpenLink" xml:space="preserve"><value>リンクを開く</value></data>
+  <data name="Home_OpenLinkFailed" xml:space="preserve"><value>リンクを開けませんでした</value></data>
+  <data name="Home_GachaTooltip" xml:space="preserve"><value>祈願履歴分析: 祈願記録を分析し、抽選統計を表示します</value></data>
+  <data name="Home_AchievementTooltip" xml:space="preserve"><value>アチーブメント追跡: アチーブメント進捗を追跡し、エクスポート・インポートに対応</value></data>
+  <data name="Home_InventoryTooltip" xml:space="preserve"><value>所持品: 現在のアカウントの所持品を表示</value></data>
+  <data name="Home_PlayerRoleTooltip" xml:space="preserve"><value>キャラクター育成確認: キャラクターのレベル、命ノ星座、武器、聖遺物を確認</value></data>
+  <data name="Home_NotesTooltip" xml:space="preserve"><value>旅人のメモ: キャラクター素材秘境などのリアルタイムデータを別ウィンドウで表示</value></data>
+  <data name="Home_VideoTooltip" xml:space="preserve"><value>動画ライブラリ: キャラクターデモやゲーム内カットシーンを閲覧</value></data>
+  <data name="Home_BBSTooltip" xml:space="preserve"><value>戦績: 深境螺旋や幻想真境劇詩などの詳細戦績データを表示</value></data>
+  <data name="OtherPage_Title" xml:space="preserve"><value>その他の設定</value></data>
+  <data name="OtherPage_ExternalPrograms" xml:space="preserve"><value>外部プログラム</value></data>
+  <data name="OtherPage_AdditionalProgramLaunch" xml:space="preserve"><value>追加プログラム起動</value></data>
+  <data name="OtherPage_AutostartExeDesc" xml:space="preserve"><value>ゲームと同時に指定の.exeプログラムを自動起動</value></data>
+  <data name="OtherPage_ProgramPath" xml:space="preserve"><value>プログラムパス</value></data>
+  <data name="OtherPage_PathPlaceholder" xml:space="preserve"><value>例: C:\Tools\MapTool.exe</value></data>
+  <data name="OtherPage_PathHint" xml:space="preserve"><value>ヒント: パス選択後に反応がない場合、手動で貼り付けて適用してください。</value></data>
+  <data name="OtherPage_AccessibilityTools" xml:space="preserve"><value>アクセシビリティツール</value></data>
+  <data name="OtherPage_AutoClicker" xml:space="preserve"><value>自動クリック</value></data>
+  <data name="OtherPage_AutoClickerDesc" xml:space="preserve"><value>トリガーキーまたはマウスボタンを押し続けて高速クリックをシミュレート</value></data>
+  <data name="OtherPage_ClickMode" xml:space="preserve"><value>クリックモード</value></data>
+  <data name="OtherPage_MouseLeft" xml:space="preserve"><value>マウス左ボタン</value></data>
+  <data name="OtherPage_MouseRight" xml:space="preserve"><value>マウス右ボタン</value></data>
+  <data name="OtherPage_MouseModeHint" xml:space="preserve"><value>両方のマウスモードは同時に有効にできません。マウスモードを有効にする前に停止ホットキーを設定してください。</value></data>
+  <data name="OtherPage_TriggerKeyHeader" xml:space="preserve"><value>トリガーキー（押し続けるキー）</value></data>
+  <data name="OtherPage_RecordClick" xml:space="preserve"><value>クリックして記録</value></data>
+  <data name="OtherPage_StopKeyHeader" xml:space="preserve"><value>停止ホットキー（必須）</value></data>
+  <data name="OtherPage_ClickKeyHeader" xml:space="preserve"><value>キーボードクリックキー（キーボードモードのみ）</value></data>
+  <data name="OtherPage_UsageInstructions" xml:space="preserve"><value>使用方法</value></data>
+  <data name="OtherPage_UsageHint" xml:space="preserve"><value>アイコンをクリックして記録開始、任意のキーを押してください。左右マウスボタンモードは排他的で、停止ホットキーを最初に設定する必要があります。</value></data>
+  <data name="OtherPage_UtilityTools" xml:space="preserve"><value>ユーティリティツール</value></data>
+  <data name="OtherPage_Browser" xml:space="preserve"><value>ブラウザ</value></data>
+  <data name="OtherPage_BrowserDesc" xml:space="preserve"><value>常に前面表示に対応した独立フローティングブラウザを開く</value></data>
+  <data name="OtherPage_Open" xml:space="preserve"><value>開く</value></data>
+  <data name="OtherPage_SaveConfig" xml:space="preserve"><value>設定を保存</value></data>
+  <data name="OtherPage_KeyRecorderEnabled" xml:space="preserve"><value>キー記録有効。グローバルキーイベント登録先: {0}</value></data>
+  <data name="OtherPage_KeyRecorderDisabled" xml:space="preserve"><value>キー記録無効。グローバルキーイベント登録解除済み。</value></data>
+  <data name="OtherPage_KeyEventError" xml:space="preserve"><value>キーイベントの登録/解除に失敗しました</value></data>
+  <data name="OtherPage_UnloadCleanupError" xml:space="preserve"><value>ページアンロード時のキーイベントクリーンアップに失敗しました</value></data>
+  <data name="OtherPage_CapturingKey" xml:space="preserve"><value>キー取得中...</value></data>
+  <data name="OtherPage_TriggerKeySet" xml:space="preserve"><value>トリガーキー設定完了</value></data>
+  <data name="OtherPage_ClickKeySet" xml:space="preserve"><value>クリックキー設定完了</value></data>
+  <data name="OtherPage_StopKeySet" xml:space="preserve"><value>停止ホットキー設定完了</value></data>
+  <data name="OtherPage_KeyProcessError" xml:space="preserve"><value>キー処理エラー</value></data>
+  <data name="Account_NotLoggedIn" xml:space="preserve"><value>未ログイン</value></data>
+  <data name="Account_SavedAccounts" xml:space="preserve"><value>保存済みアカウント</value></data>
+  <data name="Account_Login" xml:space="preserve"><value>ログイン</value></data>
+  <data name="Account_DailyCheckin" xml:space="preserve"><value>デイリーチェックイン</value></data>
+  <data name="Account_RefreshInfo" xml:space="preserve"><value>情報更新</value></data>
+  <data name="Account_TravelJournal" xml:space="preserve"><value>旅の記録</value></data>
+  <data name="Account_GachaAnalysis" xml:space="preserve"><value>祈願分析</value></data>
+  <data name="Account_AccountSecurity" xml:space="preserve"><value>アカウントセキュリティ</value></data>
+  <data name="Account_FreezeAccount" xml:space="preserve"><value>アカウント凍結</value></data>
+  <data name="Account_CopyCookie" xml:space="preserve"><value>Cookieをコピー</value></data>
+  <data name="Account_DeleteAccount" xml:space="preserve"><value>アカウント削除</value></data>
+  <data name="Account_Logout" xml:space="preserve"><value>ログアウト</value></data>
+  <data name="Account_CommunityFeed" xml:space="preserve"><value>コミュニティフィード</value></data>
+  <data name="Account_Likes" xml:space="preserve"><value>いいね</value></data>
+  <data name="Account_Posts" xml:space="preserve"><value>投稿</value></data>
+  <data name="Account_Replies" xml:space="preserve"><value>返信</value></data>
+  <data name="Account_BoundCharacters" xml:space="preserve"><value>紐付きキャラクター</value></data>
+  <data name="Account_NoCharacters" xml:space="preserve"><value>紐付きキャラクターなし</value></data>
+  <data name="Account_BindHint" xml:space="preserve"><value>MiYouSheまたはゲーム内でキャラクターを紐付けてから更新してください</value></data>
+  <data name="Account_PlayTime" xml:space="preserve"><value>プレイ時間</value></data>
+  <data name="Account_RecentDays_Format" xml:space="preserve"><value>過去 {0} 日間</value></data>
+  <data name="Account_InGame" xml:space="preserve"><value>ゲーム内</value></data>
+  <data name="Account_TotalTime" xml:space="preserve"><value>合計時間</value></data>
+  <data name="Account_DailyAvg" xml:space="preserve"><value>日次平均</value></data>
+  <data name="Account_NoRecentRecords_Format" xml:space="preserve"><value>過去 {0} 日間のゲーム記録なし</value></data>
+  <data name="Account_DeleteAccountConfirm_Format" xml:space="preserve"><value>アカウント &quot;{0}&quot; を削除しますか？認証情報、祈願履歴、クラウドゲーム認証情報など、すべての関連データが削除され、復元できません。</value></data>
+  <data name="Account_DeleteComplete" xml:space="preserve"><value>アカウント &quot;{0}&quot; が削除されました。</value></data>
+  <data name="Account_DeleteException" xml:space="preserve"><value>アカウント削除エラー</value></data>
+  <data name="Account_DeleteBtn" xml:space="preserve"><value>削除</value></data>
+  <data name="Account_CheckingIn" xml:space="preserve"><value>チェックイン中...</value></data>
+  <data name="Account_CheckinComplete" xml:space="preserve"><value>チェックイン完了</value></data>
+  <data name="Account_CheckinFailed" xml:space="preserve"><value>チェックイン失敗</value></data>
+  <data name="Account_CheckinException" xml:space="preserve"><value>チェックインエラー</value></data>
+  <data name="Account_LoginFailed" xml:space="preserve"><value>ログイン失敗</value></data>
+  <data name="Account_OtherOperations" xml:space="preserve"><value>その他の操作</value></data>
+  <data name="Account_RecentDays30" xml:space="preserve"><value>過去 30 日間</value></data>
+  <data name="Account_NoRecentRecords30" xml:space="preserve"><value>過去 30 日間のゲーム記録なし</value></data>
+  <data name="Account_CopyUID" xml:space="preserve"><value>UIDをコピー</value></data>
+  <data name="Account_DeleteCurrent" xml:space="preserve"><value>現在のアカウントを削除</value></data>
+  <data name="Account_DeleteCurrentConfirm_Format" xml:space="preserve"><value>現在のアカウント {0} ({1}) を削除してもよろしいですか？すべての関連データが削除され、復元できません。</value></data>
+  <data name="LoginQR_Title" xml:space="preserve"><value>QRコードログイン</value></data>
+  <data name="LoginQR_MiyousheQR" xml:space="preserve"><value>MiYouSheアプリ QRログイン</value></data>
+  <data name="LoginQR_WebPassport" xml:space="preserve"><value>Webパスポートログイン</value></data>
+  <data name="LoginQR_HoYoLABWeb" xml:space="preserve"><value>HoYoLAB Webログイン</value></data>
+  <data name="LoginQR_GameAppId" xml:space="preserve"><value>ゲームApp ID:</value></data>
+  <data name="LoginQR_EnterAppId" xml:space="preserve"><value>App IDを入力</value></data>
+  <data name="LoginQR_ConfirmGenerate" xml:space="preserve"><value>生成</value></data>
+  <data name="LoginQR_RefreshQR" xml:space="preserve"><value>QRコードを更新</value></data>
+  <data name="LoginQR_WebLoginWarning" xml:space="preserve"><value>注意: WebパスポートログインではStokenを取得できません。一部機能が利用不可になります。</value></data>
+  <data name="LoginQR_ManualCookie" xml:space="preserve"><value>Cookieを手動入力</value></data>
+  <data name="LoginQR_ClearHistory" xml:space="preserve"><value>ログイン履歴をクリア</value></data>
+  <data name="Panel_Toolbox" xml:space="preserve"><value>ツールボックス</value></data>
+  <data name="Panel_DataAnalysis" xml:space="preserve"><value>データ分析</value></data>
+  <data name="Panel_DataAnalysisDesc" xml:space="preserve"><value>統計、達成状況、長期データを追跡</value></data>
+  <data name="Panel_TravelerProfile" xml:space="preserve"><value>旅人プロフィール</value></data>
+  <data name="Panel_TravelerProfileDesc" xml:space="preserve"><value>キャラクター、所持品、メモ、MiYouShe戦績情報</value></data>
+  <data name="Panel_Resources" xml:space="preserve"><value>リソース</value></data>
+  <data name="Panel_ResourcesDesc" xml:space="preserve"><value>メディアとリソースライブラリ</value></data>
+  <data name="LaunchBtn_SelectPath" xml:space="preserve"><value>ゲームパスを選択</value></data>
+  <data name="LaunchBtn_ExitGame" xml:space="preserve"><value>ゲーム終了</value></data>
+  <data name="LaunchBtn_StartGame" xml:space="preserve"><value>ゲーム起動</value></data>
+  <data name="LaunchBtn_Terminating" xml:space="preserve"><value>ゲーム終了中...</value></data>
+  <data name="Checkin_Signed" xml:space="preserve"><value>本日チェックイン済み</value></data>
+  <data name="Checkin_Unsigned" xml:space="preserve"><value>未チェックイン</value></data>
+  <data name="LaunchErr_NoGamePath" xml:space="preserve"><value>ゲームパス未設定</value></data>
+  <data name="LaunchErr_NoGamePathMsg" xml:space="preserve"><value>ゲーム管理ページで先にゲームインストールパスを設定してください。</value></data>
+  <data name="LaunchErr_LaunchFailed" xml:space="preserve"><value>ゲーム起動失敗</value></data>
+  <data name="Screenshot_FolderNotFound" xml:space="preserve"><value>スクリーンショットフォルダが見つかりません</value></data>
+  <data name="Screenshot_FolderNotFoundMsg" xml:space="preserve"><value>先にゲーム内でスクリーンショットを撮るか、ランチャーのスクリーンショット機能を使用してください。</value></data>
+  <data name="Announcement_Title" xml:space="preserve"><value>お知らせ</value></data>
+  <data name="Announcement_Loading" xml:space="preserve"><value>お知らせを読み込み中...</value></data>
+  <data name="CommunityPage_Back" xml:space="preserve"><value>戻る</value></data>
+  <data name="CommunityPage_Forward" xml:space="preserve"><value>進む</value></data>
+  <data name="CommunityPage_Refresh" xml:space="preserve"><value>更新</value></data>
+  <data name="HelpPage_SearchPlaceholder" xml:space="preserve"><value>タイトル、ファイル名、内容を検索...</value></data>
+  <data name="AboutPage_GetBuildFromActions" xml:space="preserve"><value>GitHub Actionsからビルドを取得</value></data>
+  <data name="AboutPage_Contributors" xml:space="preserve"><value>貢献者</value></data>
+  <data name="AboutPage_LoadFailed" xml:space="preserve"><value>読み込み失敗</value></data>
+  <data name="AboutPage_ReportIssue" xml:space="preserve"><value>問題を報告</value></data>
+  <data name="AboutPage_OfficialWebsite" xml:space="preserve"><value>公式サイト</value></data>
+  <data name="AboutPage_ContactAuthor" xml:space="preserve"><value>作者に連絡</value></data>
+  <data name="SponsorWindow_Title" xml:space="preserve"><value>スポンサー</value></data>
+  <data name="SponsorWindow_OnlyWeChat" xml:space="preserve"><value>現在WeChatのみ対応しています。Alipayやその他の支払い方法はご利用いただけません。</value></data>
+  <data name="SponsorWindow_QrCodeFailed" xml:space="preserve"><value>QRコードの読み込みに失敗しました</value></data>
+  <data name="SponsorWindow_Disclaimer" xml:space="preserve"><value>寄付により、スポンサーシップは返金不可であることを了承したものとします。</value></data>
+  <data name="StarPrompt_Support" xml:space="preserve"><value>応援する</value></data>
+  <data name="StarPrompt_Message" xml:space="preserve"><value>FufuLauncherがお役に立ちましたか？GitHubで⭐をお願いします！</value></data>
+  <data name="StarPrompt_GoToGitHub" xml:space="preserve"><value>GitHubでスター</value></data>
+  <data name="StarPrompt_Later" xml:space="preserve"><value>後で通知</value></data>
+  <data name="StarPrompt_GotIt" xml:space="preserve"><value>了解</value></data>
+  <data name="AchievementUpdater_Title" xml:space="preserve"><value>アチーブメントデータ更新</value></data>
+  <data name="AchievementUpdater_StartFetch" xml:space="preserve"><value>取得開始</value></data>
+  <data name="AdvancedServerSwitch_Title" xml:space="preserve"><value>サーバー切替</value></data>
+  <data name="AdvancedServerSwitch_Warning" xml:space="preserve"><value>注意: ゲーム起動中は切替が無効です！</value></data>
+  <data name="AdvancedServerSwitch_Convert" xml:space="preserve"><value>ワンクリック変換</value></data>
+  <data name="Agreement_Title" xml:space="preserve"><value>利用規約</value></data>
+  <data name="BackgroundInit_Initializing" xml:space="preserve"><value>背景リソースを初期化中...</value></data>
+  <data name="BackgroundInit_PleaseWait" xml:space="preserve"><value>キャッシュに時間がかかる場合があります。お待ちください...</value></data>
+  <data name="CheckinCalendar_Title" xml:space="preserve"><value>チェックイン報酬カレンダー</value></data>
+  <data name="CloudCredential_Title" xml:space="preserve"><value>クラウドゲーム認証情報</value></data>
+  <data name="CloudCredential_AddTitle" xml:space="preserve"><value>クラウドゲーム認証情報を追加</value></data>
+  <data name="HiddenPage_Title" xml:space="preserve"><value>機能が非表示</value></data>
+  <data name="HiddenPage_Message" xml:space="preserve"><value>この機能は非表示になっています。使用するには 設定 → 外観と個人設定 → ナビゲーションバー表示項目 で再度有効にしてください。</value></data>
+  <data name="HiddenPage_BackToHome" xml:space="preserve"><value>ホームに戻る</value></data>
+  <data name="PreDownload_Title" xml:space="preserve"><value>ゲーム事前ダウンロード</value></data>
+  <data name="PreDownload_Description" xml:space="preserve"><value>新バージョンの更新データを事前に取得。自動処理です。</value></data>
+  <data name="PreDownload_Start" xml:space="preserve"><value>事前ダウンロード開始</value></data>
+  <data name="PresetManager_Title" xml:space="preserve"><value>プリセット管理</value></data>
+  <data name="PresetManager_SelectHint" xml:space="preserve"><value>ホームページに固定するプリセットを選択（最大5つ）</value></data>
+  <data name="SecurityWeb_Title" xml:space="preserve"><value>開発者ライセンス認証</value></data>
+  <data name="VerifyGame_Title" xml:space="preserve"><value>ゲームファイル整合性チェック</value></data>
+  <data name="VerifyGame_Description" xml:space="preserve"><value>ローカルファイルを検証し、破損または欠落しているファイルを自動修復します。時間がかかる場合がありますのでお待ちください。</value></data>
+  <data name="VerifyGame_Start" xml:space="preserve"><value>検証開始</value></data>
+  <data name="FeedbackWindow_Title" xml:space="preserve"><value>フィードバック送信</value></data>
+  <data name="FeedbackWindow_SelectType" xml:space="preserve"><value>送信するフィードバックの種類を選択してください:</value></data>
+  <data name="FeedbackWindow_FeatureRequest" xml:space="preserve"><value>アイデア・機能リクエストを送信</value></data>
+  <data name="FeedbackWindow_FeatureRequestDesc" xml:space="preserve"><value>新しいアイデアや機能リクエストがありますか？GitHubで提出してください。</value></data>
+  <data name="FeedbackWindow_BugReport" xml:space="preserve"><value>問題/バグを報告</value></data>
+  <data name="FeedbackWindow_BugReportDesc" xml:space="preserve"><value>エラーや予期しない動作がありましたか？GitHubでバグ報告を提出してください。</value></data>
+  <data name="AnnouncementWindow_GameAnnouncement" xml:space="preserve"><value>ゲームお知らせ</value></data>
+  <data name="DownloadWindow_Title" xml:space="preserve"><value>リソースダウンローダー</value></data>
+  <data name="DownloadWindow_GameResourceUpdate" xml:space="preserve"><value>ゲームリソース更新</value></data>
+  <data name="DownloadWindow_StuckIsNormal" xml:space="preserve"><value>ダウンロード中の停止は正常です</value></data>
+  <data name="DownloadWindow_InstallDir" xml:space="preserve"><value>インストール先</value></data>
+  <data name="DownloadWindow_VoiceLanguage" xml:space="preserve"><value>ボイスパック言語</value></data>
+  <data name="DownloadWindow_DownloadBaseGame" xml:space="preserve"><value>基本ゲームデータをダウンロード</value></data>
+  <data name="DownloadWindow_BaseGameTooltip" xml:space="preserve"><value>オフでボイスパックのみ更新</value></data>
+  <data name="DownloadWindow_ShowDetailLog" xml:space="preserve"><value>詳細ログを表示</value></data>
+  <data name="DownloadWindow_Ready" xml:space="preserve"><value>準備完了</value></data>
+  <data name="DownloadWindow_StartDownload" xml:space="preserve"><value>ダウンロード開始</value></data>
+  <data name="DownloadWindow_Cancel" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="BBSWindow_Title" xml:space="preserve"><value>戦績</value></data>
+  <data name="BBSWindow_SwitchIdentity" xml:space="preserve"><value>識別切替</value></data>
+  <data name="BBSWindow_EnterUrl" xml:space="preserve"><value>URLを入力...</value></data>
+  <data name="BBSWindow_Go" xml:space="preserve"><value>移動</value></data>
+  <data name="BBSWindow_Save" xml:space="preserve"><value>保存</value></data>
+  <data name="BBSWindow_Copy" xml:space="preserve"><value>コピー</value></data>
+  <data name="BrowserWindow_Title" xml:space="preserve"><value>ブラウザ</value></data>
+  <data name="BrowserWindow_EnterUrl" xml:space="preserve"><value>URLを入力...</value></data>
+  <data name="BrowserWindow_Refresh" xml:space="preserve"><value>更新</value></data>
+  <data name="BrowserWindow_Settings" xml:space="preserve"><value>設定</value></data>
+  <data name="BrowserWindow_PinWindow" xml:space="preserve"><value>ウィンドウ固定</value></data>
+  <data name="BrowserWindow_SettingsTitle" xml:space="preserve"><value>ブラウザ設定</value></data>
+  <data name="BrowserWindow_DefaultHomepage" xml:space="preserve"><value>デフォルトホームページ（URL）</value></data>
+  <data name="BrowserWindow_DefaultZoom" xml:space="preserve"><value>デフォルトズーム</value></data>
+  <data name="BrowserWindow_VideoHotkeys" xml:space="preserve"><value>動画操作ホットキー（JS KeyCode）</value></data>
+  <data name="BrowserWindow_RewindKey" xml:space="preserve"><value>戻るキー</value></data>
+  <data name="BrowserWindow_ForwardKey" xml:space="preserve"><value>進むキー</value></data>
+  <data name="BrowserWindow_HotkeyHint" xml:space="preserve"><value>ヒント: 一般的なキーは ArrowLeft, ArrowRight, KeyA, KeyD</value></data>
+  <data name="BrowserWindow_PerformanceSettings" xml:space="preserve"><value>パフォーマンス設定</value></data>
+  <data name="BrowserWindow_RaisePriority" xml:space="preserve"><value>プロセス優先度を上げる（ゲーム内のラグ防止）</value></data>
+  <data name="MapPage_Title" xml:space="preserve"><value>テイワットマップ</value></data>
+  <data name="MapPage_Refresh" xml:space="preserve"><value>更新</value></data>
+  <data name="MapPage_LockMapOff" xml:space="preserve"><value>マップ固定（オフ）</value></data>
+  <data name="MapPage_TopMostOff" xml:space="preserve"><value>最前面表示（オフ）</value></data>
+  <data name="PluginConfigPage_Title" xml:space="preserve"><value>プラグイン設定</value></data>
+  <data name="PluginConfigPage_AdjustParams" xml:space="preserve"><value>プラグインパラメータ調整</value></data>
+  <data name="PluginConfigPage_PluginInfo" xml:space="preserve"><value>プラグイン情報</value></data>
+  <data name="UpdateNotification_Title" xml:space="preserve"><value>バージョン更新通知</value></data>
+  <data name="UpdateNotification_UpdateNow" xml:space="preserve"><value>今すぐ更新</value></data>
+  <data name="VideoResources_Title" xml:space="preserve"><value>動画ライブラリ</value></data>
+  <data name="VideoResources_CharacterVideos" xml:space="preserve"><value>キャラクター動画</value></data>
+  <data name="VideoResources_Play" xml:space="preserve"><value>再生</value></data>
+  <data name="VideoResources_Download" xml:space="preserve"><value>ダウンロード</value></data>
+  <data name="VideoResources_CutsceneVideos" xml:space="preserve"><value>カットシーン動画</value></data>
+  <data name="ScreenshotGallery_Title" xml:space="preserve"><value>スクリーンショットギャラリー</value></data>
+  <data name="ScreenshotGallery_BackToGallery" xml:space="preserve"><value>ギャラリーに戻る</value></data>
+  <data name="ScreenshotGallery_Copy" xml:space="preserve"><value>コピー</value></data>
+  <data name="ScreenshotGallery_Cut" xml:space="preserve"><value>切り取り</value></data>
+  <data name="ScreenshotGallery_Delete" xml:space="preserve"><value>削除</value></data>
+  <data name="ScreenshotGallery_OpenFolder" xml:space="preserve"><value>画像フォルダを開く</value></data>
+  <data name="ScreenshotGallery_OpenWithApp" xml:space="preserve"><value>システムアプリで開く</value></data>
+  <data name="ScreenshotGallery_NoScreenshots" xml:space="preserve"><value>まだスクリーンショットがありません</value></data>
+  <data name="ScreenshotGallery_OpenScreenshotFolder" xml:space="preserve"><value>スクリーンショットフォルダを開く</value></data>
+  <data name="GachaDialog_Title" xml:space="preserve"><value>祈願統計分析</value></data>
+  <data name="GachaDialog_Close" xml:space="preserve"><value>閉じる</value></data>
+  <data name="GachaDialog_GachaRecordLink" xml:space="preserve"><value>祈願記録リンク</value></data>
+  <data name="GachaDialog_PasteUrl" xml:space="preserve"><value>authkey付きURLを貼り付け</value></data>
+  <data name="GachaDialog_StartAnalysis" xml:space="preserve"><value>分析開始</value></data>
+  <data name="GachaDialog_ExportUigf" xml:space="preserve"><value>UIGFエクスポート</value></data>
+  <data name="GachaDialog_ExportUigfTooltip" xml:space="preserve"><value>標準UIGF JSON形式でデスクトップにエクスポート</value></data>
+  <data name="GachaDialog_TotalInvested" xml:space="preserve"><value>合計: </value></data>
+  <data name="GachaDialog_Pulls" xml:space="preserve"><value> 回</value></data>
+  <data name="GachaDialog_CurrentPity" xml:space="preserve"><value>現在の天井</value></data>
+  <data name="GachaDialog_FiveStarCount" xml:space="preserve"><value>★5数</value></data>
+  <data name="GachaDialog_FiveStarRecords" xml:space="preserve"><value>★5記録</value></data>
+  <data name="GachaDialog_BasicFeatureNote" xml:space="preserve"><value>基本機能です。詳細分析には専用ツールをご利用ください。</value></data>
+  <data name="HighCpuUsage_Title" xml:space="preserve"><value>パフォーマンス異常警告</value></data>
+  <data name="HighCpuUsage_Detected" xml:space="preserve"><value>異常な長期リソース使用を検出</value></data>
+  <data name="HighCpuUsage_Description" xml:space="preserve"><value>OBS未検出の状態で、FufuLauncherのCPU使用率が5分間30%を超えています。通常これは正常ではありません。</value></data>
+  <data name="HighCpuUsage_SuggestedAction" xml:space="preserve"><value>推奨アクション</value></data>
+  <data name="HighCpuUsage_SuggestionText" xml:space="preserve"><value>問題を報告して診断にご協力ください。問題が続く場合は最新版に更新してください。</value></data>
+  <data name="HighCpuUsage_Dismiss" xml:space="preserve"><value>閉じる</value></data>
+  <data name="HighCpuUsage_Report" xml:space="preserve"><value>問題を報告</value></data>
+  <data name="HighCpuUsage_ExitLauncher" xml:space="preserve"><value>ランチャーを終了</value></data>
+  <data name="Diagnostics_Title" xml:space="preserve"><value>システム診断</value></data>
+  <data name="Diagnostics_HardwareAndSystem" xml:space="preserve"><value>ハードウェアとシステム環境</value></data>
+  <data name="Diagnostics_CollectingInfo" xml:space="preserve"><value>システム情報収集中...</value></data>
+  <data name="Diagnostics_DisplayAndGraphics" xml:space="preserve"><value>ディスプレイとグラフィック</value></data>
+  <data name="Diagnostics_Resolution" xml:space="preserve"><value>解像度</value></data>
+  <data name="Diagnostics_RefreshRate" xml:space="preserve"><value>リフレッシュレート</value></data>
+  <data name="Diagnostics_Hardware" xml:space="preserve"><value>ハードウェア</value></data>
+  <data name="Diagnostics_SecurityAndNetwork" xml:space="preserve"><value>セキュリティとネットワーク</value></data>
+  <data name="Diagnostics_WindowsSecurity" xml:space="preserve"><value>Windows セキュリティセンター</value></data>
+  <data name="Diagnostics_DiskSpace" xml:space="preserve"><value>システムディスク空き容量</value></data>
+  <data name="Diagnostics_NetworkStatus" xml:space="preserve"><value>ネットワーク状態</value></data>
+  <data name="Diagnostics_NetworkRegion" xml:space="preserve"><value>ネットワーク地域</value></data>
+  <data name="Diagnostics_Suggestion" xml:space="preserve"><value>提案</value></data>
+  <data name="DailyNote_Title" xml:space="preserve"><value>テイワットスケジュール</value></data>
+  <data name="DailyNote_TodayMaterials" xml:space="preserve"><value>今日の素材</value></data>
+  <data name="DailyNote_RefreshStatus" xml:space="preserve"><value>現在の更新状態</value></data>
+  <data name="DailyNote_RefreshData" xml:space="preserve"><value>データ更新</value></data>
+  <data name="DailyNote_MaterialDropHint" xml:space="preserve"><value>日次収集、天賦書、武器突破素材のドロップ通知</value></data>
+  <data name="DailyNote_TodayBirthday" xml:space="preserve"><value>今日の誕生日</value></data>
+  <data name="DailyNote_CharacterWeapon" xml:space="preserve"><value>キャラクター / 武器</value></data>
+  <data name="DailyNote_RecentActivities" xml:space="preserve"><value>最近のアクティビティ</value></data>
+  <data name="DailyNote_ActivityOverview" xml:space="preserve"><value>アクティビティ概要</value></data>
+  <data name="DailyNote_ActivityDesc" xml:space="preserve"><value>現在のイベントと残り時間を一目で確認。</value></data>
+  <data name="GenshinData_Title" xml:space="preserve"><value>旅の記録 - テイワット財務報告</value></data>
+  <data name="GenshinData_TravelJournal" xml:space="preserve"><value>旅の記録</value></data>
+  <data name="GenshinData_DataUpdated" xml:space="preserve"><value>データ更新: </value></data>
+  <data name="GenshinData_TodayEarnings" xml:space="preserve"><value>本日の収入</value></data>
+  <data name="GenshinData_Primogems" xml:space="preserve"><value>原石</value></data>
+  <data name="GenshinData_Mora" xml:space="preserve"><value>モラ</value></data>
+  <data name="GenshinData_MonthTotal" xml:space="preserve"><value>月間合計</value></data>
+  <data name="GenshinData_PrimogemsEarned" xml:space="preserve"><value>獲得原石</value></data>
+  <data name="GenshinData_Mom" xml:space="preserve"><value>前月比 </value></data>
+  <data name="GenshinData_LastMonth" xml:space="preserve"><value>（先月 </value></data>
+  <data name="GenshinData_MoraEarned" xml:space="preserve"><value>獲得モラ</value></data>
+  <data name="GenshinData_DataNote" xml:space="preserve"><value>• 日次データは通常翌朝更新&#x0a;• 収入レベルは原石獲得効率に基づき計算</value></data>
+  <data name="GenshinData_MonthlySourceAnalysis" xml:space="preserve"><value>月間原石獲得源分析</value></data>
+  <data name="GenshinData_Total" xml:space="preserve"><value>合計</value></data>
+  <data name="DataPage_SearchRole" xml:space="preserve"><value>キャラ検索...</value></data>
+  <data name="DataPage_AllRoles" xml:space="preserve"><value>全キャラクター</value></data>
+  <data name="DataPage_Only5Star" xml:space="preserve"><value>★5のみ</value></data>
+  <data name="DataPage_Only4Star" xml:space="preserve"><value>★4のみ</value></data>
+  <data name="DataPage_StarUnit" xml:space="preserve"><value>★</value></data>
+  <data name="DataPage_Talents" xml:space="preserve"><value>天賦</value></data>
+  <data name="DataPage_ConstellationDist" xml:space="preserve"><value>命ノ星座（無/1/2凸）</value></data>
+  <data name="DataPage_AvgDmg" xml:space="preserve"><value>平均ダメージ</value></data>
+  <data name="DataPage_TopWeapons" xml:space="preserve"><value>人気武器</value></data>
+  <data name="DataPage_TopArtifacts" xml:space="preserve"><value>人気聖遺物</value></data>
+  <data name="DataPage_AvgInterval" xml:space="preserve"><value>平均間隔:</value></data>
+  <data name="DataPage_MinInterval" xml:space="preserve"><value>最小間隔:</value></data>
+  <data name="DataPage_HistoryRerun" xml:space="preserve"><value>復刻履歴:</value></data>
+  <data name="DataPage_LoadingTimeline" xml:space="preserve"><value>タイムラインデータ読み込み中...</value></data>
+  <data name="DataPage_UsageRate" xml:space="preserve"><value>使用率</value></data>
+  <data name="DataPage_SpeedrunTime" xml:space="preserve"><value>タイムアタック</value></data>
+  <data name="DataPage_OwnRate" xml:space="preserve"><value>所持率</value></data>
+  <data name="DataPage_AvgConstellation" xml:space="preserve"><value>平均命ノ星座</value></data>
+  <data name="DataPage_AvgTime" xml:space="preserve"><value>平均時間</value></data>
+  <data name="DataPage_ClickToView" xml:space="preserve"><value>クリックで拡大</value></data>
+  <data name="DataPage_5Star" xml:space="preserve"><value>★5</value></data>
+  <data name="DataPage_4Star" xml:space="preserve"><value>★4</value></data>
+  <data name="DataPage_RoleData" xml:space="preserve"><value>キャラデータ</value></data>
+  <data name="DataPage_AbyssData" xml:space="preserve"><value>深境螺旋</value></data>
+  <data name="DataPage_SpiralAbyss" xml:space="preserve"><value>深境螺旋</value></data>
+  <data name="DataPage_WishData" xml:space="preserve"><value>祈願データ</value></data>
+  <data name="DataPage_RerunTimer" xml:space="preserve"><value>復刻タイマー</value></data>
+  <data name="DataPage_Timeline" xml:space="preserve"><value>タイムライン</value></data>
+  <data name="DataPage_DataProvidedBy" xml:space="preserve"><value>キャラデータ: Teyvat Assistant。復刻タイマー: Paimon.moe。</value></data>
+  <data name="HDR_SaveAndApply" xml:space="preserve"><value>保存して適用</value></data>
+  <data name="HDR_BrightnessConfig" xml:space="preserve"><value>HDR輝度設定</value></data>
+  <data name="HDR_NotSupported" xml:space="preserve"><value>HDR未対応</value></data>
+  <data name="HDR_NotSupportedMsg" xml:space="preserve"><value>現在のモニターはHDR非対応と報告しています。</value></data>
+  <data name="HDR_NotEnabled" xml:space="preserve"><value>HDR未有効</value></data>
+  <data name="HDR_NotEnabledMsg" xml:space="preserve"><value>Windows HDRモードが有効になっていません。自動調整が不正確になる可能性があります。</value></data>
+  <data name="HDR_DisplayInfo" xml:space="preserve"><value>ディスプレイ情報</value></data>
+  <data name="HDR_SwitchSetting" xml:space="preserve"><value>HDR切替設定（起動毎に強制適用）</value></data>
+  <data name="HDR_OffContent" xml:space="preserve"><value>HDR無効（レジストリ値0）</value></data>
+  <data name="HDR_OnContent" xml:space="preserve"><value>HDR有効（レジストリ値1）</value></data>
+  <data name="HDR_RegistryNote" xml:space="preserve"><value>注意: 保存するとレジストリが即時変更され、次回ゲーム起動時に自動再適用されます。</value></data>
+  <data name="HDR_MaxLuminance" xml:space="preserve"><value>最大輝度</value></data>
+  <data name="HDR_SceneLuminance" xml:space="preserve"><value>ペーパーホワイト</value></data>
+  <data name="HDR_UILuminance" xml:space="preserve"><value>UIホワイト</value></data>
+  <data name="HDR_ResetDefault" xml:space="preserve"><value>デフォルトに戻す</value></data>
+  <data name="HDR_AutoAdjust" xml:space="preserve"><value>自動調整</value></data>
+  <data name="HDR_AutoAdjustTooltip" xml:space="preserve"><value>ディスプレイデータに基づき自動計算</value></data>
+  <data name="InventoryWindow_Title" xml:space="preserve"><value>インベントリと目標計画</value></data>
+  <data name="InventoryWindow_ArchiveTitle" xml:space="preserve"><value>インベントリアーカイブ</value></data>
+  <data name="InventoryWindow_SyncStatus" xml:space="preserve"><value>現在の同期状態</value></data>
+  <data name="InventoryWindow_RefreshData" xml:space="preserve"><value>データ更新</value></data>
+  <data name="InventoryWindow_MyBag" xml:space="preserve"><value>所持品</value></data>
+  <data name="InventoryWindow_InventoryOverview" xml:space="preserve"><value>インベントリ概要</value></data>
+  <data name="InventoryWindow_OverviewDesc" xml:space="preserve"><value>現在の所持数を確認し、バッジで目標達成アイテムを素早く特定。</value></data>
+  <data name="InventoryWindow_GoalCheckHint" xml:space="preserve"><value>目標達成時にチェックマーク表示</value></data>
+  <data name="InventoryWindow_Complete" xml:space="preserve"><value>完了</value></data>
+  <data name="InventoryWindow_GoalSetting" xml:space="preserve"><value>目標設定</value></data>
+  <data name="InventoryWindow_GoalPlanning" xml:space="preserve"><value>目標計画</value></data>
+  <data name="InventoryWindow_GoalDesc" xml:space="preserve"><value>よく使う素材の目標数を設定すると、インベントリページで達成状況を確認できます。</value></data>
+  <data name="InventoryWindow_ItemName" xml:space="preserve"><value>アイテム名</value></data>
+  <data name="InventoryWindow_TargetCount" xml:space="preserve"><value>目標数</value></data>
+  <data name="InventoryWindow_GoalMetHint" xml:space="preserve"><value>目標達成時、アイテムカードに完了バッジが表示されます。</value></data>
+  <data name="AchievementWindow_Title" xml:space="preserve"><value>アチーブメントマネージャー</value></data>
+  <data name="AchievementWindow_Archive" xml:space="preserve"><value>アチーブメントアーカイブ</value></data>
+  <data name="AchievementWindow_ViewGuide" xml:space="preserve"><value>ガイドを見る</value></data>
+  <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve"><value>MiYouSheでこのアチーブメントのガイドを検索</value></data>
+  <data name="AchievementWindow_SwitchView" xml:space="preserve"><value>表示切替</value></data>
+  <data name="AchievementWindow_PrimogemTooltip" xml:space="preserve"><value>原石: 獲得 / 合計</value></data>
+  <data name="AchievementWindow_ProgressTooltip" xml:space="preserve"><value>アチーブメント進捗</value></data>
+  <data name="AchievementWindow_SearchPlaceholder" xml:space="preserve"><value>アチーブメント名、説明を検索...</value></data>
+  <data name="AchievementWindow_Version" xml:space="preserve"><value>バージョン</value></data>
+  <data name="AchievementWindow_HiddenComplete" xml:space="preserve"><value>完了済みを非表示</value></data>
+  <data name="AchievementWindow_ShowAll" xml:space="preserve"><value>すべて表示</value></data>
+  <data name="AchievementWindow_UIAFImport" xml:space="preserve"><value>UIAFインポート</value></data>
+  <data name="AchievementWindow_UIAFExport" xml:space="preserve"><value>UIAFエクスポート</value></data>
+  <data name="AchievementWindow_ImportRecords" xml:space="preserve"><value>レコードインポート</value></data>
+  <data name="AchievementWindow_ManualSave" xml:space="preserve"><value>手動保存</value></data>
+  <data name="AchievementWindow_CurrentProfile" xml:space="preserve"><value>現在のプロファイル</value></data>
+  <data name="AchievementWindow_ManageArchive" xml:space="preserve"><value>アーカイブの切替または作成</value></data>
+  <data name="AchievementWindow_ArchiveManagement" xml:space="preserve"><value>アーカイブ管理</value></data>
+  <data name="AchievementWindow_UpdateData" xml:space="preserve"><value>データ更新</value></data>
+  <data name="AchievementWindow_Progress" xml:space="preserve"><value>進捗: </value></data>
+  <data name="AgreementPage_Title" xml:space="preserve"><value>利用規約</value></data>
+  <data name="AgreementPage_Welcome" xml:space="preserve"><value>FufuLauncherへようこそ！以下の規約をよくお読みください。</value></data>
+  <data name="AgreementPage_AgreeCheck" xml:space="preserve"><value>利用規約を読み、同意しました</value></data>
+  <data name="AgreementPage_ScrollHint" xml:space="preserve"><value>同意前にスクロールして全文をお読みください</value></data>
+  <data name="AgreementPage_IconCheckHint" xml:space="preserve"><value>表示品質を確保するため、下のアイコンが正しく表示されているか確認してください</value></data>
+  <data name="AgreementPage_Settings" xml:space="preserve"><value>設定</value></data>
+  <data name="AgreementPage_Home" xml:space="preserve"><value>ホーム</value></data>
+  <data name="AgreementPage_Files" xml:space="preserve"><value>ファイル</value></data>
+  <data name="AgreementPage_CannotDisplay" xml:space="preserve"><value>表示できません</value></data>
+  <data name="AgreementPage_DisplayNormal" xml:space="preserve"><value>表示正常</value></data>
+  <data name="AgreementPage_DataStorage" xml:space="preserve"><value>データ保存場所</value></data>
+  <data name="AgreementPage_DataDirDesc" xml:space="preserve"><value>データとキャッシュの保存先をカスタマイズできます。デフォルト設定のままでも構いません。</value></data>
+  <data name="AgreementPage_UserDataDir" xml:space="preserve"><value>ユーザーデータディレクトリ</value></data>
+  <data name="AgreementPage_Change" xml:space="preserve"><value>変更</value></data>
+  <data name="AgreementPage_CacheDir" xml:space="preserve"><value>キャッシュディレクトリ</value></data>
+  <data name="AgreementPage_ConfirmAndComplete" xml:space="preserve"><value>確認して完了</value></data>
+  <data name="AgreementPage_Next" xml:space="preserve"><value>次へ</value></data>
+  <data name="PlayerInfo_Title" xml:space="preserve"><value>キャラクター情報検索</value></data>
+  <data name="PlayerInfo_SearchUid" xml:space="preserve"><value>UIDを入力して検索...</value></data>
+  <data name="PlayerInfo_Query" xml:space="preserve"><value>検索</value></data>
+  <data name="PlayerInfo_RefreshMyData" xml:space="preserve"><value>自分のデータを更新</value></data>
+  <data name="PlayerInfo_RoleList" xml:space="preserve"><value>キャラクター一覧</value></data>
+  <data name="PlayerInfo_SelectRoleHint" xml:space="preserve"><value>左側のキャラクターを選択して詳細を表示</value></data>
+  <data name="PlayerInfo_BasicStats" xml:space="preserve"><value>基本ステータス</value></data>
+  <data name="PlayerInfo_CoreStats" xml:space="preserve"><value>コアステータス</value></data>
+  <data name="PlayerInfo_Hp" xml:space="preserve"><value>最大HP</value></data>
+  <data name="PlayerInfo_Attack" xml:space="preserve"><value>攻撃力</value></data>
+  <data name="PlayerInfo_Defense" xml:space="preserve"><value>防御力</value></data>
+  <data name="PlayerInfo_ElementalMastery" xml:space="preserve"><value>元素熟知</value></data>
+  <data name="PlayerInfo_AdvancedStats" xml:space="preserve"><value>詳細ステータス</value></data>
+  <data name="PlayerInfo_CritRate" xml:space="preserve"><value>会心率</value></data>
+  <data name="PlayerInfo_CritDmg" xml:space="preserve"><value>会心ダメージ</value></data>
+  <data name="PlayerInfo_Recharge" xml:space="preserve"><value>元素チャージ効率</value></data>
+  <data name="PlayerInfo_FireDmg" xml:space="preserve"><value>炎元素ダメージ</value></data>
+  <data name="PlayerInfo_WaterDmg" xml:space="preserve"><value>水元素ダメージ</value></data>
+  <data name="PlayerInfo_PhysicalDmg" xml:space="preserve"><value>物理ダメージ</value></data>
+  <data name="PlayerInfo_ArtifactDetails" xml:space="preserve"><value>聖遺物詳細</value></data>
+  <data name="PlayerInfo_ViewSource" xml:space="preserve"><value>ソースを見る</value></data>
+  <data name="PlayerInfo_WeaponAndSkills" xml:space="preserve"><value>武器とスキル</value></data>
+  <data name="PlayerInfo_Level" xml:space="preserve"><value>Lv. </value></data>
+  <data name="PlayerInfo_SkillLevels" xml:space="preserve"><value>スキルレベル</value></data>
+  <data name="PlayerInfo_NormalAttack" xml:space="preserve"><value>通常攻撃</value></data>
+  <data name="PlayerInfo_ElementalSkill" xml:space="preserve"><value>元素スキル</value></data>
+  <data name="PlayerInfo_ElementalBurst" xml:space="preserve"><value>元素爆発</value></data>
+  <data name="PlayerInfo_ViewTeamRecommend" xml:space="preserve"><value>おすすめ編成を見る</value></data>
+  <data name="GachaAnalysis_Title" xml:space="preserve"><value>祈願記録分析</value></data>
+  <data name="GachaAnalysis_Pulls" xml:space="preserve"><value> 回</value></data>
+  <data name="GachaAnalysis_NoRecords" xml:space="preserve"><value>記録なし</value></data>
+  <data name="GachaAnalysis_4Star" xml:space="preserve"><value>★4</value></data>
+  <data name="GachaAnalysis_TotalPulls" xml:space="preserve"><value>総祈願回数</value></data>
+  <data name="GachaAnalysis_PrimogemsSpent" xml:space="preserve"><value>消費原石</value></data>
+  <data name="GachaAnalysis_Show4Star" xml:space="preserve"><value>★4記録表示</value></data>
+  <data name="GachaAnalysis_Show4StarShort" xml:space="preserve"><value>★4表示</value></data>
+  <data name="GachaAnalysis_Total" xml:space="preserve"><value>合計: </value></data>
+  <data name="GachaAnalysis_Pity5Star" xml:space="preserve"><value>★5天井: </value></data>
+  <data name="GachaAnalysis_Pity4Star" xml:space="preserve"><value>★4天井: </value></data>
+  <data name="GachaAnalysis_Pity5StarShort" xml:space="preserve"><value>★5天井 </value></data>
+  <data name="GachaAnalysis_Pity4StarShort" xml:space="preserve"><value>★4天井 </value></data>
+  <data name="GachaAnalysis_CharacterEvent" xml:space="preserve"><value>キャライベント</value></data>
+  <data name="GachaAnalysis_WeaponEvent" xml:space="preserve"><value>武器イベント</value></data>
+  <data name="GachaAnalysis_ChronicledWish" xml:space="preserve"><value>集録祈願</value></data>
+  <data name="GachaAnalysis_StandardWish" xml:space="preserve"><value>恒常祈願</value></data>
+  <data name="GachaAnalysis_WishOverview" xml:space="preserve"><value>祈願概要</value></data>
+  <data name="GachaAnalysis_WishAnalysis" xml:space="preserve"><value>祈願分析</value></data>
+  <data name="GachaAnalysis_GetRecords" xml:space="preserve"><value>祈願記録を取得</value></data>
+  <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve"><value>MiYouSheアカウント経由</value></data>
+  <data name="GachaAnalysis_GetViaUrl" xml:space="preserve"><value>URL経由</value></data>
+  <data name="GachaAnalysis_ImportUigf" xml:space="preserve"><value>UIGFファイルインポート</value></data>
+  <data name="GachaAnalysis_UpdateData" xml:space="preserve"><value>データ更新</value></data>
+  <data name="GachaAnalysis_About" xml:space="preserve"><value>について</value></data>
+  <data name="GachaAnalysis_ImageLibrary" xml:space="preserve"><value>画像リソースライブラリ</value></data>
+  <data name="GachaAnalysis_ListView" xml:space="preserve"><value>リスト表示</value></data>
+  <data name="GachaAnalysis_CardView" xml:space="preserve"><value>カード表示</value></data>
+  <data name="GachaAnalysis_ExportUigf" xml:space="preserve"><value>UIGFエクスポート</value></data>
+  <data name="GachaAnalysis_RefreshMetadata" xml:space="preserve"><value>メタデータ更新</value></data>
+  <data name="GachaAnalysis_DeleteRecords" xml:space="preserve"><value>記録削除</value></data>
+  <data name="GachaAnalysis_PullsUnit" xml:space="preserve"><value> 回</value></data>
+  <data name="GachaAnalysis_ImportHint" xml:space="preserve"><value>祈願記録のインポート方法を選び、分析を開始</value></data>
+  <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve"><value>ログイン済みMiYouSheアカウントから&#x0a;直接記録を取得</value></data>
+  <data name="GachaAnalysis_Recommended" xml:space="preserve"><value>推奨</value></data>
+  <data name="GachaAnalysis_UrlDesc" xml:space="preserve"><value>祈願分析リンクを貼り付けて&#x0a;APIから記録を取得</value></data>
+  <data name="GachaAnalysis_UigfDesc" xml:space="preserve"><value>標準UIGF形式JSONから&#x0a;記録をインポート&#x0a;UIGF v4.x/3.0/2.x</value></data>
+  <data name="GachaAnalysis_IncrementalUpdate" xml:space="preserve"><value>差分更新（推奨）</value></data>
+  <data name="GachaAnalysis_FullUpdate" xml:space="preserve"><value>全更新</value></data>
+  <data name="GachaAnalysis_Characters" xml:space="preserve"><value>キャラクター</value></data>
+  <data name="GachaAnalysis_Weapons" xml:space="preserve"><value>武器</value></data>
+  <data name="GachaAnalysis_CachedIconData" xml:space="preserve"><value>キャッシュ済みアイコンデータ</value></data>
+  <data name="GachaAnalysis_GeneratingAnalysis" xml:space="preserve"><value>祈願分析を生成中...</value></data>
+  <data name="GachaAnalysis_CopyImage" xml:space="preserve"><value>画像コピー</value></data>
+  <data name="GachaAnalysis_SaveImage" xml:space="preserve"><value>画像保存</value></data>
+  <data name="GachaAnalysis_GoldPullStats" xml:space="preserve"><value>金祈願方法統計</value></data>
+  <data name="GachaAnalysis_GoldPullStatsDesc" xml:space="preserve"><value>同じガチャの同時期の記録を1グループとしてカウント</value></data>
+  <data name="GachaAnalysis_TenPullGoldRate" xml:space="preserve"><value>10連★5率</value></data>
+  <data name="GachaAnalysis_GroupsWith5Star" xml:space="preserve"><value>グループで★5</value></data>
+  <data name="GachaAnalysis_SinglePullGoldRate" xml:space="preserve"><value>単発★5率</value></data>
+  <data name="GachaAnalysis_TimesWith5Star" xml:space="preserve"><value>回で★5</value></data>
+  <data name="GachaAnalysis_Avg5StarCost" xml:space="preserve"><value>平均★5コスト</value></data>
+  <data name="GachaAnalysis_Approx" xml:space="preserve"><value>約 </value></data>
+  <data name="GachaAnalysis_PrimogemsUnit" xml:space="preserve"><value> 原石</value></data>
+  <data name="GachaAnalysis_ActiveMonths" xml:space="preserve"><value>アクティブ月数</value></data>
+  <data name="GachaAnalysis_MonthlyAvg" xml:space="preserve"><value>月平均 </value></data>
+  <data name="GachaAnalysis_PeakMonth" xml:space="preserve"><value>ピーク月</value></data>
+  <data name="GachaAnalysis_5StarAvg" xml:space="preserve"><value>★5平均</value></data>
+  <data name="GachaAnalysis_AllPools5Star" xml:space="preserve"><value>全ガチャ★5</value></data>
+  <data name="GachaAnalysis_RarityComposition" xml:space="preserve"><value>レアリティ構成</value></data>
+  <data name="GachaAnalysis_Rarity" xml:space="preserve"><value>レアリティ</value></data>
+  <data name="GachaAnalysis_Proportion" xml:space="preserve"><value>割合</value></data>
+  <data name="GachaAnalysis_PoolPullDistribution" xml:space="preserve"><value>ガチャ別祈願分布</value></data>
+  <data name="GachaAnalysis_Pool" xml:space="preserve"><value>ガチャ</value></data>
+  <data name="GachaAnalysis_Distribution" xml:space="preserve"><value>分布</value></data>
+  <data name="GachaAnalysis_Recent5StarPulls" xml:space="preserve"><value>最近の★5祈願回数</value></data>
+  <data name="GachaAnalysis_4StarTop10" xml:space="preserve"><value>★4天井トップ10</value></data>
+  <data name="GachaAnalysis_PityInterval" xml:space="preserve"><value>★5天井間隔</value></data>
+  <data name="GachaAnalysis_MonthlyTrend" xml:space="preserve"><value>月間祈願トレンド</value></data>
+  <data name="GachaAnalysis_MonthlyTrendDesc" xml:space="preserve"><value>全ガチャ★1-5の月次推移</value></data>
+  <data name="WishBannerImage" xml:space="preserve"><value> 祈願バナー画像</value></data>
+  <data name="HelpPage_SearchResults" xml:space="preserve"><value>{0}件の結果、クリックで開く</value></data>
+  <data name="HelpPage_NoResults" xml:space="preserve"><value>一致するドキュメントなし</value></data>
+  <data name="Success" xml:space="preserve"><value>成功</value></data>
+  <data name="Failure" xml:space="preserve"><value>失敗</value></data>
+  <data name="Settings_Disclaimer" xml:space="preserve"><value>免責事項</value></data>
+  <data name="Settings_ContinueVisit" xml:space="preserve"><value>続行</value></data>
+  <data name="Settings_CommunityCheckinNote" xml:space="preserve"><value>コミュニティチェックイン情報</value></data>
+  <data name="Settings_CloudCheckinNote" xml:space="preserve"><value>クラウドゲームチェックイン情報</value></data>
+  <data name="Settings_Notice" xml:space="preserve"><value>通知</value></data>
+  <data name="Settings_SubmitApp" xml:space="preserve"><value>送信</value></data>
+  <data name="Settings_NetworkError" xml:space="preserve"><value>ネットワークエラー</value></data>
+  <data name="DownloadWindow_Success" xml:space="preserve"><value>ダウンロード成功</value></data>
+  <data name="DownloadWindow_Complete" xml:space="preserve"><value>完了</value></data>
+  <data name="DownloadWindow_Cancelled" xml:space="preserve"><value>タスクキャンセル</value></data>
+  <data name="DownloadWindow_Error" xml:space="preserve"><value>エラー発生</value></data>
+  <data name="DownloadWindow_HideDetailLog" xml:space="preserve"><value>詳細ログを非表示</value></data>
+  <data name="DownloadWindow_AllDone" xml:space="preserve"><value>全ファイルのダウンロード、検証、展開が完了しました。</value></data>
+  <data name="DownloadWindow_Processing" xml:space="preserve"><value>処理中: {0}/{1}ファイル</value></data>
+  <data name="DownloadWindow_InitTask" xml:space="preserve"><value>タスク初期化中...</value></data>
+  <data name="CommunityPage_WelcomeTitle" xml:space="preserve"><value>VanillaBBSへようこそ。以下をお読みください。</value></data>
+  <data name="CommunityPage_AuthTitle" xml:space="preserve"><value>認証リクエスト</value></data>
+  <data name="CommunityPage_Agree" xml:space="preserve"><value>同意</value></data>
+  <data name="CommunityPage_Deny" xml:space="preserve"><value>拒否</value></data>
+  <data name="CommunityPage_Unknown" xml:space="preserve"><value>不明</value></data>
+  <data name="CommunityPage_DataRequest" xml:space="preserve"><value>現在のページが以下のデータへのアクセスを要求しています:</value></data>
+  <data name="CommunityPage_ConsentPrompt" xml:space="preserve"><value>提供に同意しますか？</value></data>
+  <data name="AboutPage_FetchFailed" xml:space="preserve"><value>取得失敗</value></data>
+  <data name="AboutPage_LoadingBio" xml:space="preserve"><value>自己紹介読み込み中...</value></data>
+  <data name="AboutPage_OpenInBrowser" xml:space="preserve"><value>外部ブラウザで開く</value></data>
+  <data name="AboutPage_NoBio" xml:space="preserve"><value>このユーザーには自己紹介がありません。</value></data>
+  <data name="AboutPage_ConfirmNav" xml:space="preserve"><value>ナビゲーション確認 / コピー</value></data>
+  <data name="AboutPage_GitHubToken" xml:space="preserve"><value>GitHubトークン</value></data>
+  <data name="AboutPage_FetchSuccess" xml:space="preserve"><value>取得成功！ダウンロードスクリプトを生成しました。</value></data>
+  <data name="AboutPage_EnterToken" xml:space="preserve"><value>トークンを入力してください！</value></data>
+  <data name="AboutPage_FetchFailedArtifact" xml:space="preserve"><value>取得失敗（アーティファクトが見つかりません）</value></data>
+  <data name="AboutPage_FetchFailedRun" xml:space="preserve"><value>取得失敗（成功した実行が見つかりません）</value></data>
+  <data name="AboutPage_FetchFailedWorkflow" xml:space="preserve"><value>取得失敗（ワークフローが見つかりません）</value></data>
+  <data name="AboutPage_Exception" xml:space="preserve"><value>例外が発生しました</value></data>
+  <data name="AboutPage_GitHubTokenPlaceholder" xml:space="preserve"><value>GitHubトークンを入力してください</value></data>
+  <data name="AboutPage_SelectContact" xml:space="preserve"><value>連絡方法を選択</value></data>
+  <data name="AboutPage_DiscordCopied" xml:space="preserve"><value>Discord IDをコピーしました！</value></data>
+  <data name="AboutPage_Loading" xml:space="preserve"><value>読み込み中...</value></data>
+  <data name="AchievementWindow_DefaultProfile" xml:space="preserve"><value>デフォルトプロファイル</value></data>
+  <data name="AchievementWindow_UnnamedProfile" xml:space="preserve"><value>無名プロファイル</value></data>
+  <data name="AchievementWindow_UnknownCategory" xml:space="preserve"><value>不明なカテゴリ</value></data>
+  <data name="AchievementWindow_AllVersions" xml:space="preserve"><value>すべてのバージョン</value></data>
+  <data name="AchievementWindow_CurrentSuffix" xml:space="preserve"><value>（現在）</value></data>
+  <data name="AchievementWindow_EnterName" xml:space="preserve"><value>名前を入力...</value></data>
+  <data name="AchievementWindow_DbNotFound" xml:space="preserve"><value>内蔵データベースファイルが見つかりません</value></data>
+  <data name="AchievementWindow_AlreadyLatest" xml:space="preserve"><value>アーカイブは既に最新です。更新は不要です。</value></data>
+  <data name="AchievementWindow_UpdateDb" xml:space="preserve"><value>アチーブメントDBを更新</value></data>
+  <data name="AchievementWindow_StartUpdate" xml:space="preserve"><value>更新開始</value></data>
+  <data name="AchievementWindow_SaveCurrent" xml:space="preserve"><value>現在のプロファイルを保存</value></data>
+  <data name="AchievementWindow_NewProfile" xml:space="preserve"><value>新規プロファイル</value></data>
+  <data name="AchievementWindow_DuplicateName" xml:space="preserve"><value>このプロファイル名は既に存在します！</value></data>
+  <data name="AchievementWindow_ProfileNotFound" xml:space="preserve"><value>対象プロファイルファイルが見つかりません！</value></data>
+  <data name="AchievementWindow_InvalidChars" xml:space="preserve"><value>名前に無効な文字が含まれています。</value></data>
+  <data name="AchievementWindow_EmptyContent" xml:space="preserve"><value>ファイルに内容がありません。</value></data>
+  <data name="AchievementWindow_NoBackup" xml:space="preserve"><value>バックアッププロファイルなし</value></data>
+  <data name="AchievementWindow_ConfirmDeleteMsg" xml:space="preserve"><value>完全に削除してもよろしいですか？</value></data>
+  <data name="AchievementWindow_NewBlank" xml:space="preserve"><value>新規空白プロファイル</value></data>
+  <data name="AchievementWindow_ExistingProfiles" xml:space="preserve"><value>既存のプロファイル:</value></data>
+  <data name="AchievementWindow_ImportData" xml:space="preserve"><value>データインポート</value></data>
+  <data name="AchievementWindow_ImportFailed" xml:space="preserve"><value>インポート失敗</value></data>
+  <data name="AchievementWindow_ExportSuccess" xml:space="preserve"><value>エクスポート成功</value></data>
+  <data name="AchievementWindow_ExportFailed" xml:space="preserve"><value>エクスポート失敗</value></data>
+  <data name="AchievementWindow_InvalidName" xml:space="preserve"><value>無効な名前</value></data>
+  <data name="AchievementWindow_ReadFailed" xml:space="preserve"><value>読み取り失敗</value></data>
+  <data name="AchievementWindow_EmptyFile" xml:space="preserve"><value>空のファイル</value></data>
+  <data name="AchievementWindow_SwitchFailed" xml:space="preserve"><value>切替失敗</value></data>
+  <data name="AchievementWindow_SaveSuccess" xml:space="preserve"><value>保存成功</value></data>
+  <data name="AchievementWindow_ConfirmDelete" xml:space="preserve"><value>削除確認</value></data>
+  <data name="AchievementWindow_Importing" xml:space="preserve"><value>アチーブメントをインポート中</value></data>
+  <data name="AchievementWindow_TotalAchievements" xml:space="preserve"><value>全{0}個のアチーブメント</value></data>
+  <data name="AchievementWindow_DataLoaded" xml:space="preserve"><value>データ読み込み完了</value></data>
+  <data name="AchievementWindow_Saving" xml:space="preserve"><value>保存中...</value></data>
+  <data name="AchievementWindow_SavedToDocs" xml:space="preserve"><value>ドキュメントフォルダに保存しました</value></data>
+  <data name="AchievementWindow_ReadingData" xml:space="preserve"><value>データ読み取り中...</value></data>
+  <data name="AchievementWindow_SwitchingProfile" xml:space="preserve"><value>プロファイル切替中...</value></data>
+  <data name="AchievementWindow_PreparingRead" xml:space="preserve"><value>データ読み取り準備中...</value></data>
+  <data name="AchievementWindow_ApplyingChanges" xml:space="preserve"><value>変更を適用中</value></data>
+  <data name="AchievementWindow_RefreshingUI" xml:space="preserve"><value>インターフェース更新中...</value></data>
+  <data name="AchievementWindow_ReadingUIAF" xml:space="preserve"><value>UIAFデータ読み取り中...</value></data>
+  <data name="AchievementWindow_GeneratingUIAF" xml:space="preserve"><value>UIAFデータを生成中...</value></data>
+  <data name="AchievementWindow_UIAFExportDone" xml:space="preserve"><value>UIAFエクスポート完了</value></data>
+  <data name="AchievementWindow_SaveException" xml:space="preserve"><value>保存例外</value></data>
+  <data name="AchievementWindow_CannotOpenBrowser" xml:space="preserve"><value>ブラウザを開けません</value></data>
+  <data name="LaunchErr_UnknownError" xml:space="preserve"><value>不明なエラー</value></data>
+  <data name="LaunchErr_InvalidGamePath" xml:space="preserve"><value>ゲームパスが無効または存在しません</value></data>
+  <data name="LaunchErr_ExeNotFound" xml:space="preserve"><value>ゲーム実行ファイルが見つかりません。パス設定を確認してください。
+検索ファイル:
+{0}</value></data>
+  <data name="LaunchErr_MultipleExeFound" xml:space="preserve"><value>ゲームディレクトリに複数の実行ファイルを検出。どのファイルを起動すべきか判断できません。余分なクライアントファイルを削除するか、設定でカスタム名を指定してください。</value></data>
+  <data name="LaunchErr_CannotLoadConfig" xml:space="preserve"><value>ゲーム設定ファイルを読み込めません</value></data>
+  <data name="LaunchErr_LaunchTimeout" xml:space="preserve"><value>起動タイムアウト、再試行してください</value></data>
+  <data name="LaunchErr_FatalError" xml:space="preserve"><value>起動中に致命的なエラー: {0}</value></data>
+  <data name="LaunchErr_PluginDamagedTitle" xml:space="preserve"><value>プラグインが破損している可能性があります</value></data>
+  <data name="LaunchErr_PluginDamagedMsg" xml:space="preserve"><value>プラグインファイルが破損しているか、アンチウイルスにブロックされています。プラグインを再インストールしてください。</value></data>
+  <data name="Status_Success" xml:space="preserve"><value>成功</value></data>
+  <data name="Status_Failure" xml:space="preserve"><value>失敗</value></data>
+  <data name="Status_Skipped" xml:space="preserve"><value>スキップ</value></data>
+  <data name="Status_Completed" xml:space="preserve"><value>完了</value></data>
+  <data name="Status_Unknown" xml:space="preserve"><value>不明</value></data>
+  <data name="Status_None" xml:space="preserve"><value>なし</value></data>
+  <data name="Status_Exception" xml:space="preserve"><value>例外</value></data>
+  <data name="Status_RequestFailed" xml:space="preserve"><value>リクエスト失敗</value></data>
+  <data name="Status_UnknownError" xml:space="preserve"><value>不明なエラー</value></data>
+  <data name="CheckinCloud_Title" xml:space="preserve"><value>クラウド原神チェックイン</value></data>
+  <data name="CheckinCloud_MissingCredential" xml:space="preserve"><value>クラウドゲーム認証情報がありません（x-rpc-combo_token）</value></data>
+  <data name="CheckinCloud_TokenExpired" xml:space="preserve"><value>トークン期限切れまたはアカウント制限</value></data>
+  <data name="CheckinCloud_GainedTime" xml:space="preserve"><value>{0}分の無料時間を獲得</value></data>
+  <data name="CheckinCloud_CurrentFreeTime" xml:space="preserve"><value>現在の無料時間: {0}</value></data>
+  <data name="CheckinCloud_AlreadyCheckedIn" xml:space="preserve"><value>本日既にチェックイン済み、または制限に達しました</value></data>
+  <data name="CheckinCloud_PlayCardStatus" xml:space="preserve"><value>プレイカード状態: {0}, コイン: {1}</value></data>
+  <data name="CheckinCloud_Exception" xml:space="preserve"><value>例外: {0}</value></data>
+  <data name="CheckinCloud_HoursMinutes" xml:space="preserve"><value>{0}時間{1}分</value></data>
+  <data name="CheckinCloud_HoursOnly" xml:space="preserve"><value>{0}時間</value></data>
+  <data name="CheckinCloud_MinutesOnly" xml:space="preserve"><value>{0}分</value></data>
+  <data name="CheckinCommunity_Title" xml:space="preserve"><value>コミュニティチェックイン</value></data>
+  <data name="CheckinCommunity_MissingToken" xml:space="preserve"><value>stokenまたはmidがありません</value></data>
+  <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve"><value>タスク状態取得失敗。Cookieを確認してください。</value></data>
+  <data name="CheckinCommunity_TodayDone" xml:space="preserve"><value>本日完了（{0}コイン）</value></data>
+  <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve"><value>コミュニティチェックイン済み、スキップ</value></data>
+  <data name="CheckinCommunity_GetPostsFailed" xml:space="preserve"><value>投稿リスト取得失敗。既読/いいね/共有を実行できません。</value></data>
+  <data name="CheckinCommunity_ReadDoneSkipped" xml:space="preserve"><value>既読済み、スキップ</value></data>
+  <data name="CheckinCommunity_LikeDoneSkipped" xml:space="preserve"><value>いいね済み、スキップ</value></data>
+  <data name="CheckinCommunity_ShareDoneSkipped" xml:space="preserve"><value>共有済み、スキップ</value></data>
+  <data name="CheckinCommunity_GainedCoins" xml:space="preserve"><value>{0}コイン獲得（現在 {1}）</value></data>
+  <data name="CheckinCommunity_CurrentCoins" xml:space="preserve"><value>{0}コイン</value></data>
+  <data name="CheckinCommunity_GenshinSignRequestFailed" xml:space="preserve"><value>コミュニティチェックイン: リクエスト失敗</value></data>
+  <data name="CheckinCommunity_GenshinSignSuccess" xml:space="preserve"><value>コミュニティチェックイン成功</value></data>
+  <data name="CheckinCommunity_GenshinSignCaptcha" xml:space="preserve"><value>コミュニティチェックイン: CAPTCHA発生、スキップ</value></data>
+  <data name="CheckinCommunity_GenshinSignFailed" xml:space="preserve"><value>コミュニティチェックイン失敗: {0}</value></data>
+  <data name="CheckinCommunity_GenshinSignException" xml:space="preserve"><value>コミュニティチェックイン例外: {0}</value></data>
+  <data name="CheckinCommunity_ReadSuccess" xml:space="preserve"><value>既読成功: {0}</value></data>
+  <data name="CheckinCommunity_ReadFailed" xml:space="preserve"><value>既読失敗: {0}</value></data>
+  <data name="CheckinCommunity_ReadException" xml:space="preserve"><value>既読例外: {0}（{1}）</value></data>
+  <data name="CheckinCommunity_LikeSuccess" xml:space="preserve"><value>いいね成功: {0}</value></data>
+  <data name="CheckinCommunity_LikeFailed" xml:space="preserve"><value>いいね失敗: {0}（{1}）</value></data>
+  <data name="CheckinCommunity_LikeException" xml:space="preserve"><value>いいね例外: {0}（{1}）</value></data>
+  <data name="CheckinCommunity_ShareSuccess" xml:space="preserve"><value>共有成功: {0}</value></data>
+  <data name="CheckinCommunity_ShareFailed" xml:space="preserve"><value>共有失敗: {0}（{1}）</value></data>
+  <data name="CheckinCommunity_ShareException" xml:space="preserve"><value>共有例外: {0}（{1}）</value></data>
+  <data name="CheckinCommunity_Exception" xml:space="preserve"><value>例外: {0}</value></data>
+  <data name="Checkin_NoBoundAccount" xml:space="preserve"><value>バインド済みアカウント未検出</value></data>
+  <data name="Checkin_Reason" xml:space="preserve"><value>、理由: {0}</value></data>
+  <data name="Checkin_Detail" xml:space="preserve"><value>、詳細: {0}</value></data>
+  <data name="Checkin_GetInfoFailed" xml:space="preserve"><value>チェックイン情報取得失敗</value></data>
+  <data name="Checkin_FirstBindWarning" xml:space="preserve"><value>初回バインドです。先に手動でチェックインしてください。</value></data>
+  <data name="Checkin_AlreadySignedToday" xml:space="preserve"><value>本日既にチェックイン済み</value></data>
+  <data name="Checkin_TodayReward" xml:space="preserve"><value>本日の報酬: {0}</value></data>
+  <data name="Checkin_SignRequestFailed" xml:space="preserve"><value>このチェックインリクエストは失敗しました</value></data>
+  <data name="Checkin_SignRateLimited" xml:space="preserve"><value>チェックイン失敗、HTTP 429 レート制限</value></data>
+  <data name="Checkin_ParseResultFailed" xml:space="preserve"><value>チェックイン結果解析失敗</value></data>
+  <data name="Checkin_SignSuccess" xml:space="preserve"><value>チェックイン成功</value></data>
+  <data name="Checkin_SignFailedApi" xml:space="preserve"><value>チェックイン失敗、API: {0}</value></data>
+  <data name="Checkin_SignedDays" xml:space="preserve"><value>{0}日間チェックイン済み</value></data>
+  <data name="Checkin_RewardIs" xml:space="preserve"><value>報酬: {0}</value></data>
+  <data name="Checkin_NoAccountToSign" xml:space="preserve"><value>チェックイン可能なアカウントなし</value></data>
+  <data name="Checkin_ParseAccountListFailed" xml:space="preserve"><value>アカウントリスト解析失敗</value></data>
+  <data name="Checkin_GetAccountListException" xml:space="preserve"><value>アカウントリスト取得例外: {0}</value></data>
+  <data name="Checkin_ParseSignStatusFailed" xml:space="preserve"><value>チェックイン状態解析失敗</value></data>
+  <data name="Checkin_RequestSignStatusException" xml:space="preserve"><value>チェックイン状態リクエスト例外: {0}</value></data>
+  <data name="Checkin_ParseResponseDataFailed" xml:space="preserve"><value>アカウントリスト応答データ解析失敗</value></data>
+  <data name="Checkin_NetworkRequestException" xml:space="preserve"><value>ネットワークリクエスト例外: {0}</value></data>
+  <data name="Checkin_GetCalendarException" xml:space="preserve"><value>報酬カレンダー取得例外: {0}</value></data>
+  <data name="Checkin_AllAccountsSuccess" xml:space="preserve"><value>チェックイン完了。全{0}アカウント成功。</value></data>
+  <data name="Checkin_PartialSuccess" xml:space="preserve"><value>チェックイン完了。{0}成功、{1}失敗。</value></data>
+  <data name="Checkin_AllFailed" xml:space="preserve"><value>チェックイン失敗。{0}アカウントでエラー。</value></data>
+  <data name="Checkin_AllDisabled" xml:space="preserve"><value>すべてのアカウントが無効</value></data>
+  <data name="Checkin_AccountNotFound" xml:space="preserve"><value>現在のアカウントが見つかりません</value></data>
+  <data name="Checkin_AllDone" xml:space="preserve"><value>すべて完了</value></data>
+  <data name="Checkin_CountFailed" xml:space="preserve"><value>{0}件失敗</value></data>
+  <data name="Checkin_AccountsSuccess" xml:space="preserve"><value>{0}アカウント成功</value></data>
+  <data name="Checkin_AccountsFailed" xml:space="preserve"><value>{0}件失敗</value></data>
+  <data name="Checkin_GameCheckin" xml:space="preserve"><value>ゲームチェックイン</value></data>
+  <data name="Checkin_CloudGameCheckin" xml:space="preserve"><value>クラウドゲームチェックイン</value></data>
+  <data name="Checkin_CommunityCheckin" xml:space="preserve"><value>コミュニティチェックイン</value></data>
+  <data name="Checkin_OSAccountSkipped" xml:space="preserve"><value>OSアカウントスキップ</value></data>
+  <data name="Checkin_NoCloudCredential" xml:space="preserve"><value>クラウドゲーム認証情報未設定</value></data>
+  <data name="Checkin_NotConfiguredCredential" xml:space="preserve"><value>認証情報未設定</value></data>
+  <data name="Checkin_ConsecutiveDays" xml:space="preserve"><value>{0}日連続 | 報酬: {1}</value></data>
+  <data name="Checkin_SuccessFailCount" xml:space="preserve"><value>{0}成功、{1}失敗</value></data>
+  <data name="Checkin_GetStatusFailed" xml:space="preserve"><value>状態取得失敗</value></data>
+  <data name="Checkin_SignedToday" xml:space="preserve"><value>本日チェックイン済み</value></data>
+  <data name="Checkin_UnsignedToday" xml:space="preserve"><value>本日未チェックイン</value></data>
+  <data name="Checkin_NotEnabled" xml:space="preserve"><value>チェックイン機能無効</value></data>
+  <data name="Checkin_NotDetected" xml:space="preserve"><value>バインド未検出</value></data>
+  <data name="Checkin_NotDetectedAccount" xml:space="preserve"><value>アカウント未検出</value></data>
+  <data name="Checkin_FeatureNotEnabled" xml:space="preserve"><value>機能が有効化されていません</value></data>
+  <data name="Checkin_EnableInConfig" xml:space="preserve"><value>config.jsonでEnable=trueに設定</value></data>
+  <data name="Checkin_DefaultUser" xml:space="preserve"><value>ユーザー{0}</value></data>
+  <data name="Checkin_GameCheckinProgress" xml:space="preserve"><value>ゲームチェックイン中...</value></data>
+  <data name="Checkin_OSAccountSkippedCommunity" xml:space="preserve"><value>OSアカウント コミュニティチェックインスキップ</value></data>
+  <data name="Checkin_CommunityCheckinProgress" xml:space="preserve"><value>コミュニティチェックイン中...</value></data>
+  <data name="Checkin_CloudGameCheckinProgress" xml:space="preserve"><value>クラウドゲームチェックイン中...</value></data>
+  <data name="CheckinGame_Exception" xml:space="preserve"><value>例外: {0}</value></data>
+  <data name="Token_InvalidCookie" xml:space="preserve"><value>有効なCookieがありません</value></data>
+  <data name="Token_MissingStokenOrMid" xml:space="preserve"><value>ローカルCookieにstokenまたはmidがありません。更新不可。</value></data>
+  <data name="Token_RefreshTitle" xml:space="preserve"><value>Cookie更新</value></data>
+  <data name="Token_ManualRefreshProgress" xml:space="preserve"><value>手動更新実行中...</value></data>
+  <data name="Token_AutoRefreshProgress" xml:space="preserve"><value>Cookie期限切れ、更新実行中...</value></data>
+  <data name="Token_WebTicketFailed" xml:space="preserve"><value>WebTicket作成失敗</value></data>
+  <data name="Token_QRScanFailed" xml:space="preserve"><value>QRコードスキャンリクエスト失敗</value></data>
+  <data name="Token_ConfirmLoginFailed" xml:space="preserve"><value>ログイン確認リクエスト失敗</value></data>
+  <data name="Token_ManualRefreshDone" xml:space="preserve"><value>Cookie手動更新完了。新しい認証情報が有効です。</value></data>
+  <data name="Token_AutoRefreshDone" xml:space="preserve"><value>Cookie自動更新完了。新しい認証情報が有効です。</value></data>
+  <data name="Token_GetNewCookieFailed" xml:space="preserve"><value>新しいCookie取得失敗</value></data>
+  <data name="Token_RefreshFailed" xml:space="preserve"><value>Cookie更新失敗</value></data>
+  <data name="Token_RefreshException" xml:space="preserve"><value>Cookie更新中に例外発生: {0}</value></data>
+  <data name="RedeemCode_Expired" xml:space="preserve"><value>期限切れ</value></data>
+  <data name="RedeemCode_ExpiringToday" xml:space="preserve"><value>本日期限切れ</value></data>
+  <data name="RedeemCode_HoursLeft" xml:space="preserve"><value>残り{0}時間</value></data>
+  <data name="RedeemCode_DaysLeft" xml:space="preserve"><value>残り{0}日</value></data>
+  <data name="RedeemCode_MoreEvents" xml:space="preserve"><value>...他{0}件</value></data>
+  <data name="RedeemCode_NewPublished" xml:space="preserve"><value>新コード公開</value></data>
+  <data name="RedeemCode_NewContent" xml:space="preserve"><value>新しいコード:\n{0}\nお早めにゲーム内で交換してください！</value></data>
+  <data name="RedeemCode_ExpiringTitle" xml:space="preserve"><value>コード期限切れ間近</value></data>
+  <data name="RedeemCode_ExpiringContent" xml:space="preserve"><value>イベント{0}に利用可能コード:\n{1}\nお早めにゲーム内でご使用ください。本日期限切れ！</value></data>
+  <data name="HashCheck_Failed" xml:space="preserve"><value>検証失敗</value></data>
+  <data name="HashCheck_FileNotFound" xml:space="preserve"><value>検証ファイルが見つかりません。クライアントの整合性を確認してください。</value></data>
+  <data name="HashCheck_FormatError" xml:space="preserve"><value>形式エラー</value></data>
+  <data name="HashCheck_ComponentModified" xml:space="preserve"><value>コンポーネントが変更または欠落:\nCaptureApp\n</value></data>
+  <data name="HashCheck_NotPassed" xml:space="preserve"><value>検証未通過</value></data>
+  <data name="HashCheck_Exception" xml:space="preserve"><value>検証例外</value></data>
+  <data name="HashCheck_ExceptionMsg" xml:space="preserve"><value>ハッシュ検証中にエラー: {0}</value></data>
+  <data name="Settings_DirCreateFailed" xml:space="preserve"><value>ディレクトリ作成失敗</value></data>
+  <data name="Settings_DirCreateFailedMsg" xml:space="preserve"><value>アプリデータディレクトリを作成できません。権限を確認: {0}</value></data>
+  <data name="Settings_DbInitFailed" xml:space="preserve"><value>データベース初期化失敗</value></data>
+  <data name="Settings_DbInitFailedMsg" xml:space="preserve"><value>設定データベースを作成/初期化できません: {0}</value></data>
+  <data name="Settings_ConfigDeleteFailed" xml:space="preserve"><value>設定削除失敗</value></data>
+  <data name="Settings_ConfigDeleteFailedMsg" xml:space="preserve"><value>データベースから設定を削除できません: {0}</value></data>
+  <data name="Settings_ConfigReadFailed" xml:space="preserve"><value>設定読み取り失敗</value></data>
+  <data name="Settings_ConfigReadFailedMsg" xml:space="preserve"><value>データベースから設定を読み込めません: {0}</value></data>
+  <data name="Settings_ConfigSaveFailed" xml:space="preserve"><value>設定保存失敗</value></data>
+  <data name="Settings_ConfigSaveFailedMsg" xml:space="preserve"><value>データベースに設定を保存できません: {0}</value></data>
+  <data name="Diagnostics_Connected" xml:space="preserve"><value>接続済み</value></data>
+  <data name="Diagnostics_Disconnected" xml:space="preserve"><value>未接続</value></data>
+  <data name="Diagnostics_Domestic" xml:space="preserve"><value>国内</value></data>
+  <data name="Diagnostics_Overseas" xml:space="preserve"><value>海外</value></data>
+  <data name="Diagnostics_DomesticSystem" xml:space="preserve"><value>国内（システム）</value></data>
+  <data name="Diagnostics_OverseasSystem" xml:space="preserve"><value>海外（システム）</value></data>
+  <data name="Diagnostics_NoNetwork" xml:space="preserve"><value>ネットワークなし</value></data>
+  <data name="Diagnostics_UnknownCpu" xml:space="preserve"><value>不明なCPU</value></data>
+  <data name="Diagnostics_UnknownGpu" xml:space="preserve"><value>不明なGPU</value></data>
+  <data name="Diagnostics_ReadFailed" xml:space="preserve"><value>読み取り失敗</value></data>
+  <data name="Diagnostics_Enabled" xml:space="preserve"><value>有効</value></data>
+  <data name="Diagnostics_Disabled" xml:space="preserve"><value>無効</value></data>
+  <data name="Diagnostics_NotInstalled" xml:space="preserve"><value>未インストールまたは削除済み</value></data>
+  <data name="Diagnostics_CannotDetect" xml:space="preserve"><value>検出不可</value></data>
+  <data name="Diagnostics_PartialError" xml:space="preserve"><value>診断中にエラー発生。一部情報が不正確な可能性があります。</value></data>
+  <data name="Diagnostics_SuggestNoNetwork" xml:space="preserve"><value>ネットワーク未接続。ネットワーク設定を確認してください。</value></data>
+  <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve"><value>国内ネットワークです。サーバーアクセスが遅い可能性があります。</value></data>
+  <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve"><value>Windows セキュリティセンターが有効です。プラグイン注入に失敗する可能性があります。無効化を推奨します。</value></data>
+  <data name="Diagnostics_SuggestLowMemory" xml:space="preserve"><value>現在の物理メモリ{0}GB、最小要件12GB未満です。</value></data>
+  <data name="Diagnostics_SuggestLowDisk" xml:space="preserve"><value>システムディスク空き容量{0}GB、最小要件1GB未満です。</value></data>
+  <data name="Diagnostics_SuggestRefreshRate" xml:space="preserve"><value>モニターは{0}Hz対応ですが、現在{1}Hzで動作しています。</value></data>
+  <data name="Diagnostics_AllNormal" xml:space="preserve"><value>正常。システムとネットワーク環境は要件を満たしています。</value></data>
+  <data name="User_DefaultSignature" xml:space="preserve"><value>このユーザーは何も書いていません...</value></data>
+  <data name="User_GenderMale" xml:space="preserve"><value>男性</value></data>
+  <data name="User_GenderFemale" xml:space="preserve"><value>女性</value></data>
+  <data name="User_GenderPrivate" xml:space="preserve"><value>非公開</value></data>
+  <data name="Gacha_Won5050" xml:space="preserve"><value>50/50敗北</value></data>
+  <data name="Gacha_Guaranteed" xml:space="preserve"><value>確定</value></data>
+  <data name="Gacha_FiftyFifty" xml:space="preserve"><value>50/50</value></data>
+  <data name="Gacha_ZeroPulls" xml:space="preserve"><value>0回</value></data>
+  <data name="Gacha_No5StarPity" xml:space="preserve"><value>★5天井なし</value></data>
+  <data name="Gacha_No5StarRecord" xml:space="preserve"><value>★5記録なし</value></data>
+  <data name="Gacha_TotalPulls" xml:space="preserve"><value>総祈願回数</value></data>
+  <data name="Gacha_PrimogemEstimate" xml:space="preserve"><value>原石推定</value></data>
+  <data name="Gacha_5StarDrop" xml:space="preserve"><value>★5ドロップ</value></data>
+  <data name="Gacha_4StarDrop" xml:space="preserve"><value>★4ドロップ</value></data>
+  <data name="Gacha_Avg5StarCharCost" xml:space="preserve"><value>平均★5キャラコスト</value></data>
+  <data name="Gacha_Avg5StarPulls" xml:space="preserve"><value>平均★5祈願数</value></data>
+  <data name="Gacha_DeepestPity" xml:space="preserve"><value>最深天井</value></data>
+  <data name="Gacha_Best5Star" xml:space="preserve"><value>最良★5</value></data>
+  <data name="Gacha_Worst5Star" xml:space="preserve"><value>最悪★5</value></data>
+  <data name="Gacha_ActiveMonths" xml:space="preserve"><value>アクティブ月数</value></data>
+  <data name="Gacha_NoWishRecord" xml:space="preserve"><value>祈願記録なし</value></data>
+  <data name="Gacha_PerPull" xml:space="preserve"><value>160原石/回で計算</value></data>
+  <data name="Gacha_No5StarChar" xml:space="preserve"><value>★5キャラなし</value></data>
+  <data name="Gacha_MonthlyAvg0" xml:space="preserve"><value>月平均0回</value></data>
+  <data name="Gacha_NoRecords" xml:space="preserve"><value>記録なし</value></data>
+  <data name="Day_Sunday" xml:space="preserve"><value>日</value></data>
+  <data name="Day_Monday" xml:space="preserve"><value>月</value></data>
+  <data name="Day_Tuesday" xml:space="preserve"><value>火</value></data>
+  <data name="Day_Wednesday" xml:space="preserve"><value>水</value></data>
+  <data name="Day_Thursday" xml:space="preserve"><value>木</value></data>
+  <data name="Day_Friday" xml:space="preserve"><value>金</value></data>
+  <data name="Day_Saturday" xml:space="preserve"><value>土</value></data>
+  <data name="Element_Pyro" xml:space="preserve"><value>炎</value></data>
+  <data name="Element_Anemo" xml:space="preserve"><value>風</value></data>
+  <data name="Element_Geo" xml:space="preserve"><value>岩</value></data>
+  <data name="Element_Dendro" xml:space="preserve"><value>草</value></data>
+  <data name="Element_Electro" xml:space="preserve"><value>雷</value></data>
+  <data name="Element_Hydro" xml:space="preserve"><value>水</value></data>
+  <data name="Element_Cryo" xml:space="preserve"><value>氷</value></data>
+  <data name="Download_Connecting" xml:space="preserve"><value>Mihoyoサーバーに接続中...</value></data>
+  <data name="Download_VoiceOnly" xml:space="preserve"><value>&gt;&gt; 基本ゲームをスキップ、ボイスパックのみ</value></data>
+  <data name="Download_FetchingManifest" xml:space="preserve"><value>マニフェスト取得中: {0}...</value></data>
+  <data name="Download_ManifestFailed" xml:space="preserve"><value>マニフェストダウンロード失敗: {0}</value></data>
+  <data name="Download_TaskStart" xml:space="preserve"><value>検証/ダウンロード開始。合計: {0}ファイル、{1}</value></data>
+  <data name="Download_FileUnfixable" xml:space="preserve"><value>ファイル修復不可またはユーザーキャンセル: {0}</value></data>
+  <data name="Download_MovingFiles" xml:space="preserve"><value>ダウンロード検証完了、ファイル移動中...</value></data>
+  <data name="Download_AllDone" xml:space="preserve"><value>すべて完了！</value></data>
+  <data name="Download_UserCancelled" xml:space="preserve"><value>ユーザーによりキャンセル。</value></data>
+  <data name="Download_VerifyFailed" xml:space="preserve"><value>[検証失敗] {0}（サーバー:{1} vs ローカル:{2}）</value></data>
+  <data name="Download_FileException" xml:space="preserve"><value>[ファイル例外] {0}: {1}</value></data>
+  <data name="Download_ManifestMd5Retry" xml:space="preserve"><value>マニフェストMD5検証失敗、再試行...</value></data>
+  <data name="Download_CannotConnectApi" xml:space="preserve"><value>Mihoyo APIに接続できません</value></data>
+  <data name="DailyNote_ApiError" xml:space="preserve"><value>APIエラー、retcode={0}</value></data>
+  <data name="DailyNote_GetFailed" xml:space="preserve"><value>デイリーメモデータ取得失敗: {0}</value></data>
+  <data name="DailyNote_InvalidResponse" xml:space="preserve"><value>無効な応答形式</value></data>
+  <data name="DailyNote_TransformerTime" xml:space="preserve"><value>{0}日{1}時間{2}分</value></data>
+  <data name="DailyNote_Claimed" xml:space="preserve"><value>受取済み</value></data>
+  <data name="DailyNote_Unclaimed" xml:space="preserve"><value>未受取</value></data>
+  <data name="DailyNote_NoFingerprint" xml:space="preserve"><value>デバイス指紋サービスを取得できません</value></data>
+  <data name="DailyNote_NoActiveAccount" xml:space="preserve"><value>アクティブアカウントなし</value></data>
+  <data name="DailyNote_CannotLoadCookie" xml:space="preserve"><value>Cookieを読み込めません</value></data>
+  <data name="DailyNote_FetchFailed" xml:space="preserve"><value>メモ取得失敗: {0}（retcode={1}）</value></data>
+  <data name="Geetest_NoFingerprintService" xml:space="preserve"><value>デバイス指紋サービスを取得できません</value></data>
+  <data name="Geetest_NoAccountService" xml:space="preserve"><value>アカウント管理サービスを取得できません</value></data>
+  <data name="Geetest_NoActiveAccount" xml:space="preserve"><value>アクティブアカウントなし</value></data>
+  <data name="Geetest_CaptchaTitle" xml:space="preserve"><value>CAPTCHA認証</value></data>
+  <data name="Launcher_DllNotLoaded" xml:space="preserve"><value>C++ランタイム不足またはアンチウイルスブロックによりLauncher.dllを読み込めません。起動できません。</value></data>
+  <data name="Screenshot_Saved" xml:space="preserve"><value>スクリーンショット保存完了</value></data>
+  <data name="Screenshot_CaptureFailed" xml:space="preserve"><value>スクリーンショット撮影失敗</value></data>
+  <data name="Update_AllRetriesFailed" xml:space="preserve"><value>すべての再試行が失敗</value></data>
+  <data name="UserInfo_FeatureRemoved" xml:space="preserve"><value>機能削除済み</value></data>
+  <data name="Hoyolab_AsiaServer" xml:space="preserve"><value>アジアサーバー</value></data>
+  <data name="Hoyolab_USAServer" xml:space="preserve"><value>アメリカサーバー</value></data>
+  <data name="Hoyolab_EuroServer" xml:space="preserve"><value>欧州サーバー</value></data>
+  <data name="Hoyolab_CHTServer" xml:space="preserve"><value>TW/HK/MOサーバー</value></data>
+  <data name="FilePicker_MainWindowNull" xml:space="preserve"><value>メインウィンドウが存在しないため、ファイル選択を開けません</value></data>
+  <data name="FilePicker_InvalidWindowHandle" xml:space="preserve"><value>ウィンドウハンドルが無効です。通常ユーザーモードで実行するか再試行してください。</value></data>
+  <data name="Crash_Title" xml:space="preserve"><value>FufuLauncherでエラーが発生しました</value></data>
+  <data name="Crash_Message" xml:space="preserve"><value>アプリケーションでエラーが発生しました
+
+エラー発生源: {0}
+エラーメッセージ: {1}
+
+スタックトレース:
+{2}</value></data>
+  <data name="Program_InjectionFailed" xml:space="preserve"><value>注入起動失敗: {0}（コード: {1}）</value></data>
+  <data name="Program_InjectionException" xml:space="preserve"><value>注入プロセス例外: {0}</value></data>
+  <data name="Program_ErrorTitle" xml:space="preserve"><value>FufuLauncher エラー</value></data>
+  <data name="IniFile_AccessDenied" xml:space="preserve"><value>アクセス拒否。ファイル/フォルダが「読み取り専用」になっていないか確認するか、管理者として実行してください。</value></data>
+  <data name="IniFile_WriteFailed" xml:space="preserve"><value>書き込み失敗: ファイルがゲームまたは他のプログラムで使用中である可能性があります。
+詳細: {0}</value></data>
+  <data name="IniFile_WriteError" xml:space="preserve"><value>設定の書き込み中にエラーが発生しました。
+詳細: {0}</value></data>
+</root>
