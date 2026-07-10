@@ -9,7 +9,7 @@
 
 #### [注入模块开源地址](https://github.com/CodeCubist/FufuLauncher.UnlockerIsland)
 
-#### [English](./README-en.md)
+#### [English](./README.md)
 
 ### 提出问题前，请检查你是否更新到了最新版本。以及提问请加上标签！
 
