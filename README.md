@@ -1,56 +1,48 @@
-# [芙芙启动器](https://github.com/CodeCubist/FufuLauncher)
+# [FufuLauncher](https://github.com/CodeCubist/FufuLauncher)
 
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-orange)
 
-### 一个原神的第三方启动工具，支持游戏注入、自动签到和一些实用小功能。
+### A third-party launcher for Genshin Impact, supporting game injection, auto check-in, and various utility features.
 
-#### [官方网站](https://fu1.fun/)
+#### [Official Website](https://fu1,fun/)
 
-#### [注入模块开源地址](https://github.com/CodeCubist/FufuLauncher.UnlockerIsland)
+#### [Injection Module Open Source Address](https://github.com/CodeCubist/FufuLauncher.UnlockerIsland)
 
-#### [English](./README-en.md)
+## Main Features
 
-### 提出问题前，请检查你是否更新到了最新版本。以及提问请加上标签！
+* **Account Management**: Quick switching between multiple accounts without repeated password entry.
+* **Auto Check-in**: Complete Miyoushe daily check-ins with one click.
+* **Game Management**: Automatic game path detection and real-time version announcement updates.
+* **Utilities**: Built-in cultivation calculator and keyboard auto-clicker.
+* **Launch Parameters**: Customize resolution, windowed mode, and other settings.
+* **Injection**: Enhance the gaming experience with specialized content.
 
-## 主要功能
+## How to Use
 
-* **账号管理**：多账号快速切换，不用重复输入密码
-* **自动签到**：每天一键完成米游社签到
-* **游戏管理**：自动选择游戏路径，实时更新版本公告
-* **实用工具**：内置养成计算器、键盘连点器
-* **启动参数**：自定义分辨率、窗口模式等设置
-* **注入**：辅助体验更好的游戏内容
+* **First Launch**: A User Agreement will be displayed. You must read and agree to it before use.
+* Go to the "**Settings**" page to select the game installation path. **It is highly recommended to accept the automatically identified path.**
+* Log in to your Miyoushe account on the "**Account**" page, then you can use the check-in feature on the home page.
+* Click "**Launch Game**" on the main interface to start the game.
 
-## 怎么用
+## Important Notes
 
-* **第一次打开**会显示用户协议，同意后才能用，请仔细阅读它！
-* 去 "**设置**" 页面选一下游戏安装路径，**最好同意自动识别的路径**
-* 在 "**账号**" 页面登录米游社账号，回到主页就可以用签到了
-* 主界面点 “**点击启动游戏**” 就能启动游戏了
+* Switching accounts requires **Administrator privileges**.
+* **Avoid using Administrator mode while selecting the game path**; run the program as Administrator only after the path is set.
+* The injection feature requires the program to be **Run as Administrator**.
+* Custom backgrounds support images and video files. **Live video backgrounds may be unstable; images work normally.**
 
-## 注意事项
+## Instructions
 
-* 切换账号需要**管理员权限**
-* 游戏路径**尽量别用管理员模式选**，选完再管理员运行
-* 注入功能需要以**管理员身份运行程序**
-* 自定义背景支持图片和视频文件，**动态视频背景不太稳定，图片正常**
-
-## 说明
-
-* 请在使用项目前安装 **.NET 8.0** 或以上任意版本和 **Webview2** 运行时
-* 本项目仅供学习交流使用，请支持官方正版游戏。
-
-## 赞助商
-
-### [<img src="https://avatars.githubusercontent.com/u/34448643" alt="SignPath" width="48" /> 代码签名由 SignPath 提供](https://signpath.org)
-
-免费代码签名由 [SignPath.io](https://about.signpath.io) 提供，证书由 [SignPath Foundation](https://signpath.org) 提供。
-
-## 投稿者与审稿人
-
-<a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
-
-## Star History
+* Please ensure **.NET 8.0** or above and the **WebView2** runtime are installed before using this project.
+* This project is for learning and exchange purposes only. Please support the official game.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CodeCubist/FufuLauncher&type=date&legend=top-left)](https://www.star-history.com/#CodeCubist/FufuLauncher&type=date&legend=top-left)
+
+### [<img src="https://avatars.githubusercontent.com/u/34448643" alt="SignPath" width="48" /> Code signing provided by SignPath](https://signpath.org)
+
+Free code signing is provided by [SignPath.io](https://about.signpath.io), with certificates provided by [SignPath Foundation](https://signpath.org).
+
+**Contributors and Reviewers**
+
+<a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
