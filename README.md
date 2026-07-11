@@ -5,6 +5,7 @@
 
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-orange)
+[![GitHub Repo stars](https://img.shields.io/github/stars/CodeCubist/FufuLauncher?style=social)](https://github.com/CodeCubist/FufuLauncher)
 
 ### A third-party launcher for Genshin Impact, supporting game injection, auto check-in, and some practical utility features.
 
@@ -54,6 +55,8 @@ Free code signing is provided by [SignPath.io](https://about.signpath.io), and t
 
 <a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
 
-## Star History
+## Support
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CodeCubist/FufuLauncher&type=date&legend=top-left)](https://www.star-history.com/#CodeCubist/FufuLauncher&type=date&legend=top-left)
+If this project is helpful to you, please click the Star button on the upper right corner of the page to support the repository.
+
+[![Star Repository](https://img.shields.io/github/stars/CodeCubist/FufuLauncher?style=social&label=Star)](https://github.com/CodeCubist/FufuLauncher)
