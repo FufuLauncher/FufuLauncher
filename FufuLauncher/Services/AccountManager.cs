@@ -65,8 +65,23 @@ public class AccountManager
     {
         if (File.Exists(_accountsFilePath))
         {
-            var json = await File.ReadAllTextAsync(_accountsFilePath);
-            _accountList = JsonSerializer.Deserialize<AccountList>(json) ?? new AccountList();
+            try
+            {
+                var json = await File.ReadAllTextAsync(_accountsFilePath);
+                _accountList = JsonSerializer.Deserialize<AccountList>(json) ?? new AccountList();
+            }
+            catch (JsonException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    $"[AccountManager] accounts.json 解析失败，将重置账号列表: {ex.Message}");
+                try
+                {
+                    var backupPath = _accountsFilePath + $".corrupt.{DateTime.Now:yyyyMMddHHmmss}.bak";
+                    File.Copy(_accountsFilePath, backupPath, overwrite: true);
+                }
+                catch { }
+                _accountList = new AccountList();
+            }
         }
         else
         {
