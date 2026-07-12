@@ -310,7 +310,7 @@ If you continue, this warning will be ignored and the preset&apos;s Hash will be
   <data name="PluginFPS" xml:space="preserve"><value>FPS (幀率插件)</value></data>
   <data name="PluginAvatar" xml:space="preserve"><value>Avatar (千星頭像插件)</value></data>
   <data name="ModifiedDateLabel" xml:space="preserve"><value>修改日期: </value></data>
-  <data name="FunctionsMenuBtn" xml:space="preserve"><value>功能(Download/Repair)</value></data>
+  <data name="FunctionsMenuBtn" xml:space="preserve"><value>功能</value></data>
   <data name="DownloadPluginBtn" xml:space="preserve"><value>下載插件(Download)</value></data>
   <data name="RepairFpsPluginBtn" xml:space="preserve"><value>修復FPS顯示插件(Repair)</value></data>
   <data name="MainPluginEnabledLabel" xml:space="preserve"><value>主插件啟用</value></data>
