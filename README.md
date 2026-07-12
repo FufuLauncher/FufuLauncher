@@ -1,9 +1,16 @@
-# [FufuLauncher](https://github.com/CodeCubist/FufuLauncher)
+<div align="center">
+  <img src="https://raw.githubusercontent.com/FufuLauncher/FufuLauncher/master/FufuLauncher/Assets/icon.png" alt="FufuLauncher Logo" width="128" />
+  <h1><a href="https://github.com/CodeCubist/FufuLauncher">FufuLauncher</a></h1>
+</div>
 
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-orange)
+![Stars](https://img.shields.io/github/stars/CodeCubist/FufuLauncher?style=flat&color=yellow)
+![Downloads](https://img.shields.io/github/downloads/CodeCubist/FufuLauncher/total?style=flat&color=blue)
 
 ### A third-party launcher for Genshin Impact, supporting game injection, auto check-in, and some practical utility features.
+
+**If you find this project helpful, please consider giving it a Star to support the development.**
 
 #### [Official Website](https://fu1.fun/)
 
@@ -50,7 +57,3 @@ Free code signing is provided by [SignPath.io](https://about.signpath.io), and t
 ## Contributors and Reviewers
 
 <a href="https://github.com/FufuLauncher/FufuLauncher/graphs/contributors"><img src="https://contrib.rocks/image?repo=FufuLauncher/FufuLauncher" /></a>
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=CodeCubist/FufuLauncher&type=date&legend=top-left)](https://www.star-history.com/#CodeCubist/FufuLauncher&type=date&legend=top-left)
