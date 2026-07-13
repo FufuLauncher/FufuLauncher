@@ -52,6 +52,11 @@ public sealed partial class PluginStorePage : Page
         }
     }
     
+    private async void OnUploadPluginClick(object sender, RoutedEventArgs e)
+    {
+        await Windows.System.Launcher.LaunchUriAsync(new Uri("https://github.com/FufuLauncher/FufuLauncher/issues"));
+    }
+
     private async void OnRefreshClick(object sender, RoutedEventArgs e)
     {
         await ViewModel.InitializeAsync();

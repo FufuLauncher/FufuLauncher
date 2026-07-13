@@ -1481,4 +1481,6 @@
   <data name="PluginStoreSecurityBannedOp" xml:space="preserve"><value>脚本包含禁止的操作 ({0})。</value></data>
   <data name="PluginStoreSecurityPathTraversalShort" xml:space="preserve"><value>路径穿越尝试</value></data>
   <data name="PluginStoreSecurityScriptTooLarge" xml:space="preserve"><value>脚本过大</value></data>
+  <data name="PluginStoreUpload" xml:space="preserve"><value>上传插件</value></data>
+  <data name="PluginStoreUploadTooltip" xml:space="preserve"><value>前往 GitHub 提交你的插件</value></data>
 </root>

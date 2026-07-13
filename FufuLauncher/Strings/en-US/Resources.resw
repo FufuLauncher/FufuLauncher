@@ -1433,4 +1433,6 @@ Details: {0}</value></data>
   <data name="PluginStoreSecurityBannedOp" xml:space="preserve"><value>Script contains forbidden operation ({0}).</value></data>
   <data name="PluginStoreSecurityPathTraversalShort" xml:space="preserve"><value>Path traversal attempt</value></data>
   <data name="PluginStoreSecurityScriptTooLarge" xml:space="preserve"><value>Script too large</value></data>
+  <data name="PluginStoreUpload" xml:space="preserve"><value>Upload Plugin</value></data>
+  <data name="PluginStoreUploadTooltip" xml:space="preserve"><value>Submit your plugin on GitHub</value></data>
 </root>

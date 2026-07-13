@@ -267,6 +267,10 @@
                                 </TextBox>
 
                                 <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <Button Style="{StaticResource StoreInstallButtonStyle}" 
+                                            Content="{helpers:Loc Key=PluginStoreUpload}" 
+                                            Click="OnUploadPluginClick"
+                                            ToolTipService.ToolTip="{helpers:Loc Key=PluginStoreUploadTooltip}"/>
                                     <Button x:Name="SortButton" Background="Transparent" BorderThickness="0" Padding="12,6">
                                         <StackPanel Orientation="Horizontal" Spacing="8">
                                             <FontIcon Glyph="&#xE8CB;" FontSize="14" Foreground="{ThemeResource SafeSecondaryTextBrush}"/>
