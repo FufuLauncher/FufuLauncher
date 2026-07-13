@@ -1406,4 +1406,34 @@
 反馈: {0}</value></data>
   <data name="IniFile_WriteError" xml:space="preserve"><value>写入配置时发生错误
 反馈: {0}</value></data>
+  <data name="PluginStoreTitle" xml:space="preserve"><value>插件商城</value></data>
+  <data name="PluginStoreSearch" xml:space="preserve"><value>搜索插件...</value></data>
+  <data name="PluginStoreInstall" xml:space="preserve"><value>安装</value></data>
+  <data name="PluginStoreInstalled" xml:space="preserve"><value>已安装</value></data>
+  <data name="PluginStoreUpdate" xml:space="preserve"><value>更新</value></data>
+  <data name="PluginStoreUninstall" xml:space="preserve"><value>卸载</value></data>
+  <data name="PluginStoreInstalling" xml:space="preserve"><value>安装中...</value></data>
+  <data name="PluginStoreRating" xml:space="preserve"><value>评分</value></data>
+  <data name="PluginStoreDownloads" xml:space="preserve"><value>下载</value></data>
+  <data name="PluginStoreSize" xml:space="preserve"><value>大小</value></data>
+  <data name="PluginStoreVersion" xml:space="preserve"><value>版本</value></data>
+  <data name="PluginStoreNoResults" xml:space="preserve"><value>没有找到插件</value></data>
+  <data name="PluginStoreError" xml:space="preserve"><value>加载失败</value></data>
+  <data name="PluginStoreLoading" xml:space="preserve"><value>加载中...</value></data>
+  <data name="PluginStoreRetry" xml:space="preserve"><value>重试</value></data>
+  <data name="PluginStorePrevious" xml:space="preserve"><value>上一页</value></data>
+  <data name="PluginStoreNext" xml:space="preserve"><value>下一页</value></data>
+  <data name="PluginStoreAll" xml:space="preserve"><value>全部</value></data>
+  <data name="PluginStoreSortPopular" xml:space="preserve"><value>热门</value></data>
+  <data name="PluginStoreSortNewest" xml:space="preserve"><value>最新</value></data>
+  <data name="PluginStoreSortRating" xml:space="preserve"><value>评分最高</value></data>
+  <data name="PluginStoreInstallSuccess" xml:space="preserve"><value>已安装: {0}</value></data>
+  <data name="PluginStoreInstallFailed" xml:space="preserve"><value>安装失败: {0}</value></data>
+  <data name="PluginStoreUninstallSuccess" xml:space="preserve"><value>已卸载: {0}</value></data>
+  <data name="PluginStoreVerifying" xml:space="preserve"><value>验证中...</value></data>
+  <data name="PluginStoreHashMismatch" xml:space="preserve"><value>文件完整性校验失败，下载可能已损坏或被篡改</value></data>
+  <data name="PluginStoreLuaHashMismatch" xml:space="preserve"><value>安装脚本完整性校验失败</value></data>
+  <data name="PluginStoreSecurityBlocked" xml:space="preserve"><value>安装已阻止: {0}</value></data>
+  <data name="PluginStorePathTraversal" xml:space="preserve"><value>安全: 已阻止路径穿越尝试</value></data>
+  <data name="PluginStoreHashVerified" xml:space="preserve"><value>完整性校验通过</value></data>
 </root>

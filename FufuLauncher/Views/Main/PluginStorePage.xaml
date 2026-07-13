@@ -1,0 +1,407 @@
+<Page
+    x:Class="FufuLauncher.Views.PluginStorePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:FufuLauncher.Models"
+    xmlns:viewModels="using:FufuLauncher.ViewModels"
+    xmlns:converters="using:FufuLauncher.Converters"
+    mc:Ignorable="d"
+    Background="Transparent"
+    Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF" TintOpacity="0.6" />
+                    <AcrylicBrush x:Key="InstallOverlayBrush" FallbackColor="#D9FFFFFF" TintColor="#FFFFFF" TintOpacity="0.85" />
+                    <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
+                    <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
+                    <SolidColorBrush x:Key="SafeTextBrush" Color="#FF000000" />
+                    <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#99000000" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000" TintOpacity="0.15" />
+                    <AcrylicBrush x:Key="InstallOverlayBrush" FallbackColor="#D9000000" TintColor="#000000" TintOpacity="0.85" />
+                    <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
+                    <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
+                    <SolidColorBrush x:Key="SafeTextBrush" Color="White" />
+                    <SolidColorBrush x:Key="SafeSecondaryTextBrush" Color="#B3FFFFFF" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <converters:RatingToTextConverter x:Key="RatingToTextConverter"/>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:BoolInverterConverter x:Key="BoolInverterConverter"/>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
+            
+            <Storyboard x:Name="EntranceStoryboard">
+                <DoubleAnimation Storyboard.TargetName="RootLayoutGrid"
+                                 Storyboard.TargetProperty="Opacity"
+                                 From="0" To="1" Duration="0:0:0.5">
+                    <DoubleAnimation.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut" Exponent="4"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+                <DoubleAnimation Storyboard.TargetName="RootTranslate"
+                                 Storyboard.TargetProperty="Y"
+                                 From="30" To="0" Duration="0:0:0.6">
+                    <DoubleAnimation.EasingFunction>
+                        <ExponentialEase EasingMode="EaseOut" Exponent="6"/>
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            
+            <Style x:Key="SettingsCardStyle" TargetType="Grid">
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="Padding" Value="24" />
+            </Style>
+
+            <Style x:Key="SafePluginCardStyle" TargetType="Grid">
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="CornerRadius" Value="14"/>
+                <Setter Property="Padding" Value="0"/>
+            </Style>
+
+            <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{ThemeResource SafeSecondaryTextBrush}" />
+                <Setter Property="Margin" Value="4,0,0,8" />
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+            </Style>
+            
+            <Style x:Key="StoreInstallButtonStyle" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+                <Setter Property="CornerRadius" Value="16"/>
+                <Setter Property="Padding" Value="16,6"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}"/>
+                <Setter Property="MinWidth" Value="72"/>
+                <Setter Property="Height" Value="32"/>
+            </Style>
+
+            <Style x:Key="StoreInstalledButtonStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                <Setter Property="CornerRadius" Value="16"/>
+                <Setter Property="Padding" Value="16,6"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}"/>
+                <Setter Property="MinWidth" Value="72"/>
+                <Setter Property="Height" Value="32"/>
+            </Style>
+
+            <Style x:Key="CategoryChipStyle" TargetType="Button" BasedOn="{StaticResource DefaultButtonStyle}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="Padding" Value="16,8"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}"/>
+            </Style>
+            
+            <DataTemplate x:Key="PluginCardTemplate" x:DataType="models:PluginStoreItem">
+                <Grid Width="340" Height="156" Style="{StaticResource SafePluginCardStyle}">
+                    
+                    <Grid Padding="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Column="0" Width="64" Height="64" CornerRadius="12" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" VerticalAlignment="Top">
+                            <FontIcon Glyph="&#xE74C;" FontSize="24" Foreground="{ThemeResource SafeSecondaryTextBrush}"/>
+                            <Image Source="{x:Bind IconUrl, Converter={StaticResource StringToImageSourceConverter}, Mode=OneWay}" Stretch="UniformToFill"/>
+                        </Grid>
+
+                        <Grid Grid.Column="1" Margin="16,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>   
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="{x:Bind Name, Mode=OneWay}" Style="{StaticResource BodyStrongTextBlockStyle}" MaxLines="1" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{x:Bind Developer, Mode=OneWay}" FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}" Margin="0,2,0,0" MaxLines="1" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="1" Text="{x:Bind Description, Mode=OneWay}" FontSize="12" Foreground="{ThemeResource SafeSecondaryTextBrush}" Opacity="0.8" Margin="0,8,0,0" MaxLines="2" TextTrimming="CharacterEllipsis" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                            
+                            <Grid Grid.Row="2" Margin="0,12,0,0" Height="32" VerticalAlignment="Bottom">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" MinWidth="72"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" MaxWidth="70"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Border Grid.Column="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" Padding="6,2" VerticalAlignment="Center" Margin="0,0,8,0">
+                                        <TextBlock Text="{x:Bind Category, Mode=OneWay}" FontSize="10" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" MaxLines="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                    </Border>
+                                    
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center" Margin="0,0,8,0">
+                                        <FontIcon Glyph="&#xE735;" FontSize="10" Foreground="#FFD88417" VerticalAlignment="Center" Margin="0,0,0,1"/>
+                                        <TextBlock Text="{x:Bind RatingDisplay, Mode=OneWay}" FontSize="11" Foreground="{ThemeResource SafeSecondaryTextBrush}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    
+                                    <TextBlock Grid.Column="2" Text="{x:Bind SizeDisplay, Mode=OneWay}" FontSize="11" Foreground="{ThemeResource SafeSecondaryTextBrush}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxLines="1"/>
+                                </Grid>
+                                
+                                <Grid Grid.Column="1" VerticalAlignment="Center" Visibility="{x:Bind StateIsInProgress, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert, Mode=OneWay}">
+                                    <Grid.Transitions>
+                                        <TransitionCollection>
+                                            <EntranceThemeTransition FromVerticalOffset="12" IsStaggeringEnabled="False"/>
+                                        </TransitionCollection>
+                                    </Grid.Transitions>
+
+                                    <Button Style="{StaticResource StoreInstallButtonStyle}" 
+                                            Visibility="{x:Bind CanInstall, Mode=OneWay}" 
+                                            Content="{x:Bind ButtonText, Mode=OneWay}" 
+                                            Click="OnInstallButtonClick" 
+                                            Tag="{x:Bind}"/>
+                                    
+                                    <Button Style="{StaticResource StoreInstalledButtonStyle}" 
+                                            Visibility="{x:Bind StateIsInstalled, Mode=OneWay}" 
+                                            Content="{x:Bind ButtonText, Mode=OneWay}" 
+                                            Click="OnInstalledButtonClick" 
+                                            Tag="{x:Bind}"/>
+                                    
+                                    <Button Style="{StaticResource StoreInstallButtonStyle}" 
+                                            Visibility="{x:Bind StateIsUpdateAvailable, Mode=OneWay}" 
+                                            Content="{x:Bind ButtonText, Mode=OneWay}" 
+                                            Click="OnInstallButtonClick" 
+                                            Tag="{x:Bind}">
+                                        <Button.Resources>
+                                            <SolidColorBrush x:Key="AccentButtonBackground" Color="#FF107C10"/>
+                                            <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="#FF0E680E"/>
+                                            <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="#FF0A4B0A"/>
+                                        </Button.Resources>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    
+                    <Grid Visibility="{x:Bind StateIsInProgress, Mode=OneWay}" CornerRadius="14" Background="{ThemeResource InstallOverlayBrush}">
+                        <Grid.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition FromVerticalOffset="12" IsStaggeringEnabled="False"/>
+                            </TransitionCollection>
+                        </Grid.Transitions>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="16" Width="260" Padding="16">
+                            <TextBlock Text="{x:Bind InstallStatusText, Mode=OneWay}" FontSize="15" FontWeight="SemiBold" Foreground="{ThemeResource SafeTextBrush}" HorizontalAlignment="Center"/>
+                            <ProgressBar Value="{x:Bind InstallProgress, Mode=OneWay}" Maximum="100" Height="6" CornerRadius="3" Foreground="{ThemeResource AccentFillColorDefaultBrush}" HorizontalAlignment="Stretch"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid x:Name="RootLayoutGrid" Opacity="0" Padding="0">
+        <Grid.RenderTransform>
+            <TranslateTransform x:Name="RootTranslate" Y="30"/>
+        </Grid.RenderTransform>
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Disabled">
+            
+            <Grid Padding="36,24,36,36" HorizontalAlignment="Stretch">
+                
+                <Grid MaxWidth="1100" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="插件商城" Style="{StaticResource TitleTextBlockStyle}" FontFamily="{StaticResource AppGlobalFont}" Margin="0,0,0,24" HorizontalAlignment="Left" />
+                    
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Stretch" Spacing="16">
+                        <TextBlock Text="探索与发现" Style="{StaticResource SectionHeaderStyle}" />
+                        
+                        <Grid Style="{StaticResource SettingsCardStyle}" Translation="0,0,32" Margin="0,0,0,16" HorizontalAlignment="Stretch">
+                            <Grid.Shadow>
+                                <ThemeShadow/>
+                            </Grid.Shadow>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MaxWidth="400"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox Grid.Column="0"
+                                         x:Name="SearchBox"
+                                         PlaceholderText="搜索插件名称或关键字..."
+                                         Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         KeyDown="OnSearchKeyDown"
+                                         CornerRadius="8"
+                                         Height="36"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Center">
+                                    <TextBox.Resources>
+                                        <SolidColorBrush x:Key="TextControlBackground" Color="{ThemeResource CardBackgroundFillColorDefault}"/>
+                                    </TextBox.Resources>
+                                </TextBox>
+
+                                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                    <Button x:Name="SortButton" Background="Transparent" BorderThickness="0" Padding="12,6">
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
+                                            <FontIcon Glyph="&#xE8CB;" FontSize="14" Foreground="{ThemeResource SafeSecondaryTextBrush}"/>
+                                            <TextBlock x:Name="SortLabel" Text="热门排序" FontSize="13" Foreground="{ThemeResource SafeTextBrush}"/>
+                                        </StackPanel>
+                                        <Button.Flyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem Text="热门排序" Click="OnSortClick" Tag="popular"/>
+                                                <MenuFlyoutItem Text="最新上架" Click="OnSortClick" Tag="newest"/>
+                                                <MenuFlyoutItem Text="评分最高" Click="OnSortClick" Tag="rating"/>
+                                            </MenuFlyout>
+                                        </Button.Flyout>
+                                    </Button>
+                                    <Button Background="Transparent" BorderThickness="0" Padding="8,6" Click="OnRefreshClick" ToolTipService.ToolTip="刷新">
+                                        <FontIcon Glyph="&#xE72C;" FontSize="14" Foreground="{ThemeResource SafeSecondaryTextBrush}"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+
+                            <Rectangle Grid.Row="1" Height="1" Fill="{ThemeResource SafeBorderBrush}" Margin="-24,16,-24,16" />
+                            
+                            <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                                <ItemsControl ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="8"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="models:PluginStoreCategory">
+                                            <Button Style="{StaticResource CategoryChipStyle}" Click="OnCategoryClick" Tag="{x:Bind}">
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <!-- 【修改点】使用 FontIcon 专门解析 WinUI3 的 Segoe Fluent 图标 -->
+                                                    <FontIcon Glyph="{x:Bind Icon}" FontSize="14" VerticalAlignment="Center"/>
+                                                    <TextBlock Text="{x:Bind DisplayName}" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                        </Grid>
+                        
+                        <TextBlock Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}" Foreground="{ThemeResource SafeSecondaryTextBrush}" FontSize="12" Margin="4,0,0,16" />
+                    </StackPanel>
+                    
+                    <GridView Grid.Row="2"
+                              x:Name="PluginGridView"
+                              MinHeight="300"
+                              ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
+                              ItemTemplate="{StaticResource PluginCardTemplate}"
+                              SelectionMode="None" 
+                              IsItemClickEnabled="True"
+                              ItemClick="OnPluginItemClick"
+                              Padding="0,0,0,24"
+                              HorizontalAlignment="Stretch"
+                              ScrollViewer.VerticalScrollMode="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                              Visibility="{x:Bind ViewModel.IsLoading, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert, Mode=OneWay}">
+                        
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem">
+                                <Setter Property="Margin" Value="6"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="CornerRadius" Value="14"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="GridViewItem">
+                                            <ContentPresenter Content="{TemplateBinding Content}"
+                                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                              Margin="{TemplateBinding Padding}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GridView.ItemContainerStyle>
+
+                        <GridView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                                <RepositionThemeTransition/>
+                            </TransitionCollection>
+                        </GridView.ItemContainerTransitions>
+
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left"/>
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+
+                    <Grid Grid.Row="2" MinHeight="300" Visibility="{x:Bind ViewModel.IsLoading, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Spacing="16">
+                            <ProgressRing IsActive="True" Width="48" Height="48"/>
+                            <TextBlock Text="正在同步插件列表..." Foreground="{ThemeResource SafeSecondaryTextBrush}" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="2" MinHeight="300" Visibility="{x:Bind ViewModel.HasError, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel Spacing="16" HorizontalAlignment="Center" MaxWidth="400">
+                            <FontIcon Glyph="&#xE783;" FontSize="48" Foreground="{ThemeResource SystemFillColorCriticalBrush}"/>
+                            <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}" Foreground="{ThemeResource SafeSecondaryTextBrush}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                            <Button Content="重新加载" Click="OnRefreshClick" HorizontalAlignment="Center" Style="{StaticResource StoreInstallButtonStyle}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="3" HorizontalAlignment="Center" Margin="0,16,0,0">
+                        <Border Background="{ThemeResource SafeGlassBrush}"
+                                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                BorderThickness="1"
+                                CornerRadius="24"
+                                Padding="16,8">
+                            <StackPanel Orientation="Horizontal" Spacing="24" VerticalAlignment="Center">
+                                <Button x:Name="PrevPageBtn" Content="&#xE76B;" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                        Style="{StaticResource StoreInstalledButtonStyle}" Width="40" MinWidth="40"
+                                        Visibility="{x:Bind ViewModel.CanGoPrev, Mode=OneWay}"
+                                        Click="OnPrevPageClick" ToolTipService.ToolTip="上一页"/>
+
+                                <TextBlock x:Name="PageInfoText"
+                                           Text="{x:Bind ViewModel.PageInfo, Mode=OneWay}"
+                                           Foreground="{ThemeResource SafeTextBrush}"
+                                           VerticalAlignment="Center"
+                                           FontWeight="SemiBold"
+                                           FontSize="13"/>
+
+                                <Button x:Name="NextPageBtn" Content="&#xE76C;" FontFamily="{ThemeResource SymbolThemeFontFamily}"
+                                        Style="{StaticResource StoreInstalledButtonStyle}" Width="40" MinWidth="40"
+                                        Visibility="{x:Bind ViewModel.CanGoNext, Mode=OneWay}"
+                                        Click="OnNextPageClick" ToolTipService.ToolTip="下一页"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
