@@ -59,12 +59,16 @@ public static class AppPaths
 
         var defaultData = Path.Combine(RootDir, "Data");
         var defaultCache = Path.Combine(RootDir, "Cache");
-        if (!string.Equals(defaultData, _dataDir, StringComparison.OrdinalIgnoreCase) && Directory.Exists(defaultData))
+        if (!string.Equals(defaultData, _dataDir, StringComparison.OrdinalIgnoreCase)
+            && Directory.Exists(defaultData)
+            && !ArePathsOverlapping(defaultData, _dataDir))
         {
             if (MoveDirectoryContents(defaultData, _dataDir))
                 TryDeleteEmptyDirectory(defaultData);
         }
-        if (!string.Equals(defaultCache, _cacheDir, StringComparison.OrdinalIgnoreCase) && Directory.Exists(defaultCache))
+        if (!string.Equals(defaultCache, _cacheDir, StringComparison.OrdinalIgnoreCase)
+            && Directory.Exists(defaultCache)
+            && !ArePathsOverlapping(defaultCache, _cacheDir))
         {
             if (MoveDirectoryContents(defaultCache, _cacheDir))
                 TryDeleteEmptyDirectory(defaultCache);
@@ -91,12 +95,18 @@ public static class AppPaths
 
         if (!string.Equals(oldDataDir, newDataDir, StringComparison.OrdinalIgnoreCase))
         {
-            dataMovedOk = MoveDirectoryContents(oldDataDir, newDataDir);
+            if (!ArePathsOverlapping(oldDataDir, newDataDir))
+                dataMovedOk = MoveDirectoryContents(oldDataDir, newDataDir);
+            else
+                Debug.WriteLine($"[AppPaths] 跳过数据迁移: 源目录与目标目录存在包含关系 {oldDataDir} <-> {newDataDir}");
         }
 
         if (!string.Equals(oldCacheDir, newCacheDir, StringComparison.OrdinalIgnoreCase))
         {
-            cacheMovedOk = MoveDirectoryContents(oldCacheDir, newCacheDir);
+            if (!ArePathsOverlapping(oldCacheDir, newCacheDir))
+                cacheMovedOk = MoveDirectoryContents(oldCacheDir, newCacheDir);
+            else
+                Debug.WriteLine($"[AppPaths] 跳过缓存迁移: 源目录与目标目录存在包含关系 {oldCacheDir} <-> {newCacheDir}");
         }
 
         _dataDir = newDataDir;
@@ -137,6 +147,32 @@ public static class AppPaths
         };
         File.WriteAllText(PathsConfigFile, JsonSerializer.Serialize(config));
     }
+    
+    private static bool ArePathsOverlapping(string path1, string path2)
+    {
+        try
+        {
+            var full1 = Path.GetFullPath(path1).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                        + Path.DirectorySeparatorChar;
+            var full2 = Path.GetFullPath(path2).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                        + Path.DirectorySeparatorChar;
+            return full1.StartsWith(full2, StringComparison.OrdinalIgnoreCase)
+                || full2.StartsWith(full1, StringComparison.OrdinalIgnoreCase);
+        }
+        catch
+        {
+            return true;
+        }
+    }
+    
+    private static bool IsSubdirectoryOf(string candidate, string parent)
+    {
+        var fullCandidate = Path.GetFullPath(candidate).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                            + Path.DirectorySeparatorChar;
+        var fullParent = Path.GetFullPath(parent).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                         + Path.DirectorySeparatorChar;
+        return fullCandidate.StartsWith(fullParent, StringComparison.OrdinalIgnoreCase);
+    }
 
     private static bool MoveDirectoryContents(string sourceDir, string destDir)
     {
@@ -144,6 +180,13 @@ public static class AppPaths
         try
         {
             if (!Directory.Exists(sourceDir)) return true;
+            
+            if (IsSubdirectoryOf(destDir, sourceDir))
+            {
+                Debug.WriteLine($"[AppPaths] 中止迁移: 目标目录是源目录的子目录 {sourceDir} -> {destDir}");
+                return false;
+            }
+
             Directory.CreateDirectory(destDir);
 
             foreach (var file in Directory.GetFiles(sourceDir, "*", SearchOption.TopDirectoryOnly))
@@ -169,6 +212,15 @@ public static class AppPaths
 
             foreach (var dir in Directory.GetDirectories(sourceDir, "*", SearchOption.TopDirectoryOnly))
             {
+                var fullDir = Path.GetFullPath(dir);
+                var fullDest = Path.GetFullPath(destDir);
+                if (string.Equals(fullDir.TrimEnd(Path.DirectorySeparatorChar),
+                                   fullDest.TrimEnd(Path.DirectorySeparatorChar),
+                                   StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 var destSubDir = Path.Combine(destDir, Path.GetFileName(dir));
                 if (!MoveDirectoryContents(dir, destSubDir))
                     allSuccess = false;

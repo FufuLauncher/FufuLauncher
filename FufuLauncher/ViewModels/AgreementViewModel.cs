@@ -118,6 +118,13 @@ namespace FufuLauncher.ViewModels
         {
             try
             {
+                var validationError = ValidatePaths(DataPath, CachePath);
+                if (validationError != null)
+                {
+                    PathError = validationError;
+                    return;
+                }
+
                 Helpers.AppPaths.SaveCustomPaths(DataPath, CachePath);
                 Helpers.AppPaths.FinalizeFirstRun();
                 await _localSettingsService.ReInitializeAsync();
@@ -129,6 +136,50 @@ namespace FufuLauncher.ViewModels
                 PathError = $"保存失败: {ex.Message}";
                 Debug.WriteLine($"[Agreement] FinalizeAgreementAsync 失败: {ex}");
             }
+        }
+
+        private static string? ValidatePaths(string dataPath, string cachePath)
+        {
+            if (string.IsNullOrWhiteSpace(dataPath) || string.IsNullOrWhiteSpace(cachePath))
+                return "路径不能为空";
+
+            try
+            {
+                var fullData = Path.GetFullPath(dataPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                               + Path.DirectorySeparatorChar;
+                var fullCache = Path.GetFullPath(cachePath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                                + Path.DirectorySeparatorChar;
+                
+                if (string.Equals(fullData, fullCache, StringComparison.OrdinalIgnoreCase))
+                    return "用户数据目录和缓存目录不能相同";
+                
+                if (fullData.StartsWith(fullCache, StringComparison.OrdinalIgnoreCase)
+                    || fullCache.StartsWith(fullData, StringComparison.OrdinalIgnoreCase))
+                    return "用户数据目录和缓存目录不能互相包含（一个是另一个的子目录）";
+                
+                var appDir = Path.GetFullPath(AppContext.BaseDirectory).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                             + Path.DirectorySeparatorChar;
+                if (fullData.StartsWith(appDir, StringComparison.OrdinalIgnoreCase))
+                    return "用户数据目录不能设置在应用安装目录下";
+                if (fullCache.StartsWith(appDir, StringComparison.OrdinalIgnoreCase))
+                    return "缓存目录不能设置在应用安装目录下";
+                
+                if (appDir.StartsWith(fullData, StringComparison.OrdinalIgnoreCase))
+                    return "用户数据目录不能是应用安装目录的父目录";
+                if (appDir.StartsWith(fullCache, StringComparison.OrdinalIgnoreCase))
+                    return "缓存目录不能是应用安装目录的父目录";
+                
+                if (Path.GetPathRoot(dataPath) == Path.GetFullPath(dataPath))
+                    return "用户数据目录不能是驱动器根目录";
+                if (Path.GetPathRoot(cachePath) == Path.GetFullPath(cachePath))
+                    return "缓存目录不能是驱动器根目录";
+            }
+            catch (Exception ex)
+            {
+                return $"路径无效: {ex.Message}";
+            }
+
+            return null;
         }
         
         private async Task OnIconsMissingAsync()
