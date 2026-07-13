@@ -130,6 +130,13 @@ public sealed partial class MainWindow : WindowEx
         AppWindow.Closing += AppWindow_Closing;
 
         dispatcherQueue = Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
+        Services.LuaPluginInstaller.UIDispatcher = dispatcherQueue;
+        
+        RootGrid.Loaded += (_, _) =>
+        {
+            Services.LuaPluginInstaller.MainXamlRoot = RootGrid.XamlRoot;
+        };
+        
         settings = new UISettings();
         settings.ColorValuesChanged += Settings_ColorValuesChanged;
         _backgroundRenderer = App.GetService<IBackgroundRenderer>();

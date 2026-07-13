@@ -182,6 +182,14 @@ public class PluginStoreItem : INotifyPropertyChanged
         set { _luaHash = value; OnPropertyChanged(); }
     }
 
+    private string _dllFileName = string.Empty;
+    [JsonPropertyName("dll_file_name")]
+    public string DllFileName
+    {
+        get => _dllFileName;
+        set { _dllFileName = value; OnPropertyChanged(); }
+    }
+
     [JsonIgnore]
     public StorePluginState State
     {

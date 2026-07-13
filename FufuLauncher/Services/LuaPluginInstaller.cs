@@ -5,6 +5,11 @@ Licensed under the MIT License.
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Text;
+using CommunityToolkit.Mvvm.Messaging;
+using FufuLauncher.Messages;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using MoonSharp.Interpreter;
 
 namespace FufuLauncher.Services;
@@ -17,6 +22,10 @@ public class LuaPluginInstaller
     private string? _expectedLuaHash;
     public event Action<int, string>? ProgressChanged;
     public event Action<string>? LogReceived;
+    
+    public static DispatcherQueue? UIDispatcher { get; set; }
+    
+    public static XamlRoot? MainXamlRoot { get; set; }
 
     public LuaPluginInstaller(PluginStoreService storeService)
     {
@@ -26,7 +35,8 @@ public class LuaPluginInstaller
     
     public async Task ExecuteInstallScriptAsync(string luaScriptUrl,
         string? expectedLuaHash = null, string? expectedFileHash = null,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default,
+        string? dllFileName = null, string? pluginId = null)
     {
         _expectedLuaHash = expectedLuaHash;
         _expectedFileHash = expectedFileHash;
@@ -50,6 +60,13 @@ public class LuaPluginInstaller
         LogMessage("Executing Lua install script...");
 
         await ExecuteScriptAsync(luaScript, cancellationToken);
+
+        // 安装脚本执行完成后，检查并补全 config.ini 的 File 字段
+        if (!string.IsNullOrEmpty(pluginId))
+        {
+            var pluginDir = Path.Combine(_pluginsDir, pluginId);
+            EnsureConfigFileEntry(pluginDir, dllFileName);
+        }
     }
     
     public async Task ExecuteScriptAsync(string luaScript, CancellationToken cancellationToken = default)
@@ -199,6 +216,80 @@ public class LuaPluginInstaller
             }
         });
         
+        table["show_notification"] = (Action<string, string, string, int>)((title, message, typeStr, duration) =>
+        {
+            LogMessage($"通知: [{typeStr}] {title} - {message}");
+
+            var type = typeStr?.ToLowerInvariant() switch
+            {
+                "success" => NotificationType.Success,
+                "warning" => NotificationType.Warning,
+                "error" => NotificationType.Error,
+                _ => NotificationType.Information
+            };
+
+            if (duration <= 0) duration = 5000;
+
+            WeakReferenceMessenger.Default.Send(new NotificationMessage(title, message, type, duration));
+        });
+        
+        table["show_dialog"] = (Func<string, string, string, string, string, string>)((title, content, primaryText, secondaryText, closeText) =>
+        {
+            LogMessage($"弹窗: {title}");
+
+            var dispatcher = UIDispatcher;
+            var xamlRoot = MainXamlRoot;
+
+            if (dispatcher == null)
+            {
+                LogMessage("弹窗失败: UI 调度器未初始化");
+                return "none";
+            }
+
+            var tcs = new TaskCompletionSource<string>();
+
+            dispatcher.TryEnqueue(async () =>
+            {
+                try
+                {
+                    var dialog = new ContentDialog
+                    {
+                        Title = title,
+                        Content = content,
+                        XamlRoot = xamlRoot,
+                        DefaultButton = ContentDialogButton.Primary
+                    };
+
+                    if (!string.IsNullOrEmpty(primaryText))
+                        dialog.PrimaryButtonText = primaryText;
+                    if (!string.IsNullOrEmpty(secondaryText))
+                        dialog.SecondaryButtonText = secondaryText;
+                    if (!string.IsNullOrEmpty(closeText))
+                        dialog.CloseButtonText = closeText;
+                    else
+                        dialog.CloseButtonText = "关闭";
+
+                    var result = await dialog.ShowAsync();
+                    tcs.TrySetResult(result.ToString().ToLowerInvariant());
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[LuaInstaller] Dialog error: {ex.Message}");
+                    tcs.TrySetResult("error");
+                }
+            });
+
+            try
+            {
+                return tcs.Task.GetAwaiter().GetResult();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[LuaInstaller] Dialog wait error: {ex.Message}");
+                return "error";
+            }
+        });
+        
         script.Globals["install"] = installTable;
     }
     
@@ -237,6 +328,101 @@ public class LuaPluginInstaller
         }
 
         return fullPath;
+    }
+    
+    public void EnsureConfigFileEntry(string pluginDir, string? dllFileName = null)
+    {
+        if (string.IsNullOrWhiteSpace(pluginDir) || !Directory.Exists(pluginDir))
+            return;
+
+        var configPath = Path.Combine(pluginDir, "config.ini");
+        
+        if (!File.Exists(configPath))
+        {
+            var resolvedDll = ResolveDllFileName(pluginDir, dllFileName);
+            if (string.IsNullOrEmpty(resolvedDll)) return;
+
+            var content = $"[General]\nName = {Path.GetFileName(pluginDir)}\nFile = {resolvedDll}\n";
+            File.WriteAllText(configPath, content, Encoding.UTF8);
+            LogMessage($"已创建 config.ini 并写入 File = {resolvedDll}");
+            return;
+        }
+        
+        var lines = File.ReadAllLines(configPath, Encoding.UTF8);
+        bool inGeneral = false;
+        bool hasFileEntry = false;
+        int generalEndIndex = -1;
+
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var trimmed = lines[i].Trim();
+
+            if (trimmed.StartsWith("[") && trimmed.EndsWith("]"))
+            {
+                if (inGeneral)
+                {
+                    generalEndIndex = i;
+                    break;
+                }
+                inGeneral = trimmed.Equals("[General]", StringComparison.OrdinalIgnoreCase);
+                continue;
+            }
+
+            if (inGeneral)
+            {
+                var separatorIndex = trimmed.IndexOf('=');
+                if (separatorIndex > 0)
+                {
+                    var key = trimmed.Substring(0, separatorIndex).Trim();
+                    if (key.Equals("File", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var val = trimmed.Substring(separatorIndex + 1).Trim();
+                        if (!string.IsNullOrWhiteSpace(val))
+                        {
+                            hasFileEntry = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (hasFileEntry) return;
+        
+        var dllName = ResolveDllFileName(pluginDir, dllFileName);
+        if (string.IsNullOrEmpty(dllName)) return;
+
+        var lineList = new List<string>(lines);
+        var insertLine = $"File = {dllName}";
+
+        if (generalEndIndex > 0)
+        {
+            lineList.Insert(generalEndIndex, insertLine);
+        }
+        else if (inGeneral)
+        {
+            lineList.Add(insertLine);
+        }
+        else
+        {
+            lineList.Insert(0, "[General]");
+            lineList.Insert(1, insertLine);
+            lineList.Insert(2, "");
+        }
+
+        File.WriteAllLines(configPath, lineList, Encoding.UTF8);
+        LogMessage($"已补全 config.ini File = {dllName}");
+    }
+
+    private static string? ResolveDllFileName(string pluginDir, string? dllFileName)
+    {
+        if (!string.IsNullOrWhiteSpace(dllFileName))
+            return dllFileName;
+
+        var dllFile = Directory.GetFiles(pluginDir, "*.dll", SearchOption.TopDirectoryOnly)
+            .FirstOrDefault(f => !f.EndsWith(".disabled", StringComparison.OrdinalIgnoreCase));
+
+        return dllFile != null ? Path.GetFileName(dllFile) : null;
     }
 
     private void ReportProgress(int percent, string status)

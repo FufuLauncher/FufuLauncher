@@ -310,7 +310,12 @@ public class PluginStoreViewModel : INotifyPropertyChanged
                 item.LuaInstallUrl,
                 item.LuaHash,
                 item.FileHash,
-                _installCts.Token);
+                _installCts.Token,
+                item.DllFileName,
+                item.Id);
+            
+            var pluginDir = Path.Combine(_pluginsDir, item.Id);
+            _luaInstaller.EnsureConfigFileEntry(pluginDir, item.DllFileName);
             
             item.State = StorePluginState.Installed;
             item.InstallProgress = 100;
