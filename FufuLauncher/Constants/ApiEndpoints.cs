@@ -82,9 +82,7 @@ namespace FufuLauncher.Constants
         public const string TelegramContactUrl = "https://t.me/Adimisra6717";
         public const string GithubWorkflowsApiUrl = "https://api.github.com/repos/CodeCubist/FufuLauncher/actions/workflows";
         public const string PaimonTimelineUrl = "https://paimon.moe/timeline";
-        
-        // PRODUCTION: Change to "https://fu1.fun"
-        public const string PluginStoreBaseUrl = "http://localhost:3456";
+        public const string PluginStoreBaseUrl = "https://fu1.fun";
         public const string PluginStoreApiPrefix = "/api/v1/plugins";
         public const string PluginStoreListUrl = PluginStoreBaseUrl + PluginStoreApiPrefix + "/list";
         public const string PluginStoreDetailUrl = PluginStoreBaseUrl + PluginStoreApiPrefix + "/detail";
