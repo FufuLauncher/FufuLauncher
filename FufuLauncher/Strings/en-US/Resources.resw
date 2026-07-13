@@ -1358,4 +1358,34 @@ Stack trace:
 Details: {0}</value></data>
   <data name="IniFile_WriteError" xml:space="preserve"><value>An error occurred while writing configuration.
 Details: {0}</value></data>
+  <data name="PluginStoreTitle" xml:space="preserve"><value>Plugin Store</value></data>
+  <data name="PluginStoreSearch" xml:space="preserve"><value>Search plugins...</value></data>
+  <data name="PluginStoreInstall" xml:space="preserve"><value>Install</value></data>
+  <data name="PluginStoreInstalled" xml:space="preserve"><value>Installed</value></data>
+  <data name="PluginStoreUpdate" xml:space="preserve"><value>Update</value></data>
+  <data name="PluginStoreUninstall" xml:space="preserve"><value>Uninstall</value></data>
+  <data name="PluginStoreInstalling" xml:space="preserve"><value>Installing...</value></data>
+  <data name="PluginStoreRating" xml:space="preserve"><value>Rating</value></data>
+  <data name="PluginStoreDownloads" xml:space="preserve"><value>Downloads</value></data>
+  <data name="PluginStoreSize" xml:space="preserve"><value>Size</value></data>
+  <data name="PluginStoreVersion" xml:space="preserve"><value>Version</value></data>
+  <data name="PluginStoreNoResults" xml:space="preserve"><value>No plugins found</value></data>
+  <data name="PluginStoreError" xml:space="preserve"><value>Failed to load plugins</value></data>
+  <data name="PluginStoreLoading" xml:space="preserve"><value>Loading...</value></data>
+  <data name="PluginStoreRetry" xml:space="preserve"><value>Retry</value></data>
+  <data name="PluginStorePrevious" xml:space="preserve"><value>Previous</value></data>
+  <data name="PluginStoreNext" xml:space="preserve"><value>Next</value></data>
+  <data name="PluginStoreAll" xml:space="preserve"><value>All</value></data>
+  <data name="PluginStoreSortPopular" xml:space="preserve"><value>Popular</value></data>
+  <data name="PluginStoreSortNewest" xml:space="preserve"><value>Newest</value></data>
+  <data name="PluginStoreSortRating" xml:space="preserve"><value>Top Rated</value></data>
+  <data name="PluginStoreInstallSuccess" xml:space="preserve"><value>Installed: {0}</value></data>
+  <data name="PluginStoreInstallFailed" xml:space="preserve"><value>Install failed: {0}</value></data>
+  <data name="PluginStoreUninstallSuccess" xml:space="preserve"><value>Uninstalled: {0}</value></data>
+  <data name="PluginStoreVerifying" xml:space="preserve"><value>Verifying...</value></data>
+  <data name="PluginStoreHashMismatch" xml:space="preserve"><value>File integrity check failed. The download may be corrupted or tampered.</value></data>
+  <data name="PluginStoreLuaHashMismatch" xml:space="preserve"><value>Install script integrity check failed.</value></data>
+  <data name="PluginStoreSecurityBlocked" xml:space="preserve"><value>Install blocked: {0}</value></data>
+  <data name="PluginStorePathTraversal" xml:space="preserve"><value>Security: path traversal attempt blocked</value></data>
+  <data name="PluginStoreHashVerified" xml:space="preserve"><value>Integrity verified</value></data>
 </root>

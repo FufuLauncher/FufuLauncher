@@ -1558,6 +1558,7 @@ public sealed partial class MainWindow : WindowEx
             "FufuLauncher.ViewModels.CalculatorViewModel" => typeof(Views.CalculatorPage),
             "FufuLauncher.ViewModels.ControlPanelModel" => typeof(Views.PanelPage),
             "FufuLauncher.ViewModels.PluginViewModel" => typeof(Views.PluginPage),
+            "FufuLauncher.ViewModels.PluginStoreViewModel" => typeof(Views.PluginStorePage),
             "FufuLauncher.ViewModels.DataViewModel" => typeof(Views.DataPage),
             "FufuLauncher.ViewModels.PluginSettingsViewModel" => typeof(Views.PluginSettingsPage),
             "FufuLauncher.ViewModels.HelpViewModel" => typeof(Views.HelpPage),

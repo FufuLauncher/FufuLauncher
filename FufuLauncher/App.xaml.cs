@@ -189,6 +189,13 @@ public partial class App : Application
                     services.AddTransient<GachaAnalysisModel>();
                     services.AddTransient<CommunityViewModel>();
                     services.AddTransient<CommunityPage>();
+
+                    // ---- Plugin Store / Marketplace ----
+                    services.AddSingleton<Services.PluginStoreService>();
+                    services.AddSingleton<Services.LuaPluginInstaller>();
+                    services.AddTransient<ViewModels.PluginStoreViewModel>();
+                    services.AddTransient<Views.PluginStorePage>();
+
                     services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
                 })
                 .Build();

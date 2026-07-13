@@ -56,6 +56,8 @@
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.2.0" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
+    <PackageReference Include="MoonSharp" Version="2.0.0" />
+    <PackageReference Include="MoonSharp.Interpreter.netcore" Version="3.0.2" />
         <PackageReference Include="PuppeteerSharp" Version="25.3.1" />
         <PackageReference Include="QRCoder" Version="1.8.0" />
         <PackageReference Include="Sentry" Version="6.6.0" />
