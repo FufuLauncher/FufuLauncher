@@ -178,6 +178,14 @@ public class PluginViewModel : INotifyPropertyChanged
 
                 var iniFile = dir.GetFiles("config.ini").FirstOrDefault()
                               ?? dir.GetFiles("*.ini").FirstOrDefault();
+                
+                if (iniFile == null)
+                {
+                    string newConfigPath = Path.Combine(dir.FullName, "config.ini");
+                    string configContent = $"[General]\r\nFile = {targetFile.Name}\r\nName = {dir.Name}\r\nDescription = Auto-generated config\r\n";
+                    File.WriteAllText(newConfigPath, configContent, Encoding.UTF8);
+                    iniFile = new FileInfo(newConfigPath);
+                }
 
                 string displayName = targetFile.Name;
                 string developer = "";
@@ -224,6 +232,7 @@ public class PluginViewModel : INotifyPropertyChanged
             UpdateIsEmpty();
         }
     }
+
     private void CheckForDuplicates(Dictionary<string, List<string>> tracker)
     {
         var duplicates = tracker.Where(kv => kv.Value.Count > 1).ToList();
@@ -273,6 +282,13 @@ public class PluginViewModel : INotifyPropertyChanged
 
                 var destPath = Path.Combine(destFolderPath, fileName);
                 File.Copy(path, destPath, true);
+                
+                var configPath = Path.Combine(destFolderPath, "config.ini");
+                if (!File.Exists(configPath))
+                {
+                    string configContent = $"[General]\r\nFile = {fileName}\r\nName = {folderName}\r\nDescription = Auto-generated config\r\n";
+                    File.WriteAllText(configPath, configContent, Encoding.UTF8);
+                }
 
                 StatusMessage = $"已添加插件: {folderName}";
                 LoadPlugins();
