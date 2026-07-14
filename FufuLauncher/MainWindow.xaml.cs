@@ -109,6 +109,24 @@ public sealed partial class MainWindow : WindowEx
         {
             InitializeComponent();
         }
+        catch (Exception ex) when (ex is Microsoft.UI.Xaml.Markup.XamlParseException || ex is System.IO.FileNotFoundException)
+        {
+            System.Diagnostics.Debug.WriteLine($"XAML解析失败: {ex.Message}");
+            if (ex.InnerException != null)
+            {
+                System.Diagnostics.Debug.WriteLine($"内部异常: {ex.InnerException.Message}");
+            }
+            // Retry once - XAML parse can fail transiently when assemblies are still loading from single-file extraction
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception retryEx)
+            {
+                System.Diagnostics.Debug.WriteLine($"XAML解析重试仍失败: {retryEx.Message}");
+                throw;
+            }
+        }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"XAML解析失败: {ex.Message}");
@@ -1495,8 +1513,15 @@ public sealed partial class MainWindow : WindowEx
         NavigationView.Visibility = Visibility.Visible;
         NavigationView.SelectedItem = NavigationView.MenuItems[0];
 
-        if (ContentFrame.CurrentSourcePageType != typeof(Views.MainPage))
-            ContentFrame.Navigate(typeof(Views.MainPage));
+        try
+        {
+            if (ContentFrame.CurrentSourcePageType != typeof(Views.MainPage))
+                ContentFrame.Navigate(typeof(Views.MainPage));
+        }
+        catch (InvalidCastException ex)
+        {
+            Debug.WriteLine($"MainPage 导航类型转换异常: {ex.Message}");
+        }
 
         UpdatePageOverlayState(true);
 
@@ -1585,7 +1610,16 @@ public sealed partial class MainWindow : WindowEx
                 }
             }
 
-            ContentFrame.Navigate(pageType, null, new SuppressNavigationTransitionInfo());
+            try
+            {
+                ContentFrame.Navigate(pageType, null, new SuppressNavigationTransitionInfo());
+            }
+            catch (InvalidCastException ex)
+            {
+                Debug.WriteLine($"页面导航类型转换异常: {ex.Message}");
+                return;
+            }
+
             var isMainPage = pageType == typeof(Views.MainPage);
             UpdatePageOverlayState(isMainPage);
 

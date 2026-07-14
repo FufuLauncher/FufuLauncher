@@ -229,6 +229,16 @@ public partial class App : Application
     {
         e.Handled = true;
         LogException(e.Exception, "App_UnhandledException");
+
+        // Don't crash on InvalidCastException from XAML binding (WinRT interop issue)
+        // or COMException from ContentDialog conflicts
+        if (e.Exception is InvalidCastException || 
+            (e.Exception is COMException comEx && comEx.HResult == unchecked((int)0x80000019)))
+        {
+            Debug.WriteLine($"已抑制非致命异常: {e.Exception.Message}");
+            return;
+        }
+
         ShowCrashDialog("UI 界面交互异常", e.Exception);
         Environment.Exit(-1);
     }

@@ -25,6 +25,8 @@
 
         <PublishSingleFile>true</PublishSingleFile>
 
+        <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+
         <PublishReadyToRun>true</PublishReadyToRun>
 
         <Version>1.4.2.0</Version>
@@ -45,13 +47,13 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
         <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.Markdown" Version="7.1.2" />
         <PackageReference Include="Google.Protobuf" Version="3.35.1" />
-        <PackageReference Include="H.NotifyIcon.WinUI" Version="2.3.2" />
+        <PackageReference Include="H.NotifyIcon.WinUI" Version="2.2.0" />
         <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
         <PackageReference Include="InputSimulatorPlus" Version="1.0.7" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.9" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.28" />
         <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.2.4" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.9" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
         <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.4.0" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.2.0" />
@@ -63,10 +65,10 @@
         <PackageReference Include="Sentry" Version="6.6.0" />
         <PackageReference Include="Sentry.Profiling" Version="6.6.0" />
         <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
-        <PackageReference Include="System.Diagnostics.EventLog" Version="10.0.9" />
-        <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.9" />
-        <PackageReference Include="System.Drawing.Common" Version="10.0.9" />
-        <PackageReference Include="System.Management" Version="10.0.9" />
+        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.2" />
+        <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.1" />
+        <PackageReference Include="System.Drawing.Common" Version="9.0.17" />
+        <PackageReference Include="System.Management" Version="8.0.0" />
         <PackageReference Include="WinUIEx" Version="2.9.1" />
         <PackageReference Include="YamlDotNet" Version="18.1.0" />
         <PackageReference Include="ZstdSharp.Port" Version="0.8.8" />
