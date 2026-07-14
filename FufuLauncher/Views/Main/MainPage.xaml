@@ -337,27 +337,33 @@
                             </Pivot.Resources>
 
                             <PivotItem Header="{helpers:Loc Key=HomeTab_Events}">
-                                <ListView
-                                    Padding="4,0,4,4"
-                                    ItemTemplate="{StaticResource NewsItemTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.ActivityPosts}"
-                                    SelectionMode="None" />
+                                <Grid>
+                                    <ListView
+                                        Padding="4,0,4,4"
+                                        ItemTemplate="{StaticResource NewsItemTemplate}"
+                                        ItemsSource="{x:Bind ViewModel.ActivityPosts}"
+                                        SelectionMode="None" />
+                                </Grid>
                             </PivotItem>
 
                             <PivotItem Header="{helpers:Loc Key=HomeTab_Announcements}">
-                                <ListView
-                                    Padding="4,0,4,4"
-                                    ItemTemplate="{StaticResource NewsItemTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.AnnouncementPosts}"
-                                    SelectionMode="None" />
+                                <Grid>
+                                    <ListView
+                                        Padding="4,0,4,4"
+                                        ItemTemplate="{StaticResource NewsItemTemplate}"
+                                        ItemsSource="{x:Bind ViewModel.AnnouncementPosts}"
+                                        SelectionMode="None" />
+                                </Grid>
                             </PivotItem>
 
                             <PivotItem Header="{helpers:Loc Key=HomeTab_News}">
-                                <ListView
-                                    Padding="4,0,4,4"
-                                    ItemTemplate="{StaticResource NewsItemTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.InfoPosts}"
-                                    SelectionMode="None" />
+                                <Grid>
+                                    <ListView
+                                        Padding="4,0,4,4"
+                                        ItemTemplate="{StaticResource NewsItemTemplate}"
+                                        ItemsSource="{x:Bind ViewModel.InfoPosts}"
+                                        SelectionMode="None" />
+                                </Grid>
                             </PivotItem>
                         </Pivot>
                     </Grid>
@@ -810,35 +816,37 @@
                         ToolTipService.ToolTip="{helpers:Loc Key=Home_ToggleBg}">
                         <Button.Flyout>
                             <Flyout x:Name="BackgroundFlyout" Placement="BottomEdgeAlignedRight">
-                                <GridView
-                                    Width="320"
-                                    MaxHeight="400"
-                                    IsItemClickEnabled="True"
-                                    ItemClick="BackgroundGridView_ItemClick"
-                                    ItemsSource="{x:Bind ViewModel.AvailableBackgrounds, Mode=OneWay}"
-                                    SelectionMode="None">
-                                    <GridView.ItemTemplate>
-                                        <DataTemplate x:DataType="bg:BackgroundUrlInfo">
-                                            <Grid
-                                                Width="140"
-                                                Height="80"
-                                                Margin="4"
-                                                CornerRadius="4">
-                                                <Image Source="{x:Bind ThumbnailUrl}" Stretch="UniformToFill" />
-                                                <Border
-                                                    Padding="4,2"
-                                                    VerticalAlignment="Bottom"
-                                                    Background="Transparent">
-                                                    <TextBlock
-                                                        HorizontalAlignment="Center"
-                                                        FontSize="10"
-                                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                                        Text="{x:Bind TypeText}" />
-                                                </Border>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </GridView.ItemTemplate>
-                                </GridView>
+                                <Grid>
+                                    <GridView
+                                        Width="320"
+                                        MaxHeight="400"
+                                        IsItemClickEnabled="True"
+                                        ItemClick="BackgroundGridView_ItemClick"
+                                        ItemsSource="{x:Bind ViewModel.AvailableBackgrounds, Mode=OneWay}"
+                                        SelectionMode="None">
+                                        <GridView.ItemTemplate>
+                                            <DataTemplate x:DataType="bg:BackgroundUrlInfo">
+                                                <Grid
+                                                    Width="140"
+                                                    Height="80"
+                                                    Margin="4"
+                                                    CornerRadius="4">
+                                                    <Image Source="{x:Bind ThumbnailUrl}" Stretch="UniformToFill" />
+                                                    <Border
+                                                        Padding="4,2"
+                                                        VerticalAlignment="Bottom"
+                                                        Background="Transparent">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Center"
+                                                            FontSize="10"
+                                                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                                            Text="{x:Bind TypeText}" />
+                                                    </Border>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </GridView.ItemTemplate>
+                                    </GridView>
+                                </Grid>
                             </Flyout>
                         </Button.Flyout>
                         <FontIcon
@@ -876,35 +884,37 @@
                         ToolTipService.ToolTip="{helpers:Loc Key=InjectionModuleTitle}">
                         <Button.Flyout>
                             <Flyout x:Name="InjectionModuleFlyout" Placement="BottomEdgeAlignedRight">
-                                <ListView
-                                    Width="200"
-                                    IsItemClickEnabled="True"
-                                    ItemClick="InjectionModuleListView_ItemClick"
-                                    ItemsSource="{x:Bind ViewModel.AvailableInjectionModules, Mode=OneWay}"
-                                    SelectionMode="None">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate x:DataType="models:InjectionModuleInfo">
-                                            <Grid Padding="4,8" ColumnSpacing="10">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                </Grid.ColumnDefinitions>
-                                                <FontIcon
-                                                    Grid.Column="0"
-                                                    FontSize="14"
-                                                    Glyph="&#xE73E;"
-                                                    Visibility="{x:Bind IsSelected, Mode=OneWay}" />
-                                                <StackPanel Grid.Column="1">
-                                                    <TextBlock FontWeight="SemiBold" Text="{x:Bind Name}" />
-                                                    <TextBlock
-                                                        FontSize="11"
-                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                        Text="{x:Bind Description}" />
-                                                </StackPanel>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                                <Grid>
+                                    <ListView
+                                        Width="200"
+                                        IsItemClickEnabled="True"
+                                        ItemClick="InjectionModuleListView_ItemClick"
+                                        ItemsSource="{x:Bind ViewModel.AvailableInjectionModules, Mode=OneWay}"
+                                        SelectionMode="None">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate x:DataType="models:InjectionModuleInfo">
+                                                <Grid Padding="4,8" ColumnSpacing="10">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <FontIcon
+                                                        Grid.Column="0"
+                                                        FontSize="14"
+                                                        Glyph="&#xE73E;"
+                                                        Visibility="{x:Bind IsSelected, Mode=OneWay}" />
+                                                    <StackPanel Grid.Column="1">
+                                                        <TextBlock FontWeight="SemiBold" Text="{x:Bind Name}" />
+                                                        <TextBlock
+                                                            FontSize="11"
+                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                            Text="{x:Bind Description}" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
                             </Flyout>
                         </Button.Flyout>
                         <FontIcon
