@@ -1634,7 +1634,8 @@ public sealed partial class MainWindow : WindowEx
 
     public async Task NavigateToSettingsUpdateSectionAsync()
     {
-        Activate();
+        if (_isExit) return;
+        try { Activate(); } catch (System.Runtime.InteropServices.COMException) { return; }
 
         for (var i = 0; i < 40 && !_isMainUiLoaded; i++)
         {
@@ -1668,7 +1669,8 @@ public sealed partial class MainWindow : WindowEx
 
     public async Task NavigateToSettingsPageAsync()
     {
-        Activate();
+        if (_isExit) return;
+        try { Activate(); } catch (System.Runtime.InteropServices.COMException) { return; }
 
         for (var i = 0; i < 40 && !_isMainUiLoaded; i++)
         {
@@ -1702,7 +1704,8 @@ public sealed partial class MainWindow : WindowEx
 
     public async Task NavigateToAccountPageAsync()
     {
-        Activate();
+        if (_isExit) return;
+        try { Activate(); } catch (System.Runtime.InteropServices.COMException) { return; }
 
         for (var i = 0; i < 40 && !_isMainUiLoaded; i++)
         {
