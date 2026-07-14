@@ -86,6 +86,9 @@ Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; \
 [Run]
 Filename: "{app}\{#AppExe}"; Description: "立即启动 {#AppName}"; Flags: nowait postinstall skipifsilent
 
+[InstallDelete]
+Type: filesandordirs; Name: "{app}\Cache"
+
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\Cache"
 Type: filesandordirs; Name: "{app}\Logs"
@@ -126,6 +129,67 @@ begin
       begin
         Result := True;
         Exit;
+      end;
+    end;
+  end;
+end;
+
+function CompareVersionStr(V1, V2: string): Integer;
+var
+  P1, P2: Integer;
+  Num1, Num2: Integer;
+begin
+  Result := 0;
+  while (V1 <> '') or (V2 <> '') do
+  begin
+    P1 := Pos('.', V1);
+    if P1 = 0 then P1 := Length(V1) + 1;
+    P2 := Pos('.', V2);
+    if P2 = 0 then P2 := Length(V2) + 1;
+
+    if P1 > 1 then Num1 := StrToIntDef(Copy(V1, 1, P1 - 1), 0) else Num1 := 0;
+    if P2 > 1 then Num2 := StrToIntDef(Copy(V2, 1, P2 - 1), 0) else Num2 := 0;
+
+    if Num1 < Num2 then
+    begin
+      Result := -1;
+      Exit;
+    end
+    else if Num1 > Num2 then
+    begin
+      Result := 1;
+      Exit;
+    end;
+
+    if P1 <= Length(V1) then V1 := Copy(V1, P1 + 1, Length(V1)) else V1 := '';
+    if P2 <= Length(V2) then V2 := Copy(V2, P2 + 1, Length(V2)) else V2 := '';
+  end;
+end;
+
+function GetVersionFromJson(FileName: string): string;
+var
+  Lines: TArrayOfString;
+  I, P1, P2: Integer;
+  Line: string;
+begin
+  Result := '';
+  if LoadStringsFromFile(FileName, Lines) then
+  begin
+    for I := 0 to GetArrayLength(Lines) - 1 do
+    begin
+      Line := Lines[I];
+      P1 := Pos('"Version"', Line);
+      if P1 > 0 then
+      begin
+        P2 := Pos(':', Copy(Line, P1 + 9, Length(Line)));
+        if P2 > 0 then
+        begin
+          Result := Trim(Copy(Line, P1 + 9 + P2, Length(Line)));
+          StringChange(Result, '"', '');
+          StringChange(Result, ',', '');
+          Result := Trim(Result);
+          Exit;
+        end;
       end;
     end;
   end;
@@ -179,13 +243,17 @@ var
   ResultCode: Integer;
   DesktopPath: string;
   ShortcutPath: string;
+  AppPath: string;
+  JsonPath: string;
+  OldVersion: string;
+  DoUninstall: Boolean;
 begin
   Result := '';
   DesktopPath := ExpandConstant('{autodesktop}');
   ShortcutPath := AddBackslash(DesktopPath) + ExpandConstant('{#AppName}') + '.lnk';
   GDesktopIconExists := FileExists(ShortcutPath);
 
-  if GDesktopIconExists and IsTaskSelected('desktopicon') = False then
+  if GDesktopIconExists and (IsTaskSelected('desktopicon') = False) then
     WizardSelectTasks('desktopicon');
 
   UninstKey := 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' +
@@ -196,8 +264,32 @@ begin
 
   if UninstStr <> '' then
   begin
-    UninstStr := RemoveQuotes(UninstStr);
-    Exec(UninstStr, '/VERYSILENT /NORESTART /SUPPRESSMSGBOXES', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    DoUninstall := True;
+
+    if not RegQueryStringValue(HKCU, UninstKey, 'InstallLocation', AppPath) then
+      if not RegQueryStringValue(HKLM, UninstKey, 'InstallLocation', AppPath) then
+        if not RegQueryStringValue(HKCU, UninstKey, 'Inno Setup: App Path', AppPath) then
+          RegQueryStringValue(HKLM, UninstKey, 'Inno Setup: App Path', AppPath);
+
+    if AppPath <> '' then
+    begin
+      JsonPath := AddBackslash(AppPath) + 'Update.json';
+      if FileExists(JsonPath) then
+      begin
+        OldVersion := GetVersionFromJson(JsonPath);
+        if OldVersion <> '' then
+        begin
+          if CompareVersionStr(OldVersion, '1.4.2.1') > 0 then
+            DoUninstall := False;
+        end;
+      end;
+    end;
+
+    if DoUninstall then
+    begin
+      UninstStr := RemoveQuotes(UninstStr);
+      Exec(UninstStr, '/VERYSILENT /NORESTART /SUPPRESSMSGBOXES', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    end;
   end;
 end;
 
