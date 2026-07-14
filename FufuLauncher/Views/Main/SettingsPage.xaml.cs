@@ -384,13 +384,13 @@ public sealed partial class SettingsPage : Page
                 var checkResult = JsonSerializer.Deserialize<JsonElement>(checkBody);
                 if (checkResult.TryGetProperty("authorized", out var auth) && auth.GetBoolean())
                 {
-                    await new ContentDialog
+                    await ShowSafeDialogAsync(new ContentDialog
                     {
                         Title = "Settings_Notice".GetLocalized(),
                         Content = "您的开发者认证已通过，请勿重复提交申请",
                         CloseButtonText = "OkBtn".GetLocalized(),
                         XamlRoot = this.XamlRoot
-                    }.ShowAsync();
+                    });
                     return;
                 }
             }
@@ -424,7 +424,7 @@ public sealed partial class SettingsPage : Page
             XamlRoot = this.XamlRoot
         };
 
-        var result = await dialog.ShowAsync();
+        var result = await ShowSafeDialogAsync(dialog);
         if (result != ContentDialogResult.Primary) return;
 
         string uid = uidBox.Text?.Trim();
@@ -433,37 +433,37 @@ public sealed partial class SettingsPage : Page
 
         if (string.IsNullOrEmpty(uid) || string.IsNullOrEmpty(username))
         {
-            await new ContentDialog
+            await ShowSafeDialogAsync(new ContentDialog
             {
                 Title = "ErrorTitle".GetLocalized(),
                 Content = "UID 和用户名不能为空",
                 CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
-            }.ShowAsync();
+            });
             return;
         }
 
         if (uid.Length < 9 || uid.Length > 10 || !uid.All(char.IsDigit))
         {
-            await new ContentDialog
+            await ShowSafeDialogAsync(new ContentDialog
             {
                 Title = "ErrorTitle".GetLocalized(),
                 Content = "UID 必须为9位或10位数字",
                 CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
-            }.ShowAsync();
+            });
             return;
         }
 
         if (!string.IsNullOrEmpty(github) && !github.Contains("github.com", StringComparison.OrdinalIgnoreCase))
         {
-            await new ContentDialog
+            await ShowSafeDialogAsync(new ContentDialog
             {
                 Title = "ErrorTitle".GetLocalized(),
                 Content = "请输入正确的GitHub地址",
                 CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
-            }.ShowAsync();
+            });
             return;
         }
 
@@ -482,23 +482,44 @@ public sealed partial class SettingsPage : Page
                 ? "申请已提交，请等待管理员审批"
                 : $"提交失败: {body}";
 
-            await new ContentDialog
+            await ShowSafeDialogAsync(new ContentDialog
             {
                 Title = response.IsSuccessStatusCode ? "Success".GetLocalized() : "Failure".GetLocalized(),
                 Content = msg,
                 CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
-            }.ShowAsync();
+            });
         }
         catch (Exception ex)
         {
-            await new ContentDialog
+            await ShowSafeDialogAsync(new ContentDialog
             {
                 Title = "Settings_NetworkError".GetLocalized(),
                 Content = ex.Message,
                 CloseButtonText = "OkBtn".GetLocalized(),
                 XamlRoot = this.XamlRoot
-            }.ShowAsync();
+            });
+        }
+    }
+
+    private async Task<ContentDialogResult> ShowSafeDialogAsync(ContentDialog dialog)
+    {
+        try
+        {
+            return await dialog.ShowAsync();
+        }
+        catch (System.Runtime.InteropServices.COMException)
+        {
+            // Only a single ContentDialog can be open at any time - wait and retry once
+            await Task.Delay(300);
+            try
+            {
+                return await dialog.ShowAsync();
+            }
+            catch
+            {
+                return ContentDialogResult.None;
+            }
         }
     }
 
