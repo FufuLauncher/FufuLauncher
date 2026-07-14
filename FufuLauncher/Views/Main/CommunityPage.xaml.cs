@@ -27,9 +27,22 @@ public sealed partial class CommunityPage : Page
 
     private async void CommunityWebView_Loaded(object sender, RoutedEventArgs e)
     {
-        await CheckAndShowFirstTimeNoticeAsync();
+        try
+        {
+            await CheckAndShowFirstTimeNoticeAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"首次提示异常: {ex.Message}");
+        }
 
         await CommunityWebView.EnsureCoreWebView2Async();
+
+        if (CommunityWebView.CoreWebView2 == null)
+        {
+            System.Diagnostics.Debug.WriteLine("CoreWebView2 初始化失败");
+            return;
+        }
         
         CommunityWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
         
@@ -74,10 +87,16 @@ public sealed partial class CommunityPage : Page
             var localSettingsService = App.GetService<ILocalSettingsService>();
             var hasShownObj = await localSettingsService.ReadSettingAsync(CommunityNoticeKey);
             
-            bool hasShown = hasShownObj is bool b && b;
+            bool hasShown = hasShownObj != null && Convert.ToBoolean(hasShownObj);
 
             if (!hasShown)
             {
+                if (Content?.XamlRoot == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("XamlRoot 尚未就绪，跳过首次提示");
+                    return;
+                }
+
                 var dialog = new ContentDialog
                 {
                     Title = "CommunityPage_WelcomeTitle".GetLocalized(),
