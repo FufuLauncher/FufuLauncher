@@ -65,6 +65,8 @@ public sealed partial class AccountPage : Page
     private void Page_Unloaded(object sender, RoutedEventArgs e)
     {
         ViewModel.Cleanup();
+        this.SizeChanged -= OnPageSizeChanged;
+        ViewModel.PropertyChanged -= OnViewModelPropertyChanged;
     }
 
     private async void Page_Loaded(object sender, RoutedEventArgs e)
@@ -74,13 +76,23 @@ public sealed partial class AccountPage : Page
         ViewModel.PropertyChanged += OnViewModelPropertyChanged;
         _wasLoggedInOnLoad = ViewModel.IsLoggedIn;
 
+      
+        this.SizeChanged += OnPageSizeChanged;
+
         await Task.Delay(250);
         if (ViewModel.IsLoggedIn)
         {
+          
+            AdjustButtonSpacing();
             PlayEntranceAnimations();
         }
 
         await ViewModel.LoadUserInfoAsync();
+    }
+
+    private void OnPageSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        AdjustButtonSpacing();
     }
 
     protected override async void OnNavigatedTo(NavigationEventArgs e)
@@ -113,6 +125,7 @@ public sealed partial class AccountPage : Page
                     }
 
                     await Task.Delay(150);
+                    AdjustButtonSpacing();
                     PlayEntranceAnimations();
                 });
             }
@@ -354,8 +367,52 @@ public sealed partial class AccountPage : Page
     #region 右侧高度自适应
     private void LeftColumnGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
+        
         if (e.NewSize.Height > 100)
             RightGrid.Height = e.NewSize.Height;
+    }
+
+  
+    private void AdjustButtonSpacing()
+    {
+        if (BtnGrid == null || ProfileCard == null) return;
+
+            const int baseSpacing = 8;
+            const int maxSpacing = 28;
+            const int buttonCount = 9;
+            const double titleBarOffset = 40;  
+            const double outerMargin = 36;  
+            const double safetyMargin = 16; 
+
+         
+            double viewportHeight = this.ActualHeight - titleBarOffset - outerMargin - safetyMargin;
+            if (viewportHeight <= 0) return;
+
+           
+            double profileHeight = ProfileCard.ActualHeight;
+            double buttonAreaHeight = viewportHeight - profileHeight - 24;
+
+        
+            double totalButtonsHeight = 0;
+            totalButtonsHeight += BtnSwitchAccount?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnRefreshInfo?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnGenshinData?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnGachaAnalysis?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnSecurityCenter?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnLockAccount?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnCopyCookie?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnDeleteAccount?.ActualHeight ?? 44;
+            totalButtonsHeight += BtnLogout?.ActualHeight ?? 44;
+
+            double spacing;
+            const double minSpacing = 2;
+          
+            if (buttonAreaHeight > totalButtonsHeight + (buttonCount - 1) * minSpacing)
+                spacing = Math.Min((buttonAreaHeight - totalButtonsHeight) / (buttonCount - 1), maxSpacing);
+            else
+                spacing = minSpacing;
+
+            BtnGrid.RowSpacing = spacing;
     }
     #endregion
 

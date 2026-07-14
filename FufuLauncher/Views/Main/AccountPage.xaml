@@ -709,7 +709,7 @@
                                 </Grid>
                             </Border>
 
-                            <Grid Grid.Row="1" RowSpacing="8">
+                            <Grid x:Name="BtnGrid" Grid.Row="1" RowSpacing="8">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
