@@ -89,6 +89,18 @@ public partial class App : Application
 
         InitializeComponent();
 
+        // 清理旧版遗留的 resources.pri
+        try
+        {
+            string oldPri = Path.Combine(AppContext.BaseDirectory, "resources.pri");
+            if (File.Exists(oldPri))
+            {
+                File.Delete(oldPri);
+                Debug.WriteLine("[App] 已删除残留的 resources.pri");
+            }
+        }
+        catch { }
+
         var appInstance = AppInstance.GetCurrent();
         appInstance.Activated += App_Activated!;
 
