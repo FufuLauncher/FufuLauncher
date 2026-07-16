@@ -50,7 +50,11 @@
         <PackageReference Include="H.NotifyIcon.WinUI" Version="2.2.0" />
         <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
         <PackageReference Include="InputSimulatorPlus" Version="1.0.7" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.28" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.28" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.28">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
         <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.2.4" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />

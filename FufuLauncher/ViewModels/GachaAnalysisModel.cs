@@ -13,9 +13,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Messages;
+using FufuLauncher.Data.Entities;
+using FufuLauncher.Data.Repositories;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
-using Microsoft.Data.Sqlite;
 using Microsoft.UI.Xaml;
 using MihoyoBBS;
 
@@ -36,7 +37,7 @@ public partial class GachaAnalysisModel : ObservableObject
     private Dictionary<string, int> _charNameToIdMap;
     private Dictionary<string, int> _weaponNameToIdMap;
     private readonly string _gachaDataPath;
-    private readonly string _dbConnectionString;
+    private readonly MetadataRepository _metadataRepo;
     private readonly GachaService _gachaService;
     private readonly AccountManager _accountManager;
     private readonly ILocalSettingsService _localSettingsService;
@@ -123,110 +124,22 @@ public partial class GachaAnalysisModel : ObservableObject
     public Func<string, string, string, Task> OnShowConfirmDialogAsync;
     public Func<string, Task> OnRequireReLoginAsync;
 
-    public GachaAnalysisModel(ILocalSettingsService localSettingsService, AccountManager accountManager)
+    public GachaAnalysisModel(ILocalSettingsService localSettingsService, AccountManager accountManager, MetadataRepository metadataRepo)
     {
         _localSettingsService = localSettingsService;
 
         _gachaDataPath = Helpers.AppPaths.GachaDataFile;
-        _dbConnectionString = $"Data Source={Helpers.AppPaths.MetadataDb}";
+        _metadataRepo = metadataRepo;
         _gachaService = new GachaService();
         _accountManager = accountManager;
     }
 
     private void InitializeDatabase()
     {
-        using var connection = new SqliteConnection(_dbConnectionString);
-        connection.Open();
-        var command = connection.CreateCommand();
-        command.CommandText = @"
-            CREATE TABLE IF NOT EXISTS Metadata (
-                Name TEXT PRIMARY KEY,
-                ImgSrc TEXT,
-                ElementSrc TEXT,
-                Type TEXT
-            );
-            CREATE TABLE IF NOT EXISTS GachaLogs (
-                Id TEXT NOT NULL,
-                Uid TEXT NOT NULL,
-                GachaType TEXT NOT NULL,
-                ItemId TEXT,
-                Count TEXT,
-                Time TEXT,
-                Name TEXT,
-                Lang TEXT,
-                ItemType TEXT,
-                RankType TEXT,
-                PRIMARY KEY (Id, Uid)
-            );
-            CREATE TABLE IF NOT EXISTS GachaPoolMetadata (
-                Version TEXT NOT NULL,
-                PoolType TEXT NOT NULL,
-                StartTime TEXT NOT NULL,
-                EndTime TEXT NOT NULL,
-                UpItems TEXT NOT NULL,
-                PRIMARY KEY (Version, PoolType)
-            );
-        ";
-        command.ExecuteNonQuery();
-
-        try
-        {
-            using var checkConn = new SqliteConnection(_dbConnectionString);
-            checkConn.Open();
-            var checkCmd = checkConn.CreateCommand();
-            checkCmd.CommandText = "SELECT sql FROM sqlite_master WHERE type='table' AND name='GachaLogs'";
-            var createSql = checkCmd.ExecuteScalar() as string ?? "";
-            if (createSql.Contains("Id TEXT PRIMARY KEY") && !createSql.Contains("PRIMARY KEY (Id, Uid)"))
-            {
-                Debug.WriteLine("[Gacha] 迁移 GachaLogs 表：主键从 Id 改为 (Id, Uid)");
-                using var migrateConn = new SqliteConnection(_dbConnectionString);
-                migrateConn.Open();
-                using var transaction = migrateConn.BeginTransaction();
-                var migrateCmd = migrateConn.CreateCommand();
-                migrateCmd.CommandText = @"
-                    CREATE TABLE GachaLogs_new (
-                        Id TEXT NOT NULL,
-                        Uid TEXT NOT NULL,
-                        GachaType TEXT NOT NULL,
-                        ItemId TEXT,
-                        Count TEXT,
-                        Time TEXT,
-                        Name TEXT,
-                        Lang TEXT,
-                        ItemType TEXT,
-                        RankType TEXT,
-                        PRIMARY KEY (Id, Uid)
-                    );
-                    INSERT OR IGNORE INTO GachaLogs_new SELECT * FROM GachaLogs;
-                    DROP TABLE GachaLogs;
-                    ALTER TABLE GachaLogs_new RENAME TO GachaLogs;
-                ";
-                migrateCmd.ExecuteNonQuery();
-                transaction.Commit();
-                Debug.WriteLine("[Gacha] GachaLogs 表迁移完成");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine($"[Gacha] 表迁移检查失败: {ex.Message}");
-        }
-
-        command.CommandText = "CREATE INDEX IF NOT EXISTS idx_gacha_uid ON GachaLogs(Uid);";
-        command.ExecuteNonQuery();
-
-        static void AddColumnIfMissing(SqliteConnection conn, string table, string column, string type)
-        {
-            var cmd = conn.CreateCommand();
-            cmd.CommandText = $"PRAGMA table_info({table});";
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-                if (reader.GetString(1) == column) return;
-            cmd = conn.CreateCommand();
-            cmd.CommandText = $"ALTER TABLE {table} ADD COLUMN {column} {type};";
-            cmd.ExecuteNonQuery();
-        }
-        AddColumnIfMissing(connection, "Metadata", "Rank", "TEXT");
-        AddColumnIfMissing(connection, "Metadata", "ItemId", "TEXT");
+        // EF Core EnsureCreated() handles table creation in the repository.
+        // Legacy ad-hoc migrations (Rank/ItemId columns, PK change) are no longer
+        // needed since EF Core creates tables with the correct schema from the start.
+        // For existing databases, EF Core will see tables exist and skip creation.
     }
 
     private void LoadMetadataFromDb()
@@ -238,25 +151,18 @@ public partial class GachaAnalysisModel : ObservableObject
             WeaponMetadataPreview.Clear();
         });
 
-        using var connection = new SqliteConnection(_dbConnectionString);
-        connection.Open();
-        var command = connection.CreateCommand();
-        command.CommandText = "SELECT Name, ImgSrc, ElementSrc, Type, Rank, ItemId FROM Metadata";
-        using var reader = command.ExecuteReader();
-        while (reader.Read())
+        var entities = _metadataRepo.GetAllMetadata();
+        foreach (var entity in entities)
         {
-            var imgSrc = reader.IsDBNull(1) ? null : reader.GetString(1);
-            var elementSrc = reader.IsDBNull(2) ? null : reader.GetString(2);
-
             var item = new ScrapedMetadata
             {
-                Name = reader.GetString(0),
-                ImgSrc = string.IsNullOrWhiteSpace(imgSrc) ? null : imgSrc,
-                ElementSrc = string.IsNullOrWhiteSpace(elementSrc) ? null : elementSrc,
-                Type = reader.IsDBNull(3) ? null : reader.GetString(3)
+                Name = entity.Name,
+                ImgSrc = string.IsNullOrWhiteSpace(entity.ImgSrc) ? null : entity.ImgSrc,
+                ElementSrc = string.IsNullOrWhiteSpace(entity.ElementSrc) ? null : entity.ElementSrc,
+                Type = entity.Type,
+                Rank = entity.Rank,
+                ItemId = entity.ItemId
             };
-            if (!reader.IsDBNull(4)) item.Rank = reader.GetString(4);
-            if (!reader.IsDBNull(5)) item.ItemId = reader.GetString(5);
             _savedMetadata.Add(item);
             var isChar = item.Type == "char";
             App.MainWindow.DispatcherQueue.TryEnqueue(() =>
@@ -269,56 +175,21 @@ public partial class GachaAnalysisModel : ObservableObject
 
     private void SaveMetadataToDb(List<ScrapedMetadata> newItems)
     {
-        using var connection = new SqliteConnection(_dbConnectionString);
-        connection.Open();
-        using var transaction = connection.BeginTransaction();
-        var command = connection.CreateCommand();
-        command.CommandText = @"
-            INSERT INTO Metadata (Name, ImgSrc, ElementSrc, Type, Rank, ItemId)
-            VALUES ($name, $imgSrc, $elementSrc, $type, $rank, $itemId)
-            ON CONFLICT(Name) DO UPDATE SET
-                ImgSrc=excluded.ImgSrc,
-                ElementSrc=excluded.ElementSrc,
-                Type=excluded.Type,
-                Rank=excluded.Rank,
-                ItemId=excluded.ItemId;
-        ";
-
-        var nameParam = command.CreateParameter(); nameParam.ParameterName = "$name"; command.Parameters.Add(nameParam);
-        var imgParam = command.CreateParameter(); imgParam.ParameterName = "$imgSrc"; command.Parameters.Add(imgParam);
-        var eleParam = command.CreateParameter(); eleParam.ParameterName = "$elementSrc"; command.Parameters.Add(eleParam);
-        var typeParam = command.CreateParameter(); typeParam.ParameterName = "$type"; command.Parameters.Add(typeParam);
-        var rankParam = command.CreateParameter(); rankParam.ParameterName = "$rank"; command.Parameters.Add(rankParam);
-        var itemIdParam = command.CreateParameter(); itemIdParam.ParameterName = "$itemId"; command.Parameters.Add(itemIdParam);
-
-        foreach (var item in newItems)
+        var entities = newItems.Select(item => new MetadataEntity
         {
-            nameParam.Value = item.Name ?? "";
-            imgParam.Value = item.ImgSrc ?? "";
-            eleParam.Value = item.ElementSrc ?? "";
-            typeParam.Value = item.Type ?? "";
-            rankParam.Value = item.Rank ?? "";
-            itemIdParam.Value = item.ItemId ?? "";
-            command.ExecuteNonQuery();
-        }
-        transaction.Commit();
+            Name = item.Name ?? "",
+            ImgSrc = item.ImgSrc ?? "",
+            ElementSrc = item.ElementSrc ?? "",
+            Type = item.Type ?? "",
+            Rank = item.Rank ?? "",
+            ItemId = item.ItemId ?? ""
+        }).ToList();
+        _metadataRepo.UpsertMetadata(entities);
     }
 
     private List<string> QueryKnownUidsFromDb()
     {
-        var uids = new List<string>();
-        try
-        {
-            using var connection = new SqliteConnection(_dbConnectionString);
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "SELECT DISTINCT Uid FROM GachaLogs ORDER BY Uid";
-            using var reader = command.ExecuteReader();
-            while (reader.Read())
-                uids.Add(reader.GetString(0));
-        }
-        catch { }
-        return uids;
+        return _metadataRepo.GetDistinctUids();
     }
 
     private void RefreshKnownUids()
@@ -358,26 +229,21 @@ public partial class GachaAnalysisModel : ObservableObject
 
         try
         {
-            using var connection = new SqliteConnection(_dbConnectionString);
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "SELECT Id, GachaType, ItemId, Count, Time, Name, Lang, ItemType, RankType FROM GachaLogs WHERE Uid = $uid";
-            command.Parameters.AddWithValue("$uid", uid);
-            using var reader = command.ExecuteReader();
-            while (reader.Read())
+            var entities = _metadataRepo.GetGachaLogsByUid(uid);
+            foreach (var entity in entities)
             {
                 var item = new GachaLogItem
                 {
-                    Id = reader.GetString(0),
+                    Id = entity.Id,
                     Uid = uid,
-                    GachaType = reader.GetString(1),
-                    ItemId = reader.IsDBNull(2) ? null : reader.GetString(2),
-                    Count = reader.IsDBNull(3) ? null : reader.GetString(3),
-                    Time = reader.IsDBNull(4) ? null : reader.GetString(4),
-                    Name = reader.IsDBNull(5) ? null : reader.GetString(5),
-                    Lang = reader.IsDBNull(6) ? null : reader.GetString(6),
-                    ItemType = reader.IsDBNull(7) ? null : reader.GetString(7),
-                    RankType = reader.IsDBNull(8) ? null : reader.GetString(8)
+                    GachaType = entity.GachaType,
+                    ItemId = entity.ItemId,
+                    Count = entity.Count,
+                    Time = entity.Time,
+                    Name = entity.Name,
+                    Lang = entity.Lang,
+                    ItemType = entity.ItemType,
+                    RankType = entity.RankType
                 };
                 var gt = GetNormalizedGachaType(item.GachaType);
                 if (gt == "301") _cachedCharacterLogs.Add(item);
@@ -399,60 +265,41 @@ public partial class GachaAnalysisModel : ObservableObject
         if (string.IsNullOrEmpty(_currentUid)) { Debug.WriteLine("[Gacha] SaveGachaLogsToDb: _currentUid 为空，跳过保存"); return; }
         try
         {
-                var totalBefore = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
+            var totalBefore = _cachedCharacterLogs.Count + _cachedWeaponLogs.Count + _cachedChronicledLogs.Count + _cachedNoviceLogs.Count + _cachedStandardLogs.Count;
             Debug.WriteLine($"[Gacha] SaveGachaLogsToDb: 开始保存 UID={_currentUid}, 共 {totalBefore} 条记录");
-            using var connection = new SqliteConnection(_dbConnectionString);
-            connection.Open();
-            using var transaction = connection.BeginTransaction();
-            var command = connection.CreateCommand();
 
-            command.CommandText = "DELETE FROM GachaLogs WHERE Uid = $uid";
-            command.Parameters.AddWithValue("$uid", _currentUid);
-            command.ExecuteNonQuery();
+            var allLogs = new List<GachaLogEntity>();
+            AddLogItems(allLogs, _cachedCharacterLogs);
+            AddLogItems(allLogs, _cachedWeaponLogs);
+            AddLogItems(allLogs, _cachedChronicledLogs);
+            AddLogItems(allLogs, _cachedNoviceLogs);
+            AddLogItems(allLogs, _cachedStandardLogs);
 
-            command.CommandText = @"
-                INSERT INTO GachaLogs (Id, Uid, GachaType, ItemId, Count, Time, Name, Lang, ItemType, RankType)
-                VALUES ($id, $uid, $gachaType, $itemId, $count, $time, $name, $lang, $itemType, $rankType)";
-            command.Parameters.Clear();
-            var pId = command.CreateParameter(); pId.ParameterName = "$id"; command.Parameters.Add(pId);
-            var pUid = command.CreateParameter(); pUid.ParameterName = "$uid"; pUid.Value = _currentUid; command.Parameters.Add(pUid);
-            var pGt = command.CreateParameter(); pGt.ParameterName = "$gachaType"; command.Parameters.Add(pGt);
-            var pIt = command.CreateParameter(); pIt.ParameterName = "$itemId"; command.Parameters.Add(pIt);
-            var pCt = command.CreateParameter(); pCt.ParameterName = "$count"; command.Parameters.Add(pCt);
-            var pTm = command.CreateParameter(); pTm.ParameterName = "$time"; command.Parameters.Add(pTm);
-            var pNm = command.CreateParameter(); pNm.ParameterName = "$name"; command.Parameters.Add(pNm);
-            var pLg = command.CreateParameter(); pLg.ParameterName = "$lang"; command.Parameters.Add(pLg);
-            var pTp = command.CreateParameter(); pTp.ParameterName = "$itemType"; command.Parameters.Add(pTp);
-            var pRk = command.CreateParameter(); pRk.ParameterName = "$rankType"; command.Parameters.Add(pRk);
-
-            void InsertItems(List<GachaLogItem> items)
-            {
-                foreach (var item in items)
-                {
-                    pId.Value = item.Id ?? "";
-                    pGt.Value = item.GachaType ?? "";
-                    pIt.Value = (object?)item.ItemId ?? DBNull.Value;
-                    pCt.Value = (object?)item.Count ?? DBNull.Value;
-                    pTm.Value = (object?)item.Time ?? DBNull.Value;
-                    pNm.Value = (object?)item.Name ?? DBNull.Value;
-                    pLg.Value = (object?)item.Lang ?? DBNull.Value;
-                    pTp.Value = (object?)item.ItemType ?? DBNull.Value;
-                    pRk.Value = (object?)item.RankType ?? DBNull.Value;
-                    command.ExecuteNonQuery();
-                }
-            }
-
-            InsertItems(_cachedCharacterLogs);
-            InsertItems(_cachedWeaponLogs);
-            InsertItems(_cachedChronicledLogs);
-            InsertItems(_cachedNoviceLogs);
-            InsertItems(_cachedStandardLogs);
-            transaction.Commit();
+            _metadataRepo.ReplaceGachaLogs(_currentUid, allLogs);
             Debug.WriteLine($"[Gacha] 保存完成 UID={_currentUid}: 角色{_cachedCharacterLogs.Count} 武器{_cachedWeaponLogs.Count} 集录{_cachedChronicledLogs.Count} 新手{_cachedNoviceLogs.Count} 常驻{_cachedStandardLogs.Count}");
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[Gacha] 保存抽卡数据失败: {ex.Message}");
+        }
+    }
+
+    private static void AddLogItems(List<GachaLogEntity> target, List<GachaLogItem> source)
+    {
+        foreach (var item in source)
+        {
+            target.Add(new GachaLogEntity
+            {
+                Id = item.Id ?? "",
+                GachaType = item.GachaType ?? "",
+                ItemId = item.ItemId,
+                Count = item.Count,
+                Time = item.Time,
+                Name = item.Name,
+                Lang = item.Lang,
+                ItemType = item.ItemType,
+                RankType = item.RankType
+            });
         }
     }
 
@@ -521,12 +368,7 @@ public partial class GachaAnalysisModel : ObservableObject
 
             var deletedUid = _currentUid;
 
-            using var connection = new SqliteConnection(_dbConnectionString);
-            connection.Open();
-            var command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM GachaLogs WHERE Uid = $uid";
-            command.Parameters.AddWithValue("$uid", deletedUid);
-            command.ExecuteNonQuery();
+            _metadataRepo.DeleteGachaLogsByUid(deletedUid);
 
             var remainingUids = QueryKnownUidsFromDb();
 
@@ -673,38 +515,21 @@ public partial class GachaAnalysisModel : ObservableObject
 
     private void MigrateJsonToDb(List<GachaLogItem> logs)
     {
-        using var connection = new SqliteConnection(_dbConnectionString);
-        connection.Open();
-        using var transaction = connection.BeginTransaction();
-        var command = connection.CreateCommand();
-        command.CommandText = @"
-            INSERT OR IGNORE INTO GachaLogs (Id, Uid, GachaType, ItemId, Count, Time, Name, Lang, ItemType, RankType)
-            VALUES ($id, $uid, $gachaType, $itemId, $count, $time, $name, $lang, $itemType, $rankType)";
-        var pId = command.CreateParameter(); pId.ParameterName = "$id"; command.Parameters.Add(pId);
-        var pUid = command.CreateParameter(); pUid.ParameterName = "$uid"; command.Parameters.Add(pUid);
-        var pGt = command.CreateParameter(); pGt.ParameterName = "$gachaType"; command.Parameters.Add(pGt);
-        var pIt = command.CreateParameter(); pIt.ParameterName = "$itemId"; command.Parameters.Add(pIt);
-        var pCt = command.CreateParameter(); pCt.ParameterName = "$count"; command.Parameters.Add(pCt);
-        var pTm = command.CreateParameter(); pTm.ParameterName = "$time"; command.Parameters.Add(pTm);
-        var pNm = command.CreateParameter(); pNm.ParameterName = "$name"; command.Parameters.Add(pNm);
-        var pLg = command.CreateParameter(); pLg.ParameterName = "$lang"; command.Parameters.Add(pLg);
-        var pTp = command.CreateParameter(); pTp.ParameterName = "$itemType"; command.Parameters.Add(pTp);
-        var pRk = command.CreateParameter(); pRk.ParameterName = "$rankType"; command.Parameters.Add(pRk);
-        foreach (var item in logs)
+        var entities = logs.Select(item => new GachaLogEntity
         {
-            pId.Value = item.Id ?? "";
-            pUid.Value = item.Uid ?? "unknown";
-            pGt.Value = item.GachaType ?? "";
-            pIt.Value = (object?)item.ItemId ?? DBNull.Value;
-            pCt.Value = (object?)item.Count ?? DBNull.Value;
-            pTm.Value = (object?)item.Time ?? DBNull.Value;
-            pNm.Value = (object?)item.Name ?? DBNull.Value;
-            pLg.Value = (object?)item.Lang ?? DBNull.Value;
-            pTp.Value = (object?)item.ItemType ?? DBNull.Value;
-            pRk.Value = (object?)item.RankType ?? DBNull.Value;
-            command.ExecuteNonQuery();
-        }
-        transaction.Commit();
+            Id = item.Id ?? "",
+            Uid = item.Uid ?? "unknown",
+            GachaType = item.GachaType ?? "",
+            ItemId = item.ItemId,
+            Count = item.Count,
+            Time = item.Time,
+            Name = item.Name,
+            Lang = item.Lang,
+            ItemType = item.ItemType,
+            RankType = item.RankType
+        }).ToList();
+
+        _metadataRepo.InsertOrIgnoreGachaLogs(entities);
         Debug.WriteLine($"[Gacha] 已从 JSON 迁移 {logs.Count} 条记录到数据库");
     }
 
@@ -2226,40 +2051,6 @@ private async Task ImportUigfAsync()
         }
     }
 
-    private void EnsurePoolMetadataTable(SqliteConnection connection)
-    {
-        var command = connection.CreateCommand();
-        command.CommandText = @"
-            CREATE TABLE IF NOT EXISTS GachaPoolMetadata (
-                Version TEXT NOT NULL,
-                PoolType TEXT NOT NULL,
-                StartTime TEXT NOT NULL,
-                EndTime TEXT NOT NULL,
-                UpItems TEXT NOT NULL,
-                UpItemNames TEXT NOT NULL DEFAULT '[]',
-                PRIMARY KEY (Version, PoolType)
-            );
-        ";
-        command.ExecuteNonQuery();
-
-        var colCmd = connection.CreateCommand();
-        colCmd.CommandText = "PRAGMA table_info(GachaPoolMetadata)";
-        var hasNamesColumn = false;
-        using (var reader = colCmd.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                if (reader.GetString(1) == "UpItemNames") { hasNamesColumn = true; break; }
-            }
-        }
-        if (!hasNamesColumn)
-        {
-            var alterCmd = connection.CreateCommand();
-            alterCmd.CommandText = "ALTER TABLE GachaPoolMetadata ADD COLUMN UpItemNames TEXT NOT NULL DEFAULT '[]'";
-            alterCmd.ExecuteNonQuery();
-        }
-    }
-
     private async Task FetchGachaPoolMetadataAsync(bool deferRefresh = false)
     {
         if (_isFetchingPoolMetadata) return;
@@ -2433,78 +2224,38 @@ private async Task ImportUigfAsync()
     {
         if (pools == null) return;
 
-        using var connection = new SqliteConnection(_dbConnectionString);
-        connection.Open();
-        EnsurePoolMetadataTable(connection);
-        using var transaction = connection.BeginTransaction();
-        var command = connection.CreateCommand();
-
-        command.CommandText = @"
-            INSERT INTO GachaPoolMetadata (Version, PoolType, StartTime, EndTime, UpItems, UpItemNames)
-            VALUES ($version, $poolType, $startTime, $endTime, $upItems, $upItemNames)
-            ON CONFLICT(Version, PoolType) DO UPDATE SET
-                StartTime=excluded.StartTime,
-                EndTime=excluded.EndTime,
-                UpItems=excluded.UpItems,
-                UpItemNames=excluded.UpItemNames;
-        ";
-
         var jsonOptions = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
         };
 
-        foreach (var pool in pools)
+        var entities = pools.Select(pool => new GachaPoolMetadataEntity
         {
-            var upItemsJson = JsonSerializer.Serialize(pool.Items.Select(i => i.ItemId), jsonOptions);
-            var upItemNamesJson = JsonSerializer.Serialize(pool.Items.Select(i => i.Name), jsonOptions);
-            command.Parameters.Clear();
-            command.Parameters.AddWithValue("$version", pool.Version);
-            command.Parameters.AddWithValue("$poolType", poolType);
-            command.Parameters.AddWithValue("$startTime", pool.Start);
-            command.Parameters.AddWithValue("$endTime", pool.End);
-            command.Parameters.AddWithValue("$upItems", upItemsJson);
-            command.Parameters.AddWithValue("$upItemNames", upItemNamesJson);
-            command.ExecuteNonQuery();
-        }
+            Version = pool.Version,
+            StartTime = pool.Start,
+            EndTime = pool.End,
+            UpItems = JsonSerializer.Serialize(pool.Items.Select(i => i.ItemId), jsonOptions),
+            UpItemNames = JsonSerializer.Serialize(pool.Items.Select(i => i.Name), jsonOptions)
+        }).ToList();
 
-        transaction.Commit();
+        _metadataRepo.UpsertPoolMetadata(poolType, entities);
+        await Task.CompletedTask;
     }
 
     private List<GachaPoolMetadata> LoadPoolMetadataFromDb(string poolType)
     {
         var pools = new List<GachaPoolMetadata>();
-        using var connection = new SqliteConnection(_dbConnectionString);
-        connection.Open();
-        EnsurePoolMetadataTable(connection);
-        var command = connection.CreateCommand();
-        command.CommandText = "SELECT Version, StartTime, EndTime, UpItems, UpItemNames FROM GachaPoolMetadata WHERE PoolType = $poolType ORDER BY StartTime DESC";
-        command.Parameters.AddWithValue("$poolType", poolType);
+        var entities = _metadataRepo.GetPoolMetadataByType(poolType);
 
-        using var reader = command.ExecuteReader();
-        while (reader.Read())
+        foreach (var entity in entities)
         {
-            var upItemsJson = reader.GetString(3);
-            var upItemNamesJson = reader.GetString(4);
-
             List<int> ids;
-            try
-            {
-                ids = JsonSerializer.Deserialize<List<int>>(upItemsJson) ?? new List<int>();
-            }
-            catch (JsonException)
-            {
-                ids = new List<int>();
-            }
+            try { ids = JsonSerializer.Deserialize<List<int>>(entity.UpItems) ?? new List<int>(); }
+            catch (JsonException) { ids = new List<int>(); }
+
             List<string> names;
-            try
-            {
-                names = JsonSerializer.Deserialize<List<string>>(upItemNamesJson) ?? new List<string>();
-            }
-            catch (JsonException)
-            {
-                names = new List<string>();
-            }
+            try { names = JsonSerializer.Deserialize<List<string>>(entity.UpItemNames) ?? new List<string>(); }
+            catch (JsonException) { names = new List<string>(); }
 
             var upItems = new List<GachaPoolItem>();
             for (var i = 0; i < ids.Count; i++)
@@ -2516,14 +2267,13 @@ private async Task ImportUigfAsync()
                 });
             }
 
-            var pool = new GachaPoolMetadata
+            pools.Add(new GachaPoolMetadata
             {
-                Version = reader.GetString(0),
-                Start = reader.GetString(1),
-                End = reader.GetString(2),
+                Version = entity.Version,
+                Start = entity.StartTime,
+                End = entity.EndTime,
                 Items = upItems
-            };
-            pools.Add(pool);
+            });
         }
 
         return pools;
@@ -2531,20 +2281,7 @@ private async Task ImportUigfAsync()
 
     private bool HasPoolMetadataCache()
     {
-        try
-        {
-            using var connection = new SqliteConnection(_dbConnectionString);
-            connection.Open();
-            EnsurePoolMetadataTable(connection);
-            var command = connection.CreateCommand();
-            command.CommandText = "SELECT COUNT(*) FROM GachaPoolMetadata";
-            var count = Convert.ToInt32(command.ExecuteScalar());
-            return count > 0;
-        }
-        catch
-        {
-            return false;
-        }
+        return _metadataRepo.HasPoolMetadata();
     }
 
     private PityStatus DeterminePityStatus(GachaLogItem item, List<GachaPoolMetadata> pools, int pityCount, bool wasPreviousLost)

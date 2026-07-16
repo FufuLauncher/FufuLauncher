@@ -1,13 +1,14 @@
-﻿/*
+/*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.Data.Sqlite;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using FufuLauncher.Data.Repositories;
+using FufuLauncher.Data.Entities;
 
 namespace FufuLauncher.Views
 {
@@ -16,15 +17,15 @@ namespace FufuLauncher.Views
         private string _key;
         private string _value;
 
-        public string Key 
-        { 
-            get => _key; 
-            set { _key = value; OnPropertyChanged(nameof(Key)); } 
+        public string Key
+        {
+            get => _key;
+            set { _key = value; OnPropertyChanged(nameof(Key)); }
         }
-        public string Value 
-        { 
-            get => _value; 
-            set { _value = value; OnPropertyChanged(nameof(Value)); } 
+        public string Value
+        {
+            get => _value;
+            set { _value = value; OnPropertyChanged(nameof(Value)); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,15 +34,15 @@ namespace FufuLauncher.Views
 
     public sealed partial class DatabaseEditorWindow : Window
     {
-        private readonly string _dbPath;
+        private readonly LocalSettingsRepository _repository;
         public ObservableCollection<SettingItem> SettingsItems { get; } = new();
 
         public DatabaseEditorWindow()
         {
             InitializeComponent();
-            
-            _dbPath = Helpers.AppPaths.LocalSettingsDb;
-            
+
+            _repository = App.GetService<LocalSettingsRepository>();
+
             SettingsListView.ItemsSource = SettingsItems;
             LoadData();
         }
@@ -49,20 +50,13 @@ namespace FufuLauncher.Views
         private void LoadData()
         {
             SettingsItems.Clear();
-            if (!File.Exists(_dbPath)) return;
 
             try
             {
-                using var connection = new SqliteConnection($"Data Source={_dbPath}");
-                connection.Open();
-                var command = connection.CreateCommand();
-                command.CommandText = "SELECT [Key], [Value] FROM Settings";
-                using var reader = command.ExecuteReader();
-                while (reader.Read())
+                var entities = _repository.GetAllSettingEntitiesAsync().GetAwaiter().GetResult();
+                foreach (var entity in entities)
                 {
-                    var key = reader.GetString(0);
-                    var val = reader.IsDBNull(1) ? "" : reader.GetString(1);
-                    SettingsItems.Add(new SettingItem { Key = key, Value = val });
+                    SettingsItems.Add(new SettingItem { Key = entity.Key, Value = entity.Value ?? "" });
                 }
             }
             catch (Exception ex)
@@ -77,14 +71,15 @@ namespace FufuLauncher.Views
         {
             try
             {
-                if (File.Exists(_dbPath))
+                var dbPath = Helpers.AppPaths.LocalSettingsDb;
+                if (File.Exists(dbPath))
                 {
-                    GC.Collect(); 
+                    GC.Collect();
                     GC.WaitForPendingFinalizers();
-                    
-                    File.Delete(_dbPath);
+
+                    File.Delete(dbPath);
                     SettingsItems.Clear();
-                    
+
                     ShowDialog("成功", "数据库文件已成功删除");
                 }
             }
@@ -107,31 +102,16 @@ namespace FufuLauncher.Views
             SettingsItems.Add(new SettingItem { Key = "NewKey", Value = "" });
         }
 
-        private void OnSaveChangesClick(object sender, RoutedEventArgs e)
+        private async void OnSaveChangesClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                using var connection = new SqliteConnection($"Data Source={_dbPath}");
-                connection.Open();
+                var entities = SettingsItems
+                    .Where(item => !string.IsNullOrWhiteSpace(item.Key))
+                    .Select(item => new SettingEntity { Key = item.Key, Value = item.Value ?? "" })
+                    .ToList();
 
-                using var transaction = connection.BeginTransaction();
-                
-                var clearCmd = connection.CreateCommand();
-                clearCmd.CommandText = "DELETE FROM Settings";
-                clearCmd.ExecuteNonQuery();
-
-                foreach (var item in SettingsItems)
-                {
-                    if (string.IsNullOrWhiteSpace(item.Key)) continue;
-
-                    var insertCmd = connection.CreateCommand();
-                    insertCmd.CommandText = "INSERT INTO Settings ([Key], [Value]) VALUES ($key, $value)";
-                    insertCmd.Parameters.AddWithValue("$key", item.Key);
-                    insertCmd.Parameters.AddWithValue("$value", item.Value ?? "");
-                    insertCmd.ExecuteNonQuery();
-                }
-                
-                transaction.Commit();
+                await _repository.ReplaceAllSettingsAsync(entities);
                 ShowDialog("成功", "所有的更改已保存到数据库");
             }
             catch (Exception ex)
@@ -139,7 +119,7 @@ namespace FufuLauncher.Views
                 ShowDialog("失败", ex.Message);
             }
         }
-        
+
         private async void ShowDialog(string title, string content)
         {
             var dialog = new ContentDialog

@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization.Metadata;
 using FufuLauncher.Constants;
+using FufuLauncher.Contracts.Services;
 using FufuLauncher.Services;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
@@ -353,7 +354,7 @@ public sealed partial class LoginQrWindow : Window
             {
                 UpdateStatus("正在清除数据库缓存...", true);
 
-                var localSettingsService = new LocalSettingsService();
+                var localSettingsService = App.GetService<ILocalSettingsService>();
                 await localSettingsService.RemoveSettingAsync("AccountConfig");
                 await localSettingsService.RemoveSettingAsync("LabAccountConfig");
 

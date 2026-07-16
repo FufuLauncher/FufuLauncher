@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Data.Repositories;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
-using Microsoft.Data.Sqlite;
 
 namespace FufuLauncher.Services
 {
@@ -17,7 +17,7 @@ namespace FufuLauncher.Services
         private const string _defaultApplicationDataFolder = "FufuLauncher/ApplicationData";
         private const string _defaultLocalSettingsDb = "LocalSettings.db";
 
-        private string _dbPath => Helpers.AppPaths.LocalSettingsDb;
+        private readonly LocalSettingsRepository _repository;
 
         private Dictionary<string, string> _settings;
         private bool _isInitialized = false;
@@ -25,17 +25,18 @@ namespace FufuLauncher.Services
         public const string BackgroundServerKey = "BackgroundServer";
         public const string IsBackgroundEnabledKey = "IsBackgroundEnabled";
         public const string LastAnnouncedVersionKey = "LastAnnouncedVersion";
-        
+
         public const string LastAnnouncementUrlKey = "LastAnnouncementUrl";
-        
+
         public const string HasShownSecurityWarningKey = "HasShownSecurityWarning";
-        
+
         public const string HasDismissedFpsWarningKey = "HasDismissedFpsWarning";
 
         private readonly JsonSerializerOptions _jsonOptions;
 
-        public LocalSettingsService()
+        public LocalSettingsService(LocalSettingsRepository repository)
         {
+            _repository = repository;
             _settings = new Dictionary<string, string>();
 
             _jsonOptions = new JsonSerializerOptions
@@ -56,10 +57,10 @@ namespace FufuLauncher.Services
                 }
 
                 Debug.WriteLine("LocalSettingsService: 开始初始化数据库");
-                
+
                 try
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(_dbPath)!);
+                    Directory.CreateDirectory(Path.GetDirectoryName(Helpers.AppPaths.LocalSettingsDb)!);
                 }
                 catch (Exception ex)
                 {
@@ -71,11 +72,9 @@ namespace FufuLauncher.Services
                         4000
                     ));
                 }
-                
-                await InitializeDatabaseAsync();
-                
-                _settings = await LoadSettingsFromDbAsync();
-                
+
+                _settings = await _repository.GetAllSettingsAsync();
+
                 try
                 {
                     bool isAutoDisableFpsOff = false;
@@ -89,7 +88,7 @@ namespace FufuLauncher.Services
                         string fpsDir = Path.Combine(AppContext.BaseDirectory, "Plugins", "FPS");
                         string fpsEnabledPath = Path.Combine(fpsDir, "FPS.dll");
                         string fpsDisabledPath = Path.Combine(fpsDir, "FPS.disabled");
-        
+
                         if (File.Exists(fpsEnabledPath))
                         {
                             if (File.Exists(fpsDisabledPath))
@@ -105,7 +104,7 @@ namespace FufuLauncher.Services
                 {
                     Debug.WriteLine($"LocalSettingsService: 自动禁用FPS插件失败 - {ex.Message}");
                 }
-                
+
                 _isInitialized = true;
                 Debug.WriteLine($"LocalSettingsService: 初始化完成，加载 {_settings.Count} 项");
             }
@@ -169,49 +168,16 @@ namespace FufuLauncher.Services
             {
                 await InitializeAsync();
             }
-            
+
             var json = JsonSerializer.Serialize(value, _jsonOptions);
-            
+
             _settings[key] = json;
 
             Debug.WriteLine($"LocalSettingsService: 保存{key}");
-            
-            await SaveSettingToDbAsync(key, json);
+
+            await _repository.UpsertSettingAsync(key, json);
         }
 
-        private async Task InitializeDatabaseAsync()
-        {
-            try
-            {
-                using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
-                await connection.OpenAsync();
-
-                var command = connection.CreateCommand();
-                command.CommandText = @"
-                    CREATE TABLE IF NOT EXISTS Settings (
-                        [Key] TEXT PRIMARY KEY,
-                        [Value] TEXT
-                    )";
-
-                await command.ExecuteNonQueryAsync();
-
-                var cleanupCommand = connection.CreateCommand();
-                cleanupCommand.CommandText = @"
-                    DELETE FROM Settings WHERE [Key] IN ('AccountConfig', 'LabAccountConfig')";
-                await cleanupCommand.ExecuteNonQueryAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"LocalSettingsService: 数据库表初始化失败 - {ex.Message}");
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "Settings_DbInitFailed".GetLocalized(),
-                    string.Format("Settings_DbInitFailedMsg".GetLocalized(), ex.Message),
-                    NotificationType.Error,
-                    4000
-                ));
-            }
-        }
-        
         public async Task RemoveSettingAsync(string key)
         {
             if (!_isInitialized)
@@ -222,107 +188,7 @@ namespace FufuLauncher.Services
             if (_settings.ContainsKey(key))
             {
                 _settings.Remove(key);
-                await RemoveSettingFromDbAsync(key);
-            }
-        }
-
-        private async Task RemoveSettingFromDbAsync(string key)
-        {
-            try
-            {
-                using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
-                await connection.OpenAsync();
-        
-                var command = connection.CreateCommand();
-                command.CommandText = "DELETE FROM Settings WHERE [Key] = $key";
-                command.Parameters.AddWithValue("$key", key);
-        
-                await command.ExecuteNonQueryAsync();
-                Debug.WriteLine($"LocalSettingsService: 已从数据库删除 '{key}'");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"LocalSettingsService: 数据库删除失败 - {ex.Message}");
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "Settings_ConfigDeleteFailed".GetLocalized(),
-                    string.Format("Settings_ConfigDeleteFailedMsg".GetLocalized(), ex.Message),
-                    NotificationType.Error,
-                    4000
-                ));
-            }
-        }
-
-        private async Task<Dictionary<string, string>> LoadSettingsFromDbAsync()
-        {
-            var settings = new Dictionary<string, string>();
-            try
-            {
-                Debug.WriteLine($"LocalSettingsService: 尝试从数据库加载 {_dbPath}");
-
-                if (File.Exists(_dbPath))
-                {
-                    using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
-                    await connection.OpenAsync();
-                    
-                    var command = connection.CreateCommand();
-                    command.CommandText = "SELECT [Key], [Value] FROM Settings";
-                    
-                    using var reader = await command.ExecuteReaderAsync();
-                    while (await reader.ReadAsync())
-                    {
-                        var key = reader.GetString(0);
-                        var value = reader.GetString(1);
-                        settings[key] = value;
-                    }
-
-                    Debug.WriteLine($"LocalSettingsService: 成功从数据库加载 {settings.Count} 项");
-                    return settings;
-                }
-
-                Debug.WriteLine("LocalSettingsService: 数据库文件尚未创建，返回空字典");
-                return settings;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"LocalSettingsService: 数据库加载失败 - {ex.Message}");
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "Settings_ConfigReadFailed".GetLocalized(),
-                    string.Format("Settings_ConfigReadFailedMsg".GetLocalized(), ex.Message),
-                    NotificationType.Error,
-                    4000
-                ));
-                return settings;
-            }
-        }
-
-        private async Task SaveSettingToDbAsync(string key, string value)
-        {
-            try
-            {
-                using var connection = new SqliteConnection($"Data Source={_dbPath};Pooling=False");
-                await connection.OpenAsync();
-                
-                var command = connection.CreateCommand();
-                command.CommandText = @"
-                    INSERT INTO Settings ([Key], [Value])
-                    VALUES ($key, $value)
-                    ON CONFLICT([Key]) DO UPDATE SET [Value] = excluded.[Value]";
-                
-                command.Parameters.AddWithValue("$key", key);
-                command.Parameters.AddWithValue("$value", value);
-                
-                await command.ExecuteNonQueryAsync();
-                Debug.WriteLine($"LocalSettingsService: 已将 '{key}' 保存至数据库");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"LocalSettingsService: 数据库保存失败 - {ex.Message}");
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "Settings_ConfigSaveFailed".GetLocalized(),
-                    string.Format("Settings_ConfigSaveFailedMsg".GetLocalized(), ex.Message),
-                    NotificationType.Error,
-                    4000
-                ));
+                await _repository.DeleteSettingAsync(key);
             }
         }
     }

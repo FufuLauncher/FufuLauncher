@@ -8,6 +8,7 @@ namespace FufuLauncher.Contracts.Services
     {
         Task<object?> ReadSettingAsync(string key);
         Task SaveSettingAsync<T>(string key, T value);
+        Task RemoveSettingAsync(string key);
         Task ReInitializeAsync();
     }
 }

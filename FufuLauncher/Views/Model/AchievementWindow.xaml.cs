@@ -9,13 +9,14 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using FufuLauncher.Data.Entities;
+using FufuLauncher.Data.Repositories;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
-using Microsoft.Data.Sqlite;
 
 namespace FufuLauncher.Views;
 
@@ -25,6 +26,7 @@ public sealed partial class AchievementWindow : Window
 
     private readonly string _workFilePath;
     private readonly string _assetsFilePath;
+    private readonly AchievementRepository _achievementRepo;
     private bool _isDataLoaded;
     private Dictionary<AchievementItem, int> _itemUids = new();
     private HttpListener _listener;
@@ -82,6 +84,7 @@ public sealed partial class AchievementWindow : Window
         
         _workFilePath = Path.Combine(docPath, "achievements.db");
         _assetsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "genshin_achievements_linked.json");
+        _achievementRepo = App.GetService<AchievementRepository>();
 
         LoadData();
         StartLocalServer();
@@ -92,75 +95,27 @@ public sealed partial class AchievementWindow : Window
     private void EnsureDatabaseExists(string dbPath)
     {
         bool isNewDb = !File.Exists(dbPath);
-        using var connection = new SqliteConnection($"Data Source={dbPath}");
-        connection.Open();
-        using var cmd = connection.CreateCommand();
-        
-        cmd.CommandText = @"
-            CREATE TABLE IF NOT EXISTS Categories (
-                Name TEXT PRIMARY KEY,
-                IconUrl TEXT
-            );
-            CREATE TABLE IF NOT EXISTS Achievements (
-                Uid INTEGER PRIMARY KEY AUTOINCREMENT,
-                Id INTEGER,
-                Title TEXT,
-                CategoryName TEXT,
-                RawJson TEXT,
-                IsCompleted INTEGER,
-                CurrentProgress INTEGER,
-                MaxProgress INTEGER,
-                CompletionTimestamp INTEGER DEFAULT 0
-            );
-        ";
-        cmd.ExecuteNonQuery();
 
-        using var checkCmd = connection.CreateCommand();
-        checkCmd.CommandText = "PRAGMA table_info(Achievements);";
-        bool hasTimestamp = false;
-        using (var reader = checkCmd.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                if (reader.GetString(1) == "CompletionTimestamp")
-                {
-                    hasTimestamp = true;
-                    break;
-                }
-            }
-        }
-        
-        if (!hasTimestamp)
-        {
-            using var alterCmd = connection.CreateCommand();
-            alterCmd.CommandText = "ALTER TABLE Achievements ADD COLUMN CompletionTimestamp INTEGER DEFAULT 0;";
-            alterCmd.ExecuteNonQuery();
-        }
-        
+        // EF Core EnsureCreated handles table creation when repository is first used.
+        // Trigger it by accessing the repository, which calls EnsureCreated on the DbContext.
+        // No need for ad-hoc PRAGMA + ALTER TABLE migrations anymore.
+
         if (isNewDb)
         {
-            string oldJsonPath = Path.Combine(Path.GetDirectoryName(dbPath), "achievements.json");
+            string oldJsonPath = Path.Combine(Path.GetDirectoryName(dbPath)!, "achievements.json");
             if (File.Exists(oldJsonPath))
             {
-                ImportJsonToDb(oldJsonPath, dbPath, connection);
+                ImportJsonToDb(oldJsonPath, dbPath);
             }
             else if (File.Exists(_assetsFilePath))
             {
-                ImportJsonToDb(_assetsFilePath, dbPath, connection);
+                ImportJsonToDb(_assetsFilePath, dbPath);
             }
         }
     }
     
-    private void ImportJsonToDb(string jsonPath, string dbPath, SqliteConnection connection = null)
+    private void ImportJsonToDb(string jsonPath, string dbPath)
     {
-        bool closeConn = false;
-        if (connection == null)
-        {
-            connection = new SqliteConnection($"Data Source={dbPath}");
-            connection.Open();
-            closeConn = true;
-        }
-
         string jsonContent;
         try
         {
@@ -173,9 +128,9 @@ public sealed partial class AchievementWindow : Window
             return;
         }
 
-        var options = new JsonSerializerOptions { 
-            PropertyNameCaseInsensitive = true, 
-            NumberHandling = JsonNumberHandling.AllowReadingFromString, 
+        var options = new JsonSerializerOptions {
+            PropertyNameCaseInsensitive = true,
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
             ReadCommentHandling = JsonCommentHandling.Skip,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
@@ -193,41 +148,33 @@ public sealed partial class AchievementWindow : Window
         }
         if (rawCategories == null) return;
 
-        using var transaction = connection.BeginTransaction();
         var writeOptions = new JsonSerializerOptions { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
+        var categoryEntries = rawCategories.Select(cat => (GetCategoryName(cat), cat.IconUrl)).ToList();
+        _achievementRepo.InsertOrIgnoreCategories(categoryEntries);
+
+        var achievements = new List<AchievementEntity>();
         foreach (var cat in rawCategories)
         {
             string categoryName = GetCategoryName(cat);
-            using var catCmd = connection.CreateCommand();
-            catCmd.Transaction = transaction;
-            catCmd.CommandText = "INSERT OR IGNORE INTO Categories (Name, IconUrl) VALUES (@Name, @IconUrl)";
-            catCmd.Parameters.AddWithValue("@Name", categoryName);
-            catCmd.Parameters.AddWithValue("@IconUrl", cat.IconUrl ?? (object)DBNull.Value);
-            catCmd.ExecuteNonQuery();
-            
             if (cat.Achievements == null) continue;
 
             foreach (var item in cat.Achievements)
             {
-                using var achCmd = connection.CreateCommand();
-                achCmd.Transaction = transaction;
-                achCmd.CommandText = "INSERT INTO Achievements (Id, Title, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress, CompletionTimestamp) VALUES (@Id, @Title, @CategoryName, @RawJson, @IsCompleted, @CurrentProgress, @MaxProgress, @CompletionTimestamp)";
-                
-                achCmd.Parameters.AddWithValue("@Id", item.Id);
-                achCmd.Parameters.AddWithValue("@Title", item.Title ?? "");
-                achCmd.Parameters.AddWithValue("@CategoryName", categoryName);
-                achCmd.Parameters.AddWithValue("@RawJson", JsonSerializer.Serialize(item, writeOptions));
-                achCmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
-                achCmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
-                achCmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
-                achCmd.Parameters.AddWithValue("@CompletionTimestamp", 0);
-                achCmd.ExecuteNonQuery();
+                achievements.Add(new AchievementEntity
+                {
+                    Id = item.Id,
+                    Title = item.Title ?? "",
+                    CategoryName = categoryName,
+                    RawJson = JsonSerializer.Serialize(item, writeOptions),
+                    IsCompleted = item.IsCompleted ? 1 : 0,
+                    CurrentProgress = item.CurrentProgress,
+                    MaxProgress = item.MaxProgress,
+                    CompletionTimestamp = 0
+                });
             }
         }
-        transaction.Commit();
-
-        if (closeConn) connection.Close();
+        _achievementRepo.InsertAchievements(achievements);
     }
     
     private async Task SyncWithAssetsDatabase()
@@ -251,31 +198,21 @@ public sealed partial class AchievementWindow : Window
 
             EnsureDatabaseExists(_workFilePath);
 
-            using var connection = new SqliteConnection($"Data Source={_workFilePath}");
-            await connection.OpenAsync();
+            _achievementRepo.ChangeDatabase(_workFilePath);
 
-            var existingIds = new HashSet<int>();
-            using var idCmd = connection.CreateCommand();
-            idCmd.CommandText = "SELECT Id FROM Achievements";
-            using (var reader = await idCmd.ExecuteReaderAsync())
-            {
-                while (reader.Read()) existingIds.Add(reader.GetInt32(0));
-            }
+            var existingIds = _achievementRepo.GetExistingAchievementIds();
 
-            using var transaction = connection.BeginTransaction();
             int addedCount = 0;
             int newCategoriesCount = 0;
             var writeOptions = new JsonSerializerOptions { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
+            var newCategories = new List<(string, string?)>();
+            var newAchievements = new List<AchievementEntity>();
+
             foreach (var masterCat in masterCategories)
             {
                 string categoryName = GetCategoryName(masterCat);
-                using var catCmd = connection.CreateCommand();
-                catCmd.Transaction = transaction;
-                catCmd.CommandText = "INSERT OR IGNORE INTO Categories (Name, IconUrl) VALUES (@Name, @IconUrl)";
-                catCmd.Parameters.AddWithValue("@Name", categoryName);
-                catCmd.Parameters.AddWithValue("@IconUrl", masterCat.IconUrl ?? (object)DBNull.Value);
-                if (await catCmd.ExecuteNonQueryAsync() > 0) newCategoriesCount++;
+                newCategories.Add((categoryName, masterCat.IconUrl));
 
                 if (masterCat.Achievements == null) continue;
 
@@ -283,24 +220,26 @@ public sealed partial class AchievementWindow : Window
                 {
                     if (!existingIds.Contains(item.Id))
                     {
-                        using var achCmd = connection.CreateCommand();
-                        achCmd.Transaction = transaction;
-                        achCmd.CommandText = "INSERT INTO Achievements (Id, Title, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress, CompletionTimestamp) VALUES (@Id, @Title, @CategoryName, @RawJson, @IsCompleted, @CurrentProgress, @MaxProgress, @CompletionTimestamp)";
-                        achCmd.Parameters.AddWithValue("@Id", item.Id);
-                        achCmd.Parameters.AddWithValue("@Title", item.Title ?? "");
-                        achCmd.Parameters.AddWithValue("@CategoryName", categoryName);
-                        achCmd.Parameters.AddWithValue("@RawJson", JsonSerializer.Serialize(item, writeOptions));
-                        achCmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
-                        achCmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
-                        achCmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
-                        achCmd.Parameters.AddWithValue("@CompletionTimestamp", 0);
-                        await achCmd.ExecuteNonQueryAsync();
+                        newAchievements.Add(new AchievementEntity
+                        {
+                            Id = item.Id,
+                            Title = item.Title ?? "",
+                            CategoryName = categoryName,
+                            RawJson = JsonSerializer.Serialize(item, writeOptions),
+                            IsCompleted = item.IsCompleted ? 1 : 0,
+                            CurrentProgress = item.CurrentProgress,
+                            MaxProgress = item.MaxProgress,
+                            CompletionTimestamp = 0
+                        });
                         addedCount++;
                         existingIds.Add(item.Id);
                     }
                 }
             }
-            transaction.Commit();
+
+            newCategoriesCount = _achievementRepo.InsertOrIgnoreCategories(newCategories);
+            if (newAchievements.Count > 0)
+                _achievementRepo.InsertAchievements(newAchievements);
 
             if (addedCount > 0)
             {
@@ -367,7 +306,7 @@ public sealed partial class AchievementWindow : Window
 
             SaveData(); 
             
-            SqliteConnection.ClearAllPools();
+            _achievementRepo.ChangeDatabase(_workFilePath);
             
             string targetPath = Path.Combine(_archivesDir, $"{nameResult}.db");
             File.Copy(_workFilePath, targetPath, true);
@@ -379,7 +318,7 @@ public sealed partial class AchievementWindow : Window
         {
             SaveData();
             
-            SqliteConnection.ClearAllPools();
+            _achievementRepo.ChangeDatabase(_workFilePath);
             
             string currentBackupPath = Path.Combine(_archivesDir, $"{CurrentProfileName}.db");
             File.Copy(_workFilePath, currentBackupPath, true);
@@ -565,7 +504,7 @@ public sealed partial class AchievementWindow : Window
             ViewModel.IsLoading = true;
             ViewModel.StatusMessage = "AchievementWindow_SwitchingProfile".GetLocalized();
             
-            SqliteConnection.ClearAllPools();
+            _achievementRepo.ChangeDatabase(_workFilePath);
             
             if (isNew)
             {
@@ -776,57 +715,47 @@ public sealed partial class AchievementWindow : Window
         try
         {
             EnsureDatabaseExists(_workFilePath);
+            _achievementRepo.ChangeDatabase(_workFilePath);
 
             var rawCategories = new List<AchievementCategory>();
             var categoryMap = new Dictionary<string, AchievementCategory>();
 
-            using var connection = new SqliteConnection($"Data Source={_workFilePath}");
-            connection.Open();
-
-            using var catCmd = connection.CreateCommand();
-            catCmd.CommandText = "SELECT Name, IconUrl FROM Categories";
-            using (var reader = catCmd.ExecuteReader())
+            var catEntities = _achievementRepo.GetAllCategories();
+            foreach (var catEntity in catEntities)
             {
-                while (reader.Read())
+                var cat = new AchievementCategory
                 {
-                    var cat = new AchievementCategory
-                    {
-                        Name = reader.GetString(0),
-                        IconUrl = reader.IsDBNull(1) ? null : reader.GetString(1),
-                        Achievements = new ObservableCollection<AchievementItem>()
-                    };
-                    SetCategoryTitle(cat, cat.Name);
-                    rawCategories.Add(cat);
-                    categoryMap[cat.Name] = cat;
-                }
+                    Name = catEntity.Name,
+                    IconUrl = catEntity.IconUrl,
+                    Achievements = new ObservableCollection<AchievementItem>()
+                };
+                SetCategoryTitle(cat, cat.Name);
+                rawCategories.Add(cat);
+                categoryMap[cat.Name] = cat;
             }
+
             _itemUids.Clear();
             var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            using var achCmd = connection.CreateCommand();
-            achCmd.CommandText = "SELECT Uid, CategoryName, RawJson, IsCompleted, CurrentProgress, MaxProgress, CompletionTimestamp FROM Achievements";
-            using (var reader = achCmd.ExecuteReader())
+            var achEntities = _achievementRepo.GetAllAchievements();
+            foreach (var ach in achEntities)
             {
-                while (reader.Read())
-                {
-                    int uid = reader.GetInt32(0);
-                    string catName = reader.GetString(1);
-                    string rawJson = reader.GetString(2);
-                    bool isCompleted = reader.GetInt32(3) == 1;
-                    int currentProgress = reader.GetInt32(4);
-                    int maxProgress = reader.GetInt32(5);
-                    long completionTimestamp = reader.IsDBNull(6) ? 0 : reader.GetInt64(6);
+                string catName = ach.CategoryName ?? "";
+                string rawJson = ach.RawJson ?? "";
+                bool isCompleted = ach.IsCompleted == 1;
+                int currentProgress = ach.CurrentProgress;
+                int maxProgress = ach.MaxProgress;
+                long completionTimestamp = ach.CompletionTimestamp;
 
-                    var item = JsonSerializer.Deserialize<AchievementItem>(rawJson, options);
-                    if (item != null && categoryMap.TryGetValue(catName, out var cat))
-                    {
-                        item.IsCompleted = isCompleted;
-                        item.CurrentProgress = currentProgress;
-                        item.MaxProgress = maxProgress;
-                        item.CompletionTimestamp = completionTimestamp;
-                        cat.Achievements.Add(item);
-                        
-                        _itemUids[item] = uid;
-                    }
+                var item = JsonSerializer.Deserialize<AchievementItem>(rawJson, options);
+                if (item != null && categoryMap.TryGetValue(catName, out var cat))
+                {
+                    item.IsCompleted = isCompleted;
+                    item.CurrentProgress = currentProgress;
+                    item.MaxProgress = maxProgress;
+                    item.CompletionTimestamp = completionTimestamp;
+                    cat.Achievements.Add(item);
+
+                    _itemUids[item] = ach.Uid;
                 }
             }
             ViewModel.Categories.Clear();
@@ -975,19 +904,10 @@ public sealed partial class AchievementWindow : Window
     {
         if (!_isDataLoaded || _isBatchProcessing) return;
         if (!_itemUids.TryGetValue(item, out int uid)) return;
-        
+
         try
         {
-            using var connection = new SqliteConnection($"Data Source={_workFilePath}");
-            connection.Open();
-            using var cmd = connection.CreateCommand();
-            cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress, CompletionTimestamp = @CompletionTimestamp WHERE Uid = @Uid";
-            cmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
-            cmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
-            cmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
-            cmd.Parameters.AddWithValue("@CompletionTimestamp", item.CompletionTimestamp);
-            cmd.Parameters.AddWithValue("@Uid", uid);
-            cmd.ExecuteNonQuery();
+            _achievementRepo.UpdateAchievement(uid, item.IsCompleted, item.CurrentProgress, item.MaxProgress, item.CompletionTimestamp);
         }
         catch(Exception ex) { Debug.WriteLine(ex); }
     }
@@ -1672,10 +1592,7 @@ public sealed partial class AchievementWindow : Window
         if (!_isDataLoaded) return;
         try
         {
-            using var connection = new SqliteConnection($"Data Source={_workFilePath}");
-            connection.Open();
-            using var transaction = connection.BeginTransaction();
-
+            var updates = new Dictionary<int, (bool IsCompleted, int CurrentProgress, int MaxProgress, long CompletionTimestamp)>();
             foreach (var uiCat in ViewModel.Categories)
             {
                 foreach (var item in uiCat.Achievements)
@@ -1685,37 +1602,17 @@ public sealed partial class AchievementWindow : Window
                         foreach (var child in item.Children)
                         {
                             if (_itemUids.TryGetValue(child, out int uid))
-                            {
-                                using var cmd = connection.CreateCommand();
-                                cmd.Transaction = transaction;
-                                cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress, CompletionTimestamp = @CompletionTimestamp WHERE Uid = @Uid";
-                                cmd.Parameters.AddWithValue("@Uid", uid);
-                                cmd.Parameters.AddWithValue("@IsCompleted", child.IsCompleted ? 1 : 0);
-                                cmd.Parameters.AddWithValue("@CurrentProgress", child.CurrentProgress);
-                                cmd.Parameters.AddWithValue("@MaxProgress", child.MaxProgress);
-                                cmd.Parameters.AddWithValue("@CompletionTimestamp", child.CompletionTimestamp);
-                                cmd.ExecuteNonQuery();
-                            }
+                                updates[uid] = (child.IsCompleted, child.CurrentProgress, child.MaxProgress, child.CompletionTimestamp);
                         }
                     }
                     else
                     {
                         if (_itemUids.TryGetValue(item, out int uid))
-                        {
-                            using var cmd = connection.CreateCommand();
-                            cmd.Transaction = transaction;
-                            cmd.CommandText = "UPDATE Achievements SET IsCompleted = @IsCompleted, CurrentProgress = @CurrentProgress, MaxProgress = @MaxProgress, CompletionTimestamp = @CompletionTimestamp WHERE Uid = @Uid";
-                            cmd.Parameters.AddWithValue("@Uid", uid);
-                            cmd.Parameters.AddWithValue("@IsCompleted", item.IsCompleted ? 1 : 0);
-                            cmd.Parameters.AddWithValue("@CurrentProgress", item.CurrentProgress);
-                            cmd.Parameters.AddWithValue("@MaxProgress", item.MaxProgress);
-                            cmd.Parameters.AddWithValue("@CompletionTimestamp", item.CompletionTimestamp);
-                            cmd.ExecuteNonQuery();
-                        }
+                            updates[uid] = (item.IsCompleted, item.CurrentProgress, item.MaxProgress, item.CompletionTimestamp);
                     }
                 }
             }
-            transaction.Commit();
+            _achievementRepo.UpdateAchievementsBatch(updates);
         }
         catch (Exception ex)
         {

@@ -8,6 +8,7 @@ using System.Text.Json;
 using FufuLauncher.Activation;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Data.Repositories;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
@@ -118,6 +119,13 @@ public partial class App : Application
                 .ConfigureServices((context, services) =>
                 {
                     services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+
+                    services.AddSingleton<LocalSettingsRepository>(_ =>
+                        new LocalSettingsRepository(Helpers.AppPaths.LocalSettingsDb));
+                    services.AddSingleton<MetadataRepository>(_ =>
+                        new MetadataRepository(Helpers.AppPaths.MetadataDb));
+                    services.AddSingleton<AchievementRepository>(_ =>
+                        new AchievementRepository(Path.Combine(Helpers.AppPaths.DataDir, "achievements.db")));
 
                     services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
                     services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
