@@ -1075,7 +1075,7 @@ namespace FufuLauncher.ViewModels
             MinimizeToTray = trayJson != null && Convert.ToBoolean(trayJson);
             
             var acrylicOverlayJson = await _localSettingsService.ReadSettingAsync("IsAcrylicOverlayEnabled");
-            IsAcrylicOverlayEnabled = acrylicOverlayJson != null && Convert.ToBoolean(acrylicOverlayJson);
+            IsAcrylicOverlayEnabled = acrylicOverlayJson == null || Convert.ToBoolean(acrylicOverlayJson);
 
             var pageOverlaySemiTransparentJson = await _localSettingsService.ReadSettingAsync("IsPageOverlaySemiTransparentEnabled");
             IsPageOverlaySemiTransparentEnabled = pageOverlaySemiTransparentJson != null && Convert.ToBoolean(pageOverlaySemiTransparentJson);
@@ -1106,7 +1106,7 @@ namespace FufuLauncher.ViewModels
             }
             else
             {
-                CurrentWindowBackdrop = WindowBackdropType.None;
+                CurrentWindowBackdrop = WindowBackdropType.Acrylic;
             }
 
             var appThemeColorJson = await _localSettingsService.ReadSettingAsync("AppThemeColor");
@@ -1232,7 +1232,7 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
             IsHideCheckinCardEnabled = hideCheckinCardJson != null && Convert.ToBoolean(hideCheckinCardJson);
 
             var hideDailyNoteCardJson = await _localSettingsService.ReadSettingAsync("IsHideDailyNoteCardEnabled");
-            IsHideDailyNoteCardEnabled = hideDailyNoteCardJson == null || Convert.ToBoolean(hideDailyNoteCardJson);
+            IsHideDailyNoteCardEnabled = hideDailyNoteCardJson != null && Convert.ToBoolean(hideDailyNoteCardJson);
 
             _isUpdatingDailyNote = true;
             int activeCount = 0;
@@ -1257,12 +1257,12 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
             ShowDailyNoteTransformer = (showTransformerJson == null || Convert.ToBoolean(showTransformerJson)) && activeCount < 3;
             
             var showPresetCardJson = await _localSettingsService.ReadSettingAsync("IsShowPresetCardEnabled");
-            IsShowPresetCardEnabled = showPresetCardJson != null && Convert.ToBoolean(showPresetCardJson);
+            IsShowPresetCardEnabled = showPresetCardJson == null || Convert.ToBoolean(showPresetCardJson);
     
             _isUpdatingDailyNote = false;
             
             var showWidgetCardJson = await _localSettingsService.ReadSettingAsync("IsShowWidgetCardEnabled");
-            IsShowWidgetCardEnabled = showWidgetCardJson != null && Convert.ToBoolean(showWidgetCardJson);
+            IsShowWidgetCardEnabled = showWidgetCardJson == null || Convert.ToBoolean(showWidgetCardJson);
 
             var showWidgetGachaJson = await _localSettingsService.ReadSettingAsync("ShowWidgetGacha");
             ShowWidgetGacha = showWidgetGachaJson == null || Convert.ToBoolean(showWidgetGachaJson);

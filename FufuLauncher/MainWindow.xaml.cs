@@ -927,11 +927,11 @@ public sealed partial class MainWindow : WindowEx
             {
                 var acrylicEnabled = await localSettingsService.ReadSettingAsync("IsAcrylicEnabled");
                 var isEnabled = acrylicEnabled != null && Convert.ToBoolean(acrylicEnabled);
-                backdropType = isEnabled ? WindowBackdropType.Acrylic : WindowBackdropType.Mica;
+                backdropType = isEnabled ? WindowBackdropType.Acrylic : WindowBackdropType.Acrylic;
             }
             ApplyBackdrop(backdropType);
         }
-        catch { ApplyBackdrop(WindowBackdropType.Mica); }
+        catch { ApplyBackdrop(WindowBackdropType.Acrylic); }
     }
 
     private async Task LoadGlobalBackgroundAsync()
