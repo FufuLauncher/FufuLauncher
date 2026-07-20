@@ -14,11 +14,11 @@ namespace FufuLauncher.Constants
         public const string AgreementUrl = "https://philia093.cyou/";
         public const string AgreementFallbackUrl = "https://fu1.fun/";
         public const string IconTroubleshootUrl = "https://wwaoi.lanzouu.com/ig75f3hedlaj";
-        public const string RoleAvgUrl = "http://154.44.25.230:8080/getRoleAvg";
-        public const string AbyssRank2Url = "http://154.44.25.230:8080/getAbyssRank2";
-        public const string WishHistoryUrl = "http://154.44.25.230:8080/getWishHistory";
-        public const string SpiralAbyssRankUrl = "http://154.44.25.230:8080/getAbyssRank";
-        public const string RerunListUrl = "http://154.44.25.230:8080/getRerunList";
+        public const string RoleAvgUrl = "https://api.lelaer.com/ys/getRoleAvg.php?star=all&lang=zh-Hans";
+        public const string AbyssRank2Url = "https://api.lelaer.com/ys/getAbyssRank2.php?star=all&role=all&lang=zh-Hans";
+        public const string WishHistoryUrl = "https://api.yshelper.com/ys/getWishHistory.php?lang=zh-Hans";
+        public const string SpiralAbyssRankUrl = "https://api.yshelper.com/ys/getAbyssRank.php?star=all&role=all&lang=zh-Hans";
+        public const string RerunListUrl = "https://api.yshelper.com/ys/getRerunList.php?star=5&role=all&lang=zh-Hans";
         public const string TravelersDiaryMonthInfoUrl = "https://hk4e-api.mihoyo.com/event/ys_ledger/monthInfo";
         public const string TravelersDiaryMonthInfoOsUrl = "https://sg-hk4e-api.hoyolab.com/event/ysledgeros/month_info";
         public const string BackgroundCnApi = "https://hyp-api.mihoyo.com/hyp/hyp-connect/api/getAllGameBasicInfo?launcher_id=jGHBHlcOq1&language=zh-cn&game_id=1Z8W5NHUQb";
