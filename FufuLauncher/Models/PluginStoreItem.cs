@@ -101,8 +101,20 @@ public class PluginStoreItem : INotifyPropertyChanged
     public string Category
     {
         get => _category;
-        set { _category = value; OnPropertyChanged(); }
+        set { _category = value; OnPropertyChanged(); OnPropertyChanged(nameof(CategoryDisplay)); }
     }
+
+    private static readonly Dictionary<string, string> CategoryResourceKeys = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["utility"] = "PluginStoreCategoryUtility",
+        ["gameplay"] = "PluginStoreCategoryGameplay",
+        ["visuals"] = "PluginStoreCategoryVisuals",
+    };
+
+    [JsonIgnore]
+    public string CategoryDisplay =>
+        string.IsNullOrEmpty(Category) ? "" :
+        CategoryResourceKeys.TryGetValue(Category, out var key) ? key.GetLocalized() : Category;
 
     [JsonPropertyName("tags")]
     public List<string> Tags

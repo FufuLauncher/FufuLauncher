@@ -200,9 +200,9 @@ public class PluginStoreViewModel : INotifyPropertyChanged
             {
                 Categories.Clear();
                 Categories.Add(new PluginStoreCategory { Key = "", DisplayName = "PluginStoreAll".GetLocalized(), Icon = "\uE71D" });
-                Categories.Add(new PluginStoreCategory { Key = "utility", DisplayName = "utility", Icon = "\uE90F" });
-                Categories.Add(new PluginStoreCategory { Key = "gameplay", DisplayName = "gameplay", Icon = "\uE7FC" });
-                Categories.Add(new PluginStoreCategory { Key = "visuals", DisplayName = "visuals", Icon = "\uE790" });
+                Categories.Add(new PluginStoreCategory { Key = "utility", DisplayName = "PluginStoreCategoryUtility".GetLocalized(), Icon = "\uE90F" });
+                Categories.Add(new PluginStoreCategory { Key = "gameplay", DisplayName = "PluginStoreCategoryGameplay".GetLocalized(), Icon = "\uE7FC" });
+                Categories.Add(new PluginStoreCategory { Key = "visuals", DisplayName = "PluginStoreCategoryVisuals".GetLocalized(), Icon = "\uE790" });
                 SelectedCategory = Categories.FirstOrDefault();
             }
         }

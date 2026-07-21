@@ -1453,4 +1453,7 @@ Do you still want to execute it? (Not recommended)</value></data>
 {0}</value></data>
   <data name="PluginStoreLuaTestOpenLog" xml:space="preserve"><value>Open Log File</value></data>
   <data name="PluginStoreLuaTestClose" xml:space="preserve"><value>Close</value></data>
+  <data name="PluginStoreCategoryUtility" xml:space="preserve"><value>Utility</value></data>
+  <data name="PluginStoreCategoryGameplay" xml:space="preserve"><value>Gameplay</value></data>
+  <data name="PluginStoreCategoryVisuals" xml:space="preserve"><value>Visuals</value></data>
 </root>

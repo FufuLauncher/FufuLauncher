@@ -160,7 +160,7 @@
                                     </Grid.ColumnDefinitions>
                                     
                                     <Border Grid.Column="0" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}" CornerRadius="4" Padding="6,2" VerticalAlignment="Center" Margin="0,0,8,0">
-                                        <TextBlock Text="{x:Bind Category, Mode=OneWay}" FontSize="10" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" MaxLines="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{x:Bind CategoryDisplay, Mode=OneWay}" FontSize="10" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" MaxLines="1" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
                                     </Border>
                                     
                                     <Border Grid.Column="1" Background="#33FF6B35" CornerRadius="4" Padding="5,2" VerticalAlignment="Center" Margin="0,0,8,0"
@@ -328,7 +328,6 @@
                                         <DataTemplate x:DataType="models:PluginStoreCategory">
                                             <Button Style="{StaticResource CategoryChipStyle}" Click="OnCategoryClick" Tag="{x:Bind}">
                                                 <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <!-- 【修改点】使用 FontIcon 专门解析 WinUI3 的 Segoe Fluent 图标 -->
                                                     <FontIcon Glyph="{x:Bind Icon}" FontSize="14" VerticalAlignment="Center"/>
                                                     <TextBlock Text="{x:Bind DisplayName}" VerticalAlignment="Center"/>
                                                 </StackPanel>

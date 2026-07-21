@@ -1501,4 +1501,7 @@
 {0}</value></data>
   <data name="PluginStoreLuaTestOpenLog" xml:space="preserve"><value>打开日志文件</value></data>
   <data name="PluginStoreLuaTestClose" xml:space="preserve"><value>关闭</value></data>
+  <data name="PluginStoreCategoryUtility" xml:space="preserve"><value>实用工具</value></data>
+  <data name="PluginStoreCategoryGameplay" xml:space="preserve"><value>游戏玩法</value></data>
+  <data name="PluginStoreCategoryVisuals" xml:space="preserve"><value>视觉美化</value></data>
 </root>
