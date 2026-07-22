@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using FufuLauncher.Data.Entities;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace FufuLauncher.Data.Repositories;
@@ -13,27 +14,89 @@ public class MetadataRepository
         _dbPath = dbPath;
     }
 
+    private static readonly object _migrateLock = new();
     private static bool _migrated;
 
     private MetadataDbContext CreateContext()
     {
-        var context = new MetadataDbContext(_dbPath);
         if (!_migrated)
         {
+            lock (_migrateLock)
+            {
+                if (!_migrated)
+                {
+                    PerformMigration();
+                    _migrated = true;
+                }
+            }
+        }
+        return new MetadataDbContext(_dbPath);
+    }
+
+    /// <summary>
+    /// Safely ensures the database is ready for use.
+    /// For existing databases created by the old raw-SQLite version (which lack
+    /// __EFMigrationsHistory), we skip Migrate() entirely and manually create the
+    /// history record. This avoids a failed Migrate() transaction that can leave
+    /// the SQLite connection in a broken state.
+    /// </summary>
+    private void PerformMigration()
+    {
+        try
+        {
+            var dir = Path.GetDirectoryName(_dbPath);
+            if (!string.IsNullOrEmpty(dir))
+                Directory.CreateDirectory(dir);
+
+            // Check whether the Metadata table already exists (pre-EF database)
+            bool tableExists = false;
             try
             {
-                context.Database.Migrate();
+                using var checkConn = new SqliteConnection($"Data Source={_dbPath}");
+                checkConn.Open();
+                using var checkCmd = checkConn.CreateCommand();
+                checkCmd.CommandText =
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Metadata';";
+                tableExists = (long)checkCmd.ExecuteScalar()! > 0;
             }
             catch
             {
+                // If we can't open the connection, let Migrate() handle it
+            }
+
+            if (tableExists)
+            {
+                using var context = new MetadataDbContext(_dbPath);
+                context.Database.ExecuteSqlRaw(
+                    "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
+                context.Database.ExecuteSqlRaw(
+                    "INSERT OR IGNORE INTO __EFMigrationsHistory VALUES ('20240716000000_InitialCreate', '8.0.28');");
+                Debug.WriteLine("MetadataRepository: 检测到现有数据库，已跳过迁移");
+            }
+            else
+            {
+                using var context = new MetadataDbContext(_dbPath);
+                context.Database.Migrate();
+                Debug.WriteLine("MetadataRepository: 已创建新数据库");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"MetadataRepository: 数据库迁移处理异常 - {ex.Message}");
+
+            try
+            {
+                using var context = new MetadataDbContext(_dbPath);
                 context.Database.ExecuteSqlRaw(
                     "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
                 context.Database.ExecuteSqlRaw(
                     "INSERT OR IGNORE INTO __EFMigrationsHistory VALUES ('20240716000000_InitialCreate', '8.0.28');");
             }
-            _migrated = true;
+            catch (Exception ex2)
+            {
+                Debug.WriteLine($"MetadataRepository: 迁移历史回退创建失败 - {ex2.Message}");
+            }
         }
-        return context;
     }
 
     // ---- Metadata (scraped items) ----
