@@ -502,120 +502,166 @@ public class PluginStoreViewModel : INotifyPropertyChanged
     {
         var tcs = new TaskCompletionSource<string?>();
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        // Guard: ensure MainWindow and its DispatcherQueue are available
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
         {
-            var captchaWindow = new Window();
-            captchaWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
-            captchaWindow.Title = "人机验证";
+            Debug.WriteLine("[PluginStoreVM] Cannot show captcha: MainWindow or DispatcherQueue is null");
+            return null;
+        }
 
-            var rootGrid = new Grid();
-            rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(32) });
-            rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            
-            var titleBar = new Grid { Height = 32 };
-            titleBar.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            titleBar.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-
-            var titleText = new TextBlock
+        var enqueued = dispatcherQueue.TryEnqueue(async () =>
+        {
+            Window? captchaWindow = null;
+            CancellationTokenSource? pollCts = null;
+            try
             {
-                Text = "下载验证",
-                VerticalAlignment = VerticalAlignment.Center,
-                Margin = new Thickness(16, 0, 0, 0)
-            };
-            Grid.SetColumn(titleText, 1);
-            titleBar.Children.Add(titleText);
+                captchaWindow = new Window();
+                captchaWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
+                captchaWindow.Title = "人机验证";
 
-            Grid.SetRow(titleBar, 0);
-            rootGrid.Children.Add(titleBar);
+                var rootGrid = new Grid();
+                rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(32) });
+                rootGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+                
+                var titleBar = new Grid { Height = 32 };
+                titleBar.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                titleBar.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
-            var webView = new WebView2
-            {
-                HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Stretch
-            };
-            Grid.SetRow(webView, 1);
-            rootGrid.Children.Add(webView);
-
-            captchaWindow.Content = rootGrid;
-            
-            var appWindow = captchaWindow.AppWindow;
-            appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
-            appWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
-            appWindow.TitleBar.ButtonInactiveBackgroundColor = Microsoft.UI.Colors.Transparent;
-            appWindow.Resize(new Windows.Graphics.SizeInt32(1280, 720));
-
-            var mainAppWindow = App.MainWindow.AppWindow;
-            var mainPos = mainAppWindow.Position;
-            var mainSize = mainAppWindow.Size;
-            appWindow.Move(new Windows.Graphics.PointInt32(
-                mainPos.X + (mainSize.Width - 1280) / 2,
-                mainPos.Y + (mainSize.Height - 720) / 2));
-
-            captchaWindow.SetTitleBar(titleBar);
-
-            await webView.EnsureCoreWebView2Async();
-            webView.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-            webView.CoreWebView2.Settings.IsStatusBarEnabled = false;
-
-            var pollCts = new CancellationTokenSource();
-            var pollToken = pollCts.Token;
-            
-            webView.CoreWebView2.NavigationCompleted += async (s, e) =>
-            {
-                if (!e.IsSuccess) return;
-                Debug.WriteLine($"[PluginStoreVM] Gate page loaded, starting poll for dl_token...");
-
-                try
+                var titleText = new TextBlock
                 {
-                    for (var i = 0; i < 120 && !pollToken.IsCancellationRequested; i++)
+                    Text = "下载验证",
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(16, 0, 0, 0)
+                };
+                Grid.SetColumn(titleText, 1);
+                titleBar.Children.Add(titleText);
+
+                Grid.SetRow(titleBar, 0);
+                rootGrid.Children.Add(titleBar);
+
+                var webView = new WebView2
+                {
+                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                    VerticalAlignment = VerticalAlignment.Stretch
+                };
+                Grid.SetRow(webView, 1);
+                rootGrid.Children.Add(webView);
+
+                captchaWindow.Content = rootGrid;
+                
+                // Configure AppWindow with null guard
+                if (captchaWindow.AppWindow is { } appWindow)
+                {
+                    appWindow.TitleBar.ExtendsContentIntoTitleBar = true;
+                    appWindow.TitleBar.ButtonBackgroundColor = Microsoft.UI.Colors.Transparent;
+                    appWindow.TitleBar.ButtonInactiveBackgroundColor = Microsoft.UI.Colors.Transparent;
+                    appWindow.Resize(new Windows.Graphics.SizeInt32(1280, 720));
+
+                    // Center on main window (if available)
+                    if (App.MainWindow?.AppWindow is { } mainAppWindow)
                     {
-                        await Task.Delay(500, pollToken);
-
-                        string raw;
-                        try { raw = await webView.CoreWebView2.ExecuteScriptAsync("document.body.textContent"); }
-                        catch { continue; }
-
-                        if (string.IsNullOrWhiteSpace(raw)) continue;
-                        
-                        var unescaped = raw.Trim('"').Replace("\\\"", "\"").Replace("\\\\", "\\");
-
-                        if (!unescaped.StartsWith("{")) continue;
-
-                        try
-                        {
-                            using var doc = JsonDocument.Parse(unescaped);
-                            var root = doc.RootElement;
-                            if (root.TryGetProperty("retcode", out var rc) && rc.GetInt32() == 0 &&
-                                root.TryGetProperty("data", out var data) &&
-                                data.TryGetProperty("dl_token", out var dlToken))
-                            {
-                                var token = dlToken.GetString();
-                                if (!string.IsNullOrWhiteSpace(token))
-                                {
-                                    Debug.WriteLine($"[PluginStoreVM] Got dl_token: {token[..12]}...");
-                                    pollCts.Cancel();
-                                    tcs.TrySetResult(token);
-                                    captchaWindow.DispatcherQueue.TryEnqueue(() => captchaWindow.Close());
-                                    return;
-                                }
-                            }
-                        }
-                        catch (JsonException) { }
+                        var mainPos = mainAppWindow.Position;
+                        var mainSize = mainAppWindow.Size;
+                        appWindow.Move(new Windows.Graphics.PointInt32(
+                            mainPos.X + (mainSize.Width - 1280) / 2,
+                            mainPos.Y + (mainSize.Height - 720) / 2));
                     }
                 }
-                catch (TaskCanceledException) { }
-            };
 
-            captchaWindow.Closed += (s, e) =>
+                captchaWindow.SetTitleBar(titleBar);
+
+                await webView.EnsureCoreWebView2Async();
+                
+                // Guard: CoreWebView2 must be non-null after initialization
+                if (webView.CoreWebView2 is not { } coreWebView)
+                {
+                    Debug.WriteLine("[PluginStoreVM] CoreWebView2 is null after EnsureCoreWebView2Async");
+                    tcs.TrySetResult(null);
+                    captchaWindow.Close();
+                    return;
+                }
+
+                coreWebView.Settings.AreDefaultContextMenusEnabled = false;
+                coreWebView.Settings.IsStatusBarEnabled = false;
+
+                pollCts = new CancellationTokenSource();
+                var pollToken = pollCts.Token;
+                
+                coreWebView.NavigationCompleted += async (s, e) =>
+                {
+                    if (!e.IsSuccess) return;
+                    Debug.WriteLine($"[PluginStoreVM] Gate page loaded, starting poll for dl_token...");
+
+                    try
+                    {
+                        for (var i = 0; i < 120 && !pollToken.IsCancellationRequested; i++)
+                        {
+                            await Task.Delay(500, pollToken);
+
+                            string raw;
+                            try { raw = await webView.CoreWebView2.ExecuteScriptAsync("document.body.textContent"); }
+                            catch { continue; }
+
+                            if (string.IsNullOrWhiteSpace(raw)) continue;
+                            
+                            var unescaped = raw.Trim('"').Replace("\\\"", "\"").Replace("\\\\", "\\");
+
+                            if (!unescaped.StartsWith("{")) continue;
+
+                            try
+                            {
+                                using var doc = JsonDocument.Parse(unescaped);
+                                var root = doc.RootElement;
+                                if (root.TryGetProperty("retcode", out var rc) && rc.GetInt32() == 0 &&
+                                    root.TryGetProperty("data", out var data) &&
+                                    data.TryGetProperty("dl_token", out var dlToken))
+                                {
+                                    var token = dlToken.GetString();
+                                    if (!string.IsNullOrWhiteSpace(token))
+                                    {
+                                        Debug.WriteLine($"[PluginStoreVM] Got dl_token: {token[..12]}...");
+                                        pollCts.Cancel();
+                                        tcs.TrySetResult(token);
+                                        captchaWindow.DispatcherQueue.TryEnqueue(() => captchaWindow.Close());
+                                        return;
+                                    }
+                                }
+                            }
+                            catch (JsonException) { }
+                        }
+                    }
+                    catch (TaskCanceledException) { }
+                };
+
+                captchaWindow.Closed += (_, _) =>
+                {
+                    pollCts?.Cancel();
+                    tcs.TrySetResult(null);
+                };
+
+                Debug.WriteLine($"[PluginStoreVM] Navigating to captcha gate: {verifyUrl}");
+                coreWebView.Navigate(verifyUrl);
+                captchaWindow.Activate();
+            }
+            catch (Exception ex)
             {
-                pollCts.Cancel();
+                Debug.WriteLine($"[PluginStoreVM] Error in captcha window: {ex}");
                 tcs.TrySetResult(null);
-            };
-
-            Debug.WriteLine($"[PluginStoreVM] Navigating to captcha gate: {verifyUrl}");
-            webView.CoreWebView2.Navigate(verifyUrl);
-            captchaWindow.Activate();
+                pollCts?.Cancel();
+                // Best-effort close the window if it was created
+                if (captchaWindow is not null)
+                {
+                    try { captchaWindow.DispatcherQueue.TryEnqueue(() => captchaWindow.Close()); }
+                    catch { /* ignore cleanup failures */ }
+                }
+            }
         });
+
+        if (!enqueued)
+        {
+            Debug.WriteLine("[PluginStoreVM] Failed to enqueue captcha window to DispatcherQueue");
+            return null;
+        }
 
         return await tcs.Task;
     }
@@ -624,60 +670,108 @@ public class PluginStoreViewModel : INotifyPropertyChanged
     {
         var tcs = new TaskCompletionSource<string?>();
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        // Guard: ensure MainWindow and its DispatcherQueue are available
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
         {
-            var inputBox = new TextBox
-            {
-                PlaceholderText = "请输入访问密钥",
-                Width = 300
-            };
+            Debug.WriteLine("[PluginStoreVM] Cannot show private access dialog: MainWindow or DispatcherQueue is null");
+            return null;
+        }
 
-            var stackPanel = new StackPanel { Spacing = 12 };
-            stackPanel.Children.Add(new TextBlock
+        var enqueued = dispatcherQueue.TryEnqueue(async () =>
+        {
+            try
             {
-                Text = $"插件 \"{item.Name}\"ID{item.Id}为私密插件",
-                TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 8)
-            });
-            stackPanel.Children.Add(inputBox);
+                var inputBox = new TextBox
+                {
+                    PlaceholderText = "请输入访问密钥",
+                    Width = 300
+                };
 
-            var dialog = new ContentDialog
-            {
-                Title = "私密插件访问",
-                Content = stackPanel,
-                PrimaryButtonText = "确认",
-                SecondaryButtonText = "取消",
-                DefaultButton = ContentDialogButton.Primary,
-                XamlRoot = App.MainWindow.Content.XamlRoot
-            };
+                var stackPanel = new StackPanel { Spacing = 12 };
+                stackPanel.Children.Add(new TextBlock
+                {
+                    Text = $"插件 \"{item.Name}\"ID{item.Id}为私密插件",
+                    TextWrapping = TextWrapping.Wrap,
+                    Margin = new Thickness(0, 0, 0, 8)
+                });
+                stackPanel.Children.Add(inputBox);
 
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(inputBox.Text))
-            {
-                tcs.TrySetResult(inputBox.Text.Trim());
+                // Guard: XamlRoot requires a valid Content
+                if (App.MainWindow?.Content?.XamlRoot is not { } xamlRoot)
+                {
+                    Debug.WriteLine("[PluginStoreVM] Cannot show private access dialog: XamlRoot is null");
+                    tcs.TrySetResult(null);
+                    return;
+                }
+
+                var dialog = new ContentDialog
+                {
+                    Title = "私密插件访问",
+                    Content = stackPanel,
+                    PrimaryButtonText = "确认",
+                    SecondaryButtonText = "取消",
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = xamlRoot
+                };
+
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary && !string.IsNullOrWhiteSpace(inputBox.Text))
+                {
+                    tcs.TrySetResult(inputBox.Text.Trim());
+                }
+                else
+                {
+                    tcs.TrySetResult(null);
+                }
             }
-            else
+            catch (Exception ex)
             {
+                Debug.WriteLine($"[PluginStoreVM] Error in private access dialog: {ex}");
                 tcs.TrySetResult(null);
             }
         });
+
+        if (!enqueued)
+        {
+            Debug.WriteLine("[PluginStoreVM] Failed to enqueue private access dialog to DispatcherQueue");
+            return null;
+        }
 
         return await tcs.Task;
     }
     
     private static async Task ShowMinVersionWarningAsync(PluginStoreItem item)
     {
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
         {
-            var dialog = new ContentDialog
+            Debug.WriteLine("[PluginStoreVM] Cannot show version warning: MainWindow or DispatcherQueue is null");
+            return;
+        }
+
+        dispatcherQueue.TryEnqueue(async () =>
+        {
+            try
             {
-                Title = "版本过低",
-                Content = $"插件 \"{item.Name}\" 要求启动器版本≥ {item.MinAppVersion}，当前版本为 {CurrentAppVersion}\n\n请先更新启动器后再安装此插件",
-                CloseButtonText = "知道了",
-                DefaultButton = ContentDialogButton.Close,
-                XamlRoot = App.MainWindow.Content.XamlRoot
-            };
-            await dialog.ShowAsync();
+                if (App.MainWindow?.Content?.XamlRoot is not { } xamlRoot)
+                {
+                    Debug.WriteLine("[PluginStoreVM] Cannot show version warning: XamlRoot is null");
+                    return;
+                }
+
+                var dialog = new ContentDialog
+                {
+                    Title = "版本过低",
+                    Content = $"插件 \"{item.Name}\" 要求启动器版本≥ {item.MinAppVersion}，当前版本为 {CurrentAppVersion}\n\n请先更新启动器后再安装此插件",
+                    CloseButtonText = "知道了",
+                    DefaultButton = ContentDialogButton.Close,
+                    XamlRoot = xamlRoot
+                };
+                await dialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[PluginStoreVM] Error showing version warning: {ex}");
+            }
         });
     }
 
@@ -686,35 +780,62 @@ public class PluginStoreViewModel : INotifyPropertyChanged
         string? pluginId = null;
         string? accessKey = null;
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
         {
-            var idBox = new TextBox { PlaceholderText = "插件ID", Width = 300 };
-            var keyBox = new TextBox { PlaceholderText = "访问密钥", Width = 300 };
+            Debug.WriteLine("[PluginStoreVM] Cannot add private plugin: MainWindow or DispatcherQueue is null");
+            return;
+        }
 
-            var panel = new StackPanel { Spacing = 12 };
-            panel.Children.Add(new TextBlock { Text = "输入私密插件的 ID 和访问密钥：" });
-            panel.Children.Add(new TextBlock { Text = "插件ID", FontSize = 12, Opacity = 0.7 });
-            panel.Children.Add(idBox);
-            panel.Children.Add(new TextBlock { Text = "访问密钥", FontSize = 12, Opacity = 0.7 });
-            panel.Children.Add(keyBox);
-
-            var dialog = new ContentDialog
+        var tcs = new TaskCompletionSource();
+        dispatcherQueue.TryEnqueue(async () =>
+        {
+            try
             {
-                Title = "添加私密插件",
-                Content = panel,
-                PrimaryButtonText = "添加",
-                SecondaryButtonText = "取消",
-                DefaultButton = ContentDialogButton.Primary,
-                XamlRoot = App.MainWindow.Content.XamlRoot
-            };
+                if (App.MainWindow?.Content?.XamlRoot is not { } xamlRoot)
+                {
+                    Debug.WriteLine("[PluginStoreVM] Cannot add private plugin: XamlRoot is null");
+                    tcs.TrySetResult();
+                    return;
+                }
 
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
+                var idBox = new TextBox { PlaceholderText = "插件ID", Width = 300 };
+                var keyBox = new TextBox { PlaceholderText = "访问密钥", Width = 300 };
+
+                var panel = new StackPanel { Spacing = 12 };
+                panel.Children.Add(new TextBlock { Text = "输入私密插件的 ID 和访问密钥：" });
+                panel.Children.Add(new TextBlock { Text = "插件ID", FontSize = 12, Opacity = 0.7 });
+                panel.Children.Add(idBox);
+                panel.Children.Add(new TextBlock { Text = "访问密钥", FontSize = 12, Opacity = 0.7 });
+                panel.Children.Add(keyBox);
+
+                var dialog = new ContentDialog
+                {
+                    Title = "添加私密插件",
+                    Content = panel,
+                    PrimaryButtonText = "添加",
+                    SecondaryButtonText = "取消",
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = xamlRoot
+                };
+
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    pluginId = idBox.Text.Trim();
+                    accessKey = keyBox.Text.Trim();
+                }
+            }
+            catch (Exception ex)
             {
-                pluginId = idBox.Text.Trim();
-                accessKey = keyBox.Text.Trim();
+                Debug.WriteLine($"[PluginStoreVM] Error in private plugin dialog: {ex}");
+            }
+            finally
+            {
+                tcs.TrySetResult();
             }
         });
+
+        await tcs.Task;
 
         if (string.IsNullOrWhiteSpace(pluginId) || string.IsNullOrWhiteSpace(accessKey))
             return;
@@ -992,10 +1113,23 @@ public class PluginStoreViewModel : INotifyPropertyChanged
         
         var dialogCompleted = new TaskCompletionSource<string?>();
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
+        {
+            Debug.WriteLine("[PluginStoreVM] Cannot execute Lua test: MainWindow or DispatcherQueue is null");
+            return;
+        }
+
+        dispatcherQueue.TryEnqueue(async () =>
         {
             try
             {
+                if (App.MainWindow?.Content?.XamlRoot is not { } xamlRoot)
+                {
+                    Debug.WriteLine("[PluginStoreVM] Cannot execute Lua test: XamlRoot is null");
+                    dialogCompleted.TrySetResult(null);
+                    return;
+                }
+
                 var inputBox = new TextBox
                 {
                     PlaceholderText = "PluginStoreLuaTestInputHint".GetLocalized(),
@@ -1030,7 +1164,7 @@ public class PluginStoreViewModel : INotifyPropertyChanged
                     PrimaryButtonText = "PluginStoreLuaTestRun".GetLocalized(),
                     SecondaryButtonText = "PluginStoreLuaTestClose".GetLocalized(),
                     DefaultButton = ContentDialogButton.Primary,
-                    XamlRoot = App.MainWindow.Content.XamlRoot
+                    XamlRoot = xamlRoot
                 };
 
                 var result = await dialog.ShowAsync();
@@ -1119,21 +1253,48 @@ public class PluginStoreViewModel : INotifyPropertyChanged
     {
         var tcs = new TaskCompletionSource<bool>();
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
         {
-            var dialog = new ContentDialog
-            {
-                Title = "PluginStoreLuaTestSecurityWarning".GetLocalized(),
-                Content = string.Format("PluginStoreLuaTestSecurityBlocked".GetLocalized(), reason),
-                PrimaryButtonText = "强制执行（不推荐）",
-                SecondaryButtonText = "取消",
-                DefaultButton = ContentDialogButton.Secondary,
-                XamlRoot = App.MainWindow.Content.XamlRoot
-            };
+            Debug.WriteLine("[PluginStoreVM] Cannot show security warning: MainWindow or DispatcherQueue is null");
+            return false;
+        }
 
-            var result = await dialog.ShowAsync();
-            tcs.TrySetResult(result == ContentDialogResult.Primary);
+        var enqueued = dispatcherQueue.TryEnqueue(async () =>
+        {
+            try
+            {
+                if (App.MainWindow?.Content?.XamlRoot is not { } xamlRoot)
+                {
+                    Debug.WriteLine("[PluginStoreVM] Cannot show security warning: XamlRoot is null");
+                    tcs.TrySetResult(false);
+                    return;
+                }
+
+                var dialog = new ContentDialog
+                {
+                    Title = "PluginStoreLuaTestSecurityWarning".GetLocalized(),
+                    Content = string.Format("PluginStoreLuaTestSecurityBlocked".GetLocalized(), reason),
+                    PrimaryButtonText = "强制执行（不推荐）",
+                    SecondaryButtonText = "取消",
+                    DefaultButton = ContentDialogButton.Secondary,
+                    XamlRoot = xamlRoot
+                };
+
+                var result = await dialog.ShowAsync();
+                tcs.TrySetResult(result == ContentDialogResult.Primary);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[PluginStoreVM] Error showing security warning: {ex}");
+                tcs.TrySetResult(false);
+            }
         });
+
+        if (!enqueued)
+        {
+            Debug.WriteLine("[PluginStoreVM] Failed to enqueue security warning to DispatcherQueue");
+            return false;
+        }
 
         return await tcs.Task;
     }
@@ -1142,82 +1303,110 @@ public class PluginStoreViewModel : INotifyPropertyChanged
     {
         var tcs = new TaskCompletionSource<bool>();
 
-        App.MainWindow.DispatcherQueue.TryEnqueue(async () =>
+        if (App.MainWindow?.DispatcherQueue is not { } dispatcherQueue)
         {
-            var messagePanel = new StackPanel { Spacing = 12 };
+            Debug.WriteLine("[PluginStoreVM] Cannot show Lua test result: MainWindow or DispatcherQueue is null");
+            return;
+        }
 
-            var statusIcon = success ? "\uE73E" : "\uE783"; // Checkmark or Error
-            var statusColor = success
-                ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.LimeGreen)
-                : new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.OrangeRed);
+        var enqueued = dispatcherQueue.TryEnqueue(async () =>
+        {
+            try
+            {
+                if (App.MainWindow?.Content?.XamlRoot is not { } xamlRoot)
+                {
+                    Debug.WriteLine("[PluginStoreVM] Cannot show Lua test result: XamlRoot is null");
+                    tcs.TrySetResult(true);
+                    return;
+                }
 
-            var statusRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-            statusRow.Children.Add(new FontIcon
-            {
-                Glyph = statusIcon,
-                FontSize = 20,
-                Foreground = statusColor
-            });
-            statusRow.Children.Add(new TextBlock
-            {
-                Text = success ? "PluginStoreLuaTestSuccess".GetLocalized() : "PluginStoreLuaTestFailed".GetLocalized(),
-                FontSize = 16,
-                FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
-                VerticalAlignment = VerticalAlignment.Center
-            });
-            messagePanel.Children.Add(statusRow);
+                var messagePanel = new StackPanel { Spacing = 12 };
 
-            if (!string.IsNullOrEmpty(errorMessage))
-            {
+                var statusIcon = success ? "\uE73E" : "\uE783"; // Checkmark or Error
+                var statusColor = success
+                    ? new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.LimeGreen)
+                    : new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.OrangeRed);
+
+                var statusRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
+                statusRow.Children.Add(new FontIcon
+                {
+                    Glyph = statusIcon,
+                    FontSize = 20,
+                    Foreground = statusColor
+                });
+                statusRow.Children.Add(new TextBlock
+                {
+                    Text = success ? "PluginStoreLuaTestSuccess".GetLocalized() : "PluginStoreLuaTestFailed".GetLocalized(),
+                    FontSize = 16,
+                    FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
+                    VerticalAlignment = VerticalAlignment.Center
+                });
+                messagePanel.Children.Add(statusRow);
+
+                if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    messagePanel.Children.Add(new TextBlock
+                    {
+                        Text = errorMessage,
+                        Foreground = statusColor,
+                        TextWrapping = TextWrapping.Wrap,
+                        FontSize = 13
+                    });
+                }
+
                 messagePanel.Children.Add(new TextBlock
                 {
-                    Text = errorMessage,
-                    Foreground = statusColor,
+                    Text = string.Format("PluginStoreLuaTestLogSaved".GetLocalized(), logPath),
                     TextWrapping = TextWrapping.Wrap,
-                    FontSize = 13
+                    FontSize = 13,
+                    Opacity = 0.8,
+                    Margin = new Thickness(0, 8, 0, 0)
                 });
-            }
 
-            messagePanel.Children.Add(new TextBlock
-            {
-                Text = string.Format("PluginStoreLuaTestLogSaved".GetLocalized(), logPath),
-                TextWrapping = TextWrapping.Wrap,
-                FontSize = 13,
-                Opacity = 0.8,
-                Margin = new Thickness(0, 8, 0, 0)
-            });
-
-            var dialog = new ContentDialog
-            {
-                Title = success ? "PluginStoreLuaTestSuccess".GetLocalized() : "PluginStoreLuaTestFailed".GetLocalized(),
-                Content = messagePanel,
-                PrimaryButtonText = "PluginStoreLuaTestOpenLog".GetLocalized(),
-                SecondaryButtonText = "PluginStoreLuaTestClose".GetLocalized(),
-                DefaultButton = ContentDialogButton.Primary,
-                XamlRoot = App.MainWindow.Content.XamlRoot
-            };
-
-            var result = await dialog.ShowAsync();
-            if (result == ContentDialogResult.Primary)
-            {
-                try
+                var dialog = new ContentDialog
                 {
-                    // Open the log file with the system default text editor
-                    var psi = new System.Diagnostics.ProcessStartInfo
+                    Title = success ? "PluginStoreLuaTestSuccess".GetLocalized() : "PluginStoreLuaTestFailed".GetLocalized(),
+                    Content = messagePanel,
+                    PrimaryButtonText = "PluginStoreLuaTestOpenLog".GetLocalized(),
+                    SecondaryButtonText = "PluginStoreLuaTestClose".GetLocalized(),
+                    DefaultButton = ContentDialogButton.Primary,
+                    XamlRoot = xamlRoot
+                };
+
+                var result = await dialog.ShowAsync();
+                if (result == ContentDialogResult.Primary)
+                {
+                    try
                     {
-                        FileName = logPath,
-                        UseShellExecute = true
-                    };
-                    System.Diagnostics.Process.Start(psi);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"[PluginStoreVM] Failed to open log file: {ex.Message}");
+                        // Open the log file with the system default text editor
+                        var psi = new System.Diagnostics.ProcessStartInfo
+                        {
+                            FileName = logPath,
+                            UseShellExecute = true
+                        };
+                        System.Diagnostics.Process.Start(psi);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"[PluginStoreVM] Failed to open log file: {ex.Message}");
+                    }
                 }
             }
-
-            tcs.TrySetResult(true);
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[PluginStoreVM] Error showing Lua test result: {ex}");
+            }
+            finally
+            {
+                tcs.TrySetResult(true);
+            }
         });
+
+        if (!enqueued)
+        {
+            Debug.WriteLine("[PluginStoreVM] Failed to enqueue Lua test result to DispatcherQueue");
+            return;
+        }
 
         await tcs.Task;
     }
