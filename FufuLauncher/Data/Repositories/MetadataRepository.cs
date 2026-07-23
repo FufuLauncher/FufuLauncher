@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using FufuLauncher.Data.Entities;
+using FufuLauncher.Helpers;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,15 +8,18 @@ namespace FufuLauncher.Data.Repositories;
 
 public class MetadataRepository
 {
-    private readonly string _dbPath;
-
     public MetadataRepository(string dbPath)
     {
-        _dbPath = dbPath;
+        // The dbPath parameter is retained for backward compatibility with DI
+        // registration, but the actual path is always resolved dynamically from
+        // AppPaths.MetadataDb so that the repository stays in sync when
+        // AppPaths.DataDir is changed during the first-run agreement flow.
     }
 
     private static readonly object _migrateLock = new();
     private static bool _migrated;
+
+    private static string CurrentDbPath => AppPaths.MetadataDb;
 
     private MetadataDbContext CreateContext()
     {
@@ -30,7 +34,7 @@ public class MetadataRepository
                 }
             }
         }
-        return new MetadataDbContext(_dbPath);
+        return new MetadataDbContext(CurrentDbPath);
     }
 
     /// <summary>
@@ -42,9 +46,10 @@ public class MetadataRepository
     /// </summary>
     private void PerformMigration()
     {
+        var dbPath = CurrentDbPath;
         try
         {
-            var dir = Path.GetDirectoryName(_dbPath);
+            var dir = Path.GetDirectoryName(dbPath);
             if (!string.IsNullOrEmpty(dir))
                 Directory.CreateDirectory(dir);
 
@@ -52,7 +57,7 @@ public class MetadataRepository
             bool tableExists = false;
             try
             {
-                using var checkConn = new SqliteConnection($"Data Source={_dbPath}");
+                using var checkConn = new SqliteConnection($"Data Source={dbPath}");
                 checkConn.Open();
                 using var checkCmd = checkConn.CreateCommand();
                 checkCmd.CommandText =
@@ -66,7 +71,7 @@ public class MetadataRepository
 
             if (tableExists)
             {
-                using var context = new MetadataDbContext(_dbPath);
+                using var context = new MetadataDbContext(dbPath);
                 context.Database.ExecuteSqlRaw(
                     "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
                 context.Database.ExecuteSqlRaw(
@@ -75,7 +80,7 @@ public class MetadataRepository
             }
             else
             {
-                using var context = new MetadataDbContext(_dbPath);
+                using var context = new MetadataDbContext(dbPath);
                 context.Database.Migrate();
                 Debug.WriteLine("MetadataRepository: 已创建新数据库");
             }
@@ -86,7 +91,7 @@ public class MetadataRepository
 
             try
             {
-                using var context = new MetadataDbContext(_dbPath);
+                using var context = new MetadataDbContext(dbPath);
                 context.Database.ExecuteSqlRaw(
                     "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
                 context.Database.ExecuteSqlRaw(

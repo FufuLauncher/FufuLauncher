@@ -13,9 +13,9 @@ namespace FufuLauncher.Services;
 public class AccountManager
 {
 
-    private readonly string _dataDir;
-    private readonly string _cookiesDir;
-    private readonly string _accountsFilePath;
+    private string DataDir => Helpers.AppPaths.DataDir;
+    private string CookiesDir => Path.Combine(DataDir, "cookies");
+    private string AccountsFilePath => Path.Combine(DataDir, "accounts.json");
     private readonly SemaphoreSlim _lock = new(1, 1);
 
     private AccountList _accountList;
@@ -23,13 +23,9 @@ public class AccountManager
     public string? ActiveAccountId => _activeAccountId;
     public AccountManager()
     {
-        _dataDir = Helpers.AppPaths.DataDir;
-        _cookiesDir = Path.Combine(_dataDir, "cookies");
-        _accountsFilePath = Path.Combine(_dataDir, "accounts.json");
-
         try
         {
-            Directory.CreateDirectory(_cookiesDir);
+            Directory.CreateDirectory(CookiesDir);
         }
         catch (UnauthorizedAccessException ex)
         {
@@ -63,11 +59,11 @@ public class AccountManager
   
     private async Task LoadAccountListAsync()
     {
-        if (File.Exists(_accountsFilePath))
+        if (File.Exists(AccountsFilePath))
         {
             try
             {
-                var json = await File.ReadAllTextAsync(_accountsFilePath);
+                var json = await File.ReadAllTextAsync(AccountsFilePath);
                 _accountList = JsonSerializer.Deserialize<AccountList>(json) ?? new AccountList();
             }
             catch (JsonException ex)
@@ -76,8 +72,8 @@ public class AccountManager
                     $"[AccountManager] accounts.json 解析失败，将重置账号列表: {ex.Message}");
                 try
                 {
-                    var backupPath = _accountsFilePath + $".corrupt.{DateTime.Now:yyyyMMddHHmmss}.bak";
-                    File.Copy(_accountsFilePath, backupPath, overwrite: true);
+                    var backupPath = AccountsFilePath + $".corrupt.{DateTime.Now:yyyyMMddHHmmss}.bak";
+                    File.Copy(AccountsFilePath, backupPath, overwrite: true);
                 }
                 catch { }
                 _accountList = new AccountList();
@@ -131,7 +127,7 @@ public class AccountManager
     private async Task SaveAccountListAsync()
     {
         var json = JsonSerializer.Serialize(_accountList, new JsonSerializerOptions { WriteIndented = true });
-        await File.WriteAllTextAsync(_accountsFilePath, json);
+        await File.WriteAllTextAsync(AccountsFilePath, json);
     }
 
 
@@ -147,7 +143,7 @@ public class AccountManager
             var existingEntry = _accountList.Accounts.FirstOrDefault(a => a.Id == id);
             if (existingEntry != null)
             {
-                string existingCookiePath = Path.Combine(_cookiesDir, existingEntry.CookieFilePath);
+                string existingCookiePath = Path.Combine(CookiesDir, existingEntry.CookieFilePath);
                 var existingCookiesJson = JsonSerializer.Serialize(cookies);
                 await File.WriteAllTextAsync(existingCookiePath, existingCookiesJson);
                 existingEntry.LastLoginTime = DateTime.Now;
@@ -158,7 +154,7 @@ public class AccountManager
             }
 
             string cookieFileName = $"{id}.json";
-            string cookiePath = Path.Combine(_cookiesDir, cookieFileName);
+            string cookiePath = Path.Combine(CookiesDir, cookieFileName);
             var cookieJson = JsonSerializer.Serialize(cookies);
             await File.WriteAllTextAsync(cookiePath, cookieJson);
 
@@ -188,7 +184,7 @@ public class AccountManager
         var entry = _accountList.Accounts.FirstOrDefault(a => a.Id == accountId);
         if (entry == null) return null;
 
-        string path = Path.Combine(_cookiesDir, entry.CookieFilePath);
+        string path = Path.Combine(CookiesDir, entry.CookieFilePath);
         if (!File.Exists(path)) return null;
 
         try
@@ -213,7 +209,7 @@ public class AccountManager
             var entry = _accountList.Accounts.FirstOrDefault(a => a.Id == accountId);
             if (entry == null) return;
 
-            string path = Path.Combine(_cookiesDir, entry.CookieFilePath);
+            string path = Path.Combine(CookiesDir, entry.CookieFilePath);
             if (File.Exists(path)) File.Delete(path);
 
             _accountList.Accounts.Remove(entry);
@@ -290,7 +286,7 @@ public class AccountManager
             var entry = _accountList.Accounts.FirstOrDefault(a => a.Id == accountId);
             if (entry == null) return;
 
-            string cookiePath = Path.Combine(_cookiesDir, entry.CookieFilePath);
+            string cookiePath = Path.Combine(CookiesDir, entry.CookieFilePath);
             var json = JsonSerializer.Serialize(newCookies);
             await File.WriteAllTextAsync(cookiePath, json);
         }
@@ -329,10 +325,10 @@ public class AccountManager
 
     private bool HasLegacyAccounts()
     {
-        if (!Directory.Exists(_dataDir))
+        if (!Directory.Exists(DataDir))
             return false;
 
-        var configFiles = Directory.GetFiles(_dataDir, "config*.json")
+        var configFiles = Directory.GetFiles(DataDir, "config*.json")
             .Where(f => !Path.GetFileName(f).Equals("accounts.json", StringComparison.OrdinalIgnoreCase))
             .ToList();
 
@@ -350,14 +346,14 @@ public class AccountManager
 
         try
         {
-            var backupDir = Path.Combine(_dataDir, "legacy_accounts_backup");
+            var backupDir = Path.Combine(DataDir, "legacy_accounts_backup");
             Directory.CreateDirectory(backupDir);
 
             var subAccountFiles = new List<string>();
-            if (Directory.Exists(_dataDir))
+            if (Directory.Exists(DataDir))
             {
                 subAccountFiles.AddRange(
-                    Directory.GetFiles(_dataDir, "config*.json")
+                    Directory.GetFiles(DataDir, "config*.json")
                         .Where(f =>
                         {
                             var name = Path.GetFileName(f);
@@ -415,7 +411,7 @@ public class AccountManager
                     }
 
                     string cookieFileName = $"{accountId}.json";
-                    string cookiePath = Path.Combine(_cookiesDir, cookieFileName);
+                    string cookiePath = Path.Combine(CookiesDir, cookieFileName);
                     var cookieJson = JsonSerializer.Serialize(cookieDict);
                     await File.WriteAllTextAsync(cookiePath, cookieJson);
 
@@ -482,8 +478,8 @@ public class AccountManager
                 catch { }
 
                 string mainConfigPath = isInternationalAccount
-                    ? Path.Combine(_dataDir, "config.lab.json")
-                    : Path.Combine(_dataDir, "config.json");
+                    ? Path.Combine(DataDir, "config.lab.json")
+                    : Path.Combine(DataDir, "config.json");
 
                 if (File.Exists(mainConfigPath))
                 {
@@ -511,7 +507,7 @@ public class AccountManager
                                 string accountId = $"{serverType}_{stuid}";
 
                                 string cookieFileName = $"{accountId}.json";
-                                string cookiePath = Path.Combine(_cookiesDir, cookieFileName);
+                                string cookiePath = Path.Combine(CookiesDir, cookieFileName);
                                 await File.WriteAllTextAsync(cookiePath, JsonSerializer.Serialize(cookieDict));
 
                                 var entry = new AccountEntry
@@ -566,7 +562,7 @@ public class AccountManager
                 System.Diagnostics.Debug.WriteLine("[AccountManager] 未找到需要迁移的账号");
             }
 
-            var allConfigFiles = Directory.GetFiles(_dataDir, "config*.json")
+            var allConfigFiles = Directory.GetFiles(DataDir, "config*.json")
                 .Where(f => !Path.GetFileName(f).Equals("accounts.json", StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
@@ -610,8 +606,8 @@ public class AccountManager
             catch { }
 
             string mainConfigPath = isInternationalAccount
-                ? Path.Combine(_dataDir, "config.lab.json")
-                : Path.Combine(_dataDir, "config.json");
+                ? Path.Combine(DataDir, "config.lab.json")
+                : Path.Combine(DataDir, "config.json");
 
             if (!File.Exists(mainConfigPath))
                 return;
