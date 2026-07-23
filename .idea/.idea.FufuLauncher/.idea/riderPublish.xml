@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="LocationsWithSilentDeleteHolder">
+    <option name="locations">
+      <list>
+        <option value="$PROJECT_DIR$/UpdateFufuLauncher/bin/Release/net8.0-windows/publish" />
+      </list>
+    </option>
+  </component>
+</project>

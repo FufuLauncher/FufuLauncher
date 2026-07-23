@@ -13,6 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="AppGlobalFont">/Assets/zh-cn-l.ttf#SDK_SC_Web</FontFamily>
+            <FontFamily x:Key="SegoeFluentIconsFont">/Assets/Fonts/SegoeFluentIcons.ttf#Segoe Fluent Icons, Segoe Fluent Icons, Segoe MDL2 Assets</FontFamily>
             
             <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="AppGlobalFont" />
             <StaticResource x:Key="ControlThemeFontFamily" ResourceKey="AppGlobalFont" />

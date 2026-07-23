@@ -114,7 +114,7 @@
                         <FontIcon Grid.Row="0"
                                   Glyph="{Binding Glyph}"
                                   FontSize="20"
-                                  FontFamily="Segoe Fluent Icons"
+                                  FontFamily="{StaticResource SegoeFluentIconsFont}"
                                   Visibility="{Binding FontIconVisibility}"
                                   HorizontalAlignment="Center"
                                   Margin="0,1,0,2"
@@ -156,7 +156,7 @@
                                     Spacing="4">
                             <FontIcon Glyph="&#xE73E;"
                                       FontSize="22"
-                                      FontFamily="Segoe Fluent Icons"
+                                      FontFamily="{StaticResource SegoeFluentIconsFont}"
                                       HorizontalAlignment="Center"
                                       Foreground="{ThemeResource AccentFillColorDefaultBrush}" />
                             <TextBlock Text="{helpers:Loc Key=LanguageSelection_Selected}"
