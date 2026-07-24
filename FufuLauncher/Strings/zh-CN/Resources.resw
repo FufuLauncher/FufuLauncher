@@ -218,6 +218,8 @@
   <data name="OpenScreenshotFolder" xml:space="preserve"><value>打开截图文件夹</value></data>
   <data name="VersionUpdateTitle" xml:space="preserve"><value>版本更新</value></data>
   <data name="VersionUpdateCaption" xml:space="preserve"><value>检查并获取最新版本。点击后将启动更新程序</value></data>
+  <data name="UseThirdPartyCDNTitle" xml:space="preserve"><value>使用第三方加速节点下载更新</value></data>
+  <data name="UseThirdPartyCDNCaption" xml:space="preserve"><value>通过第三方CDN节点加速下载更新。关闭后将直连GitHub下载</value></data>
   <data name="AboutUsBtn" xml:space="preserve"><value>关于我们</value></data>
   <data name="SecurityAuthCaption" xml:space="preserve"><value>通过开发者许可认证获取部分特殊功能的使用权限</value></data>
   <data name="SecurityAuthBtn" xml:space="preserve"><value>进行开发者许可认证</value></data>

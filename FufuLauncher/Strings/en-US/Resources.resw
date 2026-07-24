@@ -218,6 +218,8 @@
   <data name="OpenScreenshotFolder" xml:space="preserve"><value>Open Screenshot Folder</value></data>
   <data name="VersionUpdateTitle" xml:space="preserve"><value>Version Update</value></data>
   <data name="VersionUpdateCaption" xml:space="preserve"><value>Check for and download the latest version</value></data>
+  <data name="UseThirdPartyCDNTitle" xml:space="preserve"><value>Use Third-Party CDN for Updates</value></data>
+  <data name="UseThirdPartyCDNCaption" xml:space="preserve"><value>Accelerate download via third-party CDN nodes. Disable to download directly from GitHub</value></data>
   <data name="AboutUsBtn" xml:space="preserve"><value>About Us</value></data>
   <data name="SecurityAuthCaption" xml:space="preserve"><value>Complete developer license authentication to unlock certain features</value></data>
   <data name="SecurityAuthBtn" xml:space="preserve"><value>Start Developer License Authentication</value></data>

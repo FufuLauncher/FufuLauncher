@@ -22,11 +22,15 @@ namespace Updater
             WindowsPrincipal principal = new(identity);
             if (!principal.IsInRole(WindowsBuiltInRole.Administrator))
             {
+                var originalArgs = Environment.GetCommandLineArgs();
+                string args = string.Join(" ", originalArgs.Skip(1).Select(a => a.Contains(' ') ? $"\"{a}\"" : a));
+
                 ProcessStartInfo psi = new()
                 {
                     FileName = Process.GetCurrentProcess().MainModule.FileName,
                     UseShellExecute = true,
-                    Verb = "runas"
+                    Verb = "runas",
+                    Arguments = args
                 };
                 try
                 {

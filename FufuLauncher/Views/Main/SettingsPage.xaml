@@ -1516,6 +1516,16 @@
                                 HorizontalAlignment="Left"
                                 Padding="12,6"
                                 CornerRadius="6" />
+
+                        <ToggleSwitch Header="{helpers:Loc Key=UseThirdPartyCDNTitle}"
+                                      OffContent="{helpers:Loc Key=Disabled}"
+                                      OnContent="{helpers:Loc Key=Enabled}"
+                                      IsOn="{x:Bind ViewModel.IsUseThirdPartyCDNEnabled, Mode=TwoWay}"
+                                      Margin="0,16,0,0" />
+                        <TextBlock Text="{helpers:Loc Key=UseThirdPartyCDNCaption}"
+                                   Style="{ThemeResource CaptionTextBlockStyle}"
+                                   Opacity="0.7"
+                                   Margin="0,4,0,0" />
                     </StackPanel>
                 </Border>
 

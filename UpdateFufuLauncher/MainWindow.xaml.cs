@@ -73,6 +73,7 @@ namespace Updater
         private long _lastReceivedBytes = 0;
         private int _stuckTicks = 0;
         private bool _isDownloading = false;
+        private bool _useThirdPartyCDN = true;
 
         private const string TestFileOfficialUrl = "https://raw.githubusercontent.com/moodlehq/moodle-exttests/master/test.html";
         private const string ExpectedTestFileMD5 = "47250a973d1b88d9445f94db4ef2c97a";
@@ -84,6 +85,16 @@ namespace Updater
 
             _stuckTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
             _stuckTimer.Tick += StuckTimer_Tick;
+            
+            var args = Environment.GetCommandLineArgs();
+            foreach (var arg in args)
+            {
+                if (arg.StartsWith("--use-third-party-cdn=", StringComparison.OrdinalIgnoreCase))
+                {
+                    var value = arg.Substring("--use-third-party-cdn=".Length);
+                    _useThirdPartyCDN = !value.Equals("false", StringComparison.OrdinalIgnoreCase);
+                }
+            }
         }
 
         private void StuckTimer_Tick(object sender, EventArgs e)
@@ -231,23 +242,32 @@ namespace Updater
                 _targetExeUrl = targetAsset["browser_download_url"].ToString();
                 _fileName = targetAsset["name"].ToString();
 
-                SubtitleText.Text = "节点联通性校验...";
-                await TestMirrorsAsync();
-
-                LoadingPanel.Visibility = Visibility.Collapsed;
-                SelectionPanel.Visibility = Visibility.Visible;
-                ActionPanel.Visibility = Visibility.Visible;
-                MirrorListView.ItemsSource = _mirrors;
-
-                if (_mirrors.Count > 0)
+                if (_useThirdPartyCDN)
                 {
-                    MirrorListView.SelectedIndex = 0;
-                    SubtitleText.Text = "请选择下载线路";
+                    SubtitleText.Text = "节点联通性校验...";
+                    await TestMirrorsAsync();
+
+                    LoadingPanel.Visibility = Visibility.Collapsed;
+                    SelectionPanel.Visibility = Visibility.Visible;
+                    ActionPanel.Visibility = Visibility.Visible;
+                    MirrorListView.ItemsSource = _mirrors;
+
+                    if (_mirrors.Count > 0)
+                    {
+                        MirrorListView.SelectedIndex = 0;
+                        SubtitleText.Text = "请选择下载线路";
+                    }
+                    else
+                    {
+                        SubtitleText.Text = "所有节点均未通过校验";
+                        MessageBox.Show("所有镜像节点均未通过文件完整性校验或网络超时\n\n请更换网络环境，或尝试使用直连官方源下载", "网络不佳", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
                 }
                 else
                 {
-                    SubtitleText.Text = "所有节点均未通过校验";
-                    MessageBox.Show("所有镜像节点均未通过文件完整性校验或网络超时\n\n请更换网络环境，或尝试使用直连官方源下载", "网络不佳", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    // Skip mirror testing, directly download from GitHub
+                    SubtitleText.Text = "直连GitHub下载...";
+                    StartMultiThreadDownload(_targetExeUrl);
                 }
             }
             catch (Exception ex)

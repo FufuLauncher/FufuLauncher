@@ -178,10 +178,18 @@ namespace FufuLauncher.ViewModels
         [ObservableProperty] private string _screenshotSavePath;
         [ObservableProperty] private bool _hasScreenshotSavePath;
 
+        [ObservableProperty] private bool _isUseThirdPartyCDNEnabled = true;
+
         partial void OnIsScreenshotEnabledChanged(bool value)
         {
             if (_isInitializing) return;
             _ = _localSettingsService.SaveSettingAsync("IsScreenshotEnabled", value);
+        }
+
+        partial void OnIsUseThirdPartyCDNEnabledChanged(bool value)
+        {
+            if (_isInitializing) return;
+            _ = _localSettingsService.SaveSettingAsync("IsUseThirdPartyCDNEnabled", value);
         }
 
         partial void OnScreenshotHotkeyChanged(string value)
@@ -947,7 +955,8 @@ namespace FufuLauncher.ViewModels
                     {
                         FileName = updaterPath,
                         UseShellExecute = true,
-                        Verb = "runas"
+                        Verb = "runas",
+                        Arguments = $"--use-third-party-cdn={IsUseThirdPartyCDNEnabled.ToString().ToLower()}"
                     };
                     Process.Start(startInfo);
                 }
@@ -1154,8 +1163,7 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
                 postLaunchBehavior = parsed;
             _postLaunchBehavior = postLaunchBehavior;
             SelectedPostLaunchBehaviorItem = PostLaunchBehaviorItems.First(i => i.Value == postLaunchBehavior);
-
-            // 截图设置
+            
             var screenshotEnabledJson = await _localSettingsService.ReadSettingAsync("IsScreenshotEnabled");
             IsScreenshotEnabled = screenshotEnabledJson != null && Convert.ToBoolean(screenshotEnabledJson);
 
@@ -1165,6 +1173,9 @@ var cpuWarningThresholdJson = await _localSettingsService.ReadSettingAsync(Proce
             var screenshotPathJson = await _localSettingsService.ReadSettingAsync("ScreenshotSavePath");
             ScreenshotSavePath = screenshotPathJson?.ToString();
             HasScreenshotSavePath = !string.IsNullOrEmpty(ScreenshotSavePath);
+
+            var useThirdPartyCDNJson = await _localSettingsService.ReadSettingAsync("IsUseThirdPartyCDNEnabled");
+            IsUseThirdPartyCDNEnabled = useThirdPartyCDNJson == null || Convert.ToBoolean(useThirdPartyCDNJson);
 
             var customExeJson = await _localSettingsService.ReadSettingAsync(GameExeManager.CustomExeNameKey);
             CustomGameExeName = customExeJson?.ToString() ?? string.Empty;
