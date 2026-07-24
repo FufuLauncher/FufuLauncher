@@ -33,6 +33,16 @@ public class LocalSettingsRepository
         return new LocalSettingsDbContext(dbPath);
     }
 
+    private static void EnsureSettingsTable(string dbPath)
+    {
+        using var conn = new SqliteConnection($"Data Source={dbPath}");
+        conn.Open();
+        using var cmd = conn.CreateCommand();
+        cmd.CommandText =
+            "CREATE TABLE IF NOT EXISTS \"Settings\" (\"Key\" TEXT NOT NULL PRIMARY KEY, \"Value\" TEXT);";
+        cmd.ExecuteNonQuery();
+    }
+
     private void PerformMigration(string dbPath)
     {
         try
@@ -41,33 +51,18 @@ public class LocalSettingsRepository
             if (!string.IsNullOrEmpty(dir))
                 Directory.CreateDirectory(dir);
 
-            bool tableExists = false;
-            try
-            {
-                using var checkConn = new SqliteConnection($"Data Source={dbPath}");
-                checkConn.Open();
-                using var checkCmd = checkConn.CreateCommand();
-                checkCmd.CommandText =
-                    "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='Settings';";
-                tableExists = (long)checkCmd.ExecuteScalar()! > 0;
-            }
-            catch { }
+            // Always ensure the Settings table exists via raw SQL first.
+            // This is idempotent and avoids relying on EF Core's EnsureCreated(),
+            // which can silently skip table creation when the database file
+            // already exists but contains orphan tables (e.g. from a prior crash).
+            EnsureSettingsTable(dbPath);
 
-            if (tableExists)
-            {
-                using var context = new LocalSettingsDbContext(dbPath);
-                context.Database.ExecuteSqlRaw(
-                    "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
-                context.Database.ExecuteSqlRaw(
-                    "INSERT OR IGNORE INTO __EFMigrationsHistory VALUES ('20240716000000_InitialCreate', '8.0.28');");
-                Debug.WriteLine("LocalSettingsRepository: 检测到现有数据库，已跳过迁移");
-            }
-            else
-            {
-                using var context = new LocalSettingsDbContext(dbPath);
-                context.Database.EnsureCreated();
-                Debug.WriteLine("LocalSettingsRepository: 已创建新数据库");
-            }
+            using var context = new LocalSettingsDbContext(dbPath);
+            context.Database.ExecuteSqlRaw(
+                "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
+            context.Database.ExecuteSqlRaw(
+                "INSERT OR IGNORE INTO __EFMigrationsHistory VALUES ('20240716000000_InitialCreate', '8.0.28');");
+            Debug.WriteLine("LocalSettingsRepository: 数据库迁移完成");
         }
         catch (Exception ex)
         {
@@ -75,9 +70,8 @@ public class LocalSettingsRepository
 
             try
             {
+                EnsureSettingsTable(dbPath);
                 using var context = new LocalSettingsDbContext(dbPath);
-                context.Database.ExecuteSqlRaw(
-                    "CREATE TABLE IF NOT EXISTS \"Settings\" (\"Key\" TEXT NOT NULL PRIMARY KEY, \"Value\" TEXT);");
                 context.Database.ExecuteSqlRaw(
                     "CREATE TABLE IF NOT EXISTS __EFMigrationsHistory (MigrationId TEXT PRIMARY KEY, ProductVersion TEXT);");
                 context.Database.ExecuteSqlRaw(
