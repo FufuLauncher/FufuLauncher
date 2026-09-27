@@ -19,6 +19,9 @@ public sealed class DeviceFpService
     private const string AppName = "bbs_cn";
     private const string Platform = "2";
 
+    // 进程级 UUID
+    private static readonly string ProcessUuid = Guid.NewGuid().ToString();
+
     private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
     private static readonly JsonSerializerOptions _jsonOptions = new()
     {
@@ -53,6 +56,9 @@ public sealed class DeviceFpService
             var saved = await _accountManager.LoadFingerprintAsync(accountId);
             if (saved is not null && !string.IsNullOrEmpty(saved.DeviceFp) && !string.IsNullOrEmpty(saved.DeviceId))
             {
+                
+                saved = saved with { SeedId = ProcessUuid };
+
                 if (string.IsNullOrEmpty(saved.BbsDeviceId))
                 {
                     saved = saved with { BbsDeviceId = NameUuidFromBytes(Encoding.UTF8.GetBytes(saved.DeviceId)).ToString() };
@@ -104,7 +110,7 @@ public sealed class DeviceFpService
         return new DeviceFpRequest
         {
             DeviceId = deviceId,
-            SeedId = Guid.NewGuid().ToString(),
+            SeedId = ProcessUuid,
             SeedTime = $"{DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()}",
             Platform = Platform,
             DeviceFp = GenerateDefaultDeviceId(),
@@ -152,14 +158,7 @@ public sealed class DeviceFpService
         }
     }
 
-    
-    // private static string GenerateDefaultDeviceId()
-    // {
-    //     var rng = Random.Shared;
-    //     return new string(new[] { (char)('1' + rng.Next(9)) }
-    //         .Concat(Enumerable.Range(0, 9).Select(_ => (char)('0' + rng.Next(10)))).ToArray());
-    // }
-    
+
     private static string GenerateDefaultDeviceId() => GenerateRandomHex(13);
     private static string GenerateRandomHex(int length)
     {
