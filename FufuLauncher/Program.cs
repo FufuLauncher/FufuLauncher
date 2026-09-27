@@ -21,6 +21,9 @@ namespace FufuLauncher
         [STAThread]
         static void Main(string[] args)
         {
+            
+            DebugLog.Initialize();
+
             if (args.Length >= 2 && string.Equals(args[0], "--backpack-elevated-inject", StringComparison.OrdinalIgnoreCase))
             {
                 Environment.Exit(Services.Backpack.GameLaunchService.RunElevatedInjection(args[1]));
