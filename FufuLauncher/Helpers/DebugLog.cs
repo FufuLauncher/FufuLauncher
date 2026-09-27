@@ -22,6 +22,12 @@ public static class DebugLog
     private const string EnvironmentVariableName = "FUFU_DEBUG_VERBOSE";
 
 
+    private const int DebounceDelayMs = 250;
+
+    private const int ReadRetryCount = 3;
+    private const int ReadRetryDelayMs = 50;
+
+
     private static readonly string[] DefaultErrorKeywords =
     {
         // 中文
@@ -33,8 +39,6 @@ public static class DebugLog
     private static readonly string ConfigPath = Path.Combine(AppPaths.SettingsDir, "debuglog.json");
 
 
-    private static readonly ConcurrentDictionary<string, bool> BlacklistCache = new(StringComparer.Ordinal);
-
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNameCaseInsensitive = true,
@@ -44,15 +48,20 @@ public static class DebugLog
 
     private static FilterState _state = FilterState.PassthroughAll;
     private static int _watcherStarted;
-    private static long _lastReloadTick;
 
 
     private static FileSystemWatcher? _watcher;
 
 
+    /// <summary>尾沿防抖定时器与它的保护锁。</summary>
+    private static readonly object DebounceLock = new();
+    private static Timer? _debounceTimer;
+
+
     public static bool IsFiltering => !_state.Passthrough;
 
-    public static int CachedVerdicts => BlacklistCache.Count;
+    /// <summary>当前过滤状态中已缓存的判定数。状态整体替换后该值随新状态从零开始。</summary>
+    public static int CachedVerdicts => _state.VerdictCache.Count;
 
 
     public static string ConfigurationPath => ConfigPath;
@@ -86,7 +95,7 @@ public static class DebugLog
         FilterState next;
         try
         {
-            next = File.Exists(ConfigPath) ? BuildState(File.ReadAllText(ConfigPath)) : FilterState.PassthroughAll;
+            next = ReadStateWithRetry();
         }
         catch (Exception ex)
         {
@@ -95,7 +104,29 @@ public static class DebugLog
         }
 
         Volatile.Write(ref _state, next);
-        BlacklistCache.Clear();
+    }
+
+
+
+    private static FilterState ReadStateWithRetry()
+    {
+        for (var attempt = 0; ; attempt++)
+        {
+            try
+            {
+                return File.Exists(ConfigPath)
+                    ? BuildState(File.ReadAllText(ConfigPath))
+                    : FilterState.PassthroughAll;
+            }
+            catch (IOException) when (attempt < ReadRetryCount)
+            {
+                Thread.Sleep(ReadRetryDelayMs);
+            }
+            catch (UnauthorizedAccessException) when (attempt < ReadRetryCount)
+            {
+                Thread.Sleep(ReadRetryDelayMs);
+            }
+        }
     }
 
 
@@ -127,18 +158,19 @@ public static class DebugLog
 
     private static bool IsBlacklisted(FilterState state, string tag)
     {
-        if (BlacklistCache.TryGetValue(tag, out var cached))
+        if (state.VerdictCache.TryGetValue(tag, out var cached))
         {
             return cached;
         }
 
+ 
         var matched = MatchesAny(state, tag);
 
-        if (BlacklistCache.Count >= MaxCacheEntries)
+        if (state.VerdictCache.Count >= MaxCacheEntries)
         {
-            BlacklistCache.Clear();
+            state.VerdictCache.Clear();
         }
-        BlacklistCache[tag] = matched;
+        state.VerdictCache[tag] = matched;
         return matched;
     }
 
@@ -371,6 +403,7 @@ public static class DebugLog
             FileSystemEventHandler handler = (_, _) => DebouncedReload();
             watcher.Changed += handler;
             watcher.Created += handler;
+            watcher.Deleted += handler;
             watcher.Renamed += (_, _) => DebouncedReload();
 
             _watcher = watcher;
@@ -383,15 +416,12 @@ public static class DebugLog
 
     private static void DebouncedReload()
     {
-        // 编辑器保存常常连发多个事件，200ms 内的重复触发直接忽略。
-        var now = Environment.TickCount64;
-        if (now - Volatile.Read(ref _lastReloadTick) < 200)
-        {
-            return;
-        }
 
-        Volatile.Write(ref _lastReloadTick, now);
-        Reload();
+        lock (DebounceLock)
+        {
+            _debounceTimer ??= new Timer(_ => Reload(), null, Timeout.Infinite, Timeout.Infinite);
+            _debounceTimer.Change(DebounceDelayMs, Timeout.Infinite);
+        }
     }
 
     /// <summary>不可变的过滤状态，整体替换实现无锁读取。</summary>
@@ -412,6 +442,8 @@ public static class DebugLog
 
         /// <summary>逃生通道关键词，为空表示不启用。</summary>
         public string[] ErrorKeywords { get; init; } = Array.Empty<string>();
+
+        public ConcurrentDictionary<string, bool> VerdictCache { get; } = new(StringComparer.Ordinal);
     }
 
     private sealed class DebugLogOptions
@@ -422,9 +454,7 @@ public static class DebugLog
         public List<string>? ErrorKeywords { get; set; }
     }
 
-    /// <summary>
-    /// 把放行的消息转发给原始监听器，被屏蔽的直接丢弃。
-    /// </summary>
+
     private sealed class DispatcherListener : TraceListener
     {
         private readonly TraceListener[] _inner;
