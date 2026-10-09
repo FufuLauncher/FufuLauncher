@@ -3958,6 +3958,18 @@ Files searched:
   <data name="Checkin_AccountsFailed" xml:space="preserve">
     <value>{0} failed</value>
   </data>
+  <data name="Checkin_UnsupportedGame" xml:space="preserve">
+    <value>Daily reward check-in is not configured for this game</value>
+  </data>
+  <data name="Checkin_LoginExpired" xml:space="preserve">
+    <value>Login expired and could not be refreshed. Please log in to Miyoushe again.</value>
+  </data>
+  <data name="Checkin_GameCaptcha" xml:space="preserve">
+    <value>Security verification is required. Please complete it on the official Miyoushe page.</value>
+  </data>
+  <data name="Checkin_SignNotConfirmed" xml:space="preserve">
+    <value>Check-in has not been confirmed. Please try again later.</value>
+  </data>
   <data name="Checkin_GameCheckin" xml:space="preserve">
     <value>Game Check-in</value>
   </data>
@@ -7061,4 +7073,10 @@ Error: {0}</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Enter a value…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Collapse header</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Expand header</value></data>
+  <data name="Checkin_Game_hkrpg_cn" xml:space="preserve"><value>Honkai: Star Rail</value></data>
+  <data name="Checkin_Game_nap_cn" xml:space="preserve"><value>Zenless Zone Zero</value></data>
+  <data name="Checkin_Game_bh3_cn" xml:space="preserve"><value>Honkai Impact 3rd</value></data>
+  <data name="Checkin_Game_bh2_cn" xml:space="preserve"><value>Houkai Gakuen 2</value></data>
+  <data name="Checkin_Game_nxx_cn" xml:space="preserve"><value>Tears of Themis</value></data>
+  <data name="Checkin_RequestTooFrequent" xml:space="preserve"><value>Requests are too frequent. Please try again later.</value></data>
 </root>

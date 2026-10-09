@@ -287,6 +287,7 @@ public partial class SettingsViewModel
         var batchCheckinJson = await _localSettingsService.ReadSettingAsync("IsBatchCheckinEnabled");
         IsBatchCheckinEnabled = batchCheckinJson != null && Convert.ToBoolean(batchCheckinJson);
 
+        await LoadCheckinGamesAsync();
         await LoadCheckinAccountsAsync();
     }
 

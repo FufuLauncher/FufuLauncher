@@ -18,7 +18,7 @@ using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
-public class TokenRefreshService
+public class TokenRefreshService : IDisposable
 {
     private const string Salt = "dDIQHbKOdaPaLuvQKVzUzqdeCaxjtaPV";
     private const string WebSalt = "G1ktdwFL4IyGkHuuWSmz0wUe9Db9scyK";
@@ -32,17 +32,23 @@ public class TokenRefreshService
         TypeInfoResolver = new DefaultJsonTypeInfoResolver()
     };
 
-    public TokenRefreshService()
+    public TokenRefreshService() : this(new HttpClient(new HttpClientHandler { UseCookies = false })
+    {
+        Timeout = TimeSpan.FromSeconds(30)
+    })
+    {
+    }
+
+    internal TokenRefreshService(HttpClient httpClient)
     {
         _deviceId = Guid.NewGuid().ToString("N").Substring(0, 16).ToUpper();
         _deviceFp = GenerateDeviceFingerprint();
 
-        var handler = new HttpClientHandler { UseCookies = false };
-        _httpClient = new HttpClient(handler);
+        _httpClient = httpClient;
     }
 
     public async Task<Dictionary<string, string>?> RefreshCookieAsync(Dictionary<string, string> currentCookies,
-        bool isManual = false)
+        bool isManual = false, bool forceRefresh = false)
     {
         try
         {
@@ -66,12 +72,12 @@ public class TokenRefreshService
 
             string cookieStr = BuildCookieString(currentCookies);
 
-            if (!isManual)
+            if (!isManual && !forceRefresh)
             {
-                bool isValid = await CheckCookieValidAsync(cookieStr);
-                if (isValid)
+                bool? isValid = await CheckCookieValidAsync(cookieStr);
+                if (isValid != false)
                 {
-                    Debug.WriteLine("当前 Cookie 仍然有效，无需刷新");
+                    Debug.WriteLine(isValid == true ? "当前 Cookie 仍然有效，无需刷新" : "无法确认 Cookie 是否失效，保留当前凭证");
                     return null;
                 }
             }
@@ -110,11 +116,38 @@ public class TokenRefreshService
             }
 
             var v2Cookies = await GetWebQrStatusAndExtractCookiesAsync(webTicket);
-            if (v2Cookies != null && v2Cookies.Count > 0)
+            if (v2Cookies != null &&
+                (v2Cookies.TryGetValue("cookie_token_v2", out var tokenV2) && !string.IsNullOrEmpty(tokenV2) ||
+                 v2Cookies.TryGetValue("cookie_token", out var tokenV1) && !string.IsNullOrEmpty(tokenV1)))
             {
+                string? expectedUid = currentCookies.GetValueOrDefault("stuid") ??
+                                      currentCookies.GetValueOrDefault("ltuid") ??
+                                      currentCookies.GetValueOrDefault("account_id") ??
+                                      currentCookies.GetValueOrDefault("account_id_v2");
+                string? refreshedUid = v2Cookies.GetValueOrDefault("account_id_v2") ??
+                                       v2Cookies.GetValueOrDefault("account_id");
+                if (!string.IsNullOrEmpty(expectedUid) && !string.IsNullOrEmpty(refreshedUid) && expectedUid != refreshedUid)
+                {
+                    if (isManual) SendErrorNotification("Token_InvalidCookie".GetLocalized());
+                    return null;
+                }
+                var refreshedCookies = new Dictionary<string, string>(currentCookies);
                 foreach (var kvp in v2Cookies)
                 {
-                    currentCookies[kvp.Key] = kvp.Value;
+                    refreshedCookies[kvp.Key] = kvp.Value;
+                }
+                if (!string.IsNullOrEmpty(expectedUid)) refreshedCookies["stuid"] = expectedUid;
+
+                // Passport 刷新返回 v2 凭证时，不再同时发送已过期的 v1 凭证。
+                if (v2Cookies.ContainsKey("cookie_token_v2") && v2Cookies.ContainsKey("account_id_v2"))
+                {
+                    refreshedCookies.Remove("cookie_token");
+                    refreshedCookies.Remove("account_id");
+                }
+                if (v2Cookies.ContainsKey("ltoken_v2") && v2Cookies.ContainsKey("ltuid_v2"))
+                {
+                    refreshedCookies.Remove("ltoken");
+                    refreshedCookies.Remove("ltuid");
                 }
 
                 Debug.WriteLine("Cookie刷新成功");
@@ -122,7 +155,7 @@ public class TokenRefreshService
                     "Token_RefreshTitle".GetLocalized(),
                     isManual ? "Token_ManualRefreshDone".GetLocalized() : "Token_AutoRefreshDone".GetLocalized(),
                     NotificationType.Success, 3000));
-                return currentCookies;
+                return refreshedCookies;
             }
             else
             {
@@ -147,11 +180,11 @@ public class TokenRefreshService
             NotificationType.Error, 4000));
     }
 
-    private async Task<bool> CheckCookieValidAsync(string cookie)
+    private async Task<bool?> CheckCookieValidAsync(string cookie)
     {
         try
         {
-            string url = ApiEndpoints.MihoyoBbsUserGameRolesUrl;
+            string url = ApiEndpoints.MihoyoBbsAccountInfoUrl;
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
 
             request.Headers.TryAddWithoutValidation("Accept", "application/json, text/plain, */*");
@@ -166,22 +199,23 @@ public class TokenRefreshService
             request.Headers.TryAddWithoutValidation("User-Agent",
                 "Mozilla/5.0 (Linux; Android 12; Unspecified Device) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36 miHoYoBBS/2.93.1");
 
-            var response = await _httpClient.SendAsync(request);
+            using var response = await _httpClient.SendAsync(request);
+            if (!response.IsSuccessStatusCode) return null;
             var responseText = await response.Content.ReadAsStringAsync();
 
-            var result = JsonSerializer.Deserialize<ApiResponse<AccountInfoData>>(responseText, _jsonOptions);
-
-            if (result != null && result.RetCode == 0 && result.Data?.List != null && result.Data.List.Count > 0)
-            {
-                return true;
-            }
+            using var json = JsonDocument.Parse(responseText);
+            if (!json.RootElement.TryGetProperty("retcode", out var code) || !code.TryGetInt32(out int retCode))
+                return null;
+            // 角色列表为空也可能是有效账号；网络、风控等错误不能视为登录失效。
+            if (retCode == 0) return true;
+            if (MiyousheCheckinGame.IsLoginExpired(retCode)) return false;
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"验证 Cookie 状态时发生异常: {ex.Message}");
         }
 
-        return false;
+        return null;
     }
 
 
@@ -398,4 +432,6 @@ public class TokenRefreshService
             return sb.ToString();
         }
     }
+
+    public void Dispose() => _httpClient.Dispose();
 }

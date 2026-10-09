@@ -81,6 +81,7 @@ public partial class App
                 services.AddSingleton<Services.AuthTicket.IAuthTicketService, Services.AuthTicket.AuthTicketService>();
 
                 services.AddSingleton<IHoyoverseCheckinService, HoyoverseCheckinService>();
+                services.AddSingleton<MiyousheGameCheckinService>();
                 services.AddSingleton<ICommunityCheckinService, CommunityCheckinService>();
                 services.AddSingleton<ICloudGameCheckinService, CloudGameCheckinService>();
                 services.AddSingleton<IHoyolabRoleResolverService, HoyolabRoleResolverService>();

@@ -1785,6 +1785,22 @@
                                                   IsOn="{x:Bind ViewModel.IsGameCheckinEnabled, Mode=TwoWay}" />
                                 </Grid>
 
+                                <ItemsControl ItemsSource="{x:Bind ViewModel.CheckinGames, Mode=OneWay}"
+                                              Margin="36,0,0,10"
+                                              IsEnabled="{x:Bind ViewModel.IsGameCheckinEnabled, Mode=OneWay}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="12" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="models:CheckinGameItem">
+                                            <CheckBox Content="{x:Bind DisplayName}" MinWidth="0"
+                                                      IsChecked="{x:Bind IsSelected, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
                                 <Rectangle Style="{StaticResource RowDividerStyle}" />
 
                                 <Grid Style="{StaticResource SettingsRowStyle}">

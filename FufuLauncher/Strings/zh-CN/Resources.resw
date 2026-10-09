@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -643,7 +643,7 @@
     <value>游戏签到</value>
   </data>
   <data name="GameCheckinCaption" xml:space="preserve">
-    <value>领取米游社每日签到奖励（原石、摩拉等）</value>
+    <value>领取米游社每日签到奖励（原石、摩拉等）；可在下方选择同时签到的其它米游</value>
   </data>
   <data name="CommunityCheckin" xml:space="preserve">
     <value>社区签到</value>
@@ -4075,6 +4075,18 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Checkin_AccountsFailed" xml:space="preserve">
     <value>{0}个失败</value>
   </data>
+  <data name="Checkin_UnsupportedGame" xml:space="preserve">
+    <value>此游戏尚未配置每日奖励签到</value>
+  </data>
+  <data name="Checkin_LoginExpired" xml:space="preserve">
+    <value>登录凭证失效，自动刷新未成功，请重新登录米游社后再签到</value>
+  </data>
+  <data name="Checkin_GameCaptcha" xml:space="preserve">
+    <value>签到需要安全验证，请在米游社官方页面完成验证</value>
+  </data>
+  <data name="Checkin_SignNotConfirmed" xml:space="preserve">
+    <value>签到状态尚未确认，请稍后重试</value>
+  </data>
   <data name="Checkin_GameCheckin" xml:space="preserve">
     <value>游戏签到</value>
   </data>
@@ -7059,4 +7071,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>请输入配置值…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>收起顶栏</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>展开顶栏</value></data>
+  <data name="Checkin_Game_hkrpg_cn" xml:space="preserve"><value>崩坏：星穹铁道</value></data>
+  <data name="Checkin_Game_nap_cn" xml:space="preserve"><value>绝区零</value></data>
+  <data name="Checkin_Game_bh3_cn" xml:space="preserve"><value>崩坏3</value></data>
+  <data name="Checkin_Game_bh2_cn" xml:space="preserve"><value>崩坏学园2</value></data>
+  <data name="Checkin_Game_nxx_cn" xml:space="preserve"><value>未定事件簿</value></data>
+  <data name="Checkin_RequestTooFrequent" xml:space="preserve"><value>请求过于频繁，请稍后重试</value></data>
 </root>

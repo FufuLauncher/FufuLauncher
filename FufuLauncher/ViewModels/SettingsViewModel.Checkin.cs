@@ -84,6 +84,28 @@ public partial class SettingsViewModel
         _ = _localSettingsService.SaveSettingAsync("IsBatchCheckinEnabled", value);
     }
 
+    private async Task LoadCheckinGamesAsync()
+    {
+        var games = new ObservableCollection<CheckinGameItem>();
+        string[] gameOrder = ["nap_cn","hkrpg_cn", "nxx_cn",  "bh3_cn", "bh2_cn"];
+        foreach (var gameBiz in gameOrder)
+        {
+            var game = MiyousheCheckinGame.SupportedGames.First(g => g.GameBiz == gameBiz);
+            var value = await _localSettingsService.ReadSettingAsync(game.SettingKey);
+            var item = new CheckinGameItem(game)
+            {
+                IsSelected = value == null || !bool.TryParse(value.ToString(), out bool enabled) || enabled
+            };
+            item.PropertyChanged += async (_, e) =>
+            {
+                if (e.PropertyName == nameof(CheckinGameItem.IsSelected))
+                    await _localSettingsService.SaveSettingAsync(item.SettingKey, item.IsSelected);
+            };
+            games.Add(item);
+        }
+        CheckinGames = games;
+    }
+
     private async Task LoadCheckinAccountsAsync()
     {
         try

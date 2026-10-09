@@ -229,6 +229,7 @@ public partial class SettingsViewModel : ObservableRecipient
     } = new();
 
     [ObservableProperty] private bool _isGameCheckinEnabled = true;
+    [ObservableProperty] private ObservableCollection<CheckinGameItem> _checkinGames = new();
     [ObservableProperty] private bool _isBatchCheckinEnabled;
     [ObservableProperty] private bool _isCommunityCheckinEnabled = true;
     [ObservableProperty] private bool _isCommunityLikeEnabled;

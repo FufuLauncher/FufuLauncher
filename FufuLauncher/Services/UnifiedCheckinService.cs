@@ -21,6 +21,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
     private readonly ICloudGameCheckinService _cloudGameCheckinService;
     private readonly AccountManager _accountManager;
     private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
+    private readonly MiyousheGameCheckinService _miyousheGameCheckinService;
 
     public UnifiedCheckinService(
         ILocalSettingsService localSettingsService,
@@ -28,7 +29,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         ICommunityCheckinService communityCheckinService,
         ICloudGameCheckinService cloudGameCheckinService,
         AccountManager accountManager,
-        IHoyolabRoleResolverService hoyolabRoleResolverService)
+        IHoyolabRoleResolverService hoyolabRoleResolverService,
+        MiyousheGameCheckinService miyousheGameCheckinService)
     {
         _localSettingsService = localSettingsService;
         _gameCheckinService = gameCheckinService;
@@ -36,6 +38,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         _cloudGameCheckinService = cloudGameCheckinService;
         _accountManager = accountManager;
         _hoyolabRoleResolverService = hoyolabRoleResolverService;
+        _miyousheGameCheckinService = miyousheGameCheckinService;
     }
 
     public async Task<UnifiedCheckinResult> ExecuteAllCheckinsAsync(IProgress<string>? progress = null)
@@ -89,6 +92,12 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         }
 
         var disabledUids = await LoadDisabledUidsAsync();
+        var enabledGames = new HashSet<string> { "hk4e_cn" };
+        if (gameEnabled)
+        {
+            foreach (var game in MiyousheCheckinGame.SupportedGames.Where(g => g.GameBiz != "hk4e_cn"))
+                if (await GetBoolSettingAsync(game.SettingKey, true)) enabledGames.Add(game.GameBiz);
+        }
 
 
         List<AccountCredentials> activeAccounts;
@@ -126,18 +135,6 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     Report($"[{account.Nickname}] {"Checkin_GameCheckinProgress".GetLocalized()}");
                     try
                     {
-                        var config = new Config
-                        {
-                            Account = new AccountConfig
-                            {
-                                Cookie = account.Cookie,
-                                Stuid = account.Stuid,
-                                Stoken = account.Stoken,
-                                Mid = account.Mid
-                            }
-                        };
-
-
                         bool isOs = account.ConfigPath.StartsWith("os_");
                         string signResult;
                         bool success;
@@ -158,14 +155,36 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                                 var osSignResult = await os.SignAccountWithResultAsync(account.Cookie, disabledUids);
                                 signResult = osSignResult.Message;
                                 success = osSignResult.Success;
+                                result.GameSignDays = HoyolabCheckinService.LastSignDays.ToString();
+                                result.GameRewardItem = HoyolabCheckinService.LastRewardItem;
                             }
                         }
                         else
                         {
-                            var genshin = new Genshin();
-                            await genshin.InitializeAsync(config);
-                            signResult = await genshin.SignAccountAsync(config, null, disabledUids);
-                            success = string.IsNullOrEmpty(GameCheckin.LastApiError);
+                            var roleResults = await _miyousheGameCheckinService.ExecuteAsync(account, disabledUids,
+                                () => RefreshCheckinCookieAsync(account), progress, enabledGames);
+                            success = roleResults.All(r => r.Success != false);
+                            if (!success) result.GameResult.FailCount++;
+                            else if (roleResults.Any(r => r.Success == true)) result.GameResult.SuccessCount++;
+                            else result.GameResult.SkippedCount++;
+                            result.AccountResults.Add(new AccountCheckinDetail
+                            {
+                                Nickname = account.Nickname,
+                                Items =
+                                {
+                                    ("Checkin_GameCheckin".GetLocalized(),
+                                        success ? roleResults.Any(r => r.Success == true) ? true : null : false,
+                                        MiyousheRoleCheckinResult.GetFailureSummary(roleResults))
+                                }
+                            });
+                            var genshinResult = roleResults.FirstOrDefault(r => r.GameBiz == "hk4e_cn" && r.Success == true);
+                            if (genshinResult != null)
+                            {
+                                result.GameSignDays = genshinResult.SignDays.ToString();
+                                result.GameRewardItem = genshinResult.RewardItem;
+                            }
+                            if (activeAccounts.Count > 1) await Task.Delay(Random.Shared.Next(2000, 5000));
+                            continue;
                         }
 
                         if (success) result.GameResult.SuccessCount++;
@@ -196,16 +215,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 }
 
                 result.GameResult.Success = result.GameResult.FailCount == 0;
-                bool anyOs = activeAccounts.Any(a => a.ConfigPath.StartsWith("os_"));
-                int signDays = anyOs ? HoyolabCheckinService.LastSignDays : GameCheckin.LastSignDays;
-                string rewardItem = anyOs ? HoyolabCheckinService.LastRewardItem : GameCheckin.LastRewardItem;
-                result.GameSignDays = signDays.ToString();
-                result.GameRewardItem = rewardItem;
-
-                result.GameResult.Message = result.GameResult.Success
-                    ? string.Format("Checkin_ConsecutiveDays".GetLocalized(), signDays, rewardItem)
-                    : string.Format("Checkin_SuccessFailCount".GetLocalized(), result.GameResult.SuccessCount,
-                        result.GameResult.FailCount);
+                result.GameResult.Message = string.Format("Checkin_SuccessFailCount".GetLocalized(),
+                    result.GameResult.SuccessCount, result.GameResult.FailCount);
             }
             catch (Exception ex)
             {
@@ -371,7 +382,8 @@ public class UnifiedCheckinService : IUnifiedCheckinService
             Debug.WriteLine($"[统一签到] 云游戏签到耗时 {cloudSw.ElapsedMilliseconds}ms");
         }
 
-        int successAccounts = result.AccountResults.Count(a => a.Items.Any(i => i.Success == true));
+        int successAccounts = result.AccountResults.Count(a => a.Items.Any(i => i.Success == true) &&
+                                                              a.Items.All(i => i.Success != false));
         int failAccounts = result.AccountResults.Count(a => a.Items.Any(i => i.Success == false));
 
         result.SummaryMessage = failAccounts == 0
@@ -390,6 +402,21 @@ public class UnifiedCheckinService : IUnifiedCheckinService
         var value = await _localSettingsService.ReadSettingAsync(key);
         if (value == null) return defaultValue;
         return bool.TryParse(value.ToString(), out var result) ? result : defaultValue;
+    }
+
+    private async Task<string?> RefreshCheckinCookieAsync(AccountCredentials account)
+    {
+        var cookies = await _accountManager.LoadCookiesAsync(account.ConfigPath);
+        if (cookies == null || cookies.Count == 0) return null;
+        using var refreshService = new TokenRefreshService();
+        // 签到接口已明确返回失效码，不能再用原神角色查询的结果阻止刷新。
+        var refreshed = await refreshService.RefreshCookieAsync(cookies, forceRefresh: true);
+        if (refreshed == null) return null;
+        await _accountManager.UpdateCookiesAsync(account.ConfigPath, refreshed);
+        account.Cookie = string.Join("; ", refreshed.Select(kv => $"{kv.Key}={kv.Value}"));
+        account.Stoken = refreshed.GetValueOrDefault("stoken", account.Stoken);
+        account.Mid = refreshed.GetValueOrDefault("mid", account.Mid);
+        return account.Cookie;
     }
 
     private async Task<HashSet<string>> LoadDisabledUidsAsync()

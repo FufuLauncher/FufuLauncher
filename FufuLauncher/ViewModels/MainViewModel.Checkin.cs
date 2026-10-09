@@ -71,6 +71,10 @@ public partial class MainViewModel
         try
         {
             var roleService = App.GetService<GameRoleService>();
+            var accountId = App.GetService<AccountManager>().ActiveAccountId;
+            // 自动签到先按社区账号执行，避免原神角色加载失败阻断其他游戏。
+            await TryAutoCheckinAsync(version, accountId);
+            if (version != _checkinStatusVersion) return;
             var selected = await roleService.GetCurrentAsync();
             if (version != _checkinStatusVersion) return;
             if (selected == null)
@@ -89,19 +93,6 @@ public partial class MainViewModel
             CheckinSummary = summary;
             UpdateCheckinIconState(status);
 
-            if (!_hasAttemptedAutoCheckin)
-            {
-                var autoCheckinObj = await _localSettingsService.ReadSettingAsync("IsAutoCheckinEnabled");
-                bool isAutoCheckinEnabled = autoCheckinObj != null && Convert.ToBoolean(autoCheckinObj);
-                bool isSigned = !string.IsNullOrEmpty(status) && (status.Contains("成功") || status.Contains("已"));
-
-                if (version == _checkinStatusVersion && roleService.IsCurrent(selected) && isAutoCheckinEnabled &&
-                    !isSigned)
-                {
-                    _hasAttemptedAutoCheckin = true;
-                    await ExecuteCheckinAsync();
-                }
-            }
         }
         catch (Exception ex)
         {
@@ -110,6 +101,18 @@ public partial class MainViewModel
             CheckinSummary = ex.Message;
             UpdateCheckinIconState("Fail");
         }
+    }
+
+    private async Task TryAutoCheckinAsync(int version, string? accountId)
+    {
+        if (_hasAttemptedAutoCheckin || accountId == null) return;
+        var enabled = await _localSettingsService.ReadSettingAsync("IsAutoCheckinEnabled");
+        if (version != _checkinStatusVersion ||
+            App.GetService<AccountManager>().ActiveAccountId != accountId ||
+            !bool.TryParse(enabled?.ToString(), out bool isEnabled) || !isEnabled) return;
+        // 原神已签或未绑定原神，都不能代表其他游戏已完成签到。
+        _hasAttemptedAutoCheckin = true;
+        await ExecuteCheckinAsync();
     }
 
     private async Task ExecuteCheckinAsync()
