@@ -198,7 +198,7 @@ public sealed partial class AchievementWindow
                 CalculateGlobalStats();
                 SaveData();
 
-                if (ViewModel.HideCompleted) ApplyFilters();
+                ApplyFilters();
 
                 ViewModel.StatusMessage = $"导入成功，同步 {result.UpdatedCount} 个成就进度";
             }
@@ -309,20 +309,6 @@ public sealed partial class AchievementWindow
         }
 
         reportProgress(95, "AchievementWindow_RefreshingUI".GetLocalized());
-
-        DispatcherQueue.TryEnqueue(() =>
-        {
-            foreach (var cat in ViewModel.Categories)
-            {
-                foreach (var item in cat.Achievements)
-                {
-                    if (item.IsGroup)
-                    {
-                        item.RefreshGroupStatus();
-                    }
-                }
-            }
-        });
 
         return stats;
     }

@@ -217,21 +217,13 @@ public sealed partial class AchievementWindow
 
         foreach (var cat in ViewModel.Categories)
         {
-            foreach (var item in cat.Achievements)
-            {
-                if (item.IsGroup)
-                {
-                    item.RefreshGroupStatus();
-                }
-            }
-
             cat.RefreshProgress();
         }
 
         CalculateGlobalStats();
         SaveData();
 
-        if (ViewModel.HideCompleted) ApplyFilters();
+        ApplyFilters();
 
         return updatedCount;
     }

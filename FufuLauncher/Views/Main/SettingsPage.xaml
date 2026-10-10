@@ -3038,6 +3038,26 @@
                                     <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=ModTrust_LaunchVerificationTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}" TextWrapping="Wrap"
+                                                   Text="{helpers:Loc Key=ModTrust_LaunchVerificationCaption}" />
+                                    </StackPanel>
+                                    <ToggleSwitch x:Name="LaunchSignatureVerificationToggle" Grid.Column="2"
+                                                  Style="{StaticResource RowToggleStyle}" IsOn="False"
+                                                  Toggled="OnLaunchSignatureVerificationToggled" />
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ModTrust_ModeTitle}" />
                                         <TextBlock Style="{StaticResource RowCaptionStyle}"
                                                    TextWrapping="Wrap"

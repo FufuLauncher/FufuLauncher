@@ -6242,4 +6242,25 @@ Puoi riprovare con un altro nodo o usare la fonte ufficiale diretta.</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Inserisci un valore…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Comprimi intestazione</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Espandi intestazione</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Azioni sui dati</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Importazione ed esportazione</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Profili e database</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Verifica le firme dei plugin all’avvio</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Disattivato per impostazione predefinita. Se attivo, si applica la politica di avviso o blocco seguente.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Verifica disattivata</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Disattivato salta la verifica; avvisa verifica senza bloccare; rigoroso blocca i plugin che non superano la verifica.</value>
+  </data>
 </root>

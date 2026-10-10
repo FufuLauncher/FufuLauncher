@@ -6236,4 +6236,25 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Введите значение…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Свернуть верхнюю панель</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Развернуть верхнюю панель</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Действия с данными</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Импорт и экспорт</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Профили и база данных</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Проверять подписи плагинов при запуске</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>По умолчанию отключено. При включении применяется выбранный ниже режим предупреждения или блокировки.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Проверка отключена</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Отключение пропускает проверку; предупреждение проверяет без блокировки; строгий режим блокирует плагины, не прошедшие проверку.</value>
+  </data>
 </root>

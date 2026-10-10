@@ -47,6 +47,23 @@ public partial class AchievementViewModel : ObservableObject
     [ObservableProperty] private string _selectedVersion = "所有版本";
 
     [ObservableProperty] private ObservableCollection<string> _availableVersions = new() { "所有版本" };
+
+    public void RefreshAvailableVersions(string allVersions)
+    {
+        var selectedVersion = SelectedVersion;
+        var versions = Categories.SelectMany(category => category.Achievements)
+            .SelectMany(item => item.IsGroup ? item.Children.AsEnumerable() : Enumerable.Repeat(item, 1))
+            .Select(item => item.Version)
+            .Where(version => !string.IsNullOrWhiteSpace(version) && version != allVersions)
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(version => System.Version.TryParse(version, out var parsed) ? parsed : null)
+            .ThenBy(version => version, StringComparer.Ordinal)
+            .Prepend(allVersions)
+            .ToList();
+
+        AvailableVersions = new ObservableCollection<string>(versions);
+        SelectedVersion = versions.Contains(selectedVersion, StringComparer.Ordinal) ? selectedVersion : allVersions;
+    }
 }
 
 public partial class AchievementCategory : ObservableObject

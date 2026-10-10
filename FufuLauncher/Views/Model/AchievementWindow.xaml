@@ -42,6 +42,12 @@
                     </ResourceDictionary>
                 </ResourceDictionary.ThemeDictionaries>
 
+                <Style x:Key="AchievementActionButtonStyle" TargetType="Button">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Padding" Value="12,10" />
+                </Style>
+
                 <Style x:Key="ToolbarButtonStyle" TargetType="Button">
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="BorderThickness" Value="0" />
@@ -114,10 +120,34 @@
             </ResourceDictionary>
         </Grid.Resources>
 
-        <Grid Background="Transparent">
+        <Grid x:Name="AchievementLayoutRoot" Background="Transparent">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="CompactAchievementLayout">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="AchievementWorkspace.DisplayMode" Value="Overlay" />
+                            <Setter Target="AchievementWorkspace.IsPaneOpen" Value="False" />
+                            <Setter Target="AchievementOperationsButton.Visibility" Value="Visible" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="WideAchievementLayout">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="1120" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="AchievementWorkspace.DisplayMode" Value="Inline" />
+                            <Setter Target="AchievementWorkspace.IsPaneOpen" Value="True" />
+                            <Setter Target="AchievementOperationsButton.Visibility" Value="Collapsed" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
             <Grid.RowDefinitions>
                 <RowDefinition Height="48" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -129,9 +159,13 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="1" Padding="16,0" BorderBrush="{ThemeResource CardBorder}" BorderThickness="0,0,0,1">
+            <Grid x:Name="AchievementFilterBar" Grid.Row="1" Padding="16,10" RowSpacing="10"
+                  BorderBrush="{ThemeResource CardBorder}" BorderThickness="0,0,0,1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
@@ -170,300 +204,374 @@
                     </StackPanel>
                 </StackPanel>
 
-                <AutoSuggestBox Grid.Column="1" PlaceholderText="{helpers:Loc Key=AchievementWindow_SearchPlaceholder}"
-                                Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                QueryIcon="Find" Margin="20,0" VerticalAlignment="Center" MaxWidth="400" />
+                <Button x:Name="AchievementOperationsButton" Grid.Column="1" Click="OnToggleOperationsClick"
+                        VerticalAlignment="Center" Padding="12,6" Margin="12,0,0,0">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon Glyph="&#xE8A5;" FontFamily="Segoe Fluent Icons" FontSize="14" />
+                        <TextBlock Text="{helpers:Loc Key=AchievementWindow_DataActions}" FontSize="12" />
+                    </StackPanel>
+                </Button>
 
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                    <ComboBox ItemsSource="{x:Bind ViewModel.AvailableVersions}"
+                <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <AutoSuggestBox PlaceholderText="{helpers:Loc Key=AchievementWindow_SearchPlaceholder}"
+                                    Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    QueryIcon="Find" VerticalAlignment="Center" />
+                    <ComboBox Grid.Column="1" ItemsSource="{x:Bind ViewModel.AvailableVersions, Mode=OneWay}"
                               SelectedItem="{x:Bind ViewModel.SelectedVersion, Mode=TwoWay}"
                               PlaceholderText="{helpers:Loc Key=AchievementWindow_Version}" MinWidth="100"
                               VerticalAlignment="Center" />
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.HideCompleted, Mode=TwoWay}"
+                    <ToggleSwitch Grid.Column="2" IsOn="{x:Bind ViewModel.HideCompleted, Mode=TwoWay}"
                                   OnContent="{helpers:Loc Key=AchievementWindow_HiddenComplete}"
                                   OffContent="{helpers:Loc Key=AchievementWindow_ShowAll}" VerticalAlignment="Center"
                                   MinWidth="100" />
-
-                    <Button Click="OnYaeReadClick" VerticalAlignment="Center" Padding="8,5"
-                            ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_YaeReadTooltip}">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xEAFC;" FontFamily="Segoe Fluent Icons" FontSize="14" />
-                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_YaeRead}" FontSize="12" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Click="OnUiafImportClick" VerticalAlignment="Center" Padding="8,5">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE118;" FontFamily="Segoe Fluent Icons" FontSize="14" />
-                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_UIAFImport}" FontSize="12" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Click="OnUiafExportClick" VerticalAlignment="Center" Padding="8,5">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE11C;" FontFamily="Segoe Fluent Icons" FontSize="14" />
-                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_UIAFExport}" FontSize="12" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Content="{helpers:Loc Key=AchievementWindow_ImportRecords}" Click="OnImportClick"
-                            FontSize="12" VerticalAlignment="Center" />
-
-                    <Button Click="OnExportClick" VerticalAlignment="Center" Padding="8,5">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE74E;" FontFamily="Segoe Fluent Icons" FontSize="14" />
-                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_ManualSave}" FontSize="12" />
-                        </StackPanel>
-                    </Button>
-
-                    <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="8,4"
-                            Margin="0,0,8,0" VerticalAlignment="Center"
-                            ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_CurrentProfile}">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE779;" FontFamily="Segoe Fluent Icons" FontSize="12"
-                                      Foreground="{ThemeResource SubTextColor}" />
-                            <TextBlock Text="{x:Bind CurrentProfileName, Mode=OneWay}" FontSize="12"
-                                       Foreground="{ThemeResource HighlightColor}" MaxWidth="100"
-                                       TextTrimming="CharacterEllipsis" />
-                        </StackPanel>
-                    </Border>
-
-                    <Button Click="OnArchiveManageClick" VerticalAlignment="Center" Padding="8,5" Margin="0,0,8,0"
-                            ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_ManageArchive}">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE71C;" FontFamily="Segoe Fluent Icons" FontSize="14" />
-                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_ArchiveManagement}" FontSize="12" />
-                        </StackPanel>
-                    </Button>
-
-                    <Button Click="OnUpdateDbClick"
-                            ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_UpdateData}">
-                        <StackPanel Orientation="Horizontal" Spacing="6">
-                            <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}"
-                                      FontSize="14" />
-                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_UpdateData}" FontSize="12" />
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
+                </Grid>
             </Grid>
 
-            <Grid Grid.Row="2">
-                <GridView x:Name="CategoryGridView"
-                          Visibility="{x:Bind ViewModel.CategoryGridVisibility, Mode=OneWay}"
-                          ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}"
-                          SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnCategoryGridItemClick"
-                          Padding="20">
-                    <GridView.RenderTransform>
-                        <TranslateTransform x:Name="GridTrans" Y="0" />
-                    </GridView.RenderTransform>
-                    <GridView.ItemTemplate>
-                        <DataTemplate x:DataType="models:AchievementCategory">
-                            <Grid Width="200" Height="140" Background="{ThemeResource CardBackground}" CornerRadius="8"
-                                  Padding="16" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="{x:Bind SafeIconUrl}" Width="48" Height="48"
-                                       HorizontalAlignment="Center" Margin="0,0,0,8" />
-                                <TextBlock Grid.Row="1" Text="{x:Bind Name}"
-                                           Foreground="{ThemeResource HighlightColor}" FontWeight="Bold" FontSize="14"
-                                           HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
-                                <StackPanel Grid.Row="2" Spacing="4">
-                                    <ProgressBar Value="{x:Bind ProgressPercent, Mode=OneWay}" Maximum="100" Height="2" />
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
-                                        <TextBlock Text="{x:Bind ProgressDisplay, Mode=OneWay}" FontSize="10"
-                                                   Foreground="{ThemeResource SubTextColor}" />
-                                        <TextBlock Text="{x:Bind ProgressPercentText, Mode=OneWay}" FontSize="10"
-                                                   Foreground="{ThemeResource SubTextColor}" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
-
-                <Grid x:Name="DetailView" Visibility="{x:Bind ViewModel.DetailListVisibility, Mode=OneWay}">
-                    <Grid.RenderTransform>
-                        <TranslateTransform x:Name="DetailTrans" Y="0" />
-                    </Grid.RenderTransform>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="280" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <ListView Grid.Column="0"
-                              ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}"
-                              SelectedItem="{x:Bind ViewModel.SelectedCategory, Mode=TwoWay}"
-                              SelectionChanged="OnCategorySelectionChanged"
-                              Background="{ThemeResource SidebarBackground}" Padding="0,10">
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:AchievementCategory">
-                                <Grid Padding="8,8">
+            <SplitView x:Name="AchievementWorkspace" Grid.Row="2" PanePlacement="Right"
+                       DisplayMode="Overlay" IsPaneOpen="False" OpenPaneLength="232"
+                       PaneBackground="{ThemeResource SidebarBackground}">
+                <SplitView.Pane>
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel Margin="16" Spacing="10">
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_DataTransfer}"
+                                       FontSize="13" FontWeight="SemiBold" Margin="0,0,0,4"
+                                       Foreground="{ThemeResource HighlightColor}" />
+                            <Button Click="OnYaeReadClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_YaeReadTooltip}">
+                                <Grid ColumnSpacing="8">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="{x:Bind SafeIconUrl}" Width="32" Height="32" Margin="0,0,12,0" />
-                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                        <TextBlock Text="{x:Bind Name}" Foreground="{ThemeResource HighlightColor}"
-                                                   FontSize="13" TextTrimming="CharacterEllipsis" />
-                                        <StackPanel Orientation="Horizontal" Spacing="6">
-                                            <TextBlock Text="{x:Bind ProgressDisplay, Mode=OneWay}"
-                                                       Foreground="{ThemeResource SubTextColor}" FontSize="11" />
-                                            <TextBlock Text="{x:Bind ProgressPercentText, Mode=OneWay}"
-                                                       Foreground="{ThemeResource SubTextColor}" FontSize="11" />
+                                    <FontIcon Glyph="&#xEAFC;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_YaeRead}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                            <Button Click="OnImportClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_ImportRecords}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE8B5;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_ImportRecords}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                            <Button Click="OnUiafImportClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_UIAFImport}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE118;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_UIAFImport}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                            <Button Click="OnUiafExportClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_UIAFExport}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE11C;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_UIAFExport}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+
+                            <Rectangle Height="1" Fill="{ThemeResource CardBorder}" Margin="0,6" />
+                            <TextBlock Text="{helpers:Loc Key=AchievementWindow_SaveManagement}"
+                                       FontSize="13" FontWeight="SemiBold" Margin="0,0,0,4"
+                                       Foreground="{ThemeResource HighlightColor}" />
+                            <Border Background="{ThemeResource BadgeBackgroundBrush}" CornerRadius="4" Padding="10,8"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_CurrentProfile}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE779;" FontFamily="Segoe Fluent Icons" FontSize="12"
+                                              Foreground="{ThemeResource SubTextColor}" />
+                                    <TextBlock Grid.Column="1" Text="{x:Bind CurrentProfileName, Mode=OneWay}"
+                                               FontSize="12" Foreground="{ThemeResource HighlightColor}"
+                                               TextTrimming="CharacterEllipsis" />
+                                </Grid>
+                            </Border>
+                            <Button Click="OnExportClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_ManualSave}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE74E;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_ManualSave}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                            <Button Click="OnArchiveManageClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_ManageArchive}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE71C;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_ArchiveManagement}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                            <Button Click="OnUpdateDbClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_UpdateData}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE72C;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{helpers:Loc Key=AchievementWindow_UpdateData}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </SplitView.Pane>
+                <Grid>
+                    <GridView x:Name="CategoryGridView"
+                              Visibility="{x:Bind ViewModel.CategoryGridVisibility, Mode=OneWay}"
+                              ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}"
+                              SelectionMode="None" IsItemClickEnabled="True" ItemClick="OnCategoryGridItemClick"
+                              Padding="20">
+                        <GridView.RenderTransform>
+                            <TranslateTransform x:Name="GridTrans" Y="0" />
+                        </GridView.RenderTransform>
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="models:AchievementCategory">
+                                <Grid Width="200" Height="140" Background="{ThemeResource CardBackground}" CornerRadius="8"
+                                      Padding="16" BorderBrush="{ThemeResource CardBorder}" BorderThickness="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{x:Bind SafeIconUrl}" Width="48" Height="48"
+                                           HorizontalAlignment="Center" Margin="0,0,0,8" />
+                                    <TextBlock Grid.Row="1" Text="{x:Bind Name}"
+                                               Foreground="{ThemeResource HighlightColor}" FontWeight="Bold" FontSize="14"
+                                               HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" />
+                                    <StackPanel Grid.Row="2" Spacing="4">
+                                        <ProgressBar Value="{x:Bind ProgressPercent, Mode=OneWay}" Maximum="100" Height="2" />
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4">
+                                            <TextBlock Text="{x:Bind ProgressDisplay, Mode=OneWay}" FontSize="10"
+                                                       Foreground="{ThemeResource SubTextColor}" />
+                                            <TextBlock Text="{x:Bind ProgressPercentText, Mode=OneWay}" FontSize="10"
+                                                       Foreground="{ThemeResource SubTextColor}" />
                                         </StackPanel>
                                     </StackPanel>
                                 </Grid>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </GridView.ItemTemplate>
+                    </GridView>
 
-                    <ListView Grid.Column="1"
-                              ItemsSource="{x:Bind ViewModel.FilteredAchievements, Mode=OneWay}"
-                              SelectionMode="None" Padding="20">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                <Setter Property="Margin" Value="0,0,0,8" />
-                                <Setter Property="Padding" Value="0" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="models:AchievementItem">
-                                <Grid>
-                                    <ContentControl
-                                        Content="{x:Bind}"
-                                        ContentTemplate="{StaticResource AchievementCardTemplate}"
-                                        Visibility="{x:Bind SingleItemVisibility, Mode=OneWay}"
-                                        HorizontalContentAlignment="Stretch" />
+                    <Grid x:Name="DetailView" Visibility="{x:Bind ViewModel.DetailListVisibility, Mode=OneWay}">
+                        <Grid.RenderTransform>
+                            <TranslateTransform x:Name="DetailTrans" Y="0" />
+                        </Grid.RenderTransform>
 
-                                    <Expander
-                                        Visibility="{x:Bind GroupVisibility, Mode=OneWay}"
-                                        HorizontalAlignment="Stretch"
-                                        HorizontalContentAlignment="Stretch"
-                                        Background="{ThemeResource CardBackground}"
-                                        BorderBrush="{ThemeResource CardBorder}"
-                                        CornerRadius="6"
-                                        IsExpanded="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="280" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                                        <Expander.Header>
-                                            <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition Width="*" />
-                                                    <ColumnDefinition Width="Auto" />
-                                                </Grid.ColumnDefinitions>
+                        <ListView Grid.Column="0"
+                                  ItemsSource="{x:Bind ViewModel.Categories, Mode=OneWay}"
+                                  SelectedItem="{x:Bind ViewModel.SelectedCategory, Mode=TwoWay}"
+                                  SelectionChanged="OnCategorySelectionChanged"
+                                  Background="{ThemeResource SidebarBackground}" Padding="0,10">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:AchievementCategory">
+                                    <Grid Padding="8,8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="{x:Bind SafeIconUrl}" Width="32" Height="32" Margin="0,0,12,0" />
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{x:Bind Name}" Foreground="{ThemeResource HighlightColor}"
+                                                       FontSize="13" TextTrimming="CharacterEllipsis" />
+                                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                                <TextBlock Text="{x:Bind ProgressDisplay, Mode=OneWay}"
+                                                           Foreground="{ThemeResource SubTextColor}" FontSize="11" />
+                                                <TextBlock Text="{x:Bind ProgressPercentText, Mode=OneWay}"
+                                                           Foreground="{ThemeResource SubTextColor}" FontSize="11" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
-                                                <Image Source="{x:Bind SafeItemIconUrl}" Width="32" Height="32"
-                                                       Margin="0,0,12,0" />
+                        <ListView Grid.Column="1"
+                                  ItemsSource="{x:Bind ViewModel.FilteredAchievements, Mode=OneWay}"
+                                  SelectionMode="None" Padding="20">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="Margin" Value="0,0,0,8" />
+                                    <Setter Property="Padding" Value="0" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="models:AchievementItem">
+                                    <Grid>
+                                        <ContentControl
+                                            Content="{x:Bind}"
+                                            ContentTemplate="{StaticResource AchievementCardTemplate}"
+                                            Visibility="{x:Bind SingleItemVisibility, Mode=OneWay}"
+                                            HorizontalContentAlignment="Stretch" />
 
-                                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                    <TextBlock Text="{x:Bind Description}"
-                                                               Foreground="{ThemeResource SubTextColor}" FontSize="13"
-                                                               TextWrapping="Wrap" />
+                                        <Expander
+                                            Visibility="{x:Bind GroupVisibility, Mode=OneWay}"
+                                            HorizontalAlignment="Stretch"
+                                            HorizontalContentAlignment="Stretch"
+                                            Background="{ThemeResource CardBackground}"
+                                            BorderBrush="{ThemeResource CardBorder}"
+                                            CornerRadius="6"
+                                            IsExpanded="True">
 
-                                                    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,2,0,0">
-                                                        <TextBlock FontSize="10" Foreground="#FFFFCC00"
-                                                                   Visibility="{x:Bind ProgressVisibility, Mode=OneWay}">
-                                                            <Run Text="{helpers:Loc Key=AchievementWindow_Progress}" />
-                                                            <Run Text="{x:Bind ProgressText, Mode=OneWay}" />
-                                                        </TextBlock>
+                                            <Expander.Header>
+                                                <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
 
-                                                        <TextBlock FontSize="10"
-                                                                   Foreground="{ThemeResource SubTextColor}">
-                                                            <Run Text="v" /><Run Text="{x:Bind Version}" />
-                                                        </TextBlock>
+                                                    <Image Source="{x:Bind SafeItemIconUrl}" Width="32" Height="32"
+                                                           Margin="0,0,12,0" />
+
+                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                        <TextBlock Text="{x:Bind Description}"
+                                                                   Foreground="{ThemeResource SubTextColor}" FontSize="13"
+                                                                   TextWrapping="Wrap" />
+
+                                                        <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,2,0,0">
+                                                            <TextBlock FontSize="10" Foreground="#FFFFCC00"
+                                                                       Visibility="{x:Bind ProgressVisibility, Mode=OneWay}">
+                                                                <Run Text="{helpers:Loc Key=AchievementWindow_Progress}" />
+                                                                <Run Text="{x:Bind ProgressText, Mode=OneWay}" />
+                                                            </TextBlock>
+
+                                                            <TextBlock FontSize="10"
+                                                                       Foreground="{ThemeResource SubTextColor}">
+                                                                <Run Text="v" /><Run Text="{x:Bind Version}" />
+                                                            </TextBlock>
+                                                        </StackPanel>
                                                     </StackPanel>
-                                                </StackPanel>
 
-                                                <TextBlock Grid.Column="2"
-                                                           Text="{x:Bind GroupProgressText, Mode=OneWay}"
-                                                           VerticalAlignment="Center"
-                                                           Foreground="{ThemeResource SubTextColor}" FontSize="12"
-                                                           Margin="0,0,16,0" />
-                                            </Grid>
-                                        </Expander.Header>
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{x:Bind GroupProgressText, Mode=OneWay}"
+                                                               VerticalAlignment="Center"
+                                                               Foreground="{ThemeResource SubTextColor}" FontSize="12"
+                                                               Margin="0,0,16,0" />
+                                                </Grid>
+                                            </Expander.Header>
 
-                                        <ItemsControl ItemsSource="{x:Bind Children, Mode=OneWay}"
-                                                      Margin="-12,0,-12,-12">
-                                            <ItemsControl.ItemTemplate>
-                                                <DataTemplate x:DataType="models:AchievementItem">
-                                                    <Grid Background="{ThemeResource SidebarBackground}" Padding="12,8"
-                                                          BorderBrush="{ThemeResource SeparatorBrush}"
-                                                          BorderThickness="0,1,0,0"
-                                                          Opacity="{x:Bind Opacity, Mode=OneWay}">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="*" />
-                                                            <ColumnDefinition Width="Auto" />
-                                                        </Grid.ColumnDefinitions>
+                                            <ItemsControl ItemsSource="{x:Bind Children, Mode=OneWay}"
+                                                          Margin="-12,0,-12,-12">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate x:DataType="models:AchievementItem">
+                                                        <Grid Background="{ThemeResource SidebarBackground}" Padding="12,8"
+                                                              BorderBrush="{ThemeResource SeparatorBrush}"
+                                                              BorderThickness="0,1,0,0"
+                                                              Opacity="{x:Bind Opacity, Mode=OneWay}">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
 
-                                                        <Border Grid.Column="0"
-                                                                Background="{ThemeResource ImageBackgroundBrush}"
-                                                                CornerRadius="4" Padding="6,4"
-                                                                VerticalAlignment="Center" Margin="0,0,12,0"
-                                                                MinWidth="40">
-                                                            <StackPanel Orientation="Horizontal"
-                                                                        HorizontalAlignment="Center" Spacing="4">
-                                                                <Image Source="{x:Bind SafePrimogemUrl}" Width="16"
-                                                                       Height="16" />
-                                                                <TextBlock Text="{x:Bind RewardCount}"
+                                                            <Border Grid.Column="0"
+                                                                    Background="{ThemeResource ImageBackgroundBrush}"
+                                                                    CornerRadius="4" Padding="6,4"
+                                                                    VerticalAlignment="Center" Margin="0,0,12,0"
+                                                                    MinWidth="40">
+                                                                <StackPanel Orientation="Horizontal"
+                                                                            HorizontalAlignment="Center" Spacing="4">
+                                                                    <Image Source="{x:Bind SafePrimogemUrl}" Width="16"
+                                                                           Height="16" />
+                                                                    <TextBlock Text="{x:Bind RewardCount}"
+                                                                               Foreground="{ThemeResource HighlightColor}"
+                                                                               FontSize="12" FontWeight="Bold" />
+                                                                </StackPanel>
+                                                            </Border>
+
+                                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                                <TextBlock Text="{x:Bind Title}"
                                                                            Foreground="{ThemeResource HighlightColor}"
-                                                                           FontSize="12" FontWeight="Bold" />
-                                                            </StackPanel>
-                                                        </Border>
-
-                                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                                            <TextBlock Text="{x:Bind Title}"
-                                                                       Foreground="{ThemeResource HighlightColor}"
-                                                                       FontWeight="Bold" FontSize="14" Margin="0,0,0,4" />
-                                                            <TextBlock Text="{x:Bind Description}"
-                                                                       Foreground="{ThemeResource SubTextColor}"
-                                                                       FontSize="13" TextWrapping="Wrap" />
-                                                            <StackPanel Orientation="Horizontal" Spacing="8"
-                                                                        Margin="0,2,0,0">
-                                                                <StackPanel Orientation="Horizontal" Spacing="4"
-                                                                            Visibility="{x:Bind CompletionTimeVisibility, Mode=OneWay}">
-                                                                    <FontIcon Glyph="&#xE823;"
-                                                                              FontFamily="Segoe Fluent Icons"
-                                                                              FontSize="11"
-                                                                              Foreground="{ThemeResource SubTextColor}" />
-                                                                    <TextBlock
-                                                                        Text="{x:Bind CompletionTimeText, Mode=OneWay}"
-                                                                        Foreground="{ThemeResource SubTextColor}"
-                                                                        FontSize="11" />
+                                                                           FontWeight="Bold" FontSize="14" Margin="0,0,0,4" />
+                                                                <TextBlock Text="{x:Bind Description}"
+                                                                           Foreground="{ThemeResource SubTextColor}"
+                                                                           FontSize="13" TextWrapping="Wrap" />
+                                                                <StackPanel Orientation="Horizontal" Spacing="8"
+                                                                            Margin="0,2,0,0">
+                                                                    <StackPanel Orientation="Horizontal" Spacing="4"
+                                                                                Visibility="{x:Bind CompletionTimeVisibility, Mode=OneWay}">
+                                                                        <FontIcon Glyph="&#xE823;"
+                                                                                  FontFamily="Segoe Fluent Icons"
+                                                                                  FontSize="11"
+                                                                                  Foreground="{ThemeResource SubTextColor}" />
+                                                                        <TextBlock
+                                                                            Text="{x:Bind CompletionTimeText, Mode=OneWay}"
+                                                                            Foreground="{ThemeResource SubTextColor}"
+                                                                            FontSize="11" />
+                                                                    </StackPanel>
                                                                 </StackPanel>
                                                             </StackPanel>
-                                                        </StackPanel>
 
-                                                        <StackPanel Grid.Column="2" Orientation="Horizontal"
-                                                                    Spacing="12" VerticalAlignment="Center">
-                                                            <Button
-                                                                Content="{helpers:Loc Key=AchievementWindow_ViewGuide}"
-                                                                FontSize="11"
-                                                                Padding="6,3"
-                                                                Click="OnSearchGuideClick"
-                                                                ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_SearchGuideTooltip}" />
+                                                            <StackPanel Grid.Column="2" Orientation="Horizontal"
+                                                                        Spacing="12" VerticalAlignment="Center">
+                                                                <Button
+                                                                    Content="{helpers:Loc Key=AchievementWindow_ViewGuide}"
+                                                                    FontSize="11"
+                                                                    Padding="6,3"
+                                                                    Click="OnSearchGuideClick"
+                                                                    ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_SearchGuideTooltip}" />
 
-                                                            <CheckBox IsChecked="{x:Bind IsCompleted, Mode=TwoWay}"
-                                                                      VerticalAlignment="Center" />
-                                                        </StackPanel>
+                                                                <CheckBox IsChecked="{x:Bind IsCompleted, Mode=TwoWay}"
+                                                                          VerticalAlignment="Center" />
+                                                            </StackPanel>
 
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
-                                    </Expander>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Expander>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </SplitView>
         </Grid>
     </Grid>
 </Window>

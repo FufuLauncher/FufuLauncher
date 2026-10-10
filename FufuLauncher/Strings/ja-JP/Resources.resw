@@ -6236,4 +6236,25 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>値を入力…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>ヘッダーを折りたたむ</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>ヘッダーを展開</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>データ操作</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>インポートとエクスポート</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>プロファイルとデータベース</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>起動時にプラグインの署名を検証</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>既定ではオフです。有効にすると、下の警告または厳格なポリシーが適用されます。</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>検証を無効化</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>オフは署名検証を省略し、警告は検証して通知します。厳格は検証に失敗したプラグインをブロックします。</value>
+  </data>
 </root>

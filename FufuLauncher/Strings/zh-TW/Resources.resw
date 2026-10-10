@@ -6236,4 +6236,25 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>請輸入設定值…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>收合頂欄</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>展開頂欄</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>資料操作</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>匯入與匯出</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>存檔與資料庫</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>啟動時驗證外掛簽章</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>預設關閉；開啟後依下方策略驗證外掛簽章，關閉時略過驗證。</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>關閉驗證</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>關閉驗證：略過簽章驗證；僅提示：驗證並提醒，但允許載入；攔截：阻止未通過驗證的外掛載入。</value>
+  </data>
 </root>

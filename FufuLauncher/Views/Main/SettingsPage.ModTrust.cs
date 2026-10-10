@@ -16,6 +16,8 @@ public sealed partial class SettingsPage
     private CodeSigningTrustService TrustService => App.GetService<CodeSigningTrustService>();
 
     private bool _isSyncingModTrustMode;
+    private bool _isModTrustPackageVerified;
+    private ModTrustEnforcement _lastEnabledModTrustMode = ModTrustEnforcement.Warn;
 
     private async Task RefreshModTrustUiAsync()
     {
@@ -43,7 +45,8 @@ public sealed partial class SettingsPage
 
             if (ModTrustModeComboBox != null)
             {
-                ModTrustModeComboBox.IsEnabled = status.PackageVerified;
+                _isModTrustPackageVerified = status.PackageVerified;
+                ModTrustModeComboBox.IsEnabled = status.PackageVerified && LaunchSignatureVerificationToggle.IsOn;
             }
 
             if (ModTrustInstallUserButton != null)
@@ -168,8 +171,28 @@ public sealed partial class SettingsPage
             }
         }
 
-        ModTrustGate.WriteMode(mode);
-        Debug.WriteLine($"[ModTrust] 信任策略模式已切换为 {mode}");
+        SaveModTrustMode(mode);
+    }
+
+    private void OnLaunchSignatureVerificationToggled(object sender, RoutedEventArgs e)
+    {
+        if (_isSyncingModTrustMode || sender is not ToggleSwitch toggle) return;
+
+        var current = ModTrustGate.ReadMode();
+        var mode = toggle.IsOn ? _lastEnabledModTrustMode : ModTrustEnforcement.Off;
+        if (mode == current) return;
+
+        SaveModTrustMode(mode);
+    }
+
+    private void SaveModTrustMode(ModTrustEnforcement mode)
+    {
+        var saved = ModTrustGate.TryWriteMode(mode);
+        var current = ModTrustGate.ReadMode();
+        SelectModTrustMode(current);
+        Debug.WriteLine(saved
+            ? $"[ModTrust] 信任策略模式已切换为 {current}"
+            : "[ModTrust] 保存信任策略失败，已恢复当前设置");
     }
 
     private void SelectModTrustMode(ModTrustEnforcement mode)
@@ -179,6 +202,13 @@ public sealed partial class SettingsPage
         _isSyncingModTrustMode = true;
         try
         {
+            if (mode != ModTrustEnforcement.Off)
+            {
+                _lastEnabledModTrustMode = mode;
+            }
+
+            LaunchSignatureVerificationToggle.IsOn = mode != ModTrustEnforcement.Off;
+            ModTrustModeComboBox.IsEnabled = _isModTrustPackageVerified && LaunchSignatureVerificationToggle.IsOn;
             ModTrustModeComboBox.SelectedIndex = mode switch
             {
                 ModTrustEnforcement.Off => 0,

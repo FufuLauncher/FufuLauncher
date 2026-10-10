@@ -37,7 +37,6 @@ public sealed partial class AchievementWindow
                     IconUrl = catEntity.IconUrl,
                     Achievements = new ObservableCollection<AchievementItem>()
                 };
-                SetCategoryTitle(cat, cat.Name);
                 rawCategories.Add(cat);
                 categoryMap[cat.Name] = cat;
             }
@@ -57,6 +56,7 @@ public sealed partial class AchievementWindow
                 var item = JsonSerializer.Deserialize<AchievementItem>(rawJson, options);
                 if (item != null && categoryMap.TryGetValue(catName, out var cat))
                 {
+                    item.Id = ach.Id;
                     item.IsCompleted = isCompleted;
                     item.CurrentProgress = currentProgress;
                     item.MaxProgress = maxProgress;
@@ -116,25 +116,7 @@ public sealed partial class AchievementWindow
                 ViewModel.Categories.Add(cat);
             }
 
-            var versions = new HashSet<string> { "AchievementWindow_AllVersions".GetLocalized() };
-            foreach (var cat in ViewModel.Categories)
-            {
-                foreach (var item in cat.Achievements)
-                {
-                    if (item.IsGroup)
-                    {
-                        foreach (var child in item.Children)
-                            if (!string.IsNullOrEmpty(child.Version))
-                                versions.Add(child.Version);
-                    }
-                    else
-                    {
-                        if (!string.IsNullOrEmpty(item.Version)) versions.Add(item.Version);
-                    }
-                }
-            }
-
-            ViewModel.AvailableVersions = new ObservableCollection<string>(versions.OrderBy(v => v));
+            ViewModel.RefreshAvailableVersions("AchievementWindow_AllVersions".GetLocalized());
             ViewModel.SelectedCategory = ViewModel.Categories.FirstOrDefault();
 
             ApplyFilters();

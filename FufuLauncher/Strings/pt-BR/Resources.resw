@@ -6236,4 +6236,25 @@ Você pode tentar outro nó ou usar a fonte oficial direta.</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Insira um valor…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Recolher cabeçalho</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Expandir cabeçalho</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Ações de dados</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Importar e exportar</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Perfis e banco de dados</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Verificar assinaturas de plugins ao iniciar</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Desativado por padrão. Quando ativado, aplica-se a política de aviso ou bloqueio abaixo.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Verificação desativada</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Desativado ignora a verificação; avisar verifica sem bloquear; estrito bloqueia plugins que falham na verificação.</value>
+  </data>
 </root>
