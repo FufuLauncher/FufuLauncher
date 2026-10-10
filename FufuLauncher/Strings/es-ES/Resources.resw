@@ -6236,4 +6236,25 @@ Puedes reintentar con otro nodo o usar la fuente oficial directa.</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Introduce un valor…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Contraer encabezado</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Expandir encabezado</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Acciones de datos</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Importar y exportar</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Perfiles y base de datos</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Verificar firmas de complementos al iniciar</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Desactivado por defecto. Al activarlo se aplica la política de aviso o bloqueo de abajo.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Verificación desactivada</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Desactivado omite la verificación; avisar verifica sin bloquear; estricto bloquea los complementos que no superen la verificación.</value>
+  </data>
 </root>

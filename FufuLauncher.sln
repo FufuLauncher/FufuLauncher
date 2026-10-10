@@ -8,6 +8,7 @@ EndProject
 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateFufuLauncher", "UpdateFufuLauncher\UpdateFufuLauncher.csproj", "{C9C2A501-D32E-47B4-9D80-24146E055418}"
 EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|arm64 = Debug|arm64

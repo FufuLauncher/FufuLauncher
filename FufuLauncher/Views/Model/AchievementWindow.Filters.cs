@@ -68,7 +68,7 @@ public sealed partial class AchievementWindow
 
     private void ApplyFilters()
     {
-        string search = ViewModel.SearchText?.Trim().ToLower();
+        string? search = ViewModel.SearchText?.Trim();
         bool isGlobalSearch = !string.IsNullOrEmpty(search);
 
         IEnumerable<AchievementItem> sourceList;
@@ -88,59 +88,10 @@ public sealed partial class AchievementWindow
             sourceList = ViewModel.SelectedCategory.Achievements;
         }
 
-        var resultList = new List<AchievementItem>();
-        bool isFilterVer = ViewModel.SelectedVersion != "AchievementWindow_AllVersions".GetLocalized() &&
-                           !string.IsNullOrEmpty(ViewModel.SelectedVersion);
-
-        foreach (var item in sourceList)
-        {
-            if (item.IsGroup)
-            {
-                bool matchGroup = false;
-
-                if (isGlobalSearch)
-                {
-                    if (item.Title != null && item.Title.ToLower().Contains(search)) matchGroup = true;
-                    else if (item.Children.Any(c => c.Description != null && c.Description.ToLower().Contains(search)))
-                        matchGroup = true;
-                }
-                else
-                {
-                    matchGroup = true;
-                }
-
-                if (isFilterVer)
-                {
-                    if (item.Version != ViewModel.SelectedVersion &&
-                        !item.Children.Any(c => c.Version == ViewModel.SelectedVersion))
-                        matchGroup = false;
-                }
-
-                if (ViewModel.HideCompleted)
-                {
-                    if (item.Children.All(c => c.IsCompleted)) matchGroup = false;
-                }
-
-                if (matchGroup) resultList.Add(item);
-            }
-            else
-            {
-                bool match = true;
-
-                if (isGlobalSearch)
-                {
-                    if (!((item.Title != null && item.Title.ToLower().Contains(search)) ||
-                          (item.Description != null && item.Description.ToLower().Contains(search))))
-                        match = false;
-                }
-
-                if (ViewModel.HideCompleted && item.IsCompleted) match = false;
-
-                if (isFilterVer && item.Version != ViewModel.SelectedVersion) match = false;
-
-                if (match) resultList.Add(item);
-            }
-        }
+        var version = ViewModel.SelectedVersion == "AchievementWindow_AllVersions".GetLocalized()
+            ? null
+            : ViewModel.SelectedVersion;
+        var resultList = AchievementFilter.Apply(sourceList, search, ViewModel.HideCompleted, version);
 
         ViewModel.FilteredAchievements.Clear();
         foreach (var item in resultList) ViewModel.FilteredAchievements.Add(item);
@@ -150,6 +101,9 @@ public sealed partial class AchievementWindow
 
     private void OnToggleViewMode(object sender, RoutedEventArgs e) =>
         ViewModel.IsCategoryGridMode = !ViewModel.IsCategoryGridMode;
+
+    private void OnToggleOperationsClick(object sender, RoutedEventArgs e) =>
+        AchievementWorkspace.IsPaneOpen = !AchievementWorkspace.IsPaneOpen;
 
     private void OnCategoryGridItemClick(object sender, ItemClickEventArgs e)
     {

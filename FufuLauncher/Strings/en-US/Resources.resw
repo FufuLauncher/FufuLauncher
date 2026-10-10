@@ -6961,10 +6961,10 @@ Error: {0}</value>
     <value>Action for invalid signatures</value>
   </data>
   <data name="ModTrust_ModeCaption" xml:space="preserve">
-    <value>Choose what happens to files that fail signature verification: do nothing (still load), notify only (load and warn), or block (stop loading)</value>
+    <value>Off skips signature verification; notify verifies and warns without blocking; strict blocks plugins that fail verification.</value>
   </data>
   <data name="ModTrust_ModeOff" xml:space="preserve">
-    <value>Do nothing</value>
+    <value>Verification off</value>
   </data>
   <data name="ModTrust_ModeWarn" xml:space="preserve">
     <value>Notify only</value>
@@ -7079,4 +7079,19 @@ Error: {0}</value>
   <data name="Checkin_Game_bh2_cn" xml:space="preserve"><value>Houkai Gakuen 2</value></data>
   <data name="Checkin_Game_nxx_cn" xml:space="preserve"><value>Tears of Themis</value></data>
   <data name="Checkin_RequestTooFrequent" xml:space="preserve"><value>Requests are too frequent. Please try again later.</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Data actions</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Import and export</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Profiles and database</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Verify plugin signatures at launch</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Disabled by default. When enabled, the warning or strict policy below applies.</value>
+  </data>
 </root>

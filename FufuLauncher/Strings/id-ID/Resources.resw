@@ -6236,4 +6236,25 @@ Anda dapat mencoba node lain atau menggunakan sumber resmi langsung.</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Masukkan nilai…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Ciutkan header</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Perluas header</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Tindakan data</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Impor dan ekspor</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Profil dan basis data</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Verifikasi tanda tangan plugin saat mulai</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Nonaktif secara bawaan. Jika aktif, kebijakan peringatan atau ketat di bawah berlaku.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Verifikasi nonaktif</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Nonaktif melewati verifikasi; peringatan memverifikasi tanpa memblokir; ketat memblokir plugin yang gagal verifikasi.</value>
+  </data>
 </root>

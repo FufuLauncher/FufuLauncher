@@ -6713,4 +6713,25 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>मान दर्ज करें…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>शीर्ष पट्टी समेटें</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>शीर्ष पट्टी फैलाएँ</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>डेटा कार्रवाइयाँ</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>आयात और निर्यात</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>प्रोफ़ाइल और डेटाबेस</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>लॉन्च पर प्लगइन हस्ताक्षर जाँचें</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>डिफ़ॉल्ट रूप से बंद है। चालू होने पर नीचे की चेतावनी या सख्त नीति लागू होती है।</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>जाँच बंद</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>बंद होने पर हस्ताक्षर जाँच नहीं होती; चेतावनी मोड बिना रोके जाँचता है; सख्त मोड असफल प्लगइन को रोकता है।</value>
+  </data>
 </root>

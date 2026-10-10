@@ -6236,4 +6236,25 @@ Versuchen Sie einen anderen Knoten oder die direkte offizielle Quelle.</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Wert eingeben…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Kopfbereich einklappen</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Kopfbereich ausklappen</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Datenaktionen</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Import und Export</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Spielstände und Datenbank</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Plug-in-Signaturen beim Start prüfen</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Standardmäßig deaktiviert. Bei Aktivierung gilt die nachfolgende Warn- oder Blockierregel.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Prüfung deaktiviert</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Aus überspringt die Signaturprüfung; Warnen prüft und meldet ohne zu blockieren; Streng blockiert Plug-ins mit ungültiger Signatur.</value>
+  </data>
 </root>

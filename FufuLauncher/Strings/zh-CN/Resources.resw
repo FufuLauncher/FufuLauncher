@@ -6959,10 +6959,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>签名无效时的处理</value>
   </data>
   <data name="ModTrust_ModeCaption" xml:space="preserve">
-    <value>选择对未通过签名校验的文件执行的操作：不操作（照常加载）、仅提示（加载并提醒）、拦截（停止加载）</value>
+    <value>关闭校验：跳过签名校验；仅提示：校验并提醒，但允许加载；拦截：阻止未通过校验的插件加载。</value>
   </data>
   <data name="ModTrust_ModeOff" xml:space="preserve">
-    <value>不操作</value>
+    <value>关闭校验</value>
   </data>
   <data name="ModTrust_ModeWarn" xml:space="preserve">
     <value>仅提示</value>
@@ -7077,4 +7077,19 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Checkin_Game_bh2_cn" xml:space="preserve"><value>崩坏学园2</value></data>
   <data name="Checkin_Game_nxx_cn" xml:space="preserve"><value>未定事件簿</value></data>
   <data name="Checkin_RequestTooFrequent" xml:space="preserve"><value>请求过于频繁，请稍后重试</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>数据操作</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>导入与导出</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>存档与数据库</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>启动时校验插件签名</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>默认关闭；开启后按下方策略校验插件签名，关闭时跳过校验。</value>
+  </data>
 </root>

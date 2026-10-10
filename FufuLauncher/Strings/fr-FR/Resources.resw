@@ -6235,4 +6235,25 @@ Réessayez avec un autre nœud ou utilisez la source officielle directe.</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>Saisissez une valeur…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>Réduire l’en-tête</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>Développer l’en-tête</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>Actions sur les données</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>Importation et exportation</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>Profils et base de données</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>Vérifier les signatures des extensions au lancement</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>Désactivé par défaut. Une fois activé, la politique d’avertissement ou de blocage ci-dessous s’applique.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>Vérification désactivée</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>Désactivé ignore la vérification ; avertir vérifie sans bloquer ; strict bloque les extensions dont la signature est invalide.</value>
+  </data>
 </root>

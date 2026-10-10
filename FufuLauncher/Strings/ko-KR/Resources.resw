@@ -6236,4 +6236,25 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigPage_ValuePlaceholder" xml:space="preserve"><value>값을 입력하세요…</value></data>
   <data name="PluginSettings_CollapseHeader" xml:space="preserve"><value>상단 영역 접기</value></data>
   <data name="PluginSettings_ExpandHeader" xml:space="preserve"><value>상단 영역 펼치기</value></data>
+  <data name="AchievementWindow_DataActions" xml:space="preserve">
+    <value>데이터 작업</value>
+  </data>
+  <data name="AchievementWindow_DataTransfer" xml:space="preserve">
+    <value>가져오기 및 내보내기</value>
+  </data>
+  <data name="AchievementWindow_SaveManagement" xml:space="preserve">
+    <value>프로필 및 데이터베이스</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationTitle" xml:space="preserve">
+    <value>시작 시 플러그인 서명 확인</value>
+  </data>
+  <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
+    <value>기본적으로 꺼져 있습니다. 켜면 아래의 경고 또는 엄격한 정책이 적용됩니다.</value>
+  </data>
+  <data name="ModTrust_ModeOff" xml:space="preserve">
+    <value>확인 끄기</value>
+  </data>
+  <data name="ModTrust_ModeCaption" xml:space="preserve">
+    <value>끄기는 서명 확인을 건너뛰고, 경고는 차단 없이 확인합니다. 엄격은 확인에 실패한 플러그인을 차단합니다.</value>
+  </data>
 </root>

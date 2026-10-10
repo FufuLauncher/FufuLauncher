@@ -176,10 +176,88 @@ public class AchievementRepository
         }
     }
 
-    public HashSet<int> GetExistingAchievementIds()
+    public (int AddedCategories, int AddedAchievements, int UpdatedAchievements) SynchronizeCatalog(
+        IEnumerable<(string Name, string? IconUrl)> categories, IReadOnlyCollection<AchievementEntity> achievements)
     {
         using var context = CreateContext();
-        return context.Achievements.Select(a => a.Id).ToHashSet();
+        using var transaction = context.Database.BeginTransaction();
+
+        var existingCategories = context.Categories.ToDictionary(c => c.Name, StringComparer.Ordinal);
+        var addedCategories = 0;
+        foreach (var (name, iconUrl) in categories)
+        {
+            if (existingCategories.TryGetValue(name, out var category))
+            {
+                category.IconUrl = iconUrl;
+            }
+            else
+            {
+                category = new AchievementCategoryEntity { Name = name, IconUrl = iconUrl };
+                context.Categories.Add(category);
+                existingCategories.Add(name, category);
+                addedCategories++;
+            }
+        }
+
+        var existingAchievements = context.Achievements.OrderBy(a => a.Uid).ToList();
+        var identities = existingAchievements.ToDictionary(a => a, AchievementIdentity.FromEntity);
+        var byId = existingAchievements.Where(a => a.Id > 0).ToLookup(a => a.Id);
+        var byIdentity = existingAchievements.ToLookup(a => identities[a]);
+        var matchedAchievements = new HashSet<AchievementEntity>();
+        var seenAchievements = new HashSet<(int Id, AchievementIdentity Identity)>();
+        var addedAchievements = 0;
+        var updatedAchievements = 0;
+
+        foreach (var achievement in achievements)
+        {
+            var identity = AchievementIdentity.FromEntity(achievement);
+            if (!seenAchievements.Add((achievement.Id, identity)))
+            {
+                continue;
+            }
+
+            AchievementEntity? existing = null;
+            if (achievement.Id > 0)
+            {
+                var candidates = byId[achievement.Id].Where(a => !matchedAchievements.Contains(a)).ToList();
+                existing = candidates.FirstOrDefault(a => identities[a] == identity)
+                           ?? candidates.FirstOrDefault(a => identities[a].StageIndex == identity.StageIndex)
+                           ?? candidates.FirstOrDefault();
+            }
+
+            existing ??= byIdentity[identity].FirstOrDefault(a =>
+                !matchedAchievements.Contains(a) &&
+                (!string.IsNullOrEmpty(identity.SeriesId) || achievement.Id <= 0 || a.Id <= 0 ||
+                 a.Id == achievement.Id));
+
+            if (existing == null)
+            {
+                context.Achievements.Add(achievement);
+                addedAchievements++;
+                continue;
+            }
+
+            matchedAchievements.Add(existing);
+            var id = achievement.Id > 0 ? achievement.Id : existing.Id;
+            var maxProgress = achievement.MaxProgress > 0 ? achievement.MaxProgress : existing.MaxProgress;
+            if (existing.Id == id && existing.Title == achievement.Title &&
+                existing.CategoryName == achievement.CategoryName && existing.RawJson == achievement.RawJson &&
+                existing.MaxProgress == maxProgress)
+            {
+                continue;
+            }
+
+            existing.Id = id;
+            existing.Title = achievement.Title;
+            existing.CategoryName = achievement.CategoryName;
+            existing.RawJson = achievement.RawJson;
+            existing.MaxProgress = maxProgress;
+            updatedAchievements++;
+        }
+
+        context.SaveChanges();
+        transaction.Commit();
+        return (addedCategories, addedAchievements, updatedAchievements);
     }
 
     public void InsertAchievement(AchievementEntity achievement)

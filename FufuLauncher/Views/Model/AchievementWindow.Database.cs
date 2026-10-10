@@ -16,14 +16,22 @@ namespace FufuLauncher.Views;
 
 public sealed partial class AchievementWindow
 {
+    private static readonly JsonSerializerOptions _achievementReadOptions = new()
+    {
+        PropertyNameCaseInsensitive = true,
+        NumberHandling = JsonNumberHandling.AllowReadingFromString,
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
+    private static readonly JsonSerializerOptions _achievementWriteOptions = new()
+    {
+        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
+
     private void EnsureDatabaseExists(string dbPath)
     {
         bool isNewDb = !File.Exists(dbPath);
-
-        // EF Core EnsureCreated handles table creation when repository is first used.
-        // Trigger it by accessing the repository, which calls EnsureCreated on the DbContext.
-        // No need for ad-hoc PRAGMA + ALTER TABLE migrations anymore.
-
         if (isNewDb)
         {
             string oldJsonPath = Path.Combine(Path.GetDirectoryName(dbPath)!, "achievements.json");
@@ -47,62 +55,54 @@ public sealed partial class AchievementWindow
         }
         catch (IOException ex)
         {
-            System.Diagnostics.Debug.WriteLine(
-                $"[AchievementWindow] 读取成就文件失败 ({jsonPath}): {ex.Message}");
+            Debug.WriteLine($"[AchievementWindow] 读取成就文件失败 ({jsonPath}): {ex.Message}");
             return;
         }
 
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            NumberHandling = JsonNumberHandling.AllowReadingFromString,
-            ReadCommentHandling = JsonCommentHandling.Skip,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-
-        List<AchievementCategory> rawCategories;
+        List<AchievementCategory>? rawCategories;
         try
         {
-            rawCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(jsonContent, options);
+            rawCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(jsonContent, _achievementReadOptions);
         }
         catch (JsonException ex)
         {
-            System.Diagnostics.Debug.WriteLine(
-                $"[AchievementWindow] 成就 JSON 解析失败 ({jsonPath}): {ex.Message}");
+            Debug.WriteLine($"[AchievementWindow] 成就 JSON 解析失败 ({jsonPath}): {ex.Message}");
             return;
         }
 
         if (rawCategories == null) return;
 
-        var writeOptions = new JsonSerializerOptions
-            { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+        _achievementRepo.ChangeDatabase(dbPath);
+        _achievementRepo.SynchronizeCatalog(
+            rawCategories.Select(cat => (GetCategoryName(cat), cat.IconUrl)),
+            CreateAchievementEntities(rawCategories));
+    }
 
-        var categoryEntries = rawCategories.Select(cat => (GetCategoryName(cat), cat.IconUrl)).ToList();
-        _achievementRepo.InsertOrIgnoreCategories(categoryEntries);
-
+    private static List<AchievementEntity> CreateAchievementEntities(IEnumerable<AchievementCategory> categories)
+    {
         var achievements = new List<AchievementEntity>();
-        foreach (var cat in rawCategories)
+        foreach (var category in categories)
         {
-            string categoryName = GetCategoryName(cat);
-            if (cat.Achievements == null) continue;
+            if (category.Achievements == null) continue;
 
-            foreach (var item in cat.Achievements)
+            var categoryName = GetCategoryName(category);
+            foreach (var item in category.Achievements)
             {
                 achievements.Add(new AchievementEntity
                 {
                     Id = item.Id,
                     Title = item.Title ?? "",
                     CategoryName = categoryName,
-                    RawJson = JsonSerializer.Serialize(item, writeOptions),
+                    RawJson = JsonSerializer.Serialize(item, _achievementWriteOptions),
                     IsCompleted = item.IsCompleted ? 1 : 0,
                     CurrentProgress = item.CurrentProgress,
                     MaxProgress = item.MaxProgress,
-                    CompletionTimestamp = 0
+                    CompletionTimestamp = item.CompletionTimestamp
                 });
             }
         }
 
-        _achievementRepo.InsertAchievements(achievements);
+        return achievements;
     }
 
     private async Task SyncWithAssetsDatabase()
@@ -120,64 +120,22 @@ public sealed partial class AchievementWindow
                 return;
             }
 
-            string masterJson = await File.ReadAllTextAsync(_assetsFilePath);
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true, NumberHandling = JsonNumberHandling.AllowReadingFromString,
-                ReadCommentHandling = JsonCommentHandling.Skip, PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            };
-            var masterCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(masterJson, options);
+            var masterJson = await File.ReadAllTextAsync(_assetsFilePath);
+            var masterCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(
+                masterJson, _achievementReadOptions) ?? throw new JsonException("成就列表为空或格式无效");
 
             EnsureDatabaseExists(_workFilePath);
-
             _achievementRepo.ChangeDatabase(_workFilePath);
 
-            var existingIds = _achievementRepo.GetExistingAchievementIds();
+            var result = _achievementRepo.SynchronizeCatalog(
+                masterCategories.Select(cat => (GetCategoryName(cat), cat.IconUrl)),
+                CreateAchievementEntities(masterCategories));
 
-            int addedCount = 0;
-            int newCategoriesCount = 0;
-            var writeOptions = new JsonSerializerOptions
-                { Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-
-            var newCategories = new List<(string, string?)>();
-            var newAchievements = new List<AchievementEntity>();
-
-            foreach (var masterCat in masterCategories)
+            LoadData();
+            if (result.AddedCategories > 0 || result.AddedAchievements > 0 || result.UpdatedAchievements > 0)
             {
-                string categoryName = GetCategoryName(masterCat);
-                newCategories.Add((categoryName, masterCat.IconUrl));
-
-                if (masterCat.Achievements == null) continue;
-
-                foreach (var item in masterCat.Achievements)
-                {
-                    if (!existingIds.Contains(item.Id))
-                    {
-                        newAchievements.Add(new AchievementEntity
-                        {
-                            Id = item.Id,
-                            Title = item.Title ?? "",
-                            CategoryName = categoryName,
-                            RawJson = JsonSerializer.Serialize(item, writeOptions),
-                            IsCompleted = item.IsCompleted ? 1 : 0,
-                            CurrentProgress = item.CurrentProgress,
-                            MaxProgress = item.MaxProgress,
-                            CompletionTimestamp = 0
-                        });
-                        addedCount++;
-                        existingIds.Add(item.Id);
-                    }
-                }
-            }
-
-            newCategoriesCount = _achievementRepo.InsertOrIgnoreCategories(newCategories);
-            if (newAchievements.Count > 0)
-                _achievementRepo.InsertAchievements(newAchievements);
-
-            if (addedCount > 0)
-            {
-                LoadData();
-                await ShowDialogAsync("数据库更新", $"同步成功！\n新增分类: {newCategoriesCount} 个\n新增成就: {addedCount} 个");
+                await ShowDialogAsync("数据库更新",
+                    $"同步成功！\n新增分类: {result.AddedCategories} 个\n新增成就: {result.AddedAchievements} 个\n更新成就信息: {result.UpdatedAchievements} 个");
             }
             else
             {
@@ -197,28 +155,10 @@ public sealed partial class AchievementWindow
         }
     }
 
-    private string GetCategoryName(AchievementCategory cat)
-    {
-        var props = typeof(AchievementCategory).GetProperties();
-        var titleProp = props.FirstOrDefault(p => p.Name.Equals("Title", StringComparison.OrdinalIgnoreCase));
-        var nameProp = props.FirstOrDefault(p => p.Name.Equals("Name", StringComparison.OrdinalIgnoreCase));
-
-        string name = null;
-        if (titleProp != null) name = titleProp.GetValue(cat) as string;
-        if (string.IsNullOrEmpty(name) && nameProp != null) name = nameProp.GetValue(cat) as string;
-
-        return string.IsNullOrEmpty(name) ? "AchievementWindow_UnknownCategory".GetLocalized() : name;
-    }
-
-    private void SetCategoryTitle(AchievementCategory cat, string title)
-    {
-        var props = typeof(AchievementCategory).GetProperties();
-        var titleProp = props.FirstOrDefault(p => p.Name.Equals("Title", StringComparison.OrdinalIgnoreCase));
-        if (titleProp != null && titleProp.CanWrite)
-        {
-            titleProp.SetValue(cat, title);
-        }
-    }
+    private static string GetCategoryName(AchievementCategory category) =>
+        string.IsNullOrWhiteSpace(category.Name)
+            ? "AchievementWindow_UnknownCategory".GetLocalized()
+            : category.Name;
 
     private async void OnUpdateDbClick(object sender, RoutedEventArgs e)
     {
@@ -233,7 +173,6 @@ public sealed partial class AchievementWindow
         };
 
         var result = await confirmDialog.ShowAsync();
-
         if (result == ContentDialogResult.Primary)
         {
             await SyncWithAssetsDatabase();
