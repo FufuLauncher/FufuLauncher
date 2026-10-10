@@ -1,0 +1,3057 @@
+{
+  "Version": "7.1",
+  "GeneratedAt": "2026-10-10T13:32:55.9001898+00:00",
+  "Items": [
+    {
+      "Name": "神里绫华",
+      "NameEn": "Kamisato Ayaka",
+      "ImgSrc": "UI_AvatarIcon_Ayaka",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000002"
+    },
+    {
+      "Name": "琴",
+      "NameEn": "Jean",
+      "ImgSrc": "UI_AvatarIcon_Qin",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000003"
+    },
+    {
+      "Name": "芭芭拉",
+      "NameEn": "Barbara",
+      "ImgSrc": "UI_AvatarIcon_Barbara",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000014"
+    },
+    {
+      "Name": "凯亚",
+      "NameEn": "Kaeya",
+      "ImgSrc": "UI_AvatarIcon_Kaeya",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000015"
+    },
+    {
+      "Name": "迪卢克",
+      "NameEn": "Diluc",
+      "ImgSrc": "UI_AvatarIcon_Diluc",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000016"
+    },
+    {
+      "Name": "雷泽",
+      "NameEn": "Razor",
+      "ImgSrc": "UI_AvatarIcon_Razor",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000020"
+    },
+    {
+      "Name": "安柏",
+      "NameEn": "Amber",
+      "ImgSrc": "UI_AvatarIcon_Ambor",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000021"
+    },
+    {
+      "Name": "温迪",
+      "NameEn": "Venti",
+      "ImgSrc": "UI_AvatarIcon_Venti",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000022"
+    },
+    {
+      "Name": "香菱",
+      "NameEn": "Xiangling",
+      "ImgSrc": "UI_AvatarIcon_Xiangling",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000023"
+    },
+    {
+      "Name": "北斗",
+      "NameEn": "Beidou",
+      "ImgSrc": "UI_AvatarIcon_Beidou",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000024"
+    },
+    {
+      "Name": "行秋",
+      "NameEn": "Xingqiu",
+      "ImgSrc": "UI_AvatarIcon_Xingqiu",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000025"
+    },
+    {
+      "Name": "魈",
+      "NameEn": "Xiao",
+      "ImgSrc": "UI_AvatarIcon_Xiao",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000026"
+    },
+    {
+      "Name": "凝光",
+      "NameEn": "Ningguang",
+      "ImgSrc": "UI_AvatarIcon_Ningguang",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000027"
+    },
+    {
+      "Name": "可莉",
+      "NameEn": "Klee",
+      "ImgSrc": "UI_AvatarIcon_Klee",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000029"
+    },
+    {
+      "Name": "钟离",
+      "NameEn": "Zhongli",
+      "ImgSrc": "UI_AvatarIcon_Zhongli",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000030"
+    },
+    {
+      "Name": "菲谢尔",
+      "NameEn": "Fischl",
+      "ImgSrc": "UI_AvatarIcon_Fischl",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000031"
+    },
+    {
+      "Name": "班尼特",
+      "NameEn": "Bennett",
+      "ImgSrc": "UI_AvatarIcon_Bennett",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000032"
+    },
+    {
+      "Name": "达达利亚",
+      "NameEn": "Tartaglia",
+      "ImgSrc": "UI_AvatarIcon_Tartaglia",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000033"
+    },
+    {
+      "Name": "诺艾尔",
+      "NameEn": "Noelle",
+      "ImgSrc": "UI_AvatarIcon_Noel",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000034"
+    },
+    {
+      "Name": "七七",
+      "NameEn": "Qiqi",
+      "ImgSrc": "UI_AvatarIcon_Qiqi",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000035"
+    },
+    {
+      "Name": "重云",
+      "NameEn": "Chongyun",
+      "ImgSrc": "UI_AvatarIcon_Chongyun",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000036"
+    },
+    {
+      "Name": "甘雨",
+      "NameEn": "Ganyu",
+      "ImgSrc": "UI_AvatarIcon_Ganyu",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000037"
+    },
+    {
+      "Name": "阿贝多",
+      "NameEn": "Albedo",
+      "ImgSrc": "UI_AvatarIcon_Albedo",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000038"
+    },
+    {
+      "Name": "迪奥娜",
+      "NameEn": "Diona",
+      "ImgSrc": "UI_AvatarIcon_Diona",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000039"
+    },
+    {
+      "Name": "莫娜",
+      "NameEn": "Mona",
+      "ImgSrc": "UI_AvatarIcon_Mona",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000041"
+    },
+    {
+      "Name": "刻晴",
+      "NameEn": "Keqing",
+      "ImgSrc": "UI_AvatarIcon_Keqing",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000042"
+    },
+    {
+      "Name": "砂糖",
+      "NameEn": "Sucrose",
+      "ImgSrc": "UI_AvatarIcon_Sucrose",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000043"
+    },
+    {
+      "Name": "辛焱",
+      "NameEn": "Xinyan",
+      "ImgSrc": "UI_AvatarIcon_Xinyan",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000044"
+    },
+    {
+      "Name": "罗莎莉亚",
+      "NameEn": "Rosaria",
+      "ImgSrc": "UI_AvatarIcon_Rosaria",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000045"
+    },
+    {
+      "Name": "胡桃",
+      "NameEn": "Hu Tao",
+      "ImgSrc": "UI_AvatarIcon_Hutao",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000046"
+    },
+    {
+      "Name": "枫原万叶",
+      "NameEn": "Kaedehara Kazuha",
+      "ImgSrc": "UI_AvatarIcon_Kazuha",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000047"
+    },
+    {
+      "Name": "烟绯",
+      "NameEn": "Yanfei",
+      "ImgSrc": "UI_AvatarIcon_Feiyan",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000048"
+    },
+    {
+      "Name": "宵宫",
+      "NameEn": "Yoimiya",
+      "ImgSrc": "UI_AvatarIcon_Yoimiya",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000049"
+    },
+    {
+      "Name": "托马",
+      "NameEn": "Thoma",
+      "ImgSrc": "UI_AvatarIcon_Tohma",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000050"
+    },
+    {
+      "Name": "优菈",
+      "NameEn": "Eula",
+      "ImgSrc": "UI_AvatarIcon_Eula",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000051"
+    },
+    {
+      "Name": "雷电将军",
+      "NameEn": "Raiden Shogun",
+      "ImgSrc": "UI_AvatarIcon_Shougun",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000052"
+    },
+    {
+      "Name": "早柚",
+      "NameEn": "Sayu",
+      "ImgSrc": "UI_AvatarIcon_Sayu",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000053"
+    },
+    {
+      "Name": "珊瑚宫心海",
+      "NameEn": "Sangonomiya Kokomi",
+      "ImgSrc": "UI_AvatarIcon_Kokomi",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000054"
+    },
+    {
+      "Name": "五郎",
+      "NameEn": "Gorou",
+      "ImgSrc": "UI_AvatarIcon_Gorou",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000055"
+    },
+    {
+      "Name": "九条裟罗",
+      "NameEn": "Kujou Sara",
+      "ImgSrc": "UI_AvatarIcon_Sara",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000056"
+    },
+    {
+      "Name": "荒泷一斗",
+      "NameEn": "Arataki Itto",
+      "ImgSrc": "UI_AvatarIcon_Itto",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000057"
+    },
+    {
+      "Name": "八重神子",
+      "NameEn": "Yae Miko",
+      "ImgSrc": "UI_AvatarIcon_Yae",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000058"
+    },
+    {
+      "Name": "鹿野院平藏",
+      "NameEn": "Shikanoin Heizou",
+      "ImgSrc": "UI_AvatarIcon_Heizo",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000059"
+    },
+    {
+      "Name": "夜兰",
+      "NameEn": "Yelan",
+      "ImgSrc": "UI_AvatarIcon_Yelan",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000060"
+    },
+    {
+      "Name": "绮良良",
+      "NameEn": "Kirara",
+      "ImgSrc": "UI_AvatarIcon_Momoka",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000061"
+    },
+    {
+      "Name": "申鹤",
+      "NameEn": "Shenhe",
+      "ImgSrc": "UI_AvatarIcon_Shenhe",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000063"
+    },
+    {
+      "Name": "云堇",
+      "NameEn": "Yun Jin",
+      "ImgSrc": "UI_AvatarIcon_Yunjin",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000064"
+    },
+    {
+      "Name": "久岐忍",
+      "NameEn": "Kuki Shinobu",
+      "ImgSrc": "UI_AvatarIcon_Shinobu",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000065"
+    },
+    {
+      "Name": "神里绫人",
+      "NameEn": "Kamisato Ayato",
+      "ImgSrc": "UI_AvatarIcon_Ayato",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000066"
+    },
+    {
+      "Name": "柯莱",
+      "NameEn": "Collei",
+      "ImgSrc": "UI_AvatarIcon_Collei",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000067"
+    },
+    {
+      "Name": "多莉",
+      "NameEn": "Dori",
+      "ImgSrc": "UI_AvatarIcon_Dori",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000068"
+    },
+    {
+      "Name": "提纳里",
+      "NameEn": "Tighnari",
+      "ImgSrc": "UI_AvatarIcon_Tighnari",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000069"
+    },
+    {
+      "Name": "妮露",
+      "NameEn": "Nilou",
+      "ImgSrc": "UI_AvatarIcon_Nilou",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000070"
+    },
+    {
+      "Name": "赛诺",
+      "NameEn": "Cyno",
+      "ImgSrc": "UI_AvatarIcon_Cyno",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000071"
+    },
+    {
+      "Name": "坎蒂丝",
+      "NameEn": "Candace",
+      "ImgSrc": "UI_AvatarIcon_Candace",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000072"
+    },
+    {
+      "Name": "纳西妲",
+      "NameEn": "Nahida",
+      "ImgSrc": "UI_AvatarIcon_Nahida",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000073"
+    },
+    {
+      "Name": "莱依拉",
+      "NameEn": "Layla",
+      "ImgSrc": "UI_AvatarIcon_Layla",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000074"
+    },
+    {
+      "Name": "流浪者",
+      "NameEn": "Wanderer",
+      "ImgSrc": "UI_AvatarIcon_Wanderer",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000075"
+    },
+    {
+      "Name": "珐露珊",
+      "NameEn": "Faruzan",
+      "ImgSrc": "UI_AvatarIcon_Faruzan",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000076"
+    },
+    {
+      "Name": "瑶瑶",
+      "NameEn": "Yaoyao",
+      "ImgSrc": "UI_AvatarIcon_Yaoyao",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000077"
+    },
+    {
+      "Name": "艾尔海森",
+      "NameEn": "Alhaitham",
+      "ImgSrc": "UI_AvatarIcon_Alhatham",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000078"
+    },
+    {
+      "Name": "迪希雅",
+      "NameEn": "Dehya",
+      "ImgSrc": "UI_AvatarIcon_Dehya",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000079"
+    },
+    {
+      "Name": "米卡",
+      "NameEn": "Mika",
+      "ImgSrc": "UI_AvatarIcon_Mika",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000080"
+    },
+    {
+      "Name": "卡维",
+      "NameEn": "Kaveh",
+      "ImgSrc": "UI_AvatarIcon_Kaveh",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000081"
+    },
+    {
+      "Name": "白术",
+      "NameEn": "Baizhu",
+      "ImgSrc": "UI_AvatarIcon_Baizhuer",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000082"
+    },
+    {
+      "Name": "琳妮特",
+      "NameEn": "Lynette",
+      "ImgSrc": "UI_AvatarIcon_Linette",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000083"
+    },
+    {
+      "Name": "林尼",
+      "NameEn": "Lyney",
+      "ImgSrc": "UI_AvatarIcon_Liney",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000084"
+    },
+    {
+      "Name": "菲米尼",
+      "NameEn": "Freminet",
+      "ImgSrc": "UI_AvatarIcon_Freminet",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000085"
+    },
+    {
+      "Name": "莱欧斯利",
+      "NameEn": "Wriothesley",
+      "ImgSrc": "UI_AvatarIcon_Wriothesley",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000086"
+    },
+    {
+      "Name": "那维莱特",
+      "NameEn": "Neuvillette",
+      "ImgSrc": "UI_AvatarIcon_Neuvillette",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000087"
+    },
+    {
+      "Name": "夏洛蒂",
+      "NameEn": "Charlotte",
+      "ImgSrc": "UI_AvatarIcon_Charlotte",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000088"
+    },
+    {
+      "Name": "芙宁娜",
+      "NameEn": "Furina",
+      "ImgSrc": "UI_AvatarIcon_Furina",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000089"
+    },
+    {
+      "Name": "夏沃蕾",
+      "NameEn": "Chevreuse",
+      "ImgSrc": "UI_AvatarIcon_Chevreuse",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000090"
+    },
+    {
+      "Name": "娜维娅",
+      "NameEn": "Navia",
+      "ImgSrc": "UI_AvatarIcon_Navia",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000091"
+    },
+    {
+      "Name": "嘉明",
+      "NameEn": "Gaming",
+      "ImgSrc": "UI_AvatarIcon_Gaming",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000092"
+    },
+    {
+      "Name": "闲云",
+      "NameEn": "Xianyun",
+      "ImgSrc": "UI_AvatarIcon_Liuyun",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000093"
+    },
+    {
+      "Name": "千织",
+      "NameEn": "Chiori",
+      "ImgSrc": "UI_AvatarIcon_Chiori",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000094"
+    },
+    {
+      "Name": "希格雯",
+      "NameEn": "Sigewinne",
+      "ImgSrc": "UI_AvatarIcon_Sigewinne",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000095"
+    },
+    {
+      "Name": "阿蕾奇诺",
+      "NameEn": "Arlecchino",
+      "ImgSrc": "UI_AvatarIcon_Arlecchino",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000096"
+    },
+    {
+      "Name": "赛索斯",
+      "NameEn": "Sethos",
+      "ImgSrc": "UI_AvatarIcon_Sethos",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000097"
+    },
+    {
+      "Name": "克洛琳德",
+      "NameEn": "Clorinde",
+      "ImgSrc": "UI_AvatarIcon_Clorinde",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000098"
+    },
+    {
+      "Name": "艾梅莉埃",
+      "NameEn": "Emilie",
+      "ImgSrc": "UI_AvatarIcon_Emilie",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000099"
+    },
+    {
+      "Name": "卡齐娜",
+      "NameEn": "Kachina",
+      "ImgSrc": "UI_AvatarIcon_Kachina",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000100"
+    },
+    {
+      "Name": "基尼奇",
+      "NameEn": "Kinich",
+      "ImgSrc": "UI_AvatarIcon_Kinich",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000101"
+    },
+    {
+      "Name": "玛拉妮",
+      "NameEn": "Mualani",
+      "ImgSrc": "UI_AvatarIcon_Mualani",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000102"
+    },
+    {
+      "Name": "希诺宁",
+      "NameEn": "Xilonen",
+      "ImgSrc": "UI_AvatarIcon_Xilonen",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000103"
+    },
+    {
+      "Name": "恰斯卡",
+      "NameEn": "Chasca",
+      "ImgSrc": "UI_AvatarIcon_Chasca",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000104"
+    },
+    {
+      "Name": "欧洛伦",
+      "NameEn": "Ororon",
+      "ImgSrc": "UI_AvatarIcon_Olorun",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000105"
+    },
+    {
+      "Name": "玛薇卡",
+      "NameEn": "Mavuika",
+      "ImgSrc": "UI_AvatarIcon_Mavuika",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000106"
+    },
+    {
+      "Name": "茜特菈莉",
+      "NameEn": "Citlali",
+      "ImgSrc": "UI_AvatarIcon_Citlali",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000107"
+    },
+    {
+      "Name": "蓝砚",
+      "NameEn": "Lan Yan",
+      "ImgSrc": "UI_AvatarIcon_Lanyan",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000108"
+    },
+    {
+      "Name": "梦见月瑞希",
+      "NameEn": "Yumemizuki Mizuki",
+      "ImgSrc": "UI_AvatarIcon_Mizuki",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000109"
+    },
+    {
+      "Name": "伊安珊",
+      "NameEn": "Iansan",
+      "ImgSrc": "UI_AvatarIcon_Iansan",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000110"
+    },
+    {
+      "Name": "瓦雷莎",
+      "NameEn": "Varesa",
+      "ImgSrc": "UI_AvatarIcon_Varesa",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000111"
+    },
+    {
+      "Name": "爱可菲",
+      "NameEn": "Escoffier",
+      "ImgSrc": "UI_AvatarIcon_Escoffier",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000112"
+    },
+    {
+      "Name": "伊法",
+      "NameEn": "Ifa",
+      "ImgSrc": "UI_AvatarIcon_Ifa",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000113"
+    },
+    {
+      "Name": "丝柯克",
+      "NameEn": "Skirk",
+      "ImgSrc": "UI_AvatarIcon_SkirkNew",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000114"
+    },
+    {
+      "Name": "塔利雅",
+      "NameEn": "Dahlia",
+      "ImgSrc": "UI_AvatarIcon_Dahlia",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000115"
+    },
+    {
+      "Name": "伊涅芙",
+      "NameEn": "Ineffa",
+      "ImgSrc": "UI_AvatarIcon_Ineffa",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000116"
+    },
+    {
+      "Name": "菈乌玛",
+      "NameEn": "Lauma",
+      "ImgSrc": "UI_AvatarIcon_Lauma",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000119"
+    },
+    {
+      "Name": "菲林斯",
+      "NameEn": "Flins",
+      "ImgSrc": "UI_AvatarIcon_Flins",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000120"
+    },
+    {
+      "Name": "爱诺",
+      "NameEn": "Aino",
+      "ImgSrc": "UI_AvatarIcon_Aino",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000121"
+    },
+    {
+      "Name": "奈芙尔",
+      "NameEn": "Nefer",
+      "ImgSrc": "UI_AvatarIcon_Nefer",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/247f14512efc8325.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000122"
+    },
+    {
+      "Name": "杜林",
+      "NameEn": "Durin",
+      "ImgSrc": "UI_AvatarIcon_Durin",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000123"
+    },
+    {
+      "Name": "雅珂达",
+      "NameEn": "Jahoda",
+      "ImgSrc": "UI_AvatarIcon_Jahoda",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000124"
+    },
+    {
+      "Name": "哥伦比娅",
+      "NameEn": "Columbina",
+      "ImgSrc": "UI_AvatarIcon_Columbina",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000125"
+    },
+    {
+      "Name": "兹白",
+      "NameEn": "Zibai",
+      "ImgSrc": "UI_AvatarIcon_Zibai",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000126"
+    },
+    {
+      "Name": "叶洛亚",
+      "NameEn": "Illuga",
+      "ImgSrc": "UI_AvatarIcon_Illuga",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000127"
+    },
+    {
+      "Name": "法尔伽",
+      "NameEn": "Varka",
+      "ImgSrc": "UI_AvatarIcon_Varka",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000128"
+    },
+    {
+      "Name": "洛恩",
+      "NameEn": "Lohen",
+      "ImgSrc": "UI_AvatarIcon_Lohen",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000129"
+    },
+    {
+      "Name": "莉奈娅",
+      "NameEn": "Linnea",
+      "ImgSrc": "UI_AvatarIcon_Linnea",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/829a6b86fb23d8bb.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000130"
+    },
+    {
+      "Name": "尼可",
+      "NameEn": "Nicole",
+      "ImgSrc": "UI_AvatarIcon_Nicole",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/6a4f0b7ab73fe4d3.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000131"
+    },
+    {
+      "Name": "布伦妮",
+      "NameEn": "Prune",
+      "ImgSrc": "UI_AvatarIcon_Prune",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000132"
+    },
+    {
+      "Name": "桑多涅",
+      "NameEn": "Sandrone",
+      "ImgSrc": "UI_AvatarIcon_MarionetteNew",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000133"
+    },
+    {
+      "Name": "沃雅妮莎",
+      "NameEn": "Vodyanitsa",
+      "ImgSrc": "UI_AvatarIcon_Vodyanitsa",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/b162f5384487d283.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000140"
+    },
+    {
+      "Name": "薇斯纳",
+      "NameEn": "Vesna",
+      "ImgSrc": "UI_AvatarIcon_Vesna",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/48d1aac6ecc56b33.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000143"
+    },
+    {
+      "Name": "阿罗夏",
+      "NameEn": "Alyosha",
+      "ImgSrc": "UI_AvatarIcon_Alyosha",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/e18d224ec1047cae.png",
+      "Type": "char",
+      "Rank": "4",
+      "ItemId": "10000148"
+    },
+    {
+      "Name": "奥黛塔",
+      "NameEn": "Odette",
+      "ImgSrc": "UI_AvatarIcon_Odette",
+      "ElementSrc": "https://act.mihoyo.com/act/gt-ui/assets/icons/bf2f65ee0d7f6243.png",
+      "Type": "char",
+      "Rank": "5",
+      "ItemId": "10000150"
+    },
+    {
+      "Name": "西风剑",
+      "NameEn": "Favonius Sword",
+      "ImgSrc": "UI_EquipIcon_Sword_Zephyrus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11401"
+    },
+    {
+      "Name": "笛剑",
+      "NameEn": "The Flute",
+      "ImgSrc": "UI_EquipIcon_Sword_Troupe",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11402"
+    },
+    {
+      "Name": "祭礼剑",
+      "NameEn": "Sacrificial Sword",
+      "ImgSrc": "UI_EquipIcon_Sword_Fossil",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11403"
+    },
+    {
+      "Name": "宗室长剑",
+      "NameEn": "Royal Longsword",
+      "ImgSrc": "UI_EquipIcon_Sword_Theocrat",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11404"
+    },
+    {
+      "Name": "匣里龙吟",
+      "NameEn": "Lion's Roar",
+      "ImgSrc": "UI_EquipIcon_Sword_Rockkiller",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11405"
+    },
+    {
+      "Name": "试作斩岩",
+      "NameEn": "Prototype Rancour",
+      "ImgSrc": "UI_EquipIcon_Sword_Proto",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11406"
+    },
+    {
+      "Name": "铁蜂刺",
+      "NameEn": "Iron Sting",
+      "ImgSrc": "UI_EquipIcon_Sword_Exotic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11407"
+    },
+    {
+      "Name": "黑岩长剑",
+      "NameEn": "Blackcliff Longsword",
+      "ImgSrc": "UI_EquipIcon_Sword_Blackrock",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11408"
+    },
+    {
+      "Name": "黑剑",
+      "NameEn": "The Black Sword",
+      "ImgSrc": "UI_EquipIcon_Sword_Bloodstained",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11409"
+    },
+    {
+      "Name": "暗巷闪光",
+      "NameEn": "The Alley Flash",
+      "ImgSrc": "UI_EquipIcon_Sword_Outlaw",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11410"
+    },
+    {
+      "Name": "降临之剑",
+      "NameEn": "Sword of Descension",
+      "ImgSrc": "UI_EquipIcon_Sword_Psalmus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11412"
+    },
+    {
+      "Name": "腐殖之剑",
+      "NameEn": "Festering Desire",
+      "ImgSrc": "UI_EquipIcon_Sword_Magnum",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11413"
+    },
+    {
+      "Name": "天目影打刀",
+      "NameEn": "Amenoma Kageuchi",
+      "ImgSrc": "UI_EquipIcon_Sword_Bakufu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11414"
+    },
+    {
+      "Name": "辰砂之纺锤",
+      "NameEn": "Cinnabar Spindle",
+      "ImgSrc": "UI_EquipIcon_Sword_Opus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11415"
+    },
+    {
+      "Name": "笼钓瓶一心",
+      "NameEn": "Kagotsurube Isshin",
+      "ImgSrc": "UI_EquipIcon_Sword_Youtou",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11416"
+    },
+    {
+      "Name": "原木刀",
+      "NameEn": "Sapwood Blade",
+      "ImgSrc": "UI_EquipIcon_Sword_Arakalari",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11417"
+    },
+    {
+      "Name": "西福斯的月光",
+      "NameEn": "Xiphos' Moonlight",
+      "ImgSrc": "UI_EquipIcon_Sword_Pleroma",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11418"
+    },
+    {
+      "Name": "东花坊时雨",
+      "NameEn": "Toukabou Shigure",
+      "ImgSrc": "UI_EquipIcon_Sword_Kasabouzu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11422"
+    },
+    {
+      "Name": "狼牙",
+      "NameEn": "Wolf-Fang",
+      "ImgSrc": "UI_EquipIcon_Sword_Boreas",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11424"
+    },
+    {
+      "Name": "海渊终曲",
+      "NameEn": "Finale of the Deep",
+      "ImgSrc": "UI_EquipIcon_Sword_Vorpal",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11425"
+    },
+    {
+      "Name": "灰河渡手",
+      "NameEn": "Fleuve Cendre Ferryman",
+      "ImgSrc": "UI_EquipIcon_Sword_Machination",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11426"
+    },
+    {
+      "Name": "船坞长剑",
+      "NameEn": "The Dockhand's Assistant",
+      "ImgSrc": "UI_EquipIcon_Sword_Mechanic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11427"
+    },
+    {
+      "Name": "水仙十字之剑",
+      "NameEn": "Sword of Narzissenkreuz",
+      "ImgSrc": "UI_EquipIcon_Sword_Purewill",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11428"
+    },
+    {
+      "Name": "弥坚骨",
+      "NameEn": "Sturdy Bone",
+      "ImgSrc": "UI_EquipIcon_Sword_Umpakati",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11430"
+    },
+    {
+      "Name": "息燧之笛",
+      "NameEn": "Flute of Ezpitzal",
+      "ImgSrc": "UI_EquipIcon_Sword_Isikhulu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11431"
+    },
+    {
+      "Name": "厄水之祸",
+      "NameEn": "Calamity of Eshu",
+      "ImgSrc": "UI_EquipIcon_Sword_SacrificialNgombe",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11432"
+    },
+    {
+      "Name": "谧音吹哨",
+      "NameEn": "Serenity's Call",
+      "ImgSrc": "UI_EquipIcon_Sword_Ilmarinen",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11433"
+    },
+    {
+      "Name": "织月者的曙色",
+      "NameEn": "Moonweaver's Dawn",
+      "ImgSrc": "UI_EquipIcon_Sword_Miekka",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11434"
+    },
+    {
+      "Name": "熔猎异端之刃",
+      "NameEn": "Heretic's Molten Blade",
+      "ImgSrc": "UI_EquipIcon_Sword_SerpentTooth",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11435"
+    },
+    {
+      "Name": "引火之源",
+      "NameEn": "Emberwell",
+      "ImgSrc": "UI_EquipIcon_Sword_GlintstoneSword",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11436"
+    },
+    {
+      "Name": "新枝",
+      "NameEn": "New Bough",
+      "ImgSrc": "UI_EquipIcon_Sword_SpikedStake",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11437"
+    },
+    {
+      "Name": "银釭",
+      "NameEn": "Silver Light",
+      "ImgSrc": "UI_EquipIcon_Sword_Fajian",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "11438"
+    },
+    {
+      "Name": "风鹰剑",
+      "NameEn": "Aquila Favonia",
+      "ImgSrc": "UI_EquipIcon_Sword_Falcon",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11501"
+    },
+    {
+      "Name": "天空之刃",
+      "NameEn": "Skyward Blade",
+      "ImgSrc": "UI_EquipIcon_Sword_Dvalin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11502"
+    },
+    {
+      "Name": "苍古自由之誓",
+      "NameEn": "Freedom-Sworn",
+      "ImgSrc": "UI_EquipIcon_Sword_Widsith",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11503"
+    },
+    {
+      "Name": "斫峰之刃",
+      "NameEn": "Summit Shaper",
+      "ImgSrc": "UI_EquipIcon_Sword_Kunwu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11504"
+    },
+    {
+      "Name": "磐岩结绿",
+      "NameEn": "Primordial Jade Cutter",
+      "ImgSrc": "UI_EquipIcon_Sword_Morax",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11505"
+    },
+    {
+      "Name": "雾切之回光",
+      "NameEn": "Mistsplitter Reforged",
+      "ImgSrc": "UI_EquipIcon_Sword_Narukami",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11509"
+    },
+    {
+      "Name": "波乱月白经津",
+      "NameEn": "Haran Geppaku Futsu",
+      "ImgSrc": "UI_EquipIcon_Sword_Amenoma",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11510"
+    },
+    {
+      "Name": "圣显之钥",
+      "NameEn": "Key of Khaj-Nisut",
+      "ImgSrc": "UI_EquipIcon_Sword_Deshret",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11511"
+    },
+    {
+      "Name": "裁叶萃光",
+      "NameEn": "Light of Foliar Incision",
+      "ImgSrc": "UI_EquipIcon_Sword_Ayus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11512"
+    },
+    {
+      "Name": "静水流涌之辉",
+      "NameEn": "Splendor of Tranquil Waters",
+      "ImgSrc": "UI_EquipIcon_Sword_Regalis",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11513"
+    },
+    {
+      "Name": "有乐御簾切",
+      "NameEn": "Uraku Misugiri",
+      "ImgSrc": "UI_EquipIcon_Sword_Needle",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11514"
+    },
+    {
+      "Name": "赦罪",
+      "NameEn": "Absolution",
+      "ImgSrc": "UI_EquipIcon_Sword_Estoc",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11515"
+    },
+    {
+      "Name": "岩峰巡歌",
+      "NameEn": "Peak Patrol Song",
+      "ImgSrc": "UI_EquipIcon_Sword_XochitlsTube",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11516"
+    },
+    {
+      "Name": "苍耀",
+      "NameEn": "Azurelight",
+      "ImgSrc": "UI_EquipIcon_Sword_OuterSword",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11517"
+    },
+    {
+      "Name": "黑蚀",
+      "NameEn": "Athame Artis",
+      "ImgSrc": "UI_EquipIcon_Sword_Motsognir",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11518"
+    },
+    {
+      "Name": "朏魄含光",
+      "NameEn": "Lightbearing Moonshard",
+      "ImgSrc": "UI_EquipIcon_Sword_SilverwareSaw",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11519"
+    },
+    {
+      "Name": "白湖冬羽",
+      "NameEn": "Whitelake Frostfeather",
+      "ImgSrc": "UI_EquipIcon_Sword_Swanlake",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11520"
+    },
+    {
+      "Name": "星锋剑",
+      "NameEn": "Exaiphanes Blade",
+      "ImgSrc": "UI_EquipIcon_Sword_WeaponQuestSnezhnaya",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11521"
+    },
+    {
+      "Name": "蝶变",
+      "NameEn": "Beyond the Chrysalis",
+      "ImgSrc": "UI_EquipIcon_Sword_Samosvist",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "11522"
+    },
+    {
+      "Name": "西风大剑",
+      "NameEn": "Favonius Greatsword",
+      "ImgSrc": "UI_EquipIcon_Claymore_Zephyrus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12401"
+    },
+    {
+      "Name": "钟剑",
+      "NameEn": "The Bell",
+      "ImgSrc": "UI_EquipIcon_Claymore_Troupe",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12402"
+    },
+    {
+      "Name": "祭礼大剑",
+      "NameEn": "Sacrificial Greatsword",
+      "ImgSrc": "UI_EquipIcon_Claymore_Fossil",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12403"
+    },
+    {
+      "Name": "宗室大剑",
+      "NameEn": "Royal Greatsword",
+      "ImgSrc": "UI_EquipIcon_Claymore_Theocrat",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12404"
+    },
+    {
+      "Name": "雨裁",
+      "NameEn": "Rainslasher",
+      "ImgSrc": "UI_EquipIcon_Claymore_Perdue",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12405"
+    },
+    {
+      "Name": "试作古华",
+      "NameEn": "Prototype Archaic",
+      "ImgSrc": "UI_EquipIcon_Claymore_Proto",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12406"
+    },
+    {
+      "Name": "白影剑",
+      "NameEn": "Whiteblind",
+      "ImgSrc": "UI_EquipIcon_Claymore_Exotic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12407"
+    },
+    {
+      "Name": "黑岩斩刀",
+      "NameEn": "Blackcliff Slasher",
+      "ImgSrc": "UI_EquipIcon_Claymore_Blackrock",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12408"
+    },
+    {
+      "Name": "螭骨剑",
+      "NameEn": "Serpent Spine",
+      "ImgSrc": "UI_EquipIcon_Claymore_Kione",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12409"
+    },
+    {
+      "Name": "千岩古剑",
+      "NameEn": "Lithic Blade",
+      "ImgSrc": "UI_EquipIcon_Claymore_Lapis",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12410"
+    },
+    {
+      "Name": "雪葬的星银",
+      "NameEn": "Snow-Tombed Starsilver",
+      "ImgSrc": "UI_EquipIcon_Claymore_Dragonfell",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12411"
+    },
+    {
+      "Name": "衔珠海皇",
+      "NameEn": "Luxurious Sea-Lord",
+      "ImgSrc": "UI_EquipIcon_Claymore_MillenniaTuna",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12412"
+    },
+    {
+      "Name": "桂木斩长正",
+      "NameEn": "Katsuragikiri Nagamasa",
+      "ImgSrc": "UI_EquipIcon_Claymore_Bakufu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12414"
+    },
+    {
+      "Name": "玛海菈的水色",
+      "NameEn": "Makhaira Aquamarine",
+      "ImgSrc": "UI_EquipIcon_Claymore_Pleroma",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12415"
+    },
+    {
+      "Name": "恶王丸",
+      "NameEn": "Akuoumaru",
+      "ImgSrc": "UI_EquipIcon_Claymore_Maria",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12416"
+    },
+    {
+      "Name": "森林王器",
+      "NameEn": "Forest Regalia",
+      "ImgSrc": "UI_EquipIcon_Claymore_Arakalari",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12417"
+    },
+    {
+      "Name": "饰铁之花",
+      "NameEn": "Mailed Flower",
+      "ImgSrc": "UI_EquipIcon_Claymore_Fleurfair",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12418"
+    },
+    {
+      "Name": "聊聊棒",
+      "NameEn": "Talking Stick",
+      "ImgSrc": "UI_EquipIcon_Claymore_BeastTamer",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12424"
+    },
+    {
+      "Name": "浪影阔剑",
+      "NameEn": "Tidal Shadow",
+      "ImgSrc": "UI_EquipIcon_Claymore_Vorpal",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12425"
+    },
+    {
+      "Name": "「究极霸王超级魔剑」",
+      "NameEn": "\"Ultimate Overlord's Mega Magic Sword\"",
+      "ImgSrc": "UI_EquipIcon_Claymore_Champion",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12426"
+    },
+    {
+      "Name": "便携动力锯",
+      "NameEn": "Portable Power Saw",
+      "ImgSrc": "UI_EquipIcon_Claymore_Mechanic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12427"
+    },
+    {
+      "Name": "硕果钩",
+      "NameEn": "Fruitful Hook",
+      "ImgSrc": "UI_EquipIcon_Claymore_Umpakati",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12430"
+    },
+    {
+      "Name": "撼地者",
+      "NameEn": "Earth Shaker",
+      "ImgSrc": "UI_EquipIcon_Claymore_Isikhulu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12431"
+    },
+    {
+      "Name": "拾慧铸熔",
+      "NameEn": "Flame-Forged Insight",
+      "ImgSrc": "UI_EquipIcon_Claymore_Polilith",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12432"
+    },
+    {
+      "Name": "万能钥匙",
+      "NameEn": "Master Key",
+      "ImgSrc": "UI_EquipIcon_Claymore_Ilmarinen",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12433"
+    },
+    {
+      "Name": "金律铸影",
+      "NameEn": "Forged by the Golden Melody",
+      "ImgSrc": "UI_EquipIcon_Claymore_EscapeWheel",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12435"
+    },
+    {
+      "Name": "救赎之斩",
+      "NameEn": "Blade of Atonement",
+      "ImgSrc": "UI_EquipIcon_Claymore_GlintstoneClaymore",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "12436"
+    },
+    {
+      "Name": "天空之傲",
+      "NameEn": "Skyward Pride",
+      "ImgSrc": "UI_EquipIcon_Claymore_Dvalin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12501"
+    },
+    {
+      "Name": "狼的末路",
+      "NameEn": "Wolf's Gravestone",
+      "ImgSrc": "UI_EquipIcon_Claymore_Wolfmound",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12502"
+    },
+    {
+      "Name": "松籁响起之时",
+      "NameEn": "Song of Broken Pines",
+      "ImgSrc": "UI_EquipIcon_Claymore_Widsith",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12503"
+    },
+    {
+      "Name": "无工之剑",
+      "NameEn": "The Unforged",
+      "ImgSrc": "UI_EquipIcon_Claymore_Kunwu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12504"
+    },
+    {
+      "Name": "Primordial Jade Greatsword",
+      "NameEn": "Primordial Jade Greatsword",
+      "ImgSrc": "UI_EquipIcon_Claymore_Aniki",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12505"
+    },
+    {
+      "Name": "赤角石溃杵",
+      "NameEn": "Redhorn Stonethresher",
+      "ImgSrc": "UI_EquipIcon_Claymore_Itadorimaru",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12510"
+    },
+    {
+      "Name": "苇海信标",
+      "NameEn": "Beacon of the Reed Sea",
+      "ImgSrc": "UI_EquipIcon_Claymore_Deshret",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12511"
+    },
+    {
+      "Name": "裁断",
+      "NameEn": "Verdict",
+      "ImgSrc": "UI_EquipIcon_Claymore_GoldenVerdict",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12512"
+    },
+    {
+      "Name": "山王长牙",
+      "NameEn": "Fang of the Mountain King",
+      "ImgSrc": "UI_EquipIcon_Claymore_EmeraldSword",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12513"
+    },
+    {
+      "Name": "焚曜千阳",
+      "NameEn": "A Thousand Blazing Suns",
+      "ImgSrc": "UI_EquipIcon_Claymore_RadianceSword",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12514"
+    },
+    {
+      "Name": "狼的武功歌",
+      "NameEn": "Gest of the Mighty Wolf",
+      "ImgSrc": "UI_EquipIcon_Claymore_EnsisAquilonis",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12515"
+    },
+    {
+      "Name": "超越之匙",
+      "NameEn": "A Teaspoon of Transcendence",
+      "ImgSrc": "UI_EquipIcon_Claymore_CrystallineSword",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "12516"
+    },
+    {
+      "Name": "匣里灭辰",
+      "NameEn": "Dragon's Bane",
+      "ImgSrc": "UI_EquipIcon_Pole_Stardust",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13401"
+    },
+    {
+      "Name": "试作星镰",
+      "NameEn": "Prototype Starglitter",
+      "ImgSrc": "UI_EquipIcon_Pole_Proto",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13402"
+    },
+    {
+      "Name": "流月针",
+      "NameEn": "Crescent Pike",
+      "ImgSrc": "UI_EquipIcon_Pole_Exotic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13403"
+    },
+    {
+      "Name": "黑岩刺枪",
+      "NameEn": "Blackcliff Pole",
+      "ImgSrc": "UI_EquipIcon_Pole_Blackrock",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13404"
+    },
+    {
+      "Name": "决斗之枪",
+      "NameEn": "Deathmatch",
+      "ImgSrc": "UI_EquipIcon_Pole_Gladiator",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13405"
+    },
+    {
+      "Name": "千岩长枪",
+      "NameEn": "Lithic Spear",
+      "ImgSrc": "UI_EquipIcon_Pole_Lapis",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13406"
+    },
+    {
+      "Name": "西风长枪",
+      "NameEn": "Favonius Lance",
+      "ImgSrc": "UI_EquipIcon_Pole_Zephyrus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13407"
+    },
+    {
+      "Name": "宗室猎枪",
+      "NameEn": "Royal Spear",
+      "ImgSrc": "UI_EquipIcon_Pole_Theocrat",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13408"
+    },
+    {
+      "Name": "龙脊长枪",
+      "NameEn": "Dragonspine Spear",
+      "ImgSrc": "UI_EquipIcon_Pole_Everfrost",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13409"
+    },
+    {
+      "Name": "喜多院十文字",
+      "NameEn": "Kitain Cross Spear",
+      "ImgSrc": "UI_EquipIcon_Pole_Bakufu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13414"
+    },
+    {
+      "Name": "「渔获」",
+      "NameEn": "\"The Catch\"",
+      "ImgSrc": "UI_EquipIcon_Pole_Mori",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13415"
+    },
+    {
+      "Name": "断浪长鳍",
+      "NameEn": "Wavebreaker's Fin",
+      "ImgSrc": "UI_EquipIcon_Pole_Maria",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13416"
+    },
+    {
+      "Name": "贯月矢",
+      "NameEn": "Moonpiercer",
+      "ImgSrc": "UI_EquipIcon_Pole_Arakalari",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13417"
+    },
+    {
+      "Name": "风信之锋",
+      "NameEn": "Missive Windspear",
+      "ImgSrc": "UI_EquipIcon_Pole_Windvane",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13419"
+    },
+    {
+      "Name": "峡湾长歌",
+      "NameEn": "Ballad of the Fjords",
+      "ImgSrc": "UI_EquipIcon_Pole_Shanty",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13424"
+    },
+    {
+      "Name": "公义的酬报",
+      "NameEn": "Rightful Reward",
+      "ImgSrc": "UI_EquipIcon_Pole_Vorpal",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13425"
+    },
+    {
+      "Name": "沙中伟贤的对答",
+      "NameEn": "Dialogues of the Desert Sages",
+      "ImgSrc": "UI_EquipIcon_Pole_Caduceus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13426"
+    },
+    {
+      "Name": "勘探钻机",
+      "NameEn": "Prospector's Drill",
+      "ImgSrc": "UI_EquipIcon_Pole_Mechanic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13427"
+    },
+    {
+      "Name": "镇山之钉",
+      "NameEn": "Mountain-Bracing Bolt",
+      "ImgSrc": "UI_EquipIcon_Pole_Umpakati",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13430"
+    },
+    {
+      "Name": "虹的行迹",
+      "NameEn": "Footprint of the Rainbow",
+      "ImgSrc": "UI_EquipIcon_Pole_Isikhulu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13431"
+    },
+    {
+      "Name": "且住亭御咄",
+      "NameEn": "Tamayuratei no Ohanashi",
+      "ImgSrc": "UI_EquipIcon_Pole_Aoandon",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13432"
+    },
+    {
+      "Name": "掘金之锹",
+      "NameEn": "Prospector's Shovel",
+      "ImgSrc": "UI_EquipIcon_Pole_Ilmarinen",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13433"
+    },
+    {
+      "Name": "圣祭者的辉杖",
+      "NameEn": "Sacrificer's Staff",
+      "ImgSrc": "UI_EquipIcon_Pole_Krivule",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13434"
+    },
+    {
+      "Name": "寒息",
+      "NameEn": "Frostbreath",
+      "ImgSrc": "UI_EquipIcon_Pole_FaesCrystalle",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13435"
+    },
+    {
+      "Name": "戍望谣歌",
+      "NameEn": "Song of the Vigil",
+      "ImgSrc": "UI_EquipIcon_Pole_GlintstonePolearm",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "13436"
+    },
+    {
+      "Name": "护摩之杖",
+      "NameEn": "Staff of Homa",
+      "ImgSrc": "UI_EquipIcon_Pole_Homa",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13501"
+    },
+    {
+      "Name": "天空之脊",
+      "NameEn": "Skyward Spine",
+      "ImgSrc": "UI_EquipIcon_Pole_Dvalin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13502"
+    },
+    {
+      "Name": "贯虹之槊",
+      "NameEn": "Vortex Vanquisher",
+      "ImgSrc": "UI_EquipIcon_Pole_Kunwu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13504"
+    },
+    {
+      "Name": "和璞鸢",
+      "NameEn": "Primordial Jade Winged-Spear",
+      "ImgSrc": "UI_EquipIcon_Pole_Morax",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13505"
+    },
+    {
+      "Name": "息灾",
+      "NameEn": "Calamity Queller",
+      "ImgSrc": "UI_EquipIcon_Pole_Santika",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13507"
+    },
+    {
+      "Name": "薙草之稻光",
+      "NameEn": "Engulfing Lightning",
+      "ImgSrc": "UI_EquipIcon_Pole_Narukami",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13509"
+    },
+    {
+      "Name": "赤沙之杖",
+      "NameEn": "Staff of the Scarlet Sands",
+      "ImgSrc": "UI_EquipIcon_Pole_Deshret",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13511"
+    },
+    {
+      "Name": "赤月之形",
+      "NameEn": "Crimson Moon's Semblance",
+      "ImgSrc": "UI_EquipIcon_Pole_BloodMoon",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13512"
+    },
+    {
+      "Name": "柔灯挽歌",
+      "NameEn": "Lumidouce Elegy",
+      "ImgSrc": "UI_EquipIcon_Pole_Muguet",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13513"
+    },
+    {
+      "Name": "香韵奏者",
+      "NameEn": "Symphonist of Scents",
+      "ImgSrc": "UI_EquipIcon_Pole_Trident",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13514"
+    },
+    {
+      "Name": "支离轮光",
+      "NameEn": "Fractured Halo",
+      "ImgSrc": "UI_EquipIcon_Pole_Perdix",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13515"
+    },
+    {
+      "Name": "血染荒城",
+      "NameEn": "Bloodsoaked Ruins",
+      "ImgSrc": "UI_EquipIcon_Pole_TummaLyhty",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13516"
+    },
+    {
+      "Name": "灾悔",
+      "NameEn": "Disaster and Remorse",
+      "ImgSrc": "UI_EquipIcon_Pole_Carbine",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "13517"
+    },
+    {
+      "Name": "西风秘典",
+      "NameEn": "Favonius Codex",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Zephyrus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14401"
+    },
+    {
+      "Name": "流浪乐章",
+      "NameEn": "The Widsith",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Troupe",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14402"
+    },
+    {
+      "Name": "祭礼残章",
+      "NameEn": "Sacrificial Fragments",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Fossil",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14403"
+    },
+    {
+      "Name": "宗室秘法录",
+      "NameEn": "Royal Grimoire",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Theocrat",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14404"
+    },
+    {
+      "Name": "匣里日月",
+      "NameEn": "Solar Pearl",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Resurrection",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14405"
+    },
+    {
+      "Name": "试作金珀",
+      "NameEn": "Prototype Amber",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Proto",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14406"
+    },
+    {
+      "Name": "万国诸海图谱",
+      "NameEn": "Mappa Mare",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Exotic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14407"
+    },
+    {
+      "Name": "黑岩绯玉",
+      "NameEn": "Blackcliff Agate",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Blackrock",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14408"
+    },
+    {
+      "Name": "昭心",
+      "NameEn": "Eye of Perception",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Truelens",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14409"
+    },
+    {
+      "Name": "暗巷的酒与诗",
+      "NameEn": "Wine and Song",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Outlaw",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14410"
+    },
+    {
+      "Name": "忍冬之果",
+      "NameEn": "Frostbearer",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Everfrost",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14412"
+    },
+    {
+      "Name": "嘟嘟可故事集",
+      "NameEn": "Dodoco Tales",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Ludiharpastum",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14413"
+    },
+    {
+      "Name": "白辰之环",
+      "NameEn": "Hakushin Ring",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Bakufu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14414"
+    },
+    {
+      "Name": "证誓之明瞳",
+      "NameEn": "Oathsworn Eye",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Jyanome",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14415"
+    },
+    {
+      "Name": "流浪的晚星",
+      "NameEn": "Wandering Evenstar",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Pleroma",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14416"
+    },
+    {
+      "Name": "盈满之实",
+      "NameEn": "Fruit of Fulfillment",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Arakalari",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14417"
+    },
+    {
+      "Name": "遗祀玉珑",
+      "NameEn": "Sacrificial Jade",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Yue",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14424"
+    },
+    {
+      "Name": "纯水流华",
+      "NameEn": "Flowing Purity",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Vorpal",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14425"
+    },
+    {
+      "Name": "无垠蔚蓝之歌",
+      "NameEn": "Ballad of the Boundless Blue",
+      "ImgSrc": "UI_EquipIcon_Catalyst_DandelionPoem",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14426"
+    },
+    {
+      "Name": "苍纹角杯",
+      "NameEn": "Ash-Graven Drinking Horn",
+      "ImgSrc": "UI_EquipIcon_Catalyst_ConchSprayer",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14427"
+    },
+    {
+      "Name": "乘浪的回旋",
+      "NameEn": "Waveriding Whirl",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Umpakati",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14430"
+    },
+    {
+      "Name": "木棉之环",
+      "NameEn": "Ring of Yaxche",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Isikhulu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14431"
+    },
+    {
+      "Name": "天光的纺琴",
+      "NameEn": "Etherlight Spindlelute",
+      "ImgSrc": "UI_EquipIcon_Catalyst_SeeliesLute",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14432"
+    },
+    {
+      "Name": "乌髓孑灯",
+      "NameEn": "Blackmarrow Lantern",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Ilmarinen",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14433"
+    },
+    {
+      "Name": "霜辰",
+      "NameEn": "Dawning Frost",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Ziedas",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14434"
+    },
+    {
+      "Name": "群王局戏",
+      "NameEn": "Clash of Kings",
+      "ImgSrc": "UI_EquipIcon_Catalyst_SandMemoria",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14435"
+    },
+    {
+      "Name": "寸心余响",
+      "NameEn": "Echoes of the Heart",
+      "ImgSrc": "UI_EquipIcon_Catalyst_GlintstoneCatalyst",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14436"
+    },
+    {
+      "Name": "凝雪沉心",
+      "NameEn": "Winter's Heavy Heart",
+      "ImgSrc": "UI_EquipIcon_Catalyst_FrostScepter",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "14437"
+    },
+    {
+      "Name": "天空之卷",
+      "NameEn": "Skyward Atlas",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Dvalin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14501"
+    },
+    {
+      "Name": "四风原典",
+      "NameEn": "Lost Prayer to the Sacred Winds",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Fourwinds",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14502"
+    },
+    {
+      "Name": "尘世之锁",
+      "NameEn": "Memory of Dust",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Kunwu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14504"
+    },
+    {
+      "Name": "碧落之珑",
+      "NameEn": "Jadefall's Splendor",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Morax",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14505"
+    },
+    {
+      "Name": "不灭月华",
+      "NameEn": "Everlasting Moonglow",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Kaleido",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14506"
+    },
+    {
+      "Name": "神乐之真意",
+      "NameEn": "Kagura's Verity",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Narukami",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14509"
+    },
+    {
+      "Name": "千夜浮梦",
+      "NameEn": "A Thousand Floating Dreams",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Ayus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14511"
+    },
+    {
+      "Name": "图莱杜拉的回忆",
+      "NameEn": "Tulaytullah's Remembrance",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Alaya",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14512"
+    },
+    {
+      "Name": "金流监督",
+      "NameEn": "Cashflow Supervision",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Wheatley",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14513"
+    },
+    {
+      "Name": "万世流涌大典",
+      "NameEn": "Tome of the Eternal Flow",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Iudex",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14514"
+    },
+    {
+      "Name": "鹤鸣余音",
+      "NameEn": "Crane's Echoing Call",
+      "ImgSrc": "UI_EquipIcon_Catalyst_MountainGale",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14515"
+    },
+    {
+      "Name": "冲浪时光",
+      "NameEn": "Surf's Up",
+      "ImgSrc": "UI_EquipIcon_Catalyst_MechaPufferfish",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14516"
+    },
+    {
+      "Name": "祭星者之望",
+      "NameEn": "Starcaller's Watch",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Figurines",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14517"
+    },
+    {
+      "Name": "寝正月初晴",
+      "NameEn": "Sunny Morning Sleep-In",
+      "ImgSrc": "UI_EquipIcon_Catalyst_SakuraFan",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14518"
+    },
+    {
+      "Name": "溢彩心念",
+      "NameEn": "Vivid Notions",
+      "ImgSrc": "UI_EquipIcon_Catalyst_VaresaTransformer",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14519"
+    },
+    {
+      "Name": "纺夜天镜",
+      "NameEn": "Nightweaver's Looking Glass",
+      "ImgSrc": "UI_EquipIcon_Catalyst_MenulisRing",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14520"
+    },
+    {
+      "Name": "真语秘匣",
+      "NameEn": "Reliquary of Truth",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Sistrum",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14521"
+    },
+    {
+      "Name": "帷间夜曲",
+      "NameEn": "Nocturne's Curtain Call",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Brisingamen",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14522"
+    },
+    {
+      "Name": "尘光七谕",
+      "NameEn": "Angelos' Heptades",
+      "ImgSrc": "UI_EquipIcon_Catalyst_FairyGarden",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14523"
+    },
+    {
+      "Name": "漩流颂歌",
+      "NameEn": "Hymn of the Maelstrom",
+      "ImgSrc": "UI_EquipIcon_Catalyst_Bludnye",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "14524"
+    },
+    {
+      "Name": "西风猎弓",
+      "NameEn": "Favonius Warbow",
+      "ImgSrc": "UI_EquipIcon_Bow_Zephyrus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15401"
+    },
+    {
+      "Name": "绝弦",
+      "NameEn": "The Stringless",
+      "ImgSrc": "UI_EquipIcon_Bow_Troupe",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15402"
+    },
+    {
+      "Name": "祭礼弓",
+      "NameEn": "Sacrificial Bow",
+      "ImgSrc": "UI_EquipIcon_Bow_Fossil",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15403"
+    },
+    {
+      "Name": "宗室长弓",
+      "NameEn": "Royal Bow",
+      "ImgSrc": "UI_EquipIcon_Bow_Theocrat",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15404"
+    },
+    {
+      "Name": "弓藏",
+      "NameEn": "Rust",
+      "ImgSrc": "UI_EquipIcon_Bow_Recluse",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15405"
+    },
+    {
+      "Name": "试作澹月",
+      "NameEn": "Prototype Crescent",
+      "ImgSrc": "UI_EquipIcon_Bow_Proto",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15406"
+    },
+    {
+      "Name": "钢轮弓",
+      "NameEn": "Compound Bow",
+      "ImgSrc": "UI_EquipIcon_Bow_Exotic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15407"
+    },
+    {
+      "Name": "黑岩战弓",
+      "NameEn": "Blackcliff Warbow",
+      "ImgSrc": "UI_EquipIcon_Bow_Blackrock",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15408"
+    },
+    {
+      "Name": "苍翠猎弓",
+      "NameEn": "The Viridescent Hunt",
+      "ImgSrc": "UI_EquipIcon_Bow_Viridescent",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15409"
+    },
+    {
+      "Name": "暗巷猎手",
+      "NameEn": "Alley Hunter",
+      "ImgSrc": "UI_EquipIcon_Bow_Outlaw",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15410"
+    },
+    {
+      "Name": "落霞",
+      "NameEn": "Fading Twilight",
+      "ImgSrc": "UI_EquipIcon_Bow_Fallensun",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15411"
+    },
+    {
+      "Name": "幽夜华尔兹",
+      "NameEn": "Mitternachts Waltz",
+      "ImgSrc": "UI_EquipIcon_Bow_Nachtblind",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15412"
+    },
+    {
+      "Name": "风花之颂",
+      "NameEn": "Windblume Ode",
+      "ImgSrc": "UI_EquipIcon_Bow_Fleurfair",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15413"
+    },
+    {
+      "Name": "破魔之弓",
+      "NameEn": "Hamayumi",
+      "ImgSrc": "UI_EquipIcon_Bow_Bakufu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15414"
+    },
+    {
+      "Name": "掠食者",
+      "NameEn": "Predator",
+      "ImgSrc": "UI_EquipIcon_Bow_Predator",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15415"
+    },
+    {
+      "Name": "曚云之月",
+      "NameEn": "Mouun's Moon",
+      "ImgSrc": "UI_EquipIcon_Bow_Maria",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15416"
+    },
+    {
+      "Name": "王下近侍",
+      "NameEn": "King's Squire",
+      "ImgSrc": "UI_EquipIcon_Bow_Arakalari",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15417"
+    },
+    {
+      "Name": "竭泽",
+      "NameEn": "End of the Line",
+      "ImgSrc": "UI_EquipIcon_Bow_Fin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15418"
+    },
+    {
+      "Name": "鹮穿之喙",
+      "NameEn": "Ibis Piercer",
+      "ImgSrc": "UI_EquipIcon_Bow_Ibis",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15419"
+    },
+    {
+      "Name": "烈阳之嗣",
+      "NameEn": "Scion of the Blazing Sun",
+      "ImgSrc": "UI_EquipIcon_Bow_Gurabad",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15424"
+    },
+    {
+      "Name": "静谧之曲",
+      "NameEn": "Song of Stillness",
+      "ImgSrc": "UI_EquipIcon_Bow_Vorpal",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15425"
+    },
+    {
+      "Name": "筑云",
+      "NameEn": "Cloudforged",
+      "ImgSrc": "UI_EquipIcon_Bow_Ultimatum",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15426"
+    },
+    {
+      "Name": "测距规",
+      "NameEn": "Range Gauge",
+      "ImgSrc": "UI_EquipIcon_Bow_Mechanic",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15427"
+    },
+    {
+      "Name": "缀花之翎",
+      "NameEn": "Flower-Wreathed Feathers",
+      "ImgSrc": "UI_EquipIcon_Bow_Umpakati",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15430"
+    },
+    {
+      "Name": "碎链",
+      "NameEn": "Chain Breaker",
+      "ImgSrc": "UI_EquipIcon_Bow_Isikhulu",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15431"
+    },
+    {
+      "Name": "冷寂迸音",
+      "NameEn": "Sequence of Solitude",
+      "ImgSrc": "UI_EquipIcon_Bow_Stinger",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15432"
+    },
+    {
+      "Name": "罗网勾针",
+      "NameEn": "Snare Hook",
+      "ImgSrc": "UI_EquipIcon_Bow_Ilmarinen",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15433"
+    },
+    {
+      "Name": "虹蛇的雨弦",
+      "NameEn": "Rainbow Serpent's Rain Bow",
+      "ImgSrc": "UI_EquipIcon_Bow_ElegguaBow",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15434"
+    },
+    {
+      "Name": "悬黎千钧",
+      "NameEn": "Jade Vista",
+      "ImgSrc": "UI_EquipIcon_Bow_ShatteredMirror",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15435"
+    },
+    {
+      "Name": "霜雪誓约",
+      "NameEn": "Covenant of Frost and Snow",
+      "ImgSrc": "UI_EquipIcon_Bow_GlintstoneBow",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15436"
+    },
+    {
+      "Name": "柔风游弦",
+      "NameEn": "Breezeborne Refrain",
+      "ImgSrc": "UI_EquipIcon_Bow_Windtalker",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "4",
+      "ItemId": "15437"
+    },
+    {
+      "Name": "天空之翼",
+      "NameEn": "Skyward Harp",
+      "ImgSrc": "UI_EquipIcon_Bow_Dvalin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15501"
+    },
+    {
+      "Name": "阿莫斯之弓",
+      "NameEn": "Amos' Bow",
+      "ImgSrc": "UI_EquipIcon_Bow_Amos",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15502"
+    },
+    {
+      "Name": "终末嗟叹之诗",
+      "NameEn": "Elegy for the End",
+      "ImgSrc": "UI_EquipIcon_Bow_Widsith",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15503"
+    },
+    {
+      "Name": "Kunwu's Wyrmbane",
+      "NameEn": "Kunwu's Wyrmbane",
+      "ImgSrc": "UI_EquipIcon_Bow_Hunters",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15504"
+    },
+    {
+      "Name": "Primordial Jade Vista",
+      "NameEn": "Primordial Jade Vista",
+      "ImgSrc": "UI_EquipIcon_Bow_Hunters",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15505"
+    },
+    {
+      "Name": "冬极白星",
+      "NameEn": "Polar Star",
+      "ImgSrc": "UI_EquipIcon_Bow_Worldbane",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15507"
+    },
+    {
+      "Name": "若水",
+      "NameEn": "Aqua Simulacra",
+      "ImgSrc": "UI_EquipIcon_Bow_Kirin",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15508"
+    },
+    {
+      "Name": "飞雷之弦振",
+      "NameEn": "Thundering Pulse",
+      "ImgSrc": "UI_EquipIcon_Bow_Narukami",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15509"
+    },
+    {
+      "Name": "猎人之径",
+      "NameEn": "Hunter's Path",
+      "ImgSrc": "UI_EquipIcon_Bow_Ayus",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15511"
+    },
+    {
+      "Name": "最初的大魔术",
+      "NameEn": "The First Great Magic",
+      "ImgSrc": "UI_EquipIcon_Bow_Pledge",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15512"
+    },
+    {
+      "Name": "白雨心弦",
+      "NameEn": "Silvershower Heartstrings",
+      "ImgSrc": "UI_EquipIcon_Bow_Arcdange",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15513"
+    },
+    {
+      "Name": "星鹫赤羽",
+      "NameEn": "Astral Vulture's Crimson Plumage",
+      "ImgSrc": "UI_EquipIcon_Bow_Qoyllorsnova",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15514"
+    },
+    {
+      "Name": "黎明破晓之史",
+      "NameEn": "The Daybreak Chronicles",
+      "ImgSrc": "UI_EquipIcon_Bow_Arianna",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15515"
+    },
+    {
+      "Name": "霜结的誓金枝",
+      "NameEn": "Golden Frostbound Oath",
+      "ImgSrc": "UI_EquipIcon_Bow_Alkonost",
+      "ElementSrc": "",
+      "Type": "weapon",
+      "Rank": "5",
+      "ItemId": "15516"
+    }
+  ]
+}
