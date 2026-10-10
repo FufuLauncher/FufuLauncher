@@ -7092,4 +7092,19 @@ UIGF v4.x/3.0/2.x</value>
   <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
     <value>默认关闭；开启后按下方策略校验插件签名，关闭时跳过校验。</value>
   </data>
+  <data name="Plugin_ResinRewardDisable_Title" xml:space="preserve">
+    <value>关闭奖励领取方式</value>
+  </data>
+  <data name="Plugin_ResinRewardDisable_Content" xml:space="preserve">
+    <value>使用{0}领取奖励关闭就意味着{0}就不会出现在你的奖励领取列表中了，你无法通过该方式领取奖励。</value>
+  </data>
+  <data name="Plugin_ResinRewardDisable_Confirm" xml:space="preserve">
+    <value>仍要关闭</value>
+  </data>
+  <data name="Plugin_PreventDetectionPopupDisable_Title" xml:space="preserve">
+    <value>关闭功能警告</value>
+  </data>
+  <data name="Plugin_PreventDetectionPopupDisable_Content" xml:space="preserve">
+    <value>关闭「{0}」可能在部分特殊场景中会被踢出游戏。</value>
+  </data>
 </root>

@@ -78,7 +78,8 @@
                                   VerticalAlignment="Center"
                                   Visibility="{x:Bind SelectionMarkVisibility, Mode=OneWay}" />
                     </StackPanel>
-                    <ToggleSwitch IsOn="{x:Bind BoolValue, Mode=TwoWay}" OnContent="{helpers:Loc Key=OnLabel}"
+                    <ToggleSwitch IsOn="{Binding BoolValue, Mode=OneWay}"
+                                  Toggled="OnSettingBoolToggled" OnContent="{helpers:Loc Key=OnLabel}"
                                   OffContent="{helpers:Loc Key=OffLabel}" MinWidth="0" Margin="0" />
                 </StackPanel>
             </DataTemplate>

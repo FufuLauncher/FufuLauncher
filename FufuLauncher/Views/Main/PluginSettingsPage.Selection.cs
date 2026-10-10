@@ -259,7 +259,27 @@ public sealed partial class PluginSettingsPage
 
     private void OnBatchEnableClick(object sender, RoutedEventArgs e) => ViewModel.BatchSetBoolValue(true);
 
-    private void OnBatchDisableClick(object sender, RoutedEventArgs e) => ViewModel.BatchSetBoolValue(false);
+    private async void OnBatchDisableClick(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded || !ViewModel.IsSettingsInteractable || _settingDisableWarningDialog != null) return;
+
+        var settings = ViewModel.SelectedSettings
+            .Where(item => string.Equals(item.Type, "bool", StringComparison.OrdinalIgnoreCase) && item.BoolValue)
+            .ToArray();
+
+        if (!await ConfirmSettingDisableAsync(settings)) return;
+        if (!IsLoaded || !ViewModel.IsSettingsInteractable) return;
+
+        foreach (var item in settings)
+        {
+            if (IsCurrentSetting(item))
+            {
+                item.BoolValue = false;
+            }
+        }
+
+        ViewModel.NotifySelectionChanged();
+    }
 
     private async void OnBatchPinClick(object sender, RoutedEventArgs e) =>
         await AnimateSettingPinAsync(ViewModel.SelectedSettings.ToArray(), true, clearSelection: true);

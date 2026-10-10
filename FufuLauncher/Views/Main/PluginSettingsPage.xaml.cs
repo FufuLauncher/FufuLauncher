@@ -97,6 +97,7 @@ public sealed partial class PluginSettingsPage : Page
 
     private void PluginSettingsPage_Unloaded(object sender, RoutedEventArgs e)
     {
+        _settingDisableWarningDialog?.Hide();
         StopConfigurationChrome();
         ViewModel.SuspendConfigurationLoading();
         ResetSettingEntranceAnimations(false);

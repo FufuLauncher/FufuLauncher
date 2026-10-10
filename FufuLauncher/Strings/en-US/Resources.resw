@@ -7094,4 +7094,19 @@ Error: {0}</value>
   <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
     <value>Disabled by default. When enabled, the warning or strict policy below applies.</value>
   </data>
+  <data name="Plugin_ResinRewardDisable_Title" xml:space="preserve">
+    <value>Disable a reward claim method</value>
+  </data>
+  <data name="Plugin_ResinRewardDisable_Content" xml:space="preserve">
+    <value>Disabling reward claims using {0} means {0} will no longer appear in your reward claim list. You will not be able to claim rewards using this method.</value>
+  </data>
+  <data name="Plugin_ResinRewardDisable_Confirm" xml:space="preserve">
+    <value>Disable anyway</value>
+  </data>
+  <data name="Plugin_PreventDetectionPopupDisable_Title" xml:space="preserve">
+    <value>Warning before disabling a feature</value>
+  </data>
+  <data name="Plugin_PreventDetectionPopupDisable_Content" xml:space="preserve">
+    <value>Disabling “{0}” may cause you to be kicked out of the game in certain special situations.</value>
+  </data>
 </root>
