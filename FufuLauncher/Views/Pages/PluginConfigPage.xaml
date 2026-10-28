@@ -11,33 +11,53 @@
     Background="Transparent">
 
     <Page.Resources>
+        <CollectionViewSource x:Name="ConfigOptionsViewSource" IsSourceGrouped="True" ItemsPath="Items" />
+
         <DataTemplate x:Key="OptionHeaderTemplate" x:DataType="models:PluginConfigOption">
-            <Grid MinHeight="20" Margin="0,0,0,8">
+            <Grid MinHeight="20" Margin="0,0,0,8" HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{x:Bind DisplayName}"
+                           MaxWidth="{x:Bind HeaderTextMaxWidth}"
                            Style="{StaticResource PluginSettingLabelStyle}"
                            ToolTipService.ToolTip="{x:Bind ToolTipText}" />
                 <Button Grid.Column="1"
                         Margin="4,0,0,0"
-                        Width="20" Height="20" MinWidth="0" MinHeight="0"
-                        Padding="0" CornerRadius="10"
-                        Background="Transparent" BorderThickness="0" Opacity="0.5"
+                        Style="{StaticResource PluginSettingActionButtonStyle}"
                         Visibility="{x:Bind HasDescription, Converter={StaticResource BoolToVisibilityConverter}}"
                         ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}"
                         AutomationProperties.Name="{helpers:Loc Key=ViewHelpTooltip}">
                     <FontIcon Glyph="&#xE9CE;" FontSize="12" />
                     <Button.Flyout>
                         <Flyout Placement="Right">
-                            <StackPanel Spacing="8" MaxWidth="320">
-                                <TextBlock Text="{x:Bind DisplayName}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </StackPanel>
+                            <Flyout.FlyoutPresenterStyle>
+                                <Style TargetType="FlyoutPresenter">
+                                    <Setter Property="MinWidth" Value="0" />
+                                    <Setter Property="MaxWidth" Value="640" />
+                                    <Setter Property="MaxHeight" Value="480" />
+                                    <Setter Property="CornerRadius" Value="8" />
+                                </Style>
+                            </Flyout.FlyoutPresenterStyle>
+                            <ScrollViewer MaxHeight="420" HorizontalScrollMode="Disabled"
+                                          HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                <StackPanel Spacing="8" MaxWidth="560">
+                                    <TextBlock Text="{x:Bind DisplayName}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                    <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap"
+                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </StackPanel>
+                            </ScrollViewer>
                         </Flyout>
                     </Button.Flyout>
+                </Button>
+                <Button Grid.Column="2" Margin="4,0,0,0" Tag="{x:Bind}" Click="OnPinOptionClick"
+                        Style="{StaticResource PluginSettingActionButtonStyle}"
+                        Opacity="{x:Bind PinOpacity, Mode=OneWay}"
+                        ToolTipService.ToolTip="{x:Bind PinTooltip, Mode=OneWay}"
+                        AutomationProperties.Name="{x:Bind PinTooltip, Mode=OneWay}">
+                    <FontIcon Glyph="{x:Bind PinGlyph, Mode=OneWay}" FontSize="12" />
                 </Button>
             </Grid>
         </DataTemplate>
@@ -320,7 +340,20 @@
                               ItemsPanel="{StaticResource SettingItemsPanel}"
                               SelectionMode="None" IsItemClickEnabled="False" HorizontalAlignment="Stretch"
                               ScrollViewer.VerticalScrollMode="Disabled"
-                              ScrollViewer.HorizontalScrollMode="Disabled" />
+                              ScrollViewer.HorizontalScrollMode="Disabled">
+                        <GridView.GroupStyle>
+                            <GroupStyle HidesIfEmpty="True"
+                                        HeaderContainerStyle="{StaticResource PluginSettingGroupHeaderStyle}">
+                                <GroupStyle.HeaderTemplate>
+                                    <DataTemplate x:DataType="models:PluginConfigOptionGroup">
+                                        <Rectangle Height="1" Margin="0,0,0,24"
+                                                   Fill="{ThemeResource DividerStrokeColorDefaultBrush}"
+                                                   Visibility="{x:Bind ShowSeparator, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                    </DataTemplate>
+                                </GroupStyle.HeaderTemplate>
+                            </GroupStyle>
+                        </GridView.GroupStyle>
+                    </GridView>
                 </ScrollViewer>
                 <StackPanel x:Name="EmptyStatePanel" Visibility="Collapsed" Spacing="12" Margin="24"
                             MaxWidth="420" HorizontalAlignment="Center" VerticalAlignment="Center">

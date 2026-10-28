@@ -4,14 +4,14 @@ Licensed under the MIT License.
 */
 
 using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
+using FufuLauncher.Models;
 
 namespace FufuLauncher.ViewModels;
 
-public class PluginSettingItem : ObservableObject
+public class PluginSettingItem : PinnablePluginSetting
 {
     private readonly IniFile _iniFile;
     private readonly Action<string, string, string> _onValueChanged;
@@ -46,28 +46,6 @@ public class PluginSettingItem : ObservableObject
         : Microsoft.UI.Xaml.Visibility.Collapsed;
 
     public Microsoft.UI.Xaml.Visibility GifErrorVisibility => Microsoft.UI.Xaml.Visibility.Collapsed;
-
-    private bool _isPinned;
-
-    public bool IsPinned
-    {
-        get => _isPinned;
-        set
-        {
-            if (SetProperty(ref _isPinned, value))
-            {
-                OnPropertyChanged(nameof(PinGlyph));
-                OnPropertyChanged(nameof(PinOpacity));
-                OnPropertyChanged(nameof(PinTooltip));
-            }
-        }
-    }
-
-    public string PinGlyph => IsPinned ? "\uE735" : "\uE734";
-
-    public double PinOpacity => IsPinned ? 0.95 : 0.5;
-
-    public string PinTooltip => IsPinned ? "UnpinSettingTooltip".GetLocalized() : "PinSettingTooltip".GetLocalized();
 
     private bool _isSelected;
 

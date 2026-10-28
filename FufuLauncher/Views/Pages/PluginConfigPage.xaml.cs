@@ -15,7 +15,8 @@ namespace FufuLauncher.Views;
 public sealed partial class PluginConfigPage : Page
 {
     private static readonly TimeSpan ExitAnimationTimeout = TimeSpan.FromMilliseconds(600);
-    private readonly ObservableCollection<PluginConfigOption> _visibleOptions = new();
+    private readonly ObservableCollection<PluginConfigOption> _pinnedOptions = new();
+    private readonly ObservableCollection<PluginConfigOption> _regularOptions = new();
     private readonly ObservableCollection<PluginConfigInfoItem> _infoItems = new();
     private readonly DispatcherQueueTimer _autoSaveTimer;
     private PluginItem? _pluginItem;
@@ -36,7 +37,12 @@ public sealed partial class PluginConfigPage : Page
     public PluginConfigPage()
     {
         InitializeComponent();
-        ConfigGridView.ItemsSource = _visibleOptions;
+        ConfigOptionsViewSource.Source = new[]
+        {
+            new PluginConfigOptionGroup(_pinnedOptions),
+            new PluginConfigOptionGroup(_regularOptions, _pinnedOptions)
+        };
+        ConfigGridView.ItemsSource = ConfigOptionsViewSource.View;
         InfoItemsControl.ItemsSource = _infoItems;
         _autoSaveTimer = DispatcherQueue.CreateTimer();
         _autoSaveTimer.Interval = TimeSpan.FromMilliseconds(350);

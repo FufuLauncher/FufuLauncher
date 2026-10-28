@@ -2,7 +2,6 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
-using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models;
@@ -30,7 +29,7 @@ public enum PluginConfigValueKind
     Enumeration
 }
 
-public sealed class PluginConfigOption : ObservableObject
+public sealed class PluginConfigOption : PinnablePluginSetting
 {
     private string _value;
     private readonly IReadOnlyList<PluginConfigChoice> _staticChoices = Array.Empty<PluginConfigChoice>();
@@ -90,6 +89,7 @@ public sealed class PluginConfigOption : ObservableObject
     }
 
     public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
+    public double HeaderTextMaxWidth => HasDescription ? 192 : 216;
 
     public bool UsesGamepadChoices
     {

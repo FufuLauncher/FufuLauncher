@@ -41,7 +41,8 @@ public sealed partial class PluginConfigPage
         _saveTask = null;
         _retryAction = null;
         _hasSaveError = false;
-        _visibleOptions.Clear();
+        _pinnedOptions.Clear();
+        _regularOptions.Clear();
         _infoItems.Clear();
         ConfigMessageBar.IsOpen = false;
         ConfigLoadErrorBar.IsOpen = false;
@@ -66,6 +67,8 @@ public sealed partial class PluginConfigPage
             }
 
             var configuration = await PluginConfiguration.LoadAsync(path, cancellation.Token);
+            var pinnedSections = await LoadPinnedOptionsAsync(path, cancellation.Token);
+            foreach (var option in configuration.Options) option.IsPinned = pinnedSections.Contains(option.SectionName);
             if (configuration.Options.Any(option => option.Kind == PluginConfigValueKind.Key))
             {
                 var keyPreference = await App.GetService<ILocalSettingsService>().ReadSettingAsync("UseKeyListInput");
@@ -189,7 +192,7 @@ public sealed partial class PluginConfigPage
         }
     }
 
-    private void UpdateVisibleOptions()
+    private void UpdateVisibleOptions(bool resetScroll = true)
     {
         if (_configuration == null)
         {
@@ -205,17 +208,18 @@ public sealed partial class PluginConfigPage
                                                              option.Description.Contains(query,
                                                                  StringComparison.CurrentCultureIgnoreCase)).ToArray();
 
-        _visibleOptions.Clear();
+        _pinnedOptions.Clear();
+        _regularOptions.Clear();
         foreach (var option in options)
         {
-            _visibleOptions.Add(option);
+            (option.IsPinned ? _pinnedOptions : _regularOptions).Add(option);
         }
 
         OptionCountTextBlock.Text = query.Length == 0
             ? string.Format(CultureInfo.CurrentCulture, "PluginConfigPage_OptionCount".GetLocalized(), options.Length)
             : string.Format(CultureInfo.CurrentCulture, "PluginConfigPage_FilteredOptionCount".GetLocalized(),
                 options.Length, _configuration.Options.Count);
-        SettingsScrollViewer.ChangeView(null, 0, null, true);
+        if (resetScroll) SettingsScrollViewer.ChangeView(null, 0, null, true);
         SettingsScrollViewer.Visibility = options.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         EmptyStatePanel.Visibility = options.Length > 0 ? Visibility.Collapsed : Visibility.Visible;
 

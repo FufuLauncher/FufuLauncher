@@ -29,10 +29,8 @@
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
-                                FontFamily="Segoe Fluent Icons" FontSize="12" Width="20" Height="20" MinWidth="0"
-                                MinHeight="0" Padding="0" CornerRadius="10" Background="Transparent"
-                                BorderThickness="0" Opacity="0.5" VerticalAlignment="Center"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
@@ -64,11 +62,8 @@
                         </Button>
                         <Button Click="OnPinSettingClick"
                                 Tag="{x:Bind}"
-                                FontSize="12" Width="20" Height="20" MinWidth="0" MinHeight="0" Padding="0"
-                                CornerRadius="10"
-                                Background="Transparent" BorderThickness="0"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 Opacity="{x:Bind PinOpacity, Mode=OneWay}"
-                                VerticalAlignment="Center"
                                 ToolTipService.ToolTip="{x:Bind PinTooltip, Mode=OneWay}">
                             <FontIcon Glyph="{x:Bind PinGlyph, Mode=OneWay}" FontSize="12" />
                         </Button>
@@ -88,10 +83,8 @@
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
-                                FontFamily="Segoe Fluent Icons" FontSize="12" Width="20" Height="20" MinWidth="0"
-                                MinHeight="0" Padding="0" CornerRadius="10" Background="Transparent"
-                                BorderThickness="0" Opacity="0.5" VerticalAlignment="Center"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
@@ -123,11 +116,8 @@
                         </Button>
                         <Button Click="OnPinSettingClick"
                                 Tag="{x:Bind}"
-                                FontSize="12" Width="20" Height="20" MinWidth="0" MinHeight="0" Padding="0"
-                                CornerRadius="10"
-                                Background="Transparent" BorderThickness="0"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 Opacity="{x:Bind PinOpacity, Mode=OneWay}"
-                                VerticalAlignment="Center"
                                 ToolTipService.ToolTip="{x:Bind PinTooltip, Mode=OneWay}">
                             <FontIcon Glyph="{x:Bind PinGlyph, Mode=OneWay}" FontSize="12" />
                         </Button>
@@ -158,10 +148,8 @@
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
-                                FontFamily="Segoe Fluent Icons" FontSize="12" Width="20" Height="20" MinWidth="0"
-                                MinHeight="0" Padding="0" CornerRadius="10" Background="Transparent"
-                                BorderThickness="0" Opacity="0.5" VerticalAlignment="Center"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
@@ -193,11 +181,8 @@
                         </Button>
                         <Button Click="OnPinSettingClick"
                                 Tag="{x:Bind}"
-                                FontSize="12" Width="20" Height="20" MinWidth="0" MinHeight="0" Padding="0"
-                                CornerRadius="10"
-                                Background="Transparent" BorderThickness="0"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 Opacity="{x:Bind PinOpacity, Mode=OneWay}"
-                                VerticalAlignment="Center"
                                 ToolTipService.ToolTip="{x:Bind PinTooltip, Mode=OneWay}">
                             <FontIcon Glyph="{x:Bind PinGlyph, Mode=OneWay}" FontSize="12" />
                         </Button>
@@ -216,10 +201,8 @@
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
-                                FontFamily="Segoe Fluent Icons" FontSize="12" Width="20" Height="20" MinWidth="0"
-                                MinHeight="0" Padding="0" CornerRadius="10" Background="Transparent"
-                                BorderThickness="0" Opacity="0.5" VerticalAlignment="Center"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
@@ -251,11 +234,8 @@
                         </Button>
                         <Button Click="OnPinSettingClick"
                                 Tag="{x:Bind}"
-                                FontSize="12" Width="20" Height="20" MinWidth="0" MinHeight="0" Padding="0"
-                                CornerRadius="10"
-                                Background="Transparent" BorderThickness="0"
+                                Style="{StaticResource PluginSettingActionButtonStyle}"
                                 Opacity="{x:Bind PinOpacity, Mode=OneWay}"
-                                VerticalAlignment="Center"
                                 ToolTipService.ToolTip="{x:Bind PinTooltip, Mode=OneWay}">
                             <FontIcon Glyph="{x:Bind PinGlyph, Mode=OneWay}" FontSize="12" />
                         </Button>
@@ -701,23 +681,8 @@
                             </Grid>
                         </GridView.Header>
                         <GridView.GroupStyle>
-                            <GroupStyle HidesIfEmpty="True">
-                                <GroupStyle.HeaderContainerStyle>
-                                    <Style TargetType="GridViewHeaderItem">
-                                        <Setter Property="Padding" Value="0" />
-                                        <Setter Property="Margin" Value="0" />
-                                        <Setter Property="MinHeight" Value="0" />
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="GridViewHeaderItem">
-                                                    <ContentPresenter Content="{TemplateBinding Content}"
-                                                                      ContentTemplate="{TemplateBinding ContentTemplate}"
-                                                                      HorizontalAlignment="Stretch" />
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </GroupStyle.HeaderContainerStyle>
+                            <GroupStyle HidesIfEmpty="True"
+                                        HeaderContainerStyle="{StaticResource PluginSettingGroupHeaderStyle}">
                                 <GroupStyle.HeaderTemplate>
                                     <DataTemplate x:DataType="viewmodels:PluginSettingsGroup">
                                         <Rectangle Height="1" Margin="0,0,0,24"
