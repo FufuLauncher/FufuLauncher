@@ -252,7 +252,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,16">
@@ -355,165 +354,183 @@
             </AppBarButton>
         </CommandBar>
 
-        <ListView x:Name="PluginListView"
-                  Grid.Row="2"
-                  ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
-                  ContainerContentChanging="OnPluginLayoutContainerChanging"
-                  SelectionMode="None"
-                  Padding="0,12,0,0">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:PluginItem">
-                    <Grid Style="{StaticResource SafePluginCardStyle}" Translation="0,0,32">
-                        <Grid.Shadow>
-                            <ThemeShadow />
-                        </Grid.Shadow>
-                        <Grid.ContextFlyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
-                                                Tag="{x:Bind}" />
-                                <MenuFlyoutItem Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
-                                                Icon="Delete" Tag="{x:Bind}" />
-                            </MenuFlyout>
-                        </Grid.ContextFlyout>
+        <ScrollViewer x:Name="PluginContentScroll"
+                      Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      HorizontalScrollMode="Disabled">
+            <Grid MinHeight="{Binding ViewportHeight, ElementName=PluginContentScroll}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0">
+                    <ListView x:Name="PluginListView"
+                              ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
+                              ContainerContentChanging="OnPluginLayoutContainerChanging"
+                              SelectionMode="None"
+                              Padding="0,12,0,0"
+                              ScrollViewer.VerticalScrollMode="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="models:PluginItem">
+                                <Grid Style="{StaticResource SafePluginCardStyle}" Translation="0,0,32">
+                                    <Grid.Shadow>
+                                        <ThemeShadow />
+                                    </Grid.Shadow>
+                                    <Grid.ContextFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
+                                                            Tag="{x:Bind}" />
+                                            <MenuFlyoutItem Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
+                                                            Icon="Delete" Tag="{x:Bind}" />
+                                        </MenuFlyout>
+                                    </Grid.ContextFlyout>
 
-                        <FontIcon Glyph="&#xE74C;" FontFamily="Segoe MDL2 Assets" FontSize="24"
-                                  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                  Margin="0,0,16,0" VerticalAlignment="Center" />
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
-                            <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}"
-                                       Style="{StaticResource BodyStrongTextBlockStyle}"
-                                       Foreground="{ThemeResource SafeTextBrush}"
-                                       FontFamily="{StaticResource AppGlobalFont}" />
+                                    <FontIcon Glyph="&#xE74C;" FontFamily="Segoe MDL2 Assets" FontSize="24"
+                                              Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                              Margin="0,0,16,0" VerticalAlignment="Center" />
 
-                            <TextBlock Text="{x:Bind Description, Mode=OneWay}"
-                                       Visibility="{x:Bind DescriptionVisibility, Mode=OneWay}"
-                                       Style="{StaticResource CaptionTextBlockStyle}"
-                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                       TextWrapping="Wrap"
-                                       TextTrimming="CharacterEllipsis"
-                                       MaxLines="2"
-                                       Margin="0,0,8,4"
-                                       FontFamily="{StaticResource AppGlobalFont}" />
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
+                                        <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}"
+                                                   Style="{StaticResource BodyStrongTextBlockStyle}"
+                                                   Foreground="{ThemeResource SafeTextBrush}"
+                                                   FontFamily="{StaticResource AppGlobalFont}" />
 
-                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="{x:Bind Description, Mode=OneWay}"
+                                                   Visibility="{x:Bind DescriptionVisibility, Mode=OneWay}"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                   TextWrapping="Wrap"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   MaxLines="2"
+                                                   Margin="0,0,8,4"
+                                                   FontFamily="{StaticResource AppGlobalFont}" />
 
-                                <StackPanel Orientation="Horizontal" Spacing="8"
-                                            Visibility="{x:Bind DeveloperVisibility, Mode=OneWay}">
-                                    <TextBlock Text="{x:Bind Developer, Mode=OneWay}"
-                                               Style="{StaticResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
-                                               MaxWidth="120"
-                                               TextTrimming="CharacterEllipsis"
-                                               ToolTipService.ToolTip="{x:Bind Developer, Mode=OneWay}"
-                                               FontFamily="{StaticResource AppGlobalFont}" />
-                                    <TextBlock Text="|" Style="{StaticResource CaptionTextBlockStyle}"
-                                               Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                               FontFamily="{StaticResource AppGlobalFont}" />
-                                </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="8">
 
-                                <TextBlock Text="{x:Bind FileSizeDisplay, Mode=OneWay}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-                                <TextBlock Text="|" Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-                                <TextBlock Text="{x:Bind DateModified, Mode=OneWay}"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-                            </StackPanel>
-                        </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Spacing="8"
+                                                        Visibility="{x:Bind DeveloperVisibility, Mode=OneWay}">
+                                                <TextBlock Text="{x:Bind Developer, Mode=OneWay}"
+                                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                                           MaxWidth="120"
+                                                           TextTrimming="CharacterEllipsis"
+                                                           ToolTipService.ToolTip="{x:Bind Developer, Mode=OneWay}"
+                                                           FontFamily="{StaticResource AppGlobalFont}" />
+                                                <TextBlock Text="|" Style="{StaticResource CaptionTextBlockStyle}"
+                                                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                           FontFamily="{StaticResource AppGlobalFont}" />
+                                            </StackPanel>
 
-                        <Button Grid.Column="2"
-                                Click="OnConfigClick"
-                                Tag="{x:Bind}"
-                                Visibility="{x:Bind ConfigVisibility, Mode=OneWay}"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                Margin="0,0,8,0"
-                                VerticalAlignment="Center"
-                                ToolTipService.ToolTip="{helpers:Loc Key=EditConfigTooltip}">
-                            <StackPanel Orientation="Horizontal" Spacing="6">
-                                <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
-                                <TextBlock Text="{helpers:Loc Key=PluginSettingsLabel}" VerticalAlignment="Center"
-                                           FontSize="12" FontFamily="{StaticResource AppGlobalFont}" />
-                            </StackPanel>
-                        </Button>
+                                            <TextBlock Text="{x:Bind FileSizeDisplay, Mode=OneWay}"
+                                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                       FontFamily="{StaticResource AppGlobalFont}" />
+                                            <TextBlock Text="|" Style="{StaticResource CaptionTextBlockStyle}"
+                                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                       FontFamily="{StaticResource AppGlobalFont}" />
+                                            <TextBlock Text="{x:Bind DateModified, Mode=OneWay}"
+                                                       Style="{StaticResource CaptionTextBlockStyle}"
+                                                       Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                       FontFamily="{StaticResource AppGlobalFont}" />
+                                        </StackPanel>
+                                    </StackPanel>
 
-                        <ToggleSwitch Grid.Column="3"
-                                      IsOn="{x:Bind IsEnabled, Mode=OneWay}"
-                                      Toggled="OnPluginToggled"
-                                      Tag="{x:Bind}"
-                                      OffContent="" OnContent=""
-                                      Margin="8,0,0,0"
-                                      VerticalAlignment="Center"
-                                      MinWidth="0" />
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                                    <Button Grid.Column="2"
+                                            Click="OnConfigClick"
+                                            Tag="{x:Bind}"
+                                            Visibility="{x:Bind ConfigVisibility, Mode=OneWay}"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Margin="0,0,8,0"
+                                            VerticalAlignment="Center"
+                                            ToolTipService.ToolTip="{helpers:Loc Key=EditConfigTooltip}">
+                                        <StackPanel Orientation="Horizontal" Spacing="6">
+                                            <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="16" />
+                                            <TextBlock Text="{helpers:Loc Key=PluginSettingsLabel}" VerticalAlignment="Center"
+                                                       FontSize="12" FontFamily="{StaticResource AppGlobalFont}" />
+                                        </StackPanel>
+                                    </Button>
 
-        <GridView x:Name="PluginLayoutGridView"
-                  Grid.Row="2"
-                  Margin="-12,0,-12,0"
-                  Padding="0"
-                  ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
-                  ItemTemplate="{StaticResource PluginGridCardTemplate}"
-                  ItemContainerStyle="{StaticResource PluginLayoutCardContainerStyle}"
-                  ContainerContentChanging="OnPluginLayoutContainerChanging"
-                  SelectionMode="None"
-                  Visibility="Collapsed">
-            <GridView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" />
-                </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-        </GridView>
+                                    <ToggleSwitch Grid.Column="3"
+                                                  IsOn="{x:Bind IsEnabled, Mode=OneWay}"
+                                                  Toggled="OnPluginToggled"
+                                                  Tag="{x:Bind}"
+                                                  OffContent="" OnContent=""
+                                                  Margin="8,0,0,0"
+                                                  VerticalAlignment="Center"
+                                                  MinWidth="0" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-        <TextBlock Grid.Row="2"
-                   Text="{helpers:Loc Key=EmptyPluginLibrary}"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                   Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
-                   FontFamily="{StaticResource AppGlobalFont}" />
+                    <GridView x:Name="PluginLayoutGridView"
+                              Margin="-12,0,-12,0"
+                              Padding="0"
+                              ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
+                              ItemTemplate="{StaticResource PluginGridCardTemplate}"
+                              ItemContainerStyle="{StaticResource PluginLayoutCardContainerStyle}"
+                              ContainerContentChanging="OnPluginLayoutContainerChanging"
+                              SelectionMode="None"
+                              Visibility="Collapsed"
+                              ScrollViewer.VerticalScrollMode="Disabled"
+                              ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
 
-        <Grid Grid.Row="3" Margin="0,12,0,0">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-                        Spacing="8">
-                <FontIcon Glyph="&#xE7BA;" FontFamily="Segoe MDL2 Assets"
-                          Foreground="{ThemeResource SystemFillColorCautionBrush}"
-                          FontSize="14" />
-                <TextBlock Text="{helpers:Loc Key=PluginSafetyDisclaimer}"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                           VerticalAlignment="Center"
-                           FontFamily="{StaticResource AppGlobalFont}" />
-            </StackPanel>
+                    <TextBlock Text="{helpers:Loc Key=EmptyPluginLibrary}"
+                               HorizontalAlignment="Center"
+                               Margin="0,64,0,12"
+                               Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                               Visibility="{x:Bind ViewModel.IsEmpty, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
+                               FontFamily="{StaticResource AppGlobalFont}" />
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        Spacing="8">
-                <TextBlock Text="{helpers:Loc Key=DiagnosticsHint}"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource CaptionTextBlockStyle}"
-                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
-                           FontFamily="{StaticResource AppGlobalFont}" />
-                <Button Content="{helpers:Loc Key=DiagnosticsBtn}"
-                        Click="OnOpenDiagnosticsClick"
-                        VerticalAlignment="Center" />
-            </StackPanel>
-        </Grid>
+                </StackPanel>
+
+                <Grid Grid.Row="1" Margin="0,20,0,8">
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Spacing="8">
+                        <FontIcon Glyph="&#xE7BA;" FontFamily="Segoe MDL2 Assets"
+                                  Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                                  FontSize="14" />
+                        <TextBlock Text="{helpers:Loc Key=PluginSafetyDisclaimer}"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                   VerticalAlignment="Center"
+                                   FontFamily="{StaticResource AppGlobalFont}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Spacing="8">
+                        <TextBlock Text="{helpers:Loc Key=DiagnosticsHint}"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                   FontFamily="{StaticResource AppGlobalFont}" />
+                        <Button Content="{helpers:Loc Key=DiagnosticsBtn}"
+                                Click="OnOpenDiagnosticsClick"
+                                VerticalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>
