@@ -180,15 +180,6 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Grid.Column="0"
-                                           Text="{x:Bind StatusText, Mode=OneWay}"
-                                           Foreground="{x:Bind StatusColor, Mode=OneWay}"
-                                           VerticalAlignment="Center"
-                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                           MaxLines="1"
-                                           TextTrimming="CharacterEllipsis"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-
                                 <Button Grid.Column="1"
                                         Click="OnConfigClick"
                                         Tag="{x:Bind}"
@@ -390,7 +381,6 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <FontIcon Glyph="&#xE74C;" FontFamily="Segoe MDL2 Assets" FontSize="24"
@@ -459,19 +449,12 @@
                             </StackPanel>
                         </Button>
 
-                        <TextBlock Grid.Column="3"
-                                   Text="{x:Bind StatusText, Mode=OneWay}"
-                                   Foreground="{x:Bind StatusColor, Mode=OneWay}"
-                                   VerticalAlignment="Center"
-                                   Margin="0,0,16,0"
-                                   Style="{StaticResource CaptionTextBlockStyle}"
-                                   FontFamily="{StaticResource AppGlobalFont}" />
-
-                        <ToggleSwitch Grid.Column="4"
+                        <ToggleSwitch Grid.Column="3"
                                       IsOn="{x:Bind IsEnabled, Mode=OneWay}"
                                       Toggled="OnPluginToggled"
                                       Tag="{x:Bind}"
                                       OffContent="" OnContent=""
+                                      Margin="8,0,0,0"
                                       VerticalAlignment="Center"
                                       MinWidth="0" />
                     </Grid>
