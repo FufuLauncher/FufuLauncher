@@ -57,7 +57,7 @@ namespace FufuLauncher.Constants
         public const string MihoyoBbsSignUrl = MihoyoBbsWebApi + "/event/luna/sign";
 
         public const string PluginProxyUrl =
-            "https://gh-proxy.com/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";
+            "https://gh-proxy.org/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";
 
         public const string PluginRawUrl =
             "https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip?raw=true";
@@ -277,7 +277,7 @@ namespace FufuLauncher.Constants
         public const string GithubApiBase = "https://api.github.com";
         public const string GithubWebBase = "https://github.com";
         public const string GithubAvatarsBase = "https://avatars.githubusercontent.com";
-        public const string GhProxyBase = "https://gh-proxy.com";
+        public const string GhProxyBase = "https://gh-proxy.org";
         public const string DevServiceBase = "https://dev.s1ky3.xyz";
         public const string CertificateSyncUrl = "https://certificate.fu1.fun";
         public const string BingBase = "https://www.bing.com";
