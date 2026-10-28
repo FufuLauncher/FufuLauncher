@@ -9052,4 +9052,19 @@ Detail: {0}</value>
   <data name="McpTool_CancelInstallCaption" xml:space="preserve">
     <value>Batalkan pemasangan yang berjalan atau menunggu dan tutup jendela verifikasi.</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>Versi game {0} tidak termasuk dalam persyaratan plugin: {1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>Persyaratan versi game di config.ini plugin tidak dapat diurai: {0} (tidak dikenali: {1})</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>Plugin tidak kompatibel dengan versi game saat ini</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>Abaikan pembatasan versi plugin</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>Jika diaktifkan, plugin tidak lagi dinonaktifkan otomatis atau diblokir untuk diaktifkan berdasarkan versi game yang dideklarasikan. Plugin yang tidak kompatibel dapat membuat game crash; gunakan dengan hati-hati.</value>
+  </data>
 </root>

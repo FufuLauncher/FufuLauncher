@@ -315,6 +315,11 @@ public partial class SettingsViewModel
         var ignoreConstraintJson = await _localSettingsService.ReadSettingAsync(ConstraintService.IgnoreSettingKey);
         IgnoreConstraintRestrictions = ignoreConstraintJson != null && Convert.ToBoolean(ignoreConstraintJson);
 
+        var ignoreGameVersionJson =
+            await _localSettingsService.ReadSettingAsync(PluginGameVersionGuard.IgnoreSettingKey);
+        IgnorePluginGameVersionRestriction =
+            ignoreGameVersionJson != null && Convert.ToBoolean(ignoreGameVersionJson);
+
         var shortTermJson = await _localSettingsService.ReadSettingAsync("IsShortTermSupportEnabled");
         IsShortTermSupportEnabled = shortTermJson != null && Convert.ToBoolean(shortTermJson);
 
@@ -364,6 +369,12 @@ public partial class SettingsViewModel
         if (_isInitializing) return;
         _ = _localSettingsService.SaveSettingAsync(ConstraintService.IgnoreSettingKey, value);
         _ = App.GetService<ConstraintService>().SetIgnoreRestrictionsAsync(value);
+    }
+
+    partial void OnIgnorePluginGameVersionRestrictionChanged(bool value)
+    {
+        if (_isInitializing) return;
+        _ = _localSettingsService.SaveSettingAsync(PluginGameVersionGuard.IgnoreSettingKey, value);
     }
 
     #endregion

@@ -154,6 +154,7 @@ public partial class App
                 services.AddTransient<GachaAnalysisViewModel>();
                 services.AddSingleton<PluginStoreService>();
                 services.AddSingleton<LightweightPluginService>();
+                services.AddSingleton<PluginGameVersionGuard>();
                 services.AddSingleton<ConstraintService>();
                 services.AddSingleton<LuaPluginInstaller>();
                 services.AddSingleton<GameSessionService>();

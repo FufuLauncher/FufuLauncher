@@ -153,6 +153,20 @@ namespace FufuLauncher.Services
                     logBuilder?.AppendLine("[插件更新] 已将插件默认配置替换为预设配置");
                 }
 
+                var installedDllPath = LightweightPluginService.MainPluginDllPath;
+                if (File.Exists(installedDllPath) && !PluginGameVersionGuard.IsPluginUsable(installedDllPath))
+                {
+                    try
+                    {
+                        File.Move(installedDllPath, LightweightPluginService.MainPluginDisabledPath, true);
+                        logBuilder?.AppendLine("[插件更新] 主插件不支持当前游戏版本，已自动禁用");
+                    }
+                    catch (Exception ex)
+                    {
+                        logBuilder?.AppendLine($"[插件更新] 主插件自动禁用失败: {ex.Message}");
+                    }
+                }
+
                 logBuilder?.AppendLine("[插件更新] 主插件安装完成");
                 return true;
             }

@@ -241,13 +241,14 @@ namespace FufuLauncher
         private static string ResolveInjectDllPath(LauncherService launcher)
         {
             var defaultDllPath = launcher.GetDefaultDllPath();
-            if (!string.IsNullOrEmpty(defaultDllPath) && File.Exists(defaultDllPath))
+            if (!string.IsNullOrEmpty(defaultDllPath) && File.Exists(defaultDllPath) &&
+                PluginGameVersionGuard.IsPluginUsable(defaultDllPath))
             {
                 return defaultDllPath;
             }
 
             var lightweightDllPath = LightweightPluginService.LitePluginDllPath;
-            if (File.Exists(lightweightDllPath))
+            if (File.Exists(lightweightDllPath) && PluginGameVersionGuard.IsPluginUsable(lightweightDllPath))
             {
                 return lightweightDllPath;
             }
@@ -258,7 +259,9 @@ namespace FufuLauncher
                 if (Directory.Exists(pluginsDir))
                 {
                     var pluginDll = Directory.GetFiles(pluginsDir, "*.dll", SearchOption.AllDirectories)
-                        .FirstOrDefault(file => !file.EndsWith(".disabled", StringComparison.OrdinalIgnoreCase));
+                        .FirstOrDefault(file =>
+                            !file.EndsWith(".disabled", StringComparison.OrdinalIgnoreCase) &&
+                            PluginGameVersionGuard.IsPluginUsable(file));
 
                     if (!string.IsNullOrEmpty(pluginDll))
                     {

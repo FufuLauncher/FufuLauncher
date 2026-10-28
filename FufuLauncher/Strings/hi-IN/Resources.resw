@@ -9047,4 +9047,19 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="McpTool_CancelInstallCaption" xml:space="preserve">
     <value>चल रहा या सत्यापन की प्रतीक्षा कर रहा इंस्टॉल रद्द करें और सत्यापन विंडो बंद करें।</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>गेम संस्करण {0} प्लगइन की आवश्यकता में शामिल नहीं है: {1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>प्लगइन config.ini में गेम संस्करण आवश्यकता को पढ़ा नहीं जा सका: {0} (अपरिचित: {1})</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>प्लगइन वर्तमान गेम संस्करण के साथ असंगत है</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>प्लगइन संस्करण प्रतिबंधों को अनदेखा करें</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>सक्षम होने पर प्लगइन घोषित गेम संस्करण के आधार पर स्वतः अक्षम या सक्षम होने से नहीं रोके जाएंगे। असंगत प्लगइन से गेम क्रैश हो सकता है; सावधानी से उपयोग करें।</value>
+  </data>
 </root>

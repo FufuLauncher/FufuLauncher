@@ -9052,4 +9052,19 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="McpTool_CancelInstallCaption" xml:space="preserve">
     <value>실행 중이거나 검증을 기다리는 설치를 취소하고 검증 창을 닫습니다.</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>게임 버전 {0}은(는) 플러그인 지원 범위에 없습니다. 선언: {1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>플러그인 config.ini의 게임 버전 선언을 해석할 수 없습니다: {0} (인식할 수 없음: {1})</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>플러그인이 현재 게임 버전과 호환되지 않습니다</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>플러그인 버전 제한 무시</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>활성화하면 플러그인이 선언한 게임 버전에 따라 자동으로 비활성화되거나 활성화가 차단되지 않습니다. 호환되지 않는 플러그인은 게임이 비정상 종료될 수 있으니 주의하세요.</value>
+  </data>
 </root>

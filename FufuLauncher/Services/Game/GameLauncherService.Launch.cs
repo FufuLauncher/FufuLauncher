@@ -33,6 +33,8 @@ public partial class GameLauncherService
                 return result;
             }
 
+            DisableIncompatiblePlugins(logBuilder);
+
             var exeNames = await GameExeManager.GetExeNamesAsync();
             processNames = exeNames.Select(Path.GetFileNameWithoutExtension).ToList();
             var foundExes = exeNames.Where(name => File.Exists(Path.Combine(gamePath, name))).ToList();

@@ -198,6 +198,8 @@ public partial class SettingsViewModel : ObservableRecipient
 
     [ObservableProperty] private bool _ignoreConstraintRestrictions;
 
+    [ObservableProperty] private bool _ignorePluginGameVersionRestriction;
+
     [ObservableProperty] private bool _isCaptchaPopupDisabled;
 
     [ObservableProperty] private bool _isCaptchaNoticeEnabled = true;

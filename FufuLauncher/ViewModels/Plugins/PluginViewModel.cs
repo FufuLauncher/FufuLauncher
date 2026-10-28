@@ -181,19 +181,27 @@ public class PluginViewModel : INotifyPropertyChanged
             var rootDir = new DirectoryInfo(_pluginsPath);
             var subDirs = rootDir.GetDirectories();
             var nameConflictTracker = new Dictionary<string, List<string>>();
+            var versionGuard = App.GetService<PluginGameVersionGuard>();
 
             foreach (var dir in subDirs)
             {
-                var dllFile = dir.GetFiles("*.dll").FirstOrDefault();
-                var disabledFile = dir.GetFiles("*.dll.disabled").FirstOrDefault();
-
-                FileInfo targetFile = dllFile ?? disabledFile;
-                if (targetFile == null) continue;
-
-                bool isEnabled = dllFile != null;
-
                 var iniFile = dir.GetFiles("config.ini").FirstOrDefault()
                               ?? dir.GetFiles("*.ini").FirstOrDefault();
+
+                var versionStatus = versionGuard.Inspect(dir.FullName, iniFile?.FullName);
+                if (versionStatus.IsBlocked)
+                {
+                    versionGuard.TryDisablePlugin(dir.FullName, iniFile?.FullName, out _);
+                }
+
+                var dllFile = dir.GetFiles("*.dll").FirstOrDefault();
+                var disabledFile = dir.GetFiles("*.dll.disabled").FirstOrDefault()
+                                   ?? dir.GetFiles("*.disabled").FirstOrDefault();
+
+                FileInfo? targetFile = dllFile ?? disabledFile;
+                if (targetFile == null) continue;
+
+                bool isEnabled = dllFile != null && !versionStatus.IsBlocked;
 
                 if (iniFile == null)
                 {
@@ -233,6 +241,8 @@ public class PluginViewModel : INotifyPropertyChanged
                     DirectoryPath = dir.FullName,
                     ConfigFilePath = iniFile?.FullName,
                     IsEnabled = isEnabled,
+                    IsVersionBlocked = versionStatus.IsBlocked,
+                    VersionBlockMessage = versionStatus.BlockMessage,
                     FileSize = targetFile.Length,
                     DateModified = targetFile.LastWriteTime
                 });
@@ -341,6 +351,19 @@ public class PluginViewModel : INotifyPropertyChanged
 
         if (enabling)
         {
+            var versionStatus = App.GetService<PluginGameVersionGuard>()
+                .Inspect(item.DirectoryPath, item.ConfigFilePath);
+            item.IsVersionBlocked = versionStatus.IsBlocked;
+            item.VersionBlockMessage = versionStatus.BlockMessage;
+
+            if (versionStatus.IsBlocked)
+            {
+                StatusMessage = versionStatus.BlockMessage;
+                NotifyPluginOperationBlocked(versionStatus.BlockMessage);
+                item.RefreshState();
+                return;
+            }
+
             var constraint = App.GetService<ConstraintService>();
             if (constraint.IsRestricted &&
                 LightweightPluginService.IsMainPluginPackage(Path.GetFileName(item.DirectoryPath),

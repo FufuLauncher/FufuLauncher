@@ -28,7 +28,7 @@ public sealed partial class McpToolInvoker
         long FileSize,
         DateTime Modified);
 
-    private static Task<McpToolResult> ListPluginsAsync(CancellationToken cancellationToken)
+    private Task<McpToolResult> ListPluginsAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
         var plugins = ScanPlugins();
@@ -47,6 +47,8 @@ public sealed partial class McpToolInvoker
                 folderPath = plugin.FolderPath,
                 fullPath = plugin.FullPath,
                 version = plugin.Version,
+                gameVersionSupport = _pluginGameVersionGuard
+                    .Inspect(plugin.FolderPath, plugin.ConfigPath).Support.ToString(),
                 developer = plugin.Developer,
                 description = plugin.Description,
                 hasConfig = plugin.ConfigPath != null,
@@ -94,6 +96,16 @@ public sealed partial class McpToolInvoker
             if (blockReason != null)
             {
                 throw new McpToolException($"Plugin operation is blocked by the launcher settings: {blockReason}");
+            }
+
+            var versionStatus = _pluginGameVersionGuard.Inspect(plugin.FolderPath, plugin.ConfigPath);
+            if (versionStatus.IsBlocked)
+            {
+                throw new McpToolException(versionStatus.Support == PluginGameVersionSupport.Malformed
+                    ? $"Enabling this plugin is blocked: its game version requirement cannot be parsed " +
+                      $"('{versionStatus.DeclaredRule}', unrecognized part: '{versionStatus.InvalidSegment}')."
+                    : $"Enabling this plugin is blocked: installed game version '{versionStatus.GameVersion}' " +
+                      $"is outside the plugin requirement '{versionStatus.DeclaredRule}'.");
             }
         }
 

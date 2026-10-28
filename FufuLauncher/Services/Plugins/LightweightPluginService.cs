@@ -160,7 +160,7 @@ namespace FufuLauncher.Services
                 if (File.Exists(MainPluginDllPath)) return true;
 
                 var disabledPath = FindMainPluginDisabledPath();
-                if (disabledPath != null)
+                if (disabledPath != null && PluginGameVersionGuard.IsPluginUsable(MainPluginDllPath))
                 {
                     File.Move(disabledPath, MainPluginDllPath, true);
                     return true;
@@ -182,7 +182,7 @@ namespace FufuLauncher.Services
                 if (File.Exists(LitePluginDllPath)) return true;
 
                 var disabledPath = FindLitePluginDisabledPath();
-                if (disabledPath != null)
+                if (disabledPath != null && PluginGameVersionGuard.IsPluginUsable(LitePluginDllPath))
                 {
                     File.Move(disabledPath, LitePluginDllPath, true);
                     return true;
@@ -408,7 +408,14 @@ namespace FufuLauncher.Services
                 {
                 }
 
-                TryEnableLitePlugin();
+                if (PluginGameVersionGuard.IsPluginUsable(LitePluginDllPath))
+                {
+                    TryEnableLitePlugin();
+                }
+                else
+                {
+                    DisableLitePluginIfPresent();
+                }
             }
             finally
             {

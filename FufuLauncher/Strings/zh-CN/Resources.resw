@@ -9438,4 +9438,19 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Checkin_MoveFailedMessage" xml:space="preserve">
     <value>无法保存新的签到顺序，已恢复原顺序。</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>当前游戏版本 {0} 不在插件支持范围内，插件声明为：{1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>插件 config.ini 中的游戏版本声明无法解析：{0}（无法识别“{1}”）</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>插件与当前游戏版本不兼容</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>忽略插件版本限制</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>开启后不再按插件声明的游戏版本自动禁用插件，也不再阻止启用。不兼容的插件可能导致游戏崩溃，请谨慎操作。</value>
+  </data>
 </root>

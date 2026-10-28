@@ -9056,4 +9056,19 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="McpTool_CancelInstallCaption" xml:space="preserve">
     <value>実行中または検証待ちのインストールを取り消し、検証ウィンドウを閉じます。</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>ゲームバージョン {0} はプラグインの対応範囲外です（宣言: {1}）</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>プラグインの config.ini にあるゲームバージョン指定を解析できません: {0}（認識できない部分: {1}）</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>プラグインは現在のゲームバージョンと互換性がありません</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>プラグインのバージョン制限を無視</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>有効にすると、プラグインが宣言したゲームバージョンによる自動無効化や有効化のブロックを行いません。互換性のないプラグインはゲームがクラッシュする可能性があります。注意してご利用ください。</value>
+  </data>
 </root>

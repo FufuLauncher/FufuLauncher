@@ -9443,4 +9443,19 @@ Details: {0}</value>
   <data name="Checkin_MoveFailedMessage" xml:space="preserve">
     <value>The new check-in order could not be saved. The previous order has been restored.</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>Game version {0} is not covered by the plugin requirement: {1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>The game version requirement in the plugin config.ini cannot be parsed: {0} (unrecognized: {1})</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>Plugin is incompatible with the current game version</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>Ignore Plugin Version Restrictions</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>When enabled, plugins are no longer disabled automatically or blocked from enabling based on their declared game version. Incompatible plugins may crash the game; proceed with caution.</value>
+  </data>
 </root>

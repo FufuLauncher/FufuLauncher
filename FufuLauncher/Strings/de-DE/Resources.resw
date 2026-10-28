@@ -9056,4 +9056,19 @@ Details: {0}</value>
   <data name="McpTool_CancelInstallCaption" xml:space="preserve">
     <value>Laufende oder wartende Installation abbrechen und das Bestätigungsfenster schließen.</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>Die Spielversion {0} ist von der Plugin-Anforderung nicht abgedeckt: {1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>Die Spielversionsangabe in der config.ini des Plugins ist nicht lesbar: {0} (unbekannt: {1})</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>Das Plugin ist mit der aktuellen Spielversion nicht kompatibel</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>Plugin-Versionsbeschränkungen ignorieren</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>Wenn aktiviert, werden Plugins anhand der deklarierten Spielversion weder automatisch deaktiviert noch am Aktivieren gehindert. Inkompatible Plugins können das Spiel zum Absturz bringen; bitte mit Vorsicht verwenden.</value>
+  </data>
 </root>

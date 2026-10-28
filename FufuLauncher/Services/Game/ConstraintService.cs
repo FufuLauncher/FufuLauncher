@@ -345,6 +345,7 @@ namespace FufuLauncher.Services
             {
                 if (!File.Exists(LightweightPluginService.LitePluginDllPath) &&
                     !LightweightPluginService.TryEnableLitePlugin() &&
+                    !LightweightPluginService.IsLitePluginInstalled &&
                     installIfMissing)
                 {
                     await _lightweightPlugin.InstallOrUpdateLitePluginAsync();

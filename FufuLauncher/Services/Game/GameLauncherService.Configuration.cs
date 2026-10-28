@@ -6,7 +6,7 @@ namespace FufuLauncher.Services;
 
 public partial class GameLauncherService
 {
-    private const string GamePathKey = "GameInstallationPath";
+    public const string GamePathKey = "GameInstallationPath";
     private const string UseInjectionKey = "UseInjection";
     public const string CustomLaunchParametersKey = "CustomLaunchParameters";
     public const string IsCustomLaunchParametersEnabledKey = "IsCustomLaunchParametersEnabled";

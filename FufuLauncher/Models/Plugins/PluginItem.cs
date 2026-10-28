@@ -19,6 +19,8 @@ public class PluginItem : INotifyPropertyChanged
     private string _directoryPath;
     private string? _configFilePath;
     private bool _isEnabled;
+    private bool _isVersionBlocked;
+    private string _versionBlockMessage = string.Empty;
     private long _fileSize;
     private DateTime _dateModified;
 
@@ -117,6 +119,32 @@ public class PluginItem : INotifyPropertyChanged
             }
         }
     }
+
+    public bool IsVersionBlocked
+    {
+        get => _isVersionBlocked;
+        set
+        {
+            if (_isVersionBlocked == value) return;
+            _isVersionBlocked = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(VersionBlockVisibility));
+        }
+    }
+
+    public string VersionBlockMessage
+    {
+        get => _versionBlockMessage;
+        set
+        {
+            if (_versionBlockMessage == value) return;
+            _versionBlockMessage = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public Visibility VersionBlockVisibility =>
+        IsVersionBlocked ? Visibility.Visible : Visibility.Collapsed;
 
     public long FileSize
     {

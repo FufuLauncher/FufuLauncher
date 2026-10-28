@@ -20,6 +20,7 @@ public sealed partial class McpToolInvoker
     private readonly PluginStoreService _pluginStore;
     private readonly McpInstallJobService _installJobs;
     private readonly LightweightPluginService _lightweightPlugin;
+    private readonly PluginGameVersionGuard _pluginGameVersionGuard;
     private readonly ConstraintService _constraintService;
     private readonly IUpdateService _updateService;
     private readonly SemaphoreSlim _mutationGate = new(1, 1);
@@ -32,6 +33,7 @@ public sealed partial class McpToolInvoker
         PluginStoreService pluginStore,
         McpInstallJobService installJobs,
         LightweightPluginService lightweightPlugin,
+        PluginGameVersionGuard pluginGameVersionGuard,
         ConstraintService constraintService,
         IUpdateService updateService)
     {
@@ -42,6 +44,7 @@ public sealed partial class McpToolInvoker
         _pluginStore = pluginStore;
         _installJobs = installJobs;
         _lightweightPlugin = lightweightPlugin;
+        _pluginGameVersionGuard = pluginGameVersionGuard;
         _constraintService = constraintService;
         _updateService = updateService;
     }

@@ -9052,4 +9052,19 @@ Click the button below to open your browser and download manually.</value>
   <data name="McpTool_CancelInstallCaption" xml:space="preserve">
     <value>Отменить текущую или ожидающую установку и закрыть окно подтверждения.</value>
   </data>
+  <data name="PluginGameVersion_Blocked_Format" xml:space="preserve">
+    <value>Версия игры {0} не входит в требуемый диапазон плагина: {1}</value>
+  </data>
+  <data name="PluginGameVersion_Malformed_Format" xml:space="preserve">
+    <value>Не удалось разобрать требование к версии игры в config.ini плагина: {0} (не распознано: {1})</value>
+  </data>
+  <data name="PluginGameVersion_BlockedTitle" xml:space="preserve">
+    <value>Плагин несовместим с текущей версией игры</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Title" xml:space="preserve">
+    <value>Игнорировать ограничения версии плагинов</value>
+  </data>
+  <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
+    <value>При включении плагины больше не отключаются автоматически и не блокируются для включения по заявленной версии игры. Несовместимый плагин может привести к сбою игры; используйте с осторожностью.</value>
+  </data>
 </root>

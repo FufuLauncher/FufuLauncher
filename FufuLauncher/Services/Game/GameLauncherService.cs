@@ -19,6 +19,7 @@ public partial class GameLauncherService : IGameLauncherService
     private readonly ControlPanelViewModel _controlPanelModel;
     private readonly GameServerConfigurationService _gameServerConfigurationService;
     private readonly LightweightPluginService _lightweightPluginService;
+    private readonly PluginGameVersionGuard _pluginGameVersionGuard;
     private readonly ConstraintService _constraintService;
     private readonly IScreenshotService _screenshotService;
     private readonly IAuthTicketService _authTicketService;
@@ -38,6 +39,7 @@ public partial class GameLauncherService : IGameLauncherService
         AccountManager accountManager,
         GameServerConfigurationService gameServerConfigurationService,
         LightweightPluginService lightweightPluginService,
+        PluginGameVersionGuard pluginGameVersionGuard,
         ConstraintService constraintService,
         CodeSigning.ModTrustGate modTrustGate)
     {
@@ -50,6 +52,7 @@ public partial class GameLauncherService : IGameLauncherService
         _accountManager = accountManager;
         _gameServerConfigurationService = gameServerConfigurationService;
         _lightweightPluginService = lightweightPluginService;
+        _pluginGameVersionGuard = pluginGameVersionGuard;
         _constraintService = constraintService;
         _modTrustGate = modTrustGate;
     }
