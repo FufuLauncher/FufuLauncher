@@ -10,7 +10,8 @@
     xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Background="Transparent"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    Unloaded="Page_Unloaded">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -49,6 +50,175 @@
                 <Setter Property="CornerRadius" Value="14" />
                 <Setter Property="Padding" Value="8,4" />
             </Style>
+
+            <Style x:Key="PluginGridCardStyle" TargetType="Border">
+                <Setter Property="Background" Value="{ThemeResource SafeGlassBrush}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="14" />
+            </Style>
+
+            <Style x:Key="PluginLayoutCardContainerStyle" TargetType="GridViewItem"
+                   BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="MinHeight" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="UseSystemFocusVisuals" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewItem">
+                            <Grid Background="Transparent">
+                                <ContentPresenter x:Name="ContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Control.IsTemplateFocusTarget="True" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="PluginGridCardTemplate" x:DataType="models:PluginItem">
+                <Grid Margin="12,12,12,16">
+                    <Border Width="300" Height="190"
+                            Style="{StaticResource PluginGridCardStyle}"
+                            Translation="0,0,32">
+                        <Border.Shadow>
+                            <ThemeShadow />
+                        </Border.Shadow>
+                        <Border.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
+                                                Tag="{x:Bind}" />
+                                <MenuFlyoutItem Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
+                                                Icon="Delete" Tag="{x:Bind}" />
+                            </MenuFlyout>
+                        </Border.ContextFlyout>
+
+                        <Grid Padding="16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Width="44" Height="44" CornerRadius="10"
+                                        Background="{ThemeResource SafeCardBrush}"
+                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        VerticalAlignment="Top">
+                                    <FontIcon Glyph="&#xE74C;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                                              Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
+                                </Border>
+
+                                <StackPanel Grid.Column="1" Margin="0,2,0,0" VerticalAlignment="Top" Spacing="3">
+                                    <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}"
+                                               Style="{StaticResource BodyStrongTextBlockStyle}"
+                                               Foreground="{ThemeResource SafeTextBrush}"
+                                               FontFamily="{StaticResource AppGlobalFont}"
+                                               MaxLines="1"
+                                               TextTrimming="CharacterEllipsis"
+                                               ToolTipService.ToolTip="{x:Bind DisplayName, Mode=OneWay}" />
+
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <TextBlock Text="{x:Bind Developer, Mode=OneWay}"
+                                                   Visibility="{x:Bind DeveloperVisibility, Mode=OneWay}"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                                   MaxWidth="130"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTipService.ToolTip="{x:Bind Developer, Mode=OneWay}"
+                                                   FontFamily="{StaticResource AppGlobalFont}" />
+                                        <TextBlock Text="|"
+                                                   Visibility="{x:Bind DeveloperVisibility, Mode=OneWay}"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                   FontFamily="{StaticResource AppGlobalFont}" />
+                                        <TextBlock Text="{x:Bind FileSizeDisplay, Mode=OneWay}"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                                                   FontFamily="{StaticResource AppGlobalFont}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <TextBlock Grid.Row="1"
+                                       Text="{x:Bind Description, Mode=OneWay}"
+                                       Visibility="{x:Bind DescriptionVisibility, Mode=OneWay}"
+                                       FontSize="12"
+                                       LineHeight="17"
+                                       Foreground="{ThemeResource SafeSecondaryTextBrush}"
+                                       Opacity="0.85"
+                                       Margin="0,10,0,0"
+                                       MaxLines="2"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Top"
+                                       FontFamily="{StaticResource AppGlobalFont}" />
+
+                            <Rectangle Grid.Row="2" Height="1" Fill="{ThemeResource SafeBorderBrush}"
+                                       Margin="-16,10,-16,10" />
+
+                            <Grid Grid.Row="3" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{x:Bind StatusText, Mode=OneWay}"
+                                           Foreground="{x:Bind StatusColor, Mode=OneWay}"
+                                           VerticalAlignment="Center"
+                                           Style="{StaticResource CaptionTextBlockStyle}"
+                                           MaxLines="1"
+                                           TextTrimming="CharacterEllipsis"
+                                           FontFamily="{StaticResource AppGlobalFont}" />
+
+                                <Button Grid.Column="1"
+                                        Click="OnConfigClick"
+                                        Tag="{x:Bind}"
+                                        Visibility="{x:Bind ConfigVisibility, Mode=OneWay}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="8,4"
+                                        MinWidth="0"
+                                        VerticalAlignment="Center"
+                                        AutomationProperties.Name="{helpers:Loc Key=PluginSettingsLabel}"
+                                        ToolTipService.ToolTip="{helpers:Loc Key=EditConfigTooltip}">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <FontIcon Glyph="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="14" />
+                                        <TextBlock Text="{helpers:Loc Key=PluginSettingsLabel}" VerticalAlignment="Center"
+                                                   FontSize="11" FontFamily="{StaticResource AppGlobalFont}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <ToggleSwitch Grid.Column="2"
+                                              IsOn="{x:Bind IsEnabled, Mode=OneWay}"
+                                              Toggled="OnPluginToggled"
+                                              Tag="{x:Bind}"
+                                              OffContent="" OnContent=""
+                                              MinWidth="0"
+                                              VerticalAlignment="Center" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </DataTemplate>
 
             <converters:BoolInverter x:Key="BoolInverter" />
 
@@ -126,6 +296,39 @@
         </Grid>
 
         <CommandBar Grid.Row="1" DefaultLabelPosition="Right" Background="Transparent" IsOpen="False">
+            <AppBarElementContainer Margin="4,0,8,0" VerticalAlignment="Center">
+                <Border CornerRadius="8"
+                        Padding="3"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="2">
+                        <ToggleButton x:Name="ListViewModeButton"
+                                      Click="OnListViewModeClick"
+                                      IsChecked="True"
+                                      Padding="8,4"
+                                      MinWidth="0"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      AutomationProperties.Name="{helpers:Loc Key=PluginPage_ListViewTooltip}"
+                                      ToolTipService.ToolTip="{helpers:Loc Key=PluginPage_ListViewTooltip}">
+                            <FontIcon Glyph="&#xE8FD;" FontSize="15" />
+                        </ToggleButton>
+                        <ToggleButton x:Name="GridViewModeButton"
+                                      Click="OnGridViewModeClick"
+                                      Padding="8,4"
+                                      MinWidth="0"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      AutomationProperties.Name="{helpers:Loc Key=PluginPage_GridViewTooltip}"
+                                      ToolTipService.ToolTip="{helpers:Loc Key=PluginPage_GridViewTooltip}">
+                            <FontIcon Glyph="&#xE80A;" FontSize="15" />
+                        </ToggleButton>
+                    </StackPanel>
+                </Border>
+            </AppBarElementContainer>
+
             <AppBarButton x:Name="GetPluginsBtn"
                           Icon="Download"
                           Label="{helpers:Loc Key=GetPluginsLabel}"
@@ -161,10 +364,12 @@
             </AppBarButton>
         </CommandBar>
 
-        <ListView
-            Grid.Row="2"
-            ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
-            SelectionMode="None" Padding="0,12,0,0">
+        <ListView x:Name="PluginListView"
+                  Grid.Row="2"
+                  ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
+                  ContainerContentChanging="OnPluginLayoutContainerChanging"
+                  SelectionMode="None"
+                  Padding="0,12,0,0">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:PluginItem">
                     <Grid Style="{StaticResource SafePluginCardStyle}" Translation="0,0,32">
@@ -273,6 +478,23 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <GridView x:Name="PluginLayoutGridView"
+                  Grid.Row="2"
+                  Margin="-12,0,-12,0"
+                  Padding="0"
+                  ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
+                  ItemTemplate="{StaticResource PluginGridCardTemplate}"
+                  ItemContainerStyle="{StaticResource PluginLayoutCardContainerStyle}"
+                  ContainerContentChanging="OnPluginLayoutContainerChanging"
+                  SelectionMode="None"
+                  Visibility="Collapsed">
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>
 
         <TextBlock Grid.Row="2"
                    Text="{helpers:Loc Key=EmptyPluginLibrary}"

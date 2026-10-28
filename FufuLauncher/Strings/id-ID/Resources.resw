@@ -5766,6 +5766,12 @@ Anda dapat mencoba node lain atau menggunakan sumber resmi langsung.</value>
   <data name="PluginPage_GetPluginsTitle" xml:space="preserve">
     <value>Get Plugins</value>
   </data>
+  <data name="PluginPage_ListViewTooltip" xml:space="preserve">
+    <value>Tampilan Daftar</value>
+  </data>
+  <data name="PluginPage_GridViewTooltip" xml:space="preserve">
+    <value>Tampilan Kisi</value>
+  </data>
   <data name="PluginPage_DownloadLatestOption" xml:space="preserve">
     <value>Download / Update Plugin</value>
   </data>

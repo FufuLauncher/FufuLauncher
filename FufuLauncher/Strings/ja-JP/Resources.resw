@@ -5766,6 +5766,12 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginPage_GetPluginsTitle" xml:space="preserve">
     <value>Get Plugins</value>
   </data>
+  <data name="PluginPage_ListViewTooltip" xml:space="preserve">
+    <value>リスト表示</value>
+  </data>
+  <data name="PluginPage_GridViewTooltip" xml:space="preserve">
+    <value>グリッド表示</value>
+  </data>
   <data name="PluginPage_DownloadLatestOption" xml:space="preserve">
     <value>Download / Update Plugin</value>
   </data>

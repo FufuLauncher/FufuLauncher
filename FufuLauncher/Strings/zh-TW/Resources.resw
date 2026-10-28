@@ -5766,6 +5766,12 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginPage_GetPluginsTitle" xml:space="preserve">
     <value>取得插件</value>
   </data>
+  <data name="PluginPage_ListViewTooltip" xml:space="preserve">
+    <value>清單檢視</value>
+  </data>
+  <data name="PluginPage_GridViewTooltip" xml:space="preserve">
+    <value>網格檢視</value>
+  </data>
   <data name="PluginPage_DownloadLatestOption" xml:space="preserve">
     <value>下載/更新插件</value>
   </data>

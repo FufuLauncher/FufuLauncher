@@ -5772,6 +5772,12 @@ Puoi riprovare con un altro nodo o usare la fonte ufficiale diretta.</value>
   <data name="PluginPage_GetPluginsTitle" xml:space="preserve">
     <value>Get Plugins</value>
   </data>
+  <data name="PluginPage_ListViewTooltip" xml:space="preserve">
+    <value>Vista Elenco</value>
+  </data>
+  <data name="PluginPage_GridViewTooltip" xml:space="preserve">
+    <value>Vista Griglia</value>
+  </data>
   <data name="PluginPage_DownloadLatestOption" xml:space="preserve">
     <value>Download / Update Plugin</value>
   </data>

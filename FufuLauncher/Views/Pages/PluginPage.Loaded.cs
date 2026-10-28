@@ -25,6 +25,8 @@ public sealed partial class PluginPage
             ViewModel.LoadPlugins();
         }
 
+        await PrepareLayoutModeAsync();
+
         try
         {
             var localSettingsService = App.GetService<ILocalSettingsService>();
