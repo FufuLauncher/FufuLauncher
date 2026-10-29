@@ -9473,4 +9473,10 @@ Details: {0}</value>
   <data name="PluginInstallWindowUninstallTitle" xml:space="preserve">
     <value>Plugin uninstallation</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>Check-in</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP Management</value>
+  </data>
 </root>

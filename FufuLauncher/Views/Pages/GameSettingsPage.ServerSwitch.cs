@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
@@ -121,14 +121,14 @@ public sealed partial class GameSettingsPage
         }
     }
 
-    private void OpenAdvancedServerSwitchWindow(string gameDir, string targetServer = "")
+    internal static void OpenAdvancedServerSwitchWindow(string gameDir, string targetServer = "")
     {
         var newWindow = new Window();
 
         newWindow.SystemBackdrop = new Microsoft.UI.Xaml.Media.MicaBackdrop();
         newWindow.ExtendsContentIntoTitleBar = true;
 
-        newWindow.Title = "Title_Convert".GetLocalized();
+        newWindow.Title = "SwitchServerTitle".GetLocalized();
 
         var hWnd = WindowNative.GetWindowHandle(newWindow);
         var winId = Win32Interop.GetWindowIdFromWindow(hWnd);

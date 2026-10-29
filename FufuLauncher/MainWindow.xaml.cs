@@ -13,6 +13,7 @@ using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using FufuLauncher.Services;
 using FufuLauncher.Services.Background;
+using FufuLauncher.Tray;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 using Windows.Media.Core;
@@ -44,6 +45,7 @@ public sealed partial class MainWindow : WindowEx
     private double _frameBackgroundOpacity;
     private bool _minimizeToTray;
     private bool _isExit;
+    private TrayIconController? _trayIconController;
     private bool _isOverlayShown;
     private Microsoft.UI.Xaml.Media.Animation.Storyboard? _pageOverlayStoryboard;
     private bool _isAcrylicOverlayEnabled;
@@ -89,6 +91,11 @@ public sealed partial class MainWindow : WindowEx
     }
 
     public IRelayCommand ExitApplicationCommand
+    {
+        get;
+    }
+
+    public IRelayCommand ShowTrayMenuCommand
     {
         get;
     }
@@ -179,6 +186,12 @@ public sealed partial class MainWindow : WindowEx
 
         ShowWindowCommand = new RelayCommand(ShowWindow);
         ExitApplicationCommand = new RelayCommand(ExitApplication);
+
+        _trayIconController = new TrayIconController(TrayIcon, this, ShowWindowCommand, ExitApplicationCommand);
+        ShowTrayMenuCommand = new RelayCommand(() => _trayIconController?.ShowTrayMenu());
+        TrayIcon.RightClickCommand = ShowTrayMenuCommand;
+        TrayIcon.LeftClickCommand = ShowWindowCommand;
+        TrayIcon.DoubleClickCommand = ShowWindowCommand;
 
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
         Title = "AppDisplayName".GetLocalized();

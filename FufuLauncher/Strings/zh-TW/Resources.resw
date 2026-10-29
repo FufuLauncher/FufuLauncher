@@ -9076,4 +9076,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
     <value>版本宣告無效</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>簽到</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP 管理</value>
+  </data>
 </root>

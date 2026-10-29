@@ -9076,4 +9076,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
     <value>버전 선언이 잘못됨</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>Check-in</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP Management</value>
+  </data>
 </root>

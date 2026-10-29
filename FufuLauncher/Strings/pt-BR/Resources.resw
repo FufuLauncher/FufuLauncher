@@ -9080,4 +9080,10 @@ Detalhes: {0}</value>
   <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
     <value>Requisito de versão inválido</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>Check-in</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP Management</value>
+  </data>
 </root>

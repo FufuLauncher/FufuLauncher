@@ -9468,4 +9468,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginInstallWindowUninstallTitle" xml:space="preserve">
     <value>插件卸载</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>签到</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP管理</value>
+  </data>
 </root>

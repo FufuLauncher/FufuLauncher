@@ -17,6 +17,7 @@
 
         <EnableMsixTooling>true</EnableMsixTooling>
         <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+        <StartupObject>FufuLauncher.Program</StartupObject>
 
         <WindowsPackageType>None</WindowsPackageType>
 

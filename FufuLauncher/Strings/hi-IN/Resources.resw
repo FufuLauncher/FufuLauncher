@@ -9071,4 +9071,10 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
     <value>संस्करण आवश्यकता अमान्य</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>Check-in</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP Management</value>
+  </data>
 </root>

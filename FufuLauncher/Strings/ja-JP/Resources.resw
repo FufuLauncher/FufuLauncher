@@ -9080,4 +9080,10 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
     <value>バージョン指定が無効</value>
   </data>
+  <data name="TrayCheckin" xml:space="preserve">
+    <value>Check-in</value>
+  </data>
+  <data name="TrayMcp" xml:space="preserve">
+    <value>MCP Management</value>
+  </data>
 </root>

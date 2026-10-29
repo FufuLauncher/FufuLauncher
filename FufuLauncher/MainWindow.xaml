@@ -39,14 +39,8 @@
                         IconSource="/Assets/WindowIcon.ico"
                         ToolTipText="{helpers:Loc Key=AppDisplayName}"
                         LeftClickCommand="{x:Bind ShowWindowCommand}"
-                        DoubleClickCommand="{x:Bind ShowWindowCommand}">
-            <tb:TaskbarIcon.ContextFlyout>
-                <MenuFlyout>
-                    <MenuFlyoutItem Text="{helpers:Loc Key=TrayShowWindow}" Command="{x:Bind ShowWindowCommand}" />
-                    <MenuFlyoutItem Text="{helpers:Loc Key=TrayExit}" Command="{x:Bind ExitApplicationCommand}" />
-                </MenuFlyout>
-            </tb:TaskbarIcon.ContextFlyout>
-        </tb:TaskbarIcon>
+                        DoubleClickCommand="{x:Bind ShowWindowCommand}"
+                        RightClickCommand="{x:Bind ShowTrayMenuCommand}" />
 
         <Grid x:Name="GlobalBackgroundHost" IsHitTestVisible="False">
             <Image x:Name="GlobalBackgroundImage"

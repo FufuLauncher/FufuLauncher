@@ -48,6 +48,19 @@ public sealed partial class MainWindow
         }
     }
 
+    private void DisposeTrayIcon()
+    {
+        try
+        {
+            _trayIconController?.Dispose();
+        }
+        catch
+        {
+        }
+
+        TrayIcon.Dispose();
+    }
+
     private void CleanupWindowResources()
     {
         _memoryOptimizationTimer?.Stop();
@@ -106,7 +119,7 @@ public sealed partial class MainWindow
 
         _isExit = true;
         CleanupWindowResources();
-        TrayIcon.Dispose();
+        DisposeTrayIcon();
         Close();
     }
 
@@ -119,7 +132,7 @@ public sealed partial class MainWindow
         {
             _isExit = true;
             CleanupWindowResources();
-            TrayIcon.Dispose();
+            DisposeTrayIcon();
             Close();
             return;
         }
@@ -142,7 +155,7 @@ public sealed partial class MainWindow
 
             _isExit = true;
             CleanupWindowResources();
-            TrayIcon.Dispose();
+            DisposeTrayIcon();
             Close();
         }
     }
