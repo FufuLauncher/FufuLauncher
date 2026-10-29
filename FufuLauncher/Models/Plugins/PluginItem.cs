@@ -1,4 +1,4 @@
-﻿/*
+/*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
@@ -21,6 +21,7 @@ public class PluginItem : INotifyPropertyChanged
     private bool _isEnabled;
     private bool _isVersionBlocked;
     private string _versionBlockMessage = string.Empty;
+    private string _gameVersionText = string.Empty;
     private long _fileSize;
     private DateTime _dateModified;
 
@@ -145,6 +146,21 @@ public class PluginItem : INotifyPropertyChanged
 
     public Visibility VersionBlockVisibility =>
         IsVersionBlocked ? Visibility.Visible : Visibility.Collapsed;
+
+    public string GameVersionText
+    {
+        get => _gameVersionText;
+        set
+        {
+            if (_gameVersionText == value) return;
+            _gameVersionText = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(GameVersionVisibility));
+        }
+    }
+
+    public Visibility GameVersionVisibility =>
+        string.IsNullOrEmpty(_gameVersionText) ? Visibility.Collapsed : Visibility.Visible;
 
     public long FileSize
     {

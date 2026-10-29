@@ -16,7 +16,9 @@ public partial class PluginStoreViewModel
 
     private async Task UninstallPluginAsync(PluginStoreItem item)
     {
-        if (item == null || item.IsInstallInProgress || _installCts != null) return;
+        if (item == null || item.IsInstallInProgress || _installCts != null || IsStoreBusy) return;
+
+        var outcome = PluginInstallOutcome.Running;
 
         try
         {
@@ -24,7 +26,10 @@ public partial class PluginStoreViewModel
 
             item.IsInstallInProgress = true;
             item.State = StorePluginState.Installing;
+            item.InstallProgressPercent = 0;
             item.InstallStatusText = "PluginStoreUninstalling".GetLocalized();
+
+            BeginOperation(item, true);
 
             if (!string.IsNullOrEmpty(item.LuaUninstallUrl))
             {
@@ -132,17 +137,23 @@ public partial class PluginStoreViewModel
             item.InstallProgress = 0;
             item.InstallStatusText = "PluginStoreUninstallComplete".GetLocalized();
             StatusMessage = string.Format("PluginStoreUninstallSuccess".GetLocalized(), item.Name);
+            outcome = PluginInstallOutcome.Succeeded;
         }
         catch (Exception ex)
         {
             DebugLog.Info("PluginStoreViewModel.Uninstall", $"[PluginStoreVM] Uninstall error: {ex}");
             item.State = StorePluginState.Installed;
             item.InstallStatusText = "PluginStoreUninstallFailed".GetLocalized();
+            StatusMessage = string.Empty;
+            outcome = PluginInstallOutcome.Failed;
         }
         finally
         {
             _installingPluginIds.Remove(item.Id);
             item.IsInstallInProgress = false;
+
+            _operationOutcome = outcome;
+            FinishOperation(item);
         }
     }
 

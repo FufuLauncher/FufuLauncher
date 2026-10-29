@@ -9067,4 +9067,13 @@ Detail: {0}</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>Jika diaktifkan, plugin tidak lagi dinonaktifkan otomatis atau diblokir untuk diaktifkan berdasarkan versi game yang dideklarasikan. Plugin yang tidak kompatibel dapat membuat game crash; gunakan dengan hati-hati.</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>Mendukung {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>Versi {0} tidak didukung</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>Persyaratan versi tidak valid</value>
+  </data>
 </root>

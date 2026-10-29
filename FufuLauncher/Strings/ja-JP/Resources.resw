@@ -9071,4 +9071,13 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>有効にすると、プラグインが宣言したゲームバージョンによる自動無効化や有効化のブロックを行いません。互換性のないプラグインはゲームがクラッシュする可能性があります。注意してご利用ください。</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>対応 {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>バージョン {0} 非対応</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>バージョン指定が無効</value>
+  </data>
 </root>

@@ -9070,4 +9070,13 @@ Détails : {0}</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>Une fois activé, les plugins ne sont plus désactivés automatiquement ni bloqués à l'activation selon la version de jeu déclarée. Un plugin incompatible peut faire planter le jeu ; agissez avec prudence.</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>Prend en charge {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>Version {0} non prise en charge</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>Exigence de version invalide</value>
+  </data>
 </root>

@@ -231,7 +231,7 @@ public class PluginViewModel : INotifyPropertyChanged
 
                 nameConflictTracker[displayName].Add(dir.Name);
 
-                Plugins.Add(new PluginItem
+                var pluginItem = new PluginItem
                 {
                     FileName = targetFile.Name,
                     DisplayName = displayName,
@@ -241,11 +241,12 @@ public class PluginViewModel : INotifyPropertyChanged
                     DirectoryPath = dir.FullName,
                     ConfigFilePath = iniFile?.FullName,
                     IsEnabled = isEnabled,
-                    IsVersionBlocked = versionStatus.IsBlocked,
-                    VersionBlockMessage = versionStatus.BlockMessage,
                     FileSize = targetFile.Length,
                     DateModified = targetFile.LastWriteTime
-                });
+                };
+
+                ApplyGameVersionDisplay(pluginItem, versionStatus);
+                Plugins.Add(pluginItem);
             }
 
             StatusMessage = string.Format("Plugin_LoadDoneCount_Format".GetLocalized(), Plugins.Count);
@@ -343,6 +344,24 @@ public class PluginViewModel : INotifyPropertyChanged
         }
     }
 
+    private static void ApplyGameVersionDisplay(PluginItem item, PluginGameVersionStatus status)
+    {
+        var parsed = status.Support is PluginGameVersionSupport.Supported
+            or PluginGameVersionSupport.Unsupported
+            or PluginGameVersionSupport.Unknown;
+
+        item.GameVersionText = parsed && !string.IsNullOrEmpty(status.DeclaredRule)
+            ? string.Format("PluginGameVersion_Supported_Format".GetLocalized(), status.DeclaredRule)
+            : string.Empty;
+
+        item.IsVersionBlocked = status.IsBlocked;
+        item.VersionBlockMessage = !status.IsBlocked
+            ? string.Empty
+            : status.Support == PluginGameVersionSupport.Malformed
+                ? "PluginGameVersion_CardMalformed".GetLocalized()
+                : string.Format("PluginGameVersion_CardUnsupported_Format".GetLocalized(), status.GameVersion);
+    }
+
     private void TogglePlugin(PluginItem? item)
     {
         if (item == null || !File.Exists(item.FullPath)) return;
@@ -353,8 +372,7 @@ public class PluginViewModel : INotifyPropertyChanged
         {
             var versionStatus = App.GetService<PluginGameVersionGuard>()
                 .Inspect(item.DirectoryPath, item.ConfigFilePath);
-            item.IsVersionBlocked = versionStatus.IsBlocked;
-            item.VersionBlockMessage = versionStatus.BlockMessage;
+            ApplyGameVersionDisplay(item, versionStatus);
 
             if (versionStatus.IsBlocked)
             {

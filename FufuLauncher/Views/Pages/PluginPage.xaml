@@ -170,14 +170,23 @@
                                            VerticalAlignment="Top"
                                            FontFamily="{StaticResource AppGlobalFont}" />
 
+                                <TextBlock Text="{x:Bind GameVersionText, Mode=OneWay}"
+                                           Visibility="{x:Bind GameVersionVisibility, Mode=OneWay}"
+                                           FontSize="11"
+                                           Foreground="{ThemeResource SafeSecondaryTextBrush}"
+                                           Margin="0,4,0,0"
+                                           MaxLines="1"
+                                           TextTrimming="CharacterEllipsis"
+                                           ToolTipService.ToolTip="{x:Bind GameVersionText, Mode=OneWay}"
+                                           FontFamily="{StaticResource AppGlobalFont}" />
+
                                 <TextBlock Text="{x:Bind VersionBlockMessage, Mode=OneWay}"
                                            Visibility="{x:Bind VersionBlockVisibility, Mode=OneWay}"
                                            FontSize="11"
                                            Foreground="{ThemeResource SystemFillColorCautionBrush}"
-                                           Margin="0,6,0,0"
-                                           MaxLines="2"
+                                           Margin="0,4,0,0"
+                                           MaxLines="1"
                                            TextTrimming="CharacterEllipsis"
-                                           TextWrapping="Wrap"
                                            ToolTipService.ToolTip="{x:Bind VersionBlockMessage, Mode=OneWay}"
                                            FontFamily="{StaticResource AppGlobalFont}" />
                             </StackPanel>
@@ -456,11 +465,22 @@
                                                        FontFamily="{StaticResource AppGlobalFont}" />
                                         </StackPanel>
 
+                                        <TextBlock Text="{x:Bind GameVersionText, Mode=OneWay}"
+                                                   Visibility="{x:Bind GameVersionVisibility, Mode=OneWay}"
+                                                   Style="{StaticResource CaptionTextBlockStyle}"
+                                                   Foreground="{ThemeResource SafeSecondaryTextBrush}"
+                                                   MaxLines="1"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTipService.ToolTip="{x:Bind GameVersionText, Mode=OneWay}"
+                                                   FontFamily="{StaticResource AppGlobalFont}" />
+
                                         <TextBlock Text="{x:Bind VersionBlockMessage, Mode=OneWay}"
                                                    Visibility="{x:Bind VersionBlockVisibility, Mode=OneWay}"
                                                    Style="{StaticResource CaptionTextBlockStyle}"
                                                    Foreground="{ThemeResource SystemFillColorCautionBrush}"
-                                                   TextWrapping="Wrap"
+                                                   MaxLines="1"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTipService.ToolTip="{x:Bind VersionBlockMessage, Mode=OneWay}"
                                                    FontFamily="{StaticResource AppGlobalFont}" />
                                     </StackPanel>
 

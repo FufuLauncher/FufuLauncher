@@ -9453,4 +9453,19 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>开启后不再按插件声明的游戏版本自动禁用插件，也不再阻止启用。不兼容的插件可能导致游戏崩溃，请谨慎操作。</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>支持 {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>当前版本 {0} 不支持</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>版本声明无效</value>
+  </data>
+  <data name="PluginInstallWindowTitle" xml:space="preserve">
+    <value>插件安装</value>
+  </data>
+  <data name="PluginInstallWindowUninstallTitle" xml:space="preserve">
+    <value>插件卸载</value>
+  </data>
 </root>

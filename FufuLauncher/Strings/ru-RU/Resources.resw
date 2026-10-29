@@ -9067,4 +9067,13 @@ Click the button below to open your browser and download manually.</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>При включении плагины больше не отключаются автоматически и не блокируются для включения по заявленной версии игры. Несовместимый плагин может привести к сбою игры; используйте с осторожностью.</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>Поддержка {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>Версия {0} не поддерживается</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>Неверное требование к версии</value>
+  </data>
 </root>

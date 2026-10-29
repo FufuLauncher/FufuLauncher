@@ -9458,4 +9458,19 @@ Details: {0}</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>When enabled, plugins are no longer disabled automatically or blocked from enabling based on their declared game version. Incompatible plugins may crash the game; proceed with caution.</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>Supports {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>Version {0} unsupported</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>Invalid version requirement</value>
+  </data>
+  <data name="PluginInstallWindowTitle" xml:space="preserve">
+    <value>Plugin installation</value>
+  </data>
+  <data name="PluginInstallWindowUninstallTitle" xml:space="preserve">
+    <value>Plugin uninstallation</value>
+  </data>
 </root>

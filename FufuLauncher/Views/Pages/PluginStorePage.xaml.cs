@@ -209,14 +209,6 @@ public sealed partial class PluginStorePage : Page
         }
     }
 
-    private void OnCancelInstallClick(object sender, RoutedEventArgs e)
-    {
-        if (sender is Button btn && btn.Tag is PluginStoreItem item)
-        {
-            ViewModel.CancelInstallCommand.Execute(item);
-        }
-    }
-
     private async void OnInstalledButtonClick(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is PluginStoreItem item)

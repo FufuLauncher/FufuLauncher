@@ -20,7 +20,6 @@
                 <ResourceDictionary x:Key="Light">
                     <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#E5FFFFFF" TintColor="#FFFFFF"
                                   TintOpacity="0.6" />
-                    <SolidColorBrush x:Key="InstallOverlayBrush" Color="#F7FFFFFF" />
                     <SolidColorBrush x:Key="SafeCardBrush" Color="#0A000000" />
                     <SolidColorBrush x:Key="SafeBorderBrush" Color="#1A000000" />
                     <SolidColorBrush x:Key="SafeHoverBrush" Color="#14000000" />
@@ -31,7 +30,6 @@
                 <ResourceDictionary x:Key="Default">
                     <AcrylicBrush x:Key="SafeGlassBrush" FallbackColor="#CC000000" TintColor="#000000"
                                   TintOpacity="0.15" />
-                    <SolidColorBrush x:Key="InstallOverlayBrush" Color="#F21C1C1C" />
                     <SolidColorBrush x:Key="SafeCardBrush" Color="#14FFFFFF" />
                     <SolidColorBrush x:Key="SafeBorderBrush" Color="#20FFFFFF" />
                     <SolidColorBrush x:Key="SafeHoverBrush" Color="#24FFFFFF" />
@@ -701,65 +699,6 @@
                             </Grid>
                         </Grid>
 
-                        <Grid Visibility="{x:Bind StateIsInProgress, Mode=OneWay}"
-                              CornerRadius="14"
-                              Background="{ThemeResource InstallOverlayBrush}">
-                            <Grid.Transitions>
-                                <TransitionCollection>
-                                    <EntranceThemeTransition FromVerticalOffset="0" IsStaggeringEnabled="False" />
-                                </TransitionCollection>
-                            </Grid.Transitions>
-
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="6" Width="272"
-                                        Padding="16">
-                                <TextBlock Text="{x:Bind InstallStatusText, Mode=OneWay}"
-                                           FontSize="13"
-                                           FontWeight="SemiBold"
-                                           Foreground="{ThemeResource SafeTextBrush}"
-                                           HorizontalAlignment="Center"
-                                           MaxLines="1"
-                                           TextTrimming="CharacterEllipsis"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-
-                                <TextBlock Text="{x:Bind InstallProgressPercentDisplay, Mode=OneWay}"
-                                           HorizontalAlignment="Center"
-                                           FontSize="26"
-                                           FontWeight="Bold"
-                                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-
-                                <ProgressBar Value="{x:Bind InstallProgressPercent, Mode=OneWay}"
-                                             Maximum="100"
-                                             Height="4"
-                                             CornerRadius="2"
-                                             Foreground="{ThemeResource AccentFillColorDefaultBrush}"
-                                             HorizontalAlignment="Stretch" />
-
-                                <StackPanel Orientation="Horizontal"
-                                            Spacing="8"
-                                            HorizontalAlignment="Center"
-                                            Visibility="{x:Bind HasTotalDownloadSize, Mode=OneWay}">
-                                    <TextBlock Text="{x:Bind DownloadSizeProgressDisplay, Mode=OneWay}"
-                                               Style="{StaticResource MetaTextStyle}" />
-                                    <TextBlock Text="·" Style="{StaticResource MetaTextStyle}" />
-                                    <TextBlock Text="{x:Bind DownloadSpeedDisplay, Mode=OneWay}"
-                                               Style="{StaticResource MetaTextStyle}" />
-                                </StackPanel>
-
-                                <Button Content="{helpers:Loc Key=PluginStoreCancelInstall}"
-                                        Style="{StaticResource StoreInstalledButtonStyle}"
-                                        HorizontalAlignment="Center"
-                                        Margin="0,6,0,0"
-                                        Click="OnCancelInstallClick"
-                                        Tag="{x:Bind}">
-                                    <Button.Resources>
-                                        <SolidColorBrush x:Key="ButtonForeground" Color="#E81123" />
-                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FF4D4D" />
-                                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#CC0000" />
-                                    </Button.Resources>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
                     </Grid>
                 </Border>
             </DataTemplate>
@@ -1019,6 +958,7 @@
                         <!--  正常网格  -->
                         <GridView x:Name="PluginGridView"
                                   Margin="-6,0,-6,0"
+                                  IsEnabled="{x:Bind ViewModel.CanInteractWithStore, Mode=OneWay}"
                                   ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
                                   ItemTemplate="{StaticResource PluginCardTemplate}"
                                   ItemContainerStyle="{StaticResource PluginCardContainerStyle}"

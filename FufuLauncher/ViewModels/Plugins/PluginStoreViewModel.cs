@@ -74,7 +74,6 @@ public partial class PluginStoreViewModel : INotifyPropertyChanged
         PrevPageCommand = new RelayCommand(async () => await GoToPageAsync(_currentPage - 1));
         AddPrivatePluginCommand = new RelayCommand(async () => await AddPrivatePluginAsync());
         LuaTestCommand = new RelayCommand(async () => await ExecuteLuaTestAsync());
-        CancelInstallCommand = new RelayCommand<PluginStoreItem>(item => CancelInstall(item!));
     }
 
     public ObservableCollection<PluginStoreItem> Plugins
@@ -247,6 +246,22 @@ public partial class PluginStoreViewModel : INotifyPropertyChanged
     public bool CanGoNext => CurrentPage < TotalPages;
     public string PageInfo => TotalPages > 0 ? $"{CurrentPage} / {TotalPages}" : "";
 
+    private bool _isStoreBusy;
+
+    public bool IsStoreBusy
+    {
+        get => _isStoreBusy;
+        private set
+        {
+            if (_isStoreBusy == value) return;
+            _isStoreBusy = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(CanInteractWithStore));
+        }
+    }
+
+    public bool CanInteractWithStore => !_isStoreBusy;
+
     public bool IsMirrorAccelerationEnabled
     {
         get => _isMirrorAccelerationEnabled;
@@ -320,11 +335,6 @@ public partial class PluginStoreViewModel : INotifyPropertyChanged
     }
 
     public ICommand LuaTestCommand
-    {
-        get;
-    }
-
-    public ICommand CancelInstallCommand
     {
         get;
     }

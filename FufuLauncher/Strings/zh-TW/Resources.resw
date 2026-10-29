@@ -9067,4 +9067,13 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>開啟後不再依外掛宣告的遊戲版本自動停用外掛，也不再阻止啟用。不相容的外掛可能導致遊戲崩潰，請謹慎操作。</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>支援 {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>目前版本 {0} 不支援</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>版本宣告無效</value>
+  </data>
 </root>

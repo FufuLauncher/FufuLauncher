@@ -14,12 +14,15 @@ public partial class PluginStoreViewModel
 {
     #region Plugin Install
 
+    private bool _installCancelRequested;
+
     private void CancelInstall(PluginStoreItem item)
     {
         if (item == null || !item.IsInstallInProgress) return;
 
         DebugLog.Info("PluginStoreViewModel.Install", $"[PluginStoreVM] User cancelled install for plugin: {item.Id}");
 
+        _installCancelRequested = true;
         _installCts?.Cancel();
 
         item.InstallStatusText = "PluginStoreCancelling".GetLocalized();
@@ -28,13 +31,25 @@ public partial class PluginStoreViewModel
 
     private async Task InstallPluginAsync(PluginStoreItem item)
     {
-        if (item == null || item.IsInstallInProgress || _installCts != null) return;
+        if (item == null || item.IsInstallInProgress || _installCts != null || IsStoreBusy) return;
 
         var preserveExisting = Directory.Exists(Path.Combine(_pluginsDir, item.Id));
 
+        if (!string.IsNullOrWhiteSpace(item.MinAppVersion) &&
+            !IsVersionSatisfied(CurrentAppVersion, item.MinAppVersion))
+        {
+            await ShowMinVersionWarningAsync(item);
+            item.State = StorePluginState.Available;
+            item.InstallProgress = 0;
+            item.InstallStatusText = "PluginStoreVersionTooLow".GetLocalized();
+            return;
+        }
+
+        var outcome = PluginInstallOutcome.Running;
+        _installCancelRequested = false;
+
         try
         {
-            _installCts?.Cancel();
             _installCts = new CancellationTokenSource();
 
             _installingPluginIds.Add(item.Id);
@@ -42,30 +57,26 @@ public partial class PluginStoreViewModel
             item.State = StorePluginState.Installing;
             item.IsInstallInProgress = true;
             item.InstallProgress = 0;
+            item.InstallProgressPercent = 0;
+            item.DownloadedBytes = 0;
+            item.TotalDownloadBytes = -1;
+            item.DownloadSpeedBytesPerSecond = 0;
             item.InstallStatusText = "PluginStoreVerifying".GetLocalized();
 
-            if (!string.IsNullOrWhiteSpace(item.MinAppVersion))
-            {
-                if (!IsVersionSatisfied(CurrentAppVersion, item.MinAppVersion))
-                {
-                    _installingPluginIds.Remove(item.Id);
-                    await ShowMinVersionWarningAsync(item);
-                    item.State = StorePluginState.Available;
-                    item.InstallProgress = 0;
-                    item.InstallStatusText = "PluginStoreVersionTooLow".GetLocalized();
-                    return;
-                }
-            }
+            BeginOperation(item, false);
 
             if (item.IsPrivate && string.IsNullOrWhiteSpace(item.AccessToken))
             {
+                item.InstallStatusText = "PluginStorePrivateAccessRequired".GetLocalized();
+
                 var accessKey = await ShowPrivateAccessDialogAsync(item);
                 if (string.IsNullOrWhiteSpace(accessKey))
                 {
                     _installingPluginIds.Remove(item.Id);
                     item.State = StorePluginState.Available;
                     item.InstallProgress = 0;
-                    item.InstallStatusText = string.Empty;
+                    item.InstallStatusText = "PluginStoreCancelled".GetLocalized();
+                    outcome = PluginInstallOutcome.Cancelled;
                     return;
                 }
 
@@ -97,15 +108,17 @@ public partial class PluginStoreViewModel
                     item.InstallProgress = 0;
                     item.InstallStatusText = "PluginStorePrivateAccessDenied".GetLocalized();
                     StatusMessage = ex.Message;
+                    outcome = PluginInstallOutcome.Failed;
                     return;
                 }
             }
 
-            await DoInstallAsync(item, preserveExisting);
+            outcome = await DoInstallAsync(item, preserveExisting);
         }
         catch (Exception ex)
         {
             DebugLog.Info("PluginStoreViewModel.Install", $"[PluginStoreVM] Install error: {ex}");
+            outcome = PluginInstallOutcome.Failed;
             _installingPluginIds.Remove(item.Id);
             item.State = StorePluginState.Available;
             item.InstallProgress = 0;
@@ -121,11 +134,22 @@ public partial class PluginStoreViewModel
             _installCts?.Dispose();
             _installCts = null;
             item.ArchivePassword = null;
+
             if (preserveExisting && item.State == StorePluginState.Available) UpdateLocalState(item);
+
+            if (outcome == PluginInstallOutcome.Failed && _installCancelRequested)
+            {
+                outcome = PluginInstallOutcome.Cancelled;
+            }
+
+            _installCancelRequested = false;
+
+            _operationOutcome = outcome;
+            FinishOperation(item);
         }
     }
 
-    private async Task DoInstallAsync(PluginStoreItem item, bool preserveExisting)
+    private async Task<PluginInstallOutcome> DoInstallAsync(PluginStoreItem item, bool preserveExisting)
     {
         var maxCaptchaRetries = 3;
         var attempt = 0;
@@ -164,34 +188,18 @@ public partial class PluginStoreViewModel
                     StatusMessage = string.Format("PluginStoreInstallFailed".GetLocalized(),
                         "PluginStoreInstallVerifyFailed".GetLocalized());
                     if (!preserveExisting) CleanupPluginDir(item.Id);
-                    return;
+                    return PluginInstallOutcome.Failed;
                 }
 
-                if (_dispatcher != null)
-                {
-                    var capturedItem = item;
-                    _dispatcher.TryEnqueue(async () =>
-                    {
-                        capturedItem.InstallProgress = 100;
-                        capturedItem.InstallProgressPercent = 100.0;
-                        capturedItem.InstallStatusText = "PluginStoreInstallComplete".GetLocalized();
-                        capturedItem.DownloadSpeedBytesPerSecond = 0;
+                item.InstallProgress = 100;
+                item.InstallProgressPercent = 100.0;
+                item.InstallStatusText = "PluginStoreInstallComplete".GetLocalized();
+                item.DownloadSpeedBytesPerSecond = 0;
 
-                        await Task.Delay(600);
-
-                        capturedItem.State = StorePluginState.Installed;
-                    });
-                }
-                else
-                {
-                    item.InstallProgress = 100;
-                    item.InstallProgressPercent = 100.0;
-                    item.InstallStatusText = "PluginStoreInstallComplete".GetLocalized();
-                    item.State = StorePluginState.Installed;
-                }
+                ApplyInstalledState(item);
 
                 StatusMessage = string.Format("PluginStoreInstallSuccess".GetLocalized(), item.Name);
-                return;
+                return PluginInstallOutcome.Succeeded;
             }
             catch (CaptchaRequiredException captchaEx)
             {
@@ -244,7 +252,7 @@ public partial class PluginStoreViewModel
                 item.InstallStatusText = "PluginStoreHashFailed".GetLocalized();
                 StatusMessage = string.Format("PluginStoreInstallFailed".GetLocalized(), ex.Message);
                 if (!preserveExisting) CleanupPluginDir(item.Id);
-                return;
+                return PluginInstallOutcome.Failed;
             }
             catch (SecurityViolationException ex)
             {
@@ -254,7 +262,7 @@ public partial class PluginStoreViewModel
                 item.InstallStatusText = "PluginStoreSecurityBlockedShort".GetLocalized();
                 StatusMessage = string.Format("PluginStoreSecurityBlocked".GetLocalized(), ex.Message);
                 if (!preserveExisting) CleanupPluginDir(item.Id);
-                return;
+                return PluginInstallOutcome.Failed;
             }
             catch (OperationCanceledException)
             {
@@ -262,7 +270,7 @@ public partial class PluginStoreViewModel
                 item.InstallProgress = 0;
                 item.InstallStatusText = "PluginStoreCancelled".GetLocalized();
                 if (!preserveExisting) CleanupPluginDir(item.Id);
-                return;
+                return PluginInstallOutcome.Cancelled;
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("download") ||
                                                        ex.Message.Contains("Download"))
@@ -275,6 +283,23 @@ public partial class PluginStoreViewModel
         }
 
         throw new InvalidOperationException("PluginStoreCaptchaRetryExhausted".GetLocalized());
+    }
+
+    private void ApplyInstalledState(PluginStoreItem item)
+    {
+        void Apply()
+        {
+            item.State = StorePluginState.Installed;
+        }
+
+        if (_dispatcher == null || _dispatcher.HasThreadAccess)
+        {
+            Apply();
+        }
+        else
+        {
+            _dispatcher.TryEnqueue(() => Apply());
+        }
     }
 
     private static bool IsVersionSatisfied(string currentVersion, string minVersion)

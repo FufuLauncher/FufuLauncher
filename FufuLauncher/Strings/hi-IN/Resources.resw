@@ -9062,4 +9062,13 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="Settings_IgnoreGameVersion_Caption" xml:space="preserve">
     <value>सक्षम होने पर प्लगइन घोषित गेम संस्करण के आधार पर स्वतः अक्षम या सक्षम होने से नहीं रोके जाएंगे। असंगत प्लगइन से गेम क्रैश हो सकता है; सावधानी से उपयोग करें।</value>
   </data>
+  <data name="PluginGameVersion_Supported_Format" xml:space="preserve">
+    <value>समर्थित {0}</value>
+  </data>
+  <data name="PluginGameVersion_CardUnsupported_Format" xml:space="preserve">
+    <value>संस्करण {0} असमर्थित</value>
+  </data>
+  <data name="PluginGameVersion_CardMalformed" xml:space="preserve">
+    <value>संस्करण आवश्यकता अमान्य</value>
+  </data>
 </root>
