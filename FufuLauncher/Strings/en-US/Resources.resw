@@ -5625,8 +5625,17 @@ Do you still want to execute it? (Not recommended)</value>
   <data name="Fps_Missing_Title" xml:space="preserve">
     <value>FPS Plugin Missing</value>
   </data>
+  <data name="Fps_Repair_Cancelled" xml:space="preserve">
+    <value>FPS plugin repair was cancelled.</value>
+  </data>
   <data name="Fps_Repair_Fail_Title" xml:space="preserve">
     <value>Repair Failed</value>
+  </data>
+  <data name="Fps_Repair_Fetching" xml:space="preserve">
+    <value>Fetching the FPS plugin from the plugin store...</value>
+  </data>
+  <data name="Fps_Repair_StoreUnavailable" xml:space="preserve">
+    <value>The FPS plugin was not found in the plugin store. Please try again later.</value>
   </data>
   <data name="Fps_Repair_Success" xml:space="preserve">
     <value>The FPS display plugin has been successfully repaired and installed.</value>

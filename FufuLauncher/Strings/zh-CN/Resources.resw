@@ -987,8 +987,17 @@
   <data name="Fps_Missing_Title" xml:space="preserve">
     <value>FPS插件缺失</value>
   </data>
+  <data name="Fps_Repair_Cancelled" xml:space="preserve">
+    <value>已取消修复FPS插件</value>
+  </data>
   <data name="Fps_Repair_Fail_Title" xml:space="preserve">
     <value>修复失败</value>
+  </data>
+  <data name="Fps_Repair_Fetching" xml:space="preserve">
+    <value>正在从插件商城获取FPS插件...</value>
+  </data>
+  <data name="Fps_Repair_StoreUnavailable" xml:space="preserve">
+    <value>插件商城中未找到FPS插件，请稍后重试</value>
   </data>
   <data name="Fps_Repair_Success" xml:space="preserve">
     <value>FPS显示插件已成功修复并安装</value>

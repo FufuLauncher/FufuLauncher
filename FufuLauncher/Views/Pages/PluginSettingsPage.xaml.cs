@@ -80,9 +80,6 @@ public sealed partial class PluginSettingsPage : Page
             if (!IsLoaded) return;
         }
 
-        await VerifyFpsPluginHashAsync();
-        if (!IsLoaded) return;
-
         await CheckAndShowFpsWarningAsync();
         if (!IsLoaded) return;
 
