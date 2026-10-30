@@ -60,6 +60,7 @@
                     Source="/Assets/WindowIcon.ico" />
                 <TextBlock
                     VerticalAlignment="Center"
+                    FontFamily="{StaticResource AppGlobalFont}"
                     Style="{StaticResource BodyTextBlockStyle}"
                     Text="{Binding Title}" />
             </StackPanel>
