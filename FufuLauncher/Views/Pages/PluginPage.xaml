@@ -170,16 +170,6 @@
                                            VerticalAlignment="Top"
                                            FontFamily="{StaticResource AppGlobalFont}" />
 
-                                <TextBlock Text="{x:Bind GameVersionText, Mode=OneWay}"
-                                           Visibility="{x:Bind GameVersionVisibility, Mode=OneWay}"
-                                           FontSize="11"
-                                           Foreground="{ThemeResource SafeSecondaryTextBrush}"
-                                           Margin="0,4,0,0"
-                                           MaxLines="1"
-                                           TextTrimming="CharacterEllipsis"
-                                           ToolTipService.ToolTip="{x:Bind GameVersionText, Mode=OneWay}"
-                                           FontFamily="{StaticResource AppGlobalFont}" />
-
                                 <TextBlock Text="{x:Bind VersionBlockMessage, Mode=OneWay}"
                                            Visibility="{x:Bind VersionBlockVisibility, Mode=OneWay}"
                                            FontSize="11"
@@ -200,6 +190,18 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0"
+                                           Text="{x:Bind GameVersionText, Mode=OneWay}"
+                                           Visibility="{x:Bind GameVersionVisibility, Mode=OneWay}"
+                                           FontSize="11"
+                                           Foreground="{ThemeResource SafeSecondaryTextBrush}"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           MaxLines="1"
+                                           TextTrimming="CharacterEllipsis"
+                                           ToolTipService.ToolTip="{x:Bind GameVersionText, Mode=OneWay}"
+                                           FontFamily="{StaticResource AppGlobalFont}" />
 
                                 <Button Grid.Column="1"
                                         Click="OnConfigClick"
@@ -414,6 +416,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
                                     <FontIcon Glyph="&#xE74C;" FontFamily="Segoe MDL2 Assets" FontSize="24"
@@ -465,15 +468,6 @@
                                                        FontFamily="{StaticResource AppGlobalFont}" />
                                         </StackPanel>
 
-                                        <TextBlock Text="{x:Bind GameVersionText, Mode=OneWay}"
-                                                   Visibility="{x:Bind GameVersionVisibility, Mode=OneWay}"
-                                                   Style="{StaticResource CaptionTextBlockStyle}"
-                                                   Foreground="{ThemeResource SafeSecondaryTextBrush}"
-                                                   MaxLines="1"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   ToolTipService.ToolTip="{x:Bind GameVersionText, Mode=OneWay}"
-                                                   FontFamily="{StaticResource AppGlobalFont}" />
-
                                         <TextBlock Text="{x:Bind VersionBlockMessage, Mode=OneWay}"
                                                    Visibility="{x:Bind VersionBlockVisibility, Mode=OneWay}"
                                                    Style="{StaticResource CaptionTextBlockStyle}"
@@ -484,7 +478,20 @@
                                                    FontFamily="{StaticResource AppGlobalFont}" />
                                     </StackPanel>
 
-                                    <Button Grid.Column="2"
+                                    <TextBlock Grid.Column="2"
+                                               Text="{x:Bind GameVersionText, Mode=OneWay}"
+                                               Visibility="{x:Bind GameVersionVisibility, Mode=OneWay}"
+                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                               Foreground="{ThemeResource SafeSecondaryTextBrush}"
+                                               MaxWidth="200"
+                                               MaxLines="1"
+                                               TextTrimming="CharacterEllipsis"
+                                               Margin="0,0,12,0"
+                                               VerticalAlignment="Center"
+                                               ToolTipService.ToolTip="{x:Bind GameVersionText, Mode=OneWay}"
+                                               FontFamily="{StaticResource AppGlobalFont}" />
+
+                                    <Button Grid.Column="3"
                                             Click="OnConfigClick"
                                             Tag="{x:Bind}"
                                             Visibility="{x:Bind ConfigVisibility, Mode=OneWay}"
@@ -500,7 +507,7 @@
                                         </StackPanel>
                                     </Button>
 
-                                    <ToggleSwitch Grid.Column="3"
+                                    <ToggleSwitch Grid.Column="4"
                                                   IsOn="{x:Bind IsEnabled, Mode=OneWay}"
                                                   Toggled="OnPluginToggled"
                                                   Tag="{x:Bind}"
