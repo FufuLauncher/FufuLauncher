@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="PageTitleStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{ThemeResource AppGlobalFont}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FontWeight" Value="SemiLight" />
         <Setter Property="FontSize" Value="{StaticResource LargeFontSize}" />
@@ -11,6 +12,7 @@
     </Style>
 
     <Style x:Key="BodyTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{ThemeResource AppGlobalFont}" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="FontSize" Value="{StaticResource MediumFontSize}" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />

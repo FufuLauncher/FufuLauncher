@@ -1487,11 +1487,11 @@
 
                 <Button.ContextFlyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem
+                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
                             Click="SwitchToBilibili_Click"
                             Icon="Switch"
                             Text="{helpers:Loc Key=Home_SwitchBilibili}" />
-                        <MenuFlyoutItem
+                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
                             Click="SwitchToOfficial_Click"
                             Icon="Switch"
                             Text="{helpers:Loc Key=Home_SwitchOfficial}" />

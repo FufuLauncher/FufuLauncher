@@ -16,6 +16,7 @@
     <Grid x:Name="RootGrid">
         <Grid.Resources>
             <Style x:Key="AnnouncementTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
             </Style>
         </Grid.Resources>

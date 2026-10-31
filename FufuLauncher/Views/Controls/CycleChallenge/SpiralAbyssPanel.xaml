@@ -29,11 +29,13 @@
         </Style>
 
         <Style x:Key="AbyssLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
 
         <Style x:Key="AbyssCaptionStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorTertiaryBrush}" />
         </Style>

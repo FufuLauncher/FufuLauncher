@@ -54,6 +54,7 @@ public sealed partial class MainWindow
                 : 380;
         var infoBar = new InfoBar
         {
+            FontFamily = (FontFamily)Application.Current.Resources["AppGlobalFont"],
             Title = message.Title,
             Message = message.Message,
             Severity = GetInfoBarSeverity(message.Type),
@@ -218,7 +219,69 @@ public sealed partial class MainWindow
             PlayContainerExitAnimation();
         }
 
-        storyboard.Completed += (_, _) =>
+        storyboard.Completed += (_, _) => CollapseNotification(element);
+
+        storyboard.Begin();
+    }
+
+    private void CollapseNotification(FrameworkElement element)
+    {
+        try
+        {
+            var index = NotificationPanel.Children.IndexOf(element);
+            if (index < 0)
+            {
+                return;
+            }
+
+            var isLastChild = index == NotificationPanel.Children.Count - 1;
+            var spacing = isLastChild ? 0 : NotificationPanel.Spacing;
+            var margin = element.Margin;
+            var space = element.ActualHeight + margin.Top + margin.Bottom + spacing;
+
+            NotificationPanel.Children.Remove(element);
+
+            if (space <= 0)
+            {
+                return;
+            }
+
+            var placeholder = new Border
+            {
+                Height = Math.Max(0, space - spacing),
+                Margin = new Thickness(0, 0, 0, -spacing),
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                IsHitTestVisible = false
+            };
+
+            NotificationPanel.Children.Insert(index, placeholder);
+
+            var heightAnim = new DoubleAnimation
+            {
+                To = 0,
+                Duration = new Duration(TimeSpan.FromMilliseconds(220)),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                EnableDependentAnimation = true
+            };
+            Storyboard.SetTarget(heightAnim, placeholder);
+            Storyboard.SetTargetProperty(heightAnim, "Height");
+
+            var storyboard = new Storyboard();
+            storyboard.Children.Add(heightAnim);
+            storyboard.Completed += (_, _) =>
+            {
+                try
+                {
+                    NotificationPanel.Children.Remove(placeholder);
+                }
+                catch
+                {
+                }
+            };
+
+            storyboard.Begin();
+        }
+        catch
         {
             try
             {
@@ -227,9 +290,7 @@ public sealed partial class MainWindow
             catch
             {
             }
-        };
-
-        storyboard.Begin();
+        }
     }
 
     private void ClearAllNotifications_Click(object sender, RoutedEventArgs e)

@@ -63,6 +63,7 @@
             </Style>
 
             <Style x:Key="ImageSourcePanelCaptionStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
@@ -330,7 +331,7 @@
                                         Click="OnOpenOfficialBackgroundWindowClick" />
                             </StackPanel>
 
-                            <Expander Header="{helpers:Loc Key=OfficialBgApiTitle}" IsExpanded="False">
+                            <Expander FontFamily="{StaticResource AppGlobalFont}" Header="{helpers:Loc Key=OfficialBgApiTitle}" IsExpanded="False">
                                 <StackPanel Spacing="8" Padding="0,4,0,0">
                                     <TextBox
                                         Text="{x:Bind ViewModel.CustomBackgroundApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -464,7 +465,7 @@
                             Background="{ThemeResource DividerStrokeColorDefaultBrush}" />
                 </Grid>
 
-                <InfoBar Grid.Row="3"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Grid.Row="3"
                          IsOpen="{x:Bind ViewModel.HasStatus, Mode=OneWay}"
                          IsClosable="False"
                          Message="{x:Bind ViewModel.StatusText, Mode=OneWay}"

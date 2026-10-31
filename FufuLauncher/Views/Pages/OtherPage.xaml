@@ -310,7 +310,7 @@
                                             VerticalAlignment="Bottom" />
                                 </Grid>
 
-                                <InfoBar Grid.Row="4" Grid.ColumnSpan="2"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Grid.Row="4" Grid.ColumnSpan="2"
                                          Severity="Informational"
                                          IsClosable="False"
                                          IsOpen="True"

@@ -36,6 +36,7 @@
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                             <Setter Property="Padding" Value="4" />
                                             <Setter Property="CornerRadius" Value="8" />
                                             <Setter Property="MaxWidth" Value="640" />
@@ -90,6 +91,7 @@
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                             <Setter Property="Padding" Value="4" />
                                             <Setter Property="CornerRadius" Value="8" />
                                             <Setter Property="MaxWidth" Value="640" />
@@ -155,6 +157,7 @@
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                             <Setter Property="Padding" Value="4" />
                                             <Setter Property="CornerRadius" Value="8" />
                                             <Setter Property="MaxWidth" Value="640" />
@@ -208,6 +211,7 @@
                                 <Flyout Placement="Right" Opened="OnSettingHelpOpened" Closed="OnSettingHelpClosed">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                             <Setter Property="Padding" Value="4" />
                                             <Setter Property="CornerRadius" Value="8" />
                                             <Setter Property="MaxWidth" Value="640" />
@@ -500,6 +504,7 @@
                                 <Flyout Placement="BottomEdgeAlignedRight" Opening="OnLaunchConfigurationFlyoutOpening">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                             <Setter Property="Padding" Value="20" />
                                             <Setter Property="CornerRadius" Value="8" />
                                             <Setter Property="MaxWidth" Value="900" />
@@ -636,7 +641,7 @@
                                                             ToolTipService.ToolTip="{helpers:Loc Key=SwitchPresetTooltip}">
                                                         <Button.ContextFlyout>
                                                             <MenuFlyout>
-                                                                <MenuFlyoutItem Text="{helpers:Loc Key=Preset_Rename}"
+                                                                <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=Preset_Rename}"
                                                                         Tag="{x:Bind}"
                                                                         Click="OnRenamePresetClick" />
                                                             </MenuFlyout>
@@ -774,7 +779,7 @@
               Visibility="{x:Bind ViewModel.HasConfigurationLoadError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
                         MaxWidth="600" Margin="24" Spacing="12">
-                <InfoBar IsOpen="{x:Bind ViewModel.HasConfigurationLoadError, Mode=OneWay}"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="{x:Bind ViewModel.HasConfigurationLoadError, Mode=OneWay}"
                          Title="{helpers:Loc Key=Settings_ConfigReadFailed}"
                          Message="{x:Bind ViewModel.ConfigurationLoadError, Mode=OneWay}"
                          Severity="Error" IsClosable="False"
@@ -783,7 +788,7 @@
                         <Button Content="{helpers:Loc Key=PluginStoreRetry}" Click="OnRetryConfigurationClick" />
                     </InfoBar.ActionButton>
                 </InfoBar>
-                <InfoBar IsOpen="{x:Bind ViewModel.HasConfigurationFileLockProcesses, Mode=OneWay}"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="{x:Bind ViewModel.HasConfigurationFileLockProcesses, Mode=OneWay}"
                          Title="{helpers:Loc Key=Plugin_FileLocked_Title}"
                          Message="{x:Bind ViewModel.ConfigurationFileLockProcesses, Mode=OneWay}"
                          Severity="Informational" IsClosable="False"

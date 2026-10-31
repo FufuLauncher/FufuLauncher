@@ -47,6 +47,7 @@
             <Flyout Placement="BottomEdgeAlignedRight" Opened="OnFlyoutOpened" Closed="OnFlyoutClosed">
                 <Flyout.FlyoutPresenterStyle>
                     <Style TargetType="FlyoutPresenter">
+                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                         <Setter Property="Padding" Value="0" />
                         <Setter Property="CornerRadius" Value="16" />
                         <Setter Property="BorderThickness" Value="0" />

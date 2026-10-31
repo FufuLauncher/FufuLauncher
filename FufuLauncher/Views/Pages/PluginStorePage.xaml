@@ -757,14 +757,14 @@
                                     <FontIcon Glyph="&#xE712;" FontSize="14" />
                                     <Button.Flyout>
                                         <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                            <MenuFlyoutItem Text="{helpers:Loc Key=PluginStorePrivatePlugin}"
+                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=PluginStorePrivatePlugin}"
                                                             Click="OnAddPrivatePluginClick"
                                                             ToolTipService.ToolTip="{helpers:Loc Key=PluginStorePrivatePluginTooltip}">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon Glyph="&#xE72E;" />
                                                 </MenuFlyoutItem.Icon>
                                             </MenuFlyoutItem>
-                                            <MenuFlyoutItem Text="{helpers:Loc Key=PluginStoreLuaTestButton}"
+                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=PluginStoreLuaTestButton}"
                                                             Click="OnLuaTestClick"
                                                             ToolTipService.ToolTip="{helpers:Loc Key=PluginStoreLuaTestTooltip}">
                                                 <MenuFlyoutItem.Icon>

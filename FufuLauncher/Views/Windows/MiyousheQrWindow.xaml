@@ -31,7 +31,7 @@
                             Style="{StaticResource AccentButtonStyle}" IsEnabled="False" />
                 </StackPanel>
                 <ProgressRing x:Name="Progress" Width="28" Height="28" IsActive="False" Visibility="Collapsed" />
-                <InfoBar x:Name="Status" IsOpen="False" IsClosable="False" />
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" x:Name="Status" IsOpen="False" IsClosable="False" />
                 <Grid ColumnSpacing="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" /><ColumnDefinition Width="*" />

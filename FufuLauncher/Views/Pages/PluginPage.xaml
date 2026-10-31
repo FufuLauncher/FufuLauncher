@@ -95,9 +95,9 @@
                         </Border.Shadow>
                         <Border.ContextFlyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
+                                <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
                                                 Tag="{x:Bind}" />
-                                <MenuFlyoutItem Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
+                                <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
                                                 Icon="Delete" Tag="{x:Bind}" />
                             </MenuFlyout>
                         </Border.ContextFlyout>
@@ -364,13 +364,13 @@
             <AppBarButton Icon="Sort" Label="{helpers:Loc Key=SortLabel}">
                 <AppBarButton.Flyout>
                     <MenuFlyout>
-                        <MenuFlyoutItem Text="{helpers:Loc Key=SortByName}" Command="{x:Bind ViewModel.SortCommand}"
+                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=SortByName}" Command="{x:Bind ViewModel.SortCommand}"
                                         CommandParameter="Name" />
-                        <MenuFlyoutItem Text="{helpers:Loc Key=SortByStatus}" Command="{x:Bind ViewModel.SortCommand}"
+                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=SortByStatus}" Command="{x:Bind ViewModel.SortCommand}"
                                         CommandParameter="Status" />
-                        <MenuFlyoutItem Text="{helpers:Loc Key=SortBySize}" Command="{x:Bind ViewModel.SortCommand}"
+                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=SortBySize}" Command="{x:Bind ViewModel.SortCommand}"
                                         CommandParameter="Size" />
-                        <MenuFlyoutItem Text="{helpers:Loc Key=SortByDate}" Command="{x:Bind ViewModel.SortCommand}"
+                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=SortByDate}" Command="{x:Bind ViewModel.SortCommand}"
                                         CommandParameter="Date" />
                     </MenuFlyout>
                 </AppBarButton.Flyout>
@@ -404,9 +404,9 @@
                                     </Grid.Shadow>
                                     <Grid.ContextFlyout>
                                         <MenuFlyout>
-                                            <MenuFlyoutItem Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
+                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=RenameFolderLabel}" Click="OnRenameClick"
                                                             Tag="{x:Bind}" />
-                                            <MenuFlyoutItem Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
+                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=DeleteLabel}" Click="OnDeleteClick"
                                                             Icon="Delete" Tag="{x:Bind}" />
                                         </MenuFlyout>
                                     </Grid.ContextFlyout>

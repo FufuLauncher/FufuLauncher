@@ -10,23 +10,28 @@
         <Grid.Resources>
             <ResourceDictionary>
                 <Style x:Key="SecondaryTextStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="12" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                 </Style>
                 <Style x:Key="MetaTextStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="11" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                 </Style>
                 <Style x:Key="SectionLabelStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="14" />
                     <Setter Property="FontWeight" Value="SemiBold" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                 </Style>
                 <Style x:Key="StatValueStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="22" />
                     <Setter Property="FontWeight" Value="SemiBold" />
                 </Style>
                 <Style x:Key="StatLabelStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="11" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                     <Setter Property="TextWrapping" Value="Wrap" />
@@ -72,7 +77,7 @@
                                  Margin="0,0,0,12"
                                  FontSize="12" />
 
-                <InfoBar Severity="Error"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Severity="Error"
                          IsOpen="True"
                          IsClosable="False"
                          Title="{helpers:Loc Key=ServiceDetail_LoadFailed}"

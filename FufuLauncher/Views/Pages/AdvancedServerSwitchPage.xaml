@@ -58,7 +58,7 @@
             </StackPanel>
         </Grid>
 
-        <InfoBar Grid.Row="1" IsOpen="True" Severity="Warning" IsClosable="False">
+        <InfoBar FontFamily="{StaticResource AppGlobalFont}" Grid.Row="1" IsOpen="True" Severity="Warning" IsClosable="False">
             <InfoBar.Content>
                 <StackPanel Spacing="6" MaxWidth="720" HorizontalAlignment="Left" Margin="0,2,12,8">
                     <TextBlock TextWrapping="Wrap">

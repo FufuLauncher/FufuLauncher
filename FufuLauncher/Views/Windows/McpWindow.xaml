@@ -11,6 +11,7 @@
     <Grid x:Name="RootGrid" Background="Transparent">
         <Grid.Resources>
             <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="13" />
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -24,15 +25,18 @@
                 <Setter Property="Padding" Value="20,14" />
             </Style>
             <Style x:Key="RowTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextWrapping" Value="Wrap" />
             </Style>
             <Style x:Key="RowCaptionStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Opacity" Value="0.65" />
                 <Setter Property="TextWrapping" Value="Wrap" />
             </Style>
             <Style x:Key="ErrorTextStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="TextWrapping" Value="Wrap" />
                 <Setter Property="Foreground" Value="{ThemeResource SystemFillColorCriticalBrush}" />
@@ -149,13 +153,13 @@
                     </Border>
                 </StackPanel>
 
-                <InfoBar Severity="Warning"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Severity="Warning"
                          IsOpen="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
                          IsClosable="False"
                          Title="{helpers:Loc Key=Mcp_SecurityTitle}"
                          Message="{helpers:Loc Key=Mcp_SecurityMessage}" />
 
-                <InfoBar Severity="Error"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Severity="Error"
                          IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
                          IsClosable="False"
                          Title="{helpers:Loc Key=Mcp_ErrorTitle}"

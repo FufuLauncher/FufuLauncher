@@ -132,7 +132,7 @@
                         </StackPanel>
                     </Border>
 
-                    <InfoBar IsOpen="True" IsClosable="False" Severity="Informational"
+                    <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="True" IsClosable="False" Severity="Informational"
                              Title="{helpers:Loc Key=Diagnostics_Suggestion}"
                              Message="{x:Bind ViewModel.Info.Suggestion, Mode=OneWay}" />
                 </StackPanel>

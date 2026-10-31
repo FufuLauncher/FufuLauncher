@@ -294,6 +294,7 @@
                                     ShouldConstrainToRootBounds="True">
                                 <Flyout.FlyoutPresenterStyle>
                                     <Style TargetType="FlyoutPresenter">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                         <Setter Property="VerticalContentAlignment" Value="Stretch" />
                                         <Setter Property="IsTabStop" Value="False" />

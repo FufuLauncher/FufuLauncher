@@ -20,6 +20,7 @@
         <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
 
         <Style TargetType="TextBlock" x:Key="LabelStyle">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Margin" Value="0,0,8,0" />
         </Style>
@@ -83,7 +84,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:GachaStatistic">
-                    <Expander HorizontalAlignment="Stretch" IsExpanded="True" CornerRadius="8">
+                    <Expander FontFamily="{StaticResource AppGlobalFont}" HorizontalAlignment="Stretch" IsExpanded="True" CornerRadius="8">
                         <Expander.Header>
                             <Grid HorizontalAlignment="Stretch" Margin="0,8">
                                 <Grid.ColumnDefinitions>

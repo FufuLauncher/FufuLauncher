@@ -30,10 +30,10 @@
                                        FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                         </Grid>
 
-                        <InfoBar IsOpen="{x:Bind HDRNotSupported}" Severity="Warning"
+                        <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="{x:Bind HDRNotSupported}" Severity="Warning"
                                  Title="{helpers:Loc Key=HDR_NotSupported}"
                                  Message="{helpers:Loc Key=HDR_NotSupportedMsg}" IsClosable="False" Margin="0,2,0,2" />
-                        <InfoBar IsOpen="{x:Bind HDRNotEnabled}" Severity="Informational"
+                        <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="{x:Bind HDRNotEnabled}" Severity="Informational"
                                  Title="{helpers:Loc Key=HDR_NotEnabled}"
                                  Message="{helpers:Loc Key=HDR_NotEnabledMsg}" IsClosable="False" Margin="0,2,0,2" />
 

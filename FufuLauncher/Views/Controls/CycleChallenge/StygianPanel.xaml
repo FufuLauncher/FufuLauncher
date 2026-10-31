@@ -40,20 +40,24 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
         <Style x:Key="KpiLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
         <Style x:Key="KpiValueStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
             <Setter Property="IsTextScaleFactorEnabled" Value="False" />
         </Style>
         <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
         <Style x:Key="SecondaryCaptionStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>

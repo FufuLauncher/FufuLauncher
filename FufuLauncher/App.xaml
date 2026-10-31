@@ -34,6 +34,72 @@
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             </Style>
 
+            <Style TargetType="ContentDialog">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="Foreground" Value="{ThemeResource ContentDialogForeground}" />
+                <Setter Property="Background" Value="{ThemeResource ContentDialogBackground}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource ContentDialogBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource ContentDialogBorderWidth}" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="CornerRadius" Value="{ThemeResource OverlayCornerRadius}" />
+            </Style>
+
+            <Style x:Key="BodyTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+                <Setter Property="TextLineBounds" Value="Full" />
+            </Style>
+
+            <Style x:Key="BodyStrongTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+                <Setter Property="TextLineBounds" Value="Full" />
+            </Style>
+
+            <Style x:Key="CaptionTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+                <Setter Property="TextLineBounds" Value="Full" />
+            </Style>
+
+            <Style x:Key="SubtitleTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+                <Setter Property="TextLineBounds" Value="Full" />
+                <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+            </Style>
+
+            <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="28" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="LineStackingStrategy" Value="MaxHeight" />
+                <Setter Property="TextLineBounds" Value="Full" />
+                <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+            </Style>
+
+            <Style TargetType="RichTextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+            </Style>
+
             <Style TargetType="NavigationViewItemHeader">
                 <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemHeaderForeground}" />
                 <Setter Property="IsEnabled" Value="False" />

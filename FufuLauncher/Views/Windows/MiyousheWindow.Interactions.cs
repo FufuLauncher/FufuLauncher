@@ -205,6 +205,7 @@ public sealed partial class MiyousheWindow
         };
         var feedback = new InfoBar
         {
+            FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["AppGlobalFont"],
             IsOpen = uncertain, IsClosable = false, Severity = InfoBarSeverity.Warning,
             Message = uncertain ? "Miyoushe_SubmissionUncertain".GetLocalized() : ""
         };

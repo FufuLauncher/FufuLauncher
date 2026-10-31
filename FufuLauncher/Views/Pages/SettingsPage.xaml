@@ -156,6 +156,7 @@
             </Style>
 
             <Style x:Key="RowComboBoxStyle" TargetType="ComboBox">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="MinWidth" Value="200" />
                 <Setter Property="Margin" Value="16,0,0,0" />
                 <Setter Property="HorizontalAlignment" Value="Right" />
@@ -163,6 +164,7 @@
             </Style>
 
             <Style x:Key="RowTextBoxStyle" TargetType="TextBox">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Width" Value="180" />
                 <Setter Property="Margin" Value="16,0,0,0" />
                 <Setter Property="HorizontalAlignment" Value="Right" />
@@ -170,6 +172,7 @@
             </Style>
 
             <Style x:Key="RowNumberBoxStyle" TargetType="NumberBox">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Width" Value="160" />
                 <Setter Property="Margin" Value="16,0,0,0" />
                 <Setter Property="SpinButtonPlacementMode" Value="Compact" />
@@ -211,6 +214,7 @@
             </Style>
 
             <Style x:Key="RowInfoBarStyle" TargetType="InfoBar">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="IsOpen" Value="True" />
                 <Setter Property="IsClosable" Value="False" />
                 <Setter Property="Margin" Value="0,4,0,6" />
@@ -222,6 +226,7 @@
             </Style>
 
             <Style x:Key="PathTextStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Opacity" Value="0.7" />
                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -988,7 +993,7 @@
                             <StackPanel>
                                 <TextBlock Style="{StaticResource CardIntroStyle}"
                                            Text="{helpers:Loc Key=NotesItemsCaption}" />
-                                <InfoBar Style="{StaticResource RowInfoBarStyle}"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
                                          Severity="Warning"
                                          Title="{helpers:Loc Key=NotesWarningTitle}"
                                          Message="{helpers:Loc Key=NotesWarningMessage}" />
@@ -1437,7 +1442,7 @@
                                                  GroupName="WindowBackdrop"
                                                  IsChecked="{Binding CurrentWindowBackdrop, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Acrylic}" />
                                 </StackPanel>
-                                <InfoBar Style="{StaticResource RowInfoBarStyle}"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
                                          Severity="Warning"
                                          Message="{helpers:Loc Key=MicaWarning}" />
 
@@ -1651,7 +1656,7 @@
                                                  PlaceholderText="{helpers:Loc Key=CustomLaunchArgsPlaceholder}"
                                                  MaxWidth="440"
                                                  HorizontalAlignment="Left" />
-                                        <InfoBar Style="{StaticResource RowInfoBarStyle}"
+                                        <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
                                                  Severity="Informational"
                                                  Message="{helpers:Loc Key=CustomLaunchArgsInfo}"
                                                  FontSize="12" />
@@ -2911,7 +2916,7 @@
                                             Command="{x:Bind ViewModel.ChangeCachePathCommand}" />
                                 </StackPanel>
 
-                                <InfoBar Style="{StaticResource RowInfoBarStyle}"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
                                          Severity="Error"
                                          IsClosable="True"
                                          FontSize="12"

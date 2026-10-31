@@ -452,7 +452,7 @@
                                             Visibility="{x:Bind SingleItemVisibility, Mode=OneWay}"
                                             HorizontalContentAlignment="Stretch" />
 
-                                        <Expander
+                                        <Expander FontFamily="{StaticResource AppGlobalFont}"
                                             Visibility="{x:Bind GroupVisibility, Mode=OneWay}"
                                             HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Stretch"

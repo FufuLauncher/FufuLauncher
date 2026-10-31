@@ -29,6 +29,7 @@
     </Style>
 
     <Style x:Key="PluginSettingLabelStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{ThemeResource AppGlobalFont}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Opacity" Value="0.9" />
         <Setter Property="VerticalAlignment" Value="Center" />

@@ -450,12 +450,12 @@
                             Margin="18,10,18,0"
                             Spacing="8"
                             Visibility="{x:Bind ViewModel.HasBanner, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <InfoBar
+                            <InfoBar FontFamily="{StaticResource AppGlobalFont}"
                                 IsClosable="False"
                                 IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
                                 Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
                                 Severity="Error" />
-                            <InfoBar
+                            <InfoBar FontFamily="{StaticResource AppGlobalFont}"
                                 IsClosable="False"
                                 IsOpen="{x:Bind ViewModel.IsOffline, Mode=OneWay}"
                                 Message="{helpers:Loc Key=CycleChallenge_OfflineBanner}"

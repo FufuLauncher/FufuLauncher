@@ -50,6 +50,7 @@
                             ShouldConstrainToRootBounds="True">
                         <Flyout.FlyoutPresenterStyle>
                             <Style TargetType="FlyoutPresenter">
+                                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                 <Setter Property="Padding" Value="0" />
                                 <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
                                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
@@ -112,7 +113,7 @@
                 </FlyoutBase.AttachedFlyout>
             </TextBox>
 
-            <TreeView x:Name="DirectoryTreeView"
+            <TreeView FontFamily="{StaticResource AppGlobalFont}" x:Name="DirectoryTreeView"
                       Grid.Row="1"
                       SelectionMode="Single"
                       ItemInvoked="DirectoryTreeView_ItemInvoked"

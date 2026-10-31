@@ -39,11 +39,13 @@ Licensed under the MIT License.
         </Style>
         <!--  KPI 标题  -->
         <Style x:Key="KpiLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
         <!--  KPI 数值  -->
         <Style x:Key="KpiValueStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
@@ -51,11 +53,13 @@ Licensed under the MIT License.
         </Style>
         <!--  区块标题  -->
         <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
         <!--  小号次要文本  -->
         <Style x:Key="SecondaryCaptionStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
         </Style>
