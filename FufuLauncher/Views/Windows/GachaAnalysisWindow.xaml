@@ -1136,8 +1136,8 @@
                         <!-- 角色活动 -->
                         <StackPanel Spacing="12">
                             <Grid Padding="20,16" CornerRadius="14"
-                                  Background="{ThemeResource SafeGlassBrush}"
-                                  BorderBrush="{ThemeResource SafeBorderBrush}" BorderThickness="1"
+                                  Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                   Shadow="{StaticResource SharedShadow}" Translation="0,0,24">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -1206,8 +1206,8 @@
 
                         <StackPanel Spacing="12">
                             <Grid Padding="20,16" CornerRadius="14"
-                                  Background="{ThemeResource SafeGlassBrush}"
-                                  BorderBrush="{ThemeResource SafeBorderBrush}" BorderThickness="1"
+                                  Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                   Shadow="{StaticResource SharedShadow}" Translation="0,0,24">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -1276,8 +1276,8 @@
 
                         <StackPanel Spacing="12">
                             <Grid Padding="20,16" CornerRadius="14"
-                                  Background="{ThemeResource SafeGlassBrush}"
-                                  BorderBrush="{ThemeResource SafeBorderBrush}" BorderThickness="1"
+                                  Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                   Shadow="{StaticResource SharedShadow}" Translation="0,0,24">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -1346,8 +1346,8 @@
 
                         <StackPanel Spacing="12">
                             <Grid Padding="20,16" CornerRadius="14"
-                                  Background="{ThemeResource SafeGlassBrush}"
-                                  BorderBrush="{ThemeResource SafeBorderBrush}" BorderThickness="1"
+                                  Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"
+                                  BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                                   Shadow="{StaticResource SharedShadow}" Translation="0,0,24">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
