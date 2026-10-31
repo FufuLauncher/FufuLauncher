@@ -12,6 +12,7 @@
     BorderThickness="1"
     BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
     Title="{helpers:Loc Key=LoginQR_OverseaVerifyTitle}"
+    TitleTemplate="{StaticResource AppContentDialogTitleTemplate}"
     PrimaryButtonText="{helpers:Loc Key=OkBtn}"
     CloseButtonText="{helpers:Loc Key=CancelBtn}"
     DefaultButton="Primary">

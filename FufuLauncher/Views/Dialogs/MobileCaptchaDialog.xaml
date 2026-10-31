@@ -12,6 +12,7 @@
     BorderThickness="1"
     BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
     Title="{helpers:Loc Key=LoginQR_MobileCaptcha}"
+    TitleTemplate="{StaticResource AppContentDialogTitleTemplate}"
     PrimaryButtonText="{helpers:Loc Key=LoginQR_LoginButton}"
     CloseButtonText="{helpers:Loc Key=CancelBtn}"
     DefaultButton="Primary">

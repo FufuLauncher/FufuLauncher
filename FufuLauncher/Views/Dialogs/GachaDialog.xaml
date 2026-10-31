@@ -8,6 +8,7 @@
     xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Title="{helpers:Loc Key=GachaDialog_Title}"
+    TitleTemplate="{StaticResource AppContentDialogTitleTemplate}"
     CloseButtonText="{helpers:Loc Key=GachaDialog_Close}"
     DefaultButton="Close"
     MinWidth="850"

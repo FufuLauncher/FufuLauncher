@@ -43,8 +43,19 @@
                 <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
             </Style>
 
+            <DataTemplate x:Key="AppContentDialogTitleTemplate">
+                <TextBlock Text="{Binding}"
+                           FontFamily="{StaticResource AppGlobalFont}"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{ThemeResource ContentDialogForeground}"
+                           TextWrapping="Wrap"
+                           MaxLines="2" />
+            </DataTemplate>
+
             <Style TargetType="ContentDialog">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="TitleTemplate" Value="{StaticResource AppContentDialogTitleTemplate}" />
                 <Setter Property="PrimaryButtonStyle" Value="{StaticResource AppDialogButtonStyle}" />
                 <Setter Property="SecondaryButtonStyle" Value="{StaticResource AppDialogButtonStyle}" />
                 <Setter Property="CloseButtonStyle" Value="{StaticResource AppDialogButtonStyle}" />
