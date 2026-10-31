@@ -187,14 +187,14 @@
                 <NavigationViewItem Content="{helpers:Loc Key=PluginMgmtTitle}"
                                     Tag="FufuLauncher.ViewModels.PluginViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7B5;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xE74C;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=PluginStoreTitle}"
                                     Tag="FufuLauncher.ViewModels.PluginStoreViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE90F;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xE7B5;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 

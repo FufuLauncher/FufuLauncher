@@ -403,10 +403,10 @@
                                                     Orientation="Horizontal"
                                                     Spacing="4">
                                                     <FontIcon
-                                                        FontFamily="Segoe Fluent Icons"
-                                                        FontSize="10"
+                                                        FontFamily="{StaticResource FluentIconsFont}"
+                                                        FontSize="12.5"
                                                         Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                                        Glyph="&#xE81D;" />
+                                                        Glyph="&#xF45A;" />
                                                     <TextBlock
                                                         FontSize="12"
                                                         Foreground="{ThemeResource TextFillColorTertiaryBrush}"
@@ -472,7 +472,7 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontSize="16" Glyph="&#xE916;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xF21C;" />
                                             <TextBlock x:Name="BtnCheckinText"
                                                        Text="{helpers:Loc Key=Account_DailyCheckin}" />
                                         </StackPanel>
@@ -515,7 +515,7 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontSize="16" Glyph="&#xEB9E;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xE871;" />
                                             <TextBlock Text="{helpers:Loc Key=Account_TravelJournal}" />
                                         </StackPanel>
                                     </Grid>
@@ -536,7 +536,7 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontSize="16" Glyph="&#xE9D2;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xE457;" />
                                             <TextBlock Text="{helpers:Loc Key=Account_GachaAnalysis}" />
                                         </StackPanel>
                                     </Grid>
@@ -557,7 +557,7 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontSize="16" Glyph="&#xE72E;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xEAC8;" />
                                             <TextBlock Text="{helpers:Loc Key=Account_AccountSecurity}" />
                                         </StackPanel>
                                     </Grid>
@@ -578,10 +578,10 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon
-                                                FontSize="16"
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                                                FontSize="20"
                                                 Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                Glyph="&#xE7BA;" />
+                                                Glyph="&#xE78F;" />
                                             <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                        Text="{helpers:Loc Key=Account_FreezeAccount}" />
                                         </StackPanel>
@@ -785,10 +785,10 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon
-                                                FontSize="16"
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                                                FontSize="20"
                                                 Foreground="{ThemeResource AccentFillColorDefaultBrush}"
-                                                Glyph="&#xE7FC;" />
+                                                Glyph="&#xEF9B;" />
                                             <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}"
                                                        Text="{helpers:Loc Key=Account_BoundCharacters}" />
                                         </StackPanel>
@@ -826,10 +826,10 @@
                                                                 BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
                                                                 BorderThickness="1"
                                                                 CornerRadius="20">
-                                                                <FontIcon
-                                                                    FontSize="16"
+                                                                <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                                                                    FontSize="20"
                                                                     Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                                    Glyph="&#xE7F4;" />
+                                                                    Glyph="&#xF5BD;" />
                                                             </Border>
 
                                                             <StackPanel
@@ -900,11 +900,11 @@
                                             Orientation="Horizontal"
                                             Spacing="12"
                                             Visibility="{x:Bind ViewModel.ShowBoundRoleEmptyState, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-                                            <FontIcon
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}"
                                                 VerticalAlignment="Center"
-                                                FontSize="24"
+                                                FontSize="30"
                                                 Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                                Glyph="&#xE7F4;" />
+                                                Glyph="&#xF5BD;" />
                                             <StackPanel VerticalAlignment="Center">
                                                 <TextBlock
                                                     FontSize="14"

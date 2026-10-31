@@ -17,6 +17,7 @@
 
             <FontFamily x:Key="AppGlobalFont">/Assets/zh-cn-l.ttf#SDK_SC_Web</FontFamily>
             <FontFamily x:Key="SegoeFluentIconsFont">/Assets/Fonts/SegoeFluentIcons.ttf#Segoe Fluent Icons</FontFamily>
+            <FontFamily x:Key="FluentIconsFont">/Assets/Fonts/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular</FontFamily>
 
             <StaticResource x:Key="ContentControlThemeFontFamily" ResourceKey="AppGlobalFont" />
             <StaticResource x:Key="ControlThemeFontFamily" ResourceKey="AppGlobalFont" />

@@ -8,7 +8,7 @@
 
     <Grid Padding="32">
         <StackPanel VerticalAlignment="Center" Spacing="16" MaxWidth="480" HorizontalAlignment="Center">
-            <FontIcon Glyph="&#xE9F5;" FontSize="48" Opacity="0.8" />
+            <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xEAC8;" FontSize="60" Opacity="0.8" />
             <TextBlock Text="{helpers:Loc Key=VerifyGame_Title}" FontSize="24" FontWeight="SemiBold"
                        HorizontalAlignment="Center" />
             <TextBlock Text="{helpers:Loc Key=VerifyGame_Description}"

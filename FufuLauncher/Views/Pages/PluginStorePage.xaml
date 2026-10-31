@@ -820,7 +820,7 @@
                             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                 <Button x:Name="SortButton" Style="{StaticResource StoreSubtleButtonStyle}">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon Glyph="&#xE8CB;" FontSize="14"
+                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF18A;" FontSize="17.5"
                                                   Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                         <TextBlock x:Name="SortLabel" Text="{helpers:Loc Key=PluginStoreSortPopular}"
                                                    VerticalAlignment="Center" />
@@ -980,7 +980,7 @@
                                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                     BorderThickness="1"
                                     HorizontalAlignment="Center">
-                                <FontIcon Glyph="&#xE783;" FontSize="28"
+                                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xE3A8;" FontSize="35"
                                           Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
                             </Border>
 

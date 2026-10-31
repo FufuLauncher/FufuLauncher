@@ -194,11 +194,11 @@
 
                     <StackPanel Margin="16,14,16,10" Spacing="3">
                         <StackPanel Orientation="Horizontal" Spacing="8">
-                            <FontIcon
+                            <FontIcon FontFamily="{StaticResource FluentIconsFont}"
                                 VerticalAlignment="Center"
-                                FontSize="14"
+                                FontSize="17.5"
                                 Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
-                                Glyph="&#xE787;" />
+                                Glyph="&#xE24E;" />
                             <TextBlock
                                 FontSize="15"
                                 FontWeight="SemiBold"

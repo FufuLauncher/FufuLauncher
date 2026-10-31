@@ -50,7 +50,7 @@
                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <StackPanel x:Name="ContributorsErrorPanel" Orientation="Vertical" Spacing="8"
                                         HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
-                                <FontIcon Glyph="&#xE783;" FontSize="32"
+                                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF3F1;" FontSize="40"
                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 <TextBlock x:Name="ContributorsErrorText" Text="{helpers:Loc Key=AboutPage_LoadFailed}"
                                            FontSize="14" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />

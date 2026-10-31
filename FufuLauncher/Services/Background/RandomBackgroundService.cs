@@ -15,7 +15,7 @@ public enum RandomBackgroundType
 
 public static class RandomBackgroundService
 {
-    private const string Endpoint = "https://image.fu1.fun/ba/";
+    private const string Endpoint = "https://image.fu1.fun/";
     private const int MaxDownloadBytes = 20 * 1024 * 1024;
     private const int MaxChallengeBytes = 8 * 1024;
     private const string ChallengeCookieName = "acw_sc__v2";

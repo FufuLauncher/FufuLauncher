@@ -312,8 +312,8 @@
                 </TransitionCollection>
             </StackPanel.ChildrenTransitions>
 
-            <FontIcon Glyph="&#xE8D7;"
-                      FontSize="40"
+            <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF27E;"
+                      FontSize="50"
                       HorizontalAlignment="Center"
                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
 

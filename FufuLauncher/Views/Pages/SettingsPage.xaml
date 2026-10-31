@@ -88,12 +88,12 @@
             </Style>
 
             <Style x:Key="RowIconStyle" TargetType="FontIcon">
-                <Setter Property="FontSize" Value="18" />
-                <Setter Property="Width" Value="20" />
-                <Setter Property="Margin" Value="0,0,16,0" />
+                <Setter Property="FontSize" Value="22.5" />
+                <Setter Property="Width" Value="25" />
+                <Setter Property="Margin" Value="0,0,11,0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
-                <Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
+                <Setter Property="FontFamily" Value="{StaticResource FluentIconsFont}" />
             </Style>
 
             <Style x:Key="RowTextStyle" TargetType="StackPanel">
@@ -262,47 +262,101 @@
 
                 <NavigationViewItem Content="{helpers:Loc Key=SectionAppearance}" Tag="AppearanceItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE771;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF592;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=HomeCardDisplayTitle}" Tag="HomeCardsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE80F;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF133;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionGameAnnouncement}" Tag="GameAnnouncementItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8A5;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF537;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=WidgetItemsTitle}" Tag="WidgetsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8FD;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xE6C4;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=NotesItemsTitle}" Tag="NotesItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE70F;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF56B;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionHomeText}" Tag="HomeTextItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8D2;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF7E4;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=ImageSource_Title}" Tag="ImageSourceItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE91B;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF488;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionBackground}" Tag="BackgroundItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE890;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xE725;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionWindowEffects}" Tag="WindowEffectsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8B3;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF8FA;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
@@ -310,17 +364,35 @@
 
                 <NavigationViewItem Content="{helpers:Loc Key=SectionLaunchConfig}" Tag="LaunchConfigItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7FC;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF677;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionScreenshotSettings}" Tag="ScreenshotSettingsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE722;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF254;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionCheckinSettings}" Tag="CheckinSettingsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE73E;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF21C;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
@@ -328,42 +400,90 @@
 
                 <NavigationViewItem Content="{helpers:Loc Key=SectionLanguage}" Tag="LanguageItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xF2B7;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF4F3;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionWindowBehavior}" Tag="WindowBehaviorItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE700;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF8B5;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionStartup}" Tag="StartupItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7E8;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF60E;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionStartupSound}" Tag="StartupSoundItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE767;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xEB42;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionAdvancedOptions}" Tag="AdvancedOptionsItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE713;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF6A9;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionStoragePaths}" Tag="StoragePathItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE8B7;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF418;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionMcp}" Tag="McpItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE774;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xE999;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionUpdate}" Tag="UpdateItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE895;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF190;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
@@ -371,12 +491,24 @@
 
                 <NavigationViewItem Content="{helpers:Loc Key=SectionAbout}" Tag="AboutItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE897;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xF4A3;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionSecurityAuth}" Tag="SecurityAuthItem">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE72E;" FontFamily="{ThemeResource SymbolThemeFontFamily}" />
+                        <FontIcon Glyph="&#xEAC8;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -459,7 +591,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE706;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE452;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ThemeTitle}" />
@@ -506,7 +638,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE790;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2F5;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=CustomThemeColorTitle}" />
@@ -536,7 +668,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE790;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE5FD;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=AutoThemeColorTitle}" />
@@ -571,7 +703,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE768;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF595;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=LaunchButtonBgColorTitle}" />
@@ -615,7 +747,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7C3;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF565;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=HideGameNewsCard}" />
@@ -632,7 +764,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF21C;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=HideCheckinCard}" />
@@ -649,7 +781,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE768;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE618;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowPresetCard}" />
@@ -666,7 +798,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8FD;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE6C4;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowWidgetCard}" />
@@ -697,7 +829,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8A5;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE5F2;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=GameAnnouncementViewModeTitle}" />
@@ -732,7 +864,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE734;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE457;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetGacha}" />
@@ -749,7 +881,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF836;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetAchievement}" />
@@ -766,7 +898,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8F1;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF8F2;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetInventory}" />
@@ -783,7 +915,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE77B;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE2DF;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetPlayerRole}" />
@@ -800,7 +932,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE70F;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF56B;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetDailyNoteWindow}" />
@@ -817,7 +949,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE714;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF84C;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetVideo}" />
@@ -834,7 +966,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8A5;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE68A;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=WidgetBBS}" />
@@ -868,7 +1000,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE70F;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF56B;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=HideNotesCard}" />
@@ -885,7 +1017,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE706;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE590;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowResin}" />
@@ -902,7 +1034,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE35D;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowDailyTasks}" />
@@ -919,7 +1051,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE80F;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF54F;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowHomeCoin}" />
@@ -936,7 +1068,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF310;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowExpeditions}" />
@@ -953,7 +1085,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72C;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF18D;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowTransformer}" />
@@ -979,7 +1111,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7C3;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF565;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=GameNewsTextColorTitle}" />
@@ -1006,7 +1138,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE768;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE994;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=LaunchBtnTextColorTitle}" />
@@ -1033,7 +1165,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF21C;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=CheckinTextColorTitle}" />
@@ -1078,7 +1210,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE890;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF8FA;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=EnableAcrylicOverlay}" />
@@ -1097,7 +1229,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE706;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4CB;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=SemiTransparentOverlay}" />
@@ -1130,7 +1262,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE890;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2F7;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BgOverlayOpacityTitle}" />
@@ -1154,7 +1286,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7C3;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2F9;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=FrameOpacityTitle}" />
@@ -1178,7 +1310,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE91B;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF488;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BackgroundQualityTitle}" />
@@ -1204,7 +1336,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8A9;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF592;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BackgroundAntialiasTitle}" />
@@ -1225,7 +1357,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8A9;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4C7;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BackgroundAntialiasStrengthTitle}" />
@@ -1252,7 +1384,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE91B;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2BD;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BgImageOpacityTitle}" />
@@ -1286,7 +1418,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8B3;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xEF26;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BackdropTitle}" />
@@ -1317,7 +1449,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE700;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4E1;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ShowHamburger}" />
@@ -1349,7 +1481,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE768;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF677;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=EnableLaunchArgsTitle}" />
@@ -1367,7 +1499,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7FC;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE684;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=LaunchWindowModeTitle}" />
@@ -1396,7 +1528,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE740;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF689;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=ResolutionTitle}" />
@@ -1458,7 +1590,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE706;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE1F7;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=HdrTitle}" />
@@ -1478,7 +1610,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7F4;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF359;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=TargetMonitorTitle}" />
@@ -1505,7 +1637,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE70F;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2EF;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=AdvLaunchArgsTitle}" />
@@ -1532,7 +1664,7 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8A5;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF669;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=CustomExeNameTitle}" />
@@ -1560,7 +1692,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE74C;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9E9;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=InjectionModuleTitle}" />
@@ -1584,7 +1716,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7BA;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9EB;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=PluginConflictCheckTitle}" />
@@ -1603,7 +1735,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE721;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF406;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=PluginConflictMainOnlyTitle}" />
@@ -1623,7 +1755,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE77B;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE933;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=UsingHoyolabAccountTitle}" />
@@ -1642,7 +1774,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE787;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xED7F;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=RedeemReminderTitle}" />
@@ -1661,7 +1793,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE768;" />
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE997;" />
                                         <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                             <TextBlock Style="{StaticResource RowTitleStyle}"
                                                        Text="{helpers:Loc Key=PostLaunchTitle}" />
@@ -1696,7 +1828,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE722;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF254;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=EnableInGameScreenshot}" />
@@ -1715,7 +1847,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE765;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4B8;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ScreenshotHotkeyTitle}" />
@@ -1745,7 +1877,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8B7;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF418;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ScreenshotSaveLocTitle}" />
@@ -1796,7 +1928,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF21C;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=GameCheckin}" />
@@ -1833,7 +1965,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE77B;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF45A;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=CommunityCheckin}" />
@@ -1875,7 +2007,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE753;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2E4;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=CloudGameCheckin}" />
@@ -1902,7 +2034,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE768;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF0A8;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=AutoCheckinOnLaunch}" />
@@ -1921,7 +2053,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8FD;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xEC92;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BatchCheckin}" />
@@ -1940,7 +2072,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE77B;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8FC;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=AccountListTitle}" />
@@ -2086,7 +2218,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4F3;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=AppLangTitle}" />
@@ -2195,7 +2327,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8FD;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF560;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=NavItemsTitle}" />
@@ -2239,7 +2371,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE921;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF165;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=MinimizeToTrayTitle}" />
@@ -2256,7 +2388,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE740;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF8B5;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=RememberWindowSizeTitle}" />
@@ -2273,7 +2405,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73F;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF66C;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=MinWindowSizeLimitTitle}" />
@@ -2289,7 +2421,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7E7;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF114;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=NotificationPositionTitle}" />
@@ -2335,7 +2467,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7E8;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF60E;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=RunAtStartupTitle}" />
@@ -2365,7 +2497,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE767;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xEB42;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=EnableStartupSound}" />
@@ -2406,7 +2538,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE71B;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4E4;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=EnableBetterGI}" />
@@ -2425,7 +2557,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE916;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xED88;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BetterGIDelayLabel}" />
@@ -2446,7 +2578,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE711;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF609;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BetterGICloseOnExit}" />
@@ -2465,7 +2597,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE74D;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF201;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=BrowserCacheTitle}" />
@@ -2492,7 +2624,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9D9;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xED9B;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ProcessPriorityTitle}" />
@@ -2516,7 +2648,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7BA;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE49D;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=EnableCpuWarning}" />
@@ -2548,7 +2680,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE950;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF0F0;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=MemoryReleaseTitle}" />
@@ -2567,7 +2699,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF6C0;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=DisableCaptchaPopup}" />
@@ -2586,7 +2718,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE946;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4A3;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=EnableCaptchaNotice}" />
@@ -2609,7 +2741,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE772;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF5E0;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=DeviceInfo_Title}" />
@@ -2634,7 +2766,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE70F;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF386;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ConfigEditorBtn}" />
@@ -2657,7 +2789,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE896;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE468;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=UpdateAchievementDbBtn}" />
@@ -2680,7 +2812,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7BA;"
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE795;"
                                               Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
@@ -2703,7 +2835,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7BA;"
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9E9;"
                                               Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
@@ -2736,7 +2868,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8B7;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE65A;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=AgreementPage_UserDataDir}" />
@@ -2761,7 +2893,7 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7BA;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF42E;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=AgreementPage_CacheDir}" />
@@ -2804,7 +2936,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE895;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF190;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=VersionUpdateTitle}" />
@@ -2826,7 +2958,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE789;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE557;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=UpdateAnnouncementTitle}" />
@@ -2847,7 +2979,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE896;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF1D7;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=PreviewUpdateTitle}" />
@@ -2869,7 +3001,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE896;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE38D;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=UseThirdPartyCDNTitle}" />
@@ -2888,7 +3020,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE789;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF402;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=PreviewUpdateAnnouncementTitle}" />
@@ -2907,7 +3039,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE769;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF5A1;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=SuppressAnnouncementInGameTitle}" />
@@ -2928,7 +3060,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72C;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF199;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=RollbackToStableTitle}" />
@@ -2949,7 +3081,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE896;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE6B6;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=PluginMirrorAccelerationTitle}" />
@@ -2969,7 +3101,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE896;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF150;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=GameUpdate_ApplyBtnTitle}" />
@@ -3051,7 +3183,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF27E;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=SectionSecurityAuth}" />
@@ -3072,7 +3204,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8D7;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF2DD;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=Settings_TemporaryDevAuth_Title}" />
@@ -3093,7 +3225,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE73E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xEAC8;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=Settings_PluginSignature_Title}" />
@@ -3114,7 +3246,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE8D7;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF27E;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ModTrust_Title}" />
@@ -3141,7 +3273,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE723;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF150;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ModTrust_InstallTitle}" />
@@ -3178,7 +3310,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xEAD7;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ModTrust_LaunchVerificationTitle}" />
@@ -3198,7 +3330,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF869;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ModTrust_ModeTitle}" />
@@ -3225,7 +3357,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE895;" />
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF13F;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"
                                                    Text="{helpers:Loc Key=ModTrust_SyncTitle}" />
@@ -3257,7 +3389,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9D9;" />
+                                <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9DC;" />
                                 <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                     <TextBlock Style="{StaticResource RowTitleStyle}"
                                                Text="{helpers:Loc Key=ServiceStatus_OpenTitle}" />
@@ -3285,7 +3417,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
+                                <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE999;" />
                                 <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                     <TextBlock Style="{StaticResource RowTitleStyle}"
                                                Text="{helpers:Loc Key=Mcp_RowTitle}" />

@@ -485,7 +485,7 @@
                                 ToolTipService.ToolTip="安装平台代码签名证书（可随时在设置中卸载）"
                                 Click="OnInstallSignatureClick">
                             <StackPanel Orientation="Horizontal" Spacing="6">
-                                <FontIcon Glyph="&#xE8D7;" FontSize="13" />
+                                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF27E;" FontSize="16.25" />
                                 <TextBlock Text="安装签名" FontSize="12" />
                             </StackPanel>
                         </Button>

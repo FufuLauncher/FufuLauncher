@@ -113,7 +113,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <FontIcon Glyph="&#xE74C;" FontSize="20"
+                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xE05C;" FontSize="25"
                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" Margin="0,0,16,0" />
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">

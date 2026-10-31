@@ -139,7 +139,7 @@
 
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12"
                         Visibility="{x:Bind ViewModel.HasError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-                <FontIcon Glyph="&#xE72E;" FontSize="32" Opacity="0.6" HorizontalAlignment="Center" />
+                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF3F1;" FontSize="40" Opacity="0.6" HorizontalAlignment="Center" />
                 <TextBlock Text="{helpers:Loc Key=GameAnnouncement_LoadFailed}" Opacity="0.7"
                            HorizontalAlignment="Center" />
                 <Button Content="{helpers:Loc Key=GameAnnouncement_Retry}"

@@ -735,10 +735,10 @@
                                     Click="OpenCheckinCalendar_Click"
                                     CornerRadius="6"
                                     ToolTipService.ToolTip="{helpers:Loc Key=Home_RewardsCalendar}">
-                                    <FontIcon
-                                        FontSize="13"
+                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                                        FontSize="16.25"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                        Glyph="&#xE787;" />
+                                        Glyph="&#xF213;" />
                                 </Button>
                             </Grid>
 
@@ -1177,10 +1177,10 @@
                                 </Grid>
                             </Flyout>
                         </Button.Flyout>
-                        <FontIcon
-                            FontSize="18"
+                        <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                            FontSize="22.5"
                             Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                            Glyph="&#xECAA;" />
+                            Glyph="&#xE9E9;" />
                     </Button>
                 </StackPanel>
             </Border>
