@@ -145,62 +145,62 @@
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="{helpers:Loc Key=NavHome}" Tag="FufuLauncher.ViewModels.MainViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE80F;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xF480;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=InjectionSettingsNav}"
                                     Tag="FufuLauncher.ViewModels.PluginSettingsViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xEA86;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xE9E9;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=Panel_Toolbox}"
                                     Tag="FufuLauncher.ViewModels.ControlPanelViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE80A;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xF82E;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=PageTitle_GameSettings}"
                                     Tag="FufuLauncher.ViewModels.GameSettingsViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7FC;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xE68A;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=NavAccountSettings}"
                                     Tag="FufuLauncher.ViewModels.AccountViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE77B;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xF5BD;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=NavOtherFeatures}"
                                     Tag="FufuLauncher.ViewModels.OtherViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE71D;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xF8CB;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=PluginMgmtTitle}"
                                     Tag="FufuLauncher.ViewModels.PluginViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE74C;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xF133;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=PluginStoreTitle}"
                                     Tag="FufuLauncher.ViewModels.PluginStoreViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE7B5;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xE22E;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
                 <NavigationViewItem Content="{helpers:Loc Key=NavHelpDocs}" Tag="FufuLauncher.ViewModels.HelpViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE82D;" FontFamily="{StaticResource ActionIconFont}" FontSize="24" />
+                        <FontIcon Glyph="&#xE186;" FontFamily="{StaticResource FluentIconsFont}" FontSize="30" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
@@ -438,8 +438,8 @@
                                     Tag="FufuLauncher.ViewModels.SettingsViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon x:Name="SettingsIcon"
-                                  Glyph="&#xE713;" FontFamily="{StaticResource ActionIconFont}"
-                                  FontSize="24"
+                                  Glyph="&#xF6A9;" FontFamily="{StaticResource FluentIconsFont}"
+                                  FontSize="30"
                                   RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <RotateTransform x:Name="SettingsIconRotation" Angle="0" />
