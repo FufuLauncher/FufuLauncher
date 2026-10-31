@@ -166,7 +166,7 @@ public sealed partial class GenshinHDRSettingPanel : UserControl
     {
         get;
         set;
-    } = "HDR_Status_Detecting".GetLocalized();
+    } = "-";
 
     [ObservableProperty]
     public partial string DisplayMaxLuminance
@@ -280,23 +280,23 @@ public sealed partial class GenshinHDRSettingPanel : UserControl
 
             if (HDREnabled)
             {
-                SystemHDRStatusText = "HDR已启用";
+                SystemHDRStatusText = "HDR_Status_Enabled".GetLocalized();
             }
             else if (HDRNotSupported)
             {
-                SystemHDRStatusText = "HDR不支持";
+                SystemHDRStatusText = "HDR_Status_NotSupported".GetLocalized();
             }
             else
             {
-                SystemHDRStatusText = "HDR未启用";
+                SystemHDRStatusText = "HDR_Status_NotEnabled".GetLocalized();
             }
 
             DisplayColorSpace = info.CurrentAdvancedColorKind switch
             {
-                DisplayAdvancedColorKind.StandardDynamicRange => "SDR(标准动态范围)",
-                DisplayAdvancedColorKind.WideColorGamut => "WCG(广色域)",
-                DisplayAdvancedColorKind.HighDynamicRange => "HDR(高动态范围)",
-                _ => "未知"
+                DisplayAdvancedColorKind.StandardDynamicRange => "HDR_ColorSpace_SDR".GetLocalized(),
+                DisplayAdvancedColorKind.WideColorGamut => "HDR_ColorSpace_WCG".GetLocalized(),
+                DisplayAdvancedColorKind.HighDynamicRange => "HDR_ColorSpace_HDR".GetLocalized(),
+                _ => "HDR_ColorSpace_Unknown".GetLocalized()
             };
 
             DisplayMaxLuminance = $"{info.MaxLuminanceInNits:F0} nits";
@@ -312,8 +312,8 @@ public sealed partial class GenshinHDRSettingPanel : UserControl
         }
         catch
         {
-            SystemHDRStatusText = "HDR无法获取";
-            DisplayColorSpace = "无法读取";
+            SystemHDRStatusText = "HDR_Status_Unavailable".GetLocalized();
+            DisplayColorSpace = "HDR_UnableToRead".GetLocalized();
             DisplayMaxLuminance = "-";
             DisplayFullFrameLuminance = "-";
             DisplaySdrWhiteLevel = "-";
