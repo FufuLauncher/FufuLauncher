@@ -374,7 +374,7 @@
 
             <Style x:Key="PluginCardContainerStyle" TargetType="GridViewItem"
                    BasedOn="{StaticResource DefaultGridViewItemStyle}">
-                <Setter Property="Margin" Value="6" />
+                <Setter Property="Margin" Value="0" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="MinWidth" Value="0" />
                 <Setter Property="MinHeight" Value="0" />
@@ -382,106 +382,17 @@
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Stretch" />
                 <Setter Property="UseSystemFocusVisuals" Value="True" />
-                <Setter Property="FocusVisualMargin" Value="-3" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="GridViewItem">
-                            <Grid x:Name="CardRoot" Background="Transparent" RenderTransformOrigin="0.5,0.5">
-                                <Grid.RenderTransform>
-                                    <ScaleTransform x:Name="CardScale" ScaleX="1" ScaleY="1" />
-                                </Grid.RenderTransform>
-
+                            <Grid Background="Transparent">
                                 <ContentPresenter x:Name="ContentPresenter"
                                                   Content="{TemplateBinding Content}"
                                                   ContentTemplate="{TemplateBinding ContentTemplate}"
                                                   ContentTransitions="{TemplateBinding ContentTransitions}"
-                                                  HorizontalAlignment="Stretch"
-                                                  VerticalAlignment="Stretch" />
-
-                                <Border x:Name="CardHighlight"
-                                        CornerRadius="14"
-                                        BorderBrush="{ThemeResource AccentFillColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        IsHitTestVisible="False"
-                                        Opacity="0" />
-
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup x:Name="CommonStates">
-                                        <VisualState x:Name="Normal">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="CardHighlight"
-                                                                 Storyboard.TargetProperty="Opacity" To="0"
-                                                                 Duration="0:0:0.25">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                                 Storyboard.TargetProperty="ScaleX" To="1"
-                                                                 Duration="0:0:0.25">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                                 Storyboard.TargetProperty="ScaleY" To="1"
-                                                                 Duration="0:0:0.25">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </VisualState>
-
-                                        <VisualState x:Name="PointerOver">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="CardHighlight"
-                                                                 Storyboard.TargetProperty="Opacity" To="1"
-                                                                 Duration="0:0:0.25">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                                 Storyboard.TargetProperty="ScaleX" To="1.025"
-                                                                 Duration="0:0:0.3">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                                 Storyboard.TargetProperty="ScaleY" To="1.025"
-                                                                 Duration="0:0:0.3">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </VisualState>
-
-                                        <VisualState x:Name="Pressed">
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="CardHighlight"
-                                                                 Storyboard.TargetProperty="Opacity" To="1"
-                                                                 Duration="0:0:0.1" />
-                                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                                 Storyboard.TargetProperty="ScaleX" To="0.985"
-                                                                 Duration="0:0:0.12">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                                <DoubleAnimation Storyboard.TargetName="CardScale"
-                                                                 Storyboard.TargetProperty="ScaleY" To="0.985"
-                                                                 Duration="0:0:0.12">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <CubicEase EasingMode="EaseOut" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Control.IsTemplateFocusTarget="True" />
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>
@@ -518,7 +429,12 @@
             </Style>
 
             <DataTemplate x:Key="PluginCardTemplate" x:DataType="models:PluginStoreItem">
-                <Border Width="340" Height="188" Style="{StaticResource SafePluginCardStyle}">
+                <Border Width="300" MinHeight="190" Margin="12,12,12,16"
+                        Style="{StaticResource SafePluginCardStyle}"
+                        Translation="0,0,32">
+                    <Border.Shadow>
+                        <ThemeShadow />
+                    </Border.Shadow>
                     <Grid>
 
                         <Grid Padding="16">
@@ -537,15 +453,15 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border Grid.Column="0"
-                                        Width="52" Height="52"
-                                        CornerRadius="12"
+                                        Width="44" Height="44"
+                                        CornerRadius="10"
                                         Background="{ThemeResource SafeCardBrush}"
                                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                                         BorderThickness="1"
                                         VerticalAlignment="Top">
                                     <Grid>
-                                        <FontIcon Glyph="&#xE74C;" FontSize="22"
-                                                  Foreground="{ThemeResource SafeSecondaryTextBrush}" />
+                                        <FontIcon Glyph="&#xE74C;" FontSize="20"
+                                                  Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}" />
                                         <Image
                                             Source="{x:Bind IconUrl, Converter={StaticResource StringToImageSourceConverter}, Mode=OneWay}"
                                             Stretch="UniformToFill" />
@@ -610,8 +526,8 @@
 
                                 <Grid Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" MaxWidth="78" />
-                                        <ColumnDefinition Width="Auto" MaxWidth="68" />
+                                        <ColumnDefinition Width="Auto" MaxWidth="64" />
+                                        <ColumnDefinition Width="Auto" MaxWidth="54" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
@@ -622,7 +538,7 @@
                                             Visibility="{x:Bind HasCategory, Mode=OneWay}">
                                         <TextBlock Text="{x:Bind CategoryDisplay, Mode=OneWay}"
                                                    FontSize="10"
-                                                   MaxWidth="60"
+                                                   MaxWidth="54"
                                                    MaxLines="1"
                                                    TextTrimming="CharacterEllipsis"
                                                    VerticalAlignment="Center"
@@ -636,7 +552,7 @@
                                             Visibility="{x:Bind HasUpdateType, Mode=OneWay}">
                                         <TextBlock Text="{x:Bind UpdateTypeDisplay, Mode=OneWay}"
                                                    FontSize="10"
-                                                   MaxWidth="48"
+                                                   MaxWidth="44"
                                                    MaxLines="1"
                                                    TextTrimming="CharacterEllipsis"
                                                    VerticalAlignment="Center"
@@ -704,7 +620,12 @@
             </DataTemplate>
 
             <DataTemplate x:Key="SkeletonCardTemplate">
-                <Border Width="340" Height="188" Style="{StaticResource SafePluginCardStyle}">
+                <Border Width="300" MinHeight="190" Margin="12,12,12,16"
+                        Style="{StaticResource SafePluginCardStyle}"
+                        Translation="0,0,32">
+                    <Border.Shadow>
+                        <ThemeShadow />
+                    </Border.Shadow>
                     <Grid Padding="16">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -718,7 +639,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Border Width="52" Height="52" CornerRadius="12"
+                            <Border Width="44" Height="44" CornerRadius="10"
                                     Background="{ThemeResource SkeletonFillBrush}" />
 
                             <StackPanel Grid.Column="1" Margin="14,0,0,0" VerticalAlignment="Center" Spacing="8">
@@ -957,8 +878,9 @@
 
                         <!--  正常网格  -->
                         <GridView x:Name="PluginGridView"
-                                  Margin="-6,0,-6,0"
+                                  Margin="-12,0,-12,0"
                                   IsEnabled="{x:Bind ViewModel.CanInteractWithStore, Mode=OneWay}"
+                                  ContainerContentChanging="OnPluginGridContainerChanging"
                                   ItemsSource="{x:Bind ViewModel.Plugins, Mode=OneWay}"
                                   ItemTemplate="{StaticResource PluginCardTemplate}"
                                   ItemContainerStyle="{StaticResource PluginCardContainerStyle}"
@@ -971,13 +893,6 @@
                                   ScrollViewer.VerticalScrollBarVisibility="Hidden"
                                   Visibility="{x:Bind ViewModel.ShowGrid, Mode=OneWay}">
 
-                            <GridView.ItemContainerTransitions>
-                                <TransitionCollection>
-                                    <EntranceThemeTransition FromVerticalOffset="28" IsStaggeringEnabled="True" />
-                                    <RepositionThemeTransition />
-                                </TransitionCollection>
-                            </GridView.ItemContainerTransitions>
-
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <ItemsWrapGrid Orientation="Horizontal" HorizontalAlignment="Left" />
@@ -986,7 +901,7 @@
                         </GridView>
 
                         <GridView x:Name="SkeletonHost"
-                                  Margin="-6,0,-6,0"
+                                  Margin="-12,0,-12,0"
                                   ItemsSource="{x:Bind SkeletonItems}"
                                   ItemTemplate="{StaticResource SkeletonCardTemplate}"
                                   ItemContainerStyle="{StaticResource PluginCardContainerStyle}"

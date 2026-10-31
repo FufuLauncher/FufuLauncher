@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Reflection;
 using FufuLauncher.Helpers;
@@ -30,7 +31,11 @@ public sealed partial class PluginStorePage : Page
     private static readonly string CurrentAppVersion =
         Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "1.0.0.0";
 
+    private readonly CardEntranceAnimator _cardEntrance = new("PluginStorePage");
+
     private bool _isSubscribed;
+    private bool _cardEntranceQueued;
+    private bool _cardEntrancePending;
 
     public PluginStorePage()
     {
@@ -55,6 +60,7 @@ public sealed partial class PluginStorePage : Page
     private void Page_Unloaded(object sender, RoutedEventArgs e)
     {
         UnsubscribeViewModel();
+        _cardEntrance.Stop();
         SkeletonPulseStoryboard.Stop();
         RefreshSpinStoryboard.Stop();
         ResultsFadeOutStoryboard.Stop();
@@ -71,6 +77,7 @@ public sealed partial class PluginStorePage : Page
     {
         if (_isSubscribed) return;
         ViewModel.PropertyChanged += OnViewModelPropertyChanged;
+        ViewModel.Plugins.CollectionChanged += OnPluginsCollectionChanged;
         _isSubscribed = true;
     }
 
@@ -78,6 +85,7 @@ public sealed partial class PluginStorePage : Page
     {
         if (!_isSubscribed) return;
         ViewModel.PropertyChanged -= OnViewModelPropertyChanged;
+        ViewModel.Plugins.CollectionChanged -= OnPluginsCollectionChanged;
         _isSubscribed = false;
     }
 
@@ -89,6 +97,50 @@ public sealed partial class PluginStorePage : Page
         {
             UpdateLoadingAnimations();
         }
+
+        if (e.PropertyName is nameof(PluginStoreViewModel.ShowGrid) && _cardEntrancePending && !_cardEntranceQueued)
+        {
+            TryRunCardEntrance();
+        }
+    }
+
+    private void OnPluginsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        _cardEntrancePending = true;
+
+        if (e.Action == NotifyCollectionChangedAction.Reset)
+        {
+            ScheduleCardEntrance();
+        }
+    }
+
+    private void ScheduleCardEntrance()
+    {
+        if (_cardEntranceQueued) return;
+        _cardEntranceQueued = true;
+
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            _cardEntranceQueued = false;
+            TryRunCardEntrance();
+        });
+    }
+
+    private void TryRunCardEntrance()
+    {
+        if (!ViewModel.ShowGrid)
+        {
+            _cardEntrancePending = true;
+            return;
+        }
+
+        _cardEntrancePending = false;
+        _cardEntrance.Begin(PluginGridView);
+    }
+
+    private void OnPluginGridContainerChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+    {
+        _cardEntrance.ObserveContainer(args);
     }
 
     private void UpdateLoadingAnimations()
@@ -201,11 +253,11 @@ public sealed partial class PluginStorePage : Page
             await ViewModel.GoToPageAsync(ViewModel.CurrentPage + 1);
     }
 
-    private void OnInstallButtonClick(object sender, RoutedEventArgs e)
+    private async void OnInstallButtonClick(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is PluginStoreItem item)
         {
-            ViewModel.InstallCommand.Execute(item);
+            await ShowPluginDetailDialogAsync(item);
         }
     }
 
