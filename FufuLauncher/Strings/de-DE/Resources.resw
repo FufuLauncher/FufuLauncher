@@ -5097,7 +5097,7 @@ Rückmeldung: {0}</value>
     <value>Installieren</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>Installiert</value>
+    <value>Deinstallieren</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>Aktualisieren</value>

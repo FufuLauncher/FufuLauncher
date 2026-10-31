@@ -5097,7 +5097,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>安裝</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>已安裝</value>
+    <value>解除安裝</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>更新</value>

@@ -4802,7 +4802,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>安装</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>已安装</value>
+    <value>卸载</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>更新</value>

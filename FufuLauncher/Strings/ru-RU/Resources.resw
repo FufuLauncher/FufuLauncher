@@ -5097,7 +5097,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>Установить</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>Установлено</value>
+    <value>Удалить</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>Обновить</value>

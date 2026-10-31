@@ -5097,7 +5097,7 @@ Detalles: {0}</value>
     <value>Instalar</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>Instalado</value>
+    <value>Desinstalar</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>Actualizar</value>

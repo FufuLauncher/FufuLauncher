@@ -5097,7 +5097,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>설치</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>설치됨</value>
+    <value>제거</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>업데이트</value>

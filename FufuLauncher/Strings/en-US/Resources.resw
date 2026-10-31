@@ -4676,7 +4676,7 @@ Details: {0}</value>
     <value>Install</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>Installed</value>
+    <value>Uninstall</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>Update</value>

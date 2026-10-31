@@ -5096,7 +5096,7 @@ Rapport : {0}</value>
     <value>Installer</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>Installé</value>
+    <value>Désinstaller</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>Mettre à jour</value>

@@ -4517,7 +4517,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>इंस्टॉल करें</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>इंस्टॉल किया गया</value>
+    <value>अनइंस्टॉल करें</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>अपडेट करें</value>

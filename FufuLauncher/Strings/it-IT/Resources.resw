@@ -5103,7 +5103,7 @@ Andare al sito Microsoft per scaricarla e installarla?</value>
     <value>Installa</value>
   </data>
   <data name="PluginStoreInstalled" xml:space="preserve">
-    <value>Installato</value>
+    <value>Disinstalla</value>
   </data>
   <data name="PluginStoreUpdate" xml:space="preserve">
     <value>Aggiorna</value>
