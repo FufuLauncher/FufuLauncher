@@ -28,9 +28,63 @@
             <StaticResource x:Key="BodyThemeFontFamily" ResourceKey="AppGlobalFont" />
             <StaticResource x:Key="CaptionThemeFontFamily" ResourceKey="AppGlobalFont" />
             <StaticResource x:Key="ToggleSwitchThemeFontFamily" ResourceKey="AppGlobalFont" />
+            <StaticResource x:Key="PivotHeaderItemFontFamily" ResourceKey="AppGlobalFont" />
 
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+            </Style>
+
+            <Style TargetType="NavigationViewItemHeader">
+                <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemHeaderForeground}" />
+                <Setter Property="IsEnabled" Value="False" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="MinHeight" Value="0" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="AutomationProperties.AccessibilityView" Value="Raw" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="NavigationViewItemHeader">
+                            <Grid x:Name="NavigationViewItemHeaderRootGrid">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="PaneStates">
+                                        <VisualState x:Name="HeaderTextVisible" />
+                                        <VisualState x:Name="HeaderTextCollapsed">
+                                            <VisualState.Setters>
+                                                <Setter Target="HeaderText.Visibility" Value="Collapsed" />
+                                                <Setter Target="InnerHeaderGrid.Height" Value="0" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="DisplayModeStates">
+                                        <VisualState x:Name="LeftMode" />
+                                        <VisualState x:Name="TopMode">
+                                            <VisualState.Setters>
+                                                <Setter Target="InnerHeaderGrid.Margin" Value="{ThemeResource TopNavigationViewItemInnerHeaderMargin}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Grid x:Name="InnerHeaderGrid"
+                                      Height="40"
+                                      HorizontalAlignment="Left"
+                                      Margin="{ThemeResource NavigationViewItemInnerHeaderMargin}">
+                                    <TextBlock x:Name="HeaderText"
+                                               Margin="0,-1,0,-1"
+                                               VerticalAlignment="Center"
+                                               FontFamily="{StaticResource AppGlobalFont}"
+                                               FontSize="14"
+                                               FontWeight="SemiBold"
+                                               LineStackingStrategy="MaxHeight"
+                                               OpticalMarginAlignment="TrimSideBearings"
+                                               Text="{TemplateBinding Content}"
+                                               TextLineBounds="Full"
+                                               TextWrapping="NoWrap" />
+                                </Grid>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <Style TargetType="Image">

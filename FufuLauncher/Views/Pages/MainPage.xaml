@@ -393,6 +393,7 @@
                                                  Color="{ThemeResource TextFillColorTertiary}" />
 
                                 <Style TargetType="PivotHeaderItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="FontSize" Value="13" />
                                     <Setter Property="FontWeight" Value="SemiBold" />
                                     <Setter Property="Margin" Value="0" />
