@@ -151,7 +151,7 @@ public sealed partial class UpdateNotificationWindow : WindowEx
         var block = new TextBlock
         {
             Style = (Style)RootGrid.Resources["AnnouncementTextBlockStyle"],
-            FontFamily = new FontFamily("Microsoft YaHei"),
+            FontFamily = (FontFamily)Application.Current.Resources["AppGlobalFont"],
             FontSize = section.FontSize,
             FontWeight = isHeading ? Microsoft.UI.Text.FontWeights.Bold : Microsoft.UI.Text.FontWeights.Normal,
             TextAlignment = section.Alignment,

@@ -45,6 +45,7 @@
                 <helpers:BoolToVisibilityConverter x:Key="BoolToVis" />
 
                 <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="Foreground" Value="{ThemeResource HighlightColor}" />
@@ -157,6 +158,7 @@
                                       HorizontalAlignment="Center" Padding="0,0,0,12">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Margin" Value="4" />
                                         <Setter Property="Padding" Value="0" />
                                     </Style>
@@ -254,6 +256,7 @@
                                   Padding="0,0,0,12">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                     <Setter Property="Margin" Value="0,0,0,8" />
                                     <Setter Property="Padding" Value="0" />

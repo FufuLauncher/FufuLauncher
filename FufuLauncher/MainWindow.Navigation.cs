@@ -420,6 +420,7 @@ public sealed partial class MainWindow
             var nickname = string.IsNullOrWhiteSpace(account.Nickname) ? account.Stuid : account.Nickname;
             var item = new RadioMenuFlyoutItem
             {
+                FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["AppGlobalFont"],
                 Text = $"{nickname} · {account.Stuid}",
                 GroupName = "AccountSwitch",
                 IsChecked = account.Id == activeId
@@ -429,7 +430,12 @@ public sealed partial class MainWindow
         }
 
         if (flyout.Items.Count == 0)
-            flyout.Items.Add(new MenuFlyoutItem { Text = "Account_NotLoggedIn".GetLocalized(), IsEnabled = false });
+            flyout.Items.Add(new MenuFlyoutItem
+            {
+                FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["AppGlobalFont"],
+                Text = "Account_NotLoggedIn".GetLocalized(),
+                IsEnabled = false
+            });
 
         flyout.ShowAt(AccountNavButton);
     }
@@ -469,6 +475,7 @@ public sealed partial class MainWindow
                 : $"{role.nickname} · {role.region_name} · {role.game_uid}";
             var item = new RadioMenuFlyoutItem
             {
+                FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["AppGlobalFont"],
                 Text = label,
                 GroupName = "RoleSwitch",
                 IsChecked = current != null && role.game_uid == current.game_uid && role.region == current.region
@@ -478,7 +485,12 @@ public sealed partial class MainWindow
         }
 
         if (roles.Count == 0)
-            flyout.Items.Add(new MenuFlyoutItem { Text = "Account_NoCharacters".GetLocalized(), IsEnabled = false });
+            flyout.Items.Add(new MenuFlyoutItem
+            {
+                FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["AppGlobalFont"],
+                Text = "Account_NoCharacters".GetLocalized(),
+                IsEnabled = false
+            });
 
         flyout.ShowAt(AccountNavButton);
     }

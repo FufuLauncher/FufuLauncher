@@ -43,6 +43,7 @@
                 <GroupStyle>
                     <GroupStyle.HeaderContainerStyle>
                         <Style TargetType="GridViewHeaderItem">
+                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="GridViewHeaderItem">

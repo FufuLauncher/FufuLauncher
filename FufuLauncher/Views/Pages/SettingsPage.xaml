@@ -139,6 +139,9 @@
             </Style>
 
             <Style x:Key="RowToggleStyle" TargetType="ToggleSwitch">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="Foreground" Value="{ThemeResource ToggleSwitchContentForeground}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                 <Setter Property="OnContent" Value="" />
                 <Setter Property="OffContent" Value="" />
                 <Setter Property="MinWidth" Value="0" />
@@ -148,6 +151,7 @@
             </Style>
 
             <Style x:Key="RowButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Padding" Value="16,6" />
                 <Setter Property="CornerRadius" Value="6" />
                 <Setter Property="Margin" Value="16,0,0,0" />
@@ -156,6 +160,12 @@
             </Style>
 
             <Style x:Key="RowComboBoxStyle" TargetType="ComboBox">
+                <Setter Property="Background" Value="{ThemeResource ComboBoxBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource ComboBoxForeground}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource ComboBoxBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource ComboBoxBorderThemeThickness}" />
+                <Setter Property="Padding" Value="{ThemeResource ComboBoxPadding}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="MinWidth" Value="200" />
                 <Setter Property="Margin" Value="16,0,0,0" />
@@ -164,6 +174,12 @@
             </Style>
 
             <Style x:Key="RowTextBoxStyle" TargetType="TextBox">
+                <Setter Property="Background" Value="{ThemeResource TextControlBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource TextControlBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}" />
+                <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Width" Value="180" />
                 <Setter Property="Margin" Value="16,0,0,0" />
@@ -172,6 +188,12 @@
             </Style>
 
             <Style x:Key="RowNumberBoxStyle" TargetType="NumberBox">
+                <Setter Property="Background" Value="{ThemeResource TextControlBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource TextControlForeground}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource TextControlBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}" />
+                <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Width" Value="160" />
                 <Setter Property="Margin" Value="16,0,0,0" />
@@ -181,6 +203,7 @@
             </Style>
 
             <Style x:Key="PresetButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Background" Value="{ThemeResource SafeCardBrush}" />
                 <Setter Property="Foreground" Value="{ThemeResource SafeTextBrush}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
@@ -199,12 +222,14 @@
             </Style>
 
             <Style x:Key="SubPanelButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Padding" Value="14,6" />
                 <Setter Property="CornerRadius" Value="6" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
             </Style>
 
             <Style x:Key="RowInfoButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Padding" Value="4" />
@@ -215,12 +240,18 @@
 
             <Style x:Key="RowInfoBarStyle" TargetType="InfoBar">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="IsTabStop" Value="False" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{ThemeResource InfoBarBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource InfoBarBorderThickness}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
                 <Setter Property="IsOpen" Value="True" />
                 <Setter Property="IsClosable" Value="False" />
                 <Setter Property="Margin" Value="0,4,0,6" />
             </Style>
 
             <Style x:Key="RowRadioButtonStyle" TargetType="RadioButton">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="MinWidth" Value="0" />
             </Style>

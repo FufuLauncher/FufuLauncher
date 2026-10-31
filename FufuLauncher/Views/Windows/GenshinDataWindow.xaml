@@ -207,6 +207,7 @@
                                   SelectionMode="None" Padding="12">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                     <Setter Property="Padding" Value="12,8" />
                                 </Style>

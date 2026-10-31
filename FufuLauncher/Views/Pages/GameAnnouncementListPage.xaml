@@ -60,6 +60,7 @@
                                   ScrollViewer.HorizontalScrollMode="Disabled">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="ListViewItem">

@@ -322,6 +322,9 @@
             </Style>
 
             <Style x:Key="DcMiniBarStyle" TargetType="ProgressBar">
+                <Setter Property="Foreground" Value="{ThemeResource ProgressBarForeground}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource ProgressBarBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource ProgressBarBorderThemeThickness}" />
                 <Setter Property="Height" Value="4" />
                 <Setter Property="MinHeight" Value="4" />
                 <Setter Property="CornerRadius" Value="2" />

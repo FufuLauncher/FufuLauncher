@@ -32,6 +32,7 @@
             <Setter Property="Padding" Value="12" />
         </Style>
         <Style x:Key="ModeChipStyle" TargetType="primitives:ToggleButton">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="MinWidth" Value="96" />
             <Setter Property="Height" Value="32" />
             <Setter Property="Padding" Value="14,0" />

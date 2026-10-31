@@ -11,7 +11,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     BorderThickness="1"
     BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
-    Style="{ThemeResource DefaultContentDialogStyle}"
     Title="{helpers:Loc Key=LoginQR_OverseaVerifyTitle}"
     PrimaryButtonText="{helpers:Loc Key=OkBtn}"
     CloseButtonText="{helpers:Loc Key=CancelBtn}"

@@ -123,6 +123,7 @@
                     <Thickness x:Key="NavigationViewBorderThickness">0</Thickness>
 
                     <Style TargetType="NavigationViewItem">
+                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                         <Setter Property="MinHeight" Value="48" />
                         <Setter Property="Margin" Value="0,1,0,1" />
                     </Style>

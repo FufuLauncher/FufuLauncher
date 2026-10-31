@@ -10,7 +10,6 @@
     Title="{helpers:Loc Key=GachaDialog_Title}"
     CloseButtonText="{helpers:Loc Key=GachaDialog_Close}"
     DefaultButton="Close"
-    Style="{ThemeResource DefaultContentDialogStyle}"
     MinWidth="850"
     Height="750"
     Loaded="GachaDialog_Loaded">
@@ -77,6 +76,7 @@
         <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.Statistics, Mode=OneWay}" SelectionMode="None">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="Margin" Value="0,0,0,12" />
                     <Setter Property="Padding" Value="0" />

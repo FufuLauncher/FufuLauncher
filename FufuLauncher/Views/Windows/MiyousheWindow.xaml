@@ -30,6 +30,7 @@
                 </ResourceDictionary.ThemeDictionaries>
                 <views:MiyousheImageConverter x:Key="CommunityImageConverter" />
                 <Style x:Key="CapsuleTabStyle" TargetType="RadioButton">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="13" />
                     <Setter Property="FontWeight" Value="SemiBold" />
                     <Setter Property="MinWidth" Value="0" />
@@ -98,6 +99,7 @@
                     <Setter Property="CornerRadius" Value="10" />
                 </Style>
                 <Style x:Key="CommunityActionStyle" TargetType="Button">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="CornerRadius" Value="18" />
                     <Setter Property="Padding" Value="14,7" />
                     <Setter Property="FontSize" Value="12" />

@@ -173,6 +173,7 @@ public sealed partial class SettingsPage
 
         return new Expander
         {
+            FontFamily = (Microsoft.UI.Xaml.Media.FontFamily)Application.Current.Resources["AppGlobalFont"],
             Header = header,
             Content = detailsPanel,
             IsExpanded = false,

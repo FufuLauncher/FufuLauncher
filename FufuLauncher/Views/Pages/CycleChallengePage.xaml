@@ -21,6 +21,7 @@
             <Setter Property="Padding" Value="8,3" />
         </Style>
         <Style x:Key="ModeTabButtonStyle" TargetType="ToggleButton">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="Height" Value="40" />
             <Setter Property="Padding" Value="12,0" />
             <Setter Property="CornerRadius" Value="8" />
@@ -224,6 +225,7 @@
                             ScrollViewer.VerticalScrollMode="Enabled">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                     <Setter Property="VerticalContentAlignment" Value="Stretch" />
                                     <Setter Property="Padding" Value="0" />

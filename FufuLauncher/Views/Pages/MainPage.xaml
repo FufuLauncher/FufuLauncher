@@ -394,6 +394,7 @@
 
                                 <Style TargetType="PivotHeaderItem">
                                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                                    <Setter Property="CornerRadius" Value="{ThemeResource PivotHeaderItemSelectedPipeCornerRadius}" />
                                     <Setter Property="FontSize" Value="13" />
                                     <Setter Property="FontWeight" Value="SemiBold" />
                                     <Setter Property="Margin" Value="0" />

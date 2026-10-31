@@ -36,6 +36,7 @@
             </ResourceDictionary.ThemeDictionaries>
 
             <Style x:Key="ToolCardButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />

@@ -293,6 +293,8 @@
                    SelectionChanged="OnGachaTabPivotSelectionChanged">
                 <Pivot.Resources>
                     <Style TargetType="PivotHeaderItem">
+                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                        <Setter Property="CornerRadius" Value="{ThemeResource PivotHeaderItemSelectedPipeCornerRadius}" />
                         <Setter Property="FontSize" Value="13" />
                         <Setter Property="FontWeight" Value="SemiBold" />
                         <Setter Property="MinHeight" Value="48" />
@@ -1175,6 +1177,7 @@
                                       SelectionMode="None" IsItemClickEnabled="False" Padding="0">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1188,6 +1191,7 @@
                                       Visibility="{Binding ViewModel.IsCharacterFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1245,6 +1249,7 @@
                                       SelectionMode="None" IsItemClickEnabled="False" Padding="0">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1258,6 +1263,7 @@
                                       Visibility="{Binding ViewModel.IsWeaponFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1315,6 +1321,7 @@
                                       SelectionMode="None" IsItemClickEnabled="False" Padding="0">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1328,6 +1335,7 @@
                                       Visibility="{Binding ViewModel.IsChronicledFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1385,6 +1393,7 @@
                                       SelectionMode="None" IsItemClickEnabled="False" Padding="0">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -1398,6 +1407,7 @@
                                       Visibility="{Binding ViewModel.IsStandardFourStarVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <GridView.ItemContainerStyle>
                                     <Style TargetType="GridViewItem">
+                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="Padding" Value="0" />
                                         <Setter Property="Margin" Value="0" />
                                         <Setter Property="MinWidth" Value="0" />
@@ -2006,6 +2016,7 @@
                                     </ListView.ItemsPanel>
                                     <ListView.ItemContainerStyle>
                                         <Style TargetType="ListViewItem">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                         </Style>
                                     </ListView.ItemContainerStyle>

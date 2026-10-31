@@ -43,12 +43,14 @@
                 </ResourceDictionary.ThemeDictionaries>
 
                 <Style x:Key="AchievementActionButtonStyle" TargetType="Button">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     <Setter Property="Padding" Value="12,10" />
                 </Style>
 
                 <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="Foreground" Value="{ThemeResource HighlightColor}" />
@@ -438,6 +440,7 @@
                                   SelectionMode="None" Padding="20">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                     <Setter Property="Margin" Value="0,0,0,8" />
                                     <Setter Property="Padding" Value="0" />

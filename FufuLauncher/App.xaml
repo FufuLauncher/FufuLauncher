@@ -34,8 +34,20 @@
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             </Style>
 
+            <Style x:Key="AppDialogButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="Background" Value="{ThemeResource ButtonBackground}" />
+                <Setter Property="Foreground" Value="{ThemeResource ButtonForeground}" />
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}" />
+                <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}" />
+                <Setter Property="CornerRadius" Value="{ThemeResource ControlCornerRadius}" />
+            </Style>
+
             <Style TargetType="ContentDialog">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="PrimaryButtonStyle" Value="{StaticResource AppDialogButtonStyle}" />
+                <Setter Property="SecondaryButtonStyle" Value="{StaticResource AppDialogButtonStyle}" />
+                <Setter Property="CloseButtonStyle" Value="{StaticResource AppDialogButtonStyle}" />
                 <Setter Property="Foreground" Value="{ThemeResource ContentDialogForeground}" />
                 <Setter Property="Background" Value="{ThemeResource ContentDialogBackground}" />
                 <Setter Property="BorderBrush" Value="{ThemeResource ContentDialogBorderBrush}" />

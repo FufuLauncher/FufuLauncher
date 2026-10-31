@@ -43,6 +43,7 @@
                 </ResourceDictionary.ThemeDictionaries>
 
                 <Style x:Key="ToolbarButtonStyle" TargetType="Button">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="Foreground" Value="{ThemeResource HighlightColor}" />
@@ -194,6 +195,7 @@
                                                       IsItemClickEnabled="False">
                                                 <GridView.ItemContainerStyle>
                                                     <Style TargetType="GridViewItem">
+                                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                                         <Setter Property="Margin" Value="0,0,10,10" />
                                                         <Setter Property="Padding" Value="0" />
                                                     </Style>
@@ -320,6 +322,7 @@
                                   IsItemClickEnabled="False" Padding="0,0,0,12">
                             <GridView.ItemContainerStyle>
                                 <Style TargetType="GridViewItem">
+                                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                     <Setter Property="Margin" Value="0,0,12,12" />
                                     <Setter Property="Padding" Value="0" />
                                 </Style>

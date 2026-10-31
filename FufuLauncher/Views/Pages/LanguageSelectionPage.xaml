@@ -175,6 +175,7 @@
         </DataTemplate>
 
         <Style x:Key="GridViewItemCardStyle" TargetType="GridViewItem">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Margin" Value="2" />

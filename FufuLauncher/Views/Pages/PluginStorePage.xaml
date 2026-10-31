@@ -830,13 +830,13 @@
                                     </StackPanel>
                                     <Button.Flyout>
                                         <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                            <RadioMenuFlyoutItem x:Name="SortPopularItem"
+                                            <RadioMenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" x:Name="SortPopularItem"
                                                                  Text="{helpers:Loc Key=PluginStoreSortPopular}"
                                                                  GroupName="PluginStoreSort"
                                                                  IsChecked="True"
                                                                  Click="OnSortClick"
                                                                  Tag="popular" />
-                                            <RadioMenuFlyoutItem x:Name="SortNewestItem"
+                                            <RadioMenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" x:Name="SortNewestItem"
                                                                  Text="{helpers:Loc Key=PluginStoreSortNewest}"
                                                                  GroupName="PluginStoreSort"
                                                                  Click="OnSortClick"

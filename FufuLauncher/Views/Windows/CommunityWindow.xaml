@@ -16,6 +16,7 @@
         <Grid.Resources>
             <ResourceDictionary>
                 <Style x:Key="CommunityToolbarButtonStyle" TargetType="Button">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="Width" Value="34" />
                     <Setter Property="Height" Value="34" />
                     <Setter Property="Padding" Value="0" />

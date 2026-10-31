@@ -7,6 +7,7 @@
     VerticalAlignment="Center">
     <UserControl.Resources>
         <Style x:Key="ColorPickerTriggerStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="MinWidth" Value="150" />
             <Setter Property="Height" Value="38" />
             <Setter Property="Padding" Value="12,4" />
@@ -18,6 +19,7 @@
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
         <Style x:Key="PaletteButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="Width" Value="30" />
             <Setter Property="Height" Value="30" />
             <Setter Property="MinWidth" Value="0" />

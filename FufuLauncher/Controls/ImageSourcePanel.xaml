@@ -34,6 +34,7 @@
             <helpers:BoolNegationConverter x:Key="BoolNegationConverter" />
 
             <Style x:Key="ImageSourceTabButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Width" Value="34" />
                 <Setter Property="Height" Value="34" />
                 <Setter Property="MinWidth" Value="34" />
@@ -48,6 +49,7 @@
             </Style>
 
             <Style x:Key="ImageSourceArrowButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Padding" Value="4,4" />
                 <Setter Property="Background" Value="{ThemeResource ImageSourceOverlayButtonBrush}" />
                 <Setter Property="BorderThickness" Value="0" />
@@ -57,6 +59,7 @@
             </Style>
 
             <Style x:Key="ImageSourcePanelButtonStyle" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="MinHeight" Value="32" />
                 <Setter Property="Padding" Value="12,4" />
                 <Setter Property="CornerRadius" Value="8" />
