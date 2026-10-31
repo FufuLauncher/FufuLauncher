@@ -6259,7 +6259,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>轻量模式（YuanShen-UnlockerLite）</value>
   </data>
   <data name="LightweightMode_PluginComboLabel" xml:space="preserve">
-    <value>YuanShen-UnlockerLite (轻量插件)</value>
+    <value>UnlockerLite (轻量插件)</value>
   </data>
   <data name="LightweightMode_LiteEnabledLabel" xml:space="preserve">
     <value>轻量插件启用</value>

@@ -448,6 +448,7 @@
                                             <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xED7F;" FontSize="22.5" />
                                             <TextBlock Text="{helpers:Loc Key=LatestRedeemCodesTitle}" FontSize="16"
                                                        FontWeight="SemiBold"
+                                                       FontFamily="{StaticResource AppGlobalFont}"
                                                        Foreground="{ThemeResource SafeTextBrush}" />
                                             <ProgressRing x:Name="CodesLoadingRing" IsActive="False"
                                                           Visibility="Collapsed" Width="16" Height="16"
@@ -466,7 +467,8 @@
                                     </Grid>
 
                                     <StackPanel x:Name="RedeemContentPanel" Visibility="Collapsed" Spacing="16">
-                                        <ItemsControl x:Name="RedeemCodesList">
+                                        <ItemsControl x:Name="RedeemCodesList"
+                                                      FontFamily="{StaticResource AppGlobalFont}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Grid Margin="0,0,0,12" Background="{ThemeResource SafeCardBrush}"
@@ -479,9 +481,11 @@
                                                         <StackPanel Spacing="8">
                                                             <Grid>
                                                                 <TextBlock Text="{Binding Title}" FontWeight="Bold"
+                                                                           FontFamily="{StaticResource AppGlobalFont}"
                                                                            FontSize="13" />
                                                                 <TextBlock Text="{Binding Valid}"
                                                                            HorizontalAlignment="Right" FontSize="11"
+                                                                           FontFamily="{StaticResource AppGlobalFont}"
                                                                            Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                                             </Grid>
 
@@ -497,12 +501,13 @@
                                                                             </Grid.ColumnDefinitions>
                                                                             <TextBlock Text="{Binding}"
                                                                                     VerticalAlignment="Center"
-                                                                                    FontFamily="Consolas, Monospace"
+                                                                                    FontFamily="{StaticResource AppGlobalFont}"
                                                                                     FontSize="12" Margin="8,4" />
                                                                             <Button Grid.Column="1"
                                                                                     Content="{helpers:Loc Key=CopyBtn}"
                                                                                     Click="CopyCode_Click"
                                                                                     Tag="{Binding}" FontSize="10"
+                                                                                    FontFamily="{StaticResource AppGlobalFont}"
                                                                                     Padding="8,2" Height="24"
                                                                                     Margin="4" CornerRadius="4" />
                                                                         </Grid>
@@ -517,6 +522,7 @@
 
                                         <TextBlock x:Name="NoCodesText" Text="{helpers:Loc Key=NoCodesAvailable}"
                                                    Visibility="Collapsed"
+                                                   FontFamily="{StaticResource AppGlobalFont}"
                                                    Foreground="{ThemeResource SafeSecondaryTextBrush}"
                                                    HorizontalAlignment="Center" Margin="0,10" />
                                     </StackPanel>
