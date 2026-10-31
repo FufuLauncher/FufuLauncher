@@ -9086,4 +9086,49 @@ Details: {0}</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Spielerdaten</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Wunschverlauf abfragen</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Fragt die lokal gespeicherten Wunschaufzeichnungen nach Banner, Seltenheit, Gegenstandsname und Zeitraum ab. Liefert eine Seite mit Einträgen und einer Zusammenfassung.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Wunsch-Analyseübersicht</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Liefert eine Übersicht der Wunschhistorie: Gesamtzahl der Züge, Seltenheitsanteile, Primogem-Kosten, Pity-Statistiken, Statistiken je Banner und die neuesten Fünf-Sterne-Züge.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Bannerzeiträume suchen</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Sucht historische Bannerzeiträume nach Version, Bannername oder beworbenem Gegenstand, samt Zügen und Fünf-Sterne-Ergebnissen je Zeitraum.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>Wunschverlauf eines Zeitraums</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Liefert jeden Wunscheintrag eines Bannerzeitraums, einschließlich Pity-Zählern und Summe der erhaltenen Gegenstände.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Erfolgsübersicht</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Liefert die Gesamtzahl und die Anzahl abgeschlossener Erfolge, die Gesamtfortschrittsrate und die Primogem-Belohnungen.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Erfolgsfortschritt je Kategorie</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Liefert den Abschlussfortschritt jeder Erfolgskategorie. Der Kategoriename kann gefiltert werden.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Erfolge suchen</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Sucht Erfolge nach ID, Titelschlüsselwort, Kategorie, Version oder Abschlussstatus und liefert den genauen Status und Fortschritt.</value>
+  </data>
 </root>

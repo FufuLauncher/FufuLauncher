@@ -64,6 +64,11 @@ public sealed class McpSettingsViewModel : ObservableObject
         get;
     } = new();
 
+    public ObservableCollection<McpToolToggleItem> PlayerTools
+    {
+        get;
+    } = new();
+
     public ObservableCollection<McpToolToggleItem> SystemTools
     {
         get;
@@ -560,7 +565,8 @@ public sealed class McpSettingsViewModel : ObservableObject
 
     private void BuildTools()
     {
-        if (PluginTools.Count > 0 || GameTools.Count > 0 || InterfaceTools.Count > 0 || SystemTools.Count > 0)
+        if (PluginTools.Count > 0 || GameTools.Count > 0 || InterfaceTools.Count > 0 ||
+            PlayerTools.Count > 0 || SystemTools.Count > 0)
         {
             return;
         }
@@ -584,6 +590,9 @@ public sealed class McpSettingsViewModel : ObservableObject
                     break;
                 case McpToolCategories.Interface:
                     InterfaceTools.Add(item);
+                    break;
+                case McpToolCategories.Player:
+                    PlayerTools.Add(item);
                     break;
                 default:
                     SystemTools.Add(item);

@@ -9082,4 +9082,49 @@ Detail: {0}</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Data pemain</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Kueri riwayat gacha</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Kueri riwayat gacha yang tersimpan lokal berdasarkan jenis banner, kelangkaan, nama item, dan rentang waktu. Mengembalikan satu halaman catatan beserta ringkasannya.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Ringkasan analisis gacha</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Mengembalikan ringkasan riwayat gacha: total tarikan, proporsi kelangkaan, biaya primogem, statistik pity, statistik per banner, dan tarikan bintang lima terbaru.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Cari periode banner</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Mencari periode banner sebelumnya berdasarkan versi, nama banner, atau item unggulan, beserta tarikan dan hasil bintang lima tiap periode.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>Riwayat gacha satu periode</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Mengembalikan setiap catatan gacha dalam satu periode banner, termasuk hitungan pity dan total item yang diperoleh.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Ringkasan pencapaian</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Mengembalikan jumlah total dan jumlah pencapaian selesai, tingkat penyelesaian keseluruhan, dan hadiah primogem.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Progres per kategori pencapaian</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Mengembalikan progres penyelesaian setiap kategori pencapaian. Nama kategori dapat difilter.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Cari pencapaian</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Mencari pencapaian berdasarkan id, kata kunci judul, kategori, versi, atau status penyelesaian dan mengembalikan status serta progres yang tepat.</value>
+  </data>
 </root>

@@ -9077,4 +9077,49 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>खिलाड़ी डेटा</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>गचा इतिहास देखें</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>पूल, दुर्लभता, आइटम नाम और समय सीमा के आधार पर स्थानीय रूप से सहेजा गया गचा इतिहास खोजें। एक पृष्ठ के रिकॉर्ड और सारांश लौटाता है।</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>गचा विश्लेषण सारांश</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>गचा इतिहास का सारांश लौटाता है: कुल पुल, दुर्लभता अनुपात, प्रिमोजेम खर्च, पिटी आँकड़े, प्रति पूल आँकड़े और हाल के पाँच-स्टार पुल।</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>बैनर अवधि खोजें</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>संस्करण, बैनर नाम या फीचर्ड आइटम के आधार पर पुरानी बैनर अवधियाँ खोजें, साथ में प्रत्येक अवधि के पुल और पाँच-स्टार परिणाम।</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>किसी अवधि का गचा इतिहास</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>किसी एक बैनर अवधि के सभी गचा रिकॉर्ड लौटाता है, जिसमें पिटी गिनती और प्राप्त आइटम का कुल योग शामिल है।</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>उपलब्धि सारांश</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>कुल और पूर्ण उपलब्धियों की संख्या, समग्र पूर्णता दर और प्रिमोजेम पुरस्कार लौटाता है।</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>श्रेणी के अनुसार उपलब्धि प्रगति</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>प्रत्येक उपलब्धि श्रेणी की पूर्णता प्रगति लौटाता है। श्रेणी नाम से फ़िल्टर किया जा सकता है।</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>उपलब्धियाँ खोजें</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>आईडी, शीर्षक कीवर्ड, श्रेणी, संस्करण या पूर्णता स्थिति के आधार पर उपलब्धियाँ खोजें और सटीक स्थिति तथा प्रगति लौटाएँ।</value>
+  </data>
 </root>

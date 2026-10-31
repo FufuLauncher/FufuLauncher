@@ -9483,4 +9483,49 @@ UIGF v4.x/3.0/2.x</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP管理</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>玩家数据</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>查询抽卡记录</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>按卡池、稀有度、物品名称与时间范围查询本地抽卡记录，返回分页记录与统计摘要。</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>抽卡分析总览</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>返回抽卡总览分析：总抽数、稀有度占比、原石消耗、保底统计、分卡池统计与最近五星记录。</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>搜索卡池期数</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>按版本、卡池名称或 UP 物品搜索历史卡池期数，并返回该期的抽数与五星结果。</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>查询某期抽卡记录</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>返回指定卡池期数内的每一条抽卡记录，含保底次数与获得物品统计。</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>成就总览</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>返回成就总数、完成数量、完成进度与原石收益等总览信息。</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>成就分区进度</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>返回各成就分区的完成进度，可按分区名称筛选。</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>搜索成就</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>按成就 ID、名称关键词、分区、版本或完成状态搜索成就，返回具体完成状态与进度。</value>
+  </data>
 </root>

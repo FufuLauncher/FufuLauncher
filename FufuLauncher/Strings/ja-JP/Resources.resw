@@ -9086,4 +9086,49 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>プレイヤーデータ</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>祈願履歴を検索</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>祈願タイプ・レアリティ・アイテム名・期間で保存済みの祈願履歴を検索します。1ページ分の記録と集計を返します。</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>祈願分析の概要</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>祈願履歴の概要を返します。総祈願数、レアリティ比率、原石消費、天井回数、祈願タイプ別集計、直近の星5記録を含みます。</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>祈願期間を検索</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>バージョン・祈願名・PUアイテムで過去の祈願期間を検索し、その期間の祈願数と星5結果を返します。</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>期間別の祈願履歴</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>指定した祈願期間の祈願記録をすべて返します。天井回数と獲得アイテムの集計を含みます。</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>実績の概要</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>実績の総数・達成数・全体達成率・原石報酬を返します。</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>実績カテゴリの進捗</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>各実績カテゴリの達成進捗を返します。カテゴリ名で絞り込めます。</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>実績を検索</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>実績ID・タイトルのキーワード・カテゴリ・バージョン・達成状態で実績を検索し、正確な状態と進捗を返します。</value>
+  </data>
 </root>

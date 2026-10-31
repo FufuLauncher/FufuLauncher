@@ -9488,4 +9488,49 @@ Details: {0}</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Player data</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Query wish records</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Query the locally stored wish records by pool, rarity, item name and time range. Returns one page of records with a summary.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Wish analysis overview</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Return an overview of the wish history: total pulls, rarity shares, primogem cost, pity statistics, per-pool statistics and the most recent five-star pulls.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Search banner periods</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Search historical banner periods by version, banner name or featured item, together with the pulls and five-star results of each period.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>Query banner period records</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Return every wish record of one banner period, including pity counters and the total of obtained items.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Achievement overview</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Return the total and completed achievement counts, the overall completion rate and the primogem rewards.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Achievement category progress</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Return the completion progress of every achievement category. A category name can be filtered.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Search achievements</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Search achievements by id, title keyword, category, version or completion state and return the exact status and progress.</value>
+  </data>
 </root>

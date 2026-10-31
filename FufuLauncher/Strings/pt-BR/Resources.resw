@@ -9086,4 +9086,49 @@ Detalhes: {0}</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Dados do jogador</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Consultar histórico de desejos</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Consulta o histórico de desejos salvo localmente por banner, raridade, nome do item e período. Retorna uma página de registros e um resumo.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Visão geral da análise de desejos</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Retorna uma visão geral do histórico de desejos: total de invocações, proporção de raridades, custo em primogemas, estatísticas de garantia, estatísticas por banner e as invocações cinco estrelas mais recentes.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Pesquisar períodos de banner</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Pesquisa períodos de banner anteriores por versão, nome do banner ou item em destaque, com as invocações e os resultados cinco estrelas de cada período.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>Histórico de desejos de um período</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Retorna cada invocação de um período de banner, incluindo contadores de garantia e o total de itens obtidos.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Visão geral das conquistas</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Retorna o total e a quantidade de conquistas concluídas, a taxa de conclusão geral e as recompensas em primogemas.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Progresso por categoria de conquistas</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Retorna o progresso de cada categoria de conquistas. O nome da categoria pode ser filtrado.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Pesquisar conquistas</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Pesquisa conquistas por id, palavra-chave do título, categoria, versão ou estado de conclusão e retorna o estado e o progresso exatos.</value>
+  </data>
 </root>

@@ -10,6 +10,7 @@ internal static class McpToolCategories
     public const string Plugins = "plugins";
     public const string Game = "game";
     public const string Interface = "interface";
+    public const string Player = "player";
     public const string System = "system";
 }
 
@@ -93,6 +94,41 @@ internal static class McpToolCatalog
             "McpTool_SetWindowStateCaption",
             "Maximize, minimize or restore the launcher main window.",
             """{"type":"object","properties":{"state":{"type":"string","enum":["maximize","minimize","restore"],"description":"Target window state."}},"required":["state"],"additionalProperties":false}"""),
+
+        new("get_gacha_records", McpToolCategories.Player, "McpTool_GetGachaRecords",
+            "McpTool_GetGachaRecordsCaption",
+            "Query the wish (gacha) records the launcher has stored locally for a player, newest first by default. Filters by pool category or gacha type id, rarity, item name and time range. Returns one page of records with pity counters and a summary of every matched record. Use get_gacha_overview for statistics and search_gacha_pools for banner periods.",
+            """{"type":"object","properties":{"uid":{"type":"string","description":"Game UID. Omit to use the player the launcher currently has selected."},"pool":{"type":"string","enum":["character","weapon","standard","novice","chronicled","301","302","200","100","400","500"],"description":"Pool filter: category name or gacha type id."},"rank":{"type":"integer","enum":[3,4,5],"description":"Only return items of this rarity."},"item":{"type":"string","description":"Item name or item id keyword."},"from":{"type":"string","description":"Earliest record time, yyyy-MM-dd or yyyy-MM-dd HH:mm:ss."},"to":{"type":"string","description":"Latest record time, yyyy-MM-dd or yyyy-MM-dd HH:mm:ss."},"order":{"type":"string","enum":["asc","desc"],"default":"desc","description":"Sort by record time. Default desc (newest first)."},"page":{"type":"integer","minimum":1,"default":1},"pageSize":{"type":"integer","minimum":1,"maximum":100,"default":20}},"additionalProperties":false}"""),
+
+        new("get_gacha_overview", McpToolCategories.Player, "McpTool_GetGachaOverview",
+            "McpTool_GetGachaOverviewCaption",
+            "Return an analysis overview of the stored wish records: total pulls, rarity distribution and rates, estimated primogem cost, pity statistics (average, best, worst, current pity per pool), per-pool statistics, monthly distribution and the most recent five-star pulls.",
+            """{"type":"object","properties":{"uid":{"type":"string","description":"Game UID. Omit to use the player the launcher currently has selected."},"recentFiveStars":{"type":"integer","minimum":0,"maximum":50,"default":10,"description":"How many recent five-star pulls to list."}},"additionalProperties":false}"""),
+
+        new("search_gacha_pools", McpToolCategories.Player, "McpTool_SearchGachaPools",
+            "McpTool_SearchGachaPoolsCaption",
+            "Search the banner periods (期) known to the launcher, for example by version 5.2 or by a featured character name. Returns each period with its time window, featured items and the player's pulls and five-star results inside that period. Pass the returned key to get_gacha_pool_records to read the individual records.",
+            """{"type":"object","properties":{"uid":{"type":"string","description":"Game UID used for the pull statistics. Omit to use the player the launcher currently has selected."},"query":{"type":"string","description":"Keyword matched against version, pool name, featured item names and period dates."},"pool":{"type":"string","enum":["character","weapon","chronicled","301","400","302","500"],"description":"Banner type filter."},"from":{"type":"string","description":"Only periods that end on or after this date (yyyy-MM-dd)."},"to":{"type":"string","description":"Only periods that start on or before this date (yyyy-MM-dd)."},"hasPulls":{"type":"boolean","default":false,"description":"true to only return periods that contain at least one pull."},"page":{"type":"integer","minimum":1,"default":1},"pageSize":{"type":"integer","minimum":1,"maximum":100,"default":20}},"additionalProperties":false}"""),
+
+        new("get_gacha_pool_records", McpToolCategories.Player, "McpTool_GetGachaPoolRecords",
+            "McpTool_GetGachaPoolRecordsCaption",
+            "Return every wish record of one banner period, identified by key from search_gacha_pools or by version plus pool type. Includes global pity counters and the obtained item totals. When several periods match, the candidates are returned instead of records.",
+            """{"type":"object","properties":{"uid":{"type":"string","description":"Game UID. Omit to use the player the launcher currently has selected."},"key":{"type":"string","description":"Period key returned by search_gacha_pools."},"version":{"type":"string","description":"Version text of the period, for example 5.2 or 5.2下半."},"pool":{"type":"string","enum":["character","weapon","chronicled","301","400","302","500"],"description":"Banner type filter used together with version."},"order":{"type":"string","enum":["asc","desc"],"default":"desc","description":"Sort by record time. Default desc (newest first)."},"page":{"type":"integer","minimum":1,"default":1},"pageSize":{"type":"integer","minimum":1,"maximum":100,"default":20}},"additionalProperties":false}"""),
+
+        new("get_achievement_overview", McpToolCategories.Player, "McpTool_GetAchievementOverview",
+            "McpTool_GetAchievementOverviewCaption",
+            "Return the achievement overview stored in the launcher save: the achievement save profile, total and completed achievement counts, global completion rate, primogem rewards obtained and still available, and the completion rate of every game version. Use get_achievement_categories for per-category progress and search_achievements for one specific achievement.",
+            EmptySchema),
+
+        new("get_achievement_categories", McpToolCategories.Player, "McpTool_GetAchievementCategories",
+            "McpTool_GetAchievementCategoriesCaption",
+            "Return the completion progress of every achievement category (分区): total and completed achievements, completion rate, primogem rewards and how many achievements are in progress. Pass category to inspect one category only.",
+            """{"type":"object","properties":{"category":{"type":"string","description":"Category name filter; a substring match is enough."},"order":{"type":"string","enum":["default","progress_asc","progress_desc","name","total_desc"],"default":"default","description":"Sort order of the returned categories."}},"additionalProperties":false}"""),
+
+        new("search_achievements", McpToolCategories.Player, "McpTool_SearchAchievements",
+            "McpTool_SearchAchievementsCaption",
+            "Search the achievements of the launcher save by exact id, title or description keyword, category, version or completion state. Returns the completion status, current and maximum progress, completion time and the progress of the series an achievement belongs to. This is the way to check one specific achievement.",
+            """{"type":"object","properties":{"id":{"type":"integer","description":"Exact achievement id."},"query":{"type":"string","description":"Keyword matched against the achievement title and description."},"category":{"type":"string","description":"Category name filter; a substring match is enough."},"version":{"type":"string","description":"Game version filter, for example 5.2."},"status":{"type":"string","enum":["all","completed","incomplete"],"default":"all","description":"Completion state filter."},"page":{"type":"integer","minimum":1,"default":1},"pageSize":{"type":"integer","minimum":1,"maximum":100,"default":20}},"additionalProperties":false}"""),
 
         new("read_crash_log", McpToolCategories.System, "McpTool_ReadCrashLog", "McpTool_ReadCrashLogCaption",
             "Read the tail of the launcher crash log (CrashLog.txt) without modifying it.",

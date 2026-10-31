@@ -9082,4 +9082,49 @@ Click the button below to open your browser and download manually.</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Данные игрока</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Запрос истории желаний</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Запрашивает сохранённую локально историю желаний по баннеру, редкости, названию предмета и периоду. Возвращает страницу записей и сводку.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Обзор анализа желаний</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Возвращает обзор истории желаний: общее число круток, распределение редкостей, затраты примогемов, статистику гаранта, статистику по баннерам и последние пятизвёздочные крутки.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Поиск периодов баннеров</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Ищет прошлые периоды баннеров по версии, названию баннера или выделенному предмету, вместе с крутками и результатами пяти звёзд за период.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>История желаний за период</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Возвращает каждую крутку периода баннера, включая счётчики гаранта и итоги полученных предметов.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Обзор достижений</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Возвращает общее число и число выполненных достижений, общий процент выполнения и награды в примогемах.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Прогресс по категориям достижений</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Возвращает прогресс каждой категории достижений. Название категории можно отфильтровать.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Поиск достижений</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Ищет достижения по id, ключевому слову названия, категории, версии или состоянию выполнения и возвращает точный статус и прогресс.</value>
+  </data>
 </root>

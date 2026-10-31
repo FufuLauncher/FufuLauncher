@@ -260,7 +260,11 @@ internal sealed class McpProtocolHandler
                 "Plugin configuration can only be read with get_plugin_config and changed with set_plugin_config " +
                 "for options that already exist; the config file must not be edited directly. " +
                 "Tools such as start_game, stop_game, switch_server and install_plugin change the user environment; " +
-                "confirm the user intent before calling them."
+                "confirm the user intent before calling them. " +
+                "The player data tools (get_gacha_records, get_gacha_overview, search_gacha_pools, " +
+                "get_gacha_pool_records, get_achievement_overview, get_achievement_categories, search_achievements) " +
+                "only read the launcher local wish history and achievement save; they never contact the game servers " +
+                "and never change the data."
         };
     }
 

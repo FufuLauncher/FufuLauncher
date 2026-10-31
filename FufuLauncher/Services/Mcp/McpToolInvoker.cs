@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Globalization;
 using System.Text.Json;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Data.Repositories;
 using FufuLauncher.Helpers;
 using FufuLauncher.Services.GameServer;
 
@@ -23,6 +24,10 @@ public sealed partial class McpToolInvoker
     private readonly PluginGameVersionGuard _pluginGameVersionGuard;
     private readonly ConstraintService _constraintService;
     private readonly IUpdateService _updateService;
+    private readonly MetadataRepository _metadataRepository;
+    private readonly AchievementRepository _achievementRepository;
+    private readonly ILocalSettingsService _localSettingsService;
+    private readonly AccountManager _accountManager;
     private readonly SemaphoreSlim _mutationGate = new(1, 1);
 
     public McpToolInvoker(
@@ -35,7 +40,11 @@ public sealed partial class McpToolInvoker
         LightweightPluginService lightweightPlugin,
         PluginGameVersionGuard pluginGameVersionGuard,
         ConstraintService constraintService,
-        IUpdateService updateService)
+        IUpdateService updateService,
+        MetadataRepository metadataRepository,
+        AchievementRepository achievementRepository,
+        ILocalSettingsService localSettingsService,
+        AccountManager accountManager)
     {
         _gameLauncher = gameLauncher;
         _gameSession = gameSession;
@@ -47,6 +56,10 @@ public sealed partial class McpToolInvoker
         _pluginGameVersionGuard = pluginGameVersionGuard;
         _constraintService = constraintService;
         _updateService = updateService;
+        _metadataRepository = metadataRepository;
+        _achievementRepository = achievementRepository;
+        _localSettingsService = localSettingsService;
+        _accountManager = accountManager;
     }
 
     public Task<McpToolResult> InvokeAsync(string toolId, JsonElement arguments,
@@ -70,6 +83,13 @@ public sealed partial class McpToolInvoker
             "open_page" => OpenPageAsync(arguments, cancellationToken),
             "open_tool_window" => OpenToolWindowAsync(arguments, cancellationToken),
             "set_window_state" => SetWindowStateAsync(arguments, cancellationToken),
+            "get_gacha_records" => GetGachaRecordsAsync(arguments, cancellationToken),
+            "get_gacha_overview" => GetGachaOverviewAsync(arguments, cancellationToken),
+            "search_gacha_pools" => SearchGachaPoolsAsync(arguments, cancellationToken),
+            "get_gacha_pool_records" => GetGachaPoolRecordsAsync(arguments, cancellationToken),
+            "get_achievement_overview" => GetAchievementOverviewAsync(cancellationToken),
+            "get_achievement_categories" => GetAchievementCategoriesAsync(arguments, cancellationToken),
+            "search_achievements" => SearchAchievementsAsync(arguments, cancellationToken),
             "read_crash_log" => ReadCrashLogAsync(arguments, cancellationToken),
             "check_update" => CheckUpdateAsync(arguments, cancellationToken),
             _ => throw new McpToolException($"Unknown tool: {toolId}")

@@ -436,6 +436,40 @@
 
                             <Rectangle Style="{StaticResource RowDividerStyle}" />
 
+                            <TextBlock Text="{helpers:Loc Key=Mcp_CategoryPlayer}"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Opacity="0.6" />
+                            <ItemsRepeater ItemsSource="{x:Bind ViewModel.PlayerTools, Mode=OneWay}">
+                                <ItemsRepeater.ItemTemplate>
+                                    <DataTemplate x:DataType="models:McpToolToggleItem">
+                                        <Grid MinHeight="44" Padding="0,4" ColumnSpacing="16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Spacing="2" VerticalAlignment="Center">
+                                                <TextBlock Text="{x:Bind Title}"
+                                                           FontSize="14"
+                                                           TextWrapping="Wrap" />
+                                                <TextBlock Text="{x:Bind Description}"
+                                                           FontSize="12"
+                                                           Opacity="0.65"
+                                                           TextWrapping="Wrap" />
+                                            </StackPanel>
+                                            <ToggleSwitch Grid.Column="1"
+                                                          MinWidth="0"
+                                                          OnContent=""
+                                                          OffContent=""
+                                                          VerticalAlignment="Center"
+                                                          IsOn="{x:Bind IsEnabled, Mode=TwoWay}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsRepeater.ItemTemplate>
+                            </ItemsRepeater>
+
+                            <Rectangle Style="{StaticResource RowDividerStyle}" />
+
                             <TextBlock Text="{helpers:Loc Key=Mcp_CategorySystem}"
                                        FontSize="12"
                                        FontWeight="SemiBold"

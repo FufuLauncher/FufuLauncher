@@ -9092,4 +9092,49 @@ Dettagli: {0}</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Dati del giocatore</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Interroga la cronologia dei desideri</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Interroga la cronologia dei desideri salvata localmente per banner, rarità, nome dell'oggetto e intervallo di date. Restituisce una pagina di voci e un riepilogo.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Panoramica dell'analisi dei desideri</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Restituisce una panoramica della cronologia dei desideri: numero di invocazioni, distribuzione delle rarità, costo in primogemme, statistiche di garanzia, statistiche per banner e ultime invocazioni a cinque stelle.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Cerca periodi di banner</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Cerca i periodi di banner passati per versione, nome del banner o oggetto in evidenza, con le invocazioni e i risultati a cinque stelle di ogni periodo.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>Cronologia dei desideri di un periodo</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Restituisce ogni invocazione di un periodo di banner, con i contatori di garanzia e il totale degli oggetti ottenuti.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Panoramica degli obiettivi</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Restituisce il numero totale e completato di obiettivi, il tasso di completamento globale e le ricompense in primogemme.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Progresso per categoria di obiettivi</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Restituisce il progresso di ogni categoria di obiettivi. È possibile filtrare per nome della categoria.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Cerca obiettivi</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Cerca gli obiettivi per id, parola chiave del titolo, categoria, versione o stato di completamento e restituisce lo stato e il progresso esatti.</value>
+  </data>
 </root>

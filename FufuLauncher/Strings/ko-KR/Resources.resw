@@ -9082,4 +9082,49 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>플레이어 데이터</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>기원 기록 조회</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>기원 유형, 등급, 아이템 이름, 기간으로 저장된 기원 기록을 조회합니다. 한 페이지의 기록과 요약을 반환합니다.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>기원 분석 개요</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>기원 기록의 개요를 반환합니다. 총 기원 횟수, 등급 분포, 원석 소모, 천장 통계, 유형별 통계, 최근 5성 기록을 포함합니다.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>기원 기간 검색</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>버전, 기원 이름, 픽업 아이템으로 과거 기원 기간을 검색하고 해당 기간의 기원 횟수와 5성 결과를 반환합니다.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>기간별 기원 기록</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>지정한 기원 기간의 모든 기원 기록을 반환합니다. 천장 횟수와 획득 아이템 집계를 포함합니다.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>업적 개요</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>업적 총 개수, 완료 개수, 전체 완료율, 원석 보상을 반환합니다.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>업적 카테고리 진행도</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>각 업적 카테고리의 완료 진행도를 반환합니다. 카테고리 이름으로 필터링할 수 있습니다.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>업적 검색</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>업적 ID, 제목 키워드, 카테고리, 버전, 완료 상태로 업적을 검색하고 정확한 상태와 진행도를 반환합니다.</value>
+  </data>
 </root>

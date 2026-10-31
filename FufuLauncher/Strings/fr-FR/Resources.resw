@@ -9085,4 +9085,49 @@ Détails : {0}</value>
   <data name="TrayMcp" xml:space="preserve">
     <value>MCP Management</value>
   </data>
+  <data name="Mcp_CategoryPlayer" xml:space="preserve">
+    <value>Données du joueur</value>
+  </data>
+  <data name="McpTool_GetGachaRecords" xml:space="preserve">
+    <value>Interroger l'historique des voeux</value>
+  </data>
+  <data name="McpTool_GetGachaRecordsCaption" xml:space="preserve">
+    <value>Interroge l'historique des voeux stocké localement par bannière, rareté, nom d'objet et période. Renvoie une page d'entrées et un résumé.</value>
+  </data>
+  <data name="McpTool_GetGachaOverview" xml:space="preserve">
+    <value>Aperçu de l'analyse des voeux</value>
+  </data>
+  <data name="McpTool_GetGachaOverviewCaption" xml:space="preserve">
+    <value>Renvoie un aperçu de l'historique des voeux : nombre de voeux, répartition des raretés, coût en primogemmes, statistiques de pitié, statistiques par bannière et derniers voeux cinq étoiles.</value>
+  </data>
+  <data name="McpTool_SearchGachaPools" xml:space="preserve">
+    <value>Rechercher des périodes de bannière</value>
+  </data>
+  <data name="McpTool_SearchGachaPoolsCaption" xml:space="preserve">
+    <value>Recherche les périodes de bannière passées par version, nom de bannière ou objet mis en avant, avec les voeux et les résultats cinq étoiles de chaque période.</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecords" xml:space="preserve">
+    <value>Historique des voeux d'une période</value>
+  </data>
+  <data name="McpTool_GetGachaPoolRecordsCaption" xml:space="preserve">
+    <value>Renvoie chaque voeu d'une période de bannière, avec les compteurs de pitié et le total des objets obtenus.</value>
+  </data>
+  <data name="McpTool_GetAchievementOverview" xml:space="preserve">
+    <value>Aperçu des succès</value>
+  </data>
+  <data name="McpTool_GetAchievementOverviewCaption" xml:space="preserve">
+    <value>Renvoie le nombre total et le nombre de succès terminés, le taux d'achèvement global et les récompenses en primogemmes.</value>
+  </data>
+  <data name="McpTool_GetAchievementCategories" xml:space="preserve">
+    <value>Progression par catégorie de succès</value>
+  </data>
+  <data name="McpTool_GetAchievementCategoriesCaption" xml:space="preserve">
+    <value>Renvoie la progression de chaque catégorie de succès. Le nom d'une catégorie peut être filtré.</value>
+  </data>
+  <data name="McpTool_SearchAchievements" xml:space="preserve">
+    <value>Rechercher des succès</value>
+  </data>
+  <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
+    <value>Recherche les succès par identifiant, mot-clé du titre, catégorie, version ou état d'achèvement et renvoie l'état et la progression exacts.</value>
+  </data>
 </root>

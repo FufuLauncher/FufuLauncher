@@ -342,10 +342,20 @@
                                                         HorizontalContentAlignment="Center"
                                                         Click="AccountSwitchButton_Click"
                                                         ToolTipService.ToolTip="{helpers:Loc Key=Account_Flyout_SwitchAccount}">
-                                                    <TextBlock FontSize="12"
-                                                               Text="{helpers:Loc Key=Account_Flyout_SwitchAccount}"
-                                                               TextTrimming="CharacterEllipsis"
-                                                               TextWrapping="NoWrap" />
+                                                    <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource ActionIconFont}"
+                                                                  FontSize="14"
+                                                                  VerticalAlignment="Center"
+                                                                  Glyph="&#xE8AB;" />
+                                                        <TextBlock FontSize="12"
+                                                                   VerticalAlignment="Center"
+                                                                   Text="{helpers:Loc Key=Account_Flyout_SwitchAccount}"
+                                                                   TextTrimming="CharacterEllipsis"
+                                                                   TextWrapping="NoWrap" />
+                                                    </StackPanel>
                                                 </Button>
                                                 <Button Grid.Column="1"
                                                         Padding="8,7"
@@ -353,10 +363,20 @@
                                                         HorizontalContentAlignment="Center"
                                                         Click="RoleSwitchButton_Click"
                                                         ToolTipService.ToolTip="{helpers:Loc Key=Account_Flyout_SwitchRole}">
-                                                    <TextBlock FontSize="12"
-                                                               Text="{helpers:Loc Key=Account_Flyout_SwitchRole}"
-                                                               TextTrimming="CharacterEllipsis"
-                                                               TextWrapping="NoWrap" />
+                                                    <StackPanel Orientation="Horizontal"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                Spacing="6">
+                                                        <FontIcon FontFamily="{StaticResource ActionIconFont}"
+                                                                  FontSize="14"
+                                                                  VerticalAlignment="Center"
+                                                                  Glyph="&#xE8AB;" />
+                                                        <TextBlock FontSize="12"
+                                                                   VerticalAlignment="Center"
+                                                                   Text="{helpers:Loc Key=Account_Flyout_SwitchRole}"
+                                                                   TextTrimming="CharacterEllipsis"
+                                                                   TextWrapping="NoWrap" />
+                                                    </StackPanel>
                                                 </Button>
                                             </Grid>
                                         </StackPanel>
