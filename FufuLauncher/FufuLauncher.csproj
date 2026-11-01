@@ -33,9 +33,9 @@
 
         <PublishReadyToRun>true</PublishReadyToRun>
 
-        <Version>1.7.2.0</Version>
-        <AssemblyVersion>1.7.2.0</AssemblyVersion>
-        <FileVersion>1.7.2.0</FileVersion>
+        <Version>1.7.2.1</Version>
+        <AssemblyVersion>1.7.2.1</AssemblyVersion>
+        <FileVersion>1.7.2.1</FileVersion>
         <Copyright>Copyright © FufuLauncher Development Team</Copyright>
     </PropertyGroup>
 

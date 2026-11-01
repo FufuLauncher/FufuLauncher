@@ -18,7 +18,7 @@ public partial class MainWindow : Window
 {
     #region Fields & Constants
 
-    private const string AppVersion = "1.7.2.0";
+    private const string AppVersion = "1.7.2.1";
     private const string DefaultUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36";
 
     private static readonly HttpClient _httpClient = new() 
