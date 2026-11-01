@@ -1637,7 +1637,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>Rewards Calendar</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>Genshin Notes</value>
+    <value>Notes</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>Refresh Notes</value>

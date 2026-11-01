@@ -21,12 +21,16 @@
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
             <Style x:Key="RowCaptionStyle" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Opacity" Value="0.65" />
                 <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
             <Style x:Key="RowDividerStyle" TargetType="Rectangle">
                 <Setter Property="Height" Value="1" />

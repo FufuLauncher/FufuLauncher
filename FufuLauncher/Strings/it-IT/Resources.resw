@@ -2438,13 +2438,13 @@ CaptureApp
     <value>Impossibile caricare le credenziali dell'account</value>
   </data>
   <data name="Home_CheckinCard" xml:space="preserve">
-    <value>Check-in Genshin</value>
+    <value>Check-in</value>
   </data>
   <data name="Home_Cleaned" xml:space="preserve">
     <value>Pulito</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>Note di Genshin</value>
+    <value>Note</value>
   </data>
   <data name="Home_DailyQuests" xml:space="preserve">
     <value>Commissioni Giornaliere</value>

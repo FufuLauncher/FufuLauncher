@@ -1604,7 +1604,7 @@
     <value>पुरस्कार कैलेंडर</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>जेनशिन नोट्स</value>
+    <value>नोट्स</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>नोट्स रीफ़्रेश करें</value>

@@ -38,12 +38,14 @@ public sealed partial class MainPage
             DailyNoteDataPanel.Opacity = 1.0;
             DailyNoteEmptyText.Opacity = 0.0;
             DailyNoteDataPanel.IsHitTestVisible = true;
+            DailyNoteEmptyText.IsHitTestVisible = false;
         }
         else
         {
             DailyNoteDataPanel.Opacity = 0.0;
             DailyNoteEmptyText.Opacity = 0.8;
             DailyNoteDataPanel.IsHitTestVisible = false;
+            DailyNoteEmptyText.IsHitTestVisible = true;
         }
     }
 
@@ -61,6 +63,7 @@ public sealed partial class MainPage
             easing));
 
         DailyNoteDataPanel.IsHitTestVisible = isLoaded;
+        DailyNoteEmptyText.IsHitTestVisible = !isLoaded;
 
         storyboard.Begin();
     }

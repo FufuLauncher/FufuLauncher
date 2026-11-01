@@ -1674,7 +1674,7 @@
     <value>資訊</value>
   </data>
   <data name="Home_CheckinCard" xml:space="preserve">
-    <value>原神簽到</value>
+    <value>簽到</value>
   </data>
   <data name="Home_RefreshCookie" xml:space="preserve">
     <value>重新整理 Token</value>
@@ -1686,7 +1686,7 @@
     <value>獎勵日曆</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>原神便箋</value>
+    <value>便箋</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>重新整理便箋</value>

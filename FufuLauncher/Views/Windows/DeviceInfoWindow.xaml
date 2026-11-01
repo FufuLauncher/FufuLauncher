@@ -16,17 +16,23 @@
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="13" />
                 <Setter Property="Opacity" Value="0.75" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
             <Style x:Key="DeviceSectionTitleStyle" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
             <Style x:Key="DeviceSectionCaptionStyle" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Opacity" Value="0.6" />
                 <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
             <Style x:Key="DeviceCardStyle" TargetType="Border">
                 <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />

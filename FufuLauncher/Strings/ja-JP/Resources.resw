@@ -1686,7 +1686,7 @@ MicrosoftのWebサイトからダウンロードしてインストールしま�
     <value>報酬カレンダー</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>原神メモ</value>
+    <value>メモ</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>メモを更新</value>

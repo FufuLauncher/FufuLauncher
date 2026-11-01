@@ -53,6 +53,8 @@
                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="11" />
                     <Setter Property="Foreground" Value="White" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
             </ResourceDictionary>
         </Grid.Resources>

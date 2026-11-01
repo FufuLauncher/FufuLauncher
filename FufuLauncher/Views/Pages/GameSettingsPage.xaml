@@ -44,6 +44,8 @@
                 <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="Margin" Value="0,0,0,12" />
                 <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="SafeCardStyle" TargetType="Grid">

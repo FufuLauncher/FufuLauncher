@@ -32,6 +32,8 @@
 
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             </Style>
 
             <Style x:Key="AppDialogButtonStyle" TargetType="Button">
@@ -75,6 +77,7 @@
                 <Setter Property="TextWrapping" Value="Wrap" />
                 <Setter Property="LineStackingStrategy" Value="MaxHeight" />
                 <Setter Property="TextLineBounds" Value="Full" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="BodyStrongTextBlockStyle" TargetType="TextBlock">
@@ -85,6 +88,7 @@
                 <Setter Property="TextWrapping" Value="Wrap" />
                 <Setter Property="LineStackingStrategy" Value="MaxHeight" />
                 <Setter Property="TextLineBounds" Value="Full" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="CaptionTextBlockStyle" TargetType="TextBlock">
@@ -95,6 +99,7 @@
                 <Setter Property="TextWrapping" Value="Wrap" />
                 <Setter Property="LineStackingStrategy" Value="MaxHeight" />
                 <Setter Property="TextLineBounds" Value="Full" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="SubtitleTextBlockStyle" TargetType="TextBlock">
@@ -106,6 +111,7 @@
                 <Setter Property="LineStackingStrategy" Value="MaxHeight" />
                 <Setter Property="TextLineBounds" Value="Full" />
                 <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
@@ -117,6 +123,7 @@
                 <Setter Property="LineStackingStrategy" Value="MaxHeight" />
                 <Setter Property="TextLineBounds" Value="Full" />
                 <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style TargetType="RichTextBlock">

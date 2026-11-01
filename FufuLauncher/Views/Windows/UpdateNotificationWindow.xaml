@@ -18,6 +18,8 @@
             <Style x:Key="AnnouncementTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                 <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
         </Grid.Resources>
 

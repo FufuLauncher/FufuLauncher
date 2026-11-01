@@ -1674,7 +1674,7 @@ Por favor, confirma que seleccionaste el directorio de instalación que contiene
     <value>Noticias</value>
   </data>
   <data name="Home_CheckinCard" xml:space="preserve">
-    <value>Check-in de Genshin</value>
+    <value>Check-in</value>
   </data>
   <data name="Home_RefreshCookie" xml:space="preserve">
     <value>Actualizar token</value>
@@ -1686,7 +1686,7 @@ Por favor, confirma que seleccionaste el directorio de instalación que contiene
     <value>Calendario de recompensas</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>Notas de Genshin</value>
+    <value>Notas</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>Actualizar notas</value>

@@ -32,12 +32,16 @@
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <Style x:Key="AbyssCaptionStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="11" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <DataTemplate x:Key="KpiCardTemplate" x:DataType="local:SpiralAbyssKpiCard">

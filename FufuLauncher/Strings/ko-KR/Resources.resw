@@ -1686,7 +1686,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>보상 달력</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>원신 노트</value>
+    <value>노트</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>노트 새로고침</value>

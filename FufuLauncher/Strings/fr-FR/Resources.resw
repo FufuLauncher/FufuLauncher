@@ -1674,7 +1674,7 @@ Voulez-vous accéder au site officiel de Microsoft pour la télécharger et l'in
     <value>Actualités</value>
   </data>
   <data name="Home_CheckinCard" xml:space="preserve">
-    <value>Check-in Genshin</value>
+    <value>Check-in</value>
   </data>
   <data name="Home_RefreshCookie" xml:space="preserve">
     <value>Actualiser le Token</value>
@@ -1686,7 +1686,7 @@ Voulez-vous accéder au site officiel de Microsoft pour la télécharger et l'in
     <value>Calendrier des récompenses</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>Carnet Genshin</value>
+    <value>Carnet</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>Actualiser le carnet</value>

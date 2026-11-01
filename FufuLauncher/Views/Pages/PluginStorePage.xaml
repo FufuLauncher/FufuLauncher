@@ -125,6 +125,8 @@
                 <Setter Property="Foreground" Value="{ThemeResource SafeSecondaryTextBrush}" />
                 <Setter Property="Margin" Value="4,0,0,8" />
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="SectionCaptionStyle" TargetType="TextBlock">
@@ -133,6 +135,8 @@
                 <Setter Property="Opacity" Value="0.8" />
                 <Setter Property="Margin" Value="0,0,4,8" />
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="StoreInstallButtonStyle" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
@@ -420,6 +424,7 @@
                 <Setter Property="MaxLines" Value="1" />
                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                 <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
             </Style>
 
             <Style x:Key="SkeletonBarStyle" TargetType="Border">

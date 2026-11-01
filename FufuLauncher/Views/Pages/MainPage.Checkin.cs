@@ -21,12 +21,14 @@ public sealed partial class MainPage
             CheckinDataPanel.Opacity = 1.0;
             CheckinEmptyText.Opacity = 0.0;
             CheckinDataPanel.IsHitTestVisible = true;
+            CheckinEmptyText.IsHitTestVisible = false;
         }
         else
         {
             CheckinDataPanel.Opacity = 0.0;
             CheckinEmptyText.Opacity = 0.8;
             CheckinDataPanel.IsHitTestVisible = false;
+            CheckinEmptyText.IsHitTestVisible = true;
         }
     }
 
@@ -44,6 +46,7 @@ public sealed partial class MainPage
             easing));
 
         CheckinDataPanel.IsHitTestVisible = isLoaded;
+        CheckinEmptyText.IsHitTestVisible = !isLoaded;
 
         storyboard.Begin();
     }

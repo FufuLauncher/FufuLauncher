@@ -13,28 +13,38 @@
                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="12" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
                 <Style x:Key="MetaTextStyle" TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="11" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
                 <Style x:Key="SectionLabelStyle" TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="14" />
                     <Setter Property="FontWeight" Value="SemiBold" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
                 <Style x:Key="StatValueStyle" TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="22" />
                     <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
                 <Style x:Key="StatLabelStyle" TargetType="TextBlock">
                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                     <Setter Property="FontSize" Value="11" />
                     <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
                     <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
             </ResourceDictionary>
         </Grid.Resources>

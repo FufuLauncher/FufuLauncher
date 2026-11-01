@@ -12,12 +12,15 @@
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <Style x:Key="HdrRowTitleStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="13" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <Style x:Key="HdrMetaLabelStyle" TargetType="TextBlock">
@@ -25,6 +28,7 @@
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <Style x:Key="HdrMetaValueStyle" TargetType="TextBlock">
@@ -32,12 +36,16 @@
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <Style x:Key="HdrDescriptionStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="11" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
             <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <Style x:Key="HdrDividerStyle" TargetType="Rectangle">
@@ -49,6 +57,8 @@
             <Setter Property="FontSize" Value="11" />
             <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
     </UserControl.Resources>
 

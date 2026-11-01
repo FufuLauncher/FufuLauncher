@@ -23,6 +23,8 @@
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontWeight" Value="SemiBold" />
             <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
 
         <SolidColorBrush x:Key="PityProgressBarForeground" Color="#FFD700" />

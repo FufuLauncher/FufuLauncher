@@ -1742,7 +1742,7 @@
     <value>资讯</value>
   </data>
   <data name="Home_CheckinCard" xml:space="preserve">
-    <value>原神签到</value>
+    <value>签到</value>
   </data>
   <data name="Home_RefreshCookie" xml:space="preserve">
     <value>刷新Cookie</value>
@@ -1754,7 +1754,7 @@
     <value>奖励日历</value>
   </data>
   <data name="Home_DailyNotesCard" xml:space="preserve">
-    <value>原神便签</value>
+    <value>便签</value>
   </data>
   <data name="Home_RefreshNotes" xml:space="preserve">
     <value>刷新便签</value>
