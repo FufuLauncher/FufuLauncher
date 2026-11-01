@@ -18,12 +18,16 @@ public sealed partial class PluginConfigPage : Page
     private readonly ObservableCollection<PluginConfigOption> _pinnedOptions = new();
     private readonly ObservableCollection<PluginConfigOption> _regularOptions = new();
     private readonly ObservableCollection<PluginConfigInfoItem> _infoItems = new();
+    private PluginConfigInfoItem? _descriptionInfoItem;
     private readonly DispatcherQueueTimer _autoSaveTimer;
     private PluginItem? _pluginItem;
     private PluginConfiguration? _configuration;
     private GamepadConnectionWatcher? _gamepadWatcher;
     private string? _loadedConfigPath;
     private CancellationTokenSource? _loadCancellation;
+    private CancellationTokenSource? _translationCancellation;
+    private string _rawDescription = string.Empty;
+    private string _defaultDescription = string.Empty;
     private Task<bool>? _saveTask;
     private TaskCompletionSource<bool>? _exitAnimationCompletion;
     private Func<Task>? _retryAction;

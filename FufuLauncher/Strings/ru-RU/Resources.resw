@@ -9127,4 +9127,10 @@ Click the button below to open your browser and download manually.</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>Ищет достижения по id, ключевому слову названия, категории, версии или состоянию выполнения и возвращает точный статус и прогресс.</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>Переводить текст плагинов</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>Переводить описания плагинов и названия параметров конфигурации на язык приложения с помощью онлайн-сервиса перевода (требуется подключение к Интернету).</value>
+  </data>
 </root>

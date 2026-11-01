@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Diagnostics;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
+using FufuLauncher.Services;
 
 namespace FufuLauncher.ViewModels;
 
@@ -121,6 +122,7 @@ public partial class PluginStoreViewModel
                         UpdateLocalState(plugin);
                     }
 
+                    ApplyCachedTranslations(plugin);
                     Plugins.Add(plugin);
                 }
             }
@@ -144,6 +146,8 @@ public partial class PluginStoreViewModel
             {
                 StatusMessage = string.Format("PluginStoreTotalPlugins".GetLocalized(), TotalPlugins);
             }
+
+            QueueDescriptionTranslation(Plugins.ToArray());
         }
         catch (InvalidOperationException ex)
         {
@@ -194,6 +198,91 @@ public partial class PluginStoreViewModel
         if (page < 1 || page > TotalPages) return;
         CurrentPage = page;
         await LoadPluginsAsync();
+    }
+
+    private int _storeDescriptionTranslationVersion;
+
+    private static void ApplyCachedTranslations(PluginStoreItem plugin)
+    {
+        var translator = PluginContentTranslationService.Instance;
+
+        if (!string.IsNullOrWhiteSpace(plugin.Description) &&
+            translator.TryGetCachedTranslation(plugin.Description, out var cachedDescription))
+        {
+            plugin.Description = cachedDescription;
+        }
+
+        if (!string.IsNullOrWhiteSpace(plugin.LongDescription) &&
+            translator.TryGetCachedTranslation(plugin.LongDescription, out var cachedLongDescription))
+        {
+            plugin.LongDescription = cachedLongDescription;
+        }
+    }
+
+    private void QueueDescriptionTranslation(IReadOnlyList<PluginStoreItem> items)
+    {
+        var version = Interlocked.Increment(ref _storeDescriptionTranslationVersion);
+        if (items.Count == 0 || !PluginContentTranslationService.Instance.ShouldTranslate)
+        {
+            return;
+        }
+
+        _ = TranslateDescriptionsAsync(version, items);
+    }
+
+    private async Task TranslateDescriptionsAsync(int version, IReadOnlyList<PluginStoreItem> items)
+    {
+        var translator = PluginContentTranslationService.Instance;
+
+        try
+        {
+            foreach (var item in items)
+            {
+                if (version != Volatile.Read(ref _storeDescriptionTranslationVersion))
+                {
+                    return;
+                }
+
+                var original = item.Description;
+                if (!string.IsNullOrWhiteSpace(original))
+                {
+                    var translated = await translator.TranslateAsync(original, original);
+                    if (version != Volatile.Read(ref _storeDescriptionTranslationVersion))
+                    {
+                        return;
+                    }
+
+                    if (!string.Equals(translated, original, StringComparison.Ordinal))
+                    {
+                        PluginContentTranslationService.RunOnUiThread(() => item.Description = translated);
+                    }
+                }
+
+                var originalLongDescription = item.LongDescription;
+                if (string.IsNullOrWhiteSpace(originalLongDescription))
+                {
+                    continue;
+                }
+
+                var translatedLongDescription =
+                    await translator.TranslateAsync(originalLongDescription, originalLongDescription);
+                if (version != Volatile.Read(ref _storeDescriptionTranslationVersion))
+                {
+                    return;
+                }
+
+                if (!string.Equals(translatedLongDescription, originalLongDescription, StringComparison.Ordinal))
+                {
+                    PluginContentTranslationService.RunOnUiThread(
+                        () => item.LongDescription = translatedLongDescription);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("PluginStoreViewModel.Browsing",
+                $"[PluginStoreVM] Description translation failed: {ex.Message}");
+        }
     }
 
     #endregion

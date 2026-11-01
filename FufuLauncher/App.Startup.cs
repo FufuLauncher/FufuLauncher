@@ -36,6 +36,7 @@ public partial class App
             await VerifyResourceFilesAsync();
 
             await ApplyLanguageSettingAsync();
+            await PluginContentTranslationService.Instance.InitializeAsync();
 
             var localUids = await LoadUidLookupAsync();
             if (await EnforceBanListAsync(localUids))

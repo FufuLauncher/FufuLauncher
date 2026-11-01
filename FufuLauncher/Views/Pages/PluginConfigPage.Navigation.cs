@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Diagnostics;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
+using FufuLauncher.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -83,6 +84,9 @@ public sealed partial class PluginConfigPage
             UpdatePluginHeader();
         }
 
+        PluginContentTranslationService.Instance.EnabledChanged -= OnContentTranslationSettingChanged;
+        PluginContentTranslationService.Instance.EnabledChanged += OnContentTranslationSettingChanged;
+
         await LoadConfigAsync();
     }
 
@@ -92,6 +96,8 @@ public sealed partial class PluginConfigPage
         StopGamepadWatcher();
         UpdateBackButtonState();
         _exitAnimationCompletion?.TrySetResult(false);
+        PluginContentTranslationService.Instance.EnabledChanged -= OnContentTranslationSettingChanged;
+        CancelContentTranslation();
         _loadCancellation?.Cancel();
         _autoSaveTimer.Stop();
         _ = SavePendingChangesAsync();

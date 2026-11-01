@@ -9533,4 +9533,10 @@ Details: {0}</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>Search achievements by id, title keyword, category, version or completion state and return the exact status and progress.</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>Translate Plugin Text</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>Translate plugin descriptions and configuration option names into the app language with the online translation service (Internet connection required).</value>
+  </data>
 </root>

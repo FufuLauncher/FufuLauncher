@@ -6,17 +6,37 @@ using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models;
 
-public sealed class PluginConfigInfoItem(string key, string value)
+public sealed class PluginConfigInfoItem(string key, string value) : INotifyPropertyChanged
 {
+    private string _value = value;
+
     public string Key
     {
         get;
     } = key;
 
-    public string Value
+    public string RawValue
     {
         get;
     } = value;
+
+    public string Value
+    {
+        get => _value;
+        private set
+        {
+            if (_value == value) return;
+            _value = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
+        }
+    }
+
+    public void ApplyTranslatedValue(string? translatedValue)
+    {
+        Value = string.IsNullOrWhiteSpace(translatedValue) ? RawValue : translatedValue.Trim();
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
 }
 
 public enum PluginConfigValueKind
@@ -38,12 +58,17 @@ public sealed class PluginConfigOption : PinnablePluginSetting
     private bool _refreshingChoices;
     private bool _useKeyListInput = true;
 
+    private string _displayName;
+    private string _description;
+
     internal PluginConfigOption(string sectionName, string name, string type, string description, string value,
         string optionsSource = "", string optionsJson = "")
     {
         SectionName = sectionName;
-        DisplayName = string.IsNullOrWhiteSpace(name) ? sectionName : name;
-        Description = description;
+        RawDisplayName = string.IsNullOrWhiteSpace(name) ? sectionName : name;
+        RawDescription = description ?? string.Empty;
+        _displayName = RawDisplayName;
+        _description = RawDescription;
         Kind = type.Trim().ToLowerInvariant() switch
         {
             "bool" or "boolean" => PluginConfigValueKind.Boolean,
@@ -71,14 +96,43 @@ public sealed class PluginConfigOption : PinnablePluginSetting
         get;
     }
 
-    public string DisplayName
+    public string RawDisplayName
     {
         get;
     }
 
-    public string Description
+    public string RawDescription
     {
         get;
+    }
+
+    public string DisplayName
+    {
+        get => _displayName;
+        private set
+        {
+            if (SetProperty(ref _displayName, value))
+            {
+                OnPropertyChanged(nameof(ToolTipText));
+            }
+        }
+    }
+
+    public string Description
+    {
+        get => _description;
+        private set
+        {
+            if (!SetProperty(ref _description, value)) return;
+            OnPropertyChanged(nameof(HasDescription));
+            OnPropertyChanged(nameof(HeaderTextMaxWidth));
+        }
+    }
+
+    public void ApplyTranslatedText(string? displayName, string? description)
+    {
+        DisplayName = string.IsNullOrWhiteSpace(displayName) ? RawDisplayName : displayName.Trim();
+        Description = string.IsNullOrWhiteSpace(description) ? RawDescription : description.Trim();
     }
 
     public string ToolTipText => DisplayName == SectionName ? DisplayName : $"{DisplayName}\n{SectionName}";

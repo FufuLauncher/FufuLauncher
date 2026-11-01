@@ -32,7 +32,13 @@ public sealed class TranslationService
 
     public static string GetLangPair(string targetCulture)
     {
-        var target = targetCulture.ToLowerInvariant() switch
+        var target = TryGetTargetLanguage(targetCulture, out var resolved) ? resolved : "en";
+        return $"zh-CN|{target}";
+    }
+
+    public static bool TryGetTargetLanguage(string? targetCulture, out string targetLanguage)
+    {
+        targetLanguage = targetCulture?.Trim().ToLowerInvariant() switch
         {
             "en-us" or "en" => "en",
             "fr-fr" or "fr" => "fr",
@@ -45,10 +51,24 @@ public sealed class TranslationService
             "it-it" or "it" => "it",
             "id-id" or "id" => "id",
             "pt-br" or "pt" => "pt",
+            "hi-in" or "hi" => "hi",
             "zh-tw" => "zh-TW",
-            _ => "en"
+            _ => string.Empty
         };
-        return $"zh-CN|{target}";
+        return targetLanguage.Length > 0;
+    }
+
+    public static bool IsSupportedTargetCulture(string? targetCulture)
+    {
+        if (string.IsNullOrWhiteSpace(targetCulture))
+            return false;
+
+        var normalized = targetCulture.Trim();
+        if (normalized.StartsWith("zh", StringComparison.OrdinalIgnoreCase))
+            return false;
+
+        return TryGetTargetLanguage(normalized, out var target) &&
+               !target.Equals("zh-TW", StringComparison.OrdinalIgnoreCase);
     }
 
     public static List<(string Text, bool IsCode)> SplitMarkdownIntoParagraphs(string markdown)
@@ -202,6 +222,12 @@ public sealed class TranslationService
             using var doc = JsonDocument.Parse(json);
             var root = doc.RootElement;
 
+            if (!HasUsableResponseStatus(root))
+            {
+                DebugLog.Info("TranslationService", "[Translation] API returned a non-200 responseStatus");
+                return text;
+            }
+
             if (root.TryGetProperty("responseData", out var responseData) &&
                 responseData.TryGetProperty("translatedText", out var translatedText))
             {
@@ -221,6 +247,19 @@ public sealed class TranslationService
             DebugLog.Info("TranslationService", $"[Translation] Error: {ex.Message}");
             return text;
         }
+    }
+
+    private static bool HasUsableResponseStatus(JsonElement root)
+    {
+        if (!root.TryGetProperty("responseStatus", out var status))
+            return true;
+
+        return status.ValueKind switch
+        {
+            JsonValueKind.Number => status.TryGetInt32(out var code) && code == 200,
+            JsonValueKind.String => int.TryParse(status.GetString(), out var code) && code == 200,
+            _ => false
+        };
     }
 
     public async Task<string> TranslateParagraphAsync(string paragraph, string langPair, CancellationToken ct = default)

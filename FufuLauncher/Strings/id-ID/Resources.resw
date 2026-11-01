@@ -9127,4 +9127,10 @@ Detail: {0}</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>Mencari pencapaian berdasarkan id, kata kunci judul, kategori, versi, atau status penyelesaian dan mengembalikan status serta progres yang tepat.</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>Terjemahkan konten plugin</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>Terjemahkan deskripsi plugin dan nama opsi konfigurasi ke bahasa aplikasi menggunakan layanan terjemahan online (memerlukan koneksi internet).</value>
+  </data>
 </root>

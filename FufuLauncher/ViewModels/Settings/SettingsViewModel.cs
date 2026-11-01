@@ -143,6 +143,8 @@ public partial class SettingsViewModel : ObservableRecipient
     [ObservableProperty] private double _pageOverlayTargetOpacity = 0.7;
     [ObservableProperty] private bool _isHamburgerButtonEnabled;
 
+    [ObservableProperty] private bool _isPluginContentTranslationEnabled = true;
+
     [ObservableProperty] private bool _isHideGameNewsCardEnabled;
     [ObservableProperty] private bool _isHideCheckinCardEnabled;
     [ObservableProperty] private bool _isHideDailyNoteCardEnabled = true;

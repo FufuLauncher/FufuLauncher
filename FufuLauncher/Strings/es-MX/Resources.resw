@@ -9131,4 +9131,10 @@ Detalles: {0}</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>Busca logros por id, palabra clave del título, categoría, versión o estado de finalización y devuelve el estado y el progreso exactos.</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>Traducir el contenido de los plugins</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>Traduce las descripciones de los plugins y los nombres de las opciones de configuración al idioma de la aplicación mediante el servicio de traducción en línea (se requiere conexión a Internet).</value>
+  </data>
 </root>

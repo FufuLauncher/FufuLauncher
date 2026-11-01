@@ -9131,4 +9131,10 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>実績ID・タイトルのキーワード・カテゴリ・バージョン・達成状態で実績を検索し、正確な状態と進捗を返します。</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>プラグインの内容を翻訳</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>オンライン翻訳サービスを使用して、プラグインの説明と設定項目名をアプリの表示言語に翻訳します（インターネット接続が必要です）。</value>
+  </data>
 </root>

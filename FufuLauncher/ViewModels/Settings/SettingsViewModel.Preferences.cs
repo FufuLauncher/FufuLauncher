@@ -231,6 +231,15 @@ public partial class SettingsViewModel
     {
         var languageJson = await _localSettingsService.ReadSettingAsync("AppLanguage");
         SelectedLanguage = (AppLanguage)(languageJson != null ? Convert.ToInt32(languageJson) : 0);
+
+        await PluginContentTranslationService.Instance.InitializeAsync();
+        IsPluginContentTranslationEnabled = PluginContentTranslationService.Instance.IsEnabled;
+    }
+
+    partial void OnIsPluginContentTranslationEnabledChanged(bool value)
+    {
+        if (_isInitializing) return;
+        _ = PluginContentTranslationService.Instance.SetEnabledAsync(value);
     }
 
     private async Task LoadWindowBehaviorSectionAsync()

@@ -28,7 +28,8 @@
             <DataTemplate x:Key="BoolTemplate" x:DataType="viewmodels:PluginSettingItem">
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
-                        <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
+                        <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
+                                   MaxWidth="176" VerticalAlignment="Center" />
                         <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
@@ -83,7 +84,8 @@
             <DataTemplate x:Key="KeyTemplate" x:DataType="viewmodels:PluginSettingItem">
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
-                        <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
+                        <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
+                                   MaxWidth="176" VerticalAlignment="Center" />
                         <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
@@ -149,7 +151,8 @@
             <DataTemplate x:Key="NumberTemplate" x:DataType="viewmodels:PluginSettingItem">
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
-                        <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
+                        <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
+                                   MaxWidth="176" VerticalAlignment="Center" />
                         <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
@@ -203,7 +206,8 @@
             <DataTemplate x:Key="StringTemplate" x:DataType="viewmodels:PluginSettingItem">
                 <StackPanel Width="240" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
-                        <TextBlock Text="{x:Bind DisplayName}" FontSize="12" Opacity="0.9" VerticalAlignment="Center" />
+                        <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
+                                   MaxWidth="176" VerticalAlignment="Center" />
                         <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
@@ -475,7 +479,8 @@
                                 HorizontalAlignment="Right" Margin="0,0,24,0">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
                             <TextBlock Text="{x:Bind ViewModel.PluginDeveloper, Mode=OneWay}" FontSize="12"
-                                       FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,0,4" />
+                                       FontWeight="SemiBold" HorizontalAlignment="Right" Margin="0,0,0,4"
+                                       MaxWidth="260" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <TextBlock Text="{helpers:Loc Key=ModifiedDateLabel}" FontSize="12" Opacity="0.6" />
                                 <TextBlock Text="{x:Bind ViewModel.LastModifiedDate, Mode=OneWay}" FontSize="12"

@@ -9122,4 +9122,10 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>आईडी, शीर्षक कीवर्ड, श्रेणी, संस्करण या पूर्णता स्थिति के आधार पर उपलब्धियाँ खोजें और सटीक स्थिति तथा प्रगति लौटाएँ।</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>प्लगइन सामग्री का अनुवाद करें</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>ऑनलाइन अनुवाद सेवा का उपयोग करके प्लगइन विवरण और कॉन्फ़िगरेशन विकल्प नामों को ऐप की भाषा में अनुवादित करें (इंटरनेट कनेक्शन आवश्यक है)।</value>
+  </data>
 </root>

@@ -9528,4 +9528,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>按成就 ID、名称关键词、分区、版本或完成状态搜索成就，返回具体完成状态与进度。</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>翻译插件内容</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>使用在线翻译服务将插件简介与配置项名称翻译为当前界面语言（需要联网）。</value>
+  </data>
 </root>

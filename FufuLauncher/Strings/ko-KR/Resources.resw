@@ -9127,4 +9127,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>업적 ID, 제목 키워드, 카테고리, 버전, 완료 상태로 업적을 검색하고 정확한 상태와 진행도를 반환합니다.</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>플러그인 내용 번역</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>온라인 번역 서비스를 사용하여 플러그인 설명과 설정 항목 이름을 앱 언어로 번역합니다(인터넷 연결 필요).</value>
+  </data>
 </root>

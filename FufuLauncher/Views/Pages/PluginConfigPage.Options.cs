@@ -10,6 +10,7 @@ using System.IO;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
+using FufuLauncher.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -20,6 +21,7 @@ public sealed partial class PluginConfigPage
     private async Task LoadConfigAsync()
     {
         StopGamepadWatcher();
+        CancelContentTranslation();
         _loadCancellation?.Cancel();
         _loadCancellation?.Dispose();
         var cancellation = new CancellationTokenSource();
@@ -44,6 +46,7 @@ public sealed partial class PluginConfigPage
         _pinnedOptions.Clear();
         _regularOptions.Clear();
         _infoItems.Clear();
+        _descriptionInfoItem = null;
         ConfigMessageBar.IsOpen = false;
         ConfigLoadErrorBar.IsOpen = false;
         ConfigLockInfoBar.IsOpen = false;
@@ -91,10 +94,18 @@ public sealed partial class PluginConfigPage
 
             foreach (var item in configuration.GeneralInfo)
             {
-                _infoItems.Add(new PluginConfigInfoItem(item.Key, item.Value));
+                var infoItem = new PluginConfigInfoItem(item.Key, item.Value);
+                if (item.Key.Equals("Description", StringComparison.OrdinalIgnoreCase))
+                {
+                    _descriptionInfoItem = infoItem;
+                }
+
+                _infoItems.Add(infoItem);
             }
 
             UpdatePluginHeader(configuration.GeneralInfo);
+            ApplyCachedTranslations();
+            StartContentTranslation();
             SetSaveStatus("PluginConfigPage_AutoSaveHint".GetLocalized(), "\uE73E");
             SaveStatusPanel.Visibility = configuration.Options.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
             UpdateVisibleOptions();
@@ -168,13 +179,12 @@ public sealed partial class PluginConfigPage
 
         TitleTextBlock.Text = GetInfo("Name", _pluginItem.DisplayName);
         ToolTipService.SetToolTip(TitleTextBlock, TitleTextBlock.Text);
-        DescriptionTextBlock.Text = GetInfo("Description", _pluginItem.Description);
-        if (string.IsNullOrWhiteSpace(DescriptionTextBlock.Text))
-        {
-            DescriptionTextBlock.Text = "PluginConfigPage_AdjustParams".GetLocalized();
-        }
-
-        ToolTipService.SetToolTip(DescriptionTextBlock, DescriptionTextBlock.Text);
+        var description = GetInfo("Description", _pluginItem.Description);
+        _rawDescription = string.IsNullOrWhiteSpace(description) ? string.Empty : description;
+        _defaultDescription = string.IsNullOrWhiteSpace(description)
+            ? "PluginConfigPage_AdjustParams".GetLocalized()
+            : description;
+        ApplyDescriptionText(_defaultDescription);
         DeveloperTextBlock.Text = GetInfo("Developer", _pluginItem.Developer);
         DeveloperTextBlock.Visibility = string.IsNullOrWhiteSpace(DeveloperTextBlock.Text)
             ? Visibility.Collapsed
@@ -200,13 +210,16 @@ public sealed partial class PluginConfigPage
         }
 
         var query = SettingsSearchBox.Text.Trim();
+
+        bool Matches(string? value) =>
+            !string.IsNullOrEmpty(value) && value.Contains(query, StringComparison.CurrentCultureIgnoreCase);
+
         var options = _configuration.Options.Where(option => query.Length == 0 ||
-                                                             option.DisplayName.Contains(query,
-                                                                 StringComparison.CurrentCultureIgnoreCase) ||
-                                                             option.SectionName.Contains(query,
-                                                                 StringComparison.CurrentCultureIgnoreCase) ||
-                                                             option.Description.Contains(query,
-                                                                 StringComparison.CurrentCultureIgnoreCase)).ToArray();
+                                                             Matches(option.DisplayName) ||
+                                                             Matches(option.RawDisplayName) ||
+                                                             Matches(option.SectionName) ||
+                                                             Matches(option.Description) ||
+                                                             Matches(option.RawDescription)).ToArray();
 
         _pinnedOptions.Clear();
         _regularOptions.Clear();
@@ -272,5 +285,172 @@ public sealed partial class PluginConfigPage
         SetSaveStatus("PluginConfigPage_Saving".GetLocalized(), "\uE895");
         _autoSaveTimer.Stop();
         _autoSaveTimer.Start();
+    }
+
+    private void ApplyCachedTranslations()
+    {
+        var translator = PluginContentTranslationService.Instance;
+        if (_configuration == null || !translator.ShouldTranslate)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(_rawDescription) &&
+            translator.TryGetCachedTranslation(_rawDescription, out var cachedDescription))
+        {
+            ApplyDescriptionText(cachedDescription);
+            _descriptionInfoItem?.ApplyTranslatedValue(cachedDescription);
+        }
+
+        foreach (var option in _configuration.Options)
+        {
+            var hasCachedName = translator.TryGetCachedTranslation(option.RawDisplayName, out var cachedName);
+            var hasCachedDescription =
+                translator.TryGetCachedTranslation(option.RawDescription, out var cachedOptionDescription);
+
+            if (hasCachedName || hasCachedDescription)
+            {
+                option.ApplyTranslatedText(hasCachedName ? cachedName : null,
+                    hasCachedDescription ? cachedOptionDescription : null);
+            }
+        }
+    }
+
+    private void ApplyDescriptionText(string text)
+    {
+        DescriptionTextBlock.Text = text;
+        ToolTipService.SetToolTip(DescriptionTextBlock, text);
+    }
+
+    private void StartContentTranslation()
+    {
+        CancelContentTranslation();
+
+        if (_configuration == null || !PluginContentTranslationService.Instance.ShouldTranslate)
+        {
+            return;
+        }
+
+        var cancellation = new CancellationTokenSource();
+        _translationCancellation = cancellation;
+        _ = TranslateContentAsync(cancellation);
+    }
+
+    private void CancelContentTranslation()
+    {
+        var cancellation = _translationCancellation;
+        _translationCancellation = null;
+        cancellation?.Cancel();
+    }
+
+    private void ResetContentTranslation()
+    {
+        ApplyDescriptionText(_defaultDescription);
+        _descriptionInfoItem?.ApplyTranslatedValue(null);
+
+        if (_configuration == null)
+        {
+            return;
+        }
+
+        foreach (var option in _configuration.Options)
+        {
+            option.ApplyTranslatedText(null, null);
+        }
+
+        UpdateVisibleOptions(false);
+    }
+
+    private async Task TranslateContentAsync(CancellationTokenSource cancellation)
+    {
+        var token = cancellation.Token;
+        var translator = PluginContentTranslationService.Instance;
+
+        try
+        {
+            if (!string.IsNullOrEmpty(_rawDescription) &&
+                !translator.TryGetCachedTranslation(_rawDescription, out _))
+            {
+                var translatedDescription = await translator.TranslateAsync(_rawDescription, _rawDescription, token);
+                if (token.IsCancellationRequested)
+                {
+                    return;
+                }
+
+                if (!string.Equals(translatedDescription, _rawDescription, StringComparison.Ordinal))
+                {
+                    DispatcherQueue.TryEnqueue(() =>
+                    {
+                        ApplyDescriptionText(translatedDescription);
+                        _descriptionInfoItem?.ApplyTranslatedValue(translatedDescription);
+                    });
+                }
+            }
+
+            var options = _configuration?.Options.ToArray() ?? Array.Empty<PluginConfigOption>();
+            foreach (var option in options)
+            {
+                token.ThrowIfCancellationRequested();
+
+                var rawName = option.RawDisplayName;
+                var rawDescription = option.RawDescription;
+
+                if (translator.TryGetCachedTranslation(rawName, out _) &&
+                    (string.IsNullOrWhiteSpace(rawDescription) ||
+                     translator.TryGetCachedTranslation(rawDescription, out _)))
+                {
+                    continue;
+                }
+
+                var name = await translator.TranslateAsync(rawName, rawName, token);
+                var description = string.IsNullOrWhiteSpace(rawDescription)
+                    ? string.Empty
+                    : await translator.TranslateAsync(rawDescription, rawDescription, token);
+
+                if (token.IsCancellationRequested)
+                {
+                    return;
+                }
+
+                DispatcherQueue.TryEnqueue(() => option.ApplyTranslatedText(name, description));
+            }
+        }
+        catch (OperationCanceledException)
+        {
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("PluginConfigPage.Options", $"[PluginConfig] Content translation failed: {ex.Message}");
+        }
+        finally
+        {
+            if (ReferenceEquals(_translationCancellation, cancellation))
+            {
+                _translationCancellation = null;
+            }
+
+            cancellation.Dispose();
+        }
+    }
+
+    private void OnContentTranslationSettingChanged(object? sender, EventArgs e)
+    {
+        DispatcherQueue.TryEnqueue(() =>
+        {
+            if (!_isActive || _configuration == null)
+            {
+                return;
+            }
+
+            if (PluginContentTranslationService.Instance.ShouldTranslate)
+            {
+                StartContentTranslation();
+            }
+            else
+            {
+                CancelContentTranslation();
+                ResetContentTranslation();
+            }
+        });
     }
 }

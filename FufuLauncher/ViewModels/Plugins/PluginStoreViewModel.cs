@@ -63,6 +63,7 @@ public partial class PluginStoreViewModel : INotifyPropertyChanged
         _localSettingsService = localSettingsService;
 
         _luaInstaller.ProgressChanged += OnInstallProgress;
+        PluginContentTranslationService.Instance.EnabledChanged += OnContentTranslationSettingChanged;
 
         RefreshCommand = new RelayCommand(async () => await LoadPluginsAsync());
         SearchCommand = new RelayCommand(async () => await SearchAsync());
@@ -272,6 +273,19 @@ public partial class PluginStoreViewModel : INotifyPropertyChanged
             OnPropertyChanged();
             _ = _localSettingsService.SaveSettingAsync(PluginMirrorDownloadService.SettingKey, value);
         }
+    }
+
+    private void OnContentTranslationSettingChanged(object? sender, EventArgs e)
+    {
+        PluginContentTranslationService.RunOnUiThread(() =>
+        {
+            if (Plugins.Count == 0)
+            {
+                return;
+            }
+
+            _ = LoadPluginsAsync();
+        });
     }
 
     private async Task LoadMirrorAccelerationSettingAsync()

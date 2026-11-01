@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
+using FufuLauncher.Services;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 
@@ -172,6 +173,7 @@ public partial class PluginSettingsViewModel
     private async Task LoadConfigurationProgressivelyAsync(CancellationTokenSource cancellation)
     {
         var token = cancellation.Token;
+        Interlocked.Increment(ref _contentTranslationVersion);
         try
         {
             await YieldConfigurationPresentationAsync(token);
@@ -232,6 +234,12 @@ public partial class PluginSettingsViewModel
             PluginDescription = snapshot.Description;
             PluginDeveloper = snapshot.Developer;
             LastModifiedDate = snapshot.LastModified;
+
+            if (PluginContentTranslationService.Instance.TryGetCachedTranslation(snapshot.RawDescription,
+                    out var cachedDescription))
+            {
+                PluginDescription = cachedDescription;
+            }
             _presetsDir = snapshot.PresetState!.Directory;
             CurrentPreset = snapshot.PresetState.CurrentPreset;
             foreach (var notification in snapshot.PresetState.Notifications)
@@ -260,6 +268,8 @@ public partial class PluginSettingsViewModel
             var currentPreset = CurrentPreset;
             var ordered = snapshot.Settings.Where(setting => IsSettingPinned(setting.Section))
                 .Concat(snapshot.Settings.Where(setting => !IsSettingPinned(setting.Section))).ToArray();
+            var useTranslation = PluginContentTranslationService.Instance.ShouldTranslate;
+            var translationRequests = new List<SettingTranslationRequest>();
             var restoredSettingNames = new List<string>();
             var budget = Stopwatch.StartNew();
             var batchCount = 0;
@@ -271,8 +281,11 @@ public partial class PluginSettingsViewModel
                     return;
                 }
 
-                var item = new PluginSettingItem(request.IniFile, setting.Section, setting.Name, setting.Type,
-                    setting.Value, setting.Help, (section, key, value) =>
+                var hasCachedName = PluginContentTranslationService.Instance.TryGetCachedTranslation(
+                    setting.RawName, out var cachedName);
+                var item = new PluginSettingItem(request.IniFile, setting.Section,
+                    hasCachedName ? cachedName : setting.FallbackName,
+                    setting.Type, setting.Value, setting.Help, (section, key, value) =>
                     {
                         if (IsCurrentConfiguration(cancellation, token) &&
                             ReferenceEquals(CurrentPreset, currentPreset))
@@ -280,6 +293,11 @@ public partial class PluginSettingsViewModel
                             OnSettingValueChanged(section, key, value);
                         }
                     }, UseKeyListInput, () => IsCurrentConfiguration(cancellation, token) && IsConfigurationReady);
+
+                if (useTranslation && !hasCachedName)
+                {
+                    translationRequests.Add(new SettingTranslationRequest(item, setting.RawName, setting.FallbackName));
+                }
 
                 if (ApplySettingDisableGuard(item))
                 {
@@ -307,6 +325,7 @@ public partial class PluginSettingsViewModel
             }
 
             NotifySettingDisablesRestored(restoredSettingNames);
+            QueueContentTranslation(translationRequests, snapshot.RawDescription);
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested)
         {
@@ -420,7 +439,7 @@ public partial class PluginSettingsViewModel
         token.ThrowIfCancellationRequested();
         if (!ConfigurationFileExists(request.IniPath))
         {
-            return new ConfigurationLoadSnapshot(false, string.Empty, string.Empty, string.Empty, string.Empty,
+            return new ConfigurationLoadSnapshot(false, string.Empty, string.Empty, null, string.Empty, string.Empty,
                 Array.Empty<ConfigurationSetting>(), null);
         }
 
@@ -450,22 +469,28 @@ public partial class PluginSettingsViewModel
                 continue;
             }
 
-            var name = section.Value.GetValueOrDefault("Name", section.Key);
+            var rawName = section.Value.GetValueOrDefault("Name", section.Key);
+            var fallbackName = rawName;
             if (request.PluginIndex == 0)
             {
                 var key = $"Plugin_{section.Key}";
                 var localized = key.GetLocalized();
-                name = localized != key ? localized : name;
+                fallbackName = localized != key ? localized : rawName;
             }
 
-            settings.Add(new ConfigurationSetting(section.Key, name, section.Value.GetValueOrDefault("Type", "string"),
+            settings.Add(new ConfigurationSetting(section.Key, rawName, fallbackName,
+                section.Value.GetValueOrDefault("Type", "string"),
                 section.Value.GetValueOrDefault("Value", string.Empty),
                 section.Value.GetValueOrDefault("help", string.Empty)));
         }
 
+        var rawDescription = general.GetValueOrDefault("Description");
         return new ConfigurationLoadSnapshot(true,
             general.GetValueOrDefault("Name", "PluginSettings_UnknownPlugin".GetLocalized()),
-            general.GetValueOrDefault("Description", "PluginSettings_NoDescription".GetLocalized()),
+            string.IsNullOrWhiteSpace(rawDescription)
+                ? "PluginSettings_NoDescription".GetLocalized()
+                : rawDescription,
+            rawDescription,
             general.GetValueOrDefault("Developer", "PluginSettings_UnknownDeveloper".GetLocalized()),
             File.GetLastWriteTime(request.IniPath).ToString("yyyy-MM-dd HH:mm:ss"), settings, presets);
     }
@@ -487,12 +512,14 @@ public partial class PluginSettingsViewModel
         bool DeveloperFeatures,
         bool AutoCreatePresets);
 
-    private sealed record ConfigurationSetting(string Section, string Name, string Type, string Value, string Help);
+    private sealed record ConfigurationSetting(string Section, string RawName, string FallbackName, string Type,
+        string Value, string Help);
 
     private sealed record ConfigurationLoadSnapshot(
         bool Exists,
         string Name,
         string Description,
+        string? RawDescription,
         string Developer,
         string LastModified,
         IReadOnlyList<ConfigurationSetting> Settings,

@@ -224,6 +224,13 @@ public class PluginViewModel : INotifyPropertyChanged
                     if (!string.IsNullOrEmpty(info.Description)) description = info.Description;
                 }
 
+                if (!string.IsNullOrEmpty(description) &&
+                    PluginContentTranslationService.Instance.TryGetCachedTranslation(description,
+                        out var cachedDescription))
+                {
+                    description = cachedDescription;
+                }
+
                 if (!nameConflictTracker.ContainsKey(displayName))
                 {
                     nameConflictTracker[displayName] = new List<string>();
@@ -251,6 +258,7 @@ public class PluginViewModel : INotifyPropertyChanged
 
             StatusMessage = string.Format("Plugin_LoadDoneCount_Format".GetLocalized(), Plugins.Count);
             CheckForDuplicates(nameConflictTracker);
+            QueueDescriptionTranslation(Plugins.ToArray());
         }
         catch (Exception ex)
         {
@@ -595,6 +603,58 @@ public class PluginViewModel : INotifyPropertyChanged
         }
         catch
         {
+        }
+    }
+
+    private int _descriptionTranslationVersion;
+
+    private void QueueDescriptionTranslation(IReadOnlyList<PluginItem> items)
+    {
+        var version = Interlocked.Increment(ref _descriptionTranslationVersion);
+        if (items.Count == 0 || !PluginContentTranslationService.Instance.ShouldTranslate)
+        {
+            return;
+        }
+
+        _ = TranslateDescriptionsAsync(version, items);
+    }
+
+    private async Task TranslateDescriptionsAsync(int version, IReadOnlyList<PluginItem> items)
+    {
+        var translator = PluginContentTranslationService.Instance;
+
+        try
+        {
+            foreach (var item in items)
+            {
+                if (version != Volatile.Read(ref _descriptionTranslationVersion))
+                {
+                    return;
+                }
+
+                var original = item.Description;
+                if (string.IsNullOrWhiteSpace(original))
+                {
+                    continue;
+                }
+
+                var translated = await translator.TranslateAsync(original, original);
+                if (version != Volatile.Read(ref _descriptionTranslationVersion))
+                {
+                    return;
+                }
+
+                if (string.Equals(translated, original, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                PluginContentTranslationService.RunOnUiThread(() => item.Description = translated);
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("PluginViewModel", $"[PluginVM] Description translation failed: {ex.Message}");
         }
     }
 

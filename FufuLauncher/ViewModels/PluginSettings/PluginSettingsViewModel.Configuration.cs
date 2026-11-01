@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
+using FufuLauncher.Services;
 
 namespace FufuLauncher.ViewModels;
 
@@ -24,6 +25,8 @@ public partial class PluginSettingsViewModel
         LoadConfigurationSynchronously();
     }
 
+    private int _contentTranslationVersion;
+
     private void LoadConfigurationSynchronously()
     {
         Settings.Clear();
@@ -31,6 +34,8 @@ public partial class PluginSettingsViewModel
         _settingOrder.Clear();
         _settingOrderIndexes.Clear();
         NotifySelectionChanged();
+
+        Interlocked.Increment(ref _contentTranslationVersion);
 
         if (!File.Exists(_iniPath))
         {
@@ -87,13 +92,7 @@ public partial class PluginSettingsViewModel
 
                 var dic = section.Value;
                 var iniName = dic.GetValueOrDefault("Name", section.Key);
-                var name = iniName;
-                if (SelectedPluginIndex == 0)
-                {
-                    var localizationKey = $"Plugin_{section.Key}";
-                    var localizedName = localizationKey.GetLocalized();
-                    name = localizedName != localizationKey ? localizedName : iniName;
-                }
+                var name = ResolveLocalizedSettingName(section.Key, iniName);
 
                 var type = dic.GetValueOrDefault("Type", "string");
                 var value = dic.GetValueOrDefault("Value", "");
@@ -133,6 +132,79 @@ public partial class PluginSettingsViewModel
             ));
         }
     }
+
+    private string ResolveLocalizedSettingName(string sectionKey, string iniName)
+    {
+        if (SelectedPluginIndex != 0)
+        {
+            return iniName;
+        }
+
+        var localizationKey = $"Plugin_{sectionKey}";
+        var localizedName = localizationKey.GetLocalized();
+        return localizedName != localizationKey ? localizedName : iniName;
+    }
+
+    private void QueueContentTranslation(IReadOnlyList<SettingTranslationRequest> requests, string? rawDescription)
+    {
+        if (!PluginContentTranslationService.Instance.ShouldTranslate)
+        {
+            return;
+        }
+
+        if (requests.Count == 0 && string.IsNullOrWhiteSpace(rawDescription))
+        {
+            return;
+        }
+
+        var version = Volatile.Read(ref _contentTranslationVersion);
+        _ = RunContentTranslationAsync(version, requests, rawDescription);
+    }
+
+    private async Task RunContentTranslationAsync(int version,
+        IReadOnlyList<SettingTranslationRequest> requests, string? rawDescription)
+    {
+        var translator = PluginContentTranslationService.Instance;
+
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(rawDescription) &&
+                !translator.TryGetCachedTranslation(rawDescription, out _))
+            {
+                var translatedDescription = await translator.TranslateAsync(rawDescription, rawDescription);
+                if (version != Volatile.Read(ref _contentTranslationVersion))
+                {
+                    return;
+                }
+
+                PluginContentTranslationService.RunOnUiThread(() => PluginDescription = translatedDescription);
+            }
+
+            foreach (var request in requests)
+            {
+                if (version != Volatile.Read(ref _contentTranslationVersion))
+                {
+                    return;
+                }
+
+                var translated = await translator.TranslateAsync(request.RawName, request.FallbackName);
+                if (version != Volatile.Read(ref _contentTranslationVersion))
+                {
+                    return;
+                }
+
+                PluginContentTranslationService.RunOnUiThread(
+                    () => request.Item.ApplyTranslatedDisplayName(translated));
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("PluginSettingsViewModel.Configuration",
+                $"[PluginSettings] Content translation failed: {ex.Message}");
+        }
+    }
+
+    private sealed record SettingTranslationRequest(PluginSettingItem Item, string RawName, string FallbackName);
 
     #endregion
 }

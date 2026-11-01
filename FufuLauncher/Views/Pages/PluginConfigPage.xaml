@@ -20,14 +20,14 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="{x:Bind DisplayName}"
-                           MaxWidth="{x:Bind HeaderTextMaxWidth}"
+                <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}"
+                           MaxWidth="{x:Bind HeaderTextMaxWidth, Mode=OneWay}"
                            Style="{StaticResource PluginSettingLabelStyle}"
-                           ToolTipService.ToolTip="{x:Bind ToolTipText}" />
+                           ToolTipService.ToolTip="{x:Bind ToolTipText, Mode=OneWay}" />
                 <Button Grid.Column="1"
                         Margin="4,0,0,0"
                         Style="{StaticResource PluginSettingActionButtonStyle}"
-                        Visibility="{x:Bind HasDescription, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Visibility="{x:Bind HasDescription, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                         ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}"
                         AutomationProperties.Name="{helpers:Loc Key=ViewHelpTooltip}">
                     <FontIcon Glyph="&#xE9CE;" FontSize="12" />
@@ -45,8 +45,9 @@
                             <ScrollViewer MaxHeight="420" HorizontalScrollMode="Disabled"
                                           HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                                 <StackPanel Spacing="8" MaxWidth="560">
-                                    <TextBlock Text="{x:Bind DisplayName}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                    <TextBlock Text="{x:Bind Description}" TextWrapping="Wrap"
+                                    <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontWeight="SemiBold"
+                                               TextWrapping="Wrap" />
+                                    <TextBlock Text="{x:Bind Description, Mode=OneWay}" TextWrapping="Wrap"
                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                 </StackPanel>
                             </ScrollViewer>
@@ -70,7 +71,7 @@
                 <ToggleSwitch IsOn="{x:Bind BooleanValue, Mode=TwoWay}"
                               OnContent="{helpers:Loc Key=OnLabel}" OffContent="{helpers:Loc Key=OffLabel}"
                               MinWidth="0" Margin="0"
-                              AutomationProperties.Name="{x:Bind DisplayName}" />
+                              AutomationProperties.Name="{x:Bind DisplayName, Mode=OneWay}" />
             </StackPanel>
         </DataTemplate>
 
@@ -82,7 +83,7 @@
                            Minimum="{x:Bind Minimum}" Maximum="{x:Bind Maximum}"
                            SmallChange="{x:Bind SmallChange}" LargeChange="10"
                            SpinButtonPlacementMode="Inline" Width="200" HorizontalAlignment="Left"
-                           AutomationProperties.Name="{x:Bind DisplayName}" />
+                           AutomationProperties.Name="{x:Bind DisplayName, Mode=OneWay}" />
             </StackPanel>
         </DataTemplate>
 
@@ -94,7 +95,7 @@
                          TextChanged="OnTextOptionChanged"
                          PlaceholderText="{helpers:Loc Key=PluginConfigPage_ValuePlaceholder}"
                          Width="200" HorizontalAlignment="Left"
-                         AutomationProperties.Name="{x:Bind DisplayName}" />
+                         AutomationProperties.Name="{x:Bind DisplayName, Mode=OneWay}" />
             </StackPanel>
         </DataTemplate>
 
@@ -108,13 +109,13 @@
                               DisplayMemberPath="Label"
                               Visibility="{x:Bind ShowChoiceList, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                               Width="200" HorizontalAlignment="Left"
-                              AutomationProperties.Name="{x:Bind DisplayName}" />
+                              AutomationProperties.Name="{x:Bind DisplayName, Mode=OneWay}" />
                     <NumberBox Value="{x:Bind KeyNumberValue, Mode=TwoWay}"
                                Minimum="-2147483648" Maximum="2147483647"
                                SmallChange="1" SpinButtonPlacementMode="Inline"
                                Visibility="{x:Bind ShowKeyNumber, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}"
                                Width="200" HorizontalAlignment="Left"
-                               AutomationProperties.Name="{x:Bind DisplayName}" />
+                               AutomationProperties.Name="{x:Bind DisplayName, Mode=OneWay}" />
                 </Grid>
             </StackPanel>
         </DataTemplate>
@@ -263,7 +264,7 @@
                                                     </Grid.ColumnDefinitions>
                                                     <TextBlock Text="{x:Bind Key}" FontSize="12" TextWrapping="Wrap"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                    <TextBlock Grid.Column="1" Text="{x:Bind Value}" FontSize="12"
+                                                    <TextBlock Grid.Column="1" Text="{x:Bind Value, Mode=OneWay}" FontSize="12"
                                                                Margin="12,0,0,0" TextWrapping="Wrap"
                                                                IsTextSelectionEnabled="True" />
                                                 </Grid>

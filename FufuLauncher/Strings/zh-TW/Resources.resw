@@ -9127,4 +9127,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="McpTool_SearchAchievementsCaption" xml:space="preserve">
     <value>依成就 ID、名稱關鍵字、分區、版本或完成狀態搜尋成就，回傳具體完成狀態與進度。</value>
   </data>
+  <data name="TranslatePluginContentTitle" xml:space="preserve">
+    <value>翻譯外掛內容</value>
+  </data>
+  <data name="TranslatePluginContentCaption" xml:space="preserve">
+    <value>使用線上翻譯服務將外掛簡介與設定項目名稱翻譯為目前介面語言（需要連網）。</value>
+  </data>
 </root>

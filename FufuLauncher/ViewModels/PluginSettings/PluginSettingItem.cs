@@ -17,14 +17,27 @@ public class PluginSettingItem : PinnablePluginSetting
     private readonly Action<string, string, string> _onValueChanged;
     private readonly Func<bool>? _canChangeValue;
 
+    private string _displayName;
+
     public string SectionKey
+    {
+        get;
+    }
+
+    public string RawDisplayName
     {
         get;
     }
 
     public string DisplayName
     {
-        get;
+        get => _displayName;
+        private set => SetProperty(ref _displayName, value);
+    }
+
+    public void ApplyTranslatedDisplayName(string? displayName)
+    {
+        DisplayName = string.IsNullOrWhiteSpace(displayName) ? RawDisplayName : displayName.Trim();
     }
 
     public string Type
@@ -100,7 +113,8 @@ public class PluginSettingItem : PinnablePluginSetting
     {
         _iniFile = iniFile;
         SectionKey = sectionKey;
-        DisplayName = displayName;
+        RawDisplayName = displayName ?? string.Empty;
+        _displayName = RawDisplayName;
         Type = type;
         _rawValue = value;
         HelpUrl = helpUrl;
@@ -169,7 +183,8 @@ public class PluginSettingItem : PinnablePluginSetting
     {
         _iniFile = iniFile;
         SectionKey = sectionKey;
-        DisplayName = displayName;
+        RawDisplayName = displayName ?? string.Empty;
+        _displayName = RawDisplayName;
         Type = type;
         _rawValue = value;
         _onValueChanged = onValueChanged;
