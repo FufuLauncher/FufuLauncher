@@ -9164,4 +9164,10 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>{0} 個の項目を追加し、{1} 個の項目を削除しました</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>テレメトリを使用する</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>統計と問題調査のために利用状況を送信します</value>
+  </data>
 </root>

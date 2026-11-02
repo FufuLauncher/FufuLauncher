@@ -9160,4 +9160,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>新增 {0} 個配置項目，移除 {1} 個配置項目</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>使用遙測</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>傳送使用情況，用於統計與問題排查</value>
+  </data>
 </root>

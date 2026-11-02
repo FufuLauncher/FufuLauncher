@@ -9164,4 +9164,10 @@ Details: {0}</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>{0} Option(en) hinzugefügt, {1} Option(en) entfernt</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>Telemetrie verwenden</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>Nutzungsinformationen für Statistik und Fehleranalyse senden</value>
+  </data>
 </root>

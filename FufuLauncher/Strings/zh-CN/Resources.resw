@@ -9567,4 +9567,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>新增 {0} 个配置项，移除 {1} 个配置项</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>使用遥测</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>发送使用情况，用于统计与问题排查</value>
+  </data>
 </root>

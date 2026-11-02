@@ -9160,4 +9160,10 @@ Detail: {0}</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>{0} opsi ditambahkan, {1} opsi dihapus</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>Gunakan telemetri</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>Kirim informasi penggunaan untuk statistik dan pemecahan masalah</value>
+  </data>
 </root>

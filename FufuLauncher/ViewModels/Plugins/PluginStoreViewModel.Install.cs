@@ -191,6 +191,8 @@ public partial class PluginStoreViewModel
                     return PluginInstallOutcome.Failed;
                 }
 
+                await RecordStoreInstallAsync(item, pluginDir);
+
                 item.InstallProgress = 100;
                 item.InstallProgressPercent = 100.0;
                 item.InstallStatusText = "PluginStoreInstallComplete".GetLocalized();
@@ -299,6 +301,44 @@ public partial class PluginStoreViewModel
         else
         {
             _dispatcher.TryEnqueue(() => Apply());
+        }
+    }
+
+    private static async Task RecordStoreInstallAsync(PluginStoreItem item, string pluginDir)
+    {
+        try
+        {
+            var dllPath = ResolveInstalledDllPath(pluginDir, item.DllFileName);
+            if (dllPath == null) return;
+
+            await App.GetService<PluginProvenanceStore>()
+                .RecordAsync(item.Id, PluginProvenanceStore.SourcePluginStore, dllPath, item.Version)
+                .ConfigureAwait(false);
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("PluginStoreViewModel.Install",
+                $"[PluginStoreVM] Failed to record plugin provenance: {ex.Message}");
+        }
+    }
+
+    private static string? ResolveInstalledDllPath(string pluginDir, string? dllFileName)
+    {
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(dllFileName))
+            {
+                var candidate = Path.Combine(pluginDir, dllFileName);
+                if (File.Exists(candidate)) return candidate;
+            }
+
+            if (!Directory.Exists(pluginDir)) return null;
+
+            return Directory.GetFiles(pluginDir, "*.dll", SearchOption.TopDirectoryOnly).FirstOrDefault();
+        }
+        catch
+        {
+            return null;
         }
     }
 

@@ -9572,4 +9572,10 @@ Details: {0}</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>Added {0} option(s), removed {1} option(s)</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>Usage telemetry</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>Send usage information for statistics and troubleshooting</value>
+  </data>
 </root>

@@ -9160,4 +9160,10 @@ Click the button below to open your browser and download manually.</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>Добавлено параметров: {0}, удалено: {1}</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>Использовать телеметрию</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>Отправлять сведения об использовании для статистики и диагностики</value>
+  </data>
 </root>

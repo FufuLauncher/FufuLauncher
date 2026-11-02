@@ -64,6 +64,8 @@ namespace FufuLauncher.Services
 
         public const string HasShownSecurityWarningKey = "HasShownSecurityWarning";
 
+        public const string IsTelemetryEnabledKey = "IsTelemetryEnabled";
+
         public const string HasDismissedFpsWarningKey = "HasDismissedFpsWarning";
 
         public const string AnnouncementViewModeKey = "AnnouncementViewMode";

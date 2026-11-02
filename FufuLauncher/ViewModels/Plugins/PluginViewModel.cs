@@ -269,6 +269,32 @@ public class PluginViewModel : INotifyPropertyChanged
         {
             IsLoading = false;
             UpdateIsEmpty();
+            TriggerPluginAudit();
+        }
+    }
+
+    private void TriggerPluginAudit()
+    {
+        try
+        {
+            if (Plugins.Count == 0) return;
+
+            var entries = new List<PluginAuditEntry>(Plugins.Count);
+            foreach (var item in Plugins)
+            {
+                entries.Add(new PluginAuditEntry(
+                    new DirectoryInfo(item.DirectoryPath).Name,
+                    item.FileName,
+                    item.FullPath,
+                    item.ConfigFilePath,
+                    item.IsEnabled));
+            }
+
+            _ = App.GetService<PluginAuditReporter>().ScanAsync(entries);
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("PluginViewModel", $"[PluginVM] Plugin audit trigger failed: {ex.Message}");
         }
     }
 
@@ -333,6 +359,9 @@ public class PluginViewModel : INotifyPropertyChanged
 
                 var destPath = Path.Combine(destFolderPath, fileName);
                 File.Copy(path, destPath, true);
+
+                await App.GetService<PluginProvenanceStore>()
+                    .RecordAsync(folderName, PluginProvenanceStore.SourceLauncherImport, destPath, null);
 
                 var configPath = Path.Combine(destFolderPath, "config.ini");
                 if (!File.Exists(configPath))

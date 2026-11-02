@@ -9163,4 +9163,10 @@ Détails : {0}</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>{0} option(s) ajoutée(s), {1} option(s) supprimée(s)</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>Utiliser la télémétrie</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>Envoyer des informations d'utilisation pour les statistiques et le dépannage</value>
+  </data>
 </root>

@@ -9155,4 +9155,10 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>{0} विकल्प जोड़े गए, {1} विकल्प हटाए गए</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>टेलीमेट्री का उपयोग करें</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>सांख्यिकी और समस्या निवारण के लिए उपयोग जानकारी भेजें</value>
+  </data>
 </root>

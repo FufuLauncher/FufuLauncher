@@ -292,9 +292,18 @@ public partial class SettingsViewModel
         }
     }
 
+    partial void OnIsTelemetryEnabledChanged(bool value)
+    {
+        if (_isInitializing) return;
+        _ = _localSettingsService.SaveSettingAsync(LocalSettingsService.IsTelemetryEnabledKey, value);
+    }
+
     private async Task LoadAdvancedOptionsSectionAsync()
     {
         UpdateWebView2CacheSizeAsync();
+
+        var telemetryJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.IsTelemetryEnabledKey);
+        IsTelemetryEnabled = telemetryJson == null || Convert.ToBoolean(telemetryJson);
 
         var cpuWarningEnabledJson =
             await _localSettingsService.ReadSettingAsync(ProcessCpuUsageMonitor.IsEnabledSettingKey);

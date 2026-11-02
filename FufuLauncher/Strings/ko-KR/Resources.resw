@@ -9160,4 +9160,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>{0}개 항목을 추가하고 {1}개 항목을 제거했습니다</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>원격 측정 사용</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>통계 및 문제 진단을 위해 사용 정보를 전송합니다</value>
+  </data>
 </root>

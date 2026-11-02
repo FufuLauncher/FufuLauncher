@@ -242,6 +242,10 @@ namespace FufuLauncher.Constants
         public const string ConstraintStatusUrl = "https://fu1.fun/constraint.json";
         public const string ConstraintDialogUrl = "https://fu1.fun/dialog.json";
 
+        public const string TelemetryBaseUrl = "https://data.fufu.skin";
+        public const string TelemetryChallengeUrl = TelemetryBaseUrl + "/api/v1/challenge";
+        public const string TelemetrySubmitUrl = TelemetryBaseUrl + "/api/v1/telemetry";
+
         public const string BanCheckUrl = "https://fu1.fun/Unlock.json";
 
         public const string SentryDsn =

@@ -9170,4 +9170,10 @@ Dettagli: {0}</value>
   <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
     <value>Aggiunte {0} opzione/i, rimosse {1} opzione/i</value>
   </data>
+  <data name="Settings_Telemetry_Title" xml:space="preserve">
+    <value>Usa la telemetria</value>
+  </data>
+  <data name="Settings_Telemetry_Caption" xml:space="preserve">
+    <value>Invia informazioni sull'utilizzo per statistiche e risoluzione dei problemi</value>
+  </data>
 </root>
