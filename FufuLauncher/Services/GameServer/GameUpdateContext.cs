@@ -86,7 +86,7 @@ public sealed class GameUpdateContext
         get;
     } = new();
 
-    public ConcurrentDictionary<string, byte> DownloadedPatches
+    public ConcurrentDictionary<string, byte> ValidatedChunks
     {
         get;
     } = new(StringComparer.Ordinal);

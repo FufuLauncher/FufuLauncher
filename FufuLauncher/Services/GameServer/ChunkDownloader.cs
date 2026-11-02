@@ -35,20 +35,16 @@ public sealed class ChunkDownloader
     {
         Directory.CreateDirectory(chunksDir);
         string chunkPath = Path.Combine(chunksDir, name);
-        string expectedHashPrefix = name.Split('_')[0];
+        string expectedHashPrefix = GetHashPrefix(name);
 
         using (await chunkLocks.LockAsync(name, token).ConfigureAwait(false))
         {
-            if (File.Exists(chunkPath))
+            if (await IsCachedBlobValidAsync(chunksDir, name, expectedSize, token).ConfigureAwait(false))
             {
-                if (new FileInfo(chunkPath).Length == expectedSize &&
-                    await IsValidChunkAsync(chunkPath, expectedHashPrefix, token).ConfigureAwait(false))
-                {
-                    return chunkPath;
-                }
-
-                File.Delete(chunkPath);
+                return chunkPath;
             }
+
+            TryDeleteFile(chunkPath);
 
             for (int attempt = 1; attempt <= MaxAttempts; attempt++)
             {
@@ -223,6 +219,36 @@ public sealed class ChunkDownloader
         }
     }
 
+    public async Task<bool> IsCachedBlobValidAsync(string chunksDir, string name, long expectedSize,
+        CancellationToken token = default)
+    {
+        string chunkPath = Path.Combine(chunksDir, name);
+        try
+        {
+            var info = new FileInfo(chunkPath);
+            if (!info.Exists || info.Length != expectedSize)
+            {
+                return false;
+            }
+
+            return await IsValidChunkAsync(chunkPath, GetHashPrefix(name), token).ConfigureAwait(false);
+        }
+        catch (IOException)
+        {
+            return false;
+        }
+        catch (UnauthorizedAccessException)
+        {
+            return false;
+        }
+    }
+
+    public static string GetHashPrefix(string name)
+    {
+        int separatorIndex = name.IndexOf('_');
+        return separatorIndex >= 0 ? name[..separatorIndex] : name;
+    }
+
     private static async Task<bool> IsValidChunkAsync(string chunkPath, string expectedHashPrefix,
         CancellationToken token)
     {
@@ -233,6 +259,10 @@ public sealed class ChunkDownloader
             return actualHash.Equals(expectedHashPrefix, StringComparison.OrdinalIgnoreCase);
         }
         catch (IOException)
+        {
+            return false;
+        }
+        catch (UnauthorizedAccessException)
         {
             return false;
         }

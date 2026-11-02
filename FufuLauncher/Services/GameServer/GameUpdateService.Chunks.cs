@@ -45,32 +45,40 @@ public sealed partial class GameUpdateService
     }
 
     private async Task DownloadOperationChunksAsync(GameUpdateContext context,
-        List<GameUpdateAssetOperation> operations, string stage)
+        List<GameUpdateAssetOperation> operations, string stage, ChunkCacheScan? scan = null)
     {
-        List<SophonChunk> chunks = operations.SelectMany(operation => operation.Chunks).ToList();
-        if (chunks.Count == 0)
+        var chunkByName = new Dictionary<string, SophonChunk>(StringComparer.Ordinal);
+        foreach (var chunk in operations.SelectMany(operation => operation.Chunks))
+        {
+            chunkByName.TryAdd(chunk.AssetChunk.ChunkName, chunk);
+        }
+
+        if (chunkByName.Count == 0)
         {
             return;
         }
 
-        long totalBytes = chunks.Sum(chunk => chunk.AssetChunk.ChunkSize);
-        var pendingNames = chunks.Select(chunk => chunk.AssetChunk.ChunkName).Distinct(StringComparer.Ordinal).ToList();
-        context.Progress.Report(GameServerConversionProgress.Reset(stage, chunks.Count, totalBytes, pendingNames));
+        Dictionary<string, long> blocks = GetDownloadBlocks([], operations);
+        ChunkCacheScan cacheScan = scan ?? await ScanChunkCacheAsync(context, blocks).ConfigureAwait(false);
+        context.Progress.Report(new GameServerConversionProgress(stage, blocks.Count, cacheScan.CachedNames.Count,
+            cacheScan.TotalBytes, cacheScan.CachedBytes, null, cacheScan.PendingNames));
 
-        long doneChunks = 0;
-        long doneBytes = 0;
+        long doneChunks = cacheScan.CachedNames.Count;
+        long doneBytes = cacheScan.CachedBytes;
         Action<long>? onBytesTransferred = context.DownloadMonitor is null ? null : context.DownloadMonitor.AddBytes;
 
-        await Parallel.ForEachAsync(chunks, context.ParallelOptions, async (chunk, token) =>
+        await Parallel.ForEachAsync(cacheScan.PendingNames, context.ParallelOptions, async (name, token) =>
         {
             await _chunkDownloader
-                .DownloadChunkAsync(chunk, context.ChunksDir, context.ChunkLocks, token, onBytesTransferred)
+                .DownloadChunkAsync(chunkByName[name], context.ChunksDir, context.ChunkLocks, token,
+                    onBytesTransferred)
                 .ConfigureAwait(false);
+            context.ValidatedChunks.TryAdd(name, 0);
 
             long current = Interlocked.Increment(ref doneChunks);
-            long bytes = Interlocked.Add(ref doneBytes, chunk.AssetChunk.ChunkSize);
-            context.Progress.Report(new GameServerConversionProgress(stage, chunks.Count, (int)current, totalBytes,
-                bytes, chunk.AssetChunk.ChunkName));
+            long bytes = Interlocked.Add(ref doneBytes, blocks[name]);
+            context.Progress.Report(new GameServerConversionProgress(stage, blocks.Count, (int)current,
+                cacheScan.TotalBytes, bytes, name));
         }).ConfigureAwait(false);
     }
 

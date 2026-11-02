@@ -117,35 +117,47 @@ public sealed partial class GameUpdateService
         return assets;
     }
 
-    private async Task PredownloadPatchesAsync(GameUpdateContext context, List<SophonPatchAsset> assets)
+    private async Task PredownloadPatchesAsync(GameUpdateContext context, List<SophonPatchAsset> assets,
+        ChunkCacheScan? scan = null)
     {
-        var distinct = assets.GroupBy(asset => asset.PatchInfo.Id, StringComparer.Ordinal)
-            .Select(group => group.First()).ToList();
+        var distinct = new Dictionary<string, SophonPatchAsset>(StringComparer.Ordinal);
+        foreach (var asset in assets)
+        {
+            distinct.TryAdd(asset.PatchInfo.Id, asset);
+        }
+
         if (distinct.Count == 0)
         {
             return;
         }
 
-        string stage = "GameServer_StageDownloadChunks".GetLocalized();
-        long totalBytes = distinct.Sum(asset => asset.PatchInfo.PatchFileSize);
-        context.Progress.Report(GameServerConversionProgress.Reset(stage, distinct.Count, totalBytes,
-            distinct.Select(asset => asset.PatchInfo.Id).ToList()));
+        var blocks = new Dictionary<string, long>(StringComparer.Ordinal);
+        foreach (var item in distinct)
+        {
+            blocks[item.Key] = item.Value.PatchInfo.PatchFileSize;
+        }
 
-        long doneBytes = 0;
-        for (int i = 0; i < distinct.Count; i++)
+        string stage = "GameServer_StageDownloadChunks".GetLocalized();
+        ChunkCacheScan cacheScan = scan ?? await ScanChunkCacheAsync(context, blocks).ConfigureAwait(false);
+        context.Progress.Report(new GameServerConversionProgress(stage, blocks.Count, cacheScan.CachedNames.Count,
+            cacheScan.TotalBytes, cacheScan.CachedBytes, null, cacheScan.PendingNames));
+
+        long doneChunks = cacheScan.CachedNames.Count;
+        long doneBytes = cacheScan.CachedBytes;
+        foreach (string name in cacheScan.PendingNames)
         {
             context.Token.ThrowIfCancellationRequested();
-            SophonPatchAsset asset = distinct[i];
-            await DownloadPatchAsync(context, asset).ConfigureAwait(false);
-            doneBytes += asset.PatchInfo.PatchFileSize;
-            context.Progress.Report(new GameServerConversionProgress(stage, distinct.Count, i + 1, totalBytes,
-                doneBytes, asset.PatchInfo.Id));
+            await DownloadPatchAsync(context, distinct[name]).ConfigureAwait(false);
+            long current = Interlocked.Increment(ref doneChunks);
+            doneBytes += blocks[name];
+            context.Progress.Report(new GameServerConversionProgress(stage, blocks.Count, (int)current,
+                cacheScan.TotalBytes, doneBytes, name));
         }
     }
 
     private async Task DownloadPatchAsync(GameUpdateContext context, SophonPatchAsset asset)
     {
-        if (context.DownloadedPatches.ContainsKey(asset.PatchInfo.Id))
+        if (context.ValidatedChunks.ContainsKey(asset.PatchInfo.Id))
         {
             return;
         }
@@ -155,7 +167,7 @@ public sealed partial class GameUpdateService
             context.ChunksDir, context.ChunkLocks, context.Token,
             context.DownloadMonitor is null ? null : context.DownloadMonitor.AddBytes).ConfigureAwait(false);
 
-        context.DownloadedPatches.TryAdd(asset.PatchInfo.Id, 0);
+        context.ValidatedChunks.TryAdd(asset.PatchInfo.Id, 0);
     }
 
     private async Task InstallOrPatchAssetsAsync(GameUpdateContext context, List<SophonPatchAsset> assets)

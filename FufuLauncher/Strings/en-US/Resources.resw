@@ -2443,6 +2443,12 @@ Go to the Microsoft website to download and install it?</value>
   <data name="GameUpdate_PredownloadDone" xml:space="preserve">
     <value>Pre-download completed. Waiting for the official update.</value>
   </data>
+  <data name="GameUpdate_ScanChunks" xml:space="preserve">
+    <value>Verifying cached chunks...</value>
+  </data>
+  <data name="GameUpdate_ReuseCachedChunks" xml:space="preserve">
+    <value>Reused {0} verified chunks ({1}); {2} chunk(s) left to download ({3}).</value>
+  </data>
   <data name="GameUpdate_NoPredownloadNeeded" xml:space="preserve">
     <value>No pre-download content available for the current version.</value>
   </data>

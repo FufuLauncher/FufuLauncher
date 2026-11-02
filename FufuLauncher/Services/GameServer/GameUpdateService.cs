@@ -85,37 +85,51 @@ public sealed partial class GameUpdateService
             return GameUpdateResult.NothingToDo;
         }
 
-        EnsureFreeSpace(context, GetPendingDownloadSize(context, blocks));
+        Directory.CreateDirectory(context.ChunksDir);
+        ChunkCacheScan scan = await ScanChunkCacheAsync(context, blocks).ConfigureAwait(false);
+        bool needsDownload = scan.PendingBytes > 0;
 
-        var plan = new GameUpdatePlan(GameUpdateOperationKind.Predownload, preBranch.Tag, downloadTotalBytes,
+        if (needsDownload)
+        {
+            EnsureFreeSpace(context, scan.PendingBytes);
+        }
+
+        var plan = new GameUpdatePlan(GameUpdateOperationKind.Predownload, preBranch.Tag, scan.PendingBytes,
             downloadTotalBytes, patchAssets.Count > 0);
-        if (confirmAsync is not null && !await confirmAsync(plan).ConfigureAwait(false))
+        if (needsDownload && confirmAsync is not null && !await confirmAsync(plan).ConfigureAwait(false))
         {
             log("AdvancedServerSwitch_Cancelled".GetLocalized());
             return GameUpdateResult.Cancelled;
         }
 
-        log(string.Format("GameUpdate_PlanSummary".GetLocalized(), ToSizeString(downloadTotalBytes), preBranch.Tag));
-
-        Directory.CreateDirectory(context.ChunksDir);
+        log(string.Format("GameUpdate_PlanSummary".GetLocalized(), ToSizeString(scan.PendingBytes), preBranch.Tag));
 
         PredownloadStatus status = new()
         {
-            Tag = preBranch.Tag, Finished = false, TotalBlocks = totalBlocks, Blocks = blocks,
+            Tag = preBranch.Tag,
+            Finished = false,
+            TotalBlocks = totalBlocks,
+            Blocks = blocks,
+            CompletedBlocks = ToBlockMap(scan.CachedNames, blocks),
         };
         await WritePredownloadStatusAsync(context, status, token).ConfigureAwait(false);
 
-        if (patchAssets.Count > 0)
+        if (needsDownload)
         {
-            await PredownloadPatchesAsync(context, patchAssets).ConfigureAwait(false);
-        }
-        else
-        {
-            await DownloadOperationChunksAsync(context, downloadOperations,
-                "GameServer_StageDownloadChunks".GetLocalized()).ConfigureAwait(false);
+            if (patchAssets.Count > 0)
+            {
+                await PredownloadPatchesAsync(context, patchAssets, scan).ConfigureAwait(false);
+            }
+            else
+            {
+                await DownloadOperationChunksAsync(context, downloadOperations,
+                    "GameServer_StageDownloadChunks".GetLocalized(), scan).ConfigureAwait(false);
+            }
+
+            token.ThrowIfCancellationRequested();
+            status.CompletedBlocks = new Dictionary<string, long>(blocks, StringComparer.Ordinal);
         }
 
-        token.ThrowIfCancellationRequested();
         status.Finished = true;
         await WritePredownloadStatusAsync(context, status, token).ConfigureAwait(false);
         log("GameUpdate_PredownloadDone".GetLocalized());
@@ -260,8 +274,10 @@ public sealed partial class GameUpdateService
             string chunksDir = Path.Combine(gameDir, ChunksDirectoryName);
             if (status.Blocks is not { Count: > 0 })
             {
-                int fileCount = Directory.Exists(chunksDir) ? Directory.GetFiles(chunksDir).Length : 0;
-                return fileCount - 1 == status.TotalBlocks;
+                int fileCount = Directory.Exists(chunksDir)
+                    ? Directory.GetFiles(chunksDir).Count(IsChunkCacheFile)
+                    : 0;
+                return fileCount == status.TotalBlocks;
             }
 
             return status.Blocks.Count == status.TotalBlocks && status.Blocks.All(block =>
