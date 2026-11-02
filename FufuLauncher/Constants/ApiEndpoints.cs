@@ -57,7 +57,7 @@ namespace FufuLauncher.Constants
         public const string MihoyoBbsSignUrl = MihoyoBbsWebApi + "/event/luna/sign";
 
         public const string PluginProxyUrl =
-            "https://gh-proxy.org/https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip";
+            "https://cdn.fufu.skin/dll/FuFuPlugin.zip";
 
         public const string PluginRawUrl =
             "https://github.com/CodeCubist/FufuLauncher--Plugins/blob/main/FuFuPlugin.zip?raw=true";
@@ -68,6 +68,9 @@ namespace FufuLauncher.Constants
         public const string UpdateJsonFallbackUrl = "https://fu1.fun/Update.json";
         public const string UpdateHtmlUrl = "https://fufu.skin/Update.html";
         public const string UpdateHtmlFallbackUrl = "https://fu1.fun/Update.html";
+        public const string PluginConfigIniUrl = "https://fufu.skin/config.ini";
+        public const string PluginConfigIniFallbackUrl = "https://fu1.fun/config.ini";
+
         public const string UpdatePreHtmlUrl = "https://fufu.skin/UpdatePre.html";
         public const string UpdatePreHtmlFallbackUrl = "https://fu1.fun/UpdatePre.html";
 
@@ -329,6 +332,9 @@ namespace FufuLauncher.Constants
         public const string DevApplyUrl = DevServiceBase + "/api/dev-apply";
         public const string DocsConfigUrl = PluginStoreBaseUrl + "/api/docs-config";
         public const string DocsContentBaseUrl = PluginStoreBaseUrl + "/api/docs/zh-CN";
+
+        public const string UnlockerLiteCdnZipUrl =
+            "https://cdn.fufu.skin/dll/YuanShen-UnlockerLite.zip";
 
         public const string UnlockerLiteReleaseApiUrl =
             "https://api.github.com/repos/FufuLauncher/YuanShen-UnlockerLite/releases/latest";

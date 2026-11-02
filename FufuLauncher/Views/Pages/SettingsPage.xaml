@@ -3296,6 +3296,29 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE72E;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=PluginConfigGuard_Title}" />
+                                        <TextBlock x:Name="PluginConfigGuardCaption"
+                                                   Style="{StaticResource RowCaptionStyle}"
+                                                   TextWrapping="Wrap"
+                                                   Text="{helpers:Loc Key=PluginConfigGuard_Caption}" />
+                                    </StackPanel>
+                                    <ToggleSwitch x:Name="PluginConfigGuardToggle"
+                                                  Grid.Column="2"
+                                                  Style="{StaticResource RowToggleStyle}"
+                                                  Toggled="OnPluginConfigGuardToggled" />
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
                                     <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xEAC8;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
                                         <TextBlock Style="{StaticResource RowTitleStyle}"

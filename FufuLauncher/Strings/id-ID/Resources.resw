@@ -9133,4 +9133,31 @@ Detail: {0}</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>Terjemahkan deskripsi plugin dan nama opsi konfigurasi ke bahasa aplikasi menggunakan layanan terjemahan online (memerlukan koneksi internet).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>Pemeriksaan konfigurasi plugin</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>Opsi berlebih atau yang hilang diperbaiki otomatis berdasarkan config.ini resmi setiap kali konfigurasi plugin utama diubah</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>Pemeriksaan dijeda, dilanjutkan dalam {0}</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>Pemeriksaan dinonaktifkan pada versi pengembangan dan pratinjau</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>Hanya pengguna terverifikasi developer yang dapat menonaktifkan pemeriksaan sementara</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>Pemeriksaan dijeda selama 10 menit dalam sesi ini dan dilanjutkan otomatis</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>Jeda telah berakhir; perubahan konfigurasi akan diperiksa kembali</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>Konfigurasi plugin telah diperbaiki</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>{0} opsi ditambahkan, {1} opsi dihapus</value>
+  </data>
 </root>

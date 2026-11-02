@@ -9133,4 +9133,31 @@ Click the button below to open your browser and download manually.</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>Переводить описания плагинов и названия параметров конфигурации на язык приложения с помощью онлайн-сервиса перевода (требуется подключение к Интернету).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>Проверка конфигурации плагина</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>При изменении конфигурации основного плагина лишние или отсутствующие параметры автоматически исправляются по официальному config.ini</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>Проверка приостановлена, возобновится через {0}</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>В dev- и preview-сборках проверка конфигурации отключена</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>Только пользователи с подтверждённым статусом разработчика могут временно отключить проверку</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>Проверка конфигурации приостановлена на 10 минут в этом сеансе, затем возобновится автоматически</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>Время приостановки истекло; изменения конфигурации снова проверяются</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>Конфигурация плагина исправлена</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>Добавлено параметров: {0}, удалено: {1}</value>
+  </data>
 </root>

@@ -9143,4 +9143,31 @@ Dettagli: {0}</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>Traduce le descrizioni dei plugin e i nomi delle opzioni di configurazione nella lingua dell'app tramite il servizio di traduzione online (è necessaria una connessione Internet).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>Verifica della configurazione del plugin</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>Le opzioni in eccesso o mancanti vengono corrette automaticamente in base al config.ini ufficiale ogni volta che la configurazione del plugin principale viene modificata</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>Verifica sospesa, riprende tra {0}</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>La verifica è disattivata nelle versioni di sviluppo e anteprima</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>Solo gli utenti verificati come sviluppatori possono disattivare temporaneamente la verifica</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>La verifica è sospesa per 10 minuti in questa sessione e riprende automaticamente</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>La sospensione è scaduta; le modifiche alla configurazione vengono nuovamente verificate</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>Configurazione del plugin corretta</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>Aggiunte {0} opzione/i, rimosse {1} opzione/i</value>
+  </data>
 </root>

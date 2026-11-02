@@ -77,6 +77,7 @@ public sealed partial class SettingsPage : Page
         DebugLog.Info("SettingsPage", "SettingsPage.PageLoaded");
         EntranceStoryboard.Begin();
         UpdateTemporaryDeveloperAuthUi();
+        UpdatePluginConfigGuardUi();
 
         _isNavigatingFromMenu = true;
         if (SettingsNavigationView.SelectedItem == null)
@@ -105,6 +106,7 @@ public sealed partial class SettingsPage : Page
                 case SettingsSectionIds.SecurityAuth:
                     await RefreshModTrustUiAsync();
                     UpdateTemporaryDeveloperAuthUi();
+                    UpdatePluginConfigGuardUi();
                     break;
             }
         }

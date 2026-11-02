@@ -151,6 +151,11 @@ namespace FufuLauncher.Services
                 {
                     File.Copy(backupConfigPath, configPath, true);
                     logBuilder?.AppendLine("[插件更新] 已将插件默认配置替换为预设配置");
+
+                    if (PluginConfigGuard.TryRepairFileInPlace(configPath))
+                    {
+                        logBuilder?.AppendLine("[插件更新] 已按官方配置校正预设配置项");
+                    }
                 }
 
                 var installedDllPath = LightweightPluginService.MainPluginDllPath;

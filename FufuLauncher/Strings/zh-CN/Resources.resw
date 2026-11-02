@@ -9534,4 +9534,31 @@ UIGF v4.x/3.0/2.x</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>使用在线翻译服务将插件简介与配置项名称翻译为当前界面语言（需要联网）。</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>插件配置校验</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>修改主插件配置时，按官方 config.ini 自动校正多余或缺失的配置项</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>已临时关闭校验，{0} 后自动恢复</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>开发版与预览版不启用配置校验</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>只有已通过开发者认证的用户才能临时关闭配置校验</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>本次运行内 10 分钟内不再校验配置，到期后自动恢复</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>临时关闭已到期，修改配置时会重新校验</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>插件配置已自动校正</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>新增 {0} 个配置项，移除 {1} 个配置项</value>
+  </data>
 </root>

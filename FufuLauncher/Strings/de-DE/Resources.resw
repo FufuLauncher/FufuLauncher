@@ -9137,4 +9137,31 @@ Details: {0}</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>Übersetzt Plugin-Beschreibungen und Namen der Konfigurationsoptionen mithilfe des Online-Übersetzungsdienstes in die Sprache der App (Internetverbindung erforderlich).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>Plugin-Konfigurationsprüfung</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>Beim Ändern der Haupt-Plugin-Konfiguration werden überzählige oder fehlende Optionen anhand der offiziellen config.ini automatisch korrigiert</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>Prüfung pausiert, Fortsetzung in {0}</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>In Entwicklungs- und Vorschauversionen ist die Prüfung deaktiviert</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>Nur verifizierte Entwickler können die Prüfung vorübergehend deaktivieren</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>Die Prüfung ist in dieser Sitzung für 10 Minuten pausiert und wird danach automatisch fortgesetzt</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>Die Pause ist abgelaufen; Konfigurationsänderungen werden wieder geprüft</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>Plugin-Konfiguration korrigiert</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>{0} Option(en) hinzugefügt, {1} Option(en) entfernt</value>
+  </data>
 </root>

@@ -56,6 +56,7 @@ public partial class App
                     _mainDispatcherQueue.TryEnqueue(async () =>
                     {
                         await SetDefaultThemeAsync();
+                        await RefreshPluginConfigBaselineAsync();
                     });
                 });
             }
@@ -73,6 +74,8 @@ public partial class App
             var activationService = GetService<IActivationService>();
             await activationService.ActivateAsync(args);
 
+            _ = GetService<PluginConfigGuardService>();
+
             DebugLog.Info("App.Startup", "App main window activated");
 
             try
@@ -89,6 +92,8 @@ public partial class App
                                            !(MainWindow is MainWindow mw && mw.IsAgreementShowing);
             if (shouldRunBackgroundTasks)
             {
+                _ = Task.Run(RefreshPluginConfigBaselineAsync);
+
                 _ = Task.Run(PlayStartupSoundDelayedAsync);
 
                 _ = Task.Run(CheckForAnnouncementAsync);
@@ -112,6 +117,18 @@ public partial class App
             LogException(ex, "OnLaunched (启动流程异常)");
             ShowCrashDialog("应用启动流程异常", ex);
             Environment.Exit(-1);
+        }
+    }
+
+    private static async Task RefreshPluginConfigBaselineAsync()
+    {
+        try
+        {
+            await GetService<PluginConfigGuardService>().RefreshBaselineAsync();
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("App.Startup", $"[PluginConfigGuard] Baseline refresh failed: {ex.Message}");
         }
     }
 

@@ -25,6 +25,8 @@ namespace FufuLauncher.Services
 
         private const string ReleaseZipDirectUrl = ApiEndpoints.UnlockerLiteReleaseZipUrl;
 
+        private const string ReleaseZipCdnUrl = ApiEndpoints.UnlockerLiteCdnZipUrl;
+
         private const string ZipAssetName = "YuanShen-UnlockerLite.zip";
         private const string ProxyPrefix = ApiEndpoints.GhProxyBase + "/";
 
@@ -436,6 +438,7 @@ namespace FufuLauncher.Services
         private static List<string> GetStaticDownloadUrls() =>
             new()
             {
+                ReleaseZipCdnUrl,
                 ProxyPrefix + ReleaseZipDirectUrl,
                 ReleaseZipDirectUrl
             };

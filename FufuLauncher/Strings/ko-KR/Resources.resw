@@ -9133,4 +9133,31 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>온라인 번역 서비스를 사용하여 플러그인 설명과 설정 항목 이름을 앱 언어로 번역합니다(인터넷 연결 필요).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>플러그인 설정 검사</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>메인 플러그인 설정을 수정할 때마다 공식 config.ini와 비교하여 불필요하거나 누락된 항목을 자동으로 수정합니다</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>일시 중지됨, {0} 후에 자동으로 다시 시작됩니다</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>개발 버전과 미리보기 버전에서는 설정 검사를 사용하지 않습니다</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>개발자 인증을 받은 사용자만 설정 검사를 일시적으로 끌 수 있습니다</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>이번 실행에서는 10분 동안 설정 검사를 중지하며 이후 자동으로 다시 시작됩니다</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>일시 중지가 만료되었습니다. 설정을 수정하면 다시 검사합니다</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>플러그인 설정이 자동으로 수정되었습니다</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>{0}개 항목을 추가하고 {1}개 항목을 제거했습니다</value>
+  </data>
 </root>

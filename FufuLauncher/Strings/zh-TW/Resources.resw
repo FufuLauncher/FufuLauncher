@@ -9133,4 +9133,31 @@ UIGF v4.x/3.0/2.x</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>使用線上翻譯服務將外掛簡介與設定項目名稱翻譯為目前介面語言（需要連網）。</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>外掛配置校驗</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>修改主要外掛配置時，依官方 config.ini 自動校正多餘或缺少的配置項目</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>已臨時關閉校驗，{0} 後自動恢復</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>開發版與預覽版不啟用配置校驗</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>只有已通過開發者認證的使用者才能臨時關閉配置校驗</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>本次執行內 10 分鐘不再校驗配置，到期後自動恢復</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>臨時關閉已到期，修改配置時會重新校驗</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>外掛配置已自動校正</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>新增 {0} 個配置項目，移除 {1} 個配置項目</value>
+  </data>
 </root>

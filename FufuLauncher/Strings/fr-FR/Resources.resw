@@ -9136,4 +9136,31 @@ Détails : {0}</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>Traduire les descriptions des plugins et les noms des options de configuration dans la langue de l'application via le service de traduction en ligne (connexion Internet requise).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>Vérification de la configuration du plugin</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>Les options en trop ou manquantes sont corrigées selon le config.ini officiel à chaque modification de la configuration du plugin principal</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>Vérification suspendue, reprise dans {0}</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>La vérification est désactivée dans les versions de développement et d'aperçu</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>Seuls les utilisateurs vérifiés comme développeurs peuvent désactiver temporairement la vérification</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>La vérification est suspendue pendant 10 minutes dans cette session, puis reprend automatiquement</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>La suspension a expiré ; les modifications de configuration sont de nouveau vérifiées</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>Configuration du plugin corrigée</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>{0} option(s) ajoutée(s), {1} option(s) supprimée(s)</value>
+  </data>
 </root>

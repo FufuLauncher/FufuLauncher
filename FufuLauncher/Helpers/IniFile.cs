@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using System.Text;
+using FufuLauncher.Services;
 
 namespace FufuLauncher.Helpers;
 
@@ -173,6 +174,11 @@ public class IniFile
     {
         try
         {
+            if (PluginConfigGuard.TryRepairLines(_path, lines, out var repairedLines))
+            {
+                lines = repairedLines;
+            }
+
             File.WriteAllLines(_path, lines, Encoding.UTF8);
         }
         catch (UnauthorizedAccessException)

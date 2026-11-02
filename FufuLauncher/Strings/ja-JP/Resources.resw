@@ -9137,4 +9137,31 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>オンライン翻訳サービスを使用して、プラグインの説明と設定項目名をアプリの表示言語に翻訳します（インターネット接続が必要です）。</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>プラグイン設定チェック</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>メインプラグインの設定を変更するたびに、公式 config.ini と照合して余分な項目や不足している項目を自動修正します</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>一時停止中です。{0} 後に自動的に再開します</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>開発版とプレビュー版では設定チェックは無効です</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>設定チェックを一時的に無効にできるのは開発者認証済みのユーザーだけです</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>このセッションでは 10 分間設定チェックを停止し、その後自動的に再開します</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>一時停止の期限が切れました。設定の変更時に再びチェックされます</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>プラグイン設定を自動修正しました</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>{0} 個の項目を追加し、{1} 個の項目を削除しました</value>
+  </data>
 </root>

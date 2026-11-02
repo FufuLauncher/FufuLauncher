@@ -9128,4 +9128,31 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>ऑनलाइन अनुवाद सेवा का उपयोग करके प्लगइन विवरण और कॉन्फ़िगरेशन विकल्प नामों को ऐप की भाषा में अनुवादित करें (इंटरनेट कनेक्शन आवश्यक है)।</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>प्लगइन कॉन्फ़िग जाँच</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>मुख्य प्लगइन कॉन्फ़िग बदलने पर अतिरिक्त या गुम विकल्पों को आधिकारिक config.ini के अनुसार स्वतः ठीक किया जाता है</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>जाँच रोकी गई, {0} में फिर शुरू होगी</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>डेव और पूर्वावलोकन बिल्ड में जाँच बंद रहती है</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>केवल सत्यापित डेवलपर ही जाँच को अस्थायी रूप से बंद कर सकते हैं</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>इस सत्र में जाँच 10 मिनट के लिए रोकी गई है और फिर स्वतः शुरू हो जाएगी</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>रोक की अवधि समाप्त हो गई; कॉन्फ़िग बदलावों की फिर जाँच होगी</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>प्लगइन कॉन्फ़िग स्वतः ठीक किया गया</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>{0} विकल्प जोड़े गए, {1} विकल्प हटाए गए</value>
+  </data>
 </root>

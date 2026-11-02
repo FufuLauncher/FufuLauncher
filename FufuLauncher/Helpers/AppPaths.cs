@@ -41,6 +41,9 @@ public static class AppPaths
     public static string ServerCacheDir => Path.Combine(CacheDir, "ServerCache");
     public static string VerifyCacheDir => Path.Combine(CacheDir, "VerifyCache");
     public static string PluginPresetsDir => Path.Combine(DataDir, "PluginPresets");
+    public static string PluginConfigBaselineDir => Path.Combine(DataDir, "PluginConfigBaseline");
+    public static string MainPluginConfigBaselineFile =>
+        Path.Combine(PluginConfigBaselineDir, "FuFuPlugin.config.bin");
 
     static AppPaths()
     {

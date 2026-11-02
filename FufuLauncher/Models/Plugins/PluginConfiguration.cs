@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using FufuLauncher.Helpers;
+using FufuLauncher.Services;
 
 namespace FufuLauncher.Models;
 
@@ -413,6 +414,11 @@ public sealed class PluginConfiguration
             {
                 var version = _version;
                 var content = BuildContent();
+                if (PluginConfigGuard.TryRepairText(path, content, out var repairedContent))
+                {
+                    content = repairedContent;
+                }
+
                 await File.WriteAllTextAsync(path, content, _encoding);
                 _savedVersion = version;
             }

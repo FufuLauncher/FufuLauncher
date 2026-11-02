@@ -155,6 +155,7 @@ public partial class App
                 services.AddSingleton<PluginStoreService>();
                 services.AddSingleton<LightweightPluginService>();
                 services.AddSingleton<PluginGameVersionGuard>();
+                services.AddSingleton<PluginConfigGuardService>();
                 services.AddSingleton<ConstraintService>();
                 services.AddSingleton<LuaPluginInstaller>();
                 services.AddSingleton<GameSessionService>();

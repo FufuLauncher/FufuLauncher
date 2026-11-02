@@ -9539,4 +9539,31 @@ Details: {0}</value>
   <data name="TranslatePluginContentCaption" xml:space="preserve">
     <value>Translate plugin descriptions and configuration option names into the app language with the online translation service (Internet connection required).</value>
   </data>
+  <data name="PluginConfigGuard_Title" xml:space="preserve">
+    <value>Plugin Config Check</value>
+  </data>
+  <data name="PluginConfigGuard_Caption" xml:space="preserve">
+    <value>Corrects extra or missing options against the official config.ini whenever the main plugin config is modified</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionBypassed" xml:space="preserve">
+    <value>Check paused, resumes in {0}</value>
+  </data>
+  <data name="PluginConfigGuard_CaptionExempt" xml:space="preserve">
+    <value>Config check is disabled on dev and preview builds</value>
+  </data>
+  <data name="PluginConfigGuard_NeedDevAuth" xml:space="preserve">
+    <value>Only developer-verified users can temporarily disable the config check</value>
+  </data>
+  <data name="PluginConfigGuard_BypassStarted" xml:space="preserve">
+    <value>Config checks are paused for 10 minutes in this session and resume automatically</value>
+  </data>
+  <data name="PluginConfigGuard_BypassEnded" xml:space="preserve">
+    <value>The pause has expired; config changes are checked again</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedTitle" xml:space="preserve">
+    <value>Plugin config corrected</value>
+  </data>
+  <data name="PluginConfigGuard_RepairedMessage" xml:space="preserve">
+    <value>Added {0} option(s), removed {1} option(s)</value>
+  </data>
 </root>
