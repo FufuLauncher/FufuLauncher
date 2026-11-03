@@ -26,7 +26,7 @@ public partial class MainWindow
             "github.chenc.dev", "gh.felicity.ac.cn", "gh.inkchills.cn", "gh.jasonzeng.dev",
             "gh.ddlc.top", "gp.zkitefly.eu.org", "gitproxy.mrhjx.cn", "ghfast.top",
             "fastgit.cc", "gh.sixyin.com", "ghp.arslantu.xyz", "github.ednovas.xyz",
-            "ghproxy.cxkpro.top", "ghproxy.imciel.com", "gh.idayer.com", "gh-proxy.net",
+            "ghproxy.cxkpro.top", "gh.idayer.com", "gh-proxy.net",
             "j.1lin.dpdns.org", "github.starrlzy.cn", "ghm.078465.xyz", "ghf.无名氏.top",
             "jiashu.1win.eu.org", "tvv.tw", "j.1win.ggff.net", "gh.catmak.name",
             "gh.b52m.cn", "slink.ltd", "github.tmby.shop", "ghpr.cc", "gh.tryxd.cn",
