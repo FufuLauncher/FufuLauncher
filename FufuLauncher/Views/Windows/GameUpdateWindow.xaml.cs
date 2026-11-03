@@ -16,18 +16,22 @@ namespace FufuLauncher.Views
         private readonly string _gameDir;
         private readonly GameUpdateOperationKind _kind;
         private readonly bool _autoStart;
+        private readonly GameServerScheme? _schemeOverride;
+        private string _descriptionText = string.Empty;
         private CancellationTokenSource? _cts;
 
         private readonly GameServerDownloadMonitor _downloadMonitor = new();
         private readonly RemainingChunksTracker _remainingChunksTracker = new();
         private DownloadSpeedChartController? _chartController;
 
-        public GameUpdateWindow(string gameDir, GameUpdateOperationKind kind, bool autoStart = false)
+        public GameUpdateWindow(string gameDir, GameUpdateOperationKind kind, bool autoStart = false,
+            GameServerScheme? schemeOverride = null)
         {
             InitializeComponent();
             _gameDir = gameDir;
             _kind = kind;
             _autoStart = autoStart;
+            _schemeOverride = schemeOverride;
 
             if (autoStart)
             {
@@ -72,7 +76,8 @@ namespace FufuLauncher.Views
 
             Title = titleKey.GetLocalized();
             TitleTextBlock.Text = titleKey.GetLocalized();
-            DescriptionTextBlock.Text = descriptionKey.GetLocalized();
+            _descriptionText = descriptionKey.GetLocalized();
+            DescriptionTextBlock.Text = _descriptionText;
             StartBtn.Content = startKey.GetLocalized();
         }
 
@@ -84,12 +89,14 @@ namespace FufuLauncher.Views
         private async void BeginOperation()
         {
             var configurationService = App.GetService<GameServerConfigurationService>();
-            var currentScheme = configurationService.TryDetectCurrentScheme(_gameDir);
+            var currentScheme = _schemeOverride ?? configurationService.TryDetectCurrentScheme(_gameDir);
             if (currentScheme is null)
             {
                 await ShowMessageAsync("AdvancedServerSwitch_UnknownCurrent".GetLocalized());
                 return;
             }
+
+            DescriptionTextBlock.Text = $"{_descriptionText} · {currentScheme.DisplayName}";
 
             StartBtn.IsEnabled = false;
             ProgressPanel.Visibility = Visibility.Visible;

@@ -2371,6 +2371,21 @@ Go to the Microsoft website to download and install it?</value>
   <data name="GameUpdate_PredownloadCaption" xml:space="preserve">
     <value>Download update resources ahead of time</value>
   </data>
+  <data name="GameUpdate_PredownloadTargetTitle" xml:space="preserve">
+    <value>Pre-download target server</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetCaption" xml:space="preserve">
+    <value>Server used for pre-download and merge (developer)</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetAuto" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetOversea" xml:space="preserve">
+    <value>Global server</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetChinese" xml:space="preserve">
+    <value>Mainland server</value>
+  </data>
   <data name="GameUpdate_UpdateBtnTitle" xml:space="preserve">
     <value>Update</value>
   </data>

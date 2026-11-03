@@ -3183,26 +3183,73 @@
 
                                 <Rectangle Style="{StaticResource RowDividerStyle}" />
 
-                                <Grid x:Name="ApplyPredownloadRow" Style="{StaticResource SettingsRowStyle}"
-                                      Visibility="Collapsed">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF150;" />
-                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
-                                        <TextBlock Style="{StaticResource RowTitleStyle}"
-                                                   Text="{helpers:Loc Key=GameUpdate_ApplyBtnTitle}" />
-                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
-                                                   Text="{helpers:Loc Key=GameUpdate_ApplyBtnCaption}" />
-                                    </StackPanel>
-                                    <Button x:Name="BtnApplyPredownload"
-                                            Grid.Column="2"
-                                            Style="{StaticResource RowButtonStyle}"
-                                            Content="{helpers:Loc Key=GameUpdate_ApplyPredownloadStart}"
-                                            Click="OnApplyPredownloadClick" />
-                                </Grid>
+                                <StackPanel x:Name="PredownloadDevPanel" Visibility="Collapsed">
+
+                                    <Grid Style="{StaticResource SettingsRowStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
+                                        <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                            <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                       Text="{helpers:Loc Key=GameUpdate_PredownloadTargetTitle}" />
+                                            <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                       Text="{helpers:Loc Key=GameUpdate_PredownloadTargetCaption}" />
+                                        </StackPanel>
+                                        <ComboBox x:Name="PredownloadTargetCombo"
+                                                  Grid.Column="2"
+                                                  Style="{StaticResource RowComboBoxStyle}"
+                                                  MinWidth="220"
+                                                  DisplayMemberPath="Label"
+                                                  SelectionChanged="OnPredownloadTargetSelectionChanged" />
+                                    </Grid>
+
+                                    <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                    <Grid Style="{StaticResource SettingsRowStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE896;" />
+                                        <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                            <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                       Text="{helpers:Loc Key=GameUpdate_PredownloadTitle}" />
+                                            <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                       Text="{helpers:Loc Key=GameUpdate_PredownloadCaption}" />
+                                        </StackPanel>
+                                        <Button x:Name="BtnPredownloadGame"
+                                                Grid.Column="2"
+                                                Style="{StaticResource RowButtonStyle}"
+                                                Content="{helpers:Loc Key=PreDownload_Start}"
+                                                Click="OnStartPredownloadClick" />
+                                    </Grid>
+
+                                    <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                    <Grid x:Name="ApplyPredownloadRow" Style="{StaticResource SettingsRowStyle}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF150;" />
+                                        <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                            <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                       Text="{helpers:Loc Key=GameUpdate_ApplyBtnTitle}" />
+                                            <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                       Text="{helpers:Loc Key=GameUpdate_ApplyBtnCaption}" />
+                                        </StackPanel>
+                                        <Button x:Name="BtnApplyPredownload"
+                                                Grid.Column="2"
+                                                Style="{StaticResource RowButtonStyle}"
+                                                Content="{helpers:Loc Key=GameUpdate_ApplyPredownloadStart}"
+                                                Click="OnApplyPredownloadClick" />
+                                    </Grid>
+                                </StackPanel>
 
                             </StackPanel>
                         </Border>

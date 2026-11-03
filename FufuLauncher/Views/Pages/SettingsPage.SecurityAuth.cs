@@ -185,7 +185,7 @@ public sealed partial class SettingsPage
         }
 
         await UpdateDeviceInfoRowVisibilityAsync();
-        await UpdateApplyPredownloadRowVisibilityAsync();
+        await UpdatePredownloadDevVisibilityAsync();
     }
 
     #endregion

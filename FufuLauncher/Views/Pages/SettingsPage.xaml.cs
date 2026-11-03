@@ -100,7 +100,7 @@ public sealed partial class SettingsPage : Page
                     break;
 
                 case SettingsSectionIds.Updates:
-                    await UpdateApplyPredownloadRowVisibilityAsync();
+                    await UpdatePredownloadDevVisibilityAsync();
                     break;
 
                 case SettingsSectionIds.SecurityAuth:

@@ -2485,6 +2485,21 @@
   <data name="GameUpdate_PredownloadCaption" xml:space="preserve">
     <value>提前下载更新资源</value>
   </data>
+  <data name="GameUpdate_PredownloadTargetTitle" xml:space="preserve">
+    <value>预下载目标服务器</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetCaption" xml:space="preserve">
+    <value>指定预下载与合并使用的服务器（开发者）</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetAuto" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetOversea" xml:space="preserve">
+    <value>国际服</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetChinese" xml:space="preserve">
+    <value>国服</value>
+  </data>
   <data name="GameUpdate_UpdateBtnTitle" xml:space="preserve">
     <value>更新</value>
   </data>
