@@ -91,12 +91,12 @@ public sealed partial class MainWindow
                 {
                     var accountManager = App.GetService<AccountManager>();
                     var activeId = accountManager.ActiveAccountId;
-                    if (activeId != null)
+                    if (activeId != null && !activeId.StartsWith("os", StringComparison.OrdinalIgnoreCase))
                     {
                         var cookies = await accountManager.LoadCookiesAsync(activeId);
                         if (cookies != null && cookies.Count > 0)
                         {
-                            var refreshService = new TokenRefreshService();
+                            using var refreshService = new TokenRefreshService();
                             var newCookies = await refreshService.RefreshCookieAsync(cookies);
                             if (newCookies != null)
                             {

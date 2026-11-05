@@ -10,6 +10,7 @@ using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models.MiHoYo;
 using FufuLauncher.Models.MiHoYo.Identity;
+using FufuLauncher.Models;
 using FufuLauncher.Services.MiHoYo.Networking;
 using FufuLauncher.Services.MiHoYo.Transport;
 
@@ -26,13 +27,22 @@ public sealed class DailyNoteService
     private const string Page = "v6.6.1-gr-cn_#/ys";
 
     private static readonly SemaphoreSlim _semaphore = new(1, 1);
-    private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private static readonly HttpClient SharedHttpClient = new(new HttpClientHandler { UseCookies = false })
+        { Timeout = TimeSpan.FromSeconds(15) };
 
+    private readonly HttpClient _httpClient;
+    private readonly Func<TokenRefreshService> _createTokenRefreshService;
     private readonly AccountIdentityService _identityService;
     private readonly OverseaGameRecordClient _overseaGameRecordClient = new();
 
-    public DailyNoteService()
+    public DailyNoteService() : this(SharedHttpClient, () => new TokenRefreshService())
     {
+    }
+
+    internal DailyNoteService(HttpClient httpClient, Func<TokenRefreshService> createTokenRefreshService)
+    {
+        _httpClient = httpClient;
+        _createTokenRefreshService = createTokenRefreshService;
         _identityService = App.GetService<AccountIdentityService>()
                            ?? throw new InvalidOperationException("DailyNote_NoIdentityService".GetLocalized());
     }
@@ -57,23 +67,30 @@ public sealed class DailyNoteService
 
             string playerQuery = $"role_id={Uri.EscapeDataString(roleId)}&server={Uri.EscapeDataString(server)}";
 
+            bool refreshAttempted = false;
+            async Task<string> RequestWithRefreshAsync(Func<AccountContext, Task<string>> send)
+            {
+                string response = await send(ctx);
+                if (refreshAttempted || !MiyousheCheckinGame.IsLoginExpired(ParseResponse(response).Retcode))
+                    return response;
+
+                refreshAttempted = true;
+                var rebuilt = await RefreshCookiesAsync(accountManager, activeId);
+                if (rebuilt == null) return response;
+                ctx = rebuilt;
+                return await send(ctx);
+            }
 
             await WarmUpPlayerInfoAsync(playerQuery, ctx);
 
-            string json = await RequestAsync(
-                $"{RecordApiBase}{DailyNotePath}?{playerQuery}", ctx, challenge: null);
+            string json = await RequestWithRefreshAsync(context => RequestAsync(
+                $"{RecordApiBase}{DailyNotePath}?{playerQuery}", context, challenge: null));
             var (retcode, message) = ParseResponse(json);
-
-            if (retcode == 10001)
-            {
-                json = await RetryWithRefreshedCookiesAsync(accountManager, activeId, playerQuery, ctx);
-                if (json is null) return null;
-                (retcode, message) = ParseResponse(json);
-            }
 
             if (retcode == 1034)
             {
-                string challenged = await TrySolveChallengeAsync(playerQuery, ctx, json);
+                string challenged = await RequestWithRefreshAsync(context =>
+                    TrySolveChallengeAsync(playerQuery, context, json));
                 var (challengeRetcode, challengeMessage) = ParseResponse(challenged);
 
                 if (challengeRetcode == 0)
@@ -90,7 +107,7 @@ public sealed class DailyNoteService
 
             if (retcode == 5003 || retcode == 1034)
             {
-                json = await RequestWidgetAsync(ctx);
+                json = await RequestWithRefreshAsync(RequestWidgetAsync);
                 (retcode, message) = ParseResponse(json);
 
                 if (retcode == 0 && !GameRoleResponseValidator.MatchesWidget(json, roleId, server))
@@ -122,10 +139,9 @@ public sealed class DailyNoteService
         }
     }
 
-    private async Task<string?> RetryWithRefreshedCookiesAsync(
-        AccountManager accountManager, string activeId, string playerQuery, AccountContext ctx)
+    private async Task<AccountContext?> RefreshCookiesAsync(AccountManager accountManager, string activeId)
     {
-        DebugLog.Info("DailyNoteService", "[DailyNoteService] retcode10001");
+        DebugLog.Info("DailyNoteService", "[DailyNoteService] Login expired, refreshing Cookie");
 
         var currentCookies = await accountManager.LoadCookiesAsync(activeId);
         if (currentCookies is null || currentCookies.Count == 0)
@@ -134,7 +150,9 @@ public sealed class DailyNoteService
             return null;
         }
 
-        var refreshed = await new TokenRefreshService().RefreshCookieAsync(currentCookies);
+        using var refreshService = _createTokenRefreshService();
+        // A business request already rejected these credentials; do not gate the retry on another API.
+        var refreshed = await refreshService.RefreshCookieAsync(currentCookies, forceRefresh: true);
         if (refreshed is null || refreshed.Count == 0)
         {
             DebugLog.Info("DailyNoteService", "[DailyNoteService] Cookie refresh failed");
@@ -142,14 +160,7 @@ public sealed class DailyNoteService
         }
 
         await accountManager.UpdateCookiesAsync(activeId, refreshed);
-        var rebuilt = await _identityService.BuildAsync(activeId);
-
-        string json = await RequestAsync(
-            $"{RecordApiBase}{DailyNotePath}?{playerQuery}", rebuilt, challenge: null);
-        var (retcode, _) = ParseResponse(json);
-        DebugLog.Info("DailyNoteService", $"[DailyNoteService] Retried after Cookie refresh retcode={retcode}");
-
-        return retcode == 10001 ? null : json;
+        return await _identityService.BuildAsync(activeId);
     }
 
     private async Task<string> TrySolveChallengeAsync(string playerQuery, AccountContext ctx, string fallback)

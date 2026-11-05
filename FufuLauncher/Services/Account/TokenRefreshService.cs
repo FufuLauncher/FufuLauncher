@@ -15,6 +15,8 @@ using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using MihoyoBBS;
 using FufuLauncher.Helpers;
+using FufuLauncher.Constants.MiHoYo;
+using FufuLauncher.Services.MiHoYo.Networking;
 
 namespace FufuLauncher.Services;
 
@@ -70,11 +72,9 @@ public class TokenRefreshService : IDisposable
             }
 
 
-            string cookieStr = BuildCookieString(currentCookies);
-
             if (!isManual && !forceRefresh)
             {
-                bool? isValid = await CheckCookieValidAsync(cookieStr);
+                bool? isValid = await CheckCookieValidAsync(currentCookies);
                 if (isValid != false)
                 {
                     DebugLog.Info("TokenRefreshService",
@@ -188,15 +188,42 @@ public class TokenRefreshService : IDisposable
             NotificationType.Error, 4000));
     }
 
-    private async Task<bool?> CheckCookieValidAsync(string cookie)
+    private async Task<bool?> CheckCookieValidAsync(IReadOnlyDictionary<string, string> cookies)
+    {
+        // The role binding API validates LToken only. CookieToken can expire independently.
+        string? ltokenCookie = BuildCredentialCookie(cookies, "ltoken", "ltuid");
+        string? cookieTokenCookie = BuildCredentialCookie(cookies, "cookie_token", "account_id");
+        if (ltokenCookie == null || cookieTokenCookie == null) return false;
+
+        bool? ltokenValid = await CheckCredentialValidAsync(ApiEndpoints.MihoyoBbsAccountInfoUrl, ltokenCookie);
+        if (ltokenValid == false) return false;
+
+        bool? cookieTokenValid = await CheckCredentialValidAsync(
+            ApiEndpoints.MihoyoBbsRolesByCookieTokenUrl, cookieTokenCookie);
+        if (cookieTokenValid == false) return false;
+
+        return ltokenValid == true && cookieTokenValid == true ? true : null;
+    }
+
+    private static string? BuildCredentialCookie(IReadOnlyDictionary<string, string> cookies,
+        string tokenName, string uidName)
+    {
+        string suffix = !string.IsNullOrEmpty(cookies.GetValueOrDefault(tokenName)) ? "" : "_v2";
+        string? token = cookies.GetValueOrDefault(tokenName + suffix);
+        string? uid = cookies.GetValueOrDefault(uidName + suffix);
+        return string.IsNullOrEmpty(token) || string.IsNullOrEmpty(uid)
+            ? null
+            : $"{tokenName}{suffix}={token}; {uidName}{suffix}={uid}";
+    }
+
+    private async Task<bool?> CheckCredentialValidAsync(string url, string cookie)
     {
         try
         {
-            string url = ApiEndpoints.MihoyoBbsAccountInfoUrl;
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
 
             request.Headers.TryAddWithoutValidation("Accept", "application/json, text/plain, */*");
-            request.Headers.TryAddWithoutValidation("DS", GenerateWebDS());
+            request.Headers.TryAddWithoutValidation("DS", MiHoYoHeaderFactory.CalculateDs2(HeaderSalts.CnX4));
             request.Headers.TryAddWithoutValidation("x-rpc-channel", "miyousheluodi");
             request.Headers.TryAddWithoutValidation("Origin", ApiEndpoints.ActMihoyoBase);
             request.Headers.TryAddWithoutValidation("x-rpc-app_version", "2.93.1");
@@ -212,11 +239,16 @@ public class TokenRefreshService : IDisposable
             var responseText = await response.Content.ReadAsStringAsync();
 
             using var json = JsonDocument.Parse(responseText);
-            if (!json.RootElement.TryGetProperty("retcode", out var code) || !code.TryGetInt32(out int retCode))
+            if (json.RootElement.ValueKind != JsonValueKind.Object ||
+                !json.RootElement.TryGetProperty("retcode", out var code) ||
+                code.ValueKind != JsonValueKind.Number || !code.TryGetInt32(out int retCode))
                 return null;
 
-            if (retCode == 0) return true;
             if (MiyousheCheckinGame.IsLoginExpired(retCode)) return false;
+            if (retCode == 0 && json.RootElement.TryGetProperty("data", out var data) &&
+                data.ValueKind == JsonValueKind.Object && data.TryGetProperty("list", out var list) &&
+                list.ValueKind == JsonValueKind.Array)
+                return true;
         }
         catch (Exception ex)
         {
