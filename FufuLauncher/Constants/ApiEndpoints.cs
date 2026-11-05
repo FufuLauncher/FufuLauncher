@@ -52,6 +52,8 @@ namespace FufuLauncher.Constants
 
         public const string MihoyoBbsWebApi = "https://api-takumi.mihoyo.com";
         public const string MihoyoBbsAccountInfoUrl = MihoyoBbsWebApi + "/binding/api/getUserGameRolesByCookie";
+        public const string MihoyoBbsRolesByCookieTokenUrl =
+            "https://passport-api.mihoyo.com/binding/api/getUserGameRolesByCookieToken";
         public const string MihoyoBbsCheckinRewardsUrl = MihoyoBbsWebApi + "/event/luna/home";
         public const string MihoyoBbsIsSignUrl = MihoyoBbsWebApi + "/event/luna/info";
         public const string MihoyoBbsSignUrl = MihoyoBbsWebApi + "/event/luna/sign";
