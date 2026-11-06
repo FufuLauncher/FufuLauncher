@@ -486,6 +486,15 @@
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Scorri per leggere l'intero contratto prima di accettare</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Impossibile caricare l'accordo. Controlla la connessione di rete e riprova.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Ricarica</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Se l'accordo non può essere caricato, puoi saltare la lettura e continuare spuntando la casella.</value>
+  </data>
   <data name="AgreementPage_Settings" xml:space="preserve">
     <value>Impostazioni</value>
   </data>

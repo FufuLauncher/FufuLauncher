@@ -2922,6 +2922,15 @@ Voulez-vous accéder au site officiel de Microsoft pour la télécharger et l'in
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Veuillez faire défiler pour lire l'intégralité des conditions avant d'accepter</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Échec du chargement de l'accord. Vérifiez votre connexion réseau et réessayez.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Si l'accord ne peut pas être chargé, vous pouvez ignorer la lecture et continuer en cochant la case.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>Afin de garantir un bon affichage, veuillez confirmer que les icônes ci-dessous s'affichent correctement</value>
   </data>

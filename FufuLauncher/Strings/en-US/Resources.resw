@@ -3263,6 +3263,15 @@ Go to the Microsoft website to download and install it?</value>
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Please scroll to read the full agreement before agreeing</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Failed to load the agreement. Please check your network connection and try again.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>If the agreement cannot be loaded, you may skip reading it and continue by checking the box.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>To ensure display quality, please confirm the icons below are showing correctly</value>
   </data>

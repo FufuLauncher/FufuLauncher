@@ -81,7 +81,7 @@ public sealed partial class MainWindow
 
             GlobalBackgroundOverlay.Fill = new SolidColorBrush(themeBgColor);
 
-            if (_isAcrylicOverlayEnabled && !_isVideoBackground)
+            if ((_isAcrylicOverlayEnabled || _isOnboardingBackdrop) && !_isVideoBackground)
             {
                 PageBackgroundOverlay.Background = new AcrylicBrush
                 {
@@ -102,6 +102,36 @@ public sealed partial class MainWindow
         }
         catch (System.Runtime.InteropServices.COMException)
         {
+        }
+    }
+
+    private void ShowOnboardingBackdrop()
+    {
+        try
+        {
+            _isOnboardingBackdrop = true;
+            UpdateBackgroundOverlayTheme();
+
+            OverlayTranslate.Y = 0;
+            PageBackgroundOverlay.Opacity = 1.0;
+            _isOverlayShown = true;
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("MainWindow.Background", $"Onboarding backdrop setup failed: {ex.Message}");
+        }
+    }
+
+    private async Task LoadOnboardingBackdropImageAsync()
+    {
+        try
+        {
+            var version = Interlocked.Increment(ref _backgroundLoadVersion);
+            await ApplyGlobalBackgroundAsync(await _backgroundRenderer.GetFallbackBackgroundAsync(), version);
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("MainWindow.Background", $"Onboarding backdrop image load failed: {ex.Message}");
         }
     }
 

@@ -3416,6 +3416,15 @@
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>请滚动阅读完整协议后勾选同意</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>用户协议加载失败，请检查网络连接后重试</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>重新加载</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>网络不可用，你可直接勾选同意并继续</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>为了确保显示效果，请确认下方图标是否正常显示</value>
   </data>

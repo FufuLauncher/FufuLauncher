@@ -2922,6 +2922,15 @@ Por favor, confirma que seleccionaste el directorio de instalación que contiene
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Por favor, desplázate para leer el acuerdo completo antes de aceptar</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>No se pudo cargar el acuerdo. Comprueba tu conexión de red e inténtalo de nuevo.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Recargar</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Si no se puede cargar el acuerdo, puedes omitir su lectura y continuar marcando la casilla.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>Para garantizar la calidad de visualización, por favor confirma que los iconos siguientes se muestran correctamente</value>
   </data>

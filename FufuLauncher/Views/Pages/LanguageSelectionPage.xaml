@@ -7,51 +7,11 @@
     xmlns:helpers="using:FufuLauncher.Helpers"
     xmlns:viewmodels="using:FufuLauncher.ViewModels"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="Transparent"
     Loaded="OnPageLoaded">
 
     <Page.Resources>
         <helpers:StringToImageSourceConverter x:Key="StringToImageSourceConverter" />
-
-        <Storyboard x:Name="EntranceStoryboard">
-            <DoubleAnimation Storyboard.TargetName="IconImage" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="IconTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <DoubleAnimation Storyboard.TargetName="TitleText" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             BeginTime="0:0:0.1" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             BeginTime="0:0:0.1" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <DoubleAnimation Storyboard.TargetName="SubtitleText" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             BeginTime="0:0:0.2" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="SubtitleTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             BeginTime="0:0:0.2" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <DoubleAnimation Storyboard.TargetName="LanguageGridArea" Storyboard.TargetProperty="Opacity" From="0"
-                             To="1"
-                             BeginTime="0:0:0.3" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="LanguageGridTransform" Storyboard.TargetProperty="Y" From="30"
-                             To="0"
-                             BeginTime="0:0:0.3" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
 
         <DataTemplate x:Key="LanguageCardTemplate">
             <Border x:Name="CardBorder"
@@ -217,9 +177,6 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,2"
                        Opacity="0">
-                    <Image.RenderTransform>
-                        <TranslateTransform x:Name="IconTransform" Y="30" />
-                    </Image.RenderTransform>
                 </Image>
 
                 <TextBlock x:Name="TitleText"
@@ -228,9 +185,6 @@
                            FontWeight="Bold"
                            HorizontalAlignment="Center"
                            Opacity="0">
-                    <TextBlock.RenderTransform>
-                        <TranslateTransform x:Name="TitleTransform" Y="30" />
-                    </TextBlock.RenderTransform>
                 </TextBlock>
 
                 <TextBlock x:Name="SubtitleText"
@@ -241,16 +195,9 @@
                            TextAlignment="Center"
                            TextWrapping="Wrap"
                            Opacity="0">
-                    <TextBlock.RenderTransform>
-                        <TranslateTransform x:Name="SubtitleTransform" Y="30" />
-                    </TextBlock.RenderTransform>
                 </TextBlock>
 
                 <Grid x:Name="LanguageGridArea" Opacity="0" Margin="0,8,0,0">
-                    <Grid.RenderTransform>
-                        <TranslateTransform x:Name="LanguageGridTransform" Y="30" />
-                    </Grid.RenderTransform>
-
                     <GridView ItemsSource="{x:Bind ViewModel.Languages}"
                               ItemTemplate="{StaticResource LanguageCardTemplate}"
                               ItemContainerStyle="{StaticResource GridViewItemCardStyle}"
@@ -272,6 +219,8 @@
         </ScrollViewer>
 
         <Grid Grid.Row="1"
+              x:Name="ActionBar"
+              Opacity="0"
               Padding="20,12"
               BorderThickness="1,1,0,0"
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"

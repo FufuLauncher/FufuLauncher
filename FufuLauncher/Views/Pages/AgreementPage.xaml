@@ -6,48 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="Transparent"
     Loaded="OnPageLoaded">
-
-    <Page.Resources>
-        <Storyboard x:Name="EntranceStoryboard">
-            <DoubleAnimation Storyboard.TargetName="IconImage" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="IconTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <DoubleAnimation Storyboard.TargetName="TitleText" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             BeginTime="0:0:0.1" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="TitleTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             BeginTime="0:0:0.1" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <DoubleAnimation Storyboard.TargetName="DescText" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             BeginTime="0:0:0.2" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="DescTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             BeginTime="0:0:0.2" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-
-            <DoubleAnimation Storyboard.TargetName="AgreementArea" Storyboard.TargetProperty="Opacity" From="0" To="1"
-                             BeginTime="0:0:0.3" Duration="0:0:0.6" />
-            <DoubleAnimation Storyboard.TargetName="AgreementTransform" Storyboard.TargetProperty="Y" From="30" To="0"
-                             BeginTime="0:0:0.3" Duration="0:0:0.6">
-                <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -76,9 +36,6 @@
                    HorizontalAlignment="Center"
                    Margin="0,0,0,10"
                    Opacity="0">
-                <Image.RenderTransform>
-                    <TranslateTransform x:Name="IconTransform" Y="30" />
-                </Image.RenderTransform>
             </Image>
 
             <TextBlock Grid.Row="1"
@@ -89,9 +46,6 @@
                        HorizontalAlignment="Center"
                        Margin="0,0,0,8"
                        Opacity="0">
-                <TextBlock.RenderTransform>
-                    <TranslateTransform x:Name="TitleTransform" Y="30" />
-                </TextBlock.RenderTransform>
             </TextBlock>
 
             <TextBlock Grid.Row="2"
@@ -103,16 +57,9 @@
                        TextAlignment="Center"
                        Margin="0,0,0,8"
                        Opacity="0">
-                <TextBlock.RenderTransform>
-                    <TranslateTransform x:Name="DescTransform" Y="30" />
-                </TextBlock.RenderTransform>
             </TextBlock>
 
             <Grid Grid.Row="3" x:Name="AgreementArea" Opacity="0">
-                <Grid.RenderTransform>
-                    <TranslateTransform x:Name="AgreementTransform" Y="30" />
-                </Grid.RenderTransform>
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -124,19 +71,54 @@
                         BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                         BorderThickness="1"
                         CornerRadius="6">
-                    <ScrollViewer x:Name="AgreementScrollViewer" Padding="16,12" VerticalScrollBarVisibility="Auto"
-                                  ViewChanged="OnAgreementScrollChanged">
-                        <TextBlock Text="{x:Bind ViewModel.AgreementText, Mode=OneWay}"
-                                   TextWrapping="Wrap"
-                                   FontSize="12.5"
-                                   LineHeight="20"
-                                   IsTextSelectionEnabled="True" />
-                    </ScrollViewer>
+                    <Grid>
+                        <ScrollViewer x:Name="AgreementScrollViewer" Padding="16,12" VerticalScrollBarVisibility="Auto"
+                                      ViewChanged="OnAgreementScrollChanged">
+                            <TextBlock Text="{x:Bind ViewModel.AgreementText, Mode=OneWay}"
+                                       TextWrapping="Wrap"
+                                       FontSize="12.5"
+                                       LineHeight="20"
+                                       IsTextSelectionEnabled="True" />
+                        </ScrollViewer>
+
+                        <ProgressRing Width="32"
+                                      Height="32"
+                                      IsActive="{x:Bind ViewModel.IsAgreementLoading, Mode=OneWay}"
+                                      Visibility="{x:Bind ViewModel.LoadingVisibility, Mode=OneWay}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center" />
+
+                        <StackPanel Spacing="12"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Visibility="{x:Bind ViewModel.AgreementErrorVisibility, Mode=OneWay}">
+
+                            <FontIcon FontFamily="{StaticResource SegoeFluentIconsFont}"
+                                      Glyph="&#xE783;"
+                                      FontSize="28"
+                                      HorizontalAlignment="Center"
+                                      Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+                            <TextBlock Text="{helpers:Loc Key=AgreementPage_LoadFailed}"
+                                       FontSize="12.5"
+                                       MaxWidth="360"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+                            <Button Content="{helpers:Loc Key=AgreementPage_Retry}"
+                                    Click="OnReloadAgreementClick"
+                                    HorizontalAlignment="Center"
+                                    Padding="16,6"
+                                    CornerRadius="4" />
+                        </StackPanel>
+                    </Grid>
                 </Border>
 
                 <CheckBox Grid.Row="1"
                           IsChecked="{x:Bind ViewModel.IsAgreementChecked, Mode=TwoWay}"
-                          IsEnabled="{x:Bind ViewModel.HasReadAgreement, Mode=OneWay}"
+                          IsEnabled="{x:Bind ViewModel.CanAcceptAgreement, Mode=OneWay}"
                           Margin="0,8,0,0"
                           Content="{helpers:Loc Key=AgreementPage_AgreeCheck}" />
 
@@ -146,21 +128,24 @@
                            Foreground="{ThemeResource TextFillColorTertiaryBrush}"
                            Visibility="{x:Bind ViewModel.HintVisibility, Mode=OneWay}"
                            Margin="28,2,0,0" />
+
+                <TextBlock Grid.Row="2"
+                           Text="{helpers:Loc Key=AgreementPage_SkipHint}"
+                           FontSize="11"
+                           Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                           TextWrapping="Wrap"
+                           Visibility="{x:Bind ViewModel.SkipHintVisibility, Mode=OneWay}"
+                           Margin="28,2,0,0" />
             </Grid>
         </Grid>
 
         <StackPanel Grid.Row="0"
+                    x:Name="IconCheckSection"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Spacing="32"
                     Padding="48"
                     Visibility="{x:Bind ViewModel.IconCheckVisibility, Mode=OneWay}">
-
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True" />
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
 
             <StackPanel Spacing="8" HorizontalAlignment="Center">
                 <Image Source="ms-appx:///Assets/icon.png"
@@ -215,25 +200,20 @@
                         MinWidth="120" />
 
                 <Button Content="{helpers:Loc Key=AgreementPage_DisplayNormal}"
-                        Command="{x:Bind ViewModel.ConfirmIconsCommand}"
+                        Click="OnIconCheckConfirmClick"
                         Style="{StaticResource DefaultButtonStyle}"
                         MinWidth="120" />
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="0"
+                    x:Name="DataDirSection"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Spacing="16"
                     Padding="32,24"
                     MaxWidth="560"
                     Visibility="{x:Bind ViewModel.DataDirVisibility, Mode=OneWay}">
-
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True" />
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
 
             <Image Source="ms-appx:///Assets/icon.png"
                    Width="52" Height="52"
@@ -283,7 +263,7 @@
             </StackPanel>
 
             <Button Content="{helpers:Loc Key=AgreementPage_Next}"
-                    Command="{x:Bind ViewModel.ConfirmDataDirCommand}"
+                    Click="OnDataDirNextClick"
                     HorizontalAlignment="Center"
                     Padding="24,8"
                     CornerRadius="4" />
@@ -299,18 +279,13 @@
         </StackPanel>
 
         <StackPanel Grid.Row="0"
+                    x:Name="TrustSection"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Spacing="20"
                     Padding="48"
                     MaxWidth="560"
                     Visibility="{x:Bind ViewModel.TrustVisibility, Mode=OneWay}">
-
-            <StackPanel.ChildrenTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition FromVerticalOffset="20" IsStaggeringEnabled="True" />
-                </TransitionCollection>
-            </StackPanel.ChildrenTransitions>
 
             <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF27E;"
                       FontSize="50"
@@ -355,7 +330,82 @@
                        TextAlignment="Center" />
         </StackPanel>
 
+        <Grid Grid.Row="0"
+              x:Name="CompleteSection"
+              Padding="48"
+              MaxWidth="600"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Visibility="{x:Bind ViewModel.CompleteVisibility, Mode=OneWay}">
+
+            <StackPanel x:Name="CompleteBadgeArea"
+                        Spacing="16"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xE930;"
+                          FontSize="64"
+                          HorizontalAlignment="Center"
+                          Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+
+                <TextBlock x:Name="CompleteBadgeText"
+                           Text="配置完成"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel x:Name="WelcomePanel"
+                        Spacing="18"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
+
+                <Image Source="ms-appx:///Assets/icon.png"
+                       Width="52"
+                       Height="52"
+                       HorizontalAlignment="Center" />
+
+                <TextBlock x:Name="WelcomeTitle"
+                           Text="欢迎使用芙芙启动器"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center" />
+
+                <TextBlock x:Name="WelcomeDesc"
+                           Text="重启后即可使用"
+                           FontSize="12.5"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center" />
+
+                <Button x:Name="RestartButton"
+                        Content="重启并进入主界面"
+                        Click="OnRestartClick"
+                        Style="{StaticResource AccentButtonStyle}"
+                        FontSize="16"
+                        MinWidth="280"
+                        MinHeight="56"
+                        Padding="48,16"
+                        CornerRadius="8"
+                        Margin="0,6,0,0"
+                        HorizontalAlignment="Center" />
+
+                <TextBlock x:Name="RestartStatusText"
+                           FontSize="12"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
         <Grid Grid.Row="1"
+              x:Name="AgreementActionBar"
+              Opacity="0"
               Padding="20,12"
               BorderThickness="1,1,0,0"
               BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
@@ -363,7 +413,7 @@
               Visibility="{x:Bind ViewModel.AgreementVisibility, Mode=OneWay}">
 
             <Button Content="{helpers:Loc Key=AgreementPage_Next}"
-                    Command="{x:Bind ViewModel.NextCommand}"
+                    Click="OnAgreementNextClick"
                     IsEnabled="{x:Bind ViewModel.IsAgreementChecked, Mode=OneWay}"
                     HorizontalAlignment="Right"
                     CornerRadius="4"

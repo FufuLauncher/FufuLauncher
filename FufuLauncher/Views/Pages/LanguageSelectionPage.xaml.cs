@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using FufuLauncher.Helpers;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -14,6 +15,10 @@ namespace FufuLauncher.Views
 {
     public sealed partial class LanguageSelectionPage : Page
     {
+        private readonly OnboardingMotion _motion = new();
+        private bool _hasEntered;
+        private bool _isLeaving;
+
         public LanguageSelectionViewModel ViewModel
         {
             get;
@@ -25,9 +30,26 @@ namespace FufuLauncher.Views
             InitializeComponent();
         }
 
+        private IReadOnlyList<FrameworkElement> GetMotionItems()
+        {
+            return new FrameworkElement[]
+            {
+                IconImage,
+                TitleText,
+                SubtitleText,
+                LanguageGridArea,
+                ActionBar
+            };
+        }
+
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            EntranceStoryboard.Begin();
+            if (_hasEntered) return;
+            _hasEntered = true;
+
+            var items = GetMotionItems();
+            _motion.Prepare(items);
+            _ = _motion.EnterAsync(items);
         }
 
         private void OnLanguageItemClick(object sender, ItemClickEventArgs e)
@@ -87,8 +109,14 @@ namespace FufuLauncher.Views
 
         private async void OnConfirmClick(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.SelectedLanguage == null) return;
+            if (ViewModel.SelectedLanguage == null || _isLeaving) return;
 
+            _isLeaving = true;
+
+            var items = GetMotionItems();
+            _motion.Settle(items);
+
+            await _motion.ExitAsync(items);
             await ViewModel.ConfirmLanguageCommand.ExecuteAsync(null);
 
             if (Frame.CanGoBack)

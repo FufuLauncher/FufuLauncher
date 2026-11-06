@@ -50,6 +50,7 @@ public sealed partial class MainWindow : WindowEx
     private Microsoft.UI.Xaml.Media.Animation.Storyboard? _pageOverlayStoryboard;
     private bool _isAcrylicOverlayEnabled;
     private bool _isPageOverlaySemiTransparent;
+    private bool _isOnboardingBackdrop;
     private double _pageOverlayTargetOpacity = 1.0;
     private bool _isHamburgerButtonEnabled;
     private NotificationPosition _notificationPosition;

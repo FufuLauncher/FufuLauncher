@@ -2922,6 +2922,15 @@ Buka situs web Microsoft untuk mengunduh dan menginstalnya?</value>
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Harap gulir untuk membaca seluruh perjanjian sebelum menyetujui</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Gagal memuat perjanjian. Periksa koneksi jaringan lalu coba lagi.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Muat ulang</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Jika perjanjian tidak dapat dimuat, Anda boleh melewati pembacaan dan lanjut dengan mencentang kotak.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>Untuk memastikan kualitas tampilan, harap konfirmasi ikon di bawah ini ditampilkan dengan benar</value>
   </data>

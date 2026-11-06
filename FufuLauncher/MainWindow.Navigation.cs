@@ -174,6 +174,9 @@ public sealed partial class MainWindow
 
     private async void ShowMainContent()
     {
+        _isOnboardingBackdrop = false;
+        UpdateBackgroundOverlayTheme();
+
         AgreementFrame.Visibility = Visibility.Collapsed;
         NavigationView.Visibility = Visibility.Visible;
         RefreshAccountMenu();

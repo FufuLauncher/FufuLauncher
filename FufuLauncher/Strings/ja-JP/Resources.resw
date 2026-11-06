@@ -2922,6 +2922,15 @@ MicrosoftのWebサイトからダウンロードしてインストールしま�
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>同意前にスクロールして全文をお読みください</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>利用規約の読み込みに失敗しました。ネットワークを確認して再試行してください。</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>再読み込み</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>読み込めない場合は、規約を読まずに同意にチェックして続行できます。</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>表示品質を確保するため、下のアイコンが正しく表示されているか確認してください</value>
   </data>

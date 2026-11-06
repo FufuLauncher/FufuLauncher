@@ -2922,6 +2922,15 @@ Jetzt zur Microsoft-Website gehen und herunterladen?</value>
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Bitte scrolle durch die vollständige Vereinbarung und setze dann den Haken.</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Die Vereinbarung konnte nicht geladen werden. Bitte prüfen Sie Ihre Netzwerkverbindung und versuchen Sie es erneut.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Neu laden</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Wenn die Vereinbarung nicht geladen werden kann, können Sie das Lesen überspringen und durch Ankreuzen fortfahren.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>Bitte überprüfe zur Sicherstellung der Anzeigequalität, ob die folgenden Symbole korrekt dargestellt werden.</value>
   </data>

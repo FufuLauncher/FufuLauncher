@@ -2922,6 +2922,15 @@ Ir para o site da Microsoft para baixar e instalar?</value>
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Por favor, role para ler o acordo completo antes de concordar</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Falha ao carregar o acordo. Verifique sua conexão e tente novamente.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Recarregar</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Se o acordo não puder ser carregado, você pode pular a leitura e continuar marcando a caixa.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>Para garantir a qualidade de exibição, confirme se os ícones abaixo estão sendo exibidos corretamente</value>
   </data>

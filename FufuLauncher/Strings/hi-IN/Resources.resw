@@ -3059,6 +3059,15 @@
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>सहमत होने से पहले कृपया पूरा अनुबंध पढ़ने के लिए स्क्रॉल करें</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>समझौता लोड नहीं हो सका। कृपया नेटवर्क कनेक्शन जाँचें और पुनः प्रयास करें।</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>पुनः लोड करें</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>यदि समझौता लोड नहीं हो सकता, तो आप पढ़ना छोड़कर चेकबॉक्स पर टिक करके आगे बढ़ सकते हैं।</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>प्रदर्शन गुणवत्ता सुनिश्चित करने के लिए, कृपया पुष्टि करें कि नीचे के आइकन सही दिख रहे हैं</value>
   </data>

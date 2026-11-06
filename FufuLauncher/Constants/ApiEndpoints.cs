@@ -20,6 +20,8 @@ namespace FufuLauncher.Constants
             "https://user.mihoyo.com/passport/index.html?legacy_env=production#/home/security";
 
         public const string AgreementUrl = "https://fufu.skin/";
+        public const string CnUserAgreementUrl = "https://fufu.skin/CN-UserAgreement.txt";
+        public const string EnUserAgreementUrl = "https://fufu.skin/EN-UserAgreement.txt";
         public const string AgreementFallbackUrl = "https://fu1.fun/";
         public const string IconTroubleshootUrl = "https://wwaoi.lanzouu.com/ig75f3hedlaj";
         public const string RoleAvgUrl = "https://api.lelaer.com/ys/getRoleAvg.php?star=all&lang=zh-Hans";

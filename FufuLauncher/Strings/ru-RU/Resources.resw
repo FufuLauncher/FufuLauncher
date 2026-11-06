@@ -2922,6 +2922,15 @@
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>Прокрутите для прочтения соглашения перед подтверждением</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>Не удалось загрузить соглашение. Проверьте подключение к сети и повторите попытку.</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>Если соглашение не удаётся загрузить, можно пропустить чтение и продолжить, установив флажок.</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>Для обеспечения качества проверьте корректность иконок ниже</value>
   </data>

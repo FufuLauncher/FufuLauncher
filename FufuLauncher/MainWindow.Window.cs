@@ -197,6 +197,8 @@ public sealed partial class MainWindow
                 Width = 850;
                 Height = 640;
                 WindowManagerHelper.CenterWindowOnScreen(AppWindow, Width, Height);
+                ShowOnboardingBackdrop();
+                _ = LoadOnboardingBackdropImageAsync();
                 AgreementFrame.Visibility = Visibility.Visible;
                 AgreementFrame.Navigate(typeof(Views.LanguageSelectionPage));
                 SyncPageTheme();

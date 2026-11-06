@@ -2922,6 +2922,15 @@
   <data name="AgreementPage_ScrollHint" xml:space="preserve">
     <value>請滾動閱讀完整條款後勾選同意</value>
   </data>
+  <data name="AgreementPage_LoadFailed" xml:space="preserve">
+    <value>使用者協議載入失敗，請檢查網路連線後重試</value>
+  </data>
+  <data name="AgreementPage_Retry" xml:space="preserve">
+    <value>重新載入</value>
+  </data>
+  <data name="AgreementPage_SkipHint" xml:space="preserve">
+    <value>網路無法使用時可跳過閱讀，直接勾選同意並繼續</value>
+  </data>
   <data name="AgreementPage_IconCheckHint" xml:space="preserve">
     <value>為了確保顯示效果，請確認下方圖示是否正常顯示</value>
   </data>
