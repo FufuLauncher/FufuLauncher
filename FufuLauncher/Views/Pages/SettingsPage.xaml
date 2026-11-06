@@ -590,6 +590,7 @@
 
             <ScrollViewer x:Name="SettingsScrollViewer"
                           Padding="32,20,32,40"
+                          IsTabStop="True"
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollMode="Disabled"
                           ViewChanged="SettingsScrollViewer_ViewChanged">
