@@ -32,6 +32,7 @@ public partial class App
 
             await GetService<LightweightPluginService>().InitializeAsync();
             await GetService<ConstraintService>().InitializeAsync();
+            await GetService<QuickFpsHotkeyService>().InitializeAsync();
 
             await VerifyResourceFilesAsync();
 

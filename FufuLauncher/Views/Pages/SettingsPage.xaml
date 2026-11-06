@@ -433,6 +433,17 @@
                         </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="{helpers:Loc Key=SectionQuickFps}" Tag="QuickFpsItem">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xF4B8;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionCheckinSettings}" Tag="CheckinSettingsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF21C;"
@@ -513,17 +524,6 @@
                         </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="{helpers:Loc Key=SectionMcp}" Tag="McpItem">
-                    <NavigationViewItem.Icon>
-                        <FontIcon Glyph="&#xE999;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
-                            <FontIcon.RenderTransform>
-                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
-                            </FontIcon.RenderTransform>
-                        </FontIcon>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
                 <NavigationViewItem Content="{helpers:Loc Key=SectionUpdate}" Tag="UpdateItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF190;"
@@ -560,6 +560,29 @@
                         </FontIcon>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
+                <NavigationViewItem Content="{helpers:Loc Key=SectionServiceStatus}" Tag="ServiceStatusItem">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE9DC;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="{helpers:Loc Key=SectionMcp}" Tag="McpItem">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE999;"
+                            FontFamily="{StaticResource FluentIconsFont}"
+                            RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
             </NavigationView.MenuItems>
         </NavigationView>
 
@@ -1953,6 +1976,249 @@
                                     </StackPanel>
                                 </StackPanel>
 
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel x:Name="QuickFpsItem" Style="{StaticResource SectionBlockStyle}">
+                        <TextBlock Text="{helpers:Loc Key=SectionQuickFps}"
+                                   Style="{StaticResource SectionHeaderStyle}" />
+                        <Border Style="{StaticResource SettingsCardStyle}" Translation="0,0,32">
+                            <Border.Shadow>
+                                <ThemeShadow />
+                            </Border.Shadow>
+                            <StackPanel>
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4B8;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsEnableTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsEnableCaption}" />
+                                    </StackPanel>
+                                    <ToggleSwitch x:Name="QuickFpsEnabledToggle" Grid.Column="2"
+                                                  Style="{StaticResource RowToggleStyle}"
+                                                  Toggled="OnQuickFpsEnabledToggled" />
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE7FC;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsGameOnlyTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsGameOnlyCaption}" />
+                                    </StackPanel>
+                                    <ToggleSwitch x:Name="QuickFpsGameOnlyToggle" Grid.Column="2"
+                                                  Style="{StaticResource RowToggleStyle}"
+                                                  Toggled="OnQuickFpsGameOnlyToggled" />
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE945;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsActionsTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsActionsCaption}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="20"
+                                                VerticalAlignment="Center" Margin="16,0,0,0">
+                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                            <TextBlock Text="{helpers:Loc Key=QuickFpsSwitchLabel}"
+                                                       FontSize="12" Opacity="0.85" VerticalAlignment="Center" />
+                                            <ToggleSwitch x:Name="QuickFpsSwitchToggle"
+                                                          Style="{StaticResource RowToggleStyle}" Margin="0"
+                                                          Toggled="OnQuickFpsSwitchToggled" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                            <TextBlock Text="{helpers:Loc Key=QuickFpsAdjustLabel}"
+                                                       FontSize="12" Opacity="0.85" VerticalAlignment="Center" />
+                                            <ToggleSwitch x:Name="QuickFpsAdjustToggle"
+                                                          Style="{StaticResource RowToggleStyle}" Margin="0"
+                                                          Toggled="OnQuickFpsAdjustToggled" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF4B8;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsAdjustTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsAdjustCaption}" />
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Style="{StaticResource RowSubPanelStyle}" Orientation="Horizontal"
+                                            Spacing="12">
+                                    <NumberBox x:Name="QuickFpsStepBox" Style="{StaticResource RowNumberBoxStyle}"
+                                               Width="120" Margin="0"
+                                               Header="{helpers:Loc Key=QuickFpsStep}"
+                                               Minimum="1" Maximum="100000" SmallChange="1"
+                                               ValueChanged="OnQuickFpsStepChanged" />
+                                    <ComboBox x:Name="QuickFpsIncreaseKeyBox" Style="{StaticResource RowComboBoxStyle}"
+                                              Width="170" MinWidth="0" Margin="0"
+                                              Header="{helpers:Loc Key=QuickFpsIncreaseKey}"
+                                              ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                              DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                              SelectionChanged="OnQuickFpsIncreaseKeyChanged" />
+                                    <ComboBox x:Name="QuickFpsDecreaseKeyBox" Style="{StaticResource RowComboBoxStyle}"
+                                              Width="170" MinWidth="0" Margin="0"
+                                              Header="{helpers:Loc Key=QuickFpsDecreaseKey}"
+                                              ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                              DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                              SelectionChanged="OnQuickFpsDecreaseKeyChanged" />
+                                </StackPanel>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE713;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsSlotsTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=QuickFpsSlotsCaption}" />
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Style="{StaticResource RowSubPanelStyle}" Spacing="8">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="190" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="1" FontSize="12" Opacity="0.7"
+                                                   Text="{helpers:Loc Key=QuickFpsFps}" />
+                                        <TextBlock Grid.Column="2" FontSize="12" Opacity="0.7"
+                                                   Text="{helpers:Loc Key=QuickFpsKey}" />
+                                    </Grid>
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="190" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="QuickFpsSlot1Label" VerticalAlignment="Center"
+                                                   FontSize="12" Opacity="0.85" />
+                                        <NumberBox x:Name="QuickFpsSlot1FpsBox" Grid.Column="1"
+                                                   Style="{StaticResource RowNumberBoxStyle}" Width="140" Margin="0"
+                                                   Minimum="1" Maximum="100000" SmallChange="1"
+                                                   Tag="1" ValueChanged="OnQuickFpsSlotFpsChanged" />
+                                        <ComboBox x:Name="QuickFpsSlot1KeyBox" Grid.Column="2"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                                  DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                                  Tag="1" SelectionChanged="OnQuickFpsSlotKeyChanged" />
+                                    </Grid>
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="190" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="QuickFpsSlot2Label" VerticalAlignment="Center"
+                                                   FontSize="12" Opacity="0.85" />
+                                        <NumberBox x:Name="QuickFpsSlot2FpsBox" Grid.Column="1"
+                                                   Style="{StaticResource RowNumberBoxStyle}" Width="140" Margin="0"
+                                                   Minimum="1" Maximum="100000" SmallChange="1"
+                                                   Tag="2" ValueChanged="OnQuickFpsSlotFpsChanged" />
+                                        <ComboBox x:Name="QuickFpsSlot2KeyBox" Grid.Column="2"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                                  DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                                  Tag="2" SelectionChanged="OnQuickFpsSlotKeyChanged" />
+                                    </Grid>
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="190" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="QuickFpsSlot3Label" VerticalAlignment="Center"
+                                                   FontSize="12" Opacity="0.85" />
+                                        <NumberBox x:Name="QuickFpsSlot3FpsBox" Grid.Column="1"
+                                                   Style="{StaticResource RowNumberBoxStyle}" Width="140" Margin="0"
+                                                   Minimum="1" Maximum="100000" SmallChange="1"
+                                                   Tag="3" ValueChanged="OnQuickFpsSlotFpsChanged" />
+                                        <ComboBox x:Name="QuickFpsSlot3KeyBox" Grid.Column="2"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                                  DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                                  Tag="3" SelectionChanged="OnQuickFpsSlotKeyChanged" />
+                                    </Grid>
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="190" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="QuickFpsSlot4Label" VerticalAlignment="Center"
+                                                   FontSize="12" Opacity="0.85" />
+                                        <NumberBox x:Name="QuickFpsSlot4FpsBox" Grid.Column="1"
+                                                   Style="{StaticResource RowNumberBoxStyle}" Width="140" Margin="0"
+                                                   Minimum="1" Maximum="100000" SmallChange="1"
+                                                   Tag="4" ValueChanged="OnQuickFpsSlotFpsChanged" />
+                                        <ComboBox x:Name="QuickFpsSlot4KeyBox" Grid.Column="2"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                                  DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                                  Tag="4" SelectionChanged="OnQuickFpsSlotKeyChanged" />
+                                    </Grid>
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="150" />
+                                            <ColumnDefinition Width="190" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock x:Name="QuickFpsSlot5Label" VerticalAlignment="Center"
+                                                   FontSize="12" Opacity="0.85" />
+                                        <NumberBox x:Name="QuickFpsSlot5FpsBox" Grid.Column="1"
+                                                   Style="{StaticResource RowNumberBoxStyle}" Width="140" Margin="0"
+                                                   Minimum="1" Maximum="100000" SmallChange="1"
+                                                   Tag="5" ValueChanged="OnQuickFpsSlotFpsChanged" />
+                                        <ComboBox x:Name="QuickFpsSlot5KeyBox" Grid.Column="2"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  ItemsSource="{x:Bind QuickFpsKeyChoices}"
+                                                  DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
+                                                  Tag="5" SelectionChanged="OnQuickFpsSlotKeyChanged" />
+                                    </Grid>
+                                </StackPanel>
+
+                                <TextBlock Text="{helpers:Loc Key=QuickFpsHint}"
+                                           Style="{StaticResource RowCaptionStyle}"
+                                           Margin="36,4,0,4" />
                             </StackPanel>
                         </Border>
                     </StackPanel>

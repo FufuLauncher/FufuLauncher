@@ -22,6 +22,7 @@ public static class SettingsSectionIds
     public const string WindowEffects = "WindowEffectsItem";
     public const string LaunchConfig = "LaunchConfigItem";
     public const string Screenshots = "ScreenshotSettingsItem";
+    public const string QuickFps = "QuickFpsItem";
     public const string Checkin = "CheckinSettingsItem";
     public const string Language = "LanguageItem";
     public const string WindowBehavior = "WindowBehaviorItem";
@@ -32,6 +33,7 @@ public static class SettingsSectionIds
     public const string Updates = "UpdateItem";
     public const string About = "AboutItem";
     public const string SecurityAuth = "SecurityAuthItem";
+    public const string ServiceStatus = "ServiceStatusItem";
     public const string Mcp = "McpItem";
 }
 
@@ -68,6 +70,7 @@ public partial class SettingsViewModel
         RegisterSection(SettingsSectionIds.WindowEffects, LoadWindowEffectsSectionAsync);
         RegisterSection(SettingsSectionIds.LaunchConfig, LoadLaunchConfigSectionAsync);
         RegisterSection(SettingsSectionIds.Screenshots, LoadScreenshotSectionAsync);
+        RegisterSection(SettingsSectionIds.QuickFps, () => Task.CompletedTask);
         RegisterSection(SettingsSectionIds.Checkin, LoadCheckinSectionAsync);
         RegisterSection(SettingsSectionIds.Language, LoadLanguageSectionAsync);
         RegisterSection(SettingsSectionIds.WindowBehavior, LoadWindowBehaviorSectionAsync);
@@ -78,6 +81,7 @@ public partial class SettingsViewModel
         RegisterSection(SettingsSectionIds.Updates, LoadUpdateSectionAsync);
         RegisterSection(SettingsSectionIds.About, LoadAboutSectionAsync);
         RegisterSection(SettingsSectionIds.SecurityAuth, LoadSecurityAuthSectionAsync);
+        RegisterSection(SettingsSectionIds.ServiceStatus, () => Task.CompletedTask);
         RegisterSection(SettingsSectionIds.Mcp, () => Task.CompletedTask);
     }
 

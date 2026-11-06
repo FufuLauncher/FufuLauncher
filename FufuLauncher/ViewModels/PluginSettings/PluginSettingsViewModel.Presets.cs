@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text.Json;
 using CommunityToolkit.Mvvm.Messaging;
@@ -198,6 +199,28 @@ public partial class PluginSettingsViewModel
         {
             ConfigurationPreparationGate.Release();
         }
+    }
+
+    public void ApplyQuickFpsTargetFps(int fps)
+    {
+        if (SelectedPluginIndex != 0 || IsLightweightMode) return;
+
+        var preset = CurrentPreset;
+        if (preset?.ConfigData == null) return;
+
+        var section = preset.ConfigData
+            .FirstOrDefault(item => item.Key.Equals("TargetFps", StringComparison.OrdinalIgnoreCase))
+            .Value;
+        if (section == null)
+        {
+            section = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            preset.ConfigData["TargetFps"] = section;
+        }
+
+        var valueKey = section.Keys
+            .FirstOrDefault(key => key.Equals("Value", StringComparison.OrdinalIgnoreCase))
+            ?? "Value";
+        section[valueKey] = fps.ToString(CultureInfo.InvariantCulture);
     }
 
     private void OnSettingValueChanged(string section, string key, string value)

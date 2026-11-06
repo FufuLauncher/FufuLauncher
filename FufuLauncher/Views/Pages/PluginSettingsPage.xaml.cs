@@ -54,6 +54,11 @@ public sealed partial class PluginSettingsPage : Page
                 ApplyModeChange();
             });
         });
+
+        WeakReferenceMessenger.Default.Register<QuickFpsTargetFpsChangedMessage>(this, (_, message) =>
+        {
+            DispatcherQueue.TryEnqueue(() => ViewModel.ApplyQuickFpsTargetFps(message.Value));
+        });
     }
 
     private async void PluginSettingsPage_Loaded(object sender, RoutedEventArgs e)

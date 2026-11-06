@@ -168,6 +168,69 @@
   <data name="SectionScreenshotSettings" xml:space="preserve">
     <value>Screenshot Settings</value>
   </data>
+  <data name="SectionQuickFps" xml:space="preserve">
+    <value>Quick FPS Mode</value>
+  </data>
+  <data name="QuickFpsEnableTitle" xml:space="preserve">
+    <value>Enable quick FPS mode</value>
+  </data>
+  <data name="QuickFpsEnableCaption" xml:space="preserve">
+    <value>Use hotkeys to change the main plugin's target frame rate in game. </value>
+  </data>
+  <data name="QuickFpsGameOnlyTitle" xml:space="preserve">
+    <value>Listen only while the game is running</value>
+  </data>
+  <data name="QuickFpsGameOnlyCaption" xml:space="preserve">
+    <value>Only react to hotkeys while the game is running. When off, hotkeys are processed whenever the launcher runs.</value>
+  </data>
+  <data name="QuickFpsActionsTitle" xml:space="preserve">
+    <value>Hotkey actions</value>
+  </data>
+  <data name="QuickFpsActionsCaption" xml:space="preserve">
+    <value>Keep either action if you want</value>
+  </data>
+  <data name="QuickFpsSwitchLabel" xml:space="preserve">
+    <value>Switch preset</value>
+  </data>
+  <data name="QuickFpsAdjustLabel" xml:space="preserve">
+    <value>Adjust FPS</value>
+  </data>
+  <data name="QuickFpsAdjustTitle" xml:space="preserve">
+    <value>Adjustment step and keys</value>
+  </data>
+  <data name="QuickFpsAdjustCaption" xml:space="preserve">
+    <value>The target frame rate never drops below 60 after adjusting</value>
+  </data>
+  <data name="QuickFpsStep" xml:space="preserve">
+    <value>Step</value>
+  </data>
+  <data name="QuickFpsIncreaseKey" xml:space="preserve">
+    <value>Increase key</value>
+  </data>
+  <data name="QuickFpsDecreaseKey" xml:space="preserve">
+    <value>Decrease key</value>
+  </data>
+  <data name="QuickFpsSlotsTitle" xml:space="preserve">
+    <value>Preset slots</value>
+  </data>
+  <data name="QuickFpsSlotsCaption" xml:space="preserve">
+    <value>Up to 5 slots; presets may be below 60</value>
+  </data>
+  <data name="QuickFpsSlotFormat" xml:space="preserve">
+    <value>Slot {0}</value>
+  </data>
+  <data name="QuickFpsFps" xml:space="preserve">
+    <value>FPS</value>
+  </data>
+  <data name="QuickFpsKey" xml:space="preserve">
+    <value>Hotkey</value>
+  </data>
+  <data name="QuickFpsHint" xml:space="preserve">
+    <value>Presets may be below 60 FPS; hotkey adjustments never go below 60.</value>
+  </data>
+  <data name="QuickFpsUnbound" xml:space="preserve">
+    <value>Unbound</value>
+  </data>
   <data name="SectionUpdate" xml:space="preserve">
     <value>Check for Updates</value>
   </data>

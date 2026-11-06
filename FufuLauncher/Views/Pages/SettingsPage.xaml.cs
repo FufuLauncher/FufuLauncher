@@ -27,11 +27,12 @@ public sealed partial class SettingsPage : Page
         SettingsSectionIds.Appearance, SettingsSectionIds.HomeCards, SettingsSectionIds.GameAnnouncement,
         SettingsSectionIds.Widgets, SettingsSectionIds.Notes, SettingsSectionIds.HomeText,
         SettingsSectionIds.ImageSource, SettingsSectionIds.Background, SettingsSectionIds.WindowEffects,
-        SettingsSectionIds.LaunchConfig, SettingsSectionIds.Screenshots, SettingsSectionIds.Checkin,
+        SettingsSectionIds.LaunchConfig, SettingsSectionIds.Screenshots, SettingsSectionIds.QuickFps,
+        SettingsSectionIds.Checkin,
         SettingsSectionIds.Language, SettingsSectionIds.WindowBehavior, SettingsSectionIds.Startup,
         SettingsSectionIds.StartupSound, SettingsSectionIds.AdvancedOptions, SettingsSectionIds.StoragePaths,
         SettingsSectionIds.Updates, SettingsSectionIds.About, SettingsSectionIds.SecurityAuth,
-        SettingsSectionIds.Mcp
+        SettingsSectionIds.ServiceStatus, SettingsSectionIds.Mcp
     };
 
     private readonly List<SettingsSearchResult> _searchIndex = new();
@@ -78,6 +79,7 @@ public sealed partial class SettingsPage : Page
         EntranceStoryboard.Begin();
         UpdateTemporaryDeveloperAuthUi();
         UpdatePluginConfigGuardUi();
+        RefreshQuickFpsSettingsUi();
 
         _isNavigatingFromMenu = true;
         if (SettingsNavigationView.SelectedItem == null)
@@ -97,6 +99,10 @@ public sealed partial class SettingsPage : Page
             {
                 case SettingsSectionIds.AdvancedOptions:
                     await UpdateDeviceInfoRowVisibilityAsync();
+                    break;
+
+                case SettingsSectionIds.QuickFps:
+                    RefreshQuickFpsSettingsUi();
                     break;
 
                 case SettingsSectionIds.Updates:

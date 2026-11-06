@@ -103,6 +103,7 @@ public partial class App
                 services.AddTransient<OtherPage>();
                 services.AddSingleton<IAutoClickerService, AutoClickerService>();
                 services.AddSingleton<IScreenshotService, ScreenshotService>();
+                services.AddSingleton<QuickFpsHotkeyService>();
                 services.AddTransient<LanguageSelectionViewModel>();
                 services.AddTransient<LanguageSelectionPage>();
                 services.AddTransient<AgreementViewModel>();

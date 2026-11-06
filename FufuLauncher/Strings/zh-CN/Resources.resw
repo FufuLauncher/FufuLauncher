@@ -168,6 +168,69 @@
   <data name="SectionScreenshotSettings" xml:space="preserve">
     <value>截图设置</value>
   </data>
+  <data name="SectionQuickFps" xml:space="preserve">
+    <value>快捷操作模式</value>
+  </data>
+  <data name="QuickFpsEnableTitle" xml:space="preserve">
+    <value>启用快捷操作模式</value>
+  </data>
+  <data name="QuickFpsEnableCaption" xml:space="preserve">
+    <value>用快捷键在游戏内切换主插件的目标帧率</value>
+  </data>
+  <data name="QuickFpsGameOnlyTitle" xml:space="preserve">
+    <value>游戏运行时启用监听</value>
+  </data>
+  <data name="QuickFpsGameOnlyCaption" xml:space="preserve">
+    <value>仅当游戏运行时响应快捷键</value>
+  </data>
+  <data name="QuickFpsActionsTitle" xml:space="preserve">
+    <value>快捷键动作</value>
+  </data>
+  <data name="QuickFpsActionsCaption" xml:space="preserve">
+    <value>可以只保留其中一种操作</value>
+  </data>
+  <data name="QuickFpsSwitchLabel" xml:space="preserve">
+    <value>切换帧数</value>
+  </data>
+  <data name="QuickFpsAdjustLabel" xml:space="preserve">
+    <value>加减帧数</value>
+  </data>
+  <data name="QuickFpsAdjustTitle" xml:space="preserve">
+    <value>加减幅度与按键</value>
+  </data>
+  <data name="QuickFpsAdjustCaption" xml:space="preserve">
+    <value>加/减后的目标帧率不会低于60</value>
+  </data>
+  <data name="QuickFpsStep" xml:space="preserve">
+    <value>幅度</value>
+  </data>
+  <data name="QuickFpsIncreaseKey" xml:space="preserve">
+    <value>加帧键</value>
+  </data>
+  <data name="QuickFpsDecreaseKey" xml:space="preserve">
+    <value>减帧键</value>
+  </data>
+  <data name="QuickFpsSlotsTitle" xml:space="preserve">
+    <value>预设槽位</value>
+  </data>
+  <data name="QuickFpsSlotsCaption" xml:space="preserve">
+    <value>最多5个槽位；预设帧率可以低于60</value>
+  </data>
+  <data name="QuickFpsSlotFormat" xml:space="preserve">
+    <value>槽位 {0}</value>
+  </data>
+  <data name="QuickFpsFps" xml:space="preserve">
+    <value>帧数</value>
+  </data>
+  <data name="QuickFpsKey" xml:space="preserve">
+    <value>快捷键</value>
+  </data>
+  <data name="QuickFpsHint" xml:space="preserve">
+    <value>预设帧率可低于60，快捷键加/减后的目标帧率不会低于60。</value>
+  </data>
+  <data name="QuickFpsUnbound" xml:space="preserve">
+    <value>未绑定</value>
+  </data>
   <data name="SectionUpdate" xml:space="preserve">
     <value>检查更新</value>
   </data>
