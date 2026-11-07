@@ -268,6 +268,11 @@ public partial class MainWindow
             return false;
         }
 
+        if (!await IsNodeEnabledAsync())
+        {
+            return false;
+        }
+
         try
         {
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
@@ -306,6 +311,36 @@ public partial class MainWindow
         {
             return false;
         }
+    }
+
+    private async Task<bool> IsNodeEnabledAsync()
+    {
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            string switchResponse = await _httpClient.GetStringAsync(ApiEndpoints.NodeSwitchUrl, cts.Token);
+            JObject switchJson = JObject.Parse(switchResponse);
+            return IsStatusEnabled(switchJson.GetValue("Status", StringComparison.OrdinalIgnoreCase));
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private static bool IsStatusEnabled(JToken? statusToken)
+    {
+        if (statusToken == null || statusToken.Type == JTokenType.Null)
+        {
+            return false;
+        }
+
+        if (statusToken.Type == JTokenType.Boolean)
+        {
+            return statusToken.Value<bool>();
+        }
+
+        return bool.TryParse(statusToken.ToString().Trim(), out bool enabled) && enabled;
     }
 
     private async Task ShowMirrorSelectionAsync(string selectionSubtitleKey)

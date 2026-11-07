@@ -17,6 +17,7 @@ public static class ApiEndpoints
 
     public const string NodeBaseUrl = "https://fufu.668851.xyz";
     public const string NodeStatusUrl = NodeBaseUrl + "/api/status";
+    public const string NodeSwitchUrl = "https://fufu.skin/DownloadNode.json";
     public const string R2BaseUrl = "https://cdn.fufu.skin";
 
     public const string TestFileUrl = "https://raw.githubusercontent.com/moodlehq/moodle-exttests/master/test.html";
