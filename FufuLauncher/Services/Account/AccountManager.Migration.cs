@@ -91,45 +91,66 @@ public partial class AccountManager
         }
     }
 
+    private static readonly EnumerationOptions CookieScanOptions = new()
+    {
+        RecurseSubdirectories = true,
+        IgnoreInaccessible = true,
+        AttributesToSkip = FileAttributes.Hidden | FileAttributes.System | FileAttributes.ReparsePoint
+    };
+
     private async Task EncryptOrphanCookieFilesAsync()
     {
-        if (!Directory.Exists(CookiesDir))
-            return;
-
-        foreach (var path in Directory.EnumerateFiles(CookiesDir, "*.json", SearchOption.AllDirectories))
+        try
         {
-            try
-            {
-                var bytes = await File.ReadAllBytesAsync(path);
-                if (CookieVault.IsEncryptedFile(bytes))
-                {
-                    var read = await ReadCookieFileAsync(path);
-                    if (read?.NeedsRewrite == true)
-                    {
-                        await WriteCookieFileAsync(path, read.Cookies);
-                        DebugLog.Info("AccountManager.Migration",
-                            $"[AccountManager] Converted cookie file storage format: {Path.GetFileName(path)}");
-                    }
+            if (!Directory.Exists(CookiesDir))
+                return;
 
-                    continue;
+            foreach (var path in Directory.EnumerateFiles(CookiesDir, "*.json", CookieScanOptions))
+            {
+                await TryEncryptOrphanCookieFileAsync(path);
+            }
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            ReportStorageWarning(CookiesDir, ex);
+            DebugLog.Warn("AccountManager.Migration",
+                $"[AccountManager] Skipped orphan cookie file scan: {CookiesDir} ({ex.Message})");
+        }
+    }
+
+    private async Task TryEncryptOrphanCookieFileAsync(string path)
+    {
+        try
+        {
+            var bytes = await File.ReadAllBytesAsync(path);
+            if (CookieVault.IsEncryptedFile(bytes))
+            {
+                var read = await ReadCookieFileAsync(path);
+                if (read?.NeedsRewrite == true)
+                {
+                    await WriteCookieFileAsync(path, read.Cookies);
+                    DebugLog.Info("AccountManager.Migration",
+                        $"[AccountManager] Converted cookie file storage format: {Path.GetFileName(path)}");
                 }
 
-                var cookies = ParseLegacyCookieJson(bytes);
-                if (cookies == null)
-                {
-                    RemoveUnreadableCookieFile(path);
-                    continue;
-                }
+                return;
+            }
 
-                await WriteCookieFileAsync(path, cookies);
-                DebugLog.Info("AccountManager.Migration",
-                    $"[AccountManager] Auto-encrypted legacy cookie file: {Path.GetFileName(path)}");
-            }
-            catch (Exception ex)
+            var cookies = ParseLegacyCookieJson(bytes);
+            if (cookies == null)
             {
-                DebugLog.Info("AccountManager.Migration",
-                    $"[AccountManager] Failed to auto-encrypt legacy cookie file {Path.GetFileName(path)}: {ex.Message}");
+                RemoveUnreadableCookieFile(path);
+                return;
             }
+
+            await WriteCookieFileAsync(path, cookies);
+            DebugLog.Info("AccountManager.Migration",
+                $"[AccountManager] Auto-encrypted legacy cookie file: {Path.GetFileName(path)}");
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("AccountManager.Migration",
+                $"[AccountManager] Failed to auto-encrypt legacy cookie file {Path.GetFileName(path)}: {ex.Message}");
         }
     }
 
@@ -174,14 +195,21 @@ public partial class AccountManager
 
     private bool HasLegacyAccounts()
     {
-        if (!Directory.Exists(DataDir))
+        try
+        {
+            if (!Directory.Exists(DataDir))
+                return false;
+
+            return Directory.EnumerateFiles(DataDir, "config*.json", SearchOption.TopDirectoryOnly)
+                .Any(f => !Path.GetFileName(f).Equals("accounts.json", StringComparison.OrdinalIgnoreCase));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            ReportStorageWarning(DataDir, ex);
+            DebugLog.Warn("AccountManager.Migration",
+                $"[AccountManager] Skipped legacy account data scan: {DataDir} ({ex.Message})");
             return false;
-
-        var configFiles = Directory.GetFiles(DataDir, "config*.json")
-            .Where(f => !Path.GetFileName(f).Equals("accounts.json", StringComparison.OrdinalIgnoreCase))
-            .ToList();
-
-        return configFiles.Count > 0;
+        }
     }
 
     private async Task MigrateLegacyAccountsAsync()

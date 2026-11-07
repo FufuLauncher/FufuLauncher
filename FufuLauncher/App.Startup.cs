@@ -105,6 +105,8 @@ public partial class App
 
                 _ = Task.Run(CheckStoragePathsAsync);
 
+                _ = Task.Run(ReportAccountStorageWarningAsync);
+
                 _ = Task.Run(SyncStartupRegistrationAsync);
 
                 ProcessStartupLaunchArguments();
@@ -130,6 +132,33 @@ public partial class App
         catch (Exception ex)
         {
             DebugLog.Info("App.Startup", $"[PluginConfigGuard] Baseline refresh failed: {ex.Message}");
+        }
+    }
+
+    private async Task ReportAccountStorageWarningAsync()
+    {
+        try
+        {
+            var warning = GetService<AccountManager>().StorageWarning;
+            if (warning == null)
+                return;
+
+            DebugLog.Warn("App.Startup",
+                $"[AccountManager] Account storage unavailable: {warning.Path} ({warning.Reason})");
+
+            var notification = new Messages.NotificationMessage(
+                "AccountStorage_UnavailableTitle".GetLocalized(),
+                string.Format("AccountStorage_UnavailableMessage".GetLocalized(), warning.Path),
+                Messages.NotificationType.Warning,
+                0);
+
+            await Task.Delay(1200);
+
+            _mainDispatcherQueue.TryEnqueue(() => WeakReferenceMessenger.Default.Send(notification));
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("App.Startup", $"[AccountManager] Startup account storage report failed: {ex.Message}");
         }
     }
 

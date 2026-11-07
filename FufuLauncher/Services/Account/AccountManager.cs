@@ -16,6 +16,8 @@ public sealed record AccountCookieFile(
     [property: System.Text.Json.Serialization.JsonPropertyName("cookies")]
     Dictionary<string, string> Cookies);
 
+public sealed record AccountStorageWarning(string Path, string Reason);
+
 public partial class AccountManager
 {
     private string DataDir => Helpers.AppPaths.DataDir;
@@ -27,7 +29,9 @@ public partial class AccountManager
     private readonly ConcurrentDictionary<string, List<GameRoleInfo>> _sessionGameRoles = new();
     private AccountList _accountList;
     private string? _activeAccountId;
+    private AccountStorageWarning? _storageWarning;
     public string? ActiveAccountId => _activeAccountId;
+    public AccountStorageWarning? StorageWarning => _storageWarning;
 
     public AccountManager()
     {
@@ -59,6 +63,9 @@ public partial class AccountManager
         }
     }
 
+    private void ReportStorageWarning(string path, Exception ex) =>
+        _storageWarning ??= new AccountStorageWarning(path, ex.Message);
+
     public AccountEntry GetActiveAccountEntry() =>
         _accountList.Accounts.FirstOrDefault(a => a.Id == _activeAccountId);
 
@@ -72,6 +79,8 @@ public partial class AccountManager
 
     private async Task LoadAccountListAsync()
     {
+        var accountListLoaded = true;
+
         if (File.Exists(AccountsFilePath))
         {
             try
@@ -94,11 +103,22 @@ public partial class AccountManager
 
                 _accountList = new AccountList();
             }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                accountListLoaded = false;
+                ReportStorageWarning(AccountsFilePath, ex);
+                DebugLog.Warn("AccountManager",
+                    $"[AccountManager] Unable to read accounts.json, continuing with an empty account list: {ex.Message}");
+                _accountList = new AccountList();
+            }
         }
         else
         {
             _accountList = new AccountList();
         }
+
+        if (_accountList.Accounts == null)
+            _accountList.Accounts = new List<AccountEntry>();
 
         var normalizedAccounts = _accountList.Accounts
             .Where(a => !string.IsNullOrWhiteSpace(a?.Id))
@@ -122,14 +142,21 @@ public partial class AccountManager
 
         await EncryptOrphanCookieFilesAsync();
 
-        if (normalizedAccounts.Count != _accountList.Accounts.Count || metadataChanged)
+        bool accountListNeedsSave = normalizedAccounts.Count != _accountList.Accounts.Count || metadataChanged;
+        _accountList.Accounts = normalizedAccounts;
+
+        if (accountListLoaded && accountListNeedsSave)
         {
-            _accountList.Accounts = normalizedAccounts;
-            await SaveAccountListAsync();
-        }
-        else
-        {
-            _accountList.Accounts = normalizedAccounts;
+            try
+            {
+                await SaveAccountListAsync();
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                ReportStorageWarning(AccountsFilePath, ex);
+                DebugLog.Warn("AccountManager",
+                    $"[AccountManager] Unable to save account list: {ex.Message}");
+            }
         }
 
         var settings = App.GetService<ILocalSettingsService>();

@@ -133,7 +133,6 @@ public sealed partial class GameSettingsPage
         var hWnd = WindowNative.GetWindowHandle(newWindow);
         var winId = Win32Interop.GetWindowIdFromWindow(hWnd);
         var appWindow = AppWindow.GetFromWindowId(winId);
-        appWindow.Resize(new Windows.Graphics.SizeInt32(1280, 720));
 
         var rootFrame = new Frame();
         rootFrame.Navigate(typeof(AdvancedServerSwitchPage), new SwitchPageParams
@@ -144,7 +143,44 @@ public sealed partial class GameSettingsPage
         });
 
         newWindow.Content = rootFrame;
+
+        ApplyMainWindowBounds(appWindow);
+
         newWindow.Activate();
+    }
+
+    private static void ApplyMainWindowBounds(AppWindow appWindow)
+    {
+        if (App.MainWindow?.AppWindow is { } mainAppWindow &&
+            mainAppWindow.Size is { Width: > 0, Height: > 0 } mainSize)
+        {
+            bool mainWindowUsable = mainAppWindow.IsVisible &&
+                                    mainAppWindow.Presenter is not
+                                        OverlappedPresenter { State: OverlappedPresenterState.Minimized };
+
+            if (mainWindowUsable)
+            {
+                appWindow.MoveAndResize(new Windows.Graphics.RectInt32(
+                    mainAppWindow.Position.X,
+                    mainAppWindow.Position.Y,
+                    mainSize.Width,
+                    mainSize.Height));
+
+                if (mainAppWindow.Presenter is OverlappedPresenter { State: OverlappedPresenterState.Maximized } &&
+                    appWindow.Presenter is OverlappedPresenter presenter)
+                {
+                    presenter.Maximize();
+                }
+
+                return;
+            }
+
+            appWindow.Resize(mainSize);
+            WindowManagerHelper.CenterWindowOnScreen(appWindow, mainSize.Width, mainSize.Height);
+            return;
+        }
+
+        appWindow.Resize(new Windows.Graphics.SizeInt32(1280, 720));
     }
 
     #endregion

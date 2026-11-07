@@ -111,6 +111,12 @@
   <data name="SectionAdvancedOptions" xml:space="preserve">
     <value>高级选项</value>
   </data>
+  <data name="AccountStorage_UnavailableTitle" xml:space="preserve">
+    <value>账号数据无法访问</value>
+  </data>
+  <data name="AccountStorage_UnavailableMessage" xml:space="preserve">
+    <value>无法访问账号数据：{0}。软件会继续启动，但本地账号可能不会显示。请检查该目录的访问权限，或在“设置 - 存储路径”中更换数据目录后重启。</value>
+  </data>
   <data name="StoragePath_MissingTitle" xml:space="preserve">
     <value>存储路径不可用</value>
   </data>

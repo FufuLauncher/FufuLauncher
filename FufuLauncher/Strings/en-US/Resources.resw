@@ -111,6 +111,12 @@
   <data name="SectionAdvancedOptions" xml:space="preserve">
     <value>Advanced Options</value>
   </data>
+  <data name="AccountStorage_UnavailableTitle" xml:space="preserve">
+    <value>Account data unavailable</value>
+  </data>
+  <data name="AccountStorage_UnavailableMessage" xml:space="preserve">
+    <value>The account data folder is not accessible: {0}. The launcher will keep starting, but local accounts may not be listed. Check the folder permissions, or change the data folder in Settings - Storage and restart.</value>
+  </data>
   <data name="StoragePath_MissingTitle" xml:space="preserve">
     <value>Storage Path Unavailable</value>
   </data>
