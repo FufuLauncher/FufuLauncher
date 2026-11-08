@@ -97,10 +97,16 @@ public static class BackgroundImageAntialiasSettings
             SaveLock.Release();
         }
     }
-
-    public static float GetBlurSigma(int strength)
+    
+    internal static EdgeAntialiasProfile GetEdgeProfile(int strength)
     {
-        var normalized = Math.Clamp(strength, 0, 100);
-        return normalized <= 0 ? 0f : 0.15f + normalized / 100f * 1.85f;
+        var t = Math.Clamp(strength, 0, 100) / 100f;
+        return new EdgeAntialiasProfile(
+            EdgeThreshold: Lerp(0.250f, 0.085f, t),
+            EdgeThresholdMin: Lerp(0.0833f, 0.0312f, t),
+            SubpixelQuality: Lerp(0.20f, 0.65f, t),
+            SearchSteps: (int)MathF.Round(Lerp(5f, BackgroundImageEdgeAntialiaser.MaxSearchSteps, t)));
     }
+
+    private static float Lerp(float from, float to, float t) => from + (to - from) * t;
 }

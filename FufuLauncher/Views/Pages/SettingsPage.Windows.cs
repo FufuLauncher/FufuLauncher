@@ -227,6 +227,11 @@ public sealed partial class SettingsPage
         ServiceStatusWindow.ShowOrActivate();
     }
 
+    private void OnOpenServiceOverviewClick(object sender, RoutedEventArgs e)
+    {
+        ServiceOverviewWebWindow.ShowOrActivate();
+    }
+
     private void OnOpenMcpWindowClick(object sender, RoutedEventArgs e)
     {
         McpWindow.ShowOrActivate();

@@ -83,9 +83,9 @@ internal static class BackgroundImageLoader
             using var image = Image.Load<Bgra32>(new DecoderOptions { MaxFrames = 1 }, stream);
             image.Mutate(context => context.AutoOrient());
             ApplyDisplayQuality(image, quality);
-            ApplyAntialias(image, antialias);
             var pixels = new byte[checked(image.Width * image.Height * 4)];
             image.CopyPixelDataTo(pixels);
+            ApplyAntialias(pixels, image.Width, image.Height, antialias);
 
 
             for (var i = 0; i < pixels.Length; i += 4)
@@ -136,19 +136,22 @@ internal static class BackgroundImageLoader
         return result;
     }
 
-    private static void ApplyAntialias(Image<Bgra32> image, (bool Enabled, int Strength) settings)
+    /// <summary>
+    /// 边缘自适应抗锯齿：只平滑检测到的锯齿边缘，平坦区域与纹理细节保持原样，
+    /// 取代原先会让整张图发虚的全图高斯模糊。须在预乘 Alpha 之前对 BGRA 直通像素调用。
+    /// </summary>
+    private static void ApplyAntialias(byte[] pixels, int width, int height, (bool Enabled, int Strength) settings)
     {
         if (!settings.Enabled || settings.Strength <= 0)
             return;
 
-        var sigma = BackgroundImageAntialiasSettings.GetBlurSigma(settings.Strength);
-        if (sigma <= 0f)
-            return;
-
+        var profile = BackgroundImageAntialiasSettings.GetEdgeProfile(settings.Strength);
         var started = Environment.TickCount64;
-        image.Mutate(context => context.GaussianBlur(sigma));
+        var processed = BackgroundImageEdgeAntialiaser.Apply(pixels, width, height, profile);
         DebugLog.Info("BackgroundImageLoader",
-            $"Applied antialias: strength={settings.Strength}, sigma={sigma:0.##}, {Environment.TickCount64 - started}ms");
+            $"Applied edge antialias: strength={settings.Strength}, threshold={profile.EdgeThreshold:0.###}, " +
+            $"subpix={profile.SubpixelQuality:0.##}, steps={profile.SearchSteps}, " +
+            $"edgePixels={processed}, {Environment.TickCount64 - started}ms");
     }
 
     private static void ApplyDisplayQuality(Image<Bgra32> image, BackgroundImageQuality quality)
