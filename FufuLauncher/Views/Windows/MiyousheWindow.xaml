@@ -139,6 +139,7 @@
                     <RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <ComboBox x:Name="GameSelector" HorizontalAlignment="Stretch" CornerRadius="18"
+                          Header="{helpers:Loc Key=MiyousheShop_CommunityGame}"
                           SelectionChanged="OnGameChanged" />
                 <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                     <StackPanel x:Name="NavigationButtons" Spacing="4">
@@ -170,6 +171,13 @@
                             <StackPanel Orientation="Horizontal" Spacing="12">
                                 <FontIcon Glyph="&#xE734;" FontSize="15" />
                                 <TextBlock Text="{helpers:Loc Key=Miyoushe_Favorites}" />
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton x:Name="ShopNavigation" GroupName="CommunityNavigation"
+                                     Style="{StaticResource CommunityNavStyle}" Click="OnOpenShop">
+                            <StackPanel Orientation="Horizontal" Spacing="12">
+                                <FontIcon Glyph="&#xE719;" FontSize="15" />
+                                <TextBlock Text="{helpers:Loc Key=MiyousheShop_Title}" />
                             </StackPanel>
                         </RadioButton>
                         <TextBlock Text="{helpers:Loc Key=Miyoushe_Library}" Margin="12,24,0,10"
@@ -204,7 +212,7 @@
                                Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
-            <Grid Grid.Column="1" RowSpacing="16">
+            <Grid x:Name="CommunityContentPane" Grid.Column="1" RowSpacing="16">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -453,6 +461,7 @@
                     </Grid>
                 </Border>
             </Grid>
+            <views:MiyousheShopView x:Name="ShopPane" Grid.Column="1" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </winuiex:WindowEx>

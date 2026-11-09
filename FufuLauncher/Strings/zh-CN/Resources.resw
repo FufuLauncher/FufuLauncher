@@ -9666,4 +9666,199 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>发送使用情况，用于统计与问题排查</value>
   </data>
+  <data name="MiyousheShop_Title" xml:space="preserve">
+    <value>兑换中心</value>
+  </data>
+  <data name="MiyousheShop_GameFilter" xml:space="preserve">
+    <value>商品分区</value>
+  </data>
+  <data name="MiyousheShop_ResizeDetails" xml:space="preserve">
+    <value>调整商品详情栏宽度</value>
+  </data>
+  <data name="MiyousheShop_SelectGoods" xml:space="preserve">
+    <value>选择商品查看详情</value>
+  </data>
+  <data name="MiyousheShop_Notes" xml:space="preserve">
+    <value>兑换限制与说明</value>
+  </data>
+  <data name="MiyousheShop_OfficialGoods" xml:space="preserve">
+    <value>在官方商城查看</value>
+  </data>
+  <data name="MiyousheShop_OfficialHistory" xml:space="preserve">
+    <value>查看官方明细</value>
+  </data>
+  <data name="MiyousheShop_EmptyGoods" xml:space="preserve">
+    <value>这个分区暂无商品。</value>
+  </data>
+  <data name="MiyousheShop_Price" xml:space="preserve">
+    <value>{0:N0} 米游币</value>
+  </data>
+  <data name="MiyousheShop_CoinUnit" xml:space="preserve">
+    <value>米游币</value>
+  </data>
+  <data name="MiyousheShop_Upcoming" xml:space="preserve">
+    <value>尚未开售</value>
+  </data>
+  <data name="MiyousheShop_Unlimited" xml:space="preserve">
+    <value>库存不限</value>
+  </data>
+  <data name="MiyousheShop_Stock" xml:space="preserve">
+    <value>剩余 {0:N0} 件</value>
+  </data>
+  <data name="MiyousheShop_SoldOut" xml:space="preserve">
+    <value>已售罄</value>
+  </data>
+  <data name="MiyousheShop_Unavailable" xml:space="preserve">
+    <value>暂不可兑换</value>
+  </data>
+  <data name="MiyousheShop_BeijingTime" xml:space="preserve">
+    <value>北京时间 {0:yyyy-MM-dd HH:mm:ss}</value>
+  </data>
+  <data name="MiyousheShop_CatalogOpening" xml:space="preserve">
+    <value>开售 {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_CatalogRestock" xml:space="preserve">
+    <value>补货 {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_StartTime" xml:space="preserve">
+    <value>开始兑换 · 北京时间</value>
+  </data>
+  <data name="MiyousheShop_NextBatchTime" xml:space="preserve">
+    <value>下一批开放 · 北京时间</value>
+  </data>
+  <data name="MiyousheShop_EndTime" xml:space="preserve">
+    <value>兑换截止 · 北京时间</value>
+  </data>
+  <data name="MiyousheShop_NextBatchQuantity" xml:space="preserve">
+    <value>下批共 {0:N0} 件</value>
+  </data>
+  <data name="MiyousheShop_Countdown" xml:space="preserve">
+    <value>还有 {0} 天 {1:00}:{2:00}:{3:00}</value>
+  </data>
+  <data name="MiyousheShop_Schedule" xml:space="preserve">
+    <value>到点自动兑换</value>
+  </data>
+  <data name="MiyousheShop_Scheduled" xml:space="preserve">
+    <value>已添加兑换计划</value>
+  </data>
+  <data name="MiyousheShop_Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="MiyousheShop_Notification" xml:space="preserve">
+    <value>米游币兑换计划</value>
+  </data>
+  <data name="MiyousheShop_LoadError" xml:space="preserve">
+    <value>商品列表加载失败，请刷新后重试。</value>
+  </data>
+  <data name="MiyousheShop_DetailError" xml:space="preserve">
+    <value>商品详情加载失败，请刷新后重试。</value>
+  </data>
+  <data name="MiyousheShop_OpenError" xml:space="preserve">
+    <value>无法打开官方商城，请在米游社 App 的兑换中心查看。</value>
+  </data>
+  <data name="MiyousheShop_Plans" xml:space="preserve">
+    <value>兑换计划</value>
+  </data>
+  <data name="MiyousheShop_BackToGoods" xml:space="preserve">
+    <value>返回商品</value>
+  </data>
+  <data name="MiyousheShop_CommunityGame" xml:space="preserve">
+    <value>社区板块</value>
+  </data>
+  <data name="MiyousheShop_AllGoods" xml:space="preserve">
+    <value>全部商品</value>
+  </data>
+  <data name="MiyousheShop_ExchangeNow" xml:space="preserve">
+    <value>立即兑换</value>
+  </data>
+  <data name="MiyousheShop_PlanHint" xml:space="preserve">
+    <value>定点计划会在对应场次开放时提交 1 件。请保持启动器运行或驻留托盘。</value>
+  </data>
+  <data name="MiyousheShop_EmptyPlans" xml:space="preserve">
+    <value>暂无兑换计划。</value>
+  </data>
+  <data name="MiyousheShop_PlanPending" xml:space="preserve">
+    <value>待执行</value>
+  </data>
+  <data name="MiyousheShop_PlanSubmitting" xml:space="preserve">
+    <value>正在准备提交</value>
+  </data>
+  <data name="MiyousheShop_PlanSucceeded" xml:space="preserve">
+    <value>兑换成功</value>
+  </data>
+  <data name="MiyousheShop_PlanFailed" xml:space="preserve">
+    <value>兑换未完成</value>
+  </data>
+  <data name="MiyousheShop_PlanVerification" xml:space="preserve">
+    <value>需要人工验证</value>
+  </data>
+  <data name="MiyousheShop_PlanUnknown" xml:space="preserve">
+    <value>结果待确认，请先核对官方兑换记录</value>
+  </data>
+  <data name="MiyousheShop_PlanMissed" xml:space="preserve">
+    <value>已错过</value>
+  </data>
+  <data name="MiyousheShop_PlanLegacy" xml:space="preserve">
+    <value>旧提醒，需重新添加自动兑换</value>
+  </data>
+  <data name="MiyousheShop_PlanReviewed" xml:space="preserve">
+    <value>已核对</value>
+  </data>
+  <data name="MiyousheShop_Target" xml:space="preserve">
+    <value>兑换到</value>
+  </data>
+  <data name="MiyousheShop_Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="MiyousheShop_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="MiyousheShop_ConfirmItem" xml:space="preserve">
+    <value>商品：{0} × 1\n消耗：{1}\n账号：{2}</value>
+  </data>
+  <data name="MiyousheShop_ConfirmScheduled" xml:space="preserve">
+    <value>将在北京时间 {0:yyyy-MM-dd HH:mm:ss} 自动提交兑换。</value>
+  </data>
+  <data name="MiyousheShop_ConfirmImmediate" xml:space="preserve">
+    <value>确认后将向米游社提交兑换。</value>
+  </data>
+  <data name="MiyousheShop_LoginRequired" xml:space="preserve">
+    <value>请选择已登录的国服米游社账号，或重新登录后重试。</value>
+  </data>
+  <data name="MiyousheShop_Unsupported" xml:space="preserve">
+    <value>此商品需在米游社官方商城兑换。</value>
+  </data>
+  <data name="MiyousheShop_NoTarget" xml:space="preserve">
+    <value>找不到此商品所需的绑定角色或收货地址，请在米游社确认后重试。</value>
+  </data>
+  <data name="MiyousheShop_LimitReached" xml:space="preserve">
+    <value>该账号已达到商品限兑次数。</value>
+  </data>
+  <data name="MiyousheShop_LimitReachedLabel" xml:space="preserve">
+    <value>已达兑换上限</value>
+  </data>
+  <data name="MiyousheShop_RateLimited" xml:space="preserve">
+    <value>商城请求频率受限。</value>
+  </data>
+  <data name="MiyousheShop_ManualVerification" xml:space="preserve">
+    <value>请在米游社官方商城完成人工验证。</value>
+  </data>
+  <data name="MiyousheShop_PrepareError" xml:space="preserve">
+    <value>无法准备兑换请求，请核对登录状态和网络。</value>
+  </data>
+  <data name="MiyousheShop_SaleChanged" xml:space="preserve">
+    <value>商品状态或开售时间已变化，请刷新后确认。</value>
+  </data>
+  <data name="MiyousheShop_Conflict" xml:space="preserve">
+    <value>计划已存在、场次已过，或有待核对的兑换。</value>
+  </data>
+  <data name="MiyousheShop_PlanError" xml:space="preserve">
+    <value>无法读取或保存兑换计划。</value>
+  </data>
+  <data name="MiyousheShop_Resolve" xml:space="preserve">
+    <value>标记已核对</value>
+  </data>
+  <data name="MiyousheShop_ResolveHint" xml:space="preserve">
+    <value>请先核对米游社官方兑换记录和米游币扣除情况。确认后会解除该商品的提交限制。</value>
+  </data>
 </root>

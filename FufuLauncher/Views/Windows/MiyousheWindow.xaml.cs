@@ -72,6 +72,7 @@ public sealed partial class MiyousheWindow : WindowEx
     public MiyousheWindow()
     {
         InitializeComponent();
+        ShopPane.GamesLoaded += SetShopGames;
         InitializeBackNavigation();
         InitializeCommentControls();
         ExtendsContentIntoTitleBar = true;
@@ -97,6 +98,7 @@ public sealed partial class MiyousheWindow : WindowEx
         Closed += (_, _) =>
         {
             _closed = true;
+            ShopPane.Stop();
             if (_instance == this) _instance = null;
             _lifetime.Cancel();
             _session.Cancel();
@@ -132,12 +134,11 @@ public sealed partial class MiyousheWindow : WindowEx
             AccountSelector.ItemsSource = choices;
             AccountSelector.SelectedItem = choices.FirstOrDefault(a => a.Id == manager.ActiveAccountId) ?? choices[0];
             await SelectAccountAsync();
+            UpdateShopAccount();
             var navigation = await _client.GetNavigationAsync(_session.Token);
             if (_closed) return;
             _forums = navigation.Forums;
-            GameSelector.ItemsSource = navigation.Games;
-            GameSelector.SelectedItem =
-                navigation.Games.FirstOrDefault(g => g.Id == 2) ?? navigation.Games.FirstOrDefault();
+            SetCommunityGames(navigation.Games, 2);
             SetForums();
             _initializing = false;
             await NavigateAsync(CommunityFeed.Forum);
@@ -149,12 +150,11 @@ public sealed partial class MiyousheWindow : WindowEx
         {
             _initializing = false;
             _changingSelectors = true;
-            GameSelector.ItemsSource = new[]
+            SetCommunityGames(new[]
             {
                 new CommunityGame(2, "原神", "ys"), new CommunityGame(6, "崩坏：星穹铁道", "sr"),
                 new CommunityGame(8, "绝区零", "zzz")
-            };
-            GameSelector.SelectedIndex = 0;
+            }, 2);
             _changingSelectors = false;
             ReportError(ex, () => ReloadNavigationAsync());
             UpdateRefreshButtonState();
@@ -169,9 +169,7 @@ public sealed partial class MiyousheWindow : WindowEx
             var navigation = await _client.GetNavigationAsync(ct);
             _changingSelectors = true;
             _forums = navigation.Forums;
-            GameSelector.ItemsSource = navigation.Games;
-            GameSelector.SelectedItem = navigation.Games.FirstOrDefault(g => g.Id == _feed.GameId) ??
-                                        navigation.Games.FirstOrDefault();
+            SetCommunityGames(navigation.Games, _feed.GameId);
             SetForums();
             _changingSelectors = false;
             completed = await NavigateAsync(CommunityFeed.Forum);
@@ -227,9 +225,11 @@ public sealed partial class MiyousheWindow : WindowEx
     private async void OnAccountChanged(object sender, SelectionChangedEventArgs e)
     {
         if (_initializing || _changingSelectors || _closed) return;
+        UpdateShopAccount();
         try
         {
             await SelectAccountAsync();
+            UpdateShopAccount();
             await NavigateAsync(_feed.Kind is CommunityFeed.Following or CommunityFeed.Favorites
                 ? _feed.Kind
                 : CommunityFeed.Forum);
@@ -239,7 +239,7 @@ public sealed partial class MiyousheWindow : WindowEx
         }
     }
 
-    private int GameId => (GameSelector.SelectedItem as CommunityGame)?.Id ?? 2;
+    private int GameId => _communityGame?.Id ?? 2;
 
     private void SetForums()
     {
@@ -250,7 +250,18 @@ public sealed partial class MiyousheWindow : WindowEx
 
     private async void OnGameChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (_initializing || _changingSelectors) return;
+        if (_changingSelectors) return;
+        if (_shopOpen)
+        {
+            if (GameSelector.SelectedItem is MiyousheShopGame game)
+            {
+                _shopGameKey = game.Key;
+                await ShopPane.SetGameAsync(game.Key);
+            }
+            return;
+        }
+        if (_initializing || GameSelector.SelectedItem is not CommunityGame selected) return;
+        _communityGame = selected;
         _changingSelectors = true;
         SetForums();
         _changingSelectors = false;
@@ -272,8 +283,11 @@ public sealed partial class MiyousheWindow : WindowEx
         await LoadFeedAsync(true);
     }
 
-    private async void OnNavigate(object sender, RoutedEventArgs args) =>
+    private async void OnNavigate(object sender, RoutedEventArgs args)
+    {
+        CloseShop();
         await NavigateAsync(Enum.Parse<CommunityFeed>((string)((RadioButton)sender).Tag));
+    }
 
     private async Task<bool> NavigateAsync(CommunityFeed kind, string target = "", string? title = null,
         int? gameId = null,
@@ -283,10 +297,11 @@ public sealed partial class MiyousheWindow : WindowEx
         _changingSelectors = true;
         if (gameId is { } relatedGame)
         {
-            var game = GameSelector.Items.OfType<CommunityGame>().FirstOrDefault(g => g.Id == relatedGame);
+            var game = _communityGames.FirstOrDefault(g => g.Id == relatedGame);
             if (game != null)
             {
-                GameSelector.SelectedItem = game;
+                _communityGame = game;
+                if (!_shopOpen) GameSelector.SelectedItem = game;
                 SetForums();
             }
         }
@@ -630,6 +645,7 @@ public sealed partial class MiyousheWindow : WindowEx
 
     private async void OnMyProfile(object sender, RoutedEventArgs args)
     {
+        CloseShop();
         if (_client.AccountUid.Length == 0)
         {
             UpdateNavigationSelection();
@@ -652,8 +668,7 @@ public sealed partial class MiyousheWindow : WindowEx
     }
 
     private Uri OriginalUri => new(ApiEndpoints.MiyousheWebBase + "/" +
-                                   ((GameSelector.ItemsSource as IReadOnlyList<CommunityGame>)
-                                       ?.FirstOrDefault(g => g.Id == _post?.GameId)?.Slug ?? "ys") + "/article/" +
+                                   (_communityGames.FirstOrDefault(g => g.Id == _post?.GameId)?.Slug ?? "ys") + "/article/" +
                                    _post!.Id);
 
     private void OnCopyLink(object sender, RoutedEventArgs args)

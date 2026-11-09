@@ -21,7 +21,8 @@ public sealed partial class MiyousheWindow
     {
         if (_dialogOpen) return;
         args.Handled = true;
-        await RefreshCurrentPageAsync();
+        if (_shopOpen) await ShopPane.RefreshAsync();
+        else await RefreshCurrentPageAsync();
     }
 
     private async Task<bool> RefreshCurrentPageAsync()
