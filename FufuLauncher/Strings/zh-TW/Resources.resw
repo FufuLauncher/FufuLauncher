@@ -764,7 +764,7 @@
     <value>社群簽到</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>自動完成社群互動任務取得米遊幣</value>
+    <value>在米遊社原神版區打卡，獲取米遊幣</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>按讚</value>
@@ -1957,6 +1957,9 @@
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>每日簽到</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>同步米遊社頭像掛件</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>重新整理資訊</value>

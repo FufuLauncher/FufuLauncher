@@ -237,9 +237,6 @@ public partial class SettingsViewModel : ObservableRecipient
     private bool _isBatchCheckinEnabled;
 
     [ObservableProperty] private bool _isCommunityCheckinEnabled = true;
-    [ObservableProperty] private bool _isCommunityLikeEnabled;
-    [ObservableProperty] private bool _isCommunityReadEnabled;
-    [ObservableProperty] private bool _isCommunityShareEnabled;
     [ObservableProperty] private bool _isCloudGameCheckinEnabled;
     [ObservableProperty] private ObservableCollection<CheckinAccountItem> _checkinAccounts = new();
 

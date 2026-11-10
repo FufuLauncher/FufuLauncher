@@ -764,7 +764,7 @@ Jika tetap melanjutkan, peringatan ini akan diabaikan dan Hash preset akan diper
     <value>Check-in Komunitas</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Selesaikan tugas interaksi komunitas secara otomatis untuk mendapatkan Koin MiYouShe</value>
+    <value>Check-in di bagian Genshin Impact di MiYouShe untuk mendapatkan Koin MiYou</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Suka</value>
@@ -1957,6 +1957,9 @@ Buka situs web Microsoft untuk mengunduh dan menginstalnya?</value>
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Check-in Harian</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Sinkronkan bingkai avatar MiYouShe</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Segarkan Info</value>

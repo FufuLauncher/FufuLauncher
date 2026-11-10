@@ -19,24 +19,6 @@ public sealed class CheckinOptions
         set;
     } = true;
 
-    public bool IsCommunityLikeEnabled
-    {
-        get;
-        set;
-    }
-
-    public bool IsCommunityReadEnabled
-    {
-        get;
-        set;
-    }
-
-    public bool IsCommunityShareEnabled
-    {
-        get;
-        set;
-    }
-
     public bool IsCloudGameCheckinEnabled
     {
         get;

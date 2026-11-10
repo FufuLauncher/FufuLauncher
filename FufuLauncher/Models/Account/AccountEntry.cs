@@ -43,6 +43,12 @@ public class AccountEntry
         set;
     }
 
+    public string? AvatarPendantUrl
+    {
+        get;
+        set;
+    }
+
     public string GameUid
     {
         get;

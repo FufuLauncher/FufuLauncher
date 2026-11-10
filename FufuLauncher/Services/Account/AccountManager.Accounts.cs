@@ -114,7 +114,8 @@ public partial class AccountManager
         }
     }
 
-    public async Task UpdateAccountMetaAsync(string accountId, string nickname, string avatarUrl, string gameUid = "")
+    public async Task UpdateAccountMetaAsync(string accountId, string nickname, string avatarUrl, string gameUid = "",
+        string? avatarPendantUrl = null)
     {
         await _lock.WaitAsync();
         try
@@ -124,6 +125,7 @@ public partial class AccountManager
             {
                 entry.Nickname = nickname;
                 entry.AvatarUrl = avatarUrl;
+                entry.AvatarPendantUrl = avatarPendantUrl;
                 if (!string.IsNullOrEmpty(gameUid))
                     entry.GameUid = gameUid;
                 await SaveAccountListAsync();

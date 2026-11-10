@@ -88,10 +88,10 @@ public class TokenRefreshService : IDisposable
             DebugLog.Info("TokenRefreshService",
                 isManual ? "Manual cookie refresh triggered..." : "Cookie expired, starting refresh...");
 
-            WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                "Token_RefreshTitle".GetLocalized(),
-                isManual ? "Token_ManualRefreshProgress".GetLocalized() : "Token_AutoRefreshProgress".GetLocalized(),
-                NotificationType.Warning, 3000));
+            if (isManual)
+                WeakReferenceMessenger.Default.Send(new NotificationMessage(
+                    "Token_RefreshTitle".GetLocalized(),
+                    "Token_ManualRefreshProgress".GetLocalized(), NotificationType.Warning, 3000));
 
             string authCookie = $"stoken={stoken}; mid={mid}";
 
@@ -159,10 +159,10 @@ public class TokenRefreshService : IDisposable
                 }
 
                 DebugLog.Info("TokenRefreshService", "Cookie refresh succeeded");
-                WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                    "Token_RefreshTitle".GetLocalized(),
-                    isManual ? "Token_ManualRefreshDone".GetLocalized() : "Token_AutoRefreshDone".GetLocalized(),
-                    NotificationType.Success, 3000));
+                if (isManual)
+                    WeakReferenceMessenger.Default.Send(new NotificationMessage(
+                        "Token_RefreshTitle".GetLocalized(),
+                        "Token_ManualRefreshDone".GetLocalized(), NotificationType.Success, 3000));
                 return refreshedCookies;
             }
             else
@@ -174,10 +174,8 @@ public class TokenRefreshService : IDisposable
         catch (Exception ex)
         {
             DebugLog.Info("TokenRefreshService", $"Cookie refresh error: {ex.Message}");
-            WeakReferenceMessenger.Default.Send(new NotificationMessage(
-                "Token_RefreshFailed".GetLocalized(),
-                string.Format("Token_RefreshException".GetLocalized(), ex.Message),
-                NotificationType.Error, 4000));
+            if (isManual)
+                SendErrorNotification(string.Format("Token_RefreshException".GetLocalized(), ex.Message));
             return null;
         }
     }

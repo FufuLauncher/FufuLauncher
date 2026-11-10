@@ -26,9 +26,6 @@ public sealed class CheckinSettingsStore(ILocalSettingsService settings)
         {
             IsGameCheckinEnabled = await ReadBoolAsync("IsGameCheckinEnabled", true),
             IsCommunityCheckinEnabled = await ReadBoolAsync("IsCommunityCheckinEnabled", true),
-            IsCommunityLikeEnabled = await ReadBoolAsync("IsCommunityLikeEnabled", false),
-            IsCommunityReadEnabled = await ReadBoolAsync("IsCommunityReadEnabled", false),
-            IsCommunityShareEnabled = await ReadBoolAsync("IsCommunityShareEnabled", false),
             IsCloudGameCheckinEnabled = await ReadBoolAsync("IsCloudGameCheckinEnabled", false)
         };
         foreach (var game in MiyousheCheckinGame.SupportedGames.Where(g => g.GameBiz != "hk4e_cn"))

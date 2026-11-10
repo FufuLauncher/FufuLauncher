@@ -3,9 +3,10 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
-using System.Diagnostics;
+using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
+using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.Views;
@@ -77,9 +78,12 @@ public partial class AccountViewModel
 
             var nickname = userInfo?.nickname ??
                            role?.nickname ?? string.Format("Account_User_Format".GetLocalized(), entry.Stuid);
-            var avatarUrl = userInfo?.avatar_url ?? "ms-appx:///Assets/DefaultAvatar.png";
+            var avatarUrl = userInfo?.avatar_url ?? entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png";
             var gameUid = role?.game_uid ?? "";
             var isOs = entry.Id.StartsWith("os_");
+            var pendantUrl = isOs ? null : userInfo != null && newUserFullInfo.retcode == 0
+                ? AccountAvatarPendant.NormalizeUrl(userInfo.pendant)
+                : entry.AvatarPendantUrl;
             var server = role?.region_name ??
                          (isOs ? "Account_Server_Global".GetLocalized() : "Account_Server_CN".GetLocalized());
             var level = role?.level.ToString() ?? "";
@@ -89,7 +93,8 @@ public partial class AccountViewModel
             var ipRegion = userInfo?.ip_region ?? "Common_Unknown".GetLocalized();
             var gender = userInfo?.gender ?? 0;
 
-            await _accountManager.UpdateAccountMetaAsync(entry.Id, nickname, avatarUrl);
+            await _accountManager.UpdateAccountMetaAsync(entry.Id, nickname, avatarUrl, avatarPendantUrl: pendantUrl);
+            if (_isDisposed || myVersion != _loadVersion || _accountManager.ActiveAccountId != entry.Id) return false;
 
             RunOnUIThread(() =>
             {
@@ -100,6 +105,7 @@ public partial class AccountViewModel
 
                 CurrentAccount.Nickname = nickname;
                 CurrentAccount.AvatarUrl = avatarUrl;
+                CurrentAccount.AvatarPendantUrl = IsAvatarPendantEnabled ? pendantUrl ?? "" : "";
                 CurrentAccount.GameUid = gameUid;
                 CurrentAccount.Server = server;
                 CurrentAccount.Level = level;
@@ -112,6 +118,7 @@ public partial class AccountViewModel
                     ? "Account_LoggedIn".GetLocalized()
                     : "Account_LoggedInNoRole".GetLocalized();
             });
+            WeakReferenceMessenger.Default.Send(new AccountAvatarChangedMessage());
             DebugLog.Info("AccountViewModel.UserInfo",
                 $"[LoadUserInfo] User info updated, HasBoundRole={hasBoundRole}");
             return true;

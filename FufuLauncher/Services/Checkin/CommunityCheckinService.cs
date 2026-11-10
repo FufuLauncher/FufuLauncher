@@ -3,575 +3,183 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
-using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using FufuLauncher.Contracts.Services;
 using FufuLauncher.Constants;
+using FufuLauncher.Constants.MiHoYo;
+using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
+using FufuLauncher.Models.MiHoYo.Identity;
+using FufuLauncher.Services.MiHoYo;
 
 namespace FufuLauncher.Services;
 
 public class CommunityCheckinService : ICommunityCheckinService
 {
+    private readonly AccountIdentityService _accountIdentityService;
     private readonly HttpClient _httpClient;
-    private readonly ILocalSettingsService _localSettingsService;
 
-    public CommunityCheckinService(ILocalSettingsService localSettingsService)
-    {
-        _localSettingsService = localSettingsService;
-        _httpClient = new HttpClient(new HttpClientHandler
+    public CommunityCheckinService(AccountIdentityService accountIdentityService)
+        : this(accountIdentityService, new HttpClient(new HttpClientHandler
         {
+            UseCookies = false,
+            AllowAutoRedirect = false,
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-        });
-        _httpClient.Timeout = TimeSpan.FromSeconds(30);
+        }) { Timeout = TimeSpan.FromSeconds(30) })
+    {
     }
 
-    public async Task<CheckinTypeResult> ExecuteCheckinAsync(
-        AccountCredentials account,
-        bool signEnabled,
-        bool readEnabled,
-        bool likeEnabled,
-        bool shareEnabled)
+    internal CommunityCheckinService(AccountIdentityService accountIdentityService, HttpClient httpClient)
+    {
+        _accountIdentityService = accountIdentityService;
+        _httpClient = httpClient;
+    }
+
+    public async Task<CheckinTypeResult> ExecuteCheckinAsync(AccountCredentials account,
+        Func<Task<string?>> refreshCookie)
     {
         var result = new CheckinTypeResult { TypeName = "CheckinCommunity_Title".GetLocalized(), Executed = true };
 
         if (string.IsNullOrEmpty(account.Stoken) || string.IsNullOrEmpty(account.Mid))
         {
-            result.Success = false;
+            result.FailCount = 1;
             result.Message = "CheckinCommunity_MissingToken".GetLocalized();
             return result;
         }
 
         try
         {
-            var deviceInfo = await LoadDeviceInfoAsync();
+            var identity = await _accountIdentityService.BuildAsync(account.ConfigPath);
             var stokenCookie = account.GetStokenCookie();
-
-
-            DebugLog.Info("CommunityCheckinService",
-                $"[CommunityCheckin] Account {account.Nickname}({account.Uid}): fetching task status");
-            var taskState = await GetTaskStateAsync(account.Cookie);
-            if (taskState == null)
+            var (code, message) = await SignAsync(identity, stokenCookie);
+            if (code is int retcode && MiyousheCheckinGame.IsLoginExpired(retcode))
             {
-                result.Success = false;
-                result.Message = "CheckinCommunity_GetTaskFailed".GetLocalized();
-                return result;
-            }
-
-            int canGet = GetIntValue(taskState.Value, "can_get_points");
-            int received = GetIntValue(taskState.Value, "already_received_points");
-            int total = GetIntValue(taskState.Value, "total_points");
-            var taskFlags = ParseTaskFlags(taskState.Value);
-
-            DebugLog.Info("CommunityCheckinService",
-                $"[CommunityCheckin] Account {account.Uid}: available {canGet}, received {received}, total {total}");
-
-            if (canGet == 0)
-            {
-                result.Success = true;
-                result.SkippedCount++;
-                result.Message = string.Format("CheckinCommunity_TodayDone".GetLocalized(), received);
-                return result;
-            }
-
-            var headers = BuildHeaders(stokenCookie, deviceInfo);
-
-
-            if (signEnabled && taskFlags["sign"] == 0)
-            {
-                var signResult = await CommunitySignAsync(headers, account.Uid);
-                if (signResult.Success) result.SuccessCount++;
-                else result.FailCount++;
-                result.Details.AddRange(signResult.Details);
-                await DelayAsync();
-            }
-            else if (taskFlags["sign"] != 0)
-            {
-                result.Details.Add("CheckinCommunity_SignDoneSkipped".GetLocalized());
-                result.SkippedCount++;
-            }
-
-
-            var posts = await GetPostsAsync(headers);
-            if (posts == null || posts.Count == 0)
-            {
-                result.Details.Add("CheckinCommunity_GetPostsFailed".GetLocalized());
-            }
-            else
-            {
-                if (readEnabled && taskFlags["read"] == 0)
+                if (await IsAlreadySignedAsync(identity.Cookies))
                 {
-                    int readNum = taskFlags["read_num"];
-                    var readPosts = posts.Take(readNum).ToList();
-                    var readResult = await ReadPostsAsync(headers, readPosts);
-                    if (readResult.Success) result.SuccessCount++;
-                    else result.FailCount++;
-                    result.Details.AddRange(readResult.Details);
-                    await DelayAsync();
-                }
-                else if (taskFlags["read"] != 0)
-                {
-                    result.Details.Add("CheckinCommunity_ReadDoneSkipped".GetLocalized());
-                    result.SkippedCount++;
+                    result.SkippedCount = 1;
+                    result.Message = "CheckinCommunity_SignDoneSkipped".GetLocalized();
+                    result.Details.Add(result.Message);
+                    return result;
                 }
 
-
-                if (likeEnabled && taskFlags["like"] == 0)
+                if (await refreshCookie() != null)
                 {
-                    int likeNum = taskFlags["like_num"];
-                    var likePosts = posts.Take(likeNum).ToList();
-                    var likeResult = await LikePostsAsync(headers, likePosts);
-                    if (likeResult.Success) result.SuccessCount++;
-                    else result.FailCount++;
-                    result.Details.AddRange(likeResult.Details);
-                    await DelayAsync();
-                }
-                else if (taskFlags["like"] != 0)
-                {
-                    result.Details.Add("CheckinCommunity_LikeDoneSkipped".GetLocalized());
-                    result.SkippedCount++;
-                }
-
-
-                if (shareEnabled && taskFlags["share"] == 0)
-                {
-                    var shareResult = await SharePostAsync(headers, posts[0]);
-                    if (shareResult.Success) result.SuccessCount++;
-                    else result.FailCount++;
-                    result.Details.AddRange(shareResult.Details);
-                    await DelayAsync();
-                }
-                else if (taskFlags["share"] != 0)
-                {
-                    result.Details.Add("CheckinCommunity_ShareDoneSkipped".GetLocalized());
-                    result.SkippedCount++;
+                    var refreshedCookie = account.GetStokenCookie();
+                    if (refreshedCookie != stokenCookie)
+                    {
+                        identity = await _accountIdentityService.BuildAsync(account.ConfigPath);
+                        (code, message) = await SignAsync(identity, refreshedCookie);
+                    }
                 }
             }
 
-
-            var finalState = await GetTaskStateAsync(account.Cookie);
-            if (finalState != null)
+            result.Success = code == 0;
+            result.Message = code switch
             {
-                int finalReceived = GetIntValue(finalState.Value, "already_received_points");
-                int gained = finalReceived - received;
-                result.Success = result.FailCount == 0;
-                result.Message = gained > 0
-                    ? string.Format("CheckinCommunity_GainedCoins".GetLocalized(), gained, finalReceived)
-                    : string.Format("CheckinCommunity_CurrentCoins".GetLocalized(), finalReceived);
-            }
-            else
-            {
-                result.Success = result.FailCount == 0;
-            }
+                0 => "CheckinCommunity_GenshinSignSuccess".GetLocalized(),
+                null => "CheckinCommunity_GenshinSignRequestFailed".GetLocalized(),
+                1028 or 1034 => "CheckinCommunity_GenshinSignCaptcha".GetLocalized(),
+                int error when MiyousheCheckinGame.IsLoginExpired(error) =>
+                    FormatSignFailure(error, "Checkin_LoginExpired".GetLocalized()),
+                int error => FormatSignFailure(error, message)
+            };
         }
         catch (Exception ex)
         {
-            result.Success = false;
-            result.Message = string.Format("CheckinCommunity_Exception".GetLocalized(), ex.Message);
-            DebugLog.Info("CommunityCheckinService", $"[CommunityCheckin] Account {account.Uid} error: {ex.Message}");
+            result.Message = string.Format("CheckinCommunity_GenshinSignException".GetLocalized(), ex.Message);
+            DebugLog.Info(nameof(CommunityCheckinService), result.Message);
         }
 
+        if (result.Success) result.SuccessCount = 1;
+        else result.FailCount = 1;
+        result.Details.Add(result.Message);
         return result;
     }
 
-    private async Task<Dictionary<string, string>?> LoadDeviceInfoAsync()
+    private static string FormatSignFailure(int code, string? message) =>
+        string.Format("CheckinCommunity_GenshinSignFailed".GetLocalized(), $"[{code}] {message}".TrimEnd());
+
+    private async Task<bool> IsAlreadySignedAsync(IReadOnlyDictionary<string, string> cookies)
     {
+        // The website status endpoint accepts v2 values under the original web cookie names.
+        var pairs = new List<string>();
+        foreach (var name in new[] { "ltuid", "ltoken", "account_id", "cookie_token" })
+        {
+            var value = cookies.GetValueOrDefault(name + "_v2");
+            if (string.IsNullOrEmpty(value)) value = cookies.GetValueOrDefault(name);
+            if (!string.IsNullOrEmpty(value)) pairs.Add($"{name}={value}");
+        }
+
+        if (pairs.Count == 0) return false;
+
         try
         {
-            var deviceIdObj = await _localSettingsService.ReadSettingAsync("DeviceId");
-            var deviceNameObj = await _localSettingsService.ReadSettingAsync("DeviceName");
-            var deviceModelObj = await _localSettingsService.ReadSettingAsync("DeviceModel");
-            var deviceFpObj = await _localSettingsService.ReadSettingAsync("DeviceFp");
+            using var request = new HttpRequestMessage(HttpMethod.Get, GenshinApiEndpoints.BbsSignStatusUrl);
+            request.Headers.Referrer = new Uri(GenshinApiEndpoints.GenshinTavernUrl);
+            request.Headers.Add(HeaderNames.Origin, "https://www.miyoushe.com");
+            request.Headers.UserAgent.ParseAdd(UserAgents.WindowsBbs295);
+            request.Headers.Add(HeaderNames.RpcClientType, ClientTypes.Web);
+            request.Headers.Add(HeaderNames.Cookie, string.Join("; ", pairs));
+            using var response = await _httpClient.SendAsync(request);
+            if (!response.IsSuccessStatusCode) return false;
 
-            return new Dictionary<string, string>
-            {
-                ["id"] = deviceIdObj?.ToString() ?? Guid.NewGuid().ToString("N"),
-                ["name"] = deviceNameObj?.ToString() ?? "Xiaomi MI 6",
-                ["model"] = deviceModelObj?.ToString() ?? "Mi 6",
-                ["fp"] = deviceFpObj?.ToString() ?? ""
-            };
+            using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+            var root = json.RootElement;
+            return root.ValueKind == JsonValueKind.Object &&
+                   root.TryGetProperty("retcode", out var retcode) && retcode.ValueKind == JsonValueKind.Number &&
+                   retcode.TryGetInt32(out var code) && code == 0 &&
+                   root.TryGetProperty("data", out var data) && data.ValueKind == JsonValueKind.Object &&
+                   data.TryGetProperty("is_signed", out var signed) && signed.ValueKind == JsonValueKind.True;
         }
-        catch
+        catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException or JsonException)
         {
-            return new Dictionary<string, string>
-            {
-                ["id"] = Guid.NewGuid().ToString("N"),
-                ["name"] = "Xiaomi MI 6",
-                ["model"] = "Mi 6",
-                ["fp"] = ""
-            };
+            DebugLog.Info(nameof(CommunityCheckinService), $"Unable to read community check-in status: {ex.Message}");
+            return false;
         }
     }
 
-    private Dictionary<string, string> BuildHeaders(string stokenCookie, Dictionary<string, string> device)
+    private async Task<(int? Code, string? Message)> SignAsync(
+        AccountContext identity, string stokenCookie)
     {
-        var ds = MihoyoBBS.Tools.GetDs(web: false);
-        return new Dictionary<string, string>
+        var device = identity.Device;
+        var body = JsonSerializer.Serialize(new { gids = GenshinApiEndpoints.GenshinCommunityId });
+        using var request = new HttpRequestMessage(HttpMethod.Post, GenshinApiEndpoints.BbsSignUrl)
         {
-            ["DS"] = ds,
-            ["cookie"] = stokenCookie,
-            ["x-rpc-client_type"] = "2",
-            ["x-rpc-app_version"] = GenshinApiEndpoints.BbsVersion,
-            ["x-rpc-sys_version"] = "12",
-            ["x-rpc-channel"] = "miyousheluodi",
-            ["x-rpc-device_id"] = device["id"],
-            ["x-rpc-device_name"] = device["name"],
-            ["x-rpc-device_model"] = device["model"],
-            ["x-rpc-h265_supported"] = "1",
-            ["Referer"] = ApiEndpoints.AppMihoyoBase,
-            ["x-rpc-verify_key"] = GenshinApiEndpoints.PassportAppId,
-            ["x-rpc-csm_source"] = "discussion",
-            ["Content-Type"] = "application/json; charset=UTF-8",
-            ["Host"] = "bbs-api.miyoushe.com",
-            ["Connection"] = "Keep-Alive",
-            ["Accept-Encoding"] = "gzip",
-            ["User-Agent"] = "okhttp/4.9.3"
+            Content = new StringContent(body, Encoding.UTF8, "application/json")
         };
-    }
+        request.Headers.Referrer = new Uri(ApiEndpoints.AppMihoyoBase);
+        request.Headers.UserAgent.ParseAdd(identity.UserAgent.OkHttp);
+        request.Headers.Add(HeaderNames.Cookie, stokenCookie);
+        request.Headers.Add(HeaderNames.DS, SignatureHelper.GetDsX6(body: body));
+        request.Headers.Add(HeaderNames.RpcClientType, "2");
+        request.Headers.Add(HeaderNames.RpcAppVersion, HeaderVersions.BbsCn);
+        request.Headers.Add(HeaderNames.RpcChannel, Channels.MiyousheLuodi);
+        request.Headers.Add(HeaderNames.RpcDeviceId, device.BbsDeviceId);
+        request.Headers.Add(HeaderNames.RpcDeviceFp, device.DeviceFp);
+        request.Headers.Add(HeaderNames.RpcDeviceName, Uri.EscapeDataString(device.DeviceName));
+        request.Headers.Add(HeaderNames.RpcDeviceModel, Uri.EscapeDataString(device.Model));
+        request.Headers.Add(HeaderNames.RpcSysVersion, device.SysVersion);
+        request.Headers.Add(HeaderNames.RpcH265Supported, "1");
+        request.Headers.Add(HeaderNames.RpcVerifyKey, GenshinApiEndpoints.PassportAppId);
+        request.Headers.Add(HeaderNames.RpcCsmSource, "discussion");
 
-    private async Task<JsonElement?> GetTaskStateAsync(string fullCookie)
-    {
-        try
-        {
-            var url = $"{GenshinApiEndpoints.BbsTasksUrl}?point_sn=myb";
-            using var request = new HttpRequestMessage(HttpMethod.Get, url);
-            request.Headers.Add("Accept", "application/json, text/plain, */*");
-            request.Headers.Add("Origin", ApiEndpoints.WebstaticRefererUrl);
-            request.Headers.Add("User-Agent",
-                "Mozilla/5.0 (Linux; Android 12; Unspecified Device) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 Mobile Safari/537.36 miHoYoBBS/2.99.1");
-            request.Headers.Add("Referer", ApiEndpoints.WebstaticRefererUrl);
-            request.Headers.Add("Accept-Language", "zh-CN,en-US;q=0.8");
-            request.Headers.Add("X-Requested-With", "com.mihoyo.hyperion");
-            request.Headers.Add("Cookie", fullCookie);
+        using var response = await _httpClient.SendAsync(request);
+        if (response.Headers.Contains(HeaderNames.RpcAigis)) return (1034, null);
 
-            var response = await _httpClient.SendAsync(request);
-            var text = await response.Content.ReadAsStringAsync();
-            var json = JsonDocument.Parse(text);
-            if (json.RootElement.GetProperty("retcode").GetInt32() == 0)
-                return json.RootElement.GetProperty("data");
-        }
-        catch (Exception ex)
-        {
-            DebugLog.Info("CommunityCheckinService", $"[CommunityCheckin] Failed to fetch task status: {ex.Message}");
-        }
+        response.EnsureSuccessStatusCode();
+        using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        var root = json.RootElement;
+        if (root.ValueKind != JsonValueKind.Object ||
+            !root.TryGetProperty("retcode", out var retcode) ||
+            retcode.ValueKind != JsonValueKind.Number ||
+            !retcode.TryGetInt32(out var code))
+            return (null, null);
 
-        return null;
-    }
-
-    private static Dictionary<string, int> ParseTaskFlags(JsonElement? state)
-    {
-        var flags = new Dictionary<string, int>
-            { ["sign"] = 0, ["read"] = 0, ["read_num"] = 3, ["like"] = 0, ["like_num"] = 5, ["share"] = 0 };
-        if (state == null) return flags;
-
-        try
-        {
-            var states = state.Value.GetProperty("states").EnumerateArray();
-            foreach (var mission in states)
-            {
-                int taskId = mission.GetProperty("mission_id").GetInt32();
-                bool isGetAward = mission.GetProperty("is_get_award").GetBoolean();
-
-                switch (taskId)
-                {
-                    case 58:
-                        flags["sign"] = isGetAward ? 1 : 0;
-                        break;
-                    case 59:
-                        flags["read"] = isGetAward ? 1 : 0;
-                        if (!isGetAward)
-                            flags["read_num"] = Math.Max(3 - mission.GetProperty("happened_times").GetInt32(), 0);
-                        break;
-                    case 60:
-                        flags["like"] = isGetAward ? 1 : 0;
-                        if (!isGetAward)
-                            flags["like_num"] = Math.Max(5 - mission.GetProperty("happened_times").GetInt32(), 0);
-                        break;
-                    case 61:
-                        flags["share"] = isGetAward ? 1 : 0;
-                        break;
-                }
-            }
-        }
-        catch
-        {
-        }
-
-        return flags;
-    }
-
-    private static int GetIntValue(JsonElement? element, string propertyName)
-    {
-        if (element == null || !element.HasValue) return 0;
-        try
-        {
-            return element.Value.GetProperty(propertyName).GetInt32();
-        }
-        catch
-        {
-            return 0;
-        }
-    }
-
-    private static string? TryGetString(JsonElement? element, string propertyName)
-    {
-        if (element == null || !element.HasValue) return null;
-        try
-        {
-            return element.Value.GetProperty(propertyName).GetString();
-        }
-        catch
-        {
-            return null;
-        }
-    }
-
-    private async Task<(bool Success, List<string> Details)> CommunitySignAsync(Dictionary<string, string> headers,
-        string uid)
-    {
-        var details = new List<string>();
-        bool success = true;
-
-        var body = JsonSerializer.Serialize(new { gids = GenshinApiEndpoints.GenshinForumId });
-        var ds = SignatureHelper.GetDsX6(body: body);
-        headers["DS"] = ds;
-
-        try
-        {
-            var data = await PostJsonAsync(GenshinApiEndpoints.BbsSignUrl, body, headers);
-            if (data == null)
-            {
-                details.Add("CheckinCommunity_GenshinSignRequestFailed".GetLocalized());
-                success = false;
-            }
-            else if (GetIntValue(data, "retcode") == 0)
-            {
-                details.Add("CheckinCommunity_GenshinSignSuccess".GetLocalized());
-            }
-            else if (GetIntValue(data, "retcode") == 1034)
-            {
-                details.Add("CheckinCommunity_GenshinSignCaptcha".GetLocalized());
-                success = false;
-            }
-            else
-            {
-                var msg = TryGetString(data, "message");
-                details.Add(string.Format("CheckinCommunity_GenshinSignFailed".GetLocalized(), msg));
-                success = false;
-            }
-        }
-        catch (Exception ex)
-        {
-            details.Add(string.Format("CheckinCommunity_GenshinSignException".GetLocalized(), ex.Message));
-            success = false;
-        }
-
-        return (success, details);
-    }
-
-    private async Task<List<(string PostId, string Title)>?> GetPostsAsync(Dictionary<string, string> headers)
-    {
-        try
-        {
-            var url =
-                $"{GenshinApiEndpoints.BbsPostListUrl}?forum_id={GenshinApiEndpoints.GenshinForumId}&is_good=false&is_hot=false&page_size=20&sort_type=1";
-            using var request = new HttpRequestMessage(HttpMethod.Get, url);
-            AddHeaders(request, headers);
-
-            var response = await _httpClient.SendAsync(request);
-            var text = await response.Content.ReadAsStringAsync();
-            var json = JsonDocument.Parse(text);
-
-            if (json.RootElement.GetProperty("retcode").GetInt32() != 0) return null;
-
-            var posts = new List<(string, string)>();
-            var list = json.RootElement.GetProperty("data").GetProperty("list").EnumerateArray();
-            foreach (var item in list)
-            {
-                var post = item.GetProperty("post");
-                var postId = post.GetProperty("post_id").ToString();
-                var title = TryGetString(post, "subject") ?? postId;
-                posts.Add((postId, title));
-            }
-
-            var random = new Random();
-            for (int i = posts.Count - 1; i > 0; i--)
-            {
-                int j = random.Next(i + 1);
-                (posts[i], posts[j]) = (posts[j], posts[i]);
-            }
-
-            return posts.Take(5).ToList();
-        }
-        catch (Exception ex)
-        {
-            DebugLog.Info("CommunityCheckinService", $"[CommunityCheckin] Failed to fetch posts: {ex.Message}");
-            return null;
-        }
-    }
-
-    private async Task<(bool Success, List<string> Details)> ReadPostsAsync(Dictionary<string, string> headers,
-        List<(string PostId, string Title)> posts)
-    {
-        var details = new List<string>();
-        bool success = true;
-
-        foreach (var (postId, title) in posts)
-        {
-            try
-            {
-                var url = $"{GenshinApiEndpoints.BbsPostDetailUrl}?post_id={postId}";
-                using var request = new HttpRequestMessage(HttpMethod.Get, url);
-                AddHeaders(request, headers);
-
-                var response = await _httpClient.SendAsync(request);
-                var text = await response.Content.ReadAsStringAsync();
-                var json = JsonDocument.Parse(text);
-
-                if (TryGetString(json.RootElement, "message") == "OK")
-                {
-                    details.Add(string.Format("CheckinCommunity_ReadSuccess".GetLocalized(), title));
-                }
-                else
-                {
-                    details.Add(string.Format("CheckinCommunity_ReadFailed".GetLocalized(), title));
-                    success = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                details.Add(string.Format("CheckinCommunity_ReadException".GetLocalized(), title, ex.Message));
-                success = false;
-            }
-
-            await DelayAsync();
-        }
-
-        return (success, details);
-    }
-
-    private async Task<(bool Success, List<string> Details)> LikePostsAsync(Dictionary<string, string> headers,
-        List<(string PostId, string Title)> posts)
-    {
-        var details = new List<string>();
-        bool success = true;
-
-        foreach (var (postId, title) in posts)
-        {
-            try
-            {
-                var likeBody = JsonSerializer.Serialize(new { post_id = postId, is_cancel = false });
-                var data = await PostJsonAsync(GenshinApiEndpoints.BbsLikeUrl, likeBody, headers);
-                if (data != null && TryGetString(data, "message") == "OK")
-                {
-                    details.Add(string.Format("CheckinCommunity_LikeSuccess".GetLocalized(), title));
-
-                    await DelayAsync();
-                    var cancelBody = JsonSerializer.Serialize(new { post_id = postId, is_cancel = true });
-                    await PostJsonAsync(GenshinApiEndpoints.BbsLikeUrl, cancelBody, headers);
-                }
-                else
-                {
-                    var msg = data != null ? TryGetString(data, "message") : "Status_RequestFailed".GetLocalized();
-                    details.Add(string.Format("CheckinCommunity_LikeFailed".GetLocalized(), title, msg));
-                    success = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                details.Add(string.Format("CheckinCommunity_LikeException".GetLocalized(), title, ex.Message));
-                success = false;
-            }
-
-            await DelayAsync();
-        }
-
-        return (success, details);
-    }
-
-    private async Task<(bool Success, List<string> Details)> SharePostAsync(Dictionary<string, string> headers,
-        (string PostId, string Title) post)
-    {
-        var details = new List<string>();
-        try
-        {
-            var url = $"{GenshinApiEndpoints.BbsShareUrl}?entity_id={post.PostId}&entity_type=1";
-            using var request = new HttpRequestMessage(HttpMethod.Get, url);
-            AddHeaders(request, headers);
-
-            var response = await _httpClient.SendAsync(request);
-            var text = await response.Content.ReadAsStringAsync();
-            var json = JsonDocument.Parse(text);
-
-            if (TryGetString(json.RootElement, "message") == "OK")
-            {
-                details.Add(string.Format("CheckinCommunity_ShareSuccess".GetLocalized(), post.Title));
-                return (true, details);
-            }
-            else
-            {
-                var msg = TryGetString(json.RootElement, "message");
-                details.Add(string.Format("CheckinCommunity_ShareFailed".GetLocalized(), post.Title, msg));
-                return (false, details);
-            }
-        }
-        catch (Exception ex)
-        {
-            details.Add(string.Format("CheckinCommunity_ShareException".GetLocalized(), post.Title, ex.Message));
-            return (false, details);
-        }
-    }
-
-    private async Task<JsonElement?> PostJsonAsync(string url, string body, Dictionary<string, string> headers)
-    {
-        try
-        {
-            using var request = new HttpRequestMessage(HttpMethod.Post, url);
-            AddHeaders(request, headers);
-            request.Content = new StringContent(body, Encoding.UTF8, "application/json");
-
-            var response = await _httpClient.SendAsync(request);
-            var text = await response.Content.ReadAsStringAsync();
-            return JsonDocument.Parse(text).RootElement;
-        }
-        catch (Exception ex)
-        {
-            DebugLog.Info("CommunityCheckinService", $"[CommunityCheckin] POST {url} failed: {ex.Message}");
-            return null;
-        }
-    }
-
-    private static void AddHeaders(HttpRequestMessage request, Dictionary<string, string> headers)
-    {
-        foreach (var (key, value) in headers)
-        {
-            if (string.IsNullOrEmpty(value)) continue;
-            switch (key.ToLower())
-            {
-                case "cookie":
-                    request.Headers.Add("Cookie", value);
-                    break;
-                case "user-agent":
-                    request.Headers.UserAgent.ParseAdd(value);
-                    break;
-                case "referer":
-                    request.Headers.Referrer = new Uri(value);
-                    break;
-                case "content-type":
-                    break;
-                default:
-                    request.Headers.TryAddWithoutValidation(key, value);
-                    break;
-            }
-        }
-    }
-
-    private static async Task DelayAsync()
-    {
-        var random = new Random();
-        await Task.Delay(random.Next(1000, 3000));
+        var message = root.TryGetProperty("message", out var value) && value.ValueKind == JsonValueKind.String
+            ? value.GetString()
+            : null;
+        return (code, message);
     }
 }

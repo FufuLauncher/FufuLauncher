@@ -25,7 +25,8 @@ public record UserInfo(
     string avatar_url,
     int gender,
     string ip_region,
-    Dictionary<string, string> achieve
+    Dictionary<string, string> achieve,
+    string? pendant = null
 );
 
 public record UserFullInfoData(UserInfo user_info);

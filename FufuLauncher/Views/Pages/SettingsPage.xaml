@@ -2281,7 +2281,6 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xF45A;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
@@ -2290,31 +2289,10 @@
                                         <TextBlock Style="{StaticResource RowCaptionStyle}"
                                                    Text="{helpers:Loc Key=CommunityCheckinCaption}" />
                                     </StackPanel>
-                                    <Button Grid.Column="2"
-                                            Style="{StaticResource RowInfoButtonStyle}"
-                                            Click="OnCommunityCheckinInfoClick">
-                                        <FontIcon Glyph="&#xE946;" FontSize="15"
-                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    </Button>
-                                    <ToggleSwitch Grid.Column="3" Style="{StaticResource RowToggleStyle}"
-                                                  Margin="8,0,0,0"
+                                    <ToggleSwitch Grid.Column="2" Style="{StaticResource RowToggleStyle}"
                                                   IsEnabled="{x:Bind ViewModel.CanEditCheckinOptions, Mode=OneWay}"
                                                   IsOn="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=TwoWay}" />
                                 </Grid>
-                                <StackPanel Style="{StaticResource RowSubPanelStyle}"
-                                            Orientation="Horizontal"
-                                            Spacing="20"
-                                            Visibility="{x:Bind ViewModel.IsCommunityCheckinEnabled, Mode=OneWay}">
-                                    <CheckBox Content="{helpers:Loc Key=Like}" MinWidth="0"
-                                              IsEnabled="{x:Bind ViewModel.CanEditCheckinOptions, Mode=OneWay}"
-                                              IsChecked="{x:Bind ViewModel.IsCommunityLikeEnabled, Mode=TwoWay}" />
-                                    <CheckBox Content="{helpers:Loc Key=ReadPosts}" MinWidth="0"
-                                              IsEnabled="{x:Bind ViewModel.CanEditCheckinOptions, Mode=OneWay}"
-                                              IsChecked="{x:Bind ViewModel.IsCommunityReadEnabled, Mode=TwoWay}" />
-                                    <CheckBox Content="{helpers:Loc Key=Share}" MinWidth="0"
-                                              IsEnabled="{x:Bind ViewModel.CanEditCheckinOptions, Mode=OneWay}"
-                                              IsChecked="{x:Bind ViewModel.IsCommunityShareEnabled, Mode=TwoWay}" />
-                                </StackPanel>
 
                                 <Rectangle Style="{StaticResource RowDividerStyle}" />
 

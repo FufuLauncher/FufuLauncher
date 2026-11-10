@@ -764,7 +764,7 @@ Si vous continuez, cet avertissement sera ignoré et le Hash de ce préréglage 
     <value>Check-in communauté</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Accomplir automatiquement les tâches d'interaction communautaire pour gagner des pièces Hoyolab</value>
+    <value>Effectuer un pointage dans la section Genshin Impact de MiYouShe pour gagner des pièces MiYou</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>J'aime</value>
@@ -1957,6 +1957,9 @@ Voulez-vous accéder au site officiel de Microsoft pour la télécharger et l'in
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Check-in quotidien</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Synchroniser le cadre d’avatar MiYouShe</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Actualiser les infos</value>

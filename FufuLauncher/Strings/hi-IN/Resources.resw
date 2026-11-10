@@ -676,7 +676,7 @@
     <value>कम्युनिटी चेक-इन</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>MiYouShe कॉइन अर्जित करने के लिए कम्युनिटी इंटरैक्शन कार्य स्वतः पूर्ण करें</value>
+    <value>MiYouShe के Genshin Impact अनुभाग में चेक इन करके MiYou कॉइन पाएँ</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>पसंद करें</value>
@@ -1875,6 +1875,9 @@
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>दैनिक चेक-इन</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>MiYouShe अवतार फ़्रेम सिंक करें</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>जानकारी रीफ़्रेश करें</value>

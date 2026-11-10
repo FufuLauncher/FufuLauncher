@@ -60,21 +60,6 @@ public partial class SettingsViewModel
         SaveCheckinOption("IsCommunityCheckinEnabled", value);
     }
 
-    partial void OnIsCommunityLikeEnabledChanged(bool value)
-    {
-        SaveCheckinOption("IsCommunityLikeEnabled", value);
-    }
-
-    partial void OnIsCommunityReadEnabledChanged(bool value)
-    {
-        SaveCheckinOption("IsCommunityReadEnabled", value);
-    }
-
-    partial void OnIsCommunityShareEnabledChanged(bool value)
-    {
-        SaveCheckinOption("IsCommunityShareEnabled", value);
-    }
-
     partial void OnIsCloudGameCheckinEnabledChanged(bool value)
     {
         SaveCheckinOption("IsCloudGameCheckinEnabled", value);
@@ -110,9 +95,6 @@ public partial class SettingsViewModel
     {
         IsGameCheckinEnabled = IsGameCheckinEnabled,
         IsCommunityCheckinEnabled = IsCommunityCheckinEnabled,
-        IsCommunityLikeEnabled = IsCommunityLikeEnabled,
-        IsCommunityReadEnabled = IsCommunityReadEnabled,
-        IsCommunityShareEnabled = IsCommunityShareEnabled,
         IsCloudGameCheckinEnabled = IsCloudGameCheckinEnabled,
         Games = CheckinGames.ToDictionary(g => g.GameBiz, g => g.IsSelected)
     };
@@ -127,9 +109,6 @@ public partial class SettingsViewModel
         {
             IsGameCheckinEnabled = options.IsGameCheckinEnabled;
             IsCommunityCheckinEnabled = options.IsCommunityCheckinEnabled;
-            IsCommunityLikeEnabled = options.IsCommunityLikeEnabled;
-            IsCommunityReadEnabled = options.IsCommunityReadEnabled;
-            IsCommunityShareEnabled = options.IsCommunityShareEnabled;
             IsCloudGameCheckinEnabled = options.IsCloudGameCheckinEnabled;
             foreach (var game in CheckinGames) game.IsSelected = options.IsGameEnabled(game.GameBiz);
         }
