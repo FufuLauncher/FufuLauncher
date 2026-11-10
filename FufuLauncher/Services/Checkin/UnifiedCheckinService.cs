@@ -316,19 +316,17 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     result.CommunityResult.SkippedCount += communityResult.SkippedCount;
                     result.CommunityResult.Details.AddRange(communityResult.Details);
 
-                    bool? success = communityResult.SkippedCount > 0 ? null : communityResult.Success;
-                    if (success == false && communityResult.FailCount == 0) result.CommunityResult.FailCount++;
+                    bool completed = communityResult.Success || communityResult.SkippedCount > 0;
+                    if (!completed && communityResult.FailCount == 0) result.CommunityResult.FailCount++;
                     var detail = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
+                    var item = ("Checkin_CommunityCheckin".GetLocalized(), (bool?)completed, communityResult.Message);
                     if (detail != null)
-                        detail.Items.Add(("Checkin_CommunityCheckin".GetLocalized(), success, communityResult.Message));
+                        detail.Items.Add(item);
                     else
                         result.AccountResults.Add(new AccountCheckinDetail
                         {
                             Nickname = account.Nickname,
-                            Items =
-                            {
-                                ("Checkin_CommunityCheckin".GetLocalized(), success, communityResult.Message)
-                            }
+                            Items = { item }
                         });
                 }
 

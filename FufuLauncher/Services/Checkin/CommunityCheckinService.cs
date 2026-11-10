@@ -18,6 +18,7 @@ namespace FufuLauncher.Services;
 
 public class CommunityCheckinService : ICommunityCheckinService
 {
+    private const int AlreadySignedCode = 1008;
     private readonly AccountIdentityService _accountIdentityService;
     private readonly HttpClient _httpClient;
 
@@ -58,13 +59,9 @@ public class CommunityCheckinService : ICommunityCheckinService
             {
                 if (await IsAlreadySignedAsync(identity.Cookies))
                 {
-                    result.SkippedCount = 1;
-                    result.Message = "CheckinCommunity_SignDoneSkipped".GetLocalized();
-                    result.Details.Add(result.Message);
-                    return result;
+                    code = AlreadySignedCode;
                 }
-
-                if (await refreshCookie() != null)
+                else if (await refreshCookie() != null)
                 {
                     var refreshedCookie = account.GetStokenCookie();
                     if (refreshedCookie != stokenCookie)
@@ -78,28 +75,30 @@ public class CommunityCheckinService : ICommunityCheckinService
             result.Success = code == 0;
             result.Message = code switch
             {
-                0 => "CheckinCommunity_GenshinSignSuccess".GetLocalized(),
-                null => "CheckinCommunity_GenshinSignRequestFailed".GetLocalized(),
-                1028 or 1034 => "CheckinCommunity_GenshinSignCaptcha".GetLocalized(),
+                0 or AlreadySignedCode => "",
+                null => "Status_RequestFailed".GetLocalized(),
+                1028 or 1034 => "Checkin_GameCaptcha".GetLocalized(),
                 int error when MiyousheCheckinGame.IsLoginExpired(error) =>
                     FormatSignFailure(error, "Checkin_LoginExpired".GetLocalized()),
                 int error => FormatSignFailure(error, message)
             };
+
+            if (code == AlreadySignedCode) result.SkippedCount = 1;
         }
         catch (Exception ex)
         {
-            result.Message = string.Format("CheckinCommunity_GenshinSignException".GetLocalized(), ex.Message);
+            result.Message = ex.Message;
             DebugLog.Info(nameof(CommunityCheckinService), result.Message);
         }
 
         if (result.Success) result.SuccessCount = 1;
-        else result.FailCount = 1;
-        result.Details.Add(result.Message);
+        else if (result.SkippedCount == 0) result.FailCount = 1;
+        if (result.Message.Length > 0) result.Details.Add(result.Message);
         return result;
     }
 
     private static string FormatSignFailure(int code, string? message) =>
-        string.Format("CheckinCommunity_GenshinSignFailed".GetLocalized(), $"[{code}] {message}".TrimEnd());
+        $"[{code}] {message}".TrimEnd();
 
     private async Task<bool> IsAlreadySignedAsync(IReadOnlyDictionary<string, string> cookies)
     {
