@@ -754,7 +754,7 @@
     <value>社区签到</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>自动完成社区互动任务获取米游币</value>
+    <value>在米游社原神板块打卡，获取米游币</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>点赞</value>
@@ -2094,6 +2094,9 @@
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>每日签到</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>同步米游社头像挂件</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>刷新信息</value>

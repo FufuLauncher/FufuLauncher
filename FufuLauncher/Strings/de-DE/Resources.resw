@@ -764,7 +764,7 @@ Wenn du fortfährst, wird diese Warnung ignoriert und der Hash dieser Vorgabe au
     <value>Community-Check-in</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Community-Interaktionsaufgaben automatisch abschließen, um MiHoYo-Münzen zu erhalten</value>
+    <value>Im Genshin-Impact-Bereich auf MiYouShe einchecken und MiYou-Münzen verdienen</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Gefällt mir</value>
@@ -1957,6 +1957,9 @@ Jetzt zur Microsoft-Website gehen und herunterladen?</value>
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Täglicher Check-in</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>MiYouShe-Avatarrahmen synchronisieren</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Info aktualisieren</value>

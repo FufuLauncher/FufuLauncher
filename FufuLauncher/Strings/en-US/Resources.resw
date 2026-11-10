@@ -757,7 +757,7 @@
     <value>Community Check-in</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Automatically complete community interaction tasks to earn MiYouShe Coins</value>
+    <value>Check in to the Genshin Impact section on MiYouShe to earn MiYou Coins</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Like</value>
@@ -1977,6 +1977,9 @@ Go to the Microsoft website to download and install it?</value>
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Daily Check-in</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Sync MiYouShe avatar frame</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Refresh Info</value>

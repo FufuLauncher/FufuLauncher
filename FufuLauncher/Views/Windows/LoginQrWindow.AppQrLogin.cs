@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.Json.Nodes;
 using FufuLauncher.Constants;
+using FufuLauncher.Constants.MiHoYo;
 using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Views;
@@ -67,7 +68,7 @@ public sealed partial class LoginQrWindow
 
         var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
-        AddCommonHeaders(request, bodyStr, "", "3", "ddxf5dufpuyo", "2.90.1");
+        AddCommonHeaders(request, bodyStr, "", ClientTypes.GameApp, AppIds.Passport, HeaderVersions.PcWebCn);
 
         try
         {
@@ -117,7 +118,7 @@ public sealed partial class LoginQrWindow
 
             using var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
-            AddCommonHeaders(request, bodyStr, "", "3", "ddxf5dufpuyo", "2.90.1");
+            AddCommonHeaders(request, bodyStr, "", ClientTypes.GameApp, AppIds.Passport, HeaderVersions.PcWebCn);
 
             try
             {

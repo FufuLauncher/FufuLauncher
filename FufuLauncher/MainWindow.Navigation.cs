@@ -26,6 +26,8 @@ public sealed partial class MainWindow
 {
     private Action? _accountFlyoutClosedAction;
     private string? _accountAvatarUrl;
+    private string? _accountPendantUrl;
+    private bool _showAccountAvatarPendant;
     private BitmapImage? _navAvatarImage;
 
     private static readonly Uri DefaultAccountAvatarUri = new("ms-appx:///Assets/DefaultAvatar.png");
@@ -77,6 +79,8 @@ public sealed partial class MainWindow
             await LoadMinWindowSizeLimitSettingAsync();
             await LoadNotificationPositionAsync();
             await LoadNavItemVisibilityAsync();
+            var pendantSetting = await _localSettingsService.ReadSettingAsync(AccountAvatarPendant.SettingKey);
+            _showAccountAvatarPendant = bool.TryParse(pendantSetting?.ToString(), out var enabled) && enabled;
             ShowMainContent();
 
             _ = Task.Run(async () =>
@@ -279,6 +283,7 @@ public sealed partial class MainWindow
         {
             _accountAvatarUrl = null;
             ResetNavAvatar();
+            ApplyAccountAvatarPendant(null);
             AccountNavText.Text = "Account_MenuTitle".GetLocalized();
             AccountFlyoutProfilePanel.Visibility = Visibility.Collapsed;
             AccountFlyoutGuestPanel.Visibility = Visibility.Visible;
@@ -299,6 +304,7 @@ public sealed partial class MainWindow
             ShowNavAvatar(entry.AvatarUrl);
             ApplyFlyoutAvatar(entry.AvatarUrl);
         }
+        ApplyAccountAvatarPendant(_showAccountAvatarPendant ? entry.AvatarPendantUrl : null);
 
         AccountNavText.Text = nickname;
         AccountFlyoutNickname.Text = nickname;
@@ -319,6 +325,15 @@ public sealed partial class MainWindow
 
     private static string FormatAccountValue(string? value) =>
         string.IsNullOrWhiteSpace(value) ? "Common_None".GetLocalized() : value;
+
+    private void ApplyAccountAvatarPendant(string? url)
+    {
+        if (string.Equals(_accountPendantUrl, url, StringComparison.Ordinal)) return;
+        _accountPendantUrl = url;
+        var image = AccountAvatarPendant.CreateImage(url);
+        AccountNavPendant.Source = image;
+        AccountFlyoutPendant.Source = image;
+    }
 
     private static Uri ResolveAccountAvatarUri(string? avatarUrl)
     {

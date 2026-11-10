@@ -764,7 +764,7 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>커뮤니티 출석 체크</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>커뮤니티 상호작용 작업을 자동으로 완료하여 미호요 코인 획득</value>
+    <value>미유사 원신 커뮤니티에서 출석 체크하고 미유 코인 받기</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>좋아요</value>
@@ -1957,6 +1957,9 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>일일 출석 체크</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>미유사 프로필 테두리 동기화</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>정보 새로고침</value>

@@ -764,7 +764,7 @@ Se continuar, este aviso será ignorado e o Hash desta predefinição será atua
     <value>Check-in da comunidade</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Complete automaticamente tarefas de interação na comunidade para ganhar Moedas Miyou</value>
+    <value>Faça check-in na seção de Genshin Impact do MiYouShe para ganhar moedas MiYou</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Curtir</value>
@@ -1957,6 +1957,9 @@ Ir para o site da Microsoft para baixar e instalar?</value>
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Check-in diário</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Sincronizar a moldura do avatar do MiYouShe</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Atualizar informações</value>

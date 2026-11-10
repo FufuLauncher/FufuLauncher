@@ -321,9 +321,15 @@
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <PersonPicture x:Name="AccountFlyoutAvatar"
-                                                               Width="52"
-                                                               Height="52" />
+                                                <Grid Width="52" Height="52">
+                                                    <PersonPicture x:Name="AccountFlyoutAvatar" Width="52" Height="52" />
+                                                    <Image x:Name="AccountFlyoutPendant" IsHitTestVisible="False"
+                                                           Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+                                                        <Image.RenderTransform>
+                                                            <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
+                                                        </Image.RenderTransform>
+                                                    </Image>
+                                                </Grid>
                                                 <TextBlock x:Name="AccountFlyoutNickname"
                                                            Grid.Column="1"
                                                            VerticalAlignment="Center"
@@ -484,6 +490,12 @@
                                        helpers:ImageFadeInHelper.DurationMilliseconds="260"
                                        helpers:ImageFadeInHelper.EnableRetry="False" />
                             </Grid>
+                            <Image x:Name="AccountNavPendant" IsHitTestVisible="False"
+                                   Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
+                                </Image.RenderTransform>
+                            </Image>
                         </Grid>
                     </Button>
                     <TextBlock x:Name="AccountNavText"

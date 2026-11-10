@@ -3,14 +3,34 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
-using System.Diagnostics;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Helpers;
+using FufuLauncher.Messages;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.ViewModels;
 
 public partial class AccountViewModel
 {
+    private bool _avatarPendantSettingLoaded;
+    [ObservableProperty] private bool _isAvatarPendantEnabled;
+
+    partial void OnIsAvatarPendantEnabledChanged(bool value)
+    {
+        if (!_avatarPendantSettingLoaded) return;
+
+        _ = _localSettingsService.SaveSettingAsync(AccountAvatarPendant.SettingKey, value);
+        if (CurrentAccount is { } account)
+        {
+            var entry = _accountManager.GetActiveAccountEntry();
+            if (entry?.Id == account.AccountId)
+                account.AvatarPendantUrl = value ? entry.AvatarPendantUrl ?? "" : "";
+        }
+        RefreshSavedAccountsList();
+        WeakReferenceMessenger.Default.Send(new AccountAvatarChangedMessage(value));
+    }
+
     private async Task LoadActiveAccountAsync(string accountId)
     {
         var cookies = await _accountManager.LoadCookiesAsync(accountId);
@@ -28,6 +48,7 @@ public partial class AccountViewModel
             Nickname = entry.Nickname ?? "Common_Unnamed".GetLocalized(),
             Stuid = entry.Stuid,
             AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png",
+            AvatarPendantUrl = IsAvatarPendantEnabled ? entry.AvatarPendantUrl ?? "" : "",
             GameUid = entry.GameUid ?? "",
             Server = entry.ServerType
         };
@@ -60,6 +81,7 @@ public partial class AccountViewModel
                     Nickname = entry.Nickname ?? "Common_Unnamed".GetLocalized(),
                     Stuid = entry.Stuid,
                     AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png",
+                    AvatarPendantUrl = IsAvatarPendantEnabled ? entry.AvatarPendantUrl ?? "" : "",
                     GameUid = entry.GameUid ?? ""
                 });
             }
@@ -112,6 +134,7 @@ public partial class AccountViewModel
                     Nickname = entry.Nickname ?? "Common_Unnamed".GetLocalized(),
                     Stuid = entry.Stuid,
                     AvatarUrl = entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png",
+                    AvatarPendantUrl = IsAvatarPendantEnabled ? entry.AvatarPendantUrl ?? "" : "",
                     GameUid = entry.GameUid ?? entry.Stuid,
                     Server = entry.ServerType,
                     HasBoundRole = false
@@ -141,6 +164,12 @@ public partial class AccountViewModel
 
     public async Task RefreshDataAsync()
     {
+        if (!_avatarPendantSettingLoaded)
+        {
+            var setting = await _localSettingsService.ReadSettingAsync(AccountAvatarPendant.SettingKey);
+            IsAvatarPendantEnabled = bool.TryParse(setting?.ToString(), out var enabled) && enabled;
+            _avatarPendantSettingLoaded = true;
+        }
         await LoadAccountInfo();
         RefreshSavedAccountsList();
     }

@@ -308,29 +308,26 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     }
 
                     Report($"[{account.Nickname}] {"Checkin_CommunityCheckinProgress".GetLocalized()}");
-                    var communityResult = await _communityCheckinService.ExecuteCheckinAsync(
-                        account, true, options.IsCommunityReadEnabled, options.IsCommunityLikeEnabled,
-                        options.IsCommunityShareEnabled);
+                    var communityResult = await _communityCheckinService.ExecuteCheckinAsync(account,
+                        () => RefreshCheckinCookieAsync(account));
 
                     result.CommunityResult.SuccessCount += communityResult.SuccessCount;
                     result.CommunityResult.FailCount += communityResult.FailCount;
                     result.CommunityResult.SkippedCount += communityResult.SkippedCount;
                     result.CommunityResult.Details.AddRange(communityResult.Details);
 
-                    bool success = communityResult.Success;
-                    if (!success && communityResult.FailCount == 0) result.CommunityResult.FailCount++;
+                    bool? success = communityResult.SkippedCount > 0 ? null : communityResult.Success;
+                    if (success == false && communityResult.FailCount == 0) result.CommunityResult.FailCount++;
                     var detail = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
                     if (detail != null)
-                        detail.Items.Add(("Checkin_CommunityCheckin".GetLocalized(), success,
-                            success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized()));
+                        detail.Items.Add(("Checkin_CommunityCheckin".GetLocalized(), success, communityResult.Message));
                     else
                         result.AccountResults.Add(new AccountCheckinDetail
                         {
                             Nickname = account.Nickname,
                             Items =
                             {
-                                ("Checkin_CommunityCheckin".GetLocalized(), success,
-                                    success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized())
+                                ("Checkin_CommunityCheckin".GetLocalized(), success, communityResult.Message)
                             }
                         });
                 }

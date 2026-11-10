@@ -327,7 +327,7 @@ public sealed partial class AccountPage : Page
                 result.OverallSuccess
                     ? "Account_CheckinComplete".GetLocalized()
                     : "Account_CheckinFailed".GetLocalized(),
-                result.SummaryMessage,
+                result.OverallSuccess ? result.SummaryMessage : result.GetDetailedSummary(),
                 result.OverallSuccess ? NotificationType.Success : NotificationType.Warning,
                 5000);
         }

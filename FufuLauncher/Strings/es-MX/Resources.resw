@@ -764,7 +764,7 @@ Si continúas, se ignorará esta advertencia y el Hash de este ajuste se actuali
     <value>Check-in de comunidad</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Completa automáticamente tareas de interacción comunitaria para ganar Miyou Coins</value>
+    <value>Registra tu asistencia en la sección de Genshin Impact de MiYouShe para ganar monedas MiYou</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Me gusta</value>
@@ -1957,6 +1957,9 @@ Por favor, confirma que seleccionaste el directorio de instalación que contiene
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Check-in diario</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Sincronizar el marco de avatar de MiYouShe</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Actualizar información</value>

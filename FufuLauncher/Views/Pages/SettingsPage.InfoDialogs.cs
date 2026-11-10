@@ -38,18 +38,6 @@ public sealed partial class SettingsPage
 
     private void OnIdentifyMonitorsClick(object sender, RoutedEventArgs e) => MonitorHelper.IdentifyAll();
 
-    private async void OnCommunityCheckinInfoClick(object sender, RoutedEventArgs e)
-    {
-        var dialog = new ContentDialog
-        {
-            Title = "Settings_CommunityCheckinNote".GetLocalized(),
-            Content = "由于米游社逐步删除了互动获取米游币渠道，下方选项大概并不能让获取米游币变得更多，等待后续官方更新新策略",
-            CloseButtonText = "GotItBtn".GetLocalized(),
-            XamlRoot = this.XamlRoot
-        };
-        await dialog.ShowAsync();
-    }
-
     private async void OnCloudGameCheckinInfoClick(object sender, RoutedEventArgs e)
     {
         var dialog = new ContentDialog

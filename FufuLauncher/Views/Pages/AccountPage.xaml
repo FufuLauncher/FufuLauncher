@@ -223,11 +223,16 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <PersonPicture
-                                            Width="32"
-                                            Height="32"
-                                            Margin="0,0,12,0"
-                                            ProfilePicture="{x:Bind AvatarUrl}" />
+                                        <Grid Width="32" Height="32" Margin="0,0,12,0">
+                                            <PersonPicture Width="32" Height="32" ProfilePicture="{x:Bind AvatarUrl}" />
+                                            <Image Source="{x:Bind helpers:AccountAvatarPendant.CreateImage(AvatarPendantUrl), Mode=OneWay}"
+                                                   IsHitTestVisible="False" Stretch="Uniform"
+                                                   RenderTransformOrigin="0.5,0.5">
+                                                <Image.RenderTransform>
+                                                    <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </Grid>
                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="14"
@@ -293,25 +298,32 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
                                     <Grid
                                         Width="84"
-                                        Height="84"
-                                        CornerRadius="42">
-                                        <Image
-                                            x:Name="AvatarPicture"
-                                            Width="84"
-                                            Height="84"
-                                            Source="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}"
-                                            Stretch="UniformToFill"
-                                            helpers:ImageFadeInHelper.IsFadeInEnabled="True"
-                                            helpers:ImageFadeInHelper.DurationMilliseconds="260"
-                                            helpers:ImageFadeInHelper.EnableRetry="False" />
+                                        Height="84">
+                                        <Grid CornerRadius="42">
+                                            <Image
+                                                x:Name="AvatarPicture"
+                                                Width="84"
+                                                Height="84"
+                                                Source="{x:Bind ViewModel.CurrentAccount.AvatarUrl, Mode=OneWay}"
+                                                Stretch="UniformToFill"
+                                                helpers:ImageFadeInHelper.IsFadeInEnabled="True"
+                                                helpers:ImageFadeInHelper.DurationMilliseconds="260"
+                                                helpers:ImageFadeInHelper.EnableRetry="False" />
+                                        </Grid>
+                                        <Image Source="{x:Bind helpers:AccountAvatarPendant.CreateImage(ViewModel.CurrentAccount.AvatarPendantUrl), Mode=OneWay}"
+                                               IsHitTestVisible="False" Stretch="Uniform"
+                                               RenderTransformOrigin="0.5,0.5">
+                                            <Image.RenderTransform>
+                                                <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
+                                            </Image.RenderTransform>
+                                        </Image>
                                     </Grid>
 
-                                    <Grid Grid.Column="1" VerticalAlignment="Center" RowSpacing="6" ColumnSpacing="16">
+                                    <Grid Grid.Column="1" VerticalAlignment="Center" RowSpacing="8" ColumnSpacing="12">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
@@ -322,7 +334,8 @@
                                         </Grid.ColumnDefinitions>
                                         <StackPanel
                                             Grid.ColumnSpan="2"
-                                            VerticalAlignment="Bottom"
+                                            Margin="0,0,60,0"
+                                            VerticalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <TextBlock
@@ -368,7 +381,67 @@
                                             </Border>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Row="1" Spacing="6">
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6"
+                                                    HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <ProgressRing Width="18" Height="18" VerticalAlignment="Center"
+                                                          IsActive="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay}"
+                                                          Visibility="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                            <ToggleButton Width="32" Height="28"
+                                                          IsChecked="{x:Bind ViewModel.IsAvatarPendantEnabled, Mode=TwoWay}"
+                                                          AutomationProperties.Name="{helpers:Loc Key=Account_SyncAvatarPendant}"
+                                                          ToolTipService.ToolTip="{helpers:Loc Key=Account_SyncAvatarPendant}">
+                                                <ToggleButton.Template>
+                                                    <ControlTemplate TargetType="ToggleButton">
+                                                        <Grid x:Name="PendantButtonBackground" Background="Transparent" CornerRadius="4">
+                                                            <VisualStateManager.VisualStateGroups>
+                                                                <VisualStateGroup x:Name="CommonStates">
+                                                                    <VisualState x:Name="Normal" />
+                                                                    <VisualState x:Name="PointerOver">
+                                                                        <VisualState.Setters>
+                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
+                                                                        </VisualState.Setters>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="Pressed">
+                                                                        <VisualState.Setters>
+                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource SubtleFillColorTertiaryBrush}" />
+                                                                        </VisualState.Setters>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="Checked">
+                                                                        <VisualState.Setters>
+                                                                            <Setter Target="PendantGlyph.Stroke" Value="{ThemeResource AccentFillColorDefaultBrush}" />
+                                                                        </VisualState.Setters>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="CheckedPointerOver">
+                                                                        <VisualState.Setters>
+                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource AccentFillColorSecondaryBrush}" />
+                                                                            <Setter Target="PendantGlyph.Stroke" Value="White" />
+                                                                        </VisualState.Setters>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="CheckedPressed">
+                                                                        <VisualState.Setters>
+                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource AccentFillColorTertiaryBrush}" />
+                                                                            <Setter Target="PendantGlyph.Stroke" Value="White" />
+                                                                        </VisualState.Setters>
+                                                                    </VisualState>
+                                                                    <VisualState x:Name="Disabled" />
+                                                                    <VisualState x:Name="CheckedDisabled" />
+                                                                </VisualStateGroup>
+                                                            </VisualStateManager.VisualStateGroups>
+                                                            <Viewbox Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                                <Canvas Width="24" Height="24">
+                                                                    <Path x:Name="PendantGlyph"
+                                                                          Data="M12,4 A8,8 0 1 0 20,12 M17.5,2 L18.7,5.3 L22,6.5 L18.7,7.7 L17.5,11 L16.3,7.7 L13,6.5 L16.3,5.3 Z"
+                                                                          Stroke="{ThemeResource TextFillColorTertiaryBrush}" StrokeThickness="1.8"
+                                                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
+                                                                </Canvas>
+                                                            </Viewbox>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </ToggleButton.Template>
+                                            </ToggleButton>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Row="1" Spacing="6" VerticalAlignment="Center">
                                             <TextBlock
                                                 FontSize="13"
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -415,8 +488,8 @@
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
-                                        <Button Grid.Row="1" Grid.Column="1" Padding="10,4"
-                                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                        <Button Grid.Row="1" Grid.Column="1" MinWidth="144" MinHeight="40" Padding="14,8"
+                                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Center"
                                                 Command="{x:Bind ViewModel.OpenMiyousheQrCommand}">
                                             <StackPanel Orientation="Horizontal" Spacing="8">
                                                 <Viewbox Width="20" Height="20">
@@ -435,13 +508,6 @@
                                         </Button>
                                     </Grid>
 
-                                    <StackPanel Grid.Column="2" VerticalAlignment="Top">
-                                        <ProgressRing
-                                            Width="20"
-                                            Height="20"
-                                            IsActive="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay}"
-                                            Visibility="{x:Bind ViewModel.IsLoadingUserInfo, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
-                                    </StackPanel>
                                 </Grid>
                             </Border>
 

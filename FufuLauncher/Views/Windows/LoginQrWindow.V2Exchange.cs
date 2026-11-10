@@ -75,10 +75,7 @@ public sealed partial class LoginQrWindow
                     finalCookies[kvp.Key] = kvp.Value;
                 }
 
-                if (!finalCookies.ContainsKey("stoken") || string.IsNullOrEmpty(finalCookies["stoken"]))
-                {
-                    finalCookies["stoken"] = stoken;
-                }
+                finalCookies["stoken"] = stoken;
 
                 return finalCookies;
             }
@@ -101,17 +98,12 @@ public sealed partial class LoginQrWindow
         string mid = dataNode["user_info"]?["mid"]?.GetValue<string>() ?? "";
         string aid = dataNode["user_info"]?["aid"]?.GetValue<string>() ?? "";
 
-        var tokens = dataNode["tokens"]?.AsArray();
-        if (tokens != null)
+        if (dataNode["tokens"] is JsonArray tokens)
         {
-            foreach (var tokenItem in tokens)
-            {
-                if (tokenItem?["token_type"]?.GetValue<int>() == 1)
-                {
-                    stoken = tokenItem["token"]?.GetValue<string>();
-                    break;
-                }
-            }
+            var token = tokens.FirstOrDefault(item => item?["name"]?.GetValue<string>() is "stoken" or "stoken_v2")
+                        ?? tokens.FirstOrDefault(item => item?["token_type"] is JsonValue type &&
+                                                        type.TryGetValue<int>(out var id) && id == 1);
+            stoken = token?["token"]?.GetValue<string>() ?? "";
         }
 
         if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))

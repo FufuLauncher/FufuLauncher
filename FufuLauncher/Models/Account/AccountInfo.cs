@@ -19,6 +19,7 @@ public partial class AccountInfo : ObservableObject
     [ObservableProperty] private string _gameUid = "";
     [ObservableProperty] private string _server = "";
     [ObservableProperty] private string _avatarUrl = "ms-appx:///Assets/DefaultAvatar.png";
+    [ObservableProperty] private string _avatarPendantUrl = "";
 
     [ObservableProperty] [NotifyPropertyChangedFor(nameof(LevelDisplay))]
     private string _level = "";

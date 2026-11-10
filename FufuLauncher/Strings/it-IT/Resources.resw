@@ -186,6 +186,9 @@
   <data name="Account_RecentDays_Format" xml:space="preserve">
     <value>Ultimi {0} Giorni</value>
   </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Sincronizza la cornice dell’avatar MiYouShe</value>
+  </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Aggiorna Info</value>
   </data>
@@ -1078,7 +1081,7 @@
     <value>Check-in Community</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Completa automaticamente le attività di interazione community per guadagnare Monete MiYouShe</value>
+    <value>Fai il check-in nella sezione Genshin Impact di MiYouShe per ottenere monete MiYou</value>
   </data>
   <data name="CommunityPage_Agree" xml:space="preserve">
     <value>Accetto</value>

@@ -373,6 +373,15 @@ public sealed partial class MainWindow : WindowEx
             dispatcherQueue.TryEnqueue(RefreshAccountMenu);
         });
 
+        WeakReferenceMessenger.Default.Register<AccountAvatarChangedMessage>(this, (_, m) =>
+        {
+            dispatcherQueue.TryEnqueue(() =>
+            {
+                if (m.PendantEnabled is bool enabled) _showAccountAvatarPendant = enabled;
+                RefreshAccountMenu();
+            });
+        });
+
         WeakReferenceMessenger.Default.Register<GameRoleChangedMessage>(this, (_, _) =>
         {
             dispatcherQueue.TryEnqueue(RefreshAccountMenu);

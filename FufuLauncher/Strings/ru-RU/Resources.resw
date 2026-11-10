@@ -764,7 +764,7 @@
     <value>Отметка сообщества</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Автовыполнение заданий сообщества для получения монет</value>
+    <value>Отмечайтесь в разделе Genshin Impact на MiYouShe, чтобы получать монеты MiYou</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Нравится</value>
@@ -1957,6 +1957,9 @@
   </data>
   <data name="Account_DailyCheckin" xml:space="preserve">
     <value>Ежедневная отметка</value>
+  </data>
+  <data name="Account_SyncAvatarPendant" xml:space="preserve">
+    <value>Синхронизировать рамку аватара MiYouShe</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Обновить</value>

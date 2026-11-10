@@ -9,6 +9,5 @@ namespace FufuLauncher.Contracts.Services;
 
 public interface ICommunityCheckinService
 {
-    Task<CheckinTypeResult> ExecuteCheckinAsync(AccountCredentials account, bool signEnabled, bool readEnabled,
-        bool likeEnabled, bool shareEnabled);
+    Task<CheckinTypeResult> ExecuteCheckinAsync(AccountCredentials account, Func<Task<string?>> refreshCookie);
 }
