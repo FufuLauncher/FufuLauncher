@@ -9798,9 +9798,6 @@ UIGF v4.x/3.0/2.x</value>
   <data name="MiyousheShop_PlanMissed" xml:space="preserve">
     <value>已错过</value>
   </data>
-  <data name="MiyousheShop_PlanLegacy" xml:space="preserve">
-    <value>旧提醒，需重新添加自动兑换</value>
-  </data>
   <data name="MiyousheShop_PlanReviewed" xml:space="preserve">
     <value>已核对</value>
   </data>

@@ -81,8 +81,7 @@ public enum MiyousheShopPlanStatus
     Verification,
     Unknown,
     Missed,
-    Legacy,
-    Reviewed
+    Reviewed = 8
 }
 
 public sealed record MiyousheShopTarget(string Label, string Uid, string Region, string GameBiz, long AddressId)

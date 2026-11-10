@@ -7,8 +7,6 @@ namespace FufuLauncher.Services.Miyoushe;
 internal sealed class MiyousheShopPlans(ILocalSettingsService settings)
 {
     private const string Setting = "MiyousheShopPlans";
-    private const string LegacySetting = "MiyousheShopReminders";
-    private sealed record LegacyReminder(Guid Id, string GoodsId, string GoodsName, DateTimeOffset OpensAt);
     private readonly SemaphoreSlim _gate = new(1, 1);
     private IReadOnlyList<MiyousheShopPlan>? _items;
 
@@ -84,20 +82,13 @@ internal sealed class MiyousheShopPlans(ILocalSettingsService settings)
     {
         if (_items != null) return _items;
         var stored = await settings.ReadSettingAsync(Setting);
-        if (stored is string json)
-            return _items = JsonSerializer.Deserialize<MiyousheShopPlan[]>(json) ??
-                            throw new InvalidDataException("Invalid shop plans.");
-        if (stored != null) throw new InvalidDataException("Invalid shop plans.");
-        var legacy = await settings.ReadSettingAsync(LegacySetting);
-        _items = legacy switch
+        return _items = stored switch
         {
             null => [],
-            string oldJson => (JsonSerializer.Deserialize<LegacyReminder[]>(oldJson) ?? [])
-                .Select(item => new MiyousheShopPlan(item.Id, item.GoodsId, item.GoodsName, item.OpensAt,
-                    "", "", 0, "", "", null, true, MiyousheShopPlanStatus.Legacy)).ToArray(),
-            _ => throw new InvalidDataException("Invalid shop reminders.")
+            string json => JsonSerializer.Deserialize<MiyousheShopPlan[]>(json) ??
+                           throw new InvalidDataException("Invalid shop plans."),
+            _ => throw new InvalidDataException("Invalid shop plans.")
         };
-        return _items;
     }
 
     private async Task<bool> UpdateAsync(Func<List<MiyousheShopPlan>, bool> update)

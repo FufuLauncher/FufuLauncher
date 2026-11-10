@@ -9803,9 +9803,6 @@ Details: {0}</value>
   <data name="MiyousheShop_PlanMissed" xml:space="preserve">
     <value>Missed</value>
   </data>
-  <data name="MiyousheShop_PlanLegacy" xml:space="preserve">
-    <value>Legacy reminder. Add a new plan to enable redemption.</value>
-  </data>
   <data name="MiyousheShop_PlanReviewed" xml:space="preserve">
     <value>Reviewed</value>
   </data>
