@@ -1,5 +1,4 @@
 preserve_hierarchy: true
-
 files:
   - source: /FufuLauncher/Strings/zh-CN/Resources.resw
     translation: /FufuLauncher/Strings/%locale%/Resources.resw
