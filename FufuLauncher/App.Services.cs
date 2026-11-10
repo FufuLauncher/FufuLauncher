@@ -73,6 +73,7 @@ public partial class App
                 services.AddTransient<Views.CycleChallengePage>();
 
                 services.AddSingleton<LaunchConfigurationViewModel>();
+                services.AddSingleton<QuickFpsConfigurationViewModel>();
                 services.AddTransient<SettingsViewModel>();
                 services.AddTransient<SettingsPage>();
                 services.AddTransient<ImageSourceViewModel>();

@@ -6036,7 +6036,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>转换失败</value>
   </data>
   <data name="AdvancedServerSwitch_FailedMsg" xml:space="preserve">
-    <value>切换失败，文件可能被占用
+    <value>切换失败
 错误信息: {0}</value>
   </data>
   <data name="ServerBili" xml:space="preserve">
@@ -9860,5 +9860,56 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="MiyousheShop_ResolveHint" xml:space="preserve">
     <value>请先核对米游社官方兑换记录和米游币扣除情况。确认后会解除该商品的提交限制。</value>
+  </data>
+  <data name="MiyoushePendant_Open" xml:space="preserve">
+    <value>更换头像框</value>
+  </data>
+  <data name="MiyoushePendant_Hint" xml:space="preserve">
+    <value>选择头像框查看预览</value>
+  </data>
+  <data name="MiyoushePendant_OwnedOnly" xml:space="preserve">
+    <value>只看已拥有</value>
+  </data>
+  <data name="MiyoushePendant_Select" xml:space="preserve">
+    <value>选择一个头像框预览效果</value>
+  </data>
+  <data name="MiyoushePendant_Equip" xml:space="preserve">
+    <value>使用此头像框</value>
+  </data>
+  <data name="MiyoushePendant_Equipped" xml:space="preserve">
+    <value>当前佩戴</value>
+  </data>
+  <data name="MiyoushePendant_Remove" xml:space="preserve">
+    <value>取消佩戴头像框</value>
+  </data>
+  <data name="MiyoushePendant_Author" xml:space="preserve">
+    <value>作者：{0}</value>
+  </data>
+  <data name="MiyoushePendant_Remain" xml:space="preserve">
+    <value>剩余 {0} 天 {1} 小时</value>
+  </data>
+  <data name="MiyoushePendant_Expired" xml:space="preserve">
+    <value>已过期</value>
+  </data>
+  <data name="MiyoushePendant_NotOwned" xml:space="preserve">
+    <value>未拥有</value>
+  </data>
+  <data name="MiyoushePendant_Updated" xml:space="preserve">
+    <value>头像框已更换</value>
+  </data>
+  <data name="MiyoushePendant_Removed" xml:space="preserve">
+    <value>已取消佩戴头像框</value>
+  </data>
+  <data name="MiyoushePendant_LoginRequired" xml:space="preserve">
+    <value>请先选择已登录的米游社账号</value>
+  </data>
+  <data name="MiyoushePendant_LoadError" xml:space="preserve">
+    <value>头像框加载失败，请稍后重试</value>
+  </data>
+  <data name="MiyoushePendant_UpdateError" xml:space="preserve">
+    <value>头像框更换失败，请稍后重试</value>
+  </data>
+  <data name="MiyoushePendant_Empty" xml:space="preserve">
+    <value>暂无头像框。</value>
   </data>
 </root>

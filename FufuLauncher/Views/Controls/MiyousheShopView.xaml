@@ -18,6 +18,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBlock Text="{helpers:Loc Key=MiyousheShop_Title}" FontSize="20" FontWeight="SemiBold"
                        VerticalAlignment="Center" />
@@ -41,7 +42,9 @@
                 </StackPanel>
             </Border>
             <Button Grid.Column="2" Content="{helpers:Loc Key=Miyoushe_Refresh}" Click="OnRefresh" />
-            <Button x:Name="PlansButton" Grid.Column="3" Content="{helpers:Loc Key=MiyousheShop_Plans}"
+            <Button x:Name="PendantsButton" Grid.Column="3" Content="{helpers:Loc Key=MiyoushePendant_Open}"
+                    Click="OnTogglePendants" />
+            <Button x:Name="PlansButton" Grid.Column="4" Content="{helpers:Loc Key=MiyousheShop_Plans}"
                     Click="OnTogglePlans" />
         </Grid>
         <InfoBar x:Name="ShopStatus" Grid.Row="1" IsClosable="True" />
@@ -297,6 +300,137 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </Grid>
+            <Grid x:Name="PendantsPane" ColumnSpacing="12" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="320" />
+                </Grid.ColumnDefinitions>
+                <Grid RowSpacing="8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{helpers:Loc Key=MiyoushePendant_Hint}" TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <CheckBox x:Name="OwnedOnlyCheck" Grid.Column="1" IsChecked="True"
+                                  Content="{helpers:Loc Key=MiyoushePendant_OwnedOnly}" Click="OnOwnedOnlyChanged" />
+                    </Grid>
+                    <ProgressBar x:Name="PendantProgress" Grid.Row="1" IsIndeterminate="True" Visibility="Collapsed" />
+                    <GridView x:Name="PendantGrid" Grid.Row="2" SelectionMode="Single"
+                              SelectionChanged="OnPendantChanged"
+                              ScrollViewer.HorizontalScrollMode="Disabled"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal" ItemWidth="120" ItemHeight="150" />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                        <GridView.ItemContainerStyle>
+                            <Style TargetType="GridViewItem" BasedOn="{StaticResource DefaultGridViewItemStyle}">
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0,0,6,6" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                                <Setter Property="CornerRadius" Value="10" />
+                            </Style>
+                        </GridView.ItemContainerStyle>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="8,8,8,6" RowSpacing="6"
+                                      Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                                      BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
+                                      CornerRadius="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="92" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Border CornerRadius="6" Background="{ThemeResource SubtleFillColorSecondaryBrush}">
+                                        <Image Margin="2" Stretch="Uniform" Source="{Binding Icon}" />
+                                    </Border>
+                                    <FontIcon Glyph="&#xE72E;" FontSize="18" Margin="0,6,6,0"
+                                              HorizontalAlignment="Right" VerticalAlignment="Top"
+                                              Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                              Visibility="{Binding Owned, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=inverse}" />
+                                    <Border Margin="6" Padding="5,2" CornerRadius="4" HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Background="{ThemeResource AccentFillColorDefaultBrush}"
+                                            Visibility="{Binding IsUsed, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <TextBlock Text="{helpers:Loc Key=MiyoushePendant_Equipped}" FontSize="10"
+                                                   Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                                    </Border>
+                                    <TextBlock Grid.Row="1" Text="{Binding Name}" FontSize="12" LineHeight="16"
+                                               LineStackingStrategy="BlockLineHeight" MaxLines="2"
+                                               TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                                               ToolTipService.ToolTip="{Binding Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                    <TextBlock x:Name="EmptyPendants" Grid.Row="2" Margin="12,16" IsHitTestVisible="False"
+                               Visibility="Collapsed" Text="{helpers:Loc Key=MiyoushePendant_Empty}" TextWrapping="Wrap"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </Grid>
+                <Border Grid.Column="1" CornerRadius="12" BorderThickness="1"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                    <Grid>
+                        <TextBlock x:Name="PendantPlaceholder" Margin="16,20"
+                                   Text="{helpers:Loc Key=MiyoushePendant_Select}" TextWrapping="Wrap"
+                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                        <ScrollViewer x:Name="PendantDetailsScroll" VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollMode="Disabled" Visibility="Collapsed">
+                            <StackPanel Spacing="12" Padding="16,16,16,18">
+                                <Grid Width="212" Height="212" HorizontalAlignment="Center">
+                                    <Ellipse Width="160" Height="160" HorizontalAlignment="Center"
+                                             VerticalAlignment="Center">
+                                        <Ellipse.Fill>
+                                            <ImageBrush x:Name="PendantAvatarBrush" Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <FontIcon x:Name="PendantAvatarFallback" Glyph="&#xE77B;" FontSize="56"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <Image x:Name="PendantPreview" Width="160" Height="160" Stretch="Uniform"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
+                                        <Image.RenderTransform>
+                                            <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </Grid>
+                                <TextBlock x:Name="PendantName" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                <Border x:Name="PendantStateBadge" Padding="8,4" CornerRadius="6"
+                                        HorizontalAlignment="Left" Visibility="Collapsed"
+                                        Background="{ThemeResource AccentFillColorDefaultBrush}">
+                                    <TextBlock x:Name="PendantState" FontSize="12"
+                                               Foreground="{ThemeResource TextOnAccentFillColorPrimaryBrush}" />
+                                </Border>
+                                <TextBlock x:Name="PendantDescription" FontSize="13" TextWrapping="Wrap"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock x:Name="PendantAuthor" FontSize="12" TextWrapping="Wrap"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <TextBlock x:Name="PendantRemain" FontSize="12" TextWrapping="Wrap"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <Button x:Name="EquipPendantButton" Click="OnEquipPendant" MinHeight="38"
+                                        HorizontalAlignment="Stretch" Visibility="Collapsed"
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        Content="{helpers:Loc Key=MiyoushePendant_Equip}" />
+                                <Button x:Name="RemovePendantButton" Click="OnRemovePendant" MinHeight="34"
+                                        HorizontalAlignment="Stretch" Visibility="Collapsed"
+                                        Content="{helpers:Loc Key=MiyoushePendant_Remove}" />
+                                <ProgressBar x:Name="PendantSaveProgress" IsIndeterminate="True" Visibility="Collapsed" />
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
             </Grid>
         </Grid>
     </Grid>

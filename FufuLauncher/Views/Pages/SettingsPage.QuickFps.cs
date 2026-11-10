@@ -5,7 +5,9 @@ Licensed under the MIT License.
 
 using System.Collections.ObjectModel;
 using System.Globalization;
+using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Helpers;
+using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.ViewModels;
@@ -18,7 +20,7 @@ public sealed partial class SettingsPage
 {
     private bool _isRefreshingQuickFps;
 
-    public ObservableCollection<VirtualKeyOption> QuickFpsKeyChoices { get; } = CreateQuickFpsKeyChoices();
+    public ObservableCollection<VirtualKeyOption> QuickFpsKeyChoices { get; } = VirtualKeyCatalog.CreateQuickFpsOptions();
 
     private static QuickFpsHotkeyService QuickFpsService => App.GetService<QuickFpsHotkeyService>();
 
@@ -36,25 +38,6 @@ public sealed partial class SettingsPage
     {
         QuickFpsSlot1Label, QuickFpsSlot2Label, QuickFpsSlot3Label, QuickFpsSlot4Label, QuickFpsSlot5Label
     };
-
-    private static ObservableCollection<VirtualKeyOption> CreateQuickFpsKeyChoices()
-    {
-        var choices = new ObservableCollection<VirtualKeyOption>
-        {
-            new()
-            {
-                KeyCode = 0,
-                KeyName = "QuickFpsUnbound".GetLocalized()
-            }
-        };
-
-        foreach (var key in VirtualKeyCatalog.Keys)
-        {
-            choices.Add(key);
-        }
-
-        return choices;
-    }
 
     private void RefreshQuickFpsSettingsUi()
     {
@@ -303,5 +286,11 @@ public sealed partial class SettingsPage
         };
 
         return key is >= 0 and < 256 ? key : fallback;
+    }
+
+    private void RegisterQuickFpsSettingsListener()
+    {
+        WeakReferenceMessenger.Default.Register<QuickFpsSettingsChangedMessage>(this, (_, _) =>
+            DispatcherQueue.TryEnqueue(RefreshQuickFpsSettingsUi));
     }
 }

@@ -58,6 +58,7 @@ public sealed partial class SettingsPage : Page
         InitializeComponent();
 
         ViewModel.SectionLoadCompleted += OnSettingsSectionLoadCompletedAsync;
+        RegisterQuickFpsSettingsListener();
     }
 
     protected async override void OnNavigatedTo(Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)

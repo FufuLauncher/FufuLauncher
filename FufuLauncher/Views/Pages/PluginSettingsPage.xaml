@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="FufuLauncher.Views.PluginSettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -507,6 +507,28 @@
                             </StackPanel>
                             <Button.Flyout>
                                 <Flyout Placement="BottomEdgeAlignedRight" Opening="OnLaunchConfigurationFlyoutOpening">
+                                    <Flyout.FlyoutPresenterStyle>
+                                        <Style TargetType="FlyoutPresenter">
+                                            <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                                            <Setter Property="Padding" Value="20" />
+                                            <Setter Property="CornerRadius" Value="8" />
+                                            <Setter Property="MaxWidth" Value="900" />
+                                            <Setter Property="MaxHeight" Value="640" />
+                                        </Style>
+                                    </Flyout.FlyoutPresenterStyle>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                        <Button x:Name="QuickFpsConfigurationButton"
+                                Padding="12,6" MinWidth="0" VerticalAlignment="Center"
+                                Visibility="{x:Bind MainPluginButtonVisibility(ViewModel.SelectedPluginIndex), Mode=OneWay}">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF4B8;"
+                                           FontSize="16.25" />
+                                <TextBlock Text="{helpers:Loc Key=SectionQuickFps}" FontSize="12" />
+                            </StackPanel>
+                            <Button.Flyout>
+                                <Flyout Placement="BottomEdgeAlignedRight" Opening="OnQuickFpsConfigurationFlyoutOpening">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
                                             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />

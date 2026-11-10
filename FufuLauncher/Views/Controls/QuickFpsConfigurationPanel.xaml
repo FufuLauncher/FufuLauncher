@@ -1,0 +1,180 @@
+<UserControl
+    x:Class="FufuLauncher.Views.Controls.QuickFpsConfigurationPanel"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    xmlns:vm="using:FufuLauncher.ViewModels"
+    FontFamily="{StaticResource AppGlobalFont}">
+    <UserControl.Resources>
+        <DataTemplate x:Key="QuickFpsSlotTemplate" x:DataType="vm:QuickFpsSlotItem">
+            <StackPanel Spacing="8" HorizontalAlignment="Stretch">
+                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                           Text="{x:Bind Label}" />
+                <NumberBox Value="{x:Bind Fps, Mode=TwoWay}"
+                           Minimum="1" Maximum="100000" SmallChange="1"
+                           AutomationProperties.Name="{x:Bind FpsAutomationName}" />
+                <ComboBox ItemsSource="{x:Bind KeyChoices}"
+                          SelectedItem="{x:Bind SelectedKey, Mode=TwoWay}"
+                          DisplayMemberPath="KeyName"
+                          HorizontalAlignment="Stretch"
+                          AutomationProperties.Name="{x:Bind KeyAutomationName}" />
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollMode="Disabled"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="24" Margin="0,0,16,16">
+            <TextBlock Text="{helpers:Loc Key=SectionQuickFps}" FontSize="18"
+                       FontWeight="SemiBold" />
+            <ContentControl IsEnabled="{x:Bind ViewModel.IsReady, Mode=OneWay}"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Stretch"
+                            IsTabStop="False">
+                <StackPanel Spacing="20">
+                    <StackPanel Style="{StaticResource PluginSettingContainerStyle}" Spacing="8">
+                        <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                   Text="{helpers:Loc Key=QuickFpsEnableTitle}"
+                                   ToolTipService.ToolTip="{helpers:Loc Key=QuickFpsEnableCaption}" />
+                        <ToggleSwitch IsOn="{x:Bind ViewModel.IsEnabled, Mode=TwoWay}"
+                                      OnContent="{helpers:Loc Key=OnLabel}" OffContent="{helpers:Loc Key=OffLabel}" />
+                    </StackPanel>
+
+                    <ContentControl IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
+                                    HorizontalContentAlignment="Stretch"
+                                    VerticalContentAlignment="Stretch"
+                                    IsTabStop="False">
+                        <Grid ColumnSpacing="24" RowSpacing="24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Grid.Column="0"
+                                        Style="{StaticResource PluginSettingContainerStyle}" Spacing="8">
+                                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                           Text="{helpers:Loc Key=QuickFpsGameOnlyTitle}"
+                                           ToolTipService.ToolTip="{helpers:Loc Key=QuickFpsGameOnlyCaption}" />
+                                <ToggleSwitch IsOn="{x:Bind ViewModel.ListenOnlyWhileGameRunning, Mode=TwoWay}"
+                                              OnContent="{helpers:Loc Key=OnLabel}"
+                                              OffContent="{helpers:Loc Key=OffLabel}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="0" Grid.Column="1"
+                                        Style="{StaticResource PluginSettingContainerStyle}" Spacing="8">
+                                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                           Text="{helpers:Loc Key=QuickFpsActionsTitle}"
+                                           ToolTipService.ToolTip="{helpers:Loc Key=QuickFpsActionsCaption}" />
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="{helpers:Loc Key=QuickFpsSwitchLabel}"
+                                               FontSize="12" Opacity="0.85" VerticalAlignment="Center" />
+                                    <ToggleSwitch IsOn="{x:Bind ViewModel.SwitchPresetsEnabled, Mode=TwoWay}"
+                                                  OnContent="" OffContent="" MinWidth="0" Margin="0" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                    <TextBlock Text="{helpers:Loc Key=QuickFpsAdjustLabel}"
+                                               FontSize="12" Opacity="0.85" VerticalAlignment="Center" />
+                                    <ToggleSwitch IsOn="{x:Bind ViewModel.AdjustEnabled, Mode=TwoWay}"
+                                                  OnContent="" OffContent="" MinWidth="0" Margin="0" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="0"
+                                        Style="{StaticResource PluginSettingContainerStyle}" Spacing="8">
+                                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                           Text="{helpers:Loc Key=QuickFpsAdjustTitle}"
+                                           ToolTipService.ToolTip="{helpers:Loc Key=QuickFpsAdjustCaption}" />
+                                <NumberBox Header="{helpers:Loc Key=QuickFpsStep}"
+                                           Value="{x:Bind ViewModel.AdjustStep, Mode=TwoWay}"
+                                           Minimum="1" Maximum="100000" SmallChange="1" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="1"
+                                        Style="{StaticResource PluginSettingContainerStyle}" Spacing="8">
+                                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                           Text="{helpers:Loc Key=QuickFpsIncreaseKey}" />
+                                <ComboBox ItemsSource="{x:Bind ViewModel.KeyChoices}"
+                                          SelectedItem="{x:Bind ViewModel.SelectedIncreaseKey, Mode=TwoWay}"
+                                          DisplayMemberPath="KeyName"
+                                          HorizontalAlignment="Stretch" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1" Grid.Column="2"
+                                        Style="{StaticResource PluginSettingContainerStyle}" Spacing="8">
+                                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                           Text="{helpers:Loc Key=QuickFpsDecreaseKey}" />
+                                <ComboBox ItemsSource="{x:Bind ViewModel.KeyChoices}"
+                                          SelectedItem="{x:Bind ViewModel.SelectedDecreaseKey, Mode=TwoWay}"
+                                          DisplayMemberPath="KeyName"
+                                          HorizontalAlignment="Stretch" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Spacing="4">
+                                <TextBlock Style="{StaticResource PluginSettingLabelStyle}"
+                                           Text="{helpers:Loc Key=QuickFpsSlotsTitle}"
+                                           ToolTipService.ToolTip="{helpers:Loc Key=QuickFpsSlotsCaption}" />
+                                <TextBlock Text="{helpers:Loc Key=QuickFpsHint}" FontSize="12" Opacity="0.6"
+                                           TextWrapping="Wrap" />
+                            </StackPanel>
+
+                            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                                  ColumnSpacing="24" RowSpacing="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="240" />
+                                    <ColumnDefinition Width="240" />
+                                    <ColumnDefinition Width="240" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <ContentControl Grid.Row="0" Grid.Column="0"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"
+                                                IsTabStop="False"
+                                                Content="{x:Bind ViewModel.Slot1, Mode=OneTime}"
+                                                ContentTemplate="{StaticResource QuickFpsSlotTemplate}" />
+
+                                <ContentControl Grid.Row="0" Grid.Column="1"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"
+                                                IsTabStop="False"
+                                                Content="{x:Bind ViewModel.Slot2, Mode=OneTime}"
+                                                ContentTemplate="{StaticResource QuickFpsSlotTemplate}" />
+
+                                <ContentControl Grid.Row="0" Grid.Column="2"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"
+                                                IsTabStop="False"
+                                                Content="{x:Bind ViewModel.Slot3, Mode=OneTime}"
+                                                ContentTemplate="{StaticResource QuickFpsSlotTemplate}" />
+
+                                <ContentControl Grid.Row="1" Grid.Column="0"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"
+                                                IsTabStop="False"
+                                                Content="{x:Bind ViewModel.Slot4, Mode=OneTime}"
+                                                ContentTemplate="{StaticResource QuickFpsSlotTemplate}" />
+
+                                <ContentControl Grid.Row="1" Grid.Column="1"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"
+                                                IsTabStop="False"
+                                                Content="{x:Bind ViewModel.Slot5, Mode=OneTime}"
+                                                ContentTemplate="{StaticResource QuickFpsSlotTemplate}" />
+                            </Grid>
+                        </Grid>
+                    </ContentControl>
+                </StackPanel>
+            </ContentControl>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

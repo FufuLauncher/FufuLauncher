@@ -6044,7 +6044,7 @@ You can retry with another node or download directly from the official source.</
     <value>Conversion failed</value>
   </data>
   <data name="AdvancedServerSwitch_FailedMsg" xml:space="preserve">
-    <value>Switch failed, files may be in use.
+    <value>Switch failed
 Error: {0}</value>
   </data>
   <data name="ServerBili" xml:space="preserve">
@@ -9865,5 +9865,56 @@ Details: {0}</value>
   </data>
   <data name="MiyousheShop_ResolveHint" xml:space="preserve">
     <value>Check your official redemption history and coin balance first. Confirming unlocks future submissions for this item.</value>
+  </data>
+  <data name="MiyoushePendant_Open" xml:space="preserve">
+    <value>Change avatar frame</value>
+  </data>
+  <data name="MiyoushePendant_Hint" xml:space="preserve">
+    <value>Select a frame to preview it. Frames you own can be equipped directly.</value>
+  </data>
+  <data name="MiyoushePendant_OwnedOnly" xml:space="preserve">
+    <value>Owned only</value>
+  </data>
+  <data name="MiyoushePendant_Select" xml:space="preserve">
+    <value>Select an avatar frame to preview</value>
+  </data>
+  <data name="MiyoushePendant_Equip" xml:space="preserve">
+    <value>Use this frame</value>
+  </data>
+  <data name="MiyoushePendant_Equipped" xml:space="preserve">
+    <value>In use</value>
+  </data>
+  <data name="MiyoushePendant_Remove" xml:space="preserve">
+    <value>Remove avatar frame</value>
+  </data>
+  <data name="MiyoushePendant_Author" xml:space="preserve">
+    <value>Author: {0}</value>
+  </data>
+  <data name="MiyoushePendant_Remain" xml:space="preserve">
+    <value>{0} d {1} h remaining</value>
+  </data>
+  <data name="MiyoushePendant_Expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="MiyoushePendant_NotOwned" xml:space="preserve">
+    <value>Not owned</value>
+  </data>
+  <data name="MiyoushePendant_Updated" xml:space="preserve">
+    <value>Avatar frame updated</value>
+  </data>
+  <data name="MiyoushePendant_Removed" xml:space="preserve">
+    <value>Avatar frame removed</value>
+  </data>
+  <data name="MiyoushePendant_LoginRequired" xml:space="preserve">
+    <value>Select a signed-in Miyoushe account first</value>
+  </data>
+  <data name="MiyoushePendant_LoadError" xml:space="preserve">
+    <value>Failed to load avatar frames. Try again later.</value>
+  </data>
+  <data name="MiyoushePendant_UpdateError" xml:space="preserve">
+    <value>Failed to update the avatar frame. Try again later.</value>
+  </data>
+  <data name="MiyoushePendant_Empty" xml:space="preserve">
+    <value>No avatar frames available.</value>
   </data>
 </root>

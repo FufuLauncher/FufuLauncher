@@ -6804,7 +6804,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>轉換失敗</value>
   </data>
   <data name="AdvancedServerSwitch_FailedMsg" xml:space="preserve">
-    <value>切換失敗，檔案可能被佔用
+    <value>切換失敗
 錯誤訊息: {0}</value>
   </data>
   <data name="ServerBili" xml:space="preserve">

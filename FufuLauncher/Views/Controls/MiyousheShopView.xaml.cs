@@ -53,7 +53,7 @@ public sealed partial class MiyousheShopView : UserControl
         _lifetime = new();
         _planStore.Changed += OnPlansChanged;
         _execution.Completed += OnExchangeCompleted;
-        ShowPlans(false);
+        ShowPane(ShopPaneKind.Catalog);
         UpdateOpening();
         await Task.WhenAll(_layoutLoad ??= RestoreLayoutAsync(), LoadPlansAsync(), RefreshAsync());
     }
@@ -70,19 +70,29 @@ public sealed partial class MiyousheShopView : UserControl
         _dialog?.Hide();
         _listRequest?.Cancel();
         _detailRequest?.Cancel();
+        _pendantRequest?.Cancel();
+        _pendantSave?.Cancel();
         _catalogSession = null;
         _detail = null;
+        _pendant = null;
+        _pendantsLoaded = false;
+        _allPendants = [];
+        _pendants.Clear();
         _detailCache.Clear();
     }
 
-    internal Task RefreshAsync() => PlansPane.Visibility == Visibility.Visible
-        ? LoadPlansAsync() : LoadPageAsync(reset: true, renewSession: true);
+    internal Task RefreshAsync() => _pane switch
+    {
+        ShopPaneKind.Plans => LoadPlansAsync(),
+        ShopPaneKind.Pendants => LoadPendantsAsync(renew: true),
+        _ => LoadPageAsync(reset: true, renewSession: true)
+    };
 
     internal Task SetGameAsync(string game)
     {
         if (_game == game) return Task.CompletedTask;
         _game = game;
-        ShowPlans(false);
+        ShowPane(ShopPaneKind.Catalog);
         return LoadPageAsync(reset: true);
     }
 
@@ -96,16 +106,12 @@ public sealed partial class MiyousheShopView : UserControl
         _loadedGame = null;
         _detailRequest?.Cancel();
         _detail = null;
+        ResetPendants();
         UpdateOpening();
-        if (_open) _ = LoadPageAsync(reset: true);
+        if (_open) _ = _pane == ShopPaneKind.Pendants ? LoadPendantsAsync() : LoadPageAsync(reset: true);
     }
 
-    internal bool TryClosePlans()
-    {
-        if (PlansPane.Visibility != Visibility.Visible) return false;
-        ShowPlans(false);
-        return true;
-    }
+    internal bool TryClosePlans() => TryClosePane();
 
     private async Task LoadPageAsync(bool reset, bool renewSession = false)
     {
@@ -575,16 +581,24 @@ public sealed partial class MiyousheShopView : UserControl
         EmptyPlans.Visibility = displayed.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    private void OnTogglePlans(object sender, RoutedEventArgs e) => ShowPlans(PlansPane.Visibility != Visibility.Visible);
+    private void OnTogglePlans(object sender, RoutedEventArgs e) =>
+        ShowPane(_pane == ShopPaneKind.Plans ? ShopPaneKind.Catalog : ShopPaneKind.Plans);
 
-    private void ShowPlans(bool visible)
+    private void ShowPane(ShopPaneKind pane)
     {
-        PlansPane.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
-        CatalogPane.Visibility = visible ? Visibility.Collapsed : Visibility.Visible;
-        ViewModeControls.Visibility = visible ? Visibility.Collapsed : Visibility.Visible;
-        PlansButton.Content = (visible ? "MiyousheShop_BackToGoods" : "MiyousheShop_Plans").GetLocalized();
-        if (visible) RenderPlans();
+        _pane = pane;
+        PlansPane.Visibility = pane == ShopPaneKind.Plans ? Visibility.Visible : Visibility.Collapsed;
+        PendantsPane.Visibility = pane == ShopPaneKind.Pendants ? Visibility.Visible : Visibility.Collapsed;
+        CatalogPane.Visibility = pane == ShopPaneKind.Catalog ? Visibility.Visible : Visibility.Collapsed;
+        ViewModeControls.Visibility = pane == ShopPaneKind.Catalog ? Visibility.Visible : Visibility.Collapsed;
+        PlansButton.Content = (pane == ShopPaneKind.Plans ? "MiyousheShop_BackToGoods" : "MiyousheShop_Plans")
+            .GetLocalized();
+        PendantsButton.Content = (pane == ShopPaneKind.Pendants ? "MiyousheShop_BackToGoods" : "MiyoushePendant_Open")
+            .GetLocalized();
+        PendantsButton.IsEnabled = _accountId.Length > 0;
+        if (pane == ShopPaneKind.Plans) RenderPlans();
         UpdateCountdownTimer();
+        UpdatePendantButtons();
     }
 
     private async void OnRefresh(object sender, RoutedEventArgs e) => await RefreshAsync();

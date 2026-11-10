@@ -3,6 +3,8 @@
   <h1><a href="https://github.com/CodeCubist/FufuLauncher">FufuLauncher</a></h1>
 </div>
 
+---
+
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2F11-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-orange)
 ![Stars](https://img.shields.io/github/stars/CodeCubist/FufuLauncher?style=flat&color=yellow)
@@ -12,11 +14,13 @@
 
 **If you find this project helpful, please consider giving it a Star to support the development.**
 
-#### [Official Website](https://fu1.fun/)
+- [Website](https://fu1.fun/) - [Status](https://status.fu1.fun/)
 
-#### [Injection Module Open Source Repository](https://github.com/CodeCubist/FufuLauncher.UnlockerIsland)
+- [Injection Module Open Source Repository](https://github.com/CodeCubist/FufuLauncher.UnlockerIsland)
 
-#### [中文](./README-CN.md)
+- [简体中文](./README-CN.md)
+
+---
 
 ### Before asking a question, please check if you have updated to the latest version. And please add tags to your questions!
 

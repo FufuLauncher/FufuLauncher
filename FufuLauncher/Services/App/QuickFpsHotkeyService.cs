@@ -110,6 +110,7 @@ public sealed class QuickFpsHotkeyService : IDisposable
 
     public async Task UpdateSettingsAsync(QuickFpsSettings settings)
     {
+        var applied = false;
         await _updateGate.WaitAsync();
         try
         {
@@ -123,6 +124,7 @@ public sealed class QuickFpsHotkeyService : IDisposable
             await _settingsService.SaveSettingAsync(SettingsKey, settings);
             DebugLog.Info("QuickFpsHotkeyService", "Settings saved");
             ApplyListeningState();
+            applied = true;
         }
         catch (Exception ex)
         {
@@ -131,6 +133,20 @@ public sealed class QuickFpsHotkeyService : IDisposable
         finally
         {
             _updateGate.Release();
+        }
+
+        if (!applied)
+        {
+            return;
+        }
+
+        try
+        {
+            WeakReferenceMessenger.Default.Send(new QuickFpsSettingsChangedMessage(Settings));
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("QuickFpsHotkeyService", $"Settings broadcast failed: {ex.Message}");
         }
     }
 

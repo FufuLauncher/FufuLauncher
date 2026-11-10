@@ -276,8 +276,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button x:Name="AccountNavButton"
-                            Width="40"
-                            Height="40"
+                            Width="42"
+                            Height="42"
                             Padding="0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
@@ -285,7 +285,7 @@
                             VerticalContentAlignment="Center"
                             Background="Transparent"
                             BorderThickness="0"
-                            CornerRadius="20"
+                            CornerRadius="21"
                             Click="AccountNavButton_Click"
                             AutomationProperties.Name="{helpers:Loc Key=Account_MenuTitle}"
                             ToolTipService.ToolTip="{helpers:Loc Key=Account_MenuTitle}">
@@ -321,14 +321,19 @@
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Grid Width="52" Height="52">
-                                                    <PersonPicture x:Name="AccountFlyoutAvatar" Width="52" Height="52" />
-                                                    <Image x:Name="AccountFlyoutPendant" IsHitTestVisible="False"
-                                                           Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
-                                                        <Image.RenderTransform>
-                                                            <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
-                                                        </Image.RenderTransform>
-                                                    </Image>
+                                                <Grid Width="69" Height="69">
+                                                    <PersonPicture x:Name="AccountFlyoutAvatar"
+                                                                   Width="52"
+                                                                   Height="52"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center" />
+                                                    <Image x:Name="AccountFlyoutPendant"
+                                                           Width="69"
+                                                           Height="69"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           IsHitTestVisible="False"
+                                                           Stretch="Uniform" />
                                                 </Grid>
                                                 <TextBlock x:Name="AccountFlyoutNickname"
                                                            Grid.Column="1"
@@ -490,14 +495,21 @@
                                        helpers:ImageFadeInHelper.DurationMilliseconds="260"
                                        helpers:ImageFadeInHelper.EnableRetry="False" />
                             </Grid>
-                            <Image x:Name="AccountNavPendant" IsHitTestVisible="False"
-                                   Stretch="Uniform" RenderTransformOrigin="0.5,0.5">
-                                <Image.RenderTransform>
-                                    <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
-                                </Image.RenderTransform>
-                            </Image>
                         </Grid>
                     </Button>
+                    <Grid Grid.Column="0"
+                          Width="42"
+                          Height="42"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center">
+                        <Image x:Name="AccountNavPendant"
+                               Width="42"
+                               Height="42"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               IsHitTestVisible="False"
+                               Stretch="Uniform" />
+                    </Grid>
                     <TextBlock x:Name="AccountNavText"
                                Grid.Column="1"
                                Margin="8,0,0,0"
