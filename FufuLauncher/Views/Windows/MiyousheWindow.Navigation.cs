@@ -80,8 +80,9 @@ public sealed partial class MiyousheWindow
     private void UpdateNavigationSelection()
     {
         foreach (var button in NavigationButtons.Children.OfType<RadioButton>())
-            button.IsChecked = button.Tag is string kind && kind == _feed.Kind.ToString() &&
-                               (_feed.Kind != CommunityFeed.User || _feed.Target == _client.AccountUid);
+            button.IsChecked = _shopOpen ? button == ShopNavigation :
+                button.Tag is string kind && kind == _feed.Kind.ToString() &&
+                (_feed.Kind != CommunityFeed.User || _feed.Target == _client.AccountUid);
         FeedBackButton.Visibility = _pageHistory.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 
@@ -89,7 +90,7 @@ public sealed partial class MiyousheWindow
 
     private async void OnBackAccelerator(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        if (_dialogOpen || _goingBack || _pageHistory.Count == 0) return;
+        if (_dialogOpen || _goingBack || (!_shopOpen && _pageHistory.Count == 0)) return;
         var focused = FocusManager.GetFocusedElement(RootGrid.XamlRoot) as DependencyObject;
         if (sender.Key == VirtualKey.Back)
         {
@@ -99,7 +100,11 @@ public sealed partial class MiyousheWindow
         }
 
         args.Handled = true;
-        await GoBackAsync();
+        if (_shopOpen)
+        {
+            if (!ShopPane.TryClosePlans()) CloseShop();
+        }
+        else await GoBackAsync();
     }
 
     private async Task GoBackAsync()

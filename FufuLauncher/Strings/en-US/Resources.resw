@@ -9674,4 +9674,196 @@ Details: {0}</value>
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>Send usage information for statistics and troubleshooting</value>
   </data>
+  <data name="MiyousheShop_Title" xml:space="preserve">
+    <value>Redemption Center</value>
+  </data>
+  <data name="MiyousheShop_GameFilter" xml:space="preserve">
+    <value>Item category</value>
+  </data>
+  <data name="MiyousheShop_ResizeDetails" xml:space="preserve">
+    <value>Resize item details pane</value>
+  </data>
+  <data name="MiyousheShop_SelectGoods" xml:space="preserve">
+    <value>Select an item to see its details</value>
+  </data>
+  <data name="MiyousheShop_Notes" xml:space="preserve">
+    <value>Redemption limits and details</value>
+  </data>
+  <data name="MiyousheShop_OfficialGoods" xml:space="preserve">
+    <value>View in official store</value>
+  </data>
+  <data name="MiyousheShop_OfficialHistory" xml:space="preserve">
+    <value>View official redemption history</value>
+  </data>
+  <data name="MiyousheShop_EmptyGoods" xml:space="preserve">
+    <value>There are no items in this category.</value>
+  </data>
+  <data name="MiyousheShop_Price" xml:space="preserve">
+    <value>{0:N0} MiYou Coins</value>
+  </data>
+  <data name="MiyousheShop_CoinUnit" xml:space="preserve">
+    <value>MiYou Coins</value>
+  </data>
+  <data name="MiyousheShop_Upcoming" xml:space="preserve">
+    <value>Coming soon</value>
+  </data>
+  <data name="MiyousheShop_Unlimited" xml:space="preserve">
+    <value>Unlimited stock</value>
+  </data>
+  <data name="MiyousheShop_Stock" xml:space="preserve">
+    <value>{0:N0} in stock</value>
+  </data>
+  <data name="MiyousheShop_SoldOut" xml:space="preserve">
+    <value>Sold out</value>
+  </data>
+  <data name="MiyousheShop_Unavailable" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="MiyousheShop_BeijingTime" xml:space="preserve">
+    <value>{0:yyyy-MM-dd HH:mm:ss} Beijing time</value>
+  </data>
+  <data name="MiyousheShop_CatalogOpening" xml:space="preserve">
+    <value>Opens {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_CatalogRestock" xml:space="preserve">
+    <value>Restock {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_StartTime" xml:space="preserve">
+    <value>Sale starts · Beijing time</value>
+  </data>
+  <data name="MiyousheShop_NextBatchTime" xml:space="preserve">
+    <value>Next batch · Beijing time</value>
+  </data>
+  <data name="MiyousheShop_EndTime" xml:space="preserve">
+    <value>Sale ends · Beijing time</value>
+  </data>
+  <data name="MiyousheShop_NextBatchQuantity" xml:space="preserve">
+    <value>{0:N0} items in the next batch</value>
+  </data>
+  <data name="MiyousheShop_Countdown" xml:space="preserve">
+    <value>Starts in {0}d {1:00}:{2:00}:{3:00}</value>
+  </data>
+  <data name="MiyousheShop_Schedule" xml:space="preserve">
+    <value>Redeem when sale opens</value>
+  </data>
+  <data name="MiyousheShop_Scheduled" xml:space="preserve">
+    <value>Redemption plan added</value>
+  </data>
+  <data name="MiyousheShop_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="MiyousheShop_Notification" xml:space="preserve">
+    <value>MiYou Coin redemption</value>
+  </data>
+  <data name="MiyousheShop_LoadError" xml:space="preserve">
+    <value>Could not load items. Refresh to try again.</value>
+  </data>
+  <data name="MiyousheShop_DetailError" xml:space="preserve">
+    <value>Could not load item details. Refresh to try again.</value>
+  </data>
+  <data name="MiyousheShop_OpenError" xml:space="preserve">
+    <value>Could not open the official store. Open the Redemption Center in the MiYouShe app.</value>
+  </data>
+  <data name="MiyousheShop_Plans" xml:space="preserve">
+    <value>Redemption plans</value>
+  </data>
+  <data name="MiyousheShop_BackToGoods" xml:space="preserve">
+    <value>Back to items</value>
+  </data>
+  <data name="MiyousheShop_CommunityGame" xml:space="preserve">
+    <value>Community section</value>
+  </data>
+  <data name="MiyousheShop_AllGoods" xml:space="preserve">
+    <value>All items</value>
+  </data>
+  <data name="MiyousheShop_ExchangeNow" xml:space="preserve">
+    <value>Redeem now</value>
+  </data>
+  <data name="MiyousheShop_PlanHint" xml:space="preserve">
+    <value>Scheduled plans submit for one item at the start of the sale. Keep FufuLauncher running or in the system tray.</value>
+  </data>
+  <data name="MiyousheShop_EmptyPlans" xml:space="preserve">
+    <value>There are no redemption plans.</value>
+  </data>
+  <data name="MiyousheShop_PlanPending" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
+  <data name="MiyousheShop_PlanSubmitting" xml:space="preserve">
+    <value>Submitting</value>
+  </data>
+  <data name="MiyousheShop_PlanSucceeded" xml:space="preserve">
+    <value>Redeemed</value>
+  </data>
+  <data name="MiyousheShop_PlanFailed" xml:space="preserve">
+    <value>Redemption failed</value>
+  </data>
+  <data name="MiyousheShop_PlanVerification" xml:space="preserve">
+    <value>Verification required</value>
+  </data>
+  <data name="MiyousheShop_PlanUnknown" xml:space="preserve">
+    <value>Result unknown. Check your official redemption history.</value>
+  </data>
+  <data name="MiyousheShop_PlanMissed" xml:space="preserve">
+    <value>Missed</value>
+  </data>
+  <data name="MiyousheShop_PlanReviewed" xml:space="preserve">
+    <value>Reviewed</value>
+  </data>
+  <data name="MiyousheShop_Target" xml:space="preserve">
+    <value>Redeem to</value>
+  </data>
+  <data name="MiyousheShop_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="MiyousheShop_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MiyousheShop_ConfirmItem" xml:space="preserve">
+    <value>Item: {0} × 1\nCost: {1}\nAccount: {2}</value>
+  </data>
+  <data name="MiyousheShop_ConfirmScheduled" xml:space="preserve">
+    <value>Redemption will be submitted automatically at {0:yyyy-MM-dd HH:mm:ss} Beijing time.</value>
+  </data>
+  <data name="MiyousheShop_ConfirmImmediate" xml:space="preserve">
+    <value>Confirm to submit this redemption to MiYouShe.</value>
+  </data>
+  <data name="MiyousheShop_LoginRequired" xml:space="preserve">
+    <value>Select a signed-in mainland China MiYouShe account, or sign in again.</value>
+  </data>
+  <data name="MiyousheShop_Unsupported" xml:space="preserve">
+    <value>Redeem this item in the official store.</value>
+  </data>
+  <data name="MiyousheShop_NoTarget" xml:space="preserve">
+    <value>No linked character or shipping address was found. Check in MiYouShe and try again.</value>
+  </data>
+  <data name="MiyousheShop_LimitReached" xml:space="preserve">
+    <value>This account has reached the item redemption limit.</value>
+  </data>
+  <data name="MiyousheShop_LimitReachedLabel" xml:space="preserve">
+    <value>Redemption limit reached</value>
+  </data>
+  <data name="MiyousheShop_RateLimited" xml:space="preserve">
+    <value>The store is rate-limiting requests.</value>
+  </data>
+  <data name="MiyousheShop_ManualVerification" xml:space="preserve">
+    <value>Complete verification in the official store.</value>
+  </data>
+  <data name="MiyousheShop_PrepareError" xml:space="preserve">
+    <value>Could not prepare the redemption. Check your sign-in and network.</value>
+  </data>
+  <data name="MiyousheShop_SaleChanged" xml:space="preserve">
+    <value>Item availability or sale time changed. Refresh to check.</value>
+  </data>
+  <data name="MiyousheShop_Conflict" xml:space="preserve">
+    <value>The plan already exists, the sale has passed, or a redemption needs review.</value>
+  </data>
+  <data name="MiyousheShop_PlanError" xml:space="preserve">
+    <value>Could not read or save redemption plans.</value>
+  </data>
+  <data name="MiyousheShop_Resolve" xml:space="preserve">
+    <value>Mark reviewed</value>
+  </data>
+  <data name="MiyousheShop_ResolveHint" xml:space="preserve">
+    <value>Check your official redemption history and coin balance first. Confirming unlocks future submissions for this item.</value>
+  </data>
 </root>

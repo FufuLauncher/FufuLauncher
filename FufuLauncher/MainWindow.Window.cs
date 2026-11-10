@@ -63,6 +63,7 @@ public sealed partial class MainWindow
 
     private void CleanupWindowResources()
     {
+        _shopPlanLifetime?.Cancel();
         _memoryOptimizationTimer?.Stop();
         _periodicMemoryTimer?.Stop();
         _gameMemoryTelemetryTimer?.Stop();

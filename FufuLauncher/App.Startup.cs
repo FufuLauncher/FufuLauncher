@@ -74,6 +74,7 @@ public partial class App
 
             var activationService = GetService<IActivationService>();
             await activationService.ActivateAsync(args);
+            (MainWindow as MainWindow)?.StartMiyousheShopPlans();
 
             _ = GetService<PluginConfigGuardService>();
 
