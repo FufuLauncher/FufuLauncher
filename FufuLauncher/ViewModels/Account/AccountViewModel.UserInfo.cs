@@ -94,6 +94,7 @@ public partial class AccountViewModel
             var gender = userInfo?.gender ?? 0;
 
             await _accountManager.UpdateAccountMetaAsync(entry.Id, nickname, avatarUrl, avatarPendantUrl: pendantUrl);
+            _ = AccountAvatarPendantCache.RefreshAsync(pendantUrl);
             if (_isDisposed || myVersion != _loadVersion || _accountManager.ActiveAccountId != entry.Id) return false;
 
             RunOnUIThread(() =>

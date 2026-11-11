@@ -21,6 +21,14 @@ public static class AccountAvatarPendant
             : null;
     }
 
-    public static BitmapImage? CreateImage(string? value) =>
-        NormalizeUrl(value) is { } url ? new BitmapImage(new Uri(url)) : null;
+    public static BitmapImage? CreateImage(string? value)
+    {
+        if (NormalizeUrl(value) is not { } url) return null;
+
+        _ = AccountAvatarPendantCache.EnsureCachedAsync(url);
+
+        return AccountAvatarPendantCache.TryGetCachedFile(url, out var cachedPath)
+            ? new BitmapImage(new Uri(cachedPath))
+            : new BitmapImage(new Uri(url));
+    }
 }

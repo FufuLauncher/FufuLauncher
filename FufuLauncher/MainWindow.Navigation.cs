@@ -29,6 +29,10 @@ public sealed partial class MainWindow
     private string? _accountPendantUrl;
     private bool _showAccountAvatarPendant;
     private BitmapImage? _navAvatarImage;
+    private BitmapImage? _pendantImage;
+    private bool _accountPendantLoadFailed;
+    private bool _accountPendantCacheInvalidated;
+    private bool _accountPendantUrlRefreshRequested;
 
     private static readonly Uri DefaultAccountAvatarUri = new("ms-appx:///Assets/DefaultAvatar.png");
 
@@ -82,6 +86,12 @@ public sealed partial class MainWindow
             var pendantSetting = await _localSettingsService.ReadSettingAsync(AccountAvatarPendant.SettingKey);
             _showAccountAvatarPendant = bool.TryParse(pendantSetting?.ToString(), out var enabled) && enabled;
             ShowMainContent();
+
+            _ = Task.Run(async () =>
+            {
+                await AccountAvatarPendantCache.PruneAsync();
+                await SyncAccountAvatarPendantAsync(forceRefreshUrl: false);
+            });
 
             _ = Task.Run(async () =>
             {
@@ -328,11 +338,145 @@ public sealed partial class MainWindow
 
     private void ApplyAccountAvatarPendant(string? url)
     {
-        if (string.Equals(_accountPendantUrl, url, StringComparison.Ordinal)) return;
-        _accountPendantUrl = url;
-        var image = AccountAvatarPendant.CreateImage(url);
-        AccountNavPendant.Source = image;
-        AccountFlyoutPendant.Source = image;
+        var normalized = AccountAvatarPendant.NormalizeUrl(url);
+        if (string.Equals(_accountPendantUrl, normalized, StringComparison.Ordinal) && !_accountPendantLoadFailed)
+            return;
+
+        if (!string.Equals(_accountPendantUrl, normalized, StringComparison.Ordinal))
+        {
+            _accountPendantCacheInvalidated = false;
+            _accountPendantUrlRefreshRequested = false;
+        }
+
+        _accountPendantUrl = normalized;
+        _accountPendantLoadFailed = false;
+
+        if (normalized == null)
+        {
+            SetPendantSource(null);
+            return;
+        }
+
+        SetPendantSource(AccountAvatarPendantCache.TryGetCachedFile(normalized, out var cachedPath)
+            ? cachedPath
+            : normalized);
+        _ = AccountAvatarPendantCache.EnsureCachedAsync(normalized);
+    }
+
+    private void SetPendantSource(string? source)
+    {
+        try
+        {
+            DetachPendantImage();
+
+            if (source == null)
+            {
+                AccountNavPendant.Source = null;
+                AccountFlyoutPendant.Source = null;
+                return;
+            }
+
+            var image = new BitmapImage(new Uri(source));
+            image.ImageFailed += OnPendantImageFailed;
+            _pendantImage = image;
+            AccountNavPendant.Source = image;
+            AccountFlyoutPendant.Source = image;
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("MainWindow.Navigation", $"[Pendant] Unable to apply pendant: {ex.Message}");
+        }
+    }
+
+    private void DetachPendantImage()
+    {
+        if (_pendantImage == null)
+            return;
+
+        _pendantImage.ImageFailed -= OnPendantImageFailed;
+        _pendantImage = null;
+    }
+
+    private void OnPendantImageFailed(object sender, ExceptionRoutedEventArgs e)
+    {
+        if (sender is not BitmapImage image || !ReferenceEquals(image, _pendantImage))
+            return;
+
+        var failedUri = image.UriSource;
+        var url = _accountPendantUrl;
+        if (url == null)
+        {
+            SetPendantSource(null);
+            return;
+        }
+
+        if (failedUri is { IsFile: true })
+        {
+            // 本地缓存文件损坏：删除后回退远程地址重试一次
+            if (!_accountPendantCacheInvalidated && AccountAvatarPendantCache.Invalidate(url))
+            {
+                _accountPendantCacheInvalidated = true;
+                _accountPendantLoadFailed = true;
+                DebugLog.Warn("MainWindow.Navigation",
+                    "[Pendant] Cached pendant file was corrupt, removed and retrying from remote: " + e.ErrorMessage);
+                SetPendantSource(url);
+                _ = AccountAvatarPendantCache.EnsureCachedAsync(url);
+                return;
+            }
+        }
+        else if (AccountAvatarPendantCache.TryGetCachedFile(url, out var cachedPath))
+        {
+            // 远程地址加载失败，本地缓存可用则改用缓存
+            DebugLog.Info("MainWindow.Navigation",
+                "[Pendant] Remote pendant failed, falling back to cache: " + e.ErrorMessage);
+            SetPendantSource(cachedPath);
+            return;
+        }
+
+        _accountPendantLoadFailed = true;
+        SetPendantSource(null);
+        DebugLog.Info("MainWindow.Navigation", "[Pendant] Pendant image failed to load: " + e.ErrorMessage);
+
+        if (_accountPendantUrlRefreshRequested) return;
+        _accountPendantUrlRefreshRequested = true;
+        _ = SyncAccountAvatarPendantAsync(forceRefreshUrl: true);
+    }
+
+    private async Task SyncAccountAvatarPendantAsync(bool forceRefreshUrl)
+    {
+        try
+        {
+            if (!_showAccountAvatarPendant) return;
+
+            var accountManager = App.GetService<AccountManager>();
+            var entry = accountManager.GetActiveAccountEntry();
+            if (entry == null || entry.Id.StartsWith("os", StringComparison.OrdinalIgnoreCase)) return;
+
+            var pendant = AccountAvatarPendant.NormalizeUrl(entry.AvatarPendantUrl);
+            if (pendant != null && !forceRefreshUrl)
+            {
+                await AccountAvatarPendantCache.EnsureCachedAsync(pendant);
+                return;
+            }
+
+            var cookies = await accountManager.LoadCookiesAsync(entry.Id);
+            if (cookies == null || cookies.Count == 0) return;
+
+            var cookieString = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
+            var response = await App.GetService<IUserInfoService>().GetUserFullInfoAsync(cookieString);
+            if (response is not { retcode: 0 }) return;
+
+            var fetched = AccountAvatarPendant.NormalizeUrl(response.data?.user_info?.pendant);
+            if (fetched == null || string.Equals(fetched, pendant, StringComparison.Ordinal)) return;
+
+            await accountManager.UpdateAvatarPendantAsync(entry.Id, fetched);
+            await AccountAvatarPendantCache.EnsureCachedAsync(fetched);
+            dispatcherQueue.TryEnqueue(() => WeakReferenceMessenger.Default.Send(new AccountAvatarChangedMessage()));
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("MainWindow.Navigation", $"[Pendant] Cloud sync failed: {ex.Message}");
+        }
     }
 
     private static Uri ResolveAccountAvatarUri(string? avatarUrl)

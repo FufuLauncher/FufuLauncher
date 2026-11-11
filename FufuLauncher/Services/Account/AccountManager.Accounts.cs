@@ -137,6 +137,24 @@ public partial class AccountManager
         }
     }
 
+    public async Task UpdateAvatarPendantAsync(string accountId, string? avatarPendantUrl)
+    {
+        await _lock.WaitAsync();
+        try
+        {
+            var entry = _accountList.Accounts.FirstOrDefault(a => a.Id == accountId);
+            if (entry != null)
+            {
+                entry.AvatarPendantUrl = avatarPendantUrl;
+                await SaveAccountListAsync();
+            }
+        }
+        finally
+        {
+            _lock.Release();
+        }
+    }
+
     private string ExtractStuid(Dictionary<string, string> cookies, string serverType)
     {
         if (serverType == "cn")
