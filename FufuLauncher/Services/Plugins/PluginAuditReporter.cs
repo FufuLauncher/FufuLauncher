@@ -39,6 +39,10 @@ public sealed class PluginAuditReporter
 
     private const string MetaSectionName = "_meta";
 
+    private const string GeneralSectionName = "General";
+
+    private const string SectionNameKey = "Name";
+
     private static readonly TimeSpan SolveTimeout = TimeSpan.FromSeconds(60);
 
     private static readonly HttpClient Http = CreateHttpClient();
@@ -229,7 +233,9 @@ public sealed class PluginAuditReporter
 
         foreach (var section in ReadAllSections(entry.ConfigFilePath))
         {
-            snapshot[section.Key] = section.Value;
+            snapshot[section.Key] = IsGeneralSection(section.Key)
+                ? section.Value
+                : BuildSectionNameSnapshot(section.Value);
         }
 
         var fileInfo = new Dictionary<string, object?>
@@ -255,6 +261,21 @@ public sealed class PluginAuditReporter
         }
 
         snapshot[MetaSectionName] = fileInfo;
+
+        return snapshot;
+    }
+
+    private static bool IsGeneralSection(string sectionName) =>
+        string.Equals(sectionName, GeneralSectionName, StringComparison.OrdinalIgnoreCase);
+
+    private static Dictionary<string, string> BuildSectionNameSnapshot(Dictionary<string, string> section)
+    {
+        var snapshot = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        if (section.TryGetValue(SectionNameKey, out var name) && !string.IsNullOrWhiteSpace(name))
+        {
+            snapshot[SectionNameKey] = Safe(name);
+        }
 
         return snapshot;
     }
@@ -329,7 +350,7 @@ public sealed class PluginAuditReporter
     private static string ResolvePluginName(PluginAuditEntry entry)
     {
         var general = ReadGeneralSection(entry.ConfigFilePath);
-        if (general.TryGetValue("Name", out var name) && !string.IsNullOrWhiteSpace(name))
+        if (general.TryGetValue(SectionNameKey, out var name) && !string.IsNullOrWhiteSpace(name))
         {
             return name.Trim();
         }
@@ -341,7 +362,7 @@ public sealed class PluginAuditReporter
     {
         var sections = ReadAllSections(configPath);
 
-        return sections.TryGetValue("General", out var general)
+        return sections.TryGetValue(GeneralSectionName, out var general)
             ? general
             : new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
     }
