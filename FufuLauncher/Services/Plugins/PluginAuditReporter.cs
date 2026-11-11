@@ -31,6 +31,8 @@ public sealed class PluginAuditReporter
 
     private const string AddMethodLauncherBundled = "launcher_bundled";
 
+    private const string AccountUid = "100000000";
+
     private const string UnknownValue = "unknown";
 
     private const int MaxFieldLength = 256;
@@ -53,13 +55,9 @@ public sealed class PluginAuditReporter
 
     private string _gameVersion = string.Empty;
 
-    private string _accountUid = string.Empty;
-
     private bool _hwidResolved;
 
     private bool _gameVersionResolved;
-
-    private bool _accountUidResolved;
 
     public PluginAuditReporter(ILocalSettingsService settings, PluginProvenanceStore provenance)
     {
@@ -109,6 +107,8 @@ public sealed class PluginAuditReporter
             cancellationToken.ThrowIfCancellationRequested();
 
             if (string.IsNullOrWhiteSpace(entry.FolderName) || !visited.Add(entry.FolderName)) continue;
+
+            if (IsTelemetryExcluded(entry)) continue;
 
             var sha256 = await Task.Run(() => TryComputeSha256(entry.FullPath), cancellationToken)
                 .ConfigureAwait(false);
@@ -214,7 +214,7 @@ public sealed class PluginAuditReporter
             ["hwid"] = Safe(await GetHwidAsync(cancellationToken).ConfigureAwait(false)),
             ["app_version"] = Safe(AppVersionHelper.FullVersion),
             ["game_version"] = Safe(await GetGameVersionAsync(cancellationToken).ConfigureAwait(false)),
-            ["account_uid"] = Safe(GetAccountUid()),
+            ["account_uid"] = AccountUid,
             ["plugin_name"] = Safe(report.Name),
             ["plugin_sha256"] = report.Sha256.ToLowerInvariant(),
             ["plugin_add_method"] = Safe(ResolveAddMethod(entry)),
@@ -298,6 +298,15 @@ public sealed class PluginAuditReporter
         }
 
         return PluginProvenanceStore.SourceExternalCopy;
+    }
+
+    private bool IsTelemetryExcluded(PluginAuditEntry entry)
+    {
+        var addMethod = ResolveAddMethod(entry);
+
+        return string.Equals(addMethod, AddMethodMainPlugin, StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(addMethod, PluginProvenanceStore.SourcePluginStore,
+                   StringComparison.OrdinalIgnoreCase);
     }
 
     private static bool IsMainPlugin(PluginAuditEntry entry) =>
@@ -395,31 +404,6 @@ public sealed class PluginAuditReporter
             _gameVersion = version ?? string.Empty;
             _gameVersionResolved = true;
             return _gameVersion;
-        }
-    }
-
-    private string GetAccountUid()
-    {
-        lock (_cacheLock)
-        {
-            if (_accountUidResolved) return _accountUid;
-        }
-
-        var uid = string.Empty;
-        try
-        {
-            uid = App.GetService<AccountManager>().GetActiveAccountEntry()?.GameUid ?? string.Empty;
-        }
-        catch (Exception ex)
-        {
-            DebugLog.Info("PluginAuditReporter", $"[PluginAudit] Failed to resolve account: {ex.Message}");
-        }
-
-        lock (_cacheLock)
-        {
-            _accountUid = uid;
-            _accountUidResolved = true;
-            return _accountUid;
         }
     }
 
