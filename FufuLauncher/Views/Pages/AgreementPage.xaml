@@ -262,6 +262,22 @@
                 </Grid>
             </StackPanel>
 
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    Padding="14,10">
+                <StackPanel Spacing="2">
+                    <CheckBox Content="{helpers:Loc Key=Settings_Telemetry_Title}"
+                              IsChecked="{x:Bind ViewModel.IsTelemetryEnabled, Mode=TwoWay}" />
+                    <TextBlock Text="{helpers:Loc Key=Settings_Telemetry_Caption}"
+                               FontSize="11"
+                               Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                               TextWrapping="Wrap"
+                               Margin="28,0,0,0" />
+                </StackPanel>
+            </Border>
+
             <Button Content="{helpers:Loc Key=AgreementPage_Next}"
                     Click="OnDataDirNextClick"
                     HorizontalAlignment="Center"

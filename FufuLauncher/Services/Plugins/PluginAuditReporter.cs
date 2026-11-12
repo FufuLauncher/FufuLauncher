@@ -457,13 +457,13 @@ public sealed class PluginAuditReporter
             var raw = await _settings.ReadSettingAsync(LocalSettingsService.IsTelemetryEnabledKey)
                 .ConfigureAwait(false);
 
-            return raw == null || Convert.ToBoolean(raw);
+            return raw != null && Convert.ToBoolean(raw);
         }
         catch (Exception ex)
         {
             DebugLog.Info("PluginAuditReporter",
                 $"[PluginAudit] Failed to read telemetry setting: {ex.Message}");
-            return true;
+            return false;
         }
     }
 

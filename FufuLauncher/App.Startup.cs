@@ -30,6 +30,8 @@ public partial class App
 
             GetService<ILocalSettingsService>().StartBackgroundLoad();
 
+            await TelemetryOptIn.ResolveEnabledAsync(GetService<ILocalSettingsService>());
+
             await GetService<LightweightPluginService>().InitializeAsync();
             await GetService<ConstraintService>().InitializeAsync();
             await GetService<QuickFpsHotkeyService>().InitializeAsync();

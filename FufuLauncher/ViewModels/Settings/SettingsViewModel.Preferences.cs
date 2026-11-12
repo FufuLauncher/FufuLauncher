@@ -295,15 +295,14 @@ public partial class SettingsViewModel
     partial void OnIsTelemetryEnabledChanged(bool value)
     {
         if (_isInitializing) return;
-        _ = _localSettingsService.SaveSettingAsync(LocalSettingsService.IsTelemetryEnabledKey, value);
+        _ = TelemetryOptIn.SaveUserChoiceAsync(_localSettingsService, value);
     }
 
     private async Task LoadAdvancedOptionsSectionAsync()
     {
         UpdateWebView2CacheSizeAsync();
 
-        var telemetryJson = await _localSettingsService.ReadSettingAsync(LocalSettingsService.IsTelemetryEnabledKey);
-        IsTelemetryEnabled = telemetryJson == null || Convert.ToBoolean(telemetryJson);
+        IsTelemetryEnabled = await TelemetryOptIn.ResolveEnabledAsync(_localSettingsService);
 
         var cpuWarningEnabledJson =
             await _localSettingsService.ReadSettingAsync(ProcessCpuUsageMonitor.IsEnabledSettingKey);

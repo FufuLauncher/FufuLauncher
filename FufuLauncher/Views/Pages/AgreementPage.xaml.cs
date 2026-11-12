@@ -108,6 +108,7 @@ namespace FufuLauncher.Views
             _motion.Prepare(GetAllMotionItems());
             _ = EnterStepAsync(CurrentStep);
             _ = LoadAgreementAsync();
+            _ = ViewModel.InitTelemetryChoiceAsync();
         }
 
         private async void OnReloadAgreementClick(object sender, RoutedEventArgs e)
@@ -207,7 +208,7 @@ namespace FufuLauncher.Views
 
         private async void OnDataDirNextClick(object sender, RoutedEventArgs e)
         {
-            if (!ViewModel.TryPrepareDataDirStep()) return;
+            if (!await ViewModel.TryPrepareDataDirStepAsync()) return;
 
             await AdvanceAsync(ViewModel.EnterTrustStep);
         }

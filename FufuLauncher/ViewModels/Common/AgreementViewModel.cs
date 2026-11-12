@@ -67,6 +67,8 @@ namespace FufuLauncher.ViewModels
 
         [ObservableProperty] private string _cachePath = Helpers.AppPaths.CacheDir;
 
+        [ObservableProperty] private bool _isTelemetryEnabled;
+
         public Visibility AgreementVisibility =>
             (!IsIconCheckMode && !IsDataDirMode && !IsTrustMode && !IsCompleteMode)
                 ? Visibility.Visible
@@ -231,7 +233,12 @@ namespace FufuLauncher.ViewModels
             IsDataDirMode = true;
         }
 
-        public bool TryPrepareDataDirStep()
+        public async Task InitTelemetryChoiceAsync()
+        {
+            IsTelemetryEnabled = await TelemetryOptIn.ResolveEnabledAsync(_localSettingsService);
+        }
+
+        public async Task<bool> TryPrepareDataDirStepAsync()
         {
             try
             {
@@ -244,6 +251,8 @@ namespace FufuLauncher.ViewModels
 
                 Helpers.AppPaths.SaveCustomPaths(DataPath, CachePath);
                 Helpers.AppPaths.FinalizeFirstRun();
+
+                await TelemetryOptIn.SaveUserChoiceAsync(_localSettingsService, IsTelemetryEnabled);
 
                 PathError = string.Empty;
                 return true;

@@ -206,7 +206,7 @@ public partial class SettingsViewModel : ObservableRecipient
 
     [ObservableProperty] private bool _isCaptchaNoticeEnabled = true;
 
-    [ObservableProperty] private bool _isTelemetryEnabled = true;
+    [ObservableProperty] private bool _isTelemetryEnabled;
 
     public IAsyncRelayCommand SelectScreenshotFolderCommand
     {
