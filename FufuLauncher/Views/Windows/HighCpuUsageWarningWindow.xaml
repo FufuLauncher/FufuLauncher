@@ -20,63 +20,42 @@
                        FontSize="12" Opacity="0.8" />
         </Grid>
 
-        <Grid Grid.Row="1" Padding="32,20,32,32">
-            <Border Padding="28" CornerRadius="20" Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1">
-                <Grid RowSpacing="18">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Padding="32,16,32,32">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                    <Grid ColumnSpacing="18">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+            <StackPanel VerticalAlignment="Top" Spacing="16">
+                <StackPanel Spacing="6">
+                    <TextBlock Text="{helpers:Loc Key=HighCpuUsage_Detected}" FontSize="20"
+                               FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <TextBlock x:Name="UsageText" FontSize="13" Opacity="0.72" TextWrapping="Wrap" />
+                </StackPanel>
 
-                        <Border Width="56" Height="56" CornerRadius="18"
-                                Background="{ThemeResource SystemFillColorCriticalBackgroundBrush}">
-                            <FontIcon Glyph="&#xE7BA;" FontSize="26"
-                                      Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
-                        </Border>
+                <TextBlock Text="{helpers:Loc Key=HighCpuUsage_Description}" FontSize="14"
+                           LineHeight="22" TextWrapping="Wrap" Opacity="0.86" />
 
-                        <StackPanel Grid.Column="1" Spacing="6" VerticalAlignment="Center">
-                            <TextBlock Text="{helpers:Loc Key=HighCpuUsage_Detected}" FontSize="22"
-                                       FontWeight="SemiBold" TextWrapping="Wrap" />
-                            <TextBlock x:Name="UsageText" FontSize="13" Opacity="0.72" TextWrapping="Wrap" />
-                        </StackPanel>
-                    </Grid>
+                <StackPanel Spacing="8">
+                    <TextBlock Text="{helpers:Loc Key=HighCpuUsage_SuggestedAction}" FontWeight="SemiBold" />
+                    <TextBlock Text="{helpers:Loc Key=HighCpuUsage_SuggestionText}" FontSize="13"
+                               Opacity="0.76" TextWrapping="Wrap" />
+                </StackPanel>
+            </StackPanel>
 
-                    <TextBlock Grid.Row="1" Text="{helpers:Loc Key=HighCpuUsage_Description}" FontSize="14"
-                               LineHeight="22" TextWrapping="Wrap" Opacity="0.86" />
+            <Grid Grid.Row="1" Margin="0,24,0,0" ColumnSpacing="12" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-                    <Border Grid.Row="2" Padding="16" CornerRadius="12"
-                            Background="{ThemeResource LayerFillColorDefaultBrush}">
-                        <StackPanel Spacing="8">
-                            <TextBlock Text="{helpers:Loc Key=HighCpuUsage_SuggestedAction}" FontWeight="SemiBold" />
-                            <TextBlock Text="{helpers:Loc Key=HighCpuUsage_SuggestionText}" FontSize="13"
-                                       Opacity="0.76" TextWrapping="Wrap" />
-                        </StackPanel>
-                    </Border>
-
-                    <Grid Grid.Row="3" ColumnSpacing="12" HorizontalAlignment="Right">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Content="{helpers:Loc Key=HighCpuUsage_Dismiss}" MinWidth="96" Click="OnDismissClick" />
-                        <Button Grid.Column="1" Content="{helpers:Loc Key=HighCpuUsage_Report}" MinWidth="104"
-                                Style="{StaticResource AccentButtonStyle}" Click="OnFeedbackClick" />
-                        <Button Grid.Column="2" Content="{helpers:Loc Key=HighCpuUsage_ExitLauncher}" MinWidth="104"
-                                Click="OnExitClick" />
-                    </Grid>
-                </Grid>
-            </Border>
+                <Button Content="{helpers:Loc Key=HighCpuUsage_Dismiss}" MinWidth="96" Click="OnDismissClick" />
+                <Button Grid.Column="1" Content="{helpers:Loc Key=HighCpuUsage_Report}" MinWidth="104"
+                        Style="{StaticResource AccentButtonStyle}" Click="OnFeedbackClick" />
+                <Button Grid.Column="2" Content="{helpers:Loc Key=HighCpuUsage_ExitLauncher}" MinWidth="104"
+                        Click="OnExitClick" />
+            </Grid>
         </Grid>
     </Grid>
 </Window>
