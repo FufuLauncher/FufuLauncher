@@ -9783,6 +9783,12 @@ Detalles: {0}</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>Código de 6 dígitos</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>Enviando…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>Reenviar en {0} s</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>Código enviado</value>
   </data>
@@ -9803,6 +9809,12 @@ Detalles: {0}</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>8 a 128 caracteres</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>Mostrar contraseña</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>Ocultar contraseña</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>Ingresa tu contraseña.</value>

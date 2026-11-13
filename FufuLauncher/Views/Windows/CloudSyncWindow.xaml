@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helpers="using:FufuLauncher.Helpers"
     xmlns:models="using:FufuLauncher.Models"
+    xmlns:views="using:FufuLauncher.Views"
     mc:Ignorable="d"
     Title="{helpers:Loc Key=CloudSync_WindowTitle}">
 
@@ -156,14 +157,14 @@
                                      PlaceholderText="{helpers:Loc Key=CloudSync_EmailPlaceholder}"
                                      InputScope="EmailSmtpAddress" />
 
-                            <PasswordBox x:Name="PasswordBox"
-                                         Header="{helpers:Loc Key=CloudSync_PasswordHeader}"
-                                         PlaceholderText="{helpers:Loc Key=CloudSync_PasswordPlaceholder}" />
+                            <views:CloudPasswordInput x:Name="PasswordInput"
+                                                      Label="{helpers:Loc Key=CloudSync_PasswordHeader}"
+                                                      PlaceholderText="{helpers:Loc Key=CloudSync_PasswordPlaceholder}" />
 
-                            <PasswordBox x:Name="ConfirmPasswordBox"
-                                         Header="{helpers:Loc Key=CloudSync_ConfirmPasswordHeader}"
-                                         PlaceholderText="{helpers:Loc Key=CloudSync_ConfirmPasswordPlaceholder}"
-                                         Visibility="Collapsed" />
+                            <views:CloudPasswordInput x:Name="ConfirmPasswordInput"
+                                                      Label="{helpers:Loc Key=CloudSync_ConfirmPasswordHeader}"
+                                                      PlaceholderText="{helpers:Loc Key=CloudSync_ConfirmPasswordPlaceholder}"
+                                                      Visibility="Collapsed" />
 
                             <Grid x:Name="OtpInputRow" ColumnSpacing="10" Visibility="Collapsed">
                                 <Grid.ColumnDefinitions>
@@ -176,7 +177,9 @@
                                          MaxLength="16" />
                                 <Button x:Name="SendAuthOtpButton"
                                         Grid.Column="1"
+                                        MinWidth="112"
                                         VerticalAlignment="Bottom"
+                                        HorizontalContentAlignment="Center"
                                         Content="{helpers:Loc Key=CloudSync_SendOtpBtn}"
                                         Click="OnSendAuthOtpClick" />
                             </Grid>
@@ -572,14 +575,20 @@
                     <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
 
                     <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <TextBlock x:Name="ArchivesEmptyText"
                                    Text="{helpers:Loc Key=CloudSync_ArchivesEmpty}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Margin="0,36,0,0"
                                    Visibility="Collapsed" />
 
-                        <ItemsRepeater x:Name="ArchivesRepeater">
+                        <ItemsRepeater x:Name="ArchivesRepeater" Grid.Row="1">
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate x:DataType="models:CloudArchiveItem">
                                     <Grid>

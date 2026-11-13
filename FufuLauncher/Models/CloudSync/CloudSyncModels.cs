@@ -84,6 +84,12 @@ public sealed class CloudApiResult<T>
         init;
     }
 
+    public TimeSpan? RetryAfter
+    {
+        get;
+        init;
+    }
+
     public string Code
     {
         get;

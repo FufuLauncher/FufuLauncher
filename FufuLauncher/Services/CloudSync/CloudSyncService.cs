@@ -277,7 +277,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
             req.Headers.Add("X-Challenge-Secret", challengeSecret);
             using var resp = await _httpClient.SendAsync(req);
             var body = await resp.Content.ReadAsStringAsync();
-            return ParseEnvelope<T>((int)resp.StatusCode, body);
+            return ParseEnvelope<T>((int)resp.StatusCode, body, GetRetryAfter(resp.Headers));
         }
         catch (Exception ex)
         {
@@ -758,7 +758,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
 
             using var resp = await _httpClient.SendAsync(req);
             var body = await resp.Content.ReadAsStringAsync();
-            return ParseEnvelope<T>((int)resp.StatusCode, body);
+            return ParseEnvelope<T>((int)resp.StatusCode, body, GetRetryAfter(resp.Headers));
         }
         catch (Exception ex)
         {
@@ -823,7 +823,10 @@ public sealed partial class CloudSyncService : ICloudSyncService
         return UnauthorizedResult<T>();
     }
 
-    private static CloudApiResult<T> ParseEnvelope<T>(int statusCode, string rawBody)
+    private static TimeSpan? GetRetryAfter(HttpResponseHeaders headers)
+        => headers.RetryAfter?.Delta ?? (headers.RetryAfter?.Date - DateTimeOffset.UtcNow);
+
+    private static CloudApiResult<T> ParseEnvelope<T>(int statusCode, string rawBody, TimeSpan? retryAfter = null)
     {
         try
         {
@@ -835,6 +838,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
                 {
                     Ok = false,
                     HttpStatusCode = statusCode,
+                    RetryAfter = retryAfter,
                     Code = "INVALID_RESPONSE",
                     Message = "CloudSync_ErrGeneric".GetLocalized()
                 };
@@ -863,6 +867,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
             {
                 Ok = envelope.Ok,
                 HttpStatusCode = statusCode,
+                RetryAfter = retryAfter,
                 Code = envelope.Code ?? string.Empty,
                 Message = envelope.Message ?? string.Empty,
                 Data = data,
@@ -876,6 +881,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
             {
                 Ok = false,
                 HttpStatusCode = statusCode,
+                RetryAfter = retryAfter,
                 Code = "PARSE_ERROR",
                 Message = "CloudSync_ErrGeneric".GetLocalized()
             };

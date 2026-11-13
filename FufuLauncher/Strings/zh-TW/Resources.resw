@@ -9779,6 +9779,12 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>請輸入 6 位驗證碼</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>傳送中…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>{0} 秒後重發</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>驗證碼已傳送</value>
   </data>
@@ -9799,6 +9805,12 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>請輸入 8-128 位密碼</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>顯示密碼</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>隱藏密碼</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>請輸入登入密碼。</value>

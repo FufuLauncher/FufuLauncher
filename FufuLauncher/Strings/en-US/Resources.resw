@@ -10532,6 +10532,12 @@ Details: {0}</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>Enter 6-digit code</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>Sending…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>Resend in {0}s</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>Code Sent</value>
   </data>
@@ -10552,6 +10558,12 @@ Details: {0}</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>Enter 8-128 character password</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>Hide password</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>Please enter your password.</value>

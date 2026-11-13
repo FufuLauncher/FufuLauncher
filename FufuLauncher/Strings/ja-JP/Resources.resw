@@ -9783,6 +9783,12 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>6桁の確認コードを入力</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>送信中…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>{0}秒後に再送信</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>送信完了</value>
   </data>
@@ -9803,6 +9809,12 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>8〜128文字のパスワードを入力</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>パスワードを表示</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>パスワードを非表示</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>パスワードを入力してください。</value>
