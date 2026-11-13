@@ -20,7 +20,10 @@ public sealed partial class SettingsPage
 {
     private bool _isRefreshingQuickFps;
 
-    public ObservableCollection<VirtualKeyOption> QuickFpsKeyChoices { get; } = VirtualKeyCatalog.CreateQuickFpsOptions();
+    public ObservableCollection<VirtualKeyOption> QuickFpsKeyChoices
+    {
+        get;
+    } = VirtualKeyCatalog.CreateQuickFpsOptions();
 
     private static QuickFpsHotkeyService QuickFpsService => App.GetService<QuickFpsHotkeyService>();
 

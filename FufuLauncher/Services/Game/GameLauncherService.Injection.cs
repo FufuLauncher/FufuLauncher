@@ -10,7 +10,8 @@ public partial class GameLauncherService
     {
         foreach (var quarantined in PluginInjectionGuard.QuarantineRootStrayFiles())
         {
-            logBuilder.AppendLine($"[LaunchFlow] Quarantined stray file in plugin root: '{Path.GetFileName(quarantined)}'");
+            logBuilder.AppendLine(
+                $"[LaunchFlow] Quarantined stray file in plugin root: '{Path.GetFileName(quarantined)}'");
         }
 
         var conflicts = PluginInjectionGuard.FindDuplicateDllNames(PluginConflictSettings.Read());

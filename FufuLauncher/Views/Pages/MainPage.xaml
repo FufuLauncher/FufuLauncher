@@ -395,7 +395,8 @@
 
                                 <Style TargetType="PivotHeaderItem">
                                     <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
-                                    <Setter Property="CornerRadius" Value="{ThemeResource PivotHeaderItemSelectedPipeCornerRadius}" />
+                                    <Setter Property="CornerRadius"
+                                            Value="{ThemeResource PivotHeaderItemSelectedPipeCornerRadius}" />
                                     <Setter Property="FontSize" Value="13" />
                                     <Setter Property="FontWeight" Value="SemiBold" />
                                     <Setter Property="Margin" Value="0" />
@@ -740,9 +741,9 @@
                                     CornerRadius="6"
                                     ToolTipService.ToolTip="{helpers:Loc Key=Home_RewardsCalendar}">
                                     <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                                        FontSize="16.25"
-                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                        Glyph="&#xF213;" />
+                                              FontSize="16.25"
+                                              Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                              Glyph="&#xF213;" />
                                 </Button>
                             </Grid>
 
@@ -941,7 +942,8 @@
                                         </StackPanel>
                                     </Grid>
 
-                                    <Grid ColumnSpacing="8" Visibility="{x:Bind ViewModel.ShowExpeditions, Mode=OneWay}">
+                                    <Grid ColumnSpacing="8"
+                                          Visibility="{x:Bind ViewModel.ShowExpeditions, Mode=OneWay}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -974,7 +976,8 @@
                                         </StackPanel>
                                     </Grid>
 
-                                    <Grid ColumnSpacing="8" Visibility="{x:Bind ViewModel.ShowTransformer, Mode=OneWay}">
+                                    <Grid ColumnSpacing="8"
+                                          Visibility="{x:Bind ViewModel.ShowTransformer, Mode=OneWay}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
@@ -1226,9 +1229,9 @@
                             </Flyout>
                         </Button.Flyout>
                         <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                            FontSize="22.5"
-                            Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                            Glyph="&#xE9E9;" />
+                                  FontSize="22.5"
+                                  Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                  Glyph="&#xE9E9;" />
                     </Button>
                 </StackPanel>
             </Border>
@@ -1535,13 +1538,13 @@
                 <Button.ContextFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
-                            Click="SwitchToBilibili_Click"
-                            Icon="Switch"
-                            Text="{helpers:Loc Key=Home_SwitchBilibili}" />
+                                        Click="SwitchToBilibili_Click"
+                                        Icon="Switch"
+                                        Text="{helpers:Loc Key=Home_SwitchBilibili}" />
                         <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
-                            Click="SwitchToOfficial_Click"
-                            Icon="Switch"
-                            Text="{helpers:Loc Key=Home_SwitchOfficial}" />
+                                        Click="SwitchToOfficial_Click"
+                                        Icon="Switch"
+                                        Text="{helpers:Loc Key=Home_SwitchOfficial}" />
                     </MenuFlyout>
                 </Button.ContextFlyout>
 

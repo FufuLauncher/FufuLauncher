@@ -193,8 +193,8 @@ public partial class PluginSettingsViewModel
                     return;
                 }
 
-                PluginContentTranslationService.RunOnUiThread(
-                    () => request.Item.ApplyTranslatedDisplayName(translated));
+                PluginContentTranslationService.RunOnUiThread(() =>
+                    request.Item.ApplyTranslatedDisplayName(translated));
             }
         }
         catch (Exception ex)

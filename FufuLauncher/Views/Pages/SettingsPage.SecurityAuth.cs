@@ -106,7 +106,8 @@ public sealed partial class SettingsPage
             return;
         }
 
-        if (!string.IsNullOrEmpty(github) && !github.Contains(ApiEndpoints.GithubHost, StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrEmpty(github) &&
+            !github.Contains(ApiEndpoints.GithubHost, StringComparison.OrdinalIgnoreCase))
         {
             await ShowSafeDialogAsync(new ContentDialog
             {

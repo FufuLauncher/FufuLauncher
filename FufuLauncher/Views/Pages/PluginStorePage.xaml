@@ -762,14 +762,16 @@
                                     <FontIcon Glyph="&#xE712;" FontSize="14" />
                                     <Button.Flyout>
                                         <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=PluginStorePrivatePlugin}"
+                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                            Text="{helpers:Loc Key=PluginStorePrivatePlugin}"
                                                             Click="OnAddPrivatePluginClick"
                                                             ToolTipService.ToolTip="{helpers:Loc Key=PluginStorePrivatePluginTooltip}">
                                                 <MenuFlyoutItem.Icon>
                                                     <FontIcon Glyph="&#xE72E;" />
                                                 </MenuFlyoutItem.Icon>
                                             </MenuFlyoutItem>
-                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=PluginStoreLuaTestButton}"
+                                            <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                            Text="{helpers:Loc Key=PluginStoreLuaTestButton}"
                                                             Click="OnLuaTestClick"
                                                             ToolTipService.ToolTip="{helpers:Loc Key=PluginStoreLuaTestTooltip}">
                                                 <MenuFlyoutItem.Icon>
@@ -809,7 +811,7 @@
                                                                      Click="OnCategoryClick"
                                                                      Tag="{x:Bind}">
                                                 <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    
+
                                                     <FontIcon Glyph="{x:Bind Icon}"
                                                               FontFamily="{StaticResource SegoeFluentIconsFont}"
                                                               FontSize="13"
@@ -825,7 +827,8 @@
                             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                                 <Button x:Name="SortButton" Style="{StaticResource StoreSubtleButtonStyle}">
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF18A;" FontSize="17.5"
+                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF18A;"
+                                                  FontSize="17.5"
                                                   Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                         <TextBlock x:Name="SortLabel" Text="{helpers:Loc Key=PluginStoreSortPopular}"
                                                    VerticalAlignment="Center" />
@@ -835,13 +838,15 @@
                                     </StackPanel>
                                     <Button.Flyout>
                                         <MenuFlyout Placement="BottomEdgeAlignedRight">
-                                            <RadioMenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" x:Name="SortPopularItem"
+                                            <RadioMenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                                 x:Name="SortPopularItem"
                                                                  Text="{helpers:Loc Key=PluginStoreSortPopular}"
                                                                  GroupName="PluginStoreSort"
                                                                  IsChecked="True"
                                                                  Click="OnSortClick"
                                                                  Tag="popular" />
-                                            <RadioMenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" x:Name="SortNewestItem"
+                                            <RadioMenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                                 x:Name="SortNewestItem"
                                                                  Text="{helpers:Loc Key=PluginStoreSortNewest}"
                                                                  GroupName="PluginStoreSort"
                                                                  Click="OnSortClick"
@@ -881,7 +886,7 @@
                             <TranslateTransform x:Name="ResultsTranslate" Y="0" />
                         </Grid.RenderTransform>
 
-                        
+
                         <GridView x:Name="PluginGridView"
                                   Margin="-12,0,-12,0"
                                   IsEnabled="{x:Bind ViewModel.CanInteractWithStore, Mode=OneWay}"

@@ -42,11 +42,11 @@ namespace FufuLauncher.Views
                 }
 
                 await MapWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync($$"""
-                    if (window.location.hostname === '{{ApiEndpoints.ActMihoyoHost}}') {
-                        localStorage.setItem('user-guide-passed', 'true');
-                        localStorage.setItem('async-announcement-hidden-ts', Date.now().toString());
-                    }
-                """);
+                          if (window.location.hostname === '{{ApiEndpoints.ActMihoyoHost}}') {
+                              localStorage.setItem('user-guide-passed', 'true');
+                              localStorage.setItem('async-announcement-hidden-ts', Date.now().toString());
+                          }
+                      """);
                 MapWebView.NavigationStarting += MapWebView_NavigationStarting;
                 MapWebView.NavigationCompleted += MapWebView_NavigationCompleted;
                 MapWebView.Source = new Uri(ApiEndpoints.InteractiveMapUrl);

@@ -30,7 +30,8 @@
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
                                    MaxWidth="176" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
+                                FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
@@ -86,7 +87,8 @@
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
                                    MaxWidth="176" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
+                                FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
@@ -153,7 +155,8 @@
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
                                    MaxWidth="176" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
+                                FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
@@ -208,7 +211,8 @@
                     <StackPanel Orientation="Horizontal" Spacing="4" Margin="0,0,0,8">
                         <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="12" Opacity="0.9"
                                    MaxWidth="176" VerticalAlignment="Center" />
-                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;" FontFamily="Segoe Fluent Icons"
+                        <Button Visibility="{x:Bind HelpVisibility, Mode=OneWay}" Content="&#xE9CE;"
+                                FontFamily="Segoe Fluent Icons"
                                 Style="{StaticResource PluginSettingActionButtonStyle}"
                                 ToolTipService.ToolTip="{helpers:Loc Key=ViewHelpTooltip}">
                             <Button.Flyout>
@@ -494,7 +498,8 @@
                                 ToolTipService.ToolTip="安装平台代码签名证书（可随时在设置中卸载）"
                                 Click="OnInstallSignatureClick">
                             <StackPanel Orientation="Horizontal" Spacing="6">
-                                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF27E;" FontSize="16.25" />
+                                <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF27E;"
+                                          FontSize="16.25" />
                                 <TextBlock Text="安装签名" FontSize="12" />
                             </StackPanel>
                         </Button>
@@ -524,11 +529,12 @@
                                 Visibility="{x:Bind MainPluginButtonVisibility(ViewModel.SelectedPluginIndex), Mode=OneWay}">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF4B8;"
-                                           FontSize="16.25" />
+                                          FontSize="16.25" />
                                 <TextBlock Text="{helpers:Loc Key=SectionQuickFps}" FontSize="12" />
                             </StackPanel>
                             <Button.Flyout>
-                                <Flyout Placement="BottomEdgeAlignedRight" Opening="OnQuickFpsConfigurationFlyoutOpening">
+                                <Flyout Placement="BottomEdgeAlignedRight"
+                                        Opening="OnQuickFpsConfigurationFlyoutOpening">
                                     <Flyout.FlyoutPresenterStyle>
                                         <Style TargetType="FlyoutPresenter">
                                             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
@@ -668,9 +674,11 @@
                                                             ToolTipService.ToolTip="{helpers:Loc Key=SwitchPresetTooltip}">
                                                         <Button.ContextFlyout>
                                                             <MenuFlyout>
-                                                                <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=Preset_Rename}"
-                                                                        Tag="{x:Bind}"
-                                                                        Click="OnRenamePresetClick" />
+                                                                <MenuFlyoutItem
+                                                                    FontFamily="{StaticResource AppGlobalFont}"
+                                                                    Text="{helpers:Loc Key=Preset_Rename}"
+                                                                    Tag="{x:Bind}"
+                                                                    Click="OnRenamePresetClick" />
                                                             </MenuFlyout>
                                                         </Button.ContextFlyout>
                                                     </Button>
@@ -806,7 +814,8 @@
               Visibility="{x:Bind ViewModel.HasConfigurationLoadError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"
                         MaxWidth="600" Margin="24" Spacing="12">
-                <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="{x:Bind ViewModel.HasConfigurationLoadError, Mode=OneWay}"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}"
+                         IsOpen="{x:Bind ViewModel.HasConfigurationLoadError, Mode=OneWay}"
                          Title="{helpers:Loc Key=Settings_ConfigReadFailed}"
                          Message="{x:Bind ViewModel.ConfigurationLoadError, Mode=OneWay}"
                          Severity="Error" IsClosable="False"
@@ -815,7 +824,8 @@
                         <Button Content="{helpers:Loc Key=PluginStoreRetry}" Click="OnRetryConfigurationClick" />
                     </InfoBar.ActionButton>
                 </InfoBar>
-                <InfoBar FontFamily="{StaticResource AppGlobalFont}" IsOpen="{x:Bind ViewModel.HasConfigurationFileLockProcesses, Mode=OneWay}"
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}"
+                         IsOpen="{x:Bind ViewModel.HasConfigurationFileLockProcesses, Mode=OneWay}"
                          Title="{helpers:Loc Key=Plugin_FileLocked_Title}"
                          Message="{x:Bind ViewModel.ConfigurationFileLockProcesses, Mode=OneWay}"
                          Severity="Informational" IsClosable="False"

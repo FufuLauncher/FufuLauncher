@@ -248,7 +248,8 @@ public class HoyolabCheckinService
             var body = new { act_id = ActId, region, uid };
             var jsonBody = JsonSerializer.Serialize(body);
 
-            using var req = new HttpRequestMessage(HttpMethod.Post, $"{BaseApi}{ApiEndpoints.OverseaSignResignPath}?lang=zh-cn");
+            using var req = new HttpRequestMessage(HttpMethod.Post,
+                $"{BaseApi}{ApiEndpoints.OverseaSignResignPath}?lang=zh-cn");
             foreach (var h in _headers)
                 AddHeader(req, h.Key, h.Value);
             req.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");

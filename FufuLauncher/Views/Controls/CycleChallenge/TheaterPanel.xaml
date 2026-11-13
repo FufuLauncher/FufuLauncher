@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <UserControl
     x:Class="FufuLauncher.Views.Controls.CycleChallenge.TheaterPanel"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,7 +9,7 @@
     xmlns:models="using:FufuLauncher.Models.CycleChallenge">
 
     <UserControl.Resources>
-        
+
         <Style x:Key="KpiCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
@@ -16,7 +17,7 @@
             <Setter Property="CornerRadius" Value="8" />
             <Setter Property="Padding" Value="12,10" />
         </Style>
-        
+
         <Style x:Key="SectionCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{ThemeResource CardBackgroundFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
@@ -24,7 +25,7 @@
             <Setter Property="CornerRadius" Value="8" />
             <Setter Property="Padding" Value="16" />
         </Style>
-        
+
         <Style x:Key="RoundCardStyle" TargetType="Border">
             <Setter Property="Background" Value="{ThemeResource LayerFillColorDefaultBrush}" />
             <Setter Property="BorderBrush" Value="{ThemeResource CardStrokeColorDefaultBrush}" />
@@ -32,7 +33,7 @@
             <Setter Property="CornerRadius" Value="6" />
             <Setter Property="Padding" Value="12" />
         </Style>
-        
+
         <Style x:Key="KpiLabelStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="12" />
@@ -40,7 +41,7 @@
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
-        
+
         <Style x:Key="KpiValueStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="20" />
@@ -50,7 +51,7 @@
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
-        
+
         <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="16" />
@@ -58,7 +59,7 @@
             <Setter Property="TextTrimming" Value="CharacterEllipsis" />
             <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
         </Style>
-        
+
         <Style x:Key="SecondaryCaptionStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
             <Setter Property="FontSize" Value="12" />
@@ -70,7 +71,7 @@
 
     <StackPanel Padding="0,0,0,8" Spacing="12">
 
-        
+
         <StackPanel
             Padding="24"
             HorizontalAlignment="Center"
@@ -96,11 +97,11 @@
                 Visibility="{x:Bind Display.HasStateDetail, Mode=OneTime, Converter={StaticResource BoolToVisibilityConverter}}" />
         </StackPanel>
 
-        
+
         <StackPanel Spacing="12"
                     Visibility="{x:Bind Display.ShowContent, Mode=OneTime, Converter={StaticResource BoolToVisibilityConverter}}">
 
-            
+
             <Grid ColumnSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -122,7 +123,7 @@
                 </StackPanel>
             </Grid>
 
-            
+
             <Grid ColumnSpacing="12" RowSpacing="12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -152,7 +153,7 @@
                 <Border Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource KpiCardStyle}">
                     <StackPanel Spacing="4">
                         <TextBlock Style="{StaticResource KpiLabelStyle}" Text="{helpers:Loc Key=Theater_Medals}" />
-                        
+
                         <ItemsControl ItemsSource="{x:Bind Display.MedalIcons, Mode=OneTime}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
@@ -190,11 +191,11 @@
                 </Border>
             </Grid>
 
-            
+
             <Border Style="{StaticResource SectionCardStyle}"
                     Visibility="{x:Bind Display.ShowBattleStats, Mode=OneTime, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel Spacing="12">
-                    
+
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="{helpers:Loc Key=Theater_BattleStats}" />
                     <Grid ColumnSpacing="12" RowSpacing="8">
                         <Grid.ColumnDefinitions>
@@ -295,7 +296,7 @@
                 </StackPanel>
             </Border>
 
-            
+
             <Border Style="{StaticResource SectionCardStyle}"
                     Visibility="{x:Bind Display.HasBackupAvatars, Mode=OneTime, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel Spacing="10" ScrollViewer.VerticalScrollMode="Auto">
@@ -326,11 +327,11 @@
                 </StackPanel>
             </Border>
 
-            
+
             <Border Style="{StaticResource SectionCardStyle}"
                     Visibility="{x:Bind Display.HasRounds, Mode=OneTime, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel Spacing="12">
-                    
+
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="{helpers:Loc Key=Theater_Review}" />
                     <ItemsRepeater ItemsSource="{x:Bind Display.Rounds, Mode=OneTime}">
                         <ItemsRepeater.Layout>
@@ -341,7 +342,7 @@
                                 <Border Style="{StaticResource RoundCardStyle}">
                                     <StackPanel Spacing="10">
 
-                                        
+
                                         <Grid ColumnSpacing="8">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
@@ -374,7 +375,7 @@
                                                 Visibility="{x:Bind HasFinishTime, Converter={StaticResource BoolToVisibilityConverter}}" />
                                         </Grid>
 
-                                        
+
                                         <StackPanel Spacing="6"
                                                     Visibility="{x:Bind HasEnemies, Converter={StaticResource BoolToVisibilityConverter}}">
                                             <TextBlock Style="{StaticResource KpiLabelStyle}"
@@ -404,7 +405,7 @@
                                             </ItemsControl>
                                         </StackPanel>
 
-                                        
+
                                         <ItemsControl ItemsSource="{x:Bind Avatars}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
@@ -425,7 +426,7 @@
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
 
-                                        
+
                                         <StackPanel Spacing="6"
                                                     Visibility="{x:Bind HasSplendour, Converter={StaticResource BoolToVisibilityConverter}}">
                                             <TextBlock Style="{StaticResource KpiLabelStyle}"
@@ -480,7 +481,7 @@
                                             </ItemsControl>
                                         </StackPanel>
 
-                                        
+
                                         <StackPanel Spacing="6"
                                                     Visibility="{x:Bind HasChoiceCards, Converter={StaticResource BoolToVisibilityConverter}}">
                                             <TextBlock Style="{StaticResource KpiLabelStyle}"
@@ -523,7 +524,7 @@
                 </StackPanel>
             </Border>
 
-            
+
             <TextBlock
                 HorizontalAlignment="Center"
                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"

@@ -102,7 +102,7 @@ public sealed partial class LoginQrWindow
         {
             var token = tokens.FirstOrDefault(item => item?["name"]?.GetValue<string>() is "stoken" or "stoken_v2")
                         ?? tokens.FirstOrDefault(item => item?["token_type"] is JsonValue type &&
-                                                        type.TryGetValue<int>(out var id) && id == 1);
+                                                         type.TryGetValue<int>(out var id) && id == 1);
             stoken = token?["token"]?.GetValue<string>() ?? "";
         }
 

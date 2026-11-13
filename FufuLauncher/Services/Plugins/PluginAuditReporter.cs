@@ -522,33 +522,65 @@ public sealed class PluginAuditReporter
 internal sealed class ReportState
 {
     [JsonPropertyName("reported")]
-    public Dictionary<string, ReportedPlugin> Reported { get; set; } =
+    public Dictionary<string, ReportedPlugin> Reported
+    {
+        get;
+        set;
+    } =
         new(StringComparer.OrdinalIgnoreCase);
 }
 
 internal sealed class ReportedPlugin
 {
     [JsonPropertyName("sha256")]
-    public string Sha256 { get; set; } = string.Empty;
+    public string Sha256
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
+    public string Name
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("reported_at")]
-    public long ReportedAt { get; set; }
+    public long ReportedAt
+    {
+        get;
+        set;
+    }
 }
 
 internal sealed class TelemetryChallenge
 {
     [JsonPropertyName("c")]
-    public string ChallengeId { get; set; } = string.Empty;
+    public string ChallengeId
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("d")]
-    public int Difficulty { get; set; }
+    public int Difficulty
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("e")]
-    public long ExpiresAt { get; set; }
+    public long ExpiresAt
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("s")]
-    public string Signature { get; set; } = string.Empty;
+    public string Signature
+    {
+        get;
+        set;
+    } = string.Empty;
 }

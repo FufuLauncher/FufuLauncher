@@ -188,7 +188,6 @@ public class TokenRefreshService : IDisposable
 
     private async Task<bool?> CheckCookieValidAsync(IReadOnlyDictionary<string, string> cookies)
     {
-        
         string? ltokenCookie = BuildCredentialCookie(cookies, "ltoken", "ltuid");
         string? cookieTokenCookie = BuildCredentialCookie(cookies, "cookie_token", "account_id");
         if (ltokenCookie == null || cookieTokenCookie == null) return false;

@@ -403,11 +403,11 @@
         </Grid>
 
         <InfoBar FontFamily="{StaticResource AppGlobalFont}"
-            Grid.Row="2"
-            Margin="24,0,24,16"
-            IsClosable="True"
-            IsOpen="{x:Bind ViewModel.IsStatusOpen, Mode=TwoWay}"
-            Message="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
-            Severity="{x:Bind ViewModel.StatusSeverity, Mode=OneWay}" />
+                 Grid.Row="2"
+                 Margin="24,0,24,16"
+                 IsClosable="True"
+                 IsOpen="{x:Bind ViewModel.IsStatusOpen, Mode=TwoWay}"
+                 Message="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+                 Severity="{x:Bind ViewModel.StatusSeverity, Mode=OneWay}" />
     </Grid>
 </Window>

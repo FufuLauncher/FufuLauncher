@@ -235,9 +235,10 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid Width="32" Height="32" Margin="0,0,12,0">
                                             <PersonPicture Width="32" Height="32" ProfilePicture="{x:Bind AvatarUrl}" />
-                                            <Image Source="{x:Bind helpers:AccountAvatarPendant.CreateImage(AvatarPendantUrl), Mode=OneWay}"
-                                                   IsHitTestVisible="False" Stretch="Uniform"
-                                                   RenderTransformOrigin="0.5,0.5">
+                                            <Image
+                                                Source="{x:Bind helpers:AccountAvatarPendant.CreateImage(AvatarPendantUrl), Mode=OneWay}"
+                                                IsHitTestVisible="False" Stretch="Uniform"
+                                                RenderTransformOrigin="0.5,0.5">
                                                 <Image.RenderTransform>
                                                     <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
                                                 </Image.RenderTransform>
@@ -324,9 +325,10 @@
                                                 helpers:ImageFadeInHelper.DurationMilliseconds="260"
                                                 helpers:ImageFadeInHelper.EnableRetry="False" />
                                         </Grid>
-                                        <Image Source="{x:Bind helpers:AccountAvatarPendant.CreateImage(ViewModel.CurrentAccount.AvatarPendantUrl), Mode=OneWay}"
-                                               IsHitTestVisible="False" Stretch="Uniform"
-                                               RenderTransformOrigin="0.5,0.5">
+                                        <Image
+                                            Source="{x:Bind helpers:AccountAvatarPendant.CreateImage(ViewModel.CurrentAccount.AvatarPendantUrl), Mode=OneWay}"
+                                            IsHitTestVisible="False" Stretch="Uniform"
+                                            RenderTransformOrigin="0.5,0.5">
                                             <Image.RenderTransform>
                                                 <ScaleTransform ScaleX="1.32" ScaleY="1.32" />
                                             </Image.RenderTransform>
@@ -402,47 +404,64 @@
                                                           ToolTipService.ToolTip="{helpers:Loc Key=Account_SyncAvatarPendant}">
                                                 <ToggleButton.Template>
                                                     <ControlTemplate TargetType="ToggleButton">
-                                                        <Grid x:Name="PendantButtonBackground" Background="Transparent" CornerRadius="4">
+                                                        <Grid x:Name="PendantButtonBackground" Background="Transparent"
+                                                              CornerRadius="4">
                                                             <VisualStateManager.VisualStateGroups>
                                                                 <VisualStateGroup x:Name="CommonStates">
                                                                     <VisualState x:Name="Normal" />
                                                                     <VisualState x:Name="PointerOver">
                                                                         <VisualState.Setters>
-                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
+                                                                            <Setter
+                                                                                Target="PendantButtonBackground.Background"
+                                                                                Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
                                                                         </VisualState.Setters>
                                                                     </VisualState>
                                                                     <VisualState x:Name="Pressed">
                                                                         <VisualState.Setters>
-                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource SubtleFillColorTertiaryBrush}" />
+                                                                            <Setter
+                                                                                Target="PendantButtonBackground.Background"
+                                                                                Value="{ThemeResource SubtleFillColorTertiaryBrush}" />
                                                                         </VisualState.Setters>
                                                                     </VisualState>
                                                                     <VisualState x:Name="Checked">
                                                                         <VisualState.Setters>
-                                                                            <Setter Target="PendantGlyph.Stroke" Value="{ThemeResource AccentFillColorDefaultBrush}" />
+                                                                            <Setter Target="PendantGlyph.Stroke"
+                                                                                    Value="{ThemeResource AccentFillColorDefaultBrush}" />
                                                                         </VisualState.Setters>
                                                                     </VisualState>
                                                                     <VisualState x:Name="CheckedPointerOver">
                                                                         <VisualState.Setters>
-                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource AccentFillColorSecondaryBrush}" />
-                                                                            <Setter Target="PendantGlyph.Stroke" Value="White" />
+                                                                            <Setter
+                                                                                Target="PendantButtonBackground.Background"
+                                                                                Value="{ThemeResource AccentFillColorSecondaryBrush}" />
+                                                                            <Setter Target="PendantGlyph.Stroke"
+                                                                                    Value="White" />
                                                                         </VisualState.Setters>
                                                                     </VisualState>
                                                                     <VisualState x:Name="CheckedPressed">
                                                                         <VisualState.Setters>
-                                                                            <Setter Target="PendantButtonBackground.Background" Value="{ThemeResource AccentFillColorTertiaryBrush}" />
-                                                                            <Setter Target="PendantGlyph.Stroke" Value="White" />
+                                                                            <Setter
+                                                                                Target="PendantButtonBackground.Background"
+                                                                                Value="{ThemeResource AccentFillColorTertiaryBrush}" />
+                                                                            <Setter Target="PendantGlyph.Stroke"
+                                                                                    Value="White" />
                                                                         </VisualState.Setters>
                                                                     </VisualState>
                                                                     <VisualState x:Name="Disabled" />
                                                                     <VisualState x:Name="CheckedDisabled" />
                                                                 </VisualStateGroup>
                                                             </VisualStateManager.VisualStateGroups>
-                                                            <Viewbox Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Viewbox Width="18" Height="18"
+                                                                     HorizontalAlignment="Center"
+                                                                     VerticalAlignment="Center">
                                                                 <Canvas Width="24" Height="24">
                                                                     <Path x:Name="PendantGlyph"
                                                                           Data="M12,4 A8,8 0 1 0 20,12 M17.5,2 L18.7,5.3 L22,6.5 L18.7,7.7 L17.5,11 L16.3,7.7 L13,6.5 L16.3,5.3 Z"
-                                                                          Stroke="{ThemeResource TextFillColorTertiaryBrush}" StrokeThickness="1.8"
-                                                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" />
+                                                                          Stroke="{ThemeResource TextFillColorTertiaryBrush}"
+                                                                          StrokeThickness="1.8"
+                                                                          StrokeStartLineCap="Round"
+                                                                          StrokeEndLineCap="Round"
+                                                                          StrokeLineJoin="Round" />
                                                                 </Canvas>
                                                             </Viewbox>
                                                         </Grid>
@@ -498,8 +517,10 @@
                                                 </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
-                                        <Button Grid.Row="1" Grid.Column="1" MinWidth="144" MinHeight="40" Padding="14,8"
-                                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalAlignment="Center"
+                                        <Button Grid.Row="1" Grid.Column="1" MinWidth="144" MinHeight="40"
+                                                Padding="14,8"
+                                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                                                VerticalAlignment="Center"
                                                 Command="{x:Bind ViewModel.OpenMiyousheQrCommand}">
                                             <StackPanel Orientation="Horizontal" Spacing="8">
                                                 <Viewbox Width="20" Height="20">
@@ -550,7 +571,8 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xF21C;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20"
+                                                      Glyph="&#xF21C;" />
                                             <TextBlock x:Name="BtnCheckinText"
                                                        Text="{helpers:Loc Key=Account_DailyCheckin}" />
                                         </StackPanel>
@@ -593,7 +615,8 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xE871;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20"
+                                                      Glyph="&#xE871;" />
                                             <TextBlock Text="{helpers:Loc Key=Account_TravelJournal}" />
                                         </StackPanel>
                                     </Grid>
@@ -614,7 +637,8 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xE457;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20"
+                                                      Glyph="&#xE457;" />
                                             <TextBlock Text="{helpers:Loc Key=Account_GachaAnalysis}" />
                                         </StackPanel>
                                     </Grid>
@@ -635,7 +659,8 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xEAC8;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20"
+                                                      Glyph="&#xEAC8;" />
                                             <TextBlock Text="{helpers:Loc Key=Account_AccountSecurity}" />
                                         </StackPanel>
                                     </Grid>
@@ -657,9 +682,9 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                                                FontSize="20"
-                                                Foreground="{ThemeResource SystemFillColorCriticalBrush}"
-                                                Glyph="&#xE78F;" />
+                                                      FontSize="20"
+                                                      Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                      Glyph="&#xE78F;" />
                                             <TextBlock Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                                        Text="{helpers:Loc Key=Account_FreezeAccount}" />
                                         </StackPanel>
@@ -723,7 +748,8 @@
                                             HorizontalAlignment="Center"
                                             Orientation="Horizontal"
                                             Spacing="8">
-                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xE753;" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20"
+                                                      Glyph="&#xE753;" />
                                             <TextBlock Text="{helpers:Loc Key=CloudSync_AccountBtn}" />
                                         </StackPanel>
                                     </Grid>
@@ -885,9 +911,9 @@
                                             Orientation="Horizontal"
                                             Spacing="8">
                                             <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                                                FontSize="20"
-                                                Foreground="{ThemeResource AccentFillColorDefaultBrush}"
-                                                Glyph="&#xEF9B;" />
+                                                      FontSize="20"
+                                                      Foreground="{ThemeResource AccentFillColorDefaultBrush}"
+                                                      Glyph="&#xEF9B;" />
                                             <TextBlock Style="{StaticResource BodyStrongTextBlockStyle}"
                                                        Text="{helpers:Loc Key=Account_BoundCharacters}" />
                                         </StackPanel>
@@ -926,9 +952,9 @@
                                                                 BorderThickness="1"
                                                                 CornerRadius="20">
                                                                 <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                                                                    FontSize="20"
-                                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                                    Glyph="&#xF5BD;" />
+                                                                          FontSize="20"
+                                                                          Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                                          Glyph="&#xF5BD;" />
                                                             </Border>
 
                                                             <StackPanel
@@ -1000,10 +1026,10 @@
                                             Spacing="12"
                                             Visibility="{x:Bind ViewModel.ShowBoundRoleEmptyState, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
                                             <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                                                VerticalAlignment="Center"
-                                                FontSize="30"
-                                                Foreground="{ThemeResource TextFillColorTertiaryBrush}"
-                                                Glyph="&#xF5BD;" />
+                                                      VerticalAlignment="Center"
+                                                      FontSize="30"
+                                                      Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                                                      Glyph="&#xF5BD;" />
                                             <StackPanel VerticalAlignment="Center">
                                                 <TextBlock
                                                     FontSize="14"

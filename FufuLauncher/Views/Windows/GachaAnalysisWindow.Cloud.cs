@@ -33,6 +33,7 @@ public sealed partial class GachaAnalysisWindow
             {
                 CloudSyncWindow.ShowOrActivate("Account");
             }
+
             return;
         }
 
@@ -66,6 +67,7 @@ public sealed partial class GachaAnalysisWindow
             {
                 CloudSyncWindow.ShowOrActivate("Account");
             }
+
             return;
         }
 
@@ -74,9 +76,23 @@ public sealed partial class GachaAnalysisWindow
 
     private sealed class GachaUploadSourceOption
     {
-        public string Label { get; init; } = string.Empty;
-        public List<string> Uids { get; init; } = new();
-        public string SuggestedSlot { get; init; } = string.Empty;
+        public string Label
+        {
+            get;
+            init;
+        } = string.Empty;
+
+        public List<string> Uids
+        {
+            get;
+            init;
+        } = new();
+
+        public string SuggestedSlot
+        {
+            get;
+            init;
+        } = string.Empty;
     }
 
     private async Task ShowCloudGachaManagerDialogAsync(ICloudSyncService cloudSync)
@@ -278,14 +294,16 @@ public sealed partial class GachaAnalysisWindow
             var selectedUids = (sourceCombo.SelectedItem as GachaUploadSourceOption)?.Uids;
             if (selectedUids == null || selectedUids.Count == 0)
             {
-                ShowFeedback(InfoBarSeverity.Warning, "CloudSync_GachaExportErrorTitle".GetLocalized(), "CloudSync_GachaNoRecordsSelected".GetLocalized());
+                ShowFeedback(InfoBarSeverity.Warning, "CloudSync_GachaExportErrorTitle".GetLocalized(),
+                    "CloudSync_GachaNoRecordsSelected".GetLocalized());
                 return string.Empty;
             }
 
             var json = ViewModel.BuildStrictUigfV4Json(selectedUids);
             if (string.IsNullOrWhiteSpace(json))
             {
-                ShowFeedback(InfoBarSeverity.Warning, "CloudSync_GachaExportErrorTitle".GetLocalized(), "CloudSync_GachaNoRecordsSelected".GetLocalized());
+                ShowFeedback(InfoBarSeverity.Warning, "CloudSync_GachaExportErrorTitle".GetLocalized(),
+                    "CloudSync_GachaNoRecordsSelected".GetLocalized());
                 return string.Empty;
             }
 
@@ -372,9 +390,20 @@ public sealed partial class GachaAnalysisWindow
                     Spacing = 4,
                     VerticalAlignment = VerticalAlignment.Center
                 };
-                var importBtn = new Button { Content = "CloudSync_GachaImportBtn".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4) };
-                var overwriteBtn = new Button { Content = "CloudSync_BtnOverwrite".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4), IsEnabled = options.Count > 0 };
-                var renameBtn = new Button { Content = "CloudSync_BtnRename".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4) };
+                var importBtn = new Button
+                {
+                    Content = "CloudSync_GachaImportBtn".GetLocalized(), FontSize = 12,
+                    Padding = new Thickness(8, 4, 8, 4)
+                };
+                var overwriteBtn = new Button
+                {
+                    Content = "CloudSync_BtnOverwrite".GetLocalized(), FontSize = 12,
+                    Padding = new Thickness(8, 4, 8, 4), IsEnabled = options.Count > 0
+                };
+                var renameBtn = new Button
+                {
+                    Content = "CloudSync_BtnRename".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4)
+                };
                 var deleteBtn = new Button
                 {
                     Content = "CloudSync_BtnDelete".GetLocalized(),
@@ -397,7 +426,8 @@ public sealed partial class GachaAnalysisWindow
                             return;
                         }
 
-                        var (success, accounts, records, _) = await ViewModel.ImportUigfJsonFromCloudAsync(pullRes.JsonContent);
+                        var (success, accounts, records, _) =
+                            await ViewModel.ImportUigfJsonFromCloudAsync(pullRes.JsonContent);
                         if (!success)
                         {
                             ShowFeedback(InfoBarSeverity.Error,
@@ -408,7 +438,8 @@ public sealed partial class GachaAnalysisWindow
 
                         ShowFeedback(InfoBarSeverity.Success,
                             "CloudSync_AchievementImportSuccessTitle".GetLocalized(),
-                            string.Format("CloudSync_GachaImportedMsg".GetLocalized(), archive.Slot, accounts, records));
+                            string.Format("CloudSync_GachaImportedMsg".GetLocalized(), archive.Slot, accounts,
+                                records));
                     }
                     finally
                     {
@@ -577,7 +608,9 @@ public sealed partial class GachaAnalysisWindow
                 var res = await cloudSync.UploadArchiveAsync("uigf", slot, json, overwriteCheck.IsChecked == true);
                 if (res.Ok)
                 {
-                    var msgKey = res.Data?.Overwritten == true ? "CloudSync_MsgOverwritten" : "CloudSync_MsgUploadedNew";
+                    var msgKey = res.Data?.Overwritten == true
+                        ? "CloudSync_MsgOverwritten"
+                        : "CloudSync_MsgUploadedNew";
                     ShowFeedback(InfoBarSeverity.Success,
                         "CloudSync_MsgUploadSuccess".GetLocalized(),
                         string.Format(msgKey.GetLocalized(), slot));

@@ -81,9 +81,11 @@ public partial class AccountViewModel
             var avatarUrl = userInfo?.avatar_url ?? entry.AvatarUrl ?? "ms-appx:///Assets/DefaultAvatar.png";
             var gameUid = role?.game_uid ?? "";
             var isOs = entry.Id.StartsWith("os_");
-            var pendantUrl = isOs ? null : userInfo != null && newUserFullInfo.retcode == 0
-                ? AccountAvatarPendant.NormalizeUrl(userInfo.pendant)
-                : entry.AvatarPendantUrl;
+            var pendantUrl = isOs
+                ? null
+                : userInfo != null && newUserFullInfo.retcode == 0
+                    ? AccountAvatarPendant.NormalizeUrl(userInfo.pendant)
+                    : entry.AvatarPendantUrl;
             var server = role?.region_name ??
                          (isOs ? "Account_Server_Global".GetLocalized() : "Account_Server_CN".GetLocalized());
             var level = role?.level.ToString() ?? "";

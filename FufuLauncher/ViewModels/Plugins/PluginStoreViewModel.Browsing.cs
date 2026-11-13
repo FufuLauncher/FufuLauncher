@@ -273,8 +273,8 @@ public partial class PluginStoreViewModel
 
                 if (!string.Equals(translatedLongDescription, originalLongDescription, StringComparison.Ordinal))
                 {
-                    PluginContentTranslationService.RunOnUiThread(
-                        () => item.LongDescription = translatedLongDescription);
+                    PluginContentTranslationService.RunOnUiThread(() =>
+                        item.LongDescription = translatedLongDescription);
                 }
             }
         }

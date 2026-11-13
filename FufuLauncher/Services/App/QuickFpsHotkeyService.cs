@@ -95,7 +95,8 @@ public sealed class QuickFpsHotkeyService : IDisposable
 
             DebugLog.Info("QuickFpsHotkeyService", $"Initialize done: {Describe(settings)}");
             DebugLog.Info("QuickFpsHotkeyService", $"Game process names: {string.Join(", ", processNames)}");
-            DebugLog.Info("QuickFpsHotkeyService", $"Main plugin config: {GetMainPluginConfigPath()} (exists={File.Exists(GetMainPluginConfigPath())})");
+            DebugLog.Info("QuickFpsHotkeyService",
+                $"Main plugin config: {GetMainPluginConfigPath()} (exists={File.Exists(GetMainPluginConfigPath())})");
             DebugLog.Info("QuickFpsHotkeyService", $"Lightweight mode: {_lightweightPlugin.IsLightweightMode}");
         }
         catch (Exception ex)
@@ -244,7 +245,8 @@ public sealed class QuickFpsHotkeyService : IDisposable
             if (isRunning != wasRunning)
             {
                 _gameRunning = isRunning;
-                DebugLog.Info("QuickFpsHotkeyService", isRunning ? "Game running detected" : "Game not running detected");
+                DebugLog.Info("QuickFpsHotkeyService",
+                    isRunning ? "Game running detected" : "Game not running detected");
             }
 
             wasRunning = isRunning;
@@ -489,7 +491,7 @@ public sealed class QuickFpsHotkeyService : IDisposable
         }
 
         DebugLog.Info("QuickFpsHotkeyService", $"Hotkey matched: enabled={settings.Enabled}, " +
-            $"listenOnlyWhileGame={settings.ListenOnlyWhileGameRunning}, gameRunning={_gameRunning}");
+                                               $"listenOnlyWhileGame={settings.ListenOnlyWhileGameRunning}, gameRunning={_gameRunning}");
 
         if (!settings.Enabled)
         {
@@ -537,7 +539,8 @@ public sealed class QuickFpsHotkeyService : IDisposable
         }
 
         var current = ReadTargetFps(GetMainPluginConfigPath());
-        DebugLog.Info("QuickFpsHotkeyService", $"Adjust matched: {(increase ? "increase" : "decrease")}, current={current}, step={settings.AdjustStep}");
+        DebugLog.Info("QuickFpsHotkeyService",
+            $"Adjust matched: {(increase ? "increase" : "decrease")}, current={current}, step={settings.AdjustStep}");
 
         if (current < 1)
         {
@@ -644,8 +647,8 @@ public sealed class QuickFpsHotkeyService : IDisposable
             }
 
             var valueKey = section.Keys
-                .FirstOrDefault(key => key.Equals(TargetFpsValueKey, StringComparison.OrdinalIgnoreCase))
-                ?? TargetFpsValueKey;
+                               .FirstOrDefault(key => key.Equals(TargetFpsValueKey, StringComparison.OrdinalIgnoreCase))
+                           ?? TargetFpsValueKey;
             section[valueKey] = fps.ToString(CultureInfo.InvariantCulture);
             var options = new JsonSerializerOptions { WriteIndented = true };
             File.WriteAllText(preset.FilePath, JsonSerializer.Serialize(preset, options));

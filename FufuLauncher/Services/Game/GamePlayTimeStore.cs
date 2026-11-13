@@ -224,7 +224,8 @@ public sealed class GamePlayTimeStore
         await WriteAtomicallyAsync(AppPaths.GamePlayTimeFile, json, cancellationToken);
     }
 
-    public async Task<string> BuildCloudPlayTimeJsonAsync(string appVersion, CancellationToken cancellationToken = default)
+    public async Task<string> BuildCloudPlayTimeJsonAsync(string appVersion,
+        CancellationToken cancellationToken = default)
     {
         await EnsureInitializedAsync(cancellationToken);
 
@@ -273,7 +274,8 @@ public sealed class GamePlayTimeStore
         return JsonSerializer.Serialize(cloudDoc, CompactCloudJsonOptions);
     }
 
-    public async Task<PlayTimeMergeResult> MergeCloudPlayTimeJsonAsync(string cloudJson, CancellationToken cancellationToken = default)
+    public async Task<PlayTimeMergeResult> MergeCloudPlayTimeJsonAsync(string cloudJson,
+        CancellationToken cancellationToken = default)
     {
         if (!TryParseCloudDocument(cloudJson, out var incomingDoc) || incomingDoc == null)
         {
@@ -428,8 +430,12 @@ public sealed class GamePlayTimeStore
             {
                 Info = new PlayTimeCloudInfo
                 {
-                    ExportApp = string.IsNullOrWhiteSpace(existingCloud.Info.ExportApp) ? "FufuLauncher" : existingCloud.Info.ExportApp,
-                    ExportAppVersion = string.IsNullOrWhiteSpace(existingCloud.Info.ExportAppVersion) ? normalizedVersion : existingCloud.Info.ExportAppVersion,
+                    ExportApp = string.IsNullOrWhiteSpace(existingCloud.Info.ExportApp)
+                        ? "FufuLauncher"
+                        : existingCloud.Info.ExportApp,
+                    ExportAppVersion = string.IsNullOrWhiteSpace(existingCloud.Info.ExportAppVersion)
+                        ? normalizedVersion
+                        : existingCloud.Info.ExportAppVersion,
                     PlaytimeVersion = CloudPlayTimeVersion,
                     ExportTimestamp = existingCloud.Info.ExportTimestamp > 0
                         ? existingCloud.Info.ExportTimestamp
@@ -518,7 +524,8 @@ public sealed class GamePlayTimeStore
         if (merge.OverlapDeduplicatedSeconds > 0)
         {
             var dedupText = FormatSecondsReadable(merge.OverlapDeduplicatedSeconds);
-            return string.Format("CloudSync_PlayTimeMergedOverlapFormat".GetLocalized(), slot, addedText, dedupText, totalText);
+            return string.Format("CloudSync_PlayTimeMergedOverlapFormat".GetLocalized(), slot, addedText, dedupText,
+                totalText);
         }
 
         return string.Format("CloudSync_PlayTimeMergedAddedFormat".GetLocalized(), slot, addedText, totalText);
@@ -573,8 +580,10 @@ public sealed class GamePlayTimeStore
             {
                 return false;
             }
+
             if (!root.TryGetProperty("segments", out var segEl) || segEl.ValueKind != JsonValueKind.Array) return false;
-            if (!root.TryGetProperty("daily_seconds", out var dailyEl) || dailyEl.ValueKind != JsonValueKind.Object) return false;
+            if (!root.TryGetProperty("daily_seconds", out var dailyEl) ||
+                dailyEl.ValueKind != JsonValueKind.Object) return false;
 
             var parsed = JsonSerializer.Deserialize<PlayTimeCloudDocument>(rawJson, CompactCloudJsonOptions);
             if (parsed?.Info == null || parsed.Segments == null || parsed.DailySeconds == null) return false;
@@ -583,10 +592,12 @@ public sealed class GamePlayTimeStore
             {
                 if (seg == null || seg.Start < 0 || seg.End < seg.Start) return false;
             }
+
             foreach (var kv in parsed.DailySeconds)
             {
                 if (!IsValidDateKey(kv.Key) || kv.Value < 0) return false;
             }
+
             if (parsed.LegacyDailySeconds != null)
             {
                 foreach (var kv in parsed.LegacyDailySeconds)
@@ -632,7 +643,8 @@ public sealed class GamePlayTimeStore
             var segSec = Math.Max(0, segDaily.GetValueOrDefault(dateKey));
             var computed = legacySec + segSec;
 
-            if (beforeDailyFloor != null && beforeDailyFloor.TryGetValue(dateKey, out var floorSec) && computed < floorSec)
+            if (beforeDailyFloor != null && beforeDailyFloor.TryGetValue(dateKey, out var floorSec) &&
+                computed < floorSec)
             {
                 var deficit = floorSec - computed;
                 legacySec += deficit;
@@ -701,10 +713,12 @@ public sealed class GamePlayTimeStore
             var d = segments[i].End - segments[i].Start;
             if (d > 0) sum += d;
         }
+
         return sum;
     }
 
-    private static Dictionary<string, long> ComputeSegmentDailySeconds(IReadOnlyList<PlayTimeSegment> normalizedSegments)
+    private static Dictionary<string, long> ComputeSegmentDailySeconds(
+        IReadOnlyList<PlayTimeSegment> normalizedSegments)
     {
         var result = new Dictionary<string, long>(StringComparer.Ordinal);
         for (var i = 0; i < normalizedSegments.Count; i++)
@@ -727,6 +741,7 @@ public sealed class GamePlayTimeStore
                     var key = current.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
                     result[key] = result.GetValueOrDefault(key) + delta;
                 }
+
                 current = sliceEnd;
             }
         }

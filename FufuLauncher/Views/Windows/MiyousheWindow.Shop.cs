@@ -62,7 +62,9 @@ public sealed partial class MiyousheWindow
         var selected = _shopGames.FirstOrDefault(game => game.Key == _shopGameKey);
         if (selected == null && _shopGameKey is { } key)
             selected = new(key, _communityGame?.Name ?? all.Name);
-        var choices = selected != null && !_shopGames.Contains(selected) ? _shopGames.Append(selected).ToArray() : _shopGames;
+        var choices = selected != null && !_shopGames.Contains(selected)
+            ? _shopGames.Append(selected).ToArray()
+            : _shopGames;
         SetGameSelector(choices, selected ?? all, "MiyousheShop_GameFilter");
     }
 

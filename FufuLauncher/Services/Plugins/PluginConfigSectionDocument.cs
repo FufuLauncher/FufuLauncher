@@ -14,20 +14,38 @@ internal sealed class PluginConfigSection
         get;
     }
 
-    public List<string> Lines { get; } = [];
+    public List<string> Lines
+    {
+        get;
+    } = [];
 
-    public List<string> KeyOrder { get; } = [];
+    public List<string> KeyOrder
+    {
+        get;
+    } = [];
 
-    public Dictionary<string, string> KeyLines { get; } = new(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, string> KeyLines
+    {
+        get;
+    } = new(StringComparer.OrdinalIgnoreCase);
 
-    public Dictionary<string, string> Values { get; } = new(StringComparer.OrdinalIgnoreCase);
+    public Dictionary<string, string> Values
+    {
+        get;
+    } = new(StringComparer.OrdinalIgnoreCase);
 }
 
 internal sealed class PluginConfigDocument
 {
-    public List<string> PrefixLines { get; } = [];
+    public List<string> PrefixLines
+    {
+        get;
+    } = [];
 
-    public List<PluginConfigSection> Sections { get; } = [];
+    public List<PluginConfigSection> Sections
+    {
+        get;
+    } = [];
 
     public static PluginConfigDocument Parse(IReadOnlyList<string> lines)
     {
@@ -68,7 +86,8 @@ internal sealed class PluginConfigDocument
     }
 
     public PluginConfigSection? Find(string sectionName) =>
-        Sections.FirstOrDefault(section => string.Equals(section.Name, sectionName, StringComparison.OrdinalIgnoreCase));
+        Sections.FirstOrDefault(section =>
+            string.Equals(section.Name, sectionName, StringComparison.OrdinalIgnoreCase));
 
     public string? GetValue(string sectionName, string key)
     {

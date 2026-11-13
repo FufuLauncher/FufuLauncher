@@ -45,6 +45,7 @@ public sealed partial class CloudSyncWindow : Window
         {
             window.SelectTab(initialTabTag);
         }
+
         window.Activate();
     }
 
@@ -228,7 +229,8 @@ public sealed partial class CloudSyncWindow : Window
             }
             else if (!string.IsNullOrWhiteSpace(_cloudSync.LastStartupMessage))
             {
-                ShowMessage(InfoBarSeverity.Warning, "CloudSync_SessionExpiredTitle".GetLocalized(), _cloudSync.LastStartupMessage);
+                ShowMessage(InfoBarSeverity.Warning, "CloudSync_SessionExpiredTitle".GetLocalized(),
+                    _cloudSync.LastStartupMessage);
             }
         }
         finally
@@ -311,8 +313,10 @@ public sealed partial class CloudSyncWindow : Window
         {
             if (_cloudSync.IsLocked && tag != "Account")
             {
-                ShowMessage(InfoBarSeverity.Warning, "CloudSync_LockedBannerTitle".GetLocalized(), "CloudSync_LockedBannerDetail".GetLocalized());
+                ShowMessage(InfoBarSeverity.Warning, "CloudSync_LockedBannerTitle".GetLocalized(),
+                    "CloudSync_LockedBannerDetail".GetLocalized());
             }
+
             return;
         }
 
@@ -331,7 +335,7 @@ public sealed partial class CloudSyncWindow : Window
         if (AuthModeSelector == null || PasswordBox == null || ConfirmPasswordBox == null ||
             OtpInputRow == null || AuthSubmitButton == null) return;
         var mode = AuthModeSelector.SelectedIndex;
-        
+
         if (mode == 0)
         {
             PasswordBox.Header = "CloudSync_PasswordHeader".GetLocalized();
@@ -363,7 +367,8 @@ public sealed partial class CloudSyncWindow : Window
         var email = EmailTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(email) || !email.Contains('@'))
         {
-            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrInvalidEmail".GetLocalized());
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                "CloudSync_ErrInvalidEmail".GetLocalized());
             return;
         }
 
@@ -382,10 +387,12 @@ public sealed partial class CloudSyncWindow : Window
                 return;
             }
 
-            var captchaRes = await CloudCaptchaWindow.ShowChallengeAsync<CloudOtpSentData>(_cloudSync, startRes.Challenge);
+            var captchaRes =
+                await CloudCaptchaWindow.ShowChallengeAsync<CloudOtpSentData>(_cloudSync, startRes.Challenge);
             if (captchaRes == null)
             {
-                ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(), "CloudSync_MsgCaptchaCancelled".GetLocalized());
+                ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(),
+                    "CloudSync_MsgCaptchaCancelled".GetLocalized());
                 return;
             }
 
@@ -417,13 +424,15 @@ public sealed partial class CloudSyncWindow : Window
 
         if (string.IsNullOrWhiteSpace(email) || !email.Contains('@'))
         {
-            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrInvalidEmail".GetLocalized());
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                "CloudSync_ErrInvalidEmail".GetLocalized());
             return;
         }
 
         if (string.IsNullOrEmpty(password) || password.Length < 8)
         {
-            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrPasswordLength".GetLocalized());
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                "CloudSync_ErrPasswordLength".GetLocalized());
             return;
         }
 
@@ -440,10 +449,12 @@ public sealed partial class CloudSyncWindow : Window
                     return;
                 }
 
-                var captchaRes = await CloudCaptchaWindow.ShowChallengeAsync<CloudLoginSessionData>(_cloudSync, startRes.Challenge);
+                var captchaRes =
+                    await CloudCaptchaWindow.ShowChallengeAsync<CloudLoginSessionData>(_cloudSync, startRes.Challenge);
                 if (captchaRes == null)
                 {
-                    ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(), "CloudSync_MsgCaptchaCancelled".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(),
+                        "CloudSync_MsgCaptchaCancelled".GetLocalized());
                     return;
                 }
 
@@ -453,8 +464,10 @@ public sealed partial class CloudSyncWindow : Window
                     PasswordBox.Password = string.Empty;
                     ShowMessage(
                         captchaRes.Data.Locked ? InfoBarSeverity.Warning : InfoBarSeverity.Success,
-                        (captchaRes.Data.Locked ? "CloudSync_MsgLoginLockedTitle" : "CloudSync_MsgLoginSuccess").GetLocalized(),
-                        (captchaRes.Data.Locked ? "CloudSync_MsgLoginLockedDetail" : "CloudSync_MsgLoginSuccessDetail").GetLocalized());
+                        (captchaRes.Data.Locked ? "CloudSync_MsgLoginLockedTitle" : "CloudSync_MsgLoginSuccess")
+                        .GetLocalized(),
+                        (captchaRes.Data.Locked ? "CloudSync_MsgLoginLockedDetail" : "CloudSync_MsgLoginSuccessDetail")
+                        .GetLocalized());
                     RefreshAccountUiState();
                 }
                 else
@@ -467,14 +480,16 @@ public sealed partial class CloudSyncWindow : Window
             {
                 if (password != ConfirmPasswordBox.Password)
                 {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrPasswordMismatch".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                        "CloudSync_ErrPasswordMismatch".GetLocalized());
                     return;
                 }
 
                 var otp = OtpTextBox.Text.Trim();
                 if (string.IsNullOrWhiteSpace(otp))
                 {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrEnterCodeFirst".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                        "CloudSync_ErrEnterCodeFirst".GetLocalized());
                     return;
                 }
 
@@ -484,7 +499,8 @@ public sealed partial class CloudSyncWindow : Window
                     PasswordBox.Password = string.Empty;
                     ConfirmPasswordBox.Password = string.Empty;
                     OtpTextBox.Text = string.Empty;
-                    ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgRegisterSuccess".GetLocalized(), "CloudSync_MsgRegisterSuccessDetail".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgRegisterSuccess".GetLocalized(),
+                        "CloudSync_MsgRegisterSuccessDetail".GetLocalized());
                     RefreshAccountUiState();
                 }
                 else
@@ -497,14 +513,16 @@ public sealed partial class CloudSyncWindow : Window
             {
                 if (password != ConfirmPasswordBox.Password)
                 {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrPasswordMismatch".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                        "CloudSync_ErrPasswordMismatch".GetLocalized());
                     return;
                 }
 
                 var otp = OtpTextBox.Text.Trim();
                 if (string.IsNullOrWhiteSpace(otp))
                 {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ErrEnterCodeFirst".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                        "CloudSync_ErrEnterCodeFirst".GetLocalized());
                     return;
                 }
 
@@ -515,7 +533,8 @@ public sealed partial class CloudSyncWindow : Window
                     ConfirmPasswordBox.Password = string.Empty;
                     OtpTextBox.Text = string.Empty;
                     AuthModeSelector.SelectedIndex = 0;
-                    ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgResetSuccess".GetLocalized(), "CloudSync_MsgResetSuccessDetail".GetLocalized());
+                    ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgResetSuccess".GetLocalized(),
+                        "CloudSync_MsgResetSuccessDetail".GetLocalized());
                 }
                 else
                 {
@@ -539,7 +558,8 @@ public sealed partial class CloudSyncWindow : Window
             var res = await _cloudSync.GetAccountStatusAsync();
             if (res.Ok)
             {
-                var statusLabel = (_cloudSync.IsLocked ? "CloudSync_StatusLocked" : "CloudSync_StatusNormal").GetLocalized();
+                var statusLabel = (_cloudSync.IsLocked ? "CloudSync_StatusLocked" : "CloudSync_StatusNormal")
+                    .GetLocalized();
                 ShowMessage(InfoBarSeverity.Success,
                     "CloudSync_RefreshDoneTitle".GetLocalized(),
                     string.Format("CloudSync_RefreshStatusResultFormat".GetLocalized(), statusLabel));
@@ -597,7 +617,8 @@ public sealed partial class CloudSyncWindow : Window
         {
             Title = actionName,
             Content = panel,
-            PrimaryButtonText = (lockAccount ? "CloudSync_ConfirmLockBtn" : "CloudSync_ConfirmUnlockBtn").GetLocalized(),
+            PrimaryButtonText =
+                (lockAccount ? "CloudSync_ConfirmLockBtn" : "CloudSync_ConfirmUnlockBtn").GetLocalized(),
             CloseButtonText = "CloudSync_CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = RootGrid.XamlRoot
@@ -623,7 +644,8 @@ public sealed partial class CloudSyncWindow : Window
 
                 if (sendRes.RequiresCaptcha && sendRes.Challenge != null)
                 {
-                    var captchaRes = await CloudCaptchaWindow.ShowChallengeAsync<CloudOtpSentData>(_cloudSync, sendRes.Challenge);
+                    var captchaRes =
+                        await CloudCaptchaWindow.ShowChallengeAsync<CloudOtpSentData>(_cloudSync, sendRes.Challenge);
                     if (dialogClosed)
                     {
                         return;
@@ -655,13 +677,15 @@ public sealed partial class CloudSyncWindow : Window
                 if (sendRes.Ok)
                 {
                     feedbackText.Foreground = (Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
-                    feedbackText.Text = string.Format("CloudSync_EmailOtpSentDetail".GetLocalized(), _cloudSync.CurrentEmail);
+                    feedbackText.Text = string.Format("CloudSync_EmailOtpSentDetail".GetLocalized(),
+                        _cloudSync.CurrentEmail);
                     codeBox.Focus(FocusState.Programmatic);
                 }
                 else
                 {
                     feedbackText.Foreground = (Brush)Application.Current.Resources["SystemFillColorCriticalBrush"];
-                    feedbackText.Text = _cloudSync.FormatFriendlyError(sendRes.Code, sendRes.Message, sendRes.HttpStatusCode);
+                    feedbackText.Text =
+                        _cloudSync.FormatFriendlyError(sendRes.Code, sendRes.Message, sendRes.HttpStatusCode);
                 }
             }
             finally
@@ -762,7 +786,8 @@ public sealed partial class CloudSyncWindow : Window
     {
         if (_cloudSync.IsLocked)
         {
-            ShowMessage(InfoBarSeverity.Warning, "CloudSync_CannotOperateTitle".GetLocalized(), "CloudSync_LockBlockedDelete".GetLocalized());
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_CannotOperateTitle".GetLocalized(),
+                "CloudSync_LockBlockedDelete".GetLocalized());
             return;
         }
 
@@ -858,6 +883,7 @@ public sealed partial class CloudSyncWindow : Window
                         "CloudSync_QuotaFailedTitle".GetLocalized(),
                         _cloudSync.FormatFriendlyError(res.Code, res.Message, res.HttpStatusCode));
                 }
+
                 RefreshAccountUiState();
                 return;
             }
@@ -898,10 +924,12 @@ public sealed partial class CloudSyncWindow : Window
         QuotaOpsValueText.Text = string.Format(usedFmt, q.Daily.Ops.Used, q.Daily.Ops.Limit, q.Daily.Ops.Remaining);
         QuotaOpsBar.Value = CalcPercent(q.Daily.Ops.Used, q.Daily.Ops.Limit);
 
-        QuotaUploadsValueText.Text = string.Format(usedFmt, q.Daily.Uploads.Used, q.Daily.Uploads.Limit, q.Daily.Uploads.Remaining);
+        QuotaUploadsValueText.Text =
+            string.Format(usedFmt, q.Daily.Uploads.Used, q.Daily.Uploads.Limit, q.Daily.Uploads.Remaining);
         QuotaUploadsBar.Value = CalcPercent(q.Daily.Uploads.Used, q.Daily.Uploads.Limit);
 
-        QuotaDeletesValueText.Text = string.Format(usedFmt, q.Daily.Deletes.Used, q.Daily.Deletes.Limit, q.Daily.Deletes.Remaining);
+        QuotaDeletesValueText.Text =
+            string.Format(usedFmt, q.Daily.Deletes.Used, q.Daily.Deletes.Limit, q.Daily.Deletes.Remaining);
         QuotaDeletesBar.Value = CalcPercent(q.Daily.Deletes.Used, q.Daily.Deletes.Limit);
 
         if (q.Upgrade.Active)
@@ -917,7 +945,8 @@ public sealed partial class CloudSyncWindow : Window
                     delta.UserDailyMaxUploads,
                     delta.UserDailyMaxDeletes,
                     delta.UserDailyMaxOps);
-            UpgradeStatusText.Text = string.Format("CloudSync_UpgradeActiveFormat".GetLocalized(), expLocal, deltaSummary);
+            UpgradeStatusText.Text =
+                string.Format("CloudSync_UpgradeActiveFormat".GetLocalized(), expLocal, deltaSummary);
             UpgradeStatusText.Foreground = (Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
         }
         else
@@ -932,14 +961,16 @@ public sealed partial class CloudSyncWindow : Window
         if (_isBusy) return;
         if (!_cloudSync.IsLoggedIn)
         {
-            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_MsgLoginRequiredFirst".GetLocalized());
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                "CloudSync_MsgLoginRequiredFirst".GetLocalized());
             return;
         }
 
         var code = ActivationCodeTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(code))
         {
-            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(), "CloudSync_ActivatePromptEmpty".GetLocalized());
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                "CloudSync_ActivatePromptEmpty".GetLocalized());
             return;
         }
 
@@ -950,7 +981,8 @@ public sealed partial class CloudSyncWindow : Window
             if (res.Ok)
             {
                 ActivationCodeTextBox.Text = string.Empty;
-                ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgActivateSuccess".GetLocalized(), "CloudSync_MsgActivateSuccessDetail".GetLocalized());
+                ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgActivateSuccess".GetLocalized(),
+                    "CloudSync_MsgActivateSuccessDetail".GetLocalized());
                 await RefreshQuotaInternalAsync(silent: true);
             }
             else
@@ -1002,6 +1034,7 @@ public sealed partial class CloudSyncWindow : Window
                         "CloudSync_ArchivesLoadFailedTitle".GetLocalized(),
                         _cloudSync.FormatFriendlyError(res.Code, res.Message, res.HttpStatusCode));
                 }
+
                 RefreshAccountUiState();
                 return;
             }
@@ -1044,7 +1077,8 @@ public sealed partial class CloudSyncWindow : Window
             msg =>
             {
                 DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] PickOpenFile failed: {msg}");
-                ShowMessage(InfoBarSeverity.Error, "CloudSync_OpenFileFailedTitle".GetLocalized(), "CloudSync_OpenFileFailedTitle".GetLocalized());
+                ShowMessage(InfoBarSeverity.Error, "CloudSync_OpenFileFailedTitle".GetLocalized(),
+                    "CloudSync_OpenFileFailedTitle".GetLocalized());
             });
         if (string.IsNullOrEmpty(path)) return;
 
@@ -1056,7 +1090,8 @@ public sealed partial class CloudSyncWindow : Window
         catch (Exception ex)
         {
             DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] ReadAllText failed: {ex.Message}");
-            ShowMessage(InfoBarSeverity.Error, "CloudSync_ReadFileFailedTitle".GetLocalized(), "CloudSync_ReadFileFailedTitle".GetLocalized());
+            ShowMessage(InfoBarSeverity.Error, "CloudSync_ReadFileFailedTitle".GetLocalized(),
+                "CloudSync_ReadFileFailedTitle".GetLocalized());
             return;
         }
 
@@ -1243,7 +1278,8 @@ public sealed partial class CloudSyncWindow : Window
             msg =>
             {
                 DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] PickSaveFile failed: {msg}");
-                ShowMessage(InfoBarSeverity.Error, "CloudSync_SaveFileFailedTitle".GetLocalized(), "CloudSync_SaveFileFailedTitle".GetLocalized());
+                ShowMessage(InfoBarSeverity.Error, "CloudSync_SaveFileFailedTitle".GetLocalized(),
+                    "CloudSync_SaveFileFailedTitle".GetLocalized());
             });
         if (string.IsNullOrEmpty(savePath)) return;
 
@@ -1257,7 +1293,8 @@ public sealed partial class CloudSyncWindow : Window
         catch (Exception ex)
         {
             DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] WriteAllText failed: {ex.Message}");
-            ShowMessage(InfoBarSeverity.Error, "CloudSync_SaveFileFailedTitle".GetLocalized(), "CloudSync_SaveFileFailedTitle".GetLocalized());
+            ShowMessage(InfoBarSeverity.Error, "CloudSync_SaveFileFailedTitle".GetLocalized(),
+                "CloudSync_SaveFileFailedTitle".GetLocalized());
         }
     }
 
@@ -1272,14 +1309,16 @@ public sealed partial class CloudSyncWindow : Window
             msg =>
             {
                 DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] PickOpenFile failed: {msg}");
-                ShowMessage(InfoBarSeverity.Error, "CloudSync_OpenFileFailedTitle".GetLocalized(), "CloudSync_OpenFileFailedTitle".GetLocalized());
+                ShowMessage(InfoBarSeverity.Error, "CloudSync_OpenFileFailedTitle".GetLocalized(),
+                    "CloudSync_OpenFileFailedTitle".GetLocalized());
             });
         if (string.IsNullOrEmpty(path)) return;
 
         var confirm = new ContentDialog
         {
             Title = "CloudSync_ConfirmOverwriteTitle".GetLocalized(),
-            Content = string.Format("CloudSync_ConfirmOverwriteDiskMsg".GetLocalized(), Path.GetFileName(path), item.Slot),
+            Content = string.Format("CloudSync_ConfirmOverwriteDiskMsg".GetLocalized(), Path.GetFileName(path),
+                item.Slot),
             PrimaryButtonText = "CloudSync_ConfirmOverwriteBtn".GetLocalized(),
             CloseButtonText = "CloudSync_CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
@@ -1320,7 +1359,8 @@ public sealed partial class CloudSyncWindow : Window
         catch (Exception ex)
         {
             DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] Overwrite failed: {ex.Message}");
-            ShowMessage(InfoBarSeverity.Error, "CloudSync_ReadFileFailedTitle".GetLocalized(), "CloudSync_ReadFileFailedTitle".GetLocalized());
+            ShowMessage(InfoBarSeverity.Error, "CloudSync_ReadFileFailedTitle".GetLocalized(),
+                "CloudSync_ReadFileFailedTitle".GetLocalized());
         }
         finally
         {
@@ -1373,7 +1413,8 @@ public sealed partial class CloudSyncWindow : Window
         SetBusy(true);
         try
         {
-            var res = await _cloudSync.RenameArchiveAsync(item.DataType, item.Slot, newSlot, overwriteCheck.IsChecked == true);
+            var res = await _cloudSync.RenameArchiveAsync(item.DataType, item.Slot, newSlot,
+                overwriteCheck.IsChecked == true);
             if (res.Ok)
             {
                 ShowMessage(InfoBarSeverity.Success,

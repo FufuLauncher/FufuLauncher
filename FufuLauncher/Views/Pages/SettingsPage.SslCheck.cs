@@ -89,7 +89,13 @@ public sealed partial class SettingsPage
                 TryHideDialog(progressDialog);
                 if (dialogTask != null)
                 {
-                    try { await dialogTask; } catch { }
+                    try
+                    {
+                        await dialogTask;
+                    }
+                    catch
+                    {
+                    }
                 }
 
                 return;
@@ -100,7 +106,13 @@ public sealed partial class SettingsPage
                 TryHideDialog(progressDialog);
                 if (dialogTask != null)
                 {
-                    try { await dialogTask; } catch { }
+                    try
+                    {
+                        await dialogTask;
+                    }
+                    catch
+                    {
+                    }
                 }
 
                 await ShowSafeDialogAsync(new ContentDialog
@@ -119,7 +131,13 @@ public sealed partial class SettingsPage
             TryHideDialog(progressDialog);
             if (dialogTask != null)
             {
-                try { await dialogTask; } catch { }
+                try
+                {
+                    await dialogTask;
+                }
+                catch
+                {
+                }
             }
 
             if (cts.IsCancellationRequested)

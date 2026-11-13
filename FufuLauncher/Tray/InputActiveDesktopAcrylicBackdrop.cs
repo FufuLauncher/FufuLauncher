@@ -13,7 +13,8 @@ namespace FufuLauncher.Tray;
 
 internal sealed partial class InputActiveDesktopAcrylicBackdrop : Microsoft.UI.Xaml.Media.SystemBackdrop
 {
-    private readonly ConcurrentDictionary<ICompositionSupportsSystemBackdrop, DesktopAcrylicController> _controllers = new();
+    private readonly ConcurrentDictionary<ICompositionSupportsSystemBackdrop, DesktopAcrylicController> _controllers =
+        new();
 
     protected override void OnTargetConnected(ICompositionSupportsSystemBackdrop target, XamlRoot xamlRoot)
     {

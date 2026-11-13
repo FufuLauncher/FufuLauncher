@@ -30,12 +30,12 @@ internal sealed class MiyousheShopPlans(ILocalSettingsService settings)
         if (plan.Target == null || string.IsNullOrWhiteSpace(plan.AccountId) ||
             (plan.Scheduled && plan.OpensAt <= DateTimeOffset.UtcNow) ||
             items.Any(item => item.AccountId == plan.AccountId &&
-                ((!plan.Scheduled && item.Scheduled && item.Status == MiyousheShopPlanStatus.Pending &&
-                  item.OpensAt <= DateTimeOffset.UtcNow.AddSeconds(12)) ||
-                 (item.GoodsId == plan.GoodsId &&
-                  (item.Status is MiyousheShopPlanStatus.Submitting or MiyousheShopPlanStatus.Unknown ||
-                   (item.Status == MiyousheShopPlanStatus.Pending &&
-                    (!plan.Scheduled || item.OpensAt == plan.OpensAt)))))))
+                              ((!plan.Scheduled && item.Scheduled && item.Status == MiyousheShopPlanStatus.Pending &&
+                                item.OpensAt <= DateTimeOffset.UtcNow.AddSeconds(12)) ||
+                               (item.GoodsId == plan.GoodsId &&
+                                (item.Status is MiyousheShopPlanStatus.Submitting or MiyousheShopPlanStatus.Unknown ||
+                                 (item.Status == MiyousheShopPlanStatus.Pending &&
+                                  (!plan.Scheduled || item.OpensAt == plan.OpensAt)))))))
             return false;
 
         items.Add(plan);
@@ -75,6 +75,7 @@ internal sealed class MiyousheShopPlans(ILocalSettingsService settings)
             items[i] = item with { Status = status };
             changed = true;
         }
+
         return changed;
     });
 
@@ -106,6 +107,7 @@ internal sealed class MiyousheShopPlans(ILocalSettingsService settings)
         {
             _gate.Release();
         }
+
         Changed?.Invoke();
         return true;
     }

@@ -54,8 +54,10 @@ namespace FufuLauncher.Constants
 
         public const string MihoyoBbsWebApi = "https://api-takumi.mihoyo.com";
         public const string MihoyoBbsAccountInfoUrl = MihoyoBbsWebApi + "/binding/api/getUserGameRolesByCookie";
+
         public const string MihoyoBbsRolesByCookieTokenUrl =
             "https://passport-api.mihoyo.com/binding/api/getUserGameRolesByCookieToken";
+
         public const string MihoyoBbsCheckinRewardsUrl = MihoyoBbsWebApi + "/event/luna/home";
         public const string MihoyoBbsIsSignUrl = MihoyoBbsWebApi + "/event/luna/info";
         public const string MihoyoBbsSignUrl = MihoyoBbsWebApi + "/event/luna/sign";
@@ -461,7 +463,10 @@ namespace FufuLauncher.Constants
 
         public const string BingWallpaperArchivePath = "/HPImageArchive.aspx";
         public const string BingWallpaperHistoricalBaseUrl = "https://bingw.jasonzeng.dev";
-        public const string BingWallpaperHistoricalRandomUrl = BingWallpaperHistoricalBaseUrl + "/?index=random&format=json";
+
+        public const string BingWallpaperHistoricalRandomUrl =
+            BingWallpaperHistoricalBaseUrl + "/?index=random&format=json";
+
         public const string RandomBackgroundBaseUrl = "https://image.fu1.fun/";
         public const string RandomBackgroundHomeUrl = RandomBackgroundBaseUrl + "?type=home";
         public const string RandomBackgroundCgUrl = RandomBackgroundBaseUrl + "?type=cg";

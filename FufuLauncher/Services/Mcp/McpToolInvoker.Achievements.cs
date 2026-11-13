@@ -141,9 +141,11 @@ public sealed partial class McpToolInvoker
         var ordered = order switch
         {
             "progress_asc" => matched.OrderBy(item => item.Percent).ThenBy(item => item.Name, StringComparer.Ordinal),
-            "progress_desc" => matched.OrderByDescending(item => item.Percent).ThenBy(item => item.Name, StringComparer.Ordinal),
+            "progress_desc" => matched.OrderByDescending(item => item.Percent)
+                .ThenBy(item => item.Name, StringComparer.Ordinal),
             "name" => matched.OrderBy(item => item.Name, StringComparer.Ordinal),
-            "total_desc" => matched.OrderByDescending(item => item.Total).ThenBy(item => item.Name, StringComparer.Ordinal),
+            "total_desc" => matched.OrderByDescending(item => item.Total)
+                .ThenBy(item => item.Name, StringComparer.Ordinal),
             _ => matched.AsEnumerable()
         };
 

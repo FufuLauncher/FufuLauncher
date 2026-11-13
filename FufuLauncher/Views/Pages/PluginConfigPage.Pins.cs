@@ -54,6 +54,7 @@ public sealed partial class PluginConfigPage
             {
                 item.IsPinned = pinned;
             }
+
             UpdateVisibleOptions(resetScroll: false);
         }
         catch (Exception ex)

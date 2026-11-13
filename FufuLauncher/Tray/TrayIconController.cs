@@ -29,7 +29,8 @@ internal sealed class TrayIconController : IDisposable
     private TrayContextMenu? _menu;
     private bool _disposed;
 
-    public TrayIconController(TaskbarIcon taskbarIcon, MainWindow mainWindow, IRelayCommand showWindowCommand, IRelayCommand exitCommand)
+    public TrayIconController(TaskbarIcon taskbarIcon, MainWindow mainWindow, IRelayCommand showWindowCommand,
+        IRelayCommand exitCommand)
     {
         _taskbarIcon = taskbarIcon;
         _mainWindow = mainWindow;

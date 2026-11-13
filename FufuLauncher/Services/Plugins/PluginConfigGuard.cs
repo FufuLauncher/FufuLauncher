@@ -219,7 +219,8 @@ public static class PluginConfigGuard
         _ => (new UTF8Encoding(false, true), 0)
     };
 
-    private static bool TryPrepare(string configPath, IReadOnlyList<string> liveLines, out PluginConfigBaseline baseline)
+    private static bool TryPrepare(string configPath, IReadOnlyList<string> liveLines,
+        out PluginConfigBaseline baseline)
     {
         baseline = null!;
 

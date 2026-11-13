@@ -34,6 +34,7 @@ public sealed partial class AccountPage
             {
                 CloudSyncWindow.ShowOrActivate("Account");
             }
+
             return;
         }
 
@@ -55,6 +56,7 @@ public sealed partial class AccountPage
             {
                 CloudSyncWindow.ShowOrActivate("Account");
             }
+
             return;
         }
 
@@ -406,7 +408,8 @@ public sealed partial class AccountPage
                         try
                         {
                             var json = await playTimeStore.BuildCloudPlayTimeJsonAsync(GetAppVersionString());
-                            var res = await cloudSync.UploadArchiveAsync("playtime", archive.Slot, json, overwrite: true);
+                            var res = await cloudSync.UploadArchiveAsync("playtime", archive.Slot, json,
+                                overwrite: true);
                             if (res.Ok)
                             {
                                 ShowFeedback(InfoBarSeverity.Success,
@@ -455,7 +458,8 @@ public sealed partial class AccountPage
                         flyout.Hide();
                         if (string.IsNullOrWhiteSpace(nextName) || nextName == archive.Slot) return;
 
-                        var res = await cloudSync.RenameArchiveAsync("playtime", archive.Slot, nextName, overwrite: false);
+                        var res = await cloudSync.RenameArchiveAsync("playtime", archive.Slot, nextName,
+                            overwrite: false);
                         if (res.Ok)
                         {
                             ShowFeedback(InfoBarSeverity.Success,
@@ -547,7 +551,9 @@ public sealed partial class AccountPage
                 var res = await cloudSync.UploadArchiveAsync("playtime", slot, json, overwriteCheck.IsChecked == true);
                 if (res.Ok)
                 {
-                    var msgKey = res.Data?.Overwritten == true ? "CloudSync_MsgOverwritten" : "CloudSync_MsgUploadedNew";
+                    var msgKey = res.Data?.Overwritten == true
+                        ? "CloudSync_MsgOverwritten"
+                        : "CloudSync_MsgUploadedNew";
                     ShowFeedback(InfoBarSeverity.Success,
                         "CloudSync_MsgUploadSuccess".GetLocalized(),
                         string.Format(msgKey.GetLocalized(), slot));

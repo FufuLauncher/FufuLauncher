@@ -218,8 +218,8 @@ public partial class PluginSettingsViewModel
         }
 
         var valueKey = section.Keys
-            .FirstOrDefault(key => key.Equals("Value", StringComparison.OrdinalIgnoreCase))
-            ?? "Value";
+                           .FirstOrDefault(key => key.Equals("Value", StringComparison.OrdinalIgnoreCase))
+                       ?? "Value";
         section[valueKey] = fps.ToString(CultureInfo.InvariantCulture);
     }
 

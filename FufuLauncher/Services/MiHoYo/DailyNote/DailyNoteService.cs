@@ -27,6 +27,7 @@ public sealed class DailyNoteService
     private const string Page = "v6.6.1-gr-cn_#/ys";
 
     private static readonly SemaphoreSlim _semaphore = new(1, 1);
+
     private static readonly HttpClient SharedHttpClient = new(new HttpClientHandler { UseCookies = false })
         { Timeout = TimeSpan.FromSeconds(15) };
 
@@ -68,6 +69,7 @@ public sealed class DailyNoteService
             string playerQuery = $"role_id={Uri.EscapeDataString(roleId)}&server={Uri.EscapeDataString(server)}";
 
             bool refreshAttempted = false;
+
             async Task<string> RequestWithRefreshAsync(Func<AccountContext, Task<string>> send)
             {
                 string response = await send(ctx);
@@ -151,7 +153,7 @@ public sealed class DailyNoteService
         }
 
         using var refreshService = _createTokenRefreshService();
-        
+
         var refreshed = await refreshService.RefreshCookieAsync(currentCookies, forceRefresh: true);
         if (refreshed is null || refreshed.Count == 0)
         {

@@ -341,7 +341,8 @@
                                                FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
                                 </Grid>
                             </Button>
-                            <Button Click="OnCloudArchiveManageClick" Style="{StaticResource AchievementActionButtonStyle}"
+                            <Button Click="OnCloudArchiveManageClick"
+                                    Style="{StaticResource AchievementActionButtonStyle}"
                                     ToolTipService.ToolTip="{helpers:Loc Key=CloudSync_AchievementTooltip}">
                                 <Grid ColumnSpacing="8">
                                     <Grid.ColumnDefinitions>
@@ -470,13 +471,13 @@
                                             HorizontalContentAlignment="Stretch" />
 
                                         <Expander FontFamily="{StaticResource AppGlobalFont}"
-                                            Visibility="{x:Bind GroupVisibility, Mode=OneWay}"
-                                            HorizontalAlignment="Stretch"
-                                            HorizontalContentAlignment="Stretch"
-                                            Background="{ThemeResource CardBackground}"
-                                            BorderBrush="{ThemeResource CardBorder}"
-                                            CornerRadius="6"
-                                            IsExpanded="True">
+                                                  Visibility="{x:Bind GroupVisibility, Mode=OneWay}"
+                                                  HorizontalAlignment="Stretch"
+                                                  HorizontalContentAlignment="Stretch"
+                                                  Background="{ThemeResource CardBackground}"
+                                                  BorderBrush="{ThemeResource CardBorder}"
+                                                  CornerRadius="6"
+                                                  IsExpanded="True">
 
                                             <Expander.Header>
                                                 <Grid HorizontalAlignment="Stretch" Margin="0,0,0,0">

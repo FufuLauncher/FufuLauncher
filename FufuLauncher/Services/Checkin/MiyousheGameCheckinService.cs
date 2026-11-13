@@ -137,7 +137,8 @@ public sealed class MiyousheGameCheckinService : IDisposable
         {
             string body =
                 JsonSerializer.Serialize(new { act_id = game.ActId, region = role.Region, uid = role.GameUid });
-            var sign = await RequestAsync<SignResponseData>(session, pacer, $"{game.ApiBase}{ApiEndpoints.GameCheckinSignPath}", game, body);
+            var sign = await RequestAsync<SignResponseData>(session, pacer,
+                $"{game.ApiBase}{ApiEndpoints.GameCheckinSignPath}", game, body);
             if (sign.RetCode != 0)
                 return new(game.GameBiz, game.Name, role.GameUid, false, sign.Message);
             if (sign.RetCode == 0 && sign.Data is { Success: not 0 })
@@ -210,9 +211,10 @@ public sealed class MiyousheGameCheckinService : IDisposable
             request.Headers.TryAddWithoutValidation("User-Agent", Tools.GetUserAgent(""));
             request.Headers.TryAddWithoutValidation("X-Requested-With", "com.mihoyo.hyperion");
             request.Headers.Referrer = new Uri(game?.Referer ?? (ApiEndpoints.ActMihoyoBase + "/"));
-            request.Headers.TryAddWithoutValidation("Origin", game?.Referer.StartsWith(ApiEndpoints.WebstaticSchemePrefix) == true
-                ? ApiEndpoints.WebstaticRefererUrl
-                : ApiEndpoints.ActMihoyoBase);
+            request.Headers.TryAddWithoutValidation("Origin",
+                game?.Referer.StartsWith(ApiEndpoints.WebstaticSchemePrefix) == true
+                    ? ApiEndpoints.WebstaticRefererUrl
+                    : ApiEndpoints.ActMihoyoBase);
             if (game?.SignGame != null) request.Headers.TryAddWithoutValidation("x-rpc-signgame", game.SignGame);
             if (body != null) request.Content = new StringContent(body, Encoding.UTF8, "application/json");
 

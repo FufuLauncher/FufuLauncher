@@ -195,7 +195,8 @@
                                                       IsItemClickEnabled="False">
                                                 <GridView.ItemContainerStyle>
                                                     <Style TargetType="GridViewItem">
-                                                        <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                                                        <Setter Property="FontFamily"
+                                                                Value="{StaticResource AppGlobalFont}" />
                                                         <Setter Property="Margin" Value="0,0,10,10" />
                                                         <Setter Property="Padding" Value="0" />
                                                     </Style>

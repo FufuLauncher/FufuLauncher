@@ -312,8 +312,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionAppearance}" Tag="AppearanceItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF592;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -323,8 +323,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=HomeCardDisplayTitle}" Tag="HomeCardsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF133;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -334,8 +334,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionGameAnnouncement}" Tag="GameAnnouncementItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF537;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -345,8 +345,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=WidgetItemsTitle}" Tag="WidgetsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE6C4;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -356,8 +356,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=NotesItemsTitle}" Tag="NotesItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF56B;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -367,8 +367,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionHomeText}" Tag="HomeTextItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF7E4;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -378,8 +378,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=ImageSource_Title}" Tag="ImageSourceItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF488;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -389,8 +389,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionBackground}" Tag="BackgroundItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE725;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -400,8 +400,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionWindowEffects}" Tag="WindowEffectsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF8FA;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -414,8 +414,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionLaunchConfig}" Tag="LaunchConfigItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF677;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -425,8 +425,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionScreenshotSettings}" Tag="ScreenshotSettingsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF254;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -436,8 +436,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionQuickFps}" Tag="QuickFpsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF4B8;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -447,8 +447,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionCheckinSettings}" Tag="CheckinSettingsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF21C;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -461,8 +461,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionLanguage}" Tag="LanguageItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF4F3;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -472,8 +472,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionWindowBehavior}" Tag="WindowBehaviorItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF8B5;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -483,8 +483,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionStartup}" Tag="StartupItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF60E;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -494,8 +494,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionStartupSound}" Tag="StartupSoundItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEB42;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -505,8 +505,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionAdvancedOptions}" Tag="AdvancedOptionsItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF6A9;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -516,8 +516,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionStoragePaths}" Tag="StoragePathItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF418;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -527,8 +527,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionUpdate}" Tag="UpdateItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF190;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -541,8 +541,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionAbout}" Tag="AboutItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xF4A3;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -552,8 +552,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionSecurityAuth}" Tag="SecurityAuthItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEAC8;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -563,8 +563,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionServiceStatus}" Tag="ServiceStatusItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE9DC;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -574,8 +574,8 @@
                 <NavigationViewItem Content="{helpers:Loc Key=SectionMcp}" Tag="McpItem">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE999;"
-                            FontFamily="{StaticResource FluentIconsFont}"
-                            RenderTransformOrigin="0.5,0.5">
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  RenderTransformOrigin="0.5,0.5">
                             <FontIcon.RenderTransform>
                                 <ScaleTransform ScaleX="1.25" ScaleY="1.25" />
                             </FontIcon.RenderTransform>
@@ -1061,7 +1061,8 @@
                             <StackPanel>
                                 <TextBlock Style="{StaticResource CardIntroStyle}"
                                            Text="{helpers:Loc Key=NotesItemsCaption}" />
-                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}"
+                                         Style="{StaticResource RowInfoBarStyle}"
                                          Severity="Warning"
                                          Title="{helpers:Loc Key=NotesWarningTitle}"
                                          Message="{helpers:Loc Key=NotesWarningMessage}" />
@@ -1510,7 +1511,8 @@
                                                  GroupName="WindowBackdrop"
                                                  IsChecked="{Binding CurrentWindowBackdrop, Mode=TwoWay, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Acrylic}" />
                                 </StackPanel>
-                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}"
+                                         Style="{StaticResource RowInfoBarStyle}"
                                          Severity="Warning"
                                          Message="{helpers:Loc Key=MicaWarning}" />
 
@@ -1724,7 +1726,8 @@
                                                  PlaceholderText="{helpers:Loc Key=CustomLaunchArgsPlaceholder}"
                                                  MaxWidth="440"
                                                  HorizontalAlignment="Left" />
-                                        <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
+                                        <InfoBar FontFamily="{StaticResource AppGlobalFont}"
+                                                 Style="{StaticResource RowInfoBarStyle}"
                                                  Severity="Informational"
                                                  Message="{helpers:Loc Key=CustomLaunchArgsInfo}"
                                                  FontSize="12" />
@@ -2138,7 +2141,8 @@
                                                    Minimum="1" Maximum="100000" SmallChange="1"
                                                    Tag="1" ValueChanged="OnQuickFpsSlotFpsChanged" />
                                         <ComboBox x:Name="QuickFpsSlot1KeyBox" Grid.Column="2"
-                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0"
+                                                  Margin="0"
                                                   ItemsSource="{x:Bind QuickFpsKeyChoices}"
                                                   DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
                                                   Tag="1" SelectionChanged="OnQuickFpsSlotKeyChanged" />
@@ -2156,7 +2160,8 @@
                                                    Minimum="1" Maximum="100000" SmallChange="1"
                                                    Tag="2" ValueChanged="OnQuickFpsSlotFpsChanged" />
                                         <ComboBox x:Name="QuickFpsSlot2KeyBox" Grid.Column="2"
-                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0"
+                                                  Margin="0"
                                                   ItemsSource="{x:Bind QuickFpsKeyChoices}"
                                                   DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
                                                   Tag="2" SelectionChanged="OnQuickFpsSlotKeyChanged" />
@@ -2174,7 +2179,8 @@
                                                    Minimum="1" Maximum="100000" SmallChange="1"
                                                    Tag="3" ValueChanged="OnQuickFpsSlotFpsChanged" />
                                         <ComboBox x:Name="QuickFpsSlot3KeyBox" Grid.Column="2"
-                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0"
+                                                  Margin="0"
                                                   ItemsSource="{x:Bind QuickFpsKeyChoices}"
                                                   DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
                                                   Tag="3" SelectionChanged="OnQuickFpsSlotKeyChanged" />
@@ -2192,7 +2198,8 @@
                                                    Minimum="1" Maximum="100000" SmallChange="1"
                                                    Tag="4" ValueChanged="OnQuickFpsSlotFpsChanged" />
                                         <ComboBox x:Name="QuickFpsSlot4KeyBox" Grid.Column="2"
-                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0"
+                                                  Margin="0"
                                                   ItemsSource="{x:Bind QuickFpsKeyChoices}"
                                                   DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
                                                   Tag="4" SelectionChanged="OnQuickFpsSlotKeyChanged" />
@@ -2210,7 +2217,8 @@
                                                    Minimum="1" Maximum="100000" SmallChange="1"
                                                    Tag="5" ValueChanged="OnQuickFpsSlotFpsChanged" />
                                         <ComboBox x:Name="QuickFpsSlot5KeyBox" Grid.Column="2"
-                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0" Margin="0"
+                                                  Style="{StaticResource RowComboBoxStyle}" Width="180" MinWidth="0"
+                                                  Margin="0"
                                                   ItemsSource="{x:Bind QuickFpsKeyChoices}"
                                                   DisplayMemberPath="KeyName" SelectedValuePath="KeyCode"
                                                   Tag="5" SelectionChanged="OnQuickFpsSlotKeyChanged" />
@@ -2423,10 +2431,10 @@
                                                                 <ColumnDefinition Width="Auto" />
                                                             </Grid.ColumnDefinitions>
                                                             <CheckBox
-                                                                      IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                                                      IsEnabled="{Binding DataContext.IsBatchCheckinEnabled, ElementName=SettingsPageRoot, Mode=OneWay}"
-                                                                      MinWidth="0"
-                                                                      VerticalAlignment="Center" />
+                                                                IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                                IsEnabled="{Binding DataContext.IsBatchCheckinEnabled, ElementName=SettingsPageRoot, Mode=OneWay}"
+                                                                MinWidth="0"
+                                                                VerticalAlignment="Center" />
                                                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                                                 <TextBlock Text="{Binding Nickname}" FontSize="14"
                                                                            TextTrimming="CharacterEllipsis"
@@ -2437,19 +2445,19 @@
                                                             <StackPanel Grid.Column="2" Orientation="Horizontal"
                                                                         Spacing="4" VerticalAlignment="Center">
                                                                 <Button
-                                                                        Click="OnCheckinAccountMoveUpClick"
-                                                                        Tag="{Binding}"
-                                                                        IsEnabled="{Binding CanMoveUp, Mode=OneWay}"
-                                                                        Width="32" Height="32" Padding="0"
-                                                                        AutomationProperties.Name="&#x2191;">
+                                                                    Click="OnCheckinAccountMoveUpClick"
+                                                                    Tag="{Binding}"
+                                                                    IsEnabled="{Binding CanMoveUp, Mode=OneWay}"
+                                                                    Width="32" Height="32" Padding="0"
+                                                                    AutomationProperties.Name="&#x2191;">
                                                                     <FontIcon Glyph="&#xE70E;" FontSize="14" />
                                                                 </Button>
                                                                 <Button
-                                                                        Click="OnCheckinAccountMoveDownClick"
-                                                                        Tag="{Binding}"
-                                                                        IsEnabled="{Binding CanMoveDown, Mode=OneWay}"
-                                                                        Width="32" Height="32" Padding="0"
-                                                                        AutomationProperties.Name="&#x2193;">
+                                                                    Click="OnCheckinAccountMoveDownClick"
+                                                                    Tag="{Binding}"
+                                                                    IsEnabled="{Binding CanMoveDown, Mode=OneWay}"
+                                                                    Width="32" Height="32" Padding="0"
+                                                                    AutomationProperties.Name="&#x2193;">
                                                                     <FontIcon Glyph="&#xE70D;" FontSize="14" />
                                                                 </Button>
                                                                 <Button Click="OnCloudCredentialClick"
@@ -2485,7 +2493,7 @@
                                                                                 Content="{helpers:Loc Key=RemoveCloudCredentialTooltip}" />
                                                                         </ToolTipService.ToolTip>
                                                                         <FontIcon Glyph="&#xE74D;" FontSize="14"
-                                                                                  Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                                                                                Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
                                                                     </Button>
                                                                 </Grid>
                                                             </StackPanel>
@@ -3245,7 +3253,8 @@
                                             Command="{x:Bind ViewModel.ChangeCachePathCommand}" />
                                 </StackPanel>
 
-                                <InfoBar FontFamily="{StaticResource AppGlobalFont}" Style="{StaticResource RowInfoBarStyle}"
+                                <InfoBar FontFamily="{StaticResource AppGlobalFont}"
+                                         Style="{StaticResource RowInfoBarStyle}"
                                          Severity="Error"
                                          IsClosable="True"
                                          FontSize="12"
@@ -3809,43 +3818,44 @@
                                 <ThemeShadow />
                             </Border.Shadow>
                             <StackPanel>
-                            <Grid Style="{StaticResource SettingsRowStyle}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9DC;" />
-                                <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
-                                    <TextBlock Style="{StaticResource RowTitleStyle}"
-                                               Text="{helpers:Loc Key=ServiceStatus_OpenTitle}" />
-                                    <TextBlock Style="{StaticResource RowCaptionStyle}"
-                                               Text="{helpers:Loc Key=ServiceStatus_OpenCaption}" />
-                                </StackPanel>
-                                <Button Grid.Column="2"
-                                        Style="{StaticResource RowButtonStyle}"
-                                        Content="{helpers:Loc Key=ServiceStatus_OpenButton}"
-                                        Click="OnOpenServiceStatusWindowClick" />
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE9DC;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=ServiceStatus_OpenTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=ServiceStatus_OpenCaption}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="2"
+                                            Style="{StaticResource RowButtonStyle}"
+                                            Content="{helpers:Loc Key=ServiceStatus_OpenButton}"
+                                            Click="OnOpenServiceStatusWindowClick" />
                                 </Grid>
 
                                 <Rectangle Style="{StaticResource RowDividerStyle}" />
 
                                 <Grid Style="{StaticResource SettingsRowStyle}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
-                                <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
-                                    <TextBlock Style="{StaticResource RowTitleStyle}" Text="服务状态总览" />
-                                    <TextBlock Style="{StaticResource RowCaptionStyle}" Text="查看 status.fu1.fun 上的所有服务运行状态" />
-                                </StackPanel>
-                                <Button Grid.Column="2"
-                                        Style="{StaticResource RowButtonStyle}"
-                                        Content="打开"
-                                        Click="OnOpenServiceOverviewClick" />
-                            </Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}" Text="服务状态总览" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="查看 status.fu1.fun 上的所有服务运行状态" />
+                                    </StackPanel>
+                                    <Button Grid.Column="2"
+                                            Style="{StaticResource RowButtonStyle}"
+                                            Content="打开"
+                                            Click="OnOpenServiceOverviewClick" />
+                                </Grid>
 
                                 <Rectangle Style="{StaticResource RowDividerStyle}" />
 
@@ -3857,7 +3867,8 @@
                                     </Grid.ColumnDefinitions>
                                     <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE753;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
-                                        <TextBlock Style="{StaticResource RowTitleStyle}" Text="{helpers:Loc Key=CloudSync_SettingsTitle}" />
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=CloudSync_SettingsTitle}" />
                                         <TextBlock Style="{StaticResource RowCaptionStyle}"
                                                    Text="{helpers:Loc Key=CloudSync_SettingsCaption}" />
                                     </StackPanel>

@@ -155,7 +155,6 @@ public sealed partial class CloudCaptchaWindow : Window
     {
         if (args.Uri.Contains(ApiEndpoints.CloudSyncAuthResultPath, StringComparison.OrdinalIgnoreCase))
         {
-            
             args.Cancel = true;
             StatusTextBlock.Text = "CloudSync_CaptchaSubmitting".GetLocalized();
             await TrySinglePollAsync();
@@ -192,6 +191,7 @@ public sealed partial class CloudCaptchaWindow : Window
             {
                 _finished = true;
             }
+
             return done;
         }
         finally

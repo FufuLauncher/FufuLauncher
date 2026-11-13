@@ -116,8 +116,10 @@ public sealed class OnboardingMotion
             var beginTime = TimeSpan.FromMilliseconds(stagger.TotalMilliseconds * order);
             var translate = EnsureTranslate(element);
 
-            storyboard.Children.Add(CreateAnimation(element, "Opacity", entrance ? 1d : 0d, duration, beginTime, easing));
-            storyboard.Children.Add(CreateAnimation(translate, "Y", entrance ? 0d : SlideOffset, duration, beginTime, easing));
+            storyboard.Children.Add(
+                CreateAnimation(element, "Opacity", entrance ? 1d : 0d, duration, beginTime, easing));
+            storyboard.Children.Add(CreateAnimation(translate, "Y", entrance ? 0d : SlideOffset, duration, beginTime,
+                easing));
 
             _running[element] = storyboard;
         }

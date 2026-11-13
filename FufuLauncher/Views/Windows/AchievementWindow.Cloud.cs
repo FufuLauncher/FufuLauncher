@@ -36,6 +36,7 @@ public sealed partial class AchievementWindow
             {
                 CloudSyncWindow.ShowOrActivate("Account");
             }
+
             return;
         }
 
@@ -63,6 +64,7 @@ public sealed partial class AchievementWindow
             {
                 CloudSyncWindow.ShowOrActivate("Account");
             }
+
             return;
         }
 
@@ -277,9 +279,20 @@ public sealed partial class AchievementWindow
                     Spacing = 4,
                     VerticalAlignment = VerticalAlignment.Center
                 };
-                var importBtn = new Button { Content = "CloudSync_AchievementImportBtn".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4) };
-                var overwriteBtn = new Button { Content = "CloudSync_BtnOverwrite".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4) };
-                var renameBtn = new Button { Content = "CloudSync_BtnRename".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4) };
+                var importBtn = new Button
+                {
+                    Content = "CloudSync_AchievementImportBtn".GetLocalized(), FontSize = 12,
+                    Padding = new Thickness(8, 4, 8, 4)
+                };
+                var overwriteBtn = new Button
+                {
+                    Content = "CloudSync_BtnOverwrite".GetLocalized(), FontSize = 12,
+                    Padding = new Thickness(8, 4, 8, 4)
+                };
+                var renameBtn = new Button
+                {
+                    Content = "CloudSync_BtnRename".GetLocalized(), FontSize = 12, Padding = new Thickness(8, 4, 8, 4)
+                };
                 var deleteBtn = new Button
                 {
                     Content = "CloudSync_BtnDelete".GetLocalized(),
@@ -313,7 +326,9 @@ public sealed partial class AchievementWindow
                         }
 
                         var updated = ApplyUiafData(uiafData);
-                        ViewModel.StatusMessage = string.Format("CloudSync_AchievementStatusSyncedFormat".GetLocalized(), archive.Slot, updated);
+                        ViewModel.StatusMessage =
+                            string.Format("CloudSync_AchievementStatusSyncedFormat".GetLocalized(), archive.Slot,
+                                updated);
                         ShowFeedback(InfoBarSeverity.Success,
                             "CloudSync_AchievementImportSuccessTitle".GetLocalized(),
                             string.Format("CloudSync_AchievementImportedMsg".GetLocalized(), archive.Slot, updated));
@@ -489,7 +504,9 @@ public sealed partial class AchievementWindow
                 var res = await cloudSync.UploadArchiveAsync("uiaf", slot, json, overwriteCheck.IsChecked == true);
                 if (res.Ok)
                 {
-                    var msgKey = res.Data?.Overwritten == true ? "CloudSync_MsgOverwritten" : "CloudSync_MsgUploadedNew";
+                    var msgKey = res.Data?.Overwritten == true
+                        ? "CloudSync_MsgOverwritten"
+                        : "CloudSync_MsgUploadedNew";
                     ShowFeedback(InfoBarSeverity.Success,
                         "CloudSync_MsgUploadSuccess".GetLocalized(),
                         string.Format(msgKey.GetLocalized(), slot));

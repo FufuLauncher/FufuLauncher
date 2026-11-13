@@ -16,7 +16,11 @@ public sealed class PluginConfigOptionGroup : ObservableObject
         if (_precedingOptions != null) _precedingOptions.CollectionChanged += OnPrecedingOptionsChanged;
     }
 
-    public ObservableCollection<PluginConfigOption> Items { get; }
+    public ObservableCollection<PluginConfigOption> Items
+    {
+        get;
+    }
+
     public bool ShowSeparator => _precedingOptions?.Count > 0;
 
     private void OnPrecedingOptionsChanged(object? sender, NotifyCollectionChangedEventArgs e) =>

@@ -10,7 +10,10 @@ using static FufuLauncher.Services.Miyoushe.MiyousheShopClient;
 namespace FufuLauncher.Services.Miyoushe;
 
 internal sealed class MiyousheShopExecution(
-    MiyousheShopPlans plans, MiyousheShopClient client, AccountManager accounts, AccountIdentityService identity)
+    MiyousheShopPlans plans,
+    MiyousheShopClient client,
+    AccountManager accounts,
+    AccountIdentityService identity)
 {
     private static readonly TimeSpan PrepareLead = TimeSpan.FromSeconds(25);
     private static readonly TimeSpan ReserveLead = TimeSpan.FromSeconds(1);
@@ -65,6 +68,7 @@ internal sealed class MiyousheShopExecution(
                         await finished.Value;
                         workers.Remove(finished.Key);
                     }
+
                     var pending = await plans.GetAsync();
                     var now = DateTimeOffset.UtcNow;
                     foreach (var plan in pending.Where(item => item.Scheduled && item.Status == Pending)
@@ -77,8 +81,10 @@ internal sealed class MiyousheShopExecution(
                             delay = untilPrepare < TimeSpan.FromSeconds(5) ? untilPrepare : TimeSpan.FromSeconds(5);
                             break;
                         }
+
                         workers.Add(plan.Id, RunScheduledAsync(plan, ct));
                     }
+
                     if (delay == Timeout.InfiniteTimeSpan && workers.Count > 0)
                         delay = TimeSpan.FromSeconds(5);
                 }
@@ -87,6 +93,7 @@ internal sealed class MiyousheShopExecution(
                     DebugLog.Info(nameof(MiyousheShopExecution), ex.GetType().Name);
                     delay = TimeSpan.FromSeconds(30);
                 }
+
                 await _wake.WaitAsync(delay, ct);
             }
         }
@@ -129,6 +136,7 @@ internal sealed class MiyousheShopExecution(
                 if (limit <= TimeSpan.Zero) return await FinishAsync(plan, Pending, new(Missed));
                 prepare.CancelAfter(limit);
             }
+
             using var request = await PrepareAsync(plan, prepare.Token);
             if (plan.Scheduled) await WaitUntilAsync(plan.OpensAt - ReserveLead, prepare.Token);
 
@@ -151,6 +159,7 @@ internal sealed class MiyousheShopExecution(
                     sending = true;
                     result = await client.SubmitAsync(request, ct);
                 }
+
                 return await FinishAsync(plan, Submitting, result);
             }
             finally
@@ -161,7 +170,8 @@ internal sealed class MiyousheShopExecution(
         catch (Exception ex)
         {
             if (ex is OperationCanceledException && ct.IsCancellationRequested && !reserved) return null;
-            result = sending ? new(Unknown) : TooLate(plan) || ct.IsCancellationRequested ? new(Missed) :
+            result = sending ? new(Unknown) :
+                TooLate(plan) || ct.IsCancellationRequested ? new(Missed) :
                 new(Failed, ex is MiyousheShopException ? ex.Message : "MiyousheShop_PrepareError".GetLocalized());
             try
             {
@@ -169,7 +179,6 @@ internal sealed class MiyousheShopExecution(
             }
             catch when (sending)
             {
-                
                 return result;
             }
         }
@@ -185,6 +194,7 @@ internal sealed class MiyousheShopExecution(
             await plans.RemoveAsync(plan.Id);
             return result;
         }
+
         return await plans.TransitionAsync(plan.Id, expected, result.Status, result.Message) ? result : null;
     }
 
@@ -228,14 +238,15 @@ internal sealed class MiyousheShopExecution(
 
     private AccountEntry? FindAccount(string id) =>
         accounts.GetAllAccounts().FirstOrDefault(item => item.Id == id && item.ServerType == "cn" &&
-            item.Id == "cn_" + item.Stuid);
+                                                         item.Id == "cn_" + item.Stuid);
 
     private static bool TooLate(MiyousheShopPlan plan) =>
         plan.Scheduled && DateTimeOffset.UtcNow - plan.OpensAt > DeadlineGrace;
 
     private static bool MatchesSale(MiyousheShopGoods goods, DateTimeOffset opensAt) =>
         goods.Status is "not_in_sell" or "online" &&
-        (goods.NextOpening == opensAt || (goods.IsAvailable && (goods.Restock == opensAt || goods.SaleStart == opensAt)));
+        (goods.NextOpening == opensAt ||
+         (goods.IsAvailable && (goods.Restock == opensAt || goods.SaleStart == opensAt)));
 
     private static async Task WaitUntilAsync(DateTimeOffset time, CancellationToken ct)
     {

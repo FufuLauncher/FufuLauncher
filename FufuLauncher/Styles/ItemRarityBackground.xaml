@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:FufuLauncher.Controls"
     xmlns:helpers="using:FufuLauncher.Helpers">
-    
+
     <Style TargetType="controls:ItemRarityBackground">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

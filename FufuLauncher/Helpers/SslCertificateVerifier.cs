@@ -109,7 +109,8 @@ public static partial class SslCertificateVerifier
                 pendingTypes.Enqueue(nested);
             }
 
-            foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Static |
+                                                 BindingFlags.FlattenHierarchy))
             {
                 object? rawValue;
                 try
@@ -124,7 +125,8 @@ public static partial class SslCertificateVerifier
                 CollectEndpointValues(field.Name, rawValue, grouped, seenPerHost);
             }
 
-            foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
+            foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Static |
+                                                    BindingFlags.FlattenHierarchy))
             {
                 if (prop.GetIndexParameters().Length > 0 || prop.GetMethod is not { IsPublic: true })
                 {
@@ -168,7 +170,7 @@ public static partial class SslCertificateVerifier
         {
             return Array.Empty<SslCertificateInfo>();
         }
-        
+
         var inFlightByEndpoint = new ConcurrentDictionary<(string Host, int Port), Lazy<Task<SslCertificateInfo>>>();
         var results = new SslCertificateInfo[targets.Count];
         var completed = 0;
@@ -394,7 +396,8 @@ public static partial class SslCertificateVerifier
         }
         else
         {
-            connectError = dnsError ?? string.Format("SslCheck_ErrDnsFailed".GetLocalized(), "SslCheck_NoDnsIp".GetLocalized());
+            connectError = dnsError ??
+                           string.Format("SslCheck_ErrDnsFailed".GetLocalized(), "SslCheck_NoDnsIp".GetLocalized());
         }
 
         if ((outcome == null || outcome.Capture == null) &&
@@ -438,7 +441,8 @@ public static partial class SslCertificateVerifier
             var options = CreateSslOptions(target.Host, captured => capture = captured);
             await sslStream.AuthenticateAsClientAsync(options, timeoutCts.Token).ConfigureAwait(false);
             var remoteIp = (tcpClient.Client.RemoteEndPoint as IPEndPoint)?.Address;
-            return await CompleteTlsProbeAsync(sslStream, target, capture, remoteIp, cancellationToken).ConfigureAwait(false);
+            return await CompleteTlsProbeAsync(sslStream, target, capture, remoteIp, cancellationToken)
+                .ConfigureAwait(false);
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
@@ -467,7 +471,8 @@ public static partial class SslCertificateVerifier
         try
         {
             using var tcpClient = new TcpClient();
-            await tcpClient.ConnectAsync(proxyUri.IdnHost.Trim('[', ']'), proxyUri.Port, timeoutCts.Token).ConfigureAwait(false);
+            await tcpClient.ConnectAsync(proxyUri.IdnHost.Trim('[', ']'), proxyUri.Port, timeoutCts.Token)
+                .ConfigureAwait(false);
             var networkStream = tcpClient.GetStream();
 
             var authority = target.Host.Contains(':')
@@ -490,7 +495,8 @@ public static partial class SslCertificateVerifier
             await networkStream.WriteAsync(requestBytes, timeoutCts.Token).ConfigureAwait(false);
             await networkStream.FlushAsync(timeoutCts.Token).ConfigureAwait(false);
 
-            var statusLine = await ReadHttpHeaderLineAndConsumeHeadersAsync(networkStream, timeoutCts.Token).ConfigureAwait(false);
+            var statusLine = await ReadHttpHeaderLineAndConsumeHeadersAsync(networkStream, timeoutCts.Token)
+                .ConfigureAwait(false);
             if (!IsHttpSuccessStatusLine(statusLine))
             {
                 return new TlsProbeOutcome(null, null, null, null, statusLine);
@@ -499,7 +505,8 @@ public static partial class SslCertificateVerifier
             using var sslStream = new SslStream(networkStream, leaveInnerStreamOpen: false);
             var options = CreateSslOptions(target.Host, captured => capture = captured);
             await sslStream.AuthenticateAsClientAsync(options, timeoutCts.Token).ConfigureAwait(false);
-            return await CompleteTlsProbeAsync(sslStream, target, capture, remoteAddress: null, cancellationToken).ConfigureAwait(false);
+            return await CompleteTlsProbeAsync(sslStream, target, capture, remoteAddress: null, cancellationToken)
+                .ConfigureAwait(false);
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
         {
@@ -525,7 +532,8 @@ public static partial class SslCertificateVerifier
     {
         var protocolDisplay = FormatProtocol(sslStream.SslProtocol);
         var cipherSuiteDisplay = TryGetCipherSuite(sslStream);
-        var quicOutcome = await ProbeQuicSupportAsync(sslStream, target, remoteAddress, cancellationToken).ConfigureAwait(false);
+        var quicOutcome = await ProbeQuicSupportAsync(sslStream, target, remoteAddress, cancellationToken)
+            .ConfigureAwait(false);
 
         return new TlsProbeOutcome(capture, protocolDisplay, cipherSuiteDisplay, quicOutcome, null);
     }
@@ -539,12 +547,14 @@ public static partial class SslCertificateVerifier
         var altSvc = await ProbeHttpAltSvcAsync(sslStream, target, cancellationToken).ConfigureAwait(false);
         if (!string.IsNullOrWhiteSpace(altSvc.AdvertisedProtocols))
         {
-            return new QuicProbeOutcome(IsSupported: true, TimedOut: false, Summary: $"Alt-Svc: {altSvc.AdvertisedProtocols}");
+            return new QuicProbeOutcome(IsSupported: true, TimedOut: false,
+                Summary: $"Alt-Svc: {altSvc.AdvertisedProtocols}");
         }
 
         if (remoteAddress != null)
         {
-            var udpResult = await ProbeUdpQuicAsync(remoteAddress, target.Port, cancellationToken).ConfigureAwait(false);
+            var udpResult = await ProbeUdpQuicAsync(remoteAddress, target.Port, cancellationToken)
+                .ConfigureAwait(false);
             if (!string.IsNullOrWhiteSpace(udpResult.Versions))
             {
                 return new QuicProbeOutcome(IsSupported: true, TimedOut: false, Summary: udpResult.Versions);
@@ -558,7 +568,8 @@ public static partial class SslCertificateVerifier
             return new QuicProbeOutcome(IsSupported: false, TimedOut: false, Summary: null);
         }
 
-        return new QuicProbeOutcome(IsSupported: false, TimedOut: altSvc.TimedOut && !altSvc.GotResponse, Summary: null);
+        return new QuicProbeOutcome(IsSupported: false, TimedOut: altSvc.TimedOut && !altSvc.GotResponse,
+            Summary: null);
     }
 
     private static async Task<(bool GotResponse, bool TimedOut, string? AdvertisedProtocols)> ProbeHttpAltSvcAsync(
@@ -584,7 +595,9 @@ public static partial class SslCertificateVerifier
 
             while (totalRead < maxHeaderBytes)
             {
-                var read = await sslStream.ReadAsync(buffer.AsMemory(totalRead, maxHeaderBytes - totalRead), httpCts.Token).ConfigureAwait(false);
+                var read = await sslStream
+                    .ReadAsync(buffer.AsMemory(totalRead, maxHeaderBytes - totalRead), httpCts.Token)
+                    .ConfigureAwait(false);
                 if (read == 0)
                 {
                     break;
@@ -669,7 +682,7 @@ public static partial class SslCertificateVerifier
         {
             using var udpClient = new UdpClient(remoteAddress.AddressFamily);
             udpClient.Connect(remoteAddress, port);
-            
+
             var packet = new byte[1200];
             packet[0] = 0xC0;
             packet[1] = 0x0A;
@@ -837,7 +850,7 @@ public static partial class SslCertificateVerifier
                 {
                     onCaptured(ExtractCertificateData(certificate, chain, sslPolicyErrors));
                 }
-                
+
                 return true;
             }
         };
@@ -943,9 +956,9 @@ public static partial class SslCertificateVerifier
         if (sslPolicyErrors.HasFlag(SslPolicyErrors.RemoteCertificateChainErrors) && errors.Count == 0)
         {
             var hadOnlyRevocationUnknown = effectiveChain.ChainStatus.Length > 0 &&
-                effectiveChain.ChainStatus.All(s => s.Status is X509ChainStatusFlags.NoError
-                    or X509ChainStatusFlags.RevocationStatusUnknown
-                    or X509ChainStatusFlags.OfflineRevocation);
+                                           effectiveChain.ChainStatus.All(s => s.Status is X509ChainStatusFlags.NoError
+                                               or X509ChainStatusFlags.RevocationStatusUnknown
+                                               or X509ChainStatusFlags.OfflineRevocation);
 
             if (!hadOnlyRevocationUnknown)
             {
@@ -1181,7 +1194,8 @@ public static partial class SslCertificateVerifier
             details.Add(new SslCertificateDetail("SslCheck_ValidationStatus".GetLocalized(), statusSummary));
             details.Add(new SslCertificateDetail("SslCheck_ResolvedIp".GetLocalized(), ipDisplay));
             details.Add(new SslCertificateDetail("SslCheck_FailureReason".GetLocalized(), reason));
-            details.Add(new SslCertificateDetail("SslCheck_StackedEndpoints".GetLocalized(), FormatStackedEndpoints(target.StackedEndpoints)));
+            details.Add(new SslCertificateDetail("SslCheck_StackedEndpoints".GetLocalized(),
+                FormatStackedEndpoints(target.StackedEndpoints)));
 
             return new SslCertificateInfo(
                 Host: target.Host,
@@ -1220,7 +1234,8 @@ public static partial class SslCertificateVerifier
         }
 
         details.Add(new SslCertificateDetail("SslCheck_CertType".GetLocalized(), capture.CertificateType));
-        details.Add(new SslCertificateDetail("SslCheck_QuicSupport".GetLocalized(), FormatQuicSupport(outcome?.QuicOutcome)));
+        details.Add(new SslCertificateDetail("SslCheck_QuicSupport".GetLocalized(),
+            FormatQuicSupport(outcome?.QuicOutcome)));
 
         details.Add(new SslCertificateDetail("SslCheck_Subject".GetLocalized(), capture.Subject));
         details.Add(new SslCertificateDetail("SslCheck_Issuer".GetLocalized(), capture.Issuer));
@@ -1239,9 +1254,11 @@ public static partial class SslCertificateVerifier
         details.Add(new SslCertificateDetail(
             "PluginSignature_ValidTo".GetLocalized(),
             FormatValidTo(capture.NotBeforeUtc, capture.NotAfterUtc)));
-        details.Add(new SslCertificateDetail("PluginSignature_SignatureAlgorithm".GetLocalized(), capture.SignatureAlgorithm));
+        details.Add(new SslCertificateDetail("PluginSignature_SignatureAlgorithm".GetLocalized(),
+            capture.SignatureAlgorithm));
         details.Add(new SslCertificateDetail("PluginSignature_PublicKey".GetLocalized(), capture.PublicKeyDescription));
-        details.Add(new SslCertificateDetail("SslCheck_StackedEndpoints".GetLocalized(), FormatStackedEndpoints(target.StackedEndpoints)));
+        details.Add(new SslCertificateDetail("SslCheck_StackedEndpoints".GetLocalized(),
+            FormatStackedEndpoints(target.StackedEndpoints)));
 
         return new SslCertificateInfo(
             Host: target.Host,
@@ -1272,7 +1289,8 @@ public static partial class SslCertificateVerifier
                 .ToList();
 
             baseIp = addresses.Length > MaxDisplayIps
-                ? string.Format("SslCheck_MoreItemsFormat".GetLocalized(), string.Join(", ", formatted), addresses.Length)
+                ? string.Format("SslCheck_MoreItemsFormat".GetLocalized(), string.Join(", ", formatted),
+                    addresses.Length)
                 : string.Join(", ", formatted);
         }
         else

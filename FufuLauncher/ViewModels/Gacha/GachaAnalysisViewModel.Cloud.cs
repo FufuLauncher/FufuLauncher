@@ -195,7 +195,8 @@ public partial class GachaAnalysisViewModel
         });
     }
 
-    public async Task<(bool Success, int ImportedAccounts, int ImportedRecords, string? DisplayUid)> ImportUigfJsonFromCloudAsync(string jsonContent)
+    public async Task<(bool Success, int ImportedAccounts, int ImportedRecords, string? DisplayUid)>
+        ImportUigfJsonFromCloudAsync(string jsonContent)
     {
         if (string.IsNullOrWhiteSpace(jsonContent))
         {
@@ -327,7 +328,8 @@ public partial class GachaAnalysisViewModel
         });
 
         var allKnownUids = QueryKnownUidsFromDb();
-        var displayUid = !string.IsNullOrWhiteSpace(_currentUid) && importedUids.Contains(_currentUid, StringComparer.Ordinal)
+        var displayUid = !string.IsNullOrWhiteSpace(_currentUid) &&
+                         importedUids.Contains(_currentUid, StringComparer.Ordinal)
             ? _currentUid
             : importedUids[0];
 

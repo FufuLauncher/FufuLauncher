@@ -87,9 +87,11 @@ public sealed partial class CloudCredentialWindow : Window
                     ShowCredentialError("CloudCredential_IdentityUnavailable".GetLocalized());
                     return;
                 }
+
                 if (!string.Equals(accountUid, _uid, StringComparison.Ordinal))
                 {
-                    ShowCredentialError(string.Format("CloudCredential_AccountMismatch".GetLocalized(), accountUid, _uid));
+                    ShowCredentialError(string.Format("CloudCredential_AccountMismatch".GetLocalized(), accountUid,
+                        _uid));
                     return;
                 }
 
@@ -98,6 +100,7 @@ public sealed partial class CloudCredentialWindow : Window
                     ShowCredentialError("CloudCredential_SaveFailed".GetLocalized());
                     return;
                 }
+
                 _captured = true;
                 if (_isClosed) return;
                 TitleText.Text = $"添加云游戏凭证 - {_uid} (已获取)";

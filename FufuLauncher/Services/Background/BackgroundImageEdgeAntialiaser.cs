@@ -18,14 +18,14 @@ internal static class BackgroundImageEdgeAntialiaser
     private const float InvByte = 1f / 255f;
     private const float HalfInvByte = 0.5f / 255f;
     private const int LinearLutSize = 16384;
-    
+
     private static readonly int[] StepTable = [1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 8];
 
     private static readonly float[] SrgbToLinear = BuildSrgbToLinear();
     private static readonly byte[] LinearToSrgb = BuildLinearToSrgb();
 
     public static int MaxSearchSteps => StepTable.Length;
-    
+
     public static int Apply(byte[] pixels, int width, int height, EdgeAntialiasProfile profile)
     {
         if (width < 3 || height < 3)
@@ -42,7 +42,7 @@ internal static class BackgroundImageEdgeAntialiaser
         try
         {
             Buffer.BlockCopy(pixels, 0, source, 0, byteCount);
-            
+
             Parallel.For(0, height, y =>
             {
                 var rowStart = y * width;
@@ -53,7 +53,7 @@ internal static class BackgroundImageEdgeAntialiaser
                     luma[p] = (byte)((source[i + 2] * 54 + source[i + 1] * 183 + source[i] * 19 + 128) >> 8);
                 }
             });
-            
+
             var processed = 0;
             Parallel.For(1, height - 1,
                 () => 0,
@@ -92,7 +92,7 @@ internal static class BackgroundImageEdgeAntialiaser
         var maxLuma = MathF.Max(MathF.Max(MathF.Max(lumaN, lumaS), MathF.Max(lumaW, lumaE)), lumaM);
         var minLuma = MathF.Min(MathF.Min(MathF.Min(lumaN, lumaS), MathF.Min(lumaW, lumaE)), lumaM);
         var range = maxLuma - minLuma;
-        
+
         if (range < MathF.Max(profile.EdgeThresholdMin, maxLuma * profile.EdgeThreshold))
             return false;
 
@@ -103,7 +103,7 @@ internal static class BackgroundImageEdgeAntialiaser
 
         var lumaNS = lumaN + lumaS;
         var lumaWE = lumaW + lumaE;
-        
+
         var subpixA = (2f * (lumaNS + lumaWE) + (lumaNW + lumaNE + lumaSW + lumaSE)) * (1f / 12f);
         var subpixC = Math.Clamp(MathF.Abs(subpixA - lumaM) / range, 0f, 1f);
         var subpixF = (-2f * subpixC + 3f) * subpixC * subpixC;
@@ -127,12 +127,12 @@ internal static class BackgroundImageEdgeAntialiaser
         var gradientScaled = MathF.Max(MathF.Abs(gradient1), MathF.Abs(gradient2)) * 0.25f;
         var localAverage = 0.5f * (lumaM + (pairNegative ? luma1 : luma2));
         var lumaMBelow = lumaM - localAverage < 0f;
-        
+
         var pairOffset = horzSpan ? (pairNegative ? -width : width) : (pairNegative ? -1 : 1);
         var along = horzSpan ? 1 : width;
         var maxNeg = horzSpan ? x : y;
         var maxPos = horzSpan ? width - 1 - x : height - 1 - y;
-        
+
         var distNeg = 0;
         var endNeg = 0f;
         var doneNeg = false;
@@ -154,7 +154,7 @@ internal static class BackgroundImageEdgeAntialiaser
             endPos = (luma[si] + luma[si + pairOffset]) * HalfInvByte - localAverage;
             donePos = MathF.Abs(endPos) >= gradientScaled || distPos >= maxPos;
         }
-        
+
         var spanLength = distNeg + distPos;
         var nearestNeg = distNeg < distPos;
         var nearest = Math.Min(distNeg, distPos);

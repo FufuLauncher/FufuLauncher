@@ -209,7 +209,7 @@
                     </Grid>
                 </DataTemplate>
 
-                
+
                 <DataTemplate x:Key="GachaCardTemplate" x:DataType="models:GachaDisplayItem">
                     <Grid Width="118" Height="178" Margin="6">
                         <Grid.Shadow>
@@ -547,18 +547,21 @@
                             </StackPanel>
                             <Button.Flyout>
                                 <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutSubItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_GetViaMiyoushe}">
+                                    <MenuFlyoutSubItem FontFamily="{StaticResource AppGlobalFont}"
+                                                       Text="{helpers:Loc Key=GachaAnalysis_GetViaMiyoushe}">
                                         <MenuFlyoutSubItem.Icon>
                                             <FontIcon Glyph="&#xE77B;" FontSize="14" />
                                         </MenuFlyoutSubItem.Icon>
-                                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_IncrementalUpdate}"
+                                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                        Text="{helpers:Loc Key=GachaAnalysis_IncrementalUpdate}"
                                                         Click="OnMiYouSheIncrementalUpdateClick"
                                                         ToolTipService.ToolTip="仅获取本地没有的新增祈愿记录，速度快，推荐日常使用">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE710;" FontSize="14" />
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
-                                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_FullUpdate}"
+                                        <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                        Text="{helpers:Loc Key=GachaAnalysis_FullUpdate}"
                                                         Click="OnMiYouSheFullUpdateClick"
                                                         ToolTipService.ToolTip="重新拉取全部祈愿记录，耗时较长，可用于修复缺失的数据">
                                             <MenuFlyoutItem.Icon>
@@ -566,20 +569,23 @@
                                             </MenuFlyoutItem.Icon>
                                         </MenuFlyoutItem>
                                     </MenuFlyoutSubItem>
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_GetViaGame}"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                    Text="{helpers:Loc Key=GachaAnalysis_GetViaGame}"
                                                     Click="OnGameCacheFetchClick">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE7FC;" FontSize="14" />
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_GetViaUrl}"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                    Text="{helpers:Loc Key=GachaAnalysis_GetViaUrl}"
                                                     Click="OnUrlFetchClick">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE71B;" FontSize="14" />
                                         </MenuFlyoutItem.Icon>
                                     </MenuFlyoutItem>
                                     <MenuFlyoutSeparator />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ImportUigf}"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
+                                                    Text="{helpers:Loc Key=GachaAnalysis_ImportUigf}"
                                                     Command="{x:Bind ViewModel.ImportUigfCommand}">
                                         <MenuFlyoutItem.Icon>
                                             <FontIcon Glyph="&#xE8B5;" FontSize="14" />
@@ -1155,7 +1161,7 @@
                               Visibility="{Binding ViewModel.ShowOverviewCards, Converter={StaticResource BoolToVisibilityConverter}}">
                     <StackPanel x:Name="OverviewCardRoot" Spacing="20">
 
-                        
+
                         <StackPanel Spacing="12">
                             <Grid Padding="20,16" CornerRadius="14"
                                   Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"

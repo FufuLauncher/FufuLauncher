@@ -102,7 +102,8 @@ public sealed partial class MiyousheShopView
             ShowStatus(ex.Message, InfoBarSeverity.Warning);
         }
         catch (Exception ex) when (ex is HttpRequestException or JsonException or InvalidDataException or IOException
-                                   or TaskCanceledException or OperationCanceledException or InvalidOperationException)
+                                       or TaskCanceledException or OperationCanceledException
+                                       or InvalidOperationException)
         {
             if (!ct.IsCancellationRequested) ShowError("MiyoushePendant_LoadError", ex);
         }
@@ -227,7 +228,8 @@ public sealed partial class MiyousheShopView
         PendantPlaceholder.Visibility = Visibility.Collapsed;
         PendantName.Text = pendant.Name;
         PendantDescription.Text = pendant.Pendant.Description;
-        PendantDescription.Visibility = pendant.Pendant.Description.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+        PendantDescription.Visibility =
+            pendant.Pendant.Description.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         PendantAuthor.Text = pendant.Pendant.AuthorText;
         PendantAuthor.Visibility = pendant.Pendant.AuthorText.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         PendantRemain.Text = pendant.Pendant.RemainText;

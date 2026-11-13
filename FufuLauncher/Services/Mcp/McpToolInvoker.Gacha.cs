@@ -242,10 +242,18 @@ public sealed partial class McpToolInvoker
             averageFiveStarPity = averagePity,
             bestFiveStarPity = best == null
                 ? null
-                : new { name = best.Log.Name, poolName = DescribeBucketName(best.Bucket), pity = best.Pity, time = FormatRecordTime(best.Time) },
+                : new
+                {
+                    name = best.Log.Name, poolName = DescribeBucketName(best.Bucket), pity = best.Pity,
+                    time = FormatRecordTime(best.Time)
+                },
             worstFiveStarPity = worst == null
                 ? null
-                : new { name = worst.Log.Name, poolName = DescribeBucketName(worst.Bucket), pity = worst.Pity, time = FormatRecordTime(worst.Time) },
+                : new
+                {
+                    name = worst.Log.Name, poolName = DescribeBucketName(worst.Bucket), pity = worst.Pity,
+                    time = FormatRecordTime(worst.Time)
+                },
             pools,
             monthly,
             recentFiveStars,

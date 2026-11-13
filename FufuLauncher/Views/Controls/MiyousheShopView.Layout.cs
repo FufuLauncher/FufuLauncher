@@ -57,6 +57,7 @@ public sealed partial class MiyousheShopView
             button.IsChecked = true;
             return;
         }
+
         ApplyViewMode(grid);
         await _settings.TrySaveSettingAsync(ViewModeSetting, grid);
     }
@@ -78,6 +79,7 @@ public sealed partial class MiyousheShopView
         {
             _updatingSelection = false;
         }
+
         if (selected != null) ActiveGoodsView.ScrollIntoView(selected);
     }
 
@@ -86,7 +88,7 @@ public sealed partial class MiyousheShopView
     private void OnGoodsGridSizeChanged(object sender, SizeChangedEventArgs e)
     {
         if (GoodsGrid.ItemsPanelRoot is not ItemsWrapGrid panel || e.NewSize.Width <= 0) return;
-        double width = e.NewSize.Width - 16; 
+        double width = e.NewSize.Width - 16;
         int columns = Math.Max(1, (int)(width / MinimumTileWidth));
         panel.ItemWidth = Math.Clamp(Math.Floor(width / columns), MinimumTileWidth, MaximumTileWidth);
     }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <UserControl
     x:Class="FufuLauncher.Views.Controls.CycleChallenge.RemoteImage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,7 +9,7 @@
     VerticalAlignment="Stretch">
 
     <Grid x:Name="RootGrid" Background="Transparent">
-        
+
         <Border x:Name="PlaceholderBorder"
                 Background="{ThemeResource ControlFillColorSecondaryBrush}"
                 CornerRadius="4">
@@ -22,7 +23,7 @@
                       IsHitTestVisible="False" />
         </Border>
 
-        
+
         <Image x:Name="ContentImage"
                Stretch="Uniform"
                HorizontalAlignment="Stretch"

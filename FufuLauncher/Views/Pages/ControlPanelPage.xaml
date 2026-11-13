@@ -580,7 +580,8 @@
                                     </Grid.ColumnDefinitions>
                                     <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}"
                                             CornerRadius="10">
-                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF45A;" FontSize="27.5"
+                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF45A;"
+                                                  FontSize="27.5"
                                                   Foreground="{ThemeResource PanelTextBrush}"
                                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
                                     </Border>

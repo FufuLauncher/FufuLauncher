@@ -27,6 +27,7 @@ public partial class AccountViewModel
             if (entry?.Id == account.AccountId)
                 account.AvatarPendantUrl = value ? entry.AvatarPendantUrl ?? "" : "";
         }
+
         RefreshSavedAccountsList();
         WeakReferenceMessenger.Default.Send(new AccountAvatarChangedMessage(value));
     }
@@ -170,6 +171,7 @@ public partial class AccountViewModel
             IsAvatarPendantEnabled = bool.TryParse(setting?.ToString(), out var enabled) && enabled;
             _avatarPendantSettingLoaded = true;
         }
+
         await LoadAccountInfo();
         RefreshSavedAccountsList();
     }

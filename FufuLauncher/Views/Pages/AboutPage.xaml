@@ -67,10 +67,12 @@
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="24"
                         Margin="0,16,0,0">
-                <HyperlinkButton Content="GitHub" NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.GithubRepoUrl)}" />
+                <HyperlinkButton Content="GitHub"
+                                 NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.GithubRepoUrl)}" />
                 <HyperlinkButton Content="{helpers:Loc Key=AboutPage_ReportIssue}"
                                  NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.GithubIssuesUrl)}" />
-                <HyperlinkButton Content="{helpers:Loc Key=AboutPage_OfficialWebsite}" NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.OfficialWebsiteUrl)}" />
+                <HyperlinkButton Content="{helpers:Loc Key=AboutPage_OfficialWebsite}"
+                                 NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.OfficialWebsiteUrl)}" />
                 <HyperlinkButton Content="{helpers:Loc Key=AboutPage_ContactAuthor}" Click="ContactAuthor_Click" />
             </StackPanel>
         </Grid>

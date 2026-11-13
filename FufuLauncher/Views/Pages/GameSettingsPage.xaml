@@ -318,7 +318,8 @@
                                         <ThemeShadow />
                                     </Grid.Shadow>
                                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
-                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF418;" FontSize="50" Opacity="0.3" />
+                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF418;"
+                                                  FontSize="50" Opacity="0.3" />
                                         <TextBlock Text="{helpers:Loc Key=ConfigureGamePathFirst}" FontSize="14"
                                                    Foreground="{ThemeResource SafeSecondaryTextBrush}" />
                                     </StackPanel>
@@ -447,7 +448,8 @@
                                         </Grid.ColumnDefinitions>
 
                                         <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xED7F;" FontSize="22.5" />
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xED7F;"
+                                                      FontSize="22.5" />
                                             <TextBlock Text="{helpers:Loc Key=LatestRedeemCodesTitle}" FontSize="16"
                                                        FontWeight="SemiBold"
                                                        FontFamily="{StaticResource AppGlobalFont}"
@@ -559,7 +561,8 @@
                                     <Button Click="AddAccount_Click" Padding="6" Background="Transparent"
                                             BorderThickness="0"
                                             ToolTipService.ToolTip="{helpers:Loc Key=ReadFromLocalTooltip}">
-                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF159;" FontSize="20" />
+                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF159;"
+                                                  FontSize="20" />
                                     </Button>
                                     <Button Click="RefreshAccounts_Click" Padding="6" Background="Transparent"
                                             BorderThickness="0"
@@ -676,7 +679,8 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF18D;" FontSize="27.5" Margin="0,0,16,0" />
+                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF18D;"
+                                              FontSize="27.5" Margin="0,0,16,0" />
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock Text="{helpers:Loc Key=SwitchServerTitle}" FontWeight="SemiBold" />
                                         <TextBlock Text="{helpers:Loc Key=ServerSwitchCaption}" FontSize="11"
@@ -714,7 +718,8 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF537;" FontSize="27.5" Margin="0,0,16,0" />
+                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF537;"
+                                              FontSize="27.5" Margin="0,0,16,0" />
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock Text="{helpers:Loc Key=OfficialAnnouncementsTitle}"
                                                    FontWeight="SemiBold" />
@@ -734,7 +739,8 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xEAC8;" FontSize="27.5" Margin="0,0,16,0" />
+                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xEAC8;"
+                                              FontSize="27.5" Margin="0,0,16,0" />
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock Text="{helpers:Loc Key=VerifyGameTitle}" FontWeight="SemiBold" />
                                         <TextBlock Text="{helpers:Loc Key=VerifyAndRepairCaption}" FontSize="11"
@@ -806,7 +812,8 @@
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF190;" FontSize="27.5" Margin="0,0,16,0" />
+                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF190;"
+                                              FontSize="27.5" Margin="0,0,16,0" />
                                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <TextBlock Text="{helpers:Loc Key=GameUpdate_UpdateBtnTitle}"
                                                    FontWeight="SemiBold" />

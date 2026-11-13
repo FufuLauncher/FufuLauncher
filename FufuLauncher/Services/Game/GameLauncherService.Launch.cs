@@ -43,7 +43,8 @@ public partial class GameLauncherService
             {
                 result.ErrorMessage =
                     string.Format("LaunchErr_ExeNotFound".GetLocalized(), string.Join("\n", exeNames));
-                logBuilder.AppendLine($"[LaunchFlow] Error: no game executable found in '{gamePath}' (expected: {string.Join(", ", exeNames)})");
+                logBuilder.AppendLine(
+                    $"[LaunchFlow] Error: no game executable found in '{gamePath}' (expected: {string.Join(", ", exeNames)})");
                 result.DetailLog = logBuilder.ToString();
                 return result;
             }
@@ -51,7 +52,8 @@ public partial class GameLauncherService
             if (foundExes.Count > 1 && exeNames.Count > 1)
             {
                 result.ErrorMessage = "LaunchErr_MultipleExeFound".GetLocalized();
-                logBuilder.AppendLine($"[LaunchFlow] Error: multiple game executables found: {string.Join(", ", foundExes)}");
+                logBuilder.AppendLine(
+                    $"[LaunchFlow] Error: multiple game executables found: {string.Join(", ", foundExes)}");
                 result.DetailLog = logBuilder.ToString();
                 return result;
             }
@@ -137,7 +139,8 @@ public partial class GameLauncherService
                         }
                         else
                         {
-                            logBuilder.AppendLine($"[LaunchFlow] AuthTicket creation failed: {ticketResult.ErrorMessage}");
+                            logBuilder.AppendLine(
+                                $"[LaunchFlow] AuthTicket creation failed: {ticketResult.ErrorMessage}");
                             WeakReferenceMessenger.Default.Send(new NotificationMessage(
                                 "HoyolabAccount_EnableFailed_Title".GetLocalized(),
                                 "HoyolabAccount_EnableFailed_Message".GetLocalized(),
@@ -218,7 +221,8 @@ public partial class GameLauncherService
                         File.Exists(LightweightPluginService.LitePluginDllPath))
                     {
                         targetDllPath = LightweightPluginService.LitePluginDllPath;
-                        logBuilder.AppendLine($"[LaunchFlow] Lightweight mode enabled, using lightweight plugin DLL: '{targetDllPath}'");
+                        logBuilder.AppendLine(
+                            $"[LaunchFlow] Lightweight mode enabled, using lightweight plugin DLL: '{targetDllPath}'");
                     }
                     else if (!string.IsNullOrEmpty(defaultDllPath) && File.Exists(defaultDllPath))
                     {
@@ -266,7 +270,8 @@ public partial class GameLauncherService
                             var fileInfo = new FileInfo(targetDllPath);
                             if (fileInfo.Length < 10 * 1024)
                             {
-                                logBuilder.AppendLine($"[LaunchFlow] Warning: plugin DLL may be corrupted (size: {fileInfo.Length} bytes)");
+                                logBuilder.AppendLine(
+                                    $"[LaunchFlow] Warning: plugin DLL may be corrupted (size: {fileInfo.Length} bytes)");
                                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
                                     "LaunchErr_PluginDamagedTitle".GetLocalized(),
                                     "LaunchErr_PluginDamagedMsg".GetLocalized(),
@@ -288,7 +293,8 @@ public partial class GameLauncherService
 
                             if (!trustDecision.Allowed)
                             {
-                                logBuilder.AppendLine("[LaunchFlow] Strict trust mode blocked the DLL, injection cancelled");
+                                logBuilder.AppendLine(
+                                    "[LaunchFlow] Strict trust mode blocked the DLL, injection cancelled");
                                 WeakReferenceMessenger.Default.Send(new NotificationMessage(
                                     "ModTrust_BlockedTitle".GetLocalized(),
                                     string.Format("ModTrust_BlockedMsg".GetLocalized(), trustDecision.Reason),
@@ -303,7 +309,8 @@ public partial class GameLauncherService
                                     }
                                     catch (Exception ex)
                                     {
-                                        logBuilder.AppendLine($"[LaunchFlow] Registry snapshot restore failed: {ex.Message}");
+                                        logBuilder.AppendLine(
+                                            $"[LaunchFlow] Registry snapshot restore failed: {ex.Message}");
                                     }
                                 }
 
@@ -330,7 +337,8 @@ public partial class GameLauncherService
                         }
                         catch (Exception ex)
                         {
-                            logBuilder.AppendLine($"[LaunchFlow] Signature trust check failed (launch continues): {ex.Message}");
+                            logBuilder.AppendLine(
+                                $"[LaunchFlow] Signature trust check failed (launch continues): {ex.Message}");
                         }
 
                         logBuilder.AppendLine($"[LaunchFlow] Preparing DLL injection: '{targetDllPath}'");
@@ -344,7 +352,8 @@ public partial class GameLauncherService
                     }
                     else
                     {
-                        logBuilder.AppendLine("[LaunchFlow] No usable injection DLL (default path invalid, no plugin), falling back to normal launch");
+                        logBuilder.AppendLine(
+                            "[LaunchFlow] No usable injection DLL (default path invalid, no plugin), falling back to normal launch");
                         gameStarted = StartGameNormally(gameExePath, arguments, gamePath, logBuilder);
                     }
                 }

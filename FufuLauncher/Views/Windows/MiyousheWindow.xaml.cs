@@ -258,8 +258,10 @@ public sealed partial class MiyousheWindow : WindowEx
                 _shopGameKey = game.Key;
                 await ShopPane.SetGameAsync(game.Key);
             }
+
             return;
         }
+
         if (_initializing || GameSelector.SelectedItem is not CommunityGame selected) return;
         _communityGame = selected;
         _changingSelectors = true;

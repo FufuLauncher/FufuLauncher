@@ -58,7 +58,7 @@ internal static class ProofOfWorkSolver
         using var hasher = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
         Span<byte> hash = stackalloc byte[HashLength];
 
-        for (var nonce = start; ; nonce += stride)
+        for (var nonce = start;; nonce += stride)
         {
             if (Volatile.Read(ref result[0]) >= 0) return;
             if (cancellationToken.IsCancellationRequested) return;

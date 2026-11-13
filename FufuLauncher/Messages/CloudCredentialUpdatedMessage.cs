@@ -14,5 +14,8 @@ public class CloudCredentialUpdatedMessage : ValueChangedMessage<string>
         HasCredential = hasCredential;
     }
 
-    public bool HasCredential { get; }
+    public bool HasCredential
+    {
+        get;
+    }
 }

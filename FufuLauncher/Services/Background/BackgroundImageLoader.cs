@@ -136,10 +136,7 @@ internal static class BackgroundImageLoader
         return result;
     }
 
-    
-    
-    
-    
+
     private static void ApplyAntialias(byte[] pixels, int width, int height, (bool Enabled, int Strength) settings)
     {
         if (!settings.Enabled || settings.Strength <= 0)

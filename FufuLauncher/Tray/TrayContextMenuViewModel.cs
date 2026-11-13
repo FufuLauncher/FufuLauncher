@@ -24,7 +24,10 @@ internal sealed class TrayContextMenuViewModel
 
     public string Title => "AppDisplayName".GetLocalized();
 
-    public FontFamily TrayIconFont { get; } = new(
+    public FontFamily TrayIconFont
+    {
+        get;
+    } = new(
         OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000)
             ? "Segoe Fluent Icons"
             : "Segoe MDL2 Assets");

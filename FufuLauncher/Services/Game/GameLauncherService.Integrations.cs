@@ -14,7 +14,8 @@ public partial class GameLauncherService
             {
                 if (!IsAdministrator())
                 {
-                    logBuilder.AppendLine("[LaunchFlow] FPS overlay: administrator privileges required, setting reset to disabled");
+                    logBuilder.AppendLine(
+                        "[LaunchFlow] FPS overlay: administrator privileges required, setting reset to disabled");
                     await _localSettingsService.SaveSettingAsync("IsFpsOverlayEnabled", false);
                     return;
                 }

@@ -68,7 +68,8 @@ internal sealed partial class MiyousheShopClient
         if (target.Uid.Length > 0) body["uid"] = target.Uid;
         if (target.Region.Length > 0) body["region"] = target.Region;
         if (target.GameBiz.Length > 0) body["game_biz"] = target.GameBiz;
-        var request = CreateAccountRequest(HttpMethod.Post, Api + ApiEndpoints.MiyousheShopExchangeEndpoint, account, uid);
+        var request = CreateAccountRequest(HttpMethod.Post, Api + ApiEndpoints.MiyousheShopExchangeEndpoint, account,
+            uid);
         request.Content = new ByteArrayContent(JsonSerializer.SerializeToUtf8Bytes(body));
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
         return request;
@@ -90,11 +91,13 @@ internal sealed partial class MiyousheShopClient
             return code switch
             {
                 0 => new(MiyousheShopPlanStatus.Succeeded, root.Get("data").Text("order_sn")),
-                1028 or 1034 => new(MiyousheShopPlanStatus.Verification, "MiyousheShop_ManualVerification".GetLocalized()),
+                1028 or 1034 => new(MiyousheShopPlanStatus.Verification,
+                    "MiyousheShop_ManualVerification".GetLocalized()),
                 _ => new(MiyousheShopPlanStatus.Failed, FormatRejection(root))
             };
         }
-        catch (Exception ex) when (ex is HttpRequestException or OperationCanceledException or IOException or JsonException)
+        catch (Exception ex) when (ex is HttpRequestException or OperationCanceledException or IOException
+                                       or JsonException)
         {
             return new(MiyousheShopPlanStatus.Unknown);
         }

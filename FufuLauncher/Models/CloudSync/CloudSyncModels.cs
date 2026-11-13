@@ -35,139 +35,305 @@ public sealed class FlexibleTimestampConverter : JsonConverter<string?>
 public sealed class CloudApiEnvelope
 {
     [JsonPropertyName("ok")]
-    public bool Ok { get; set; }
+    public bool Ok
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("code")]
-    public string Code { get; set; } = string.Empty;
+    public string Code
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("message")]
-    public string Message { get; set; } = string.Empty;
+    public string Message
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("data")]
-    public JsonElement? Data { get; set; }
+    public JsonElement? Data
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("details")]
-    public JsonElement? Details { get; set; }
+    public JsonElement? Details
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudApiResult<T>
 {
-    public bool Ok { get; init; }
-    public int HttpStatusCode { get; init; }
-    public string Code { get; init; } = string.Empty;
-    public string Message { get; init; } = string.Empty;
-    public T? Data { get; init; }
-    public CloudChallengeInfo? Challenge { get; init; }
-    public bool RequiresCaptcha => Challenge != null && string.Equals(Code, "CAPTCHA_REQUIRED", StringComparison.Ordinal);
+    public bool Ok
+    {
+        get;
+        init;
+    }
+
+    public int HttpStatusCode
+    {
+        get;
+        init;
+    }
+
+    public string Code
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string Message
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public T? Data
+    {
+        get;
+        init;
+    }
+
+    public CloudChallengeInfo? Challenge
+    {
+        get;
+        init;
+    }
+
+    public bool RequiresCaptcha =>
+        Challenge != null && string.Equals(Code, "CAPTCHA_REQUIRED", StringComparison.Ordinal);
+
     public bool IsPending => string.Equals(Code, "CHALLENGE_PENDING", StringComparison.Ordinal);
-    public bool IsAccountLocked => HttpStatusCode == 423 || string.Equals(Code, "ACCOUNT_LOCKED", StringComparison.Ordinal);
+
+    public bool IsAccountLocked =>
+        HttpStatusCode == 423 || string.Equals(Code, "ACCOUNT_LOCKED", StringComparison.Ordinal);
 }
 
 public sealed class CloudChallengeInfo
 {
     [JsonPropertyName("challenge_id")]
-    public string ChallengeId { get; set; } = string.Empty;
+    public string ChallengeId
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("challenge_secret")]
-    public string ChallengeSecret { get; set; } = string.Empty;
+    public string ChallengeSecret
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("captcha_url")]
-    public string CaptchaUrl { get; set; } = string.Empty;
+    public string CaptchaUrl
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("poll_url")]
-    public string PollUrl { get; set; } = string.Empty;
+    public string PollUrl
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("expires_in")]
-    public int ExpiresIn { get; set; }
+    public int ExpiresIn
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudLoginSessionData
 {
     [JsonPropertyName("stoken")]
-    public string Stoken { get; set; } = string.Empty;
+    public string Stoken
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("stoken_expires_in")]
-    public long StokenExpiresIn { get; set; }
+    public long StokenExpiresIn
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("ltoken")]
-    public string Ltoken { get; set; } = string.Empty;
+    public string Ltoken
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("ltoken_expires_in")]
-    public long LtokenExpiresIn { get; set; }
+    public long LtokenExpiresIn
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("account_status")]
-    public string AccountStatus { get; set; } = "active";
+    public string AccountStatus
+    {
+        get;
+        set;
+    } = "active";
 
     [JsonPropertyName("locked")]
-    public bool Locked { get; set; }
+    public bool Locked
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("locked_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string? LockedAt { get; set; }
+    public string? LockedAt
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudLtokenIssueData
 {
     [JsonPropertyName("ltoken")]
-    public string Ltoken { get; set; } = string.Empty;
+    public string Ltoken
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("expires_in")]
-    public long ExpiresIn { get; set; }
+    public long ExpiresIn
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("account_status")]
-    public string AccountStatus { get; set; } = "active";
+    public string AccountStatus
+    {
+        get;
+        set;
+    } = "active";
 
     [JsonPropertyName("locked")]
-    public bool Locked { get; set; }
+    public bool Locked
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("locked_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string? LockedAt { get; set; }
+    public string? LockedAt
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudAccountStatusData
 {
     [JsonPropertyName("account_status")]
-    public string AccountStatus { get; set; } = "active";
+    public string AccountStatus
+    {
+        get;
+        set;
+    } = "active";
 
     [JsonPropertyName("locked")]
-    public bool Locked { get; set; }
+    public bool Locked
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("locked_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string? LockedAt { get; set; }
+    public string? LockedAt
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudOtpSentData
 {
     [JsonPropertyName("expires_in")]
-    public int ExpiresIn { get; set; }
+    public int ExpiresIn
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudArchiveItem
 {
     [JsonPropertyName("data_type")]
-    public string DataType { get; set; } = string.Empty;
+    public string DataType
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("slot")]
-    public string Slot { get; set; } = string.Empty;
+    public string Slot
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("compressed_size")]
-    public long CompressedSize { get; set; }
+    public long CompressedSize
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("raw_size")]
-    public long RawSize { get; set; }
+    public long RawSize
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("sha256")]
-    public string Sha256 { get; set; } = string.Empty;
+    public string Sha256
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("created_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string CreatedAt { get; set; } = string.Empty;
+    public string CreatedAt
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string UpdatedAt { get; set; } = string.Empty;
+    public string UpdatedAt
+    {
+        get;
+        set;
+    } = string.Empty;
 
     public string TypeBadge => DataType.ToLowerInvariant() switch
     {
@@ -218,280 +384,659 @@ public sealed class CloudArchiveItem
 public sealed class CloudRemainingQuotaSnapshot
 {
     [JsonPropertyName("ops")]
-    public long Ops { get; set; }
+    public long Ops
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("uploads")]
-    public long Uploads { get; set; }
+    public long Uploads
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("deletes")]
-    public long Deletes { get; set; }
+    public long Deletes
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudArchiveListData
 {
     [JsonPropertyName("r2_bytes_used")]
-    public long R2BytesUsed { get; set; }
+    public long R2BytesUsed
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("r2_bytes_limit")]
-    public long R2BytesLimit { get; set; }
+    public long R2BytesLimit
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("file_count")]
-    public int FileCount { get; set; }
+    public int FileCount
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("file_count_limit")]
-    public int FileCountLimit { get; set; }
+    public int FileCountLimit
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("archives")]
-    public List<CloudArchiveItem> Archives { get; set; } = new();
+    public List<CloudArchiveItem> Archives
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("remaining_quota")]
-    public CloudRemainingQuotaSnapshot? RemainingQuota { get; set; }
+    public CloudRemainingQuotaSnapshot? RemainingQuota
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudUploadResultData
 {
     [JsonPropertyName("type")]
-    public string Type { get; set; } = string.Empty;
+    public string Type
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("slot")]
-    public string Slot { get; set; } = string.Empty;
+    public string Slot
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("overwritten")]
-    public bool Overwritten { get; set; }
+    public bool Overwritten
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("compressed_size")]
-    public long CompressedSize { get; set; }
+    public long CompressedSize
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("raw_size")]
-    public long RawSize { get; set; }
+    public long RawSize
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("sha256")]
-    public string Sha256 { get; set; } = string.Empty;
+    public string Sha256
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("updated_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string UpdatedAt { get; set; } = string.Empty;
+    public string UpdatedAt
+    {
+        get;
+        set;
+    } = string.Empty;
 }
 
 public sealed class CloudPullResult
 {
-    public bool Ok { get; init; }
-    public int HttpStatusCode { get; init; }
-    public string Code { get; init; } = string.Empty;
-    public string Message { get; init; } = string.Empty;
-    public string DataType { get; init; } = string.Empty;
-    public string Slot { get; init; } = string.Empty;
-    public string Sha256 { get; init; } = string.Empty;
-    public long CompressedBytes { get; init; }
-    public long RawBytes { get; init; }
-    public string JsonContent { get; init; } = string.Empty;
+    public bool Ok
+    {
+        get;
+        init;
+    }
+
+    public int HttpStatusCode
+    {
+        get;
+        init;
+    }
+
+    public string Code
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string Message
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string DataType
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string Slot
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string Sha256
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public long CompressedBytes
+    {
+        get;
+        init;
+    }
+
+    public long RawBytes
+    {
+        get;
+        init;
+    }
+
+    public string JsonContent
+    {
+        get;
+        init;
+    } = string.Empty;
 }
 
 public sealed class PlayTimeSegment
 {
     [JsonPropertyName("start")]
-    public long Start { get; set; }
+    public long Start
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("end")]
-    public long End { get; set; }
+    public long End
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class PlayTimeCloudInfo
 {
     [JsonPropertyName("export_app")]
-    public string ExportApp { get; set; } = "FufuLauncher";
+    public string ExportApp
+    {
+        get;
+        set;
+    } = "FufuLauncher";
 
     [JsonPropertyName("export_app_version")]
-    public string ExportAppVersion { get; set; } = string.Empty;
+    public string ExportAppVersion
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("playtime_version")]
-    public string PlaytimeVersion { get; set; } = "v1.0";
+    public string PlaytimeVersion
+    {
+        get;
+        set;
+    } = "v1.0";
 
     [JsonPropertyName("export_timestamp")]
-    public long ExportTimestamp { get; set; }
+    public long ExportTimestamp
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class PlayTimeCloudDocument
 {
     [JsonPropertyName("info")]
-    public PlayTimeCloudInfo Info { get; set; } = new();
+    public PlayTimeCloudInfo Info
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("segments")]
-    public List<PlayTimeSegment> Segments { get; set; } = new();
+    public List<PlayTimeSegment> Segments
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("daily_seconds")]
-    public Dictionary<string, long> DailySeconds { get; set; } = new(StringComparer.Ordinal);
+    public Dictionary<string, long> DailySeconds
+    {
+        get;
+        set;
+    } = new(StringComparer.Ordinal);
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonPropertyName("legacy_daily_seconds")]
-    public Dictionary<string, long>? LegacyDailySeconds { get; set; }
+    public Dictionary<string, long>? LegacyDailySeconds
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class PlayTimeMergeResult
 {
-    public bool Ok { get; init; }
-    public string? ErrorCode { get; init; }
-    public long BeforeTotalSeconds { get; init; }
-    public long AfterTotalSeconds { get; init; }
-    public long AddedSeconds { get; init; }
-    public long IncomingSegmentSeconds { get; init; }
-    public long OverlapDeduplicatedSeconds { get; init; }
-    public int ResultingSegmentCount { get; init; }
-    public int UpdatedDaysCount { get; init; }
+    public bool Ok
+    {
+        get;
+        init;
+    }
+
+    public string? ErrorCode
+    {
+        get;
+        init;
+    }
+
+    public long BeforeTotalSeconds
+    {
+        get;
+        init;
+    }
+
+    public long AfterTotalSeconds
+    {
+        get;
+        init;
+    }
+
+    public long AddedSeconds
+    {
+        get;
+        init;
+    }
+
+    public long IncomingSegmentSeconds
+    {
+        get;
+        init;
+    }
+
+    public long OverlapDeduplicatedSeconds
+    {
+        get;
+        init;
+    }
+
+    public int ResultingSegmentCount
+    {
+        get;
+        init;
+    }
+
+    public int UpdatedDaysCount
+    {
+        get;
+        init;
+    }
 }
 
 public sealed class PlayTimeLocalSummary
 {
-    public int TotalDays { get; init; }
-    public long TotalSeconds { get; init; }
-    public int SegmentCount { get; init; }
-    public long SegmentedSeconds { get; init; }
-    public long LegacySeconds { get; init; }
+    public int TotalDays
+    {
+        get;
+        init;
+    }
+
+    public long TotalSeconds
+    {
+        get;
+        init;
+    }
+
+    public int SegmentCount
+    {
+        get;
+        init;
+    }
+
+    public long SegmentedSeconds
+    {
+        get;
+        init;
+    }
+
+    public long LegacySeconds
+    {
+        get;
+        init;
+    }
 }
 
 public sealed class CloudRenameResultData
 {
     [JsonPropertyName("type")]
-    public string Type { get; set; } = string.Empty;
+    public string Type
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("old_slot")]
-    public string OldSlot { get; set; } = string.Empty;
+    public string OldSlot
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("new_slot")]
-    public string NewSlot { get; set; } = string.Empty;
+    public string NewSlot
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("overwritten")]
-    public bool Overwritten { get; set; }
+    public bool Overwritten
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudDeleteResultData
 {
     [JsonPropertyName("type")]
-    public string Type { get; set; } = string.Empty;
+    public string Type
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("slot")]
-    public string Slot { get; set; } = string.Empty;
+    public string Slot
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("freed_bytes")]
-    public long FreedBytes { get; set; }
+    public long FreedBytes
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudDeleteAllResultData
 {
     [JsonPropertyName("deleted_files")]
-    public int DeletedFiles { get; set; }
+    public int DeletedFiles
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("freed_bytes")]
-    public long FreedBytes { get; set; }
+    public long FreedBytes
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudQuotaCounter
 {
     [JsonPropertyName("used")]
-    public long Used { get; set; }
+    public long Used
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("limit")]
-    public long Limit { get; set; }
+    public long Limit
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("remaining")]
-    public long Remaining { get; set; }
+    public long Remaining
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudQuotaDaily
 {
     [JsonPropertyName("ops")]
-    public CloudQuotaCounter Ops { get; set; } = new();
+    public CloudQuotaCounter Ops
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("uploads")]
-    public CloudQuotaCounter Uploads { get; set; } = new();
+    public CloudQuotaCounter Uploads
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("deletes")]
-    public CloudQuotaCounter Deletes { get; set; } = new();
+    public CloudQuotaCounter Deletes
+    {
+        get;
+        set;
+    } = new();
 }
 
 public sealed class CloudQuotaStorage
 {
     [JsonPropertyName("r2_bytes")]
-    public CloudQuotaCounter R2Bytes { get; set; } = new();
+    public CloudQuotaCounter R2Bytes
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("files")]
-    public CloudQuotaCounter Files { get; set; } = new();
+    public CloudQuotaCounter Files
+    {
+        get;
+        set;
+    } = new();
 }
 
 public sealed class CloudQuotaLimits
 {
     [JsonPropertyName("user_daily_max_ops")]
-    public long UserDailyMaxOps { get; set; }
+    public long UserDailyMaxOps
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("user_daily_max_uploads")]
-    public long UserDailyMaxUploads { get; set; }
+    public long UserDailyMaxUploads
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("user_daily_max_deletes")]
-    public long UserDailyMaxDeletes { get; set; }
+    public long UserDailyMaxDeletes
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("max_user_r2_bytes")]
-    public long MaxUserR2Bytes { get; set; }
+    public long MaxUserR2Bytes
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("max_user_files")]
-    public long MaxUserFiles { get; set; }
+    public long MaxUserFiles
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudQuotaUpgradeInfo
 {
     [JsonPropertyName("active")]
-    public bool Active { get; set; }
+    public bool Active
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("activated_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string? ActivatedAt { get; set; }
+    public string? ActivatedAt
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("expires_at")]
     [JsonConverter(typeof(FlexibleTimestampConverter))]
-    public string? ExpiresAt { get; set; }
+    public string? ExpiresAt
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("expires_in_seconds")]
-    public long ExpiresInSeconds { get; set; }
+    public long ExpiresInSeconds
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("expanded_by")]
-    public CloudQuotaLimits? ExpandedBy { get; set; }
+    public CloudQuotaLimits? ExpandedBy
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudQuotaData
 {
     [JsonPropertyName("utc_date")]
-    public string UtcDate { get; set; } = string.Empty;
+    public string UtcDate
+    {
+        get;
+        set;
+    } = string.Empty;
 
     [JsonPropertyName("resets_at")]
-    public long ResetsAt { get; set; }
+    public long ResetsAt
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("daily")]
-    public CloudQuotaDaily Daily { get; set; } = new();
+    public CloudQuotaDaily Daily
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("storage")]
-    public CloudQuotaStorage Storage { get; set; } = new();
+    public CloudQuotaStorage Storage
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("base_limits")]
-    public CloudQuotaLimits BaseLimits { get; set; } = new();
+    public CloudQuotaLimits BaseLimits
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("effective_limits")]
-    public CloudQuotaLimits EffectiveLimits { get; set; } = new();
+    public CloudQuotaLimits EffectiveLimits
+    {
+        get;
+        set;
+    } = new();
 
     [JsonPropertyName("upgrade")]
-    public CloudQuotaUpgradeInfo Upgrade { get; set; } = new();
+    public CloudQuotaUpgradeInfo Upgrade
+    {
+        get;
+        set;
+    } = new();
 }
 
 public sealed class CloudActivationResultData
 {
     [JsonPropertyName("effective_limits")]
-    public CloudQuotaLimits? EffectiveLimits { get; set; }
+    public CloudQuotaLimits? EffectiveLimits
+    {
+        get;
+        set;
+    }
 
     [JsonPropertyName("upgrade")]
-    public CloudQuotaUpgradeInfo? Upgrade { get; set; }
+    public CloudQuotaUpgradeInfo? Upgrade
+    {
+        get;
+        set;
+    }
 }
 
 public sealed class CloudPersistedSession
 {
-    public string Email { get; set; } = string.Empty;
-    public string Stoken { get; set; } = string.Empty;
-    public long StokenExpiresAtUnix { get; set; }
+    public string Email
+    {
+        get;
+        set;
+    } = string.Empty;
+
+    public string Stoken
+    {
+        get;
+        set;
+    } = string.Empty;
+
+    public long StokenExpiresAtUnix
+    {
+        get;
+        set;
+    }
 }

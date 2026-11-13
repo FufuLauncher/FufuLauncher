@@ -11,13 +11,40 @@ public interface ICloudSyncService
 {
     event EventHandler? SessionChanged;
 
-    bool IsLoggedIn { get; }
-    bool HasLtoken { get; }
-    string CurrentEmail { get; }
-    string AccountStatus { get; }
-    bool IsLocked { get; }
-    string? LockedAt { get; }
-    string? LastStartupMessage { get; }
+    bool IsLoggedIn
+    {
+        get;
+    }
+
+    bool HasLtoken
+    {
+        get;
+    }
+
+    string CurrentEmail
+    {
+        get;
+    }
+
+    string AccountStatus
+    {
+        get;
+    }
+
+    bool IsLocked
+    {
+        get;
+    }
+
+    string? LockedAt
+    {
+        get;
+    }
+
+    string? LastStartupMessage
+    {
+        get;
+    }
 
     Task InitializeOnStartupAsync();
     Task<bool> EnsureAuthenticatedAsync();
@@ -51,9 +78,15 @@ public interface ICloudSyncService
     Task<CloudApiResult<CloudActivationResultData>> ActivateCodeAsync(string code);
 
     Task<CloudApiResult<CloudArchiveListData>> ListArchivesAsync(string? typeFilter = null);
-    Task<CloudApiResult<CloudUploadResultData>> UploadArchiveAsync(string dataType, string slot, string jsonContent, bool overwrite = true);
+
+    Task<CloudApiResult<CloudUploadResultData>> UploadArchiveAsync(string dataType, string slot, string jsonContent,
+        bool overwrite = true);
+
     Task<CloudPullResult> PullArchiveAsync(string dataType, string slot);
-    Task<CloudApiResult<CloudRenameResultData>> RenameArchiveAsync(string dataType, string oldSlot, string newSlot, bool overwrite = false);
+
+    Task<CloudApiResult<CloudRenameResultData>> RenameArchiveAsync(string dataType, string oldSlot, string newSlot,
+        bool overwrite = false);
+
     Task<CloudApiResult<CloudDeleteResultData>> DeleteArchiveAsync(string dataType, string slot);
     Task<CloudApiResult<CloudDeleteAllResultData>> DeleteAllDataAsync();
 }

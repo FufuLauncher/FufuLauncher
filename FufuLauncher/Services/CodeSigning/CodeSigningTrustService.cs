@@ -718,7 +718,8 @@ public sealed class CodeSigningTrustService
                     return new TrustOperationResult { Ok = false, Message = "同步端点返回了非法文件名，已终止" };
                 }
 
-                var bytes = await client.GetByteArrayAsync(ApiEndpoints.GetCertificateSyncFileUrl(url, file.Name), cancellationToken)
+                var bytes = await client.GetByteArrayAsync(ApiEndpoints.GetCertificateSyncFileUrl(url, file.Name),
+                        cancellationToken)
                     .ConfigureAwait(false);
 
                 var actualHash = Convert.ToHexString(SHA256.HashData(bytes));

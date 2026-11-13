@@ -155,7 +155,8 @@
                                         <VisualState x:Name="LeftMode" />
                                         <VisualState x:Name="TopMode">
                                             <VisualState.Setters>
-                                                <Setter Target="InnerHeaderGrid.Margin" Value="{ThemeResource TopNavigationViewItemInnerHeaderMargin}" />
+                                                <Setter Target="InnerHeaderGrid.Margin"
+                                                        Value="{ThemeResource TopNavigationViewItemInnerHeaderMargin}" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>

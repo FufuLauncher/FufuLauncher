@@ -32,7 +32,8 @@ internal sealed record MiyousheLoginQr(
         if (text.Length > 4096 || text.Any(char.IsControl)
                                || !Uri.TryCreate(text, UriKind.Absolute, out var uri)
                                || uri.Scheme != "https" || !uri.IsDefaultPort || uri.UserInfo.Length != 0
-                               || !uri.Host.Equals(ApiEndpoints.UserMihoyoHost, StringComparison.OrdinalIgnoreCase)) return false;
+                               || !uri.Host.Equals(ApiEndpoints.UserMihoyoHost, StringComparison.OrdinalIgnoreCase))
+            return false;
         var parameters = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var pair in uri.Query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries))
         {

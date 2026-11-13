@@ -314,6 +314,7 @@ public sealed partial class MainWindow
             ShowNavAvatar(entry.AvatarUrl);
             ApplyFlyoutAvatar(entry.AvatarUrl);
         }
+
         ApplyAccountAvatarPendant(_showAccountAvatarPendant ? entry.AvatarPendantUrl : null);
 
         AccountNavText.Text = nickname;
@@ -412,7 +413,6 @@ public sealed partial class MainWindow
 
         if (failedUri is { IsFile: true })
         {
-            
             if (!_accountPendantCacheInvalidated && AccountAvatarPendantCache.Invalidate(url))
             {
                 _accountPendantCacheInvalidated = true;
@@ -426,7 +426,6 @@ public sealed partial class MainWindow
         }
         else if (AccountAvatarPendantCache.TryGetCachedFile(url, out var cachedPath))
         {
-            
             DebugLog.Info("MainWindow.Navigation",
                 "[Pendant] Remote pendant failed, falling back to cache: " + e.ErrorMessage);
             SetPendantSource(cachedPath);

@@ -335,7 +335,8 @@
                                         Click="OnOpenOfficialBackgroundWindowClick" />
                             </StackPanel>
 
-                            <Expander FontFamily="{StaticResource AppGlobalFont}" Header="{helpers:Loc Key=OfficialBgApiTitle}" IsExpanded="False">
+                            <Expander FontFamily="{StaticResource AppGlobalFont}"
+                                      Header="{helpers:Loc Key=OfficialBgApiTitle}" IsExpanded="False">
                                 <StackPanel Spacing="8" Padding="0,4,0,0">
                                     <TextBox
                                         Text="{x:Bind ViewModel.CustomBackgroundApiUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

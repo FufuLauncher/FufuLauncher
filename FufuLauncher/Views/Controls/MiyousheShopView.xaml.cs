@@ -13,6 +13,7 @@ namespace FufuLauncher.Views;
 public sealed partial class MiyousheShopView : UserControl
 {
     private sealed record DetailSnapshot(MiyousheShopGoods Goods, string Notes, long LoadedAt);
+
     private const int DetailCacheLifetimeMs = 20_000;
 
     private readonly MiyousheShopClient _client = App.GetService<MiyousheShopClient>();
@@ -124,6 +125,7 @@ public sealed partial class MiyousheShopView : UserControl
             EmptyGoods.Visibility = Visibility.Collapsed;
             MoreGoods.Visibility = Visibility.Collapsed;
         }
+
         _listRequest?.Cancel();
         using var request = new CancellationTokenSource();
         _listRequest = request;
@@ -146,6 +148,7 @@ public sealed partial class MiyousheShopView : UserControl
                 _detailCache.Clear();
                 _goods.Clear();
             }
+
             var seen = _goods.Select(item => item.Id).ToHashSet(StringComparer.Ordinal);
             int availableIndex = _goods.TakeWhile(item => !item.AccountLimitReached).Count();
             foreach (var item in result.Goods)
@@ -154,13 +157,16 @@ public sealed partial class MiyousheShopView : UserControl
                 if (item.AccountLimitReached) _goods.Add(item);
                 else _goods.Insert(availableIndex++, item);
             }
-            if (reset) ActiveGoodsView.SelectedItem = _goods.FirstOrDefault(item => item.Id == selectedId) ??
-                                                     _goods.FirstOrDefault();
+
+            if (reset)
+                ActiveGoodsView.SelectedItem = _goods.FirstOrDefault(item => item.Id == selectedId) ??
+                                               _goods.FirstOrDefault();
             _page = page;
             _loadedGame = game;
             EmptyGoods.Visibility = _goods.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
             MoreGoods.Visibility = page * (long)MiyousheShopClient.PageSize < result.Total && result.Goods.Count > 0
-                ? Visibility.Visible : Visibility.Collapsed;
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
         catch (MiyousheShopException ex)
         {
@@ -175,8 +181,9 @@ public sealed partial class MiyousheShopView : UserControl
             }
         }
         catch (Exception ex) when (request.IsCancellationRequested || ex is HttpRequestException or
-                                   System.Text.Json.JsonException or InvalidDataException or TaskCanceledException or
-                                   IOException or InvalidOperationException)
+                                       System.Text.Json.JsonException or InvalidDataException or TaskCanceledException
+                                       or
+                                       IOException or InvalidOperationException)
         {
             if (!request.IsCancellationRequested) ShowError("MiyousheShop_LoadError", ex);
         }
@@ -245,7 +252,7 @@ public sealed partial class MiyousheShopView : UserControl
             if (reportError && !request.IsCancellationRequested) ShowStatus(ex.Message, InfoBarSeverity.Warning);
         }
         catch (Exception ex) when (request.IsCancellationRequested || ex is HttpRequestException or
-                                   System.Text.Json.JsonException or InvalidDataException or TaskCanceledException)
+                                       System.Text.Json.JsonException or InvalidDataException or TaskCanceledException)
         {
             if (reportError && !request.IsCancellationRequested) ShowError("MiyousheShop_DetailError", ex);
         }
@@ -310,7 +317,7 @@ public sealed partial class MiyousheShopView : UserControl
             if (_open && session == _catalogSession) UpdateCatalogGoods(detail);
         }
         catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException or
-                                   InvalidDataException or OperationCanceledException or MiyousheShopException)
+                                       InvalidDataException or OperationCanceledException or MiyousheShopException)
         {
             DebugLog.Info(nameof(MiyousheShopView), ex.GetType().Name);
         }
@@ -361,10 +368,13 @@ public sealed partial class MiyousheShopView : UserControl
                 _nextUiDeadline = opening;
                 countdown = FormatCountdown(remaining);
             }
+
             alreadyScheduled = _plans.Any(item => item.AccountId == _accountId && item.GoodsId == detail.Id &&
-                item.OpensAt == opening && item.Status is MiyousheShopPlanStatus.Pending or MiyousheShopPlanStatus.Submitting);
+                                                  item.OpensAt == opening &&
+                                                  item.Status is MiyousheShopPlanStatus.Pending
+                                                      or MiyousheShopPlanStatus.Submitting);
             canSchedule = _detail != null && detail.SupportsExchange && remaining > TimeSpan.Zero &&
-                (detail.End is not { } end || opening < end);
+                          (detail.End is not { } end || opening < end);
         }
         else if (display is { IsAvailable: true, End: { } end })
         {
@@ -385,7 +395,8 @@ public sealed partial class MiyousheShopView : UserControl
         ScheduleButton.IsEnabled = canSchedule && !alreadyScheduled && !_saving;
         ScheduleButton.Content = (alreadyScheduled ? "MiyousheShop_Scheduled" : "MiyousheShop_Schedule").GetLocalized();
         ExchangeButton.Visibility = _detail is { SupportsExchange: true, IsAvailable: true }
-            ? Visibility.Visible : Visibility.Collapsed;
+            ? Visibility.Visible
+            : Visibility.Collapsed;
         ExchangeButton.IsEnabled = !_saving;
         UpdateCountdownTimer();
     }
@@ -424,6 +435,7 @@ public sealed partial class MiyousheShopView : UserControl
             ShowError("MiyousheShop_LoginRequired");
             return;
         }
+
         var opens = scheduled ? detail.NextOpening : DateTimeOffset.UtcNow;
         if (opens is not { } opening || (scheduled ? opening <= DateTimeOffset.UtcNow : !detail.IsAvailable)) return;
         string id = _accountId, name = _accountName;
@@ -439,6 +451,7 @@ public sealed partial class MiyousheShopView : UserControl
                 ShowError("MiyousheShop_NoTarget");
                 return;
             }
+
             var selector = new ComboBox
             {
                 Header = "MiyousheShop_Target".GetLocalized(), ItemsSource = targets,
@@ -453,7 +466,8 @@ public sealed partial class MiyousheShopView : UserControl
             content.Children.Add(new TextBlock
             {
                 Text = scheduled
-                    ? string.Format("MiyousheShop_ConfirmScheduled".GetLocalized(), opening.ToOffset(TimeSpan.FromHours(8)))
+                    ? string.Format("MiyousheShop_ConfirmScheduled".GetLocalized(),
+                        opening.ToOffset(TimeSpan.FromHours(8)))
                     : "MiyousheShop_ConfirmImmediate".GetLocalized(),
                 TextWrapping = TextWrapping.Wrap
             });
@@ -484,7 +498,9 @@ public sealed partial class MiyousheShopView : UserControl
             var status = ("MiyousheShop_Plan" + result.Status).GetLocalized();
             if (!ct.IsCancellationRequested && _accountId == id)
                 ShowStatus(string.IsNullOrEmpty(result.Message) ? status : status + " · " + result.Message,
-                    result.Status == MiyousheShopPlanStatus.Succeeded ? InfoBarSeverity.Success : InfoBarSeverity.Warning);
+                    result.Status == MiyousheShopPlanStatus.Succeeded
+                        ? InfoBarSeverity.Success
+                        : InfoBarSeverity.Warning);
             if (result.Status == MiyousheShopPlanStatus.Succeeded)
                 await RefreshRedeemedGoodsAsync(plan);
         }
@@ -546,7 +562,8 @@ public sealed partial class MiyousheShopView : UserControl
                 CloseButtonText = "MiyousheShop_Cancel".GetLocalized()
             };
             if (await ShowConfirmationAsync(dialog))
-                await _planStore.TransitionAsync(plan.Id, MiyousheShopPlanStatus.Unknown, MiyousheShopPlanStatus.Reviewed);
+                await _planStore.TransitionAsync(plan.Id, MiyousheShopPlanStatus.Unknown,
+                    MiyousheShopPlanStatus.Reviewed);
         }
         catch (Exception ex)
         {
@@ -575,7 +592,8 @@ public sealed partial class MiyousheShopView : UserControl
     private void RenderPlans()
     {
         var displayed = _plans.Where(item => item.Scheduled || item.CanResolve ||
-            item.Status == MiyousheShopPlanStatus.Submitting).OrderBy(item => item.Status)
+                                             item.Status == MiyousheShopPlanStatus.Submitting)
+            .OrderBy(item => item.Status)
             .ThenBy(item => item.OpensAt).ToArray();
         PlansList.ItemsSource = displayed;
         EmptyPlans.Visibility = displayed.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
@@ -603,6 +621,7 @@ public sealed partial class MiyousheShopView : UserControl
 
     private async void OnRefresh(object sender, RoutedEventArgs e) => await RefreshAsync();
     private async void OnLoadMore(object sender, RoutedEventArgs e) => await LoadPageAsync(reset: false);
+
     private async void OnOpenSelectedGoods(object sender, RoutedEventArgs e)
     {
         if (ActiveGoodsView.SelectedItem is MiyousheShopGoods item)
@@ -613,7 +632,8 @@ public sealed partial class MiyousheShopView : UserControl
     {
         if (sender is Button { Tag: MiyousheShopPlan item })
             await OpenOfficialAsync(item.CanResolve || item.Status == MiyousheShopPlanStatus.Succeeded
-                ? MiyousheShopClient.OfficialHistoryUri : MiyousheShopClient.OfficialUri(item.GoodsId));
+                ? MiyousheShopClient.OfficialHistoryUri
+                : MiyousheShopClient.OfficialUri(item.GoodsId));
     }
 
     private async Task OpenOfficialAsync(Uri uri)
@@ -627,6 +647,7 @@ public sealed partial class MiyousheShopView : UserControl
             ShowError("MiyousheShop_OpenError", ex);
             return;
         }
+
         ShowError("MiyousheShop_OpenError");
     }
 

@@ -240,6 +240,7 @@ public partial class PluginSettingsViewModel
             {
                 PluginDescription = cachedDescription;
             }
+
             _presetsDir = snapshot.PresetState!.Directory;
             CurrentPreset = snapshot.PresetState.CurrentPreset;
             foreach (var notification in snapshot.PresetState.Notifications)
@@ -512,8 +513,13 @@ public partial class PluginSettingsViewModel
         bool DeveloperFeatures,
         bool AutoCreatePresets);
 
-    private sealed record ConfigurationSetting(string Section, string RawName, string FallbackName, string Type,
-        string Value, string Help);
+    private sealed record ConfigurationSetting(
+        string Section,
+        string RawName,
+        string FallbackName,
+        string Type,
+        string Value,
+        string Help);
 
     private sealed record ConfigurationLoadSnapshot(
         bool Exists,

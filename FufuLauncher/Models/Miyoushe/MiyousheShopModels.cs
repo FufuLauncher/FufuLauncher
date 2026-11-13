@@ -10,11 +10,28 @@ public sealed record MiyousheShopGame(string Key, string Name)
 }
 
 public sealed record MiyousheShopGoods(
-    string Id, string Name, string Icon, long Price, long Stock, bool Unlimited,
-    string Status, DateTimeOffset? SaleStart, DateTimeOffset? Restock, long RestockQuantity,
-    DateTimeOffset? End, string Description, string Details, long Type, string Game, string GameBiz)
+    string Id,
+    string Name,
+    string Icon,
+    long Price,
+    long Stock,
+    bool Unlimited,
+    string Status,
+    DateTimeOffset? SaleStart,
+    DateTimeOffset? Restock,
+    long RestockQuantity,
+    DateTimeOffset? End,
+    string Description,
+    string Details,
+    long Type,
+    string Game,
+    string GameBiz)
 {
-    public bool AccountLimitReached { get; init; }
+    public bool AccountLimitReached
+    {
+        get;
+        init;
+    }
 
     public bool IsAvailable => !AccountLimitReached && Status == "online" && (Unlimited || Stock > 0) &&
                                (End is not { } end || end > DateTimeOffset.UtcNow);
@@ -36,7 +53,8 @@ public sealed record MiyousheShopGoods(
     public string PriceText => string.Format("MiyousheShop_Price".GetLocalized(), Price);
 
     public string CatalogTimingText => NextOpening is { } opening
-        ? string.Format((Status == "online" ? "MiyousheShop_CatalogRestock" : "MiyousheShop_CatalogOpening").GetLocalized(),
+        ? string.Format(
+            (Status == "online" ? "MiyousheShop_CatalogRestock" : "MiyousheShop_CatalogOpening").GetLocalized(),
             opening.ToOffset(TimeSpan.FromHours(8)))
         : "";
 
@@ -59,7 +77,8 @@ public sealed record MiyousheShopGoods(
         item.Number("type"), item.Text("game"), item.Text("game_biz"))
     {
         AccountLimitReached = authenticated && item.Text("account_cycle_type") != "not_limit" &&
-            item.Number("account_cycle_limit") is > 0 and var limit && item.Number("account_exchange_num") >= limit
+                              item.Number("account_cycle_limit") is > 0 and var limit &&
+                              item.Number("account_exchange_num") >= limit
     };
 
     private static DateTimeOffset? ReadTime(JsonElement item, string key)
@@ -70,7 +89,9 @@ public sealed record MiyousheShopGoods(
 }
 
 public sealed record MiyousheShopPage(
-    IReadOnlyList<MiyousheShopGoods> Goods, IReadOnlyList<MiyousheShopGame> Games, long Total);
+    IReadOnlyList<MiyousheShopGoods> Goods,
+    IReadOnlyList<MiyousheShopGame> Games,
+    long Total);
 
 public enum MiyousheShopPlanStatus
 {
@@ -90,27 +111,35 @@ public sealed record MiyousheShopTarget(string Label, string Uid, string Region,
 }
 
 public sealed record MiyousheShopPlan(
-    Guid Id, string GoodsId, string GoodsName, DateTimeOffset OpensAt, string AccountId,
-    string AccountName, long GoodsType, string Game, string GameBiz, MiyousheShopTarget? Target,
-    bool Scheduled, MiyousheShopPlanStatus Status, string Result = "")
+    Guid Id,
+    string GoodsId,
+    string GoodsName,
+    DateTimeOffset OpensAt,
+    string AccountId,
+    string AccountName,
+    long GoodsType,
+    string Game,
+    string GameBiz,
+    MiyousheShopTarget? Target,
+    bool Scheduled,
+    MiyousheShopPlanStatus Status,
+    string Result = "")
 {
     [JsonIgnore]
     public string TimeText => string.Format("MiyousheShop_BeijingTime".GetLocalized(),
         OpensAt.ToOffset(TimeSpan.FromHours(8)));
 
-    [JsonIgnore]
-    public string StatusText => ("MiyousheShop_Plan" + Status).GetLocalized();
+    [JsonIgnore] public string StatusText => ("MiyousheShop_Plan" + Status).GetLocalized();
 
-    [JsonIgnore]
-    public string RecipientText => Target == null ? "" : $"{AccountName} · {Target.Label}";
+    [JsonIgnore] public string RecipientText => Target == null ? "" : $"{AccountName} · {Target.Label}";
 
     [JsonIgnore]
     public bool CanRemove => Status is not (MiyousheShopPlanStatus.Submitting or MiyousheShopPlanStatus.Unknown);
 
-    [JsonIgnore]
-    public bool CanResolve => Status == MiyousheShopPlanStatus.Unknown;
+    [JsonIgnore] public bool CanResolve => Status == MiyousheShopPlanStatus.Unknown;
 
     [JsonIgnore]
     public string OfficialLinkText => (CanResolve || Status == MiyousheShopPlanStatus.Succeeded
-        ? "MiyousheShop_OfficialHistory" : "MiyousheShop_OfficialGoods").GetLocalized();
+        ? "MiyousheShop_OfficialHistory"
+        : "MiyousheShop_OfficialGoods").GetLocalized();
 }

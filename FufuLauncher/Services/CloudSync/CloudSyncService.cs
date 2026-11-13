@@ -42,7 +42,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
     private string _stoken = string.Empty;
     private long _stokenExpiresAtUnix;
 
-    
+
     private string _ltoken = string.Empty;
     private long _ltokenExpiresAtUnix;
     private string _accountStatus = "unknown";
@@ -91,14 +91,17 @@ public sealed partial class CloudSyncService : ICloudSyncService
             if (result.Ok)
             {
                 _lastStartupMessage = null;
-                DebugLog.Info("CloudSyncService", $"[CloudSync] Startup silent ltoken rotation succeeded (locked={_isLocked}).");
+                DebugLog.Info("CloudSyncService",
+                    $"[CloudSync] Startup silent ltoken rotation succeeded (locked={_isLocked}).");
             }
             else
             {
-                _lastStartupMessage = result.HttpStatusCode == 403 || string.Equals(result.Code, "FORBIDDEN", StringComparison.Ordinal)
+                _lastStartupMessage = result.HttpStatusCode == 403 ||
+                                      string.Equals(result.Code, "FORBIDDEN", StringComparison.Ordinal)
                     ? "CloudSync_ErrAuthRequired".GetLocalized()
                     : null;
-                DebugLog.Info("CloudSyncService", $"[CloudSync] Startup silent ltoken rotation failed: [{result.HttpStatusCode}] {result.Code} - {result.Message}");
+                DebugLog.Info("CloudSyncService",
+                    $"[CloudSync] Startup silent ltoken rotation failed: [{result.HttpStatusCode}] {result.Code} - {result.Message}");
             }
         }
         catch (Exception ex)
@@ -158,7 +161,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
             return trimmed;
         }
 
-        var cleaned = UnsafeSlotCharsRegex().Replace(trimmed, "_").Replace("..", "_", StringComparison.Ordinal).Trim('.', '_');
+        var cleaned = UnsafeSlotCharsRegex().Replace(trimmed, "_").Replace("..", "_", StringComparison.Ordinal)
+            .Trim('.', '_');
         if (string.IsNullOrEmpty(cleaned) || !char.IsAsciiLetterOrDigit(cleaned[0]))
         {
             cleaned = string.IsNullOrEmpty(cleaned) ? fallback : $"{fallback}_{cleaned}";
@@ -176,7 +180,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
     {
         if (!string.IsNullOrWhiteSpace(code) || !string.IsNullOrWhiteSpace(message))
         {
-            DebugLog.Info("CloudSyncService", $"[CloudSync] API error mapped: status={statusCode}, code={code}, detail={message}");
+            DebugLog.Info("CloudSyncService",
+                $"[CloudSync] API error mapped: status={statusCode}, code={code}, detail={message}");
         }
 
         return code switch
@@ -199,7 +204,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
                 or "INVALID_PLAYTIME_SCHEMA" or "UNSUPPORTED_PLAYTIME_VERSION"
                 => "CloudSync_ErrInvalidFormat".GetLocalized(),
             "INVALID_DATA_SLOT" or "INVALID_SLOT" => "CloudSync_ErrInvalidSlot".GetLocalized(),
-            "INVALID_ACTIVATION_CODE" or "INVALID_ACTIVATION_CODE_FORMAT" => "CloudSync_ErrActivationInvalid".GetLocalized(),
+            "INVALID_ACTIVATION_CODE" or "INVALID_ACTIVATION_CODE_FORMAT" => "CloudSync_ErrActivationInvalid"
+                .GetLocalized(),
             "ACTIVATION_ALREADY_REDEEMED" => "CloudSync_ErrActivationRedeemed".GetLocalized(),
             "ACTIVATION_CODE_EXHAUSTED" => "CloudSync_ErrActivationExhausted".GetLocalized(),
             "ACTIVATION_DISABLED" => "CloudSync_ErrActivationDisabled".GetLocalized(),
@@ -222,20 +228,23 @@ public sealed partial class CloudSyncService : ICloudSyncService
         });
 
     public Task<CloudApiResult<CloudChallengeInfo>> StartRegisterSendCodeAsync(string email)
-        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthRegisterSendCodePath, new
-        {
-            email = email.Trim()
-        });
+        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthRegisterSendCodePath,
+            new
+            {
+                email = email.Trim()
+            });
 
-    public async Task<CloudApiResult<CloudLoginSessionData>> ConfirmRegisterAsync(string email, string password, string code)
+    public async Task<CloudApiResult<CloudLoginSessionData>> ConfirmRegisterAsync(string email, string password,
+        string code)
     {
         var trimmedEmail = email.Trim();
-        var result = await SendAnonymousJsonAsync<CloudLoginSessionData>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthRegisterConfirmPath, new
-        {
-            email = trimmedEmail,
-            password,
-            code = code.Trim()
-        });
+        var result = await SendAnonymousJsonAsync<CloudLoginSessionData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncAuthRegisterConfirmPath, new
+            {
+                email = trimmedEmail,
+                password,
+                code = code.Trim()
+            });
 
         if (result.Ok && result.Data != null)
         {
@@ -246,10 +255,11 @@ public sealed partial class CloudSyncService : ICloudSyncService
     }
 
     public Task<CloudApiResult<CloudChallengeInfo>> StartResetPasswordSendCodeAsync(string email)
-        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthResetPasswordSendCodePath, new
-        {
-            email = email.Trim()
-        });
+        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncAuthResetPasswordSendCodePath, new
+            {
+                email = email.Trim()
+            });
 
     public Task<CloudApiResult<object>> ConfirmResetPasswordAsync(string email, string code, string newPassword)
         => SendAnonymousJsonAsync<object>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthResetPasswordConfirmPath, new
@@ -310,7 +320,6 @@ public sealed partial class CloudSyncService : ICloudSyncService
         await _authLock.WaitAsync();
         try
         {
-            
             if (!string.IsNullOrEmpty(staleLtoken) &&
                 !string.IsNullOrEmpty(_ltoken) &&
                 !string.Equals(_ltoken, staleLtoken, StringComparison.Ordinal) &&
@@ -359,7 +368,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
                 _accountStatus = string.IsNullOrWhiteSpace(parsed.Data.AccountStatus)
                     ? (parsed.Data.Locked ? "locked" : "active")
                     : parsed.Data.AccountStatus;
-                _isLocked = parsed.Data.Locked || string.Equals(_accountStatus, "locked", StringComparison.OrdinalIgnoreCase);
+                _isLocked = parsed.Data.Locked ||
+                            string.Equals(_accountStatus, "locked", StringComparison.OrdinalIgnoreCase);
                 _lockedAt = parsed.Data.LockedAt;
                 RaiseSessionChanged();
             }
@@ -409,7 +419,6 @@ public sealed partial class CloudSyncService : ICloudSyncService
         }
         else
         {
-            
             ClearSessionState(clearEmail: false);
         }
 
@@ -424,80 +433,94 @@ public sealed partial class CloudSyncService : ICloudSyncService
 
     public async Task<CloudApiResult<CloudAccountStatusData>> GetAccountStatusAsync()
     {
-        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Get, ApiEndpoints.CloudSyncAccountStatusPath);
+        var result =
+            await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Get,
+                ApiEndpoints.CloudSyncAccountStatusPath);
         if (result.Ok && result.Data != null)
         {
             UpdateAccountLockState(result.Data);
         }
+
         return result;
     }
 
     public Task<CloudApiResult<CloudOtpSentData>> SendLockCodeAsync()
-        => SendAuthenticatedJsonAsync<CloudOtpSentData>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountLockSendCodePath, new { });
+        => SendAuthenticatedJsonAsync<CloudOtpSentData>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountLockSendCodePath,
+            new { });
 
     public async Task<CloudApiResult<CloudAccountStatusData>> ConfirmLockAsync(string code)
     {
-        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountLockConfirmPath, new
-        {
-            code = code.Trim()
-        });
+        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncAccountLockConfirmPath, new
+            {
+                code = code.Trim()
+            });
         if (result.Ok && result.Data != null)
         {
             UpdateAccountLockState(result.Data);
         }
+
         return result;
     }
 
     public Task<CloudApiResult<CloudOtpSentData>> SendUnlockCodeAsync()
-        => SendAuthenticatedJsonAsync<CloudOtpSentData>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountUnlockSendCodePath, new { });
+        => SendAuthenticatedJsonAsync<CloudOtpSentData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncAccountUnlockSendCodePath, new { });
 
     public async Task<CloudApiResult<CloudAccountStatusData>> ConfirmUnlockAsync(string code)
     {
-        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountUnlockConfirmPath, new
-        {
-            code = code.Trim()
-        });
+        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncAccountUnlockConfirmPath, new
+            {
+                code = code.Trim()
+            });
         if (result.Ok && result.Data != null)
         {
             UpdateAccountLockState(result.Data);
         }
+
         return result;
     }
 
     public async Task<CloudApiResult<object>> DeleteAccountAsync(string password)
     {
-        var result = await SendAuthenticatedJsonAsync<object>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountDeletePath, new
-        {
-            password,
-            confirm = true
-        });
+        var result = await SendAuthenticatedJsonAsync<object>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountDeletePath,
+            new
+            {
+                password,
+                confirm = true
+            });
         if (result.Ok)
         {
             ClearSessionState(clearEmail: true);
         }
+
         return result;
     }
 
     public async Task<CloudApiResult<CloudQuotaData>> GetQuotaAsync()
     {
-        var result = await SendAuthenticatedJsonAsync<CloudQuotaData>(HttpMethod.Get, ApiEndpoints.CloudSyncDataQuotaPath);
+        var result =
+            await SendAuthenticatedJsonAsync<CloudQuotaData>(HttpMethod.Get, ApiEndpoints.CloudSyncDataQuotaPath);
         MarkLockedIf423(result.HttpStatusCode, result.Code);
         return result;
     }
 
     public async Task<CloudApiResult<CloudActivationResultData>> ActivateCodeAsync(string code)
     {
-        var result = await SendAuthenticatedJsonAsync<CloudActivationResultData>(HttpMethod.Post, ApiEndpoints.CloudSyncDataActivatePath, new
-        {
-            code = code.Trim()
-        });
+        var result = await SendAuthenticatedJsonAsync<CloudActivationResultData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncDataActivatePath, new
+            {
+                code = code.Trim()
+            });
         MarkLockedIf423(result.HttpStatusCode, result.Code);
         return result;
     }
 
     public async Task<CloudApiResult<CloudArchiveListData>> ListArchivesAsync(string? typeFilter = null)
     {
-        var path = string.IsNullOrWhiteSpace(typeFilter) || string.Equals(typeFilter, "all", StringComparison.OrdinalIgnoreCase)
+        var path = string.IsNullOrWhiteSpace(typeFilter) ||
+                   string.Equals(typeFilter, "all", StringComparison.OrdinalIgnoreCase)
             ? ApiEndpoints.CloudSyncDataListPath
             : ApiEndpoints.GetCloudSyncDataListPath(typeFilter);
 
@@ -506,7 +529,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
         return result;
     }
 
-    public async Task<CloudApiResult<CloudUploadResultData>> UploadArchiveAsync(string dataType, string slot, string jsonContent, bool overwrite = true)
+    public async Task<CloudApiResult<CloudUploadResultData>> UploadArchiveAsync(string dataType, string slot,
+        string jsonContent, bool overwrite = true)
     {
         var normalizedType = (dataType ?? string.Empty).Trim().ToLowerInvariant();
         if (normalizedType is not ("uiaf" or "uigf" or "playtime"))
@@ -630,8 +654,12 @@ public sealed partial class CloudSyncService : ICloudSyncService
                         DataType = TryGetHeader(resp.Headers, "X-Data-Type") ?? dataType,
                         Slot = TryGetHeader(resp.Headers, "X-Data-Slot") ?? slot,
                         Sha256 = TryGetHeader(resp.Headers, "X-Data-SHA256") ?? string.Empty,
-                        CompressedBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Compressed-Bytes"), out var cb) ? cb : 0,
-                        RawBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Raw-Bytes"), out var rb) ? rb : Encoding.UTF8.GetByteCount(body),
+                        CompressedBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Compressed-Bytes"), out var cb)
+                            ? cb
+                            : 0,
+                        RawBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Raw-Bytes"), out var rb)
+                            ? rb
+                            : Encoding.UTF8.GetByteCount(body),
                         JsonContent = body
                     };
                 }
@@ -667,7 +695,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
         };
     }
 
-    public async Task<CloudApiResult<CloudRenameResultData>> RenameArchiveAsync(string dataType, string oldSlot, string newSlot, bool overwrite = false)
+    public async Task<CloudApiResult<CloudRenameResultData>> RenameArchiveAsync(string dataType, string oldSlot,
+        string newSlot, bool overwrite = false)
     {
         var trimmedNew = (newSlot ?? string.Empty).Trim();
         if (!IsValidSlotName(trimmedNew))
@@ -681,39 +710,43 @@ public sealed partial class CloudSyncService : ICloudSyncService
             };
         }
 
-        var result = await SendAuthenticatedJsonAsync<CloudRenameResultData>(HttpMethod.Post, ApiEndpoints.CloudSyncDataRenamePath, new
-        {
-            type = dataType.Trim().ToLowerInvariant(),
-            old_slot = oldSlot.Trim(),
-            new_slot = trimmedNew,
-            overwrite
-        });
+        var result = await SendAuthenticatedJsonAsync<CloudRenameResultData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncDataRenamePath, new
+            {
+                type = dataType.Trim().ToLowerInvariant(),
+                old_slot = oldSlot.Trim(),
+                new_slot = trimmedNew,
+                overwrite
+            });
         MarkLockedIf423(result.HttpStatusCode, result.Code);
         return result;
     }
 
     public async Task<CloudApiResult<CloudDeleteResultData>> DeleteArchiveAsync(string dataType, string slot)
     {
-        var result = await SendAuthenticatedJsonAsync<CloudDeleteResultData>(HttpMethod.Post, ApiEndpoints.CloudSyncDataDeletePath, new
-        {
-            type = dataType.Trim().ToLowerInvariant(),
-            slot = slot.Trim()
-        });
+        var result = await SendAuthenticatedJsonAsync<CloudDeleteResultData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncDataDeletePath, new
+            {
+                type = dataType.Trim().ToLowerInvariant(),
+                slot = slot.Trim()
+            });
         MarkLockedIf423(result.HttpStatusCode, result.Code);
         return result;
     }
 
     public async Task<CloudApiResult<CloudDeleteAllResultData>> DeleteAllDataAsync()
     {
-        var result = await SendAuthenticatedJsonAsync<CloudDeleteAllResultData>(HttpMethod.Post, ApiEndpoints.CloudSyncDataDeleteAllPath, new
-        {
-            confirm = true
-        });
+        var result = await SendAuthenticatedJsonAsync<CloudDeleteAllResultData>(HttpMethod.Post,
+            ApiEndpoints.CloudSyncDataDeleteAllPath, new
+            {
+                confirm = true
+            });
         MarkLockedIf423(result.HttpStatusCode, result.Code);
         return result;
     }
 
-    private async Task<CloudApiResult<T>> SendAnonymousJsonAsync<T>(HttpMethod method, string path, object? payload = null)
+    private async Task<CloudApiResult<T>> SendAnonymousJsonAsync<T>(HttpMethod method, string path,
+        object? payload = null)
     {
         try
         {
@@ -739,7 +772,8 @@ public sealed partial class CloudSyncService : ICloudSyncService
         }
     }
 
-    private async Task<CloudApiResult<T>> SendAuthenticatedJsonAsync<T>(HttpMethod method, string path, object? payload = null)
+    private async Task<CloudApiResult<T>> SendAuthenticatedJsonAsync<T>(HttpMethod method, string path,
+        object? payload = null)
     {
         if (!await EnsureAuthenticatedAsync())
         {

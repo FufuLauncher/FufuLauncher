@@ -80,9 +80,10 @@ public sealed partial class MiyousheWindow
     private void UpdateNavigationSelection()
     {
         foreach (var button in NavigationButtons.Children.OfType<RadioButton>())
-            button.IsChecked = _shopOpen ? button == ShopNavigation :
-                button.Tag is string kind && kind == _feed.Kind.ToString() &&
-                (_feed.Kind != CommunityFeed.User || _feed.Target == _client.AccountUid);
+            button.IsChecked = _shopOpen
+                ? button == ShopNavigation
+                : button.Tag is string kind && kind == _feed.Kind.ToString() &&
+                  (_feed.Kind != CommunityFeed.User || _feed.Target == _client.AccountUid);
         FeedBackButton.Visibility = _pageHistory.Count == 0 ? Visibility.Collapsed : Visibility.Visible;
     }
 

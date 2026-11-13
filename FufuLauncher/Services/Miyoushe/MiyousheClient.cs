@@ -105,7 +105,9 @@ public sealed partial class MiyousheClient : IDisposable
         switch (feed.Kind)
         {
             case CommunityFeed.Forum:
-                endpoint = feed.Sort == 3 ? ApiEndpoints.MiyousheGetHotForumPostListPath : ApiEndpoints.MiyousheGetRecentForumPostListPath;
+                endpoint = feed.Sort == 3
+                    ? ApiEndpoints.MiyousheGetHotForumPostListPath
+                    : ApiEndpoints.MiyousheGetRecentForumPostListPath;
                 q = new()
                 {
                     ["forum_id"] = feed.ForumId.ToString(), ["gids"] = feed.GameId.ToString(), ["is_good"] = "false",
@@ -196,7 +198,8 @@ public sealed partial class MiyousheClient : IDisposable
             if (onlyAuthor) q["only_master"] = "true";
         }
 
-        var data = await SendAsync(floor == null ? ApiEndpoints.MiyousheGetPostRepliesPath : ApiEndpoints.MiyousheGetSubRepliesPath, q,
+        var data = await SendAsync(
+            floor == null ? ApiEndpoints.MiyousheGetPostRepliesPath : ApiEndpoints.MiyousheGetSubRepliesPath, q,
             _context == null ? Profile.Web : Profile.X4Sign, ct);
         var replies = data.Get("list").Items().Select(CommunityReply.Parse).ToArray();
         var next = data.Text("last_id");
@@ -259,7 +262,8 @@ public sealed partial class MiyousheClient : IDisposable
                 Profile.K2 or Profile.K2Sign => Profile.K2Sign,
                 _ => Profile.X4Sign
             };
-            var data = await SendAsync(ApiEndpoints.MiyousheCreateVerificationPath, new() { ["is_high"] = "true" }, profile, ct,
+            var data = await SendAsync(ApiEndpoints.MiyousheCreateVerificationPath, new() { ["is_high"] = "true" },
+                profile, ct,
                 verificationRequest: true);
             if (data.Text("gt").Length == 0) throw new CommunityApiException("服务未提供可用的验证码，请在米游社官方页面完成验证");
             var result = await showCaptcha(data, null, ct) ?? throw new OperationCanceledException(ct);

@@ -97,7 +97,7 @@ public static class BackgroundImageAntialiasSettings
             SaveLock.Release();
         }
     }
-    
+
     internal static EdgeAntialiasProfile GetEdgeProfile(int strength)
     {
         var t = Math.Clamp(strength, 0, 100) / 100f;

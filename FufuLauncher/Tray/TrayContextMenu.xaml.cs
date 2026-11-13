@@ -77,7 +77,8 @@ internal sealed partial class TrayContextMenu : Flyout
     }
 
     [DllImport("dwmapi.dll")]
-    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int attributeValue, int attributeSize);
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attribute, ref int attributeValue,
+        int attributeSize);
 
     [DllImport("user32.dll")]
     private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);

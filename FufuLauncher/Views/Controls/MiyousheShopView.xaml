@@ -92,7 +92,8 @@
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                                     </StackPanel>
                                     <StackPanel Grid.Column="2" Spacing="4" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding PriceText}" FontWeight="SemiBold" TextAlignment="Right"
+                                        <TextBlock Text="{Binding PriceText}" FontWeight="SemiBold"
+                                                   TextAlignment="Right"
                                                    Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
                                         <TextBlock Text="{Binding StockText}" FontSize="12" TextAlignment="Right"
                                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
@@ -292,9 +293,11 @@
                                 </StackPanel>
                                 <Button Grid.Column="1" Tag="{Binding}" Click="OnOpenPlanGoods"
                                         Content="{Binding OfficialLinkText}" />
-                                <Button Grid.Column="2" Tag="{Binding}" Click="OnResolvePlan" IsEnabled="{Binding CanResolve}"
+                                <Button Grid.Column="2" Tag="{Binding}" Click="OnResolvePlan"
+                                        IsEnabled="{Binding CanResolve}"
                                         Content="{helpers:Loc Key=MiyousheShop_Resolve}" />
-                                <Button Grid.Column="3" Tag="{Binding}" Click="OnRemovePlan" IsEnabled="{Binding CanRemove}"
+                                <Button Grid.Column="3" Tag="{Binding}" Click="OnRemovePlan"
+                                        IsEnabled="{Binding CanRemove}"
                                         Content="{helpers:Loc Key=MiyousheShop_Remove}" />
                             </Grid>
                         </DataTemplate>
@@ -375,7 +378,8 @@
                         </GridView.ItemTemplate>
                     </GridView>
                     <TextBlock x:Name="EmptyPendants" Grid.Row="2" Margin="12,16" IsHitTestVisible="False"
-                               Visibility="Collapsed" Text="{helpers:Loc Key=MiyoushePendant_Empty}" TextWrapping="Wrap"
+                               Visibility="Collapsed" Text="{helpers:Loc Key=MiyoushePendant_Empty}"
+                               TextWrapping="Wrap"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                 </Grid>
                 <Border Grid.Column="1" CornerRadius="12" BorderThickness="1"

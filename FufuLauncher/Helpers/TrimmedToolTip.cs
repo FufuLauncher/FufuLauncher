@@ -151,7 +151,8 @@ public static class TrimmedToolTip
     private static void ApplyToolTip(TextBlock textBlock, string text)
     {
         var state = States.GetOrCreateValue(textBlock);
-        if (state.OwnedToolTip?.Content is TextBlock current && string.Equals(current.Text, text, StringComparison.Ordinal))
+        if (state.OwnedToolTip?.Content is TextBlock current &&
+            string.Equals(current.Text, text, StringComparison.Ordinal))
         {
             return;
         }

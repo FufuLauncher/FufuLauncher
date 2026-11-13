@@ -253,7 +253,8 @@
                                     PlaceholderText="{helpers:Loc Key=Miyoushe_SearchHint}" QueryIcon="Find"
                                     QuerySubmitted="OnSearch" />
                 </Grid>
-                <InfoBar FontFamily="{StaticResource AppGlobalFont}" x:Name="StatusBar" Grid.Row="1" IsOpen="False" IsClosable="True" Closed="OnStatusClosed">
+                <InfoBar FontFamily="{StaticResource AppGlobalFont}" x:Name="StatusBar" Grid.Row="1" IsOpen="False"
+                         IsClosable="True" Closed="OnStatusClosed">
                     <InfoBar.ActionButton>
                         <Button x:Name="StatusAction" Click="OnStatusAction" />
                     </InfoBar.ActionButton>

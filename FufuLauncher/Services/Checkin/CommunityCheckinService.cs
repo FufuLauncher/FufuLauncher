@@ -102,7 +102,6 @@ public class CommunityCheckinService : ICommunityCheckinService
 
     private async Task<bool> IsAlreadySignedAsync(IReadOnlyDictionary<string, string> cookies)
     {
-        
         var pairs = new List<string>();
         foreach (var name in new[] { "ltuid", "ltoken", "account_id", "cookie_token" })
         {
