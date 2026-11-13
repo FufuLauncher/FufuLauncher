@@ -52,7 +52,7 @@ public sealed partial class CloudCredentialWindow : Window
             CloudWebView.CoreWebView2.ContextMenuRequested += CoreWebView2_ContextMenuRequested;
 
             CloudWebView.CoreWebView2.AddWebResourceRequestedFilter(
-                "*://api-cloudgame.mihoyo.com/hk4e_cg_cn/wallet/wallet/get*",
+                ApiEndpoints.CloudGameWalletWebViewFilter,
                 CoreWebView2WebResourceContext.All);
             CloudWebView.CoreWebView2.WebResourceRequested += CoreWebView2_WebResourceRequested;
 

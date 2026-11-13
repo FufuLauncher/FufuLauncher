@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -2216,6 +2217,9 @@ Ir para o site da Microsoft para baixar e instalar?</value>
   <data name="AboutPage_ContactAuthor" xml:space="preserve">
     <value>Contatar autor</value>
   </data>
+  <data name="AboutPage_ContactEmailOption" xml:space="preserve">
+    <value>E-mail ({0})</value>
+  </data>
   <data name="SponsorWindow_Title" xml:space="preserve">
     <value>Apoiar</value>
   </data>
@@ -3453,6 +3457,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="AboutPage_DiscordCopied" xml:space="preserve">
     <value>ID do Discord copiado!</value>
+  </data>
+  <data name="AboutPage_EmailCopied" xml:space="preserve">
+    <value>E-mail copiado!</value>
   </data>
   <data name="AboutPage_Loading" xml:space="preserve">
     <value>Carregando...</value>
@@ -9305,6 +9312,9 @@ Detalhes: {0}</value>
   <data name="CloudSync_BtnExportSave" xml:space="preserve">
     <value>Salvar</value>
   </data>
+  <data name="CloudSync_BtnMergeToLocal" xml:space="preserve">
+    <value>Mesclar</value>
+  </data>
   <data name="CloudSync_BtnOverwrite" xml:space="preserve">
     <value>Sobrescrever</value>
   </data>
@@ -9374,6 +9384,9 @@ Detalhes: {0}</value>
   <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
     <value>Desbloquear</value>
   </data>
+  <data name="CloudSync_ContactTip" xml:space="preserve">
+    <value>Em caso de dúvidas, entre em contato pelo e-mail dev@fufu.skin</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Excluir conta e dados</value>
   </data>
@@ -9424,6 +9437,15 @@ Detalhes: {0}</value>
   </data>
   <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
     <value>Falha no download</value>
+  </data>
+  <data name="CloudSync_DurationHoursMinsFormat" xml:space="preserve">
+    <value>{0} h {1} min</value>
+  </data>
+  <data name="CloudSync_DurationMinsSecsFormat" xml:space="preserve">
+    <value>{0} min {1} s</value>
+  </data>
+  <data name="CloudSync_DurationSecsFormat" xml:space="preserve">
+    <value>{0} s</value>
   </data>
   <data name="CloudSync_EmailHeader" xml:space="preserve">
     <value>E-mail</value>
@@ -9526,6 +9548,9 @@ Detalhes: {0}</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>Todos os tipos</value>
+  </data>
+  <data name="CloudSync_FilterPlayTime" xml:space="preserve">
+    <value>Tempo de jogo</value>
   </data>
   <data name="CloudSync_FilterUiaf" xml:space="preserve">
     <value>Conquistas</value>
@@ -9785,6 +9810,54 @@ Detalhes: {0}</value>
   <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
     <value>Definir senha</value>
   </data>
+  <data name="CloudSync_PlayTimeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Sobrescrever o arquivo na nuvem "{0}" com os registros locais de tempo de jogo?</value>
+  </data>
+  <data name="CloudSync_PlayTimeEmptyCloud" xml:space="preserve">
+    <value>Ainda não há arquivos de tempo de jogo na nuvem. Digite um nome acima e envie seus registros atuais.</value>
+  </data>
+  <data name="CloudSync_PlayTimeListSummary" xml:space="preserve">
+    <value>{0} arquivos de tempo · Total {1}/{2} · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_PlayTimeLocalSummaryFormat" xml:space="preserve">
+    <value>Registros locais: {0} dias · Total {1} ({2} segmentos)</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedAddedFormat" xml:space="preserve">
+    <value>Adicionado +{1} de "{0}". Tempo total: {2}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedNoGainFormat" xml:space="preserve">
+    <value>"{0}" verificado: nenhum novo tempo (intervalos sobrepostos ou não excedem os dados locais). Total: {1}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedOverlapFormat" xml:space="preserve">
+    <value>Adicionado +{1} de "{0}" ({2} de sobreposição removidos). Total: {3}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeFailedTitle" xml:space="preserve">
+    <value>Falha ao mesclar tempo de jogo</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeImportBtn" xml:space="preserve">
+    <value>Mesclar e importar</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeSuccessTitle" xml:space="preserve">
+    <value>Tempo de jogo mesclado</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeTip" xml:space="preserve">
+    <value>O download mescla de forma aditiva com os registros locais: o tempo existente nunca diminui e intervalos repetidos são removidos automaticamente.</value>
+  </data>
+  <data name="CloudSync_PlayTimeNotSignedInMsg" xml:space="preserve">
+    <value>Faça login primeiro no Arquivo Nuvem FufuLauncher para enviar ou sincronizar registros de tempo de jogo.</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncBtn" xml:space="preserve">
+    <value>Sincronizar Nuvem</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncTooltip" xml:space="preserve">
+    <value>Enviar ou mesclar aditivamente arquivos de tempo de jogo na nuvem</value>
+  </data>
+  <data name="CloudSync_PlayTimeTitle" xml:space="preserve">
+    <value>Tempo de jogo · Arquivo Nuvem FufuLauncher</value>
+  </data>
+  <data name="CloudSync_PlayTimeUploadBtn" xml:space="preserve">
+    <value>Enviar tempo de jogo atual</value>
+  </data>
   <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
     <value>Atualize para ver espaço e uso diário</value>
   </data>
@@ -9938,6 +10011,9 @@ Detalhes: {0}</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Redefinir senha</value>
   </data>
+  <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
+    <value>Tempo de jogo</value>
+  </data>
   <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
     <value>Conquistas</value>
   </data>
@@ -9976,6 +10052,9 @@ Detalhes: {0}</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Enviar arquivo local</value>
+  </data>
+  <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
+    <value>Registros de tempo de jogo</value>
   </data>
   <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
     <value>Conquistas</value>

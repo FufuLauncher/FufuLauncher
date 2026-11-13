@@ -169,11 +169,18 @@ public sealed class CloudArchiveItem
     [JsonConverter(typeof(FlexibleTimestampConverter))]
     public string UpdatedAt { get; set; } = string.Empty;
 
-    public string TypeBadge => string.Equals(DataType, "uiaf", StringComparison.OrdinalIgnoreCase)
-        ? "CloudSync_TypeBadgeUiaf".GetLocalized()
-        : string.Equals(DataType, "uigf", StringComparison.OrdinalIgnoreCase)
-            ? "CloudSync_TypeBadgeUigf".GetLocalized()
-            : DataType.ToUpperInvariant();
+    public string TypeBadge => DataType.ToLowerInvariant() switch
+    {
+        "uiaf" => "CloudSync_TypeBadgeUiaf".GetLocalized(),
+        "uigf" => "CloudSync_TypeBadgeUigf".GetLocalized(),
+        "playtime" => "CloudSync_TypeBadgePlayTime".GetLocalized(),
+        _ => DataType.ToUpperInvariant()
+    };
+
+    public bool IsPlayTime => string.Equals(DataType, "playtime", StringComparison.OrdinalIgnoreCase);
+
+    public Microsoft.UI.Xaml.Visibility PlayTimeMergeVisibility =>
+        IsPlayTime ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;
 
     public string SizeSummary => string.Format(
         "CloudSync_SizeSummaryFormat".GetLocalized(),
@@ -278,6 +285,68 @@ public sealed class CloudPullResult
     public long CompressedBytes { get; init; }
     public long RawBytes { get; init; }
     public string JsonContent { get; init; } = string.Empty;
+}
+
+public sealed class PlayTimeSegment
+{
+    [JsonPropertyName("start")]
+    public long Start { get; set; }
+
+    [JsonPropertyName("end")]
+    public long End { get; set; }
+}
+
+public sealed class PlayTimeCloudInfo
+{
+    [JsonPropertyName("export_app")]
+    public string ExportApp { get; set; } = "FufuLauncher";
+
+    [JsonPropertyName("export_app_version")]
+    public string ExportAppVersion { get; set; } = string.Empty;
+
+    [JsonPropertyName("playtime_version")]
+    public string PlaytimeVersion { get; set; } = "v1.0";
+
+    [JsonPropertyName("export_timestamp")]
+    public long ExportTimestamp { get; set; }
+}
+
+public sealed class PlayTimeCloudDocument
+{
+    [JsonPropertyName("info")]
+    public PlayTimeCloudInfo Info { get; set; } = new();
+
+    [JsonPropertyName("segments")]
+    public List<PlayTimeSegment> Segments { get; set; } = new();
+
+    [JsonPropertyName("daily_seconds")]
+    public Dictionary<string, long> DailySeconds { get; set; } = new(StringComparer.Ordinal);
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonPropertyName("legacy_daily_seconds")]
+    public Dictionary<string, long>? LegacyDailySeconds { get; set; }
+}
+
+public sealed class PlayTimeMergeResult
+{
+    public bool Ok { get; init; }
+    public string? ErrorCode { get; init; }
+    public long BeforeTotalSeconds { get; init; }
+    public long AfterTotalSeconds { get; init; }
+    public long AddedSeconds { get; init; }
+    public long IncomingSegmentSeconds { get; init; }
+    public long OverlapDeduplicatedSeconds { get; init; }
+    public int ResultingSegmentCount { get; init; }
+    public int UpdatedDaysCount { get; init; }
+}
+
+public sealed class PlayTimeLocalSummary
+{
+    public int TotalDays { get; init; }
+    public long TotalSeconds { get; init; }
+    public int SegmentCount { get; init; }
+    public long SegmentedSeconds { get; init; }
+    public long LegacySeconds { get; init; }
 }
 
 public sealed class CloudRenameResultData

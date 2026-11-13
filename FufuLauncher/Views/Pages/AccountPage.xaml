@@ -1046,19 +1046,40 @@
                                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                 Text="{helpers:Loc Key=Account_RecentDays30}" />
                                         </StackPanel>
-                                        <Border
+                                        <StackPanel
                                             Grid.Column="1"
-                                            Padding="8,3"
-                                            VerticalAlignment="Top"
-                                            Background="{ThemeResource SystemFillColorSuccessBrush}"
-                                            CornerRadius="12"
-                                            Visibility="{x:Bind ControlPanelViewModel.IsGameRunning, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
-                                            <TextBlock
-                                                FontSize="11"
-                                                FontWeight="SemiBold"
-                                                Foreground="White"
-                                                Text="{helpers:Loc Key=Account_InGame}" />
-                                        </Border>
+                                            Orientation="Horizontal"
+                                            Spacing="8"
+                                            VerticalAlignment="Top">
+                                            <Border
+                                                Padding="8,3"
+                                                VerticalAlignment="Center"
+                                                Background="{ThemeResource SystemFillColorSuccessBrush}"
+                                                CornerRadius="12"
+                                                Visibility="{x:Bind ControlPanelViewModel.IsGameRunning, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <TextBlock
+                                                    FontSize="11"
+                                                    FontWeight="SemiBold"
+                                                    Foreground="White"
+                                                    Text="{helpers:Loc Key=Account_InGame}" />
+                                            </Border>
+                                            <Button
+                                                x:Name="BtnPlayTimeCloudSync"
+                                                Padding="10,4"
+                                                CornerRadius="8"
+                                                VerticalAlignment="Center"
+                                                Click="OnPlayTimeCloudSyncClicked"
+                                                ToolTipService.ToolTip="{helpers:Loc Key=CloudSync_PlayTimeSyncTooltip}">
+                                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                                    <FontIcon
+                                                        FontSize="13"
+                                                        Glyph="&#xE753;" />
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Text="{helpers:Loc Key=CloudSync_PlayTimeSyncBtn}" />
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
                                     </Grid>
                                     <Grid Grid.Row="1" ColumnSpacing="12">
                                         <Grid.ColumnDefinitions>

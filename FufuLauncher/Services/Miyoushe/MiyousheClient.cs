@@ -87,8 +87,8 @@ public sealed partial class MiyousheClient : IDisposable
     public async Task<(IReadOnlyList<CommunityGame> Games, IReadOnlyList<CommunityForum> Forums)> GetNavigationAsync(
         CancellationToken ct)
     {
-        var games = await SendAsync("apihub/wapi/getGameList", [], Profile.Web, ct);
-        var forums = await SendAsync("apihub/wapi/getAllGamesForums", [], Profile.Web, ct);
+        var games = await SendAsync(ApiEndpoints.MiyousheGetGameListPath, [], Profile.Web, ct);
+        var forums = await SendAsync(ApiEndpoints.MiyousheGetAllGamesForumsPath, [], Profile.Web, ct);
         return (
             games.Get("list").Items()
                 .Select(g => new CommunityGame((int)g.Number("id"), g.Text("name"), g.Text("en_name"))).ToArray(),
@@ -105,7 +105,7 @@ public sealed partial class MiyousheClient : IDisposable
         switch (feed.Kind)
         {
             case CommunityFeed.Forum:
-                endpoint = feed.Sort == 3 ? "painter/wapi/getHotForumPostList" : "painter/wapi/getRecentForumPostList";
+                endpoint = feed.Sort == 3 ? ApiEndpoints.MiyousheGetHotForumPostListPath : ApiEndpoints.MiyousheGetRecentForumPostListPath;
                 q = new()
                 {
                     ["forum_id"] = feed.ForumId.ToString(), ["gids"] = feed.GameId.ToString(), ["is_good"] = "false",
@@ -115,7 +115,7 @@ public sealed partial class MiyousheClient : IDisposable
                 profile = _context == null ? Profile.Web : Profile.X4;
                 break;
             case CommunityFeed.News:
-                endpoint = "painter/wapi/getNewsList";
+                endpoint = ApiEndpoints.MiyousheGetNewsListPath;
                 q = new()
                 {
                     ["gids"] = feed.GameId.ToString(), ["type"] = feed.Sort.ToString(), ["page_size"] = "20",
@@ -123,31 +123,31 @@ public sealed partial class MiyousheClient : IDisposable
                 };
                 break;
             case CommunityFeed.Search:
-                endpoint = "post/wapi/searchPosts";
+                endpoint = ApiEndpoints.MiyousheSearchPostsPath;
                 q["keyword"] = feed.Target;
                 q["last_id"] = cursor;
                 q["order_type"] = feed.Sort.ToString();
                 break;
             case CommunityFeed.Following:
                 RequireLogin("ltoken", "ltoken_v2");
-                endpoint = "painter/wapi/timeline/list";
+                endpoint = ApiEndpoints.MiyousheTimelineListPath;
                 q["gids"] = "0";
                 if (cursor.Length > 0) q["offset"] = cursor;
                 profile = Profile.X4Sign;
                 break;
             case CommunityFeed.Favorites:
                 RequireLogin("cookie_token", "cookie_token_v2");
-                endpoint = "post/wapi/userFavouritePost";
+                endpoint = ApiEndpoints.MiyousheUserFavouritePostPath;
                 q = new() { ["uid"] = AccountUid, ["size"] = "20", ["offset"] = cursor };
                 profile = Profile.X4;
                 break;
             case CommunityFeed.User:
-                endpoint = "post/wapi/userPost";
+                endpoint = ApiEndpoints.MiyousheUserPostPath;
                 q["uid"] = feed.Target;
                 if (cursor.Length > 0) q["offset"] = cursor;
                 break;
             case CommunityFeed.Topic:
-                endpoint = "post/wapi/getTopicPostList";
+                endpoint = ApiEndpoints.MiyousheGetTopicPostListPath;
                 q = new()
                 {
                     ["gids"] = feed.GameId.ToString(), ["game_id"] = feed.GameId.ToString(), ["topic_id"] = feed.Target,
@@ -155,7 +155,7 @@ public sealed partial class MiyousheClient : IDisposable
                 };
                 break;
             case CommunityFeed.Collection:
-                endpoint = "post/wapi/getPostFullInCollection";
+                endpoint = ApiEndpoints.MiyousheGetPostFullInCollectionPath;
                 q = new() { ["collection_id"] = feed.Target };
                 break;
             default: throw new ArgumentOutOfRangeException(nameof(feed));
@@ -175,7 +175,7 @@ public sealed partial class MiyousheClient : IDisposable
     public async Task<CommunityPost> GetPostAsync(string id, int gameId, CancellationToken ct)
     {
         ValidateId(id);
-        var data = await SendAsync("post/wapi/getPostFull", new() { ["post_id"] = id, ["read"] = "1" },
+        var data = await SendAsync(ApiEndpoints.MiyousheGetPostFullPath, new() { ["post_id"] = id, ["read"] = "1" },
             _context == null ? Profile.Web : Profile.K2Sign, ct);
         var post = CommunityPost.Parse(data.Get("post"), gameId);
         if (post.Id.Length == 0) throw new CommunityApiException("帖子内容不可用");
@@ -196,7 +196,7 @@ public sealed partial class MiyousheClient : IDisposable
             if (onlyAuthor) q["only_master"] = "true";
         }
 
-        var data = await SendAsync(floor == null ? "post/wapi/getPostReplies" : "post/wapi/getSubReplies", q,
+        var data = await SendAsync(floor == null ? ApiEndpoints.MiyousheGetPostRepliesPath : ApiEndpoints.MiyousheGetSubRepliesPath, q,
             _context == null ? Profile.Web : Profile.X4Sign, ct);
         var replies = data.Get("list").Items().Select(CommunityReply.Parse).ToArray();
         var next = data.Text("last_id");
@@ -207,9 +207,9 @@ public sealed partial class MiyousheClient : IDisposable
     {
         string endpoint = feed.Kind switch
         {
-            CommunityFeed.User => "user/wapi/getUserFullInfo",
-            CommunityFeed.Topic => "topic/wapi/getTopicFullInfo",
-            CommunityFeed.Collection => "collection/wapi/collection/detail", _ => ""
+            CommunityFeed.User => ApiEndpoints.MiyousheGetUserFullInfoPath,
+            CommunityFeed.Topic => ApiEndpoints.MiyousheGetTopicFullInfoPath,
+            CommunityFeed.Collection => ApiEndpoints.MiyousheGetCollectionDetailPath, _ => ""
         };
         if (endpoint.Length == 0) return "";
         var q = new Dictionary<string, string>
@@ -259,11 +259,11 @@ public sealed partial class MiyousheClient : IDisposable
                 Profile.K2 or Profile.K2Sign => Profile.K2Sign,
                 _ => Profile.X4Sign
             };
-            var data = await SendAsync("misc/api/createVerification", new() { ["is_high"] = "true" }, profile, ct,
+            var data = await SendAsync(ApiEndpoints.MiyousheCreateVerificationPath, new() { ["is_high"] = "true" }, profile, ct,
                 verificationRequest: true);
             if (data.Text("gt").Length == 0) throw new CommunityApiException("服务未提供可用的验证码，请在米游社官方页面完成验证");
             var result = await showCaptcha(data, null, ct) ?? throw new OperationCanceledException(ct);
-            var verified = await SendAsync("misc/api/verifyVerification", [], profile switch
+            var verified = await SendAsync(ApiEndpoints.MiyousheVerifyVerificationPath, [], profile switch
                 {
                     Profile.WebSign => Profile.WebSign, Profile.K2Sign => Profile.K2, _ => Profile.X4
                 },

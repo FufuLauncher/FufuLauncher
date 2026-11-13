@@ -236,7 +236,7 @@ public sealed partial class PluginSettingsPage
             fileName = "FuFuPlugin.zip";
 
         var rawGithubUrl = proxyUrl.Replace(ApiEndpoints.GhProxyBase + "/", "");
-        if (rawGithubUrl.Contains("github.com") && rawGithubUrl.Contains("/blob/") &&
+        if (rawGithubUrl.Contains(ApiEndpoints.GithubHost) && rawGithubUrl.Contains("/blob/") &&
             !rawGithubUrl.Contains("?raw=true"))
         {
             rawGithubUrl += "?raw=true";

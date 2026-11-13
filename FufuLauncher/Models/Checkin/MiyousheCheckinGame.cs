@@ -27,7 +27,7 @@ public sealed record MiyousheCheckinGame(
     [
         new("hk4e_cn", "原神", "e202311201442471", LunaApi, ApiEndpoints.ActMihoyoBase + "/", "hk4e"),
         new("hkrpg_cn", "崩坏：星穹铁道", "e202304121516551", LunaApi, ApiEndpoints.ActMihoyoBase + "/"),
-        new("nap_cn", "绝区零", "e202406242138391", ApiEndpoints.ActNapApiBase + "/event/luna/zzz",
+        new("nap_cn", "绝区零", "e202406242138391", ApiEndpoints.LunaZzzEventApiBase,
             ApiEndpoints.ActMihoyoBase + "/", "zzz"),
         new("bh3_cn", "崩坏3", "e202306201626331", LunaApi,
             ApiEndpoints.WebstaticSigninBh3Url),

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -18,11 +19,17 @@
   <data name="AboutPage_ContactAuthor" xml:space="preserve">
     <value>Contatta l'Autore</value>
   </data>
+  <data name="AboutPage_ContactEmailOption" xml:space="preserve">
+    <value>Email ({0})</value>
+  </data>
   <data name="AboutPage_Contributors" xml:space="preserve">
     <value>Collaboratori</value>
   </data>
   <data name="AboutPage_DiscordCopied" xml:space="preserve">
     <value>ID Discord Copiato!</value>
+  </data>
+  <data name="AboutPage_EmailCopied" xml:space="preserve">
+    <value>Email copiata!</value>
   </data>
   <data name="AboutPage_EnterToken" xml:space="preserve">
     <value>Inserisci il tuo Token!</value>
@@ -9311,6 +9318,9 @@ Dettagli: {0}</value>
   <data name="CloudSync_BtnExportSave" xml:space="preserve">
     <value>Salva</value>
   </data>
+  <data name="CloudSync_BtnMergeToLocal" xml:space="preserve">
+    <value>Unisci</value>
+  </data>
   <data name="CloudSync_BtnOverwrite" xml:space="preserve">
     <value>Sovrascrivi</value>
   </data>
@@ -9380,6 +9390,9 @@ Dettagli: {0}</value>
   <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
     <value>Sblocca</value>
   </data>
+  <data name="CloudSync_ContactTip" xml:space="preserve">
+    <value>In caso di problemi, contatta dev@fufu.skin</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Elimina account e dati</value>
   </data>
@@ -9430,6 +9443,15 @@ Dettagli: {0}</value>
   </data>
   <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
     <value>Download fallito</value>
+  </data>
+  <data name="CloudSync_DurationHoursMinsFormat" xml:space="preserve">
+    <value>{0} h {1} min</value>
+  </data>
+  <data name="CloudSync_DurationMinsSecsFormat" xml:space="preserve">
+    <value>{0} min {1} s</value>
+  </data>
+  <data name="CloudSync_DurationSecsFormat" xml:space="preserve">
+    <value>{0} s</value>
   </data>
   <data name="CloudSync_EmailHeader" xml:space="preserve">
     <value>Indirizzo e-mail</value>
@@ -9532,6 +9554,9 @@ Dettagli: {0}</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>Tutti i tipi</value>
+  </data>
+  <data name="CloudSync_FilterPlayTime" xml:space="preserve">
+    <value>Tempo di gioco</value>
   </data>
   <data name="CloudSync_FilterUiaf" xml:space="preserve">
     <value>Obiettivi</value>
@@ -9791,6 +9816,54 @@ Dettagli: {0}</value>
   <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
     <value>Imposta password</value>
   </data>
+  <data name="CloudSync_PlayTimeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Sovrascrivere l'archivio cloud "{0}" con i dati locali del tempo di gioco?</value>
+  </data>
+  <data name="CloudSync_PlayTimeEmptyCloud" xml:space="preserve">
+    <value>Nessun archivio del tempo di gioco nel cloud. Inserisci un nome sopra e carica i tuoi dati attuali.</value>
+  </data>
+  <data name="CloudSync_PlayTimeListSummary" xml:space="preserve">
+    <value>{0} archivi tempo · Totale {1}/{2} · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_PlayTimeLocalSummaryFormat" xml:space="preserve">
+    <value>Dati locali: {0} giorni · Totale {1} ({2} segmenti)</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedAddedFormat" xml:space="preserve">
+    <value>+{1} aggiunti da "{0}". Tempo totale: {2}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedNoGainFormat" xml:space="preserve">
+    <value>"{0}" verificato: nessun nuovo tempo (intervalli sovrapposti o non superiori ai dati locali). Totale: {1}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedOverlapFormat" xml:space="preserve">
+    <value>+{1} aggiunti da "{0}" ({2} di sovrapposizione deduplicati). Totale: {3}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeFailedTitle" xml:space="preserve">
+    <value>Unione del tempo di gioco non riuscita</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeImportBtn" xml:space="preserve">
+    <value>Unisci e importa</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeSuccessTitle" xml:space="preserve">
+    <value>Tempo di gioco unito</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeTip" xml:space="preserve">
+    <value>Il download unisce i dati in modo additivo: il tempo locale non diminuisce mai e gli intervalli sovrapposti vengono deduplicati automaticamente.</value>
+  </data>
+  <data name="CloudSync_PlayTimeNotSignedInMsg" xml:space="preserve">
+    <value>Accedi prima all'Archivio Cloud FufuLauncher per caricare o sincronizzare il tempo di gioco.</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncBtn" xml:space="preserve">
+    <value>Sincronizza Cloud</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncTooltip" xml:space="preserve">
+    <value>Carica o unisci in modo additivo gli archivi cloud del tempo di gioco</value>
+  </data>
+  <data name="CloudSync_PlayTimeTitle" xml:space="preserve">
+    <value>Tempo di gioco · Archivio Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_PlayTimeUploadBtn" xml:space="preserve">
+    <value>Carica tempo di gioco attuale</value>
+  </data>
   <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
     <value>Aggiorna per vedere spazio e uso giornaliero</value>
   </data>
@@ -9944,6 +10017,9 @@ Dettagli: {0}</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Reimposta password</value>
   </data>
+  <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
+    <value>Tempo di gioco</value>
+  </data>
   <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
     <value>Obiettivi</value>
   </data>
@@ -9982,6 +10058,9 @@ Dettagli: {0}</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Carica file locale</value>
+  </data>
+  <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
+    <value>Dati tempo di gioco</value>
   </data>
   <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
     <value>Obiettivi</value>

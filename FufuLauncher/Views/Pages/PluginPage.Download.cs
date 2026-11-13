@@ -198,7 +198,7 @@ public sealed partial class PluginPage
 
         var rawGithubUrl = proxyUrl.Replace(ApiEndpoints.GhProxyBase + "/", "");
 
-        if (rawGithubUrl.Contains("github.com") && rawGithubUrl.Contains("/blob/") &&
+        if (rawGithubUrl.Contains(ApiEndpoints.GithubHost) && rawGithubUrl.Contains("/blob/") &&
             !rawGithubUrl.Contains("?raw=true"))
         {
             rawGithubUrl += "?raw=true";

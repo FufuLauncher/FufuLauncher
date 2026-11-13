@@ -14,7 +14,7 @@ public static class HelpDocumentRenderer
         "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><base href=\"__BASE__\"></head><body>__BODY__</body></html>";
 
     private const string FontFaceRule =
-        "@font-face { font-family: 'FufuDoc'; src: url('https://fufu.fonts/MiSans-Regular.ttf') format('truetype'); font-display: swap; }";
+        $"@font-face {{ font-family: 'FufuDoc'; src: url('{ApiEndpoints.HelpCustomFontUrl}') format('truetype'); font-display: swap; }}";
 
     private static readonly string s_fontPath =
         Path.Combine(AppContext.BaseDirectory, "Assets", "Fonts", "MiSans-Regular.ttf");

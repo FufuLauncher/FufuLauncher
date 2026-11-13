@@ -167,7 +167,7 @@ public class HoyolabCheckinService
             try
             {
                 var query = $"act_id={ActId}&lang=zh-cn";
-                var url = $"{BaseApi}/event/sol/home?{query}";
+                var url = $"{BaseApi}{ApiEndpoints.OverseaSignHomePath}?{query}";
                 using var req = new HttpRequestMessage(HttpMethod.Get, url);
                 AddHeaders(req);
                 var resp = await _httpClient.SendAsync(req);
@@ -191,7 +191,7 @@ public class HoyolabCheckinService
         try
         {
             var query = $"act_id={ActId}&lang=zh-cn";
-            var url = $"{BaseApi}/event/sol/home?{query}";
+            var url = $"{BaseApi}{ApiEndpoints.OverseaSignHomePath}?{query}";
             using var req = new HttpRequestMessage(HttpMethod.Get, url);
             AddHeaders(req);
             var resp = await _httpClient.SendAsync(req);
@@ -223,7 +223,7 @@ public class HoyolabCheckinService
         try
         {
             var query = $"act_id={ActId}&lang=zh-cn&region={region}&uid={uid}";
-            var url = $"{BaseApi}/event/sol/resign_info?{query}";
+            var url = $"{BaseApi}{ApiEndpoints.OverseaSignResignInfoPath}?{query}";
             using var req = new HttpRequestMessage(HttpMethod.Get, url);
             AddHeaders(req);
             var resp = await _httpClient.SendAsync(req);
@@ -248,7 +248,7 @@ public class HoyolabCheckinService
             var body = new { act_id = ActId, region, uid };
             var jsonBody = JsonSerializer.Serialize(body);
 
-            using var req = new HttpRequestMessage(HttpMethod.Post, $"{BaseApi}/event/sol/resign?lang=zh-cn");
+            using var req = new HttpRequestMessage(HttpMethod.Post, $"{BaseApi}{ApiEndpoints.OverseaSignResignPath}?lang=zh-cn");
             foreach (var h in _headers)
                 AddHeader(req, h.Key, h.Value);
             req.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
@@ -284,7 +284,7 @@ public class HoyolabCheckinService
         try
         {
             var query = $"act_id={ActId}&lang=zh-cn&region={region}&uid={uid}";
-            var url = $"{BaseApi}/event/sol/info?{query}";
+            var url = $"{BaseApi}{ApiEndpoints.OverseaSignInfoPath}?{query}";
             using var req = new HttpRequestMessage(HttpMethod.Get, url);
             AddHeaders(req);
             var resp = await _httpClient.SendAsync(req);
@@ -314,7 +314,7 @@ public class HoyolabCheckinService
                 var body = new { act_id = ActId, region = account.Region, uid = account.GameUid };
                 var jsonBody = JsonSerializer.Serialize(body);
 
-                using var req = new HttpRequestMessage(HttpMethod.Post, $"{BaseApi}/event/sol/sign");
+                using var req = new HttpRequestMessage(HttpMethod.Post, $"{BaseApi}{ApiEndpoints.OverseaSignPostPath}");
                 foreach (var h in headers)
                     AddHeader(req, h.Key, h.Value);
 

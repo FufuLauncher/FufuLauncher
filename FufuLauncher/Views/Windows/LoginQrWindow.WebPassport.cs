@@ -47,8 +47,7 @@ public sealed partial class LoginQrWindow
             PassportWebView.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
 
             long timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-            string url =
-                $"{ApiEndpoints.UserMihoyoLoginPlatformUrl}?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&ux_mode=popup&iframe_level=1&t={timestamp}#/login";
+            string url = ApiEndpoints.GetWebPassportLoginUrl(timestamp);
             await Task.Delay(100);
             PassportWebView.CoreWebView2.Navigate(url);
 
@@ -99,9 +98,9 @@ public sealed partial class LoginQrWindow
         {
             string uri = e.Request.Uri;
 
-            if (uri.Contains("/ma-cn-passport/web/loginByPassword") ||
-                uri.Contains("/ma-cn-passport/web/loginByMobileCaptcha") ||
-                uri.Contains("/ma-cn-passport/web/queryQRLoginStatus"))
+            if (uri.Contains(ApiEndpoints.PassportWebLoginByPasswordPath) ||
+                uri.Contains(ApiEndpoints.PassportWebLoginByMobileCaptchaPath) ||
+                uri.Contains(ApiEndpoints.PassportWebQueryQrLoginStatusPath))
             {
                 if (e.Response.StatusCode == 200)
                 {

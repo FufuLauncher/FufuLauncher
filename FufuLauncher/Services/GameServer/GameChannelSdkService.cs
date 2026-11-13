@@ -331,7 +331,7 @@ public sealed class GameChannelSdkService
 
     private async Task<SdkPackage?> GetChannelSdkPackageAsync(GameServerScheme scheme, CancellationToken token)
     {
-        using JsonDocument doc = await GetIndexAsync(scheme, "getGameChannelSDKs", token).ConfigureAwait(false);
+        using JsonDocument doc = await GetIndexAsync(scheme, ApiEndpoints.HypGetGameChannelSdksEndpoint, token).ConfigureAwait(false);
         foreach (JsonElement sdk in GetArray(doc, "game_channel_sdks").EnumerateArray())
         {
             if (!MatchesGame(sdk, scheme)) { continue; }
@@ -361,7 +361,7 @@ public sealed class GameChannelSdkService
 
     private async Task<List<string>> GetDeprecatedFilesAsync(GameServerScheme scheme, CancellationToken token)
     {
-        using JsonDocument doc = await GetIndexAsync(scheme, "getGameDeprecatedFileConfigs", token).ConfigureAwait(false);
+        using JsonDocument doc = await GetIndexAsync(scheme, ApiEndpoints.HypGetGameDeprecatedFileConfigsEndpoint, token).ConfigureAwait(false);
         var paths = new List<string>();
         foreach (JsonElement config in GetArray(doc, "deprecated_file_configs").EnumerateArray())
         {
@@ -379,7 +379,7 @@ public sealed class GameChannelSdkService
 
     private async Task<JsonDocument> GetIndexAsync(GameServerScheme scheme, string endpoint, CancellationToken token)
     {
-        string url = $"{scheme.HypApi}/{endpoint}?channel={(int)scheme.Channel}&game_ids[]={scheme.GameId}&launcher_id={scheme.LauncherId}&sub_channel={(int)scheme.SubChannel}";
+        string url = ApiEndpoints.BuildHypChannelIndexUrl(scheme.HypApi, endpoint, (int)scheme.Channel, scheme.GameId, scheme.LauncherId, (int)scheme.SubChannel);
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(token);
         timeout.CancelAfter(TimeSpan.FromSeconds(30));
         string json;

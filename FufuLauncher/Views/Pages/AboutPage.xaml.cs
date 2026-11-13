@@ -149,8 +149,8 @@ public sealed partial class AboutPage : Page
             {
                 owner = new ContributorItem
                 {
-                    Name = "CodeCubist", Url = ApiEndpoints.GithubWebBase + "/CodeCubist",
-                    AvatarUrl = ApiEndpoints.GithubAvatarsBase + "/u/249788103?v=4", Contributions = 999
+                    Name = "CodeCubist", Url = ApiEndpoints.AuthorGithubUrl,
+                    AvatarUrl = ApiEndpoints.AuthorAvatarUrl, Contributions = 999
                 };
             }
 
@@ -337,8 +337,13 @@ public sealed partial class AboutPage : Page
             HorizontalAlignment = HorizontalAlignment.Stretch,
             SelectedIndex = 0
         };
-        platformCombo.Items.Add("Telegram");
-        platformCombo.Items.Add("Discord");
+        platformCombo.Items.Add(new ComboBoxItem { Content = "Telegram", Tag = "Telegram" });
+        platformCombo.Items.Add(new ComboBoxItem { Content = "Discord", Tag = "Discord" });
+        platformCombo.Items.Add(new ComboBoxItem
+        {
+            Content = string.Format("AboutPage_ContactEmailOption".GetLocalized(), ApiEndpoints.ContactEmail),
+            Tag = "Email"
+        });
 
         contentPanel.Children.Add(warningText);
         contentPanel.Children.Add(platformCombo);
@@ -357,7 +362,7 @@ public sealed partial class AboutPage : Page
 
         if (result == ContentDialogResult.Primary)
         {
-            string selectedPlatform = platformCombo.SelectedValue as string;
+            var selectedPlatform = (platformCombo.SelectedItem as ComboBoxItem)?.Tag as string;
 
             if (selectedPlatform == "Telegram")
             {
@@ -370,17 +375,46 @@ public sealed partial class AboutPage : Page
             }
             else if (selectedPlatform == "Discord")
             {
-                DataPackage dataPackage = new();
-                dataPackage.SetText("codecubist");
-                Clipboard.SetContent(dataPackage);
-
-                var originalContent = (sender as HyperlinkButton).Content;
-                (sender as HyperlinkButton).Content = "AboutPage_DiscordCopied".GetLocalized();
-                (sender as HyperlinkButton).IsEnabled = false;
-                await Task.Delay(2000);
-                (sender as HyperlinkButton).Content = originalContent;
-                (sender as HyperlinkButton).IsEnabled = true;
+                await CopyContactAndNotifyAsync(sender as HyperlinkButton, "codecubist", "AboutPage_DiscordCopied");
             }
+            else if (selectedPlatform == "Email")
+            {
+                await CopyContactAndNotifyAsync(sender as HyperlinkButton, ApiEndpoints.ContactEmail,
+                    "AboutPage_EmailCopied");
+            }
+        }
+    }
+
+    private static async Task CopyContactAndNotifyAsync(HyperlinkButton? contactButton, string textToCopy,
+        string copiedResourceKey)
+    {
+        DataPackage dataPackage = new();
+        dataPackage.SetText(textToCopy);
+        Clipboard.SetContent(dataPackage);
+        try
+        {
+            Clipboard.Flush();
+        }
+        catch
+        {
+        }
+
+        if (contactButton == null)
+        {
+            return;
+        }
+
+        var originalContent = contactButton.Content;
+        contactButton.Content = copiedResourceKey.GetLocalized();
+        contactButton.IsEnabled = false;
+        try
+        {
+            await Task.Delay(2000);
+        }
+        finally
+        {
+            contactButton.Content = originalContent;
+            contactButton.IsEnabled = true;
         }
     }
 

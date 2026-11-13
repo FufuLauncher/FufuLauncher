@@ -18,7 +18,7 @@ public sealed partial class MiyousheClient
         RequireInteractionAccount();
         ValidateId(postId);
         string body = JsonSerializer.Serialize(new { is_cancel = !liked, post_id = postId });
-        await SendAsync("apihub/api/upvotePost", [], Profile.K2Sign, ct, body);
+        await SendAsync(ApiEndpoints.MiyousheUpvotePostPath, [], Profile.K2Sign, ct, body);
     }
 
     public async Task SetReplyLikeAsync(string postId, string replyId, bool liked, CancellationToken ct)
@@ -27,7 +27,7 @@ public sealed partial class MiyousheClient
         ValidateId(postId);
         ValidateId(replyId);
         string body = JsonSerializer.Serialize(new { is_cancel = !liked, post_id = postId, reply_id = replyId });
-        await SendAsync("apihub/api/upvoteReply", [], Profile.K2Sign, ct, body);
+        await SendAsync(ApiEndpoints.MiyousheUpvoteReplyPath, [], Profile.K2Sign, ct, body);
     }
 
     public async Task PublishReplyAsync(CommunityPost post, string content, string? replyId, CancellationToken ct)
@@ -44,7 +44,7 @@ public sealed partial class MiyousheClient
             ["structured_content"] = JsonSerializer.Serialize(new[] { new { insert = content + "\n" } })
         };
         if (replyId != null) body["reply_id"] = replyId;
-        await SendAsync("post/wapi/releaseReply", [], Profile.WebSign, ct, JsonSerializer.Serialize(body),
+        await SendAsync(ApiEndpoints.MiyousheReleaseReplyPath, [], Profile.WebSign, ct, JsonSerializer.Serialize(body),
             submission: true);
     }
 }

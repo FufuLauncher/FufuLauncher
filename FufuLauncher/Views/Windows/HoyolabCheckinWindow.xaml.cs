@@ -46,7 +46,7 @@ namespace FufuLauncher.Views
             if (!string.IsNullOrEmpty(_rawCookie))
             {
                 var cookieManager = CheckinWebView.CoreWebView2.CookieManager;
-                var domains = new[] { ".hoyolab.com", ".hoyoverse.com", ".mihoyo.com" };
+                var domains = ApiEndpoints.OverseaCookieDomains;
 
                 var cookiePairs = _rawCookie.Split(';', StringSplitOptions.RemoveEmptyEntries);
                 foreach (var domain in domains)

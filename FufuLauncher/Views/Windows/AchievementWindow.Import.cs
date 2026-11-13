@@ -20,7 +20,7 @@ public sealed partial class AchievementWindow
         try
         {
             _listener = new HttpListener();
-            _listener.Prefixes.Add("http://127.0.0.1:15655/");
+            _listener.Prefixes.Add(ApiEndpoints.AchievementImportListenerUrl);
             _listener.Start();
 
             await Task.Run(async () =>

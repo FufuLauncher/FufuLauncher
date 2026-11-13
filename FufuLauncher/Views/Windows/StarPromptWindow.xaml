@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:windowex="using:WinUIEx"
+    xmlns:constants="using:FufuLauncher.Constants"
     xmlns:helpers="using:FufuLauncher.Helpers"
     Title="Support FufuLauncher">
 
@@ -34,7 +35,7 @@
                 <TextBlock Text="{helpers:Loc Key=StarPrompt_Message}"
                            TextWrapping="Wrap" LineHeight="24" FontSize="14" Opacity="0.9" />
                 <HyperlinkButton Content="{helpers:Loc Key=StarPrompt_GoToGitHub}"
-                                 NavigateUri="https://github.com/FufuLauncher/FufuLauncher"
+                                 NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.GithubRepoUrl)}"
                                  Margin="0,16,0,0" />
             </StackPanel>
 

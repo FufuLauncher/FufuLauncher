@@ -121,14 +121,14 @@ public class CloudGameCheckinService : ICloudGameCheckinService
 
     private async Task<JsonElement> RequestWalletAsync(string comboToken)
     {
-        using var request = new HttpRequestMessage(HttpMethod.Get, GenshinApiEndpoints.CloudGameWalletUrl);
-        request.Headers.Add("Host", GenshinApiEndpoints.CloudGameHost);
+        using var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpoints.CloudGameWalletUrl);
+        request.Headers.Add("Host", ApiEndpoints.CloudGameHost);
         request.Headers.Add("Accept", "*/*");
         request.Headers.Add("x-rpc-combo_token", comboToken);
         request.Headers.Add("Accept-Encoding", "gzip, deflate");
         request.Headers.Add("User-Agent",
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36");
-        request.Headers.Add("Referer", GenshinApiEndpoints.CloudGameReferer);
+        request.Headers.Add("Referer", ApiEndpoints.AppMihoyoBase);
 
         var response = await _httpClient.SendAsync(request);
         var text = await response.Content.ReadAsStringAsync();

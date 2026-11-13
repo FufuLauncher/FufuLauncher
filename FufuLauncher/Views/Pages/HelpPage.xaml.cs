@@ -121,7 +121,7 @@ public sealed partial class HelpPage : Page
             : Windows.UI.Color.FromArgb(255, 251, 251, 251);
 
         if (HelpDocumentRenderer.HasCustomFont)
-            core.SetVirtualHostNameToFolderMapping("fufu.fonts", HelpDocumentRenderer.CustomFontDirectory,
+            core.SetVirtualHostNameToFolderMapping(ApiEndpoints.HelpFontVirtualHost, HelpDocumentRenderer.CustomFontDirectory,
                 CoreWebView2HostResourceAccessKind.Allow);
 
         core.NavigationStarting += (sender, e) =>

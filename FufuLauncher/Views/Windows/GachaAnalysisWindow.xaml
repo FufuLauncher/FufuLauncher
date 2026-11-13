@@ -209,7 +209,7 @@
                     </Grid>
                 </DataTemplate>
 
-                <!-- 卡片格子视图：单个抽卡角色/武器卡片 -->
+                
                 <DataTemplate x:Key="GachaCardTemplate" x:DataType="models:GachaDisplayItem">
                     <Grid Width="118" Height="178" Margin="6">
                         <Grid.Shadow>
@@ -1155,7 +1155,7 @@
                               Visibility="{Binding ViewModel.ShowOverviewCards, Converter={StaticResource BoolToVisibilityConverter}}">
                     <StackPanel x:Name="OverviewCardRoot" Spacing="20">
 
-                        <!-- 角色活动 -->
+                        
                         <StackPanel Spacing="12">
                             <Grid Padding="20,16" CornerRadius="14"
                                   Background="{ThemeResource CardBackgroundFillColorSecondaryBrush}"

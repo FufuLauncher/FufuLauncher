@@ -809,7 +809,7 @@
                                                                      Click="OnCategoryClick"
                                                                      Tag="{x:Bind}">
                                                 <StackPanel Orientation="Horizontal" Spacing="6">
-                                                    <!--  Glyph 来自服务端数据，必须钉死图标字体，否则未知码位会渲染成方框  -->
+                                                    
                                                     <FontIcon Glyph="{x:Bind Icon}"
                                                               FontFamily="{StaticResource SegoeFluentIconsFont}"
                                                               FontSize="13"
@@ -881,7 +881,7 @@
                             <TranslateTransform x:Name="ResultsTranslate" Y="0" />
                         </Grid.RenderTransform>
 
-                        <!--  正常网格  -->
+                        
                         <GridView x:Name="PluginGridView"
                                   Margin="-12,0,-12,0"
                                   IsEnabled="{x:Bind ViewModel.CanInteractWithStore, Mode=OneWay}"

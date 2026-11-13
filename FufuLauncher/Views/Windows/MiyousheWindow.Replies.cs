@@ -154,7 +154,7 @@ public sealed partial class MiyousheWindow
 
     private async Task<bool> HandleCommentActionAsync(Uri uri)
     {
-        if (uri.Host != "miyoushe-native.invalid") return false;
+        if (uri.Host != ApiEndpoints.MiyousheNativeVirtualHost) return false;
         if (!_isPostOpen || _post == null || _commentActionRoot.Length == 0 ||
             !uri.AbsoluteUri.StartsWith(_commentActionRoot, StringComparison.Ordinal)) return true;
         string action = uri.AbsoluteUri[_commentActionRoot.Length..];

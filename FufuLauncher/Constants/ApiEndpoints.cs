@@ -84,7 +84,7 @@ namespace FufuLauncher.Constants
         public const string MihoyoBbsUserGameRolesUrl =
             "https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByCookie?game_biz=hk4e_cn";
 
-        public const string MiyousheUserFullInfoUrl = "https://bbs-api.miyoushe.com/user/wapi/getUserFullInfo";
+        public const string MiyousheUserFullInfoUrl = MiyousheBbsApiBase + "/" + MiyousheGetUserFullInfoPath;
 
         public const string PassportCreateQrLoginUrl =
             "https://passport-api.mihoyo.com/account/ma-cn-passport/web/createQRLogin";
@@ -101,7 +101,7 @@ namespace FufuLauncher.Constants
         public const string BbsDefaultUrl =
             "https://webstatic.mihoyo.com/app/community-game-records/index.html?bbs_presentation_style=fullscreen&game_id=2";
 
-        public const string MiyousheArticleUrl = "https://m.miyoushe.com/ys/#/article/";
+        public const string MiyousheArticleUrl = MiyousheMobileWebBase + "/ys/#/article/";
 
         public const string PassportAppCreateQrLoginUrl =
             "https://passport-api.mihoyo.com/account/ma-cn-passport/app/createQRLogin";
@@ -119,7 +119,7 @@ namespace FufuLauncher.Constants
             "https://passport-api.mihoyo.com/account/auth/api/getCookieAccountInfoBySToken";
 
         public const string GetLTokenBySTokenUrl = "https://passport-api.mihoyo.com/account/auth/api/getLTokenBySToken";
-        public const string UserMihoyoLoginPlatformUrl = "https://user.mihoyo.com/login-platform/index.html";
+        public const string UserMihoyoLoginPlatformUrl = UserMihoyoBase + "/login-platform/index.html";
 
         public const string AccountCreateLoginCaptchaUrl =
             "https://passport-api.mihoyo.com/account/ma-cn-verifier/verifier/createLoginCaptcha";
@@ -151,7 +151,7 @@ namespace FufuLauncher.Constants
         public const string OverseaThirdPartyOAuthUrl =
             "https://account.hoyoverse.com/single-page/third-party-oauth.html";
 
-        public const string OverseaGameRecordApiBase = "https://bbs-api-os.hoyolab.com/game_record/app/genshin/api";
+        public const string OverseaGameRecordApiBase = HoyolabBbsApiBase + GameRecordApiPathPrefix;
         public const string OverseaSignBaseApi = "https://sg-hk4e-api.hoyoverse.com";
         public const string OverseaSignActId = "e202102251931481";
 
@@ -231,7 +231,8 @@ namespace FufuLauncher.Constants
 
         public const string MicrosoftNetworkCheckUrl = "https://www.microsoft.com";
         public const string VcRedistDownloadUrl = "https://aka.ms/vc14/vc_redist.x64.exe";
-        public const string TelegramContactUrl = "https://www.microsoft.com";
+        public const string TelegramContactUrl = "https://t.me/codecubist";
+        public const string ContactEmail = "dev@fufu.skin";
         public const string PaimonTimelineUrl = "https://paimon.moe/timeline";
         public const string PluginStoreBaseUrl = "https://fu1.fun";
         public const string PluginStoreApiPrefix = "/api/v1/plugins";
@@ -255,15 +256,22 @@ namespace FufuLauncher.Constants
         public const string SentryDsn =
             "https://9c8e89f029c240e3dba227979a26759a@o4511497397272576.ingest.de.sentry.io/4511497409265745";
 
-        public const string ActMihoyoBase = "https://act.mihoyo.com";
+        public const string ActMihoyoHost = "act.mihoyo.com";
+        public const string ActMihoyoBase = "https://" + ActMihoyoHost;
         public const string ActNapApiBase = "https://act-nap-api.mihoyo.com";
         public const string AppMihoyoBase = "https://app.mihoyo.com";
-        public const string BbsMihoyoBase = "https://bbs.mihoyo.com";
+        public const string BbsMihoyoHost = "bbs.mihoyo.com";
+        public const string BbsMihoyoBase = "https://" + BbsMihoyoHost;
         public const string MihoyoWebBase = "https://mihoyo.com";
+        public const string UserMihoyoHost = "user.mihoyo.com";
+        public const string UserMihoyoBase = "https://" + UserMihoyoHost;
         public const string ActSdkApiBase = "https://api-sdk.mihoyo.com";
-        public const string CloudGameApiBase = "https://api-cloudgame.mihoyo.com";
+        public const string CloudGameHost = "api-cloudgame.mihoyo.com";
+        public const string CloudGameApiBase = "https://" + CloudGameHost;
+        public const string ApiTakumiRecordBase = "https://api-takumi-record.mihoyo.com";
         public const string GtUiIconsBase = "https://act.mihoyo.com/act/gt-ui/assets/icons/";
         public const string BaikeBase = "https://baike.mihoyo.com";
+        public const string BaikeContentPathPrefix = "/ys/obc/content/";
         public const string SeelieBase = "https://seelie.me";
 
         public const string AchievementIconSingleUrl =
@@ -280,11 +288,20 @@ namespace FufuLauncher.Constants
         public const string HoyolabBbsApiBase = "https://bbs-api-os.hoyolab.com";
         public const string HoyolabAccountApiBase = "https://api-account-os.hoyolab.com";
         public const string HoyoverseAccountBase = "https://account.hoyoverse.com";
+        public const string HoyoversePublicApiBase = "https://sg-public-api.hoyoverse.com";
         public const string Hk4eGachaOsBase = "https://hk4e-api-os.hoyoverse.com";
 
-        public const string MiyousheWebBase = "https://www.miyoushe.com";
+        public const string MiyousheWebHost = "www.miyoushe.com";
+        public const string MiyousheWebBase = "https://" + MiyousheWebHost;
+        public const string MiyousheWebRefererUrl = MiyousheWebBase + "/";
+        public const string MiyousheMobileWebHost = "m.miyoushe.com";
+        public const string MiyousheMobileWebBase = "https://" + MiyousheMobileWebHost;
         public const string MiyousheBbsApiBase = "https://bbs-api.miyoushe.com";
+        public const string MiyousheStaticHost = "bbs-static.miyoushe.com";
+        public const string WebstaticMiyousheBase = "https://webstatic.miyoushe.com";
+        public const string WebstaticSchemePrefix = "https://webstatic.";
 
+        public const string GithubHost = "github.com";
         public const string GithubApiBase = "https://api.github.com";
         public const string GithubWebBase = "https://github.com";
         public const string GithubAvatarsBase = "https://avatars.githubusercontent.com";
@@ -303,10 +320,11 @@ namespace FufuLauncher.Constants
 
         public const string MiyousheAccountCenterUrl = "https://www.miyoushe.com/ys/accountCenter/postList?id=";
         public const string LunaEventApiBase = "https://api-takumi.mihoyo.com/event/luna";
-        public const string GachaLogCnUrl = "https://public-operation-hk4e.mihoyo.com/gacha_info/api/getGachaLog";
-        public const string GachaLogOsUrl = Hk4eGachaOsBase + "/gacha_info/api/getGachaLog";
+        public const string GachaLogApiPath = "/gacha_info/api/getGachaLog";
+        public const string GachaLogCnUrl = "https://public-operation-hk4e.mihoyo.com" + GachaLogApiPath;
+        public const string GachaLogOsUrl = Hk4eGachaOsBase + GachaLogApiPath;
         public const string DeviceFpUrl = "https://public-data-api.mihoyo.com/device-fp/api/getFp";
-        public const string DailyNoteRecordApiBase = "https://api-takumi-record.mihoyo.com/game_record/app/genshin";
+        public const string DailyNoteRecordApiBase = ApiTakumiRecordBase + "/game_record/app/genshin";
 
         public const string GeetestCreateVerificationUrl =
             "https://api-takumi-record.mihoyo.com/game_record/app/card/wapi/createVerification?is_high=true";
@@ -365,5 +383,351 @@ namespace FufuLauncher.Constants
 
         public static string GetPluginFileDownloadUrl(string pluginId) =>
             $"{PluginStoreBaseUrl}/plugins/files/{Uri.EscapeDataString(pluginId)}.zip";
+
+        public const string LoopbackHost = "127.0.0.1";
+        public const string LocalhostHost = "localhost";
+        public const string HttpLocalhostPrefix = "http://" + LocalhostHost;
+        public const string HttpsLocalhostPrefix = "https://" + LocalhostHost;
+
+        public const string MihoyoDomain = "mihoyo.com";
+        public const string HoyolabDomain = "hoyolab.com";
+        public const string HoyoverseDomain = "hoyoverse.com";
+        public const string MihoyoCookieDomain = "." + MihoyoDomain;
+        public const string HoyolabCookieDomain = "." + HoyolabDomain;
+        public const string HoyoverseCookieDomain = "." + HoyoverseDomain;
+
+        public static readonly string[] OverseaCookieDomains =
+        [
+            HoyolabCookieDomain,
+            HoyoverseCookieDomain,
+            MihoyoCookieDomain
+        ];
+
+        public const string MihoyoWebSubdomainFilter = "*://*." + MihoyoDomain + "/*";
+        public const string HoyolabWebSubdomainFilter = "*://*." + HoyolabDomain + "/*";
+
+        public const string OfficialWebsiteUrl = PluginStoreBaseUrl + "/";
+        public const string GithubRepoUrl = GithubWebBase + "/FufuLauncher/FufuLauncher";
+        public const string GithubIssuesUrl = GithubRepoUrl + "/issues";
+        public const string AuthorGithubUrl = GithubWebBase + "/CodeCubist";
+        public const string AuthorAvatarUrl = GithubAvatarsBase + "/u/249788103?v=4";
+        public const string ServiceStatusWebUrl = "https://status.fu1.fun/";
+        public const string CommunityForumUrl = "https://bbs.xcnahida.cn/";
+        public const string StatsMonitorListUrl = StatsUptimeRobotBase + "/api/getMonitorList/sPFa3CV3SA";
+        public const string StatsMonitorDetailUrl = StatsUptimeRobotBase + "/api/getMonitor/sPFa3CV3SA";
+        public const string IpCountryCodeUrl = "http://ip-api.com/line/?fields=countryCode";
+
+        public const string TrustedFufuDomain = "fu1.fun";
+        public const string TrustedFufuSkinDomain = "fufu.skin";
+        public const string TrustedPluginGithubPrefix = "github.com/codecubist";
+
+        public const string ActUploadWidgetIconBase = "https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358";
+
+        public const string WidgetIconGachaUrl =
+            ActUploadWidgetIconBase + "/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png";
+
+        public const string WidgetIconAchievementUrl =
+            ActUploadWidgetIconBase + "/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png";
+
+        public const string WidgetIconInventoryUrl =
+            ActUploadWidgetIconBase + "/746e735b9968d0a7496393809653bf9b_3827123919585554136.png";
+
+        public const string WidgetIconPlayerRoleUrl =
+            ActUploadWidgetIconBase + "/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png";
+
+        public const string WidgetIconDailyNoteUrl =
+            ActUploadWidgetIconBase + "/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png";
+
+        public const string WidgetIconBbsUrl =
+            ActUploadWidgetIconBase + "/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png";
+
+        public const string WidgetIconVideoUrl =
+            ActUploadWidgetIconBase + "/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png";
+
+        public const string CommunityGameRecordLogoBase = WebstaticRefererUrl + "/app/community-game-records/images";
+        public const string DailyNoteResinLogoUrl = CommunityGameRecordLogoBase + "/logo-1.cd77560a.png";
+        public const string DailyNoteDailyTasksLogoUrl = CommunityGameRecordLogoBase + "/logo-3.786c15d1.png";
+        public const string DailyNoteHomeCoinLogoUrl = CommunityGameRecordLogoBase + "/logo-2.e5225a21.png";
+        public const string DailyNoteExpeditionsLogoUrl = CommunityGameRecordLogoBase + "/logo-4.835b640a.png";
+        public const string DailyNoteTransformerLogoUrl = CommunityGameRecordLogoBase + "/logo-5.5feb0161.png";
+
+        public const string ElementPyroIconUrl = GtUiIconsBase + "6a4f0b7ab73fe4d3.png";
+        public const string ElementAnemoIconUrl = GtUiIconsBase + "48d1aac6ecc56b33.png";
+        public const string ElementGeoIconUrl = GtUiIconsBase + "829a6b86fb23d8bb.png";
+        public const string ElementDendroIconUrl = GtUiIconsBase + "247f14512efc8325.png";
+        public const string ElementElectroIconUrl = GtUiIconsBase + "e18d224ec1047cae.png";
+        public const string ElementHydroIconUrl = GtUiIconsBase + "b162f5384487d283.png";
+        public const string ElementCryoIconUrl = GtUiIconsBase + "bf2f65ee0d7f6243.png";
+
+        public const string BingWallpaperArchivePath = "/HPImageArchive.aspx";
+        public const string BingWallpaperHistoricalBaseUrl = "https://bingw.jasonzeng.dev";
+        public const string BingWallpaperHistoricalRandomUrl = BingWallpaperHistoricalBaseUrl + "/?index=random&format=json";
+        public const string RandomBackgroundBaseUrl = "https://image.fu1.fun/";
+        public const string RandomBackgroundHomeUrl = RandomBackgroundBaseUrl + "?type=home";
+        public const string RandomBackgroundCgUrl = RandomBackgroundBaseUrl + "?type=cg";
+
+        public const string CloudSyncBaseUrl = "https://cloud.fufu.skin";
+        public const string CloudSyncAuthLoginPath = "/api/auth/login";
+        public const string CloudSyncAuthRegisterSendCodePath = "/api/auth/register/send-code";
+        public const string CloudSyncAuthRegisterConfirmPath = "/api/auth/register/confirm";
+        public const string CloudSyncAuthResetPasswordSendCodePath = "/api/auth/reset-password/send-code";
+        public const string CloudSyncAuthResetPasswordConfirmPath = "/api/auth/reset-password/confirm";
+        public const string CloudSyncAuthLtokenPath = "/api/auth/ltoken";
+        public const string CloudSyncAuthLogoutPath = "/api/auth/logout";
+        public const string CloudSyncAuthResultPath = "/api/auth/result";
+        public const string CloudSyncAccountStatusPath = "/api/account/status";
+        public const string CloudSyncAccountLockSendCodePath = "/api/account/lock/send-code";
+        public const string CloudSyncAccountLockConfirmPath = "/api/account/lock/confirm";
+        public const string CloudSyncAccountUnlockSendCodePath = "/api/account/unlock/send-code";
+        public const string CloudSyncAccountUnlockConfirmPath = "/api/account/unlock/confirm";
+        public const string CloudSyncAccountDeletePath = "/api/account/delete";
+        public const string CloudSyncDataQuotaPath = "/api/data/quota";
+        public const string CloudSyncDataActivatePath = "/api/data/activate";
+        public const string CloudSyncDataListPath = "/api/data/list";
+        public const string CloudSyncDataUploadPath = "/api/data/upload";
+        public const string CloudSyncDataPullPath = "/api/data/pull";
+        public const string CloudSyncDataRenamePath = "/api/data/rename";
+        public const string CloudSyncDataDeletePath = "/api/data/delete";
+        public const string CloudSyncDataDeleteAllPath = "/api/data/delete-all";
+
+        public const string CertificateSyncPublicPrefix = "/public/";
+        public const string CertificateSyncIndexPath = CertificateSyncPublicPrefix + "index.json";
+
+        public const string GeetestCnApiServer = "api.geetest.com";
+        public const string GeetestOverseaApiServer = "api-na.geetest.com";
+
+        public const string PassportQrMobileLoginPath = "/login-platform/mobile.html";
+        public const string PassportQrInGamePath = "/qr_code_in_game.html";
+        public const string PassportWebLoginByPasswordPath = "/ma-cn-passport/web/loginByPassword";
+        public const string PassportWebLoginByMobileCaptchaPath = "/ma-cn-passport/web/loginByMobileCaptcha";
+        public const string PassportWebQueryQrLoginStatusPath = "/ma-cn-passport/web/queryQRLoginStatus";
+
+        public const string HoyolabSigninSeaFullscreenUrl =
+            ActHoyolabBase + "/ys/event/signin-sea-v3/index.html?act_id=" + OverseaSignActId +
+            "&hyl_auth_required=true&hyl_presentation_style=fullscreen&utm_source=hoyolab&utm_medium=tools&lang=zh-cn&bbs_theme=dark&bbs_theme_device=1";
+
+        public const string MiyousheGenshinTavernUrl = MiyousheWebBase + "/ys/home/26";
+        public const string BbsSignUrl = MiyousheBbsApiBase + "/apihub/app/api/signIn";
+        public const string BbsSignStatusUrl = MiyousheBbsApiBase + "/apihub/api/querySignInStatus?gids=2";
+        public const string BbsCreateVerificationUrl = MiyousheBbsApiBase + "/misc/api/createVerification?is_high=true";
+        public const string BbsVerifyVerificationUrl = MiyousheBbsApiBase + "/misc/api/verifyVerification";
+
+        public const string CloudGameWalletPath = "/hk4e_cg_cn/wallet/wallet/get";
+        public const string CloudGameWalletUrl = CloudGameApiBase + CloudGameWalletPath;
+        public const string CloudGameWalletWebViewFilter = "*://" + CloudGameHost + CloudGameWalletPath + "*";
+
+        public const string LunaResignInfoUrl = LunaEventApiBase + "/resign_info";
+        public const string LunaResignUrl = LunaEventApiBase + "/resign";
+        public const string LunaZzzEventApiBase = ActNapApiBase + "/event/luna/zzz";
+        public const string GameCheckinInfoPath = "/info";
+        public const string GameCheckinSignPath = "/sign";
+        public const string GameCheckinHomePath = "/home";
+
+        public const string OverseaSignHomePath = "/event/sol/home";
+        public const string OverseaSignResignInfoPath = "/event/sol/resign_info";
+        public const string OverseaSignResignPath = "/event/sol/resign?lang=zh-cn";
+        public const string OverseaSignInfoPath = "/event/sol/info";
+        public const string OverseaSignPostPath = "/event/sol/sign";
+
+        public const string GameRecordApiPathPrefix = "/game_record/app/genshin/api";
+        public const string CnGameRecordApiBase = ApiTakumiRecordBase + GameRecordApiPathPrefix;
+        public const string OverseaEventGameRecordApiBase = HoyoversePublicApiBase + "/event/game_record/genshin/api";
+        public const string DailyNoteChallengePath = GameRecordApiPathPrefix + "/dailyNote";
+        public const string DailyNoteIndexPath = "/api/index";
+        public const string DailyNotePath = "/api/dailyNote";
+        public const string DailyNoteWidgetPath = "/aapi/widget/v2?game_id=2";
+        public const string OverseaDailyNoteIndexUrl = OverseaGameRecordApiBase + "/index";
+        public const string OverseaDailyNoteUrl = OverseaGameRecordApiBase + "/dailyNote";
+        public const string GameRecordSpiralAbyssEndpoint = "spiralAbyss";
+        public const string GameRecordRoleCombatEndpoint = "role_combat";
+        public const string GameRecordHardChallengeEndpoint = "hard_challenge";
+
+        public const string BbsProtocolGameRecordApiPrefix = GameRecordApiPathPrefix + "/";
+        public const string BbsProtocolRecordPath = "/record/";
+        public const string BbsProtocolGameRecordPath = "/game_record/";
+        public const string BbsProtocolEventPath = "/event/";
+        public const string BbsProtocolCommunityPath = "/community/";
+        public const string BbsProtocolApiPath = "/api/";
+
+        public const string GachaPagePathMarker = "e20190909gacha-v";
+        public const string GachaPageIndexSuffix = "/index.html";
+
+        public static readonly HashSet<string> GachaOverseaHosts = new(StringComparer.Ordinal)
+        {
+            "hk4e-api-os.hoyoverse.com",
+            "hk4e-api-os.mihoyo.com",
+            "public-operation-hk4e-sg.hoyoverse.com",
+            "webstatic-sea.hoyoverse.com",
+            "webstatic-sea.mihoyo.com",
+            "gs.hoyoverse.com"
+        };
+
+        public static readonly HashSet<string> GachaApiHosts = new(StringComparer.Ordinal)
+        {
+            "public-operation-hk4e.mihoyo.com",
+            "hk4e-api.mihoyo.com",
+            "hk4e-api.miyoushe.com",
+            "hk4e-api-os.hoyoverse.com",
+            "hk4e-api-os.mihoyo.com",
+            "public-operation-hk4e-sg.hoyoverse.com"
+        };
+
+        public static readonly HashSet<string> GachaPageHosts = new(StringComparer.Ordinal)
+        {
+            "webstatic.mihoyo.com",
+            "webstatic.miyoushe.com",
+            "webstatic-sea.hoyoverse.com",
+            "webstatic-sea.mihoyo.com",
+            "gs.hoyoverse.com"
+        };
+
+        public const string MiyousheGetGameListPath = "apihub/wapi/getGameList";
+        public const string MiyousheGetAllGamesForumsPath = "apihub/wapi/getAllGamesForums";
+        public const string MiyousheGetHotForumPostListPath = "painter/wapi/getHotForumPostList";
+        public const string MiyousheGetRecentForumPostListPath = "painter/wapi/getRecentForumPostList";
+        public const string MiyousheGetNewsListPath = "painter/wapi/getNewsList";
+        public const string MiyousheSearchPostsPath = "post/wapi/searchPosts";
+        public const string MiyousheTimelineListPath = "painter/wapi/timeline/list";
+        public const string MiyousheUserFavouritePostPath = "post/wapi/userFavouritePost";
+        public const string MiyousheUserPostPath = "post/wapi/userPost";
+        public const string MiyousheGetTopicPostListPath = "post/wapi/getTopicPostList";
+        public const string MiyousheGetPostFullInCollectionPath = "post/wapi/getPostFullInCollection";
+        public const string MiyousheGetPostFullPath = "post/wapi/getPostFull";
+        public const string MiyousheGetPostRepliesPath = "post/wapi/getPostReplies";
+        public const string MiyousheGetSubRepliesPath = "post/wapi/getSubReplies";
+        public const string MiyousheGetUserFullInfoPath = "user/wapi/getUserFullInfo";
+        public const string MiyousheGetTopicFullInfoPath = "topic/wapi/getTopicFullInfo";
+        public const string MiyousheGetCollectionDetailPath = "collection/wapi/collection/detail";
+        public const string MiyousheCreateVerificationPath = "misc/api/createVerification";
+        public const string MiyousheVerifyVerificationPath = "misc/api/verifyVerification";
+        public const string MiyousheUpvotePostPath = "apihub/api/upvotePost";
+        public const string MiyousheUpvoteReplyPath = "apihub/api/upvoteReply";
+        public const string MiyousheReleaseReplyPath = "post/wapi/releaseReply";
+        public const string MiyousheGetUserPendantListPath = "pendant/wapi/getUserPendantList";
+        public const string MiyousheSetUserPendantPath = "pendant/wapi/setUserPendant";
+
+        public const string MiyousheShopApiBase = MiyousheBbsApiBase + "/common/homushop/v1/web/goods/";
+        public const string MiyousheShopListEndpoint = "list";
+        public const string MiyousheShopDetailEndpoint = "detail";
+        public const string MiyousheShopExchangeEndpoint = "exchange";
+        public const string MiyousheShopOfficialPageBase = WebstaticRefererUrl + "/app/community-shop/index.html#/myb/";
+        public const string MiyousheShopAddressListUrl = MihoyoBbsWebApi + "/account/address/list?point_sn=myb";
+        public const string MiyousheShopUserGameRolesPrefix = MihoyoBbsAccountInfoUrl + "?game_biz=";
+
+        public const string MiyousheNativeVirtualHost = "miyoushe-native.invalid";
+        public const string MiyousheNativeVirtualBaseUrl = "https://" + MiyousheNativeVirtualHost + "/";
+
+        public const string HypGetGameBranchesEndpoint = "getGameBranches";
+        public const string HypGetGameChannelSdksEndpoint = "getGameChannelSDKs";
+        public const string HypGetGameDeprecatedFileConfigsEndpoint = "getGameDeprecatedFileConfigs";
+        public const string SophonGetBuildEndpoint = "getBuild";
+        public const string SophonGetPatchBuildEndpoint = "getPatchBuild";
+
+        public static readonly string[] GitHubHosts =
+        [
+            GithubHost,
+            "raw.githubusercontent.com",
+            "objects.githubusercontent.com",
+            "releases-assets.githubusercontent.com",
+            "codeload.github.com",
+            "github.io"
+        ];
+
+        public static readonly string[] GitHubHostSuffixes =
+        [
+            ".github.com",
+            ".github.io"
+        ];
+
+        public const string AchievementImportListenerUrl = "http://" + LoopbackHost + ":15655/";
+        public const string AnnouncementFontServerUrl = "http://" + LoopbackHost + ":1221/";
+        public const string McpEndpointPath = "/mcp";
+        public const string HelpFontVirtualHost = "fufu.fonts";
+        public const string HelpCustomFontUrl = "https://" + HelpFontVirtualHost + "/MiSans-Regular.ttf";
+
+        public static Uri ToUri(string url) => new(url);
+
+        public static string GetStatsMonitorListUrl(int page) =>
+            $"{StatsMonitorListUrl}?page={page}";
+
+        public static string GetStatsMonitorDetailUrl(int monitorId) =>
+            $"{StatsMonitorDetailUrl}?m={monitorId}&region=_default";
+
+        public static string GetBingWallpaperArchiveUrl(int count, string market) =>
+            $"{BingBase}{BingWallpaperArchivePath}?format=js&idx=0&n={count}&mkt={Uri.EscapeDataString(market)}";
+
+        public static string GetBingWallpaperHistoricalDateUrl(string dateValue) =>
+            $"{BingWallpaperHistoricalBaseUrl}/?date={dateValue}&format=json";
+
+        public static string GetMyMemoryTranslateRequestUrl(string encodedText, string langPair) =>
+            $"{MyMemoryTranslateUrl}?q={encodedText}&langpair={Uri.EscapeDataString(langPair)}";
+
+        public static string GetCloudSyncDataListPath(string? typeFilter) =>
+            string.IsNullOrWhiteSpace(typeFilter)
+                ? CloudSyncDataListPath
+                : $"{CloudSyncDataListPath}?type={Uri.EscapeDataString(typeFilter.ToLowerInvariant())}";
+
+        public static string GetCertificateSyncIndexUrl(string baseUrl) =>
+            $"{baseUrl}{CertificateSyncIndexPath}";
+
+        public static string GetCertificateSyncFileUrl(string baseUrl, string fileName) =>
+            $"{baseUrl}{CertificateSyncPublicPrefix}{fileName}";
+
+        public static string GetGameRecordChallengePath(string apiName) =>
+            $"{GameRecordApiPathPrefix}/{apiName}";
+
+        public static string GetWebPassportLoginUrl(long timestamp) =>
+            $"{UserMihoyoLoginPlatformUrl}?app_id=dw9y09jqjpxc&theme=passport&token_type=4&game_biz=plat_cn&ux_mode=popup&iframe_level=1&t={timestamp}#/login";
+
+        public static string GetGameQrCodeScanUrl(string gameBiz) =>
+            $"{ActSdkApiBase}/{gameBiz}/combo/panda/qrcode/scan";
+
+        public static string GetMiyousheArticleWebUrl(string gameSlug, string postId) =>
+            $"{MiyousheWebBase}/{gameSlug}/article/{postId}";
+
+        public static bool IsMiyousheCommunityHost(string host) =>
+            host == MiyousheWebHost || host == MiyousheMobileWebHost || host == BbsMihoyoHost;
+
+        public static bool IsGitHubHost(string host)
+        {
+            foreach (var allowed in GitHubHosts)
+            {
+                if (host.Equals(allowed, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+
+            foreach (var suffix in GitHubHostSuffixes)
+            {
+                if (host.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static string BuildMirrorUrl(string domain, string originalUrl) =>
+            $"https://{domain}/{originalUrl}";
+
+        public static string GetMcpEndpointUrl(string host, int port) =>
+            $"http://{host}:{port}{McpEndpointPath}";
+
+        public static string GetMcpLocalEndpointUrl(int port) =>
+            GetMcpEndpointUrl(LoopbackHost, port);
+
+        public static string BuildHypChannelIndexUrl(string hypApi, string endpoint, int channel, string gameId,
+            string launcherId, int subChannel) =>
+            $"{hypApi}/{endpoint}?channel={channel}&game_ids[]={gameId}&launcher_id={launcherId}&sub_channel={subChannel}";
+
+        public static string BuildHypGameBranchesUrl(string hypApi, string launcherId, string gameId) =>
+            $"{hypApi}/{HypGetGameBranchesEndpoint}?launcher_id={launcherId}&game_ids[]={gameId}";
+
+        public static string BuildSophonBuildUrl(string sophonApi, string branchName, string packageId,
+            string password, string? tag = null) =>
+            tag == null
+                ? $"{sophonApi}/{SophonGetBuildEndpoint}?branch={Uri.EscapeDataString(branchName)}&package_id={Uri.EscapeDataString(packageId)}&password={Uri.EscapeDataString(password)}"
+                : $"{sophonApi}/{SophonGetBuildEndpoint}?branch={Uri.EscapeDataString(branchName)}&package_id={Uri.EscapeDataString(packageId)}&password={Uri.EscapeDataString(password)}&tag={Uri.EscapeDataString(tag)}";
+
+        public static string BuildSophonPatchBuildUrl(string sophonApi) =>
+            $"{sophonApi}/{SophonGetPatchBuildEndpoint}";
     }
 }

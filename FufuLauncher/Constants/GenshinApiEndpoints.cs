@@ -7,19 +7,15 @@ namespace FufuLauncher.Constants;
 
 public static class GenshinApiEndpoints
 {
-    private const string BbsApi = ApiEndpoints.MiyousheBbsApiBase;
-    private const string CloudGameApi = ApiEndpoints.CloudGameApiBase;
+    public const string BbsSignUrl = ApiEndpoints.BbsSignUrl;
+    public const string BbsSignStatusUrl = ApiEndpoints.BbsSignStatusUrl;
+    public const string GenshinTavernUrl = ApiEndpoints.MiyousheGenshinTavernUrl;
+    public const string BbsCreateVerificationUrl = ApiEndpoints.BbsCreateVerificationUrl;
+    public const string BbsVerifyVerificationUrl = ApiEndpoints.BbsVerifyVerificationUrl;
 
 
-    public const string BbsSignUrl = $"{BbsApi}/apihub/app/api/signIn";
-    public static readonly string BbsSignStatusUrl = $"{BbsApi}/apihub/api/querySignInStatus?gids={GenshinCommunityId}";
-    public const string GenshinTavernUrl = "https://www.miyoushe.com/ys/home/26";
-    public const string BbsCreateVerificationUrl = $"{BbsApi}/misc/api/createVerification?is_high=true";
-    public const string BbsVerifyVerificationUrl = $"{BbsApi}/misc/api/verifyVerification";
-
-
-    public const string CloudGameWalletUrl = $"{CloudGameApi}/hk4e_cg_cn/wallet/wallet/get";
-    public const string CloudGameHost = "api-cloudgame.mihoyo.com";
+    public const string CloudGameWalletUrl = ApiEndpoints.CloudGameWalletUrl;
+    public const string CloudGameHost = ApiEndpoints.CloudGameHost;
     public const string CloudGameReferer = ApiEndpoints.AppMihoyoBase;
 
 

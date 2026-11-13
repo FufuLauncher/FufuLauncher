@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-Copyright (c) FufuLauncher Dev Team. All rights reserved.
-Licensed under the MIT License.
--->
 <UserControl
     x:Class="FufuLauncher.Views.Controls.CycleChallenge.RemoteImage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -13,7 +8,7 @@ Licensed under the MIT License.
     VerticalAlignment="Stretch">
 
     <Grid x:Name="RootGrid" Background="Transparent">
-        <!-- 占位层：加载中 / 加载失败时显示，成功打开后隐藏 -->
+        
         <Border x:Name="PlaceholderBorder"
                 Background="{ThemeResource ControlFillColorSecondaryBrush}"
                 CornerRadius="4">
@@ -27,7 +22,7 @@ Licensed under the MIT License.
                       IsHitTestVisible="False" />
         </Border>
 
-        <!-- 图片层：成功加载后由 ImageFadeInHelper 淡入 -->
+        
         <Image x:Name="ContentImage"
                Stretch="Uniform"
                HorizontalAlignment="Stretch"

@@ -33,9 +33,9 @@ public sealed record RawChallengeResponse(
 
 public sealed class GameRecordApiClient
 {
-    private const string CnGameRecordBase = "https://api-takumi-record.mihoyo.com/game_record/app/genshin/api";
-    private const string OsGameRecordBase = "https://bbs-api-os.hoyolab.com/game_record/app/genshin/api";
-    private const string OsEventBase = "https://sg-public-api.hoyoverse.com/event/game_record/genshin/api";
+    private const string CnGameRecordBase = ApiEndpoints.CnGameRecordApiBase;
+    private const string OsGameRecordBase = ApiEndpoints.OverseaGameRecordApiBase;
+    private const string OsEventBase = ApiEndpoints.OverseaEventGameRecordApiBase;
 
     private const string ToolVersionCn = "v6.6.1-gr-cn";
     private const string PageCn = "v6.6.1-gr-cn_#/ys";
@@ -61,18 +61,18 @@ public sealed class GameRecordApiClient
     }
 
     public Task<RawChallengeResponse> GetSpiralAbyssAsync(SelectedGameRole role, int scheduleType, CancellationToken token) =>
-        GetAsync(role, "spiralAbyss", $"{RoleQuery(role)}&schedule_type={scheduleType}", ChallengePath("spiralAbyss"), token);
+        GetAsync(role, ApiEndpoints.GameRecordSpiralAbyssEndpoint, $"{RoleQuery(role)}&schedule_type={scheduleType}", ChallengePath(ApiEndpoints.GameRecordSpiralAbyssEndpoint), token);
 
     public Task<RawChallengeResponse> GetRoleCombatAsync(SelectedGameRole role, CancellationToken token) =>
-        GetAsync(role, "role_combat", $"{RoleQuery(role)}&need_detail=true&active=1", ChallengePath("role_combat"), token);
+        GetAsync(role, ApiEndpoints.GameRecordRoleCombatEndpoint, $"{RoleQuery(role)}&need_detail=true&active=1", ChallengePath(ApiEndpoints.GameRecordRoleCombatEndpoint), token);
 
     public Task<RawChallengeResponse> GetHardChallengeAsync(SelectedGameRole role, CancellationToken token) =>
-        GetAsync(role, "hard_challenge", $"{RoleQuery(role)}&need_detail=true", ChallengePath("hard_challenge"), token);
+        GetAsync(role, ApiEndpoints.GameRecordHardChallengeEndpoint, $"{RoleQuery(role)}&need_detail=true", ChallengePath(ApiEndpoints.GameRecordHardChallengeEndpoint), token);
 
     private static string RoleQuery(SelectedGameRole role) =>
         $"role_id={Uri.EscapeDataString(role.Role.game_uid)}&server={Uri.EscapeDataString(role.Role.region)}";
 
-    private static string ChallengePath(string apiName) => $"/game_record/app/genshin/api/{apiName}";
+    private static string ChallengePath(string apiName) => ApiEndpoints.GetGameRecordChallengePath(apiName);
 
     private static bool IsOversea(SelectedGameRole role) =>
         string.Equals(role.ServerType, "os", StringComparison.OrdinalIgnoreCase);

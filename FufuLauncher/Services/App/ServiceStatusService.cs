@@ -6,8 +6,6 @@ namespace FufuLauncher.Services;
 
 public sealed class ServiceStatusService
 {
-    private const string MonitorListUrl = ApiEndpoints.StatsUptimeRobotBase + "/api/getMonitorList/sPFa3CV3SA";
-    private const string MonitorDetailUrl = ApiEndpoints.StatsUptimeRobotBase + "/api/getMonitor/sPFa3CV3SA";
     private static readonly HttpClient Client = CreateClient();
 
     private static HttpClient CreateClient()
@@ -20,7 +18,7 @@ public sealed class ServiceStatusService
 
     public async Task<ServiceStatusPage> GetPageAsync(int page, CancellationToken cancellationToken = default)
     {
-        using var response = await Client.GetAsync($"{MonitorListUrl}?page={page}", cancellationToken);
+        using var response = await Client.GetAsync(ApiEndpoints.GetStatsMonitorListUrl(page), cancellationToken);
         response.EnsureSuccessStatusCode();
 
         await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
@@ -89,7 +87,7 @@ public sealed class ServiceStatusService
     public async Task<ServiceMonitorDetail> GetMonitorDetailAsync(int monitorId,
         CancellationToken cancellationToken = default)
     {
-        using var response = await Client.GetAsync($"{MonitorDetailUrl}?m={monitorId}&region=_default",
+        using var response = await Client.GetAsync(ApiEndpoints.GetStatsMonitorDetailUrl(monitorId),
             cancellationToken);
         response.EnsureSuccessStatusCode();
 

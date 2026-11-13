@@ -322,7 +322,7 @@ public static partial class CommunityContent
     {
         kind = CommunityFeed.Forum;
         id = "";
-        if (uri.Host is not ("www.miyoushe.com" or "m.miyoushe.com" or "bbs.mihoyo.com")) return false;
+        if (!ApiEndpoints.IsMiyousheCommunityHost(uri.Host)) return false;
         var post = Regex.Match(uri.AbsolutePath, @"/(?:article|detail)/(\d+)(?:/|$)");
         if (post.Success)
         {

@@ -134,7 +134,7 @@ public sealed partial class VideoResourcesWindow : Window, INotifyPropertyChange
             string jsCode = @"
     (function() {
         var items = [];
-        var nodes = document.querySelectorAll('a[href*=""/ys/obc/content/""]');
+        var nodes = document.querySelectorAll('a[href*=""" + ApiEndpoints.BaikeContentPathPrefix + @"""]');
         nodes.forEach(function(a) {
             var img = a.querySelector('.item__img');
             var title = a.querySelector('h5');
@@ -315,7 +315,6 @@ public sealed partial class VideoResourcesWindow : Window, INotifyPropertyChange
                         outline:none; 
                         box-shadow: 0 0 20px rgba(0,0,0,0.5);
                     }}
-                    /* 倍速提示层 */
                     #speed-overlay {{
                         position: absolute;
                         top: 10%;
@@ -333,7 +332,7 @@ public sealed partial class VideoResourcesWindow : Window, INotifyPropertyChange
                 </style>
             </head>
             <body>
-                <div id='speed-overlay'>3.0x 速进中</div>
+                <div id='speed-overlay'>3.0x速进中</div>
                 
                 <video controls autoplay loop name='media' id='player'>
                     <source src='{videoUrl}' type='video/mp4'>

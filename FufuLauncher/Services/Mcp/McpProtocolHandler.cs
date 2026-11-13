@@ -34,10 +34,10 @@ internal sealed class McpProtocolHandler
 
     public async Task<McpHttpResponse> HandleAsync(McpHttpRequest request, CancellationToken cancellationToken)
     {
-        if (!string.Equals(request.Path, "/mcp", StringComparison.OrdinalIgnoreCase))
+        if (!string.Equals(request.Path, ApiEndpoints.McpEndpointPath, StringComparison.OrdinalIgnoreCase))
         {
             return McpHttpResponse.Json(404,
-                PlainError(-32601, "Not Found. The MCP endpoint is POST /mcp."));
+                PlainError(-32601, $"Not Found. The MCP endpoint is POST {ApiEndpoints.McpEndpointPath}."));
         }
 
         var remoteAddress = McpIpFilter.Describe(request.RemoteAddress);

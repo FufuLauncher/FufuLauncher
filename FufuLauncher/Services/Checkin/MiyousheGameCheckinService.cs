@@ -123,7 +123,7 @@ public sealed class MiyousheGameCheckinService : IDisposable
     private async Task<MiyousheRoleCheckinResult> SignRoleAsync(
         CheckinSession session, MiyousheRequestPacer pacer, MiyousheCheckinGame game, AccountItem role)
     {
-        string infoUrl = $"{game.ApiBase}/info?lang=zh-cn&act_id={game.ActId}" +
+        string infoUrl = $"{game.ApiBase}{ApiEndpoints.GameCheckinInfoPath}?lang=zh-cn&act_id={game.ActId}" +
                          $"&region={Uri.EscapeDataString(role.Region)}&uid={Uri.EscapeDataString(role.GameUid)}";
         var status = await RequestAsync<IsSignData>(session, pacer, infoUrl, game);
         if (status.RetCode != 0 || status.Data == null)
@@ -137,7 +137,7 @@ public sealed class MiyousheGameCheckinService : IDisposable
         {
             string body =
                 JsonSerializer.Serialize(new { act_id = game.ActId, region = role.Region, uid = role.GameUid });
-            var sign = await RequestAsync<SignResponseData>(session, pacer, $"{game.ApiBase}/sign", game, body);
+            var sign = await RequestAsync<SignResponseData>(session, pacer, $"{game.ApiBase}{ApiEndpoints.GameCheckinSignPath}", game, body);
             if (sign.RetCode != 0)
                 return new(game.GameBiz, game.Name, role.GameUid, false, sign.Message);
             if (sign.RetCode == 0 && sign.Data is { Success: not 0 })
@@ -156,7 +156,7 @@ public sealed class MiyousheGameCheckinService : IDisposable
         int days = status.Data.TotalSignDay;
         string rewardItem = "";
         var rewards = await RequestAsync<CheckinRewardsData>(session, pacer,
-            $"{game.ApiBase}/home?lang=zh-cn&act_id={game.ActId}", game);
+            $"{game.ApiBase}{ApiEndpoints.GameCheckinHomePath}?lang=zh-cn&act_id={game.ActId}", game);
         if (rewards.RetCode == 0 && rewards.Data?.Awards is { } awards && days > 0 && days <= awards.Count)
             rewardItem = Tools.GetItem(awards[days - 1]);
 
@@ -210,7 +210,7 @@ public sealed class MiyousheGameCheckinService : IDisposable
             request.Headers.TryAddWithoutValidation("User-Agent", Tools.GetUserAgent(""));
             request.Headers.TryAddWithoutValidation("X-Requested-With", "com.mihoyo.hyperion");
             request.Headers.Referrer = new Uri(game?.Referer ?? (ApiEndpoints.ActMihoyoBase + "/"));
-            request.Headers.TryAddWithoutValidation("Origin", game?.Referer.StartsWith("https://webstatic.") == true
+            request.Headers.TryAddWithoutValidation("Origin", game?.Referer.StartsWith(ApiEndpoints.WebstaticSchemePrefix) == true
                 ? ApiEndpoints.WebstaticRefererUrl
                 : ApiEndpoints.ActMihoyoBase);
             if (game?.SignGame != null) request.Headers.TryAddWithoutValidation("x-rpc-signgame", game.SignGame);

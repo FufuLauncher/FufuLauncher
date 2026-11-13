@@ -136,10 +136,10 @@ internal static class BackgroundImageLoader
         return result;
     }
 
-    /// <summary>
-    /// 边缘自适应抗锯齿：只平滑检测到的锯齿边缘，平坦区域与纹理细节保持原样，
-    /// 取代原先会让整张图发虚的全图高斯模糊。须在预乘 Alpha 之前对 BGRA 直通像素调用。
-    /// </summary>
+    
+    
+    
+    
     private static void ApplyAntialias(byte[] pixels, int width, int height, (bool Enabled, int Strength) settings)
     {
         if (!settings.Enabled || settings.Strength <= 0)

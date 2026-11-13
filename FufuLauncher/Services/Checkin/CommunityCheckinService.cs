@@ -102,7 +102,7 @@ public class CommunityCheckinService : ICommunityCheckinService
 
     private async Task<bool> IsAlreadySignedAsync(IReadOnlyDictionary<string, string> cookies)
     {
-        // The website status endpoint accepts v2 values under the original web cookie names.
+        
         var pairs = new List<string>();
         foreach (var name in new[] { "ltuid", "ltoken", "account_id", "cookie_token" })
         {
@@ -115,9 +115,9 @@ public class CommunityCheckinService : ICommunityCheckinService
 
         try
         {
-            using var request = new HttpRequestMessage(HttpMethod.Get, GenshinApiEndpoints.BbsSignStatusUrl);
-            request.Headers.Referrer = new Uri(GenshinApiEndpoints.GenshinTavernUrl);
-            request.Headers.Add(HeaderNames.Origin, "https://www.miyoushe.com");
+            using var request = new HttpRequestMessage(HttpMethod.Get, ApiEndpoints.BbsSignStatusUrl);
+            request.Headers.Referrer = new Uri(ApiEndpoints.MiyousheGenshinTavernUrl);
+            request.Headers.Add(HeaderNames.Origin, ApiEndpoints.MiyousheWebBase);
             request.Headers.UserAgent.ParseAdd(UserAgents.WindowsBbs295);
             request.Headers.Add(HeaderNames.RpcClientType, ClientTypes.Web);
             request.Headers.Add(HeaderNames.Cookie, string.Join("; ", pairs));
@@ -144,7 +144,7 @@ public class CommunityCheckinService : ICommunityCheckinService
     {
         var device = identity.Device;
         var body = JsonSerializer.Serialize(new { gids = GenshinApiEndpoints.GenshinCommunityId });
-        using var request = new HttpRequestMessage(HttpMethod.Post, GenshinApiEndpoints.BbsSignUrl)
+        using var request = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.BbsSignUrl)
         {
             Content = new StringContent(body, Encoding.UTF8, "application/json")
         };

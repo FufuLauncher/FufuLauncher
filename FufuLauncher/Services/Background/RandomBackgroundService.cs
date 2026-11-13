@@ -15,7 +15,7 @@ public enum RandomBackgroundType
 
 public static class RandomBackgroundService
 {
-    private const string Endpoint = "https://image.fu1.fun/";
+    private const string Endpoint = ApiEndpoints.RandomBackgroundBaseUrl;
     private const int MaxDownloadBytes = 20 * 1024 * 1024;
     private const int MaxChallengeBytes = 8 * 1024;
     private const string ChallengeCookieName = "acw_sc__v2";
@@ -63,8 +63,8 @@ public static class RandomBackgroundService
 
     private static string GetEndpoint(RandomBackgroundType type) => type switch
     {
-        RandomBackgroundType.Home => Endpoint + "?type=home",
-        RandomBackgroundType.Cg => Endpoint + "?type=cg",
+        RandomBackgroundType.Home => ApiEndpoints.RandomBackgroundHomeUrl,
+        RandomBackgroundType.Cg => ApiEndpoints.RandomBackgroundCgUrl,
         _ => Endpoint
     };
 

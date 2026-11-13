@@ -8,7 +8,7 @@ internal static class MiyoushePendantImages
 {
     private const int Concurrency = 8;
     private const int Attempts = 3;
-    private const string ResizableHost = "bbs-static.miyoushe.com";
+    private const string ResizableHost = ApiEndpoints.MiyousheStaticHost;
 
     private static readonly HttpClient Http = CreateClient();
     private static readonly SemaphoreSlim Gate = new(Concurrency, Concurrency);

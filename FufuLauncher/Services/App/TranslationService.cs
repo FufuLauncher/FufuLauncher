@@ -17,7 +17,6 @@ public sealed class TranslationService
     public static TranslationService Instance => _instance.Value;
 
     private readonly HttpClient _httpClient = new();
-    private const string ApiBaseUrl = ApiEndpoints.MyMemoryTranslateUrl;
     private const int MaxCharsPerRequest = 500;
 
     private readonly ConcurrentDictionary<string, string> _cache = new();
@@ -209,7 +208,7 @@ public sealed class TranslationService
         try
         {
             var encodedText = Uri.EscapeDataString(text);
-            var url = $"{ApiBaseUrl}?q={encodedText}&langpair={Uri.EscapeDataString(langPair)}";
+            var url = ApiEndpoints.GetMyMemoryTranslateRequestUrl(encodedText, langPair);
 
             var response = await _httpClient.GetAsync(url, ct);
             if (!response.IsSuccessStatusCode)

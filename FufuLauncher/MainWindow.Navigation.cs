@@ -412,7 +412,7 @@ public sealed partial class MainWindow
 
         if (failedUri is { IsFile: true })
         {
-            // 本地缓存文件损坏：删除后回退远程地址重试一次
+            
             if (!_accountPendantCacheInvalidated && AccountAvatarPendantCache.Invalidate(url))
             {
                 _accountPendantCacheInvalidated = true;
@@ -426,7 +426,7 @@ public sealed partial class MainWindow
         }
         else if (AccountAvatarPendantCache.TryGetCachedFile(url, out var cachedPath))
         {
-            // 远程地址加载失败，本地缓存可用则改用缓存
+            
             DebugLog.Info("MainWindow.Navigation",
                 "[Pendant] Remote pendant failed, falling back to cache: " + e.ErrorMessage);
             SetPendantSource(cachedPath);

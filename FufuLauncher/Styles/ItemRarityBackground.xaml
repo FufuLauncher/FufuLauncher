@@ -3,9 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="using:FufuLauncher.Controls"
     xmlns:helpers="using:FufuLauncher.Helpers">
-
-    <!-- The native PNG already contains the gradient and watermark. An Image layer keeps
-         its load lifecycle local to each control, including virtualized multi-window views. -->
+    
     <Style TargetType="controls:ItemRarityBackground">
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

@@ -15,7 +15,7 @@ internal sealed class MiyousheShopException(string message) : Exception(message)
 
 internal sealed partial class MiyousheShopClient
 {
-    private const string Origin = "https://webstatic.miyoushe.com";
+    private const string Origin = ApiEndpoints.WebstaticRefererUrl;
 
     internal async Task<MiyousheShopGoods> GetAccountGoodsAsync(string id, AccountContext account, string uid,
         CancellationToken ct)
@@ -35,9 +35,10 @@ internal sealed partial class MiyousheShopClient
         if (!goods.RequiresAddress && !goods.RequiresRole)
             return [new("UID " + uid, communityUid, "", communityBiz, 0)];
 
-        string path = goods.RequiresAddress ? "/account/address/list?point_sn=myb" :
-            "/binding/api/getUserGameRolesByCookie?game_biz=" + Uri.EscapeDataString(goods.GameBiz);
-        var data = await ReadAccountDataAsync(ApiEndpoints.MihoyoBbsWebApi + path, account, uid, ct);
+        string url = goods.RequiresAddress
+            ? ApiEndpoints.MiyousheShopAddressListUrl
+            : ApiEndpoints.MiyousheShopUserGameRolesPrefix + Uri.EscapeDataString(goods.GameBiz);
+        var data = await ReadAccountDataAsync(url, account, uid, ct);
         if (goods.RequiresAddress)
             return data.Get("list").Items().Where(item => item.Number("id") > 0).Select(item =>
             {
@@ -67,7 +68,7 @@ internal sealed partial class MiyousheShopClient
         if (target.Uid.Length > 0) body["uid"] = target.Uid;
         if (target.Region.Length > 0) body["region"] = target.Region;
         if (target.GameBiz.Length > 0) body["game_biz"] = target.GameBiz;
-        var request = CreateAccountRequest(HttpMethod.Post, Api + "exchange", account, uid);
+        var request = CreateAccountRequest(HttpMethod.Post, Api + ApiEndpoints.MiyousheShopExchangeEndpoint, account, uid);
         request.Content = new ByteArrayContent(JsonSerializer.SerializeToUtf8Bytes(body));
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
         return request;
@@ -123,7 +124,7 @@ internal sealed partial class MiyousheShopClient
 
         bool shopHost = new Uri(url).Host == new Uri(ApiEndpoints.MiyousheBbsApiBase).Host;
         var request = new HttpRequestMessage(method, url);
-        request.Headers.Referrer = new((shopHost ? Origin : "https://user.mihoyo.com") + "/");
+        request.Headers.Referrer = new((shopHost ? Origin : ApiEndpoints.UserMihoyoBase) + "/");
         request.Headers.TryAddWithoutValidation("Origin", request.Headers.Referrer.GetLeftPart(UriPartial.Authority));
         request.Headers.TryAddWithoutValidation("Cookie", cookie);
         request.Headers.TryAddWithoutValidation("User-Agent", account.UserAgent.Mobile);

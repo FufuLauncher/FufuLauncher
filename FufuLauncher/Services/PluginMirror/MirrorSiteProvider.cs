@@ -125,14 +125,7 @@ public class MirrorSiteProvider
         try
         {
             var host = new Uri(url).Host;
-            return host.Equals("github.com", StringComparison.OrdinalIgnoreCase)
-                   || host.Equals("raw.githubusercontent.com", StringComparison.OrdinalIgnoreCase)
-                   || host.Equals("objects.githubusercontent.com", StringComparison.OrdinalIgnoreCase)
-                   || host.Equals("releases-assets.githubusercontent.com", StringComparison.OrdinalIgnoreCase)
-                   || host.Equals("codeload.github.com", StringComparison.OrdinalIgnoreCase)
-                   || host.EndsWith(".github.com", StringComparison.OrdinalIgnoreCase)
-                   || host.Equals("github.io", StringComparison.OrdinalIgnoreCase)
-                   || host.EndsWith(".github.io", StringComparison.OrdinalIgnoreCase);
+            return ApiEndpoints.IsGitHubHost(host);
         }
         catch
         {
@@ -142,7 +135,7 @@ public class MirrorSiteProvider
 
     public static string BuildMirrorUrl(string domain, string originalUrl)
     {
-        return $"https://{domain}/{originalUrl}";
+        return ApiEndpoints.BuildMirrorUrl(domain, originalUrl);
     }
 
     public static async Task<string?> ResolveRedirectUrlAsync(string url)

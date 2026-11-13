@@ -65,9 +65,9 @@ public sealed partial class BBSWindow
             await BBSWebView.EnsureCoreWebView2Async();
             UpdateWebViewSettings();
 
-            BBSWebView.CoreWebView2.AddWebResourceRequestedFilter("*://*.mihoyo.com/*",
+            BBSWebView.CoreWebView2.AddWebResourceRequestedFilter(ApiEndpoints.MihoyoWebSubdomainFilter,
                 CoreWebView2WebResourceContext.All);
-            BBSWebView.CoreWebView2.AddWebResourceRequestedFilter("*://*.hoyolab.com/*",
+            BBSWebView.CoreWebView2.AddWebResourceRequestedFilter(ApiEndpoints.HoyolabWebSubdomainFilter,
                 CoreWebView2WebResourceContext.All);
 
             BBSWebView.CoreWebView2.WebResourceRequested += CoreWebView2_WebResourceRequested;

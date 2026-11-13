@@ -33,7 +33,7 @@ internal sealed class MiyousheQrLoginService : IDisposable
     {
         if (qr.IsExpired) throw new MiyousheQrException("MiyousheQr_Expired");
         if (qr.GameBiz == null) return qr;
-        string url = $"{ApiEndpoints.ActSdkApiBase}/{qr.GameBiz}/combo/panda/qrcode/scan";
+        string url = ApiEndpoints.GetGameQrCodeScanUrl(qr.GameBiz);
         var result = await PostAsync(url, new
         {
             passport_app_id = "bll8iq97cem8", ticket = qr.Ticket, app_id = qr.AppId,

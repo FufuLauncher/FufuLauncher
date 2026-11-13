@@ -153,9 +153,9 @@ public sealed partial class CloudCaptchaWindow : Window
 
     private async void OnNavigationStarting(CoreWebView2 sender, CoreWebView2NavigationStartingEventArgs args)
     {
-        if (args.Uri.Contains("/api/auth/result", StringComparison.OrdinalIgnoreCase))
+        if (args.Uri.Contains(ApiEndpoints.CloudSyncAuthResultPath, StringComparison.OrdinalIgnoreCase))
         {
-            // Cancel before WebView2 fetches /api/auth/result so we retrieve the single-use status atomically via poll_url.
+            
             args.Cancel = true;
             StatusTextBlock.Text = "CloudSync_CaptchaSubmitting".GetLocalized();
             await TrySinglePollAsync();

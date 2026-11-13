@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -2097,7 +2098,7 @@
     <value>重新整理 QR Code</value>
   </data>
   <data name="LoginQR_AutoRefreshHint" xml:space="preserve">
-    <value>二維碼每 60 秒自動重新整理一次</value>
+    <value>二維碼每60秒自動重新整理一次</value>
   </data>
   <data name="LoginQR_AutoRefreshed" xml:space="preserve">
     <value>二維碼已自動重新整理，請重新掃描</value>
@@ -2215,6 +2216,9 @@
   </data>
   <data name="AboutPage_ContactAuthor" xml:space="preserve">
     <value>聯絡作者</value>
+  </data>
+  <data name="AboutPage_ContactEmailOption" xml:space="preserve">
+    <value>電子郵件 ({0})</value>
   </data>
   <data name="SponsorWindow_Title" xml:space="preserve">
     <value>贊助作者</value>
@@ -3453,6 +3457,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="AboutPage_DiscordCopied" xml:space="preserve">
     <value>Discord ID 已複製!</value>
+  </data>
+  <data name="AboutPage_EmailCopied" xml:space="preserve">
+    <value>電子郵件已複製!</value>
   </data>
   <data name="AboutPage_Loading" xml:space="preserve">
     <value>正在取得...</value>
@@ -9301,6 +9308,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_BtnExportSave" xml:space="preserve">
     <value>儲存</value>
   </data>
+  <data name="CloudSync_BtnMergeToLocal" xml:space="preserve">
+    <value>合併匯入</value>
+  </data>
   <data name="CloudSync_BtnOverwrite" xml:space="preserve">
     <value>覆寫</value>
   </data>
@@ -9370,6 +9380,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
     <value>確認解鎖</value>
   </data>
+  <data name="CloudSync_ContactTip" xml:space="preserve">
+    <value>如有問題，請聯繫 dev@fufu.skin</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>註銷帳號並清除資料</value>
   </data>
@@ -9420,6 +9433,15 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
     <value>下載失敗</value>
+  </data>
+  <data name="CloudSync_DurationHoursMinsFormat" xml:space="preserve">
+    <value>{0} 小時 {1} 分鐘</value>
+  </data>
+  <data name="CloudSync_DurationMinsSecsFormat" xml:space="preserve">
+    <value>{0} 分 {1} 秒</value>
+  </data>
+  <data name="CloudSync_DurationSecsFormat" xml:space="preserve">
+    <value>{0} 秒</value>
   </data>
   <data name="CloudSync_EmailHeader" xml:space="preserve">
     <value>電子郵件地址</value>
@@ -9522,6 +9544,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>全部類型</value>
+  </data>
+  <data name="CloudSync_FilterPlayTime" xml:space="preserve">
+    <value>遊戲時長</value>
   </data>
   <data name="CloudSync_FilterUiaf" xml:space="preserve">
     <value>成就存檔</value>
@@ -9781,6 +9806,54 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
     <value>設定密碼</value>
   </data>
+  <data name="CloudSync_PlayTimeConfirmOverwriteMsg" xml:space="preserve">
+    <value>確定使用目前本機遊戲時長紀錄覆寫雲端存檔「{0}」嗎？</value>
+  </data>
+  <data name="CloudSync_PlayTimeEmptyCloud" xml:space="preserve">
+    <value>雲端暫無遊戲時長存檔，可在上方輸入名稱並上傳目前紀錄。</value>
+  </data>
+  <data name="CloudSync_PlayTimeListSummary" xml:space="preserve">
+    <value>遊戲時長雲端存檔 {0} 份 - 全庫 {1}/{2} - 空間 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_PlayTimeLocalSummaryFormat" xml:space="preserve">
+    <value>本機目前統計：{0} 天 - 累計 {1}（含 {2} 筆時段紀錄）</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedAddedFormat" xml:space="preserve">
+    <value>已從「{0}」疊加 +{1}，目前累計總時長：{2}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedNoGainFormat" xml:space="preserve">
+    <value>已校對「{0}」：未新增時長（時段完全重疊或未超過現有資料），目前累計總時長：{1}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedOverlapFormat" xml:space="preserve">
+    <value>已從「{0}」疊加 +{1}（已自動去除重疊時段 {2}），目前累計總時長：{3}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeFailedTitle" xml:space="preserve">
+    <value>合併匯入遊戲時長失敗</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeImportBtn" xml:space="preserve">
+    <value>合併匯入</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeSuccessTitle" xml:space="preserve">
+    <value>遊戲時長合併完成</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeTip" xml:space="preserve">
+    <value>下載匯入採用增量疊加規則：現有本機資料不會減少，僅累計新增遊玩時長並自動對重複時間段去重。</value>
+  </data>
+  <data name="CloudSync_PlayTimeNotSignedInMsg" xml:space="preserve">
+    <value>請先在 FufuLauncher 雲端存檔中心登入帳戶，再上傳或同步遊戲時長紀錄。</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncBtn" xml:space="preserve">
+    <value>雲端同步</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncTooltip" xml:space="preserve">
+    <value>上傳或增量合併雲端遊戲時長存檔</value>
+  </data>
+  <data name="CloudSync_PlayTimeTitle" xml:space="preserve">
+    <value>遊戲時長 - FufuLauncher 雲端存檔管理</value>
+  </data>
+  <data name="CloudSync_PlayTimeUploadBtn" xml:space="preserve">
+    <value>上傳目前遊戲時長到雲端</value>
+  </data>
   <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
     <value>重新整理檢視目前空間與今日配額使用情況</value>
   </data>
@@ -9934,6 +10007,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>確認重設密碼</value>
   </data>
+  <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
+    <value>遊戲時長</value>
+  </data>
   <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
     <value>成就存檔</value>
   </data>
@@ -9972,6 +10048,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>上傳本機檔案</value>
+  </data>
+  <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
+    <value>遊戲時長紀錄</value>
   </data>
   <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
     <value>成就紀錄</value>

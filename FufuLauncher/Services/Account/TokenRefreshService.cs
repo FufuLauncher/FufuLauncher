@@ -188,7 +188,7 @@ public class TokenRefreshService : IDisposable
 
     private async Task<bool?> CheckCookieValidAsync(IReadOnlyDictionary<string, string> cookies)
     {
-        // The role binding API validates LToken only. CookieToken can expire independently.
+        
         string? ltokenCookie = BuildCredentialCookie(cookies, "ltoken", "ltuid");
         string? cookieTokenCookie = BuildCredentialCookie(cookies, "cookie_token", "account_id");
         if (ltokenCookie == null || cookieTokenCookie == null) return false;

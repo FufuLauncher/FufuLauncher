@@ -32,7 +32,7 @@ internal sealed record MiyousheLoginQr(
         if (text.Length > 4096 || text.Any(char.IsControl)
                                || !Uri.TryCreate(text, UriKind.Absolute, out var uri)
                                || uri.Scheme != "https" || !uri.IsDefaultPort || uri.UserInfo.Length != 0
-                               || !uri.Host.Equals("user.mihoyo.com", StringComparison.OrdinalIgnoreCase)) return false;
+                               || !uri.Host.Equals(ApiEndpoints.UserMihoyoHost, StringComparison.OrdinalIgnoreCase)) return false;
         var parameters = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var pair in uri.Query.TrimStart('?').Split('&', StringSplitOptions.RemoveEmptyEntries))
         {
@@ -49,7 +49,7 @@ internal sealed record MiyousheLoginQr(
             expiry = seconds;
         }
 
-        if (uri.AbsolutePath == "/login-platform/mobile.html")
+        if (uri.AbsolutePath == ApiEndpoints.PassportQrMobileLoginPath)
         {
             if (!parameters.TryGetValue("tk", out var ticket) || !IsTicket(ticket)
                                                               || !parameters.TryGetValue("token_types", out var types)
@@ -60,7 +60,7 @@ internal sealed record MiyousheLoginQr(
             return true;
         }
 
-        if (uri.AbsolutePath != "/qr_code_in_game.html"
+        if (uri.AbsolutePath != ApiEndpoints.PassportQrInGamePath
             || !parameters.TryGetValue("ticket", out var gameTicket) || !IsTicket(gameTicket)
             || !parameters.TryGetValue("app_id", out var appIdText)
             || !int.TryParse(appIdText, out int appId)

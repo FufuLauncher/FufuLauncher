@@ -24,11 +24,11 @@ public sealed class OverseaGameRecordClient
     {
         string roleQuery = $"role_id={Uri.EscapeDataString(uid)}&server={Uri.EscapeDataString(region)}";
 
-        await GetAsync($"{ApiEndpoints.OverseaGameRecordApiBase}/index?{roleQuery}", roleQuery, cookies, token)
+        await GetAsync($"{ApiEndpoints.OverseaDailyNoteIndexUrl}?{roleQuery}", roleQuery, cookies, token)
             .ConfigureAwait(false);
 
         string json =
-            await GetAsync($"{ApiEndpoints.OverseaGameRecordApiBase}/dailyNote?{roleQuery}", roleQuery, cookies, token)
+            await GetAsync($"{ApiEndpoints.OverseaDailyNoteUrl}?{roleQuery}", roleQuery, cookies, token)
                 .ConfigureAwait(false);
         return DailyNoteParser.Parse(json);
     }

@@ -14,28 +14,77 @@
     </Window.SystemBackdrop>
 
     <Grid x:Name="RootGrid" Background="Transparent">
+        <Grid.Resources>
+            <Style x:Key="SectionHeadingStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+            </Style>
+            <Style x:Key="RowTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+            </Style>
+            <Style x:Key="RowLabelStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+            </Style>
+            <Style x:Key="RowCaptionStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+            </Style>
+            <Style x:Key="HairlineDividerStyle" TargetType="Rectangle">
+                <Setter Property="Height" Value="1" />
+                <Setter Property="Fill" Value="{ThemeResource DividerStrokeColorDefaultBrush}" />
+            </Style>
+            <Style x:Key="VerticalDividerStyle" TargetType="Rectangle">
+                <Setter Property="Width" Value="1" />
+                <Setter Property="Fill" Value="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+            <Style x:Key="FlatRowActionButtonStyle"
+                   TargetType="Button"
+                   BasedOn="{StaticResource DefaultButtonStyle}">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="CornerRadius" Value="4" />
+            </Style>
+        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Title bar -->
-        <Border x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
             <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" Margin="16,0,0,0">
                 <FontIcon Glyph="&#xE753;" FontSize="14" />
                 <TextBlock Text="{helpers:Loc Key=CloudSync_WindowTitle}" FontSize="12" VerticalAlignment="Center" />
             </StackPanel>
-        </Border>
+        </Grid>
 
-        <!-- Top Navigation + Session Chip + Busy Bar -->
-        <Grid Grid.Row="1" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="0,0,0,1" Padding="12,0,24,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
+        <!-- Top Navigation + Busy Bar -->
+        <Grid Grid.Row="1" BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}" BorderThickness="0,0,0,1" Padding="12,0">
             <NavigationView x:Name="MainNavView"
                             PaneDisplayMode="Top"
                             IsBackButtonVisible="Collapsed"
@@ -60,21 +109,7 @@
                 </NavigationView.MenuItems>
             </NavigationView>
 
-            <Border Grid.Column="1"
-                    VerticalAlignment="Center"
-                    Padding="12,5"
-                    CornerRadius="14"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                    BorderThickness="1">
-                <TextBlock x:Name="HeaderSessionSummaryText"
-                           FontSize="12"
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                           Text="{helpers:Loc Key=CloudSync_NotLoggedInShort}" />
-            </Border>
-
             <ProgressBar x:Name="GlobalProgressBar"
-                         Grid.ColumnSpan="2"
                          VerticalAlignment="Bottom"
                          IsIndeterminate="True"
                          Visibility="Collapsed" />
@@ -87,53 +122,29 @@
                       HorizontalScrollMode="Disabled"
                       HorizontalContentAlignment="Stretch"
                       VerticalContentAlignment="Top">
-            <Grid Padding="32,20,32,16" HorizontalAlignment="Stretch">
+            <Grid Padding="32,24,32,20" HorizontalAlignment="Stretch">
 
                 <!-- 1. Account & Security -->
                 <Grid x:Name="AccountTabPanel" VerticalAlignment="Top">
 
                     <!-- Signed-out View -->
-                    <Border x:Name="UnauthPanel"
-                            Width="500"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Top"
-                            Margin="0,28,0,20"
-                            Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                            BorderThickness="1"
-                            CornerRadius="10"
-                            Padding="32,28">
-                        <StackPanel Spacing="16">
-                            <Grid ColumnSpacing="14">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" MinWidth="0" />
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0"
-                                        Width="44"
-                                        Height="44"
-                                        VerticalAlignment="Top"
-                                        CornerRadius="10"
-                                        Background="{ThemeResource SubtleFillColorSecondaryBrush}"
-                                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                        BorderThickness="1">
-                                    <FontIcon Glyph="&#xE753;"
-                                              FontSize="20"
-                                              Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
-                                </Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="3">
-                                    <TextBlock Text="{helpers:Loc Key=CloudSync_AuthTitle}"
-                                               Style="{StaticResource SubtitleTextBlockStyle}"
-                                               TextWrapping="Wrap" />
-                                    <TextBlock Text="{helpers:Loc Key=CloudSync_AuthSubtitle}"
-                                               TextWrapping="Wrap"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                               FontSize="12" />
-                                </StackPanel>
-                            </Grid>
+                    <Grid x:Name="UnauthPanel" RowSpacing="20" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                            <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                        <StackPanel Grid.Row="0" Spacing="3">
+                            <TextBlock Text="{helpers:Loc Key=CloudSync_AuthTitle}"
+                                       Style="{StaticResource SubtitleTextBlockStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=CloudSync_AuthSubtitle}"
+                                       Style="{StaticResource RowCaptionStyle}" />
+                        </StackPanel>
 
+                        <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+
+                        <StackPanel Grid.Row="2" Spacing="16" Width="460" HorizontalAlignment="Left">
                             <RadioButtons x:Name="AuthModeSelector"
                                           MaxColumns="3"
                                           SelectionChanged="OnAuthModeChanged" />
@@ -169,18 +180,20 @@
                             </Grid>
 
                             <Button x:Name="AuthSubmitButton"
-                                    HorizontalAlignment="Stretch"
-                                    Margin="0,6,0,0"
-                                    Padding="16,9"
+                                    HorizontalAlignment="Left"
+                                    MinWidth="180"
+                                    Margin="0,4,0,0"
+                                    Padding="24,8"
                                     Content="{helpers:Loc Key=CloudSync_SubmitLogin}"
                                     Style="{StaticResource AccentButtonStyle}"
                                     Click="OnAuthSubmitClick" />
                         </StackPanel>
-                    </Border>
+                    </Grid>
 
                     <!-- Signed-in View -->
                     <Grid x:Name="LoggedInAccountPanel" RowSpacing="20" Visibility="Collapsed">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
@@ -193,9 +206,7 @@
                             <StackPanel Spacing="3">
                                 <TextBlock Text="{helpers:Loc Key=CloudSync_AccountSectionTitle}" Style="{StaticResource SubtitleTextBlockStyle}" />
                                 <TextBlock Text="{helpers:Loc Key=CloudSync_AccountSectionSubtitle}"
-                                           FontSize="12"
-                                           TextWrapping="Wrap"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                           Style="{StaticResource RowCaptionStyle}" />
                             </StackPanel>
                             <Button Grid.Column="1"
                                     VerticalAlignment="Center"
@@ -203,63 +214,78 @@
                                     Click="OnRefreshAccountStatusClick" />
                         </Grid>
 
-                        <Grid Grid.Row="1" ColumnSpacing="24">
+                        <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+
+                        <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.05*" MinWidth="0" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="1.15*" MinWidth="0" />
-                                <ColumnDefinition Width="*" MinWidth="0" />
                             </Grid.ColumnDefinitions>
 
-                            <!-- Account Info Surface -->
-                            <Border Grid.Column="0"
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="8"
-                                    Padding="24,22"
-                                    VerticalAlignment="Stretch">
-                                <Grid RowSpacing="18" ColumnSpacing="24">
+                            <!-- Account Info Flat List -->
+                            <StackPanel Grid.Column="0">
+                                <Grid ColumnSpacing="20" Padding="0,4,0,14">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
+                                        <ColumnDefinition Width="128" />
                                         <ColumnDefinition Width="*" MinWidth="0" />
                                     </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelEmail}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock x:Name="AccountEmailValueText" Grid.Row="0" Grid.Column="1" Text="-" IsTextSelectionEnabled="True" TextWrapping="Wrap" />
-
-                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelStatus}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock x:Name="AccountLockStatusText" Grid.Row="1" Grid.Column="1" Text="-" FontWeight="SemiBold" TextWrapping="Wrap" />
-
-                                    <TextBlock Grid.Row="2" Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelLockedAt}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock x:Name="AccountLockedAtText" Grid.Row="2" Grid.Column="1" Text="-" TextWrapping="Wrap" />
-
-                                    <TextBlock Grid.Row="3" Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelAutoLogin}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{helpers:Loc Key=CloudSync_AutoLoginDesc}" TextWrapping="Wrap" />
+                                    <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelEmail}" Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="AccountEmailValueText" Grid.Column="1" Text="-" IsTextSelectionEnabled="True" TextWrapping="Wrap" VerticalAlignment="Center" />
                                 </Grid>
-                            </Border>
 
-                            <!-- Security & Session Controls Surface -->
-                            <Border Grid.Column="1"
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="8"
-                                    Padding="24,22"
-                                    VerticalAlignment="Stretch">
-                                <StackPanel Spacing="14">
-                                    <TextBlock Text="{helpers:Loc Key=CloudSync_SecurityActionsTitle}" FontWeight="SemiBold" FontSize="15" />
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
 
-                                    <TextBlock Text="{helpers:Loc Key=CloudSync_LockHint}"
-                                               TextWrapping="Wrap"
-                                               FontSize="12"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                <Grid ColumnSpacing="20" Padding="0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128" />
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelStatus}" Style="{StaticResource RowLabelStyle}" />
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                        <Ellipse x:Name="AccountStatusIndicator"
+                                                 Width="8"
+                                                 Height="8"
+                                                 VerticalAlignment="Center"
+                                                 Fill="{ThemeResource SystemFillColorSuccessBrush}" />
+                                        <TextBlock x:Name="AccountLockStatusText" Text="-" FontWeight="SemiBold" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
 
-                                    <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <Grid ColumnSpacing="20" Padding="0,14,0,4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="128" />
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_LabelLockedAt}" Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="AccountLockedAtText" Grid.Column="1" Text="-" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Rectangle Grid.Column="1" Style="{StaticResource VerticalDividerStyle}" Margin="32,4" />
+
+                            <!-- Security & Session Flat Action Rows -->
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_SecurityActionsTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}"
+                                           Margin="0,0,0,12" />
+
+                                <Grid ColumnSpacing="20" Padding="0,4,0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Spacing="3" VerticalAlignment="Center">
+                                        <TextBlock x:Name="AccountLockActionTitleText"
+                                                   Text="{helpers:Loc Key=CloudSync_LockTitle}"
+                                                   Style="{StaticResource RowTitleStyle}" />
+                                        <TextBlock x:Name="AccountLockActionDescText"
+                                                   Text="{helpers:Loc Key=CloudSync_LockDesc}"
+                                                   Style="{StaticResource RowCaptionStyle}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                         <Button x:Name="LockAccountButton"
                                                 Content="{helpers:Loc Key=CloudSync_LockAccountBtn}"
                                                 Click="OnLockAccountClick" />
@@ -267,19 +293,50 @@
                                                 Content="{helpers:Loc Key=CloudSync_UnlockAccountBtn}"
                                                 Style="{StaticResource AccentButtonStyle}"
                                                 Click="OnUnlockAccountClick" />
-                                        <Button Content="{helpers:Loc Key=CloudSync_LogoutBtn}"
-                                                Click="OnLogoutClick" />
                                     </StackPanel>
+                                </Grid>
 
-                                    <Rectangle Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" Margin="0,4,0,2" />
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
 
+                                <Grid ColumnSpacing="20" Padding="0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Spacing="3" VerticalAlignment="Center">
+                                        <TextBlock Text="{helpers:Loc Key=CloudSync_LabelAutoLogin}"
+                                                   Style="{StaticResource RowTitleStyle}" />
+                                        <TextBlock Text="{helpers:Loc Key=CloudSync_AutoLoginDesc}"
+                                                   Style="{StaticResource RowCaptionStyle}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Content="{helpers:Loc Key=CloudSync_LogoutBtn}"
+                                            Click="OnLogoutClick" />
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <Grid ColumnSpacing="20" Padding="0,14,0,4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Spacing="3" VerticalAlignment="Center">
+                                        <TextBlock Text="{helpers:Loc Key=CloudSync_DeleteAccountTitle}"
+                                                   Style="{StaticResource RowTitleStyle}"
+                                                   Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                                        <TextBlock Text="{helpers:Loc Key=CloudSync_DeleteAccountWarning}"
+                                                   Style="{StaticResource RowCaptionStyle}" />
+                                    </StackPanel>
                                     <Button x:Name="DeleteAccountButton"
-                                            HorizontalAlignment="Left"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
                                             Content="{helpers:Loc Key=CloudSync_DeleteAccountBtn}"
                                             Foreground="{ThemeResource SystemFillColorCriticalBrush}"
                                             Click="OnDeleteAccountClick" />
-                                </StackPanel>
-                            </Border>
+                                </Grid>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -287,6 +344,7 @@
                 <!-- 2. Quotas & Upgrades -->
                 <Grid x:Name="QuotaTabPanel" RowSpacing="20" Visibility="Collapsed" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
@@ -300,14 +358,14 @@
                             <TextBlock Text="{helpers:Loc Key=CloudSync_QuotaTitle}" Style="{StaticResource SubtitleTextBlockStyle}" />
                             <TextBlock x:Name="QuotaResetInfoText"
                                        Text="{helpers:Loc Key=CloudSync_QuotaDefaultSubtitle}"
-                                       FontSize="12"
-                                       TextWrapping="Wrap"
-                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                       Style="{StaticResource RowCaptionStyle}" />
                         </StackPanel>
                         <Button Grid.Column="1" Content="{helpers:Loc Key=CloudSync_QuotaRefreshBtn}" Click="OnRefreshQuotaClick" VerticalAlignment="Center" />
                     </Grid>
 
-                    <Grid Grid.Row="1">
+                    <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+
+                    <Grid Grid.Row="2">
                         <TextBlock x:Name="QuotaNotReadyHintText"
                                    Text="{helpers:Loc Key=CloudSync_QuotaNotReadySignIn}"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
@@ -315,124 +373,129 @@
                                    Margin="0,32,0,0"
                                    Visibility="Collapsed" />
 
-                        <Grid x:Name="QuotaDetailsPanel" ColumnSpacing="24" HorizontalAlignment="Stretch">
+                        <Grid x:Name="QuotaDetailsPanel" HorizontalAlignment="Stretch">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*" MinWidth="0" />
+                                <ColumnDefinition Width="1.25*" MinWidth="0" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" MinWidth="0" />
                             </Grid.ColumnDefinitions>
 
-                            <!-- Quota Usage Meters -->
-                            <Border Grid.Column="0"
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="8"
-                                    Padding="24,22"
-                                    VerticalAlignment="Stretch">
-                                <StackPanel Spacing="18">
-                                    <!-- Cloud Storage -->
-                                    <StackPanel Spacing="6">
-                                        <Grid ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" MinWidth="0" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaStorageLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                            <TextBlock x:Name="QuotaStorageValueText" Grid.Column="1" HorizontalAlignment="Right" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
-                                        </Grid>
-                                        <ProgressBar x:Name="QuotaStorageBar" Minimum="0" Maximum="100" Value="0" />
-                                    </StackPanel>
-
-                                    <!-- Archive Files -->
-                                    <StackPanel Spacing="6">
-                                        <Grid ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" MinWidth="0" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaFilesLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                            <TextBlock x:Name="QuotaFilesValueText" Grid.Column="1" HorizontalAlignment="Right" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
-                                        </Grid>
-                                        <ProgressBar x:Name="QuotaFilesBar" Minimum="0" Maximum="100" Value="0" />
-                                    </StackPanel>
-
-                                    <!-- Daily Ops -->
-                                    <StackPanel Spacing="6">
-                                        <Grid ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" MinWidth="0" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaOpsLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                            <TextBlock x:Name="QuotaOpsValueText" Grid.Column="1" HorizontalAlignment="Right" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
-                                        </Grid>
-                                        <ProgressBar x:Name="QuotaOpsBar" Minimum="0" Maximum="100" Value="0" />
-                                    </StackPanel>
-
-                                    <!-- Daily Uploads -->
-                                    <StackPanel Spacing="6">
-                                        <Grid ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" MinWidth="0" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaUploadsLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                            <TextBlock x:Name="QuotaUploadsValueText" Grid.Column="1" HorizontalAlignment="Right" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
-                                        </Grid>
-                                        <ProgressBar x:Name="QuotaUploadsBar" Minimum="0" Maximum="100" Value="0" />
-                                    </StackPanel>
-
-                                    <!-- Daily Deletes -->
-                                    <StackPanel Spacing="6">
-                                        <Grid ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" MinWidth="0" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaDeletesLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                            <TextBlock x:Name="QuotaDeletesValueText" Grid.Column="1" HorizontalAlignment="Right" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
-                                        </Grid>
-                                        <ProgressBar x:Name="QuotaDeletesBar" Minimum="0" Maximum="100" Value="0" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </Border>
-
-                            <!-- Activation Code Redemption -->
-                            <Border Grid.Column="1"
-                                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="8"
-                                    Padding="24,22"
-                                    VerticalAlignment="Stretch">
-                                <StackPanel Spacing="14">
-                                    <TextBlock Text="{helpers:Loc Key=CloudSync_UpgradeTitle}" FontWeight="SemiBold" FontSize="15" />
-
-                                    <InfoBar IsOpen="True"
-                                             IsClosable="False"
-                                             Severity="Informational"
-                                             Message="{helpers:Loc Key=CloudSync_UpgradeDisclaimer}" />
-
-                                    <TextBlock x:Name="UpgradeStatusText"
-                                               Text="{helpers:Loc Key=CloudSync_UpgradeInactive}"
-                                               TextWrapping="Wrap"
-                                               FontSize="12"
-                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-
-                                    <Grid ColumnSpacing="8">
+                            <!-- Quota Usage Meters (Flat Hairline-Separated Rows) -->
+                            <StackPanel Grid.Column="0">
+                                <!-- Cloud Storage -->
+                                <StackPanel Spacing="8" Padding="0,2,0,14">
+                                    <Grid ColumnSpacing="12">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" MinWidth="0" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBox x:Name="ActivationCodeTextBox"
-                                                 PlaceholderText="{helpers:Loc Key=CloudSync_ActivationPlaceholder}" />
-                                        <Button Grid.Column="1"
-                                                Content="{helpers:Loc Key=CloudSync_ActivateBtn}"
-                                                Style="{StaticResource AccentButtonStyle}"
-                                                Click="OnActivateCodeClick" />
+                                        <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaStorageLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock x:Name="QuotaStorageValueText" Grid.Column="1" HorizontalAlignment="Right" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
                                     </Grid>
+                                    <ProgressBar x:Name="QuotaStorageBar" Minimum="0" Maximum="100" Value="0" />
                                 </StackPanel>
-                            </Border>
+
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <!-- Archive Files -->
+                                <StackPanel Spacing="8" Padding="0,14">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaFilesLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock x:Name="QuotaFilesValueText" Grid.Column="1" HorizontalAlignment="Right" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
+                                    </Grid>
+                                    <ProgressBar x:Name="QuotaFilesBar" Minimum="0" Maximum="100" Value="0" />
+                                </StackPanel>
+
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <!-- Daily Ops -->
+                                <StackPanel Spacing="8" Padding="0,14">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaOpsLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock x:Name="QuotaOpsValueText" Grid.Column="1" HorizontalAlignment="Right" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
+                                    </Grid>
+                                    <ProgressBar x:Name="QuotaOpsBar" Minimum="0" Maximum="100" Value="0" />
+                                </StackPanel>
+
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <!-- Daily Uploads -->
+                                <StackPanel Spacing="8" Padding="0,14">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaUploadsLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock x:Name="QuotaUploadsValueText" Grid.Column="1" HorizontalAlignment="Right" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
+                                    </Grid>
+                                    <ProgressBar x:Name="QuotaUploadsBar" Minimum="0" Maximum="100" Value="0" />
+                                </StackPanel>
+
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <!-- Daily Deletes -->
+                                <StackPanel Spacing="8" Padding="0,14,0,2">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{helpers:Loc Key=CloudSync_QuotaDeletesLabel}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock x:Name="QuotaDeletesValueText" Grid.Column="1" HorizontalAlignment="Right" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Text="-" />
+                                    </Grid>
+                                    <ProgressBar x:Name="QuotaDeletesBar" Minimum="0" Maximum="100" Value="0" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <Rectangle Grid.Column="1" Style="{StaticResource VerticalDividerStyle}" Margin="32,4" />
+
+                            <!-- Activation Code Redemption (Flat Section) -->
+                            <StackPanel Grid.Column="2" Spacing="14" Padding="0,2,0,0">
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_UpgradeTitle}" Style="{StaticResource SectionHeadingStyle}" />
+
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE946;"
+                                              FontSize="13"
+                                              Margin="0,2,0,0"
+                                              VerticalAlignment="Top"
+                                              Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{helpers:Loc Key=CloudSync_UpgradeDisclaimer}"
+                                               Style="{StaticResource RowCaptionStyle}" />
+                                </Grid>
+
+                                <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                <TextBlock x:Name="UpgradeStatusText"
+                                           Text="{helpers:Loc Key=CloudSync_UpgradeInactive}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="ActivationCodeTextBox"
+                                             PlaceholderText="{helpers:Loc Key=CloudSync_ActivationPlaceholder}" />
+                                    <Button Grid.Column="1"
+                                            Content="{helpers:Loc Key=CloudSync_ActivateBtn}"
+                                            Style="{StaticResource AccentButtonStyle}"
+                                            Click="OnActivateCodeClick" />
+                                </Grid>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -454,9 +517,7 @@
                             <TextBlock Text="{helpers:Loc Key=CloudSync_ArchivesTitle}" Style="{StaticResource SubtitleTextBlockStyle}" />
                             <TextBlock x:Name="ArchivesSummaryText"
                                        Text="{helpers:Loc Key=CloudSync_ArchivesSubtitle}"
-                                       FontSize="12"
-                                       TextWrapping="Wrap"
-                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                       Style="{StaticResource RowCaptionStyle}" />
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
@@ -467,6 +528,7 @@
                                 <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterAll}" Tag="all" />
                                 <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterUiaf}" Tag="uiaf" />
                                 <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterUigf}" Tag="uigf" />
+                                <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterPlayTime}" Tag="playtime" />
                             </ComboBox>
                             <Button Content="{helpers:Loc Key=CloudSync_RefreshBtn}" Click="OnRefreshArchivesClick" />
                             <Button Content="{helpers:Loc Key=CloudSync_UploadLocalBtn}" Style="{StaticResource AccentButtonStyle}" Click="OnUploadLocalJsonClick" />
@@ -476,7 +538,7 @@
                         </StackPanel>
                     </Grid>
 
-                    <Rectangle Grid.Row="1" Height="1" Fill="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                    <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
 
                     <Grid Grid.Row="2">
                         <TextBlock x:Name="ArchivesEmptyText"
@@ -486,40 +548,35 @@
                                    Margin="0,36,0,0"
                                    Visibility="Collapsed" />
 
-                        <ListView x:Name="ArchivesListView"
-                                  SelectionMode="None"
-                                  IsItemClickEnabled="False">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                    <Setter Property="Padding" Value="0,4" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
+                        <ItemsRepeater x:Name="ArchivesRepeater">
+                            <ItemsRepeater.ItemTemplate>
                                 <DataTemplate x:DataType="models:CloudArchiveItem">
-                                    <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                                            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                                            BorderThickness="1"
-                                            CornerRadius="8"
-                                            Padding="16,11">
-                                        <Grid ColumnSpacing="14">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <Grid ColumnSpacing="16" Padding="4,12">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="104" />
-                                                <ColumnDefinition Width="1.35*" MinWidth="0" />
-                                                <ColumnDefinition Width="170" />
                                                 <ColumnDefinition Width="*" MinWidth="0" />
+                                                <ColumnDefinition Width="190" />
+                                                <ColumnDefinition Width="148" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
                                             <TextBlock Grid.Column="0"
                                                        Text="{x:Bind TypeBadge}"
                                                        VerticalAlignment="Center"
+                                                       FontSize="12"
                                                        FontWeight="SemiBold"
                                                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
 
                                             <TextBlock Grid.Column="1"
                                                        Text="{x:Bind Slot}"
                                                        VerticalAlignment="Center"
+                                                       FontSize="14"
                                                        FontWeight="SemiBold"
                                                        TextTrimming="CharacterEllipsis"
                                                        ToolTipService.ToolTip="{x:Bind Slot}" />
@@ -528,6 +585,7 @@
                                                        Text="{x:Bind SizeSummary}"
                                                        VerticalAlignment="Center"
                                                        FontSize="12"
+                                                       TextTrimming="CharacterEllipsis"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
                                             <TextBlock Grid.Column="3"
@@ -537,22 +595,38 @@
                                                        TextTrimming="CharacterEllipsis"
                                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
-                                            <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
-                                                <Button Content="{helpers:Loc Key=CloudSync_BtnExportSave}" Tag="{x:Bind}" Click="OnSaveArchiveToDiskClick" FontSize="12" Padding="10,5" />
-                                                <Button Content="{helpers:Loc Key=CloudSync_BtnOverwrite}" Tag="{x:Bind}" Click="OnOverwriteArchiveFromDiskClick" FontSize="12" Padding="10,5" />
-                                                <Button Content="{helpers:Loc Key=CloudSync_BtnRename}" Tag="{x:Bind}" Click="OnRenameArchiveClick" FontSize="12" Padding="10,5" />
+                                            <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="2" VerticalAlignment="Center">
+                                                <Button Content="{helpers:Loc Key=CloudSync_BtnMergeToLocal}"
+                                                        Tag="{x:Bind}"
+                                                        Visibility="{x:Bind PlayTimeMergeVisibility}"
+                                                        Click="OnMergePlayTimeArchiveToLocalClick"
+                                                        Style="{StaticResource FlatRowActionButtonStyle}"
+                                                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                <Button Content="{helpers:Loc Key=CloudSync_BtnExportSave}"
+                                                        Tag="{x:Bind}"
+                                                        Click="OnSaveArchiveToDiskClick"
+                                                        Style="{StaticResource FlatRowActionButtonStyle}" />
+                                                <Button Content="{helpers:Loc Key=CloudSync_BtnOverwrite}"
+                                                        Tag="{x:Bind}"
+                                                        Click="OnOverwriteArchiveFromDiskClick"
+                                                        Style="{StaticResource FlatRowActionButtonStyle}" />
+                                                <Button Content="{helpers:Loc Key=CloudSync_BtnRename}"
+                                                        Tag="{x:Bind}"
+                                                        Click="OnRenameArchiveClick"
+                                                        Style="{StaticResource FlatRowActionButtonStyle}" />
                                                 <Button Content="{helpers:Loc Key=CloudSync_BtnDelete}"
                                                         Tag="{x:Bind}"
                                                         Click="OnDeleteSingleArchiveClick"
-                                                        FontSize="12"
-                                                        Padding="10,5"
+                                                        Style="{StaticResource FlatRowActionButtonStyle}"
                                                         Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
                                             </StackPanel>
                                         </Grid>
-                                    </Border>
+
+                                        <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+                                    </Grid>
                                 </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                            </ItemsRepeater.ItemTemplate>
+                        </ItemsRepeater>
                     </Grid>
                 </Grid>
 
@@ -565,6 +639,17 @@
                  IsOpen="False"
                  IsClosable="True"
                  HorizontalAlignment="Stretch"
-                 Margin="32,0,32,16" />
+                 Margin="32,0,32,8" />
+
+        <!-- Footer Contact Tip -->
+        <TextBlock Grid.Row="4"
+                   Text="{helpers:Loc Key=CloudSync_ContactTip}"
+                   FontSize="11"
+                   Foreground="{ThemeResource TextFillColorTertiaryBrush}"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   IsTextSelectionEnabled="True"
+                   Margin="32,0,32,12" />
     </Grid>
 </Window>

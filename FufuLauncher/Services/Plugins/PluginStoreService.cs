@@ -79,7 +79,7 @@ public class PluginStoreService
         if (string.IsNullOrWhiteSpace(url)) return string.Empty;
 
         var baseUrl = ApiEndpoints.PluginStoreBaseUrl;
-        var isLocal = baseUrl.Contains("localhost") || baseUrl.Contains("127.0.0.1");
+        var isLocal = baseUrl.Contains(ApiEndpoints.LocalhostHost) || baseUrl.Contains(ApiEndpoints.LoopbackHost);
         if (!isLocal) return url;
 
         try

@@ -77,8 +77,8 @@ public sealed class BingWallpaperLoadResult
 
 public class BingWallpaperService
 {
-    private const string ApiHost = "https://www.bing.com";
-    private const string HistoricalApiUrl = "https://bingw.jasonzeng.dev/?index=random&format=json";
+    private const string ApiHost = ApiEndpoints.BingBase;
+    private const string HistoricalApiUrl = ApiEndpoints.BingWallpaperHistoricalRandomUrl;
     private const int ArchiveCount = 8;
     private const int MaxDownloadBytes = 30 * 1024 * 1024;
 
@@ -458,12 +458,12 @@ public class BingWallpaperService
 
         var date = start.AddDays(Random.Shared.Next((end - start).Days + 1));
         var dateValue = date.ToString("yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
-        return $"https://bingw.jasonzeng.dev/?date={dateValue}&format=json";
+        return ApiEndpoints.GetBingWallpaperHistoricalDateUrl(dateValue);
     }
 
     private static async Task<IReadOnlyList<BingWallpaperItem>> DownloadWallpapersAsync(string market)
     {
-        var url = $"{ApiHost}/HPImageArchive.aspx?format=js&idx=0&n={ArchiveCount}&mkt={Uri.EscapeDataString(market)}";
+        var url = ApiEndpoints.GetBingWallpaperArchiveUrl(ArchiveCount, market);
         var json = await HttpClient.GetStringAsync(url);
         var response = JsonSerializer.Deserialize<BingArchiveResponse>(json, JsonOptions);
 

@@ -31,7 +31,7 @@ public sealed class GeetestService
 
     private const string VerifyVerificationUrl = ApiEndpoints.GeetestVerifyVerificationUrl;
 
-    private const string DailyNoteChallengePath = "/game_record/app/genshin/api/dailyNote";
+    private const string DailyNoteChallengePath = ApiEndpoints.DailyNoteChallengePath;
 
     private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
 
@@ -174,7 +174,8 @@ public sealed class GeetestService
     private static async Task<GeetestResult> ShowGeetestWebViewAsync(string gt, string challenge, bool isOversea,
         string? apiServerOverride = null, bool showNotice = false)
     {
-        string apiServer = apiServerOverride ?? (isOversea ? "api-na.geetest.com" : "api.geetest.com");
+        string apiServer = apiServerOverride ??
+                           (isOversea ? ApiEndpoints.GeetestOverseaApiServer : ApiEndpoints.GeetestCnApiServer);
         TaskCompletionSource<GeetestResult> tcs = new();
 
         if (App.MainWindow == null)
@@ -467,9 +468,9 @@ public sealed class GeetestService
         if (isOversea && (result is null || (result.Error == 1 && string.IsNullOrEmpty(result.Validate))))
         {
             DebugLog.Info("GeetestService",
-                "[GeetestService] TryVerifyAigisSession: api-na load failed, falling back to api.geetest.com");
+                $"[GeetestService] TryVerifyAigisSession: api-na load failed, falling back to {ApiEndpoints.GeetestCnApiServer}");
             result = await ShowGeetestWebViewAsync(verification.Gt, verification.Challenge, isOversea,
-                apiServerOverride: "api.geetest.com");
+                apiServerOverride: ApiEndpoints.GeetestCnApiServer);
         }
 
         if (result is null || string.IsNullOrEmpty(result.Validate))

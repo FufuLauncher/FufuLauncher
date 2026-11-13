@@ -23,9 +23,15 @@ public partial class ControlPanelViewModel : ObservableObject
     public ControlPanelViewModel(GamePlayTimeStore playTimeStore)
     {
         _playTimeStore = playTimeStore;
+        _playTimeStore.PlayTimeChanged += OnPlayTimeStoreChanged;
         _cancellationTokenSource = new CancellationTokenSource();
 
         _ = InitializeAsync(_cancellationTokenSource.Token);
+    }
+
+    private void OnPlayTimeStoreChanged(object? sender, EventArgs e)
+    {
+        CalculateMonthlyStats();
     }
 
     private async Task InitializeAsync(CancellationToken cancellationToken)
@@ -47,6 +53,7 @@ public partial class ControlPanelViewModel : ObservableObject
 
     public void Cleanup()
     {
+        _playTimeStore.PlayTimeChanged -= OnPlayTimeStoreChanged;
         try
         {
             _cancellationTokenSource?.Cancel();

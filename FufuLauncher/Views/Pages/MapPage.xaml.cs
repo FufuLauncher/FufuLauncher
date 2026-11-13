@@ -41,12 +41,12 @@ namespace FufuLauncher.Views
                     return;
                 }
 
-                await MapWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(@"
-                    if (window.location.hostname === 'act.mihoyo.com') {
+                await MapWebView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync($$"""
+                    if (window.location.hostname === '{{ApiEndpoints.ActMihoyoHost}}') {
                         localStorage.setItem('user-guide-passed', 'true');
-                        localStorage.setItem('async-announcement-hidden-ts', Date.now().toString());  
+                        localStorage.setItem('async-announcement-hidden-ts', Date.now().toString());
                     }
-                ");
+                """);
                 MapWebView.NavigationStarting += MapWebView_NavigationStarting;
                 MapWebView.NavigationCompleted += MapWebView_NavigationCompleted;
                 MapWebView.Source = new Uri(ApiEndpoints.InteractiveMapUrl);
@@ -61,7 +61,7 @@ namespace FufuLauncher.Views
         private async void MapWebView_NavigationStarting(WebView2 sender,
             Microsoft.Web.WebView2.Core.CoreWebView2NavigationStartingEventArgs args)
         {
-            if (args.Uri.Contains("act.mihoyo.com"))
+            if (args.Uri.Contains(ApiEndpoints.ActMihoyoHost))
             {
                 string setStorageScript = @"
                     localStorage.setItem('user-guide-passed', 'true');

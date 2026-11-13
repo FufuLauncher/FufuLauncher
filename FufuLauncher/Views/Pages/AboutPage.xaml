@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="using:FufuLauncher.Views"
+    xmlns:constants="using:FufuLauncher.Constants"
     xmlns:helpers="using:FufuLauncher.Helpers"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -66,10 +67,10 @@
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="24"
                         Margin="0,16,0,0">
-                <HyperlinkButton Content="GitHub" NavigateUri="https://github.com/FufuLauncher/FufuLauncher" />
+                <HyperlinkButton Content="GitHub" NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.GithubRepoUrl)}" />
                 <HyperlinkButton Content="{helpers:Loc Key=AboutPage_ReportIssue}"
-                                 NavigateUri="https://github.com/FufuLauncher/FufuLauncher/issues" />
-                <HyperlinkButton Content="{helpers:Loc Key=AboutPage_OfficialWebsite}" NavigateUri="https://fu1.fun/" />
+                                 NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.GithubIssuesUrl)}" />
+                <HyperlinkButton Content="{helpers:Loc Key=AboutPage_OfficialWebsite}" NavigateUri="{x:Bind constants:ApiEndpoints.ToUri(constants:ApiEndpoints.OfficialWebsiteUrl)}" />
                 <HyperlinkButton Content="{helpers:Loc Key=AboutPage_ContactAuthor}" Click="ContactAuthor_Click" />
             </StackPanel>
         </Grid>

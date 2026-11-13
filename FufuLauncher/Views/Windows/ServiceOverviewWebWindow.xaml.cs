@@ -13,7 +13,7 @@ namespace FufuLauncher.Views;
 
 public sealed partial class ServiceOverviewWebWindow : Window
 {
-    public const string StatusUrl = "https://status.fu1.fun/";
+    public const string StatusUrl = ApiEndpoints.ServiceStatusWebUrl;
 
     private static ServiceOverviewWebWindow? _current;
 

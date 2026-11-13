@@ -169,7 +169,7 @@ internal sealed class MiyousheShopExecution(
             }
             catch when (sending)
             {
-                // The durable reservation still prevents another submission after a storage failure.
+                
                 return result;
             }
         }

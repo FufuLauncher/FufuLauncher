@@ -11,13 +11,13 @@ public static class ElementMapping
 {
     private static readonly Dictionary<int, (string Name, string IconUrl)> Elements = new()
     {
-        { 1, ("Element_Pyro".GetLocalized(), ApiEndpoints.GtUiIconsBase + "6a4f0b7ab73fe4d3.png") },
-        { 2, ("Element_Anemo".GetLocalized(), ApiEndpoints.GtUiIconsBase + "48d1aac6ecc56b33.png") },
-        { 3, ("Element_Geo".GetLocalized(), ApiEndpoints.GtUiIconsBase + "829a6b86fb23d8bb.png") },
-        { 4, ("Element_Dendro".GetLocalized(), ApiEndpoints.GtUiIconsBase + "247f14512efc8325.png") },
-        { 5, ("Element_Electro".GetLocalized(), ApiEndpoints.GtUiIconsBase + "e18d224ec1047cae.png") },
-        { 6, ("Element_Hydro".GetLocalized(), ApiEndpoints.GtUiIconsBase + "b162f5384487d283.png") },
-        { 7, ("Element_Cryo".GetLocalized(), ApiEndpoints.GtUiIconsBase + "bf2f65ee0d7f6243.png") }
+        { 1, ("Element_Pyro".GetLocalized(), ApiEndpoints.ElementPyroIconUrl) },
+        { 2, ("Element_Anemo".GetLocalized(), ApiEndpoints.ElementAnemoIconUrl) },
+        { 3, ("Element_Geo".GetLocalized(), ApiEndpoints.ElementGeoIconUrl) },
+        { 4, ("Element_Dendro".GetLocalized(), ApiEndpoints.ElementDendroIconUrl) },
+        { 5, ("Element_Electro".GetLocalized(), ApiEndpoints.ElementElectroIconUrl) },
+        { 6, ("Element_Hydro".GetLocalized(), ApiEndpoints.ElementHydroIconUrl) },
+        { 7, ("Element_Cryo".GetLocalized(), ApiEndpoints.ElementCryoIconUrl) }
     };
 
     public static string? GetElementName(int elementId)

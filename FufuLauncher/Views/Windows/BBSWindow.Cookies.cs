@@ -50,7 +50,7 @@ public sealed partial class BBSWindow
 
         foreach (var kv in cookieDic)
         {
-            var cookie = manager.CreateCookie(kv.Key, kv.Value, ".mihoyo.com", "/");
+            var cookie = manager.CreateCookie(kv.Key, kv.Value, ApiEndpoints.MihoyoCookieDomain, "/");
             manager.AddOrUpdateCookie(cookie);
         }
 

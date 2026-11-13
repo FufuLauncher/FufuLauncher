@@ -56,20 +56,15 @@ public static class GachaUrlHelper
             return null;
 
         var host = uri.Host.ToLowerInvariant();
-        var isOversea = host is "hk4e-api-os.hoyoverse.com" or "hk4e-api-os.mihoyo.com"
-            or "public-operation-hk4e-sg.hoyoverse.com" or "webstatic-sea.hoyoverse.com"
-            or "webstatic-sea.mihoyo.com" or "gs.hoyoverse.com";
-        var isApi = host is "public-operation-hk4e.mihoyo.com" or "hk4e-api.mihoyo.com"
-            or "hk4e-api.miyoushe.com" or "hk4e-api-os.hoyoverse.com" or "hk4e-api-os.mihoyo.com"
-            or "public-operation-hk4e-sg.hoyoverse.com";
-        var isPage = host is "webstatic.mihoyo.com" or "webstatic.miyoushe.com"
-            or "webstatic-sea.hoyoverse.com" or "webstatic-sea.mihoyo.com" or "gs.hoyoverse.com";
+        var isOversea = ApiEndpoints.GachaOverseaHosts.Contains(host);
+        var isApi = ApiEndpoints.GachaApiHosts.Contains(host);
+        var isPage = ApiEndpoints.GachaPageHosts.Contains(host);
 
         string endpoint;
-        if (isApi && uri.AbsolutePath.EndsWith("/gacha_info/api/getGachaLog", StringComparison.Ordinal))
+        if (isApi && uri.AbsolutePath.EndsWith(ApiEndpoints.GachaLogApiPath, StringComparison.Ordinal))
             endpoint = uri.GetLeftPart(UriPartial.Path);
-        else if (isPage && uri.AbsolutePath.Contains("e20190909gacha-v", StringComparison.Ordinal) &&
-                 uri.AbsolutePath.EndsWith("/index.html", StringComparison.Ordinal))
+        else if (isPage && uri.AbsolutePath.Contains(ApiEndpoints.GachaPagePathMarker, StringComparison.Ordinal) &&
+                 uri.AbsolutePath.EndsWith(ApiEndpoints.GachaPageIndexSuffix, StringComparison.Ordinal))
             endpoint = isOversea
                 ? ApiEndpoints.GachaLogOsUrl
                 : ApiEndpoints.GachaLogCnUrl;

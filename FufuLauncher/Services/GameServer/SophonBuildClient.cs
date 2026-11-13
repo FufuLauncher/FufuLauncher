@@ -64,8 +64,7 @@ public sealed class SophonBuildClient
                             branchProp.ValueKind == JsonValueKind.String
             ? branchProp.GetString()!
             : "main";
-        string buildUrl =
-            $"{scheme.SophonApi}/getBuild?branch={Uri.EscapeDataString(branchName)}&package_id={Uri.EscapeDataString(packageId)}&password={Uri.EscapeDataString(password)}&tag={Uri.EscapeDataString(tag)}";
+        string buildUrl = ApiEndpoints.BuildSophonBuildUrl(scheme.SophonApi, branchName, packageId, password, tag);
         string json = await GetStringWithRetryAsync(buildUrl, token).ConfigureAwait(false);
 
         using var buildDoc = JsonDocument.Parse(json);
@@ -92,7 +91,7 @@ public sealed class SophonBuildClient
     public async Task<SophonPatchBuildResponse?> GetPatchBuildAsync(GameServerScheme scheme,
         SophonBranchPayload payload, CancellationToken token = default)
     {
-        string url = $"{scheme.SophonApi}/getPatchBuild";
+        string url = ApiEndpoints.BuildSophonPatchBuildUrl(scheme.SophonApi);
         string json = await ExecuteWithRetryAsync(url, async attempt =>
         {
             using var content = new StringContent(JsonSerializer.Serialize(payload, RequestJsonOptions), Encoding.UTF8,
@@ -229,8 +228,7 @@ public sealed class SophonBuildClient
                             branchProp.ValueKind == JsonValueKind.String
             ? branchProp.GetString()!
             : (isPreDownload ? "predownload" : "main");
-        return
-            $"{scheme.SophonApi}/getBuild?branch={Uri.EscapeDataString(branchName)}&package_id={Uri.EscapeDataString(packageId)}&password={Uri.EscapeDataString(password)}";
+        return ApiEndpoints.BuildSophonBuildUrl(scheme.SophonApi, branchName, packageId, password);
     }
 
     private static SophonBranchInfo ParseBranchInfo(JsonElement dataProp)
@@ -285,8 +283,7 @@ public sealed class SophonBuildClient
     private async Task<JsonDocument> GetBranchDocumentAsync(GameServerScheme scheme, bool isPreDownload,
         CancellationToken token)
     {
-        string branchUrl =
-            $"{scheme.HypApi}/getGameBranches?launcher_id={scheme.LauncherId}&game_ids[]={scheme.GameId}";
+        string branchUrl = ApiEndpoints.BuildHypGameBranchesUrl(scheme.HypApi, scheme.LauncherId, scheme.GameId);
         string branchJson = await GetStringWithRetryAsync(branchUrl, token).ConfigureAwait(false);
         return JsonDocument.Parse(branchJson);
     }

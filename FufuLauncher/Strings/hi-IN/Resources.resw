@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -2254,6 +2255,9 @@
   <data name="AboutPage_ContactAuthor" xml:space="preserve">
     <value>लेखक से संपर्क करें</value>
   </data>
+  <data name="AboutPage_ContactEmailOption" xml:space="preserve">
+    <value>ईमेल ({0})</value>
+  </data>
   <data name="SponsorWindow_Title" xml:space="preserve">
     <value>प्रायोजक</value>
   </data>
@@ -3602,6 +3606,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="AboutPage_DiscordCopied" xml:space="preserve">
     <value>Discord ID कॉपी हो गया!</value>
+  </data>
+  <data name="AboutPage_EmailCopied" xml:space="preserve">
+    <value>ईमेल कॉपी हो गया!</value>
   </data>
   <data name="AboutPage_Loading" xml:space="preserve">
     <value>लोड हो रहा है...</value>
@@ -9296,6 +9303,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_BtnExportSave" xml:space="preserve">
     <value>सहेजें</value>
   </data>
+  <data name="CloudSync_BtnMergeToLocal" xml:space="preserve">
+    <value>मर्ज करें</value>
+  </data>
   <data name="CloudSync_BtnOverwrite" xml:space="preserve">
     <value>ओवरराइट</value>
   </data>
@@ -9365,6 +9375,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
     <value>अनलॉक करें</value>
   </data>
+  <data name="CloudSync_ContactTip" xml:space="preserve">
+    <value>यदि कोई समस्या हो, तो कृपया dev@fufu.skin पर संपर्क करें</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>खाता और डेटा हटाएं</value>
   </data>
@@ -9415,6 +9428,15 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
     <value>डाउनलोड विफल</value>
+  </data>
+  <data name="CloudSync_DurationHoursMinsFormat" xml:space="preserve">
+    <value>{0} घंटे {1} मिनट</value>
+  </data>
+  <data name="CloudSync_DurationMinsSecsFormat" xml:space="preserve">
+    <value>{0} मिनट {1} सेकंड</value>
+  </data>
+  <data name="CloudSync_DurationSecsFormat" xml:space="preserve">
+    <value>{0} सेकंड</value>
   </data>
   <data name="CloudSync_EmailHeader" xml:space="preserve">
     <value>ईमेल पता</value>
@@ -9517,6 +9539,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>सभी प्रकार</value>
+  </data>
+  <data name="CloudSync_FilterPlayTime" xml:space="preserve">
+    <value>खेलने का समय</value>
   </data>
   <data name="CloudSync_FilterUiaf" xml:space="preserve">
     <value>उपलब्धियां</value>
@@ -9776,6 +9801,54 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
     <value>पासवर्ड सेट करें</value>
   </data>
+  <data name="CloudSync_PlayTimeConfirmOverwriteMsg" xml:space="preserve">
+    <value>क्या आप वर्तमान स्थानीय प्लेटाइम डेटा से क्लाउड संग्रह "{0}" को ओवरराइट करना चाहते हैं?</value>
+  </data>
+  <data name="CloudSync_PlayTimeEmptyCloud" xml:space="preserve">
+    <value>क्लाउड में अभी कोई प्लेटाइम संग्रह नहीं है। ऊपर नाम दर्ज करें और अपना वर्तमान रिकॉर्ड अपलोड करें।</value>
+  </data>
+  <data name="CloudSync_PlayTimeListSummary" xml:space="preserve">
+    <value>{0} प्लेटाइम संग्रह · कुल {1}/{2} · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_PlayTimeLocalSummaryFormat" xml:space="preserve">
+    <value>स्थानीय रिकॉर्ड: {0} दिन · कुल {1} ({2} खंड)</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedAddedFormat" xml:space="preserve">
+    <value>"{0}" से +{1} जोड़ा गया। कुल समय: {2}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedNoGainFormat" xml:space="preserve">
+    <value>"{0}" सत्यापित: कोई नया समय नहीं जुड़ा (अवधि ओवरलैप है या स्थानीय डेटा से अधिक नहीं है)। कुल: {1}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedOverlapFormat" xml:space="preserve">
+    <value>"{0}" से +{1} जोड़ा गया ({2} ओवरलैपिंग समय स्वतः हटाया गया)। कुल: {3}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeFailedTitle" xml:space="preserve">
+    <value>प्लेटाइम मर्ज विफल</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeImportBtn" xml:space="preserve">
+    <value>मर्ज और आयात करें</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeSuccessTitle" xml:space="preserve">
+    <value>प्लेटाइम मर्ज पूर्ण</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeTip" xml:space="preserve">
+    <value>डाउनलोड करने पर स्थानीय रिकॉर्ड में समय जुड़ता है: मौजूदा समय कभी कम नहीं होता और दोहराई गई समय अवधि स्वतः हटा दी जाती है।</value>
+  </data>
+  <data name="CloudSync_PlayTimeNotSignedInMsg" xml:space="preserve">
+    <value>प्लेटाइम रिकॉर्ड अपलोड या सिंक करने के लिए कृपया पहले FufuLauncher क्लाउड संग्रह में साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncBtn" xml:space="preserve">
+    <value>क्लाउड सिंक</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncTooltip" xml:space="preserve">
+    <value>क्लाउड प्लेटाइम संग्रह अपलोड या संयोजी रूप से मर्ज करें</value>
+  </data>
+  <data name="CloudSync_PlayTimeTitle" xml:space="preserve">
+    <value>खेलने का समय · FufuLauncher क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_PlayTimeUploadBtn" xml:space="preserve">
+    <value>वर्तमान प्लेटाइम अपलोड करें</value>
+  </data>
   <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
     <value>वर्तमान स्टोरेज और उपयोग देखने के लिए रीफ़्रेश करें</value>
   </data>
@@ -9929,6 +10002,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>पासवर्ड रीसेट करें</value>
   </data>
+  <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
+    <value>खेलने का समय</value>
+  </data>
   <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
     <value>उपलब्धियां</value>
   </data>
@@ -9967,6 +10043,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>स्थानीय फ़ाइल अपलोड</value>
+  </data>
+  <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
+    <value>प्लेटाइम रिकॉर्ड</value>
   </data>
   <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
     <value>उपलब्धियां</value>

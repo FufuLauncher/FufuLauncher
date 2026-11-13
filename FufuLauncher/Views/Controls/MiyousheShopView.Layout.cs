@@ -86,7 +86,7 @@ public sealed partial class MiyousheShopView
     private void OnGoodsGridSizeChanged(object sender, SizeChangedEventArgs e)
     {
         if (GoodsGrid.ItemsPanelRoot is not ItemsWrapGrid panel || e.NewSize.Width <= 0) return;
-        double width = e.NewSize.Width - 16; // Leave room for the vertical scroll bar.
+        double width = e.NewSize.Width - 16; 
         int columns = Math.Max(1, (int)(width / MinimumTileWidth));
         panel.ItemWidth = Math.Clamp(Math.Floor(width / columns), MinimumTileWidth, MaximumTileWidth);
     }

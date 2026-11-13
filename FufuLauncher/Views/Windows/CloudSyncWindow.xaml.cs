@@ -61,7 +61,7 @@ public sealed partial class CloudSyncWindow : Window
         };
         AuthModeSelector.SelectedIndex = 0;
 
-        ArchivesListView.ItemsSource = _archives;
+        ArchivesRepeater.ItemsSource = _archives;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
 
@@ -245,7 +245,7 @@ public sealed partial class CloudSyncWindow : Window
 
         if (!loggedIn)
         {
-            HeaderSessionSummaryText.Text = "CloudSync_NotLoggedInShort".GetLocalized();
+            QuotaResetInfoText.Text = "CloudSync_QuotaDefaultSubtitle".GetLocalized();
             QuotaDetailsPanel.Visibility = Visibility.Collapsed;
             QuotaNotReadyHintText.Text = "CloudSync_QuotaNotReadySignIn".GetLocalized();
             QuotaNotReadyHintText.Visibility = Visibility.Visible;
@@ -262,25 +262,27 @@ public sealed partial class CloudSyncWindow : Window
         }
 
         var locked = _cloudSync.IsLocked;
-        HeaderSessionSummaryText.Text = string.Format(
-            (locked ? "CloudSync_StatusSuffixLocked" : "CloudSync_StatusSuffixNormal").GetLocalized(),
-            _cloudSync.CurrentEmail);
-
-        AccountEmailValueText.Text = string.IsNullOrWhiteSpace(_cloudSync.CurrentEmail) ? "-" : _cloudSync.CurrentEmail;
-        AccountLockStatusText.Text = (locked ? "CloudSync_StatusLocked" : "CloudSync_StatusNormal").GetLocalized();
-        AccountLockStatusText.Foreground = locked
+        var statusBrush = locked
             ? (Brush)Application.Current.Resources["SystemFillColorCriticalBrush"]
             : (Brush)Application.Current.Resources["SystemFillColorSuccessBrush"];
+
+        AccountEmailValueText.Text = string.IsNullOrWhiteSpace(_cloudSync.CurrentEmail) ? "-" : _cloudSync.CurrentEmail;
+        AccountStatusIndicator.Fill = statusBrush;
+        AccountLockStatusText.Text = (locked ? "CloudSync_StatusLocked" : "CloudSync_StatusNormal").GetLocalized();
+        AccountLockStatusText.Foreground = statusBrush;
         AccountLockedAtText.Text = locked
             ? CloudArchiveItem.FormatIsoTimestamp(_cloudSync.LockedAt)
             : "CloudSync_NotLockedText".GetLocalized();
 
+        AccountLockActionTitleText.Text = (locked ? "CloudSync_UnlockTitle" : "CloudSync_LockTitle").GetLocalized();
+        AccountLockActionDescText.Text = (locked ? "CloudSync_UnlockDesc" : "CloudSync_LockDesc").GetLocalized();
         LockAccountButton.Visibility = locked ? Visibility.Collapsed : Visibility.Visible;
         UnlockAccountButton.Visibility = locked ? Visibility.Visible : Visibility.Collapsed;
         DeleteAccountButton.IsEnabled = !locked;
 
         if (locked)
         {
+            QuotaResetInfoText.Text = "CloudSync_QuotaDefaultSubtitle".GetLocalized();
             QuotaDetailsPanel.Visibility = Visibility.Collapsed;
             QuotaNotReadyHintText.Text = "CloudSync_QuotaNotReadyLocked".GetLocalized();
             QuotaNotReadyHintText.Visibility = Visibility.Visible;
@@ -329,7 +331,7 @@ public sealed partial class CloudSyncWindow : Window
         if (AuthModeSelector == null || PasswordBox == null || ConfirmPasswordBox == null ||
             OtpInputRow == null || AuthSubmitButton == null) return;
         var mode = AuthModeSelector.SelectedIndex;
-        // 0: Login, 1: Register, 2: Reset password
+        
         if (mode == 0)
         {
             PasswordBox.Header = "CloudSync_PasswordHeader".GetLocalized();
@@ -972,7 +974,7 @@ public sealed partial class CloudSyncWindow : Window
         }
     }
 
-    private bool IsInitializedOrLoaded() => ArchiveFilterComboBox != null && ArchivesListView != null;
+    private bool IsInitializedOrLoaded() => ArchiveFilterComboBox != null && ArchivesRepeater != null;
 
     private async void OnRefreshArchivesClick(object sender, RoutedEventArgs e)
     {
@@ -1063,8 +1065,13 @@ public sealed partial class CloudSyncWindow : Window
         {
             Header = "CloudSync_UploadDataTypeHeader".GetLocalized(),
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            Items = { "CloudSync_UploadTypeUiafOption".GetLocalized(), "CloudSync_UploadTypeUigfOption".GetLocalized() },
-            SelectedIndex = detectedType == "uigf" ? 1 : 0
+            Items =
+            {
+                "CloudSync_UploadTypeUiafOption".GetLocalized(),
+                "CloudSync_UploadTypeUigfOption".GetLocalized(),
+                "CloudSync_UploadTypePlayTimeOption".GetLocalized()
+            },
+            SelectedIndex = detectedType == "uigf" ? 1 : detectedType == "playtime" ? 2 : 0
         };
         var slotBox = new TextBox
         {
@@ -1102,14 +1109,31 @@ public sealed partial class CloudSyncWindow : Window
 
         if (await dialog.ShowAsync() != ContentDialogResult.Primary) return;
 
-        var dataType = typeCombo.SelectedIndex == 1 ? "uigf" : "uiaf";
+        var dataType = typeCombo.SelectedIndex == 1
+            ? "uigf"
+            : typeCombo.SelectedIndex == 2
+                ? "playtime"
+                : "uiaf";
         var slot = slotBox.Text.Trim();
         var overwrite = overwriteCheck.IsChecked == true;
+
+        var uploadContent = jsonContent;
+        if (dataType == "playtime")
+        {
+            uploadContent = TryPreparePlayTimeUploadJson(jsonContent);
+            if (uploadContent == null)
+            {
+                ShowMessage(InfoBarSeverity.Error,
+                    "CloudSync_MsgUploadFailedTitle".GetLocalized(),
+                    "CloudSync_ErrInvalidFormat".GetLocalized());
+                return;
+            }
+        }
 
         SetBusy(true);
         try
         {
-            var res = await _cloudSync.UploadArchiveAsync(dataType, slot, jsonContent, overwrite);
+            var res = await _cloudSync.UploadArchiveAsync(dataType, slot, uploadContent, overwrite);
             if (res.Ok)
             {
                 var detailKey = res.Data?.Overwritten == true ? "CloudSync_MsgOverwritten" : "CloudSync_MsgUploadedNew";
@@ -1127,6 +1151,61 @@ public sealed partial class CloudSyncWindow : Window
         finally
         {
             SetBusy(false);
+        }
+    }
+
+    private async void OnMergePlayTimeArchiveToLocalClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not FrameworkElement { Tag: CloudArchiveItem item } || !item.IsPlayTime) return;
+        if (!_cloudSync.IsLoggedIn || _cloudSync.IsLocked)
+        {
+            ShowMessage(InfoBarSeverity.Warning,
+                "CloudSync_CannotOperateTitle".GetLocalized(),
+                (_cloudSync.IsLocked ? "CloudSync_ErrLocked" : "CloudSync_MsgLoginRequiredFirst").GetLocalized());
+            return;
+        }
+
+        SetBusy(true);
+        CloudPullResult pullRes;
+        try
+        {
+            pullRes = await _cloudSync.PullArchiveAsync(item.DataType, item.Slot);
+        }
+        finally
+        {
+            SetBusy(false);
+        }
+
+        if (!pullRes.Ok)
+        {
+            ShowMessage(InfoBarSeverity.Error, "CloudSync_DownloadFailedTitle".GetLocalized(),
+                _cloudSync.FormatFriendlyError(pullRes.Code, pullRes.Message, pullRes.HttpStatusCode));
+            return;
+        }
+
+        try
+        {
+            var store = App.GetService<GamePlayTimeStore>();
+            await store.EnsureInitializedAsync();
+            var merge = await store.MergeCloudPlayTimeJsonAsync(pullRes.JsonContent);
+            if (!merge.Ok)
+            {
+                ShowMessage(InfoBarSeverity.Error,
+                    "CloudSync_PlayTimeMergeFailedTitle".GetLocalized(),
+                    "CloudSync_ErrInvalidFormat".GetLocalized());
+                return;
+            }
+
+            ShowMessage(InfoBarSeverity.Success,
+                "CloudSync_PlayTimeMergeSuccessTitle".GetLocalized(),
+                GamePlayTimeStore.FormatMergeSummary(item.Slot, merge));
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] Merge PlayTime failed: {ex.Message}");
+            ShowMessage(InfoBarSeverity.Error,
+                "CloudSync_PlayTimeMergeFailedTitle".GetLocalized(),
+                "CloudSync_ErrInvalidFormat".GetLocalized());
         }
     }
 
@@ -1212,7 +1291,19 @@ public sealed partial class CloudSyncWindow : Window
         try
         {
             var jsonContent = await File.ReadAllTextAsync(path);
-            var res = await _cloudSync.UploadArchiveAsync(item.DataType, item.Slot, jsonContent, overwrite: true);
+            var uploadContent = jsonContent;
+            if (item.IsPlayTime)
+            {
+                uploadContent = TryPreparePlayTimeUploadJson(jsonContent);
+                if (uploadContent == null)
+                {
+                    ShowMessage(InfoBarSeverity.Error, "CloudSync_OverwriteFailedTitle".GetLocalized(),
+                        "CloudSync_ErrInvalidFormat".GetLocalized());
+                    return;
+                }
+            }
+
+            var res = await _cloudSync.UploadArchiveAsync(item.DataType, item.Slot, uploadContent, overwrite: true);
             if (res.Ok)
             {
                 ShowMessage(InfoBarSeverity.Success,
@@ -1409,11 +1500,27 @@ public sealed partial class CloudSyncWindow : Window
         try
         {
             using var doc = JsonDocument.Parse(json);
-            if (doc.RootElement.ValueKind == JsonValueKind.Object &&
-                doc.RootElement.TryGetProperty("info", out var info))
+            if (doc.RootElement.ValueKind == JsonValueKind.Object)
             {
-                if (info.TryGetProperty("uiaf_version", out _)) return "uiaf";
-                if (info.TryGetProperty("version", out _)) return "uigf";
+                if (doc.RootElement.TryGetProperty("info", out var info) && info.ValueKind == JsonValueKind.Object)
+                {
+                    if (info.TryGetProperty("uiaf_version", out _)) return "uiaf";
+                    if (info.TryGetProperty("version", out _)) return "uigf";
+                    if (info.TryGetProperty("playtime_version", out _)) return "playtime";
+                }
+
+                if (doc.RootElement.TryGetProperty("storage_key", out var sk) &&
+                    sk.ValueKind == JsonValueKind.String &&
+                    string.Equals(sk.GetString(), "fufu.game-play-time", StringComparison.Ordinal))
+                {
+                    return "playtime";
+                }
+
+                if (doc.RootElement.TryGetProperty("segments", out _) &&
+                    doc.RootElement.TryGetProperty("daily_seconds", out _))
+                {
+                    return "playtime";
+                }
             }
         }
         catch
@@ -1421,5 +1528,14 @@ public sealed partial class CloudSyncWindow : Window
         }
 
         return "uiaf";
+    }
+
+    private static string? TryPreparePlayTimeUploadJson(string rawJson)
+    {
+        var appVersion = !string.IsNullOrWhiteSpace(AppVersionHelper.NumericVersion)
+            ? AppVersionHelper.NumericVersion
+            : "1.7.2.3";
+        if (appVersion.Length > 64) appVersion = appVersion[..64];
+        return GamePlayTimeStore.TryConvertPlayTimeJsonToCloudJson(rawJson, appVersion);
     }
 }

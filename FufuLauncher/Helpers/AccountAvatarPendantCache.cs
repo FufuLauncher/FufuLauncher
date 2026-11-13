@@ -330,7 +330,7 @@ public static class AccountAvatarPendantCache
         };
         client.DefaultRequestHeaders.UserAgent.ParseAdd(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36");
-        client.DefaultRequestHeaders.Referrer = new Uri("https://www.miyoushe.com/");
+        client.DefaultRequestHeaders.Referrer = new Uri(ApiEndpoints.MiyousheWebRefererUrl);
         return client;
     }
 }

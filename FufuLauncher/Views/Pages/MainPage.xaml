@@ -5,6 +5,7 @@
     xmlns:bg="using:FufuLauncher.Services.Background"
     xmlns:models="using:FufuLauncher.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:constants="using:FufuLauncher.Constants"
     xmlns:helpers="using:FufuLauncher.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:FufuLauncher.ViewModels"
@@ -849,7 +850,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-1.cd77560a.png"
+                                            Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.DailyNoteResinLogoUrl)}"
                                             Stretch="Uniform" />
                                         <StackPanel
                                             Grid.Column="1"
@@ -882,7 +883,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-3.786c15d1.png"
+                                            Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.DailyNoteDailyTasksLogoUrl)}"
                                             Stretch="Uniform" />
                                         <StackPanel
                                             Grid.Column="1"
@@ -915,7 +916,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-2.e5225a21.png"
+                                            Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.DailyNoteHomeCoinLogoUrl)}"
                                             Stretch="Uniform" />
                                         <StackPanel
                                             Grid.Column="1"
@@ -948,7 +949,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-4.835b640a.png"
+                                            Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.DailyNoteExpeditionsLogoUrl)}"
                                             Stretch="Uniform" />
                                         <StackPanel
                                             Grid.Column="1"
@@ -981,7 +982,7 @@
                                         <Image
                                             Width="24"
                                             Height="24"
-                                            Source="https://webstatic.mihoyo.com/app/community-game-records/images/logo-5.5feb0161.png"
+                                            Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.DailyNoteTransformerLogoUrl)}"
                                             Stretch="Uniform" />
                                         <StackPanel
                                             Grid.Column="1"
@@ -1278,7 +1279,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetGacha}"
                                 Visibility="{x:Bind ViewModel.WidgetGachaVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/4e65638b8b81ca7556f0fd42612d0be2_6482084243159257686.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconGachaUrl)}" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetAchievement"
@@ -1293,7 +1294,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetAchievement}"
                                 Visibility="{x:Bind ViewModel.WidgetAchievementVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/b097c597c8e957e5c29ebba956be7b77_3600296528699504897.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconAchievementUrl)}" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetInventory"
@@ -1308,7 +1309,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetInventory}"
                                 Visibility="{x:Bind ViewModel.WidgetInventoryVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/746e735b9968d0a7496393809653bf9b_3827123919585554136.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconInventoryUrl)}" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetPlayerRole"
@@ -1323,7 +1324,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetPlayerRole}"
                                 Visibility="{x:Bind ViewModel.WidgetPlayerRoleVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/816696c690ea7d95d8c13e67f794c807_6317738625095616930.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconPlayerRoleUrl)}" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetDailyNote"
@@ -1338,7 +1339,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetNotes}"
                                 Visibility="{x:Bind ViewModel.WidgetDailyNoteWindowVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/35990ccaac57819dbaf39a47db133a59_6427418972247587857.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconDailyNoteUrl)}" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetVideo"
@@ -1353,7 +1354,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetVideo}"
                                 Visibility="{x:Bind ViewModel.WidgetVideoVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/6ba109a0c67067ce3f16c18147c91f03_2613518829063232490.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconVideoUrl)}" />
                             </Button>
                             <Button
                                 x:Name="BtnWidgetBBS"
@@ -1368,7 +1369,7 @@
                                 ToolTipService.ToolTip="{helpers:Loc Key=Home_WidgetBBS}"
                                 Visibility="{x:Bind ViewModel.WidgetBBSVisibility, Mode=OneWay}">
                                 <Image
-                                    Source="https://act-upload.mihoyo.com/ys-obc/2025/01/21/73740358/aae53df95bd8d8f437729545e3a287ab_8614980669390833989.png" />
+                                    Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconBbsUrl)}" />
                             </Button>
 
                             <Button

@@ -81,11 +81,11 @@ public sealed partial class BBSWindow
 
     private static readonly (string prefix, string clientType)[] ApiRouteMap =
     {
-        ("/game_record/app/genshin/api/", "5"),
-        ("/record/", "5"),
-        ("/game_record/", "5"),
-        ("/event/", "2"),
-        ("/community/", "2"),
+        (ApiEndpoints.BbsProtocolGameRecordApiPrefix, "5"),
+        (ApiEndpoints.BbsProtocolRecordPath, "5"),
+        (ApiEndpoints.BbsProtocolGameRecordPath, "5"),
+        (ApiEndpoints.BbsProtocolEventPath, "2"),
+        (ApiEndpoints.BbsProtocolCommunityPath, "2"),
     };
 
     private ClientConfig _currentConfig;
@@ -113,10 +113,12 @@ public sealed partial class BBSWindow
             }
 
             var uri = args.Request.Uri;
-            bool isApiRequest = uri.Contains("/api/") || uri.Contains("/community/") || uri.Contains("/record/") ||
-                                uri.Contains("/event/");
+            bool isApiRequest = uri.Contains(ApiEndpoints.BbsProtocolApiPath) ||
+                                uri.Contains(ApiEndpoints.BbsProtocolCommunityPath) ||
+                                uri.Contains(ApiEndpoints.BbsProtocolRecordPath) ||
+                                uri.Contains(ApiEndpoints.BbsProtocolEventPath);
 
-            if (isApiRequest && (uri.Contains("mihoyo.com") || uri.Contains("hoyolab.com")))
+            if (isApiRequest && (uri.Contains(ApiEndpoints.MihoyoDomain) || uri.Contains(ApiEndpoints.HoyolabDomain)))
             {
                 var headers = args.Request.Headers;
                 var config = SelectConfig(uri);

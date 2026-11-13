@@ -702,7 +702,7 @@ public sealed class CodeSigningTrustService
             using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(45) };
             client.DefaultRequestHeaders.UserAgent.ParseAdd("FufuLauncher-TrustSync/1.0");
 
-            var indexJson = await client.GetStringAsync($"{url}/public/index.json", cancellationToken)
+            var indexJson = await client.GetStringAsync(ApiEndpoints.GetCertificateSyncIndexUrl(url), cancellationToken)
                 .ConfigureAwait(false);
             var index = JsonSerializer.Deserialize<TrustIndex>(indexJson,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -718,7 +718,7 @@ public sealed class CodeSigningTrustService
                     return new TrustOperationResult { Ok = false, Message = "同步端点返回了非法文件名，已终止" };
                 }
 
-                var bytes = await client.GetByteArrayAsync($"{url}/public/{file.Name}", cancellationToken)
+                var bytes = await client.GetByteArrayAsync(ApiEndpoints.GetCertificateSyncFileUrl(url, file.Name), cancellationToken)
                     .ConfigureAwait(false);
 
                 var actualHash = Convert.ToHexString(SHA256.HashData(bytes));

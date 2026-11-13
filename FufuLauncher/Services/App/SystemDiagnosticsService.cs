@@ -79,7 +79,7 @@ public class SystemDiagnosticsService
                 try
                 {
                     using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(3) };
-                    regionCode = await client.GetStringAsync("http://ip-api.com/line/?fields=countryCode");
+                    regionCode = await client.GetStringAsync(ApiEndpoints.IpCountryCodeUrl);
                     regionCode = regionCode.Trim();
                     info.NetworkRegion = regionCode == "CN"
                         ? "Diagnostics_Domestic".GetLocalized()

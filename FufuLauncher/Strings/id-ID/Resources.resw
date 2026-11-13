@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -2216,6 +2217,9 @@ Buka situs web Microsoft untuk mengunduh dan menginstalnya?</value>
   <data name="AboutPage_ContactAuthor" xml:space="preserve">
     <value>Hubungi Penulis</value>
   </data>
+  <data name="AboutPage_ContactEmailOption" xml:space="preserve">
+    <value>Email ({0})</value>
+  </data>
   <data name="SponsorWindow_Title" xml:space="preserve">
     <value>Dukung Penulis</value>
   </data>
@@ -3453,6 +3457,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="AboutPage_DiscordCopied" xml:space="preserve">
     <value>Discord ID Tersalin!</value>
+  </data>
+  <data name="AboutPage_EmailCopied" xml:space="preserve">
+    <value>Email Tersalin!</value>
   </data>
   <data name="AboutPage_Loading" xml:space="preserve">
     <value>Memuat...</value>
@@ -9301,6 +9308,9 @@ Detail: {0}</value>
   <data name="CloudSync_BtnExportSave" xml:space="preserve">
     <value>Simpan</value>
   </data>
+  <data name="CloudSync_BtnMergeToLocal" xml:space="preserve">
+    <value>Gabung</value>
+  </data>
   <data name="CloudSync_BtnOverwrite" xml:space="preserve">
     <value>Timpa</value>
   </data>
@@ -9370,6 +9380,9 @@ Detail: {0}</value>
   <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
     <value>Buka Kunci</value>
   </data>
+  <data name="CloudSync_ContactTip" xml:space="preserve">
+    <value>Jika ada pertanyaan, silakan hubungi dev@fufu.skin</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Hapus Akun &amp; Data</value>
   </data>
@@ -9420,6 +9433,15 @@ Detail: {0}</value>
   </data>
   <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
     <value>Unduhan Gagal</value>
+  </data>
+  <data name="CloudSync_DurationHoursMinsFormat" xml:space="preserve">
+    <value>{0}j {1}m</value>
+  </data>
+  <data name="CloudSync_DurationMinsSecsFormat" xml:space="preserve">
+    <value>{0}m {1}d</value>
+  </data>
+  <data name="CloudSync_DurationSecsFormat" xml:space="preserve">
+    <value>{0}d</value>
   </data>
   <data name="CloudSync_EmailHeader" xml:space="preserve">
     <value>Alamat email</value>
@@ -9522,6 +9544,9 @@ Detail: {0}</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>Semua Tipe</value>
+  </data>
+  <data name="CloudSync_FilterPlayTime" xml:space="preserve">
+    <value>Waktu Bermain</value>
   </data>
   <data name="CloudSync_FilterUiaf" xml:space="preserve">
     <value>Pencapaian</value>
@@ -9781,6 +9806,54 @@ Detail: {0}</value>
   <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
     <value>Kata sandi</value>
   </data>
+  <data name="CloudSync_PlayTimeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Timpa arsip cloud "{0}" dengan data waktu bermain lokal saat ini?</value>
+  </data>
+  <data name="CloudSync_PlayTimeEmptyCloud" xml:space="preserve">
+    <value>Belum ada arsip waktu bermain di cloud. Masukkan nama di atas lalu unggah catatan saat ini.</value>
+  </data>
+  <data name="CloudSync_PlayTimeListSummary" xml:space="preserve">
+    <value>{0} arsip waktu bermain · Total {1}/{2} · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_PlayTimeLocalSummaryFormat" xml:space="preserve">
+    <value>Catatan lokal: {0} hari · Total {1} ({2} segmen)</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedAddedFormat" xml:space="preserve">
+    <value>Ditambahkan +{1} dari "{0}". Total waktu bermain: {2}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedNoGainFormat" xml:space="preserve">
+    <value>"{0}" disinkronkan: tidak ada waktu baru (rentang waktu tumpang tindih atau tidak melebihi data lokal). Total: {1}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedOverlapFormat" xml:space="preserve">
+    <value>Ditambahkan +{1} dari "{0}" ({2} waktu tumpang tindih dideduplikasi). Total: {3}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeFailedTitle" xml:space="preserve">
+    <value>Gagal Menggabungkan Waktu Bermain</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeImportBtn" xml:space="preserve">
+    <value>Gabung &amp; Impor</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeSuccessTitle" xml:space="preserve">
+    <value>Waktu Bermain Digabungkan</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeTip" xml:space="preserve">
+    <value>Pengunduhan digabungkan secara aditif dengan catatan lokal: data yang ada tidak akan berkurang dan rentang waktu yang sama akan otomatis dideduplikasi.</value>
+  </data>
+  <data name="CloudSync_PlayTimeNotSignedInMsg" xml:space="preserve">
+    <value>Silakan masuk ke Arsip Cloud FufuLauncher terlebih dahulu untuk mengunggah atau menyinkronkan catatan waktu bermain.</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncBtn" xml:space="preserve">
+    <value>Sinkronisasi Cloud</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncTooltip" xml:space="preserve">
+    <value>Unggah atau gabungkan arsip waktu bermain cloud secara aditif</value>
+  </data>
+  <data name="CloudSync_PlayTimeTitle" xml:space="preserve">
+    <value>Waktu Bermain · Arsip Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_PlayTimeUploadBtn" xml:space="preserve">
+    <value>Unggah Waktu Bermain Saat Ini</value>
+  </data>
   <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
     <value>Muat ulang untuk melihat detail penggunaan</value>
   </data>
@@ -9934,6 +10007,9 @@ Detail: {0}</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Atur Ulang Kata Sandi</value>
   </data>
+  <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
+    <value>Waktu Bermain</value>
+  </data>
   <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
     <value>Pencapaian</value>
   </data>
@@ -9972,6 +10048,9 @@ Detail: {0}</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Unggah File Lokal</value>
+  </data>
+  <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
+    <value>Catatan Waktu Bermain</value>
   </data>
   <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
     <value>Pencapaian</value>

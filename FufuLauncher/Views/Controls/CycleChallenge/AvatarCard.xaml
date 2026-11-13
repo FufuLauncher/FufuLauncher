@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!--
-Copyright (c) FufuLauncher Dev Team. All rights reserved.
-Licensed under the MIT License.
--->
 <UserControl
     x:Class="FufuLauncher.Views.Controls.CycleChallenge.AvatarCard"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

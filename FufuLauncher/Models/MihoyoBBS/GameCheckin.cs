@@ -52,8 +52,8 @@ public abstract class GameCheckin
     protected readonly string CheckinRewardsUrl = ApiEndpoints.MihoyoBbsCheckinRewardsUrl;
     protected readonly string IsSignUrl = ApiEndpoints.MihoyoBbsIsSignUrl;
     protected readonly string SignUrl = ApiEndpoints.MihoyoBbsSignUrl;
-    protected readonly string ResignInfoUrl = ApiEndpoints.LunaEventApiBase + "/resign_info";
-    protected readonly string ResignUrl = ApiEndpoints.LunaEventApiBase + "/resign";
+    protected readonly string ResignInfoUrl = ApiEndpoints.LunaResignInfoUrl;
+    protected readonly string ResignUrl = ApiEndpoints.LunaResignUrl;
 
     protected GameCheckin(string gameId, string gameName, string actId, string playerName = "玩家")
     {
@@ -73,7 +73,7 @@ public abstract class GameCheckin
     {
         try
         {
-            var url = $"{ApiEndpoints.LunaEventApiBase}/home?act_id={ActId}&lang=zh-cn";
+            var url = $"{CheckinRewardsUrl}?act_id={ActId}&lang=zh-cn";
             using (var request = new HttpRequestMessage(HttpMethod.Get, url))
             {
                 AddHeadersToRequest(request);

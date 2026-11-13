@@ -3776,6 +3776,27 @@
                                             Content="{helpers:Loc Key=ModTrust_SyncBtn}"
                                             Click="OnModTrustSyncClick" />
                                 </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}"
+                                                   Text="{helpers:Loc Key=Settings_SslCheck_Title}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=Settings_SslCheck_Caption}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="2"
+                                            Style="{StaticResource RowButtonStyle}"
+                                            Content="{helpers:Loc Key=Settings_SslCheck_Btn}"
+                                            Click="OnVerifySslCertificatesClick" />
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </StackPanel>

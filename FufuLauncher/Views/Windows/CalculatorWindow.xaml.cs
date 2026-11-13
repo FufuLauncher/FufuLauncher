@@ -127,7 +127,7 @@ public sealed partial class CalculatorWindow : Window
             var kv = item.Split('=', 2);
             if (kv.Length == 2)
             {
-                var cookie = manager.CreateCookie(kv[0].Trim(), kv[1].Trim(), ".mihoyo.com", "/");
+                var cookie = manager.CreateCookie(kv[0].Trim(), kv[1].Trim(), ApiEndpoints.MihoyoCookieDomain, "/");
                 manager.AddOrUpdateCookie(cookie);
             }
         }
@@ -318,7 +318,7 @@ public sealed partial class CalculatorWindow : Window
         try
         {
             var uri = new Uri(args.Uri);
-            bool isAllowed = uri.Host.EndsWith("mihoyo.com", StringComparison.OrdinalIgnoreCase);
+            bool isAllowed = uri.Host.EndsWith(ApiEndpoints.MihoyoDomain, StringComparison.OrdinalIgnoreCase);
 
             if (!isAllowed)
             {

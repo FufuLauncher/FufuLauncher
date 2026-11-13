@@ -545,8 +545,8 @@ public sealed class McpHostService
     {
         var lanAddresses = GetLanAddresses();
         return lanAddresses.Count > 0
-            ? $"http://{lanAddresses[0]}:{Port}/mcp"
-            : $"http://127.0.0.1:{Port}/mcp";
+            ? ApiEndpoints.GetMcpEndpointUrl(lanAddresses[0], Port)
+            : ApiEndpoints.GetMcpLocalEndpointUrl(Port);
     }
 
     private async Task LoadSettingsAsync()

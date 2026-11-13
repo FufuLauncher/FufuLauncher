@@ -39,7 +39,7 @@ public sealed partial class SecurityWebWindow : Window
             var parts = cookieKV.Split('=', 2);
             if (parts.Length == 2)
             {
-                var cookie = cookieManager.CreateCookie(parts[0], parts[1], ".mihoyo.com", "/");
+                var cookie = cookieManager.CreateCookie(parts[0], parts[1], ApiEndpoints.MihoyoCookieDomain, "/");
                 cookieManager.AddOrUpdateCookie(cookie);
             }
         }

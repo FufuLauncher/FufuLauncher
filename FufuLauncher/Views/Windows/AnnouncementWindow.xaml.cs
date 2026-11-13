@@ -129,7 +129,7 @@ namespace FufuLauncher.Views
         private readonly string _fontFilePath;
         private bool _isRunning;
 
-        private const string ServerUrl = "http://127.0.0.1:1221/";
+        private const string ServerUrl = ApiEndpoints.AnnouncementFontServerUrl;
 
         public LocalFontServer(string fontFilePath)
         {

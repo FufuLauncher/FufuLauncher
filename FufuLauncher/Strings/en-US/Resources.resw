@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -2359,6 +2360,9 @@ Go to the Microsoft website to download and install it?</value>
   <data name="AboutPage_ContactAuthor" xml:space="preserve">
     <value>Contact Author</value>
   </data>
+  <data name="AboutPage_ContactEmailOption" xml:space="preserve">
+    <value>Email ({0})</value>
+  </data>
   <data name="SponsorWindow_Title" xml:space="preserve">
     <value>Sponsor</value>
   </data>
@@ -3839,6 +3843,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="AboutPage_DiscordCopied" xml:space="preserve">
     <value>Discord ID Copied!</value>
+  </data>
+  <data name="AboutPage_EmailCopied" xml:space="preserve">
+    <value>Email Copied!</value>
   </data>
   <data name="AboutPage_Loading" xml:space="preserve">
     <value>Loading...</value>
@@ -10054,6 +10061,9 @@ Details: {0}</value>
   <data name="CloudSync_BtnExportSave" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="CloudSync_BtnMergeToLocal" xml:space="preserve">
+    <value>Merge</value>
+  </data>
   <data name="CloudSync_BtnOverwrite" xml:space="preserve">
     <value>Overwrite</value>
   </data>
@@ -10123,6 +10133,9 @@ Details: {0}</value>
   <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
     <value>Confirm Unlock</value>
   </data>
+  <data name="CloudSync_ContactTip" xml:space="preserve">
+    <value>If you have any questions, please contact dev@fufu.skin</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Delete Account &amp; Data</value>
   </data>
@@ -10173,6 +10186,15 @@ Details: {0}</value>
   </data>
   <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
     <value>Download Failed</value>
+  </data>
+  <data name="CloudSync_DurationHoursMinsFormat" xml:space="preserve">
+    <value>{0}h {1}m</value>
+  </data>
+  <data name="CloudSync_DurationMinsSecsFormat" xml:space="preserve">
+    <value>{0}m {1}s</value>
+  </data>
+  <data name="CloudSync_DurationSecsFormat" xml:space="preserve">
+    <value>{0}s</value>
   </data>
   <data name="CloudSync_EmailHeader" xml:space="preserve">
     <value>Email address</value>
@@ -10275,6 +10297,9 @@ Details: {0}</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>All Types</value>
+  </data>
+  <data name="CloudSync_FilterPlayTime" xml:space="preserve">
+    <value>Playtime</value>
   </data>
   <data name="CloudSync_FilterUiaf" xml:space="preserve">
     <value>Achievements</value>
@@ -10534,6 +10559,54 @@ Details: {0}</value>
   <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="CloudSync_PlayTimeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Overwrite cloud archive "{0}" with local playtime data?</value>
+  </data>
+  <data name="CloudSync_PlayTimeEmptyCloud" xml:space="preserve">
+    <value>No cloud playtime archives yet. Enter a name above and upload your current records.</value>
+  </data>
+  <data name="CloudSync_PlayTimeListSummary" xml:space="preserve">
+    <value>{0} playtime archives · Total {1}/{2} · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_PlayTimeLocalSummaryFormat" xml:space="preserve">
+    <value>Local records: {0} days · Total {1} ({2} segments)</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedAddedFormat" xml:space="preserve">
+    <value>Added +{1} from "{0}". Total playtime: {2}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedNoGainFormat" xml:space="preserve">
+    <value>Synced "{0}": no new playtime (intervals overlap or do not exceed local totals). Total: {1}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergedOverlapFormat" xml:space="preserve">
+    <value>Added +{1} from "{0}" ({2} overlapping time deduplicated). Total: {3}</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeFailedTitle" xml:space="preserve">
+    <value>Playtime Merge Failed</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeImportBtn" xml:space="preserve">
+    <value>Merge &amp; Import</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeSuccessTitle" xml:space="preserve">
+    <value>Playtime Merged</value>
+  </data>
+  <data name="CloudSync_PlayTimeMergeTip" xml:space="preserve">
+    <value>Downloading merges additively with local records: existing playtime never decreases, and overlapping time intervals are automatically deduplicated.</value>
+  </data>
+  <data name="CloudSync_PlayTimeNotSignedInMsg" xml:space="preserve">
+    <value>Please sign in to FufuLauncher Cloud Archive first to upload or sync playtime records.</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncBtn" xml:space="preserve">
+    <value>Cloud Sync</value>
+  </data>
+  <data name="CloudSync_PlayTimeSyncTooltip" xml:space="preserve">
+    <value>Upload or additively merge cloud playtime archives</value>
+  </data>
+  <data name="CloudSync_PlayTimeTitle" xml:space="preserve">
+    <value>Playtime · FufuLauncher Cloud Archive</value>
+  </data>
+  <data name="CloudSync_PlayTimeUploadBtn" xml:space="preserve">
+    <value>Upload Current Playtime</value>
+  </data>
   <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
     <value>Refresh to view current storage and daily usage details</value>
   </data>
@@ -10687,6 +10760,9 @@ Details: {0}</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Reset Password</value>
   </data>
+  <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
+    <value>Playtime</value>
+  </data>
   <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
     <value>Achievements</value>
   </data>
@@ -10726,6 +10802,9 @@ Details: {0}</value>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Upload Local File</value>
   </data>
+  <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
+    <value>Playtime Records</value>
+  </data>
   <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
     <value>Achievements</value>
   </data>
@@ -10734,5 +10813,170 @@ Details: {0}</value>
   </data>
   <data name="CloudSync_WindowTitle" xml:space="preserve">
     <value>FufuLauncher Cloud Archive</value>
+  </data>
+  <data name="Settings_SslCheck_Title" xml:space="preserve">
+    <value>SSL certificate check</value>
+  </data>
+  <data name="Settings_SslCheck_Caption" xml:space="preserve">
+    <value>When the SSL for the target domain expires, the services under that domain will also be unavailable.</value>
+  </data>
+  <data name="Settings_SslCheck_Btn" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="SslCheck_DialogTitle" xml:space="preserve">
+    <value>SSL Certificate Verification</value>
+  </data>
+  <data name="SslCheck_CheckingInitial" xml:space="preserve">
+    <value>Collecting and stacking HTTPS endpoints by domain...</value>
+  </data>
+  <data name="SslCheck_CheckingProgress" xml:space="preserve">
+    <value>Resolving and verifying unique domains ({0}/{1}): {2}</value>
+  </data>
+  <data name="SslCheck_NoEndpoints" xml:space="preserve">
+    <value>No valid HTTPS domains were found in ApiEndpoints.</value>
+  </data>
+  <data name="SslCheck_Failed" xml:space="preserve">
+    <value>Failed to verify SSL certificates: {0}</value>
+  </data>
+  <data name="SslCheck_SummaryFormat" xml:space="preserve">
+    <value>Stacked {0} HTTPS URLs into {1} unique domain(s) (each verified once): {2} valid, {3} invalid or failed.</value>
+  </data>
+  <data name="SslCheck_StackedHostFormat" xml:space="preserve">
+    <value>{0} · {1} stacked</value>
+  </data>
+  <data name="SslCheck_Valid" xml:space="preserve">
+    <value>Valid</value>
+  </data>
+  <data name="SslCheck_Invalid" xml:space="preserve">
+    <value>Invalid ({0})</value>
+  </data>
+  <data name="SslCheck_ConnectFailed" xml:space="preserve">
+    <value>Resolve/connect failed</value>
+  </data>
+  <data name="SslCheck_ValidationStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SslCheck_ResolvedIp" xml:space="preserve">
+    <value>Resolved IP</value>
+  </data>
+  <data name="SslCheck_TlsProtocol" xml:space="preserve">
+    <value>TLS protocol</value>
+  </data>
+  <data name="SslCheck_Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="SslCheck_Issuer" xml:space="preserve">
+    <value>Issuer</value>
+  </data>
+  <data name="SslCheck_CertChain" xml:space="preserve">
+    <value>Chain</value>
+  </data>
+  <data name="SslCheck_San" xml:space="preserve">
+    <value>SAN</value>
+  </data>
+  <data name="SslCheck_Sha256Thumbprint" xml:space="preserve">
+    <value>SHA-256</value>
+  </data>
+  <data name="SslCheck_FailureReason" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SslCheck_StackedEndpoints" xml:space="preserve">
+    <value>Endpoints</value>
+  </data>
+  <data name="SslCheck_ErrTimeout" xml:space="preserve">
+    <value>Connection timed out</value>
+  </data>
+  <data name="SslCheck_ErrDnsFailed" xml:space="preserve">
+    <value>DNS resolution failed: {0}</value>
+  </data>
+  <data name="SslCheck_ErrNoCertificate" xml:space="preserve">
+    <value>No certificate presented</value>
+  </data>
+  <data name="SslCheck_ErrNameMismatch" xml:space="preserve">
+    <value>Hostname mismatch</value>
+  </data>
+  <data name="SslCheck_ErrExpiredOrNotYetValid" xml:space="preserve">
+    <value>Certificate expired or not yet valid</value>
+  </data>
+  <data name="SslCheck_ErrUntrustedRoot" xml:space="preserve">
+    <value>Untrusted root CA</value>
+  </data>
+  <data name="SslCheck_ErrPartialChain" xml:space="preserve">
+    <value>Incomplete chain</value>
+  </data>
+  <data name="SslCheck_ErrRevoked" xml:space="preserve">
+    <value>Certificate revoked</value>
+  </data>
+  <data name="SslCheck_ErrChainError" xml:space="preserve">
+    <value>Certificate chain error</value>
+  </data>
+  <data name="SslCheck_NoDnsIp" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="SslCheck_MoreItemsFormat" xml:space="preserve">
+    <value>{0} ({1} total)</value>
+  </data>
+  <data name="SslCheck_ViaProxyFormat" xml:space="preserve">
+    <value>{0} (via system proxy {1})</value>
+  </data>
+  <data name="SslCheck_ViaProxyOnlyFormat" xml:space="preserve">
+    <value>Via system proxy {0}</value>
+  </data>
+  <data name="SslCheck_NotYetValidFormat" xml:space="preserve">
+    <value>{0} (not yet valid)</value>
+  </data>
+  <data name="SslCheck_ExpiredFormat" xml:space="preserve">
+    <value>{0} (expired {1} days ago)</value>
+  </data>
+  <data name="SslCheck_DaysRemainingFormat" xml:space="preserve">
+    <value>{0} ({1} days left)</value>
+  </data>
+  <data name="SslCheck_CertType" xml:space="preserve">
+    <value>Certificate Type</value>
+  </data>
+  <data name="SslCheck_CertType_DV" xml:space="preserve">
+    <value>DV (Domain Validated)</value>
+  </data>
+  <data name="SslCheck_CertType_OV" xml:space="preserve">
+    <value>OV (Organization Validated)</value>
+  </data>
+  <data name="SslCheck_CertType_EV" xml:space="preserve">
+    <value>EV (Extended Validation)</value>
+  </data>
+  <data name="SslCheck_CertType_IV" xml:space="preserve">
+    <value>IV (Individual Validated)</value>
+  </data>
+  <data name="SslCheck_CertType_SelfSigned" xml:space="preserve">
+    <value>Self-Signed</value>
+  </data>
+  <data name="SslCheck_CertType_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="SslCheck_QuicSupport" xml:space="preserve">
+    <value>QUIC (HTTP/3)</value>
+  </data>
+  <data name="SslCheck_QuicSupportedFormat" xml:space="preserve">
+    <value>Supported ({0})</value>
+  </data>
+  <data name="SslCheck_QuicUnsupported" xml:space="preserve">
+    <value>Unsupported or not advertised (no h3 / QUIC detected)</value>
+  </data>
+  <data name="SslCheck_QuicTimeout" xml:space="preserve">
+    <value>Not detected (HTTP/QUIC probe timed out)</value>
+  </data>
+  <data name="SslCheck_CertTypeShort_SelfSigned" xml:space="preserve">
+    <value>Self-Signed</value>
+  </data>
+  <data name="SslCheck_CertTypeShort_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Supported" xml:space="preserve">
+    <value>QUIC</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Unsupported" xml:space="preserve">
+    <value>No QUIC</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Timeout" xml:space="preserve">
+    <value>QUIC timeout</value>
   </data>
 </root>
