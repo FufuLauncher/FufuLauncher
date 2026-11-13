@@ -445,7 +445,7 @@ namespace FufuLauncher.Views
                 if (!Directory.Exists(assetsDir)) Directory.CreateDirectory(assetsDir);
 
 
-                string filePath = Path.Combine(assetsDir, "genshin_achievements_linked.scraped.json");
+                string filePath = Path.Combine(assetsDir, "achievements.json");
                 await File.WriteAllTextAsync(filePath, finalJsonData);
 
                 _progressDialog.Hide();
