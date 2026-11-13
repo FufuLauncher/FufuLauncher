@@ -9173,4 +9173,808 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>सांख्यिकी और समस्या निवारण के लिए उपयोग जानकारी भेजें</value>
   </data>
+  <data name="CloudSync_AccountBtn" xml:space="preserve">
+    <value>क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_AccountFullBtn" xml:space="preserve">
+    <value>FufuLauncher क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
+    <value>लिंक किया गया ईमेल, सुरक्षा स्थिति और विकल्प देखें</value>
+  </data>
+  <data name="CloudSync_AccountSectionTitle" xml:space="preserve">
+    <value>खाता विवरण</value>
+  </data>
+  <data name="CloudSync_AchievementBtn" xml:space="preserve">
+    <value>क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_AchievementConfirmOverwriteMsg" xml:space="preserve">
+    <value>क्या वर्तमान डेटा से "{0}" को ओवरराइट करें?</value>
+  </data>
+  <data name="CloudSync_AchievementCurrentProfile" xml:space="preserve">
+    <value>वर्तमान प्रोफ़ाइल: {0}</value>
+  </data>
+  <data name="CloudSync_AchievementEmptyCloud" xml:space="preserve">
+    <value>क्लाउड में कोई उपलब्धि संग्रह नहीं है।</value>
+  </data>
+  <data name="CloudSync_AchievementImportBtn" xml:space="preserve">
+    <value>आयात</value>
+  </data>
+  <data name="CloudSync_AchievementImportedMsg" xml:space="preserve">
+    <value>"{0}" से {1} उपलब्धियां अपडेट हुईं।</value>
+  </data>
+  <data name="CloudSync_AchievementImportFailedTitle" xml:space="preserve">
+    <value>आयात विफल</value>
+  </data>
+  <data name="CloudSync_AchievementImportSuccessTitle" xml:space="preserve">
+    <value>आयात सफल</value>
+  </data>
+  <data name="CloudSync_AchievementInvalidFormatMsg" xml:space="preserve">
+    <value>अमान्य संग्रह प्रारूप।</value>
+  </data>
+  <data name="CloudSync_AchievementListSummary" xml:space="preserve">
+    <value>{0} उपलब्धियां · {1}/{2} कुल · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
+    <value>कृपया पहले FufuLauncher क्लाउड में साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
+    <value>"{0}" से {1} उपलब्धियां सिंक हुईं</value>
+  </data>
+  <data name="CloudSync_AchievementTitle" xml:space="preserve">
+    <value>उपलब्धियां · FufuLauncher क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_AchievementTooltip" xml:space="preserve">
+    <value>FufuLauncher क्लाउड उपलब्धि संग्रह प्रबंधित करें</value>
+  </data>
+  <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
+    <value>वर्तमान उपलब्धियां अपलोड करें</value>
+  </data>
+  <data name="CloudSync_ActionSuccessTitleFormat" xml:space="preserve">
+    <value>{0} सफल</value>
+  </data>
+  <data name="CloudSync_ActivateBtn" xml:space="preserve">
+    <value>रिडीम करें</value>
+  </data>
+  <data name="CloudSync_ActivateFailedTitle" xml:space="preserve">
+    <value>रिडीम विफल</value>
+  </data>
+  <data name="CloudSync_ActivatePromptEmpty" xml:space="preserve">
+    <value>कृपया सक्रियण कोड दर्ज करें।</value>
+  </data>
+  <data name="CloudSync_ActivationPlaceholder" xml:space="preserve">
+    <value>कोड दर्ज करें</value>
+  </data>
+  <data name="CloudSync_ArchiveNameHeader" xml:space="preserve">
+    <value>संग्रह नाम</value>
+  </data>
+  <data name="CloudSync_ArchiveNamePlaceholder" xml:space="preserve">
+    <value>केवल अक्षर, अंक, _, -, .</value>
+  </data>
+  <data name="CloudSync_ArchivesDefaultSubtitle" xml:space="preserve">
+    <value>क्लाउड संग्रह प्रबंधित करने के लिए साइन इन करें</value>
+  </data>
+  <data name="CloudSync_ArchivesEmpty" xml:space="preserve">
+    <value>कोई क्लाउड संग्रह नहीं मिला।</value>
+  </data>
+  <data name="CloudSync_ArchivesFilteredEmpty" xml:space="preserve">
+    <value>इस फ़िल्टर के लिए कोई क्लाउड संग्रह नहीं मिला।</value>
+  </data>
+  <data name="CloudSync_ArchivesLoadFailedTitle" xml:space="preserve">
+    <value>लोड विफल</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedEmpty" xml:space="preserve">
+    <value>खाता लॉक है। पहले अनलॉक करें।</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedHint" xml:space="preserve">
+    <value>खाता लॉक है; संग्रह एक्सेस अक्षम है</value>
+  </data>
+  <data name="CloudSync_ArchivesSignInEmpty" xml:space="preserve">
+    <value>देखने के लिए कृपया साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_ArchivesSubtitle" xml:space="preserve">
+    <value>सहेजे गए क्लाउड संग्रह देखें, सहेजें, नाम बदलें, ओवरराइट करें या हटाएं</value>
+  </data>
+  <data name="CloudSync_ArchivesSummary" xml:space="preserve">
+    <value>{0} / {1} संग्रह · {2} / {3} उपयोग</value>
+  </data>
+  <data name="CloudSync_ArchivesTitle" xml:space="preserve">
+    <value>क्लाउड संग्रह सूची</value>
+  </data>
+  <data name="CloudSync_AuthSubtitle" xml:space="preserve">
+    <value>सभी डिवाइस पर अपनी उपलब्धियों और विश इतिहास का सुरक्षित बैकअप लें।</value>
+  </data>
+  <data name="CloudSync_AuthTitle" xml:space="preserve">
+    <value>FufuLauncher क्लाउड में साइन इन या पंजीकरण करें</value>
+  </data>
+  <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
+    <value>इस डिवाइस पर साइन-इन स्थिति सुरक्षित है</value>
+  </data>
+  <data name="CloudSync_BtnDelete" xml:space="preserve">
+    <value>हटाएं</value>
+  </data>
+  <data name="CloudSync_BtnExportSave" xml:space="preserve">
+    <value>सहेजें</value>
+  </data>
+  <data name="CloudSync_BtnOverwrite" xml:space="preserve">
+    <value>ओवरराइट</value>
+  </data>
+  <data name="CloudSync_BtnRename" xml:space="preserve">
+    <value>नाम बदलें</value>
+  </data>
+  <data name="CloudSync_BusyWaitMsg" xml:space="preserve">
+    <value>अन्य कार्य प्रगति पर है। कृपया प्रतीक्षा करें।</value>
+  </data>
+  <data name="CloudSync_CancelBtn" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="CloudSync_CannotOperateTitle" xml:space="preserve">
+    <value>उपलब्ध नहीं</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpened" xml:space="preserve">
+    <value>सत्यापन पृष्ठ ब्राउज़र में खुला है। पूरा होने की प्रतीक्षा है...</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpenFailed" xml:space="preserve">
+    <value>सिस्टम ब्राउज़र खोलने में असमर्थ।</value>
+  </data>
+  <data name="CloudSync_CaptchaHint" xml:space="preserve">
+    <value>कृपया नीचे दिया गया सत्यापन पूरा करें। पूरा होने पर विंडो अपने आप बंद हो जाएगी।</value>
+  </data>
+  <data name="CloudSync_CaptchaLoadError" xml:space="preserve">
+    <value>पृष्ठ लोड नहीं हो सका। जारी रखने के लिए ब्राउज़र में खोलें चुनें।</value>
+  </data>
+  <data name="CloudSync_CaptchaOpenBrowser" xml:space="preserve">
+    <value>ब्राउज़र में खोलें</value>
+  </data>
+  <data name="CloudSync_CaptchaSubmitting" xml:space="preserve">
+    <value>सत्यापन परिणाम की पुष्टि हो रही है...</value>
+  </data>
+  <data name="CloudSync_CaptchaTitle" xml:space="preserve">
+    <value>सुरक्षा सत्यापन</value>
+  </data>
+  <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
+    <value>सुरक्षा सत्यापन - FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CloseBtn" xml:space="preserve">
+    <value>बंद करें</value>
+  </data>
+  <data name="CloudSync_ConfirmBtn" xml:space="preserve">
+    <value>पुष्टि करें</value>
+  </data>
+  <data name="CloudSync_ConfirmLockBtn" xml:space="preserve">
+    <value>लॉक करें</value>
+  </data>
+  <data name="CloudSync_ConfirmNewPasswordHeader" xml:space="preserve">
+    <value>नए पासवर्ड की पुष्टि करें</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteBtn" xml:space="preserve">
+    <value>ओवरराइट करें</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteDiskMsg" xml:space="preserve">
+    <value>क्या "{0}" से "{1}" को ओवरराइट करें?</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteTitle" xml:space="preserve">
+    <value>ओवरराइट की पुष्टि करें</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>पासवर्ड की पुष्टि करें</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>पासवर्ड पुनः दर्ज करें</value>
+  </data>
+  <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
+    <value>अनलॉक करें</value>
+  </data>
+  <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
+    <value>खाता और डेटा हटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneDetail" xml:space="preserve">
+    <value>आपका खाता और सारा क्लाउड डेटा हटा दिया गया है।</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneTitle" xml:space="preserve">
+    <value>खाता हटाया गया</value>
+  </data>
+  <data name="CloudSync_DeleteAccountTitle" xml:space="preserve">
+    <value>खाता स्थायी रूप से हटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
+    <value>चेतावनी: खाता हटाने से सभी क्लाउड संग्रह और खाता विवरण स्थायी रूप से मिट जाएंगे!</value>
+  </data>
+  <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
+    <value>सभी क्लाउड डेटा मिटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteAllConfirmBtn" xml:space="preserve">
+    <value>सब हटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteAllFailedTitle" xml:space="preserve">
+    <value>हटाना विफल</value>
+  </data>
+  <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
+    <value>क्या सभी क्लाउड संग्रह हटाएं? आपका खाता सुरक्षित रहेगा।</value>
+  </data>
+  <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
+    <value>साफ़ हो गया</value>
+  </data>
+  <data name="CloudSync_DeleteAllTitle" xml:space="preserve">
+    <value>सभी क्लाउड डेटा मिटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveMsg" xml:space="preserve">
+    <value>क्या संग्रह "{0}" को स्थायी रूप से हटाएं?</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveTitle" xml:space="preserve">
+    <value>संग्रह हटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteConfirmBtn" xml:space="preserve">
+    <value>हटाएं</value>
+  </data>
+  <data name="CloudSync_DeleteFailedTitle" xml:space="preserve">
+    <value>हटाने में विफल</value>
+  </data>
+  <data name="CloudSync_DeleteSuccessTitle" xml:space="preserve">
+    <value>हटाया गया</value>
+  </data>
+  <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
+    <value>डाउनलोड विफल</value>
+  </data>
+  <data name="CloudSync_EmailHeader" xml:space="preserve">
+    <value>ईमेल पता</value>
+  </data>
+  <data name="CloudSync_EmailOtpSentDetail" xml:space="preserve">
+    <value>{0} पर कोड भेजा गया है। यह 10 मिनट तक मान्य है।</value>
+  </data>
+  <data name="CloudSync_EmailPlaceholder" xml:space="preserve">
+    <value>अपना ईमेल पता दर्ज करें</value>
+  </data>
+  <data name="CloudSync_ErrAccountNotFound" xml:space="preserve">
+    <value>खाता नहीं मिला।</value>
+  </data>
+  <data name="CloudSync_ErrActivationDisabled" xml:space="preserve">
+    <value>कोड रिडीम सुविधा वर्तमान में बंद है।</value>
+  </data>
+  <data name="CloudSync_ErrActivationExhausted" xml:space="preserve">
+    <value>इस कोड की सीमा समाप्त हो गई है।</value>
+  </data>
+  <data name="CloudSync_ErrActivationInvalid" xml:space="preserve">
+    <value>अमान्य सक्रियण कोड।</value>
+  </data>
+  <data name="CloudSync_ErrActivationRedeemed" xml:space="preserve">
+    <value>यह कोड पहले ही उपयोग हो चुका है।</value>
+  </data>
+  <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
+    <value>इस नाम का संग्रह पहले से है।</value>
+  </data>
+  <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
+    <value>संग्रह नहीं मिला।</value>
+  </data>
+  <data name="CloudSync_ErrAuthRequired" xml:space="preserve">
+    <value>सत्र समाप्त हो गया। पुनः साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_ErrCaptchaFailed" xml:space="preserve">
+    <value>सत्यापन विफल या समाप्त। पुनः प्रयास करें।</value>
+  </data>
+  <data name="CloudSync_ErrEmailRegistered" xml:space="preserve">
+    <value>यह ईमेल पहले से पंजीकृत है।</value>
+  </data>
+  <data name="CloudSync_ErrEnterCodeFirst" xml:space="preserve">
+    <value>पहले ईमेल सत्यापन कोड दर्ज करें।</value>
+  </data>
+  <data name="CloudSync_ErrFileLimit" xml:space="preserve">
+    <value>फ़ाइल संख्या सीमा पूरी हो गई है।</value>
+  </data>
+  <data name="CloudSync_ErrGeneric" xml:space="preserve">
+    <value>अनुरोध विफल रहा। नेटवर्क जांचें और पुनः प्रयास करें।</value>
+  </data>
+  <data name="CloudSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>गलत ईमेल या पासवर्ड।</value>
+  </data>
+  <data name="CloudSync_ErrInvalidEmail" xml:space="preserve">
+    <value>मान्य ईमेल पता दर्ज करें।</value>
+  </data>
+  <data name="CloudSync_ErrInvalidFormat" xml:space="preserve">
+    <value>संग्रह फ़ॉर्मैट अमान्य है।</value>
+  </data>
+  <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
+    <value>नाम में केवल 1-64 अक्षर, अंक, _, -, . हो सकते हैं।</value>
+  </data>
+  <data name="CloudSync_ErrLocked" xml:space="preserve">
+    <value>खाता लॉक है। पहले ईमेल द्वारा अनलॉक करें।</value>
+  </data>
+  <data name="CloudSync_ErrOtpAttempts" xml:space="preserve">
+    <value>अधिक गलत प्रयास। नया कोड मांगें।</value>
+  </data>
+  <data name="CloudSync_ErrOtpCooldown" xml:space="preserve">
+    <value>कृपया थोड़ी प्रतीक्षा करें।</value>
+  </data>
+  <data name="CloudSync_ErrOtpExpired" xml:space="preserve">
+    <value>सत्यापन कोड समाप्त हो गया।</value>
+  </data>
+  <data name="CloudSync_ErrOtpInvalid" xml:space="preserve">
+    <value>गलत सत्यापन कोड।</value>
+  </data>
+  <data name="CloudSync_ErrPasswordLength" xml:space="preserve">
+    <value>पासवर्ड 8-128 अक्षरों का होना चाहिए।</value>
+  </data>
+  <data name="CloudSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>पासवर्ड मेल नहीं खाते।</value>
+  </data>
+  <data name="CloudSync_ErrPayloadTooLarge" xml:space="preserve">
+    <value>डेटा का आकार अनुमत सीमा से अधिक है।</value>
+  </data>
+  <data name="CloudSync_ErrQuotaExceeded" xml:space="preserve">
+    <value>दैनिक सीमा समाप्त हो गई है। कल पुनः प्रयास करें।</value>
+  </data>
+  <data name="CloudSync_ErrRateLimited" xml:space="preserve">
+    <value>बहुत अधिक अनुरोध। थोड़ी देर बाद प्रयास करें।</value>
+  </data>
+  <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
+    <value>क्लाउड स्टोरेज पर्याप्त नहीं है।</value>
+  </data>
+  <data name="CloudSync_ErrUnsupportedDataType" xml:space="preserve">
+    <value>असमर्थित संग्रह डेटा प्रकार।</value>
+  </data>
+  <data name="CloudSync_FileFilterJson" xml:space="preserve">
+    <value>संग्रह फ़ाइलें</value>
+  </data>
+  <data name="CloudSync_FilterAll" xml:space="preserve">
+    <value>सभी प्रकार</value>
+  </data>
+  <data name="CloudSync_FilterUiaf" xml:space="preserve">
+    <value>उपलब्धियां</value>
+  </data>
+  <data name="CloudSync_FilterUigf" xml:space="preserve">
+    <value>विश रिकॉर्ड</value>
+  </data>
+  <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
+    <value>सभी स्थानीय खाते ({0} UID)</value>
+  </data>
+  <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
+    <value>क्या चयनित डेटा से "{0}" को ओवरराइट करें?</value>
+  </data>
+  <data name="CloudSync_GachaEmptyCloud" xml:space="preserve">
+    <value>क्लाउड में कोई विश संग्रह नहीं है।</value>
+  </data>
+  <data name="CloudSync_GachaEmptyDesc" xml:space="preserve">
+    <value>मल्टी-खाता विश संग्रह सिंक करें</value>
+  </data>
+  <data name="CloudSync_GachaEmptyTitle" xml:space="preserve">
+    <value>क्लाउड से पुनर्स्थापित / प्रबंधित करें</value>
+  </data>
+  <data name="CloudSync_GachaExportErrorTitle" xml:space="preserve">
+    <value>निर्यात विफल</value>
+  </data>
+  <data name="CloudSync_GachaImportBtn" xml:space="preserve">
+    <value>पुनर्स्थापित</value>
+  </data>
+  <data name="CloudSync_GachaImportedMsg" xml:space="preserve">
+    <value>"{0}" से {1} खाते ({2} रिकॉर्ड) आयात किए गए।</value>
+  </data>
+  <data name="CloudSync_GachaListSummary" xml:space="preserve">
+    <value>{0} विश · {1}/{2} कुल · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_GachaNoLocalDataHint" xml:space="preserve">
+    <value>स्थानीय विश डेटा नहीं है। आप नीचे से पुनर्स्थापित कर सकते हैं।</value>
+  </data>
+  <data name="CloudSync_GachaNoRecordsSelected" xml:space="preserve">
+    <value>चयनित खाते में कोई मान्य विश रिकॉर्ड नहीं है।</value>
+  </data>
+  <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
+    <value>कृपया पहले FufuLauncher क्लाउड में साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
+    <value>अपलोड करने हेतु स्थानीय खाता चुनें</value>
+  </data>
+  <data name="CloudSync_GachaTitle" xml:space="preserve">
+    <value>विश विश्लेषण · FufuLauncher क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
+    <value>क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
+    <value>UID {0} ({1} रिकॉर्ड)</value>
+  </data>
+  <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
+    <value>चयनित रिकॉर्ड अपलोड करें</value>
+  </data>
+  <data name="CloudSync_GotoUnlockBtn" xml:space="preserve">
+    <value>अनलॉक करें</value>
+  </data>
+  <data name="CloudSync_HintTitle" xml:space="preserve">
+    <value>सूचना</value>
+  </data>
+  <data name="CloudSync_InputCurrentPwd" xml:space="preserve">
+    <value>पुष्टि के लिए वर्तमान पासवर्ड दर्ज करें</value>
+  </data>
+  <data name="CloudSync_InputOtpRequired" xml:space="preserve">
+    <value>कृपया ईमेल सत्यापन कोड दर्ज करें।</value>
+  </data>
+  <data name="CloudSync_LabelAutoLogin" xml:space="preserve">
+    <value>ऑटो साइन-इन</value>
+  </data>
+  <data name="CloudSync_LabelEmail" xml:space="preserve">
+    <value>ईमेल</value>
+  </data>
+  <data name="CloudSync_LabelLockedAt" xml:space="preserve">
+    <value>लॉक समय</value>
+  </data>
+  <data name="CloudSync_LabelStatus" xml:space="preserve">
+    <value>स्थिति</value>
+  </data>
+  <data name="CloudSync_LoadingArchivesText" xml:space="preserve">
+    <value>क्लाउड संग्रह लोड हो रहे हैं...</value>
+  </data>
+  <data name="CloudSync_LockAccountBtn" xml:space="preserve">
+    <value>खाता लॉक करें (ईमेल सत्यापन)</value>
+  </data>
+  <data name="CloudSync_LockBlockedDelete" xml:space="preserve">
+    <value>लॉक किया गया खाता नहीं हटाया जा सकता। पहले अनलॉक करें।</value>
+  </data>
+  <data name="CloudSync_LockDesc" xml:space="preserve">
+    <value>ईमेल सत्यापन द्वारा अनलॉक करने तक क्लाउड डेटा का उपयोग बंद रहेगा।</value>
+  </data>
+  <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
+    <value>लॉक रहते समय कोटा या संग्रह नहीं देखा जा सकता। खाता और सुरक्षा से अनलॉक करें।</value>
+  </data>
+  <data name="CloudSync_LockedBannerTitle" xml:space="preserve">
+    <value>खाता लॉक है</value>
+  </data>
+  <data name="CloudSync_LockHint" xml:space="preserve">
+    <value>नोट: लॉक रहने तक क्लाउड संग्रह देखना, अपलोड करना, हटाना या खाता बंद करना प्रतिबंधित रहेगा।</value>
+  </data>
+  <data name="CloudSync_LockTitle" xml:space="preserve">
+    <value>खाता लॉक करें</value>
+  </data>
+  <data name="CloudSync_LoginFailedTitle" xml:space="preserve">
+    <value>साइन-इन विफल</value>
+  </data>
+  <data name="CloudSync_LogoutBtn" xml:space="preserve">
+    <value>साइन आउट</value>
+  </data>
+  <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
+    <value>क्या आप इस डिवाइस से FufuLauncher क्लाउड खाते से साइन आउट करना चाहते हैं?</value>
+  </data>
+  <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
+    <value>अन्य सभी डिवाइस से भी साइन आउट करें</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessDetail" xml:space="preserve">
+    <value>स्थानीय सत्र हटा दिया गया।</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessTitle" xml:space="preserve">
+    <value>साइन आउट</value>
+  </data>
+  <data name="CloudSync_ModeLogin" xml:space="preserve">
+    <value>साइन इन</value>
+  </data>
+  <data name="CloudSync_ModeRegister" xml:space="preserve">
+    <value>पंजीकरण</value>
+  </data>
+  <data name="CloudSync_ModeReset" xml:space="preserve">
+    <value>पासवर्ड रीसेट</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccess" xml:space="preserve">
+    <value>रिडीम सफल</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccessDetail" xml:space="preserve">
+    <value>कोटा अपग्रेड सक्रिय हो गया।</value>
+  </data>
+  <data name="CloudSync_MsgCancelled" xml:space="preserve">
+    <value>रद्द किया गया</value>
+  </data>
+  <data name="CloudSync_MsgCaptchaCancelled" xml:space="preserve">
+    <value>सत्यापन रद्द किया गया।</value>
+  </data>
+  <data name="CloudSync_MsgDeleteAllSuccess" xml:space="preserve">
+    <value>{0} क्लाउड संग्रह हटाए गए।</value>
+  </data>
+  <data name="CloudSync_MsgDeleteSuccess" xml:space="preserve">
+    <value>संग्रह "{0}" हटाया गया।</value>
+  </data>
+  <data name="CloudSync_MsgLockedSuccess" xml:space="preserve">
+    <value>आपका खाता अब लॉक है।</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedDetail" xml:space="preserve">
+    <value>साइन इन हुआ, परंतु खाता लॉक है। अनलॉक करें।</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedTitle" xml:space="preserve">
+    <value>साइन इन (खाता लॉक)</value>
+  </data>
+  <data name="CloudSync_MsgLoginRequiredFirst" xml:space="preserve">
+    <value>कृपया पहले साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccess" xml:space="preserve">
+    <value>साइन इन सफल</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccessDetail" xml:space="preserve">
+    <value>सफलतापूर्वक साइन इन हो गया।</value>
+  </data>
+  <data name="CloudSync_MsgOverwritten" xml:space="preserve">
+    <value>संग्रह "{0}" ओवरराइट हुआ।</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>खाता बन गया</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccessDetail" xml:space="preserve">
+    <value>पंजीकरण पूर्ण हुआ और साइन इन हो गया।</value>
+  </data>
+  <data name="CloudSync_MsgRenameSuccess" xml:space="preserve">
+    <value>"{0}" नाम रखा गया।</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccess" xml:space="preserve">
+    <value>पासवर्ड रीसेट</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccessDetail" xml:space="preserve">
+    <value>पासवर्ड अपडेट हो गया। नए पासवर्ड से साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_MsgUnlockedSuccess" xml:space="preserve">
+    <value>खाता अनलॉक हो गया है।</value>
+  </data>
+  <data name="CloudSync_MsgUploadedNew" xml:space="preserve">
+    <value>संग्रह "{0}" अपलोड हुआ।</value>
+  </data>
+  <data name="CloudSync_MsgUploadFailedTitle" xml:space="preserve">
+    <value>अपलोड विफल</value>
+  </data>
+  <data name="CloudSync_MsgUploadSuccess" xml:space="preserve">
+    <value>अपलोड सफल</value>
+  </data>
+  <data name="CloudSync_NavAccount" xml:space="preserve">
+    <value>खाता और सुरक्षा</value>
+  </data>
+  <data name="CloudSync_NavArchives" xml:space="preserve">
+    <value>क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_NavQuota" xml:space="preserve">
+    <value>कोटा और अपग्रेड</value>
+  </data>
+  <data name="CloudSync_NotLockedText" xml:space="preserve">
+    <value>लॉक नहीं है</value>
+  </data>
+  <data name="CloudSync_NotLoggedInShort" xml:space="preserve">
+    <value>लॉग आउट</value>
+  </data>
+  <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
+    <value>FufuLauncher क्लाउड में साइन इन नहीं</value>
+  </data>
+  <data name="CloudSync_OpenBtn" xml:space="preserve">
+    <value>खोलें</value>
+  </data>
+  <data name="CloudSync_OpenCenterBtn" xml:space="preserve">
+    <value>क्लाउड केंद्र खोलें</value>
+  </data>
+  <data name="CloudSync_OpenFileFailedTitle" xml:space="preserve">
+    <value>फ़ाइल खोलने में विफल</value>
+  </data>
+  <data name="CloudSync_OtpHeader" xml:space="preserve">
+    <value>ईमेल सत्यापन कोड</value>
+  </data>
+  <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
+    <value>6 अंकों का कोड दर्ज करें</value>
+  </data>
+  <data name="CloudSync_OtpSentTitle" xml:space="preserve">
+    <value>कोड भेजा गया</value>
+  </data>
+  <data name="CloudSync_OverwriteExistingCheck" xml:space="preserve">
+    <value>नाम पहले से मौजूद होने पर ओवरराइट करें</value>
+  </data>
+  <data name="CloudSync_OverwriteFailedTitle" xml:space="preserve">
+    <value>ओवरराइट विफल</value>
+  </data>
+  <data name="CloudSync_OverwriteSuccessTitle" xml:space="preserve">
+    <value>ओवरराइट सफल</value>
+  </data>
+  <data name="CloudSync_PasswordHeader" xml:space="preserve">
+    <value>पासवर्ड</value>
+  </data>
+  <data name="CloudSync_PasswordNewHeader" xml:space="preserve">
+    <value>नया पासवर्ड</value>
+  </data>
+  <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
+    <value>8-128 अक्षरों का पासवर्ड दर्ज करें</value>
+  </data>
+  <data name="CloudSync_PasswordRequired" xml:space="preserve">
+    <value>कृपया अपना पासवर्ड दर्ज करें।</value>
+  </data>
+  <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
+    <value>पासवर्ड सेट करें</value>
+  </data>
+  <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
+    <value>वर्तमान स्टोरेज और उपयोग देखने के लिए रीफ़्रेश करें</value>
+  </data>
+  <data name="CloudSync_QuotaDeletesLabel" xml:space="preserve">
+    <value>दैनिक विलोपन</value>
+  </data>
+  <data name="CloudSync_QuotaFailedTitle" xml:space="preserve">
+    <value>कोटा लोड विफल</value>
+  </data>
+  <data name="CloudSync_QuotaFilesLabel" xml:space="preserve">
+    <value>फ़ाइलें</value>
+  </data>
+  <data name="CloudSync_QuotaFilesValue" xml:space="preserve">
+    <value>{0} / {1} फ़ाइलें (शेष {2})</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
+    <value>खाता लॉक है। कोटा देखने के लिए पहले अनलॉक करें।</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
+    <value>कृपया पहले खाता और सुरक्षा टैब में साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
+    <value>दैनिक ऑपरेशन</value>
+  </data>
+  <data name="CloudSync_QuotaRefreshBtn" xml:space="preserve">
+    <value>रीफ़्रेश</value>
+  </data>
+  <data name="CloudSync_QuotaResetInfo" xml:space="preserve">
+    <value>दिनांक: {0} · अगला रीसेट: {1}</value>
+  </data>
+  <data name="CloudSync_QuotaStorageLabel" xml:space="preserve">
+    <value>क्लाउड स्टोरेज</value>
+  </data>
+  <data name="CloudSync_QuotaStorageValue" xml:space="preserve">
+    <value>{0} / {1} (शेष {2})</value>
+  </data>
+  <data name="CloudSync_QuotaTitle" xml:space="preserve">
+    <value>क्लाउड स्टोरेज व दैनिक कोटा</value>
+  </data>
+  <data name="CloudSync_QuotaUploadsLabel" xml:space="preserve">
+    <value>दैनिक अपलोड</value>
+  </data>
+  <data name="CloudSync_QuotaUsedRemaining" xml:space="preserve">
+    <value>{0} / {1} उपयोग (शेष {2})</value>
+  </data>
+  <data name="CloudSync_ReadFileFailedTitle" xml:space="preserve">
+    <value>फ़ाइल पढ़ने में विफल</value>
+  </data>
+  <data name="CloudSync_RefreshBtn" xml:space="preserve">
+    <value>रीफ़्रेश</value>
+  </data>
+  <data name="CloudSync_RefreshDoneTitle" xml:space="preserve">
+    <value>रीफ़्रेश हुआ</value>
+  </data>
+  <data name="CloudSync_RefreshFailedTitle" xml:space="preserve">
+    <value>रीफ़्रेश विफल</value>
+  </data>
+  <data name="CloudSync_RefreshListBtn" xml:space="preserve">
+    <value>रीफ़्रेश</value>
+  </data>
+  <data name="CloudSync_RefreshStatusBtn" xml:space="preserve">
+    <value>रीफ़्रेश</value>
+  </data>
+  <data name="CloudSync_RefreshStatusResultFormat" xml:space="preserve">
+    <value>खाता स्थिति: {0}।</value>
+  </data>
+  <data name="CloudSync_RegisterFailedTitle" xml:space="preserve">
+    <value>पंजीकरण विफल</value>
+  </data>
+  <data name="CloudSync_RenameConfirmBtn" xml:space="preserve">
+    <value>नाम बदलें</value>
+  </data>
+  <data name="CloudSync_RenameFailedTitle" xml:space="preserve">
+    <value>नाम बदलना विफल</value>
+  </data>
+  <data name="CloudSync_RenameNewHeader" xml:space="preserve">
+    <value>नया नाम</value>
+  </data>
+  <data name="CloudSync_RenameOldName" xml:space="preserve">
+    <value>वर्तमान नाम: {0}</value>
+  </data>
+  <data name="CloudSync_RenameOverwriteCheck" xml:space="preserve">
+    <value>लक्ष्य नाम मौजूद होने पर बदलें</value>
+  </data>
+  <data name="CloudSync_RenameSuccessTitle" xml:space="preserve">
+    <value>नाम बदला गया</value>
+  </data>
+  <data name="CloudSync_RenameTitle" xml:space="preserve">
+    <value>संग्रह नाम बदलें</value>
+  </data>
+  <data name="CloudSync_ResetFailedTitle" xml:space="preserve">
+    <value>रीसेट विफल</value>
+  </data>
+  <data name="CloudSync_SaveFileFailedTitle" xml:space="preserve">
+    <value>फ़ाइल सहेजने में विफल</value>
+  </data>
+  <data name="CloudSync_SaveSuccessDetail" xml:space="preserve">
+    <value>संग्रह "{0}" को {1} पर सहेजा गया।</value>
+  </data>
+  <data name="CloudSync_SaveSuccessTitle" xml:space="preserve">
+    <value>सहेजा गया</value>
+  </data>
+  <data name="CloudSync_SecurityActionsTitle" xml:space="preserve">
+    <value>सुरक्षा और खाता</value>
+  </data>
+  <data name="CloudSync_SelectedFileFormat" xml:space="preserve">
+    <value>चयनित: {0}</value>
+  </data>
+  <data name="CloudSync_SendFailedTitle" xml:space="preserve">
+    <value>भेजने में विफल</value>
+  </data>
+  <data name="CloudSync_SendingEmail" xml:space="preserve">
+    <value>सत्यापन ईमेल भेजा जा रहा है...</value>
+  </data>
+  <data name="CloudSync_SendOtpBtn" xml:space="preserve">
+    <value>कोड भेजें</value>
+  </data>
+  <data name="CloudSync_SessionExpiredTitle" xml:space="preserve">
+    <value>सत्र समाप्त</value>
+  </data>
+  <data name="CloudSync_SettingsCaption" xml:space="preserve">
+    <value>क्लाउड खाता, स्टोरेज व दैनिक कोटा प्रबंधित करें और उपलब्धियों व विश डेटा को सिंक करें</value>
+  </data>
+  <data name="CloudSync_SettingsTitle" xml:space="preserve">
+    <value>FufuLauncher क्लाउड संग्रह</value>
+  </data>
+  <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
+    <value>{0} (मूल {1})</value>
+  </data>
+  <data name="CloudSync_StartUploadBtn" xml:space="preserve">
+    <value>अपलोड करें</value>
+  </data>
+  <data name="CloudSync_StatusLocked" xml:space="preserve">
+    <value>लॉक किया गया</value>
+  </data>
+  <data name="CloudSync_StatusNormal" xml:space="preserve">
+    <value>सामान्य</value>
+  </data>
+  <data name="CloudSync_StatusSuffixLocked" xml:space="preserve">
+    <value>{0} · लॉक</value>
+  </data>
+  <data name="CloudSync_StatusSuffixNormal" xml:space="preserve">
+    <value>{0} · सामान्य</value>
+  </data>
+  <data name="CloudSync_SubmitLogin" xml:space="preserve">
+    <value>साइन इन करें</value>
+  </data>
+  <data name="CloudSync_SubmitRegister" xml:space="preserve">
+    <value>पंजीकरण व साइन इन</value>
+  </data>
+  <data name="CloudSync_SubmitReset" xml:space="preserve">
+    <value>पासवर्ड रीसेट करें</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
+    <value>उपलब्धियां</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUigf" xml:space="preserve">
+    <value>विश</value>
+  </data>
+  <data name="CloudSync_UnlockAccountBtn" xml:space="preserve">
+    <value>खाता अनलॉक करें (ईमेल सत्यापन)</value>
+  </data>
+  <data name="CloudSync_UnlockDesc" xml:space="preserve">
+    <value>पहुंच बहाल करने के लिए ईमेल सत्यापन पूरा करें।</value>
+  </data>
+  <data name="CloudSync_UnlockTitle" xml:space="preserve">
+    <value>खाता अनलॉक करें</value>
+  </data>
+  <data name="CloudSync_UpgradeActiveFormat" xml:space="preserve">
+    <value>सक्रिय अवधि: {0}{1}</value>
+  </data>
+  <data name="CloudSync_UpgradeDeltaFormat" xml:space="preserve">
+    <value> (स्पेस +{0}, फ़ाइलें +{1}, अपलोड +{2}, हटाएं +{3}, ऑप्स +{4})</value>
+  </data>
+  <data name="CloudSync_UpgradeDisclaimer" xml:space="preserve">
+    <value>रिडीम कोड केवल डेवलपर डीबगिंग के लिए हैं और इन्हें खरीदा नहीं जा सकता।</value>
+  </data>
+  <data name="CloudSync_UpgradeInactive" xml:space="preserve">
+    <value>कोई सक्रिय अपग्रेड नहीं है। सीमा बढ़ाने के लिए सक्रियण कोड उपयोग करें।</value>
+  </data>
+  <data name="CloudSync_UpgradeTitle" xml:space="preserve">
+    <value>कोटा अपग्रेड कोड</value>
+  </data>
+  <data name="CloudSync_UploadDataTypeHeader" xml:space="preserve">
+    <value>डेटा प्रकार</value>
+  </data>
+  <data name="CloudSync_UploadFileDialogTitle" xml:space="preserve">
+    <value>स्थानीय संग्रह अपलोड</value>
+  </data>
+  <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
+    <value>स्थानीय फ़ाइल अपलोड</value>
+  </data>
+  <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
+    <value>उपलब्धियां</value>
+  </data>
+  <data name="CloudSync_UploadTypeUigfOption" xml:space="preserve">
+    <value>विश रिकॉर्ड</value>
+  </data>
+  <data name="CloudSync_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher क्लाउड संग्रह</value>
+  </data>
 </root>

@@ -145,7 +145,7 @@ public sealed partial class AccountPage : Page
         var rippleButtons = new[]
         {
             BtnSwitchAccount, BtnRefreshInfo, BtnGenshinData, BtnGachaAnalysis, BtnSecurityCenter, BtnLockAccount,
-            BtnCopyCookie, BtnRefreshCookie, BtnDeleteAccount, BtnLogout
+            BtnCopyCookie, BtnRefreshCookie, BtnCloudSync, BtnDeleteAccount, BtnLogout
         };
         foreach (var btn in rippleButtons)
         {
@@ -355,12 +355,17 @@ public sealed partial class AccountPage : Page
     }
 
 
+    private void OnCloudSyncClicked(object sender, RoutedEventArgs e)
+    {
+        CloudSyncWindow.ShowOrActivate();
+    }
+
     private void AdjustButtonSpacing()
     {
         if (BtnGrid == null || ProfileCard == null) return;
 
         const int maxSpacing = 28;
-        const int buttonCount = 10;
+        const int buttonCount = 11;
         const double titleBarOffset = 40;
         const double outerMargin = 36;
         const double safetyMargin = 16;
@@ -383,6 +388,7 @@ public sealed partial class AccountPage : Page
         totalButtonsHeight += BtnLockAccount?.ActualHeight ?? 44;
         totalButtonsHeight += BtnCopyCookie?.ActualHeight ?? 44;
         totalButtonsHeight += BtnRefreshCookie?.ActualHeight ?? 44;
+        totalButtonsHeight += BtnCloudSync?.ActualHeight ?? 44;
         totalButtonsHeight += BtnDeleteAccount?.ActualHeight ?? 44;
         totalButtonsHeight += BtnLogout?.ActualHeight ?? 44;
 

@@ -1490,7 +1490,7 @@
     <value>自定义名称(不含 .lnk,留空用默认)</value>
   </data>
   <data name="Desc_ShortcutDescription" xml:space="preserve">
-    <value>通过 FufuLauncher 注入启动原神</value>
+    <value>通过FufuLauncher注入启动原神</value>
   </data>
   <data name="Title_ShortcutCreated" xml:space="preserve">
     <value>快捷方式已创建</value>
@@ -1541,7 +1541,7 @@
 请检查您的游戏路径设置是否正确指向了游戏安装目录</value>
   </data>
   <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve">
-    <value>当前为国际服客户端，不允许切换到B服，请通过服务器转换来切换到中国服务器！</value>
+    <value>当前为国际服客户端，无法切换到B服，请通过服务器转换来切换到中国服务器！</value>
   </data>
   <data name="Btn_SwitchToOfficialServer" xml:space="preserve">
     <value>切换到 官方服务器</value>
@@ -4881,7 +4881,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>注入进程发生异常: {0}</value>
   </data>
   <data name="Program_ErrorTitle" xml:space="preserve">
-    <value>FufuLauncher 错误</value>
+    <value>FufuLauncher错误</value>
   </data>
   <data name="IniFile_AccessDenied" xml:space="preserve">
     <value>拒绝访问 请检查文件或文件夹是否被设置为"只读"，或者尝试以管理员身份重新运行启动器</value>
@@ -5458,7 +5458,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>环比上期</value>
   </data>
   <data name="DataPage_DetailTitle" xml:space="preserve">
-    <value>{0} · 综合分析</value>
+    <value>{0} - 综合分析</value>
   </data>
   <data name="DataPage_DetailWeapons" xml:space="preserve">
     <value>武器选择分布</value>
@@ -5731,7 +5731,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>当前没有进行中的角色卡池。</value>
   </data>
   <data name="DataPage_BannerAdviceItem" xml:space="preserve">
-    <value>{0}（{1} · 深渊登场 {2}）</value>
+    <value>{0}（{1} - 深渊登场 {2}）</value>
   </data>
   <data name="DataPage_ListSeparator" xml:space="preserve">
     <value>、</value>
@@ -6277,7 +6277,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>刷新</value>
   </data>
   <data name="OfficialBgWindow_SummaryFormat" xml:space="preserve">
-    <value>来源：{0} · 共 {1} 项资源</value>
+    <value>来源：{0} - 共 {1} 项资源</value>
   </data>
   <data name="OfficialBgWindow_Loading" xml:space="preserve">
     <value>正在获取官方背景资源...</value>
@@ -6750,7 +6750,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>在米游社风控验证码弹窗中显示来源说明；关闭后仅隐藏文字，验证功能不受影响。</value>
   </data>
   <data name="CaptchaNoticeWatermark" xml:space="preserve">
-    <value>米游社便签 · 人机验证</value>
+    <value>米游社便签 - 人机验证</value>
   </data>
   <data name="CaptchaNoticeTitle" xml:space="preserve">
     <value>此验证来自米游社便签</value>
@@ -7065,7 +7065,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>米游社要求安全验证。点击“验证并发布”完成官方验证码后提交本次评论。</value>
   </data>
   <data name="ModTrust_Title" xml:space="preserve">
-    <value>代码签名信任（FufuLauncher CA）</value>
+    <value>代码签名信任（FufuLauncherCA）</value>
   </data>
   <data name="ModTrust_Loading" xml:space="preserve">
     <value>正在读取信任状态…</value>
@@ -7205,7 +7205,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>仅检测主插件</value>
   </data>
   <data name="PluginConflictMainOnlyCaption" xml:space="preserve">
-    <value>只检查 FufuLauncher.UnlockerIsland.dll；关闭后检查所有插件 DLL</value>
+    <value>只检查FufuLauncher.UnlockerIsland.dll；关闭后检查所有插件 DLL</value>
   </data>
   <data name="ModTrust_ModeTitle" xml:space="preserve">
     <value>签名无效时的处理</value>
@@ -7313,7 +7313,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>确认登录</value>
   </data>
   <data name="MiyousheQr_SelectionHint" xml:space="preserve">
-    <value>拖动鼠标框选二维码 · Esc 或鼠标右键取消</value>
+    <value>拖动鼠标框选二维码 - Esc 或鼠标右键取消</value>
   </data>
   <data name="MiyousheQr_Genshin" xml:space="preserve">
     <value>原神</value>
@@ -7526,13 +7526,27 @@ UIGF v4.x/3.0/2.x</value>
     <value>以下配置项未经关闭警告确认，已自动恢复为开启状态：
 {0}</value>
   </data>
-  <data name="PluginStoreArchivePasswordTitle" xml:space="preserve"><value>压缩包解压密码</value></data>
-  <data name="PluginStoreArchivePasswordPlaceholder" xml:space="preserve"><value>请输入压缩包密码</value></data>
-  <data name="PluginStoreArchivePasswordPrompt" xml:space="preserve"><value>“{0}”需要解压密码。</value></data>
-  <data name="PluginStoreArchivePasswordRetry" xml:space="preserve"><value>“{0}”的密码不正确，或压缩包已损坏。请重新输入密码后重试解压。</value></data>
-  <data name="PluginStoreArchivePasswordExtract" xml:space="preserve"><value>解压</value></data>
-  <data name="PluginStoreArchivePasswordCancel" xml:space="preserve"><value>取消</value></data>
-  <data name="PluginStoreArchivePasswordUnavailable" xml:space="preserve"><value>压缩包需要密码，但无法打开密码输入窗口。</value></data>
+  <data name="PluginStoreArchivePasswordTitle" xml:space="preserve">
+    <value>压缩包解压密码</value>
+  </data>
+  <data name="PluginStoreArchivePasswordPlaceholder" xml:space="preserve">
+    <value>请输入压缩包密码</value>
+  </data>
+  <data name="PluginStoreArchivePasswordPrompt" xml:space="preserve">
+    <value>“{0}”需要解压密码。</value>
+  </data>
+  <data name="PluginStoreArchivePasswordRetry" xml:space="preserve">
+    <value>“{0}”的密码不正确，或压缩包已损坏。请重新输入密码后重试解压。</value>
+  </data>
+  <data name="PluginStoreArchivePasswordExtract" xml:space="preserve">
+    <value>解压</value>
+  </data>
+  <data name="PluginStoreArchivePasswordCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="PluginStoreArchivePasswordUnavailable" xml:space="preserve">
+    <value>压缩包需要密码，但无法打开密码输入窗口。</value>
+  </data>
   <data name="SectionServiceStatus" xml:space="preserve">
     <value>服务状态</value>
   </data>
@@ -8755,7 +8769,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>周期挑战</value>
   </data>
   <data name="CycleChallenge_Subtitle" xml:space="preserve">
-    <value>深境螺旋 · 幻想真境剧诗 · 幽境危战</value>
+    <value>深境螺旋 - 幻想真境剧诗 - 幽境危战</value>
   </data>
   <data name="CycleChallenge_Refresh" xml:space="preserve">
     <value>刷新</value>
@@ -9244,7 +9258,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>连接地址</value>
   </data>
   <data name="Mcp_StatusRunning" xml:space="preserve">
-    <value>服务运行中 · 端口 {0}</value>
+    <value>服务运行中 - 端口 {0}</value>
   </data>
   <data name="Mcp_StatusEnabledNotRunning" xml:space="preserve">
     <value>已启用，但服务未能启动</value>
@@ -9496,7 +9510,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>查看</value>
   </data>
   <data name="Mcp_AuditSummaryFormat" xml:space="preserve">
-    <value>连接 {0} · 调用 {1} · 失败 {2}</value>
+    <value>连接 {0} - 调用 {1} - 失败 {2}</value>
   </data>
   <data name="Mcp_AuditArchivedCount" xml:space="preserve">
     <value>已归档 {0} 条</value>
@@ -9724,13 +9738,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>补货 {0:MM-dd HH:mm}</value>
   </data>
   <data name="MiyousheShop_StartTime" xml:space="preserve">
-    <value>开始兑换 · 北京时间</value>
+    <value>开始兑换 - 北京时间</value>
   </data>
   <data name="MiyousheShop_NextBatchTime" xml:space="preserve">
-    <value>下一批开放 · 北京时间</value>
+    <value>下一批开放 - 北京时间</value>
   </data>
   <data name="MiyousheShop_EndTime" xml:space="preserve">
-    <value>兑换截止 · 北京时间</value>
+    <value>兑换截止 - 北京时间</value>
   </data>
   <data name="MiyousheShop_NextBatchQuantity" xml:space="preserve">
     <value>下批共 {0:N0} 件</value>
@@ -9911,5 +9925,809 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="MiyoushePendant_Empty" xml:space="preserve">
     <value>暂无头像框。</value>
+  </data>
+  <data name="CloudSync_AccountBtn" xml:space="preserve">
+    <value>云存档中心</value>
+  </data>
+  <data name="CloudSync_AccountFullBtn" xml:space="preserve">
+    <value>FufuLauncher云存档中心</value>
+  </data>
+  <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
+    <value>查看绑定邮箱、保护状态以及安全选项</value>
+  </data>
+  <data name="CloudSync_AccountSectionTitle" xml:space="preserve">
+    <value>当前账户信息</value>
+  </data>
+  <data name="CloudSync_AchievementBtn" xml:space="preserve">
+    <value>云端存档管理</value>
+  </data>
+  <data name="CloudSync_AchievementConfirmOverwriteMsg" xml:space="preserve">
+    <value>确定使用当前成就进度覆写云端存档「{0}」吗？</value>
+  </data>
+  <data name="CloudSync_AchievementCurrentProfile" xml:space="preserve">
+    <value>当前本地档案：{0}（支持同一账号上传多份，或不同账号分别命名上传）</value>
+  </data>
+  <data name="CloudSync_AchievementEmptyCloud" xml:space="preserve">
+    <value>云端暂无成就存档，可在上方输入名称并上传当前进度。</value>
+  </data>
+  <data name="CloudSync_AchievementImportBtn" xml:space="preserve">
+    <value>拉取导入</value>
+  </data>
+  <data name="CloudSync_AchievementImportedMsg" xml:space="preserve">
+    <value>已从云端存档「{0}」合并导入，共更新 {1} 个成就进度。</value>
+  </data>
+  <data name="CloudSync_AchievementImportFailedTitle" xml:space="preserve">
+    <value>导入失败</value>
+  </data>
+  <data name="CloudSync_AchievementImportSuccessTitle" xml:space="preserve">
+    <value>导入成功</value>
+  </data>
+  <data name="CloudSync_AchievementInvalidFormatMsg" xml:space="preserve">
+    <value>云端存档数据格式异常，无法导入。</value>
+  </data>
+  <data name="CloudSync_AchievementListSummary" xml:space="preserve">
+    <value>成就云存档 {0} 份 - 全库 {1}/{2} - 空间 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
+    <value>请先在「FufuLauncher云存档中心」登录您的云存档账号，然后再管理云端成就存档。</value>
+  </data>
+  <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
+    <value>已从云端「{0}」同步 {1} 个成就</value>
+  </data>
+  <data name="CloudSync_AchievementTitle" xml:space="preserve">
+    <value>成就追踪 -FufuLauncher云存档管理</value>
+  </data>
+  <data name="CloudSync_AchievementTooltip" xml:space="preserve">
+    <value>管理FufuLauncher云端成就存档</value>
+  </data>
+  <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
+    <value>上传当前成就进度到云端</value>
+  </data>
+  <data name="CloudSync_ActionSuccessTitleFormat" xml:space="preserve">
+    <value>{0}成功</value>
+  </data>
+  <data name="CloudSync_ActivateBtn" xml:space="preserve">
+    <value>兑换激活码</value>
+  </data>
+  <data name="CloudSync_ActivateFailedTitle" xml:space="preserve">
+    <value>兑换失败</value>
+  </data>
+  <data name="CloudSync_ActivatePromptEmpty" xml:space="preserve">
+    <value>请输入激活码。</value>
+  </data>
+  <data name="CloudSync_ActivationPlaceholder" xml:space="preserve">
+    <value>请输入激活码</value>
+  </data>
+  <data name="CloudSync_ArchiveNameHeader" xml:space="preserve">
+    <value>存档名称</value>
+  </data>
+  <data name="CloudSync_ArchiveNamePlaceholder" xml:space="preserve">
+    <value>支持英文、数字、_、-、.</value>
+  </data>
+  <data name="CloudSync_ArchivesDefaultSubtitle" xml:space="preserve">
+    <value>登录后可查看与管理已上传的云端存档</value>
+  </data>
+  <data name="CloudSync_ArchivesEmpty" xml:space="preserve">
+    <value>暂无云端存档记录。</value>
+  </data>
+  <data name="CloudSync_ArchivesFilteredEmpty" xml:space="preserve">
+    <value>当前筛选条件下暂无云端存档记录。</value>
+  </data>
+  <data name="CloudSync_ArchivesLoadFailedTitle" xml:space="preserve">
+    <value>加载失败</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedEmpty" xml:space="preserve">
+    <value>账户处于锁定状态，请先在「账户与安全」通过邮箱验证解锁。</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedHint" xml:space="preserve">
+    <value>账户已锁定，暂无法访问云端存档</value>
+  </data>
+  <data name="CloudSync_ArchivesSignInEmpty" xml:space="preserve">
+    <value>请先登录后查看云端存档。</value>
+  </data>
+  <data name="CloudSync_ArchivesSubtitle" xml:space="preserve">
+    <value>查看、导出、重命名、覆写或删除已保存的云端存档</value>
+  </data>
+  <data name="CloudSync_ArchivesSummary" xml:space="preserve">
+    <value>共 {0} / {1} 个云端存档 - 已占用 {2} / {3}</value>
+  </data>
+  <data name="CloudSync_ArchivesTitle" xml:space="preserve">
+    <value>云端存档列表与管理</value>
+  </data>
+  <data name="CloudSync_AuthSubtitle" xml:space="preserve">
+    <value>登录后即可在不同设备间安全备份与同步成就进度和祈愿记录。</value>
+  </data>
+  <data name="CloudSync_AuthTitle" xml:space="preserve">
+    <value>登录或注册FufuLauncher云存档账号</value>
+  </data>
+  <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
+    <value>已在本机安全保存登录状态</value>
+  </data>
+  <data name="CloudSync_BtnDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="CloudSync_BtnExportSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="CloudSync_BtnOverwrite" xml:space="preserve">
+    <value>覆写</value>
+  </data>
+  <data name="CloudSync_BtnRename" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="CloudSync_BusyWaitMsg" xml:space="preserve">
+    <value>当前正在执行其他任务，请稍后再试。</value>
+  </data>
+  <data name="CloudSync_CancelBtn" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CloudSync_CannotOperateTitle" xml:space="preserve">
+    <value>无法操作</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpened" xml:space="preserve">
+    <value>已在浏览器中打开验证页面，完成后将自动继续...</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpenFailed" xml:space="preserve">
+    <value>无法打开系统浏览器，请检查默认浏览器设置。</value>
+  </data>
+  <data name="CloudSync_CaptchaHint" xml:space="preserve">
+    <value>请完成下方安全验证，验证完成后窗口将自动关闭。</value>
+  </data>
+  <data name="CloudSync_CaptchaLoadError" xml:space="preserve">
+    <value>验证页面加载失败，请点击右侧按钮在浏览器中继续。</value>
+  </data>
+  <data name="CloudSync_CaptchaOpenBrowser" xml:space="preserve">
+    <value>在浏览器中打开</value>
+  </data>
+  <data name="CloudSync_CaptchaSubmitting" xml:space="preserve">
+    <value>正在确认验证结果...</value>
+  </data>
+  <data name="CloudSync_CaptchaTitle" xml:space="preserve">
+    <value>安全验证</value>
+  </data>
+  <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
+    <value>安全验证 -FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CloseBtn" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="CloudSync_ConfirmBtn" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="CloudSync_ConfirmLockBtn" xml:space="preserve">
+    <value>确认锁定</value>
+  </data>
+  <data name="CloudSync_ConfirmNewPasswordHeader" xml:space="preserve">
+    <value>确认新密码</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteBtn" xml:space="preserve">
+    <value>确认覆写</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteDiskMsg" xml:space="preserve">
+    <value>确定使用本地文件「{0}」覆写云端存档「{1}」吗？</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteTitle" xml:space="preserve">
+    <value>确认覆写云存档</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>请再次输入密码</value>
+  </data>
+  <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
+    <value>确认解锁</value>
+  </data>
+  <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
+    <value>注销账户并清除数据</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneDetail" xml:space="preserve">
+    <value>账户与全部云端数据已被永久删除。</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneTitle" xml:space="preserve">
+    <value>账户已注销</value>
+  </data>
+  <data name="CloudSync_DeleteAccountTitle" xml:space="preserve">
+    <value>永久注销账户</value>
+  </data>
+  <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
+    <value>注销账户将永久删除您的全部云端成就、祈愿存档以及账户信息，且无法恢复，务必三思而后行！</value>
+  </data>
+  <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
+    <value>清空全部云端数据</value>
+  </data>
+  <data name="CloudSync_DeleteAllConfirmBtn" xml:space="preserve">
+    <value>确认清空</value>
+  </data>
+  <data name="CloudSync_DeleteAllFailedTitle" xml:space="preserve">
+    <value>清空失败</value>
+  </data>
+  <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
+    <value>确定要清空当前账号下所有云端成就与祈愿存档吗？（账号本身将被保留，但全部云端文件将被永久清除，务必三思而后行！）</value>
+  </data>
+  <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
+    <value>已清空</value>
+  </data>
+  <data name="CloudSync_DeleteAllTitle" xml:space="preserve">
+    <value>清空全部云端数据</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveMsg" xml:space="preserve">
+    <value>确定要永久删除云端存档「{0}」吗？此操作不可撤销。</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveTitle" xml:space="preserve">
+    <value>删除云端存档</value>
+  </data>
+  <data name="CloudSync_DeleteConfirmBtn" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="CloudSync_DeleteFailedTitle" xml:space="preserve">
+    <value>删除失败</value>
+  </data>
+  <data name="CloudSync_DeleteSuccessTitle" xml:space="preserve">
+    <value>已删除</value>
+  </data>
+  <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
+    <value>下载失败</value>
+  </data>
+  <data name="CloudSync_EmailHeader" xml:space="preserve">
+    <value>邮箱地址</value>
+  </data>
+  <data name="CloudSync_EmailOtpSentDetail" xml:space="preserve">
+    <value>验证码已发送至{0}，请在10分钟内查收输入。</value>
+  </data>
+  <data name="CloudSync_EmailPlaceholder" xml:space="preserve">
+    <value>请输入邮箱地址</value>
+  </data>
+  <data name="CloudSync_ErrAccountNotFound" xml:space="preserve">
+    <value>未找到该邮箱对应的账户。</value>
+  </data>
+  <data name="CloudSync_ErrActivationDisabled" xml:space="preserve">
+    <value>当前暂未开放激活码兑换功能。</value>
+  </data>
+  <data name="CloudSync_ErrActivationExhausted" xml:space="preserve">
+    <value>该激活码的可用名额已领完。</value>
+  </data>
+  <data name="CloudSync_ErrActivationInvalid" xml:space="preserve">
+    <value>激活码无效，请核对后重试。</value>
+  </data>
+  <data name="CloudSync_ErrActivationRedeemed" xml:space="preserve">
+    <value>当前账户已兑换过该激活码，同一激活码仅可兑换一次。</value>
+  </data>
+  <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
+    <value>云端已存在同名存档；如需替换，请勾选“若存在同名存档则直接覆写”。</value>
+  </data>
+  <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
+    <value>未找到目标云端存档，请刷新列表后重试。</value>
+  </data>
+  <data name="CloudSync_ErrAuthRequired" xml:space="preserve">
+    <value>登录状态已过期，请重新登录。</value>
+  </data>
+  <data name="CloudSync_ErrCaptchaFailed" xml:space="preserve">
+    <value>安全验证已过期或未通过，请重试。</value>
+  </data>
+  <data name="CloudSync_ErrEmailRegistered" xml:space="preserve">
+    <value>该邮箱已注册，请直接登录或使用重置密码。</value>
+  </data>
+  <data name="CloudSync_ErrEnterCodeFirst" xml:space="preserve">
+    <value>请先获取并输入邮箱验证码。</value>
+  </data>
+  <data name="CloudSync_ErrFileLimit" xml:space="preserve">
+    <value>云端存档数量已达上限，请先删除旧存档或直接覆写已有存档。</value>
+  </data>
+  <data name="CloudSync_ErrGeneric" xml:space="preserve">
+    <value>操作未能完成，请检查网络连接后重试。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>邮箱或密码错误，请检查后重试。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidEmail" xml:space="preserve">
+    <value>请输入有效的邮箱地址。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidFormat" xml:space="preserve">
+    <value>存档文件格式校验未通过，请确认文件内容完整有效。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
+    <value>存档名称仅支持1-64位英文、数字、下划线(_)、中划线(-)或点(.)，且必须以字母或数字开头、不能以点结尾或包含连续两点。</value>
+  </data>
+  <data name="CloudSync_ErrLocked" xml:space="preserve">
+    <value>当前账户处于锁定状态，无法访问或修改云存档。请前往「云存档中心 -&gt; 账户与安全」通过邮箱验证解锁。</value>
+  </data>
+  <data name="CloudSync_ErrOtpAttempts" xml:space="preserve">
+    <value>验证码尝试次数过多，请重新获取验证码。</value>
+  </data>
+  <data name="CloudSync_ErrOtpCooldown" xml:space="preserve">
+    <value>操作过于频繁，请稍后再试。</value>
+  </data>
+  <data name="CloudSync_ErrOtpExpired" xml:space="preserve">
+    <value>邮箱验证码已过期，请重新发送。</value>
+  </data>
+  <data name="CloudSync_ErrOtpInvalid" xml:space="preserve">
+    <value>邮箱验证码错误，请检查后重试。</value>
+  </data>
+  <data name="CloudSync_ErrPasswordLength" xml:space="preserve">
+    <value>密码长度须为 8 至 128 个字符。</value>
+  </data>
+  <data name="CloudSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>两次输入的密码不一致。</value>
+  </data>
+  <data name="CloudSync_ErrPayloadTooLarge" xml:space="preserve">
+    <value>上传数据体积超出允许限制。</value>
+  </data>
+  <data name="CloudSync_ErrQuotaExceeded" xml:space="preserve">
+    <value>今日操作或配额已达上限，请明日配额重置后再试。</value>
+  </data>
+  <data name="CloudSync_ErrRateLimited" xml:space="preserve">
+    <value>请求过于频繁，请稍后再试。</value>
+  </data>
+  <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
+    <value>云端存储空间不足，可清理部分旧存档或使用激活码扩容。</value>
+  </data>
+  <data name="CloudSync_ErrUnsupportedDataType" xml:space="preserve">
+    <value>不支持的存档数据类型。</value>
+  </data>
+  <data name="CloudSync_FileFilterJson" xml:space="preserve">
+    <value>存档文件</value>
+  </data>
+  <data name="CloudSync_FilterAll" xml:space="preserve">
+    <value>全部类型</value>
+  </data>
+  <data name="CloudSync_FilterUiaf" xml:space="preserve">
+    <value>成就存档</value>
+  </data>
+  <data name="CloudSync_FilterUigf" xml:space="preserve">
+    <value>祈愿记录</value>
+  </data>
+  <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
+    <value>全部本地账号合并（共 {0} 个 UID）</value>
+  </data>
+  <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
+    <value>确定使用所选本地祈愿记录覆写云端存档「{0}」吗？</value>
+  </data>
+  <data name="CloudSync_GachaEmptyCloud" xml:space="preserve">
+    <value>云端暂无祈愿记录存档，可选择账号数据并上传。</value>
+  </data>
+  <data name="CloudSync_GachaEmptyDesc" xml:space="preserve">
+    <value>同步与管理多账号祈愿云端存档</value>
+  </data>
+  <data name="CloudSync_GachaEmptyTitle" xml:space="preserve">
+    <value>从云端恢复 / 管理</value>
+  </data>
+  <data name="CloudSync_GachaExportErrorTitle" xml:space="preserve">
+    <value>生成存档失败</value>
+  </data>
+  <data name="CloudSync_GachaImportBtn" xml:space="preserve">
+    <value>恢复导入</value>
+  </data>
+  <data name="CloudSync_GachaImportedMsg" xml:space="preserve">
+    <value>已从云端存档「{0}」导入 {1} 个账号，共合并 {2} 条祈愿记录。</value>
+  </data>
+  <data name="CloudSync_GachaListSummary" xml:space="preserve">
+    <value>祈愿云存档 {0} 份 - 全库 {1}/{2} - 空间 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_GachaNoLocalDataHint" xml:space="preserve">
+    <value>当前本地暂无祈愿记录，您仍可直接从下方云端存档恢复历史记录。</value>
+  </data>
+  <data name="CloudSync_GachaNoRecordsSelected" xml:space="preserve">
+    <value>所选账号下暂无有效祈愿记录可供上传。</value>
+  </data>
+  <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
+    <value>请先在「FufuLauncher云存档中心」登录您的云存档账号，然后再管理祈愿云端存档。</value>
+  </data>
+  <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
+    <value>选择要上传的本地账号数据</value>
+  </data>
+  <data name="CloudSync_GachaTitle" xml:space="preserve">
+    <value>祈愿分析 -FufuLauncher云存档管理</value>
+  </data>
+  <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
+    <value>云端存档</value>
+  </data>
+  <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
+    <value>UID {0}（{1} 条记录）</value>
+  </data>
+  <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
+    <value>上传所选祈愿记录到云端</value>
+  </data>
+  <data name="CloudSync_GotoUnlockBtn" xml:space="preserve">
+    <value>前往解锁</value>
+  </data>
+  <data name="CloudSync_HintTitle" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="CloudSync_InputCurrentPwd" xml:space="preserve">
+    <value>请输入当前登录密码确认</value>
+  </data>
+  <data name="CloudSync_InputOtpRequired" xml:space="preserve">
+    <value>请先输入邮箱验证码。</value>
+  </data>
+  <data name="CloudSync_LabelAutoLogin" xml:space="preserve">
+    <value>自动登录</value>
+  </data>
+  <data name="CloudSync_LabelEmail" xml:space="preserve">
+    <value>绑定邮箱</value>
+  </data>
+  <data name="CloudSync_LabelLockedAt" xml:space="preserve">
+    <value>锁定时间</value>
+  </data>
+  <data name="CloudSync_LabelStatus" xml:space="preserve">
+    <value>账户状态</value>
+  </data>
+  <data name="CloudSync_LoadingArchivesText" xml:space="preserve">
+    <value>正在加载云端存档列表</value>
+  </data>
+  <data name="CloudSync_LockAccountBtn" xml:space="preserve">
+    <value>锁定账户（邮箱验证）</value>
+  </data>
+  <data name="CloudSync_LockBlockedDelete" xml:space="preserve">
+    <value>锁定状态下无法注销账户，请先通过邮箱验证解锁。</value>
+  </data>
+  <data name="CloudSync_LockDesc" xml:space="preserve">
+    <value>锁定后将禁止访问与修改云端存档及注销账户；只有手动通过邮箱验证解锁后才能恢复使用。</value>
+  </data>
+  <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
+    <value>锁定状态下无法查看配额或管理云端存档，请先在「账户与安全」完成邮箱验证解锁。</value>
+  </data>
+  <data name="CloudSync_LockedBannerTitle" xml:space="preserve">
+    <value>账户已锁定</value>
+  </data>
+  <data name="CloudSync_LockHint" xml:space="preserve">
+    <value>提示：锁定账户后将暂禁访问、上传或删除云端存档，也无法注销账户；需通过邮箱验证手动解锁后方可恢复正常使用。</value>
+  </data>
+  <data name="CloudSync_LockTitle" xml:space="preserve">
+    <value>锁定账户</value>
+  </data>
+  <data name="CloudSync_LoginFailedTitle" xml:space="preserve">
+    <value>登录失败</value>
+  </data>
+  <data name="CloudSync_LogoutBtn" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
+    <value>确定要退出当前FufuLauncher云存档账号吗？退出后将清除本机保存的登录状态。</value>
+  </data>
+  <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
+    <value>同时退出其他设备上的登录状态</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessDetail" xml:space="preserve">
+    <value>本地登录状态已清除。</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessTitle" xml:space="preserve">
+    <value>已退出登录</value>
+  </data>
+  <data name="CloudSync_ModeLogin" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="CloudSync_ModeRegister" xml:space="preserve">
+    <value>注册账号</value>
+  </data>
+  <data name="CloudSync_ModeReset" xml:space="preserve">
+    <value>重置密码</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccess" xml:space="preserve">
+    <value>兑换成功</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccessDetail" xml:space="preserve">
+    <value>激活码兑换成功，配额扩容已即时生效。</value>
+  </data>
+  <data name="CloudSync_MsgCancelled" xml:space="preserve">
+    <value>已取消</value>
+  </data>
+  <data name="CloudSync_MsgCaptchaCancelled" xml:space="preserve">
+    <value>您已取消安全验证。</value>
+  </data>
+  <data name="CloudSync_MsgDeleteAllSuccess" xml:space="preserve">
+    <value>已清除全部 {0} 个云端存档。</value>
+  </data>
+  <data name="CloudSync_MsgDeleteSuccess" xml:space="preserve">
+    <value>已删除云端存档「{0}」。</value>
+  </data>
+  <data name="CloudSync_MsgLockedSuccess" xml:space="preserve">
+    <value>账户已进入锁定状态。</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedDetail" xml:space="preserve">
+    <value>登录成功，但该账户当前处于锁定状态。请先通过邮箱验证解锁后再访问云端存档。</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedTitle" xml:space="preserve">
+    <value>登录成功（账户已锁定）</value>
+  </data>
+  <data name="CloudSync_MsgLoginRequiredFirst" xml:space="preserve">
+    <value>请先登录。</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccess" xml:space="preserve">
+    <value>登录成功</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccessDetail" xml:space="preserve">
+    <value>登录成功，已为您开启云端同步服务。</value>
+  </data>
+  <data name="CloudSync_MsgOverwritten" xml:space="preserve">
+    <value>已覆写更新云端存档「{0}」。</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>注册成功</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccessDetail" xml:space="preserve">
+    <value>账号注册成功并已自动登录。</value>
+  </data>
+  <data name="CloudSync_MsgRenameSuccess" xml:space="preserve">
+    <value>已重命名为「{0}」。</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccess" xml:space="preserve">
+    <value>密码已重置</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccessDetail" xml:space="preserve">
+    <value>密码修改成功，请使用新密码登录。</value>
+  </data>
+  <data name="CloudSync_MsgUnlockedSuccess" xml:space="preserve">
+    <value>账户已解锁，所有云存档功能已恢复正常。</value>
+  </data>
+  <data name="CloudSync_MsgUploadedNew" xml:space="preserve">
+    <value>已上传新存档「{0}」。</value>
+  </data>
+  <data name="CloudSync_MsgUploadFailedTitle" xml:space="preserve">
+    <value>上传失败</value>
+  </data>
+  <data name="CloudSync_MsgUploadSuccess" xml:space="preserve">
+    <value>上传成功</value>
+  </data>
+  <data name="CloudSync_NavAccount" xml:space="preserve">
+    <value>账户与安全</value>
+  </data>
+  <data name="CloudSync_NavArchives" xml:space="preserve">
+    <value>云端存档</value>
+  </data>
+  <data name="CloudSync_NavQuota" xml:space="preserve">
+    <value>配额与扩容</value>
+  </data>
+  <data name="CloudSync_NotLockedText" xml:space="preserve">
+    <value>未锁定</value>
+  </data>
+  <data name="CloudSync_NotLoggedInShort" xml:space="preserve">
+    <value>未登录</value>
+  </data>
+  <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
+    <value>未登录FufuLauncher云存档</value>
+  </data>
+  <data name="CloudSync_OpenBtn" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="CloudSync_OpenCenterBtn" xml:space="preserve">
+    <value>打开云存档中心</value>
+  </data>
+  <data name="CloudSync_OpenFileFailedTitle" xml:space="preserve">
+    <value>打开文件失败</value>
+  </data>
+  <data name="CloudSync_OtpHeader" xml:space="preserve">
+    <value>邮箱验证码</value>
+  </data>
+  <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
+    <value>请输入验证码</value>
+  </data>
+  <data name="CloudSync_OtpSentTitle" xml:space="preserve">
+    <value>验证码已发送</value>
+  </data>
+  <data name="CloudSync_OverwriteExistingCheck" xml:space="preserve">
+    <value>若存在同名存档则直接覆写</value>
+  </data>
+  <data name="CloudSync_OverwriteFailedTitle" xml:space="preserve">
+    <value>覆写失败</value>
+  </data>
+  <data name="CloudSync_OverwriteSuccessTitle" xml:space="preserve">
+    <value>覆写成功</value>
+  </data>
+  <data name="CloudSync_PasswordHeader" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="CloudSync_PasswordNewHeader" xml:space="preserve">
+    <value>新密码</value>
+  </data>
+  <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="CloudSync_PasswordRequired" xml:space="preserve">
+    <value>请输入登录密码。</value>
+  </data>
+  <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
+    <value>设置密码</value>
+  </data>
+  <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
+    <value>刷新查看当前空间与今日配额使用情况</value>
+  </data>
+  <data name="CloudSync_QuotaDeletesLabel" xml:space="preserve">
+    <value>今日删除 / 清理次数</value>
+  </data>
+  <data name="CloudSync_QuotaFailedTitle" xml:space="preserve">
+    <value>获取配额失败</value>
+  </data>
+  <data name="CloudSync_QuotaFilesLabel" xml:space="preserve">
+    <value>存档文件数量</value>
+  </data>
+  <data name="CloudSync_QuotaFilesValue" xml:space="preserve">
+    <value>{0} / {1} 个（剩余 {2} 个）</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
+    <value>当前账户已锁定，暂无法查看配额或使用扩容码；请先通过邮箱验证解锁。</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
+    <value>请先在「账户与安全」中登录FufuLauncher云存档账号。</value>
+  </data>
+  <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
+    <value>今日总操作次数</value>
+  </data>
+  <data name="CloudSync_QuotaRefreshBtn" xml:space="preserve">
+    <value>刷新配额</value>
+  </data>
+  <data name="CloudSync_QuotaResetInfo" xml:space="preserve">
+    <value>统计日期：{0} - 下次配额重置：{1}</value>
+  </data>
+  <data name="CloudSync_QuotaStorageLabel" xml:space="preserve">
+    <value>云端存储空间</value>
+  </data>
+  <data name="CloudSync_QuotaStorageValue" xml:space="preserve">
+    <value>{0} / {1}（剩余 {2}）</value>
+  </data>
+  <data name="CloudSync_QuotaTitle" xml:space="preserve">
+    <value>云端空间与每日配额</value>
+  </data>
+  <data name="CloudSync_QuotaUploadsLabel" xml:space="preserve">
+    <value>今日上传 / 覆写次数</value>
+  </data>
+  <data name="CloudSync_QuotaUsedRemaining" xml:space="preserve">
+    <value>已用 {0} / {1}（剩余 {2}）</value>
+  </data>
+  <data name="CloudSync_ReadFileFailedTitle" xml:space="preserve">
+    <value>读取文件失败</value>
+  </data>
+  <data name="CloudSync_RefreshBtn" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="CloudSync_RefreshDoneTitle" xml:space="preserve">
+    <value>已刷新</value>
+  </data>
+  <data name="CloudSync_RefreshFailedTitle" xml:space="preserve">
+    <value>刷新失败</value>
+  </data>
+  <data name="CloudSync_RefreshListBtn" xml:space="preserve">
+    <value>刷新列表</value>
+  </data>
+  <data name="CloudSync_RefreshStatusBtn" xml:space="preserve">
+    <value>刷新状态</value>
+  </data>
+  <data name="CloudSync_RefreshStatusResultFormat" xml:space="preserve">
+    <value>当前账户状态：{0}。</value>
+  </data>
+  <data name="CloudSync_RegisterFailedTitle" xml:space="preserve">
+    <value>注册失败</value>
+  </data>
+  <data name="CloudSync_RenameConfirmBtn" xml:space="preserve">
+    <value>确定重命名</value>
+  </data>
+  <data name="CloudSync_RenameFailedTitle" xml:space="preserve">
+    <value>重命名失败</value>
+  </data>
+  <data name="CloudSync_RenameNewHeader" xml:space="preserve">
+    <value>新存档名称</value>
+  </data>
+  <data name="CloudSync_RenameOldName" xml:space="preserve">
+    <value>原名称：{0}</value>
+  </data>
+  <data name="CloudSync_RenameOverwriteCheck" xml:space="preserve">
+    <value>若目标名称已存在则覆盖</value>
+  </data>
+  <data name="CloudSync_RenameSuccessTitle" xml:space="preserve">
+    <value>重命名成功</value>
+  </data>
+  <data name="CloudSync_RenameTitle" xml:space="preserve">
+    <value>重命名云端存档</value>
+  </data>
+  <data name="CloudSync_ResetFailedTitle" xml:space="preserve">
+    <value>重置失败</value>
+  </data>
+  <data name="CloudSync_SaveFileFailedTitle" xml:space="preserve">
+    <value>保存文件失败</value>
+  </data>
+  <data name="CloudSync_SaveSuccessDetail" xml:space="preserve">
+    <value>云端存档「{0}」已保存至 {1}。</value>
+  </data>
+  <data name="CloudSync_SaveSuccessTitle" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="CloudSync_SecurityActionsTitle" xml:space="preserve">
+    <value>安全与账户管理</value>
+  </data>
+  <data name="CloudSync_SelectedFileFormat" xml:space="preserve">
+    <value>已选择：{0}</value>
+  </data>
+  <data name="CloudSync_SendFailedTitle" xml:space="preserve">
+    <value>发送失败</value>
+  </data>
+  <data name="CloudSync_SendingEmail" xml:space="preserve">
+    <value>正在发送验证邮件...</value>
+  </data>
+  <data name="CloudSync_SendOtpBtn" xml:space="preserve">
+    <value>发送验证码</value>
+  </data>
+  <data name="CloudSync_SessionExpiredTitle" xml:space="preserve">
+    <value>登录已失效</value>
+  </data>
+  <data name="CloudSync_SettingsCaption" xml:space="preserve">
+    <value>管理云存档账号、查看空间与每日配额，并同步成就与祈愿记录</value>
+  </data>
+  <data name="CloudSync_SettingsTitle" xml:space="preserve">
+    <value>FufuLauncher云存档中心</value>
+  </data>
+  <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
+    <value>{0}（原始 {1}）</value>
+  </data>
+  <data name="CloudSync_StartUploadBtn" xml:space="preserve">
+    <value>开始上传</value>
+  </data>
+  <data name="CloudSync_StatusLocked" xml:space="preserve">
+    <value>已锁定</value>
+  </data>
+  <data name="CloudSync_StatusNormal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="CloudSync_StatusSuffixLocked" xml:space="preserve">
+    <value>{0} - 已锁定</value>
+  </data>
+  <data name="CloudSync_StatusSuffixNormal" xml:space="preserve">
+    <value>{0} - 正常</value>
+  </data>
+  <data name="CloudSync_SubmitLogin" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="CloudSync_SubmitRegister" xml:space="preserve">
+    <value>完成注册并登录</value>
+  </data>
+  <data name="CloudSync_SubmitReset" xml:space="preserve">
+    <value>确认重置密码</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
+    <value>成就存档</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUigf" xml:space="preserve">
+    <value>祈愿记录</value>
+  </data>
+  <data name="CloudSync_UnlockAccountBtn" xml:space="preserve">
+    <value>解锁账户（邮箱验证）</value>
+  </data>
+  <data name="CloudSync_UnlockDesc" xml:space="preserve">
+    <value>完成绑定邮箱验证后，即可解除锁定并恢复全部云存档功能。</value>
+  </data>
+  <data name="CloudSync_UnlockTitle" xml:space="preserve">
+    <value>解锁账户</value>
+  </data>
+  <data name="CloudSync_UpgradeActiveFormat" xml:space="preserve">
+    <value>扩容生效中，有效期至：{0}{1}</value>
+  </data>
+  <data name="CloudSync_UpgradeDeltaFormat" xml:space="preserve">
+    <value>（空间 +{0}，文件 +{1}，上传 +{2}，删除 +{3}，操作 +{4}）</value>
+  </data>
+  <data name="CloudSync_UpgradeDisclaimer" xml:space="preserve">
+    <value>兑换码仅为开发者调试时使用，非付费可得</value>
+  </data>
+  <data name="CloudSync_UpgradeInactive" xml:space="preserve">
+    <value>当前未激活扩容计划，使用有效激活码可提升存储空间与每日配额上限。</value>
+  </data>
+  <data name="CloudSync_UpgradeTitle" xml:space="preserve">
+    <value>激活码配额扩容</value>
+  </data>
+  <data name="CloudSync_UploadDataTypeHeader" xml:space="preserve">
+    <value>数据类型</value>
+  </data>
+  <data name="CloudSync_UploadFileDialogTitle" xml:space="preserve">
+    <value>上传本地存档文件</value>
+  </data>
+  <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
+    <value>上传本地文件</value>
+  </data>
+  <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
+    <value>成就记录</value>
+  </data>
+  <data name="CloudSync_UploadTypeUigfOption" xml:space="preserve">
+    <value>祈愿记录</value>
+  </data>
+  <data name="CloudSync_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher云存档中心</value>
   </data>
 </root>

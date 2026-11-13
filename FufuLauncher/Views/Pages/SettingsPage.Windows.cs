@@ -237,5 +237,10 @@ public sealed partial class SettingsPage
         McpWindow.ShowOrActivate();
     }
 
+    private void OnOpenCloudSyncWindowClick(object sender, RoutedEventArgs e)
+    {
+        CloudSyncWindow.ShowOrActivate();
+    }
+
     #endregion
 }

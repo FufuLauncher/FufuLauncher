@@ -104,6 +104,9 @@ public partial class App
 
                 _ = Task.Run(async () => await GetService<ConstraintService>().RefreshAsync());
 
+                _ = Task.Run(async () =>
+                    await GetService<FufuLauncher.Contracts.Services.ICloudSyncService>().InitializeOnStartupAsync());
+
                 _ = Task.Run(RunStartupUpdateCheckAsync);
 
                 _ = Task.Run(CheckStoragePathsAsync);

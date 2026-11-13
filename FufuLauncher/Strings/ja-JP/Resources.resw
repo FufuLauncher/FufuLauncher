@@ -9182,4 +9182,808 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>統計と問題調査のために利用状況を送信します</value>
   </data>
+  <data name="CloudSync_AccountBtn" xml:space="preserve">
+    <value>クラウド管理</value>
+  </data>
+  <data name="CloudSync_AccountFullBtn" xml:space="preserve">
+    <value>FufuLauncher クラウドアーカイブ</value>
+  </data>
+  <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
+    <value>登録メール、保護状態、およびセキュリティ設定を確認します</value>
+  </data>
+  <data name="CloudSync_AccountSectionTitle" xml:space="preserve">
+    <value>アカウント情報</value>
+  </data>
+  <data name="CloudSync_AchievementBtn" xml:space="preserve">
+    <value>クラウド管理</value>
+  </data>
+  <data name="CloudSync_AchievementConfirmOverwriteMsg" xml:space="preserve">
+    <value>現在のデータでクラウドの「{0}」を上書きしますか？</value>
+  </data>
+  <data name="CloudSync_AchievementCurrentProfile" xml:space="preserve">
+    <value>現在のプロファイル：{0}（1アカウント複数保存や複数アカウント保存に対応）</value>
+  </data>
+  <data name="CloudSync_AchievementEmptyCloud" xml:space="preserve">
+    <value>クラウドに保存されたデータがありません。</value>
+  </data>
+  <data name="CloudSync_AchievementImportBtn" xml:space="preserve">
+    <value>インポート</value>
+  </data>
+  <data name="CloudSync_AchievementImportedMsg" xml:space="preserve">
+    <value>「{0}」を取り込み、{1} 件のアチーブメントを更新しました。</value>
+  </data>
+  <data name="CloudSync_AchievementImportFailedTitle" xml:space="preserve">
+    <value>インポート失敗</value>
+  </data>
+  <data name="CloudSync_AchievementImportSuccessTitle" xml:space="preserve">
+    <value>インポート完了</value>
+  </data>
+  <data name="CloudSync_AchievementInvalidFormatMsg" xml:space="preserve">
+    <value>アーカイブのデータ形式が不正です。</value>
+  </data>
+  <data name="CloudSync_AchievementListSummary" xml:space="preserve">
+    <value>アチーブメント {0} 件 · 合計 {1}/{2} · 容量 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
+    <value>先に FufuLauncher クラウドへログインしてください。</value>
+  </data>
+  <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
+    <value>「{0}」から {1} 件を同期しました</value>
+  </data>
+  <data name="CloudSync_AchievementTitle" xml:space="preserve">
+    <value>アチーブメント · FufuLauncher クラウド管理</value>
+  </data>
+  <data name="CloudSync_AchievementTooltip" xml:space="preserve">
+    <value>FufuLauncher クラウドのアチーブメントを管理（送信・取得・上書き・削除）</value>
+  </data>
+  <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
+    <value>現在の達成状況をアップロード</value>
+  </data>
+  <data name="CloudSync_ActionSuccessTitleFormat" xml:space="preserve">
+    <value>{0}完了</value>
+  </data>
+  <data name="CloudSync_ActivateBtn" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="CloudSync_ActivateFailedTitle" xml:space="preserve">
+    <value>適用失敗</value>
+  </data>
+  <data name="CloudSync_ActivatePromptEmpty" xml:space="preserve">
+    <value>コードを入力してください。</value>
+  </data>
+  <data name="CloudSync_ActivationPlaceholder" xml:space="preserve">
+    <value>コードを入力</value>
+  </data>
+  <data name="CloudSync_ArchiveNameHeader" xml:space="preserve">
+    <value>アーカイブ名</value>
+  </data>
+  <data name="CloudSync_ArchiveNamePlaceholder" xml:space="preserve">
+    <value>英数字・_・-・. のみ</value>
+  </data>
+  <data name="CloudSync_ArchivesDefaultSubtitle" xml:space="preserve">
+    <value>ログイン後にクラウドアーカイブを管理できます</value>
+  </data>
+  <data name="CloudSync_ArchivesEmpty" xml:space="preserve">
+    <value>クラウドアーカイブはありません。</value>
+  </data>
+  <data name="CloudSync_ArchivesFilteredEmpty" xml:space="preserve">
+    <value>現在の条件に一致するクラウドアーカイブはありません。</value>
+  </data>
+  <data name="CloudSync_ArchivesLoadFailedTitle" xml:space="preserve">
+    <value>読み込み失敗</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedEmpty" xml:space="preserve">
+    <value>ロック中です。「アカウントとセキュリティ」から解除してください。</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedHint" xml:space="preserve">
+    <value>アカウントがロック中のためアーカイブにアクセスできません</value>
+  </data>
+  <data name="CloudSync_ArchivesSignInEmpty" xml:space="preserve">
+    <value>アーカイブを表示するにはログインしてください。</value>
+  </data>
+  <data name="CloudSync_ArchivesSubtitle" xml:space="preserve">
+    <value>保存されたアーカイブの確認・保存・名前変更・上書き・削除を行います</value>
+  </data>
+  <data name="CloudSync_ArchivesSummary" xml:space="preserve">
+    <value>{0} / {1} 件 · {2} / {3} 使用中</value>
+  </data>
+  <data name="CloudSync_ArchivesTitle" xml:space="preserve">
+    <value>クラウドアーカイブ管理</value>
+  </data>
+  <data name="CloudSync_AuthSubtitle" xml:space="preserve">
+    <value>ログインすると、複数デバイス間でアチーブメントと祈願記録を安全にバックアップ・同期できます。</value>
+  </data>
+  <data name="CloudSync_AuthTitle" xml:space="preserve">
+    <value>FufuLauncher クラウドにログインまたは登録</value>
+  </data>
+  <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
+    <value>この端末にログイン状態が安全に保存されています</value>
+  </data>
+  <data name="CloudSync_BtnDelete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="CloudSync_BtnExportSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="CloudSync_BtnOverwrite" xml:space="preserve">
+    <value>上書き</value>
+  </data>
+  <data name="CloudSync_BtnRename" xml:space="preserve">
+    <value>名前変更</value>
+  </data>
+  <data name="CloudSync_BusyWaitMsg" xml:space="preserve">
+    <value>別の処理が実行中です。しばらくお待ちください。</value>
+  </data>
+  <data name="CloudSync_CancelBtn" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="CloudSync_CannotOperateTitle" xml:space="preserve">
+    <value>操作不可</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpened" xml:space="preserve">
+    <value>ブラウザで認証ページを開きました。完了まで待機しています...</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpenFailed" xml:space="preserve">
+    <value>システムブラウザを開けませんでした。</value>
+  </data>
+  <data name="CloudSync_CaptchaHint" xml:space="preserve">
+    <value>下の認証を完了してください。完了するとウィンドウは自動的に閉じます。</value>
+  </data>
+  <data name="CloudSync_CaptchaLoadError" xml:space="preserve">
+    <value>認証ページの読み込みに失敗しました。右側のボタンからブラウザで続行してください。</value>
+  </data>
+  <data name="CloudSync_CaptchaOpenBrowser" xml:space="preserve">
+    <value>ブラウザで開く</value>
+  </data>
+  <data name="CloudSync_CaptchaSubmitting" xml:space="preserve">
+    <value>認証結果を確認しています...</value>
+  </data>
+  <data name="CloudSync_CaptchaTitle" xml:space="preserve">
+    <value>セキュリティ認証</value>
+  </data>
+  <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
+    <value>セキュリティ認証 - FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CloseBtn" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="CloudSync_ConfirmBtn" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="CloudSync_ConfirmLockBtn" xml:space="preserve">
+    <value>ロックする</value>
+  </data>
+  <data name="CloudSync_ConfirmNewPasswordHeader" xml:space="preserve">
+    <value>新しいパスワード（確認）</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteBtn" xml:space="preserve">
+    <value>上書きする</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteDiskMsg" xml:space="preserve">
+    <value>「{0}」でクラウドの「{1}」を上書きしますか？</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteTitle" xml:space="preserve">
+    <value>上書き確認</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>パスワード（確認）</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>パスワードを再入力</value>
+  </data>
+  <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
+    <value>解除する</value>
+  </data>
+  <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
+    <value>アカウントとデータを削除</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneDetail" xml:space="preserve">
+    <value>アカウントとクラウドデータが完全に削除されました。</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneTitle" xml:space="preserve">
+    <value>アカウント削除完了</value>
+  </data>
+  <data name="CloudSync_DeleteAccountTitle" xml:space="preserve">
+    <value>アカウントの完全削除</value>
+  </data>
+  <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
+    <value>警告：アカウントを削除すると、すべてのクラウドデータとアカウント情報が永久に消去され、復元できません。</value>
+  </data>
+  <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
+    <value>全クラウドデータを消去</value>
+  </data>
+  <data name="CloudSync_DeleteAllConfirmBtn" xml:space="preserve">
+    <value>すべて消去</value>
+  </data>
+  <data name="CloudSync_DeleteAllFailedTitle" xml:space="preserve">
+    <value>消去失敗</value>
+  </data>
+  <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
+    <value>すべてのクラウドアーカイブを消去しますか？（アカウントは保持されますが、全ファイルが完全削除されます）</value>
+  </data>
+  <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
+    <value>消去完了</value>
+  </data>
+  <data name="CloudSync_DeleteAllTitle" xml:space="preserve">
+    <value>全クラウドデータの消去</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveMsg" xml:space="preserve">
+    <value>クラウド上の「{0}」を完全に削除しますか？</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveTitle" xml:space="preserve">
+    <value>アーカイブ削除</value>
+  </data>
+  <data name="CloudSync_DeleteConfirmBtn" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="CloudSync_DeleteFailedTitle" xml:space="preserve">
+    <value>削除失敗</value>
+  </data>
+  <data name="CloudSync_DeleteSuccessTitle" xml:space="preserve">
+    <value>削除完了</value>
+  </data>
+  <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
+    <value>ダウンロード失敗</value>
+  </data>
+  <data name="CloudSync_EmailHeader" xml:space="preserve">
+    <value>メールアドレス</value>
+  </data>
+  <data name="CloudSync_EmailOtpSentDetail" xml:space="preserve">
+    <value>認証コードを {0} に送信しました（10分間有効）。</value>
+  </data>
+  <data name="CloudSync_EmailPlaceholder" xml:space="preserve">
+    <value>メールアドレスを入力</value>
+  </data>
+  <data name="CloudSync_ErrAccountNotFound" xml:space="preserve">
+    <value>該当するアカウントが見つかりません。</value>
+  </data>
+  <data name="CloudSync_ErrActivationDisabled" xml:space="preserve">
+    <value>現在コードの適用機能は無効です。</value>
+  </data>
+  <data name="CloudSync_ErrActivationExhausted" xml:space="preserve">
+    <value>このコードの使用回数上限に達しました。</value>
+  </data>
+  <data name="CloudSync_ErrActivationInvalid" xml:space="preserve">
+    <value>コードが無効です。</value>
+  </data>
+  <data name="CloudSync_ErrActivationRedeemed" xml:space="preserve">
+    <value>このコードは既に適用済みです。</value>
+  </data>
+  <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
+    <value>同名のアーカイブが既に存在します。上書きオプションを有効にしてください。</value>
+  </data>
+  <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
+    <value>対象のアーカイブが見つかりません。</value>
+  </data>
+  <data name="CloudSync_ErrAuthRequired" xml:space="preserve">
+    <value>セッションの期限が切れました。再ログインしてください。</value>
+  </data>
+  <data name="CloudSync_ErrCaptchaFailed" xml:space="preserve">
+    <value>認証に失敗したか期限切れです。もう一度お試しください。</value>
+  </data>
+  <data name="CloudSync_ErrEmailRegistered" xml:space="preserve">
+    <value>このメールアドレスは既に登録されています。</value>
+  </data>
+  <data name="CloudSync_ErrEnterCodeFirst" xml:space="preserve">
+    <value>メール認証コードを入力してください。</value>
+  </data>
+  <data name="CloudSync_ErrFileLimit" xml:space="preserve">
+    <value>保存ファイル数の上限に達しています。不要なファイルを削除するか上書きしてください。</value>
+  </data>
+  <data name="CloudSync_ErrGeneric" xml:space="preserve">
+    <value>処理に失敗しました。通信環境を確認してやり直してください。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>メールアドレスまたはパスワードが正しくありません。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidEmail" xml:space="preserve">
+    <value>有効なメールアドレスを入力してください。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidFormat" xml:space="preserve">
+    <value>データ形式の検証に失敗しました。ファイル内容を確認してください。</value>
+  </data>
+  <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
+    <value>名前は1〜64文字の半角英数字・_・-・. のみ使用でき、先頭は英数字、末尾にピリオド不可です。</value>
+  </data>
+  <data name="CloudSync_ErrLocked" xml:space="preserve">
+    <value>アカウントがロックされています。先にメール認証でロック解除してください。</value>
+  </data>
+  <data name="CloudSync_ErrOtpAttempts" xml:space="preserve">
+    <value>試行回数が上限を超えました。新しいコードを取得してください。</value>
+  </data>
+  <data name="CloudSync_ErrOtpCooldown" xml:space="preserve">
+    <value>操作が頻繁すぎます。しばらくしてからお試しください。</value>
+  </data>
+  <data name="CloudSync_ErrOtpExpired" xml:space="preserve">
+    <value>認証コードの有効期限が切れています。</value>
+  </data>
+  <data name="CloudSync_ErrOtpInvalid" xml:space="preserve">
+    <value>認証コードが正しくありません。</value>
+  </data>
+  <data name="CloudSync_ErrPasswordLength" xml:space="preserve">
+    <value>パスワードは8〜128文字で入力してください。</value>
+  </data>
+  <data name="CloudSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>パスワードが一致しません。</value>
+  </data>
+  <data name="CloudSync_ErrPayloadTooLarge" xml:space="preserve">
+    <value>データサイズが許可された上限を超えています。</value>
+  </data>
+  <data name="CloudSync_ErrQuotaExceeded" xml:space="preserve">
+    <value>本日の上限に達しました。リセット後に再度お試しください。</value>
+  </data>
+  <data name="CloudSync_ErrRateLimited" xml:space="preserve">
+    <value>リクエストが頻繁すぎます。しばらくしてからお試しください。</value>
+  </data>
+  <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
+    <value>クラウド容量が不足しています。古いアーカイブを削除するか容量を拡張してください。</value>
+  </data>
+  <data name="CloudSync_ErrUnsupportedDataType" xml:space="preserve">
+    <value>サポートされていないデータ種別です。</value>
+  </data>
+  <data name="CloudSync_FileFilterJson" xml:space="preserve">
+    <value>アーカイブファイル</value>
+  </data>
+  <data name="CloudSync_FilterAll" xml:space="preserve">
+    <value>すべて</value>
+  </data>
+  <data name="CloudSync_FilterUiaf" xml:space="preserve">
+    <value>アチーブメント</value>
+  </data>
+  <data name="CloudSync_FilterUigf" xml:space="preserve">
+    <value>祈願履歴</value>
+  </data>
+  <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
+    <value>すべてのローカルUIDを統合（計 {0} 件）</value>
+  </data>
+  <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
+    <value>選択したデータでクラウドの「{0}」を上書きしますか？</value>
+  </data>
+  <data name="CloudSync_GachaEmptyCloud" xml:space="preserve">
+    <value>クラウドに祈願アーカイブがありません。</value>
+  </data>
+  <data name="CloudSync_GachaEmptyDesc" xml:space="preserve">
+    <value>複数アカウントの祈願アーカイブを同期</value>
+  </data>
+  <data name="CloudSync_GachaEmptyTitle" xml:space="preserve">
+    <value>クラウドから復元 / 管理</value>
+  </data>
+  <data name="CloudSync_GachaExportErrorTitle" xml:space="preserve">
+    <value>エクスポート失敗</value>
+  </data>
+  <data name="CloudSync_GachaImportBtn" xml:space="preserve">
+    <value>復元</value>
+  </data>
+  <data name="CloudSync_GachaImportedMsg" xml:space="preserve">
+    <value>「{0}」から {1} アカウント・{2} 件を取り込みました。</value>
+  </data>
+  <data name="CloudSync_GachaListSummary" xml:space="preserve">
+    <value>祈願アーカイブ {0} 件 · 合計 {1}/{2} · 容量 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_GachaNoLocalDataHint" xml:space="preserve">
+    <value>ローカル履歴がありません。下の一覧からクラウドデータを復元できます。</value>
+  </data>
+  <data name="CloudSync_GachaNoRecordsSelected" xml:space="preserve">
+    <value>有効な祈願履歴がありません。</value>
+  </data>
+  <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
+    <value>先に FufuLauncher クラウドへログインしてください。</value>
+  </data>
+  <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
+    <value>アップロードするアカウント</value>
+  </data>
+  <data name="CloudSync_GachaTitle" xml:space="preserve">
+    <value>祈願分析 · FufuLauncher クラウド管理</value>
+  </data>
+  <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
+    <value>クラウド管理</value>
+  </data>
+  <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
+    <value>UID {0}（{1} 件）</value>
+  </data>
+  <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
+    <value>選択した履歴をアップロード</value>
+  </data>
+  <data name="CloudSync_GotoUnlockBtn" xml:space="preserve">
+    <value>解除へ進む</value>
+  </data>
+  <data name="CloudSync_HintTitle" xml:space="preserve">
+    <value>案内</value>
+  </data>
+  <data name="CloudSync_InputCurrentPwd" xml:space="preserve">
+    <value>確認のため現在のパスワードを入力</value>
+  </data>
+  <data name="CloudSync_InputOtpRequired" xml:space="preserve">
+    <value>メール認証コードを入力してください。</value>
+  </data>
+  <data name="CloudSync_LabelAutoLogin" xml:space="preserve">
+    <value>自動ログイン</value>
+  </data>
+  <data name="CloudSync_LabelEmail" xml:space="preserve">
+    <value>登録メール</value>
+  </data>
+  <data name="CloudSync_LabelLockedAt" xml:space="preserve">
+    <value>ロック日時</value>
+  </data>
+  <data name="CloudSync_LabelStatus" xml:space="preserve">
+    <value>状態</value>
+  </data>
+  <data name="CloudSync_LoadingArchivesText" xml:space="preserve">
+    <value>クラウドアーカイブを読み込み中...</value>
+  </data>
+  <data name="CloudSync_LockAccountBtn" xml:space="preserve">
+    <value>アカウントをロック（メール認証）</value>
+  </data>
+  <data name="CloudSync_LockBlockedDelete" xml:space="preserve">
+    <value>ロック中はアカウントを削除できません。先にロックを解除してください。</value>
+  </data>
+  <data name="CloudSync_LockDesc" xml:space="preserve">
+    <value>ロックするとメール認証による手動解除までクラウドデータへのアクセスとアカウント削除がブロックされます。</value>
+  </data>
+  <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
+    <value>ロック中はクォータ確認やクラウド操作ができません。「アカウントとセキュリティ」から解除してください。</value>
+  </data>
+  <data name="CloudSync_LockedBannerTitle" xml:space="preserve">
+    <value>アカウントがロックされています</value>
+  </data>
+  <data name="CloudSync_LockHint" xml:space="preserve">
+    <value>ヒント：ロック中はクラウドデータの閲覧・アップロード・削除およびアカウント削除が制限されます。メール認証で手動解除すると復旧します。</value>
+  </data>
+  <data name="CloudSync_LockTitle" xml:space="preserve">
+    <value>アカウントをロック</value>
+  </data>
+  <data name="CloudSync_LoginFailedTitle" xml:space="preserve">
+    <value>ログイン失敗</value>
+  </data>
+  <data name="CloudSync_LogoutBtn" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
+    <value>現在の FufuLauncher クラウドアカウントからログアウトしますか？</value>
+  </data>
+  <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
+    <value>他の端末のログイン状態も同時に無効化する</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessDetail" xml:space="preserve">
+    <value>ローカルのログイン状態を消去しました。</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessTitle" xml:space="preserve">
+    <value>ログアウト完了</value>
+  </data>
+  <data name="CloudSync_ModeLogin" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="CloudSync_ModeRegister" xml:space="preserve">
+    <value>新規登録</value>
+  </data>
+  <data name="CloudSync_ModeReset" xml:space="preserve">
+    <value>パスワード再設定</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccess" xml:space="preserve">
+    <value>適用完了</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccessDetail" xml:space="preserve">
+    <value>クォータ拡張が適用されました。</value>
+  </data>
+  <data name="CloudSync_MsgCancelled" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="CloudSync_MsgCaptchaCancelled" xml:space="preserve">
+    <value>認証がキャンセルされました。</value>
+  </data>
+  <data name="CloudSync_MsgDeleteAllSuccess" xml:space="preserve">
+    <value>{0} 件のクラウドデータを消去しました。</value>
+  </data>
+  <data name="CloudSync_MsgDeleteSuccess" xml:space="preserve">
+    <value>「{0}」を削除しました。</value>
+  </data>
+  <data name="CloudSync_MsgLockedSuccess" xml:space="preserve">
+    <value>アカウントをロックしました。</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedDetail" xml:space="preserve">
+    <value>ログインしましたがアカウントはロック中です。解除してからご利用ください。</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedTitle" xml:space="preserve">
+    <value>ログイン成功（ロック中）</value>
+  </data>
+  <data name="CloudSync_MsgLoginRequiredFirst" xml:space="preserve">
+    <value>先にログインしてください。</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccess" xml:space="preserve">
+    <value>ログイン成功</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccessDetail" xml:space="preserve">
+    <value>ログインしました。クラウド同期を利用できます。</value>
+  </data>
+  <data name="CloudSync_MsgOverwritten" xml:space="preserve">
+    <value>「{0}」を上書き更新しました。</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>登録完了</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccessDetail" xml:space="preserve">
+    <value>登録が完了しログインしました。</value>
+  </data>
+  <data name="CloudSync_MsgRenameSuccess" xml:space="preserve">
+    <value>「{0}」に名前を変更しました。</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccess" xml:space="preserve">
+    <value>再設定完了</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccessDetail" xml:space="preserve">
+    <value>パスワードを変更しました。新しいパスワードでログインしてください。</value>
+  </data>
+  <data name="CloudSync_MsgUnlockedSuccess" xml:space="preserve">
+    <value>ロックを解除しました。</value>
+  </data>
+  <data name="CloudSync_MsgUploadedNew" xml:space="preserve">
+    <value>「{0}」をアップロードしました。</value>
+  </data>
+  <data name="CloudSync_MsgUploadFailedTitle" xml:space="preserve">
+    <value>アップロード失敗</value>
+  </data>
+  <data name="CloudSync_MsgUploadSuccess" xml:space="preserve">
+    <value>アップロード完了</value>
+  </data>
+  <data name="CloudSync_NavAccount" xml:space="preserve">
+    <value>アカウントとセキュリティ</value>
+  </data>
+  <data name="CloudSync_NavArchives" xml:space="preserve">
+    <value>クラウドアーカイブ</value>
+  </data>
+  <data name="CloudSync_NavQuota" xml:space="preserve">
+    <value>クォータと拡張</value>
+  </data>
+  <data name="CloudSync_NotLockedText" xml:space="preserve">
+    <value>未ロック</value>
+  </data>
+  <data name="CloudSync_NotLoggedInShort" xml:space="preserve">
+    <value>未ログイン</value>
+  </data>
+  <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
+    <value>FufuLauncher クラウド未ログイン</value>
+  </data>
+  <data name="CloudSync_OpenBtn" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="CloudSync_OpenCenterBtn" xml:space="preserve">
+    <value>クラウドセンターを開く</value>
+  </data>
+  <data name="CloudSync_OpenFileFailedTitle" xml:space="preserve">
+    <value>ファイルを開けません</value>
+  </data>
+  <data name="CloudSync_OtpHeader" xml:space="preserve">
+    <value>メール認証コード</value>
+  </data>
+  <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
+    <value>6桁の確認コードを入力</value>
+  </data>
+  <data name="CloudSync_OtpSentTitle" xml:space="preserve">
+    <value>送信完了</value>
+  </data>
+  <data name="CloudSync_OverwriteExistingCheck" xml:space="preserve">
+    <value>同名のアーカイブが存在する場合は上書きする</value>
+  </data>
+  <data name="CloudSync_OverwriteFailedTitle" xml:space="preserve">
+    <value>上書き失敗</value>
+  </data>
+  <data name="CloudSync_OverwriteSuccessTitle" xml:space="preserve">
+    <value>上書き完了</value>
+  </data>
+  <data name="CloudSync_PasswordHeader" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="CloudSync_PasswordNewHeader" xml:space="preserve">
+    <value>新しいパスワード</value>
+  </data>
+  <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
+    <value>8〜128文字のパスワードを入力</value>
+  </data>
+  <data name="CloudSync_PasswordRequired" xml:space="preserve">
+    <value>パスワードを入力してください。</value>
+  </data>
+  <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
+    <value>パスワードを設定</value>
+  </data>
+  <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
+    <value>更新して現在の容量と日次使用状況を確認します</value>
+  </data>
+  <data name="CloudSync_QuotaDeletesLabel" xml:space="preserve">
+    <value>本日の削除回数</value>
+  </data>
+  <data name="CloudSync_QuotaFailedTitle" xml:space="preserve">
+    <value>クォータ取得失敗</value>
+  </data>
+  <data name="CloudSync_QuotaFilesLabel" xml:space="preserve">
+    <value>保存ファイル数</value>
+  </data>
+  <data name="CloudSync_QuotaFilesValue" xml:space="preserve">
+    <value>{0} / {1} 件（残り {2} 件）</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
+    <value>アカウントがロック中のため表示できません。先にロックを解除してください。</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
+    <value>先に「アカウントとセキュリティ」からログインしてください。</value>
+  </data>
+  <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
+    <value>本日の総操作回数</value>
+  </data>
+  <data name="CloudSync_QuotaRefreshBtn" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CloudSync_QuotaResetInfo" xml:space="preserve">
+    <value>集計日：{0} · 次回リセット：{1}</value>
+  </data>
+  <data name="CloudSync_QuotaStorageLabel" xml:space="preserve">
+    <value>クラウド容量</value>
+  </data>
+  <data name="CloudSync_QuotaStorageValue" xml:space="preserve">
+    <value>{0} / {1}（残り {2}）</value>
+  </data>
+  <data name="CloudSync_QuotaTitle" xml:space="preserve">
+    <value>容量と日次クォータ</value>
+  </data>
+  <data name="CloudSync_QuotaUploadsLabel" xml:space="preserve">
+    <value>本日のアップロード / 上書き回数</value>
+  </data>
+  <data name="CloudSync_QuotaUsedRemaining" xml:space="preserve">
+    <value>{0} / {1} 使用（残り {2}）</value>
+  </data>
+  <data name="CloudSync_ReadFileFailedTitle" xml:space="preserve">
+    <value>読み込み失敗</value>
+  </data>
+  <data name="CloudSync_RefreshBtn" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CloudSync_RefreshDoneTitle" xml:space="preserve">
+    <value>更新完了</value>
+  </data>
+  <data name="CloudSync_RefreshFailedTitle" xml:space="preserve">
+    <value>更新失敗</value>
+  </data>
+  <data name="CloudSync_RefreshListBtn" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CloudSync_RefreshStatusBtn" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="CloudSync_RefreshStatusResultFormat" xml:space="preserve">
+    <value>現在の状態：{0}</value>
+  </data>
+  <data name="CloudSync_RegisterFailedTitle" xml:space="preserve">
+    <value>登録失敗</value>
+  </data>
+  <data name="CloudSync_RenameConfirmBtn" xml:space="preserve">
+    <value>変更</value>
+  </data>
+  <data name="CloudSync_RenameFailedTitle" xml:space="preserve">
+    <value>変更失敗</value>
+  </data>
+  <data name="CloudSync_RenameNewHeader" xml:space="preserve">
+    <value>新しい名前</value>
+  </data>
+  <data name="CloudSync_RenameOldName" xml:space="preserve">
+    <value>現在の名前：{0}</value>
+  </data>
+  <data name="CloudSync_RenameOverwriteCheck" xml:space="preserve">
+    <value>変更先の名前が存在する場合は上書き</value>
+  </data>
+  <data name="CloudSync_RenameSuccessTitle" xml:space="preserve">
+    <value>変更完了</value>
+  </data>
+  <data name="CloudSync_RenameTitle" xml:space="preserve">
+    <value>アーカイブ名を変更</value>
+  </data>
+  <data name="CloudSync_ResetFailedTitle" xml:space="preserve">
+    <value>再設定失敗</value>
+  </data>
+  <data name="CloudSync_SaveFileFailedTitle" xml:space="preserve">
+    <value>保存失敗</value>
+  </data>
+  <data name="CloudSync_SaveSuccessDetail" xml:space="preserve">
+    <value>「{0}」を {1} に保存しました。</value>
+  </data>
+  <data name="CloudSync_SaveSuccessTitle" xml:space="preserve">
+    <value>保存完了</value>
+  </data>
+  <data name="CloudSync_SecurityActionsTitle" xml:space="preserve">
+    <value>セキュリティとアカウント操作</value>
+  </data>
+  <data name="CloudSync_SelectedFileFormat" xml:space="preserve">
+    <value>選択中：{0}</value>
+  </data>
+  <data name="CloudSync_SendFailedTitle" xml:space="preserve">
+    <value>送信失敗</value>
+  </data>
+  <data name="CloudSync_SendingEmail" xml:space="preserve">
+    <value>認証メールを送信中...</value>
+  </data>
+  <data name="CloudSync_SendOtpBtn" xml:space="preserve">
+    <value>コード送信</value>
+  </data>
+  <data name="CloudSync_SessionExpiredTitle" xml:space="preserve">
+    <value>セッション期限切れ</value>
+  </data>
+  <data name="CloudSync_SettingsCaption" xml:space="preserve">
+    <value>クラウドアカウントや容量・日次クォータを管理し、アチーブメントと祈願履歴を同期します</value>
+  </data>
+  <data name="CloudSync_SettingsTitle" xml:space="preserve">
+    <value>FufuLauncher クラウドアーカイブ</value>
+  </data>
+  <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
+    <value>{0}（元サイズ {1}）</value>
+  </data>
+  <data name="CloudSync_StartUploadBtn" xml:space="preserve">
+    <value>アップロード</value>
+  </data>
+  <data name="CloudSync_StatusLocked" xml:space="preserve">
+    <value>ロック中</value>
+  </data>
+  <data name="CloudSync_StatusNormal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="CloudSync_StatusSuffixLocked" xml:space="preserve">
+    <value>{0} · ロック中</value>
+  </data>
+  <data name="CloudSync_StatusSuffixNormal" xml:space="preserve">
+    <value>{0} · 正常</value>
+  </data>
+  <data name="CloudSync_SubmitLogin" xml:space="preserve">
+    <value>ログイン</value>
+  </data>
+  <data name="CloudSync_SubmitRegister" xml:space="preserve">
+    <value>登録してログイン</value>
+  </data>
+  <data name="CloudSync_SubmitReset" xml:space="preserve">
+    <value>パスワードを再設定</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
+    <value>アチーブメント</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUigf" xml:space="preserve">
+    <value>祈願履歴</value>
+  </data>
+  <data name="CloudSync_UnlockAccountBtn" xml:space="preserve">
+    <value>ロック解除（メール認証）</value>
+  </data>
+  <data name="CloudSync_UnlockDesc" xml:space="preserve">
+    <value>メール認証を完了するとロックが解除され、すべての機能が復旧します。</value>
+  </data>
+  <data name="CloudSync_UnlockTitle" xml:space="preserve">
+    <value>ロック解除</value>
+  </data>
+  <data name="CloudSync_UpgradeActiveFormat" xml:space="preserve">
+    <value>拡張有効期限：{0}{1}</value>
+  </data>
+  <data name="CloudSync_UpgradeDeltaFormat" xml:space="preserve">
+    <value>（容量 +{0}、ファイル +{1}、送信 +{2}、削除 +{3}、操作 +{4}）</value>
+  </data>
+  <data name="CloudSync_UpgradeDisclaimer" xml:space="preserve">
+    <value>引き換えコードは開発者のデバッグ専用であり、購入によって入手できるものではありません。</value>
+  </data>
+  <data name="CloudSync_UpgradeInactive" xml:space="preserve">
+    <value>拡張プランは未適用です。有効なコードで容量や日次上限を拡張できます。</value>
+  </data>
+  <data name="CloudSync_UpgradeTitle" xml:space="preserve">
+    <value>アクティベーションコード拡張</value>
+  </data>
+  <data name="CloudSync_UploadDataTypeHeader" xml:space="preserve">
+    <value>データ種別</value>
+  </data>
+  <data name="CloudSync_UploadFileDialogTitle" xml:space="preserve">
+    <value>ローカルファイルのアップロード</value>
+  </data>
+  <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
+    <value>ローカルファイルをアップロード</value>
+  </data>
+  <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
+    <value>アチーブメント</value>
+  </data>
+  <data name="CloudSync_UploadTypeUigfOption" xml:space="preserve">
+    <value>祈願履歴</value>
+  </data>
+  <data name="CloudSync_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher クラウドアーカイブ</value>
+  </data>
 </root>

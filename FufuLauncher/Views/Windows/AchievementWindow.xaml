@@ -341,6 +341,20 @@
                                                FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
                                 </Grid>
                             </Button>
+                            <Button Click="OnCloudArchiveManageClick" Style="{StaticResource AchievementActionButtonStyle}"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=CloudSync_AchievementTooltip}">
+                                <Grid ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Glyph="&#xE753;" FontFamily="Segoe Fluent Icons" FontSize="14"
+                                              VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1"
+                                               Text="{helpers:Loc Key=CloudSync_AchievementBtn}"
+                                               FontSize="12" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
                             <Button Click="OnUpdateDbClick" Style="{StaticResource AchievementActionButtonStyle}"
                                     ToolTipService.ToolTip="{helpers:Loc Key=AchievementWindow_UpdateData}">
                                 <Grid ColumnSpacing="8">

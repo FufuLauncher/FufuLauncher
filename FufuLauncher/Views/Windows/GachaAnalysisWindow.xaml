@@ -476,6 +476,18 @@
                                 </StackPanel>
                             </Grid>
                         </Button>
+
+                        <Button Click="OnCloudArchiveManageClick" HorizontalAlignment="Stretch"
+                                Padding="16,12" CornerRadius="8">
+                            <StackPanel Spacing="4" HorizontalAlignment="Center">
+                                <FontIcon Glyph="&#xE753;" FontSize="20" HorizontalAlignment="Center" />
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_GachaEmptyTitle}"
+                                           FontWeight="SemiBold" HorizontalAlignment="Center" TextAlignment="Center" />
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_GachaEmptyDesc}"
+                                           FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
                 </ScrollViewer>
 
@@ -620,6 +632,14 @@
                             <StackPanel Orientation="Horizontal" Spacing="8">
                                 <FontIcon Glyph="&#xE74D;" FontSize="14" />
                                 <TextBlock Text="{helpers:Loc Key=GachaAnalysis_DeleteRecords}" />
+                            </StackPanel>
+                        </Button>
+
+                        <Button Click="OnCloudArchiveManageClick"
+                                IsEnabled="{Binding ViewModel.IsFetching, Converter={StaticResource BoolInverter}}">
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <FontIcon Glyph="&#xE753;" FontSize="14" />
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_GachaToolbarBtn}" />
                             </StackPanel>
                         </Button>
                     </StackPanel>

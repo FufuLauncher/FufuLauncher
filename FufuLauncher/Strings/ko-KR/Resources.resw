@@ -9178,4 +9178,808 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>통계 및 문제 진단을 위해 사용 정보를 전송합니다</value>
   </data>
+  <data name="CloudSync_AccountBtn" xml:space="preserve">
+    <value>클라우드 센터</value>
+  </data>
+  <data name="CloudSync_AccountFullBtn" xml:space="preserve">
+    <value>FufuLauncher 클라우드 아카이브</value>
+  </data>
+  <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
+    <value>연결된 이메일, 보호 상태 및 보안 옵션을 확인합니다</value>
+  </data>
+  <data name="CloudSync_AccountSectionTitle" xml:space="preserve">
+    <value>계정 정보</value>
+  </data>
+  <data name="CloudSync_AchievementBtn" xml:space="preserve">
+    <value>클라우드 아카이브</value>
+  </data>
+  <data name="CloudSync_AchievementConfirmOverwriteMsg" xml:space="preserve">
+    <value>현재 업적 진행도로 클라우드 아카이브 "{0}"을(를) 덮어쓰시겠습니까?</value>
+  </data>
+  <data name="CloudSync_AchievementCurrentProfile" xml:space="preserve">
+    <value>현재 프로필: {0} (단일/다중 계정 여러 개 업로드 지원)</value>
+  </data>
+  <data name="CloudSync_AchievementEmptyCloud" xml:space="preserve">
+    <value>클라우드에 업적 아카이브가 없습니다.</value>
+  </data>
+  <data name="CloudSync_AchievementImportBtn" xml:space="preserve">
+    <value>가져오기</value>
+  </data>
+  <data name="CloudSync_AchievementImportedMsg" xml:space="preserve">
+    <value>"{0}"에서 {1}개의 업적을 업데이트했습니다.</value>
+  </data>
+  <data name="CloudSync_AchievementImportFailedTitle" xml:space="preserve">
+    <value>가져오기 실패</value>
+  </data>
+  <data name="CloudSync_AchievementImportSuccessTitle" xml:space="preserve">
+    <value>가져오기 완료</value>
+  </data>
+  <data name="CloudSync_AchievementInvalidFormatMsg" xml:space="preserve">
+    <value>아카이브 데이터 형식이 올바르지 않습니다.</value>
+  </data>
+  <data name="CloudSync_AchievementListSummary" xml:space="preserve">
+    <value>업적 {0}개 · 전체 {1}/{2} · {3}/{4} 사용</value>
+  </data>
+  <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
+    <value>먼저 FufuLauncher 클라우드 계정에 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
+    <value>"{0}"에서 {1}개 업적 동기화됨</value>
+  </data>
+  <data name="CloudSync_AchievementTitle" xml:space="preserve">
+    <value>업적 추적 · FufuLauncher 클라우드 아카이브</value>
+  </data>
+  <data name="CloudSync_AchievementTooltip" xml:space="preserve">
+    <value>FufuLauncher 클라우드 업적 아카이브 관리</value>
+  </data>
+  <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
+    <value>현재 업적 업로드</value>
+  </data>
+  <data name="CloudSync_ActionSuccessTitleFormat" xml:space="preserve">
+    <value>{0} 완료</value>
+  </data>
+  <data name="CloudSync_ActivateBtn" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="CloudSync_ActivateFailedTitle" xml:space="preserve">
+    <value>적용 실패</value>
+  </data>
+  <data name="CloudSync_ActivatePromptEmpty" xml:space="preserve">
+    <value>코드를 입력하세요.</value>
+  </data>
+  <data name="CloudSync_ActivationPlaceholder" xml:space="preserve">
+    <value>활성화 코드 입력</value>
+  </data>
+  <data name="CloudSync_ArchiveNameHeader" xml:space="preserve">
+    <value>아카이브 이름</value>
+  </data>
+  <data name="CloudSync_ArchiveNamePlaceholder" xml:space="preserve">
+    <value>영문, 숫자, _, -, .만 가능</value>
+  </data>
+  <data name="CloudSync_ArchivesDefaultSubtitle" xml:space="preserve">
+    <value>로그인 후 클라우드 아카이브를 관리할 수 있습니다</value>
+  </data>
+  <data name="CloudSync_ArchivesEmpty" xml:space="preserve">
+    <value>클라우드 아카이브가 없습니다.</value>
+  </data>
+  <data name="CloudSync_ArchivesFilteredEmpty" xml:space="preserve">
+    <value>선택한 필터에 해당하는 아카이브가 없습니다.</value>
+  </data>
+  <data name="CloudSync_ArchivesLoadFailedTitle" xml:space="preserve">
+    <value>불러오기 실패</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedEmpty" xml:space="preserve">
+    <value>계정이 잠겨 있습니다. 계정 및 보안에서 잠금을 해제하세요.</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedHint" xml:space="preserve">
+    <value>계정이 잠겨 있어 아카이브에 접근할 수 없습니다</value>
+  </data>
+  <data name="CloudSync_ArchivesSignInEmpty" xml:space="preserve">
+    <value>아카이브를 보려면 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_ArchivesSubtitle" xml:space="preserve">
+    <value>업로드된 아카이브를 조회, 저장, 이름 변경, 덮어쓰기 또는 삭제합니다</value>
+  </data>
+  <data name="CloudSync_ArchivesSummary" xml:space="preserve">
+    <value>{0} / {1}개 · {2} / {3} 사용 중</value>
+  </data>
+  <data name="CloudSync_ArchivesTitle" xml:space="preserve">
+    <value>클라우드 아카이브 목록</value>
+  </data>
+  <data name="CloudSync_AuthSubtitle" xml:space="preserve">
+    <value>로그인하여 여러 기기 간에 업적 진행도와 기원 기록을 안전하게 백업하세요.</value>
+  </data>
+  <data name="CloudSync_AuthTitle" xml:space="preserve">
+    <value>FufuLauncher 클라우드 로그인 또는 가입</value>
+  </data>
+  <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
+    <value>이 기기에 로그인 상태가 안전하게 저장됨</value>
+  </data>
+  <data name="CloudSync_BtnDelete" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="CloudSync_BtnExportSave" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="CloudSync_BtnOverwrite" xml:space="preserve">
+    <value>덮어쓰기</value>
+  </data>
+  <data name="CloudSync_BtnRename" xml:space="preserve">
+    <value>이름 변경</value>
+  </data>
+  <data name="CloudSync_BusyWaitMsg" xml:space="preserve">
+    <value>다른 작업이 진행 중입니다. 잠시 후 다시 시도하세요.</value>
+  </data>
+  <data name="CloudSync_CancelBtn" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="CloudSync_CannotOperateTitle" xml:space="preserve">
+    <value>작업 불가</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpened" xml:space="preserve">
+    <value>브라우저에서 인증 페이지를 열었습니다. 완료를 기다리는 중...</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpenFailed" xml:space="preserve">
+    <value>시스템 브라우저를 열 수 없습니다.</value>
+  </data>
+  <data name="CloudSync_CaptchaHint" xml:space="preserve">
+    <value>아래 보안 인증을 완료하세요. 완료되면 창이 자동으로 닫힙니다.</value>
+  </data>
+  <data name="CloudSync_CaptchaLoadError" xml:space="preserve">
+    <value>인증 페이지를 불러오지 못했습니다. 브라우저에서 열기를 클릭해 주세요.</value>
+  </data>
+  <data name="CloudSync_CaptchaOpenBrowser" xml:space="preserve">
+    <value>브라우저에서 열기</value>
+  </data>
+  <data name="CloudSync_CaptchaSubmitting" xml:space="preserve">
+    <value>인증 결과를 확인하는 중...</value>
+  </data>
+  <data name="CloudSync_CaptchaTitle" xml:space="preserve">
+    <value>보안 인증</value>
+  </data>
+  <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
+    <value>보안 인증 - FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CloseBtn" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="CloudSync_ConfirmBtn" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="CloudSync_ConfirmLockBtn" xml:space="preserve">
+    <value>잠금 확인</value>
+  </data>
+  <data name="CloudSync_ConfirmNewPasswordHeader" xml:space="preserve">
+    <value>새 비밀번호 확인</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteBtn" xml:space="preserve">
+    <value>덮어쓰기</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteDiskMsg" xml:space="preserve">
+    <value>"{0}" 파일로 클라우드 아카이브 "{1}"을(를) 덮어쓰시겠습니까?</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteTitle" xml:space="preserve">
+    <value>덮어쓰기 확인</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>비밀번호 확인</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>비밀번호 다시 입력</value>
+  </data>
+  <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
+    <value>해제 확인</value>
+  </data>
+  <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
+    <value>계정 및 데이터 삭제</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneDetail" xml:space="preserve">
+    <value>계정과 모든 클라우드 데이터가 영구 삭제되었습니다.</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneTitle" xml:space="preserve">
+    <value>계정 삭제됨</value>
+  </data>
+  <data name="CloudSync_DeleteAccountTitle" xml:space="preserve">
+    <value>계정 영구 삭제</value>
+  </data>
+  <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
+    <value>경고: 계정을 삭제하면 모든 클라우드 아카이브와 계정 정보가 영구 삭제되며 복구할 수 없습니다!</value>
+  </data>
+  <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
+    <value>클라우드 데이터 전체 삭제</value>
+  </data>
+  <data name="CloudSync_DeleteAllConfirmBtn" xml:space="preserve">
+    <value>전체 삭제</value>
+  </data>
+  <data name="CloudSync_DeleteAllFailedTitle" xml:space="preserve">
+    <value>삭제 실패</value>
+  </data>
+  <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
+    <value>클라우드의 모든 업적과 기원 아카이브를 삭제하시겠습니까? (계정은 유지되지만 모든 파일이 영구 삭제됩니다)</value>
+  </data>
+  <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
+    <value>삭제 완료</value>
+  </data>
+  <data name="CloudSync_DeleteAllTitle" xml:space="preserve">
+    <value>전체 클라우드 데이터 삭제</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveMsg" xml:space="preserve">
+    <value>클라우드 아카이브 "{0}"을(를) 영구 삭제하시겠습니까?</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveTitle" xml:space="preserve">
+    <value>아카이브 삭제</value>
+  </data>
+  <data name="CloudSync_DeleteConfirmBtn" xml:space="preserve">
+    <value>삭제</value>
+  </data>
+  <data name="CloudSync_DeleteFailedTitle" xml:space="preserve">
+    <value>삭제 실패</value>
+  </data>
+  <data name="CloudSync_DeleteSuccessTitle" xml:space="preserve">
+    <value>삭제됨</value>
+  </data>
+  <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
+    <value>다운로드 실패</value>
+  </data>
+  <data name="CloudSync_EmailHeader" xml:space="preserve">
+    <value>이메일 주소</value>
+  </data>
+  <data name="CloudSync_EmailOtpSentDetail" xml:space="preserve">
+    <value>{0}(으)로 인증 코드를 보냈습니다. 10분 이내에 입력하세요.</value>
+  </data>
+  <data name="CloudSync_EmailPlaceholder" xml:space="preserve">
+    <value>이메일 주소를 입력하세요</value>
+  </data>
+  <data name="CloudSync_ErrAccountNotFound" xml:space="preserve">
+    <value>해당 이메일 계정을 찾을 수 없습니다.</value>
+  </data>
+  <data name="CloudSync_ErrActivationDisabled" xml:space="preserve">
+    <value>코드 적용 기능이 비활성화되어 있습니다.</value>
+  </data>
+  <data name="CloudSync_ErrActivationExhausted" xml:space="preserve">
+    <value>코드 사용 가능 횟수가 모두 소진되었습니다.</value>
+  </data>
+  <data name="CloudSync_ErrActivationInvalid" xml:space="preserve">
+    <value>유효하지 않은 코드입니다.</value>
+  </data>
+  <data name="CloudSync_ErrActivationRedeemed" xml:space="preserve">
+    <value>이미 사용된 코드입니다.</value>
+  </data>
+  <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
+    <value>같은 이름의 아카이브가 이미 있습니다. 덮어쓰기 옵션을 사용하세요.</value>
+  </data>
+  <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
+    <value>아카이브를 찾을 수 없습니다.</value>
+  </data>
+  <data name="CloudSync_ErrAuthRequired" xml:space="preserve">
+    <value>로그인이 만료되었습니다. 다시 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_ErrCaptchaFailed" xml:space="preserve">
+    <value>보안 인증에 실패했거나 만료되었습니다.</value>
+  </data>
+  <data name="CloudSync_ErrEmailRegistered" xml:space="preserve">
+    <value>이미 등록된 이메일입니다.</value>
+  </data>
+  <data name="CloudSync_ErrEnterCodeFirst" xml:space="preserve">
+    <value>이메일 인증 코드를 먼저 입력하세요.</value>
+  </data>
+  <data name="CloudSync_ErrFileLimit" xml:space="preserve">
+    <value>아카이브 개수 한도에 도달했습니다. 기존 아카이브를 삭제하거나 덮어쓰세요.</value>
+  </data>
+  <data name="CloudSync_ErrGeneric" xml:space="preserve">
+    <value>요청을 완료하지 못했습니다. 네트워크를 확인하고 다시 시도하세요.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>이메일 또는 비밀번호가 올바르지 않습니다.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidEmail" xml:space="preserve">
+    <value>올바른 이메일 주소를 입력하세요.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidFormat" xml:space="preserve">
+    <value>아카이브 형식 검증에 실패했습니다.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
+    <value>이름은 1~64자 영문자, 숫자, _, -, .만 사용할 수 있습니다.</value>
+  </data>
+  <data name="CloudSync_ErrLocked" xml:space="preserve">
+    <value>계정이 잠겨 있습니다. 먼저 이메일 인증으로 잠금을 해제하세요.</value>
+  </data>
+  <data name="CloudSync_ErrOtpAttempts" xml:space="preserve">
+    <value>입력 시도 횟수를 초과했습니다. 새 코드를 발급받으세요.</value>
+  </data>
+  <data name="CloudSync_ErrOtpCooldown" xml:space="preserve">
+    <value>요청이 너무 잦습니다. 잠시 후 다시 시도하세요.</value>
+  </data>
+  <data name="CloudSync_ErrOtpExpired" xml:space="preserve">
+    <value>인증 코드가 만료되었습니다.</value>
+  </data>
+  <data name="CloudSync_ErrOtpInvalid" xml:space="preserve">
+    <value>인증 코드가 올바르지 않습니다.</value>
+  </data>
+  <data name="CloudSync_ErrPasswordLength" xml:space="preserve">
+    <value>비밀번호는 8~128자여야 합니다.</value>
+  </data>
+  <data name="CloudSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>비밀번호가 일치하지 않습니다.</value>
+  </data>
+  <data name="CloudSync_ErrPayloadTooLarge" xml:space="preserve">
+    <value>업로드 크기가 허용 한도를 초과했습니다.</value>
+  </data>
+  <data name="CloudSync_ErrQuotaExceeded" xml:space="preserve">
+    <value>일일 한도에 도달했습니다. 초기화 후 다시 시도하세요.</value>
+  </data>
+  <data name="CloudSync_ErrRateLimited" xml:space="preserve">
+    <value>요청이 너무 많습니다. 잠시 후 다시 시도하세요.</value>
+  </data>
+  <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
+    <value>클라우드 용량이 부족합니다. 기존 파일을 삭제하거나 용량을 확장하세요.</value>
+  </data>
+  <data name="CloudSync_ErrUnsupportedDataType" xml:space="preserve">
+    <value>지원되지 않는 데이터 유형입니다.</value>
+  </data>
+  <data name="CloudSync_FileFilterJson" xml:space="preserve">
+    <value>아카이브 파일</value>
+  </data>
+  <data name="CloudSync_FilterAll" xml:space="preserve">
+    <value>전체</value>
+  </data>
+  <data name="CloudSync_FilterUiaf" xml:space="preserve">
+    <value>업적 기록</value>
+  </data>
+  <data name="CloudSync_FilterUigf" xml:space="preserve">
+    <value>기원 기록</value>
+  </data>
+  <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
+    <value>모든 로컬 계정 병합 (총 {0}개 UID)</value>
+  </data>
+  <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
+    <value>선택한 데이터로 클라우드 아카이브 "{0}"을(를) 덮어쓰시겠습니까?</value>
+  </data>
+  <data name="CloudSync_GachaEmptyCloud" xml:space="preserve">
+    <value>클라우드에 기원 아카이브가 없습니다.</value>
+  </data>
+  <data name="CloudSync_GachaEmptyDesc" xml:space="preserve">
+    <value>여러 계정의 클라우드 기원 아카이브 동기화</value>
+  </data>
+  <data name="CloudSync_GachaEmptyTitle" xml:space="preserve">
+    <value>클라우드 복원 / 관리</value>
+  </data>
+  <data name="CloudSync_GachaExportErrorTitle" xml:space="preserve">
+    <value>내보내기 실패</value>
+  </data>
+  <data name="CloudSync_GachaImportBtn" xml:space="preserve">
+    <value>복원</value>
+  </data>
+  <data name="CloudSync_GachaImportedMsg" xml:space="preserve">
+    <value>"{0}"에서 {1}개 계정({2}건)을 가져왔습니다.</value>
+  </data>
+  <data name="CloudSync_GachaListSummary" xml:space="preserve">
+    <value>기원 {0}개 · 전체 {1}/{2} · {3}/{4} 사용</value>
+  </data>
+  <data name="CloudSync_GachaNoLocalDataHint" xml:space="preserve">
+    <value>로컬 기원 기록이 없습니다. 아래에서 클라우드 기록을 복원할 수 있습니다.</value>
+  </data>
+  <data name="CloudSync_GachaNoRecordsSelected" xml:space="preserve">
+    <value>선택한 계정에 유효한 기원 기록이 없습니다.</value>
+  </data>
+  <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
+    <value>먼저 FufuLauncher 클라우드 계정에 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
+    <value>업로드할 계정 선택</value>
+  </data>
+  <data name="CloudSync_GachaTitle" xml:space="preserve">
+    <value>기원 분석 · FufuLauncher 클라우드 아카이브</value>
+  </data>
+  <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
+    <value>클라우드 관리</value>
+  </data>
+  <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
+    <value>UID {0} ({1}개 기록)</value>
+  </data>
+  <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
+    <value>선택한 기원 기록 업로드</value>
+  </data>
+  <data name="CloudSync_GotoUnlockBtn" xml:space="preserve">
+    <value>해제하러 가기</value>
+  </data>
+  <data name="CloudSync_HintTitle" xml:space="preserve">
+    <value>안내</value>
+  </data>
+  <data name="CloudSync_InputCurrentPwd" xml:space="preserve">
+    <value>확인을 위해 현재 비밀번호 입력</value>
+  </data>
+  <data name="CloudSync_InputOtpRequired" xml:space="preserve">
+    <value>이메일 인증 코드를 먼저 입력하세요.</value>
+  </data>
+  <data name="CloudSync_LabelAutoLogin" xml:space="preserve">
+    <value>자동 로그인</value>
+  </data>
+  <data name="CloudSync_LabelEmail" xml:space="preserve">
+    <value>연결된 이메일</value>
+  </data>
+  <data name="CloudSync_LabelLockedAt" xml:space="preserve">
+    <value>잠금 시각</value>
+  </data>
+  <data name="CloudSync_LabelStatus" xml:space="preserve">
+    <value>계정 상태</value>
+  </data>
+  <data name="CloudSync_LoadingArchivesText" xml:space="preserve">
+    <value>클라우드 아카이브 불러오는 중...</value>
+  </data>
+  <data name="CloudSync_LockAccountBtn" xml:space="preserve">
+    <value>계정 잠금 (이메일 인증)</value>
+  </data>
+  <data name="CloudSync_LockBlockedDelete" xml:space="preserve">
+    <value>잠긴 상태에서는 계정을 삭제할 수 없습니다. 먼저 잠금을 해제하세요.</value>
+  </data>
+  <data name="CloudSync_LockDesc" xml:space="preserve">
+    <value>잠금 시 수동 이메일 인증으로 해제하기 전까지 모든 클라우드 접근과 계정 삭제가 제한됩니다.</value>
+  </data>
+  <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
+    <value>잠긴 상태에서는 할당량 조회나 아카이브 관리가 불가합니다. 계정 및 보안에서 잠금을 해제하세요.</value>
+  </data>
+  <data name="CloudSync_LockedBannerTitle" xml:space="preserve">
+    <value>계정 잠김</value>
+  </data>
+  <data name="CloudSync_LockHint" xml:space="preserve">
+    <value>안내: 계정이 잠기면 이메일 인증으로 직접 해제할 때까지 클라우드 데이터 접근 및 계정 삭제가 차단됩니다.</value>
+  </data>
+  <data name="CloudSync_LockTitle" xml:space="preserve">
+    <value>계정 잠금</value>
+  </data>
+  <data name="CloudSync_LoginFailedTitle" xml:space="preserve">
+    <value>로그인 실패</value>
+  </data>
+  <data name="CloudSync_LogoutBtn" xml:space="preserve">
+    <value>로그아웃</value>
+  </data>
+  <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
+    <value>현재 FufuLauncher 클라우드 계정에서 로그아웃하시겠습니까?</value>
+  </data>
+  <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
+    <value>다른 모든 기기에서도 함께 로그아웃</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessDetail" xml:space="preserve">
+    <value>로컬 로그인 상태가 삭제되었습니다.</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessTitle" xml:space="preserve">
+    <value>로그아웃됨</value>
+  </data>
+  <data name="CloudSync_ModeLogin" xml:space="preserve">
+    <value>로그인</value>
+  </data>
+  <data name="CloudSync_ModeRegister" xml:space="preserve">
+    <value>회원가입</value>
+  </data>
+  <data name="CloudSync_ModeReset" xml:space="preserve">
+    <value>비밀번호 재설정</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccess" xml:space="preserve">
+    <value>적용 완료</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccessDetail" xml:space="preserve">
+    <value>할당량 확장이 즉시 적용되었습니다.</value>
+  </data>
+  <data name="CloudSync_MsgCancelled" xml:space="preserve">
+    <value>취소됨</value>
+  </data>
+  <data name="CloudSync_MsgCaptchaCancelled" xml:space="preserve">
+    <value>보안 인증이 취소되었습니다.</value>
+  </data>
+  <data name="CloudSync_MsgDeleteAllSuccess" xml:space="preserve">
+    <value>총 {0}개의 클라우드 아카이브를 삭제했습니다.</value>
+  </data>
+  <data name="CloudSync_MsgDeleteSuccess" xml:space="preserve">
+    <value>"{0}" 아카이브를 삭제했습니다.</value>
+  </data>
+  <data name="CloudSync_MsgLockedSuccess" xml:space="preserve">
+    <value>계정이 잠겼습니다.</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedDetail" xml:space="preserve">
+    <value>로그인되었으나 계정이 잠겨 있습니다. 이메일 인증으로 해제 후 이용하세요.</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedTitle" xml:space="preserve">
+    <value>로그인됨 (계정 잠김)</value>
+  </data>
+  <data name="CloudSync_MsgLoginRequiredFirst" xml:space="preserve">
+    <value>먼저 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccess" xml:space="preserve">
+    <value>로그인 성공</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccessDetail" xml:space="preserve">
+    <value>로그인되었습니다. 클라우드 동기화를 사용할 수 있습니다.</value>
+  </data>
+  <data name="CloudSync_MsgOverwritten" xml:space="preserve">
+    <value>"{0}" 아카이브를 덮어썼습니다.</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>가입 완료</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccessDetail" xml:space="preserve">
+    <value>계정이 생성되고 로그인되었습니다.</value>
+  </data>
+  <data name="CloudSync_MsgRenameSuccess" xml:space="preserve">
+    <value>"{0}"(으)로 변경되었습니다.</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccess" xml:space="preserve">
+    <value>재설정 완료</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccessDetail" xml:space="preserve">
+    <value>비밀번호가 변경되었습니다. 새 비밀번호로 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_MsgUnlockedSuccess" xml:space="preserve">
+    <value>계정 잠금이 해제되었습니다.</value>
+  </data>
+  <data name="CloudSync_MsgUploadedNew" xml:space="preserve">
+    <value>"{0}" 아카이브가 업로드되었습니다.</value>
+  </data>
+  <data name="CloudSync_MsgUploadFailedTitle" xml:space="preserve">
+    <value>업로드 실패</value>
+  </data>
+  <data name="CloudSync_MsgUploadSuccess" xml:space="preserve">
+    <value>업로드 완료</value>
+  </data>
+  <data name="CloudSync_NavAccount" xml:space="preserve">
+    <value>계정 및 보안</value>
+  </data>
+  <data name="CloudSync_NavArchives" xml:space="preserve">
+    <value>클라우드 아카이브</value>
+  </data>
+  <data name="CloudSync_NavQuota" xml:space="preserve">
+    <value>할당량 및 확장</value>
+  </data>
+  <data name="CloudSync_NotLockedText" xml:space="preserve">
+    <value>잠기지 않음</value>
+  </data>
+  <data name="CloudSync_NotLoggedInShort" xml:space="preserve">
+    <value>로그아웃됨</value>
+  </data>
+  <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
+    <value>FufuLauncher 클라우드 로그인 필요</value>
+  </data>
+  <data name="CloudSync_OpenBtn" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="CloudSync_OpenCenterBtn" xml:space="preserve">
+    <value>클라우드 센터 열기</value>
+  </data>
+  <data name="CloudSync_OpenFileFailedTitle" xml:space="preserve">
+    <value>파일 열기 실패</value>
+  </data>
+  <data name="CloudSync_OtpHeader" xml:space="preserve">
+    <value>이메일 인증 코드</value>
+  </data>
+  <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
+    <value>6자리 인증 코드 입력</value>
+  </data>
+  <data name="CloudSync_OtpSentTitle" xml:space="preserve">
+    <value>코드 전송됨</value>
+  </data>
+  <data name="CloudSync_OverwriteExistingCheck" xml:space="preserve">
+    <value>같은 이름이 있으면 덮어쓰기</value>
+  </data>
+  <data name="CloudSync_OverwriteFailedTitle" xml:space="preserve">
+    <value>덮어쓰기 실패</value>
+  </data>
+  <data name="CloudSync_OverwriteSuccessTitle" xml:space="preserve">
+    <value>덮어쓰기 완료</value>
+  </data>
+  <data name="CloudSync_PasswordHeader" xml:space="preserve">
+    <value>비밀번호</value>
+  </data>
+  <data name="CloudSync_PasswordNewHeader" xml:space="preserve">
+    <value>새 비밀번호</value>
+  </data>
+  <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
+    <value>8~128자 비밀번호 입력</value>
+  </data>
+  <data name="CloudSync_PasswordRequired" xml:space="preserve">
+    <value>비밀번호를 입력하세요.</value>
+  </data>
+  <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
+    <value>비밀번호 설정</value>
+  </data>
+  <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
+    <value>새로고침하여 현재 공간 및 일일 사용량을 확인하세요</value>
+  </data>
+  <data name="CloudSync_QuotaDeletesLabel" xml:space="preserve">
+    <value>일일 삭제</value>
+  </data>
+  <data name="CloudSync_QuotaFailedTitle" xml:space="preserve">
+    <value>할당량 조회 실패</value>
+  </data>
+  <data name="CloudSync_QuotaFilesLabel" xml:space="preserve">
+    <value>저장된 파일 수</value>
+  </data>
+  <data name="CloudSync_QuotaFilesValue" xml:space="preserve">
+    <value>{0} / {1}개 (남음 {2}개)</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
+    <value>계정이 잠겨 있어 확인할 수 없습니다. 먼저 잠금을 해제하세요.</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
+    <value>먼저 계정 및 보안에서 로그인하세요.</value>
+  </data>
+  <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
+    <value>일일 총 작업 수</value>
+  </data>
+  <data name="CloudSync_QuotaRefreshBtn" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="CloudSync_QuotaResetInfo" xml:space="preserve">
+    <value>기준일: {0} · 다음 초기화: {1}</value>
+  </data>
+  <data name="CloudSync_QuotaStorageLabel" xml:space="preserve">
+    <value>클라우드 저장 공간</value>
+  </data>
+  <data name="CloudSync_QuotaStorageValue" xml:space="preserve">
+    <value>{0} / {1} (남음 {2})</value>
+  </data>
+  <data name="CloudSync_QuotaTitle" xml:space="preserve">
+    <value>클라우드 공간 및 일일 할당량</value>
+  </data>
+  <data name="CloudSync_QuotaUploadsLabel" xml:space="preserve">
+    <value>일일 업로드 / 덮어쓰기</value>
+  </data>
+  <data name="CloudSync_QuotaUsedRemaining" xml:space="preserve">
+    <value>{0} / {1} 사용 (남음 {2})</value>
+  </data>
+  <data name="CloudSync_ReadFileFailedTitle" xml:space="preserve">
+    <value>파일 읽기 실패</value>
+  </data>
+  <data name="CloudSync_RefreshBtn" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="CloudSync_RefreshDoneTitle" xml:space="preserve">
+    <value>새로고침됨</value>
+  </data>
+  <data name="CloudSync_RefreshFailedTitle" xml:space="preserve">
+    <value>새로고침 실패</value>
+  </data>
+  <data name="CloudSync_RefreshListBtn" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="CloudSync_RefreshStatusBtn" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="CloudSync_RefreshStatusResultFormat" xml:space="preserve">
+    <value>현재 계정 상태: {0}.</value>
+  </data>
+  <data name="CloudSync_RegisterFailedTitle" xml:space="preserve">
+    <value>가입 실패</value>
+  </data>
+  <data name="CloudSync_RenameConfirmBtn" xml:space="preserve">
+    <value>변경</value>
+  </data>
+  <data name="CloudSync_RenameFailedTitle" xml:space="preserve">
+    <value>이름 변경 실패</value>
+  </data>
+  <data name="CloudSync_RenameNewHeader" xml:space="preserve">
+    <value>새 이름</value>
+  </data>
+  <data name="CloudSync_RenameOldName" xml:space="preserve">
+    <value>기존 이름: {0}</value>
+  </data>
+  <data name="CloudSync_RenameOverwriteCheck" xml:space="preserve">
+    <value>대상 이름이 이미 존재하면 덮어쓰기</value>
+  </data>
+  <data name="CloudSync_RenameSuccessTitle" xml:space="preserve">
+    <value>변경 완료</value>
+  </data>
+  <data name="CloudSync_RenameTitle" xml:space="preserve">
+    <value>이름 변경</value>
+  </data>
+  <data name="CloudSync_ResetFailedTitle" xml:space="preserve">
+    <value>재설정 실패</value>
+  </data>
+  <data name="CloudSync_SaveFileFailedTitle" xml:space="preserve">
+    <value>파일 저장 실패</value>
+  </data>
+  <data name="CloudSync_SaveSuccessDetail" xml:space="preserve">
+    <value>클라우드 아카이브 "{0}"을(를) {1}에 저장했습니다.</value>
+  </data>
+  <data name="CloudSync_SaveSuccessTitle" xml:space="preserve">
+    <value>저장 완료</value>
+  </data>
+  <data name="CloudSync_SecurityActionsTitle" xml:space="preserve">
+    <value>보안 및 계정 작업</value>
+  </data>
+  <data name="CloudSync_SelectedFileFormat" xml:space="preserve">
+    <value>선택됨: {0}</value>
+  </data>
+  <data name="CloudSync_SendFailedTitle" xml:space="preserve">
+    <value>전송 실패</value>
+  </data>
+  <data name="CloudSync_SendingEmail" xml:space="preserve">
+    <value>인증 메일을 보내는 중...</value>
+  </data>
+  <data name="CloudSync_SendOtpBtn" xml:space="preserve">
+    <value>코드 전송</value>
+  </data>
+  <data name="CloudSync_SessionExpiredTitle" xml:space="preserve">
+    <value>로그인 만료</value>
+  </data>
+  <data name="CloudSync_SettingsCaption" xml:space="preserve">
+    <value>클라우드 계정, 저장 공간 및 일일 할당량을 관리하고 업적과 기원 기록을 동기화합니다</value>
+  </data>
+  <data name="CloudSync_SettingsTitle" xml:space="preserve">
+    <value>FufuLauncher 클라우드 아카이브</value>
+  </data>
+  <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
+    <value>{0} (원본 {1})</value>
+  </data>
+  <data name="CloudSync_StartUploadBtn" xml:space="preserve">
+    <value>업로드</value>
+  </data>
+  <data name="CloudSync_StatusLocked" xml:space="preserve">
+    <value>잠김</value>
+  </data>
+  <data name="CloudSync_StatusNormal" xml:space="preserve">
+    <value>정상</value>
+  </data>
+  <data name="CloudSync_StatusSuffixLocked" xml:space="preserve">
+    <value>{0} · 잠김</value>
+  </data>
+  <data name="CloudSync_StatusSuffixNormal" xml:space="preserve">
+    <value>{0} · 정상</value>
+  </data>
+  <data name="CloudSync_SubmitLogin" xml:space="preserve">
+    <value>로그인</value>
+  </data>
+  <data name="CloudSync_SubmitRegister" xml:space="preserve">
+    <value>가입 및 로그인</value>
+  </data>
+  <data name="CloudSync_SubmitReset" xml:space="preserve">
+    <value>비밀번호 재설정</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
+    <value>업적</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUigf" xml:space="preserve">
+    <value>기원</value>
+  </data>
+  <data name="CloudSync_UnlockAccountBtn" xml:space="preserve">
+    <value>잠금 해제 (이메일 인증)</value>
+  </data>
+  <data name="CloudSync_UnlockDesc" xml:space="preserve">
+    <value>연결된 이메일 인증을 완료하면 잠금이 해제됩니다.</value>
+  </data>
+  <data name="CloudSync_UnlockTitle" xml:space="preserve">
+    <value>계정 잠금 해제</value>
+  </data>
+  <data name="CloudSync_UpgradeActiveFormat" xml:space="preserve">
+    <value>확장 만료일: {0}{1}</value>
+  </data>
+  <data name="CloudSync_UpgradeDeltaFormat" xml:space="preserve">
+    <value> (공간 +{0}, 파일 +{1}, 업로드 +{2}, 삭제 +{3}, 작업 +{4})</value>
+  </data>
+  <data name="CloudSync_UpgradeDisclaimer" xml:space="preserve">
+    <value>교환 코드는 개발자 디버깅 전용이며 유료 구매로 제공되지 않습니다.</value>
+  </data>
+  <data name="CloudSync_UpgradeInactive" xml:space="preserve">
+    <value>적용된 확장 플랜이 없습니다. 유효한 코드로 용량과 일일 한도를 늘릴 수 있습니다.</value>
+  </data>
+  <data name="CloudSync_UpgradeTitle" xml:space="preserve">
+    <value>확장 코드</value>
+  </data>
+  <data name="CloudSync_UploadDataTypeHeader" xml:space="preserve">
+    <value>데이터 유형</value>
+  </data>
+  <data name="CloudSync_UploadFileDialogTitle" xml:space="preserve">
+    <value>로컬 아카이브 업로드</value>
+  </data>
+  <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
+    <value>로컬 파일 업로드</value>
+  </data>
+  <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
+    <value>업적 기록</value>
+  </data>
+  <data name="CloudSync_UploadTypeUigfOption" xml:space="preserve">
+    <value>기원 기록</value>
+  </data>
+  <data name="CloudSync_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher 클라우드 아카이브</value>
+  </data>
 </root>

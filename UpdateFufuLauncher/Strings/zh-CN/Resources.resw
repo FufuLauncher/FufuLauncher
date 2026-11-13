@@ -164,7 +164,7 @@
 此处不提供更新</value>
   </data>
   <data name="PreviewNotNewerMessage" xml:space="preserve">
-    <value>预览版版本号未高于最新正式版，不允许更新预览版</value>
+    <value>预览版版本号未高于最新正式版，无法更新预览版</value>
   </data>
   <data name="FetchingGitHubTags" xml:space="preserve">
     <value>获取GitHub标签列表...</value>

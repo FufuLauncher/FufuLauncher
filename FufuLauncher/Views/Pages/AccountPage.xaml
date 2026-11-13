@@ -202,6 +202,16 @@
                         </StackPanel>
                     </Button>
 
+                    <Button
+                        Padding="24,10"
+                        HorizontalAlignment="Center"
+                        Click="OnCloudSyncClicked">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xE753;" />
+                            <TextBlock Text="{helpers:Loc Key=CloudSync_AccountFullBtn}" />
+                        </StackPanel>
+                    </Button>
+
                     <StackPanel
                         Margin="0,32,0,0"
                         Spacing="12"
@@ -523,6 +533,7 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Button
                                     x:Name="BtnSwitchAccount"
@@ -698,8 +709,29 @@
                                 </Button>
 
                                 <Button
-                                    x:Name="BtnDeleteAccount"
+                                    x:Name="BtnCloudSync"
                                     Grid.Row="8"
+                                    Click="OnCloudSyncClicked"
+                                    Style="{StaticResource ActionButtonStyle}"
+                                    Translation="0,0,32">
+                                    <Button.Shadow>
+                                        <ThemeShadow />
+                                    </Button.Shadow>
+                                    <Grid Background="Transparent">
+                                        <Canvas IsHitTestVisible="False" />
+                                        <StackPanel
+                                            HorizontalAlignment="Center"
+                                            Orientation="Horizontal"
+                                            Spacing="8">
+                                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" FontSize="20" Glyph="&#xE753;" />
+                                            <TextBlock Text="{helpers:Loc Key=CloudSync_AccountBtn}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Button>
+
+                                <Button
+                                    x:Name="BtnDeleteAccount"
+                                    Grid.Row="9"
                                     Click="OnDeleteCurrentAccountClicked"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">
@@ -724,7 +756,7 @@
 
                                 <Button
                                     x:Name="BtnLogout"
-                                    Grid.Row="9"
+                                    Grid.Row="10"
                                     Command="{x:Bind ViewModel.LogoutCommand}"
                                     Style="{StaticResource ActionButtonStyle}"
                                     Translation="0,0,32">

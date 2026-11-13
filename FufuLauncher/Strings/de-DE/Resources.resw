@@ -9182,4 +9182,808 @@ Details: {0}</value>
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>Nutzungsinformationen für Statistik und Fehleranalyse senden</value>
   </data>
+  <data name="CloudSync_AccountBtn" xml:space="preserve">
+    <value>Cloud-Archiv</value>
+  </data>
+  <data name="CloudSync_AccountFullBtn" xml:space="preserve">
+    <value>FufuLauncher Cloud-Archiv</value>
+  </data>
+  <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
+    <value>Verknüpfte E-Mail, Schutzstatus und Sicherheitsoptionen anzeigen</value>
+  </data>
+  <data name="CloudSync_AccountSectionTitle" xml:space="preserve">
+    <value>Kontoinformationen</value>
+  </data>
+  <data name="CloudSync_AchievementBtn" xml:space="preserve">
+    <value>Cloud-Archive</value>
+  </data>
+  <data name="CloudSync_AchievementConfirmOverwriteMsg" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" mit dem aktuellen Erfolgsstand überschreiben?</value>
+  </data>
+  <data name="CloudSync_AchievementCurrentProfile" xml:space="preserve">
+    <value>Aktuelles lokales Profil: {0} (mehrere Archive pro Konto oder für verschiedene Konten unterstützt)</value>
+  </data>
+  <data name="CloudSync_AchievementEmptyCloud" xml:space="preserve">
+    <value>Noch keine Cloud-Erfolgsarchive vorhanden.</value>
+  </data>
+  <data name="CloudSync_AchievementImportBtn" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="CloudSync_AchievementImportedMsg" xml:space="preserve">
+    <value>"{0}" importiert und {1} Erfolg(e) aktualisiert.</value>
+  </data>
+  <data name="CloudSync_AchievementImportFailedTitle" xml:space="preserve">
+    <value>Import fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_AchievementImportSuccessTitle" xml:space="preserve">
+    <value>Importiert</value>
+  </data>
+  <data name="CloudSync_AchievementInvalidFormatMsg" xml:space="preserve">
+    <value>Ungültiges Archivformat.</value>
+  </data>
+  <data name="CloudSync_AchievementListSummary" xml:space="preserve">
+    <value>{0} Erfolgsarchiv(e) · {1}/{2} gesamt · {3}/{4} belegt</value>
+  </data>
+  <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
+    <value>Bitte melden Sie sich zuerst bei FufuLauncher Cloud an.</value>
+  </data>
+  <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
+    <value>{1} Erfolge aus "{0}" synchronisiert</value>
+  </data>
+  <data name="CloudSync_AchievementTitle" xml:space="preserve">
+    <value>Erfolge · FufuLauncher Cloud-Archive</value>
+  </data>
+  <data name="CloudSync_AchievementTooltip" xml:space="preserve">
+    <value>FufuLauncher Cloud-Erfolgsarchive verwalten</value>
+  </data>
+  <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
+    <value>Aktuelle Erfolge hochladen</value>
+  </data>
+  <data name="CloudSync_ActionSuccessTitleFormat" xml:space="preserve">
+    <value>{0} erfolgreich</value>
+  </data>
+  <data name="CloudSync_ActivateBtn" xml:space="preserve">
+    <value>Einlösen</value>
+  </data>
+  <data name="CloudSync_ActivateFailedTitle" xml:space="preserve">
+    <value>Einlösung fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_ActivatePromptEmpty" xml:space="preserve">
+    <value>Bitte geben Sie einen Aktivierungscode ein.</value>
+  </data>
+  <data name="CloudSync_ActivationPlaceholder" xml:space="preserve">
+    <value>Aktivierungscode eingeben</value>
+  </data>
+  <data name="CloudSync_ArchiveNameHeader" xml:space="preserve">
+    <value>Archivname</value>
+  </data>
+  <data name="CloudSync_ArchiveNamePlaceholder" xml:space="preserve">
+    <value>Nur Buchstaben, Ziffern, _, -, .</value>
+  </data>
+  <data name="CloudSync_ArchivesDefaultSubtitle" xml:space="preserve">
+    <value>Melden Sie sich an, um Cloud-Archive zu verwalten</value>
+  </data>
+  <data name="CloudSync_ArchivesEmpty" xml:space="preserve">
+    <value>Keine Cloud-Archive gefunden.</value>
+  </data>
+  <data name="CloudSync_ArchivesFilteredEmpty" xml:space="preserve">
+    <value>Keine passenden Cloud-Archive für diesen Filter gefunden.</value>
+  </data>
+  <data name="CloudSync_ArchivesLoadFailedTitle" xml:space="preserve">
+    <value>Laden fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedEmpty" xml:space="preserve">
+    <value>Konto ist gesperrt. Bitte unter Konto &amp; Sicherheit entsperren.</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedHint" xml:space="preserve">
+    <value>Konto ist gesperrt; Archivzugriff deaktiviert</value>
+  </data>
+  <data name="CloudSync_ArchivesSignInEmpty" xml:space="preserve">
+    <value>Bitte melden Sie sich an, um Cloud-Archive anzuzeigen.</value>
+  </data>
+  <data name="CloudSync_ArchivesSubtitle" xml:space="preserve">
+    <value>Gespeicherte Cloud-Archive anzeigen, sichern, umbenennen, überschreiben oder löschen</value>
+  </data>
+  <data name="CloudSync_ArchivesSummary" xml:space="preserve">
+    <value>{0} / {1} Archive · {2} / {3} belegt</value>
+  </data>
+  <data name="CloudSync_ArchivesTitle" xml:space="preserve">
+    <value>Cloud-Archive</value>
+  </data>
+  <data name="CloudSync_AuthSubtitle" xml:space="preserve">
+    <value>Melden Sie sich an, um Erfolge und Gebetschroniken sicher geräteübergreifend zu sichern.</value>
+  </data>
+  <data name="CloudSync_AuthTitle" xml:space="preserve">
+    <value>Bei FufuLauncher Cloud anmelden oder registrieren</value>
+  </data>
+  <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
+    <value>Anmeldestatus sicher auf diesem Gerät gespeichert</value>
+  </data>
+  <data name="CloudSync_BtnDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="CloudSync_BtnExportSave" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="CloudSync_BtnOverwrite" xml:space="preserve">
+    <value>Überschreiben</value>
+  </data>
+  <data name="CloudSync_BtnRename" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="CloudSync_BusyWaitMsg" xml:space="preserve">
+    <value>Ein anderer Vorgang läuft noch. Bitte warten.</value>
+  </data>
+  <data name="CloudSync_CancelBtn" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="CloudSync_CannotOperateTitle" xml:space="preserve">
+    <value>Nicht verfügbar</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpened" xml:space="preserve">
+    <value>Überprüfungsseite wurde im Browser geöffnet. Warte auf Abschluss...</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpenFailed" xml:space="preserve">
+    <value>Browser konnte nicht geöffnet werden.</value>
+  </data>
+  <data name="CloudSync_CaptchaHint" xml:space="preserve">
+    <value>Bitte schließen Sie die Überprüfung unten ab. Dieses Fenster schließt danach automatisch.</value>
+  </data>
+  <data name="CloudSync_CaptchaLoadError" xml:space="preserve">
+    <value>Überprüfungsseite konnte nicht geladen werden. Klicken Sie auf Im Browser öffnen.</value>
+  </data>
+  <data name="CloudSync_CaptchaOpenBrowser" xml:space="preserve">
+    <value>Im Browser öffnen</value>
+  </data>
+  <data name="CloudSync_CaptchaSubmitting" xml:space="preserve">
+    <value>Überprüfungsergebnis wird bestätigt...</value>
+  </data>
+  <data name="CloudSync_CaptchaTitle" xml:space="preserve">
+    <value>Sicherheitsüberprüfung</value>
+  </data>
+  <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
+    <value>Sicherheitsüberprüfung - FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CloseBtn" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="CloudSync_ConfirmBtn" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="CloudSync_ConfirmLockBtn" xml:space="preserve">
+    <value>Sperren</value>
+  </data>
+  <data name="CloudSync_ConfirmNewPasswordHeader" xml:space="preserve">
+    <value>Neues Passwort bestätigen</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteBtn" xml:space="preserve">
+    <value>Überschreiben</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteDiskMsg" xml:space="preserve">
+    <value>Cloud-Archiv "{1}" mit "{0}" überschreiben?</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteTitle" xml:space="preserve">
+    <value>Überschreiben bestätigen</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Passwort erneut eingeben</value>
+  </data>
+  <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
+    <value>Entsperren</value>
+  </data>
+  <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
+    <value>Konto &amp; Daten löschen</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneDetail" xml:space="preserve">
+    <value>Ihr Konto und alle Cloud-Daten wurden dauerhaft gelöscht.</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneTitle" xml:space="preserve">
+    <value>Konto gelöscht</value>
+  </data>
+  <data name="CloudSync_DeleteAccountTitle" xml:space="preserve">
+    <value>Konto dauerhaft löschen</value>
+  </data>
+  <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
+    <value>Warnung: Beim Löschen Ihres Kontos werden alle Cloud-Archive und Kontodaten unwiderruflich entfernt!</value>
+  </data>
+  <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
+    <value>Alle Cloud-Daten löschen</value>
+  </data>
+  <data name="CloudSync_DeleteAllConfirmBtn" xml:space="preserve">
+    <value>Alles löschen</value>
+  </data>
+  <data name="CloudSync_DeleteAllFailedTitle" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
+    <value>Wirklich alle Erfolgs- und Gebetsarchive aus der Cloud löschen? Ihr Konto bleibt erhalten.</value>
+  </data>
+  <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
+    <value>Gelöscht</value>
+  </data>
+  <data name="CloudSync_DeleteAllTitle" xml:space="preserve">
+    <value>Alle Cloud-Daten löschen</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveMsg" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" dauerhaft löschen? Dies kann nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveTitle" xml:space="preserve">
+    <value>Cloud-Archiv löschen</value>
+  </data>
+  <data name="CloudSync_DeleteConfirmBtn" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="CloudSync_DeleteFailedTitle" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_DeleteSuccessTitle" xml:space="preserve">
+    <value>Gelöscht</value>
+  </data>
+  <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
+    <value>Download fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_EmailHeader" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="CloudSync_EmailOtpSentDetail" xml:space="preserve">
+    <value>Bestätigungscode an {0} gesendet (10 Minuten gültig).</value>
+  </data>
+  <data name="CloudSync_EmailPlaceholder" xml:space="preserve">
+    <value>E-Mail-Adresse eingeben</value>
+  </data>
+  <data name="CloudSync_ErrAccountNotFound" xml:space="preserve">
+    <value>Kein Konto mit dieser E-Mail-Adresse gefunden.</value>
+  </data>
+  <data name="CloudSync_ErrActivationDisabled" xml:space="preserve">
+    <value>Die Code-Einlösung ist derzeit nicht verfügbar.</value>
+  </data>
+  <data name="CloudSync_ErrActivationExhausted" xml:space="preserve">
+    <value>Dieser Aktivierungscode hat das Einlöselimit erreicht.</value>
+  </data>
+  <data name="CloudSync_ErrActivationInvalid" xml:space="preserve">
+    <value>Ungültiger Aktivierungscode.</value>
+  </data>
+  <data name="CloudSync_ErrActivationRedeemed" xml:space="preserve">
+    <value>Dieser Code wurde von diesem Konto bereits eingelöst.</value>
+  </data>
+  <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
+    <value>Ein Archiv mit diesem Namen existiert bereits.</value>
+  </data>
+  <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
+    <value>Archiv nicht gefunden.</value>
+  </data>
+  <data name="CloudSync_ErrAuthRequired" xml:space="preserve">
+    <value>Sitzung abgelaufen. Bitte erneut anmelden.</value>
+  </data>
+  <data name="CloudSync_ErrCaptchaFailed" xml:space="preserve">
+    <value>Überprüfung fehlgeschlagen oder abgelaufen. Bitte erneut versuchen.</value>
+  </data>
+  <data name="CloudSync_ErrEmailRegistered" xml:space="preserve">
+    <value>Diese E-Mail-Adresse ist bereits registriert.</value>
+  </data>
+  <data name="CloudSync_ErrEnterCodeFirst" xml:space="preserve">
+    <value>Bitte fordern Sie zuerst einen E-Mail-Bestätigungscode an und geben Sie ihn ein.</value>
+  </data>
+  <data name="CloudSync_ErrFileLimit" xml:space="preserve">
+    <value>Maximale Dateianzahl erreicht. Löschen oder überschreiben Sie ein Archiv.</value>
+  </data>
+  <data name="CloudSync_ErrGeneric" xml:space="preserve">
+    <value>Vorgang fehlgeschlagen. Bitte prüfen Sie Ihre Internetverbindung.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>Falsche E-Mail-Adresse oder falsches Passwort.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidEmail" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidFormat" xml:space="preserve">
+    <value>Archivformat ungültig.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
+    <value>Der Archivname darf 1–64 Buchstaben, Ziffern, _, -, . enthalten und nicht mit einem Punkt enden.</value>
+  </data>
+  <data name="CloudSync_ErrLocked" xml:space="preserve">
+    <value>Dieses Konto ist gesperrt. Bitte entsperren Sie es zuerst im FufuLauncher Cloud-Archiv.</value>
+  </data>
+  <data name="CloudSync_ErrOtpAttempts" xml:space="preserve">
+    <value>Zu viele Fehlversuche. Bitte neuen Code anfordern.</value>
+  </data>
+  <data name="CloudSync_ErrOtpCooldown" xml:space="preserve">
+    <value>Zu viele Anfragen. Bitte warten Sie einen Moment.</value>
+  </data>
+  <data name="CloudSync_ErrOtpExpired" xml:space="preserve">
+    <value>Der Bestätigungscode ist abgelaufen.</value>
+  </data>
+  <data name="CloudSync_ErrOtpInvalid" xml:space="preserve">
+    <value>Ungültiger Bestätigungscode.</value>
+  </data>
+  <data name="CloudSync_ErrPasswordLength" xml:space="preserve">
+    <value>Das Passwort muss 8–128 Zeichen lang sein.</value>
+  </data>
+  <data name="CloudSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="CloudSync_ErrPayloadTooLarge" xml:space="preserve">
+    <value>Die Archivgröße überschreitet das zulässige Limit.</value>
+  </data>
+  <data name="CloudSync_ErrQuotaExceeded" xml:space="preserve">
+    <value>Tageskontingent erreicht. Bitte morgen erneut versuchen.</value>
+  </data>
+  <data name="CloudSync_ErrRateLimited" xml:space="preserve">
+    <value>Zu viele Anfragen. Bitte später erneut versuchen.</value>
+  </data>
+  <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
+    <value>Nicht genügend Cloud-Speicherplatz verfügbar.</value>
+  </data>
+  <data name="CloudSync_ErrUnsupportedDataType" xml:space="preserve">
+    <value>Nicht unterstützter Archivdatentyp.</value>
+  </data>
+  <data name="CloudSync_FileFilterJson" xml:space="preserve">
+    <value>Archivdateien</value>
+  </data>
+  <data name="CloudSync_FilterAll" xml:space="preserve">
+    <value>Alle Typen</value>
+  </data>
+  <data name="CloudSync_FilterUiaf" xml:space="preserve">
+    <value>Erfolge</value>
+  </data>
+  <data name="CloudSync_FilterUigf" xml:space="preserve">
+    <value>Gebetschronik</value>
+  </data>
+  <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
+    <value>Alle lokalen Konten kombiniert ({0} UIDs)</value>
+  </data>
+  <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" mit ausgewählten Gebetsdaten überschreiben?</value>
+  </data>
+  <data name="CloudSync_GachaEmptyCloud" xml:space="preserve">
+    <value>Noch keine Cloud-Gebetsarchive vorhanden.</value>
+  </data>
+  <data name="CloudSync_GachaEmptyDesc" xml:space="preserve">
+    <value>Gebetsarchive mehrerer Konten aus der Cloud verwalten</value>
+  </data>
+  <data name="CloudSync_GachaEmptyTitle" xml:space="preserve">
+    <value>Aus Cloud wiederherstellen</value>
+  </data>
+  <data name="CloudSync_GachaExportErrorTitle" xml:space="preserve">
+    <value>Export fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_GachaImportBtn" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="CloudSync_GachaImportedMsg" xml:space="preserve">
+    <value>{1} Konto/Konten ({2} Einträge) aus "{0}" importiert.</value>
+  </data>
+  <data name="CloudSync_GachaListSummary" xml:space="preserve">
+    <value>{0} Gebetsarchiv(e) · {1}/{2} gesamt · {3}/{4} belegt</value>
+  </data>
+  <data name="CloudSync_GachaNoLocalDataHint" xml:space="preserve">
+    <value>Keine lokalen Gebetsdaten vorhanden. Sie können unten Cloud-Archive wiederherstellen.</value>
+  </data>
+  <data name="CloudSync_GachaNoRecordsSelected" xml:space="preserve">
+    <value>Keine gültigen Gebetseinträge für das ausgewählte Konto vorhanden.</value>
+  </data>
+  <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
+    <value>Bitte melden Sie sich zuerst bei FufuLauncher Cloud an.</value>
+  </data>
+  <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
+    <value>Lokale Kontodaten zum Hochladen</value>
+  </data>
+  <data name="CloudSync_GachaTitle" xml:space="preserve">
+    <value>Gebetsanalyse · FufuLauncher Cloud-Archive</value>
+  </data>
+  <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
+    <value>Cloud-Sync</value>
+  </data>
+  <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
+    <value>UID {0} ({1} Einträge)</value>
+  </data>
+  <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
+    <value>Ausgewählte Gebetsdaten hochladen</value>
+  </data>
+  <data name="CloudSync_GotoUnlockBtn" xml:space="preserve">
+    <value>Entsperren</value>
+  </data>
+  <data name="CloudSync_HintTitle" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="CloudSync_InputCurrentPwd" xml:space="preserve">
+    <value>Aktuelles Passwort zur Bestätigung eingeben</value>
+  </data>
+  <data name="CloudSync_InputOtpRequired" xml:space="preserve">
+    <value>Bitte geben Sie den E-Mail-Bestätigungscode ein.</value>
+  </data>
+  <data name="CloudSync_LabelAutoLogin" xml:space="preserve">
+    <value>Automatische Anmeldung</value>
+  </data>
+  <data name="CloudSync_LabelEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="CloudSync_LabelLockedAt" xml:space="preserve">
+    <value>Gesperrt am</value>
+  </data>
+  <data name="CloudSync_LabelStatus" xml:space="preserve">
+    <value>Kontostatus</value>
+  </data>
+  <data name="CloudSync_LoadingArchivesText" xml:space="preserve">
+    <value>Cloud-Archive werden geladen...</value>
+  </data>
+  <data name="CloudSync_LockAccountBtn" xml:space="preserve">
+    <value>Konto sperren (E-Mail)</value>
+  </data>
+  <data name="CloudSync_LockBlockedDelete" xml:space="preserve">
+    <value>Ein gesperrtes Konto kann nicht gelöscht werden. Bitte entsperren Sie es zuerst.</value>
+  </data>
+  <data name="CloudSync_LockDesc" xml:space="preserve">
+    <value>Durch das Sperren werden alle Cloud-Archivzugriffe und Kontolöschungen bis zur manuellen E-Mail-Bestätigung blockiert.</value>
+  </data>
+  <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
+    <value>Im gesperrten Zustand können keine Kontingente oder Archive verwaltet werden. Entsperren Sie das Konto unter Konto &amp; Sicherheit.</value>
+  </data>
+  <data name="CloudSync_LockedBannerTitle" xml:space="preserve">
+    <value>Konto gesperrt</value>
+  </data>
+  <data name="CloudSync_LockHint" xml:space="preserve">
+    <value>Hinweis: Bei gesperrtem Konto sind das Anzeigen, Hochladen und Löschen von Archiven sowie die Kontolöschung bis zur manuellen E-Mail-Entsperrung blockiert.</value>
+  </data>
+  <data name="CloudSync_LockTitle" xml:space="preserve">
+    <value>Konto sperren</value>
+  </data>
+  <data name="CloudSync_LoginFailedTitle" xml:space="preserve">
+    <value>Anmeldung fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_LogoutBtn" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
+    <value>Von Ihrem FufuLauncher Cloud-Konto auf diesem Gerät abmelden?</value>
+  </data>
+  <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
+    <value>Auch auf allen anderen Geräten abmelden</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessDetail" xml:space="preserve">
+    <value>Lokaler Anmeldestatus wurde entfernt.</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessTitle" xml:space="preserve">
+    <value>Abgemeldet</value>
+  </data>
+  <data name="CloudSync_ModeLogin" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="CloudSync_ModeRegister" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="CloudSync_ModeReset" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccess" xml:space="preserve">
+    <value>Eingelöst</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccessDetail" xml:space="preserve">
+    <value>Aktivierungscode eingelöst. Die Kontingenterweiterung ist aktiv.</value>
+  </data>
+  <data name="CloudSync_MsgCancelled" xml:space="preserve">
+    <value>Abgebrochen</value>
+  </data>
+  <data name="CloudSync_MsgCaptchaCancelled" xml:space="preserve">
+    <value>Überprüfung abgebrochen.</value>
+  </data>
+  <data name="CloudSync_MsgDeleteAllSuccess" xml:space="preserve">
+    <value>{0} Cloud-Archiv(e) gelöscht.</value>
+  </data>
+  <data name="CloudSync_MsgDeleteSuccess" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" gelöscht.</value>
+  </data>
+  <data name="CloudSync_MsgLockedSuccess" xml:space="preserve">
+    <value>Ihr Konto ist jetzt gesperrt.</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedDetail" xml:space="preserve">
+    <value>Angemeldet, aber das Konto ist gesperrt. Bitte per E-Mail entsperren.</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedTitle" xml:space="preserve">
+    <value>Angemeldet (Konto gesperrt)</value>
+  </data>
+  <data name="CloudSync_MsgLoginRequiredFirst" xml:space="preserve">
+    <value>Bitte melden Sie sich zuerst an.</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccess" xml:space="preserve">
+    <value>Angemeldet</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccessDetail" xml:space="preserve">
+    <value>Erfolgreich angemeldet. Cloud-Synchronisation ist bereit.</value>
+  </data>
+  <data name="CloudSync_MsgOverwritten" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" überschrieben.</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>Konto erstellt</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccessDetail" xml:space="preserve">
+    <value>Konto registriert und automatisch angemeldet.</value>
+  </data>
+  <data name="CloudSync_MsgRenameSuccess" xml:space="preserve">
+    <value>Umbenannt in "{0}".</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccess" xml:space="preserve">
+    <value>Passwort zurückgesetzt</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccessDetail" xml:space="preserve">
+    <value>Passwort aktualisiert. Bitte melden Sie sich mit dem neuen Passwort an.</value>
+  </data>
+  <data name="CloudSync_MsgUnlockedSuccess" xml:space="preserve">
+    <value>Konto entsperrt. Alle Funktionen wurden wiederhergestellt.</value>
+  </data>
+  <data name="CloudSync_MsgUploadedNew" xml:space="preserve">
+    <value>Archiv "{0}" hochgeladen.</value>
+  </data>
+  <data name="CloudSync_MsgUploadFailedTitle" xml:space="preserve">
+    <value>Upload fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_MsgUploadSuccess" xml:space="preserve">
+    <value>Hochgeladen</value>
+  </data>
+  <data name="CloudSync_NavAccount" xml:space="preserve">
+    <value>Konto &amp; Sicherheit</value>
+  </data>
+  <data name="CloudSync_NavArchives" xml:space="preserve">
+    <value>Cloud-Archive</value>
+  </data>
+  <data name="CloudSync_NavQuota" xml:space="preserve">
+    <value>Kontingent &amp; Erweiterung</value>
+  </data>
+  <data name="CloudSync_NotLockedText" xml:space="preserve">
+    <value>Nicht gesperrt</value>
+  </data>
+  <data name="CloudSync_NotLoggedInShort" xml:space="preserve">
+    <value>Nicht angemeldet</value>
+  </data>
+  <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
+    <value>Nicht bei FufuLauncher Cloud angemeldet</value>
+  </data>
+  <data name="CloudSync_OpenBtn" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="CloudSync_OpenCenterBtn" xml:space="preserve">
+    <value>Cloud-Archiv öffnen</value>
+  </data>
+  <data name="CloudSync_OpenFileFailedTitle" xml:space="preserve">
+    <value>Datei konnte nicht geöffnet werden</value>
+  </data>
+  <data name="CloudSync_OtpHeader" xml:space="preserve">
+    <value>E-Mail-Bestätigungscode</value>
+  </data>
+  <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
+    <value>6-stelligen Code eingeben</value>
+  </data>
+  <data name="CloudSync_OtpSentTitle" xml:space="preserve">
+    <value>Code gesendet</value>
+  </data>
+  <data name="CloudSync_OverwriteExistingCheck" xml:space="preserve">
+    <value>Überschreiben, falls der Name bereits existiert</value>
+  </data>
+  <data name="CloudSync_OverwriteFailedTitle" xml:space="preserve">
+    <value>Überschreiben fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_OverwriteSuccessTitle" xml:space="preserve">
+    <value>Überschrieben</value>
+  </data>
+  <data name="CloudSync_PasswordHeader" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="CloudSync_PasswordNewHeader" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
+    <value>8–128 Zeichen eingeben</value>
+  </data>
+  <data name="CloudSync_PasswordRequired" xml:space="preserve">
+    <value>Bitte geben Sie Ihr Passwort ein.</value>
+  </data>
+  <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
+    <value>Passwort festlegen</value>
+  </data>
+  <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
+    <value>Aktualisieren, um Speicherplatz und tägliche Nutzung anzuzeigen</value>
+  </data>
+  <data name="CloudSync_QuotaDeletesLabel" xml:space="preserve">
+    <value>Tägliche Löschungen</value>
+  </data>
+  <data name="CloudSync_QuotaFailedTitle" xml:space="preserve">
+    <value>Kontingent konnte nicht geladen werden</value>
+  </data>
+  <data name="CloudSync_QuotaFilesLabel" xml:space="preserve">
+    <value>Archivdateien</value>
+  </data>
+  <data name="CloudSync_QuotaFilesValue" xml:space="preserve">
+    <value>{0} / {1} Dateien (noch {2})</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
+    <value>Konto ist gesperrt. Bitte zuerst per E-Mail entsperren.</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
+    <value>Bitte melden Sie sich zuerst unter Konto &amp; Sicherheit an.</value>
+  </data>
+  <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
+    <value>Tägliche Vorgänge</value>
+  </data>
+  <data name="CloudSync_QuotaRefreshBtn" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="CloudSync_QuotaResetInfo" xml:space="preserve">
+    <value>Datum: {0} · Nächster Reset: {1}</value>
+  </data>
+  <data name="CloudSync_QuotaStorageLabel" xml:space="preserve">
+    <value>Cloud-Speicher</value>
+  </data>
+  <data name="CloudSync_QuotaStorageValue" xml:space="preserve">
+    <value>{0} / {1} (noch {2})</value>
+  </data>
+  <data name="CloudSync_QuotaTitle" xml:space="preserve">
+    <value>Cloud-Speicher &amp; Tageskontingente</value>
+  </data>
+  <data name="CloudSync_QuotaUploadsLabel" xml:space="preserve">
+    <value>Tägliche Uploads / Überschreibungen</value>
+  </data>
+  <data name="CloudSync_QuotaUsedRemaining" xml:space="preserve">
+    <value>{0} / {1} genutzt (noch {2})</value>
+  </data>
+  <data name="CloudSync_ReadFileFailedTitle" xml:space="preserve">
+    <value>Datei konnte nicht gelesen werden</value>
+  </data>
+  <data name="CloudSync_RefreshBtn" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="CloudSync_RefreshDoneTitle" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="CloudSync_RefreshFailedTitle" xml:space="preserve">
+    <value>Aktualisierung fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_RefreshListBtn" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="CloudSync_RefreshStatusBtn" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="CloudSync_RefreshStatusResultFormat" xml:space="preserve">
+    <value>Kontostatus: {0}.</value>
+  </data>
+  <data name="CloudSync_RegisterFailedTitle" xml:space="preserve">
+    <value>Registrierung fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_RenameConfirmBtn" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="CloudSync_RenameFailedTitle" xml:space="preserve">
+    <value>Umbenennen fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_RenameNewHeader" xml:space="preserve">
+    <value>Neuer Archivname</value>
+  </data>
+  <data name="CloudSync_RenameOldName" xml:space="preserve">
+    <value>Aktueller Name: {0}</value>
+  </data>
+  <data name="CloudSync_RenameOverwriteCheck" xml:space="preserve">
+    <value>Überschreiben, falls Zielname existiert</value>
+  </data>
+  <data name="CloudSync_RenameSuccessTitle" xml:space="preserve">
+    <value>Umbenannt</value>
+  </data>
+  <data name="CloudSync_RenameTitle" xml:space="preserve">
+    <value>Cloud-Archiv umbenennen</value>
+  </data>
+  <data name="CloudSync_ResetFailedTitle" xml:space="preserve">
+    <value>Zurücksetzen fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_SaveFileFailedTitle" xml:space="preserve">
+    <value>Datei konnte nicht gespeichert werden</value>
+  </data>
+  <data name="CloudSync_SaveSuccessDetail" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" unter {1} gespeichert.</value>
+  </data>
+  <data name="CloudSync_SaveSuccessTitle" xml:space="preserve">
+    <value>Gespeichert</value>
+  </data>
+  <data name="CloudSync_SecurityActionsTitle" xml:space="preserve">
+    <value>Sicherheit &amp; Konto</value>
+  </data>
+  <data name="CloudSync_SelectedFileFormat" xml:space="preserve">
+    <value>Ausgewählt: {0}</value>
+  </data>
+  <data name="CloudSync_SendFailedTitle" xml:space="preserve">
+    <value>Senden fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_SendingEmail" xml:space="preserve">
+    <value>Bestätigungs-E-Mail wird gesendet...</value>
+  </data>
+  <data name="CloudSync_SendOtpBtn" xml:space="preserve">
+    <value>Code senden</value>
+  </data>
+  <data name="CloudSync_SessionExpiredTitle" xml:space="preserve">
+    <value>Sitzung abgelaufen</value>
+  </data>
+  <data name="CloudSync_SettingsCaption" xml:space="preserve">
+    <value>Cloud-Konto, Speicher und Tageskontingente verwalten sowie Erfolge und Gebetschronik synchronisieren</value>
+  </data>
+  <data name="CloudSync_SettingsTitle" xml:space="preserve">
+    <value>FufuLauncher Cloud-Archiv</value>
+  </data>
+  <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
+    <value>{0} (original {1})</value>
+  </data>
+  <data name="CloudSync_StartUploadBtn" xml:space="preserve">
+    <value>Hochladen</value>
+  </data>
+  <data name="CloudSync_StatusLocked" xml:space="preserve">
+    <value>Gesperrt</value>
+  </data>
+  <data name="CloudSync_StatusNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="CloudSync_StatusSuffixLocked" xml:space="preserve">
+    <value>{0} · Gesperrt</value>
+  </data>
+  <data name="CloudSync_StatusSuffixNormal" xml:space="preserve">
+    <value>{0} · Normal</value>
+  </data>
+  <data name="CloudSync_SubmitLogin" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="CloudSync_SubmitRegister" xml:space="preserve">
+    <value>Registrieren &amp; Anmelden</value>
+  </data>
+  <data name="CloudSync_SubmitReset" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
+    <value>Erfolge</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUigf" xml:space="preserve">
+    <value>Gebete</value>
+  </data>
+  <data name="CloudSync_UnlockAccountBtn" xml:space="preserve">
+    <value>Konto entsperren (E-Mail)</value>
+  </data>
+  <data name="CloudSync_UnlockDesc" xml:space="preserve">
+    <value>Schließen Sie die E-Mail-Bestätigung ab, um den Zugriff wiederherzustellen.</value>
+  </data>
+  <data name="CloudSync_UnlockTitle" xml:space="preserve">
+    <value>Konto entsperren</value>
+  </data>
+  <data name="CloudSync_UpgradeActiveFormat" xml:space="preserve">
+    <value>Erweiterung aktiv bis: {0}{1}</value>
+  </data>
+  <data name="CloudSync_UpgradeDeltaFormat" xml:space="preserve">
+    <value> (Speicher +{0}, Dateien +{1}, Uploads +{2}, Löschungen +{3}, Vorgänge +{4})</value>
+  </data>
+  <data name="CloudSync_UpgradeDisclaimer" xml:space="preserve">
+    <value>Einlösecodes dienen ausschließlich der Entwickler-Fehlerbehebung und sind nicht käuflich erwerblich.</value>
+  </data>
+  <data name="CloudSync_UpgradeInactive" xml:space="preserve">
+    <value>Keine Erweiterung aktiv. Lösen Sie einen gültigen Aktivierungscode ein, um Limits zu erhöhen.</value>
+  </data>
+  <data name="CloudSync_UpgradeTitle" xml:space="preserve">
+    <value>Kontingent-Erweiterungscode</value>
+  </data>
+  <data name="CloudSync_UploadDataTypeHeader" xml:space="preserve">
+    <value>Datentyp</value>
+  </data>
+  <data name="CloudSync_UploadFileDialogTitle" xml:space="preserve">
+    <value>Lokales Archiv hochladen</value>
+  </data>
+  <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
+    <value>Lokale Datei hochladen</value>
+  </data>
+  <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
+    <value>Erfolge</value>
+  </data>
+  <data name="CloudSync_UploadTypeUigfOption" xml:space="preserve">
+    <value>Gebetschronik</value>
+  </data>
+  <data name="CloudSync_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher Cloud-Archiv</value>
+  </data>
 </root>

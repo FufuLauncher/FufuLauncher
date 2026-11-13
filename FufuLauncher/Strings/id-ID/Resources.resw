@@ -9178,4 +9178,808 @@ Detail: {0}</value>
   <data name="Settings_Telemetry_Caption" xml:space="preserve">
     <value>Kirim informasi penggunaan untuk statistik dan pemecahan masalah</value>
   </data>
+  <data name="CloudSync_AccountBtn" xml:space="preserve">
+    <value>Arsip Cloud</value>
+  </data>
+  <data name="CloudSync_AccountFullBtn" xml:space="preserve">
+    <value>FufuLauncher Cloud Archive</value>
+  </data>
+  <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
+    <value>Lihat email tertaut, status perlindungan, dan opsi keamanan</value>
+  </data>
+  <data name="CloudSync_AccountSectionTitle" xml:space="preserve">
+    <value>Informasi Akun</value>
+  </data>
+  <data name="CloudSync_AchievementBtn" xml:space="preserve">
+    <value>Arsip Cloud</value>
+  </data>
+  <data name="CloudSync_AchievementConfirmOverwriteMsg" xml:space="preserve">
+    <value>Timpa arsip cloud "{0}" dengan progres saat ini?</value>
+  </data>
+  <data name="CloudSync_AchievementCurrentProfile" xml:space="preserve">
+    <value>Profil saat ini: {0}</value>
+  </data>
+  <data name="CloudSync_AchievementEmptyCloud" xml:space="preserve">
+    <value>Belum ada arsip pencapaian di cloud.</value>
+  </data>
+  <data name="CloudSync_AchievementImportBtn" xml:space="preserve">
+    <value>Impor</value>
+  </data>
+  <data name="CloudSync_AchievementImportedMsg" xml:space="preserve">
+    <value>Mengimpor "{0}" dan memperbarui {1} pencapaian.</value>
+  </data>
+  <data name="CloudSync_AchievementImportFailedTitle" xml:space="preserve">
+    <value>Impor Gagal</value>
+  </data>
+  <data name="CloudSync_AchievementImportSuccessTitle" xml:space="preserve">
+    <value>Berhasil Diimpor</value>
+  </data>
+  <data name="CloudSync_AchievementInvalidFormatMsg" xml:space="preserve">
+    <value>Format arsip cloud tidak valid.</value>
+  </data>
+  <data name="CloudSync_AchievementListSummary" xml:space="preserve">
+    <value>{0} pencapaian · {1}/{2} total · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
+    <value>Masuk ke FufuLauncher Cloud Archive terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
+    <value>Disinkronkan {1} pencapaian dari "{0}"</value>
+  </data>
+  <data name="CloudSync_AchievementTitle" xml:space="preserve">
+    <value>Pencapaian · Arsip Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_AchievementTooltip" xml:space="preserve">
+    <value>Kelola arsip pencapaian cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
+    <value>Unggah Pencapaian Saat Ini</value>
+  </data>
+  <data name="CloudSync_ActionSuccessTitleFormat" xml:space="preserve">
+    <value>{0} Berhasil</value>
+  </data>
+  <data name="CloudSync_ActivateBtn" xml:space="preserve">
+    <value>Tukarkan</value>
+  </data>
+  <data name="CloudSync_ActivateFailedTitle" xml:space="preserve">
+    <value>Penukaran Gagal</value>
+  </data>
+  <data name="CloudSync_ActivatePromptEmpty" xml:space="preserve">
+    <value>Masukkan kode aktivasi.</value>
+  </data>
+  <data name="CloudSync_ActivationPlaceholder" xml:space="preserve">
+    <value>Masukkan kode aktivasi</value>
+  </data>
+  <data name="CloudSync_ArchiveNameHeader" xml:space="preserve">
+    <value>Nama arsip</value>
+  </data>
+  <data name="CloudSync_ArchiveNamePlaceholder" xml:space="preserve">
+    <value>Huruf, angka, _, -, . saja</value>
+  </data>
+  <data name="CloudSync_ArchivesDefaultSubtitle" xml:space="preserve">
+    <value>Masuk untuk mengelola arsip cloud Anda</value>
+  </data>
+  <data name="CloudSync_ArchivesEmpty" xml:space="preserve">
+    <value>Tidak ada arsip cloud.</value>
+  </data>
+  <data name="CloudSync_ArchivesFilteredEmpty" xml:space="preserve">
+    <value>Tidak ada arsip cloud yang sesuai dengan filter.</value>
+  </data>
+  <data name="CloudSync_ArchivesLoadFailedTitle" xml:space="preserve">
+    <value>Gagal Memuat</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedEmpty" xml:space="preserve">
+    <value>Akun terkunci. Buka kunci di tab Akun &amp; Keamanan.</value>
+  </data>
+  <data name="CloudSync_ArchivesLockedHint" xml:space="preserve">
+    <value>Akun terkunci; akses arsip dinonaktifkan</value>
+  </data>
+  <data name="CloudSync_ArchivesSignInEmpty" xml:space="preserve">
+    <value>Masuk untuk melihat arsip cloud.</value>
+  </data>
+  <data name="CloudSync_ArchivesSubtitle" xml:space="preserve">
+    <value>Lihat, simpan, ubah nama, timpa, atau hapus arsip cloud Anda</value>
+  </data>
+  <data name="CloudSync_ArchivesSummary" xml:space="preserve">
+    <value>{0} / {1} arsip · {2} / {3} terpakai</value>
+  </data>
+  <data name="CloudSync_ArchivesTitle" xml:space="preserve">
+    <value>Daftar Arsip Cloud</value>
+  </data>
+  <data name="CloudSync_AuthSubtitle" xml:space="preserve">
+    <value>Masuk untuk mencadangkan dan menyinkronkan pencapaian serta riwayat permohonan antar perangkat.</value>
+  </data>
+  <data name="CloudSync_AuthTitle" xml:space="preserve">
+    <value>Masuk atau Daftar Akun Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
+    <value>Status masuk tersimpan aman di perangkat ini</value>
+  </data>
+  <data name="CloudSync_BtnDelete" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="CloudSync_BtnExportSave" xml:space="preserve">
+    <value>Simpan</value>
+  </data>
+  <data name="CloudSync_BtnOverwrite" xml:space="preserve">
+    <value>Timpa</value>
+  </data>
+  <data name="CloudSync_BtnRename" xml:space="preserve">
+    <value>Ubah Nama</value>
+  </data>
+  <data name="CloudSync_BusyWaitMsg" xml:space="preserve">
+    <value>Operasi lain sedang berjalan. Harap tunggu.</value>
+  </data>
+  <data name="CloudSync_CancelBtn" xml:space="preserve">
+    <value>Batal</value>
+  </data>
+  <data name="CloudSync_CannotOperateTitle" xml:space="preserve">
+    <value>Tidak Tersedia</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpened" xml:space="preserve">
+    <value>Halaman verifikasi dibuka di browser. Menunggu penyelesaian...</value>
+  </data>
+  <data name="CloudSync_CaptchaBrowserOpenFailed" xml:space="preserve">
+    <value>Tidak dapat membuka browser sistem.</value>
+  </data>
+  <data name="CloudSync_CaptchaHint" xml:space="preserve">
+    <value>Selesaikan verifikasi di bawah. Jendela akan tertutup otomatis setelah selesai.</value>
+  </data>
+  <data name="CloudSync_CaptchaLoadError" xml:space="preserve">
+    <value>Gagal memuat halaman. Klik Buka di Browser untuk melanjutkan.</value>
+  </data>
+  <data name="CloudSync_CaptchaOpenBrowser" xml:space="preserve">
+    <value>Buka di Browser</value>
+  </data>
+  <data name="CloudSync_CaptchaSubmitting" xml:space="preserve">
+    <value>Mengonfirmasi hasil verifikasi...</value>
+  </data>
+  <data name="CloudSync_CaptchaTitle" xml:space="preserve">
+    <value>Verifikasi Keamanan</value>
+  </data>
+  <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
+    <value>Verifikasi - FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CloseBtn" xml:space="preserve">
+    <value>Tutup</value>
+  </data>
+  <data name="CloudSync_ConfirmBtn" xml:space="preserve">
+    <value>Konfirmasi</value>
+  </data>
+  <data name="CloudSync_ConfirmLockBtn" xml:space="preserve">
+    <value>Kunci</value>
+  </data>
+  <data name="CloudSync_ConfirmNewPasswordHeader" xml:space="preserve">
+    <value>Konfirmasi kata sandi baru</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteBtn" xml:space="preserve">
+    <value>Timpa</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteDiskMsg" xml:space="preserve">
+    <value>Timpa arsip cloud "{1}" dengan "{0}"?</value>
+  </data>
+  <data name="CloudSync_ConfirmOverwriteTitle" xml:space="preserve">
+    <value>Konfirmasi Penimpaan</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>Konfirmasi kata sandi</value>
+  </data>
+  <data name="CloudSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Masukkan ulang kata sandi</value>
+  </data>
+  <data name="CloudSync_ConfirmUnlockBtn" xml:space="preserve">
+    <value>Buka Kunci</value>
+  </data>
+  <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
+    <value>Hapus Akun &amp; Data</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneDetail" xml:space="preserve">
+    <value>Akun dan seluruh arsip cloud telah dihapus permanen.</value>
+  </data>
+  <data name="CloudSync_DeleteAccountDoneTitle" xml:space="preserve">
+    <value>Akun Dihapus</value>
+  </data>
+  <data name="CloudSync_DeleteAccountTitle" xml:space="preserve">
+    <value>Hapus Akun Permanen</value>
+  </data>
+  <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
+    <value>Peringatan: Menghapus akun akan menghapus permanen seluruh arsip cloud dan informasi akun Anda!</value>
+  </data>
+  <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
+    <value>Hapus Semua Data Cloud</value>
+  </data>
+  <data name="CloudSync_DeleteAllConfirmBtn" xml:space="preserve">
+    <value>Hapus Semua</value>
+  </data>
+  <data name="CloudSync_DeleteAllFailedTitle" xml:space="preserve">
+    <value>Gagal Menghapus</value>
+  </data>
+  <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
+    <value>Hapus semua arsip pencapaian dan permohonan di cloud? Akun tetap aktif.</value>
+  </data>
+  <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
+    <value>Dibersihkan</value>
+  </data>
+  <data name="CloudSync_DeleteAllTitle" xml:space="preserve">
+    <value>Hapus Semua Data Cloud</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveMsg" xml:space="preserve">
+    <value>Hapus permanen arsip "{0}" dari cloud?</value>
+  </data>
+  <data name="CloudSync_DeleteArchiveTitle" xml:space="preserve">
+    <value>Hapus Arsip</value>
+  </data>
+  <data name="CloudSync_DeleteConfirmBtn" xml:space="preserve">
+    <value>Hapus</value>
+  </data>
+  <data name="CloudSync_DeleteFailedTitle" xml:space="preserve">
+    <value>Gagal Menghapus</value>
+  </data>
+  <data name="CloudSync_DeleteSuccessTitle" xml:space="preserve">
+    <value>Terhapus</value>
+  </data>
+  <data name="CloudSync_DownloadFailedTitle" xml:space="preserve">
+    <value>Unduhan Gagal</value>
+  </data>
+  <data name="CloudSync_EmailHeader" xml:space="preserve">
+    <value>Alamat email</value>
+  </data>
+  <data name="CloudSync_EmailOtpSentDetail" xml:space="preserve">
+    <value>Kode dikirim ke {0}. Berlaku selama 10 menit.</value>
+  </data>
+  <data name="CloudSync_EmailPlaceholder" xml:space="preserve">
+    <value>Masukkan alamat email Anda</value>
+  </data>
+  <data name="CloudSync_ErrAccountNotFound" xml:space="preserve">
+    <value>Akun tidak ditemukan.</value>
+  </data>
+  <data name="CloudSync_ErrActivationDisabled" xml:space="preserve">
+    <value>Penukaran kode sedang tidak tersedia.</value>
+  </data>
+  <data name="CloudSync_ErrActivationExhausted" xml:space="preserve">
+    <value>Batas penukaran kode sudah habis.</value>
+  </data>
+  <data name="CloudSync_ErrActivationInvalid" xml:space="preserve">
+    <value>Kode aktivasi tidak valid.</value>
+  </data>
+  <data name="CloudSync_ErrActivationRedeemed" xml:space="preserve">
+    <value>Kode ini sudah pernah ditukarkan.</value>
+  </data>
+  <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
+    <value>Nama arsip sudah ada. Aktifkan opsi timpa.</value>
+  </data>
+  <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
+    <value>Arsip tidak ditemukan.</value>
+  </data>
+  <data name="CloudSync_ErrAuthRequired" xml:space="preserve">
+    <value>Sesi berakhir. Silakan masuk kembali.</value>
+  </data>
+  <data name="CloudSync_ErrCaptchaFailed" xml:space="preserve">
+    <value>Verifikasi gagal atau kedaluwarsa.</value>
+  </data>
+  <data name="CloudSync_ErrEmailRegistered" xml:space="preserve">
+    <value>Email ini sudah terdaftar.</value>
+  </data>
+  <data name="CloudSync_ErrEnterCodeFirst" xml:space="preserve">
+    <value>Masukkan kode verifikasi email terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_ErrFileLimit" xml:space="preserve">
+    <value>Batas jumlah arsip tercapai. Hapus atau timpa arsip yang ada.</value>
+  </data>
+  <data name="CloudSync_ErrGeneric" xml:space="preserve">
+    <value>Permintaan gagal. Periksa koneksi Anda dan coba lagi.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>Email atau kata sandi salah.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidEmail" xml:space="preserve">
+    <value>Masukkan alamat email yang valid.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidFormat" xml:space="preserve">
+    <value>Validasi format arsip gagal.</value>
+  </data>
+  <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
+    <value>Nama hanya mendukung 1-64 huruf Latin, angka, _, -, dan ., diawali huruf/angka dan tidak diakhiri titik.</value>
+  </data>
+  <data name="CloudSync_ErrLocked" xml:space="preserve">
+    <value>Akun terkunci. Verifikasi email untuk membuka kunci terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_ErrOtpAttempts" xml:space="preserve">
+    <value>Terlalu banyak percobaan salah. Minta kode baru.</value>
+  </data>
+  <data name="CloudSync_ErrOtpCooldown" xml:space="preserve">
+    <value>Terlalu banyak permintaan. Coba lagi nanti.</value>
+  </data>
+  <data name="CloudSync_ErrOtpExpired" xml:space="preserve">
+    <value>Kode verifikasi kedaluwarsa.</value>
+  </data>
+  <data name="CloudSync_ErrOtpInvalid" xml:space="preserve">
+    <value>Kode verifikasi salah.</value>
+  </data>
+  <data name="CloudSync_ErrPasswordLength" xml:space="preserve">
+    <value>Kata sandi harus 8-128 karakter.</value>
+  </data>
+  <data name="CloudSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>Kata sandi tidak cocok.</value>
+  </data>
+  <data name="CloudSync_ErrPayloadTooLarge" xml:space="preserve">
+    <value>Ukuran unggahan melebihi batas.</value>
+  </data>
+  <data name="CloudSync_ErrQuotaExceeded" xml:space="preserve">
+    <value>Kuota harian tercapai. Coba lagi besok.</value>
+  </data>
+  <data name="CloudSync_ErrRateLimited" xml:space="preserve">
+    <value>Terlalu banyak permintaan. Coba lagi sebentar lagi.</value>
+  </data>
+  <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
+    <value>Penyimpanan cloud penuh. Hapus arsip lama atau tingkatkan kuota.</value>
+  </data>
+  <data name="CloudSync_ErrUnsupportedDataType" xml:space="preserve">
+    <value>Jenis data arsip tidak didukung.</value>
+  </data>
+  <data name="CloudSync_FileFilterJson" xml:space="preserve">
+    <value>File Arsip</value>
+  </data>
+  <data name="CloudSync_FilterAll" xml:space="preserve">
+    <value>Semua Tipe</value>
+  </data>
+  <data name="CloudSync_FilterUiaf" xml:space="preserve">
+    <value>Pencapaian</value>
+  </data>
+  <data name="CloudSync_FilterUigf" xml:space="preserve">
+    <value>Permohonan</value>
+  </data>
+  <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
+    <value>Gabungkan semua akun ({0} UID)</value>
+  </data>
+  <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
+    <value>Timpa arsip "{0}" dengan data permohonan terpilih?</value>
+  </data>
+  <data name="CloudSync_GachaEmptyCloud" xml:space="preserve">
+    <value>Belum ada arsip permohonan di cloud.</value>
+  </data>
+  <data name="CloudSync_GachaEmptyDesc" xml:space="preserve">
+    <value>Sinkronkan arsip permohonan multi-akun dari cloud</value>
+  </data>
+  <data name="CloudSync_GachaEmptyTitle" xml:space="preserve">
+    <value>Pulihkan / Kelola Cloud</value>
+  </data>
+  <data name="CloudSync_GachaExportErrorTitle" xml:space="preserve">
+    <value>Ekspor Gagal</value>
+  </data>
+  <data name="CloudSync_GachaImportBtn" xml:space="preserve">
+    <value>Pulihkan</value>
+  </data>
+  <data name="CloudSync_GachaImportedMsg" xml:space="preserve">
+    <value>Mengimpor {1} akun ({2} data) dari "{0}".</value>
+  </data>
+  <data name="CloudSync_GachaListSummary" xml:space="preserve">
+    <value>{0} permohonan · {1}/{2} total · {3}/{4}</value>
+  </data>
+  <data name="CloudSync_GachaNoLocalDataHint" xml:space="preserve">
+    <value>Belum ada data lokal. Anda dapat memulihkan dari cloud di bawah.</value>
+  </data>
+  <data name="CloudSync_GachaNoRecordsSelected" xml:space="preserve">
+    <value>Tidak ada data permohonan valid untuk akun ini.</value>
+  </data>
+  <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
+    <value>Masuk ke FufuLauncher Cloud Archive terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
+    <value>Data akun lokal yang diunggah</value>
+  </data>
+  <data name="CloudSync_GachaTitle" xml:space="preserve">
+    <value>Analisis Permohonan · Arsip Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
+    <value>Arsip Cloud</value>
+  </data>
+  <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
+    <value>UID {0} ({1} data)</value>
+  </data>
+  <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
+    <value>Unggah Data Terpilih</value>
+  </data>
+  <data name="CloudSync_GotoUnlockBtn" xml:space="preserve">
+    <value>Buka Kunci</value>
+  </data>
+  <data name="CloudSync_HintTitle" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="CloudSync_InputCurrentPwd" xml:space="preserve">
+    <value>Masukkan kata sandi saat ini</value>
+  </data>
+  <data name="CloudSync_InputOtpRequired" xml:space="preserve">
+    <value>Masukkan kode verifikasi email.</value>
+  </data>
+  <data name="CloudSync_LabelAutoLogin" xml:space="preserve">
+    <value>Masuk otomatis</value>
+  </data>
+  <data name="CloudSync_LabelEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="CloudSync_LabelLockedAt" xml:space="preserve">
+    <value>Dikunci pada</value>
+  </data>
+  <data name="CloudSync_LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="CloudSync_LoadingArchivesText" xml:space="preserve">
+    <value>Memuat arsip cloud...</value>
+  </data>
+  <data name="CloudSync_LockAccountBtn" xml:space="preserve">
+    <value>Kunci Akun (Verifikasi Email)</value>
+  </data>
+  <data name="CloudSync_LockBlockedDelete" xml:space="preserve">
+    <value>Tidak dapat menghapus akun yang terkunci. Buka kunci terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_LockDesc" xml:space="preserve">
+    <value>Mengunci akan memblokir semua akses data cloud hingga Anda memverifikasi email untuk membuka kunci.</value>
+  </data>
+  <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
+    <value>Kuota dan arsip tidak dapat diakses saat terkunci. Buka kunci di tab Akun &amp; Keamanan.</value>
+  </data>
+  <data name="CloudSync_LockedBannerTitle" xml:space="preserve">
+    <value>Akun Terkunci</value>
+  </data>
+  <data name="CloudSync_LockHint" xml:space="preserve">
+    <value>Catatan: Mengunci akun menangguhkan akses arsip dan penghapusan akun hingga dibuka manual lewat verifikasi email.</value>
+  </data>
+  <data name="CloudSync_LockTitle" xml:space="preserve">
+    <value>Kunci Akun</value>
+  </data>
+  <data name="CloudSync_LoginFailedTitle" xml:space="preserve">
+    <value>Gagal Masuk</value>
+  </data>
+  <data name="CloudSync_LogoutBtn" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
+    <value>Keluar dari akun cloud FufuLauncher di perangkat ini?</value>
+  </data>
+  <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
+    <value>Keluar juga dari semua perangkat lain</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessDetail" xml:space="preserve">
+    <value>Sesi lokal telah dihapus.</value>
+  </data>
+  <data name="CloudSync_LogoutSuccessTitle" xml:space="preserve">
+    <value>Keluar</value>
+  </data>
+  <data name="CloudSync_ModeLogin" xml:space="preserve">
+    <value>Masuk</value>
+  </data>
+  <data name="CloudSync_ModeRegister" xml:space="preserve">
+    <value>Daftar</value>
+  </data>
+  <data name="CloudSync_ModeReset" xml:space="preserve">
+    <value>Atur Ulang Kata Sandi</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccess" xml:space="preserve">
+    <value>Berhasil</value>
+  </data>
+  <data name="CloudSync_MsgActivateSuccessDetail" xml:space="preserve">
+    <value>Peningkatan kuota telah aktif.</value>
+  </data>
+  <data name="CloudSync_MsgCancelled" xml:space="preserve">
+    <value>Dibatalkan</value>
+  </data>
+  <data name="CloudSync_MsgCaptchaCancelled" xml:space="preserve">
+    <value>Verifikasi dibatalkan.</value>
+  </data>
+  <data name="CloudSync_MsgDeleteAllSuccess" xml:space="preserve">
+    <value>{0} arsip cloud dihapus.</value>
+  </data>
+  <data name="CloudSync_MsgDeleteSuccess" xml:space="preserve">
+    <value>Arsip "{0}" dihapus.</value>
+  </data>
+  <data name="CloudSync_MsgLockedSuccess" xml:space="preserve">
+    <value>Akun Anda sekarang terkunci.</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedDetail" xml:space="preserve">
+    <value>Berhasil masuk, tetapi akun sedang terkunci.</value>
+  </data>
+  <data name="CloudSync_MsgLoginLockedTitle" xml:space="preserve">
+    <value>Masuk (Akun Terkunci)</value>
+  </data>
+  <data name="CloudSync_MsgLoginRequiredFirst" xml:space="preserve">
+    <value>Silakan masuk terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccess" xml:space="preserve">
+    <value>Berhasil Masuk</value>
+  </data>
+  <data name="CloudSync_MsgLoginSuccessDetail" xml:space="preserve">
+    <value>Berhasil masuk. Sinkronisasi cloud siap.</value>
+  </data>
+  <data name="CloudSync_MsgOverwritten" xml:space="preserve">
+    <value>Arsip "{0}" berhasil diperbarui.</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>Akun Dibuat</value>
+  </data>
+  <data name="CloudSync_MsgRegisterSuccessDetail" xml:space="preserve">
+    <value>Pendaftaran berhasil dan otomatis masuk.</value>
+  </data>
+  <data name="CloudSync_MsgRenameSuccess" xml:space="preserve">
+    <value>Diubah namanya menjadi "{0}".</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccess" xml:space="preserve">
+    <value>Kata Sandi Diatur Ulang</value>
+  </data>
+  <data name="CloudSync_MsgResetSuccessDetail" xml:space="preserve">
+    <value>Kata sandi diperbarui. Silakan masuk kembali.</value>
+  </data>
+  <data name="CloudSync_MsgUnlockedSuccess" xml:space="preserve">
+    <value>Akun telah dibuka kuncinya.</value>
+  </data>
+  <data name="CloudSync_MsgUploadedNew" xml:space="preserve">
+    <value>Arsip "{0}" berhasil diunggah.</value>
+  </data>
+  <data name="CloudSync_MsgUploadFailedTitle" xml:space="preserve">
+    <value>Unggahan Gagal</value>
+  </data>
+  <data name="CloudSync_MsgUploadSuccess" xml:space="preserve">
+    <value>Diunggah</value>
+  </data>
+  <data name="CloudSync_NavAccount" xml:space="preserve">
+    <value>Akun &amp; Keamanan</value>
+  </data>
+  <data name="CloudSync_NavArchives" xml:space="preserve">
+    <value>Arsip Cloud</value>
+  </data>
+  <data name="CloudSync_NavQuota" xml:space="preserve">
+    <value>Kuota &amp; Peningkatan</value>
+  </data>
+  <data name="CloudSync_NotLockedText" xml:space="preserve">
+    <value>Tidak terkunci</value>
+  </data>
+  <data name="CloudSync_NotLoggedInShort" xml:space="preserve">
+    <value>Belum masuk</value>
+  </data>
+  <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
+    <value>Belum Masuk Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_OpenBtn" xml:space="preserve">
+    <value>Buka</value>
+  </data>
+  <data name="CloudSync_OpenCenterBtn" xml:space="preserve">
+    <value>Buka Arsip Cloud</value>
+  </data>
+  <data name="CloudSync_OpenFileFailedTitle" xml:space="preserve">
+    <value>Gagal Membuka File</value>
+  </data>
+  <data name="CloudSync_OtpHeader" xml:space="preserve">
+    <value>Kode verifikasi email</value>
+  </data>
+  <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
+    <value>Masukkan 6 digit kode</value>
+  </data>
+  <data name="CloudSync_OtpSentTitle" xml:space="preserve">
+    <value>Kode Terkirim</value>
+  </data>
+  <data name="CloudSync_OverwriteExistingCheck" xml:space="preserve">
+    <value>Timpa jika nama arsip sudah ada</value>
+  </data>
+  <data name="CloudSync_OverwriteFailedTitle" xml:space="preserve">
+    <value>Gagal Menimpa</value>
+  </data>
+  <data name="CloudSync_OverwriteSuccessTitle" xml:space="preserve">
+    <value>Berhasil Ditimpa</value>
+  </data>
+  <data name="CloudSync_PasswordHeader" xml:space="preserve">
+    <value>Kata sandi</value>
+  </data>
+  <data name="CloudSync_PasswordNewHeader" xml:space="preserve">
+    <value>Kata sandi baru</value>
+  </data>
+  <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
+    <value>Masukkan 8-128 karakter kata sandi</value>
+  </data>
+  <data name="CloudSync_PasswordRequired" xml:space="preserve">
+    <value>Masukkan kata sandi Anda.</value>
+  </data>
+  <data name="CloudSync_PasswordSetHeader" xml:space="preserve">
+    <value>Kata sandi</value>
+  </data>
+  <data name="CloudSync_QuotaDefaultSubtitle" xml:space="preserve">
+    <value>Muat ulang untuk melihat detail penggunaan</value>
+  </data>
+  <data name="CloudSync_QuotaDeletesLabel" xml:space="preserve">
+    <value>Penghapusan Harian</value>
+  </data>
+  <data name="CloudSync_QuotaFailedTitle" xml:space="preserve">
+    <value>Gagal Memuat Kuota</value>
+  </data>
+  <data name="CloudSync_QuotaFilesLabel" xml:space="preserve">
+    <value>Jumlah File</value>
+  </data>
+  <data name="CloudSync_QuotaFilesValue" xml:space="preserve">
+    <value>{0} / {1} file (sisa {2})</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
+    <value>Akun terkunci. Buka kunci terlebih dahulu untuk melihat kuota.</value>
+  </data>
+  <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
+    <value>Masuk ke akun cloud FufuLauncher Anda terlebih dahulu.</value>
+  </data>
+  <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
+    <value>Operasi Harian</value>
+  </data>
+  <data name="CloudSync_QuotaRefreshBtn" xml:space="preserve">
+    <value>Muat Ulang</value>
+  </data>
+  <data name="CloudSync_QuotaResetInfo" xml:space="preserve">
+    <value>Tanggal: {0} · Reset berikutnya: {1}</value>
+  </data>
+  <data name="CloudSync_QuotaStorageLabel" xml:space="preserve">
+    <value>Penyimpanan Cloud</value>
+  </data>
+  <data name="CloudSync_QuotaStorageValue" xml:space="preserve">
+    <value>{0} / {1} (sisa {2})</value>
+  </data>
+  <data name="CloudSync_QuotaTitle" xml:space="preserve">
+    <value>Penyimpanan &amp; Kuota Harian</value>
+  </data>
+  <data name="CloudSync_QuotaUploadsLabel" xml:space="preserve">
+    <value>Unggahan Harian</value>
+  </data>
+  <data name="CloudSync_QuotaUsedRemaining" xml:space="preserve">
+    <value>{0} / {1} terpakai (sisa {2})</value>
+  </data>
+  <data name="CloudSync_ReadFileFailedTitle" xml:space="preserve">
+    <value>Gagal Membaca File</value>
+  </data>
+  <data name="CloudSync_RefreshBtn" xml:space="preserve">
+    <value>Muat Ulang</value>
+  </data>
+  <data name="CloudSync_RefreshDoneTitle" xml:space="preserve">
+    <value>Diperbarui</value>
+  </data>
+  <data name="CloudSync_RefreshFailedTitle" xml:space="preserve">
+    <value>Gagal Memuat Ulang</value>
+  </data>
+  <data name="CloudSync_RefreshListBtn" xml:space="preserve">
+    <value>Muat Ulang</value>
+  </data>
+  <data name="CloudSync_RefreshStatusBtn" xml:space="preserve">
+    <value>Muat Ulang</value>
+  </data>
+  <data name="CloudSync_RefreshStatusResultFormat" xml:space="preserve">
+    <value>Status akun: {0}.</value>
+  </data>
+  <data name="CloudSync_RegisterFailedTitle" xml:space="preserve">
+    <value>Pendaftaran Gagal</value>
+  </data>
+  <data name="CloudSync_RenameConfirmBtn" xml:space="preserve">
+    <value>Ubah Nama</value>
+  </data>
+  <data name="CloudSync_RenameFailedTitle" xml:space="preserve">
+    <value>Gagal Mengubah Nama</value>
+  </data>
+  <data name="CloudSync_RenameNewHeader" xml:space="preserve">
+    <value>Nama arsip baru</value>
+  </data>
+  <data name="CloudSync_RenameOldName" xml:space="preserve">
+    <value>Nama saat ini: {0}</value>
+  </data>
+  <data name="CloudSync_RenameOverwriteCheck" xml:space="preserve">
+    <value>Timpa jika nama tujuan sudah ada</value>
+  </data>
+  <data name="CloudSync_RenameSuccessTitle" xml:space="preserve">
+    <value>Nama Diubah</value>
+  </data>
+  <data name="CloudSync_RenameTitle" xml:space="preserve">
+    <value>Ubah Nama Arsip</value>
+  </data>
+  <data name="CloudSync_ResetFailedTitle" xml:space="preserve">
+    <value>Gagal Mengatur Ulang</value>
+  </data>
+  <data name="CloudSync_SaveFileFailedTitle" xml:space="preserve">
+    <value>Gagal Menyimpan File</value>
+  </data>
+  <data name="CloudSync_SaveSuccessDetail" xml:space="preserve">
+    <value>Arsip "{0}" disimpan ke {1}.</value>
+  </data>
+  <data name="CloudSync_SaveSuccessTitle" xml:space="preserve">
+    <value>Tersimpan</value>
+  </data>
+  <data name="CloudSync_SecurityActionsTitle" xml:space="preserve">
+    <value>Keamanan &amp; Akun</value>
+  </data>
+  <data name="CloudSync_SelectedFileFormat" xml:space="preserve">
+    <value>Dipilih: {0}</value>
+  </data>
+  <data name="CloudSync_SendFailedTitle" xml:space="preserve">
+    <value>Gagal Mengirim</value>
+  </data>
+  <data name="CloudSync_SendingEmail" xml:space="preserve">
+    <value>Mengirim email verifikasi...</value>
+  </data>
+  <data name="CloudSync_SendOtpBtn" xml:space="preserve">
+    <value>Kirim Kode</value>
+  </data>
+  <data name="CloudSync_SessionExpiredTitle" xml:space="preserve">
+    <value>Sesi Kedaluwarsa</value>
+  </data>
+  <data name="CloudSync_SettingsCaption" xml:space="preserve">
+    <value>Kelola akun cloud, kuota harian &amp; penyimpanan, serta sinkronkan data pencapaian dan permohonan</value>
+  </data>
+  <data name="CloudSync_SettingsTitle" xml:space="preserve">
+    <value>FufuLauncher Cloud Archive</value>
+  </data>
+  <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
+    <value>{0} (asli {1})</value>
+  </data>
+  <data name="CloudSync_StartUploadBtn" xml:space="preserve">
+    <value>Unggah</value>
+  </data>
+  <data name="CloudSync_StatusLocked" xml:space="preserve">
+    <value>Terkunci</value>
+  </data>
+  <data name="CloudSync_StatusNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="CloudSync_StatusSuffixLocked" xml:space="preserve">
+    <value>{0} · Terkunci</value>
+  </data>
+  <data name="CloudSync_StatusSuffixNormal" xml:space="preserve">
+    <value>{0} · Normal</value>
+  </data>
+  <data name="CloudSync_SubmitLogin" xml:space="preserve">
+    <value>Masuk</value>
+  </data>
+  <data name="CloudSync_SubmitRegister" xml:space="preserve">
+    <value>Daftar &amp; Masuk</value>
+  </data>
+  <data name="CloudSync_SubmitReset" xml:space="preserve">
+    <value>Atur Ulang Kata Sandi</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUiaf" xml:space="preserve">
+    <value>Pencapaian</value>
+  </data>
+  <data name="CloudSync_TypeBadgeUigf" xml:space="preserve">
+    <value>Permohonan</value>
+  </data>
+  <data name="CloudSync_UnlockAccountBtn" xml:space="preserve">
+    <value>Buka Kunci (Verifikasi Email)</value>
+  </data>
+  <data name="CloudSync_UnlockDesc" xml:space="preserve">
+    <value>Selesaikan verifikasi email untuk memulihkan akses arsip cloud Anda.</value>
+  </data>
+  <data name="CloudSync_UnlockTitle" xml:space="preserve">
+    <value>Buka Kunci Akun</value>
+  </data>
+  <data name="CloudSync_UpgradeActiveFormat" xml:space="preserve">
+    <value>Aktif hingga: {0}{1}</value>
+  </data>
+  <data name="CloudSync_UpgradeDeltaFormat" xml:space="preserve">
+    <value> (Ruang +{0}, File +{1}, Unggah +{2}, Hapus +{3}, Ops +{4})</value>
+  </data>
+  <data name="CloudSync_UpgradeDisclaimer" xml:space="preserve">
+    <value>Kode penukaran hanya untuk keperluan debugging pengembang dan tidak diperjualbelikan.</value>
+  </data>
+  <data name="CloudSync_UpgradeInactive" xml:space="preserve">
+    <value>Belum ada paket aktif. Tukarkan kode aktivasi yang valid untuk memperbesar batas.</value>
+  </data>
+  <data name="CloudSync_UpgradeTitle" xml:space="preserve">
+    <value>Kode Peningkatan Kuota</value>
+  </data>
+  <data name="CloudSync_UploadDataTypeHeader" xml:space="preserve">
+    <value>Tipe data</value>
+  </data>
+  <data name="CloudSync_UploadFileDialogTitle" xml:space="preserve">
+    <value>Unggah Arsip Lokal</value>
+  </data>
+  <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
+    <value>Unggah File Lokal</value>
+  </data>
+  <data name="CloudSync_UploadTypeUiafOption" xml:space="preserve">
+    <value>Pencapaian</value>
+  </data>
+  <data name="CloudSync_UploadTypeUigfOption" xml:space="preserve">
+    <value>Riwayat Permohonan</value>
+  </data>
+  <data name="CloudSync_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher Cloud Archive</value>
+  </data>
 </root>

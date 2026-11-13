@@ -3825,6 +3825,26 @@
                                         Content="打开"
                                         Click="OnOpenServiceOverviewClick" />
                             </Grid>
+
+                                <Rectangle Style="{StaticResource RowDividerStyle}" />
+
+                                <Grid Style="{StaticResource SettingsRowStyle}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE753;" />
+                                    <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
+                                        <TextBlock Style="{StaticResource RowTitleStyle}" Text="{helpers:Loc Key=CloudSync_SettingsTitle}" />
+                                        <TextBlock Style="{StaticResource RowCaptionStyle}"
+                                                   Text="{helpers:Loc Key=CloudSync_SettingsCaption}" />
+                                    </StackPanel>
+                                    <Button Grid.Column="2"
+                                            Style="{StaticResource RowButtonStyle}"
+                                            Content="{helpers:Loc Key=CloudSync_OpenBtn}"
+                                            Click="OnOpenCloudSyncWindowClick" />
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </StackPanel>
