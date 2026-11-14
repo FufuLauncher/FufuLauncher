@@ -10527,6 +10527,12 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>请输入验证码</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>发送中…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>{0} 秒后重发</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>验证码已发送</value>
   </data>
@@ -10547,6 +10553,12 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>请输入密码</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>显示密码</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>隐藏密码</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>请输入登录密码。</value>

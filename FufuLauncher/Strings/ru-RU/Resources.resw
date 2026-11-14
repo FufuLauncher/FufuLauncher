@@ -9779,6 +9779,12 @@ Click the button below to open your browser and download manually.</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>6-значный код</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>Отправка…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>Повтор через {0} с</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>Код отправлен</value>
   </data>
@@ -9799,6 +9805,12 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>От 8 до 128 символов</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>Показать пароль</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>Скрыть пароль</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>Введите пароль.</value>

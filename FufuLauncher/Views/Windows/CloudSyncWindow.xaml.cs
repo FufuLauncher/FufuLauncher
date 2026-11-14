@@ -11,6 +11,7 @@ using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.ViewModels;
 using Microsoft.UI;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -23,11 +24,23 @@ namespace FufuLauncher.Views;
 
 public sealed partial class CloudSyncWindow : Window
 {
+    private static readonly TimeSpan DefaultAuthOtpCooldown = TimeSpan.FromSeconds(30);
     private static CloudSyncWindow? _current;
 
     private readonly ICloudSyncService _cloudSync;
     private readonly ObservableCollection<CloudArchiveItem> _archives = new();
-    private bool _isBusy;
+    private readonly DispatcherQueueTimer _authOtpTimer;
+    private readonly Dictionary<(int Mode, string Email), DateTimeOffset> _authOtpResendAt = new();
+    private bool _isSendingAuthOtp;
+    private bool _statusIsAuthOtpFeedback;
+    private bool _closed;
+    private int _busyOperations;
+    private long _archiveRequestVersion;
+    private bool _archiveLoadPending;
+    private string? _archiveAccountEmail;
+    private string? _displayedArchiveFilter;
+
+    private bool IsBusy => _isSendingAuthOtp || _busyOperations > 0 || _archiveLoadPending;
 
     public static void ShowOrActivate(string? initialTabTag = null)
     {
@@ -49,10 +62,25 @@ public sealed partial class CloudSyncWindow : Window
         window.Activate();
     }
 
-    public CloudSyncWindow()
+    public CloudSyncWindow() : this(App.GetService<ICloudSyncService>())
     {
-        _cloudSync = App.GetService<ICloudSyncService>();
+    }
+
+    internal CloudSyncWindow(ICloudSyncService cloudSync)
+    {
+        _cloudSync = cloudSync;
         InitializeComponent();
+        _authOtpTimer = DispatcherQueue.CreateTimer();
+        _authOtpTimer.Interval = TimeSpan.FromSeconds(1);
+        _authOtpTimer.Tick += (_, _) => UpdateAuthOtpButton();
+        EmailTextBox.TextChanged += (_, _) => ResetAuthOtpFeedback();
+        Activated += (_, args) =>
+        {
+            if (args.WindowActivationState == WindowActivationState.Deactivated)
+            {
+                MaskAuthPasswords();
+            }
+        };
 
         AuthModeSelector.ItemsSource = new[]
         {
@@ -71,7 +99,12 @@ public sealed partial class CloudSyncWindow : Window
         _ = ApplyBackdropFromSettingsAsync();
 
         _cloudSync.SessionChanged += OnSessionChanged;
-        Closed += (_, _) => _cloudSync.SessionChanged -= OnSessionChanged;
+        Closed += (_, _) =>
+        {
+            _closed = true;
+            _authOtpTimer.Stop();
+            _cloudSync.SessionChanged -= OnSessionChanged;
+        };
 
         EmailTextBox.Text = _cloudSync.CurrentEmail;
         RefreshAccountUiState();
@@ -241,9 +274,16 @@ public sealed partial class CloudSyncWindow : Window
 
     private void RefreshAccountUiState()
     {
+        if (_closed) return;
         var loggedIn = _cloudSync.IsLoggedIn;
+        if (loggedIn)
+        {
+            MaskAuthPasswords();
+            DismissAuthOtpFeedback();
+        }
         UnauthPanel.Visibility = loggedIn ? Visibility.Collapsed : Visibility.Visible;
         LoggedInAccountPanel.Visibility = loggedIn ? Visibility.Visible : Visibility.Collapsed;
+        UpdateAuthOtpButton();
 
         if (!loggedIn)
         {
@@ -251,7 +291,7 @@ public sealed partial class CloudSyncWindow : Window
             QuotaDetailsPanel.Visibility = Visibility.Collapsed;
             QuotaNotReadyHintText.Text = "CloudSync_QuotaNotReadySignIn".GetLocalized();
             QuotaNotReadyHintText.Visibility = Visibility.Visible;
-            _archives.Clear();
+            ResetArchiveList();
             ArchivesSummaryText.Text = "CloudSync_ArchivesDefaultSubtitle".GetLocalized();
             ArchivesEmptyText.Text = "CloudSync_ArchivesSignInEmpty".GetLocalized();
             ArchivesEmptyText.Visibility = Visibility.Visible;
@@ -288,13 +328,17 @@ public sealed partial class CloudSyncWindow : Window
             QuotaDetailsPanel.Visibility = Visibility.Collapsed;
             QuotaNotReadyHintText.Text = "CloudSync_QuotaNotReadyLocked".GetLocalized();
             QuotaNotReadyHintText.Visibility = Visibility.Visible;
-            _archives.Clear();
+            ResetArchiveList();
             ArchivesSummaryText.Text = "CloudSync_ArchivesLockedHint".GetLocalized();
             ArchivesEmptyText.Text = "CloudSync_ArchivesLockedEmpty".GetLocalized();
             ArchivesEmptyText.Visibility = Visibility.Visible;
         }
         else
         {
+            if (_archiveAccountEmail != null && _archiveAccountEmail != _cloudSync.CurrentEmail)
+            {
+                ResetArchiveList();
+            }
             QuotaNotReadyHintText.Visibility = Visibility.Collapsed;
             QuotaDetailsPanel.Visibility = Visibility.Visible;
         }
@@ -305,6 +349,7 @@ public sealed partial class CloudSyncWindow : Window
         if (AccountTabPanel == null || QuotaTabPanel == null || ArchivesTabPanel == null) return;
         if (args.SelectedItem is not NavigationViewItem item || item.Tag is not string tag) return;
 
+        if (tag != "Account") MaskAuthPasswords();
         AccountTabPanel.Visibility = tag == "Account" ? Visibility.Visible : Visibility.Collapsed;
         QuotaTabPanel.Visibility = tag == "Quota" ? Visibility.Visible : Visibility.Collapsed;
         ArchivesTabPanel.Visibility = tag == "Archives" ? Visibility.Visible : Visibility.Collapsed;
@@ -332,100 +377,198 @@ public sealed partial class CloudSyncWindow : Window
 
     private void OnAuthModeChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (AuthModeSelector == null || PasswordBox == null || ConfirmPasswordBox == null ||
-            OtpInputRow == null || AuthSubmitButton == null) return;
+        if (AuthModeSelector == null || PasswordInput == null || ConfirmPasswordInput == null ||
+            OtpInputRow == null || AuthSubmitButton == null || _authOtpTimer == null) return;
         var mode = AuthModeSelector.SelectedIndex;
+        MaskAuthPasswords();
+        ResetAuthOtpFeedback();
 
         if (mode == 0)
         {
-            PasswordBox.Header = "CloudSync_PasswordHeader".GetLocalized();
-            ConfirmPasswordBox.Visibility = Visibility.Collapsed;
+            PasswordInput.Label = "CloudSync_PasswordHeader".GetLocalized();
+            ConfirmPasswordInput.Visibility = Visibility.Collapsed;
             OtpInputRow.Visibility = Visibility.Collapsed;
             AuthSubmitButton.Content = "CloudSync_SubmitLogin".GetLocalized();
         }
         else if (mode == 1)
         {
-            PasswordBox.Header = "CloudSync_PasswordSetHeader".GetLocalized();
-            ConfirmPasswordBox.Header = "CloudSync_ConfirmPasswordHeader".GetLocalized();
-            ConfirmPasswordBox.Visibility = Visibility.Visible;
+            PasswordInput.Label = "CloudSync_PasswordSetHeader".GetLocalized();
+            ConfirmPasswordInput.Label = "CloudSync_ConfirmPasswordHeader".GetLocalized();
+            ConfirmPasswordInput.Visibility = Visibility.Visible;
             OtpInputRow.Visibility = Visibility.Visible;
             AuthSubmitButton.Content = "CloudSync_SubmitRegister".GetLocalized();
         }
         else
         {
-            PasswordBox.Header = "CloudSync_PasswordNewHeader".GetLocalized();
-            ConfirmPasswordBox.Header = "CloudSync_ConfirmNewPasswordHeader".GetLocalized();
-            ConfirmPasswordBox.Visibility = Visibility.Visible;
+            PasswordInput.Label = "CloudSync_PasswordNewHeader".GetLocalized();
+            ConfirmPasswordInput.Label = "CloudSync_ConfirmNewPasswordHeader".GetLocalized();
+            ConfirmPasswordInput.Visibility = Visibility.Visible;
             OtpInputRow.Visibility = Visibility.Visible;
             AuthSubmitButton.Content = "CloudSync_SubmitReset".GetLocalized();
         }
     }
 
+    private void MaskAuthPasswords()
+    {
+        PasswordInput?.MaskPassword();
+        ConfirmPasswordInput?.MaskPassword();
+    }
+
     private async void OnSendAuthOtpClick(object sender, RoutedEventArgs e)
     {
-        if (_isBusy) return;
+        if (IsBusy || _closed || _cloudSync.IsLoggedIn) return;
+        var context = GetAuthOtpContext();
+        if (context.Mode is not (1 or 2) || GetAuthOtpSecondsRemaining(context) > 0) return;
+
         var email = EmailTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(email) || !email.Contains('@'))
         {
             ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
-                "CloudSync_ErrInvalidEmail".GetLocalized());
+                "CloudSync_ErrInvalidEmail".GetLocalized(), isAuthOtpFeedback: true);
+            EmailTextBox.Focus(FocusState.Programmatic);
             return;
         }
 
-        var mode = AuthModeSelector.SelectedIndex;
-        SetBusy(true);
+        _isSendingAuthOtp = true;
+        DismissAuthOtpFeedback();
+        EmailTextBox.IsReadOnly = true;
+        AuthModeSelector.IsEnabled = false;
+        AuthSubmitButton.IsEnabled = false;
+        UpdateAuthOtpButton();
         try
         {
-            var startRes = mode == 1
+            var startRes = context.Mode == 1
                 ? await _cloudSync.StartRegisterSendCodeAsync(email)
                 : await _cloudSync.StartResetPasswordSendCodeAsync(email);
+            if (_closed || _cloudSync.IsLoggedIn) return;
 
-            if (!startRes.RequiresCaptcha || startRes.Challenge == null)
+            if (startRes.RequiresCaptcha && startRes.Challenge is { } challenge)
             {
-                ShowMessage(InfoBarSeverity.Error, "CloudSync_SendFailedTitle".GetLocalized(),
-                    _cloudSync.FormatFriendlyError(startRes.Code, startRes.Message, startRes.HttpStatusCode));
+                var captchaRes = await CloudCaptchaWindow.ShowChallengeAsync<CloudOtpSentData>(_cloudSync, challenge);
+                if (_closed || _cloudSync.IsLoggedIn) return;
+
+                if (captchaRes == null)
+                {
+                    if (context == GetAuthOtpContext())
+                    {
+                        ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(),
+                            "CloudSync_MsgCaptchaCancelled".GetLocalized(), isAuthOtpFeedback: true);
+                    }
+                    return;
+                }
+
+                ApplyAuthOtpResult(captchaRes, context, email);
                 return;
             }
 
-            var captchaRes =
-                await CloudCaptchaWindow.ShowChallengeAsync<CloudOtpSentData>(_cloudSync, startRes.Challenge);
-            if (captchaRes == null)
-            {
-                ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(),
-                    "CloudSync_MsgCaptchaCancelled".GetLocalized());
-                return;
-            }
-
-            if (captchaRes.Ok)
-            {
-                ShowMessage(InfoBarSeverity.Success,
-                    "CloudSync_OtpSentTitle".GetLocalized(),
-                    string.Format("CloudSync_EmailOtpSentDetail".GetLocalized(), email));
-                OtpTextBox.Focus(FocusState.Programmatic);
-            }
-            else
+            ApplyAuthOtpResult(startRes, context, email);
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] Unable to send verification code: {ex.Message}");
+            if (!_closed && !_cloudSync.IsLoggedIn && context == GetAuthOtpContext())
             {
                 ShowMessage(InfoBarSeverity.Error, "CloudSync_SendFailedTitle".GetLocalized(),
-                    _cloudSync.FormatFriendlyError(captchaRes.Code, captchaRes.Message, captchaRes.HttpStatusCode));
+                    "CloudSync_ErrGeneric".GetLocalized(), isAuthOtpFeedback: true);
             }
         }
         finally
         {
-            SetBusy(false);
+            _isSendingAuthOtp = false;
+            if (!_closed)
+            {
+                EmailTextBox.IsReadOnly = false;
+                AuthModeSelector.IsEnabled = true;
+                AuthSubmitButton.IsEnabled = true;
+                UpdateAuthOtpButton();
+            }
         }
+    }
+
+    private (int Mode, string Email) GetAuthOtpContext()
+        => (AuthModeSelector.SelectedIndex, EmailTextBox.Text.Trim().ToLowerInvariant());
+
+    private void ApplyAuthOtpResult<T>(CloudApiResult<T> result, (int Mode, string Email) context, string email)
+    {
+        var code = result.Code == "CAPTCHA_REQUIRED" ? "CHALLENGE_INVALID" : result.Code;
+        var sent = result.Ok && code != "CHALLENGE_INVALID";
+        var retryAfter = result.RetryAfter ?? (sent || code == "OTP_COOLDOWN" ? DefaultAuthOtpCooldown : TimeSpan.Zero);
+        if (retryAfter > TimeSpan.Zero)
+        {
+            var now = DateTimeOffset.UtcNow;
+            foreach (var entry in _authOtpResendAt.Where(entry => entry.Value <= now).ToArray())
+            {
+                _authOtpResendAt.Remove(entry.Key);
+            }
+            _authOtpResendAt[context] = now + retryAfter;
+        }
+
+        if (context != GetAuthOtpContext()) return;
+        if (sent)
+        {
+            ShowMessage(InfoBarSeverity.Success, "CloudSync_OtpSentTitle".GetLocalized(),
+                string.Format("CloudSync_EmailOtpSentDetail".GetLocalized(), email), isAuthOtpFeedback: true);
+            if (AccountTabPanel.Visibility == Visibility.Visible) OtpTextBox.Focus(FocusState.Programmatic);
+        }
+        else
+        {
+            ShowMessage(InfoBarSeverity.Error, "CloudSync_SendFailedTitle".GetLocalized(),
+                _cloudSync.FormatFriendlyError(code, result.Message, result.HttpStatusCode), isAuthOtpFeedback: true);
+        }
+    }
+
+    private void DismissAuthOtpFeedback()
+    {
+        if (!_statusIsAuthOtpFeedback) return;
+        _statusIsAuthOtpFeedback = false;
+        StatusInfoBar.IsOpen = false;
+    }
+
+    private void ResetAuthOtpFeedback()
+    {
+        DismissAuthOtpFeedback();
+        UpdateAuthOtpButton();
+    }
+
+    private double GetAuthOtpSecondsRemaining((int Mode, string Email) context)
+        => _authOtpResendAt.TryGetValue(context, out var deadline)
+            ? Math.Max(0, Math.Ceiling((deadline - DateTimeOffset.UtcNow).TotalSeconds))
+            : 0;
+
+    private void UpdateAuthOtpButton()
+    {
+        if (_closed) return;
+        var context = GetAuthOtpContext();
+        var seconds = context.Mode is 1 or 2 && !_cloudSync.IsLoggedIn ? GetAuthOtpSecondsRemaining(context) : 0;
+        if (seconds > 0)
+        {
+            if (!_authOtpTimer.IsRunning) _authOtpTimer.Start();
+        }
+        else if (_authOtpTimer.IsRunning)
+        {
+            _authOtpTimer.Stop();
+        }
+
+        SendAuthOtpButton.IsEnabled = !IsBusy && !_cloudSync.IsLoggedIn && seconds == 0;
+        SendAuthOtpButton.Content = _isSendingAuthOtp
+            ? "CloudSync_OtpSendingBtn".GetLocalized()
+            : seconds > 0
+                ? string.Format("CloudSync_OtpResendIn".GetLocalized(), seconds)
+                : "CloudSync_SendOtpBtn".GetLocalized();
     }
 
     private async void OnAuthSubmitClick(object sender, RoutedEventArgs e)
     {
-        if (_isBusy) return;
+        if (IsBusy) return;
         var email = EmailTextBox.Text.Trim();
-        var password = PasswordBox.Password;
+        var password = PasswordInput.Password;
         var mode = AuthModeSelector.SelectedIndex;
 
         if (string.IsNullOrWhiteSpace(email) || !email.Contains('@'))
         {
             ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
                 "CloudSync_ErrInvalidEmail".GetLocalized());
+            EmailTextBox.Focus(FocusState.Programmatic);
             return;
         }
 
@@ -433,9 +576,31 @@ public sealed partial class CloudSyncWindow : Window
         {
             ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
                 "CloudSync_ErrPasswordLength".GetLocalized());
+            PasswordInput.FocusInput();
             return;
         }
 
+        var otp = OtpTextBox.Text.Trim();
+        if (mode != 0)
+        {
+            if (password != ConfirmPasswordInput.Password)
+            {
+                ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                    "CloudSync_ErrPasswordMismatch".GetLocalized());
+                ConfirmPasswordInput.FocusInput();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(otp))
+            {
+                ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
+                    "CloudSync_ErrEnterCodeFirst".GetLocalized());
+                OtpTextBox.Focus(FocusState.Programmatic);
+                return;
+            }
+        }
+
+        MaskAuthPasswords();
         SetBusy(true);
         try
         {
@@ -461,7 +626,7 @@ public sealed partial class CloudSyncWindow : Window
                 if (captchaRes.Ok && captchaRes.Data != null)
                 {
                     _cloudSync.ApplyLoginSession(email, captchaRes.Data);
-                    PasswordBox.Password = string.Empty;
+                    PasswordInput.Password = string.Empty;
                     ShowMessage(
                         captchaRes.Data.Locked ? InfoBarSeverity.Warning : InfoBarSeverity.Success,
                         (captchaRes.Data.Locked ? "CloudSync_MsgLoginLockedTitle" : "CloudSync_MsgLoginSuccess")
@@ -478,26 +643,11 @@ public sealed partial class CloudSyncWindow : Window
             }
             else if (mode == 1)
             {
-                if (password != ConfirmPasswordBox.Password)
-                {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
-                        "CloudSync_ErrPasswordMismatch".GetLocalized());
-                    return;
-                }
-
-                var otp = OtpTextBox.Text.Trim();
-                if (string.IsNullOrWhiteSpace(otp))
-                {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
-                        "CloudSync_ErrEnterCodeFirst".GetLocalized());
-                    return;
-                }
-
                 var regRes = await _cloudSync.ConfirmRegisterAsync(email, password, otp);
                 if (regRes.Ok)
                 {
-                    PasswordBox.Password = string.Empty;
-                    ConfirmPasswordBox.Password = string.Empty;
+                    PasswordInput.Password = string.Empty;
+                    ConfirmPasswordInput.Password = string.Empty;
                     OtpTextBox.Text = string.Empty;
                     ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgRegisterSuccess".GetLocalized(),
                         "CloudSync_MsgRegisterSuccessDetail".GetLocalized());
@@ -511,26 +661,11 @@ public sealed partial class CloudSyncWindow : Window
             }
             else
             {
-                if (password != ConfirmPasswordBox.Password)
-                {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
-                        "CloudSync_ErrPasswordMismatch".GetLocalized());
-                    return;
-                }
-
-                var otp = OtpTextBox.Text.Trim();
-                if (string.IsNullOrWhiteSpace(otp))
-                {
-                    ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
-                        "CloudSync_ErrEnterCodeFirst".GetLocalized());
-                    return;
-                }
-
                 var resetRes = await _cloudSync.ConfirmResetPasswordAsync(email, otp, password);
                 if (resetRes.Ok)
                 {
-                    PasswordBox.Password = string.Empty;
-                    ConfirmPasswordBox.Password = string.Empty;
+                    PasswordInput.Password = string.Empty;
+                    ConfirmPasswordInput.Password = string.Empty;
                     OtpTextBox.Text = string.Empty;
                     AuthModeSelector.SelectedIndex = 0;
                     ShowMessage(InfoBarSeverity.Success, "CloudSync_MsgResetSuccess".GetLocalized(),
@@ -551,7 +686,7 @@ public sealed partial class CloudSyncWindow : Window
 
     private async void OnRefreshAccountStatusClick(object sender, RoutedEventArgs e)
     {
-        if (_isBusy) return;
+        if (IsBusy) return;
         SetBusy(true);
         try
         {
@@ -791,9 +926,9 @@ public sealed partial class CloudSyncWindow : Window
             return;
         }
 
-        var pwdBox = new PasswordBox
+        var passwordInput = new CloudPasswordInput
         {
-            Header = "CloudSync_PasswordHeader".GetLocalized(),
+            Label = "CloudSync_PasswordHeader".GetLocalized(),
             PlaceholderText = "CloudSync_InputCurrentPwd".GetLocalized()
         };
         var errText = new TextBlock
@@ -810,7 +945,7 @@ public sealed partial class CloudSyncWindow : Window
             TextWrapping = TextWrapping.Wrap,
             Foreground = (Brush)Application.Current.Resources["SystemFillColorCriticalBrush"]
         });
-        panel.Children.Add(pwdBox);
+        panel.Children.Add(passwordInput);
         panel.Children.Add(errText);
 
         var dialog = new ContentDialog
@@ -825,17 +960,20 @@ public sealed partial class CloudSyncWindow : Window
 
         dialog.PrimaryButtonClick += async (_, args) =>
         {
-            if (string.IsNullOrEmpty(pwdBox.Password))
+            var password = passwordInput.Password;
+            if (string.IsNullOrEmpty(password))
             {
                 args.Cancel = true;
                 errText.Text = "CloudSync_PasswordRequired".GetLocalized();
+                passwordInput.FocusInput();
                 return;
             }
 
+            passwordInput.MaskPassword();
             var deferral = args.GetDeferral();
             try
             {
-                var res = await _cloudSync.DeleteAccountAsync(pwdBox.Password);
+                var res = await _cloudSync.DeleteAccountAsync(password);
                 if (!res.Ok)
                 {
                     args.Cancel = true;
@@ -854,7 +992,23 @@ public sealed partial class CloudSyncWindow : Window
             }
         };
 
-        await dialog.ShowAsync();
+        void OnDeleteDialogWindowActivated(object sender, WindowActivatedEventArgs args)
+        {
+            if (args.WindowActivationState == WindowActivationState.Deactivated)
+            {
+                passwordInput.MaskPassword();
+            }
+        }
+
+        Activated += OnDeleteDialogWindowActivated;
+        try
+        {
+            await dialog.ShowAsync();
+        }
+        finally
+        {
+            Activated -= OnDeleteDialogWindowActivated;
+        }
         RefreshAccountUiState();
     }
 
@@ -958,7 +1112,7 @@ public sealed partial class CloudSyncWindow : Window
 
     private async void OnActivateCodeClick(object sender, RoutedEventArgs e)
     {
-        if (_isBusy) return;
+        if (IsBusy) return;
         if (!_cloudSync.IsLoggedIn)
         {
             ShowMessage(InfoBarSeverity.Warning, "CloudSync_HintTitle".GetLocalized(),
@@ -999,14 +1153,11 @@ public sealed partial class CloudSyncWindow : Window
 
     private void OnArchiveFilterChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!IsInitializedOrLoaded()) return;
-        if (_cloudSync.IsLoggedIn && !_cloudSync.IsLocked)
+        if (ArchivesRepeater != null && _cloudSync.IsLoggedIn && !_cloudSync.IsLocked)
         {
-            _ = RefreshArchivesInternalAsync(silent: true);
+            _ = RefreshArchivesInternalAsync(silent: false);
         }
     }
-
-    private bool IsInitializedOrLoaded() => ArchiveFilterComboBox != null && ArchivesRepeater != null;
 
     private async void OnRefreshArchivesClick(object sender, RoutedEventArgs e)
     {
@@ -1015,30 +1166,52 @@ public sealed partial class CloudSyncWindow : Window
 
     private async Task RefreshArchivesInternalAsync(bool silent)
     {
-        if (!_cloudSync.IsLoggedIn)
+        if (_closed) return;
+        if (!_cloudSync.IsLoggedIn || _cloudSync.IsLocked)
         {
             RefreshAccountUiState();
             return;
         }
 
-        SetBusy(true);
+        var filter = (ArchiveFilterComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "all";
+        var email = _cloudSync.CurrentEmail;
+        var accountChanged = _archiveAccountEmail != email;
+        _archiveAccountEmail = email;
+        var version = ++_archiveRequestVersion;
+        _archiveLoadPending = true;
+        UpdateBusyUi();
+
+        if (accountChanged || _displayedArchiveFilter != filter)
+        {
+            _displayedArchiveFilter = null;
+            _archives.Clear();
+            ArchivesSummaryText.Text = "CloudSync_ArchivesSubtitle".GetLocalized();
+        }
+
+        ArchivesEmptyText.Text = "CloudSync_LoadingArchivesText".GetLocalized();
+        ArchivesEmptyText.Visibility = _archives.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         try
         {
-            var filter = (ArchiveFilterComboBox.SelectedItem as ComboBoxItem)?.Tag?.ToString() ?? "all";
             var res = await _cloudSync.ListArchivesAsync(filter);
-            if (!res.Ok || res.Data == null)
+            if (_closed || version != _archiveRequestVersion) return;
+            if (!_cloudSync.IsLoggedIn || _cloudSync.IsLocked || email != _cloudSync.CurrentEmail)
             {
-                if (!silent)
-                {
-                    ShowMessage(res.IsAccountLocked ? InfoBarSeverity.Warning : InfoBarSeverity.Error,
-                        "CloudSync_ArchivesLoadFailedTitle".GetLocalized(),
-                        _cloudSync.FormatFriendlyError(res.Code, res.Message, res.HttpStatusCode));
-                }
-
+                ResetArchiveList();
                 RefreshAccountUiState();
                 return;
             }
 
+            if (!res.Ok || res.Data == null)
+            {
+                if (!silent || _archives.Count == 0)
+                {
+                    ArchivesEmptyText.Text = _cloudSync.FormatFriendlyError(res.Code, res.Message, res.HttpStatusCode);
+                    ArchivesEmptyText.Visibility = Visibility.Visible;
+                }
+                return;
+            }
+
+            _displayedArchiveFilter = filter;
             _archives.Clear();
             foreach (var item in res.Data.Archives)
             {
@@ -1051,13 +1224,30 @@ public sealed partial class CloudSyncWindow : Window
                 res.Data.FileCountLimit,
                 CloudArchiveItem.FormatBytes(res.Data.R2BytesUsed),
                 CloudArchiveItem.FormatBytes(res.Data.R2BytesLimit));
-            ArchivesEmptyText.Text = "CloudSync_ArchivesFilteredEmpty".GetLocalized();
+            ArchivesEmptyText.Text = (filter == "all" ? "CloudSync_ArchivesEmpty" : "CloudSync_ArchivesFilteredEmpty")
+                .GetLocalized();
             ArchivesEmptyText.Visibility = _archives.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
         finally
         {
-            SetBusy(false);
+            if (version == _archiveRequestVersion)
+            {
+                _archiveLoadPending = false;
+                UpdateBusyUi();
+            }
         }
+    }
+
+    private void ResetArchiveList()
+    {
+        ++_archiveRequestVersion;
+        _archiveLoadPending = false;
+        _archiveAccountEmail = null;
+        _displayedArchiveFilter = null;
+        _archives.Clear();
+        ArchivesSummaryText.Text = "CloudSync_ArchivesSubtitle".GetLocalized();
+        ArchivesEmptyText.Visibility = Visibility.Collapsed;
+        UpdateBusyUi();
     }
 
     private async void OnUploadLocalJsonClick(object sender, RoutedEventArgs e)
@@ -1518,12 +1708,22 @@ public sealed partial class CloudSyncWindow : Window
 
     private void SetBusy(bool busy)
     {
-        _isBusy = busy;
-        GlobalProgressBar.Visibility = busy ? Visibility.Visible : Visibility.Collapsed;
+        _busyOperations += busy ? 1 : -1;
+        UpdateBusyUi();
     }
 
-    private void ShowMessage(InfoBarSeverity severity, string title, string message)
+    private void UpdateBusyUi()
     {
+        if (_closed) return;
+        GlobalProgressBar.Visibility = _busyOperations > 0 || _archiveLoadPending
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+        UpdateAuthOtpButton();
+    }
+
+    private void ShowMessage(InfoBarSeverity severity, string title, string message, bool isAuthOtpFeedback = false)
+    {
+        _statusIsAuthOtpFeedback = isAuthOtpFeedback;
         StatusInfoBar.Severity = severity;
         StatusInfoBar.Title = title;
         StatusInfoBar.Message = message;

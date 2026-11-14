@@ -9779,6 +9779,12 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>6자리 인증 코드 입력</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>보내는 중…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>{0}초 후 다시 보내기</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>코드 전송됨</value>
   </data>
@@ -9799,6 +9805,12 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>8~128자 비밀번호 입력</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>비밀번호 표시</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>비밀번호 숨기기</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>비밀번호를 입력하세요.</value>

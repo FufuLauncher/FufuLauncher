@@ -9774,6 +9774,12 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
     <value>6 अंकों का कोड दर्ज करें</value>
   </data>
+  <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
+    <value>भेजा जा रहा है…</value>
+  </data>
+  <data name="CloudSync_OtpResendIn" xml:space="preserve">
+    <value>{0} सेकंड में फिर भेजें</value>
+  </data>
   <data name="CloudSync_OtpSentTitle" xml:space="preserve">
     <value>कोड भेजा गया</value>
   </data>
@@ -9794,6 +9800,12 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
     <value>8-128 अक्षरों का पासवर्ड दर्ज करें</value>
+  </data>
+  <data name="CloudSync_ShowPassword" xml:space="preserve">
+    <value>पासवर्ड दिखाएँ</value>
+  </data>
+  <data name="CloudSync_HidePassword" xml:space="preserve">
+    <value>पासवर्ड छिपाएँ</value>
   </data>
   <data name="CloudSync_PasswordRequired" xml:space="preserve">
     <value>कृपया अपना पासवर्ड दर्ज करें।</value>
