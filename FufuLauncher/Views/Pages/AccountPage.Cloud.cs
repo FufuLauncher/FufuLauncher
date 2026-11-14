@@ -219,7 +219,7 @@ public sealed partial class AccountPage
         {
             var appVersion = !string.IsNullOrWhiteSpace(AppVersionHelper.NumericVersion)
                 ? AppVersionHelper.NumericVersion
-                : "1.7.2.3";
+                : "1.7.2.4";
             return appVersion.Length > 64 ? appVersion[..64] : appVersion;
         }
 

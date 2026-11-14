@@ -1775,7 +1775,7 @@ public sealed partial class CloudSyncWindow : Window
     {
         var appVersion = !string.IsNullOrWhiteSpace(AppVersionHelper.NumericVersion)
             ? AppVersionHelper.NumericVersion
-            : "1.7.2.3";
+            : "1.7.2.4";
         if (appVersion.Length > 64) appVersion = appVersion[..64];
         return GamePlayTimeStore.TryConvertPlayTimeJsonToCloudJson(rawJson, appVersion);
     }
