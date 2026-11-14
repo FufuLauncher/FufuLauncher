@@ -4446,6 +4446,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>नोट्स प्राप्त करने में विफल: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>कृपया फिर से लॉगिन करें</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>डिवाइस फ़िंगरप्रिंट सेवा प्राप्त नहीं कर सकते</value>
   </data>

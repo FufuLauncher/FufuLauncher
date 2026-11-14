@@ -4294,6 +4294,9 @@ Arquivos pesquisados:
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Falha ao obter notas: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Faça login novamente</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>Não foi possível obter o serviço de impressão digital do dispositivo</value>
   </data>

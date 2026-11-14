@@ -4821,6 +4821,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>获取便签失败: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>请重新登录</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>无法获取设备指纹服务</value>
   </data>

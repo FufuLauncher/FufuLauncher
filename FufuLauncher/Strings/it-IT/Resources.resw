@@ -1207,6 +1207,9 @@ Stack trace:
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Recupero note fallito: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Accedi di nuovo</value>
+  </data>
   <data name="DailyNote_GetFailed" xml:space="preserve">
     <value>Recupero dati note giornaliere fallito: {0}</value>
   </data>

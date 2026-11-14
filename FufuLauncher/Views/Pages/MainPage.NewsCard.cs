@@ -7,6 +7,7 @@ using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 
 namespace FufuLauncher.Views;
@@ -20,6 +21,8 @@ public sealed partial class MainPage
     private Storyboard _newsSkeletonShimmerStoryboard;
     private bool _isSkeletonLayerAVisible = true;
     private bool _isSkeletonRotating;
+    private int _currentNewsTabIndex;
+    private Storyboard? _newsTabTransitionStoryboard;
 
     private void InfoCard_PointerEntered(object sender, PointerRoutedEventArgs e)
     {
@@ -257,11 +260,27 @@ public sealed partial class MainPage
         storyboard.Begin();
     }
 
+    private void InfoCardNewsViewport_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (InfoCardNewsViewport == null)
+        {
+            return;
+        }
+
+        if (e.NewSize.Width > 0 && e.NewSize.Height > 0)
+        {
+            InfoCardNewsViewport.Clip = new RectangleGeometry
+            {
+                Rect = new Windows.Foundation.Rect(0, 0, e.NewSize.Width, e.NewSize.Height)
+            };
+        }
+    }
+
     private void InfoCardNavView_SelectionChanged(
         NavigationView sender,
         NavigationViewSelectionChangedEventArgs args)
     {
-        if (InfoCardNewsPivot == null)
+        if (EventsListView == null || AnnouncementsListView == null || NewsListView == null)
         {
             return;
         }
@@ -276,27 +295,87 @@ public sealed partial class MainPage
                 _ => -1
             };
 
-            if (targetIndex >= 0 && InfoCardNewsPivot.SelectedIndex != targetIndex)
+            if (targetIndex >= 0)
             {
-                InfoCardNewsPivot.SelectedIndex = targetIndex;
+                SwitchNewsTab(targetIndex);
             }
         }
     }
 
-    private void InfoCardNewsPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void SwitchNewsTab(int targetIndex)
     {
-        if (InfoCardNavView == null || InfoCardNewsPivot == null)
+        var previousIndex = _currentNewsTabIndex;
+        if (targetIndex == previousIndex)
         {
             return;
         }
 
-        var index = InfoCardNewsPivot.SelectedIndex;
-        if (index >= 0 && index < InfoCardNavView.MenuItems.Count &&
-            !Equals(InfoCardNavView.SelectedItem, InfoCardNavView.MenuItems[index]))
+        _newsTabTransitionStoryboard?.Stop();
+        _currentNewsTabIndex = targetIndex;
+
+        ListView? targetList = null;
+        TranslateTransform? targetTranslate = null;
+
+        for (var i = 0; i < 3; i++)
         {
-            InfoCardNavView.SelectedItem = InfoCardNavView.MenuItems[index];
+            var (list, translate) = GetNewsTabParts(i);
+
+            if (i == targetIndex)
+            {
+                targetList = list;
+                targetTranslate = translate;
+            }
+            else
+            {
+                list.Visibility = Visibility.Collapsed;
+                list.Opacity = 1.0;
+                translate.X = 0;
+            }
         }
+
+        if (targetList == null || targetTranslate == null)
+        {
+            return;
+        }
+
+        var direction = targetIndex > previousIndex ? 1 : -1;
+        var width = InfoCardNewsViewport?.ActualWidth ?? 0;
+        var slideOffset = Math.Min(100.0, Math.Max(width * 0.28, 72.0)) * direction;
+
+        targetList.Visibility = Visibility.Visible;
+        targetList.Opacity = 0;
+        targetTranslate.X = slideOffset;
+
+        var storyboard = new Storyboard();
+        var slideDuration = new Duration(TimeSpan.FromMilliseconds(280));
+        var fadeDuration = new Duration(TimeSpan.FromMilliseconds(200));
+        var slideEasing = new ExponentialEase { Exponent = 5, EasingMode = EasingMode.EaseOut };
+        var fadeEasing = new CubicEase { EasingMode = EasingMode.EaseOut };
+
+        storyboard.Children.Add(CreateDoubleAnimation(targetTranslate, "X", 0, slideDuration, slideEasing));
+        storyboard.Children.Add(CreateDoubleAnimation(targetList, "Opacity", 1.0, fadeDuration, fadeEasing));
+
+        _newsTabTransitionStoryboard = storyboard;
+        storyboard.Completed += (_, _) =>
+        {
+            if (!ReferenceEquals(_newsTabTransitionStoryboard, storyboard))
+            {
+                return;
+            }
+
+            targetTranslate.X = 0;
+            targetList.Opacity = 1.0;
+            _newsTabTransitionStoryboard = null;
+        };
+        storyboard.Begin();
     }
+
+    private (ListView List, TranslateTransform Translate) GetNewsTabParts(int index) => index switch
+    {
+        0 => (EventsListView, EventsListTranslate),
+        1 => (AnnouncementsListView, AnnouncementsListTranslate),
+        _ => (NewsListView, NewsListTranslate)
+    };
 
     #endregion
 }

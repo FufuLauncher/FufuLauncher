@@ -438,207 +438,52 @@
                                 </NavigationView.MenuItems>
                             </NavigationView>
 
-                            <Pivot
-                                x:Name="InfoCardNewsPivot"
+                            <Grid
+                                x:Name="InfoCardNewsViewport"
                                 Grid.Row="1"
-                                SelectionChanged="InfoCardNewsPivot_SelectionChanged">
-                                <Pivot.Template>
-                                    <ControlTemplate TargetType="Pivot">
-                                        <Grid
-                                            x:Name="RootElement"
-                                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                            Background="{TemplateBinding Background}">
-                                            <VisualStateManager.VisualStateGroups>
-                                                <VisualStateGroup x:Name="Orientation">
-                                                    <VisualState x:Name="Portrait" />
-                                                    <VisualState x:Name="Landscape" />
-                                                </VisualStateGroup>
-                                                <VisualStateGroup x:Name="NavigationButtonsVisibility">
-                                                    <VisualState x:Name="NavigationButtonsHidden" />
-                                                    <VisualState x:Name="NavigationButtonsVisible" />
-                                                    <VisualState x:Name="PreviousButtonVisible" />
-                                                    <VisualState x:Name="NextButtonVisible" />
-                                                </VisualStateGroup>
-                                                <VisualStateGroup x:Name="HeaderStates">
-                                                    <VisualState x:Name="HeaderDynamic" />
-                                                    <VisualState x:Name="HeaderStatic" />
-                                                </VisualStateGroup>
-                                            </VisualStateManager.VisualStateGroups>
-
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                                <RowDefinition Height="*" />
-                                            </Grid.RowDefinitions>
-
-                                            <ContentControl
-                                                x:Name="TitleContentControl"
-                                                Content="{TemplateBinding Title}"
-                                                ContentTemplate="{TemplateBinding TitleTemplate}"
-                                                IsTabStop="False"
-                                                Visibility="Collapsed" />
-
-                                            <Grid Grid.Row="1">
-                                                <ScrollViewer
-                                                    x:Name="ScrollViewer"
-                                                    Margin="{TemplateBinding Padding}"
-                                                    BringIntoViewOnFocusChange="False"
-                                                    HorizontalScrollBarVisibility="Hidden"
-                                                    HorizontalSnapPointsAlignment="Center"
-                                                    HorizontalSnapPointsType="MandatorySingle"
-                                                    VerticalContentAlignment="Stretch"
-                                                    VerticalScrollBarVisibility="Disabled"
-                                                    VerticalScrollMode="Disabled"
-                                                    VerticalSnapPointsType="None"
-                                                    ZoomMode="Disabled">
-                                                    <ScrollViewer.Template>
-                                                        <ControlTemplate TargetType="ScrollViewer">
-                                                            <Grid Background="{TemplateBinding Background}">
-                                                                <ScrollContentPresenter
-                                                                    x:Name="ScrollContentPresenter"
-                                                                    Margin="{TemplateBinding Padding}"
-                                                                    ContentTemplate="{TemplateBinding ContentTemplate}" />
-                                                            </Grid>
-                                                        </ControlTemplate>
-                                                    </ScrollViewer.Template>
-                                                    <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
-                                                        <Grid x:Name="PivotLayoutElement">
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="0" />
-                                                                <RowDefinition Height="*" />
-                                                            </Grid.RowDefinitions>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto" />
-                                                                <ColumnDefinition Width="*" />
-                                                                <ColumnDefinition Width="Auto" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <Grid.RenderTransform>
-                                                                <CompositeTransform x:Name="PivotLayoutElementTranslateTransform" />
-                                                            </Grid.RenderTransform>
-                                                            <ContentPresenter
-                                                                x:Name="LeftHeaderPresenter"
-                                                                Content="{TemplateBinding LeftHeader}"
-                                                                ContentTemplate="{TemplateBinding LeftHeaderTemplate}"
-                                                                IsHitTestVisible="False"
-                                                                Visibility="Collapsed" />
-                                                            <ContentControl
-                                                                x:Name="HeaderClipper"
-                                                                Grid.Column="1"
-                                                                HorizontalContentAlignment="Stretch"
-                                                                IsHitTestVisible="False"
-                                                                IsTabStop="False"
-                                                                UseSystemFocusVisuals="False"
-                                                                Visibility="Collapsed">
-                                                                <ContentControl.Clip>
-                                                                    <RectangleGeometry x:Name="HeaderClipperGeometry" />
-                                                                </ContentControl.Clip>
-                                                                <Grid Background="{ThemeResource PivotHeaderBackground}">
-                                                                    <Grid.RenderTransform>
-                                                                        <CompositeTransform x:Name="HeaderOffsetTranslateTransform" />
-                                                                    </Grid.RenderTransform>
-                                                                    <PivotHeaderPanel x:Name="StaticHeader" Visibility="Collapsed">
-                                                                        <PivotHeaderPanel.RenderTransform>
-                                                                            <CompositeTransform x:Name="StaticHeaderTranslateTransform" />
-                                                                        </PivotHeaderPanel.RenderTransform>
-                                                                    </PivotHeaderPanel>
-                                                                    <PivotHeaderPanel x:Name="Header">
-                                                                        <PivotHeaderPanel.RenderTransform>
-                                                                            <CompositeTransform x:Name="HeaderTranslateTransform" />
-                                                                        </PivotHeaderPanel.RenderTransform>
-                                                                    </PivotHeaderPanel>
-                                                                    <Rectangle
-                                                                        x:Name="FocusFollower"
-                                                                        HorizontalAlignment="Stretch"
-                                                                        VerticalAlignment="Stretch"
-                                                                        Control.IsTemplateFocusTarget="True"
-                                                                        Fill="Transparent"
-                                                                        IsHitTestVisible="False" />
-                                                                </Grid>
-                                                            </ContentControl>
-                                                            <Button
-                                                                x:Name="PreviousButton"
-                                                                Grid.Column="1"
-                                                                Width="20"
-                                                                Height="36"
-                                                                HorizontalAlignment="Left"
-                                                                VerticalAlignment="Top"
-                                                                Background="Transparent"
-                                                                IsEnabled="False"
-                                                                IsHitTestVisible="False"
-                                                                IsTabStop="False"
-                                                                Opacity="0"
-                                                                UseSystemFocusVisuals="False"
-                                                                Visibility="Collapsed" />
-                                                            <Button
-                                                                x:Name="NextButton"
-                                                                Grid.Column="1"
-                                                                Width="20"
-                                                                Height="36"
-                                                                HorizontalAlignment="Right"
-                                                                VerticalAlignment="Top"
-                                                                Background="Transparent"
-                                                                IsEnabled="False"
-                                                                IsHitTestVisible="False"
-                                                                IsTabStop="False"
-                                                                Opacity="0"
-                                                                UseSystemFocusVisuals="False"
-                                                                Visibility="Collapsed" />
-                                                            <ContentPresenter
-                                                                x:Name="RightHeaderPresenter"
-                                                                Grid.Column="2"
-                                                                Content="{TemplateBinding RightHeader}"
-                                                                ContentTemplate="{TemplateBinding RightHeaderTemplate}"
-                                                                IsHitTestVisible="False"
-                                                                Visibility="Collapsed" />
-                                                            <ItemsPresenter
-                                                                x:Name="PivotItemPresenter"
-                                                                Grid.Row="1"
-                                                                Grid.ColumnSpan="3">
-                                                                <ItemsPresenter.RenderTransform>
-                                                                    <TransformGroup>
-                                                                        <TranslateTransform x:Name="ItemsPresenterTranslateTransform" />
-                                                                        <CompositeTransform x:Name="ItemsPresenterCompositeTransform" />
-                                                                    </TransformGroup>
-                                                                </ItemsPresenter.RenderTransform>
-                                                            </ItemsPresenter>
-                                                        </Grid>
-                                                    </PivotPanel>
-                                                </ScrollViewer>
-                                            </Grid>
-                                        </Grid>
-                                    </ControlTemplate>
-                                </Pivot.Template>
-
-                                <PivotItem Margin="0">
-                                    <Grid>
-                                        <ListView
-                                            Padding="4,0,4,4"
-                                            ItemTemplate="{StaticResource NewsItemTemplate}"
-                                            ItemsSource="{x:Bind ViewModel.ActivityPosts}"
-                                            SelectionMode="None" />
-                                    </Grid>
-                                </PivotItem>
-
-                                <PivotItem Margin="0">
-                                    <Grid>
-                                        <ListView
-                                            Padding="4,0,4,4"
-                                            ItemTemplate="{StaticResource NewsItemTemplate}"
-                                            ItemsSource="{x:Bind ViewModel.AnnouncementPosts}"
-                                            SelectionMode="None" />
-                                    </Grid>
-                                </PivotItem>
-
-                                <PivotItem Margin="0">
-                                    <Grid>
-                                        <ListView
-                                            Padding="4,0,4,4"
-                                            ItemTemplate="{StaticResource NewsItemTemplate}"
-                                            ItemsSource="{x:Bind ViewModel.InfoPosts}"
-                                            SelectionMode="None" />
-                                    </Grid>
-                                </PivotItem>
-                            </Pivot>
+                                SizeChanged="InfoCardNewsViewport_SizeChanged">
+                                <ListView
+                                    x:Name="EventsListView"
+                                    Padding="4,0,4,4"
+                                    ItemTemplate="{StaticResource NewsItemTemplate}"
+                                    ItemsSource="{x:Bind ViewModel.ActivityPosts}"
+                                    SelectionMode="None">
+                                    <ListView.ItemContainerTransitions>
+                                        <TransitionCollection />
+                                    </ListView.ItemContainerTransitions>
+                                    <ListView.RenderTransform>
+                                        <TranslateTransform x:Name="EventsListTranslate" X="0" />
+                                    </ListView.RenderTransform>
+                                </ListView>
+                                <ListView
+                                    x:Name="AnnouncementsListView"
+                                    Padding="4,0,4,4"
+                                    ItemTemplate="{StaticResource NewsItemTemplate}"
+                                    ItemsSource="{x:Bind ViewModel.AnnouncementPosts}"
+                                    SelectionMode="None"
+                                    Visibility="Collapsed">
+                                    <ListView.ItemContainerTransitions>
+                                        <TransitionCollection />
+                                    </ListView.ItemContainerTransitions>
+                                    <ListView.RenderTransform>
+                                        <TranslateTransform x:Name="AnnouncementsListTranslate" X="0" />
+                                    </ListView.RenderTransform>
+                                </ListView>
+                                <ListView
+                                    x:Name="NewsListView"
+                                    Padding="4,0,4,4"
+                                    ItemTemplate="{StaticResource NewsItemTemplate}"
+                                    ItemsSource="{x:Bind ViewModel.InfoPosts}"
+                                    SelectionMode="None"
+                                    Visibility="Collapsed">
+                                    <ListView.ItemContainerTransitions>
+                                        <TransitionCollection />
+                                    </ListView.ItemContainerTransitions>
+                                    <ListView.RenderTransform>
+                                        <TranslateTransform x:Name="NewsListTranslate" X="0" />
+                                    </ListView.RenderTransform>
+                                </ListView>
+                            </Grid>
                         </Grid>
 
                         <Grid

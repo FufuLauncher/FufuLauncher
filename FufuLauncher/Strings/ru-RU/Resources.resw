@@ -4294,6 +4294,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Не удалось получить заметки: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Пожалуйста, войдите снова</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>Не удалось получить сервис отпечатка устройства</value>
   </data>

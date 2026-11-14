@@ -4294,6 +4294,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>取得便箋失敗: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>請重新登入</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>無法取得裝置指紋服務</value>
   </data>

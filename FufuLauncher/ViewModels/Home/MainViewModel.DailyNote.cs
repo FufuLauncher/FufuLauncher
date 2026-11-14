@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models.MiHoYo;
 using FufuLauncher.Services;
+using FufuLauncher.Services.MiHoYo.DailyNote;
 using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.ViewModels;
@@ -94,10 +95,20 @@ public partial class MainViewModel
             DebugLog.Info("MainViewModel.DailyNote", $"[DailyNote] Failed to load note data: {ex.Message}");
             await UpdateUI(() =>
             {
-                if (version == _dailyNoteVersion) DailyNoteStatus = ex.Message;
+                if (version == _dailyNoteVersion)
+                {
+                    DailyNoteStatus = IsReloginRequiredError(ex)
+                        ? "DailyNote_ReloginRequired".GetLocalized()
+                        : ex.Message;
+                }
             });
         }
     }
+
+    private static bool IsReloginRequiredError(Exception ex) =>
+        ex is DailyNoteApiException { Retcode: 10001 or -10001 } ||
+        ex.Message.Contains("（10001）", StringComparison.Ordinal) ||
+        ex.Message.Contains("（-10001）", StringComparison.Ordinal);
 
     private async Task ClearDailyNoteDataAsync(bool invalidate = true)
     {

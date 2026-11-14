@@ -4294,6 +4294,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>노트를 가져오지 못했습니다: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>다시 로그인해 주세요</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>기기 지문 서비스를 가져올 수 없습니다</value>
   </data>

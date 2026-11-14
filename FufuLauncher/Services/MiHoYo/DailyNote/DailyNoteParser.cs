@@ -72,6 +72,11 @@ public class DailyNoteCardData
     } = "";
 }
 
+public sealed class DailyNoteApiException(int retcode, string message) : InvalidOperationException(message)
+{
+    public int Retcode { get; } = retcode;
+}
+
 public static class DailyNoteParser
 {
     public static DailyNoteCardData Parse(string json)
@@ -87,13 +92,13 @@ public static class DailyNoteParser
 
         if (retcode != 0)
         {
-            string message = root.TryGetProperty("message", out var msgProp)
+            string? message = root.TryGetProperty("message", out var msgProp)
                 ? msgProp.GetString()
                 : "Status_UnknownError".GetLocalized();
             string error = string.IsNullOrWhiteSpace(message)
                 ? string.Format("DailyNote_ApiError".GetLocalized(), retcode)
                 : $"{message}，retcode={retcode}";
-            throw new InvalidOperationException(string.Format("DailyNote_GetFailed".GetLocalized(), error));
+            throw new DailyNoteApiException(retcode, string.Format("DailyNote_GetFailed".GetLocalized(), error));
         }
 
         if (!root.TryGetProperty("data", out var data))

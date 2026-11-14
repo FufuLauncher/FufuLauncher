@@ -117,7 +117,8 @@ public sealed class DailyNoteService
             }
 
             if (retcode != 0)
-                throw new InvalidOperationException(
+                throw new DailyNoteApiException(
+                    retcode,
                     string.Format("DailyNote_FetchFailed".GetLocalized(), message, retcode));
 
             return DailyNoteParser.Parse(json);

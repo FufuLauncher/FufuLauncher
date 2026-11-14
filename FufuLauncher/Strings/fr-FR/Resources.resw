@@ -4293,6 +4293,9 @@ Fichier recherché :
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Échec de récupération du carnet : {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Veuillez vous reconnecter</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>Impossible d'obtenir le service d'empreinte de l'appareil</value>
   </data>

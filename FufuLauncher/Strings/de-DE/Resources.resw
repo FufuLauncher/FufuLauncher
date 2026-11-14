@@ -4294,6 +4294,9 @@ Gesuchte Datei:
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Abruf der Notizen fehlgeschlagen: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Bitte erneut anmelden</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>Geräte-Fingerprint-Dienst nicht verfügbar</value>
   </data>

@@ -4294,6 +4294,9 @@ File yang dicari:
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Gagal mendapatkan catatan: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Silakan masuk kembali</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>Tidak dapat memperoleh layanan sidik jari perangkat</value>
   </data>

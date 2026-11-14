@@ -4294,6 +4294,9 @@ Archivos buscados:
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>Error al obtener notas: {0} (retcode={1})</value>
   </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>Vuelve a iniciar sesión</value>
+  </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>No se puede obtener el servicio de huella digital del dispositivo</value>
   </data>
