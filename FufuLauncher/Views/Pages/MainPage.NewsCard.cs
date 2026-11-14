@@ -5,6 +5,7 @@ Licensed under the MIT License.
 
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Animation;
 
@@ -49,7 +50,7 @@ public sealed partial class MainPage
             NewsSkeletonPanel.Visibility = isExpanded ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        var pivotTargetOpacity = isExpanded && ViewModel.IsNewsLoaded ? 1.0 : 0.0;
+        var contentTargetOpacity = isExpanded && ViewModel.IsNewsLoaded ? 1.0 : 0.0;
 
         var sb = new Storyboard();
         var duration = new Duration(TimeSpan.FromMilliseconds(350));
@@ -66,26 +67,26 @@ public sealed partial class MainPage
         Storyboard.SetTargetProperty(heightAnim, "Height");
         sb.Children.Add(heightAnim);
 
-        if (InfoCardPivot != null)
+        if (InfoCardContentPanel != null)
         {
-            var pivotOpacityAnim = new DoubleAnimation
+            var contentOpacityAnim = new DoubleAnimation
             {
-                To = pivotTargetOpacity,
+                To = contentTargetOpacity,
                 Duration = new Duration(TimeSpan.FromMilliseconds(200)),
                 EasingFunction = easing,
                 EnableDependentAnimation = true
             };
-            Storyboard.SetTarget(pivotOpacityAnim, InfoCardPivot);
-            Storyboard.SetTargetProperty(pivotOpacityAnim, "Opacity");
-            sb.Children.Add(pivotOpacityAnim);
+            Storyboard.SetTarget(contentOpacityAnim, InfoCardContentPanel);
+            Storyboard.SetTargetProperty(contentOpacityAnim, "Opacity");
+            sb.Children.Add(contentOpacityAnim);
         }
 
         sb.Completed += (_, _) =>
         {
-            if (InfoCardPivot != null)
+            if (InfoCardContentPanel != null)
             {
-                InfoCardPivot.IsHitTestVisible = isExpanded && ViewModel.IsNewsLoaded;
-                InfoCardPivot.Opacity = pivotTargetOpacity;
+                InfoCardContentPanel.IsHitTestVisible = isExpanded && ViewModel.IsNewsLoaded;
+                InfoCardContentPanel.Opacity = contentTargetOpacity;
             }
 
             BannerImageArea.CornerRadius = targetCornerRadius;
@@ -116,17 +117,18 @@ public sealed partial class MainPage
 
     private void InitializeNewsSkeleton()
     {
-        if (NewsSkeletonPanel == null || InfoCardPivot == null) return;
+        if (NewsSkeletonPanel == null || InfoCardContentPanel == null) return;
 
         if (ViewModel.IsNewsLoaded)
         {
             NewsSkeletonPanel.Visibility = Visibility.Collapsed;
-            InfoCardPivot.Opacity = _isInfoCardExpanded ? 1.0 : 0.0;
-            InfoCardPivotTranslate.Y = 0;
+            InfoCardContentPanel.Opacity = _isInfoCardExpanded ? 1.0 : 0.0;
+            InfoCardContentPanel.IsHitTestVisible = _isInfoCardExpanded;
+            InfoCardContentTranslate.Y = 0;
             return;
         }
 
-        InfoCardPivot.IsHitTestVisible = false;
+        InfoCardContentPanel.IsHitTestVisible = false;
 
         if (_isInfoCardExpanded)
         {
@@ -226,7 +228,7 @@ public sealed partial class MainPage
 
     private void OnNewsContentLoaded()
     {
-        if (NewsSkeletonPanel == null || InfoCardPivot == null) return;
+        if (NewsSkeletonPanel == null || InfoCardContentPanel == null) return;
 
         StopNewsSkeletonEffects();
 
@@ -235,24 +237,65 @@ public sealed partial class MainPage
         var easing = new CubicEase { EasingMode = EasingMode.EaseInOut };
 
         storyboard.Children.Add(CreateDoubleAnimation(NewsSkeletonPanel, "Opacity", 0, duration, easing));
-        storyboard.Children.Add(CreateDoubleAnimation(InfoCardPivotTranslate, "Y", 0, duration, easing));
+        storyboard.Children.Add(CreateDoubleAnimation(InfoCardContentTranslate, "Y", 0, duration, easing));
 
         if (_isInfoCardExpanded)
         {
-            storyboard.Children.Add(CreateDoubleAnimation(InfoCardPivot, "Opacity", 1, duration, easing));
+            storyboard.Children.Add(CreateDoubleAnimation(InfoCardContentPanel, "Opacity", 1, duration, easing));
         }
 
         storyboard.Completed += (_, _) =>
         {
             NewsSkeletonPanel.Visibility = Visibility.Collapsed;
-            InfoCardPivotTranslate.Y = 0;
-            if (_isInfoCardExpanded && InfoCardPivot != null)
+            InfoCardContentTranslate.Y = 0;
+            if (_isInfoCardExpanded && InfoCardContentPanel != null)
             {
-                InfoCardPivot.IsHitTestVisible = true;
-                InfoCardPivot.Opacity = 1.0;
+                InfoCardContentPanel.IsHitTestVisible = true;
+                InfoCardContentPanel.Opacity = 1.0;
             }
         };
         storyboard.Begin();
+    }
+
+    private void InfoCardNavView_SelectionChanged(
+        NavigationView sender,
+        NavigationViewSelectionChangedEventArgs args)
+    {
+        if (InfoCardNewsPivot == null)
+        {
+            return;
+        }
+
+        if (args.SelectedItem is NavigationViewItem item && item.Tag is string tag)
+        {
+            var targetIndex = tag switch
+            {
+                "Events" => 0,
+                "Announcements" => 1,
+                "News" => 2,
+                _ => -1
+            };
+
+            if (targetIndex >= 0 && InfoCardNewsPivot.SelectedIndex != targetIndex)
+            {
+                InfoCardNewsPivot.SelectedIndex = targetIndex;
+            }
+        }
+    }
+
+    private void InfoCardNewsPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (InfoCardNavView == null || InfoCardNewsPivot == null)
+        {
+            return;
+        }
+
+        var index = InfoCardNewsPivot.SelectedIndex;
+        if (index >= 0 && index < InfoCardNavView.MenuItems.Count &&
+            !Equals(InfoCardNavView.SelectedItem, InfoCardNavView.MenuItems[index]))
+        {
+            InfoCardNavView.SelectedItem = InfoCardNavView.MenuItems[index];
+        }
     }
 
     #endregion
