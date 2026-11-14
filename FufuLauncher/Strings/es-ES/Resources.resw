@@ -9593,6 +9593,9 @@ Detalles: {0}</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>Demasiadas solicitudes.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>El servicio en la nube no está disponible temporalmente. Inténtalo más tarde.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>Espacio en la nube insuficiente.</value>
   </data>
@@ -10404,7 +10407,7 @@ Detalles: {0}</value>
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>{1} deseo(s) de {0} personaje(s) guardados en el archivo en la nube de FufuLauncher &apos;{2}&apos; ({3} en total).</value>
+    <value>{1} deseo(s) de {0} personaje(s) guardados en el archivo en la nube de FufuLauncher '{2}' ({3} en total).</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -10761,7 +10764,7 @@ Detalles: {0}</value>
     <value>Consulta las estadísticas globales sin iniciar sesión en Hutao Cloud. Elige un personaje vinculado para consultar tu rango actual.</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>El archivo en la nube de FufuLauncher &apos;{0}&apos; ya existe. Elige una opción:</value>
+    <value>El archivo en la nube de FufuLauncher '{0}' ya existe. Elige una opción:</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>Presencia en Teatro</value>
@@ -10794,7 +10797,7 @@ Detalles: {0}</value>
     <value>Presencia en Abismo</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>Selecciona un personaje vinculado arriba para ver la clasificación del UID.</value>
+    <value>No se encontró clasificación del período actual para los roles vinculados (inicia sesión y vincula un rol o verifica los envíos actuales)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Estadísticas y clasificación de Hutao Cloud actualizadas</value>
@@ -10900,5 +10903,14 @@ Detalles: {0}</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao Cloud devolvió un estado inesperado ({0}). Inténtalo de nuevo más tarde</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>Almacenamiento en la nube</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>Este rol aún no ha enviado registros de la Espiral del Abismo del período actual</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>La clasificación personal solo admite datos del período actual. Cambia el período a Período actual</value>
   </data>
 </root>

@@ -70,57 +70,49 @@ public sealed partial class CloudSyncService
             };
         }
 
-        if (!await EnsureAuthenticatedAsync())
+        var raw = await SendAuthenticatedRawAsync(token =>
+        {
+            var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncDataUploadPath);
+            req.Headers.Add("X-LToken", token);
+            req.Headers.Add("X-Data-Type", normalizedType);
+            req.Headers.Add("X-Data-Slot", trimmedSlot);
+            req.Headers.Add("X-Overwrite", overwrite ? "true" : "false");
+            req.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+            return req;
+        }, retryOnTransientFailure: overwrite);
+
+        if (raw == null)
         {
             return UnauthorizedResult<CloudUploadResultData>();
         }
 
-        for (var attempt = 0; attempt < 2; attempt++)
+        if (raw.IsNetworkError)
         {
-            var usedLtoken = _ltoken;
-            try
-            {
-                using var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncDataUploadPath);
-                req.Headers.Add("X-LToken", usedLtoken);
-                req.Headers.Add("X-Data-Type", normalizedType);
-                req.Headers.Add("X-Data-Slot", trimmedSlot);
-                req.Headers.Add("X-Overwrite", overwrite ? "true" : "false");
-                req.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                using var resp = await _httpClient.SendAsync(req);
-                var body = await resp.Content.ReadAsStringAsync();
-
-                if ((int)resp.StatusCode == 403 && attempt == 0 && IsLoggedIn)
-                {
-                    var rotate = await RotateLtokenInternalAsync(usedLtoken);
-                    if (rotate.Ok)
-                    {
-                        continue;
-                    }
-                }
-
-                var parsed = ParseEnvelope<CloudUploadResultData>((int)resp.StatusCode, body);
-                MarkLockedIf423(parsed.HttpStatusCode, parsed.Code);
-                return parsed;
-            }
-            catch (Exception ex)
-            {
-                return new CloudApiResult<CloudUploadResultData>
-                {
-                    Ok = false,
-                    HttpStatusCode = 0,
-                    Code = "NETWORK_ERROR",
-                    Message = ex.Message
-                };
-            }
+            return NetworkErrorResult<CloudUploadResultData>(raw.NetworkErrorMessage);
         }
 
-        return UnauthorizedResult<CloudUploadResultData>();
+        var parsed = ParseEnvelope<CloudUploadResultData>(raw.StatusCode, raw.Body, raw.RetryAfter);
+        MarkLockedIf423(parsed.HttpStatusCode, parsed.Code);
+        return parsed;
     }
 
     public async Task<CloudPullResult> PullArchiveAsync(string dataType, string slot)
     {
-        if (!await EnsureAuthenticatedAsync())
+        var payload = JsonSerializer.Serialize(new
+        {
+            type = dataType.Trim().ToLowerInvariant(),
+            slot = slot.Trim()
+        });
+
+        var raw = await SendAuthenticatedRawAsync(token =>
+        {
+            var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncDataPullPath);
+            req.Headers.Add("X-LToken", token);
+            req.Content = new StringContent(payload, Encoding.UTF8, "application/json");
+            return req;
+        }, retryOnTransientFailure: true);
+
+        if (raw == null)
         {
             return new CloudPullResult
             {
@@ -131,81 +123,54 @@ public sealed partial class CloudSyncService
             };
         }
 
-        var payload = JsonSerializer.Serialize(new
+        if (raw.IsNetworkError)
         {
-            type = dataType.Trim().ToLowerInvariant(),
-            slot = slot.Trim()
-        });
-
-        for (var attempt = 0; attempt < 2; attempt++)
-        {
-            var usedLtoken = _ltoken;
-            try
+            return new CloudPullResult
             {
-                using var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncDataPullPath);
-                req.Headers.Add("X-LToken", usedLtoken);
-                req.Content = new StringContent(payload, Encoding.UTF8, "application/json");
-
-                using var resp = await _httpClient.SendAsync(req);
-                var body = await resp.Content.ReadAsStringAsync();
-
-                if ((int)resp.StatusCode == 403 && attempt == 0 && IsLoggedIn)
-                {
-                    var rotate = await RotateLtokenInternalAsync(usedLtoken);
-                    if (rotate.Ok)
-                    {
-                        continue;
-                    }
-                }
-
-                if (resp.IsSuccessStatusCode)
-                {
-                    return new CloudPullResult
-                    {
-                        Ok = true,
-                        HttpStatusCode = (int)resp.StatusCode,
-                        Code = "PULL_SUCCESS",
-                        DataType = TryGetHeader(resp.Headers, "X-Data-Type") ?? dataType,
-                        Slot = TryGetHeader(resp.Headers, "X-Data-Slot") ?? slot,
-                        Sha256 = TryGetHeader(resp.Headers, "X-Data-SHA256") ?? string.Empty,
-                        CompressedBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Compressed-Bytes"), out var cb)
-                            ? cb
-                            : 0,
-                        RawBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Raw-Bytes"), out var rb)
-                            ? rb
-                            : Encoding.UTF8.GetByteCount(body),
-                        JsonContent = body
-                    };
-                }
-
-                var errorEnvelope = ParseEnvelope<object>((int)resp.StatusCode, body);
-                MarkLockedIf423(errorEnvelope.HttpStatusCode, errorEnvelope.Code);
-                return new CloudPullResult
-                {
-                    Ok = false,
-                    HttpStatusCode = errorEnvelope.HttpStatusCode,
-                    Code = errorEnvelope.Code,
-                    Message = errorEnvelope.Message
-                };
-            }
-            catch (Exception ex)
-            {
-                return new CloudPullResult
-                {
-                    Ok = false,
-                    HttpStatusCode = 0,
-                    Code = "NETWORK_ERROR",
-                    Message = ex.Message
-                };
-            }
+                Ok = false,
+                HttpStatusCode = 0,
+                Code = "NETWORK_ERROR",
+                Message = raw.NetworkErrorMessage ?? string.Empty
+            };
         }
 
+        if (raw.IsSuccessStatusCode)
+        {
+            if (!LooksLikeJsonValueStart(raw.Body, objectOnly: false))
+            {
+                DebugLog.Info("CloudSyncService",
+                    $"[CloudSync] Upstream returned non-JSON archive payload (HTTP {raw.StatusCode}): {SummarizeNonJsonBody(raw.Body)}");
+                return new CloudPullResult
+                {
+                    Ok = false,
+                    HttpStatusCode = raw.StatusCode,
+                    Code = "INVALID_RESPONSE",
+                    Message = "CloudSync_ErrServiceUnavailable".GetLocalized()
+                };
+            }
+
+            return new CloudPullResult
+            {
+                Ok = true,
+                HttpStatusCode = raw.StatusCode,
+                Code = "PULL_SUCCESS",
+                DataType = raw.DataType ?? dataType,
+                Slot = raw.Slot ?? slot,
+                Sha256 = raw.Sha256 ?? string.Empty,
+                CompressedBytes = raw.CompressedBytes ?? 0,
+                RawBytes = raw.RawBytes ?? Encoding.UTF8.GetByteCount(raw.Body),
+                JsonContent = raw.Body
+            };
+        }
+
+        var errorEnvelope = ParseEnvelope<object>(raw.StatusCode, raw.Body, raw.RetryAfter);
+        MarkLockedIf423(errorEnvelope.HttpStatusCode, errorEnvelope.Code);
         return new CloudPullResult
         {
             Ok = false,
-            HttpStatusCode = 403,
-            Code = "FORBIDDEN",
-            Message = "CloudSync_ErrAuthRequired".GetLocalized()
+            HttpStatusCode = errorEnvelope.HttpStatusCode,
+            Code = errorEnvelope.Code,
+            Message = errorEnvelope.Message
         };
     }
 

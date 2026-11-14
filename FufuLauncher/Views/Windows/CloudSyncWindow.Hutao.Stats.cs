@@ -118,9 +118,12 @@ public sealed partial class CloudSyncWindow
             HutaoStatsEmptyText.Visibility = Visibility.Visible;
         }
 
+        var roleFilterSnapshot = _selectedRoleUid;
+        var targetUids = GetHutaoStatsTargetUids(roleFilterSnapshot);
+
         try
         {
-            var res = await _hutaoCloud.GetHutaoStatisticsBundleAsync(_hutaoStatsLastPeriod, _selectedRoleUid);
+            var res = await _hutaoCloud.GetHutaoStatisticsBundleAsync(_hutaoStatsLastPeriod, targetUids);
             if (_closed || version != _hutaoStatsRequestVersion) return;
 
             if (!res.Ok || res.Data == null)
@@ -135,6 +138,7 @@ public sealed partial class CloudSyncWindow
             }
 
             _hutaoStatsLoaded = true;
+            _hutaoStatsLoadedForRoleUid = roleFilterSnapshot;
             _hutaoStatsBundle = res.Data;
             RenderHutaoStatisticsView();
 
@@ -173,8 +177,7 @@ public sealed partial class CloudSyncWindow
             HutaoStatsOverviewAvgText.Text = "-";
             HutaoStatsOverviewTheaterText.Text = "-";
             HutaoStatsOverviewUpdatedText.Text = "-";
-            HutaoStatsUidRankGrid.Visibility = Visibility.Collapsed;
-            HutaoStatsUidRankEmptyText.Visibility = Visibility.Visible;
+            RenderHutaoUidRankSection(null);
             _hutaoStatsRows.Clear();
             HutaoStatsEmptyText.Text = "HutaoSync_StatsEmptyHint".GetLocalized();
             HutaoStatsEmptyText.Visibility = Visibility.Visible;
@@ -221,35 +224,7 @@ public sealed partial class CloudSyncWindow
                 bundle.RoleCombat.RecordTotal.ToString("N0"))
             : "-";
 
-        if (!bundle.IsLastPeriod &&
-            !string.IsNullOrWhiteSpace(bundle.QueriedUid) &&
-            bundle.UidRank is { } uidRank &&
-            (uidRank.Damage != null || uidRank.TakeDamage != null))
-        {
-            HutaoStatsUidRankGrid.Visibility = Visibility.Visible;
-            HutaoStatsUidRankEmptyText.Visibility = Visibility.Collapsed;
-
-            HutaoStatsUidDamageText.Text = uidRank.Damage != null
-                ? $"{bundle.UidDamageAvatarName} · " + string.Format(
-                    "HutaoSync_StatsUidRankMetricFormat".GetLocalized(),
-                    uidRank.Damage.Value.ToString("N0"),
-                    $"{uidRank.Damage.Rate * 100:0.0}%",
-                    $"{uidRank.Damage.RateOnAvatar * 100:0.0}%")
-                : "-";
-
-            HutaoStatsUidTakeDamageText.Text = uidRank.TakeDamage != null
-                ? $"{bundle.UidTakeDamageAvatarName} · " + string.Format(
-                    "HutaoSync_StatsUidRankMetricFormat".GetLocalized(),
-                    uidRank.TakeDamage.Value.ToString("N0"),
-                    $"{uidRank.TakeDamage.Rate * 100:0.0}%",
-                    $"{uidRank.TakeDamage.RateOnAvatar * 100:0.0}%")
-                : "-";
-        }
-        else
-        {
-            HutaoStatsUidRankGrid.Visibility = Visibility.Collapsed;
-            HutaoStatsUidRankEmptyText.Visibility = Visibility.Visible;
-        }
+        RenderHutaoUidRankSection(bundle);
 
         IReadOnlyList<HutaoRankDisplayItem> sourceRows = _hutaoStatsCategory switch
         {
@@ -268,5 +243,104 @@ public sealed partial class CloudSyncWindow
 
         HutaoStatsEmptyText.Text = "HutaoSync_StatsEmptyHint".GetLocalized();
         HutaoStatsEmptyText.Visibility = _hutaoStatsRows.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private bool ShouldRefreshHutaoStats() =>
+        _currentHutaoSubTab == "HutaoStats" &&
+        !_hutaoStatsLoading &&
+        (!_hutaoStatsLoaded || !string.Equals(_hutaoStatsLoadedForRoleUid, _selectedRoleUid, StringComparison.Ordinal));
+
+    private List<string> GetHutaoStatsTargetUids(string roleFilterUid)
+    {
+        if (!string.IsNullOrWhiteSpace(roleFilterUid))
+        {
+            return [roleFilterUid.Trim()];
+        }
+
+        return _accountRoles
+            .Where(r => !r.IsAllRolesOption && !string.IsNullOrWhiteSpace(r.Uid))
+            .Select(r => r.Uid.Trim())
+            .Where(u => !string.IsNullOrEmpty(u))
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
+    }
+
+    private void RenderHutaoUidRankSection(HutaoStatisticsBundle? bundle)
+    {
+        if (HutaoStatsUidRanksRepeater == null || HutaoStatsUidRankEmptyText == null)
+        {
+            return;
+        }
+
+        _hutaoUidRankRows.Clear();
+
+        if (bundle == null)
+        {
+            HutaoStatsUidRanksRepeater.Visibility = Visibility.Collapsed;
+            HutaoStatsUidRankEmptyText.Text = "HutaoSync_StatsUidRankEmptyHint".GetLocalized();
+            HutaoStatsUidRankEmptyText.Visibility = Visibility.Visible;
+            return;
+        }
+
+        if (bundle.IsLastPeriod)
+        {
+            HutaoStatsUidRanksRepeater.Visibility = Visibility.Collapsed;
+            HutaoStatsUidRankEmptyText.Text = "HutaoSync_StatsUidRankLastPeriodHint".GetLocalized();
+            HutaoStatsUidRankEmptyText.Visibility = Visibility.Visible;
+            return;
+        }
+
+        if (bundle.UidRanks.Count == 0)
+        {
+            HutaoStatsUidRanksRepeater.Visibility = Visibility.Collapsed;
+            HutaoStatsUidRankEmptyText.Text = "HutaoSync_StatsUidRankEmptyHint".GetLocalized();
+            HutaoStatsUidRankEmptyText.Visibility = Visibility.Visible;
+            return;
+        }
+
+        var damageLabel = "HutaoSync_StatsUidDamageLabel".GetLocalized();
+        var takeDamageLabel = "HutaoSync_StatsUidTakeDamageLabel".GetLocalized();
+        var noRecordHint = "HutaoSync_StatsUidNoRecordHint".GetLocalized();
+
+        foreach (var entry in bundle.UidRanks)
+        {
+            var rank = entry.Rank;
+            var hasData = rank != null && (rank.Damage != null || rank.TakeDamage != null);
+
+            _hutaoUidRankRows.Add(new HutaoUidRankDisplayItem
+            {
+                RoleTitle = FormatUidRankRoleTitle(entry.Uid),
+                DamageLabel = damageLabel,
+                DamageText = FormatUidRankMetric(rank?.Damage, entry.DamageAvatarName),
+                TakeDamageLabel = takeDamageLabel,
+                TakeDamageText = FormatUidRankMetric(rank?.TakeDamage, entry.TakeDamageAvatarName),
+                HasRankData = hasData,
+                NoRecordHintText = noRecordHint
+            });
+        }
+
+        HutaoStatsUidRanksRepeater.Visibility = Visibility.Visible;
+        HutaoStatsUidRankEmptyText.Visibility = Visibility.Collapsed;
+    }
+
+    private string FormatUidRankRoleTitle(string uid)
+    {
+        var matched = _accountRoles.FirstOrDefault(r =>
+            !r.IsAllRolesOption && string.Equals(r.Uid, uid, StringComparison.Ordinal));
+        return matched != null ? matched.DisplayText : GameRoleDisplay.Archive(uid);
+    }
+
+    private static string FormatUidRankMetric(HutaoRankValue? rankValue, string avatarName)
+    {
+        if (rankValue == null)
+        {
+            return "-";
+        }
+
+        return $"{avatarName} · " + string.Format(
+            "HutaoSync_StatsUidRankMetricFormat".GetLocalized(),
+            rankValue.Value.ToString("N0"),
+            $"{rankValue.Rate * 100:0.0}%",
+            $"{rankValue.RateOnAvatar * 100:0.0}%");
     }
 }

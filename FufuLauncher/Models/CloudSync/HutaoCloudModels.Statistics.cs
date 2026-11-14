@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.Models;
 
@@ -284,6 +285,82 @@ public sealed class HutaoRecordRankData
     }
 }
 
+public sealed class HutaoUidRankItem
+{
+    public string Uid
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public HutaoRecordRankData? Rank
+    {
+        get;
+        init;
+    }
+
+    public string DamageAvatarName
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string TakeDamageAvatarName
+    {
+        get;
+        init;
+    } = string.Empty;
+}
+
+public sealed class HutaoUidRankDisplayItem
+{
+    public string RoleTitle
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string DamageLabel
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string DamageText
+    {
+        get;
+        init;
+    } = "-";
+
+    public string TakeDamageLabel
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public string TakeDamageText
+    {
+        get;
+        init;
+    } = "-";
+
+    public bool HasRankData
+    {
+        get;
+        init;
+    }
+
+    public string NoRecordHintText
+    {
+        get;
+        init;
+    } = string.Empty;
+
+    public Visibility RankGridVisibility => HasRankData ? Visibility.Visible : Visibility.Collapsed;
+
+    public Visibility NoRecordVisibility => HasRankData ? Visibility.Collapsed : Visibility.Visible;
+}
+
 public sealed class HutaoStatisticsBundle
 {
     public bool IsLastPeriod
@@ -292,11 +369,11 @@ public sealed class HutaoStatisticsBundle
         init;
     }
 
-    public string QueriedUid
+    public IReadOnlyList<string> QueriedUids
     {
         get;
         init;
-    } = string.Empty;
+    } = Array.Empty<string>();
 
     public HutaoAbyssOverview? Overview
     {
@@ -310,11 +387,11 @@ public sealed class HutaoStatisticsBundle
         init;
     }
 
-    public HutaoRecordRankData? UidRank
+    public IReadOnlyList<HutaoUidRankItem> UidRanks
     {
         get;
         init;
-    }
+    } = Array.Empty<HutaoUidRankItem>();
 
     public Dictionary<int, List<HutaoRankDisplayItem>> UtilizationByFloor
     {
@@ -345,18 +422,6 @@ public sealed class HutaoStatisticsBundle
         get;
         init;
     } = new();
-
-    public string UidDamageAvatarName
-    {
-        get;
-        init;
-    } = string.Empty;
-
-    public string UidTakeDamageAvatarName
-    {
-        get;
-        init;
-    } = string.Empty;
 }
 
 public sealed class HutaoRankDisplayItem

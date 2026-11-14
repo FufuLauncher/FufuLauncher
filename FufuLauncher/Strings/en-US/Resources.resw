@@ -10342,6 +10342,9 @@ Details: {0}</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>Too many requests. Please try again later.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>Cloud service is temporarily unavailable. Please try again later.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>Not enough cloud storage. Delete older archives or redeem an upgrade code.</value>
   </data>
@@ -11318,7 +11321,7 @@ Details: {0}</value>
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>Saved {1} wish record(s) for {0} character(s) to FufuLauncher Cloud Archive &apos;{2}&apos; ({3} total records). You can export or import it on the Cloud Archives page.</value>
+    <value>Saved {1} wish record(s) for {0} character(s) to FufuLauncher Cloud Archive '{2}' ({3} total records). You can export or import it on the Cloud Archives page.</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -11669,13 +11672,13 @@ Details: {0}</value>
     <value>{0} (Top {1} globally · Same hero {2})</value>
   </data>
   <data name="HutaoSync_StatsEmptyHint" xml:space="preserve">
-    <value>No statistics available to display. Click &apos;Refresh Stats&apos; to try again.</value>
+    <value>No statistics available to display. Click 'Refresh Stats' to try again.</value>
   </data>
   <data name="HutaoSync_StatsDesc" xml:space="preserve">
     <value>Browse global Spiral Abyss and Imaginarium Theater statistics without signing in to Hutao Cloud. Select a bound character to also query your current-period personal ranking.</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>FufuLauncher Cloud Archive &apos;{0}&apos; already exists. Choose how to proceed:</value>
+    <value>FufuLauncher Cloud Archive '{0}' already exists. Choose how to proceed:</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>Theater Attendance</value>
@@ -11708,7 +11711,7 @@ Details: {0}</value>
     <value>Abyss Attendance</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>Select a bound character above to query current-period rankings for its UID, or submit this period&apos;s Spiral Abyss record first.</value>
+    <value>No current-period Spiral Abyss ranking found for bound roles (sign in and bind a game role first, or verify current-period submissions)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Updated Hutao Cloud statistics and rankings</value>
@@ -11814,5 +11817,14 @@ Details: {0}</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao Cloud returned an unexpected status ({0}). Please try again later</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>Cloud Storage</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>No current-period Spiral Abyss record submitted for this role</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>Personal global ranking only supports current-period data. Switch the period to Current Period to view</value>
   </data>
 </root>

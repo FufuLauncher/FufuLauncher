@@ -34,9 +34,16 @@ public sealed partial class CloudSyncService : ICloudSyncService
     [GeneratedRegex("[^a-zA-Z0-9_.-]+", RegexOptions.CultureInvariant)]
     private static partial Regex UnsafeSlotCharsRegex();
 
+    private static readonly TimeSpan[] DefaultTransientRetryDelays =
+    [
+        TimeSpan.FromMilliseconds(350),
+        TimeSpan.FromMilliseconds(900)
+    ];
+
     private readonly HttpClient _httpClient;
     private readonly SemaphoreSlim _authLock = new(1, 1);
     private readonly string _sessionFilePath;
+    private readonly IReadOnlyList<TimeSpan> _transientRetryDelays;
 
     private string _email = string.Empty;
     private string _stoken = string.Empty;
@@ -53,13 +60,19 @@ public sealed partial class CloudSyncService : ICloudSyncService
     public event EventHandler? SessionChanged;
 
     public CloudSyncService()
+        : this(CreateDefaultHandler(), Path.Combine(AppPaths.SettingsDir, SessionFileName), null)
     {
-        _sessionFilePath = Path.Combine(AppPaths.SettingsDir, SessionFileName);
-        var handler = new HttpClientHandler
-        {
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-            AllowAutoRedirect = false
-        };
+    }
+
+    internal CloudSyncService(
+        HttpMessageHandler handler,
+        string? sessionFilePath = null,
+        IReadOnlyList<TimeSpan>? transientRetryDelays = null)
+    {
+        _sessionFilePath = string.IsNullOrWhiteSpace(sessionFilePath)
+            ? Path.Combine(AppPaths.SettingsDir, SessionFileName)
+            : sessionFilePath;
+        _transientRetryDelays = transientRetryDelays ?? DefaultTransientRetryDelays;
         _httpClient = new HttpClient(handler)
         {
             BaseAddress = BaseUri,
@@ -69,6 +82,13 @@ public sealed partial class CloudSyncService : ICloudSyncService
 
         LoadPersistedSession();
     }
+
+    private static HttpClientHandler CreateDefaultHandler()
+        => new()
+        {
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+            AllowAutoRedirect = false
+        };
 
     public bool IsLoggedIn => !string.IsNullOrWhiteSpace(_stoken) && !IsStokenExpiredLocally();
     public bool HasLtoken => !string.IsNullOrWhiteSpace(_ltoken) && !IsLtokenExpiredLocally();
@@ -214,6 +234,9 @@ public sealed partial class CloudSyncService : ICloudSyncService
                 => "CloudSync_ErrQuotaExceeded".GetLocalized(),
             "RATE_LIMITED" => "CloudSync_ErrRateLimited".GetLocalized(),
             "INVALID_DATA_TYPE" => "CloudSync_ErrUnsupportedDataType".GetLocalized(),
+            "BAD_GATEWAY" or "SERVICE_UNAVAILABLE" or "GATEWAY_TIMEOUT" or "UPSTREAM_ERROR"
+                => "CloudSync_ErrServiceUnavailable".GetLocalized(),
+            _ when statusCode is 502 or 503 or 504 => "CloudSync_ErrServiceUnavailable".GetLocalized(),
             _ when statusCode == 423 => "CloudSync_ErrLocked".GetLocalized(),
             _ when statusCode == 429 => "CloudSync_ErrRateLimited".GetLocalized(),
             _ when statusCode == 413 => "CloudSync_ErrPayloadTooLarge".GetLocalized(),
@@ -221,102 +244,268 @@ public sealed partial class CloudSyncService : ICloudSyncService
         };
     }
 
-    private async Task<CloudApiResult<T>> SendAnonymousJsonAsync<T>(HttpMethod method, string path,
-        object? payload = null)
+    private sealed class RawHttpResponse
     {
-        try
-        {
-            using var req = new HttpRequestMessage(method, path);
-            if (payload != null)
-            {
-                req.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-            }
+        public int StatusCode { get; init; }
+        public bool IsSuccessStatusCode { get; init; }
+        public string Body { get; init; } = string.Empty;
+        public TimeSpan? RetryAfter { get; init; }
+        public string? DataType { get; init; }
+        public string? Slot { get; init; }
+        public string? Sha256 { get; init; }
+        public long? CompressedBytes { get; init; }
+        public long? RawBytes { get; init; }
+        public bool IsNetworkError { get; init; }
+        public string? NetworkErrorMessage { get; init; }
+    }
 
-            using var resp = await _httpClient.SendAsync(req);
-            var body = await resp.Content.ReadAsStringAsync();
-            return ParseEnvelope<T>((int)resp.StatusCode, body, GetRetryAfter(resp.Headers));
-        }
-        catch (Exception ex)
-        {
-            return new CloudApiResult<T>
-            {
-                Ok = false,
-                HttpStatusCode = 0,
-                Code = "NETWORK_ERROR",
-                Message = ex.Message
-            };
-        }
+    private async Task<CloudApiResult<T>> SendAnonymousJsonAsync<T>(HttpMethod method, string path,
+        object? payload = null, bool? retryOnTransient = null)
+    {
+        var jsonPayload = payload == null ? null : JsonSerializer.Serialize(payload);
+        var shouldRetry = retryOnTransient ?? (method == HttpMethod.Get);
+        var raw = await SendWithTransientRetryAsync(
+            () => CreateJsonRequest(method, path, jsonPayload),
+            shouldRetry);
+
+        return raw.IsNetworkError
+            ? NetworkErrorResult<T>(raw.NetworkErrorMessage)
+            : ParseEnvelope<T>(raw.StatusCode, raw.Body, raw.RetryAfter);
     }
 
     private async Task<CloudApiResult<T>> SendAuthenticatedJsonAsync<T>(HttpMethod method, string path,
-        object? payload = null)
+        object? payload = null, bool? retryOnTransient = null)
     {
-        if (!await EnsureAuthenticatedAsync())
+        var jsonPayload = payload == null ? null : JsonSerializer.Serialize(payload);
+        var shouldRetry = retryOnTransient ?? (method == HttpMethod.Get);
+
+        var raw = await SendAuthenticatedRawAsync(token =>
+        {
+            var req = CreateJsonRequest(method, path, jsonPayload);
+            req.Headers.Add("X-LToken", token);
+            return req;
+        }, shouldRetry);
+
+        if (raw == null)
         {
             return UnauthorizedResult<T>();
         }
 
-        var jsonPayload = payload == null ? null : JsonSerializer.Serialize(payload);
+        return raw.IsNetworkError
+            ? NetworkErrorResult<T>(raw.NetworkErrorMessage)
+            : ParseEnvelope<T>(raw.StatusCode, raw.Body, raw.RetryAfter);
+    }
+
+    private async Task<RawHttpResponse?> SendAuthenticatedRawAsync(
+        Func<string, HttpRequestMessage> authenticatedRequestFactory,
+        bool retryOnTransientFailure)
+    {
+        if (!await EnsureAuthenticatedAsync())
+        {
+            return null;
+        }
 
         for (var attempt = 0; attempt < 2; attempt++)
         {
             var usedLtoken = _ltoken;
+            var raw = await SendWithTransientRetryAsync(
+                () => authenticatedRequestFactory(usedLtoken),
+                retryOnTransientFailure);
+
+            if (raw.IsNetworkError)
+            {
+                return raw;
+            }
+
+            if (raw.StatusCode == 403 && attempt == 0 && IsLoggedIn)
+            {
+                var rotate = await RotateLtokenInternalAsync(usedLtoken);
+                if (rotate.Ok)
+                {
+                    continue;
+                }
+            }
+
+            return raw;
+        }
+
+        return null;
+    }
+
+    private async Task<RawHttpResponse> SendWithTransientRetryAsync(
+        Func<HttpRequestMessage> requestFactory,
+        bool retryOnTransientFailure)
+    {
+        var maxRetryCount = retryOnTransientFailure ? _transientRetryDelays.Count : 0;
+        for (var attempt = 0; attempt <= maxRetryCount; attempt++)
+        {
             try
             {
-                using var req = new HttpRequestMessage(method, path);
-                req.Headers.Add("X-LToken", usedLtoken);
-                if (jsonPayload != null)
-                {
-                    req.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                }
+                using var req = requestFactory();
+                var method = req.Method.Method;
+                var targetPath = req.RequestUri?.IsAbsoluteUri == true
+                    ? req.RequestUri.AbsolutePath
+                    : req.RequestUri?.OriginalString ?? string.Empty;
 
                 using var resp = await _httpClient.SendAsync(req);
                 var body = await resp.Content.ReadAsStringAsync();
 
-                if ((int)resp.StatusCode == 403 && attempt == 0 && IsLoggedIn)
+                if (attempt < maxRetryCount && IsTransientGatewayStatus(resp.StatusCode))
                 {
-                    var rotate = await RotateLtokenInternalAsync(usedLtoken);
-                    if (rotate.Ok)
-                    {
-                        continue;
-                    }
+                    DebugLog.Info("CloudSyncService",
+                        $"[CloudSync] Transient HTTP {(int)resp.StatusCode} on {method} {targetPath}, retrying ({attempt + 1}/{maxRetryCount})...");
+                    await Task.Delay(_transientRetryDelays[attempt]);
+                    continue;
                 }
 
-                return ParseEnvelope<T>((int)resp.StatusCode, body);
+                return new RawHttpResponse
+                {
+                    StatusCode = (int)resp.StatusCode,
+                    IsSuccessStatusCode = resp.IsSuccessStatusCode,
+                    Body = body,
+                    RetryAfter = GetRetryAfter(resp.Headers),
+                    DataType = TryGetHeader(resp.Headers, "X-Data-Type"),
+                    Slot = TryGetHeader(resp.Headers, "X-Data-Slot"),
+                    Sha256 = TryGetHeader(resp.Headers, "X-Data-SHA256"),
+                    CompressedBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Compressed-Bytes"), out var cb)
+                        ? cb
+                        : null,
+                    RawBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Raw-Bytes"), out var rb)
+                        ? rb
+                        : null
+                };
+            }
+            catch (HttpRequestException ex) when (attempt < maxRetryCount)
+            {
+                DebugLog.Info("CloudSyncService",
+                    $"[CloudSync] Transient transport error ({ex.Message}), retrying ({attempt + 1}/{maxRetryCount})...");
+                await Task.Delay(_transientRetryDelays[attempt]);
             }
             catch (Exception ex)
             {
-                return new CloudApiResult<T>
+                return new RawHttpResponse
                 {
-                    Ok = false,
-                    HttpStatusCode = 0,
-                    Code = "NETWORK_ERROR",
-                    Message = ex.Message
+                    IsNetworkError = true,
+                    NetworkErrorMessage = ex.Message
                 };
             }
         }
 
-        return UnauthorizedResult<T>();
+        return new RawHttpResponse
+        {
+            IsNetworkError = true,
+            NetworkErrorMessage = "Transient retry attempts exhausted."
+        };
     }
+
+    private static HttpRequestMessage CreateJsonRequest(HttpMethod method, string path, string? jsonPayload)
+    {
+        var req = new HttpRequestMessage(method, path);
+        if (jsonPayload != null)
+        {
+            req.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+        }
+
+        return req;
+    }
+
+    private static bool IsTransientGatewayStatus(HttpStatusCode statusCode)
+        => statusCode is HttpStatusCode.BadGateway
+            or HttpStatusCode.ServiceUnavailable
+            or HttpStatusCode.GatewayTimeout;
+
+    private static CloudApiResult<T> NetworkErrorResult<T>(string? message)
+        => new()
+        {
+            Ok = false,
+            HttpStatusCode = 0,
+            Code = "NETWORK_ERROR",
+            Message = message ?? string.Empty
+        };
 
     private static TimeSpan? GetRetryAfter(HttpResponseHeaders headers)
         => headers.RetryAfter?.Delta ?? (headers.RetryAfter?.Date - DateTimeOffset.UtcNow);
 
+    private static bool LooksLikeJsonValueStart(string? rawBody, bool objectOnly)
+    {
+        if (string.IsNullOrWhiteSpace(rawBody))
+        {
+            return false;
+        }
+
+        foreach (var ch in rawBody)
+        {
+            if (char.IsWhiteSpace(ch))
+            {
+                continue;
+            }
+
+            return objectOnly ? ch == '{' : ch is '{' or '[';
+        }
+
+        return false;
+    }
+
+    private static string SummarizeNonJsonBody(string? rawBody)
+    {
+        if (string.IsNullOrWhiteSpace(rawBody))
+        {
+            return "<empty>";
+        }
+
+        var normalized = rawBody.Trim()
+            .Replace("\r", " ", StringComparison.Ordinal)
+            .Replace("\n", " ", StringComparison.Ordinal)
+            .Replace("\t", " ", StringComparison.Ordinal);
+
+        return normalized.Length > 120 ? normalized[..120] + "..." : normalized;
+    }
+
+    private static (string Code, string ResourceKey) MapUpstreamHttpError(int statusCode)
+        => statusCode switch
+        {
+            502 => ("BAD_GATEWAY", "CloudSync_ErrServiceUnavailable"),
+            503 => ("SERVICE_UNAVAILABLE", "CloudSync_ErrServiceUnavailable"),
+            504 => ("GATEWAY_TIMEOUT", "CloudSync_ErrServiceUnavailable"),
+            >= 500 => ("UPSTREAM_ERROR", "CloudSync_ErrServiceUnavailable"),
+            429 => ("RATE_LIMITED", "CloudSync_ErrRateLimited"),
+            423 => ("ACCOUNT_LOCKED", "CloudSync_ErrLocked"),
+            413 => ("PAYLOAD_TOO_LARGE", "CloudSync_ErrPayloadTooLarge"),
+            403 => ("FORBIDDEN", "CloudSync_ErrAuthRequired"),
+            _ => ("INVALID_RESPONSE", "CloudSync_ErrGeneric")
+        };
+
     private static CloudApiResult<T> ParseEnvelope<T>(int statusCode, string rawBody, TimeSpan? retryAfter = null)
     {
+        if (!LooksLikeJsonValueStart(rawBody, objectOnly: true))
+        {
+            var (code, resourceKey) = MapUpstreamHttpError(statusCode);
+            DebugLog.Info("CloudSyncService",
+                $"[CloudSync] Non-JSON upstream response (HTTP {statusCode}, code={code}): {SummarizeNonJsonBody(rawBody)}");
+            return new CloudApiResult<T>
+            {
+                Ok = false,
+                HttpStatusCode = statusCode,
+                RetryAfter = retryAfter,
+                Code = code,
+                Message = resourceKey.GetLocalized()
+            };
+        }
+
         try
         {
             var envelope = JsonSerializer.Deserialize<CloudApiEnvelope>(rawBody, JsonOptions);
             if (envelope == null)
             {
+                var (code, resourceKey) = MapUpstreamHttpError(statusCode);
                 DebugLog.Info("CloudSyncService", $"[CloudSync] Empty envelope from HTTP {statusCode}");
                 return new CloudApiResult<T>
                 {
                     Ok = false,
                     HttpStatusCode = statusCode,
                     RetryAfter = retryAfter,
-                    Code = "INVALID_RESPONSE",
-                    Message = "CloudSync_ErrGeneric".GetLocalized()
+                    Code = code,
+                    Message = resourceKey.GetLocalized()
                 };
             }
 
@@ -352,14 +541,17 @@ public sealed partial class CloudSyncService : ICloudSyncService
         }
         catch (Exception ex)
         {
+            var (code, resourceKey) = statusCode >= 500
+                ? MapUpstreamHttpError(statusCode)
+                : ("PARSE_ERROR", "CloudSync_ErrGeneric");
             DebugLog.Info("CloudSyncService", $"[CloudSync] Envelope parse failed (HTTP {statusCode}): {ex.Message}");
             return new CloudApiResult<T>
             {
                 Ok = false,
                 HttpStatusCode = statusCode,
                 RetryAfter = retryAfter,
-                Code = "PARSE_ERROR",
-                Message = "CloudSync_ErrGeneric".GetLocalized()
+                Code = code,
+                Message = resourceKey.GetLocalized()
             };
         }
     }

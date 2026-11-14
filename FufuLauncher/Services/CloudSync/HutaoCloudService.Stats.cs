@@ -10,7 +10,7 @@ public sealed partial class HutaoCloudService
 {
     public async Task<HutaoOperationResult<HutaoStatisticsBundle>> GetHutaoStatisticsBundleAsync(
         bool lastPeriod,
-        string? uid,
+        IReadOnlyList<string>? uids,
         CancellationToken cancellationToken = default)
     {
         var suffix = lastPeriod ? "?last=true" : "?last=false";
@@ -59,16 +59,22 @@ public sealed partial class HutaoCloudService
 
         var catalogTask = ResolveItemCatalogAsync(cancellationToken);
 
-        var trimmedUid = (uid ?? string.Empty).Trim();
-        Task<(int RetCode, string? Message, string? L10nKey, HutaoRecordRankData? Data, HttpStatusCode HttpStatus)>? rankTask =
-            !string.IsNullOrEmpty(trimmedUid)
-                ? SendRawRequestAsync<HutaoRecordRankData>(
+        var normalizedUids = (uids ?? Array.Empty<string>())
+            .Select(u => (u ?? string.Empty).Trim())
+            .Where(u => !string.IsNullOrEmpty(u))
+            .Distinct(StringComparer.Ordinal)
+            .ToList();
+
+        var rankTasks = !lastPeriod && normalizedUids.Count > 0
+            ? normalizedUids
+                .Select(targetUid => SendRawRequestAsync<HutaoRecordRankData>(
                     HttpMethod.Get,
-                    $"{ApiEndpoints.HutaoRecordRankPath}?Uid={Uri.EscapeDataString(trimmedUid)}",
+                    $"{ApiEndpoints.HutaoRecordRankPath}?Uid={Uri.EscapeDataString(targetUid)}",
                     null,
                     requiresAuth: false,
-                    cancellationToken)
-                : null;
+                    cancellationToken))
+                .ToList()
+            : null;
 
         await Task.WhenAll(
             overviewTask,
@@ -79,9 +85,9 @@ public sealed partial class HutaoCloudService
             theaterTask,
             catalogTask);
 
-        if (rankTask != null)
+        if (rankTasks is { Count: > 0 })
         {
-            await rankTask;
+            await Task.WhenAll(rankTasks);
         }
 
         var overviewRes = overviewTask.Result;
@@ -91,7 +97,6 @@ public sealed partial class HutaoCloudService
         var teamRes = teamTask.Result;
         var theaterRes = theaterTask.Result;
         var catalog = catalogTask.Result;
-        var rankRes = rankTask?.Result;
 
         if (overviewRes.RetCode != 0 &&
             utilRes.RetCode != 0 &&
@@ -111,13 +116,29 @@ public sealed partial class HutaoCloudService
         var teamsByFloor = BuildTeamRows(teamRes.Data, byId);
         var roleCombatRates = BuildRoleCombatRows(theaterRes.Data, byId);
 
-        var uidRankData = rankRes.HasValue && rankRes.Value.RetCode == 0 ? rankRes.Value.Data : null;
-        var dmgAvatarName = uidRankData?.Damage is { Item: > 0 }
-            ? ResolveAvatarName(uidRankData.Damage.Item, byId)
-            : string.Empty;
-        var takeAvatarName = uidRankData?.TakeDamage is { Item: > 0 }
-            ? ResolveAvatarName(uidRankData.TakeDamage.Item, byId)
-            : string.Empty;
+        var uidRanks = new List<HutaoUidRankItem>(normalizedUids.Count);
+        if (rankTasks != null)
+        {
+            for (var i = 0; i < normalizedUids.Count; i++)
+            {
+                var rankRes = rankTasks[i].Result;
+                var uidRankData = rankRes.RetCode == 0 ? rankRes.Data : null;
+                var dmgAvatarName = uidRankData?.Damage is { Item: > 0 }
+                    ? ResolveAvatarName(uidRankData.Damage.Item, byId)
+                    : string.Empty;
+                var takeAvatarName = uidRankData?.TakeDamage is { Item: > 0 }
+                    ? ResolveAvatarName(uidRankData.TakeDamage.Item, byId)
+                    : string.Empty;
+
+                uidRanks.Add(new HutaoUidRankItem
+                {
+                    Uid = normalizedUids[i],
+                    Rank = uidRankData,
+                    DamageAvatarName = dmgAvatarName,
+                    TakeDamageAvatarName = takeAvatarName
+                });
+            }
+        }
 
         return new HutaoOperationResult<HutaoStatisticsBundle>
         {
@@ -125,17 +146,15 @@ public sealed partial class HutaoCloudService
             Data = new HutaoStatisticsBundle
             {
                 IsLastPeriod = lastPeriod,
-                QueriedUid = trimmedUid,
+                QueriedUids = normalizedUids,
                 Overview = overviewRes.RetCode == 0 ? overviewRes.Data : null,
                 RoleCombat = theaterRes.RetCode == 0 ? theaterRes.Data : null,
-                UidRank = uidRankData,
+                UidRanks = uidRanks,
                 UtilizationByFloor = utilByFloor,
                 AttendanceByFloor = attendByFloor,
                 HoldingRates = holdingRates,
                 TeamsByFloor = teamsByFloor,
-                RoleCombatRates = roleCombatRates,
-                UidDamageAvatarName = dmgAvatarName,
-                UidTakeDamageAvatarName = takeAvatarName
+                RoleCombatRates = roleCombatRates
             }
         };
     }

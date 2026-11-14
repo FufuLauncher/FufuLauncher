@@ -9589,6 +9589,9 @@ Detail: {0}</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>Terlalu banyak permintaan. Coba lagi sebentar lagi.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>Layanan cloud sedang tidak tersedia sementara. Silakan coba lagi nanti.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>Penyimpanan cloud penuh. Hapus arsip lama atau tingkatkan kuota.</value>
   </data>
@@ -10400,7 +10403,7 @@ Detail: {0}</value>
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>{1} permohonan untuk {0} karakter disimpan ke arsip cloud FufuLauncher &apos;{2}&apos; (total {3}).</value>
+    <value>{1} permohonan untuk {0} karakter disimpan ke arsip cloud FufuLauncher '{2}' (total {3}).</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -10757,7 +10760,7 @@ Detail: {0}</value>
     <value>Lihat statistik global tanpa masuk ke Hutao Cloud. Pilih karakter tertaut untuk memeriksa peringkat pribadi periode ini.</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>Arsip cloud FufuLauncher &apos;{0}&apos; sudah ada. Pilih tindakan:</value>
+    <value>Arsip cloud FufuLauncher '{0}' sudah ada. Pilih tindakan:</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>Kehadiran Teater</value>
@@ -10790,7 +10793,7 @@ Detail: {0}</value>
     <value>Kehadiran Abyss</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>Pilih karakter tertaut di atas untuk melihat peringkat UID periode ini.</value>
+    <value>Peringkat periode saat ini tidak ditemukan untuk peran tertaut (masuk dan tautkan peran game, atau periksa kiriman saat ini)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Statistik dan peringkat Hutao Cloud diperbarui</value>
@@ -10896,5 +10899,14 @@ Detail: {0}</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao Cloud mengembalikan status tidak terduga ({0}). Silakan coba lagi nanti</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>Penyimpanan Cloud</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>Belum ada catatan Spiral Abyss periode saat ini yang dikirimkan untuk peran ini</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>Peringkat pribadi hanya mendukung data periode saat ini. Ubah periode ke Periode Saat Ini untuk melihat</value>
   </data>
 </root>

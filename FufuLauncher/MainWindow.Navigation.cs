@@ -209,6 +209,17 @@ public sealed partial class MainWindow
         }
     }
 
+    private const string CloudStorageNavTag = "CloudStorageWindow";
+
+    private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        if (args.InvokedItemContainer is NavigationViewItem invokedItem &&
+            invokedItem.Tag?.ToString() == CloudStorageNavTag)
+        {
+            Views.CloudSyncWindow.ShowOrActivate();
+        }
+    }
+
     private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
         RefreshAccountMenu();

@@ -71,6 +71,6 @@ public interface IHutaoCloudService
 
     Task<HutaoOperationResult<HutaoStatisticsBundle>> GetHutaoStatisticsBundleAsync(
         bool lastPeriod,
-        string? uid,
+        IReadOnlyList<string>? uids,
         CancellationToken cancellationToken = default);
 }

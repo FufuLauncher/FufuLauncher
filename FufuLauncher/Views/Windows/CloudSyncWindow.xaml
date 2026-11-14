@@ -10,10 +10,6 @@
     mc:Ignorable="d"
     Title="{helpers:Loc Key=CloudSync_WindowTitle}">
 
-    <Window.SystemBackdrop>
-        <MicaBackdrop />
-    </Window.SystemBackdrop>
-
     <Grid x:Name="RootGrid" Background="Transparent">
         <Grid.Resources>
             <Style x:Key="SectionHeadingStyle" TargetType="TextBlock">
@@ -55,6 +51,19 @@
                 <Setter Property="Width" Value="1" />
                 <Setter Property="Fill" Value="{ThemeResource DividerStrokeColorDefaultBrush}" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+            <Style x:Key="BrandLogoStyle" TargetType="Image">
+                <Setter Property="Width" Value="36" />
+                <Setter Property="Height" Value="36" />
+                <Setter Property="Stretch" Value="Uniform" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="BrandTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextTrimming" Value="None" />
             </Style>
             <Style x:Key="FlatRowActionButtonStyle"
                    TargetType="Button"
@@ -124,13 +133,18 @@
         </Grid>
 
         <!-- Content Area (No MaxWidth on ScrollViewer child so viewport width maps 1:1 without horizontal offset/clipping) -->
-        <ScrollViewer Grid.Row="2"
+        <ScrollViewer x:Name="ContentScrollViewer"
+                      Grid.Row="2"
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
                       HorizontalScrollMode="Disabled"
                       HorizontalContentAlignment="Stretch"
                       VerticalContentAlignment="Top">
             <Grid Padding="32,24,32,20" HorizontalAlignment="Stretch">
+                <Grid x:Name="ContentViewport"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Top"
+                      SizeChanged="OnViewportSizeChanged">
 
                 <!-- 1. Account & Security -->
                 <Grid x:Name="AccountTabPanel" RowSpacing="24" VerticalAlignment="Top">
@@ -217,12 +231,31 @@
                                 <ColumnDefinition Width="*" MinWidth="0" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Spacing="3">
-                                <TextBlock Text="{helpers:Loc Key=CloudSync_AccountSectionTitle}"
-                                           Style="{StaticResource SubtitleTextBlockStyle}" />
-                                <TextBlock Text="{helpers:Loc Key=CloudSync_AccountSectionSubtitle}"
-                                           Style="{StaticResource RowCaptionStyle}" />
-                            </StackPanel>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0"
+                                            Orientation="Horizontal"
+                                            Spacing="10"
+                                            VerticalAlignment="Center">
+                                    <Image Source="ms-appx:///Assets/icon.png"
+                                           Style="{StaticResource BrandLogoStyle}" />
+                                    <TextBlock Text="FufuLauncher"
+                                               Style="{StaticResource BrandTitleStyle}" />
+                                </StackPanel>
+                                <Rectangle Grid.Column="1"
+                                           Style="{StaticResource VerticalDividerStyle}"
+                                           Margin="16,4" />
+                                <StackPanel Grid.Column="2" Spacing="3" VerticalAlignment="Center">
+                                    <TextBlock Text="{helpers:Loc Key=CloudSync_AccountSectionTitle}"
+                                               Style="{StaticResource SubtitleTextBlockStyle}" />
+                                    <TextBlock Text="{helpers:Loc Key=CloudSync_AccountSectionSubtitle}"
+                                               Style="{StaticResource RowCaptionStyle}" />
+                                </StackPanel>
+                            </Grid>
                             <Button Grid.Column="1"
                                     VerticalAlignment="Center"
                                     Content="{helpers:Loc Key=CloudSync_RefreshStatusBtn}"
@@ -370,15 +403,45 @@
                                 <ColumnDefinition Width="*" MinWidth="0" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
-                                <TextBlock Text="{helpers:Loc Key=CloudSync_AccountHutaoTitle}"
-                                           Style="{StaticResource SectionHeadingStyle}" />
-                                <TextBlock x:Name="AccountHutaoStatusText"
-                                           Text="{helpers:Loc Key=CloudSync_AccountHutaoSignedOut}"
-                                           Style="{StaticResource RowTitleStyle}" />
-                                <TextBlock Text="{helpers:Loc Key=CloudSync_AccountHutaoDesc}"
+                            <Grid Grid.Column="0" RowSpacing="4">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Row="0"
+                                            Grid.Column="0"
+                                            Orientation="Horizontal"
+                                            Spacing="10"
+                                            VerticalAlignment="Center">
+                                    <Image Source="ms-appx:///Assets/SnapHutao.png"
+                                           Style="{StaticResource BrandLogoStyle}" />
+                                    <TextBlock Text="Snap.Hutao"
+                                               Style="{StaticResource BrandTitleStyle}" />
+                                </StackPanel>
+                                <Rectangle Grid.Row="0"
+                                           Grid.Column="1"
+                                           Style="{StaticResource VerticalDividerStyle}"
+                                           Margin="16,4" />
+                                <StackPanel Grid.Row="0"
+                                            Grid.Column="2"
+                                            Spacing="4"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="{helpers:Loc Key=CloudSync_AccountHutaoTitle}"
+                                               Style="{StaticResource SectionHeadingStyle}" />
+                                    <TextBlock x:Name="AccountHutaoStatusText"
+                                               Text="{helpers:Loc Key=CloudSync_AccountHutaoSignedOut}"
+                                               Style="{StaticResource RowTitleStyle}" />
+                                </StackPanel>
+                                <TextBlock Grid.Row="1"
+                                           Grid.Column="2"
+                                           Text="{helpers:Loc Key=CloudSync_AccountHutaoDesc}"
                                            Style="{StaticResource RowCaptionStyle}" />
-                            </StackPanel>
+                            </Grid>
                             <Button x:Name="AccountHutaoActionButton"
                                     Grid.Column="1"
                                     VerticalAlignment="Center"
@@ -713,12 +776,31 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="0" Spacing="3">
-                        <TextBlock Text="{helpers:Loc Key=HutaoSync_SectionTitle}"
-                                   Style="{StaticResource SubtitleTextBlockStyle}" />
-                        <TextBlock Text="{helpers:Loc Key=HutaoSync_SectionSubtitle}"
-                                   Style="{StaticResource RowCaptionStyle}" />
-                    </StackPanel>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" MinWidth="0" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    Spacing="10"
+                                    VerticalAlignment="Center">
+                            <Image Source="ms-appx:///Assets/SnapHutao.png"
+                                   Style="{StaticResource BrandLogoStyle}" />
+                            <TextBlock Text="Snap.Hutao"
+                                       Style="{StaticResource BrandTitleStyle}" />
+                        </StackPanel>
+                        <Rectangle Grid.Column="1"
+                                   Style="{StaticResource VerticalDividerStyle}"
+                                   Margin="16,4" />
+                        <StackPanel Grid.Column="2" Spacing="3" VerticalAlignment="Center">
+                            <TextBlock Text="{helpers:Loc Key=HutaoSync_SectionTitle}"
+                                       Style="{StaticResource SubtitleTextBlockStyle}" />
+                            <TextBlock Text="{helpers:Loc Key=HutaoSync_SectionSubtitle}"
+                                       Style="{StaticResource RowCaptionStyle}" />
+                        </StackPanel>
+                    </Grid>
 
                     <Border Grid.Row="1"
                             BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
@@ -762,7 +844,7 @@
                         </InfoBar.ActionButton>
                     </InfoBar>
 
-                    <Grid Grid.Row="3">
+                    <Grid x:Name="HutaoSubTabViewport" Grid.Row="3" SizeChanged="OnViewportSizeChanged">
                         <StackPanel x:Name="HutaoSubAccountPanel" Spacing="16" Visibility="Visible">
                             <StackPanel Spacing="3">
                                 <TextBlock Text="{helpers:Loc Key=HutaoSync_AccountTitle}"
@@ -1491,30 +1573,47 @@
                                 <TextBlock x:Name="HutaoStatsUidRankEmptyText"
                                            Text="{helpers:Loc Key=HutaoSync_StatsUidRankEmptyHint}"
                                            Style="{StaticResource RowCaptionStyle}" />
-                                <Grid x:Name="HutaoStatsUidRankGrid" ColumnSpacing="20" RowSpacing="8" Visibility="Collapsed">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="164" />
-                                        <ColumnDefinition Width="*" MinWidth="0" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="0" Grid.Column="0"
-                                               Text="{helpers:Loc Key=HutaoSync_StatsUidDamageLabel}"
-                                               Style="{StaticResource RowLabelStyle}" />
-                                    <TextBlock x:Name="HutaoStatsUidDamageText"
-                                               Grid.Row="0" Grid.Column="1"
-                                               Style="{StaticResource RowCaptionStyle}"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Row="1" Grid.Column="0"
-                                               Text="{helpers:Loc Key=HutaoSync_StatsUidTakeDamageLabel}"
-                                               Style="{StaticResource RowLabelStyle}" />
-                                    <TextBlock x:Name="HutaoStatsUidTakeDamageText"
-                                               Grid.Row="1" Grid.Column="1"
-                                               Style="{StaticResource RowCaptionStyle}"
-                                               VerticalAlignment="Center" />
-                                </Grid>
+                                <ItemsRepeater x:Name="HutaoStatsUidRanksRepeater" Visibility="Collapsed">
+                                    <ItemsRepeater.Layout>
+                                        <StackLayout Spacing="10" />
+                                    </ItemsRepeater.Layout>
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="models:HutaoUidRankDisplayItem">
+                                            <StackPanel Spacing="6">
+                                                <TextBlock Text="{x:Bind RoleTitle}"
+                                                           Style="{StaticResource RowTitleStyle}" />
+                                                <Grid ColumnSpacing="20" RowSpacing="8"
+                                                      Visibility="{x:Bind RankGridVisibility}">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="164" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                                               Text="{x:Bind DamageLabel}"
+                                                               Style="{StaticResource RowLabelStyle}" />
+                                                    <TextBlock Grid.Row="0" Grid.Column="1"
+                                                               Text="{x:Bind DamageText}"
+                                                               Style="{StaticResource RowCaptionStyle}"
+                                                               VerticalAlignment="Center" />
+                                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                                               Text="{x:Bind TakeDamageLabel}"
+                                                               Style="{StaticResource RowLabelStyle}" />
+                                                    <TextBlock Grid.Row="1" Grid.Column="1"
+                                                               Text="{x:Bind TakeDamageText}"
+                                                               Style="{StaticResource RowCaptionStyle}"
+                                                               VerticalAlignment="Center" />
+                                                </Grid>
+                                                <TextBlock Text="{x:Bind NoRecordHintText}"
+                                                           Style="{StaticResource RowCaptionStyle}"
+                                                           Visibility="{x:Bind NoRecordVisibility}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
                             </StackPanel>
 
                             <Rectangle Style="{StaticResource HairlineDividerStyle}" />
@@ -1676,6 +1775,7 @@
                     </Grid>
                 </Grid>
 
+                </Grid>
             </Grid>
         </ScrollViewer>
 

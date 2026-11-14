@@ -9584,6 +9584,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>बहुत अधिक अनुरोध। थोड़ी देर बाद प्रयास करें।</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>क्लाउड सेवा अस्थायी रूप से अनुपलब्ध है। थोड़ी देर बाद प्रयास करें।</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>क्लाउड स्टोरेज पर्याप्त नहीं है।</value>
   </data>
@@ -10395,7 +10398,7 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>{0} पात्र(ों) की {1} विश FufuLauncher क्लाउड आर्काइव &apos;{2}&apos; में सहेजी गईं (कुल {3})।</value>
+    <value>{0} पात्र(ों) की {1} विश FufuLauncher क्लाउड आर्काइव '{2}' में सहेजी गईं (कुल {3})।</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -10752,7 +10755,7 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
     <value>बिना साइन इन के एबिस और थिएटर आँकड़े देखें। व्यक्तिगत वर्तमान रैंक देखने के लिए लिंक किया गया पात्र चुनें।</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>FufuLauncher क्लाउड आर्काइव &apos;{0}&apos; पहले से है। आगे कैसे बढ़ें?</value>
+    <value>FufuLauncher क्लाउड आर्काइव '{0}' पहले से है। आगे कैसे बढ़ें?</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>थिएटर उपस्थिति</value>
@@ -10785,7 +10788,7 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
     <value>एबिस उपस्थिति</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>UID रैंकिंग देखने के लिए ऊपर लिंक किया गया पात्र चुनें।</value>
+    <value>बाउंड भूमिकाओं के लिए वर्तमान अवधि की रैंकिंग नहीं मिली (कृपया साइन इन करें और गेम भूमिका जोड़ें या सबमिशन जांचें)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Hutao Cloud आँकड़े और रैंकिंग अपडेट की गईं</value>
@@ -10891,5 +10894,14 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao Cloud ने अप्रत्याशित स्थिति ({0}) लौटाई। कृपया बाद में पुनः प्रयास करें</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>क्लाउड स्टोरेज</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>इस भूमिका के लिए वर्तमान अवधि का स्पाइरल एबिस रिकॉर्ड सबमिट नहीं किया गया है</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>व्यक्तिगत रैंकिंग केवल वर्तमान अवधि के डेटा का समर्थन करती है। कृपया वर्तमान अवधि पर स्विच करें</value>
   </data>
 </root>

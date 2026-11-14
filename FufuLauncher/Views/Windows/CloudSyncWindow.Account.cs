@@ -22,8 +22,14 @@ public sealed partial class CloudSyncWindow
             MaskAuthPasswords();
             DismissAuthOtpFeedback();
         }
-        UnauthPanel.Visibility = loggedIn ? Visibility.Collapsed : Visibility.Visible;
-        LoggedInAccountPanel.Visibility = loggedIn ? Visibility.Visible : Visibility.Collapsed;
+        var authPanels = new UIElement[] { UnauthPanel, LoggedInAccountPanel };
+        var targetIndex = loggedIn ? 1 : 0;
+        var targetPanel = authPanels[targetIndex];
+        var direction = loggedIn ? 1 : -1;
+        var animateAccountAuth = _isWindowContentLoaded &&
+                                 AccountTabPanel?.Visibility == Visibility.Visible &&
+                                 targetPanel.Visibility != Visibility.Visible;
+        SwitchSlidePanel(SlideChannel.AccountAuth, authPanels, targetIndex, direction, ContentViewport, animateAccountAuth);
         UpdateAuthOtpButton();
 
         if (!loggedIn)

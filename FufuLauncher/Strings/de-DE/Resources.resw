@@ -9593,6 +9593,9 @@ Details: {0}</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>Zu viele Anfragen. Bitte später erneut versuchen.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>Der Cloud-Dienst ist vorübergehend nicht erreichbar. Bitte später erneut versuchen.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>Nicht genügend Cloud-Speicherplatz verfügbar.</value>
   </data>
@@ -10404,7 +10407,7 @@ Details: {0}</value>
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>{1} Gebet(e) für {0} Figur(en) im FufuLauncher-Cloud-Archiv &apos;{2}&apos; gespeichert (gesamt {3}).</value>
+    <value>{1} Gebet(e) für {0} Figur(en) im FufuLauncher-Cloud-Archiv '{2}' gespeichert (gesamt {3}).</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -10761,7 +10764,7 @@ Details: {0}</value>
     <value>Durchsuchen Sie globale Abgrund- und Theater-Statistiken ohne Anmeldung. Wählen Sie eine verknüpfte Figur für Ihre persönliche aktuelle Rangliste.</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>Das FufuLauncher-Cloud-Archiv &apos;{0}&apos; existiert bereits. Wie möchten Sie fortfahren?</value>
+    <value>Das FufuLauncher-Cloud-Archiv '{0}' existiert bereits. Wie möchten Sie fortfahren?</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>Theater-Teilnahme</value>
@@ -10794,7 +10797,7 @@ Details: {0}</value>
     <value>Teilnahmerate</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>Wählen Sie oben eine verknüpfte Figur für die UID-Rangliste oder laden Sie zuerst den aktuellen Abgrund hoch.</value>
+    <value>Keine aktuelle Rangliste für gebundene Rollen gefunden (bitte anmelden und Spielrolle verknüpfen oder aktuelle Einsendungen prüfen)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Hutao Cloud Statistiken &amp; Ranglisten aktualisiert</value>
@@ -10900,5 +10903,14 @@ Details: {0}</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Die Hutao-Cloud hat einen unerwarteten Status ({0}) zurückgegeben. Bitte versuchen Sie es später erneut</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>Cloud-Speicher</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>Für diese Rolle wurde noch kein aktueller Gewundener-Abgrund-Eintrag übermittelt</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>Die persönliche Rangliste unterstützt nur Daten der aktuellen Periode. Bitte auf Aktuelle Periode umschalten</value>
   </data>
 </root>

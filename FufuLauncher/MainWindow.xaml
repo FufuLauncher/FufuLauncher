@@ -81,6 +81,7 @@
                         IsSettingsVisible="False"
                         IsPaneToggleButtonVisible="False"
                         SelectionChanged="NavigationView_SelectionChanged"
+                        ItemInvoked="NavigationView_ItemInvoked"
                         Loaded="NavigationView_Loaded"
                         PaneOpened="NavigationView_PaneOpened"
                         PaneClosed="NavigationView_PaneClosed"
@@ -258,6 +259,21 @@
                 <NavigationViewItem Content="{helpers:Loc Key=NavHelpDocs}" Tag="FufuLauncher.ViewModels.HelpViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xE186;"
+                                  FontFamily="{StaticResource FluentIconsFont}"
+                                  FontSize="24"
+                                  RenderTransformOrigin="0.5,0.5">
+                            <FontIcon.RenderTransform>
+                                <ScaleTransform ScaleX="1.35" ScaleY="1.35" />
+                            </FontIcon.RenderTransform>
+                        </FontIcon>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItem Content="{helpers:Loc Key=NavCloudStorage}"
+                                    Tag="CloudStorageWindow"
+                                    SelectsOnInvoked="False">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xF2E5;"
                                   FontFamily="{StaticResource FluentIconsFont}"
                                   FontSize="24"
                                   RenderTransformOrigin="0.5,0.5">

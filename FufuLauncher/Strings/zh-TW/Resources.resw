@@ -9589,6 +9589,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>請求過於頻繁，請稍後再試。</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>雲端服務節點暫時無法使用，請稍後重試。</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>雲端儲存空間不足，可清理部分舊存檔或使用啟用碼擴容。</value>
   </data>
@@ -10790,7 +10793,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>深淵出場率</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>請選擇上方已綁定遊戲角色以查詢該UID的當期排行，或該UID尚未提交當期深境螺旋紀錄</value>
+    <value>暫未查詢到已綁定角色的當期深境螺旋排行記錄（請先登入帳號並綁定遊戲角色，或確認角色已提交當期深淵資料）</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>已更新胡桃雲全服統計與排行資料</value>
@@ -10896,5 +10899,14 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>胡桃雲服務回傳異常狀態（{0}），請稍後重試</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>雲端儲存</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>該角色暫未提交當期深境螺旋記錄</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>個人挑戰全服排行僅支援查詢當期資料，請將統計週期切換為「當期」後查看</value>
   </data>
 </root>

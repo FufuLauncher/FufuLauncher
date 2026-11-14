@@ -9589,6 +9589,9 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>요청이 너무 많습니다. 잠시 후 다시 시도하세요.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>클라우드 서비스를 일시적으로 사용할 수 없습니다. 잠시 후 다시 시도하세요.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>클라우드 용량이 부족합니다. 기존 파일을 삭제하거나 용량을 확장하세요.</value>
   </data>
@@ -10151,7 +10154,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>Sync Guide</value>
   </data>
   <data name="HutaoSync_BridgeRuleDesc" xml:space="preserve">
-    <value>호두 클라우드에서 가져온 데이터는 FufuLauncher 클라우드 아카이브에 저장되며, &apos;클라우드 아카이브&apos;에서 내보내거나 가져올 수 있습니다. 호두 클라우드로 업로드할 때도 FufuLauncher 클라우드 아카이브에서 직접 읽습니다.</value>
+    <value>호두 클라우드에서 가져온 데이터는 FufuLauncher 클라우드 아카이브에 저장되며, '클라우드 아카이브'에서 내보내거나 가져올 수 있습니다. 호두 클라우드로 업로드할 때도 FufuLauncher 클라우드 아카이브에서 직접 읽습니다.</value>
   </data>
   <data name="HutaoSync_AchievementNotice" xml:space="preserve">
     <value>Achievements note: Hutao Cloud does not support achievement sync. Continue using the Achievements window or Cloud Archives to back up, export, or import achievement profiles.</value>
@@ -10160,7 +10163,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>Sign In &amp; Unlock FufuLauncher Cloud Sync to Transfer</value>
   </data>
   <data name="HutaoSync_FufuRequiredBannerMsg" xml:space="preserve">
-    <value>여기서 호두 클라우드 계정, 통계 순위 및 후원 상태를 볼 수 있습니다. FufuLauncher 클라우드 아카이브와 동기화하려면 &apos;계정 및 보안&apos;에서 로그인 및 잠금 해제를 진행해 주세요.</value>
+    <value>여기서 호두 클라우드 계정, 통계 순위 및 후원 상태를 볼 수 있습니다. FufuLauncher 클라우드 아카이브와 동기화하려면 '계정 및 보안'에서 로그인 및 잠금 해제를 진행해 주세요.</value>
   </data>
   <data name="HutaoSync_GotoFufuAccountBtn" xml:space="preserve">
     <value>Go to Account &amp; Security</value>
@@ -10301,7 +10304,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>Load Archive Contents</value>
   </data>
   <data name="HutaoSync_PushGachaEmptyHint" xml:space="preserve">
-    <value>위의 FufuLauncher 기원 클라우드 아카이브를 선택하면 자동으로 불러오며, &apos;아카이브 읽기&apos;로 다시 불러올 수 있습니다</value>
+    <value>위의 FufuLauncher 기원 클라우드 아카이브를 선택하면 자동으로 불러오며, '아카이브 읽기'로 다시 불러올 수 있습니다</value>
   </data>
   <data name="HutaoSync_PushGachaActionBtn" xml:space="preserve">
     <value>Upload Selected to Hutao Cloud</value>
@@ -10316,7 +10319,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>FufuLauncher 도전 클라우드 아카이브 선택</value>
   </data>
   <data name="HutaoSync_ChallengeInspectEmptyHint" xml:space="preserve">
-    <value>위의 FufuLauncher 도전 클라우드 아카이브를 선택하면 자동으로 불러오며, &apos;아카이브 읽기&apos;로 다시 불러올 수 있습니다</value>
+    <value>위의 FufuLauncher 도전 클라우드 아카이브를 선택하면 자동으로 불러오며, '아카이브 읽기'로 다시 불러올 수 있습니다</value>
   </data>
   <data name="HutaoSync_ChallengeActionBtn" xml:space="preserve">
     <value>Upload Selected to Hutao Cloud</value>
@@ -10400,7 +10403,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>캐릭터 {0}명의 기원 {1}건을 FufuLauncher 클라우드 아카이브 &apos;{2}&apos;에 저장했습니다(총 {3}건). &apos;클라우드 아카이브&apos; 페이지에서 내보낼 수 있습니다</value>
+    <value>캐릭터 {0}명의 기원 {1}건을 FufuLauncher 클라우드 아카이브 '{2}'에 저장했습니다(총 {3}건). '클라우드 아카이브' 페이지에서 내보낼 수 있습니다</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -10751,13 +10754,13 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>{0} (전체 상위 {1} · 동일 캐릭터 {2})</value>
   </data>
   <data name="HutaoSync_StatsEmptyHint" xml:space="preserve">
-    <value>표시할 통계 순위 데이터가 없습니다. &apos;통계 새로고침&apos;을 눌러 다시 시도하세요</value>
+    <value>표시할 통계 순위 데이터가 없습니다. '통계 새로고침'을 눌러 다시 시도하세요</value>
   </data>
   <data name="HutaoSync_StatsDesc" xml:space="preserve">
     <value>호두 계정에 로그인하지 않아도 나선 비경 및 환상극 전체 통계를 볼 수 있으며, 연동된 캐릭터를 선택하면 개인 순위도 조회됩니다.</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>FufuLauncher 클라우드 아카이브 &apos;{0}&apos;이(가) 이미 있습니다. 처리 방식을 선택하세요:</value>
+    <value>FufuLauncher 클라우드 아카이브 '{0}'이(가) 이미 있습니다. 처리 방식을 선택하세요:</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>환상극 출전률</value>
@@ -10790,7 +10793,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>나선 출전률</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>위에서 연동 캐릭터를 선택하면 해당 UID의 이번 회차 순위를 조회할 수 있습니다(이번 회차 기록 제출 필요)</value>
+    <value>연동된 캐릭터의 이번 회차 순위 기록을 찾을 수 없습니다 (계정 연동 또는 이번 회차 나선 비경 제출 여부를 확인하세요)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>호두 클라우드 통계 및 순위를 업데이트했습니다</value>
@@ -10896,5 +10899,14 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao 클라우드에서 오류 상태({0})를 반환했습니다. 잠시 후 다시 시도해 주세요</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>클라우드 저장소</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>이 캐릭터는 이번 회차 나선 비경 기록을 아직 제출하지 않았습니다</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>개인 순위는 이번 회차 데이터만 지원합니다. 기간을 이번 회차로 전환해 주세요</value>
   </data>
 </root>

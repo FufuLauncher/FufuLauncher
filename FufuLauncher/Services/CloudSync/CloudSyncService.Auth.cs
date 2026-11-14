@@ -16,7 +16,7 @@ public sealed partial class CloudSyncService
         {
             email = email.Trim(),
             password
-        });
+        }, retryOnTransient: true);
 
     public Task<CloudApiResult<CloudChallengeInfo>> StartRegisterSendCodeAsync(string email)
         => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthRegisterSendCodePath,
@@ -62,24 +62,16 @@ public sealed partial class CloudSyncService
 
     public async Task<CloudApiResult<T>> PollChallengeAsync<T>(string pollUrl, string challengeSecret)
     {
-        try
+        var raw = await SendWithTransientRetryAsync(() =>
         {
-            using var req = new HttpRequestMessage(HttpMethod.Get, ResolveServiceUri(pollUrl));
+            var req = new HttpRequestMessage(HttpMethod.Get, ResolveServiceUri(pollUrl));
             req.Headers.Add("X-Challenge-Secret", challengeSecret);
-            using var resp = await _httpClient.SendAsync(req);
-            var body = await resp.Content.ReadAsStringAsync();
-            return ParseEnvelope<T>((int)resp.StatusCode, body, GetRetryAfter(resp.Headers));
-        }
-        catch (Exception ex)
-        {
-            return new CloudApiResult<T>
-            {
-                Ok = false,
-                HttpStatusCode = 0,
-                Code = "NETWORK_ERROR",
-                Message = ex.Message
-            };
-        }
+            return req;
+        }, retryOnTransientFailure: true);
+
+        return raw.IsNetworkError
+            ? NetworkErrorResult<T>(raw.NetworkErrorMessage)
+            : ParseEnvelope<T>(raw.StatusCode, raw.Body, raw.RetryAfter);
     }
 
     public void ApplyLoginSession(string email, CloudLoginSessionData loginData)
@@ -143,13 +135,20 @@ public sealed partial class CloudSyncService
                 };
             }
 
-            using var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncAuthLtokenPath);
-            req.Headers.Add("X-SToken", _stoken);
-            req.Content = new StringContent("{}", Encoding.UTF8, "application/json");
+            var raw = await SendWithTransientRetryAsync(() =>
+            {
+                var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncAuthLtokenPath);
+                req.Headers.Add("X-SToken", _stoken);
+                req.Content = new StringContent("{}", Encoding.UTF8, "application/json");
+                return req;
+            }, retryOnTransientFailure: true);
 
-            using var resp = await _httpClient.SendAsync(req);
-            var body = await resp.Content.ReadAsStringAsync();
-            var parsed = ParseEnvelope<CloudLtokenIssueData>((int)resp.StatusCode, body);
+            if (raw.IsNetworkError)
+            {
+                return NetworkErrorResult<CloudLtokenIssueData>(raw.NetworkErrorMessage);
+            }
+
+            var parsed = ParseEnvelope<CloudLtokenIssueData>(raw.StatusCode, raw.Body, raw.RetryAfter);
 
             if (parsed.Ok && parsed.Data != null && !string.IsNullOrWhiteSpace(parsed.Data.Ltoken))
             {
@@ -164,22 +163,12 @@ public sealed partial class CloudSyncService
                 _lockedAt = parsed.Data.LockedAt;
                 RaiseSessionChanged();
             }
-            else if ((int)resp.StatusCode == 403)
+            else if (raw.StatusCode == 403)
             {
                 ClearSessionState(clearEmail: false);
             }
 
             return parsed;
-        }
-        catch (Exception ex)
-        {
-            return new CloudApiResult<CloudLtokenIssueData>
-            {
-                Ok = false,
-                HttpStatusCode = 0,
-                Code = "NETWORK_ERROR",
-                Message = ex.Message
-            };
         }
         finally
         {

@@ -17,6 +17,7 @@ public sealed partial class CloudSyncWindow
     private readonly ObservableCollection<HutaoAccountExtraFieldItem> _hutaoExtraFields = new();
     private readonly ObservableCollection<HutaoDeviceListItem> _hutaoDevices = new();
     private readonly ObservableCollection<HutaoRankDisplayItem> _hutaoStatsRows = new();
+    private readonly ObservableCollection<HutaoUidRankDisplayItem> _hutaoUidRankRows = new();
     private readonly List<HutaoGachaEntrySelectionItem> _allHutaoGachaEntries = new();
     private readonly List<FufuCloudUigfUidItem> _allFufuUigfUids = new();
     private readonly List<FufuCloudChallengeItem> _allFufuChallengeItems = new();
@@ -24,6 +25,7 @@ public sealed partial class CloudSyncWindow
     private readonly List<string> _fufuUigfSlots = new();
     private readonly List<string> _fufuChallengeSlots = new();
     private DispatcherQueueTimer? _hutaoOtpTimer;
+    private int _currentHutaoSubTabIndex;
     private bool _hutaoInitialized;
     private bool _suppressHutaoSlotComboSync;
     private bool _suppressHutaoRoleSync;
@@ -37,6 +39,7 @@ public sealed partial class CloudSyncWindow
     private bool _hutaoEntriesLoading;
     private bool _hutaoStatsLoaded;
     private bool _hutaoStatsLoading;
+    private string _hutaoStatsLoadedForRoleUid = string.Empty;
     private HutaoStatisticsBundle? _hutaoStatsBundle;
     private bool _hutaoStatsLastPeriod;
     private string _hutaoStatsCategory = "Util";
@@ -62,6 +65,7 @@ public sealed partial class CloudSyncWindow
         HutaoExtraFieldsRepeater.ItemsSource = _hutaoExtraFields;
         HutaoDevicesRepeater.ItemsSource = _hutaoDevices;
         HutaoStatsRowsRepeater.ItemsSource = _hutaoStatsRows;
+        HutaoStatsUidRanksRepeater.ItemsSource = _hutaoUidRankRows;
 
         InitializeHutaoPullSaveModeCombo();
         InitializeHutaoStatsSelectors();
@@ -104,6 +108,14 @@ public sealed partial class CloudSyncWindow
         ReloadAccountBoundRoles();
         RefreshHutaoRoleLabels();
         ApplyAllHutaoRoleFilters();
+        if (_currentHutaoSubTab == "HutaoStats")
+        {
+            _ = RefreshHutaoStatisticsAsync(silent: true);
+        }
+        else
+        {
+            _hutaoStatsLoaded = false;
+        }
     }
 
     private async Task InitializeHutaoSessionAsync()
@@ -154,12 +166,32 @@ public sealed partial class CloudSyncWindow
             return;
         }
 
-        HutaoSubAccountPanel.Visibility = _currentHutaoSubTab == "HutaoAccount" ? Visibility.Visible : Visibility.Collapsed;
-        HutaoSubPullPanel.Visibility = _currentHutaoSubTab == "HutaoPull" ? Visibility.Visible : Visibility.Collapsed;
-        HutaoSubPushGachaPanel.Visibility = _currentHutaoSubTab == "HutaoPushGacha" ? Visibility.Visible : Visibility.Collapsed;
-        HutaoSubChallengePanel.Visibility = _currentHutaoSubTab == "HutaoChallenge" ? Visibility.Visible : Visibility.Collapsed;
-        HutaoSubStatsPanel.Visibility = _currentHutaoSubTab == "HutaoStats" ? Visibility.Visible : Visibility.Collapsed;
-        HutaoSubSponsorPanel.Visibility = _currentHutaoSubTab == "HutaoSponsor" ? Visibility.Visible : Visibility.Collapsed;
+        var targetIndex = _currentHutaoSubTab switch
+        {
+            "HutaoAccount" => 0,
+            "HutaoPull" => 1,
+            "HutaoPushGacha" => 2,
+            "HutaoChallenge" => 3,
+            "HutaoStats" => 4,
+            "HutaoSponsor" => 5,
+            _ => 0
+        };
+
+        var previousIndex = _currentHutaoSubTabIndex;
+        _currentHutaoSubTabIndex = targetIndex;
+
+        var subPanels = new UIElement[]
+        {
+            HutaoSubAccountPanel,
+            HutaoSubPullPanel,
+            HutaoSubPushGachaPanel,
+            HutaoSubChallengePanel,
+            HutaoSubStatsPanel,
+            HutaoSubSponsorPanel
+        };
+        var direction = targetIndex == previousIndex ? 0 : (targetIndex > previousIndex ? 1 : -1);
+        var animate = _isWindowContentLoaded && HutaoTabPanel?.Visibility == Visibility.Visible;
+        SwitchSlidePanel(SlideChannel.HutaoSubTab, subPanels, targetIndex, direction, HutaoSubTabViewport, animate);
 
         UpdateHutaoFufuRequiredBanner();
 
@@ -176,7 +208,7 @@ public sealed partial class CloudSyncWindow
         {
             _ = AutoInspectFufuChallengeIfNeededAsync();
         }
-        else if (_currentHutaoSubTab == "HutaoStats" && !_hutaoStatsLoaded && !_hutaoStatsLoading)
+        else if (ShouldRefreshHutaoStats())
         {
             _ = RefreshHutaoStatisticsAsync(silent: true);
         }
@@ -203,8 +235,15 @@ public sealed partial class CloudSyncWindow
 
         var fufuReady = _cloudSync.IsLoggedIn && !_cloudSync.IsLocked;
         var hutaoLoggedIn = _hutaoCloud.IsLoggedIn;
-        HutaoUnauthPanel.Visibility = hutaoLoggedIn ? Visibility.Collapsed : Visibility.Visible;
-        HutaoLoggedInPanel.Visibility = hutaoLoggedIn ? Visibility.Visible : Visibility.Collapsed;
+        var hutaoAuthPanels = new UIElement[] { HutaoUnauthPanel, HutaoLoggedInPanel };
+        var targetIndex = hutaoLoggedIn ? 1 : 0;
+        var targetPanel = hutaoAuthPanels[targetIndex];
+        var direction = hutaoLoggedIn ? 1 : -1;
+        var animateHutaoAuth = _isWindowContentLoaded &&
+                               HutaoTabPanel?.Visibility == Visibility.Visible &&
+                               HutaoSubAccountPanel?.Visibility == Visibility.Visible &&
+                               targetPanel.Visibility != Visibility.Visible;
+        SwitchSlidePanel(SlideChannel.HutaoAuth, hutaoAuthPanels, targetIndex, direction, HutaoSubTabViewport, animateHutaoAuth);
 
         if (!hutaoLoggedIn)
         {
@@ -342,7 +381,7 @@ public sealed partial class CloudSyncWindow
             _ = RefreshHutaoGachaEntriesAsync(silent: true);
         }
 
-        if (_currentHutaoSubTab == "HutaoStats" && !_hutaoStatsLoaded && !_hutaoStatsLoading)
+        if (ShouldRefreshHutaoStats())
         {
             _ = RefreshHutaoStatisticsAsync(silent: true);
         }

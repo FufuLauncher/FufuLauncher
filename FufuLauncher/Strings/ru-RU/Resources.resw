@@ -9589,6 +9589,9 @@ Click the button below to open your browser and download manually.</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>Слишком много запросов.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>Облачный сервис временно недоступен. Попробуйте позже.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>Недостаточно места в облаке.</value>
   </data>
@@ -10790,7 +10793,7 @@ Click the button below to open your browser and download manually.</value>
     <value>Участие в Бездне</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>Выберите привязанного персонажа выше для просмотра рейтинга этого UID.</value>
+    <value>Рейтинг текущего периода для привязанных персонажей не найден (войдите, привяжите персонажа или проверьте отправку данных)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Статистика и рейтинги Hutao Cloud обновлены</value>
@@ -10896,5 +10899,14 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Облако Hutao вернуло непредвиденный статус ({0}). Повторите попытку позже</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>Облачное хранилище</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>Для этого персонажа ещё не отправлены записи Витой Бездны за текущий период</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>Личный рейтинг поддерживает только данные текущего периода. Переключите период на Текущий</value>
   </data>
 </root>

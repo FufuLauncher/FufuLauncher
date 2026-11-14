@@ -9,11 +9,14 @@ using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using Microsoft.UI;
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Animation;
+using Windows.Foundation;
 using Windows.UI;
 using FufuLauncher.ViewModels;
 
@@ -31,9 +34,20 @@ public sealed partial class CloudSyncWindow : Window
     private readonly ObservableCollection<CloudArchiveItem> _archives = new();
     private readonly DispatcherQueueTimer _authOtpTimer;
     private readonly Dictionary<(int Mode, string Email), DateTimeOffset> _authOtpResendAt = new();
+    private enum SlideChannel
+    {
+        MainTab,
+        HutaoSubTab,
+        AccountAuth,
+        HutaoAuth
+    }
+
+    private readonly Dictionary<SlideChannel, Storyboard> _slideStoryboards = new();
+    private int _currentMainTabIndex;
     private bool _isSendingAuthOtp;
     private bool _statusIsAuthOtpFeedback;
     private bool _closed;
+    private bool _isWindowContentLoaded;
     private int _busyOperations;
     private long _archiveRequestVersion;
     private bool _archiveLoadPending;
@@ -90,6 +104,7 @@ public sealed partial class CloudSyncWindow : Window
         _accountManager = accountManager ?? TryGetService<AccountManager>();
         _gameRoleService = gameRoleService ?? TryGetService<GameRoleService>();
         InitializeComponent();
+        RootGrid.Loaded += OnRootGridLoaded;
         _authOtpTimer = DispatcherQueue.CreateTimer();
         _authOtpTimer.Interval = TimeSpan.FromSeconds(1);
         _authOtpTimer.Tick += (_, _) => UpdateAuthOtpButton();
@@ -116,7 +131,7 @@ public sealed partial class CloudSyncWindow : Window
 
         ConfigureWindow();
         ApplyThemeAndTitleBar();
-        _ = ApplyBackdropFromSettingsAsync();
+        ApplyWindowBackdrop();
 
         _cloudSync.SessionChanged += OnSessionChanged;
         Closed += (_, _) =>
@@ -124,6 +139,7 @@ public sealed partial class CloudSyncWindow : Window
             _closed = true;
             _authOtpTimer.Stop();
             _cloudSync.SessionChanged -= OnSessionChanged;
+            StopAllSlideTransitions();
             CleanupHutaoBridge();
         };
 
@@ -232,33 +248,34 @@ public sealed partial class CloudSyncWindow : Window
         }
     }
 
-    private async Task ApplyBackdropFromSettingsAsync()
+    private void ApplyWindowBackdrop()
     {
         try
         {
-            var settings = App.GetService<ILocalSettingsService>();
-            var backdropJson = await settings.ReadSettingAsync("WindowBackdrop");
-            var backdropType = backdropJson != null
-                ? (WindowBackdropType)Convert.ToInt32(backdropJson)
-                : WindowBackdropType.Acrylic;
-
-            if (backdropType == WindowBackdropType.None)
+            if (MicaController.IsSupported())
             {
-                SystemBackdrop = null;
-                var isDark = RootGrid.ActualTheme == ElementTheme.Dark;
-                RootGrid.Background = new SolidColorBrush(isDark
-                    ? Color.FromArgb(255, 32, 32, 32)
-                    : Color.FromArgb(255, 243, 243, 243));
+                SystemBackdrop = new MicaBackdrop();
                 return;
             }
-
-            SystemBackdrop = backdropType == WindowBackdropType.Mica
-                ? new MicaBackdrop()
-                : new DesktopAcrylicBackdrop();
         }
         catch (Exception ex)
         {
-            DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] ApplyBackdrop failed: {ex.Message}");
+            DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] MicaBackdrop failed: {ex.Message}");
+        }
+
+        try
+        {
+            SystemBackdrop = new DesktopAcrylicBackdrop();
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] DesktopAcrylicBackdrop fallback failed: {ex.Message}");
+            var isDark = RootGrid.RequestedTheme == ElementTheme.Dark ||
+                         (RootGrid.RequestedTheme == ElementTheme.Default &&
+                          Application.Current.RequestedTheme == ApplicationTheme.Dark);
+            RootGrid.Background = new SolidColorBrush(isDark
+                ? Color.FromArgb(255, 32, 32, 32)
+                : Color.FromArgb(255, 243, 243, 243));
         }
     }
 
@@ -299,11 +316,29 @@ public sealed partial class CloudSyncWindow : Window
         if (AccountTabPanel == null || QuotaTabPanel == null || ArchivesTabPanel == null || HutaoTabPanel == null) return;
         if (args.SelectedItem is not NavigationViewItem item || item.Tag is not string tag) return;
 
+        var targetIndex = tag switch
+        {
+            "Account" => 0,
+            "Quota" => 1,
+            "Archives" => 2,
+            "Hutao" => 3,
+            _ => -1
+        };
+        if (targetIndex < 0) return;
+
+        var previousIndex = _currentMainTabIndex;
+        var direction = targetIndex >= previousIndex ? 1 : -1;
+        _currentMainTabIndex = targetIndex;
+
         if (tag != "Account") MaskAuthPasswords();
-        AccountTabPanel.Visibility = tag == "Account" ? Visibility.Visible : Visibility.Collapsed;
-        QuotaTabPanel.Visibility = tag == "Quota" ? Visibility.Visible : Visibility.Collapsed;
-        ArchivesTabPanel.Visibility = tag == "Archives" ? Visibility.Visible : Visibility.Collapsed;
-        HutaoTabPanel.Visibility = tag == "Hutao" ? Visibility.Visible : Visibility.Collapsed;
+        if (targetIndex != previousIndex)
+        {
+            ContentScrollViewer?.ChangeView(null, 0, null, true);
+        }
+
+        UIElement[] mainPanels = [AccountTabPanel, QuotaTabPanel, ArchivesTabPanel, HutaoTabPanel];
+        var animate = _isWindowContentLoaded && targetIndex != previousIndex;
+        SwitchSlidePanel(SlideChannel.MainTab, mainPanels, targetIndex, direction, ContentViewport, animate);
 
         if (_cloudSync.IsLocked && tag != "Account")
         {
@@ -330,6 +365,130 @@ public sealed partial class CloudSyncWindow : Window
         {
             _ = RefreshArchivesInternalAsync(silent: false);
         }
+    }
+
+    private void OnRootGridLoaded(object sender, RoutedEventArgs e)
+    {
+        RootGrid.Loaded -= OnRootGridLoaded;
+        _isWindowContentLoaded = true;
+    }
+
+    private void OnViewportSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (sender is UIElement element && e.NewSize.Width > 0 && e.NewSize.Height > 0)
+        {
+            element.Clip = new RectangleGeometry
+            {
+                Rect = new Rect(0, 0, e.NewSize.Width, e.NewSize.Height)
+            };
+        }
+    }
+
+    private void SwitchSlidePanel(SlideChannel channel, IReadOnlyList<UIElement> panels, int targetIndex, int direction,
+        FrameworkElement? viewport, bool animate)
+    {
+        if (panels.Count == 0 || targetIndex < 0 || targetIndex >= panels.Count)
+        {
+            return;
+        }
+
+        if (_slideStoryboards.Remove(channel, out var existing))
+        {
+            existing.Stop();
+        }
+
+        for (var i = 0; i < panels.Count; i++)
+        {
+            if (i != targetIndex)
+            {
+                var hiddenPanel = panels[i];
+                hiddenPanel.Visibility = Visibility.Collapsed;
+                hiddenPanel.Opacity = 1;
+                EnsureSlideTranslate(hiddenPanel).X = 0;
+            }
+        }
+
+        var targetPanel = panels[targetIndex];
+        var targetTranslate = EnsureSlideTranslate(targetPanel);
+
+        if (!animate || _closed)
+        {
+            targetPanel.Visibility = Visibility.Visible;
+            targetPanel.Opacity = 1;
+            targetTranslate.X = 0;
+            return;
+        }
+
+        var width = viewport?.ActualWidth > 0 ? viewport.ActualWidth : 640.0;
+        var slideDirection = direction >= 0 ? 1 : -1;
+        var slideOffset = Math.Min(100.0, Math.Max(width * 0.28, 72.0)) * slideDirection;
+
+        targetPanel.Visibility = Visibility.Visible;
+        targetPanel.Opacity = 0;
+        targetTranslate.X = slideOffset;
+
+        var slideDuration = TimeSpan.FromMilliseconds(280);
+        var fadeDuration = TimeSpan.FromMilliseconds(200);
+        var slideEasing = new ExponentialEase { Exponent = 5, EasingMode = EasingMode.EaseOut };
+        var fadeEasing = new CubicEase { EasingMode = EasingMode.EaseOut };
+
+        var storyboard = new Storyboard();
+        storyboard.Children.Add(CreateSlideDoubleAnimation(targetTranslate, "X", slideOffset, 0, slideDuration, slideEasing));
+        storyboard.Children.Add(CreateSlideDoubleAnimation(targetPanel, "Opacity", 0, 1.0, fadeDuration, fadeEasing));
+
+        _slideStoryboards[channel] = storyboard;
+        storyboard.Completed += (_, _) =>
+        {
+            if (_slideStoryboards.TryGetValue(channel, out var current) && ReferenceEquals(current, storyboard))
+            {
+                _slideStoryboards.Remove(channel);
+                storyboard.Stop();
+                if (!_closed)
+                {
+                    targetPanel.Opacity = 1;
+                    targetTranslate.X = 0;
+                }
+            }
+        };
+        storyboard.Begin();
+    }
+
+    private void StopAllSlideTransitions()
+    {
+        foreach (var storyboard in _slideStoryboards.Values.ToArray())
+        {
+            storyboard.Stop();
+        }
+
+        _slideStoryboards.Clear();
+    }
+
+    private static TranslateTransform EnsureSlideTranslate(UIElement target)
+    {
+        if (target.RenderTransform is TranslateTransform translate)
+        {
+            return translate;
+        }
+
+        translate = new TranslateTransform();
+        target.RenderTransform = translate;
+        return translate;
+    }
+
+    private static DoubleAnimation CreateSlideDoubleAnimation(DependencyObject target, string propertyPath,
+        double from, double to, TimeSpan duration, EasingFunctionBase? easing)
+    {
+        var animation = new DoubleAnimation
+        {
+            From = from,
+            To = to,
+            Duration = new Duration(duration),
+            EasingFunction = easing,
+            EnableDependentAnimation = true
+        };
+        Storyboard.SetTarget(animation, target);
+        Storyboard.SetTargetProperty(animation, propertyPath);
+        return animation;
     }
 
     private void SetBusy(bool busy)

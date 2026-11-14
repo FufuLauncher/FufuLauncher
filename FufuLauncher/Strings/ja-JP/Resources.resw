@@ -9593,6 +9593,9 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>リクエストが頻繁すぎます。しばらくしてからお試しください。</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>クラウドサービスが一時的に利用できません。しばらくしてから再度お試しください。</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>クラウド容量が不足しています。古いアーカイブを削除するか容量を拡張してください。</value>
   </data>
@@ -10794,7 +10797,7 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
     <value>螺旋出場率</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>上で連携済みキャラを選択すると該当 UID の今期ランキングを確認できます（今期記録の提出が必要です）</value>
+    <value>連携済みキャラクターの今期ランキングが見つかりません（アカウント連携または今期の深境螺旋データ送信をご確認ください）</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>胡桃クラウドの統計とランキングを更新しました</value>
@@ -10900,5 +10903,14 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao クラウドから異常な状態（{0}）が返されました。しばらくしてからもう一度お試しください</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>クラウドストレージ</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>このキャラクターの今期の深境螺旋記録はまだ送信されていません</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>個人ランキングは今期データのみ対応しています。統計期間を「今期」に切り替えてご確認ください</value>
   </data>
 </root>

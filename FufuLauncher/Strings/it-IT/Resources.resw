@@ -9599,6 +9599,9 @@ Dettagli: {0}</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>Troppe richieste.</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>Il servizio cloud non è al momento disponibile. Riprova più tardi.</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>Spazio cloud insufficiente.</value>
   </data>
@@ -10161,7 +10164,7 @@ Dettagli: {0}</value>
     <value>Sync Guide</value>
   </data>
   <data name="HutaoSync_BridgeRuleDesc" xml:space="preserve">
-    <value>I dati scaricati da Hutao Cloud vengono salvati nel tuo archivio cloud FufuLauncher per l&apos;esportazione o l&apos;importazione. I caricamenti leggono direttamente i tuoi archivi cloud FufuLauncher.</value>
+    <value>I dati scaricati da Hutao Cloud vengono salvati nel tuo archivio cloud FufuLauncher per l'esportazione o l'importazione. I caricamenti leggono direttamente i tuoi archivi cloud FufuLauncher.</value>
   </data>
   <data name="HutaoSync_AchievementNotice" xml:space="preserve">
     <value>Achievements note: Hutao Cloud does not support achievement sync. Continue using the Achievements window or Cloud Archives to back up, export, or import achievement profiles.</value>
@@ -10179,7 +10182,7 @@ Dettagli: {0}</value>
     <value>Hutao Cloud Account</value>
   </data>
   <data name="HutaoSync_AccountSubtitle" xml:space="preserve">
-    <value>Accedi a Hutao Cloud per visualizzare account e dispositivi. La sincronizzazione con gli archivi cloud FufuLauncher richiede l&apos;accesso a FufuLauncher.</value>
+    <value>Accedi a Hutao Cloud per visualizzare account e dispositivi. La sincronizzazione con gli archivi cloud FufuLauncher richiede l'accesso a FufuLauncher.</value>
   </data>
   <data name="HutaoSync_ModeLogin" xml:space="preserve">
     <value>Sign In</value>
@@ -10251,7 +10254,7 @@ Dettagli: {0}</value>
     <value>Sign Out</value>
   </data>
   <data name="HutaoSync_PullSectionTitle" xml:space="preserve">
-    <value>Sincronizza da Hutao Cloud all&apos;archivio cloud FufuLauncher (Desideri)</value>
+    <value>Sincronizza da Hutao Cloud all'archivio cloud FufuLauncher (Desideri)</value>
   </data>
   <data name="HutaoSync_PullSectionDesc" xml:space="preserve">
     <value>Carica la cronologia desideri da Hutao Cloud per creare o unire un archivio cloud FufuLauncher.</value>
@@ -10281,7 +10284,7 @@ Dettagli: {0}</value>
     <value>Click 'Load Hutao Cloud List' above to view characters saved on Hutao Cloud</value>
   </data>
   <data name="HutaoSync_PullActionBtn" xml:space="preserve">
-    <value>Sincronizza nell&apos;archivio cloud FufuLauncher</value>
+    <value>Sincronizza nell'archivio cloud FufuLauncher</value>
   </data>
   <data name="HutaoSync_DeleteHutaoUidBtn" xml:space="preserve">
     <value>Delete from Hutao</value>
@@ -10290,13 +10293,13 @@ Dettagli: {0}</value>
     <value>Confirm Hutao Cloud Deletion</value>
   </data>
   <data name="HutaoSync_ConfirmDeleteUidMsgFormat" xml:space="preserve">
-    <value>Eliminare definitivamente i desideri dell&apos;UID {0} da Hutao Cloud? Gli archivi cloud FufuLauncher non verranno modificati.</value>
+    <value>Eliminare definitivamente i desideri dell'UID {0} da Hutao Cloud? Gli archivi cloud FufuLauncher non verranno modificati.</value>
   </data>
   <data name="HutaoSync_GachaEntryCountFormat" xml:space="preserve">
     <value>{0} wish records</value>
   </data>
   <data name="HutaoSync_PushGachaTitle" xml:space="preserve">
-    <value>Carica dall&apos;archivio cloud FufuLauncher a Hutao Cloud (Desideri)</value>
+    <value>Carica dall'archivio cloud FufuLauncher a Hutao Cloud (Desideri)</value>
   </data>
   <data name="HutaoSync_PushGachaDesc" xml:space="preserve">
     <value>Seleziona un archivio desideri cloud FufuLauncher e carica i dati su Hutao Cloud.</value>
@@ -10317,7 +10320,7 @@ Dettagli: {0}</value>
     <value>Upload Selected to Hutao Cloud</value>
   </data>
   <data name="HutaoSync_ChallengeTitle" xml:space="preserve">
-    <value>Carica dall&apos;archivio cloud FufuLauncher a Hutao Cloud (Abisso e Teatro)</value>
+    <value>Carica dall'archivio cloud FufuLauncher a Hutao Cloud (Abisso e Teatro)</value>
   </data>
   <data name="HutaoSync_ChallengeDesc" xml:space="preserve">
     <value>Seleziona un archivio sfide cloud FufuLauncher (solo periodo corrente). Hutao Cloud accetta invii solo per statistiche globali.</value>
@@ -10401,16 +10404,16 @@ Dettagli: {0}</value>
     <value>Loaded wish history for {0} character(s) on Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgFufuUigfLoadedFormat" xml:space="preserve">
-    <value>Desideri di {0} personaggio/i caricati dall&apos;archivio cloud FufuLauncher</value>
+    <value>Desideri di {0} personaggio/i caricati dall'archivio cloud FufuLauncher</value>
   </data>
   <data name="HutaoSync_MsgFufuChallengeLoadedFormat" xml:space="preserve">
-    <value>{0} record caricati dall&apos;archivio cloud FufuLauncher</value>
+    <value>{0} record caricati dall'archivio cloud FufuLauncher</value>
   </data>
   <data name="HutaoSync_MsgDeleteUidSuccessFormat" xml:space="preserve">
     <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>{1} desideri di {0} personaggio/i salvati nell&apos;archivio cloud FufuLauncher &apos;{2}&apos; ({3} totali).</value>
+    <value>{1} desideri di {0} personaggio/i salvati nell'archivio cloud FufuLauncher '{2}' ({3} totali).</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
     <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
@@ -10479,13 +10482,13 @@ Dettagli: {0}</value>
     <value>Seleziona prima un archivio cloud FufuLauncher</value>
   </data>
   <data name="HutaoSync_ErrArchiveNoValidRecords" xml:space="preserve">
-    <value>Nessun record valido trovato nell&apos;archivio cloud FufuLauncher</value>
+    <value>Nessun record valido trovato nell'archivio cloud FufuLauncher</value>
   </data>
   <data name="HutaoSync_ErrNoHutaoGachaData" xml:space="preserve">
     <value>No downloadable wish history found on Hutao Cloud</value>
   </data>
   <data name="HutaoSync_ErrNoSupportedChallengeRecords" xml:space="preserve">
-    <value>Nessun record di Abisso o Teatro trovato nell&apos;archivio cloud FufuLauncher</value>
+    <value>Nessun record di Abisso o Teatro trovato nell'archivio cloud FufuLauncher</value>
   </data>
   <data name="HutaoSync_ErrSelectChallengeFirst" xml:space="preserve">
     <value>Please select at least one challenge record to upload</value>
@@ -10767,7 +10770,7 @@ Dettagli: {0}</value>
     <value>Consulta statistiche di Abisso e Teatro senza accesso a Hutao Cloud. Seleziona un personaggio collegato per vedere il tuo grado.</value>
   </data>
   <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
-    <value>L&apos;archivio cloud FufuLauncher &apos;{0}&apos; esiste già. Scegli come procedere:</value>
+    <value>L'archivio cloud FufuLauncher '{0}' esiste già. Scegli come procedere:</value>
   </data>
   <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
     <value>Presenza Teatro</value>
@@ -10800,7 +10803,7 @@ Dettagli: {0}</value>
     <value>Presenza Abisso</value>
   </data>
   <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
-    <value>Seleziona un personaggio collegato sopra per vedere la classifica di questo UID.</value>
+    <value>Nessuna classifica del periodo corrente trovata per i ruoli collegati (accedi e collega un ruolo o verifica gli invii correnti)</value>
   </data>
   <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
     <value>Statistiche e classifiche Hutao Cloud aggiornate</value>
@@ -10890,7 +10893,7 @@ Dettagli: {0}</value>
     <value>{0} / {1} ({2} completati)</value>
   </data>
   <data name="HutaoSync_ErrChallengeInvalidData" xml:space="preserve">
-    <value>Hutao Cloud ha rifiutato i dati della sfida. Verifica che i dati dell&apos;Abisso e dei personaggi siano completi.</value>
+    <value>Hutao Cloud ha rifiutato i dati della sfida. Verifica che i dati dell'Abisso e dei personaggi siano completi.</value>
   </data>
   <data name="HutaoSync_TravelerMaleName" xml:space="preserve">
     <value>Aether</value>
@@ -10902,9 +10905,18 @@ Dettagli: {0}</value>
     <value>Periodo {0} · {1} record</value>
   </data>
   <data name="HutaoSync_ErrMiHoYoLoginExpired" xml:space="preserve">
-    <value>La sessione dell&apos;account Miyoushe / HoYoLAB è scaduta. Accedi nuovamente in Gestione account e riprova</value>
+    <value>La sessione dell'account Miyoushe / HoYoLAB è scaduta. Accedi nuovamente in Gestione account e riprova</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
     <value>Hutao Cloud ha restituito uno stato imprevisto ({0}). Riprova più tardi</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>Archiviazione cloud</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>Nessun record dell&apos;Abisso a Spirale del periodo corrente inviato per questo ruolo</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>La classifica personale supporta solo i dati del periodo corrente. Passa a Periodo corrente per visualizzare</value>
   </data>
 </root>
