@@ -9381,6 +9381,60 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>यदि कोई समस्या हो, तो कृपया dev@fufu.skin पर संपर्क करें</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>क्लाउड सिंक</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>क्या चयनित स्थानीय चुनौती रिकॉर्ड से क्लाउड आर्काइव "{0}" को ओवरराइट करें?</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>क्लाउड में कोई आवधिक चुनौती आर्काइव नहीं है। अपलोड करने के लिए ऊपर नाम दर्ज करें।</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>चुनौती आर्काइव {0} · कुल {1}/{2} · उपयोग {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>स्थानीय: {0} UID · {1} रिकॉर्ड (Abyss {2} / Theater {3} / Stygian {4})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>आवधिक चुनौती क्लाउड आर्काइव प्रबंधित करें</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>चुनौती डेटा सिंक विफल रहा</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>मर्ज और आयात करें</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>चुनौती डेटा सफलतापूर्वक सिंक हुआ</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>"{0}" सिंक हुआ: +{1} नए चक्र, {2} बेहतर हुए, {3} स्थानीय सुरक्षित (कुल {4} रिकॉर्ड)।</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>डाउनलोड करने पर डेटा केवल जुड़ता या बेहतर होता है: छूटे हुए चक्र जोड़े जाते हैं, स्थानीय रिकॉर्ड सुरक्षित रहते हैं, और डुप्लिकेट चक्र केवल बेहतर स्कोर या तेज़ समय होने पर अपडेट होते हैं।</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>चयनित दायरे के लिए कोई स्थानीय आवधिक चुनौती रिकॉर्ड नहीं मिला।</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>आवधिक चुनौती डेटा अपलोड या सिंक करने से पहले कृपया FufuLauncher क्लाउड आर्काइव में साइन इन करें।</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>सभी UID ({0} रिकॉर्ड)</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>अपलोड डेटा दायरा</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0} (Abyss {1} / Theater {2} / Stygian {3})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>आवधिक चुनौती · FufuLauncher क्लाउड आर्काइव</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>चयनित चुनौती डेटा क्लाउड पर अपलोड करें</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>खाता और डेटा हटाएं</value>
   </data>
@@ -9542,6 +9596,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>सभी प्रकार</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>आवधिक चुनौती</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>खेलने का समय</value>
@@ -10017,6 +10074,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>पासवर्ड रीसेट करें</value>
   </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>आवधिक चुनौती</value>
+  </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>खेलने का समय</value>
   </data>
@@ -10058,6 +10118,9 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>स्थानीय फ़ाइल अपलोड</value>
+  </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>आवधिक चुनौती रिकॉर्ड</value>
   </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>प्लेटाइम रिकॉर्ड</value>

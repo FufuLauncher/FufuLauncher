@@ -10134,6 +10134,60 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>如有问题，可联系dev@fufu.skin</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>云同步</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>确定使用当前所选的本地周期挑战数据覆盖云端存档「{0}」吗？</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>云端暂无周期挑战存档，可在上方选择范围并输入名称后上传。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>周期挑战存档 {0} 份 · 全库 {1}/{2} · 空间 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>本地统计：{0} 个 UID · 共 {1} 条记录（深渊 {2} / 幻想 {3} / 危战 {4}）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>管理周期挑战云存档（深境螺旋 / 幻想真境剧诗 / 幽境危战）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>周期挑战数据同步失败</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>合并导入</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>周期挑战数据同步成功</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>已同步云端挑战存档「{0}」：新增 {1} 条，更新更高纪录 {2} 条，保留本地 {3} 条（当前共 {4} 条）。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>下载采用递增补全同步：自动补充本地缺失期数并完整保留本地独有记录；同周期仅在云端成绩更优（星数/层数/幕数更高或通关更快）时升级，数据只增不减。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>当前所选范围内暂无可上传的本地周期挑战记录。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>请先登录FufuLauncher云存档账户，再上传或同步周期挑战记录。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>全部 UID（共 {0} 条记录）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>上传数据范围</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0}（深渊 {1} / 幻想 {2} / 危战 {3}）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>周期挑战 - FufuLauncher云存档管理</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>上传所选周期挑战记录到云端</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>注销账户并清除数据</value>
   </data>
@@ -10295,6 +10349,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>全部类型</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>周期挑战</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>游戏时长</value>
@@ -10770,6 +10827,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>确认重置密码</value>
   </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>周期挑战</value>
+  </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>游戏时长</value>
   </data>
@@ -10811,6 +10871,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>上传本地文件</value>
+  </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>周期挑战记录</value>
   </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>游戏时长记录</value>

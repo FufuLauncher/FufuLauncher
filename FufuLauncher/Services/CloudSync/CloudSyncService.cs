@@ -202,6 +202,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
             "ARCHIVE_NOT_FOUND" => "CloudSync_ErrArchiveNotFound".GetLocalized(),
             "INVALID_UIAF_SCHEMA" or "UNSUPPORTED_UIAF_VERSION" or "INVALID_UIGF_SCHEMA" or "UNSUPPORTED_UIGF_VERSION"
                 or "INVALID_PLAYTIME_SCHEMA" or "UNSUPPORTED_PLAYTIME_VERSION"
+                or "INVALID_CHALLENGE_SCHEMA" or "UNSUPPORTED_CHALLENGE_VERSION"
                 => "CloudSync_ErrInvalidFormat".GetLocalized(),
             "INVALID_DATA_SLOT" or "INVALID_SLOT" => "CloudSync_ErrInvalidSlot".GetLocalized(),
             "INVALID_ACTIVATION_CODE" or "INVALID_ACTIVATION_CODE_FORMAT" => "CloudSync_ErrActivationInvalid"
@@ -533,7 +534,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
         string jsonContent, bool overwrite = true)
     {
         var normalizedType = (dataType ?? string.Empty).Trim().ToLowerInvariant();
-        if (normalizedType is not ("uiaf" or "uigf" or "playtime"))
+        if (normalizedType is not ("uiaf" or "uigf" or "playtime" or "challenge"))
         {
             return new CloudApiResult<CloudUploadResultData>
             {

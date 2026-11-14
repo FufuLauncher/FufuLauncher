@@ -9,6 +9,7 @@ using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
+using FufuLauncher.Services.CycleChallenge;
 using FufuLauncher.ViewModels;
 using Microsoft.UI;
 using Microsoft.UI.Dispatching;
@@ -1294,9 +1295,16 @@ public sealed partial class CloudSyncWindow : Window
             {
                 "CloudSync_UploadTypeUiafOption".GetLocalized(),
                 "CloudSync_UploadTypeUigfOption".GetLocalized(),
-                "CloudSync_UploadTypePlayTimeOption".GetLocalized()
+                "CloudSync_UploadTypePlayTimeOption".GetLocalized(),
+                "CloudSync_UploadTypeChallengeOption".GetLocalized()
             },
-            SelectedIndex = detectedType == "uigf" ? 1 : detectedType == "playtime" ? 2 : 0
+            SelectedIndex = detectedType switch
+            {
+                "uigf" => 1,
+                "playtime" => 2,
+                "challenge" => 3,
+                _ => 0
+            }
         };
         var slotBox = new TextBox
         {
@@ -1334,25 +1342,23 @@ public sealed partial class CloudSyncWindow : Window
 
         if (await dialog.ShowAsync() != ContentDialogResult.Primary) return;
 
-        var dataType = typeCombo.SelectedIndex == 1
-            ? "uigf"
-            : typeCombo.SelectedIndex == 2
-                ? "playtime"
-                : "uiaf";
+        var dataType = typeCombo.SelectedIndex switch
+        {
+            1 => "uigf",
+            2 => "playtime",
+            3 => "challenge",
+            _ => "uiaf"
+        };
         var slot = slotBox.Text.Trim();
         var overwrite = overwriteCheck.IsChecked == true;
 
-        var uploadContent = jsonContent;
-        if (dataType == "playtime")
+        var uploadContent = TryPrepareArchiveUploadJson(dataType, jsonContent);
+        if (uploadContent == null)
         {
-            uploadContent = TryPreparePlayTimeUploadJson(jsonContent);
-            if (uploadContent == null)
-            {
-                ShowMessage(InfoBarSeverity.Error,
-                    "CloudSync_MsgUploadFailedTitle".GetLocalized(),
-                    "CloudSync_ErrInvalidFormat".GetLocalized());
-                return;
-            }
+            ShowMessage(InfoBarSeverity.Error,
+                "CloudSync_MsgUploadFailedTitle".GetLocalized(),
+                "CloudSync_ErrInvalidFormat".GetLocalized());
+            return;
         }
 
         SetBusy(true);
@@ -1379,9 +1385,9 @@ public sealed partial class CloudSyncWindow : Window
         }
     }
 
-    private async void OnMergePlayTimeArchiveToLocalClick(object sender, RoutedEventArgs e)
+    private async void OnMergeArchiveToLocalClick(object sender, RoutedEventArgs e)
     {
-        if (sender is not FrameworkElement { Tag: CloudArchiveItem item } || !item.IsPlayTime) return;
+        if (sender is not FrameworkElement { Tag: CloudArchiveItem item } || !item.CanMergeToLocal) return;
         if (!_cloudSync.IsLoggedIn || _cloudSync.IsLocked)
         {
             ShowMessage(InfoBarSeverity.Warning,
@@ -1405,6 +1411,35 @@ public sealed partial class CloudSyncWindow : Window
         {
             ShowMessage(InfoBarSeverity.Error, "CloudSync_DownloadFailedTitle".GetLocalized(),
                 _cloudSync.FormatFriendlyError(pullRes.Code, pullRes.Message, pullRes.HttpStatusCode));
+            return;
+        }
+
+        if (item.IsChallenge)
+        {
+            try
+            {
+                var challengeService = App.GetService<CycleChallengeService>();
+                var merge = await challengeService.MergeCloudChallengeJsonAsync(pullRes.JsonContent);
+                if (!merge.Ok)
+                {
+                    ShowMessage(InfoBarSeverity.Error,
+                        "CloudSync_CycleChallengeMergeFailedTitle".GetLocalized(),
+                        "CloudSync_ErrInvalidFormat".GetLocalized());
+                    return;
+                }
+
+                ShowMessage(InfoBarSeverity.Success,
+                    "CloudSync_CycleChallengeMergeSuccessTitle".GetLocalized(),
+                    CycleChallengeService.FormatMergeSummary(item.Slot, merge));
+            }
+            catch (Exception ex)
+            {
+                DebugLog.Info("CloudSyncWindow", $"[CloudSyncWindow] Merge Challenge failed: {ex.Message}");
+                ShowMessage(InfoBarSeverity.Error,
+                    "CloudSync_CycleChallengeMergeFailedTitle".GetLocalized(),
+                    "CloudSync_ErrInvalidFormat".GetLocalized());
+            }
+
             return;
         }
 
@@ -1520,16 +1555,12 @@ public sealed partial class CloudSyncWindow : Window
         try
         {
             var jsonContent = await File.ReadAllTextAsync(path);
-            var uploadContent = jsonContent;
-            if (item.IsPlayTime)
+            var uploadContent = TryPrepareArchiveUploadJson(item.DataType, jsonContent);
+            if (uploadContent == null)
             {
-                uploadContent = TryPreparePlayTimeUploadJson(jsonContent);
-                if (uploadContent == null)
-                {
-                    ShowMessage(InfoBarSeverity.Error, "CloudSync_OverwriteFailedTitle".GetLocalized(),
-                        "CloudSync_ErrInvalidFormat".GetLocalized());
-                    return;
-                }
+                ShowMessage(InfoBarSeverity.Error, "CloudSync_OverwriteFailedTitle".GetLocalized(),
+                    "CloudSync_ErrInvalidFormat".GetLocalized());
+                return;
             }
 
             var res = await _cloudSync.UploadArchiveAsync(item.DataType, item.Slot, uploadContent, overwrite: true);
@@ -1748,6 +1779,7 @@ public sealed partial class CloudSyncWindow : Window
                     if (info.TryGetProperty("uiaf_version", out _)) return "uiaf";
                     if (info.TryGetProperty("version", out _)) return "uigf";
                     if (info.TryGetProperty("playtime_version", out _)) return "playtime";
+                    if (info.TryGetProperty("challenge_version", out _)) return "challenge";
                 }
 
                 if (doc.RootElement.TryGetProperty("storage_key", out var sk) &&
@@ -1771,12 +1803,18 @@ public sealed partial class CloudSyncWindow : Window
         return "uiaf";
     }
 
-    private static string? TryPreparePlayTimeUploadJson(string rawJson)
+    private static string? TryPrepareArchiveUploadJson(string dataType, string rawJson)
     {
         var appVersion = !string.IsNullOrWhiteSpace(AppVersionHelper.NumericVersion)
             ? AppVersionHelper.NumericVersion
             : "1.7.2.4";
         if (appVersion.Length > 64) appVersion = appVersion[..64];
-        return GamePlayTimeStore.TryConvertPlayTimeJsonToCloudJson(rawJson, appVersion);
+
+        return dataType switch
+        {
+            "playtime" => GamePlayTimeStore.TryConvertPlayTimeJsonToCloudJson(rawJson, appVersion),
+            "challenge" => CycleChallengeService.TryConvertChallengeJsonToCloudJson(rawJson, appVersion),
+            _ => rawJson
+        };
     }
 }

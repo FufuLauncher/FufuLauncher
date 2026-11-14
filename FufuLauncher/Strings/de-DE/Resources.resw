@@ -9390,6 +9390,60 @@ Details: {0}</value>
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>Bei Fragen wenden Sie sich bitte an dev@fufu.skin</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>Cloud-Sync</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Cloud-Archiv "{0}" mit den ausgewählten lokalen Herausforderungsdaten überschreiben?</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>Keine Herausforderungsarchive in der Cloud. Namen oben eingeben und hochladen.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>Herausforderungsarchive {0} · Gesamt {1}/{2} · Belegt {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>Lokal: {0} UID(s) · {1} Einträge (Abgrund {2} / Theater {3} / Stygisch {4})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>Cloud-Archive für periodische Herausforderungen verwalten</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>Herausforderungssync fehlgeschlagen</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>Zusammenführen &amp; Importieren</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>Herausforderungsdaten synchronisiert</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>"{0}" synchronisiert: +{1} neue Zeiträume, {2} verbessert, {3} lokal behalten (gesamt {4} Einträge).</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>Beim Herunterladen wird monoton zusammengeführt: Fehlende Zeiträume werden ergänzt, rein lokale bleiben erhalten und Duplikate werden nur bei besseren Sternen, Ebenen/Akten oder schnellerer Zeit aktualisiert.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>Keine lokalen Herausforderungsdaten für den ausgewählten Bereich gefunden.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>Bitte melden Sie sich beim FufuLauncher Cloud-Archiv an, bevor Sie Herausforderungsdaten hochladen oder synchronisieren.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>Alle UIDs ({0} Einträge)</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>Upload-Datenbereich</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0} (Abgrund {1} / Theater {2} / Stygisch {3})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>Periodische Herausforderung · FufuLauncher Cloud-Archiv</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>Ausgewählte Herausforderungen hochladen</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Konto &amp; Daten löschen</value>
   </data>
@@ -9551,6 +9605,9 @@ Details: {0}</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>Alle Typen</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>Herausforderung</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>Spielzeit</value>
@@ -10026,6 +10083,9 @@ Details: {0}</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Passwort zurücksetzen</value>
   </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>Herausforderung</value>
+  </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>Spielzeit</value>
   </data>
@@ -10067,6 +10127,9 @@ Details: {0}</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Lokale Datei hochladen</value>
+  </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>Herausforderungsdaten</value>
   </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>Spielzeitdaten</value>

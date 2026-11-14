@@ -9386,6 +9386,60 @@ Click the button below to open your browser and download manually.</value>
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>Если возникнут вопросы, обратитесь по адресу dev@fufu.skin</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>Облако</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Перезаписать облачный архив «{0}» выбранными локальными данными испытаний?</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>Облачные архивы испытаний не найдены. Введите имя выше, чтобы отправить данные.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>Архивы испытаний: {0} · Всего {1}/{2} · Занято {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>Локально: {0} UID · {1} зап. (Бездна {2} / Театр {3} / Натиск {4})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>Управление облачными архивами испытаний</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>Ошибка объединения испытаний</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>Объединить и импортировать</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>Данные испытаний объединены</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>Синхронизировано «{0}»: +{1} новых циклов, {2} улучшено, {3} локальных сохранено (всего {4} зап.).</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>Загрузка объединяет данные без потерь: недостающие циклы добавляются, локальные сохраняются, а дубликаты обновляются только при лучшем результате в облаке.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>В выбранной области нет локальных записей испытаний для отправки.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>Войдите в облачный архив FufuLauncher перед загрузкой или синхронизацией записей испытаний.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>Все UID ({0} зап.)</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>Область отправки</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0} (Бездна {1} / Театр {2} / Натиск {3})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>Испытания · Облачный архив FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>Отправить выбранные испытания в облако</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Удалить аккаунт и данные</value>
   </data>
@@ -9547,6 +9601,9 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>Все типы</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>Испытания</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>Время игры</value>
@@ -10022,6 +10079,9 @@ Click the button below to open your browser and download manually.</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Сбросить пароль</value>
   </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>Испытания</value>
+  </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>Время игры</value>
   </data>
@@ -10063,6 +10123,9 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Загрузить файл</value>
+  </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>Записи испытаний</value>
   </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>Записи времени игры</value>

@@ -30,6 +30,7 @@ public sealed partial class CycleChallengePage : Page
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        ViewModel.AttachCloudSyncListener();
         if (_subscribed)
         {
             return;
@@ -42,6 +43,7 @@ public sealed partial class CycleChallengePage : Page
 
     private void OnUnloaded(object sender, RoutedEventArgs e)
     {
+        ViewModel.DetachCloudSyncListener();
         if (!_subscribed)
         {
             return;

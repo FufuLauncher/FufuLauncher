@@ -9386,6 +9386,60 @@ Detail: {0}</value>
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>Jika ada pertanyaan, silakan hubungi dev@fufu.skin</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>Sinkron Cloud</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>Timpa arsip cloud "{0}" dengan data tantangan lokal yang dipilih?</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>Belum ada arsip tantangan berkala di cloud. Masukkan nama di atas untuk mengunggah data lokal.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>Arsip tantangan {0} · Total {1}/{2} · Terpakai {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>Lokal: {0} UID · {1} rekaman (Abyss {2} / Theater {3} / Stygian {4})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>Kelola arsip cloud tantangan berkala</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>Gagal menggabung data tantangan</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>Gabung &amp; Impor</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>Data tantangan berhasil digabung</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>"{0}" disinkronkan: +{1} periode baru, {2} ditingkatkan, {3} lokal dipertahankan (total {4} rekaman).</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>Pengunduhan menggabungkan secara bertahap: periode yang belum ada ditambahkan, data lokal tetap dipertahankan, dan periode sama hanya diperbarui jika arsip cloud memiliki skor lebih tinggi atau waktu lebih cepat.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>Tidak ada data tantangan berkala lokal untuk cakupan yang dipilih.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>Silakan masuk ke Arsip Cloud FufuLauncher sebelum mengunggah atau menyinkronkan data tantangan berkala.</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>Semua UID ({0} rekaman)</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>Cakupan Data Unggahan</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0} (Abyss {1} / Theater {2} / Stygian {3})</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>Tantangan Berkala · Arsip Cloud FufuLauncher</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>Unggah Data Tantangan Terpilih ke Cloud</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>Hapus Akun &amp; Data</value>
   </data>
@@ -9547,6 +9601,9 @@ Detail: {0}</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>Semua Tipe</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>Tantangan Berkala</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>Waktu Bermain</value>
@@ -10022,6 +10079,9 @@ Detail: {0}</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>Atur Ulang Kata Sandi</value>
   </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>Tantangan Berkala</value>
+  </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>Waktu Bermain</value>
   </data>
@@ -10063,6 +10123,9 @@ Detail: {0}</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>Unggah File Lokal</value>
+  </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>Rekaman Tantangan</value>
   </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>Catatan Waktu Bermain</value>

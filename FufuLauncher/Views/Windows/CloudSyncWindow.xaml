@@ -562,6 +562,7 @@
                                 <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterUiaf}" Tag="uiaf" />
                                 <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterUigf}" Tag="uigf" />
                                 <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterPlayTime}" Tag="playtime" />
+                                <ComboBoxItem Content="{helpers:Loc Key=CloudSync_FilterChallenge}" Tag="challenge" />
                             </ComboBox>
                             <Button Content="{helpers:Loc Key=CloudSync_RefreshBtn}" Click="OnRefreshArchivesClick" />
                             <Button Content="{helpers:Loc Key=CloudSync_UploadLocalBtn}"
@@ -639,8 +640,8 @@
                                                         VerticalAlignment="Center">
                                                 <Button Content="{helpers:Loc Key=CloudSync_BtnMergeToLocal}"
                                                         Tag="{x:Bind}"
-                                                        Visibility="{x:Bind PlayTimeMergeVisibility}"
-                                                        Click="OnMergePlayTimeArchiveToLocalClick"
+                                                        Visibility="{x:Bind MergeToLocalVisibility}"
+                                                        Click="OnMergeArchiveToLocalClick"
                                                         Style="{StaticResource FlatRowActionButtonStyle}"
                                                         Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
                                                 <Button Content="{helpers:Loc Key=CloudSync_BtnExportSave}"

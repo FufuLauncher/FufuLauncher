@@ -176,6 +176,97 @@ public sealed class CycleChallengeRepository
         return db.CycleChallengeRecords.Count(x => x.Uid == uid && x.Mode == modeValue);
     }
 
+    public IReadOnlyList<string> GetAvailableUids()
+    {
+        EnsureInitialized();
+        using var db = CreateContext();
+        return db.CycleChallengeRecords
+            .AsNoTracking()
+            .Select(x => x.Uid)
+            .Distinct()
+            .ToList()
+            .OrderBy(x => x, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    public IReadOnlyList<(string Uid, int Mode, int Count)> GetUidModeCounts()
+    {
+        EnsureInitialized();
+        using var db = CreateContext();
+        return db.CycleChallengeRecords
+            .AsNoTracking()
+            .GroupBy(x => new { x.Uid, x.Mode })
+            .Select(g => new { g.Key.Uid, g.Key.Mode, Count = g.Count() })
+            .ToList()
+            .Select(x => (x.Uid, x.Mode, x.Count))
+            .OrderBy(x => x.Uid, StringComparer.Ordinal)
+            .ThenBy(x => x.Mode)
+            .ToList();
+    }
+
+    public IReadOnlyList<CycleChallengeRecordEntity> GetRecords(IReadOnlyCollection<string>? uids = null)
+    {
+        EnsureInitialized();
+        using var db = CreateContext();
+        IQueryable<CycleChallengeRecordEntity> query = db.CycleChallengeRecords.AsNoTracking();
+        if (uids is { Count: > 0 })
+        {
+            var filter = uids
+                .Where(u => !string.IsNullOrWhiteSpace(u))
+                .Select(u => u.Trim())
+                .Distinct(StringComparer.Ordinal)
+                .ToList();
+            if (filter.Count == 0)
+            {
+                return Array.Empty<CycleChallengeRecordEntity>();
+            }
+
+            query = query.Where(x => filter.Contains(x.Uid));
+        }
+
+        return query
+            .ToList()
+            .OrderBy(x => x.Uid, StringComparer.Ordinal)
+            .ThenBy(x => x.Mode)
+            .ThenByDescending(x => ParseSchedule(x.ScheduleId))
+            .ThenBy(x => x.ScheduleId, StringComparer.Ordinal)
+            .ToList();
+    }
+
+    public void UpsertRange(IEnumerable<CycleChallengeRecordEntity> records)
+    {
+        var list = records as IList<CycleChallengeRecordEntity> ?? records.ToList();
+        if (list.Count == 0)
+        {
+            return;
+        }
+
+        EnsureInitialized();
+        lock (_initLock)
+        {
+            using var db = CreateContext();
+            var existingMap = db.CycleChallengeRecords
+                .ToList()
+                .ToDictionary(x => (x.Uid, x.Mode, x.ScheduleId));
+
+            foreach (var record in list)
+            {
+                var key = (record.Uid, record.Mode, record.ScheduleId);
+                if (existingMap.TryGetValue(key, out var existing))
+                {
+                    db.Entry(existing).CurrentValues.SetValues(record);
+                }
+                else
+                {
+                    db.CycleChallengeRecords.Add(record);
+                    existingMap[key] = record;
+                }
+            }
+
+            db.SaveChanges();
+        }
+    }
+
 
     public int Trim(string uid, ChallengeMode mode, int keep)
     {

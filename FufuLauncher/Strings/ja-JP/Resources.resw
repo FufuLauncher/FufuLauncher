@@ -9390,6 +9390,60 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>問題がある場合は、dev@fufu.skin までご連絡ください</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>クラウド同期</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>選択中のローカル周期挑戦データでクラウドアーカイブ「{0}」を上書きしますか？</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>クラウド上に周期挑戦アーカイブがありません。上で範囲と名前を指定してアップロードできます。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>周期挑戦アーカイブ {0} 件 · 合計 {1}/{2} · 容量 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>ローカル統計：{0} 件の UID · 合計 {1} 件（深境螺旋 {2} / 幻想シアター {3} / 幽境の激戦 {4}）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>周期挑戦クラウドアーカイブ管理（深境螺旋 / 幻想シアター / 幽境の激戦）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>周期挑戦データの同期に失敗しました</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>マージして取込</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>周期挑戦データの同期に成功しました</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>「{0}」を同期しました：新規追加 {1} 件、記録更新 {2} 件、ローカル保持 {3} 件（合計 {4} 件）。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>ダウンロード時は加算マージのみを実行します：不足している期間のみ追加し、ローカル固有の記録はすべて保持します。同じ期間が重複する場合も、クラウド側の成績（星数・到達階層/幕・クリアタイム）が上回る場合のみ更新されます。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>選択した範囲にアップロード可能なローカル周期挑戦記録がありません。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>周期挑戦データのアップロードや同期を行う前に、FufuLauncherクラウドアーカイブへサインインしてください。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>すべての UID（合計 {0} 件）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>アップロード対象範囲</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0}（深境螺旋 {1} / 幻想シアター {2} / 幽境の激戦 {3}）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>周期挑戦 · FufuLauncherクラウドアーカイブ</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>選択した周期挑戦記録をクラウドへアップロード</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>アカウントとデータを削除</value>
   </data>
@@ -9551,6 +9605,9 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>すべて</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>周期挑戦</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>プレイ時間</value>
@@ -10026,6 +10083,9 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>パスワードを再設定</value>
   </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>周期挑戦</value>
+  </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>プレイ時間</value>
   </data>
@@ -10067,6 +10127,9 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   </data>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>ローカルファイルをアップロード</value>
+  </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>周期挑戦記録</value>
   </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>プレイ時間記録</value>
