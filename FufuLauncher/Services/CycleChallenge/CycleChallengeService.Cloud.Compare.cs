@@ -178,7 +178,8 @@ public sealed partial class CycleChallengeService
             using (summaryDoc)
             {
                 if (totalStar == 0) totalStar = GetInt(summary, "total_star");
-                if (maxFloorNum == 0) TryParseMaxFloor(GetString(summary, "max_floor"), out maxFloorNum, out maxChamberNum);
+                if (maxFloorNum == 0)
+                    TryParseMaxFloor(GetString(summary, "max_floor"), out maxFloorNum, out maxChamberNum);
                 if (totalWinTimes == 0) totalWinTimes = GetInt(summary, "total_win_times");
                 if (totalBattleTimes == 0) totalBattleTimes = GetInt(summary, "total_battle_times");
                 isUnlock |= GetBool(summary, "is_unlock");
@@ -294,7 +295,8 @@ public sealed partial class CycleChallengeService
 
                 if (root.TryGetProperty("single", out var single) && single.ValueKind is JsonValueKind.Object)
                 {
-                    ExtractStygianMode(single, out singleHasData, out singleDifficulty, out singleSecond, out singleChallengeCount);
+                    ExtractStygianMode(single, out singleHasData, out singleDifficulty, out singleSecond,
+                        out singleChallengeCount);
                 }
 
                 if (root.TryGetProperty("mp", out var mp) && mp.ValueKind is JsonValueKind.Object)

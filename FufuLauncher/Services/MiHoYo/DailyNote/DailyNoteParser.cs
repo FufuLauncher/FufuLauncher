@@ -74,7 +74,10 @@ public class DailyNoteCardData
 
 public sealed class DailyNoteApiException(int retcode, string message) : InvalidOperationException(message)
 {
-    public int Retcode { get; } = retcode;
+    public int Retcode
+    {
+        get;
+    } = retcode;
 }
 
 public static class DailyNoteParser

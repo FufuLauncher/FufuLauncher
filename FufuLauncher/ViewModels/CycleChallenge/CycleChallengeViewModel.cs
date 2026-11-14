@@ -337,6 +337,7 @@ public sealed partial class CycleChallengeViewModel : ObservableObject
     private readonly AccountManager _accountManager;
     private readonly GameRoleService _gameRoleService;
     private readonly CycleChallengeService _service;
+
     private readonly Microsoft.UI.Dispatching.DispatcherQueue? _dispatcherQueue =
         Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
 

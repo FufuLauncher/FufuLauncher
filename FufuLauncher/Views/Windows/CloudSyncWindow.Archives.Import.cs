@@ -45,7 +45,8 @@ public sealed partial class CloudSyncWindow
         var panel = new StackPanel { Spacing = 10, MinWidth = 400 };
         panel.Children.Add(new TextBlock
         {
-            Text = string.Format("CloudSync_UiafImportSummaryFormat".GetLocalized(), summary.TotalItems, summary.CompletedItems),
+            Text = string.Format("CloudSync_UiafImportSummaryFormat".GetLocalized(), summary.TotalItems,
+                summary.CompletedItems),
             TextWrapping = TextWrapping.Wrap,
             FontSize = 13
         });

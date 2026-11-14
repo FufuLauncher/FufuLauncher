@@ -50,7 +50,8 @@ public sealed partial class CycleChallengeService
 
         if (normalizedFilterUid is not null)
         {
-            var matched = groupedByUid.FirstOrDefault(x => string.Equals(x.Uid, normalizedFilterUid, StringComparison.Ordinal));
+            var matched = groupedByUid.FirstOrDefault(x =>
+                string.Equals(x.Uid, normalizedFilterUid, StringComparison.Ordinal));
             return new CycleChallengeLocalSummary
             {
                 UidCount = matched is not null ? 1 : 0,
@@ -78,7 +79,8 @@ public sealed partial class CycleChallengeService
         string appVersion,
         CancellationToken cancellationToken = default)
     {
-        var entities = await Task.Run(() => _repository.GetRecords(targetUids), cancellationToken).ConfigureAwait(false);
+        var entities = await Task.Run(() => _repository.GetRecords(targetUids), cancellationToken)
+            .ConfigureAwait(false);
 
         var exportedRecords = new List<CycleChallengeCloudRecord>(Math.Min(entities.Count, MaxCloudRecords));
         var orderedEntities = entities.Count > MaxCloudRecords
@@ -125,7 +127,9 @@ public sealed partial class CycleChallengeService
             Info = new CycleChallengeCloudInfo
             {
                 ExportApp = "FufuLauncher",
-                ExportAppVersion = string.IsNullOrWhiteSpace(appVersion) ? "1.0.0" : ClampOptionalString(appVersion, MaxIdentifierLength),
+                ExportAppVersion = string.IsNullOrWhiteSpace(appVersion)
+                    ? "1.0.0"
+                    : ClampOptionalString(appVersion, MaxIdentifierLength),
                 ChallengeVersion = "v1.0",
                 ExportTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds()
             },
@@ -150,7 +154,9 @@ public sealed partial class CycleChallengeService
                     ? "FufuLauncher"
                     : ClampOptionalString(doc.Info.ExportApp, 128) ?? "FufuLauncher",
                 ExportAppVersion = string.IsNullOrWhiteSpace(doc.Info.ExportAppVersion)
-                    ? (string.IsNullOrWhiteSpace(appVersion) ? "1.0.0" : ClampOptionalString(appVersion, MaxIdentifierLength))
+                    ? (string.IsNullOrWhiteSpace(appVersion)
+                        ? "1.0.0"
+                        : ClampOptionalString(appVersion, MaxIdentifierLength))
                     : ClampOptionalString(doc.Info.ExportAppVersion, MaxIdentifierLength),
                 ChallengeVersion = "v1.0",
                 ExportTimestamp = doc.Info.ExportTimestamp > 0
@@ -180,14 +186,18 @@ public sealed partial class CycleChallengeService
         {
             var localRecords = _repository.GetRecords();
             var beforeTotalCount = localRecords.Count;
-            var localMap = new Dictionary<(string Uid, int Mode, string ScheduleId), CycleChallengeRecordEntity>(localRecords.Count);
+            var localMap =
+                new Dictionary<(string Uid, int Mode, string ScheduleId), CycleChallengeRecordEntity>(
+                    localRecords.Count);
             foreach (var item in localRecords)
             {
                 localMap[(item.Uid, item.Mode, item.ScheduleId)] = item;
             }
 
             // Deduplicate duplicates within the incoming payload using the same monotonic comparator.
-            var deduplicatedIncoming = new Dictionary<(string Uid, int Mode, string ScheduleId), CycleChallengeRecordEntity>(doc!.Records.Count);
+            var deduplicatedIncoming =
+                new Dictionary<(string Uid, int Mode, string ScheduleId), CycleChallengeRecordEntity>(
+                    doc!.Records.Count);
             foreach (var rec in doc.Records)
             {
                 var modeEnum = (ChallengeMode)rec.Mode;

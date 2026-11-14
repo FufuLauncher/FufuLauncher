@@ -62,6 +62,7 @@ public sealed partial class CloudSyncWindow
                 {
                     ShowMessage(InfoBarSeverity.Error, "HutaoSync_FailedTitle".GetLocalized(), res.Message);
                 }
+
                 return false;
             }
 
@@ -85,6 +86,7 @@ public sealed partial class CloudSyncWindow
                 ShowMessage(InfoBarSeverity.Success, "HutaoSync_SuccessTitle".GetLocalized(),
                     string.Format("HutaoSync_MsgEntriesLoadedFormat".GetLocalized(), _allHutaoGachaEntries.Count));
             }
+
             return true;
         }
         finally
@@ -180,7 +182,8 @@ public sealed partial class CloudSyncWindow
 
         if (isExistingMode)
         {
-            if (HutaoPullExistingSlotCombo.SelectedItem is not string existingSlot || string.IsNullOrWhiteSpace(existingSlot))
+            if (HutaoPullExistingSlotCombo.SelectedItem is not string existingSlot ||
+                string.IsNullOrWhiteSpace(existingSlot))
             {
                 ShowMessage(InfoBarSeverity.Warning, "HutaoSync_HintTitle".GetLocalized(),
                     "HutaoSync_ErrSelectFufuArchive".GetLocalized());
@@ -405,7 +408,8 @@ public sealed partial class CloudSyncWindow
             return;
         }
 
-        if (_allFufuChallengeItems.Count == 0 || !string.Equals(_lastInspectedChallengeSlot, slot, StringComparison.Ordinal))
+        if (_allFufuChallengeItems.Count == 0 ||
+            !string.Equals(_lastInspectedChallengeSlot, slot, StringComparison.Ordinal))
         {
             SetBusy(true);
             try
@@ -474,6 +478,7 @@ public sealed partial class CloudSyncWindow
             {
                 ShowMessage(InfoBarSeverity.Error, "HutaoSync_FailedTitle".GetLocalized(), res.Message);
             }
+
             return;
         }
 
@@ -498,7 +503,8 @@ public sealed partial class CloudSyncWindow
     {
         if (_closed || !_cloudSync.IsLoggedIn || _cloudSync.IsLocked) return;
         if (FufuChallengeArchiveComboBox.SelectedItem is not string slot || string.IsNullOrWhiteSpace(slot)) return;
-        if (string.Equals(slot, _lastInspectedChallengeSlot, StringComparison.Ordinal) && _allFufuChallengeItems.Count > 0) return;
+        if (string.Equals(slot, _lastInspectedChallengeSlot, StringComparison.Ordinal) &&
+            _allFufuChallengeItems.Count > 0) return;
         await InspectFufuChallengeSlotAsync(slot, silent: true);
     }
 
@@ -523,6 +529,7 @@ public sealed partial class CloudSyncWindow
             {
                 ShowMessage(InfoBarSeverity.Error, "HutaoSync_FailedTitle".GetLocalized(), res.Message);
             }
+
             return;
         }
 

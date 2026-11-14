@@ -80,7 +80,8 @@ public sealed partial class HutaoCloudService
         };
     }
 
-    public async Task<HutaoOperationResult<HutaoUserInfo>> RegisterAsync(string email, string password, string verifyCode)
+    public async Task<HutaoOperationResult<HutaoUserInfo>> RegisterAsync(string email, string password,
+        string verifyCode)
     {
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(verifyCode))
         {
@@ -116,9 +117,11 @@ public sealed partial class HutaoCloudService
         };
     }
 
-    public async Task<HutaoOperationResult<HutaoUserInfo>> ResetPasswordAsync(string email, string newPassword, string verifyCode)
+    public async Task<HutaoOperationResult<HutaoUserInfo>> ResetPasswordAsync(string email, string newPassword,
+        string verifyCode)
     {
-        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(newPassword) || string.IsNullOrWhiteSpace(verifyCode))
+        if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(newPassword) ||
+            string.IsNullOrWhiteSpace(verifyCode))
         {
             return Fail<HutaoUserInfo>("HutaoSync_ErrEnterCompleteAuth".GetLocalized());
         }
@@ -155,7 +158,8 @@ public sealed partial class HutaoCloudService
 
     public async Task<HutaoOperationResult<HutaoUserInfo>> RefreshUserInfoAsync()
     {
-        var res = await SendAuthenticatedAsync<HutaoUserInfo>(HttpMethod.Get, ApiEndpoints.HutaoPassportUserInfoPath, null);
+        var res = await SendAuthenticatedAsync<HutaoUserInfo>(HttpMethod.Get, ApiEndpoints.HutaoPassportUserInfoPath,
+            null);
         if (!res.Ok)
         {
             return res;
@@ -193,7 +197,8 @@ public sealed partial class HutaoCloudService
         }
 
         var devices = ParseLoggedInDevices(res.Data)
-            .Where(d => !string.IsNullOrWhiteSpace(d.EffectiveDeviceId) || !string.IsNullOrWhiteSpace(d.EffectiveDeviceName))
+            .Where(d => !string.IsNullOrWhiteSpace(d.EffectiveDeviceId) ||
+                        !string.IsNullOrWhiteSpace(d.EffectiveDeviceName))
             .OrderByDescending(d => string.Equals(d.EffectiveDeviceId, _deviceId, StringComparison.OrdinalIgnoreCase))
             .ToList();
 
@@ -301,7 +306,7 @@ public sealed partial class HutaoCloudService
         if (element.ValueKind == JsonValueKind.Array)
         {
             return JsonSerializer.Deserialize<List<HutaoLoggedInDevice>>(element.GetRawText(), JsonOptions)
-                ?? new List<HutaoLoggedInDevice>();
+                   ?? new List<HutaoLoggedInDevice>();
         }
 
         if (element.ValueKind == JsonValueKind.Object)
@@ -315,7 +320,7 @@ public sealed partial class HutaoCloudService
                      prop.Name.Equals("Data", StringComparison.OrdinalIgnoreCase)))
                 {
                     return JsonSerializer.Deserialize<List<HutaoLoggedInDevice>>(prop.Value.GetRawText(), JsonOptions)
-                        ?? new List<HutaoLoggedInDevice>();
+                           ?? new List<HutaoLoggedInDevice>();
                 }
             }
         }

@@ -409,16 +409,23 @@
                                     <CornerRadius x:Key="NavigationViewContentGridCornerRadius">0</CornerRadius>
                                     <SolidColorBrush x:Key="NavigationViewContentBackground" Color="Transparent" />
                                     <SolidColorBrush x:Key="NavigationViewContentGridBorderBrush" Color="Transparent" />
-                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundPointerOver" Color="Transparent" />
+                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundPointerOver"
+                                                     Color="Transparent" />
                                     <SolidColorBrush x:Key="TopNavigationViewItemBackgroundPressed" Color="Transparent" />
-                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundSelected" Color="Transparent" />
-                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundSelectedPointerOver" Color="Transparent" />
-                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundSelectedPressed" Color="Transparent" />
-                                    <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver" Color="Transparent" />
+                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundSelected"
+                                                     Color="Transparent" />
+                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundSelectedPointerOver"
+                                                     Color="Transparent" />
+                                    <SolidColorBrush x:Key="TopNavigationViewItemBackgroundSelectedPressed"
+                                                     Color="Transparent" />
+                                    <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver"
+                                                     Color="Transparent" />
                                     <SolidColorBrush x:Key="NavigationViewItemBackgroundPressed" Color="Transparent" />
                                     <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected" Color="Transparent" />
-                                    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver" Color="Transparent" />
-                                    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPressed" Color="Transparent" />
+                                    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver"
+                                                     Color="Transparent" />
+                                    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPressed"
+                                                     Color="Transparent" />
                                     <Style TargetType="NavigationViewItem">
                                         <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
                                         <Setter Property="FontSize" Value="14" />

@@ -101,7 +101,8 @@ public sealed partial class HutaoCloudService
             {
                 if (!resp.IsSuccessStatusCode)
                 {
-                    DebugLog.Info("HutaoCloudService", $"[Hutao] {method} {path} HTTP={(int)resp.StatusCode} empty body");
+                    DebugLog.Info("HutaoCloudService",
+                        $"[Hutao] {method} {path} HTTP={(int)resp.StatusCode} empty body");
                     return (-(int)resp.StatusCode, null, null, default, resp.StatusCode);
                 }
 
@@ -116,9 +117,11 @@ public sealed partial class HutaoCloudService
                     TryReadInt(retEl, out var retCode))
                 {
                     var message = TryGetPropertyIgnoreCase(doc.RootElement, "message", out var msgEl)
-                        ? (msgEl.ValueKind == JsonValueKind.String ? msgEl.GetString() : msgEl.ValueKind == JsonValueKind.Null ? null : msgEl.GetRawText())
+                        ? (msgEl.ValueKind == JsonValueKind.String ? msgEl.GetString() :
+                            msgEl.ValueKind == JsonValueKind.Null ? null : msgEl.GetRawText())
                         : null;
-                    var l10nKey = TryGetPropertyIgnoreCase(doc.RootElement, "l10nKey", out var l10nEl) && l10nEl.ValueKind == JsonValueKind.String
+                    var l10nKey = TryGetPropertyIgnoreCase(doc.RootElement, "l10nKey", out var l10nEl) &&
+                                  l10nEl.ValueKind == JsonValueKind.String
                         ? l10nEl.GetString()
                         : null;
 
@@ -254,7 +257,8 @@ public sealed partial class HutaoCloudService
 
             var encrypted = File.ReadAllBytes(_sessionFilePath);
             var decrypted = ProtectedData.Unprotect(encrypted, DpapiEntropy, DataProtectionScope.CurrentUser);
-            var session = JsonSerializer.Deserialize<HutaoPersistedSession>(Encoding.UTF8.GetString(decrypted), JsonOptions);
+            var session =
+                JsonSerializer.Deserialize<HutaoPersistedSession>(Encoding.UTF8.GetString(decrypted), JsonOptions);
             if (session == null || string.IsNullOrWhiteSpace(session.RefreshToken)) return;
 
             _email = session.Email ?? string.Empty;
@@ -328,7 +332,8 @@ public sealed partial class HutaoCloudService
         if (combined.Contains("频繁", StringComparison.OrdinalIgnoreCase) ||
             combined.Contains("TooMany", StringComparison.OrdinalIgnoreCase) ||
             combined.Contains("Rate", StringComparison.OrdinalIgnoreCase) ||
-            combined.Contains("60", StringComparison.OrdinalIgnoreCase) && combined.Contains("秒", StringComparison.OrdinalIgnoreCase))
+            combined.Contains("60", StringComparison.OrdinalIgnoreCase) &&
+            combined.Contains("秒", StringComparison.OrdinalIgnoreCase))
         {
             return "HutaoSync_ErrRateLimited".GetLocalized();
         }
@@ -479,7 +484,8 @@ public sealed partial class HutaoCloudService
                         }
                     }
                 }
-                else if (prop.Value.ValueKind == JsonValueKind.String && !string.IsNullOrWhiteSpace(prop.Value.GetString()))
+                else if (prop.Value.ValueKind == JsonValueKind.String &&
+                         !string.IsNullOrWhiteSpace(prop.Value.GetString()))
                 {
                     return $"{prop.Name}: {prop.Value.GetString()}";
                 }

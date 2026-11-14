@@ -216,7 +216,11 @@ public sealed partial class MainWindow
         if (args.InvokedItemContainer is NavigationViewItem invokedItem &&
             invokedItem.Tag?.ToString() == CloudStorageNavTag)
         {
-            Views.CloudSyncWindow.ShowOrActivate();
+            dispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Low, () =>
+            {
+                if (_isExit) return;
+                Views.CloudSyncWindow.ShowFromSidebar();
+            });
         }
     }
 

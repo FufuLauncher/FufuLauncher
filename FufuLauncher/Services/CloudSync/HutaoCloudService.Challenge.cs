@@ -123,7 +123,8 @@ public sealed partial class HutaoCloudService
                 var maxRound = entry.Stat?.MaxRoundId ?? entry.MaxRoundId ?? 0;
                 var medalNum = entry.Stat?.MedalNum ?? entry.MedalNum ?? 0;
                 var avatarCount = req?.BackupAvatars.Count ?? 0;
-                var summary = string.Format("HutaoSync_TheaterSummaryFormat".GetLocalized(), maxRound, medalNum, avatarCount);
+                var summary = string.Format("HutaoSync_TheaterSummaryFormat".GetLocalized(), maxRound, medalNum,
+                    avatarCount);
 
                 items.Add(new FufuCloudChallengeItem
                 {
@@ -209,7 +210,9 @@ public sealed partial class HutaoCloudService
         var skippedIncompleteCount = 0;
         var failedCount = 0;
         var failureDetails = new List<string>();
-        var avatarCache = new Dictionary<string, (bool Ok, string ErrorMessage, List<HutaoSimpleAvatar> Avatars)>(StringComparer.Ordinal);
+        var avatarCache =
+            new Dictionary<string, (bool Ok, string ErrorMessage, List<HutaoSimpleAvatar> Avatars)>(StringComparer
+                .Ordinal);
 
         foreach (var item in targets)
         {
@@ -224,7 +227,8 @@ public sealed partial class HutaoCloudService
             if (item.Mode == 0)
             {
                 var abyss = SpiralAbyssPayloadParser.Parse(item.Payload);
-                if (abyss == null || !TryBuildSpiralAbyssData(abyss, item.ScheduleId, out var abyssData) || abyssData == null)
+                if (abyss == null || !TryBuildSpiralAbyssData(abyss, item.ScheduleId, out var abyssData) ||
+                    abyssData == null)
                 {
                     skippedIncompleteCount++;
                     continue;
@@ -240,12 +244,14 @@ public sealed partial class HutaoCloudService
                 {
                     failedCount++;
                     var avatarReason = !avatarResult.Ok && !string.IsNullOrWhiteSpace(avatarResult.ErrorMessage)
-                        ? string.Format("HutaoSync_ErrChallengeFetchAvatarsFormat".GetLocalized(), item.Uid, avatarResult.ErrorMessage)
+                        ? string.Format("HutaoSync_ErrChallengeFetchAvatarsFormat".GetLocalized(), item.Uid,
+                            avatarResult.ErrorMessage)
                         : string.Format("HutaoSync_ErrChallengeMissingAvatarsFormat".GetLocalized(), item.Uid);
                     if (!failureDetails.Contains(avatarReason, StringComparer.Ordinal))
                     {
                         failureDetails.Add(avatarReason);
                     }
+
                     continue;
                 }
 
@@ -292,7 +298,8 @@ public sealed partial class HutaoCloudService
                 else
                 {
                     failedCount++;
-                    var reason = ExtractChallengeFailureReason(rawRes.RetCode, rawRes.Message, rawRes.L10nKey, rawRes.HttpStatus);
+                    var reason = ExtractChallengeFailureReason(rawRes.RetCode, rawRes.Message, rawRes.L10nKey,
+                        rawRes.HttpStatus);
                     if (!string.IsNullOrWhiteSpace(reason) && !failureDetails.Contains(reason, StringComparer.Ordinal))
                     {
                         failureDetails.Add(reason);
@@ -306,7 +313,8 @@ public sealed partial class HutaoCloudService
                     ? el.Deserialize<RoleCombatEntryDto>(CycleChallengePayloadReader.SerializerOptions)
                     : null;
 
-                if (entry == null || !TryBuildRoleCombatRequest(item.Uid, entry, item.ScheduleId, out var combatReq) || combatReq == null)
+                if (entry == null || !TryBuildRoleCombatRequest(item.Uid, entry, item.ScheduleId, out var combatReq) ||
+                    combatReq == null)
                 {
                     skippedIncompleteCount++;
                     continue;
@@ -339,7 +347,8 @@ public sealed partial class HutaoCloudService
                 else
                 {
                     failedCount++;
-                    var reason = ExtractChallengeFailureReason(rawRes.RetCode, rawRes.Message, rawRes.L10nKey, rawRes.HttpStatus);
+                    var reason = ExtractChallengeFailureReason(rawRes.RetCode, rawRes.Message, rawRes.L10nKey,
+                        rawRes.HttpStatus);
                     if (!string.IsNullOrWhiteSpace(reason) && !failureDetails.Contains(reason, StringComparer.Ordinal))
                     {
                         failureDetails.Add(reason);
@@ -358,18 +367,22 @@ public sealed partial class HutaoCloudService
         {
             parts.Add(string.Format("HutaoSync_ChallengeUploadedPart".GetLocalized(), uploadedCount));
         }
+
         if (extendedCount > 0)
         {
             parts.Add("HutaoSync_ChallengeExtendedPart".GetLocalized());
         }
+
         if (skippedPastCount > 0)
         {
             parts.Add(string.Format("HutaoSync_ChallengeSkippedPastPart".GetLocalized(), skippedPastCount));
         }
+
         if (skippedIncompleteCount > 0)
         {
             parts.Add(string.Format("HutaoSync_ChallengeSkippedIncompletePart".GetLocalized(), skippedIncompleteCount));
         }
+
         if (failedCount > 0)
         {
             parts.Add(string.Format("HutaoSync_ChallengeFailedPart".GetLocalized(), failedCount));
@@ -401,12 +414,14 @@ public sealed partial class HutaoCloudService
         };
     }
 
-    private static bool TryBuildSpiralAbyssData(SpiralAbyssDto dto, string fallbackScheduleId, out HutaoSpiralAbyssData? result)
+    private static bool TryBuildSpiralAbyssData(SpiralAbyssDto dto, string fallbackScheduleId,
+        out HutaoSpiralAbyssData? result)
     {
         result = null;
 
         var schedStr = !string.IsNullOrWhiteSpace(dto.ScheduleId) ? dto.ScheduleId : fallbackScheduleId;
-        if (!int.TryParse(schedStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out var scheduleId) || scheduleId <= 0)
+        if (!int.TryParse(schedStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out var scheduleId) ||
+            scheduleId <= 0)
         {
             return false;
         }
@@ -423,7 +438,8 @@ public sealed partial class HutaoCloudService
         var take = dto.TakeDamageRank?.FirstOrDefault();
 
         if (dmg == null || defeat == null || energy == null || normal == null || take == null ||
-            dmg.AvatarId <= 0 || defeat.AvatarId <= 0 || energy.AvatarId <= 0 || normal.AvatarId <= 0 || take.AvatarId <= 0)
+            dmg.AvatarId <= 0 || defeat.AvatarId <= 0 || energy.AvatarId <= 0 || normal.AvatarId <= 0 ||
+            take.AvatarId <= 0)
         {
             return false;
         }
@@ -492,7 +508,8 @@ public sealed partial class HutaoCloudService
             ? entry.Schedule!.ScheduleId
             : (!string.IsNullOrWhiteSpace(entry.ScheduleId) ? entry.ScheduleId : fallbackScheduleId);
 
-        if (!int.TryParse(schedStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out var scheduleId) || scheduleId <= 0)
+        if (!int.TryParse(schedStr, NumberStyles.Integer, CultureInfo.InvariantCulture, out var scheduleId) ||
+            scheduleId <= 0)
         {
             return false;
         }
@@ -554,7 +571,9 @@ public sealed partial class HutaoCloudService
             return $"{start.Value.ToLocalTime():yyyy-MM-dd} ~ {end.Value.ToLocalTime():yyyy-MM-dd}";
         }
 
-        return string.IsNullOrWhiteSpace(fallbackSchedule) ? "-" : string.Format("HutaoSync_ScheduleFallbackFormat".GetLocalized(), fallbackSchedule);
+        return string.IsNullOrWhiteSpace(fallbackSchedule)
+            ? "-"
+            : string.Format("HutaoSync_ScheduleFallbackFormat".GetLocalized(), fallbackSchedule);
     }
 
     private static DateTimeOffset? ParseTimestampOrIso(string? raw)

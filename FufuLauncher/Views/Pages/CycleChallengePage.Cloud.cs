@@ -259,7 +259,8 @@ public sealed partial class CycleChallengePage
                 return;
             }
 
-            var uidSummary = fullSummary.Uids.FirstOrDefault(x => string.Equals(x.Uid, selectedUid, StringComparison.Ordinal));
+            var uidSummary =
+                fullSummary.Uids.FirstOrDefault(x => string.Equals(x.Uid, selectedUid, StringComparison.Ordinal));
             if (uidSummary is null)
             {
                 localSummaryText.Text = string.Format(
@@ -548,7 +549,8 @@ public sealed partial class CycleChallengePage
                     var confirmFlyoutPanel = new StackPanel { Spacing = 8, MaxWidth = 240 };
                     confirmFlyoutPanel.Children.Add(new TextBlock
                     {
-                        Text = string.Format("CloudSync_CycleChallengeConfirmOverwriteMsg".GetLocalized(), archive.Slot),
+                        Text = string.Format("CloudSync_CycleChallengeConfirmOverwriteMsg".GetLocalized(),
+                            archive.Slot),
                         TextWrapping = TextWrapping.Wrap,
                         FontSize = 12
                     });
@@ -569,7 +571,9 @@ public sealed partial class CycleChallengePage
                         var selectedUid = GetSelectedScopeUid();
                         var targetCount = string.IsNullOrWhiteSpace(selectedUid)
                             ? currentSummary.TotalCount
-                            : (currentSummary.Uids.FirstOrDefault(x => string.Equals(x.Uid, selectedUid, StringComparison.Ordinal))?.TotalCount ?? 0);
+                            : (currentSummary.Uids
+                                .FirstOrDefault(x => string.Equals(x.Uid, selectedUid, StringComparison.Ordinal))
+                                ?.TotalCount ?? 0);
                         if (targetCount == 0)
                         {
                             ShowFeedback(
@@ -736,7 +740,8 @@ public sealed partial class CycleChallengePage
             var selectedUid = GetSelectedScopeUid();
             var targetCount = string.IsNullOrWhiteSpace(selectedUid)
                 ? currentSummary.TotalCount
-                : (currentSummary.Uids.FirstOrDefault(x => string.Equals(x.Uid, selectedUid, StringComparison.Ordinal))?.TotalCount ?? 0);
+                : (currentSummary.Uids.FirstOrDefault(x => string.Equals(x.Uid, selectedUid, StringComparison.Ordinal))
+                    ?.TotalCount ?? 0);
             if (targetCount == 0)
             {
                 ShowFeedback(

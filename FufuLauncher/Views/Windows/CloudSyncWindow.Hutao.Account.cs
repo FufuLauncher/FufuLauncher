@@ -223,6 +223,7 @@ public sealed partial class CloudSyncWindow
                 {
                     ShowMessage(InfoBarSeverity.Error, "HutaoSync_FailedTitle".GetLocalized(), res.Message);
                 }
+
                 return;
             }
 
@@ -236,7 +237,9 @@ public sealed partial class CloudSyncWindow
             foreach (var dev in res.Data ?? new List<HutaoLoggedInDevice>())
             {
                 var devId = dev.EffectiveDeviceId;
-                var devName = !string.IsNullOrWhiteSpace(dev.EffectiveDeviceName) ? dev.EffectiveDeviceName : unknownName;
+                var devName = !string.IsNullOrWhiteSpace(dev.EffectiveDeviceName)
+                    ? dev.EffectiveDeviceName
+                    : unknownName;
                 var os = dev.EffectiveOs;
                 var isCurrent = !string.IsNullOrWhiteSpace(devId) &&
                                 string.Equals(devId, currentId, StringComparison.OrdinalIgnoreCase);
@@ -281,7 +284,8 @@ public sealed partial class CloudSyncWindow
         if (IsBusy || !EnsureHutaoLoggedInForUiAction()) return;
         if (sender is not FrameworkElement { Tag: string deviceId } || string.IsNullOrWhiteSpace(deviceId)) return;
 
-        var matched = _hutaoDevices.FirstOrDefault(x => string.Equals(x.DeviceId, deviceId, StringComparison.OrdinalIgnoreCase));
+        var matched = _hutaoDevices.FirstOrDefault(x =>
+            string.Equals(x.DeviceId, deviceId, StringComparison.OrdinalIgnoreCase));
         var displayName = matched?.TitleText ?? deviceId;
 
         var dialog = new ContentDialog
@@ -312,6 +316,7 @@ public sealed partial class CloudSyncWindow
             {
                 await RefreshHutaoDevicesAsync(silent: true);
             }
+
             RefreshHutaoUiState();
         }
         finally

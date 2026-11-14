@@ -41,7 +41,8 @@ public sealed partial class CycleChallengeService
 
                 case ChallengeMode.Theater:
                 {
-                    var stat = element.TryGetProperty("stat", out var statEl) && statEl.ValueKind is JsonValueKind.Object
+                    var stat = element.TryGetProperty("stat", out var statEl) &&
+                               statEl.ValueKind is JsonValueKind.Object
                         ? statEl
                         : default;
                     summary = new JsonObject
@@ -264,7 +265,8 @@ public sealed partial class CycleChallengeService
     private static bool TryReadMode(JsonElement obj, out int mode)
     {
         mode = -1;
-        if (!obj.TryGetProperty("mode", out var el) || el.ValueKind is not JsonValueKind.Number || !el.TryGetInt32(out var val))
+        if (!obj.TryGetProperty("mode", out var el) || el.ValueKind is not JsonValueKind.Number ||
+            !el.TryGetInt32(out var val))
         {
             return false;
         }

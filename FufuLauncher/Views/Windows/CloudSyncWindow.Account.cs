@@ -22,6 +22,7 @@ public sealed partial class CloudSyncWindow
             MaskAuthPasswords();
             DismissAuthOtpFeedback();
         }
+
         var authPanels = new UIElement[] { UnauthPanel, LoggedInAccountPanel };
         var targetIndex = loggedIn ? 1 : 0;
         var targetPanel = authPanels[targetIndex];
@@ -29,7 +30,8 @@ public sealed partial class CloudSyncWindow
         var animateAccountAuth = _isWindowContentLoaded &&
                                  AccountTabPanel?.Visibility == Visibility.Visible &&
                                  targetPanel.Visibility != Visibility.Visible;
-        SwitchSlidePanel(SlideChannel.AccountAuth, authPanels, targetIndex, direction, ContentViewport, animateAccountAuth);
+        SwitchSlidePanel(SlideChannel.AccountAuth, authPanels, targetIndex, direction, ContentViewport,
+            animateAccountAuth);
         UpdateAuthOtpButton();
 
         if (!loggedIn)
@@ -87,6 +89,7 @@ public sealed partial class CloudSyncWindow
             {
                 ResetArchiveList();
             }
+
             QuotaNotReadyHintText.Visibility = Visibility.Collapsed;
             QuotaDetailsPanel.Visibility = Visibility.Visible;
         }
@@ -173,6 +176,7 @@ public sealed partial class CloudSyncWindow
                         ShowMessage(InfoBarSeverity.Informational, "CloudSync_MsgCancelled".GetLocalized(),
                             "CloudSync_MsgCaptchaCancelled".GetLocalized(), isAuthOtpFeedback: true);
                     }
+
                     return;
                 }
 
@@ -219,6 +223,7 @@ public sealed partial class CloudSyncWindow
             {
                 _authOtpResendAt.Remove(entry.Key);
             }
+
             _authOtpResendAt[context] = now + retryAfter;
         }
 
@@ -728,6 +733,7 @@ public sealed partial class CloudSyncWindow
         {
             Activated -= OnDeleteDialogWindowActivated;
         }
+
         RefreshAccountUiState();
     }
 }

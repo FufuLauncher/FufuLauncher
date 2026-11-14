@@ -33,8 +33,7 @@ public sealed class HutaoApiResponse<T>
         set;
     }
 
-    [JsonIgnore]
-    public bool IsSuccess => RetCode == 0;
+    [JsonIgnore] public bool IsSuccess => RetCode == 0;
 }
 
 public sealed class HutaoTokenSet
@@ -114,7 +113,8 @@ public sealed class HutaoUserInfo
 
     [JsonIgnore]
     public bool HasValidGachaPlan =>
-        IsMaintainer || IsLicensedDeveloper || (GachaLogExpireAt.HasValue && GachaLogExpireAt.Value > DateTimeOffset.UtcNow);
+        IsMaintainer || IsLicensedDeveloper ||
+        (GachaLogExpireAt.HasValue && GachaLogExpireAt.Value > DateTimeOffset.UtcNow);
 
     [JsonIgnore]
     public bool HasValidCdnPlan =>
@@ -210,11 +210,13 @@ public sealed class HutaoLoggedInDevice
 
     [JsonIgnore]
     public string EffectiveOs =>
-        FirstNonEmpty(OperatingSystem, Os, Platform, ReadExtraString("os"), ReadExtraString("operating_system"), ReadExtraString("system"));
+        FirstNonEmpty(OperatingSystem, Os, Platform, ReadExtraString("os"), ReadExtraString("operating_system"),
+            ReadExtraString("system"));
 
     [JsonIgnore]
     public string EffectiveLoginTime =>
-        FirstNonEmpty(LastLoginTime, LoginTime, CreatedAt, ReadExtraString("last_login_time"), ReadExtraString("login_time"), ReadExtraString("created_at"));
+        FirstNonEmpty(LastLoginTime, LoginTime, CreatedAt, ReadExtraString("last_login_time"),
+            ReadExtraString("login_time"), ReadExtraString("created_at"));
 
     private string? ReadExtraString(string key)
     {
@@ -226,6 +228,7 @@ public sealed class HutaoLoggedInDevice
                 return kv.Value.ValueKind == JsonValueKind.String ? kv.Value.GetString() : kv.Value.ToString();
             }
         }
+
         return null;
     }
 
@@ -235,6 +238,7 @@ public sealed class HutaoLoggedInDevice
         {
             if (!string.IsNullOrWhiteSpace(candidate)) return candidate.Trim();
         }
+
         return string.Empty;
     }
 }

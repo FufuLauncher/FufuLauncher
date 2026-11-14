@@ -34,6 +34,7 @@ public sealed partial class CloudSyncWindow : Window
     private readonly ObservableCollection<CloudArchiveItem> _archives = new();
     private readonly DispatcherQueueTimer _authOtpTimer;
     private readonly Dictionary<(int Mode, string Email), DateTimeOffset> _authOtpResendAt = new();
+
     private enum SlideChannel
     {
         MainTab,
@@ -56,13 +57,12 @@ public sealed partial class CloudSyncWindow : Window
 
     private bool IsBusy => _isSendingAuthOtp || _busyOperations > 0 || _archiveLoadPending;
 
-    public static void ShowOrActivate(string? initialTabTag = null)
+    private static CloudSyncWindow GetOrCreateWindow(string? initialTabTag = null)
     {
         if (_current != null)
         {
             _current.SelectTab(initialTabTag);
-            _current.Activate();
-            return;
+            return _current;
         }
 
         var window = new CloudSyncWindow();
@@ -73,7 +73,28 @@ public sealed partial class CloudSyncWindow : Window
             window.SelectTab(initialTabTag);
         }
 
+        return window;
+    }
+
+    public static void ShowOrActivate(string? initialTabTag = null)
+    {
+        var window = GetOrCreateWindow(initialTabTag);
         window.Activate();
+    }
+
+    internal static void ShowFromSidebar()
+    {
+        var window = GetOrCreateWindow();
+        if (window._closed) return;
+
+        if (window.AppWindow?.Presenter is OverlappedPresenter presenter &&
+            presenter.State == OverlappedPresenterState.Minimized)
+        {
+            presenter.Restore();
+        }
+
+        window.Activate();
+        window.SetForegroundWindow();
     }
 
     public CloudSyncWindow() : this(
@@ -313,7 +334,8 @@ public sealed partial class CloudSyncWindow : Window
 
     private void OnNavSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
-        if (AccountTabPanel == null || QuotaTabPanel == null || ArchivesTabPanel == null || HutaoTabPanel == null) return;
+        if (AccountTabPanel == null || QuotaTabPanel == null || ArchivesTabPanel == null ||
+            HutaoTabPanel == null) return;
         if (args.SelectedItem is not NavigationViewItem item || item.Tag is not string tag) return;
 
         var targetIndex = tag switch
@@ -433,7 +455,8 @@ public sealed partial class CloudSyncWindow : Window
         var fadeEasing = new CubicEase { EasingMode = EasingMode.EaseOut };
 
         var storyboard = new Storyboard();
-        storyboard.Children.Add(CreateSlideDoubleAnimation(targetTranslate, "X", slideOffset, 0, slideDuration, slideEasing));
+        storyboard.Children.Add(CreateSlideDoubleAnimation(targetTranslate, "X", slideOffset, 0, slideDuration,
+            slideEasing));
         storyboard.Children.Add(CreateSlideDoubleAnimation(targetPanel, "Opacity", 0, 1.0, fadeDuration, fadeEasing));
 
         _slideStoryboards[channel] = storyboard;

@@ -18,16 +18,23 @@ public sealed partial class CloudSyncWindow
         try
         {
             HutaoStatsPeriodCombo.Items.Clear();
-            HutaoStatsPeriodCombo.Items.Add(new ComboBoxItem { Tag = "current", Content = "HutaoSync_StatsPeriodCurrent".GetLocalized() });
-            HutaoStatsPeriodCombo.Items.Add(new ComboBoxItem { Tag = "last", Content = "HutaoSync_StatsPeriodLast".GetLocalized() });
+            HutaoStatsPeriodCombo.Items.Add(new ComboBoxItem
+                { Tag = "current", Content = "HutaoSync_StatsPeriodCurrent".GetLocalized() });
+            HutaoStatsPeriodCombo.Items.Add(new ComboBoxItem
+                { Tag = "last", Content = "HutaoSync_StatsPeriodLast".GetLocalized() });
             HutaoStatsPeriodCombo.SelectedIndex = 0;
 
             HutaoStatsCategoryCombo.Items.Clear();
-            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem { Tag = "Util", Content = "HutaoSync_StatsCatUtil".GetLocalized() });
-            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem { Tag = "Attend", Content = "HutaoSync_StatsCatAttend".GetLocalized() });
-            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem { Tag = "Hold", Content = "HutaoSync_StatsCatHold".GetLocalized() });
-            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem { Tag = "Team", Content = "HutaoSync_StatsCatTeam".GetLocalized() });
-            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem { Tag = "Theater", Content = "HutaoSync_StatsCatTheater".GetLocalized() });
+            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem
+                { Tag = "Util", Content = "HutaoSync_StatsCatUtil".GetLocalized() });
+            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem
+                { Tag = "Attend", Content = "HutaoSync_StatsCatAttend".GetLocalized() });
+            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem
+                { Tag = "Hold", Content = "HutaoSync_StatsCatHold".GetLocalized() });
+            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem
+                { Tag = "Team", Content = "HutaoSync_StatsCatTeam".GetLocalized() });
+            HutaoStatsCategoryCombo.Items.Add(new ComboBoxItem
+                { Tag = "Theater", Content = "HutaoSync_StatsCatTheater".GetLocalized() });
             HutaoStatsCategoryCombo.SelectedIndex = 0;
 
             HutaoStatsFloorCombo.Items.Clear();
@@ -39,6 +46,7 @@ public sealed partial class CloudSyncWindow
                     Content = string.Format("HutaoSync_StatsFloorFormat".GetLocalized(), fl)
                 });
             }
+
             HutaoStatsFloorCombo.SelectedIndex = 0;
         }
         finally
@@ -92,7 +100,8 @@ public sealed partial class CloudSyncWindow
     {
         if (_suppressHutaoStatsFilterSync) return;
         var tag = (HutaoStatsFloorCombo.SelectedItem as ComboBoxItem)?.Tag?.ToString();
-        if (int.TryParse(tag, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out var floor))
+        if (int.TryParse(tag, System.Globalization.NumberStyles.Integer,
+                System.Globalization.CultureInfo.InvariantCulture, out var floor))
         {
             _hutaoStatsFloor = floor;
         }
@@ -228,7 +237,8 @@ public sealed partial class CloudSyncWindow
 
         IReadOnlyList<HutaoRankDisplayItem> sourceRows = _hutaoStatsCategory switch
         {
-            "Attend" => bundle.AttendanceByFloor.GetValueOrDefault(_hutaoStatsFloor) ?? new List<HutaoRankDisplayItem>(),
+            "Attend" => bundle.AttendanceByFloor.GetValueOrDefault(_hutaoStatsFloor) ??
+                        new List<HutaoRankDisplayItem>(),
             "Hold" => bundle.HoldingRates,
             "Team" => bundle.TeamsByFloor.GetValueOrDefault(_hutaoStatsFloor) ?? new List<HutaoRankDisplayItem>(),
             "Theater" => bundle.RoleCombatRates,

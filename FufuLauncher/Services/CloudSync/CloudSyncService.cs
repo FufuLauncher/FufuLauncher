@@ -246,17 +246,71 @@ public sealed partial class CloudSyncService : ICloudSyncService
 
     private sealed class RawHttpResponse
     {
-        public int StatusCode { get; init; }
-        public bool IsSuccessStatusCode { get; init; }
-        public string Body { get; init; } = string.Empty;
-        public TimeSpan? RetryAfter { get; init; }
-        public string? DataType { get; init; }
-        public string? Slot { get; init; }
-        public string? Sha256 { get; init; }
-        public long? CompressedBytes { get; init; }
-        public long? RawBytes { get; init; }
-        public bool IsNetworkError { get; init; }
-        public string? NetworkErrorMessage { get; init; }
+        public int StatusCode
+        {
+            get;
+            init;
+        }
+
+        public bool IsSuccessStatusCode
+        {
+            get;
+            init;
+        }
+
+        public string Body
+        {
+            get;
+            init;
+        } = string.Empty;
+
+        public TimeSpan? RetryAfter
+        {
+            get;
+            init;
+        }
+
+        public string? DataType
+        {
+            get;
+            init;
+        }
+
+        public string? Slot
+        {
+            get;
+            init;
+        }
+
+        public string? Sha256
+        {
+            get;
+            init;
+        }
+
+        public long? CompressedBytes
+        {
+            get;
+            init;
+        }
+
+        public long? RawBytes
+        {
+            get;
+            init;
+        }
+
+        public bool IsNetworkError
+        {
+            get;
+            init;
+        }
+
+        public string? NetworkErrorMessage
+        {
+            get;
+            init;
+        }
     }
 
     private async Task<CloudApiResult<T>> SendAnonymousJsonAsync<T>(HttpMethod method, string path,

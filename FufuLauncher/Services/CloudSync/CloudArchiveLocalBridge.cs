@@ -382,7 +382,8 @@ public static class CloudArchiveLocalBridge
                     if (existing.Count == 0 && File.Exists(assetsPath))
                     {
                         var masterJson = File.ReadAllText(assetsPath);
-                        var rawCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(masterJson, ReadOptions);
+                        var rawCategories =
+                            JsonSerializer.Deserialize<List<AchievementCategory>>(masterJson, ReadOptions);
                         if (rawCategories != null && rawCategories.Count > 0)
                         {
                             var catalogEntities = new List<AchievementEntity>();
@@ -425,7 +426,9 @@ public static class CloudArchiveLocalBridge
                         .GroupBy(e => e.Id)
                         .ToDictionary(g => g.Key, g => g.ToList());
 
-                    var updates = new Dictionary<int, (bool IsCompleted, int CurrentProgress, int MaxProgress, long CompletionTimestamp)>();
+                    var updates =
+                        new Dictionary<int, (bool IsCompleted, int CurrentProgress, int MaxProgress, long
+                            CompletionTimestamp)>();
                     var nowUnix = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
                     var count = 0;
 

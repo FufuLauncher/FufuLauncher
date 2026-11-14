@@ -175,7 +175,8 @@ public sealed class GameRecordApiClient
             {
                 foreach (var item in listArr.EnumerateArray())
                 {
-                    if (!item.TryGetProperty("id", out var idProp) || !idProp.TryGetInt32(out var avatarId) || avatarId <= 0)
+                    if (!item.TryGetProperty("id", out var idProp) || !idProp.TryGetInt32(out var avatarId) ||
+                        avatarId <= 0)
                     {
                         continue;
                     }
@@ -251,7 +252,8 @@ public sealed class GameRecordApiClient
                 foreach (var entry in detailArr.EnumerateArray())
                 {
                     if (!entry.TryGetProperty("base", out var baseObj) || baseObj.ValueKind != JsonValueKind.Object ||
-                        !baseObj.TryGetProperty("id", out var avatarIdProp) || !avatarIdProp.TryGetInt32(out var avatarId) ||
+                        !baseObj.TryGetProperty("id", out var avatarIdProp) ||
+                        !avatarIdProp.TryGetInt32(out var avatarId) ||
                         avatarId <= 0)
                     {
                         continue;
@@ -275,8 +277,10 @@ public sealed class GameRecordApiClient
                     {
                         foreach (var relic in relicsArr.EnumerateArray())
                         {
-                            if (relic.TryGetProperty("set", out var setObj) && setObj.ValueKind == JsonValueKind.Object &&
-                                setObj.TryGetProperty("id", out var setIdProp) && setIdProp.TryGetInt32(out var setId) &&
+                            if (relic.TryGetProperty("set", out var setObj) &&
+                                setObj.ValueKind == JsonValueKind.Object &&
+                                setObj.TryGetProperty("id", out var setIdProp) &&
+                                setIdProp.TryGetInt32(out var setId) &&
                                 setId > 0)
                             {
                                 relicSetIds.Add(setId);
@@ -352,7 +356,8 @@ public sealed class GameRecordApiClient
         if (response.Kind == ChallengeErrorKind.RiskControlRequired && !isOversea)
         {
             response = await TryApplyRiskChallengeAsync(
-                context, isOversea, method, apiName, rawQuery, jsonBody, challengePath, cookieOverride: null, response, token)
+                    context, isOversea, method, apiName, rawQuery, jsonBody, challengePath, cookieOverride: null,
+                    response, token)
                 .ConfigureAwait(false);
         }
 
@@ -372,8 +377,8 @@ public sealed class GameRecordApiClient
                         if (response.Kind == ChallengeErrorKind.RiskControlRequired && !isOversea)
                         {
                             response = await TryApplyRiskChallengeAsync(
-                                context, isOversea, method, apiName, rawQuery, jsonBody, challengePath,
-                                cookieOverride: null, response, token)
+                                    context, isOversea, method, apiName, rawQuery, jsonBody, challengePath,
+                                    cookieOverride: null, response, token)
                                 .ConfigureAwait(false);
                         }
                     }
@@ -390,7 +395,7 @@ public sealed class GameRecordApiClient
             if (response.Kind == ChallengeErrorKind.LoginExpired)
             {
                 var altResponse = await SendWithAlternateCookiesAsync(
-                    context, isOversea, method, apiName, rawQuery, jsonBody, challengePath, token)
+                        context, isOversea, method, apiName, rawQuery, jsonBody, challengePath, token)
                     .ConfigureAwait(false);
                 if (altResponse is not null)
                 {
@@ -413,7 +418,7 @@ public sealed class GameRecordApiClient
             if (!string.IsNullOrEmpty(challenge))
             {
                 return await SendWithFallbackAsync(
-                    context, isOversea, method, apiName, rawQuery, jsonBody, challenge, token, cookieOverride)
+                        context, isOversea, method, apiName, rawQuery, jsonBody, challenge, token, cookieOverride)
                     .ConfigureAwait(false);
             }
         }
@@ -439,13 +444,14 @@ public sealed class GameRecordApiClient
         foreach (var cookieOverride in alternateCookies)
         {
             var resp = await SendWithFallbackAsync(
-                context, isOversea, method, apiName, rawQuery, jsonBody, challenge: null, token, cookieOverride)
+                    context, isOversea, method, apiName, rawQuery, jsonBody, challenge: null, token, cookieOverride)
                 .ConfigureAwait(false);
 
             if (resp.Kind == ChallengeErrorKind.RiskControlRequired && !isOversea)
             {
                 resp = await TryApplyRiskChallengeAsync(
-                    context, isOversea, method, apiName, rawQuery, jsonBody, challengePath, cookieOverride, resp, token)
+                        context, isOversea, method, apiName, rawQuery, jsonBody, challengePath, cookieOverride, resp,
+                        token)
                     .ConfigureAwait(false);
             }
 
@@ -524,7 +530,8 @@ public sealed class GameRecordApiClient
             return [CnGameRecordBase];
         }
 
-        return apiName is "spiralAbyss" or ApiEndpoints.GameRecordCharacterListEndpoint or ApiEndpoints.GameRecordCharacterDetailEndpoint
+        return apiName is "spiralAbyss" or ApiEndpoints.GameRecordCharacterListEndpoint
+            or ApiEndpoints.GameRecordCharacterDetailEndpoint
             ? [OsGameRecordBase, OsEventBase]
             : [OsEventBase, OsGameRecordBase];
     }
@@ -579,7 +586,8 @@ public sealed class GameRecordApiClient
         }
 
         request.Headers.TryAddWithoutValidation(
-            HeaderNames.DS, MiHoYoHeaderFactory.CalculateDs2(HeaderSalts.OsGameRecord, SortQuery(rawQuery), jsonBody ?? string.Empty));
+            HeaderNames.DS,
+            MiHoYoHeaderFactory.CalculateDs2(HeaderSalts.OsGameRecord, SortQuery(rawQuery), jsonBody ?? string.Empty));
     }
 
     private async Task<bool> TryRefreshCookiesAsync(string accountId, bool isOversea, CancellationToken token)
@@ -600,13 +608,13 @@ public sealed class GameRecordApiClient
                 if (!string.IsNullOrWhiteSpace(aid))
                 {
                     string newCookieToken = await TryFetchExchangedTokenAsync(() => isOversea
-                        ? _overseaPassportClient.GetCookieAccountInfoBySTokenAsync(stoken, mid, aid, token)
-                        : _passportClient.GetCookieAccountInfoBySTokenAsync(stoken, mid, aid, token))
+                            ? _overseaPassportClient.GetCookieAccountInfoBySTokenAsync(stoken, mid, aid, token)
+                            : _passportClient.GetCookieAccountInfoBySTokenAsync(stoken, mid, aid, token))
                         .ConfigureAwait(false);
 
                     string newLToken = await TryFetchExchangedTokenAsync(() => isOversea
-                        ? _overseaPassportClient.GetLTokenBySTokenAsync(stoken, mid, aid, token)
-                        : _passportClient.GetLTokenBySTokenAsync(stoken, mid, aid, token))
+                            ? _overseaPassportClient.GetLTokenBySTokenAsync(stoken, mid, aid, token)
+                            : _passportClient.GetLTokenBySTokenAsync(stoken, mid, aid, token))
                         .ConfigureAwait(false);
 
                     var updated = new Dictionary<string, string>(cookies, StringComparer.Ordinal);
@@ -761,8 +769,10 @@ public sealed class GameRecordApiClient
         AddCandidate(("ltuid", ltuid), ("ltoken", ltoken));
         AddCandidate(("ltuid_v2", ltuidV2), ("ltoken_v2", ltokenV2));
         AddCandidate(("account_id", accountId), ("cookie_token", cookieToken), ("ltuid", ltuid), ("ltoken", ltoken));
-        AddCandidate(("account_id_v2", accountIdV2), ("cookie_token_v2", cookieTokenV2), ("ltuid_v2", ltuidV2), ("ltoken_v2", ltokenV2));
-        AddCandidate(("account_id_v2", accountIdV2), ("cookie_token_v2", cookieTokenV2), ("ltuid_v2", ltuidV2), ("ltoken_v2", ltokenV2), ("mid", mid));
+        AddCandidate(("account_id_v2", accountIdV2), ("cookie_token_v2", cookieTokenV2), ("ltuid_v2", ltuidV2),
+            ("ltoken_v2", ltokenV2));
+        AddCandidate(("account_id_v2", accountIdV2), ("cookie_token_v2", cookieTokenV2), ("ltuid_v2", ltuidV2),
+            ("ltoken_v2", ltokenV2), ("mid", mid));
 
         return candidates;
     }

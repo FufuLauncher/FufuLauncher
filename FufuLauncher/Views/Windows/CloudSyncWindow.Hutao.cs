@@ -213,7 +213,8 @@ public sealed partial class CloudSyncWindow
             _ = RefreshHutaoStatisticsAsync(silent: true);
         }
         else if (_currentHutaoSubTab == "HutaoAccount" && _hutaoCloud.IsLoggedIn &&
-                 !string.Equals(_hutaoDevicesLoadedForEmail, _hutaoCloud.CurrentEmail, StringComparison.OrdinalIgnoreCase))
+                 !string.Equals(_hutaoDevicesLoadedForEmail, _hutaoCloud.CurrentEmail,
+                     StringComparison.OrdinalIgnoreCase))
         {
             _ = RefreshHutaoDevicesAsync(silent: true);
         }
@@ -243,11 +244,13 @@ public sealed partial class CloudSyncWindow
                                HutaoTabPanel?.Visibility == Visibility.Visible &&
                                HutaoSubAccountPanel?.Visibility == Visibility.Visible &&
                                targetPanel.Visibility != Visibility.Visible;
-        SwitchSlidePanel(SlideChannel.HutaoAuth, hutaoAuthPanels, targetIndex, direction, HutaoSubTabViewport, animateHutaoAuth);
+        SwitchSlidePanel(SlideChannel.HutaoAuth, hutaoAuthPanels, targetIndex, direction, HutaoSubTabViewport,
+            animateHutaoAuth);
 
         if (!hutaoLoggedIn)
         {
-            if (string.IsNullOrWhiteSpace(HutaoEmailTextBox.Text) && !string.IsNullOrWhiteSpace(_hutaoCloud.CurrentEmail))
+            if (string.IsNullOrWhiteSpace(HutaoEmailTextBox.Text) &&
+                !string.IsNullOrWhiteSpace(_hutaoCloud.CurrentEmail))
             {
                 HutaoEmailTextBox.Text = _hutaoCloud.CurrentEmail;
             }
@@ -300,7 +303,8 @@ public sealed partial class CloudSyncWindow
 
             if (AccountHutaoStatusText != null && AccountHutaoActionButton != null)
             {
-                AccountHutaoStatusText.Text = string.Format("CloudSync_AccountHutaoSignedInFormat".GetLocalized(), displayAccount);
+                AccountHutaoStatusText.Text =
+                    string.Format("CloudSync_AccountHutaoSignedInFormat".GetLocalized(), displayAccount);
                 AccountHutaoActionButton.Content = "CloudSync_AccountHutaoManageBtn".GetLocalized();
             }
 
@@ -322,14 +326,16 @@ public sealed partial class CloudSyncWindow
                 HutaoRedeemButton.IsEnabled = !IsBusy;
             }
 
-            if (!string.Equals(_hutaoDevicesLoadedForEmail, _hutaoCloud.CurrentEmail, StringComparison.OrdinalIgnoreCase) &&
+            if (!string.Equals(_hutaoDevicesLoadedForEmail, _hutaoCloud.CurrentEmail,
+                    StringComparison.OrdinalIgnoreCase) &&
                 !_hutaoDevicesLoading)
             {
                 _ = RefreshHutaoDevicesAsync(silent: true);
             }
 
             if (_currentHutaoSubTab == "HutaoPull" &&
-                !string.Equals(_hutaoEntriesLoadedForEmail, _hutaoCloud.CurrentEmail, StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(_hutaoEntriesLoadedForEmail, _hutaoCloud.CurrentEmail,
+                    StringComparison.OrdinalIgnoreCase) &&
                 !_hutaoEntriesLoading)
             {
                 _ = RefreshHutaoGachaEntriesAsync(silent: true);
@@ -402,9 +408,10 @@ public sealed partial class CloudSyncWindow
 
     private void UpdateHutaoRepeaterEmptyStates()
     {
-        HutaoGachaEntriesEmptyText.Text = !string.IsNullOrWhiteSpace(_selectedRoleUid) && _allHutaoGachaEntries.Count > 0
-            ? string.Format("HutaoSync_PullFilteredEmptyHintFormat".GetLocalized(), _selectedRoleUid)
-            : "HutaoSync_PullEmptyHint".GetLocalized();
+        HutaoGachaEntriesEmptyText.Text =
+            !string.IsNullOrWhiteSpace(_selectedRoleUid) && _allHutaoGachaEntries.Count > 0
+                ? string.Format("HutaoSync_PullFilteredEmptyHintFormat".GetLocalized(), _selectedRoleUid)
+                : "HutaoSync_PullEmptyHint".GetLocalized();
         HutaoGachaEntriesEmptyText.Visibility = _hutaoGachaEntries.Count == 0
             ? Visibility.Visible
             : Visibility.Collapsed;
@@ -416,9 +423,10 @@ public sealed partial class CloudSyncWindow
             ? Visibility.Visible
             : Visibility.Collapsed;
 
-        FufuChallengeItemsEmptyText.Text = !string.IsNullOrWhiteSpace(_selectedRoleUid) && _allFufuChallengeItems.Count > 0
-            ? string.Format("HutaoSync_ChallengeFilteredEmptyHintFormat".GetLocalized(), _selectedRoleUid)
-            : "HutaoSync_ChallengeInspectEmptyHint".GetLocalized();
+        FufuChallengeItemsEmptyText.Text =
+            !string.IsNullOrWhiteSpace(_selectedRoleUid) && _allFufuChallengeItems.Count > 0
+                ? string.Format("HutaoSync_ChallengeFilteredEmptyHintFormat".GetLocalized(), _selectedRoleUid)
+                : "HutaoSync_ChallengeInspectEmptyHint".GetLocalized();
         FufuChallengeItemsEmptyText.Visibility = _fufuChallengeItems.Count == 0
             ? Visibility.Visible
             : Visibility.Collapsed;
@@ -506,6 +514,7 @@ public sealed partial class CloudSyncWindow
                 ShowMessage(InfoBarSeverity.Error, "CloudSync_RefreshFailedTitle".GetLocalized(),
                     _cloudSync.FormatFriendlyError(res.Code, res.Message, res.HttpStatusCode));
             }
+
             return;
         }
 

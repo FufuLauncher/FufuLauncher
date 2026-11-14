@@ -99,7 +99,10 @@ public sealed partial class HutaoCloudService
             if (endIdsRes.Data is { Count: > 0 })
             {
                 activeQueryTypes = endIdsRes.Data
-                    .Where(kv => kv.Value > 0 && int.TryParse(kv.Key, NumberStyles.Integer, CultureInfo.InvariantCulture, out var qt) && QueryTypes.Contains(qt))
+                    .Where(kv =>
+                        kv.Value > 0 &&
+                        int.TryParse(kv.Key, NumberStyles.Integer, CultureInfo.InvariantCulture, out var qt) &&
+                        QueryTypes.Contains(qt))
                     .Select(kv => int.Parse(kv.Key, CultureInfo.InvariantCulture))
                     .Distinct()
                     .ToList();
@@ -118,7 +121,9 @@ public sealed partial class HutaoCloudService
                     var path = cursor.HasValue
                         ? $"{ApiEndpoints.HutaoGachaLimitedRetrievePath}?uid={Uri.EscapeDataString(uid)}&configType={queryType}&endId={cursor.Value}&count=200"
                         : $"{ApiEndpoints.HutaoGachaLimitedRetrievePath}?uid={Uri.EscapeDataString(uid)}&configType={queryType}&count=200";
-                    var pageRes = await SendAuthenticatedAsync<List<HutaoGachaItem>>(HttpMethod.Get, path, null, cancellationToken);
+                    var pageRes =
+                        await SendAuthenticatedAsync<List<HutaoGachaItem>>(HttpMethod.Get, path, null,
+                            cancellationToken);
                     if (!pageRes.Ok)
                     {
                         return new HutaoOperationResult<HutaoBridgeTransferSummary>
@@ -325,7 +330,8 @@ public sealed partial class HutaoCloudService
 
             if (!endIdsRes.Ok)
             {
-                DebugLog.Info("HutaoCloudService", $"[Hutao] PushGacha EndIds failed for UID {entry.Uid}: {endIdsRes.Message}");
+                DebugLog.Info("HutaoCloudService",
+                    $"[Hutao] PushGacha EndIds failed for UID {entry.Uid}: {endIdsRes.Message}");
                 return new HutaoOperationResult<HutaoBridgeTransferSummary>
                 {
                     Ok = false,
@@ -341,7 +347,8 @@ public sealed partial class HutaoCloudService
 
             foreach (var rec in entry.List)
             {
-                if (!long.TryParse((rec.Id ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var id) || id <= 0)
+                if (!long.TryParse((rec.Id ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture,
+                        out var id) || id <= 0)
                 {
                     skippedInvalidCount++;
                     continue;
@@ -360,7 +367,9 @@ public sealed partial class HutaoCloudService
                     continue;
                 }
 
-                var queryType = gachaType == 400 ? 301 : ParseGachaTypeInt(rec.UigfGachaType, gachaType.ToString(CultureInfo.InvariantCulture));
+                var queryType = gachaType == 400
+                    ? 301
+                    : ParseGachaTypeInt(rec.UigfGachaType, gachaType.ToString(CultureInfo.InvariantCulture));
                 if (queryType is not (100 or 200 or 301 or 302 or 500))
                 {
                     queryType = gachaType == 400 ? 301 : 200;
@@ -421,7 +430,8 @@ public sealed partial class HutaoCloudService
 
                 if (!uploadRes.Ok)
                 {
-                    DebugLog.Info("HutaoCloudService", $"[Hutao] PushGacha Upload failed for UID {entry.Uid} (batchCount={batch.Count}): {uploadRes.Message}");
+                    DebugLog.Info("HutaoCloudService",
+                        $"[Hutao] PushGacha Upload failed for UID {entry.Uid} (batchCount={batch.Count}): {uploadRes.Message}");
                     return new HutaoOperationResult<HutaoBridgeTransferSummary>
                     {
                         Ok = false,
@@ -483,7 +493,9 @@ public sealed partial class HutaoCloudService
 
         var gachaType = ValidGachaTypes.Contains(item.GachaType)
             ? item.GachaType.ToString(CultureInfo.InvariantCulture)
-            : (ValidGachaTypes.Contains(item.QueryType) ? item.QueryType.ToString(CultureInfo.InvariantCulture) : "200");
+            : (ValidGachaTypes.Contains(item.QueryType)
+                ? item.QueryType.ToString(CultureInfo.InvariantCulture)
+                : "200");
 
         var queryTypeStr = item.QueryType is 100 or 200 or 301 or 302 or 500
             ? item.QueryType.ToString(CultureInfo.InvariantCulture)
@@ -626,8 +638,10 @@ public sealed partial class HutaoCloudService
             catalog.ById.TryGetValue(id, out var meta))
         {
             if (string.IsNullOrWhiteSpace(rec.Name) && !string.IsNullOrEmpty(meta.Name)) rec.Name = meta.Name;
-            if (string.IsNullOrWhiteSpace(rec.ItemType) && !string.IsNullOrEmpty(meta.ItemType)) rec.ItemType = meta.ItemType;
-            if (string.IsNullOrWhiteSpace(rec.RankType) && !string.IsNullOrEmpty(meta.RankType)) rec.RankType = meta.RankType;
+            if (string.IsNullOrWhiteSpace(rec.ItemType) && !string.IsNullOrEmpty(meta.ItemType))
+                rec.ItemType = meta.ItemType;
+            if (string.IsNullOrWhiteSpace(rec.RankType) && !string.IsNullOrEmpty(meta.RankType))
+                rec.RankType = meta.RankType;
         }
         else if (string.IsNullOrWhiteSpace(rec.ItemId) &&
                  !string.IsNullOrWhiteSpace(rec.Name) &&
@@ -734,7 +748,8 @@ public sealed partial class HutaoCloudService
         UIGFItem rec,
         (Dictionary<int, (string Name, string ItemType, string RankType)> ById, Dictionary<string, int> ByName) catalog)
     {
-        if (int.TryParse((rec.ItemId ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var directId) && directId > 0)
+        if (int.TryParse((rec.ItemId ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture,
+                out var directId) && directId > 0)
         {
             return directId;
         }
@@ -750,13 +765,15 @@ public sealed partial class HutaoCloudService
 
     private static int ParseGachaTypeInt(string? primary, string? fallback)
     {
-        if (int.TryParse((primary ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var p) &&
+        if (int.TryParse((primary ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture,
+                out var p) &&
             ValidGachaTypes.Contains(p))
         {
             return p;
         }
 
-        if (int.TryParse((fallback ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var f) &&
+        if (int.TryParse((fallback ?? string.Empty).Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture,
+                out var f) &&
             ValidGachaTypes.Contains(f))
         {
             return f;
@@ -769,12 +786,15 @@ public sealed partial class HutaoCloudService
     {
         if (string.IsNullOrWhiteSpace(rawTime)) return null;
 
-        if (DateTimeOffset.TryParse(rawTime.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dto))
+        if (DateTimeOffset.TryParse(rawTime.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind,
+                out var dto))
         {
-            return dto.ToOffset(TimeSpan.FromHours(tzHours)).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+            return dto.ToOffset(TimeSpan.FromHours(tzHours))
+                .ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }
 
-        if (DateTime.TryParse(rawTime.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces, out var dt))
+        if (DateTime.TryParse(rawTime.Trim(), CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces,
+                out var dt))
         {
             return dt.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
         }

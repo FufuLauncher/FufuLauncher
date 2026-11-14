@@ -106,7 +106,8 @@ public sealed partial class HutaoCloudService
             theaterRes.RetCode != 0)
         {
             return Fail<HutaoStatisticsBundle>(
-                FormatFriendlyError(overviewRes.RetCode, overviewRes.Message, overviewRes.L10nKey, overviewRes.HttpStatus));
+                FormatFriendlyError(overviewRes.RetCode, overviewRes.Message, overviewRes.L10nKey,
+                    overviewRes.HttpStatus));
         }
 
         var byId = catalog.ById;
@@ -167,7 +168,8 @@ public sealed partial class HutaoCloudService
         return hasTraveler && ids.Contains(10000021) && ids.Contains(10000015) && ids.Contains(10000006);
     }
 
-    private static string ExtractChallengeFailureReason(int retCode, string? message, string? l10nKey, HttpStatusCode httpStatus)
+    private static string ExtractChallengeFailureReason(int retCode, string? message, string? l10nKey,
+        HttpStatusCode httpStatus)
     {
         if (retCode == 500020 ||
             (!string.IsNullOrWhiteSpace(message) && message.Contains("无效", StringComparison.OrdinalIgnoreCase)))
@@ -250,7 +252,8 @@ public sealed partial class HutaoCloudService
             var item = sorted[i];
             var constParts = (item.Constellations ?? new List<HutaoItemRateIntDouble>())
                 .OrderBy(c => c.Item)
-                .Select(c => string.Format("HutaoSync_StatsConstellationFormat".GetLocalized(), c.Item, $"{c.Rate * 100:0.0}%"))
+                .Select(c => string.Format("HutaoSync_StatsConstellationFormat".GetLocalized(), c.Item,
+                    $"{c.Rate * 100:0.0}%"))
                 .ToList();
 
             list.Add(new HutaoRankDisplayItem
@@ -282,6 +285,7 @@ public sealed partial class HutaoCloudService
             {
                 combined.AddRange(floor.Up.Select(t => (upperLabel, t.Item, t.Rate)));
             }
+
             if (floor.Down != null)
             {
                 combined.AddRange(floor.Down.Select(t => (lowerLabel, t.Item, t.Rate)));
@@ -304,7 +308,8 @@ public sealed partial class HutaoCloudService
                 {
                     RankNumberText = (i + 1).ToString(CultureInfo.InvariantCulture),
                     PrimaryText = memberNames.Count > 0 ? string.Join(" / ", memberNames) : entry.ItemIds,
-                    SecondaryText = $"{entry.SideLabel} · {string.Format("HutaoSync_StatsFloorFormat".GetLocalized(), floor.Floor)}",
+                    SecondaryText =
+                        $"{entry.SideLabel} · {string.Format("HutaoSync_StatsFloorFormat".GetLocalized(), floor.Floor)}",
                     MetricText = string.Format("HutaoSync_StatsTeamCountFormat".GetLocalized(), entry.Rate)
                 });
             }
@@ -334,7 +339,8 @@ public sealed partial class HutaoCloudService
             {
                 RankNumberText = (i + 1).ToString(CultureInfo.InvariantCulture),
                 PrimaryText = ResolveAvatarName(entry.Item, byId),
-                SecondaryText = string.Format("HutaoSync_StatsRoleCombatRecordCountFormat".GetLocalized(), stats.RecordTotal),
+                SecondaryText = string.Format("HutaoSync_StatsRoleCombatRecordCountFormat".GetLocalized(),
+                    stats.RecordTotal),
                 MetricText = $"{entry.Rate * 100:0.0}%"
             });
         }

@@ -251,7 +251,8 @@ public sealed partial class HutaoCloudService : IHutaoCloudService
         return null;
     }
 
-    private async Task<(Dictionary<int, (string Name, string ItemType, string RankType)> ById, Dictionary<string, int> ByName)>
+    private async Task<(Dictionary<int, (string Name, string ItemType, string RankType)> ById, Dictionary<string, int>
+            ByName)>
         ResolveItemCatalogAsync(CancellationToken cancellationToken)
     {
         var entities = _metadataRepo.GetAllMetadata();
@@ -352,19 +353,23 @@ public sealed partial class HutaoCloudService : IHutaoCloudService
                     : string.Empty;
                 if (string.IsNullOrEmpty(itemId)) continue;
 
-                var icon = elem.TryGetProperty("icon", out var iconProp) ? iconProp.GetString() ?? string.Empty : string.Empty;
+                var icon = elem.TryGetProperty("icon", out var iconProp)
+                    ? iconProp.GetString() ?? string.Empty
+                    : string.Empty;
                 var rank = string.Empty;
                 if (isAvatar && elem.TryGetProperty("avatar_level", out var avLv) && avLv.TryGetInt32(out var avRank))
                 {
                     rank = avRank.ToString(CultureInfo.InvariantCulture);
                 }
-                else if (!isAvatar && elem.TryGetProperty("weapon_level", out var wpLv) && wpLv.TryGetInt32(out var wpRank))
+                else if (!isAvatar && elem.TryGetProperty("weapon_level", out var wpLv) &&
+                         wpLv.TryGetInt32(out var wpRank))
                 {
                     rank = wpRank.ToString(CultureInfo.InvariantCulture);
                 }
 
                 var elementSrc = string.Empty;
-                if (isAvatar && elem.TryGetProperty("element_attr_id", out var elemProp) && elemProp.TryGetInt32(out var elemId))
+                if (isAvatar && elem.TryGetProperty("element_attr_id", out var elemProp) &&
+                    elemProp.TryGetInt32(out var elemId))
                 {
                     elementSrc = ElementMapping.GetElementIconUrl(elemId) ?? string.Empty;
                 }

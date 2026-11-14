@@ -74,6 +74,7 @@ public sealed partial class CloudSyncWindow
                     ArchivesEmptyText.Text = _cloudSync.FormatFriendlyError(res.Code, res.Message, res.HttpStatusCode);
                     ArchivesEmptyText.Visibility = Visibility.Visible;
                 }
+
                 return;
             }
 

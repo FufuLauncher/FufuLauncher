@@ -26,7 +26,8 @@ public sealed partial class CloudSyncWindow
             var activeUid = activeRole?.game_uid ?? string.Empty;
 
             var orderedAccounts = _accountManager.GetAllAccounts()
-                .OrderByDescending(a => activeAcc != null && string.Equals(a.Id, activeAcc.Id, StringComparison.Ordinal))
+                .OrderByDescending(a =>
+                    activeAcc != null && string.Equals(a.Id, activeAcc.Id, StringComparison.Ordinal))
                 .ToList();
 
             var seenUids = new HashSet<string>(StringComparer.Ordinal);
@@ -205,7 +206,8 @@ public sealed partial class CloudSyncWindow
         {
             var preferredSlot = FindPreferredSlotForRole(_fufuChallengeSlots, _selectedRoleUid);
             if (!string.IsNullOrWhiteSpace(preferredSlot) &&
-                !string.Equals(FufuChallengeArchiveComboBox.SelectedItem as string, preferredSlot, StringComparison.Ordinal))
+                !string.Equals(FufuChallengeArchiveComboBox.SelectedItem as string, preferredSlot,
+                    StringComparison.Ordinal))
             {
                 FufuChallengeArchiveComboBox.SelectedItem = preferredSlot;
                 return;
@@ -236,7 +238,8 @@ public sealed partial class CloudSyncWindow
     private string ResolveUidDisplayTitle(string uid)
     {
         if (string.IsNullOrWhiteSpace(uid)) return string.Empty;
-        var matched = _accountRoles.FirstOrDefault(r => !r.IsAllRolesOption && string.Equals(r.Uid, uid, StringComparison.Ordinal));
+        var matched = _accountRoles.FirstOrDefault(r =>
+            !r.IsAllRolesOption && string.Equals(r.Uid, uid, StringComparison.Ordinal));
         return matched != null ? matched.ShortDisplayText : GameRoleDisplay.Archive(uid);
     }
 
@@ -309,7 +312,8 @@ public sealed partial class CloudSyncWindow
     {
         if (slots.Count == 0 || string.IsNullOrWhiteSpace(uid)) return null;
 
-        var exactPrefixed = slots.FirstOrDefault(s => string.Equals(s, $"uid_{uid}", StringComparison.OrdinalIgnoreCase));
+        var exactPrefixed =
+            slots.FirstOrDefault(s => string.Equals(s, $"uid_{uid}", StringComparison.OrdinalIgnoreCase));
         if (exactPrefixed != null) return exactPrefixed;
 
         var exactUid = slots.FirstOrDefault(s => string.Equals(s, uid, StringComparison.OrdinalIgnoreCase));
