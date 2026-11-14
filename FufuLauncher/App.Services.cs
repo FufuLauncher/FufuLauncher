@@ -187,6 +187,7 @@ public partial class App
                 services.AddSingleton<Services.CodeSigning.CodeSigningTrustService>();
                 services.AddSingleton<Services.CodeSigning.ModTrustGate>();
                 services.AddSingleton<ICloudSyncService, CloudSyncService>();
+                services.AddSingleton<IHutaoCloudService, HutaoCloudService>();
 
                 services.Configure<LocalSettingsOptions>(
                     context.Configuration.GetSection(nameof(LocalSettingsOptions)));

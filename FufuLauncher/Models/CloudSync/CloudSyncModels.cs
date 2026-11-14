@@ -350,11 +350,15 @@ public sealed class CloudArchiveItem
         _ => DataType.ToUpperInvariant()
     };
 
+    public bool IsUiaf => string.Equals(DataType, "uiaf", StringComparison.OrdinalIgnoreCase);
+
+    public bool IsUigf => string.Equals(DataType, "uigf", StringComparison.OrdinalIgnoreCase);
+
     public bool IsPlayTime => string.Equals(DataType, "playtime", StringComparison.OrdinalIgnoreCase);
 
     public bool IsChallenge => string.Equals(DataType, "challenge", StringComparison.OrdinalIgnoreCase);
 
-    public bool CanMergeToLocal => IsPlayTime || IsChallenge;
+    public bool CanMergeToLocal => IsPlayTime || IsChallenge || IsUiaf || IsUigf;
 
     public Microsoft.UI.Xaml.Visibility PlayTimeMergeVisibility =>
         IsPlayTime ? Microsoft.UI.Xaml.Visibility.Visible : Microsoft.UI.Xaml.Visibility.Collapsed;

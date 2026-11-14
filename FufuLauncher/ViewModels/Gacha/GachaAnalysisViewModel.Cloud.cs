@@ -276,6 +276,11 @@ public partial class GachaAnalysisViewModel
             SaveGachaLogsToDb();
         }
 
+        if (_savedMetadata.Count == 0)
+        {
+            LoadMetadataFromDb();
+        }
+
         var totalImportedRecords = 0;
         var importedUids = new List<string>(validAccounts.Count);
 

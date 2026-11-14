@@ -29,6 +29,9 @@ public sealed partial class CloudSyncWindow : Window
     private static CloudSyncWindow? _current;
 
     private readonly ICloudSyncService _cloudSync;
+    private readonly IHutaoCloudService _hutaoCloud;
+    private readonly AccountManager? _accountManager;
+    private readonly GameRoleService? _gameRoleService;
     private readonly ObservableCollection<CloudArchiveItem> _archives = new();
     private readonly DispatcherQueueTimer _authOtpTimer;
     private readonly Dictionary<(int Mode, string Email), DateTimeOffset> _authOtpResendAt = new();
@@ -63,13 +66,33 @@ public sealed partial class CloudSyncWindow : Window
         window.Activate();
     }
 
-    public CloudSyncWindow() : this(App.GetService<ICloudSyncService>())
+    public CloudSyncWindow() : this(
+        App.GetService<ICloudSyncService>(),
+        App.GetService<IHutaoCloudService>(),
+        TryGetService<AccountManager>(),
+        TryGetService<GameRoleService>())
     {
     }
 
     internal CloudSyncWindow(ICloudSyncService cloudSync)
+        : this(
+            cloudSync,
+            App.GetService<IHutaoCloudService>(),
+            TryGetService<AccountManager>(),
+            TryGetService<GameRoleService>())
+    {
+    }
+
+    internal CloudSyncWindow(
+        ICloudSyncService cloudSync,
+        IHutaoCloudService hutaoCloud,
+        AccountManager? accountManager = null,
+        GameRoleService? gameRoleService = null)
     {
         _cloudSync = cloudSync;
+        _hutaoCloud = hutaoCloud;
+        _accountManager = accountManager ?? TryGetService<AccountManager>();
+        _gameRoleService = gameRoleService ?? TryGetService<GameRoleService>();
         InitializeComponent();
         _authOtpTimer = DispatcherQueue.CreateTimer();
         _authOtpTimer.Interval = TimeSpan.FromSeconds(1);
@@ -105,8 +128,10 @@ public sealed partial class CloudSyncWindow : Window
             _closed = true;
             _authOtpTimer.Stop();
             _cloudSync.SessionChanged -= OnSessionChanged;
+            CleanupHutaoBridge();
         };
 
+        InitializeHutaoBridge();
         EmailTextBox.Text = _cloudSync.CurrentEmail;
         RefreshAccountUiState();
         if (_cloudSync.IsLoggedIn)
@@ -296,6 +321,7 @@ public sealed partial class CloudSyncWindow : Window
             ArchivesSummaryText.Text = "CloudSync_ArchivesDefaultSubtitle".GetLocalized();
             ArchivesEmptyText.Text = "CloudSync_ArchivesSignInEmpty".GetLocalized();
             ArchivesEmptyText.Visibility = Visibility.Visible;
+            RefreshHutaoUiState();
             return;
         }
 
@@ -343,26 +369,35 @@ public sealed partial class CloudSyncWindow : Window
             QuotaNotReadyHintText.Visibility = Visibility.Collapsed;
             QuotaDetailsPanel.Visibility = Visibility.Visible;
         }
+
+        RefreshHutaoUiState();
     }
 
     private void OnNavSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
     {
-        if (AccountTabPanel == null || QuotaTabPanel == null || ArchivesTabPanel == null) return;
+        if (AccountTabPanel == null || QuotaTabPanel == null || ArchivesTabPanel == null || HutaoTabPanel == null) return;
         if (args.SelectedItem is not NavigationViewItem item || item.Tag is not string tag) return;
 
         if (tag != "Account") MaskAuthPasswords();
         AccountTabPanel.Visibility = tag == "Account" ? Visibility.Visible : Visibility.Collapsed;
         QuotaTabPanel.Visibility = tag == "Quota" ? Visibility.Visible : Visibility.Collapsed;
         ArchivesTabPanel.Visibility = tag == "Archives" ? Visibility.Visible : Visibility.Collapsed;
+        HutaoTabPanel.Visibility = tag == "Hutao" ? Visibility.Visible : Visibility.Collapsed;
+
+        if (_cloudSync.IsLocked && tag != "Account")
+        {
+            ShowMessage(InfoBarSeverity.Warning, "CloudSync_LockedBannerTitle".GetLocalized(),
+                "CloudSync_LockedBannerDetail".GetLocalized());
+        }
+
+        if (tag == "Hutao")
+        {
+            _ = RefreshHutaoTabOnSelectAsync();
+            return;
+        }
 
         if (!_cloudSync.IsLoggedIn || _cloudSync.IsLocked)
         {
-            if (_cloudSync.IsLocked && tag != "Account")
-            {
-                ShowMessage(InfoBarSeverity.Warning, "CloudSync_LockedBannerTitle".GetLocalized(),
-                    "CloudSync_LockedBannerDetail".GetLocalized());
-            }
-
             return;
         }
 
@@ -1214,9 +1249,31 @@ public sealed partial class CloudSyncWindow : Window
 
             _displayedArchiveFilter = filter;
             _archives.Clear();
+            var isAllFilter = string.Equals(filter, "all", StringComparison.OrdinalIgnoreCase);
+            if (isAllFilter)
+            {
+                _fufuUigfSlots.Clear();
+                _fufuChallengeSlots.Clear();
+            }
+
             foreach (var item in res.Data.Archives)
             {
                 _archives.Add(item);
+                if (!isAllFilter) continue;
+
+                if (item.IsUigf)
+                {
+                    _fufuUigfSlots.Add(item.Slot);
+                }
+                else if (item.IsChallenge)
+                {
+                    _fufuChallengeSlots.Add(item.Slot);
+                }
+            }
+
+            if (isAllFilter)
+            {
+                SyncHutaoArchivePickers();
             }
 
             ArchivesSummaryText.Text = string.Format(
@@ -1440,6 +1497,18 @@ public sealed partial class CloudSyncWindow : Window
                     "CloudSync_ErrInvalidFormat".GetLocalized());
             }
 
+            return;
+        }
+
+        if (item.IsUiaf)
+        {
+            await MergeUiafArchiveToLocalAsync(item.Slot, pullRes.JsonContent);
+            return;
+        }
+
+        if (item.IsUigf)
+        {
+            await MergeUigfArchiveToLocalAsync(item.Slot, pullRes.JsonContent);
             return;
         }
 
@@ -1816,5 +1885,17 @@ public sealed partial class CloudSyncWindow : Window
             "challenge" => CycleChallengeService.TryConvertChallengeJsonToCloudJson(rawJson, appVersion),
             _ => rawJson
         };
+    }
+
+    private static T? TryGetService<T>() where T : class
+    {
+        try
+        {
+            return App.GetService<T>();
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

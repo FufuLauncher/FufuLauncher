@@ -495,6 +495,34 @@ namespace FufuLauncher.Constants
         public const string CloudSyncDataDeletePath = "/api/data/delete";
         public const string CloudSyncDataDeleteAllPath = "/api/data/delete-all";
 
+        public const string HutaoApiBaseUrl = "https://homa.snapgenshin.cn";
+        public const string HutaoPassportVerifyPath = "/Passport/v2/Verify";
+        public const string HutaoPassportRegisterPath = "/Passport/v2/Register";
+        public const string HutaoPassportLoginPath = "/Passport/v2/Login";
+        public const string HutaoPassportResetPasswordPath = "/Passport/v2/ResetPassword";
+        public const string HutaoPassportRefreshTokenPath = "/Passport/v2/RefreshToken";
+        public const string HutaoPassportUserInfoPath = "/Passport/v2/UserInfo";
+        public const string HutaoPassportRevokeTokenPath = "/Passport/v2/RevokeToken";
+        public const string HutaoPassportRevokeAllTokensPath = "/Passport/v2/RevokeAllTokens";
+        public const string HutaoPassportLoggedInDevicesPath = "/Passport/v2/LoggedInDevices";
+        public const string HutaoRedeemUsePath = "/Redeem/Use";
+        public const string HutaoSponsorUrl = "https://afdian.com/item/80d3b9decf9011edb5f452540025c377";
+        public const string HutaoGachaEntriesPath = "/GachaLog/Entries";
+        public const string HutaoGachaEndIdsPath = "/GachaLog/EndIds";
+        public const string HutaoGachaLimitedRetrievePath = "/GachaLog/LimitedRetrieve";
+        public const string HutaoGachaUploadPath = "/GachaLog/Upload";
+        public const string HutaoGachaDeletePath = "/GachaLog/Delete";
+        public const string HutaoRecordUploadPath = "/Record/Upload";
+        public const string HutaoRecordCheckPath = "/Record/Check";
+        public const string HutaoRecordRankPath = "/Record/Rank";
+        public const string HutaoRoleCombatUploadPath = "/RoleCombat/Upload";
+        public const string HutaoRoleCombatStatisticsPath = "/RoleCombat/Statistics";
+        public const string HutaoStatisticsOverviewPath = "/Statistics/Overview";
+        public const string HutaoStatisticsUtilizationRatePath = "/Statistics/Avatar/UtilizationRate";
+        public const string HutaoStatisticsAttendanceRatePath = "/Statistics/Avatar/AttendanceRate";
+        public const string HutaoStatisticsHoldingRatePath = "/Statistics/Avatar/HoldingRate";
+        public const string HutaoStatisticsTeamCombinationPath = "/Statistics/Team/Combination";
+
         public const string CertificateSyncPublicPrefix = "/public/";
         public const string CertificateSyncIndexPath = CertificateSyncPublicPrefix + "index.json";
 
@@ -546,6 +574,8 @@ namespace FufuLauncher.Constants
         public const string GameRecordSpiralAbyssEndpoint = "spiralAbyss";
         public const string GameRecordRoleCombatEndpoint = "role_combat";
         public const string GameRecordHardChallengeEndpoint = "hard_challenge";
+        public const string GameRecordCharacterListEndpoint = "character/list";
+        public const string GameRecordCharacterDetailEndpoint = "character/detail";
 
         public const string BbsProtocolGameRecordApiPrefix = GameRecordApiPathPrefix + "/";
         public const string BbsProtocolRecordPath = "/record/";

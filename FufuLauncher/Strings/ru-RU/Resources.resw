@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -10138,5 +10137,764 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="CloudSync_WindowTitle" xml:space="preserve">
     <value>Облачный архив FufuLauncher</value>
+  </data>
+  <data name="CloudSync_NavHutao" xml:space="preserve">
+    <value>Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_SectionTitle" xml:space="preserve">
+    <value>Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_SectionSubtitle" xml:space="preserve">
+    <value>Sync wish and cycle challenge records between Hutao Cloud and your FufuLauncher Cloud Sync archives</value>
+  </data>
+  <data name="HutaoSync_BridgeRuleTitle" xml:space="preserve">
+    <value>Sync Guide</value>
+  </data>
+  <data name="HutaoSync_BridgeRuleDesc" xml:space="preserve">
+    <value>Данные из Hutao Cloud сохраняются в облачный архив FufuLauncher для экспорта или импорта. При отправке в Hutao Cloud данные читаются из ваших облачных архивов FufuLauncher.</value>
+  </data>
+  <data name="HutaoSync_AchievementNotice" xml:space="preserve">
+    <value>Achievements note: Hutao Cloud does not support achievement sync. Continue using the Achievements window or Cloud Archives to back up, export, or import achievement profiles.</value>
+  </data>
+  <data name="HutaoSync_FufuRequiredBannerTitle" xml:space="preserve">
+    <value>Sign In &amp; Unlock FufuLauncher Cloud Sync to Transfer</value>
+  </data>
+  <data name="HutaoSync_FufuRequiredBannerMsg" xml:space="preserve">
+    <value>Здесь доступны управление аккаунтом Hutao Cloud, статистика и поддержка. Для обмена с облачными архивами FufuLauncher войдите в «Аккаунт и безопасность».</value>
+  </data>
+  <data name="HutaoSync_GotoFufuAccountBtn" xml:space="preserve">
+    <value>Go to Account &amp; Security</value>
+  </data>
+  <data name="HutaoSync_AccountTitle" xml:space="preserve">
+    <value>Hutao Cloud Account</value>
+  </data>
+  <data name="HutaoSync_AccountSubtitle" xml:space="preserve">
+    <value>Войдите в Hutao Cloud для просмотра статуса и устройств. Для обмена с облачными архивами FufuLauncher требуется вход в FufuLauncher.</value>
+  </data>
+  <data name="HutaoSync_ModeLogin" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="HutaoSync_ModeRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="HutaoSync_ModeReset" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="HutaoSync_EmailHeader" xml:space="preserve">
+    <value>Hutao Email</value>
+  </data>
+  <data name="HutaoSync_EmailPlaceholder" xml:space="preserve">
+    <value>Enter your Hutao account email</value>
+  </data>
+  <data name="HutaoSync_PasswordHeader" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="HutaoSync_PasswordPlaceholder" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="HutaoSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="HutaoSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Re-enter your password</value>
+  </data>
+  <data name="HutaoSync_OtpHeader" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="HutaoSync_OtpPlaceholder" xml:space="preserve">
+    <value>Enter email verification code</value>
+  </data>
+  <data name="HutaoSync_SendOtpBtn" xml:space="preserve">
+    <value>Send Code</value>
+  </data>
+  <data name="HutaoSync_SendOtpCooldownFormat" xml:space="preserve">
+    <value>Resend ({0}s)</value>
+  </data>
+  <data name="HutaoSync_SubmitLogin" xml:space="preserve">
+    <value>Sign In to Hutao</value>
+  </data>
+  <data name="HutaoSync_SubmitRegister" xml:space="preserve">
+    <value>Register &amp; Sign In</value>
+  </data>
+  <data name="HutaoSync_SubmitReset" xml:space="preserve">
+    <value>Reset &amp; Sign In</value>
+  </data>
+  <data name="HutaoSync_LabelAccount" xml:space="preserve">
+    <value>Signed in as</value>
+  </data>
+  <data name="HutaoSync_LabelGachaPlan" xml:space="preserve">
+    <value>Wish Backup Service</value>
+  </data>
+  <data name="HutaoSync_PlanActiveFormat" xml:space="preserve">
+    <value>Active until {0}</value>
+  </data>
+  <data name="HutaoSync_PlanDeveloper" xml:space="preserve">
+    <value>Permanent Access</value>
+  </data>
+  <data name="HutaoSync_PlanExpired" xml:space="preserve">
+    <value>Not active or expired (redeem under Sponsor &amp; Support or upload current-period challenges to extend)</value>
+  </data>
+  <data name="HutaoSync_RefreshAccountBtn" xml:space="preserve">
+    <value>Refresh Status</value>
+  </data>
+  <data name="HutaoSync_LogoutBtn" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="HutaoSync_PullSectionTitle" xml:space="preserve">
+    <value>Синхронизация из Hutao Cloud в облачный архив FufuLauncher (Молитвы)</value>
+  </data>
+  <data name="HutaoSync_PullSectionDesc" xml:space="preserve">
+    <value>Загрузите историю молитв с Hutao Cloud и создайте или обновите облачный архив FufuLauncher.</value>
+  </data>
+  <data name="HutaoSync_LoadHutaoListBtn" xml:space="preserve">
+    <value>Load Hutao Cloud List</value>
+  </data>
+  <data name="HutaoSync_ToggleSelectBtn" xml:space="preserve">
+    <value>Select / Deselect All</value>
+  </data>
+  <data name="HutaoSync_TargetSlotHeader" xml:space="preserve">
+    <value>Имя нового облачного архива FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_TargetSlotPlaceholder" xml:space="preserve">
+    <value>Letters, numbers, underscores, hyphens, or dots only</value>
+  </data>
+  <data name="HutaoSync_PickExistingSlotHeader" xml:space="preserve">
+    <value>Существующий архив молитв FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_PickExistingSlotPlaceholder" xml:space="preserve">
+    <value>Выберите облачный архив молитв FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_MergeExistingCheck" xml:space="preserve">
+    <value>Объединить и сохранить прежние записи в облачном архиве FufuLauncher (Рекомендуется)</value>
+  </data>
+  <data name="HutaoSync_PullEmptyHint" xml:space="preserve">
+    <value>Click 'Load Hutao Cloud List' above to view characters saved on Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_PullActionBtn" xml:space="preserve">
+    <value>Сохранить в облачный архив FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_DeleteHutaoUidBtn" xml:space="preserve">
+    <value>Delete from Hutao</value>
+  </data>
+  <data name="HutaoSync_ConfirmDeleteUidTitle" xml:space="preserve">
+    <value>Confirm Hutao Cloud Deletion</value>
+  </data>
+  <data name="HutaoSync_ConfirmDeleteUidMsgFormat" xml:space="preserve">
+    <value>Удалить все молитвы UID {0} в Hutao Cloud? Это не затронет облачные архивы FufuLauncher.</value>
+  </data>
+  <data name="HutaoSync_GachaEntryCountFormat" xml:space="preserve">
+    <value>{0} wish records</value>
+  </data>
+  <data name="HutaoSync_PushGachaTitle" xml:space="preserve">
+    <value>Отправка из облачного архива FufuLauncher в Hutao Cloud (Молитвы)</value>
+  </data>
+  <data name="HutaoSync_PushGachaDesc" xml:space="preserve">
+    <value>Выберите сохранённый облачный архив молитв FufuLauncher и отправьте записи в Hutao Cloud.</value>
+  </data>
+  <data name="HutaoSync_SelectFufuGachaArchivePlaceholder" xml:space="preserve">
+    <value>Выберите архив молитв FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_RefreshFufuArchiveBtn" xml:space="preserve">
+    <value>Refresh List</value>
+  </data>
+  <data name="HutaoSync_InspectArchiveBtn" xml:space="preserve">
+    <value>Load Archive Contents</value>
+  </data>
+  <data name="HutaoSync_PushGachaEmptyHint" xml:space="preserve">
+    <value>При выборе облачного архива FufuLauncher содержимое загрузится автоматически.</value>
+  </data>
+  <data name="HutaoSync_PushGachaActionBtn" xml:space="preserve">
+    <value>Upload Selected to Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_ChallengeTitle" xml:space="preserve">
+    <value>Отправка из облачного архива FufuLauncher в Hutao Cloud (Бездна и Театр)</value>
+  </data>
+  <data name="HutaoSync_ChallengeDesc" xml:space="preserve">
+    <value>Выберите архив испытаний FufuLauncher (только текущий цикл). Hutao Cloud принимает данные только для общей статистики.</value>
+  </data>
+  <data name="HutaoSync_SelectFufuChallengeArchivePlaceholder" xml:space="preserve">
+    <value>Выберите архив испытаний FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_ChallengeInspectEmptyHint" xml:space="preserve">
+    <value>При выборе архива испытаний FufuLauncher содержимое загрузится автоматически.</value>
+  </data>
+  <data name="HutaoSync_ChallengeActionBtn" xml:space="preserve">
+    <value>Upload Selected to Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_ModeAbyss" xml:space="preserve">
+    <value>Spiral Abyss</value>
+  </data>
+  <data name="HutaoSync_ModeTheater" xml:space="preserve">
+    <value>Imaginarium Theater</value>
+  </data>
+  <data name="HutaoSync_AbyssSummaryFormat" xml:space="preserve">
+    <value>Deepest Floor {0} · {1} Stars</value>
+  </data>
+  <data name="HutaoSync_TheaterSummaryFormat" xml:space="preserve">
+    <value>Act {0} · {1} Medals · {2} Supporting Cast</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusCurrent" xml:space="preserve">
+    <value>Current Period</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusPast" xml:space="preserve">
+    <value>Past Period</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusIncomplete" xml:space="preserve">
+    <value>Incomplete Stats</value>
+  </data>
+  <data name="HutaoSync_ScheduleFallbackFormat" xml:space="preserve">
+    <value>Season {0}</value>
+  </data>
+  <data name="HutaoSync_ChallengeUploadedPart" xml:space="preserve">
+    <value>Uploaded {0} record(s)</value>
+  </data>
+  <data name="HutaoSync_ChallengeExtendedPart" xml:space="preserve">
+    <value>Hutao wish backup time extended</value>
+  </data>
+  <data name="HutaoSync_ChallengeSkippedPastPart" xml:space="preserve">
+    <value>Skipped {0} past-period record(s)</value>
+  </data>
+  <data name="HutaoSync_ChallengeSkippedIncompletePart" xml:space="preserve">
+    <value>Skipped {0} incomplete record(s)</value>
+  </data>
+  <data name="HutaoSync_ChallengeFailedPart" xml:space="preserve">
+    <value>{0} record(s) failed to upload</value>
+  </data>
+  <data name="HutaoSync_SuccessTitle" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="HutaoSync_FailedTitle" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="HutaoSync_HintTitle" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="HutaoSync_MsgVerifySent" xml:space="preserve">
+    <value>Verification code sent. Please check your inbox.</value>
+  </data>
+  <data name="HutaoSync_MsgLoginSuccess" xml:space="preserve">
+    <value>Signed in to Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>Registered and signed in to Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgResetSuccess" xml:space="preserve">
+    <value>Password reset and signed in to Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgLogoutSuccess" xml:space="preserve">
+    <value>Signed out of Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgAccountRefreshed" xml:space="preserve">
+    <value>Hutao Cloud account status updated</value>
+  </data>
+  <data name="HutaoSync_MsgEntriesLoadedFormat" xml:space="preserve">
+    <value>Loaded wish history for {0} character(s) on Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgFufuUigfLoadedFormat" xml:space="preserve">
+    <value>Загружены молитвы {0} перс. из облачного архива FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_MsgFufuChallengeLoadedFormat" xml:space="preserve">
+    <value>Загружено {0} записей Бездны/Театра из облачного архива FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_MsgDeleteUidSuccessFormat" xml:space="preserve">
+    <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
+    <value>Сохранено {1} молитв для {0} перс. в облачный архив FufuLauncher «{2}» (всего {3}).</value>
+  </data>
+  <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
+    <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgPushGachaUpToDate" xml:space="preserve">
+    <value>Hutao Cloud already has all latest wish records from this archive</value>
+  </data>
+  <data name="HutaoSync_MsgChallengeNothingUploaded" xml:space="preserve">
+    <value>No eligible current-period challenge records to upload</value>
+  </data>
+  <data name="HutaoSync_ErrEnterEmail" xml:space="preserve">
+    <value>Please enter your Hutao account email first</value>
+  </data>
+  <data name="HutaoSync_ErrEnterAccountPassword" xml:space="preserve">
+    <value>Please enter your Hutao email and password</value>
+  </data>
+  <data name="HutaoSync_ErrEnterCompleteAuth" xml:space="preserve">
+    <value>Please fill in your email, password, and verification code</value>
+  </data>
+  <data name="HutaoSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>The two passwords do not match</value>
+  </data>
+  <data name="HutaoSync_ErrRateLimited" xml:space="preserve">
+    <value>Requests are too frequent. Please wait a moment before trying again.</value>
+  </data>
+  <data name="HutaoSync_ErrAuthExpired" xml:space="preserve">
+    <value>Your Hutao Cloud session has expired. Please sign in again.</value>
+  </data>
+  <data name="HutaoSync_ErrNoGachaService" xml:space="preserve">
+    <value>Your Hutao Cloud wish backup service is not active or has expired</value>
+  </data>
+  <data name="HutaoSync_ErrUidLimit" xml:space="preserve">
+    <value>Your Hutao Cloud account has reached the maximum of 5 saved characters. Please delete an unused UID first.</value>
+  </data>
+  <data name="HutaoSync_ErrInvalidVerifyCode" xml:space="preserve">
+    <value>The verification code is invalid or expired</value>
+  </data>
+  <data name="HutaoSync_ErrAccountExists" xml:space="preserve">
+    <value>This email is already registered on Hutao Cloud. Please sign in directly.</value>
+  </data>
+  <data name="HutaoSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>Incorrect email or password. Please verify and try again.</value>
+  </data>
+  <data name="HutaoSync_ErrNotCurrentPeriod" xml:space="preserve">
+    <value>Hutao Cloud only accepts current-period Spiral Abyss and Imaginarium Theater records</value>
+  </data>
+  <data name="HutaoSync_ErrNetwork" xml:space="preserve">
+    <value>Unable to reach Hutao Cloud. Please check your network connection.</value>
+  </data>
+  <data name="HutaoSync_ErrTimeout" xml:space="preserve">
+    <value>Connection to Hutao Cloud timed out. Please try again.</value>
+  </data>
+  <data name="HutaoSync_ErrGeneric" xml:space="preserve">
+    <value>Unable to complete the Hutao Cloud operation. Please try again later.</value>
+  </data>
+  <data name="HutaoSync_ErrHutaoLoginRequired" xml:space="preserve">
+    <value>Please sign in to your Hutao Cloud account first</value>
+  </data>
+  <data name="HutaoSync_ErrFufuLoginRequired" xml:space="preserve">
+    <value>Please sign in to your FufuLauncher Cloud Sync account under Account &amp; Security first</value>
+  </data>
+  <data name="HutaoSync_ErrSelectUidFirst" xml:space="preserve">
+    <value>Please select at least one character UID</value>
+  </data>
+  <data name="HutaoSync_ErrSelectFufuArchive" xml:space="preserve">
+    <value>Сначала выберите облачный архив FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_ErrArchiveNoValidRecords" xml:space="preserve">
+    <value>В выбранном облачном архиве FufuLauncher нет подходящих записей</value>
+  </data>
+  <data name="HutaoSync_ErrNoHutaoGachaData" xml:space="preserve">
+    <value>No downloadable wish history found on Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_ErrNoSupportedChallengeRecords" xml:space="preserve">
+    <value>В облачном архиве FufuLauncher не найдены записи Бездны или Театра</value>
+  </data>
+  <data name="HutaoSync_ErrSelectChallengeFirst" xml:space="preserve">
+    <value>Please select at least one challenge record to upload</value>
+  </data>
+  <data name="CloudSync_UiafTargetCurrentDefault" xml:space="preserve">
+    <value>Currently Active Achievement Profile</value>
+  </data>
+  <data name="CloudSync_UiafTargetCurrentNamedFormat" xml:space="preserve">
+    <value>Currently Active Profile ({0})</value>
+  </data>
+  <data name="CloudSync_UiafTargetNamedFormat" xml:space="preserve">
+    <value>Local Backup Profile: {0}</value>
+  </data>
+  <data name="CloudSync_UiafTargetNewProfile" xml:space="preserve">
+    <value>Create New Local Achievement Profile...</value>
+  </data>
+  <data name="CloudSync_UiafDefaultProfileName" xml:space="preserve">
+    <value>Default Profile</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileEmptyErr" xml:space="preserve">
+    <value>Please enter a name for the new achievement profile</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileExistsErr" xml:space="preserve">
+    <value>An achievement profile with this name already exists</value>
+  </data>
+  <data name="CloudSync_UiafMergeFailed" xml:space="preserve">
+    <value>Failed to import achievement archive. Please check the archive data.</value>
+  </data>
+  <data name="CloudSync_UiafImportDialogTitle" xml:space="preserve">
+    <value>Import Achievement Archive to Software</value>
+  </data>
+  <data name="CloudSync_UiafImportSummaryFormat" xml:space="preserve">
+    <value>This cloud archive contains {0} achievement records ({1} completed). Choose which local achievement profile to import into:</value>
+  </data>
+  <data name="CloudSync_UiafTargetHeader" xml:space="preserve">
+    <value>Target Profile</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileHeader" xml:space="preserve">
+    <value>New Profile Name</value>
+  </data>
+  <data name="CloudSync_UiafNewProfilePlaceholder" xml:space="preserve">
+    <value>Enter new local profile name</value>
+  </data>
+  <data name="CloudSync_UiafImportTip" xml:space="preserve">
+    <value>Merging keeps higher progress and completed achievements without overwriting existing completions.</value>
+  </data>
+  <data name="CloudSync_UiafMergeSuccessTitle" xml:space="preserve">
+    <value>Achievements Imported</value>
+  </data>
+  <data name="CloudSync_UiafMergeSuccessFormat" xml:space="preserve">
+    <value>Imported cloud archive '{0}' into local profile '{1}' and updated {2} achievement(s).</value>
+  </data>
+  <data name="CloudSync_UiafMergeFailedTitle" xml:space="preserve">
+    <value>Achievement Import Failed</value>
+  </data>
+  <data name="CloudSync_UigfImportDialogTitle" xml:space="preserve">
+    <value>Import Wish Archive to Software</value>
+  </data>
+  <data name="CloudSync_UigfImportSummary" xml:space="preserve">
+    <value>Select the character UIDs to import into your local Wish History:</value>
+  </data>
+  <data name="CloudSync_UigfImportTip" xml:space="preserve">
+    <value>Records will be merged cleanly by ID without losing your existing local wish history.</value>
+  </data>
+  <data name="CloudSync_UigfMergeSuccessTitle" xml:space="preserve">
+    <value>Wish History Imported</value>
+  </data>
+  <data name="CloudSync_UigfMergeSuccessFormat" xml:space="preserve">
+    <value>Merged {1} character(s) ({2} records processed, active UID {3}) from archive '{0}' into local Wish History.</value>
+  </data>
+  <data name="CloudSync_UigfMergeFailedTitle" xml:space="preserve">
+    <value>Wish History Import Failed</value>
+  </data>
+  <data name="CloudSync_ImportConfirmBtn" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="CloudSync_AccountHutaoTitle" xml:space="preserve">
+    <value>Hutao Cloud Account</value>
+  </data>
+  <data name="CloudSync_AccountHutaoDesc" xml:space="preserve">
+    <value>Sign in and manage your Hutao Cloud account here. Saving to or uploading from cloud archives still requires signing in to and unlocking your FufuLauncher Cloud Sync account.</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignedOut" xml:space="preserve">
+    <value>Not signed in to Hutao Cloud</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignedInFormat" xml:space="preserve">
+    <value>Signed in as: {0}</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignInBtn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="CloudSync_AccountHutaoManageBtn" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="HutaoSync_SubTabAccount" xml:space="preserve">
+    <value>Hutao Account</value>
+  </data>
+  <data name="HutaoSync_SubTabPullWish" xml:space="preserve">
+    <value>Download Wishes</value>
+  </data>
+  <data name="HutaoSync_SubTabPushWish" xml:space="preserve">
+    <value>Upload Wishes</value>
+  </data>
+  <data name="HutaoSync_SubTabChallenge" xml:space="preserve">
+    <value>Upload Abyss &amp; Theater</value>
+  </data>
+  <data name="HutaoSync_OpenSponsorPageBtn" xml:space="preserve">
+    <value>Open Hutao Sponsor Page</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeDeviceMsgFormat" xml:space="preserve">
+    <value>Sign out device '{0}' from Hutao Cloud? If this is your current device, you will need to sign in again.</value>
+  </data>
+  <data name="HutaoSync_RedeemDesc" xml:space="preserve">
+    <value>Enter an official Hutao Cloud sponsor redemption code to activate or extend service duration for your signed-in Hutao account.</value>
+  </data>
+  <data name="HutaoSync_RedeemTitle" xml:space="preserve">
+    <value>Redeem Code</value>
+  </data>
+  <data name="HutaoSync_RoleDeveloper" xml:space="preserve">
+    <value>Licensed Developer</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeAllDevicesTitle" xml:space="preserve">
+    <value>Sign Out All Devices</value>
+  </data>
+  <data name="HutaoSync_LabelAccelPlan" xml:space="preserve">
+    <value>Download Acceleration</value>
+  </data>
+  <data name="HutaoSync_NoBoundRolesHint" xml:space="preserve">
+    <value>No bound game roles found on current accounts; showing all UIDs from archives and Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_LabelNormalizedAccount" xml:space="preserve">
+    <value>Normalized Username</value>
+  </data>
+  <data name="HutaoSync_DevicesDesc" xml:space="preserve">
+    <value>View devices signed in to your Hutao Cloud account and sign out individual devices or all devices remotely.</value>
+  </data>
+  <data name="HutaoSync_SponsorFreeTipDesc" xml:space="preserve">
+    <value>Submitting your current-period Spiral Abyss or Imaginarium Theater records under Upload Abyss &amp; Theater grants or extends free wish cloud backup time.</value>
+  </data>
+  <data name="HutaoSync_ActiveRoleSuffix" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="HutaoSync_SponsorSignInHint" xml:space="preserve">
+    <value>Please sign in to your Hutao Cloud account under Hutao Account before redeeming a code.</value>
+  </data>
+  <data name="HutaoSync_GameRoleHeader" xml:space="preserve">
+    <value>Game Role</value>
+  </data>
+  <data name="HutaoSync_DevicesTitle" xml:space="preserve">
+    <value>Signed-In Devices</value>
+  </data>
+  <data name="HutaoSync_MsgDeviceRevoked" xml:space="preserve">
+    <value>Selected device has been signed out</value>
+  </data>
+  <data name="HutaoSync_SponsorGotoLoginBtn" xml:space="preserve">
+    <value>Sign In to Hutao Account</value>
+  </data>
+  <data name="HutaoSync_RefreshDevicesBtn" xml:space="preserve">
+    <value>Refresh Devices</value>
+  </data>
+  <data name="HutaoSync_MsgRolesRefreshedFormat" xml:space="preserve">
+    <value>Updated bound roles list ({0} role(s))</value>
+  </data>
+  <data name="HutaoSync_DeviceLoginTimeFormat" xml:space="preserve">
+    <value>Last sign-in: {0}</value>
+  </data>
+  <data name="HutaoSync_AllRolesOption" xml:space="preserve">
+    <value>All Bound Roles (Show All)</value>
+  </data>
+  <data name="HutaoSync_RedeemPlaceholder" xml:space="preserve">
+    <value>Enter Hutao Cloud redemption code</value>
+  </data>
+  <data name="HutaoSync_PushGachaFilteredEmptyHintFormat" xml:space="preserve">
+    <value>No wish records found for UID {0} in this archive. Switch archives or select All Bound Roles.</value>
+  </data>
+  <data name="HutaoSync_DeviceIdFormat" xml:space="preserve">
+    <value>ID: {0}</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeDeviceTitle" xml:space="preserve">
+    <value>Confirm Device Sign-Out</value>
+  </data>
+  <data name="HutaoSync_RoleMaintainer" xml:space="preserve">
+    <value>Maintainer</value>
+  </data>
+  <data name="HutaoSync_DeviceCurrentBadge" xml:space="preserve">
+    <value>Current Device</value>
+  </data>
+  <data name="HutaoSync_RoleStandard" xml:space="preserve">
+    <value>Standard User</value>
+  </data>
+  <data name="HutaoSync_SubTabSponsor" xml:space="preserve">
+    <value>Sponsor &amp; Support</value>
+  </data>
+  <data name="HutaoSync_MsgRedeemDetailFormat" xml:space="preserve">
+    <value>Code redeemed ({0}). Account service validity has been updated.</value>
+  </data>
+  <data name="HutaoSync_SponsorEntryDesc" xml:space="preserve">
+    <value>Visit the official Hutao Cloud Afdian sponsor page to support server operations and obtain redemption codes for wish cloud backup or download acceleration services.</value>
+  </data>
+  <data name="HutaoSync_ErrRedeemEmpty" xml:space="preserve">
+    <value>Please enter a redemption code first</value>
+  </data>
+  <data name="HutaoSync_RevokeAllDevicesBtn" xml:space="preserve">
+    <value>Sign Out All Devices</value>
+  </data>
+  <data name="HutaoSync_DeviceUnknownName" xml:space="preserve">
+    <value>Unknown Device</value>
+  </data>
+  <data name="HutaoSync_MsgRedeemSuccess" xml:space="preserve">
+    <value>Code redeemed successfully. Account service validity has been updated.</value>
+  </data>
+  <data name="HutaoSync_ChallengeFilteredEmptyHintFormat" xml:space="preserve">
+    <value>No Abyss or Theater records found for UID {0} in this archive. Switch archives or select All Bound Roles.</value>
+  </data>
+  <data name="HutaoSync_ErrDeviceInvalid" xml:space="preserve">
+    <value>Unable to identify the target device</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeAllDevicesMsg" xml:space="preserve">
+    <value>Sign out your Hutao Cloud account on all devices, including this one? You will need to sign in again.</value>
+  </data>
+  <data name="HutaoSync_DevicesEmptyHint" xml:space="preserve">
+    <value>No signed-in devices listed. Click Refresh Devices to load the latest list.</value>
+  </data>
+  <data name="HutaoSync_SponsorEntryTitle" xml:space="preserve">
+    <value>Sponsor Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_MsgAllDevicesRevoked" xml:space="preserve">
+    <value>All devices have been signed out. Please sign in to Hutao Cloud again.</value>
+  </data>
+  <data name="HutaoSync_ErrRedeemInvalid" xml:space="preserve">
+    <value>The redemption code is invalid, expired, or has already been used</value>
+  </data>
+  <data name="HutaoSync_LabelCurrentDevice" xml:space="preserve">
+    <value>Current Device ID</value>
+  </data>
+  <data name="HutaoSync_SponsorStatusTitle" xml:space="preserve">
+    <value>Hutao Cloud Service Status</value>
+  </data>
+  <data name="HutaoSync_RevokeDeviceBtn" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="HutaoSync_RedeemBtn" xml:space="preserve">
+    <value>Redeem</value>
+  </data>
+  <data name="HutaoSync_SponsorFreeTipTitle" xml:space="preserve">
+    <value>Earn Free Wish Backup Time</value>
+  </data>
+  <data name="HutaoSync_RefreshRolesTooltip" xml:space="preserve">
+    <value>Refresh bound game roles</value>
+  </data>
+  <data name="HutaoSync_PullFilteredEmptyHintFormat" xml:space="preserve">
+    <value>No wish history found on Hutao Cloud for UID {0}</value>
+  </data>
+  <data name="HutaoSync_AccelPlanExpired" xml:space="preserve">
+    <value>Not active or expired</value>
+  </data>
+  <data name="HutaoSync_LabelRoleIdentity" xml:space="preserve">
+    <value>Account Role</value>
+  </data>
+  <data name="HutaoSync_StatsCatUtil" xml:space="preserve">
+    <value>Использование в Бездне</value>
+  </data>
+  <data name="HutaoSync_StatsCategoryHeader" xml:space="preserve">
+    <value>Раздел</value>
+  </data>
+  <data name="HutaoSync_PullConflictMergeBtn" xml:space="preserve">
+    <value>Объединить</value>
+  </data>
+  <data name="HutaoSync_StatsRefreshBtn" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankMetricFormat" xml:space="preserve">
+    <value>{0} (Топ {1} мира · Тот же герой {2})</value>
+  </data>
+  <data name="HutaoSync_StatsEmptyHint" xml:space="preserve">
+    <value>Нет данных для отображения. Нажмите «Обновить».</value>
+  </data>
+  <data name="HutaoSync_StatsDesc" xml:space="preserve">
+    <value>Просматривайте статистику Бездны и Театра без входа в Hutao Cloud. Выберите персонажа для просмотра личного рейтинга.</value>
+  </data>
+  <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
+    <value>Облачный архив FufuLauncher «{0}» уже существует. Выберите действие:</value>
+  </data>
+  <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
+    <value>Участие в Театре</value>
+  </data>
+  <data name="HutaoSync_StatsTeamCountFormat" xml:space="preserve">
+    <value>{0} боёв</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewRecords" xml:space="preserve">
+    <value>Всего игроков</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeExisting" xml:space="preserve">
+    <value>Обновить существующий облачный архив FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_StatsRoleCombatRecordCountFormat" xml:space="preserve">
+    <value>{0} записей</value>
+  </data>
+  <data name="HutaoSync_PullConflictOverwriteBtn" xml:space="preserve">
+    <value>Перезаписать</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodCurrent" xml:space="preserve">
+    <value>Текущий</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewUpdated" xml:space="preserve">
+    <value>Обновлено</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeNew" xml:space="preserve">
+    <value>Создать новый облачный архив FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_StatsCatAttend" xml:space="preserve">
+    <value>Участие в Бездне</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
+    <value>Выберите привязанного персонажа выше для просмотра рейтинга этого UID.</value>
+  </data>
+  <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
+    <value>Статистика и рейтинги Hutao Cloud обновлены</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewAbyssFullStar" xml:space="preserve">
+    <value>На 36 звёзд</value>
+  </data>
+  <data name="HutaoSync_StatsTeamUpperLabel" xml:space="preserve">
+    <value>1-я пол.</value>
+  </data>
+  <data name="HutaoSync_StatsTeamLowerLabel" xml:space="preserve">
+    <value>2-я пол.</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankTitle" xml:space="preserve">
+    <value>Личный мировой рейтинг (Текущий)</value>
+  </data>
+  <data name="HutaoSync_StatsAvgSummaryFormat" xml:space="preserve">
+    <value>Сред. {0:0.0} ★ · Сред. {1:0.0} боёв</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewAvgStar" xml:space="preserve">
+    <value>Сред. звёзды / бои</value>
+  </data>
+  <data name="HutaoSync_StatsUidDamageLabel" xml:space="preserve">
+    <value>Макс. урон за удар</value>
+  </data>
+  <data name="HutaoSync_StatsLoadingHint" xml:space="preserve">
+    <value>Загрузка статистики из Hutao Cloud...</value>
+  </data>
+  <data name="HutaoSync_StatsCatHold" xml:space="preserve">
+    <value>Наличие и созвездия</value>
+  </data>
+  <data name="HutaoSync_SubTabStats" xml:space="preserve">
+    <value>Статистика и рейтинг</value>
+  </data>
+  <data name="HutaoSync_StatsFloorHeader" xml:space="preserve">
+    <value>Этаж</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewSchedule" xml:space="preserve">
+    <value>Цикл Бездны</value>
+  </data>
+  <data name="HutaoSync_StatsUidTakeDamageLabel" xml:space="preserve">
+    <value>Макс. полученный урон</value>
+  </data>
+  <data name="HutaoSync_TravelerFemaleName" xml:space="preserve">
+    <value>Люмин</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewTitle" xml:space="preserve">
+    <value>Общая сводка</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewTheater" xml:space="preserve">
+    <value>Записи Театра</value>
+  </data>
+  <data name="HutaoSync_PullConflictTitle" xml:space="preserve">
+    <value>Облачный архив FufuLauncher уже существует</value>
+  </data>
+  <data name="HutaoSync_StatsFloorFormat" xml:space="preserve">
+    <value>Этаж {0}</value>
+  </data>
+  <data name="HutaoSync_StatsConstellationFormat" xml:space="preserve">
+    <value>С{0} {1}</value>
+  </data>
+  <data name="HutaoSync_PullNoExistingHint" xml:space="preserve">
+    <value>Существующие архивы молитв FufuLauncher не найдены; будет создан новый архив.</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodLast" xml:space="preserve">
+    <value>Прошлый</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeHeader" xml:space="preserve">
+    <value>Режим облачного архива FufuLauncher</value>
+  </data>
+  <data name="HutaoSync_StatsTitle" xml:space="preserve">
+    <value>Глобальная статистика и рейтинг Hutao Cloud</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodHeader" xml:space="preserve">
+    <value>Период</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeMissingAvatarsFormat" xml:space="preserve">
+    <value>Недостаточно данных персонажей для UID {0} (привяжите UID с минимум 9 персонажами, включая Путешественника, Эмбер, Кэйю и Лизу)</value>
+  </data>
+  <data name="HutaoSync_PullConflictCancelBtn" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="HutaoSync_StatsCatTeam" xml:space="preserve">
+    <value>Популярные отряды</value>
+  </data>
+  <data name="HutaoSync_StatsFullStarSummaryFormat" xml:space="preserve">
+    <value>{0} / {1} (пройдено {2})</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeInvalidData" xml:space="preserve">
+    <value>Hutao Cloud отклонил данные испытания. Проверьте полноту данных текущего цикла и персонажей.</value>
+  </data>
+  <data name="HutaoSync_TravelerMaleName" xml:space="preserve">
+    <value>Итэр</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeFetchAvatarsFormat" xml:space="preserve">
+    <value>Не удалось получить список персонажей UID {0}: {1}</value>
+  </data>
+  <data name="HutaoSync_StatsRoleCombatSummaryFormat" xml:space="preserve">
+    <value>Цикл {0} · {1} зап.</value>
+  </data>
+  <data name="HutaoSync_ErrMiHoYoLoginExpired" xml:space="preserve">
+    <value>Срок действия входа в аккаунт Miyoushe / HoYoLAB истёк. Войдите снова в разделе управления аккаунтами и повторите попытку</value>
+  </data>
+  <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
+    <value>Облако Hutao вернуло непредвиденный статус ({0}). Повторите попытку позже</value>
   </data>
 </root>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -221,7 +220,7 @@
     <value>预设槽位</value>
   </data>
   <data name="QuickFpsSlotsCaption" xml:space="preserve">
-    <value>最多5个槽位；预设帧率可以低于60</value>
+    <value>最多5个槽位。预设帧率可以低于60</value>
   </data>
   <data name="QuickFpsSlotFormat" xml:space="preserve">
     <value>槽位 {0}</value>
@@ -566,7 +565,7 @@
     <value>独立注入</value>
   </data>
   <data name="InjectionCaption" xml:space="preserve">
-    <value>内置注入通过启动器自身引擎加载插件；独立注入使用独立程序启动游戏并加载插件，适用于内置模式不兼容的情况。</value>
+    <value>内置注入通过启动器自身引擎加载插件。独立注入使用独立程序启动游戏并加载插件，适用于内置模式不兼容的情况。</value>
   </data>
   <data name="UsingHoyolabAccountTitle" xml:space="preserve">
     <value>使用米游社/HoyoLAB 账户直接登录游戏</value>
@@ -749,7 +748,7 @@
     <value>游戏签到</value>
   </data>
   <data name="GameCheckinCaption" xml:space="preserve">
-    <value>领取米游社每日签到奖励（原石、摩拉等）；可在下方选择同时签到的其它米游</value>
+    <value>领取米游社每日签到奖励（原石、摩拉等）。可在下方选择同时签到的其它米游</value>
   </data>
   <data name="CommunityCheckin" xml:space="preserve">
     <value>社区签到</value>
@@ -782,7 +781,7 @@
     <value>批量签到</value>
   </data>
   <data name="BatchCheckinCaption" xml:space="preserve">
-    <value>按列表顺序为勾选的账号执行各自的签到任务；点击账号可单独配置上方选项，关闭后仅为当前账号执行</value>
+    <value>按列表顺序为勾选的账号执行各自的签到任务。点击账号可单独配置上方选项，关闭后仅为当前账号执行</value>
   </data>
   <data name="Checkin_ConfiguringAccount" xml:space="preserve">
     <value>正在配置：{0}（{1}）</value>
@@ -818,7 +817,7 @@
     <value>BetterGI启动延迟 (秒)</value>
   </data>
   <data name="BetterGIDelayCaption" xml:space="preserve">
-    <value>设为0可关闭延迟；延迟只影响BetterGI</value>
+    <value>设为0可关闭延迟。延迟只影响BetterGI</value>
   </data>
   <data name="BetterGICloseOnExit" xml:space="preserve">
     <value>退出游戏时关闭BetterGI</value>
@@ -2202,7 +2201,7 @@
     <value>近 30 天暂无游戏记录</value>
   </data>
   <data name="Account_CopyUID" xml:space="preserve">
-    <value>复制 UID</value>
+    <value>复制UID</value>
   </data>
   <data name="Account_DeleteCurrent" xml:space="preserve">
     <value>删除当前账号</value>
@@ -2979,7 +2978,7 @@
     <value>建议操作</value>
   </data>
   <data name="HighCpuUsage_SuggestionText" xml:space="preserve">
-    <value>请优先汇报问题以帮助定位；如果当前版本持续异常，建议退出使用并更新到最新版本。</value>
+    <value>请优先汇报问题以帮助定位。如果当前版本持续异常，建议退出使用并更新到最新版本。</value>
   </data>
   <data name="HighCpuUsage_Dismiss" xml:space="preserve">
     <value>稍后处理</value>
@@ -5669,7 +5668,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>本期环境</value>
   </data>
   <data name="DataPage_InsightMetaBody" xml:space="preserve">
-    <value>{0} 的满星通关率为 {1}，平均重开 {2} 次；第一梯队由 {3} 领衔。</value>
+    <value>{0} 的满星通关率为 {1}，平均重开 {2} 次。第一梯队由 {3} 领衔。</value>
   </data>
   <data name="DataPage_InsightRiseTitle" xml:space="preserve">
     <value>强度崛起</value>
@@ -5747,7 +5746,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>、</value>
   </data>
   <data name="DataPage_ClauseSeparator" xml:space="preserve">
-    <value>；</value>
+    <value>。</value>
   </data>
   <data name="DataPage_ExportPdf" xml:space="preserve">
     <value>导出PDF分析报告</value>
@@ -5995,7 +5994,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>游戏中暂停启动器公告</value>
   </data>
   <data name="SuppressAnnouncementInGameCaption" xml:space="preserve">
-    <value>开启后，游戏运行期间不会自动弹出启动器公告；退出游戏或重启启动器后将恢复正常弹出</value>
+    <value>开启后，游戏运行期间不会自动弹出启动器公告。退出游戏或重启启动器后将恢复正常弹出</value>
   </data>
   <data name="UpdateNotification_PreviewBanner" xml:space="preserve">
     <value>这是预览版（Pre-release）更新，可能存在不稳定问题，请谨慎更新</value>
@@ -6497,7 +6496,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>插件文件被占用</value>
   </data>
   <data name="Plugin_FileLocked_Content" xml:space="preserve">
-    <value>插件文件“{0}”正被其它程序占用，操作未能完成。请先关闭游戏或占用该文件的程序后重试；若反复出现，可能是杀毒软件正在扫描，请稍后再试。</value>
+    <value>插件文件“{0}”正被其它程序占用，操作未能完成。请先关闭游戏或占用该文件的程序后重试。若反复出现，可能是杀毒软件正在扫描，请稍后再试。</value>
   </data>
   <data name="PluginPage_FreeCamHelpTitle" xml:space="preserve">
     <value>自由视角使用说明</value>
@@ -6757,7 +6756,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>显示验证码弹窗说明</value>
   </data>
   <data name="EnableCaptchaNoticeCaption" xml:space="preserve">
-    <value>在米游社风控验证码弹窗中显示来源说明；关闭后仅隐藏文字，验证功能不受影响。</value>
+    <value>在米游社风控验证码弹窗中显示来源说明。关闭后仅隐藏文字，验证功能不受影响。</value>
   </data>
   <data name="CaptchaNoticeWatermark" xml:space="preserve">
     <value>米游社便签 - 人机验证</value>
@@ -6769,7 +6768,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>该弹窗由米游社风控触发，仅用于「便签」数据的查询验证，并非启动器自身的人机验证。</value>
   </data>
   <data name="CaptchaNoticeLine2" xml:space="preserve">
-    <value>完成验证后即可查看便签；不想看到此提示，可在「设置 → 高级选项」中关闭。</value>
+    <value>完成验证后即可查看便签。不想看到此提示，可在「设置 → 高级选项」中关闭。</value>
   </data>
   <data name="DeviceInfo_Title" xml:space="preserve">
     <value>米游社设备信息</value>
@@ -7027,7 +7026,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>右侧评论</value>
   </data>
   <data name="Miyoushe_CommentsLayoutHint" xml:space="preserve">
-    <value>开启后评论显示在右侧栏；关闭后接在正文下方</value>
+    <value>开启后评论显示在右侧栏。关闭后接在正文下方</value>
   </data>
   <data name="Miyoushe_LoadingComments" xml:space="preserve">
     <value>正在加载评论…</value>
@@ -7103,7 +7102,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>证书安装 / 卸载</value>
   </data>
   <data name="ModTrust_InstallCaption" xml:space="preserve">
-    <value>安装后，我们签发的代码签名会被系统与本启动器识别；可随时卸载，不影响其它证书。</value>
+    <value>安装后，我们签发的代码签名会被系统与本启动器识别。可随时卸载，不影响其它证书。</value>
   </data>
   <data name="ModTrust_InstallUserBtn" xml:space="preserve">
     <value>安装（当前用户）</value>
@@ -7167,7 +7166,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已安装（当前用户 + 本机）</value>
   </data>
   <data name="ModTrust_MachineHint" xml:space="preserve">
-    <value>当前用户范围由本机安装提供；安装与卸载请在本机范围操作。</value>
+    <value>当前用户范围由本机安装提供。安装与卸载请在本机范围操作。</value>
   </data>
   <data name="SectionStartup" xml:space="preserve">
     <value>启动设置</value>
@@ -7203,7 +7202,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>定位文件</value>
   </data>
   <data name="PluginDllConflict_Hint" xml:space="preserve">
-    <value>请只保留最新版本的插件，并把其他插件里的同名 DLL 删除或重命名；如果不清楚该保留哪一个，建议删除全部插件后重新安装。</value>
+    <value>请只保留最新版本的插件，并把其他插件里的同名 DLL 删除或重命名。如果不清楚该保留哪一个，建议删除全部插件后重新安装。</value>
   </data>
   <data name="PluginConflictCheckTitle" xml:space="preserve">
     <value>插件冲突检测</value>
@@ -7215,13 +7214,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>仅检测主插件</value>
   </data>
   <data name="PluginConflictMainOnlyCaption" xml:space="preserve">
-    <value>只检查FufuLauncher.UnlockerIsland.dll；关闭后检查所有插件 DLL</value>
+    <value>只检查FufuLauncher.UnlockerIsland.dll。关闭后检查所有插件 DLL</value>
   </data>
   <data name="ModTrust_ModeTitle" xml:space="preserve">
     <value>签名无效时的处理</value>
   </data>
   <data name="ModTrust_ModeCaption" xml:space="preserve">
-    <value>关闭校验：跳过签名校验；仅提示：校验并提醒，但允许加载；拦截：阻止未通过校验的插件加载。</value>
+    <value>关闭校验：跳过签名校验。仅提示：校验并提醒，但允许加载。拦截：阻止未通过校验的插件加载。</value>
   </data>
   <data name="ModTrust_ModeOff" xml:space="preserve">
     <value>关闭校验</value>
@@ -7251,13 +7250,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>拒绝访问</value>
   </data>
   <data name="BanCheck_KilledMessage" xml:space="preserve">
-    <value>此设备已被禁止使用芙芙启动器。{0}{0}UID：{1}{0}原因：{2}{0}{0}如果你认为这是误判，可以前往以下地址提交申诉（若 UID 显示为“-”，申诉时可不填）：{0}{3}{0}{0}是否立即打开申诉页面？选择“否”将直接关闭启动器。</value>
+    <value>此设备已被禁止使用芙芙启动器。{0}{0}UID：{1}{0}原因：{2}{0}{0}如果你认为这是误判，可以前往以下地址提交申诉（若UID显示为“-”，申诉时可不填）：{0}{3}{0}{0}是否立即打开申诉页面？选择“否”将直接关闭启动器。</value>
   </data>
   <data name="BanCheck_RevokedReason" xml:space="preserve">
     <value>访问已被服务端撤销</value>
   </data>
   <data name="BanCheck_BannedReason" xml:space="preserve">
-    <value>该 UID 位于服务端封禁名单中</value>
+    <value>该UID位于服务端封禁名单中</value>
   </data>
   <data name="GachaAnalysis_ReadingBoundRoles" xml:space="preserve">
     <value>正在查询米游社绑定的游戏角色...</value>
@@ -7284,7 +7283,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>切换游戏角色</value>
   </data>
   <data name="GameRole_Hint" xml:space="preserve">
-    <value>绑定角色页设置默认角色；各功能可独立切换服务器，互不影响。</value>
+    <value>绑定角色页设置默认角色。各功能可独立切换服务器，互不影响。</value>
   </data>
   <data name="GameRole_Refresh" xml:space="preserve">
     <value>刷新绑定角色</value>
@@ -7305,7 +7304,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>识屏扫码</value>
   </data>
   <data name="MiyousheQr_Instructions" xml:space="preserve">
-    <value>「普通扫码」仅读取选中区域一次；「持续扫码」反复读取选中区域内的新二维码。识别后将使用当前米游社账号登录。Esc或右键取消框选。</value>
+    <value>「普通扫码」仅读取选中区域一次。「持续扫码」反复读取选中区域内的新二维码。识别后将使用当前米游社账号登录。Esc或右键取消框选。</value>
   </data>
   <data name="MiyousheQr_CurrentAccount" xml:space="preserve">
     <value>当前米游社账号</value>
@@ -7323,7 +7322,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>确认登录</value>
   </data>
   <data name="MiyousheQr_SelectionHint" xml:space="preserve">
-    <value>拖动鼠标框选二维码 - Esc 或鼠标右键取消</value>
+    <value>拖动鼠标框选二维码 - Esc或鼠标右键取消</value>
   </data>
   <data name="MiyousheQr_Genshin" xml:space="preserve">
     <value>原神</value>
@@ -7392,7 +7391,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>扫码服务返回了无法识别的结果，请刷新二维码后重试。</value>
   </data>
   <data name="MiyousheQr_Rejected" xml:space="preserve">
-    <value>扫码请求被拒绝，二维码可能已过期或凭证已失效。请刷新二维码；仍失败时重新登录米游社账号。</value>
+    <value>扫码请求被拒绝，二维码可能已过期或凭证已失效。请刷新二维码。仍失败时重新登录米游社账号。</value>
   </data>
   <data name="MiyousheQr_Continuous" xml:space="preserve">
     <value>持续扫码</value>
@@ -7932,7 +7931,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>错误: {0}</value>
   </data>
   <data name="Gacha_DeletedUidRecordsDetail_Format" xml:space="preserve">
-    <value>已删除 UID: {0} 的抽卡记录</value>
+    <value>已删除UID: {0} 的抽卡记录</value>
   </data>
   <data name="PluginSettings_UnknownPlugin" xml:space="preserve">
     <value>未知插件</value>
@@ -8163,7 +8162,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>操作失败：文件已存在</value>
   </data>
   <data name="Gacha_SwitchedToUid_Format" xml:space="preserve">
-    <value>切换至 UID: {0}</value>
+    <value>切换至UID: {0}</value>
   </data>
   <data name="AutoClicker_SecurityWarningMessage" xml:space="preserve">
     <value>开启全局连点器将安装全局键盘和鼠标钩子，并可能被部分安全软件拦截。是否确认开启？</value>
@@ -8388,7 +8387,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>预设保存失败</value>
   </data>
   <data name="Gacha_DeletedUidRecords_Format" xml:space="preserve">
-    <value>已删除 UID: {0} 的记录</value>
+    <value>已删除UID: {0} 的记录</value>
   </data>
   <data name="Gacha_FetchingPoolMetadata" xml:space="preserve">
     <value>正在获取卡池元数据...</value>
@@ -8559,7 +8558,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>未找到可用于祈愿获取的原神绑定角色。请登录绑定了目标角色的米游社账号，或使用「从游戏获取」。</value>
   </data>
   <data name="Gacha_NoNewRecordsKeptExisting_Format" xml:space="preserve">
-    <value>UID {0} 未获取到新记录，已保留现有数据。</value>
+    <value>UID{0} 未获取到新记录，已保留现有数据。</value>
   </data>
   <data name="Gacha_LocalHistoryLoaded" xml:space="preserve">
     <value>已加载本地历史记录</value>
@@ -8568,7 +8567,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已取消导入，现有数据未更改。</value>
   </data>
   <data name="Gacha_FetchDoneCheckingImages_Format" xml:space="preserve">
-    <value>获取完成，UID {0}，共 {1} 条记录，正在检查图片资源...</value>
+    <value>获取完成，UID{0}，共 {1} 条记录，正在检查图片资源...</value>
   </data>
   <data name="Gacha_AuthCode1002" xml:space="preserve">
     <value>米游社未接受所选角色的认证参数（返回码 1002）。可使用「从游戏获取」读取游戏生成的链接。</value>
@@ -8616,7 +8615,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>剪贴板内容无效</value>
   </data>
   <data name="Gacha_RoleUidMismatchError" xml:space="preserve">
-    <value>返回记录的 UID 与所选游戏角色不一致，已停止导入。</value>
+    <value>返回记录的UID与所选游戏角色不一致，已停止导入。</value>
   </data>
   <data name="Gacha_AuthCheckLoginSuffix" xml:space="preserve">
     <value> 请检查米游社登录状态，或使用「从游戏获取」。</value>
@@ -8643,7 +8642,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>导出失败</value>
   </data>
   <data name="Gacha_NoAccountBoundToUid_Format" xml:space="preserve">
-    <value>未找到绑定 UID {0} 的米游社账号。请确认目标角色已绑定到已登录的米游社账号，或使用「从游戏获取」。</value>
+    <value>未找到绑定UID{0} 的米游社账号。请确认目标角色已绑定到已登录的米游社账号，或使用「从游戏获取」。</value>
   </data>
   <data name="Gacha_RoleSwitchedDiscardOld" xml:space="preserve">
     <value>角色已切换，已丢弃旧角色的获取结果。</value>
@@ -9112,10 +9111,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>账户</value>
   </data>
   <data name="Account_Flyout_CommunityUid" xml:space="preserve">
-    <value>米游社 UID</value>
+    <value>米游社UID</value>
   </data>
   <data name="Account_Flyout_GameUid" xml:space="preserve">
-    <value>游戏 UID</value>
+    <value>游戏UID</value>
   </data>
   <data name="Account_Flyout_Level" xml:space="preserve">
     <value>等级</value>
@@ -9145,7 +9144,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>图像源</value>
   </data>
   <data name="ImageSource_Subtitle" xml:space="preserve">
-    <value>选择图像来源并预览；此处展示的图片会同时应用为主背景。</value>
+    <value>选择图像来源并预览。此处展示的图片会同时应用为主背景。</value>
   </data>
   <data name="ImageSource_SourceOfficial" xml:space="preserve">
     <value>官方背景</value>
@@ -9190,7 +9189,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>官方</value>
   </data>
   <data name="ImageSource_BingHint" xml:space="preserve">
-    <value>可选择年份从 Bing 归档中切换；开启“官方”后只使用最近的官方壁纸。</value>
+    <value>可选择年份从 Bing 归档中切换。开启“官方”后只使用最近的官方壁纸。</value>
   </data>
   <data name="ImageSource_CustomEmpty" xml:space="preserve">
     <value>尚未选择自定义背景图片。</value>
@@ -9223,7 +9222,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>固定使用本地图片</value>
   </data>
   <data name="ImageSource_RandomPinLocalHint" xml:space="preserve">
-    <value>将当前图片保存到本地，只显示这张图片；开启后不再下载新图片。</value>
+    <value>将当前图片保存到本地，只显示这张图片。开启后不再下载新图片。</value>
   </data>
   <data name="ImageSource_RandomPinFailed" xml:space="preserve">
     <value>当前没有可保存的随机背景图片。</value>
@@ -10144,10 +10143,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>云端暂无周期挑战存档，可在上方选择范围并输入名称后上传。</value>
   </data>
   <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
-    <value>周期挑战存档 {0} 份 · 全库 {1}/{2} · 空间 {3}/{4}</value>
+    <value>周期挑战存档 {0} 份 - 全库 {1}/{2} - 空间 {3}/{4}</value>
   </data>
   <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
-    <value>本地统计：{0} 个 UID · 共 {1} 条记录（深渊 {2} / 幻想 {3} / 危战 {4}）</value>
+    <value>本地统计：{0} 个UID- 共 {1} 条记录（深渊 {2} / 幻想 {3} / 危战 {4}）</value>
   </data>
   <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
     <value>管理周期挑战云存档（深境螺旋 / 幻想真境剧诗 / 幽境危战）</value>
@@ -10165,7 +10164,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已同步云端挑战存档「{0}」：新增 {1} 条，更新更高纪录 {2} 条，保留本地 {3} 条（当前共 {4} 条）。</value>
   </data>
   <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
-    <value>下载采用递增补全同步：自动补充本地缺失期数并完整保留本地独有记录；同周期仅在云端成绩更优（星数/层数/幕数更高或通关更快）时升级，数据只增不减。</value>
+    <value>下载采用递增补全同步：自动补充本地缺失期数并完整保留本地独有记录。同周期仅在云端成绩更优（星数/层数/幕数更高或通关更快）时升级，数据只增不减。</value>
   </data>
   <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
     <value>当前所选范围内暂无可上传的本地周期挑战记录。</value>
@@ -10174,13 +10173,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>请先登录FufuLauncher云存档账户，再上传或同步周期挑战记录。</value>
   </data>
   <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
-    <value>全部 UID（共 {0} 条记录）</value>
+    <value>全部UID（共 {0} 条记录）</value>
   </data>
   <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
     <value>上传数据范围</value>
   </data>
   <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
-    <value>UID {0}（深渊 {1} / 幻想 {2} / 危战 {3}）</value>
+    <value>UID{0}（深渊 {1} / 幻想 {2} / 危战 {3}）</value>
   </data>
   <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
     <value>周期挑战 - FufuLauncher云存档管理</value>
@@ -10273,7 +10272,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>当前账户已兑换过该激活码，同一激活码仅可兑换一次。</value>
   </data>
   <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
-    <value>云端已存在同名存档；如需替换，请勾选“若存在同名存档则直接覆写”。</value>
+    <value>云端已存在同名存档。如需替换，请勾选“若存在同名存档则直接覆写”。</value>
   </data>
   <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
     <value>未找到目标云端存档，请刷新列表后重试。</value>
@@ -10363,7 +10362,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>祈愿记录</value>
   </data>
   <data name="CloudSync_GachaAllUidsOption" xml:space="preserve">
-    <value>全部本地账号合并（共 {0} 个 UID）</value>
+    <value>全部本地账号合并（共 {0} 个UID）</value>
   </data>
   <data name="CloudSync_GachaConfirmOverwriteMsg" xml:space="preserve">
     <value>确定使用所选本地祈愿记录覆写云端存档「{0}」吗？</value>
@@ -10408,7 +10407,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>云端存档</value>
   </data>
   <data name="CloudSync_GachaUidOptionFormat" xml:space="preserve">
-    <value>UID {0}（{1} 条记录）</value>
+    <value>UID{0}（{1} 条记录）</value>
   </data>
   <data name="CloudSync_GachaUploadBtn" xml:space="preserve">
     <value>上传所选祈愿记录到云端</value>
@@ -10447,7 +10446,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>锁定状态下无法注销账户，请先通过邮箱验证解锁。</value>
   </data>
   <data name="CloudSync_LockDesc" xml:space="preserve">
-    <value>锁定后将禁止访问与修改云端存档及注销账户；只有手动通过邮箱验证解锁后才能恢复使用。</value>
+    <value>锁定后将禁止访问与修改云端存档及注销账户。只有手动通过邮箱验证解锁后才能恢复使用。</value>
   </data>
   <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
     <value>锁定状态下无法查看配额或管理云端存档，请先在「账户与安全」完成邮箱验证解锁。</value>
@@ -10456,7 +10455,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>账户已锁定</value>
   </data>
   <data name="CloudSync_LockHint" xml:space="preserve">
-    <value>提示：锁定账户后将暂禁访问、上传或删除云端存档，也无法注销账户；需通过邮箱验证手动解锁后方可恢复正常使用。</value>
+    <value>提示：锁定账户后将暂禁访问、上传或删除云端存档，也无法注销账户。需通过邮箱验证手动解锁后方可恢复正常使用。</value>
   </data>
   <data name="CloudSync_LockTitle" xml:space="preserve">
     <value>锁定账户</value>
@@ -10690,7 +10689,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>{0} / {1} 个（剩余 {2} 个）</value>
   </data>
   <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
-    <value>当前账户已锁定，暂无法查看配额或使用扩容码；请先通过邮箱验证解锁。</value>
+    <value>当前账户已锁定，暂无法查看配额或使用扩容码。请先通过邮箱验证解锁。</value>
   </data>
   <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
     <value>请先在「账户与安全」中登录FufuLauncher云存档账号。</value>
@@ -11051,5 +11050,764 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="SslCheck_QuicSummary_Timeout" xml:space="preserve">
     <value>QUIC未检出</value>
+  </data>
+  <data name="CloudSync_NavHutao" xml:space="preserve">
+    <value>胡桃云</value>
+  </data>
+  <data name="HutaoSync_SectionTitle" xml:space="preserve">
+    <value>胡桃云</value>
+  </data>
+  <data name="HutaoSync_SectionSubtitle" xml:space="preserve">
+    <value>在胡桃云与您的FufuLauncher云端存档之间同步祈愿与周期挑战记录</value>
+  </data>
+  <data name="HutaoSync_BridgeRuleTitle" xml:space="preserve">
+    <value>同步方式说明</value>
+  </data>
+  <data name="HutaoSync_BridgeRuleDesc" xml:space="preserve">
+    <value>从胡桃云获取的数据将保存至您的FufuLauncher云端存档，之后可在「云端存档」中导出保存或导入软件。上传到胡桃云时也会直接读取您在FufuLauncher云端保存的存档。</value>
+  </data>
+  <data name="HutaoSync_AchievementNotice" xml:space="preserve">
+    <value>成就备份说明：胡桃云暂不支持同步成就，您可继续在成就窗口或「云端存档」中备份、导出或导入本地成就档案。</value>
+  </data>
+  <data name="HutaoSync_FufuRequiredBannerTitle" xml:space="preserve">
+    <value>使用同步功能需登录并解锁FufuLauncher云存档账号</value>
+  </data>
+  <data name="HutaoSync_FufuRequiredBannerMsg" xml:space="preserve">
+    <value>您可在此查看并管理胡桃云账号、统计排行与赞助服务。如需将数据保存至FufuLauncher云端存档或从FufuLauncher云端存档上传至胡桃云，请前往「账户与安全」登录并确保账号未锁定。</value>
+  </data>
+  <data name="HutaoSync_GotoFufuAccountBtn" xml:space="preserve">
+    <value>前往账户与安全</value>
+  </data>
+  <data name="HutaoSync_AccountTitle" xml:space="preserve">
+    <value>胡桃云账号</value>
+  </data>
+  <data name="HutaoSync_AccountSubtitle" xml:space="preserve">
+    <value>登录胡桃云查看账号详情、服务有效期与登录设备。将数据保存到FufuLauncher云端存档或从FufuLauncher云端存档上传时需登录FufuLauncher云存档账号。</value>
+  </data>
+  <data name="HutaoSync_ModeLogin" xml:space="preserve">
+    <value>登录账号</value>
+  </data>
+  <data name="HutaoSync_ModeRegister" xml:space="preserve">
+    <value>注册账号</value>
+  </data>
+  <data name="HutaoSync_ModeReset" xml:space="preserve">
+    <value>重置密码</value>
+  </data>
+  <data name="HutaoSync_EmailHeader" xml:space="preserve">
+    <value>胡桃账号邮箱</value>
+  </data>
+  <data name="HutaoSync_EmailPlaceholder" xml:space="preserve">
+    <value>请输入注册或绑定的邮箱</value>
+  </data>
+  <data name="HutaoSync_PasswordHeader" xml:space="preserve">
+    <value>账号密码</value>
+  </data>
+  <data name="HutaoSync_PasswordPlaceholder" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="HutaoSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="HutaoSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>请再次输入密码</value>
+  </data>
+  <data name="HutaoSync_OtpHeader" xml:space="preserve">
+    <value>邮箱验证码</value>
+  </data>
+  <data name="HutaoSync_OtpPlaceholder" xml:space="preserve">
+    <value>请输入收到的验证码</value>
+  </data>
+  <data name="HutaoSync_SendOtpBtn" xml:space="preserve">
+    <value>发送验证码</value>
+  </data>
+  <data name="HutaoSync_SendOtpCooldownFormat" xml:space="preserve">
+    <value>重新发送 ({0}秒)</value>
+  </data>
+  <data name="HutaoSync_SubmitLogin" xml:space="preserve">
+    <value>登录胡桃账号</value>
+  </data>
+  <data name="HutaoSync_SubmitRegister" xml:space="preserve">
+    <value>注册并登录</value>
+  </data>
+  <data name="HutaoSync_SubmitReset" xml:space="preserve">
+    <value>重置并登录</value>
+  </data>
+  <data name="HutaoSync_LabelAccount" xml:space="preserve">
+    <value>当前账号</value>
+  </data>
+  <data name="HutaoSync_LabelGachaPlan" xml:space="preserve">
+    <value>祈愿云备份服务</value>
+  </data>
+  <data name="HutaoSync_PlanActiveFormat" xml:space="preserve">
+    <value>已开通，有效期至 {0}</value>
+  </data>
+  <data name="HutaoSync_PlanDeveloper" xml:space="preserve">
+    <value>长期有效</value>
+  </data>
+  <data name="HutaoSync_PlanExpired" xml:space="preserve">
+    <value>未开通或已过期（可在「赞助支持」兑换或上传当期挑战延长时间）</value>
+  </data>
+  <data name="HutaoSync_RefreshAccountBtn" xml:space="preserve">
+    <value>刷新状态</value>
+  </data>
+  <data name="HutaoSync_LogoutBtn" xml:space="preserve">
+    <value>退出登录</value>
+  </data>
+  <data name="HutaoSync_PullSectionTitle" xml:space="preserve">
+    <value>从胡桃云同步到FufuLauncher云端存档（祈愿记录）</value>
+  </data>
+  <data name="HutaoSync_PullSectionDesc" xml:space="preserve">
+    <value>读取胡桃云上保存的角色祈愿记录，勾选后新建或合并写入您的FufuLauncher云端存档。</value>
+  </data>
+  <data name="HutaoSync_LoadHutaoListBtn" xml:space="preserve">
+    <value>读取胡桃云列表</value>
+  </data>
+  <data name="HutaoSync_ToggleSelectBtn" xml:space="preserve">
+    <value>全选 / 取消</value>
+  </data>
+  <data name="HutaoSync_TargetSlotHeader" xml:space="preserve">
+    <value>新FufuLauncher云端存档名称</value>
+  </data>
+  <data name="HutaoSync_TargetSlotPlaceholder" xml:space="preserve">
+    <value>仅支持字母、数字、下划线、短横线或小数点</value>
+  </data>
+  <data name="HutaoSync_PickExistingSlotHeader" xml:space="preserve">
+    <value>已有FufuLauncher祈愿云端存档</value>
+  </data>
+  <data name="HutaoSync_PickExistingSlotPlaceholder" xml:space="preserve">
+    <value>选择已有FufuLauncher祈愿云端存档</value>
+  </data>
+  <data name="HutaoSync_MergeExistingCheck" xml:space="preserve">
+    <value>合并保留该FufuLauncher云端存档中的原有记录（推荐）</value>
+  </data>
+  <data name="HutaoSync_PullEmptyHint" xml:space="preserve">
+    <value>点击上方「读取胡桃云列表」获取您在胡桃云中保存的角色</value>
+  </data>
+  <data name="HutaoSync_PullActionBtn" xml:space="preserve">
+    <value>同步所选角色到FufuLauncher云端存档</value>
+  </data>
+  <data name="HutaoSync_DeleteHutaoUidBtn" xml:space="preserve">
+    <value>从胡桃云删除</value>
+  </data>
+  <data name="HutaoSync_ConfirmDeleteUidTitle" xml:space="preserve">
+    <value>确认删除胡桃云记录</value>
+  </data>
+  <data name="HutaoSync_ConfirmDeleteUidMsgFormat" xml:space="preserve">
+    <value>确定要永久删除胡桃云上UID{0} 的全部祈愿记录吗？此操作无法撤销，不影响您的本地与FufuLauncher云端存档。</value>
+  </data>
+  <data name="HutaoSync_GachaEntryCountFormat" xml:space="preserve">
+    <value>共 {0} 条祈愿记录</value>
+  </data>
+  <data name="HutaoSync_PushGachaTitle" xml:space="preserve">
+    <value>从FufuLauncher云端存档上传到胡桃云（祈愿记录）</value>
+  </data>
+  <data name="HutaoSync_PushGachaDesc" xml:space="preserve">
+    <value>选择您已保存的FufuLauncher祈愿云端存档，读取其中的角色记录后上传同步至胡桃云。</value>
+  </data>
+  <data name="HutaoSync_SelectFufuGachaArchivePlaceholder" xml:space="preserve">
+    <value>选择FufuLauncher祈愿云端存档</value>
+  </data>
+  <data name="HutaoSync_RefreshFufuArchiveBtn" xml:space="preserve">
+    <value>刷新列表</value>
+  </data>
+  <data name="HutaoSync_InspectArchiveBtn" xml:space="preserve">
+    <value>读取存档内容</value>
+  </data>
+  <data name="HutaoSync_PushGachaEmptyHint" xml:space="preserve">
+    <value>选择上方的FufuLauncher祈愿云端存档后将自动读取内容，也可点击「读取存档内容」重新读取</value>
+  </data>
+  <data name="HutaoSync_PushGachaActionBtn" xml:space="preserve">
+    <value>上传所选角色到胡桃云</value>
+  </data>
+  <data name="HutaoSync_ChallengeTitle" xml:space="preserve">
+    <value>从FufuLauncher云端存档上传到胡桃云（深境螺旋与幻想真境剧诗）</value>
+  </data>
+  <data name="HutaoSync_ChallengeDesc" xml:space="preserve">
+    <value>选择您已保存的FufuLauncher周期挑战云端存档并自动读取记录（仅支持上传当期深境螺旋与当期幻想真境剧诗）。胡桃云仅接收挑战记录上传与全服统计，不提供个人挑战记录下载或恢复，您仍可在「云端存档」中备份和导出个人记录。</value>
+  </data>
+  <data name="HutaoSync_SelectFufuChallengeArchivePlaceholder" xml:space="preserve">
+    <value>选择FufuLauncher周期挑战云端存档</value>
+  </data>
+  <data name="HutaoSync_ChallengeInspectEmptyHint" xml:space="preserve">
+    <value>选择上方的FufuLauncher周期挑战云端存档后将自动读取内容，也可点击「读取存档内容」重新读取</value>
+  </data>
+  <data name="HutaoSync_ChallengeActionBtn" xml:space="preserve">
+    <value>上传所选记录到胡桃云</value>
+  </data>
+  <data name="HutaoSync_ModeAbyss" xml:space="preserve">
+    <value>深境螺旋</value>
+  </data>
+  <data name="HutaoSync_ModeTheater" xml:space="preserve">
+    <value>幻想真境剧诗</value>
+  </data>
+  <data name="HutaoSync_AbyssSummaryFormat" xml:space="preserve">
+    <value>最深抵达 {0} - 共 {1} 星</value>
+  </data>
+  <data name="HutaoSync_TheaterSummaryFormat" xml:space="preserve">
+    <value>第 {0} 幕 - {1} 枚奖章 - {2} 名参演角色</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusCurrent" xml:space="preserve">
+    <value>当期可上传</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusPast" xml:space="preserve">
+    <value>往期已结束</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusIncomplete" xml:space="preserve">
+    <value>统计数据不完整</value>
+  </data>
+  <data name="HutaoSync_ScheduleFallbackFormat" xml:space="preserve">
+    <value>第 {0} 期</value>
+  </data>
+  <data name="HutaoSync_ChallengeUploadedPart" xml:space="preserve">
+    <value>成功上传 {0} 条记录</value>
+  </data>
+  <data name="HutaoSync_ChallengeExtendedPart" xml:space="preserve">
+    <value>已获得胡桃云祈愿服务时长奖励</value>
+  </data>
+  <data name="HutaoSync_ChallengeSkippedPastPart" xml:space="preserve">
+    <value>跳过 {0} 条非当期记录</value>
+  </data>
+  <data name="HutaoSync_ChallengeSkippedIncompletePart" xml:space="preserve">
+    <value>跳过 {0} 条数据不完整的记录</value>
+  </data>
+  <data name="HutaoSync_ChallengeFailedPart" xml:space="preserve">
+    <value>{0} 条记录上传未成功</value>
+  </data>
+  <data name="HutaoSync_SuccessTitle" xml:space="preserve">
+    <value>操作完成</value>
+  </data>
+  <data name="HutaoSync_FailedTitle" xml:space="preserve">
+    <value>操作失败</value>
+  </data>
+  <data name="HutaoSync_HintTitle" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="HutaoSync_MsgVerifySent" xml:space="preserve">
+    <value>验证码已发送至您的邮箱，请注意查收</value>
+  </data>
+  <data name="HutaoSync_MsgLoginSuccess" xml:space="preserve">
+    <value>已成功登录胡桃云账号</value>
+  </data>
+  <data name="HutaoSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>注册并登录胡桃云成功</value>
+  </data>
+  <data name="HutaoSync_MsgResetSuccess" xml:space="preserve">
+    <value>密码已重置并重新登录</value>
+  </data>
+  <data name="HutaoSync_MsgLogoutSuccess" xml:space="preserve">
+    <value>已退出胡桃云账号登录</value>
+  </data>
+  <data name="HutaoSync_MsgAccountRefreshed" xml:space="preserve">
+    <value>胡桃云账号状态已更新</value>
+  </data>
+  <data name="HutaoSync_MsgEntriesLoadedFormat" xml:space="preserve">
+    <value>在胡桃云中读取到 {0} 个角色的祈愿记录</value>
+  </data>
+  <data name="HutaoSync_MsgFufuUigfLoadedFormat" xml:space="preserve">
+    <value>在FufuLauncher云端存档中读取到 {0} 个角色的祈愿记录</value>
+  </data>
+  <data name="HutaoSync_MsgFufuChallengeLoadedFormat" xml:space="preserve">
+    <value>在FufuLauncher云端存档中读取到 {0} 条深渊/剧诗挑战记录</value>
+  </data>
+  <data name="HutaoSync_MsgDeleteUidSuccessFormat" xml:space="preserve">
+    <value>已从胡桃云删除UID{0} 的 {1} 条祈愿记录</value>
+  </data>
+  <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
+    <value>已将 {0} 个角色的 {1} 条祈愿记录保存至FufuLauncher云端存档「{2}」（当前共 {3} 条记录），可前往「云端存档」页面导出或导入软件</value>
+  </data>
+  <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
+    <value>已将 {0} 个角色的新增祈愿记录（共 {1} 条）上传到胡桃云</value>
+  </data>
+  <data name="HutaoSync_MsgPushGachaUpToDate" xml:space="preserve">
+    <value>胡桃云上的记录已包含当前最新祈愿，无需重复上传</value>
+  </data>
+  <data name="HutaoSync_MsgChallengeNothingUploaded" xml:space="preserve">
+    <value>没有可上传的当期挑战记录</value>
+  </data>
+  <data name="HutaoSync_ErrEnterEmail" xml:space="preserve">
+    <value>请先输入胡桃账号邮箱</value>
+  </data>
+  <data name="HutaoSync_ErrEnterAccountPassword" xml:space="preserve">
+    <value>请输入胡桃账号邮箱和密码</value>
+  </data>
+  <data name="HutaoSync_ErrEnterCompleteAuth" xml:space="preserve">
+    <value>请完整填写邮箱、密码和邮箱验证码</value>
+  </data>
+  <data name="HutaoSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>两次输入的密码不一致</value>
+  </data>
+  <data name="HutaoSync_ErrRateLimited" xml:space="preserve">
+    <value>操作或发送验证码过于频繁，请稍等片刻后再试</value>
+  </data>
+  <data name="HutaoSync_ErrAuthExpired" xml:space="preserve">
+    <value>胡桃云登录状态已失效，请重新登录</value>
+  </data>
+  <data name="HutaoSync_ErrNoGachaService" xml:space="preserve">
+    <value>您的胡桃账号暂未开通或已过期祈愿云备份服务</value>
+  </data>
+  <data name="HutaoSync_ErrUidLimit" xml:space="preserve">
+    <value>该胡桃云账号保存的游戏角色数量已达上限（最多 5 个），请先删除不用的角色后再试</value>
+  </data>
+  <data name="HutaoSync_ErrInvalidVerifyCode" xml:space="preserve">
+    <value>邮箱验证码不正确或已过期</value>
+  </data>
+  <data name="HutaoSync_ErrAccountExists" xml:space="preserve">
+    <value>该邮箱已注册胡桃账号，请直接登录</value>
+  </data>
+  <data name="HutaoSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>邮箱或密码不正确，请核对后重试</value>
+  </data>
+  <data name="HutaoSync_ErrNotCurrentPeriod" xml:space="preserve">
+    <value>胡桃云仅接受当期深境螺旋或幻想真境剧诗记录</value>
+  </data>
+  <data name="HutaoSync_ErrNetwork" xml:space="preserve">
+    <value>无法连接胡桃云服务，请检查网络设置后重试</value>
+  </data>
+  <data name="HutaoSync_ErrTimeout" xml:space="preserve">
+    <value>连接胡桃云超时，请稍后再试</value>
+  </data>
+  <data name="HutaoSync_ErrGeneric" xml:space="preserve">
+    <value>胡桃云操作未能完成，请稍后重试</value>
+  </data>
+  <data name="HutaoSync_ErrHutaoLoginRequired" xml:space="preserve">
+    <value>请先登录您的胡桃云账号</value>
+  </data>
+  <data name="HutaoSync_ErrFufuLoginRequired" xml:space="preserve">
+    <value>请先在「账户与安全」登录FufuLauncher云存档账号</value>
+  </data>
+  <data name="HutaoSync_ErrSelectUidFirst" xml:space="preserve">
+    <value>请先勾选至少一个游戏角色UID</value>
+  </data>
+  <data name="HutaoSync_ErrSelectFufuArchive" xml:space="preserve">
+    <value>请先选择一个FufuLauncher云端存档</value>
+  </data>
+  <data name="HutaoSync_ErrArchiveNoValidRecords" xml:space="preserve">
+    <value>所选FufuLauncher云端存档中未检测到可用记录</value>
+  </data>
+  <data name="HutaoSync_ErrNoHutaoGachaData" xml:space="preserve">
+    <value>未获取到可用的胡桃云祈愿记录</value>
+  </data>
+  <data name="HutaoSync_ErrNoSupportedChallengeRecords" xml:space="preserve">
+    <value>所选FufuLauncher周期挑战云端存档中未找到深境螺旋或幻想真境剧诗记录</value>
+  </data>
+  <data name="HutaoSync_ErrSelectChallengeFirst" xml:space="preserve">
+    <value>请先勾选至少一条要上传的挑战记录</value>
+  </data>
+  <data name="CloudSync_UiafTargetCurrentDefault" xml:space="preserve">
+    <value>当前正在使用的成就档案</value>
+  </data>
+  <data name="CloudSync_UiafTargetCurrentNamedFormat" xml:space="preserve">
+    <value>当前正在使用的成就档案（{0}）</value>
+  </data>
+  <data name="CloudSync_UiafTargetNamedFormat" xml:space="preserve">
+    <value>本地备份档案：{0}</value>
+  </data>
+  <data name="CloudSync_UiafTargetNewProfile" xml:space="preserve">
+    <value>新建独立的本地成就档案...</value>
+  </data>
+  <data name="CloudSync_UiafDefaultProfileName" xml:space="preserve">
+    <value>默认成就档案</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileEmptyErr" xml:space="preserve">
+    <value>请输入新成就档案的名称</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileExistsErr" xml:space="preserve">
+    <value>已存在同名成就档案，请换一个名称</value>
+  </data>
+  <data name="CloudSync_UiafMergeFailed" xml:space="preserve">
+    <value>导入成就存档失败，请检查文件是否完整</value>
+  </data>
+  <data name="CloudSync_UiafImportDialogTitle" xml:space="preserve">
+    <value>导入成就存档到软件</value>
+  </data>
+  <data name="CloudSync_UiafImportSummaryFormat" xml:space="preserve">
+    <value>该云端成就存档包含 {0} 条成就记录（其中 {1} 项已完成）。请选择要导入到的本地成就档案位置：</value>
+  </data>
+  <data name="CloudSync_UiafTargetHeader" xml:space="preserve">
+    <value>导入目标档案</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileHeader" xml:space="preserve">
+    <value>新档案名称</value>
+  </data>
+  <data name="CloudSync_UiafNewProfilePlaceholder" xml:space="preserve">
+    <value>请输入新本地成就档案名称</value>
+  </data>
+  <data name="CloudSync_UiafImportTip" xml:space="preserve">
+    <value>导入时会自动与目标档案合并，只保留更高的成就完成进度，不会覆盖您原本已完成的成就。</value>
+  </data>
+  <data name="CloudSync_UiafMergeSuccessTitle" xml:space="preserve">
+    <value>成就已导入软件</value>
+  </data>
+  <data name="CloudSync_UiafMergeSuccessFormat" xml:space="preserve">
+    <value>已将云存档「{0}」导入本地成就档案「{1}」，共更新 {2} 项成就进度。</value>
+  </data>
+  <data name="CloudSync_UiafMergeFailedTitle" xml:space="preserve">
+    <value>成就导入失败</value>
+  </data>
+  <data name="CloudSync_UigfImportDialogTitle" xml:space="preserve">
+    <value>导入祈愿存档到软件</value>
+  </data>
+  <data name="CloudSync_UigfImportSummary" xml:space="preserve">
+    <value>请选择要导入到本地祈愿分析的角色UID：</value>
+  </data>
+  <data name="CloudSync_UigfImportTip" xml:space="preserve">
+    <value>将自动按记录编号合并去重并补充物品名称，不会丢失您本地原有的抽卡记录。</value>
+  </data>
+  <data name="CloudSync_UigfMergeSuccessTitle" xml:space="preserve">
+    <value>祈愿记录已导入软件</value>
+  </data>
+  <data name="CloudSync_UigfMergeSuccessFormat" xml:space="preserve">
+    <value>已将云存档「{0}」中的 {1} 个角色（共 {2} 条记录，当前定位UID{3}）合并导入本地祈愿分析库。</value>
+  </data>
+  <data name="CloudSync_UigfMergeFailedTitle" xml:space="preserve">
+    <value>祈愿记录导入失败</value>
+  </data>
+  <data name="CloudSync_ImportConfirmBtn" xml:space="preserve">
+    <value>开始导入</value>
+  </data>
+  <data name="CloudSync_AccountHutaoTitle" xml:space="preserve">
+    <value>胡桃云账号</value>
+  </data>
+  <data name="CloudSync_AccountHutaoDesc" xml:space="preserve">
+    <value>在此登录并管理您的胡桃云账号。将记录保存到云端存档或从云端存档上传至胡桃云时，仍需登录并解锁FufuLauncher云存档账号。</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignedOut" xml:space="preserve">
+    <value>当前未登录胡桃云</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignedInFormat" xml:space="preserve">
+    <value>当前已登录：{0}</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignInBtn" xml:space="preserve">
+    <value>前往登录</value>
+  </data>
+  <data name="CloudSync_AccountHutaoManageBtn" xml:space="preserve">
+    <value>前往管理</value>
+  </data>
+  <data name="HutaoSync_SubTabAccount" xml:space="preserve">
+    <value>胡桃账号</value>
+  </data>
+  <data name="HutaoSync_SubTabPullWish" xml:space="preserve">
+    <value>获取祈愿</value>
+  </data>
+  <data name="HutaoSync_SubTabPushWish" xml:space="preserve">
+    <value>上传祈愿</value>
+  </data>
+  <data name="HutaoSync_SubTabChallenge" xml:space="preserve">
+    <value>上传深渊与剧诗</value>
+  </data>
+  <data name="HutaoSync_OpenSponsorPageBtn" xml:space="preserve">
+    <value>前往胡桃云赞助页</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeDeviceMsgFormat" xml:space="preserve">
+    <value>确定要将设备「{0}」从胡桃云下线吗？若是当前设备，下线后需要重新登录胡桃云账号。</value>
+  </data>
+  <data name="HutaoSync_RedeemDesc" xml:space="preserve">
+    <value>如您已获得胡桃云官方赞助兑换码，请在此输入并为当前登录的胡桃账号激活对应服务时长。</value>
+  </data>
+  <data name="HutaoSync_RedeemTitle" xml:space="preserve">
+    <value>使用兑换码</value>
+  </data>
+  <data name="HutaoSync_RoleDeveloper" xml:space="preserve">
+    <value>授权开发者</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeAllDevicesTitle" xml:space="preserve">
+    <value>确认全部设备下线</value>
+  </data>
+  <data name="HutaoSync_LabelAccelPlan" xml:space="preserve">
+    <value>资源加速服务</value>
+  </data>
+  <data name="HutaoSync_NoBoundRolesHint" xml:space="preserve">
+    <value>当前登录账号暂未绑定角色，将直接显示存档与胡桃云中的全部UID</value>
+  </data>
+  <data name="HutaoSync_LabelNormalizedAccount" xml:space="preserve">
+    <value>规范化用户名</value>
+  </data>
+  <data name="HutaoSync_DevicesDesc" xml:space="preserve">
+    <value>查看当前胡桃云账号在各台设备上的登录状态，也可以操作下线指定设备或强制全部设备下线。</value>
+  </data>
+  <data name="HutaoSync_SponsorFreeTipDesc" xml:space="preserve">
+    <value>每期在「上传深渊与剧诗」提交当期深境螺旋或幻想真境剧诗记录即可免费获赠或延长胡桃云祈愿备份服务时长。</value>
+  </data>
+  <data name="HutaoSync_ActiveRoleSuffix" xml:space="preserve">
+    <value>当前激活</value>
+  </data>
+  <data name="HutaoSync_SponsorSignInHint" xml:space="preserve">
+    <value>请先在「胡桃账号」登录您的胡桃云账号后再使用兑换码。</value>
+  </data>
+  <data name="HutaoSync_GameRoleHeader" xml:space="preserve">
+    <value>选择游戏角色</value>
+  </data>
+  <data name="HutaoSync_DevicesTitle" xml:space="preserve">
+    <value>已登录设备管理</value>
+  </data>
+  <data name="HutaoSync_MsgDeviceRevoked" xml:space="preserve">
+    <value>已将所选设备下线</value>
+  </data>
+  <data name="HutaoSync_SponsorGotoLoginBtn" xml:space="preserve">
+    <value>前往登录胡桃账号</value>
+  </data>
+  <data name="HutaoSync_RefreshDevicesBtn" xml:space="preserve">
+    <value>刷新设备列表</value>
+  </data>
+  <data name="HutaoSync_MsgRolesRefreshedFormat" xml:space="preserve">
+    <value>已刷新绑定角色列表（共 {0} 个角色）</value>
+  </data>
+  <data name="HutaoSync_DeviceLoginTimeFormat" xml:space="preserve">
+    <value>最近登录：{0}</value>
+  </data>
+  <data name="HutaoSync_AllRolesOption" xml:space="preserve">
+    <value>全部已绑定角色（显示全部）</value>
+  </data>
+  <data name="HutaoSync_RedeemPlaceholder" xml:space="preserve">
+    <value>请输入胡桃云兑换码</value>
+  </data>
+  <data name="HutaoSync_PushGachaFilteredEmptyHintFormat" xml:space="preserve">
+    <value>当前存档中暂无角色UID{0} 的祈愿记录，请切换存档或选择「全部已绑定角色」</value>
+  </data>
+  <data name="HutaoSync_DeviceIdFormat" xml:space="preserve">
+    <value>标识：{0}</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeDeviceTitle" xml:space="preserve">
+    <value>确认下线设备</value>
+  </data>
+  <data name="HutaoSync_RoleMaintainer" xml:space="preserve">
+    <value>维护者</value>
+  </data>
+  <data name="HutaoSync_DeviceCurrentBadge" xml:space="preserve">
+    <value>当前设备</value>
+  </data>
+  <data name="HutaoSync_RoleStandard" xml:space="preserve">
+    <value>普通用户</value>
+  </data>
+  <data name="HutaoSync_SubTabSponsor" xml:space="preserve">
+    <value>赞助支持</value>
+  </data>
+  <data name="HutaoSync_MsgRedeemDetailFormat" xml:space="preserve">
+    <value>兑换成功（{0}），账号服务有效期已更新</value>
+  </data>
+  <data name="HutaoSync_SponsorEntryDesc" xml:space="preserve">
+    <value>前往胡桃云官方爱发电赞助页面支持服务器与云服务运营，获取祈愿云备份或资源加速服务兑换码。</value>
+  </data>
+  <data name="HutaoSync_ErrRedeemEmpty" xml:space="preserve">
+    <value>请输入兑换码后再提交</value>
+  </data>
+  <data name="HutaoSync_RevokeAllDevicesBtn" xml:space="preserve">
+    <value>全部设备下线</value>
+  </data>
+  <data name="HutaoSync_DeviceUnknownName" xml:space="preserve">
+    <value>未知设备</value>
+  </data>
+  <data name="HutaoSync_MsgRedeemSuccess" xml:space="preserve">
+    <value>兑换成功，账号服务有效期已更新</value>
+  </data>
+  <data name="HutaoSync_ChallengeFilteredEmptyHintFormat" xml:space="preserve">
+    <value>当前存档中暂无角色UID{0} 的深渊或剧诗记录，请切换存档或选择「全部已绑定角色」</value>
+  </data>
+  <data name="HutaoSync_ErrDeviceInvalid" xml:space="preserve">
+    <value>未能识别目标设备标识</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeAllDevicesMsg" xml:space="preserve">
+    <value>确定要将此胡桃云账号在所有设备（包括当前设备）上的登录状态全部下线吗？下线后需重新登录。</value>
+  </data>
+  <data name="HutaoSync_DevicesEmptyHint" xml:space="preserve">
+    <value>暂无已登录设备记录，或点击「刷新设备列表」获取最新列表</value>
+  </data>
+  <data name="HutaoSync_SponsorEntryTitle" xml:space="preserve">
+    <value>赞助胡桃云服务</value>
+  </data>
+  <data name="HutaoSync_MsgAllDevicesRevoked" xml:space="preserve">
+    <value>已使所有设备的登录状态失效，请重新登录胡桃账号</value>
+  </data>
+  <data name="HutaoSync_ErrRedeemInvalid" xml:space="preserve">
+    <value>兑换码无效、已过期或已被使用，请核对后重试</value>
+  </data>
+  <data name="HutaoSync_LabelCurrentDevice" xml:space="preserve">
+    <value>当前设备标识</value>
+  </data>
+  <data name="HutaoSync_SponsorStatusTitle" xml:space="preserve">
+    <value>胡桃云服务有效期</value>
+  </data>
+  <data name="HutaoSync_RevokeDeviceBtn" xml:space="preserve">
+    <value>下线设备</value>
+  </data>
+  <data name="HutaoSync_RedeemBtn" xml:space="preserve">
+    <value>立即兑换</value>
+  </data>
+  <data name="HutaoSync_SponsorFreeTipTitle" xml:space="preserve">
+    <value>免费获取祈愿云备份时长</value>
+  </data>
+  <data name="HutaoSync_RefreshRolesTooltip" xml:space="preserve">
+    <value>刷新账户绑定角色列表</value>
+  </data>
+  <data name="HutaoSync_PullFilteredEmptyHintFormat" xml:space="preserve">
+    <value>胡桃云中暂无角色UID{0} 的祈愿记录</value>
+  </data>
+  <data name="HutaoSync_AccelPlanExpired" xml:space="preserve">
+    <value>未开通或已过期</value>
+  </data>
+  <data name="HutaoSync_LabelRoleIdentity" xml:space="preserve">
+    <value>账号身份</value>
+  </data>
+  <data name="HutaoSync_StatsCatUtil" xml:space="preserve">
+    <value>深渊使用率</value>
+  </data>
+  <data name="HutaoSync_StatsCategoryHeader" xml:space="preserve">
+    <value>排行维度</value>
+  </data>
+  <data name="HutaoSync_PullConflictMergeBtn" xml:space="preserve">
+    <value>合并保留原有记录</value>
+  </data>
+  <data name="HutaoSync_StatsRefreshBtn" xml:space="preserve">
+    <value>刷新统计</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankMetricFormat" xml:space="preserve">
+    <value>{0}（超越 {1} 全服玩家 - 同角色 {2}）</value>
+  </data>
+  <data name="HutaoSync_StatsEmptyHint" xml:space="preserve">
+    <value>暂无可显示的统计排行数据，请点击「刷新统计」重试</value>
+  </data>
+  <data name="HutaoSync_StatsDesc" xml:space="preserve">
+    <value>无需登录胡桃账号即可浏览深境螺旋与幻想真境剧诗全服统计，选择已绑定角色可同时查询个人当期全服排行。</value>
+  </data>
+  <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
+    <value>FufuLauncher云端存档「{0}」已存在，请选择写入方式：</value>
+  </data>
+  <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
+    <value>幻想真境剧诗上场率</value>
+  </data>
+  <data name="HutaoSync_StatsTeamCountFormat" xml:space="preserve">
+    <value>上场 {0} 次</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewRecords" xml:space="preserve">
+    <value>提交玩家总数</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeExisting" xml:space="preserve">
+    <value>同步到已有FufuLauncher云端存档</value>
+  </data>
+  <data name="HutaoSync_StatsRoleCombatRecordCountFormat" xml:space="preserve">
+    <value>全服样本 {0} 条</value>
+  </data>
+  <data name="HutaoSync_PullConflictOverwriteBtn" xml:space="preserve">
+    <value>覆盖原存档</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodCurrent" xml:space="preserve">
+    <value>当期统计</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewUpdated" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeNew" xml:space="preserve">
+    <value>新建FufuLauncher云端存档</value>
+  </data>
+  <data name="HutaoSync_StatsCatAttend" xml:space="preserve">
+    <value>深渊上场率</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
+    <value>请选择上方已绑定游戏角色以查询该UID的当期排行，或该UID尚未提交当期深境螺旋记录</value>
+  </data>
+  <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
+    <value>已更新胡桃云全服统计与排行数据</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewAbyssFullStar" xml:space="preserve">
+    <value>满星记录数</value>
+  </data>
+  <data name="HutaoSync_StatsTeamUpperLabel" xml:space="preserve">
+    <value>上半</value>
+  </data>
+  <data name="HutaoSync_StatsTeamLowerLabel" xml:space="preserve">
+    <value>下半</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankTitle" xml:space="preserve">
+    <value>个人挑战全服排行（当期）</value>
+  </data>
+  <data name="HutaoSync_StatsAvgSummaryFormat" xml:space="preserve">
+    <value>平均 {0:0.0} 星 - 平均 {1:0.0} 场</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewAvgStar" xml:space="preserve">
+    <value>平均渊星 / 平均战斗</value>
+  </data>
+  <data name="HutaoSync_StatsUidDamageLabel" xml:space="preserve">
+    <value>单次最高伤害</value>
+  </data>
+  <data name="HutaoSync_StatsLoadingHint" xml:space="preserve">
+    <value>正在从胡桃云获取全服统计数据...</value>
+  </data>
+  <data name="HutaoSync_StatsCatHold" xml:space="preserve">
+    <value>角色持有与命之座</value>
+  </data>
+  <data name="HutaoSync_SubTabStats" xml:space="preserve">
+    <value>统计与排行</value>
+  </data>
+  <data name="HutaoSync_StatsFloorHeader" xml:space="preserve">
+    <value>深渊层数</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewSchedule" xml:space="preserve">
+    <value>深渊期数</value>
+  </data>
+  <data name="HutaoSync_StatsUidTakeDamageLabel" xml:space="preserve">
+    <value>最高承受伤害</value>
+  </data>
+  <data name="HutaoSync_TravelerFemaleName" xml:space="preserve">
+    <value>荧</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewTitle" xml:space="preserve">
+    <value>全服期数概览</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewTheater" xml:space="preserve">
+    <value>剧诗统计样本</value>
+  </data>
+  <data name="HutaoSync_PullConflictTitle" xml:space="preserve">
+    <value>FufuLauncher云端存档已存在</value>
+  </data>
+  <data name="HutaoSync_StatsFloorFormat" xml:space="preserve">
+    <value>第 {0} 层</value>
+  </data>
+  <data name="HutaoSync_StatsConstellationFormat" xml:space="preserve">
+    <value>{0}命 {1}</value>
+  </data>
+  <data name="HutaoSync_PullNoExistingHint" xml:space="preserve">
+    <value>当前暂无已有的FufuLauncher祈愿云端存档，本次将为您新建存档。</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodLast" xml:space="preserve">
+    <value>上期统计</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeHeader" xml:space="preserve">
+    <value>FufuLauncher云端存档方式</value>
+  </data>
+  <data name="HutaoSync_StatsTitle" xml:space="preserve">
+    <value>胡桃云全服统计与排行</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodHeader" xml:space="preserve">
+    <value>统计期数</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeMissingAvatarsFormat" xml:space="preserve">
+    <value>UID{0} 缺少完整角色面板数据（需先在账户管理绑定该UID，且角色不少于 9 名并包含旅行者、安柏、凯亚、丽莎）</value>
+  </data>
+  <data name="HutaoSync_PullConflictCancelBtn" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="HutaoSync_StatsCatTeam" xml:space="preserve">
+    <value>热门配队出场</value>
+  </data>
+  <data name="HutaoSync_StatsFullStarSummaryFormat" xml:space="preserve">
+    <value>{0} / {1}（通关 {2}）</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeInvalidData" xml:space="preserve">
+    <value>胡桃云校验挑战数据未通过，请确认当期深境螺旋与角色数据均完整</value>
+  </data>
+  <data name="HutaoSync_TravelerMaleName" xml:space="preserve">
+    <value>空</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeFetchAvatarsFormat" xml:space="preserve">
+    <value>UID{0} 获取角色列表失败：{1}</value>
+  </data>
+  <data name="HutaoSync_StatsRoleCombatSummaryFormat" xml:space="preserve">
+    <value>第 {0} 期 - {1} 条</value>
+  </data>
+  <data name="HutaoSync_ErrMiHoYoLoginExpired" xml:space="preserve">
+    <value>米游社 / HoYoLAB 账号登录状态已失效，请前往「账户管理」重新登录后再试</value>
+  </data>
+  <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
+    <value>胡桃云服务返回异常状态（{0}），请稍后重试</value>
   </data>
 </root>

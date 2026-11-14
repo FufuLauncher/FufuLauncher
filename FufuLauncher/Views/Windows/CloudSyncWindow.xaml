@@ -109,6 +109,11 @@
                             <FontIcon Glyph="&#xE753;" />
                         </NavigationViewItem.Icon>
                     </NavigationViewItem>
+                    <NavigationViewItem Content="{helpers:Loc Key=CloudSync_NavHutao}" Tag="Hutao">
+                        <NavigationViewItem.Icon>
+                            <FontIcon Glyph="&#xE895;" />
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
                 </NavigationView.MenuItems>
             </NavigationView>
 
@@ -128,7 +133,11 @@
             <Grid Padding="32,24,32,20" HorizontalAlignment="Stretch">
 
                 <!-- 1. Account & Security -->
-                <Grid x:Name="AccountTabPanel" VerticalAlignment="Top">
+                <Grid x:Name="AccountTabPanel" RowSpacing="24" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
                     <!-- Signed-out View -->
                     <Grid x:Name="UnauthPanel" RowSpacing="20" VerticalAlignment="Top">
@@ -353,6 +362,30 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
+
+                    <StackPanel Grid.Row="1" Spacing="14">
+                        <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+                        <Grid ColumnSpacing="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" MinWidth="0" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_AccountHutaoTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <TextBlock x:Name="AccountHutaoStatusText"
+                                           Text="{helpers:Loc Key=CloudSync_AccountHutaoSignedOut}"
+                                           Style="{StaticResource RowTitleStyle}" />
+                                <TextBlock Text="{helpers:Loc Key=CloudSync_AccountHutaoDesc}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+                            </StackPanel>
+                            <Button x:Name="AccountHutaoActionButton"
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Content="{helpers:Loc Key=CloudSync_AccountHutaoSignInBtn}"
+                                    Click="OnAccountGotoHutaoClick" />
+                        </Grid>
+                    </StackPanel>
                 </Grid>
 
                 <!-- 2. Quotas & Upgrades -->
@@ -669,6 +702,977 @@
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                         </ItemsRepeater>
+                    </Grid>
+                </Grid>
+
+                <Grid x:Name="HutaoTabPanel" RowSpacing="16" Visibility="Collapsed" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Spacing="3">
+                        <TextBlock Text="{helpers:Loc Key=HutaoSync_SectionTitle}"
+                                   Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock Text="{helpers:Loc Key=HutaoSync_SectionSubtitle}"
+                                   Style="{StaticResource RowCaptionStyle}" />
+                    </StackPanel>
+
+                    <Border Grid.Row="1"
+                            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                            BorderThickness="0,0,0,1">
+                        <SelectorBar x:Name="HutaoSubTabSelector"
+                                     SelectionChanged="OnHutaoSubTabSelectionChanged">
+                            <SelectorBar.Items>
+                                <SelectorBarItem x:Name="HutaoSubAccountTab"
+                                                 Text="{helpers:Loc Key=HutaoSync_SubTabAccount}"
+                                                 Tag="HutaoAccount"
+                                                 IsSelected="True" />
+                                <SelectorBarItem x:Name="HutaoSubPullTab"
+                                                 Text="{helpers:Loc Key=HutaoSync_SubTabPullWish}"
+                                                 Tag="HutaoPull" />
+                                <SelectorBarItem x:Name="HutaoSubPushGachaTab"
+                                                 Text="{helpers:Loc Key=HutaoSync_SubTabPushWish}"
+                                                 Tag="HutaoPushGacha" />
+                                <SelectorBarItem x:Name="HutaoSubChallengeTab"
+                                                 Text="{helpers:Loc Key=HutaoSync_SubTabChallenge}"
+                                                 Tag="HutaoChallenge" />
+                                <SelectorBarItem x:Name="HutaoSubStatsTab"
+                                                 Text="{helpers:Loc Key=HutaoSync_SubTabStats}"
+                                                 Tag="HutaoStats" />
+                                <SelectorBarItem x:Name="HutaoSubSponsorTab"
+                                                 Text="{helpers:Loc Key=HutaoSync_SubTabSponsor}"
+                                                 Tag="HutaoSponsor" />
+                            </SelectorBar.Items>
+                        </SelectorBar>
+                    </Border>
+
+                    <InfoBar x:Name="HutaoFufuRequiredBanner"
+                             Grid.Row="2"
+                             Title="{helpers:Loc Key=HutaoSync_FufuRequiredBannerTitle}"
+                             Message="{helpers:Loc Key=HutaoSync_FufuRequiredBannerMsg}"
+                             Severity="Warning"
+                             IsOpen="False"
+                             IsClosable="False">
+                        <InfoBar.ActionButton>
+                            <Button Content="{helpers:Loc Key=HutaoSync_GotoFufuAccountBtn}"
+                                    Click="OnHutaoGotoFufuAccountClick" />
+                        </InfoBar.ActionButton>
+                    </InfoBar>
+
+                    <Grid Grid.Row="3">
+                        <StackPanel x:Name="HutaoSubAccountPanel" Spacing="16" Visibility="Visible">
+                            <StackPanel Spacing="3">
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_AccountTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_AccountSubtitle}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+                            </StackPanel>
+
+                            <Grid>
+                                <StackPanel x:Name="HutaoUnauthPanel" Spacing="14" Width="460" HorizontalAlignment="Left">
+                                    <RadioButtons x:Name="HutaoAuthModeSelector"
+                                                  MaxColumns="3"
+                                                  SelectionChanged="OnHutaoAuthModeChanged" />
+
+                                    <TextBox x:Name="HutaoEmailTextBox"
+                                             Header="{helpers:Loc Key=HutaoSync_EmailHeader}"
+                                             PlaceholderText="{helpers:Loc Key=HutaoSync_EmailPlaceholder}"
+                                             InputScope="EmailSmtpAddress" />
+
+                                    <views:CloudPasswordInput x:Name="HutaoPasswordInput"
+                                                              Label="{helpers:Loc Key=HutaoSync_PasswordHeader}"
+                                                              PlaceholderText="{helpers:Loc Key=HutaoSync_PasswordPlaceholder}" />
+
+                                    <views:CloudPasswordInput x:Name="HutaoConfirmPasswordInput"
+                                                              Label="{helpers:Loc Key=HutaoSync_ConfirmPasswordHeader}"
+                                                              PlaceholderText="{helpers:Loc Key=HutaoSync_ConfirmPasswordPlaceholder}"
+                                                              Visibility="Collapsed" />
+
+                                    <Grid x:Name="HutaoOtpRow" ColumnSpacing="10" Visibility="Collapsed">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox x:Name="HutaoOtpTextBox"
+                                                 Header="{helpers:Loc Key=HutaoSync_OtpHeader}"
+                                                 PlaceholderText="{helpers:Loc Key=HutaoSync_OtpPlaceholder}"
+                                                 MaxLength="16" />
+                                        <Button x:Name="HutaoSendOtpButton"
+                                                Grid.Column="1"
+                                                MinWidth="112"
+                                                VerticalAlignment="Bottom"
+                                                HorizontalContentAlignment="Center"
+                                                Content="{helpers:Loc Key=HutaoSync_SendOtpBtn}"
+                                                Click="OnHutaoSendOtpClick" />
+                                    </Grid>
+
+                                    <Button x:Name="HutaoAuthSubmitButton"
+                                            HorizontalAlignment="Left"
+                                            MinWidth="180"
+                                            Margin="0,4,0,0"
+                                            Padding="24,8"
+                                            Content="{helpers:Loc Key=HutaoSync_SubmitLogin}"
+                                            Style="{StaticResource AccentButtonStyle}"
+                                            Click="OnHutaoAuthSubmitClick" />
+                                </StackPanel>
+
+                                <StackPanel x:Name="HutaoLoggedInPanel" Visibility="Collapsed" Spacing="16">
+                                    <Grid ColumnSpacing="16">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid Grid.Column="0" ColumnSpacing="20" RowSpacing="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="148" />
+                                                <ColumnDefinition Width="*" MinWidth="0" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0" Grid.Column="0"
+                                                       Text="{helpers:Loc Key=HutaoSync_LabelAccount}"
+                                                       Style="{StaticResource RowLabelStyle}" />
+                                            <TextBlock x:Name="HutaoCurrentEmailText"
+                                                       Grid.Row="0" Grid.Column="1"
+                                                       IsTextSelectionEnabled="True"
+                                                       Style="{StaticResource RowTitleStyle}" />
+
+                                            <TextBlock Grid.Row="1" Grid.Column="0"
+                                                       Text="{helpers:Loc Key=HutaoSync_LabelNormalizedAccount}"
+                                                       Style="{StaticResource RowLabelStyle}" />
+                                            <TextBlock x:Name="HutaoNormalizedNameText"
+                                                       Grid.Row="1" Grid.Column="1"
+                                                       IsTextSelectionEnabled="True"
+                                                       Style="{StaticResource RowCaptionStyle}"
+                                                       VerticalAlignment="Center" />
+
+                                            <TextBlock Grid.Row="2" Grid.Column="0"
+                                                       Text="{helpers:Loc Key=HutaoSync_LabelRoleIdentity}"
+                                                       Style="{StaticResource RowLabelStyle}" />
+                                            <TextBlock x:Name="HutaoAccountRoleText"
+                                                       Grid.Row="2" Grid.Column="1"
+                                                       Style="{StaticResource RowCaptionStyle}"
+                                                       VerticalAlignment="Center" />
+
+                                            <TextBlock Grid.Row="3" Grid.Column="0"
+                                                       Text="{helpers:Loc Key=HutaoSync_LabelGachaPlan}"
+                                                       Style="{StaticResource RowLabelStyle}" />
+                                            <TextBlock x:Name="HutaoPlanStatusText"
+                                                       Grid.Row="3" Grid.Column="1"
+                                                       Style="{StaticResource RowCaptionStyle}"
+                                                       VerticalAlignment="Center" />
+
+                                            <TextBlock Grid.Row="4" Grid.Column="0"
+                                                       Text="{helpers:Loc Key=HutaoSync_LabelAccelPlan}"
+                                                       Style="{StaticResource RowLabelStyle}" />
+                                            <TextBlock x:Name="HutaoCdnStatusText"
+                                                       Grid.Row="4" Grid.Column="1"
+                                                       Style="{StaticResource RowCaptionStyle}"
+                                                       VerticalAlignment="Center" />
+
+                                            <TextBlock Grid.Row="5" Grid.Column="0"
+                                                       Text="{helpers:Loc Key=HutaoSync_LabelCurrentDevice}"
+                                                       Style="{StaticResource RowLabelStyle}" />
+                                            <TextBlock x:Name="HutaoCurrentDeviceIdText"
+                                                       Grid.Row="5" Grid.Column="1"
+                                                       IsTextSelectionEnabled="True"
+                                                       Style="{StaticResource RowCaptionStyle}"
+                                                       VerticalAlignment="Center" />
+                                        </Grid>
+
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Top">
+                                            <Button Content="{helpers:Loc Key=HutaoSync_RefreshAccountBtn}"
+                                                    Click="OnHutaoRefreshUserInfoClick" />
+                                            <Button Content="{helpers:Loc Key=HutaoSync_LogoutBtn}"
+                                                    Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                    Click="OnHutaoLogoutClick" />
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <ItemsRepeater x:Name="HutaoExtraFieldsRepeater" Visibility="Collapsed">
+                                        <ItemsRepeater.ItemTemplate>
+                                            <DataTemplate x:DataType="models:HutaoAccountExtraFieldItem">
+                                                <Grid ColumnSpacing="20" Padding="0,3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="148" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0"
+                                                               Text="{x:Bind Label}"
+                                                               Style="{StaticResource RowLabelStyle}" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Text="{x:Bind Value}"
+                                                               IsTextSelectionEnabled="True"
+                                                               Style="{StaticResource RowCaptionStyle}"
+                                                               VerticalAlignment="Center" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsRepeater.ItemTemplate>
+                                    </ItemsRepeater>
+
+                                    <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                                    <StackPanel Spacing="10">
+                                        <Grid ColumnSpacing="16">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" MinWidth="0" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Spacing="3">
+                                                <TextBlock Text="{helpers:Loc Key=HutaoSync_DevicesTitle}"
+                                                           Style="{StaticResource SectionHeadingStyle}" />
+                                                <TextBlock Text="{helpers:Loc Key=HutaoSync_DevicesDesc}"
+                                                           Style="{StaticResource RowCaptionStyle}" />
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                                <Button Content="{helpers:Loc Key=HutaoSync_RefreshDevicesBtn}"
+                                                        Click="OnHutaoRefreshDevicesClick" />
+                                                <Button Content="{helpers:Loc Key=HutaoSync_RevokeAllDevicesBtn}"
+                                                        Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                                        Click="OnHutaoRevokeAllDevicesClick" />
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <TextBlock x:Name="HutaoDevicesEmptyText"
+                                                   Text="{helpers:Loc Key=HutaoSync_DevicesEmptyHint}"
+                                                   Style="{StaticResource RowCaptionStyle}"
+                                                   Margin="0,4,0,4" />
+
+                                        <ItemsRepeater x:Name="HutaoDevicesRepeater">
+                                            <ItemsRepeater.ItemTemplate>
+                                                <DataTemplate x:DataType="models:HutaoDeviceListItem">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+                                                        <Grid ColumnSpacing="12" Padding="4,8">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" MinWidth="0" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <StackPanel Grid.Column="0" Spacing="2" VerticalAlignment="Center">
+                                                                <StackPanel Orientation="Horizontal" Spacing="8">
+                                                                    <TextBlock Text="{x:Bind TitleText}"
+                                                                               FontSize="13"
+                                                                               FontWeight="SemiBold"
+                                                                               TextTrimming="CharacterEllipsis" />
+                                                                    <TextBlock Text="{x:Bind BadgeText}"
+                                                                               FontSize="12"
+                                                                               FontWeight="SemiBold"
+                                                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                                                               VerticalAlignment="Center" />
+                                                                </StackPanel>
+                                                                <TextBlock Text="{x:Bind SubtitleText}"
+                                                                           IsTextSelectionEnabled="True"
+                                                                           Style="{StaticResource RowCaptionStyle}" />
+                                                            </StackPanel>
+                                                            <Button Grid.Column="1"
+                                                                    Content="{helpers:Loc Key=HutaoSync_RevokeDeviceBtn}"
+                                                                    Tag="{x:Bind DeviceId}"
+                                                                    Click="OnHutaoRevokeDeviceClick"
+                                                                    Style="{StaticResource FlatRowActionButtonStyle}"
+                                                                    Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                                                        </Grid>
+                                                        <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsRepeater.ItemTemplate>
+                                        </ItemsRepeater>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+
+                            <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                            <InfoBar Title="{helpers:Loc Key=HutaoSync_BridgeRuleTitle}"
+                                     Message="{helpers:Loc Key=HutaoSync_BridgeRuleDesc}"
+                                     Severity="Informational"
+                                     IsOpen="True"
+                                     IsClosable="False" />
+
+                            <TextBlock Text="{helpers:Loc Key=HutaoSync_AchievementNotice}"
+                                       Style="{StaticResource RowCaptionStyle}" />
+                        </StackPanel>
+
+                        <Grid x:Name="HutaoSubPullPanel" RowSpacing="14" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Spacing="3">
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_PullSectionTitle}"
+                                               Style="{StaticResource SectionHeadingStyle}" />
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_PullSectionDesc}"
+                                               Style="{StaticResource RowCaptionStyle}" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                    <Button Content="{helpers:Loc Key=HutaoSync_ToggleSelectBtn}"
+                                            Click="OnHutaoToggleSelectAllPullClick" />
+                                    <Button Content="{helpers:Loc Key=HutaoSync_LoadHutaoListBtn}"
+                                            Click="OnHutaoLoadEntriesClick" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="1" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="HutaoPullRoleFilterCombo"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_GameRoleHeader}"
+                                          SelectionChanged="OnHutaoPullRoleFilterChanged" />
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        ToolTipService.ToolTip="{helpers:Loc Key=HutaoSync_RefreshRolesTooltip}"
+                                        Click="OnHutaoRefreshAccountRolesClick">
+                                    <FontIcon Glyph="&#xE72C;" FontSize="14" />
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Row="2" ColumnSpacing="16" RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="260" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="HutaoPullSaveModeCombo"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_PullSaveModeHeader}"
+                                          SelectionChanged="OnHutaoPullSaveModeChanged" />
+                                <StackPanel x:Name="HutaoPullNewSlotPanel" Grid.Column="1" Spacing="4">
+                                    <TextBox x:Name="HutaoPullTargetSlotBox"
+                                             Text="hutao_gacha"
+                                             Header="{helpers:Loc Key=HutaoSync_TargetSlotHeader}"
+                                             PlaceholderText="{helpers:Loc Key=HutaoSync_TargetSlotPlaceholder}"
+                                             MaxLength="64" />
+                                </StackPanel>
+                                <StackPanel x:Name="HutaoPullExistingSlotPanel" Grid.Column="1" Spacing="4" Visibility="Collapsed">
+                                    <ComboBox x:Name="HutaoPullExistingSlotCombo"
+                                              HorizontalAlignment="Stretch"
+                                              Header="{helpers:Loc Key=HutaoSync_PickExistingSlotHeader}"
+                                              PlaceholderText="{helpers:Loc Key=HutaoSync_PickExistingSlotPlaceholder}"
+                                              SelectionChanged="OnHutaoPullExistingSlotChanged" />
+                                </StackPanel>
+                            </Grid>
+
+                            <StackPanel Grid.Row="3" Spacing="8">
+                                <TextBlock x:Name="HutaoGachaEntriesEmptyText"
+                                           Text="{helpers:Loc Key=HutaoSync_PullEmptyHint}"
+                                           Style="{StaticResource RowCaptionStyle}"
+                                           Margin="0,6,0,6" />
+                                <ItemsRepeater x:Name="HutaoGachaEntriesRepeater">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="models:HutaoGachaEntrySelectionItem">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid ColumnSpacing="12" Padding="4,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="280" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <CheckBox Grid.Column="0"
+                                                              IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                                                              MinWidth="0" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Text="{x:Bind DisplayTitle, Mode=OneWay}"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="SemiBold"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               helpers:TrimmedToolTip.IsEnabled="True" />
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{x:Bind CountSummary}"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource RowCaptionStyle}" />
+                                                    <Button Grid.Column="3"
+                                                            Content="{helpers:Loc Key=HutaoSync_DeleteHutaoUidBtn}"
+                                                            Tag="{x:Bind Uid}"
+                                                            Click="OnHutaoDeleteGachaUidClick"
+                                                            Style="{StaticResource FlatRowActionButtonStyle}"
+                                                            Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                                                </Grid>
+                                                <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                            </StackPanel>
+
+                            <Grid Grid.Row="4" ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="4">
+                                    <CheckBox x:Name="HutaoMergeExistingCheckBox"
+                                              IsChecked="True"
+                                              Visibility="Collapsed"
+                                              Content="{helpers:Loc Key=HutaoSync_MergeExistingCheck}" />
+                                    <TextBlock x:Name="HutaoPullNoExistingHintText"
+                                               Text="{helpers:Loc Key=HutaoSync_PullNoExistingHint}"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               Visibility="Collapsed" />
+                                </StackPanel>
+                                <Button x:Name="HutaoPullActionButton"
+                                        Grid.Column="1"
+                                        Content="{helpers:Loc Key=HutaoSync_PullActionBtn}"
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        Click="OnHutaoPullToFufuClick" />
+                            </Grid>
+                        </Grid>
+
+                        <Grid x:Name="HutaoSubPushGachaPanel" RowSpacing="14" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Spacing="3">
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_PushGachaTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_PushGachaDesc}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+                            </StackPanel>
+
+                            <Grid Grid.Row="1" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="HutaoPushRoleFilterCombo"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_GameRoleHeader}"
+                                          SelectionChanged="OnHutaoPushRoleFilterChanged" />
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        ToolTipService.ToolTip="{helpers:Loc Key=HutaoSync_RefreshRolesTooltip}"
+                                        Click="OnHutaoRefreshAccountRolesClick">
+                                    <FontIcon Glyph="&#xE72C;" FontSize="14" />
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Row="2" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="FufuUigfArchiveComboBox"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          PlaceholderText="{helpers:Loc Key=HutaoSync_SelectFufuGachaArchivePlaceholder}"
+                                          SelectionChanged="OnHutaoPushUigfArchiveSelectionChanged" />
+                                <Button Grid.Column="1"
+                                        Content="{helpers:Loc Key=HutaoSync_RefreshFufuArchiveBtn}"
+                                        Click="OnHutaoRefreshFufuArchivesClick" />
+                                <Button Grid.Column="2"
+                                        Content="{helpers:Loc Key=HutaoSync_InspectArchiveBtn}"
+                                        Click="OnHutaoInspectFufuUigfClick" />
+                            </Grid>
+
+                            <StackPanel Grid.Row="3" Spacing="8">
+                                <TextBlock x:Name="FufuUigfUidsEmptyText"
+                                           Text="{helpers:Loc Key=HutaoSync_PushGachaEmptyHint}"
+                                           Style="{StaticResource RowCaptionStyle}"
+                                           Margin="0,6,0,6" />
+                                <ItemsRepeater x:Name="FufuUigfUidsRepeater">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="models:FufuCloudUigfUidItem">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid ColumnSpacing="12" Padding="4,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="280" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <CheckBox Grid.Column="0"
+                                                              IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                                                              MinWidth="0" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Text="{x:Bind DisplayTitle, Mode=OneWay}"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="SemiBold"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               helpers:TrimmedToolTip.IsEnabled="True" />
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{x:Bind DetailText}"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource RowCaptionStyle}" />
+                                                </Grid>
+                                                <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                            </StackPanel>
+
+                            <Button x:Name="HutaoPushGachaActionButton"
+                                    Grid.Row="4"
+                                    HorizontalAlignment="Right"
+                                    Content="{helpers:Loc Key=HutaoSync_PushGachaActionBtn}"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Click="OnHutaoPushGachaToHutaoClick" />
+                        </Grid>
+
+                        <Grid x:Name="HutaoSubChallengePanel" RowSpacing="14" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0" Spacing="3">
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_ChallengeTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_ChallengeDesc}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+                            </StackPanel>
+
+                            <Grid Grid.Row="1" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="HutaoChallengeRoleFilterCombo"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_GameRoleHeader}"
+                                          SelectionChanged="OnHutaoChallengeRoleFilterChanged" />
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        ToolTipService.ToolTip="{helpers:Loc Key=HutaoSync_RefreshRolesTooltip}"
+                                        Click="OnHutaoRefreshAccountRolesClick">
+                                    <FontIcon Glyph="&#xE72C;" FontSize="14" />
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Row="2" ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="FufuChallengeArchiveComboBox"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          PlaceholderText="{helpers:Loc Key=HutaoSync_SelectFufuChallengeArchivePlaceholder}"
+                                          SelectionChanged="OnHutaoChallengeArchiveSelectionChanged" />
+                                <Button Grid.Column="1"
+                                        Content="{helpers:Loc Key=HutaoSync_RefreshFufuArchiveBtn}"
+                                        Click="OnHutaoRefreshFufuArchivesClick" />
+                                <Button Grid.Column="2"
+                                        Content="{helpers:Loc Key=HutaoSync_InspectArchiveBtn}"
+                                        Click="OnHutaoInspectFufuChallengeClick" />
+                            </Grid>
+
+                            <StackPanel Grid.Row="3" Spacing="8">
+                                <TextBlock x:Name="FufuChallengeItemsEmptyText"
+                                           Text="{helpers:Loc Key=HutaoSync_ChallengeInspectEmptyHint}"
+                                           Style="{StaticResource RowCaptionStyle}"
+                                           Margin="0,6,0,6" />
+                                <ItemsRepeater x:Name="FufuChallengeItemsRepeater">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="models:FufuCloudChallengeItem">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid ColumnSpacing="12" Padding="4,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                        <ColumnDefinition Width="180" />
+                                                        <ColumnDefinition Width="100" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <CheckBox Grid.Column="0"
+                                                              IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                                                              MinWidth="0" />
+                                                    <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                                                        <TextBlock Text="{x:Bind TitleText, Mode=OneWay}"
+                                                                   FontSize="13"
+                                                                   FontWeight="SemiBold"
+                                                                   TextTrimming="CharacterEllipsis"
+                                                                   helpers:TrimmedToolTip.IsEnabled="True" />
+                                                        <TextBlock Text="{x:Bind SummaryText}"
+                                                                   Style="{StaticResource RowCaptionStyle}" />
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{x:Bind PeriodText}"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource RowCaptionStyle}" />
+                                                    <TextBlock Grid.Column="3"
+                                                               Text="{x:Bind StatusBadgeText}"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Right"
+                                                               FontSize="12"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                </Grid>
+                                                <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                            </StackPanel>
+
+                            <Button x:Name="HutaoChallengeActionButton"
+                                    Grid.Row="4"
+                                    HorizontalAlignment="Right"
+                                    Content="{helpers:Loc Key=HutaoSync_ChallengeActionBtn}"
+                                    Style="{StaticResource AccentButtonStyle}"
+                                    Click="OnHutaoPushChallengeToHutaoClick" />
+                        </Grid>
+
+                        <StackPanel x:Name="HutaoSubStatsPanel" Spacing="16" Visibility="Collapsed">
+                            <Grid ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="3">
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_StatsTitle}"
+                                               Style="{StaticResource SectionHeadingStyle}" />
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_StatsDesc}"
+                                               Style="{StaticResource RowCaptionStyle}" />
+                                </StackPanel>
+                                <Button x:Name="HutaoStatsRefreshButton"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Content="{helpers:Loc Key=HutaoSync_StatsRefreshBtn}"
+                                        Click="OnHutaoStatsRefreshClick" />
+                            </Grid>
+
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="HutaoStatsRoleFilterCombo"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_GameRoleHeader}"
+                                          SelectionChanged="OnHutaoStatsRoleChanged" />
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Bottom"
+                                        ToolTipService.ToolTip="{helpers:Loc Key=HutaoSync_RefreshRolesTooltip}"
+                                        Click="OnHutaoRefreshAccountRolesClick">
+                                    <FontIcon Glyph="&#xE72C;" FontSize="14" />
+                                </Button>
+                            </Grid>
+
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="140" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox x:Name="HutaoStatsPeriodCombo"
+                                          Grid.Column="0"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_StatsPeriodHeader}"
+                                          SelectionChanged="OnHutaoStatsPeriodChanged" />
+                                <ComboBox x:Name="HutaoStatsCategoryCombo"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_StatsCategoryHeader}"
+                                          SelectionChanged="OnHutaoStatsCategoryChanged" />
+                                <ComboBox x:Name="HutaoStatsFloorCombo"
+                                          Grid.Column="2"
+                                          HorizontalAlignment="Stretch"
+                                          Header="{helpers:Loc Key=HutaoSync_StatsFloorHeader}"
+                                          SelectionChanged="OnHutaoStatsFloorChanged" />
+                            </Grid>
+
+                            <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_StatsOverviewTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <Grid ColumnSpacing="20" RowSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="164" />
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsOverviewSchedule}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsOverviewScheduleText"
+                                               Grid.Row="0" Grid.Column="1"
+                                               Style="{StaticResource RowTitleStyle}" />
+                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsOverviewRecords}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsOverviewRecordsText"
+                                               Grid.Row="1" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="2" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsOverviewAbyssFullStar}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsOverviewFullStarText"
+                                               Grid.Row="2" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="3" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsOverviewAvgStar}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsOverviewAvgText"
+                                               Grid.Row="3" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="4" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsOverviewTheater}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsOverviewTheaterText"
+                                               Grid.Row="4" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="5" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsOverviewUpdated}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsOverviewUpdatedText"
+                                               Grid.Row="5" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_StatsUidRankTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <TextBlock x:Name="HutaoStatsUidRankEmptyText"
+                                           Text="{helpers:Loc Key=HutaoSync_StatsUidRankEmptyHint}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+                                <Grid x:Name="HutaoStatsUidRankGrid" ColumnSpacing="20" RowSpacing="8" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="164" />
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsUidDamageLabel}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsUidDamageText"
+                                               Grid.Row="0" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                               Text="{helpers:Loc Key=HutaoSync_StatsUidTakeDamageLabel}"
+                                               Style="{StaticResource RowLabelStyle}" />
+                                    <TextBlock x:Name="HutaoStatsUidTakeDamageText"
+                                               Grid.Row="1" Grid.Column="1"
+                                               Style="{StaticResource RowCaptionStyle}"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </StackPanel>
+
+                            <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                            <StackPanel Spacing="8">
+                                <TextBlock x:Name="HutaoStatsEmptyText"
+                                           Text="{helpers:Loc Key=HutaoSync_StatsEmptyHint}"
+                                           Style="{StaticResource RowCaptionStyle}"
+                                           Margin="0,4,0,4" />
+                                <ItemsRepeater x:Name="HutaoStatsRowsRepeater">
+                                    <ItemsRepeater.ItemTemplate>
+                                        <DataTemplate x:DataType="models:HutaoRankDisplayItem">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid ColumnSpacing="12" Padding="4,8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="36" />
+                                                        <ColumnDefinition Width="220" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0"
+                                                               Text="{x:Bind RankNumberText}"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                    <TextBlock Grid.Column="1"
+                                                               Text="{x:Bind PrimaryText}"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="SemiBold"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               helpers:TrimmedToolTip.IsEnabled="True" />
+                                                    <TextBlock Grid.Column="2"
+                                                               Text="{x:Bind SecondaryText}"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource RowCaptionStyle}"
+                                                               TextTrimming="CharacterEllipsis"
+                                                               helpers:TrimmedToolTip.IsEnabled="True" />
+                                                    <TextBlock Grid.Column="3"
+                                                               Text="{x:Bind MetricText}"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="SemiBold"
+                                                               Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                </Grid>
+                                                <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsRepeater.ItemTemplate>
+                                </ItemsRepeater>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel x:Name="HutaoSubSponsorPanel" Spacing="16" Visibility="Collapsed">
+                            <Grid ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="10">
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_SponsorStatusTitle}"
+                                               Style="{StaticResource SectionHeadingStyle}" />
+                                    <Grid ColumnSpacing="20" RowSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="148" />
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                                   Text="{helpers:Loc Key=HutaoSync_LabelAccount}"
+                                                   Style="{StaticResource RowLabelStyle}" />
+                                        <TextBlock x:Name="HutaoSponsorAccountText"
+                                                   Grid.Row="0" Grid.Column="1"
+                                                   Style="{StaticResource RowTitleStyle}" />
+                                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                                   Text="{helpers:Loc Key=HutaoSync_LabelGachaPlan}"
+                                                   Style="{StaticResource RowLabelStyle}" />
+                                        <TextBlock x:Name="HutaoSponsorGachaText"
+                                                   Grid.Row="1" Grid.Column="1"
+                                                   Style="{StaticResource RowCaptionStyle}"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                                   Text="{helpers:Loc Key=HutaoSync_LabelAccelPlan}"
+                                                   Style="{StaticResource RowLabelStyle}" />
+                                        <TextBlock x:Name="HutaoSponsorCdnText"
+                                                   Grid.Row="2" Grid.Column="1"
+                                                   Style="{StaticResource RowCaptionStyle}"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                </StackPanel>
+                                <Button x:Name="HutaoSponsorActionBtn"
+                                        Grid.Column="1"
+                                        VerticalAlignment="Top"
+                                        Content="{helpers:Loc Key=HutaoSync_RefreshAccountBtn}"
+                                        Click="OnHutaoSponsorPrimaryActionClick" />
+                            </Grid>
+
+                            <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                            <Grid ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Spacing="4">
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_SponsorEntryTitle}"
+                                               Style="{StaticResource SectionHeadingStyle}" />
+                                    <TextBlock Text="{helpers:Loc Key=HutaoSync_SponsorEntryDesc}"
+                                               Style="{StaticResource RowCaptionStyle}" />
+                                </StackPanel>
+                                <Button Grid.Column="1"
+                                        VerticalAlignment="Center"
+                                        Content="{helpers:Loc Key=HutaoSync_OpenSponsorPageBtn}"
+                                        Style="{StaticResource AccentButtonStyle}"
+                                        Click="OnHutaoOpenSponsorPageClick" />
+                            </Grid>
+
+                            <InfoBar Title="{helpers:Loc Key=HutaoSync_SponsorFreeTipTitle}"
+                                     Message="{helpers:Loc Key=HutaoSync_SponsorFreeTipDesc}"
+                                     Severity="Informational"
+                                     IsOpen="True"
+                                     IsClosable="False" />
+
+                            <Rectangle Style="{StaticResource HairlineDividerStyle}" />
+
+                            <StackPanel Spacing="10">
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_RedeemTitle}"
+                                           Style="{StaticResource SectionHeadingStyle}" />
+                                <TextBlock Text="{helpers:Loc Key=HutaoSync_RedeemDesc}"
+                                           Style="{StaticResource RowCaptionStyle}" />
+                                <TextBlock x:Name="HutaoSponsorSignInHintText"
+                                           Text="{helpers:Loc Key=HutaoSync_SponsorSignInHint}"
+                                           Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                                           Style="{StaticResource RowCaptionStyle}"
+                                           Visibility="Collapsed" />
+                                <Grid ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox x:Name="HutaoRedeemCodeBox"
+                                             Grid.Column="0"
+                                             PlaceholderText="{helpers:Loc Key=HutaoSync_RedeemPlaceholder}"
+                                             MaxLength="64" />
+                                    <Button x:Name="HutaoRedeemButton"
+                                            Grid.Column="1"
+                                            Content="{helpers:Loc Key=HutaoSync_RedeemBtn}"
+                                            Style="{StaticResource AccentButtonStyle}"
+                                            Click="OnHutaoRedeemCodeClick" />
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
                     </Grid>
                 </Grid>
 
