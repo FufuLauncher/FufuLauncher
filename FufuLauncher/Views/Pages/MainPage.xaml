@@ -442,47 +442,101 @@
                                 x:Name="InfoCardNewsViewport"
                                 Grid.Row="1"
                                 SizeChanged="InfoCardNewsViewport_SizeChanged">
-                                <ListView
-                                    x:Name="EventsListView"
-                                    Padding="4,0,4,4"
-                                    ItemTemplate="{StaticResource NewsItemTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.ActivityPosts}"
-                                    SelectionMode="None">
-                                    <ListView.ItemContainerTransitions>
-                                        <TransitionCollection />
-                                    </ListView.ItemContainerTransitions>
-                                    <ListView.RenderTransform>
+                                <Grid x:Name="EventsTabPanel">
+                                    <Grid.RenderTransform>
                                         <TranslateTransform x:Name="EventsListTranslate" X="0" />
-                                    </ListView.RenderTransform>
-                                </ListView>
-                                <ListView
-                                    x:Name="AnnouncementsListView"
-                                    Padding="4,0,4,4"
-                                    ItemTemplate="{StaticResource NewsItemTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.AnnouncementPosts}"
-                                    SelectionMode="None"
-                                    Visibility="Collapsed">
-                                    <ListView.ItemContainerTransitions>
-                                        <TransitionCollection />
-                                    </ListView.ItemContainerTransitions>
-                                    <ListView.RenderTransform>
+                                    </Grid.RenderTransform>
+                                    <ListView
+                                        x:Name="EventsListView"
+                                        Padding="4,0,4,4"
+                                        ItemTemplate="{StaticResource NewsItemTemplate}"
+                                        ItemsSource="{x:Bind ViewModel.ActivityPosts}"
+                                        SelectionMode="None"
+                                        Visibility="{x:Bind ViewModel.ActivityListVisibility, Mode=OneWay}">
+                                        <ListView.ItemContainerTransitions>
+                                            <TransitionCollection />
+                                        </ListView.ItemContainerTransitions>
+                                    </ListView>
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        IsHitTestVisible="False"
+                                        Spacing="4"
+                                        Visibility="{x:Bind ViewModel.ActivityEmptyVisibility, Mode=OneWay}">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            helpers:TrimmedToolTip.IsEnabled="False"
+                                            FontSize="11"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Opacity="0.65"
+                                            Text="( ˘•ω•˘ )"
+                                            TextTrimming="None" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid x:Name="AnnouncementsTabPanel" Visibility="Collapsed">
+                                    <Grid.RenderTransform>
                                         <TranslateTransform x:Name="AnnouncementsListTranslate" X="0" />
-                                    </ListView.RenderTransform>
-                                </ListView>
-                                <ListView
-                                    x:Name="NewsListView"
-                                    Padding="4,0,4,4"
-                                    ItemTemplate="{StaticResource NewsItemTemplate}"
-                                    ItemsSource="{x:Bind ViewModel.InfoPosts}"
-                                    SelectionMode="None"
-                                    Visibility="Collapsed">
-                                    <ListView.ItemContainerTransitions>
-                                        <TransitionCollection />
-                                    </ListView.ItemContainerTransitions>
-                                    <ListView.RenderTransform>
+                                    </Grid.RenderTransform>
+                                    <ListView
+                                        x:Name="AnnouncementsListView"
+                                        Padding="4,0,4,4"
+                                        ItemTemplate="{StaticResource NewsItemTemplate}"
+                                        ItemsSource="{x:Bind ViewModel.AnnouncementPosts}"
+                                        SelectionMode="None"
+                                        Visibility="{x:Bind ViewModel.AnnouncementListVisibility, Mode=OneWay}">
+                                        <ListView.ItemContainerTransitions>
+                                            <TransitionCollection />
+                                        </ListView.ItemContainerTransitions>
+                                    </ListView>
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        IsHitTestVisible="False"
+                                        Spacing="4"
+                                        Visibility="{x:Bind ViewModel.AnnouncementEmptyVisibility, Mode=OneWay}">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            helpers:TrimmedToolTip.IsEnabled="False"
+                                            FontSize="11"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Opacity="0.65"
+                                            Text="( ˘•ω•˘ )"
+                                            TextTrimming="None" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid x:Name="NewsTabPanel" Visibility="Collapsed">
+                                    <Grid.RenderTransform>
                                         <TranslateTransform x:Name="NewsListTranslate" X="0" />
-                                    </ListView.RenderTransform>
-                                </ListView>
+                                    </Grid.RenderTransform>
+                                    <ListView
+                                        x:Name="NewsListView"
+                                        Padding="4,0,4,4"
+                                        ItemTemplate="{StaticResource NewsItemTemplate}"
+                                        ItemsSource="{x:Bind ViewModel.InfoPosts}"
+                                        SelectionMode="None"
+                                        Visibility="{x:Bind ViewModel.InfoListVisibility, Mode=OneWay}">
+                                        <ListView.ItemContainerTransitions>
+                                            <TransitionCollection />
+                                        </ListView.ItemContainerTransitions>
+                                    </ListView>
+                                    <StackPanel
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        IsHitTestVisible="False"
+                                        Spacing="4"
+                                        Visibility="{x:Bind ViewModel.InfoEmptyVisibility, Mode=OneWay}">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            helpers:TrimmedToolTip.IsEnabled="False"
+                                            FontSize="11"
+                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                            Opacity="0.65"
+                                            Text="( ˘•ω•˘ )"
+                                            TextTrimming="None" />
+                                    </StackPanel>
+                                </Grid>
                             </Grid>
                         </Grid>
 

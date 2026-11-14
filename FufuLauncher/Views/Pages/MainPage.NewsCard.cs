@@ -280,7 +280,7 @@ public sealed partial class MainPage
         NavigationView sender,
         NavigationViewSelectionChangedEventArgs args)
     {
-        if (EventsListView == null || AnnouncementsListView == null || NewsListView == null)
+        if (EventsTabPanel == null || AnnouncementsTabPanel == null || NewsTabPanel == null)
         {
             return;
         }
@@ -313,27 +313,27 @@ public sealed partial class MainPage
         _newsTabTransitionStoryboard?.Stop();
         _currentNewsTabIndex = targetIndex;
 
-        ListView? targetList = null;
+        Grid? targetPanel = null;
         TranslateTransform? targetTranslate = null;
 
         for (var i = 0; i < 3; i++)
         {
-            var (list, translate) = GetNewsTabParts(i);
+            var (panel, translate) = GetNewsTabParts(i);
 
             if (i == targetIndex)
             {
-                targetList = list;
+                targetPanel = panel;
                 targetTranslate = translate;
             }
             else
             {
-                list.Visibility = Visibility.Collapsed;
-                list.Opacity = 1.0;
+                panel.Visibility = Visibility.Collapsed;
+                panel.Opacity = 1.0;
                 translate.X = 0;
             }
         }
 
-        if (targetList == null || targetTranslate == null)
+        if (targetPanel == null || targetTranslate == null)
         {
             return;
         }
@@ -342,8 +342,8 @@ public sealed partial class MainPage
         var width = InfoCardNewsViewport?.ActualWidth ?? 0;
         var slideOffset = Math.Min(100.0, Math.Max(width * 0.28, 72.0)) * direction;
 
-        targetList.Visibility = Visibility.Visible;
-        targetList.Opacity = 0;
+        targetPanel.Visibility = Visibility.Visible;
+        targetPanel.Opacity = 0;
         targetTranslate.X = slideOffset;
 
         var storyboard = new Storyboard();
@@ -353,7 +353,7 @@ public sealed partial class MainPage
         var fadeEasing = new CubicEase { EasingMode = EasingMode.EaseOut };
 
         storyboard.Children.Add(CreateDoubleAnimation(targetTranslate, "X", 0, slideDuration, slideEasing));
-        storyboard.Children.Add(CreateDoubleAnimation(targetList, "Opacity", 1.0, fadeDuration, fadeEasing));
+        storyboard.Children.Add(CreateDoubleAnimation(targetPanel, "Opacity", 1.0, fadeDuration, fadeEasing));
 
         _newsTabTransitionStoryboard = storyboard;
         storyboard.Completed += (_, _) =>
@@ -364,17 +364,17 @@ public sealed partial class MainPage
             }
 
             targetTranslate.X = 0;
-            targetList.Opacity = 1.0;
+            targetPanel.Opacity = 1.0;
             _newsTabTransitionStoryboard = null;
         };
         storyboard.Begin();
     }
 
-    private (ListView List, TranslateTransform Translate) GetNewsTabParts(int index) => index switch
+    private (Grid Panel, TranslateTransform Translate) GetNewsTabParts(int index) => index switch
     {
-        0 => (EventsListView, EventsListTranslate),
-        1 => (AnnouncementsListView, AnnouncementsListTranslate),
-        _ => (NewsListView, NewsListTranslate)
+        0 => (EventsTabPanel, EventsListTranslate),
+        1 => (AnnouncementsTabPanel, AnnouncementsListTranslate),
+        _ => (NewsTabPanel, NewsListTranslate)
     };
 
     #endregion

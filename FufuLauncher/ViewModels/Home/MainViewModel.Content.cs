@@ -9,6 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 using FufuLauncher.Helpers;
 
 namespace FufuLauncher.ViewModels;
@@ -24,6 +25,39 @@ public partial class MainViewModel
     [ObservableProperty] private ObservableCollection<SocialMediaItem> _socialMediaList = new();
 
     [ObservableProperty] private bool _isNewsLoaded;
+
+    public Visibility ActivityListVisibility =>
+        !IsNewsLoaded || ActivityPosts.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    public Visibility ActivityEmptyVisibility =>
+        IsNewsLoaded && ActivityPosts.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    public Visibility AnnouncementListVisibility =>
+        !IsNewsLoaded || AnnouncementPosts.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    public Visibility AnnouncementEmptyVisibility =>
+        IsNewsLoaded && AnnouncementPosts.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    public Visibility InfoListVisibility =>
+        !IsNewsLoaded || InfoPosts.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    public Visibility InfoEmptyVisibility =>
+        IsNewsLoaded && InfoPosts.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+    partial void OnIsNewsLoadedChanged(bool value)
+    {
+        NotifyNewsEmptyStates();
+    }
+
+    private void NotifyNewsEmptyStates()
+    {
+        OnPropertyChanged(nameof(ActivityListVisibility));
+        OnPropertyChanged(nameof(ActivityEmptyVisibility));
+        OnPropertyChanged(nameof(AnnouncementListVisibility));
+        OnPropertyChanged(nameof(AnnouncementEmptyVisibility));
+        OnPropertyChanged(nameof(InfoListVisibility));
+        OnPropertyChanged(nameof(InfoEmptyVisibility));
+    }
 
     private DispatcherQueueTimer _bannerTimer;
 
@@ -51,6 +85,7 @@ public partial class MainViewModel
             _bannerTimer?.Start();
 
             IsNewsLoaded = true;
+            NotifyNewsEmptyStates();
 
             return;
         }
@@ -97,6 +132,7 @@ public partial class MainViewModel
                     }
 
                     IsNewsLoaded = true;
+                    NotifyNewsEmptyStates();
 
                     if (Banners.Count > 0)
                     {
@@ -122,13 +158,21 @@ public partial class MainViewModel
             }
             else
             {
-                IsNewsLoaded = true;
+                await UpdateUI(() =>
+                {
+                    IsNewsLoaded = true;
+                    NotifyNewsEmptyStates();
+                });
             }
         }
         catch (Exception ex)
         {
             DebugLog.Info("MainViewModel.Content", $"Content load failed: {ex.Message}");
-            IsNewsLoaded = true;
+            await UpdateUI(() =>
+            {
+                IsNewsLoaded = true;
+                NotifyNewsEmptyStates();
+            });
         }
     }
 
