@@ -186,17 +186,31 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                                <FontIcon Style="{StaticResource SectionTitleIconStyle}"
-                                          Glyph="&#xE928;"
-                                          FontSize="24" />
-                                <StackPanel Spacing="3">
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0"
+                                            Orientation="Horizontal"
+                                            Spacing="10"
+                                            VerticalAlignment="Center">
+                                    <Image Source="ms-appx:///Assets/icon.png"
+                                           Style="{StaticResource BrandLogoStyle}" />
+                                    <TextBlock Text="FufuLauncher"
+                                               Style="{StaticResource BrandTitleStyle}" />
+                                </StackPanel>
+                                <Rectangle Grid.Column="1"
+                                           Style="{StaticResource VerticalDividerStyle}"
+                                           Margin="16,4" />
+                                <StackPanel Grid.Column="2" Spacing="3" VerticalAlignment="Center">
                                     <TextBlock Text="{helpers:Loc Key=CloudSync_AuthTitle}"
                                                Style="{StaticResource SubtitleTextBlockStyle}" />
                                     <TextBlock Text="{helpers:Loc Key=CloudSync_AuthSubtitle}"
                                                Style="{StaticResource RowCaptionStyle}" />
                                 </StackPanel>
-                            </StackPanel>
+                            </Grid>
 
                             <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
 
