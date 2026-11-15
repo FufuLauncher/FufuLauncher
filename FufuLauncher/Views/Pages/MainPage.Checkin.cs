@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Animation;
 
 namespace FufuLauncher.Views;
@@ -11,6 +12,38 @@ namespace FufuLauncher.Views;
 public sealed partial class MainPage
 {
     #region 游戏签到
+
+    private void CheckinButton_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (sender is Button button)
+        {
+            var radius = Math.Min(e.NewSize.Width, e.NewSize.Height) / 2.0;
+            if (Math.Abs(button.CornerRadius.TopLeft - radius) > 0.1)
+            {
+                button.CornerRadius = new CornerRadius(radius);
+            }
+
+            if (CheckinRefreshButton != null && e.NewSize.Height > 0)
+            {
+                var side = e.NewSize.Height;
+                if (Math.Abs(CheckinRefreshButton.Width - side) > 0.1)
+                {
+                    CheckinRefreshButton.Width = side;
+                }
+
+                if (Math.Abs(CheckinRefreshButton.Height - side) > 0.1)
+                {
+                    CheckinRefreshButton.Height = side;
+                }
+
+                var refreshRadius = side / 3.0;
+                if (Math.Abs(CheckinRefreshButton.CornerRadius.TopLeft - refreshRadius) > 0.1)
+                {
+                    CheckinRefreshButton.CornerRadius = new CornerRadius(refreshRadius);
+                }
+            }
+        }
+    }
 
     private void SyncCheckinState()
     {

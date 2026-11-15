@@ -2157,10 +2157,10 @@ MicrosoftのWebサイトからダウンロードしてインストールしま�
     <value>ゲーム終了中...</value>
   </data>
   <data name="Checkin_Signed" xml:space="preserve">
-    <value>本日チェックイン済み</value>
+    <value>チェックイン済</value>
   </data>
   <data name="Checkin_Unsigned" xml:space="preserve">
-    <value>本日未チェックイン</value>
+    <value>未チェックイン</value>
   </data>
   <data name="LaunchErr_NoGamePath" xml:space="preserve">
     <value>ゲームパス未設定</value>
@@ -3886,10 +3886,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>状態取得失敗</value>
   </data>
   <data name="Checkin_SignedToday" xml:space="preserve">
-    <value>本日チェックイン済み</value>
+    <value>済み</value>
   </data>
   <data name="Checkin_UnsignedToday" xml:space="preserve">
-    <value>本日未チェックイン</value>
+    <value>未チェックイン</value>
   </data>
   <data name="Checkin_NotEnabled" xml:space="preserve">
     <value>チェックイン機能無効</value>
@@ -4989,7 +4989,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>チェックイン一部失敗</value>
   </data>
   <data name="Checkin_SignNow" xml:space="preserve">
-    <value>今すぐチェックイン</value>
+    <value>チェックイン</value>
   </data>
   <data name="Checkin_LoadingStatus" xml:space="preserve">
     <value>ステータスを読み込み中...</value>

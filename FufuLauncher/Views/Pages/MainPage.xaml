@@ -755,13 +755,14 @@
                                     Padding="0"
                                     Background="{ThemeResource CardButtonBackgroundBrush}"
                                     BorderThickness="0"
-                                    Click="RefreshTokenButton_Click"
+                                    Click="OpenCheckinCalendar_Click"
                                     CornerRadius="4"
-                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RefreshCookie}">
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RewardsCalendar}">
                                     <FontIcon
-                                        FontSize="11"
+                                        FontFamily="{StaticResource FluentIconsFont}"
+                                        FontSize="14"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                        Glyph="&#xE72C;" />
+                                        Glyph="&#xF213;" />
                                 </Button>
                                 <Button
                                     Grid.Column="2"
@@ -795,15 +796,8 @@
                             </Grid>
 
                             <Grid Grid.Row="1" Margin="0,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
                                 <TextBlock
                                     x:Name="CheckinEmptyText"
-                                    Grid.Column="0"
-                                    Margin="0,0,12,0"
                                     VerticalAlignment="Center"
                                     FontSize="12"
                                     Foreground="{ThemeResource TextFillColorPrimaryBrush}"
@@ -813,22 +807,39 @@
                                     TextTrimming="CharacterEllipsis"
                                     TextWrapping="Wrap" />
 
-                                <StackPanel
+                                <Grid
                                     x:Name="CheckinDataPanel"
-                                    Grid.Column="0"
-                                    Margin="0,0,12,0"
                                     VerticalAlignment="Center"
                                     IsHitTestVisible="False"
-                                    Opacity="0"
-                                    Spacing="2">
+                                    Opacity="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
                                     <TextBlock
-                                        FontSize="12"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Center"
+                                        FontSize="14"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                        MaxLines="2"
+                                        MaxLines="1"
                                         Text="{Binding CheckinStatusText}"
                                         TextTrimming="CharacterEllipsis"
-                                        TextWrapping="Wrap" />
+                                        TextWrapping="NoWrap" />
+
+                                    <Rectangle
+                                        Grid.Column="1"
+                                        Width="1"
+                                        Height="12"
+                                        Margin="6,0"
+                                        VerticalAlignment="Center"
+                                        Fill="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Opacity="0.25" />
+
                                     <TextBlock
+                                        Grid.Column="2"
+                                        VerticalAlignment="Center"
                                         FontSize="11"
                                         Foreground="{ThemeResource TextFillColorPrimaryBrush}"
                                         MaxLines="2"
@@ -836,43 +847,51 @@
                                         Text="{Binding CheckinSummary}"
                                         TextTrimming="CharacterEllipsis"
                                         TextWrapping="Wrap" />
-                                </StackPanel>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
                                 <Button
-                                    Grid.Column="1"
-                                    Width="28"
-                                    Height="28"
+                                    x:Name="CheckinRefreshButton"
+                                    Grid.Column="0"
+                                    Width="30"
+                                    Height="30"
                                     Padding="0"
-                                    HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Background="{ThemeResource CardButtonBackgroundBrush}"
                                     BorderThickness="0"
-                                    Click="OpenCheckinCalendar_Click"
-                                    CornerRadius="6"
-                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RewardsCalendar}">
-                                    <FontIcon FontFamily="{StaticResource FluentIconsFont}"
-                                              FontSize="16.25"
-                                              Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                              Glyph="&#xF213;" />
+                                    Click="RefreshTokenButton_Click"
+                                    CornerRadius="10"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Home_RefreshCookie}">
+                                    <FontIcon
+                                        FontSize="14"
+                                        Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                        Glyph="&#xE72C;" />
+                                </Button>
+
+                                <Button
+                                    Grid.Column="1"
+                                    Padding="8,6"
+                                    HorizontalAlignment="Stretch"
+                                    Background="{ThemeResource CardButtonBackgroundBrush}"
+                                    BorderThickness="0"
+                                    Command="{Binding ExecuteCheckinCommand}"
+                                    CornerRadius="16"
+                                    Foreground="{ThemeResource TextFillColorPrimaryBrush}"
+                                    IsEnabled="{Binding IsCheckinButtonEnabled, Mode=OneWay}"
+                                    SizeChanged="CheckinButton_SizeChanged">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        Text="{Binding CheckinButtonText}"
+                                        TextTrimming="CharacterEllipsis"
+                                        TextWrapping="NoWrap" />
                                 </Button>
                             </Grid>
-
-                            <Button
-                                Grid.Row="2"
-                                Padding="8,6"
-                                HorizontalAlignment="Stretch"
-                                Background="{ThemeResource CardButtonBackgroundBrush}"
-                                BorderThickness="0"
-                                Command="{Binding ExecuteCheckinCommand}"
-                                CornerRadius="4"
-                                Foreground="{ThemeResource TextFillColorPrimaryBrush}"
-                                IsEnabled="{Binding IsCheckinButtonEnabled, Mode=OneWay}">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    Text="{Binding CheckinButtonText}"
-                                    TextTrimming="CharacterEllipsis"
-                                    TextWrapping="NoWrap" />
-                            </Button>
                         </Grid>
                     </Grid>
 
