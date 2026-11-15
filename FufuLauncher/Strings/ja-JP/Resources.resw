@@ -3886,7 +3886,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>状態取得失敗</value>
   </data>
   <data name="Checkin_SignedToday" xml:space="preserve">
-    <value>済み</value>
+    <value>チェックイン済</value>
   </data>
   <data name="Checkin_UnsignedToday" xml:space="preserve">
     <value>未チェックイン</value>
