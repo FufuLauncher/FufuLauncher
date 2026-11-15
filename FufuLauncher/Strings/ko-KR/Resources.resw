@@ -10909,4 +10909,66 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>개인 순위는 이번 회차 데이터만 지원합니다. 기간을 이번 회차로 전환해 주세요</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>사람 인증이 취소되어 신청이 제출되지 않았습니다.</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>아래 정보를 입력하고 사람 인증을 완료하여 심사 신청을 제출하세요.</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>개발자 인증 신청</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>이 장치는 이미 개발자로 인증되었습니다.</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>이 장치의 심사 신청이 이미 제출되었습니다.</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>인증 서비스를 일시적으로 사용할 수 없습니다. 나중에 다시 시도하세요.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>올바른 GitHub 링크를 입력하세요.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>장치 정보를 가져올 수 없습니다. 나중에 다시 시도하세요.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>올바른 게임 UID를 입력하세요.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>올바른 사용자 이름을 입력하세요.</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>이 장치의 개발자 인증 신청이 승인되지 않았습니다.</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>제출에 실패했습니다. 입력 내용을 확인하고 다시 시도하세요.</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>지금은 이 신청을 제출할 수 없습니다. 나중에 다시 시도하세요.</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub 링크 (선택 사항)</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>개발자 인증이 이미 승인되었습니다. 다시 신청할 필요가 없습니다.</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>게임 UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID와 사용자 이름은 비워 둘 수 없습니다.</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>사용자 이름</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>심사 신청이 제출되었습니다. 잠시 기다려 주세요.</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>심사 신청이 제출되었습니다. 잠시 기다려 주세요.</value>
+  </data>
 </root>

@@ -3,10 +3,8 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
-using System.Text;
-using System.Text.Json;
-using FufuLauncher.Constants;
 using FufuLauncher.Helpers;
+using FufuLauncher.Models;
 using FufuLauncher.Services;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -17,40 +15,65 @@ public sealed partial class SettingsPage
 {
     #region 开发者认证
 
+    private Task ShowDevAuthMessageAsync(string titleResourceKey, string content)
+    {
+        return ShowSafeDialogAsync(new ContentDialog
+        {
+            Title = titleResourceKey.GetLocalized(),
+            Content = content,
+            CloseButtonText = "OkBtn".GetLocalized(),
+            XamlRoot = this.XamlRoot
+        });
+    }
+
     private async void OnOpenSecurityAuthClick(object sender, RoutedEventArgs e)
     {
-        string hwid = await Task.Run(() => Helpers.SystemEnvironmentHelper.GetHwid());
+        var authService = App.GetService<DeveloperAuthorizationService>();
+        string hwid = await Task.Run(SystemEnvironmentHelper.GetHwid);
 
-        try
+        if (!DeveloperAuthorizationService.IsValidHwid(hwid))
         {
-            using var checkClient = new HttpClient();
-            var checkPayload = JsonSerializer.Serialize(new { hwid });
-            var checkContent = new StringContent(checkPayload, Encoding.UTF8, "application/json");
-            var checkResponse = await checkClient.PostAsync(ApiEndpoints.DevVerifyHwidUrl, checkContent);
-            if (checkResponse.IsSuccessStatusCode)
+            await ShowDevAuthMessageAsync("ErrorTitle", "DevAuth_ErrInvalidHwid".GetLocalized());
+            return;
+        }
+
+        var status = await authService.GetVerificationStatusAsync(hwid);
+        if (status.Ok)
+        {
+            if (status.Authorized || string.Equals(status.Status, "approved", StringComparison.OrdinalIgnoreCase))
             {
-                var checkBody = await checkResponse.Content.ReadAsStringAsync();
-                var checkResult = JsonSerializer.Deserialize<JsonElement>(checkBody);
-                if (checkResult.TryGetProperty("authorized", out var auth) && auth.GetBoolean())
-                {
-                    await ShowSafeDialogAsync(new ContentDialog
-                    {
-                        Title = "Settings_Notice".GetLocalized(),
-                        Content = "您的开发者认证已通过，请勿重复提交申请",
-                        CloseButtonText = "OkBtn".GetLocalized(),
-                        XamlRoot = this.XamlRoot
-                    });
-                    return;
-                }
+                await ShowDevAuthMessageAsync("Settings_Notice", "DevAuth_NoticeAlreadyApproved".GetLocalized());
+                return;
+            }
+
+            if (string.Equals(status.Status, "pending", StringComparison.OrdinalIgnoreCase))
+            {
+                await ShowDevAuthMessageAsync("Settings_Notice", "DevAuth_NoticePending".GetLocalized());
+                return;
+            }
+
+            if (string.Equals(status.Status, "rejected", StringComparison.OrdinalIgnoreCase))
+            {
+                await ShowDevAuthMessageAsync("ErrorTitle", "DevAuth_ErrRejected".GetLocalized());
+                return;
             }
         }
-        catch
-        {
-        }
 
-        var uidBox = new TextBox { PlaceholderText = "游戏 UID", Margin = new Thickness(0, 8, 0, 0) };
-        var nameBox = new TextBox { PlaceholderText = "用户名", Margin = new Thickness(0, 8, 0, 0) };
-        var githubBox = new TextBox { PlaceholderText = "GitHub 链接（可选）", Margin = new Thickness(0, 8, 0, 0) };
+        var uidBox = new TextBox
+        {
+            PlaceholderText = "DevAuth_UidPlaceholder".GetLocalized(),
+            Margin = new Thickness(0, 8, 0, 0)
+        };
+        var nameBox = new TextBox
+        {
+            PlaceholderText = "DevAuth_UsernamePlaceholder".GetLocalized(),
+            Margin = new Thickness(0, 8, 0, 0)
+        };
+        var githubBox = new TextBox
+        {
+            PlaceholderText = "DevAuth_GithubPlaceholder".GetLocalized(),
+            Margin = new Thickness(0, 8, 0, 0)
+        };
         var hwidBlock = new TextBlock
         {
             Text = $"HWID: {hwid}",
@@ -60,7 +83,11 @@ public sealed partial class SettingsPage
         };
 
         var panel = new StackPanel();
-        panel.Children.Add(new TextBlock { Text = "填写以下信息提交开发者认证申请" });
+        panel.Children.Add(new TextBlock
+        {
+            Text = "DevAuth_DialogHint".GetLocalized(),
+            TextWrapping = TextWrapping.Wrap
+        });
         panel.Children.Add(uidBox);
         panel.Children.Add(nameBox);
         panel.Children.Add(githubBox);
@@ -68,90 +95,104 @@ public sealed partial class SettingsPage
 
         var dialog = new ContentDialog
         {
-            Title = "开发者认证申请",
+            Title = "DevAuth_DialogTitle".GetLocalized(),
             Content = panel,
             PrimaryButtonText = "Settings_SubmitApp".GetLocalized(),
             CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
         };
 
-        var result = await ShowSafeDialogAsync(dialog);
-        if (result != ContentDialogResult.Primary) return;
+        var dialogResult = await ShowSafeDialogAsync(dialog);
+        if (dialogResult != ContentDialogResult.Primary)
+        {
+            return;
+        }
 
-        string uid = uidBox.Text?.Trim();
-        string username = nameBox.Text?.Trim();
-        string github = githubBox.Text?.Trim();
+        string uid = uidBox.Text?.Trim() ?? string.Empty;
+        string username = nameBox.Text?.Trim() ?? string.Empty;
+        string github = githubBox.Text?.Trim() ?? string.Empty;
 
         if (string.IsNullOrEmpty(uid) || string.IsNullOrEmpty(username))
         {
-            await ShowSafeDialogAsync(new ContentDialog
-            {
-                Title = "ErrorTitle".GetLocalized(),
-                Content = "UID 和用户名不能为空",
-                CloseButtonText = "OkBtn".GetLocalized(),
-                XamlRoot = this.XamlRoot
-            });
+            await ShowDevAuthMessageAsync("ErrorTitle", "DevAuth_UidRequired".GetLocalized());
             return;
         }
 
-        if (uid.Length < 9 || uid.Length > 10 || !uid.All(char.IsDigit))
+        if (!DeveloperAuthorizationService.IsValidUid(uid))
         {
-            await ShowSafeDialogAsync(new ContentDialog
-            {
-                Title = "ErrorTitle".GetLocalized(),
-                Content = "UID 必须为9位或10位数字",
-                CloseButtonText = "OkBtn".GetLocalized(),
-                XamlRoot = this.XamlRoot
-            });
+            await ShowDevAuthMessageAsync("ErrorTitle", "DevAuth_ErrInvalidUid".GetLocalized());
             return;
         }
 
-        if (!string.IsNullOrEmpty(github) &&
-            !github.Contains(ApiEndpoints.GithubHost, StringComparison.OrdinalIgnoreCase))
+        if (!DeveloperAuthorizationService.IsValidUsername(username))
         {
-            await ShowSafeDialogAsync(new ContentDialog
-            {
-                Title = "ErrorTitle".GetLocalized(),
-                Content = "请输入正确的GitHub地址",
-                CloseButtonText = "OkBtn".GetLocalized(),
-                XamlRoot = this.XamlRoot
-            });
+            await ShowDevAuthMessageAsync("ErrorTitle", "DevAuth_ErrInvalidUsername".GetLocalized());
             return;
         }
 
-        try
+        if (!DeveloperAuthorizationService.IsValidOptionalGithubUrl(github))
         {
-            using var client = new HttpClient();
-            object payload = string.IsNullOrEmpty(github)
-                ? new { uid, username, hwid }
-                : new { uid, username, hwid, github };
-            var json = JsonSerializer.Serialize(payload);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync(ApiEndpoints.DevApplyUrl, content);
-            var body = await response.Content.ReadAsStringAsync();
-
-            string msg = response.IsSuccessStatusCode
-                ? "申请已提交，请等待管理员审批"
-                : $"提交失败: {body}";
-
-            await ShowSafeDialogAsync(new ContentDialog
-            {
-                Title = response.IsSuccessStatusCode ? "Success".GetLocalized() : "Failure".GetLocalized(),
-                Content = msg,
-                CloseButtonText = "OkBtn".GetLocalized(),
-                XamlRoot = this.XamlRoot
-            });
+            await ShowDevAuthMessageAsync("ErrorTitle", "DevAuth_ErrInvalidGithub".GetLocalized());
+            return;
         }
-        catch (Exception ex)
+
+        var applyResult = await authService.StartApplicationAsync(uid, username, hwid, github);
+        if (applyResult.RequiresCaptcha && applyResult.Challenge is { } challenge)
         {
-            await ShowSafeDialogAsync(new ContentDialog
+            var captchaUri = authService.TryResolveServiceUri(challenge.CaptchaUrl);
+            if (captchaUri == null)
             {
-                Title = "Settings_NetworkError".GetLocalized(),
-                Content = ex.Message,
-                CloseButtonText = "OkBtn".GetLocalized(),
-                XamlRoot = this.XamlRoot
-            });
+                await ShowDevAuthMessageAsync("Failure", "DevAuth_ErrSecurityRejected".GetLocalized());
+                return;
+            }
+
+            var captchaResult = await CloudCaptchaWindow.ShowExternalChallengeAsync<CloudApiResult<DevApplySubmissionData>>(
+                captchaUri,
+                ApiEndpoints.DevApplyResultPath,
+                async () =>
+                {
+                    var pollResult = await authService.PollApplicationChallengeAsync(challenge);
+                    if (pollResult.IsPending)
+                    {
+                        return (false, null);
+                    }
+
+                    return (true, pollResult);
+                });
+
+            if (captchaResult == null)
+            {
+                await ShowDevAuthMessageAsync("Settings_Notice", "DevAuth_CaptchaCancelled".GetLocalized());
+                return;
+            }
+
+            if (captchaResult.Ok)
+            {
+                await ShowDevAuthMessageAsync("Success", "DevAuth_SubmitSuccess".GetLocalized());
+                return;
+            }
+
+            string captchaTitleKey = string.Equals(captchaResult.Code, "NETWORK_ERROR", StringComparison.Ordinal)
+                ? "Settings_NetworkError"
+                : "Failure";
+            await ShowDevAuthMessageAsync(
+                captchaTitleKey,
+                authService.FormatFriendlyError(captchaResult.Code, captchaResult.Message, captchaResult.HttpStatusCode));
+            return;
         }
+
+        if (!applyResult.Ok)
+        {
+            string titleKey = string.Equals(applyResult.Code, "NETWORK_ERROR", StringComparison.Ordinal)
+                ? "Settings_NetworkError"
+                : "Failure";
+            await ShowDevAuthMessageAsync(
+                titleKey,
+                authService.FormatFriendlyError(applyResult.Code, applyResult.Message, applyResult.HttpStatusCode));
+            return;
+        }
+
+        await ShowDevAuthMessageAsync("Success", "DevAuth_SubmitSuccess".GetLocalized());
     }
 
     private bool _isSyncingTemporaryDevAuth;

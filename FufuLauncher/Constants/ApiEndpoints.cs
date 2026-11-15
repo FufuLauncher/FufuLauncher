@@ -308,7 +308,7 @@ namespace FufuLauncher.Constants
         public const string GithubWebBase = "https://github.com";
         public const string GithubAvatarsBase = "https://avatars.githubusercontent.com";
         public const string GhProxyBase = "https://gh-proxy.org";
-        public const string DevServiceBase = "https://dev.s1ky3.xyz";
+        public const string DevServiceBase = "https://developer-application.fufu.skin";
         public const string CertificateSyncUrl = "https://certificate.fu1.fun";
         public const string BingBase = "https://www.bing.com";
         public const string StatsUptimeRobotBase = "https://stats.uptimerobot.com";
@@ -358,6 +358,8 @@ namespace FufuLauncher.Constants
         public const string DeveloperPortalUrl = PluginStoreBaseUrl + "/dev-add";
         public const string DevVerifyHwidUrl = DevServiceBase + "/api/verify-hwid";
         public const string DevApplyUrl = DevServiceBase + "/api/dev-apply";
+        public const string DevApplyChallengeStatusPath = "/api/dev-apply/challenge/status";
+        public const string DevApplyResultPath = "/api/dev-apply/result";
         public const string DocsConfigUrl = PluginStoreBaseUrl + "/api/docs-config";
         public const string DocsContentBaseUrl = PluginStoreBaseUrl + "/api/docs/zh-CN";
 

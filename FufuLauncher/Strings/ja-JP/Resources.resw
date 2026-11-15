@@ -10913,4 +10913,66 @@ Bilibiliサーバー対応、MiYouSheログイン不要</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>個人ランキングは今期データのみ対応しています。統計期間を「今期」に切り替えてご確認ください</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>人間認証がキャンセルされました。申請はまだ送信されていません。</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>以下の情報を入力し、人間認証を完了して審査申請を送信してください。</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>開発者認証申請</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>このデバイスはすでに開発者認証済みです。</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>このデバイスの審査申請はすでに提出されています。</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>認証サービスは一時的に利用できません。しばらくしてから再試行してください。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>有効な GitHub リンクを入力してください。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>デバイス情報を取得できませんでした。しばらくしてから再試行してください。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>有効なゲーム UID を入力してください。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>有効なユーザー名を入力してください。</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>このデバイスの開発者認証申請は承認されませんでした。</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>送信に失敗しました。入力内容を確認して再試行してください。</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>現在この申請を送信できません。しばらくしてから再試行してください。</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub リンク（任意）</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>開発者認証はすでに承認済みです。再申請は不要です。</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>ゲーム UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID とユーザー名は空にできません。</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>ユーザー名</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>審査申請は提出済みです。結果が出るまでしばらくお待ちください。</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>審査申請が提出されました。結果が出るまでお待ちください。</value>
+  </data>
 </root>

@@ -10904,4 +10904,66 @@ Bilibili समर्थित; MiYouShe लॉगिन आवश्यक न�
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>व्यक्तिगत रैंकिंग केवल वर्तमान अवधि के डेटा का समर्थन करती है। कृपया वर्तमान अवधि पर स्विच करें</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>मानव सत्यापन रद्द कर दिया गया। आवेदन जमा नहीं हुआ।</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>आवेदन जमा करने के लिए नीचे जानकारी भरें और मानव सत्यापन पूरा करें।</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>डेवलपर सत्यापन आवेदन</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>यह डिवाइस पहले से ही डेवलपर के रूप में सत्यापित है।</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>इस डिवाइस के लिए समीक्षा आवेदन पहले ही जमा हो चुका है।</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>सत्यापन सेवा अस्थायी रूप से अनुपलब्ध है। कृपया बाद में पुनः प्रयास करें।</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>कृपया मान्य GitHub लिंक दर्ज करें।</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>डिवाइस जानकारी प्राप्त नहीं हो सकी। कृपया बाद में पुनः प्रयास करें।</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>कृपया मान्य गेम UID दर्ज करें।</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>कृपया मान्य उपयोगकर्ता नाम दर्ज करें।</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>इस डिवाइस के लिए डेवलपर सत्यापन आवेदन स्वीकृत नहीं हुआ।</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>सबमिशन विफल रहा। कृपया अपनी जानकारी जांचें और पुनः प्रयास करें।</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>अभी यह आवेदन जमा नहीं किया जा सकता। कृपया बाद में पुनः प्रयास करें।</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub लिंक (वैकल्पिक)</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>आपका डेवलपर सत्यापन पहले ही स्वीकृत हो चुका है।</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>गेम UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID और उपयोगकर्ता नाम खाली नहीं हो सकते।</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>उपयोगकर्ता नाम</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>आपका आवेदन समीक्षा के लिए जमा हो गया है। कृपया प्रतीक्षा करें।</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>समीक्षा के लिए आवेदन जमा हो गया है। कृपया प्रतीक्षा करें।</value>
+  </data>
 </root>

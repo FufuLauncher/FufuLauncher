@@ -10913,4 +10913,66 @@ Details: {0}</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>Die persönliche Rangliste unterstützt nur Daten der aktuellen Periode. Bitte auf Aktuelle Periode umschalten</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>Menschliche Prüfung abgebrochen. Antrag wurde nicht eingereicht.</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>Bitte Daten eingeben und menschliche Prüfung abschließen, um den Antrag einzureichen.</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>Entwickler-Verifizierungsantrag</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>Dieses Gerät ist bereits als Entwickler verifiziert.</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>Für dieses Gerät wurde bereits ein Prüfungsantrag eingereicht.</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>Verifizierungsdienst vorübergehend nicht verfügbar. Bitte später erneut versuchen.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>Bitte eine gültige GitHub-URL eingeben.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>Geräteinformationen konnten nicht abgerufen werden. Bitte später erneut versuchen.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>Bitte eine gültige Spiel-UID eingeben.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>Bitte einen gültigen Benutzernamen eingeben.</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>Der Antrag für dieses Gerät wurde abgelehnt.</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>Übermittlung fehlgeschlagen. Bitte Eingaben prüfen und erneut versuchen.</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>Antrag kann derzeit nicht eingereicht werden. Bitte später erneut versuchen.</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub-Link (optional)</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>Ihre Entwickler-Verifizierung wurde bereits genehmigt.</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>Spiel-UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID und Benutzername dürfen nicht leer sein.</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>Ihr Antrag zur Prüfung wurde eingereicht. Bitte haben Sie etwas Geduld.</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>Antrag zur Prüfung eingereicht. Bitte haben Sie etwas Geduld.</value>
+  </data>
 </root>

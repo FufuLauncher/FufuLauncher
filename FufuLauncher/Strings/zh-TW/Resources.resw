@@ -10909,4 +10909,66 @@ UIGF v4.x/3.0/2.x</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>個人挑戰全服排行僅支援查詢當期資料，請將統計週期切換為「當期」後查看</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>人機驗證已取消，申請尚未送出。</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>填寫以下資訊並完成人機驗證後送出開發者認證申請</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>開發者認證申請</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>該裝置已通過開發者認證，請勿重複送出。</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>審核已送出，請勿重複送出申請。</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>驗證服務暫時無法使用，請稍後再試。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>請輸入有效的GitHub連結。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>無法取得裝置資訊，請稍後重試。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>請輸入有效的遊戲UID。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>請輸入有效的使用者名稱。</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>該裝置的開發者認證申請未通過審核。</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>送出失敗，請檢查輸入資訊後重試。</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>暫時無法送出該申請，請稍後重試。</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub連結（選填）</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>您的開發者認證已通過，請勿重複送出申請。</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>遊戲UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID與使用者名稱不能為空。</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>使用者名稱</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>審核已送出，請耐心等待。</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>審核已送出，請耐心等待。</value>
+  </data>
 </root>

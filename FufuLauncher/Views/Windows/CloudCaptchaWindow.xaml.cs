@@ -20,14 +20,18 @@ namespace FufuLauncher.Views;
 public sealed partial class CloudCaptchaWindow : Window
 {
     private readonly Uri _captchaUri;
+    private readonly string _resultPathHint;
     private readonly SemaphoreSlim _pollSemaphore = new(1, 1);
     private readonly CancellationTokenSource _cts = new();
     private readonly Func<Task<bool>> _tryConsumePollAsync;
     private bool _finished;
 
-    private CloudCaptchaWindow(Uri captchaUri, Func<Task<bool>> tryConsumePollAsync)
+    private CloudCaptchaWindow(Uri captchaUri, string resultPathHint, Func<Task<bool>> tryConsumePollAsync)
     {
         _captchaUri = captchaUri;
+        _resultPathHint = string.IsNullOrWhiteSpace(resultPathHint)
+            ? ApiEndpoints.CloudSyncAuthResultPath
+            : resultPathHint;
         _tryConsumePollAsync = tryConsumePollAsync;
 
         InitializeComponent();
@@ -45,18 +49,33 @@ public sealed partial class CloudCaptchaWindow : Window
         _ = InitializeAsync();
     }
 
-    public static async Task<CloudApiResult<T>?> ShowChallengeAsync<T>(
+    public static Task<CloudApiResult<T>?> ShowChallengeAsync<T>(
         ICloudSyncService cloudSync,
         CloudChallengeInfo challenge)
     {
         var captchaUri = cloudSync.ResolveServiceUri(challenge.CaptchaUrl);
-        var tcs = new TaskCompletionSource<CloudApiResult<T>?>(TaskCreationOptions.RunContinuationsAsynchronously);
+        return ShowExternalChallengeAsync<CloudApiResult<T>>(
+            captchaUri,
+            ApiEndpoints.CloudSyncAuthResultPath,
+            async () =>
+            {
+                var result = await cloudSync.PollChallengeAsync<T>(challenge.PollUrl, challenge.ChallengeSecret);
+                return result.IsPending ? (false, null) : (true, result);
+            });
+    }
+
+    public static async Task<TResult?> ShowExternalChallengeAsync<TResult>(
+        Uri captchaUri,
+        string resultPathHint,
+        Func<Task<(bool Done, TResult? Result)>> pollOnceAsync)
+    {
+        var tcs = new TaskCompletionSource<TResult?>(TaskCreationOptions.RunContinuationsAsynchronously);
         CloudCaptchaWindow? window = null;
 
         async Task<bool> PollOnceAsync()
         {
-            var result = await cloudSync.PollChallengeAsync<T>(challenge.PollUrl, challenge.ChallengeSecret);
-            if (result.IsPending)
+            var (done, result) = await pollOnceAsync();
+            if (!done)
             {
                 return false;
             }
@@ -75,8 +94,8 @@ public sealed partial class CloudCaptchaWindow : Window
             return true;
         }
 
-        window = new CloudCaptchaWindow(captchaUri, PollOnceAsync);
-        window.Closed += (_, _) => tcs.TrySetResult(null);
+        window = new CloudCaptchaWindow(captchaUri, resultPathHint, PollOnceAsync);
+        window.Closed += (_, _) => tcs.TrySetResult(default);
         window.Activate();
 
         return await tcs.Task;
@@ -153,7 +172,7 @@ public sealed partial class CloudCaptchaWindow : Window
 
     private async void OnNavigationStarting(CoreWebView2 sender, CoreWebView2NavigationStartingEventArgs args)
     {
-        if (args.Uri.Contains(ApiEndpoints.CloudSyncAuthResultPath, StringComparison.OrdinalIgnoreCase))
+        if (args.Uri.Contains(_resultPathHint, StringComparison.OrdinalIgnoreCase))
         {
             args.Cancel = true;
             StatusTextBlock.Text = "CloudSync_CaptchaSubmitting".GetLocalized();

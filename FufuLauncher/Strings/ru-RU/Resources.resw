@@ -10909,4 +10909,66 @@ Click the button below to open your browser and download manually.</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>Личный рейтинг поддерживает только данные текущего периода. Переключите период на Текущий</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>Проверка отменена. Заявка не отправлена.</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>Заполните поля ниже и пройдите проверку, чтобы отправить заявку.</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>Заявка на статус разработчика</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>Это устройство уже прошло проверку разработчика.</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>Заявка на проверку для этого устройства уже отправлена.</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>Сервис проверки временно недоступен. Повторите попытку позже.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>Введите корректную ссылку GitHub.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>Не удалось получить данные устройства. Повторите попытку позже.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>Введите корректный игровой UID.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>Введите корректное имя пользователя.</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>Заявка на статус разработчика для этого устройства была отклонена.</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>Не удалось отправить запрос. Проверьте данные и повторите попытку.</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>Сейчас не удалось отправить заявку. Повторите попытку позже.</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>Ссылка на GitHub (необязательно)</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>Ваш статус разработчика уже подтверждён. Повторная заявка не требуется.</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>Игровой UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID и имя пользователя не могут быть пустыми.</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>Заявка отправлена на проверку. Пожалуйста, подождите.</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>Заявка отправлена на проверку. Пожалуйста, подождите.</value>
+  </data>
 </root>

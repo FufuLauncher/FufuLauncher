@@ -11822,4 +11822,66 @@ UIGF v4.x/3.0/2.x</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>个人挑战全服排行仅支持查询当期数据，请将统计周期切换为「当期」后查看</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>人机验证已取消，申请尚未提交。</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>填写以下信息并完成人机验证后提交开发者认证申请</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>开发者认证申请</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>该设备已通过开发者认证，请勿重复提交。</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>审核已提交，请勿重复提交申请。</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>验证服务暂不可用，请稍后再试。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>请输入有效的GitHub链接。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>无法获取设备信息，请稍后重试。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>请输入有效的游戏UID。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>请输入有效的用户名。</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>该设备的开发者认证申请未通过审核。</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>提交失败，请检查输入信息后重试。</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>暂时无法提交该申请，请稍后重试。</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub链接（可选）</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>您的开发者认证已通过，请勿重复提交申请。</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>游戏UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID和用户名不能为空。</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>审核已提交，请耐心等待。</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>审核已提交，请耐心等待。</value>
+  </data>
 </root>

@@ -10914,9 +10914,71 @@ Dettagli: {0}</value>
     <value>Archiviazione cloud</value>
   </data>
   <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
-    <value>Nessun record dell&apos;Abisso a Spirale del periodo corrente inviato per questo ruolo</value>
+    <value>Nessun record dell'Abisso a Spirale del periodo corrente inviato per questo ruolo</value>
   </data>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>La classifica personale supporta solo i dati del periodo corrente. Passa a Periodo corrente per visualizzare</value>
+  </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>Verifica umana annullata. Richiesta non inviata.</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>Compila i campi qui sotto e completa la verifica umana per inviare la richiesta.</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>Richiesta verifica sviluppatore</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>Questo dispositivo è già verificato.</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>Esiste già una richiesta in attesa di revisione per questo dispositivo.</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>Servizio di verifica temporaneamente non disponibile. Riprova più tardi.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>Inserisci un URL GitHub valido.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>Impossibile ottenere le informazioni del dispositivo. Riprova più tardi.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>Inserisci un UID di gioco valido.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>Inserisci un nome utente valido.</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>La richiesta per questo dispositivo non è stata approvata.</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>Invio non riuscito. Controlla i dati inseriti e riprova.</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>Impossibile inviare la richiesta ora. Riprova più tardi.</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>Link GitHub (opzionale)</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>La tua verifica sviluppatore è già stata approvata.</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>UID di gioco</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID e nome utente non possono essere vuoti.</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>Nome utente</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>La tua richiesta è stata inviata per la revisione. Attendi.</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>Richiesta inviata per la revisione. Attendi.</value>
   </data>
 </root>

@@ -10909,4 +10909,66 @@ Detail: {0}</value>
   <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
     <value>Peringkat pribadi hanya mendukung data periode saat ini. Ubah periode ke Periode Saat Ini untuk melihat</value>
   </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>Verifikasi manusia dibatalkan. Pengajuan belum dikirim.</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>Isi data di bawah ini dan selesaikan verifikasi manusia untuk mengirim pengajuan.</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>Pengajuan Verifikasi Pengembang</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>Perangkat ini sudah terverifikasi sebagai pengembang.</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>Pengajuan untuk perangkat ini sudah dikirim dan sedang ditinjau.</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>Layanan verifikasi sedang tidak tersedia. Silakan coba lagi nanti.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>Masukkan tautan GitHub yang valid.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>Tidak dapat memperoleh informasi perangkat. Silakan coba lagi nanti.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>Masukkan UID game yang valid.</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>Masukkan nama pengguna yang valid.</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>Pengajuan verifikasi pengembang untuk perangkat ini tidak disetujui.</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>Pengiriman gagal. Periksa kembali data Anda dan coba lagi.</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>Tidak dapat mengirim pengajuan saat ini. Silakan coba lagi nanti.</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>Tautan GitHub (opsional)</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>Verifikasi pengembang Anda sudah disetujui. Tidak perlu mengajukan ulang.</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>UID Game</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID dan nama pengguna tidak boleh kosong.</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>Nama pengguna</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>Pengajuan Anda telah dikirim untuk ditinjau. Harap tunggu.</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>Pengajuan telah dikirim untuk ditinjau. Harap tunggu.</value>
+  </data>
 </root>
