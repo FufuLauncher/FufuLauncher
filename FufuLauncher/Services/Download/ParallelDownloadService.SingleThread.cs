@@ -42,7 +42,7 @@ public sealed partial class ParallelDownloadService
             catch (OperationCanceledException) when (!ct.IsCancellationRequested)
             {
                 throw new DownloadFailedException(
-                    $"建立连接或排队超时（>{opt.RequestTimeout.TotalSeconds:F0}s）。",
+                    string.Format("Download_ConnectOrQueueTimeout_Format".GetLocalized(), opt.RequestTimeout.TotalSeconds),
                     url, totalSize, 0, DownloadFailureReason.TimedOut);
             }
 
@@ -114,7 +114,7 @@ public sealed partial class ParallelDownloadService
         catch (OperationCanceledException) when (!ct.IsCancellationRequested)
         {
             throw new DownloadFailedException(
-                "单线程下载停滞超时。", url, totalSize, 0, DownloadFailureReason.Stalled);
+                "Download_SingleThreadStalled".GetLocalized(), url, totalSize, 0, DownloadFailureReason.Stalled);
         }
         finally
         {

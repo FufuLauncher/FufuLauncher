@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
@@ -15,7 +16,7 @@ public partial class AccountManager
         try
         {
             var entry = _accountList.Accounts.FirstOrDefault(a => a.Id == accountId)
-                        ?? throw new InvalidOperationException("社区账号已移除。");
+                        ?? throw new InvalidOperationException("Account_Removed".GetLocalized());
             var oldRoles = entry.GameRoles;
             var oldUid = entry.GameUid;
             var oldRegion = entry.GameRegion;
@@ -44,7 +45,7 @@ public partial class AccountManager
         try
         {
             if (ActiveAccountId != accountId)
-                throw new InvalidOperationException("社区账号已切换，请重新选择角色。");
+                throw new InvalidOperationException("Account_SwitchedReselectRole".GetLocalized());
             var entry = GetActiveAccountEntry()!;
             var oldUid = entry.GameUid;
             var oldRegion = entry.GameRegion;

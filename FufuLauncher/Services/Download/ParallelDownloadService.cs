@@ -47,13 +47,13 @@ public sealed partial class ParallelDownloadService
     {
         string fullPath = Path.GetFullPath(destinationPath);
         string directory = Path.GetDirectoryName(fullPath)
-                           ?? throw new ArgumentException("目标路径缺少目录部分。", nameof(destinationPath));
+                           ?? throw new ArgumentException("Download_MissingDirectoryInPath".GetLocalized(), nameof(destinationPath));
         Directory.CreateDirectory(directory);
 
         if (File.Exists(fullPath) && !opt.OverwriteExisting)
         {
             throw new DownloadFailedException(
-                $"目标文件已存在: {fullPath}", url, 0, 0, DownloadFailureReason.TargetUnwritable);
+                string.Format("Download_TargetExists_Format".GetLocalized(), fullPath), url, 0, 0, DownloadFailureReason.TargetUnwritable);
         }
 
         string workPath = opt.UseTemporaryFile ? fullPath + ".part" : fullPath;
@@ -77,7 +77,7 @@ public sealed partial class ParallelDownloadService
             if (opt.ExpectedSize is { } expected && probe.ContentLength > 0 && probe.ContentLength != expected)
             {
                 throw new DownloadFailedException(
-                    $"文件大小与预期不符: 服务端 {probe.ContentLength}B，预期 {expected}B",
+                    string.Format("Download_SizeMismatchExpected_Format".GetLocalized(), probe.ContentLength, expected),
                     url, probe.ContentLength, 0, DownloadFailureReason.IntegrityMismatch);
             }
 
@@ -88,7 +88,7 @@ public sealed partial class ParallelDownloadService
             if (!canParallel && !probe.SupportsRange && !opt.AllowRangeFallback)
             {
                 throw new DownloadFailedException(
-                    "服务端不支持分段下载（缺少 Accept-Ranges: bytes）。",
+                    "Download_RangeNotSupported".GetLocalized(),
                     url, totalSize, 0, DownloadFailureReason.RangeNotSupported);
             }
 
@@ -121,7 +121,7 @@ public sealed partial class ParallelDownloadService
             if (totalSize > 0 && actualLength != totalSize)
             {
                 throw new DownloadFailedException(
-                    $"下载大小不符: 实际 {actualLength}B，预期 {totalSize}B",
+                    string.Format("Download_ActualSizeMismatch_Format".GetLocalized(), actualLength, totalSize),
                     url, totalSize, 0, DownloadFailureReason.IntegrityMismatch);
             }
 
@@ -155,13 +155,13 @@ public sealed partial class ParallelDownloadService
         {
             Cleanup(workPath, resumeStatePath, opt);
             throw new DownloadFailedException(
-                "下载超时。", url, 0, 0, DownloadFailureReason.TimedOut);
+                "Download_TimedOut".GetLocalized(), url, 0, 0, DownloadFailureReason.TimedOut);
         }
         catch (OperationCanceledException)
         {
             Cleanup(workPath, resumeStatePath, opt);
             throw new DownloadFailedException(
-                "下载已取消。", url, 0, 0, DownloadFailureReason.Cancelled);
+                "Download_Cancelled".GetLocalized(), url, 0, 0, DownloadFailureReason.Cancelled);
         }
         catch (DownloadFailedException)
         {
@@ -172,14 +172,14 @@ public sealed partial class ParallelDownloadService
         {
             Cleanup(workPath, resumeStatePath, opt);
             throw new DownloadFailedException(
-                $"目标路径不可写: {ex.Message}", url, 0, 0,
+                string.Format("Download_TargetNotWritable_Format".GetLocalized(), ex.Message), url, 0, 0,
                 DownloadFailureReason.TargetUnwritable, ex);
         }
         catch (Exception ex)
         {
             Cleanup(workPath, resumeStatePath, opt);
             throw new DownloadFailedException(
-                $"下载失败: {ex.Message}", url, 0, 0, DownloadFailureReason.Unknown, ex);
+                string.Format("Download_Failed_Format".GetLocalized(), ex.Message), url, 0, 0, DownloadFailureReason.Unknown, ex);
         }
     }
 
@@ -305,14 +305,14 @@ public sealed partial class ParallelDownloadService
                 if (headResp.StatusCode is not (HttpStatusCode.MethodNotAllowed or HttpStatusCode.NotImplemented))
                 {
                     throw new DownloadFailedException(
-                        $"HEAD 预检失败: HTTP {(int)headResp.StatusCode} {headResp.ReasonPhrase}",
+                        string.Format("Download_HeadPreflightFailed_Format".GetLocalized(), (int)headResp.StatusCode, headResp.ReasonPhrase),
                         url, 0, 0, DownloadFailureReason.PreFlightFailed);
                 }
             }
             catch (HttpRequestException ex)
             {
                 throw new DownloadFailedException(
-                    $"HEAD 预检网络错误: {ex.Message}", url, 0, 0,
+                    string.Format("Download_HeadPreflightNetworkError_Format".GetLocalized(), ex.Message), url, 0, 0,
                     DownloadFailureReason.PreFlightFailed, ex);
             }
             finally
@@ -330,7 +330,7 @@ public sealed partial class ParallelDownloadService
             if (!probeResp.IsSuccessStatusCode)
             {
                 throw new DownloadFailedException(
-                    $"预检失败: HTTP {(int)probeResp.StatusCode} {probeResp.ReasonPhrase}",
+                    string.Format("Download_PreflightFailed_Format".GetLocalized(), (int)probeResp.StatusCode, probeResp.ReasonPhrase),
                     url, 0, 0, DownloadFailureReason.PreFlightFailed);
             }
 

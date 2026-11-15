@@ -5,7 +5,7 @@
     xmlns:windowex="using:WinUIEx"
     xmlns:constants="using:FufuLauncher.Constants"
     xmlns:helpers="using:FufuLauncher.Helpers"
-    Title="Support FufuLauncher">
+    Title="{helpers:Loc Key=StarPrompt_Title}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Grid.Row="0" IsHitTestVisible="False" Margin="16,0,0,0">
-            <TextBlock Text="Support FufuLauncher" VerticalAlignment="Center" FontSize="12"
+            <TextBlock Text="{helpers:Loc Key=StarPrompt_Title}" VerticalAlignment="Center" FontSize="12"
                        Foreground="{ThemeResource TextFillColorPrimaryBrush}" />
         </Grid>
 

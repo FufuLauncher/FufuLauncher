@@ -29,7 +29,7 @@ public sealed partial class DailyNoteWindow
         _isRefreshing = true;
         try
         {
-            StatusText = "正在连接...";
+            StatusText = "DailyNote_Connecting".GetLocalized();
             MaterialGroups.Clear();
             Activities.Clear();
 
@@ -50,7 +50,7 @@ public sealed partial class DailyNoteWindow
             {
                 if (retryCountMat > 0)
                 {
-                    StatusText = $"正在连接...";
+                    StatusText = "DailyNote_Connecting".GetLocalized();
                     await Task.Delay(300);
                 }
 
@@ -72,7 +72,7 @@ public sealed partial class DailyNoteWindow
             {
                 if (retryCountAct > 0)
                 {
-                    StatusText = $"正在连接...";
+                    StatusText = "DailyNote_Connecting".GetLocalized();
                     await Task.Delay(300);
                 }
 
@@ -85,11 +85,11 @@ public sealed partial class DailyNoteWindow
             }
 
             IsLoadingActivities = false;
-            StatusText = "更新完毕";
+            StatusText = "DailyNote_Updated".GetLocalized();
         }
         catch (Exception ex)
         {
-            StatusText = "初始化异常";
+            StatusText = "DailyNote_InitError".GetLocalized();
             DebugLog.Info("DailyNoteWindow.Scraper", $"[DailyNote] Init Error: {ex}");
             IsLoadingMaterials = false;
             IsLoadingActivities = false;

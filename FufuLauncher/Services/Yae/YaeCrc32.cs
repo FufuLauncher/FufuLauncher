@@ -1,8 +1,6 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-CRC-32-IEEE 802.3 标准实现，用于计算游戏进程哈希（对 exe 前 0x10000 字节）。
 */
 
 namespace FufuLauncher.Services.Yae;

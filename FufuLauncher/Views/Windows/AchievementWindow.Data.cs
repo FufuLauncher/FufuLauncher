@@ -121,15 +121,15 @@ public sealed partial class AchievementWindow
 
             ApplyFilters();
 
-            ViewModel.StatusMessage = $"共 {ViewModel.Categories.Sum(c => c.TotalCount)} 个成就";
+            ViewModel.StatusMessage = string.Format("AchievementWindow_TotalAchievements".GetLocalized(), ViewModel.Categories.Sum(c => c.TotalCount));
             CalculateGlobalStats();
 
-            ViewModel.StatusMessage = $"AchievementWindow_DataLoaded".GetLocalized();
+            ViewModel.StatusMessage = "AchievementWindow_DataLoaded".GetLocalized();
             _isDataLoaded = true;
         }
         catch (Exception ex)
         {
-            ViewModel.StatusMessage = $"初始化失败: {ex.Message}";
+            ViewModel.StatusMessage = string.Format("AchievementWindow_InitFailed_Format".GetLocalized(), ex.Message);
             DebugLog.Info("AchievementWindow.Data", ex);
         }
         finally

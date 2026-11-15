@@ -157,7 +157,7 @@ public class UpdateService : IUpdateService
             var updateInfo = await FetchManifestAsync().WaitAsync(TimeSpan.FromSeconds(40), cancellationToken);
             if (updateInfo == null)
             {
-                result.Message = "暂时无法连接更新服务器，未执行更新检查。";
+                result.Message = "UpdateService_Unreachable".GetLocalized();
                 return result;
             }
 
@@ -177,19 +177,19 @@ public class UpdateService : IUpdateService
             result.IsDevBuild = await _devBuildDetectionService.DetectAsync(result.ServerVersion);
             result.HasUpdate = AppVersionHelper.IsNewerVersion(result.ServerVersion, currentVersion);
             result.HasPreviewUpdate = AppVersionHelper.IsNewerVersion(result.PreviewVersion, currentVersion);
-            result.Message = result.HasUpdate ? "发现启动器新版本。" : "当前启动器已是最新版本。";
+            result.Message = result.HasUpdate ? "UpdateService_NewVersionFound".GetLocalized() : "UpdateService_UpToDate".GetLocalized();
 
             DebugLog.Info("UpdateService",
                 $"[UpdateService] Probe: current={currentVersion}, server={result.ServerVersion}, preview={result.PreviewVersion}, hasUpdate={result.HasUpdate}");
         }
         catch (OperationCanceledException)
         {
-            result.Message = "检查更新已取消或超时。";
+            result.Message = "UpdateService_CancelledOrTimeout".GetLocalized();
         }
         catch (Exception ex)
         {
             DebugLog.Info("UpdateService", $"[UpdateService] Probe failed: {ex.GetType().Name} - {ex.Message}");
-            result.Message = $"检查更新失败：{ex.Message}";
+            result.Message = string.Format("UpdateService_CheckFailed_Format".GetLocalized(), ex.Message);
         }
 
         return result;

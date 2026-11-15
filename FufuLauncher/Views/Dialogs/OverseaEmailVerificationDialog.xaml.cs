@@ -130,7 +130,7 @@ public sealed partial class OverseaEmailVerificationDialog : ContentDialog, IAig
                         continue;
                     }
 
-                    ShowError("人机验证未完成，请重试");
+                    ShowError("LoginQR_CaptchaNotCompleted".GetLocalized());
                     return;
                 }
 
@@ -150,7 +150,7 @@ public sealed partial class OverseaEmailVerificationDialog : ContentDialog, IAig
         }
         catch (Exception ex)
         {
-            ShowError($"发送异常: {ex.Message}");
+            ShowError(string.Format("LoginQR_SendCaptchaException_Format".GetLocalized(), ex.Message));
         }
         finally
         {

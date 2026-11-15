@@ -246,7 +246,7 @@ public sealed partial class GameSettingsPage
     {
         var path = await FilePickerService.PickOpenFileAsync(
             null,
-            new[] { ("可执行文件", new[] { ".exe" }) },
+            new[] { ("Common_ExecutableFiles".GetLocalized(), new[] { ".exe" }) },
             PickerLocationId.ComputerFolder,
             msg => WeakReferenceMessenger.Default.Send(new NotificationMessage("ErrorTitle".GetLocalized(), msg,
                 NotificationType.Error)));

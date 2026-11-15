@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using FufuLauncher.Helpers;
 using FufuLauncher.Models.MiHoYo.Passport;
 using FufuLauncher.Services.MiHoYo.Passport;
 using Microsoft.UI.Xaml;
@@ -36,7 +37,7 @@ public sealed partial class LoginQrWindow
         if (result == null)
         {
             if (!string.IsNullOrEmpty(error))
-                UpdateStatus($"登录失败: {error}", false);
+                UpdateStatus(string.Format("LoginQR_LoginFailedReason_Format".GetLocalized(), error), false);
             return;
         }
 
@@ -56,7 +57,7 @@ public sealed partial class LoginQrWindow
             return;
         }
 
-        UpdateStatus("正在换取登录凭证...", true);
+        UpdateStatus("LoginQR_ExchangingLoginCredential".GetLocalized(), true);
         var passportClient = App.GetService<OverseaPassportClient>();
         (string? rawRisk, PassportResponse<LoginResult> response) =
             await passportClient.LoginByThirdPartyAsync(token, verify: null);
@@ -72,14 +73,14 @@ public sealed partial class LoginQrWindow
             }
             else
             {
-                UpdateStatus("安全验证未完成", false);
+                UpdateStatus("LoginQR_RiskVerifyIncomplete".GetLocalized(), false);
                 return;
             }
         }
 
         if (!response.IsSuccess || response.Data?.Token?.Token == null || response.Data.UserInfo == null)
         {
-            UpdateStatus($"登录失败: [{response.RetCode}] {response.Message}", false);
+            UpdateStatus(string.Format("LoginQR_LoginFailedCode_Format".GetLocalized(), response.RetCode, response.Message), false);
             return;
         }
 
@@ -94,11 +95,11 @@ public sealed partial class LoginQrWindow
 
         if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid) || string.IsNullOrEmpty(aid))
         {
-            UpdateStatus("登录失败: 响应缺少凭证", false);
+            UpdateStatus("LoginQR_LoginMissingCredential".GetLocalized(), false);
             return;
         }
 
-        UpdateStatus("正在获取完整登录凭证...", true);
+        UpdateStatus("LoginQR_FetchingFullCredential".GetLocalized(), true);
 
         var cookies = new Dictionary<string, string>
         {

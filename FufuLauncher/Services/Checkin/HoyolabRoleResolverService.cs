@@ -106,7 +106,7 @@ public class HoyolabRoleResolverService : IHoyolabRoleResolverService
                       ?? ExtractCookieValue(cookie, "ltuid_v2")
                       ?? ExtractCookieValue(cookie, "account_id");
             if (string.IsNullOrWhiteSpace(uid))
-                return new HoyolabRoleResolveResult(-1, "Cookie 中缺少 HoYoLAB UID", "game_record_card",
+                return new HoyolabRoleResolveResult(-1, "Account_MissingHoyolabUidCookie".GetLocalized(), "game_record_card",
                     new List<GameRoleInfo>());
 
             var url = $"{ApiEndpoints.HoyolabGameRecordCardUrl}?uid={uid}";

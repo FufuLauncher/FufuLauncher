@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services.Security;
 
@@ -58,13 +59,13 @@ internal static partial class CookieVault
             catch (Exception ex) when (ex is CryptographicException or ArgumentException)
             {
                 Zero(plaintext);
-                throw new CookieVaultException(CookieVaultError.FileDecryptFailed, "HWID 密钥完整性校验失败", ex);
+                throw new CookieVaultException(CookieVaultError.FileDecryptFailed, "CookieVault_HwidIntegrityFailed".GetLocalized(), ex);
             }
 
             if (plaintext.Length != KeySize)
             {
                 Zero(plaintext);
-                throw new CookieVaultException(CookieVaultError.KeyInvalid, "HWID 解保护的 Cookie 密钥长度无效");
+                throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_HwidKeyLengthInvalid".GetLocalized());
             }
 
             return plaintext;
@@ -103,7 +104,7 @@ internal static partial class CookieVault
     private static byte[] DeriveHwidKey(byte[] keyId)
     {
         if (!TryGetSystemVolumeSerial(out uint serial))
-            throw new CookieVaultException(CookieVaultError.HwidUnavailable, "无法读取 C 盘序列号");
+            throw new CookieVaultException(CookieVaultError.HwidUnavailable, "CookieVault_CannotReadSystemDriveSerial".GetLocalized());
 
         var password = Encoding.UTF8.GetBytes($"FufuLauncher.HWID.v1|{serial:X8}");
         var salt = new byte[HwidSalt.Length + keyId.Length];

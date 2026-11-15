@@ -38,7 +38,7 @@ public class BackgroundItem
         set;
     }
 
-    public string TypeText => IsVideo ? "视频" : "图片";
+    public string TypeText => IsVideo ? "Background_TypeVideo".GetLocalized() : "Background_TypeImage".GetLocalized();
 }
 
 namespace FufuLauncher.Services.Background
@@ -885,7 +885,7 @@ namespace FufuLauncher.Services.Background
                 await using (var fileStream = new FileStream(tempFile, FileMode.CreateNew, FileAccess.Write))
                 {
                     await contentStream.CopyToAsync(fileStream, timeout.Token);
-                    if (fileStream.Length == 0) throw new InvalidDataException("背景下载内容为空");
+                    if (fileStream.Length == 0) throw new InvalidDataException("Background_EmptyDownload".GetLocalized());
                 }
 
                 File.Move(tempFile, cachedFilePath, true);

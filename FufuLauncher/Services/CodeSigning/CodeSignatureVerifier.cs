@@ -56,15 +56,15 @@ public static class CodeSignatureVerifier
             if (!digestVerified)
             {
                 result.Details.Add(trustResult == WinTrustInterop.TRUST_E_BAD_DIGEST
-                    ? "signature does not match the file content (file may be tampered)"
-                    : $"signature verification failed (WinVerifyTrust=0x{trustResult:X8})");
+                    ? "ModTrust_Verify_BadDigest".GetLocalized()
+                    : string.Format("ModTrust_Verify_WinTrustFailed_Format".GetLocalized(), trustResult));
                 return result.Clone(ModTrustStatus.Tampered);
             }
 
             if (package.Manifest.AdditionalTrustedLeafThumbprintsSha256.Any(t =>
                     t.Equals(thumbprint, StringComparison.OrdinalIgnoreCase)))
             {
-                result.Details.Add("thumbprint matches the additional allow list in the trust manifest");
+                result.Details.Add("ModTrust_Verify_Allowlisted".GetLocalized());
                 return result.Clone(ModTrustStatus.TrustedAllowlisted);
             }
 
@@ -78,15 +78,15 @@ public static class CodeSignatureVerifier
 
                 if (!chain.Build(leaf))
                 {
-                    result.Details.Add("certificate chain does not reach the platform root certificate: " +
-                                       string.Join("; ", chain.ChainStatus.Select(s => s.StatusInformation.Trim())));
+                    result.Details.Add(string.Format("ModTrust_Verify_ChainIncomplete_Format".GetLocalized(),
+                        string.Join("; ", chain.ChainStatus.Select(s => s.StatusInformation.Trim()))));
                     return result;
                 }
             }
 
             if (package.IsRevoked(result.SerialNumberHex))
             {
-                result.Details.Add("certificate is revoked by the platform");
+                result.Details.Add("ModTrust_Verify_Revoked".GetLocalized());
                 return result.Clone(ModTrustStatus.Revoked);
             }
 
@@ -99,14 +99,13 @@ public static class CodeSignatureVerifier
 
             if (!osTrusted)
             {
-                result.Details.Add(
-                    "OS trust chain not established (root certificate not installed); verified against the platform root certificate instead");
+                result.Details.Add("ModTrust_Verify_NoOsChain".GetLocalized());
             }
 
-            result.Details.Add("issued by the platform code signing CA and compliant with policy");
+            result.Details.Add("ModTrust_Verify_Compliant".GetLocalized());
             if (!string.IsNullOrEmpty(result.SignerId))
             {
-                result.Details.Add($"signer ID: {result.SignerId}");
+                result.Details.Add(string.Format("ModTrust_Verify_SignerId_Format".GetLocalized(), result.SignerId));
             }
 
             return result.Clone(ModTrustStatus.TrustedPlatform);

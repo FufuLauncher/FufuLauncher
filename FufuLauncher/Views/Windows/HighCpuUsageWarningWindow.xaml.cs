@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Windows.Graphics;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Views;
 
@@ -19,7 +20,7 @@ public sealed partial class HighCpuUsageWarningWindow : Window
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
-        UsageText.Text = $"最近一次采样占用约 {cpuUsage:F1}%";
+        UsageText.Text = string.Format("HighCpuUsage_SampleUsage_Format".GetLocalized(), cpuUsage);
 
         var size = new SizeInt32(620, 430);
         AppWindow.Resize(size);

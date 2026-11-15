@@ -64,7 +64,7 @@ public sealed partial class PluginPage
         }
         catch (Exception ex)
         {
-            ViewModel.StatusMessage = $"无法打开说明图: {ex.Message}";
+            ViewModel.StatusMessage = string.Format("PluginPage_CannotOpenGuideImage_Format".GetLocalized(), ex.Message);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services.Security;
 
@@ -122,11 +123,11 @@ internal static partial class CookieVault
         try
         {
             envelope = JsonSerializer.Deserialize<CookieFileEnvelope>(fileBytes)
-                       ?? throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 文件加密格式无效");
+                       ?? throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_FileFormatInvalid".GetLocalized());
         }
         catch (JsonException ex)
         {
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 文件加密格式无效", ex);
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_FileFormatInvalid".GetLocalized(), ex);
         }
 
         if (!string.Equals(envelope.Format, FormatName, StringComparison.Ordinal)
@@ -135,13 +136,13 @@ internal static partial class CookieVault
             || (!string.Equals(envelope.KeyProtection, KeyProtectionName, StringComparison.Ordinal)
                 && !string.Equals(envelope.KeyProtection, IntermediateKeyProtectionName, StringComparison.Ordinal)
                 && !string.Equals(envelope.KeyProtection, LegacyKeyProtectionName, StringComparison.Ordinal)))
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 文件加密格式不受支持");
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_FormatUnsupported".GetLocalized());
 
         if (string.IsNullOrEmpty(envelope.KeyId)
             || string.IsNullOrEmpty(envelope.Nonce)
             || string.IsNullOrEmpty(envelope.Tag)
             || string.IsNullOrEmpty(envelope.Ciphertext))
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 文件加密参数缺失");
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_ParamsMissing".GetLocalized());
 
         byte[] keyId;
         byte[] nonce;
@@ -156,18 +157,18 @@ internal static partial class CookieVault
         }
         catch (FormatException ex)
         {
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 文件加密参数编码无效", ex);
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_ParamsEncodingInvalid".GetLocalized(), ex);
         }
 
         if (keyId.Length != KeyIdSize || nonce.Length != NonceSize || tag.Length != TagSize)
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 文件加密参数长度无效");
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_ParamsLengthInvalid".GetLocalized());
 
         var key = LoadKey(dataDir);
         byte[]? associatedData = null;
         try
         {
             if (!CryptographicOperations.FixedTimeEquals(key.KeyId, keyId))
-                throw new CookieVaultException(CookieVaultError.KeyMismatch, "Cookie 文件加密密钥不匹配");
+                throw new CookieVaultException(CookieVaultError.KeyMismatch, "CookieVault_KeyMismatch".GetLocalized());
 
             associatedData = BuildAssociatedData(fileName, keyId, envelope.Version, envelope.KeyProtection!);
             var plaintext = new byte[ciphertext.Length];
@@ -180,7 +181,7 @@ internal static partial class CookieVault
             catch (Exception ex) when (ex is CryptographicException or ArgumentException)
             {
                 Zero(plaintext);
-                throw new CookieVaultException(CookieVaultError.FileDecryptFailed, "Cookie 文件完整性校验失败", ex);
+                throw new CookieVaultException(CookieVaultError.FileDecryptFailed, "CookieVault_IntegrityFailed".GetLocalized(), ex);
             }
         }
         finally
@@ -206,12 +207,12 @@ internal static partial class CookieVault
         }
         else
         {
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 二进制文件格式无效");
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_BinaryFormatInvalid".GetLocalized());
         }
 
         if (fileBytes.Length <= headerSize
             || fileBytes[magicSize] != BinaryFormatVersion)
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 二进制文件格式无效");
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_BinaryFormatInvalid".GetLocalized());
 
         int keyIdOffset = magicSize + 1;
         var keyId = fileBytes.AsSpan(keyIdOffset, KeyIdSize).ToArray();
@@ -223,14 +224,14 @@ internal static partial class CookieVault
         var ciphertext = fileBytes.AsSpan(cipherOffset).ToArray();
 
         if (ciphertext.Length == 0)
-            throw new CookieVaultException(CookieVaultError.FileFormat, "Cookie 二进制文件格式无效");
+            throw new CookieVaultException(CookieVaultError.FileFormat, "CookieVault_BinaryFormatInvalid".GetLocalized());
 
         var key = LoadKey(dataDir);
         byte[]? associatedData = null;
         try
         {
             if (!CryptographicOperations.FixedTimeEquals(key.KeyId, keyId))
-                throw new CookieVaultException(CookieVaultError.KeyMismatch, "Cookie 文件加密密钥不匹配");
+                throw new CookieVaultException(CookieVaultError.KeyMismatch, "CookieVault_KeyMismatch".GetLocalized());
 
             associatedData = BuildBinaryAssociatedData(fileName, keyId);
             var plaintext = new byte[ciphertext.Length];
@@ -243,7 +244,7 @@ internal static partial class CookieVault
             catch (Exception ex) when (ex is CryptographicException or ArgumentException)
             {
                 Zero(plaintext);
-                throw new CookieVaultException(CookieVaultError.FileDecryptFailed, "Cookie 文件完整性校验失败", ex);
+                throw new CookieVaultException(CookieVaultError.FileDecryptFailed, "CookieVault_IntegrityFailed".GetLocalized(), ex);
             }
         }
         finally

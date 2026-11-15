@@ -193,7 +193,7 @@ public sealed partial class ParallelDownloadService
 
             int failed = Volatile.Read(ref state.FailedChunks);
             throw new DownloadFailedException(
-                $"下载失败: {failed} 个小段出错" +
+                string.Format("Download_ChunksFailed_Format".GetLocalized(), failed) +
                 (last != null ? $"（{last.GetType().Name}: {last.Message}）" : ""),
                 url, totalSize, failed, DownloadFailureReason.ChunksFailed, last)
             {
@@ -277,7 +277,7 @@ public sealed partial class ParallelDownloadService
                 }
                 catch (OperationCanceledException) when (!ct.IsCancellationRequested)
                 {
-                    throw new IOException($"建立连接或排队超时（>{opt.RequestTimeout.TotalSeconds:F0}s）。");
+                    throw new IOException(string.Format("Download_ConnectOrQueueTimeout_Format".GetLocalized(), opt.RequestTimeout.TotalSeconds));
                 }
 
                 using (resp)
@@ -285,7 +285,7 @@ public sealed partial class ParallelDownloadService
                     if (resp.StatusCode == HttpStatusCode.OK)
                     {
                         throw new DownloadFailedException(
-                            "服务端忽略了 Range 请求，返回完整内容。",
+                            "Download_ServerIgnoredRange".GetLocalized(),
                             url, totalSize, 1, DownloadFailureReason.RangeNotSupported);
                     }
 
@@ -296,10 +296,10 @@ public sealed partial class ParallelDownloadService
                     if (contentRange?.From != start || contentRange.To != end)
                     {
                         throw new DownloadFailedException(
-                            $"分段响应范围不符: 请求 [{start}-{end}]，返回 " +
-                            (contentRange == null
-                                ? "无 Content-Range 头"
-                                : $"[{contentRange.From}-{contentRange.To}]"),
+                            string.Format("Download_RangeMismatch_Format".GetLocalized(), start, end,
+                                contentRange == null
+                                    ? "Download_MissingContentRangeHeader".GetLocalized()
+                                    : $"[{contentRange.From}-{contentRange.To}]"),
                             url, totalSize, 1, DownloadFailureReason.RangeNotSupported);
                     }
 
@@ -343,7 +343,7 @@ public sealed partial class ParallelDownloadService
 
                     if (written < chunkSize)
                     {
-                        throw new IOException($"小段不完整: 预期 {chunkSize}B，实际 {written}B");
+                        throw new IOException(string.Format("Download_ChunkIncomplete_Format".GetLocalized(), chunkSize, written));
                     }
 
                     return;
@@ -352,7 +352,7 @@ public sealed partial class ParallelDownloadService
             catch (OperationCanceledException) when (!ct.IsCancellationRequested)
             {
                 lastError = new DownloadFailedException(
-                    "小段下载停滞超时。", url, totalSize, 1, DownloadFailureReason.Stalled);
+                    "Download_ChunkStalled".GetLocalized(), url, totalSize, 1, DownloadFailureReason.Stalled);
             }
             catch (OperationCanceledException)
             {
@@ -404,7 +404,7 @@ public sealed partial class ParallelDownloadService
         }
 
         throw new IOException(
-            $"小段 [{start}-{end}] 重试 {opt.MaxRetries} 次后仍失败", lastError);
+            string.Format("Download_ChunkRetryFailed_Format".GetLocalized(), start, end, opt.MaxRetries), lastError);
     }
 
     private static void ReportProgress(

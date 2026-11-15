@@ -74,7 +74,7 @@ public sealed partial class OverseaPasswordLoginDialog : ContentDialog, IPasspor
                     continue;
                 }
 
-                return (null, "安全验证未完成");
+                return (null, "LoginQR_RiskVerifyIncomplete".GetLocalized());
             }
 
             if (response.IsSuccess && response.Data is not null)
@@ -93,7 +93,7 @@ public sealed partial class OverseaPasswordLoginDialog : ContentDialog, IPasspor
             return (null, $"[{response.RetCode}] {response.Message}");
         }
 
-        return (null, "登录失败：校验次数过多，请稍后重试");
+        return (null, "LoginQR_TooManyVerifyAttempts".GetLocalized());
     }
 
     private void AccountTextBox_TextChanged(object sender, TextChangedEventArgs e) => UpdatePrimaryButtonState();

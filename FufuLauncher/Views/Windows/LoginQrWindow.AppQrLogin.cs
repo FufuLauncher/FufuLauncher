@@ -28,12 +28,12 @@ public sealed partial class LoginQrWindow
             if (!IsSessionActive(session)) return;
 
             if (refreshCount == 0)
-                UpdateStatus("正在创建APP登录二维码...", true);
+                UpdateStatus("LoginQR_CreatingAppQr".GetLocalized(), true);
 
             var qrResult = await CreateAppQrCodeAsync(session);
             if (!qrResult.Success)
             {
-                UpdateStatus($"创建失败: {qrResult.Message}", false);
+                UpdateStatus(string.Format("LoginQR_CreateFailed_Format".GetLocalized(), qrResult.Message), false);
                 return;
             }
 
@@ -41,7 +41,7 @@ public sealed partial class LoginQrWindow
 
             session.QrCreatedAt = DateTimeOffset.UtcNow;
             RenderQrCode(qrResult.Url);
-            UpdateStatus("请使用米游社APP扫描二维码", false, true);
+            UpdateStatus("LoginQR_ScanWithMiyoushe".GetLocalized(), false, true);
             SetQrHint(refreshCount == 0 ? "LoginQR_AutoRefreshHint" : "LoginQR_AutoRefreshed");
 
             var outcome = await PollAppLoginStatusAsync(session);
@@ -51,7 +51,7 @@ public sealed partial class LoginQrWindow
             {
                 DebugLog.Info("LoginQrWindow.AppQrLogin", "二维码自动刷新次数已达上限");
                 SetQrHint("LoginQR_AutoRefreshPaused");
-                UpdateStatus("二维码已过期且自动刷新次数已达上限，请点击刷新二维码", false);
+                UpdateStatus("LoginQR_QrExpiredMaxRefresh".GetLocalized(), false);
                 return;
             }
 
@@ -140,7 +140,7 @@ public sealed partial class LoginQrWindow
                     if (status?.ToLower() == "confirmed")
                     {
                         _isLoginCompleting = true;
-                        UpdateStatus("APP扫码成功，正在换取...", true);
+                        UpdateStatus("LoginQR_AppScanSuccessExchanging".GetLocalized(), true);
                         confirmedData = result["data"];
                         break;
                     }
@@ -148,7 +148,7 @@ public sealed partial class LoginQrWindow
                     if (status?.ToLower() == "scanned")
                     {
                         scanned = true;
-                        UpdateStatus("已扫码，请在手机端确认登录...", true);
+                        UpdateStatus("LoginQR_ScannedConfirmPhone".GetLocalized(), true);
                     }
 
                     consecutiveErrors = 0;
@@ -171,7 +171,7 @@ public sealed partial class LoginQrWindow
 
             if (consecutiveErrors >= MaxConsecutiveErrors)
             {
-                UpdateStatus("网络异常次数过多，请检查网络后重试", false);
+                UpdateStatus("LoginQR_TooManyNetworkErrors".GetLocalized(), false);
                 return QrPollOutcome.Stopped;
             }
 

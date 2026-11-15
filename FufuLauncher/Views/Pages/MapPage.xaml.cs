@@ -215,7 +215,7 @@ namespace FufuLauncher.Views
             {
                 bool isTop = TopMostToggle.IsChecked == true;
                 presenter.IsAlwaysOnTop = isTop;
-                TopMostToggle.Content = isTop ? "窗口置顶 (开)" : "窗口置顶 (关)";
+                TopMostToggle.Content = isTop ? "MapPage_TopMostOn".GetLocalized() : "MapPage_TopMostOff".GetLocalized();
             }
         }
 
@@ -225,7 +225,7 @@ namespace FufuLauncher.Views
 
             MapWebView.IsHitTestVisible = !isLocked;
 
-            LockMapToggle.Content = isLocked ? "锁定地图 (开)" : "锁定地图 (关)";
+            LockMapToggle.Content = isLocked ? "MapPage_LockMapOn".GetLocalized() : "MapPage_LockMapOff".GetLocalized();
         }
     }
 }

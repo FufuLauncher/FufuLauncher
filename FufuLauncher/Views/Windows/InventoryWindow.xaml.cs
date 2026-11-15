@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Net.Http.Json;
 using System.Text.Json;
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
@@ -102,8 +103,9 @@ namespace FufuLauncher.Views
                         _loadedRole = selected;
                         _currentItems = data.Items;
                         RefreshUiBindings();
-                        StatusText.Text =
-                            $"上次更新: {DateTimeOffset.FromUnixTimeSeconds(data.LastUpdateTime).LocalDateTime:MM-dd HH:mm}";
+                        StatusText.Text = string.Format(
+                            "Inventory_LastUpdated_Format".GetLocalized(),
+                            DateTimeOffset.FromUnixTimeSeconds(data.LastUpdateTime).LocalDateTime.ToString("MM-dd HH:mm"));
                         return;
                     }
                 }
@@ -166,11 +168,11 @@ namespace FufuLauncher.Views
             var existingItems = _currentItems.ToList();
             try
             {
-                StatusText.Text = isManualRefresh ? "正在请求米游社..." : "正在获取数据...";
+                StatusText.Text = isManualRefresh ? "Inventory_RequestingMiyoushe".GetLocalized() : "Inventory_FetchingData".GetLocalized();
                 var selected = await _roles.GetCurrentAsync(RoleSelection)
-                               ?? throw new InvalidOperationException("请先登录米游社账号");
+                               ?? throw new InvalidOperationException("Inventory_LoginRequired".GetLocalized());
                 if (selected.ServerType != "cn")
-                    throw new InvalidOperationException("背包同步暂仅支持天空岛和世界树角色。");
+                    throw new InvalidOperationException("Inventory_CnOnly".GetLocalized());
                 if (version != _loadVersion || _closed) return;
                 if (_loadedRole == null || _loadedRole.Role.game_uid != selected.Role.game_uid ||
                     _loadedRole.Role.region != selected.Role.region)
@@ -190,11 +192,11 @@ namespace FufuLauncher.Views
                 await SaveToCacheAsync();
                 if (version != _loadVersion || _closed || !_roles.IsCurrent(selected, RoleSelection)) return;
                 RefreshUiBindings();
-                StatusText.Text = $"同步成功: {DateTime.Now:HH:mm:ss}";
+                StatusText.Text = string.Format("Inventory_SyncSuccess_Format".GetLocalized(), DateTime.Now.ToString("HH:mm:ss"));
             }
             catch (Exception ex)
             {
-                if (version == _loadVersion && !_closed) StatusText.Text = $"同步失败: {ex.Message}";
+                if (version == _loadVersion && !_closed) StatusText.Text = string.Format("Inventory_SyncFailed_Format".GetLocalized(), ex.Message);
             }
             finally
             {
@@ -253,7 +255,7 @@ namespace FufuLauncher.Views
                 items.Add(new InventoryItemModel
                 {
                     Id = item.GetProperty("id").GetInt32(),
-                    Name = item.GetProperty("name").GetString() ?? "未知",
+                    Name = item.GetProperty("name").GetString() ?? "Common_Unknown".GetLocalized(),
                     OwnedCount = owned,
                     IconUrl = item.TryGetProperty("icon", out var icon) ? icon.GetString() : ""
                 });
@@ -272,7 +274,7 @@ namespace FufuLauncher.Views
             var json = await response.Content.ReadAsStringAsync();
             using var document = JsonDocument.Parse(json);
             if (!document.RootElement.TryGetProperty("retcode", out var code) || code.GetInt32() != 0)
-                throw new InvalidOperationException("背包接口请求失败，请检查该角色的登录和授权状态。");
+                throw new InvalidOperationException("Inventory_ApiRequestFailed".GetLocalized());
             return json;
         }
     }

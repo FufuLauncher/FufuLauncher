@@ -69,7 +69,7 @@ public sealed partial class PresetManagerWindow : Window
     {
         InitializeComponent();
         _localSettingsService = App.GetService<ILocalSettingsService>();
-        Title = "预设管理";
+        Title = "PresetManager_Title".GetLocalized();
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
@@ -142,9 +142,9 @@ public sealed partial class PresetManagerWindow : Window
 
                 var dialog = new ContentDialog
                 {
-                    Title = "提示",
-                    Content = "最多只能固定 5 个预设",
-                    CloseButtonText = "确定",
+                    Title = "Common_Notice".GetLocalized(),
+                    Content = "PresetManager_MaxPinnedHint".GetLocalized(),
+                    CloseButtonText = "Common_Confirm".GetLocalized(),
                     XamlRoot = this.Content.XamlRoot
                 };
                 await dialog.ShowAsync();

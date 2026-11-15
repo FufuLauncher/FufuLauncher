@@ -63,7 +63,7 @@
             <InfoBar.Content>
                 <StackPanel Spacing="6" MaxWidth="720" HorizontalAlignment="Left" Margin="0,2,12,8">
                     <TextBlock TextWrapping="Wrap">
-                        <Run Text="若启动游戏遇到下面弹窗，停止切换游戏服务器，请使用软件或官方启动器的" /><Run FontWeight="Bold" Text="“修复游戏”" />
+                        <Run Text="{helpers:Loc Key=AdvancedServerSwitch_ErrorNoticePre}" /><Run FontWeight="Bold" Text="{helpers:Loc Key=AdvancedServerSwitch_ErrorNoticeBold}" />
                     </TextBlock>
                     <Border BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}" BorderThickness="1"
                             CornerRadius="4" Padding="8,6"

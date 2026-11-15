@@ -369,11 +369,10 @@ namespace FufuLauncher.Views
                 {
                     var dialog = new ContentDialog
                     {
-                        Title = "检测到不同账号",
-                        Content =
-                            $"当前数据属于 UID: {currentUid}\n即将导入的数据来自 UID: {incomingUid}\n\n是否为 UID {incomingUid} 创建新的数据存档？",
-                        PrimaryButtonText = "创建新存档",
-                        CloseButtonText = "取消",
+                        Title = "GachaAnalysis_DifferentAccountTitle".GetLocalized(),
+                        Content = string.Format("GachaAnalysis_DifferentAccountContent_Format".GetLocalized(), currentUid, incomingUid),
+                        PrimaryButtonText = "GachaAnalysis_CreateNewArchive".GetLocalized(),
+                        CloseButtonText = "CancelBtn".GetLocalized(),
                         DefaultButton = ContentDialogButton.Primary,
                         XamlRoot = Content.XamlRoot
                     };
@@ -391,7 +390,7 @@ namespace FufuLauncher.Views
                     {
                         Title = title,
                         Content = content,
-                        PrimaryButtonText = buttonText ?? "确定",
+                        PrimaryButtonText = buttonText ?? "Common_Confirm".GetLocalized(),
                         DefaultButton = ContentDialogButton.Primary,
                         XamlRoot = Content.XamlRoot
                     };
@@ -406,9 +405,9 @@ namespace FufuLauncher.Views
                 {
                     var dialog = new ContentDialog
                     {
-                        Title = "获取失败",
+                        Title = "GachaAnalysis_FetchFailedTitle".GetLocalized(),
                         Content = msg,
-                        CloseButtonText = "知道了",
+                        CloseButtonText = "Common_GotIt".GetLocalized(),
                         DefaultButton = ContentDialogButton.Close,
                         XamlRoot = Content.XamlRoot
                     };
@@ -425,10 +424,10 @@ namespace FufuLauncher.Views
                     {
                         var dialog = new ContentDialog
                         {
-                            Title = "需要登录目标账户",
+                            Title = "GachaAnalysis_ReloginTitle".GetLocalized(),
                             Content = message,
-                            PrimaryButtonText = "前往登录",
-                            CloseButtonText = "取消",
+                            PrimaryButtonText = "GachaAnalysis_GoToLogin".GetLocalized(),
+                            CloseButtonText = "CancelBtn".GetLocalized(),
                             DefaultButton = ContentDialogButton.Primary,
                             XamlRoot = Content.XamlRoot
                         };

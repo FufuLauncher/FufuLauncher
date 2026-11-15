@@ -53,7 +53,7 @@ public class GachaService
         using var response = await _httpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();
         return JsonSerializer.Deserialize<GameRolesResponse>(await response.Content.ReadAsStringAsync())
-               ?? throw new JsonException("Invalid role-binding response.");
+               ?? throw new JsonException("Gacha_InvalidRoleBindingResponse".GetLocalized());
     }
 
     public Task<GachaLink> GenerateAuthKeyAsync(IReadOnlyDictionary<string, string> cookies, GameRoleInfo role)
@@ -66,7 +66,7 @@ public class GachaService
         var mid = Read("mid", "account_mid_v2", "ltmid_v2");
         var stuid = Read("stuid", "stuid_v2", "account_id", "account_id_v2", "ltuid", "ltuid_v2");
         if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid) || string.IsNullOrEmpty(stuid))
-            throw new GachaAuthKeyException("米游社抽卡登录凭证不完整。请在账号页使用「米游社 APP 扫码」或短信验证码重新登录绑定了目标角色的账号。",
+            throw new GachaAuthKeyException("Gacha_AuthKey_IncompleteLogin".GetLocalized(),
                 requiresReLogin: true);
         return GenerateAuthKeyAsync(stoken, mid, stuid, role);
     }
@@ -74,9 +74,9 @@ public class GachaService
     public async Task<GachaLink> GenerateAuthKeyAsync(string stoken, string mid, string stuid, GameRoleInfo role)
     {
         if (!GachaAccountResolver.IsSupportedRole(role))
-            throw new ArgumentException("所选角色的游戏、UID 或服务器信息无效。", nameof(role));
+            throw new ArgumentException("Gacha_AuthKey_InvalidRole".GetLocalized(), nameof(role));
         if (string.IsNullOrWhiteSpace(stoken) || string.IsNullOrWhiteSpace(mid) || string.IsNullOrWhiteSpace(stuid))
-            throw new ArgumentException("米游社登录凭证不完整，请重新登录所选账号。");
+            throw new ArgumentException("Gacha_AuthKey_ReloginRequired".GetLocalized());
 
         var body = JsonSerializer.Serialize(new
         {
@@ -98,18 +98,18 @@ public class GachaService
 
         using var response = await _httpClient.SendAsync(request);
         if (!response.IsSuccessStatusCode)
-            throw new GachaAuthKeyException($"米游社认证请求失败（HTTP {(int)response.StatusCode}）。");
+            throw new GachaAuthKeyException(string.Format("Gacha_AuthKey_HttpError_Format".GetLocalized(), (int)response.StatusCode));
         try
         {
             using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
             var root = doc.RootElement;
             if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty("retcode", out var rc) ||
                 rc.ValueKind != JsonValueKind.Number || !rc.TryGetInt32(out var retcode))
-                throw new GachaAuthKeyException("米游社认证接口返回了无效数据。");
+                throw new GachaAuthKeyException("Gacha_AuthKey_InvalidResponse".GetLocalized());
             if (retcode == -100)
-                throw new GachaAuthKeyException("米游社未接受所选角色的抽卡认证（返回码 -100）。", retcode);
+                throw new GachaAuthKeyException("Gacha_AuthKey_Rejected".GetLocalized(), retcode);
             if (retcode != 0)
-                throw new GachaAuthKeyException($"米游社认证密钥生成失败（返回码 {retcode}）。", retcode);
+                throw new GachaAuthKeyException(string.Format("Gacha_AuthKey_GenFailed_Format".GetLocalized(), retcode), retcode);
             if (!root.TryGetProperty("data", out var data) || data.ValueKind != JsonValueKind.Object ||
                 !data.TryGetProperty("authkey", out var key) || key.ValueKind != JsonValueKind.String ||
                 string.IsNullOrWhiteSpace(key.GetString()) ||
@@ -117,16 +117,16 @@ public class GachaService
                 !version.TryGetInt32(out var authkeyVersion) || authkeyVersion <= 0 ||
                 !data.TryGetProperty("sign_type", out var sign) || sign.ValueKind != JsonValueKind.Number ||
                 !sign.TryGetInt32(out var signType) || signType <= 0)
-                throw new GachaAuthKeyException("米游社认证接口未返回完整的祈愿认证信息。");
+                throw new GachaAuthKeyException("Gacha_AuthKey_IncompleteData".GetLocalized());
 
             var url = ApiEndpoints.GachaLogCnUrl +
                       $"?authkey={Uri.EscapeDataString(key.GetString()!)}&authkey_ver={authkeyVersion}" +
                       $"&sign_type={signType}&region={role.region}&lang=zh-cn";
-            return GachaUrlHelper.Parse(url) ?? throw new GachaAuthKeyException("米游社返回的祈愿认证信息无效。");
+            return GachaUrlHelper.Parse(url) ?? throw new GachaAuthKeyException("Gacha_AuthKey_InvalidData".GetLocalized());
         }
         catch (JsonException)
         {
-            throw new GachaAuthKeyException("米游社认证接口返回了无效数据。");
+            throw new GachaAuthKeyException("Gacha_AuthKey_InvalidResponse".GetLocalized());
         }
     }
 
@@ -192,7 +192,7 @@ public class GachaService
                     if (response?.Retcode != 0)
                     {
                         if (requireComplete && response?.Retcode == -100)
-                            throw new GachaFetchException("祈愿链接已过期或无效，请在游戏中重新打开祈愿历史记录后再试。", -100);
+                            throw new GachaFetchException("Gacha_Fetch_LinkExpired".GetLocalized(), -100);
                         DebugLog.Info("GachaService",
                             $"[Gacha] type={gachaType} page={page} retry {retry + 1}/{maxRetry}, retcode={response?.Retcode}, message={response?.Message}");
                         if (retry < maxRetry - 1)
@@ -202,7 +202,7 @@ public class GachaService
                         }
 
                         if (requireComplete)
-                            throw new GachaFetchException($"祈愿记录获取失败（返回码 {response?.Retcode}），请稍后重试。",
+                            throw new GachaFetchException(string.Format("Gacha_Fetch_ErrorCode_Format".GetLocalized(), response?.Retcode),
                                 response?.Retcode);
                         DebugLog.Info("GachaService",
                             $"[Gacha] type={gachaType} page={page} retries exhausted, skipping");
@@ -281,7 +281,7 @@ public class GachaService
                     }
 
                     if (requireComplete)
-                        throw new GachaFetchException("祈愿记录请求失败，请检查网络后重试。", null);
+                        throw new GachaFetchException("Gacha_Fetch_NetworkError".GetLocalized(), null);
                     DebugLog.Info("GachaService", $"[Gacha] type={gachaType} page={page} retries exhausted, skipping");
                 }
             }
@@ -297,23 +297,23 @@ public class GachaService
         ref string? observedUid)
     {
         if (data?.List == null)
-            throw new GachaFetchException("服务器返回了无效的祈愿记录数据。", null);
+            throw new GachaFetchException("Gacha_Fetch_InvalidServerData".GetLocalized(), null);
         if (!string.IsNullOrEmpty(expectedRegion) && !string.IsNullOrEmpty(data.Region) &&
             data.Region != expectedRegion)
-            throw new GachaFetchException("祈愿链接与返回记录的服务器不一致，已停止导入。", null);
+            throw new GachaFetchException("Gacha_Fetch_ServerMismatch".GetLocalized(), null);
 
         var region = string.IsNullOrEmpty(expectedRegion) ? data.Region : expectedRegion;
         foreach (var item in data.List)
         {
             var uid = item.Uid;
             if (string.IsNullOrEmpty(uid) || uid.Length is < 9 or > 10 || !uid.All(char.IsAsciiDigit))
-                throw new GachaFetchException("祈愿记录缺少有效的游戏 UID，已停止导入。", null);
+                throw new GachaFetchException("Gacha_Fetch_MissingUid".GetLocalized(), null);
             if (observedUid != null && uid != observedUid)
-                throw new GachaFetchException("祈愿记录包含不同账号的数据，已停止导入。", null);
+                throw new GachaFetchException("Gacha_Fetch_MultipleAccounts".GetLocalized(), null);
             if (!string.IsNullOrEmpty(expectedUid) && uid != expectedUid)
-                throw new GachaFetchException("返回记录的 UID 与所选游戏角色不一致，已停止导入。", null);
+                throw new GachaFetchException("Gacha_Fetch_UidMismatch".GetLocalized(), null);
             if (!string.IsNullOrEmpty(region) && ServerRegion.Resolve(uid) != region)
-                throw new GachaFetchException("祈愿记录的 UID 与服务器不一致，已停止导入。", null);
+                throw new GachaFetchException("Gacha_Fetch_UidServerMismatch".GetLocalized(), null);
             observedUid = uid;
         }
     }

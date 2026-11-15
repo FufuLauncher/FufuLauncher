@@ -16,7 +16,7 @@ namespace FufuLauncher.Helpers
                 return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
             }
 
-            return "从未使用";
+            return "Common_NeverUsed".GetLocalized();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

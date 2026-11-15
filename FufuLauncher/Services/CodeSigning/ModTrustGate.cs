@@ -157,7 +157,7 @@ public sealed class ModTrustGate
                 Allowed = true,
                 Result = new ModTrustResult { FilePath = filePath, Status = ModTrustStatus.VerificationSkipped },
                 Mode = mode,
-                Reason = "trust check disabled"
+                Reason = "ModTrust_ReasonSkipped".GetLocalized()
             };
         }
 
@@ -181,24 +181,23 @@ public sealed class ModTrustGate
     public static string Describe(ModTrustResult result, ModTrustEnforcement mode)
     {
         var signer = string.IsNullOrWhiteSpace(result.SignerSubject)
-            ? "(unsigned)"
-            : $"{result.SignerSubject}{(string.IsNullOrWhiteSpace(result.SignerId) ? string.Empty : $" (signer id {result.SignerId})")}";
+            ? "ModTrust_UnsignedMarker".GetLocalized()
+            : $"{result.SignerSubject}{(string.IsNullOrWhiteSpace(result.SignerId) ? string.Empty : string.Format("ModTrust_SignerIdSuffix_Format".GetLocalized(), result.SignerId))}";
 
         return result.Status switch
         {
-            ModTrustStatus.VerificationSkipped => "trust check disabled",
-            ModTrustStatus.TrustedPlatform => $"signed by the FufuLauncher code signing CA: {signer}",
-            ModTrustStatus.TrustedAllowlisted => $"listed in the platform trust allow list: {signer}",
-            ModTrustStatus.Unsigned => "unsigned: publisher cannot be verified",
-            ModTrustStatus.Tampered => "signature does not match the file content, the file may be tampered",
-            ModTrustStatus.Revoked => $"signing certificate is revoked by the platform: {signer}",
-            ModTrustStatus.PolicyViolation =>
-                $"signing certificate violates the platform policy (basic code signing certificates only): {signer}",
+            ModTrustStatus.VerificationSkipped => "ModTrust_ReasonSkipped".GetLocalized(),
+            ModTrustStatus.TrustedPlatform => string.Format("ModTrust_ReasonTrustedPlatform_Format".GetLocalized(), signer),
+            ModTrustStatus.TrustedAllowlisted => string.Format("ModTrust_ReasonTrustedAllowlisted_Format".GetLocalized(), signer),
+            ModTrustStatus.Unsigned => "ModTrust_ReasonUnsigned".GetLocalized(),
+            ModTrustStatus.Tampered => "ModTrust_ReasonTampered".GetLocalized(),
+            ModTrustStatus.Revoked => string.Format("ModTrust_ReasonRevoked_Format".GetLocalized(), signer),
+            ModTrustStatus.PolicyViolation => string.Format("ModTrust_ReasonPolicyViolation_Format".GetLocalized(), signer),
             ModTrustStatus.PackageUnavailable =>
                 mode == ModTrustEnforcement.Enforce
-                    ? "trust package unavailable, strict mode refuses to load unverified files"
-                    : "trust package unavailable, reported without blocking",
-            _ => $"signature failed platform trust verification: {signer}"
+                    ? "ModTrust_ReasonPkgUnavailableEnforce".GetLocalized()
+                    : "ModTrust_ReasonPkgUnavailableWarn".GetLocalized(),
+            _ => string.Format("ModTrust_ReasonFailed_Format".GetLocalized(), signer)
         };
     }
 }

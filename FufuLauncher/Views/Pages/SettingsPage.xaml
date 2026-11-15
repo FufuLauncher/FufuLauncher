@@ -3847,13 +3847,13 @@
                                     </Grid.ColumnDefinitions>
                                     <FontIcon Style="{StaticResource RowIconStyle}" Glyph="&#xE774;" />
                                     <StackPanel Grid.Column="1" Style="{StaticResource RowTextStyle}">
-                                        <TextBlock Style="{StaticResource RowTitleStyle}" Text="服务状态总览" />
+                                        <TextBlock Style="{StaticResource RowTitleStyle}" Text="{helpers:Loc Key=Settings_ServiceOverview}" />
                                         <TextBlock Style="{StaticResource RowCaptionStyle}"
-                                                   Text="查看 status.fu1.fun 上的所有服务运行状态" />
+                                                   Text="{helpers:Loc Key=Settings_ServiceOverviewDesc}" />
                                     </StackPanel>
                                     <Button Grid.Column="2"
                                             Style="{StaticResource RowButtonStyle}"
-                                            Content="打开"
+                                            Content="{helpers:Loc Key=Common_Open}"
                                             Click="OnOpenServiceOverviewClick" />
                                 </Grid>
 

@@ -34,7 +34,7 @@ public sealed partial class ParallelDownloadService
         if (!actual.Equals(opt.ExpectedHash, StringComparison.OrdinalIgnoreCase))
         {
             throw new DownloadFailedException(
-                $"哈希校验失败: 实际 {actual}，预期 {opt.ExpectedHash}",
+                string.Format("Download_HashVerifyFailed_Format".GetLocalized(), actual, opt.ExpectedHash),
                 url, totalSize, 0, DownloadFailureReason.IntegrityMismatch);
         }
     }

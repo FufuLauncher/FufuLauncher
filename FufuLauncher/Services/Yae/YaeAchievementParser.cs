@@ -1,9 +1,6 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-解析 AchievementAllDataNotify protobuf 数据，转换为 UIAF 项。
-解析逻辑参考 HolographicHat/YaeAchievement (GPL-3.0)。
 */
 
 using Google.Protobuf;

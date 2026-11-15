@@ -1,8 +1,6 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-UIAF v1.1 结果文件的单条成就项，与成就窗口的导入/导出格式一致。
 */
 
 using System.Text.Json.Serialization;

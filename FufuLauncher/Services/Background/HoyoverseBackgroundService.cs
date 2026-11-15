@@ -34,7 +34,7 @@ namespace FufuLauncher.Services.Background
             set;
         }
 
-        public string TypeText => IsVideo ? "视频" : "图片";
+        public string TypeText => IsVideo ? "Background_TypeVideo".GetLocalized() : "Background_TypeImage".GetLocalized();
     }
 
     public interface IHoyoverseBackgroundService

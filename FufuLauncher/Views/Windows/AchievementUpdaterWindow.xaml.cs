@@ -46,7 +46,7 @@ namespace FufuLauncher.Views
         private async void InitializeBrowserWindow()
         {
             _browserWindow = new Window();
-            _browserWindow.Title = "请勿操作此窗口！";
+            _browserWindow.Title = "AchievementUpdater_DoNotTouch".GetLocalized();
 
             _browserWindow.SystemBackdrop = new MicaBackdrop();
 
@@ -80,11 +80,11 @@ namespace FufuLauncher.Views
         {
             var stackPanel = new StackPanel { Spacing = 10, Width = 400 };
 
-            _dialogStatusText = new TextBlock { Text = "正在初始化组件...", TextWrapping = TextWrapping.Wrap };
+            _dialogStatusText = new TextBlock { Text = "AchievementUpdater_Initializing".GetLocalized(), TextWrapping = TextWrapping.Wrap };
             _dialogProgressBar = new ProgressBar { Minimum = 0, Maximum = 100, Value = 0, IsIndeterminate = true };
             _currentAchievementText = new TextBlock
             {
-                Text = "等待页面响应",
+                Text = "AchievementUpdater_WaitingPage".GetLocalized(),
                 FontSize = 12,
                 Opacity = 0.6,
                 FontStyle = Windows.UI.Text.FontStyle.Italic
@@ -93,14 +93,14 @@ namespace FufuLauncher.Views
             stackPanel.Children.Add(_dialogStatusText);
             stackPanel.Children.Add(_dialogProgressBar);
             stackPanel.Children.Add(new TextBlock
-                { Text = "当前进度状态：", FontSize = 12, Margin = new Thickness(0, 10, 0, 0) });
+                { Text = "AchievementUpdater_CurrentProgress".GetLocalized(), FontSize = 12, Margin = new Thickness(0, 10, 0, 0) });
             stackPanel.Children.Add(_currentAchievementText);
 
             _progressDialog = new ContentDialog
             {
-                Title = "正在获取成就数据",
+                Title = "AchievementUpdater_FetchingTitle".GetLocalized(),
                 Content = stackPanel,
-                CloseButtonText = "取消",
+                CloseButtonText = "CancelBtn".GetLocalized(),
                 XamlRoot = Content.XamlRoot
             };
         }
@@ -283,8 +283,8 @@ namespace FufuLauncher.Views
                 else if (type == "done")
                 {
                     _dialogProgressBar.IsIndeterminate = true;
-                    _dialogStatusText.Text = "基础结构抓取完毕，准备从 GitHub 获取详细数据字典...";
-                    _currentAchievementText.Text = "等待网络请求连接";
+                    _dialogStatusText.Text = "AchievementUpdater_StructureDone".GetLocalized();
+                    _currentAchievementText.Text = "AchievementUpdater_WaitingNetwork".GetLocalized();
 
 
                     _ = FetchAndMergeGithubDataAsync().ContinueWith(t =>
@@ -306,9 +306,9 @@ namespace FufuLauncher.Views
 
                     var errorDialog = new ContentDialog
                     {
-                        Title = "执行异常",
-                        Content = $"获取脚本发生错误: {errorMsg}",
-                        CloseButtonText = "关闭",
+                        Title = "AchievementUpdater_ExecError".GetLocalized(),
+                        Content = string.Format("AchievementUpdater_ScriptError_Format".GetLocalized(), errorMsg),
+                        CloseButtonText = "CloseBtn".GetLocalized(),
                         XamlRoot = Content.XamlRoot
                     };
                     _ = errorDialog.ShowAsync();
@@ -346,9 +346,9 @@ namespace FufuLauncher.Views
                     {
                         string downloadUrl = fileNode["download_url"]?.ToString();
 
-                        _dialogStatusText.Text = $"正在拉取 GitHub 详情: {fileName}";
+                        _dialogStatusText.Text = string.Format("AchievementUpdater_FetchingGithub_Format".GetLocalized(), fileName);
                         _dialogProgressBar.Value = ((double)currentIndex / totalFiles) * 100;
-                        _currentAchievementText.Text = $"处理进度: {currentIndex + 1} / {totalFiles}";
+                        _currentAchievementText.Text = string.Format("AchievementUpdater_Progress_Format".GetLocalized(), currentIndex + 1, totalFiles);
 
                         string fileContent = await client.GetStringAsync(downloadUrl);
                         var categoryData = JsonNode.Parse(fileContent);
@@ -375,7 +375,7 @@ namespace FufuLauncher.Views
                     currentIndex++;
                 }
 
-                _dialogStatusText.Text = "正在整合数据结构并进行多阶段排序...";
+                _dialogStatusText.Text = "AchievementUpdater_Sorting".GetLocalized();
                 _dialogProgressBar.IsIndeterminate = true;
 
 
@@ -389,7 +389,7 @@ namespace FufuLauncher.Views
                     });
                 }
 
-                _currentAchievementText.Text = "执行数据字段并入...";
+                _currentAchievementText.Text = "AchievementUpdater_MergingFields".GetLocalized();
 
 
                 foreach (var category in _allCategoriesData)
@@ -430,8 +430,8 @@ namespace FufuLauncher.Views
 
                 _dialogProgressBar.IsIndeterminate = false;
                 _dialogProgressBar.Value = 100;
-                _dialogStatusText.Text = "数据结构拼合完成，正在写入本地磁盘...";
-                _currentAchievementText.Text = "完成";
+                _dialogStatusText.Text = "AchievementUpdater_WritingDisk".GetLocalized();
+                _currentAchievementText.Text = "AchievementUpdater_Done".GetLocalized();
 
 
                 var options = new JsonSerializerOptions
@@ -455,9 +455,9 @@ namespace FufuLauncher.Views
 
                 var completeDialog = new ContentDialog
                 {
-                    Title = "执行完毕",
-                    Content = "成就数据已成功从 Web 及 GitHub 双端拉取并完成拼合，本地文件已覆盖。",
-                    CloseButtonText = "确认退出",
+                    Title = "AchievementUpdater_ExecComplete".GetLocalized(),
+                    Content = "AchievementUpdater_CompleteContent".GetLocalized(),
+                    CloseButtonText = "AchievementUpdater_ConfirmExit".GetLocalized(),
                     XamlRoot = Content.XamlRoot
                 };
                 await completeDialog.ShowAsync();
@@ -475,9 +475,9 @@ namespace FufuLauncher.Views
 
                     var errorDialog = new ContentDialog
                     {
-                        Title = "执行异常",
-                        Content = $"获取或整合数据时发生错误: {ex.Message}",
-                        CloseButtonText = "关闭",
+                        Title = "AchievementUpdater_ExecError".GetLocalized(),
+                        Content = string.Format("AchievementUpdater_FetchMergeError_Format".GetLocalized(), ex.Message),
+                        CloseButtonText = "CloseBtn".GetLocalized(),
                         XamlRoot = Content.XamlRoot
                     };
                     await errorDialog.ShowAsync();

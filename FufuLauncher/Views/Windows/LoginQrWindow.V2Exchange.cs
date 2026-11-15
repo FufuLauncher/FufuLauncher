@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Text;
 using System.Text.Json.Nodes;
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 using FufuLauncher.Services.MiHoYo.Passport;
 
 namespace FufuLauncher.Views;
@@ -18,7 +19,7 @@ public sealed partial class LoginQrWindow
     {
         try
         {
-            UpdateStatus("正在获取完整登录凭证...", true);
+            UpdateStatus("LoginQR_FetchingFullCredential".GetLocalized(), true);
             var finalCookies = new Dictionary<string, string>
             {
                 ["stoken"] = stoken,
@@ -44,7 +45,7 @@ public sealed partial class LoginQrWindow
             string webTicket = await CreateWebQrCodeAsync();
             if (string.IsNullOrEmpty(webTicket))
             {
-                UpdateStatus("无法创建验证凭据");
+                UpdateStatus("LoginQR_CannotCreateAuthToken".GetLocalized());
                 return null;
             }
 
@@ -53,7 +54,7 @@ public sealed partial class LoginQrWindow
             bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie);
             if (!scanResult)
             {
-                UpdateStatus("扫描请求被拒绝");
+                UpdateStatus("LoginQR_ScanRejected".GetLocalized());
                 return null;
             }
 
@@ -63,7 +64,7 @@ public sealed partial class LoginQrWindow
                 await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie);
             if (!confirmResult)
             {
-                UpdateStatus("请求被拒绝");
+                UpdateStatus("LoginQR_RequestRejected".GetLocalized());
                 return null;
             }
 
@@ -81,13 +82,13 @@ public sealed partial class LoginQrWindow
             }
             else
             {
-                UpdateStatus("未能从响应头提取出完整Cookie");
+                UpdateStatus("LoginQR_ExtractCookieFromHeadersFailed".GetLocalized());
                 return null;
             }
         }
         catch (Exception ex)
         {
-            UpdateStatus($"凭证换取异常: {ex.Message}");
+            UpdateStatus(string.Format("LoginQR_CredentialExchangeException_Format".GetLocalized(), ex.Message));
             return null;
         }
     }
@@ -108,7 +109,7 @@ public sealed partial class LoginQrWindow
 
         if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))
         {
-            UpdateStatus("提取失败，请重试", false);
+            UpdateStatus("LoginQR_ExtractRetry".GetLocalized(), false);
             return;
         }
 

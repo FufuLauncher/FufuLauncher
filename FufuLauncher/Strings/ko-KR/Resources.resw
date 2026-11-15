@@ -116,8 +116,8 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
 이는 일반적으로 플러그인이 백신 소프트웨어(예: Windows Defender)에 의해 오탐 차단되었거나 손상되었기 때문입니다.
 
 권장 사항:
-1. 소프트웨어 디렉토리를 백신 예외 목록에 추가하세요
-2. 이 페이지에서 플러그인을 다시 다운로드하여 설치하세요</value>
+1. 소프트웨어 디렉터리를 백신 예외 목록에 추가하세요.
+2. 이 페이지에서 플러그인을 다시 다운로드하여 설치하세요.</value>
   </data>
   <data name="Plugin_Corrupted_Title" xml:space="preserve">
     <value>플러그인이 손상되었을 수 있습니다</value>
@@ -410,7 +410,7 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>알림</value>
   </data>
   <data name="NotesWarningMessage" xml:space="preserve">
-    <value>노트 데이터는 HoYoLAB 게임 기록 API에서 가져옵니다. 너무 자주 새로고침하면 CAPTCHA가 발생할 수 있으며, 심한 경우 위험 관리로 일시적으로 접근이 차단될 수 있습니다. 새로고침 빈도를 줄이고 나중에 다시 시도하세요.</value>
+    <value>노트 데이터는 Miyoushe 게임 기록 API에서 가져옵니다. 너무 자주 새로고침하면 보안 문자 인증이 발생할 수 있으며, 심한 경우 위험 관리로 일시적으로 접근이 차단될 수 있습니다. 새로고침 빈도를 줄이고 나중에 다시 시도하세요.</value>
   </data>
   <data name="HideNotesCard" xml:space="preserve">
     <value>노트 카드 숨기기</value>
@@ -491,10 +491,10 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>앱을 다시 시작하면 적용됩니다</value>
   </data>
   <data name="LangZhCN" xml:space="preserve">
-    <value>중국어 간체 (권장)</value>
+    <value>简体中文 (권장)</value>
   </data>
   <data name="LangZhTW" xml:space="preserve">
-    <value>중국어 번체</value>
+    <value>繁體中文</value>
   </data>
   <data name="LangEnUS" xml:space="preserve">
     <value>English</value>
@@ -566,13 +566,13 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>빠른 프리셋</value>
   </data>
   <data name="HdrTitle" xml:space="preserve">
-    <value>HDR밝기 설정</value>
+    <value>HDR 밝기 설정</value>
   </data>
   <data name="HdrCaption" xml:space="preserve">
-    <value>게임 내 HDR최대 밝기 및 UI 밝기 조정</value>
+    <value>게임 내 HDR 최대 밝기 및 UI 밝기 조정</value>
   </data>
   <data name="OpenHdrSettings" xml:space="preserve">
-    <value>HDR설정 열기</value>
+    <value>HDR 설정 열기</value>
   </data>
   <data name="TargetMonitorTitle" xml:space="preserve">
     <value>대상 모니터</value>
@@ -671,10 +671,10 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>공식 배경 서버</value>
   </data>
   <data name="ServerCN" xml:space="preserve">
-    <value>중국 서버 (Skyisland)</value>
+    <value>중국 서버 (천공의 섬)</value>
   </data>
   <data name="ServerGlobal" xml:space="preserve">
-    <value>글로벌 서버 (Teyvat)</value>
+    <value>글로벌 서버 (티바트)</value>
   </data>
   <data name="OfficialBgApiTitle" xml:space="preserve">
     <value>공식 배경 API</value>
@@ -758,13 +758,13 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>게임 출석 체크</value>
   </data>
   <data name="GameCheckinCaption" xml:space="preserve">
-    <value>미호요 커뮤니티 일일 출석 보상 수령 (원석, 모라 등)</value>
+    <value>Miyoushe 일일 출석 보상을 수령합니다(원석, 모라 등). 아래에서 함께 출석할 다른 게임도 선택할 수 있습니다.</value>
   </data>
   <data name="CommunityCheckin" xml:space="preserve">
     <value>커뮤니티 출석 체크</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>미유사 원신 커뮤니티에서 출석 체크하고 미유 코인 받기</value>
+    <value>Miyoushe 원신 게시판에서 출석 체크하고 미유 코인 받기</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>좋아요</value>
@@ -899,7 +899,7 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>버전 업데이트</value>
   </data>
   <data name="VersionUpdateCaption" xml:space="preserve">
-    <value>최신 버전 확인 및 다운로드</value>
+    <value>최신 버전을 확인하고 다운로드합니다. 클릭하면 업데이터가 실행됩니다.</value>
   </data>
   <data name="UpdateAnnouncementTitle" xml:space="preserve">
     <value>업데이트 공지</value>
@@ -1350,10 +1350,10 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
     <value>실행 명령 복사</value>
   </data>
   <data name="FileName_ShortcutName" xml:space="preserve">
-    <value>Genshin Impact 실행.lnk</value>
+    <value>원신 실행.lnk</value>
   </data>
   <data name="Desc_ShortcutDescription" xml:space="preserve">
-    <value>FufuLauncher 인젝션을 통해 Genshin Impact 실행</value>
+    <value>FufuLauncher 인젝션을 통해 원신 실행</value>
   </data>
   <data name="Title_ShortcutCreated" xml:space="preserve">
     <value>바로가기 생성됨</value>
@@ -1842,7 +1842,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>비디오 라이브러리: 캐릭터 데모 및 게임 내 컷신을 감상하세요</value>
   </data>
   <data name="Home_BBSTooltip" xml:space="preserve">
-    <value>전투 기록: 나선비경, 환상극장 등 상세 전투 기록을 확인하세요</value>
+    <value>전투 기록: 나선 비경, 환상극 등 상세 전투 기록을 확인하세요</value>
   </data>
   <data name="OtherPage_Title" xml:space="preserve">
     <value>기타 설정</value>
@@ -1959,7 +1959,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>일일 출석 체크</value>
   </data>
   <data name="Account_SyncAvatarPendant" xml:space="preserve">
-    <value>미유사 프로필 테두리 동기화</value>
+    <value>Miyoushe 프로필 테두리 동기화</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>정보 새로고침</value>
@@ -2007,7 +2007,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>연동된 캐릭터 없음</value>
   </data>
   <data name="Account_BindHint" xml:space="preserve">
-    <value>미호요 커뮤니티 또는 게임 내에서 캐릭터를 연동한 후 새로고침하세요</value>
+    <value>Miyoushe 또는 게임 내에서 캐릭터를 연동한 후 새로고침하세요</value>
   </data>
   <data name="Account_PlayTime" xml:space="preserve">
     <value>플레이 시간</value>
@@ -2076,7 +2076,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>QR 코드 로그인</value>
   </data>
   <data name="LoginQR_MiyousheQR" xml:space="preserve">
-    <value>미호요 커뮤니티 앱 QR 로그인</value>
+    <value>Miyoushe 앱 QR 로그인</value>
   </data>
   <data name="LoginQR_WebPassport" xml:space="preserve">
     <value>웹 패스포트 로그인</value>
@@ -2127,7 +2127,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>여행자 프로필</value>
   </data>
   <data name="Panel_TravelerProfileDesc" xml:space="preserve">
-    <value>캐릭터, 인벤토리, 노트 및 미호요 커뮤니티 전투 기록</value>
+    <value>캐릭터, 인벤토리, 노트 및 Miyoushe 전투 기록</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
     <value>리소스</value>
@@ -2743,10 +2743,10 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>캐릭터 데이터</value>
   </data>
   <data name="DataPage_AbyssData" xml:space="preserve">
-    <value>스티지안 격전</value>
+    <value>지맥 제압전</value>
   </data>
   <data name="DataPage_SpiralAbyss" xml:space="preserve">
-    <value>나선비경</value>
+    <value>나선 비경</value>
   </data>
   <data name="DataPage_WishData" xml:space="preserve">
     <value>기원 데이터</value>
@@ -2764,31 +2764,31 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>저장 및 적용</value>
   </data>
   <data name="HDR_BrightnessConfig" xml:space="preserve">
-    <value>HDR밝기 설정</value>
+    <value>HDR 밝기 설정</value>
   </data>
   <data name="HDR_NotSupported" xml:space="preserve">
-    <value>HDR미지원</value>
+    <value>HDR 미지원</value>
   </data>
   <data name="HDR_NotSupportedMsg" xml:space="preserve">
     <value>현재 모니터가 HDR을 지원하지 않는 것으로 보고됩니다.</value>
   </data>
   <data name="HDR_NotEnabled" xml:space="preserve">
-    <value>HDR활성화 안 됨</value>
+    <value>HDR 활성화 안 됨</value>
   </data>
   <data name="HDR_NotEnabledMsg" xml:space="preserve">
-    <value>Windows HDR모드가 활성화되지 않았습니다. 자동 조정이 부정확할 수 있습니다.</value>
+    <value>Windows HDR 모드가 활성화되지 않았습니다. 자동 조정이 부정확할 수 있습니다.</value>
   </data>
   <data name="HDR_DisplayInfo" xml:space="preserve">
     <value>디스플레이 정보</value>
   </data>
   <data name="HDR_SwitchSetting" xml:space="preserve">
-    <value>HDR스위치 설정 (매 실행 시 강제 적용)</value>
+    <value>HDR 스위치 설정</value>
   </data>
   <data name="HDR_OffContent" xml:space="preserve">
-    <value>HDR비활성화 (레지스트리 값 0)</value>
+    <value>HDR 비활성화 (레지스트리 값 0)</value>
   </data>
   <data name="HDR_OnContent" xml:space="preserve">
-    <value>HDR활성화 (레지스트리 값 1)</value>
+    <value>HDR 활성화 (레지스트리 값 1)</value>
   </data>
   <data name="HDR_RegistryNote" xml:space="preserve">
     <value>참고: 저장하면 즉시 레지스트리가 수정되며, 다음 게임 실행 시 이 설정이 자동으로 다시 적용됩니다.</value>
@@ -2866,7 +2866,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>가이드 보기</value>
   </data>
   <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve">
-    <value>미호요 커뮤니티에서 이 업적 가이드 검색</value>
+    <value>Miyoushe에서 이 업적 가이드 검색</value>
   </data>
   <data name="AchievementWindow_SwitchView" xml:space="preserve">
     <value>보기 전환</value>
@@ -2929,7 +2929,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>동의하기 전에 전체 약관을 스크롤하여 읽어주세요</value>
   </data>
   <data name="AgreementPage_LoadFailed" xml:space="preserve">
-    <value>사용자 계약을 불러오지 못했습니다. 네트워크를 확인한 후 다시 시도하세요.</value>
+    <value>사용자 약관을 불러오지 못했습니다. 네트워크를 확인한 후 다시 시도하세요.</value>
   </data>
   <data name="AgreementPage_Retry" xml:space="preserve">
     <value>다시 불러오기</value>
@@ -3106,7 +3106,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>무기 이벤트</value>
   </data>
   <data name="GachaAnalysis_ChronicledWish" xml:space="preserve">
-    <value>집록 기원</value>
+    <value>묶음 기원</value>
   </data>
   <data name="GachaAnalysis_StandardWish" xml:space="preserve">
     <value>상시 기원</value>
@@ -3178,7 +3178,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>기원 기록 가져오기</value>
   </data>
   <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve">
-    <value>미호요 커뮤니티 계정으로 가져오기</value>
+    <value>Miyoushe 계정으로 가져오기</value>
   </data>
   <data name="GachaAnalysis_GetViaUrl" xml:space="preserve">
     <value>URL로 가져오기</value>
@@ -3217,7 +3217,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>기원 기록을 가져올 방법을 선택하고 기원 데이터 분석을 시작하세요</value>
   </data>
   <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve">
-    <value>로그인된 미호요 커뮤니티
+    <value>로그인된 Miyoushe
 계정을 통해 직접 가져오기</value>
   </data>
   <data name="GachaAnalysis_Recommended" xml:space="preserve">
@@ -3257,7 +3257,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>이미지 저장</value>
   </data>
   <data name="GachaAnalysis_GoldPullStats" xml:space="preserve">
-    <value>골드 뽑기 방식 통계</value>
+    <value>5★ 획득 방식 통계</value>
   </data>
   <data name="GachaAnalysis_GoldPullStatsDesc" xml:space="preserve">
     <value>동일 기원에서 동시에 기록된 항목은 하나의 그룹으로 계산됩니다</value>
@@ -3673,7 +3673,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>오늘 이미 출석했거나 한도에 도달했습니다</value>
   </data>
   <data name="CheckinCloud_PlayCardStatus" xml:space="preserve">
-    <value>플레이 카드 상태: {0}, 미호요 코인: {1}</value>
+    <value>플레이 카드 상태: {0}, 미유 코인: {1}</value>
   </data>
   <data name="CheckinCloud_Exception" xml:space="preserve">
     <value>예외: {0}</value>
@@ -3697,7 +3697,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>작업 상태를 가져오지 못했습니다. 쿠키를 확인하세요.</value>
   </data>
   <data name="CheckinCommunity_TodayDone" xml:space="preserve">
-    <value>오늘 완료 ({0} 미호요 코인)</value>
+    <value>오늘 완료 ({0} 미유 코인)</value>
   </data>
   <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve">
     <value>커뮤니티 출석 이미 완료, 건너뜀</value>
@@ -3715,10 +3715,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>공유 이미 완료, 건너뜀</value>
   </data>
   <data name="CheckinCommunity_GainedCoins" xml:space="preserve">
-    <value>{0} 미호요 코인 획득 (현재 {1})</value>
+    <value>{0} 미유 코인 획득 (현재 {1})</value>
   </data>
   <data name="CheckinCommunity_CurrentCoins" xml:space="preserve">
-    <value>{0} 미호요 코인</value>
+    <value>{0} 미유 코인</value>
   </data>
   <data name="CheckinCommunity_GenshinSignRequestFailed" xml:space="preserve">
     <value>원신 커뮤니티 출석: 요청 실패</value>
@@ -4048,13 +4048,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>연결 끊김</value>
   </data>
   <data name="Diagnostics_Domestic" xml:space="preserve">
-    <value>국내</value>
+    <value>중국 본토</value>
   </data>
   <data name="Diagnostics_Overseas" xml:space="preserve">
     <value>해외</value>
   </data>
   <data name="Diagnostics_DomesticSystem" xml:space="preserve">
-    <value>국내 (시스템)</value>
+    <value>중국 본토 (시스템 설정)</value>
   </data>
   <data name="Diagnostics_OverseasSystem" xml:space="preserve">
     <value>해외 (시스템)</value>
@@ -4090,7 +4090,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>네트워크가 연결되지 않았습니다. 네트워크 설정을 확인하세요.</value>
   </data>
   <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve">
-    <value>현재 국내 네트워크에 있습니다. 서버 접근이 느릴 수 있습니다.</value>
+    <value>현재 중국 본토 네트워크 환경이므로 서버 연결이 느릴 수 있습니다.</value>
   </data>
   <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve">
     <value>Windows 보안 센터가 활성화되어 있어 플러그인 인젝션이 실패할 수 있습니다. 비활성화하는 것이 좋습니다.</value>
@@ -4108,7 +4108,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>정상. 시스템 및 네트워크 환경이 요구 사항을 충족합니다.</value>
   </data>
   <data name="User_DefaultSignature" xml:space="preserve">
-    <value>이 사용자는 게으름이 많아 아무것도 쓰지 않았습니다...</value>
+    <value>작성된 자기소개가 없습니다...</value>
   </data>
   <data name="User_GenderMale" xml:space="preserve">
     <value>남성</value>
@@ -4126,7 +4126,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>확정 천장</value>
   </data>
   <data name="Gacha_FiftyFifty" xml:space="preserve">
-    <value>50/50</value>
+    <value>반천장</value>
   </data>
   <data name="Gacha_ZeroPulls" xml:space="preserve">
     <value>0 뽑기</value>
@@ -4225,7 +4225,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>얼음</value>
   </data>
   <data name="Download_Connecting" xml:space="preserve">
-    <value>미호요 서버에 연결 중...</value>
+    <value>miHoYo 서버에 연결 중...</value>
   </data>
   <data name="Download_VoiceOnly" xml:space="preserve">
     <value>&gt;&gt; 기본 게임 건너뜀, 음성 팩 전용 모드</value>
@@ -4261,7 +4261,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>매니페스트 MD5 검증 실패, 재시도 중...</value>
   </data>
   <data name="Download_CannotConnectApi" xml:space="preserve">
-    <value>미호요 API에 연결할 수 없습니다</value>
+    <value>miHoYo API에 연결할 수 없습니다</value>
   </data>
   <data name="DailyNote_ApiError" xml:space="preserve">
     <value>API 오류 반환, retcode={0}</value>
@@ -4473,10 +4473,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>캐릭터 육성</value>
   </data>
   <data name="DataPage_TabSpiral" xml:space="preserve">
-    <value>나선비경</value>
+    <value>나선 비경</value>
   </data>
   <data name="DataPage_TabStygian" xml:space="preserve">
-    <value>스티지안 격전</value>
+    <value>지맥 제압전</value>
   </data>
   <data name="DataPage_TabWish" xml:space="preserve">
     <value>배너 기록</value>
@@ -4563,16 +4563,16 @@ UIGF v4.x/3.0/2.x</value>
     <value>현재 버전</value>
   </data>
   <data name="DataPage_KpiSample" xml:space="preserve">
-    <value>나선비경 유효 표본</value>
+    <value>나선 비경 유효 표본</value>
   </data>
   <data name="DataPage_KpiStygianSample" xml:space="preserve">
-    <value>스티지안</value>
+    <value>지맥 제압전</value>
   </data>
   <data name="DataPage_KpiFullStar" xml:space="preserve">
-    <value>만별 클리어율</value>
+    <value>풀별 클리어율</value>
   </data>
   <data name="DataPage_KpiOnceFullStar" xml:space="preserve">
-    <value>첫 시도</value>
+    <value>첫 시도 풀별</value>
   </data>
   <data name="DataPage_KpiRestart" xml:space="preserve">
     <value>평균 재도전 횟수</value>
@@ -4632,7 +4632,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>나선비경 등장</value>
   </data>
   <data name="DataPage_StygianPick" xml:space="preserve">
-    <value>스티지안 등장</value>
+    <value>지맥 제압전 등장</value>
   </data>
   <data name="DataPage_MetricAvgLevel" xml:space="preserve">
     <value>평균 레벨</value>
@@ -4857,7 +4857,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>이번 패치 환경</value>
   </data>
   <data name="DataPage_InsightMetaBody" xml:space="preserve">
-    <value>{0}의 만별 클리어율은 {1}, 평균 재도전 {2}회. 최상위 티어는 {3}이(가) 이끌고 있습니다.</value>
+    <value>{0}의 풀별 클리어율은 {1}, 평균 재도전 {2}회입니다. 최상위 티어는 {3}이(가) 이끌고 있습니다.</value>
   </data>
   <data name="DataPage_InsightRiseTitle" xml:space="preserve">
     <value>상승세</value>
@@ -4875,7 +4875,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>뽑기 우선순위</value>
   </data>
   <data name="DataPage_InsightValueBody" xml:space="preserve">
-    <value>{0}은(는) 보유자 중 {1}이 기용하지만 전체 보유율은 {2}에 불과합니다. 강하지만 희소해 우선순위가 가장 높습니다.</value>
+    <value>{0}은(는) 보유자 중 {1}가 기용하지만 전체 보유율은 {2}에 불과합니다. 강하지만 희소해 우선순위가 가장 높습니다.</value>
   </data>
   <data name="DataPage_InsightBenchTitle" xml:space="preserve">
     <value>벤치 신세</value>
@@ -4887,7 +4887,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>명함으로 충분</value>
   </data>
   <data name="DataPage_InsightNoConstBody" xml:space="preserve">
-    <value>{0}은(는) {1}의 플레이어가 명함(C0)으로 운용하므로 돌파가 필요하지 않습니다.</value>
+    <value>{0}은(는) 플레이어의 {1}가 명함(C0)으로 운용하므로 돌파가 필요하지 않습니다.</value>
   </data>
   <data name="DataPage_InsightConstTitle" xml:space="preserve">
     <value>돌파 의존</value>
@@ -4905,7 +4905,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>성유물 1순위</value>
   </data>
   <data name="DataPage_InsightArtifactBody" xml:space="preserve">
-    <value>{0}이(가) 빌드의 {1}을 차지하므로 기준 조합으로 봐도 됩니다.</value>
+    <value>{0}이(가) 빌드의 {1}를 차지하므로 기준 조합으로 봐도 됩니다.</value>
   </data>
   <data name="DataPage_InsightOverdueTitle" xml:space="preserve">
     <value>복각 관측</value>
@@ -5043,16 +5043,16 @@ UIGF v4.x/3.0/2.x</value>
     <value>왼쪽 하단</value>
   </data>
   <data name="UsingHoyolabAccountTitle" xml:space="preserve">
-    <value>미유사/HoyoLAB 계정으로 게임에 직접 로그인</value>
+    <value>Miyoushe / HoYoLAB 계정으로 게임에 직접 로그인</value>
   </data>
   <data name="UsingHoyolabAccountCaption" xml:space="preserve">
-    <value>게임 시작 시 현재 선택된 미유사 또는 HoyoLAB 계정으로 게임에 직접 진입하며, 게임 내에서 계정과 비밀번호를 다시 입력할 필요가 없습니다.</value>
+    <value>게임 시작 시 현재 선택된 Miyoushe 또는 HoYoLAB 계정으로 게임에 직접 진입하며, 게임 내에서 계정과 비밀번호를 다시 입력할 필요가 없습니다.</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Title" xml:space="preserve">
     <value>사용할 수 없음</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Message" xml:space="preserve">
-    <value>먼저 계정 설정에서 미유사 또는 HoyoLAB 계정에 로그인해 주세요.</value>
+    <value>먼저 계정 설정에서 Miyoushe 또는 HoYoLAB 계정에 로그인해 주세요.</value>
   </data>
   <data name="HoyolabAccount_LoginExpired_Title" xml:space="preserve">
     <value>계정 로그인이 만료되었습니다</value>
@@ -5070,7 +5070,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>사용 설정됨</value>
   </data>
   <data name="HoyolabAccount_Enabled_Message" xml:space="preserve">
-    <value>다음 게임 시작 시 미유사/HoyoLAB 계정으로 게임에 직접 진입하며, 계정과 비밀번호를 다시 입력할 필요가 없습니다.</value>
+    <value>다음 게임 시작 시 Miyoushe / HoYoLAB 계정으로 게임에 직접 진입하며, 계정과 비밀번호를 다시 입력할 필요가 없습니다.</value>
   </data>
   <data name="HoyolabAccount_EnableFailed_Title" xml:space="preserve">
     <value>사용 설정 실패</value>
@@ -5088,10 +5088,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>계정과 서버가 일치하지 않음</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_OverseaMsg" xml:space="preserve">
-    <value>현재 선택된 HoyoLAB 글로벌 서버 계정으로는 중국 서버 게임을 시작할 수 없습니다. 해당 지역 계정으로 전환해 주세요.</value>
+    <value>현재 선택된 HoYoLAB 글로벌 서버 계정으로는 중국 서버 게임을 시작할 수 없습니다. 해당 지역 계정으로 전환해 주세요.</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_CnMsg" xml:space="preserve">
-    <value>현재 선택된 미유사 중국 서버 계정으로는 글로벌 서버 게임을 시작할 수 없습니다. 해당 지역 계정으로 전환해 주세요.</value>
+    <value>현재 선택된 Miyoushe 중국 서버 계정으로는 글로벌 서버 게임을 시작할 수 없습니다. 해당 지역 계정으로 전환해 주세요.</value>
   </data>
   <data name="HelpPage_TranslateBtn" xml:space="preserve">
     <value>번역</value>
@@ -5292,10 +5292,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>플러그인 파일 다운로드 실패: {0}</value>
   </data>
   <data name="PluginStoreDownloadCountWan" xml:space="preserve">
-    <value>{0:F1}만</value>
+    <value>{0:F1}M</value>
   </data>
   <data name="PluginStoreDownloadCountK" xml:space="preserve">
-    <value>{0:F1}천</value>
+    <value>{0:F1}K</value>
   </data>
   <data name="PluginStoreScriptDownloading" xml:space="preserve">
     <value>설치 스크립트 다운로드 중...</value>
@@ -5506,19 +5506,19 @@ UIGF v4.x/3.0/2.x</value>
     <value>양호</value>
   </data>
   <data name="PreviewUpdateTitle" xml:space="preserve">
-    <value>Preview Update</value>
+    <value>프리뷰 버전 업데이트</value>
   </data>
   <data name="PreviewUpdateCaption" xml:space="preserve">
-    <value>Download the pre-release (beta) build. Preview updates are only triggered when the preview version is newer than the latest stable release.</value>
+    <value>프리뷰(테스트) 버전을 다운로드합니다. 프리뷰 버전이 최신 정식 버전보다 높을 때만 프리뷰 업데이트가 진행됩니다.</value>
   </data>
   <data name="UpdateNotification_PreviewTitle" xml:space="preserve">
-    <value>Pre-release Update Announcement</value>
+    <value>프리뷰 버전 업데이트 공지</value>
   </data>
   <data name="PreviewUpdateAnnouncementTitle" xml:space="preserve">
-    <value>Pre-release Update Announcements</value>
+    <value>프리뷰 버전 업데이트 공지</value>
   </data>
   <data name="PreviewUpdateAnnouncementCaption" xml:space="preserve">
-    <value>When enabled, an update announcement window pops up automatically when a new pre-release build is detected.</value>
+    <value>활성화하면 새 프리뷰 빌드가 감지될 때 업데이트 공지 창이 자동으로 열립니다.</value>
   </data>
   <data name="SuppressAnnouncementInGameTitle" xml:space="preserve">
     <value>게임 중 런처 공지 일시 중지</value>
@@ -5527,19 +5527,19 @@ UIGF v4.x/3.0/2.x</value>
     <value>활성화하면 게임 실행 중에는 런처 공지가 자동으로 표시되지 않습니다. 게임을 종료하거나 런처를 다시 시작하면 정상적으로 표시됩니다.</value>
   </data>
   <data name="UpdateNotification_PreviewBanner" xml:space="preserve">
-    <value>This is a pre-release update and may be unstable. Please update with caution.</value>
+    <value>이 업데이트는 프리뷰(Pre-release) 버전이며 불안정할 수 있습니다. 신중하게 업데이트하세요.</value>
   </data>
   <data name="PreviewVersionBadgeFormat" xml:space="preserve">
-    <value>v{0} Pre-release</value>
+    <value>v{0} 프리뷰</value>
   </data>
   <data name="RollbackToStableTitle" xml:space="preserve">
-    <value>Rollback to Stable</value>
+    <value>정식 버전으로 되돌리기</value>
   </data>
   <data name="RollbackToStableCaption" xml:space="preserve">
-    <value>Only available on pre-release builds. Downloads and installs the latest stable release, replacing the current pre-release.</value>
+    <value>프리뷰 버전에서만 사용할 수 있습니다. 최신 정식 버전을 다운로드하여 설치하고 현재 프리뷰 버전을 대체합니다.</value>
   </data>
   <data name="DevVersionBadgeFormat" xml:space="preserve">
-    <value>v{0} Dev</value>
+    <value>v{0} 개발 버전</value>
   </data>
   <data name="Preset_Rename" xml:space="preserve">
     <value>이름 바꾸기</value>
@@ -5632,160 +5632,160 @@ UIGF v4.x/3.0/2.x</value>
     <value>게임 공식에서 배포한 모든 배경을 보고 미리보기와 로컬 저장을 할 수 있으며, 정적 이미지는 바로 런처 배경으로 설정할 수 있습니다.</value>
   </data>
   <data name="LightweightMode_StandardTooltip" xml:space="preserve">
-    <value>Standard mode (main plugin)</value>
+    <value>표준 모드 (메인 플러그인)</value>
   </data>
   <data name="LightweightMode_LiteTooltip" xml:space="preserve">
-    <value>Lightweight mode (YuanShen-UnlockerLite)</value>
+    <value>경량 모드 (YuanShen-UnlockerLite)</value>
   </data>
   <data name="LightweightMode_PluginComboLabel" xml:space="preserve">
-    <value>YuanShen-UnlockerLite (Lite Plugin)</value>
+    <value>YuanShen-UnlockerLite (경량 플러그인)</value>
   </data>
   <data name="LightweightMode_LiteEnabledLabel" xml:space="preserve">
-    <value>Lite Plugin Enabled</value>
+    <value>경량 플러그인 활성화</value>
   </data>
   <data name="LightweightMode_ReinstallBtn" xml:space="preserve">
-    <value>Reinstall Lite Plugin</value>
+    <value>경량 플러그인 다시 설치</value>
   </data>
   <data name="LightweightMode_EnterTitle" xml:space="preserve">
-    <value>Switch to Lightweight Mode</value>
+    <value>경량 모드로 전환</value>
   </data>
   <data name="LightweightMode_EnterContent" xml:space="preserve">
-    <value>The main plugin will be disabled, the latest YuanShen-UnlockerLite will be downloaded and installed, and this page will show the lite plugin configuration instead.</value>
+    <value>메인 플러그인이 비활성화되고 최신 YuanShen-UnlockerLite가 다운로드 및 설치되며, 이 페이지가 경량 플러그인 설정으로 전환됩니다.</value>
   </data>
   <data name="LightweightMode_EnterConfirm" xml:space="preserve">
-    <value>Switch</value>
+    <value>전환</value>
   </data>
   <data name="LightweightMode_ExitTitle" xml:space="preserve">
-    <value>Switch Back to Standard Mode</value>
+    <value>표준 모드로 되돌아가기</value>
   </data>
   <data name="LightweightMode_ExitContent" xml:space="preserve">
-    <value>The lite plugin will be removed and the main plugin will be enabled again.</value>
+    <value>경량 플러그인이 제거되고 메인 플러그인이 다시 활성화됩니다.</value>
   </data>
   <data name="LightweightMode_ExitConfirm" xml:space="preserve">
-    <value>Switch</value>
+    <value>전환</value>
   </data>
   <data name="LightweightMode_EnterSuccess" xml:space="preserve">
-    <value>Switched to lightweight mode</value>
+    <value>경량 모드로 전환되었습니다</value>
   </data>
   <data name="LightweightMode_ExitSuccess" xml:space="preserve">
-    <value>Switched back to standard mode</value>
+    <value>표준 모드로 되돌아갔습니다</value>
   </data>
   <data name="LightweightMode_ExitSuccessNoMain" xml:space="preserve">
-    <value>Switched back to standard mode, but the main plugin was not found. Please download it first.</value>
+    <value>표준 모드로 되돌아갔지만 메인 플러그인을 찾을 수 없습니다. 먼저 다운로드하여 설치해 주세요.</value>
   </data>
   <data name="LightweightMode_InstallTitle" xml:space="preserve">
-    <value>Installing Lite Plugin</value>
+    <value>경량 플러그인 설치 중</value>
   </data>
   <data name="LightweightMode_ReinstallTitle" xml:space="preserve">
-    <value>Reinstalling Lite Plugin</value>
+    <value>경량 플러그인 다시 설치 중</value>
   </data>
   <data name="LightweightMode_StatusResolving" xml:space="preserve">
-    <value>Resolving the latest release...</value>
+    <value>최신 릴리스 확인 중...</value>
   </data>
   <data name="LightweightMode_StatusDownloading" xml:space="preserve">
-    <value>Downloading...</value>
+    <value>다운로드 중...</value>
   </data>
   <data name="LightweightMode_StatusInstalling" xml:space="preserve">
-    <value>Installing...</value>
+    <value>설치 중...</value>
   </data>
   <data name="LightweightMode_DownloadFailed" xml:space="preserve">
-    <value>Failed to download the lightweight plugin: {0}</value>
+    <value>경량 플러그인 다운로드 실패: {0}</value>
   </data>
   <data name="LightweightMode_InvalidPackage" xml:space="preserve">
-    <value>Invalid package content: YuanShen-UnlockerLite.dll was not found.</value>
+    <value>플러그인 패키지 내용이 올바르지 않습니다. YuanShen-UnlockerLite.dll을 찾을 수 없습니다.</value>
   </data>
   <data name="LightweightMode_InstallFailed" xml:space="preserve">
-    <value>Failed to install the lightweight plugin: {0} Please check your network and try again.</value>
+    <value>경량 플러그인 설치 실패: {0} 네트워크 연결을 확인한 후 다시 시도하세요.</value>
   </data>
   <data name="LightweightMode_ReinstallSuccess" xml:space="preserve">
-    <value>The lightweight plugin was reinstalled.</value>
+    <value>경량 플러그인이 다시 설치되었습니다.</value>
   </data>
   <data name="LightweightMode_BlockMainInstall" xml:space="preserve">
-    <value>Installing or enabling the main plugin is disabled in lightweight mode. Switch back to standard mode to restore it.</value>
+    <value>경량 모드에서는 메인 플러그인의 설치 및 활성화가 비활성화됩니다. 복원하려면 표준 모드로 되돌아가세요.</value>
   </data>
   <data name="LightweightMode_BlockLiteInstall" xml:space="preserve">
-    <value>The lightweight plugin can only be installed or enabled in lightweight mode.</value>
+    <value>경량 플러그인은 경량 모드에서만 설치하거나 활성화할 수 있습니다.</value>
   </data>
   <data name="LightweightMode_LiteDisabledOverlay" xml:space="preserve">
-    <value>The lite plugin is disabled or not installed. Reinstall it from the Functions menu.</value>
+    <value>경량 플러그인이 비활성화되었거나 설치되지 않았습니다. 기능 메뉴에서 경량 플러그인을 다시 설치해 주세요.</value>
   </data>
   <data name="LightweightMode_LiteNotInstalled" xml:space="preserve">
-    <value>YuanShen-UnlockerLite is not installed</value>
+    <value>YuanShen-UnlockerLite가 설치되지 않았습니다</value>
   </data>
   <data name="LightweightMode_LiteMissing_Title" xml:space="preserve">
-    <value>Lightweight Plugin Missing</value>
+    <value>경량 플러그인 누락</value>
   </data>
   <data name="LightweightMode_LiteMissing_Content" xml:space="preserve">
-    <value>Lightweight plugin DLL file not found. It may not be installed, was accidentally deleted, or was blocked by antivirus software. Please reinstall it from the Functions menu.</value>
+    <value>경량 플러그인 DLL 파일을 찾을 수 없습니다. 설치되지 않았거나, 실수로 삭제되었거나, 백신 프로그램에 의해 차단되었을 수 있습니다. 기능 메뉴에서 경량 플러그인을 다시 설치해 주세요.</value>
   </data>
   <data name="Constraint_BlockedTitle" xml:space="preserve">
-    <value>Action Restricted</value>
+    <value>작업 제한됨</value>
   </data>
   <data name="Constraint_BlockedDefault" xml:space="preserve">
-    <value>The main plugin cannot be enabled in the current state. Please use lightweight mode.</value>
+    <value>현재 상태에서는 메인 플러그인을 활성화할 수 없습니다. 경량 모드를 사용해 주세요.</value>
   </data>
   <data name="Constraint_AutoApplied" xml:space="preserve">
-    <value>The main plugin was disabled and lightweight mode was enabled automatically by the server policy.</value>
+    <value>서버 정책에 따라 메인 플러그인이 자동으로 비활성화되고 경량 모드로 전환되었습니다.</value>
   </data>
   <data name="Settings_IgnoreConstraint_Title" xml:space="preserve">
-    <value>Ignore Usage Restrictions</value>
+    <value>사용 제한 무시</value>
   </data>
   <data name="Settings_IgnoreConstraint_Caption" xml:space="preserve">
-    <value>Disabling this restriction affects the usage restriction policy applied during software updates. Proceed with caution.</value>
+    <value>이 제한을 해제하면 소프트웨어 업데이트 시 적용되는 사용 제한 정책에 영향을 미칩니다. 신중하게 조작해 주세요.</value>
   </data>
   <data name="Constraint_ModeSwitchExplanation" xml:space="preserve">
-    <value>Why we do this: when the game updates, the old main plugin may run into various unexpected issues or even security risks. The lightweight plugin works across all game versions, so we temporarily switch you to lightweight mode during game updates to keep the basic features working, and will switch back automatically once the main plugin is adapted.</value>
+    <value>이유 안내: 게임이 업데이트되면 기존 메인 플러그인에서 예기치 않은 문제나 보안 위험이 발생할 수 있습니다. 경량 플러그인은 모든 게임 버전에서 동작하므로, 게임 업데이트 기간에는 기본 기능을 유지하기 위해 일시적으로 경량 모드로 전환하며 메인 플러그인의 대응이 완료되면 자동으로 복귀합니다.</value>
   </data>
   <data name="PinSettingTooltip" xml:space="preserve">
-    <value>Pin this item to the top</value>
+    <value>이 항목을 상단에 고정</value>
   </data>
   <data name="UnpinSettingTooltip" xml:space="preserve">
-    <value>Unpin this item</value>
+    <value>고정 해제</value>
   </data>
   <data name="BatchActions_SelectedCount" xml:space="preserve">
-    <value>Selected: {0}</value>
+    <value>{0}개 선택됨</value>
   </data>
   <data name="BatchActions_Enable" xml:space="preserve">
-    <value>Enable Selected</value>
+    <value>선택 항목 켜기</value>
   </data>
   <data name="BatchActions_Disable" xml:space="preserve">
-    <value>Disable Selected</value>
+    <value>선택 항목 끄기</value>
   </data>
   <data name="BatchActions_Pin" xml:space="preserve">
-    <value>Pin Selected</value>
+    <value>선택 항목 고정</value>
   </data>
   <data name="BatchActions_Unpin" xml:space="preserve">
-    <value>Unpin Selected</value>
+    <value>선택 항목 고정 해제</value>
   </data>
   <data name="BatchActions_ClearSelection" xml:space="preserve">
-    <value>Clear Selection</value>
+    <value>선택 해제</value>
   </data>
   <data name="Plugin_FileLocked_Title" xml:space="preserve">
-    <value>Plugin File In Use</value>
+    <value>플러그인 파일 사용 중</value>
   </data>
   <data name="Plugin_FileLocked_Content" xml:space="preserve">
-    <value>The plugin file "{0}" is in use by another program, so the operation could not be completed. Please close the game or the program using the file and try again. If this keeps happening, antivirus scanning may be the cause - wait a moment and retry.</value>
+    <value>플러그인 파일 "{0}"이(가) 다른 프로그램에서 사용 중이어서 작업을 완료할 수 없습니다. 게임이나 파일을 사용 중인 프로그램을 닫은 후 다시 시도하세요. 문제가 반복되면 백신 검사 중일 수 있으므로 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="PluginPage_FreeCamHelpTitle" xml:space="preserve">
-    <value>Free Camera Instructions</value>
+    <value>자유 카메라 사용 안내</value>
   </data>
   <data name="PluginPage_FileNotFoundTitle" xml:space="preserve">
-    <value>File Not Found</value>
+    <value>파일을 찾을 수 없음</value>
   </data>
   <data name="PluginPage_FreeCamImageMissing" xml:space="preserve">
-    <value>freecam.png was not found in the Assets folder.</value>
+    <value>Assets 폴더에서 freecam.png를 찾을 수 없습니다.</value>
   </data>
   <data name="PluginPage_DuplicateTitle" xml:space="preserve">
-    <value>Plugin Conflict Warning</value>
+    <value>플러그인 충돌 경고</value>
   </data>
   <data name="PluginPage_OpenPluginFolderBtn" xml:space="preserve">
-    <value>Open Plugin Folder</value>
+    <value>플러그인 폴더 열기</value>
   </data>
   <data name="PluginPage_IgnoreBtn" xml:space="preserve">
-    <value>Ignore</value>
+    <value>무시</value>
   </data>
   <data name="PluginPage_GetPluginsTitle" xml:space="preserve">
-    <value>Get Plugins</value>
+    <value>플러그인 받기</value>
   </data>
   <data name="PluginPage_ListViewTooltip" xml:space="preserve">
     <value>목록 보기</value>
@@ -5794,228 +5794,228 @@ UIGF v4.x/3.0/2.x</value>
     <value>그리드 보기</value>
   </data>
   <data name="PluginPage_DownloadLatestOption" xml:space="preserve">
-    <value>Download / Update Plugin</value>
+    <value>플러그인 다운로드 / 업데이트</value>
   </data>
   <data name="PluginPage_DownloadCustomOption" xml:space="preserve">
-    <value>Custom Plugin URL</value>
+    <value>사용자 지정 플러그인 링크</value>
   </data>
   <data name="PluginPage_DownloadCustomPlaceholder" xml:space="preserve">
-    <value>Enter a direct download URL</value>
+    <value>직접 다운로드 URL 입력</value>
   </data>
   <data name="PluginPage_DownloadNotice" xml:space="preserve">
-    <value>Note: the game already includes gamepad hot-switching.</value>
+    <value>참고: 게임에 컨트롤러 핫 스왑 기능이 이미 내장되어 있습니다.</value>
   </data>
   <data name="PluginPage_DownloadChooseHint" xml:space="preserve">
-    <value>Choose the plugin package to download and install:</value>
+    <value>다운로드하여 설치할 플러그인 패키지를 선택하세요:</value>
   </data>
   <data name="PluginPage_DownloadProxyHint" xml:space="preserve">
-    <value>A proxy is used by default; if it fails, the launcher switches to a direct GitHub connection.</value>
+    <value>기본적으로 프록시 가속을 사용하며, 실패 시 GitHub 직접 연결로 전환됩니다.</value>
   </data>
   <data name="PluginPage_DownloadAndInstallBtn" xml:space="preserve">
-    <value>Download and Install</value>
+    <value>다운로드 및 설치</value>
   </data>
   <data name="PluginPage_InputErrorTitle" xml:space="preserve">
-    <value>Invalid Input</value>
+    <value>입력 오류</value>
   </data>
   <data name="PluginPage_InvalidUrlMessage" xml:space="preserve">
-    <value>Please enter a valid plugin download URL.</value>
+    <value>유효한 플러그인 다운로드 링크를 입력해 주세요.</value>
   </data>
   <data name="PluginPage_FetchingFormat" xml:space="preserve">
-    <value>Fetching {0}</value>
+    <value>{0} 가져오는 중</value>
   </data>
   <data name="PluginPage_StatusConnecting" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>연결 중...</value>
   </data>
   <data name="PluginPage_StatusSwitchingLine" xml:space="preserve">
-    <value>Connection failed, trying the backup route...</value>
+    <value>연결에 실패하여 예비 경로를 시도하는 중...</value>
   </data>
   <data name="PluginPage_DownloadHttpFailedFormat" xml:space="preserve">
-    <value>Download failed (HTTP {0})</value>
+    <value>다운로드 실패 (HTTP {0})</value>
   </data>
   <data name="PluginPage_LineBackup" xml:space="preserve">
-    <value>backup route</value>
+    <value>예비 경로</value>
   </data>
   <data name="PluginPage_LineMain" xml:space="preserve">
-    <value>primary route</value>
+    <value>주 경로</value>
   </data>
   <data name="PluginPage_StatusDownloadingFormat" xml:space="preserve">
-    <value>Downloading via {0}... {1}%</value>
+    <value>{0}에서 다운로드 중... {1}%</value>
   </data>
   <data name="PluginPage_StatusExtracting" xml:space="preserve">
-    <value>Extracting...</value>
+    <value>압축 해제 중...</value>
   </data>
   <data name="PluginPage_StatusInstalling" xml:space="preserve">
-    <value>Installing...</value>
+    <value>설치 중...</value>
   </data>
   <data name="PluginPage_DownloadErrorTitle" xml:space="preserve">
-    <value>Download / Install Error</value>
+    <value>다운로드 / 설치 오류</value>
   </data>
   <data name="PluginPage_DownloadErrorContentFormat" xml:space="preserve">
-    <value>Automatic download failed: {0}
+    <value>자동 다운로드 실패: {0}
 
-Click the button below to open your browser and download manually.</value>
+아래 버튼을 클릭하여 브라우저에서 수동으로 다운로드해 주세요.</value>
   </data>
   <data name="PluginPage_ManualDownloadBtn" xml:space="preserve">
-    <value>Manual Download</value>
+    <value>수동 다운로드</value>
   </data>
   <data name="PluginPage_SecurityWarningContent" xml:space="preserve">
-    <value>Security software can block this program's injection. If it stops working or plugins disappear, please turn off your security center.</value>
+    <value>보안 소프트웨어가 이 프로그램의 인젝션을 차단할 수 있습니다. 작동하지 않거나 플러그인이 사라지는 경우 컴퓨터의 보안 센터를 꺼 주세요.</value>
   </data>
   <data name="PluginPage_RenameFolderTitle" xml:space="preserve">
-    <value>Rename Plugin Folder</value>
+    <value>플러그인 폴더 이름 변경</value>
   </data>
   <data name="PluginPage_DuplicateDetectedHeader" xml:space="preserve">
-    <value>Duplicate plugins detected:</value>
+    <value>중복된 플러그인이 감지되었습니다:</value>
   </data>
   <data name="PluginPage_DuplicatePluginNameFormat" xml:space="preserve">
-    <value>Plugin name: {0}</value>
+    <value>플러그인 이름: {0}</value>
   </data>
   <data name="PluginPage_DuplicateConflictsHeader" xml:space="preserve">
-    <value>Conflicting folders:</value>
+    <value>충돌하는 폴더:</value>
   </data>
   <data name="PluginPage_DuplicateFolderItemFormat" xml:space="preserve">
     <value>   - {0}</value>
   </data>
   <data name="PluginPage_DuplicateHint" xml:space="preserve">
-    <value>It is recommended to delete the older plugin version manually.</value>
+    <value>이전 버전의 플러그인을 수동으로 삭제하는 것을 권장합니다.</value>
   </data>
   <data name="Settings_PluginSignature_Title" xml:space="preserve">
-    <value>Verify Plugin Signatures</value>
+    <value>플러그인 서명 검증</value>
   </data>
   <data name="Settings_PluginSignature_Caption" xml:space="preserve">
-    <value>Check the digital signature of installed plugin DLLs and inspect the signature details.</value>
+    <value>설치된 플러그인 DLL의 디지털 서명을 검사하고 서명 세부 정보를 확인합니다.</value>
   </data>
   <data name="Settings_PluginSignature_Btn" xml:space="preserve">
-    <value>Verify</value>
+    <value>검증 시작</value>
   </data>
   <data name="PluginSignature_DialogTitle" xml:space="preserve">
-    <value>Plugin Signature Results</value>
+    <value>플러그인 서명 검증 결과</value>
   </data>
   <data name="PluginSignature_Checking" xml:space="preserve">
-    <value>Verifying plugin signatures...</value>
+    <value>플러그인 서명 검증 중...</value>
   </data>
   <data name="PluginSignature_NoPlugins" xml:space="preserve">
-    <value>No plugin DLLs were found in the Plugins folder.</value>
+    <value>Plugins 폴더에서 플러그인 DLL을 찾을 수 없습니다.</value>
   </data>
   <data name="PluginSignature_Failed" xml:space="preserve">
-    <value>Verification failed: {0}</value>
+    <value>검증 실패: {0}</value>
   </data>
   <data name="PluginSignature_Signed" xml:space="preserve">
-    <value>Signed</value>
+    <value>서명됨</value>
   </data>
   <data name="PluginSignature_Unsigned" xml:space="preserve">
-    <value>Not signed</value>
+    <value>서명 안 됨</value>
   </data>
   <data name="PluginSignature_File" xml:space="preserve">
-    <value>File</value>
+    <value>파일</value>
   </data>
   <data name="PluginSignature_Signer" xml:space="preserve">
-    <value>Signer</value>
+    <value>서명자</value>
   </data>
   <data name="PluginSignature_Issuer" xml:space="preserve">
-    <value>Issuer</value>
+    <value>발급자</value>
   </data>
   <data name="PluginSignature_SerialNumber" xml:space="preserve">
-    <value>Serial number</value>
+    <value>일련 번호</value>
   </data>
   <data name="PluginSignature_Thumbprint" xml:space="preserve">
-    <value>Thumbprint</value>
+    <value>지문</value>
   </data>
   <data name="PluginSignature_ValidFrom" xml:space="preserve">
-    <value>Valid from</value>
+    <value>유효 기간 시작</value>
   </data>
   <data name="PluginSignature_ValidTo" xml:space="preserve">
-    <value>Valid to</value>
+    <value>유효 기간 만료</value>
   </data>
   <data name="PluginSignature_SignatureAlgorithm" xml:space="preserve">
-    <value>Signature algorithm</value>
+    <value>서명 알고리즘</value>
   </data>
   <data name="PluginSignature_PublicKey" xml:space="preserve">
-    <value>Public key algorithm</value>
+    <value>공개 키 알고리즘</value>
   </data>
   <data name="PluginSignature_TrustStatus" xml:space="preserve">
-    <value>Trust status</value>
+    <value>신뢰 상태</value>
   </data>
   <data name="PluginSignature_TrustValid" xml:space="preserve">
-    <value>Signature is valid and trusted.</value>
+    <value>서명이 유효하며 신뢰할 수 있습니다.</value>
   </data>
   <data name="PluginSignature_TrustNotSigned" xml:space="preserve">
-    <value>The file has no digital signature.</value>
+    <value>파일에 디지털 서명이 없습니다.</value>
   </data>
   <data name="PluginSignature_TrustBadDigest" xml:space="preserve">
-    <value>Signature verification failed: the file may have been modified.</value>
+    <value>서명 검증 실패: 파일 내용이 수정되었을 수 있습니다.</value>
   </data>
   <data name="PluginSignature_TrustSubjectNotTrusted" xml:space="preserve">
-    <value>The signing identity is not trusted.</value>
+    <value>서명 주체가 신뢰할 수 없습니다.</value>
   </data>
   <data name="PluginSignature_TrustExpired" xml:space="preserve">
-    <value>The signing certificate has expired.</value>
+    <value>서명 인증서가 만료되었습니다.</value>
   </data>
   <data name="PluginSignature_TrustRevoked" xml:space="preserve">
-    <value>The signing certificate has been revoked.</value>
+    <value>서명 인증서가 해지되었습니다.</value>
   </data>
   <data name="PluginSignature_TrustUntrustedRoot" xml:space="preserve">
-    <value>Signature is not trusted: the certificate chain or root certificate is not trusted.</value>
+    <value>서명이 신뢰되지 않음: 인증서 체인 또는 루트 인증서가 신뢰할 수 있는 목록에 없습니다.</value>
   </data>
   <data name="PluginSignature_TrustWrongUsage" xml:space="preserve">
-    <value>The certificate usage does not match code signing.</value>
+    <value>인증서 용도가 코드 서명과 일치하지 않습니다.</value>
   </data>
   <data name="PluginSignature_TrustUnknown" xml:space="preserve">
-    <value>Unknown status (0x{0})</value>
+    <value>알 수 없는 상태 (0x{0})</value>
   </data>
   <data name="Plugin_StopSwitchBtn" xml:space="preserve">
-    <value>Stop</value>
+    <value>전환 중지</value>
   </data>
   <data name="Plugin_StopRequested" xml:space="preserve">
-    <value>Stopping...</value>
+    <value>중지 중...</value>
   </data>
   <data name="Plugin_SwitchStopped_Title" xml:space="preserve">
-    <value>Stopped</value>
+    <value>중지됨</value>
   </data>
   <data name="Plugin_SwitchStopped_Content" xml:space="preserve">
-    <value>The switch was stopped and nothing was changed.</value>
+    <value>전환이 중지되었으며 아무것도 변경되지 않았습니다.</value>
   </data>
   <data name="DailyNote_NoIdentityService" xml:space="preserve">
-    <value>The account identity service is unavailable, so daily note data cannot be read.</value>
+    <value>계정 신원 서비스를 가져올 수 없어 실시간 노트 데이터를 읽을 수 없습니다.</value>
   </data>
   <data name="PluginStoreAccessDenied" xml:space="preserve">
-    <value>Access denied.</value>
+    <value>접근이 거부되었습니다.</value>
   </data>
   <data name="PluginStoreCancelling" xml:space="preserve">
-    <value>Cancelling...</value>
+    <value>취소 중...</value>
   </data>
   <data name="PluginStoreCaptchaCancelled" xml:space="preserve">
-    <value>Captcha verification was cancelled.</value>
+    <value>보안 문자 인증이 취소되었습니다.</value>
   </data>
   <data name="PluginStoreCaptchaFailed" xml:space="preserve">
-    <value>Captcha verification failed.</value>
+    <value>보안 문자 인증에 실패했습니다.</value>
   </data>
   <data name="PluginStoreCaptchaRequired" xml:space="preserve">
-    <value>Captcha verification is required.</value>
+    <value>보안 문자 인증이 필요합니다.</value>
   </data>
   <data name="PluginStoreCaptchaRetryExhausted" xml:space="preserve">
-    <value>Captcha retry limit reached. Please try again later.</value>
+    <value>보안 문자 인증 재시도 횟수를 초과했습니다. 나중에 다시 시도해 주세요.</value>
   </data>
   <data name="PluginStoreExtracting" xml:space="preserve">
-    <value>Extracting...</value>
+    <value>압축 해제 중...</value>
   </data>
   <data name="PluginStoreHttpError" xml:space="preserve">
-    <value>Request failed (HTTP {0}): {1}</value>
+    <value>요청 실패 (HTTP {0}): {1}</value>
   </data>
   <data name="PluginStorePrivateAccessCancelled" xml:space="preserve">
-    <value>Private plugin access verification was cancelled.</value>
+    <value>비공개 플러그인 접근 인증이 취소되었습니다.</value>
   </data>
   <data name="PluginStorePrivateAccessDenied" xml:space="preserve">
-    <value>Private plugin access was denied.</value>
+    <value>비공개 플러그인 접근이 거부되었습니다.</value>
   </data>
   <data name="PluginStorePrivateAccessRequired" xml:space="preserve">
-    <value>Private plugin access authorization is required.</value>
+    <value>비공개 플러그인 접근 권한이 필요합니다.</value>
   </data>
   <data name="PluginStoreRetrying" xml:space="preserve">
-    <value>Retrying...</value>
+    <value>다시 시도 중...</value>
   </data>
   <data name="PluginStoreWritingConfig" xml:space="preserve">
-    <value>Writing configuration...</value>
+    <value>설정 쓰는 중...</value>
   </data>
   <data name="EnableCaptchaNotice" xml:space="preserve">
     <value>CAPTCHA 팝업 설명 표시</value>
@@ -6024,19 +6024,19 @@ Click the button below to open your browser and download manually.</value>
     <value>리스크 컨트롤 CAPTCHA 창에 출처 설명을 표시합니다. 끄면 설명만 숨겨지고 인증은 정상적으로 사용할 수 있습니다.</value>
   </data>
   <data name="CaptchaNoticeWatermark" xml:space="preserve">
-    <value>미유써 실시간 노트 · CAPTCHA</value>
+    <value>Miyoushe 실시간 노트 · CAPTCHA</value>
   </data>
   <data name="CaptchaNoticeTitle" xml:space="preserve">
-    <value>이 인증은 미유써 실시간 노트용입니다</value>
+    <value>이 인증은 Miyoushe 실시간 노트용입니다</value>
   </data>
   <data name="CaptchaNoticeLine1" xml:space="preserve">
-    <value>이 창은 미유써 리스크 컨트롤로 표시되며 '실시간 노트' 조회에만 사용됩니다. 런처 자체의 CAPTCHA가 아닙니다.</value>
+    <value>이 창은 Miyoushe 위험 관리로 표시되며 「실시간 노트」 조회에만 사용됩니다. 런처 자체의 CAPTCHA가 아닙니다.</value>
   </data>
   <data name="CaptchaNoticeLine2" xml:space="preserve">
     <value>인증을 완료하면 실시간 노트를 볼 수 있습니다. 이 안내가 필요 없다면 「설정 → 고급 옵션」에서 끌 수 있습니다.</value>
   </data>
   <data name="DeviceInfo_Title" xml:space="preserve">
-    <value>미유써 기기 정보</value>
+    <value>Miyoushe 기기 정보</value>
   </data>
   <data name="DeviceInfo_Caption" xml:space="preserve">
     <value>선택한 계정의 기기 지문, 기기 식별자, 기기 프로필 데이터를 확인하고 수정합니다</value>
@@ -6048,7 +6048,7 @@ Click the button below to open your browser and download manually.</value>
     <value>기기 지문</value>
   </data>
   <data name="DeviceInfo_FingerprintCaption" xml:space="preserve">
-    <value>미유써 API 인증에 사용되는 기기 식별자입니다. 저장하면 해당 계정에 즉시 적용됩니다.</value>
+    <value>Miyoushe API 인증에 사용되는 기기 식별자입니다. 저장하면 해당 계정에 즉시 적용됩니다.</value>
   </data>
   <data name="DeviceInfo_ExtSection" xml:space="preserve">
     <value>기기 프로필(ext_fields)</value>
@@ -6240,7 +6240,7 @@ Click the button below to open your browser and download manually.</value>
     <value>시작 시 플러그인 서명 확인</value>
   </data>
   <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
-    <value>기본적으로 꺼져 있습니다. 켜면 아래의 경고 또는 엄격한 정책이 적용됩니다.</value>
+    <value>기본적으로 꺼져 있습니다. 켜면 아래 정책에 따라 플러그인 서명을 검증하며, 끄면 검증을 건너뜁니다.</value>
   </data>
   <data name="ModTrust_ModeOff" xml:space="preserve">
     <value>확인 끄기</value>
@@ -6522,10 +6522,10 @@ Click the button below to open your browser and download manually.</value>
     <value>이번 달 남은 보충 출석 횟수는 {0}회이며, 보충 출석 카드가 {1}장 남았습니다. 보충 출석하시겠습니까?</value>
   </data>
   <data name="Checkin_ResignConfirmFormatCn" xml:space="preserve">
-    <value>이번 달 남은 보충 출석 횟수는 {0}회이며, {1} 미호요 코인이 소모됩니다. 보충 출석하시겠습니까?</value>
+    <value>이번 달 남은 보충 출석 횟수는 {0}회이며, {1} 미유 코인이 소모됩니다. 보충 출석하시겠습니까?</value>
   </data>
   <data name="Checkin_ResignInsufficientCoinCn" xml:space="preserve">
-    <value>미호요 코인 부족</value>
+    <value>미유 코인 부족</value>
   </data>
   <data name="Checkin_ResignSuccess" xml:space="preserve">
     <value>보충 출석 완료</value>
@@ -6739,12 +6739,12 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="GachaAnalysis_GameDesc" xml:space="preserve">
     <value>게임에 진입하여 기원 기록을 엽니다
-Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
+Bilibili 서버 지원, Miyoushe 로그인 불필요</value>
   </data>
   <data name="GachaAnalysis_CacheInstructions" xml:space="preserve">
     <value>내보낼 게임 계정으로 접속하여 「기원 기록」을 열고 로드가 완료될 때까지 기다린 후 「가져오기 시작」을 클릭하세요.
 
-공식 중국 서버, Bilibili 서버 및 글로벌 서버를 지원하며 미호요 커뮤니티 로그인이 필요하지 않습니다. 게임에 접속된 계정이 내보내려는 계정인지 확인해 주세요.</value>
+공식 중국 서버, Bilibili 서버 및 글로벌 서버를 지원하며 Miyoushe 로그인이 필요하지 않습니다. 게임에 접속된 계정이 내보내려는 계정인지 확인해 주세요.</value>
   </data>
   <data name="GachaAnalysis_CacheStart" xml:space="preserve">
     <value>가져오기 시작</value>
@@ -6765,10 +6765,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>이 게임은 일일 출석 체크가 설정되지 않았습니다</value>
   </data>
   <data name="Checkin_LoginExpired" xml:space="preserve">
-    <value>로그인 자격 증명이 만료되었으며 자동 갱신에 실패했습니다. 미호요 커뮤니티에 다시 로그인한 후 출석 체크해 주세요</value>
+    <value>로그인 자격 증명이 만료되었으며 자동 갱신에 실패했습니다. Miyoushe에 다시 로그인한 후 출석 체크해 주세요</value>
   </data>
   <data name="Checkin_GameCaptcha" xml:space="preserve">
-    <value>출석 체크에 보안 인증이 필요합니다. 미호요 커뮤니티 공식 웹페이지에서 인증을 완료해 주세요</value>
+    <value>출석 체크에 보안 인증이 필요합니다. Miyoushe 공식 웹페이지에서 인증을 완료해 주세요</value>
   </data>
   <data name="Checkin_SignNotConfirmed" xml:space="preserve">
     <value>출석 체크 상태가 아직 확인되지 않았습니다. 잠시 후 다시 시도해 주세요</value>
@@ -6777,7 +6777,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>데이터베이스 경로: {0}, 해당 디렉터리에 쓰기 권한이 있는지, 디스크를 사용할 수 있는지 확인해 주세요.</value>
   </data>
   <data name="Launcher_DllNotFound" xml:space="preserve">
-    <value>인젝션 일시 중단 모듈이 누락되어 인젝션 기능을 사용할 수 없습니다. 런처를 다시 설치해 주세요.</value>
+    <value>Launcher.dll(인젝션 일시 중단 모듈)이 누락되어 인젝션 기능을 사용할 수 없습니다. 런처를 다시 설치해 주세요.</value>
   </data>
   <data name="AdvancedServerSwitch_TargetServer" xml:space="preserve">
     <value>대상 서버</value>
@@ -6817,7 +6817,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
 오류 정보: {0}</value>
   </data>
   <data name="ServerBili" xml:space="preserve">
-    <value>Bilibili 서버 (Bilibili)</value>
+    <value>Bilibili 서버</value>
   </data>
   <data name="DownloadWindow_Server" xml:space="preserve">
     <value>서버</value>
@@ -7012,10 +7012,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>이 공지에는 본문 내용이 없습니다</value>
   </data>
   <data name="GameAnnouncement_Region_CNGF01" xml:space="preserve">
-    <value>셀레스티아</value>
+    <value>천공의 섬</value>
   </data>
   <data name="GameAnnouncement_Region_CNQD01" xml:space="preserve">
-    <value>이르민술</value>
+    <value>세계수</value>
   </data>
   <data name="GameAnnouncement_Region_OSUSA" xml:space="preserve">
     <value>아메리카</value>
@@ -7027,7 +7027,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>아시아</value>
   </data>
   <data name="GameAnnouncement_Region_OSCHT" xml:space="preserve">
-    <value>TW/HK/MO</value>
+    <value>대만/홍콩/마카오</value>
   </data>
   <data name="GameAnnouncement_TimeHoursBegin" xml:space="preserve">
     <value>{0}시간 후에 시작됩니다</value>
@@ -7051,7 +7051,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>seed_time은 올바른 Unix 밀리초 타임스탬프여야 합니다</value>
   </data>
   <data name="Miyoushe_Title" xml:space="preserve">
-    <value>미호요 커뮤니티</value>
+    <value>Miyoushe</value>
   </data>
   <data name="Miyoushe_CardHint" xml:space="preserve">
     <value>공식 소식, 커뮤니티 게시글 및 팔로우한 작성자 둘러보기</value>
@@ -7069,7 +7069,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>팔로우</value>
   </data>
   <data name="Miyoushe_Favorites" xml:space="preserve">
-    <value>커뮤니티 즐겨찾기</value>
+    <value>Miyoushe 즐겨찾기</value>
   </data>
   <data name="Miyoushe_Library" xml:space="preserve">
     <value>내 콘텐츠</value>
@@ -7108,7 +7108,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>계정 전환은 이 창에만 적용됩니다</value>
   </data>
   <data name="Miyoushe_LoginHint" xml:space="preserve">
-    <value>런처 계정 관리에서 미호요 커뮤니티 중국 서버 계정으로 로그인한 후 선택해 주세요. 로그인이 만료된 경우 다시 로그인하세요.</value>
+    <value>런처 계정 관리에서 Miyoushe 중국 서버 계정으로 로그인한 후 선택해 주세요. 로그인이 만료된 경우 다시 로그인하세요.</value>
   </data>
   <data name="Miyoushe_IdentityError" xml:space="preserve">
     <value>계정의 기기 식별자를 사용할 수 없어 게스트 모드로 전환되었습니다. 계정 관리에서 다시 로그인한 후 재시도하세요.</value>
@@ -7204,13 +7204,13 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>보안 인증 완료</value>
   </data>
   <data name="Miyoushe_RiskHint" xml:space="preserve">
-    <value>미호요 커뮤니티 보안 인증이 필요하여 후속 요청이 일시 중지되었습니다. 공식 인증을 완료하면 이전 작업을 다시 시도합니다.</value>
+    <value>Miyoushe 보안 인증이 필요하여 후속 요청이 일시 중지되었습니다. 공식 인증을 완료하면 이전 작업을 다시 시도합니다.</value>
   </data>
   <data name="Miyoushe_VerifyHint" xml:space="preserve">
-    <value>미호요 커뮤니티 공식 인증 코드를 완료해 주세요. 이 창을 닫으면 인증이 취소됩니다.</value>
+    <value>Miyoushe 공식 인증 코드를 완료해 주세요. 이 창을 닫으면 인증이 취소됩니다.</value>
   </data>
   <data name="Miyoushe_VerifyLoadError" xml:space="preserve">
-    <value>보안 인증 로드에 실패했습니다. 네트워크를 확인한 후 다시 시도하거나 미호요 커뮤니티 공식 웹페이지에서 인증해 주세요.</value>
+    <value>보안 인증 로드에 실패했습니다. 네트워크를 확인한 후 다시 시도하거나 Miyoushe 공식 웹페이지에서 인증해 주세요.</value>
   </data>
   <data name="Miyoushe_VerifyCancelled" xml:space="preserve">
     <value>인증이 취소되었으며 요청이 여전히 일시 중지된 상태입니다. 재시도를 클릭하여 다시 인증할 수 있습니다.</value>
@@ -7252,7 +7252,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>댓글을 입력하세요 (최대 1000자)</value>
   </data>
   <data name="Miyoushe_SendComment" xml:space="preserve">
-    <value>미호요 커뮤니티에 등록</value>
+    <value>Miyoushe에 등록</value>
   </data>
   <data name="Miyoushe_Cancel" xml:space="preserve">
     <value>취소</value>
@@ -7270,7 +7270,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>등록 결과를 확인할 수 없지만 임시 보관되었습니다. 원본 게시글을 확인한 후 등록되지 않았을 경우 다시 시도해 주세요.</value>
   </data>
   <data name="Miyoushe_CommentRiskHint" xml:space="preserve">
-    <value>미호요 커뮤니티 보안 인증이 필요합니다. '인증 및 등록'을 클릭하여 공식 인증을 완료한 후 댓글을 제출하세요.</value>
+    <value>Miyoushe 보안 인증이 필요합니다. '인증 및 등록'을 클릭하여 공식 인증을 완료한 후 댓글을 제출하세요.</value>
   </data>
   <data name="ModTrust_Title" xml:space="preserve">
     <value>코드 서명 신뢰 (FufuLauncher CA)</value>
@@ -7285,7 +7285,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>신뢰 패키지가 아직 배포되지 않았습니다: Assets\Trust 폴더에 인증서와 매니페스트 파일을 넣거나 「지금 업데이트」를 클릭하여 공식 엔드포인트에서 동기화하세요.</value>
   </data>
   <data name="ModTrust_StatusFormat" xml:space="preserve">
-    <value>현재 상태: {0}</value>
+    <value>현재 상태: {0}  동기화 엔드포인트: {1}</value>
   </data>
   <data name="ModTrust_InstalledUser" xml:space="preserve">
     <value>설치됨 (현재 사용자)</value>
@@ -7348,7 +7348,11 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>코드 서명 검증 실패</value>
   </data>
   <data name="ModTrust_BlockedMsg" xml:space="preserve">
-    <value>이 파일은 서명 검증을 통과하지 못하여 로드가 차단되었습니다:</value>
+    <value>이 파일은 서명 검증을 통과하지 못하여 로드가 차단되었습니다:
+
+{0}
+
+「설정 → 개발자 라이선스 인증 → 코드 서명 신뢰」에서 자세한 내용을 확인할 수 있습니다.</value>
   </data>
   <data name="ModTrust_WarnTitle" xml:space="preserve">
     <value>코드 서명 알림</value>
@@ -7375,7 +7379,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>액세스 거부됨</value>
   </data>
   <data name="BanCheck_KilledMessage" xml:space="preserve">
-    <value>이 기기는 푸푸 런처 사용이 차단되었습니다.{0}{0}UID: {1}{0}사유: {2}{0}{0}오류라고 생각되시면 다음 주소에서 이의 제기를 제출할 수 있습니다(UID가 "-"로 표시되는 경우 비워두셔도 됩니다):{0}{3}{0}{0}지금 이의 제기 페이지를 여시겠습니까? '아니요'를 선택하면 런처가 종료됩니다.</value>
+    <value>이 기기는 FufuLauncher 사용이 차단되었습니다.{0}{0}UID: {1}{0}사유: {2}{0}{0}오류라고 생각되시면 다음 주소에서 이의 제기를 제출할 수 있습니다(UID가 "-"로 표시되는 경우 비워 두셔도 됩니다):{0}{3}{0}{0}지금 이의 제기 페이지를 여시겠습니까? '아니요'를 선택하면 런처가 종료됩니다.</value>
   </data>
   <data name="BanCheck_RevokedReason" xml:space="preserve">
     <value>서버에 의해 액세스가 취소되었습니다</value>
@@ -7384,13 +7388,13 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>해당 UID가 서버 차단 목록에 등록되어 있습니다</value>
   </data>
   <data name="GachaAnalysis_ReadingBoundRoles" xml:space="preserve">
-    <value>미요셰에 연동된 게임 캐릭터 조회 중...</value>
+    <value>Miyoushe에 연동된 게임 캐릭터 조회 중...</value>
   </data>
   <data name="GachaAnalysis_SelectRole" xml:space="preserve">
     <value>게임 캐릭터 선택</value>
   </data>
   <data name="GachaAnalysis_SelectRoleHint" xml:space="preserve">
-    <value>기원 기록을 불러올 캐릭터를 선택하세요. Bilibili 서버 캐릭터는 '세계수'로 표시됩니다. 대상 캐릭터가 보이지 않으면 취소한 후 미요셰 연동을 확인하거나 '게임에서 가져오기'를 사용하세요.</value>
+    <value>기원 기록을 불러올 캐릭터를 선택하세요. Bilibili 서버 캐릭터는 '세계수'로 표시됩니다. 대상 캐릭터가 보이지 않으면 취소한 후 Miyoushe 연동을 확인하거나 '게임에서 가져오기'를 사용하세요.</value>
   </data>
   <data name="GachaAnalysis_SkyIsland" xml:space="preserve">
     <value>천공의 섬 (공식 서버)</value>
@@ -7429,10 +7433,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>화면 QR 스캔</value>
   </data>
   <data name="MiyousheQr_Instructions" xml:space="preserve">
-    <value>「일반 스캔」은 선택한 영역을 한 번만 인식합니다. 「연속 스캔」은 선택한 영역 내의 새로운 QR 코드를 지속적으로 감지합니다. 인식 후 현재 미요셰 계정으로 로그인합니다. Esc 또는 마우스 우클릭으로 선택을 취소할 수 있습니다.</value>
+    <value>「일반 스캔」은 선택한 영역을 한 번만 인식합니다. 「연속 스캔」은 선택한 영역 내의 새로운 QR 코드를 지속적으로 감지합니다. 인식 후 현재 Miyoushe 계정으로 로그인합니다. Esc 또는 마우스 우클릭으로 선택을 취소할 수 있습니다.</value>
   </data>
   <data name="MiyousheQr_CurrentAccount" xml:space="preserve">
-    <value>현재 미요셰 계정</value>
+    <value>현재 Miyoushe 계정</value>
   </data>
   <data name="MiyousheQr_Target" xml:space="preserve">
     <value>로그인 대상</value>
@@ -7462,19 +7466,19 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>붕괴3rd</value>
   </data>
   <data name="MiyousheQr_Passport" xml:space="preserve">
-    <value>호요버스 통행증</value>
+    <value>miHoYo 통행증</value>
   </data>
   <data name="MiyousheQr_NoAccount" xml:space="preserve">
-    <value>먼저 런처에서 미요셰 계정에 로그인하세요.</value>
+    <value>먼저 런처에서 Miyoushe 계정에 로그인하세요.</value>
   </data>
   <data name="MiyousheQr_CnOnly" xml:space="preserve">
-    <value>미요셰 중국 서버 계정으로 전환한 후 스캔하세요.</value>
+    <value>Miyoushe 중국 서버 계정으로 전환한 후 스캔하세요.</value>
   </data>
   <data name="MiyousheQr_CredentialsMissing" xml:space="preserve">
-    <value>현재 계정에 스캔에 필요한 인증 정보가 없습니다. 미요셰 앱으로 런처에 다시 스캔 로그인하세요.</value>
+    <value>현재 계정에 스캔에 필요한 인증 정보가 없습니다. Miyoushe 앱으로 런처에 다시 스캔 로그인하세요.</value>
   </data>
   <data name="MiyousheQr_AccountChanged" xml:space="preserve">
-    <value>현재 미요셰 계정이 변경되었습니다. QR 코드를 다시 선택하세요.</value>
+    <value>현재 Miyoushe 계정이 변경되었습니다. QR 코드를 다시 선택하세요.</value>
   </data>
   <data name="MiyousheQr_Expired" xml:space="preserve">
     <value>QR 코드가 만료되었습니다. 대상 기기에서 새로고침한 후 다시 선택하세요.</value>
@@ -7516,7 +7520,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>스캔 서비스에서 알 수 없는 결과를 반환했습니다. QR 코드를 새로고침한 후 다시 시도하세요.</value>
   </data>
   <data name="MiyousheQr_Rejected" xml:space="preserve">
-    <value>스캔 요청이 거부되었습니다. QR 코드가 만료되었거나 인증 정보가 유효하지 않습니다. QR 코드를 새로고침하세요. 계속 실패할 경우 미요셰 계정에 다시 로그인하세요.</value>
+    <value>스캔 요청이 거부되었습니다. QR 코드가 만료되었거나 인증 정보가 유효하지 않습니다. QR 코드를 새로고침하세요. 계속 실패할 경우 Miyoushe 계정에 다시 로그인하세요.</value>
   </data>
   <data name="MiyousheQr_Continuous" xml:space="preserve">
     <value>연속 스캔</value>
@@ -7528,7 +7532,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>로그인 자동 확인</value>
   </data>
   <data name="MiyousheQr_AutoConfirmHint" xml:space="preserve">
-    <value>스캔 전 선택하면 지원되는 새로운 QR 코드가 인식되는 즉시 현재 미요셰 계정으로 로그인을 승인합니다.</value>
+    <value>스캔 전 선택하면 지원되는 새로운 QR 코드가 인식되는 즉시 현재 Miyoushe 계정으로 로그인을 승인합니다.</value>
   </data>
   <data name="MiyousheQr_Scanning" xml:space="preserve">
     <value>영역 내 새로운 QR 코드를 대기 중입니다. {0}회 확인되었습니다. 「스캔 중지」를 클릭하여 종료할 수 있습니다.</value>
@@ -7664,7 +7668,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>글로벌 서버</value>
   </data>
   <data name="Account_LoginMiyoushe" xml:space="preserve">
-    <value>HoYoLAB 로그인</value>
+    <value>로그인 (Miyoushe / HoYoLAB)</value>
   </data>
   <data name="PluginSettings_ParsePresetFailedDetail_Format" xml:space="preserve">
     <value>프리셋 파일을 구문 분석할 수 없습니다
@@ -7790,9 +7794,9 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>캐릭터 이벤트 기원</value>
   </data>
   <data name="PluginStore_VersionTooLowMessage_Format" xml:space="preserve">
-    <value>플러그인 "{0}"은(는) 실행기 버전 ≥ {1}이(가) 필요하며, 현재 버전은 {2}입니다
+    <value>플러그인 "{0}"은(는) 런처 버전 ≥ {1}이(가) 필요하며, 현재 버전은 {2}입니다
 
-이 플러그인을 설치하기 전에 실행기를 먼저 업데이트하세요.</value>
+이 플러그인을 설치하기 전에 런처를 먼저 업데이트하세요.</value>
   </data>
   <data name="Common_Error_Format" xml:space="preserve">
     <value>오류: {0}</value>
@@ -8380,7 +8384,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>플러그인 ID</value>
   </data>
   <data name="LaunchConfig_PostLaunch_Exit" xml:space="preserve">
-    <value>실행기 종료</value>
+    <value>런처 종료</value>
   </data>
   <data name="Gacha_UnknownFiveStar" xml:space="preserve">
     <value>알 수 없는 5성</value>
@@ -8419,10 +8423,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>사용자 {0}</value>
   </data>
   <data name="Gacha_AuthCode1016" xml:space="preserve">
-    <value>HoYoLAB에서 기원 수신 권한이 없습니다 (코드 1016). 연동을 확인하거나 '게임에서 가져오기'를 이용하세요.</value>
+    <value>Miyoushe에서 기원 조회 권한이 없습니다 (코드 1016). 연동을 확인하거나 '게임에서 가져오기'를 이용하세요.</value>
   </data>
   <data name="Gacha_NoBoundRoleFound" xml:space="preserve">
-    <value>기원 수신에 사용할 수 있는 연동된 캐릭터가 없습니다. 대상 캐릭터가 연동된 HoYoLAB 계정으로 로그인하거나 '게임에서 가져오기'를 사용하세요.</value>
+    <value>기원 조회에 사용할 수 있는 연동된 캐릭터가 없습니다. 대상 캐릭터가 연동된 Miyoushe 계정으로 로그인하거나 '게임에서 가져오기'를 사용하세요.</value>
   </data>
   <data name="Gacha_NoNewRecordsKeptExisting_Format" xml:space="preserve">
     <value>UID {0}에 대한 새 기록이 없습니다. 기존 데이터를 유지합니다.</value>
@@ -8437,7 +8441,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>가져오기 완료, UID {0}, 총 {1}개 기록, 이미지 리소스 확인 중...</value>
   </data>
   <data name="Gacha_AuthCode1002" xml:space="preserve">
-    <value>HoYoLAB에서 인증 매개변수를 거부했습니다 (코드 1002). '게임에서 가져오기'를 시도해보세요.</value>
+    <value>Miyoushe에서 인증 매개변수를 거부했습니다 (코드 1002). '게임에서 가져오기'를 시도해 보세요.</value>
   </data>
   <data name="Gacha_NoRecordsKeptExisting" xml:space="preserve">
     <value>기원 기록을 가져오지 못했습니다. 게임 내 기원 기록이 있는지 확인하세요.</value>
@@ -8485,7 +8489,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>가져온 UID가 선택한 게임 캐릭터와 일치하지 않아 가져오기를 중단했습니다.</value>
   </data>
   <data name="Gacha_AuthCheckLoginSuffix" xml:space="preserve">
-    <value> HoYoLAB 로그인 상태를 확인하거나 '게임에서 가져오기'를 사용하세요.</value>
+    <value> Miyoushe 로그인 상태를 확인하거나 '게임에서 가져오기'를 사용하세요.</value>
   </data>
   <data name="Account_LoadAccountFailed_Format" xml:space="preserve">
     <value>계정 정보를 불러오지 못했습니다: {0}</value>
@@ -8509,7 +8513,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>내보내기 실패</value>
   </data>
   <data name="Gacha_NoAccountBoundToUid_Format" xml:space="preserve">
-    <value>UID {0}에 연동된 HoYoLAB 계정을 찾을 수 없습니다. 연동을 확인하거나 '게임에서 가져오기'를 이용하세요.</value>
+    <value>UID {0}에 연동된 Miyoushe 계정을 찾을 수 없습니다. 연동을 확인하거나 '게임에서 가져오기'를 이용하세요.</value>
   </data>
   <data name="Gacha_RoleSwitchedDiscardOld" xml:space="preserve">
     <value>캐릭터가 전환되어 이전 캐릭터의 수신 결과를 삭제했습니다.</value>
@@ -8591,7 +8595,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>데이터 로딩 대기 중...</value>
   </data>
   <data name="GenshinData_ConnectingMiyoushe" xml:space="preserve">
-    <value>미요호 커뮤니티에 연결 중...</value>
+    <value>Miyoushe에 연결 중...</value>
   </data>
   <data name="GenshinData_LoginRequired" xml:space="preserve">
     <value>계정 로그인이 필요합니다</value>
@@ -8609,7 +8613,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>로딩 실패: {0}</value>
   </data>
   <data name="Help_DocPreloadingSnippet" xml:space="preserve">
-    <value>본문이 백그라운드에서 여전히 프리로드 중입니다. 제목 또는 경로에서 일치함</value>
+    <value>본문을 백그라운드에서 불러오는 중이며, 제목 또는 경로에서 일치했습니다.</value>
   </data>
   <data name="Help_LoadingDoc" xml:space="preserve">
     <value>로딩 중...</value>
@@ -8630,7 +8634,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>{0}개의 이미지 리소스를 업데이트하고 데이터베이스에 저장했습니다</value>
   </data>
   <data name="Gacha_CrawlerStatus_PoolMetaComplete_Format" xml:space="preserve">
-    <value>기원 풀 메타데이터 업데이트 완료 (총 {0}개 기록 풀: 캐릭터 {1}, 무기 {2}, 만개 {3})</value>
+    <value>기원 풀 메타데이터 업데이트 완료 (총 {0}개 기록 풀: 캐릭터 {1}, 무기 {2}, 묶음 {3})</value>
   </data>
   <data name="Gacha_ItemType_Character" xml:space="preserve">
     <value>캐릭터</value>
@@ -8669,43 +8673,43 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>스토리 CG</value>
   </data>
   <data name="NavImageSources" xml:space="preserve">
-    <value>Image Sources</value>
+    <value>이미지 소스</value>
   </data>
   <data name="ImageSource_Title" xml:space="preserve">
-    <value>Image Sources</value>
+    <value>이미지 소스</value>
   </data>
   <data name="ImageSource_Subtitle" xml:space="preserve">
-    <value>Choose an image source and preview it. The image shown here is also applied as the main background.</value>
+    <value>이미지 소스를 선택하고 미리 보세요. 여기에 표시된 이미지가 메인 배경으로도 적용됩니다.</value>
   </data>
   <data name="ImageSource_SourceOfficial" xml:space="preserve">
-    <value>Official</value>
+    <value>공식 배경</value>
   </data>
   <data name="ImageSource_SourceRandom" xml:space="preserve">
-    <value>Random BlueArchive</value>
+    <value>랜덤 BlueArchive</value>
   </data>
   <data name="ImageSource_SourceBing" xml:space="preserve">
-    <value>Bing Wallpaper</value>
+    <value>Bing 배경화면</value>
   </data>
   <data name="ImageSource_SourceCustom" xml:space="preserve">
-    <value>Custom</value>
+    <value>사용자 지정</value>
   </data>
   <data name="ImageSource_SourceSlideshow" xml:space="preserve">
-    <value>Slideshow</value>
+    <value>배경 슬라이드쇼</value>
   </data>
   <data name="ImageSource_Previous" xml:space="preserve">
-    <value>Previous</value>
+    <value>이전</value>
   </data>
   <data name="ImageSource_Next" xml:space="preserve">
-    <value>Next</value>
+    <value>다음</value>
   </data>
   <data name="ImageSource_Refresh" xml:space="preserve">
-    <value>Next image</value>
+    <value>다른 이미지</value>
   </data>
   <data name="ImageSource_RandomScope" xml:space="preserve">
-    <value>Random scope</value>
+    <value>랜덤 범위</value>
   </data>
   <data name="ImageSource_RandomHint" xml:space="preserve">
-    <value>The arrow buttons load a new random BlueArchive image and apply it to the main background.</value>
+    <value>좌우 버튼을 누르면 새로운 랜덤 BlueArchive 이미지를 불러와 메인 배경에 적용합니다.</value>
   </data>
   <data name="ImageSource_BingChangeOnStartup" xml:space="preserve">
     <value>시작할 때 Bing 배경 화면 변경</value>
@@ -8723,19 +8727,19 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>Bing 아카이브에서 연도를 선택하세요. 공식을 켜면 최신 공식 배경만 사용합니다.</value>
   </data>
   <data name="ImageSource_CustomEmpty" xml:space="preserve">
-    <value>No custom background image selected.</value>
+    <value>사용자 지정 배경 이미지가 선택되지 않았습니다.</value>
   </data>
   <data name="ImageSource_SlideshowEmpty" xml:space="preserve">
-    <value>No slideshow folder selected.</value>
+    <value>슬라이드쇼 이미지 폴더가 선택되지 않았습니다.</value>
   </data>
   <data name="ImageSource_BingEmpty" xml:space="preserve">
-    <value>Failed to load Bing wallpaper. Try again later.</value>
+    <value>Bing 배경화면을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="ImageSource_InvalidApiUrl" xml:space="preserve">
-    <value>The official background API URL is invalid. Enter a complete HTTP/HTTPS address.</value>
+    <value>공식 배경 API 주소가 올바르지 않습니다. 전체 HTTP/HTTPS 주소를 입력해 주세요.</value>
   </data>
   <data name="ImageSource_ApplyApi" xml:space="preserve">
-    <value>Apply</value>
+    <value>적용</value>
   </data>
   <data name="BackgroundAntialiasTitle" xml:space="preserve">
     <value>이미지 안티 앨리어싱</value>
@@ -9098,10 +9102,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>버전 선언이 잘못됨</value>
   </data>
   <data name="TrayCheckin" xml:space="preserve">
-    <value>Check-in</value>
+    <value>출석 체크</value>
   </data>
   <data name="TrayMcp" xml:space="preserve">
-    <value>MCP Management</value>
+    <value>MCP 관리</value>
   </data>
   <data name="Mcp_CategoryPlayer" xml:space="preserve">
     <value>플레이어 데이터</value>
@@ -9239,7 +9243,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>업적 추적 · FufuLauncher 클라우드 아카이브</value>
   </data>
   <data name="CloudSync_AchievementTooltip" xml:space="preserve">
-    <value>FufuLauncher 클라우드 업적 아카이브 관리</value>
+    <value>FufuLauncher 클라우드 업적 아카이브 관리 (업로드 / 가져오기 / 덮어쓰기 / 삭제)</value>
   </data>
   <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
     <value>현재 업적 업로드</value>
@@ -9401,7 +9405,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>로컬: UID {0}개 · 총 {1}개 기록(나선 {2} / 환상극 {3} / 지맥 {4})</value>
   </data>
   <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
-    <value>주기 도전 클라우드 아카이브 관리</value>
+    <value>주기 도전 클라우드 아카이브 관리 (나선 비경 / 환상극 / 지맥 제압전)</value>
   </data>
   <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
     <value>주기 도전 데이터 동기화 실패</value>
@@ -9464,7 +9468,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>삭제 실패</value>
   </data>
   <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
-    <value>클라우드의 모든 업적과 기원 아카이브를 삭제하시겠습니까? (계정은 유지되지만 모든 파일이 영구 삭제됩니다)</value>
+    <value>현재 계정의 모든 클라우드 업적과 기원 아카이브를 삭제하시겠습니까? (계정은 유지되지만 모든 클라우드 파일이 영구적으로 삭제되므로 신중하게 진행해 주세요)</value>
   </data>
   <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
     <value>삭제 완료</value>
@@ -9557,7 +9561,7 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>아카이브 형식 검증에 실패했습니다.</value>
   </data>
   <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
-    <value>이름은 1~64자 영문자, 숫자, _, -, .만 사용할 수 있습니다.</value>
+    <value>아카이브 이름은 1~64자의 영문자, 숫자, _, -, .만 사용할 수 있으며, 영문자 또는 숫자로 시작하고 마침표로 끝나거나 마침표가 연속(..)될 수 없습니다.</value>
   </data>
   <data name="CloudSync_ErrLocked" xml:space="preserve">
     <value>계정이 잠겨 있습니다. 먼저 이메일 인증으로 잠금을 해제하세요.</value>
@@ -10142,106 +10146,106 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>FufuLauncher 클라우드 아카이브</value>
   </data>
   <data name="CloudSync_NavHutao" xml:space="preserve">
-    <value>Hutao Cloud</value>
+    <value>호두 클라우드</value>
   </data>
   <data name="HutaoSync_SectionTitle" xml:space="preserve">
-    <value>Hutao Cloud</value>
+    <value>호두 클라우드</value>
   </data>
   <data name="HutaoSync_SectionSubtitle" xml:space="preserve">
-    <value>Sync wish and cycle challenge records between Hutao Cloud and your FufuLauncher Cloud Sync archives</value>
+    <value>호두 클라우드와 FufuLauncher 클라우드 아카이브 간에 기원 및 주기 도전 기록을 동기화합니다</value>
   </data>
   <data name="HutaoSync_BridgeRuleTitle" xml:space="preserve">
-    <value>Sync Guide</value>
+    <value>동기화 방식 안내</value>
   </data>
   <data name="HutaoSync_BridgeRuleDesc" xml:space="preserve">
     <value>호두 클라우드에서 가져온 데이터는 FufuLauncher 클라우드 아카이브에 저장되며, '클라우드 아카이브'에서 내보내거나 가져올 수 있습니다. 호두 클라우드로 업로드할 때도 FufuLauncher 클라우드 아카이브에서 직접 읽습니다.</value>
   </data>
   <data name="HutaoSync_AchievementNotice" xml:space="preserve">
-    <value>Achievements note: Hutao Cloud does not support achievement sync. Continue using the Achievements window or Cloud Archives to back up, export, or import achievement profiles.</value>
+    <value>업적 백업 안내: 호두 클라우드는 업적 동기화를 지원하지 않습니다. 업적 창이나 '클라우드 아카이브'에서 로컬 업적 프로필을 백업, 내보내기 또는 가져오기해 주세요.</value>
   </data>
   <data name="HutaoSync_FufuRequiredBannerTitle" xml:space="preserve">
-    <value>Sign In &amp; Unlock FufuLauncher Cloud Sync to Transfer</value>
+    <value>동기화하려면 FufuLauncher 클라우드 계정에 로그인 및 잠금 해제하세요</value>
   </data>
   <data name="HutaoSync_FufuRequiredBannerMsg" xml:space="preserve">
     <value>여기서 호두 클라우드 계정, 통계 순위 및 후원 상태를 볼 수 있습니다. FufuLauncher 클라우드 아카이브와 동기화하려면 '계정 및 보안'에서 로그인 및 잠금 해제를 진행해 주세요.</value>
   </data>
   <data name="HutaoSync_GotoFufuAccountBtn" xml:space="preserve">
-    <value>Go to Account &amp; Security</value>
+    <value>계정 및 보안으로 이동</value>
   </data>
   <data name="HutaoSync_AccountTitle" xml:space="preserve">
-    <value>Hutao Cloud Account</value>
+    <value>호두 클라우드 계정</value>
   </data>
   <data name="HutaoSync_AccountSubtitle" xml:space="preserve">
     <value>호두 클라우드에 로그인하여 계정 정보, 서비스 만료일 및 로그인 기기를 확인합니다. FufuLauncher 클라우드 아카이브 동기화에는 FufuLauncher 클라우드 로그인이 필요합니다.</value>
   </data>
   <data name="HutaoSync_ModeLogin" xml:space="preserve">
-    <value>Sign In</value>
+    <value>로그인</value>
   </data>
   <data name="HutaoSync_ModeRegister" xml:space="preserve">
-    <value>Register</value>
+    <value>회원가입</value>
   </data>
   <data name="HutaoSync_ModeReset" xml:space="preserve">
-    <value>Reset Password</value>
+    <value>비밀번호 재설정</value>
   </data>
   <data name="HutaoSync_EmailHeader" xml:space="preserve">
-    <value>Hutao Email</value>
+    <value>호두 계정 이메일</value>
   </data>
   <data name="HutaoSync_EmailPlaceholder" xml:space="preserve">
-    <value>Enter your Hutao account email</value>
+    <value>등록 또는 연동된 이메일 입력</value>
   </data>
   <data name="HutaoSync_PasswordHeader" xml:space="preserve">
-    <value>Password</value>
+    <value>비밀번호</value>
   </data>
   <data name="HutaoSync_PasswordPlaceholder" xml:space="preserve">
-    <value>Enter your password</value>
+    <value>비밀번호 입력</value>
   </data>
   <data name="HutaoSync_ConfirmPasswordHeader" xml:space="preserve">
-    <value>Confirm Password</value>
+    <value>비밀번호 확인</value>
   </data>
   <data name="HutaoSync_ConfirmPasswordPlaceholder" xml:space="preserve">
-    <value>Re-enter your password</value>
+    <value>비밀번호 다시 입력</value>
   </data>
   <data name="HutaoSync_OtpHeader" xml:space="preserve">
-    <value>Verification Code</value>
+    <value>이메일 인증 코드</value>
   </data>
   <data name="HutaoSync_OtpPlaceholder" xml:space="preserve">
-    <value>Enter email verification code</value>
+    <value>이메일로 받은 인증 코드 입력</value>
   </data>
   <data name="HutaoSync_SendOtpBtn" xml:space="preserve">
-    <value>Send Code</value>
+    <value>인증 코드 전송</value>
   </data>
   <data name="HutaoSync_SendOtpCooldownFormat" xml:space="preserve">
-    <value>Resend ({0}s)</value>
+    <value>다시 보내기 ({0}초)</value>
   </data>
   <data name="HutaoSync_SubmitLogin" xml:space="preserve">
-    <value>Sign In to Hutao</value>
+    <value>호두 계정 로그인</value>
   </data>
   <data name="HutaoSync_SubmitRegister" xml:space="preserve">
-    <value>Register &amp; Sign In</value>
+    <value>가입 및 로그인</value>
   </data>
   <data name="HutaoSync_SubmitReset" xml:space="preserve">
-    <value>Reset &amp; Sign In</value>
+    <value>재설정 및 로그인</value>
   </data>
   <data name="HutaoSync_LabelAccount" xml:space="preserve">
-    <value>Signed in as</value>
+    <value>현재 계정</value>
   </data>
   <data name="HutaoSync_LabelGachaPlan" xml:space="preserve">
-    <value>Wish Backup Service</value>
+    <value>기원 클라우드 백업 서비스</value>
   </data>
   <data name="HutaoSync_PlanActiveFormat" xml:space="preserve">
-    <value>Active until {0}</value>
+    <value>이용 중 · {0}까지 유효</value>
   </data>
   <data name="HutaoSync_PlanDeveloper" xml:space="preserve">
-    <value>Permanent Access</value>
+    <value>영구 이용</value>
   </data>
   <data name="HutaoSync_PlanExpired" xml:space="preserve">
-    <value>Not active or expired (redeem under Sponsor &amp; Support or upload current-period challenges to extend)</value>
+    <value>미이용 또는 만료됨 ('후원 및 지원'에서 교환하거나 이번 회차 도전을 업로드하여 연장 가능)</value>
   </data>
   <data name="HutaoSync_RefreshAccountBtn" xml:space="preserve">
-    <value>Refresh Status</value>
+    <value>상태 새로고침</value>
   </data>
   <data name="HutaoSync_LogoutBtn" xml:space="preserve">
-    <value>Sign Out</value>
+    <value>로그아웃</value>
   </data>
   <data name="HutaoSync_PullSectionTitle" xml:space="preserve">
     <value>호두 클라우드에서 FufuLauncher 클라우드 아카이브로 동기화 (기원 기록)</value>
@@ -10250,16 +10254,16 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>호두 클라우드에 저장된 기원 기록을 불러와 선택한 캐릭터를 FufuLauncher 클라우드 아카이브에 새로 만들거나 병합합니다.</value>
   </data>
   <data name="HutaoSync_LoadHutaoListBtn" xml:space="preserve">
-    <value>Load Hutao Cloud List</value>
+    <value>호두 클라우드 목록 불러오기</value>
   </data>
   <data name="HutaoSync_ToggleSelectBtn" xml:space="preserve">
-    <value>Select / Deselect All</value>
+    <value>전체 선택 / 해제</value>
   </data>
   <data name="HutaoSync_TargetSlotHeader" xml:space="preserve">
     <value>새 FufuLauncher 클라우드 아카이브 이름</value>
   </data>
   <data name="HutaoSync_TargetSlotPlaceholder" xml:space="preserve">
-    <value>Letters, numbers, underscores, hyphens, or dots only</value>
+    <value>영문자, 숫자, _, -, .만 사용할 수 있습니다</value>
   </data>
   <data name="HutaoSync_PickExistingSlotHeader" xml:space="preserve">
     <value>기존 FufuLauncher 기원 클라우드 아카이브</value>
@@ -10271,22 +10275,22 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>이 FufuLauncher 클라우드 아카이브의 기존 기록 병합 및 유지 (권장)</value>
   </data>
   <data name="HutaoSync_PullEmptyHint" xml:space="preserve">
-    <value>Click 'Load Hutao Cloud List' above to view characters saved on Hutao Cloud</value>
+    <value>위의 '호두 클라우드 목록 불러오기'를 클릭하여 호두 클라우드에 저장된 캐릭터를 확인하세요</value>
   </data>
   <data name="HutaoSync_PullActionBtn" xml:space="preserve">
     <value>선택 항목을 FufuLauncher 클라우드 아카이브로 동기화</value>
   </data>
   <data name="HutaoSync_DeleteHutaoUidBtn" xml:space="preserve">
-    <value>Delete from Hutao</value>
+    <value>호두 클라우드에서 삭제</value>
   </data>
   <data name="HutaoSync_ConfirmDeleteUidTitle" xml:space="preserve">
-    <value>Confirm Hutao Cloud Deletion</value>
+    <value>호두 클라우드 기록 삭제 확인</value>
   </data>
   <data name="HutaoSync_ConfirmDeleteUidMsgFormat" xml:space="preserve">
     <value>호두 클라우드에서 UID {0}의 모든 기원 기록을 영구 삭제하시겠습니까? 되돌릴 수 없으며 로컬 및 FufuLauncher 클라우드 아카이브에는 영향을 주지 않습니다.</value>
   </data>
   <data name="HutaoSync_GachaEntryCountFormat" xml:space="preserve">
-    <value>{0} wish records</value>
+    <value>총 {0}건의 기원 기록</value>
   </data>
   <data name="HutaoSync_PushGachaTitle" xml:space="preserve">
     <value>FufuLauncher 클라우드 아카이브에서 호두 클라우드로 업로드 (기원 기록)</value>
@@ -10298,16 +10302,16 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>FufuLauncher 기원 클라우드 아카이브 선택</value>
   </data>
   <data name="HutaoSync_RefreshFufuArchiveBtn" xml:space="preserve">
-    <value>Refresh List</value>
+    <value>목록 새로고침</value>
   </data>
   <data name="HutaoSync_InspectArchiveBtn" xml:space="preserve">
-    <value>Load Archive Contents</value>
+    <value>아카이브 불러오기</value>
   </data>
   <data name="HutaoSync_PushGachaEmptyHint" xml:space="preserve">
-    <value>위의 FufuLauncher 기원 클라우드 아카이브를 선택하면 자동으로 불러오며, '아카이브 읽기'로 다시 불러올 수 있습니다</value>
+    <value>위의 FufuLauncher 기원 클라우드 아카이브를 선택하면 자동으로 불러오며, '아카이브 불러오기'로 다시 불러올 수 있습니다</value>
   </data>
   <data name="HutaoSync_PushGachaActionBtn" xml:space="preserve">
-    <value>Upload Selected to Hutao Cloud</value>
+    <value>선택한 캐릭터를 호두 클라우드에 업로드</value>
   </data>
   <data name="HutaoSync_ChallengeTitle" xml:space="preserve">
     <value>FufuLauncher 클라우드 아카이브에서 호두 클라우드로 업로드 (나선 비경 및 환상극)</value>
@@ -10319,79 +10323,79 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>FufuLauncher 도전 클라우드 아카이브 선택</value>
   </data>
   <data name="HutaoSync_ChallengeInspectEmptyHint" xml:space="preserve">
-    <value>위의 FufuLauncher 도전 클라우드 아카이브를 선택하면 자동으로 불러오며, '아카이브 읽기'로 다시 불러올 수 있습니다</value>
+    <value>위의 FufuLauncher 도전 클라우드 아카이브를 선택하면 자동으로 불러오며, '아카이브 불러오기'로 다시 불러올 수 있습니다</value>
   </data>
   <data name="HutaoSync_ChallengeActionBtn" xml:space="preserve">
-    <value>Upload Selected to Hutao Cloud</value>
+    <value>선택한 기록을 호두 클라우드에 업로드</value>
   </data>
   <data name="HutaoSync_ModeAbyss" xml:space="preserve">
-    <value>Spiral Abyss</value>
+    <value>나선 비경</value>
   </data>
   <data name="HutaoSync_ModeTheater" xml:space="preserve">
-    <value>Imaginarium Theater</value>
+    <value>현실 속 환상극</value>
   </data>
   <data name="HutaoSync_AbyssSummaryFormat" xml:space="preserve">
-    <value>Deepest Floor {0} · {1} Stars</value>
+    <value>최고 도달 {0} · 총 {1}별</value>
   </data>
   <data name="HutaoSync_TheaterSummaryFormat" xml:space="preserve">
-    <value>Act {0} · {1} Medals · {2} Supporting Cast</value>
+    <value>제{0}막 · 스텔라 {1}개 · 지원 캐릭터 {2}명</value>
   </data>
   <data name="HutaoSync_ChallengeStatusCurrent" xml:space="preserve">
-    <value>Current Period</value>
+    <value>이번 회차 업로드 가능</value>
   </data>
   <data name="HutaoSync_ChallengeStatusPast" xml:space="preserve">
-    <value>Past Period</value>
+    <value>지난 회차 종료</value>
   </data>
   <data name="HutaoSync_ChallengeStatusIncomplete" xml:space="preserve">
-    <value>Incomplete Stats</value>
+    <value>통계 데이터 불완전</value>
   </data>
   <data name="HutaoSync_ScheduleFallbackFormat" xml:space="preserve">
-    <value>Season {0}</value>
+    <value>제{0}기</value>
   </data>
   <data name="HutaoSync_ChallengeUploadedPart" xml:space="preserve">
-    <value>Uploaded {0} record(s)</value>
+    <value>{0}건 업로드 완료</value>
   </data>
   <data name="HutaoSync_ChallengeExtendedPart" xml:space="preserve">
-    <value>Hutao wish backup time extended</value>
+    <value>호두 클라우드 기원 백업 이용 기간 연장 보상 획득</value>
   </data>
   <data name="HutaoSync_ChallengeSkippedPastPart" xml:space="preserve">
-    <value>Skipped {0} past-period record(s)</value>
+    <value>지난 회차 기록 {0}건 건너뜀</value>
   </data>
   <data name="HutaoSync_ChallengeSkippedIncompletePart" xml:space="preserve">
-    <value>Skipped {0} incomplete record(s)</value>
+    <value>불완전한 기록 {0}건 건너뜀</value>
   </data>
   <data name="HutaoSync_ChallengeFailedPart" xml:space="preserve">
-    <value>{0} record(s) failed to upload</value>
+    <value>{0}건 업로드 실패</value>
   </data>
   <data name="HutaoSync_SuccessTitle" xml:space="preserve">
-    <value>Completed</value>
+    <value>작업 완료</value>
   </data>
   <data name="HutaoSync_FailedTitle" xml:space="preserve">
-    <value>Failed</value>
+    <value>작업 실패</value>
   </data>
   <data name="HutaoSync_HintTitle" xml:space="preserve">
-    <value>Notice</value>
+    <value>안내</value>
   </data>
   <data name="HutaoSync_MsgVerifySent" xml:space="preserve">
-    <value>Verification code sent. Please check your inbox.</value>
+    <value>인증 코드가 이메일로 전송되었습니다. 메일함을 확인해 주세요.</value>
   </data>
   <data name="HutaoSync_MsgLoginSuccess" xml:space="preserve">
-    <value>Signed in to Hutao Cloud</value>
+    <value>호두 클라우드 계정에 로그인했습니다</value>
   </data>
   <data name="HutaoSync_MsgRegisterSuccess" xml:space="preserve">
-    <value>Registered and signed in to Hutao Cloud</value>
+    <value>호두 클라우드에 가입 및 로그인했습니다</value>
   </data>
   <data name="HutaoSync_MsgResetSuccess" xml:space="preserve">
-    <value>Password reset and signed in to Hutao Cloud</value>
+    <value>비밀번호를 재설정하고 다시 로그인했습니다</value>
   </data>
   <data name="HutaoSync_MsgLogoutSuccess" xml:space="preserve">
-    <value>Signed out of Hutao Cloud</value>
+    <value>호두 클라우드 계정에서 로그아웃했습니다</value>
   </data>
   <data name="HutaoSync_MsgAccountRefreshed" xml:space="preserve">
-    <value>Hutao Cloud account status updated</value>
+    <value>호두 클라우드 계정 상태를 업데이트했습니다</value>
   </data>
   <data name="HutaoSync_MsgEntriesLoadedFormat" xml:space="preserve">
-    <value>Loaded wish history for {0} character(s) on Hutao Cloud</value>
+    <value>호두 클라우드에서 캐릭터 {0}명의 기원 기록을 불러왔습니다</value>
   </data>
   <data name="HutaoSync_MsgFufuUigfLoadedFormat" xml:space="preserve">
     <value>FufuLauncher 클라우드 아카이브에서 캐릭터 {0}명의 기원 기록을 불러왔습니다</value>
@@ -10400,73 +10404,73 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>FufuLauncher 클라우드 아카이브에서 나선/환상극 기록 {0}건을 불러왔습니다</value>
   </data>
   <data name="HutaoSync_MsgDeleteUidSuccessFormat" xml:space="preserve">
-    <value>Deleted {1} wish records for UID {0} from Hutao Cloud</value>
+    <value>호두 클라우드에서 UID {0}의 기원 기록 {1}건을 삭제했습니다</value>
   </data>
   <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
-    <value>캐릭터 {0}명의 기원 {1}건을 FufuLauncher 클라우드 아카이브 '{2}'에 저장했습니다(총 {3}건). '클라우드 아카이브' 페이지에서 내보낼 수 있습니다</value>
+    <value>캐릭터 {0}명의 기원 기록 {1}건을 FufuLauncher 클라우드 아카이브 '{2}'에 저장했습니다(총 {3}건). '클라우드 아카이브' 페이지에서 내보내거나 가져올 수 있습니다.</value>
   </data>
   <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
-    <value>Uploaded {1} new wish records for {0} character(s) to Hutao Cloud</value>
+    <value>캐릭터 {0}명의 신규 기원 기록 {1}건을 호두 클라우드에 업로드했습니다</value>
   </data>
   <data name="HutaoSync_MsgPushGachaUpToDate" xml:space="preserve">
-    <value>Hutao Cloud already has all latest wish records from this archive</value>
+    <value>호두 클라우드에 이미 이 아카이브의 최신 기원 기록이 모두 포함되어 있습니다</value>
   </data>
   <data name="HutaoSync_MsgChallengeNothingUploaded" xml:space="preserve">
-    <value>No eligible current-period challenge records to upload</value>
+    <value>업로드할 수 있는 이번 회차 도전 기록이 없습니다</value>
   </data>
   <data name="HutaoSync_ErrEnterEmail" xml:space="preserve">
-    <value>Please enter your Hutao account email first</value>
+    <value>먼저 호두 계정 이메일을 입력해 주세요</value>
   </data>
   <data name="HutaoSync_ErrEnterAccountPassword" xml:space="preserve">
-    <value>Please enter your Hutao email and password</value>
+    <value>호두 계정 이메일과 비밀번호를 입력해 주세요</value>
   </data>
   <data name="HutaoSync_ErrEnterCompleteAuth" xml:space="preserve">
-    <value>Please fill in your email, password, and verification code</value>
+    <value>이메일, 비밀번호, 인증 코드를 모두 입력해 주세요</value>
   </data>
   <data name="HutaoSync_ErrPasswordMismatch" xml:space="preserve">
-    <value>The two passwords do not match</value>
+    <value>입력한 두 비밀번호가 일치하지 않습니다</value>
   </data>
   <data name="HutaoSync_ErrRateLimited" xml:space="preserve">
-    <value>Requests are too frequent. Please wait a moment before trying again.</value>
+    <value>요청이나 인증 코드 발송이 너무 빈번합니다. 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrAuthExpired" xml:space="preserve">
-    <value>Your Hutao Cloud session has expired. Please sign in again.</value>
+    <value>호두 클라우드 로그인 세션이 만료되었습니다. 다시 로그인해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrNoGachaService" xml:space="preserve">
-    <value>Your Hutao Cloud wish backup service is not active or has expired</value>
+    <value>호두 클라우드 기원 백업 서비스가 활성화되지 않았거나 만료되었습니다</value>
   </data>
   <data name="HutaoSync_ErrUidLimit" xml:space="preserve">
-    <value>Your Hutao Cloud account has reached the maximum of 5 saved characters. Please delete an unused UID first.</value>
+    <value>이 호두 클라우드 계정에 저장할 수 있는 캐릭터 수(최대 5명)에 도달했습니다. 사용하지 않는 UID를 먼저 삭제한 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrInvalidVerifyCode" xml:space="preserve">
-    <value>The verification code is invalid or expired</value>
+    <value>이메일 인증 코드가 올바르지 않거나 만료되었습니다</value>
   </data>
   <data name="HutaoSync_ErrAccountExists" xml:space="preserve">
-    <value>This email is already registered on Hutao Cloud. Please sign in directly.</value>
+    <value>이미 호두 클라우드에 등록된 이메일입니다. 바로 로그인해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrInvalidCredentials" xml:space="preserve">
-    <value>Incorrect email or password. Please verify and try again.</value>
+    <value>이메일 또는 비밀번호가 올바르지 않습니다. 확인 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrNotCurrentPeriod" xml:space="preserve">
-    <value>Hutao Cloud only accepts current-period Spiral Abyss and Imaginarium Theater records</value>
+    <value>호두 클라우드는 이번 회차 나선 비경 및 현실 속 환상극 기록만 업로드할 수 있습니다</value>
   </data>
   <data name="HutaoSync_ErrNetwork" xml:space="preserve">
-    <value>Unable to reach Hutao Cloud. Please check your network connection.</value>
+    <value>호두 클라우드 서비스에 연결할 수 없습니다. 네트워크 연결을 확인한 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrTimeout" xml:space="preserve">
-    <value>Connection to Hutao Cloud timed out. Please try again.</value>
+    <value>호두 클라우드 연결 시간이 초과되었습니다. 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrGeneric" xml:space="preserve">
-    <value>Unable to complete the Hutao Cloud operation. Please try again later.</value>
+    <value>호두 클라우드 작업을 완료하지 못했습니다. 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrHutaoLoginRequired" xml:space="preserve">
-    <value>Please sign in to your Hutao Cloud account first</value>
+    <value>먼저 호두 클라우드 계정에 로그인해 주세요</value>
   </data>
   <data name="HutaoSync_ErrFufuLoginRequired" xml:space="preserve">
-    <value>Please sign in to your FufuLauncher Cloud Sync account under Account &amp; Security first</value>
+    <value>먼저 '계정 및 보안'에서 FufuLauncher 클라우드 계정에 로그인해 주세요</value>
   </data>
   <data name="HutaoSync_ErrSelectUidFirst" xml:space="preserve">
-    <value>Please select at least one character UID</value>
+    <value>최소 한 개의 캐릭터 UID를 선택해 주세요</value>
   </data>
   <data name="HutaoSync_ErrSelectFufuArchive" xml:space="preserve">
     <value>먼저 FufuLauncher 클라우드 아카이브를 선택해 주세요</value>
@@ -10475,268 +10479,268 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>선택한 FufuLauncher 클라우드 아카이브에서 유효한 기록을 찾지 못했습니다</value>
   </data>
   <data name="HutaoSync_ErrNoHutaoGachaData" xml:space="preserve">
-    <value>No downloadable wish history found on Hutao Cloud</value>
+    <value>호두 클라우드에서 다운로드할 수 있는 기원 기록을 찾지 못했습니다</value>
   </data>
   <data name="HutaoSync_ErrNoSupportedChallengeRecords" xml:space="preserve">
     <value>선택한 FufuLauncher 도전 클라우드 아카이브에 나선 비경 또는 환상극 기록이 없습니다</value>
   </data>
   <data name="HutaoSync_ErrSelectChallengeFirst" xml:space="preserve">
-    <value>Please select at least one challenge record to upload</value>
+    <value>업로드할 도전 기록을 최소 한 건 선택해 주세요</value>
   </data>
   <data name="CloudSync_UiafTargetCurrentDefault" xml:space="preserve">
-    <value>Currently Active Achievement Profile</value>
+    <value>현재 사용 중인 업적 프로필</value>
   </data>
   <data name="CloudSync_UiafTargetCurrentNamedFormat" xml:space="preserve">
-    <value>Currently Active Profile ({0})</value>
+    <value>현재 사용 중인 업적 프로필 ({0})</value>
   </data>
   <data name="CloudSync_UiafTargetNamedFormat" xml:space="preserve">
-    <value>Local Backup Profile: {0}</value>
+    <value>로컬 백업 프로필: {0}</value>
   </data>
   <data name="CloudSync_UiafTargetNewProfile" xml:space="preserve">
-    <value>Create New Local Achievement Profile...</value>
+    <value>새 독립 로컬 업적 프로필 만들기...</value>
   </data>
   <data name="CloudSync_UiafDefaultProfileName" xml:space="preserve">
-    <value>Default Profile</value>
+    <value>기본 프로필</value>
   </data>
   <data name="CloudSync_UiafNewProfileEmptyErr" xml:space="preserve">
-    <value>Please enter a name for the new achievement profile</value>
+    <value>새 업적 프로필 이름을 입력해 주세요</value>
   </data>
   <data name="CloudSync_UiafNewProfileExistsErr" xml:space="preserve">
-    <value>An achievement profile with this name already exists</value>
+    <value>같은 이름의 업적 프로필이 이미 존재합니다. 다른 이름을 입력해 주세요.</value>
   </data>
   <data name="CloudSync_UiafMergeFailed" xml:space="preserve">
-    <value>Failed to import achievement archive. Please check the archive data.</value>
+    <value>업적 아카이브를 가져오지 못했습니다. 아카이브 데이터가 올바른지 확인해 주세요.</value>
   </data>
   <data name="CloudSync_UiafImportDialogTitle" xml:space="preserve">
-    <value>Import Achievement Archive to Software</value>
+    <value>업적 아카이브를 프로그램으로 가져오기</value>
   </data>
   <data name="CloudSync_UiafImportSummaryFormat" xml:space="preserve">
-    <value>This cloud archive contains {0} achievement records ({1} completed). Choose which local achievement profile to import into:</value>
+    <value>이 클라우드 업적 아카이브에는 {0}개의 업적 기록({1}개 완료)이 포함되어 있습니다. 가져올 로컬 업적 프로필을 선택하세요:</value>
   </data>
   <data name="CloudSync_UiafTargetHeader" xml:space="preserve">
-    <value>Target Profile</value>
+    <value>대상 프로필</value>
   </data>
   <data name="CloudSync_UiafNewProfileHeader" xml:space="preserve">
-    <value>New Profile Name</value>
+    <value>새 프로필 이름</value>
   </data>
   <data name="CloudSync_UiafNewProfilePlaceholder" xml:space="preserve">
-    <value>Enter new local profile name</value>
+    <value>새 로컬 업적 프로필 이름 입력</value>
   </data>
   <data name="CloudSync_UiafImportTip" xml:space="preserve">
-    <value>Merging keeps higher progress and completed achievements without overwriting existing completions.</value>
+    <value>가져올 때 대상 프로필과 자동으로 병합되며, 더 높은 진행도와 완료된 업적만 유지하고 기존 완료 기록은 덮어쓰지 않습니다.</value>
   </data>
   <data name="CloudSync_UiafMergeSuccessTitle" xml:space="preserve">
-    <value>Achievements Imported</value>
+    <value>업적 가져오기 완료</value>
   </data>
   <data name="CloudSync_UiafMergeSuccessFormat" xml:space="preserve">
-    <value>Imported cloud archive '{0}' into local profile '{1}' and updated {2} achievement(s).</value>
+    <value>클라우드 아카이브 '{0}'을(를) 로컬 프로필 '{1}'(으)로 가져와 {2}개의 업적 진행도를 업데이트했습니다.</value>
   </data>
   <data name="CloudSync_UiafMergeFailedTitle" xml:space="preserve">
-    <value>Achievement Import Failed</value>
+    <value>업적 가져오기 실패</value>
   </data>
   <data name="CloudSync_UigfImportDialogTitle" xml:space="preserve">
-    <value>Import Wish Archive to Software</value>
+    <value>기원 아카이브를 프로그램으로 가져오기</value>
   </data>
   <data name="CloudSync_UigfImportSummary" xml:space="preserve">
-    <value>Select the character UIDs to import into your local Wish History:</value>
+    <value>로컬 기원 분석 라이브러리로 가져올 캐릭터 UID를 선택하세요:</value>
   </data>
   <data name="CloudSync_UigfImportTip" xml:space="preserve">
-    <value>Records will be merged cleanly by ID without losing your existing local wish history.</value>
+    <value>기록 ID를 기준으로 중복을 제거하며 안전하게 병합하므로 기존 로컬 기원 기록이 손실되지 않습니다.</value>
   </data>
   <data name="CloudSync_UigfMergeSuccessTitle" xml:space="preserve">
-    <value>Wish History Imported</value>
+    <value>기원 기록 가져오기 완료</value>
   </data>
   <data name="CloudSync_UigfMergeSuccessFormat" xml:space="preserve">
-    <value>Merged {1} character(s) ({2} records processed, active UID {3}) from archive '{0}' into local Wish History.</value>
+    <value>클라우드 아카이브 '{0}'에서 캐릭터 {1}명(총 {2}건, 활성 UID {3})의 기록을 로컬 기원 분석 라이브러리로 병합했습니다.</value>
   </data>
   <data name="CloudSync_UigfMergeFailedTitle" xml:space="preserve">
-    <value>Wish History Import Failed</value>
+    <value>기원 기록 가져오기 실패</value>
   </data>
   <data name="CloudSync_ImportConfirmBtn" xml:space="preserve">
-    <value>Import</value>
+    <value>가져오기</value>
   </data>
   <data name="CloudSync_AccountHutaoTitle" xml:space="preserve">
-    <value>Hutao Cloud Account</value>
+    <value>호두 클라우드 계정</value>
   </data>
   <data name="CloudSync_AccountHutaoDesc" xml:space="preserve">
-    <value>Sign in and manage your Hutao Cloud account here. Saving to or uploading from cloud archives still requires signing in to and unlocking your FufuLauncher Cloud Sync account.</value>
+    <value>여기서 호두 클라우드 계정을 로그인하고 관리할 수 있습니다. 클라우드 아카이브에 저장하거나 업로드하려면 FufuLauncher 클라우드 계정의 로그인 및 잠금 해제가 필요합니다.</value>
   </data>
   <data name="CloudSync_AccountHutaoSignedOut" xml:space="preserve">
-    <value>Not signed in to Hutao Cloud</value>
+    <value>호두 클라우드에 로그인되지 않음</value>
   </data>
   <data name="CloudSync_AccountHutaoSignedInFormat" xml:space="preserve">
-    <value>Signed in as: {0}</value>
+    <value>로그인됨: {0}</value>
   </data>
   <data name="CloudSync_AccountHutaoSignInBtn" xml:space="preserve">
-    <value>Sign In</value>
+    <value>로그인</value>
   </data>
   <data name="CloudSync_AccountHutaoManageBtn" xml:space="preserve">
-    <value>Manage</value>
+    <value>관리</value>
   </data>
   <data name="HutaoSync_SubTabAccount" xml:space="preserve">
-    <value>Hutao Account</value>
+    <value>호두 계정</value>
   </data>
   <data name="HutaoSync_SubTabPullWish" xml:space="preserve">
-    <value>Download Wishes</value>
+    <value>기원 받기</value>
   </data>
   <data name="HutaoSync_SubTabPushWish" xml:space="preserve">
-    <value>Upload Wishes</value>
+    <value>기원 업로드</value>
   </data>
   <data name="HutaoSync_SubTabChallenge" xml:space="preserve">
-    <value>Upload Abyss &amp; Theater</value>
+    <value>나선 및 환상극 업로드</value>
   </data>
   <data name="HutaoSync_OpenSponsorPageBtn" xml:space="preserve">
-    <value>Open Hutao Sponsor Page</value>
+    <value>호두 클라우드 후원 페이지 열기</value>
   </data>
   <data name="HutaoSync_ConfirmRevokeDeviceMsgFormat" xml:space="preserve">
-    <value>Sign out device '{0}' from Hutao Cloud? If this is your current device, you will need to sign in again.</value>
+    <value>기기 '{0}'을(를) 호두 클라우드에서 로그아웃하시겠습니까? 현재 기기인 경우 다시 로그인해야 합니다.</value>
   </data>
   <data name="HutaoSync_RedeemDesc" xml:space="preserve">
-    <value>Enter an official Hutao Cloud sponsor redemption code to activate or extend service duration for your signed-in Hutao account.</value>
+    <value>호두 클라우드 공식 후원 리딤 코드를 입력하여 현재 로그인된 호두 계정의 서비스 이용 기간을 활성화하거나 연장할 수 있습니다.</value>
   </data>
   <data name="HutaoSync_RedeemTitle" xml:space="preserve">
-    <value>Redeem Code</value>
+    <value>코드 교환</value>
   </data>
   <data name="HutaoSync_RoleDeveloper" xml:space="preserve">
-    <value>Licensed Developer</value>
+    <value>인증 개발자</value>
   </data>
   <data name="HutaoSync_ConfirmRevokeAllDevicesTitle" xml:space="preserve">
-    <value>Sign Out All Devices</value>
+    <value>모든 기기 로그아웃</value>
   </data>
   <data name="HutaoSync_LabelAccelPlan" xml:space="preserve">
-    <value>Download Acceleration</value>
+    <value>리소스 다운로드 가속 서비스</value>
   </data>
   <data name="HutaoSync_NoBoundRolesHint" xml:space="preserve">
-    <value>No bound game roles found on current accounts; showing all UIDs from archives and Hutao Cloud</value>
+    <value>현재 로그인된 계정에 연동된 캐릭터가 없어 아카이브 및 호두 클라우드의 모든 UID를 표시합니다</value>
   </data>
   <data name="HutaoSync_LabelNormalizedAccount" xml:space="preserve">
-    <value>Normalized Username</value>
+    <value>정규화된 사용자 이름</value>
   </data>
   <data name="HutaoSync_DevicesDesc" xml:space="preserve">
-    <value>View devices signed in to your Hutao Cloud account and sign out individual devices or all devices remotely.</value>
+    <value>호두 클라우드 계정에 로그인된 기기 상태를 확인하고, 특정 기기 또는 모든 기기를 원격으로 로그아웃할 수 있습니다.</value>
   </data>
   <data name="HutaoSync_SponsorFreeTipDesc" xml:space="preserve">
-    <value>Submitting your current-period Spiral Abyss or Imaginarium Theater records under Upload Abyss &amp; Theater grants or extends free wish cloud backup time.</value>
+    <value>'나선 및 환상극 업로드'에서 이번 회차 나선 비경 또는 현실 속 환상극 기록을 제출하면 호두 클라우드 기원 백업 이용 기간을 무료로 받거나 연장할 수 있습니다.</value>
   </data>
   <data name="HutaoSync_ActiveRoleSuffix" xml:space="preserve">
-    <value>Active</value>
+    <value>현재 활성</value>
   </data>
   <data name="HutaoSync_SponsorSignInHint" xml:space="preserve">
-    <value>Please sign in to your Hutao Cloud account under Hutao Account before redeeming a code.</value>
+    <value>리딤 코드를 사용하기 전에 먼저 '호두 계정'에서 호두 클라우드 계정에 로그인해 주세요.</value>
   </data>
   <data name="HutaoSync_GameRoleHeader" xml:space="preserve">
-    <value>Game Role</value>
+    <value>게임 캐릭터</value>
   </data>
   <data name="HutaoSync_DevicesTitle" xml:space="preserve">
-    <value>Signed-In Devices</value>
+    <value>로그인된 기기 관리</value>
   </data>
   <data name="HutaoSync_MsgDeviceRevoked" xml:space="preserve">
-    <value>Selected device has been signed out</value>
+    <value>선택한 기기를 로그아웃했습니다</value>
   </data>
   <data name="HutaoSync_SponsorGotoLoginBtn" xml:space="preserve">
-    <value>Sign In to Hutao Account</value>
+    <value>호두 계정 로그인하러 가기</value>
   </data>
   <data name="HutaoSync_RefreshDevicesBtn" xml:space="preserve">
-    <value>Refresh Devices</value>
+    <value>기기 목록 새로고침</value>
   </data>
   <data name="HutaoSync_MsgRolesRefreshedFormat" xml:space="preserve">
-    <value>Updated bound roles list ({0} role(s))</value>
+    <value>연동된 캐릭터 목록을 새로고침했습니다 (총 {0}명)</value>
   </data>
   <data name="HutaoSync_DeviceLoginTimeFormat" xml:space="preserve">
-    <value>Last sign-in: {0}</value>
+    <value>최근 로그인: {0}</value>
   </data>
   <data name="HutaoSync_AllRolesOption" xml:space="preserve">
-    <value>All Bound Roles (Show All)</value>
+    <value>연동된 모든 캐릭터 (전체 표시)</value>
   </data>
   <data name="HutaoSync_RedeemPlaceholder" xml:space="preserve">
-    <value>Enter Hutao Cloud redemption code</value>
+    <value>호두 클라우드 리딤 코드 입력</value>
   </data>
   <data name="HutaoSync_PushGachaFilteredEmptyHintFormat" xml:space="preserve">
-    <value>No wish records found for UID {0} in this archive. Switch archives or select All Bound Roles.</value>
+    <value>이 아카이브에 UID {0}의 기원 기록이 없습니다. 다른 아카이브로 전환하거나 '연동된 모든 캐릭터'를 선택해 주세요.</value>
   </data>
   <data name="HutaoSync_DeviceIdFormat" xml:space="preserve">
-    <value>ID: {0}</value>
+    <value>식별자: {0}</value>
   </data>
   <data name="HutaoSync_ConfirmRevokeDeviceTitle" xml:space="preserve">
-    <value>Confirm Device Sign-Out</value>
+    <value>기기 로그아웃 확인</value>
   </data>
   <data name="HutaoSync_RoleMaintainer" xml:space="preserve">
-    <value>Maintainer</value>
+    <value>유지 관리자</value>
   </data>
   <data name="HutaoSync_DeviceCurrentBadge" xml:space="preserve">
-    <value>Current Device</value>
+    <value>현재 기기</value>
   </data>
   <data name="HutaoSync_RoleStandard" xml:space="preserve">
-    <value>Standard User</value>
+    <value>일반 사용자</value>
   </data>
   <data name="HutaoSync_SubTabSponsor" xml:space="preserve">
-    <value>Sponsor &amp; Support</value>
+    <value>후원 및 지원</value>
   </data>
   <data name="HutaoSync_MsgRedeemDetailFormat" xml:space="preserve">
-    <value>Code redeemed ({0}). Account service validity has been updated.</value>
+    <value>리딤 코드 적용 완료 ({0}). 계정 서비스 유효 기간이 업데이트되었습니다.</value>
   </data>
   <data name="HutaoSync_SponsorEntryDesc" xml:space="preserve">
-    <value>Visit the official Hutao Cloud Afdian sponsor page to support server operations and obtain redemption codes for wish cloud backup or download acceleration services.</value>
+    <value>호두 클라우드 공식 아이파디엔(Afdian) 후원 페이지를 방문하여 서버 운영을 지원하고 기원 클라우드 백업 또는 리소스 가속 서비스 리딤 코드를 받을 수 있습니다.</value>
   </data>
   <data name="HutaoSync_ErrRedeemEmpty" xml:space="preserve">
-    <value>Please enter a redemption code first</value>
+    <value>먼저 리딤 코드를 입력해 주세요</value>
   </data>
   <data name="HutaoSync_RevokeAllDevicesBtn" xml:space="preserve">
-    <value>Sign Out All Devices</value>
+    <value>모든 기기 로그아웃</value>
   </data>
   <data name="HutaoSync_DeviceUnknownName" xml:space="preserve">
-    <value>Unknown Device</value>
+    <value>알 수 없는 기기</value>
   </data>
   <data name="HutaoSync_MsgRedeemSuccess" xml:space="preserve">
-    <value>Code redeemed successfully. Account service validity has been updated.</value>
+    <value>리딤 코드가 적용되었습니다. 계정 서비스 유효 기간이 업데이트되었습니다.</value>
   </data>
   <data name="HutaoSync_ChallengeFilteredEmptyHintFormat" xml:space="preserve">
-    <value>No Abyss or Theater records found for UID {0} in this archive. Switch archives or select All Bound Roles.</value>
+    <value>이 아카이브에 UID {0}의 나선 또는 환상극 기록이 없습니다. 다른 아카이브로 전환하거나 '연동된 모든 캐릭터'를 선택해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrDeviceInvalid" xml:space="preserve">
-    <value>Unable to identify the target device</value>
+    <value>대상 기기 식별자를 확인할 수 없습니다</value>
   </data>
   <data name="HutaoSync_ConfirmRevokeAllDevicesMsg" xml:space="preserve">
-    <value>Sign out your Hutao Cloud account on all devices, including this one? You will need to sign in again.</value>
+    <value>현재 기기를 포함한 모든 기기에서 호두 클라우드 계정을 로그아웃하시겠습니까? 이후 다시 로그인해야 합니다.</value>
   </data>
   <data name="HutaoSync_DevicesEmptyHint" xml:space="preserve">
-    <value>No signed-in devices listed. Click Refresh Devices to load the latest list.</value>
+    <value>로그인된 기기 기록이 없습니다. '기기 목록 새로고침'을 눌러 최신 목록을 불러오세요.</value>
   </data>
   <data name="HutaoSync_SponsorEntryTitle" xml:space="preserve">
-    <value>Sponsor Hutao Cloud</value>
+    <value>호두 클라우드 후원</value>
   </data>
   <data name="HutaoSync_MsgAllDevicesRevoked" xml:space="preserve">
-    <value>All devices have been signed out. Please sign in to Hutao Cloud again.</value>
+    <value>모든 기기의 로그인 상태를 해제했습니다. 호두 계정에 다시 로그인해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrRedeemInvalid" xml:space="preserve">
-    <value>The redemption code is invalid, expired, or has already been used</value>
+    <value>리딤 코드가 잘못되었거나 만료되었거나 이미 사용되었습니다. 확인 후 다시 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_LabelCurrentDevice" xml:space="preserve">
-    <value>Current Device ID</value>
+    <value>현재 기기 식별자</value>
   </data>
   <data name="HutaoSync_SponsorStatusTitle" xml:space="preserve">
-    <value>Hutao Cloud Service Status</value>
+    <value>호두 클라우드 서비스 유효 기간</value>
   </data>
   <data name="HutaoSync_RevokeDeviceBtn" xml:space="preserve">
-    <value>Sign Out</value>
+    <value>로그아웃</value>
   </data>
   <data name="HutaoSync_RedeemBtn" xml:space="preserve">
-    <value>Redeem</value>
+    <value>교환하기</value>
   </data>
   <data name="HutaoSync_SponsorFreeTipTitle" xml:space="preserve">
-    <value>Earn Free Wish Backup Time</value>
+    <value>무료 기원 백업 기간 받기</value>
   </data>
   <data name="HutaoSync_RefreshRolesTooltip" xml:space="preserve">
-    <value>Refresh bound game roles</value>
+    <value>연동된 게임 캐릭터 목록 새로고침</value>
   </data>
   <data name="HutaoSync_PullFilteredEmptyHintFormat" xml:space="preserve">
-    <value>No wish history found on Hutao Cloud for UID {0}</value>
+    <value>호두 클라우드에 UID {0}의 기원 기록이 없습니다</value>
   </data>
   <data name="HutaoSync_AccelPlanExpired" xml:space="preserve">
-    <value>Not active or expired</value>
+    <value>미이용 또는 만료됨</value>
   </data>
   <data name="HutaoSync_LabelRoleIdentity" xml:space="preserve">
-    <value>Account Role</value>
+    <value>계정 등급</value>
   </data>
   <data name="HutaoSync_StatsCatUtil" xml:space="preserve">
     <value>나선 사용률</value>
@@ -10895,10 +10899,10 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
     <value>{0}회차 · {1}건</value>
   </data>
   <data name="HutaoSync_ErrMiHoYoLoginExpired" xml:space="preserve">
-    <value>미요버스 / HoYoLAB 계정 로그인 상태가 만료되었습니다. 「계정 관리」에서 다시 로그인한 후 시도해 주세요</value>
+    <value>Miyoushe / HoYoLAB 계정 로그인 상태가 만료되었습니다. 「계정 관리」에서 다시 로그인한 후 시도해 주세요.</value>
   </data>
   <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
-    <value>Hutao 클라우드에서 오류 상태({0})를 반환했습니다. 잠시 후 다시 시도해 주세요</value>
+    <value>호두 클라우드에서 오류 상태({0})를 반환했습니다. 잠시 후 다시 시도해 주세요.</value>
   </data>
   <data name="NavCloudStorage" xml:space="preserve">
     <value>클라우드 저장소</value>
@@ -10970,5 +10974,2414 @@ Bilibili 서버 지원, 미호요 커뮤니티 로그인 불필요</value>
   </data>
   <data name="DevAuth_SubmitSuccess" xml:space="preserve">
     <value>심사 신청이 제출되었습니다. 잠시 기다려 주세요.</value>
+  </data>
+  <data name="AccountStorage_UnavailableTitle" xml:space="preserve">
+    <value>계정 데이터에 접근할 수 없음</value>
+  </data>
+  <data name="AccountStorage_UnavailableMessage" xml:space="preserve">
+    <value>계정 데이터에 접근할 수 없습니다: {0}. 런처는 계속 실행되지만 로컬 계정이 표시되지 않을 수 있습니다. 해당 디렉터리의 접근 권한을 확인하거나 '설정 - 저장 경로'에서 데이터 디렉터리를 변경한 후 다시 시작해 주세요.</value>
+  </data>
+  <data name="SectionQuickFps" xml:space="preserve">
+    <value>빠른 FPS 모드</value>
+  </data>
+  <data name="QuickFpsEnableTitle" xml:space="preserve">
+    <value>빠른 FPS 모드 사용</value>
+  </data>
+  <data name="QuickFpsEnableCaption" xml:space="preserve">
+    <value>단축키로 게임 내에서 메인 플러그인의 목표 프레임 레이트를 전환합니다.</value>
+  </data>
+  <data name="QuickFpsGameOnlyTitle" xml:space="preserve">
+    <value>게임 실행 중에만 키 입력 감지</value>
+  </data>
+  <data name="QuickFpsGameOnlyCaption" xml:space="preserve">
+    <value>게임이 실행 중일 때만 단축키에 반응합니다. 끄면 런처가 실행되는 동안 항상 단축키에 반응합니다.</value>
+  </data>
+  <data name="QuickFpsActionsTitle" xml:space="preserve">
+    <value>단축키 동작</value>
+  </data>
+  <data name="QuickFpsActionsCaption" xml:space="preserve">
+    <value>원하는 동작 한 가지만 남겨 둘 수 있습니다</value>
+  </data>
+  <data name="QuickFpsSwitchLabel" xml:space="preserve">
+    <value>프리셋 전환</value>
+  </data>
+  <data name="QuickFpsAdjustLabel" xml:space="preserve">
+    <value>FPS 증감</value>
+  </data>
+  <data name="QuickFpsAdjustTitle" xml:space="preserve">
+    <value>증감 폭 및 단축키</value>
+  </data>
+  <data name="QuickFpsAdjustCaption" xml:space="preserve">
+    <value>증감 후 목표 프레임 레이트는 60 미만으로 내려가지 않습니다</value>
+  </data>
+  <data name="QuickFpsStep" xml:space="preserve">
+    <value>증감 폭</value>
+  </data>
+  <data name="QuickFpsIncreaseKey" xml:space="preserve">
+    <value>프레임 증가 키</value>
+  </data>
+  <data name="QuickFpsDecreaseKey" xml:space="preserve">
+    <value>프레임 감소 키</value>
+  </data>
+  <data name="QuickFpsSlotsTitle" xml:space="preserve">
+    <value>프리셋 슬롯</value>
+  </data>
+  <data name="QuickFpsSlotsCaption" xml:space="preserve">
+    <value>최대 5개 슬롯을 지원하며, 프리셋 FPS는 60 미만으로 설정할 수 있습니다</value>
+  </data>
+  <data name="QuickFpsSlotFormat" xml:space="preserve">
+    <value>슬롯 {0}</value>
+  </data>
+  <data name="QuickFpsFps" xml:space="preserve">
+    <value>프레임 수</value>
+  </data>
+  <data name="QuickFpsKey" xml:space="preserve">
+    <value>단축키</value>
+  </data>
+  <data name="QuickFpsHint" xml:space="preserve">
+    <value>프리셋 FPS는 60 미만일 수 있지만, 단축키로 증감한 목표 FPS는 60 미만으로 내려가지 않습니다.</value>
+  </data>
+  <data name="QuickFpsUnbound" xml:space="preserve">
+    <value>할당 안 됨</value>
+  </data>
+  <data name="AutoThemeColorTitle" xml:space="preserve">
+    <value>배경에서 테마 색상 자동 추출</value>
+  </data>
+  <data name="AutoThemeColorCaption" xml:space="preserve">
+    <value>배경 이미지에서 테마 색상을 자동으로 추출합니다.</value>
+  </data>
+  <data name="Settings_TemporaryDevAuth_Title" xml:space="preserve">
+    <value>임시 개발자 인증</value>
+  </data>
+  <data name="Settings_TemporaryDevAuth_Caption" xml:space="preserve">
+    <value>이번 실행 동안 기본적으로 개발자 인증을 보유하고 검증을 건너뛰며, 재시작 시 자동으로 해제됩니다</value>
+  </data>
+  <data name="Fps_Repair_Cancelled" xml:space="preserve">
+    <value>FPS 플러그인 복구가 취소되었습니다.</value>
+  </data>
+  <data name="Fps_Repair_Fetching" xml:space="preserve">
+    <value>플러그인 스토어에서 FPS 플러그인을 가져오는 중...</value>
+  </data>
+  <data name="Fps_Repair_StoreUnavailable" xml:space="preserve">
+    <value>플러그인 스토어에서 FPS 플러그인을 찾을 수 없습니다. 잠시 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetTitle" xml:space="preserve">
+    <value>사전 다운로드 대상 서버</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetCaption" xml:space="preserve">
+    <value>사전 다운로드 및 병합에 사용할 서버를 지정합니다 (개발자용)</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetAuto" xml:space="preserve">
+    <value>자동</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetOversea" xml:space="preserve">
+    <value>글로벌 서버</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetChinese" xml:space="preserve">
+    <value>중국 서버</value>
+  </data>
+  <data name="GameUpdate_ScanChunks" xml:space="preserve">
+    <value>다운로드된 청크를 검증하는 중...</value>
+  </data>
+  <data name="GameUpdate_ReuseCachedChunks" xml:space="preserve">
+    <value>검증된 청크 {0}개({1})를 재사용했으며, {2}개({3})를 추가로 다운로드해야 합니다.</value>
+  </data>
+  <data name="GameUpdate_LocalManifestUnavailable" xml:space="preserve">
+    <value>이전 버전 매니페스트를 사용할 수 없어 대상 버전을 기준으로 로컬 파일을 검증합니다: {0}</value>
+  </data>
+  <data name="GameUpdate_RepairFailed" xml:space="preserve">
+    <value>복구 후에도 {0}개의 파일이 검증을 통과하지 못했습니다. 게임 버전은 변경되지 않았으며 재시도를 위해 다운로드 데이터를 유지했습니다.</value>
+  </data>
+  <data name="PluginStoreArchivePasswordTitle" xml:space="preserve">
+    <value>압축 파일 비밀번호</value>
+  </data>
+  <data name="PluginStoreArchivePasswordPlaceholder" xml:space="preserve">
+    <value>압축 파일 비밀번호 입력</value>
+  </data>
+  <data name="PluginStoreArchivePasswordPrompt" xml:space="preserve">
+    <value>“{0}”의 압축을 풀려면 비밀번호가 필요합니다.</value>
+  </data>
+  <data name="PluginStoreArchivePasswordRetry" xml:space="preserve">
+    <value>“{0}”의 비밀번호가 올바르지 않거나 압축 파일이 손상되었습니다. 비밀번호를 다시 입력하여 압축 해제를 재시도해 주세요.</value>
+  </data>
+  <data name="PluginStoreArchivePasswordExtract" xml:space="preserve">
+    <value>압축 해제</value>
+  </data>
+  <data name="PluginStoreArchivePasswordCancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="PluginStoreArchivePasswordUnavailable" xml:space="preserve">
+    <value>압축 파일에 비밀번호가 필요하지만 비밀번호 입력 창을 열 수 없습니다.</value>
+  </data>
+  <data name="NavCycleChallenge" xml:space="preserve">
+    <value>주기 도전</value>
+  </data>
+  <data name="CycleChallenge_Title" xml:space="preserve">
+    <value>주기 도전</value>
+  </data>
+  <data name="CycleChallenge_Subtitle" xml:space="preserve">
+    <value>나선 비경 · 현실 속 환상극 · 지맥 제압전</value>
+  </data>
+  <data name="CycleChallenge_Refresh" xml:space="preserve">
+    <value>새로고침</value>
+  </data>
+  <data name="CycleChallenge_RefreshTooltip" xml:space="preserve">
+    <value>현재 회차의 도전 데이터 새로고침</value>
+  </data>
+  <data name="CycleChallenge_DataStatusFresh" xml:space="preserve">
+    <value>데이터 최신 상태</value>
+  </data>
+  <data name="CycleChallenge_DataStatusCached" xml:space="preserve">
+    <value>캐시된 데이터 표시 중</value>
+  </data>
+  <data name="CycleChallenge_DataStatusOffline" xml:space="preserve">
+    <value>오프라인 모드</value>
+  </data>
+  <data name="CycleChallenge_OfflineBanner" xml:space="preserve">
+    <value>현재 오프라인 상태이므로 로컬에 캐시된 데이터를 표시하고 있습니다</value>
+  </data>
+  <data name="CycleChallenge_LoadFailed" xml:space="preserve">
+    <value>데이터를 불러오지 못했습니다</value>
+  </data>
+  <data name="CycleChallenge_Retry" xml:space="preserve">
+    <value>다시 시도</value>
+  </data>
+  <data name="CycleChallenge_NoAccount" xml:space="preserve">
+    <value>Miyoushe 계정에 로그인되어 있지 않습니다</value>
+  </data>
+  <data name="CycleChallenge_GoLogin" xml:space="preserve">
+    <value>로그인하러 가기</value>
+  </data>
+  <data name="CycleChallenge_NoRole" xml:space="preserve">
+    <value>현재 계정에 연동된 사용 가능한 원신 캐릭터가 없습니다</value>
+  </data>
+  <data name="CycleChallenge_RefreshRoles" xml:space="preserve">
+    <value>캐릭터 목록 새로고침</value>
+  </data>
+  <data name="CycleChallenge_NotParticipated" xml:space="preserve">
+    <value>이번 시즌에 참여하지 않음</value>
+  </data>
+  <data name="CycleChallenge_NotUnlocked" xml:space="preserve">
+    <value>아직 이 도전을 해금하지 않았습니다</value>
+  </data>
+  <data name="CycleChallenge_InProgress" xml:space="preserve">
+    <value>진행 중</value>
+  </data>
+  <data name="CycleChallenge_Settled" xml:space="preserve">
+    <value>정산 완료</value>
+  </data>
+  <data name="CycleChallenge_LoginExpired" xml:space="preserve">
+    <value>로그인 세션이 만료되었습니다. 다시 로그인해 주세요</value>
+  </data>
+  <data name="CycleChallenge_RiskControl" xml:space="preserve">
+    <value>위험 관리에 의해 요청이 차단되었습니다. 잠시 후 다시 시도해 주세요</value>
+  </data>
+  <data name="CycleChallenge_RateLimited" xml:space="preserve">
+    <value>요청이 너무 빈번합니다. 잠시 후 다시 시도해 주세요</value>
+  </data>
+  <data name="CycleChallenge_Unsupported" xml:space="preserve">
+    <value>아직 이 도전의 표시를 지원하지 않습니다</value>
+  </data>
+  <data name="CycleChallenge_EmptyHint" xml:space="preserve">
+    <value>이번 회차에는 아직 도전 기록이 없습니다</value>
+  </data>
+  <data name="CycleChallenge_DataSourceNote" xml:space="preserve">
+    <value>출처: Miyoushe 게임 기록 API</value>
+  </data>
+  <data name="CycleChallenge_TabAbyss" xml:space="preserve">
+    <value>나선 비경</value>
+  </data>
+  <data name="CycleChallenge_TabTheater" xml:space="preserve">
+    <value>현실 속 환상극</value>
+  </data>
+  <data name="CycleChallenge_TabStygian" xml:space="preserve">
+    <value>지맥 제압전</value>
+  </data>
+  <data name="CycleChallenge_PeriodLabel" xml:space="preserve">
+    <value>회차</value>
+  </data>
+  <data name="CycleChallenge_PeriodListTitle" xml:space="preserve">
+    <value>도전 회차</value>
+  </data>
+  <data name="CycleChallenge_PeriodListDesc" xml:space="preserve">
+    <value>회차를 선택하여 도전 기록을 확인하세요</value>
+  </data>
+  <data name="CycleChallenge_Upcoming" xml:space="preserve">
+    <value>미개방</value>
+  </data>
+  <data name="CycleChallenge_PeriodCurrent" xml:space="preserve">
+    <value>이번 회차</value>
+  </data>
+  <data name="CycleChallenge_PeriodLast" xml:space="preserve">
+    <value>이전 회차</value>
+  </data>
+  <data name="CycleChallenge_NoCachedPeriod" xml:space="preserve">
+    <value>캐시된 이전 회차 기록이 없습니다</value>
+  </data>
+  <data name="Abyss_TotalStar" xml:space="preserve">
+    <value>획득한 별</value>
+  </data>
+  <data name="Abyss_MaxFloor" xml:space="preserve">
+    <value>최고 도달</value>
+  </data>
+  <data name="Abyss_BattleTimes" xml:space="preserve">
+    <value>전투 횟수</value>
+  </data>
+  <data name="Abyss_WinTimes" xml:space="preserve">
+    <value>승리 횟수</value>
+  </data>
+  <data name="Abyss_StrongestHit" xml:space="preserve">
+    <value>최강 일격</value>
+  </data>
+  <data name="Abyss_UpperHalf" xml:space="preserve">
+    <value>전반</value>
+  </data>
+  <data name="Abyss_LowerHalf" xml:space="preserve">
+    <value>후반</value>
+  </data>
+  <data name="Abyss_Floor" xml:space="preserve">
+    <value>층</value>
+  </data>
+  <data name="Abyss_SkippedFloor" xml:space="preserve">
+    <value>건너뛴 층</value>
+  </data>
+  <data name="Abyss_LeyLineDisorder" xml:space="preserve">
+    <value>지맥 이상</value>
+  </data>
+  <data name="Abyss_RevealRank" xml:space="preserve">
+    <value>출전 횟수</value>
+  </data>
+  <data name="Abyss_DefeatRank" xml:space="preserve">
+    <value>최다 처치</value>
+  </data>
+  <data name="Abyss_DamageRank" xml:space="preserve">
+    <value>최강 일격</value>
+  </data>
+  <data name="Abyss_TakeDamageRank" xml:space="preserve">
+    <value>최대 피격 피해</value>
+  </data>
+  <data name="Abyss_NormalSkillRank" xml:space="preserve">
+    <value>원소전투 스킬</value>
+  </data>
+  <data name="Abyss_EnergySkillRank" xml:space="preserve">
+    <value>원소폭발</value>
+  </data>
+  <data name="Abyss_Times" xml:space="preserve">
+    <value>횟수</value>
+  </data>
+  <data name="Theater_Difficulty" xml:space="preserve">
+    <value>난이도</value>
+  </data>
+  <data name="Theater_MaxRound" xml:space="preserve">
+    <value>최고 기록</value>
+  </data>
+  <data name="Theater_Medals" xml:space="preserve">
+    <value>별 도전 스텔라</value>
+  </data>
+  <data name="Theater_Coins" xml:space="preserve">
+    <value>환상극의 꽃</value>
+  </data>
+  <data name="Theater_AvatarBonus" xml:space="preserve">
+    <value>장외 응원</value>
+  </data>
+  <data name="Theater_Rent" xml:space="preserve">
+    <value>조력 횟수</value>
+  </data>
+  <data name="Theater_Act" xml:space="preserve">
+    <value>막</value>
+  </data>
+  <data name="Theater_BackupAvatars" xml:space="preserve">
+    <value>대기 캐릭터</value>
+  </data>
+  <data name="Theater_Enemies" xml:space="preserve">
+    <value>적</value>
+  </data>
+  <data name="Theater_MaxDefeat" xml:space="preserve">
+    <value>최다 처치</value>
+  </data>
+  <data name="Theater_MaxDamage" xml:space="preserve">
+    <value>최고 피해</value>
+  </data>
+  <data name="Theater_MaxTakeDamage" xml:space="preserve">
+    <value>최대 피격 피해</value>
+  </data>
+  <data name="Theater_ShortestClear" xml:space="preserve">
+    <value>최단 공연</value>
+  </data>
+  <data name="Theater_TotalTime" xml:space="preserve">
+    <value>총 공연 시간</value>
+  </data>
+  <data name="Theater_ShowBattleStats" xml:space="preserve">
+    <value>전투 통계 보기</value>
+  </data>
+  <data name="Stygian_Difficulty" xml:space="preserve">
+    <value>난이도</value>
+  </data>
+  <data name="Stygian_BestTime" xml:space="preserve">
+    <value>최단 기록</value>
+  </data>
+  <data name="Stygian_Solo" xml:space="preserve">
+    <value>솔로 도전</value>
+  </data>
+  <data name="Stygian_Coop" xml:space="preserve">
+    <value>다인 도전</value>
+  </data>
+  <data name="Stygian_Stage" xml:space="preserve">
+    <value>스테이지</value>
+  </data>
+  <data name="Stygian_BestAvatar" xml:space="preserve">
+    <value>최고 활약 캐릭터</value>
+  </data>
+  <data name="Stygian_Team" xml:space="preserve">
+    <value>파티</value>
+  </data>
+  <data name="Stygian_Monster" xml:space="preserve">
+    <value>적</value>
+  </data>
+  <data name="Stygian_Dps" xml:space="preserve">
+    <value>초당 피해량</value>
+  </data>
+  <data name="Stygian_Second" xml:space="preserve">
+    <value>초</value>
+  </data>
+  <data name="Stygian_NoCoopData" xml:space="preserve">
+    <value>다인 도전 데이터가 없습니다</value>
+  </data>
+  <data name="Stygian_ScheduleName" xml:space="preserve">
+    <value>회차</value>
+  </data>
+  <data name="Theater_Difficulty_1" xml:space="preserve">
+    <value>쉬움 모드</value>
+  </data>
+  <data name="Theater_Difficulty_2" xml:space="preserve">
+    <value>보통 모드</value>
+  </data>
+  <data name="Theater_Difficulty_3" xml:space="preserve">
+    <value>어려움 모드</value>
+  </data>
+  <data name="Theater_Difficulty_4" xml:space="preserve">
+    <value>탁월 모드</value>
+  </data>
+  <data name="Theater_Difficulty_5" xml:space="preserve">
+    <value>달 계시 모드</value>
+  </data>
+  <data name="Theater_Difficulty_Unknown" xml:space="preserve">
+    <value>알 수 없음</value>
+  </data>
+  <data name="Theater_AvatarTrial" xml:space="preserve">
+    <value>체험</value>
+  </data>
+  <data name="Theater_AvatarSupport" xml:space="preserve">
+    <value>조력</value>
+  </data>
+  <data name="Theater_NoDetail" xml:space="preserve">
+    <value>아직 공연 데이터가 없습니다</value>
+  </data>
+  <data name="Theater_BattleStats" xml:space="preserve">
+    <value>전투 통계</value>
+  </data>
+  <data name="Theater_Review" xml:space="preserve">
+    <value>공연 회고</value>
+  </data>
+  <data name="Stygian_Difficulty_1" xml:space="preserve">
+    <value>보통</value>
+  </data>
+  <data name="Stygian_Difficulty_2" xml:space="preserve">
+    <value>숙련</value>
+  </data>
+  <data name="Stygian_Difficulty_3" xml:space="preserve">
+    <value>어려움</value>
+  </data>
+  <data name="Stygian_Difficulty_4" xml:space="preserve">
+    <value>위험</value>
+  </data>
+  <data name="Stygian_Difficulty_5" xml:space="preserve">
+    <value>극한</value>
+  </data>
+  <data name="Stygian_Difficulty_6" xml:space="preserve">
+    <value>절망</value>
+  </data>
+  <data name="Stygian_Difficulty_Unknown" xml:space="preserve">
+    <value>알 수 없음</value>
+  </data>
+  <data name="Stygian_ExtremeValue" xml:space="preserve">
+    <value>최고 피해량</value>
+  </data>
+  <data name="Stygian_UseTime" xml:space="preserve">
+    <value>전투 시간</value>
+  </data>
+  <data name="Stygian_BlingAvatars" xml:space="preserve">
+    <value>주요 출전 캐릭터</value>
+  </data>
+  <data name="Theater_RoundTitle" xml:space="preserve">
+    <value>제{0}막</value>
+  </data>
+  <data name="Theater_TarotTitle" xml:space="preserve">
+    <value>아르카나 {0}</value>
+  </data>
+  <data name="Theater_TarotTitleShort" xml:space="preserve">
+    <value>아르카나</value>
+  </data>
+  <data name="Theater_UsedTime" xml:space="preserve">
+    <value>소요 시간 {0}</value>
+  </data>
+  <data name="Theater_FinishAt" xml:space="preserve">
+    <value>완료 {0}</value>
+  </data>
+  <data name="Stygian_BestType_1" xml:space="preserve">
+    <value>최강 일격</value>
+  </data>
+  <data name="Stygian_BestType_2" xml:space="preserve">
+    <value>최고 누적 피해</value>
+  </data>
+  <data name="Stygian_BestType_Other" xml:space="preserve">
+    <value>최고 활약</value>
+  </data>
+  <data name="Theater_SplendourBuffs" xml:space="preserve">
+    <value>찬란한 축복</value>
+  </data>
+  <data name="Theater_ChoiceCards" xml:space="preserve">
+    <value>신비한 수확</value>
+  </data>
+  <data name="Theater_MaxRoundWithTarot" xml:space="preserve">
+    <value>제{0}막 아르카나 {1}</value>
+  </data>
+  <data name="Abyss_BattleStats" xml:space="preserve">
+    <value>전투 통계</value>
+  </data>
+  <data name="GameServer_OperationInProgress" xml:space="preserve">
+    <value>이 게임 폴더에서 서버 전환 또는 복구 작업이 진행 중입니다. 완료될 때까지 기다려 주세요.</value>
+  </data>
+  <data name="GameServer_CloseGameFirst" xml:space="preserve">
+    <value>서버를 전환하거나 게임 파일을 복구하기 전에 먼저 게임을 종료해 주세요.</value>
+  </data>
+  <data name="GameServer_ClientConversionRequired" xml:space="preserve">
+    <value>현재 클라이언트가 대상 서버와 호환되지 않습니다. 중국 서버/글로벌 서버 변환 기능을 이용해 주세요.</value>
+  </data>
+  <data name="CloudCredential_InitFailed" xml:space="preserve">
+    <value>자격 증명 로그인 페이지를 열 수 없습니다. 창을 닫은 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="CloudCredential_IdentityUnavailable" xml:space="preserve">
+    <value>현재 로그인된 계정을 확인할 수 없습니다. 웹페이지에서 로그아웃한 후 선택한 계정으로 다시 로그인하여 시도해 주세요.</value>
+  </data>
+  <data name="CloudCredential_AccountMismatch" xml:space="preserve">
+    <value>현재 로그인된 계정({0})이 선택한 계정({1})과 일치하지 않습니다. 웹페이지에서 로그아웃한 후 선택한 계정으로 로그인해 주세요. 자격 증명은 저장되지 않았습니다.</value>
+  </data>
+  <data name="CloudCredential_SaveFailed" xml:space="preserve">
+    <value>자격 증명을 저장하지 못했습니다. 다시 시도해 주세요.</value>
+  </data>
+  <data name="CloudCredential_RemoveFailed" xml:space="preserve">
+    <value>자격 증명을 삭제하지 못했습니다. 다시 시도해 주세요.</value>
+  </data>
+  <data name="Checkin_MoveFailed" xml:space="preserve">
+    <value>출석 순서 저장 실패</value>
+  </data>
+  <data name="Checkin_MoveFailedMessage" xml:space="preserve">
+    <value>새 출석 순서를 저장하지 못하여 이전 순서로 복원되었습니다.</value>
+  </data>
+  <data name="PluginInstallWindowTitle" xml:space="preserve">
+    <value>플러그인 설치</value>
+  </data>
+  <data name="PluginInstallWindowUninstallTitle" xml:space="preserve">
+    <value>플러그인 제거</value>
+  </data>
+  <data name="MiyousheShop_Title" xml:space="preserve">
+    <value>교환 센터</value>
+  </data>
+  <data name="MiyousheShop_GameFilter" xml:space="preserve">
+    <value>상품 분류</value>
+  </data>
+  <data name="MiyousheShop_ResizeDetails" xml:space="preserve">
+    <value>상품 상세 정보 창 너비 조절</value>
+  </data>
+  <data name="MiyousheShop_SelectGoods" xml:space="preserve">
+    <value>상품을 선택하여 상세 정보 보기</value>
+  </data>
+  <data name="MiyousheShop_Notes" xml:space="preserve">
+    <value>교환 제한 및 안내</value>
+  </data>
+  <data name="MiyousheShop_OfficialGoods" xml:space="preserve">
+    <value>공식 스토어에서 보기</value>
+  </data>
+  <data name="MiyousheShop_OfficialHistory" xml:space="preserve">
+    <value>공식 내역 보기</value>
+  </data>
+  <data name="MiyousheShop_EmptyGoods" xml:space="preserve">
+    <value>이 분류에는 현재 상품이 없습니다.</value>
+  </data>
+  <data name="MiyousheShop_Price" xml:space="preserve">
+    <value>{0:N0} 미유 코인</value>
+  </data>
+  <data name="MiyousheShop_CoinUnit" xml:space="preserve">
+    <value>미유 코인</value>
+  </data>
+  <data name="MiyousheShop_Upcoming" xml:space="preserve">
+    <value>판매 예정</value>
+  </data>
+  <data name="MiyousheShop_Unlimited" xml:space="preserve">
+    <value>재고 무제한</value>
+  </data>
+  <data name="MiyousheShop_Stock" xml:space="preserve">
+    <value>남은 수량 {0:N0}개</value>
+  </data>
+  <data name="MiyousheShop_SoldOut" xml:space="preserve">
+    <value>품절</value>
+  </data>
+  <data name="MiyousheShop_Unavailable" xml:space="preserve">
+    <value>현재 교환 불가</value>
+  </data>
+  <data name="MiyousheShop_BeijingTime" xml:space="preserve">
+    <value>베이징 시간 {0:yyyy-MM-dd HH:mm:ss}</value>
+  </data>
+  <data name="MiyousheShop_CatalogOpening" xml:space="preserve">
+    <value>판매 시작 {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_CatalogRestock" xml:space="preserve">
+    <value>재입고 {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_StartTime" xml:space="preserve">
+    <value>교환 시작 · 베이징 시간</value>
+  </data>
+  <data name="MiyousheShop_NextBatchTime" xml:space="preserve">
+    <value>다음 회차 오픈 · 베이징 시간</value>
+  </data>
+  <data name="MiyousheShop_EndTime" xml:space="preserve">
+    <value>교환 마감 · 베이징 시간</value>
+  </data>
+  <data name="MiyousheShop_NextBatchQuantity" xml:space="preserve">
+    <value>다음 회차 총 {0:N0}개</value>
+  </data>
+  <data name="MiyousheShop_Countdown" xml:space="preserve">
+    <value>{0}일 {1:00}:{2:00}:{3:00} 남음</value>
+  </data>
+  <data name="MiyousheShop_Schedule" xml:space="preserve">
+    <value>오픈 시 자동 교환</value>
+  </data>
+  <data name="MiyousheShop_Scheduled" xml:space="preserve">
+    <value>교환 계획이 추가되었습니다</value>
+  </data>
+  <data name="MiyousheShop_Remove" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="MiyousheShop_Notification" xml:space="preserve">
+    <value>미유 코인 교환 계획</value>
+  </data>
+  <data name="MiyousheShop_LoadError" xml:space="preserve">
+    <value>상품 목록을 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_DetailError" xml:space="preserve">
+    <value>상품 상세 정보를 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_OpenError" xml:space="preserve">
+    <value>공식 스토어를 열 수 없습니다. Miyoushe 앱의 교환 센터에서 확인해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_Plans" xml:space="preserve">
+    <value>교환 계획</value>
+  </data>
+  <data name="MiyousheShop_BackToGoods" xml:space="preserve">
+    <value>상품으로 돌아가기</value>
+  </data>
+  <data name="MiyousheShop_CommunityGame" xml:space="preserve">
+    <value>커뮤니티 게시판</value>
+  </data>
+  <data name="MiyousheShop_AllGoods" xml:space="preserve">
+    <value>전체 상품</value>
+  </data>
+  <data name="MiyousheShop_ExchangeNow" xml:space="preserve">
+    <value>즉시 교환</value>
+  </data>
+  <data name="MiyousheShop_PlanHint" xml:space="preserve">
+    <value>예약 계획은 해당 회차가 시작될 때 상품 1개의 교환을 자동으로 제출합니다. 런처를 실행 중이거나 트레이에 유지해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_EmptyPlans" xml:space="preserve">
+    <value>등록된 교환 계획이 없습니다.</value>
+  </data>
+  <data name="MiyousheShop_PlanPending" xml:space="preserve">
+    <value>대기 중</value>
+  </data>
+  <data name="MiyousheShop_PlanSubmitting" xml:space="preserve">
+    <value>제출 준비 중</value>
+  </data>
+  <data name="MiyousheShop_PlanSucceeded" xml:space="preserve">
+    <value>교환 성공</value>
+  </data>
+  <data name="MiyousheShop_PlanFailed" xml:space="preserve">
+    <value>교환 미완료</value>
+  </data>
+  <data name="MiyousheShop_PlanVerification" xml:space="preserve">
+    <value>수동 인증 필요</value>
+  </data>
+  <data name="MiyousheShop_PlanUnknown" xml:space="preserve">
+    <value>결과 확인 필요 · 먼저 공식 교환 내역을 확인해 주세요</value>
+  </data>
+  <data name="MiyousheShop_PlanMissed" xml:space="preserve">
+    <value>놓침</value>
+  </data>
+  <data name="MiyousheShop_PlanReviewed" xml:space="preserve">
+    <value>확인 완료</value>
+  </data>
+  <data name="MiyousheShop_Target" xml:space="preserve">
+    <value>교환 대상</value>
+  </data>
+  <data name="MiyousheShop_Confirm" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="MiyousheShop_Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="MiyousheShop_ConfirmItem" xml:space="preserve">
+    <value>상품: {0} × 1
+소모: {1}
+계정: {2}</value>
+  </data>
+  <data name="MiyousheShop_ConfirmScheduled" xml:space="preserve">
+    <value>베이징 시간 {0:yyyy-MM-dd HH:mm:ss}에 자동으로 교환이 제출됩니다.</value>
+  </data>
+  <data name="MiyousheShop_ConfirmImmediate" xml:space="preserve">
+    <value>확인하면 Miyoushe에 교환 요청을 제출합니다.</value>
+  </data>
+  <data name="MiyousheShop_LoginRequired" xml:space="preserve">
+    <value>로그인된 중국 서버 Miyoushe 계정을 선택하거나 다시 로그인한 후 시도해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_Unsupported" xml:space="preserve">
+    <value>이 상품은 Miyoushe 공식 스토어에서 교환해야 합니다.</value>
+  </data>
+  <data name="MiyousheShop_NoTarget" xml:space="preserve">
+    <value>이 상품에 필요한 연동 캐릭터 또는 배송 주소를 찾을 수 없습니다. Miyoushe에서 확인한 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_LimitReached" xml:space="preserve">
+    <value>이 계정은 해당 상품의 교환 횟수 제한에 도달했습니다.</value>
+  </data>
+  <data name="MiyousheShop_LimitReachedLabel" xml:space="preserve">
+    <value>교환 한도 도달</value>
+  </data>
+  <data name="MiyousheShop_RateLimited" xml:space="preserve">
+    <value>스토어 요청 빈도가 제한되었습니다.</value>
+  </data>
+  <data name="MiyousheShop_ManualVerification" xml:space="preserve">
+    <value>Miyoushe 공식 스토어에서 수동 인증을 완료해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_PrepareError" xml:space="preserve">
+    <value>교환 요청을 준비할 수 없습니다. 로그인 상태와 네트워크를 확인해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_SaleChanged" xml:space="preserve">
+    <value>상품 상태 또는 판매 시간이 변경되었습니다. 새로고침하여 확인해 주세요.</value>
+  </data>
+  <data name="MiyousheShop_Conflict" xml:space="preserve">
+    <value>이미 계획이 존재하거나 회차가 지났거나 확인이 필요한 교환이 있습니다.</value>
+  </data>
+  <data name="MiyousheShop_PlanError" xml:space="preserve">
+    <value>교환 계획을 읽거나 저장할 수 없습니다.</value>
+  </data>
+  <data name="MiyousheShop_Resolve" xml:space="preserve">
+    <value>확인 완료로 표시</value>
+  </data>
+  <data name="MiyousheShop_ResolveHint" xml:space="preserve">
+    <value>먼저 Miyoushe 공식 교환 내역과 미유 코인 차감 여부를 확인해 주세요. 확인을 누르면 이 상품의 제출 제한이 해제됩니다.</value>
+  </data>
+  <data name="MiyoushePendant_Open" xml:space="preserve">
+    <value>프로필 테두리 변경</value>
+  </data>
+  <data name="MiyoushePendant_Hint" xml:space="preserve">
+    <value>프로필 테두리를 선택하여 미리 보고, 보유 중인 테두리는 바로 착용할 수 있습니다.</value>
+  </data>
+  <data name="MiyoushePendant_OwnedOnly" xml:space="preserve">
+    <value>보유 중인 항목만 보기</value>
+  </data>
+  <data name="MiyoushePendant_Select" xml:space="preserve">
+    <value>미리 볼 프로필 테두리를 선택하세요</value>
+  </data>
+  <data name="MiyoushePendant_Equip" xml:space="preserve">
+    <value>이 테두리 사용</value>
+  </data>
+  <data name="MiyoushePendant_Equipped" xml:space="preserve">
+    <value>현재 착용 중</value>
+  </data>
+  <data name="MiyoushePendant_Remove" xml:space="preserve">
+    <value>프로필 테두리 해제</value>
+  </data>
+  <data name="MiyoushePendant_Author" xml:space="preserve">
+    <value>작성자: {0}</value>
+  </data>
+  <data name="MiyoushePendant_Remain" xml:space="preserve">
+    <value>{0}일 {1}시간 남음</value>
+  </data>
+  <data name="MiyoushePendant_Expired" xml:space="preserve">
+    <value>만료됨</value>
+  </data>
+  <data name="MiyoushePendant_NotOwned" xml:space="preserve">
+    <value>미보유</value>
+  </data>
+  <data name="MiyoushePendant_Updated" xml:space="preserve">
+    <value>프로필 테두리가 변경되었습니다</value>
+  </data>
+  <data name="MiyoushePendant_Removed" xml:space="preserve">
+    <value>프로필 테두리를 해제했습니다</value>
+  </data>
+  <data name="MiyoushePendant_LoginRequired" xml:space="preserve">
+    <value>먼저 로그인된 Miyoushe 계정을 선택해 주세요</value>
+  </data>
+  <data name="MiyoushePendant_LoadError" xml:space="preserve">
+    <value>프로필 테두리를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요</value>
+  </data>
+  <data name="MiyoushePendant_UpdateError" xml:space="preserve">
+    <value>프로필 테두리를 변경하지 못했습니다. 잠시 후 다시 시도해 주세요</value>
+  </data>
+  <data name="MiyoushePendant_Empty" xml:space="preserve">
+    <value>사용 가능한 프로필 테두리가 없습니다.</value>
+  </data>
+  <data name="Settings_SslCheck_Title" xml:space="preserve">
+    <value>SSL 인증서 검증</value>
+  </data>
+  <data name="Settings_SslCheck_Caption" xml:space="preserve">
+    <value>대상 도메인의 SSL이 만료되면 해당 도메인의 서비스도 사용할 수 없게 됩니다</value>
+  </data>
+  <data name="Settings_SslCheck_Btn" xml:space="preserve">
+    <value>검증</value>
+  </data>
+  <data name="SslCheck_DialogTitle" xml:space="preserve">
+    <value>SSL 인증서 검증 결과</value>
+  </data>
+  <data name="SslCheck_CheckingInitial" xml:space="preserve">
+    <value>도메인별로 HTTPS 주소를 수집 및 통합하는 중...</value>
+  </data>
+  <data name="SslCheck_CheckingProgress" xml:space="preserve">
+    <value>고유 도메인 확인 및 검증 중 ({0}/{1}): {2}</value>
+  </data>
+  <data name="SslCheck_NoEndpoints" xml:space="preserve">
+    <value>유효한 HTTPS 도메인이 감지되지 않았습니다.</value>
+  </data>
+  <data name="SslCheck_Failed" xml:space="preserve">
+    <value>SSL 인증서 검증 중 오류 발생: {0}</value>
+  </data>
+  <data name="SslCheck_SummaryFormat" xml:space="preserve">
+    <value>HTTPS 주소 {0}개를 고유 도메인 {1}개로 자동 통합했습니다(중복 검증 생략): 유효 {2}개, 무효 또는 연결 실패 {3}개.</value>
+  </data>
+  <data name="SslCheck_StackedHostFormat" xml:space="preserve">
+    <value>{0} · {1}개 통합됨</value>
+  </data>
+  <data name="SslCheck_Valid" xml:space="preserve">
+    <value>유효</value>
+  </data>
+  <data name="SslCheck_Invalid" xml:space="preserve">
+    <value>무효 ({0})</value>
+  </data>
+  <data name="SslCheck_ConnectFailed" xml:space="preserve">
+    <value>확인/연결 실패</value>
+  </data>
+  <data name="SslCheck_ValidationStatus" xml:space="preserve">
+    <value>검증 상태</value>
+  </data>
+  <data name="SslCheck_ResolvedIp" xml:space="preserve">
+    <value>확인된 IP</value>
+  </data>
+  <data name="SslCheck_TlsProtocol" xml:space="preserve">
+    <value>TLS 프로토콜</value>
+  </data>
+  <data name="SslCheck_Subject" xml:space="preserve">
+    <value>인증서 주체</value>
+  </data>
+  <data name="SslCheck_Issuer" xml:space="preserve">
+    <value>발급 기관</value>
+  </data>
+  <data name="SslCheck_CertChain" xml:space="preserve">
+    <value>인증서 체인</value>
+  </data>
+  <data name="SslCheck_San" xml:space="preserve">
+    <value>주체 대체 이름</value>
+  </data>
+  <data name="SslCheck_Sha256Thumbprint" xml:space="preserve">
+    <value>SHA-256 지문</value>
+  </data>
+  <data name="SslCheck_FailureReason" xml:space="preserve">
+    <value>실패 사유</value>
+  </data>
+  <data name="SslCheck_StackedEndpoints" xml:space="preserve">
+    <value>연결된 주소</value>
+  </data>
+  <data name="SslCheck_ErrTimeout" xml:space="preserve">
+    <value>연결 시간 초과</value>
+  </data>
+  <data name="SslCheck_ErrDnsFailed" xml:space="preserve">
+    <value>DNS 확인 실패: {0}</value>
+  </data>
+  <data name="SslCheck_ErrNoCertificate" xml:space="preserve">
+    <value>서버가 인증서를 반환하지 않았습니다</value>
+  </data>
+  <data name="SslCheck_ErrNameMismatch" xml:space="preserve">
+    <value>도메인 이름 불일치</value>
+  </data>
+  <data name="SslCheck_ErrExpiredOrNotYetValid" xml:space="preserve">
+    <value>인증서가 만료되었거나 아직 유효하지 않습니다</value>
+  </data>
+  <data name="SslCheck_ErrUntrustedRoot" xml:space="preserve">
+    <value>신뢰할 수 없는 루트 인증 기관</value>
+  </data>
+  <data name="SslCheck_ErrPartialChain" xml:space="preserve">
+    <value>인증서 체인이 불완전합니다</value>
+  </data>
+  <data name="SslCheck_ErrRevoked" xml:space="preserve">
+    <value>인증서가 해지되었습니다</value>
+  </data>
+  <data name="SslCheck_ErrChainError" xml:space="preserve">
+    <value>인증서 체인 검증 실패</value>
+  </data>
+  <data name="SslCheck_NoDnsIp" xml:space="preserve">
+    <value>확인된 IP 없음</value>
+  </data>
+  <data name="SslCheck_MoreItemsFormat" xml:space="preserve">
+    <value>{0} 외 총 {1}개</value>
+  </data>
+  <data name="SslCheck_ViaProxyFormat" xml:space="preserve">
+    <value>{0} (시스템 프록시 {1} 경유)</value>
+  </data>
+  <data name="SslCheck_ViaProxyOnlyFormat" xml:space="preserve">
+    <value>시스템 프록시 {0} 경유</value>
+  </data>
+  <data name="SslCheck_NotYetValidFormat" xml:space="preserve">
+    <value>{0} (아직 유효하지 않음)</value>
+  </data>
+  <data name="SslCheck_ExpiredFormat" xml:space="preserve">
+    <value>{0} ({1}일 전 만료)</value>
+  </data>
+  <data name="SslCheck_DaysRemainingFormat" xml:space="preserve">
+    <value>{0} ({1}일 남음)</value>
+  </data>
+  <data name="SslCheck_CertType" xml:space="preserve">
+    <value>인증서 유형</value>
+  </data>
+  <data name="SslCheck_CertType_DV" xml:space="preserve">
+    <value>DV (도메인 검증)</value>
+  </data>
+  <data name="SslCheck_CertType_OV" xml:space="preserve">
+    <value>OV (조직 검증)</value>
+  </data>
+  <data name="SslCheck_CertType_EV" xml:space="preserve">
+    <value>EV (확장 검증)</value>
+  </data>
+  <data name="SslCheck_CertType_IV" xml:space="preserve">
+    <value>IV (개인 검증)</value>
+  </data>
+  <data name="SslCheck_CertType_SelfSigned" xml:space="preserve">
+    <value>자체 서명 인증서</value>
+  </data>
+  <data name="SslCheck_CertType_Unknown" xml:space="preserve">
+    <value>알 수 없음</value>
+  </data>
+  <data name="SslCheck_QuicSupport" xml:space="preserve">
+    <value>QUIC (HTTP/3)</value>
+  </data>
+  <data name="SslCheck_QuicSupportedFormat" xml:space="preserve">
+    <value>지원 ({0})</value>
+  </data>
+  <data name="SslCheck_QuicUnsupported" xml:space="preserve">
+    <value>미지원 또는 미통지 (h3 / QUIC 감지 안 됨)</value>
+  </data>
+  <data name="SslCheck_QuicTimeout" xml:space="preserve">
+    <value>감지 안 됨 (HTTP/QUIC 탐색 시간 초과)</value>
+  </data>
+  <data name="SslCheck_CertTypeShort_SelfSigned" xml:space="preserve">
+    <value>자체 서명</value>
+  </data>
+  <data name="SslCheck_CertTypeShort_Unknown" xml:space="preserve">
+    <value>알 수 없음</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Supported" xml:space="preserve">
+    <value>QUIC 지원</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Unsupported" xml:space="preserve">
+    <value>QUIC 미지원</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Timeout" xml:space="preserve">
+    <value>QUIC 시간 초과</value>
+  </data>
+  <data name="About_ApiRateLimitOrInvalid" xml:space="preserve">
+    <value>API 요청 제한 또는 응답 형식 오류</value>
+  </data>
+  <data name="About_ContactNoticeText" xml:space="preserve">
+    <value>참고: 연락하실 때는 요점과 용건을 바로 말씀해 주세요.
+"계세요?", "안녕하세요" 같은 의미 없는 첫인사는 삼가 주세요.</value>
+  </data>
+  <data name="About_ContributorBio_Format" xml:space="preserve">
+    <value>기여 횟수: {0}회
+
+소개: {1}</value>
+  </data>
+  <data name="About_ContributorBioFailed_Format" xml:space="preserve">
+    <value>기여 횟수: {0}회
+
+소개를 불러오지 못했습니다.</value>
+  </data>
+  <data name="About_ContributorsFetchFailed" xml:space="preserve">
+    <value>기여자를 불러오지 못했습니다. 네트워크 연결 또는 API 상태를 확인해 주세요</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>FufuLauncher 정보</value>
+  </data>
+  <data name="Account_CannotExtractId" xml:space="preserve">
+    <value>계정 ID를 추출할 수 없습니다</value>
+  </data>
+  <data name="Account_CannotReadLoginInfo" xml:space="preserve">
+    <value>커뮤니티 계정 로그인 정보를 읽을 수 없습니다.</value>
+  </data>
+  <data name="Account_CookieContentInvalid" xml:space="preserve">
+    <value>Cookie 파일 내용이 올바르지 않습니다</value>
+  </data>
+  <data name="Account_CookieFilenameEmpty" xml:space="preserve">
+    <value>Cookie 파일 이름이 비어 있습니다</value>
+  </data>
+  <data name="Account_CookiePathInvalid" xml:space="preserve">
+    <value>Cookie 파일 경로가 올바르지 않습니다</value>
+  </data>
+  <data name="Account_CookiePathOutOfBounds" xml:space="preserve">
+    <value>Cookie 파일 경로가 데이터 디렉터리 범위를 벗어났습니다</value>
+  </data>
+  <data name="Account_DeviceFpUnavailable" xml:space="preserve">
+    <value>기기 지문을 사용할 수 없습니다 (등록 실패)</value>
+  </data>
+  <data name="Account_FetchRolesFailed_Format" xml:space="preserve">
+    <value>연동된 캐릭터를 가져오지 못했습니다 ({0}). 새로고침하거나 다시 로그인해 주세요.</value>
+  </data>
+  <data name="Account_InvalidLoginRelogin" xml:space="preserve">
+    <value>로그인 정보가 올바르지 않습니다. 커뮤니티 계정에 다시 로그인해 주세요.</value>
+  </data>
+  <data name="Account_MissingHoyolabUidCookie" xml:space="preserve">
+    <value>Cookie에 HoYoLAB UID가 없습니다</value>
+  </data>
+  <data name="Account_Removed" xml:space="preserve">
+    <value>커뮤니티 계정이 제거되었습니다.</value>
+  </data>
+  <data name="Account_RoleNotBoundPrompt" xml:space="preserve">
+    <value>선택한 캐릭터가 연동 목록에 없습니다. 캐릭터 전환 스위치를 사용해 다시 선택해 주세요.</value>
+  </data>
+  <data name="Account_RoleNotBoundRefresh" xml:space="preserve">
+    <value>선택한 캐릭터가 현재 커뮤니티 계정에 연동되어 있지 않습니다. 캐릭터 목록을 새로고침해 주세요.</value>
+  </data>
+  <data name="Account_SwitchedReselectRole" xml:space="preserve">
+    <value>커뮤니티 계정이 전환되었습니다. 캐릭터를 다시 선택해 주세요.</value>
+  </data>
+  <data name="AchievementUpdater_CompleteContent" xml:space="preserve">
+    <value>웹과 GitHub 양쪽에서 업적 데이터를 성공적으로 가져와 병합했으며, 로컬 파일을 덮어썼습니다.</value>
+  </data>
+  <data name="AchievementUpdater_ConfirmExit" xml:space="preserve">
+    <value>종료 확인</value>
+  </data>
+  <data name="AchievementUpdater_CurrentProgress" xml:space="preserve">
+    <value>현재 진행 상태:</value>
+  </data>
+  <data name="AchievementUpdater_Done" xml:space="preserve">
+    <value>완료</value>
+  </data>
+  <data name="AchievementUpdater_DoNotTouch" xml:space="preserve">
+    <value>이 창을 조작하지 마세요!</value>
+  </data>
+  <data name="AchievementUpdater_ExecComplete" xml:space="preserve">
+    <value>실행 완료</value>
+  </data>
+  <data name="AchievementUpdater_ExecError" xml:space="preserve">
+    <value>실행 오류</value>
+  </data>
+  <data name="AchievementUpdater_FetchingGithub_Format" xml:space="preserve">
+    <value>GitHub 상세 데이터 가져오는 중: {0}</value>
+  </data>
+  <data name="AchievementUpdater_FetchingTitle" xml:space="preserve">
+    <value>업적 데이터 가져오는 중</value>
+  </data>
+  <data name="AchievementUpdater_FetchMergeError_Format" xml:space="preserve">
+    <value>데이터를 가져오거나 병합하는 중 오류가 발생했습니다: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Initializing" xml:space="preserve">
+    <value>구성 요소 초기화 중...</value>
+  </data>
+  <data name="AchievementUpdater_MergingFields" xml:space="preserve">
+    <value>데이터 필드 병합 중...</value>
+  </data>
+  <data name="AchievementUpdater_Progress_Format" xml:space="preserve">
+    <value>처리 진행률: {0} / {1}</value>
+  </data>
+  <data name="AchievementUpdater_ScriptError_Format" xml:space="preserve">
+    <value>수집 스크립트 오류 발생: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Sorting" xml:space="preserve">
+    <value>데이터 구조를 통합하고 다단계 정렬하는 중...</value>
+  </data>
+  <data name="AchievementUpdater_StructureDone" xml:space="preserve">
+    <value>기본 구조 수집이 완료되었습니다. GitHub에서 상세 데이터 사전을 가져올 준비 중...</value>
+  </data>
+  <data name="AchievementUpdater_WaitingNetwork" xml:space="preserve">
+    <value>네트워크 연결 대기 중</value>
+  </data>
+  <data name="AchievementUpdater_WaitingPage" xml:space="preserve">
+    <value>페이지 응답 대기 중</value>
+  </data>
+  <data name="AchievementUpdater_WritingDisk" xml:space="preserve">
+    <value>데이터 구조 병합 완료, 로컬 디스크에 쓰는 중...</value>
+  </data>
+  <data name="AchievementWindow_AnalyzingProgress" xml:space="preserve">
+    <value>진행 데이터 분석 중...</value>
+  </data>
+  <data name="AchievementWindow_ComparingDbVersion" xml:space="preserve">
+    <value>데이터베이스 버전 비교 중...</value>
+  </data>
+  <data name="AchievementWindow_CsvTextFilter" xml:space="preserve">
+    <value>CSV/텍스트 파일</value>
+  </data>
+  <data name="AchievementWindow_DbInvalidOrEmpty" xml:space="preserve">
+    <value>업적 목록이 비어 있거나 형식이 올바르지 않습니다</value>
+  </data>
+  <data name="AchievementWindow_DbSyncSuccess_Format" xml:space="preserve">
+    <value>동기화 성공!
+추가된 카테고리: {0}개
+추가된 업적: {1}개
+업데이트된 업적 정보: {2}개</value>
+  </data>
+  <data name="AchievementWindow_DbUpdateTitle" xml:space="preserve">
+    <value>데이터베이스 업데이트</value>
+  </data>
+  <data name="AchievementWindow_DbUpToDate" xml:space="preserve">
+    <value>현재 최신 데이터베이스입니다</value>
+  </data>
+  <data name="AchievementWindow_DeleteArchiveTooltip" xml:space="preserve">
+    <value>이 프로필 삭제</value>
+  </data>
+  <data name="AchievementWindow_EnterNewProfilePrompt" xml:space="preserve">
+    <value>새 프로필의 이름을 입력하세요:</value>
+  </data>
+  <data name="AchievementWindow_FileUnreadable_Format" xml:space="preserve">
+    <value>파일이 사용 중이거나 읽을 수 없습니다.
+{0}</value>
+  </data>
+  <data name="AchievementWindow_FollowSteps" xml:space="preserve">
+    <value>다음 단계를 따라 진행하세요:</value>
+  </data>
+  <data name="AchievementWindow_IdNotFoundInDb_Format" xml:space="preserve">
+    <value>[ID: {0}] 데이터베이스에서 해당 업적을 찾을 수 없습니다</value>
+  </data>
+  <data name="AchievementWindow_ImportException_Format" xml:space="preserve">
+    <value>가져오는 중 오류가 발생했습니다:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_ImportNoChanges" xml:space="preserve">
+    <value>가져오기 완료, 새로운 변경 사항이 없습니다</value>
+  </data>
+  <data name="AchievementWindow_ImportPartialUnrecognizedHeader" xml:space="preserve">
+    <value>인식되지 않은 항목 일부 예시:</value>
+  </data>
+  <data name="AchievementWindow_ImportResultTitle" xml:space="preserve">
+    <value>가져오기 결과</value>
+  </data>
+  <data name="AchievementWindow_ImportStats_Format" xml:space="preserve">
+    <value>스캔한 행: {0}
+미완료 건너뜀: {1}
+동기화됨: {2}
+이미 완료됨: {3}
+인식 불가: {4}</value>
+  </data>
+  <data name="AchievementWindow_ImportSuccessTitle" xml:space="preserve">
+    <value>가져오기 성공</value>
+  </data>
+  <data name="AchievementWindow_ImportSynced_Format" xml:space="preserve">
+    <value>가져오기 성공, {0}개 업적 진행도가 동기화되었습니다</value>
+  </data>
+  <data name="AchievementWindow_InitFailed_Format" xml:space="preserve">
+    <value>초기화 실패: {0}</value>
+  </data>
+  <data name="AchievementWindow_InvalidUiafFormat" xml:space="preserve">
+    <value>유효하지 않은 UIAF 파일 형식입니다</value>
+  </data>
+  <data name="AchievementWindow_ProcessingLine_Format" xml:space="preserve">
+    <value>{0}/{1}번째 행 처리 중...</value>
+  </data>
+  <data name="AchievementWindow_SavedAs_Format" xml:space="preserve">
+    <value>현재 진행도가 저장되었습니다: {0}</value>
+  </data>
+  <data name="AchievementWindow_ServerNotStarted" xml:space="preserve">
+    <value>서비스가 시작되지 않았습니다</value>
+  </data>
+  <data name="AchievementWindow_SwitchedTo_Format" xml:space="preserve">
+    <value>전환됨: {0}</value>
+  </data>
+  <data name="AchievementWindow_SyncError_Format" xml:space="preserve">
+    <value>동기화 중 오류가 발생했습니다:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafDoneStatus_Format" xml:space="preserve">
+    <value>UIAF 가져오기 완료, {0}개 업적 동기화됨</value>
+  </data>
+  <data name="AchievementWindow_UiafExportError_Format" xml:space="preserve">
+    <value>파일 생성 중 오류가 발생했습니다:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafExportSuccessMsg" xml:space="preserve">
+    <value>UIAF 형식 데이터를 성공적으로 내보냈습니다.</value>
+  </data>
+  <data name="AchievementWindow_UiafParseException_Format" xml:space="preserve">
+    <value>읽기 또는 구문 분석 중 오류가 발생했습니다:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafSuccessDialog_Format" xml:space="preserve">
+    <value>UIAF 가져오기 성공!
+총 {0}개의 업적 진행도가 업데이트되었습니다</value>
+  </data>
+  <data name="AchievementWindow_UnnamedSavePrompt" xml:space="preserve">
+    <value>현재 프로필의 이름이 지정되지 않았습니다. 전환하거나 새로 만들기 전에 현재 진행도의 이름을 먼저 지정하세요:</value>
+  </data>
+  <data name="AchievementWindow_UpdateDbConfirmContent" xml:space="preserve">
+    <value>이 작업은 소프트웨어에 내장된 최신 업적 목록을 읽어 현재 프로필에 누락된 새 업적을 추가합니다.
+
+기존 진행도(완료된 업적)는 손실되지 않고 유지됩니다.
+
+계속하시겠습니까?</value>
+  </data>
+  <data name="AchievementWindow_UpdateFailedTitle" xml:space="preserve">
+    <value>업데이트 실패</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideSteps" xml:space="preserve">
+    <value>1. YaeAchievement 도구를 직접 다운로드하여 실행하세요.
+2. Yae에서 업적 스캔을 완료한 후 Excel 또는 CSV 표로 내보내기를 클릭하세요.
+3. 이 화면으로 돌아와 [기록 가져오기] 버튼을 클릭하고 방금 내보낸 파일을 선택하면 가져오기가 완료됩니다.</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideTitle" xml:space="preserve">
+    <value>Yae 업적 기록 가져오기 방법</value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticePre" xml:space="preserve">
+    <value>게임을 실행할 때 아래 팝업이 나타나면 게임 서버 전환을 중단하고 본 프로그램 또는 공식 런처에서 다음 기능을 실행하세요: </value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticeBold" xml:space="preserve">
+    <value>"게임 복구"</value>
+  </data>
+  <data name="Agreement_CompleteBadge" xml:space="preserve">
+    <value>설정 완료</value>
+  </data>
+  <data name="Agreement_InstallCert" xml:space="preserve">
+    <value>인증서 설치</value>
+  </data>
+  <data name="Agreement_InstallFailed_Format" xml:space="preserve">
+    <value>설치 실패: {0}</value>
+  </data>
+  <data name="Agreement_RestartBtn" xml:space="preserve">
+    <value>다시 시작하고 메인 화면으로 이동</value>
+  </data>
+  <data name="Agreement_RestartFailed" xml:space="preserve">
+    <value>재시작에 실패했습니다. 버튼을 다시 클릭하거나 수동으로 닫은 뒤 런처를 다시 실행해 주세요.</value>
+  </data>
+  <data name="Agreement_Restarting" xml:space="preserve">
+    <value>런처를 다시 시작하는 중...</value>
+  </data>
+  <data name="Agreement_SaveFailed" xml:space="preserve">
+    <value>설정을 저장하지 못했습니다. 다시 시도해 주세요.</value>
+  </data>
+  <data name="Agreement_SkipCert" xml:space="preserve">
+    <value>지금은 건너뛰기</value>
+  </data>
+  <data name="Agreement_TrustDesc" xml:space="preserve">
+    <value>설치하면 본 런처와 Windows 시스템이 당사가 발급한 코드 서명을 신뢰하게 되어 사용 편의성이 향상되고 Windows Defender의 오탐 차단을 줄일 수 있습니다.</value>
+  </data>
+  <data name="Agreement_TrustTitle" xml:space="preserve">
+    <value>플랫폼 인증서 설치 (선택 사항)</value>
+  </data>
+  <data name="Agreement_WelcomeDesc" xml:space="preserve">
+    <value>재시작 후 바로 사용할 수 있습니다</value>
+  </data>
+  <data name="Agreement_WelcomeTitle" xml:space="preserve">
+    <value>FufuLauncher에 오신 것을 환영합니다</value>
+  </data>
+  <data name="App_UpdateNoticeTitle_Format" xml:space="preserve">
+    <value>버전 업데이트 공지 - v{0}</value>
+  </data>
+  <data name="App_UpdatePreviewNoticeTitle_Format" xml:space="preserve">
+    <value>프리뷰 버전 업데이트 공지 - v{0}</value>
+  </data>
+  <data name="AuthTicket_ApiError_Format" xml:space="preserve">
+    <value>API 오류: [{0}] {1}</value>
+  </data>
+  <data name="AuthTicket_HttpError_Format" xml:space="preserve">
+    <value>요청 실패 (HTTP {0})</value>
+  </data>
+  <data name="AuthTicket_NoTicket" xml:space="preserve">
+    <value>유효한 인증 정보를 가져오지 못했습니다</value>
+  </data>
+  <data name="AuthTicket_NotLoggedIn" xml:space="preserve">
+    <value>계정에 로그인되어 있지 않습니다</value>
+  </data>
+  <data name="AuthTicket_ParseError" xml:space="preserve">
+    <value>응답 구문 분석에 실패했습니다</value>
+  </data>
+  <data name="AuthTicket_RequestException_Format" xml:space="preserve">
+    <value>요청 오류: {0}</value>
+  </data>
+  <data name="AuthTicket_SessionExpired" xml:space="preserve">
+    <value>계정 로그인 상태가 만료되었습니다</value>
+  </data>
+  <data name="Background_EmptyDownload" xml:space="preserve">
+    <value>다운로드한 배경 콘텐츠가 비어 있습니다</value>
+  </data>
+  <data name="Background_TypeImage" xml:space="preserve">
+    <value>이미지</value>
+  </data>
+  <data name="Background_TypeVideo" xml:space="preserve">
+    <value>동영상</value>
+  </data>
+  <data name="Cache_EmptyDownloadedFile" xml:space="preserve">
+    <value>다운로드가 완료되었지만 캐시 파일이 비어 있습니다.</value>
+  </data>
+  <data name="Checkin_Game_hk4e_cn" xml:space="preserve">
+    <value>원신</value>
+  </data>
+  <data name="CheckinCalendar_MonthTitle_Format" xml:space="preserve">
+    <value>{0}월 출석 보상 캘린더</value>
+  </data>
+  <data name="CloudCredential_AddUidCapturedTitle_Format" xml:space="preserve">
+    <value>클라우드 게임 인증 정보 추가 - {0} (획득 완료)</value>
+  </data>
+  <data name="CloudCredential_AddUidTitle_Format" xml:space="preserve">
+    <value>클라우드 게임 인증 정보 추가 - {0}</value>
+  </data>
+  <data name="CloudCredential_FetchSuccess" xml:space="preserve">
+    <value>인증 정보를 가져왔습니다</value>
+  </data>
+  <data name="Common_Disable" xml:space="preserve">
+    <value>비활성화</value>
+  </data>
+  <data name="Common_Enable" xml:space="preserve">
+    <value>활성화</value>
+  </data>
+  <data name="Common_Exception" xml:space="preserve">
+    <value>예외</value>
+  </data>
+  <data name="Common_NeverUsed" xml:space="preserve">
+    <value>사용 기록 없음</value>
+  </data>
+  <data name="Common_Open" xml:space="preserve">
+    <value>열기</value>
+  </data>
+  <data name="Common_OpenFailed" xml:space="preserve">
+    <value>열기 실패</value>
+  </data>
+  <data name="Common_RiskWarning" xml:space="preserve">
+    <value>위험 안내</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>경고</value>
+  </data>
+  <data name="CommunityPage_AccountNickname_Format" xml:space="preserve">
+    <value>계정 닉네임: {0}</value>
+  </data>
+  <data name="CommunityPage_WelcomeDesc" xml:space="preserve">
+    <value>이 포럼은 CodeCubist와 Vanilla가 공동 기획하고 FufuLauncher를 플랫폼으로 삼아 공개되었습니다.
+
+QQ 채널이나 Miyoushe를 대체하기 위한 것이 아니라, 유저 간 공유와 빠른 질의응답을 돕기 위해 만들어졌습니다. 커뮤니티 규칙을 지킨다면 게임 콘텐츠, 런처 관련 질문, 일상 이야기 등 무엇이든 자유롭게 게시하고 소통할 수 있습니다.
+
+소프트웨어 업데이트 소식도 이곳에 공지되며, 개발자와 직접 소통하는 것도 가능합니다.
+
+현재 사이트는 시범 운영 중이며, 운영 성과가 좋으면 정식 개편을 거쳐 정식으로 선보일 예정입니다.</value>
+  </data>
+  <data name="ControlPanel_SecurityTipTitle" xml:space="preserve">
+    <value>보안 안내</value>
+  </data>
+  <data name="CookieVault_BinaryFormatInvalid" xml:space="preserve">
+    <value>Cookie 바이너리 파일 형식이 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_CannotReadSystemDriveSerial" xml:space="preserve">
+    <value>시스템 드라이브 일련번호를 읽을 수 없습니다</value>
+  </data>
+  <data name="CookieVault_FileFormatInvalid" xml:space="preserve">
+    <value>Cookie 파일 암호화 형식이 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_FormatUnsupported" xml:space="preserve">
+    <value>지원하지 않는 Cookie 파일 암호화 형식입니다</value>
+  </data>
+  <data name="CookieVault_HwidIntegrityFailed" xml:space="preserve">
+    <value>HWID 키 무결성 검증에 실패했습니다</value>
+  </data>
+  <data name="CookieVault_HwidKeyLengthInvalid" xml:space="preserve">
+    <value>HWID로 복호화된 Cookie 키 길이가 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_IntegrityFailed" xml:space="preserve">
+    <value>Cookie 파일 무결성 검증에 실패했습니다</value>
+  </data>
+  <data name="CookieVault_KeyCreateFailed" xml:space="preserve">
+    <value>Cookie 암호화 키를 생성할 수 없습니다</value>
+  </data>
+  <data name="CookieVault_KeyDecryptFailed" xml:space="preserve">
+    <value>DPAPI 또는 HWID로 Cookie 암호화 키를 복호화할 수 없습니다</value>
+  </data>
+  <data name="CookieVault_KeyDirInvalid" xml:space="preserve">
+    <value>Cookie 암호화 키 디렉터리가 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_KeyFileFormatInvalid" xml:space="preserve">
+    <value>Cookie 암호화 키 파일 형식이 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_KeyMismatch" xml:space="preserve">
+    <value>Cookie 파일 암호화 키가 일치하지 않습니다</value>
+  </data>
+  <data name="CookieVault_KeyMissing" xml:space="preserve">
+    <value>Cookie 암호화 키가 존재하지 않습니다</value>
+  </data>
+  <data name="CookieVault_KeyPathInvalid" xml:space="preserve">
+    <value>Cookie 암호화 키 경로가 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_KeyProtectionFlagInvalid" xml:space="preserve">
+    <value>Cookie 암호화 키 보호 플래그가 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_KeyProtectionUnavailable" xml:space="preserve">
+    <value>DPAPI와 HWID를 모두 사용할 수 없어 Cookie 키를 보호할 수 없습니다</value>
+  </data>
+  <data name="CookieVault_KeyUnreadable" xml:space="preserve">
+    <value>Cookie 암호화 키를 읽을 수 없습니다</value>
+  </data>
+  <data name="CookieVault_ParamsEncodingInvalid" xml:space="preserve">
+    <value>Cookie 파일 암호화 매개변수 인코딩이 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_ParamsLengthInvalid" xml:space="preserve">
+    <value>Cookie 파일 암호화 매개변수 길이가 올바르지 않습니다</value>
+  </data>
+  <data name="CookieVault_ParamsMissing" xml:space="preserve">
+    <value>Cookie 파일 암호화 매개변수가 누락되었습니다</value>
+  </data>
+  <data name="Crash_Source_AppStartup" xml:space="preserve">
+    <value>애플리케이션 시작 오류</value>
+  </data>
+  <data name="Crash_Source_CoreInit" xml:space="preserve">
+    <value>핵심 구성 및 서비스 초기화 오류</value>
+  </data>
+  <data name="Crash_Source_DomainFatal" xml:space="preserve">
+    <value>애플리케이션 도메인 치명적 예외</value>
+  </data>
+  <data name="Crash_Source_UiUnhandled" xml:space="preserve">
+    <value>처리되지 않은 UI 예외</value>
+  </data>
+  <data name="Crash_Source_UnobservedTask" xml:space="preserve">
+    <value>백그라운드 비동기 작업 예외</value>
+  </data>
+  <data name="CycleChallenge_NonJsonResponse_Format" xml:space="preserve">
+    <value>HTTP {0} 비-JSON 응답: {1}</value>
+  </data>
+  <data name="CycleChallenge_RequestFailed" xml:space="preserve">
+    <value>요청에 실패했습니다.</value>
+  </data>
+  <data name="DailyNote_Connecting" xml:space="preserve">
+    <value>연결 중...</value>
+  </data>
+  <data name="DailyNote_FetchingActivities" xml:space="preserve">
+    <value>이벤트 가져오는 중...</value>
+  </data>
+  <data name="DailyNote_FetchingMaterials" xml:space="preserve">
+    <value>소재 가져오는 중...</value>
+  </data>
+  <data name="DailyNote_InitError" xml:space="preserve">
+    <value>초기화 오류</value>
+  </data>
+  <data name="DailyNote_Initializing" xml:space="preserve">
+    <value>초기화 중...</value>
+  </data>
+  <data name="DailyNote_Updated" xml:space="preserve">
+    <value>업데이트 완료</value>
+  </data>
+  <data name="DatabaseEditor_Add" xml:space="preserve">
+    <value>추가</value>
+  </data>
+  <data name="DatabaseEditor_DeleteDb" xml:space="preserve">
+    <value>DB 삭제</value>
+  </data>
+  <data name="DatabaseEditor_DeleteFailed_Format" xml:space="preserve">
+    <value>파일을 삭제할 수 없습니다. 앱에서 사용 중일 수 있습니다.
+{0}</value>
+  </data>
+  <data name="DatabaseEditor_DeleteSuccess" xml:space="preserve">
+    <value>데이터베이스 파일을 삭제했습니다</value>
+  </data>
+  <data name="DatabaseEditor_Key" xml:space="preserve">
+    <value>키</value>
+  </data>
+  <data name="DatabaseEditor_ReloadFailed" xml:space="preserve">
+    <value>변경 사항을 데이터베이스에 기록했으나 설정을 다시 불러오지 못해 일부 설정이 이전 값으로 유지될 수 있습니다. 런처를 재시작해 주세요.</value>
+  </data>
+  <data name="DatabaseEditor_Save" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="DatabaseEditor_SaveSuccess" xml:space="preserve">
+    <value>모든 변경 사항을 데이터베이스에 저장했습니다</value>
+  </data>
+  <data name="DatabaseEditor_Title" xml:space="preserve">
+    <value>데이터베이스 편집기</value>
+  </data>
+  <data name="DatabaseEditor_Value" xml:space="preserve">
+    <value>값</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Download_ActualSizeMismatch_Format" xml:space="preserve">
+    <value>다운로드 크기가 일치하지 않습니다: 실제 {0} B, 예상 {1} B</value>
+  </data>
+  <data name="Download_Cancelled" xml:space="preserve">
+    <value>다운로드가 취소되었습니다.</value>
+  </data>
+  <data name="Download_ChunkIncomplete_Format" xml:space="preserve">
+    <value>청크가 불완전합니다: 예상 {0} B, 실제 {1} B</value>
+  </data>
+  <data name="Download_ChunkRetryFailed_Format" xml:space="preserve">
+    <value>청크 [{0}-{1}]이(가) {2}회 재시도 후에도 실패했습니다</value>
+  </data>
+  <data name="Download_ChunksFailed_Format" xml:space="preserve">
+    <value>다운로드 실패: 청크 {0}개 오류</value>
+  </data>
+  <data name="Download_ChunkStalled" xml:space="preserve">
+    <value>청크 다운로드가 멈춰 시간 초과되었습니다.</value>
+  </data>
+  <data name="Download_ConnectOrQueueTimeout_Format" xml:space="preserve">
+    <value>연결 또는 대기열 시간이 초과되었습니다(&gt;{0:F0}초).</value>
+  </data>
+  <data name="Download_Failed_Format" xml:space="preserve">
+    <value>다운로드 실패: {0}</value>
+  </data>
+  <data name="Download_HashAlgorithmWithoutExpectedHash" xml:space="preserve">
+    <value>HashAlgorithm이 지정되었지만 ExpectedHash가 제공되지 않았습니다.</value>
+  </data>
+  <data name="Download_HashVerifyFailed_Format" xml:space="preserve">
+    <value>해시 검증 실패: 실제 {0}, 예상 {1}</value>
+  </data>
+  <data name="Download_HeadPreflightFailed_Format" xml:space="preserve">
+    <value>HEAD 사전 확인 실패: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_HeadPreflightNetworkError_Format" xml:space="preserve">
+    <value>HEAD 사전 확인 네트워크 오류: {0}</value>
+  </data>
+  <data name="Download_MissingContentRangeHeader" xml:space="preserve">
+    <value>Content-Range 응답 헤더 없음</value>
+  </data>
+  <data name="Download_MissingDirectoryInPath" xml:space="preserve">
+    <value>대상 경로에 디렉터리 부분이 누락되었습니다.</value>
+  </data>
+  <data name="Download_PreflightFailed_Format" xml:space="preserve">
+    <value>사전 확인 실패: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_RangeMismatch_Format" xml:space="preserve">
+    <value>분할 응답 범위 불일치: 요청 [{0}-{1}], 응답 {2}</value>
+  </data>
+  <data name="Download_RangeNotSupported" xml:space="preserve">
+    <value>서버가 분할 다운로드를 지원하지 않습니다(Accept-Ranges: bytes 누락).</value>
+  </data>
+  <data name="Download_ServerIgnoredRange" xml:space="preserve">
+    <value>서버가 Range 요청을 무시하고 전체 콘텐츠를 반환했습니다.</value>
+  </data>
+  <data name="Download_SingleThreadStalled" xml:space="preserve">
+    <value>단일 스레드 다운로드가 멈춰 시간 초과되었습니다.</value>
+  </data>
+  <data name="Download_SizeMismatchExpected_Format" xml:space="preserve">
+    <value>파일 크기가 예상과 일치하지 않습니다: 서버 {0} B, 예상 {1} B</value>
+  </data>
+  <data name="Download_TargetExists_Format" xml:space="preserve">
+    <value>대상 파일이 이미 존재합니다: {0}</value>
+  </data>
+  <data name="Download_TargetNotWritable_Format" xml:space="preserve">
+    <value>대상 경로에 쓸 수 없습니다: {0}</value>
+  </data>
+  <data name="Download_TimedOut" xml:space="preserve">
+    <value>다운로드 시간이 초과되었습니다.</value>
+  </data>
+  <data name="EasterEgg_Sya_1" xml:space="preserve">
+    <value>안녕, 보고 싶었어.</value>
+  </data>
+  <data name="EasterEgg_Sya_2" xml:space="preserve">
+    <value>금방이라도 그리워할 것 같은 표정 짓지 마. 자세히 봐 봐, 나 바로 네 앞에 서 있잖아♪</value>
+  </data>
+  <data name="EasterEgg_Sya_3_Format" xml:space="preserve">
+    <value>이미 정해진 인과라 해도, {0}의 손끝에서 흔들리게 될 거야♪</value>
+  </data>
+  <data name="EasterEgg_Sya_4" xml:space="preserve">
+    <value>앰포리어스 안에 잠들어 있던 「기억」이 다시 모여, 완전히 새로운 몸으로 엮어졌어.</value>
+  </data>
+  <data name="EasterEgg_Sya_5" xml:space="preserve">
+    <value>지금의 난 그저 「기억」의 잔물결이 아니라, 손 뻗으면 닿을 수 있는 진짜 동료야.</value>
+  </data>
+  <data name="EasterEgg_Sya_6" xml:space="preserve">
+    <value>스크루룸 씨 같은 「무기 생명체」로 변하긴 했지만, 손바닥의 온기는 예전과 똑같지?</value>
+  </data>
+  <data name="EasterEgg_Sya_7_Format" xml:space="preserve">
+    <value>드디어 추억 속에서만 재회하지 않아도 되겠네, {0}. 눈을 뜨기만 하면 네가 보이고, 너와 함께 다다를 별들까지 전부……</value>
+  </data>
+  <data name="EasterEgg_Sya_8_Format" xml:space="preserve">
+    <value>약속했어. 여정의 다음 정거장에서도, {0}의 이야기 속에 내 이름이 남아 있어야 해♪</value>
+  </data>
+  <data name="EasterEgg_Sya_9" xml:space="preserve">
+    <value>영원히 바래지 않는 밀밭의 물결처럼, 손 뻗으면 닿는 여명처럼.</value>
+  </data>
+  <data name="EasterEgg_Sya_10_Format" xml:space="preserve">
+    <value>{0}, 나 돌아왔어♪</value>
+  </data>
+  <data name="EasterEgg_Welcome_1" xml:space="preserve">
+    <value>「키레네는. 분홍 머리에. 뾰족 귀.」</value>
+  </data>
+  <data name="EasterEgg_Welcome_2" xml:space="preserve">
+    <value>「키레네는. 소녀. 제사장.」</value>
+  </data>
+  <data name="EasterEgg_Welcome_3" xml:space="preserve">
+    <value>「키레네는. 눈물은 싫어. 히히 하하.」</value>
+  </data>
+  <data name="EasterEgg_Welcome_4" xml:space="preserve">
+    <value>「키레네는. 다정하고. 예쁜 걸 좋아하고. 시도 쓸 줄 알아.」</value>
+  </data>
+  <data name="EasterEgg_Welcome_5" xml:space="preserve">
+    <value>「키레네는, 키가 자라지 않고, 말할 줄 알며.
+    바람에 흩어진 뒤에도, 여전히 남겨진 존재.」</value>
+  </data>
+  <data name="EasterEgg_Welcome_6" xml:space="preserve">
+    <value>「키레네는, 모든 문장의 마지막에,
+    계속 까르륵 웃는, 작은 꼬리 같은 존재♪」</value>
+  </data>
+  <data name="EasterEgg_Welcome_7" xml:space="preserve">
+    <value>「키레네는, 울면서 태어나고,
+    연약하고, 투명해서, 마치 수정 같은 존재.」</value>
+  </data>
+  <data name="EasterEgg_Welcome_8" xml:space="preserve">
+    <value>「키레네는, 웃으며 작별을 고하고,
+    부드럽고, 분홍빛이라, 마치 꽃 같은 존재.」</value>
+  </data>
+  <data name="FilePicker_AllFilesFilter" xml:space="preserve">
+    <value>모든 파일|*.*</value>
+  </data>
+  <data name="Gacha_AuthKey_GenFailed_Format" xml:space="preserve">
+    <value>Miyoushe 인증 키 생성에 실패했습니다(반환 코드 {0}).</value>
+  </data>
+  <data name="Gacha_AuthKey_HttpError_Format" xml:space="preserve">
+    <value>Miyoushe 인증 요청에 실패했습니다(HTTP {0}).</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteData" xml:space="preserve">
+    <value>Miyoushe 인증 API가 완전한 기원 인증 정보를 반환하지 않았습니다.</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteLogin" xml:space="preserve">
+    <value>Miyoushe 기원 로그인 인증 정보가 불완전합니다. 계정 페이지에서 「Miyoushe 앱 QR 스캔」 또는 문자 인증으로 대상 캐릭터가 연동된 계정에 다시 로그인해 주세요.</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidData" xml:space="preserve">
+    <value>Miyoushe에서 반환한 기원 인증 정보가 올바르지 않습니다.</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidResponse" xml:space="preserve">
+    <value>Miyoushe 인증 API가 잘못된 데이터를 반환했습니다.</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidRole" xml:space="preserve">
+    <value>선택한 캐릭터의 게임, UID 또는 서버 정보가 올바르지 않습니다.</value>
+  </data>
+  <data name="Gacha_AuthKey_Rejected" xml:space="preserve">
+    <value>Miyoushe가 선택한 캐릭터의 기원 인증을 거부했습니다(반환 코드 -100).</value>
+  </data>
+  <data name="Gacha_AuthKey_ReloginRequired" xml:space="preserve">
+    <value>Miyoushe 로그인 인증 정보가 불완전합니다. 선택한 계정에 다시 로그인해 주세요.</value>
+  </data>
+  <data name="Gacha_Fetch_ErrorCode_Format" xml:space="preserve">
+    <value>기원 기록을 가져오지 못했습니다(반환 코드 {0}). 잠시 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="Gacha_Fetch_InvalidServerData" xml:space="preserve">
+    <value>서버에서 잘못된 기원 기록 데이터를 반환했습니다.</value>
+  </data>
+  <data name="Gacha_Fetch_LinkExpired" xml:space="preserve">
+    <value>기원 기록 링크가 만료되었거나 유효하지 않습니다. 게임 내에서 기원 기록을 다시 연 뒤 시도해 주세요.</value>
+  </data>
+  <data name="Gacha_Fetch_MissingUid" xml:space="preserve">
+    <value>기원 기록에 유효한 게임 UID가 없어 가져오기를 중단했습니다.</value>
+  </data>
+  <data name="Gacha_Fetch_MultipleAccounts" xml:space="preserve">
+    <value>기원 기록에 서로 다른 계정의 데이터가 포함되어 있어 가져오기를 중단했습니다.</value>
+  </data>
+  <data name="Gacha_Fetch_NetworkError" xml:space="preserve">
+    <value>기원 기록 요청에 실패했습니다. 네트워크 연결을 확인한 뒤 다시 시도해 주세요.</value>
+  </data>
+  <data name="Gacha_Fetch_ServerMismatch" xml:space="preserve">
+    <value>기원 링크와 반환된 기록의 서버가 일치하지 않아 가져오기를 중단했습니다.</value>
+  </data>
+  <data name="Gacha_Fetch_UidMismatch" xml:space="preserve">
+    <value>반환된 기록의 UID가 선택한 게임 캐릭터와 일치하지 않아 가져오기를 중단했습니다.</value>
+  </data>
+  <data name="Gacha_Fetch_UidServerMismatch" xml:space="preserve">
+    <value>기원 기록의 UID가 서버와 일치하지 않아 가져오기를 중단했습니다.</value>
+  </data>
+  <data name="Gacha_InvalidRoleBindingResponse" xml:space="preserve">
+    <value>캐릭터 연동 응답 데이터가 올바르지 않습니다.</value>
+  </data>
+  <data name="Gacha_Resolver_CookieUnreadable_Format" xml:space="preserve">
+    <value>계정 {0}의 로그인 인증 정보를 읽을 수 없습니다. 해당 계정에 다시 로그인해 주세요.</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryFailed_Format" xml:space="preserve">
+    <value>계정 {0}의 연동 캐릭터 조회에 실패했습니다(반환 코드 {1}).</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryIncomplete_Format" xml:space="preserve">
+    <value>계정 {0}의 연동 캐릭터 조회가 완료되지 않았습니다({1}). 잠시 후 다시 시도해 주세요.</value>
+  </data>
+  <data name="GachaAnalysis_ConfirmDeleteRecords_Format" xml:space="preserve">
+    <value>UID: {0}의 모든 기원 기록을 삭제하시겠습니까?
+이 작업은 되돌릴 수 없습니다!</value>
+  </data>
+  <data name="GachaAnalysis_CopyImageSuccess" xml:space="preserve">
+    <value>기원 분석 이미지를 클립보드에 복사했습니다.</value>
+  </data>
+  <data name="GachaAnalysis_CreateNewArchive" xml:space="preserve">
+    <value>새 아카이브 만들기</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountContent_Format" xml:space="preserve">
+    <value>현재 데이터는 UID: {0} 소속입니다.
+가져올 데이터는 UID: {1}에서 왔습니다.
+
+UID {1}용 새 데이터 아카이브를 만드시겠습니까?</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountTitle" xml:space="preserve">
+    <value>다른 계정 감지됨</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV22" xml:space="preserve">
+    <value>v2.2 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV23" xml:space="preserve">
+    <value>v2.3 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV24" xml:space="preserve">
+    <value>v2.4 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV30" xml:space="preserve">
+    <value>v3.0 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV40" xml:space="preserve">
+    <value>v4.0 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV41" xml:space="preserve">
+    <value>v4.1 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV42" xml:space="preserve">
+    <value>v4.2 형식으로 내보내기</value>
+  </data>
+  <data name="GachaAnalysis_ExportImageFilename_Format" xml:space="preserve">
+    <value>기원분석_{0}_{1:yyyyMMddHHmmss}</value>
+  </data>
+  <data name="GachaAnalysis_FetchFailedTitle" xml:space="preserve">
+    <value>가져오기 실패</value>
+  </data>
+  <data name="GachaAnalysis_FullFetchTooltip" xml:space="preserve">
+    <value>모든 기원 기록을 처음부터 다시 불러옵니다. 시간이 더 걸리지만 누락된 데이터를 복구할 때 유용합니다</value>
+  </data>
+  <data name="GachaAnalysis_GoToLogin" xml:space="preserve">
+    <value>로그인하러 가기</value>
+  </data>
+  <data name="GachaAnalysis_IncrementalTooltip" xml:space="preserve">
+    <value>로컬에 없는 신규 기원 기록만 가져옵니다. 속도가 빨라 일상적인 업데이트에 권장됩니다</value>
+  </data>
+  <data name="GachaAnalysis_NoAccountDeleteHint" xml:space="preserve">
+    <value>현재 선택된 계정이 없어 기록을 삭제할 수 없습니다.</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInDesc" xml:space="preserve">
+    <value>로그인된 Miyoushe 계정이 감지되지 않았습니다. 로그인을 위해 계정 설정 페이지로 이동합니다.</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInTitle" xml:space="preserve">
+    <value>Miyoushe에 로그인되지 않음</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedDesc" xml:space="preserve">
+    <value>글로벌 서버(HoYoLAB) 계정의 기원 기록 자동 불러오기 기능은 현재 지원 준비 중입니다. 조금만 기다려 주세요.
+
+글로벌 서버 사용자는 「URL로 가져오기」 기능을 통해 기원 기록을 가져올 수 있습니다.</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedTitle" xml:space="preserve">
+    <value>글로벌 서버 미지원</value>
+  </data>
+  <data name="GachaAnalysis_PngImage" xml:space="preserve">
+    <value>PNG 이미지</value>
+  </data>
+  <data name="GachaAnalysis_ReloginTitle" xml:space="preserve">
+    <value>대상 계정 로그인 필요</value>
+  </data>
+  <data name="GachaAnalysis_SaveFailedTitle" xml:space="preserve">
+    <value>저장 실패</value>
+  </data>
+  <data name="GachaAnalysis_SaveImageSuccess" xml:space="preserve">
+    <value>기원 분석 이미지를 파일로 저장했습니다.</value>
+  </data>
+  <data name="GachaAnalysis_SaveSuccessTitle" xml:space="preserve">
+    <value>저장 완료</value>
+  </data>
+  <data name="GachaAnalysis_UigfPartnerBadge" xml:space="preserve">
+    <value>UIGF / UIAF 표준 프로젝트 협력 인증</value>
+  </data>
+  <data name="GachaAnalysis_UigfSupportDesc" xml:space="preserve">
+    <value>이 프로젝트는 UIGF v4.2 / v4.1 / v4.0 / v3.0 / v2.4 / v2.3 / v2.2 표준 형식으로 기원 데이터를 처리합니다</value>
+  </data>
+  <data name="GachaAnalysis_UrlDialogTitle" xml:space="preserve">
+    <value>URL로 기원 기록 가져오기</value>
+  </data>
+  <data name="GachaAnalysis_UrlInstruction" xml:space="preserve">
+    <value>Miyoushe나 다른 도구에서 얻은 기원 기록 링크를 붙여넣으세요. 링크에 authkey 매개변수가 포함되어 있어야 합니다.</value>
+  </data>
+  <data name="GachaAnalysis_UrlPlaceholder" xml:space="preserve">
+    <value>여기에 기원 분석 링크(URL)를 붙여넣으세요...</value>
+  </data>
+  <data name="GameServer_UnexpectedEof" xml:space="preserve">
+    <value>예기치 않은 파일 끝입니다(파일이 잘렸을 수 있습니다).</value>
+  </data>
+  <data name="GameUpdate_IncompletePatchData" xml:space="preserve">
+    <value>패치 세그먼트 데이터가 불완전합니다</value>
+  </data>
+  <data name="HighCpuUsage_SampleUsage_Format" xml:space="preserve">
+    <value>최근 샘플링 CPU 점유율 약 {0:F1}%</value>
+  </data>
+  <data name="HoyolabCheckin_Title" xml:space="preserve">
+    <value>HoYoLAB 자동 출석 체크</value>
+  </data>
+  <data name="Inventory_ApiRequestFailed" xml:space="preserve">
+    <value>가방 API 요청에 실패했습니다. 해당 캐릭터의 로그인 및 권한 상태를 확인해 주세요.</value>
+  </data>
+  <data name="Inventory_CnOnly" xml:space="preserve">
+    <value>가방 동기화는 현재 천공의 섬 및 세계수(중국 서버) 캐릭터만 지원합니다.</value>
+  </data>
+  <data name="Inventory_FetchingData" xml:space="preserve">
+    <value>데이터 가져오는 중...</value>
+  </data>
+  <data name="Inventory_LastUpdated_Format" xml:space="preserve">
+    <value>마지막 업데이트: {0}</value>
+  </data>
+  <data name="Inventory_LoginRequired" xml:space="preserve">
+    <value>먼저 Miyoushe 계정에 로그인해 주세요</value>
+  </data>
+  <data name="Inventory_RequestingMiyoushe" xml:space="preserve">
+    <value>Miyoushe에 요청 중...</value>
+  </data>
+  <data name="Inventory_SyncFailed_Format" xml:space="preserve">
+    <value>동기화 실패: {0}</value>
+  </data>
+  <data name="Inventory_SyncSuccess_Format" xml:space="preserve">
+    <value>동기화 완료: {0}</value>
+  </data>
+  <data name="LoginQR_AppScanSuccessExchanging" xml:space="preserve">
+    <value>앱 QR 스캔 완료, 인증 정보 교환 중...</value>
+  </data>
+  <data name="LoginQR_CannotCreateAuthToken" xml:space="preserve">
+    <value>인증 토큰을 생성할 수 없습니다</value>
+  </data>
+  <data name="LoginQR_CaptchaNotCompleted" xml:space="preserve">
+    <value>사람 확인(CAPTCHA)이 완료되지 않았습니다. 다시 시도해 주세요</value>
+  </data>
+  <data name="LoginQR_ClearDone" xml:space="preserve">
+    <value>정리 완료</value>
+  </data>
+  <data name="LoginQR_ClearFailed_Format" xml:space="preserve">
+    <value>정리 실패: {0}</value>
+  </data>
+  <data name="LoginQR_ClearingDbCache" xml:space="preserve">
+    <value>데이터베이스 캐시 삭제 중...</value>
+  </data>
+  <data name="LoginQR_CompleteWebLogin" xml:space="preserve">
+    <value>웹 페이지에서 로그인 인증을 완료해 주세요</value>
+  </data>
+  <data name="LoginQR_ConfirmClearHistory" xml:space="preserve">
+    <value>저장된 이전 로그인 기록 데이터를 삭제하시겠습니까?</value>
+  </data>
+  <data name="LoginQR_CreateFailed_Format" xml:space="preserve">
+    <value>생성 실패: {0}</value>
+  </data>
+  <data name="LoginQR_CreatingAppQr" xml:space="preserve">
+    <value>앱 로그인 QR 코드 생성 중...</value>
+  </data>
+  <data name="LoginQR_CreatingGameQr" xml:space="preserve">
+    <value>게임 내 스캔용 QR 코드 생성 중...</value>
+  </data>
+  <data name="LoginQR_CredentialExchangeException_Format" xml:space="preserve">
+    <value>인증 정보 교환 오류: {0}</value>
+  </data>
+  <data name="LoginQR_ExchangingLoginCredential" xml:space="preserve">
+    <value>로그인 인증 정보 교환 중...</value>
+  </data>
+  <data name="LoginQR_ExtractCookieFromHeadersFailed" xml:space="preserve">
+    <value>응답 헤더에서 전체 Cookie를 추출하지 못했습니다</value>
+  </data>
+  <data name="LoginQR_ExtractRetry" xml:space="preserve">
+    <value>추출에 실패했습니다. 다시 시도해 주세요</value>
+  </data>
+  <data name="LoginQR_ExtractSuccess" xml:space="preserve">
+    <value>인증 정보 추출 완료</value>
+  </data>
+  <data name="LoginQR_FetchingFullCredential" xml:space="preserve">
+    <value>전체 로그인 인증 정보 가져오는 중...</value>
+  </data>
+  <data name="LoginQR_ForceStoppedScan" xml:space="preserve">
+    <value>QR 스캔 대기를 강제 종료했습니다</value>
+  </data>
+  <data name="LoginQR_GameScanSuccessExchanging" xml:space="preserve">
+    <value>QR 스캔 완료, SToken 교환 중...</value>
+  </data>
+  <data name="LoginQR_GetSmsCodeFirst" xml:space="preserve">
+    <value>먼저 문자 인증 번호를 받아 주세요</value>
+  </data>
+  <data name="LoginQR_InvalidCookie" xml:space="preserve">
+    <value>유효하지 않은 Cookie</value>
+  </data>
+  <data name="LoginQR_InvalidCookieFormat" xml:space="preserve">
+    <value>Cookie 형식이 올바르지 않습니다</value>
+  </data>
+  <data name="LoginQR_InvalidMobileLength" xml:space="preserve">
+    <value>올바른 11자리 휴대폰 번호를 입력해 주세요</value>
+  </data>
+  <data name="LoginQR_LoadingPassportPage" xml:space="preserve">
+    <value>통행증 로그인 페이지 불러오는 중...</value>
+  </data>
+  <data name="LoginQR_LoadPassportFailed_Format" xml:space="preserve">
+    <value>통행증 웹 페이지 불러오기 실패: {0}</value>
+  </data>
+  <data name="LoginQR_LoggingIn" xml:space="preserve">
+    <value>로그인 중...</value>
+  </data>
+  <data name="LoginQR_LoginFailedCode_Format" xml:space="preserve">
+    <value>로그인 실패: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_LoginFailedReason_Format" xml:space="preserve">
+    <value>로그인 실패: {0}</value>
+  </data>
+  <data name="LoginQR_LoginMissingCredential" xml:space="preserve">
+    <value>로그인 실패: 응답에 인증 정보가 없습니다</value>
+  </data>
+  <data name="LoginQR_PasteCookiePlaceholder" xml:space="preserve">
+    <value>여기에 Cookie 붙여넣기</value>
+  </data>
+  <data name="LoginQR_ProcessFailed_Format" xml:space="preserve">
+    <value>처리 실패: {0}</value>
+  </data>
+  <data name="LoginQR_QrExpiredMaxRefresh" xml:space="preserve">
+    <value>QR 코드가 만료되었고 자동 새로고침 횟수 제한에 도달했습니다. 클릭하여 수동으로 새로고침해 주세요</value>
+  </data>
+  <data name="LoginQR_RequestRejected" xml:space="preserve">
+    <value>요청이 거부되었습니다</value>
+  </data>
+  <data name="LoginQR_RiskVerifyIncomplete" xml:space="preserve">
+    <value>보안 인증이 완료되지 않았습니다</value>
+  </data>
+  <data name="LoginQR_ScanMissingCredential" xml:space="preserve">
+    <value>스캔 응답에 인증 정보가 없습니다. QR 코드를 새로고침한 뒤 다시 시도해 주세요</value>
+  </data>
+  <data name="LoginQR_ScannedConfirmPhone" xml:space="preserve">
+    <value>스캔 완료, 휴대폰에서 로그인을 확인해 주세요...</value>
+  </data>
+  <data name="LoginQR_ScanRejected" xml:space="preserve">
+    <value>스캔 요청이 거부되었습니다</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyoushe" xml:space="preserve">
+    <value>Miyoushe 앱으로 QR 코드를 스캔해 주세요</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyousheOrGame" xml:space="preserve">
+    <value>Miyoushe 또는 해당 게임 내에서 QR 코드를 스캔해 주세요</value>
+  </data>
+  <data name="LoginQR_SendCaptchaException_Format" xml:space="preserve">
+    <value>전송 오류: {0}</value>
+  </data>
+  <data name="LoginQR_SendCaptchaFailed_Format" xml:space="preserve">
+    <value>전송 실패: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeException_Format" xml:space="preserve">
+    <value>SToken 교환 오류: {0}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeFailed_Format" xml:space="preserve">
+    <value>SToken 교환 실패: {0}</value>
+  </data>
+  <data name="LoginQR_TooManyNetworkErrors" xml:space="preserve">
+    <value>네트워크 오류가 너무 많습니다. 연결을 확인한 뒤 다시 시도해 주세요</value>
+  </data>
+  <data name="LoginQR_TooManyVerifyAttempts" xml:space="preserve">
+    <value>로그인 실패: 인증 시도 횟수가 너무 많습니다. 잠시 후 다시 시도해 주세요</value>
+  </data>
+  <data name="MainWindow_DispatcherClosed" xml:space="preserve">
+    <value>메인 창의 UI 디스패처 대기열이 닫혔습니다</value>
+  </data>
+  <data name="MapPage_LockMapOn" xml:space="preserve">
+    <value>지도 잠금 (켜짐)</value>
+  </data>
+  <data name="MapPage_TopMostOn" xml:space="preserve">
+    <value>창 항상 위 (켜짐)</value>
+  </data>
+  <data name="Miyoushe_CommentLengthLimit" xml:space="preserve">
+    <value>댓글은 1자에서 1000자 사이여야 합니다</value>
+  </data>
+  <data name="Miyoushe_DeviceIdentityIncomplete" xml:space="preserve">
+    <value>Miyoushe 계정의 기기 식별 정보가 불완전합니다</value>
+  </data>
+  <data name="Miyoushe_InteractiveFallback" xml:space="preserve">
+    <value>[상호작용 콘텐츠: 원본 게시글에서 확인하세요]</value>
+  </data>
+  <data name="Miyoushe_InvalidId" xml:space="preserve">
+    <value>유효하지 않은 Miyoushe ID</value>
+  </data>
+  <data name="Miyoushe_LibraryLoadFailedIO" xml:space="preserve">
+    <value>로컬 즐겨찾기 파일을 읽지 못해 원본 파일을 유지했습니다. 파일을 복구한 뒤 창을 다시 열어 주세요</value>
+  </data>
+  <data name="Miyoushe_LoginCnAccountFirst" xml:space="preserve">
+    <value>먼저 런처 계정 관리에서 Miyoushe 중국 서버 계정에 로그인한 뒤 해당 계정을 선택해 주세요</value>
+  </data>
+  <data name="Miyoushe_NoPendingVerify" xml:space="preserve">
+    <value>대기 중인 인증이 없습니다</value>
+  </data>
+  <data name="Miyoushe_PostUnavailable" xml:space="preserve">
+    <value>게시글 내용을 사용할 수 없습니다</value>
+  </data>
+  <data name="Miyoushe_RateLimitedManual" xml:space="preserve">
+    <value>요청 횟수 제한에 도달했습니다. 잠시 후 수동으로 다시 시도해 주세요</value>
+  </data>
+  <data name="Miyoushe_RateLimitedWait_Format" xml:space="preserve">
+    <value>요청 횟수 제한에 도달했습니다. {0}초 후에 다시 시도해 주세요</value>
+  </data>
+  <data name="Miyoushe_ReloginRequired" xml:space="preserve">
+    <value>Miyoushe 계정에 다시 로그인해 주세요</value>
+  </data>
+  <data name="Miyoushe_ResponseTooLarge" xml:space="preserve">
+    <value>응답 데이터가 너무 큽니다</value>
+  </data>
+  <data name="Miyoushe_SecurityVerifyRequired" xml:space="preserve">
+    <value>Miyoushe에서 보안 인증을 요구합니다</value>
+  </data>
+  <data name="Miyoushe_SubmissionUncertainIO" xml:space="preserve">
+    <value>댓글 등록 결과를 확인할 수 없습니다. 중복 게시를 방지하려면 먼저 원본 게시글을 확인해 주세요</value>
+  </data>
+  <data name="Miyoushe_UnrecognizedResponse" xml:space="preserve">
+    <value>Miyoushe에서 인식할 수 없는 응답을 반환했습니다</value>
+  </data>
+  <data name="Miyoushe_VerifyFailedRetry" xml:space="preserve">
+    <value>인증에 실패했습니다. 다시 시도해 주세요</value>
+  </data>
+  <data name="Miyoushe_VerifyNoCaptchaProvided" xml:space="preserve">
+    <value>서비스에서 사용 가능한 인증 문자를 제공하지 않았습니다. Miyoushe 공식 페이지에서 인증을 완료해 주세요</value>
+  </data>
+  <data name="Miyoushe_VerifyParamsIncomplete" xml:space="preserve">
+    <value>인증 매개변수가 불완전합니다. Miyoushe 공식 페이지에서 인증을 완료해 주세요</value>
+  </data>
+  <data name="Miyoushe_VoteInteractiveFallback" xml:space="preserve">
+    <value>[투표: 원본 게시글에서 참여하세요]</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstall" xml:space="preserve">
+    <value>인증서를 설치하려면 관리자 권한이 필요합니다</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstallDetail_Format" xml:space="preserve">
+    <value>인증서를 설치하려면 관리자 권한이 필요합니다({0})</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstall" xml:space="preserve">
+    <value>인증서를 제거하려면 관리자 권한이 필요합니다</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstallDetail_Format" xml:space="preserve">
+    <value>인증서를 제거하려면 관리자 권한이 필요합니다({0})</value>
+  </data>
+  <data name="ModTrust_CertAlreadyInstalled" xml:space="preserve">
+    <value>플랫폼 인증서가 이미 설치되어 있으므로 다시 설치할 필요가 없습니다</value>
+  </data>
+  <data name="ModTrust_CertInstalledScope_Format" xml:space="preserve">
+    <value>플랫폼 인증서가 설치되었습니다({0})</value>
+  </data>
+  <data name="ModTrust_CertNotInstalled" xml:space="preserve">
+    <value>플랫폼 인증서가 설치되어 있지 않습니다</value>
+  </data>
+  <data name="ModTrust_CertPurposeNote" xml:space="preserve">
+    <value>인증서 용도: 당사가 발급한 코드 서명을 검증합니다. 설치 후 설정에서 언제든 제거할 수 있습니다.</value>
+  </data>
+  <data name="ModTrust_CertUnavailable" xml:space="preserve">
+    <value>플랫폼 인증서를 사용할 수 없습니다. 나중에 설정에서 신뢰 정보를 업데이트해 주세요.</value>
+  </data>
+  <data name="ModTrust_CertUninstalledScope_Format" xml:space="preserve">
+    <value>플랫폼 인증서가 제거되었습니다({0})</value>
+  </data>
+  <data name="ModTrust_ConfirmAndInstall" xml:space="preserve">
+    <value>확인 완료, 설치</value>
+  </data>
+  <data name="ModTrust_ElevatedExitCode_Format" xml:space="preserve">
+    <value>관리자 권한 작업 종료 코드 {0}</value>
+  </data>
+  <data name="ModTrust_ElevatedStartFailed" xml:space="preserve">
+    <value>관리자 권한 프로세스 시작에 실패했습니다</value>
+  </data>
+  <data name="ModTrust_ElevationCancelled" xml:space="preserve">
+    <value>관리자 권한 승인이 취소되어 작업을 실행하지 않았습니다</value>
+  </data>
+  <data name="ModTrust_ExePathUnavailable" xml:space="preserve">
+    <value>현재 실행 파일 경로를 찾을 수 없습니다</value>
+  </data>
+  <data name="ModTrust_InstallFailedMsg_Format" xml:space="preserve">
+    <value>설치 실패: {0}</value>
+  </data>
+  <data name="ModTrust_InstallFailedTitle" xml:space="preserve">
+    <value>설치 실패</value>
+  </data>
+  <data name="ModTrust_InstallPkgUnavailable" xml:space="preserve">
+    <value>신뢰 패키지를 사용할 수 없어 인증서 설치를 거부했습니다</value>
+  </data>
+  <data name="ModTrust_InstallReviewLead_Format" xml:space="preserve">
+    <value>「{0}」에 다음 플랫폼 인증서를 설치합니다. 내용을 확인한 뒤 계속해 주세요:</value>
+  </data>
+  <data name="ModTrust_IssuerCertLabel" xml:space="preserve">
+    <value>플랫폼 중간 인증서</value>
+  </data>
+  <data name="ModTrust_IssuerLabel" xml:space="preserve">
+    <value>발급자</value>
+  </data>
+  <data name="ModTrust_MachineAlreadyCoversUser" xml:space="preserve">
+    <value>로컬 컴퓨터 수준 신뢰가 이미 설치되어 현재 사용자를 포함하므로 사용자 단위로 중복 설치할 필요가 없습니다</value>
+  </data>
+  <data name="ModTrust_Manifest_HashMismatch" xml:space="preserve">
+    <value>매니페스트 콘텐츠 해시가 서명 봉투와 일치하지 않습니다</value>
+  </data>
+  <data name="ModTrust_Manifest_InvalidEnvelope" xml:space="preserve">
+    <value>서명 봉투 구문 분석에 실패했습니다</value>
+  </data>
+  <data name="ModTrust_Manifest_NotRsa" xml:space="preserve">
+    <value>서명 인증서가 RSA 공개 키를 사용하지 않습니다</value>
+  </data>
+  <data name="ModTrust_Manifest_SigVerifyFailed" xml:space="preserve">
+    <value>매니페스트 서명 검증에 실패했습니다</value>
+  </data>
+  <data name="ModTrust_Manifest_ThumbprintMismatch" xml:space="preserve">
+    <value>서명자 지문이 매니페스트 선언과 일치하지 않습니다</value>
+  </data>
+  <data name="ModTrust_Manifest_UnsupportedAlg_Format" xml:space="preserve">
+    <value>지원하지 않는 서명 알고리즘: {0}</value>
+  </data>
+  <data name="ModTrust_Manifest_VerifyException_Format" xml:space="preserve">
+    <value>매니페스트 서명 검증 오류: {0}</value>
+  </data>
+  <data name="ModTrust_NoMachineCertToUninstall" xml:space="preserve">
+    <value>로컬 컴퓨터 저장소에 이 앱이 설치한 인증서가 없습니다</value>
+  </data>
+  <data name="ModTrust_NoPinnedRoot" xml:space="preserve">
+    <value>앱에 고정 루트 인증서(Assets/Trust/ModsRootCA.cer)가 내장되어 있지 않아 신뢰 패키지를 검증할 수 없습니다</value>
+  </data>
+  <data name="ModTrust_NoUserCertToUninstall" xml:space="preserve">
+    <value>현재 사용자 저장소에 이 앱이 설치한 인증서가 없습니다</value>
+  </data>
+  <data name="ModTrust_NoVerifiedPkg" xml:space="preserve">
+    <value>검증을 통과한 신뢰 패키지가 없습니다</value>
+  </data>
+  <data name="ModTrust_OpCompleted" xml:space="preserve">
+    <value>작업이 완료되었습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_IssuingThumbprintMismatch" xml:space="preserve">
+    <value>발급 인증서 지문이 매니페스트 선언과 일치하지 않습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestEmpty" xml:space="preserve">
+    <value>신뢰 매니페스트가 비어 있습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestInvalidJson_Format" xml:space="preserve">
+    <value>신뢰 매니페스트가 올바른 JSON이 아닙니다: {0}</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestSigInvalid_Format" xml:space="preserve">
+    <value>매니페스트 서명이 유효하지 않습니다: {0}</value>
+  </data>
+  <data name="ModTrust_Pkg_NoSignerCert" xml:space="preserve">
+    <value>매니페스트 서명자 인증서가 제공되지 않았습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_RootHasPrivateKey" xml:space="preserve">
+    <value>신뢰 패키지의 루트 인증서에 개인 키가 포함되어 거부되었습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_RootNotSelfSigned" xml:space="preserve">
+    <value>루트 인증서가 자체 서명 인증서가 아닙니다</value>
+  </data>
+  <data name="ModTrust_Pkg_RootThumbprintMismatch" xml:space="preserve">
+    <value>루트 인증서 지문이 매니페스트 선언과 일치하지 않습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerNotChained" xml:space="preserve">
+    <value>매니페스트 서명자 인증서가 이 신뢰 패키지의 루트 인증서로 체인 연결되지 않습니다</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerThumbprintMismatch" xml:space="preserve">
+    <value>매니페스트 서명자 인증서 지문이 매니페스트 선언과 일치하지 않습니다</value>
+  </data>
+  <data name="ModTrust_PkgRootMismatch_Format" xml:space="preserve">
+    <value>신뢰 패키지 루트 인증서가 내장된 고정 루트 인증서와 일치하지 않아({0}) 거부되었습니다</value>
+  </data>
+  <data name="ModTrust_PkgVerifyFailed_Format" xml:space="preserve">
+    <value>신뢰 패키지 검증 실패({0}): {1}</value>
+  </data>
+  <data name="ModTrust_Policy_AnyEku" xml:space="preserve">
+    <value>인증서에 포괄적 용도 OID(anyExtendedKeyUsage)가 포함되어 있습니다</value>
+  </data>
+  <data name="ModTrust_Policy_CabForumOid_Format" xml:space="preserve">
+    <value>인증서에 CA/Browser Forum 정책 OID({0}, EV 정책 포함)가 포함되어 있습니다</value>
+  </data>
+  <data name="ModTrust_Policy_IsCa" xml:space="preserve">
+    <value>서명 인증서가 CA 인증서입니다</value>
+  </data>
+  <data name="ModTrust_Policy_KeyCertSign" xml:space="preserve">
+    <value>인증서에 keyCertSign 키 사용 권한이 포함되어 있습니다</value>
+  </data>
+  <data name="ModTrust_Policy_NoDigitalSig" xml:space="preserve">
+    <value>인증서에 digitalSignature 키 사용 권한이 없습니다</value>
+  </data>
+  <data name="ModTrust_Policy_NoEku" xml:space="preserve">
+    <value>인증서에 확장 키 사용(EKU) 확장이 없습니다</value>
+  </data>
+  <data name="ModTrust_Policy_NonCodeEku_Format" xml:space="preserve">
+    <value>인증서에 코드 서명 외 EKU({0})가 포함되어 있습니다</value>
+  </data>
+  <data name="ModTrust_Policy_ValidityExceeded_Format" xml:space="preserve">
+    <value>인증서 유효 기간 {0:F0}일이 정책 상한 {1}일을 초과했습니다</value>
+  </data>
+  <data name="ModTrust_ReasonFailed_Format" xml:space="preserve">
+    <value>서명이 플랫폼 신뢰 검증을 통과하지 못했습니다: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableEnforce" xml:space="preserve">
+    <value>신뢰 패키지를 사용할 수 없어 차단 모드에서 미검증 파일 로드를 거부합니다</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableWarn" xml:space="preserve">
+    <value>신뢰 패키지를 사용할 수 없어 경고 표시 후 실행을 허용했습니다</value>
+  </data>
+  <data name="ModTrust_ReasonPolicyViolation_Format" xml:space="preserve">
+    <value>서명 인증서가 플랫폼 정책을 위반했습니다(기본 코드 서명 인증서만 허용): {0}</value>
+  </data>
+  <data name="ModTrust_ReasonRevoked_Format" xml:space="preserve">
+    <value>서명 인증서가 플랫폼에 의해 해지되었습니다: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonSkipped" xml:space="preserve">
+    <value>서명 신뢰 검증 비활성화됨</value>
+  </data>
+  <data name="ModTrust_ReasonTampered" xml:space="preserve">
+    <value>서명이 파일 내용과 일치하지 않습니다. 파일이 변조되었을 수 있습니다</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedAllowlisted_Format" xml:space="preserve">
+    <value>플랫폼 신뢰 허용 목록에 포함됨: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedPlatform_Format" xml:space="preserve">
+    <value>FufuLauncher 코드 서명 CA에서 발급함: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonUnsigned" xml:space="preserve">
+    <value>서명되지 않음: 게시자 신원을 확인할 수 없습니다</value>
+  </data>
+  <data name="ModTrust_ReviewTitle" xml:space="preserve">
+    <value>플랫폼 인증서 확인</value>
+  </data>
+  <data name="ModTrust_RootCertLabel" xml:space="preserve">
+    <value>플랫폼 루트 인증서</value>
+  </data>
+  <data name="ModTrust_SignerIdSuffix_Format" xml:space="preserve">
+    <value> (서명자 ID {0})</value>
+  </data>
+  <data name="ModTrust_SubjectLabel" xml:space="preserve">
+    <value>발급 대상</value>
+  </data>
+  <data name="ModTrust_SyncFailed_Format" xml:space="preserve">
+    <value>동기화 실패: {0}</value>
+  </data>
+  <data name="ModTrust_SyncHashMismatch_Format" xml:space="preserve">
+    <value>파일 {0} 해시 검증 실패(예상 {1}, 실제 {2})로 이번 동기화가 거부되었습니다</value>
+  </data>
+  <data name="ModTrust_SyncIllegalFilename" xml:space="preserve">
+    <value>동기화 엔드포인트가 잘못된 파일 이름을 반환하여 중단되었습니다</value>
+  </data>
+  <data name="ModTrust_SyncInvalidIndex" xml:space="preserve">
+    <value>동기화 엔드포인트가 유효한 파일 목록을 반환하지 않았습니다</value>
+  </data>
+  <data name="ModTrust_SyncNoPinnedRoot" xml:space="preserve">
+    <value>앱에 고정 루트 인증서(Assets/Trust/ModsRootCA.cer)가 내장되어 있지 않아 네트워크 신뢰 패키지를 받지 않습니다</value>
+  </data>
+  <data name="ModTrust_SyncRootMismatch" xml:space="preserve">
+    <value>동기화된 신뢰 패키지 루트 인증서가 앱 내장 루트 인증서와 일치하지 않아 거부되었습니다(클라이언트 업데이트가 필요할 수 있습니다)</value>
+  </data>
+  <data name="ModTrust_SyncUpdated_Format" xml:space="preserve">
+    <value>신뢰 패키지가 업데이트되었습니다(버전 {0}, 해지 {1}건)</value>
+  </data>
+  <data name="ModTrust_ThumbprintSha256" xml:space="preserve">
+    <value>SHA-256 지문</value>
+  </data>
+  <data name="ModTrust_UninstallAction" xml:space="preserve">
+    <value>제거</value>
+  </data>
+  <data name="ModTrust_UninstallCertTitle" xml:space="preserve">
+    <value>플랫폼 인증서 제거</value>
+  </data>
+  <data name="ModTrust_UninstallFailedMsg_Format" xml:space="preserve">
+    <value>제거 실패: {0}</value>
+  </data>
+  <data name="ModTrust_UninstallFromMachine" xml:space="preserve">
+    <value>현재 사용자의 신뢰는 로컬 컴퓨터 설치를 통해 제공되므로 컴퓨터 범위에서 제거해 주세요</value>
+  </data>
+  <data name="ModTrust_UninstallPkgUnavailable" xml:space="preserve">
+    <value>신뢰 패키지를 사용할 수 없어 제거할 인증서를 찾을 수 없습니다</value>
+  </data>
+  <data name="ModTrust_UnknownAction_Format" xml:space="preserve">
+    <value>알 수 없는 작업: {0}</value>
+  </data>
+  <data name="ModTrust_UnsignedMarker" xml:space="preserve">
+    <value>(서명 없음)</value>
+  </data>
+  <data name="ModTrust_ValidUntil" xml:space="preserve">
+    <value>만료일</value>
+  </data>
+  <data name="ModTrust_Verify_Allowlisted" xml:space="preserve">
+    <value>인증서 지문이 신뢰 매니페스트의 추가 허용 목록과 일치합니다</value>
+  </data>
+  <data name="ModTrust_Verify_BadDigest" xml:space="preserve">
+    <value>서명이 파일 내용과 일치하지 않습니다(파일이 변조되었을 수 있음)</value>
+  </data>
+  <data name="ModTrust_Verify_ChainIncomplete_Format" xml:space="preserve">
+    <value>인증서 체인이 플랫폼 루트 인증서까지 연결되지 않습니다: {0}</value>
+  </data>
+  <data name="ModTrust_Verify_Compliant" xml:space="preserve">
+    <value>플랫폼 코드 서명 CA에서 발급되었으며 정책을 준수합니다</value>
+  </data>
+  <data name="ModTrust_Verify_NoOsChain" xml:space="preserve">
+    <value>OS에 신뢰 체인이 구성되어 있지 않아(루트 인증서 미설치) 플랫폼 내장 루트 인증서로 대신 검증했습니다</value>
+  </data>
+  <data name="ModTrust_Verify_Revoked" xml:space="preserve">
+    <value>인증서가 플랫폼에 의해 해지되었습니다</value>
+  </data>
+  <data name="ModTrust_Verify_SignerId_Format" xml:space="preserve">
+    <value>서명자 ID: {0}</value>
+  </data>
+  <data name="ModTrust_Verify_WinTrustFailed_Format" xml:space="preserve">
+    <value>서명 검증 실패 (WinVerifyTrust=0x{0:X8})</value>
+  </data>
+  <data name="Passport_ParseResponseFailed" xml:space="preserve">
+    <value>응답 구문 분석에 실패했습니다</value>
+  </data>
+  <data name="Passport_ParseResponseFailedDetail_Format" xml:space="preserve">
+    <value>응답 구문 분석 실패: {0}</value>
+  </data>
+  <data name="Plugin_Download_HttpFailed_Format" xml:space="preserve">
+    <value>다운로드 실패 (HTTP {0})</value>
+  </data>
+  <data name="Plugin_Download_MainLineFailed" xml:space="preserve">
+    <value>기본 경로 다운로드 실패</value>
+  </data>
+  <data name="PluginInstaller_ExecutingScript" xml:space="preserve">
+    <value>스크립트 실행 중...</value>
+  </data>
+  <data name="PluginInstaller_ScriptCompleted" xml:space="preserve">
+    <value>실행 완료</value>
+  </data>
+  <data name="PluginInstaller_ScriptFailed" xml:space="preserve">
+    <value>실행 실패</value>
+  </data>
+  <data name="PluginPage_CannotOpenGuideImage_Format" xml:space="preserve">
+    <value>안내 이미지를 열 수 없습니다: {0}</value>
+  </data>
+  <data name="PluginPage_InstallSuccess_Format" xml:space="preserve">
+    <value>{0} 설치가 완료되었습니다!</value>
+  </data>
+  <data name="PluginSettings_InstallSig" xml:space="preserve">
+    <value>인증서 설치</value>
+  </data>
+  <data name="PluginSettings_InstallSigTooltip" xml:space="preserve">
+    <value>플랫폼 코드 서명 인증서를 설치합니다(설정에서 언제든 제거 가능)</value>
+  </data>
+  <data name="PresetManager_MaxPinnedHint" xml:space="preserve">
+    <value>프리셋은 최대 5개까지 고정할 수 있습니다</value>
+  </data>
+  <data name="Screenshot_ConfirmDeleteToRecycle" xml:space="preserve">
+    <value>이 스크린샷을 휴지통으로 이동하시겠습니까?</value>
+  </data>
+  <data name="Screenshot_DateGroupFormat" xml:space="preserve">
+    <value>yyyy년 MM월 dd일</value>
+  </data>
+  <data name="Screenshot_SourceGame" xml:space="preserve">
+    <value>게임 스크린샷</value>
+  </data>
+  <data name="Screenshot_SourceLauncher" xml:space="preserve">
+    <value>런처 스크린샷</value>
+  </data>
+  <data name="ServiceOverview_Loading" xml:space="preserve">
+    <value>서비스 상태 불러오는 중...</value>
+  </data>
+  <data name="ServiceOverview_Title" xml:space="preserve">
+    <value>서비스 상태 개요</value>
+  </data>
+  <data name="Settings_CloudCheckinNoteDesc" xml:space="preserve">
+    <value>클라우드 게임 출석 체크를 사용하려면 해당 계정의 클라우드 게임 로그인 인증 정보를 추가해야 하며, 미추가 시 클라우드 게임 출석 체크는 건너뜁니다</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledDesc" xml:space="preserve">
+    <value>끄면 런처의 CPU 점유율이 장시간 높아도 더 이상 알림을 표시하지 않습니다. 끊김, 발열 또는 과도한 배터리 소모가 발생하면 직접 확인 후 제보해 주세요.</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledTitle" xml:space="preserve">
+    <value>CPU 과부하 경고 비활성화됨</value>
+  </data>
+  <data name="Settings_IndependentDeploymentDesc" xml:space="preserve">
+    <value>이 독립 배포 버전은 PR 기여자가 독자적으로 개발 및 제공하는 소프트웨어이며, FufuLauncher는 해당 소프트웨어의 보안성, 안정성 및 향후 유지보수에 대해 어떠한 보증도 제공하지 않습니다. 사용에 따른 위험은 직접 판단하셔야 합니다.
+
+해당 프로젝트 페이지로 계속 이동하시겠습니까?</value>
+  </data>
+  <data name="Settings_ServiceOverview" xml:space="preserve">
+    <value>서비스 상태 개요</value>
+  </data>
+  <data name="Settings_ServiceOverviewDesc" xml:space="preserve">
+    <value>status.fu1.fun의 모든 서비스 운영 상태 보기</value>
+  </data>
+  <data name="StarPrompt_Title" xml:space="preserve">
+    <value>FufuLauncher 응원하기</value>
+  </data>
+  <data name="Startup_ErrOpenRegistryKey" xml:space="preserve">
+    <value>시작 프로그램 레지스트리 키를 열 수 없습니다</value>
+  </data>
+  <data name="Startup_ErrProcessPathUnavailable" xml:space="preserve">
+    <value>현재 실행 파일 경로를 가져올 수 없습니다</value>
+  </data>
+  <data name="UpdateService_CancelledOrTimeout" xml:space="preserve">
+    <value>업데이트 확인이 취소되었거나 시간이 초과되었습니다.</value>
+  </data>
+  <data name="UpdateService_CheckFailed_Format" xml:space="preserve">
+    <value>업데이트 확인 실패: {0}</value>
+  </data>
+  <data name="UpdateService_NewVersionFound" xml:space="preserve">
+    <value>새 런처 버전이 발견되었습니다.</value>
+  </data>
+  <data name="UpdateService_Unreachable" xml:space="preserve">
+    <value>현재 업데이트 서버에 연결할 수 없어 업데이트 확인을 건너뛰었습니다.</value>
+  </data>
+  <data name="UpdateService_UpToDate" xml:space="preserve">
+    <value>현재 런처가 최신 버전입니다.</value>
+  </data>
+  <data name="Yae_ErrConfigNotFound_Format" xml:space="preserve">
+    <value>현재 게임 버전에 해당하는 Yae 구성(해시 0x{0:X8})을 찾을 수 없습니다. 게임을 업데이트하거나 메타데이터 업데이트를 기다려 주세요.</value>
+  </data>
+  <data name="Yae_ErrCreateProcessFailed_Format" xml:space="preserve">
+    <value>게임 프로세스 생성 실패: {0}</value>
+  </data>
+  <data name="Yae_ErrDllLoadTimeout_Format" xml:space="preserve">
+    <value>원격 LoadLibraryW가 10초 내에 완료되지 않아 DLL 로드가 시간 초과되었습니다: {0}</value>
+  </data>
+  <data name="Yae_ErrDllNotFound" xml:space="preserve">
+    <value>YaeAchievementLib.dll 구성 요소를 찾을 수 없습니다. 프로그램을 다시 설치해 주세요.</value>
+  </data>
+  <data name="Yae_ErrElevationCancelled" xml:space="preserve">
+    <value>관리자 권한 확인이 취소되었습니다.</value>
+  </data>
+  <data name="Yae_ErrElevationStartFailed" xml:space="preserve">
+    <value>관리자 권한 읽기 프로세스를 시작할 수 없습니다.</value>
+  </data>
+  <data name="Yae_ErrExePathUnavailable" xml:space="preserve">
+    <value>현재 실행 파일 경로를 찾을 수 없습니다.</value>
+  </data>
+  <data name="Yae_ErrExitCode_Format" xml:space="preserve">
+    <value>읽기 실패(오류 코드 {0}).</value>
+  </data>
+  <data name="Yae_ErrFetchMetadataFailed" xml:space="preserve">
+    <value>Yae 업적 메타데이터를 가져올 수 없습니다. 네트워크 연결을 확인해 주세요.</value>
+  </data>
+  <data name="Yae_ErrGameCreateFailed" xml:space="preserve">
+    <value>게임 프로세스 생성에 실패했습니다.</value>
+  </data>
+  <data name="Yae_ErrGameNotFound" xml:space="preserve">
+    <value>게임 실행 파일을 찾을 수 없습니다. 설정에서 게임 설치 폴더를 확인해 주세요.</value>
+  </data>
+  <data name="Yae_ErrGameRunning" xml:space="preserve">
+    <value>게임이 현재 실행 중입니다. 업적을 읽기 전에 먼저 게임을 종료해 주세요.</value>
+  </data>
+  <data name="Yae_ErrInjectFailed_Format" xml:space="preserve">
+    <value>Yae 구성 요소 인젝션 실패: {0}</value>
+  </data>
+  <data name="Yae_ErrInjectionFailed" xml:space="preserve">
+    <value>Yae 구성 요소 인젝션에 실패했습니다.</value>
+  </data>
+  <data name="Yae_ErrInvalidConfig" xml:space="preserve">
+    <value>읽기 구성 파일이 올바르지 않습니다.</value>
+  </data>
+  <data name="Yae_ErrMetadataDecryptFailed" xml:space="preserve">
+    <value>Yae 메타데이터 복호화 및 검증에 실패했습니다.</value>
+  </data>
+  <data name="Yae_ErrModuleNotFound_Format" xml:space="preserve">
+    <value>대상 프로세스에서 로드된 모듈을 찾을 수 없습니다: {0}</value>
+  </data>
+  <data name="Yae_ErrNoAchievementData" xml:space="preserve">
+    <value>업적 데이터를 가져오지 못했습니다.</value>
+  </data>
+  <data name="Yae_ErrNoData" xml:space="preserve">
+    <value>게임에서 업적 데이터를 가져오지 못했습니다. 게임 월드에 진입했는지 확인해 주세요.</value>
+  </data>
+  <data name="Yae_ErrNoResultFile" xml:space="preserve">
+    <value>업적 읽기 결과 파일을 생성하지 못했습니다.</value>
   </data>
 </root>

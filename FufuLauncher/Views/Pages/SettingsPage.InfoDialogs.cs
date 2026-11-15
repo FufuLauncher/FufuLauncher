@@ -22,7 +22,7 @@ public sealed partial class SettingsPage
         var dialog = new ContentDialog
         {
             Title = "Settings_Disclaimer".GetLocalized(),
-            Content = "该独立部署版本软件由PR贡献者自行开发提供，FufuLauncher无法对该软件的安全性、稳定性或后续维护提供任何保证，您需要自行辨别使用风险\n\n是否继续访问该项目地址？",
+            Content = "Settings_IndependentDeploymentDesc".GetLocalized(),
             PrimaryButtonText = "Settings_ContinueVisit".GetLocalized(),
             CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
@@ -43,7 +43,7 @@ public sealed partial class SettingsPage
         var dialog = new ContentDialog
         {
             Title = "Settings_CloudCheckinNote".GetLocalized(),
-            Content = "开启云游戏签到需要对应账号添加云游戏登录凭证，否则跳过云游戏签到",
+            Content = "Settings_CloudCheckinNoteDesc".GetLocalized(),
             CloseButtonText = "GotItBtn".GetLocalized(),
             XamlRoot = this.XamlRoot
         };
@@ -62,8 +62,8 @@ public sealed partial class SettingsPage
         {
             var dialog = new ContentDialog
             {
-                Title = "已关闭 CPU 占用异常警告",
-                Content = "关闭后，启动器即使长期高 CPU 占用也不会再主动提示。若遇到卡顿、发热或异常耗电，请自行留意并及时反馈问题。",
+                Title = "Settings_CpuWarningDisabledTitle".GetLocalized(),
+                Content = "Settings_CpuWarningDisabledDesc".GetLocalized(),
                 CloseButtonText = "GotItBtn".GetLocalized(),
                 XamlRoot = XamlRoot
             };

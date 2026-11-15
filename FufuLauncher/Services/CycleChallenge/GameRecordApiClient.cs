@@ -345,7 +345,7 @@ public sealed class GameRecordApiClient
 
         if (context.Cookies.Count == 0)
         {
-            return Failure(ChallengeErrorKind.LoginExpired, -1, "登录信息无效，请重新登录社区账号。");
+            return Failure(ChallengeErrorKind.LoginExpired, -1, "CycleChallenge_LoginExpired".GetLocalized());
         }
 
         var isOversea = IsOversea(role);
@@ -520,7 +520,7 @@ public sealed class GameRecordApiClient
             }
         }
 
-        return last ?? Failure(ChallengeErrorKind.NetworkError, -1, "请求失败。");
+        return last ?? Failure(ChallengeErrorKind.NetworkError, -1, "CycleChallenge_RequestFailed".GetLocalized());
     }
 
     private static string[] GetCandidateBases(bool isOversea, string apiName)
@@ -814,7 +814,8 @@ public sealed class GameRecordApiClient
         {
             string snippet = json.Length > 60 ? json[..60] : json;
             snippet = snippet.Replace('\r', ' ').Replace('\n', ' ').Trim();
-            return Failure(ChallengeErrorKind.ServerError, -1, $"HTTP {statusCode} 非 JSON 响应：{snippet}");
+            return Failure(ChallengeErrorKind.ServerError, -1,
+                string.Format("CycleChallenge_NonJsonResponse_Format".GetLocalized(), statusCode, snippet));
         }
     }
 

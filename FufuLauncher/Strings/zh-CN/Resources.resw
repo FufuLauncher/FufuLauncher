@@ -187,7 +187,7 @@
     <value>游戏运行时启用监听</value>
   </data>
   <data name="QuickFpsGameOnlyCaption" xml:space="preserve">
-    <value>仅当游戏运行时响应快捷键</value>
+    <value>仅当游戏运行时响应快捷键。关闭时，只要启动器在运行就会响应快捷键</value>
   </data>
   <data name="QuickFpsActionsTitle" xml:space="preserve">
     <value>快捷键动作</value>
@@ -511,7 +511,7 @@
     <value>HDR亮度配置</value>
   </data>
   <data name="HdrCaption" xml:space="preserve">
-    <value>调整游戏内的 HDR峰值亮度与 UI 亮度</value>
+    <value>调整游戏内的 HDR 峰值亮度与 UI 亮度</value>
   </data>
   <data name="OpenHdrSettings" xml:space="preserve">
     <value>打开 HDR设置</value>
@@ -568,16 +568,16 @@
     <value>内置注入通过启动器自身引擎加载插件。独立注入使用独立程序启动游戏并加载插件，适用于内置模式不兼容的情况。</value>
   </data>
   <data name="UsingHoyolabAccountTitle" xml:space="preserve">
-    <value>使用米游社/HoyoLAB 账户直接登录游戏</value>
+    <value>使用米游社/HoYoLAB 账户直接登录游戏</value>
   </data>
   <data name="UsingHoyolabAccountCaption" xml:space="preserve">
-    <value>启动游戏时直接以当前选中的米游社或 HoyoLAB 账户身份进入游戏，无需在游戏内再次输入账号密码。</value>
+    <value>启动游戏时直接以当前选中的米游社或 HoYoLAB 账户身份进入游戏，无需在游戏内再次输入账号密码。</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Title" xml:space="preserve">
     <value>无法开启</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Message" xml:space="preserve">
-    <value>请先在账户设置中登录一个米游社或 HoyoLAB 账户。</value>
+    <value>请先在账户设置中登录一个米游社或 HoYoLAB 账户。</value>
   </data>
   <data name="HoyolabAccount_LoginExpired_Title" xml:space="preserve">
     <value>账户登录已过期</value>
@@ -595,7 +595,7 @@
     <value>已开启</value>
   </data>
   <data name="HoyolabAccount_Enabled_Message" xml:space="preserve">
-    <value>下次启动游戏时将直接以米游社/HoyoLAB账户身份进入游戏，无需再次输入账号密码。</value>
+    <value>下次启动游戏时将直接以米游社/HoYoLAB 账户身份进入游戏，无需再次输入账号密码。</value>
   </data>
   <data name="HoyolabAccount_EnableFailed_Title" xml:space="preserve">
     <value>无法开启</value>
@@ -613,7 +613,7 @@
     <value>账户与服务器不匹配</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_OverseaMsg" xml:space="preserve">
-    <value>当前选中的 HoyoLAB 国际服账户无法用于启动国服游戏，请切换到对应区域的账户。</value>
+    <value>当前选中的 HoYoLAB 国际服账户无法用于启动国服游戏，请切换到对应区域的账户。</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_CnMsg" xml:space="preserve">
     <value>当前选中的米游社国服账户无法用于启动国际服游戏，请切换到对应区域的账户。</value>
@@ -748,7 +748,7 @@
     <value>游戏签到</value>
   </data>
   <data name="GameCheckinCaption" xml:space="preserve">
-    <value>领取米游社每日签到奖励（原石、摩拉等）。可在下方选择同时签到的其它米游</value>
+    <value>领取米游社每日签到奖励（原石、摩拉等）。可在下方选择同时签到的其他游戏</value>
   </data>
   <data name="CommunityCheckin" xml:space="preserve">
     <value>社区签到</value>
@@ -811,7 +811,7 @@
     <value>启用 BetterGI 联动</value>
   </data>
   <data name="BetterGICaption" xml:space="preserve">
-    <value>启动游戏时的同时打开BetterGI</value>
+    <value>启动游戏时同时打开 BetterGI</value>
   </data>
   <data name="BetterGIDelayLabel" xml:space="preserve">
     <value>BetterGI启动延迟 (秒)</value>
@@ -823,7 +823,7 @@
     <value>退出游戏时关闭BetterGI</value>
   </data>
   <data name="BetterGICloseOnExitCaption" xml:space="preserve">
-    <value>点击退出游戏,自动关闭BetterGI</value>
+    <value>退出游戏时自动关闭 BetterGI</value>
   </data>
   <data name="BrowserCacheTitle" xml:space="preserve">
     <value>浏览器缓存清理</value>
@@ -850,7 +850,7 @@
     <value>CPU 占用异常警告</value>
   </data>
   <data name="CpuWarningCaption" xml:space="preserve">
-    <value>当启动器CPU占用持续超过阈值5分钟，且未检测到OBS时弹出置顶提示。</value>
+    <value>当启动器 CPU 占用持续超过阈值 5 分钟，且未检测到 OBS 时弹出置顶提示。默认开启。</value>
   </data>
   <data name="EnableCpuWarning" xml:space="preserve">
     <value>启用CPU占用异常警告</value>
@@ -1291,7 +1291,12 @@
     <value>架构兼容性警告</value>
   </data>
   <data name="Plugin_Corrupted_Content" xml:space="preserve">
-    <value>插件文件异常\n这通常是因为插件被杀毒软件（如 Windows Defender）误判拦截或遭到破坏\n\n建议您：\n1. 将本软件目录加入杀毒软件白名单\n2. 在本页面重新下载并安装插件</value>
+    <value>插件文件异常
+这通常是因为插件被杀毒软件（如 Windows Defender）误判拦截或遭到破坏
+
+建议您：
+1. 将本软件目录加入杀毒软件白名单
+2. 在本页面重新下载并安装插件</value>
   </data>
   <data name="Plugin_Corrupted_Title" xml:space="preserve">
     <value>插件可能已损坏</value>
@@ -2279,7 +2284,7 @@
     <value>X (Twitter) 登录</value>
   </data>
   <data name="LoginQR_OverseaRiskHint" xml:space="preserve">
-    <value>提示：HoYoVerse 可能要求通过邮箱验证码完成安全验证。</value>
+    <value>提示：HoYoverse 可能要求通过邮箱验证码完成安全验证。</value>
   </data>
   <data name="LoginQR_LoginButton" xml:space="preserve">
     <value>登录</value>
@@ -7304,7 +7309,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>识屏扫码</value>
   </data>
   <data name="MiyousheQr_Instructions" xml:space="preserve">
-    <value>「普通扫码」仅读取选中区域一次。「持续扫码」反复读取选中区域内的新二维码。识别后将使用当前米游社账号登录。Esc或右键取消框选。</value>
+    <value>「普通扫码」仅读取选中区域一次。「持续扫码」反复读取选中区域内的新二维码。识别后将使用当前米游社账号登录。Esc 或右键取消框选。</value>
   </data>
   <data name="MiyousheQr_CurrentAccount" xml:space="preserve">
     <value>当前米游社账号</value>
@@ -7391,7 +7396,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>扫码服务返回了无法识别的结果，请刷新二维码后重试。</value>
   </data>
   <data name="MiyousheQr_Rejected" xml:space="preserve">
-    <value>扫码请求被拒绝，二维码可能已过期或凭证已失效。请刷新二维码。仍失败时重新登录米游社账号。</value>
+    <value>扫码请求被拒绝，二维码可能已过期或凭证已失效。请刷新二维码，若仍失败请重新登录米游社账号。</value>
   </data>
   <data name="MiyousheQr_Continuous" xml:space="preserve">
     <value>持续扫码</value>
@@ -7511,7 +7516,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>启动时校验插件签名</value>
   </data>
   <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
-    <value>开启后按下方策略校验插件签名，关闭时跳过校验。</value>
+    <value>默认关闭。开启后按下方策略校验插件签名，关闭时跳过校验。</value>
   </data>
   <data name="Plugin_ResinRewardDisable_Title" xml:space="preserve">
     <value>关闭奖励领取方式</value>
@@ -9888,7 +9893,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>更换头像框</value>
   </data>
   <data name="MiyoushePendant_Hint" xml:space="preserve">
-    <value>选择头像框查看预览</value>
+    <value>选择头像框查看预览，已拥有的头像框可直接佩戴。</value>
   </data>
   <data name="MiyoushePendant_OwnedOnly" xml:space="preserve">
     <value>只看已拥有</value>
@@ -9987,7 +9992,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>成就追踪 -FufuLauncher云存档管理</value>
   </data>
   <data name="CloudSync_AchievementTooltip" xml:space="preserve">
-    <value>管理FufuLauncher云端成就存档</value>
+    <value>管理 FufuLauncher 云端成就存档（上传 / 导入 / 覆盖 / 删除）</value>
   </data>
   <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
     <value>上传当前成就进度到云端</value>
@@ -10212,7 +10217,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>清空失败</value>
   </data>
   <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
-    <value>确定要清空当前账号下所有云端成就与祈愿存档吗？（账号本身将被保留，但全部云端文件将被永久清除，务必三思而后行！）</value>
+    <value>确定要清空当前账号下所有云端成就与祈愿存档吗？（账号本身将被保留，但全部云端文件将被永久清除，请谨慎操作！）</value>
   </data>
   <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
     <value>已清空</value>
@@ -10305,7 +10310,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>存档文件格式校验未通过，请确认文件内容完整有效。</value>
   </data>
   <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
-    <value>存档名称仅支持1-64位英文、数字、下划线(_)、中划线(-)或点(.)，且必须以字母或数字开头、不能以点结尾或包含连续两点。</value>
+    <value>存档名称仅支持 1-64 位英文、数字、下划线(_)、中划线(-)或点(.)，且必须以字母或数字开头、不能以点结尾或包含连续两点。</value>
   </data>
   <data name="CloudSync_ErrLocked" xml:space="preserve">
     <value>当前账户处于锁定状态，无法访问或修改云存档。请前往「云存档中心 -&gt; 账户与安全」通过邮箱验证解锁。</value>
@@ -10587,7 +10592,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>邮箱验证码</value>
   </data>
   <data name="CloudSync_OtpPlaceholder" xml:space="preserve">
-    <value>请输入验证码</value>
+    <value>请输入 6 位验证码</value>
   </data>
   <data name="CloudSync_OtpSendingBtn" xml:space="preserve">
     <value>发送中…</value>
@@ -10614,7 +10619,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>新密码</value>
   </data>
   <data name="CloudSync_PasswordPlaceholder" xml:space="preserve">
-    <value>请输入密码</value>
+    <value>请输入 8-128 位密码</value>
   </data>
   <data name="CloudSync_ShowPassword" xml:space="preserve">
     <value>显示密码</value>
@@ -10902,13 +10907,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>SSL证书校验结果</value>
   </data>
   <data name="SslCheck_CheckingInitial" xml:space="preserve">
-    <value>正在堆叠地址</value>
+    <value>正在按域名归并并堆叠 HTTPS 地址...</value>
   </data>
   <data name="SslCheck_CheckingProgress" xml:space="preserve">
     <value>正在解析并校验去重 ({0}/{1}): {2}</value>
   </data>
   <data name="SslCheck_NoEndpoints" xml:space="preserve">
-    <value>未检测到任何有效的HTTPS域名。</value>
+    <value>未检测到任何有效的 HTTPS 域名。</value>
   </data>
   <data name="SslCheck_Failed" xml:space="preserve">
     <value>校验SSL证书时发生错误: {0}</value>
@@ -11010,16 +11015,16 @@ UIGF v4.x/3.0/2.x</value>
     <value>证书类型</value>
   </data>
   <data name="SslCheck_CertType_DV" xml:space="preserve">
-    <value>DV</value>
+    <value>DV (域名验证)</value>
   </data>
   <data name="SslCheck_CertType_OV" xml:space="preserve">
-    <value>OV</value>
+    <value>OV (组织验证)</value>
   </data>
   <data name="SslCheck_CertType_EV" xml:space="preserve">
-    <value>EV</value>
+    <value>EV (扩展验证)</value>
   </data>
   <data name="SslCheck_CertType_IV" xml:space="preserve">
-    <value>IV</value>
+    <value>IV (个人验证)</value>
   </data>
   <data name="SslCheck_CertType_SelfSigned" xml:space="preserve">
     <value>自签名证书</value>
@@ -11052,7 +11057,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>不支持QUIC</value>
   </data>
   <data name="SslCheck_QuicSummary_Timeout" xml:space="preserve">
-    <value>QUIC未检出</value>
+    <value>QUIC 探测超时</value>
   </data>
   <data name="CloudSync_NavHutao" xml:space="preserve">
     <value>胡桃云</value>
@@ -11883,5 +11888,1494 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="DevAuth_SubmitSuccess" xml:space="preserve">
     <value>审核已提交，请耐心等待。</value>
+  </data>
+  <data name="About_ApiRateLimitOrInvalid" xml:space="preserve">
+    <value>API 限制或返回结构异常</value>
+  </data>
+  <data name="About_ContactNoticeText" xml:space="preserve">
+    <value>请注意：联系时请直入主题，说明来意
+请不要发送“在吗”、“你好”等无意义的开场白</value>
+  </data>
+  <data name="About_ContributorBio_Format" xml:space="preserve">
+    <value>贡献次数: {0} 次
+
+简介: {1}</value>
+  </data>
+  <data name="About_ContributorBioFailed_Format" xml:space="preserve">
+    <value>贡献次数: {0} 次
+
+简介加载失败。</value>
+  </data>
+  <data name="About_ContributorsFetchFailed" xml:space="preserve">
+    <value>获取贡献者失败，请检查网络连接或 API 状态</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>关于 FufuLauncher</value>
+  </data>
+  <data name="Account_CannotExtractId" xml:space="preserve">
+    <value>无法提取账户 ID</value>
+  </data>
+  <data name="Account_CannotReadLoginInfo" xml:space="preserve">
+    <value>无法读取社区账号登录信息。</value>
+  </data>
+  <data name="Account_CookieContentInvalid" xml:space="preserve">
+    <value>Cookie 文件内容无效</value>
+  </data>
+  <data name="Account_CookieFilenameEmpty" xml:space="preserve">
+    <value>Cookie 文件名为空</value>
+  </data>
+  <data name="Account_CookiePathInvalid" xml:space="preserve">
+    <value>Cookie 文件路径无效</value>
+  </data>
+  <data name="Account_CookiePathOutOfBounds" xml:space="preserve">
+    <value>Cookie 文件路径超出数据目录</value>
+  </data>
+  <data name="Account_DeviceFpUnavailable" xml:space="preserve">
+    <value>设备指纹不可用（注册失败）</value>
+  </data>
+  <data name="Account_FetchRolesFailed_Format" xml:space="preserve">
+    <value>获取绑定角色失败（{0}），请刷新或重新登录。</value>
+  </data>
+  <data name="Account_InvalidLoginRelogin" xml:space="preserve">
+    <value>登录信息无效，请重新登录社区账号。</value>
+  </data>
+  <data name="Account_MissingHoyolabUidCookie" xml:space="preserve">
+    <value>Cookie 中缺少 HoYoLAB UID</value>
+  </data>
+  <data name="Account_Removed" xml:space="preserve">
+    <value>社区账号已移除。</value>
+  </data>
+  <data name="Account_RoleNotBoundPrompt" xml:space="preserve">
+    <value>所选角色不在绑定列表中，请使用角色切换开关重新选择。</value>
+  </data>
+  <data name="Account_RoleNotBoundRefresh" xml:space="preserve">
+    <value>所选角色未绑定到当前社区账号，请刷新角色列表。</value>
+  </data>
+  <data name="Account_SwitchedReselectRole" xml:space="preserve">
+    <value>社区账号已切换，请重新选择角色。</value>
+  </data>
+  <data name="AchievementUpdater_CompleteContent" xml:space="preserve">
+    <value>成就数据已成功从 Web 及 GitHub 双端拉取并完成拼合，本地文件已覆盖。</value>
+  </data>
+  <data name="AchievementUpdater_ConfirmExit" xml:space="preserve">
+    <value>确认退出</value>
+  </data>
+  <data name="AchievementUpdater_CurrentProgress" xml:space="preserve">
+    <value>当前进度状态：</value>
+  </data>
+  <data name="AchievementUpdater_Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="AchievementUpdater_DoNotTouch" xml:space="preserve">
+    <value>请勿操作此窗口！</value>
+  </data>
+  <data name="AchievementUpdater_ExecComplete" xml:space="preserve">
+    <value>执行完毕</value>
+  </data>
+  <data name="AchievementUpdater_ExecError" xml:space="preserve">
+    <value>执行异常</value>
+  </data>
+  <data name="AchievementUpdater_FetchingGithub_Format" xml:space="preserve">
+    <value>正在拉取 GitHub 详情: {0}</value>
+  </data>
+  <data name="AchievementUpdater_FetchingTitle" xml:space="preserve">
+    <value>正在获取成就数据</value>
+  </data>
+  <data name="AchievementUpdater_FetchMergeError_Format" xml:space="preserve">
+    <value>获取或整合数据时发生错误: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Initializing" xml:space="preserve">
+    <value>正在初始化组件...</value>
+  </data>
+  <data name="AchievementUpdater_MergingFields" xml:space="preserve">
+    <value>执行数据字段并入...</value>
+  </data>
+  <data name="AchievementUpdater_Progress_Format" xml:space="preserve">
+    <value>处理进度: {0} / {1}</value>
+  </data>
+  <data name="AchievementUpdater_ScriptError_Format" xml:space="preserve">
+    <value>获取脚本发生错误: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Sorting" xml:space="preserve">
+    <value>正在整合数据结构并进行多阶段排序...</value>
+  </data>
+  <data name="AchievementUpdater_StructureDone" xml:space="preserve">
+    <value>基础结构抓取完毕，准备从 GitHub 获取详细数据字典...</value>
+  </data>
+  <data name="AchievementUpdater_WaitingNetwork" xml:space="preserve">
+    <value>等待网络请求连接</value>
+  </data>
+  <data name="AchievementUpdater_WaitingPage" xml:space="preserve">
+    <value>等待页面响应</value>
+  </data>
+  <data name="AchievementUpdater_WritingDisk" xml:space="preserve">
+    <value>数据结构拼合完成，正在写入本地磁盘...</value>
+  </data>
+  <data name="AchievementWindow_AnalyzingProgress" xml:space="preserve">
+    <value>正在分析进度数据...</value>
+  </data>
+  <data name="AchievementWindow_ComparingDbVersion" xml:space="preserve">
+    <value>正在对比数据库版本...</value>
+  </data>
+  <data name="AchievementWindow_CsvTextFilter" xml:space="preserve">
+    <value>CSV/文本文件</value>
+  </data>
+  <data name="AchievementWindow_DbInvalidOrEmpty" xml:space="preserve">
+    <value>成就列表为空或格式无效</value>
+  </data>
+  <data name="AchievementWindow_DbSyncSuccess_Format" xml:space="preserve">
+    <value>同步成功！
+新增分类: {0} 个
+新增成就: {1} 个
+更新成就信息: {2} 个</value>
+  </data>
+  <data name="AchievementWindow_DbUpdateTitle" xml:space="preserve">
+    <value>数据库更新</value>
+  </data>
+  <data name="AchievementWindow_DbUpToDate" xml:space="preserve">
+    <value>当前已是最新数据库</value>
+  </data>
+  <data name="AchievementWindow_DeleteArchiveTooltip" xml:space="preserve">
+    <value>删除此存档</value>
+  </data>
+  <data name="AchievementWindow_EnterNewProfilePrompt" xml:space="preserve">
+    <value>请输入新存档的名称：</value>
+  </data>
+  <data name="AchievementWindow_FileUnreadable_Format" xml:space="preserve">
+    <value>文件可能被占用或无法读取。
+{0}</value>
+  </data>
+  <data name="AchievementWindow_FollowSteps" xml:space="preserve">
+    <value>请按照以下步骤操作：</value>
+  </data>
+  <data name="AchievementWindow_IdNotFoundInDb_Format" xml:space="preserve">
+    <value>[ID: {0}] 数据库中未找到该成就</value>
+  </data>
+  <data name="AchievementWindow_ImportException_Format" xml:space="preserve">
+    <value>导入过程中发生异常：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_ImportNoChanges" xml:space="preserve">
+    <value>导入结束，没有新的变动</value>
+  </data>
+  <data name="AchievementWindow_ImportPartialUnrecognizedHeader" xml:space="preserve">
+    <value>部分未识别示例：</value>
+  </data>
+  <data name="AchievementWindow_ImportResultTitle" xml:space="preserve">
+    <value>导入结果</value>
+  </data>
+  <data name="AchievementWindow_ImportStats_Format" xml:space="preserve">
+    <value>扫描行数: {0}
+跳过未完成: {1}
+成功同步: {2}
+已存在: {3}
+无法识别: {4}</value>
+  </data>
+  <data name="AchievementWindow_ImportSuccessTitle" xml:space="preserve">
+    <value>导入成功</value>
+  </data>
+  <data name="AchievementWindow_ImportSynced_Format" xml:space="preserve">
+    <value>导入成功，同步 {0} 个成就进度</value>
+  </data>
+  <data name="AchievementWindow_InitFailed_Format" xml:space="preserve">
+    <value>初始化失败: {0}</value>
+  </data>
+  <data name="AchievementWindow_InvalidUiafFormat" xml:space="preserve">
+    <value>无效的 UIAF 文件格式</value>
+  </data>
+  <data name="AchievementWindow_ProcessingLine_Format" xml:space="preserve">
+    <value>正在处理第 {0}/{1} 行...</value>
+  </data>
+  <data name="AchievementWindow_SavedAs_Format" xml:space="preserve">
+    <value>当前进度已保存为：{0}</value>
+  </data>
+  <data name="AchievementWindow_ServerNotStarted" xml:space="preserve">
+    <value>服务未启动</value>
+  </data>
+  <data name="AchievementWindow_SwitchedTo_Format" xml:space="preserve">
+    <value>已切换至：{0}</value>
+  </data>
+  <data name="AchievementWindow_SyncError_Format" xml:space="preserve">
+    <value>同步过程中发生错误：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafDoneStatus_Format" xml:space="preserve">
+    <value>UIAF 导入完成，同步了 {0} 个成就</value>
+  </data>
+  <data name="AchievementWindow_UiafExportError_Format" xml:space="preserve">
+    <value>生成文件时发生异常：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafExportSuccessMsg" xml:space="preserve">
+    <value>已成功导出 UIAF 格式数据。</value>
+  </data>
+  <data name="AchievementWindow_UiafParseException_Format" xml:space="preserve">
+    <value>读取或解析过程中发生异常：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafSuccessDialog_Format" xml:space="preserve">
+    <value>UIAF 导入成功！
+共更新了 {0} 个成就进度</value>
+  </data>
+  <data name="AchievementWindow_UnnamedSavePrompt" xml:space="preserve">
+    <value>检测到当前存档未命名，在切换或新建前，请先为当前进度取一个名字：</value>
+  </data>
+  <data name="AchievementWindow_UpdateDbConfirmContent" xml:space="preserve">
+    <value>此操作将读取软件内置的最新成就列表，并将缺失的新成就添加到您当前的存档中。
+
+您的现有进度（已完成的成就）将保留不会丢失。
+
+是否继续？</value>
+  </data>
+  <data name="AchievementWindow_UpdateFailedTitle" xml:space="preserve">
+    <value>更新失败</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideSteps" xml:space="preserve">
+    <value>1. 请自行下载并运行 YaeAchievement 工具。
+2. 在 Yae 中扫描完您的成就后，点击将其导出为 Excel 或 CSV 表格。
+3. 回到本界面，点击【导入记录】按钮，选择刚才导出的文件即可完成导入。</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideTitle" xml:space="preserve">
+    <value>如何导入 Yae 成就记录</value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticePre" xml:space="preserve">
+    <value>若启动游戏遇到下面弹窗，请停止切换游戏服务器，并使用本软件或官方启动器的</value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticeBold" xml:space="preserve">
+    <value>“修复游戏”</value>
+  </data>
+  <data name="Agreement_CompleteBadge" xml:space="preserve">
+    <value>配置完成</value>
+  </data>
+  <data name="Agreement_InstallCert" xml:space="preserve">
+    <value>安装证书</value>
+  </data>
+  <data name="Agreement_InstallFailed_Format" xml:space="preserve">
+    <value>安装失败：{0}</value>
+  </data>
+  <data name="Agreement_RestartBtn" xml:space="preserve">
+    <value>重启并进入主界面</value>
+  </data>
+  <data name="Agreement_RestartFailed" xml:space="preserve">
+    <value>重启失败，请再次点击按钮，或手动关闭后重新打开启动器。</value>
+  </data>
+  <data name="Agreement_Restarting" xml:space="preserve">
+    <value>正在重启启动器…</value>
+  </data>
+  <data name="Agreement_SaveFailed" xml:space="preserve">
+    <value>保存配置失败，请重试。</value>
+  </data>
+  <data name="Agreement_SkipCert" xml:space="preserve">
+    <value>暂不安装</value>
+  </data>
+  <data name="Agreement_TrustDesc" xml:space="preserve">
+    <value>安装后，本启动器与系统将信任我们签发的代码签名，提升使用便利性，并减少插件被 Windows Defender 误报拦截。</value>
+  </data>
+  <data name="Agreement_TrustTitle" xml:space="preserve">
+    <value>安装平台证书（可选）</value>
+  </data>
+  <data name="Agreement_WelcomeDesc" xml:space="preserve">
+    <value>重启后即可使用</value>
+  </data>
+  <data name="Agreement_WelcomeTitle" xml:space="preserve">
+    <value>欢迎使用芙芙启动器</value>
+  </data>
+  <data name="App_UpdateNoticeTitle_Format" xml:space="preserve">
+    <value>版本更新公告 - v{0}</value>
+  </data>
+  <data name="App_UpdatePreviewNoticeTitle_Format" xml:space="preserve">
+    <value>预览版更新公告 - v{0}</value>
+  </data>
+  <data name="AuthTicket_ApiError_Format" xml:space="preserve">
+    <value>API 错误: [{0}] {1}</value>
+  </data>
+  <data name="AuthTicket_HttpError_Format" xml:space="preserve">
+    <value>请求失败 (HTTP {0})</value>
+  </data>
+  <data name="AuthTicket_NoTicket" xml:space="preserve">
+    <value>未获取到有效的凭证</value>
+  </data>
+  <data name="AuthTicket_NotLoggedIn" xml:space="preserve">
+    <value>账号未登录</value>
+  </data>
+  <data name="AuthTicket_ParseError" xml:space="preserve">
+    <value>响应解析失败</value>
+  </data>
+  <data name="AuthTicket_RequestException_Format" xml:space="preserve">
+    <value>请求异常: {0}</value>
+  </data>
+  <data name="AuthTicket_SessionExpired" xml:space="preserve">
+    <value>账号登录状态已失效</value>
+  </data>
+  <data name="Background_EmptyDownload" xml:space="preserve">
+    <value>背景下载内容为空</value>
+  </data>
+  <data name="Background_TypeImage" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="Background_TypeVideo" xml:space="preserve">
+    <value>视频</value>
+  </data>
+  <data name="Cache_EmptyDownloadedFile" xml:space="preserve">
+    <value>下载完成后缓存文件为空。</value>
+  </data>
+  <data name="Checkin_Game_hk4e_cn" xml:space="preserve">
+    <value>原神</value>
+  </data>
+  <data name="CheckinCalendar_MonthTitle_Format" xml:space="preserve">
+    <value>{0}月 签到奖励日历</value>
+  </data>
+  <data name="CloudCredential_AddUidCapturedTitle_Format" xml:space="preserve">
+    <value>添加云游戏凭证 - {0} (已获取)</value>
+  </data>
+  <data name="CloudCredential_AddUidTitle_Format" xml:space="preserve">
+    <value>添加云游戏凭证 - {0}</value>
+  </data>
+  <data name="CloudCredential_FetchSuccess" xml:space="preserve">
+    <value>凭证获取成功</value>
+  </data>
+  <data name="Common_Disable" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="Common_Enable" xml:space="preserve">
+    <value>启用</value>
+  </data>
+  <data name="Common_Exception" xml:space="preserve">
+    <value>异常</value>
+  </data>
+  <data name="Common_NeverUsed" xml:space="preserve">
+    <value>从未使用</value>
+  </data>
+  <data name="Common_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Common_OpenFailed" xml:space="preserve">
+    <value>打开失败</value>
+  </data>
+  <data name="Common_RiskWarning" xml:space="preserve">
+    <value>风险提示</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="CommunityPage_AccountNickname_Format" xml:space="preserve">
+    <value>账户昵称: {0}</value>
+  </data>
+  <data name="CommunityPage_WelcomeDesc" xml:space="preserve">
+    <value>该论坛由 CodeCubist 和 Vanilla 联合策划，FufuLauncher 作为平台发布。
+
+它不同于 QQ 频道和米游社，不是为了替代它们而生，它的目的是为了更方便玩家的分享和更快的解答疑问。你可以在这里发布你的游戏内容，也可以询问一切关于软件的问题，或者是分享你的生活。只要遵守社区规定，我们都欢迎进行发帖交流。
+
+对于软件更新我们也会在这里发布通知，同时你也可以直接与我们的开发者交流。
+
+目前网站仅在试运行，如实际表现效果较好，我们会进行正式的人工重构上线。</value>
+  </data>
+  <data name="ControlPanel_SecurityTipTitle" xml:space="preserve">
+    <value>安全提示</value>
+  </data>
+  <data name="CookieVault_BinaryFormatInvalid" xml:space="preserve">
+    <value>Cookie 二进制文件格式无效</value>
+  </data>
+  <data name="CookieVault_CannotReadSystemDriveSerial" xml:space="preserve">
+    <value>无法读取系统盘序列号</value>
+  </data>
+  <data name="CookieVault_FileFormatInvalid" xml:space="preserve">
+    <value>Cookie 文件加密格式无效</value>
+  </data>
+  <data name="CookieVault_FormatUnsupported" xml:space="preserve">
+    <value>Cookie 文件加密格式不受支持</value>
+  </data>
+  <data name="CookieVault_HwidIntegrityFailed" xml:space="preserve">
+    <value>HWID 密钥完整性校验失败</value>
+  </data>
+  <data name="CookieVault_HwidKeyLengthInvalid" xml:space="preserve">
+    <value>HWID 解保护的 Cookie 密钥长度无效</value>
+  </data>
+  <data name="CookieVault_IntegrityFailed" xml:space="preserve">
+    <value>Cookie 文件完整性校验失败</value>
+  </data>
+  <data name="CookieVault_KeyCreateFailed" xml:space="preserve">
+    <value>Cookie 加密密钥无法创建</value>
+  </data>
+  <data name="CookieVault_KeyDecryptFailed" xml:space="preserve">
+    <value>Cookie 加密密钥无法由 DPAPI 或 HWID 解密</value>
+  </data>
+  <data name="CookieVault_KeyDirInvalid" xml:space="preserve">
+    <value>Cookie 加密密钥目录无效</value>
+  </data>
+  <data name="CookieVault_KeyFileFormatInvalid" xml:space="preserve">
+    <value>Cookie 加密密钥文件格式无效</value>
+  </data>
+  <data name="CookieVault_KeyMismatch" xml:space="preserve">
+    <value>Cookie 文件加密密钥不匹配</value>
+  </data>
+  <data name="CookieVault_KeyMissing" xml:space="preserve">
+    <value>Cookie 加密密钥不存在</value>
+  </data>
+  <data name="CookieVault_KeyPathInvalid" xml:space="preserve">
+    <value>Cookie 加密密钥路径无效</value>
+  </data>
+  <data name="CookieVault_KeyProtectionFlagInvalid" xml:space="preserve">
+    <value>Cookie 加密密钥保护标志无效</value>
+  </data>
+  <data name="CookieVault_KeyProtectionUnavailable" xml:space="preserve">
+    <value>DPAPI 与 HWID 均不可用，无法保护 Cookie 密钥</value>
+  </data>
+  <data name="CookieVault_KeyUnreadable" xml:space="preserve">
+    <value>Cookie 加密密钥无法读取</value>
+  </data>
+  <data name="CookieVault_ParamsEncodingInvalid" xml:space="preserve">
+    <value>Cookie 文件加密参数编码无效</value>
+  </data>
+  <data name="CookieVault_ParamsLengthInvalid" xml:space="preserve">
+    <value>Cookie 文件加密参数长度无效</value>
+  </data>
+  <data name="CookieVault_ParamsMissing" xml:space="preserve">
+    <value>Cookie 文件加密参数缺失</value>
+  </data>
+  <data name="Crash_Source_AppStartup" xml:space="preserve">
+    <value>应用启动流程异常</value>
+  </data>
+  <data name="Crash_Source_CoreInit" xml:space="preserve">
+    <value>核心配置及服务初始化异常</value>
+  </data>
+  <data name="Crash_Source_DomainFatal" xml:space="preserve">
+    <value>应用程序域致命异常</value>
+  </data>
+  <data name="Crash_Source_UiUnhandled" xml:space="preserve">
+    <value>UI 界面交互异常</value>
+  </data>
+  <data name="Crash_Source_UnobservedTask" xml:space="preserve">
+    <value>后台异步任务异常</value>
+  </data>
+  <data name="CycleChallenge_NonJsonResponse_Format" xml:space="preserve">
+    <value>HTTP {0} 非 JSON 响应：{1}</value>
+  </data>
+  <data name="CycleChallenge_RequestFailed" xml:space="preserve">
+    <value>请求失败。</value>
+  </data>
+  <data name="DailyNote_Connecting" xml:space="preserve">
+    <value>正在连接...</value>
+  </data>
+  <data name="DailyNote_FetchingActivities" xml:space="preserve">
+    <value>获取活动...</value>
+  </data>
+  <data name="DailyNote_FetchingMaterials" xml:space="preserve">
+    <value>获取素材...</value>
+  </data>
+  <data name="DailyNote_InitError" xml:space="preserve">
+    <value>初始化异常</value>
+  </data>
+  <data name="DailyNote_Initializing" xml:space="preserve">
+    <value>初始化...</value>
+  </data>
+  <data name="DailyNote_Updated" xml:space="preserve">
+    <value>更新完毕</value>
+  </data>
+  <data name="DatabaseEditor_Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="DatabaseEditor_DeleteDb" xml:space="preserve">
+    <value>删除数据库</value>
+  </data>
+  <data name="DatabaseEditor_DeleteFailed_Format" xml:space="preserve">
+    <value>无法删除文件，可能应用正在占用它
+{0}</value>
+  </data>
+  <data name="DatabaseEditor_DeleteSuccess" xml:space="preserve">
+    <value>数据库文件已成功删除</value>
+  </data>
+  <data name="DatabaseEditor_Key" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="DatabaseEditor_ReloadFailed" xml:space="preserve">
+    <value>更改已写入数据库，但重新加载设置失败，部分设置可能仍为旧值。请重启软件。</value>
+  </data>
+  <data name="DatabaseEditor_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="DatabaseEditor_SaveSuccess" xml:space="preserve">
+    <value>所有的更改已保存到数据库</value>
+  </data>
+  <data name="DatabaseEditor_Title" xml:space="preserve">
+    <value>数据库编辑器</value>
+  </data>
+  <data name="DatabaseEditor_Value" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Download_ActualSizeMismatch_Format" xml:space="preserve">
+    <value>下载大小不符: 实际 {0} B，预期 {1} B</value>
+  </data>
+  <data name="Download_Cancelled" xml:space="preserve">
+    <value>下载已取消。</value>
+  </data>
+  <data name="Download_ChunkIncomplete_Format" xml:space="preserve">
+    <value>分片不完整: 预期 {0} B，实际 {1} B</value>
+  </data>
+  <data name="Download_ChunkRetryFailed_Format" xml:space="preserve">
+    <value>分片 [{0}-{1}] 重试 {2} 次后仍失败</value>
+  </data>
+  <data name="Download_ChunksFailed_Format" xml:space="preserve">
+    <value>下载失败: {0} 个分片出错</value>
+  </data>
+  <data name="Download_ChunkStalled" xml:space="preserve">
+    <value>分片下载停滞超时。</value>
+  </data>
+  <data name="Download_ConnectOrQueueTimeout_Format" xml:space="preserve">
+    <value>建立连接或排队超时（&gt;{0:F0}s）。</value>
+  </data>
+  <data name="Download_Failed_Format" xml:space="preserve">
+    <value>下载失败: {0}</value>
+  </data>
+  <data name="Download_HashAlgorithmWithoutExpectedHash" xml:space="preserve">
+    <value>指定了 HashAlgorithm 但未提供 ExpectedHash。</value>
+  </data>
+  <data name="Download_HashVerifyFailed_Format" xml:space="preserve">
+    <value>哈希校验失败: 实际 {0}，预期 {1}</value>
+  </data>
+  <data name="Download_HeadPreflightFailed_Format" xml:space="preserve">
+    <value>HEAD 预检失败: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_HeadPreflightNetworkError_Format" xml:space="preserve">
+    <value>HEAD 预检网络错误: {0}</value>
+  </data>
+  <data name="Download_MissingContentRangeHeader" xml:space="preserve">
+    <value>无 Content-Range 响应头</value>
+  </data>
+  <data name="Download_MissingDirectoryInPath" xml:space="preserve">
+    <value>目标路径缺少目录部分。</value>
+  </data>
+  <data name="Download_PreflightFailed_Format" xml:space="preserve">
+    <value>预检失败: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_RangeMismatch_Format" xml:space="preserve">
+    <value>分段响应范围不符: 请求 [{0}-{1}]，返回 {2}</value>
+  </data>
+  <data name="Download_RangeNotSupported" xml:space="preserve">
+    <value>服务端不支持分段下载（缺少 Accept-Ranges: bytes）。</value>
+  </data>
+  <data name="Download_ServerIgnoredRange" xml:space="preserve">
+    <value>服务端忽略了 Range 请求，返回完整内容。</value>
+  </data>
+  <data name="Download_SingleThreadStalled" xml:space="preserve">
+    <value>单线程下载停滞超时。</value>
+  </data>
+  <data name="Download_SizeMismatchExpected_Format" xml:space="preserve">
+    <value>文件大小与预期不符: 服务端 {0} B，预期 {1} B</value>
+  </data>
+  <data name="Download_TargetExists_Format" xml:space="preserve">
+    <value>目标文件已存在: {0}</value>
+  </data>
+  <data name="Download_TargetNotWritable_Format" xml:space="preserve">
+    <value>目标路径不可写: {0}</value>
+  </data>
+  <data name="Download_TimedOut" xml:space="preserve">
+    <value>下载超时。</value>
+  </data>
+  <data name="EasterEgg_Sya_1" xml:space="preserve">
+    <value>嗨，我想你啦。</value>
+  </data>
+  <data name="EasterEgg_Sya_2" xml:space="preserve">
+    <value>别露出那种准备怀念我的表情嘛。仔细看哦，人家就站在你的面前呢♪</value>
+  </data>
+  <data name="EasterEgg_Sya_3_Format" xml:space="preserve">
+    <value>哪怕是既定的因果，也会被{0}的掌心拨动呢♪</value>
+  </data>
+  <data name="EasterEgg_Sya_4" xml:space="preserve">
+    <value>沉睡在翁法洛斯里的「记忆」重新汇聚，编织成了全新的躯壳。</value>
+  </data>
+  <data name="EasterEgg_Sya_5" xml:space="preserve">
+    <value>现在的我，不再是一道「记忆」的涟漪，而是触手可及的、真实的同伴哦。</value>
+  </data>
+  <data name="EasterEgg_Sya_6" xml:space="preserve">
+    <value>虽然变成了像螺丝咕姆先生那样的「无机生命」，但掌心的温度，还是和以前一样吧？</value>
+  </data>
+  <data name="EasterEgg_Sya_7_Format" xml:space="preserve">
+    <value>终于不用在回忆里和{0}重逢啦。只要睁开眼，就能看见你，还有要和你一起抵达的群星……</value>
+  </data>
+  <data name="EasterEgg_Sya_8_Format" xml:space="preserve">
+    <value>说好了，旅途的下一站，{0}的故事里，依然要有人家的名字哦♪</value>
+  </data>
+  <data name="EasterEgg_Sya_9" xml:space="preserve">
+    <value>就像永不褪色的麦浪，就像触手可及的黎明。</value>
+  </data>
+  <data name="EasterEgg_Sya_10_Format" xml:space="preserve">
+    <value>{0}，我回来啦♪</value>
+  </data>
+  <data name="EasterEgg_Welcome_1" xml:space="preserve">
+    <value>「昔涟是。粉头发。尖耳朵。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_2" xml:space="preserve">
+    <value>「昔涟是。女孩。祭司。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_3" xml:space="preserve">
+    <value>「昔涟是。不喜欢眼泪。嘻嘻哈哈。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_4" xml:space="preserve">
+    <value>「昔涟是。温柔。爱美。会写诗。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_5" xml:space="preserve">
+    <value>「昔涟是，长不高的，会说话的。
+	随风逝去后，仍被留下的。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_6" xml:space="preserve">
+    <value>「昔涟是，每一句最后的，
+	一直咯咯笑的，像是小尾巴的♪」</value>
+  </data>
+  <data name="EasterEgg_Welcome_7" xml:space="preserve">
+    <value>「昔涟是，哭着诞生的，
+	脆弱的，透明的，像是水晶的。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_8" xml:space="preserve">
+    <value>「昔涟是，笑着道别的，
+	柔软的，粉色的，像是花的。」</value>
+  </data>
+  <data name="FilePicker_AllFilesFilter" xml:space="preserve">
+    <value>所有文件|*.*</value>
+  </data>
+  <data name="Gacha_AuthKey_GenFailed_Format" xml:space="preserve">
+    <value>米游社认证密钥生成失败（返回码 {0}）。</value>
+  </data>
+  <data name="Gacha_AuthKey_HttpError_Format" xml:space="preserve">
+    <value>米游社认证请求失败（HTTP {0}）。</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteData" xml:space="preserve">
+    <value>米游社认证接口未返回完整的祈愿认证信息。</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteLogin" xml:space="preserve">
+    <value>米游社抽卡登录凭证不完整。请在账号页使用「米游社 APP 扫码」或短信验证码重新登录绑定了目标角色的账号。</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidData" xml:space="preserve">
+    <value>米游社返回的祈愿认证信息无效。</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidResponse" xml:space="preserve">
+    <value>米游社认证接口返回了无效数据。</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidRole" xml:space="preserve">
+    <value>所选角色的游戏、UID 或服务器信息无效。</value>
+  </data>
+  <data name="Gacha_AuthKey_Rejected" xml:space="preserve">
+    <value>米游社未接受所选角色的抽卡认证（返回码 -100）。</value>
+  </data>
+  <data name="Gacha_AuthKey_ReloginRequired" xml:space="preserve">
+    <value>米游社登录凭证不完整，请重新登录所选账号。</value>
+  </data>
+  <data name="Gacha_Fetch_ErrorCode_Format" xml:space="preserve">
+    <value>祈愿记录获取失败（返回码 {0}），请稍后重试。</value>
+  </data>
+  <data name="Gacha_Fetch_InvalidServerData" xml:space="preserve">
+    <value>服务器返回了无效的祈愿记录数据。</value>
+  </data>
+  <data name="Gacha_Fetch_LinkExpired" xml:space="preserve">
+    <value>祈愿链接已过期或无效，请在游戏中重新打开祈愿历史记录后再试。</value>
+  </data>
+  <data name="Gacha_Fetch_MissingUid" xml:space="preserve">
+    <value>祈愿记录缺少有效的游戏 UID，已停止导入。</value>
+  </data>
+  <data name="Gacha_Fetch_MultipleAccounts" xml:space="preserve">
+    <value>祈愿记录包含不同账号的数据，已停止导入。</value>
+  </data>
+  <data name="Gacha_Fetch_NetworkError" xml:space="preserve">
+    <value>祈愿记录请求失败，请检查网络后重试。</value>
+  </data>
+  <data name="Gacha_Fetch_ServerMismatch" xml:space="preserve">
+    <value>祈愿链接与返回记录的服务器不一致，已停止导入。</value>
+  </data>
+  <data name="Gacha_Fetch_UidMismatch" xml:space="preserve">
+    <value>返回记录的 UID 与所选游戏角色不一致，已停止导入。</value>
+  </data>
+  <data name="Gacha_Fetch_UidServerMismatch" xml:space="preserve">
+    <value>祈愿记录的 UID 与服务器不一致，已停止导入。</value>
+  </data>
+  <data name="Gacha_InvalidRoleBindingResponse" xml:space="preserve">
+    <value>角色绑定响应数据无效。</value>
+  </data>
+  <data name="Gacha_Resolver_CookieUnreadable_Format" xml:space="preserve">
+    <value>账号 {0} 的登录凭证无法读取，请重新登录该账号。</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryFailed_Format" xml:space="preserve">
+    <value>账号 {0} 的绑定角色查询失败（返回码 {1}）。</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryIncomplete_Format" xml:space="preserve">
+    <value>账号 {0} 的绑定角色查询未完成（{1}），请稍后重试。</value>
+  </data>
+  <data name="GachaAnalysis_ConfirmDeleteRecords_Format" xml:space="preserve">
+    <value>确定要删除 UID: {0} 的所有抽卡记录吗？
+此操作不可逆转！</value>
+  </data>
+  <data name="GachaAnalysis_CopyImageSuccess" xml:space="preserve">
+    <value>祈愿分析图片已复制到剪贴板。</value>
+  </data>
+  <data name="GachaAnalysis_CreateNewArchive" xml:space="preserve">
+    <value>创建新存档</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountContent_Format" xml:space="preserve">
+    <value>当前数据属于 UID: {0}
+即将导入的数据来自 UID: {1}
+
+是否为 UID {1} 创建新的数据存档？</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountTitle" xml:space="preserve">
+    <value>检测到不同账号</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV22" xml:space="preserve">
+    <value>导出为 v2.2</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV23" xml:space="preserve">
+    <value>导出为 v2.3</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV24" xml:space="preserve">
+    <value>导出为 v2.4</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV30" xml:space="preserve">
+    <value>导出为 v3.0</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV40" xml:space="preserve">
+    <value>导出为 v4.0</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV41" xml:space="preserve">
+    <value>导出为 v4.1</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV42" xml:space="preserve">
+    <value>导出为 v4.2</value>
+  </data>
+  <data name="GachaAnalysis_ExportImageFilename_Format" xml:space="preserve">
+    <value>祈愿分析_{0}_{1:yyyyMMddHHmmss}</value>
+  </data>
+  <data name="GachaAnalysis_FetchFailedTitle" xml:space="preserve">
+    <value>获取失败</value>
+  </data>
+  <data name="GachaAnalysis_FullFetchTooltip" xml:space="preserve">
+    <value>重新拉取全部祈愿记录，耗时较长，可用于修复缺失的数据</value>
+  </data>
+  <data name="GachaAnalysis_GoToLogin" xml:space="preserve">
+    <value>前往登录</value>
+  </data>
+  <data name="GachaAnalysis_IncrementalTooltip" xml:space="preserve">
+    <value>仅获取本地没有的新增祈愿记录，速度快，推荐日常使用</value>
+  </data>
+  <data name="GachaAnalysis_NoAccountDeleteHint" xml:space="preserve">
+    <value>当前没有选中任何账号，无法删除记录。</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInDesc" xml:space="preserve">
+    <value>检测到尚未登录米游社账号，即将跳转到账户设置页面进行登录。</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInTitle" xml:space="preserve">
+    <value>未登录米游社</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedDesc" xml:space="preserve">
+    <value>国际服（HoYoLAB）账号的抽卡记录获取功能正在适配中，敬请期待。
+
+国际服用户可通过「通过URL获取」方式导入抽卡记录。</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedTitle" xml:space="preserve">
+    <value>国际服暂不支持</value>
+  </data>
+  <data name="GachaAnalysis_PngImage" xml:space="preserve">
+    <value>PNG 图片</value>
+  </data>
+  <data name="GachaAnalysis_ReloginTitle" xml:space="preserve">
+    <value>需要登录目标账户</value>
+  </data>
+  <data name="GachaAnalysis_SaveFailedTitle" xml:space="preserve">
+    <value>保存失败</value>
+  </data>
+  <data name="GachaAnalysis_SaveImageSuccess" xml:space="preserve">
+    <value>祈愿分析图片已保存至文件。</value>
+  </data>
+  <data name="GachaAnalysis_SaveSuccessTitle" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="GachaAnalysis_UigfPartnerBadge" xml:space="preserve">
+    <value>已获 UIGF / UIAF 标准项目合作</value>
+  </data>
+  <data name="GachaAnalysis_UigfSupportDesc" xml:space="preserve">
+    <value>该项目使用 UIGF v4.2 / v4.1 / v4.0 / v3.0 / v2.4 / v2.3 / v2.2 标准格式处理祈愿数据</value>
+  </data>
+  <data name="GachaAnalysis_UrlDialogTitle" xml:space="preserve">
+    <value>通过 URL 获取抽卡记录</value>
+  </data>
+  <data name="GachaAnalysis_UrlInstruction" xml:space="preserve">
+    <value>粘贴从米游社或其他工具获取的抽卡记录链接，链接应包含 authkey 参数。</value>
+  </data>
+  <data name="GachaAnalysis_UrlPlaceholder" xml:space="preserve">
+    <value>在此处粘贴抽卡分析链接 (URL)...</value>
+  </data>
+  <data name="GameServer_UnexpectedEof" xml:space="preserve">
+    <value>文件末尾早于预期（文件可能被截断）。</value>
+  </data>
+  <data name="GameUpdate_IncompletePatchData" xml:space="preserve">
+    <value>补丁段数据不完整</value>
+  </data>
+  <data name="HighCpuUsage_SampleUsage_Format" xml:space="preserve">
+    <value>最近一次采样占用约 {0:F1}%</value>
+  </data>
+  <data name="HoyolabCheckin_Title" xml:space="preserve">
+    <value>HoYoLAB 自动签到</value>
+  </data>
+  <data name="Inventory_ApiRequestFailed" xml:space="preserve">
+    <value>背包接口请求失败，请检查该角色的登录和授权状态。</value>
+  </data>
+  <data name="Inventory_CnOnly" xml:space="preserve">
+    <value>背包同步暂仅支持天空岛和世界树角色。</value>
+  </data>
+  <data name="Inventory_FetchingData" xml:space="preserve">
+    <value>正在获取数据...</value>
+  </data>
+  <data name="Inventory_LastUpdated_Format" xml:space="preserve">
+    <value>上次更新: {0}</value>
+  </data>
+  <data name="Inventory_LoginRequired" xml:space="preserve">
+    <value>请先登录米游社账号</value>
+  </data>
+  <data name="Inventory_RequestingMiyoushe" xml:space="preserve">
+    <value>正在请求米游社...</value>
+  </data>
+  <data name="Inventory_SyncFailed_Format" xml:space="preserve">
+    <value>同步失败: {0}</value>
+  </data>
+  <data name="Inventory_SyncSuccess_Format" xml:space="preserve">
+    <value>同步成功: {0}</value>
+  </data>
+  <data name="LoginQR_AppScanSuccessExchanging" xml:space="preserve">
+    <value>APP 扫码成功，正在换取凭据...</value>
+  </data>
+  <data name="LoginQR_CannotCreateAuthToken" xml:space="preserve">
+    <value>无法创建验证凭据</value>
+  </data>
+  <data name="LoginQR_CaptchaNotCompleted" xml:space="preserve">
+    <value>人机验证未完成，请重试</value>
+  </data>
+  <data name="LoginQR_ClearDone" xml:space="preserve">
+    <value>清理完成</value>
+  </data>
+  <data name="LoginQR_ClearFailed_Format" xml:space="preserve">
+    <value>清理失败: {0}</value>
+  </data>
+  <data name="LoginQR_ClearingDbCache" xml:space="preserve">
+    <value>正在清除数据库缓存...</value>
+  </data>
+  <data name="LoginQR_CompleteWebLogin" xml:space="preserve">
+    <value>请在网页中完成登录验证</value>
+  </data>
+  <data name="LoginQR_ConfirmClearHistory" xml:space="preserve">
+    <value>确定清除保存的历史登录数据吗？</value>
+  </data>
+  <data name="LoginQR_CreateFailed_Format" xml:space="preserve">
+    <value>创建失败: {0}</value>
+  </data>
+  <data name="LoginQR_CreatingAppQr" xml:space="preserve">
+    <value>正在创建 APP 登录二维码...</value>
+  </data>
+  <data name="LoginQR_CreatingGameQr" xml:space="preserve">
+    <value>正在创建游戏扫码二维码...</value>
+  </data>
+  <data name="LoginQR_CredentialExchangeException_Format" xml:space="preserve">
+    <value>凭证换取异常: {0}</value>
+  </data>
+  <data name="LoginQR_ExchangingLoginCredential" xml:space="preserve">
+    <value>正在换取登录凭证...</value>
+  </data>
+  <data name="LoginQR_ExtractCookieFromHeadersFailed" xml:space="preserve">
+    <value>未能从响应头提取出完整 Cookie</value>
+  </data>
+  <data name="LoginQR_ExtractRetry" xml:space="preserve">
+    <value>提取失败，请重试</value>
+  </data>
+  <data name="LoginQR_ExtractSuccess" xml:space="preserve">
+    <value>凭证提取成功</value>
+  </data>
+  <data name="LoginQR_FetchingFullCredential" xml:space="preserve">
+    <value>正在获取完整登录凭证...</value>
+  </data>
+  <data name="LoginQR_ForceStoppedScan" xml:space="preserve">
+    <value>已强制终止扫码等待</value>
+  </data>
+  <data name="LoginQR_GameScanSuccessExchanging" xml:space="preserve">
+    <value>扫码成功，正在换取 SToken...</value>
+  </data>
+  <data name="LoginQR_GetSmsCodeFirst" xml:space="preserve">
+    <value>请先获取短信验证码</value>
+  </data>
+  <data name="LoginQR_InvalidCookie" xml:space="preserve">
+    <value>Cookie 无效</value>
+  </data>
+  <data name="LoginQR_InvalidCookieFormat" xml:space="preserve">
+    <value>Cookie 格式无效</value>
+  </data>
+  <data name="LoginQR_InvalidMobileLength" xml:space="preserve">
+    <value>请输入正确的 11 位手机号</value>
+  </data>
+  <data name="LoginQR_LoadingPassportPage" xml:space="preserve">
+    <value>正在加载通行证登录页面...</value>
+  </data>
+  <data name="LoginQR_LoadPassportFailed_Format" xml:space="preserve">
+    <value>加载通行证网页失败: {0}</value>
+  </data>
+  <data name="LoginQR_LoggingIn" xml:space="preserve">
+    <value>正在登录...</value>
+  </data>
+  <data name="LoginQR_LoginFailedCode_Format" xml:space="preserve">
+    <value>登录失败: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_LoginFailedReason_Format" xml:space="preserve">
+    <value>登录失败: {0}</value>
+  </data>
+  <data name="LoginQR_LoginMissingCredential" xml:space="preserve">
+    <value>登录失败: 响应缺少凭证</value>
+  </data>
+  <data name="LoginQR_PasteCookiePlaceholder" xml:space="preserve">
+    <value>在此处粘贴 Cookie</value>
+  </data>
+  <data name="LoginQR_ProcessFailed_Format" xml:space="preserve">
+    <value>处理失败: {0}</value>
+  </data>
+  <data name="LoginQR_QrExpiredMaxRefresh" xml:space="preserve">
+    <value>二维码已过期且自动刷新次数已达上限，请点击刷新二维码</value>
+  </data>
+  <data name="LoginQR_RequestRejected" xml:space="preserve">
+    <value>请求被拒绝</value>
+  </data>
+  <data name="LoginQR_RiskVerifyIncomplete" xml:space="preserve">
+    <value>安全验证未完成</value>
+  </data>
+  <data name="LoginQR_ScanMissingCredential" xml:space="preserve">
+    <value>扫码响应缺少凭证，请点击刷新二维码后重试</value>
+  </data>
+  <data name="LoginQR_ScannedConfirmPhone" xml:space="preserve">
+    <value>已扫码，请在手机端确认登录...</value>
+  </data>
+  <data name="LoginQR_ScanRejected" xml:space="preserve">
+    <value>扫描请求被拒绝</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyoushe" xml:space="preserve">
+    <value>请使用米游社 APP 扫描二维码</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyousheOrGame" xml:space="preserve">
+    <value>请使用米游社或对应游戏内扫描二维码</value>
+  </data>
+  <data name="LoginQR_SendCaptchaException_Format" xml:space="preserve">
+    <value>发送异常: {0}</value>
+  </data>
+  <data name="LoginQR_SendCaptchaFailed_Format" xml:space="preserve">
+    <value>发送失败: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeException_Format" xml:space="preserve">
+    <value>SToken 换取异常: {0}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeFailed_Format" xml:space="preserve">
+    <value>SToken 换取失败: {0}</value>
+  </data>
+  <data name="LoginQR_TooManyNetworkErrors" xml:space="preserve">
+    <value>网络异常次数过多，请检查网络后重试</value>
+  </data>
+  <data name="LoginQR_TooManyVerifyAttempts" xml:space="preserve">
+    <value>登录失败：校验次数过多，请稍后重试</value>
+  </data>
+  <data name="MainWindow_DispatcherClosed" xml:space="preserve">
+    <value>主窗口的 UI 调度队列已关闭</value>
+  </data>
+  <data name="MapPage_LockMapOn" xml:space="preserve">
+    <value>锁定地图 (开)</value>
+  </data>
+  <data name="MapPage_TopMostOn" xml:space="preserve">
+    <value>窗口置顶 (开)</value>
+  </data>
+  <data name="Miyoushe_CommentLengthLimit" xml:space="preserve">
+    <value>评论需包含 1 至 1000 个字符</value>
+  </data>
+  <data name="Miyoushe_DeviceIdentityIncomplete" xml:space="preserve">
+    <value>米游社账号的设备身份不完整</value>
+  </data>
+  <data name="Miyoushe_InteractiveFallback" xml:space="preserve">
+    <value>[互动内容：请在原帖查看]</value>
+  </data>
+  <data name="Miyoushe_InvalidId" xml:space="preserve">
+    <value>无效的米游社 ID</value>
+  </data>
+  <data name="Miyoushe_LibraryLoadFailedIO" xml:space="preserve">
+    <value>本地收藏文件读取失败，已保留原文件；请修复后重新打开窗口</value>
+  </data>
+  <data name="Miyoushe_LoginCnAccountFirst" xml:space="preserve">
+    <value>请先在启动器账号管理中登录米游社国服账号，再选择该账号</value>
+  </data>
+  <data name="Miyoushe_NoPendingVerify" xml:space="preserve">
+    <value>没有待处理的验证</value>
+  </data>
+  <data name="Miyoushe_PostUnavailable" xml:space="preserve">
+    <value>帖子内容不可用</value>
+  </data>
+  <data name="Miyoushe_RateLimitedManual" xml:space="preserve">
+    <value>请求频率受限，请稍后手动重试</value>
+  </data>
+  <data name="Miyoushe_RateLimitedWait_Format" xml:space="preserve">
+    <value>请求频率受限，请等待 {0} 秒再重试</value>
+  </data>
+  <data name="Miyoushe_ReloginRequired" xml:space="preserve">
+    <value>请重新登录米游社账号</value>
+  </data>
+  <data name="Miyoushe_ResponseTooLarge" xml:space="preserve">
+    <value>响应内容过大</value>
+  </data>
+  <data name="Miyoushe_SecurityVerifyRequired" xml:space="preserve">
+    <value>米游社要求完成安全验证</value>
+  </data>
+  <data name="Miyoushe_SubmissionUncertainIO" xml:space="preserve">
+    <value>评论提交结果暂时无法确认，请先检查原帖，避免重复发布</value>
+  </data>
+  <data name="Miyoushe_UnrecognizedResponse" xml:space="preserve">
+    <value>米游社返回了无法识别的响应</value>
+  </data>
+  <data name="Miyoushe_VerifyFailedRetry" xml:space="preserve">
+    <value>验证未成功，请重试</value>
+  </data>
+  <data name="Miyoushe_VerifyNoCaptchaProvided" xml:space="preserve">
+    <value>服务未提供可用的验证码，请在米游社官方页面完成验证</value>
+  </data>
+  <data name="Miyoushe_VerifyParamsIncomplete" xml:space="preserve">
+    <value>验证参数不完整，请在米游社官方页面完成验证</value>
+  </data>
+  <data name="Miyoushe_VoteInteractiveFallback" xml:space="preserve">
+    <value>[投票：请在原帖参与]</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstall" xml:space="preserve">
+    <value>需要管理员权限才能完成证书安装</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstallDetail_Format" xml:space="preserve">
+    <value>需要管理员权限才能完成证书安装（{0}）</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstall" xml:space="preserve">
+    <value>需要管理员权限才能完成证书卸载</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstallDetail_Format" xml:space="preserve">
+    <value>需要管理员权限才能完成证书卸载（{0}）</value>
+  </data>
+  <data name="ModTrust_CertAlreadyInstalled" xml:space="preserve">
+    <value>平台证书已存在，无需重复安装</value>
+  </data>
+  <data name="ModTrust_CertInstalledScope_Format" xml:space="preserve">
+    <value>已安装平台证书（{0}）</value>
+  </data>
+  <data name="ModTrust_CertNotInstalled" xml:space="preserve">
+    <value>平台证书未安装，无需卸载</value>
+  </data>
+  <data name="ModTrust_CertPurposeNote" xml:space="preserve">
+    <value>证书用途：验证我们签发的代码签名。安装后可在设置中随时卸载。</value>
+  </data>
+  <data name="ModTrust_CertUnavailable" xml:space="preserve">
+    <value>平台证书不可用，请稍后在设置中更新信任信息。</value>
+  </data>
+  <data name="ModTrust_CertUninstalledScope_Format" xml:space="preserve">
+    <value>已卸载平台证书（{0}）</value>
+  </data>
+  <data name="ModTrust_ConfirmAndInstall" xml:space="preserve">
+    <value>核对无误，安装</value>
+  </data>
+  <data name="ModTrust_ElevatedExitCode_Format" xml:space="preserve">
+    <value>提权操作退出码 {0}</value>
+  </data>
+  <data name="ModTrust_ElevatedStartFailed" xml:space="preserve">
+    <value>提权进程启动失败</value>
+  </data>
+  <data name="ModTrust_ElevationCancelled" xml:space="preserve">
+    <value>已取消管理员授权，操作未执行</value>
+  </data>
+  <data name="ModTrust_ExePathUnavailable" xml:space="preserve">
+    <value>无法定位当前程序路径</value>
+  </data>
+  <data name="ModTrust_InstallFailedMsg_Format" xml:space="preserve">
+    <value>安装失败：{0}</value>
+  </data>
+  <data name="ModTrust_InstallFailedTitle" xml:space="preserve">
+    <value>安装失败</value>
+  </data>
+  <data name="ModTrust_InstallPkgUnavailable" xml:space="preserve">
+    <value>信任包不可用，拒绝安装证书</value>
+  </data>
+  <data name="ModTrust_InstallReviewLead_Format" xml:space="preserve">
+    <value>即将为「{0}」安装以下平台证书，请核对无误后继续：</value>
+  </data>
+  <data name="ModTrust_IssuerCertLabel" xml:space="preserve">
+    <value>平台中间证书</value>
+  </data>
+  <data name="ModTrust_IssuerLabel" xml:space="preserve">
+    <value>颁发者</value>
+  </data>
+  <data name="ModTrust_MachineAlreadyCoversUser" xml:space="preserve">
+    <value>本机信任已安装并覆盖当前用户，无需在当前用户范围重复安装</value>
+  </data>
+  <data name="ModTrust_Manifest_HashMismatch" xml:space="preserve">
+    <value>清单内容哈希与签名信封不一致</value>
+  </data>
+  <data name="ModTrust_Manifest_InvalidEnvelope" xml:space="preserve">
+    <value>签名信封解析失败</value>
+  </data>
+  <data name="ModTrust_Manifest_NotRsa" xml:space="preserve">
+    <value>签名证书不是 RSA 公钥</value>
+  </data>
+  <data name="ModTrust_Manifest_SigVerifyFailed" xml:space="preserve">
+    <value>清单签名校验失败</value>
+  </data>
+  <data name="ModTrust_Manifest_ThumbprintMismatch" xml:space="preserve">
+    <value>签名者指纹与清单声明不一致</value>
+  </data>
+  <data name="ModTrust_Manifest_UnsupportedAlg_Format" xml:space="preserve">
+    <value>不支持的签名算法：{0}</value>
+  </data>
+  <data name="ModTrust_Manifest_VerifyException_Format" xml:space="preserve">
+    <value>清单签名校验异常：{0}</value>
+  </data>
+  <data name="ModTrust_NoMachineCertToUninstall" xml:space="preserve">
+    <value>本机范围没有由本应用安装的证书，无需卸载</value>
+  </data>
+  <data name="ModTrust_NoPinnedRoot" xml:space="preserve">
+    <value>应用未内置固定根证书（Assets/Trust/ModsRootCA.cer），无法验证信任包</value>
+  </data>
+  <data name="ModTrust_NoUserCertToUninstall" xml:space="preserve">
+    <value>当前用户范围没有由本应用安装的证书，无需卸载</value>
+  </data>
+  <data name="ModTrust_NoVerifiedPkg" xml:space="preserve">
+    <value>没有通过校验的信任包</value>
+  </data>
+  <data name="ModTrust_OpCompleted" xml:space="preserve">
+    <value>操作已完成</value>
+  </data>
+  <data name="ModTrust_Pkg_IssuingThumbprintMismatch" xml:space="preserve">
+    <value>签发证书指纹与清单声明不一致</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestEmpty" xml:space="preserve">
+    <value>信任清单为空</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestInvalidJson_Format" xml:space="preserve">
+    <value>信任清单不是有效的 JSON：{0}</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestSigInvalid_Format" xml:space="preserve">
+    <value>清单签名无效：{0}</value>
+  </data>
+  <data name="ModTrust_Pkg_NoSignerCert" xml:space="preserve">
+    <value>未提供清单签名者证书</value>
+  </data>
+  <data name="ModTrust_Pkg_RootHasPrivateKey" xml:space="preserve">
+    <value>信任包中的根证书包含私钥，已拒绝</value>
+  </data>
+  <data name="ModTrust_Pkg_RootNotSelfSigned" xml:space="preserve">
+    <value>根证书不是自签名证书</value>
+  </data>
+  <data name="ModTrust_Pkg_RootThumbprintMismatch" xml:space="preserve">
+    <value>根证书指纹与清单声明不一致</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerNotChained" xml:space="preserve">
+    <value>清单签名者证书未链接到此信任包的根证书</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerThumbprintMismatch" xml:space="preserve">
+    <value>清单签名者证书指纹与清单声明不一致</value>
+  </data>
+  <data name="ModTrust_PkgRootMismatch_Format" xml:space="preserve">
+    <value>信任包根证书与内置固定根证书不匹配（{0}），已拒绝</value>
+  </data>
+  <data name="ModTrust_PkgVerifyFailed_Format" xml:space="preserve">
+    <value>信任包校验失败（{0}）：{1}</value>
+  </data>
+  <data name="ModTrust_Policy_AnyEku" xml:space="preserve">
+    <value>证书包含宽泛用途 OID (anyExtendedKeyUsage)</value>
+  </data>
+  <data name="ModTrust_Policy_CabForumOid_Format" xml:space="preserve">
+    <value>证书包含 CA/Browser Forum 策略 OID（{0}，含 EV 策略）</value>
+  </data>
+  <data name="ModTrust_Policy_IsCa" xml:space="preserve">
+    <value>签名证书为 CA 证书</value>
+  </data>
+  <data name="ModTrust_Policy_KeyCertSign" xml:space="preserve">
+    <value>证书包含 keyCertSign 密钥用法</value>
+  </data>
+  <data name="ModTrust_Policy_NoDigitalSig" xml:space="preserve">
+    <value>证书缺少 digitalSignature 密钥用法</value>
+  </data>
+  <data name="ModTrust_Policy_NoEku" xml:space="preserve">
+    <value>证书缺少增强型密钥用法 (EKU) 扩展</value>
+  </data>
+  <data name="ModTrust_Policy_NonCodeEku_Format" xml:space="preserve">
+    <value>证书包含非代码签名 EKU（{0}）</value>
+  </data>
+  <data name="ModTrust_Policy_ValidityExceeded_Format" xml:space="preserve">
+    <value>证书有效期 {0:F0} 天超出策略上限 {1} 天</value>
+  </data>
+  <data name="ModTrust_ReasonFailed_Format" xml:space="preserve">
+    <value>签名未通过平台信任校验：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableEnforce" xml:space="preserve">
+    <value>信任包不可用，拦截模式拒绝加载未验证文件</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableWarn" xml:space="preserve">
+    <value>信任包不可用，已提示放行</value>
+  </data>
+  <data name="ModTrust_ReasonPolicyViolation_Format" xml:space="preserve">
+    <value>签名证书不符合平台策略（仅允许基础代码签名证书）：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonRevoked_Format" xml:space="preserve">
+    <value>签名证书已被平台吊销：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonSkipped" xml:space="preserve">
+    <value>未启用签名信任校验</value>
+  </data>
+  <data name="ModTrust_ReasonTampered" xml:space="preserve">
+    <value>签名与文件内容不匹配，文件可能已被篡改</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedAllowlisted_Format" xml:space="preserve">
+    <value>已列入平台信任允许清单：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedPlatform_Format" xml:space="preserve">
+    <value>由 FufuLauncher 代码签名 CA 签发：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonUnsigned" xml:space="preserve">
+    <value>未签名：无法验证发布者身份</value>
+  </data>
+  <data name="ModTrust_ReviewTitle" xml:space="preserve">
+    <value>核对平台证书</value>
+  </data>
+  <data name="ModTrust_RootCertLabel" xml:space="preserve">
+    <value>平台根证书</value>
+  </data>
+  <data name="ModTrust_SignerIdSuffix_Format" xml:space="preserve">
+    <value> (签名者 ID {0})</value>
+  </data>
+  <data name="ModTrust_SubjectLabel" xml:space="preserve">
+    <value>颁发给</value>
+  </data>
+  <data name="ModTrust_SyncFailed_Format" xml:space="preserve">
+    <value>同步失败：{0}</value>
+  </data>
+  <data name="ModTrust_SyncHashMismatch_Format" xml:space="preserve">
+    <value>文件 {0} 哈希校验失败（期望 {1}，实际 {2}），已拒绝本次同步</value>
+  </data>
+  <data name="ModTrust_SyncIllegalFilename" xml:space="preserve">
+    <value>同步端点返回了非法文件名，已终止</value>
+  </data>
+  <data name="ModTrust_SyncInvalidIndex" xml:space="preserve">
+    <value>同步端点未返回有效的文件清单</value>
+  </data>
+  <data name="ModTrust_SyncNoPinnedRoot" xml:space="preserve">
+    <value>应用未内置根证书（Assets/Trust/ModsRootCA.cer），拒绝从网络接受任何信任包</value>
+  </data>
+  <data name="ModTrust_SyncRootMismatch" xml:space="preserve">
+    <value>同步到的信任包根证书与应用内置根证书不一致，已拒绝（可能需要更新客户端）</value>
+  </data>
+  <data name="ModTrust_SyncUpdated_Format" xml:space="preserve">
+    <value>信任包已更新（版本 {0}，吊销 {1} 条）</value>
+  </data>
+  <data name="ModTrust_ThumbprintSha256" xml:space="preserve">
+    <value>SHA-256 指纹</value>
+  </data>
+  <data name="ModTrust_UninstallAction" xml:space="preserve">
+    <value>卸载</value>
+  </data>
+  <data name="ModTrust_UninstallCertTitle" xml:space="preserve">
+    <value>卸载平台证书</value>
+  </data>
+  <data name="ModTrust_UninstallFailedMsg_Format" xml:space="preserve">
+    <value>卸载失败：{0}</value>
+  </data>
+  <data name="ModTrust_UninstallFromMachine" xml:space="preserve">
+    <value>当前用户的信任由本机安装提供，请在本机范围卸载</value>
+  </data>
+  <data name="ModTrust_UninstallPkgUnavailable" xml:space="preserve">
+    <value>信任包不可用，无法定位需要卸载的证书</value>
+  </data>
+  <data name="ModTrust_UnknownAction_Format" xml:space="preserve">
+    <value>未知操作：{0}</value>
+  </data>
+  <data name="ModTrust_UnsignedMarker" xml:space="preserve">
+    <value>(未签名)</value>
+  </data>
+  <data name="ModTrust_ValidUntil" xml:space="preserve">
+    <value>有效期至</value>
+  </data>
+  <data name="ModTrust_Verify_Allowlisted" xml:space="preserve">
+    <value>证书指纹匹配信任清单附加允许列表</value>
+  </data>
+  <data name="ModTrust_Verify_BadDigest" xml:space="preserve">
+    <value>签名与文件内容不匹配（文件可能已被篡改）</value>
+  </data>
+  <data name="ModTrust_Verify_ChainIncomplete_Format" xml:space="preserve">
+    <value>证书链未能链接至平台根证书：{0}</value>
+  </data>
+  <data name="ModTrust_Verify_Compliant" xml:space="preserve">
+    <value>由平台代码签名 CA 签发且符合策略</value>
+  </data>
+  <data name="ModTrust_Verify_NoOsChain" xml:space="preserve">
+    <value>未在系统中建立信任链（根证书未安装）；改为使用平台内置根证书校验</value>
+  </data>
+  <data name="ModTrust_Verify_Revoked" xml:space="preserve">
+    <value>证书已被平台吊销</value>
+  </data>
+  <data name="ModTrust_Verify_SignerId_Format" xml:space="preserve">
+    <value>签名者 ID: {0}</value>
+  </data>
+  <data name="ModTrust_Verify_WinTrustFailed_Format" xml:space="preserve">
+    <value>签名验证失败 (WinVerifyTrust=0x{0:X8})</value>
+  </data>
+  <data name="Passport_ParseResponseFailed" xml:space="preserve">
+    <value>响应解析失败</value>
+  </data>
+  <data name="Passport_ParseResponseFailedDetail_Format" xml:space="preserve">
+    <value>响应解析失败: {0}</value>
+  </data>
+  <data name="Plugin_Download_HttpFailed_Format" xml:space="preserve">
+    <value>下载失败 (HTTP {0})</value>
+  </data>
+  <data name="Plugin_Download_MainLineFailed" xml:space="preserve">
+    <value>主线路下载失败</value>
+  </data>
+  <data name="PluginInstaller_ExecutingScript" xml:space="preserve">
+    <value>正在执行脚本...</value>
+  </data>
+  <data name="PluginInstaller_ScriptCompleted" xml:space="preserve">
+    <value>执行完成</value>
+  </data>
+  <data name="PluginInstaller_ScriptFailed" xml:space="preserve">
+    <value>执行失败</value>
+  </data>
+  <data name="PluginPage_CannotOpenGuideImage_Format" xml:space="preserve">
+    <value>无法打开说明图: {0}</value>
+  </data>
+  <data name="PluginPage_InstallSuccess_Format" xml:space="preserve">
+    <value>{0} 安装成功！</value>
+  </data>
+  <data name="PluginSettings_InstallSig" xml:space="preserve">
+    <value>安装签名</value>
+  </data>
+  <data name="PluginSettings_InstallSigTooltip" xml:space="preserve">
+    <value>安装平台代码签名证书（可随时在设置中卸载）</value>
+  </data>
+  <data name="PresetManager_MaxPinnedHint" xml:space="preserve">
+    <value>最多只能固定 5 个预设</value>
+  </data>
+  <data name="Screenshot_ConfirmDeleteToRecycle" xml:space="preserve">
+    <value>确定要将此截图移到回收站吗？</value>
+  </data>
+  <data name="Screenshot_DateGroupFormat" xml:space="preserve">
+    <value>yyyy年MM月dd日</value>
+  </data>
+  <data name="Screenshot_SourceGame" xml:space="preserve">
+    <value>游戏截图</value>
+  </data>
+  <data name="Screenshot_SourceLauncher" xml:space="preserve">
+    <value>启动器截图</value>
+  </data>
+  <data name="ServiceOverview_Loading" xml:space="preserve">
+    <value>正在加载服务状态...</value>
+  </data>
+  <data name="ServiceOverview_Title" xml:space="preserve">
+    <value>服务状态总览</value>
+  </data>
+  <data name="Settings_CloudCheckinNoteDesc" xml:space="preserve">
+    <value>开启云游戏签到需要为对应账号添加云游戏登录凭证，否则将跳过云游戏签到</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledDesc" xml:space="preserve">
+    <value>关闭后，启动器即使长期高 CPU 占用也不会再主动提示。若遇到卡顿、发热或异常耗电，请自行留意并及时反馈问题。</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledTitle" xml:space="preserve">
+    <value>已关闭 CPU 占用异常警告</value>
+  </data>
+  <data name="Settings_IndependentDeploymentDesc" xml:space="preserve">
+    <value>该独立部署版本软件由 PR 贡献者自行开发提供，FufuLauncher 无法对该软件的安全性、稳定性或后续维护提供任何保证，您需要自行辨别使用风险。
+
+是否继续访问该项目地址？</value>
+  </data>
+  <data name="Settings_ServiceOverview" xml:space="preserve">
+    <value>服务状态总览</value>
+  </data>
+  <data name="Settings_ServiceOverviewDesc" xml:space="preserve">
+    <value>查看 status.fu1.fun 上的所有服务运行状态</value>
+  </data>
+  <data name="StarPrompt_Title" xml:space="preserve">
+    <value>支持 FufuLauncher</value>
+  </data>
+  <data name="Startup_ErrOpenRegistryKey" xml:space="preserve">
+    <value>无法打开启动项注册表键</value>
+  </data>
+  <data name="Startup_ErrProcessPathUnavailable" xml:space="preserve">
+    <value>无法获取当前程序路径</value>
+  </data>
+  <data name="UpdateService_CancelledOrTimeout" xml:space="preserve">
+    <value>检查更新已取消或超时。</value>
+  </data>
+  <data name="UpdateService_CheckFailed_Format" xml:space="preserve">
+    <value>检查更新失败：{0}</value>
+  </data>
+  <data name="UpdateService_NewVersionFound" xml:space="preserve">
+    <value>发现启动器新版本。</value>
+  </data>
+  <data name="UpdateService_Unreachable" xml:space="preserve">
+    <value>暂时无法连接更新服务器，未执行更新检查。</value>
+  </data>
+  <data name="UpdateService_UpToDate" xml:space="preserve">
+    <value>当前启动器已是最新版本。</value>
+  </data>
+  <data name="Yae_ErrConfigNotFound_Format" xml:space="preserve">
+    <value>未找到该游戏版本对应的 Yae 配置（哈希 0x{0:X8}），请更新游戏或等待元数据更新。</value>
+  </data>
+  <data name="Yae_ErrCreateProcessFailed_Format" xml:space="preserve">
+    <value>创建游戏进程失败：{0}</value>
+  </data>
+  <data name="Yae_ErrDllLoadTimeout_Format" xml:space="preserve">
+    <value>远程 LoadLibraryW 在 10s 内未完成，DLL 加载超时：{0}</value>
+  </data>
+  <data name="Yae_ErrDllNotFound" xml:space="preserve">
+    <value>未找到 YaeAchievementLib.dll 组件，请重新安装本程序。</value>
+  </data>
+  <data name="Yae_ErrElevationCancelled" xml:space="preserve">
+    <value>已取消管理员权限确认。</value>
+  </data>
+  <data name="Yae_ErrElevationStartFailed" xml:space="preserve">
+    <value>无法启动提权读取进程。</value>
+  </data>
+  <data name="Yae_ErrExePathUnavailable" xml:space="preserve">
+    <value>无法定位当前程序路径。</value>
+  </data>
+  <data name="Yae_ErrExitCode_Format" xml:space="preserve">
+    <value>读取失败（错误码 {0}）。</value>
+  </data>
+  <data name="Yae_ErrFetchMetadataFailed" xml:space="preserve">
+    <value>无法获取 Yae 成就元数据，请检查网络连接。</value>
+  </data>
+  <data name="Yae_ErrGameCreateFailed" xml:space="preserve">
+    <value>游戏进程创建失败。</value>
+  </data>
+  <data name="Yae_ErrGameNotFound" xml:space="preserve">
+    <value>未找到游戏主程序，请在设置中确认游戏安装目录。</value>
+  </data>
+  <data name="Yae_ErrGameRunning" xml:space="preserve">
+    <value>检测到游戏正在运行，请先退出游戏后再读取成就。</value>
+  </data>
+  <data name="Yae_ErrInjectFailed_Format" xml:space="preserve">
+    <value>注入 Yae 组件失败：{0}</value>
+  </data>
+  <data name="Yae_ErrInjectionFailed" xml:space="preserve">
+    <value>Yae 组件注入失败。</value>
+  </data>
+  <data name="Yae_ErrInvalidConfig" xml:space="preserve">
+    <value>读取配置文件无效。</value>
+  </data>
+  <data name="Yae_ErrMetadataDecryptFailed" xml:space="preserve">
+    <value>Yae 元数据解密校验失败。</value>
+  </data>
+  <data name="Yae_ErrModuleNotFound_Format" xml:space="preserve">
+    <value>未在目标进程中找到已加载模块：{0}</value>
+  </data>
+  <data name="Yae_ErrNoAchievementData" xml:space="preserve">
+    <value>未能获取到成就数据。</value>
+  </data>
+  <data name="Yae_ErrNoData" xml:space="preserve">
+    <value>未能从游戏获取成就数据，请确认已进入游戏世界。</value>
+  </data>
+  <data name="Yae_ErrNoResultFile" xml:space="preserve">
+    <value>未能生成成就读取结果。</value>
   </data>
 </root>

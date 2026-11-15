@@ -45,7 +45,7 @@ public partial class AccountManager
     {
         string? directory = Path.GetDirectoryName(path);
         if (string.IsNullOrEmpty(directory))
-            throw new InvalidOperationException("Cookie 文件路径无效");
+            throw new InvalidOperationException("Account_CookiePathInvalid".GetLocalized());
 
         Directory.CreateDirectory(directory);
         string temporaryPath = path + "." + Guid.NewGuid().ToString("N") + ".tmp";
@@ -107,7 +107,7 @@ public partial class AccountManager
                 try
                 {
                     var file = JsonSerializer.Deserialize<AccountCookieFile>(plaintext, CookieJsonOptions)
-                               ?? throw new JsonException("Cookie 文件内容无效");
+                               ?? throw new JsonException("Account_CookieContentInvalid".GetLocalized());
                     return new CookieReadResult(file.Cookies ?? new Dictionary<string, string>(),
                         CookieVault.IsLegacyJsonEnvelope(bytes)
                         || CookieVault.IsLegacyBinaryEnvelope(bytes));

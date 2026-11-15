@@ -19,7 +19,7 @@ public sealed partial class GachaAnalysisWindow
 
         contentPanel.Children.Add(new TextBlock
         {
-            Text = "该项目使用UIGF v4.2/v4.1/v4.0/v3.0/v2.4/v2.3/v2.2标准格式处理祈愿数据",
+            Text = "GachaAnalysis_UigfSupportDesc".GetLocalized(),
             TextWrapping = TextWrapping.Wrap
         });
 
@@ -45,7 +45,7 @@ public sealed partial class GachaAnalysisWindow
 
         badgePanel.Children.Add(new TextBlock
         {
-            Text = "已获UIGF/UIAF标准项目合作",
+            Text = "GachaAnalysis_UigfPartnerBadge".GetLocalized(),
             VerticalAlignment = VerticalAlignment.Center,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold
         });
@@ -54,9 +54,9 @@ public sealed partial class GachaAnalysisWindow
 
         var dialog = new ContentDialog
         {
-            Title = "关于",
+            Title = "GachaAnalysis_About".GetLocalized(),
             Content = contentPanel,
-            CloseButtonText = "关闭",
+            CloseButtonText = "CloseBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
@@ -71,9 +71,9 @@ public sealed partial class GachaAnalysisWindow
         {
             var noDataDialog = new ContentDialog
             {
-                Title = "提示",
-                Content = "当前没有选中任何账号，无法删除记录。",
-                CloseButtonText = "知道了",
+                Title = "Common_Notice".GetLocalized(),
+                Content = "GachaAnalysis_NoAccountDeleteHint".GetLocalized(),
+                CloseButtonText = "Common_GotIt".GetLocalized(),
                 DefaultButton = ContentDialogButton.Close,
                 XamlRoot = Content.XamlRoot
             };
@@ -83,10 +83,10 @@ public sealed partial class GachaAnalysisWindow
 
         ContentDialog deleteDialog = new()
         {
-            Title = "警告",
-            Content = $"确定要删除 UID: {ViewModel.SelectedUid} 的所有抽卡记录吗？\n此操作不可逆转！",
-            PrimaryButtonText = "确认删除",
-            CloseButtonText = "取消",
+            Title = "Common_Warning".GetLocalized(),
+            Content = string.Format("GachaAnalysis_ConfirmDeleteRecords_Format".GetLocalized(), ViewModel.SelectedUid),
+            PrimaryButtonText = "Title_ConfirmDelete".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = Content.XamlRoot
         };
@@ -120,9 +120,9 @@ public sealed partial class GachaAnalysisWindow
         {
             var osDialog = new ContentDialog
             {
-                Title = "国际服暂不支持",
-                Content = "国际服（HoYoLAB）账号的抽卡记录获取功能正在适配中，敬请期待。\n\n国际服用户可通过「通过URL获取」方式导入抽卡记录。",
-                CloseButtonText = "知道了",
+                Title = "GachaAnalysis_OsNotSupportedTitle".GetLocalized(),
+                Content = "GachaAnalysis_OsNotSupportedDesc".GetLocalized(),
+                CloseButtonText = "Common_GotIt".GetLocalized(),
                 DefaultButton = ContentDialogButton.Close,
                 XamlRoot = Content.XamlRoot
             };
@@ -134,9 +134,9 @@ public sealed partial class GachaAnalysisWindow
         {
             var dialog = new ContentDialog
             {
-                Title = "未登录米游社",
-                Content = "检测到尚未登录米游社账号，即将跳转到账户设置页面进行登录。",
-                CloseButtonText = "知道了",
+                Title = "GachaAnalysis_NotLoggedInTitle".GetLocalized(),
+                Content = "GachaAnalysis_NotLoggedInDesc".GetLocalized(),
+                CloseButtonText = "Common_GotIt".GetLocalized(),
                 DefaultButton = ContentDialogButton.Close,
                 XamlRoot = Content.XamlRoot
             };
@@ -180,13 +180,13 @@ public sealed partial class GachaAnalysisWindow
             TextWrapping = TextWrapping.Wrap,
             Height = 120,
             Text = ViewModel.GachaUrl ?? "",
-            PlaceholderText = "在此处粘贴抽卡分析链接 (URL)..."
+            PlaceholderText = "GachaAnalysis_UrlPlaceholder".GetLocalized()
         };
 
         var panel = new StackPanel { Spacing = 12 };
         panel.Children.Add(new TextBlock
         {
-            Text = "粘贴从米游社或其他工具获取的抽卡记录链接，链接应包含 authkey 参数。",
+            Text = "GachaAnalysis_UrlInstruction".GetLocalized(),
             FontSize = 12,
             Foreground =
                 (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
@@ -196,10 +196,10 @@ public sealed partial class GachaAnalysisWindow
 
         var dialog = new ContentDialog
         {
-            Title = "通过 URL 获取抽卡记录",
+            Title = "GachaAnalysis_UrlDialogTitle".GetLocalized(),
             Content = panel,
-            PrimaryButtonText = "开始获取",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "GachaAnalysis_CacheStart".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = Content.XamlRoot
         };

@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using FufuLauncher.Helpers;
 using FufuLauncher.Models.MiHoYo.Passport;
 using FufuLauncher.Services.MiHoYo.Passport;
 using Microsoft.UI.Xaml.Controls;
@@ -28,11 +29,11 @@ public sealed partial class LoginQrWindow
         if (string.IsNullOrEmpty(dialog.ActionType) || string.IsNullOrEmpty(dialog.Mobile) ||
             string.IsNullOrEmpty(dialog.Captcha))
         {
-            UpdateStatus("请先获取短信验证码", false);
+            UpdateStatus("LoginQR_GetSmsCodeFirst".GetLocalized(), false);
             return;
         }
 
-        UpdateStatus("正在登录...", true);
+        UpdateStatus("LoginQR_LoggingIn".GetLocalized(), true);
         var passportClient = App.GetService<PassportClient>();
         PassportResponse<LoginResult> response =
             await passportClient.LoginByMobileCaptchaAsync(dialog.ActionType, dialog.Mobile, dialog.Captcha,
@@ -40,7 +41,7 @@ public sealed partial class LoginQrWindow
 
         if (!response.IsSuccess || response.Data?.Token?.Token == null || response.Data.UserInfo == null)
         {
-            UpdateStatus($"登录失败: [{response.RetCode}] {response.Message}", false);
+            UpdateStatus(string.Format("LoginQR_LoginFailedCode_Format".GetLocalized(), response.RetCode, response.Message), false);
             return;
         }
 
@@ -50,7 +51,7 @@ public sealed partial class LoginQrWindow
 
         if (string.IsNullOrEmpty(stoken) || string.IsNullOrEmpty(mid))
         {
-            UpdateStatus("登录失败: 响应缺少凭证", false);
+            UpdateStatus("LoginQR_LoginMissingCredential".GetLocalized(), false);
             return;
         }
 

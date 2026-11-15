@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using FufuLauncher.Helpers;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Windowing;
@@ -182,7 +183,7 @@ public sealed partial class SettingsPage
         window.ExtendsContentIntoTitleBar = true;
         window.SetTitleBar(page.AppTitleBar);
 
-        window.Title = "关于 FufuLauncher";
+        window.Title = "About_WindowTitle".GetLocalized();
 
         try
         {

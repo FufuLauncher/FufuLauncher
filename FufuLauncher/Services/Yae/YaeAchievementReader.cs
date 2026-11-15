@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Text.Json;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services.Yae;
 
@@ -27,17 +28,17 @@ public static class YaeAchievementReader
     {
         if (IsGameRunning())
         {
-            throw new ApplicationException("检测到游戏正在运行，请先退出游戏后再读取成就。");
+            throw new ApplicationException("Yae_ErrGameRunning".GetLocalized());
         }
 
         if (!File.Exists(gameExePath))
         {
-            throw new ApplicationException("未找到游戏主程序，请在设置中确认游戏安装目录。");
+            throw new ApplicationException("Yae_ErrGameNotFound".GetLocalized());
         }
 
 
         var dllPath = ResolveYaeDll()
-                      ?? throw new ApplicationException("未找到 YaeAchievementLib.dll 组件，请重新安装本程序。");
+                      ?? throw new ApplicationException("Yae_ErrDllNotFound".GetLocalized());
 
         var metadata = await YaeMetadataService.GetMetadataAsync(cancellationToken).ConfigureAwait(false);
         var gameHash = YaeMetadataService.ComputeGameHash(gameExePath);
@@ -61,11 +62,11 @@ public static class YaeAchievementReader
             });
 
             var currentExe = Environment.ProcessPath
-                             ?? throw new InvalidOperationException("无法定位当前程序路径。");
+                             ?? throw new InvalidOperationException("Yae_ErrExePathUnavailable".GetLocalized());
             var psi = new ProcessStartInfo
             {
                 FileName = currentExe,
-                Arguments = $"--yae-inject \"{cfgFile}\"",
+                Arguments = $"--yae-inject \"{cfgFile}\" --lang \"{ResourceExtensions.CurrentCulture}\"",
                 UseShellExecute = true,
                 Verb = "runas",
                 WorkingDirectory = Path.GetDirectoryName(currentExe),
@@ -78,12 +79,12 @@ public static class YaeAchievementReader
             }
             catch (Win32Exception ex) when (ex.NativeErrorCode == 1223)
             {
-                throw new InvalidOperationException("已取消管理员权限确认。");
+                throw new InvalidOperationException("Yae_ErrElevationCancelled".GetLocalized());
             }
 
             if (helper is null)
             {
-                throw new InvalidOperationException("无法启动提权读取进程。");
+                throw new InvalidOperationException("Yae_ErrElevationStartFailed".GetLocalized());
             }
 
             using (helper)
@@ -97,18 +98,18 @@ public static class YaeAchievementReader
                         : string.Empty;
                     throw new InvalidOperationException(exitCode switch
                     {
-                        ExitCode.InvalidConfig => "读取配置文件无效。",
-                        ExitCode.GameCreateFailed => "游戏进程创建失败。",
-                        ExitCode.InjectionFailed => "Yae 组件注入失败。",
-                        ExitCode.NoAchievementData => "未能从游戏获取成就数据，请确认已进入游戏世界。",
-                        _ => $"读取失败（错误码 {exitCode}）。",
+                        ExitCode.InvalidConfig => "Yae_ErrInvalidConfig".GetLocalized(),
+                        ExitCode.GameCreateFailed => "Yae_ErrGameCreateFailed".GetLocalized(),
+                        ExitCode.InjectionFailed => "Yae_ErrInjectionFailed".GetLocalized(),
+                        ExitCode.NoAchievementData => "Yae_ErrNoData".GetLocalized(),
+                        _ => string.Format("Yae_ErrExitCode_Format".GetLocalized(), exitCode),
                     } + (string.IsNullOrEmpty(detail) ? string.Empty : $"\n{detail}"));
                 }
             }
 
             if (!File.Exists(resultFile))
             {
-                throw new InvalidOperationException("未能生成成就读取结果。");
+                throw new InvalidOperationException("Yae_ErrNoResultFile".GetLocalized());
             }
 
             var json = await File.ReadAllTextAsync(resultFile, cancellationToken).ConfigureAwait(false);
@@ -149,7 +150,7 @@ public static class YaeAchievementReader
             var achievement = data.FirstOrDefault(d => d.Kind == YaeCommandKind.ResponseAchievement);
             if (achievement is null)
             {
-                WriteError(errorFilePath, "未获取到成就数据。");
+                WriteError(errorFilePath, "Yae_ErrNoAchievementData".GetLocalized());
                 return ExitCode.NoAchievementData;
             }
 

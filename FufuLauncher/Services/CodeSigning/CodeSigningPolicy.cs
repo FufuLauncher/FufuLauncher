@@ -57,7 +57,7 @@ public static class CodeSigningPolicy
 
         if (ekuOids.Length == 0)
         {
-            problems.Add("certificate has no Extended Key Usage extension");
+            problems.Add("ModTrust_Policy_NoEku".GetLocalized());
         }
         else
         {
@@ -65,15 +65,15 @@ public static class CodeSigningPolicy
             {
                 if (oid == CodeSigningEku) continue;
                 problems.Add(oid == AnyExtendedKeyUsage
-                    ? "certificate carries anyExtendedKeyUsage"
-                    : $"certificate carries a non code signing EKU ({oid})");
+                    ? "ModTrust_Policy_AnyEku".GetLocalized()
+                    : string.Format("ModTrust_Policy_NonCodeEku_Format".GetLocalized(), oid));
             }
         }
 
         var basic = leaf.Extensions.OfType<X509BasicConstraintsExtension>().FirstOrDefault();
         if (basic is { CertificateAuthority: true })
         {
-            problems.Add("signer certificate is a CA certificate");
+            problems.Add("ModTrust_Policy_IsCa".GetLocalized());
         }
 
         var keyUsage = leaf.Extensions.OfType<X509KeyUsageExtension>().FirstOrDefault();
@@ -81,12 +81,12 @@ public static class CodeSigningPolicy
         {
             if ((keyUsage.KeyUsages & X509KeyUsageFlags.KeyCertSign) != 0)
             {
-                problems.Add("certificate carries keyCertSign");
+                problems.Add("ModTrust_Policy_KeyCertSign".GetLocalized());
             }
 
             if ((keyUsage.KeyUsages & X509KeyUsageFlags.DigitalSignature) == 0)
             {
-                problems.Add("certificate is missing the digitalSignature key usage");
+                problems.Add("ModTrust_Policy_NoDigitalSig".GetLocalized());
             }
         }
 
@@ -94,15 +94,14 @@ public static class CodeSigningPolicy
         {
             if (extension.Oid?.Value is { } oid && IsCaBrowserForumPolicyOid(oid))
             {
-                problems.Add($"certificate carries a CA/Browser Forum policy OID ({oid}, includes EV policies)");
+                problems.Add(string.Format("ModTrust_Policy_CabForumOid_Format".GetLocalized(), oid));
             }
         }
 
         var validityDays = (leaf.NotAfter - leaf.NotBefore).TotalDays;
         if (validityDays > maxValidityDays + 1)
         {
-            problems.Add(
-                $"certificate validity of {validityDays:F0} days exceeds the policy maximum of {maxValidityDays} days");
+            problems.Add(string.Format("ModTrust_Policy_ValidityExceeded_Format".GetLocalized(), validityDays, maxValidityDays));
         }
 
         violations = problems;
@@ -277,41 +276,41 @@ public static class ManifestSignatureVerifier
             var envelope = JsonSerializer.Deserialize<ManifestSignatureEnvelope>(signatureJson);
             if (envelope == null)
             {
-                reason = "签名信封解析失败";
+                reason = "ModTrust_Manifest_InvalidEnvelope".GetLocalized();
                 return false;
             }
 
             if (!string.Equals(envelope.Algorithm, ExpectedAlgorithm, StringComparison.Ordinal))
             {
-                reason = $"不支持的签名算法：{envelope.Algorithm}";
+                reason = string.Format("ModTrust_Manifest_UnsupportedAlg_Format".GetLocalized(), envelope.Algorithm);
                 return false;
             }
 
             if (!string.Equals(envelope.SignerThumbprintSha256, Sha256Thumbprint(signerCertificate),
                     StringComparison.OrdinalIgnoreCase))
             {
-                reason = "签名者指纹与清单声明不一致";
+                reason = "ModTrust_Manifest_ThumbprintMismatch".GetLocalized();
                 return false;
             }
 
             if (!string.Equals(envelope.SignedFileSha256, Convert.ToHexString(SHA256.HashData(manifestBytes)),
                     StringComparison.OrdinalIgnoreCase))
             {
-                reason = "清单内容哈希与签名信封不一致";
+                reason = "ModTrust_Manifest_HashMismatch".GetLocalized();
                 return false;
             }
 
             using var rsa = signerCertificate.GetRSAPublicKey();
             if (rsa == null)
             {
-                reason = "签名证书不是 RSA 公钥";
+                reason = "ModTrust_Manifest_NotRsa".GetLocalized();
                 return false;
             }
 
             var signature = Convert.FromBase64String(envelope.SignatureBase64);
             if (!rsa.VerifyData(manifestBytes, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1))
             {
-                reason = "清单签名校验失败";
+                reason = "ModTrust_Manifest_SigVerifyFailed".GetLocalized();
                 return false;
             }
 
@@ -320,7 +319,7 @@ public static class ManifestSignatureVerifier
         }
         catch (Exception ex)
         {
-            reason = $"清单签名校验异常：{ex.Message}";
+            reason = string.Format("ModTrust_Manifest_VerifyException_Format".GetLocalized(), ex.Message);
             return false;
         }
     }

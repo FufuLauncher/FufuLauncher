@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using System.Text.Json;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services;
 
@@ -74,7 +75,7 @@ public partial class AccountManager
     private string ResolveCookiePath(string cookieFilePath)
     {
         if (string.IsNullOrWhiteSpace(cookieFilePath))
-            throw new InvalidOperationException("Cookie 文件名为空");
+            throw new InvalidOperationException("Account_CookieFilenameEmpty".GetLocalized());
 
         string root = Path.GetFullPath(CookiesDir);
         string path = Path.GetFullPath(Path.Combine(root, cookieFilePath));
@@ -83,7 +84,7 @@ public partial class AccountManager
             : root + Path.DirectorySeparatorChar;
 
         if (!path.StartsWith(rootPrefix, StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("Cookie 文件路径超出数据目录");
+            throw new InvalidOperationException("Account_CookiePathOutOfBounds".GetLocalized());
 
         return path;
     }

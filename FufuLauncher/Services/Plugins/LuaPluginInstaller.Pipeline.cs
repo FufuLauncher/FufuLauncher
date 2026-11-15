@@ -23,18 +23,18 @@ public partial class LuaPluginInstaller
         LogMessage($"Script length: {luaScript.Length} chars");
         LogMessage($"Sandbox directory: {_pluginsDir}");
 
-        ReportProgress(0, "正在执行脚本...");
+        ReportProgress(0, "PluginInstaller_ExecutingScript".GetLocalized());
 
         try
         {
             await ExecuteScriptAsync(luaScript, cancellationToken);
             LogMessage("No exception");
-            ReportProgress(100, "执行完成");
+            ReportProgress(100, "PluginInstaller_ScriptCompleted".GetLocalized());
         }
         catch (Exception ex)
         {
             LogMessage($"Script test aborted: {ex.Message}");
-            ReportProgress(100, "执行失败");
+            ReportProgress(100, "PluginInstaller_ScriptFailed".GetLocalized());
             throw;
         }
     }

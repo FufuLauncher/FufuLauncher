@@ -32,7 +32,7 @@ public sealed partial class CloudCredentialWindow : Window
         SystemBackdrop = new MicaBackdrop();
         AppWindow.Resize(new SizeInt32(1280, 720));
 
-        TitleText.Text = $"添加云游戏凭证 - {_uid}";
+        TitleText.Text = string.Format("CloudCredential_AddUidTitle_Format".GetLocalized(), _uid);
         Closed += OnWindowClosed;
         InitializeWebViewAsync();
     }
@@ -103,9 +103,9 @@ public sealed partial class CloudCredentialWindow : Window
 
                 _captured = true;
                 if (_isClosed) return;
-                TitleText.Text = $"添加云游戏凭证 - {_uid} (已获取)";
+                TitleText.Text = string.Format("CloudCredential_AddUidCapturedTitle_Format".GetLocalized(), _uid);
                 CredentialInfoBar.IsOpen = false;
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("云游戏凭证", "凭证获取成功",
+                WeakReferenceMessenger.Default.Send(new NotificationMessage("CloudCredential_Title".GetLocalized(), "CloudCredential_FetchSuccess".GetLocalized(),
                     NotificationType.Success, 2000));
                 await Task.Delay(1500);
                 if (!_isClosed) Close();

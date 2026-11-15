@@ -155,7 +155,7 @@ internal static partial class CookieVault
     {
         string? directory = Path.GetDirectoryName(keyPath);
         if (string.IsNullOrEmpty(directory))
-            throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥路径无效");
+            throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyPathInvalid".GetLocalized());
 
         byte[]? keyBytes = null;
         byte[]? payload = null;
@@ -177,7 +177,7 @@ internal static partial class CookieVault
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or CryptographicException)
         {
-            throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥无法创建", ex);
+            throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyCreateFailed".GetLocalized(), ex);
         }
         finally
         {
@@ -197,11 +197,11 @@ internal static partial class CookieVault
         }
         catch (Exception ex) when (ex is FileNotFoundException or DirectoryNotFoundException)
         {
-            throw new CookieVaultException(CookieVaultError.KeyMissing, "Cookie 加密密钥不存在", ex);
+            throw new CookieVaultException(CookieVaultError.KeyMissing, "CookieVault_KeyMissing".GetLocalized(), ex);
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            throw new CookieVaultException(CookieVaultError.KeyUnreadable, "Cookie 加密密钥无法读取", ex);
+            throw new CookieVaultException(CookieVaultError.KeyUnreadable, "CookieVault_KeyUnreadable".GetLocalized(), ex);
         }
 
         try
@@ -212,7 +212,7 @@ internal static partial class CookieVault
                 var keyBytes = UnwrapKeyData(parsed);
                 if (keyBytes == null)
                     throw new CookieVaultException(CookieVaultError.KeyDecryptFailed,
-                        "Cookie 加密密钥无法由 DPAPI 或 HWID 解密");
+                        "CookieVault_KeyDecryptFailed".GetLocalized());
                 return new CookieKey(keyBytes, parsed.KeyId);
             }
             finally
@@ -230,7 +230,7 @@ internal static partial class CookieVault
     {
         if (fileBytes.Length < KeyHeaderSize
             || !fileBytes.AsSpan(0, KeyMagic.Length).SequenceEqual(KeyMagic))
-            throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+            throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
 
         byte version = fileBytes[KeyMagic.Length];
         var keyId = fileBytes.AsSpan(KeyMagic.Length + 1, KeyIdSize).ToArray();
@@ -238,7 +238,7 @@ internal static partial class CookieVault
         if (version == LegacyKeyFileVersion)
         {
             if (fileBytes.Length <= KeyHeaderSize)
-                throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+                throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
             return new ParsedKeyFile
             {
                 Version = version,
@@ -248,12 +248,12 @@ internal static partial class CookieVault
         }
 
         if (version != KeyFileVersion || fileBytes.Length < KeyHeaderSize + 1)
-            throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+            throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
 
         int offset = KeyHeaderSize;
         byte flags = fileBytes[offset++];
         if ((flags & ~(KeyFlagDpapi | KeyFlagHwid)) != 0)
-            throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥保护标志无效");
+            throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyProtectionFlagInvalid".GetLocalized());
 
         var parsed = new ParsedKeyFile { Version = version, KeyId = keyId };
         try
@@ -261,11 +261,11 @@ internal static partial class CookieVault
             if ((flags & KeyFlagDpapi) != 0)
             {
                 if (fileBytes.Length < offset + LengthSize)
-                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
                 int length = BinaryPrimitives.ReadInt32LittleEndian(fileBytes.AsSpan(offset, LengthSize));
                 offset += LengthSize;
                 if (length <= 0 || length > fileBytes.Length - offset)
-                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
                 parsed.DpapiBlob = fileBytes.AsSpan(offset, length).ToArray();
                 offset += length;
             }
@@ -273,7 +273,7 @@ internal static partial class CookieVault
             if ((flags & KeyFlagHwid) != 0)
             {
                 if (fileBytes.Length < offset + NonceSize + TagSize + LengthSize)
-                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
                 parsed.HwidNonce = fileBytes.AsSpan(offset, NonceSize).ToArray();
                 offset += NonceSize;
                 parsed.HwidTag = fileBytes.AsSpan(offset, TagSize).ToArray();
@@ -281,14 +281,14 @@ internal static partial class CookieVault
                 int length = BinaryPrimitives.ReadInt32LittleEndian(fileBytes.AsSpan(offset, LengthSize));
                 offset += LengthSize;
                 if (length != KeySize || fileBytes.Length < offset + length)
-                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+                    throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
                 parsed.HwidCipher = fileBytes.AsSpan(offset, length).ToArray();
                 offset += length;
             }
 
             if (offset != fileBytes.Length
                 || (parsed.DpapiBlob == null && parsed.HwidCipher == null))
-                throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥文件格式无效");
+                throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyFileFormatInvalid".GetLocalized());
 
             return parsed;
         }
@@ -381,7 +381,7 @@ internal static partial class CookieVault
                 flags |= KeyFlagHwid;
             if (flags == 0)
                 throw new CookieVaultException(CookieVaultError.KeyInvalid,
-                    "DPAPI 与 HWID 均不可用，无法保护 Cookie 密钥");
+                    "CookieVault_KeyProtectionUnavailable".GetLocalized());
 
             int size = KeyHeaderSize + 1;
             if (dpapiBlob != null)
@@ -489,7 +489,7 @@ internal static partial class CookieVault
     private static string GetKeyPath(string dataDir)
     {
         if (string.IsNullOrWhiteSpace(dataDir))
-            throw new CookieVaultException(CookieVaultError.KeyInvalid, "Cookie 加密密钥目录无效");
+            throw new CookieVaultException(CookieVaultError.KeyInvalid, "CookieVault_KeyDirInvalid".GetLocalized());
         return Path.Combine(dataDir, "secrets", "cookie.key");
     }
 

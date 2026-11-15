@@ -18,7 +18,7 @@ public sealed partial class DailyNoteWindow
 {
     private async Task<bool> FetchDailyMaterialsAsync()
     {
-        StatusText = "获取素材...";
+        StatusText = "DailyNote_FetchingMaterials".GetLocalized();
         string url = ApiEndpoints.BaikeDailyMaterialsUrl;
 
         try

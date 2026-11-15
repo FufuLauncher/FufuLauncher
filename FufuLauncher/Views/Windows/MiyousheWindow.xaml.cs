@@ -152,8 +152,9 @@ public sealed partial class MiyousheWindow : WindowEx
             _changingSelectors = true;
             SetCommunityGames(new[]
             {
-                new CommunityGame(2, "原神", "ys"), new CommunityGame(6, "崩坏：星穹铁道", "sr"),
-                new CommunityGame(8, "绝区零", "zzz")
+                new CommunityGame(2, "MiyousheQr_Genshin".GetLocalized(), "ys"),
+                new CommunityGame(6, "MiyousheQr_StarRail".GetLocalized(), "sr"),
+                new CommunityGame(8, "MiyousheQr_Zzz".GetLocalized(), "zzz")
             }, 2);
             _changingSelectors = false;
             ReportError(ex, () => ReloadNavigationAsync());

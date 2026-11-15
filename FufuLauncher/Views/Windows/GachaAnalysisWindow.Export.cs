@@ -69,7 +69,7 @@ public sealed partial class GachaAnalysisWindow
         {
             Title = title,
             Content = content,
-            CloseButtonText = "知道了",
+            CloseButtonText = "Common_GotIt".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = this.Content.XamlRoot
         };
@@ -99,12 +99,12 @@ public sealed partial class GachaAnalysisWindow
                 }
             }
 
-            ShowDialogMessage("复制成功", "祈愿分析图片已复制到剪贴板。");
+            ShowDialogMessage("Common_CopySuccess".GetLocalized(), "GachaAnalysis_CopyImageSuccess".GetLocalized());
         }
         catch (Exception ex)
         {
             DebugLog.Info("GachaAnalysisWindow.Export", $"[Gacha] Failed to copy image: {ex}");
-            ShowDialogMessage("复制失败", ex.Message);
+            ShowDialogMessage("Common_CopyFailed".GetLocalized(), ex.Message);
         }
     }
 
@@ -114,10 +114,10 @@ public sealed partial class GachaAnalysisWindow
         {
             var path = await FilePickerService.PickSaveFileAsync(
                 this,
-                new[] { ("PNG 图片", new[] { ".png" }) },
-                $"祈愿分析_{ViewModel.SelectedUid}_{DateTime.Now:yyyyMMddHHmmss}",
+                new[] { ("GachaAnalysis_PngImage".GetLocalized(), new[] { ".png" }) },
+                string.Format("GachaAnalysis_ExportImageFilename_Format".GetLocalized(), ViewModel.SelectedUid, DateTime.Now),
                 PickerLocationId.PicturesLibrary,
-                msg => ShowDialogMessage("错误", msg));
+                msg => ShowDialogMessage("ErrorTitle".GetLocalized(), msg));
             if (string.IsNullOrEmpty(path)) return;
 
             using var stream = await RenderElementToStreamAsync(AnalysisExportTarget);
@@ -125,11 +125,11 @@ public sealed partial class GachaAnalysisWindow
             using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
             stream.AsStream().CopyTo(fileStream);
 
-            ShowDialogMessage("保存成功", $"祈愿分析图片已保存至文件。");
+            ShowDialogMessage("GachaAnalysis_SaveSuccessTitle".GetLocalized(), "GachaAnalysis_SaveImageSuccess".GetLocalized());
         }
         catch (Exception ex)
         {
-            ShowDialogMessage("保存失败", $"详细信息: {ex.Message}");
+            ShowDialogMessage("GachaAnalysis_SaveFailedTitle".GetLocalized(), string.Format("Common_DetailInfo_Format".GetLocalized(), ex.Message));
         }
     }
 }

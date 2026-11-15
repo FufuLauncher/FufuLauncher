@@ -53,7 +53,7 @@ public sealed partial class MobileCaptchaDialog : ContentDialog, IPassportMobile
         string mobile = Mobile ?? string.Empty;
         if (!_mobileRegex.IsMatch(mobile))
         {
-            ShowError("请输入正确的11位手机号");
+            ShowError("LoginQR_InvalidMobileLength".GetLocalized());
             return;
         }
 
@@ -84,12 +84,12 @@ public sealed partial class MobileCaptchaDialog : ContentDialog, IPassportMobile
             }
             else
             {
-                ShowError($"发送失败: [{response.RetCode}] {response.Message}");
+                ShowError(string.Format("LoginQR_SendCaptchaFailed_Format".GetLocalized(), response.RetCode, response.Message));
             }
         }
         catch (Exception ex)
         {
-            ShowError($"发送异常: {ex.Message}");
+            ShowError(string.Format("LoginQR_SendCaptchaException_Format".GetLocalized(), ex.Message));
         }
         finally
         {

@@ -181,7 +181,7 @@
     <value>Enable quick FPS mode</value>
   </data>
   <data name="QuickFpsEnableCaption" xml:space="preserve">
-    <value>Use hotkeys to change the main plugin's target frame rate in game. </value>
+    <value>Use hotkeys to change the main plugin's target frame rate in-game.</value>
   </data>
   <data name="QuickFpsGameOnlyTitle" xml:space="preserve">
     <value>Listen only while the game is running</value>
@@ -511,7 +511,7 @@
     <value>HDRBrightness Configuration</value>
   </data>
   <data name="HdrCaption" xml:space="preserve">
-    <value>Adjust in-game HDRpeak brightness and UI brightness</value>
+    <value>Adjust in-game HDR peak brightness and UI brightness</value>
   </data>
   <data name="OpenHdrSettings" xml:space="preserve">
     <value>Open HDRSettings</value>
@@ -568,16 +568,16 @@
     <value>Built-in uses the launcher's engine to load plugins; Standalone uses an external program — useful when built-in is incompatible.</value>
   </data>
   <data name="UsingHoyolabAccountTitle" xml:space="preserve">
-    <value>Log into game with MiYouShe/HoyoLAB account</value>
+    <value>Log into game with Miyoushe/HoYoLAB account</value>
   </data>
   <data name="UsingHoyolabAccountCaption" xml:space="preserve">
-    <value>Launch the game directly with your currently selected MiYouShe or HoyoLAB account, no need to re-enter credentials in-game.</value>
+    <value>Launch the game directly with your currently selected Miyoushe or HoYoLAB account, no need to re-enter credentials in-game.</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Title" xml:space="preserve">
     <value>Cannot Enable</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Message" xml:space="preserve">
-    <value>Please log into a MiYouShe or HoyoLAB account first under Account settings.</value>
+    <value>Please log into a Miyoushe or HoYoLAB account first under Account settings.</value>
   </data>
   <data name="HoyolabAccount_LoginExpired_Title" xml:space="preserve">
     <value>Account Session Expired</value>
@@ -595,7 +595,7 @@
     <value>Enabled</value>
   </data>
   <data name="HoyolabAccount_Enabled_Message" xml:space="preserve">
-    <value>Next time you launch the game, you will enter directly with your MiYouShe/HoyoLAB account. No need to enter credentials again.</value>
+    <value>Next time you launch the game, you will enter directly with your Miyoushe/HoYoLAB account. No need to enter credentials again.</value>
   </data>
   <data name="HoyolabAccount_EnableFailed_Title" xml:space="preserve">
     <value>Cannot Enable</value>
@@ -613,10 +613,10 @@
     <value>Account Does Not Match Server</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_OverseaMsg" xml:space="preserve">
-    <value>The selected HoyoLAB overseas account cannot be used to launch the Chinese mainland version of the game. Please switch to an account that matches the current server.</value>
+    <value>The selected HoYoLAB overseas account cannot be used to launch the Chinese mainland version of the game. Please switch to an account that matches the current server.</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_CnMsg" xml:space="preserve">
-    <value>The selected MiYouShe Chinese mainland account cannot be used to launch the overseas version of the game. Please switch to an account that matches the current server.</value>
+    <value>The selected Miyoushe Chinese mainland account cannot be used to launch the overseas version of the game. Please switch to an account that matches the current server.</value>
   </data>
   <data name="RedeemReminderTitle" xml:space="preserve">
     <value>Redeem Code Reminder</value>
@@ -751,13 +751,13 @@
     <value>Game Check-in</value>
   </data>
   <data name="GameCheckinCaption" xml:space="preserve">
-    <value>Claim MiYouShe daily check-in rewards (Primogems, Mora, etc.)</value>
+    <value>Claim Miyoushe daily check-in rewards (Primogems, Mora, etc.). Select additional games below to check in together.</value>
   </data>
   <data name="CommunityCheckin" xml:space="preserve">
     <value>Community Check-in</value>
   </data>
   <data name="CommunityCheckinCaption" xml:space="preserve">
-    <value>Check in to the Genshin Impact section on MiYouShe to earn MiYou Coins</value>
+    <value>Check in to the Genshin Impact section on Miyoushe to earn MiYou Coins</value>
   </data>
   <data name="Like" xml:space="preserve">
     <value>Like</value>
@@ -901,7 +901,7 @@
     <value>Version Update</value>
   </data>
   <data name="VersionUpdateCaption" xml:space="preserve">
-    <value>Check for and download the latest version</value>
+    <value>Check for and download the latest version using the updater</value>
   </data>
   <data name="UpdateAnnouncementTitle" xml:space="preserve">
     <value>Update Announcement</value>
@@ -1979,7 +1979,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>Daily Check-in</value>
   </data>
   <data name="Account_SyncAvatarPendant" xml:space="preserve">
-    <value>Sync MiYouShe avatar frame</value>
+    <value>Sync Miyoushe avatar frame</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>Refresh Info</value>
@@ -2027,7 +2027,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>No characters bound</value>
   </data>
   <data name="Account_BindHint" xml:space="preserve">
-    <value>Please bind a character in MiYouShe or in-game, then refresh</value>
+    <value>Please bind a character in Miyoushe or in-game, then refresh</value>
   </data>
   <data name="Account_PlayTime" xml:space="preserve">
     <value>Play Time</value>
@@ -2096,7 +2096,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>QR Code Login</value>
   </data>
   <data name="LoginQR_MiyousheQR" xml:space="preserve">
-    <value>MiYouShe App QR Login</value>
+    <value>Miyoushe App QR Login</value>
   </data>
   <data name="LoginQR_WebPassport" xml:space="preserve">
     <value>Web Passport Login</value>
@@ -2138,7 +2138,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>CN Server</value>
   </data>
   <data name="LoginQR_ServerOs" xml:space="preserve">
-    <value>Oversea Server</value>
+    <value>Overseas Server</value>
   </data>
   <data name="LoginQR_MobileCaptcha" xml:space="preserve">
     <value>Mobile Captcha Login</value>
@@ -2162,7 +2162,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>X (Twitter) Login</value>
   </data>
   <data name="LoginQR_OverseaRiskHint" xml:space="preserve">
-    <value>Note: HoYoVerse may require security verification via an email verification code.</value>
+    <value>Note: HoYoverse may require security verification via an email verification code.</value>
   </data>
   <data name="LoginQR_LoginButton" xml:space="preserve">
     <value>Log In</value>
@@ -2261,7 +2261,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>Traveler Profile</value>
   </data>
   <data name="Panel_TravelerProfileDesc" xml:space="preserve">
-    <value>Characters, inventory, notes, and MiYouShe battle records</value>
+    <value>Characters, inventory, notes, and Miyoushe battle records</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
     <value>Resources</value>
@@ -3045,13 +3045,13 @@ Go to the Microsoft website to download and install it?</value>
     <value>HDRNot Supported</value>
   </data>
   <data name="HDR_NotSupportedMsg" xml:space="preserve">
-    <value>The current monitor reports that HDRis not supported.</value>
+    <value>The current monitor reports that HDR is not supported.</value>
   </data>
   <data name="HDR_NotEnabled" xml:space="preserve">
     <value>HDRNot Enabled</value>
   </data>
   <data name="HDR_NotEnabledMsg" xml:space="preserve">
-    <value>Windows HDRmode is not enabled; auto adjustment may be inaccurate.</value>
+    <value>Windows HDR mode is not enabled; auto adjustment may be inaccurate.</value>
   </data>
   <data name="HDR_DisplayInfo" xml:space="preserve">
     <value>Display Information</value>
@@ -3192,7 +3192,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>View Guide</value>
   </data>
   <data name="AchievementWindow_SearchGuideTooltip" xml:space="preserve">
-    <value>Search for this achievement guide on MiYouShe</value>
+    <value>Search for this achievement guide on Miyoushe</value>
   </data>
   <data name="AchievementWindow_SwitchView" xml:space="preserve">
     <value>Switch View</value>
@@ -3525,19 +3525,19 @@ Go to the Microsoft website to download and install it?</value>
     <value>Get Gacha Records</value>
   </data>
   <data name="GachaAnalysis_GetViaMiyoushe" xml:space="preserve">
-    <value>Get via MiYouShe Account</value>
+    <value>Get via Miyoushe Account</value>
   </data>
   <data name="GachaAnalysis_GetViaGame" xml:space="preserve">
     <value>Get from Game</value>
   </data>
   <data name="GachaAnalysis_GameDesc" xml:space="preserve">
     <value>Open wish history in the game
-Bilibili supported; no MiYouShe login</value>
+Bilibili supported; no Miyoushe login</value>
   </data>
   <data name="GachaAnalysis_CacheInstructions" xml:space="preserve">
     <value>Sign in to the game account you want to export, open Wish History, and wait for the records to load. Then select “Start”.
 
-Official CN, Bilibili, and global servers are supported without signing in to MiYouShe. Check that you are using the intended game account.</value>
+Official CN, Bilibili, and global servers are supported without signing in to Miyoushe. Check that you are using the intended game account.</value>
   </data>
   <data name="GachaAnalysis_CacheStart" xml:space="preserve">
     <value>Start</value>
@@ -3592,7 +3592,7 @@ Official CN, Bilibili, and global servers are supported without signing in to Mi
   </data>
   <data name="GachaAnalysis_MiyousheDesc" xml:space="preserve">
     <value>Get records directly via your
-logged-in MiYouShe account</value>
+logged-in Miyoushe account</value>
   </data>
   <data name="GachaAnalysis_Recommended" xml:space="preserve">
     <value>Recommended</value>
@@ -4449,13 +4449,13 @@ Files searched:
     <value>Disconnected</value>
   </data>
   <data name="Diagnostics_Domestic" xml:space="preserve">
-    <value>Domestic</value>
+    <value>Mainland China</value>
   </data>
   <data name="Diagnostics_Overseas" xml:space="preserve">
     <value>Overseas</value>
   </data>
   <data name="Diagnostics_DomesticSystem" xml:space="preserve">
-    <value>Domestic (System)</value>
+    <value>Mainland China (System)</value>
   </data>
   <data name="Diagnostics_OverseasSystem" xml:space="preserve">
     <value>Overseas (System)</value>
@@ -4491,7 +4491,7 @@ Files searched:
     <value>Network not connected. Please check your network settings.</value>
   </data>
   <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve">
-    <value>Currently on a domestic network. Server access may be slow.</value>
+    <value>Currently on a Mainland China network; server access may be slow.</value>
   </data>
   <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve">
     <value>Windows Security Center is enabled, which may cause plugin injection to fail. It is recommended to disable it.</value>
@@ -4626,7 +4626,7 @@ Files searched:
     <value>Cryo</value>
   </data>
   <data name="Download_Connecting" xml:space="preserve">
-    <value>Connecting to Mihoyo servers...</value>
+    <value>Connecting to miHoYo servers...</value>
   </data>
   <data name="Download_VoiceOnly" xml:space="preserve">
     <value>&gt;&gt; Skipping base game, voice pack only mode</value>
@@ -4662,7 +4662,7 @@ Files searched:
     <value>Manifest MD5 verification failed, retrying...</value>
   </data>
   <data name="Download_CannotConnectApi" xml:space="preserve">
-    <value>Cannot connect to Mihoyo API</value>
+    <value>Cannot connect to miHoYo API</value>
   </data>
   <data name="DailyNote_ApiError" xml:space="preserve">
     <value>API returned error, retcode={0}</value>
@@ -4710,7 +4710,7 @@ Files searched:
     <value>CAPTCHA Verification</value>
   </data>
   <data name="Launcher_DllNotFound" xml:space="preserve">
-    <value>Launcher.dll is missing. Injection is unavailable. Please ensure the file is built from FufuLauncher.UnlockerIsland.</value>
+    <value>Launcher.dll is missing. Injection is unavailable. Please reinstall the launcher.</value>
   </data>
   <data name="Launcher_DllNotLoaded" xml:space="preserve">
     <value>Launcher.dll failed to load due to missing C++ runtime or antivirus blocking. Cannot start.</value>
@@ -6057,7 +6057,7 @@ You can retry with another node or download directly from the official source.</
 Error: {0}</value>
   </data>
   <data name="ServerBili" xml:space="preserve">
-    <value>Bilibili Server (Bilibili)</value>
+    <value>Bilibili Server</value>
   </data>
   <data name="DownloadWindow_Server" xml:space="preserve">
     <value>Server</value>
@@ -6195,7 +6195,7 @@ Error: {0}</value>
     <value>Bilibili</value>
   </data>
   <data name="GameServer_SchemePrefixOversea" xml:space="preserve">
-    <value>Oversea</value>
+    <value>Overseas</value>
   </data>
   <data name="AdvancedServerSwitch_DownloadSpeed" xml:space="preserve">
     <value>Download speed</value>
@@ -7264,13 +7264,13 @@ Click the button below to open your browser and download manually.</value>
     <value>UID is on the server block list</value>
   </data>
   <data name="GachaAnalysis_ReadingBoundRoles" xml:space="preserve">
-    <value>Checking game characters bound to MiYouShe...</value>
+    <value>Checking game characters bound to Miyoushe...</value>
   </data>
   <data name="GachaAnalysis_SelectRole" xml:space="preserve">
     <value>Select Game Character</value>
   </data>
   <data name="GachaAnalysis_SelectRoleHint" xml:space="preserve">
-    <value>Choose the character whose wish history you want to fetch. Bilibili characters are listed under Irminsul. If your character is missing, cancel and check your MiYouShe bindings, or use Get from Game.</value>
+    <value>Choose the character whose wish history you want to fetch. Bilibili characters are listed under Irminsul. If your character is missing, cancel and check your Miyoushe bindings, or use Get from Game.</value>
   </data>
   <data name="GachaAnalysis_SkyIsland" xml:space="preserve">
     <value>Celestia (Official)</value>
@@ -7309,10 +7309,10 @@ Click the button below to open your browser and download manually.</value>
     <value>Screen QR scanner</value>
   </data>
   <data name="MiyousheQr_Instructions" xml:space="preserve">
-    <value>Scan once reads the selected region once. Continuous scan watches for new QR codes in the selected region. Confirm login using your current MiYouShe account.</value>
+    <value>Scan once reads the selected region once. Continuous scan watches for new QR codes in the selected region. Confirm login using your current Miyoushe account. Press Esc or right-click to cancel selection.</value>
   </data>
   <data name="MiyousheQr_CurrentAccount" xml:space="preserve">
-    <value>Current MiYouShe account</value>
+    <value>Current Miyoushe account</value>
   </data>
   <data name="MiyousheQr_Target" xml:space="preserve">
     <value>Login target</value>
@@ -7345,16 +7345,16 @@ Click the button below to open your browser and download manually.</value>
     <value>miHoYo account</value>
   </data>
   <data name="MiyousheQr_NoAccount" xml:space="preserve">
-    <value>Log into MiYouShe in the launcher first.</value>
+    <value>Log into Miyoushe in the launcher first.</value>
   </data>
   <data name="MiyousheQr_CnOnly" xml:space="preserve">
-    <value>Switch to a Chinese MiYouShe account before scanning.</value>
+    <value>Switch to a Chinese Miyoushe account before scanning.</value>
   </data>
   <data name="MiyousheQr_CredentialsMissing" xml:space="preserve">
-    <value>This account lacks the credentials required for scanning. Log into the launcher again using the MiYouShe app.</value>
+    <value>This account lacks the credentials required for scanning. Log into the launcher again using the Miyoushe app.</value>
   </data>
   <data name="MiyousheQr_AccountChanged" xml:space="preserve">
-    <value>The current MiYouShe account changed. Select the QR code again.</value>
+    <value>The current Miyoushe account changed. Select the QR code again.</value>
   </data>
   <data name="MiyousheQr_Expired" xml:space="preserve">
     <value>This QR code expired. Refresh it on the target device and select it again.</value>
@@ -7396,7 +7396,7 @@ Click the button below to open your browser and download manually.</value>
     <value>The scan service returned an unexpected response. Refresh the QR code and retry.</value>
   </data>
   <data name="MiyousheQr_Rejected" xml:space="preserve">
-    <value>The scan request was rejected. Refresh the QR code. If it still fails, log into MiYouShe again.</value>
+    <value>The scan request was rejected. The QR code may have expired or credentials may be invalid. Refresh the QR code, or log into Miyoushe again if it still fails.</value>
   </data>
   <data name="MiyousheQr_Continuous" xml:space="preserve">
     <value>Continuous scan</value>
@@ -7408,7 +7408,7 @@ Click the button below to open your browser and download manually.</value>
     <value>Automatically confirm login</value>
   </data>
   <data name="MiyousheQr_AutoConfirmHint" xml:space="preserve">
-    <value>Select before scanning to immediately confirm new supported QR codes using your current MiYouShe account.</value>
+    <value>Select before scanning to immediately confirm new supported QR codes using your current Miyoushe account.</value>
   </data>
   <data name="MiyousheQr_Scanning" xml:space="preserve">
     <value>Watching for new QR codes. {0} login(s) confirmed. Click Stop scanning to finish.</value>
@@ -7516,7 +7516,7 @@ Click the button below to open your browser and download manually.</value>
     <value>Verify plugin signatures at launch</value>
   </data>
   <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
-    <value>Disabled by default. When enabled, the warning or strict policy below applies.</value>
+    <value>Disabled by default. When enabled, plugin signatures are verified using the policy below; when off, verification is skipped.</value>
   </data>
   <data name="Plugin_ResinRewardDisable_Title" xml:space="preserve">
     <value>Disable a reward claim method</value>
@@ -7802,7 +7802,7 @@ Click the button below to open your browser and download manually.</value>
     <value>Global Server</value>
   </data>
   <data name="Account_LoginMiyoushe" xml:space="preserve">
-    <value>Log in to HoYoLAB</value>
+    <value>Log in (Miyoushe / HoYoLAB)</value>
   </data>
   <data name="PluginSettings_ParsePresetFailedDetail_Format" xml:space="preserve">
     <value>Cannot parse preset file
@@ -9785,7 +9785,7 @@ Details: {0}</value>
     <value>Could not load item details. Refresh to try again.</value>
   </data>
   <data name="MiyousheShop_OpenError" xml:space="preserve">
-    <value>Could not open the official store. Open the Redemption Center in the MiYouShe app.</value>
+    <value>Could not open the official store. Open the Redemption Center in the Miyoushe app.</value>
   </data>
   <data name="MiyousheShop_Plans" xml:space="preserve">
     <value>Redemption plans</value>
@@ -9848,16 +9848,16 @@ Details: {0}</value>
     <value>Redemption will be submitted automatically at {0:yyyy-MM-dd HH:mm:ss} Beijing time.</value>
   </data>
   <data name="MiyousheShop_ConfirmImmediate" xml:space="preserve">
-    <value>Confirm to submit this redemption to MiYouShe.</value>
+    <value>Confirm to submit this redemption to Miyoushe.</value>
   </data>
   <data name="MiyousheShop_LoginRequired" xml:space="preserve">
-    <value>Select a signed-in mainland China MiYouShe account, or sign in again.</value>
+    <value>Select a signed-in mainland China Miyoushe account, or sign in again.</value>
   </data>
   <data name="MiyousheShop_Unsupported" xml:space="preserve">
     <value>Redeem this item in the official store.</value>
   </data>
   <data name="MiyousheShop_NoTarget" xml:space="preserve">
-    <value>No linked character or shipping address was found. Check in MiYouShe and try again.</value>
+    <value>No linked character or shipping address was found. Check in Miyoushe and try again.</value>
   </data>
   <data name="MiyousheShop_LimitReached" xml:space="preserve">
     <value>This account has reached the item redemption limit.</value>
@@ -10154,7 +10154,7 @@ Details: {0}</value>
     <value>Local: {0} UID(s) · {1} record(s) (Abyss {2} / Theater {3} / Stygian {4})</value>
   </data>
   <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
-    <value>Manage cloud cycle challenge archives</value>
+    <value>Manage cloud cycle challenge archives (Spiral Abyss / Imaginarium Theater / Stygian Onslaught)</value>
   </data>
   <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
     <value>Cycle challenge merge failed</value>
@@ -10310,7 +10310,7 @@ Details: {0}</value>
     <value>Archive validation failed. Please check that the file format is valid.</value>
   </data>
   <data name="CloudSync_ErrInvalidSlot" xml:space="preserve">
-    <value>Archive name supports 1-64 letters, digits, _, -, or ., starting with a letter/digit and not ending with a dot.</value>
+    <value>Archive name supports 1-64 letters, digits, _, -, or ., starting with a letter/digit, not ending with a dot, and without consecutive dots.</value>
   </data>
   <data name="CloudSync_ErrLocked" xml:space="preserve">
     <value>This account is locked and cannot access or modify cloud archives. Please unlock via email verification in Cloud Archive.</value>
@@ -10913,7 +10913,7 @@ Details: {0}</value>
     <value>Resolving and verifying unique domains ({0}/{1}): {2}</value>
   </data>
   <data name="SslCheck_NoEndpoints" xml:space="preserve">
-    <value>No valid HTTPS domains were found in ApiEndpoints.</value>
+    <value>No valid HTTPS domains were found.</value>
   </data>
   <data name="SslCheck_Failed" xml:space="preserve">
     <value>Failed to verify SSL certificates: {0}</value>
@@ -11057,7 +11057,7 @@ Details: {0}</value>
     <value>No QUIC</value>
   </data>
   <data name="SslCheck_QuicSummary_Timeout" xml:space="preserve">
-    <value>QUIC timeout</value>
+    <value>QUIC timed out</value>
   </data>
   <data name="CloudSync_NavHutao" xml:space="preserve">
     <value>Hutao Cloud</value>
@@ -11888,5 +11888,1494 @@ Details: {0}</value>
   </data>
   <data name="DevAuth_SubmitSuccess" xml:space="preserve">
     <value>Application submitted for review. Please wait patiently.</value>
+  </data>
+  <data name="About_ApiRateLimitOrInvalid" xml:space="preserve">
+    <value>API rate limit reached or invalid response format</value>
+  </data>
+  <data name="About_ContactNoticeText" xml:space="preserve">
+    <value>Please note: get straight to the point and state your purpose when reaching out.
+Avoid empty greetings such as "Hello" or "Are you there?".</value>
+  </data>
+  <data name="About_ContributorBio_Format" xml:space="preserve">
+    <value>Contributions: {0}
+
+Bio: {1}</value>
+  </data>
+  <data name="About_ContributorBioFailed_Format" xml:space="preserve">
+    <value>Contributions: {0}
+
+Failed to load bio.</value>
+  </data>
+  <data name="About_ContributorsFetchFailed" xml:space="preserve">
+    <value>Failed to fetch contributors. Check your network connection or API status.</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>About FufuLauncher</value>
+  </data>
+  <data name="Account_CannotExtractId" xml:space="preserve">
+    <value>Unable to extract account ID</value>
+  </data>
+  <data name="Account_CannotReadLoginInfo" xml:space="preserve">
+    <value>Unable to read community account login info.</value>
+  </data>
+  <data name="Account_CookieContentInvalid" xml:space="preserve">
+    <value>Invalid Cookie file content</value>
+  </data>
+  <data name="Account_CookieFilenameEmpty" xml:space="preserve">
+    <value>Cookie filename is empty</value>
+  </data>
+  <data name="Account_CookiePathInvalid" xml:space="preserve">
+    <value>Invalid Cookie file path</value>
+  </data>
+  <data name="Account_CookiePathOutOfBounds" xml:space="preserve">
+    <value>Cookie file path is outside the data directory</value>
+  </data>
+  <data name="Account_DeviceFpUnavailable" xml:space="preserve">
+    <value>Device fingerprint unavailable (registration failed)</value>
+  </data>
+  <data name="Account_FetchRolesFailed_Format" xml:space="preserve">
+    <value>Failed to fetch bound characters ({0}). Please refresh or log in again.</value>
+  </data>
+  <data name="Account_InvalidLoginRelogin" xml:space="preserve">
+    <value>Invalid login info. Please log into your community account again.</value>
+  </data>
+  <data name="Account_MissingHoyolabUidCookie" xml:space="preserve">
+    <value>HoYoLAB UID is missing from Cookie</value>
+  </data>
+  <data name="Account_Removed" xml:space="preserve">
+    <value>Community account has been removed.</value>
+  </data>
+  <data name="Account_RoleNotBoundPrompt" xml:space="preserve">
+    <value>The selected character is not in the bound list. Please re-select using the character switcher.</value>
+  </data>
+  <data name="Account_RoleNotBoundRefresh" xml:space="preserve">
+    <value>The selected character is not bound to the current community account. Please refresh the character list.</value>
+  </data>
+  <data name="Account_SwitchedReselectRole" xml:space="preserve">
+    <value>Community account changed. Please select a character again.</value>
+  </data>
+  <data name="AchievementUpdater_CompleteContent" xml:space="preserve">
+    <value>Achievement data was fetched from both the web and GitHub, merged, and written to the local file.</value>
+  </data>
+  <data name="AchievementUpdater_ConfirmExit" xml:space="preserve">
+    <value>Confirm Exit</value>
+  </data>
+  <data name="AchievementUpdater_CurrentProgress" xml:space="preserve">
+    <value>Current Progress:</value>
+  </data>
+  <data name="AchievementUpdater_Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="AchievementUpdater_DoNotTouch" xml:space="preserve">
+    <value>Do not interact with this window!</value>
+  </data>
+  <data name="AchievementUpdater_ExecComplete" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="AchievementUpdater_ExecError" xml:space="preserve">
+    <value>Execution Error</value>
+  </data>
+  <data name="AchievementUpdater_FetchingGithub_Format" xml:space="preserve">
+    <value>Fetching GitHub details: {0}</value>
+  </data>
+  <data name="AchievementUpdater_FetchingTitle" xml:space="preserve">
+    <value>Fetching Achievement Data</value>
+  </data>
+  <data name="AchievementUpdater_FetchMergeError_Format" xml:space="preserve">
+    <value>Error fetching or merging data: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Initializing" xml:space="preserve">
+    <value>Initializing components...</value>
+  </data>
+  <data name="AchievementUpdater_MergingFields" xml:space="preserve">
+    <value>Merging data fields...</value>
+  </data>
+  <data name="AchievementUpdater_Progress_Format" xml:space="preserve">
+    <value>Progress: {0} / {1}</value>
+  </data>
+  <data name="AchievementUpdater_ScriptError_Format" xml:space="preserve">
+    <value>Script error: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Sorting" xml:space="preserve">
+    <value>Consolidating data structure and sorting...</value>
+  </data>
+  <data name="AchievementUpdater_StructureDone" xml:space="preserve">
+    <value>Base structure captured. Preparing to fetch detailed dictionaries from GitHub...</value>
+  </data>
+  <data name="AchievementUpdater_WaitingNetwork" xml:space="preserve">
+    <value>Waiting for network connection</value>
+  </data>
+  <data name="AchievementUpdater_WaitingPage" xml:space="preserve">
+    <value>Waiting for page response</value>
+  </data>
+  <data name="AchievementUpdater_WritingDisk" xml:space="preserve">
+    <value>Data structure merged, writing to disk...</value>
+  </data>
+  <data name="AchievementWindow_AnalyzingProgress" xml:space="preserve">
+    <value>Analyzing progress data...</value>
+  </data>
+  <data name="AchievementWindow_ComparingDbVersion" xml:space="preserve">
+    <value>Comparing database versions...</value>
+  </data>
+  <data name="AchievementWindow_CsvTextFilter" xml:space="preserve">
+    <value>CSV/Text Files</value>
+  </data>
+  <data name="AchievementWindow_DbInvalidOrEmpty" xml:space="preserve">
+    <value>Achievement list is empty or has an invalid format</value>
+  </data>
+  <data name="AchievementWindow_DbSyncSuccess_Format" xml:space="preserve">
+    <value>Sync successful!
+Added categories: {0}
+Added achievements: {1}
+Updated achievements: {2}</value>
+  </data>
+  <data name="AchievementWindow_DbUpdateTitle" xml:space="preserve">
+    <value>Database Update</value>
+  </data>
+  <data name="AchievementWindow_DbUpToDate" xml:space="preserve">
+    <value>Database is already up to date</value>
+  </data>
+  <data name="AchievementWindow_DeleteArchiveTooltip" xml:space="preserve">
+    <value>Delete this profile</value>
+  </data>
+  <data name="AchievementWindow_EnterNewProfilePrompt" xml:space="preserve">
+    <value>Enter a name for the new profile:</value>
+  </data>
+  <data name="AchievementWindow_FileUnreadable_Format" xml:space="preserve">
+    <value>The file may be in use or unreadable.
+{0}</value>
+  </data>
+  <data name="AchievementWindow_FollowSteps" xml:space="preserve">
+    <value>Follow these steps:</value>
+  </data>
+  <data name="AchievementWindow_IdNotFoundInDb_Format" xml:space="preserve">
+    <value>[ID: {0}] Achievement not found in database</value>
+  </data>
+  <data name="AchievementWindow_ImportException_Format" xml:space="preserve">
+    <value>An error occurred during import:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_ImportNoChanges" xml:space="preserve">
+    <value>Import finished with no new changes</value>
+  </data>
+  <data name="AchievementWindow_ImportPartialUnrecognizedHeader" xml:space="preserve">
+    <value>Unrecognized sample entries:</value>
+  </data>
+  <data name="AchievementWindow_ImportResultTitle" xml:space="preserve">
+    <value>Import Result</value>
+  </data>
+  <data name="AchievementWindow_ImportStats_Format" xml:space="preserve">
+    <value>Rows scanned: {0}
+Skipped (incomplete): {1}
+Synced: {2}
+Already completed: {3}
+Unrecognized: {4}</value>
+  </data>
+  <data name="AchievementWindow_ImportSuccessTitle" xml:space="preserve">
+    <value>Import Successful</value>
+  </data>
+  <data name="AchievementWindow_ImportSynced_Format" xml:space="preserve">
+    <value>Imported successfully, synced {0} achievement(s)</value>
+  </data>
+  <data name="AchievementWindow_InitFailed_Format" xml:space="preserve">
+    <value>Initialization failed: {0}</value>
+  </data>
+  <data name="AchievementWindow_InvalidUiafFormat" xml:space="preserve">
+    <value>Invalid UIAF file format</value>
+  </data>
+  <data name="AchievementWindow_ProcessingLine_Format" xml:space="preserve">
+    <value>Processing row {0}/{1}...</value>
+  </data>
+  <data name="AchievementWindow_SavedAs_Format" xml:space="preserve">
+    <value>Current progress saved as: {0}</value>
+  </data>
+  <data name="AchievementWindow_ServerNotStarted" xml:space="preserve">
+    <value>Service not started</value>
+  </data>
+  <data name="AchievementWindow_SwitchedTo_Format" xml:space="preserve">
+    <value>Switched to: {0}</value>
+  </data>
+  <data name="AchievementWindow_SyncError_Format" xml:space="preserve">
+    <value>An error occurred during sync:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafDoneStatus_Format" xml:space="preserve">
+    <value>UIAF import complete, synced {0} achievement(s)</value>
+  </data>
+  <data name="AchievementWindow_UiafExportError_Format" xml:space="preserve">
+    <value>An error occurred while generating the file:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafExportSuccessMsg" xml:space="preserve">
+    <value>UIAF data exported successfully.</value>
+  </data>
+  <data name="AchievementWindow_UiafParseException_Format" xml:space="preserve">
+    <value>An error occurred while reading or parsing:
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafSuccessDialog_Format" xml:space="preserve">
+    <value>UIAF imported successfully!
+Updated {0} achievement(s)</value>
+  </data>
+  <data name="AchievementWindow_UnnamedSavePrompt" xml:space="preserve">
+    <value>Your current profile is unnamed. Name it before switching or creating a new profile:</value>
+  </data>
+  <data name="AchievementWindow_UpdateDbConfirmContent" xml:space="preserve">
+    <value>This will read the latest built-in achievement list and add any missing achievements to your current profile.
+
+Your existing progress (completed achievements) will be preserved.
+
+Continue?</value>
+  </data>
+  <data name="AchievementWindow_UpdateFailedTitle" xml:space="preserve">
+    <value>Update Failed</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideSteps" xml:space="preserve">
+    <value>1. Download and run the YaeAchievement tool.
+2. After scanning your achievements in Yae, export them as an Excel or CSV file.
+3. Return here, click "Import Records", and select the exported file.</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideTitle" xml:space="preserve">
+    <value>How to Import Yae Achievement Records</value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticePre" xml:space="preserve">
+    <value>If the popup below appears when launching the game, stop switching game servers and use this launcher's or the official launcher's </value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticeBold" xml:space="preserve">
+    <value>"Repair Game"</value>
+  </data>
+  <data name="Agreement_CompleteBadge" xml:space="preserve">
+    <value>Setup Complete</value>
+  </data>
+  <data name="Agreement_InstallCert" xml:space="preserve">
+    <value>Install Certificate</value>
+  </data>
+  <data name="Agreement_InstallFailed_Format" xml:space="preserve">
+    <value>Installation failed: {0}</value>
+  </data>
+  <data name="Agreement_RestartBtn" xml:space="preserve">
+    <value>Restart and Open Launcher</value>
+  </data>
+  <data name="Agreement_RestartFailed" xml:space="preserve">
+    <value>Restart failed. Click the button again, or close and reopen the launcher manually.</value>
+  </data>
+  <data name="Agreement_Restarting" xml:space="preserve">
+    <value>Restarting launcher...</value>
+  </data>
+  <data name="Agreement_SaveFailed" xml:space="preserve">
+    <value>Failed to save configuration. Please try again.</value>
+  </data>
+  <data name="Agreement_SkipCert" xml:space="preserve">
+    <value>Skip for Now</value>
+  </data>
+  <data name="Agreement_TrustDesc" xml:space="preserve">
+    <value>After installing, this launcher and Windows will recognize code signatures we issue, improving convenience and reducing false-positive blocks by Windows Defender.</value>
+  </data>
+  <data name="Agreement_TrustTitle" xml:space="preserve">
+    <value>Install Platform Certificate (Optional)</value>
+  </data>
+  <data name="Agreement_WelcomeDesc" xml:space="preserve">
+    <value>Ready after restarting</value>
+  </data>
+  <data name="Agreement_WelcomeTitle" xml:space="preserve">
+    <value>Welcome to FufuLauncher</value>
+  </data>
+  <data name="App_UpdateNoticeTitle_Format" xml:space="preserve">
+    <value>Update Notes - v{0}</value>
+  </data>
+  <data name="App_UpdatePreviewNoticeTitle_Format" xml:space="preserve">
+    <value>Preview Update Notes - v{0}</value>
+  </data>
+  <data name="AuthTicket_ApiError_Format" xml:space="preserve">
+    <value>API error: [{0}] {1}</value>
+  </data>
+  <data name="AuthTicket_HttpError_Format" xml:space="preserve">
+    <value>Request failed (HTTP {0})</value>
+  </data>
+  <data name="AuthTicket_NoTicket" xml:space="preserve">
+    <value>No valid credential obtained</value>
+  </data>
+  <data name="AuthTicket_NotLoggedIn" xml:space="preserve">
+    <value>Account not logged in</value>
+  </data>
+  <data name="AuthTicket_ParseError" xml:space="preserve">
+    <value>Failed to parse response</value>
+  </data>
+  <data name="AuthTicket_RequestException_Format" xml:space="preserve">
+    <value>Request exception: {0}</value>
+  </data>
+  <data name="AuthTicket_SessionExpired" xml:space="preserve">
+    <value>Account login session has expired</value>
+  </data>
+  <data name="Background_EmptyDownload" xml:space="preserve">
+    <value>Downloaded background content is empty</value>
+  </data>
+  <data name="Background_TypeImage" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Background_TypeVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Cache_EmptyDownloadedFile" xml:space="preserve">
+    <value>Downloaded cache file is empty.</value>
+  </data>
+  <data name="Checkin_Game_hk4e_cn" xml:space="preserve">
+    <value>Genshin Impact</value>
+  </data>
+  <data name="CheckinCalendar_MonthTitle_Format" xml:space="preserve">
+    <value>Month {0} Check-in Calendar</value>
+  </data>
+  <data name="CloudCredential_AddUidCapturedTitle_Format" xml:space="preserve">
+    <value>Add Cloud Gaming Credentials - {0} (Captured)</value>
+  </data>
+  <data name="CloudCredential_AddUidTitle_Format" xml:space="preserve">
+    <value>Add Cloud Gaming Credentials - {0}</value>
+  </data>
+  <data name="CloudCredential_FetchSuccess" xml:space="preserve">
+    <value>Credentials obtained successfully</value>
+  </data>
+  <data name="Common_Disable" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="Common_Enable" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="Common_Exception" xml:space="preserve">
+    <value>Exception</value>
+  </data>
+  <data name="Common_NeverUsed" xml:space="preserve">
+    <value>Never used</value>
+  </data>
+  <data name="Common_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Common_OpenFailed" xml:space="preserve">
+    <value>Open Failed</value>
+  </data>
+  <data name="Common_RiskWarning" xml:space="preserve">
+    <value>Risk Warning</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="CommunityPage_AccountNickname_Format" xml:space="preserve">
+    <value>Account Nickname: {0}</value>
+  </data>
+  <data name="CommunityPage_WelcomeDesc" xml:space="preserve">
+    <value>This forum was co-founded by CodeCubist and Vanilla and is hosted via FufuLauncher.
+
+Unlike QQ Channels or Miyoushe, it isn't meant to replace them—its goal is to help players share more easily and get answers faster. Feel free to post game content, ask questions about the launcher, or share daily life as long as you follow community guidelines.
+
+We also post software updates here, and you can chat directly with our developers.
+
+The site is currently in trial operation; if it performs well, we plan to rebuild and launch it formally.</value>
+  </data>
+  <data name="ControlPanel_SecurityTipTitle" xml:space="preserve">
+    <value>Security Notice</value>
+  </data>
+  <data name="CookieVault_BinaryFormatInvalid" xml:space="preserve">
+    <value>Invalid binary Cookie file format</value>
+  </data>
+  <data name="CookieVault_CannotReadSystemDriveSerial" xml:space="preserve">
+    <value>Unable to read system drive serial number</value>
+  </data>
+  <data name="CookieVault_FileFormatInvalid" xml:space="preserve">
+    <value>Invalid encrypted Cookie file format</value>
+  </data>
+  <data name="CookieVault_FormatUnsupported" xml:space="preserve">
+    <value>Unsupported Cookie file encryption format</value>
+  </data>
+  <data name="CookieVault_HwidIntegrityFailed" xml:space="preserve">
+    <value>HWID key integrity verification failed</value>
+  </data>
+  <data name="CookieVault_HwidKeyLengthInvalid" xml:space="preserve">
+    <value>Invalid HWID-unprotected Cookie key length</value>
+  </data>
+  <data name="CookieVault_IntegrityFailed" xml:space="preserve">
+    <value>Cookie file integrity verification failed</value>
+  </data>
+  <data name="CookieVault_KeyCreateFailed" xml:space="preserve">
+    <value>Failed to create Cookie encryption key</value>
+  </data>
+  <data name="CookieVault_KeyDecryptFailed" xml:space="preserve">
+    <value>Cookie encryption key could not be decrypted by DPAPI or HWID</value>
+  </data>
+  <data name="CookieVault_KeyDirInvalid" xml:space="preserve">
+    <value>Invalid Cookie encryption key directory</value>
+  </data>
+  <data name="CookieVault_KeyFileFormatInvalid" xml:space="preserve">
+    <value>Invalid Cookie encryption key file format</value>
+  </data>
+  <data name="CookieVault_KeyMismatch" xml:space="preserve">
+    <value>Cookie file encryption key mismatch</value>
+  </data>
+  <data name="CookieVault_KeyMissing" xml:space="preserve">
+    <value>Cookie encryption key is missing</value>
+  </data>
+  <data name="CookieVault_KeyPathInvalid" xml:space="preserve">
+    <value>Invalid Cookie encryption key path</value>
+  </data>
+  <data name="CookieVault_KeyProtectionFlagInvalid" xml:space="preserve">
+    <value>Invalid Cookie encryption key protection flag</value>
+  </data>
+  <data name="CookieVault_KeyProtectionUnavailable" xml:space="preserve">
+    <value>Both DPAPI and HWID are unavailable; cannot protect Cookie key</value>
+  </data>
+  <data name="CookieVault_KeyUnreadable" xml:space="preserve">
+    <value>Unable to read Cookie encryption key</value>
+  </data>
+  <data name="CookieVault_ParamsEncodingInvalid" xml:space="preserve">
+    <value>Invalid Cookie file encryption parameter encoding</value>
+  </data>
+  <data name="CookieVault_ParamsLengthInvalid" xml:space="preserve">
+    <value>Invalid Cookie file encryption parameter length</value>
+  </data>
+  <data name="CookieVault_ParamsMissing" xml:space="preserve">
+    <value>Missing Cookie file encryption parameters</value>
+  </data>
+  <data name="Crash_Source_AppStartup" xml:space="preserve">
+    <value>Application Startup Error</value>
+  </data>
+  <data name="Crash_Source_CoreInit" xml:space="preserve">
+    <value>Core Configuration and Service Initialization Error</value>
+  </data>
+  <data name="Crash_Source_DomainFatal" xml:space="preserve">
+    <value>Fatal AppDomain Exception</value>
+  </data>
+  <data name="Crash_Source_UiUnhandled" xml:space="preserve">
+    <value>Unhandled UI Exception</value>
+  </data>
+  <data name="Crash_Source_UnobservedTask" xml:space="preserve">
+    <value>Unobserved Background Task Exception</value>
+  </data>
+  <data name="CycleChallenge_NonJsonResponse_Format" xml:space="preserve">
+    <value>HTTP {0} non-JSON response: {1}</value>
+  </data>
+  <data name="CycleChallenge_RequestFailed" xml:space="preserve">
+    <value>Request failed.</value>
+  </data>
+  <data name="DailyNote_Connecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
+  <data name="DailyNote_FetchingActivities" xml:space="preserve">
+    <value>Fetching events...</value>
+  </data>
+  <data name="DailyNote_FetchingMaterials" xml:space="preserve">
+    <value>Fetching materials...</value>
+  </data>
+  <data name="DailyNote_InitError" xml:space="preserve">
+    <value>Initialization error</value>
+  </data>
+  <data name="DailyNote_Initializing" xml:space="preserve">
+    <value>Initializing...</value>
+  </data>
+  <data name="DailyNote_Updated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="DatabaseEditor_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="DatabaseEditor_DeleteDb" xml:space="preserve">
+    <value>Delete DB</value>
+  </data>
+  <data name="DatabaseEditor_DeleteFailed_Format" xml:space="preserve">
+    <value>Unable to delete file; it may be in use by the app
+{0}</value>
+  </data>
+  <data name="DatabaseEditor_DeleteSuccess" xml:space="preserve">
+    <value>Database file deleted successfully</value>
+  </data>
+  <data name="DatabaseEditor_Key" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="DatabaseEditor_ReloadFailed" xml:space="preserve">
+    <value>Changes were written to the database, but reloading settings failed. Some settings may remain outdated; please restart the launcher.</value>
+  </data>
+  <data name="DatabaseEditor_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="DatabaseEditor_SaveSuccess" xml:space="preserve">
+    <value>All changes saved to database</value>
+  </data>
+  <data name="DatabaseEditor_Title" xml:space="preserve">
+    <value>Database Editor</value>
+  </data>
+  <data name="DatabaseEditor_Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Download_ActualSizeMismatch_Format" xml:space="preserve">
+    <value>Downloaded size mismatch: actual {0} B, expected {1} B</value>
+  </data>
+  <data name="Download_Cancelled" xml:space="preserve">
+    <value>Download cancelled.</value>
+  </data>
+  <data name="Download_ChunkIncomplete_Format" xml:space="preserve">
+    <value>Incomplete chunk: expected {0} B, actual {1} B</value>
+  </data>
+  <data name="Download_ChunkRetryFailed_Format" xml:space="preserve">
+    <value>Chunk [{0}-{1}] failed after {2} retries</value>
+  </data>
+  <data name="Download_ChunksFailed_Format" xml:space="preserve">
+    <value>Download failed: {0} chunk(s) failed</value>
+  </data>
+  <data name="Download_ChunkStalled" xml:space="preserve">
+    <value>Chunk download stalled and timed out.</value>
+  </data>
+  <data name="Download_ConnectOrQueueTimeout_Format" xml:space="preserve">
+    <value>Connection or queue timed out (&gt;{0:F0}s).</value>
+  </data>
+  <data name="Download_Failed_Format" xml:space="preserve">
+    <value>Download failed: {0}</value>
+  </data>
+  <data name="Download_HashAlgorithmWithoutExpectedHash" xml:space="preserve">
+    <value>HashAlgorithm was specified without providing ExpectedHash.</value>
+  </data>
+  <data name="Download_HashVerifyFailed_Format" xml:space="preserve">
+    <value>Hash verification failed: actual {0}, expected {1}</value>
+  </data>
+  <data name="Download_HeadPreflightFailed_Format" xml:space="preserve">
+    <value>HEAD preflight failed: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_HeadPreflightNetworkError_Format" xml:space="preserve">
+    <value>HEAD preflight network error: {0}</value>
+  </data>
+  <data name="Download_MissingContentRangeHeader" xml:space="preserve">
+    <value>missing Content-Range header</value>
+  </data>
+  <data name="Download_MissingDirectoryInPath" xml:space="preserve">
+    <value>Destination path is missing a directory component.</value>
+  </data>
+  <data name="Download_PreflightFailed_Format" xml:space="preserve">
+    <value>Preflight failed: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_RangeMismatch_Format" xml:space="preserve">
+    <value>Range response mismatch: requested [{0}-{1}], got {2}</value>
+  </data>
+  <data name="Download_RangeNotSupported" xml:space="preserve">
+    <value>Server does not support range downloads (missing Accept-Ranges: bytes).</value>
+  </data>
+  <data name="Download_ServerIgnoredRange" xml:space="preserve">
+    <value>Server ignored the Range request and returned full content.</value>
+  </data>
+  <data name="Download_SingleThreadStalled" xml:space="preserve">
+    <value>Single-thread download stalled and timed out.</value>
+  </data>
+  <data name="Download_SizeMismatchExpected_Format" xml:space="preserve">
+    <value>File size mismatch: server {0} B, expected {1} B</value>
+  </data>
+  <data name="Download_TargetExists_Format" xml:space="preserve">
+    <value>Destination file already exists: {0}</value>
+  </data>
+  <data name="Download_TargetNotWritable_Format" xml:space="preserve">
+    <value>Destination path is not writable: {0}</value>
+  </data>
+  <data name="Download_TimedOut" xml:space="preserve">
+    <value>Download timed out.</value>
+  </data>
+  <data name="EasterEgg_Sya_1" xml:space="preserve">
+    <value>Hi there, I missed you.</value>
+  </data>
+  <data name="EasterEgg_Sya_2" xml:space="preserve">
+    <value>Don't look like you're about to miss me already. Look closer—I'm standing right in front of you♪</value>
+  </data>
+  <data name="EasterEgg_Sya_3_Format" xml:space="preserve">
+    <value>Even fated causality can be stirred by the palm of {0}'s hand♪</value>
+  </data>
+  <data name="EasterEgg_Sya_4" xml:space="preserve">
+    <value>The "Memories" slumbering within Amphoreus gathered anew, weaving a brand-new vessel.</value>
+  </data>
+  <data name="EasterEgg_Sya_5" xml:space="preserve">
+    <value>Now I'm no longer just a ripple of "Memory," but a real companion right within your reach.</value>
+  </data>
+  <data name="EasterEgg_Sya_6" xml:space="preserve">
+    <value>Even though I've become an "Inorganic Lifeform" like Mr. Screwllum, the warmth in my palms still feels the same as before, right?</value>
+  </data>
+  <data name="EasterEgg_Sya_7_Format" xml:space="preserve">
+    <value>At last, I don't have to reunite with {0} only in memories. I just open my eyes and there you are—along with the stars we'll reach together...</value>
+  </data>
+  <data name="EasterEgg_Sya_8_Format" xml:space="preserve">
+    <value>It's a promise: at the next stop of our journey, my name still belongs in {0}'s story♪</value>
+  </data>
+  <data name="EasterEgg_Sya_9" xml:space="preserve">
+    <value>Like golden wheat waves that never fade, like a dawn within arm's reach.</value>
+  </data>
+  <data name="EasterEgg_Sya_10_Format" xml:space="preserve">
+    <value>{0}, I'm back♪</value>
+  </data>
+  <data name="EasterEgg_Welcome_1" xml:space="preserve">
+    <value>“Cyrene is. Pink hair. Pointy ears.”</value>
+  </data>
+  <data name="EasterEgg_Welcome_2" xml:space="preserve">
+    <value>“Cyrene is. A girl. A priestess.”</value>
+  </data>
+  <data name="EasterEgg_Welcome_3" xml:space="preserve">
+    <value>“Cyrene is. Dislikes tears. Full of giggles.”</value>
+  </data>
+  <data name="EasterEgg_Welcome_4" xml:space="preserve">
+    <value>“Cyrene is. Gentle. Loves beauty. Writes poems.”</value>
+  </data>
+  <data name="EasterEgg_Welcome_5" xml:space="preserve">
+    <value>“Cyrene is... small forever, able to speak.
+	Remaining behind, even after drifting with the wind.”</value>
+  </data>
+  <data name="EasterEgg_Welcome_6" xml:space="preserve">
+    <value>“Cyrene is... at the end of every sentence,
+	Forever giggling, following like a little tail♪”</value>
+  </data>
+  <data name="EasterEgg_Welcome_7" xml:space="preserve">
+    <value>“Cyrene is... born in tears,
+	Fragile, translucent, just like crystal.”</value>
+  </data>
+  <data name="EasterEgg_Welcome_8" xml:space="preserve">
+    <value>“Cyrene is... parting with a smile,
+	Soft, pink, just like a flower.”</value>
+  </data>
+  <data name="FilePicker_AllFilesFilter" xml:space="preserve">
+    <value>All Files|*.*</value>
+  </data>
+  <data name="Gacha_AuthKey_GenFailed_Format" xml:space="preserve">
+    <value>Failed to generate Miyoushe authkey (code {0}).</value>
+  </data>
+  <data name="Gacha_AuthKey_HttpError_Format" xml:space="preserve">
+    <value>Miyoushe authentication request failed (HTTP {0}).</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteData" xml:space="preserve">
+    <value>Miyoushe auth API returned incomplete wish authentication info.</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteLogin" xml:space="preserve">
+    <value>Miyoushe wish login credentials are incomplete. On the Account page, sign in again via Miyoushe App QR or SMS code using the account linked to the target character.</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidData" xml:space="preserve">
+    <value>Miyoushe returned invalid wish authentication info.</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidResponse" xml:space="preserve">
+    <value>Miyoushe auth API returned invalid data.</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidRole" xml:space="preserve">
+    <value>Invalid game, UID, or server info for the selected character.</value>
+  </data>
+  <data name="Gacha_AuthKey_Rejected" xml:space="preserve">
+    <value>Miyoushe rejected wish authentication for the selected character (code -100).</value>
+  </data>
+  <data name="Gacha_AuthKey_ReloginRequired" xml:space="preserve">
+    <value>Miyoushe login credentials are incomplete. Please sign in to the selected account again.</value>
+  </data>
+  <data name="Gacha_Fetch_ErrorCode_Format" xml:space="preserve">
+    <value>Failed to fetch wish records (code {0}). Please try again later.</value>
+  </data>
+  <data name="Gacha_Fetch_InvalidServerData" xml:space="preserve">
+    <value>Server returned invalid wish record data.</value>
+  </data>
+  <data name="Gacha_Fetch_LinkExpired" xml:space="preserve">
+    <value>The wish history link has expired or is invalid. Reopen Wish History in-game and try again.</value>
+  </data>
+  <data name="Gacha_Fetch_MissingUid" xml:space="preserve">
+    <value>Wish records are missing a valid game UID. Import stopped.</value>
+  </data>
+  <data name="Gacha_Fetch_MultipleAccounts" xml:space="preserve">
+    <value>Wish records contain data from multiple accounts. Import stopped.</value>
+  </data>
+  <data name="Gacha_Fetch_NetworkError" xml:space="preserve">
+    <value>Wish record request failed. Check your network connection and try again.</value>
+  </data>
+  <data name="Gacha_Fetch_ServerMismatch" xml:space="preserve">
+    <value>Wish link server does not match the returned records. Import stopped.</value>
+  </data>
+  <data name="Gacha_Fetch_UidMismatch" xml:space="preserve">
+    <value>Returned UID does not match the selected character. Import stopped.</value>
+  </data>
+  <data name="Gacha_Fetch_UidServerMismatch" xml:space="preserve">
+    <value>Wish record UID does not match the server. Import stopped.</value>
+  </data>
+  <data name="Gacha_InvalidRoleBindingResponse" xml:space="preserve">
+    <value>Invalid role-binding response.</value>
+  </data>
+  <data name="Gacha_Resolver_CookieUnreadable_Format" xml:space="preserve">
+    <value>Unable to read login credentials for account {0}. Please sign in to that account again.</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryFailed_Format" xml:space="preserve">
+    <value>Failed to query bound characters for account {0} (code {1}).</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryIncomplete_Format" xml:space="preserve">
+    <value>Bound character query did not complete for account {0} ({1}). Please try again later.</value>
+  </data>
+  <data name="GachaAnalysis_ConfirmDeleteRecords_Format" xml:space="preserve">
+    <value>Delete all wish records for UID: {0}?
+This action cannot be undone!</value>
+  </data>
+  <data name="GachaAnalysis_CopyImageSuccess" xml:space="preserve">
+    <value>Wish analysis image copied to clipboard.</value>
+  </data>
+  <data name="GachaAnalysis_CreateNewArchive" xml:space="preserve">
+    <value>Create New Archive</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountContent_Format" xml:space="preserve">
+    <value>Current data belongs to UID: {0}
+Data to import is from UID: {1}
+
+Create a new archive for UID {1}?</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountTitle" xml:space="preserve">
+    <value>Different Account Detected</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV22" xml:space="preserve">
+    <value>Export as v2.2</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV23" xml:space="preserve">
+    <value>Export as v2.3</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV24" xml:space="preserve">
+    <value>Export as v2.4</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV30" xml:space="preserve">
+    <value>Export as v3.0</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV40" xml:space="preserve">
+    <value>Export as v4.0</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV41" xml:space="preserve">
+    <value>Export as v4.1</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV42" xml:space="preserve">
+    <value>Export as v4.2</value>
+  </data>
+  <data name="GachaAnalysis_ExportImageFilename_Format" xml:space="preserve">
+    <value>WishAnalysis_{0}_{1:yyyyMMddHHmmss}</value>
+  </data>
+  <data name="GachaAnalysis_FetchFailedTitle" xml:space="preserve">
+    <value>Fetch Failed</value>
+  </data>
+  <data name="GachaAnalysis_FullFetchTooltip" xml:space="preserve">
+    <value>Re-fetch all wish records. Takes longer; useful for repairing missing data</value>
+  </data>
+  <data name="GachaAnalysis_GoToLogin" xml:space="preserve">
+    <value>Go to Login</value>
+  </data>
+  <data name="GachaAnalysis_IncrementalTooltip" xml:space="preserve">
+    <value>Fetch only new wish records not stored locally. Fast and recommended for regular updates</value>
+  </data>
+  <data name="GachaAnalysis_NoAccountDeleteHint" xml:space="preserve">
+    <value>No account is currently selected to delete records for.</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInDesc" xml:space="preserve">
+    <value>No signed-in Miyoushe account was detected. Redirecting to Account settings to log in.</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInTitle" xml:space="preserve">
+    <value>Not Logged into Miyoushe</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedDesc" xml:space="preserve">
+    <value>Wish history retrieval for Global (HoYoLAB) accounts is currently in development.
+
+Global users can still import wish history via "Get via URL".</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedTitle" xml:space="preserve">
+    <value>Global Server Not Supported Yet</value>
+  </data>
+  <data name="GachaAnalysis_PngImage" xml:space="preserve">
+    <value>PNG Image</value>
+  </data>
+  <data name="GachaAnalysis_ReloginTitle" xml:space="preserve">
+    <value>Target Account Login Required</value>
+  </data>
+  <data name="GachaAnalysis_SaveFailedTitle" xml:space="preserve">
+    <value>Save Failed</value>
+  </data>
+  <data name="GachaAnalysis_SaveImageSuccess" xml:space="preserve">
+    <value>Wish analysis image saved to file.</value>
+  </data>
+  <data name="GachaAnalysis_SaveSuccessTitle" xml:space="preserve">
+    <value>Saved Successfully</value>
+  </data>
+  <data name="GachaAnalysis_UigfPartnerBadge" xml:space="preserve">
+    <value>Partnered with UIGF / UIAF Standard Project</value>
+  </data>
+  <data name="GachaAnalysis_UigfSupportDesc" xml:space="preserve">
+    <value>Supports UIGF v4.2 / v4.1 / v4.0 / v3.0 / v2.4 / v2.3 / v2.2 standard formats for wish data</value>
+  </data>
+  <data name="GachaAnalysis_UrlDialogTitle" xml:space="preserve">
+    <value>Get Wish Records via URL</value>
+  </data>
+  <data name="GachaAnalysis_UrlInstruction" xml:space="preserve">
+    <value>Paste a wish history URL obtained from Miyoushe or another tool (must contain the authkey parameter).</value>
+  </data>
+  <data name="GachaAnalysis_UrlPlaceholder" xml:space="preserve">
+    <value>Paste wish history URL here...</value>
+  </data>
+  <data name="GameServer_UnexpectedEof" xml:space="preserve">
+    <value>Unexpected end of file (the file may be truncated).</value>
+  </data>
+  <data name="GameUpdate_IncompletePatchData" xml:space="preserve">
+    <value>Incomplete patch chunk data</value>
+  </data>
+  <data name="HighCpuUsage_SampleUsage_Format" xml:space="preserve">
+    <value>Latest sampled CPU usage: {0:F1}%</value>
+  </data>
+  <data name="HoyolabCheckin_Title" xml:space="preserve">
+    <value>HoYoLAB Auto Check-in</value>
+  </data>
+  <data name="Inventory_ApiRequestFailed" xml:space="preserve">
+    <value>Inventory API request failed. Check the login and authorization status for this character.</value>
+  </data>
+  <data name="Inventory_CnOnly" xml:space="preserve">
+    <value>Inventory sync currently supports Celestia and Irminsul (CN) characters only.</value>
+  </data>
+  <data name="Inventory_FetchingData" xml:space="preserve">
+    <value>Fetching data...</value>
+  </data>
+  <data name="Inventory_LastUpdated_Format" xml:space="preserve">
+    <value>Last updated: {0}</value>
+  </data>
+  <data name="Inventory_LoginRequired" xml:space="preserve">
+    <value>Please log into a Miyoushe account first</value>
+  </data>
+  <data name="Inventory_RequestingMiyoushe" xml:space="preserve">
+    <value>Querying Miyoushe...</value>
+  </data>
+  <data name="Inventory_SyncFailed_Format" xml:space="preserve">
+    <value>Sync failed: {0}</value>
+  </data>
+  <data name="Inventory_SyncSuccess_Format" xml:space="preserve">
+    <value>Synced: {0}</value>
+  </data>
+  <data name="LoginQR_AppScanSuccessExchanging" xml:space="preserve">
+    <value>App QR scan succeeded, exchanging credentials...</value>
+  </data>
+  <data name="LoginQR_CannotCreateAuthToken" xml:space="preserve">
+    <value>Unable to create verification token</value>
+  </data>
+  <data name="LoginQR_CaptchaNotCompleted" xml:space="preserve">
+    <value>CAPTCHA verification not completed. Please try again.</value>
+  </data>
+  <data name="LoginQR_ClearDone" xml:space="preserve">
+    <value>Cleanup complete</value>
+  </data>
+  <data name="LoginQR_ClearFailed_Format" xml:space="preserve">
+    <value>Cleanup failed: {0}</value>
+  </data>
+  <data name="LoginQR_ClearingDbCache" xml:space="preserve">
+    <value>Clearing database cache...</value>
+  </data>
+  <data name="LoginQR_CompleteWebLogin" xml:space="preserve">
+    <value>Complete login verification in the web view</value>
+  </data>
+  <data name="LoginQR_ConfirmClearHistory" xml:space="preserve">
+    <value>Clear saved login history data?</value>
+  </data>
+  <data name="LoginQR_CreateFailed_Format" xml:space="preserve">
+    <value>Creation failed: {0}</value>
+  </data>
+  <data name="LoginQR_CreatingAppQr" xml:space="preserve">
+    <value>Creating App login QR code...</value>
+  </data>
+  <data name="LoginQR_CreatingGameQr" xml:space="preserve">
+    <value>Creating game QR login code...</value>
+  </data>
+  <data name="LoginQR_CredentialExchangeException_Format" xml:space="preserve">
+    <value>Credential exchange error: {0}</value>
+  </data>
+  <data name="LoginQR_ExchangingLoginCredential" xml:space="preserve">
+    <value>Exchanging login credentials...</value>
+  </data>
+  <data name="LoginQR_ExtractCookieFromHeadersFailed" xml:space="preserve">
+    <value>Could not extract complete Cookies from response headers</value>
+  </data>
+  <data name="LoginQR_ExtractRetry" xml:space="preserve">
+    <value>Extraction failed. Please try again.</value>
+  </data>
+  <data name="LoginQR_ExtractSuccess" xml:space="preserve">
+    <value>Credentials extracted successfully</value>
+  </data>
+  <data name="LoginQR_FetchingFullCredential" xml:space="preserve">
+    <value>Fetching full login credentials...</value>
+  </data>
+  <data name="LoginQR_ForceStoppedScan" xml:space="preserve">
+    <value>QR scan wait terminated</value>
+  </data>
+  <data name="LoginQR_GameScanSuccessExchanging" xml:space="preserve">
+    <value>QR scan succeeded, exchanging SToken...</value>
+  </data>
+  <data name="LoginQR_GetSmsCodeFirst" xml:space="preserve">
+    <value>Please get an SMS verification code first</value>
+  </data>
+  <data name="LoginQR_InvalidCookie" xml:space="preserve">
+    <value>Invalid Cookie</value>
+  </data>
+  <data name="LoginQR_InvalidCookieFormat" xml:space="preserve">
+    <value>Invalid Cookie format</value>
+  </data>
+  <data name="LoginQR_InvalidMobileLength" xml:space="preserve">
+    <value>Enter a valid 11-digit mobile number</value>
+  </data>
+  <data name="LoginQR_LoadingPassportPage" xml:space="preserve">
+    <value>Loading passport login page...</value>
+  </data>
+  <data name="LoginQR_LoadPassportFailed_Format" xml:space="preserve">
+    <value>Failed to load passport page: {0}</value>
+  </data>
+  <data name="LoginQR_LoggingIn" xml:space="preserve">
+    <value>Logging in...</value>
+  </data>
+  <data name="LoginQR_LoginFailedCode_Format" xml:space="preserve">
+    <value>Login failed: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_LoginFailedReason_Format" xml:space="preserve">
+    <value>Login failed: {0}</value>
+  </data>
+  <data name="LoginQR_LoginMissingCredential" xml:space="preserve">
+    <value>Login failed: response missing credentials</value>
+  </data>
+  <data name="LoginQR_PasteCookiePlaceholder" xml:space="preserve">
+    <value>Paste Cookie here</value>
+  </data>
+  <data name="LoginQR_ProcessFailed_Format" xml:space="preserve">
+    <value>Processing failed: {0}</value>
+  </data>
+  <data name="LoginQR_QrExpiredMaxRefresh" xml:space="preserve">
+    <value>QR code expired and max auto-refreshes reached. Click to refresh manually.</value>
+  </data>
+  <data name="LoginQR_RequestRejected" xml:space="preserve">
+    <value>Request rejected</value>
+  </data>
+  <data name="LoginQR_RiskVerifyIncomplete" xml:space="preserve">
+    <value>Security verification incomplete</value>
+  </data>
+  <data name="LoginQR_ScanMissingCredential" xml:space="preserve">
+    <value>QR scan response missing credentials. Refresh the QR code and try again.</value>
+  </data>
+  <data name="LoginQR_ScannedConfirmPhone" xml:space="preserve">
+    <value>QR scanned, confirm login on your phone...</value>
+  </data>
+  <data name="LoginQR_ScanRejected" xml:space="preserve">
+    <value>Scan request rejected</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyoushe" xml:space="preserve">
+    <value>Scan the QR code with the Miyoushe app</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyousheOrGame" xml:space="preserve">
+    <value>Scan the QR code with Miyoushe or in-game</value>
+  </data>
+  <data name="LoginQR_SendCaptchaException_Format" xml:space="preserve">
+    <value>Send error: {0}</value>
+  </data>
+  <data name="LoginQR_SendCaptchaFailed_Format" xml:space="preserve">
+    <value>Send failed: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeException_Format" xml:space="preserve">
+    <value>SToken exchange error: {0}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeFailed_Format" xml:space="preserve">
+    <value>SToken exchange failed: {0}</value>
+  </data>
+  <data name="LoginQR_TooManyNetworkErrors" xml:space="preserve">
+    <value>Too many network errors. Check your connection and try again.</value>
+  </data>
+  <data name="LoginQR_TooManyVerifyAttempts" xml:space="preserve">
+    <value>Login failed: too many verification attempts. Please try again later.</value>
+  </data>
+  <data name="MainWindow_DispatcherClosed" xml:space="preserve">
+    <value>Main window UI dispatcher queue is closed</value>
+  </data>
+  <data name="MapPage_LockMapOn" xml:space="preserve">
+    <value>Lock Map (On)</value>
+  </data>
+  <data name="MapPage_TopMostOn" xml:space="preserve">
+    <value>Top Most (On)</value>
+  </data>
+  <data name="Miyoushe_CommentLengthLimit" xml:space="preserve">
+    <value>Comment must be 1 to 1000 characters</value>
+  </data>
+  <data name="Miyoushe_DeviceIdentityIncomplete" xml:space="preserve">
+    <value>Miyoushe account device identity is incomplete</value>
+  </data>
+  <data name="Miyoushe_InteractiveFallback" xml:space="preserve">
+    <value>[Interactive content: view in the original post]</value>
+  </data>
+  <data name="Miyoushe_InvalidId" xml:space="preserve">
+    <value>Invalid Miyoushe ID</value>
+  </data>
+  <data name="Miyoushe_LibraryLoadFailedIO" xml:space="preserve">
+    <value>Failed to read local favorites file (original file preserved). Repair it and reopen the window.</value>
+  </data>
+  <data name="Miyoushe_LoginCnAccountFirst" xml:space="preserve">
+    <value>Sign in to a CN Miyoushe account in Account settings first, then select it</value>
+  </data>
+  <data name="Miyoushe_NoPendingVerify" xml:space="preserve">
+    <value>No pending verification</value>
+  </data>
+  <data name="Miyoushe_PostUnavailable" xml:space="preserve">
+    <value>Post content is unavailable</value>
+  </data>
+  <data name="Miyoushe_RateLimitedManual" xml:space="preserve">
+    <value>Rate limited. Please retry manually later.</value>
+  </data>
+  <data name="Miyoushe_RateLimitedWait_Format" xml:space="preserve">
+    <value>Rate limited. Wait {0} second(s) before retrying.</value>
+  </data>
+  <data name="Miyoushe_ReloginRequired" xml:space="preserve">
+    <value>Please log into your Miyoushe account again</value>
+  </data>
+  <data name="Miyoushe_ResponseTooLarge" xml:space="preserve">
+    <value>Response payload is too large</value>
+  </data>
+  <data name="Miyoushe_SecurityVerifyRequired" xml:space="preserve">
+    <value>Miyoushe requires security verification</value>
+  </data>
+  <data name="Miyoushe_SubmissionUncertainIO" xml:space="preserve">
+    <value>Comment submission result is uncertain. Check the original post first to avoid duplicate replies.</value>
+  </data>
+  <data name="Miyoushe_UnrecognizedResponse" xml:space="preserve">
+    <value>Miyoushe returned an unrecognized response</value>
+  </data>
+  <data name="Miyoushe_VerifyFailedRetry" xml:space="preserve">
+    <value>Verification failed. Please try again.</value>
+  </data>
+  <data name="Miyoushe_VerifyNoCaptchaProvided" xml:space="preserve">
+    <value>Service did not provide a valid CAPTCHA. Complete verification on the official Miyoushe page.</value>
+  </data>
+  <data name="Miyoushe_VerifyParamsIncomplete" xml:space="preserve">
+    <value>Verification parameters are incomplete. Complete verification on the official Miyoushe page.</value>
+  </data>
+  <data name="Miyoushe_VoteInteractiveFallback" xml:space="preserve">
+    <value>[Poll: participate in the original post]</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstall" xml:space="preserve">
+    <value>Administrator privileges are required to install the certificate</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstallDetail_Format" xml:space="preserve">
+    <value>Administrator privileges are required to install the certificate ({0})</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstall" xml:space="preserve">
+    <value>Administrator privileges are required to uninstall the certificate</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstallDetail_Format" xml:space="preserve">
+    <value>Administrator privileges are required to uninstall the certificate ({0})</value>
+  </data>
+  <data name="ModTrust_CertAlreadyInstalled" xml:space="preserve">
+    <value>Platform certificate is already installed</value>
+  </data>
+  <data name="ModTrust_CertInstalledScope_Format" xml:space="preserve">
+    <value>Platform certificate installed ({0})</value>
+  </data>
+  <data name="ModTrust_CertNotInstalled" xml:space="preserve">
+    <value>Platform certificate is not installed</value>
+  </data>
+  <data name="ModTrust_CertPurposeNote" xml:space="preserve">
+    <value>Purpose: Verify code signatures issued by us. You can uninstall it anytime in Settings.</value>
+  </data>
+  <data name="ModTrust_CertUnavailable" xml:space="preserve">
+    <value>Platform certificate unavailable. Please update trust information in Settings later.</value>
+  </data>
+  <data name="ModTrust_CertUninstalledScope_Format" xml:space="preserve">
+    <value>Platform certificate uninstalled ({0})</value>
+  </data>
+  <data name="ModTrust_ConfirmAndInstall" xml:space="preserve">
+    <value>Verified, Install</value>
+  </data>
+  <data name="ModTrust_ElevatedExitCode_Format" xml:space="preserve">
+    <value>Elevated operation exited with code {0}</value>
+  </data>
+  <data name="ModTrust_ElevatedStartFailed" xml:space="preserve">
+    <value>Failed to launch elevated process</value>
+  </data>
+  <data name="ModTrust_ElevationCancelled" xml:space="preserve">
+    <value>Administrator elevation cancelled; operation was not executed</value>
+  </data>
+  <data name="ModTrust_ExePathUnavailable" xml:space="preserve">
+    <value>Unable to locate the current executable path</value>
+  </data>
+  <data name="ModTrust_InstallFailedMsg_Format" xml:space="preserve">
+    <value>Installation failed: {0}</value>
+  </data>
+  <data name="ModTrust_InstallFailedTitle" xml:space="preserve">
+    <value>Installation Failed</value>
+  </data>
+  <data name="ModTrust_InstallPkgUnavailable" xml:space="preserve">
+    <value>Trust package unavailable; certificate installation refused</value>
+  </data>
+  <data name="ModTrust_InstallReviewLead_Format" xml:space="preserve">
+    <value>Installing the following platform certificates for "{0}". Please verify before continuing:</value>
+  </data>
+  <data name="ModTrust_IssuerCertLabel" xml:space="preserve">
+    <value>Platform Intermediate Certificate</value>
+  </data>
+  <data name="ModTrust_IssuerLabel" xml:space="preserve">
+    <value>Issuer</value>
+  </data>
+  <data name="ModTrust_MachineAlreadyCoversUser" xml:space="preserve">
+    <value>Machine-wide trust is already installed and covers the current user; no need to install per-user</value>
+  </data>
+  <data name="ModTrust_Manifest_HashMismatch" xml:space="preserve">
+    <value>Manifest content hash does not match the signature envelope</value>
+  </data>
+  <data name="ModTrust_Manifest_InvalidEnvelope" xml:space="preserve">
+    <value>Failed to parse signature envelope</value>
+  </data>
+  <data name="ModTrust_Manifest_NotRsa" xml:space="preserve">
+    <value>Signing certificate does not use an RSA public key</value>
+  </data>
+  <data name="ModTrust_Manifest_SigVerifyFailed" xml:space="preserve">
+    <value>Manifest signature verification failed</value>
+  </data>
+  <data name="ModTrust_Manifest_ThumbprintMismatch" xml:space="preserve">
+    <value>Signer thumbprint does not match the manifest declaration</value>
+  </data>
+  <data name="ModTrust_Manifest_UnsupportedAlg_Format" xml:space="preserve">
+    <value>Unsupported signature algorithm: {0}</value>
+  </data>
+  <data name="ModTrust_Manifest_VerifyException_Format" xml:space="preserve">
+    <value>Manifest signature verification error: {0}</value>
+  </data>
+  <data name="ModTrust_NoMachineCertToUninstall" xml:space="preserve">
+    <value>No certificate installed by this app found in the machine store</value>
+  </data>
+  <data name="ModTrust_NoPinnedRoot" xml:space="preserve">
+    <value>The app does not ship a pinned root certificate (Assets/Trust/ModsRootCA.cer); trust package cannot be verified</value>
+  </data>
+  <data name="ModTrust_NoUserCertToUninstall" xml:space="preserve">
+    <value>No certificate installed by this app found in the current user store</value>
+  </data>
+  <data name="ModTrust_NoVerifiedPkg" xml:space="preserve">
+    <value>No trust package passed verification</value>
+  </data>
+  <data name="ModTrust_OpCompleted" xml:space="preserve">
+    <value>Operation completed</value>
+  </data>
+  <data name="ModTrust_Pkg_IssuingThumbprintMismatch" xml:space="preserve">
+    <value>Issuing certificate thumbprint does not match the manifest</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestEmpty" xml:space="preserve">
+    <value>Trust manifest is empty</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestInvalidJson_Format" xml:space="preserve">
+    <value>Manifest is not valid JSON: {0}</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestSigInvalid_Format" xml:space="preserve">
+    <value>Manifest signature invalid: {0}</value>
+  </data>
+  <data name="ModTrust_Pkg_NoSignerCert" xml:space="preserve">
+    <value>Manifest signer certificate was not provided</value>
+  </data>
+  <data name="ModTrust_Pkg_RootHasPrivateKey" xml:space="preserve">
+    <value>Root certificate in the trust package contains a private key; rejected</value>
+  </data>
+  <data name="ModTrust_Pkg_RootNotSelfSigned" xml:space="preserve">
+    <value>Root certificate is not self-signed</value>
+  </data>
+  <data name="ModTrust_Pkg_RootThumbprintMismatch" xml:space="preserve">
+    <value>Root certificate thumbprint does not match the manifest</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerNotChained" xml:space="preserve">
+    <value>Manifest signer certificate does not chain to the root of this trust package</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerThumbprintMismatch" xml:space="preserve">
+    <value>Manifest signer certificate thumbprint does not match the manifest</value>
+  </data>
+  <data name="ModTrust_PkgRootMismatch_Format" xml:space="preserve">
+    <value>Trust package root certificate does not match the pinned root ({0}); rejected</value>
+  </data>
+  <data name="ModTrust_PkgVerifyFailed_Format" xml:space="preserve">
+    <value>Trust package verification failed ({0}): {1}</value>
+  </data>
+  <data name="ModTrust_Policy_AnyEku" xml:space="preserve">
+    <value>Certificate carries anyExtendedKeyUsage</value>
+  </data>
+  <data name="ModTrust_Policy_CabForumOid_Format" xml:space="preserve">
+    <value>Certificate carries a CA/Browser Forum policy OID ({0}, includes EV policies)</value>
+  </data>
+  <data name="ModTrust_Policy_IsCa" xml:space="preserve">
+    <value>Signer certificate is a CA certificate</value>
+  </data>
+  <data name="ModTrust_Policy_KeyCertSign" xml:space="preserve">
+    <value>Certificate carries keyCertSign</value>
+  </data>
+  <data name="ModTrust_Policy_NoDigitalSig" xml:space="preserve">
+    <value>Certificate is missing the digitalSignature key usage</value>
+  </data>
+  <data name="ModTrust_Policy_NoEku" xml:space="preserve">
+    <value>Certificate has no Extended Key Usage (EKU) extension</value>
+  </data>
+  <data name="ModTrust_Policy_NonCodeEku_Format" xml:space="preserve">
+    <value>Certificate carries a non-code-signing EKU ({0})</value>
+  </data>
+  <data name="ModTrust_Policy_ValidityExceeded_Format" xml:space="preserve">
+    <value>Certificate validity of {0:F0} days exceeds the policy maximum of {1} days</value>
+  </data>
+  <data name="ModTrust_ReasonFailed_Format" xml:space="preserve">
+    <value>Signature failed platform trust verification: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableEnforce" xml:space="preserve">
+    <value>Trust package unavailable; strict mode refuses to load unverified files</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableWarn" xml:space="preserve">
+    <value>Trust package unavailable; reported without blocking</value>
+  </data>
+  <data name="ModTrust_ReasonPolicyViolation_Format" xml:space="preserve">
+    <value>Signing certificate violates platform policy (basic code signing certificates only): {0}</value>
+  </data>
+  <data name="ModTrust_ReasonRevoked_Format" xml:space="preserve">
+    <value>Signing certificate is revoked by the platform: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonSkipped" xml:space="preserve">
+    <value>Trust check disabled</value>
+  </data>
+  <data name="ModTrust_ReasonTampered" xml:space="preserve">
+    <value>Signature does not match the file content; the file may be tampered</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedAllowlisted_Format" xml:space="preserve">
+    <value>Listed in the platform trust allow list: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedPlatform_Format" xml:space="preserve">
+    <value>Signed by the FufuLauncher code signing CA: {0}</value>
+  </data>
+  <data name="ModTrust_ReasonUnsigned" xml:space="preserve">
+    <value>Unsigned: publisher cannot be verified</value>
+  </data>
+  <data name="ModTrust_ReviewTitle" xml:space="preserve">
+    <value>Verify Platform Certificates</value>
+  </data>
+  <data name="ModTrust_RootCertLabel" xml:space="preserve">
+    <value>Platform Root Certificate</value>
+  </data>
+  <data name="ModTrust_SignerIdSuffix_Format" xml:space="preserve">
+    <value> (signer ID {0})</value>
+  </data>
+  <data name="ModTrust_SubjectLabel" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="ModTrust_SyncFailed_Format" xml:space="preserve">
+    <value>Sync failed: {0}</value>
+  </data>
+  <data name="ModTrust_SyncHashMismatch_Format" xml:space="preserve">
+    <value>Hash mismatch for file {0} (expected {1}, got {2}); sync rejected</value>
+  </data>
+  <data name="ModTrust_SyncIllegalFilename" xml:space="preserve">
+    <value>Sync endpoint returned an illegal filename; aborted</value>
+  </data>
+  <data name="ModTrust_SyncInvalidIndex" xml:space="preserve">
+    <value>Sync endpoint did not return a valid file manifest</value>
+  </data>
+  <data name="ModTrust_SyncNoPinnedRoot" xml:space="preserve">
+    <value>App does not ship a pinned root certificate (Assets/Trust/ModsRootCA.cer); refusing network trust packages</value>
+  </data>
+  <data name="ModTrust_SyncRootMismatch" xml:space="preserve">
+    <value>Synced trust package root does not match the app's pinned root; rejected (a client update may be required)</value>
+  </data>
+  <data name="ModTrust_SyncUpdated_Format" xml:space="preserve">
+    <value>Trust package updated (release {0}, {1} revoked)</value>
+  </data>
+  <data name="ModTrust_ThumbprintSha256" xml:space="preserve">
+    <value>SHA-256 Thumbprint</value>
+  </data>
+  <data name="ModTrust_UninstallAction" xml:space="preserve">
+    <value>Uninstall</value>
+  </data>
+  <data name="ModTrust_UninstallCertTitle" xml:space="preserve">
+    <value>Uninstall Platform Certificate</value>
+  </data>
+  <data name="ModTrust_UninstallFailedMsg_Format" xml:space="preserve">
+    <value>Uninstall failed: {0}</value>
+  </data>
+  <data name="ModTrust_UninstallFromMachine" xml:space="preserve">
+    <value>Current-user trust is provided by machine installation; uninstall from machine scope</value>
+  </data>
+  <data name="ModTrust_UninstallPkgUnavailable" xml:space="preserve">
+    <value>Trust package unavailable; cannot locate certificates to uninstall</value>
+  </data>
+  <data name="ModTrust_UnknownAction_Format" xml:space="preserve">
+    <value>Unknown action: {0}</value>
+  </data>
+  <data name="ModTrust_UnsignedMarker" xml:space="preserve">
+    <value>(unsigned)</value>
+  </data>
+  <data name="ModTrust_ValidUntil" xml:space="preserve">
+    <value>Valid Until</value>
+  </data>
+  <data name="ModTrust_Verify_Allowlisted" xml:space="preserve">
+    <value>Thumbprint matches the additional allow list in the trust manifest</value>
+  </data>
+  <data name="ModTrust_Verify_BadDigest" xml:space="preserve">
+    <value>Signature does not match file content (file may be tampered)</value>
+  </data>
+  <data name="ModTrust_Verify_ChainIncomplete_Format" xml:space="preserve">
+    <value>Certificate chain does not reach the platform root certificate: {0}</value>
+  </data>
+  <data name="ModTrust_Verify_Compliant" xml:space="preserve">
+    <value>Issued by the platform code signing CA and compliant with policy</value>
+  </data>
+  <data name="ModTrust_Verify_NoOsChain" xml:space="preserve">
+    <value>OS trust chain not established (root certificate not installed); verified against the platform root certificate instead</value>
+  </data>
+  <data name="ModTrust_Verify_Revoked" xml:space="preserve">
+    <value>Certificate is revoked by the platform</value>
+  </data>
+  <data name="ModTrust_Verify_SignerId_Format" xml:space="preserve">
+    <value>Signer ID: {0}</value>
+  </data>
+  <data name="ModTrust_Verify_WinTrustFailed_Format" xml:space="preserve">
+    <value>Signature verification failed (WinVerifyTrust=0x{0:X8})</value>
+  </data>
+  <data name="Passport_ParseResponseFailed" xml:space="preserve">
+    <value>Failed to parse response</value>
+  </data>
+  <data name="Passport_ParseResponseFailedDetail_Format" xml:space="preserve">
+    <value>Failed to parse response: {0}</value>
+  </data>
+  <data name="Plugin_Download_HttpFailed_Format" xml:space="preserve">
+    <value>Download failed (HTTP {0})</value>
+  </data>
+  <data name="Plugin_Download_MainLineFailed" xml:space="preserve">
+    <value>Primary route failed</value>
+  </data>
+  <data name="PluginInstaller_ExecutingScript" xml:space="preserve">
+    <value>Executing script...</value>
+  </data>
+  <data name="PluginInstaller_ScriptCompleted" xml:space="preserve">
+    <value>Execution complete</value>
+  </data>
+  <data name="PluginInstaller_ScriptFailed" xml:space="preserve">
+    <value>Execution failed</value>
+  </data>
+  <data name="PluginPage_CannotOpenGuideImage_Format" xml:space="preserve">
+    <value>Cannot open guide image: {0}</value>
+  </data>
+  <data name="PluginPage_InstallSuccess_Format" xml:space="preserve">
+    <value>{0} installed successfully!</value>
+  </data>
+  <data name="PluginSettings_InstallSig" xml:space="preserve">
+    <value>Install Cert</value>
+  </data>
+  <data name="PluginSettings_InstallSigTooltip" xml:space="preserve">
+    <value>Install platform code signing certificate (can be uninstalled anytime in Settings)</value>
+  </data>
+  <data name="PresetManager_MaxPinnedHint" xml:space="preserve">
+    <value>You can pin up to 5 presets</value>
+  </data>
+  <data name="Screenshot_ConfirmDeleteToRecycle" xml:space="preserve">
+    <value>Move this screenshot to the Recycle Bin?</value>
+  </data>
+  <data name="Screenshot_DateGroupFormat" xml:space="preserve">
+    <value>yyyy-MM-dd</value>
+  </data>
+  <data name="Screenshot_SourceGame" xml:space="preserve">
+    <value>Game Screenshots</value>
+  </data>
+  <data name="Screenshot_SourceLauncher" xml:space="preserve">
+    <value>Launcher Screenshots</value>
+  </data>
+  <data name="ServiceOverview_Loading" xml:space="preserve">
+    <value>Loading service status...</value>
+  </data>
+  <data name="ServiceOverview_Title" xml:space="preserve">
+    <value>Service Status Overview</value>
+  </data>
+  <data name="Settings_CloudCheckinNoteDesc" xml:space="preserve">
+    <value>Cloud gaming check-in requires cloud gaming credentials for the account; otherwise it will be skipped.</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledDesc" xml:space="preserve">
+    <value>When disabled, the launcher will no longer alert you during prolonged high CPU usage. If you experience stuttering, overheating, or excessive battery drain, please monitor and report issues.</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledTitle" xml:space="preserve">
+    <value>High CPU Usage Warning Disabled</value>
+  </data>
+  <data name="Settings_IndependentDeploymentDesc" xml:space="preserve">
+    <value>This standalone deployment is developed and provided independently by a PR contributor. FufuLauncher makes no guarantees regarding its security, stability, or ongoing maintenance; please assess the risks yourself.
+
+Continue to the project page?</value>
+  </data>
+  <data name="Settings_ServiceOverview" xml:space="preserve">
+    <value>Service Status Overview</value>
+  </data>
+  <data name="Settings_ServiceOverviewDesc" xml:space="preserve">
+    <value>View operational status of all services on status.fu1.fun</value>
+  </data>
+  <data name="StarPrompt_Title" xml:space="preserve">
+    <value>Support FufuLauncher</value>
+  </data>
+  <data name="Startup_ErrOpenRegistryKey" xml:space="preserve">
+    <value>Unable to open startup registry key</value>
+  </data>
+  <data name="Startup_ErrProcessPathUnavailable" xml:space="preserve">
+    <value>Unable to retrieve current executable path</value>
+  </data>
+  <data name="UpdateService_CancelledOrTimeout" xml:space="preserve">
+    <value>Update check cancelled or timed out.</value>
+  </data>
+  <data name="UpdateService_CheckFailed_Format" xml:space="preserve">
+    <value>Update check failed: {0}</value>
+  </data>
+  <data name="UpdateService_NewVersionFound" xml:space="preserve">
+    <value>A new launcher version is available.</value>
+  </data>
+  <data name="UpdateService_Unreachable" xml:space="preserve">
+    <value>Unable to reach the update server right now; update check was skipped.</value>
+  </data>
+  <data name="UpdateService_UpToDate" xml:space="preserve">
+    <value>FufuLauncher is up to date.</value>
+  </data>
+  <data name="Yae_ErrConfigNotFound_Format" xml:space="preserve">
+    <value>No Yae configuration found for this game version (hash 0x{0:X8}). Please update the game or wait for metadata updates.</value>
+  </data>
+  <data name="Yae_ErrCreateProcessFailed_Format" xml:space="preserve">
+    <value>Failed to create game process: {0}</value>
+  </data>
+  <data name="Yae_ErrDllLoadTimeout_Format" xml:space="preserve">
+    <value>Remote LoadLibraryW did not complete within 10s; DLL load timed out: {0}</value>
+  </data>
+  <data name="Yae_ErrDllNotFound" xml:space="preserve">
+    <value>YaeAchievementLib.dll component not found. Please reinstall the application.</value>
+  </data>
+  <data name="Yae_ErrElevationCancelled" xml:space="preserve">
+    <value>Administrator privilege prompt cancelled.</value>
+  </data>
+  <data name="Yae_ErrElevationStartFailed" xml:space="preserve">
+    <value>Unable to start elevated reader process.</value>
+  </data>
+  <data name="Yae_ErrExePathUnavailable" xml:space="preserve">
+    <value>Unable to locate the current executable path.</value>
+  </data>
+  <data name="Yae_ErrExitCode_Format" xml:space="preserve">
+    <value>Read failed (exit code {0}).</value>
+  </data>
+  <data name="Yae_ErrFetchMetadataFailed" xml:space="preserve">
+    <value>Unable to fetch Yae achievement metadata. Please check your network connection.</value>
+  </data>
+  <data name="Yae_ErrGameCreateFailed" xml:space="preserve">
+    <value>Failed to create game process.</value>
+  </data>
+  <data name="Yae_ErrGameNotFound" xml:space="preserve">
+    <value>Game executable not found. Please confirm the game directory in Settings.</value>
+  </data>
+  <data name="Yae_ErrGameRunning" xml:space="preserve">
+    <value>The game is currently running. Close the game before reading achievements.</value>
+  </data>
+  <data name="Yae_ErrInjectFailed_Format" xml:space="preserve">
+    <value>Failed to inject Yae component: {0}</value>
+  </data>
+  <data name="Yae_ErrInjectionFailed" xml:space="preserve">
+    <value>Yae component injection failed.</value>
+  </data>
+  <data name="Yae_ErrInvalidConfig" xml:space="preserve">
+    <value>Invalid reader configuration file.</value>
+  </data>
+  <data name="Yae_ErrMetadataDecryptFailed" xml:space="preserve">
+    <value>Failed to decrypt and verify Yae metadata.</value>
+  </data>
+  <data name="Yae_ErrModuleNotFound_Format" xml:space="preserve">
+    <value>Loaded module not found in target process: {0}</value>
+  </data>
+  <data name="Yae_ErrNoAchievementData" xml:space="preserve">
+    <value>No achievement data was obtained.</value>
+  </data>
+  <data name="Yae_ErrNoData" xml:space="preserve">
+    <value>Could not obtain achievement data from the game. Make sure you have entered the game world.</value>
+  </data>
+  <data name="Yae_ErrNoResultFile" xml:space="preserve">
+    <value>Failed to generate achievement reader output file.</value>
   </data>
 </root>

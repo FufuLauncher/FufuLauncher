@@ -145,7 +145,7 @@ public sealed partial class ScreenshotGalleryWindow : Window
                     return new List<FileInfo>();
                 }
             });
-            allFiles.AddRange(gameFiles.Select(f => (f, "游戏截图")));
+            allFiles.AddRange(gameFiles.Select(f => (f, "Screenshot_SourceGame".GetLocalized())));
         }
 
         if (Directory.Exists(_customScreenshotDirectory))
@@ -163,13 +163,13 @@ public sealed partial class ScreenshotGalleryWindow : Window
                     return new List<FileInfo>();
                 }
             });
-            allFiles.AddRange(customFiles.Select(f => (f, "启动器截图")));
+            allFiles.AddRange(customFiles.Select(f => (f, "Screenshot_SourceLauncher".GetLocalized())));
         }
 
         if (!allFiles.Any()) return;
 
         var sorted = allFiles.OrderByDescending(x => x.file.CreationTime).ToList();
-        var groupedFiles = sorted.GroupBy(x => x.file.CreationTime.ToString("yyyy年MM月dd日"));
+        var groupedFiles = sorted.GroupBy(x => x.file.CreationTime.ToString("Screenshot_DateGroupFormat".GetLocalized()));
 
         foreach (var group in groupedFiles)
         {
@@ -337,10 +337,10 @@ public sealed partial class ScreenshotGalleryWindow : Window
         {
             var dialog = new ContentDialog
             {
-                Title = "确认删除",
-                Content = "确定要将此截图移到回收站吗？",
-                PrimaryButtonText = "删除",
-                CloseButtonText = "取消",
+                Title = "Title_ConfirmDelete".GetLocalized(),
+                Content = "Screenshot_ConfirmDeleteToRecycle".GetLocalized(),
+                PrimaryButtonText = "DeleteLabel".GetLocalized(),
+                CloseButtonText = "CancelBtn".GetLocalized(),
                 DefaultButton = ContentDialogButton.Close,
                 XamlRoot = RootGrid.XamlRoot
             };

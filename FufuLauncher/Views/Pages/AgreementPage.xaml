@@ -308,12 +308,12 @@
                       HorizontalAlignment="Center"
                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
 
-            <TextBlock Text="安装平台证书(可选)"
+            <TextBlock Text="{helpers:Loc Key=Agreement_TrustTitle}"
                        FontSize="18"
                        FontWeight="SemiBold"
                        HorizontalAlignment="Center" />
 
-            <TextBlock Text="安装后本启动器与系统可以识别我们为可信开发者签发的代码签名，提高你的使用便捷性，使我们的插件不再频繁被Windows Defender拦截。"
+            <TextBlock Text="{helpers:Loc Key=Agreement_TrustDesc}"
                        FontSize="12"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        HorizontalAlignment="Center"
@@ -323,14 +323,14 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Spacing="12">
-                <Button Content="安装证书"
+                <Button Content="{helpers:Loc Key=Agreement_InstallCert}"
                         Click="OnTrustInstallClick"
                         Style="{StaticResource AccentButtonStyle}"
                         HorizontalAlignment="Center"
                         Padding="24,8"
                         CornerRadius="4" />
 
-                <Button Content="暂不安装"
+                <Button Content="{helpers:Loc Key=Agreement_SkipCert}"
                         Click="OnTrustSkipClick"
                         Style="{StaticResource DefaultButtonStyle}"
                         HorizontalAlignment="Center"
@@ -365,7 +365,7 @@
                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
 
                 <TextBlock x:Name="CompleteBadgeText"
-                           Text="配置完成"
+                           Text="{helpers:Loc Key=Agreement_CompleteBadge}"
                            FontSize="28"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
@@ -384,14 +384,14 @@
                        HorizontalAlignment="Center" />
 
                 <TextBlock x:Name="WelcomeTitle"
-                           Text="欢迎使用芙芙启动器"
+                           Text="{helpers:Loc Key=Agreement_WelcomeTitle}"
                            FontSize="24"
                            FontWeight="SemiBold"
                            HorizontalAlignment="Center"
                            TextAlignment="Center" />
 
                 <TextBlock x:Name="WelcomeDesc"
-                           Text="重启后即可使用"
+                           Text="{helpers:Loc Key=Agreement_WelcomeDesc}"
                            FontSize="12.5"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                            HorizontalAlignment="Center"
@@ -399,7 +399,7 @@
                            TextAlignment="Center" />
 
                 <Button x:Name="RestartButton"
-                        Content="重启并进入主界面"
+                        Content="{helpers:Loc Key=Agreement_RestartBtn}"
                         Click="OnRestartClick"
                         Style="{StaticResource AccentButtonStyle}"
                         FontSize="16"

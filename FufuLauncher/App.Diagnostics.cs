@@ -46,7 +46,7 @@ public partial class App
         }
 
         LogException(e.Exception, "UnobservedTaskException");
-        ShowCrashDialog("后台异步任务异常", e.Exception);
+        ShowCrashDialog("Crash_Source_UnobservedTask".GetLocalized(), e.Exception);
     }
 
     private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
@@ -61,7 +61,7 @@ public partial class App
             return;
         }
 
-        ShowCrashDialog("UI 界面交互异常", e.Exception);
+        ShowCrashDialog("Crash_Source_UiUnhandled".GetLocalized(), e.Exception);
         Environment.Exit(-1);
     }
 
@@ -69,7 +69,7 @@ public partial class App
     {
         var ex = e.ExceptionObject as Exception;
         LogException(ex, "CurrentDomain_UnhandledException");
-        ShowCrashDialog("应用程序域致命异常", ex);
+        ShowCrashDialog("Crash_Source_DomainFatal".GetLocalized(), ex);
         Environment.Exit(-1);
     }
 

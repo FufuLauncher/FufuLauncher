@@ -348,8 +348,8 @@ public partial class App
 
                 var updateWindow = new UpdateNotificationWindow(result.UpdateInfoUrl, result.IsPreview);
                 updateWindow.Title = result.IsPreview
-                    ? $"预览版更新公告 - v{result.ServerVersion}"
-                    : $"版本更新公告 - v{result.ServerVersion}";
+                    ? string.Format("App_UpdatePreviewNoticeTitle_Format".GetLocalized(), result.ServerVersion)
+                    : string.Format("App_UpdateNoticeTitle_Format".GetLocalized(), result.ServerVersion);
                 updateWindow.Activate();
             }
         }
