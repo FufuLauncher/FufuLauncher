@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 using FufuLauncher.Helpers;
+using FufuLauncher.Models.MiHoYo.Identity;
+using FufuLauncher.Services.MiHoYo.Networking;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -22,8 +24,7 @@ public sealed partial class LoginQrWindow : Window
 
     private const string Salt = "dDIQHbKOdaPaLuvQKVzUzqdeCaxjtaPV";
     private const string SaltGame = "t0qEgfub6cvueAPgR5m9aQWWVciEer7v";
-    private readonly string _deviceId;
-    private readonly string _deviceFp;
+    private readonly string _gameDeviceId = Guid.NewGuid().ToString("N")[..16].ToUpperInvariant();
     private HttpClient _httpClient;
 
     public bool DidLoginSucceed() => IsLoginSuccessful;
@@ -50,8 +51,6 @@ public sealed partial class LoginQrWindow : Window
 
     public LoginQrWindow()
     {
-        _deviceId = Guid.NewGuid().ToString("N")[..16].ToUpper();
-        _deviceFp = GenerateDeviceFingerprint();
         var handler = new HttpClientHandler { UseCookies = false };
         _httpClient = new HttpClient(handler);
 
@@ -189,7 +188,7 @@ public sealed partial class LoginQrWindow : Window
         return _loginTcs.Task;
     }
 
-    private void AddCommonHeaders(HttpRequestMessage request, string body, string query, string clientType,
+    private void AddCommonHeaders(HttpRequestMessage request, DeviceIdentity device, string body, string query, string clientType,
         string appId, string sdkVersion, string cookie = "", string referer = "")
     {
         request.Headers.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 miHoYoBBS/2.90.1 Capture/2.2.0");
@@ -201,35 +200,13 @@ public sealed partial class LoginQrWindow : Window
 
         request.Headers.TryAddWithoutValidation("x-rpc-client_type", clientType);
         request.Headers.TryAddWithoutValidation("x-rpc-app_version", "2.90.1");
-        request.Headers.TryAddWithoutValidation("x-rpc-device_id", _deviceId);
-        request.Headers.TryAddWithoutValidation("x-rpc-device_fp", _deviceFp);
+        MiHoYoHeaderFactory.ApplyDeviceIdentityHeaders(request, device, device.DeviceId);
         request.Headers.TryAddWithoutValidation("x-rpc-game_biz", "bbs_cn");
         request.Headers.TryAddWithoutValidation("x-rpc-app_id", appId);
         request.Headers.TryAddWithoutValidation("x-rpc-sdk_version", sdkVersion);
         request.Headers.TryAddWithoutValidation("x-rpc-account_version", "2.90.1");
-        request.Headers.TryAddWithoutValidation("x-rpc-device_model", "Mi 14");
-        request.Headers.TryAddWithoutValidation("x-rpc-device_name", "Mihoyo Capture");
 
         request.Headers.TryAddWithoutValidation("DS", GenerateDS(body, query));
-    }
-
-    private string GenerateDeviceFingerprint()
-    {
-        long timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        string seedId = GenerateRandomString(16, "0123456789abcdef");
-
-        var deviceInfo = new
-        {
-            device_id = _deviceId,
-            seed_id = seedId,
-            seed_time = timestamp,
-            platform = "2",
-            device_fp = "",
-            app_name = "bbs_cn"
-        };
-
-        string fpStr = JsonSerializer.Serialize(deviceInfo, _jsonOptions);
-        return CreateMD5(fpStr);
     }
 
     private string GenerateDS(string body, string query)

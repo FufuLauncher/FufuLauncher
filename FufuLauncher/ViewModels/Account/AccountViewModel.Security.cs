@@ -107,7 +107,7 @@ public partial class AccountViewModel
 
             RunOnUIThread(() => StatusMessage = "Account_RefreshingCookie".GetLocalized());
 
-            var tokenService = new TokenRefreshService();
+            using var tokenService = new TokenRefreshService();
             var newCookies = await tokenService.RefreshCookieAsync(cookies, true);
 
             if (newCookies == null || newCookies.Count == 0)
@@ -116,8 +116,9 @@ public partial class AccountViewModel
                 return;
             }
 
-            await _accountManager.UpdateCookiesAsync(activeId, newCookies);
-            RunOnUIThread(() => StatusMessage = "Account_CookieRefreshSuccess".GetLocalized());
+            bool saved = await _accountManager.TryUpdateCookiesAsync(activeId, cookies, newCookies);
+            RunOnUIThread(() => StatusMessage = (saved ? "Account_CookieRefreshSuccess" :
+                "Account_CookieRefreshFailed").GetLocalized());
         }
         catch (Exception ex)
         {

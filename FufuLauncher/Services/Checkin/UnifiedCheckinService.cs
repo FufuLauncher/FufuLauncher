@@ -58,8 +58,6 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 continue;
 
             string cookieStr = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
-            cookies.TryGetValue("stoken", out var stoken);
-            cookies.TryGetValue("mid", out var mid);
 
 
             string cloudTokenKey = $"CloudComboToken_{entry.Stuid}";
@@ -71,8 +69,6 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                 Uid = entry.Stuid,
                 Cookie = cookieStr,
                 Stuid = entry.Stuid,
-                Stoken = stoken ?? "",
-                Mid = mid ?? "",
                 Nickname = entry.Nickname ?? string.Format("Checkin_DefaultUser".GetLocalized(), entry.Stuid),
                 ConfigPath = entry.Id,
                 CloudComboToken = cloudComboToken
@@ -308,8 +304,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
                     }
 
                     Report($"[{account.Nickname}] {"Checkin_CommunityCheckinProgress".GetLocalized()}");
-                    var communityResult = await _communityCheckinService.ExecuteCheckinAsync(account,
-                        () => RefreshCheckinCookieAsync(account));
+                    var communityResult = await _communityCheckinService.ExecuteCheckinAsync(account);
 
                     result.CommunityResult.SuccessCount += communityResult.SuccessCount;
                     result.CommunityResult.FailCount += communityResult.FailCount;
@@ -455,10 +450,12 @@ public class UnifiedCheckinService : IUnifiedCheckinService
 
         var refreshed = await refreshService.RefreshCookieAsync(cookies, forceRefresh: true);
         if (refreshed == null) return null;
-        await _accountManager.UpdateCookiesAsync(account.ConfigPath, refreshed);
+        if (!await _accountManager.TryUpdateCookiesAsync(account.ConfigPath, cookies, refreshed))
+        {
+            refreshed = await _accountManager.LoadCookiesAsync(account.ConfigPath);
+            if (refreshed == null || refreshed.Count == 0) return null;
+        }
         account.Cookie = string.Join("; ", refreshed.Select(kv => $"{kv.Key}={kv.Value}"));
-        account.Stoken = refreshed.GetValueOrDefault("stoken", account.Stoken);
-        account.Mid = refreshed.GetValueOrDefault("mid", account.Mid);
         return account.Cookie;
     }
 

@@ -4077,9 +4077,6 @@ Files searched:
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>Community Check-in</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Missing stoken or mid</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>Failed to get task status. Please check your cookie.</value>
   </data>
@@ -4247,6 +4244,21 @@ Files searched:
   </data>
   <data name="Checkin_UnsupportedGame" xml:space="preserve">
     <value>Daily reward check-in is not configured for this game</value>
+  </data>
+  <data name="CheckinCommunity_LoginRequired" xml:space="preserve">
+    <value>Sign in to Miyoushe again in the launcher to resume community check-in.</value>
+  </data>
+  <data name="CheckinCommunity_VerificationDisabled" xml:space="preserve">
+    <value>Community check-in requires verification. Enable verification pop-ups in Settings and try again.</value>
+  </data>
+  <data name="CheckinCommunity_VerificationUnavailable" xml:space="preserve">
+    <value>Miyoushe did not provide a challenge that can be completed on desktop. Try again later.</value>
+  </data>
+  <data name="CheckinCommunity_VerificationCancelled" xml:space="preserve">
+    <value>Verification was cancelled. Community check-in is incomplete.</value>
+  </data>
+  <data name="CheckinCommunity_VerificationFailed" xml:space="preserve">
+    <value>Community check-in could not pass verification. Try again later.</value>
   </data>
   <data name="Checkin_LoginExpired" xml:space="preserve">
     <value>Login expired and could not be refreshed. Please log in to Miyoushe again.</value>
@@ -7015,6 +7027,9 @@ Click the button below to open your browser and download manually.</value>
   </data>
   <data name="Miyoushe_VerifyLoadError" xml:space="preserve">
     <value>Captcha failed to load. Check your connection and retry, or verify on the official Miyoushe website.</value>
+  </data>
+  <data name="Miyoushe_VerifyResultError" xml:space="preserve">
+    <value>The verification result was incomplete. Please try again.</value>
   </data>
   <data name="Miyoushe_VerifyCancelled" xml:space="preserve">
     <value>Verification cancelled. Requests remain paused. Retry to verify again.</value>

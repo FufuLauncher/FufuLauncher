@@ -3690,9 +3690,6 @@ Fichier recherché :
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>Check-in communauté</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Stoken ou mid manquant</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>Échec de récupération des tâches, veuillez vérifier le cookie</value>
   </data>

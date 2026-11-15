@@ -3691,9 +3691,6 @@ Archivos buscados:
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>Check-in de comunidad</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Falta stoken o mid</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>Error al obtener el estado de la tarea. Por favor, verifica tu cookie.</value>
   </data>

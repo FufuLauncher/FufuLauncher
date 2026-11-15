@@ -154,7 +154,7 @@ public sealed partial class LoginQrWindow
                         var rawNode = JsonNode.Parse(raw);
                         string uid = rawNode["uid"]?.GetValue<string>();
                         string token = rawNode["token"]?.GetValue<string>();
-                        return await GetSTokenByGameTokenAsync(uid, token)
+                        return await GetSTokenByGameTokenAsync(uid, token, session)
                             ? QrPollOutcome.Confirmed
                             : QrPollOutcome.Stopped;
                     }
@@ -207,7 +207,7 @@ public sealed partial class LoginQrWindow
         return timeoutCts.IsCancellationRequested ? QrPollOutcome.Refresh : QrPollOutcome.Stopped;
     }
 
-    private async Task<bool> GetSTokenByGameTokenAsync(string accountId, string gameToken)
+    private async Task<bool> GetSTokenByGameTokenAsync(string accountId, string gameToken, LoginSession session)
     {
         string url = ApiEndpoints.GetTokenByGameTokenUrl;
         var requestBody = new JsonObject
@@ -223,7 +223,7 @@ public sealed partial class LoginQrWindow
         request.Headers.TryAddWithoutValidation("x-rpc-app_version", "2.71.1");
         request.Headers.TryAddWithoutValidation("x-rpc-game_biz", "bbs_cn");
         request.Headers.TryAddWithoutValidation("x-rpc-sys_version", "12");
-        request.Headers.TryAddWithoutValidation("x-rpc-device_id", _deviceId);
+        request.Headers.TryAddWithoutValidation("x-rpc-device_id", _gameDeviceId);
         request.Headers.TryAddWithoutValidation("x-rpc-device_name", "Xiaomi MI 6");
         request.Headers.TryAddWithoutValidation("x-rpc-device_model", "MI 6");
         request.Headers.TryAddWithoutValidation("x-rpc-app_id", "bll8iq97cem8");
@@ -244,8 +244,8 @@ public sealed partial class LoginQrWindow
 
                 if (!string.IsNullOrEmpty(stoken) && !string.IsNullOrEmpty(mid))
                 {
-                    var cookies = await ExchangeV2TokensAsync(stoken, mid, accountId);
-                    if (cookies == null) return false;
+                    var cookies = await ExchangeV2TokensAsync(stoken, mid, accountId, token: session.Cts.Token);
+                    if (cookies == null || !IsSessionActive(session)) return false;
 
                     OnLoginSuccess(cookies, "cn");
                     return true;
@@ -269,7 +269,7 @@ public sealed partial class LoginQrWindow
         request.Headers.TryAddWithoutValidation("Accept", "application/json");
         request.Headers.TryAddWithoutValidation("x-rpc-game_biz", "bbs_cn");
         request.Headers.TryAddWithoutValidation("x-rpc-sys_version", "12");
-        request.Headers.TryAddWithoutValidation("x-rpc-device_id", _deviceId);
+        request.Headers.TryAddWithoutValidation("x-rpc-device_id", _gameDeviceId);
         request.Headers.TryAddWithoutValidation("x-rpc-device_name", "Xiaomi MI 6");
         request.Headers.TryAddWithoutValidation("x-rpc-device_model", "MI 6");
         request.Headers.TryAddWithoutValidation("x-rpc-client_type", "3");

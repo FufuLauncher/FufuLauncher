@@ -3691,9 +3691,6 @@ Gesuchte Datei:
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>Community-Check-in</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Stoken oder mid fehlt</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>Abruf des Aufgabenstatus fehlgeschlagen, bitte Cookie überprüfen</value>
   </data>

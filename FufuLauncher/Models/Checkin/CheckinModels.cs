@@ -193,18 +193,6 @@ public class AccountCredentials
         set;
     } = "";
 
-    public string Stoken
-    {
-        get;
-        set;
-    } = "";
-
-    public string Mid
-    {
-        get;
-        set;
-    } = "";
-
     public string Nickname
     {
         get;
@@ -223,5 +211,4 @@ public class AccountCredentials
         set;
     } = "";
 
-    public string GetStokenCookie() => $"stuid={Stuid};stoken={Stoken};mid={Mid}";
 }

@@ -4203,9 +4203,6 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>社区签到</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>缺少 stoken 或 mid</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>获取任务状态失败，请检查 cookie</value>
   </data>
@@ -4376,6 +4373,21 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="Checkin_LoginExpired" xml:space="preserve">
     <value>登录凭证失效，自动刷新未成功，请重新登录米游社后再签到</value>
+  </data>
+  <data name="CheckinCommunity_LoginRequired" xml:space="preserve">
+    <value>请在启动器中重新登录米游社，再进行社区签到</value>
+  </data>
+  <data name="CheckinCommunity_VerificationDisabled" xml:space="preserve">
+    <value>社区签到需要安全验证。请在设置中取消「禁用风控验证码弹窗」，然后重试</value>
+  </data>
+  <data name="CheckinCommunity_VerificationUnavailable" xml:space="preserve">
+    <value>米游社未提供可在桌面完成的验证码，请稍后重试社区签到</value>
+  </data>
+  <data name="CheckinCommunity_VerificationCancelled" xml:space="preserve">
+    <value>已取消安全验证，社区签到未完成</value>
+  </data>
+  <data name="CheckinCommunity_VerificationFailed" xml:space="preserve">
+    <value>社区签到未通过安全验证，请稍后重试</value>
   </data>
   <data name="Checkin_GameCaptcha" xml:space="preserve">
     <value>签到需要安全验证，请在米游社官方页面完成验证</value>
@@ -7010,6 +7022,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="Miyoushe_VerifyLoadError" xml:space="preserve">
     <value>验证码加载失败，请检查网络后重试，或在米游社官方页面验证。</value>
+  </data>
+  <data name="Miyoushe_VerifyResultError" xml:space="preserve">
+    <value>未收到完整的验证码结果，请重试。</value>
   </data>
   <data name="Miyoushe_VerifyCancelled" xml:space="preserve">
     <value>已取消验证，浏览请求仍处于暂停状态。点击重试可再次验证。</value>

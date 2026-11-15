@@ -275,8 +275,7 @@ public sealed class GameRecordApiClient
                 return false;
             }
 
-            await _accountManager.UpdateCookiesAsync(accountId, refreshed).ConfigureAwait(false);
-            return true;
+            return await _accountManager.TryUpdateCookiesAsync(accountId, cookies, refreshed).ConfigureAwait(false);
         }
         catch
         {
