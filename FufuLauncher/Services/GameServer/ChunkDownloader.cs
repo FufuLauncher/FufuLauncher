@@ -31,7 +31,7 @@ public sealed class ChunkDownloader
     }
 
     public async Task<string> DownloadBlobAsync(string name, long expectedSize, string url, string chunksDir,
-        KeyedSemaphoreSlim chunkLocks,
+        AsyncKeyedLocker<string> chunkLocks,
         CancellationToken token = default, Action<long>? onBytesTransferred = null)
     {
         Directory.CreateDirectory(chunksDir);
