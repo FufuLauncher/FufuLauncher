@@ -162,7 +162,7 @@ public sealed class DailyNoteService
             return null;
         }
 
-        await accountManager.UpdateCookiesAsync(activeId, refreshed);
+        await accountManager.UpdateCookiesAsync(activeId, currentCookies, refreshed);
         return await _identityService.BuildAsync(activeId);
     }
 

@@ -834,9 +834,6 @@
   <data name="CheckinCommunity_LikeSuccess" xml:space="preserve">
     <value>Mi piace riuscito: {0}</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Stoken o mid mancante</value>
-  </data>
   <data name="CheckinCommunity_ReadDoneSkipped" xml:space="preserve">
     <value>Lettura già fatta, saltata</value>
   </data>

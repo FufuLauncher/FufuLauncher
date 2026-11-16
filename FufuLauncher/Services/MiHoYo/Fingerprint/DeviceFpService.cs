@@ -142,7 +142,7 @@ public sealed class DeviceFpService
 
             return ParseFingerprint(json);
         }
-        catch (OperationCanceledException)
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
         {
             throw;
         }

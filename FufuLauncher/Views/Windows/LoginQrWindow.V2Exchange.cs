@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.Json.Nodes;
 using FufuLauncher.Constants;
 using FufuLauncher.Helpers;
+using FufuLauncher.Models.MiHoYo.Identity;
+using FufuLauncher.Services.MiHoYo;
 using FufuLauncher.Services.MiHoYo.Passport;
 
 namespace FufuLauncher.Views;
@@ -15,8 +17,15 @@ public sealed partial class LoginQrWindow
 {
     #region 扫码换取
 
-    private async Task<Dictionary<string, string>?> ExchangeV2TokensAsync(string stoken, string mid, string aid)
+    private async Task<Dictionary<string, string>?> ExchangeV2TokensAsync(string stoken, string mid, string aid,
+        DeviceIdentity? device = null, CancellationToken token = default)
     {
+        if (string.IsNullOrWhiteSpace(aid))
+        {
+            UpdateStatus("登录失败: 响应缺少账号 ID", false);
+            return null;
+        }
+
         try
         {
             UpdateStatus("LoginQR_FetchingFullCredential".GetLocalized(), true);
@@ -24,25 +33,20 @@ public sealed partial class LoginQrWindow
             {
                 ["stoken"] = stoken,
                 ["mid"] = mid,
-                ["account_id"] = aid,
-                ["ltuid"] = aid
+                ["stuid"] = aid
             };
 
             var passportClient = App.GetService<PassportClient>();
-
-            string cookieToken = await passportClient.GetCookieAccountInfoBySTokenAsync(stoken, mid, aid);
-            if (!string.IsNullOrEmpty(cookieToken))
+            device ??= await App.GetService<AccountIdentityService>().GetDeviceAsync(token);
+            var webCookies = await passportClient.ExchangeWebCookiesAsync(stoken, mid, aid, device, token);
+            if (webCookies != null)
             {
-                finalCookies["cookie_token"] = cookieToken;
+                foreach (var (name, value) in webCookies)
+                    finalCookies[name] = value;
+                return finalCookies;
             }
 
-            string ltoken = await passportClient.GetLTokenBySTokenAsync(stoken, mid, aid);
-            if (!string.IsNullOrEmpty(ltoken))
-            {
-                finalCookies["ltoken"] = ltoken;
-            }
-
-            string webTicket = await CreateWebQrCodeAsync();
+            string? webTicket = await CreateWebQrCodeAsync(device, token);
             if (string.IsNullOrEmpty(webTicket))
             {
                 UpdateStatus("LoginQR_CannotCreateAuthToken".GetLocalized());
@@ -51,40 +55,50 @@ public sealed partial class LoginQrWindow
 
             string authCookie = $"stoken={stoken}; mid={mid}";
 
-            bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie);
+            bool scanResult = await SimulateAppActionAsync(ApiEndpoints.PassportScanQrLoginUrl, webTicket, authCookie,
+                device, token);
             if (!scanResult)
             {
                 UpdateStatus("LoginQR_ScanRejected".GetLocalized());
                 return null;
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(1000, token);
 
             bool confirmResult =
-                await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie);
+                await SimulateAppActionAsync(ApiEndpoints.PassportConfirmQrLoginUrl, webTicket, authCookie, device,
+                    token);
             if (!confirmResult)
             {
                 UpdateStatus("LoginQR_RequestRejected".GetLocalized());
                 return null;
             }
 
-            var v2Cookies = await GetWebQrStatusAndExtractCookiesAsync(webTicket);
-            if (v2Cookies != null && v2Cookies.Count > 0)
+            var v2Cookies = await GetWebQrStatusAndExtractCookiesAsync(webTicket, device, token);
+            if (v2Cookies != null)
             {
-                foreach (var kvp in v2Cookies)
-                {
-                    finalCookies[kvp.Key] = kvp.Value;
-                }
-
-                finalCookies["stoken"] = stoken;
-
-                return finalCookies;
+                bool hasLToken = CopyPair("ltoken_v2", "ltuid_v2", "ltmid_v2") | CopyPair("ltoken", "ltuid");
+                bool hasCookieToken = CopyPair("cookie_token_v2", "account_id_v2", "account_mid_v2") |
+                                      CopyPair("cookie_token", "account_id");
+                if (hasLToken && hasCookieToken) return finalCookies;
             }
-            else
+
+            UpdateStatus("LoginQR_ExtractCookieFromHeadersFailed".GetLocalized());
+            return null;
+
+            bool CopyPair(string tokenName, string uidName, string? midName = null)
             {
-                UpdateStatus("LoginQR_ExtractCookieFromHeadersFailed".GetLocalized());
-                return null;
+                var value = v2Cookies!.GetValueOrDefault(tokenName);
+                if (string.IsNullOrEmpty(value) || v2Cookies.GetValueOrDefault(uidName) != aid) return false;
+                finalCookies[tokenName] = value;
+                finalCookies[uidName] = aid;
+                if (midName != null) finalCookies[midName] = mid;
+                return true;
             }
+        }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        {
+            return null;
         }
         catch (Exception ex)
         {
@@ -93,7 +107,7 @@ public sealed partial class LoginQrWindow
         }
     }
 
-    private async Task ProcessAndExchangeV2TokensAsync(JsonNode dataNode)
+    private async Task ProcessAndExchangeV2TokensAsync(JsonNode dataNode, LoginSession session, DeviceIdentity device)
     {
         string stoken = "";
         string mid = dataNode["user_info"]?["mid"]?.GetValue<string>() ?? "";
@@ -113,61 +127,63 @@ public sealed partial class LoginQrWindow
             return;
         }
 
-        var cookies = await ExchangeV2TokensAsync(stoken, mid, aid);
-        if (cookies != null)
+        var cookies = await ExchangeV2TokensAsync(stoken, mid, aid, device, session.Cts.Token);
+        if (cookies != null && IsSessionActive(session))
         {
             OnLoginSuccess(cookies, "cn");
         }
     }
 
-    private async Task<string> CreateWebQrCodeAsync()
+    private async Task<string?> CreateWebQrCodeAsync(DeviceIdentity device, CancellationToken token)
     {
         string url = ApiEndpoints.PassportCreateQrLoginUrl;
         var body = new JsonObject();
         string bodyStr = body.ToJsonString(_jsonOptions);
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
 
-        AddCommonHeaders(request, bodyStr, "", "2", "bll8iq97cem8", "2.90.1");
+        AddCommonHeaders(request, device, bodyStr, "", "2", "bll8iq97cem8", "2.90.1");
 
         try
         {
-            var response = await _httpClient.SendAsync(request);
-            var result = JsonNode.Parse(await response.Content.ReadAsStringAsync());
-            if (result["retcode"]?.GetValue<int>() == 0) return result["data"]["ticket"]?.GetValue<string>();
+            using var response = await _httpClient.SendAsync(request, token);
+            var result = JsonNode.Parse(await response.Content.ReadAsStringAsync(token));
+            if (result?["retcode"]?.GetValue<int>() == 0) return result["data"]?["ticket"]?.GetValue<string>();
         }
-        catch
+        catch (Exception) when (!token.IsCancellationRequested)
         {
         }
 
-        return null!;
+        return null;
     }
 
-    private async Task<bool> SimulateAppActionAsync(string url, string ticket, string authCookie)
+    private async Task<bool> SimulateAppActionAsync(string url, string ticket, string authCookie,
+        DeviceIdentity device, CancellationToken token)
     {
         var tokenTypes = new JsonArray { "4" };
         var body = new JsonObject { ["ticket"] = ticket, ["token_types"] = tokenTypes };
         string bodyStr = body.ToJsonString(_jsonOptions);
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
-        AddCommonHeaders(request, bodyStr, "", "2", "bll8iq97cem8", "2.90.1", authCookie);
+        AddCommonHeaders(request, device, bodyStr, "", "2", "bll8iq97cem8", "2.90.1", authCookie);
 
         try
         {
-            var response = await _httpClient.SendAsync(request);
-            var result = JsonNode.Parse(await response.Content.ReadAsStringAsync());
-            return result["retcode"]?.GetValue<int>() == 0;
+            using var response = await _httpClient.SendAsync(request, token);
+            var result = JsonNode.Parse(await response.Content.ReadAsStringAsync(token));
+            return result?["retcode"]?.GetValue<int>() == 0;
         }
-        catch
+        catch (Exception) when (!token.IsCancellationRequested)
         {
         }
 
         return false;
     }
 
-    private async Task<Dictionary<string, string>> GetWebQrStatusAndExtractCookiesAsync(string ticket)
+    private async Task<Dictionary<string, string>?> GetWebQrStatusAndExtractCookiesAsync(string ticket,
+        DeviceIdentity device, CancellationToken token)
     {
         string url = ApiEndpoints.PassportQueryQrLoginStatusUrl;
         var body = new JsonObject { ["ticket"] = ticket };
@@ -175,18 +191,18 @@ public sealed partial class LoginQrWindow
 
         for (int i = 0; i < 3; i++)
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
-            AddCommonHeaders(request, bodyStr, "", "2", "bll8iq97cem8", "2.90.1");
+            AddCommonHeaders(request, device, bodyStr, "", "2", "bll8iq97cem8", "2.90.1");
 
             try
             {
-                var response = await _httpClient.SendAsync(request);
-                var result = JsonNode.Parse(await response.Content.ReadAsStringAsync());
+                using var response = await _httpClient.SendAsync(request, token);
+                var result = JsonNode.Parse(await response.Content.ReadAsStringAsync(token));
 
-                if (result["retcode"]?.GetValue<int>() == 0)
+                if (result?["retcode"]?.GetValue<int>() == 0)
                 {
-                    string status = result["data"]["status"]?.GetValue<string>();
+                    string? status = result["data"]?["status"]?.GetValue<string>();
                     if (status == "Confirmed" || status == "confirmed")
                     {
                         var cookieDict = new Dictionary<string, string>();
@@ -204,11 +220,11 @@ public sealed partial class LoginQrWindow
                     }
                 }
             }
-            catch
+            catch (Exception) when (!token.IsCancellationRequested)
             {
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(1000, token);
         }
 
         return null;

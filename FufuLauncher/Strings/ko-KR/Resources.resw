@@ -3690,9 +3690,6 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>커뮤니티 출석 체크</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>stoken 또는 mid 누락</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>작업 상태를 가져오지 못했습니다. 쿠키를 확인하세요.</value>
   </data>

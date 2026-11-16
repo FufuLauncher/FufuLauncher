@@ -78,12 +78,12 @@ public sealed partial class MainPage
                 return;
             }
 
-            var tokenService = new TokenRefreshService();
+            using var tokenService = new TokenRefreshService();
             var newCookies = await tokenService.RefreshCookieAsync(cookies, true);
 
             if (newCookies != null)
             {
-                await accountManager.UpdateCookiesAsync(activeId, newCookies);
+                await accountManager.UpdateCookiesAsync(activeId, cookies, newCookies);
             }
         }
         catch (Exception ex)

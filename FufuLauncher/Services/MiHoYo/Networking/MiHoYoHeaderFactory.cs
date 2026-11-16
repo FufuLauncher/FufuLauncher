@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Security.Cryptography;
 using System.Text;
 using FufuLauncher.Constants.MiHoYo;
+using FufuLauncher.Models.MiHoYo.Identity;
 
 namespace FufuLauncher.Services.MiHoYo.Networking;
 
@@ -86,6 +87,16 @@ public static class MiHoYoHeaderFactory
     public static void ApplyDeviceFpHeaders(HttpRequestMessage request, string userAgent = UserAgents.OkHttp)
     {
         request.Headers.UserAgent.ParseAdd(userAgent);
+    }
+
+    internal static void ApplyDeviceIdentityHeaders(HttpRequestMessage request, DeviceIdentity device, string deviceId)
+    {
+        request.Headers.Add(HeaderNames.RpcDeviceId, deviceId);
+        if (!string.IsNullOrEmpty(device.DeviceFp))
+            request.Headers.Add(HeaderNames.RpcDeviceFp, device.DeviceFp);
+        request.Headers.Add(HeaderNames.RpcDeviceName, Uri.EscapeDataString(device.DeviceName));
+        request.Headers.Add(HeaderNames.RpcDeviceModel, Uri.EscapeDataString(device.Model));
+        request.Headers.Add(HeaderNames.RpcSysVersion, device.SysVersion);
     }
 }
 

@@ -97,7 +97,7 @@ public sealed partial class MainWindow
                             var newCookies = await refreshService.RefreshCookieAsync(cookies);
                             if (newCookies != null)
                             {
-                                await accountManager.UpdateCookiesAsync(activeId, newCookies);
+                                await accountManager.UpdateCookiesAsync(activeId, cookies, newCookies);
                             }
                         }
                     }

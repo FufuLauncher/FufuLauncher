@@ -38,8 +38,8 @@ public sealed class AccountIdentityService
                 $"[AccountIdentity] No cookies found for account {accountId}, returning empty ctx");
         }
 
-        var device = await _deviceFpService.GetOrRegisterAsync(token).ConfigureAwait(false);
-        if (string.IsNullOrEmpty(device.DeviceFp))
+        var deviceIdentity = await GetDeviceAsync(token).ConfigureAwait(false);
+        if (string.IsNullOrEmpty(deviceIdentity.DeviceFp))
         {
             throw new InvalidOperationException("Account_DeviceFpUnavailable".GetLocalized());
         }
@@ -48,17 +48,9 @@ public sealed class AccountIdentityService
         var serverType = ServerTypeExtensions.ParseServerType(ExtractServerType(accountId));
         var accountIdentity = new AccountIdentity(
             Stuid: ExtractStuid(cookies, serverType),
-            Mid: cookies.GetValueOrDefault("mid") ?? "");
+            Mid: cookies.GetValueOrDefault("mid") ?? cookies.GetValueOrDefault("account_mid_v2") ??
+                 cookies.GetValueOrDefault("ltmid_v2") ?? "");
 
-
-        var deviceIdentity = new DeviceIdentity(
-            DeviceId: device.DeviceId,
-            BbsDeviceId: device.BbsDeviceId,
-            DeviceFp: device.DeviceFp,
-            DeviceName: profile.ResolvedDisplayName,
-            SysVersion: profile.OsVersion,
-            Model: profile.Model,
-            FpLastUpdate: DateTimeOffset.UtcNow);
 
         var ua = new UserAgent(
             Mobile: string.Format(
@@ -76,6 +68,14 @@ public sealed class AccountIdentityService
             Identity: accountIdentity,
             Device: deviceIdentity,
             UserAgent: ua);
+    }
+
+    internal async Task<DeviceIdentity> GetDeviceAsync(CancellationToken token = default)
+    {
+        var device = await _deviceFpService.GetOrRegisterAsync(token).ConfigureAwait(false);
+        var profile = _deviceService.Device;
+        return new DeviceIdentity(device.DeviceId, device.BbsDeviceId, device.DeviceFp,
+            profile.ResolvedDisplayName, profile.OsVersion, profile.Model, DateTimeOffset.UtcNow);
     }
 
     private static string ExtractServerType(string accountId)
