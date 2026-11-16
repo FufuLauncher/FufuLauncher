@@ -17,7 +17,7 @@ public sealed record AccountContext(
 
     public string Mid => Identity.Mid;
 
-    public string? Stoken => Cookies.TryGetValue("stoken", out var t) ? t : null;
+    public string? Stoken => Cookies.GetValueOrDefault("stoken") ?? Cookies.GetValueOrDefault("stoken_v2");
 }
 
 public sealed record AccountIdentity(string Stuid, string Mid);

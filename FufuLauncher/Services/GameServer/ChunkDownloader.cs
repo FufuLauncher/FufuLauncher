@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using AsyncKeyedLock;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models.GameServer;
 
@@ -22,7 +23,7 @@ public sealed class ChunkDownloader
         _httpClient = httpClientProvider.ChunkClient;
     }
 
-    public Task<string> DownloadChunkAsync(SophonChunk chunk, string chunksDir, KeyedSemaphoreSlim chunkLocks,
+    public Task<string> DownloadChunkAsync(SophonChunk chunk, string chunksDir, AsyncKeyedLocker<string> chunkLocks,
         CancellationToken token = default, Action<long>? onBytesTransferred = null)
     {
         return DownloadBlobAsync(chunk.AssetChunk.ChunkName, chunk.AssetChunk.ChunkSize, chunk.DownloadUrl, chunksDir,
@@ -30,7 +31,7 @@ public sealed class ChunkDownloader
     }
 
     public async Task<string> DownloadBlobAsync(string name, long expectedSize, string url, string chunksDir,
-        KeyedSemaphoreSlim chunkLocks,
+        AsyncKeyedLocker<string> chunkLocks,
         CancellationToken token = default, Action<long>? onBytesTransferred = null)
     {
         Directory.CreateDirectory(chunksDir);

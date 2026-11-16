@@ -9,6 +9,8 @@ using System.Text.Json.Nodes;
 using FufuLauncher.Constants;
 using FufuLauncher.Constants.MiHoYo;
 using FufuLauncher.Helpers;
+using FufuLauncher.Models.MiHoYo.Identity;
+using FufuLauncher.Services.MiHoYo;
 
 namespace FufuLauncher.Views;
 
@@ -22,29 +24,38 @@ public sealed partial class LoginQrWindow
 
         session.FlowStarted = true;
         _isLoginCompleting = false;
+        UpdateStatus("LoginQR_CreatingAppQr".GetLocalized(), true);
+
+        DeviceIdentity device;
+        try
+        {
+            device = await App.GetService<AccountIdentityService>().GetDeviceAsync(session.Cts.Token);
+        }
+        catch (Exception ex)
+        {
+            if (IsSessionActive(session))
+                UpdateStatus(string.Format("LoginQR_CreateFailed_Format".GetLocalized(), ex.Message), false);
+            return;
+        }
 
         for (int refreshCount = 0;; refreshCount++)
         {
             if (!IsSessionActive(session)) return;
 
-            if (refreshCount == 0)
-                UpdateStatus("LoginQR_CreatingAppQr".GetLocalized(), true);
-
-            var qrResult = await CreateAppQrCodeAsync(session);
+            var qrResult = await CreateAppQrCodeAsync(session, device);
+            if (!IsSessionActive(session)) return;
             if (!qrResult.Success)
             {
                 UpdateStatus(string.Format("LoginQR_CreateFailed_Format".GetLocalized(), qrResult.Message), false);
                 return;
             }
 
-            if (!IsSessionActive(session)) return;
-
             session.QrCreatedAt = DateTimeOffset.UtcNow;
             RenderQrCode(qrResult.Url);
             UpdateStatus("LoginQR_ScanWithMiyoushe".GetLocalized(), false, true);
             SetQrHint(refreshCount == 0 ? "LoginQR_AutoRefreshHint" : "LoginQR_AutoRefreshed");
 
-            var outcome = await PollAppLoginStatusAsync(session);
+            var outcome = await PollAppLoginStatusAsync(session, device);
             if (outcome != QrPollOutcome.Refresh || !IsSessionActive(session)) return;
 
             if (refreshCount >= MaxQrAutoRefreshCount)
@@ -60,19 +71,20 @@ public sealed partial class LoginQrWindow
         }
     }
 
-    private async Task<(bool Success, string Url, string Message)> CreateAppQrCodeAsync(LoginSession session)
+    private async Task<(bool Success, string Url, string Message)> CreateAppQrCodeAsync(LoginSession session,
+        DeviceIdentity device)
     {
         string url = ApiEndpoints.PassportAppCreateQrLoginUrl;
         var body = new JsonObject();
         string bodyStr = body.ToJsonString(_jsonOptions);
 
-        var request = new HttpRequestMessage(HttpMethod.Post, url);
+        using var request = new HttpRequestMessage(HttpMethod.Post, url);
         request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
-        AddCommonHeaders(request, bodyStr, "", ClientTypes.GameApp, AppIds.Passport, HeaderVersions.PcWebCn);
+        AddCommonHeaders(request, device, bodyStr, "", ClientTypes.GameApp, AppIds.Passport, HeaderVersions.PcWebCn);
 
         try
         {
-            var response = await _httpClient.SendAsync(request);
+            using var response = await _httpClient.SendAsync(request, session.Cts.Token);
             string responseStr = await response.Content.ReadAsStringAsync();
             var result = JsonNode.Parse(responseStr);
 
@@ -91,7 +103,7 @@ public sealed partial class LoginQrWindow
         }
     }
 
-    private async Task<QrPollOutcome> PollAppLoginStatusAsync(LoginSession session)
+    private async Task<QrPollOutcome> PollAppLoginStatusAsync(LoginSession session, DeviceIdentity device)
     {
         const int MaxConsecutiveErrors = 5;
         const int TimeoutSeconds = 180;
@@ -118,7 +130,7 @@ public sealed partial class LoginQrWindow
 
             using var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Content = new StringContent(bodyStr, Encoding.UTF8, "application/json");
-            AddCommonHeaders(request, bodyStr, "", ClientTypes.GameApp, AppIds.Passport, HeaderVersions.PcWebCn);
+            AddCommonHeaders(request, device, bodyStr, "", ClientTypes.GameApp, AppIds.Passport, HeaderVersions.PcWebCn);
 
             try
             {
@@ -185,9 +197,9 @@ public sealed partial class LoginQrWindow
             }
         }
 
-        if (confirmedData != null)
+        if (confirmedData != null && IsSessionActive(session))
         {
-            await ProcessAndExchangeV2TokensAsync(confirmedData);
+            await ProcessAndExchangeV2TokensAsync(confirmedData, session, device);
             return QrPollOutcome.Confirmed;
         }
 

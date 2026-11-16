@@ -3690,9 +3690,6 @@ File yang dicari:
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>Check-in Komunitas</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Stoken atau mid tidak ada</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>Gagal mendapatkan status tugas. Harap periksa cookie Anda.</value>
   </data>

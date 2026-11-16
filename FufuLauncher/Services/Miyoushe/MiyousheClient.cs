@@ -241,19 +241,12 @@ public sealed partial class MiyousheClient : IDisposable
         if (!blocked.NeedsVerification) throw blocked;
         if (blocked.Aigis is { Length: > 0 } raw)
         {
-            using var doc = JsonDocument.Parse(raw);
-            var session = doc.RootElement.Text("session_id");
-            var data = doc.RootElement.Get("data");
-            if (data.ValueKind == JsonValueKind.String)
-            {
-                using var nested = JsonDocument.Parse(data.GetString()!);
-                data = nested.RootElement.Clone();
-            }
-
-            if (session.Length == 0 || data.Text("gt").Length == 0)
+            var challenge = MiyousheAigisChallenge.Parse(raw);
+            if (challenge == null)
                 throw new CommunityApiException("Miyoushe_VerifyParamsIncomplete".GetLocalized());
-            var result = await showCaptcha(data, session, ct) ?? throw new OperationCanceledException(ct);
-            _aigis = session + ";" + Convert.ToBase64String(Encoding.UTF8.GetBytes(result.GetRawText()));
+            var result = await showCaptcha(challenge.Parameters, challenge.SessionId, ct)
+                         ?? throw new OperationCanceledException(ct);
+            _aigis = challenge.CreateProof(result);
         }
         else
         {

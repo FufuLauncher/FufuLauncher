@@ -625,8 +625,8 @@ public sealed class GameRecordApiClient
 
                     if (changed)
                     {
-                        await _accountManager.UpdateCookiesAsync(accountId, updated).ConfigureAwait(false);
-                        return true;
+                        return await _accountManager.UpdateCookiesAsync(accountId, cookies, updated)
+                            .ConfigureAwait(false);
                     }
                 }
             }
@@ -643,8 +643,7 @@ public sealed class GameRecordApiClient
                 return false;
             }
 
-            await _accountManager.UpdateCookiesAsync(accountId, refreshed).ConfigureAwait(false);
-            return true;
+            return await _accountManager.UpdateCookiesAsync(accountId, cookies, refreshed).ConfigureAwait(false);
         }
         catch (OperationCanceledException)
         {

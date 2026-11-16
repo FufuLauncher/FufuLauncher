@@ -48,6 +48,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="AsyncKeyedLock" Version="8.1.3" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
         <PackageReference Include="Google.Protobuf" Version="3.35.1"/>
         <PackageReference Include="H.NotifyIcon.WinUI" Version="2.2.0"/>
@@ -210,9 +211,7 @@
     </Target>
 
     <Target Name="CopyYaeAchievementLib" AfterTargets="Build;Publish" Condition="Exists('$(OutDir)runtimes\win-x64\native\YaeAchievementLib.dll')">
-        <Copy SourceFiles="$(OutDir)runtimes\win-x64\native\YaeAchievementLib.dll"
-              DestinationFiles="$(OutDir)YaeAchievementLib.dll"
-              SkipUnchangedFiles="true"/>
+        <Copy SourceFiles="$(OutDir)runtimes\win-x64\native\YaeAchievementLib.dll" DestinationFiles="$(OutDir)YaeAchievementLib.dll" SkipUnchangedFiles="true" />
         <Message Text="已复制 YaeAchievementLib.dll 到输出根目录" Importance="high"/>
     </Target>
 </Project>

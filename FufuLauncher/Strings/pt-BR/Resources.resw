@@ -3690,9 +3690,6 @@ Arquivos pesquisados:
   <data name="CheckinCommunity_Title" xml:space="preserve">
     <value>Check-in da comunidade</value>
   </data>
-  <data name="CheckinCommunity_MissingToken" xml:space="preserve">
-    <value>Stoken ou mid ausente</value>
-  </data>
   <data name="CheckinCommunity_GetTaskFailed" xml:space="preserve">
     <value>Falha ao obter status da tarefa. Verifique seu cookie.</value>
   </data>
