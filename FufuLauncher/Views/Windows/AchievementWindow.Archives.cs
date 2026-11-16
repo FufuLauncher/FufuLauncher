@@ -16,7 +16,7 @@ public sealed partial class AchievementWindow
     {
         if (!File.Exists(_profileRecordPath) || CurrentProfileName == "AchievementWindow_UnnamedProfile".GetLocalized())
         {
-            var nameResult = await ShowInputAsync("保存当前存档", "检测到当前存档未命名，在切换或新建前，请先为当前进度取一个名字：");
+            var nameResult = await ShowInputAsync("AchievementWindow_SaveCurrent".GetLocalized(), "AchievementWindow_UnnamedSavePrompt".GetLocalized());
             if (string.IsNullOrWhiteSpace(nameResult)) return;
 
             SaveData();
@@ -28,7 +28,7 @@ public sealed partial class AchievementWindow
             File.Copy(_workFilePath, targetPath, true);
             File.WriteAllText(_profileRecordPath, nameResult);
             CurrentProfileName = nameResult;
-            await ShowDialogAsync("保存成功", $"当前进度已保存为：{nameResult}");
+            await ShowDialogAsync("AchievementWindow_SaveSuccess".GetLocalized(), string.Format("AchievementWindow_SavedAs_Format".GetLocalized(), nameResult));
         }
         else
         {
@@ -117,7 +117,7 @@ public sealed partial class AchievementWindow
                 };
 
                 bool isCurrent = file == CurrentProfileName;
-                string displayText = isCurrent ? $"{file} (当前)" : file;
+                string displayText = isCurrent ? $"{file}{"AchievementWindow_CurrentSuffix".GetLocalized()}" : file;
 
                 var txtBlock = new TextBlock { Text = displayText, VerticalAlignment = VerticalAlignment.Center };
                 if (isCurrent)
@@ -143,7 +143,7 @@ public sealed partial class AchievementWindow
                     Margin = new Thickness(4, 0, 0, 0)
                 };
 
-                ToolTipService.SetToolTip(deleteBtn, "删除此存档");
+                ToolTipService.SetToolTip(deleteBtn, "AchievementWindow_DeleteArchiveTooltip".GetLocalized());
 
                 deleteBtn.Content = new FontIcon
                 {
@@ -167,7 +167,7 @@ public sealed partial class AchievementWindow
 
                     var confirmDeleteBtn = new Button
                     {
-                        Content = "确认删除",
+                        Content = "AchievementWindow_ConfirmDelete".GetLocalized(),
                         Background =
                             new Microsoft.UI.Xaml.Media.SolidColorBrush(Windows.UI.Color.FromArgb(255, 200, 50, 50)),
                         Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.White),
@@ -214,12 +214,12 @@ public sealed partial class AchievementWindow
         createBtn.Click += async (_, _) =>
         {
             dialog.Hide();
-            var newName = await ShowInputAsync("新建存档", "请输入新存档的名称：");
+            var newName = await ShowInputAsync("AchievementWindow_NewProfile".GetLocalized(), "AchievementWindow_EnterNewProfilePrompt".GetLocalized());
             if (string.IsNullOrWhiteSpace(newName)) return;
 
             if (File.Exists(Path.Combine(_archivesDir, $"{newName}.db")))
             {
-                await ShowDialogAsync("ErrorTitle".GetLocalized(), "该存档名称已存在！");
+                await ShowDialogAsync("ErrorTitle".GetLocalized(), "AchievementWindow_DuplicateName".GetLocalized());
                 return;
             }
 
@@ -252,7 +252,7 @@ public sealed partial class AchievementWindow
                 string sourceArchive = Path.Combine(_archivesDir, $"{profileName}.db");
                 if (!File.Exists(sourceArchive))
                 {
-                    await ShowDialogAsync("ErrorTitle".GetLocalized(), "找不到目标存档文件！");
+                    await ShowDialogAsync("ErrorTitle".GetLocalized(), "AchievementWindow_ProfileNotFound".GetLocalized());
                     return;
                 }
 
@@ -270,11 +270,11 @@ public sealed partial class AchievementWindow
                 File.Copy(_workFilePath, newBackupPath, true);
             }
 
-            ViewModel.StatusMessage = $"已切换至：{profileName}";
+            ViewModel.StatusMessage = string.Format("AchievementWindow_SwitchedTo_Format".GetLocalized(), profileName);
         }
         catch (Exception ex)
         {
-            await ShowDialogAsync("切换失败", ex.Message);
+            await ShowDialogAsync("AchievementWindow_SwitchFailed".GetLocalized(), ex.Message);
             LoadData();
         }
     }

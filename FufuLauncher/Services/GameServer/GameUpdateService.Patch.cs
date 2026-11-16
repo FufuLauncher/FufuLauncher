@@ -328,7 +328,7 @@ public sealed partial class GameUpdateService
             int read = await source.ReadAsync(buffer.AsMemory(0, toRead), token).ConfigureAwait(false);
             if (read <= 0)
             {
-                throw new EndOfStreamException("补丁段数据不完整");
+                throw new EndOfStreamException("GameUpdate_IncompletePatchData".GetLocalized());
             }
 
             await target.WriteAsync(buffer.AsMemory(0, read), token).ConfigureAwait(false);

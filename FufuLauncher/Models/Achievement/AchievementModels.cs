@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 using CommunityToolkit.Mvvm.ComponentModel;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml;
 
 namespace FufuLauncher.Models;
@@ -22,7 +23,7 @@ public partial class AchievementViewModel : ObservableObject
 
     [ObservableProperty] private string _statusMessage;
 
-    [ObservableProperty] private string _serverStatusText = "服务未启动";
+    [ObservableProperty] private string _serverStatusText = "AchievementWindow_ServerNotStarted".GetLocalized();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CategoryGridVisibility))]
@@ -44,9 +45,9 @@ public partial class AchievementViewModel : ObservableObject
 
     [ObservableProperty] private bool _hideCompleted;
 
-    [ObservableProperty] private string _selectedVersion = "所有版本";
+    [ObservableProperty] private string _selectedVersion = "AchievementWindow_AllVersions".GetLocalized();
 
-    [ObservableProperty] private ObservableCollection<string> _availableVersions = new() { "所有版本" };
+    [ObservableProperty] private ObservableCollection<string> _availableVersions = new() { "AchievementWindow_AllVersions".GetLocalized() };
 
     public void RefreshAvailableVersions(string allVersions)
     {

@@ -278,14 +278,14 @@ public sealed partial class PluginSettingsPage
                 try
                 {
                     response = await client.GetAsync(proxyUrl, HttpCompletionOption.ResponseHeadersRead);
-                    if (!response.IsSuccessStatusCode) throw new Exception("主线路失败");
+                    if (!response.IsSuccessStatusCode) throw new Exception("Plugin_Download_MainLineFailed".GetLocalized());
                 }
                 catch
                 {
                     statusText.Text = "Plugin_Download_Fallback".GetLocalized();
                     usedFallback = true;
                     response = await client.GetAsync(rawGithubUrl, HttpCompletionOption.ResponseHeadersRead);
-                    if (!response.IsSuccessStatusCode) throw new Exception($"下载失败 (HTTP {response.StatusCode})");
+                    if (!response.IsSuccessStatusCode) throw new Exception(string.Format("Plugin_Download_HttpFailed_Format".GetLocalized(), response.StatusCode));
                 }
 
                 using (response)

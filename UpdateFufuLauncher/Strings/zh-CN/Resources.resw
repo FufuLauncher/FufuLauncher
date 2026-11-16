@@ -29,7 +29,7 @@
     <value>FufuLauncher Update（测试模式）</value>
   </data>
   <data name="SubtitlePreparing" xml:space="preserve">
-    <value>请稍后...</value>
+    <value>请稍候...</value>
   </data>
   <data name="PreparingNodeCheck" xml:space="preserve">
     <value>准备校验节点...</value>

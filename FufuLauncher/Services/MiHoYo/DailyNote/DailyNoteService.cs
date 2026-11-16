@@ -117,7 +117,8 @@ public sealed class DailyNoteService
             }
 
             if (retcode != 0)
-                throw new InvalidOperationException(
+                throw new DailyNoteApiException(
+                    retcode,
                     string.Format("DailyNote_FetchFailed".GetLocalized(), message, retcode));
 
             return DailyNoteParser.Parse(json);
@@ -161,7 +162,7 @@ public sealed class DailyNoteService
             return null;
         }
 
-        await accountManager.TryUpdateCookiesAsync(activeId, currentCookies, refreshed);
+        await accountManager.UpdateCookiesAsync(activeId, currentCookies, refreshed);
         return await _identityService.BuildAsync(activeId);
     }
 

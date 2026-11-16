@@ -1,10 +1,6 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-从 Yae CDN 获取成就元数据（AchievementInfo protobuf），
-支持三镜像下载、ETag 缓存、GIF8 混淆解密与游戏哈希解析。
-镜像与协议参考 HolographicHat/YaeAchievement。
 */
 
 using System.IO.Compression;
@@ -67,7 +63,7 @@ public static class YaeMetadataService
             }
         }
 
-        throw new ApplicationException(lastError ?? "无法获取 Yae 成就元数据，请检查网络连接。");
+        throw new ApplicationException(lastError ?? "Yae_ErrFetchMetadataFailed".GetLocalized());
     }
 
 
@@ -91,7 +87,7 @@ public static class YaeMetadataService
     {
         if (!metadata.NativeConfig.MethodRva.TryGetValue(gameHash, out var rva))
         {
-            throw new ApplicationException($"未找到该游戏版本对应的 Yae 配置（哈希 0x{gameHash:X8}），请更新游戏版本或等待元数据更新。");
+            throw new ApplicationException(string.Format("Yae_ErrConfigNotFound_Format".GetLocalized(), gameHash));
         }
 
         return new YaeNativeConfiguration
@@ -171,7 +167,7 @@ public static class YaeMetadataService
         var result = output.ToArray();
         if (YaeCrc32.Compute(result) != hush)
         {
-            throw new InvalidDataException("Yae 元数据解密校验失败。");
+            throw new InvalidDataException("Yae_ErrMetadataDecryptFailed".GetLocalized());
         }
 
         return result;

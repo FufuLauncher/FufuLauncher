@@ -51,7 +51,7 @@ public sealed partial class AchievementWindow
             string text = inputTextBox.Text.Trim();
             if (text.IndexOfAny(invalid) >= 0)
             {
-                await ShowDialogAsync("名称无效", "名称包含非法字符，请重试。");
+                await ShowDialogAsync("AchievementWindow_InvalidName".GetLocalized(), "AchievementWindow_InvalidChars".GetLocalized());
                 return null;
             }
 

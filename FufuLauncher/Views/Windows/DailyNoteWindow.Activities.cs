@@ -17,7 +17,7 @@ public sealed partial class DailyNoteWindow
 {
     private async Task<bool> FetchActivitiesAsync()
     {
-        StatusText = "获取活动...";
+        StatusText = "DailyNote_FetchingActivities".GetLocalized();
         string url = ApiEndpoints.BaikeActivitiesUrl;
 
         try

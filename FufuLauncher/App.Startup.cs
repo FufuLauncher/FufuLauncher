@@ -124,7 +124,7 @@ public partial class App
         {
             DebugLog.Info("App.Startup", $"Startup failed: {ex.Message}");
             LogException(ex, "OnLaunched (启动流程异常)");
-            ShowCrashDialog("应用启动流程异常", ex);
+            ShowCrashDialog("Crash_Source_AppStartup".GetLocalized(), ex);
             Environment.Exit(-1);
         }
     }

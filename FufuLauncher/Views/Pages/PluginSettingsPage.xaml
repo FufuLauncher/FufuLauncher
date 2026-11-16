@@ -495,12 +495,12 @@
                         <Button x:Name="InstallSignatureButton"
                                 Padding="12,6" MinWidth="0"
                                 VerticalAlignment="Center"
-                                ToolTipService.ToolTip="安装平台代码签名证书（可随时在设置中卸载）"
+                                ToolTipService.ToolTip="{helpers:Loc Key=PluginSettings_InstallSigTooltip}"
                                 Click="OnInstallSignatureClick">
                             <StackPanel Orientation="Horizontal" Spacing="6">
                                 <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF27E;"
                                           FontSize="16.25" />
-                                <TextBlock Text="安装签名" FontSize="12" />
+                                <TextBlock Text="{helpers:Loc Key=PluginSettings_InstallSig}" FontSize="12" />
                             </StackPanel>
                         </Button>
                         <Button x:Name="LaunchConfigurationButton"

@@ -97,6 +97,14 @@
                         <TextBlock Text="{helpers:Loc Key=CycleChallenge_Refresh}" />
                     </StackPanel>
                 </Button>
+                <Button
+                    Click="OnCloudArchiveManageClick"
+                    ToolTipService.ToolTip="{helpers:Loc Key=CloudSync_CycleChallengeManageTooltip}">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon FontSize="14" Glyph="&#xE753;" />
+                        <TextBlock Text="{helpers:Loc Key=CloudSync_CycleChallengeBtn}" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
 

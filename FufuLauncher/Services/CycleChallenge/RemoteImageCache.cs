@@ -224,7 +224,7 @@ public static class RemoteImageCache
                         return filePath;
                     }
 
-                    throw new IOException("下载完成后缓存文件为空。");
+                    throw new IOException("Cache_EmptyDownloadedFile".GetLocalized());
                 }
                 catch (Exception ex) when (ex is HttpRequestException
                                                or IOException

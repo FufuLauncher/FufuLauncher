@@ -761,7 +761,7 @@ public sealed class GameServerConverter
                 .ConfigureAwait(false);
             if (read <= 0)
             {
-                throw new EndOfStreamException("文件末尾早于预期（文件可能被截断）。");
+                throw new EndOfStreamException("GameServer_UnexpectedEof".GetLocalized());
             }
 
             total += read;

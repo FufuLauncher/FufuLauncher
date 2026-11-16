@@ -167,7 +167,7 @@ public partial class AccountManager
             if (cookies.TryGetValue("ltuid_v2", out var ltuidV2)) return ltuidV2;
         }
 
-        throw new ArgumentException("无法提取账户 ID");
+        throw new ArgumentException("Account_CannotExtractId".GetLocalized());
     }
 
     #endregion

@@ -1,19 +1,12 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-以 CREATE_SUSPENDED 启动游戏进程并注入 YaeAchievementLib.dll：
-1. LoadLibraryW 远程线程加载 DLL；
-2. 等 LoadLibraryW 完成后用 ToolHelp 枚举目标进程模块，按路径匹配获取完整 64 位基址
-   （GetExitCodeThread 只返回 32 位 DWORD，x64 下会截断 HMODULE，不再用于取基址）；
-3. 在本进程 DONT_RESOLVE_DLL_REFERENCES 加载 DLL 计算 YaeMain RVA；
-4. 在目标进程以 base + YaeMainRVA 创建远程线程执行入口。
-注入流程参考 HolographicHat/YaeAchievement (GPL-3.0)。
 */
 
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services.Yae;
 
@@ -47,7 +40,7 @@ internal sealed class YaeGameProcess : IDisposable
                 gameExePath, commandLine, 0, 0, false, YaeNative.CreateSuspended, 0, workDir,
                 ref startupInfo, out var processInfo))
         {
-            throw new YaeGameCreateException($"创建游戏进程失败：{Marshal.GetLastPInvokeErrorMessage()}");
+            throw new YaeGameCreateException(string.Format("Yae_ErrCreateProcessFailed_Format".GetLocalized(), Marshal.GetLastPInvokeErrorMessage()));
         }
 
         _processHandle = processInfo.hProcess;
@@ -64,7 +57,7 @@ internal sealed class YaeGameProcess : IDisposable
         {
             YaeNative.TerminateProcess(_processHandle, 1);
             CloseHandles();
-            throw new YaeInjectionException($"注入 Yae 组件失败：{ex.Message}", ex);
+            throw new YaeInjectionException(string.Format("Yae_ErrInjectFailed_Format".GetLocalized(), ex.Message), ex);
         }
     }
 
@@ -125,7 +118,7 @@ internal sealed class YaeGameProcess : IDisposable
             {
                 if (YaeNative.WaitForSingleObject(loadThread, 10000) != 0)
                 {
-                    throw new Win32Exception($"远程 LoadLibraryW 在 10s 内未完成，DLL 加载超时：{dllPath}");
+                    throw new Win32Exception(string.Format("Yae_ErrDllLoadTimeout_Format".GetLocalized(), dllPath));
                 }
             }
             finally
@@ -142,7 +135,7 @@ internal sealed class YaeGameProcess : IDisposable
         var moduleBase = FindRemoteModuleBase(processId, dllPath);
         if (moduleBase == 0)
         {
-            throw new Win32Exception($"未在目标进程中找到已加载模块：{dllPath}");
+            throw new Win32Exception(string.Format("Yae_ErrModuleNotFound_Format".GetLocalized(), dllPath));
         }
 
         return moduleBase;

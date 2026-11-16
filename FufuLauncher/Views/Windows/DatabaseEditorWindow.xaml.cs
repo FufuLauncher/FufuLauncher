@@ -100,12 +100,12 @@ namespace FufuLauncher.Views
                     File.Delete(dbPath);
                     SettingsItems.Clear();
 
-                    ShowDialog("成功", "数据库文件已成功删除");
+                    ShowDialog("Success".GetLocalized(), "DatabaseEditor_DeleteSuccess".GetLocalized());
                 }
             }
             catch (Exception ex)
             {
-                ShowDialog("失败", $"无法删除文件，可能应用正在占用它\n{ex.Message}");
+                ShowDialog("Failure".GetLocalized(), string.Format("DatabaseEditor_DeleteFailed_Format".GetLocalized(), ex.Message));
             }
         }
 
@@ -135,15 +135,15 @@ namespace FufuLauncher.Views
 
                 if (!await _localSettingsService.InvalidateAndReloadAsync())
                 {
-                    ShowDialog("失败", "更改已写入数据库，但重新加载设置失败，部分设置可能仍为旧值。请重启软件。");
+                    ShowDialog("Failure".GetLocalized(), "DatabaseEditor_ReloadFailed".GetLocalized());
                     return;
                 }
 
-                ShowDialog("成功", "所有的更改已保存到数据库");
+                ShowDialog("Success".GetLocalized(), "DatabaseEditor_SaveSuccess".GetLocalized());
             }
             catch (Exception ex)
             {
-                ShowDialog("失败", ex.Message);
+                ShowDialog("Failure".GetLocalized(), ex.Message);
             }
         }
 
@@ -153,7 +153,7 @@ namespace FufuLauncher.Views
             {
                 Title = title,
                 Content = content,
-                CloseButtonText = "OK",
+                CloseButtonText = "Dialog_OK".GetLocalized(),
                 XamlRoot = Content.XamlRoot
             };
             await dialog.ShowAsync();

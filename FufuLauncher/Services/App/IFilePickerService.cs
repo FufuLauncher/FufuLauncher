@@ -253,7 +253,7 @@ namespace FufuLauncher.Services
         {
             dlg.Filter = BuildWinFormsFilter(filters);
             if (string.IsNullOrEmpty(dlg.Filter))
-                dlg.Filter = "所有文件|*.*";
+                dlg.Filter = "FilePicker_AllFilesFilter".GetLocalized();
             dlg.Multiselect = false;
             var initialPath = MapStartLocationPath(startLocation);
             if (!string.IsNullOrEmpty(initialPath) && Directory.Exists(initialPath))
@@ -266,7 +266,7 @@ namespace FufuLauncher.Services
         {
             dlg.Filter = BuildWinFormsFilter(filters);
             if (string.IsNullOrEmpty(dlg.Filter))
-                dlg.Filter = "所有文件|*.*";
+                dlg.Filter = "FilePicker_AllFilesFilter".GetLocalized();
             if (!string.IsNullOrEmpty(defaultFileName))
                 dlg.FileName = defaultFileName;
             var initialPath = MapStartLocationPath(startLocation);
@@ -291,7 +291,7 @@ namespace FufuLauncher.Services
                 parts.Add($"{label}|{spec}");
             }
 
-            parts.Add("所有文件|*.*");
+            parts.Add("FilePicker_AllFilesFilter".GetLocalized());
             return string.Join("|", parts);
         }
 

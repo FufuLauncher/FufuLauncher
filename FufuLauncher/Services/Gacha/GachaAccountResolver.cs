@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Models.MiHoYo;
 
@@ -37,14 +38,15 @@ public sealed class GachaAccountResolver(
                 var cookies = await loadCookies(account.Id);
                 if (cookies == null || cookies.Count == 0)
                 {
-                    errors.Add($"账号 {label} 的登录凭证无法读取，请重新登录该账号。");
+                    errors.Add(string.Format("Gacha_Resolver_CookieUnreadable_Format".GetLocalized(), label));
                     continue;
                 }
 
                 var response = await loadRoles(string.Join("; ", cookies.Select(c => $"{c.Key}={c.Value}")));
                 if (response?.retcode != 0 || response.data?.list == null)
                 {
-                    errors.Add($"账号 {label} 的绑定角色查询失败（返回码 {response?.retcode.ToString() ?? "未知"}）。");
+                    errors.Add(string.Format("Gacha_Resolver_RoleQueryFailed_Format".GetLocalized(), label,
+                        response?.retcode.ToString() ?? "Common_Unknown".GetLocalized()));
                     continue;
                 }
 
@@ -59,7 +61,7 @@ public sealed class GachaAccountResolver(
             }
             catch (Exception ex)
             {
-                errors.Add($"账号 {label} 的绑定角色查询未完成（{ex.GetType().Name}），请稍后重试。");
+                errors.Add(string.Format("Gacha_Resolver_RoleQueryIncomplete_Format".GetLocalized(), label, ex.GetType().Name));
             }
         }
 

@@ -23,7 +23,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0"
-                       Text="服务状态总览"
+                       Text="{helpers:Loc Key=ServiceOverview_Title}"
                        VerticalAlignment="Center"
                        Margin="16,0,0,0"
                        Style="{ThemeResource CaptionTextBlockStyle}"
@@ -38,10 +38,10 @@
                         Padding="10,4"
                         Background="Transparent"
                         BorderThickness="0"
-                        ToolTipService.ToolTip="刷新">
+                        ToolTipService.ToolTip="{helpers:Loc Key=MapPage_Refresh}">
                     <StackPanel Orientation="Horizontal" Spacing="8">
                         <FontIcon Glyph="&#xE72C;" FontSize="13" />
-                        <TextBlock Text="刷新" FontSize="12" />
+                        <TextBlock Text="{helpers:Loc Key=MapPage_Refresh}" FontSize="12" />
                     </StackPanel>
                 </Button>
                 <Button Click="OpenInEdgeButton_Click"
@@ -70,7 +70,7 @@
               VerticalAlignment="Stretch">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
                 <ProgressRing IsActive="True" Width="50" Height="50" />
-                <TextBlock Text="正在加载服务状态..."
+                <TextBlock Text="{helpers:Loc Key=ServiceOverview_Loading}"
                            HorizontalAlignment="Center"
                            Style="{ThemeResource BodyTextBlockStyle}"
                            Opacity="0.7" />

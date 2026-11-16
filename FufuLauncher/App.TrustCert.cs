@@ -69,7 +69,7 @@ public static class TrustCertCli
                 }
 
                 default:
-                    result = new TrustOperationResult { Ok = false, Message = $"未知操作：{action}" };
+                    result = new TrustOperationResult { Ok = false, Message = string.Format("ModTrust_UnknownAction_Format".GetLocalized(), action) };
                     break;
             }
 

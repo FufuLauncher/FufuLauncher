@@ -22,13 +22,13 @@ internal static class TrustInstallFlow
         var package = await Task.Run(() => service.GetPackage(true));
         if (package == null)
         {
-            await ShowAsync(xamlRoot, "安装失败", "平台证书不可用，请稍后在设置中更新信任信息。");
+            await ShowAsync(xamlRoot, "ModTrust_InstallFailedTitle".GetLocalized(), "ModTrust_CertUnavailable".GetLocalized());
             return null;
         }
 
-        var scopeText = scope == TrustStoreScope.CurrentUser ? "当前用户" : "本机";
-        var confirmed = await ShowAsync(xamlRoot, "核对平台证书", BuildReviewContent(package, scopeText),
-            "核对无误，安装", "取消");
+        var scopeText = scope == TrustStoreScope.CurrentUser ? "ModTrust_ScopeUser".GetLocalized() : "ModTrust_ScopeMachine".GetLocalized();
+        var confirmed = await ShowAsync(xamlRoot, "ModTrust_ReviewTitle".GetLocalized(), BuildReviewContent(package, scopeText),
+            "ModTrust_ConfirmAndInstall".GetLocalized(), "CancelBtn".GetLocalized());
 
         if (confirmed != ContentDialogResult.Primary) return null;
 
@@ -46,10 +46,10 @@ internal static class TrustInstallFlow
     internal static async Task<TrustOperationResult?> UninstallAsync(
         CodeSigningTrustService service, XamlRoot xamlRoot, TrustStoreScope scope)
     {
-        var scopeText = scope == TrustStoreScope.CurrentUser ? "当前用户" : "本机";
-        var confirmed = await ShowAsync(xamlRoot, "卸载平台证书",
-            $"即将为「{scopeText}」卸载平台证书，卸载后将不再信任我们签发的代码签名。是否继续？",
-            "卸载", "取消");
+        var scopeText = scope == TrustStoreScope.CurrentUser ? "ModTrust_ScopeUser".GetLocalized() : "ModTrust_ScopeMachine".GetLocalized();
+        var confirmed = await ShowAsync(xamlRoot, "ModTrust_UninstallCertTitle".GetLocalized(),
+            string.Format("ModTrust_UninstallConfirm".GetLocalized(), scopeText),
+            "ModTrust_UninstallAction".GetLocalized(), "CancelBtn".GetLocalized());
 
         if (confirmed != ContentDialogResult.Primary) return null;
 
@@ -70,16 +70,16 @@ internal static class TrustInstallFlow
 
         panel.Children.Add(new TextBlock
         {
-            Text = $"即将为「{scopeText}」安装以下平台证书，请核对无误后继续：",
+            Text = string.Format("ModTrust_InstallReviewLead_Format".GetLocalized(), scopeText),
             TextWrapping = TextWrapping.Wrap
         });
 
-        panel.Children.Add(BuildCertificateBlock("平台根证书", package.Root));
-        panel.Children.Add(BuildCertificateBlock("平台中间证书", package.Issuer));
+        panel.Children.Add(BuildCertificateBlock("ModTrust_RootCertLabel".GetLocalized(), package.Root));
+        panel.Children.Add(BuildCertificateBlock("ModTrust_IssuerCertLabel".GetLocalized(), package.Issuer));
 
         panel.Children.Add(new TextBlock
         {
-            Text = "证书用途：验证我们签发的代码签名。安装后可在设置中随时卸载。",
+            Text = "ModTrust_CertPurposeNote".GetLocalized(),
             FontSize = 12,
             Opacity = 0.75,
             TextWrapping = TextWrapping.Wrap
@@ -100,11 +100,11 @@ internal static class TrustInstallFlow
         var stack = new StackPanel { Spacing = 4 };
 
         stack.Children.Add(new TextBlock { Text = title, FontWeight = FontWeights.SemiBold });
-        stack.Children.Add(BuildCertificateField("颁发给", certificate.Subject));
-        stack.Children.Add(BuildCertificateField("颁发者", certificate.Issuer));
-        stack.Children.Add(BuildCertificateField("SHA-256 指纹",
+        stack.Children.Add(BuildCertificateField("ModTrust_SubjectLabel".GetLocalized(), certificate.Subject));
+        stack.Children.Add(BuildCertificateField("ModTrust_IssuerLabel".GetLocalized(), certificate.Issuer));
+        stack.Children.Add(BuildCertificateField("ModTrust_ThumbprintSha256".GetLocalized(),
             ManifestSignatureVerifier.Sha256Thumbprint(certificate)));
-        stack.Children.Add(BuildCertificateField("有效期至", certificate.NotAfter.ToString("yyyy-MM-dd")));
+        stack.Children.Add(BuildCertificateField("ModTrust_ValidUntil".GetLocalized(), certificate.NotAfter.ToString("yyyy-MM-dd")));
 
         return new Border
         {
@@ -160,15 +160,16 @@ internal static class TrustInstallFlow
     }
 
     private static async Task<ContentDialogResult> ShowAsync(
-        XamlRoot xamlRoot, string title, object content, string primaryText = "确定", string closeText = "关闭")
+        XamlRoot xamlRoot, string title, object content, string? primaryText = null, string? closeText = null)
     {
+        var resolvedPrimary = primaryText ?? "Common_Confirm".GetLocalized();
         var dialog = new ContentDialog
         {
             Title = title,
             Content = content,
-            PrimaryButtonText = primaryText,
-            CloseButtonText = closeText,
-            DefaultButton = primaryText == "确定" ? ContentDialogButton.Close : ContentDialogButton.Primary,
+            PrimaryButtonText = resolvedPrimary,
+            CloseButtonText = closeText ?? "CloseBtn".GetLocalized(),
+            DefaultButton = primaryText == null ? ContentDialogButton.Close : ContentDialogButton.Primary,
             XamlRoot = xamlRoot,
             Resources = { ["ContentDialogMaxWidth"] = 640.0 }
         };
@@ -202,19 +203,19 @@ internal static class TrustInstallFlow
             var executable = Environment.ProcessPath;
             if (string.IsNullOrEmpty(executable))
             {
-                return new TrustOperationResult { Ok = false, Message = "无法定位当前程序路径" };
+                return new TrustOperationResult { Ok = false, Message = "ModTrust_ExePathUnavailable".GetLocalized() };
             }
 
             var process = Process.Start(new ProcessStartInfo(executable)
             {
-                Arguments = $"--trust-cert {action} {scope} --result-file \"{resultFile}\"",
+                Arguments = $"--trust-cert {action} {scope} --result-file \"{resultFile}\" --lang \"{ResourceExtensions.CurrentCulture}\"",
                 Verb = "runas",
                 UseShellExecute = true
             });
 
             if (process == null)
             {
-                return new TrustOperationResult { Ok = false, Message = "提权进程启动失败" };
+                return new TrustOperationResult { Ok = false, Message = "ModTrust_ElevatedStartFailed".GetLocalized() };
             }
 
             await process.WaitForExitAsync();
@@ -236,17 +237,23 @@ internal static class TrustInstallFlow
             return new TrustOperationResult
             {
                 Ok = process.ExitCode == 0,
-                Message = process.ExitCode == 0 ? "操作已完成" : $"提权操作退出码 {process.ExitCode}"
+                Message = process.ExitCode == 0
+                    ? "ModTrust_OpCompleted".GetLocalized()
+                    : string.Format("ModTrust_ElevatedExitCode_Format".GetLocalized(), process.ExitCode)
             };
         }
         catch (System.ComponentModel.Win32Exception ex) when (ex.NativeErrorCode == 1223)
         {
-            return new TrustOperationResult { Ok = false, Message = "已取消管理员授权，操作未执行" };
+            return new TrustOperationResult { Ok = false, Message = "ModTrust_ElevationCancelled".GetLocalized() };
         }
         catch (Exception ex)
         {
             DebugLog.Info("TrustInstallFlow", $"[TrustInstallFlow] Elevated certificate operation failed: {ex}");
-            return new TrustOperationResult { Ok = false, Message = $"操作失败：{ex.Message}" };
+            return new TrustOperationResult
+            {
+                Ok = false,
+                Message = string.Format("Common_OperationFailed_Format".GetLocalized(), ex.Message)
+            };
         }
         finally
         {

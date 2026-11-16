@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -45,7 +46,7 @@ public sealed partial class LoginQrWindow
             AcceptsReturn = true,
             Height = 150,
             TextWrapping = TextWrapping.Wrap,
-            PlaceholderText = "在此处粘贴Cookie"
+            PlaceholderText = "LoginQR_PasteCookiePlaceholder".GetLocalized()
         };
 
         TextBlock errorTextBlock = new()
@@ -62,10 +63,10 @@ public sealed partial class LoginQrWindow
 
         ContentDialog dialog = new()
         {
-            Title = "手动输入Cookie",
+            Title = "LoginQR_ManualCookie".GetLocalized(),
             Content = dialogContent,
-            PrimaryButtonText = "保存",
-            CloseButtonText = "取消",
+            PrimaryButtonText = "Common_Save".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = this.Content?.XamlRoot
         };
 
@@ -76,7 +77,7 @@ public sealed partial class LoginQrWindow
             if (string.IsNullOrEmpty(cookieStr) || !cookieStr.Contains("="))
             {
                 args.Cancel = true;
-                errorTextBlock.Text = "Cookie无效";
+                errorTextBlock.Text = "LoginQR_InvalidCookie".GetLocalized();
                 errorTextBlock.Visibility = Visibility.Visible;
                 return;
             }
@@ -88,7 +89,7 @@ public sealed partial class LoginQrWindow
                 if (cookies.Count == 0)
                 {
                     args.Cancel = true;
-                    errorTextBlock.Text = "Cookie 格式无效";
+                    errorTextBlock.Text = "LoginQR_InvalidCookieFormat".GetLocalized();
                     errorTextBlock.Visibility = Visibility.Visible;
                     return;
                 }
@@ -101,7 +102,7 @@ public sealed partial class LoginQrWindow
             catch (Exception ex)
             {
                 args.Cancel = true;
-                errorTextBlock.Text = $"保存失败: {ex.Message}";
+                errorTextBlock.Text = string.Format("Common_SaveFailed_Format".GetLocalized(), ex.Message);
                 errorTextBlock.Visibility = Visibility.Visible;
             }
             finally
@@ -254,10 +255,10 @@ public sealed partial class LoginQrWindow
     {
         var dialog = new ContentDialog
         {
-            Title = "警告",
-            Content = "确定清除保存的历史登录数据吗？",
-            PrimaryButtonText = "确定",
-            CloseButtonText = "取消",
+            Title = "Common_Warning".GetLocalized(),
+            Content = "LoginQR_ConfirmClearHistory".GetLocalized(),
+            PrimaryButtonText = "OkBtn".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             XamlRoot = Content?.XamlRoot
         };
 
@@ -267,19 +268,19 @@ public sealed partial class LoginQrWindow
         {
             try
             {
-                UpdateStatus("正在清除数据库缓存...", true);
+                UpdateStatus("LoginQR_ClearingDbCache".GetLocalized(), true);
 
                 var localSettingsService = App.GetService<ILocalSettingsService>();
                 await localSettingsService.RemoveSettingAsync("AccountConfig");
                 await localSettingsService.RemoveSettingAsync("LabAccountConfig");
 
-                UpdateStatus("清理完成", false, false);
+                UpdateStatus("LoginQR_ClearDone".GetLocalized(), false, false);
                 await Task.Delay(1000);
                 UpdateStatus("", false, true);
             }
             catch (Exception ex)
             {
-                UpdateStatus($"清理失败: {ex.Message}", false, false);
+                UpdateStatus(string.Format("LoginQR_ClearFailed_Format".GetLocalized(), ex.Message), false, false);
                 await Task.Delay(2000);
                 UpdateStatus("", false, true);
             }
@@ -299,7 +300,7 @@ public sealed partial class LoginQrWindow
     private void CancelGameLoginPolling()
     {
         _currentSession?.Cancel();
-        UpdateStatus("已强制终止扫码等待", false, false);
+        UpdateStatus("LoginQR_ForceStoppedScan".GetLocalized(), false, false);
     }
 
     private async void EnterGameLoginMode()

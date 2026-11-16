@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using FufuLauncher.Helpers;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -35,7 +36,7 @@ public sealed partial class ServiceOverviewWebWindow : Window
     {
         InitializeComponent();
 
-        Title = "服务状态总览";
+        Title = "ServiceOverview_Title".GetLocalized();
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);

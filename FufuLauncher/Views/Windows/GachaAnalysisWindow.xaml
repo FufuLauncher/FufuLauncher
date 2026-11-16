@@ -555,7 +555,7 @@
                                         <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
                                                         Text="{helpers:Loc Key=GachaAnalysis_IncrementalUpdate}"
                                                         Click="OnMiYouSheIncrementalUpdateClick"
-                                                        ToolTipService.ToolTip="仅获取本地没有的新增祈愿记录，速度快，推荐日常使用">
+                                                        ToolTipService.ToolTip="{helpers:Loc Key=GachaAnalysis_IncrementalTooltip}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE710;" FontSize="14" />
                                             </MenuFlyoutItem.Icon>
@@ -563,7 +563,7 @@
                                         <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}"
                                                         Text="{helpers:Loc Key=GachaAnalysis_FullUpdate}"
                                                         Click="OnMiYouSheFullUpdateClick"
-                                                        ToolTipService.ToolTip="重新拉取全部祈愿记录，耗时较长，可用于修复缺失的数据">
+                                                        ToolTipService.ToolTip="{helpers:Loc Key=GachaAnalysis_FullFetchTooltip}">
                                             <MenuFlyoutItem.Icon>
                                                 <FontIcon Glyph="&#xE72C;" FontSize="14" />
                                             </MenuFlyoutItem.Icon>
@@ -602,25 +602,25 @@
                             </StackPanel>
                             <DropDownButton.Flyout>
                                 <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v4.2"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV42}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v4.2" />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v4.1"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV41}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v4.1" />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v4.0"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV40}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v4.0" />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v3.0"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV30}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v3.0" />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v2.4"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV24}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v2.4" />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v2.3"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV23}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v2.3" />
-                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="Export as v2.2"
+                                    <MenuFlyoutItem FontFamily="{StaticResource AppGlobalFont}" Text="{helpers:Loc Key=GachaAnalysis_ExportAsV22}"
                                                     Command="{x:Bind ViewModel.ExportUigfCommand}"
                                                     CommandParameter="v2.2" />
                                 </MenuFlyout>

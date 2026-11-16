@@ -41,7 +41,7 @@ public sealed class AccountIdentityService
         var deviceIdentity = await GetDeviceAsync(token).ConfigureAwait(false);
         if (string.IsNullOrEmpty(deviceIdentity.DeviceFp))
         {
-            throw new InvalidOperationException("设备指纹不可用（注册失败）");
+            throw new InvalidOperationException("Account_DeviceFpUnavailable".GetLocalized());
         }
 
         var profile = _deviceService.Device;

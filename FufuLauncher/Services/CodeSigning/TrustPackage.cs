@@ -239,11 +239,11 @@ public static class TrustPackageLoader
         try
         {
             manifest = JsonSerializer.Deserialize<TrustManifest>(manifestBytes, ManifestJsonOptions)
-                       ?? throw new TrustPackageException("manifest is empty");
+                       ?? throw new TrustPackageException("ModTrust_Pkg_ManifestEmpty".GetLocalized());
         }
         catch (JsonException ex)
         {
-            throw new TrustPackageException($"manifest is not valid JSON: {ex.Message}");
+            throw new TrustPackageException(string.Format("ModTrust_Pkg_ManifestInvalidJson_Format".GetLocalized(), ex.Message));
         }
 
         var root = new X509Certificate2(rootPath);
@@ -257,26 +257,26 @@ public static class TrustPackageLoader
 
             if (!string.Equals(manifest.RootThumbprintSha256, rootThumbprint, StringComparison.OrdinalIgnoreCase))
             {
-                throw new TrustPackageException("root certificate thumbprint does not match the manifest");
+                throw new TrustPackageException("ModTrust_Pkg_RootThumbprintMismatch".GetLocalized());
             }
 
             if (!string.Equals(manifest.IssuerThumbprintSha256, issuerThumbprint, StringComparison.OrdinalIgnoreCase))
             {
-                throw new TrustPackageException("issuing certificate thumbprint does not match the manifest");
+                throw new TrustPackageException("ModTrust_Pkg_IssuingThumbprintMismatch".GetLocalized());
             }
 
             if (root.Subject != root.Issuer)
             {
-                throw new TrustPackageException("root certificate is not self-signed");
+                throw new TrustPackageException("ModTrust_Pkg_RootNotSelfSigned".GetLocalized());
             }
 
             if (root.HasPrivateKey)
             {
                 throw new TrustPackageException(
-                    "root certificate in the trust package contains a private key, rejected");
+                    "ModTrust_Pkg_RootHasPrivateKey".GetLocalized());
             }
 
-            var signatureReason = "manifest signer certificate not provided";
+            var signatureReason = "ModTrust_Pkg_NoSignerCert".GetLocalized();
             var signatureOk = false;
             if (signer != null)
             {
@@ -296,7 +296,7 @@ public static class TrustPackageLoader
                     {
                         signatureOk = false;
                         signatureReason =
-                            "manifest signer certificate does not chain to the root of this trust package";
+                            "ModTrust_Pkg_SignerNotChained".GetLocalized();
                     }
                     else if (!string.IsNullOrWhiteSpace(manifest.ManifestSignerThumbprintSha256) &&
                              !string.Equals(manifest.ManifestSignerThumbprintSha256,
@@ -304,14 +304,14 @@ public static class TrustPackageLoader
                                  StringComparison.OrdinalIgnoreCase))
                     {
                         signatureOk = false;
-                        signatureReason = "manifest signer certificate thumbprint does not match the manifest";
+                        signatureReason = "ModTrust_Pkg_SignerThumbprintMismatch".GetLocalized();
                     }
                 }
             }
 
             if (!signatureOk)
             {
-                throw new TrustPackageException($"manifest signature invalid: {signatureReason}");
+                throw new TrustPackageException(string.Format("ModTrust_Pkg_ManifestSigInvalid_Format".GetLocalized(), signatureReason));
             }
 
             var matchesPin = string.IsNullOrWhiteSpace(pinnedRootThumbprintSha256) ||

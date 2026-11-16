@@ -26,12 +26,12 @@ internal static class PassportHttpUtil
         try
         {
             return JsonSerializer.Deserialize<PassportResponse<TData>>(json)
-                   ?? CreateFailure<TData>("响应解析失败");
+                   ?? CreateFailure<TData>("Passport_ParseResponseFailed".GetLocalized());
         }
         catch (JsonException ex)
         {
             DebugLog.Info("PassportHttpUtil", $"[Passport] Failed to parse response: {ex.Message}");
-            return CreateFailure<TData>($"响应解析失败: {ex.Message}");
+            return CreateFailure<TData>(string.Format("Passport_ParseResponseFailedDetail_Format".GetLocalized(), ex.Message));
         }
     }
 
@@ -40,12 +40,12 @@ internal static class PassportHttpUtil
         string json = await response.Content.ReadAsStringAsync(token).ConfigureAwait(false);
         try
         {
-            return JsonSerializer.Deserialize<PassportResponse>(json) ?? CreateFailure("响应解析失败");
+            return JsonSerializer.Deserialize<PassportResponse>(json) ?? CreateFailure("Passport_ParseResponseFailed".GetLocalized());
         }
         catch (JsonException ex)
         {
             DebugLog.Info("PassportHttpUtil", $"[Passport] Failed to parse response: {ex.Message}");
-            return CreateFailure($"响应解析失败: {ex.Message}");
+            return CreateFailure(string.Format("Passport_ParseResponseFailedDetail_Format".GetLocalized(), ex.Message));
         }
     }
 

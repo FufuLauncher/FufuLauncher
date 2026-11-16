@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 
 namespace FufuLauncher.Services;
@@ -33,7 +34,7 @@ public sealed class GameRoleScope
     {
         if (!GameRoleSelection.Filter(account.GameRoles ?? [], account.ServerType)
                 .Any(r => r.game_uid == role.game_uid && r.region == role.region))
-            throw new InvalidOperationException("所选角色未绑定到当前社区账号，请刷新角色列表。");
+            throw new InvalidOperationException("Account_RoleNotBoundRefresh".GetLocalized());
         _accountId = account.Id;
         _uid = role.game_uid;
         _region = role.region;

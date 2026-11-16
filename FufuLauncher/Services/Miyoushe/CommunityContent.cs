@@ -3,6 +3,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models.Miyoushe;
 using HtmlAgilityPack;
 
@@ -257,8 +258,8 @@ public static partial class CommunityContent
             body.Append("<span class=\"muted\">" + Encode(insert.Text("backup_text") is { Length: > 0 } backup
                 ? backup
                 : insert.Get("vote").ValueKind != JsonValueKind.Undefined
-                    ? "[投票：请在原帖参与]"
-                    : "[互动内容：请在原帖查看]") + "</span>");
+                    ? "Miyoushe_VoteInteractiveFallback".GetLocalized()
+                    : "Miyoushe_InteractiveFallback".GetLocalized()) + "</span>");
     }
 
     private static void AddImage(StringBuilder body, string url)

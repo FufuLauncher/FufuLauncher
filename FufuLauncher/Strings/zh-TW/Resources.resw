@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -56,10 +55,10 @@
     <value>幀數顯示插件雜湊不符，可能已被竄改或損壞，請重新安裝啟動器</value>
   </data>
   <data name="Fps_Missing_Content" xml:space="preserve">
-    <value>未找到FPS插件DLL檔案，插件可能未安裝、被誤刪或被防毒軟體攔截。請點擊功能選單中的「修復FPS顯示插件」後重試。</value>
+    <value>未找到 FPS 插件 DLL 檔案，插件可能未安裝、被誤刪或被防毒軟體攔截。請點擊功能選單中的「修復 FPS 顯示插件」後重試。</value>
   </data>
   <data name="Fps_Missing_Title" xml:space="preserve">
-    <value>FPS插件缺失</value>
+    <value>FPS 插件缺失</value>
   </data>
   <data name="Fps_Repair_Fail_Title" xml:space="preserve">
     <value>修復失敗</value>
@@ -94,8 +93,8 @@
   <data name="PR_Description" xml:space="preserve">
     <value>本專案目前由個人開發者（CodeCubist）獨立維護
 我們堅持並積極落實以玩家痛點為核心的開發方向，開放透明且高效率地推動更新
-提交 Pull Requests 是讓具備程式開發能力的用戶協助推進開發進度、最佳化結構及分擔專案維護壓力的核心途徑
-如可提供協助，請透過下方按鈕前往程式碼倉庫提交你的貢獻</value>
+提交 Pull Requests 是讓具備程式開發能力的使用者協助推進開發進度、最佳化結構及分擔專案維護壓力的核心途徑
+如可提供協助，請透過下方按鈕前往程式碼倉庫提交您的貢獻</value>
   </data>
   <data name="PR_GitHubButton" xml:space="preserve">
     <value>前往 GitHub 倉庫提交 Pull Request</value>
@@ -157,7 +156,7 @@
     <value>未找到檔案，請確認啟動器檔案完整</value>
   </data>
   <data name="Plugin_MainMissing_Content" xml:space="preserve">
-    <value>未找到主插件DLL檔案，插件可能未安裝、被誤刪或被防毒軟體攔截。請重新下載插件，或將啟動器目錄加入防毒軟體白名單後再試。</value>
+    <value>未找到主插件 DLL 檔案，插件可能未安裝、被誤刪或被防毒軟體攔截。請重新下載插件，或將啟動器目錄加入防毒軟體白名單後再試。</value>
   </data>
   <data name="Plugin_MainMissing_Title" xml:space="preserve">
     <value>主插件缺失</value>
@@ -172,7 +171,7 @@
     <value>確認刪除</value>
   </data>
   <data name="Preset_Delete_Confirm_Format" xml:space="preserve">
-    <value>確定要刪除預設 "{0}" 嗎？此操作無法恢復！</value>
+    <value>確定要刪除預設 "{0}" 嗎？此操作無法復原！</value>
   </data>
   <data name="Preset_Locked_Content_Format" xml:space="preserve">
     <value>鎖定原因：{0}
@@ -189,7 +188,7 @@
     <value>確認重設</value>
   </data>
   <data name="Preset_ResetAll_Content" xml:space="preserve">
-    <value>確定要移除目前插件的所有預設並重新下載恢復預設嗎？此操作無法恢復！</value>
+    <value>確定要移除目前插件的所有預設並重新下載恢復預設嗎？此操作無法復原！</value>
   </data>
   <data name="Preset_ResetAll_Title" xml:space="preserve">
     <value>重設全部預設</value>
@@ -405,7 +404,7 @@
     <value>便箋卡片顯示項目</value>
   </data>
   <data name="NotesItemsCaption" xml:space="preserve">
-    <value>選擇要在便箋卡片中顯示的項目，最多選擇3個！</value>
+    <value>選擇要在便箋卡片中顯示的項目，最多選擇 3 個！</value>
   </data>
   <data name="NotesWarningTitle" xml:space="preserve">
     <value>注意</value>
@@ -567,13 +566,13 @@
     <value>快速預設</value>
   </data>
   <data name="HdrTitle" xml:space="preserve">
-    <value>HDR亮度設定</value>
+    <value>HDR 亮度設定</value>
   </data>
   <data name="HdrCaption" xml:space="preserve">
-    <value>調整遊戲內的 HDR峰值亮度與 UI 亮度</value>
+    <value>調整遊戲內的 HDR 峰值亮度與 UI 亮度</value>
   </data>
   <data name="OpenHdrSettings" xml:space="preserve">
-    <value>開啟 HDR設定</value>
+    <value>開啟 HDR 設定</value>
   </data>
   <data name="TargetMonitorTitle" xml:space="preserve">
     <value>目標顯示器</value>
@@ -624,7 +623,7 @@
     <value>獨立注入</value>
   </data>
   <data name="InjectionCaption" xml:space="preserve">
-    <value>內建注入透過啟動器自身引擎載入插件；獨立注入使用獨立程式啟動遊戲並載入插件，適用於內建模式不相容的情況。</value>
+    <value>內建注入透過啟動器自身引擎載入插件。獨立注入使用獨立程式啟動遊戲並載入插件，適用於內建模式不相容的情況。</value>
   </data>
   <data name="RedeemReminderTitle" xml:space="preserve">
     <value>兌換碼提醒</value>
@@ -759,7 +758,7 @@
     <value>遊戲簽到</value>
   </data>
   <data name="GameCheckinCaption" xml:space="preserve">
-    <value>領取米遊社每日簽到獎勵（原石、摩拉等）</value>
+    <value>領取米遊社每日簽到獎勵（原石、摩拉等）。可在下方選擇同時簽到的其他遊戲</value>
   </data>
   <data name="CommunityCheckin" xml:space="preserve">
     <value>社群簽到</value>
@@ -792,7 +791,7 @@
     <value>批次簽到</value>
   </data>
   <data name="BatchCheckinCaption" xml:space="preserve">
-    <value>開啟此開關則可為所有勾選的帳號執行指定的簽到任務，否則僅為目前帳號執行</value>
+    <value>依清單順序為勾選的帳號執行各自的簽到任務。點擊帳號可單獨設定上方選項，關閉後僅為目前帳號執行</value>
   </data>
   <data name="AccountListTitle" xml:space="preserve">
     <value>帳號清單</value>
@@ -804,7 +803,7 @@
     <value>遇到驗證碼？</value>
   </data>
   <data name="CaptchaTooltip" xml:space="preserve">
-    <value>遊戲簽到和社群簽到（機率較大）過程中可能會遇到驗證碼，需要設定真實裝置資訊降低風險控管頻率，或使用獨立部署版本設定打碼服務。</value>
+    <value>遊戲簽到與社群簽到（機率較高）過程中可能會遇到驗證碼，需要設定真實裝置資訊降低風險控管頻率，或使用獨立部署版本設定驗證碼辨識服務。</value>
   </data>
   <data name="SelfHostedVersion" xml:space="preserve">
     <value>獨立部署版本</value>
@@ -819,13 +818,13 @@
     <value>BetterGI 啟動延遲 (秒)</value>
   </data>
   <data name="BetterGIDelayCaption" xml:space="preserve">
-    <value>設為0可關閉延遲；延遲只影響 BetterGI</value>
+    <value>設為 0 可關閉延遲。延遲只影響 BetterGI</value>
   </data>
   <data name="BetterGICloseOnExit" xml:space="preserve">
     <value>退出遊戲時關閉 BetterGI</value>
   </data>
   <data name="BetterGICloseOnExitCaption" xml:space="preserve">
-    <value>點擊退出遊戲，自動關閉 BetterGI</value>
+    <value>退出遊戲時自動關閉 BetterGI</value>
   </data>
   <data name="BrowserCacheTitle" xml:space="preserve">
     <value>瀏覽器快取清理</value>
@@ -930,7 +929,7 @@
     <value>啟動遊戲時載入插件</value>
   </data>
   <data name="GetPluginsLabel" xml:space="preserve">
-    <value>取得插件(Get Plugins)</value>
+    <value>取得插件 (Get Plugins)</value>
   </data>
   <data name="FreeCamHelpLabel" xml:space="preserve">
     <value>自由視角怎麼用</value>
@@ -1020,19 +1019,19 @@
     <value>下載插件</value>
   </data>
   <data name="RepairFpsPluginBtn" xml:space="preserve">
-    <value>修復FPS顯示插件</value>
+    <value>修復 FPS 顯示插件</value>
   </data>
   <data name="MainPluginEnabledLabel" xml:space="preserve">
     <value>主插件啟用</value>
   </data>
   <data name="FpsPluginEnabledLabel" xml:space="preserve">
-    <value>FPS插件啟用</value>
+    <value>FPS 插件啟用</value>
   </data>
   <data name="AvatarPluginEnabledLabel" xml:space="preserve">
     <value>頭像插件啟用</value>
   </data>
   <data name="KeyInputModeLabel" xml:space="preserve">
-    <value>按鍵輸入模式(列表)</value>
+    <value>按鍵輸入模式 (清單)</value>
   </data>
   <data name="ListLabel" xml:space="preserve">
     <value>列表</value>
@@ -1050,7 +1049,7 @@
     <value>有想法或遇到問題？點此回饋</value>
   </data>
   <data name="SubmitPRBtn" xml:space="preserve">
-    <value>提交PR</value>
+    <value>提交 PR</value>
   </data>
   <data name="EnableInjectionParenLabel" xml:space="preserve">
     <value>啟用注入</value>
@@ -1185,7 +1184,7 @@
     <value>啟用傷害跳字色彩修改</value>
   </data>
   <data name="Plugin_RainbowDamageMode" xml:space="preserve">
-    <value>0動態循環 1固定色彩</value>
+    <value>0 動態循環 1 固定色彩</value>
   </data>
   <data name="Plugin_RainbowFixedColorIdx" xml:space="preserve">
     <value>固定色彩索引 (0至7)</value>
@@ -1278,7 +1277,7 @@
     <value>切換伺服器</value>
   </data>
   <data name="ServerSwitchCaption" xml:space="preserve">
-    <value>官方服 / B服 / 國際服互轉</value>
+    <value>官方服 / Bilibili 服 / 國際服互轉</value>
   </data>
   <data name="MapToolsTitle" xml:space="preserve">
     <value>地圖工具</value>
@@ -1332,8 +1331,8 @@
   <data name="Msg_ChooseShortcutAction" xml:space="preserve">
     <value>請選擇您想要執行的操作：
 
-你需要建立桌面捷徑：直接在桌面建立圖示（將以系統管理員權限執行）？
-還是複製啟動命令：取得完整命令列，可用於 Steam 或指令碼？</value>
+建立桌面捷徑：直接在桌面建立圖示（將以系統管理員權限執行）；
+或複製啟動命令：取得完整命令列，可用於 Steam 或指令碼。</value>
   </data>
   <data name="Msg_ImportedLaunchParams_Format" xml:space="preserve">
     <value>已匯入啟動參數：{0}</value>
@@ -1360,7 +1359,7 @@
     <value>捷徑已建立</value>
   </data>
   <data name="Msg_ShortcutCreated" xml:space="preserve">
-    <value>已建立桌面捷徑，預設將以系統管理員權限執行。請檢查你的電腦桌面</value>
+    <value>已建立桌面捷徑，預設將以系統管理員權限執行。請檢查您的桌面</value>
   </data>
   <data name="Title_LaunchCommand" xml:space="preserve">
     <value>啟動命令</value>
@@ -1405,7 +1404,7 @@
 請檢查您的遊戲路徑設定是否正確指向了遊戲安裝目錄</value>
   </data>
   <data name="Msg_GlobalClientNoSwitchToBili" xml:space="preserve">
-    <value>目前為國際服客戶端，不允許切換到B服，請透過伺服器轉換來切換到中國伺服器！</value>
+    <value>目前為國際服客戶端，不允許切換至 B 服，請透過伺服器轉換切換至中國大陸伺服器！</value>
   </data>
   <data name="Btn_SwitchToOfficialServer" xml:space="preserve">
     <value>切換到官方伺服器</value>
@@ -1414,7 +1413,7 @@
     <value>請選擇你要切換到的伺服器：</value>
   </data>
   <data name="Btn_SwitchToBiliServer" xml:space="preserve">
-    <value>切換到B服</value>
+    <value>切換到 B 服</value>
   </data>
   <data name="Btn_ConvertBetweenGlobalAndCN" xml:space="preserve">
     <value>國際服和陸服互相轉換</value>
@@ -1527,7 +1526,7 @@
     <value>該帳號已經儲存過了，無須重複儲存。</value>
   </data>
   <data name="Placeholder_EnterAccountName" xml:space="preserve">
-    <value>請輸入帳號名稱 (例如: 大號 / 小號)</value>
+    <value>請輸入帳號名稱（例如：本尊 / 分身）</value>
   </data>
   <data name="Title_SaveNewAccount" xml:space="preserve">
     <value>儲存新帳號</value>
@@ -1610,7 +1609,7 @@
     <value>全部清除</value>
   </data>
   <data name="NetDisconnected" xml:space="preserve">
-    <value>網路連線已斷開，請檢查你的網路設定</value>
+    <value>網路連線已中斷，請檢查您的網路設定</value>
   </data>
   <data name="NetProxyWarning" xml:space="preserve">
     <value>正在使用代理網路連線，請注意你的流量消耗</value>
@@ -1810,7 +1809,7 @@
     <value>官服</value>
   </data>
   <data name="Home_BilibiliServer" xml:space="preserve">
-    <value>B服</value>
+    <value>Bilibili 服</value>
   </data>
   <data name="Home_Deployed" xml:space="preserve">
     <value>已部署</value>
@@ -1921,13 +1920,13 @@
     <value>儲存設定</value>
   </data>
   <data name="OtherPage_KeyRecorderEnabled" xml:space="preserve">
-    <value>按鍵錄製設定開啟，全域按鍵事件已註冊到 {0}</value>
+    <value>按鍵錄製設定開啟，全域按鍵事件已註冊至 {0}</value>
   </data>
   <data name="OtherPage_KeyRecorderDisabled" xml:space="preserve">
-    <value>按鍵錄製設定關閉，全域按鍵事件已註銷</value>
+    <value>按鍵錄製設定關閉，全域按鍵事件已取消註冊</value>
   </data>
   <data name="OtherPage_KeyEventError" xml:space="preserve">
-    <value>註冊／註銷按鍵事件失敗</value>
+    <value>註冊／取消註冊按鍵事件失敗</value>
   </data>
   <data name="OtherPage_UnloadCleanupError" xml:space="preserve">
     <value>頁面卸載清理按鍵事件失敗</value>
@@ -1960,7 +1959,7 @@
     <value>每日簽到</value>
   </data>
   <data name="Account_SyncAvatarPendant" xml:space="preserve">
-    <value>同步米遊社頭像掛件</value>
+    <value>同步米遊社頭像框</value>
   </data>
   <data name="Account_RefreshInfo" xml:space="preserve">
     <value>重新整理資訊</value>
@@ -2029,7 +2028,7 @@
     <value>近 {0} 天暫無遊戲記錄</value>
   </data>
   <data name="Account_DeleteAccountConfirm_Format" xml:space="preserve">
-    <value>刪除帳號 "{0}"？此操作將刪除該帳號的所有相關資料，包含憑證、祈願記錄和雲端遊戲憑證，且無法恢復。</value>
+    <value>刪除帳號 "{0}"？此操作將刪除該帳號的所有相關資料，包含憑證、祈願記錄與雲端遊戲憑證，且無法復原。</value>
   </data>
   <data name="Account_DeleteComplete" xml:space="preserve">
     <value>帳號 "{0}" 刪除完成</value>
@@ -2065,31 +2064,31 @@
     <value>近 30 天暫無遊戲記錄</value>
   </data>
   <data name="Account_CopyUID" xml:space="preserve">
-    <value>複製 UID</value>
+    <value>複製UID</value>
   </data>
   <data name="Account_DeleteCurrent" xml:space="preserve">
     <value>刪除目前帳號</value>
   </data>
   <data name="Account_DeleteCurrentConfirm_Format" xml:space="preserve">
-    <value>確定要刪除目前帳號 {0} ({1}) 嗎？此操作將刪除該帳號的所有相關資料，且無法恢復。</value>
+    <value>確定要刪除目前帳號 {0} ({1}) 嗎？此操作將刪除該帳號的所有相關資料，且無法復原。</value>
   </data>
   <data name="LoginQR_Title" xml:space="preserve">
     <value>掃碼登入</value>
   </data>
   <data name="LoginQR_MiyousheQR" xml:space="preserve">
-    <value>米遊社APP掃碼登入</value>
+    <value>米遊社 App 掃碼登入</value>
   </data>
   <data name="LoginQR_WebPassport" xml:space="preserve">
     <value>網頁通行證登入</value>
   </data>
   <data name="LoginQR_HoYoLABWeb" xml:space="preserve">
-    <value>HoYoLAB網頁登入</value>
+    <value>HoYoLAB 網頁登入</value>
   </data>
   <data name="LoginQR_GameAppId" xml:space="preserve">
-    <value>遊戲App ID:</value>
+    <value>遊戲 App ID:</value>
   </data>
   <data name="LoginQR_EnterAppId" xml:space="preserve">
-    <value>輸入AppID</value>
+    <value>輸入 App ID</value>
   </data>
   <data name="LoginQR_ConfirmGenerate" xml:space="preserve">
     <value>確認產生</value>
@@ -2098,16 +2097,16 @@
     <value>重新整理 QR Code</value>
   </data>
   <data name="LoginQR_AutoRefreshHint" xml:space="preserve">
-    <value>二維碼每60秒自動重新整理一次</value>
+    <value>QR Code 每 60 秒自動重新整理一次</value>
   </data>
   <data name="LoginQR_AutoRefreshed" xml:space="preserve">
-    <value>二維碼已自動重新整理，請重新掃描</value>
+    <value>QR Code 已自動重新整理，請重新掃描</value>
   </data>
   <data name="LoginQR_AutoRefreshPaused" xml:space="preserve">
     <value>自動重新整理已暫停，請點擊「重新整理 QR Code」</value>
   </data>
   <data name="LoginQR_WebLoginWarning" xml:space="preserve">
-    <value>注意：網頁通行證登入無法取得 Stoken，部分功能會無法使用</value>
+    <value>注意：網頁通行證登入無法取得 SToken，部分功能會無法使用</value>
   </data>
   <data name="LoginQR_ManualCookie" xml:space="preserve">
     <value>手動輸入 Cookie</value>
@@ -2122,7 +2121,7 @@
     <value>資料分析</value>
   </data>
   <data name="Panel_DataAnalysisDesc" xml:space="preserve">
-    <value>記錄統計、完成進度與長期資料沉澱</value>
+    <value>紀錄統計、完成進度與長期資料累積</value>
   </data>
   <data name="Panel_TravelerProfile" xml:space="preserve">
     <value>旅行者檔案</value>
@@ -2200,7 +2199,7 @@
     <value>搜尋標題、檔案名稱或內容...</value>
   </data>
   <data name="AboutPage_GetBuildFromActions" xml:space="preserve">
-    <value>從 Github Actions 取得組建</value>
+    <value>從 GitHub Actions 取得組建</value>
   </data>
   <data name="AboutPage_Contributors" xml:space="preserve">
     <value>貢獻者名單</value>
@@ -2233,10 +2232,10 @@
     <value>付款即視為知曉並同意：贊助如無特殊原因概不退款</value>
   </data>
   <data name="StarPrompt_Support" xml:space="preserve">
-    <value>支援</value>
+    <value>支持我們</value>
   </data>
   <data name="StarPrompt_Message" xml:space="preserve">
-    <value>如果您覺得FufuLauncher幫助到了您，不妨前往 GitHub 為專案點亮一個免費的 Star，您的支持是開發的最大動力</value>
+    <value>如果您覺得 FufuLauncher 對您有所幫助，不妨前往 GitHub 為專案點亮一個免費的 Star，您的支持是開發的最大動力</value>
   </data>
   <data name="StarPrompt_GoToGitHub" xml:space="preserve">
     <value>點擊前往 GitHub</value>
@@ -2254,7 +2253,7 @@
     <value>立即開始取得</value>
   </data>
   <data name="AdvancedServerSwitch_Title" xml:space="preserve">
-    <value>伺服器的轉換</value>
+    <value>伺服器轉換</value>
   </data>
   <data name="AdvancedServerSwitch_Warning" xml:space="preserve">
     <value>注意，遊戲啟動時切換無效！</value>
@@ -2416,10 +2415,10 @@
     <value>影片控制快捷鍵 (JS KeyCode)</value>
   </data>
   <data name="BrowserWindow_RewindKey" xml:space="preserve">
-    <value>後退鍵</value>
+    <value>倒轉鍵</value>
   </data>
   <data name="BrowserWindow_ForwardKey" xml:space="preserve">
-    <value>快進鍵</value>
+    <value>快轉鍵</value>
   </data>
   <data name="BrowserWindow_HotkeyHint" xml:space="preserve">
     <value>提示: 常用鍵為 ArrowLeft, ArrowRight, KeyA, KeyD</value>
@@ -2518,7 +2517,7 @@
     <value>匯出 UIGF</value>
   </data>
   <data name="GachaDialog_ExportUigfTooltip" xml:space="preserve">
-    <value>匯出標準 UIGF Json 格式到桌面</value>
+    <value>匯出標準 UIGF JSON 格式至桌面</value>
   </data>
   <data name="GachaDialog_TotalInvested" xml:space="preserve">
     <value>共投入</value>
@@ -2527,7 +2526,7 @@
     <value>抽</value>
   </data>
   <data name="GachaDialog_CurrentPity" xml:space="preserve">
-    <value>目前墊底</value>
+    <value>目前墊數</value>
   </data>
   <data name="GachaDialog_FiveStarCount" xml:space="preserve">
     <value>五星數量</value>
@@ -2542,7 +2541,7 @@
     <value>效能異常提示</value>
   </data>
   <data name="HighCpuUsage_Detected" xml:space="preserve">
-    <value>偵測到長期異常的資源佔用</value>
+    <value>偵測到長時間異常的資源佔用</value>
   </data>
   <data name="HighCpuUsage_Description" xml:space="preserve">
     <value>在未偵測到 OBS 正在執行的情況下，芙芙啟動器的 CPU 使用率已持續高於 30% 達 5 分鐘。這通常不是正常現象。</value>
@@ -2551,7 +2550,7 @@
     <value>建議操作</value>
   </data>
   <data name="HighCpuUsage_SuggestionText" xml:space="preserve">
-    <value>請優先回報問題以幫助定位；如果目前版本持續異常，建議退出使用並更新到最新版本。</value>
+    <value>請優先回報問題以幫助定位。如果目前版本持續異常，建議退出使用並更新到最新版本。</value>
   </data>
   <data name="HighCpuUsage_Dismiss" xml:space="preserve">
     <value>稍後處理</value>
@@ -2587,7 +2586,7 @@
     <value>安全與網路</value>
   </data>
   <data name="Diagnostics_WindowsSecurity" xml:space="preserve">
-    <value>Windows 安全中心</value>
+    <value>Windows 安全性</value>
   </data>
   <data name="Diagnostics_DiskSpace" xml:space="preserve">
     <value>系統碟剩餘空間</value>
@@ -2759,13 +2758,13 @@
     <value>活動時間軸</value>
   </data>
   <data name="DataPage_DataProvidedBy" xml:space="preserve">
-    <value>資料由提瓦特小助手提供 活動時間軸由Paimon.moe提供</value>
+    <value>資料由提瓦特小助手提供，活動時間軸由 Paimon.moe 提供</value>
   </data>
   <data name="HDR_SaveAndApply" xml:space="preserve">
     <value>儲存並生效</value>
   </data>
   <data name="HDR_BrightnessConfig" xml:space="preserve">
-    <value>HDR亮度設定</value>
+    <value>HDR 亮度設定</value>
   </data>
   <data name="HDR_NotSupported" xml:space="preserve">
     <value>不支援 HDR</value>
@@ -2774,22 +2773,22 @@
     <value>目前顯示器回報不支援 HDR。</value>
   </data>
   <data name="HDR_NotEnabled" xml:space="preserve">
-    <value>HDR未開啟</value>
+    <value>HDR 未開啟</value>
   </data>
   <data name="HDR_NotEnabledMsg" xml:space="preserve">
-    <value>Windows HDR模式未開啟，自動調整可能不準確。</value>
+    <value>Windows HDR 模式未開啟，自動調整可能不準確。</value>
   </data>
   <data name="HDR_DisplayInfo" xml:space="preserve">
     <value>顯示器資訊</value>
   </data>
   <data name="HDR_SwitchSetting" xml:space="preserve">
-    <value>HDR開關設定 (每次啟動時強制套用)</value>
+    <value>HDR 開關設定（每次啟動時強制套用）</value>
   </data>
   <data name="HDR_OffContent" xml:space="preserve">
-    <value>關閉 HDR(登錄檔值為 0)</value>
+    <value>關閉 HDR（登錄檔值為 0）</value>
   </data>
   <data name="HDR_OnContent" xml:space="preserve">
-    <value>開啟 HDR(登錄檔值為 1)</value>
+    <value>開啟 HDR（登錄檔值為 1）</value>
   </data>
   <data name="HDR_RegistryNote" xml:space="preserve">
     <value>注意：儲存後會立即修改登錄檔，且下次啟動遊戲時會自動重新套用此設定。</value>
@@ -2930,7 +2929,7 @@
     <value>請滾動閱讀完整條款後勾選同意</value>
   </data>
   <data name="AgreementPage_LoadFailed" xml:space="preserve">
-    <value>使用者協議載入失敗，請檢查網路連線後重試</value>
+    <value>使用者條款載入失敗，請檢查網路連線後重試</value>
   </data>
   <data name="AgreementPage_Retry" xml:space="preserve">
     <value>重新載入</value>
@@ -2981,7 +2980,7 @@
     <value>角色資訊查詢</value>
   </data>
   <data name="PlayerInfo_SearchUid" xml:space="preserve">
-    <value>輸入 UID 查詢...</value>
+    <value>輸入UID查詢...</value>
   </data>
   <data name="PlayerInfo_Query" xml:space="preserve">
     <value>查詢</value>
@@ -3230,7 +3229,7 @@
   </data>
   <data name="GachaAnalysis_UigfDesc" xml:space="preserve">
     <value>從標準 UIGF 格式
-JSON檔案匯入記錄
+JSON 檔案匯入記錄
 UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="GachaAnalysis_IncrementalUpdate" xml:space="preserve">
@@ -3611,7 +3610,7 @@ UIGF v4.x/3.0/2.x</value>
 {0}</value>
   </data>
   <data name="LaunchErr_MultipleExeFound" xml:space="preserve">
-    <value>在目前遊戲目錄中同時偵測到了多個可執行程式，啟動器無法確定該啟動哪一個，請清理多餘的客戶端檔案，或者在設定中自訂啟動名稱</value>
+    <value>在目前遊戲目錄中同時偵測到多個可執行檔，啟動器無法確定該啟動哪一個，請清理多餘的客戶端檔案，或在設定中自訂啟動名稱</value>
   </data>
   <data name="LaunchErr_CannotLoadConfig" xml:space="preserve">
     <value>無法載入遊戲設定檔</value>
@@ -3695,7 +3694,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>取得任務狀態失敗，請檢查 cookie</value>
   </data>
   <data name="CheckinCommunity_TodayDone" xml:space="preserve">
-    <value>今日已完成 ({0}米遊幣)</value>
+    <value>今日已完成 ({0} 米遊幣)</value>
   </data>
   <data name="CheckinCommunity_SignDoneSkipped" xml:space="preserve">
     <value>社群簽到已完成，跳過</value>
@@ -3866,7 +3865,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>社群簽到</value>
   </data>
   <data name="Checkin_OSAccountSkipped" xml:space="preserve">
-    <value>OS 帳號跳過</value>
+    <value>國際服 (OS) 帳號已略過</value>
   </data>
   <data name="Checkin_NoCloudCredential" xml:space="preserve">
     <value>未設定雲端遊戲憑證</value>
@@ -3911,7 +3910,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>正在遊戲簽到...</value>
   </data>
   <data name="Checkin_OSAccountSkippedCommunity" xml:space="preserve">
-    <value>OS 帳號跳過社群簽到</value>
+    <value>國際服 (OS) 帳號已略過社群簽到</value>
   </data>
   <data name="Checkin_CommunityCheckinProgress" xml:space="preserve">
     <value>正在社群簽到...</value>
@@ -4046,13 +4045,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>未連線</value>
   </data>
   <data name="Diagnostics_Domestic" xml:space="preserve">
-    <value>國內</value>
+    <value>中國大陸</value>
   </data>
   <data name="Diagnostics_Overseas" xml:space="preserve">
     <value>海外</value>
   </data>
   <data name="Diagnostics_DomesticSystem" xml:space="preserve">
-    <value>國內 (依系統設定)</value>
+    <value>中國大陸 (依系統設定)</value>
   </data>
   <data name="Diagnostics_OverseasSystem" xml:space="preserve">
     <value>海外 (依系統設定)</value>
@@ -4088,10 +4087,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>網路未連線，請檢查系統網路設定</value>
   </data>
   <data name="Diagnostics_SuggestDomesticSlow" xml:space="preserve">
-    <value>目前處於國內網路環境，存取伺服器可能存在緩慢情況</value>
+    <value>目前處於中國大陸網路環境，連線伺服器可能較為緩慢</value>
   </data>
   <data name="Diagnostics_SuggestSecurityCenter" xml:space="preserve">
-    <value>Windows 安全中心已開啟，這可能會導致插件注入失敗，建議關閉 Windows 安全中心</value>
+    <value>Windows 安全性已開啟，這可能會導致插件注入失敗，建議關閉 Windows 安全性</value>
   </data>
   <data name="Diagnostics_SuggestLowMemory" xml:space="preserve">
     <value>目前實體記憶體為 {0}GB，不符合最低 12GB 的要求</value>
@@ -4256,7 +4255,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>[檔案處理異常] {0}: {1}</value>
   </data>
   <data name="Download_ManifestMd5Retry" xml:space="preserve">
-    <value>Manifest MD5驗證失敗，重試中...</value>
+    <value>Manifest MD5 驗證失敗，重試中...</value>
   </data>
   <data name="Download_CannotConnectApi" xml:space="preserve">
     <value>無法連線到米哈遊 API</value>
@@ -4290,6 +4289,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="DailyNote_FetchFailed" xml:space="preserve">
     <value>取得便箋失敗: {0} (retcode={1})</value>
+  </data>
+  <data name="DailyNote_ReloginRequired" xml:space="preserve">
+    <value>請重新登入</value>
   </data>
   <data name="Geetest_NoFingerprintService" xml:space="preserve">
     <value>無法取得裝置指紋服務</value>
@@ -4355,18 +4357,18 @@ UIGF v4.x/3.0/2.x</value>
     <value>注入處理程序發生異常: {0}</value>
   </data>
   <data name="Program_ErrorTitle" xml:space="preserve">
-    <value>FufuLauncher錯誤</value>
+    <value>FufuLauncher 錯誤</value>
   </data>
   <data name="IniFile_AccessDenied" xml:space="preserve">
     <value>拒絕存取，請檢查檔案或資料夾是否被設定為「唯讀」，或者嘗試以系統管理員身分重新執行啟動器</value>
   </data>
   <data name="IniFile_WriteFailed" xml:space="preserve">
     <value>寫入失敗：檔案可能正被遊戲或其他程式佔用
-回饋: {0}</value>
+詳細資訊: {0}</value>
   </data>
   <data name="IniFile_WriteError" xml:space="preserve">
     <value>寫入設定時發生錯誤
-回饋: {0}</value>
+詳細資訊: {0}</value>
   </data>
   <data name="SectionWindowBehavior" xml:space="preserve">
     <value>視窗與導覽</value>
@@ -4399,19 +4401,19 @@ UIGF v4.x/3.0/2.x</value>
     <value>透過第三方 CDN 節點加速下載更新。關閉後將直連 GitHub 下載</value>
   </data>
   <data name="PluginStoreSubtitle" xml:space="preserve">
-    <value>探索並安裝社群外掛，擴充啟動器的功能</value>
+    <value>探索並安裝社群插件，擴充啟動器的功能</value>
   </data>
   <data name="PluginStorePluginsSection" xml:space="preserve">
-    <value>外掛清單</value>
+    <value>插件清單</value>
   </data>
   <data name="PluginStoreMoreActions" xml:space="preserve">
     <value>更多操作</value>
   </data>
   <data name="PluginStorePrivatePlugin" xml:space="preserve">
-    <value>私密外掛</value>
+    <value>私密插件</value>
   </data>
   <data name="PluginStorePrivatePluginTooltip" xml:space="preserve">
-    <value>新增私密外掛（需要外掛 ID 與存取金鑰）</value>
+    <value>新增私密插件（需要插件 ID 與存取金鑰）</value>
   </data>
   <data name="PluginStorePrivateBadge" xml:space="preserve">
     <value>私密</value>
@@ -4429,7 +4431,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>重設篩選</value>
   </data>
   <data name="PluginStoreErrorTitle" xml:space="preserve">
-    <value>無法連線到外掛商城</value>
+    <value>無法連線到插件商城</value>
   </data>
   <data name="PluginStoreCategoryLabel" xml:space="preserve">
     <value>分類</value>
@@ -4456,7 +4458,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>正在下載安裝指令碼...</value>
   </data>
   <data name="DataPage_Title" xml:space="preserve">
-    <value>數據中心</value>
+    <value>資料中心</value>
   </data>
   <data name="DataPage_Subtitle" xml:space="preserve">
     <value>彙總全服榜單，交叉分析培養與抽卡趨勢以供決策參考</value>
@@ -4483,7 +4485,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>活動時間軸</value>
   </data>
   <data name="DataPage_Refresh" xml:space="preserve">
-    <value>重新載入數據</value>
+    <value>重新載入資料</value>
   </data>
   <data name="DataPage_LastUpdate" xml:space="preserve">
     <value>更新於 {0}</value>
@@ -4492,13 +4494,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>正在彙總全服榜單…</value>
   </data>
   <data name="DataPage_LoadFailedTitle" xml:space="preserve">
-    <value>數據載入失敗</value>
+    <value>資料載入失敗</value>
   </data>
   <data name="DataPage_LoadFailedBody" xml:space="preserve">
     <value>無法連線統計服務，請檢查網路後重試。</value>
   </data>
   <data name="DataPage_PartialData" xml:space="preserve">
-    <value>有 {0} 份榜單未能載入，目前顯示的是部分數據。</value>
+    <value>有 {0} 份榜單未能載入，目前顯示的是部分資料。</value>
   </data>
   <data name="DataPage_Retry" xml:space="preserve">
     <value>重試</value>
@@ -4600,7 +4602,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>深淵登場率</value>
   </data>
   <data name="DataPage_SortValue" xml:space="preserve">
-    <value>抽卡優先級</value>
+    <value>抽卡優先度</value>
   </data>
   <data name="DataPage_SortOwn" xml:space="preserve">
     <value>擁有率</value>
@@ -4648,7 +4650,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>平均通關</value>
   </data>
   <data name="DataPage_ChangeVsLast" xml:space="preserve">
-    <value>環比上期</value>
+    <value>較上期變化</value>
   </data>
   <data name="DataPage_DetailTitle" xml:space="preserve">
     <value>{0} - 綜合分析</value>
@@ -4852,7 +4854,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>本期環境</value>
   </data>
   <data name="DataPage_InsightMetaBody" xml:space="preserve">
-    <value>{0} 的滿星通關率為 {1}，平均重開 {2} 次；第一梯隊由 {3} 領銜。</value>
+    <value>{0} 的滿星通關率為 {1}，平均重開 {2} 次。第一梯隊由 {3} 領銜。</value>
   </data>
   <data name="DataPage_InsightRiseTitle" xml:space="preserve">
     <value>強度崛起</value>
@@ -4867,7 +4869,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>{0} 的使用率從 {1} 跌到 {2}，本期明顯退場。</value>
   </data>
   <data name="DataPage_InsightValueTitle" xml:space="preserve">
-    <value>抽卡優先級</value>
+    <value>抽卡優先度</value>
   </data>
   <data name="DataPage_InsightValueBody" xml:space="preserve">
     <value>{0} 在持有者中的登場率高達 {1}，但全服擁有率只有 {2}——強度高而普及低，優先級最高。</value>
@@ -4888,13 +4890,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>吃命座</value>
   </data>
   <data name="DataPage_InsightConstBody" xml:space="preserve">
-    <value>{0} 只有 {1} 的使用者是零命，登場數據主要來自有命座的玩家。</value>
+    <value>{0} 只有 {1} 的使用者是零命，登場資料主要來自有命座的玩家。</value>
   </data>
   <data name="DataPage_InsightWeaponTitle" xml:space="preserve">
     <value>專武幾乎唯一</value>
   </data>
   <data name="DataPage_InsightWeaponBody" xml:space="preserve">
-    <value>{0} 出現在 {2} 的 {1} 配裝中，基本就是預設答案。</value>
+    <value>{0} 出現在 {2} 的 {1} 配裝中，幾乎就是預設首選。</value>
   </data>
   <data name="DataPage_InsightArtifactTitle" xml:space="preserve">
     <value>聖遺物首選</value>
@@ -4930,16 +4932,16 @@ UIGF v4.x/3.0/2.x</value>
     <value>、</value>
   </data>
   <data name="DataPage_ClauseSeparator" xml:space="preserve">
-    <value>；</value>
+    <value>。</value>
   </data>
   <data name="DataPage_ExportPdf" xml:space="preserve">
     <value>匯出專業 PDF 分析報告</value>
   </data>
   <data name="DataPage_ExportPdfFileType" xml:space="preserve">
-    <value>PDF 文件</value>
+    <value>PDF 檔案</value>
   </data>
   <data name="DataPage_Exporting" xml:space="preserve">
-    <value>正在產生FufuLauncher資料分析報告…</value>
+    <value>正在產生 FufuLauncher 資料分析報告…</value>
   </data>
   <data name="DataPage_Exported" xml:space="preserve">
     <value>PDF 報告已匯出：{0}</value>
@@ -5038,16 +5040,16 @@ UIGF v4.x/3.0/2.x</value>
     <value>左下角</value>
   </data>
   <data name="UsingHoyolabAccountTitle" xml:space="preserve">
-    <value>使用米遊社/HoyoLAB 帳戶直接登入遊戲</value>
+    <value>使用米遊社 / HoYoLAB 帳戶直接登入遊戲</value>
   </data>
   <data name="UsingHoyolabAccountCaption" xml:space="preserve">
-    <value>啟動遊戲時直接以目前選中的米遊社或 HoyoLAB 帳戶身分進入遊戲，無需在遊戲內再次輸入帳號密碼。</value>
+    <value>啟動遊戲時直接以目前選取的米遊社或 HoYoLAB 帳戶身分進入遊戲，無需在遊戲內再次輸入帳號密碼。</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Title" xml:space="preserve">
     <value>無法開啟</value>
   </data>
   <data name="HoyolabAccount_NoLoggedIn_Message" xml:space="preserve">
-    <value>請先在帳戶設定中登入一個米遊社或 HoyoLAB 帳戶。</value>
+    <value>請先在帳戶設定中登入米遊社或 HoYoLAB 帳戶。</value>
   </data>
   <data name="HoyolabAccount_LoginExpired_Title" xml:space="preserve">
     <value>帳戶登入已過期</value>
@@ -5065,7 +5067,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已開啟</value>
   </data>
   <data name="HoyolabAccount_Enabled_Message" xml:space="preserve">
-    <value>下次啟動遊戲時將直接以米遊社/HoyoLAB 帳戶身分進入遊戲，無需再次輸入帳號密碼。</value>
+    <value>下次啟動遊戲時將直接以米遊社 / HoYoLAB 帳戶身分進入遊戲，無需再次輸入帳號密碼。</value>
   </data>
   <data name="HoyolabAccount_EnableFailed_Title" xml:space="preserve">
     <value>無法開啟</value>
@@ -5083,10 +5085,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>帳戶與伺服器不相符</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_OverseaMsg" xml:space="preserve">
-    <value>目前選中的 HoyoLAB 國際服帳戶無法用於啟動國服遊戲，請切換到對應區域的帳戶。</value>
+    <value>目前選取的 HoYoLAB 國際服帳戶無法用於啟動中國大陸服遊戲，請切換至對應區域的帳戶。</value>
   </data>
   <data name="HoyolabAccount_ServerMismatch_CnMsg" xml:space="preserve">
-    <value>目前選中的米遊社國服帳戶無法用於啟動國際服遊戲，請切換到對應區域的帳戶。</value>
+    <value>目前選取的米遊社中國大陸服帳戶無法用於啟動國際服遊戲，請切換至對應區域的帳戶。</value>
   </data>
   <data name="HelpPage_TranslateBtn" xml:space="preserve">
     <value>翻譯</value>
@@ -5302,13 +5304,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>執行安裝腳本...</value>
   </data>
   <data name="PluginStoreLuaSecurityFailed" xml:space="preserve">
-    <value>Lua腳本未通過安全性驗證。</value>
+    <value>Lua 指令碼未通過安全性驗證。</value>
   </data>
   <data name="PluginStoreLuaScriptError" xml:space="preserve">
-    <value>Lua腳本錯誤: {0}</value>
+    <value>Lua 指令碼錯誤: {0}</value>
   </data>
   <data name="PluginStoreLuaScriptFailed" xml:space="preserve">
-    <value>Lua腳本執行失敗: {0}</value>
+    <value>Lua 指令碼執行失敗: {0}</value>
   </data>
   <data name="PluginStoreDialogClose" xml:space="preserve">
     <value>關閉</value>
@@ -5338,13 +5340,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>前往 GitHub 提交你的插件</value>
   </data>
   <data name="PluginStoreLuaTestButton" xml:space="preserve">
-    <value>Lua測試</value>
+    <value>Lua 測試</value>
   </data>
   <data name="PluginStoreLuaTestTitle" xml:space="preserve">
     <value>Lua 插件安裝腳本測試</value>
   </data>
   <data name="PluginStoreLuaTestDescription" xml:space="preserve">
-    <value>在下方輸入 Lua 插件安裝腳本，點擊執行測試來驗證腳本。腳本將在沙箱環境中執行，所有檔案操作限制在 Plugins 目錄內。</value>
+    <value>在下方輸入 Lua 插件安裝腳本，點擊執行測試來驗證腳本。腳本將在沙盒環境中執行，所有檔案操作限制在 Plugins 目錄內。</value>
   </data>
   <data name="PluginStoreLuaTestInputHint" xml:space="preserve">
     <value>-- 在此輸入 Lua 插件安裝腳本
@@ -5519,7 +5521,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>遊戲中暫停啟動器公告</value>
   </data>
   <data name="SuppressAnnouncementInGameCaption" xml:space="preserve">
-    <value>開啟後，遊戲執行期間不會自動彈出啟動器公告；結束遊戲或重啟啟動器後將恢復正常彈出</value>
+    <value>開啟後，遊戲執行期間不會自動彈出啟動器公告。結束遊戲或重啟啟動器後將恢復正常彈出</value>
   </data>
   <data name="UpdateNotification_PreviewBanner" xml:space="preserve">
     <value>這是預覽版（Pre-release）更新，可能存在不穩定問題，請謹慎更新</value>
@@ -5528,7 +5530,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>v{0} 預覽版</value>
   </data>
   <data name="RollbackToStableTitle" xml:space="preserve">
-    <value>回退正式版</value>
+    <value>退回正式版</value>
   </data>
   <data name="RollbackToStableCaption" xml:space="preserve">
     <value>僅預覽版可用。下載並安裝最新正式版，覆蓋目前預覽版</value>
@@ -5711,7 +5713,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>輕量插件缺失</value>
   </data>
   <data name="LightweightMode_LiteMissing_Content" xml:space="preserve">
-    <value>未找到輕量插件DLL檔案，插件可能未安裝、被誤刪或被防毒軟體攔截。請在功能選單中重新安裝輕量插件。</value>
+    <value>未找到輕量插件 DLL 檔案，插件可能未安裝、被誤刪或被防毒軟體攔截。請在功能選單中重新安裝輕量插件。</value>
   </data>
   <data name="Constraint_BlockedTitle" xml:space="preserve">
     <value>操作已受限</value>
@@ -5756,10 +5758,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>取消選擇</value>
   </data>
   <data name="Plugin_FileLocked_Title" xml:space="preserve">
-    <value>插件檔案被占用</value>
+    <value>插件檔案被佔用</value>
   </data>
   <data name="Plugin_FileLocked_Content" xml:space="preserve">
-    <value>插件檔案「{0}」正被其它程式占用，操作未能完成。請先關閉遊戲或占用該檔案的程式後重試；若反覆出現，可能是防毒軟體正在掃描，請稍後再試。</value>
+    <value>插件檔案「{0}」正被其他程式佔用，操作未能完成。請先關閉遊戲或佔用該檔案的程式後重試。若反覆出現，可能是防毒軟體正在掃描，請稍後再試。</value>
   </data>
   <data name="PluginPage_FreeCamHelpTitle" xml:space="preserve">
     <value>自由視角使用說明</value>
@@ -5854,7 +5856,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>手動下載</value>
   </data>
   <data name="PluginPage_SecurityWarningContent" xml:space="preserve">
-    <value>安全軟體會阻擋該程式的正常注入運行，如無法使用或者插件消失，請關閉你電腦的安全中心！</value>
+    <value>安全軟體可能會阻擋此程式正常注入運作，若無法使用或插件消失，請關閉您電腦的 Windows 安全性（安全中心）！</value>
   </data>
   <data name="PluginPage_RenameFolderTitle" xml:space="preserve">
     <value>重新命名插件資料夾</value>
@@ -5875,10 +5877,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>建議手動刪除舊版本插件</value>
   </data>
   <data name="Settings_PluginSignature_Title" xml:space="preserve">
-    <value>校驗插件簽名</value>
+    <value>驗證插件簽章</value>
   </data>
   <data name="Settings_PluginSignature_Caption" xml:space="preserve">
-    <value>檢測已安裝插件DLL的數位簽章，並檢視簽章詳情</value>
+    <value>檢測已安裝插件 DLL 的數位簽章，並檢視簽章詳情</value>
   </data>
   <data name="Settings_PluginSignature_Btn" xml:space="preserve">
     <value>開始校驗</value>
@@ -6016,7 +6018,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>顯示驗證碼彈窗說明</value>
   </data>
   <data name="EnableCaptchaNoticeCaption" xml:space="preserve">
-    <value>在米遊社風控驗證碼彈窗中顯示來源說明；關閉後僅隱藏文字，驗證功能不受影響。</value>
+    <value>在米遊社風控驗證碼彈窗中顯示來源說明。關閉後僅隱藏文字，驗證功能不受影響。</value>
   </data>
   <data name="CaptchaNoticeWatermark" xml:space="preserve">
     <value>米遊社便箋 - 人機驗證</value>
@@ -6028,7 +6030,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>該彈窗由米遊社風控觸發，僅用於「便箋」資料的查詢驗證，並非啟動器自身的人機驗證。</value>
   </data>
   <data name="CaptchaNoticeLine2" xml:space="preserve">
-    <value>完成驗證後即可查看便箋；不想看到此提示，可在「設定 → 進階選項」中關閉。</value>
+    <value>完成驗證後即可查看便箋。不想看到此提示，可在「設定 → 進階選項」中關閉。</value>
   </data>
   <data name="DeviceInfo_Title" xml:space="preserve">
     <value>米遊社裝置資訊</value>
@@ -6136,7 +6138,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>定位檔案</value>
   </data>
   <data name="PluginDllConflict_Hint" xml:space="preserve">
-    <value>請只保留最新版本的外掛，並把其他外掛裡的同名 DLL 刪除或重新命名；如果不清楚該保留哪一個，建議刪除全部外掛後重新安裝。</value>
+    <value>請只保留最新版本的外掛，並把其他外掛裡的同名 DLL 刪除或重新命名。如果不清楚該保留哪一個，建議刪除全部外掛後重新安裝。</value>
   </data>
   <data name="PluginConflictCheckTitle" xml:space="preserve">
     <value>外掛衝突偵測</value>
@@ -6148,7 +6150,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>僅偵測主外掛</value>
   </data>
   <data name="PluginConflictMainOnlyCaption" xml:space="preserve">
-    <value>只檢查FufuLauncher.UnlockerIsland.dll；關閉後檢查所有外掛 DLL</value>
+    <value>只檢查 FufuLauncher.UnlockerIsland.dll。關閉後檢查所有外掛 DLL</value>
   </data>
   <data name="PluginDllConflict_DeleteBtn" xml:space="preserve">
     <value>刪除</value>
@@ -6235,13 +6237,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>啟動時驗證外掛簽章</value>
   </data>
   <data name="ModTrust_LaunchVerificationCaption" xml:space="preserve">
-    <value>預設關閉；開啟後依下方策略驗證外掛簽章，關閉時略過驗證。</value>
+    <value>預設關閉。開啟後依下方策略驗證外掛簽章，關閉時略過驗證。</value>
   </data>
   <data name="ModTrust_ModeOff" xml:space="preserve">
     <value>關閉驗證</value>
   </data>
   <data name="ModTrust_ModeCaption" xml:space="preserve">
-    <value>關閉驗證：略過簽章驗證；僅提示：驗證並提醒，但允許載入；攔截：阻止未通過驗證的外掛載入。</value>
+    <value>關閉驗證：略過簽章驗證。僅提示：驗證並提醒，但允許載入。攔截：阻止未通過驗證的外掛載入。</value>
   </data>
   <data name="SectionServiceStatus" xml:space="preserve">
     <value>服務狀態</value>
@@ -6430,10 +6432,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>捷徑名稱</value>
   </data>
   <data name="Placeholder_ShortcutName" xml:space="preserve">
-    <value>自訂名稱(不含 .lnk,留空用預設)</value>
+    <value>自訂名稱（不含 .lnk，留空則使用預設值）</value>
   </data>
   <data name="LoginQR_ServerCn" xml:space="preserve">
-    <value>國服</value>
+    <value>中國大陸服</value>
   </data>
   <data name="LoginQR_ServerOs" xml:space="preserve">
     <value>國際服</value>
@@ -6460,7 +6462,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>X (Twitter) 登入</value>
   </data>
   <data name="LoginQR_OverseaRiskHint" xml:space="preserve">
-    <value>提示：HoYoVerse 可能要求透過信箱驗證碼完成安全驗證。</value>
+    <value>提示：HoYoverse 可能要求透過信箱驗證碼完成安全驗證。</value>
   </data>
   <data name="LoginQR_LoginButton" xml:space="preserve">
     <value>登入</value>
@@ -6472,13 +6474,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>手機號碼</value>
   </data>
   <data name="LoginQR_MobilePlaceholder" xml:space="preserve">
-    <value>請輸入11位手機號碼</value>
+    <value>請輸入 11 位手機號碼</value>
   </data>
   <data name="LoginQR_CaptchaHeader" xml:space="preserve">
     <value>驗證碼</value>
   </data>
   <data name="LoginQR_CaptchaPlaceholder" xml:space="preserve">
-    <value>6位簡訊驗證碼</value>
+    <value>6 位簡訊驗證碼</value>
   </data>
   <data name="LoginQR_AccountHeader" xml:space="preserve">
     <value>帳號</value>
@@ -6499,7 +6501,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>信箱驗證碼</value>
   </data>
   <data name="LoginQR_EmailCaptchaPlaceholder" xml:space="preserve">
-    <value>6位信箱驗證碼</value>
+    <value>6 位信箱驗證碼</value>
   </data>
   <data name="LoginQR_SendEmailCaptcha" xml:space="preserve">
     <value>發送信箱驗證碼</value>
@@ -6667,10 +6669,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>全螢幕最大亮度</value>
   </data>
   <data name="HDR_SdrWhiteLevel" xml:space="preserve">
-    <value>SDR白點亮度</value>
+    <value>SDR 白點亮度</value>
   </data>
   <data name="HDR_MaxLuminance_Desc" xml:space="preserve">
-    <value>調節高光與極端亮部細節的亮度上限 (建議與顯示器峰值一致)</value>
+    <value>調節高光與極端亮部細節的亮度上限（建議與顯示器峰值一致）</value>
   </data>
   <data name="HDR_SceneLuminance_Desc" xml:space="preserve">
     <value>調節遊戲世界環境場景的基礎參考白點亮度</value>
@@ -6679,28 +6681,28 @@ UIGF v4.x/3.0/2.x</value>
     <value>調節小地圖、血條、文字等介面元素的亮度</value>
   </data>
   <data name="HDR_Status_Enabled" xml:space="preserve">
-    <value>HDR已啟用</value>
+    <value>HDR 已啟用</value>
   </data>
   <data name="HDR_Status_NotEnabled" xml:space="preserve">
-    <value>HDR未啟用</value>
+    <value>HDR 未啟用</value>
   </data>
   <data name="HDR_Status_NotSupported" xml:space="preserve">
-    <value>HDR不支援</value>
+    <value>不支援 HDR</value>
   </data>
   <data name="HDR_Status_Unavailable" xml:space="preserve">
-    <value>HDR無法取得</value>
+    <value>無法取得 HDR</value>
   </data>
   <data name="HDR_Status_Detecting" xml:space="preserve">
-    <value>HDR偵測中...</value>
+    <value>HDR 偵測中...</value>
   </data>
   <data name="HDR_ColorSpace_SDR" xml:space="preserve">
-    <value>SDR(標準動態範圍)</value>
+    <value>SDR（標準動態範圍）</value>
   </data>
   <data name="HDR_ColorSpace_WCG" xml:space="preserve">
-    <value>WCG(廣色域)</value>
+    <value>WCG（廣色域）</value>
   </data>
   <data name="HDR_ColorSpace_HDR" xml:space="preserve">
-    <value>HDR(高動態範圍)</value>
+    <value>HDR（高動態範圍）</value>
   </data>
   <data name="HDR_ColorSpace_Unknown" xml:space="preserve">
     <value>未知</value>
@@ -6772,7 +6774,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>資料庫路徑: {0}，請檢查該目錄是否可寫入、磁碟是否可用。</value>
   </data>
   <data name="Launcher_DllNotFound" xml:space="preserve">
-    <value>注入暫停模組缺失，注入功能不可用。請重新安裝啟動器。</value>
+    <value>Launcher.dll 注入模組缺失，注入功能無法使用。請重新安裝啟動器。</value>
   </data>
   <data name="AdvancedServerSwitch_TargetServer" xml:space="preserve">
     <value>目標伺服器</value>
@@ -6812,7 +6814,7 @@ UIGF v4.x/3.0/2.x</value>
 錯誤訊息: {0}</value>
   </data>
   <data name="ServerBili" xml:space="preserve">
-    <value>B服 (Bilibili)</value>
+    <value>Bilibili 服</value>
   </data>
   <data name="DownloadWindow_Server" xml:space="preserve">
     <value>伺服器</value>
@@ -6947,7 +6949,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>官方服</value>
   </data>
   <data name="GameServer_SchemePrefixBilibili" xml:space="preserve">
-    <value>渠道服</value>
+    <value>Bilibili 服</value>
   </data>
   <data name="GameServer_SchemePrefixOversea" xml:space="preserve">
     <value>國際服</value>
@@ -7097,13 +7099,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>訪客瀏覽</value>
   </data>
   <data name="Miyoushe_GuestHint" xml:space="preserve">
-    <value>公開內容無需登入。個人動態與收藏需選擇啟動器中的國服帳號。</value>
+    <value>公開內容無需登入。個人動態與收藏需選擇啟動器中的中國大陸服帳號。</value>
   </data>
   <data name="Miyoushe_AccountHint" xml:space="preserve">
     <value>切換僅影響此視窗</value>
   </data>
   <data name="Miyoushe_LoginHint" xml:space="preserve">
-    <value>請在啟動器帳號管理中登入米遊社國服帳號，再選擇該帳號。登入過期時請重新登入。</value>
+    <value>請在啟動器帳號管理中登入米遊社中國大陸服帳號，再選擇該帳號。登入過期時請重新登入。</value>
   </data>
   <data name="Miyoushe_IdentityError" xml:space="preserve">
     <value>帳號的裝置指紋無法使用，已切換為訪客。請在帳號管理中重新登入後重試。</value>
@@ -7220,7 +7222,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>右側評論</value>
   </data>
   <data name="Miyoushe_CommentsLayoutHint" xml:space="preserve">
-    <value>開啟後評論顯示在右側欄；關閉後接在正文下方</value>
+    <value>開啟後評論顯示在右側欄。關閉後接在正文下方</value>
   </data>
   <data name="Miyoushe_LoadingComments" xml:space="preserve">
     <value>正在載入評論…</value>
@@ -7268,7 +7270,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>米遊社要求安全驗證。點擊「驗證並發布」完成官方驗證碼後提交本次評論。</value>
   </data>
   <data name="ModTrust_Title" xml:space="preserve">
-    <value>程式碼簽署信任（FufuLauncherCA）</value>
+    <value>程式碼簽署信任（FufuLauncher CA）</value>
   </data>
   <data name="ModTrust_Loading" xml:space="preserve">
     <value>正在讀取信任狀態…</value>
@@ -7280,7 +7282,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>尚未部署信任套件：請在 Assets\Trust 放置憑證與清單檔案，或點擊「立即更新」從官方端點同步。</value>
   </data>
   <data name="ModTrust_StatusFormat" xml:space="preserve">
-    <value>目前狀態：{0}</value>
+    <value>目前狀態：{0} 同步端點：{1}</value>
   </data>
   <data name="ModTrust_InstalledUser" xml:space="preserve">
     <value>已安裝（目前使用者）</value>
@@ -7295,7 +7297,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>憑證安裝 / 解除安裝</value>
   </data>
   <data name="ModTrust_InstallCaption" xml:space="preserve">
-    <value>安裝後，我們簽發的程式碼簽章會被系統與本啟動器辨識；可隨時解除安裝，不影響其他憑證。</value>
+    <value>安裝後，我們簽發的程式碼簽章會被系統與本啟動器辨識。可隨時解除安裝，不影響其他憑證。</value>
   </data>
   <data name="ModTrust_InstallUserBtn" xml:space="preserve">
     <value>安裝（目前使用者）</value>
@@ -7343,7 +7345,9 @@ UIGF v4.x/3.0/2.x</value>
     <value>程式碼簽章驗證未通過</value>
   </data>
   <data name="ModTrust_BlockedMsg" xml:space="preserve">
-    <value>該檔案未通過簽章驗證，已阻止載入：</value>
+    <value>該檔案未通過簽章驗證，已阻止載入：
+{0}
+可在「設定中心 → 開發者授權認證 → 程式碼簽署信任」中查看詳情。</value>
   </data>
   <data name="ModTrust_WarnTitle" xml:space="preserve">
     <value>程式碼簽署提示</value>
@@ -7355,7 +7359,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已安裝（目前使用者 + 本機）</value>
   </data>
   <data name="ModTrust_MachineHint" xml:space="preserve">
-    <value>目前使用者範圍由本機安裝提供；安裝與解除安裝請在本機範圍操作。</value>
+    <value>目前使用者範圍由本機安裝提供。安裝與解除安裝請在本機範圍操作。</value>
   </data>
   <data name="ModTrust_ModeTitle" xml:space="preserve">
     <value>簽章無效時的處理</value>
@@ -7370,13 +7374,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>拒絕存取</value>
   </data>
   <data name="BanCheck_KilledMessage" xml:space="preserve">
-    <value>此裝置已被禁止使用芙芙啟動器。{0}{0}UID：{1}{0}原因：{2}{0}{0}如果你認為這是誤判，可以前往以下網址提交申訴（若 UID 顯示為「-」，申訴時可不填）：{0}{3}{0}{0}是否立即開啟申訴頁面？選擇「否」將直接關閉啟動器。</value>
+    <value>此裝置已被禁止使用芙芙啟動器。{0}{0}UID：{1}{0}原因：{2}{0}{0}如果您認為這是誤判，可以前往以下網址提交申訴（若 UID 顯示為「-」，申訴時可不填）：{0}{3}{0}{0}是否立即開啟申訴頁面？選擇「否」將直接關閉啟動器。</value>
   </data>
   <data name="BanCheck_RevokedReason" xml:space="preserve">
     <value>存取已被伺服器端撤銷</value>
   </data>
   <data name="BanCheck_BannedReason" xml:space="preserve">
-    <value>該 UID 位於伺服器端封禁名單中</value>
+    <value>該 UID 位於伺服器端封鎖名單中</value>
   </data>
   <data name="GachaAnalysis_ReadingBoundRoles" xml:space="preserve">
     <value>正在查詢米遊社綁定的遊戲角色...</value>
@@ -7385,13 +7389,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>選擇遊戲角色</value>
   </data>
   <data name="GachaAnalysis_SelectRoleHint" xml:space="preserve">
-    <value>請選擇本次要取得祈願紀錄的角色。B服角色顯示為「世界樹」。未看到目標角色時請取消，檢查米遊社綁定，或使用「從遊戲取得」。</value>
+    <value>請選擇本次要取得祈願紀錄的角色。Bilibili 服角色顯示為「世界樹」。未看到目標角色時請取消，檢查米遊社綁定，或使用「從遊戲取得」。</value>
   </data>
   <data name="GachaAnalysis_SkyIsland" xml:space="preserve">
     <value>天空島（官服）</value>
   </data>
   <data name="GachaAnalysis_WorldTree" xml:space="preserve">
-    <value>世界樹（B服）</value>
+    <value>世界樹（Bilibili 服）</value>
   </data>
   <data name="GachaAnalysis_SkyIslandShort" xml:space="preserve">
     <value>天空島</value>
@@ -7403,7 +7407,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>切換遊戲角色</value>
   </data>
   <data name="GameRole_Hint" xml:space="preserve">
-    <value>綁定角色頁設定預設角色；各功能可獨立切換伺服器，互不影響。</value>
+    <value>綁定角色頁設定預設角色。各功能可獨立切換伺服器，互不影響。</value>
   </data>
   <data name="GameRole_Refresh" xml:space="preserve">
     <value>重新整理綁定角色</value>
@@ -7424,7 +7428,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>螢幕辨識掃碼</value>
   </data>
   <data name="MiyousheQr_Instructions" xml:space="preserve">
-    <value>「一般掃碼」僅讀取選取區域一次；「持續掃碼」反覆讀取選取區域內的新 QR Code。辨識後將使用目前米遊社帳號登入。Esc 或滑鼠右鍵取消框選。</value>
+    <value>「一般掃碼」僅讀取選取區域一次。「持續掃碼」會反覆讀取選取區域內的新 QR Code。辨識後將使用目前米遊社帳號登入。按 Esc 或滑鼠右鍵取消框選。</value>
   </data>
   <data name="MiyousheQr_CurrentAccount" xml:space="preserve">
     <value>目前米遊社帳號</value>
@@ -7442,7 +7446,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>確認登入</value>
   </data>
   <data name="MiyousheQr_SelectionHint" xml:space="preserve">
-    <value>拖曳滑鼠框選 QR Code - Esc 或滑鼠右鍵取消</value>
+    <value>拖曳滑鼠框選 QR Code - 按 Esc 或滑鼠右鍵取消</value>
   </data>
   <data name="MiyousheQr_Genshin" xml:space="preserve">
     <value>原神</value>
@@ -7463,7 +7467,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>請先在啟動器中登入米遊社帳號。</value>
   </data>
   <data name="MiyousheQr_CnOnly" xml:space="preserve">
-    <value>請切換到米遊社國服帳號後掃碼。</value>
+    <value>請切換至米遊社中國大陸服帳號後掃碼。</value>
   </data>
   <data name="MiyousheQr_CredentialsMissing" xml:space="preserve">
     <value>目前帳號缺少掃碼所需的憑證，請使用米遊社 App 重新掃碼登入啟動器。</value>
@@ -7475,7 +7479,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>QR Code 已過期，請在目標裝置上重新整理後重新框選。</value>
   </data>
   <data name="MiyousheQr_Unsupported" xml:space="preserve">
-    <value>這不是支援的米哈遊登入 QR Code。支援通行證及原神、星穹鐵道、絕區零、崩壞3國服的登入 QR Code。</value>
+    <value>這不是支援的米哈遊登入 QR Code。支援通行證及原神、崩壞：星穹鐵道、絕區零、崩壞3 中國大陸服的登入 QR Code。</value>
   </data>
   <data name="MiyousheQr_NotFound" xml:space="preserve">
     <value>選取區域內未辨識到 QR Code，請完整框選 QR Code 並留出四周空白。</value>
@@ -7490,7 +7494,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>正在辨識 QR Code…</value>
   </data>
   <data name="MiyousheQr_Ready" xml:space="preserve">
-    <value>已辨識 QR Code，請核對帳號和登入目標後確認。</value>
+    <value>已辨識 QR Code，請核對帳號與登入目標後確認。</value>
   </data>
   <data name="MiyousheQr_Confirming" xml:space="preserve">
     <value>正在確認登入…</value>
@@ -7511,7 +7515,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>掃碼服務傳回了無法辨識的結果，請重新整理 QR Code 後重試。</value>
   </data>
   <data name="MiyousheQr_Rejected" xml:space="preserve">
-    <value>掃碼請求被拒絕，QR Code 可能已過期或憑證已失效。請重新整理 QR Code；若仍失敗請重新登入米遊社帳號。</value>
+    <value>掃碼請求被拒絕，QR Code 可能已過期或憑證已失效。請重新整理 QR Code。若仍失敗，請重新登入米遊社帳號。</value>
   </data>
   <data name="MiyousheQr_Continuous" xml:space="preserve">
     <value>持續掃碼</value>
@@ -7659,7 +7663,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>國際服</value>
   </data>
   <data name="Account_LoginMiyoushe" xml:space="preserve">
-    <value>登入米遊社</value>
+    <value>登入（米遊社 / HoYoLAB）</value>
   </data>
   <data name="PluginSettings_ParsePresetFailedDetail_Format" xml:space="preserve">
     <value>無法剖析預設檔案
@@ -7851,7 +7855,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>正在載入使用者資訊...</value>
   </data>
   <data name="PluginSettings_FpsUnlockEnabled" xml:space="preserve">
-    <value>已啟用，FPS解鎖功能生效</value>
+    <value>已啟用，FPS 解鎖功能生效</value>
   </data>
   <data name="Gacha_ExportSuccess_Format" xml:space="preserve">
     <value>匯出成功，檔案已儲存至：{0}</value>
@@ -7867,7 +7871,7 @@ UIGF v4.x/3.0/2.x</value>
 詳細資訊: {0}</value>
   </data>
   <data name="PluginSettings_EnsurePluginDirConfigHint" xml:space="preserve">
-    <value>請確保Plugins目錄下存在對應的資料夾及config.ini檔案</value>
+    <value>請確保 Plugins 目錄下存在對應的資料夾及 config.ini 檔案</value>
   </data>
   <data name="Gacha_Bucket_Lucky" xml:space="preserve">
     <value>歐氣區間</value>
@@ -7930,7 +7934,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>檔案中未找到抽卡記錄</value>
   </data>
   <data name="PluginSettings_PresetDeleteFailedDetail_Format" xml:space="preserve">
-    <value>無法刪除指定的預設檔案，檔案可能被占用或沒有權限
+    <value>無法刪除指定的預設檔案，檔案可能被佔用或沒有權限
 詳細資訊: {0}</value>
   </data>
   <data name="Gacha_Kpi_FiveStarPulls" xml:space="preserve">
@@ -7985,7 +7989,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>載入失敗: {0}</value>
   </data>
   <data name="LaunchConfig_PostLaunch_MinimizeToTray" xml:space="preserve">
-    <value>最小化至匣</value>
+    <value>最小化至系統匣</value>
   </data>
   <data name="Gacha_Pool_Weapon" xml:space="preserve">
     <value>武器活動</value>
@@ -8027,7 +8031,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>切換至 UID: {0}</value>
   </data>
   <data name="AutoClicker_SecurityWarningMessage" xml:space="preserve">
-    <value>開啟全域連點器將安裝全域鍵盤和滑鼠攔截勾點，並可能被部分安全軟體攔截。是否確認開啟？</value>
+    <value>開啟全域連點器將安裝全域鍵盤與滑鼠攔截掛鉤，並可能被部分安全軟體攔截。是否確認開啟？</value>
   </data>
   <data name="Main_WallpaperSwitch" xml:space="preserve">
     <value>桌布切換</value>
@@ -8099,7 +8103,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已登入至 {0}</value>
   </data>
   <data name="Gacha_AllRarityRecords" xml:space="preserve">
-    <value>1-5星全部記錄</value>
+    <value>1-5 星全部記錄</value>
   </data>
   <data name="Blank_CannotReadRegistry" xml:space="preserve">
     <value>無法讀取登錄檔</value>
@@ -8109,7 +8113,7 @@ UIGF v4.x/3.0/2.x</value>
 詳細資訊: {0}</value>
   </data>
   <data name="Blank_PermissionOrOccupied_GamePath" xml:space="preserve">
-    <value>權限不足或已被其他程式占用，請以普通使用者身分重新選擇遊戲路徑</value>
+    <value>權限不足或已被其他程式佔用，請以一般使用者身分重新選擇遊戲路徑</value>
   </data>
   <data name="PluginSettings_SaveFailedTitle" xml:space="preserve">
     <value>設定儲存失敗</value>
@@ -8201,7 +8205,7 @@ UIGF v4.x/3.0/2.x</value>
 詳細資訊: {0}</value>
   </data>
   <data name="AdditionalProgram_PermissionOrOccupied" xml:space="preserve">
-    <value>權限不足或已被其他程式占用，請以普通使用者身分重新選擇檔案</value>
+    <value>權限不足或已被其他程式佔用，請以一般使用者身分重新選擇檔案</value>
   </data>
   <data name="PluginSettings_ConfigUpdateFailedTitle" xml:space="preserve">
     <value>設定更新失敗</value>
@@ -8348,7 +8352,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>無法開啟檔案選擇器</value>
   </data>
   <data name="Account_Server_CN" xml:space="preserve">
-    <value>國服</value>
+    <value>中國大陸服</value>
   </data>
   <data name="Account_LogoutFailed_Format" xml:space="preserve">
     <value>登出失敗: {0}</value>
@@ -8372,7 +8376,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>安全原則違規: {0}</value>
   </data>
   <data name="PluginStore_PluginId" xml:space="preserve">
-    <value>外掛程式ID</value>
+    <value>外掛程式 ID</value>
   </data>
   <data name="LaunchConfig_PostLaunch_Exit" xml:space="preserve">
     <value>關閉啟動器</value>
@@ -8414,10 +8418,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>使用者 {0}</value>
   </data>
   <data name="Gacha_AuthCode1016" xml:space="preserve">
-    <value>米遊社未授權此帳號獲取所選遊戲角色的祈願記錄（返回碼 1016）。請檢查綁定關係，或使用「從遊戲獲取」。</value>
+    <value>米遊社未授權此帳號取得所選遊戲角色的祈願記錄（返回碼 1016）。請檢查綁定關係，或使用「從遊戲取得」。</value>
   </data>
   <data name="Gacha_NoBoundRoleFound" xml:space="preserve">
-    <value>未找到可用於祈願獲取的原神綁定角色。請登入綁定了目標角色的米遊社帳號，或使用「從遊戲獲取」。</value>
+    <value>未找到可用於祈願取得的原神綁定角色。請登入綁定了目標角色的米遊社帳號，或使用「從遊戲取得」。</value>
   </data>
   <data name="Gacha_NoNewRecordsKeptExisting_Format" xml:space="preserve">
     <value>UID {0} 未取得新記錄，已保留現有資料。</value>
@@ -8432,7 +8436,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>取得完成，UID {0}，共 {1} 筆記錄，正在檢查圖片資源...</value>
   </data>
   <data name="Gacha_AuthCode1002" xml:space="preserve">
-    <value>米遊社未接受所選角色的認證參數（返回碼 1002）。可使用「從遊戲獲取」讀取遊戲產生的連結。</value>
+    <value>米遊社未接受所選角色的認證參數（返回碼 1002）。可使用「從遊戲取得」讀取遊戲產生的連結。</value>
   </data>
   <data name="Gacha_NoRecordsKeptExisting" xml:space="preserve">
     <value>未取得祈願記錄，已保留現有資料。請確認遊戲內祈願歷史中有可查詢的記錄。</value>
@@ -8477,10 +8481,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>剪貼簿內容無效</value>
   </data>
   <data name="Gacha_RoleUidMismatchError" xml:space="preserve">
-    <value>返回記錄的 UID 與所選遊戲角色不一致，已停止匯入。</value>
+    <value>回傳記錄的 UID 與所選遊戲角色不一致，已停止匯入。</value>
   </data>
   <data name="Gacha_AuthCheckLoginSuffix" xml:space="preserve">
-    <value> 請檢查米遊社登入狀態，或使用「從遊戲獲取」。</value>
+    <value> 請檢查米遊社登入狀態，或使用「從遊戲取得」。</value>
   </data>
   <data name="Account_LoadAccountFailed_Format" xml:space="preserve">
     <value>載入帳戶資訊失敗: {0}</value>
@@ -8504,13 +8508,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>匯出失敗</value>
   </data>
   <data name="Gacha_NoAccountBoundToUid_Format" xml:space="preserve">
-    <value>未找到綁定 UID {0} 的米遊社帳號。請確認目標角色已綁定到已登入的米遊社帳號，或使用「從遊戲獲取」。</value>
+    <value>未找到綁定 UID {0} 的米遊社帳號。請確認目標角色已綁定至已登入的米遊社帳號，或使用「從遊戲取得」。</value>
   </data>
   <data name="Gacha_RoleSwitchedDiscardOld" xml:space="preserve">
     <value>角色已切換，已丟棄舊角色的取得結果。</value>
   </data>
   <data name="Gacha_StartCaptureApp" xml:space="preserve">
-    <value>啟動抓包工具</value>
+    <value>啟動封包擷取工具</value>
   </data>
   <data name="Plugin_RenameFailedExists" xml:space="preserve">
     <value>重新命名失敗：資料夾名稱已存在</value>
@@ -8555,10 +8559,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>路徑有效</value>
   </data>
   <data name="PluginSettings_MainPluginDisabledOverlay" xml:space="preserve">
-    <value>已被禁用，請啟用主外掛程式才能調試設定</value>
+    <value>已被停用，請啟用主插件才能調整設定</value>
   </data>
   <data name="PluginSettings_FpsPluginDisabledOverlay" xml:space="preserve">
-    <value>已被禁用，請啟用FPS外掛程式才能調試外掛程式設定</value>
+    <value>已被停用，請啟用 FPS 插件才能調整插件設定</value>
   </data>
   <data name="PluginSettings_PluginChangedTitle" xml:space="preserve">
     <value>外掛程式變更</value>
@@ -8604,7 +8608,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>載入失敗: {0}</value>
   </data>
   <data name="Help_DocPreloadingSnippet" xml:space="preserve">
-    <value>內文仍在此後台預先載入，符合項目來自標題或路徑</value>
+    <value>內文仍在背景預先載入，符合項目來自標題或路徑</value>
   </data>
   <data name="Help_LoadingDoc" xml:space="preserve">
     <value>載入中...</value>
@@ -8625,7 +8629,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已更新 {0} 個圖片資源並存入資料庫</value>
   </data>
   <data name="Gacha_CrawlerStatus_PoolMetaComplete_Format" xml:space="preserve">
-    <value>祈願卡池元資料更新完成（共 {0} 個歷史祈願：角色 {1}、武器 {2}、集錄 {3}）</value>
+    <value>祈願卡池中繼資料更新完成（共 {0} 個歷史祈願：角色 {1}、武器 {2}、集錄 {3}）</value>
   </data>
   <data name="Gacha_ItemType_Character" xml:space="preserve">
     <value>角色</value>
@@ -8670,7 +8674,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>圖像來源</value>
   </data>
   <data name="ImageSource_Subtitle" xml:space="preserve">
-    <value>選擇圖像來源並預覽；此處顯示的圖片會同時套用為主背景。</value>
+    <value>選擇圖像來源並預覽。此處顯示的圖片會同時套用為主背景。</value>
   </data>
   <data name="ImageSource_SourceOfficial" xml:space="preserve">
     <value>官方背景</value>
@@ -8715,7 +8719,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>官方</value>
   </data>
   <data name="ImageSource_BingHint" xml:space="preserve">
-    <value>可選擇年份從 Bing 封存中切換；開啟「官方」後只使用最近的官方桌布。</value>
+    <value>可選擇年份從 Bing 封存中切換。開啟「官方」後只使用最近的官方桌布。</value>
   </data>
   <data name="ImageSource_CustomEmpty" xml:space="preserve">
     <value>尚未選擇自訂背景圖片。</value>
@@ -8736,7 +8740,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>影像抗鋸齒</value>
   </data>
   <data name="BackgroundAntialiasCaption" xml:space="preserve">
-    <value>平滑主背景影像邊緣；預設關閉。</value>
+    <value>平滑主背景影像邊緣。預設關閉。</value>
   </data>
   <data name="BackgroundAntialiasStrengthTitle" xml:space="preserve">
     <value>抗鋸齒強度</value>
@@ -8748,7 +8752,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>固定使用本機圖片</value>
   </data>
   <data name="ImageSource_RandomPinLocalHint" xml:space="preserve">
-    <value>將目前圖片儲存到本機，只顯示這張圖片；開啟後不再下載新圖片。</value>
+    <value>將目前圖片儲存到本機，只顯示這張圖片。開啟後不再下載新圖片。</value>
   </data>
   <data name="ImageSource_RandomPinFailed" xml:space="preserve">
     <value>目前沒有可儲存的隨機背景圖片。</value>
@@ -9186,7 +9190,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>雲端存檔中心</value>
   </data>
   <data name="CloudSync_AccountFullBtn" xml:space="preserve">
-    <value>FufuLauncher雲端存檔中心</value>
+    <value>FufuLauncher 雲端存檔中心</value>
   </data>
   <data name="CloudSync_AccountSectionSubtitle" xml:space="preserve">
     <value>檢視綁定信箱、保護狀態以及安全選項</value>
@@ -9225,16 +9229,16 @@ UIGF v4.x/3.0/2.x</value>
     <value>成就雲端存檔 {0} 份 - 全庫 {1}/{2} - 空間 {3}/{4}</value>
   </data>
   <data name="CloudSync_AchievementNotSignedInMsg" xml:space="preserve">
-    <value>請先在「FufuLauncher雲端存檔中心」登入您的雲端存檔帳號，然後再管理雲端成就存檔。</value>
+    <value>請先在「FufuLauncher 雲端存檔中心」登入您的雲端存檔帳號，然後再管理雲端成就存檔。</value>
   </data>
   <data name="CloudSync_AchievementStatusSyncedFormat" xml:space="preserve">
     <value>已從雲端「{0}」同步 {1} 個成就</value>
   </data>
   <data name="CloudSync_AchievementTitle" xml:space="preserve">
-    <value>成就追蹤 -FufuLauncher雲端存檔管理</value>
+    <value>成就追蹤 - FufuLauncher 雲端存檔管理</value>
   </data>
   <data name="CloudSync_AchievementTooltip" xml:space="preserve">
-    <value>管理FufuLauncher雲端成就存檔（上傳 / 拉取 / 覆寫 / 刪除）</value>
+    <value>管理 FufuLauncher 雲端成就存檔（上傳 / 匯入 / 覆寫 / 刪除）</value>
   </data>
   <data name="CloudSync_AchievementUploadBtn" xml:space="preserve">
     <value>上傳目前成就進度到雲端</value>
@@ -9294,7 +9298,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>登入後即可在不同裝置間安全備份與同步成就進度和祈願紀錄。</value>
   </data>
   <data name="CloudSync_AuthTitle" xml:space="preserve">
-    <value>登入或註冊FufuLauncher雲端存檔帳號</value>
+    <value>登入或註冊 FufuLauncher 雲端存檔帳號</value>
   </data>
   <data name="CloudSync_AutoLoginDesc" xml:space="preserve">
     <value>已在本機安全儲存登入狀態</value>
@@ -9345,7 +9349,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>安全驗證</value>
   </data>
   <data name="CloudSync_CaptchaWindowTitle" xml:space="preserve">
-    <value>安全驗證 -FufuLauncher</value>
+    <value>安全驗證 - FufuLauncher</value>
   </data>
   <data name="CloudSync_CloseBtn" xml:space="preserve">
     <value>關閉</value>
@@ -9380,6 +9384,60 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_ContactTip" xml:space="preserve">
     <value>如有問題，請聯繫 dev@fufu.skin</value>
   </data>
+  <data name="CloudSync_CycleChallengeBtn" xml:space="preserve">
+    <value>雲端同步</value>
+  </data>
+  <data name="CloudSync_CycleChallengeConfirmOverwriteMsg" xml:space="preserve">
+    <value>確定使用目前所選的本機週期挑戰資料覆蓋雲端存檔「{0}」嗎？</value>
+  </data>
+  <data name="CloudSync_CycleChallengeEmptyCloud" xml:space="preserve">
+    <value>雲端尚無週期挑戰存檔，可在上方選擇範圍並輸入名稱後上傳。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeListSummary" xml:space="preserve">
+    <value>週期挑戰存檔 {0} 份 - 總庫 {1}/{2} - 空間 {3}/{4}</value>
+  </data>
+  <data name="CloudSync_CycleChallengeLocalSummaryFormat" xml:space="preserve">
+    <value>本機統計：{0} 個 UID - 共 {1} 筆紀錄（深淵 {2} / 幻想 {3} / 危戰 {4}）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeManageTooltip" xml:space="preserve">
+    <value>管理週期挑戰雲端存檔（深境螺旋 / 幻想真境劇詩 / 幽境危戰）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeFailedTitle" xml:space="preserve">
+    <value>週期挑戰資料同步失敗</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeImportBtn" xml:space="preserve">
+    <value>合併匯入</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSuccessTitle" xml:space="preserve">
+    <value>週期挑戰資料同步成功</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeSummaryFormat" xml:space="preserve">
+    <value>已同步雲端挑戰存檔「{0}」：新增 {1} 筆，更新更高紀錄 {2} 筆，保留本機 {3} 筆（目前共 {4} 筆）。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeMergeTip" xml:space="preserve">
+    <value>下載採用遞增補全同步：自動補齊本機缺少的期數並完整保留本機獨有紀錄。同週期僅在雲端成績更優（星數/層數/幕數更高或通關更快）時升級，資料只增不減。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNoLocalData" xml:space="preserve">
+    <value>目前所選範圍內尚無可上傳的本機週期挑戰紀錄。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeNotSignedInMsg" xml:space="preserve">
+    <value>請先登入 FufuLauncher 雲端存檔帳戶，再上傳或同步週期挑戰紀錄。</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceAllUids" xml:space="preserve">
+    <value>全部 UID（共 {0} 筆紀錄）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceHeader" xml:space="preserve">
+    <value>上傳資料範圍</value>
+  </data>
+  <data name="CloudSync_CycleChallengeSourceSingleUid" xml:space="preserve">
+    <value>UID {0}（深淵 {1} / 幻想 {2} / 危戰 {3}）</value>
+  </data>
+  <data name="CloudSync_CycleChallengeTitle" xml:space="preserve">
+    <value>週期挑戰 - FufuLauncher 雲端存檔管理</value>
+  </data>
+  <data name="CloudSync_CycleChallengeUploadBtn" xml:space="preserve">
+    <value>上傳所選週期挑戰紀錄至雲端</value>
+  </data>
   <data name="CloudSync_DeleteAccountBtn" xml:space="preserve">
     <value>註銷帳號並清除資料</value>
   </data>
@@ -9393,7 +9451,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>永久註銷帳號</value>
   </data>
   <data name="CloudSync_DeleteAccountWarning" xml:space="preserve">
-    <value>警告：註銷帳號將永久刪除您的全部雲端成就、祈願存檔與帳號資訊，且無法復原！</value>
+    <value>警告：註銷帳號將永久刪除您的全部雲端成就、祈願存檔與帳號資訊，且無法復原，請務必三思而後行！</value>
   </data>
   <data name="CloudSync_DeleteAllBtn" xml:space="preserve">
     <value>清空全部雲端資料</value>
@@ -9405,7 +9463,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>清空失敗</value>
   </data>
   <data name="CloudSync_DeleteAllMsg" xml:space="preserve">
-    <value>確定要清空目前帳號下所有雲端成就與祈願存檔嗎？（帳號本身將被保留，但全部雲端檔案將被永久清除！）</value>
+    <value>確定要清空目前帳號下所有雲端成就與祈願存檔嗎？（帳號本身將被保留，但全部雲端檔案將被永久清除，請謹慎操作！）</value>
   </data>
   <data name="CloudSync_DeleteAllSuccessTitle" xml:space="preserve">
     <value>已清空</value>
@@ -9465,7 +9523,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>目前帳號已兌換過該啟用碼，同一啟用碼僅可兌換一次。</value>
   </data>
   <data name="CloudSync_ErrArchiveExists" xml:space="preserve">
-    <value>雲端已存在同名存檔；如需替換，請勾選「若存在同名存檔則直接覆寫」。</value>
+    <value>雲端已存在同名存檔。如需替換，請勾選「若存在同名存檔則直接覆寫」。</value>
   </data>
   <data name="CloudSync_ErrArchiveNotFound" xml:space="preserve">
     <value>找不到目標雲端存檔，請重新整理列表後重試。</value>
@@ -9530,6 +9588,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_ErrRateLimited" xml:space="preserve">
     <value>請求過於頻繁，請稍後再試。</value>
   </data>
+  <data name="CloudSync_ErrServiceUnavailable" xml:space="preserve">
+    <value>雲端服務節點暫時無法使用，請稍後重試。</value>
+  </data>
   <data name="CloudSync_ErrStorageLimit" xml:space="preserve">
     <value>雲端儲存空間不足，可清理部分舊存檔或使用啟用碼擴容。</value>
   </data>
@@ -9541,6 +9602,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_FilterAll" xml:space="preserve">
     <value>全部類型</value>
+  </data>
+  <data name="CloudSync_FilterChallenge" xml:space="preserve">
+    <value>週期挑戰</value>
   </data>
   <data name="CloudSync_FilterPlayTime" xml:space="preserve">
     <value>遊戲時長</value>
@@ -9585,13 +9649,13 @@ UIGF v4.x/3.0/2.x</value>
     <value>所選帳號下暫無有效祈願紀錄可供上傳。</value>
   </data>
   <data name="CloudSync_GachaNotSignedInMsg" xml:space="preserve">
-    <value>請先在「FufuLauncher雲端存檔中心」登入您的雲端存檔帳號，然後再管理祈願雲端存檔。</value>
+    <value>請先在「FufuLauncher 雲端存檔中心」登入您的雲端存檔帳號，然後再管理祈願雲端存檔。</value>
   </data>
   <data name="CloudSync_GachaSourceHeader" xml:space="preserve">
     <value>選擇要上傳的本機帳號資料</value>
   </data>
   <data name="CloudSync_GachaTitle" xml:space="preserve">
-    <value>祈願分析 -FufuLauncher雲端存檔管理</value>
+    <value>祈願分析 - FufuLauncher 雲端存檔管理</value>
   </data>
   <data name="CloudSync_GachaToolbarBtn" xml:space="preserve">
     <value>雲端存檔</value>
@@ -9636,7 +9700,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>鎖定狀態下不允許註銷帳號，請先透過信箱驗證解鎖。</value>
   </data>
   <data name="CloudSync_LockDesc" xml:space="preserve">
-    <value>鎖定後將禁止存取與修改雲端存檔及註銷帳號；只有手動透過信箱驗證解鎖後才能恢復使用。</value>
+    <value>鎖定後將禁止存取與修改雲端存檔及註銷帳號。只有手動透過信箱驗證解鎖後才能恢復使用。</value>
   </data>
   <data name="CloudSync_LockedBannerDetail" xml:space="preserve">
     <value>鎖定狀態下不允許檢視配額或管理雲端存檔，請先在「帳號與安全」完成信箱驗證解鎖。</value>
@@ -9645,7 +9709,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>帳號已鎖定</value>
   </data>
   <data name="CloudSync_LockHint" xml:space="preserve">
-    <value>提示：鎖定帳號後將暫禁存取、上傳或刪除雲端存檔，亦無法註銷帳號；需透過信箱驗證手動解鎖後方可恢復正常使用。</value>
+    <value>提示：鎖定帳號後將暫禁存取、上傳或刪除雲端存檔，亦無法註銷帳號。需透過信箱驗證手動解鎖後方可恢復正常使用。</value>
   </data>
   <data name="CloudSync_LockTitle" xml:space="preserve">
     <value>鎖定帳號</value>
@@ -9657,7 +9721,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>登出</value>
   </data>
   <data name="CloudSync_LogoutConfirmText" xml:space="preserve">
-    <value>確定要登出目前FufuLauncher雲端存檔帳號嗎？登出後將清除本機儲存的登入狀態。</value>
+    <value>確定要登出目前 FufuLauncher 雲端存檔帳號嗎？登出後將清除本機儲存的登入狀態。</value>
   </data>
   <data name="CloudSync_LogoutRevokeAllCheck" xml:space="preserve">
     <value>同時登出其他裝置上的登入狀態</value>
@@ -9759,7 +9823,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>未登入</value>
   </data>
   <data name="CloudSync_NotSignedInDialogTitle" xml:space="preserve">
-    <value>未登入FufuLauncher雲端存檔</value>
+    <value>未登入 FufuLauncher 雲端存檔</value>
   </data>
   <data name="CloudSync_OpenBtn" xml:space="preserve">
     <value>開啟</value>
@@ -9879,10 +9943,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>{0} / {1} 個（剩餘 {2} 個）</value>
   </data>
   <data name="CloudSync_QuotaNotReadyLocked" xml:space="preserve">
-    <value>目前帳號已鎖定，暫無法檢視配額或使用擴容碼；請先透過信箱驗證解鎖。</value>
+    <value>目前帳號已鎖定，暫無法檢視配額或使用擴容碼。請先透過信箱驗證解鎖。</value>
   </data>
   <data name="CloudSync_QuotaNotReadySignIn" xml:space="preserve">
-    <value>請先在「帳號與安全」中登入FufuLauncher雲端存檔帳號。</value>
+    <value>請先在「帳號與安全」中登入 FufuLauncher 雲端存檔帳號。</value>
   </data>
   <data name="CloudSync_QuotaOpsLabel" xml:space="preserve">
     <value>今日總操作次數</value>
@@ -9987,7 +10051,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>管理雲端存檔帳號、檢視空間與每日配額，並同步成就與祈願紀錄</value>
   </data>
   <data name="CloudSync_SettingsTitle" xml:space="preserve">
-    <value>FufuLauncher雲端存檔中心</value>
+    <value>FufuLauncher 雲端存檔中心</value>
   </data>
   <data name="CloudSync_SizeSummaryFormat" xml:space="preserve">
     <value>{0}（原始 {1}）</value>
@@ -10015,6 +10079,9 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="CloudSync_SubmitReset" xml:space="preserve">
     <value>確認重設密碼</value>
+  </data>
+  <data name="CloudSync_TypeBadgeChallenge" xml:space="preserve">
+    <value>週期挑戰</value>
   </data>
   <data name="CloudSync_TypeBadgePlayTime" xml:space="preserve">
     <value>遊戲時長</value>
@@ -10058,6 +10125,9 @@ UIGF v4.x/3.0/2.x</value>
   <data name="CloudSync_UploadLocalBtn" xml:space="preserve">
     <value>上傳本機檔案</value>
   </data>
+  <data name="CloudSync_UploadTypeChallengeOption" xml:space="preserve">
+    <value>週期挑戰紀錄</value>
+  </data>
   <data name="CloudSync_UploadTypePlayTimeOption" xml:space="preserve">
     <value>遊戲時長紀錄</value>
   </data>
@@ -10068,6 +10138,3245 @@ UIGF v4.x/3.0/2.x</value>
     <value>祈願紀錄</value>
   </data>
   <data name="CloudSync_WindowTitle" xml:space="preserve">
-    <value>FufuLauncher雲端存檔中心</value>
+    <value>FufuLauncher 雲端存檔中心</value>
+  </data>
+  <data name="CloudSync_NavHutao" xml:space="preserve">
+    <value>胡桃雲</value>
+  </data>
+  <data name="HutaoSync_SectionTitle" xml:space="preserve">
+    <value>胡桃雲</value>
+  </data>
+  <data name="HutaoSync_SectionSubtitle" xml:space="preserve">
+    <value>在胡桃雲與您的 FufuLauncher 雲端存檔之間同步祈願與週期挑戰紀錄</value>
+  </data>
+  <data name="HutaoSync_BridgeRuleTitle" xml:space="preserve">
+    <value>同步方式說明</value>
+  </data>
+  <data name="HutaoSync_BridgeRuleDesc" xml:space="preserve">
+    <value>從胡桃雲取得的資料將儲存至您的 FufuLauncher 雲端存檔，之後可在「雲端存檔」中匯出儲存或匯入軟體。上傳至胡桃雲時也會直接讀取您在 FufuLauncher 雲端儲存的存檔。</value>
+  </data>
+  <data name="HutaoSync_AchievementNotice" xml:space="preserve">
+    <value>成就備份說明：胡桃雲暫不支援同步成就，您可繼續在成就視窗或「雲端存檔」中備份、匯出或匯入本機成就檔案。</value>
+  </data>
+  <data name="HutaoSync_FufuRequiredBannerTitle" xml:space="preserve">
+    <value>使用同步功能需登入並解鎖 FufuLauncher 雲端存檔帳號</value>
+  </data>
+  <data name="HutaoSync_FufuRequiredBannerMsg" xml:space="preserve">
+    <value>您可在此檢視並管理胡桃雲帳號、統計排行與贊助服務。如需將資料儲存至 FufuLauncher 雲端存檔或從 FufuLauncher 雲端存檔上傳至胡桃雲，請前往「帳號與安全」登入並確認帳號未鎖定。</value>
+  </data>
+  <data name="HutaoSync_GotoFufuAccountBtn" xml:space="preserve">
+    <value>前往帳號與安全</value>
+  </data>
+  <data name="HutaoSync_AccountTitle" xml:space="preserve">
+    <value>胡桃雲帳號</value>
+  </data>
+  <data name="HutaoSync_AccountSubtitle" xml:space="preserve">
+    <value>登入胡桃雲檢視帳號詳情、服務有效期與登入裝置。將資料儲存至 FufuLauncher 雲端存檔或從 FufuLauncher 雲端存檔上傳時需登入 FufuLauncher 雲端存檔帳號。</value>
+  </data>
+  <data name="HutaoSync_ModeLogin" xml:space="preserve">
+    <value>登入帳號</value>
+  </data>
+  <data name="HutaoSync_ModeRegister" xml:space="preserve">
+    <value>註冊帳號</value>
+  </data>
+  <data name="HutaoSync_ModeReset" xml:space="preserve">
+    <value>重設密碼</value>
+  </data>
+  <data name="HutaoSync_EmailHeader" xml:space="preserve">
+    <value>胡桃帳號信箱</value>
+  </data>
+  <data name="HutaoSync_EmailPlaceholder" xml:space="preserve">
+    <value>請輸入註冊或綁定的信箱</value>
+  </data>
+  <data name="HutaoSync_PasswordHeader" xml:space="preserve">
+    <value>帳號密碼</value>
+  </data>
+  <data name="HutaoSync_PasswordPlaceholder" xml:space="preserve">
+    <value>請輸入密碼</value>
+  </data>
+  <data name="HutaoSync_ConfirmPasswordHeader" xml:space="preserve">
+    <value>確認密碼</value>
+  </data>
+  <data name="HutaoSync_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>請再次輸入密碼</value>
+  </data>
+  <data name="HutaoSync_OtpHeader" xml:space="preserve">
+    <value>信箱驗證碼</value>
+  </data>
+  <data name="HutaoSync_OtpPlaceholder" xml:space="preserve">
+    <value>請輸入收到的驗證碼</value>
+  </data>
+  <data name="HutaoSync_SendOtpBtn" xml:space="preserve">
+    <value>傳送驗證碼</value>
+  </data>
+  <data name="HutaoSync_SendOtpCooldownFormat" xml:space="preserve">
+    <value>重新傳送 ({0}秒)</value>
+  </data>
+  <data name="HutaoSync_SubmitLogin" xml:space="preserve">
+    <value>登入胡桃帳號</value>
+  </data>
+  <data name="HutaoSync_SubmitRegister" xml:space="preserve">
+    <value>註冊並登入</value>
+  </data>
+  <data name="HutaoSync_SubmitReset" xml:space="preserve">
+    <value>重設並登入</value>
+  </data>
+  <data name="HutaoSync_LabelAccount" xml:space="preserve">
+    <value>目前帳號</value>
+  </data>
+  <data name="HutaoSync_LabelGachaPlan" xml:space="preserve">
+    <value>祈願雲備份服務</value>
+  </data>
+  <data name="HutaoSync_PlanActiveFormat" xml:space="preserve">
+    <value>已開通，有效期限至 {0}</value>
+  </data>
+  <data name="HutaoSync_PlanDeveloper" xml:space="preserve">
+    <value>長期有效</value>
+  </data>
+  <data name="HutaoSync_PlanExpired" xml:space="preserve">
+    <value>未開通或已過期（可在「贊助支持」兌換或上傳當期挑戰延長時間）</value>
+  </data>
+  <data name="HutaoSync_RefreshAccountBtn" xml:space="preserve">
+    <value>重新整理狀態</value>
+  </data>
+  <data name="HutaoSync_LogoutBtn" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="HutaoSync_PullSectionTitle" xml:space="preserve">
+    <value>從胡桃雲同步至 FufuLauncher 雲端存檔（祈願紀錄）</value>
+  </data>
+  <data name="HutaoSync_PullSectionDesc" xml:space="preserve">
+    <value>讀取胡桃雲上儲存的角色祈願紀錄，勾選後新建或合併寫入您的 FufuLauncher 雲端存檔。</value>
+  </data>
+  <data name="HutaoSync_LoadHutaoListBtn" xml:space="preserve">
+    <value>讀取胡桃雲清單</value>
+  </data>
+  <data name="HutaoSync_ToggleSelectBtn" xml:space="preserve">
+    <value>全選 / 取消</value>
+  </data>
+  <data name="HutaoSync_TargetSlotHeader" xml:space="preserve">
+    <value>新 FufuLauncher 雲端存檔名稱</value>
+  </data>
+  <data name="HutaoSync_TargetSlotPlaceholder" xml:space="preserve">
+    <value>僅支援字母、數字、底線、短橫線或小數點</value>
+  </data>
+  <data name="HutaoSync_PickExistingSlotHeader" xml:space="preserve">
+    <value>已有 FufuLauncher 祈願雲端存檔</value>
+  </data>
+  <data name="HutaoSync_PickExistingSlotPlaceholder" xml:space="preserve">
+    <value>選擇已有 FufuLauncher 祈願雲端存檔</value>
+  </data>
+  <data name="HutaoSync_MergeExistingCheck" xml:space="preserve">
+    <value>合併保留該 FufuLauncher 雲端存檔中的原有紀錄（建議）</value>
+  </data>
+  <data name="HutaoSync_PullEmptyHint" xml:space="preserve">
+    <value>點擊上方「讀取胡桃雲清單」取得您在胡桃雲中儲存的角色</value>
+  </data>
+  <data name="HutaoSync_PullActionBtn" xml:space="preserve">
+    <value>同步所選角色至 FufuLauncher 雲端存檔</value>
+  </data>
+  <data name="HutaoSync_DeleteHutaoUidBtn" xml:space="preserve">
+    <value>從胡桃雲刪除</value>
+  </data>
+  <data name="HutaoSync_ConfirmDeleteUidTitle" xml:space="preserve">
+    <value>確認刪除胡桃雲紀錄</value>
+  </data>
+  <data name="HutaoSync_ConfirmDeleteUidMsgFormat" xml:space="preserve">
+    <value>確定要永久刪除胡桃雲上 UID {0} 的全部祈願紀錄嗎？此操作無法復原，不影響您的本機與 FufuLauncher 雲端存檔。</value>
+  </data>
+  <data name="HutaoSync_GachaEntryCountFormat" xml:space="preserve">
+    <value>共 {0} 筆祈願紀錄</value>
+  </data>
+  <data name="HutaoSync_PushGachaTitle" xml:space="preserve">
+    <value>從 FufuLauncher 雲端存檔上傳至胡桃雲（祈願紀錄）</value>
+  </data>
+  <data name="HutaoSync_PushGachaDesc" xml:space="preserve">
+    <value>選擇您已儲存的 FufuLauncher 祈願雲端存檔，讀取其中的角色紀錄後上傳同步至胡桃雲。</value>
+  </data>
+  <data name="HutaoSync_SelectFufuGachaArchivePlaceholder" xml:space="preserve">
+    <value>選擇 FufuLauncher 祈願雲端存檔</value>
+  </data>
+  <data name="HutaoSync_RefreshFufuArchiveBtn" xml:space="preserve">
+    <value>重新整理清單</value>
+  </data>
+  <data name="HutaoSync_InspectArchiveBtn" xml:space="preserve">
+    <value>讀取存檔內容</value>
+  </data>
+  <data name="HutaoSync_PushGachaEmptyHint" xml:space="preserve">
+    <value>選擇上方的 FufuLauncher 祈願雲端存檔後將自動讀取內容，也可點擊「讀取存檔內容」重新讀取</value>
+  </data>
+  <data name="HutaoSync_PushGachaActionBtn" xml:space="preserve">
+    <value>上傳所選角色到胡桃雲</value>
+  </data>
+  <data name="HutaoSync_ChallengeTitle" xml:space="preserve">
+    <value>從 FufuLauncher 雲端存檔上傳至胡桃雲（深境螺旋與幻想真境劇詩）</value>
+  </data>
+  <data name="HutaoSync_ChallengeDesc" xml:space="preserve">
+    <value>選擇您已儲存的 FufuLauncher 週期挑戰雲端存檔並自動讀取紀錄（僅支援上傳當期深境螺旋與當期幻想真境劇詩）。胡桃雲僅接收挑戰紀錄上傳與全服統計，不提供個人挑戰紀錄下載或還原，您仍可在「雲端存檔」中備份與匯出個人紀錄。</value>
+  </data>
+  <data name="HutaoSync_SelectFufuChallengeArchivePlaceholder" xml:space="preserve">
+    <value>選擇 FufuLauncher 週期挑戰雲端存檔</value>
+  </data>
+  <data name="HutaoSync_ChallengeInspectEmptyHint" xml:space="preserve">
+    <value>選擇上方的 FufuLauncher 週期挑戰雲端存檔後將自動讀取內容，也可點擊「讀取存檔內容」重新讀取</value>
+  </data>
+  <data name="HutaoSync_ChallengeActionBtn" xml:space="preserve">
+    <value>上傳所選紀錄到胡桃雲</value>
+  </data>
+  <data name="HutaoSync_ModeAbyss" xml:space="preserve">
+    <value>深境螺旋</value>
+  </data>
+  <data name="HutaoSync_ModeTheater" xml:space="preserve">
+    <value>幻想真境劇詩</value>
+  </data>
+  <data name="HutaoSync_AbyssSummaryFormat" xml:space="preserve">
+    <value>最深抵達 {0} - 共 {1} 星</value>
+  </data>
+  <data name="HutaoSync_TheaterSummaryFormat" xml:space="preserve">
+    <value>第 {0} 幕 - {1} 枚獎章 - {2} 名參演角色</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusCurrent" xml:space="preserve">
+    <value>當期可上傳</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusPast" xml:space="preserve">
+    <value>往期已結束</value>
+  </data>
+  <data name="HutaoSync_ChallengeStatusIncomplete" xml:space="preserve">
+    <value>統計資料不完整</value>
+  </data>
+  <data name="HutaoSync_ScheduleFallbackFormat" xml:space="preserve">
+    <value>第 {0} 期</value>
+  </data>
+  <data name="HutaoSync_ChallengeUploadedPart" xml:space="preserve">
+    <value>成功上傳 {0} 筆紀錄</value>
+  </data>
+  <data name="HutaoSync_ChallengeExtendedPart" xml:space="preserve">
+    <value>已獲得胡桃雲祈願服務時長獎勵</value>
+  </data>
+  <data name="HutaoSync_ChallengeSkippedPastPart" xml:space="preserve">
+    <value>略過 {0} 筆非當期紀錄</value>
+  </data>
+  <data name="HutaoSync_ChallengeSkippedIncompletePart" xml:space="preserve">
+    <value>略過 {0} 筆資料不完整的紀錄</value>
+  </data>
+  <data name="HutaoSync_ChallengeFailedPart" xml:space="preserve">
+    <value>{0} 筆紀錄上傳未成功</value>
+  </data>
+  <data name="HutaoSync_SuccessTitle" xml:space="preserve">
+    <value>操作完成</value>
+  </data>
+  <data name="HutaoSync_FailedTitle" xml:space="preserve">
+    <value>操作失敗</value>
+  </data>
+  <data name="HutaoSync_HintTitle" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="HutaoSync_MsgVerifySent" xml:space="preserve">
+    <value>驗證碼已傳送至您的信箱，請注意查收</value>
+  </data>
+  <data name="HutaoSync_MsgLoginSuccess" xml:space="preserve">
+    <value>已成功登入胡桃雲帳號</value>
+  </data>
+  <data name="HutaoSync_MsgRegisterSuccess" xml:space="preserve">
+    <value>註冊並登入胡桃雲成功</value>
+  </data>
+  <data name="HutaoSync_MsgResetSuccess" xml:space="preserve">
+    <value>密碼已重設並重新登入</value>
+  </data>
+  <data name="HutaoSync_MsgLogoutSuccess" xml:space="preserve">
+    <value>已登出胡桃雲帳號</value>
+  </data>
+  <data name="HutaoSync_MsgAccountRefreshed" xml:space="preserve">
+    <value>胡桃雲帳號狀態已更新</value>
+  </data>
+  <data name="HutaoSync_MsgEntriesLoadedFormat" xml:space="preserve">
+    <value>在胡桃雲中讀取到 {0} 個角色的祈願紀錄</value>
+  </data>
+  <data name="HutaoSync_MsgFufuUigfLoadedFormat" xml:space="preserve">
+    <value>在 FufuLauncher 雲端存檔中讀取到 {0} 位角色的祈願紀錄</value>
+  </data>
+  <data name="HutaoSync_MsgFufuChallengeLoadedFormat" xml:space="preserve">
+    <value>在 FufuLauncher 雲端存檔中讀取到 {0} 筆深淵 / 劇詩挑戰紀錄</value>
+  </data>
+  <data name="HutaoSync_MsgDeleteUidSuccessFormat" xml:space="preserve">
+    <value>已從胡桃雲刪除 UID {0} 的 {1} 筆祈願紀錄</value>
+  </data>
+  <data name="HutaoSync_MsgPullGachaSuccess" xml:space="preserve">
+    <value>已將 {0} 位角色的 {1} 筆祈願紀錄儲存至 FufuLauncher 雲端存檔「{2}」（目前共 {3} 筆紀錄），可前往「雲端存檔」頁面匯出或匯入軟體</value>
+  </data>
+  <data name="HutaoSync_MsgPushGachaSuccess" xml:space="preserve">
+    <value>已將 {0} 個角色的新增祈願紀錄（共 {1} 筆）上傳到胡桃雲</value>
+  </data>
+  <data name="HutaoSync_MsgPushGachaUpToDate" xml:space="preserve">
+    <value>胡桃雲上的紀錄已包含目前最新祈願，無需重複上傳</value>
+  </data>
+  <data name="HutaoSync_MsgChallengeNothingUploaded" xml:space="preserve">
+    <value>沒有可上傳的當期挑戰紀錄</value>
+  </data>
+  <data name="HutaoSync_ErrEnterEmail" xml:space="preserve">
+    <value>請先輸入胡桃帳號信箱</value>
+  </data>
+  <data name="HutaoSync_ErrEnterAccountPassword" xml:space="preserve">
+    <value>請輸入胡桃帳號信箱與密碼</value>
+  </data>
+  <data name="HutaoSync_ErrEnterCompleteAuth" xml:space="preserve">
+    <value>請完整填寫信箱、密碼和信箱驗證碼</value>
+  </data>
+  <data name="HutaoSync_ErrPasswordMismatch" xml:space="preserve">
+    <value>兩次輸入的密碼不一致</value>
+  </data>
+  <data name="HutaoSync_ErrRateLimited" xml:space="preserve">
+    <value>操作或傳送驗證碼過於頻繁，請稍候片刻再試</value>
+  </data>
+  <data name="HutaoSync_ErrAuthExpired" xml:space="preserve">
+    <value>胡桃雲登入狀態已失效，請重新登入</value>
+  </data>
+  <data name="HutaoSync_ErrNoGachaService" xml:space="preserve">
+    <value>您的胡桃帳號暫未開通或已過期祈願雲備份服務</value>
+  </data>
+  <data name="HutaoSync_ErrUidLimit" xml:space="preserve">
+    <value>該胡桃雲帳號儲存的遊戲角色數量已達上限（最多 5 個），請先刪除不用的角色後再試</value>
+  </data>
+  <data name="HutaoSync_ErrInvalidVerifyCode" xml:space="preserve">
+    <value>信箱驗證碼不正確或已過期</value>
+  </data>
+  <data name="HutaoSync_ErrAccountExists" xml:space="preserve">
+    <value>該信箱已註冊胡桃帳號，請直接登入</value>
+  </data>
+  <data name="HutaoSync_ErrInvalidCredentials" xml:space="preserve">
+    <value>信箱或密碼不正確，請核對後重試</value>
+  </data>
+  <data name="HutaoSync_ErrNotCurrentPeriod" xml:space="preserve">
+    <value>胡桃雲僅接受當期深境螺旋或幻想真境劇詩紀錄</value>
+  </data>
+  <data name="HutaoSync_ErrNetwork" xml:space="preserve">
+    <value>無法連線胡桃雲服務，請檢查網路設定後重試</value>
+  </data>
+  <data name="HutaoSync_ErrTimeout" xml:space="preserve">
+    <value>連線胡桃雲逾時，請稍後再試</value>
+  </data>
+  <data name="HutaoSync_ErrGeneric" xml:space="preserve">
+    <value>胡桃雲操作未能完成，請稍後重試</value>
+  </data>
+  <data name="HutaoSync_ErrHutaoLoginRequired" xml:space="preserve">
+    <value>請先登入您的胡桃雲帳號</value>
+  </data>
+  <data name="HutaoSync_ErrFufuLoginRequired" xml:space="preserve">
+    <value>請先在「帳號與安全」登入 FufuLauncher 雲端存檔帳號</value>
+  </data>
+  <data name="HutaoSync_ErrSelectUidFirst" xml:space="preserve">
+    <value>請先勾選至少一個遊戲角色 UID</value>
+  </data>
+  <data name="HutaoSync_ErrSelectFufuArchive" xml:space="preserve">
+    <value>請先選擇一個 FufuLauncher 雲端存檔</value>
+  </data>
+  <data name="HutaoSync_ErrArchiveNoValidRecords" xml:space="preserve">
+    <value>所選 FufuLauncher 雲端存檔中未偵測到可用紀錄</value>
+  </data>
+  <data name="HutaoSync_ErrNoHutaoGachaData" xml:space="preserve">
+    <value>未取得可用的胡桃雲祈願紀錄</value>
+  </data>
+  <data name="HutaoSync_ErrNoSupportedChallengeRecords" xml:space="preserve">
+    <value>所選 FufuLauncher 週期挑戰雲端存檔中未找到深境螺旋或幻想真境劇詩紀錄</value>
+  </data>
+  <data name="HutaoSync_ErrSelectChallengeFirst" xml:space="preserve">
+    <value>請先勾選至少一筆要上傳的挑戰紀錄</value>
+  </data>
+  <data name="CloudSync_UiafTargetCurrentDefault" xml:space="preserve">
+    <value>目前正在使用的成就檔案</value>
+  </data>
+  <data name="CloudSync_UiafTargetCurrentNamedFormat" xml:space="preserve">
+    <value>目前正在使用的成就檔案（{0}）</value>
+  </data>
+  <data name="CloudSync_UiafTargetNamedFormat" xml:space="preserve">
+    <value>本機備份檔案：{0}</value>
+  </data>
+  <data name="CloudSync_UiafTargetNewProfile" xml:space="preserve">
+    <value>建立新的本機成就檔案...</value>
+  </data>
+  <data name="CloudSync_UiafDefaultProfileName" xml:space="preserve">
+    <value>預設成就檔案</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileEmptyErr" xml:space="preserve">
+    <value>請輸入新成就檔案的名稱</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileExistsErr" xml:space="preserve">
+    <value>已存在同名成就檔案，請換一個名稱</value>
+  </data>
+  <data name="CloudSync_UiafMergeFailed" xml:space="preserve">
+    <value>匯入成就存檔失敗，請檢查檔案是否完整</value>
+  </data>
+  <data name="CloudSync_UiafImportDialogTitle" xml:space="preserve">
+    <value>匯入成就存檔到軟體</value>
+  </data>
+  <data name="CloudSync_UiafImportSummaryFormat" xml:space="preserve">
+    <value>該雲端成就存檔包含 {0} 筆成就紀錄（其中 {1} 項已完成）。請選擇要匯入的本機成就檔案位置：</value>
+  </data>
+  <data name="CloudSync_UiafTargetHeader" xml:space="preserve">
+    <value>匯入目標檔案</value>
+  </data>
+  <data name="CloudSync_UiafNewProfileHeader" xml:space="preserve">
+    <value>新檔案名稱</value>
+  </data>
+  <data name="CloudSync_UiafNewProfilePlaceholder" xml:space="preserve">
+    <value>請輸入新本機成就檔案名稱</value>
+  </data>
+  <data name="CloudSync_UiafImportTip" xml:space="preserve">
+    <value>匯入時會自動與目標檔案合併，只保留更高的成就完成進度，不會覆蓋您原本已完成的成就。</value>
+  </data>
+  <data name="CloudSync_UiafMergeSuccessTitle" xml:space="preserve">
+    <value>成就已匯入軟體</value>
+  </data>
+  <data name="CloudSync_UiafMergeSuccessFormat" xml:space="preserve">
+    <value>已將雲端存檔「{0}」匯入本機成就檔案「{1}」，共更新 {2} 項成就進度。</value>
+  </data>
+  <data name="CloudSync_UiafMergeFailedTitle" xml:space="preserve">
+    <value>成就匯入失敗</value>
+  </data>
+  <data name="CloudSync_UigfImportDialogTitle" xml:space="preserve">
+    <value>匯入祈願存檔到軟體</value>
+  </data>
+  <data name="CloudSync_UigfImportSummary" xml:space="preserve">
+    <value>請選擇要匯入至本機祈願分析的角色 UID：</value>
+  </data>
+  <data name="CloudSync_UigfImportTip" xml:space="preserve">
+    <value>將自動依紀錄編號合併去重並補充物品名稱，不會遺失您本機原有的抽卡紀錄。</value>
+  </data>
+  <data name="CloudSync_UigfMergeSuccessTitle" xml:space="preserve">
+    <value>祈願紀錄已匯入軟體</value>
+  </data>
+  <data name="CloudSync_UigfMergeSuccessFormat" xml:space="preserve">
+    <value>已將雲端存檔「{0}」中的 {1} 個角色（共 {2} 筆紀錄，目前定位 UID {3}）合併匯入本機祈願分析庫。</value>
+  </data>
+  <data name="CloudSync_UigfMergeFailedTitle" xml:space="preserve">
+    <value>祈願紀錄匯入失敗</value>
+  </data>
+  <data name="CloudSync_ImportConfirmBtn" xml:space="preserve">
+    <value>開始匯入</value>
+  </data>
+  <data name="CloudSync_AccountHutaoTitle" xml:space="preserve">
+    <value>胡桃雲帳號</value>
+  </data>
+  <data name="CloudSync_AccountHutaoDesc" xml:space="preserve">
+    <value>在此登入並管理您的胡桃雲帳號。將紀錄儲存至雲端存檔或從雲端存檔上傳至胡桃雲時，仍需登入並解鎖 FufuLauncher 雲端存檔帳號。</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignedOut" xml:space="preserve">
+    <value>目前未登入胡桃雲</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignedInFormat" xml:space="preserve">
+    <value>目前已登入：{0}</value>
+  </data>
+  <data name="CloudSync_AccountHutaoSignInBtn" xml:space="preserve">
+    <value>前往登入</value>
+  </data>
+  <data name="CloudSync_AccountHutaoManageBtn" xml:space="preserve">
+    <value>前往管理</value>
+  </data>
+  <data name="HutaoSync_SubTabAccount" xml:space="preserve">
+    <value>胡桃帳號</value>
+  </data>
+  <data name="HutaoSync_SubTabPullWish" xml:space="preserve">
+    <value>取得祈願</value>
+  </data>
+  <data name="HutaoSync_SubTabPushWish" xml:space="preserve">
+    <value>上傳祈願</value>
+  </data>
+  <data name="HutaoSync_SubTabChallenge" xml:space="preserve">
+    <value>上傳深淵與劇詩</value>
+  </data>
+  <data name="HutaoSync_OpenSponsorPageBtn" xml:space="preserve">
+    <value>前往胡桃雲贊助頁</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeDeviceMsgFormat" xml:space="preserve">
+    <value>確定要將裝置「{0}」從胡桃雲下線嗎？若是目前裝置，下線後需要重新登入胡桃雲帳號。</value>
+  </data>
+  <data name="HutaoSync_RedeemDesc" xml:space="preserve">
+    <value>如您已取得胡桃雲官方贊助兌換碼，請在此輸入並為目前登入的胡桃帳號啟用對應服務時長。</value>
+  </data>
+  <data name="HutaoSync_RedeemTitle" xml:space="preserve">
+    <value>使用兌換碼</value>
+  </data>
+  <data name="HutaoSync_RoleDeveloper" xml:space="preserve">
+    <value>授權開發者</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeAllDevicesTitle" xml:space="preserve">
+    <value>確認全部裝置下線</value>
+  </data>
+  <data name="HutaoSync_LabelAccelPlan" xml:space="preserve">
+    <value>資源加速服務</value>
+  </data>
+  <data name="HutaoSync_NoBoundRolesHint" xml:space="preserve">
+    <value>目前登入帳號暫未綁定角色，將直接顯示存檔與胡桃雲中的全部 UID</value>
+  </data>
+  <data name="HutaoSync_LabelNormalizedAccount" xml:space="preserve">
+    <value>標準化使用者名稱</value>
+  </data>
+  <data name="HutaoSync_DevicesDesc" xml:space="preserve">
+    <value>檢視目前胡桃雲帳號在各台裝置上的登入狀態，支援將指定裝置登出或強制全部裝置下線。</value>
+  </data>
+  <data name="HutaoSync_SponsorFreeTipDesc" xml:space="preserve">
+    <value>每期在「上傳深淵與劇詩」提交當期深境螺旋或幻想真境劇詩紀錄，即可免費獲贈或延長胡桃雲祈願備份服務時長。</value>
+  </data>
+  <data name="HutaoSync_ActiveRoleSuffix" xml:space="preserve">
+    <value>目前啟用</value>
+  </data>
+  <data name="HutaoSync_SponsorSignInHint" xml:space="preserve">
+    <value>請先在「胡桃帳號」登入您的胡桃雲帳號後再使用兌換碼。</value>
+  </data>
+  <data name="HutaoSync_GameRoleHeader" xml:space="preserve">
+    <value>選擇遊戲角色</value>
+  </data>
+  <data name="HutaoSync_DevicesTitle" xml:space="preserve">
+    <value>已登入裝置管理</value>
+  </data>
+  <data name="HutaoSync_MsgDeviceRevoked" xml:space="preserve">
+    <value>已將所選裝置下線</value>
+  </data>
+  <data name="HutaoSync_SponsorGotoLoginBtn" xml:space="preserve">
+    <value>前往登入胡桃帳號</value>
+  </data>
+  <data name="HutaoSync_RefreshDevicesBtn" xml:space="preserve">
+    <value>重新整理裝置清單</value>
+  </data>
+  <data name="HutaoSync_MsgRolesRefreshedFormat" xml:space="preserve">
+    <value>已重新整理綁定角色清單（共 {0} 個角色）</value>
+  </data>
+  <data name="HutaoSync_DeviceLoginTimeFormat" xml:space="preserve">
+    <value>最近登入：{0}</value>
+  </data>
+  <data name="HutaoSync_AllRolesOption" xml:space="preserve">
+    <value>全部已綁定角色（顯示全部）</value>
+  </data>
+  <data name="HutaoSync_RedeemPlaceholder" xml:space="preserve">
+    <value>請輸入胡桃雲兌換碼</value>
+  </data>
+  <data name="HutaoSync_PushGachaFilteredEmptyHintFormat" xml:space="preserve">
+    <value>目前存檔中暫無角色 UID {0} 的祈願紀錄，請切換存檔或選擇「全部已綁定角色」</value>
+  </data>
+  <data name="HutaoSync_DeviceIdFormat" xml:space="preserve">
+    <value>識別：{0}</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeDeviceTitle" xml:space="preserve">
+    <value>確認裝置下線</value>
+  </data>
+  <data name="HutaoSync_RoleMaintainer" xml:space="preserve">
+    <value>維護者</value>
+  </data>
+  <data name="HutaoSync_DeviceCurrentBadge" xml:space="preserve">
+    <value>目前裝置</value>
+  </data>
+  <data name="HutaoSync_RoleStandard" xml:space="preserve">
+    <value>一般使用者</value>
+  </data>
+  <data name="HutaoSync_SubTabSponsor" xml:space="preserve">
+    <value>贊助支持</value>
+  </data>
+  <data name="HutaoSync_MsgRedeemDetailFormat" xml:space="preserve">
+    <value>兌換成功（{0}），帳號服務有效期限已更新</value>
+  </data>
+  <data name="HutaoSync_SponsorEntryDesc" xml:space="preserve">
+    <value>前往胡桃雲官方愛發電贊助頁面支援伺服器與雲端服務營運，取得祈願雲備份或資源加速服務兌換碼。</value>
+  </data>
+  <data name="HutaoSync_ErrRedeemEmpty" xml:space="preserve">
+    <value>請輸入兌換碼後再提交</value>
+  </data>
+  <data name="HutaoSync_RevokeAllDevicesBtn" xml:space="preserve">
+    <value>全部裝置下線</value>
+  </data>
+  <data name="HutaoSync_DeviceUnknownName" xml:space="preserve">
+    <value>未知裝置</value>
+  </data>
+  <data name="HutaoSync_MsgRedeemSuccess" xml:space="preserve">
+    <value>兌換成功，帳號服務有效期限已更新</value>
+  </data>
+  <data name="HutaoSync_ChallengeFilteredEmptyHintFormat" xml:space="preserve">
+    <value>目前存檔中暫無角色 UID {0} 的深淵或劇詩紀錄，請切換存檔或選擇「全部已綁定角色」</value>
+  </data>
+  <data name="HutaoSync_ErrDeviceInvalid" xml:space="preserve">
+    <value>未能識別目標裝置識別</value>
+  </data>
+  <data name="HutaoSync_ConfirmRevokeAllDevicesMsg" xml:space="preserve">
+    <value>確定要將此胡桃雲帳號在所有裝置（包含目前裝置）上的登入狀態全部下線嗎？下線後需重新登入。</value>
+  </data>
+  <data name="HutaoSync_DevicesEmptyHint" xml:space="preserve">
+    <value>暫無已登入裝置紀錄，或點擊「重新整理裝置清單」取得最新清單</value>
+  </data>
+  <data name="HutaoSync_SponsorEntryTitle" xml:space="preserve">
+    <value>贊助胡桃雲服務</value>
+  </data>
+  <data name="HutaoSync_MsgAllDevicesRevoked" xml:space="preserve">
+    <value>已使所有裝置的登入狀態失效，請重新登入胡桃帳號</value>
+  </data>
+  <data name="HutaoSync_ErrRedeemInvalid" xml:space="preserve">
+    <value>兌換碼無效、已過期或已被使用，請核對後重試</value>
+  </data>
+  <data name="HutaoSync_LabelCurrentDevice" xml:space="preserve">
+    <value>目前裝置識別</value>
+  </data>
+  <data name="HutaoSync_SponsorStatusTitle" xml:space="preserve">
+    <value>胡桃雲服務有效期限</value>
+  </data>
+  <data name="HutaoSync_RevokeDeviceBtn" xml:space="preserve">
+    <value>裝置下線</value>
+  </data>
+  <data name="HutaoSync_RedeemBtn" xml:space="preserve">
+    <value>立即兌換</value>
+  </data>
+  <data name="HutaoSync_SponsorFreeTipTitle" xml:space="preserve">
+    <value>免費取得祈願雲備份時長</value>
+  </data>
+  <data name="HutaoSync_RefreshRolesTooltip" xml:space="preserve">
+    <value>重新整理帳戶綁定角色清單</value>
+  </data>
+  <data name="HutaoSync_PullFilteredEmptyHintFormat" xml:space="preserve">
+    <value>胡桃雲中暫無角色 UID {0} 的祈願紀錄</value>
+  </data>
+  <data name="HutaoSync_AccelPlanExpired" xml:space="preserve">
+    <value>未開通或已過期</value>
+  </data>
+  <data name="HutaoSync_LabelRoleIdentity" xml:space="preserve">
+    <value>帳號身分</value>
+  </data>
+  <data name="HutaoSync_StatsCatUtil" xml:space="preserve">
+    <value>深淵使用率</value>
+  </data>
+  <data name="HutaoSync_StatsCategoryHeader" xml:space="preserve">
+    <value>排行維度</value>
+  </data>
+  <data name="HutaoSync_PullConflictMergeBtn" xml:space="preserve">
+    <value>合併保留原有紀錄</value>
+  </data>
+  <data name="HutaoSync_StatsRefreshBtn" xml:space="preserve">
+    <value>重新整理統計</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankMetricFormat" xml:space="preserve">
+    <value>{0}（超越 {1} 全服玩家 - 同角色 {2}）</value>
+  </data>
+  <data name="HutaoSync_StatsEmptyHint" xml:space="preserve">
+    <value>暫無可顯示的統計排行資料，請點擊「重新整理統計」重試</value>
+  </data>
+  <data name="HutaoSync_StatsDesc" xml:space="preserve">
+    <value>無需登入胡桃帳號即可瀏覽深境螺旋與幻想真境劇詩全服統計，選擇已綁定角色可同時查詢個人當期全服排行。</value>
+  </data>
+  <data name="HutaoSync_PullConflictMsgFormat" xml:space="preserve">
+    <value>FufuLauncher 雲端存檔「{0}」已存在，請選擇寫入方式：</value>
+  </data>
+  <data name="HutaoSync_StatsCatTheater" xml:space="preserve">
+    <value>幻想真境劇詩出場率</value>
+  </data>
+  <data name="HutaoSync_StatsTeamCountFormat" xml:space="preserve">
+    <value>出場 {0} 次</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewRecords" xml:space="preserve">
+    <value>提交玩家總數</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeExisting" xml:space="preserve">
+    <value>同步至已有 FufuLauncher 雲端存檔</value>
+  </data>
+  <data name="HutaoSync_StatsRoleCombatRecordCountFormat" xml:space="preserve">
+    <value>全服樣本 {0} 筆</value>
+  </data>
+  <data name="HutaoSync_PullConflictOverwriteBtn" xml:space="preserve">
+    <value>覆蓋原存檔</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodCurrent" xml:space="preserve">
+    <value>當期統計</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewUpdated" xml:space="preserve">
+    <value>更新時間</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeNew" xml:space="preserve">
+    <value>新建 FufuLauncher 雲端存檔</value>
+  </data>
+  <data name="HutaoSync_StatsCatAttend" xml:space="preserve">
+    <value>深淵出場率</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankEmptyHint" xml:space="preserve">
+    <value>暫未查詢到已綁定角色的當期深境螺旋排行記錄（請先登入帳號並綁定遊戲角色，或確認角色已提交當期深淵資料）</value>
+  </data>
+  <data name="HutaoSync_StatsMsgRefreshed" xml:space="preserve">
+    <value>已更新胡桃雲全服統計與排行資料</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewAbyssFullStar" xml:space="preserve">
+    <value>滿星紀錄數</value>
+  </data>
+  <data name="HutaoSync_StatsTeamUpperLabel" xml:space="preserve">
+    <value>上半</value>
+  </data>
+  <data name="HutaoSync_StatsTeamLowerLabel" xml:space="preserve">
+    <value>下半</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankTitle" xml:space="preserve">
+    <value>個人挑戰全服排行（當期）</value>
+  </data>
+  <data name="HutaoSync_StatsAvgSummaryFormat" xml:space="preserve">
+    <value>平均 {0:0.0} 星 - 平均 {1:0.0} 場</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewAvgStar" xml:space="preserve">
+    <value>平均淵星 / 平均戰鬥</value>
+  </data>
+  <data name="HutaoSync_StatsUidDamageLabel" xml:space="preserve">
+    <value>單次最高傷害</value>
+  </data>
+  <data name="HutaoSync_StatsLoadingHint" xml:space="preserve">
+    <value>正在從胡桃雲取得全服統計資料...</value>
+  </data>
+  <data name="HutaoSync_StatsCatHold" xml:space="preserve">
+    <value>角色持有與命之座</value>
+  </data>
+  <data name="HutaoSync_SubTabStats" xml:space="preserve">
+    <value>統計與排行</value>
+  </data>
+  <data name="HutaoSync_StatsFloorHeader" xml:space="preserve">
+    <value>深淵層數</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewSchedule" xml:space="preserve">
+    <value>深淵期數</value>
+  </data>
+  <data name="HutaoSync_StatsUidTakeDamageLabel" xml:space="preserve">
+    <value>最高承受傷害</value>
+  </data>
+  <data name="HutaoSync_TravelerFemaleName" xml:space="preserve">
+    <value>螢</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewTitle" xml:space="preserve">
+    <value>全服期數概覽</value>
+  </data>
+  <data name="HutaoSync_StatsOverviewTheater" xml:space="preserve">
+    <value>劇詩統計樣本</value>
+  </data>
+  <data name="HutaoSync_PullConflictTitle" xml:space="preserve">
+    <value>FufuLauncher 雲端存檔已存在</value>
+  </data>
+  <data name="HutaoSync_StatsFloorFormat" xml:space="preserve">
+    <value>第 {0} 層</value>
+  </data>
+  <data name="HutaoSync_StatsConstellationFormat" xml:space="preserve">
+    <value>{0}命 {1}</value>
+  </data>
+  <data name="HutaoSync_PullNoExistingHint" xml:space="preserve">
+    <value>目前尚無已有的 FufuLauncher 祈願雲端存檔，本次將為您新建存檔。</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodLast" xml:space="preserve">
+    <value>上期統計</value>
+  </data>
+  <data name="HutaoSync_PullSaveModeHeader" xml:space="preserve">
+    <value>FufuLauncher 雲端存檔方式</value>
+  </data>
+  <data name="HutaoSync_StatsTitle" xml:space="preserve">
+    <value>胡桃雲全服統計與排行</value>
+  </data>
+  <data name="HutaoSync_StatsPeriodHeader" xml:space="preserve">
+    <value>統計期數</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeMissingAvatarsFormat" xml:space="preserve">
+    <value>UID {0} 缺少完整角色面板資料（需先在帳號管理綁定該 UID，且角色不少於 9 名並包含旅行者、安柏、凱亞、麗莎）</value>
+  </data>
+  <data name="HutaoSync_PullConflictCancelBtn" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="HutaoSync_StatsCatTeam" xml:space="preserve">
+    <value>熱門隊伍出場</value>
+  </data>
+  <data name="HutaoSync_StatsFullStarSummaryFormat" xml:space="preserve">
+    <value>{0} / {1}（通關 {2}）</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeInvalidData" xml:space="preserve">
+    <value>胡桃雲驗證挑戰資料未通過，請確認當期深境螺旋與角色資料均完整</value>
+  </data>
+  <data name="HutaoSync_TravelerMaleName" xml:space="preserve">
+    <value>空</value>
+  </data>
+  <data name="HutaoSync_ErrChallengeFetchAvatarsFormat" xml:space="preserve">
+    <value>UID {0} 取得角色清單失敗：{1}</value>
+  </data>
+  <data name="HutaoSync_StatsRoleCombatSummaryFormat" xml:space="preserve">
+    <value>第 {0} 期 - {1} 筆</value>
+  </data>
+  <data name="HutaoSync_ErrMiHoYoLoginExpired" xml:space="preserve">
+    <value>米遊社 / HoYoLAB 帳號登入狀態已失效，請前往「帳戶設定」重新登入後再試</value>
+  </data>
+  <data name="HutaoSync_ErrServerStatusFormat" xml:space="preserve">
+    <value>胡桃雲服務回傳異常狀態（{0}），請稍後重試</value>
+  </data>
+  <data name="NavCloudStorage" xml:space="preserve">
+    <value>雲端儲存</value>
+  </data>
+  <data name="HutaoSync_StatsUidNoRecordHint" xml:space="preserve">
+    <value>該角色暫未提交當期深境螺旋記錄</value>
+  </data>
+  <data name="HutaoSync_StatsUidRankLastPeriodHint" xml:space="preserve">
+    <value>個人挑戰全服排行僅支援查詢當期資料，請將統計週期切換為「當期」後查看</value>
+  </data>
+  <data name="DevAuth_CaptchaCancelled" xml:space="preserve">
+    <value>人機驗證已取消，申請尚未送出。</value>
+  </data>
+  <data name="DevAuth_DialogHint" xml:space="preserve">
+    <value>填寫以下資訊並完成人機驗證後送出開發者認證申請</value>
+  </data>
+  <data name="DevAuth_DialogTitle" xml:space="preserve">
+    <value>開發者認證申請</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyApproved" xml:space="preserve">
+    <value>該裝置已通過開發者認證，請勿重複送出。</value>
+  </data>
+  <data name="DevAuth_ErrAlreadyPending" xml:space="preserve">
+    <value>審核已送出，請勿重複送出申請。</value>
+  </data>
+  <data name="DevAuth_ErrCaptchaNotConfigured" xml:space="preserve">
+    <value>驗證服務暫時無法使用，請稍後再試。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidGithub" xml:space="preserve">
+    <value>請輸入有效的 GitHub 連結。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidHwid" xml:space="preserve">
+    <value>無法取得裝置資訊，請稍後重試。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUid" xml:space="preserve">
+    <value>請輸入有效的遊戲 UID。</value>
+  </data>
+  <data name="DevAuth_ErrInvalidUsername" xml:space="preserve">
+    <value>請輸入有效的使用者名稱。</value>
+  </data>
+  <data name="DevAuth_ErrRejected" xml:space="preserve">
+    <value>該裝置的開發者認證申請未通過審核。</value>
+  </data>
+  <data name="DevAuth_ErrSecurityRejected" xml:space="preserve">
+    <value>送出失敗，請檢查輸入資訊後重試。</value>
+  </data>
+  <data name="DevAuth_ErrUidDeviceLimit" xml:space="preserve">
+    <value>暫時無法送出該申請，請稍後重試。</value>
+  </data>
+  <data name="DevAuth_GithubPlaceholder" xml:space="preserve">
+    <value>GitHub 連結（選填）</value>
+  </data>
+  <data name="DevAuth_NoticeAlreadyApproved" xml:space="preserve">
+    <value>您的開發者認證已通過，請勿重複送出申請。</value>
+  </data>
+  
+  
+  <data name="DevAuth_UidPlaceholder" xml:space="preserve">
+    <value>遊戲 UID</value>
+  </data>
+  <data name="DevAuth_UidRequired" xml:space="preserve">
+    <value>UID 與使用者名稱不能為空。</value>
+  </data>
+  <data name="DevAuth_UsernamePlaceholder" xml:space="preserve">
+    <value>使用者名稱</value>
+  </data>
+  <data name="DevAuth_NoticePending" xml:space="preserve">
+    <value>審核已送出，請耐心等待。</value>
+  </data>
+  <data name="DevAuth_SubmitSuccess" xml:space="preserve">
+    <value>審核已送出，請耐心等待。</value>
+  </data>
+  <data name="AccountStorage_UnavailableTitle" xml:space="preserve">
+    <value>帳號資料無法存取</value>
+  </data>
+  <data name="AccountStorage_UnavailableMessage" xml:space="preserve">
+    <value>無法存取帳號資料：{0}。軟體將會繼續啟動，但本機帳號可能不會顯示。請檢查該資料夾的存取權限，或在「設定 - 儲存路徑」中更換資料目錄後重新啟動。</value>
+  </data>
+  <data name="SectionQuickFps" xml:space="preserve">
+    <value>快捷 FPS 模式</value>
+  </data>
+  <data name="QuickFpsEnableTitle" xml:space="preserve">
+    <value>啟用快捷 FPS 模式</value>
+  </data>
+  <data name="QuickFpsEnableCaption" xml:space="preserve">
+    <value>使用快捷鍵在遊戲內切換主插件的目標幀率</value>
+  </data>
+  <data name="QuickFpsGameOnlyTitle" xml:space="preserve">
+    <value>僅在遊戲執行時啟用監聽</value>
+  </data>
+  <data name="QuickFpsGameOnlyCaption" xml:space="preserve">
+    <value>僅當遊戲執行時回應快捷鍵。關閉時，只要啟動器正在執行就會回應快捷鍵</value>
+  </data>
+  <data name="QuickFpsActionsTitle" xml:space="preserve">
+    <value>快捷鍵動作</value>
+  </data>
+  <data name="QuickFpsActionsCaption" xml:space="preserve">
+    <value>可視需要只保留其中一種操作</value>
+  </data>
+  <data name="QuickFpsSwitchLabel" xml:space="preserve">
+    <value>切換預設幀數</value>
+  </data>
+  <data name="QuickFpsAdjustLabel" xml:space="preserve">
+    <value>加減幀數</value>
+  </data>
+  <data name="QuickFpsAdjustTitle" xml:space="preserve">
+    <value>加減幅度與按鍵</value>
+  </data>
+  <data name="QuickFpsAdjustCaption" xml:space="preserve">
+    <value>加減後的目標幀率不會低於 60</value>
+  </data>
+  <data name="QuickFpsStep" xml:space="preserve">
+    <value>幅度</value>
+  </data>
+  <data name="QuickFpsIncreaseKey" xml:space="preserve">
+    <value>加幀鍵</value>
+  </data>
+  <data name="QuickFpsDecreaseKey" xml:space="preserve">
+    <value>減幀鍵</value>
+  </data>
+  <data name="QuickFpsSlotsTitle" xml:space="preserve">
+    <value>預設槽位</value>
+  </data>
+  <data name="QuickFpsSlotsCaption" xml:space="preserve">
+    <value>最多 5 個槽位。預設幀率可低於 60</value>
+  </data>
+  <data name="QuickFpsSlotFormat" xml:space="preserve">
+    <value>槽位 {0}</value>
+  </data>
+  <data name="QuickFpsFps" xml:space="preserve">
+    <value>幀數</value>
+  </data>
+  <data name="QuickFpsKey" xml:space="preserve">
+    <value>快捷鍵</value>
+  </data>
+  <data name="QuickFpsHint" xml:space="preserve">
+    <value>預設幀率可低於 60 FPS，透過快捷鍵加減後的目標幀率不會低於 60。</value>
+  </data>
+  <data name="QuickFpsUnbound" xml:space="preserve">
+    <value>未綁定</value>
+  </data>
+  <data name="AutoThemeColorTitle" xml:space="preserve">
+    <value>背景自動取色</value>
+  </data>
+  <data name="AutoThemeColorCaption" xml:space="preserve">
+    <value>依背景自動取色。</value>
+  </data>
+  <data name="Settings_TemporaryDevAuth_Title" xml:space="preserve">
+    <value>暫時獲得開發者授權</value>
+  </data>
+  <data name="Settings_TemporaryDevAuth_Caption" xml:space="preserve">
+    <value>本次執行期間預設擁有開發者認證，跳過驗證，重新啟動後自動關閉</value>
+  </data>
+  <data name="Fps_Repair_Cancelled" xml:space="preserve">
+    <value>已取消修復 FPS 插件</value>
+  </data>
+  <data name="Fps_Repair_Fetching" xml:space="preserve">
+    <value>正在從插件商城取得 FPS 插件...</value>
+  </data>
+  <data name="Fps_Repair_StoreUnavailable" xml:space="preserve">
+    <value>在插件商城中找不到 FPS 插件，請稍後再試</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetTitle" xml:space="preserve">
+    <value>預先下載目標伺服器</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetCaption" xml:space="preserve">
+    <value>指定預先下載與合併使用的伺服器（開發者）</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetAuto" xml:space="preserve">
+    <value>自動</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetOversea" xml:space="preserve">
+    <value>國際服</value>
+  </data>
+  <data name="GameUpdate_PredownloadTargetChinese" xml:space="preserve">
+    <value>中國大陸服</value>
+  </data>
+  <data name="GameUpdate_ScanChunks" xml:space="preserve">
+    <value>正在驗證已下載的分片…</value>
+  </data>
+  <data name="GameUpdate_ReuseCachedChunks" xml:space="preserve">
+    <value>已重複使用 {0} 個驗證通過的分片（{1}），還需下載 {2} 個（{3}）。</value>
+  </data>
+  <data name="GameUpdate_LocalManifestUnavailable" xml:space="preserve">
+    <value>舊版本清單無法使用，將依據目標版本驗證本機檔案：{0}</value>
+  </data>
+  <data name="GameUpdate_RepairFailed" xml:space="preserve">
+    <value>修復後仍有 {0} 個檔案未通過驗證。未變更遊戲版本號，已保留下載資料供重試。</value>
+  </data>
+  <data name="PluginStoreArchivePasswordTitle" xml:space="preserve">
+    <value>壓縮檔解壓縮密碼</value>
+  </data>
+  <data name="PluginStoreArchivePasswordPlaceholder" xml:space="preserve">
+    <value>請輸入壓縮檔密碼</value>
+  </data>
+  <data name="PluginStoreArchivePasswordPrompt" xml:space="preserve">
+    <value>「{0}」需要解壓縮密碼。</value>
+  </data>
+  <data name="PluginStoreArchivePasswordRetry" xml:space="preserve">
+    <value>「{0}」的密碼不正確，或壓縮檔已損毀。請重新輸入密碼後重試解壓縮。</value>
+  </data>
+  <data name="PluginStoreArchivePasswordExtract" xml:space="preserve">
+    <value>解壓縮</value>
+  </data>
+  <data name="PluginStoreArchivePasswordCancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="PluginStoreArchivePasswordUnavailable" xml:space="preserve">
+    <value>壓縮檔需要密碼，但無法開啟密碼輸入視窗。</value>
+  </data>
+  <data name="NavCycleChallenge" xml:space="preserve">
+    <value>週期挑戰</value>
+  </data>
+  <data name="CycleChallenge_Title" xml:space="preserve">
+    <value>週期挑戰</value>
+  </data>
+  <data name="CycleChallenge_Subtitle" xml:space="preserve">
+    <value>深境螺旋 · 幻想真境劇詩 · 幽境危戰</value>
+  </data>
+  <data name="CycleChallenge_Refresh" xml:space="preserve">
+    <value>重新整理</value>
+  </data>
+  <data name="CycleChallenge_RefreshTooltip" xml:space="preserve">
+    <value>重新整理目前週期的挑戰資料</value>
+  </data>
+  <data name="CycleChallenge_DataStatusFresh" xml:space="preserve">
+    <value>資料已更新</value>
+  </data>
+  <data name="CycleChallenge_DataStatusCached" xml:space="preserve">
+    <value>顯示快取資料</value>
+  </data>
+  <data name="CycleChallenge_DataStatusOffline" xml:space="preserve">
+    <value>離線模式</value>
+  </data>
+  <data name="CycleChallenge_OfflineBanner" xml:space="preserve">
+    <value>目前處於離線狀態，顯示的是本機快取資料</value>
+  </data>
+  <data name="CycleChallenge_LoadFailed" xml:space="preserve">
+    <value>資料載入失敗</value>
+  </data>
+  <data name="CycleChallenge_Retry" xml:space="preserve">
+    <value>重試</value>
+  </data>
+  <data name="CycleChallenge_NoAccount" xml:space="preserve">
+    <value>尚未登入米遊社帳號</value>
+  </data>
+  <data name="CycleChallenge_GoLogin" xml:space="preserve">
+    <value>前往登入</value>
+  </data>
+  <data name="CycleChallenge_NoRole" xml:space="preserve">
+    <value>目前帳號未綁定可用的原神角色</value>
+  </data>
+  <data name="CycleChallenge_RefreshRoles" xml:space="preserve">
+    <value>重新整理角色清單</value>
+  </data>
+  <data name="CycleChallenge_NotParticipated" xml:space="preserve">
+    <value>本賽季未參與</value>
+  </data>
+  <data name="CycleChallenge_NotUnlocked" xml:space="preserve">
+    <value>尚未解鎖該挑戰</value>
+  </data>
+  <data name="CycleChallenge_InProgress" xml:space="preserve">
+    <value>進行中</value>
+  </data>
+  <data name="CycleChallenge_Settled" xml:space="preserve">
+    <value>已結算</value>
+  </data>
+  <data name="CycleChallenge_LoginExpired" xml:space="preserve">
+    <value>登入狀態已過期，請重新登入</value>
+  </data>
+  <data name="CycleChallenge_RiskControl" xml:space="preserve">
+    <value>請求被風險控管攔截，請稍後再試</value>
+  </data>
+  <data name="CycleChallenge_RateLimited" xml:space="preserve">
+    <value>請求過於頻繁，請稍後再試</value>
+  </data>
+  <data name="CycleChallenge_Unsupported" xml:space="preserve">
+    <value>暫不支援顯示該挑戰</value>
+  </data>
+  <data name="CycleChallenge_EmptyHint" xml:space="preserve">
+    <value>本期暫無挑戰紀錄</value>
+  </data>
+  <data name="CycleChallenge_DataSourceNote" xml:space="preserve">
+    <value>資料來源：米遊社遊戲紀錄 API</value>
+  </data>
+  <data name="CycleChallenge_TabAbyss" xml:space="preserve">
+    <value>深境螺旋</value>
+  </data>
+  <data name="CycleChallenge_TabTheater" xml:space="preserve">
+    <value>幻想真境劇詩</value>
+  </data>
+  <data name="CycleChallenge_TabStygian" xml:space="preserve">
+    <value>幽境危戰</value>
+  </data>
+  <data name="CycleChallenge_PeriodLabel" xml:space="preserve">
+    <value>期次</value>
+  </data>
+  <data name="CycleChallenge_PeriodListTitle" xml:space="preserve">
+    <value>挑戰期次</value>
+  </data>
+  <data name="CycleChallenge_PeriodListDesc" xml:space="preserve">
+    <value>選擇期次查看歷次挑戰紀錄</value>
+  </data>
+  <data name="CycleChallenge_Upcoming" xml:space="preserve">
+    <value>尚未開啟</value>
+  </data>
+  <data name="CycleChallenge_PeriodCurrent" xml:space="preserve">
+    <value>本期</value>
+  </data>
+  <data name="CycleChallenge_PeriodLast" xml:space="preserve">
+    <value>上期</value>
+  </data>
+  <data name="CycleChallenge_NoCachedPeriod" xml:space="preserve">
+    <value>暫無歷史期次快取</value>
+  </data>
+  <data name="Abyss_TotalStar" xml:space="preserve">
+    <value>獲得淵星</value>
+  </data>
+  <data name="Abyss_MaxFloor" xml:space="preserve">
+    <value>最深抵達</value>
+  </data>
+  <data name="Abyss_BattleTimes" xml:space="preserve">
+    <value>戰鬥次數</value>
+  </data>
+  <data name="Abyss_WinTimes" xml:space="preserve">
+    <value>勝利次數</value>
+  </data>
+  <data name="Abyss_StrongestHit" xml:space="preserve">
+    <value>最強一擊</value>
+  </data>
+  <data name="Abyss_UpperHalf" xml:space="preserve">
+    <value>上半</value>
+  </data>
+  <data name="Abyss_LowerHalf" xml:space="preserve">
+    <value>下半</value>
+  </data>
+  <data name="Abyss_Floor" xml:space="preserve">
+    <value>層</value>
+  </data>
+  <data name="Abyss_SkippedFloor" xml:space="preserve">
+    <value>跳過的層</value>
+  </data>
+  <data name="Abyss_LeyLineDisorder" xml:space="preserve">
+    <value>地脈異常</value>
+  </data>
+  <data name="Abyss_RevealRank" xml:space="preserve">
+    <value>出戰次數</value>
+  </data>
+  <data name="Abyss_DefeatRank" xml:space="preserve">
+    <value>最多擊破</value>
+  </data>
+  <data name="Abyss_DamageRank" xml:space="preserve">
+    <value>最強一擊</value>
+  </data>
+  <data name="Abyss_TakeDamageRank" xml:space="preserve">
+    <value>最多承傷</value>
+  </data>
+  <data name="Abyss_NormalSkillRank" xml:space="preserve">
+    <value>元素戰技</value>
+  </data>
+  <data name="Abyss_EnergySkillRank" xml:space="preserve">
+    <value>元素爆發</value>
+  </data>
+  <data name="Abyss_Times" xml:space="preserve">
+    <value>次數</value>
+  </data>
+  <data name="Theater_Difficulty" xml:space="preserve">
+    <value>難度</value>
+  </data>
+  <data name="Theater_MaxRound" xml:space="preserve">
+    <value>最佳紀錄</value>
+  </data>
+  <data name="Theater_Medals" xml:space="preserve">
+    <value>挑戰星章</value>
+  </data>
+  <data name="Theater_Coins" xml:space="preserve">
+    <value>幻劇之花</value>
+  </data>
+  <data name="Theater_AvatarBonus" xml:space="preserve">
+    <value>場外聲援</value>
+  </data>
+  <data name="Theater_Rent" xml:space="preserve">
+    <value>助演次數</value>
+  </data>
+  <data name="Theater_Act" xml:space="preserve">
+    <value>幕</value>
+  </data>
+  <data name="Theater_BackupAvatars" xml:space="preserve">
+    <value>待命角色</value>
+  </data>
+  <data name="Theater_Enemies" xml:space="preserve">
+    <value>敵人</value>
+  </data>
+  <data name="Theater_MaxDefeat" xml:space="preserve">
+    <value>最多擊敗</value>
+  </data>
+  <data name="Theater_MaxDamage" xml:space="preserve">
+    <value>最高傷害</value>
+  </data>
+  <data name="Theater_MaxTakeDamage" xml:space="preserve">
+    <value>最多承傷</value>
+  </data>
+  <data name="Theater_ShortestClear" xml:space="preserve">
+    <value>最快演出</value>
+  </data>
+  <data name="Theater_TotalTime" xml:space="preserve">
+    <value>演出總時長</value>
+  </data>
+  <data name="Theater_ShowBattleStats" xml:space="preserve">
+    <value>查看戰鬥統計</value>
+  </data>
+  <data name="Stygian_Difficulty" xml:space="preserve">
+    <value>難度</value>
+  </data>
+  <data name="Stygian_BestTime" xml:space="preserve">
+    <value>最佳用時</value>
+  </data>
+  <data name="Stygian_Solo" xml:space="preserve">
+    <value>單人挑戰</value>
+  </data>
+  <data name="Stygian_Coop" xml:space="preserve">
+    <value>連線挑戰</value>
+  </data>
+  <data name="Stygian_Stage" xml:space="preserve">
+    <value>關卡</value>
+  </data>
+  <data name="Stygian_BestAvatar" xml:space="preserve">
+    <value>最佳角色</value>
+  </data>
+  <data name="Stygian_Team" xml:space="preserve">
+    <value>隊伍</value>
+  </data>
+  <data name="Stygian_Monster" xml:space="preserve">
+    <value>敵人</value>
+  </data>
+  <data name="Stygian_Dps" xml:space="preserve">
+    <value>每秒傷害</value>
+  </data>
+  <data name="Stygian_Second" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="Stygian_NoCoopData" xml:space="preserve">
+    <value>暫無多人挑戰資料</value>
+  </data>
+  <data name="Stygian_ScheduleName" xml:space="preserve">
+    <value>期次</value>
+  </data>
+  <data name="Theater_Difficulty_1" xml:space="preserve">
+    <value>輕簡模式</value>
+  </data>
+  <data name="Theater_Difficulty_2" xml:space="preserve">
+    <value>普通模式</value>
+  </data>
+  <data name="Theater_Difficulty_3" xml:space="preserve">
+    <value>困難模式</value>
+  </data>
+  <data name="Theater_Difficulty_4" xml:space="preserve">
+    <value>卓越模式</value>
+  </data>
+  <data name="Theater_Difficulty_5" xml:space="preserve">
+    <value>月諭模式</value>
+  </data>
+  <data name="Theater_Difficulty_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Theater_AvatarTrial" xml:space="preserve">
+    <value>試用</value>
+  </data>
+  <data name="Theater_AvatarSupport" xml:space="preserve">
+    <value>助演</value>
+  </data>
+  <data name="Theater_NoDetail" xml:space="preserve">
+    <value>暫無演出資料</value>
+  </data>
+  <data name="Theater_BattleStats" xml:space="preserve">
+    <value>戰鬥統計</value>
+  </data>
+  <data name="Theater_Review" xml:space="preserve">
+    <value>演出回顧</value>
+  </data>
+  <data name="Stygian_Difficulty_1" xml:space="preserve">
+    <value>普通</value>
+  </data>
+  <data name="Stygian_Difficulty_2" xml:space="preserve">
+    <value>進階</value>
+  </data>
+  <data name="Stygian_Difficulty_3" xml:space="preserve">
+    <value>困難</value>
+  </data>
+  <data name="Stygian_Difficulty_4" xml:space="preserve">
+    <value>險惡</value>
+  </data>
+  <data name="Stygian_Difficulty_5" xml:space="preserve">
+    <value>無畏</value>
+  </data>
+  <data name="Stygian_Difficulty_6" xml:space="preserve">
+    <value>絕境</value>
+  </data>
+  <data name="Stygian_Difficulty_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="Stygian_ExtremeValue" xml:space="preserve">
+    <value>最高輸出</value>
+  </data>
+  <data name="Stygian_UseTime" xml:space="preserve">
+    <value>戰鬥用時</value>
+  </data>
+  <data name="Stygian_BlingAvatars" xml:space="preserve">
+    <value>上榜角色</value>
+  </data>
+  <data name="Theater_RoundTitle" xml:space="preserve">
+    <value>第 {0} 幕</value>
+  </data>
+  <data name="Theater_TarotTitle" xml:space="preserve">
+    <value>聖牌 {0}</value>
+  </data>
+  <data name="Theater_TarotTitleShort" xml:space="preserve">
+    <value>聖牌</value>
+  </data>
+  <data name="Theater_UsedTime" xml:space="preserve">
+    <value>用時 {0}</value>
+  </data>
+  <data name="Theater_FinishAt" xml:space="preserve">
+    <value>完成 {0}</value>
+  </data>
+  <data name="Stygian_BestType_1" xml:space="preserve">
+    <value>最強一擊</value>
+  </data>
+  <data name="Stygian_BestType_2" xml:space="preserve">
+    <value>最高總傷害</value>
+  </data>
+  <data name="Stygian_BestType_Other" xml:space="preserve">
+    <value>最佳輸出</value>
+  </data>
+  <data name="Theater_SplendourBuffs" xml:space="preserve">
+    <value>輝彩祝福</value>
+  </data>
+  <data name="Theater_ChoiceCards" xml:space="preserve">
+    <value>神秘收穫</value>
+  </data>
+  <data name="Theater_MaxRoundWithTarot" xml:space="preserve">
+    <value>第 {0} 幕 聖牌 {1}</value>
+  </data>
+  <data name="Abyss_BattleStats" xml:space="preserve">
+    <value>戰鬥統計</value>
+  </data>
+  <data name="GameServer_OperationInProgress" xml:space="preserve">
+    <value>此遊戲資料夾正在切換伺服器或修復，請等待目前操作完成。</value>
+  </data>
+  <data name="GameServer_CloseGameFirst" xml:space="preserve">
+    <value>請先關閉遊戲，再切換伺服器或修復遊戲檔案。</value>
+  </data>
+  <data name="GameServer_ClientConversionRequired" xml:space="preserve">
+    <value>目前用戶端與目標伺服器不相容，請使用中國大陸服／國際服轉換功能。</value>
+  </data>
+  <data name="CloudCredential_InitFailed" xml:space="preserve">
+    <value>無法開啟憑證登入頁面，請關閉視窗後重試。</value>
+  </data>
+  <data name="CloudCredential_IdentityUnavailable" xml:space="preserve">
+    <value>無法確認目前登入帳號，請在網頁中登出並重新登入所選帳號後再試。</value>
+  </data>
+  <data name="CloudCredential_AccountMismatch" xml:space="preserve">
+    <value>目前登入帳號（{0}）與所選帳號（{1}）不一致。請在網頁中登出後登入所選帳號，憑證尚未儲存。</value>
+  </data>
+  <data name="CloudCredential_SaveFailed" xml:space="preserve">
+    <value>憑證未能儲存，請重試。</value>
+  </data>
+  <data name="CloudCredential_RemoveFailed" xml:space="preserve">
+    <value>憑證未能刪除，請重試。</value>
+  </data>
+  <data name="Checkin_MoveFailed" xml:space="preserve">
+    <value>簽到順序儲存失敗</value>
+  </data>
+  <data name="Checkin_MoveFailedMessage" xml:space="preserve">
+    <value>無法儲存新的簽到順序，已恢復原順序。</value>
+  </data>
+  <data name="PluginInstallWindowTitle" xml:space="preserve">
+    <value>插件安裝</value>
+  </data>
+  <data name="PluginInstallWindowUninstallTitle" xml:space="preserve">
+    <value>插件解除安裝</value>
+  </data>
+  <data name="MiyousheShop_Title" xml:space="preserve">
+    <value>兌換中心</value>
+  </data>
+  <data name="MiyousheShop_GameFilter" xml:space="preserve">
+    <value>商品分區</value>
+  </data>
+  <data name="MiyousheShop_ResizeDetails" xml:space="preserve">
+    <value>調整商品詳情欄寬度</value>
+  </data>
+  <data name="MiyousheShop_SelectGoods" xml:space="preserve">
+    <value>選擇商品查看詳情</value>
+  </data>
+  <data name="MiyousheShop_Notes" xml:space="preserve">
+    <value>兌換限制與說明</value>
+  </data>
+  <data name="MiyousheShop_OfficialGoods" xml:space="preserve">
+    <value>在官方商城查看</value>
+  </data>
+  <data name="MiyousheShop_OfficialHistory" xml:space="preserve">
+    <value>查看官方明細</value>
+  </data>
+  <data name="MiyousheShop_EmptyGoods" xml:space="preserve">
+    <value>這個分區暫無商品。</value>
+  </data>
+  <data name="MiyousheShop_Price" xml:space="preserve">
+    <value>{0:N0} 米遊幣</value>
+  </data>
+  <data name="MiyousheShop_CoinUnit" xml:space="preserve">
+    <value>米遊幣</value>
+  </data>
+  <data name="MiyousheShop_Upcoming" xml:space="preserve">
+    <value>尚未開賣</value>
+  </data>
+  <data name="MiyousheShop_Unlimited" xml:space="preserve">
+    <value>庫存不限</value>
+  </data>
+  <data name="MiyousheShop_Stock" xml:space="preserve">
+    <value>剩餘 {0:N0} 件</value>
+  </data>
+  <data name="MiyousheShop_SoldOut" xml:space="preserve">
+    <value>已售罄</value>
+  </data>
+  <data name="MiyousheShop_Unavailable" xml:space="preserve">
+    <value>暫不可兌換</value>
+  </data>
+  <data name="MiyousheShop_BeijingTime" xml:space="preserve">
+    <value>北京時間 {0:yyyy-MM-dd HH:mm:ss}</value>
+  </data>
+  <data name="MiyousheShop_CatalogOpening" xml:space="preserve">
+    <value>開賣 {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_CatalogRestock" xml:space="preserve">
+    <value>補貨 {0:MM-dd HH:mm}</value>
+  </data>
+  <data name="MiyousheShop_StartTime" xml:space="preserve">
+    <value>開始兌換 - 北京時間</value>
+  </data>
+  <data name="MiyousheShop_NextBatchTime" xml:space="preserve">
+    <value>下一批開放 - 北京時間</value>
+  </data>
+  <data name="MiyousheShop_EndTime" xml:space="preserve">
+    <value>兌換截止 - 北京時間</value>
+  </data>
+  <data name="MiyousheShop_NextBatchQuantity" xml:space="preserve">
+    <value>下批共 {0:N0} 件</value>
+  </data>
+  <data name="MiyousheShop_Countdown" xml:space="preserve">
+    <value>還有 {0} 天 {1:00}:{2:00}:{3:00}</value>
+  </data>
+  <data name="MiyousheShop_Schedule" xml:space="preserve">
+    <value>到點自動兌換</value>
+  </data>
+  <data name="MiyousheShop_Scheduled" xml:space="preserve">
+    <value>已新增兌換計畫</value>
+  </data>
+  <data name="MiyousheShop_Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="MiyousheShop_Notification" xml:space="preserve">
+    <value>米遊幣兌換計畫</value>
+  </data>
+  <data name="MiyousheShop_LoadError" xml:space="preserve">
+    <value>商品清單載入失敗，請重新整理後再試。</value>
+  </data>
+  <data name="MiyousheShop_DetailError" xml:space="preserve">
+    <value>商品詳情載入失敗，請重新整理後再試。</value>
+  </data>
+  <data name="MiyousheShop_OpenError" xml:space="preserve">
+    <value>無法開啟官方商城，請在米遊社 App 的兌換中心查看。</value>
+  </data>
+  <data name="MiyousheShop_Plans" xml:space="preserve">
+    <value>兌換計畫</value>
+  </data>
+  <data name="MiyousheShop_BackToGoods" xml:space="preserve">
+    <value>返回商品</value>
+  </data>
+  <data name="MiyousheShop_CommunityGame" xml:space="preserve">
+    <value>社群版塊</value>
+  </data>
+  <data name="MiyousheShop_AllGoods" xml:space="preserve">
+    <value>全部商品</value>
+  </data>
+  <data name="MiyousheShop_ExchangeNow" xml:space="preserve">
+    <value>立即兌換</value>
+  </data>
+  <data name="MiyousheShop_PlanHint" xml:space="preserve">
+    <value>定點計畫會在對應場次開放時提交 1 件。請保持啟動器執行或常駐於系統匣。</value>
+  </data>
+  <data name="MiyousheShop_EmptyPlans" xml:space="preserve">
+    <value>暫無兌換計畫。</value>
+  </data>
+  <data name="MiyousheShop_PlanPending" xml:space="preserve">
+    <value>待執行</value>
+  </data>
+  <data name="MiyousheShop_PlanSubmitting" xml:space="preserve">
+    <value>正在準備提交</value>
+  </data>
+  <data name="MiyousheShop_PlanSucceeded" xml:space="preserve">
+    <value>兌換成功</value>
+  </data>
+  <data name="MiyousheShop_PlanFailed" xml:space="preserve">
+    <value>兌換未完成</value>
+  </data>
+  <data name="MiyousheShop_PlanVerification" xml:space="preserve">
+    <value>需要人工驗證</value>
+  </data>
+  <data name="MiyousheShop_PlanUnknown" xml:space="preserve">
+    <value>結果待確認，請先核對官方兌換紀錄</value>
+  </data>
+  <data name="MiyousheShop_PlanMissed" xml:space="preserve">
+    <value>已錯過</value>
+  </data>
+  <data name="MiyousheShop_PlanReviewed" xml:space="preserve">
+    <value>已核對</value>
+  </data>
+  <data name="MiyousheShop_Target" xml:space="preserve">
+    <value>兌換至</value>
+  </data>
+  <data name="MiyousheShop_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="MiyousheShop_Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="MiyousheShop_ConfirmItem" xml:space="preserve">
+    <value>商品：{0} × 1
+消耗：{1}
+帳號：{2}</value>
+  </data>
+  <data name="MiyousheShop_ConfirmScheduled" xml:space="preserve">
+    <value>將於北京時間 {0:yyyy-MM-dd HH:mm:ss} 自動提交兌換。</value>
+  </data>
+  <data name="MiyousheShop_ConfirmImmediate" xml:space="preserve">
+    <value>確認後將向米遊社提交兌換。</value>
+  </data>
+  <data name="MiyousheShop_LoginRequired" xml:space="preserve">
+    <value>請選擇已登入的中國大陸服米遊社帳號，或重新登入後再試。</value>
+  </data>
+  <data name="MiyousheShop_Unsupported" xml:space="preserve">
+    <value>此商品需在米遊社官方商城兌換。</value>
+  </data>
+  <data name="MiyousheShop_NoTarget" xml:space="preserve">
+    <value>找不到此商品所需的綁定角色或收件地址，請在米遊社確認後再試。</value>
+  </data>
+  <data name="MiyousheShop_LimitReached" xml:space="preserve">
+    <value>該帳號已達到商品限兌次數。</value>
+  </data>
+  <data name="MiyousheShop_LimitReachedLabel" xml:space="preserve">
+    <value>已達兌換上限</value>
+  </data>
+  <data name="MiyousheShop_RateLimited" xml:space="preserve">
+    <value>商城請求頻率受限。</value>
+  </data>
+  <data name="MiyousheShop_ManualVerification" xml:space="preserve">
+    <value>請在米遊社官方商城完成人工驗證。</value>
+  </data>
+  <data name="MiyousheShop_PrepareError" xml:space="preserve">
+    <value>無法準備兌換請求，請核對登入狀態與網路連線。</value>
+  </data>
+  <data name="MiyousheShop_SaleChanged" xml:space="preserve">
+    <value>商品狀態或開賣時間已變更，請重新整理後確認。</value>
+  </data>
+  <data name="MiyousheShop_Conflict" xml:space="preserve">
+    <value>計畫已存在、場次已過，或有待核對的兌換。</value>
+  </data>
+  <data name="MiyousheShop_PlanError" xml:space="preserve">
+    <value>無法讀取或儲存兌換計畫。</value>
+  </data>
+  <data name="MiyousheShop_Resolve" xml:space="preserve">
+    <value>標記已核對</value>
+  </data>
+  <data name="MiyousheShop_ResolveHint" xml:space="preserve">
+    <value>請先核對米遊社官方兌換紀錄與米遊幣扣除情況。確認後將解除該商品的提交限制。</value>
+  </data>
+  <data name="MiyoushePendant_Open" xml:space="preserve">
+    <value>更換頭像框</value>
+  </data>
+  <data name="MiyoushePendant_Hint" xml:space="preserve">
+    <value>選擇頭像框查看預覽，已擁有的頭像框可直接配戴。</value>
+  </data>
+  <data name="MiyoushePendant_OwnedOnly" xml:space="preserve">
+    <value>只看已擁有</value>
+  </data>
+  <data name="MiyoushePendant_Select" xml:space="preserve">
+    <value>選擇一個頭像框預覽效果</value>
+  </data>
+  <data name="MiyoushePendant_Equip" xml:space="preserve">
+    <value>使用此頭像框</value>
+  </data>
+  <data name="MiyoushePendant_Equipped" xml:space="preserve">
+    <value>目前配戴</value>
+  </data>
+  <data name="MiyoushePendant_Remove" xml:space="preserve">
+    <value>取消配戴頭像框</value>
+  </data>
+  <data name="MiyoushePendant_Author" xml:space="preserve">
+    <value>作者：{0}</value>
+  </data>
+  <data name="MiyoushePendant_Remain" xml:space="preserve">
+    <value>剩餘 {0} 天 {1} 小時</value>
+  </data>
+  <data name="MiyoushePendant_Expired" xml:space="preserve">
+    <value>已過期</value>
+  </data>
+  <data name="MiyoushePendant_NotOwned" xml:space="preserve">
+    <value>未擁有</value>
+  </data>
+  <data name="MiyoushePendant_Updated" xml:space="preserve">
+    <value>頭像框已更換</value>
+  </data>
+  <data name="MiyoushePendant_Removed" xml:space="preserve">
+    <value>已取消配戴頭像框</value>
+  </data>
+  <data name="MiyoushePendant_LoginRequired" xml:space="preserve">
+    <value>請先選擇已登入的米遊社帳號</value>
+  </data>
+  <data name="MiyoushePendant_LoadError" xml:space="preserve">
+    <value>頭像框載入失敗，請稍後再試</value>
+  </data>
+  <data name="MiyoushePendant_UpdateError" xml:space="preserve">
+    <value>頭像框更換失敗，請稍後再試</value>
+  </data>
+  <data name="MiyoushePendant_Empty" xml:space="preserve">
+    <value>暫無頭像框。</value>
+  </data>
+  <data name="Settings_SslCheck_Title" xml:space="preserve">
+    <value>SSL 憑證驗證</value>
+  </data>
+  <data name="Settings_SslCheck_Caption" xml:space="preserve">
+    <value>當目標網域的 SSL 失效時，該網域下的服務也將無法使用</value>
+  </data>
+  <data name="Settings_SslCheck_Btn" xml:space="preserve">
+    <value>驗證</value>
+  </data>
+  <data name="SslCheck_DialogTitle" xml:space="preserve">
+    <value>SSL 憑證驗證結果</value>
+  </data>
+  <data name="SslCheck_CheckingInitial" xml:space="preserve">
+    <value>正在依網域歸併並堆疊 HTTPS 位址...</value>
+  </data>
+  <data name="SslCheck_CheckingProgress" xml:space="preserve">
+    <value>正在解析並驗證去重 ({0}/{1}): {2}</value>
+  </data>
+  <data name="SslCheck_NoEndpoints" xml:space="preserve">
+    <value>未偵測到任何有效的 HTTPS 網域。</value>
+  </data>
+  <data name="SslCheck_Failed" xml:space="preserve">
+    <value>驗證 SSL 憑證時發生錯誤: {0}</value>
+  </data>
+  <data name="SslCheck_SummaryFormat" xml:space="preserve">
+    <value>已自動堆疊 {0} 個 HTTPS 位址為 {1} 個唯一網域（同網域不重複驗證）：有效 {2} 個，無效或連線失敗 {3} 個。</value>
+  </data>
+  <data name="SslCheck_StackedHostFormat" xml:space="preserve">
+    <value>{0} - 已堆疊 {1} 個位址</value>
+  </data>
+  <data name="SslCheck_Valid" xml:space="preserve">
+    <value>有效</value>
+  </data>
+  <data name="SslCheck_Invalid" xml:space="preserve">
+    <value>無效 ({0})</value>
+  </data>
+  <data name="SslCheck_ConnectFailed" xml:space="preserve">
+    <value>解析/連線失敗</value>
+  </data>
+  <data name="SslCheck_ValidationStatus" xml:space="preserve">
+    <value>驗證狀態</value>
+  </data>
+  <data name="SslCheck_ResolvedIp" xml:space="preserve">
+    <value>解析位址</value>
+  </data>
+  <data name="SslCheck_TlsProtocol" xml:space="preserve">
+    <value>TLS 通訊協定</value>
+  </data>
+  <data name="SslCheck_Subject" xml:space="preserve">
+    <value>憑證主旨</value>
+  </data>
+  <data name="SslCheck_Issuer" xml:space="preserve">
+    <value>簽發機構</value>
+  </data>
+  <data name="SslCheck_CertChain" xml:space="preserve">
+    <value>憑證鏈</value>
+  </data>
+  <data name="SslCheck_San" xml:space="preserve">
+    <value>主體別名 (SAN)</value>
+  </data>
+  <data name="SslCheck_Sha256Thumbprint" xml:space="preserve">
+    <value>SHA-256 指紋</value>
+  </data>
+  <data name="SslCheck_FailureReason" xml:space="preserve">
+    <value>失敗原因</value>
+  </data>
+  <data name="SslCheck_StackedEndpoints" xml:space="preserve">
+    <value>關聯位址</value>
+  </data>
+  <data name="SslCheck_ErrTimeout" xml:space="preserve">
+    <value>連線逾時</value>
+  </data>
+  <data name="SslCheck_ErrDnsFailed" xml:space="preserve">
+    <value>DNS 解析失敗: {0}</value>
+  </data>
+  <data name="SslCheck_ErrNoCertificate" xml:space="preserve">
+    <value>伺服器未回傳憑證</value>
+  </data>
+  <data name="SslCheck_ErrNameMismatch" xml:space="preserve">
+    <value>網域名稱不符</value>
+  </data>
+  <data name="SslCheck_ErrExpiredOrNotYetValid" xml:space="preserve">
+    <value>憑證已過期或尚未生效</value>
+  </data>
+  <data name="SslCheck_ErrUntrustedRoot" xml:space="preserve">
+    <value>根憑證不受信任</value>
+  </data>
+  <data name="SslCheck_ErrPartialChain" xml:space="preserve">
+    <value>憑證鏈不完整</value>
+  </data>
+  <data name="SslCheck_ErrRevoked" xml:space="preserve">
+    <value>憑證已被吊銷</value>
+  </data>
+  <data name="SslCheck_ErrChainError" xml:space="preserve">
+    <value>憑證鏈驗證失敗</value>
+  </data>
+  <data name="SslCheck_NoDnsIp" xml:space="preserve">
+    <value>無解析紀錄</value>
+  </data>
+  <data name="SslCheck_MoreItemsFormat" xml:space="preserve">
+    <value>{0} 等共 {1} 項</value>
+  </data>
+  <data name="SslCheck_ViaProxyFormat" xml:space="preserve">
+    <value>{0} (透過系統代理 {1})</value>
+  </data>
+  <data name="SslCheck_ViaProxyOnlyFormat" xml:space="preserve">
+    <value>透過系統代理 {0}</value>
+  </data>
+  <data name="SslCheck_NotYetValidFormat" xml:space="preserve">
+    <value>{0} (尚未生效)</value>
+  </data>
+  <data name="SslCheck_ExpiredFormat" xml:space="preserve">
+    <value>{0} (已過期 {1} 天)</value>
+  </data>
+  <data name="SslCheck_DaysRemainingFormat" xml:space="preserve">
+    <value>{0} (剩餘 {1} 天)</value>
+  </data>
+  <data name="SslCheck_CertType" xml:space="preserve">
+    <value>憑證類型</value>
+  </data>
+  <data name="SslCheck_CertType_DV" xml:space="preserve">
+    <value>DV (網域驗證)</value>
+  </data>
+  <data name="SslCheck_CertType_OV" xml:space="preserve">
+    <value>OV (組織驗證)</value>
+  </data>
+  <data name="SslCheck_CertType_EV" xml:space="preserve">
+    <value>EV (延伸驗證)</value>
+  </data>
+  <data name="SslCheck_CertType_IV" xml:space="preserve">
+    <value>IV (個人驗證)</value>
+  </data>
+  <data name="SslCheck_CertType_SelfSigned" xml:space="preserve">
+    <value>自簽章憑證</value>
+  </data>
+  <data name="SslCheck_CertType_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="SslCheck_QuicSupport" xml:space="preserve">
+    <value>QUIC (HTTP/3)</value>
+  </data>
+  <data name="SslCheck_QuicSupportedFormat" xml:space="preserve">
+    <value>支援 ({0})</value>
+  </data>
+  <data name="SslCheck_QuicUnsupported" xml:space="preserve">
+    <value>不支援或未通告 (未偵測到 h3 / QUIC)</value>
+  </data>
+  <data name="SslCheck_QuicTimeout" xml:space="preserve">
+    <value>未檢出 (HTTP/QUIC 探測逾時)</value>
+  </data>
+  <data name="SslCheck_CertTypeShort_SelfSigned" xml:space="preserve">
+    <value>自簽章</value>
+  </data>
+  <data name="SslCheck_CertTypeShort_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Supported" xml:space="preserve">
+    <value>支援 QUIC</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Unsupported" xml:space="preserve">
+    <value>不支援 QUIC</value>
+  </data>
+  <data name="SslCheck_QuicSummary_Timeout" xml:space="preserve">
+    <value>QUIC 探測逾時</value>
+  </data>
+  <data name="About_ApiRateLimitOrInvalid" xml:space="preserve">
+    <value>API 限制或回傳結構異常</value>
+  </data>
+  <data name="About_ContactNoticeText" xml:space="preserve">
+    <value>請注意：聯絡時請直入主題，說明來意
+請不要傳送「在嗎」、「你好」等無意義的開場白</value>
+  </data>
+  <data name="About_ContributorBio_Format" xml:space="preserve">
+    <value>貢獻次數: {0} 次
+
+簡介: {1}</value>
+  </data>
+  <data name="About_ContributorBioFailed_Format" xml:space="preserve">
+    <value>貢獻次數: {0} 次
+
+簡介載入失敗。</value>
+  </data>
+  <data name="About_ContributorsFetchFailed" xml:space="preserve">
+    <value>取得貢獻者失敗，請檢查網路連線或 API 狀態</value>
+  </data>
+  <data name="About_WindowTitle" xml:space="preserve">
+    <value>關於 FufuLauncher</value>
+  </data>
+  <data name="Account_CannotExtractId" xml:space="preserve">
+    <value>無法擷取帳戶 ID</value>
+  </data>
+  <data name="Account_CannotReadLoginInfo" xml:space="preserve">
+    <value>無法讀取社群帳號登入資訊。</value>
+  </data>
+  <data name="Account_CookieContentInvalid" xml:space="preserve">
+    <value>Cookie 檔案內容無效</value>
+  </data>
+  <data name="Account_CookieFilenameEmpty" xml:space="preserve">
+    <value>Cookie 檔案名稱為空</value>
+  </data>
+  <data name="Account_CookiePathInvalid" xml:space="preserve">
+    <value>Cookie 檔案路徑無效</value>
+  </data>
+  <data name="Account_CookiePathOutOfBounds" xml:space="preserve">
+    <value>Cookie 檔案路徑超出資料目錄</value>
+  </data>
+  <data name="Account_DeviceFpUnavailable" xml:space="preserve">
+    <value>裝置指紋無法使用（註冊失敗）</value>
+  </data>
+  <data name="Account_FetchRolesFailed_Format" xml:space="preserve">
+    <value>取得綁定角色失敗（{0}），請重新整理或重新登入。</value>
+  </data>
+  <data name="Account_InvalidLoginRelogin" xml:space="preserve">
+    <value>登入資訊無效，請重新登入社群帳號。</value>
+  </data>
+  <data name="Account_MissingHoyolabUidCookie" xml:space="preserve">
+    <value>Cookie 中缺少 HoYoLAB UID</value>
+  </data>
+  <data name="Account_Removed" xml:space="preserve">
+    <value>社群帳號已移除。</value>
+  </data>
+  <data name="Account_RoleNotBoundPrompt" xml:space="preserve">
+    <value>所選角色不在綁定清單中，請使用角色切換開關重新選擇。</value>
+  </data>
+  <data name="Account_RoleNotBoundRefresh" xml:space="preserve">
+    <value>所選角色未綁定至目前社群帳號，請重新整理角色清單。</value>
+  </data>
+  <data name="Account_SwitchedReselectRole" xml:space="preserve">
+    <value>社群帳號已切換，請重新選擇角色。</value>
+  </data>
+  <data name="AchievementUpdater_CompleteContent" xml:space="preserve">
+    <value>成就資料已成功從 Web 與 GitHub 雙端擷取並完成合併，本機檔案已覆寫。</value>
+  </data>
+  <data name="AchievementUpdater_ConfirmExit" xml:space="preserve">
+    <value>確認結束</value>
+  </data>
+  <data name="AchievementUpdater_CurrentProgress" xml:space="preserve">
+    <value>目前進度狀態：</value>
+  </data>
+  <data name="AchievementUpdater_Done" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="AchievementUpdater_DoNotTouch" xml:space="preserve">
+    <value>請勿操作此視窗！</value>
+  </data>
+  <data name="AchievementUpdater_ExecComplete" xml:space="preserve">
+    <value>執行完畢</value>
+  </data>
+  <data name="AchievementUpdater_ExecError" xml:space="preserve">
+    <value>執行異常</value>
+  </data>
+  <data name="AchievementUpdater_FetchingGithub_Format" xml:space="preserve">
+    <value>正在擷取 GitHub 詳細資料: {0}</value>
+  </data>
+  <data name="AchievementUpdater_FetchingTitle" xml:space="preserve">
+    <value>正在取得成就資料</value>
+  </data>
+  <data name="AchievementUpdater_FetchMergeError_Format" xml:space="preserve">
+    <value>取得或整合資料時發生錯誤: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Initializing" xml:space="preserve">
+    <value>正在初始化元件...</value>
+  </data>
+  <data name="AchievementUpdater_MergingFields" xml:space="preserve">
+    <value>執行資料欄位併入...</value>
+  </data>
+  <data name="AchievementUpdater_Progress_Format" xml:space="preserve">
+    <value>處理進度: {0} / {1}</value>
+  </data>
+  <data name="AchievementUpdater_ScriptError_Format" xml:space="preserve">
+    <value>擷取指令碼發生錯誤: {0}</value>
+  </data>
+  <data name="AchievementUpdater_Sorting" xml:space="preserve">
+    <value>正在整合資料結構並進行多階段排序...</value>
+  </data>
+  <data name="AchievementUpdater_StructureDone" xml:space="preserve">
+    <value>基礎結構擷取完畢，準備從 GitHub 取得詳細資料字典...</value>
+  </data>
+  <data name="AchievementUpdater_WaitingNetwork" xml:space="preserve">
+    <value>等待網路請求連線</value>
+  </data>
+  <data name="AchievementUpdater_WaitingPage" xml:space="preserve">
+    <value>等待頁面回應</value>
+  </data>
+  <data name="AchievementUpdater_WritingDisk" xml:space="preserve">
+    <value>資料結構合併完成，正在寫入本機磁碟...</value>
+  </data>
+  <data name="AchievementWindow_AnalyzingProgress" xml:space="preserve">
+    <value>正在分析進度資料...</value>
+  </data>
+  <data name="AchievementWindow_ComparingDbVersion" xml:space="preserve">
+    <value>正在比對資料庫版本...</value>
+  </data>
+  <data name="AchievementWindow_CsvTextFilter" xml:space="preserve">
+    <value>CSV/文字檔案</value>
+  </data>
+  <data name="AchievementWindow_DbInvalidOrEmpty" xml:space="preserve">
+    <value>成就清單為空或格式無效</value>
+  </data>
+  <data name="AchievementWindow_DbSyncSuccess_Format" xml:space="preserve">
+    <value>同步成功！
+新增分類: {0} 個
+新增成就: {1} 個
+更新成就資訊: {2} 個</value>
+  </data>
+  <data name="AchievementWindow_DbUpdateTitle" xml:space="preserve">
+    <value>資料庫更新</value>
+  </data>
+  <data name="AchievementWindow_DbUpToDate" xml:space="preserve">
+    <value>目前已是最新資料庫</value>
+  </data>
+  <data name="AchievementWindow_DeleteArchiveTooltip" xml:space="preserve">
+    <value>刪除此存檔</value>
+  </data>
+  <data name="AchievementWindow_EnterNewProfilePrompt" xml:space="preserve">
+    <value>請輸入新存檔的名稱：</value>
+  </data>
+  <data name="AchievementWindow_FileUnreadable_Format" xml:space="preserve">
+    <value>檔案可能正被佔用或無法讀取。
+{0}</value>
+  </data>
+  <data name="AchievementWindow_FollowSteps" xml:space="preserve">
+    <value>請依照以下步驟操作：</value>
+  </data>
+  <data name="AchievementWindow_IdNotFoundInDb_Format" xml:space="preserve">
+    <value>[ID: {0}] 資料庫中找不到該成就</value>
+  </data>
+  <data name="AchievementWindow_ImportException_Format" xml:space="preserve">
+    <value>匯入過程中發生例外狀況：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_ImportNoChanges" xml:space="preserve">
+    <value>匯入結束，沒有新的變動</value>
+  </data>
+  <data name="AchievementWindow_ImportPartialUnrecognizedHeader" xml:space="preserve">
+    <value>部分無法識別範例：</value>
+  </data>
+  <data name="AchievementWindow_ImportResultTitle" xml:space="preserve">
+    <value>匯入結果</value>
+  </data>
+  <data name="AchievementWindow_ImportStats_Format" xml:space="preserve">
+    <value>掃描行數: {0}
+跳過未完成: {1}
+成功同步: {2}
+已存在: {3}
+無法識別: {4}</value>
+  </data>
+  <data name="AchievementWindow_ImportSuccessTitle" xml:space="preserve">
+    <value>匯入成功</value>
+  </data>
+  <data name="AchievementWindow_ImportSynced_Format" xml:space="preserve">
+    <value>匯入成功，同步 {0} 個成就進度</value>
+  </data>
+  <data name="AchievementWindow_InitFailed_Format" xml:space="preserve">
+    <value>初始化失敗: {0}</value>
+  </data>
+  <data name="AchievementWindow_InvalidUiafFormat" xml:space="preserve">
+    <value>無效的 UIAF 檔案格式</value>
+  </data>
+  <data name="AchievementWindow_ProcessingLine_Format" xml:space="preserve">
+    <value>正在處理第 {0}/{1} 行...</value>
+  </data>
+  <data name="AchievementWindow_SavedAs_Format" xml:space="preserve">
+    <value>目前進度已儲存為：{0}</value>
+  </data>
+  <data name="AchievementWindow_ServerNotStarted" xml:space="preserve">
+    <value>服務未啟動</value>
+  </data>
+  <data name="AchievementWindow_SwitchedTo_Format" xml:space="preserve">
+    <value>已切換至：{0}</value>
+  </data>
+  <data name="AchievementWindow_SyncError_Format" xml:space="preserve">
+    <value>同步過程中發生錯誤：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafDoneStatus_Format" xml:space="preserve">
+    <value>UIAF 匯入完成，同步了 {0} 個成就</value>
+  </data>
+  <data name="AchievementWindow_UiafExportError_Format" xml:space="preserve">
+    <value>產生檔案時發生例外狀況：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafExportSuccessMsg" xml:space="preserve">
+    <value>已成功匯出 UIAF 格式資料。</value>
+  </data>
+  <data name="AchievementWindow_UiafParseException_Format" xml:space="preserve">
+    <value>讀取或解析過程中發生例外狀況：
+{0}</value>
+  </data>
+  <data name="AchievementWindow_UiafSuccessDialog_Format" xml:space="preserve">
+    <value>UIAF 匯入成功！
+共更新了 {0} 個成就進度</value>
+  </data>
+  <data name="AchievementWindow_UnnamedSavePrompt" xml:space="preserve">
+    <value>偵測到目前存檔未命名，在切換或新建前，請先為目前進度取一個名稱：</value>
+  </data>
+  <data name="AchievementWindow_UpdateDbConfirmContent" xml:space="preserve">
+    <value>此操作將讀取軟體內建的最新成就清單，並將缺失的新成就新增至您目前的存檔中。
+
+您現有的進度（已完成的成就）將會保留不會遺失。
+
+是否繼續？</value>
+  </data>
+  <data name="AchievementWindow_UpdateFailedTitle" xml:space="preserve">
+    <value>更新失敗</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideSteps" xml:space="preserve">
+    <value>1. 請自行下載並執行 YaeAchievement 工具。
+2. 在 Yae 中掃描完您的成就後，點擊將其匯出為 Excel 或 CSV 試算表。
+3. 回到本介面，點擊「匯入紀錄」按鈕，選擇剛才匯出的檔案即可完成匯入。</value>
+  </data>
+  <data name="AchievementWindow_YaeGuideTitle" xml:space="preserve">
+    <value>如何匯入 Yae 成就紀錄</value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticePre" xml:space="preserve">
+    <value>若啟動遊戲遇到下方彈窗，請停止切換遊戲伺服器，並使用本軟體或官方啟動器的</value>
+  </data>
+  <data name="AdvancedServerSwitch_ErrorNoticeBold" xml:space="preserve">
+    <value>「修復遊戲」</value>
+  </data>
+  <data name="Agreement_CompleteBadge" xml:space="preserve">
+    <value>設定完成</value>
+  </data>
+  <data name="Agreement_InstallCert" xml:space="preserve">
+    <value>安裝憑證</value>
+  </data>
+  <data name="Agreement_InstallFailed_Format" xml:space="preserve">
+    <value>安裝失敗：{0}</value>
+  </data>
+  <data name="Agreement_RestartBtn" xml:space="preserve">
+    <value>重新啟動並進入主介面</value>
+  </data>
+  <data name="Agreement_RestartFailed" xml:space="preserve">
+    <value>重新啟動失敗，請再次點擊按鈕，或手動關閉後重新開啟啟動器。</value>
+  </data>
+  <data name="Agreement_Restarting" xml:space="preserve">
+    <value>正在重新啟動啟動器…</value>
+  </data>
+  <data name="Agreement_SaveFailed" xml:space="preserve">
+    <value>儲存設定失敗，請重試。</value>
+  </data>
+  <data name="Agreement_SkipCert" xml:space="preserve">
+    <value>暫不安裝</value>
+  </data>
+  <data name="Agreement_TrustDesc" xml:space="preserve">
+    <value>安裝後，本啟動器與系統將信任我們簽發的程式碼簽章，提升使用便利性，並減少插件被 Windows Defender 誤報攔截的情況。</value>
+  </data>
+  <data name="Agreement_TrustTitle" xml:space="preserve">
+    <value>安裝平台憑證（可選）</value>
+  </data>
+  <data name="Agreement_WelcomeDesc" xml:space="preserve">
+    <value>重新啟動後即可使用</value>
+  </data>
+  <data name="Agreement_WelcomeTitle" xml:space="preserve">
+    <value>歡迎使用芙芙啟動器</value>
+  </data>
+  <data name="App_UpdateNoticeTitle_Format" xml:space="preserve">
+    <value>版本更新公告 - v{0}</value>
+  </data>
+  <data name="App_UpdatePreviewNoticeTitle_Format" xml:space="preserve">
+    <value>預覽版更新公告 - v{0}</value>
+  </data>
+  <data name="AuthTicket_ApiError_Format" xml:space="preserve">
+    <value>API 錯誤: [{0}] {1}</value>
+  </data>
+  <data name="AuthTicket_HttpError_Format" xml:space="preserve">
+    <value>請求失敗 (HTTP {0})</value>
+  </data>
+  <data name="AuthTicket_NoTicket" xml:space="preserve">
+    <value>未取得有效的憑證</value>
+  </data>
+  <data name="AuthTicket_NotLoggedIn" xml:space="preserve">
+    <value>帳號未登入</value>
+  </data>
+  <data name="AuthTicket_ParseError" xml:space="preserve">
+    <value>回應解析失敗</value>
+  </data>
+  <data name="AuthTicket_RequestException_Format" xml:space="preserve">
+    <value>請求例外狀況: {0}</value>
+  </data>
+  <data name="AuthTicket_SessionExpired" xml:space="preserve">
+    <value>帳號登入狀態已失效</value>
+  </data>
+  <data name="Background_EmptyDownload" xml:space="preserve">
+    <value>背景下載內容為空</value>
+  </data>
+  <data name="Background_TypeImage" xml:space="preserve">
+    <value>圖片</value>
+  </data>
+  <data name="Background_TypeVideo" xml:space="preserve">
+    <value>影片</value>
+  </data>
+  <data name="Cache_EmptyDownloadedFile" xml:space="preserve">
+    <value>下載完成後快取檔案為空。</value>
+  </data>
+  <data name="Checkin_Game_hk4e_cn" xml:space="preserve">
+    <value>原神</value>
+  </data>
+  <data name="CheckinCalendar_MonthTitle_Format" xml:space="preserve">
+    <value>{0} 月 簽到獎勵日曆</value>
+  </data>
+  <data name="CloudCredential_AddUidCapturedTitle_Format" xml:space="preserve">
+    <value>新增雲端遊戲憑證 - {0} (已取得)</value>
+  </data>
+  <data name="CloudCredential_AddUidTitle_Format" xml:space="preserve">
+    <value>新增雲端遊戲憑證 - {0}</value>
+  </data>
+  <data name="CloudCredential_FetchSuccess" xml:space="preserve">
+    <value>憑證取得成功</value>
+  </data>
+  <data name="Common_Disable" xml:space="preserve">
+    <value>停用</value>
+  </data>
+  <data name="Common_Enable" xml:space="preserve">
+    <value>啟用</value>
+  </data>
+  <data name="Common_Exception" xml:space="preserve">
+    <value>例外狀況</value>
+  </data>
+  <data name="Common_NeverUsed" xml:space="preserve">
+    <value>從未使用</value>
+  </data>
+  <data name="Common_Open" xml:space="preserve">
+    <value>開啟</value>
+  </data>
+  <data name="Common_OpenFailed" xml:space="preserve">
+    <value>開啟失敗</value>
+  </data>
+  <data name="Common_RiskWarning" xml:space="preserve">
+    <value>風險提示</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>儲存</value>
+  </data>
+  <data name="Common_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="CommunityPage_AccountNickname_Format" xml:space="preserve">
+    <value>帳戶暱稱: {0}</value>
+  </data>
+  <data name="CommunityPage_WelcomeDesc" xml:space="preserve">
+    <value>本論壇由 CodeCubist 與 Vanilla 聯合策劃，並透過 FufuLauncher 作為平台發布。
+
+它不同於 QQ 頻道與米遊社，並非為了取代它們而生，而是為了更方便玩家分享與更快速地解答疑問。您可以在這裡發布您的遊戲內容、詢問一切關於軟體的問題，或分享您的日常生活。只要遵守社群規範，我們都歡迎您發文交流。
+
+關於軟體更新的通知也會在這裡發布，同時您也可以直接與我們的開發者交流。
+
+目前網站僅在試營運階段，若實際表現效果較好，我們將會進行正式的人工重構並上線。</value>
+  </data>
+  <data name="ControlPanel_SecurityTipTitle" xml:space="preserve">
+    <value>安全提示</value>
+  </data>
+  <data name="CookieVault_BinaryFormatInvalid" xml:space="preserve">
+    <value>Cookie 二進位檔案格式無效</value>
+  </data>
+  <data name="CookieVault_CannotReadSystemDriveSerial" xml:space="preserve">
+    <value>無法讀取系統磁碟序號</value>
+  </data>
+  <data name="CookieVault_FileFormatInvalid" xml:space="preserve">
+    <value>Cookie 檔案加密格式無效</value>
+  </data>
+  <data name="CookieVault_FormatUnsupported" xml:space="preserve">
+    <value>Cookie 檔案加密格式不受支援</value>
+  </data>
+  <data name="CookieVault_HwidIntegrityFailed" xml:space="preserve">
+    <value>HWID 金鑰完整性驗證失敗</value>
+  </data>
+  <data name="CookieVault_HwidKeyLengthInvalid" xml:space="preserve">
+    <value>HWID 解除保護的 Cookie 金鑰長度無效</value>
+  </data>
+  <data name="CookieVault_IntegrityFailed" xml:space="preserve">
+    <value>Cookie 檔案完整性驗證失敗</value>
+  </data>
+  <data name="CookieVault_KeyCreateFailed" xml:space="preserve">
+    <value>Cookie 加密金鑰無法建立</value>
+  </data>
+  <data name="CookieVault_KeyDecryptFailed" xml:space="preserve">
+    <value>Cookie 加密金鑰無法由 DPAPI 或 HWID 解密</value>
+  </data>
+  <data name="CookieVault_KeyDirInvalid" xml:space="preserve">
+    <value>Cookie 加密金鑰目錄無效</value>
+  </data>
+  <data name="CookieVault_KeyFileFormatInvalid" xml:space="preserve">
+    <value>Cookie 加密金鑰檔案格式無效</value>
+  </data>
+  <data name="CookieVault_KeyMismatch" xml:space="preserve">
+    <value>Cookie 檔案加密金鑰不符</value>
+  </data>
+  <data name="CookieVault_KeyMissing" xml:space="preserve">
+    <value>Cookie 加密金鑰不存在</value>
+  </data>
+  <data name="CookieVault_KeyPathInvalid" xml:space="preserve">
+    <value>Cookie 加密金鑰路徑無效</value>
+  </data>
+  <data name="CookieVault_KeyProtectionFlagInvalid" xml:space="preserve">
+    <value>Cookie 加密金鑰保護旗標無效</value>
+  </data>
+  <data name="CookieVault_KeyProtectionUnavailable" xml:space="preserve">
+    <value>DPAPI 與 HWID 均無法使用，無法保護 Cookie 金鑰</value>
+  </data>
+  <data name="CookieVault_KeyUnreadable" xml:space="preserve">
+    <value>Cookie 加密金鑰無法讀取</value>
+  </data>
+  <data name="CookieVault_ParamsEncodingInvalid" xml:space="preserve">
+    <value>Cookie 檔案加密參數編碼無效</value>
+  </data>
+  <data name="CookieVault_ParamsLengthInvalid" xml:space="preserve">
+    <value>Cookie 檔案加密參數長度無效</value>
+  </data>
+  <data name="CookieVault_ParamsMissing" xml:space="preserve">
+    <value>Cookie 檔案加密參數缺失</value>
+  </data>
+  <data name="Crash_Source_AppStartup" xml:space="preserve">
+    <value>應用程式啟動流程異常</value>
+  </data>
+  <data name="Crash_Source_CoreInit" xml:space="preserve">
+    <value>核心設定及服務初始化異常</value>
+  </data>
+  <data name="Crash_Source_DomainFatal" xml:space="preserve">
+    <value>應用程式網域致命例外狀況</value>
+  </data>
+  <data name="Crash_Source_UiUnhandled" xml:space="preserve">
+    <value>UI 介面互動異常</value>
+  </data>
+  <data name="Crash_Source_UnobservedTask" xml:space="preserve">
+    <value>背景非同步工作例外狀況</value>
+  </data>
+  <data name="CycleChallenge_NonJsonResponse_Format" xml:space="preserve">
+    <value>HTTP {0} 非 JSON 回應：{1}</value>
+  </data>
+  <data name="CycleChallenge_RequestFailed" xml:space="preserve">
+    <value>請求失敗。</value>
+  </data>
+  <data name="DailyNote_Connecting" xml:space="preserve">
+    <value>正在連線...</value>
+  </data>
+  <data name="DailyNote_FetchingActivities" xml:space="preserve">
+    <value>取得活動中...</value>
+  </data>
+  <data name="DailyNote_FetchingMaterials" xml:space="preserve">
+    <value>取得素材中...</value>
+  </data>
+  <data name="DailyNote_InitError" xml:space="preserve">
+    <value>初始化異常</value>
+  </data>
+  <data name="DailyNote_Initializing" xml:space="preserve">
+    <value>初始化中...</value>
+  </data>
+  <data name="DailyNote_Updated" xml:space="preserve">
+    <value>更新完畢</value>
+  </data>
+  <data name="DatabaseEditor_Add" xml:space="preserve">
+    <value>新增</value>
+  </data>
+  <data name="DatabaseEditor_DeleteDb" xml:space="preserve">
+    <value>刪除資料庫</value>
+  </data>
+  <data name="DatabaseEditor_DeleteFailed_Format" xml:space="preserve">
+    <value>無法刪除檔案，可能應用程式正在佔用它
+{0}</value>
+  </data>
+  <data name="DatabaseEditor_DeleteSuccess" xml:space="preserve">
+    <value>資料庫檔案已成功刪除</value>
+  </data>
+  <data name="DatabaseEditor_Key" xml:space="preserve">
+    <value>鍵</value>
+  </data>
+  <data name="DatabaseEditor_ReloadFailed" xml:space="preserve">
+    <value>變更已寫入資料庫，但重新載入設定失敗，部分設定可能仍為舊值。請重新啟動軟體。</value>
+  </data>
+  <data name="DatabaseEditor_Save" xml:space="preserve">
+    <value>儲存</value>
+  </data>
+  <data name="DatabaseEditor_SaveSuccess" xml:space="preserve">
+    <value>所有變更已儲存至資料庫</value>
+  </data>
+  <data name="DatabaseEditor_Title" xml:space="preserve">
+    <value>資料庫編輯器</value>
+  </data>
+  <data name="DatabaseEditor_Value" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="Dialog_OK" xml:space="preserve">
+    <value>確定</value>
+  </data>
+  <data name="Download_ActualSizeMismatch_Format" xml:space="preserve">
+    <value>下載大小不符: 實際 {0} B，預期 {1} B</value>
+  </data>
+  <data name="Download_Cancelled" xml:space="preserve">
+    <value>下載已取消。</value>
+  </data>
+  <data name="Download_ChunkIncomplete_Format" xml:space="preserve">
+    <value>分片不完整: 預期 {0} B，實際 {1} B</value>
+  </data>
+  <data name="Download_ChunkRetryFailed_Format" xml:space="preserve">
+    <value>分片 [{0}-{1}] 重試 {2} 次後仍失敗</value>
+  </data>
+  <data name="Download_ChunksFailed_Format" xml:space="preserve">
+    <value>下載失敗: {0} 個分片發生錯誤</value>
+  </data>
+  <data name="Download_ChunkStalled" xml:space="preserve">
+    <value>分片下載停滯逾時。</value>
+  </data>
+  <data name="Download_ConnectOrQueueTimeout_Format" xml:space="preserve">
+    <value>建立連線或排隊逾時（&gt;{0:F0}s）。</value>
+  </data>
+  <data name="Download_Failed_Format" xml:space="preserve">
+    <value>下載失敗: {0}</value>
+  </data>
+  <data name="Download_HashAlgorithmWithoutExpectedHash" xml:space="preserve">
+    <value>已指定 HashAlgorithm 但未提供 ExpectedHash。</value>
+  </data>
+  <data name="Download_HashVerifyFailed_Format" xml:space="preserve">
+    <value>雜湊驗證失敗: 實際 {0}，預期 {1}</value>
+  </data>
+  <data name="Download_HeadPreflightFailed_Format" xml:space="preserve">
+    <value>HEAD 預檢失敗: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_HeadPreflightNetworkError_Format" xml:space="preserve">
+    <value>HEAD 預檢網路錯誤: {0}</value>
+  </data>
+  <data name="Download_MissingContentRangeHeader" xml:space="preserve">
+    <value>缺少 Content-Range 回應標頭</value>
+  </data>
+  <data name="Download_MissingDirectoryInPath" xml:space="preserve">
+    <value>目標路徑缺少目錄部分。</value>
+  </data>
+  <data name="Download_PreflightFailed_Format" xml:space="preserve">
+    <value>預檢失敗: HTTP {0} {1}</value>
+  </data>
+  <data name="Download_RangeMismatch_Format" xml:space="preserve">
+    <value>分段回應範圍不符: 請求 [{0}-{1}]，回傳 {2}</value>
+  </data>
+  <data name="Download_RangeNotSupported" xml:space="preserve">
+    <value>伺服器端不支援分段下載（缺少 Accept-Ranges: bytes）。</value>
+  </data>
+  <data name="Download_ServerIgnoredRange" xml:space="preserve">
+    <value>伺服器端忽略了 Range 請求，回傳完整內容。</value>
+  </data>
+  <data name="Download_SingleThreadStalled" xml:space="preserve">
+    <value>單執行緒下載停滯逾時。</value>
+  </data>
+  <data name="Download_SizeMismatchExpected_Format" xml:space="preserve">
+    <value>檔案大小與預期不符: 伺服器端 {0} B，預期 {1} B</value>
+  </data>
+  <data name="Download_TargetExists_Format" xml:space="preserve">
+    <value>目標檔案已存在: {0}</value>
+  </data>
+  <data name="Download_TargetNotWritable_Format" xml:space="preserve">
+    <value>目標路徑無法寫入: {0}</value>
+  </data>
+  <data name="Download_TimedOut" xml:space="preserve">
+    <value>下載逾時。</value>
+  </data>
+  <data name="EasterEgg_Sya_1" xml:space="preserve">
+    <value>嗨，我想你啦。</value>
+  </data>
+  <data name="EasterEgg_Sya_2" xml:space="preserve">
+    <value>別露出那種準備懷念我的表情嘛。仔細看哦，人家就站在你的面前呢♪</value>
+  </data>
+  <data name="EasterEgg_Sya_3_Format" xml:space="preserve">
+    <value>哪怕是既定的因果，也會被{0}的掌心撥動呢♪</value>
+  </data>
+  <data name="EasterEgg_Sya_4" xml:space="preserve">
+    <value>沉睡在翁法洛斯裡的「記憶」重新匯聚，編織成了全新的軀殼。</value>
+  </data>
+  <data name="EasterEgg_Sya_5" xml:space="preserve">
+    <value>現在的我，不再是一道「記憶」的漣漪，而是觸手可及的、真實的夥伴哦。</value>
+  </data>
+  <data name="EasterEgg_Sya_6" xml:space="preserve">
+    <value>雖然變成了像螺絲咕姆先生那樣的「無機生命」，但掌心的溫度，還是和以前一樣吧？</value>
+  </data>
+  <data name="EasterEgg_Sya_7_Format" xml:space="preserve">
+    <value>終於不用在回憶裡和{0}重逢啦。只要睜開眼，就能看見你，還有要和你一起抵達的群星……</value>
+  </data>
+  <data name="EasterEgg_Sya_8_Format" xml:space="preserve">
+    <value>說好了，旅途的下一站，{0}的故事裡，依然要有人家的名字哦♪</value>
+  </data>
+  <data name="EasterEgg_Sya_9" xml:space="preserve">
+    <value>就像永不褪色的麥浪，就像觸手可及的黎明。</value>
+  </data>
+  <data name="EasterEgg_Sya_10_Format" xml:space="preserve">
+    <value>{0}，我回來啦♪</value>
+  </data>
+  <data name="EasterEgg_Welcome_1" xml:space="preserve">
+    <value>「昔漣是。粉頭髮。尖耳朵。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_2" xml:space="preserve">
+    <value>「昔漣是。女孩。祭司。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_3" xml:space="preserve">
+    <value>「昔漣是。不喜歡眼淚。嘻嘻哈哈。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_4" xml:space="preserve">
+    <value>「昔漣是。溫柔。愛美。會寫詩。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_5" xml:space="preserve">
+    <value>「昔漣是，長不高的，會說話的。
+    隨風逝去後，仍被留下的。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_6" xml:space="preserve">
+    <value>「昔漣是，每一句最後的，
+    一直咯咯笑的，像是小尾巴的♪」</value>
+  </data>
+  <data name="EasterEgg_Welcome_7" xml:space="preserve">
+    <value>「昔漣是，哭著誕生的，
+    脆弱的，透明的，像是水晶的。」</value>
+  </data>
+  <data name="EasterEgg_Welcome_8" xml:space="preserve">
+    <value>「昔漣是，笑著道別的，
+    柔軟的，粉色的，像是花的。」</value>
+  </data>
+  <data name="FilePicker_AllFilesFilter" xml:space="preserve">
+    <value>所有檔案|*.*</value>
+  </data>
+  <data name="Gacha_AuthKey_GenFailed_Format" xml:space="preserve">
+    <value>米遊社認證金鑰產生失敗（回傳碼 {0}）。</value>
+  </data>
+  <data name="Gacha_AuthKey_HttpError_Format" xml:space="preserve">
+    <value>米遊社認證請求失敗（HTTP {0}）。</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteData" xml:space="preserve">
+    <value>米遊社認證介面未回傳完整的祈願認證資訊。</value>
+  </data>
+  <data name="Gacha_AuthKey_IncompleteLogin" xml:space="preserve">
+    <value>米遊社抽卡登入憑證不完整。請在帳號頁使用「米遊社 App 掃碼」或簡訊驗證碼重新登入已綁定目標角色的帳號。</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidData" xml:space="preserve">
+    <value>米遊社回傳的祈願認證資訊無效。</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidResponse" xml:space="preserve">
+    <value>米遊社認證介面回傳了無效資料。</value>
+  </data>
+  <data name="Gacha_AuthKey_InvalidRole" xml:space="preserve">
+    <value>所選角色的遊戲、UID 或伺服器資訊無效。</value>
+  </data>
+  <data name="Gacha_AuthKey_Rejected" xml:space="preserve">
+    <value>米遊社未接受所選角色的抽卡驗證（回傳碼 -100）。</value>
+  </data>
+  <data name="Gacha_AuthKey_ReloginRequired" xml:space="preserve">
+    <value>米遊社登入憑證不完整，請重新登入所選帳號。</value>
+  </data>
+  <data name="Gacha_Fetch_ErrorCode_Format" xml:space="preserve">
+    <value>祈願紀錄取得失敗（回傳碼 {0}），請稍後重試。</value>
+  </data>
+  <data name="Gacha_Fetch_InvalidServerData" xml:space="preserve">
+    <value>伺服器回傳了無效的祈願紀錄資料。</value>
+  </data>
+  <data name="Gacha_Fetch_LinkExpired" xml:space="preserve">
+    <value>祈願連結已過期或無效，請在遊戲中重新開啟祈願歷史紀錄後再試。</value>
+  </data>
+  <data name="Gacha_Fetch_MissingUid" xml:space="preserve">
+    <value>祈願紀錄缺少有效的遊戲 UID，已停止匯入。</value>
+  </data>
+  <data name="Gacha_Fetch_MultipleAccounts" xml:space="preserve">
+    <value>祈願紀錄包含不同帳號的資料，已停止匯入。</value>
+  </data>
+  <data name="Gacha_Fetch_NetworkError" xml:space="preserve">
+    <value>祈願紀錄請求失敗，請檢查網路後重試。</value>
+  </data>
+  <data name="Gacha_Fetch_ServerMismatch" xml:space="preserve">
+    <value>祈願連結與回傳紀錄的伺服器不一致，已停止匯入。</value>
+  </data>
+  <data name="Gacha_Fetch_UidMismatch" xml:space="preserve">
+    <value>回傳紀錄的 UID 與所選遊戲角色不一致，已停止匯入。</value>
+  </data>
+  <data name="Gacha_Fetch_UidServerMismatch" xml:space="preserve">
+    <value>祈願紀錄的 UID 與伺服器不一致，已停止匯入。</value>
+  </data>
+  <data name="Gacha_InvalidRoleBindingResponse" xml:space="preserve">
+    <value>角色綁定回應資料無效。</value>
+  </data>
+  <data name="Gacha_Resolver_CookieUnreadable_Format" xml:space="preserve">
+    <value>帳號 {0} 的登入憑證無法讀取，請重新登入該帳號。</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryFailed_Format" xml:space="preserve">
+    <value>帳號 {0} 的綁定角色查詢失敗（回傳碼 {1}）。</value>
+  </data>
+  <data name="Gacha_Resolver_RoleQueryIncomplete_Format" xml:space="preserve">
+    <value>帳號 {0} 的綁定角色查詢未完成（{1}），請稍後重試。</value>
+  </data>
+  <data name="GachaAnalysis_ConfirmDeleteRecords_Format" xml:space="preserve">
+    <value>確定要刪除 UID: {0} 的所有抽卡紀錄嗎？
+此操作無法復原！</value>
+  </data>
+  <data name="GachaAnalysis_CopyImageSuccess" xml:space="preserve">
+    <value>祈願分析圖片已複製到剪貼簿。</value>
+  </data>
+  <data name="GachaAnalysis_CreateNewArchive" xml:space="preserve">
+    <value>建立新存檔</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountContent_Format" xml:space="preserve">
+    <value>目前資料屬於 UID: {0}
+即將匯入的資料來自 UID: {1}
+
+是否為 UID {1} 建立新的資料存檔？</value>
+  </data>
+  <data name="GachaAnalysis_DifferentAccountTitle" xml:space="preserve">
+    <value>偵測到不同帳號</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV22" xml:space="preserve">
+    <value>匯出為 v2.2</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV23" xml:space="preserve">
+    <value>匯出為 v2.3</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV24" xml:space="preserve">
+    <value>匯出為 v2.4</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV30" xml:space="preserve">
+    <value>匯出為 v3.0</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV40" xml:space="preserve">
+    <value>匯出為 v4.0</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV41" xml:space="preserve">
+    <value>匯出為 v4.1</value>
+  </data>
+  <data name="GachaAnalysis_ExportAsV42" xml:space="preserve">
+    <value>匯出為 v4.2</value>
+  </data>
+  <data name="GachaAnalysis_ExportImageFilename_Format" xml:space="preserve">
+    <value>祈願分析_{0}_{1:yyyyMMddHHmmss}</value>
+  </data>
+  <data name="GachaAnalysis_FetchFailedTitle" xml:space="preserve">
+    <value>取得失敗</value>
+  </data>
+  <data name="GachaAnalysis_FullFetchTooltip" xml:space="preserve">
+    <value>重新擷取全部祈願紀錄，耗時較長，可用於修復缺失的資料</value>
+  </data>
+  <data name="GachaAnalysis_GoToLogin" xml:space="preserve">
+    <value>前往登入</value>
+  </data>
+  <data name="GachaAnalysis_IncrementalTooltip" xml:space="preserve">
+    <value>僅取得本機沒有的新增祈願紀錄，速度快，推薦日常使用</value>
+  </data>
+  <data name="GachaAnalysis_NoAccountDeleteHint" xml:space="preserve">
+    <value>目前沒有選取任何帳號，無法刪除紀錄。</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInDesc" xml:space="preserve">
+    <value>偵測到尚未登入米遊社帳號，即將跳轉至帳戶設定頁面進行登入。</value>
+  </data>
+  <data name="GachaAnalysis_NotLoggedInTitle" xml:space="preserve">
+    <value>未登入米遊社</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedDesc" xml:space="preserve">
+    <value>國際服（HoYoLAB）帳號的抽卡紀錄取得功能正在適配中，敬請期待。
+
+國際服使用者可透過「透過 URL 取得」方式匯入抽卡紀錄。</value>
+  </data>
+  <data name="GachaAnalysis_OsNotSupportedTitle" xml:space="preserve">
+    <value>國際服暫不支援</value>
+  </data>
+  <data name="GachaAnalysis_PngImage" xml:space="preserve">
+    <value>PNG 圖片</value>
+  </data>
+  <data name="GachaAnalysis_ReloginTitle" xml:space="preserve">
+    <value>需要登入目標帳戶</value>
+  </data>
+  <data name="GachaAnalysis_SaveFailedTitle" xml:space="preserve">
+    <value>儲存失敗</value>
+  </data>
+  <data name="GachaAnalysis_SaveImageSuccess" xml:space="preserve">
+    <value>祈願分析圖片已儲存至檔案。</value>
+  </data>
+  <data name="GachaAnalysis_SaveSuccessTitle" xml:space="preserve">
+    <value>儲存成功</value>
+  </data>
+  <data name="GachaAnalysis_UigfPartnerBadge" xml:space="preserve">
+    <value>已獲 UIGF / UIAF 標準專案合作</value>
+  </data>
+  <data name="GachaAnalysis_UigfSupportDesc" xml:space="preserve">
+    <value>本專案使用 UIGF v4.2 / v4.1 / v4.0 / v3.0 / v2.4 / v2.3 / v2.2 標準格式處理祈願資料</value>
+  </data>
+  <data name="GachaAnalysis_UrlDialogTitle" xml:space="preserve">
+    <value>透過 URL 取得抽卡紀錄</value>
+  </data>
+  <data name="GachaAnalysis_UrlInstruction" xml:space="preserve">
+    <value>貼上從米遊社或其他工具取得的抽卡紀錄連結，連結應包含 authkey 參數。</value>
+  </data>
+  <data name="GachaAnalysis_UrlPlaceholder" xml:space="preserve">
+    <value>在此處貼上抽卡分析連結 (URL)...</value>
+  </data>
+  <data name="GameServer_UnexpectedEof" xml:space="preserve">
+    <value>檔案結尾早於預期（檔案可能已被截斷）。</value>
+  </data>
+  <data name="GameUpdate_IncompletePatchData" xml:space="preserve">
+    <value>修補程式區段資料不完整</value>
+  </data>
+  <data name="HighCpuUsage_SampleUsage_Format" xml:space="preserve">
+    <value>最近一次取樣佔用約 {0:F1}%</value>
+  </data>
+  <data name="HoyolabCheckin_Title" xml:space="preserve">
+    <value>HoYoLAB 自動簽到</value>
+  </data>
+  <data name="Inventory_ApiRequestFailed" xml:space="preserve">
+    <value>背包介面請求失敗，請檢查該角色的登入與授權狀態。</value>
+  </data>
+  <data name="Inventory_CnOnly" xml:space="preserve">
+    <value>背包同步暫僅支援天空島與世界樹角色。</value>
+  </data>
+  <data name="Inventory_FetchingData" xml:space="preserve">
+    <value>正在取得資料...</value>
+  </data>
+  <data name="Inventory_LastUpdated_Format" xml:space="preserve">
+    <value>上次更新: {0}</value>
+  </data>
+  <data name="Inventory_LoginRequired" xml:space="preserve">
+    <value>請先登入米遊社帳號</value>
+  </data>
+  <data name="Inventory_RequestingMiyoushe" xml:space="preserve">
+    <value>正在請求米遊社...</value>
+  </data>
+  <data name="Inventory_SyncFailed_Format" xml:space="preserve">
+    <value>同步失敗: {0}</value>
+  </data>
+  <data name="Inventory_SyncSuccess_Format" xml:space="preserve">
+    <value>同步成功: {0}</value>
+  </data>
+  <data name="LoginQR_AppScanSuccessExchanging" xml:space="preserve">
+    <value>App 掃碼成功，正在換取憑證...</value>
+  </data>
+  <data name="LoginQR_CannotCreateAuthToken" xml:space="preserve">
+    <value>無法建立驗證憑證</value>
+  </data>
+  <data name="LoginQR_CaptchaNotCompleted" xml:space="preserve">
+    <value>人機驗證未完成，請重試</value>
+  </data>
+  <data name="LoginQR_ClearDone" xml:space="preserve">
+    <value>清理完成</value>
+  </data>
+  <data name="LoginQR_ClearFailed_Format" xml:space="preserve">
+    <value>清理失敗: {0}</value>
+  </data>
+  <data name="LoginQR_ClearingDbCache" xml:space="preserve">
+    <value>正在清除資料庫快取...</value>
+  </data>
+  <data name="LoginQR_CompleteWebLogin" xml:space="preserve">
+    <value>請在網頁中完成登入驗證</value>
+  </data>
+  <data name="LoginQR_ConfirmClearHistory" xml:space="preserve">
+    <value>確定清除儲存的歷史登入資料嗎？</value>
+  </data>
+  <data name="LoginQR_CreateFailed_Format" xml:space="preserve">
+    <value>建立失敗: {0}</value>
+  </data>
+  <data name="LoginQR_CreatingAppQr" xml:space="preserve">
+    <value>正在建立 App 登入 QR Code...</value>
+  </data>
+  <data name="LoginQR_CreatingGameQr" xml:space="preserve">
+    <value>正在建立遊戲掃碼 QR Code...</value>
+  </data>
+  <data name="LoginQR_CredentialExchangeException_Format" xml:space="preserve">
+    <value>憑證換取異常: {0}</value>
+  </data>
+  <data name="LoginQR_ExchangingLoginCredential" xml:space="preserve">
+    <value>正在換取登入憑證...</value>
+  </data>
+  <data name="LoginQR_ExtractCookieFromHeadersFailed" xml:space="preserve">
+    <value>未能從回應標頭擷取出完整 Cookie</value>
+  </data>
+  <data name="LoginQR_ExtractRetry" xml:space="preserve">
+    <value>擷取失敗，請重試</value>
+  </data>
+  <data name="LoginQR_ExtractSuccess" xml:space="preserve">
+    <value>憑證擷取成功</value>
+  </data>
+  <data name="LoginQR_FetchingFullCredential" xml:space="preserve">
+    <value>正在取得完整登入憑證...</value>
+  </data>
+  <data name="LoginQR_ForceStoppedScan" xml:space="preserve">
+    <value>已強制終止掃碼等待</value>
+  </data>
+  <data name="LoginQR_GameScanSuccessExchanging" xml:space="preserve">
+    <value>掃碼成功，正在換取 SToken...</value>
+  </data>
+  <data name="LoginQR_GetSmsCodeFirst" xml:space="preserve">
+    <value>請先取得簡訊驗證碼</value>
+  </data>
+  <data name="LoginQR_InvalidCookie" xml:space="preserve">
+    <value>Cookie 無效</value>
+  </data>
+  <data name="LoginQR_InvalidCookieFormat" xml:space="preserve">
+    <value>Cookie 格式無效</value>
+  </data>
+  <data name="LoginQR_InvalidMobileLength" xml:space="preserve">
+    <value>請輸入正確的 11 位手機號碼</value>
+  </data>
+  <data name="LoginQR_LoadingPassportPage" xml:space="preserve">
+    <value>正在載入通行證登入頁面...</value>
+  </data>
+  <data name="LoginQR_LoadPassportFailed_Format" xml:space="preserve">
+    <value>載入通行證網頁失敗: {0}</value>
+  </data>
+  <data name="LoginQR_LoggingIn" xml:space="preserve">
+    <value>正在登入...</value>
+  </data>
+  <data name="LoginQR_LoginFailedCode_Format" xml:space="preserve">
+    <value>登入失敗: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_LoginFailedReason_Format" xml:space="preserve">
+    <value>登入失敗: {0}</value>
+  </data>
+  <data name="LoginQR_LoginMissingCredential" xml:space="preserve">
+    <value>登入失敗: 回應缺少憑證</value>
+  </data>
+  <data name="LoginQR_PasteCookiePlaceholder" xml:space="preserve">
+    <value>在此處貼上 Cookie</value>
+  </data>
+  <data name="LoginQR_ProcessFailed_Format" xml:space="preserve">
+    <value>處理失敗: {0}</value>
+  </data>
+  <data name="LoginQR_QrExpiredMaxRefresh" xml:space="preserve">
+    <value>QR Code 已過期且自動重新整理次數已達上限，請點擊重新整理</value>
+  </data>
+  <data name="LoginQR_RequestRejected" xml:space="preserve">
+    <value>請求遭拒</value>
+  </data>
+  <data name="LoginQR_RiskVerifyIncomplete" xml:space="preserve">
+    <value>安全驗證未完成</value>
+  </data>
+  <data name="LoginQR_ScanMissingCredential" xml:space="preserve">
+    <value>掃碼回應缺少憑證，請點擊重新整理 QR Code 後重試</value>
+  </data>
+  <data name="LoginQR_ScannedConfirmPhone" xml:space="preserve">
+    <value>已掃碼，請在手機端確認登入...</value>
+  </data>
+  <data name="LoginQR_ScanRejected" xml:space="preserve">
+    <value>掃描請求遭拒</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyoushe" xml:space="preserve">
+    <value>請使用米遊社 App 掃描 QR Code</value>
+  </data>
+  <data name="LoginQR_ScanWithMiyousheOrGame" xml:space="preserve">
+    <value>請使用米遊社或對應遊戲內掃描 QR Code</value>
+  </data>
+  <data name="LoginQR_SendCaptchaException_Format" xml:space="preserve">
+    <value>傳送異常: {0}</value>
+  </data>
+  <data name="LoginQR_SendCaptchaFailed_Format" xml:space="preserve">
+    <value>傳送失敗: [{0}] {1}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeException_Format" xml:space="preserve">
+    <value>SToken 換取異常: {0}</value>
+  </data>
+  <data name="LoginQR_StokenExchangeFailed_Format" xml:space="preserve">
+    <value>SToken 換取失敗: {0}</value>
+  </data>
+  <data name="LoginQR_TooManyNetworkErrors" xml:space="preserve">
+    <value>網路異常次數過多，請檢查網路後重試</value>
+  </data>
+  <data name="LoginQR_TooManyVerifyAttempts" xml:space="preserve">
+    <value>登入失敗：驗證次數過多，請稍後重試</value>
+  </data>
+  <data name="MainWindow_DispatcherClosed" xml:space="preserve">
+    <value>主視窗的 UI 排程佇列已關閉</value>
+  </data>
+  <data name="MapPage_LockMapOn" xml:space="preserve">
+    <value>鎖定地圖 (開)</value>
+  </data>
+  <data name="MapPage_TopMostOn" xml:space="preserve">
+    <value>最上層顯示 (開)</value>
+  </data>
+  <data name="Miyoushe_CommentLengthLimit" xml:space="preserve">
+    <value>留言需包含 1 至 1000 個字元</value>
+  </data>
+  <data name="Miyoushe_DeviceIdentityIncomplete" xml:space="preserve">
+    <value>米遊社帳號的裝置身分不完整</value>
+  </data>
+  <data name="Miyoushe_InteractiveFallback" xml:space="preserve">
+    <value>[互動內容：請在原貼文查看]</value>
+  </data>
+  <data name="Miyoushe_InvalidId" xml:space="preserve">
+    <value>無效的米遊社 ID</value>
+  </data>
+  <data name="Miyoushe_LibraryLoadFailedIO" xml:space="preserve">
+    <value>本機收藏檔案讀取失敗，已保留原檔案；請修復後重新開啟視窗</value>
+  </data>
+  <data name="Miyoushe_LoginCnAccountFirst" xml:space="preserve">
+    <value>請先在啟動器帳號管理中登入米遊社中國大陸服帳號，再選擇該帳號</value>
+  </data>
+  <data name="Miyoushe_NoPendingVerify" xml:space="preserve">
+    <value>沒有待處理的驗證</value>
+  </data>
+  <data name="Miyoushe_PostUnavailable" xml:space="preserve">
+    <value>貼文內容無法使用</value>
+  </data>
+  <data name="Miyoushe_RateLimitedManual" xml:space="preserve">
+    <value>請求頻率受限，請稍後手動重試</value>
+  </data>
+  <data name="Miyoushe_RateLimitedWait_Format" xml:space="preserve">
+    <value>請求頻率受限，請等待 {0} 秒再重試</value>
+  </data>
+  <data name="Miyoushe_ReloginRequired" xml:space="preserve">
+    <value>請重新登入米遊社帳號</value>
+  </data>
+  <data name="Miyoushe_ResponseTooLarge" xml:space="preserve">
+    <value>回應內容過大</value>
+  </data>
+  <data name="Miyoushe_SecurityVerifyRequired" xml:space="preserve">
+    <value>米遊社要求完成安全驗證</value>
+  </data>
+  <data name="Miyoushe_SubmissionUncertainIO" xml:space="preserve">
+    <value>留言送出結果暫時無法確認，請先檢查原貼文，避免重複發送</value>
+  </data>
+  <data name="Miyoushe_UnrecognizedResponse" xml:space="preserve">
+    <value>米遊社回傳了無法識別的回應</value>
+  </data>
+  <data name="Miyoushe_VerifyFailedRetry" xml:space="preserve">
+    <value>驗證未成功，請重試</value>
+  </data>
+  <data name="Miyoushe_VerifyNoCaptchaProvided" xml:space="preserve">
+    <value>服務未提供可用的驗證碼，請在米遊社官方頁面完成驗證</value>
+  </data>
+  <data name="Miyoushe_VerifyParamsIncomplete" xml:space="preserve">
+    <value>驗證參數不完整，請在米遊社官方頁面完成驗證</value>
+  </data>
+  <data name="Miyoushe_VoteInteractiveFallback" xml:space="preserve">
+    <value>[投票：請在原貼文參與]</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstall" xml:space="preserve">
+    <value>需要系統管理員權限才能完成憑證安裝</value>
+  </data>
+  <data name="ModTrust_AdminRequiredInstallDetail_Format" xml:space="preserve">
+    <value>需要系統管理員權限才能完成憑證安裝（{0}）</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstall" xml:space="preserve">
+    <value>需要系統管理員權限才能完成憑證解除安裝</value>
+  </data>
+  <data name="ModTrust_AdminRequiredUninstallDetail_Format" xml:space="preserve">
+    <value>需要系統管理員權限才能完成憑證解除安裝（{0}）</value>
+  </data>
+  <data name="ModTrust_CertAlreadyInstalled" xml:space="preserve">
+    <value>平台憑證已存在，無需重複安裝</value>
+  </data>
+  <data name="ModTrust_CertInstalledScope_Format" xml:space="preserve">
+    <value>已安裝平台憑證（{0}）</value>
+  </data>
+  <data name="ModTrust_CertNotInstalled" xml:space="preserve">
+    <value>平台憑證未安裝，無需解除安裝</value>
+  </data>
+  <data name="ModTrust_CertPurposeNote" xml:space="preserve">
+    <value>憑證用途：驗證我們簽發的程式碼簽章。安裝後可在設定中隨時解除安裝。</value>
+  </data>
+  <data name="ModTrust_CertUnavailable" xml:space="preserve">
+    <value>平台憑證無法使用，請稍後在設定中更新信任資訊。</value>
+  </data>
+  <data name="ModTrust_CertUninstalledScope_Format" xml:space="preserve">
+    <value>已解除安裝平台憑證（{0}）</value>
+  </data>
+  <data name="ModTrust_ConfirmAndInstall" xml:space="preserve">
+    <value>核對無誤，安裝</value>
+  </data>
+  <data name="ModTrust_ElevatedExitCode_Format" xml:space="preserve">
+    <value>提權操作結束碼 {0}</value>
+  </data>
+  <data name="ModTrust_ElevatedStartFailed" xml:space="preserve">
+    <value>提權處理程序啟動失敗</value>
+  </data>
+  <data name="ModTrust_ElevationCancelled" xml:space="preserve">
+    <value>已取消系統管理員授權，操作未執行</value>
+  </data>
+  <data name="ModTrust_ExePathUnavailable" xml:space="preserve">
+    <value>無法定位目前程式路徑</value>
+  </data>
+  <data name="ModTrust_InstallFailedMsg_Format" xml:space="preserve">
+    <value>安裝失敗：{0}</value>
+  </data>
+  <data name="ModTrust_InstallFailedTitle" xml:space="preserve">
+    <value>安裝失敗</value>
+  </data>
+  <data name="ModTrust_InstallPkgUnavailable" xml:space="preserve">
+    <value>信任套件無法使用，拒絕安裝憑證</value>
+  </data>
+  <data name="ModTrust_InstallReviewLead_Format" xml:space="preserve">
+    <value>即將為「{0}」安裝以下平台憑證，請核對無誤後繼續：</value>
+  </data>
+  <data name="ModTrust_IssuerCertLabel" xml:space="preserve">
+    <value>平台中繼憑證</value>
+  </data>
+  <data name="ModTrust_IssuerLabel" xml:space="preserve">
+    <value>簽發者</value>
+  </data>
+  <data name="ModTrust_MachineAlreadyCoversUser" xml:space="preserve">
+    <value>本機信任已安裝並覆蓋目前使用者，無需在目前使用者範圍重複安裝</value>
+  </data>
+  <data name="ModTrust_Manifest_HashMismatch" xml:space="preserve">
+    <value>清單內容雜湊與簽章信封不一致</value>
+  </data>
+  <data name="ModTrust_Manifest_InvalidEnvelope" xml:space="preserve">
+    <value>簽章信封解析失敗</value>
+  </data>
+  <data name="ModTrust_Manifest_NotRsa" xml:space="preserve">
+    <value>簽署憑證不是 RSA 公鑰</value>
+  </data>
+  <data name="ModTrust_Manifest_SigVerifyFailed" xml:space="preserve">
+    <value>清單簽章驗證失敗</value>
+  </data>
+  <data name="ModTrust_Manifest_ThumbprintMismatch" xml:space="preserve">
+    <value>簽署者指紋與清單宣告不一致</value>
+  </data>
+  <data name="ModTrust_Manifest_UnsupportedAlg_Format" xml:space="preserve">
+    <value>不支援的簽章演算法：{0}</value>
+  </data>
+  <data name="ModTrust_Manifest_VerifyException_Format" xml:space="preserve">
+    <value>清單簽章驗證異常：{0}</value>
+  </data>
+  <data name="ModTrust_NoMachineCertToUninstall" xml:space="preserve">
+    <value>本機範圍沒有由本應用程式安裝的憑證，無需解除安裝</value>
+  </data>
+  <data name="ModTrust_NoPinnedRoot" xml:space="preserve">
+    <value>應用程式未內建固定根憑證（Assets/Trust/ModsRootCA.cer），無法驗證信任套件</value>
+  </data>
+  <data name="ModTrust_NoUserCertToUninstall" xml:space="preserve">
+    <value>目前使用者範圍沒有由本應用程式安裝的憑證，無需解除安裝</value>
+  </data>
+  <data name="ModTrust_NoVerifiedPkg" xml:space="preserve">
+    <value>沒有通過驗證的信任套件</value>
+  </data>
+  <data name="ModTrust_OpCompleted" xml:space="preserve">
+    <value>操作已完成</value>
+  </data>
+  <data name="ModTrust_Pkg_IssuingThumbprintMismatch" xml:space="preserve">
+    <value>簽發憑證指紋與清單宣告不一致</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestEmpty" xml:space="preserve">
+    <value>信任清單為空</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestInvalidJson_Format" xml:space="preserve">
+    <value>信任清單不是有效的 JSON：{0}</value>
+  </data>
+  <data name="ModTrust_Pkg_ManifestSigInvalid_Format" xml:space="preserve">
+    <value>清單簽章無效：{0}</value>
+  </data>
+  <data name="ModTrust_Pkg_NoSignerCert" xml:space="preserve">
+    <value>未提供清單簽署者憑證</value>
+  </data>
+  <data name="ModTrust_Pkg_RootHasPrivateKey" xml:space="preserve">
+    <value>信任套件中的根憑證包含私鑰，已拒絕</value>
+  </data>
+  <data name="ModTrust_Pkg_RootNotSelfSigned" xml:space="preserve">
+    <value>根憑證不是自簽章憑證</value>
+  </data>
+  <data name="ModTrust_Pkg_RootThumbprintMismatch" xml:space="preserve">
+    <value>根憑證指紋與清單宣告不一致</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerNotChained" xml:space="preserve">
+    <value>清單簽署者憑證未連結至此信任套件的根憑證</value>
+  </data>
+  <data name="ModTrust_Pkg_SignerThumbprintMismatch" xml:space="preserve">
+    <value>清單簽署者憑證指紋與清單宣告不一致</value>
+  </data>
+  <data name="ModTrust_PkgRootMismatch_Format" xml:space="preserve">
+    <value>信任套件根憑證與內建固定根憑證不符（{0}），已拒絕</value>
+  </data>
+  <data name="ModTrust_PkgVerifyFailed_Format" xml:space="preserve">
+    <value>信任套件驗證失敗（{0}）：{1}</value>
+  </data>
+  <data name="ModTrust_Policy_AnyEku" xml:space="preserve">
+    <value>憑證包含寬泛用途 OID (anyExtendedKeyUsage)</value>
+  </data>
+  <data name="ModTrust_Policy_CabForumOid_Format" xml:space="preserve">
+    <value>憑證包含 CA/Browser Forum 策略 OID（{0}，含 EV 策略）</value>
+  </data>
+  <data name="ModTrust_Policy_IsCa" xml:space="preserve">
+    <value>簽署憑證為 CA 憑證</value>
+  </data>
+  <data name="ModTrust_Policy_KeyCertSign" xml:space="preserve">
+    <value>憑證包含 keyCertSign 金鑰用途</value>
+  </data>
+  <data name="ModTrust_Policy_NoDigitalSig" xml:space="preserve">
+    <value>憑證缺少 digitalSignature 金鑰用途</value>
+  </data>
+  <data name="ModTrust_Policy_NoEku" xml:space="preserve">
+    <value>憑證缺少增強型金鑰用途 (EKU) 擴充項目</value>
+  </data>
+  <data name="ModTrust_Policy_NonCodeEku_Format" xml:space="preserve">
+    <value>憑證包含非程式碼簽署 EKU（{0}）</value>
+  </data>
+  <data name="ModTrust_Policy_ValidityExceeded_Format" xml:space="preserve">
+    <value>憑證效期 {0:F0} 天超出策略上限 {1} 天</value>
+  </data>
+  <data name="ModTrust_ReasonFailed_Format" xml:space="preserve">
+    <value>簽章未通過平台信任驗證：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableEnforce" xml:space="preserve">
+    <value>信任套件無法使用，攔截模式拒絕載入未驗證檔案</value>
+  </data>
+  <data name="ModTrust_ReasonPkgUnavailableWarn" xml:space="preserve">
+    <value>信任套件無法使用，已提示放行</value>
+  </data>
+  <data name="ModTrust_ReasonPolicyViolation_Format" xml:space="preserve">
+    <value>簽署憑證不符合平台策略（僅允許基礎程式碼簽署憑證）：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonRevoked_Format" xml:space="preserve">
+    <value>簽署憑證已被平台吊銷：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonSkipped" xml:space="preserve">
+    <value>未啟用簽章信任驗證</value>
+  </data>
+  <data name="ModTrust_ReasonTampered" xml:space="preserve">
+    <value>簽章與檔案內容不符，檔案可能已被竄改</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedAllowlisted_Format" xml:space="preserve">
+    <value>已列入平台信任允許清單：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonTrustedPlatform_Format" xml:space="preserve">
+    <value>由 FufuLauncher 程式碼簽署 CA 簽發：{0}</value>
+  </data>
+  <data name="ModTrust_ReasonUnsigned" xml:space="preserve">
+    <value>未簽署：無法驗證發布者身分</value>
+  </data>
+  <data name="ModTrust_ReviewTitle" xml:space="preserve">
+    <value>核對平台憑證</value>
+  </data>
+  <data name="ModTrust_RootCertLabel" xml:space="preserve">
+    <value>平台根憑證</value>
+  </data>
+  <data name="ModTrust_SignerIdSuffix_Format" xml:space="preserve">
+    <value> (簽署者 ID {0})</value>
+  </data>
+  <data name="ModTrust_SubjectLabel" xml:space="preserve">
+    <value>簽發對象</value>
+  </data>
+  <data name="ModTrust_SyncFailed_Format" xml:space="preserve">
+    <value>同步失敗：{0}</value>
+  </data>
+  <data name="ModTrust_SyncHashMismatch_Format" xml:space="preserve">
+    <value>檔案 {0} 雜湊驗證失敗（預期 {1}，實際 {2}），已拒絕本次同步</value>
+  </data>
+  <data name="ModTrust_SyncIllegalFilename" xml:space="preserve">
+    <value>同步端點回傳了非法檔案名稱，已終止</value>
+  </data>
+  <data name="ModTrust_SyncInvalidIndex" xml:space="preserve">
+    <value>同步端點未回傳有效的檔案清單</value>
+  </data>
+  <data name="ModTrust_SyncNoPinnedRoot" xml:space="preserve">
+    <value>應用程式未內建根憑證（Assets/Trust/ModsRootCA.cer），拒絕從網路接受任何信任套件</value>
+  </data>
+  <data name="ModTrust_SyncRootMismatch" xml:space="preserve">
+    <value>同步到的信任套件根憑證與應用程式內建根憑證不一致，已拒絕（可能需要更新用戶端）</value>
+  </data>
+  <data name="ModTrust_SyncUpdated_Format" xml:space="preserve">
+    <value>信任套件已更新（版本 {0}，吊銷 {1} 筆）</value>
+  </data>
+  <data name="ModTrust_ThumbprintSha256" xml:space="preserve">
+    <value>SHA-256 指紋</value>
+  </data>
+  <data name="ModTrust_UninstallAction" xml:space="preserve">
+    <value>解除安裝</value>
+  </data>
+  <data name="ModTrust_UninstallCertTitle" xml:space="preserve">
+    <value>解除安裝平台憑證</value>
+  </data>
+  <data name="ModTrust_UninstallFailedMsg_Format" xml:space="preserve">
+    <value>解除安裝失敗：{0}</value>
+  </data>
+  <data name="ModTrust_UninstallFromMachine" xml:space="preserve">
+    <value>目前使用者的信任由本機安裝提供，請在本機範圍解除安裝</value>
+  </data>
+  <data name="ModTrust_UninstallPkgUnavailable" xml:space="preserve">
+    <value>信任套件無法使用，無法定位需要解除安裝的憑證</value>
+  </data>
+  <data name="ModTrust_UnknownAction_Format" xml:space="preserve">
+    <value>未知操作：{0}</value>
+  </data>
+  <data name="ModTrust_UnsignedMarker" xml:space="preserve">
+    <value>(未簽署)</value>
+  </data>
+  <data name="ModTrust_ValidUntil" xml:space="preserve">
+    <value>效期至</value>
+  </data>
+  <data name="ModTrust_Verify_Allowlisted" xml:space="preserve">
+    <value>憑證指紋符合信任清單附加允許清單</value>
+  </data>
+  <data name="ModTrust_Verify_BadDigest" xml:space="preserve">
+    <value>簽章與檔案內容不符（檔案可能已被竄改）</value>
+  </data>
+  <data name="ModTrust_Verify_ChainIncomplete_Format" xml:space="preserve">
+    <value>憑證鏈未能連結至平台根憑證：{0}</value>
+  </data>
+  <data name="ModTrust_Verify_Compliant" xml:space="preserve">
+    <value>由平台程式碼簽署 CA 簽發且符合策略</value>
+  </data>
+  <data name="ModTrust_Verify_NoOsChain" xml:space="preserve">
+    <value>未在系統中建立信任鏈（根憑證未安裝）；改為使用平台內建根憑證驗證</value>
+  </data>
+  <data name="ModTrust_Verify_Revoked" xml:space="preserve">
+    <value>憑證已被平台吊銷</value>
+  </data>
+  <data name="ModTrust_Verify_SignerId_Format" xml:space="preserve">
+    <value>簽署者 ID: {0}</value>
+  </data>
+  <data name="ModTrust_Verify_WinTrustFailed_Format" xml:space="preserve">
+    <value>簽章驗證失敗 (WinVerifyTrust=0x{0:X8})</value>
+  </data>
+  <data name="Passport_ParseResponseFailed" xml:space="preserve">
+    <value>回應解析失敗</value>
+  </data>
+  <data name="Passport_ParseResponseFailedDetail_Format" xml:space="preserve">
+    <value>回應解析失敗: {0}</value>
+  </data>
+  <data name="Plugin_Download_HttpFailed_Format" xml:space="preserve">
+    <value>下載失敗 (HTTP {0})</value>
+  </data>
+  <data name="Plugin_Download_MainLineFailed" xml:space="preserve">
+    <value>主線路下載失敗</value>
+  </data>
+  <data name="PluginInstaller_ExecutingScript" xml:space="preserve">
+    <value>正在執行指令碼...</value>
+  </data>
+  <data name="PluginInstaller_ScriptCompleted" xml:space="preserve">
+    <value>執行完成</value>
+  </data>
+  <data name="PluginInstaller_ScriptFailed" xml:space="preserve">
+    <value>執行失敗</value>
+  </data>
+  <data name="PluginPage_CannotOpenGuideImage_Format" xml:space="preserve">
+    <value>無法開啟說明圖: {0}</value>
+  </data>
+  <data name="PluginPage_InstallSuccess_Format" xml:space="preserve">
+    <value>{0} 安裝成功！</value>
+  </data>
+  <data name="PluginSettings_InstallSig" xml:space="preserve">
+    <value>安裝憑證</value>
+  </data>
+  <data name="PluginSettings_InstallSigTooltip" xml:space="preserve">
+    <value>安裝平台程式碼簽署憑證（可隨時在設定中解除安裝）</value>
+  </data>
+  <data name="PresetManager_MaxPinnedHint" xml:space="preserve">
+    <value>最多只能釘選 5 個預設</value>
+  </data>
+  <data name="Screenshot_ConfirmDeleteToRecycle" xml:space="preserve">
+    <value>確定要將此截圖移至資源回收筒嗎？</value>
+  </data>
+  <data name="Screenshot_DateGroupFormat" xml:space="preserve">
+    <value>yyyy年MM月dd日</value>
+  </data>
+  <data name="Screenshot_SourceGame" xml:space="preserve">
+    <value>遊戲截圖</value>
+  </data>
+  <data name="Screenshot_SourceLauncher" xml:space="preserve">
+    <value>啟動器截圖</value>
+  </data>
+  <data name="ServiceOverview_Loading" xml:space="preserve">
+    <value>正在載入服務狀態...</value>
+  </data>
+  <data name="ServiceOverview_Title" xml:space="preserve">
+    <value>服務狀態總覽</value>
+  </data>
+  <data name="Settings_CloudCheckinNoteDesc" xml:space="preserve">
+    <value>開啟雲端遊戲簽到需要為對應帳號新增雲端遊戲登入憑證，否則將跳過雲端遊戲簽到</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledDesc" xml:space="preserve">
+    <value>關閉後，啟動器即使長期高 CPU 佔用也不會再主動提示。若遇到卡頓、發熱或異常耗電，請自行留意並及時回報問題。</value>
+  </data>
+  <data name="Settings_CpuWarningDisabledTitle" xml:space="preserve">
+    <value>已關閉 CPU 佔用異常警告</value>
+  </data>
+  <data name="Settings_IndependentDeploymentDesc" xml:space="preserve">
+    <value>該獨立部署版本軟體由 PR 貢獻者自行開發提供，FufuLauncher 無法對該軟體的安全性、穩定性或後續維護提供任何保證，您需要自行辨別使用風險。
+
+是否繼續造訪該專案網址？</value>
+  </data>
+  <data name="Settings_ServiceOverview" xml:space="preserve">
+    <value>服務狀態總覽</value>
+  </data>
+  <data name="Settings_ServiceOverviewDesc" xml:space="preserve">
+    <value>查看 status.fu1.fun 上的所有服務運作狀態</value>
+  </data>
+  <data name="StarPrompt_Title" xml:space="preserve">
+    <value>支持 FufuLauncher</value>
+  </data>
+  <data name="Startup_ErrOpenRegistryKey" xml:space="preserve">
+    <value>無法開啟啟動項目登錄檔機碼</value>
+  </data>
+  <data name="Startup_ErrProcessPathUnavailable" xml:space="preserve">
+    <value>無法取得目前程式路徑</value>
+  </data>
+  <data name="UpdateService_CancelledOrTimeout" xml:space="preserve">
+    <value>檢查更新已取消或逾時。</value>
+  </data>
+  <data name="UpdateService_CheckFailed_Format" xml:space="preserve">
+    <value>檢查更新失敗：{0}</value>
+  </data>
+  <data name="UpdateService_NewVersionFound" xml:space="preserve">
+    <value>發現啟動器新版本。</value>
+  </data>
+  <data name="UpdateService_Unreachable" xml:space="preserve">
+    <value>暫時無法連線至更新伺服器，未執行更新檢查。</value>
+  </data>
+  <data name="UpdateService_UpToDate" xml:space="preserve">
+    <value>目前啟動器已是最新版本。</value>
+  </data>
+  <data name="Yae_ErrConfigNotFound_Format" xml:space="preserve">
+    <value>找不到該遊戲版本對應的 Yae 設定（雜湊 0x{0:X8}），請更新遊戲或等待中繼資料更新。</value>
+  </data>
+  <data name="Yae_ErrCreateProcessFailed_Format" xml:space="preserve">
+    <value>建立遊戲處理程序失敗：{0}</value>
+  </data>
+  <data name="Yae_ErrDllLoadTimeout_Format" xml:space="preserve">
+    <value>遠端 LoadLibraryW 在 10s 內未完成，DLL 載入逾時：{0}</value>
+  </data>
+  <data name="Yae_ErrDllNotFound" xml:space="preserve">
+    <value>找不到 YaeAchievementLib.dll 元件，請重新安裝本程式。</value>
+  </data>
+  <data name="Yae_ErrElevationCancelled" xml:space="preserve">
+    <value>已取消系統管理員權限確認。</value>
+  </data>
+  <data name="Yae_ErrElevationStartFailed" xml:space="preserve">
+    <value>無法啟動提權讀取處理程序。</value>
+  </data>
+  <data name="Yae_ErrExePathUnavailable" xml:space="preserve">
+    <value>無法定位目前程式路徑。</value>
+  </data>
+  <data name="Yae_ErrExitCode_Format" xml:space="preserve">
+    <value>讀取失敗（錯誤碼 {0}）。</value>
+  </data>
+  <data name="Yae_ErrFetchMetadataFailed" xml:space="preserve">
+    <value>無法取得 Yae 成就中繼資料，請檢查網路連線。</value>
+  </data>
+  <data name="Yae_ErrGameCreateFailed" xml:space="preserve">
+    <value>遊戲處理程序建立失敗。</value>
+  </data>
+  <data name="Yae_ErrGameNotFound" xml:space="preserve">
+    <value>找不到遊戲主程式，請在設定中確認遊戲安裝目錄。</value>
+  </data>
+  <data name="Yae_ErrGameRunning" xml:space="preserve">
+    <value>偵測到遊戲正在執行，請先結束遊戲後再讀取成就。</value>
+  </data>
+  <data name="Yae_ErrInjectFailed_Format" xml:space="preserve">
+    <value>注入 Yae 元件失敗：{0}</value>
+  </data>
+  <data name="Yae_ErrInjectionFailed" xml:space="preserve">
+    <value>Yae 元件注入失敗。</value>
+  </data>
+  <data name="Yae_ErrInvalidConfig" xml:space="preserve">
+    <value>讀取設定檔無效。</value>
+  </data>
+  <data name="Yae_ErrMetadataDecryptFailed" xml:space="preserve">
+    <value>Yae 中繼資料解密驗證失敗。</value>
+  </data>
+  <data name="Yae_ErrModuleNotFound_Format" xml:space="preserve">
+    <value>未在目標處理程序中找到已載入模組：{0}</value>
+  </data>
+  <data name="Yae_ErrNoAchievementData" xml:space="preserve">
+    <value>未能取得成就資料。</value>
+  </data>
+  <data name="Yae_ErrNoData" xml:space="preserve">
+    <value>未能從遊戲取得成就資料，請確認已進入遊戲世界。</value>
+  </data>
+  <data name="Yae_ErrNoResultFile" xml:space="preserve">
+    <value>未能產生成就讀取結果。</value>
   </data>
 </root>

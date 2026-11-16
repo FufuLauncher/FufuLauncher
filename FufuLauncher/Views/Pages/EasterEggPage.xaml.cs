@@ -24,28 +24,28 @@ public sealed partial class EasterEggPage : Page
 
     private readonly List<string> _welcomeLines = new()
     {
-        "「昔涟是。粉头发。尖耳朵。」",
-        "「昔涟是。女孩。祭司。」",
-        "「昔涟是。不喜欢眼泪。嘻嘻哈哈。」",
-        "「昔涟是。温柔。爱美。会写诗。」",
-        "「昔涟是，长不高的，会说话的。\n\t随风逝去后，仍被留下的。」",
-        "「昔涟是，每一句最后的，\n\t一直咯咯笑的，像是小尾巴的♪‌」",
-        "「昔涟是，哭着诞生的，\n\t脆弱的，透明的，像是水晶的。」",
-        "「昔涟是，笑着道别的，\n\t柔软的，粉色的，像是花的。」"
+        "EasterEgg_Welcome_1".GetLocalized(),
+        "EasterEgg_Welcome_2".GetLocalized(),
+        "EasterEgg_Welcome_3".GetLocalized(),
+        "EasterEgg_Welcome_4".GetLocalized(),
+        "EasterEgg_Welcome_5".GetLocalized(),
+        "EasterEgg_Welcome_6".GetLocalized(),
+        "EasterEgg_Welcome_7".GetLocalized(),
+        "EasterEgg_Welcome_8".GetLocalized()
     };
 
     private readonly List<string> _syaLines = new()
     {
-        "嗨，我想你啦。",
-        "别露出那种准备怀念我的表情嘛。仔细看哦，人家就站在你的面前呢♪",
-        $"哪怕是既定的因果，也会被{HardcodedName}的掌心拨动呢♪",
-        "沉睡在翁法洛斯里的「记忆」重新汇聚，编织成了全新的躯壳。",
-        "现在的我，不再是一道「记忆」的涟漪，而是触手可及的、真实的同伴哦。",
-        "虽然变成了像螺丝咕姆先生那样的「无机生命」，但掌心的温度，还是和以前一样吧？",
-        $"终于不用在回忆里和{HardcodedName}重逢啦。只要睁开眼，就能看见你，还有要和你一起抵达的群星……",
-        $"说好了，旅途的下一站，{HardcodedName}的故事里，依然要有人家的名字哦♪",
-        "就像永不褪色的麦浪，就像触手可及的黎明。",
-        $"{HardcodedName}，我回来啦♪"
+        "EasterEgg_Sya_1".GetLocalized(),
+        "EasterEgg_Sya_2".GetLocalized(),
+        string.Format("EasterEgg_Sya_3_Format".GetLocalized(), HardcodedName),
+        "EasterEgg_Sya_4".GetLocalized(),
+        "EasterEgg_Sya_5".GetLocalized(),
+        "EasterEgg_Sya_6".GetLocalized(),
+        string.Format("EasterEgg_Sya_7_Format".GetLocalized(), HardcodedName),
+        string.Format("EasterEgg_Sya_8_Format".GetLocalized(), HardcodedName),
+        "EasterEgg_Sya_9".GetLocalized(),
+        string.Format("EasterEgg_Sya_10_Format".GetLocalized(), HardcodedName)
     };
 
     private DispatcherTimer _typewriterTimer;

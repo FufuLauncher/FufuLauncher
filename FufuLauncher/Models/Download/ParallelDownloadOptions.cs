@@ -3,6 +3,8 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using FufuLauncher.Helpers;
+
 namespace FufuLauncher.Models.Download;
 
 public enum DownloadHashAlgorithm
@@ -261,7 +263,7 @@ public sealed record ParallelDownloadOptions
         if (o.HashAlgorithm != DownloadHashAlgorithm.None && string.IsNullOrWhiteSpace(o.ExpectedHash))
         {
             throw new ArgumentException(
-                "指定了 HashAlgorithm 但未提供 ExpectedHash。", nameof(ExpectedHash));
+                "Download_HashAlgorithmWithoutExpectedHash".GetLocalized(), nameof(ExpectedHash));
         }
 
         if (o.ExpectedSize is <= 0)

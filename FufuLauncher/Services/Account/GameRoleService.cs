@@ -5,6 +5,7 @@ Licensed under the MIT License.
 
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 
 namespace FufuLauncher.Services;
@@ -29,11 +30,11 @@ public sealed class GameRoleService(AccountManager accounts, IUserInfoService us
             if (accounts.ActiveAccountId != accountId) return;
             var cookies = await accounts.LoadCookiesAsync(accountId);
             if (cookies == null || cookies.Count == 0)
-                throw new InvalidOperationException("无法读取社区账号登录信息。");
+                throw new InvalidOperationException("Account_CannotReadLoginInfo".GetLocalized());
             var response = await userInfo.GetUserGameRolesAsync(
                 string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}")));
             if (response.retcode != 0 || response.data?.list == null)
-                throw new InvalidOperationException($"获取绑定角色失败（{response.retcode}），请刷新或重新登录。");
+                throw new InvalidOperationException(string.Format("Account_FetchRolesFailed_Format".GetLocalized(), response.retcode));
             if (accounts.ActiveAccountId != accountId) return;
             await UpdateBindingsAsync(accountId, response.data.list);
         }
@@ -70,10 +71,10 @@ public sealed class GameRoleService(AccountManager accounts, IUserInfoService us
         if (accounts.ActiveAccountId != accountId) return null;
         var role = scope == null ? GameRoleSelection.Current(account) : scope.Current(account);
         if (role == null)
-            throw new InvalidOperationException("所选角色不在绑定列表中，请使用角色切换开关重新选择。");
+            throw new InvalidOperationException("Account_RoleNotBoundPrompt".GetLocalized());
         var cookies = await accounts.LoadCookiesAsync(accountId);
         if (cookies == null || cookies.Count == 0)
-            throw new InvalidOperationException("登录信息无效，请重新登录社区账号。");
+            throw new InvalidOperationException("Account_InvalidLoginRelogin".GetLocalized());
         var result = new SelectedGameRole(accountId, account.ServerType, role, cookies);
         return IsCurrent(result, scope) ? result : null;
     }
@@ -89,7 +90,7 @@ public sealed class GameRoleService(AccountManager accounts, IUserInfoService us
         if (scope != null)
         {
             if (account?.Id != accountId)
-                throw new InvalidOperationException("社区账号已切换，请重新选择角色。");
+                throw new InvalidOperationException("Account_SwitchedReselectRole".GetLocalized());
             scope.Select(account, role);
             WeakReferenceMessenger.Default.Send(new FeatureGameRoleChangedMessage(scope));
             return;

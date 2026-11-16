@@ -39,7 +39,7 @@
         </GridView>
 
         <Button Grid.Row="3" x:Name="ResignButton" Content="{helpers:Loc Key=Checkin_ResignTitle}"
-                HorizontalAlignment="Center" Margin="0,0,0,12" Padding="24,6"
+                HorizontalAlignment="Center" Margin="0,16,0,16" Padding="24,6"
                 Click="ResignButton_Click" />
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models.Miyoushe;
 
 namespace FufuLauncher.Services.Miyoushe;
@@ -53,7 +54,7 @@ public sealed class CommunityLibrary(string path)
         var previousHistory = _history.ToList();
         try
         {
-            if (_loadFailed) throw new IOException("本地收藏文件读取失败，已保留原文件；请修复后重新打开窗口");
+            if (_loadFailed) throw new IOException("Miyoushe_LibraryLoadFailedIO".GetLocalized());
             update();
             Directory.CreateDirectory(Path.GetDirectoryName(path)!);
             string temp = path + ".tmp";

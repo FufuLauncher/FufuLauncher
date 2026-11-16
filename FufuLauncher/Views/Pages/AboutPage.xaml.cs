@@ -90,7 +90,7 @@ public sealed partial class AboutPage : Page
 
                     if (jsonDocument.RootElement.ValueKind != JsonValueKind.Array)
                     {
-                        string errorMessage = "API限制或返回结构异常";
+                        string errorMessage = "About_ApiRateLimitOrInvalid".GetLocalized();
                         if (jsonDocument.RootElement.ValueKind == JsonValueKind.Object &&
                             jsonDocument.RootElement.TryGetProperty("message", out JsonElement messageElement))
                         {
@@ -228,12 +228,12 @@ public sealed partial class AboutPage : Page
                                 if (!string.IsNullOrWhiteSpace(rawBio)) bioStr = rawBio;
                             }
 
-                            flyoutBio.Text = $"贡献次数: {contributor.Contributions} 次\n\n简介: {bioStr}";
+                            flyoutBio.Text = string.Format("About_ContributorBio_Format".GetLocalized(), contributor.Contributions, bioStr);
                             isBioLoaded = true;
                         }
                         catch
                         {
-                            flyoutBio.Text = $"贡献次数: {contributor.Contributions} 次\n\n简介加载失败。";
+                            flyoutBio.Text = string.Format("About_ContributorBioFailed_Format".GetLocalized(), contributor.Contributions);
                         }
                     };
 
@@ -315,7 +315,7 @@ public sealed partial class AboutPage : Page
             DebugLog.Info("AboutPage", $"[LoadContributorsAsync] Failed to get contributors: {ex}");
             ContributorsLoadingRing.IsActive = false;
             ContributorsErrorPanel.Visibility = Visibility.Visible;
-            ContributorsErrorText.Text = "获取贡献者失败，请检查网络连接或 API 状态";
+            ContributorsErrorText.Text = "About_ContributorsFetchFailed".GetLocalized();
         }
     }
 
@@ -325,7 +325,7 @@ public sealed partial class AboutPage : Page
 
         TextBlock warningText = new()
         {
-            Text = "请注意：联系时请直入主题，说明来意\n请不要发送“在吗”、“你好”等无意义的开场白",
+            Text = "About_ContactNoticeText".GetLocalized(),
             TextWrapping = TextWrapping.Wrap,
             Foreground =
                 (Microsoft.UI.Xaml.Media.Brush)Application.Current.Resources["SystemControlErrorTextForegroundBrush"]

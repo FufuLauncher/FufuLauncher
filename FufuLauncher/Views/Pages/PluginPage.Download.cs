@@ -376,7 +376,7 @@ public sealed partial class PluginPage
             {
             }
 
-            ViewModel.StatusMessage = $"{targetFolderName} 安装成功！";
+            ViewModel.StatusMessage = string.Format("PluginPage_InstallSuccess_Format".GetLocalized(), targetFolderName);
             ViewModel.LoadPlugins();
 
             progressDialog.Hide();

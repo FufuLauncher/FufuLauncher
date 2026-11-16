@@ -142,7 +142,7 @@ public sealed partial class MainWindow : WindowEx
                     tcs.SetException(ex);
                 }
             }))
-            tcs.SetException(new InvalidOperationException("主窗口的 UI 调度队列已关闭"));
+            tcs.SetException(new InvalidOperationException("MainWindow_DispatcherClosed".GetLocalized()));
         return tcs.Task;
     }
 

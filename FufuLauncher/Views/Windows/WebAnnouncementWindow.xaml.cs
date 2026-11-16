@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Web.WebView2.Core;
 using Windows.Graphics;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Views;
 
@@ -19,7 +20,7 @@ public sealed partial class WebAnnouncementWindow : Window
     {
         InitializeComponent();
 
-        Title = "公告";
+        Title = "Announcement_Title".GetLocalized();
 
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);

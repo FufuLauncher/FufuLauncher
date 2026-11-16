@@ -38,7 +38,7 @@ public static class StartupManager
             using var runKey = OpenRunKey(writable: true);
             if (runKey is null)
             {
-                errorMessage = "无法打开启动项注册表键";
+                errorMessage = "Startup_ErrOpenRegistryKey".GetLocalized();
                 return false;
             }
 
@@ -47,7 +47,7 @@ public static class StartupManager
                 var command = BuildCommand();
                 if (command is null)
                 {
-                    errorMessage = "无法获取当前程序路径";
+                    errorMessage = "Startup_ErrProcessPathUnavailable".GetLocalized();
                     return false;
                 }
 

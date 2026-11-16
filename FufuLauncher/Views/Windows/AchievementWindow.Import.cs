@@ -104,9 +104,9 @@ public sealed partial class AchievementWindow
     {
         var path = await FilePickerService.PickOpenFileAsync(
             this,
-            new[] { ("CSV/文本文件", new[] { ".csv", ".txt" }) },
+            new[] { ("AchievementWindow_CsvTextFilter".GetLocalized(), new[] { ".csv", ".txt" }) },
             Windows.Storage.Pickers.PickerLocationId.Desktop,
-            msg => _ = ShowDialogAsync("错误", msg));
+            msg => _ = ShowDialogAsync("ErrorTitle".GetLocalized(), msg));
 
         if (!string.IsNullOrEmpty(path))
         {
@@ -155,14 +155,14 @@ public sealed partial class AchievementWindow
             catch (Exception ex)
             {
                 progressDialog.Hide();
-                await ShowDialogAsync("读取失败", $"文件可能被占用或无法读取。\n{ex.Message}");
+                await ShowDialogAsync("AchievementWindow_ReadFailed".GetLocalized(), string.Format("AchievementWindow_FileUnreadable_Format".GetLocalized(), ex.Message));
                 return;
             }
 
             if (lines.Count == 0)
             {
                 progressDialog.Hide();
-                await ShowDialogAsync("空文件", "文件中没有内容。");
+                await ShowDialogAsync("AchievementWindow_EmptyFile".GetLocalized(), "AchievementWindow_EmptyContent".GetLocalized());
                 return;
             }
 
@@ -201,29 +201,30 @@ public sealed partial class AchievementWindow
 
                 ApplyFilters();
 
-                ViewModel.StatusMessage = $"导入成功，同步 {result.UpdatedCount} 个成就进度";
+                ViewModel.StatusMessage = string.Format("AchievementWindow_ImportSynced_Format".GetLocalized(), result.UpdatedCount);
             }
             else
             {
-                ViewModel.StatusMessage = $"导入结束，没有新的变动";
+                ViewModel.StatusMessage = "AchievementWindow_ImportNoChanges".GetLocalized();
             }
 
             progressDialog.Hide();
             await dialogTask;
 
-            string resultMsg = $"扫描行数: {result.TotalScanned}\n" +
-                               $"跳过未完成: {result.SkippedIncomplete}\n" +
-                               $"成功同步: {result.UpdatedCount}\n" +
-                               $"已存在: {result.AlreadyDone}\n" +
-                               $"无法识别: {result.FailedCount}\n\n" +
-                               (result.Errors.Any() ? "部分未识别项:\n" + string.Join("\n", result.Errors.Take(3)) : "");
+            string resultMsg = string.Format("AchievementWindow_ImportStats_Format".GetLocalized(),
+                                   result.TotalScanned,
+                                   result.SkippedIncomplete,
+                                   result.UpdatedCount,
+                                   result.AlreadyDone,
+                                   result.FailedCount) +
+                               (result.Errors.Any() ? "\n\n" + "AchievementWindow_ImportPartialUnrecognizedHeader".GetLocalized() + "\n" + string.Join("\n", result.Errors.Take(3)) : "");
 
-            await ShowDialogAsync("导入数据", resultMsg);
+            await ShowDialogAsync("AchievementWindow_ImportData".GetLocalized(), resultMsg);
         }
         catch (Exception ex)
         {
             progressDialog.Hide();
-            await ShowDialogAsync("ErrorTitle".GetLocalized(), $"导入过程中发生异常：\n{ex.Message}");
+            await ShowDialogAsync("ErrorTitle".GetLocalized(), string.Format("AchievementWindow_ImportException_Format".GetLocalized(), ex.Message));
         }
         finally
         {
@@ -256,11 +257,11 @@ public sealed partial class AchievementWindow
             }
         }
 
-        reportProgress(10, "正在分析进度数据...");
+        reportProgress(10, "AchievementWindow_AnalyzingProgress".GetLocalized());
 
         for (int i = 0; i < total; i++)
         {
-            if (i % 100 == 0) reportProgress(10 + (double)i / total * 80, $"正在处理第 {i}/{total} 行...");
+            if (i % 100 == 0) reportProgress(10 + (double)i / total * 80, string.Format("AchievementWindow_ProcessingLine_Format".GetLocalized(), i, total));
 
             string line = lines[i];
             if (string.IsNullOrWhiteSpace(line)) continue;
@@ -305,7 +306,7 @@ public sealed partial class AchievementWindow
             else
             {
                 stats.FailedCount++;
-                if (stats.Errors.Count < 5) stats.Errors.Add($"[ID: {gameId}] 数据库中未找到该成就");
+                if (stats.Errors.Count < 5) stats.Errors.Add(string.Format("AchievementWindow_IdNotFoundInDb_Format".GetLocalized(), gameId));
             }
         }
 

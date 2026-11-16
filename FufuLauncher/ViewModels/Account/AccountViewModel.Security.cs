@@ -116,7 +116,7 @@ public partial class AccountViewModel
                 return;
             }
 
-            bool saved = await _accountManager.TryUpdateCookiesAsync(activeId, cookies, newCookies);
+            bool saved = await _accountManager.UpdateCookiesAsync(activeId, cookies, newCookies);
             RunOnUIThread(() => StatusMessage = (saved ? "Account_CookieRefreshSuccess" :
                 "Account_CookieRefreshFailed").GetLocalized());
         }

@@ -450,7 +450,7 @@ public class UnifiedCheckinService : IUnifiedCheckinService
 
         var refreshed = await refreshService.RefreshCookieAsync(cookies, forceRefresh: true);
         if (refreshed == null) return null;
-        if (!await _accountManager.TryUpdateCookiesAsync(account.ConfigPath, cookies, refreshed))
+        if (!await _accountManager.UpdateCookiesAsync(account.ConfigPath, cookies, refreshed))
         {
             refreshed = await _accountManager.LoadCookiesAsync(account.ConfigPath);
             if (refreshed == null || refreshed.Count == 0) return null;

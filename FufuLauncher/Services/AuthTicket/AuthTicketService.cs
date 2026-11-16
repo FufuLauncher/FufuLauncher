@@ -32,7 +32,7 @@ public sealed class AuthTicketService : IAuthTicketService
             var cookies = await _accountManager.LoadCookiesAsync(accountId);
             if (cookies == null || cookies.Count == 0)
             {
-                result.ErrorMessage = "账号未登录";
+                result.ErrorMessage = "AuthTicket_NotLoggedIn".GetLocalized();
                 return result;
             }
 
@@ -43,13 +43,13 @@ public sealed class AuthTicketService : IAuthTicketService
 
             if (string.IsNullOrEmpty(stoken))
             {
-                result.ErrorMessage = "账号登录状态已失效";
+                result.ErrorMessage = "AuthTicket_SessionExpired".GetLocalized();
                 return result;
             }
 
             if (string.IsNullOrEmpty(mid))
             {
-                result.ErrorMessage = "账号登录状态已失效";
+                result.ErrorMessage = "AuthTicket_SessionExpired".GetLocalized();
                 return result;
             }
 
@@ -75,7 +75,7 @@ public sealed class AuthTicketService : IAuthTicketService
 
                 if (string.IsNullOrEmpty(stuid) || !int.TryParse(stuid, CultureInfo.InvariantCulture, out var uid))
                 {
-                    result.ErrorMessage = "账号登录状态已失效";
+                    result.ErrorMessage = "AuthTicket_SessionExpired".GetLocalized();
                     return result;
                 }
 
@@ -103,26 +103,26 @@ public sealed class AuthTicketService : IAuthTicketService
 
             if (!response.IsSuccessStatusCode)
             {
-                result.ErrorMessage = $"请求失败 (HTTP {(int)response.StatusCode})";
+                result.ErrorMessage = string.Format("AuthTicket_HttpError_Format".GetLocalized(), (int)response.StatusCode);
                 return result;
             }
 
             var apiResponse = JsonSerializer.Deserialize<MihoyoApiResponse<AuthTicketData>>(responseBody);
             if (apiResponse == null)
             {
-                result.ErrorMessage = "响应解析失败";
+                result.ErrorMessage = "AuthTicket_ParseError".GetLocalized();
                 return result;
             }
 
             if (apiResponse.RetCode != 0)
             {
-                result.ErrorMessage = $"API 错误: [{apiResponse.RetCode}] {apiResponse.Message}";
+                result.ErrorMessage = string.Format("AuthTicket_ApiError_Format".GetLocalized(), apiResponse.RetCode, apiResponse.Message);
                 return result;
             }
 
             if (apiResponse.Data == null || string.IsNullOrEmpty(apiResponse.Data.Ticket))
             {
-                result.ErrorMessage = "未获取到有效的凭证";
+                result.ErrorMessage = "AuthTicket_NoTicket".GetLocalized();
                 return result;
             }
 
@@ -134,7 +134,7 @@ public sealed class AuthTicketService : IAuthTicketService
         catch (Exception ex)
         {
             DebugLog.Info("AuthTicketService", $"[AuthTicket] Exception: {ex.Message}");
-            result.ErrorMessage = $"请求异常: {ex.Message}";
+            result.ErrorMessage = string.Format("AuthTicket_RequestException_Format".GetLocalized(), ex.Message);
             return result;
         }
     }

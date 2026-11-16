@@ -112,19 +112,19 @@ public sealed partial class AchievementWindow
         if (_isBatchProcessing) return;
         _isBatchProcessing = true;
         ViewModel.IsLoading = true;
-        ViewModel.StatusMessage = "正在对比数据库版本...";
+        ViewModel.StatusMessage = "AchievementWindow_ComparingDbVersion".GetLocalized();
 
         try
         {
             if (!File.Exists(_assetsFilePath))
             {
-                await ShowDialogAsync("ErrorTitle".GetLocalized(), "找不到内置数据库文件");
+                await ShowDialogAsync("ErrorTitle".GetLocalized(), "AchievementWindow_DbNotFound".GetLocalized());
                 return;
             }
 
             var masterJson = await File.ReadAllTextAsync(_assetsFilePath);
             var masterCategories = JsonSerializer.Deserialize<List<AchievementCategory>>(
-                masterJson, _achievementReadOptions) ?? throw new JsonException("成就列表为空或格式无效");
+                masterJson, _achievementReadOptions) ?? throw new JsonException("AchievementWindow_DbInvalidOrEmpty".GetLocalized());
 
             EnsureDatabaseExists(_workFilePath);
             _achievementRepo.ChangeDatabase(_workFilePath);
@@ -136,18 +136,18 @@ public sealed partial class AchievementWindow
             LoadData();
             if (result.AddedCategories > 0 || result.AddedAchievements > 0 || result.UpdatedAchievements > 0)
             {
-                await ShowDialogAsync("数据库更新",
-                    $"同步成功！\n新增分类: {result.AddedCategories} 个\n新增成就: {result.AddedAchievements} 个\n更新成就信息: {result.UpdatedAchievements} 个");
+                await ShowDialogAsync("AchievementWindow_DbUpdateTitle".GetLocalized(),
+                    string.Format("AchievementWindow_DbSyncSuccess_Format".GetLocalized(), result.AddedCategories, result.AddedAchievements, result.UpdatedAchievements));
             }
             else
             {
-                ViewModel.StatusMessage = "当前已是最新数据库";
-                await ShowDialogAsync("数据库更新", "您的存档已经是最新版本，无需更新。");
+                ViewModel.StatusMessage = "AchievementWindow_DbUpToDate".GetLocalized();
+                await ShowDialogAsync("AchievementWindow_DbUpdateTitle".GetLocalized(), "AchievementWindow_AlreadyLatest".GetLocalized());
             }
         }
         catch (Exception ex)
         {
-            await ShowDialogAsync("更新失败", $"同步过程中发生错误：\n{ex.Message}");
+            await ShowDialogAsync("AchievementWindow_UpdateFailedTitle".GetLocalized(), string.Format("AchievementWindow_SyncError_Format".GetLocalized(), ex.Message));
         }
         finally
         {
@@ -167,7 +167,7 @@ public sealed partial class AchievementWindow
         var confirmDialog = new ContentDialog
         {
             Title = "AchievementWindow_UpdateDb".GetLocalized(),
-            Content = "此操作将读取软件内置的最新成就列表，并将缺失的新成就添加到您当前的存档中。\n\n您的现有进度（已完成的成就）将保留不会丢失。\n\n是否继续？",
+            Content = "AchievementWindow_UpdateDbConfirmContent".GetLocalized(),
             PrimaryButtonText = "AchievementWindow_StartUpdate".GetLocalized(),
             CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Primary,

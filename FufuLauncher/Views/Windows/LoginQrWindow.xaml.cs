@@ -309,7 +309,7 @@ public sealed partial class LoginQrWindow : Window
                 { Text = message, VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap });
 
             _statusDialog.Content = sp;
-            _statusDialog.CloseButtonText = isProgress ? "" : "确定";
+            _statusDialog.CloseButtonText = isProgress ? "" : "OkBtn".GetLocalized();
 
             if (!_isDialogOpen)
             {

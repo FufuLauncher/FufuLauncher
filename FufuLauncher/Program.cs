@@ -27,25 +27,29 @@ namespace FufuLauncher
             if (args.Length >= 2 &&
                 string.Equals(args[0], "--backpack-elevated-inject", StringComparison.OrdinalIgnoreCase))
             {
+                InitializeSubprocessLanguage(args);
                 Environment.Exit(Services.Backpack.GameLaunchService.RunElevatedInjection(args[1]));
                 return;
             }
 
             if (args.Length >= 2 && string.Equals(args[0], "--yae-inject", StringComparison.OrdinalIgnoreCase))
             {
+                InitializeSubprocessLanguage(args);
                 Environment.Exit(Services.Yae.YaeAchievementReader.RunElevatedInjection(args[1]));
                 return;
             }
 
             if (TrustCertCli.IsTrustCertCommand(args))
             {
-                Environment.Exit(TrustCertCli.Run(args));
+                InitializeSubprocessLanguage(args);
+                Environment.Exit(TrustCertCli.Run(StripLanguageArgs(args)));
                 return;
             }
 
             if (TrustCertCli.IsTrustDiagCommand(args))
             {
-                Environment.Exit(TrustCertCli.RunDiagnostics(args));
+                InitializeSubprocessLanguage(args);
+                Environment.Exit(TrustCertCli.RunDiagnostics(StripLanguageArgs(args)));
                 return;
             }
 
@@ -68,6 +72,7 @@ namespace FufuLauncher
 
             if (args.Length > 0 && string.Equals(args[0], "--elevated-inject", StringComparison.OrdinalIgnoreCase))
             {
+                InitializeSubprocessLanguage(args);
                 RunElevatedInjection(args);
                 return;
             }
@@ -335,6 +340,72 @@ namespace FufuLauncher
             catch
             {
             }
+        }
+
+        private static void InitializeSubprocessLanguage(string[] args)
+        {
+            try
+            {
+                for (var i = 0; i < args.Length - 1; i++)
+                {
+                    if (string.Equals(args[i], "--lang", StringComparison.OrdinalIgnoreCase) &&
+                        !string.IsNullOrWhiteSpace(args[i + 1]))
+                    {
+                        var candidate = args[i + 1].Trim();
+                        if (candidate.Length >= 2)
+                        {
+                            ResourceExtensions.SetLanguage(candidate);
+                            return;
+                        }
+                    }
+                }
+
+                var language = ViewModels.AppLanguage.Default;
+                var dbPath = AppPaths.LocalSettingsDb;
+                if (File.Exists(dbPath))
+                {
+                    using var connection = new Microsoft.Data.Sqlite.SqliteConnection(
+                        new Microsoft.Data.Sqlite.SqliteConnectionStringBuilder
+                        {
+                            DataSource = dbPath,
+                            Mode = Microsoft.Data.Sqlite.SqliteOpenMode.ReadOnly
+                        }.ToString());
+                    connection.Open();
+                    using var cmd = connection.CreateCommand();
+                    cmd.CommandText = "SELECT \"Value\" FROM \"Settings\" WHERE \"Key\" = 'AppLanguage' LIMIT 1;";
+                    if (cmd.ExecuteScalar() is string raw)
+                    {
+                        var trimmed = raw.Trim().Trim('"');
+                        if (int.TryParse(trimmed, out var code))
+                        {
+                            language = (ViewModels.AppLanguage)code;
+                        }
+                    }
+                }
+
+                var culture = LanguagePreferenceResolver.Resolve(
+                    language,
+                    Windows.System.UserProfile.GlobalizationPreferences.Languages);
+                ResourceExtensions.SetLanguage(culture);
+            }
+            catch
+            {
+            }
+        }
+
+        private static string[] StripLanguageArgs(string[] args)
+        {
+            var filtered = new List<string>(args.Length);
+            for (var i = 0; i < args.Length; i++)
+            {
+                if (string.Equals(args[i], "--lang", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (i + 1 < args.Length) i++;
+                    continue;
+                }
+                filtered.Add(args[i]);
+            }
+            return filtered.ToArray();
         }
     }
 }

@@ -89,7 +89,7 @@ public sealed class MiyousheGameCheckinService : IDisposable
 
                     if (disabledUids.Contains(role.GameUid))
                     {
-                        roleResults[index] = new(game.GameBiz, game.Name, role.GameUid, null,
+                        roleResults[index] = new(game.GameBiz, game.LocalizedName, role.GameUid, null,
                             "Status_Skipped".GetLocalized());
                         continue;
                     }
@@ -101,12 +101,12 @@ public sealed class MiyousheGameCheckinService : IDisposable
                     try
                     {
                         progress?.Report(
-                            $"[{account.Nickname}] {game.Name} ({role.GameUid}) — {"Checkin_GameCheckinProgress".GetLocalized()}");
+                            $"[{account.Nickname}] {game.LocalizedName} ({role.GameUid}) — {"Checkin_GameCheckinProgress".GetLocalized()}");
                         roleResults[index] = await SignRoleAsync(session, pacer, game, role);
                     }
                     catch (Exception ex)
                     {
-                        roleResults[index] = new(game.GameBiz, game.Name, role.GameUid, false,
+                        roleResults[index] = new(game.GameBiz, game.LocalizedName, role.GameUid, false,
                             string.Format("Checkin_NetworkRequestException".GetLocalized(), ex.Message));
                     }
                     finally
@@ -127,9 +127,9 @@ public sealed class MiyousheGameCheckinService : IDisposable
                          $"&region={Uri.EscapeDataString(role.Region)}&uid={Uri.EscapeDataString(role.GameUid)}";
         var status = await RequestAsync<IsSignData>(session, pacer, infoUrl, game);
         if (status.RetCode != 0 || status.Data == null)
-            return new(game.GameBiz, game.Name, role.GameUid, false, status.Message);
+            return new(game.GameBiz, game.LocalizedName, role.GameUid, false, status.Message);
         if (status.Data.FirstBind)
-            return new(game.GameBiz, game.Name, role.GameUid, false,
+            return new(game.GameBiz, game.LocalizedName, role.GameUid, false,
                 "Checkin_FirstBindWarning".GetLocalized());
 
         bool alreadySigned = status.Data.IsSign;
@@ -140,17 +140,17 @@ public sealed class MiyousheGameCheckinService : IDisposable
             var sign = await RequestAsync<SignResponseData>(session, pacer,
                 $"{game.ApiBase}{ApiEndpoints.GameCheckinSignPath}", game, body);
             if (sign.RetCode != 0)
-                return new(game.GameBiz, game.Name, role.GameUid, false, sign.Message);
+                return new(game.GameBiz, game.LocalizedName, role.GameUid, false, sign.Message);
             if (sign.RetCode == 0 && sign.Data is { Success: not 0 })
-                return new(game.GameBiz, game.Name, role.GameUid, false,
+                return new(game.GameBiz, game.LocalizedName, role.GameUid, false,
                     "Checkin_GameCaptcha".GetLocalized());
 
 
             status = await RequestAsync<IsSignData>(session, pacer, infoUrl, game);
             if (status.RetCode != 0 || status.Data == null)
-                return new(game.GameBiz, game.Name, role.GameUid, false, status.Message);
+                return new(game.GameBiz, game.LocalizedName, role.GameUid, false, status.Message);
             if (!status.Data.IsSign)
-                return new(game.GameBiz, game.Name, role.GameUid, false,
+                return new(game.GameBiz, game.LocalizedName, role.GameUid, false,
                     "Checkin_SignNotConfirmed".GetLocalized());
         }
 
@@ -167,7 +167,7 @@ public sealed class MiyousheGameCheckinService : IDisposable
         message += $" | {string.Format("Checkin_SignedDays".GetLocalized(), days)}";
         if (rewardItem.Length > 0)
             message += $" | {string.Format("Checkin_RewardIs".GetLocalized(), rewardItem)}";
-        return new(game.GameBiz, game.Name, role.GameUid, true, message, days, rewardItem);
+        return new(game.GameBiz, game.LocalizedName, role.GameUid, true, message, days, rewardItem);
     }
 
     private async Task<CheckinResponse<T>> RequestAsync<T>(CheckinSession session, MiyousheRequestPacer pacer,

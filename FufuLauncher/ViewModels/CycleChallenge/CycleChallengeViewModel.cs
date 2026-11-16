@@ -338,9 +338,13 @@ public sealed partial class CycleChallengeViewModel : ObservableObject
     private readonly GameRoleService _gameRoleService;
     private readonly CycleChallengeService _service;
 
+    private readonly Microsoft.UI.Dispatching.DispatcherQueue? _dispatcherQueue =
+        Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread();
+
     private CancellationTokenSource? _cts;
     private int _loadVersion;
     private bool _suppressPeriodReload;
+    private bool _isCloudListenerAttached;
     private DateTimeOffset? _lastFetchedAt;
 
 
@@ -668,6 +672,51 @@ public sealed partial class CycleChallengeViewModel : ObservableObject
         HasError = true;
         ErrorMessage = "CycleChallenge_NoAccount".GetLocalized();
         StatusText = null;
+    }
+
+    public string? GetCurrentRoleUid()
+    {
+        var account = _accountManager.GetActiveAccountEntry();
+        return account is null ? null : RoleSelection.Current(account)?.game_uid;
+    }
+
+    public void AttachCloudSyncListener()
+    {
+        if (_isCloudListenerAttached)
+        {
+            return;
+        }
+
+        _service.ChallengesChanged += OnChallengesChanged;
+        _isCloudListenerAttached = true;
+    }
+
+    public void DetachCloudSyncListener()
+    {
+        if (!_isCloudListenerAttached)
+        {
+            return;
+        }
+
+        _service.ChallengesChanged -= OnChallengesChanged;
+        _isCloudListenerAttached = false;
+    }
+
+    public Task ReloadAfterCloudSyncAsync()
+    {
+        RefreshHeader();
+        return ReloadAsync(forceRefresh: false);
+    }
+
+    private void OnChallengesChanged(object? sender, EventArgs e)
+    {
+        if (_dispatcherQueue is null || _dispatcherQueue.HasThreadAccess)
+        {
+            _ = ReloadAfterCloudSyncAsync();
+            return;
+        }
+
+        _dispatcherQueue.TryEnqueue(() => _ = ReloadAfterCloudSyncAsync());
     }
 
     private void RefreshHeader()

@@ -1,15 +1,6 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-YaeAchievementPipe 命名管道服务端，运行在提权子进程中。
-协议与 Snap Hutao 的 YaeNamedPipeServer (MIT) 一致：
-- 0xFC：写入成就/背包命令 ID（2 个 uint32）
-- 0xFD：写入 10 个方法 RVA
-- 0xFE：恢复游戏主线程
-- 0x01/0x02：读取 int32 长度 + 数据
-- 0x03：读取 12 字节属性对
-- 0xFF：写入 true，结束游戏
 */
 
 using System.IO.Pipes;

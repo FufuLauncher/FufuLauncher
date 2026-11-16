@@ -102,21 +102,20 @@ public sealed partial class AchievementWindow
 
         contentPanel.Children.Add(new TextBlock
         {
-            Text = "请按照以下步骤操作：",
+            Text = "AchievementWindow_FollowSteps".GetLocalized(),
             TextWrapping = TextWrapping.Wrap
         });
 
         contentPanel.Children.Add(new TextBlock
         {
-            Text =
-                "1. 请自行下载并运行 YaeAchievement 工具。\n2. 在 Yae 中扫描完您的成就后，点击将其导出为 Excel 或 CSV 表格。\n3. 回到本界面，点击【导入记录】按钮，选择刚才导出的文件即可完成导入。",
+            Text = "AchievementWindow_YaeGuideSteps".GetLocalized(),
             TextWrapping = TextWrapping.Wrap,
             Foreground = new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.LightGray)
         });
 
         var dialog = new ContentDialog
         {
-            Title = "如何导入 Yae 成就记录",
+            Title = "AchievementWindow_YaeGuideTitle".GetLocalized(),
             Content = contentPanel,
             CloseButtonText = "GotItBtn".GetLocalized(),
             XamlRoot = Content.XamlRoot
@@ -129,9 +128,9 @@ public sealed partial class AchievementWindow
     {
         var path = await FilePickerService.PickOpenFileAsync(
             this,
-            new[] { ("JSON 文件", new[] { ".json" }) },
+            new[] { ("Common_JsonFile".GetLocalized(), new[] { ".json" }) },
             Windows.Storage.Pickers.PickerLocationId.Desktop,
-            msg => _ = ShowDialogAsync("错误", msg));
+            msg => _ = ShowDialogAsync("ErrorTitle".GetLocalized(), msg));
         if (string.IsNullOrEmpty(path)) return;
 
         if (_isBatchProcessing) return;
@@ -145,18 +144,18 @@ public sealed partial class AchievementWindow
 
             if (uiafData == null || uiafData.List == null)
             {
-                await ShowDialogAsync("ErrorTitle".GetLocalized(), "无效的UIAF文件格式");
+                await ShowDialogAsync("ErrorTitle".GetLocalized(), "AchievementWindow_InvalidUiafFormat".GetLocalized());
                 return;
             }
 
             int updatedCount = ApplyUiafData(uiafData);
 
-            ViewModel.StatusMessage = $"UIAF导入完成，同步了 {updatedCount} 个成就";
-            await ShowDialogAsync("导入数据", $"UIAF导入成功！\n共更新了 {updatedCount} 个成就进度");
+            ViewModel.StatusMessage = string.Format("AchievementWindow_UiafDoneStatus_Format".GetLocalized(), updatedCount);
+            await ShowDialogAsync("AchievementWindow_ImportData".GetLocalized(), string.Format("AchievementWindow_UiafSuccessDialog_Format".GetLocalized(), updatedCount));
         }
         catch (Exception ex)
         {
-            await ShowDialogAsync("导入失败", $"读取或解析过程中发生异常：\n{ex.Message}");
+            await ShowDialogAsync("AchievementWindow_ImportFailed".GetLocalized(), string.Format("AchievementWindow_UiafParseException_Format".GetLocalized(), ex.Message));
         }
         finally
         {
@@ -267,7 +266,7 @@ public sealed partial class AchievementWindow
             if (result is null || result.List.Count == 0)
             {
                 ViewModel.StatusMessage = "AchievementWindow_YaeEmptyResult".GetLocalized();
-                await ShowDialogAsync("导入结果", "AchievementWindow_YaeEmptyResult".GetLocalized());
+                await ShowDialogAsync("AchievementWindow_ImportResultTitle".GetLocalized(), "AchievementWindow_YaeEmptyResult".GetLocalized());
                 return;
             }
 
@@ -293,13 +292,13 @@ public sealed partial class AchievementWindow
 
             ViewModel.StatusMessage = string.Format("AchievementWindow_YaeReadDone".GetLocalized(), result.List.Count,
                 updatedCount);
-            await ShowDialogAsync("导入成功",
+            await ShowDialogAsync("AchievementWindow_ImportSuccessTitle".GetLocalized(),
                 string.Format("AchievementWindow_YaeReadDone".GetLocalized(), result.List.Count, updatedCount));
         }
         catch (Exception ex)
         {
             ViewModel.StatusMessage = "AchievementWindow_YaeReadFailed".GetLocalized();
-            await ShowDialogAsync("导入失败", ex.Message);
+            await ShowDialogAsync("AchievementWindow_ImportFailed".GetLocalized(), ex.Message);
         }
         finally
         {
@@ -311,10 +310,10 @@ public sealed partial class AchievementWindow
     {
         var path = await FilePickerService.PickSaveFileAsync(
             this,
-            new[] { ("JSON 文件", new[] { ".json" }) },
+            new[] { ("Common_JsonFile".GetLocalized(), new[] { ".json" }) },
             $"UIAF_Export_{DateTime.Now:yyyyMMdd_HHmmss}",
             Windows.Storage.Pickers.PickerLocationId.Desktop,
-            msg => _ = ShowDialogAsync("错误", msg));
+            msg => _ = ShowDialogAsync("ErrorTitle".GetLocalized(), msg));
         if (string.IsNullOrEmpty(path)) return;
 
         ViewModel.StatusMessage = "AchievementWindow_GeneratingUIAF".GetLocalized();
@@ -367,11 +366,11 @@ public sealed partial class AchievementWindow
             await File.WriteAllTextAsync(path, jsonOutput);
 
             ViewModel.StatusMessage = "AchievementWindow_UIAFExportDone".GetLocalized();
-            await ShowDialogAsync("导出成功", "已成功导出UIAF格式数据。");
+            await ShowDialogAsync("AchievementWindow_ExportSuccess".GetLocalized(), "AchievementWindow_UiafExportSuccessMsg".GetLocalized());
         }
         catch (Exception ex)
         {
-            await ShowDialogAsync("导出失败", $"生成文件时发生异常：\n{ex.Message}");
+            await ShowDialogAsync("AchievementWindow_ExportFailed".GetLocalized(), string.Format("AchievementWindow_UiafExportError_Format".GetLocalized(), ex.Message));
         }
     }
 

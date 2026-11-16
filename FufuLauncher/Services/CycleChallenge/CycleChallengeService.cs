@@ -15,7 +15,7 @@ using FufuLauncher.Services;
 
 namespace FufuLauncher.Services.CycleChallenge;
 
-public sealed class CycleChallengeService
+public sealed partial class CycleChallengeService
 {
     private const string ApiVersion = "cn-2.112.0/os-2.54.0";
 

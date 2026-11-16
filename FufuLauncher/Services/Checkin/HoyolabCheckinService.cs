@@ -276,7 +276,7 @@ public class HoyolabCheckinService
         }
         catch (Exception ex)
         {
-            return (false, string.Format("Checkin_ResignFailed".GetLocalized(), "异常", ex.Message));
+            return (false, string.Format("Checkin_ResignFailed".GetLocalized(), "Common_Exception".GetLocalized(), ex.Message));
         }
     }
 

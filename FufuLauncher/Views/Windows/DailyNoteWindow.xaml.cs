@@ -5,6 +5,7 @@ Licensed under the MIT License.
 
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using FufuLauncher.Helpers;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 
@@ -157,7 +158,7 @@ namespace FufuLauncher.Views
             }
         }
 
-        private string _statusText = "初始化...";
+        private string _statusText = "DailyNote_Initializing".GetLocalized();
 
         public string StatusText
         {

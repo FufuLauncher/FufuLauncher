@@ -99,7 +99,7 @@ public partial class App : Application
         catch (Exception ex)
         {
             LogException(ex, "App Constructor");
-            ShowCrashDialog("核心配置及服务初始化异常", ex);
+            ShowCrashDialog("Crash_Source_CoreInit".GetLocalized(), ex);
             Environment.Exit(-1);
         }
     }

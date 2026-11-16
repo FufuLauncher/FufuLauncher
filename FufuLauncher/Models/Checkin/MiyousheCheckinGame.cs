@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using FufuLauncher.Constants;
+using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models;
 
@@ -16,6 +17,8 @@ public sealed record MiyousheCheckinGame(
     string? SignGame = null)
 {
     public string SettingKey => $"GameCheckinEnabled_{GameBiz}";
+
+    public string LocalizedName => $"Checkin_Game_{GameBiz}".GetLocalized();
 
 
     private const string LunaApi = ApiEndpoints.LunaEventApiBase;
@@ -50,6 +53,6 @@ public sealed record MiyousheRoleCheckinResult(
     string RewardItem = "")
 {
     public static string GetFailureSummary(IEnumerable<MiyousheRoleCheckinResult> results) =>
-        string.Join("；", results.Where(r => r.Success == false)
-            .Select(r => $"{r.GameName}：{r.Message.Trim()}").Distinct());
+        string.Join("; ", results.Where(r => r.Success == false)
+            .Select(r => $"{r.GameName}: {r.Message.Trim()}").Distinct());
 }

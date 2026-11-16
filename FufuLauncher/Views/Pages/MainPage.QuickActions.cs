@@ -83,7 +83,7 @@ public sealed partial class MainPage
 
             if (newCookies != null)
             {
-                await accountManager.TryUpdateCookiesAsync(activeId, cookies, newCookies);
+                await accountManager.UpdateCookiesAsync(activeId, cookies, newCookies);
             }
         }
         catch (Exception ex)

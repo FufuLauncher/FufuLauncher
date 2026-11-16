@@ -2,6 +2,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models.MiHoYo.Identity;
 using FufuLauncher.Models.Miyoushe;
 
@@ -75,7 +76,7 @@ public sealed partial class MiyousheClient : IDisposable
         if (context != null && (context.ServerType != ServerType.Cn ||
                                 string.IsNullOrEmpty(context.Device.BbsDeviceId) ||
                                 string.IsNullOrEmpty(context.Device.DeviceFp)))
-            throw new InvalidOperationException("米游社账号的设备身份不完整");
+            throw new InvalidOperationException("Miyoushe_DeviceIdentityIncomplete".GetLocalized());
         _context = context;
         _http = new(handler ?? new HttpClientHandler
         {
@@ -180,7 +181,7 @@ public sealed partial class MiyousheClient : IDisposable
         var data = await SendAsync(ApiEndpoints.MiyousheGetPostFullPath, new() { ["post_id"] = id, ["read"] = "1" },
             _context == null ? Profile.Web : Profile.K2Sign, ct);
         var post = CommunityPost.Parse(data.Get("post"), gameId);
-        if (post.Id.Length == 0) throw new CommunityApiException("帖子内容不可用");
+        if (post.Id.Length == 0) throw new CommunityApiException("Miyoushe_PostUnavailable".GetLocalized());
         return post;
     }
 
@@ -236,13 +237,13 @@ public sealed partial class MiyousheClient : IDisposable
     public async Task VerifyAsync(Func<JsonElement, string?, CancellationToken, Task<JsonElement?>> showCaptcha,
         CancellationToken ct)
     {
-        var blocked = _blocked ?? throw new InvalidOperationException("没有待处理的验证");
+        var blocked = _blocked ?? throw new InvalidOperationException("Miyoushe_NoPendingVerify".GetLocalized());
         if (!blocked.NeedsVerification) throw blocked;
         if (blocked.Aigis is { Length: > 0 } raw)
         {
             var challenge = MiyousheAigisChallenge.Parse(raw);
             if (challenge == null)
-                throw new CommunityApiException("验证参数不完整，请在米游社官方页面完成验证");
+                throw new CommunityApiException("Miyoushe_VerifyParamsIncomplete".GetLocalized());
             var result = await showCaptcha(challenge.Parameters, challenge.SessionId, ct)
                          ?? throw new OperationCanceledException(ct);
             _aigis = challenge.CreateProof(result);
@@ -258,7 +259,7 @@ public sealed partial class MiyousheClient : IDisposable
             var data = await SendAsync(ApiEndpoints.MiyousheCreateVerificationPath, new() { ["is_high"] = "true" },
                 profile, ct,
                 verificationRequest: true);
-            if (data.Text("gt").Length == 0) throw new CommunityApiException("服务未提供可用的验证码，请在米游社官方页面完成验证");
+            if (data.Text("gt").Length == 0) throw new CommunityApiException("Miyoushe_VerifyNoCaptchaProvided".GetLocalized());
             var result = await showCaptcha(data, null, ct) ?? throw new OperationCanceledException(ct);
             var verified = await SendAsync(ApiEndpoints.MiyousheVerifyVerificationPath, [], profile switch
                 {
@@ -266,7 +267,7 @@ public sealed partial class MiyousheClient : IDisposable
                 },
                 ct, result.GetRawText(), verificationRequest: true);
             _challenge = verified.Text("challenge");
-            if (_challenge.Length == 0) throw new CommunityApiException("验证未成功，请重试");
+            if (_challenge.Length == 0) throw new CommunityApiException("Miyoushe_VerifyFailedRetry".GetLocalized());
         }
 
         _blocked = null;
@@ -279,7 +280,7 @@ public sealed partial class MiyousheClient : IDisposable
         if (!verificationRequest && _blocked != null) throw _blocked;
         if (_cooldown > DateTimeOffset.UtcNow)
             throw new CommunityApiException(
-                $"请求频率受限，请等待 {Math.Ceiling((_cooldown - DateTimeOffset.UtcNow).TotalSeconds)} 秒再重试", 429);
+                string.Format("Miyoushe_RateLimitedWait_Format".GetLocalized(), Math.Ceiling((_cooldown - DateTimeOffset.UtcNow).TotalSeconds)), 429);
         using var deadline = CancellationTokenSource.CreateLinkedTokenSource(ct);
         deadline.CancelAfter(TimeSpan.FromSeconds(25));
         ct = deadline.Token;
@@ -355,21 +356,21 @@ public sealed partial class MiyousheClient : IDisposable
                 var wait = response.Headers.RetryAfter?.Delta ??
                            (response.Headers.RetryAfter?.Date - DateTimeOffset.UtcNow) ?? TimeSpan.FromSeconds(30);
                 _cooldown = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(Math.Clamp(wait.TotalSeconds, 1, 300));
-                throw new CommunityApiException("请求频率受限，请稍后手动重试", 429);
+                throw new CommunityApiException("Miyoushe_RateLimitedManual".GetLocalized(), 429);
             }
 
             if (aigis != null || response.StatusCode is HttpStatusCode.Forbidden or HttpStatusCode.PreconditionFailed)
-                throw Block(new("米游社要求完成安全验证", (int)response.StatusCode, true, aigis: aigis), profile,
+                throw Block(new("Miyoushe_SecurityVerifyRequired".GetLocalized(), (int)response.StatusCode, true, aigis: aigis), profile,
                     verificationRequest);
             response.EnsureSuccessStatusCode();
-            if (response.Content.Headers.ContentLength > 8 * 1024 * 1024) throw new InvalidDataException("响应内容过大");
+            if (response.Content.Headers.ContentLength > 8 * 1024 * 1024) throw new InvalidDataException("Miyoushe_ResponseTooLarge".GetLocalized());
             await using var stream = await response.Content.ReadAsStreamAsync(ct);
             using var buffer = new MemoryStream();
             var chunk = new byte[16384];
             int read;
             while ((read = await stream.ReadAsync(chunk, ct)) > 0)
             {
-                if (buffer.Length + read > 8 * 1024 * 1024) throw new InvalidDataException("响应内容过大");
+                if (buffer.Length + read > 8 * 1024 * 1024) throw new InvalidDataException("Miyoushe_ResponseTooLarge".GetLocalized());
                 buffer.Write(chunk, 0, read);
             }
 
@@ -377,7 +378,7 @@ public sealed partial class MiyousheClient : IDisposable
             var root = doc.RootElement;
             var retcode = root.Get("retcode");
             if (retcode.ValueKind != JsonValueKind.Number || !retcode.TryGetInt32(out int code))
-                throw new InvalidDataException("米游社返回了无法识别的响应");
+                throw new InvalidDataException("Miyoushe_UnrecognizedResponse".GetLocalized());
             if (code != 0)
                 throw Block(new(root.Text("message"), code, code is 1028 or 1034, code is -100 or 10001 or -101),
                     profile, verificationRequest);
@@ -430,12 +431,12 @@ public sealed partial class MiyousheClient : IDisposable
         bool ltoken = keys.Any(k => k is "ltoken" or "ltoken_v2") && LTokenCookies.Length > 0;
         bool cookieToken = keys.Any(k => k is "cookie_token" or "cookie_token_v2") && CookieTokenCookies.Length > 0;
         if (_context == null || (!ltoken && !cookieToken))
-            throw new CommunityApiException("请先在启动器账号管理中登录米游社国服账号，再选择该账号", -100, loginExpired: true);
+            throw new CommunityApiException("Miyoushe_LoginCnAccountFirst".GetLocalized(), -100, loginExpired: true);
     }
 
     public static void ValidateId(string id)
     {
-        if (id.Length is < 1 or > 20 || !id.All(char.IsAsciiDigit)) throw new ArgumentException("无效的米游社 ID");
+        if (id.Length is < 1 or > 20 || !id.All(char.IsAsciiDigit)) throw new ArgumentException("Miyoushe_InvalidId".GetLocalized());
     }
 
     public void Dispose() => _http.Dispose();

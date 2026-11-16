@@ -250,7 +250,7 @@ namespace FufuLauncher.Views
             catch (Exception ex)
             {
                 DebugLog.Info("AgreementPage", $"[Agreement] Failed to install platform certificate: {ex}");
-                TrustStatusText.Text = $"安装失败：{ex.Message}";
+                TrustStatusText.Text = string.Format("Agreement_InstallFailed_Format".GetLocalized(), ex.Message);
                 _isFinishing = false;
                 return;
             }
@@ -272,7 +272,7 @@ namespace FufuLauncher.Views
         {
             if (!await ViewModel.SaveAgreementAcceptedAsync())
             {
-                TrustStatusText.Text = "保存配置失败，请重试。";
+                TrustStatusText.Text = "Agreement_SaveFailed".GetLocalized();
                 return;
             }
 
@@ -285,11 +285,11 @@ namespace FufuLauncher.Views
             _isRestarting = true;
 
             RestartButton.IsEnabled = false;
-            RestartStatusText.Text = "正在重启启动器…";
+            RestartStatusText.Text = "Agreement_Restarting".GetLocalized();
 
             if (ViewModel.TryRestart()) return;
 
-            RestartStatusText.Text = "重启失败，请再次点击按钮，或手动关闭后重新打开启动器。";
+            RestartStatusText.Text = "Agreement_RestartFailed".GetLocalized();
             RestartButton.IsEnabled = true;
             _isRestarting = false;
         }

@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using System.Diagnostics;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
@@ -85,10 +86,10 @@ public sealed partial class ControlPanelPage : Page
     {
         ContentDialog riskDialog = new()
         {
-            Title = "安全提示",
-            Content = "进入战绩信息页面可能会导致您的账户被标注为风险账户，进而导致部分功能（如某些自动化工具或特定网页访问）无法正常使用，是否确认继续？",
-            PrimaryButtonText = "确认继续",
-            CloseButtonText = "取消",
+            Title = "ControlPanel_SecurityTipTitle".GetLocalized(),
+            Content = "Home_BBSSecurityMessage".GetLocalized(),
+            PrimaryButtonText = "Home_BBSConfirm".GetLocalized(),
+            CloseButtonText = "CancelBtn".GetLocalized(),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = XamlRoot
         };

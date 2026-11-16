@@ -25,7 +25,7 @@ namespace FufuLauncher.Views
 
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
-            Title = "游戏公告";
+            Title = "AnnouncementWindow_GameAnnouncement".GetLocalized();
 
             StartFontServer();
 

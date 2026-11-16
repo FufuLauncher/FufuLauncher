@@ -71,23 +71,34 @@ public sealed class PassportClient
         return await PassportHttpUtil.DeserializeAsync<LoginResult>(response, token).ConfigureAwait(false);
     }
 
+    public async Task<string> GetLTokenBySTokenAsync(string stoken, string mid, string aid,
+        CancellationToken token = default)
+    {
+        var device = await GetDeviceAsync(token).ConfigureAwait(false);
+        return await GetLTokenBySTokenAsync(CreateAuthCookie(stoken, mid, aid), device, token).ConfigureAwait(false);
+    }
+
+    public async Task<string> GetCookieAccountInfoBySTokenAsync(string stoken, string mid, string aid,
+        CancellationToken token = default)
+    {
+        var device = await GetDeviceAsync(token).ConfigureAwait(false);
+        return await GetCookieAccountInfoBySTokenAsync(CreateAuthCookie(stoken, mid, aid), aid, device, token)
+            .ConfigureAwait(false);
+    }
+
     internal async Task<Dictionary<string, string>?> ExchangeWebCookiesAsync(string stoken, string mid, string aid,
         DeviceIdentity device, CancellationToken token = default)
     {
-        string cookie = $"mid={mid}; stoken={stoken}; stuid={aid}";
-        var account = await ExchangeAsync<UidCookieToken>(ApiEndpoints.GetCookieAccountInfoBySTokenUrl, cookie,
-            device, token).ConfigureAwait(false);
-        if (string.IsNullOrEmpty(account?.CookieToken) ||
-            (!string.IsNullOrEmpty(account.Uid) && account.Uid != aid))
-            return null;
+        string cookie = CreateAuthCookie(stoken, mid, aid);
+        string cookieToken = await GetCookieAccountInfoBySTokenAsync(cookie, aid, device, token).ConfigureAwait(false);
+        if (cookieToken.Length == 0) return null;
 
-        var login = await ExchangeAsync<LTokenWrapper>(ApiEndpoints.GetLTokenBySTokenUrl, cookie,
-            device, token).ConfigureAwait(false);
-        if (string.IsNullOrEmpty(login?.LToken)) return null;
+        string ltoken = await GetLTokenBySTokenAsync(cookie, device, token).ConfigureAwait(false);
+        if (ltoken.Length == 0) return null;
 
         var cookies = new Dictionary<string, string>();
-        AddToken(login.LToken, "ltoken", "ltuid", "ltmid_v2");
-        AddToken(account.CookieToken, "cookie_token", "account_id", "account_mid_v2");
+        AddToken(ltoken, "ltoken", "ltuid", "ltmid_v2");
+        AddToken(cookieToken, "cookie_token", "account_id", "account_mid_v2");
         return cookies;
 
         void AddToken(string value, string tokenName, string uidName, string midName)
@@ -98,6 +109,26 @@ public sealed class PassportClient
             if (suffix.Length > 0) cookies[midName] = mid;
         }
     }
+
+    private async Task<string> GetLTokenBySTokenAsync(string cookie, DeviceIdentity device, CancellationToken token)
+    {
+        var login = await ExchangeAsync<LTokenWrapper>(ApiEndpoints.GetLTokenBySTokenUrl, cookie, device, token)
+            .ConfigureAwait(false);
+        return login?.LToken ?? string.Empty;
+    }
+
+    private async Task<string> GetCookieAccountInfoBySTokenAsync(string cookie, string aid, DeviceIdentity device,
+        CancellationToken token)
+    {
+        var account = await ExchangeAsync<UidCookieToken>(ApiEndpoints.GetCookieAccountInfoBySTokenUrl, cookie,
+            device, token).ConfigureAwait(false);
+        return account != null && (string.IsNullOrEmpty(account.Uid) || account.Uid == aid)
+            ? account.CookieToken ?? string.Empty
+            : string.Empty;
+    }
+
+    private static string CreateAuthCookie(string stoken, string mid, string aid) =>
+        $"mid={mid}; stoken={stoken}; stuid={aid}";
 
     private async Task<T?> ExchangeAsync<T>(string url, string cookie, DeviceIdentity device, CancellationToken token)
     {

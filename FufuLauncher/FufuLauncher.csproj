@@ -33,9 +33,9 @@
 
         <PublishReadyToRun>true</PublishReadyToRun>
 
-        <Version>1.7.2.3</Version>
-        <AssemblyVersion>1.7.2.3</AssemblyVersion>
-        <FileVersion>1.7.2.3</FileVersion>
+        <Version>1.7.2.5</Version>
+        <AssemblyVersion>1.7.2.5</AssemblyVersion>
+        <FileVersion>1.7.2.5</FileVersion>
         <Copyright>Copyright © FufuLauncher Development Team</Copyright>
     </PropertyGroup>
 
@@ -157,6 +157,10 @@
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </Content>
         <Content Update="Assets\ItemRarity\**\*.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Update="Assets\SnapHutao.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
             <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         </Content>

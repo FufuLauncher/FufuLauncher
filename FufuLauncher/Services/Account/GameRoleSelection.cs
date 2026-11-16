@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using FufuLauncher.Contracts.Services;
+using FufuLauncher.Helpers;
 using FufuLauncher.Models;
 using FufuLauncher.Models.MiHoYo;
 
@@ -38,7 +39,7 @@ public static class GameRoleSelection
     public static void Select(AccountEntry account, string uid, string region)
     {
         if (!Filter(account.GameRoles ?? [], account.ServerType).Any(r => r.game_uid == uid && r.region == region))
-            throw new InvalidOperationException("所选角色未绑定到当前社区账号，请刷新角色列表。");
+            throw new InvalidOperationException("Account_RoleNotBoundRefresh".GetLocalized());
         account.GameUid = uid;
         account.GameRegion = region;
     }

@@ -34,9 +34,16 @@ public sealed partial class CloudSyncService : ICloudSyncService
     [GeneratedRegex("[^a-zA-Z0-9_.-]+", RegexOptions.CultureInvariant)]
     private static partial Regex UnsafeSlotCharsRegex();
 
+    private static readonly TimeSpan[] DefaultTransientRetryDelays =
+    [
+        TimeSpan.FromMilliseconds(350),
+        TimeSpan.FromMilliseconds(900)
+    ];
+
     private readonly HttpClient _httpClient;
     private readonly SemaphoreSlim _authLock = new(1, 1);
     private readonly string _sessionFilePath;
+    private readonly IReadOnlyList<TimeSpan> _transientRetryDelays;
 
     private string _email = string.Empty;
     private string _stoken = string.Empty;
@@ -53,13 +60,19 @@ public sealed partial class CloudSyncService : ICloudSyncService
     public event EventHandler? SessionChanged;
 
     public CloudSyncService()
+        : this(CreateDefaultHandler(), Path.Combine(AppPaths.SettingsDir, SessionFileName), null)
     {
-        _sessionFilePath = Path.Combine(AppPaths.SettingsDir, SessionFileName);
-        var handler = new HttpClientHandler
-        {
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-            AllowAutoRedirect = false
-        };
+    }
+
+    internal CloudSyncService(
+        HttpMessageHandler handler,
+        string? sessionFilePath = null,
+        IReadOnlyList<TimeSpan>? transientRetryDelays = null)
+    {
+        _sessionFilePath = string.IsNullOrWhiteSpace(sessionFilePath)
+            ? Path.Combine(AppPaths.SettingsDir, SessionFileName)
+            : sessionFilePath;
+        _transientRetryDelays = transientRetryDelays ?? DefaultTransientRetryDelays;
         _httpClient = new HttpClient(handler)
         {
             BaseAddress = BaseUri,
@@ -69,6 +82,13 @@ public sealed partial class CloudSyncService : ICloudSyncService
 
         LoadPersistedSession();
     }
+
+    private static HttpClientHandler CreateDefaultHandler()
+        => new()
+        {
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+            AllowAutoRedirect = false
+        };
 
     public bool IsLoggedIn => !string.IsNullOrWhiteSpace(_stoken) && !IsStokenExpiredLocally();
     public bool HasLtoken => !string.IsNullOrWhiteSpace(_ltoken) && !IsLtokenExpiredLocally();
@@ -202,6 +222,7 @@ public sealed partial class CloudSyncService : ICloudSyncService
             "ARCHIVE_NOT_FOUND" => "CloudSync_ErrArchiveNotFound".GetLocalized(),
             "INVALID_UIAF_SCHEMA" or "UNSUPPORTED_UIAF_VERSION" or "INVALID_UIGF_SCHEMA" or "UNSUPPORTED_UIGF_VERSION"
                 or "INVALID_PLAYTIME_SCHEMA" or "UNSUPPORTED_PLAYTIME_VERSION"
+                or "INVALID_CHALLENGE_SCHEMA" or "UNSUPPORTED_CHALLENGE_VERSION"
                 => "CloudSync_ErrInvalidFormat".GetLocalized(),
             "INVALID_DATA_SLOT" or "INVALID_SLOT" => "CloudSync_ErrInvalidSlot".GetLocalized(),
             "INVALID_ACTIVATION_CODE" or "INVALID_ACTIVATION_CODE_FORMAT" => "CloudSync_ErrActivationInvalid"
@@ -213,6 +234,9 @@ public sealed partial class CloudSyncService : ICloudSyncService
                 => "CloudSync_ErrQuotaExceeded".GetLocalized(),
             "RATE_LIMITED" => "CloudSync_ErrRateLimited".GetLocalized(),
             "INVALID_DATA_TYPE" => "CloudSync_ErrUnsupportedDataType".GetLocalized(),
+            "BAD_GATEWAY" or "SERVICE_UNAVAILABLE" or "GATEWAY_TIMEOUT" or "UPSTREAM_ERROR"
+                => "CloudSync_ErrServiceUnavailable".GetLocalized(),
+            _ when statusCode is 502 or 503 or 504 => "CloudSync_ErrServiceUnavailable".GetLocalized(),
             _ when statusCode == 423 => "CloudSync_ErrLocked".GetLocalized(),
             _ when statusCode == 429 => "CloudSync_ErrRateLimited".GetLocalized(),
             _ when statusCode == 413 => "CloudSync_ErrPayloadTooLarge".GetLocalized(),
@@ -220,627 +244,322 @@ public sealed partial class CloudSyncService : ICloudSyncService
         };
     }
 
-    public Task<CloudApiResult<CloudChallengeInfo>> StartLoginAsync(string email, string password)
-        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthLoginPath, new
-        {
-            email = email.Trim(),
-            password
-        });
-
-    public Task<CloudApiResult<CloudChallengeInfo>> StartRegisterSendCodeAsync(string email)
-        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthRegisterSendCodePath,
-            new
-            {
-                email = email.Trim()
-            });
-
-    public async Task<CloudApiResult<CloudLoginSessionData>> ConfirmRegisterAsync(string email, string password,
-        string code)
+    private sealed class RawHttpResponse
     {
-        var trimmedEmail = email.Trim();
-        var result = await SendAnonymousJsonAsync<CloudLoginSessionData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncAuthRegisterConfirmPath, new
-            {
-                email = trimmedEmail,
-                password,
-                code = code.Trim()
-            });
-
-        if (result.Ok && result.Data != null)
+        public int StatusCode
         {
-            ApplyLoginSession(trimmedEmail, result.Data);
+            get;
+            init;
         }
 
-        return result;
-    }
-
-    public Task<CloudApiResult<CloudChallengeInfo>> StartResetPasswordSendCodeAsync(string email)
-        => SendAnonymousJsonAsync<CloudChallengeInfo>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncAuthResetPasswordSendCodePath, new
-            {
-                email = email.Trim()
-            });
-
-    public Task<CloudApiResult<object>> ConfirmResetPasswordAsync(string email, string code, string newPassword)
-        => SendAnonymousJsonAsync<object>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthResetPasswordConfirmPath, new
+        public bool IsSuccessStatusCode
         {
-            email = email.Trim(),
-            code = code.Trim(),
-            new_password = newPassword
-        });
-
-    public async Task<CloudApiResult<T>> PollChallengeAsync<T>(string pollUrl, string challengeSecret)
-    {
-        try
-        {
-            using var req = new HttpRequestMessage(HttpMethod.Get, ResolveServiceUri(pollUrl));
-            req.Headers.Add("X-Challenge-Secret", challengeSecret);
-            using var resp = await _httpClient.SendAsync(req);
-            var body = await resp.Content.ReadAsStringAsync();
-            return ParseEnvelope<T>((int)resp.StatusCode, body, GetRetryAfter(resp.Headers));
-        }
-        catch (Exception ex)
-        {
-            return new CloudApiResult<T>
-            {
-                Ok = false,
-                HttpStatusCode = 0,
-                Code = "NETWORK_ERROR",
-                Message = ex.Message
-            };
-        }
-    }
-
-    public void ApplyLoginSession(string email, CloudLoginSessionData loginData)
-    {
-        var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        _email = string.IsNullOrWhiteSpace(email) ? _email : email.Trim();
-        _stoken = loginData.Stoken;
-        _stokenExpiresAtUnix = loginData.StokenExpiresIn > 0 ? now + loginData.StokenExpiresIn : 0;
-        _ltoken = loginData.Ltoken;
-        _ltokenExpiresAtUnix = loginData.LtokenExpiresIn > 0 ? now + loginData.LtokenExpiresIn : 0;
-        _accountStatus = string.IsNullOrWhiteSpace(loginData.AccountStatus)
-            ? (loginData.Locked ? "locked" : "active")
-            : loginData.AccountStatus;
-        _isLocked = loginData.Locked || string.Equals(_accountStatus, "locked", StringComparison.OrdinalIgnoreCase);
-        _lockedAt = loginData.LockedAt;
-        _lastStartupMessage = null;
-
-        SavePersistedSession();
-        RaiseSessionChanged();
-    }
-
-    public async Task<CloudApiResult<CloudLtokenIssueData>> RotateLtokenAsync()
-    {
-        return await RotateLtokenInternalAsync(staleLtoken: null);
-    }
-
-    private async Task<CloudApiResult<CloudLtokenIssueData>> RotateLtokenInternalAsync(string? staleLtoken)
-    {
-        await _authLock.WaitAsync();
-        try
-        {
-            if (!string.IsNullOrEmpty(staleLtoken) &&
-                !string.IsNullOrEmpty(_ltoken) &&
-                !string.Equals(_ltoken, staleLtoken, StringComparison.Ordinal) &&
-                !IsLtokenExpiredLocally())
-            {
-                return new CloudApiResult<CloudLtokenIssueData>
-                {
-                    Ok = true,
-                    HttpStatusCode = 200,
-                    Code = "LTOKEN_REUSED",
-                    Data = new CloudLtokenIssueData
-                    {
-                        Ltoken = _ltoken,
-                        AccountStatus = _accountStatus,
-                        Locked = _isLocked,
-                        LockedAt = _lockedAt
-                    }
-                };
-            }
-
-            if (string.IsNullOrWhiteSpace(_stoken) || IsStokenExpiredLocally())
-            {
-                ClearSessionState(clearEmail: false);
-                return new CloudApiResult<CloudLtokenIssueData>
-                {
-                    Ok = false,
-                    HttpStatusCode = 403,
-                    Code = "FORBIDDEN",
-                    Message = "CloudSync_ErrAuthRequired".GetLocalized()
-                };
-            }
-
-            using var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncAuthLtokenPath);
-            req.Headers.Add("X-SToken", _stoken);
-            req.Content = new StringContent("{}", Encoding.UTF8, "application/json");
-
-            using var resp = await _httpClient.SendAsync(req);
-            var body = await resp.Content.ReadAsStringAsync();
-            var parsed = ParseEnvelope<CloudLtokenIssueData>((int)resp.StatusCode, body);
-
-            if (parsed.Ok && parsed.Data != null && !string.IsNullOrWhiteSpace(parsed.Data.Ltoken))
-            {
-                var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-                _ltoken = parsed.Data.Ltoken;
-                _ltokenExpiresAtUnix = parsed.Data.ExpiresIn > 0 ? now + parsed.Data.ExpiresIn : 0;
-                _accountStatus = string.IsNullOrWhiteSpace(parsed.Data.AccountStatus)
-                    ? (parsed.Data.Locked ? "locked" : "active")
-                    : parsed.Data.AccountStatus;
-                _isLocked = parsed.Data.Locked ||
-                            string.Equals(_accountStatus, "locked", StringComparison.OrdinalIgnoreCase);
-                _lockedAt = parsed.Data.LockedAt;
-                RaiseSessionChanged();
-            }
-            else if ((int)resp.StatusCode == 403)
-            {
-                ClearSessionState(clearEmail: false);
-            }
-
-            return parsed;
-        }
-        catch (Exception ex)
-        {
-            return new CloudApiResult<CloudLtokenIssueData>
-            {
-                Ok = false,
-                HttpStatusCode = 0,
-                Code = "NETWORK_ERROR",
-                Message = ex.Message
-            };
-        }
-        finally
-        {
-            _authLock.Release();
-        }
-    }
-
-    public async Task<CloudApiResult<object>> LogoutAsync(bool revokeStoken = false)
-    {
-        CloudApiResult<object> result;
-        if (HasLtoken)
-        {
-            result = await SendAuthenticatedJsonAsync<object>(HttpMethod.Post, ApiEndpoints.CloudSyncAuthLogoutPath, new
-            {
-                revoke_stoken = revokeStoken
-            });
-        }
-        else
-        {
-            result = new CloudApiResult<object> { Ok = true, HttpStatusCode = 200, Code = "LOGOUT_LOCAL" };
+            get;
+            init;
         }
 
-        _ltoken = string.Empty;
-        _ltokenExpiresAtUnix = 0;
-        if (revokeStoken)
+        public string Body
         {
-            ClearSessionState(clearEmail: false);
-        }
-        else
+            get;
+            init;
+        } = string.Empty;
+
+        public TimeSpan? RetryAfter
         {
-            ClearSessionState(clearEmail: false);
-        }
-
-        return result;
-    }
-
-    public Task ClearLocalSessionAsync()
-    {
-        ClearSessionState(clearEmail: false);
-        return Task.CompletedTask;
-    }
-
-    public async Task<CloudApiResult<CloudAccountStatusData>> GetAccountStatusAsync()
-    {
-        var result =
-            await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Get,
-                ApiEndpoints.CloudSyncAccountStatusPath);
-        if (result.Ok && result.Data != null)
-        {
-            UpdateAccountLockState(result.Data);
+            get;
+            init;
         }
 
-        return result;
-    }
-
-    public Task<CloudApiResult<CloudOtpSentData>> SendLockCodeAsync()
-        => SendAuthenticatedJsonAsync<CloudOtpSentData>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountLockSendCodePath,
-            new { });
-
-    public async Task<CloudApiResult<CloudAccountStatusData>> ConfirmLockAsync(string code)
-    {
-        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncAccountLockConfirmPath, new
-            {
-                code = code.Trim()
-            });
-        if (result.Ok && result.Data != null)
+        public string? DataType
         {
-            UpdateAccountLockState(result.Data);
+            get;
+            init;
         }
 
-        return result;
-    }
-
-    public Task<CloudApiResult<CloudOtpSentData>> SendUnlockCodeAsync()
-        => SendAuthenticatedJsonAsync<CloudOtpSentData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncAccountUnlockSendCodePath, new { });
-
-    public async Task<CloudApiResult<CloudAccountStatusData>> ConfirmUnlockAsync(string code)
-    {
-        var result = await SendAuthenticatedJsonAsync<CloudAccountStatusData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncAccountUnlockConfirmPath, new
-            {
-                code = code.Trim()
-            });
-        if (result.Ok && result.Data != null)
+        public string? Slot
         {
-            UpdateAccountLockState(result.Data);
+            get;
+            init;
         }
 
-        return result;
-    }
-
-    public async Task<CloudApiResult<object>> DeleteAccountAsync(string password)
-    {
-        var result = await SendAuthenticatedJsonAsync<object>(HttpMethod.Post, ApiEndpoints.CloudSyncAccountDeletePath,
-            new
-            {
-                password,
-                confirm = true
-            });
-        if (result.Ok)
+        public string? Sha256
         {
-            ClearSessionState(clearEmail: true);
+            get;
+            init;
         }
 
-        return result;
-    }
-
-    public async Task<CloudApiResult<CloudQuotaData>> GetQuotaAsync()
-    {
-        var result =
-            await SendAuthenticatedJsonAsync<CloudQuotaData>(HttpMethod.Get, ApiEndpoints.CloudSyncDataQuotaPath);
-        MarkLockedIf423(result.HttpStatusCode, result.Code);
-        return result;
-    }
-
-    public async Task<CloudApiResult<CloudActivationResultData>> ActivateCodeAsync(string code)
-    {
-        var result = await SendAuthenticatedJsonAsync<CloudActivationResultData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncDataActivatePath, new
-            {
-                code = code.Trim()
-            });
-        MarkLockedIf423(result.HttpStatusCode, result.Code);
-        return result;
-    }
-
-    public async Task<CloudApiResult<CloudArchiveListData>> ListArchivesAsync(string? typeFilter = null)
-    {
-        var path = string.IsNullOrWhiteSpace(typeFilter) ||
-                   string.Equals(typeFilter, "all", StringComparison.OrdinalIgnoreCase)
-            ? ApiEndpoints.CloudSyncDataListPath
-            : ApiEndpoints.GetCloudSyncDataListPath(typeFilter);
-
-        var result = await SendAuthenticatedJsonAsync<CloudArchiveListData>(HttpMethod.Get, path);
-        MarkLockedIf423(result.HttpStatusCode, result.Code);
-        return result;
-    }
-
-    public async Task<CloudApiResult<CloudUploadResultData>> UploadArchiveAsync(string dataType, string slot,
-        string jsonContent, bool overwrite = true)
-    {
-        var normalizedType = (dataType ?? string.Empty).Trim().ToLowerInvariant();
-        if (normalizedType is not ("uiaf" or "uigf" or "playtime"))
+        public long? CompressedBytes
         {
-            return new CloudApiResult<CloudUploadResultData>
-            {
-                Ok = false,
-                HttpStatusCode = 400,
-                Code = "INVALID_DATA_TYPE",
-                Message = "CloudSync_ErrUnsupportedDataType".GetLocalized()
-            };
+            get;
+            init;
         }
 
-        var trimmedSlot = (slot ?? string.Empty).Trim();
-        if (!IsValidSlotName(trimmedSlot))
+        public long? RawBytes
         {
-            return new CloudApiResult<CloudUploadResultData>
-            {
-                Ok = false,
-                HttpStatusCode = 400,
-                Code = "INVALID_DATA_SLOT",
-                Message = FormatFriendlyError("INVALID_DATA_SLOT", null, 400)
-            };
+            get;
+            init;
         }
 
-        if (!await EnsureAuthenticatedAsync())
+        public bool IsNetworkError
         {
-            return UnauthorizedResult<CloudUploadResultData>();
+            get;
+            init;
         }
 
-        for (var attempt = 0; attempt < 2; attempt++)
+        public string? NetworkErrorMessage
         {
-            var usedLtoken = _ltoken;
-            try
-            {
-                using var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncDataUploadPath);
-                req.Headers.Add("X-LToken", usedLtoken);
-                req.Headers.Add("X-Data-Type", normalizedType);
-                req.Headers.Add("X-Data-Slot", trimmedSlot);
-                req.Headers.Add("X-Overwrite", overwrite ? "true" : "false");
-                req.Content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-
-                using var resp = await _httpClient.SendAsync(req);
-                var body = await resp.Content.ReadAsStringAsync();
-
-                if ((int)resp.StatusCode == 403 && attempt == 0 && IsLoggedIn)
-                {
-                    var rotate = await RotateLtokenInternalAsync(usedLtoken);
-                    if (rotate.Ok)
-                    {
-                        continue;
-                    }
-                }
-
-                var parsed = ParseEnvelope<CloudUploadResultData>((int)resp.StatusCode, body);
-                MarkLockedIf423(parsed.HttpStatusCode, parsed.Code);
-                return parsed;
-            }
-            catch (Exception ex)
-            {
-                return new CloudApiResult<CloudUploadResultData>
-                {
-                    Ok = false,
-                    HttpStatusCode = 0,
-                    Code = "NETWORK_ERROR",
-                    Message = ex.Message
-                };
-            }
+            get;
+            init;
         }
-
-        return UnauthorizedResult<CloudUploadResultData>();
-    }
-
-    public async Task<CloudPullResult> PullArchiveAsync(string dataType, string slot)
-    {
-        if (!await EnsureAuthenticatedAsync())
-        {
-            return new CloudPullResult
-            {
-                Ok = false,
-                HttpStatusCode = 403,
-                Code = "FORBIDDEN",
-                Message = "CloudSync_ErrAuthRequired".GetLocalized()
-            };
-        }
-
-        var payload = JsonSerializer.Serialize(new
-        {
-            type = dataType.Trim().ToLowerInvariant(),
-            slot = slot.Trim()
-        });
-
-        for (var attempt = 0; attempt < 2; attempt++)
-        {
-            var usedLtoken = _ltoken;
-            try
-            {
-                using var req = new HttpRequestMessage(HttpMethod.Post, ApiEndpoints.CloudSyncDataPullPath);
-                req.Headers.Add("X-LToken", usedLtoken);
-                req.Content = new StringContent(payload, Encoding.UTF8, "application/json");
-
-                using var resp = await _httpClient.SendAsync(req);
-                var body = await resp.Content.ReadAsStringAsync();
-
-                if ((int)resp.StatusCode == 403 && attempt == 0 && IsLoggedIn)
-                {
-                    var rotate = await RotateLtokenInternalAsync(usedLtoken);
-                    if (rotate.Ok)
-                    {
-                        continue;
-                    }
-                }
-
-                if (resp.IsSuccessStatusCode)
-                {
-                    return new CloudPullResult
-                    {
-                        Ok = true,
-                        HttpStatusCode = (int)resp.StatusCode,
-                        Code = "PULL_SUCCESS",
-                        DataType = TryGetHeader(resp.Headers, "X-Data-Type") ?? dataType,
-                        Slot = TryGetHeader(resp.Headers, "X-Data-Slot") ?? slot,
-                        Sha256 = TryGetHeader(resp.Headers, "X-Data-SHA256") ?? string.Empty,
-                        CompressedBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Compressed-Bytes"), out var cb)
-                            ? cb
-                            : 0,
-                        RawBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Raw-Bytes"), out var rb)
-                            ? rb
-                            : Encoding.UTF8.GetByteCount(body),
-                        JsonContent = body
-                    };
-                }
-
-                var errorEnvelope = ParseEnvelope<object>((int)resp.StatusCode, body);
-                MarkLockedIf423(errorEnvelope.HttpStatusCode, errorEnvelope.Code);
-                return new CloudPullResult
-                {
-                    Ok = false,
-                    HttpStatusCode = errorEnvelope.HttpStatusCode,
-                    Code = errorEnvelope.Code,
-                    Message = errorEnvelope.Message
-                };
-            }
-            catch (Exception ex)
-            {
-                return new CloudPullResult
-                {
-                    Ok = false,
-                    HttpStatusCode = 0,
-                    Code = "NETWORK_ERROR",
-                    Message = ex.Message
-                };
-            }
-        }
-
-        return new CloudPullResult
-        {
-            Ok = false,
-            HttpStatusCode = 403,
-            Code = "FORBIDDEN",
-            Message = "CloudSync_ErrAuthRequired".GetLocalized()
-        };
-    }
-
-    public async Task<CloudApiResult<CloudRenameResultData>> RenameArchiveAsync(string dataType, string oldSlot,
-        string newSlot, bool overwrite = false)
-    {
-        var trimmedNew = (newSlot ?? string.Empty).Trim();
-        if (!IsValidSlotName(trimmedNew))
-        {
-            return new CloudApiResult<CloudRenameResultData>
-            {
-                Ok = false,
-                HttpStatusCode = 400,
-                Code = "INVALID_DATA_SLOT",
-                Message = FormatFriendlyError("INVALID_DATA_SLOT", null, 400)
-            };
-        }
-
-        var result = await SendAuthenticatedJsonAsync<CloudRenameResultData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncDataRenamePath, new
-            {
-                type = dataType.Trim().ToLowerInvariant(),
-                old_slot = oldSlot.Trim(),
-                new_slot = trimmedNew,
-                overwrite
-            });
-        MarkLockedIf423(result.HttpStatusCode, result.Code);
-        return result;
-    }
-
-    public async Task<CloudApiResult<CloudDeleteResultData>> DeleteArchiveAsync(string dataType, string slot)
-    {
-        var result = await SendAuthenticatedJsonAsync<CloudDeleteResultData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncDataDeletePath, new
-            {
-                type = dataType.Trim().ToLowerInvariant(),
-                slot = slot.Trim()
-            });
-        MarkLockedIf423(result.HttpStatusCode, result.Code);
-        return result;
-    }
-
-    public async Task<CloudApiResult<CloudDeleteAllResultData>> DeleteAllDataAsync()
-    {
-        var result = await SendAuthenticatedJsonAsync<CloudDeleteAllResultData>(HttpMethod.Post,
-            ApiEndpoints.CloudSyncDataDeleteAllPath, new
-            {
-                confirm = true
-            });
-        MarkLockedIf423(result.HttpStatusCode, result.Code);
-        return result;
     }
 
     private async Task<CloudApiResult<T>> SendAnonymousJsonAsync<T>(HttpMethod method, string path,
-        object? payload = null)
+        object? payload = null, bool? retryOnTransient = null)
     {
-        try
-        {
-            using var req = new HttpRequestMessage(method, path);
-            if (payload != null)
-            {
-                req.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-            }
+        var jsonPayload = payload == null ? null : JsonSerializer.Serialize(payload);
+        var shouldRetry = retryOnTransient ?? (method == HttpMethod.Get);
+        var raw = await SendWithTransientRetryAsync(
+            () => CreateJsonRequest(method, path, jsonPayload),
+            shouldRetry);
 
-            using var resp = await _httpClient.SendAsync(req);
-            var body = await resp.Content.ReadAsStringAsync();
-            return ParseEnvelope<T>((int)resp.StatusCode, body, GetRetryAfter(resp.Headers));
-        }
-        catch (Exception ex)
-        {
-            return new CloudApiResult<T>
-            {
-                Ok = false,
-                HttpStatusCode = 0,
-                Code = "NETWORK_ERROR",
-                Message = ex.Message
-            };
-        }
+        return raw.IsNetworkError
+            ? NetworkErrorResult<T>(raw.NetworkErrorMessage)
+            : ParseEnvelope<T>(raw.StatusCode, raw.Body, raw.RetryAfter);
     }
 
     private async Task<CloudApiResult<T>> SendAuthenticatedJsonAsync<T>(HttpMethod method, string path,
-        object? payload = null)
+        object? payload = null, bool? retryOnTransient = null)
     {
-        if (!await EnsureAuthenticatedAsync())
+        var jsonPayload = payload == null ? null : JsonSerializer.Serialize(payload);
+        var shouldRetry = retryOnTransient ?? (method == HttpMethod.Get);
+
+        var raw = await SendAuthenticatedRawAsync(token =>
+        {
+            var req = CreateJsonRequest(method, path, jsonPayload);
+            req.Headers.Add("X-LToken", token);
+            return req;
+        }, shouldRetry);
+
+        if (raw == null)
         {
             return UnauthorizedResult<T>();
         }
 
-        var jsonPayload = payload == null ? null : JsonSerializer.Serialize(payload);
+        return raw.IsNetworkError
+            ? NetworkErrorResult<T>(raw.NetworkErrorMessage)
+            : ParseEnvelope<T>(raw.StatusCode, raw.Body, raw.RetryAfter);
+    }
+
+    private async Task<RawHttpResponse?> SendAuthenticatedRawAsync(
+        Func<string, HttpRequestMessage> authenticatedRequestFactory,
+        bool retryOnTransientFailure)
+    {
+        if (!await EnsureAuthenticatedAsync())
+        {
+            return null;
+        }
 
         for (var attempt = 0; attempt < 2; attempt++)
         {
             var usedLtoken = _ltoken;
+            var raw = await SendWithTransientRetryAsync(
+                () => authenticatedRequestFactory(usedLtoken),
+                retryOnTransientFailure);
+
+            if (raw.IsNetworkError)
+            {
+                return raw;
+            }
+
+            if (raw.StatusCode == 403 && attempt == 0 && IsLoggedIn)
+            {
+                var rotate = await RotateLtokenInternalAsync(usedLtoken);
+                if (rotate.Ok)
+                {
+                    continue;
+                }
+            }
+
+            return raw;
+        }
+
+        return null;
+    }
+
+    private async Task<RawHttpResponse> SendWithTransientRetryAsync(
+        Func<HttpRequestMessage> requestFactory,
+        bool retryOnTransientFailure)
+    {
+        var maxRetryCount = retryOnTransientFailure ? _transientRetryDelays.Count : 0;
+        for (var attempt = 0; attempt <= maxRetryCount; attempt++)
+        {
             try
             {
-                using var req = new HttpRequestMessage(method, path);
-                req.Headers.Add("X-LToken", usedLtoken);
-                if (jsonPayload != null)
-                {
-                    req.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
-                }
+                using var req = requestFactory();
+                var method = req.Method.Method;
+                var targetPath = req.RequestUri?.IsAbsoluteUri == true
+                    ? req.RequestUri.AbsolutePath
+                    : req.RequestUri?.OriginalString ?? string.Empty;
 
                 using var resp = await _httpClient.SendAsync(req);
                 var body = await resp.Content.ReadAsStringAsync();
 
-                if ((int)resp.StatusCode == 403 && attempt == 0 && IsLoggedIn)
+                if (attempt < maxRetryCount && IsTransientGatewayStatus(resp.StatusCode))
                 {
-                    var rotate = await RotateLtokenInternalAsync(usedLtoken);
-                    if (rotate.Ok)
-                    {
-                        continue;
-                    }
+                    DebugLog.Info("CloudSyncService",
+                        $"[CloudSync] Transient HTTP {(int)resp.StatusCode} on {method} {targetPath}, retrying ({attempt + 1}/{maxRetryCount})...");
+                    await Task.Delay(_transientRetryDelays[attempt]);
+                    continue;
                 }
 
-                return ParseEnvelope<T>((int)resp.StatusCode, body);
+                return new RawHttpResponse
+                {
+                    StatusCode = (int)resp.StatusCode,
+                    IsSuccessStatusCode = resp.IsSuccessStatusCode,
+                    Body = body,
+                    RetryAfter = GetRetryAfter(resp.Headers),
+                    DataType = TryGetHeader(resp.Headers, "X-Data-Type"),
+                    Slot = TryGetHeader(resp.Headers, "X-Data-Slot"),
+                    Sha256 = TryGetHeader(resp.Headers, "X-Data-SHA256"),
+                    CompressedBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Compressed-Bytes"), out var cb)
+                        ? cb
+                        : null,
+                    RawBytes = long.TryParse(TryGetHeader(resp.Headers, "X-Raw-Bytes"), out var rb)
+                        ? rb
+                        : null
+                };
+            }
+            catch (HttpRequestException ex) when (attempt < maxRetryCount)
+            {
+                DebugLog.Info("CloudSyncService",
+                    $"[CloudSync] Transient transport error ({ex.Message}), retrying ({attempt + 1}/{maxRetryCount})...");
+                await Task.Delay(_transientRetryDelays[attempt]);
             }
             catch (Exception ex)
             {
-                return new CloudApiResult<T>
+                return new RawHttpResponse
                 {
-                    Ok = false,
-                    HttpStatusCode = 0,
-                    Code = "NETWORK_ERROR",
-                    Message = ex.Message
+                    IsNetworkError = true,
+                    NetworkErrorMessage = ex.Message
                 };
             }
         }
 
-        return UnauthorizedResult<T>();
+        return new RawHttpResponse
+        {
+            IsNetworkError = true,
+            NetworkErrorMessage = "Transient retry attempts exhausted."
+        };
     }
+
+    private static HttpRequestMessage CreateJsonRequest(HttpMethod method, string path, string? jsonPayload)
+    {
+        var req = new HttpRequestMessage(method, path);
+        if (jsonPayload != null)
+        {
+            req.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+        }
+
+        return req;
+    }
+
+    private static bool IsTransientGatewayStatus(HttpStatusCode statusCode)
+        => statusCode is HttpStatusCode.BadGateway
+            or HttpStatusCode.ServiceUnavailable
+            or HttpStatusCode.GatewayTimeout;
+
+    private static CloudApiResult<T> NetworkErrorResult<T>(string? message)
+        => new()
+        {
+            Ok = false,
+            HttpStatusCode = 0,
+            Code = "NETWORK_ERROR",
+            Message = message ?? string.Empty
+        };
 
     private static TimeSpan? GetRetryAfter(HttpResponseHeaders headers)
         => headers.RetryAfter?.Delta ?? (headers.RetryAfter?.Date - DateTimeOffset.UtcNow);
 
+    private static bool LooksLikeJsonValueStart(string? rawBody, bool objectOnly)
+    {
+        if (string.IsNullOrWhiteSpace(rawBody))
+        {
+            return false;
+        }
+
+        foreach (var ch in rawBody)
+        {
+            if (char.IsWhiteSpace(ch))
+            {
+                continue;
+            }
+
+            return objectOnly ? ch == '{' : ch is '{' or '[';
+        }
+
+        return false;
+    }
+
+    private static string SummarizeNonJsonBody(string? rawBody)
+    {
+        if (string.IsNullOrWhiteSpace(rawBody))
+        {
+            return "<empty>";
+        }
+
+        var normalized = rawBody.Trim()
+            .Replace("\r", " ", StringComparison.Ordinal)
+            .Replace("\n", " ", StringComparison.Ordinal)
+            .Replace("\t", " ", StringComparison.Ordinal);
+
+        return normalized.Length > 120 ? normalized[..120] + "..." : normalized;
+    }
+
+    private static (string Code, string ResourceKey) MapUpstreamHttpError(int statusCode)
+        => statusCode switch
+        {
+            502 => ("BAD_GATEWAY", "CloudSync_ErrServiceUnavailable"),
+            503 => ("SERVICE_UNAVAILABLE", "CloudSync_ErrServiceUnavailable"),
+            504 => ("GATEWAY_TIMEOUT", "CloudSync_ErrServiceUnavailable"),
+            >= 500 => ("UPSTREAM_ERROR", "CloudSync_ErrServiceUnavailable"),
+            429 => ("RATE_LIMITED", "CloudSync_ErrRateLimited"),
+            423 => ("ACCOUNT_LOCKED", "CloudSync_ErrLocked"),
+            413 => ("PAYLOAD_TOO_LARGE", "CloudSync_ErrPayloadTooLarge"),
+            403 => ("FORBIDDEN", "CloudSync_ErrAuthRequired"),
+            _ => ("INVALID_RESPONSE", "CloudSync_ErrGeneric")
+        };
+
     private static CloudApiResult<T> ParseEnvelope<T>(int statusCode, string rawBody, TimeSpan? retryAfter = null)
     {
+        if (!LooksLikeJsonValueStart(rawBody, objectOnly: true))
+        {
+            var (code, resourceKey) = MapUpstreamHttpError(statusCode);
+            DebugLog.Info("CloudSyncService",
+                $"[CloudSync] Non-JSON upstream response (HTTP {statusCode}, code={code}): {SummarizeNonJsonBody(rawBody)}");
+            return new CloudApiResult<T>
+            {
+                Ok = false,
+                HttpStatusCode = statusCode,
+                RetryAfter = retryAfter,
+                Code = code,
+                Message = resourceKey.GetLocalized()
+            };
+        }
+
         try
         {
             var envelope = JsonSerializer.Deserialize<CloudApiEnvelope>(rawBody, JsonOptions);
             if (envelope == null)
             {
+                var (code, resourceKey) = MapUpstreamHttpError(statusCode);
                 DebugLog.Info("CloudSyncService", $"[CloudSync] Empty envelope from HTTP {statusCode}");
                 return new CloudApiResult<T>
                 {
                     Ok = false,
                     HttpStatusCode = statusCode,
                     RetryAfter = retryAfter,
-                    Code = "INVALID_RESPONSE",
-                    Message = "CloudSync_ErrGeneric".GetLocalized()
+                    Code = code,
+                    Message = resourceKey.GetLocalized()
                 };
             }
 
@@ -876,14 +595,17 @@ public sealed partial class CloudSyncService : ICloudSyncService
         }
         catch (Exception ex)
         {
+            var (code, resourceKey) = statusCode >= 500
+                ? MapUpstreamHttpError(statusCode)
+                : ("PARSE_ERROR", "CloudSync_ErrGeneric");
             DebugLog.Info("CloudSyncService", $"[CloudSync] Envelope parse failed (HTTP {statusCode}): {ex.Message}");
             return new CloudApiResult<T>
             {
                 Ok = false,
                 HttpStatusCode = statusCode,
                 RetryAfter = retryAfter,
-                Code = "PARSE_ERROR",
-                Message = "CloudSync_ErrGeneric".GetLocalized()
+                Code = code,
+                Message = resourceKey.GetLocalized()
             };
         }
     }

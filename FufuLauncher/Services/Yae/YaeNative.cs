@@ -1,8 +1,6 @@
 /*
 Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
-
-Yae 集成所需的本机 API（用于 CREATE_SUSPENDED 启动游戏、注入 Yae DLL 等）。
 */
 
 using System.Runtime.InteropServices;

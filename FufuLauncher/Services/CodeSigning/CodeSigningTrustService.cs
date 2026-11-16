@@ -251,7 +251,7 @@ public sealed class CodeSigningTrustService
                     if (!package.MatchesPinnedRoot)
                     {
                         _lastLoadError =
-                            $"trust package root certificate does not match the pinned root ({package.RootThumbprintSha256}), rejected";
+                            string.Format("ModTrust_PkgRootMismatch_Format".GetLocalized(), package.RootThumbprintSha256);
                         DebugLog.Info("CodeSigningTrustService", $"[TrustService] {_lastLoadError}");
                         package.Dispose();
                         continue;
@@ -262,7 +262,7 @@ public sealed class CodeSigningTrustService
                 }
                 catch (Exception ex)
                 {
-                    _lastLoadError = $"trust package verification failed ({directory}): {ex.Message}";
+                    _lastLoadError = string.Format("ModTrust_PkgVerifyFailed_Format".GetLocalized(), directory, ex.Message);
                     DebugLog.Info("CodeSigningTrustService", $"[TrustService] {_lastLoadError}");
                 }
             }
@@ -288,8 +288,8 @@ public sealed class CodeSigningTrustService
                 PinnedRootThumbprintSha256 = pin,
                 SyncEndpoint = SyncEndpoint,
                 PackageError = pin == null
-                    ? "the app does not ship a pinned root certificate (Assets/Trust/ModsRootCA.cer), trust package cannot be verified"
-                    : LastLoadError ?? "no trust package passed verification"
+                    ? "ModTrust_NoPinnedRoot".GetLocalized()
+                    : LastLoadError ?? "ModTrust_NoVerifiedPkg".GetLocalized()
             };
         }
 
@@ -451,7 +451,7 @@ public sealed class CodeSigningTrustService
         var package = GetPackage(true);
         if (package == null)
         {
-            return new TrustOperationResult { Ok = false, Message = "信任包不可用，拒绝安装证书" };
+            return new TrustOperationResult { Ok = false, Message = "ModTrust_InstallPkgUnavailable".GetLocalized() };
         }
 
         if (scope == TrustStoreScope.CurrentUser && IsInstalled(package, TrustStoreScope.LocalMachine))
@@ -459,7 +459,7 @@ public sealed class CodeSigningTrustService
             return new TrustOperationResult
             {
                 Ok = false,
-                Message = "本机信任已安装并覆盖当前用户，无需在当前用户范围重复安装"
+                Message = "ModTrust_MachineAlreadyCoversUser".GetLocalized()
             };
         }
 
@@ -473,7 +473,7 @@ public sealed class CodeSigningTrustService
             if (AddToStore(package.Issuer, StoreName.CertificateAuthority, scope)) added++;
         }, ref denied, ref lastError);
 
-        var scopeText = scope == TrustStoreScope.CurrentUser ? "current user" : "machine";
+        var scopeText = scope == TrustStoreScope.CurrentUser ? "ModTrust_ScopeUser".GetLocalized() : "ModTrust_ScopeMachine".GetLocalized();
         DebugLog.Info("CodeSigningTrustService",
             $"[TrustService] install for {scope}: added={added}, denied={denied}, error={lastError}");
 
@@ -484,14 +484,14 @@ public sealed class CodeSigningTrustService
                 Ok = false,
                 NeedsElevation = true,
                 Message = string.IsNullOrWhiteSpace(lastError)
-                    ? "需要管理员权限才能完成证书安装"
-                    : $"需要管理员权限才能完成证书安装（{lastError}）"
+                    ? "ModTrust_AdminRequiredInstall".GetLocalized()
+                    : string.Format("ModTrust_AdminRequiredInstallDetail_Format".GetLocalized(), lastError)
             };
         }
 
         if (lastError != null)
         {
-            return new TrustOperationResult { Ok = false, Message = $"安装失败：{lastError}" };
+            return new TrustOperationResult { Ok = false, Message = string.Format("ModTrust_InstallFailedMsg_Format".GetLocalized(), lastError) };
         }
 
         MarkScopeInstalled(package, scope);
@@ -500,8 +500,8 @@ public sealed class CodeSigningTrustService
         {
             Ok = true,
             Message = added == 0
-                ? "平台证书已存在，无需重复安装"
-                : $"已安装平台证书（{scopeText}）"
+                ? "ModTrust_CertAlreadyInstalled".GetLocalized()
+                : string.Format("ModTrust_CertInstalledScope_Format".GetLocalized(), scopeText)
         };
     }
 
@@ -567,7 +567,7 @@ public sealed class CodeSigningTrustService
         var package = GetPackage(true);
         if (package == null)
         {
-            return new TrustOperationResult { Ok = false, Message = "信任包不可用，无法定位需要卸载的证书" };
+            return new TrustOperationResult { Ok = false, Message = "ModTrust_UninstallPkgUnavailable".GetLocalized() };
         }
 
         if (scope == TrustStoreScope.CurrentUser && IsInstalled(package, TrustStoreScope.LocalMachine))
@@ -575,7 +575,7 @@ public sealed class CodeSigningTrustService
             return new TrustOperationResult
             {
                 Ok = false,
-                Message = "当前用户的信任由本机安装提供，请在本机范围卸载"
+                Message = "ModTrust_UninstallFromMachine".GetLocalized()
             };
         }
 
@@ -593,8 +593,8 @@ public sealed class CodeSigningTrustService
             {
                 Ok = false,
                 Message = scope == TrustStoreScope.CurrentUser
-                    ? "当前用户范围没有由本应用安装的证书，无需卸载"
-                    : "本机范围没有由本应用安装的证书，无需卸载"
+                    ? "ModTrust_NoUserCertToUninstall".GetLocalized()
+                    : "ModTrust_NoMachineCertToUninstall".GetLocalized()
             };
         }
 
@@ -608,7 +608,7 @@ public sealed class CodeSigningTrustService
             removed += RemoveFromStore(package.Issuer, StoreName.CertificateAuthority, scope);
         }, ref denied, ref lastError);
 
-        var scopeText = scope == TrustStoreScope.CurrentUser ? "current user" : "machine";
+        var scopeText = scope == TrustStoreScope.CurrentUser ? "ModTrust_ScopeUser".GetLocalized() : "ModTrust_ScopeMachine".GetLocalized();
         DebugLog.Info("CodeSigningTrustService",
             $"[TrustService] uninstall for {scope}: removed={removed}, denied={denied}, error={lastError}");
 
@@ -619,14 +619,14 @@ public sealed class CodeSigningTrustService
                 Ok = false,
                 NeedsElevation = true,
                 Message = string.IsNullOrWhiteSpace(lastError)
-                    ? "需要管理员权限才能完成证书卸载"
-                    : $"需要管理员权限才能完成证书卸载（{lastError}）"
+                    ? "ModTrust_AdminRequiredUninstall".GetLocalized()
+                    : string.Format("ModTrust_AdminRequiredUninstallDetail_Format".GetLocalized(), lastError)
             };
         }
 
         if (lastError != null)
         {
-            return new TrustOperationResult { Ok = false, Message = $"卸载失败：{lastError}" };
+            return new TrustOperationResult { Ok = false, Message = string.Format("ModTrust_UninstallFailedMsg_Format".GetLocalized(), lastError) };
         }
 
         MarkScopeUninstalled(scope);
@@ -635,8 +635,8 @@ public sealed class CodeSigningTrustService
         {
             Ok = true,
             Message = removed == 0
-                ? "平台证书未安装，无需卸载"
-                : $"已卸载平台证书（{scopeText}）"
+                ? "ModTrust_CertNotInstalled".GetLocalized()
+                : string.Format("ModTrust_CertUninstalledScope_Format".GetLocalized(), scopeText)
         };
     }
 
@@ -689,7 +689,7 @@ public sealed class CodeSigningTrustService
             return new TrustOperationResult
             {
                 Ok = false,
-                Message = "应用未内置根证书（Assets/Trust/ModsRootCA.cer），拒绝从网络接受任何信任包"
+                Message = "ModTrust_SyncNoPinnedRoot".GetLocalized()
             };
         }
 
@@ -708,14 +708,14 @@ public sealed class CodeSigningTrustService
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
             if (index?.Ok != true || index.Files.Count == 0)
             {
-                return new TrustOperationResult { Ok = false, Message = "同步端点未返回有效的文件清单" };
+                return new TrustOperationResult { Ok = false, Message = "ModTrust_SyncInvalidIndex".GetLocalized() };
             }
 
             foreach (var file in index.Files)
             {
                 if (string.IsNullOrWhiteSpace(file.Name) || file.Name.Contains("..", StringComparison.Ordinal))
                 {
-                    return new TrustOperationResult { Ok = false, Message = "同步端点返回了非法文件名，已终止" };
+                    return new TrustOperationResult { Ok = false, Message = "ModTrust_SyncIllegalFilename".GetLocalized() };
                 }
 
                 var bytes = await client.GetByteArrayAsync(ApiEndpoints.GetCertificateSyncFileUrl(url, file.Name),
@@ -728,7 +728,7 @@ public sealed class CodeSigningTrustService
                     return new TrustOperationResult
                     {
                         Ok = false,
-                        Message = $"文件 {file.Name} 哈希校验失败（期望 {file.Sha256}，实际 {actualHash}），已拒绝本次同步"
+                        Message = string.Format("ModTrust_SyncHashMismatch_Format".GetLocalized(), file.Name, file.Sha256, actualHash)
                     };
                 }
 
@@ -742,7 +742,7 @@ public sealed class CodeSigningTrustService
                 return new TrustOperationResult
                 {
                     Ok = false,
-                    Message = "同步到的信任包根证书与应用内置根证书不一致，已拒绝（可能需要更新客户端）"
+                    Message = "ModTrust_SyncRootMismatch".GetLocalized()
                 };
             }
 
@@ -766,13 +766,13 @@ public sealed class CodeSigningTrustService
             return new TrustOperationResult
             {
                 Ok = true,
-                Message = $"信任包已更新（release {index.ReleaseId}，吊销 {verified.Manifest.RevokedSerialNumbers.Count} 条）"
+                Message = string.Format("ModTrust_SyncUpdated_Format".GetLocalized(), index.ReleaseId, verified.Manifest.RevokedSerialNumbers.Count)
             };
         }
         catch (Exception ex)
         {
             DebugLog.Info("CodeSigningTrustService", $"[TrustService] Trust package sync failed: {ex}");
-            return new TrustOperationResult { Ok = false, Message = $"同步失败：{ex.Message}" };
+            return new TrustOperationResult { Ok = false, Message = string.Format("ModTrust_SyncFailed_Format".GetLocalized(), ex.Message) };
         }
         finally
         {

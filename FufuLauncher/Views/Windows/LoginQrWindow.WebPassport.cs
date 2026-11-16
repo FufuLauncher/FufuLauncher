@@ -18,7 +18,7 @@ public sealed partial class LoginQrWindow
     {
         _currentSession?.Cancel();
 
-        UpdateStatus("正在加载通行证登录页面...", true);
+        UpdateStatus("LoginQR_LoadingPassportPage".GetLocalized(), true);
         try
         {
             await PassportWebView.EnsureCoreWebView2Async();
@@ -51,11 +51,11 @@ public sealed partial class LoginQrWindow
             await Task.Delay(100);
             PassportWebView.CoreWebView2.Navigate(url);
 
-            UpdateStatus("请在网页中完成登录验证", false, true);
+            UpdateStatus("LoginQR_CompleteWebLogin".GetLocalized(), false, true);
         }
         catch (Exception ex)
         {
-            UpdateStatus($"加载通行证网页失败: {ex.Message}", false);
+            UpdateStatus(string.Format("LoginQR_LoadPassportFailed_Format".GetLocalized(), ex.Message), false);
         }
     }
 
@@ -132,12 +132,12 @@ public sealed partial class LoginQrWindow
                         {
                             try
                             {
-                                UpdateStatus("凭证提取成功", true);
+                                UpdateStatus("LoginQR_ExtractSuccess".GetLocalized(), true);
                                 OnLoginSuccess(cookieDict, "cn");
                             }
                             catch (Exception ex)
                             {
-                                UpdateStatus($"处理失败: {ex.Message}", false);
+                                UpdateStatus(string.Format("LoginQR_ProcessFailed_Format".GetLocalized(), ex.Message), false);
                             }
                         });
 

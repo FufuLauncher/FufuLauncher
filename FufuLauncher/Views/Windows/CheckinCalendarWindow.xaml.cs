@@ -80,7 +80,7 @@ namespace FufuLauncher.Views
                     {
                         if (_closed || version != _calendarVersion ||
                             accountManager.ActiveAccountId != activeId) return;
-                        TitleText.Text = $"{calendarData.Month}月 签到奖励日历";
+                        TitleText.Text = string.Format("CheckinCalendar_MonthTitle_Format".GetLocalized(), calendarData.Month);
                         Rewards.Clear();
                         foreach (var item in calendarData.Awards)
                             Rewards.Add(item);
