@@ -3,6 +3,7 @@ using System.Text;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
+using FufuLauncher.Services.GameServer;
 
 namespace FufuLauncher.Services;
 
@@ -33,6 +34,7 @@ public partial class GameLauncherService
                 return result;
             }
 
+            using var lease = await GameServerOperation.EnterAsync(gamePath, cancellationToken, requireClosed: false);
             DisableIncompatiblePlugins(logBuilder);
 
             var exeNames = await GameExeManager.GetExeNamesAsync();

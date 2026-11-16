@@ -2130,7 +2130,7 @@ MicrosoftのWebサイトからダウンロードしてインストールしま�
     <value>キャラクター、所持品、メモ、Miyoushe 戦績情報</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>リソース</value>
+    <value>リソース管理</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>プレイヤーフォーラム、交流、フィードバック</value>

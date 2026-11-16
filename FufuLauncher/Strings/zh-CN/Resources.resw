@@ -2386,7 +2386,7 @@
     <value>角色、背包、便签与米游社战绩信息</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>资源获取</value>
+    <value>资源管理</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>玩家论坛、交流分享与问题反馈</value>
@@ -2398,7 +2398,7 @@
     <value>VanillaBBS</value>
   </data>
   <data name="Panel_ResourcesDesc" xml:space="preserve">
-    <value>管理与资源获取</value>
+    <value>浏览视频与管理本地过场动画</value>
   </data>
   <data name="LaunchBtn_SelectPath" xml:space="preserve">
     <value>请选择游戏路径</value>
@@ -13377,5 +13377,206 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>未能生成成就读取结果。</value>
+  </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>过场动画资源管理</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>按章节查看、清理和恢复已安装的过场动画</value>
+  </data>
+  <data name="Cutscene_Search" xml:space="preserve">
+    <value>搜索动画、章节、角色或文件名</value>
+  </data>
+  <data name="Cutscene_Refresh" xml:space="preserve">
+    <value>刷新资源列表</value>
+  </data>
+  <data name="Cutscene_All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="Cutscene_KeepVisible" xml:space="preserve">
+    <value>保留当前列表中的资源</value>
+  </data>
+  <data name="Cutscene_KeepHint" xml:space="preserve">
+    <value>勾选表示保留或下载，取消勾选会加入待删除。</value>
+  </data>
+  <data name="Cutscene_ShowReleaseVersion" xml:space="preserve">
+    <value>显示上线版本</value>
+  </data>
+  <data name="Cutscene_ShowClipCount" xml:space="preserve">
+    <value>显示下属数量</value>
+  </data>
+  <data name="Cutscene_ChapterClipCountSingle" xml:space="preserve">
+    <value>{0} 段</value>
+  </data>
+  <data name="Cutscene_ChapterClipCount" xml:space="preserve">
+    <value>{0} 段</value>
+  </data>
+  <data name="Cutscene_SortMode" xml:space="preserve">
+    <value>排序方式</value>
+  </data>
+  <data name="Cutscene_SortByRelease" xml:space="preserve">
+    <value>按上线时间</value>
+  </data>
+  <data name="Cutscene_SortDirection" xml:space="preserve">
+    <value>排序方向</value>
+  </data>
+  <data name="Cutscene_SortAscending" xml:space="preserve">
+    <value>正序</value>
+  </data>
+  <data name="Cutscene_SortDescending" xml:space="preserve">
+    <value>倒序</value>
+  </data>
+  <data name="Cutscene_PendingFilter" xml:space="preserve">
+    <value>待更改 {0}</value>
+  </data>
+  <data name="Cutscene_PendingEmpty" xml:space="preserve">
+    <value>没有符合筛选条件的待更改文件</value>
+  </data>
+  <data name="Cutscene_ExpandAll" xml:space="preserve">
+    <value>全部展开</value>
+  </data>
+  <data name="Cutscene_CollapseAll" xml:space="preserve">
+    <value>全部收起</value>
+  </data>
+  <data name="Cutscene_Apply" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
+  <data name="Cutscene_InstallSummary" xml:space="preserve">
+    <value>已安装 {0}/{1} 个文件 · {2}/{3}</value>
+  </data>
+  <data name="Cutscene_VisibleSummary" xml:space="preserve">
+    <value>已勾选 {0}/{1}</value>
+  </data>
+  <data name="Cutscene_DeleteSummary" xml:space="preserve">
+    <value>待删除 {0}</value>
+  </data>
+  <data name="Cutscene_DownloadSummary" xml:space="preserve">
+    <value>待下载 {0}</value>
+  </data>
+  <data name="Cutscene_Confirm" xml:space="preserve">
+    <value>{0}，{1}。\n\n请确认选中的视频可以删除。游戏更新或修复时可能会重新下载这些文件。</value>
+  </data>
+  <data name="Cutscene_Scanning" xml:space="preserve">
+    <value>正在读取已安装版本的过场动画清单…</value>
+  </data>
+  <data name="Cutscene_ScanFailed" xml:space="preserve">
+    <value>无法读取过场动画清单。请检查游戏目录、版本和网络连接后刷新。</value>
+  </data>
+  <data name="Cutscene_HistoryUnavailable" xml:space="preserve">
+    <value>暂时无法核对上一版本的清单，按版本判定的清理暂不可用。</value>
+  </data>
+  <data name="Cutscene_NothingLoaded" xml:space="preserve">
+    <value>暂无可显示的过场动画</value>
+  </data>
+  <data name="Cutscene_Empty" xml:space="preserve">
+    <value>没有符合筛选条件的过场动画</value>
+  </data>
+  <data name="Cutscene_PendingRemoval" xml:space="preserve">
+    <value>待删除</value>
+  </data>
+  <data name="Cutscene_PendingDownload" xml:space="preserve">
+    <value>待下载</value>
+  </data>
+  <data name="Cutscene_NotInstalled" xml:space="preserve">
+    <value>未安装或文件不完整</value>
+  </data>
+  <data name="Cutscene_Installed" xml:space="preserve">
+    <value>已安装</value>
+  </data>
+  <data name="Cutscene_Protected" xml:space="preserve">
+    <value>已安装 · 保留</value>
+  </data>
+  <data name="Cutscene_Applied" xml:space="preserve">
+    <value>已应用过场动画更改。</value>
+  </data>
+  <data name="Cutscene_Stopped" xml:space="preserve">
+    <value>操作已取消。列表已按当前文件状态刷新。</value>
+  </data>
+  <data name="Cutscene_ApplyFailed" xml:space="preserve">
+    <value>无法完成过场动画更改。请检查网络和游戏文件访问权限。</value>
+  </data>
+  <data name="Cutscene_RescanRequired" xml:space="preserve">
+    <value>游戏路径、版本或文件状态已变化，请刷新后重新选择。</value>
+  </data>
+  <data name="Cutscene_Restoring" xml:space="preserve">
+    <value>正在恢复 {0}</value>
+  </data>
+  <data name="Cutscene_Removing" xml:space="preserve">
+    <value>正在校验并删除 {0}</value>
+  </data>
+  <data name="Cutscene_RestoreFailed" xml:space="preserve">
+    <value>恢复文件失败：{0}</value>
+  </data>
+  <data name="Cutscene_FileChanged" xml:space="preserve">
+    <value>{0} 的内容与官方清单不一致，已跳过删除。</value>
+  </data>
+  <data name="Cutscene_UnsafePath" xml:space="preserve">
+    <value>过场动画目录或文件包含链接，或目录已不存在。请检查安装目录。</value>
+  </data>
+  <data name="Cutscene_Reunion" xml:space="preserve">
+    <value>星之归还</value>
+  </data>
+  <data name="Cutscene_TravelerMenu" xml:space="preserve">
+    <value>按主角版本</value>
+  </data>
+  <data name="Cutscene_Traveler_Aether" xml:space="preserve">
+    <value>男主（空）</value>
+  </data>
+  <data name="Cutscene_Traveler_Lumine" xml:space="preserve">
+    <value>女主（荧）</value>
+  </data>
+  <data name="Cutscene_RemoveAether" xml:space="preserve">
+    <value>将全部男主（空）版本加入待删除</value>
+  </data>
+  <data name="Cutscene_RemoveLumine" xml:space="preserve">
+    <value>将全部女主（荧）版本加入待删除</value>
+  </data>
+  <data name="Cutscene_ClearTraveler" xml:space="preserve">
+    <value>撤销主角批量选择</value>
+  </data>
+  <data name="Cutscene_ConfirmTraveler" xml:space="preserve">
+    <value>本次包含{0}的专属过场，也会清理当前版本中已选中的文件。请确认这个安装目录使用的是另一位主角。</value>
+  </data>
+  <data name="Cutscene_Category_Archon" xml:space="preserve">
+    <value>魔神任务</value>
+  </data>
+  <data name="Cutscene_Category_Story" xml:space="preserve">
+    <value>传说任务</value>
+  </data>
+  <data name="Cutscene_Category_Event" xml:space="preserve">
+    <value>活动任务</value>
+  </data>
+  <data name="Cutscene_Category_Tribal" xml:space="preserve">
+    <value>部族纪闻</value>
+  </data>
+  <data name="Cutscene_Category_World" xml:space="preserve">
+    <value>世界任务</value>
+  </data>
+  <data name="Cutscene_Category_Other" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="Cutscene_Region_Mondstadt" xml:space="preserve">
+    <value>序章 · 蒙德</value>
+  </data>
+  <data name="Cutscene_Region_Liyue" xml:space="preserve">
+    <value>璃月</value>
+  </data>
+  <data name="Cutscene_Region_Inazuma" xml:space="preserve">
+    <value>稻妻</value>
+  </data>
+  <data name="Cutscene_Region_Sumeru" xml:space="preserve">
+    <value>须弥</value>
+  </data>
+  <data name="Cutscene_Region_Fontaine" xml:space="preserve">
+    <value>枫丹</value>
+  </data>
+  <data name="Cutscene_Region_Natlan" xml:space="preserve">
+    <value>纳塔</value>
+  </data>
+  <data name="Cutscene_Region_NodKrai" xml:space="preserve">
+    <value>挪德卡莱</value>
+  </data>
+  <data name="Cutscene_Region_Snezhnaya" xml:space="preserve">
+    <value>至冬</value>
   </data>
 </root>

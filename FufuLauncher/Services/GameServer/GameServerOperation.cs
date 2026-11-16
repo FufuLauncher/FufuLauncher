@@ -12,7 +12,7 @@ internal static class GameServerOperation
 {
     private static readonly ConcurrentDictionary<string, SemaphoreSlim> Gates = new(StringComparer.OrdinalIgnoreCase);
 
-    public static async Task<IDisposable> EnterAsync(string gameDir, CancellationToken token)
+    public static async Task<IDisposable> EnterAsync(string gameDir, CancellationToken token, bool requireClosed = true)
     {
         string path = Path.TrimEndingDirectorySeparator(Path.GetFullPath(gameDir));
         SemaphoreSlim gate = Gates.GetOrAdd(path, _ => new SemaphoreSlim(1, 1));
@@ -24,7 +24,8 @@ internal static class GameServerOperation
         var lease = new Lease(gate);
         try
         {
-            await EnsureGameClosedAsync().ConfigureAwait(false);
+            if (requireClosed)
+                await EnsureGameClosedAsync().ConfigureAwait(false);
             return lease;
         }
         catch

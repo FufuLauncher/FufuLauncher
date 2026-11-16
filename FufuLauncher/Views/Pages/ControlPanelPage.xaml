@@ -494,27 +494,48 @@
                                 Text="{helpers:Loc Key=Panel_ResourcesDesc}" />
                         </StackPanel>
 
-                        <Button Style="{StaticResource ToolCardButtonStyle}" Click="OnOpenVideoResourcesClick">
-                            <Grid ColumnSpacing="14">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="48" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}"
-                                        CornerRadius="10">
-                                    <Image Margin="9"
-                                           Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconVideoUrl)}"
-                                           Stretch="Uniform" />
-                                </Border>
-                                <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
-                                    <TextBlock FontSize="17" FontWeight="SemiBold"
-                                               Foreground="{ThemeResource PanelTextBrush}"
-                                               Text="{helpers:Loc Key=Home_WidgetVideo}" />
-                                    <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}"
-                                               Text="{helpers:Loc Key=Home_VideoTooltip}" TextWrapping="Wrap" />
-                                </StackPanel>
-                            </Grid>
-                        </Button>
+                        <Grid ColumnSpacing="12" ColumnDefinitions="*,*">
+                            <Button Style="{StaticResource ToolCardButtonStyle}" Click="OnOpenVideoResourcesClick">
+                                <Grid ColumnSpacing="14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="48" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}"
+                                            CornerRadius="10">
+                                        <Image Margin="9"
+                                               Source="{x:Bind helpers:EndpointImage.Create(constants:ApiEndpoints.WidgetIconVideoUrl)}"
+                                               Stretch="Uniform" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                        <TextBlock FontSize="17" FontWeight="SemiBold"
+                                                   Foreground="{ThemeResource PanelTextBrush}"
+                                                   Text="{helpers:Loc Key=Home_WidgetVideo}" />
+                                        <TextBlock FontSize="13" Foreground="{ThemeResource PanelSecondaryTextBrush}"
+                                                   Text="{helpers:Loc Key=Home_VideoTooltip}" TextWrapping="Wrap" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="1" Style="{StaticResource ToolCardButtonStyle}"
+                                    Click="OnOpenCutsceneResourcesClick">
+                                <Grid ColumnSpacing="14" ColumnDefinitions="48,*">
+                                    <Border Width="48" Height="48" Background="{ThemeResource PanelCardBrush}"
+                                            CornerRadius="10">
+                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF55A;" FontSize="24"
+                                                  Foreground="{ThemeResource PanelTextBrush}"
+                                                  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" Spacing="4" VerticalAlignment="Center">
+                                        <TextBlock FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap"
+                                                   Foreground="{ThemeResource PanelTextBrush}"
+                                                   Text="{helpers:Loc Key=Cutscene_Title}" />
+                                        <TextBlock FontSize="13" TextWrapping="Wrap"
+                                                   Foreground="{ThemeResource PanelSecondaryTextBrush}"
+                                                   Text="{helpers:Loc Key=Cutscene_CardDescription}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </Grid>
                     </StackPanel>
                 </Border>
 

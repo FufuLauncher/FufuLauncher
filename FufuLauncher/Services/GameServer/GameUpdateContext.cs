@@ -12,7 +12,8 @@ namespace FufuLauncher.Services.GameServer;
 public sealed class GameUpdateContext
 {
     public GameUpdateContext(string gameDir, GameServerScheme scheme, IProgress<GameServerConversionProgress> progress,
-        Action<string> log, CancellationToken token, GameServerDownloadMonitor? downloadMonitor = null)
+        Action<string> log, CancellationToken token, GameServerDownloadMonitor? downloadMonitor = null,
+        string? chunksDirectory = null)
     {
         GameDir = gameDir;
         Scheme = scheme;
@@ -27,7 +28,7 @@ public sealed class GameUpdateContext
             CancellationToken = token,
         };
 
-        ChunksDir = Path.Combine(gameDir, GameUpdateService.ChunksDirectoryName);
+        ChunksDir = chunksDirectory ?? Path.Combine(gameDir, GameUpdateService.ChunksDirectoryName);
         PredownloadStatusFilePath = Path.Combine(ChunksDir, GameUpdateService.PredownloadStatusFileName);
     }
 

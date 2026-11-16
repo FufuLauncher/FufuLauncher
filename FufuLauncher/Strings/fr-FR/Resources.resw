@@ -2130,7 +2130,7 @@ Voulez-vous accéder au site officiel de Microsoft pour la télécharger et l'in
     <value>Personnages, inventaire, carnet et données de combat Miyoushe</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Acquisition de ressources</value>
+    <value>Gestion des ressources</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Forum des joueurs, échanges et retours</value>

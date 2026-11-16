@@ -2130,7 +2130,7 @@ Por favor, confirma que seleccionaste el directorio de instalación que contiene
     <value>Personajes, inventario, notas y registros de batalla de Miyoushe</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Recursos</value>
+    <value>Gestión de recursos</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Foro de jugadores, intercambio y comentarios</value>
