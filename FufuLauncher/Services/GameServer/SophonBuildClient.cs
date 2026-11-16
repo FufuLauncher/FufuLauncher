@@ -74,6 +74,11 @@ public sealed class SophonBuildClient
             throw new InvalidOperationException("GameServer_BranchDataNull".GetLocalized());
         }
 
+        if (!dataProp.TryGetProperty("tag", out var returnedTag) || returnedTag.GetString() != tag)
+        {
+            throw new InvalidDataException("GameServer_BranchDataNull".GetLocalized());
+        }
+
         return ParseBranchInfo(dataProp);
     }
 

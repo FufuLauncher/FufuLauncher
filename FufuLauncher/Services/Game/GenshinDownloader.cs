@@ -127,6 +127,8 @@ namespace FufuLauncher.Services
         {
             try
             {
+                using var operation = await GameServerOperation.EnterAsync(installPath, token, requireClosed: false)
+                    .ConfigureAwait(false);
                 Log?.Invoke("Download_Connecting".GetLocalized());
 
                 using JsonDocument buildDoc = await _sophonBuildClient.GetBuildDocumentAsync(_scheme, false, token)

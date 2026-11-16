@@ -2130,7 +2130,7 @@
     <value>Персонажи, инвентарь, заметки и боевая хроника</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Ресурсы</value>
+    <value>Управление ресурсами</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Форум игроков, общение и обратная связь</value>

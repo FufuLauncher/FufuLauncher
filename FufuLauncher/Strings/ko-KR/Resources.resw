@@ -2130,7 +2130,7 @@ Microsoft 웹사이트로 이동하여 다운로드 및 설치하시겠습니까
     <value>캐릭터, 인벤토리, 노트 및 Miyoushe 전투 기록</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>리소스</value>
+    <value>리소스 관리</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>플레이어 포럼, 정보 공유 및 피드백</value>

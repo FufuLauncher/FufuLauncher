@@ -109,6 +109,11 @@ public sealed partial class ControlPanelPage : Page
         window.Activate();
     }
 
+    private void OnOpenCutsceneResourcesClick(object sender, RoutedEventArgs e)
+    {
+        CutsceneResourcesWindow.Show();
+    }
+
     private void OnOpenCommunityClick(object sender, RoutedEventArgs e)
     {
         var window = new CommunityWindow();

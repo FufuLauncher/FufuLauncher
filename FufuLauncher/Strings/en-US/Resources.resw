@@ -2264,7 +2264,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>Characters, inventory, notes, and Miyoushe battle records</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Resources</value>
+    <value>Resource Management</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Player forum, discussions, and feedback</value>
@@ -2276,7 +2276,7 @@ Go to the Microsoft website to download and install it?</value>
     <value>VanillaBBS</value>
   </data>
   <data name="Panel_ResourcesDesc" xml:space="preserve">
-    <value>Media and resource library</value>
+    <value>Browse videos and manage local cutscenes</value>
   </data>
   <data name="LaunchBtn_SelectPath" xml:space="preserve">
     <value>Select Game Path</value>
@@ -13392,5 +13392,206 @@ Continue to the project page?</value>
   </data>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>Failed to generate achievement reader output file.</value>
+  </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Cutscene Resource Management</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>View, remove, and restore installed cutscenes by chapter</value>
+  </data>
+  <data name="Cutscene_Search" xml:space="preserve">
+    <value>Search by scene, chapter, character, or file name</value>
+  </data>
+  <data name="Cutscene_Refresh" xml:space="preserve">
+    <value>Refresh resource list</value>
+  </data>
+  <data name="Cutscene_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Cutscene_KeepVisible" xml:space="preserve">
+    <value>Keep resources in the current list</value>
+  </data>
+  <data name="Cutscene_KeepHint" xml:space="preserve">
+    <value>Check to keep or download. Uncheck to queue for removal.</value>
+  </data>
+  <data name="Cutscene_ShowReleaseVersion" xml:space="preserve">
+    <value>Show release version</value>
+  </data>
+  <data name="Cutscene_ShowClipCount" xml:space="preserve">
+    <value>Show clip count</value>
+  </data>
+  <data name="Cutscene_ChapterClipCountSingle" xml:space="preserve">
+    <value>{0} clip</value>
+  </data>
+  <data name="Cutscene_ChapterClipCount" xml:space="preserve">
+    <value>{0} clips</value>
+  </data>
+  <data name="Cutscene_SortMode" xml:space="preserve">
+    <value>Sort by</value>
+  </data>
+  <data name="Cutscene_SortByRelease" xml:space="preserve">
+    <value>Release time</value>
+  </data>
+  <data name="Cutscene_SortDirection" xml:space="preserve">
+    <value>Sort direction</value>
+  </data>
+  <data name="Cutscene_SortAscending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="Cutscene_SortDescending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="Cutscene_PendingFilter" xml:space="preserve">
+    <value>Pending {0}</value>
+  </data>
+  <data name="Cutscene_PendingEmpty" xml:space="preserve">
+    <value>No pending changes match the filters</value>
+  </data>
+  <data name="Cutscene_ExpandAll" xml:space="preserve">
+    <value>Expand all</value>
+  </data>
+  <data name="Cutscene_CollapseAll" xml:space="preserve">
+    <value>Collapse all</value>
+  </data>
+  <data name="Cutscene_Apply" xml:space="preserve">
+    <value>Apply changes</value>
+  </data>
+  <data name="Cutscene_InstallSummary" xml:space="preserve">
+    <value>Installed {0}/{1} files · {2}/{3}</value>
+  </data>
+  <data name="Cutscene_VisibleSummary" xml:space="preserve">
+    <value>Selected {0}/{1}</value>
+  </data>
+  <data name="Cutscene_DeleteSummary" xml:space="preserve">
+    <value>Remove {0}</value>
+  </data>
+  <data name="Cutscene_DownloadSummary" xml:space="preserve">
+    <value>Download {0}</value>
+  </data>
+  <data name="Cutscene_Confirm" xml:space="preserve">
+    <value>{0}, {1}.\n\nConfirm that the selected videos can be removed. Game updates or repairs may download them again.</value>
+  </data>
+  <data name="Cutscene_Scanning" xml:space="preserve">
+    <value>Reading the cutscene manifest for the installed version…</value>
+  </data>
+  <data name="Cutscene_ScanFailed" xml:space="preserve">
+    <value>Could not read the cutscene manifest. Check the game directory, version, and network connection, then refresh.</value>
+  </data>
+  <data name="Cutscene_HistoryUnavailable" xml:space="preserve">
+    <value>The previous version’s manifest is unavailable. Removal based on version history is temporarily unavailable.</value>
+  </data>
+  <data name="Cutscene_NothingLoaded" xml:space="preserve">
+    <value>No cutscenes loaded</value>
+  </data>
+  <data name="Cutscene_Empty" xml:space="preserve">
+    <value>No cutscenes match the filters</value>
+  </data>
+  <data name="Cutscene_PendingRemoval" xml:space="preserve">
+    <value>To remove</value>
+  </data>
+  <data name="Cutscene_PendingDownload" xml:space="preserve">
+    <value>To download</value>
+  </data>
+  <data name="Cutscene_NotInstalled" xml:space="preserve">
+    <value>Missing or incomplete</value>
+  </data>
+  <data name="Cutscene_Installed" xml:space="preserve">
+    <value>Installed</value>
+  </data>
+  <data name="Cutscene_Protected" xml:space="preserve">
+    <value>Installed · Kept</value>
+  </data>
+  <data name="Cutscene_Applied" xml:space="preserve">
+    <value>Cutscene changes applied.</value>
+  </data>
+  <data name="Cutscene_Stopped" xml:space="preserve">
+    <value>Operation canceled. The list now shows the current file status.</value>
+  </data>
+  <data name="Cutscene_ApplyFailed" xml:space="preserve">
+    <value>Could not apply the cutscene changes. Check the network and access to the game files.</value>
+  </data>
+  <data name="Cutscene_RescanRequired" xml:space="preserve">
+    <value>The game path, version, or file status has changed. Refresh and select the cutscenes again.</value>
+  </data>
+  <data name="Cutscene_Restoring" xml:space="preserve">
+    <value>Restoring {0}</value>
+  </data>
+  <data name="Cutscene_Removing" xml:space="preserve">
+    <value>Checking and removing {0}</value>
+  </data>
+  <data name="Cutscene_RestoreFailed" xml:space="preserve">
+    <value>Could not restore {0}</value>
+  </data>
+  <data name="Cutscene_FileChanged" xml:space="preserve">
+    <value>{0} differs from the official manifest and was kept.</value>
+  </data>
+  <data name="Cutscene_UnsafePath" xml:space="preserve">
+    <value>A cutscene path contains a link or the directory is missing. Check the installation directory.</value>
+  </data>
+  <data name="Cutscene_Reunion" xml:space="preserve">
+    <value>Stellar Reunion</value>
+  </data>
+  <data name="Cutscene_TravelerMenu" xml:space="preserve">
+    <value>Traveler version</value>
+  </data>
+  <data name="Cutscene_Traveler_Aether" xml:space="preserve">
+    <value>Aether</value>
+  </data>
+  <data name="Cutscene_Traveler_Lumine" xml:space="preserve">
+    <value>Lumine</value>
+  </data>
+  <data name="Cutscene_RemoveAether" xml:space="preserve">
+    <value>Queue all Aether cutscenes for removal</value>
+  </data>
+  <data name="Cutscene_RemoveLumine" xml:space="preserve">
+    <value>Queue all Lumine cutscenes for removal</value>
+  </data>
+  <data name="Cutscene_ClearTraveler" xml:space="preserve">
+    <value>Undo traveler selection</value>
+  </data>
+  <data name="Cutscene_ConfirmTraveler" xml:space="preserve">
+    <value>This selection includes {0} cutscenes from the current game version. Confirm that this installation uses the other traveler.</value>
+  </data>
+  <data name="Cutscene_Category_Archon" xml:space="preserve">
+    <value>Archon Quests</value>
+  </data>
+  <data name="Cutscene_Category_Story" xml:space="preserve">
+    <value>Story Quests</value>
+  </data>
+  <data name="Cutscene_Category_Event" xml:space="preserve">
+    <value>Event Quests</value>
+  </data>
+  <data name="Cutscene_Category_Tribal" xml:space="preserve">
+    <value>Tribal Chronicles</value>
+  </data>
+  <data name="Cutscene_Category_World" xml:space="preserve">
+    <value>World Quests</value>
+  </data>
+  <data name="Cutscene_Category_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Cutscene_Region_Mondstadt" xml:space="preserve">
+    <value>Mondstadt</value>
+  </data>
+  <data name="Cutscene_Region_Liyue" xml:space="preserve">
+    <value>Liyue</value>
+  </data>
+  <data name="Cutscene_Region_Inazuma" xml:space="preserve">
+    <value>Inazuma</value>
+  </data>
+  <data name="Cutscene_Region_Sumeru" xml:space="preserve">
+    <value>Sumeru</value>
+  </data>
+  <data name="Cutscene_Region_Fontaine" xml:space="preserve">
+    <value>Fontaine</value>
+  </data>
+  <data name="Cutscene_Region_Natlan" xml:space="preserve">
+    <value>Natlan</value>
+  </data>
+  <data name="Cutscene_Region_NodKrai" xml:space="preserve">
+    <value>Nod-Krai</value>
+  </data>
+  <data name="Cutscene_Region_Snezhnaya" xml:space="preserve">
+    <value>Snezhnaya</value>
   </data>
 </root>

@@ -3227,7 +3227,7 @@ Se puoi aiutare, usa il pulsante qui sotto per visitare il repository di codice 
     <value>Traccia statistiche, progressi e dati a lungo termine</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Risorse</value>
+    <value>Gestione risorse</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Forum dei giocatori, scambi e feedback</value>

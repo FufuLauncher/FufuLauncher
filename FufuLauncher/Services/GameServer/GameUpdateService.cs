@@ -144,6 +144,8 @@ public sealed partial class GameUpdateService
     {
         ArgumentNullException.ThrowIfNull(currentScheme);
 
+        using var lease = await GameServerOperation.EnterAsync(gameDir, token, requireClosed: false)
+            .ConfigureAwait(false);
         EnsureDirectoryPermissions(gameDir);
 
         var context = new GameUpdateContext(gameDir, currentScheme, progress, log, token, downloadMonitor);

@@ -40,57 +40,57 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms" />
+        <FrameworkReference Include="Microsoft.WindowsDesktop.App.WindowsForms"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Manifest Include="$(ApplicationManifest)" />
+        <Manifest Include="$(ApplicationManifest)"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="AsyncKeyedLock" Version="8.1.3" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
-        <PackageReference Include="Google.Protobuf" Version="3.35.1" />
-        <PackageReference Include="H.NotifyIcon.WinUI" Version="2.2.0" />
-        <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
-        <PackageReference Include="Markdig" Version="1.3.2" />
-        <PackageReference Include="Markdown.ColorCode" Version="3.0.1" />
-        <PackageReference Include="InputSimulatorPlus" Version="1.0.7" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.28" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2"/>
+        <PackageReference Include="Google.Protobuf" Version="3.35.1"/>
+        <PackageReference Include="H.NotifyIcon.WinUI" Version="2.2.0"/>
+        <PackageReference Include="HtmlAgilityPack" Version="1.12.4"/>
+        <PackageReference Include="Markdig" Version="1.3.2"/>
+        <PackageReference Include="Markdown.ColorCode" Version="3.0.1"/>
+        <PackageReference Include="InputSimulatorPlus" Version="1.0.7"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.28"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.28">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.2.4" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
-        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.4.0" />
-        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44" />
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.2.0" />
-        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1" />
-        <PackageReference Include="MoonSharp" Version="2.0.0" />
-        <PackageReference Include="MoonSharp.Interpreter.netcore" Version="3.0.2" />
-        <PackageReference Include="PuppeteerSharp" Version="25.3.1" />
-        <PackageReference Include="QRCoder" Version="1.8.0" />
-        <PackageReference Include="QuestPDF" Version="2026.7.1" />
-        <PackageReference Include="Sentry" Version="6.6.0" />
-        <PackageReference Include="Sentry.Profiling" Version="6.6.0" />
-        <PackageReference Include="SharpCompress" Version="0.50.5" />
-        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />
-        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.2" />
-        <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.1" />
-        <PackageReference Include="System.Drawing.Common" Version="9.0.17" />
-        <PackageReference Include="System.IO.Hashing" Version="9.0.11" />
-        <PackageReference Include="System.Management" Version="8.0.0" />
-        <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
-        <PackageReference Include="WinUIEx" Version="2.9.1" />
+        <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.2.4"/>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.4.0"/>
+        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4078.44"/>
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.2.0"/>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.1"/>
+        <PackageReference Include="MoonSharp" Version="2.0.0"/>
+        <PackageReference Include="MoonSharp.Interpreter.netcore" Version="3.0.2"/>
+        <PackageReference Include="PuppeteerSharp" Version="25.3.1"/>
+        <PackageReference Include="QRCoder" Version="1.8.0"/>
+        <PackageReference Include="QuestPDF" Version="2026.7.1"/>
+        <PackageReference Include="Sentry" Version="6.6.0"/>
+        <PackageReference Include="Sentry.Profiling" Version="6.6.0"/>
+        <PackageReference Include="SharpCompress" Version="0.50.5"/>
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12"/>
+        <PackageReference Include="System.Diagnostics.EventLog" Version="8.0.2"/>
+        <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.1"/>
+        <PackageReference Include="System.Drawing.Common" Version="9.0.17"/>
+        <PackageReference Include="System.IO.Hashing" Version="9.0.11"/>
+        <PackageReference Include="System.Management" Version="8.0.0"/>
+        <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0"/>
+        <PackageReference Include="WinUIEx" Version="2.9.1"/>
         <PackageReference Include="Yae.Lib" Version="5.4.5">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="YamlDotNet" Version="18.1.0" />
-        <PackageReference Include="ZstdSharp.Port" Version="0.8.8" />
-        <PackageReference Include="ZXing.Net" Version="0.16.11" />
+        <PackageReference Include="YamlDotNet" Version="18.1.0"/>
+        <PackageReference Include="ZstdSharp.Port" Version="0.8.8"/>
+        <PackageReference Include="ZXing.Net" Version="0.16.11"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -98,34 +98,34 @@
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
             <Link>Update.json</Link>
         </Content>
-        <Content Include="Strings\en-US\Resources.resw" />
-        <Content Include="Strings\zh-CN\Resources.resw" />
-        <Content Include="Strings\fr-FR\Resources.resw" />
-        <Content Include="Strings\de-DE\Resources.resw" />
-        <Content Include="Strings\ru-RU\Resources.resw" />
-        <Content Include="Strings\ja-JP\Resources.resw" />
-        <Content Include="Strings\es-ES\Resources.resw" />
-        <Content Include="Strings\zh-TW\Resources.resw" />
-        <Content Include="Strings\ko-KR\Resources.resw" />
-        <Content Include="Strings\it-IT\Resources.resw" />
-        <Content Include="Strings\id-ID\Resources.resw" />
-        <Content Include="Strings\pt-BR\Resources.resw" />
-        <Content Include="Strings\es-MX\Resources.resw" />
-        <Content Include="Strings\hi-IN\Resources.resw" />
-        <Content Remove="Plugins\Avatar\**" />
+        <Content Include="Strings\en-US\Resources.resw"/>
+        <Content Include="Strings\zh-CN\Resources.resw"/>
+        <Content Include="Strings\fr-FR\Resources.resw"/>
+        <Content Include="Strings\de-DE\Resources.resw"/>
+        <Content Include="Strings\ru-RU\Resources.resw"/>
+        <Content Include="Strings\ja-JP\Resources.resw"/>
+        <Content Include="Strings\es-ES\Resources.resw"/>
+        <Content Include="Strings\zh-TW\Resources.resw"/>
+        <Content Include="Strings\ko-KR\Resources.resw"/>
+        <Content Include="Strings\it-IT\Resources.resw"/>
+        <Content Include="Strings\id-ID\Resources.resw"/>
+        <Content Include="Strings\pt-BR\Resources.resw"/>
+        <Content Include="Strings\es-MX\Resources.resw"/>
+        <Content Include="Strings\hi-IN\Resources.resw"/>
+        <Content Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="protobuf-net" Version="3.2.56" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="protobuf-net" Version="3.2.56"/>
     </ItemGroup>
 
     <ItemGroup>
         <None Update="appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <None Update="Licenses\TeyvatGuide.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
-        <None Remove="Plugins\Avatar\**" />
+        <None Update="Licenses\TeyvatGuide.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
+        <None Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -172,45 +172,46 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="Models\Game\GameConfig.cs" />
+        <Compile Remove="Models\Game\GameConfig.cs"/>
         <Compile Update="Views\Windows\BrowserConfig.cs">
             <DependentUpon>BrowserWindow.xaml</DependentUpon>
         </Compile>
-        <Compile Remove="Plugins\Avatar\**" />
+        <Compile Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Constants\MiHoYo\" />
-        <Folder Include="Services\MiHoYo\Fingerprint\" />
-        <Folder Include="Services\UID\" />
+        <Folder Include="Constants\MiHoYo\"/>
+        <Folder Include="Services\MiHoYo\Fingerprint\"/>
+        <Folder Include="Services\UID\"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Page Remove="Plugins\Avatar\**" />
+        <Page Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Include="Assets\bg.png" LogicalName="FufuLauncher.Assets.bg.png" />
-        <EmbeddedResource Remove="Plugins\Avatar\**" />
+        <EmbeddedResource Include="Assets\bg.png" LogicalName="FufuLauncher.Assets.bg.png"/>
+        <EmbeddedResource Include="Assets\CutsceneNames.json" LogicalName="FufuLauncher.Assets.CutsceneNames.json" />
+        <EmbeddedResource Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Remove="Plugins\Avatar\**" />
+        <Resource Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
     <Target Name="RemoveUnwantedRuntimesFolders" AfterTargets="Build;Publish" Condition="Exists('$(OutDir)runtimes')">
         <ItemGroup>
-            <AllRuntimeDirs Include="$([System.IO.Directory]::GetDirectories('$(OutDir)runtimes'))" />
-            <WinRuntimeDirs Include="$([System.IO.Directory]::GetDirectories('$(OutDir)runtimes', 'win*'))" />
-            <RuntimeDirsToDelete Include="@(AllRuntimeDirs)" Exclude="@(WinRuntimeDirs)" />
+            <AllRuntimeDirs Include="$([System.IO.Directory]::GetDirectories('$(OutDir)runtimes'))"/>
+            <WinRuntimeDirs Include="$([System.IO.Directory]::GetDirectories('$(OutDir)runtimes', 'win*'))"/>
+            <RuntimeDirsToDelete Include="@(AllRuntimeDirs)" Exclude="@(WinRuntimeDirs)"/>
         </ItemGroup>
 
-        <RemoveDir Directories="@(RuntimeDirsToDelete)" />
-        <Message Text="已清理runtimes文件夹" Importance="high" />
+        <RemoveDir Directories="@(RuntimeDirsToDelete)"/>
+        <Message Text="已清理runtimes文件夹" Importance="high"/>
     </Target>
 
     <Target Name="CopyYaeAchievementLib" AfterTargets="Build;Publish" Condition="Exists('$(OutDir)runtimes\win-x64\native\YaeAchievementLib.dll')">
         <Copy SourceFiles="$(OutDir)runtimes\win-x64\native\YaeAchievementLib.dll" DestinationFiles="$(OutDir)YaeAchievementLib.dll" SkipUnchangedFiles="true" />
-        <Message Text="已复制 YaeAchievementLib.dll 到输出根目录" Importance="high" />
+        <Message Text="已复制 YaeAchievementLib.dll 到输出根目录" Importance="high"/>
     </Target>
 </Project>

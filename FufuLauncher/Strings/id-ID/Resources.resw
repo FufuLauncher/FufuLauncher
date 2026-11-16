@@ -2130,7 +2130,7 @@ Buka situs web Microsoft untuk mengunduh dan menginstalnya?</value>
     <value>Karakter, inventori, catatan harian, dan catatan pertempuran Miyoushe</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Sumber Daya</value>
+    <value>Pengelolaan Sumber Daya</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Forum pemain, berbagi, dan masukan</value>

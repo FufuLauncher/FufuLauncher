@@ -2130,7 +2130,7 @@ Jetzt zur Microsoft-Website gehen und herunterladen?</value>
     <value>Figuren, Inventar, Notizen und Miyoushe-Kampfdaten</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Ressourcenbeschaffung</value>
+    <value>Ressourcenverwaltung</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Spielerforum, Austausch und Feedback</value>

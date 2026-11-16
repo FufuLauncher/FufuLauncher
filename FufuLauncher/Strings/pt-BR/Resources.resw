@@ -2130,7 +2130,7 @@ Ir para o site da Microsoft para baixar e instalar?</value>
     <value>Personagens, inventário, notas e registros de batalha do Miyoushe</value>
   </data>
   <data name="Panel_Resources" xml:space="preserve">
-    <value>Recursos</value>
+    <value>Gerenciamento de recursos</value>
   </data>
   <data name="Panel_CommunityDesc" xml:space="preserve">
     <value>Fórum de jogadores, trocas e feedback</value>
