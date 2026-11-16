@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO.Compression;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using AsyncKeyedLock;
 using FufuLauncher.Constants;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models.GameServer;
@@ -17,7 +18,7 @@ public sealed class GameChannelSdkService
 {
     private const string SdkVersionFileName = "sdk_pkg_version";
     private const string InstalledSdkStateFileName = ".fufu-channel-sdk.json";
-    private static readonly KeyedSemaphoreSlim CacheLocks = new();
+    private static readonly AsyncKeyedLocker<string> CacheLocks = new();
 
     private static readonly JsonSerializerOptions VersionJsonOptions =
         new() { NumberHandling = JsonNumberHandling.AllowReadingFromString };

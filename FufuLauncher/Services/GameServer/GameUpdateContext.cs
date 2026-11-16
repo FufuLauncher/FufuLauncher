@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using System.Collections.Concurrent;
+using AsyncKeyedLock;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models.GameServer;
 
@@ -81,7 +82,7 @@ public sealed class GameUpdateContext
         get;
     } = new(StringComparer.Ordinal);
 
-    public KeyedSemaphoreSlim ChunkLocks
+    public AsyncKeyedLocker<string> ChunkLocks
     {
         get;
     } = new();
