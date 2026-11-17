@@ -19,8 +19,9 @@ namespace FufuLauncher.Services.GameServer;
 
 internal static partial class CutsceneCatalogUpdater
 {
+    // Keep the reviewed seed available independently of the launcher source tree.
     private const string PublishedCatalogUrl =
-        "https://raw.githubusercontent.com/FufuLauncher/FufuLauncher/master/FufuLauncher/Assets/CutsceneNames.json";
+        "https://raw.githubusercontent.com/ChiyukiKazama/FufuLauncher/003d87954bfa98d0a3da3ce551ff8a4c43720f13/FufuLauncher/Assets/CutsceneNames.json";
     private const string AnimeGameDataRepoApiCommitUrl =
         "https://api.github.com/repos/DimbreathBot/AnimeGameData/commits/master";
     private const string AnimeGameDataRawBase =
