@@ -17,12 +17,26 @@ public sealed partial class GameUpdateService
         var brokenAssets = new ConcurrentBag<AssetProperty>();
         int totalAssets = manifest.Assets.Count;
         int doneAssets = 0;
+        int skippedSlimmed = 0;
 
         await Parallel.ForEachAsync(manifest.Assets, context.ParallelOptions, async (asset, token) =>
         {
             token.ThrowIfCancellationRequested();
 
             string assetPath = context.GetGameFilePath(asset.AssetName);
+            if (IsSlimmableAssetPath(asset.AssetName) && CutsceneProtectionService.IsStubbedAndLocked(assetPath))
+            {
+                Interlocked.Increment(ref skippedSlimmed);
+                int skippedCurrent = Interlocked.Increment(ref doneAssets);
+                if (skippedCurrent % 100 == 0 || skippedCurrent == totalAssets)
+                {
+                    context.Progress.Report(new GameServerConversionProgress(
+                        string.Format("GameServer_VerifyProgress".GetLocalized(), skippedCurrent, totalAssets),
+                        totalAssets, skippedCurrent, 0, 0, null));
+                }
+                return;
+            }
+
             bool isBroken;
             try
             {
@@ -51,6 +65,18 @@ public sealed partial class GameUpdateService
             }
         }).ConfigureAwait(false);
 
+        if (skippedSlimmed > 0)
+        {
+            context.Log(string.Format("Cutscene_VerifySkippedSlimmed".GetLocalized(), skippedSlimmed));
+        }
+
         return brokenAssets.ToList();
+    }
+
+    private static bool IsSlimmableAssetPath(string assetName)
+    {
+        string normalized = assetName.Replace('\\', '/');
+        return normalized.Contains("/StreamingAssets/VideoAssets/StandaloneWindows64/", StringComparison.OrdinalIgnoreCase)
+            || normalized.Contains("/StreamingAssets/AudioAssets/", StringComparison.OrdinalIgnoreCase);
     }
 }

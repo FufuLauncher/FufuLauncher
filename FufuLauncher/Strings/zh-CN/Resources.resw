@@ -13405,6 +13405,132 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Cutscene_Refresh" xml:space="preserve">
     <value>刷新资源列表</value>
   </data>
+  <data name="Cutscene_ResourceActions" xml:space="preserve">
+    <value>资源操作</value>
+  </data>
+  <data name="Cutscene_CatalogUpdate" xml:space="preserve">
+    <value>更新清单</value>
+  </data>
+  <data name="Cutscene_CatalogUpdating" xml:space="preserve">
+    <value>正在从官方与上游数据源拉取并在本地合并清单…</value>
+  </data>
+  <data name="Cutscene_CatalogUpdated" xml:space="preserve">
+    <value>已更新动画清单至 {0}。</value>
+  </data>
+  <data name="Cutscene_CatalogCurrent" xml:space="preserve">
+    <value>当前动画清单 {0} 已是最新。</value>
+  </data>
+  <data name="Cutscene_CatalogUpdateFailed" xml:space="preserve">
+    <value>更新动画清单失败，仍使用上次有效的清单。</value>
+  </data>
+  <data name="Cutscene_VoicePacks" xml:space="preserve">
+    <value>语音包盘点</value>
+  </data>
+  <data name="Cutscene_VoiceScanning" xml:space="preserve">
+    <value>正在扫描本机语音包…</value>
+  </data>
+  <data name="Cutscene_VoiceScanFailed" xml:space="preserve">
+    <value>无法读取本机语音包。</value>
+  </data>
+  <data name="Cutscene_NoVoicePacks" xml:space="preserve">
+    <value>未找到已安装的语音包。</value>
+  </data>
+  <data name="Cutscene_VoicePackHint" xml:space="preserve">
+    <value>官方包清单只提供文件信息，语音包的章节归属尚未核实。</value>
+  </data>
+  <data name="Cutscene_VoicePackSummary" xml:space="preserve">
+    <value>{0} · {1} 个包 · {2}</value>
+  </data>
+  <data name="Cutscene_VoiceChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="Cutscene_VoiceEnglish" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="Cutscene_VoiceJapanese" xml:space="preserve">
+    <value>日语</value>
+  </data>
+  <data name="Cutscene_VoiceKorean" xml:space="preserve">
+    <value>韩语</value>
+  </data>
+  <data name="Cutscene_ChooseDecoder" xml:space="preserve">
+    <value>设置动画转换器</value>
+  </data>
+  <data name="Cutscene_PickDecoder" xml:space="preserve">
+    <value>选择程序</value>
+  </data>
+  <data name="Cutscene_DecoderHint" xml:space="preserve">
+    <value>预览和导出需要 Charlotte CLI 2.x。请选择已解压的 charlotte-cli.exe。</value>
+  </data>
+  <data name="Cutscene_DecoderDownloads" xml:space="preserve">
+    <value>获取 Charlotte CLI</value>
+  </data>
+  <data name="Cutscene_DecoderSetupFailed" xml:space="preserve">
+    <value>无法设置动画转换器。</value>
+  </data>
+  <data name="Cutscene_DecoderSelected" xml:space="preserve">
+    <value>已保存动画转换器路径。</value>
+  </data>
+  <data name="Cutscene_ChooseFfmpeg" xml:space="preserve">
+    <value>设置 MP4 转码器</value>
+  </data>
+  <data name="Cutscene_FfmpegHint" xml:space="preserve">
+    <value>导出 MP4 或转码预览需要 FFmpeg。请选择支持 libx264 的 ffmpeg.exe。</value>
+  </data>
+  <data name="Cutscene_FfmpegDownloads" xml:space="preserve">
+    <value>获取 FFmpeg</value>
+  </data>
+  <data name="Cutscene_InvalidDecoder" xml:space="preserve">
+    <value>请选择有效的 {0}。</value>
+  </data>
+  <data name="Cutscene_PlayLocal" xml:space="preserve">
+    <value>播放动画</value>
+  </data>
+  <data name="Cutscene_ExportLocal" xml:space="preserve">
+    <value>导出动画</value>
+  </data>
+  <data name="Cutscene_ExportAudioTracks" xml:space="preserve">
+    <value>选择导出的音轨</value>
+  </data>
+  <data name="Cutscene_AudioTrackNumber" xml:space="preserve">
+    <value>音轨 {0}</value>
+  </data>
+  <data name="Cutscene_ExportAudioRequired" xml:space="preserve">
+    <value>仅保留音乐和音效需要独立音轨。请至少选择一条现有音轨。</value>
+  </data>
+  <data name="Cutscene_PreparingMedia" xml:space="preserve">
+    <value>正在准备本地动画…</value>
+  </data>
+  <data name="Cutscene_DecodeFailed" xml:space="preserve">
+    <value>无法转换此动画。请确认 Charlotte CLI 支持该资源。</value>
+  </data>
+  <data name="Cutscene_PlayFailed" xml:space="preserve">
+    <value>无法打开动画预览。</value>
+  </data>
+  <data name="Cutscene_PlayCodecFailed" xml:space="preserve">
+    <value>系统播放器无法解码此动画。</value>
+  </data>
+  <data name="Cutscene_TranscodeAndPlay" xml:space="preserve">
+    <value>转为 MP4 播放</value>
+  </data>
+  <data name="Cutscene_Exporting" xml:space="preserve">
+    <value>正在导出动画…</value>
+  </data>
+  <data name="Cutscene_Exported" xml:space="preserve">
+    <value>动画导出完成。</value>
+  </data>
+  <data name="Cutscene_ExportFailed" xml:space="preserve">
+    <value>无法导出动画。</value>
+  </data>
+  <data name="Cutscene_InvalidExportFormat" xml:space="preserve">
+    <value>请选择 MP4 或 MKV 格式。</value>
+  </data>
+  <data name="Cutscene_Mp4Unavailable" xml:space="preserve">
+    <value>FFmpeg 无法生成 MP4。请检查 libx264 支持或导出 MKV。</value>
+  </data>
+  <data name="Cutscene_ExportOutsideGame" xml:space="preserve">
+    <value>请将动画导出到游戏目录之外。</value>
+  </data>
   <data name="Cutscene_All" xml:space="preserve">
     <value>全部</value>
   </data>
@@ -13593,5 +13719,290 @@ UIGF v4.x/3.0/2.x</value>
   </data>
   <data name="Cutscene_Region_Snezhnaya" xml:space="preserve">
     <value>至冬</value>
+  </data>
+  <data name="Cutscene_OneClickCatalogUpdate" xml:space="preserve">
+    <value>一键更新清单</value>
+  </data>
+  <data name="Cutscene_BatchMenu" xml:space="preserve">
+    <value>批量选择</value>
+  </data>
+  <data name="Cutscene_QueueLinkedAudio" xml:space="preserve">
+    <value>选中全部关联剧情语音包</value>
+  </data>
+  <data name="Cutscene_QueueAudioByLang" xml:space="preserve">
+    <value>按语种选中关联语音包</value>
+  </data>
+  <data name="Cutscene_CatalogImport" xml:space="preserve">
+    <value>导入本地目录清单 (.json)</value>
+  </data>
+  <data name="Cutscene_LockCleaned" xml:space="preserve">
+    <value>锁定已清理文件（防重下占位）</value>
+  </data>
+  <data name="Cutscene_UnlockCleaned" xml:space="preserve">
+    <value>解锁并移除空占位文件</value>
+  </data>
+  <data name="Cutscene_BypassCheck" xml:space="preserve">
+    <value>客户端校验跳过（Persistent 绕过）</value>
+  </data>
+  <data name="Cutscene_AutoSetupTools" xml:space="preserve">
+    <value>自动安装播放与转码组件 (Charlotte / FFmpeg)</value>
+  </data>
+  <data name="Cutscene_ClearPreviewCache" xml:space="preserve">
+    <value>清理预览缓存</value>
+  </data>
+  <data name="Cutscene_ResourceScope" xml:space="preserve">
+    <value>资源类型筛选</value>
+  </data>
+  <data name="Cutscene_ScopeAll" xml:space="preserve">
+    <value>全部资源（视频+语音）</value>
+  </data>
+  <data name="Cutscene_ScopeVideo" xml:space="preserve">
+    <value>仅过场动画 (.usm)</value>
+  </data>
+  <data name="Cutscene_ScopeAudio" xml:space="preserve">
+    <value>仅剧情语音 (.pck)</value>
+  </data>
+  <data name="Cutscene_AudioLanguageFilter" xml:space="preserve">
+    <value>语音语言筛选</value>
+  </data>
+  <data name="Cutscene_AllLanguages" xml:space="preserve">
+    <value>全部语种</value>
+  </data>
+  <data name="Cutscene_ExportChapter" xml:space="preserve">
+    <value>导出整章动画</value>
+  </data>
+  <data name="Cutscene_StubLockOption" xml:space="preserve">
+    <value>空文件只读锁占位防重下</value>
+  </data>
+  <data name="Cutscene_StubLockOptionHint" xml:space="preserve">
+    <value>清理过往动画/语音时在 StreamingAssets 与 Persistent 原位保留只读且拒绝写入/删除的 0 字节占位文件，避免启动器或游戏校检直接重下。</value>
+  </data>
+  <data name="Cutscene_CatalogStatusCached" xml:space="preserve">
+    <value>目录清单：{0}（本地合并缓存）</value>
+  </data>
+  <data name="Cutscene_CatalogStatusBuiltIn" xml:space="preserve">
+    <value>目录清单：{0}（内置）</value>
+  </data>
+  <data name="Cutscene_HistoryBaseline" xml:space="preserve">
+    <value>对比基准 v{0}</value>
+  </data>
+  <data name="Cutscene_QueueLinkedAudioDone" xml:space="preserve">
+    <value>已将 {0} 个已定位的过往剧情语音包加入待清理列表。</value>
+  </data>
+  <data name="Cutscene_QueueLinkedAudioNone" xml:space="preserve">
+    <value>当前没有新增可按过场调用链清理的过往剧情语音包。</value>
+  </data>
+  <data name="Cutscene_QueueAudioByLangDone" xml:space="preserve">
+    <value>已按所选语种将 {0} 个关联剧情语音包加入待清理列表。</value>
+  </data>
+  <data name="Cutscene_QueueAudioByLangNone" xml:space="preserve">
+    <value>所选语种当前没有新增可清理的关联剧情语音包。</value>
+  </data>
+  <data name="Cutscene_InstallSummaryWithAudio" xml:space="preserve">
+    <value>已安装：动画 {0}/{1} · 语音 {2}/{3} · {4}/{5}</value>
+  </data>
+  <data name="Cutscene_ConfirmStubLock" xml:space="preserve">
+    <value>{0}，{1}。\n\n将使用「0 字节占位 + NTFS 拒绝写入/删除锁」方式清理选中文件，并在更新校检时自动跳过，避免游戏或启动器自动重下。确认继续吗？</value>
+  </data>
+  <data name="Cutscene_ConfirmSharedAudio" xml:space="preserve">
+    <value>警告：选中的部分语音包（VoiceGroup）被多个任务或章节共享引用！仅建议在确认这些关联章节均已通关后再行清理。</value>
+  </data>
+  <data name="Cutscene_CatalogUpdatedVia" xml:space="preserve">
+    <value>目录清单已更新至 {0}（来源：{1}）。</value>
+  </data>
+  <data name="Cutscene_CatalogImportFailed" xml:space="preserve">
+    <value>无法导入该目录清单文件，请检查 JSON 格式是否有效。</value>
+  </data>
+  <data name="Cutscene_VoicePackDetailedSummary" xml:space="preserve">
+    <value>{0}（{1} 个包 · {2} 个已追踪剧情 · {3} 个已锁占位 · {4}）</value>
+  </data>
+  <data name="Cutscene_StubbedLockedShort" xml:space="preserve">
+    <value>已清理 · 0字节锁定</value>
+  </data>
+  <data name="Cutscene_VoiceCoreProtected" xml:space="preserve">
+    <value>常驻语音或系统共享包（自动保留）</value>
+  </data>
+  <data name="Cutscene_VoicePackTracedHint" xml:space="preserve">
+    <value>下方列出了本地检测到的语言语音包。通过过场动画的 VoiceGroup 调用链定位的剧情语音包可直接在主列表中清理，常驻系统语音默认保护保留。</value>
+  </data>
+  <data name="Cutscene_LockingCleaned" xml:space="preserve">
+    <value>正在对已清理文件写入 0 字节只读占位锁…</value>
+  </data>
+  <data name="Cutscene_LockCleanedDone" xml:space="preserve">
+    <value>已补齐/锁定 {0} 个已清理资源的防重下 0 字节占位文件。</value>
+  </data>
+  <data name="Cutscene_UnlockingCleaned" xml:space="preserve">
+    <value>正在解锁并移除 0 字节占位文件…</value>
+  </data>
+  <data name="Cutscene_UnlockCleanedDone" xml:space="preserve">
+    <value>已解锁并移除 {0} 个 0 字节占位文件。</value>
+  </data>
+  <data name="Cutscene_BypassFailed" xml:space="preserve">
+    <value>无法读取或应用 Persistent 校验绕过设置，请检查游戏目录与文件权限。</value>
+  </data>
+  <data name="Cutscene_BypassDirStatus" xml:space="preserve">
+    <value>Persistent 目录：{0}</value>
+  </data>
+  <data name="Cutscene_BypassDirMissing" xml:space="preserve">
+    <value>未找到（请先至少启动过一次游戏）</value>
+  </data>
+  <data name="Cutscene_BypassFilesStatus" xml:space="preserve">
+    <value>待提升清单：res {0} · data {1} · silence {2} · base_revision={3} · cache_versions={4}</value>
+  </data>
+  <data name="Cutscene_BypassDetectedLogTag" xml:space="preserve">
+    <value>从 Player.log 自动识别最近版本标签：{0}</value>
+  </data>
+  <data name="Cutscene_BypassPasteTagHeader" xml:space="preserve">
+    <value>粘贴或编辑游戏右上角版本串（自动提取 R / S / D）：</value>
+  </data>
+  <data name="Cutscene_BypassRiskWarning" xml:space="preserve">
+    <value>参考 MihoyoResourceIntegrityCheckBypass 方案：清理只读标记、删除 base_revision 与 cache_versions_*、将 *_remote 提升为 *_persist 并写入指定的 R/S/D 版本号。首次应用会自动备份原文件，可随时还原；若之后有官方热更或客户端强制全量校检，请先还原或手动更新 R/S/D 数值。</value>
+  </data>
+  <data name="Cutscene_BypassApplyBtn" xml:space="preserve">
+    <value>应用校验绕过</value>
+  </data>
+  <data name="Cutscene_BypassRestoreBtn" xml:space="preserve">
+    <value>还原备份</value>
+  </data>
+  <data name="Cutscene_BypassRestoring" xml:space="preserve">
+    <value>正在从备份还原 Persistent 版本文件…</value>
+  </data>
+  <data name="Cutscene_BypassRestored" xml:space="preserve">
+    <value>已从备份还原 {0} 个 Persistent 版本文件。</value>
+  </data>
+  <data name="Cutscene_BypassApplying" xml:space="preserve">
+    <value>正在应用 Persistent 资源校验绕过…</value>
+  </data>
+  <data name="Cutscene_BypassApplied" xml:space="preserve">
+    <value>已应用 Persistent 绕过：移除 {0} 个校检标记、提升 {1} 组版本清单、写入 {2}。</value>
+  </data>
+  <data name="Cutscene_BypassInvalidNumbers" xml:space="preserve">
+    <value>R / S / D 版本号格式无效：请填写纯数字（例如从游戏内版本号 R..._S..._D... 中提取）。</value>
+  </data>
+  <data name="Cutscene_BypassNoPersistent" xml:space="preserve">
+    <value>未找到 Persistent 目录，请确认已选定正确游戏安装目录并至少启动过一次游戏。</value>
+  </data>
+  <data name="Cutscene_BypassKeptPersist" xml:space="preserve">
+    <value>未找到 {0}，保留现有 {1}</value>
+  </data>
+  <data name="Cutscene_BypassMissingPair" xml:space="preserve">
+    <value>未找到 {0}</value>
+  </data>
+  <data name="Cutscene_BypassNoBackup" xml:space="preserve">
+    <value>未找到 Persistent 备份文件，无法还原。</value>
+  </data>
+  <data name="Cutscene_ToolsAutoConfiguredAll" xml:space="preserve">
+    <value>已完成 Charlotte 与 FFmpeg 自动安装与配置，可直接播放及导出过场动画！</value>
+  </data>
+  <data name="Cutscene_ToolFetchingRelease" xml:space="preserve">
+    <value>正在获取最新 Charlotte 发布包信息（自动优先可用镜像）…</value>
+  </data>
+  <data name="Cutscene_ToolDownloading" xml:space="preserve">
+    <value>正在下载播放与转码组件（Charlotte + FFmpeg）…</value>
+  </data>
+  <data name="Cutscene_ToolExtracting" xml:space="preserve">
+    <value>正在解压并配置工具组件…</value>
+  </data>
+  <data name="Cutscene_ToolDownloadFailed" xml:space="preserve">
+    <value>自动下载组件失败。请检查网络连接，或在高级菜单中手动选择 charlotte-cli.exe 与 ffmpeg.exe。</value>
+  </data>
+  <data name="Cutscene_PreviewCacheCleared" xml:space="preserve">
+    <value>已清理本地播放预览缓存，释放 {0} 空间。</value>
+  </data>
+  <data name="Cutscene_DecoderAutoHint" xml:space="preserve">
+    <value>需要 Charlotte (USM 解码器) 与 FFmpeg（可点击下方按钮通过内置镜像自动一键下载并配置，也可以手动指定本地 exe）。</value>
+  </data>
+  <data name="Cutscene_AutoInstallBtn" xml:space="preserve">
+    <value>一键自动下载并配置</value>
+  </data>
+  <data name="Cutscene_ExportSubtitleMode" xml:space="preserve">
+    <value>字幕处理方式</value>
+  </data>
+  <data name="Cutscene_ExportSubNone" xml:space="preserve">
+    <value>不导出字幕</value>
+  </data>
+  <data name="Cutscene_ExportSubBurnIn" xml:space="preserve">
+    <value>硬字幕烧录进画面（推荐通用分享）</value>
+  </data>
+  <data name="Cutscene_ExportSubSoft" xml:space="preserve">
+    <value>封装内嵌软字幕轨（mov_text，保留原文排版）</value>
+  </data>
+  <data name="Cutscene_BatchExportFormat" xml:space="preserve">
+    <value>导出格式</value>
+  </data>
+  <data name="Cutscene_BatchExportBurnSub" xml:space="preserve">
+    <value>导出 MP4 时自动烧录默认字幕（若动画包含字幕轨）</value>
+  </data>
+  <data name="Cutscene_BatchExportHint" xml:space="preserve">
+    <value>将导出章节「{0}」在本机已安装的 {1} 个过场动画到指定文件夹。</value>
+  </data>
+  <data name="Cutscene_ExportPickFolder" xml:space="preserve">
+    <value>选择保存文件夹并开始导出</value>
+  </data>
+  <data name="Cutscene_BatchExportProgress" xml:space="preserve">
+    <value>正在导出 ({0}/{1})：{2}</value>
+  </data>
+  <data name="Cutscene_BatchExported" xml:space="preserve">
+    <value>已完成批量导出：共保存 {0} 个过场动画文件。</value>
+  </data>
+  <data name="Cutscene_KindVideo" xml:space="preserve">
+    <value>过场动画</value>
+  </data>
+  <data name="Cutscene_AudioItemTitle" xml:space="preserve">
+    <value>剧情语音 ({0}) · 组 {1} · {2}</value>
+  </data>
+  <data name="Cutscene_StubbedLocked" xml:space="preserve">
+    <value>已清理 · 空占位已锁定</value>
+  </data>
+  <data name="Cutscene_VoiceGroupBadge" xml:space="preserve">
+    <value>语音组 {0}</value>
+  </data>
+  <data name="Cutscene_SharedChaptersBadge" xml:space="preserve">
+    <value>跨 {0} 章节共用</value>
+  </data>
+  <data name="Cutscene_TraceChainVideos" xml:space="preserve">
+    <value>关联动画：{0}</value>
+  </data>
+  <data name="Cutscene_TraceChainChapter" xml:space="preserve">
+    <value>来源章节：{0}</value>
+  </data>
+  <data name="Cutscene_VoiceGroupLabel" xml:space="preserve">
+    <value>未命名剧情组 {0}</value>
+  </data>
+  <data name="Cutscene_VerifySkippedSlimmed" xml:space="preserve">
+    <value>校验时已跳过 {0} 个已清理并锁定占位的动画/语音文件（避免重下）。</value>
+  </data>
+  <data name="Cutscene_PlayerFastForward" xml:space="preserve">
+    <value>按住空格键 3.0× 快进中</value>
+  </data>
+  <data name="Cutscene_PlayerSpeed" xml:space="preserve">
+    <value>播放倍速</value>
+  </data>
+  <data name="Cutscene_PlayerAudioTrack" xml:space="preserve">
+    <value>切换配音音轨</value>
+  </data>
+  <data name="Cutscene_PlayerSubtitleTrack" xml:space="preserve">
+    <value>选择字幕语言</value>
+  </data>
+  <data name="Cutscene_PlayerFullscreen" xml:space="preserve">
+    <value>全屏切换 (F / F11)</value>
+  </data>
+  <data name="Cutscene_PlayerSubtitleOff" xml:space="preserve">
+    <value>关闭字幕</value>
+  </data>
+  <data name="Cutscene_AutoTranscoding" xml:space="preserve">
+    <value>当前系统编解码器不支持直接播放，正在自动转码为兼容性 MP4…</value>
+  </data>
+  <data name="Cutscene_CatalogPullSophon" xml:space="preserve">
+    <value>正在直接查询官方最新构建清单（Sophon）…</value>
+  </data>
+  <data name="Cutscene_CatalogPullUpstream" xml:space="preserve">
+    <value>正在拉取上游剧情资源索引（AnimeGameData）…</value>
+  </data>
+  <data name="Cutscene_CatalogPullTextMap" xml:space="preserve">
+    <value>正在流式匹配新增章节与剧情本地化名称…</value>
+  </data>
+  <data name="Cutscene_CatalogMerging" xml:space="preserve">
+    <value>正在将拉取结果与内置清单在本地自主合并…</value>
   </data>
 </root>

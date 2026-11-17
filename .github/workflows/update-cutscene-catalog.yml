@@ -1,0 +1,41 @@
+name: Validate Built-in Cutscene Catalog
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'FufuLauncher/Assets/CutsceneNames.json'
+      - 'docs/update-cutscene-catalog.py'
+      - 'docs/update-cutscene-voice-catalog.py'
+      - '.github/workflows/update-cutscene-catalog.yml'
+  pull_request:
+    paths:
+      - 'FufuLauncher/Assets/CutsceneNames.json'
+      - 'docs/update-cutscene-catalog.py'
+      - 'docs/update-cutscene-voice-catalog.py'
+      - '.github/workflows/update-cutscene-catalog.yml'
+
+jobs:
+  validate:
+    name: Validate Built-in CutsceneNames.json
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check built-in catalog schema and compatibility
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ] && git show "origin/${{ github.base_ref }}:FufuLauncher/Assets/CutsceneNames.json" > /tmp/base-catalog.json 2>/dev/null; then
+            python docs/update-cutscene-catalog.py validate --baseline /tmp/base-catalog.json --strict-compat
+          elif git show HEAD~1:FufuLauncher/Assets/CutsceneNames.json > /tmp/base-catalog.json 2>/dev/null; then
+            python docs/update-cutscene-catalog.py validate --baseline /tmp/base-catalog.json --strict-compat
+          else
+            python docs/update-cutscene-catalog.py validate
+          fi

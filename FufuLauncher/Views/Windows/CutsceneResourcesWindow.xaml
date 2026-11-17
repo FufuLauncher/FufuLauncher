@@ -164,9 +164,15 @@
                                 <TextBlock x:Name="NetChangeText" Grid.Column="1" FontSize="16" FontWeight="SemiBold"
                                            VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
                             </Grid>
-                            <TextBlock x:Name="GameVersionText" Style="{StaticResource CaptionTextBlockStyle}" TextTrimming="CharacterEllipsis"
-                                       ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                                <TextBlock x:Name="GameVersionText" Style="{StaticResource CaptionTextBlockStyle}" TextTrimming="CharacterEllipsis"
+                                           ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
+                                <HyperlinkButton x:Name="QuickCatalogUpdateLink"
+                                                 Content="{helpers:Loc Key=Cutscene_OneClickCatalogUpdate}"
+                                                 Click="OnUpdateNameCatalogClick"
+                                                 Padding="4,0" FontSize="12" VerticalAlignment="Center" />
+                            </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                             <CheckBox x:Name="ShowReleaseVersion" Content="{helpers:Loc Key=Cutscene_ShowReleaseVersion}"
@@ -193,14 +199,14 @@
                 </StackPanel>
             </Border>
 
-            <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="8">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
                 <AutoSuggestBox x:Name="SearchBox" PlaceholderText="{helpers:Loc Key=Cutscene_Search}"
                                 TextChanged="OnSearchChanged" AutomationProperties.Name="{helpers:Loc Key=Cutscene_Search}">
                     <AutoSuggestBox.QueryIcon>
                         <SymbolIcon Symbol="Find" />
                     </AutoSuggestBox.QueryIcon>
                 </AutoSuggestBox>
-                <DropDownButton x:Name="TravelerButton" Grid.Column="1" Content="{helpers:Loc Key=Cutscene_TravelerMenu}"
+                <DropDownButton x:Name="TravelerButton" Grid.Column="1" Content="{helpers:Loc Key=Cutscene_BatchMenu}"
                                 IsEnabled="False">
                     <DropDownButton.Flyout>
                         <MenuFlyout>
@@ -208,26 +214,74 @@
                                             Click="OnRemoveAetherClick" />
                             <MenuFlyoutItem x:Name="RemoveLumineItem" Text="{helpers:Loc Key=Cutscene_RemoveLumine}"
                                             Click="OnRemoveLumineClick" />
-                            <MenuFlyoutSeparator />
                             <MenuFlyoutItem x:Name="ClearTravelerItem" Text="{helpers:Loc Key=Cutscene_ClearTraveler}"
                                             Click="OnClearTravelerClick" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem x:Name="QueueLinkedAudioItem" Text="{helpers:Loc Key=Cutscene_QueueLinkedAudio}"
+                                            Click="OnQueueLinkedAudioClick" />
+                            <MenuFlyoutSubItem x:Name="QueueAudioByLangSubMenu" Text="{helpers:Loc Key=Cutscene_QueueAudioByLang}">
+                                <MenuFlyoutItem x:Name="QueueChineseAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceChinese}"
+                                                Tag="Chinese" Click="OnQueueAudioByLanguageClick" />
+                                <MenuFlyoutItem x:Name="QueueEnglishAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceEnglish}"
+                                                Tag="English(US)" Click="OnQueueAudioByLanguageClick" />
+                                <MenuFlyoutItem x:Name="QueueJapaneseAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceJapanese}"
+                                                Tag="Japanese" Click="OnQueueAudioByLanguageClick" />
+                                <MenuFlyoutItem x:Name="QueueKoreanAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceKorean}"
+                                                Tag="Korean" Click="OnQueueAudioByLanguageClick" />
+                            </MenuFlyoutSubItem>
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>
-                <Button x:Name="RefreshButton" Grid.Column="2" Click="OnRefreshClick"
+                <DropDownButton x:Name="ResourceActionsButton" Grid.Column="2" Content="{helpers:Loc Key=Cutscene_ResourceActions}">
+                    <DropDownButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogUpdate}" Click="OnUpdateNameCatalogClick" />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogImport}" Click="OnImportCatalogClick" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_VoicePacks}" Click="OnVoicePacksClick" />
+                            <MenuFlyoutItem x:Name="LockCleanedItem" Text="{helpers:Loc Key=Cutscene_LockCleaned}"
+                                            Click="OnLockCleanedClick" />
+                            <MenuFlyoutItem x:Name="UnlockCleanedItem" Text="{helpers:Loc Key=Cutscene_UnlockCleaned}"
+                                            Click="OnUnlockCleanedClick" />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_BypassCheck}" Click="OnPersistentBypassClick" />
+                            <MenuFlyoutSeparator />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_AutoSetupTools}" Click="OnAutoSetupToolsClick" />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_ChooseDecoder}" Click="OnChooseDecoderClick" />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_ChooseFfmpeg}" Click="OnChooseFfmpegClick" />
+                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_ClearPreviewCache}" Click="OnClearPreviewCacheClick" />
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+                <Button x:Name="RefreshButton" Grid.Column="3" Click="OnRefreshClick"
                         ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_Refresh}"
                         AutomationProperties.Name="{helpers:Loc Key=Cutscene_Refresh}">
                     <SymbolIcon Symbol="Refresh" />
                 </Button>
             </Grid>
 
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
-                <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
+            <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="8">
+                <ComboBox x:Name="ResourceScopeFilter" SelectedIndex="0" SelectionChanged="OnResourceScopeChanged"
+                          MinWidth="126" VerticalAlignment="Top"
+                          AutomationProperties.Name="{helpers:Loc Key=Cutscene_ResourceScope}">
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAll}" Tag="All" />
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeVideo}" Tag="Video" />
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAudio}" Tag="Audio" />
+                </ComboBox>
+                <ComboBox x:Name="AudioLanguageFilter" Grid.Column="1" SelectedIndex="0" SelectionChanged="OnAudioLanguageChanged"
+                          MinWidth="104" VerticalAlignment="Top"
+                          AutomationProperties.Name="{helpers:Loc Key=Cutscene_AudioLanguageFilter}">
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_AllLanguages}" Tag="" />
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceChinese}" Tag="Chinese" />
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceEnglish}" Tag="English(US)" />
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceJapanese}" Tag="Japanese" />
+                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceKorean}" Tag="Korean" />
+                </ComboBox>
+                <ScrollViewer Grid.Column="2" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
                               VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
                     <!-- WinUI draws the scroll bar over the content at the bottom of the viewer. -->
                     <StackPanel x:Name="Filters" Orientation="Horizontal" Spacing="6" Margin="0,0,0,18" />
                 </ScrollViewer>
-                <ToggleButton x:Name="PendingOnlyButton" Grid.Column="1" Click="OnPendingOnlyClick"
+                <ToggleButton x:Name="PendingOnlyButton" Grid.Column="3" Click="OnPendingOnlyClick"
                               CornerRadius="14" VerticalAlignment="Top" Visibility="Collapsed" />
             </Grid>
             <InfoBar x:Name="Notice" IsOpen="False" IsClosable="True" />
@@ -279,7 +333,7 @@
                             <Expander Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
                                       IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
                                 <Expander.Header>
-                                    <Grid ColumnDefinitions="*,Auto,Auto,84,Auto" Padding="0,4">
+                                    <Grid ColumnDefinitions="*,Auto,Auto,Auto,84,Auto" Padding="0,4">
                                         <TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
                                                    VerticalAlignment="Center" Margin="0,0,12,0" ToolTipService.ToolTip="{x:Bind Title}" />
                                         <Border Grid.Column="1" Margin="0,0,8,0" Padding="6,0" CornerRadius="5"
@@ -292,9 +346,16 @@
                                         <ContentControl Grid.Column="2" Content="{x:Bind TypeLabel}" HorizontalAlignment="Right"
                                                         Style="{StaticResource CutsceneBadgeStyle}"
                                                         DataContextChanged="OnChapterBadgeContextChanged" />
-                                        <TextBlock Grid.Column="3" Text="{x:Bind SizeLabel}" Margin="8,0,0,0" TextAlignment="Right"
+                                        <Button Grid.Column="3" Tag="{x:Bind}" Click="OnExportChapterClick"
+                                                Visibility="{x:Bind ExportChapterVisibility, Mode=OneWay}"
+                                                Margin="8,0,0,0" Padding="6,4" VerticalAlignment="Center"
+                                                ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportChapter}"
+                                                AutomationProperties.Name="{helpers:Loc Key=Cutscene_ExportChapter}">
+                                            <SymbolIcon Symbol="Save" />
+                                        </Button>
+                                        <TextBlock Grid.Column="4" Text="{x:Bind SizeLabel}" Margin="8,0,0,0" TextAlignment="Right"
                                                    VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" FontWeight="SemiBold" />
-                                        <Border Grid.Column="4" Width="22" Margin="12,0,0,0" CornerRadius="11"
+                                        <Border Grid.Column="5" Width="22" Margin="12,0,0,0" CornerRadius="11"
                                                 Style="{StaticResource CutsceneMetadataBadgeStyle}"
                                                 Visibility="{x:Bind CountVisibility, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind CountLabel}">
                                             <TextBlock Text="{x:Bind CountText}" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -306,19 +367,40 @@
                                 <ItemsControl ItemsSource="{Binding Rows}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid Padding="0,5" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                            <Grid Padding="0,5" ColumnDefinitions="Auto,Auto,*,Auto,Auto" ColumnSpacing="10">
                                                 <CheckBox MinWidth="0" VerticalAlignment="Center"
                                                           IsChecked="{Binding IsKept, Mode=TwoWay}" IsEnabled="{Binding CanToggle}"
                                                           AutomationProperties.Name="{Binding DisplayName}" />
-                                                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                                                <Border Grid.Column="1" Padding="6,2" CornerRadius="4"
+                                                        Background="{ThemeResource SubtleFillColorSecondaryBrush}"
+                                                        VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding KindTagText}"
+                                                               Style="{StaticResource CaptionTextBlockStyle}"
+                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                </Border>
+                                                <StackPanel Grid.Column="2" Spacing="2" VerticalAlignment="Center">
                                                     <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
                                                                ToolTipService.ToolTip="{Binding Name}" />
                                                     <TextBlock Text="{Binding StateLabel}" Style="{StaticResource CaptionTextBlockStyle}"
-                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                               TextWrapping="Wrap" />
                                                 </StackPanel>
-                                                <TextBlock Grid.Column="2" Text="{Binding SizeLabel}" VerticalAlignment="Center"
+                                                <TextBlock Grid.Column="3" Text="{Binding SizeLabel}" VerticalAlignment="Center"
                                                            Style="{StaticResource CaptionTextBlockStyle}"
                                                            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="4"
+                                                            Visibility="{Binding LocalActionsVisibility}" VerticalAlignment="Center">
+                                                    <Button Tag="{Binding}" Click="OnPlayLocalCutsceneClick" Padding="7"
+                                                            ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayLocal}"
+                                                            AutomationProperties.Name="{helpers:Loc Key=Cutscene_PlayLocal}">
+                                                        <SymbolIcon Symbol="Play" />
+                                                    </Button>
+                                                    <Button Tag="{Binding}" Click="OnExportLocalCutsceneClick" Padding="7"
+                                                            ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportLocal}"
+                                                            AutomationProperties.Name="{helpers:Loc Key=Cutscene_ExportLocal}">
+                                                        <SymbolIcon Symbol="Save" />
+                                                    </Button>
+                                                </StackPanel>
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -338,8 +420,14 @@
                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" ColumnSpacing="12" RowSpacing="6">
                 <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                    <TextBlock x:Name="RemovalText" Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
-                    <TextBlock x:Name="DownloadText" Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                    <TextBlock x:Name="RemovalText" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
+                    <TextBlock x:Name="DownloadText" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
+                    <CheckBox x:Name="StubLockProtectionCheck"
+                              Content="{helpers:Loc Key=Cutscene_StubLockOption}"
+                              IsChecked="True"
+                              MinWidth="0"
+                              VerticalAlignment="Center"
+                              ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_StubLockOptionHint}" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
                     <Button x:Name="CancelButton" Content="{helpers:Loc Key=CancelBtn}" Click="OnCancelClick"

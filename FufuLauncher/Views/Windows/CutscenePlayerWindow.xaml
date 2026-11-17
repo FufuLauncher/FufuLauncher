@@ -1,0 +1,218 @@
+<Window
+    x:Class="FufuLauncher.Views.CutscenePlayerWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="using:FufuLauncher.Helpers"
+    Title="{helpers:Loc Key=Cutscene_PlayLocal}">
+
+    <Grid x:Name="RootGrid" Background="Black"
+          PointerMoved="OnRootPointerMoved"
+          KeyDown="OnRootKeyDown"
+          KeyUp="OnRootKeyUp"
+          IsTabStop="True">
+
+        <MediaPlayerElement x:Name="PlayerElement"
+                            AreTransportControlsEnabled="False"
+                            Stretch="Uniform"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+
+        <!-- Transparent interaction layer for click play/pause & double-click fullscreen -->
+        <Border x:Name="CanvasHitArea"
+                Background="Transparent"
+                Tapped="OnCanvasTapped"
+                DoubleTapped="OnCanvasDoubleTapped" />
+
+        <!-- Top-center 3.0x fast-forward indicator (Genshin native cutscene/video style) -->
+        <Border x:Name="FastForwardBadge"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Margin="0,56,0,0"
+                Padding="14,6"
+                CornerRadius="16"
+                Background="#B0000000"
+                BorderBrush="#40FFFFFF"
+                BorderThickness="1"
+                Visibility="Collapsed"
+                IsHitTestVisible="False">
+            <StackPanel Orientation="Horizontal" Spacing="6">
+                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB9D;" FontSize="13" Foreground="White" />
+                <TextBlock Text="{helpers:Loc Key=Cutscene_PlayerFastForward}" Foreground="White" FontSize="13" FontWeight="SemiBold" />
+            </StackPanel>
+        </Border>
+
+        <!-- Game-style bottom-center subtitle overlay -->
+        <Grid x:Name="SubtitleContainer"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Margin="48,0,48,88"
+              MaxWidth="980"
+              Visibility="Collapsed"
+              IsHitTestVisible="False">
+            <Border Background="#7A000000" CornerRadius="6" Padding="14,6">
+                <Grid>
+                    <TextBlock x:Name="SubtitleShadowText"
+                               Foreground="#CC000000"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"
+                               Margin="1,1,0,0" />
+                    <TextBlock x:Name="SubtitleText"
+                               Foreground="White"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Status / auto-transcode / codec error overlay -->
+        <Border x:Name="StatusOverlay"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                MaxWidth="460"
+                Padding="20,16"
+                CornerRadius="12"
+                Background="#D8161616"
+                BorderBrush="#33FFFFFF"
+                BorderThickness="1"
+                Visibility="Collapsed">
+            <StackPanel Spacing="12" HorizontalAlignment="Center">
+                <ProgressRing x:Name="StatusRing" IsActive="False" Width="32" Height="32" HorizontalAlignment="Center" />
+                <TextBlock x:Name="StatusOverlayText"
+                           Foreground="White"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           FontSize="14" />
+                <Button x:Name="RetryTranscodeButton"
+                        Content="{helpers:Loc Key=Cutscene_TranscodeAndPlay}"
+                        Style="{StaticResource AccentButtonStyle}"
+                        HorizontalAlignment="Center"
+                        Visibility="Collapsed"
+                        Click="OnRetryTranscodeClick" />
+            </StackPanel>
+        </Border>
+
+        <!-- Auto-hiding HUD: Top TitleBar + Bottom Control Bar -->
+        <Grid x:Name="HudOverlay" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Top gradient bar -->
+            <Grid x:Name="AppTitleBar"
+                  Height="48"
+                  Padding="16,0,148,0">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#CC000000" Offset="0" />
+                        <GradientStop Color="#00000000" Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" />
+                    <TextBlock x:Name="PlayerTitleText"
+                               Foreground="White"
+                               FontWeight="SemiBold"
+                               FontSize="14"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" />
+                    <TextBlock x:Name="PlayerSubtitleText"
+                               Foreground="#B0FFFFFF"
+                               FontSize="12"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Bottom gradient transport bar -->
+            <Border Grid.Row="2" Padding="16,18,16,12">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#00000000" Offset="0" />
+                        <GradientStop Color="#CC000000" Offset="0.45" />
+                        <GradientStop Color="#E6000000" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel Spacing="6">
+                    <!-- Seek bar -->
+                    <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                        <TextBlock x:Name="CurrentTimeText" Text="00:00" Foreground="#E6FFFFFF" FontSize="12" VerticalAlignment="Center" />
+                        <Slider x:Name="TimelineSlider"
+                                Grid.Column="1"
+                                Minimum="0"
+                                Maximum="100"
+                                Value="0"
+                                VerticalAlignment="Center"
+                                PointerCaptureLost="OnTimelinePointerReleased"
+                                ValueChanged="OnTimelineValueChanged" />
+                        <TextBlock x:Name="DurationTimeText" Grid.Column="2" Text="00:00" Foreground="#B0FFFFFF" FontSize="12" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <!-- Controls row -->
+                    <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                            <Button x:Name="PlayPauseButton" Click="OnPlayPauseClick" Padding="8" Background="Transparent" BorderThickness="0">
+                                <SymbolIcon x:Name="PlayPauseIcon" Symbol="Pause" Foreground="White" />
+                            </Button>
+                            <Button Click="OnSeekBackClick" Padding="6" Background="Transparent" BorderThickness="0"
+                                    ToolTipService.ToolTip="-5s">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED3C;" FontSize="15" Foreground="White" />
+                            </Button>
+                            <Button Click="OnSeekForwardClick" Padding="6" Background="Transparent" BorderThickness="0"
+                                    ToolTipService.ToolTip="+5s">
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED3D;" FontSize="15" Foreground="White" />
+                            </Button>
+                            <Button x:Name="MuteButton" Click="OnMuteClick" Padding="6" Background="Transparent" BorderThickness="0">
+                                <SymbolIcon x:Name="VolumeIcon" Symbol="Volume" Foreground="White" />
+                            </Button>
+                            <Slider x:Name="VolumeSlider" Width="82" Minimum="0" Maximum="100" Value="100"
+                                    VerticalAlignment="Center" ValueChanged="OnVolumeChanged" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <ComboBox x:Name="SpeedSelector"
+                                      SelectionChanged="OnSpeedChanged"
+                                      SelectedIndex="1"
+                                      MinWidth="74"
+                                      ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayerSpeed}">
+                                <ComboBoxItem Content="0.5x" Tag="0.5" />
+                                <ComboBoxItem Content="1.0x" Tag="1.0" />
+                                <ComboBoxItem Content="1.5x" Tag="1.5" />
+                                <ComboBoxItem Content="2.0x" Tag="2.0" />
+                                <ComboBoxItem Content="3.0x" Tag="3.0" />
+                            </ComboBox>
+                            <ComboBox x:Name="AudioTrackSelector"
+                                      SelectionChanged="OnAudioTrackChanged"
+                                      MinWidth="96"
+                                      Visibility="Collapsed"
+                                      ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayerAudioTrack}" />
+                            <ComboBox x:Name="SubtitleTrackSelector"
+                                      SelectionChanged="OnSubtitleTrackChanged"
+                                      MinWidth="104"
+                                      Visibility="Collapsed"
+                                      ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayerSubtitleTrack}" />
+                            <Button x:Name="ExportButton"
+                                    Click="OnExportClick"
+                                    Padding="8,6"
+                                    Visibility="Collapsed"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportLocal}">
+                                <SymbolIcon Symbol="Save" Foreground="White" />
+                            </Button>
+                            <Button x:Name="FullscreenButton"
+                                    Click="OnFullscreenClick"
+                                    Padding="8,6"
+                                    ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayerFullscreen}">
+                                <SymbolIcon x:Name="FullscreenIcon" Symbol="FullScreen" Foreground="White" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

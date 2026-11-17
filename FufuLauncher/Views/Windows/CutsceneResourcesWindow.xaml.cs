@@ -21,7 +21,7 @@ public sealed partial class CutsceneResourcesWindow : Window
     private static CutsceneResourcesWindow? _instance;
     private readonly GameUpdateService _service = App.GetService<GameUpdateService>();
     private CutsceneCatalog? _catalog;
-    private List<CutsceneVideoRow> _videos = [];
+    private List<CutsceneResourceRow> _items = [];
     private List<CutsceneChapterRow> _chapters = [];
     private CutsceneCategory? _category;
     private CancellationTokenSource? _work;
@@ -36,7 +36,7 @@ public sealed partial class CutsceneResourcesWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         RectInt32 area = DisplayArea.GetFromWindowId(AppWindow.Id, DisplayAreaFallback.Primary).WorkArea;
-        int width = Math.Min(920, area.Width - 32);
+        int width = Math.Min(980, area.Width - 32);
         int height = Math.Min(920, area.Height - 32);
         AppWindow.MoveAndResize(new RectInt32(area.X + (area.Width - width) / 2, area.Y + (area.Height - height) / 2,
             width, height));
@@ -85,9 +85,12 @@ public sealed partial class CutsceneResourcesWindow : Window
             }
 
             CutsceneCatalog catalog = await Task.Run(() => _service.ScanCutscenesAsync(gameDir, work.Token), work.Token);
+            CutsceneCatalogStatus catalogStatus = await Task.Run(CutsceneNameCatalogStore.GetStatus, work.Token);
             if (_closed)
                 return;
 
+            _displayCatalog = catalogStatus.Catalog;
+            _usingCachedCatalog = catalogStatus.UsingCachedCatalog;
             BindCatalog(catalog);
             if (!catalog.HasHistory)
                 ShowNotice(InfoBarSeverity.Informational, "Cutscene_HistoryUnavailable".GetLocalized());
@@ -125,22 +128,83 @@ public sealed partial class CutsceneResourcesWindow : Window
     private void BindCatalog(CutsceneCatalog? catalog)
     {
         _catalog = catalog;
-        _videos = catalog?.Videos.Select(video => new CutsceneVideoRow(video, OnSelectionChanged)).ToList() ?? [];
+        if (catalog is null)
+        {
+            _items = [];
+        }
+        else
+        {
+            _items = catalog.Videos
+                .Select(video => new CutsceneResourceRow(video, OnSelectionChanged))
+                .Concat(catalog.Audios.Select(audio => new CutsceneResourceRow(audio, OnSelectionChanged)))
+                .ToList();
+        }
         PendingOnlyButton.IsChecked = false;
-        if (_category is CutsceneCategory category && !_videos.Any(item => item.Video.Chapter.Category == category))
+        UpdateGameVersionHeader();
+        RefreshDisplayCatalog();
+    }
+
+    private void UpdateGameVersionHeader()
+    {
+        if (_catalog is null)
+        {
+            GameVersionText.Text = string.Empty;
+            return;
+        }
+
+        CutsceneNameCatalog names = _displayCatalog ?? CutsceneNames.BuiltIn;
+        string catalogSuffix = _usingCachedCatalog
+            ? string.Format("Cutscene_CatalogStatusCached".GetLocalized(), names.VersionLabel)
+            : string.Format("Cutscene_CatalogStatusBuiltIn".GetLocalized(), names.VersionLabel);
+        string historyText = _catalog.EarlierVersion is not null
+            ? $" · {string.Format("Cutscene_HistoryBaseline".GetLocalized(), _catalog.EarlierVersion)}"
+            : string.Empty;
+        GameVersionText.Text = $"{_catalog.Scheme.DisplayName} · {_catalog.Version}{historyText} · {catalogSuffix}";
+    }
+
+    private void RefreshDisplayCatalog()
+    {
+        CutsceneNameCatalog names = _displayCatalog ?? CutsceneNames.BuiltIn;
+        foreach (var row in _items)
+            row.UseDisplayCatalog(names);
+        if (_category is CutsceneCategory category && !GetScopeFilteredItems().Any(row => row.Chapter.Category == category))
             _category = null;
-        GameVersionText.Text = catalog is null ? string.Empty
-            : $"{catalog.Scheme.DisplayName} · {catalog.Version}";
+        UpdateGameVersionHeader();
         BuildFilters();
         RefreshChapters();
+    }
+
+    private string GetSelectedResourceScope() =>
+        (ResourceScopeFilter?.SelectedItem as ComboBoxItem)?.Tag as string ?? "All";
+
+    private string GetSelectedAudioLanguage() =>
+        (AudioLanguageFilter?.SelectedItem as ComboBoxItem)?.Tag as string ?? string.Empty;
+
+    private IEnumerable<CutsceneResourceRow> GetScopeFilteredItems()
+    {
+        string scope = GetSelectedResourceScope();
+        string lang = GetSelectedAudioLanguage();
+
+        return _items.Where(row =>
+        {
+            if (scope == "Video" && !row.IsVideo)
+                return false;
+            if (scope == "Audio" && !row.IsAudio)
+                return false;
+            if (row.IsAudio && lang.Length > 0
+                && !string.Equals(row.AudioLanguageFolder, lang, StringComparison.OrdinalIgnoreCase))
+                return false;
+            return true;
+        });
     }
 
     private void BuildFilters()
     {
         Filters.Children.Clear();
-        AddFilter(null, "Cutscene_All".GetLocalized(), _videos.Count);
-        foreach (var group in _videos.GroupBy(video => video.Video.Chapter.Category).OrderBy(group => group.Key))
-            AddFilter(group.Key, group.First().Video.Chapter.Label, group.Count());
+        CutsceneResourceRow[] scoped = GetScopeFilteredItems().ToArray();
+        AddFilter(null, "Cutscene_All".GetLocalized(), scoped.Length);
+        foreach (var group in scoped.GroupBy(row => row.Chapter.Category).OrderBy(group => group.Key))
+            AddFilter(group.Key, group.First().Chapter.Label, group.Count());
     }
 
     private void AddFilter(CutsceneCategory? category, string label, int count)
@@ -183,6 +247,26 @@ public sealed partial class CutsceneResourcesWindow : Window
             RefreshChapters();
     }
 
+    private void OnResourceScopeChanged(object sender, SelectionChangedEventArgs args)
+    {
+        if (AudioLanguageFilter is not null)
+            AudioLanguageFilter.IsEnabled = !_busy && GetSelectedResourceScope() != "Video";
+        if (_catalog is not null)
+        {
+            BuildFilters();
+            RefreshChapters();
+        }
+    }
+
+    private void OnAudioLanguageChanged(object sender, SelectionChangedEventArgs args)
+    {
+        if (_catalog is not null)
+        {
+            BuildFilters();
+            RefreshChapters();
+        }
+    }
+
     private void OnPendingOnlyClick(object sender, RoutedEventArgs args) => RefreshChapters();
 
     private void OnMetadataDisplayChanged(object sender, RoutedEventArgs args) => UpdateMetadataVisibility();
@@ -198,16 +282,19 @@ public sealed partial class CutsceneResourcesWindow : Window
     private void RefreshChapters()
     {
         string[] terms = SearchBox.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        var expanded = _chapters.Where(chapter => chapter.IsExpanded).Select(chapter => chapter.Chapter).ToHashSet();
+        var expanded = _chapters.Where(chapter => chapter.IsExpanded).SelectMany(chapter => chapter.Rows)
+            .Select(row => row.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
         bool pendingOnly = PendingOnlyButton.IsChecked == true;
-        var chapters = _videos
-            .Where(row => (_category is null || row.Video.Chapter.Category == _category)
+        var chapters = GetScopeFilteredItems()
+            .Where(row => (_category is null || row.Chapter.Category == _category)
                 && (!pendingOnly || row.IsRemovalPending || row.IsDownloadPending)
                 && terms.All(term => row.SearchText.Contains(term, StringComparison.CurrentCultureIgnoreCase)))
-            .GroupBy(row => row.Video.Chapter)
-            .Select(group => new CutsceneChapterRow(group.Key, group.OrderBy(row => row.Name).ToArray())
+            .GroupBy(row => row.Chapter)
+            .Select(group => new CutsceneChapterRow(
+                group.Key,
+                group.OrderBy(row => row.IsAudio).ThenBy(row => row.Name).ToArray())
             {
-                IsExpanded = terms.Length > 0 || expanded.Contains(group.Key)
+                IsExpanded = terms.Length > 0 || group.Any(row => expanded.Contains(row.Name))
             });
         _chapters = OrderChaptersByRelease(chapters, descending: SortDirection.SelectedIndex == 1).ToList();
         UpdateMetadataVisibility();
@@ -263,10 +350,70 @@ public sealed partial class CutsceneResourcesWindow : Window
             return;
 
         _batchSelection = true;
-        foreach (var row in _videos)
+        foreach (var row in _items)
             row.SetTravelerRemoval(traveler);
         _batchSelection = false;
         OnSelectionChanged();
+    }
+
+    private void OnQueueLinkedAudioClick(object sender, RoutedEventArgs args)
+    {
+        if (_busy)
+            return;
+
+        var videoKeptMap = _items
+            .Where(row => row.IsVideo)
+            .ToDictionary(row => row.Name, row => row.IsKept, StringComparer.OrdinalIgnoreCase);
+
+        int queuedCount = 0;
+        _batchSelection = true;
+        foreach (var row in _items.Where(r => r.IsAudio && r.IsInstalled && r.CanRemove && r.IsKept))
+        {
+            CutsceneAudioAsset audio = row.Audio!;
+            if (audio.LinkedVideoNames.Count == 0)
+                continue;
+
+            // Only queue audio if every linked video in this installation is uninstalled or queued for removal.
+            bool allLinkedVideosRemoved = audio.LinkedVideoNames.All(vid =>
+                !videoKeptMap.TryGetValue(vid, out bool kept) || !kept);
+            if (allLinkedVideosRemoved)
+            {
+                row.IsKept = false;
+                queuedCount++;
+            }
+        }
+        _batchSelection = false;
+        OnSelectionChanged();
+
+        ShowNotice(
+            queuedCount > 0 ? InfoBarSeverity.Success : InfoBarSeverity.Informational,
+            queuedCount > 0
+                ? string.Format("Cutscene_QueueLinkedAudioDone".GetLocalized(), queuedCount)
+                : "Cutscene_QueueLinkedAudioNone".GetLocalized());
+    }
+
+    private void OnQueueAudioByLanguageClick(object sender, RoutedEventArgs args)
+    {
+        if (_busy || sender is not MenuFlyoutItem { Tag: string languageFolder })
+            return;
+
+        int queuedCount = 0;
+        _batchSelection = true;
+        foreach (var row in _items.Where(r => r.IsAudio
+            && string.Equals(r.AudioLanguageFolder, languageFolder, StringComparison.OrdinalIgnoreCase)
+            && r.IsInstalled && r.CanRemove && r.IsKept))
+        {
+            row.IsKept = false;
+            queuedCount++;
+        }
+        _batchSelection = false;
+        OnSelectionChanged();
+
+        ShowNotice(
+            queuedCount > 0 ? InfoBarSeverity.Success : InfoBarSeverity.Informational,
+            queuedCount > 0
+                ? string.Format("Cutscene_QueueAudioByLangDone".GetLocalized(), queuedCount)
+                : "Cutscene_QueueAudioByLangNone".GetLocalized());
     }
 
     private void OnExpandClick(object sender, RoutedEventArgs args)
@@ -284,7 +431,7 @@ public sealed partial class CutsceneResourcesWindow : Window
             ? "Cutscene_CollapseAll" : "Cutscene_ExpandAll").GetLocalized();
     }
 
-    private void SetKept(IEnumerable<CutsceneVideoRow> rows, bool keep)
+    private void SetKept(IEnumerable<CutsceneResourceRow> rows, bool keep)
     {
         _batchSelection = true;
         foreach (var row in rows)
@@ -310,17 +457,25 @@ public sealed partial class CutsceneResourcesWindow : Window
 
     private void UpdateSummary()
     {
-        long total = _videos.Sum(row => row.Video.Asset.AssetSize);
-        int installedCount = _videos.Count(row => row.Video.IsInstalled);
-        long local = _videos.Sum(row => row.Video.LocalBytes);
-        var removal = _videos.Where(row => row.IsRemovalPending).ToArray();
-        var download = _videos.Where(row => row.IsDownloadPending).ToArray();
-        long removalBytes = removal.Sum(row => row.Video.LocalBytes);
-        long downloadBytes = download.Sum(row => row.Video.DownloadBytes);
-        long installDelta = download.Sum(row => row.Video.Asset.AssetSize - row.Video.LocalBytes);
+        var videos = _items.Where(row => row.IsVideo).ToArray();
+        var audios = _items.Where(row => row.IsAudio).ToArray();
+        long total = _items.Sum(row => row.AssetSize);
+        int installedVideos = videos.Count(row => row.IsInstalled);
+        int installedAudios = audios.Count(row => row.IsInstalled);
+        long local = _items.Sum(row => row.DiskBytes);
+        var removal = _items.Where(row => row.IsRemovalPending).ToArray();
+        var download = _items.Where(row => row.IsDownloadPending).ToArray();
+        long removalBytes = removal.Sum(row => row.DiskBytes);
+        long downloadBytes = download.Sum(row => row.DownloadBytes);
+        long installDelta = download.Sum(row => row.AssetSize - row.DiskBytes);
         long net = installDelta - removalBytes;
-        InstallSummary.Text = string.Format("Cutscene_InstallSummary".GetLocalized(), installedCount, _videos.Count,
-            FormatSize(local), FormatSize(total));
+
+        InstallSummary.Text = audios.Length > 0
+            ? string.Format("Cutscene_InstallSummaryWithAudio".GetLocalized(),
+                installedVideos, videos.Length, installedAudios, audios.Length, FormatSize(local), FormatSize(total))
+            : string.Format("Cutscene_InstallSummary".GetLocalized(),
+                installedVideos, videos.Length, FormatSize(local), FormatSize(total));
+
         NetChangeText.Text = net == 0 ? string.Empty : $"{(net < 0 ? "−" : "+")}{FormatSize(Math.Abs(net))}";
         RetainedColumn.Width = Star(local - removalBytes);
         RemovalColumn.Width = Star(removalBytes);
@@ -333,10 +488,21 @@ public sealed partial class CutsceneResourcesWindow : Window
         PendingOnlyButton.Content = string.Format("Cutscene_PendingFilter".GetLocalized(), pendingCount);
         PendingOnlyButton.Visibility = pendingCount > 0 || PendingOnlyButton.IsChecked == true
             ? Visibility.Visible : Visibility.Collapsed;
-        RemoveAetherItem.IsEnabled = _videos.Any(row => row.Video.IsInstalled && row.Video.Traveler == CutsceneTraveler.Aether);
-        RemoveLumineItem.IsEnabled = _videos.Any(row => row.Video.IsInstalled && row.Video.Traveler == CutsceneTraveler.Lumine);
-        ClearTravelerItem.IsEnabled = _videos.Any(row => row.RemoveUnusedTraveler);
-        TravelerButton.IsEnabled = !_busy && (RemoveAetherItem.IsEnabled || RemoveLumineItem.IsEnabled);
+
+        RemoveAetherItem.IsEnabled = videos.Any(row => row.IsInstalled && row.Video!.Traveler == CutsceneTraveler.Aether);
+        RemoveLumineItem.IsEnabled = videos.Any(row => row.IsInstalled && row.Video!.Traveler == CutsceneTraveler.Lumine);
+        ClearTravelerItem.IsEnabled = videos.Any(row => row.RemoveUnusedTraveler);
+
+        bool hasRemovableAudios = audios.Any(row => row.IsInstalled && row.CanRemove);
+        QueueLinkedAudioItem.IsEnabled = hasRemovableAudios;
+        QueueChineseAudioItem.IsEnabled = audios.Any(r => r.AudioLanguageFolder == "Chinese" && r.IsInstalled && r.CanRemove);
+        QueueEnglishAudioItem.IsEnabled = audios.Any(r => r.AudioLanguageFolder == "English(US)" && r.IsInstalled && r.CanRemove);
+        QueueJapaneseAudioItem.IsEnabled = audios.Any(r => r.AudioLanguageFolder == "Japanese" && r.IsInstalled && r.CanRemove);
+        QueueKoreanAudioItem.IsEnabled = audios.Any(r => r.AudioLanguageFolder == "Korean" && r.IsInstalled && r.CanRemove);
+        TravelerButton.IsEnabled = !_busy && (RemoveAetherItem.IsEnabled || RemoveLumineItem.IsEnabled || hasRemovableAudios);
+
+        LockCleanedItem.IsEnabled = !_busy && _items.Any(row => !row.IsInstalled);
+        UnlockCleanedItem.IsEnabled = !_busy && _items.Any(row => row.IsStubbedLocked);
 
         var visible = _chapters.SelectMany(chapter => chapter.Rows).ToArray();
         KeepVisible.IsEnabled = !_busy && visible.Any(row => row.CanToggle);
@@ -351,18 +517,29 @@ public sealed partial class CutsceneResourcesWindow : Window
         if (_busy || catalog is null)
             return;
 
-        CutsceneChange[] changes = _videos.Where(row => row.IsRemovalPending || row.IsDownloadPending)
-            .Select(row => new CutsceneChange(row.Video, row.IsKept, row.RemoveUnusedTraveler)).ToArray();
+        CutsceneChange[] videoChanges = _items
+            .Where(row => row.IsVideo && (row.IsRemovalPending || row.IsDownloadPending))
+            .Select(row => new CutsceneChange(row.Video!, row.IsKept, row.RemoveUnusedTraveler))
+            .ToArray();
+        CutsceneAudioChange[] audioChanges = _items
+            .Where(row => row.IsAudio && (row.IsRemovalPending || row.IsDownloadPending))
+            .Select(row => new CutsceneAudioChange(row.Audio!, row.IsKept))
+            .ToArray();
+        bool useStubLock = StubLockProtectionCheck.IsChecked == true;
+
         using var work = new CancellationTokenSource();
         _work = work;
         SetBusy(true);
         try
         {
-            string message = changes.Any(change => !change.Keep && !change.RemoveUnusedTraveler)
-                ? string.Format("Cutscene_Confirm".GetLocalized(), RemovalText.Text, DownloadText.Text)
+            string message = (videoChanges.Any(c => !c.Keep && !c.RemoveUnusedTraveler) || audioChanges.Any(c => !c.Keep))
+                ? string.Format((useStubLock ? "Cutscene_ConfirmStubLock" : "Cutscene_Confirm").GetLocalized(),
+                    RemovalText.Text, DownloadText.Text)
                 : $"{RemovalText.Text} · {DownloadText.Text}";
-            if (changes.FirstOrDefault(change => change.RemoveUnusedTraveler)?.Video.Traveler is CutsceneTraveler traveler)
+            if (videoChanges.FirstOrDefault(change => change.RemoveUnusedTraveler)?.Video.Traveler is CutsceneTraveler traveler)
                 message += "\n\n" + string.Format("Cutscene_ConfirmTraveler".GetLocalized(), traveler.DisplayName());
+            if (audioChanges.Any(c => !c.Keep && c.Audio.IsSharedAcrossChapters))
+                message += "\n\n" + "Cutscene_ConfirmSharedAudio".GetLocalized();
 
             var dialog = new ContentDialog
             {
@@ -389,7 +566,8 @@ public sealed partial class CutsceneResourcesWindow : Window
             Notice.IsOpen = false;
             SetBusy(true, "Cutscene_Apply".GetLocalized());
             var progress = new Progress<GameServerConversionProgress>(UpdateWorkProgress);
-            await Task.Run(() => _service.ApplyCutsceneChangesAsync(catalog, changes, progress, work.Token), work.Token);
+            await Task.Run(() => _service.ApplyResourceChangesAsync(
+                catalog, videoChanges, audioChanges, useStubLock, progress, work.Token), work.Token);
             if (!_closed)
                 ShowNotice(InfoBarSeverity.Success, "Cutscene_Applied".GetLocalized());
         }
@@ -450,11 +628,16 @@ public sealed partial class CutsceneResourcesWindow : Window
     {
         _busy = busy;
         ChapterList.IsEnabled = !busy;
+        ResourceActionsButton.IsEnabled = !busy;
         RefreshButton.IsEnabled = !busy;
+        QuickCatalogUpdateLink.IsEnabled = !busy;
         SearchBox.IsEnabled = !busy;
+        ResourceScopeFilter.IsEnabled = !busy;
+        AudioLanguageFilter.IsEnabled = !busy && GetSelectedResourceScope() != "Video";
         SortMode.IsEnabled = !busy;
         SortDirection.IsEnabled = !busy;
         PendingOnlyButton.IsEnabled = !busy;
+        StubLockProtectionCheck.IsEnabled = !busy;
         foreach (ToggleButton filter in Filters.Children.Cast<ToggleButton>())
             filter.IsEnabled = !busy;
         OperationProgress.Visibility = status is null ? Visibility.Collapsed : Visibility.Visible;

@@ -70,6 +70,29 @@ internal sealed partial record CutsceneChapter(CutsceneCategory Category, string
         : QuestId.Length == 0 ? TitleKey.GetLocalized() : $"{TitleKey.GetLocalized()} · {QuestId}";
     public string Label => $"Cutscene_Category_{Category}".GetLocalized();
 
+    public static CutsceneChapter FromVoiceGroup(string groupId, IReadOnlyList<string> videos,
+        IReadOnlyList<CutsceneVoiceQuestRef> quests)
+    {
+        if (videos.Count > 0)
+        {
+            CutsceneChapter fromVideo = FromFileName(videos[0]);
+            if (fromVideo.QuestId.Length > 0 || fromVideo.TitleKey != "Cutscene_Category_Other")
+                return fromVideo with { QuestId = string.IsNullOrEmpty(fromVideo.QuestId) ? $"#{groupId}" : fromVideo.QuestId };
+        }
+
+        int chapterId = quests.Select(q => q.ChapterId).FirstOrDefault(id => id > 0);
+        CutsceneCategory category = groupId switch
+        {
+            _ when groupId.StartsWith("1", StringComparison.Ordinal) => CutsceneCategory.Archon,
+            _ when groupId.StartsWith("2", StringComparison.Ordinal) => CutsceneCategory.Story,
+            _ when groupId.StartsWith("4", StringComparison.Ordinal) => CutsceneCategory.Event,
+            _ when groupId.StartsWith("5", StringComparison.Ordinal) => CutsceneCategory.World,
+            _ => CutsceneCategory.Other
+        };
+        string suffix = chapterId > 0 ? $"#{chapterId}" : $"#{groupId}";
+        return new CutsceneChapter(category, $"Cutscene_Category_{category}", suffix, QuestChapterId: chapterId);
+    }
+
     [GeneratedRegex("(AQ|LQ|EQ|WQ)_?(\\d+)", RegexOptions.CultureInvariant)]
     private static partial Regex QuestCode();
 }
