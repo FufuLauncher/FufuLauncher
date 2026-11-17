@@ -201,8 +201,7 @@ public sealed partial class GameUpdateService
         {
             if (File.Exists(path))
             {
-                File.SetAttributes(path, FileAttributes.Normal);
-                File.Delete(path);
+                CutsceneProtectionService.UnlockFile(path, deleteFile: true);
             }
         }
         catch

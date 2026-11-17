@@ -13405,6 +13405,132 @@ Continue to the project page?</value>
   <data name="Cutscene_Refresh" xml:space="preserve">
     <value>Refresh resource list</value>
   </data>
+  <data name="Cutscene_ResourceActions" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="Cutscene_CatalogUpdate" xml:space="preserve">
+    <value>Update catalog</value>
+  </data>
+  <data name="Cutscene_CatalogUpdating" xml:space="preserve">
+    <value>Getting the resource catalog…</value>
+  </data>
+  <data name="Cutscene_CatalogUpdated" xml:space="preserve">
+    <value>Saved resource catalog {0}.</value>
+  </data>
+  <data name="Cutscene_CatalogCurrent" xml:space="preserve">
+    <value>Resource catalog {0} is up to date.</value>
+  </data>
+  <data name="Cutscene_CatalogUpdateFailed" xml:space="preserve">
+    <value>Could not update the resource catalog. The saved catalog is still available.</value>
+  </data>
+  <data name="Cutscene_VoicePacks" xml:space="preserve">
+    <value>Voice packages</value>
+  </data>
+  <data name="Cutscene_VoiceScanning" xml:space="preserve">
+    <value>Scanning local voice packages…</value>
+  </data>
+  <data name="Cutscene_VoiceScanFailed" xml:space="preserve">
+    <value>Could not read the local voice packages.</value>
+  </data>
+  <data name="Cutscene_NoVoicePacks" xml:space="preserve">
+    <value>No installed voice packages found.</value>
+  </data>
+  <data name="Cutscene_VoicePackHint" xml:space="preserve">
+    <value>The game manifest lists files. The chapter contents of these packages have not been verified.</value>
+  </data>
+  <data name="Cutscene_VoicePackSummary" xml:space="preserve">
+    <value>{0} · {1} packages · {2}</value>
+  </data>
+  <data name="Cutscene_VoiceChinese" xml:space="preserve">
+    <value>Chinese</value>
+  </data>
+  <data name="Cutscene_VoiceEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Cutscene_VoiceJapanese" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="Cutscene_VoiceKorean" xml:space="preserve">
+    <value>Korean</value>
+  </data>
+  <data name="Cutscene_ChooseDecoder" xml:space="preserve">
+    <value>Set cutscene converter</value>
+  </data>
+  <data name="Cutscene_PickDecoder" xml:space="preserve">
+    <value>Select program</value>
+  </data>
+  <data name="Cutscene_DecoderHint" xml:space="preserve">
+    <value>Preview and export require Charlotte CLI 2.x. Select the extracted charlotte-cli.exe.</value>
+  </data>
+  <data name="Cutscene_DecoderDownloads" xml:space="preserve">
+    <value>Get Charlotte CLI</value>
+  </data>
+  <data name="Cutscene_DecoderSetupFailed" xml:space="preserve">
+    <value>Could not set the cutscene converter.</value>
+  </data>
+  <data name="Cutscene_DecoderSelected" xml:space="preserve">
+    <value>Cutscene converter path saved.</value>
+  </data>
+  <data name="Cutscene_ChooseFfmpeg" xml:space="preserve">
+    <value>Set MP4 converter</value>
+  </data>
+  <data name="Cutscene_FfmpegHint" xml:space="preserve">
+    <value>MP4 export and transcoded previews require FFmpeg. Select an ffmpeg.exe with libx264 support.</value>
+  </data>
+  <data name="Cutscene_FfmpegDownloads" xml:space="preserve">
+    <value>Get FFmpeg</value>
+  </data>
+  <data name="Cutscene_InvalidDecoder" xml:space="preserve">
+    <value>Select a valid {0} file.</value>
+  </data>
+  <data name="Cutscene_PlayLocal" xml:space="preserve">
+    <value>Play cutscene</value>
+  </data>
+  <data name="Cutscene_ExportLocal" xml:space="preserve">
+    <value>Export cutscene</value>
+  </data>
+  <data name="Cutscene_ExportAudioTracks" xml:space="preserve">
+    <value>Choose audio tracks to export</value>
+  </data>
+  <data name="Cutscene_AudioTrackNumber" xml:space="preserve">
+    <value>Audio track {0}</value>
+  </data>
+  <data name="Cutscene_ExportAudioRequired" xml:space="preserve">
+    <value>Music and sound effects require a separate track. Select at least one available audio track.</value>
+  </data>
+  <data name="Cutscene_PreparingMedia" xml:space="preserve">
+    <value>Preparing the local cutscene…</value>
+  </data>
+  <data name="Cutscene_DecodeFailed" xml:space="preserve">
+    <value>Could not convert this cutscene. Check that Charlotte CLI supports this file.</value>
+  </data>
+  <data name="Cutscene_PlayFailed" xml:space="preserve">
+    <value>Could not open the cutscene preview.</value>
+  </data>
+  <data name="Cutscene_PlayCodecFailed" xml:space="preserve">
+    <value>The system player could not decode this cutscene.</value>
+  </data>
+  <data name="Cutscene_TranscodeAndPlay" xml:space="preserve">
+    <value>Transcode and play</value>
+  </data>
+  <data name="Cutscene_Exporting" xml:space="preserve">
+    <value>Exporting the cutscene…</value>
+  </data>
+  <data name="Cutscene_Exported" xml:space="preserve">
+    <value>Cutscene exported.</value>
+  </data>
+  <data name="Cutscene_ExportFailed" xml:space="preserve">
+    <value>Could not export the cutscene.</value>
+  </data>
+  <data name="Cutscene_InvalidExportFormat" xml:space="preserve">
+    <value>Select MP4 or MKV.</value>
+  </data>
+  <data name="Cutscene_Mp4Unavailable" xml:space="preserve">
+    <value>FFmpeg could not generate an MP4. Check libx264 support or export MKV.</value>
+  </data>
+  <data name="Cutscene_ExportOutsideGame" xml:space="preserve">
+    <value>Select a destination outside the game folder.</value>
+  </data>
   <data name="Cutscene_All" xml:space="preserve">
     <value>All</value>
   </data>
@@ -13426,20 +13552,17 @@ Continue to the project page?</value>
   <data name="Cutscene_ChapterClipCount" xml:space="preserve">
     <value>{0} clips</value>
   </data>
-  <data name="Cutscene_SortMode" xml:space="preserve">
-    <value>Sort by</value>
-  </data>
   <data name="Cutscene_SortByRelease" xml:space="preserve">
-    <value>Release time</value>
+    <value>Release order</value>
   </data>
   <data name="Cutscene_SortDirection" xml:space="preserve">
     <value>Sort direction</value>
   </data>
   <data name="Cutscene_SortAscending" xml:space="preserve">
-    <value>Ascending</value>
+    <value>Oldest first</value>
   </data>
   <data name="Cutscene_SortDescending" xml:space="preserve">
-    <value>Descending</value>
+    <value>Newest first</value>
   </data>
   <data name="Cutscene_PendingFilter" xml:space="preserve">
     <value>Pending {0}</value>
@@ -13481,7 +13604,7 @@ Continue to the project page?</value>
     <value>The previous version’s manifest is unavailable. Removal based on version history is temporarily unavailable.</value>
   </data>
   <data name="Cutscene_NothingLoaded" xml:space="preserve">
-    <value>No cutscenes loaded</value>
+    <value>No resources to show</value>
   </data>
   <data name="Cutscene_Empty" xml:space="preserve">
     <value>No cutscenes match the filters</value>
@@ -13593,5 +13716,311 @@ Continue to the project page?</value>
   </data>
   <data name="Cutscene_Region_Snezhnaya" xml:space="preserve">
     <value>Snezhnaya</value>
+  </data>
+  <data name="Cutscene_BatchMenu" xml:space="preserve">
+    <value>Batch select</value>
+  </data>
+  <data name="Cutscene_QueueLinkedAudio" xml:space="preserve">
+    <value>Queue all traced story audio packs</value>
+  </data>
+  <data name="Cutscene_QueueAudioByLang" xml:space="preserve">
+    <value>Queue traced audio by language</value>
+  </data>
+  <data name="Cutscene_CatalogImport" xml:space="preserve">
+    <value>Import catalog</value>
+  </data>
+  <data name="Cutscene_LockCleaned" xml:space="preserve">
+    <value>Lock cleaned files (0-byte stub)</value>
+  </data>
+  <data name="Cutscene_UnlockCleaned" xml:space="preserve">
+    <value>Unlock and remove 0-byte stubs</value>
+  </data>
+  <data name="Cutscene_BypassCheck" xml:space="preserve">
+    <value>Client verification bypass (Persistent)</value>
+  </data>
+  <data name="Cutscene_AutoSetupTools" xml:space="preserve">
+    <value>Auto-setup player tools (Charlotte / FFmpeg)</value>
+  </data>
+  <data name="Cutscene_ClearPreviewCache" xml:space="preserve">
+    <value>Clear preview cache</value>
+  </data>
+  <data name="Cutscene_ResourceScope" xml:space="preserve">
+    <value>Resource type</value>
+  </data>
+  <data name="Cutscene_ScopeAll" xml:space="preserve">
+    <value>All resources</value>
+  </data>
+  <data name="Cutscene_ScopeVideo" xml:space="preserve">
+    <value>Cutscenes</value>
+  </data>
+  <data name="Cutscene_ScopeAudio" xml:space="preserve">
+    <value>Story audio</value>
+  </data>
+  <data name="Cutscene_AudioLanguageFilter" xml:space="preserve">
+    <value>Voice language</value>
+  </data>
+  <data name="Cutscene_AllLanguages" xml:space="preserve">
+    <value>All languages</value>
+  </data>
+  <data name="Cutscene_ExportChapter" xml:space="preserve">
+    <value>Export chapter cutscenes</value>
+  </data>
+  <data name="Cutscene_StubLockOption" xml:space="preserve">
+    <value>Use 0-byte read-only stub lock</value>
+  </data>
+  <data name="Cutscene_StubLockOptionHint" xml:space="preserve">
+    <value>Replace cleaned files in StreamingAssets and Persistent with locked 0-byte read-only stubs (Deny Write/Delete ACL) so the client and launcher skip re-downloading them.</value>
+  </data>
+  <data name="Cutscene_CatalogStatusCached" xml:space="preserve">
+    <value>Resource catalog {0}</value>
+  </data>
+  <data name="Cutscene_HistoryBaseline" xml:space="preserve">
+    <value>Baseline v{0}</value>
+  </data>
+  <data name="Cutscene_QueueLinkedAudioDone" xml:space="preserve">
+    <value>Queued {0} traced story audio pack(s) for removal.</value>
+  </data>
+  <data name="Cutscene_QueueLinkedAudioNone" xml:space="preserve">
+    <value>No additional traced story audio packs are available to queue.</value>
+  </data>
+  <data name="Cutscene_QueueAudioByLangDone" xml:space="preserve">
+    <value>Queued {0} traced audio pack(s) for the selected language.</value>
+  </data>
+  <data name="Cutscene_QueueAudioByLangNone" xml:space="preserve">
+    <value>No additional traced story audio packs are available for this language.</value>
+  </data>
+  <data name="Cutscene_InstallSummaryWithAudio" xml:space="preserve">
+    <value>Installed: {0}/{1} videos · {2}/{3} audio · {4}/{5}</value>
+  </data>
+  <data name="Cutscene_ConfirmStubLock" xml:space="preserve">
+    <value>{0}, {1}.\n\nCleaned files will be replaced with locked 0-byte NTFS stubs (Deny Write/Delete) so the client and launcher verification skip re-downloading them. Continue?</value>
+  </data>
+  <data name="Cutscene_ConfirmSharedAudio" xml:space="preserve">
+    <value>Some selected voice packs are shared by multiple quests or chapters. Confirm that you have completed all linked chapters before removing them.</value>
+  </data>
+  <data name="Cutscene_CatalogImportFailed" xml:space="preserve">
+    <value>Could not import the resource catalog. Select a valid catalog file.</value>
+  </data>
+  <data name="Cutscene_CatalogImportOutdated" xml:space="preserve">
+    <value>This catalog is outdated. Import a newer catalog.</value>
+  </data>
+  <data name="Cutscene_CatalogRefreshFailed" xml:space="preserve">
+    <value>The catalog was saved, but the resource list could not be refreshed. Check the game path and version, then refresh.</value>
+  </data>
+  <data name="Cutscene_VoicePackDetailedSummary" xml:space="preserve">
+    <value>{0} · {2} of {1} linked · {3} removed · {4}</value>
+  </data>
+  <data name="Cutscene_VoiceCoreProtected" xml:space="preserve">
+    <value>Protected voices without a quest match</value>
+  </data>
+  <data name="Cutscene_VoicePackTracedHint" xml:space="preserve">
+    <value>Browse installed voice packs by language. Shared packs list the chapters that use them.</value>
+  </data>
+  <data name="Cutscene_LockingCleaned" xml:space="preserve">
+    <value>Applying 0-byte read-only stub locks to cleaned files…</value>
+  </data>
+  <data name="Cutscene_LockCleanedDone" xml:space="preserve">
+    <value>Applied 0-byte anti-redownload stub locks to {0} cleaned resource path(s).</value>
+  </data>
+  <data name="Cutscene_UnlockingCleaned" xml:space="preserve">
+    <value>Unlocking and removing 0-byte stub files…</value>
+  </data>
+  <data name="Cutscene_UnlockCleanedDone" xml:space="preserve">
+    <value>Unlocked and removed {0} 0-byte stub file(s).</value>
+  </data>
+  <data name="Cutscene_BypassFailed" xml:space="preserve">
+    <value>Could not inspect or apply the Persistent verification bypass. Check the game folder and permissions.</value>
+  </data>
+  <data name="Cutscene_BypassDirStatus" xml:space="preserve">
+    <value>Persistent directory: {0}</value>
+  </data>
+  <data name="Cutscene_BypassDirMissing" xml:space="preserve">
+    <value>Not found (launch the game at least once first)</value>
+  </data>
+  <data name="Cutscene_BypassFilesStatus" xml:space="preserve">
+    <value>Remote manifests: res {0} · data {1} · silence {2} · base_revision={3} · cache_versions={4}</value>
+  </data>
+  <data name="Cutscene_BypassDetectedLogTag" xml:space="preserve">
+    <value>Auto-detected tag from Player.log: {0}</value>
+  </data>
+  <data name="Cutscene_BypassPasteTagHeader" xml:space="preserve">
+    <value>Paste or edit game version tag (auto-parses R / S / D):</value>
+  </data>
+  <data name="Cutscene_BypassRiskWarning" xml:space="preserve">
+    <value>Follows MihoyoResourceIntegrityCheckBypass: clears ReadOnly, deletes base_revision and cache_versions_*, promotes *_remote to *_persist, and writes the R/S/D numbers. A backup is saved automatically before the first run so you can restore anytime.</value>
+  </data>
+  <data name="Cutscene_BypassApplyBtn" xml:space="preserve">
+    <value>Apply bypass</value>
+  </data>
+  <data name="Cutscene_BypassRestoreBtn" xml:space="preserve">
+    <value>Restore backup</value>
+  </data>
+  <data name="Cutscene_BypassRestoring" xml:space="preserve">
+    <value>Restoring Persistent files from backup…</value>
+  </data>
+  <data name="Cutscene_BypassRestored" xml:space="preserve">
+    <value>Restored {0} Persistent file(s) from backup.</value>
+  </data>
+  <data name="Cutscene_BypassApplying" xml:space="preserve">
+    <value>Applying Persistent verification bypass…</value>
+  </data>
+  <data name="Cutscene_BypassApplied" xml:space="preserve">
+    <value>Applied Persistent bypass: removed {0} marker(s), promoted {1} manifest(s), wrote {2}.</value>
+  </data>
+  <data name="Cutscene_BypassInvalidNumbers" xml:space="preserve">
+    <value>Invalid R / S / D numbers: enter digits only (as shown in the in-game version string R..._S..._D...).</value>
+  </data>
+  <data name="Cutscene_BypassNoPersistent" xml:space="preserve">
+    <value>Persistent directory not found. Verify the game folder and run the game at least once.</value>
+  </data>
+  <data name="Cutscene_BypassKeptPersist" xml:space="preserve">
+    <value>{0} missing; kept existing {1}</value>
+  </data>
+  <data name="Cutscene_BypassMissingPair" xml:space="preserve">
+    <value>{0} missing</value>
+  </data>
+  <data name="Cutscene_BypassNoBackup" xml:space="preserve">
+    <value>No Persistent backup found to restore.</value>
+  </data>
+  <data name="Cutscene_ToolsAutoConfiguredAll" xml:space="preserve">
+    <value>Charlotte and FFmpeg are installed and configured. Ready to play and export cutscenes!</value>
+  </data>
+  <data name="Cutscene_ToolFetchingRelease" xml:space="preserve">
+    <value>Fetching latest Charlotte release metadata (with mirror fallback)…</value>
+  </data>
+  <data name="Cutscene_ToolDownloading" xml:space="preserve">
+    <value>Downloading media tools (Charlotte + FFmpeg)…</value>
+  </data>
+  <data name="Cutscene_ToolExtracting" xml:space="preserve">
+    <value>Extracting and configuring tools…</value>
+  </data>
+  <data name="Cutscene_ToolDownloadFailed" xml:space="preserve">
+    <value>Failed to auto-download media tools. Check your connection or locate charlotte-cli.exe and ffmpeg.exe manually.</value>
+  </data>
+  <data name="Cutscene_PreviewCacheCleared" xml:space="preserve">
+    <value>Cleared local playback preview cache ({0} freed).</value>
+  </data>
+  <data name="Cutscene_DecoderAutoHint" xml:space="preserve">
+    <value>Charlotte (USM decoder) and FFmpeg are required. Click "One-click auto-install" below (with mirror fallback) or browse local executables manually.</value>
+  </data>
+  <data name="Cutscene_AutoInstallBtn" xml:space="preserve">
+    <value>One-click auto-install</value>
+  </data>
+  <data name="Cutscene_ExportSubtitleMode" xml:space="preserve">
+    <value>Subtitle export mode</value>
+  </data>
+  <data name="Cutscene_ExportSubNone" xml:space="preserve">
+    <value>No subtitles</value>
+  </data>
+  <data name="Cutscene_ExportSubBurnIn" xml:space="preserve">
+    <value>Burn subtitles into video (hardsub)</value>
+  </data>
+  <data name="Cutscene_ExportSubSoft" xml:space="preserve">
+    <value>Embed soft subtitle track (mov_text)</value>
+  </data>
+  <data name="Cutscene_BatchExportFormat" xml:space="preserve">
+    <value>Export format</value>
+  </data>
+  <data name="Cutscene_BatchExportBurnSub" xml:space="preserve">
+    <value>Burn default subtitles when exporting MP4 (if available)</value>
+  </data>
+  <data name="Cutscene_BatchExportHint" xml:space="preserve">
+    <value>Export {1} locally installed cutscene(s) from "{0}" to a chosen folder.</value>
+  </data>
+  <data name="Cutscene_ExportPickFolder" xml:space="preserve">
+    <value>Choose folder &amp; export</value>
+  </data>
+  <data name="Cutscene_BatchExportProgress" xml:space="preserve">
+    <value>Exporting ({0}/{1}): {2}</value>
+  </data>
+  <data name="Cutscene_BatchExported" xml:space="preserve">
+    <value>Batch export complete: saved {0} cutscene file(s).</value>
+  </data>
+  <data name="Cutscene_KindVideo" xml:space="preserve">
+    <value>Cutscene</value>
+  </data>
+  <data name="Cutscene_AudioItemTitle" xml:space="preserve">
+    <value>Story voice pack</value>
+  </data>
+  <data name="Cutscene_QuestAudioItemTitle" xml:space="preserve">
+    <value>Quest voice pack</value>
+  </data>
+  <data name="Cutscene_StubbedLocked" xml:space="preserve">
+    <value>Cleaned · 0-byte locked</value>
+  </data>
+  <data name="Cutscene_SharedChaptersBadge" xml:space="preserve">
+    <value>Shared across {0} chapters</value>
+  </data>
+  <data name="Cutscene_TraceChainVideos" xml:space="preserve">
+    <value>Linked videos: {0}</value>
+  </data>
+  <data name="Cutscene_VerifySkippedSlimmed" xml:space="preserve">
+    <value>Skipped {0} slimmed 0-byte locked cutscene/audio stub file(s) during verification.</value>
+  </data>
+  <data name="Cutscene_PlayerFastForward" xml:space="preserve">
+    <value>3.0× Fast-Forward (Hold Space)</value>
+  </data>
+  <data name="Cutscene_PlayerSpeed" xml:space="preserve">
+    <value>Playback speed</value>
+  </data>
+  <data name="Cutscene_PlayerAudioTrack" xml:space="preserve">
+    <value>Switch audio track</value>
+  </data>
+  <data name="Cutscene_PlayerSubtitleTrack" xml:space="preserve">
+    <value>Select subtitle language</value>
+  </data>
+  <data name="Cutscene_PlayerFullscreen" xml:space="preserve">
+    <value>Toggle fullscreen (F / F11)</value>
+  </data>
+  <data name="Cutscene_PlayerSubtitleOff" xml:space="preserve">
+    <value>Subtitles off</value>
+  </data>
+  <data name="Cutscene_AutoTranscoding" xml:space="preserve">
+    <value>Direct playback unsupported by system codecs. Auto-transcoding to compatible MP4…</value>
+  </data>
+  <data name="Cutscene_CatalogPullUpstream" xml:space="preserve">
+    <value>Downloading the catalog and quest data…</value>
+  </data>
+  <data name="Cutscene_CatalogPullTextMap" xml:space="preserve">
+    <value>Streaming localized titles for newly discovered chapters…</value>
+  </data>
+  <data name="Cutscene_CatalogMerging" xml:space="preserve">
+    <value>Preparing the cutscene and voice catalog…</value>
+  </data>
+  <data name="Cutscene_CatalogSetupTitle" xml:space="preserve">
+    <value>Get the resource catalog</value>
+  </data>
+  <data name="Cutscene_CatalogRequired" xml:space="preserve">
+    <value>Get the cutscene and voice catalog to start. The launcher saves it on this device for future visits.</value>
+  </data>
+  <data name="Cutscene_CatalogFetch" xml:space="preserve">
+    <value>Get catalog online</value>
+  </data>
+  <data name="Cutscene_CatalogFetchFailed" xml:space="preserve">
+    <value>Could not get the resource catalog. Check your connection and retry, or import an existing catalog.</value>
+  </data>
+  <data name="Cutscene_ShowPlaybackExport" xml:space="preserve">
+    <value>Show playback and export</value>
+  </data>
+  <data name="Cutscene_Category_Hangout" xml:space="preserve">
+    <value>Hangout Events</value>
+  </data>
+  <data name="Cutscene_UnclassifiedVoice" xml:space="preserve">
+    <value>Unclassified story audio</value>
+  </data>
+  <data name="Cutscene_Protection_Unclassified" xml:space="preserve">
+    <value>Protected · Quest association unconfirmed</value>
+  </data>
+  <data name="Cutscene_Protection_HistoryUnavailable" xml:space="preserve">
+    <value>Protected · Comparison manifest unavailable</value>
+  </data>
+  <data name="Cutscene_Protection_MissingInHistory" xml:space="preserve">
+    <value>Protected · Absent from the comparison version</value>
+  </data>
+  <data name="Cutscene_Protection_LinkedVideo" xml:space="preserve">
+    <value>Protected · A linked cutscene is protected</value>
+  </data>
+  <data name="Cutscene_Protection_CurrentChapter" xml:space="preserve">
+    <value>Protected · Belongs to a current chapter</value>
   </data>
 </root>

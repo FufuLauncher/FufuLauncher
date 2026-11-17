@@ -8,11 +8,15 @@ using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models.GameServer;
 
-internal enum CutsceneCategory { Archon, Story, Event, Tribal, World, Other }
+internal enum CutsceneCategory { Archon, Story, Hangout, Event, Tribal, World, Other }
 
 internal sealed partial record CutsceneChapter(CutsceneCategory Category, string TitleKey, string QuestId = "",
     IReadOnlyDictionary<string, string>? Titles = null, Version? ReleaseVersion = null, int QuestChapterId = 0)
 {
+    // Display Bough Keeper: Dainsleif with the Archon Quest chapter it introduces.
+    internal static CutsceneCategory? GetCategoryOverride(int questChapterId) =>
+        questChapterId == 1105 ? CutsceneCategory.Archon : null;
+
     public static CutsceneChapter FromFileName(string name)
     {
         string file = Path.GetFileNameWithoutExtension(name).ToUpperInvariant();
@@ -66,9 +70,10 @@ internal sealed partial record CutsceneChapter(CutsceneCategory Category, string
         return new(category, titleKey, questId);
     }
 
-    public string Title => Titles is not null ? CutsceneNames.Localize(Titles)
-        : QuestId.Length == 0 ? TitleKey.GetLocalized() : $"{TitleKey.GetLocalized()} · {QuestId}";
+    public string Title => Titles is not null ? CutsceneNames.Localize(Titles) : TitleKey.GetLocalized();
     public string Label => $"Cutscene_Category_{Category}".GetLocalized();
+
+    public static CutsceneChapter UnclassifiedVoice { get; } = new(CutsceneCategory.Other, "Cutscene_UnclassifiedVoice");
 
     [GeneratedRegex("(AQ|LQ|EQ|WQ)_?(\\d+)", RegexOptions.CultureInvariant)]
     private static partial Regex QuestCode();

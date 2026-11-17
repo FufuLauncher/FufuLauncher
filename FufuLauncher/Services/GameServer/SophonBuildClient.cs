@@ -46,7 +46,31 @@ public sealed class SophonBuildClient
     }
 
     public async Task<SophonBranchInfo> GetBranchInfoByTagAsync(GameServerScheme scheme, string tag,
-        CancellationToken token = default)
+        CancellationToken token = default) =>
+        ParseBranchInfo(await GetBuildDataByTagAsync(scheme, tag, token).ConfigureAwait(false));
+
+    internal async Task<(SophonBranchInfo Game, Dictionary<string, SophonBranchInfo> Languages)>
+        GetBranchManifestSourcesByTagAsync(GameServerScheme scheme, string tag, IEnumerable<string> languageFields,
+            CancellationToken token)
+    {
+        var requested = languageFields.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        JsonElement data = await GetBuildDataByTagAsync(scheme, tag, token).ConfigureAwait(false);
+        SophonBranchInfo game = ParseBranchInfo(data);
+        var languages = new Dictionary<string, SophonBranchInfo>(StringComparer.OrdinalIgnoreCase);
+        foreach (JsonElement manifest in data.GetProperty("manifests").EnumerateArray())
+        {
+            if (manifest.TryGetProperty("matching_field", out JsonElement field)
+                && field.ValueKind == JsonValueKind.String && requested.Contains(field.GetString()!))
+            {
+                languages.TryAdd(field.GetString()!, ParseManifestSource(manifest));
+            }
+        }
+
+        return (game, languages);
+    }
+
+    private async Task<JsonElement> GetBuildDataByTagAsync(GameServerScheme scheme, string tag,
+        CancellationToken token)
     {
         using JsonDocument doc = await GetBranchDocumentAsync(scheme, false, token).ConfigureAwait(false);
         JsonElement targetBranch = GetTargetBranchElement(doc, false);
@@ -79,7 +103,7 @@ public sealed class SophonBuildClient
             throw new InvalidDataException("GameServer_BranchDataNull".GetLocalized());
         }
 
-        return ParseBranchInfo(dataProp);
+        return dataProp.Clone();
     }
 
     public async Task<SophonBranchPayload> GetBranchPayloadAsync(GameServerScheme scheme, bool isPreDownload,
@@ -261,6 +285,11 @@ public sealed class SophonBuildClient
             manifestData = manifestsProp[0];
         }
 
+        return ParseManifestSource(manifestData);
+    }
+
+    private static SophonBranchInfo ParseManifestSource(JsonElement manifestData)
+    {
         string manifestId = manifestData.GetProperty("manifest").GetProperty("id").GetString()!;
         string manifestChecksum = manifestData.GetProperty("manifest").TryGetProperty("checksum", out var checksumProp)
                                   && checksumProp.ValueKind == JsonValueKind.String

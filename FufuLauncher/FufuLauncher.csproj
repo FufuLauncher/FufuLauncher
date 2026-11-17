@@ -191,7 +191,6 @@
 
     <ItemGroup>
         <EmbeddedResource Include="Assets\bg.png" LogicalName="FufuLauncher.Assets.bg.png"/>
-        <EmbeddedResource Include="Assets\CutsceneNames.json" LogicalName="FufuLauncher.Assets.CutsceneNames.json" />
         <EmbeddedResource Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 
