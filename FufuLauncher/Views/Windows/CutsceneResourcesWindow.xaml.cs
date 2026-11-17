@@ -21,6 +21,7 @@ public sealed partial class CutsceneResourcesWindow : Window
     private static CutsceneResourcesWindow? _instance;
     private readonly GameUpdateService _service = App.GetService<GameUpdateService>();
     private CutsceneCatalog? _catalog;
+    private CutsceneNameCatalog? _nameCatalog;
     private List<CutsceneResourceRow> _items = [];
     private List<CutsceneChapterRow> _chapters = [];
     private CutsceneCategory? _category;
@@ -36,8 +37,9 @@ public sealed partial class CutsceneResourcesWindow : Window
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         RectInt32 area = DisplayArea.GetFromWindowId(AppWindow.Id, DisplayAreaFallback.Primary).WorkArea;
-        int width = Math.Min(980, area.Width - 32);
-        int height = Math.Min(920, area.Height - 32);
+        double scale = WindowManagerHelper.GetScaleFactor(this);
+        int width = Math.Min((int)Math.Round(1240 * scale), area.Width - 32);
+        int height = Math.Min((int)Math.Round(980 * scale), area.Height - 32);
         AppWindow.MoveAndResize(new RectInt32(area.X + (area.Width - width) / 2, area.Y + (area.Height - height) / 2,
             width, height));
         Closed += (_, _) =>
@@ -73,6 +75,16 @@ public sealed partial class CutsceneResourcesWindow : Window
         Notice.IsOpen = false;
         try
         {
+            _nameCatalog = await Task.Run(CutsceneNameCatalogStore.LoadCurrent, work.Token);
+            if (_closed)
+                return;
+            UpdateCatalogAvailability();
+            if (_nameCatalog is not { } names)
+            {
+                BindCatalog(null);
+                return;
+            }
+
             string? gameDir = await GetGameDirectoryAsync();
             if (gameDir is null)
             {
@@ -84,13 +96,11 @@ public sealed partial class CutsceneResourcesWindow : Window
                 return;
             }
 
-            CutsceneCatalog catalog = await Task.Run(() => _service.ScanCutscenesAsync(gameDir, work.Token), work.Token);
-            CutsceneCatalogStatus catalogStatus = await Task.Run(CutsceneNameCatalogStore.GetStatus, work.Token);
+            CutsceneCatalog catalog = await Task.Run(
+                () => _service.ScanCutscenesAsync(gameDir, names, work.Token), work.Token);
             if (_closed)
                 return;
 
-            _displayCatalog = catalogStatus.Catalog;
-            _usingCachedCatalog = catalogStatus.UsingCachedCatalog;
             BindCatalog(catalog);
             if (!catalog.HasHistory)
                 ShowNotice(InfoBarSeverity.Informational, "Cutscene_HistoryUnavailable".GetLocalized());
@@ -128,7 +138,7 @@ public sealed partial class CutsceneResourcesWindow : Window
     private void BindCatalog(CutsceneCatalog? catalog)
     {
         _catalog = catalog;
-        if (catalog is null)
+        if (catalog is null || _nameCatalog is not { } names)
         {
             _items = [];
         }
@@ -136,42 +146,38 @@ public sealed partial class CutsceneResourcesWindow : Window
         {
             _items = catalog.Videos
                 .Select(video => new CutsceneResourceRow(video, OnSelectionChanged))
-                .Concat(catalog.Audios.Select(audio => new CutsceneResourceRow(audio, OnSelectionChanged)))
+                .Concat(catalog.Audios.Select(audio => new CutsceneResourceRow(audio, names, OnSelectionChanged)))
                 .ToList();
         }
         PendingOnlyButton.IsChecked = false;
+        UpdateCatalogAvailability();
         UpdateGameVersionHeader();
-        RefreshDisplayCatalog();
+        BuildFilters();
+        RefreshChapters();
+    }
+
+    private void UpdateCatalogAvailability()
+    {
+        bool ready = _nameCatalog is not null;
+        CatalogSetup.Visibility = ready ? Visibility.Collapsed : Visibility.Visible;
+        ManagementHeader.Visibility = ready ? Visibility.Visible : Visibility.Collapsed;
+        ManagementList.Visibility = ManagementHeader.Visibility;
+        ChangeActions.Visibility = _catalog is not null ? Visibility.Visible : Visibility.Collapsed;
+        Footer.Visibility = ChangeActions.Visibility == Visibility.Visible || OperationProgress.Visibility == Visibility.Visible
+            ? Visibility.Visible : Visibility.Collapsed;
     }
 
     private void UpdateGameVersionHeader()
     {
-        if (_catalog is null)
-        {
-            GameVersionText.Text = string.Empty;
-            return;
-        }
-
-        CutsceneNameCatalog names = _displayCatalog ?? CutsceneNames.BuiltIn;
-        string catalogSuffix = _usingCachedCatalog
-            ? string.Format("Cutscene_CatalogStatusCached".GetLocalized(), names.VersionLabel)
-            : string.Format("Cutscene_CatalogStatusBuiltIn".GetLocalized(), names.VersionLabel);
-        string historyText = _catalog.EarlierVersion is not null
-            ? $" · {string.Format("Cutscene_HistoryBaseline".GetLocalized(), _catalog.EarlierVersion)}"
+        string catalogLabel = _nameCatalog is { } names
+            ? string.Format("Cutscene_CatalogStatusCached".GetLocalized(), names.GameVersion.ToString())
             : string.Empty;
-        GameVersionText.Text = $"{_catalog.Scheme.DisplayName} · {_catalog.Version}{historyText} · {catalogSuffix}";
-    }
-
-    private void RefreshDisplayCatalog()
-    {
-        CutsceneNameCatalog names = _displayCatalog ?? CutsceneNames.BuiltIn;
-        foreach (var row in _items)
-            row.UseDisplayCatalog(names);
-        if (_category is CutsceneCategory category && !GetScopeFilteredItems().Any(row => row.Chapter.Category == category))
-            _category = null;
-        UpdateGameVersionHeader();
-        BuildFilters();
-        RefreshChapters();
+        string historyText = _catalog?.EarlierVersion is { } earlier
+            ? $" · {string.Format("Cutscene_HistoryBaseline".GetLocalized(), earlier)}"
+            : string.Empty;
+        GameVersionText.Text = _catalog is { } catalog
+            ? $"{catalog.Scheme.DisplayName} · {catalog.Version}{historyText} · {catalogLabel}"
+            : catalogLabel;
     }
 
     private string GetSelectedResourceScope() =>
@@ -202,9 +208,14 @@ public sealed partial class CutsceneResourcesWindow : Window
     {
         Filters.Children.Clear();
         CutsceneResourceRow[] scoped = GetScopeFilteredItems().ToArray();
+        var byCategory = scoped.SelectMany(row => row.Chapters.Select(chapter => (row, chapter.Category)))
+            .ToLookup(link => link.Category, link => link.row);
+        if (_category is { } category && !byCategory.Contains(category))
+            _category = null;
+
         AddFilter(null, "Cutscene_All".GetLocalized(), scoped.Length);
-        foreach (var group in scoped.GroupBy(row => row.Chapter.Category).OrderBy(group => group.Key))
-            AddFilter(group.Key, group.First().Chapter.Label, group.Count());
+        foreach (var group in byCategory.OrderBy(group => group.Key))
+            AddFilter(group.Key, $"Cutscene_Category_{group.Key}".GetLocalized(), group.Distinct().Count());
     }
 
     private void AddFilter(CutsceneCategory? category, string label, int count)
@@ -212,6 +223,7 @@ public sealed partial class CutsceneResourcesWindow : Window
         var button = new ToggleButton
         {
             IsChecked = _category == category,
+            IsEnabled = !_busy,
             Content = $"{label} {count}",
             CornerRadius = new CornerRadius(14),
             Tag = category
@@ -250,7 +262,7 @@ public sealed partial class CutsceneResourcesWindow : Window
     private void OnResourceScopeChanged(object sender, SelectionChangedEventArgs args)
     {
         if (AudioLanguageFilter is not null)
-            AudioLanguageFilter.IsEnabled = !_busy && GetSelectedResourceScope() != "Video";
+            AudioLanguageFilter.IsEnabled = !_busy && _nameCatalog is not null && GetSelectedResourceScope() != "Video";
         if (_catalog is not null)
         {
             BuildFilters();
@@ -269,41 +281,61 @@ public sealed partial class CutsceneResourcesWindow : Window
 
     private void OnPendingOnlyClick(object sender, RoutedEventArgs args) => RefreshChapters();
 
-    private void OnMetadataDisplayChanged(object sender, RoutedEventArgs args) => UpdateMetadataVisibility();
+    private bool ShowMediaActions => ShowPlaybackExport.IsChecked == true;
 
-    private void UpdateMetadataVisibility()
+    private void OnDisplayOptionsChanged(object sender, RoutedEventArgs args) => UpdateDisplayOptions();
+
+    private void UpdateDisplayOptions()
     {
         bool showRelease = ShowReleaseVersion.IsChecked == true;
         bool showCount = ShowClipCount.IsChecked == true;
+        bool showMedia = ShowMediaActions;
+        foreach (var row in _items)
+            row.SetMediaActionsVisibility(showMedia);
         foreach (var chapter in _chapters)
-            chapter.SetMetadataVisibility(showRelease, showCount);
+            chapter.SetDisplayOptions(showRelease, showCount, showMedia);
+
+        Visibility mediaVisibility = showMedia ? Visibility.Visible : Visibility.Collapsed;
+        MediaToolsSeparator.Visibility = mediaVisibility;
+        AutoSetupToolsItem.Visibility = mediaVisibility;
+        ChooseDecoderItem.Visibility = mediaVisibility;
+        ChooseFfmpegItem.Visibility = mediaVisibility;
+        ClearPreviewCacheItem.Visibility = mediaVisibility;
     }
 
     private void RefreshChapters()
     {
         string[] terms = SearchBox.Text.Split(' ', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
-        var expanded = _chapters.Where(chapter => chapter.IsExpanded).SelectMany(chapter => chapter.Rows)
-            .Select(row => row.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var expanded = _chapters.Where(chapter => chapter.IsExpanded).Select(chapter => chapter.Chapter).ToHashSet();
         bool pendingOnly = PendingOnlyButton.IsChecked == true;
         var chapters = GetScopeFilteredItems()
-            .Where(row => (_category is null || row.Chapter.Category == _category)
-                && (!pendingOnly || row.IsRemovalPending || row.IsDownloadPending)
-                && terms.All(term => row.SearchText.Contains(term, StringComparison.CurrentCultureIgnoreCase)))
-            .GroupBy(row => row.Chapter)
+            .Where(row => !pendingOnly || row.IsRemovalPending || row.IsDownloadPending)
+            .SelectMany(row => row.Chapters.Select(chapter => (row, chapter)))
+            .Where(link => (_category is null || link.chapter.Category == _category)
+                && MatchesSearch(link.row, link.chapter, terms))
+            .GroupBy(link => link.chapter, link => link.row)
             .Select(group => new CutsceneChapterRow(
                 group.Key,
                 group.OrderBy(row => row.IsAudio).ThenBy(row => row.Name).ToArray())
             {
-                IsExpanded = terms.Length > 0 || group.Any(row => expanded.Contains(row.Name))
+                IsExpanded = terms.Length > 0 || expanded.Contains(group.Key)
             });
         _chapters = OrderChaptersByRelease(chapters, descending: SortDirection.SelectedIndex == 1).ToList();
-        UpdateMetadataVisibility();
+        UpdateDisplayOptions();
         ChapterList.ItemsSource = _chapters;
         EmptyText.Text = (_catalog is null ? "Cutscene_NothingLoaded"
             : pendingOnly ? "Cutscene_PendingEmpty" : "Cutscene_Empty").GetLocalized();
         EmptyText.Visibility = _chapters.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
         UpdateExpandButton();
         UpdateSummary();
+    }
+
+    private static bool MatchesSearch(CutsceneResourceRow row, CutsceneChapter chapter, string[] terms)
+    {
+        if (terms.Length == 0)
+            return true;
+        string search = $"{row.SearchText} {row.KindTagText} {chapter.Title} {chapter.Label}";
+        return terms.All(term => search.Contains(term, StringComparison.CurrentCultureIgnoreCase));
     }
 
     private static IOrderedEnumerable<CutsceneChapterRow> OrderChaptersByRelease(IEnumerable<CutsceneChapterRow> chapters,
@@ -321,7 +353,7 @@ public sealed partial class CutsceneResourcesWindow : Window
     }
 
     private void OnKeepVisibleClick(object sender, RoutedEventArgs args) =>
-        SetKept(_chapters.SelectMany(chapter => chapter.Rows), KeepVisible.IsChecked == true);
+        SetKept(_chapters.SelectMany(chapter => chapter.Rows).Distinct(), KeepVisible.IsChecked == true);
 
     private void OnKeepChapterClick(object sender, RoutedEventArgs args)
     {
@@ -504,7 +536,7 @@ public sealed partial class CutsceneResourcesWindow : Window
         LockCleanedItem.IsEnabled = !_busy && _items.Any(row => !row.IsInstalled);
         UnlockCleanedItem.IsEnabled = !_busy && _items.Any(row => row.IsStubbedLocked);
 
-        var visible = _chapters.SelectMany(chapter => chapter.Rows).ToArray();
+        var visible = _chapters.SelectMany(chapter => chapter.Rows).Distinct().ToArray();
         KeepVisible.IsEnabled = !_busy && visible.Any(row => row.CanToggle);
         KeepVisible.IsChecked = CutsceneChapterRow.GetKeepState(visible);
         VisibleSummary.Text = string.Format("Cutscene_VisibleSummary".GetLocalized(),
@@ -628,13 +660,18 @@ public sealed partial class CutsceneResourcesWindow : Window
     {
         _busy = busy;
         ChapterList.IsEnabled = !busy;
-        ResourceActionsButton.IsEnabled = !busy;
-        RefreshButton.IsEnabled = !busy;
-        QuickCatalogUpdateLink.IsEnabled = !busy;
-        SearchBox.IsEnabled = !busy;
+        bool canManage = !busy && _nameCatalog is not null;
+        ResourceActionsButton.IsEnabled = canManage;
+        RefreshButton.IsEnabled = canManage;
+        QuickCatalogUpdateLink.IsEnabled = canManage;
+        FetchCatalogButton.IsEnabled = !busy;
+        ImportCatalogButton.IsEnabled = !busy;
+        SearchBox.IsEnabled = canManage;
+        ShowReleaseVersion.IsEnabled = canManage;
+        ShowClipCount.IsEnabled = canManage;
+        ShowPlaybackExport.IsEnabled = canManage;
         ResourceScopeFilter.IsEnabled = !busy;
         AudioLanguageFilter.IsEnabled = !busy && GetSelectedResourceScope() != "Video";
-        SortMode.IsEnabled = !busy;
         SortDirection.IsEnabled = !busy;
         PendingOnlyButton.IsEnabled = !busy;
         StubLockProtectionCheck.IsEnabled = !busy;
@@ -644,6 +681,7 @@ public sealed partial class CutsceneResourcesWindow : Window
         CancelButton.Visibility = OperationProgress.Visibility;
         WorkStatus.Text = status ?? string.Empty;
         WorkProgress.IsIndeterminate = busy;
+        UpdateCatalogAvailability();
         UpdateExpandButton();
         UpdateSummary();
     }

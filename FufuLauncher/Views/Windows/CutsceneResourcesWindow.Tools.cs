@@ -25,60 +25,99 @@ public sealed partial class CutsceneResourcesWindow
     private static readonly MediaTool Ffmpeg = new(CutsceneMediaService.FfmpegFileName, "CutsceneFfmpegPath",
         "Cutscene_ChooseFfmpeg", "Cutscene_FfmpegHint", "Cutscene_FfmpegDownloads",
         "https://ffmpeg.org/download.html#build-windows");
-    private CutsceneNameCatalog? _displayCatalog;
-    private bool _usingCachedCatalog;
 
     private async void OnUpdateNameCatalogClick(object sender, RoutedEventArgs args) =>
-        await RunResourceActionAsync("Cutscene_CatalogUpdating", "Cutscene_CatalogUpdateFailed", async token =>
+        await RunResourceActionAsync("Cutscene_CatalogUpdating",
+            _nameCatalog is null ? "Cutscene_CatalogFetchFailed" : "Cutscene_CatalogUpdateFailed", async token =>
         {
             var progress = new Progress<string>(stage =>
             {
-                if (!_closed)
-                    DispatcherQueue.TryEnqueue(() => WorkStatus.Text = stage);
+                if (!_closed && _busy && !token.IsCancellationRequested)
+                    WorkStatus.Text = stage;
             });
-            var sophonClient = App.GetService<SophonBuildClient>();
             CutsceneCatalogUpdateResult result = await CutsceneNameCatalogStore.UpdateAsync(
-                sophonClient, _catalog?.Scheme, progress, token);
+                App.GetService<SophonBuildClient>(), _catalog?.Scheme, progress, token);
             if (_closed)
                 return;
 
-            _displayCatalog = result.Catalog;
-            _usingCachedCatalog = result.Updated || _usingCachedCatalog;
-            RefreshDisplayCatalog();
-            string message = result.Updated ? "Cutscene_CatalogUpdatedVia" : "Cutscene_CatalogCurrent";
+            if ((result.Updated || _nameCatalog is null || result.Catalog.IsNewerThan(_nameCatalog))
+                && !await RefreshAfterCatalogChangeAsync(result.Catalog, token))
+                return;
+
+            string message = result.Updated ? "Cutscene_CatalogUpdated" : "Cutscene_CatalogCurrent";
             ShowNotice(result.Updated ? InfoBarSeverity.Success : InfoBarSeverity.Informational,
-                result.Updated
-                    ? string.Format(message.GetLocalized(), result.Catalog.VersionLabel, result.SourceName)
-                    : string.Format(message.GetLocalized(), result.Catalog.VersionLabel));
+                string.Format(message.GetLocalized(), result.Catalog.GameVersion));
         });
 
     private async void OnImportCatalogClick(object sender, RoutedEventArgs args) =>
         await RunResourceActionAsync(null, "Cutscene_CatalogImportFailed", async token =>
         {
-            var filters = new (string Label, string[] Extensions)[] { ("CutsceneNames.json", ["*.json"]) };
+            var filters = new (string Label, string[] Extensions)[]
+            {
+                ("Cutscene_CatalogImport".GetLocalized(), ["*.json"])
+            };
             string? path = await FilePickerService.PickOpenFileAsync(this, filters,
                 onError: _ => ShowNotice(InfoBarSeverity.Error, "FilePicker_CannotOpen".GetLocalized()));
             if (path is null || _closed)
                 return;
 
             CutsceneCatalogUpdateResult result = await CutsceneNameCatalogStore.ImportFromFileAsync(path, token);
-            if (_closed)
+            if (_closed || !await RefreshAfterCatalogChangeAsync(result.Catalog, token))
                 return;
 
-            _displayCatalog = result.Catalog;
-            _usingCachedCatalog = true;
-            RefreshDisplayCatalog();
             ShowNotice(InfoBarSeverity.Success,
-                string.Format("Cutscene_CatalogUpdatedVia".GetLocalized(), result.Catalog.VersionLabel, result.SourceName));
+                string.Format("Cutscene_CatalogUpdated".GetLocalized(), result.Catalog.GameVersion));
         });
+
+    private async Task<bool> RefreshAfterCatalogChangeAsync(CutsceneNameCatalog names, CancellationToken token)
+    {
+        _nameCatalog = names;
+        SetBusy(true, "Cutscene_Scanning".GetLocalized());
+        try
+        {
+            CutsceneCatalog? refreshed = null;
+            if (_catalog is { } current)
+            {
+                refreshed = await Task.Run(() => _service.RebuildCutsceneAssociations(current, names, token), token);
+            }
+            else if (await GetGameDirectoryAsync() is { } gameDir)
+            {
+                refreshed = await Task.Run(() => _service.ScanCutscenesAsync(gameDir, names, token), token);
+            }
+
+            if (_closed)
+                return false;
+            BindCatalog(refreshed);
+            return true;
+        }
+        catch (OperationCanceledException) when (token.IsCancellationRequested)
+        {
+            if (!_closed)
+                BindCatalog(null);
+            throw;
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info(nameof(CutsceneResourcesWindow), $"Catalog saved but resource refresh failed ({ex.GetType().Name}).");
+            if (!_closed)
+            {
+                BindCatalog(null);
+                ShowNotice(InfoBarSeverity.Warning, "Cutscene_CatalogRefreshFailed".GetLocalized());
+            }
+            return false;
+        }
+    }
 
     private async void OnVoicePacksClick(object sender, RoutedEventArgs args)
     {
+        if (_nameCatalog is not { } names)
+            return;
+
         await RunResourceActionAsync("Cutscene_VoiceScanning", "Cutscene_VoiceScanFailed", async token =>
         {
             string gameDir = await GetGameDirectoryAsync()
                 ?? throw new InvalidOperationException("Err_GamePathNotFound".GetLocalized());
-            var packs = await Task.Run(() => _service.ScanLocalVoicePacks(gameDir, token), token);
+            var packs = await Task.Run(() => _service.ScanLocalVoicePacks(gameDir, names, token), token);
             if (_closed)
                 return;
             if (packs.Count == 0)
@@ -92,7 +131,7 @@ public sealed partial class CutsceneResourcesWindow
                 ItemsSource = packs.Select(pack =>
                 {
                     long totalBytes = pack.Packages.Sum(p => p.Bytes + p.PersistentBytes);
-                    int tracedCount = pack.Packages.Count(p => !string.IsNullOrEmpty(p.VoiceGroupId));
+                    int tracedCount = pack.Packages.Count(p => p.LinkedChapters.Count > 0);
                     int lockedCount = pack.Packages.Count(p => p.IsStubbedLocked);
                     return string.Format("Cutscene_VoicePackDetailedSummary".GetLocalized(),
                         pack.LanguageKey.GetLocalized(), pack.Packages.Count, tracedCount, lockedCount, FormatSize(totalBytes));
@@ -110,18 +149,16 @@ public sealed partial class CutsceneResourcesWindow
                     return;
 
                 packages.ItemsSource = packs[languages.SelectedIndex].Packages
-                    .Select(package =>
+                    .GroupBy(package => package.LinkedChapters.Count > 0
+                        ? string.Join(" · ", package.LinkedChapters.Select(chapter => chapter.Title).Distinct())
+                        : "Cutscene_VoiceCoreProtected".GetLocalized())
+                    .OrderBy(group => group.Key, StringComparer.CurrentCulture)
+                    .Select(group => new TextBlock
                     {
-                        long totalPkgBytes = package.Bytes + package.PersistentBytes;
-                        string sizeText = package.IsStubbedLocked
-                            ? "Cutscene_StubbedLockedShort".GetLocalized()
-                            : FormatSize(totalPkgBytes);
-                        string traceText = package.LinkedSummary is not null
-                            ? $"{package.Name} · {sizeText} · [{package.VoiceGroupId}] {package.LinkedSummary}"
-                            : $"{package.Name} · {sizeText} · {"Cutscene_VoiceCoreProtected".GetLocalized()}";
-                        return traceText;
-                    })
-                    .ToArray();
+                        Text = $"{group.Key} · {FormatSize(group.Sum(package => package.Bytes + package.PersistentBytes))}",
+                        TextWrapping = TextWrapping.Wrap,
+                        Margin = new Thickness(0, 4, 0, 4)
+                    }).ToArray();
             };
             languages.SelectedIndex = 0;
             var content = new StackPanel { Spacing = 10 };
@@ -311,13 +348,16 @@ public sealed partial class CutsceneResourcesWindow
             }
 
             SetBusy(true, "Cutscene_BypassApplying".GetLocalized());
+            string resRevision = resBox.Text;
+            string silenceRevision = silenceBox.Text;
+            string dataRevision = dataBox.Text;
             CutscenePersistentBypassReport report = await Task.Run(() =>
                 CutsceneProtectionService.ApplyPersistentBypassAsync(
                     gameDir,
                     scheme.IsOversea,
-                    resBox.Text,
-                    silenceBox.Text,
-                    dataBox.Text,
+                    resRevision,
+                    silenceRevision,
+                    dataRevision,
                     token), token);
 
             if (!_closed)
@@ -337,6 +377,9 @@ public sealed partial class CutsceneResourcesWindow
 
     private async void OnAutoSetupToolsClick(object sender, RoutedEventArgs args)
     {
+        if (!ShowMediaActions)
+            return;
+
         await RunResourceActionAsync("Cutscene_ToolDownloading", "Cutscene_ToolDownloadFailed", async token =>
         {
             var progress = new Progress<string>(msg =>
@@ -369,6 +412,9 @@ public sealed partial class CutsceneResourcesWindow
 
     private void OnClearPreviewCacheClick(object sender, RoutedEventArgs args)
     {
+        if (!ShowMediaActions || _busy)
+            return;
+
         long freed = CutsceneMediaService.ClearPreviewCache();
         ShowNotice(InfoBarSeverity.Success,
             string.Format("Cutscene_PreviewCacheCleared".GetLocalized(), FormatSize(freed)));
@@ -383,19 +429,19 @@ public sealed partial class CutsceneResourcesWindow
 
     private async void OnPlayLocalCutsceneClick(object sender, RoutedEventArgs args)
     {
-        if (sender is Button { Tag: CutsceneResourceRow row } && row.IsVideo)
+        if (ShowMediaActions && sender is Button { Tag: CutsceneResourceRow row } && row.IsVideo)
             await PlayLocalCutsceneAsync(row);
     }
 
     private async void OnExportLocalCutsceneClick(object sender, RoutedEventArgs args)
     {
-        if (sender is Button { Tag: CutsceneResourceRow row } && row.IsVideo)
+        if (ShowMediaActions && sender is Button { Tag: CutsceneResourceRow row } && row.IsVideo)
             await ExportSingleCutsceneAsync(row);
     }
 
     private async void OnExportChapterClick(object sender, RoutedEventArgs args)
     {
-        if (sender is Button { Tag: CutsceneChapterRow chapter })
+        if (ShowMediaActions && sender is Button { Tag: CutsceneChapterRow chapter })
             await ExportChapterAsync(chapter);
     }
 
@@ -446,7 +492,7 @@ public sealed partial class CutsceneResourcesWindow
 
             var playerWindow = new CutscenePlayerWindow(
                 row.DisplayName,
-                $"{row.Chapter.Title} · {video.Name}",
+                $"{video.Chapter.Title} · {row.DisplayName}",
                 cachedMkv,
                 cacheDir,
                 ffmpeg,

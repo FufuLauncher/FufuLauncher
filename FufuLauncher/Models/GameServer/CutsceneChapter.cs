@@ -8,11 +8,15 @@ using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Models.GameServer;
 
-internal enum CutsceneCategory { Archon, Story, Event, Tribal, World, Other }
+internal enum CutsceneCategory { Archon, Story, Hangout, Event, Tribal, World, Other }
 
 internal sealed partial record CutsceneChapter(CutsceneCategory Category, string TitleKey, string QuestId = "",
     IReadOnlyDictionary<string, string>? Titles = null, Version? ReleaseVersion = null, int QuestChapterId = 0)
 {
+    // Display Bough Keeper: Dainsleif with the Archon Quest chapter it introduces.
+    internal static CutsceneCategory? GetCategoryOverride(int questChapterId) =>
+        questChapterId == 1105 ? CutsceneCategory.Archon : null;
+
     public static CutsceneChapter FromFileName(string name)
     {
         string file = Path.GetFileNameWithoutExtension(name).ToUpperInvariant();
@@ -66,32 +70,10 @@ internal sealed partial record CutsceneChapter(CutsceneCategory Category, string
         return new(category, titleKey, questId);
     }
 
-    public string Title => Titles is not null ? CutsceneNames.Localize(Titles)
-        : QuestId.Length == 0 ? TitleKey.GetLocalized() : $"{TitleKey.GetLocalized()} · {QuestId}";
+    public string Title => Titles is not null ? CutsceneNames.Localize(Titles) : TitleKey.GetLocalized();
     public string Label => $"Cutscene_Category_{Category}".GetLocalized();
 
-    public static CutsceneChapter FromVoiceGroup(string groupId, IReadOnlyList<string> videos,
-        IReadOnlyList<CutsceneVoiceQuestRef> quests)
-    {
-        if (videos.Count > 0)
-        {
-            CutsceneChapter fromVideo = FromFileName(videos[0]);
-            if (fromVideo.QuestId.Length > 0 || fromVideo.TitleKey != "Cutscene_Category_Other")
-                return fromVideo with { QuestId = string.IsNullOrEmpty(fromVideo.QuestId) ? $"#{groupId}" : fromVideo.QuestId };
-        }
-
-        int chapterId = quests.Select(q => q.ChapterId).FirstOrDefault(id => id > 0);
-        CutsceneCategory category = groupId switch
-        {
-            _ when groupId.StartsWith("1", StringComparison.Ordinal) => CutsceneCategory.Archon,
-            _ when groupId.StartsWith("2", StringComparison.Ordinal) => CutsceneCategory.Story,
-            _ when groupId.StartsWith("4", StringComparison.Ordinal) => CutsceneCategory.Event,
-            _ when groupId.StartsWith("5", StringComparison.Ordinal) => CutsceneCategory.World,
-            _ => CutsceneCategory.Other
-        };
-        string suffix = chapterId > 0 ? $"#{chapterId}" : $"#{groupId}";
-        return new CutsceneChapter(category, $"Cutscene_Category_{category}", suffix, QuestChapterId: chapterId);
-    }
+    public static CutsceneChapter UnclassifiedVoice { get; } = new(CutsceneCategory.Other, "Cutscene_UnclassifiedVoice");
 
     [GeneratedRegex("(AQ|LQ|EQ|WQ)_?(\\d+)", RegexOptions.CultureInvariant)]
     private static partial Regex QuestCode();

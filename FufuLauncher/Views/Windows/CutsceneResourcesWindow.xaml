@@ -63,6 +63,7 @@
                 <Style x:Key="CutsceneStoryBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneStoryBadgeBrush}" />
                 </Style>
+                <Style x:Key="CutsceneHangoutBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneStoryBadgeStyle}" />
                 <Style x:Key="CutsceneEventBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneEventBadgeBrush}" />
                 </Style>
@@ -152,145 +153,173 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1" Margin="16,10,16,10" Spacing="10">
-            <Border Padding="16,12" CornerRadius="8" BorderThickness="1"
-                    Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <StackPanel Spacing="8">
-                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                        <StackPanel Spacing="4" VerticalAlignment="Center">
-                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                <TextBlock x:Name="InstallSummary" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                <TextBlock x:Name="NetChangeText" Grid.Column="1" FontSize="16" FontWeight="SemiBold"
-                                           VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                            </Grid>
-                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                                <TextBlock x:Name="GameVersionText" Style="{StaticResource CaptionTextBlockStyle}" TextTrimming="CharacterEllipsis"
-                                           ToolTipService.ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" VerticalAlignment="Center" />
-                                <HyperlinkButton x:Name="QuickCatalogUpdateLink"
-                                                 Content="{helpers:Loc Key=Cutscene_OneClickCatalogUpdate}"
-                                                 Click="OnUpdateNameCatalogClick"
-                                                 Padding="4,0" FontSize="12" VerticalAlignment="Center" />
+        <StackPanel Grid.Row="1" Margin="24,12,24,12" Spacing="10">
+            <StackPanel x:Name="ManagementHeader" Spacing="12" Visibility="Collapsed">
+                <Border Padding="16,12" CornerRadius="8" BorderThickness="1"
+                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                    <StackPanel Spacing="10">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                            <StackPanel Spacing="4" VerticalAlignment="Center">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                    <TextBlock x:Name="InstallSummary" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                    <TextBlock x:Name="NetChangeText" Grid.Column="1" FontSize="16" FontWeight="SemiBold"
+                                               VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                                </Grid>
+                                <TextBlock x:Name="GameVersionText" Style="{StaticResource CaptionTextBlockStyle}"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                             </StackPanel>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <HyperlinkButton x:Name="QuickCatalogUpdateLink" Grid.Column="1"
+                                             Content="{helpers:Loc Key=Cutscene_CatalogUpdate}" Click="OnUpdateNameCatalogClick"
+                                             VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid Height="7" CornerRadius="3.5" Background="{ThemeResource ControlFillColorDefaultBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="RetainedColumn" Width="0*" />
+                                <ColumnDefinition x:Name="RemovalColumn" Width="0*" />
+                                <ColumnDefinition x:Name="DownloadColumn" Width="0*" />
+                                <ColumnDefinition x:Name="AbsentColumn" Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{ThemeResource AccentFillColorDefaultBrush}" />
+                            <Border Grid.Column="1" Background="{ThemeResource SystemFillColorCriticalBrush}" />
+                            <Border Grid.Column="2" Background="{ThemeResource SystemFillColorSuccessBrush}" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
+                    <AutoSuggestBox x:Name="SearchBox" PlaceholderText="{helpers:Loc Key=Cutscene_Search}"
+                                    TextChanged="OnSearchChanged" AutomationProperties.Name="{helpers:Loc Key=Cutscene_Search}">
+                        <AutoSuggestBox.QueryIcon>
+                            <SymbolIcon Symbol="Find" />
+                        </AutoSuggestBox.QueryIcon>
+                    </AutoSuggestBox>
+                    <DropDownButton x:Name="TravelerButton" Grid.Column="1" Content="{helpers:Loc Key=Cutscene_BatchMenu}"
+                                    IsEnabled="False">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem x:Name="RemoveAetherItem" Text="{helpers:Loc Key=Cutscene_RemoveAether}"
+                                                Click="OnRemoveAetherClick" />
+                                <MenuFlyoutItem x:Name="RemoveLumineItem" Text="{helpers:Loc Key=Cutscene_RemoveLumine}"
+                                                Click="OnRemoveLumineClick" />
+                                <MenuFlyoutItem x:Name="ClearTravelerItem" Text="{helpers:Loc Key=Cutscene_ClearTraveler}"
+                                                Click="OnClearTravelerClick" />
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem x:Name="QueueLinkedAudioItem" Text="{helpers:Loc Key=Cutscene_QueueLinkedAudio}"
+                                                Click="OnQueueLinkedAudioClick" />
+                                <MenuFlyoutSubItem x:Name="QueueAudioByLangSubMenu" Text="{helpers:Loc Key=Cutscene_QueueAudioByLang}">
+                                    <MenuFlyoutItem x:Name="QueueChineseAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceChinese}"
+                                                    Tag="Chinese" Click="OnQueueAudioByLanguageClick" />
+                                    <MenuFlyoutItem x:Name="QueueEnglishAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceEnglish}"
+                                                    Tag="English(US)" Click="OnQueueAudioByLanguageClick" />
+                                    <MenuFlyoutItem x:Name="QueueJapaneseAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceJapanese}"
+                                                    Tag="Japanese" Click="OnQueueAudioByLanguageClick" />
+                                    <MenuFlyoutItem x:Name="QueueKoreanAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceKorean}"
+                                                    Tag="Korean" Click="OnQueueAudioByLanguageClick" />
+                                </MenuFlyoutSubItem>
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+                    <DropDownButton x:Name="ResourceActionsButton" Grid.Column="2" Content="{helpers:Loc Key=Cutscene_ResourceActions}">
+                        <DropDownButton.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogUpdate}" Click="OnUpdateNameCatalogClick" />
+                                <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogImport}" Click="OnImportCatalogClick" />
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_VoicePacks}" Click="OnVoicePacksClick" />
+                                <MenuFlyoutItem x:Name="LockCleanedItem" Text="{helpers:Loc Key=Cutscene_LockCleaned}"
+                                                Click="OnLockCleanedClick" />
+                                <MenuFlyoutItem x:Name="UnlockCleanedItem" Text="{helpers:Loc Key=Cutscene_UnlockCleaned}"
+                                                Click="OnUnlockCleanedClick" />
+                                <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_BypassCheck}" Click="OnPersistentBypassClick" />
+                                <MenuFlyoutSeparator x:Name="MediaToolsSeparator" Visibility="Collapsed" />
+                                <MenuFlyoutItem x:Name="AutoSetupToolsItem" Text="{helpers:Loc Key=Cutscene_AutoSetupTools}"
+                                                Click="OnAutoSetupToolsClick" Visibility="Collapsed" />
+                                <MenuFlyoutItem x:Name="ChooseDecoderItem" Text="{helpers:Loc Key=Cutscene_ChooseDecoder}"
+                                                Click="OnChooseDecoderClick" Visibility="Collapsed" />
+                                <MenuFlyoutItem x:Name="ChooseFfmpegItem" Text="{helpers:Loc Key=Cutscene_ChooseFfmpeg}"
+                                                Click="OnChooseFfmpegClick" Visibility="Collapsed" />
+                                <MenuFlyoutItem x:Name="ClearPreviewCacheItem" Text="{helpers:Loc Key=Cutscene_ClearPreviewCache}"
+                                                Click="OnClearPreviewCacheClick" Visibility="Collapsed" />
+                            </MenuFlyout>
+                        </DropDownButton.Flyout>
+                    </DropDownButton>
+                    <Button x:Name="RefreshButton" Grid.Column="3" Click="OnRefreshClick"
+                            ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_Refresh}"
+                            AutomationProperties.Name="{helpers:Loc Key=Cutscene_Refresh}">
+                        <SymbolIcon Symbol="Refresh" />
+                    </Button>
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto" ColumnSpacing="12">
+                    <ComboBox x:Name="ResourceScopeFilter" SelectedIndex="0" SelectionChanged="OnResourceScopeChanged"
+                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_ResourceScope}" MinWidth="150">
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAll}" Tag="All" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeVideo}" Tag="Video" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAudio}" Tag="Audio" />
+                    </ComboBox>
+                    <ComboBox x:Name="AudioLanguageFilter" Grid.Column="1" SelectedIndex="0" SelectionChanged="OnAudioLanguageChanged"
+                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_AudioLanguageFilter}" MinWidth="130">
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_AllLanguages}" Tag="" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceChinese}" Tag="Chinese" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceEnglish}" Tag="English(US)" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceJapanese}" Tag="Japanese" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceKorean}" Tag="Korean" />
+                    </ComboBox>
+                    <ComboBox x:Name="SortDirection" Grid.Column="2" SelectedIndex="1" SelectionChanged="OnSortChanged"
+                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_SortByRelease}" MinWidth="130">
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortAscending}" />
+                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortDescending}" />
+                    </ComboBox>
+                    <ScrollViewer Grid.Column="3" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Hidden"
+                                  HorizontalContentAlignment="Stretch"
+                                  VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal" Spacing="14" HorizontalAlignment="Right" VerticalAlignment="Center">
                             <CheckBox x:Name="ShowReleaseVersion" Content="{helpers:Loc Key=Cutscene_ShowReleaseVersion}"
                                       ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}" MinWidth="0" MinHeight="26"
-                                      Padding="8,0,0,0" VerticalContentAlignment="Center"
-                                      IsChecked="False" Click="OnMetadataDisplayChanged" />
+                                      IsChecked="False" Click="OnDisplayOptionsChanged" />
                             <CheckBox x:Name="ShowClipCount" Content="{helpers:Loc Key=Cutscene_ShowClipCount}"
                                       ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}" MinWidth="0" MinHeight="26"
-                                      Padding="8,0,0,0" VerticalContentAlignment="Center"
-                                      IsChecked="False" Click="OnMetadataDisplayChanged" />
+                                      IsChecked="False" Click="OnDisplayOptionsChanged" />
+                            <CheckBox x:Name="ShowPlaybackExport" Content="{helpers:Loc Key=Cutscene_ShowPlaybackExport}"
+                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}" MinWidth="0" MinHeight="26"
+                                      IsChecked="False" Click="OnDisplayOptionsChanged" />
                         </StackPanel>
-                    </Grid>
-                    <Grid Height="6" Background="{ThemeResource ControlStrokeColorDefaultBrush}" CornerRadius="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="RetainedColumn" Width="0*" />
-                            <ColumnDefinition x:Name="RemovalColumn" Width="0*" />
-                            <ColumnDefinition x:Name="DownloadColumn" Width="0*" />
-                            <ColumnDefinition x:Name="AbsentColumn" Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Border Background="{ThemeResource AccentFillColorDefaultBrush}" />
-                        <Border Grid.Column="1" Background="{ThemeResource SystemFillColorCriticalBrush}" />
-                        <Border Grid.Column="2" Background="{ThemeResource SystemFillColorSuccessBrush}" />
-                    </Grid>
-                </StackPanel>
-            </Border>
+                    </ScrollViewer>
+                    <ToggleButton x:Name="PendingOnlyButton" Grid.Column="4" Click="OnPendingOnlyClick"
+                                  CornerRadius="14" VerticalAlignment="Center" Visibility="Collapsed" />
+                </Grid>
 
-            <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
-                <AutoSuggestBox x:Name="SearchBox" PlaceholderText="{helpers:Loc Key=Cutscene_Search}"
-                                TextChanged="OnSearchChanged" AutomationProperties.Name="{helpers:Loc Key=Cutscene_Search}">
-                    <AutoSuggestBox.QueryIcon>
-                        <SymbolIcon Symbol="Find" />
-                    </AutoSuggestBox.QueryIcon>
-                </AutoSuggestBox>
-                <DropDownButton x:Name="TravelerButton" Grid.Column="1" Content="{helpers:Loc Key=Cutscene_BatchMenu}"
-                                IsEnabled="False">
-                    <DropDownButton.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem x:Name="RemoveAetherItem" Text="{helpers:Loc Key=Cutscene_RemoveAether}"
-                                            Click="OnRemoveAetherClick" />
-                            <MenuFlyoutItem x:Name="RemoveLumineItem" Text="{helpers:Loc Key=Cutscene_RemoveLumine}"
-                                            Click="OnRemoveLumineClick" />
-                            <MenuFlyoutItem x:Name="ClearTravelerItem" Text="{helpers:Loc Key=Cutscene_ClearTraveler}"
-                                            Click="OnClearTravelerClick" />
-                            <MenuFlyoutSeparator />
-                            <MenuFlyoutItem x:Name="QueueLinkedAudioItem" Text="{helpers:Loc Key=Cutscene_QueueLinkedAudio}"
-                                            Click="OnQueueLinkedAudioClick" />
-                            <MenuFlyoutSubItem x:Name="QueueAudioByLangSubMenu" Text="{helpers:Loc Key=Cutscene_QueueAudioByLang}">
-                                <MenuFlyoutItem x:Name="QueueChineseAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceChinese}"
-                                                Tag="Chinese" Click="OnQueueAudioByLanguageClick" />
-                                <MenuFlyoutItem x:Name="QueueEnglishAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceEnglish}"
-                                                Tag="English(US)" Click="OnQueueAudioByLanguageClick" />
-                                <MenuFlyoutItem x:Name="QueueJapaneseAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceJapanese}"
-                                                Tag="Japanese" Click="OnQueueAudioByLanguageClick" />
-                                <MenuFlyoutItem x:Name="QueueKoreanAudioItem" Text="{helpers:Loc Key=Cutscene_VoiceKorean}"
-                                                Tag="Korean" Click="OnQueueAudioByLanguageClick" />
-                            </MenuFlyoutSubItem>
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
-                <DropDownButton x:Name="ResourceActionsButton" Grid.Column="2" Content="{helpers:Loc Key=Cutscene_ResourceActions}">
-                    <DropDownButton.Flyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogUpdate}" Click="OnUpdateNameCatalogClick" />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogImport}" Click="OnImportCatalogClick" />
-                            <MenuFlyoutSeparator />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_VoicePacks}" Click="OnVoicePacksClick" />
-                            <MenuFlyoutItem x:Name="LockCleanedItem" Text="{helpers:Loc Key=Cutscene_LockCleaned}"
-                                            Click="OnLockCleanedClick" />
-                            <MenuFlyoutItem x:Name="UnlockCleanedItem" Text="{helpers:Loc Key=Cutscene_UnlockCleaned}"
-                                            Click="OnUnlockCleanedClick" />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_BypassCheck}" Click="OnPersistentBypassClick" />
-                            <MenuFlyoutSeparator />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_AutoSetupTools}" Click="OnAutoSetupToolsClick" />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_ChooseDecoder}" Click="OnChooseDecoderClick" />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_ChooseFfmpeg}" Click="OnChooseFfmpegClick" />
-                            <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_ClearPreviewCache}" Click="OnClearPreviewCacheClick" />
-                        </MenuFlyout>
-                    </DropDownButton.Flyout>
-                </DropDownButton>
-                <Button x:Name="RefreshButton" Grid.Column="3" Click="OnRefreshClick"
-                        ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_Refresh}"
-                        AutomationProperties.Name="{helpers:Loc Key=Cutscene_Refresh}">
-                    <SymbolIcon Symbol="Refresh" />
-                </Button>
-            </Grid>
-
-            <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="8">
-                <ComboBox x:Name="ResourceScopeFilter" SelectedIndex="0" SelectionChanged="OnResourceScopeChanged"
-                          MinWidth="126" VerticalAlignment="Top"
-                          AutomationProperties.Name="{helpers:Loc Key=Cutscene_ResourceScope}">
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAll}" Tag="All" />
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeVideo}" Tag="Video" />
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAudio}" Tag="Audio" />
-                </ComboBox>
-                <ComboBox x:Name="AudioLanguageFilter" Grid.Column="1" SelectedIndex="0" SelectionChanged="OnAudioLanguageChanged"
-                          MinWidth="104" VerticalAlignment="Top"
-                          AutomationProperties.Name="{helpers:Loc Key=Cutscene_AudioLanguageFilter}">
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_AllLanguages}" Tag="" />
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceChinese}" Tag="Chinese" />
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceEnglish}" Tag="English(US)" />
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceJapanese}" Tag="Japanese" />
-                    <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceKorean}" Tag="Korean" />
-                </ComboBox>
-                <ScrollViewer Grid.Column="2" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
+                <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
                               VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
-                    <!-- WinUI draws the scroll bar over the content at the bottom of the viewer. -->
-                    <StackPanel x:Name="Filters" Orientation="Horizontal" Spacing="6" Margin="0,0,0,18" />
+                    <StackPanel x:Name="Filters" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8" />
                 </ScrollViewer>
-                <ToggleButton x:Name="PendingOnlyButton" Grid.Column="3" Click="OnPendingOnlyClick"
-                              CornerRadius="14" VerticalAlignment="Top" Visibility="Collapsed" />
-            </Grid>
+            </StackPanel>
             <InfoBar x:Name="Notice" IsOpen="False" IsClosable="True" />
         </StackPanel>
 
-        <Grid Grid.Row="2" Margin="16,0,16,12" RowDefinitions="Auto,*"
+        <Border x:Name="CatalogSetup" Grid.Row="2" Margin="24,16" Padding="30,26" MaxWidth="560"
+                HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderThickness="1"
+                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+            <StackPanel Spacing="12">
+                <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogSetupTitle}" Style="{StaticResource TitleTextBlockStyle}"
+                           TextWrapping="Wrap" />
+                <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogRequired}" TextWrapping="Wrap"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,4,0,0">
+                    <Button x:Name="FetchCatalogButton" Style="{StaticResource AccentButtonStyle}"
+                            Content="{helpers:Loc Key=Cutscene_CatalogFetch}" Click="OnUpdateNameCatalogClick" />
+                    <Button x:Name="ImportCatalogButton" Content="{helpers:Loc Key=Cutscene_CatalogImport}"
+                            Click="OnImportCatalogClick" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Grid x:Name="ManagementList" Grid.Row="2" Margin="24,0,24,12" RowDefinitions="Auto,*" Visibility="Collapsed"
               CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
               Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-            <Grid Padding="12,6" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10"
+            <Grid Padding="12,8" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10"
                   BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                 <CheckBox x:Name="KeepVisible" MinWidth="0" VerticalAlignment="Center" Click="OnKeepVisibleClick"
                           AutomationProperties.Name="{helpers:Loc Key=Cutscene_KeepVisible}" />
@@ -299,18 +328,8 @@
                     <TextBlock Text="{helpers:Loc Key=Cutscene_KeepHint}" Style="{StaticResource CaptionTextBlockStyle}"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                 </StackPanel>
-                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
-                    <ComboBox x:Name="SortMode" SelectedIndex="0" SelectionChanged="OnSortChanged"
-                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_SortMode}">
-                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortByRelease}" />
-                    </ComboBox>
-                    <ComboBox x:Name="SortDirection" SelectedIndex="1" SelectionChanged="OnSortChanged"
-                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_SortDirection}">
-                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortAscending}" />
-                        <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortDescending}" />
-                    </ComboBox>
-                    <Button x:Name="ExpandButton" Click="OnExpandClick" Content="{helpers:Loc Key=Cutscene_ExpandAll}" />
-                </StackPanel>
+                <Button x:Name="ExpandButton" Grid.Column="2" VerticalAlignment="Center"
+                        Click="OnExpandClick" Content="{helpers:Loc Key=Cutscene_ExpandAll}" />
             </Grid>
 
             <ListView Grid.Row="1" x:Name="ChapterList" SelectionMode="None"
@@ -325,6 +344,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="views:CutsceneChapterRow">
                         <Grid Padding="12,3,12,3" ColumnDefinitions="Auto,*" ColumnSpacing="6"
+                              ToolTipService.ToolTip="{x:Bind ProtectionHint, Mode=OneWay}"
                               BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
                             <CheckBox IsChecked="{x:Bind IsKept, Mode=OneWay}" IsEnabled="{x:Bind CanToggle, Mode=OneWay}"
                                       Click="OnKeepChapterClick"
@@ -380,7 +400,7 @@
                                                 </Border>
                                                 <StackPanel Grid.Column="2" Spacing="2" VerticalAlignment="Center">
                                                     <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
-                                                               ToolTipService.ToolTip="{Binding Name}" />
+                                                               ToolTipService.ToolTip="{Binding DisplayName}" />
                                                     <TextBlock Text="{Binding StateLabel}" Style="{StaticResource CaptionTextBlockStyle}"
                                                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                                                TextWrapping="Wrap" />
@@ -415,31 +435,33 @@
                        TextWrapping="Wrap" TextAlignment="Center" Visibility="Collapsed" />
         </Grid>
 
-        <Border Grid.Row="3" Padding="16,10" BorderThickness="0,1,0,0"
+        <Border x:Name="Footer" Grid.Row="3" Padding="24,10" BorderThickness="0,1,0,0" Visibility="Collapsed"
                 BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                 Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" ColumnSpacing="12" RowSpacing="6">
-                <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
-                    <TextBlock x:Name="RemovalText" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
-                    <TextBlock x:Name="DownloadText" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
-                    <CheckBox x:Name="StubLockProtectionCheck"
-                              Content="{helpers:Loc Key=Cutscene_StubLockOption}"
-                              IsChecked="True"
-                              MinWidth="0"
-                              VerticalAlignment="Center"
-                              ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_StubLockOptionHint}" />
-                </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
-                    <Button x:Name="CancelButton" Content="{helpers:Loc Key=CancelBtn}" Click="OnCancelClick"
-                            Visibility="Collapsed" />
-                    <Button x:Name="ApplyButton" Style="{StaticResource AccentButtonStyle}" Click="OnApplyClick"
+            <StackPanel Spacing="10">
+                <Grid x:Name="ChangeActions" ColumnDefinitions="*,Auto" ColumnSpacing="16" Visibility="Collapsed">
+                    <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+                        <TextBlock x:Name="RemovalText" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
+                        <TextBlock x:Name="DownloadText" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
+                        <CheckBox x:Name="StubLockProtectionCheck"
+                                  Content="{helpers:Loc Key=Cutscene_StubLockOption}"
+                                  IsChecked="True"
+                                  MinWidth="0"
+                                  VerticalAlignment="Center"
+                                  ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_StubLockOptionHint}" />
+                    </StackPanel>
+                    <Button x:Name="ApplyButton" Grid.Column="1" Style="{StaticResource AccentButtonStyle}" Click="OnApplyClick"
                             Content="{helpers:Loc Key=Cutscene_Apply}" IsEnabled="False" />
-                </StackPanel>
-                <StackPanel x:Name="OperationProgress" Grid.Row="1" Grid.ColumnSpan="2" Spacing="4" Visibility="Collapsed">
-                    <ProgressBar x:Name="WorkProgress" IsIndeterminate="True" />
-                    <TextBlock x:Name="WorkStatus" Style="{StaticResource CaptionTextBlockStyle}" TextTrimming="CharacterEllipsis" />
-                </StackPanel>
-            </Grid>
+                </Grid>
+                <Grid x:Name="OperationProgress" ColumnDefinitions="*,Auto" ColumnSpacing="16" Visibility="Collapsed">
+                    <StackPanel Spacing="4" VerticalAlignment="Center">
+                        <ProgressBar x:Name="WorkProgress" IsIndeterminate="True" />
+                        <TextBlock x:Name="WorkStatus" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <Button x:Name="CancelButton" Grid.Column="1"
+                            Content="{helpers:Loc Key=CancelBtn}" Click="OnCancelClick" />
+                </Grid>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

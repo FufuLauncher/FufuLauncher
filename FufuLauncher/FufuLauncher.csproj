@@ -113,6 +113,7 @@
         <Content Include="Strings\es-MX\Resources.resw"/>
         <Content Include="Strings\hi-IN\Resources.resw"/>
         <Content Remove="Plugins\Avatar\**"/>
+        <Content Remove="Assets\CutsceneNames.json"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -126,6 +127,7 @@
         </None>
         <None Update="Licenses\TeyvatGuide.txt" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest"/>
         <None Remove="Plugins\Avatar\**"/>
+        <None Remove="Assets\CutsceneNames.json"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -191,7 +193,6 @@
 
     <ItemGroup>
         <EmbeddedResource Include="Assets\bg.png" LogicalName="FufuLauncher.Assets.bg.png"/>
-        <EmbeddedResource Include="Assets\CutsceneNames.json" LogicalName="FufuLauncher.Assets.CutsceneNames.json" />
         <EmbeddedResource Remove="Plugins\Avatar\**"/>
     </ItemGroup>
 

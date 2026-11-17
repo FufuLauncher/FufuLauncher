@@ -10,18 +10,27 @@ using FufuLauncher.Protobuf;
 
 namespace FufuLauncher.Services.GameServer;
 
+internal enum CutsceneRemovalProtection
+{
+    None,
+    Unclassified,
+    HistoryUnavailable,
+    MissingInHistory,
+    LinkedVideo,
+    CurrentChapter
+}
+
 internal sealed record CutsceneAsset(
     AssetProperty Asset,
     CutsceneChapter Chapter,
-    bool CanRemove,
+    CutsceneRemovalProtection RemovalProtection,
     long LocalBytes,
     long PersistentBytes,
     CutsceneLocalState LocalState,
     CutsceneTraveler? Traveler,
-    CutsceneName? Metadata,
-    string? VoiceGroupId = null,
-    IReadOnlyList<string>? LinkedAudioPackages = null)
+    CutsceneName? Metadata)
 {
+    public bool CanRemove => RemovalProtection == CutsceneRemovalProtection.None;
     public string Name => Path.GetFileName(Asset.AssetName);
     public bool IsInstalled => LocalBytes == Asset.AssetSize || PersistentBytes == Asset.AssetSize;
     public bool IsStubbedLocked => !IsInstalled && LocalState == CutsceneLocalState.StubbedLocked;
@@ -31,25 +40,29 @@ internal sealed record CutsceneAsset(
 
 internal sealed record CutsceneAudioAsset(
     AssetProperty Asset,
+    SophonBranchInfo Source,
     string LanguageFolder,
     string LanguageKey,
     string RelativePath,
-    CutsceneChapter Chapter,
-    string VoiceGroupId,
     IReadOnlyList<string> LinkedVideoNames,
     IReadOnlyList<CutsceneChapter> LinkedChapters,
-    bool IsSharedAcrossChapters,
-    bool CanRemove,
+    bool IsQuestVoice,
+    CutsceneRemovalProtection RemovalProtection,
     long LocalBytes,
     long PersistentBytes,
     CutsceneLocalState LocalState)
 {
+    public bool CanRemove => RemovalProtection == CutsceneRemovalProtection.None;
+    public bool IsSharedAcrossChapters => LinkedChapters.Count > 1;
     public string Name => Path.GetFileName(Asset.AssetName);
     public bool IsInstalled => LocalBytes == Asset.AssetSize || PersistentBytes == Asset.AssetSize;
     public bool IsStubbedLocked => !IsInstalled && LocalState == CutsceneLocalState.StubbedLocked;
     public long DiskBytes => LocalBytes + PersistentBytes;
     public long DownloadBytes => Asset.AssetChunks.Sum(chunk => chunk.ChunkSize);
 }
+
+internal sealed record CutsceneVoiceManifestAsset(
+    AssetProperty Asset, SophonBranchInfo Source, string LanguageFolder, string RelativePath, string LanguageKey);
 
 internal sealed record CutsceneCatalog(
     string GameDirectory,
@@ -64,35 +77,37 @@ internal sealed record CutsceneCatalog(
     SophonBranchInfo Source,
     IReadOnlyList<CutsceneAsset> Videos,
     IReadOnlyList<CutsceneAudioAsset> Audios,
+    IReadOnlyList<CutsceneVoiceManifestAsset> VoiceAssets,
+    Dictionary<string, string>? EarlierVideoHashes,
+    Dictionary<string, string>? EarlierAudioHashes,
     bool HasHistory);
 
 internal sealed record CutsceneChange(CutsceneAsset Video, bool Keep, bool RemoveUnusedTraveler = false);
 internal sealed record CutsceneAudioChange(CutsceneAudioAsset Audio, bool Keep);
 
 internal sealed record CutsceneVoicePackage(
-    string Name,
     long Bytes,
-    long PersistentBytes = 0,
-    bool IsStubbedLocked = false,
-    string? VoiceGroupId = null,
-    string? LinkedSummary = null);
+    long PersistentBytes,
+    bool IsStubbedLocked,
+    IReadOnlyList<CutsceneChapter> LinkedChapters);
 
 internal sealed record CutsceneVoicePack(string LanguageKey, IReadOnlyList<CutsceneVoicePackage> Packages);
 
 public sealed partial class GameUpdateService
 {
-    private static readonly (string Directory, string LabelKey)[] VoiceLanguages =
+    internal static IReadOnlyList<(string Directory, string LabelKey, string MatchingField)> VoiceLanguages { get; } =
     [
-        ("Chinese", "Cutscene_VoiceChinese"),
-        ("English(US)", "Cutscene_VoiceEnglish"),
-        ("Japanese", "Cutscene_VoiceJapanese"),
-        ("Korean", "Cutscene_VoiceKorean")
+        ("Chinese", "Cutscene_VoiceChinese", "zh-cn"),
+        ("English(US)", "Cutscene_VoiceEnglish", "en-us"),
+        ("Japanese", "Cutscene_VoiceJapanese", "ja-jp"),
+        ("Korean", "Cutscene_VoiceKorean", "ko-kr")
     ];
 
     private static readonly Dictionary<string, string> VoiceLanguageKeyMap =
         VoiceLanguages.ToDictionary(item => item.Directory, item => item.LabelKey, StringComparer.OrdinalIgnoreCase);
 
-    internal async Task<CutsceneCatalog> ScanCutscenesAsync(string gameDir, CancellationToken token)
+    internal async Task<CutsceneCatalog> ScanCutscenesAsync(
+        string gameDir, CutsceneNameCatalog activeCatalog, CancellationToken token)
     {
         gameDir = Path.GetFullPath(gameDir);
         GameServerScheme scheme = _configurationService.TryDetectCurrentScheme(gameDir)
@@ -111,8 +126,6 @@ public sealed partial class GameUpdateService
 
         ValidateCutsceneDirectory(videoDir);
         ValidateExistingDirectoryChain(persistentVideoDir);
-        ValidateExistingDirectoryChain(audioDir);
-        ValidateExistingDirectoryChain(persistentAudioDir);
 
         SophonBranchPayload? branchPayload = null;
         try
@@ -124,84 +137,37 @@ public sealed partial class GameUpdateService
         {
         }
 
-        SophonBranchInfo source = await _sophonBuildClient.GetBranchInfoByTagAsync(scheme, version, token)
-            .ConfigureAwait(false);
-        SophonManifestProto manifest = await _sophonBuildClient.DownloadManifestAsync(source, token).ConfigureAwait(false);
+        Dictionary<string, string> voiceFolders = GetInstalledVoiceFolders(audioDir, persistentAudioDir);
+        var (source, manifest, voiceAssets) =
+            await LoadCutsceneManifestsAsync(scheme, version, audioPrefix, voiceFolders, token).ConfigureAwait(false);
         var (earlierVersion, earlierVideos, earlierAudios) = await LoadEarlierResourcesAsync(
-                scheme, version, branchPayload, videoPrefix, audioPrefix, token)
+                scheme, version, branchPayload, videoPrefix, audioPrefix, voiceFolders, token)
             .ConfigureAwait(false);
-
-        CutsceneNameCatalog activeCatalog = CutsceneNameCatalogStore.LoadCurrent();
-        CutsceneNameCatalog builtInCatalog = CutsceneNames.BuiltIn;
-        IReadOnlyDictionary<string, CutsceneVoiceGroup> voiceGroups = activeCatalog.VoiceGroups.Count > 0
-            ? activeCatalog.VoiceGroups
-            : builtInCatalog.VoiceGroups;
-
-        var videoToGroup = new Dictionary<string, CutsceneVoiceGroup>(StringComparer.OrdinalIgnoreCase);
-        var packageToGroup = new Dictionary<string, CutsceneVoiceGroup>(StringComparer.OrdinalIgnoreCase);
-        foreach (CutsceneVoiceGroup group in voiceGroups.Values)
-        {
-            foreach (string vid in group.Videos)
-                videoToGroup.TryAdd(vid, group);
-            foreach (string pkg in group.Packages)
-                packageToGroup.TryAdd(pkg, group);
-        }
 
         AssetProperty[] videoAssets = manifest.Assets.Where(asset => IsPackagedCutscene(asset, videoPrefix)).ToArray();
         var shippedFiles = videoAssets.Select(asset => Path.GetFileName(asset.AssetName))
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
         var videos = new List<CutsceneAsset>(videoAssets.Length);
-        var videoByName = new Dictionary<string, CutsceneAsset>(StringComparer.OrdinalIgnoreCase);
         foreach (AssetProperty asset in videoAssets)
         {
             token.ThrowIfCancellationRequested();
             string name = Path.GetFileName(asset.AssetName);
             CutsceneTraveler? traveler = CutsceneTravelers.FindVariant(name, shippedFiles);
-            CutsceneName? metadata = builtInCatalog.Find(name, traveler);
-            CutsceneChapter chapter = metadata?.Chapter ?? CutsceneChapter.FromFileName(name);
-            bool canRemove = metadata?.AllowRemoval == true
-                || metadata?.AllowRemovalInVersion == version
-                || (chapter.Category != CutsceneCategory.Other && earlierVideos is not null
-                    && earlierVideos.TryGetValue(name, out string? hash)
-                    && hash.Equals(asset.AssetHashMd5, StringComparison.OrdinalIgnoreCase));
-
             string streamingPath = Path.Combine(videoDir, name);
             string persistentPath = Path.Combine(persistentVideoDir, name);
-            long localBytes = GetCutsceneFileSize(streamingPath);
-            long persistentBytes = GetCutsceneFileSize(persistentPath);
-            CutsceneLocalState localState = CutsceneProtectionService.GetLocalState(streamingPath, persistentPath, asset.AssetSize);
-
-            videoToGroup.TryGetValue(name, out CutsceneVoiceGroup? linkedGroup);
-            var cutscene = new CutsceneAsset(
+            videos.Add(new CutsceneAsset(
                 asset,
-                chapter,
-                canRemove,
-                localBytes,
-                persistentBytes,
-                localState,
+                CutsceneChapter.FromFileName(name),
+                CutsceneRemovalProtection.Unclassified,
+                GetCutsceneFileSize(streamingPath),
+                GetCutsceneFileSize(persistentPath),
+                CutsceneProtectionService.GetLocalState(streamingPath, persistentPath, asset.AssetSize),
                 traveler,
-                metadata,
-                linkedGroup?.GroupId,
-                linkedGroup?.Packages);
-            videos.Add(cutscene);
-            videoByName.TryAdd(name, cutscene);
+                null));
         }
 
-        List<CutsceneAudioAsset> audios = BuildTracedAudioAssets(
-            manifest,
-            audioPrefix,
-            audioDir,
-            persistentAudioDir,
-            version,
-            earlierAudios,
-            packageToGroup,
-            videoByName,
-            activeCatalog,
-            builtInCatalog,
-            token);
-
-        return new CutsceneCatalog(
+        var catalog = new CutsceneCatalog(
             gameDir,
             videoDir,
             persistentVideoDir,
@@ -213,9 +179,62 @@ public sealed partial class GameUpdateService
             scheme,
             source,
             videos,
-            audios,
+            [],
+            voiceAssets,
+            earlierVideos,
+            earlierAudios,
             earlierVideos is not null);
+        return RebuildCutsceneAssociations(catalog, activeCatalog, token);
     }
+
+    internal CutsceneCatalog RebuildCutsceneAssociations(
+        CutsceneCatalog catalog, CutsceneNameCatalog activeCatalog, CancellationToken token)
+    {
+        EnsureCutsceneInstallationUnchanged(catalog);
+        ValidateExistingDirectoryChain(catalog.AudioDirectory);
+        ValidateExistingDirectoryChain(catalog.PersistentAudioDirectory);
+
+        var videos = new List<CutsceneAsset>(catalog.Videos.Count);
+        foreach (CutsceneAsset video in catalog.Videos)
+        {
+            token.ThrowIfCancellationRequested();
+            CutsceneName? metadata = activeCatalog.FindByFilename(video.Name);
+            CutsceneChapter chapter = metadata?.Chapter ?? CutsceneChapter.FromFileName(video.Name);
+            CutsceneRemovalProtection protection = HasCutsceneRemovalException(video, catalog.Version)
+                ? CutsceneRemovalProtection.None
+                : chapter.Category == CutsceneCategory.Other
+                    ? CutsceneRemovalProtection.Unclassified
+                    : GetHistoricalProtection(catalog.EarlierVideoHashes, video.Name);
+
+            videos.Add(video with { Chapter = chapter, Metadata = metadata, RemovalProtection = protection });
+        }
+
+        var audios = BuildTracedAudioAssets(catalog, videos, activeCatalog, token);
+        return catalog with { Videos = videos, Audios = audios };
+    }
+
+    private static CutsceneRemovalProtection GetHistoricalProtection(
+        Dictionary<string, string>? earlierHashes, string path)
+    {
+        if (earlierHashes is null)
+            return CutsceneRemovalProtection.HistoryUnavailable;
+        // A historical manifest establishes that the resource was already released.
+        return earlierHashes.ContainsKey(path)
+            ? CutsceneRemovalProtection.None
+            : CutsceneRemovalProtection.MissingInHistory;
+    }
+
+    // Display catalogs can be imported. Keep exceptions for missing history tied to known official files.
+    private static bool HasCutsceneRemovalException(CutsceneAsset video, string version) =>
+        (video.Traveler is not null ? CutsceneNames.CanonicalSceneKey(video.Name) : Path.GetFileNameWithoutExtension(video.Name))
+        .ToUpperInvariant() switch
+        {
+            "CS_BEYOND_BACKSTORY" or "VIDEO_REUNION_67_TEST" or "VIDEO_REUNION_72"
+                or "BATTLEPASS" or "CHANGEWEATHER" or "CS_SHIELDINGRESOURCES_02" => true,
+            "CS_ZD_AQ702318_SN" or "CS_ZD_AQ702323_OD" or "CS_ZD_AQ702514_SR"
+                or "CS_ZD_AQ703109_ZS" => version == "7.2.0",
+            _ => false
+        };
 
     internal CutsceneCatalog RefreshCutscenes(CutsceneCatalog catalog)
     {
@@ -248,7 +267,7 @@ public sealed partial class GameUpdateService
         };
     }
 
-    internal IReadOnlyList<CutsceneVoicePack> ScanLocalVoicePacks(string gameDir, CancellationToken token)
+    internal IReadOnlyList<CutsceneVoicePack> ScanLocalVoicePacks(string gameDir, CutsceneNameCatalog names, CancellationToken token)
     {
         gameDir = Path.GetFullPath(gameDir);
         GameServerScheme scheme = _configurationService.TryDetectCurrentScheme(gameDir)
@@ -257,20 +276,9 @@ public sealed partial class GameUpdateService
         string streamingRoot = Path.Combine(gameDir, dataDir, "StreamingAssets", "AudioAssets");
         string persistentRoot = Path.Combine(gameDir, dataDir, "Persistent", "AudioAssets");
 
-        CutsceneNameCatalog activeCatalog = CutsceneNameCatalogStore.LoadCurrent();
-        CutsceneNameCatalog builtInCatalog = CutsceneNames.BuiltIn;
-        IReadOnlyDictionary<string, CutsceneVoiceGroup> voiceGroups = activeCatalog.VoiceGroups.Count > 0
-            ? activeCatalog.VoiceGroups
-            : builtInCatalog.VoiceGroups;
-        var packageToGroup = new Dictionary<string, CutsceneVoiceGroup>(StringComparer.OrdinalIgnoreCase);
-        foreach (CutsceneVoiceGroup group in voiceGroups.Values)
-        {
-            foreach (string pkg in group.Packages)
-                packageToGroup.TryAdd(pkg, group);
-        }
-
+        var groupsByPackage = GetVoiceGroupsByPackage(names);
         var packs = new List<CutsceneVoicePack>();
-        foreach (var (folder, labelKey) in VoiceLanguages)
+        foreach (var (folder, labelKey, _) in VoiceLanguages)
         {
             token.ThrowIfCancellationRequested();
             string streamingPath = Path.Combine(streamingRoot, folder);
@@ -309,18 +317,8 @@ public sealed partial class GameUpdateService
                 if (sBytes == 0 && pBytes == 0 && !locked)
                     continue;
 
-                string relPath = $"{folder}/{name}";
-                packageToGroup.TryGetValue(relPath, out CutsceneVoiceGroup? group);
-                string? linkedSummary = null;
-                if (group is not null)
-                {
-                    CutsceneChapter? linkedChapter = ResolvePrimaryChapter(group, null, activeCatalog, builtInCatalog);
-                    linkedSummary = linkedChapter is not null
-                        ? linkedChapter.Title
-                        : string.Format("Cutscene_VoiceGroupLabel".GetLocalized(), group.GroupId);
-                }
-
-                packages.Add(new CutsceneVoicePackage(name, sBytes, pBytes, locked, group?.GroupId, linkedSummary));
+                var (_, chapters) = ResolveVoiceLinks(groupsByPackage[$"{folder}/{name}"], names);
+                packages.Add(new CutsceneVoicePackage(sBytes, pBytes, locked, chapters));
             }
 
             if (packages.Count > 0)
@@ -379,6 +377,7 @@ public sealed partial class GameUpdateService
 
         var pendingItems = new List<(
             AssetProperty Asset,
+            SophonBranchInfo Source,
             string Name,
             string StreamingPath,
             string PersistentPath,
@@ -403,6 +402,7 @@ public sealed partial class GameUpdateService
 
             pendingItems.Add((
                 video.Asset,
+                catalog.Source,
                 video.Name,
                 streamingPath,
                 persistentPath,
@@ -428,6 +428,7 @@ public sealed partial class GameUpdateService
 
             pendingItems.Add((
                 audio.Asset,
+                audio.Source,
                 audio.RelativePath,
                 streamingPath,
                 persistentPath,
@@ -467,7 +468,7 @@ public sealed partial class GameUpdateService
             if (item.Keep)
             {
                 CutsceneProtectionService.UnlockCleanedAsset(item.StreamingPath, item.PersistentPath, deleteStub: true);
-                await RestoreAssetAsync(catalog, item.Asset, item.Name, item.StreamingPath, progress, token)
+                await RestoreAssetAsync(catalog, item.Asset, item.Source, item.Name, item.StreamingPath, progress, token)
                     .ConfigureAwait(false);
                 continue;
             }
@@ -557,8 +558,8 @@ public sealed partial class GameUpdateService
         return (lockedCount, unlockedCount);
     }
 
-    private async Task RestoreAssetAsync(CutsceneCatalog catalog, AssetProperty asset, string displayName,
-        string streamingPath, IProgress<GameServerConversionProgress> progress, CancellationToken token)
+    private async Task RestoreAssetAsync(CutsceneCatalog catalog, AssetProperty asset, SophonBranchInfo source,
+        string displayName, string streamingPath, IProgress<GameServerConversionProgress> progress, CancellationToken token)
     {
         string tempParent = Path.GetDirectoryName(streamingPath) ?? catalog.VideoDirectory;
         Directory.CreateDirectory(tempParent);
@@ -568,7 +569,7 @@ public sealed partial class GameUpdateService
         {
             var context = new GameUpdateContext(catalog.GameDirectory, catalog.Scheme, progress, _ => { }, token,
                 chunksDirectory: temp);
-            var op = GameUpdateAssetOperation.Add(catalog.Source.ChunkPrefix, catalog.Source.ChunkSuffix, asset);
+            var op = GameUpdateAssetOperation.Add(source.ChunkPrefix, source.ChunkSuffix, asset);
             await DownloadOperationChunksAsync(context, [op], "GameServer_StageDownloadChunks".GetLocalized())
                 .ConfigureAwait(false);
 
@@ -588,179 +589,166 @@ public sealed partial class GameUpdateService
         }
     }
 
-    private List<CutsceneAudioAsset> BuildTracedAudioAssets(
-        SophonManifestProto manifest,
-        string audioPrefix,
-        string audioDir,
-        string persistentAudioDir,
-        string currentVersion,
-        Dictionary<string, string>? earlierAudios,
-        Dictionary<string, CutsceneVoiceGroup> packageToGroup,
-        Dictionary<string, CutsceneAsset> videoByName,
-        CutsceneNameCatalog activeCatalog,
-        CutsceneNameCatalog builtInCatalog,
-        CancellationToken token)
+    private static List<CutsceneAudioAsset> BuildTracedAudioAssets(CutsceneCatalog catalog,
+        IReadOnlyList<CutsceneAsset> videos, CutsceneNameCatalog names, CancellationToken token)
     {
-        Version.TryParse(currentVersion, out Version? currentVer);
-        var fallbackChapterCache = new Dictionary<string, CutsceneChapter>(StringComparer.OrdinalIgnoreCase);
+        Version.TryParse(catalog.Version, out Version? installedVersion);
+        var groupsByPackage = GetVoiceGroupsByPackage(names);
+        var videosByName = videos.ToLookup(video => CutsceneNames.CanonicalSceneKey(video.Name),
+            StringComparer.OrdinalIgnoreCase);
+        var videosByChapter = videos.Where(video => video.Chapter.QuestChapterId > 0)
+            .ToLookup(video => video.Chapter.QuestChapterId);
         var result = new List<CutsceneAudioAsset>();
 
-        foreach (AssetProperty asset in manifest.Assets)
+        foreach (var (asset, source, languageFolder, relPath, labelKey) in catalog.VoiceAssets)
         {
             token.ThrowIfCancellationRequested();
-            if (!IsPackagedVoiceAudio(asset, audioPrefix, out string languageFolder, out string relPath, out string labelKey))
+            if (!groupsByPackage.Contains(relPath))
                 continue;
 
-            if (!packageToGroup.TryGetValue(relPath, out CutsceneVoiceGroup? group))
-                continue;
+            var groups = groupsByPackage[relPath];
+            var (filenames, chapters) = ResolveVoiceLinks(groups, names);
+            var matchingVideos = filenames.SelectMany(name => videosByName[CutsceneNames.CanonicalSceneKey(name)])
+                .DistinctBy(video => video.Name, StringComparer.OrdinalIgnoreCase).ToArray();
+            string[] linkedVideoNames = matchingVideos.Select(video => video.Name).ToArray();
+            bool protectedVideo = matchingVideos.Any(video => !video.CanRemove)
+                || chapters.SelectMany(chapter => videosByChapter[chapter.QuestChapterId]).Any(video => !video.CanRemove);
+            bool currentChapter = chapters.Any(chapter =>
+                installedVersion is not null && chapter.ReleaseVersion is Version release
+                && (release.Major > installedVersion.Major
+                    || (release.Major == installedVersion.Major && release.Minor >= installedVersion.Minor)));
 
-            var linkedVideos = new List<string>();
-            var linkedChapters = new List<CutsceneChapter>();
-            bool hasProtectedLinkedVideo = false;
-            bool hasProtectedBuiltInChapter = false;
-
-            foreach (string vidName in group.Videos)
+            // The fifth and sixth acts can be cleaned in the 7.2 release, by exact pack identity.
+            bool removableChapterVoice = catalog.Version == "7.2.0"
+                && (relPath.Equals($"{languageFolder}/1049.pck", StringComparison.OrdinalIgnoreCase)
+                    || relPath.Equals($"{languageFolder}/1050.pck", StringComparison.OrdinalIgnoreCase));
+            CutsceneRemovalProtection protection = CutsceneRemovalProtection.None;
+            if (!removableChapterVoice)
             {
-                if (videoByName.TryGetValue(vidName, out CutsceneAsset? cutscene))
+                protection = chapters.Count == 0 && matchingVideos.Length == 0
+                    ? CutsceneRemovalProtection.Unclassified
+                    : GetHistoricalProtection(catalog.EarlierAudioHashes, relPath);
+                if (protection == CutsceneRemovalProtection.None)
                 {
-                    linkedVideos.Add(cutscene.Name);
-                    if (!cutscene.CanRemove)
-                        hasProtectedLinkedVideo = true;
-                    AddDistinctChapter(linkedChapters, activeCatalog.Find(cutscene.Name, cutscene.Traveler)?.Chapter ?? cutscene.Chapter);
-                }
-                else
-                {
-                    linkedVideos.Add(vidName);
-                    CutsceneName? builtInMeta = builtInCatalog.FindByFilename(vidName);
-                    if (builtInMeta is not null)
-                    {
-                        CutsceneChapter displayCh = activeCatalog.FindByFilename(vidName)?.Chapter ?? builtInMeta.Chapter;
-                        AddDistinctChapter(linkedChapters, displayCh);
-                        if (IsChapterProtectedInVersion(builtInMeta, currentVersion, currentVer))
-                            hasProtectedBuiltInChapter = true;
-                    }
-                }
-            }
-
-            foreach (CutsceneVoiceQuestRef quest in group.Quests)
-            {
-                if (quest.ChapterId <= 0)
-                    continue;
-                CutsceneChapter? chapter = activeCatalog.FindChapterByQuestChapterId(quest.ChapterId)
-                    ?? builtInCatalog.FindChapterByQuestChapterId(quest.ChapterId);
-                if (chapter is not null)
-                {
-                    AddDistinctChapter(linkedChapters, chapter);
-                    CutsceneName? builtInScene = builtInCatalog.Entries.Values
-                        .FirstOrDefault(e => e.Chapter.QuestChapterId == quest.ChapterId);
-                    if (builtInScene is not null && IsChapterProtectedInVersion(builtInScene, currentVersion, currentVer))
-                        hasProtectedBuiltInChapter = true;
+                    if (currentChapter)
+                        protection = CutsceneRemovalProtection.CurrentChapter;
+                    else if (protectedVideo)
+                        protection = CutsceneRemovalProtection.LinkedVideo;
                 }
             }
-
-            CutsceneChapter primaryChapter;
-            if (linkedChapters.Count > 0)
-            {
-                primaryChapter = linkedChapters[0];
-            }
-            else
-            {
-                CutsceneChapter synthesized = CutsceneChapter.FromVoiceGroup(group.GroupId, group.Videos, group.Quests);
-                string key = $"{synthesized.Category}:{synthesized.QuestChapterId}:{synthesized.QuestId}:{group.GroupId}";
-                if (!fallbackChapterCache.TryGetValue(key, out CutsceneChapter? cached))
-                {
-                    cached = synthesized;
-                    fallbackChapterCache[key] = cached;
-                }
-                primaryChapter = cached;
-                linkedChapters.Add(primaryChapter);
-            }
-
-            bool hasTraceLink = group.Videos.Count > 0 || group.Quests.Count > 0;
-            bool existsUnchangedInEarlier = earlierAudios is not null
-                && earlierAudios.TryGetValue(relPath, out string? oldHash)
-                && oldHash.Equals(asset.AssetHashMd5, StringComparison.OrdinalIgnoreCase);
-
-            bool canRemove = hasTraceLink
-                && existsUnchangedInEarlier
-                && !hasProtectedLinkedVideo
-                && !hasProtectedBuiltInChapter;
 
             string osRelPath = relPath.Replace('/', Path.DirectorySeparatorChar);
-            string streamingPath = Path.Combine(audioDir, osRelPath);
-            string persistentPath = Path.Combine(persistentAudioDir, osRelPath);
-            long localBytes = GetCutsceneFileSize(streamingPath);
-            long persistentBytes = GetCutsceneFileSize(persistentPath);
-            CutsceneLocalState localState = CutsceneProtectionService.GetLocalState(streamingPath, persistentPath, asset.AssetSize);
-
+            string streamingPath = Path.Combine(catalog.AudioDirectory, osRelPath);
+            string persistentPath = Path.Combine(catalog.PersistentAudioDirectory, osRelPath);
             result.Add(new CutsceneAudioAsset(
                 asset,
+                source,
                 languageFolder,
                 labelKey,
                 relPath,
-                primaryChapter,
-                group.GroupId,
-                linkedVideos,
-                linkedChapters,
-                linkedChapters.Count > 1,
-                canRemove,
-                localBytes,
-                persistentBytes,
-                localState));
+                linkedVideoNames,
+                chapters.Count > 0 ? chapters : [CutsceneChapter.UnclassifiedVoice],
+                filenames.Count == 0 && chapters.Count > 0 && groups.Any(group => group.Quests.Count > 0),
+                protection,
+                GetCutsceneFileSize(streamingPath),
+                GetCutsceneFileSize(persistentPath),
+                CutsceneProtectionService.GetLocalState(streamingPath, persistentPath, asset.AssetSize)));
         }
 
         return result;
     }
 
-    private static bool IsChapterProtectedInVersion(CutsceneName builtInMeta, string currentVersion, Version? currentVer)
-    {
-        if (builtInMeta.AllowRemoval || builtInMeta.AllowRemovalInVersion == currentVersion)
-            return false;
+    private static ILookup<string, CutsceneVoiceGroup> GetVoiceGroupsByPackage(CutsceneNameCatalog names) =>
+        names.VoiceGroups.Values.SelectMany(group => group.Packages.Select(package => (package, group)))
+            .ToLookup(link => link.package, link => link.group, StringComparer.OrdinalIgnoreCase);
 
-        if (currentVer is not null && builtInMeta.Chapter.ReleaseVersion is Version release)
+    private static (IReadOnlyList<string> Videos, IReadOnlyList<CutsceneChapter> Chapters)
+        ResolveVoiceLinks(IEnumerable<CutsceneVoiceGroup> groups, CutsceneNameCatalog names)
+    {
+        var filenames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var chapters = new List<CutsceneChapter>();
+        var chapterIds = new HashSet<int>();
+        foreach (CutsceneVoiceGroup group in groups)
         {
-            if (release.Major > currentVer.Major
-                || (release.Major == currentVer.Major && release.Minor >= currentVer.Minor))
-                return true;
+            foreach (CutsceneVoiceQuestRef quest in group.Quests)
+                AddChapter(names.FindChapter(quest));
+            foreach (string filename in group.Videos)
+            {
+                filenames.Add(filename);
+                CutsceneChapter? chapter = names.FindByFilename(filename)?.Chapter;
+                if (chapter?.Category != CutsceneCategory.Other)
+                    AddChapter(chapter);
+            }
         }
-        return false;
+
+        return (filenames.ToArray(), chapters);
+
+        void AddChapter(CutsceneChapter? chapter)
+        {
+            if (chapter is null)
+                return;
+            if (chapter.QuestChapterId > 0 ? chapterIds.Add(chapter.QuestChapterId) : !chapters.Contains(chapter))
+                chapters.Add(chapter);
+        }
     }
 
-    private static CutsceneChapter? ResolvePrimaryChapter(
-        CutsceneVoiceGroup group,
-        CutsceneAsset? videoMatch,
-        CutsceneNameCatalog activeCatalog,
-        CutsceneNameCatalog builtInCatalog)
+    private static Dictionary<string, string> GetInstalledVoiceFolders(string audioDir, string persistentAudioDir)
     {
-        if (videoMatch is not null)
-            return activeCatalog.Find(videoMatch.Name, videoMatch.Traveler)?.Chapter ?? videoMatch.Chapter;
-
-        foreach (string vid in group.Videos)
+        var folders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var (folder, _, matchingField) in VoiceLanguages)
         {
-            CutsceneName? found = activeCatalog.FindByFilename(vid) ?? builtInCatalog.FindByFilename(vid);
-            if (found is not null)
-                return found.Chapter;
+            string streaming = Path.Combine(audioDir, folder);
+            string persistent = Path.Combine(persistentAudioDir, folder);
+            ValidateExistingDirectoryChain(streaming);
+            ValidateExistingDirectoryChain(persistent);
+            if (HasVoicePackages(streaming) || HasVoicePackages(persistent))
+            {
+                folders.Add(matchingField, folder);
+            }
         }
+        return folders;
 
-        foreach (CutsceneVoiceQuestRef q in group.Quests)
-        {
-            if (q.ChapterId <= 0)
-                continue;
-            CutsceneChapter? ch = activeCatalog.FindChapterByQuestChapterId(q.ChapterId)
-                ?? builtInCatalog.FindChapterByQuestChapterId(q.ChapterId);
-            if (ch is not null)
-                return ch;
-        }
-        return null;
+        static bool HasVoicePackages(string path) =>
+            Directory.Exists(path) && Directory.EnumerateFiles(path, "*.pck").Any();
     }
 
-    private static void AddDistinctChapter(List<CutsceneChapter> list, CutsceneChapter chapter)
+    private async Task<(SophonBranchInfo Source, SophonManifestProto Manifest, CutsceneVoiceManifestAsset[] Voices)>
+        LoadCutsceneManifestsAsync(GameServerScheme scheme, string version, string audioPrefix,
+            IReadOnlyDictionary<string, string> voiceFolders, CancellationToken token)
     {
-        if (!list.Any(existing => ReferenceEquals(existing, chapter)
-                || (existing.QuestChapterId > 0 && existing.QuestChapterId == chapter.QuestChapterId)
-                || string.Equals(existing.Title, chapter.Title, StringComparison.OrdinalIgnoreCase)))
+        var (source, languageSources) = await _sophonBuildClient
+            .GetBranchManifestSourcesByTagAsync(scheme, version, voiceFolders.Keys, token).ConfigureAwait(false);
+        Task<SophonManifestProto> game = _sophonBuildClient.DownloadManifestAsync(source, token);
+        var languages = Task.WhenAll(languageSources.Select(async pair =>
         {
-            list.Add(chapter);
+            SophonManifestProto language = await _sophonBuildClient.DownloadManifestAsync(pair.Value, token)
+                .ConfigureAwait(false);
+            return (Source: pair.Value, Manifest: language, Folder: voiceFolders[pair.Key]);
+        }));
+        await Task.WhenAll(game, languages).ConfigureAwait(false);
+
+        var voices = new Dictionary<string, CutsceneVoiceManifestAsset>(StringComparer.OrdinalIgnoreCase);
+        foreach (var language in await languages.ConfigureAwait(false))
+            AddVoiceAssets(language.Manifest, language.Source, language.Folder);
+
+        // Some builds can include language assets in the main manifest as well.
+        SophonManifestProto manifest = await game.ConfigureAwait(false);
+        AddVoiceAssets(manifest, source, null);
+        return (source, manifest, voices.Values.ToArray());
+
+        void AddVoiceAssets(SophonManifestProto candidate, SophonBranchInfo candidateSource, string? languageFolder)
+        {
+            foreach (AssetProperty asset in candidate.Assets)
+            {
+                token.ThrowIfCancellationRequested();
+                if (IsPackagedVoiceAudio(asset, audioPrefix, out string folder, out string path, out string label)
+                    && (languageFolder is null
+                        ? voiceFolders.Values.Contains(folder, StringComparer.OrdinalIgnoreCase)
+                        : string.Equals(languageFolder, folder, StringComparison.OrdinalIgnoreCase)))
+                {
+                    voices.TryAdd(path, new CutsceneVoiceManifestAsset(asset, candidateSource, folder, path, label));
+                }
+            }
         }
     }
 
@@ -771,6 +759,7 @@ public sealed partial class GameUpdateService
             SophonBranchPayload? branchPayload,
             string videoPrefix,
             string audioPrefix,
+            IReadOnlyDictionary<string, string> voiceFolders,
             CancellationToken token)
     {
         if (!Version.TryParse(version, out Version? installed))
@@ -817,22 +806,17 @@ public sealed partial class GameUpdateService
             token.ThrowIfCancellationRequested();
             try
             {
-                SophonBranchInfo source = await _sophonBuildClient.GetBranchInfoByTagAsync(scheme, tag, token)
-                    .ConfigureAwait(false);
-                SophonManifestProto manifest = await _sophonBuildClient.DownloadManifestAsync(source, token)
-                    .ConfigureAwait(false);
+                var (_, manifest, voices) =
+                    await LoadCutsceneManifestsAsync(scheme, tag, audioPrefix, voiceFolders, token).ConfigureAwait(false);
 
                 var earlierVideos = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                var earlierAudios = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                var earlierAudios = voices.ToDictionary(voice => voice.RelativePath, voice => voice.Asset.AssetHashMd5,
+                    StringComparer.OrdinalIgnoreCase);
                 foreach (AssetProperty asset in manifest.Assets)
                 {
                     if (IsPackagedCutscene(asset, videoPrefix))
                     {
                         earlierVideos[Path.GetFileName(asset.AssetName)] = asset.AssetHashMd5;
-                    }
-                    else if (IsPackagedVoiceAudio(asset, audioPrefix, out _, out string relPath, out _))
-                    {
-                        earlierAudios[relPath] = asset.AssetHashMd5;
                     }
                 }
                 return (tag, earlierVideos, earlierAudios);

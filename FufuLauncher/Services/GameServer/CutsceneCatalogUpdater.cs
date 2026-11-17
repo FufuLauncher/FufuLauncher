@@ -5,10 +5,10 @@ Licensed under the MIT License.
 
 using System.Buffers;
 using System.Buffers.Text;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using FufuLauncher.Constants;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models.GameServer;
@@ -17,394 +17,640 @@ using FufuLauncher.Services.PluginMirror;
 
 namespace FufuLauncher.Services.GameServer;
 
-/// <summary>
-/// Pulls upstream open game data (AnimeGameData) and live official HYP/Sophon manifests
-/// directly on the client, then autonomously merges them with the built-in curated catalog.
-/// Never contacts any developer-hosted backend server or FufuLauncher GitHub endpoints.
-/// </summary>
-internal static class CutsceneCatalogUpdater
+internal static partial class CutsceneCatalogUpdater
 {
+    private const string PublishedCatalogUrl =
+        "https://raw.githubusercontent.com/FufuLauncher/FufuLauncher/master/FufuLauncher/Assets/CutsceneNames.json";
     private const string AnimeGameDataRepoApiCommitUrl =
         "https://api.github.com/repos/DimbreathBot/AnimeGameData/commits/master";
-
     private const string AnimeGameDataRawBase =
         "https://raw.githubusercontent.com/DimbreathBot/AnimeGameData";
-
+    private const string PublishedDataFallback = "d54f6f0d423ded9d055bb740a3e5f3aa8f2667f1";
+    private const string ResourceTable = "BinOutput/ResourceCollection/ConfigResourceCollection.json";
     private const int MaxTableBytes = 24 * 1024 * 1024;
     private const int MaxTextMapBytes = 64 * 1024 * 1024;
+
     private static readonly TimeSpan EndpointTimeout = TimeSpan.FromSeconds(18);
     private static readonly TimeSpan TextMapTimeout = TimeSpan.FromSeconds(40);
-    private static readonly JsonSerializerOptions ReadJsonOptions = new() { PropertyNameCaseInsensitive = true };
-    private static readonly JsonWriterOptions WriteJsonOptions = new()
+    private static readonly JsonSerializerOptions WriteJsonOptions = new()
     {
-        Indented = true,
+        WriteIndented = true,
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
 
-    private static readonly string[] TravelerSuffixes = ["_PlayerBoy", "_PlayerGirl", "_Boy", "_Girl"];
+    internal sealed record QuestInfo(int Id, int ResId, int ChapterId, int Series, string? Type, ulong TitleHash);
+    internal sealed record ChapterMeta(int Id, string? QuestType, int CityId, ulong TitleHash, ulong NumHash, ulong ImageTitleHash);
+    internal sealed record ResourceCollectionEntry(IReadOnlyList<string> Packages, IReadOnlyList<string> Videos);
+    private sealed record QuestTables(Dictionary<string, ResourceCollectionEntry> Resources,
+        Dictionary<int, ChapterMeta> Chapters, List<QuestInfo> Quests, Dictionary<int, SubquestInfo> Subquests);
+    private sealed record SubquestInfo(int MainId, ulong TitleHash);
+    private sealed record VideoQuestMatch(CutsceneVoiceQuestRef Quest, ulong TitleHash, ulong MainTitleHash,
+        bool ConfirmedByResource);
+    private sealed record PendingScene(string Filename, CutsceneVoiceQuestRef? Quest, JsonNode? CuratedTitles = null,
+        ulong TitleHash = 0, ulong MainTitleHash = 0);
 
-    internal sealed record QuestInfo(int Id, int ResId, int ChapterId, string? Type, ulong TitleTextMapHash);
-    internal sealed record ChapterMeta(int Id, ulong TitleTextMapHash, ulong NumTextMapHash, string? QuestType);
-    internal sealed record ResourceCollectionEntry(
-        string GroupId,
-        IReadOnlyList<string> Packages,
-        IReadOnlyList<string> Videos);
-
-    internal sealed record MergeOutcome(
-        byte[] CatalogJsonBytes,
-        CutsceneNameCatalog Catalog,
-        bool Changed,
-        string SourceSummary);
-
-    public static async Task<MergeOutcome> PullAndMergeAsync(
+    public static async Task<(byte[]? Bytes, CutsceneNameCatalog Catalog)> PullAndMergeAsync(
         HttpClient httpClient,
-        SophonBuildClient? sophonClient,
+        SophonBuildClient sophonClient,
         GameServerScheme? preferredScheme,
-        CutsceneNameCatalog currentCatalog,
+        CutsceneNameCatalog? currentCatalog,
         byte[]? existingCachedBytes,
         IProgress<string>? status,
         CancellationToken token)
     {
-        // Step 1: Query official HYP/Sophon endpoints directly for live version & shipped .usm list.
-        status?.Report("Cutscene_CatalogPullSophon".GetLocalized());
-        var (liveVersion, liveUsmFiles) = await TryFetchLiveSophonAsync(sophonClient, preferredScheme, token)
-            .ConfigureAwait(false);
-
-        // Step 2: Resolve upstream AnimeGameData revision (best-effort commit SHA -> fallback 'master').
         status?.Report("Cutscene_CatalogPullUpstream".GetLocalized());
-        string commitRef = await TryResolveUpstreamCommitAsync(httpClient, token).ConfigureAwait(false);
-        string rawBase = $"{AnimeGameDataRawBase}/{commitRef}";
-        string shortRef = commitRef.Length > 10 ? commitRef[..10] : commitRef;
+        var (publishedBytes, publishedCatalog) = await DownloadWithMirrorsAsync(
+            httpClient, PublishedCatalogUrl, CutsceneNameCatalogStore.MaxCatalogBytes, ReadPublishedCatalog, token)
+            .ConfigureAwait(false);
+        if (currentCatalog is null && publishedCatalog.VoiceGroups.Count > 0)
+            return (publishedBytes, publishedCatalog);
 
-        byte[] resCollectionBytes = await DownloadBytesWithMirrorsAsync(
-            httpClient, $"{rawBase}/BinOutput/ResourceCollection/ConfigResourceCollection.json",
-            MaxTableBytes, EndpointTimeout, token).ConfigureAwait(false);
-        byte[] chapterExcelBytes = await DownloadBytesWithMirrorsAsync(
-            httpClient, $"{rawBase}/ExcelBinOutput/ChapterExcelConfigData.json",
-            MaxTableBytes, EndpointTimeout, token).ConfigureAwait(false);
-        byte[] mainQuestBytes = await DownloadBytesWithMirrorsAsync(
-            httpClient, $"{rawBase}/ExcelBinOutput/MainQuestExcelConfigData.json",
-            MaxTableBytes, EndpointTimeout, token).ConfigureAwait(false);
+        JsonObject publishedRoot = ParseCatalogRoot(publishedBytes);
+        string pinnedRef = GetPublishedDataRef(publishedRoot);
+        var (version, videos) = await TryFetchLiveSophonAsync(sophonClient, preferredScheme, token)
+            .ConfigureAwait(false);
+        // The published revision is matched to its game version. Upstream master may omit some of its quests.
+        string commitRef = version is not null && version > publishedCatalog.GameVersion
+            ? await TryResolveUpstreamCommitAsync(httpClient, token).ConfigureAwait(false) ?? pinnedRef
+            : pinnedRef;
 
-        var resourceCollections = ParseResourceCollections(resCollectionBytes);
-        var chapterMeta = ParseChapterExcel(chapterExcelBytes);
-        var mainQuests = ParseMainQuests(mainQuestBytes);
-
-        // Step 3: Load embedded curated baseline and check which new chapters/scenes need TextMap lookup.
-        byte[] builtInBytes;
-        using (Stream builtInStream = CutsceneNames.OpenEmbeddedStream())
-        using (var ms = new MemoryStream())
+        QuestTables tables;
+        try
         {
-            await builtInStream.CopyToAsync(ms, token).ConfigureAwait(false);
-            builtInBytes = ms.ToArray();
+            tables = await DownloadTablesAsync(httpClient, commitRef, token).ConfigureAwait(false);
+        }
+        catch (Exception) when (!token.IsCancellationRequested && commitRef != pinnedRef)
+        {
+            commitRef = pinnedRef;
+            tables = await DownloadTablesAsync(httpClient, commitRef, token).ConfigureAwait(false);
         }
 
-        IReadOnlySet<ulong> neededHashes = CollectNeededTextMapHashes(
-            builtInBytes, existingCachedBytes, liveUsmFiles, resourceCollections, mainQuests, chapterMeta);
-
-        Dictionary<ulong, string> textChs = [];
-        Dictionary<ulong, string> textCht = [];
-        Dictionary<ulong, string> textEn = [];
+        var merge = new CatalogMerge(publishedRoot, existingCachedBytes, tables, videos);
+        var neededHashes = merge.GetNeededTextHashes();
+        Dictionary<ulong, string>[] textMaps = [[], [], []];
         if (neededHashes.Count > 0)
         {
             status?.Report("Cutscene_CatalogPullTextMap".GetLocalized());
-            textChs = await TryFetchFilteredTextMapAsync(
-                httpClient, $"{rawBase}/TextMap/TextMapCHS.json", neededHashes, token).ConfigureAwait(false);
-            textCht = await TryFetchFilteredTextMapAsync(
-                httpClient, $"{rawBase}/TextMap/TextMapCHT.json", neededHashes, token).ConfigureAwait(false);
-            textEn = await TryFetchFilteredTextMapAsync(
-                httpClient, $"{rawBase}/TextMap/TextMapEN.json", neededHashes, token).ConfigureAwait(false);
+            string rawBase = $"{AnimeGameDataRawBase}/{commitRef}";
+            textMaps = await Task.WhenAll(
+                FetchCatalogTextMapAsync(httpClient, rawBase, "CHS", merge, neededHashes, token),
+                FetchCatalogTextMapAsync(httpClient, rawBase, "CHT", merge, neededHashes, token),
+                FetchCatalogTextMapAsync(httpClient, rawBase, "EN", merge, neededHashes, token))
+                .ConfigureAwait(false);
         }
 
-        // Step 4: Autonomously merge BuiltIn + Existing Cache + Live Sophon + AnimeGameData locally.
         status?.Report("Cutscene_CatalogMerging".GetLocalized());
-        string voiceSourceUrl = $"{rawBase}/BinOutput/ResourceCollection/ConfigResourceCollection.json";
-        string questSourceUrl = $"https://github.com/DimbreathBot/AnimeGameData/tree/{shortRef}";
-        string sourceSummary = liveUsmFiles.Count > 0
-            ? $"Sophon ({liveVersion}) + AnimeGameData ({shortRef})"
-            : $"AnimeGameData ({shortRef})";
-
-        return MergeCatalogs(
-            builtInBytes,
-            existingCachedBytes,
-            currentCatalog,
-            liveVersion,
-            liveUsmFiles,
-            resourceCollections,
-            mainQuests,
-            chapterMeta,
-            textChs,
-            textCht,
-            textEn,
-            questSourceUrl,
-            voiceSourceUrl,
-            sourceSummary);
+        return merge.Finish(currentCatalog, version, commitRef, textMaps, token);
     }
 
-    internal static MergeOutcome MergeCatalogs(
-        byte[] builtInBytes,
-        byte[]? existingCachedBytes,
-        CutsceneNameCatalog currentCatalog,
-        Version? liveSophonVersion,
-        IReadOnlySet<string> liveSophonVideos,
-        IReadOnlyDictionary<string, ResourceCollectionEntry> resourceCollections,
-        IReadOnlyList<QuestInfo> mainQuests,
-        IReadOnlyDictionary<int, ChapterMeta> chapterMeta,
-        IReadOnlyDictionary<ulong, string> textChs,
-        IReadOnlyDictionary<ulong, string> textCht,
-        IReadOnlyDictionary<ulong, string> textEn,
-        string questSourceUrl,
-        string voiceSourceUrl,
-        string sourceSummary)
+    private static string GetPublishedDataRef(JsonObject publishedRoot)
     {
-        JsonNode? builtInNode = JsonNode.Parse(builtInBytes)
-            ?? throw new InvalidDataException("Built-in cutscene catalog is invalid.");
-        JsonObject builtInRoot = builtInNode.AsObject();
-        CutsceneNameCatalog builtInCatalog = CutsceneNames.BuiltIn;
-
-        var chaptersList = new List<JsonObject>();
-        var seenScenes = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var chapterByQuestId = new Dictionary<int, JsonObject>();
-
-        // 1. Copy curated chapters & scenes from BuiltIn (always authoritative).
-        if (builtInRoot["chapters"] is JsonArray builtInChapters)
+        string? source = publishedRoot["voiceSource"]?.GetValue<string>();
+        string prefix = $"{AnimeGameDataRawBase}/";
+        string suffix = $"/{ResourceTable}";
+        if (source is not null && source.StartsWith(prefix, StringComparison.Ordinal)
+            && source.EndsWith(suffix, StringComparison.Ordinal) && source.Length == prefix.Length + suffix.Length + 40)
         {
-            foreach (JsonNode? chNode in builtInChapters)
+            string commit = source.Substring(prefix.Length, 40);
+            if (commit.All(char.IsAsciiHexDigit))
+                return commit;
+        }
+        return PublishedDataFallback;
+    }
+
+    private static JsonObject ParseCatalogRoot(ReadOnlySpan<byte> bytes)
+    {
+        if (bytes.StartsWith("\uFEFF"u8))
+            bytes = bytes[3..];
+        return JsonNode.Parse(bytes, new JsonNodeOptions { PropertyNameCaseInsensitive = true })!.AsObject();
+    }
+
+    private static (byte[] Bytes, CutsceneNameCatalog Catalog) ReadPublishedCatalog(byte[] bytes)
+    {
+        using var stream = new MemoryStream(bytes, writable: false);
+        return (bytes, CutsceneNames.Read(stream));
+    }
+
+    private static async Task<QuestTables> DownloadTablesAsync(
+        HttpClient client, string commit, CancellationToken token)
+    {
+        string rawBase = $"{AnimeGameDataRawBase}/{commit}";
+        var resources = DownloadWithMirrorsAsync(client, $"{rawBase}/{ResourceTable}", MaxTableBytes,
+            ParseResourceCollections, token);
+        var chapters = DownloadWithMirrorsAsync(client, $"{rawBase}/ExcelBinOutput/ChapterExcelConfigData.json",
+            MaxTableBytes, ParseChapterExcel, token);
+        var quests = DownloadWithMirrorsAsync(client, $"{rawBase}/ExcelBinOutput/MainQuestExcelConfigData.json",
+            MaxTableBytes, ParseMainQuests, token);
+        var subquests = TryDownloadSubquestsAsync(client, $"{rawBase}/ExcelBinOutput/QuestExcelConfigData.json", token);
+        await Task.WhenAll(resources, chapters, quests, subquests).ConfigureAwait(false);
+        return new QuestTables(await resources.ConfigureAwait(false), await chapters.ConfigureAwait(false),
+            await quests.ConfigureAwait(false), await subquests.ConfigureAwait(false));
+    }
+
+    private static async Task<Dictionary<int, SubquestInfo>> TryDownloadSubquestsAsync(
+        HttpClient client, string url, CancellationToken token)
+    {
+        using var bounded = CancellationTokenSource.CreateLinkedTokenSource(token);
+        bounded.CancelAfter(EndpointTimeout);
+        try
+        {
+            return await DownloadWithMirrorsAsync(client, url, MaxTableBytes, ParseSubquests, bounded.Token)
+                .ConfigureAwait(false);
+        }
+        catch (Exception ex) when (!token.IsCancellationRequested)
+        {
+            DebugLog.Info(nameof(CutsceneCatalogUpdater), $"Optional subquest data unavailable ({ex.GetType().Name}).");
+            return [];
+        }
+    }
+
+    private sealed class CatalogMerge
+    {
+        private readonly JsonObject _published;
+        private readonly JsonObject? _cached;
+        private readonly Dictionary<int, ChapterMeta> _chapterMeta;
+        private readonly Dictionary<int, QuestInfo> _questsById;
+        private readonly ILookup<int, QuestInfo> _questsByChapter;
+        private readonly List<JsonObject> _chapters = [];
+        private readonly Dictionary<(int ChapterId, int QuestId), JsonObject> _chapterIndex = [];
+        private readonly HashSet<string> _seenScenes = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<(int ChapterId, int QuestId), CutsceneVoiceQuestRef> _chaptersToResolve = [];
+        private readonly Dictionary<string, PendingScene> _scenesToAdd =
+            new(StringComparer.OrdinalIgnoreCase);
+        private readonly IReadOnlyList<CutsceneVoiceGroup> _groups;
+        private readonly Dictionary<string, VideoQuestMatch> _videoQuests;
+
+        public CatalogMerge(JsonObject published, byte[]? cachedBytes, QuestTables tables, IReadOnlySet<string> liveVideos)
+        {
+            _published = published;
+            _cached = cachedBytes is not null ? ParseCatalogRoot(cachedBytes) : null;
+            _chapterMeta = tables.Chapters;
+            _questsById = tables.Quests.ToDictionary(q => q.Id);
+            _questsByChapter = tables.Quests.ToLookup(quest => quest.ChapterId);
+            _groups = BuildVoiceGroups(tables.Resources, tables.Quests);
+            string[] files = liveVideos.Concat(_groups.SelectMany(group => group.Videos))
+                .Order(StringComparer.OrdinalIgnoreCase).ToArray();
+            _videoQuests = BuildVideoQuestIndex(files, _groups, _questsById, tables.Subquests);
+            AddExistingChapters(_published, isPublished: true);
+            if (_cached is not null)
+                AddExistingChapters(_cached, isPublished: false);
+
+            foreach (CutsceneVoiceGroup group in _groups.Where(group => group.Packages.Count > 0))
             {
-                if (chNode is not JsonObject chObj)
-                    continue;
-                var clone = chObj.DeepClone().AsObject();
-                NormalizeAndRegisterChapter(clone, chaptersList, seenScenes, chapterByQuestId);
-            }
-        }
-
-        // 2. Carry forward non-builtIn chapters/scenes already persisted in local cache (if any).
-        if (existingCachedBytes is { Length: > 0 })
-        {
-            TryOverlayCachedExtras(existingCachedBytes, chaptersList, seenScenes, chapterByQuestId);
-        }
-
-        // 3. Index quests by resId and build refreshed voiceGroups + video->group map.
-        var questsByResId = new Dictionary<int, List<QuestInfo>>();
-        foreach (QuestInfo q in mainQuests)
-        {
-            if (q.ResId <= 0)
-                continue;
-            if (!questsByResId.TryGetValue(q.ResId, out List<QuestInfo>? list))
-                questsByResId[q.ResId] = list = [];
-            list.Add(q);
-        }
-
-        var videoToGroup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        var voiceGroupsObj = new JsonObject();
-        var mergedVoiceGroups = new Dictionary<string, CutsceneVoiceGroup>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var (groupId, entry) in resourceCollections.OrderBy(kv => kv.Key, StringComparer.Ordinal))
-        {
-            foreach (string rawVideo in entry.Videos)
-            {
-                string fileName = Path.GetFileName(rawVideo.Replace('\\', '/'));
-                if (fileName.Length > 0)
-                    videoToGroup.TryAdd(CanonicalSceneKey(fileName), groupId);
-            }
-
-            if (entry.Packages.Count == 0)
-                continue;
-
-            int gidInt = int.TryParse(groupId, out int parsedGid) ? parsedGid : 0;
-            List<QuestInfo> linkedQuests = gidInt > 0 && questsByResId.TryGetValue(gidInt, out List<QuestInfo>? qList)
-                ? qList
-                : [];
-
-            var pkgArray = new JsonArray(entry.Packages.Select(p => JsonValue.Create(p)).ToArray<JsonNode?>());
-            var vidArray = new JsonArray(entry.Videos.Select(v => JsonValue.Create(v)).ToArray<JsonNode?>());
-            var questArray = new JsonArray(linkedQuests
-                .Select(q => (JsonNode)new JsonObject
+                bool hasChapter = group.Quests.Any(quest => quest.ChapterId > 0);
+                foreach (CutsceneVoiceQuestRef quest in group.Quests)
                 {
-                    ["id"] = q.Id,
-                    ["chapterId"] = q.ChapterId
-                })
-                .ToArray());
+                    if (quest.ChapterId > 0 || !hasChapter)
+                        AddQuestChapter(quest);
+                }
+            }
 
-            voiceGroupsObj[groupId] = new JsonObject
+            foreach (string filename in files)
             {
-                ["packages"] = pkgArray,
-                ["videos"] = vidArray,
-                ["quests"] = questArray
+                string scene = CutsceneNames.CanonicalSceneKey(filename);
+                if (!IsValidSceneKey(scene) || !filename.EndsWith(".usm", StringComparison.OrdinalIgnoreCase)
+                    || !_seenScenes.Add(scene))
+                    continue;
+
+                VideoQuestMatch? match = _videoQuests.GetValueOrDefault(scene);
+                _scenesToAdd.Add(scene, new PendingScene(filename, match?.Quest, TitleHash: match?.TitleHash ?? 0,
+                    MainTitleHash: match?.MainTitleHash ?? 0));
+            }
+
+            foreach (PendingScene scene in _scenesToAdd.Values)
+            {
+                if (scene.Quest is { } quest)
+                    AddQuestChapter(quest);
+            }
+        }
+
+        private void AddExistingChapters(JsonObject root, bool isPublished)
+        {
+            if (root["chapters"] is not JsonArray chapters)
+                return;
+
+            foreach (JsonObject chapter in chapters.OfType<JsonObject>())
+            {
+                if (chapter["scenes"] is not JsonObject oldScenes)
+                    continue;
+
+                var key = (ChapterId: chapter["questChapterId"]?.GetValue<int>() ?? 0,
+                    QuestId: chapter["mainQuestId"]?.GetValue<int>() ?? 0);
+                bool verifiedTitle = chapter["titleFromChapter"] is JsonValue provenance
+                    && provenance.TryGetValue<bool>(out bool verified) && verified;
+                var scenes = new JsonObject();
+                foreach (var (scene, titles) in oldScenes)
+                {
+                    if (!_seenScenes.Add(scene))
+                        continue;
+                    if (_videoQuests.TryGetValue(scene, out VideoQuestMatch? match)
+                        && (key.ChapterId > 0 && match.ConfirmedByResource && match.Quest.ChapterId != key.ChapterId
+                            || !isPublished && match.Quest.ChapterId > 0
+                                && (key == (0, 0) || HasFallbackSceneTitles(scene, titles))))
+                    {
+                        JsonNode? curatedTitles = !isPublished && (key == (0, 0) || HasFallbackSceneTitles(scene, titles))
+                            ? null : titles?.DeepClone();
+                        _scenesToAdd.Add(scene, new PendingScene($"{scene}.usm", match.Quest, curatedTitles,
+                            match.TitleHash, match.MainTitleHash));
+                    }
+                    else
+                    {
+                        scenes[scene] = titles?.DeepClone();
+                    }
+                }
+
+                if (key != (0, 0) && _chapterIndex.TryGetValue(key, out JsonObject? existing))
+                {
+                    JsonObject target = existing["scenes"]!.AsObject();
+                    foreach (var (scene, titles) in scenes)
+                        target[scene] = titles?.DeepClone();
+                }
+                else if (scenes.Count > 0 || isPublished || verifiedTitle)
+                {
+                    var copy = chapter.DeepClone().AsObject();
+                    copy["scenes"] = scenes;
+                    if (CutsceneChapter.GetCategoryOverride(key.ChapterId) is { } category)
+                        copy["category"] = category.ToString();
+                    if (copy["titles"] is JsonObject titles)
+                    {
+                        foreach (string locale in titles.Select(title => title.Key).ToArray())
+                        {
+                            string[] parts = (titles[locale]?.GetValue<string>() ?? string.Empty).Split(" · ", 3);
+                            if (parts.Length == 3 && HasChapterSubject(parts[1], parts[0]))
+                                titles[locale] = $"{parts[1]} · {parts[2]}";
+                        }
+                    }
+                    _chapters.Add(copy);
+                    if (key != (0, 0))
+                        _chapterIndex.Add(key, copy);
+                    if (!isPublished && !verifiedTitle && key.ChapterId > 0
+                        && _questsByChapter[key.ChapterId].FirstOrDefault() is { } quest)
+                        _chaptersToResolve.TryAdd(key, new CutsceneVoiceQuestRef(quest.Id, quest.ChapterId));
+                }
+            }
+        }
+
+        private static bool HasFallbackSceneTitles(string scene, JsonNode? titles)
+        {
+            string fileSuffix = scene[(scene.LastIndexOf('_') + 1)..];
+            return titles is JsonObject localized && localized.All(title =>
+                title.Value is JsonValue value && value.TryGetValue<string>(out string? text)
+                    && (string.Equals(text, scene, StringComparison.OrdinalIgnoreCase)
+                        || text.EndsWith(" · " + fileSuffix, StringComparison.OrdinalIgnoreCase)));
+        }
+
+        private void AddQuestChapter(CutsceneVoiceQuestRef quest)
+        {
+            var key = GetChapterKey(quest);
+            if (!_chapterIndex.ContainsKey(key))
+                _chaptersToResolve.TryAdd(key, quest);
+        }
+
+        public HashSet<ulong> GetNeededTextHashes(IReadOnlyDictionary<ulong, string>? chapterText = null)
+        {
+            var hashes = new HashSet<ulong>();
+            foreach (CutsceneVoiceQuestRef quest in _chaptersToResolve.Values)
+            {
+                if (_chapterMeta.TryGetValue(quest.ChapterId, out ChapterMeta? chapter))
+                {
+                    if (GetTitle(chapterText, chapter.TitleHash) is not null)
+                        continue;
+
+                    hashes.Add(chapter.TitleHash);
+                    hashes.Add(chapter.NumHash);
+                    hashes.Add(chapter.ImageTitleHash);
+                }
+
+                foreach (QuestInfo info in GetTitleQuests(quest))
+                    hashes.Add(info.TitleHash);
+            }
+
+            foreach (var scene in _scenesToAdd.Values)
+            {
+                hashes.Add(scene.TitleHash);
+                if (GetTitle(chapterText, scene.TitleHash) is null)
+                    hashes.Add(scene.MainTitleHash);
+            }
+
+            hashes.Remove(0);
+            if (chapterText is not null)
+                hashes.RemoveWhere(hash => GetTitle(chapterText, hash) is not null);
+            return hashes;
+        }
+
+        private IEnumerable<QuestInfo> GetTitleQuests(CutsceneVoiceQuestRef quest) => quest.ChapterId > 0
+            ? _questsByChapter[quest.ChapterId].OrderBy(info => info.Id)
+            : [_questsById[quest.Id]];
+
+        public (byte[]? Bytes, CutsceneNameCatalog Catalog) Finish(CutsceneNameCatalog? currentCatalog,
+            Version? liveVersion, string commit, IReadOnlyList<Dictionary<ulong, string>> maps, CancellationToken token)
+        {
+            foreach (var (key, quest) in _chaptersToResolve)
+            {
+                token.ThrowIfCancellationRequested();
+                ChapterMeta? meta = _chapterMeta.GetValueOrDefault(quest.ChapterId);
+                CutsceneCategory category = InferCategory(_questsById[quest.Id], meta);
+                bool hasVerifiedTitle = maps.All(map => GetTitle(map, meta?.TitleHash) is not null);
+                bool fromCache = _chapterIndex.TryGetValue(key, out JsonObject? chapter);
+                if (fromCache && !hasVerifiedTitle)
+                    continue;
+
+                ulong[] questTitleHashes = GetTitleQuests(quest).Select(q => q.TitleHash).ToArray();
+                chapter ??= new JsonObject { ["scenes"] = new JsonObject() };
+                chapter["category"] = category.ToString();
+                chapter["titles"] = GetLocalizedTitles(maps, (map, locale) =>
+                {
+                    return FormatChapterTitle(map, meta, category)
+                        ?? questTitleHashes.Select(hash => GetTitle(map, hash))
+                        .FirstOrDefault(value => value is not null)
+                        ?? FallbackTitle(new CutsceneChapter(category, $"Cutscene_Category_{category}"), locale);
+                });
+                if (key.ChapterId > 0)
+                {
+                    chapter["questChapterId"] = key.ChapterId;
+                    if (hasVerifiedTitle)
+                        chapter["titleFromChapter"] = true;
+                }
+                else
+                    chapter["mainQuestId"] = key.QuestId;
+                if (!fromCache)
+                {
+                    _chapterIndex.Add(key, chapter);
+                    _chapters.Add(chapter);
+                }
+            }
+
+            var fallbackChapters = new Dictionary<CutsceneChapter, JsonObject>();
+            var sameQuestScenes = _scenesToAdd.Where(pair => pair.Value.Quest is not null)
+                .OrderBy(pair => pair.Key, StringComparer.OrdinalIgnoreCase).ToLookup(pair => pair.Value.Quest!.Id,
+                    pair => pair.Key);
+            foreach (var (key, scene) in _scenesToAdd)
+            {
+                token.ThrowIfCancellationRequested();
+                JsonObject chapter;
+                if (scene.Quest is { } quest)
+                {
+                    chapter = _chapterIndex[GetChapterKey(quest)];
+                }
+                else
+                {
+                    CutsceneChapter fallback = CutsceneChapter.FromFileName(scene.Filename);
+                    if (!fallbackChapters.TryGetValue(fallback, out chapter!))
+                    {
+                        chapter = new JsonObject
+                        {
+                            ["category"] = fallback.Category.ToString(),
+                            ["titles"] = GetLocalizedTitles(maps, (_, locale) => FallbackTitle(fallback, locale)),
+                            ["scenes"] = new JsonObject()
+                        };
+                        fallbackChapters.Add(fallback, chapter);
+                        _chapters.Add(chapter);
+                    }
+                }
+
+                string[] related = scene.Quest is { } linked ? sameQuestScenes[linked.Id].ToArray() : [];
+                string suffix = related.Length > 1 ? $" · {Array.IndexOf(related, key) + 1}" : string.Empty;
+                chapter["scenes"]![key] = scene.CuratedTitles ?? GetLocalizedTitles(maps, (map, locale) =>
+                    GetTitle(map, scene.TitleHash) is { } title ? title :
+                        (GetTitle(map, scene.MainTitleHash)
+                         ?? (scene.Quest is not null ? chapter["titles"]?[locale]?.GetValue<string>() : null)
+                         ?? key) + suffix);
+            }
+
+            var publishedVersion = Version.Parse(_published["gameVersion"]!.GetValue<string>());
+            Version version = liveVersion is not null && liveVersion > publishedVersion ? liveVersion : publishedVersion;
+            if (currentCatalog is not null && currentCatalog.GameVersion > version)
+                version = currentCatalog.GameVersion;
+
+            var groupNodes = new JsonObject();
+            foreach (CutsceneVoiceGroup group in _groups.Where(group => group.Packages.Count > 0))
+            {
+                var quests = new JsonArray(group.Quests.Select(quest => (JsonNode)new JsonObject
+                {
+                    ["id"] = quest.Id,
+                    ["chapterId"] = quest.ChapterId
+                }).ToArray());
+                groupNodes[group.GroupId] = new JsonObject
+                {
+                    ["packages"] = ToStringArray(group.Packages),
+                    ["videos"] = ToStringArray(group.Videos),
+                    ["quests"] = quests
+                };
+            }
+
+            var result = new JsonObject
+            {
+                ["gameVersion"] = version.ToString(3),
+                ["questSource"] = $"https://github.com/DimbreathBot/AnimeGameData/tree/{commit}",
+                ["earlyCutsceneSource"] = _published["earlyCutsceneSource"]?.DeepClone(),
+                ["releaseSource"] = _published["releaseSource"]?.DeepClone(),
+                ["voiceSource"] = $"{AnimeGameDataRawBase}/{commit}/{ResourceTable}",
+                ["chapters"] = new JsonArray(_chapters
+                    .OrderBy(chapter => chapter["questChapterId"]?.GetValue<int>() ?? 0)
+                    .ThenBy(chapter => chapter["mainQuestId"]?.GetValue<int>() ?? 0)
+                    .ThenBy(chapter => chapter["scenes"]!.AsObject().FirstOrDefault().Key, StringComparer.OrdinalIgnoreCase)
+                    .ToArray<JsonNode?>()),
+                ["voiceGroups"] = groupNodes
             };
 
-            mergedVoiceGroups[groupId] = new CutsceneVoiceGroup(
-                groupId,
-                entry.Packages.ToArray(),
-                entry.Videos.Select(v => Path.GetFileName(v.Trim())).ToArray(),
-                linkedQuests.Select(q => new CutsceneVoiceQuestRef(q.Id, Math.Max(0, q.ChapterId))).ToArray());
-        }
-
-        // 4. Identify candidate .usm files and scaffold new chapters/scenes not already curated.
-        var candidateFiles = new SortedDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        IEnumerable<string> rawVideoNames = liveSophonVideos.Count > 0
-            ? liveSophonVideos
-            : resourceCollections.Values.SelectMany(v => v.Videos);
-        foreach (string rawName in rawVideoNames)
-        {
-            string fileName = Path.GetFileName(rawName.Replace('\\', '/').Trim());
-            if (!fileName.EndsWith(".usm", StringComparison.OrdinalIgnoreCase))
-                continue;
-            string canonical = CanonicalSceneKey(fileName);
-            if (!IsValidSceneKey(canonical))
-                continue;
-            candidateFiles.TryAdd(canonical, fileName);
-        }
-
-        Version baseVersion = builtInCatalog.GameVersion;
-        Version targetVersion = MaxVersion(liveSophonVersion, MaxVersion(currentCatalog.GameVersion, baseVersion));
-        string releaseVer = $"{targetVersion.Major}.{targetVersion.Minor}";
-
-        // Pre-count how many new scenes share each MainQuest title so we disambiguate duplicates cleanly.
-        var questSceneCounts = new Dictionary<int, int>();
-        foreach (string canonical in candidateFiles.Keys)
-        {
-            if (seenScenes.Contains(canonical))
-                continue;
-            if (TryResolvePrimaryQuest(canonical, videoToGroup, questsByResId, out QuestInfo? q) && q is not null)
-                questSceneCounts[q.Id] = questSceneCounts.GetValueOrDefault(q.Id) + 1;
-        }
-
-        var adhocChapterByTitleKey = new Dictionary<string, JsonObject>(StringComparer.OrdinalIgnoreCase);
-        int addedScenesCount = 0;
-
-        foreach (var (canonical, fileName) in candidateFiles)
-        {
-            if (seenScenes.Contains(canonical))
-                continue;
-
-            TryResolvePrimaryQuest(canonical, videoToGroup, questsByResId, out QuestInfo? linkedQuest);
-            int questChapterId = linkedQuest is { ChapterId: > 0 } ? linkedQuest.ChapterId : 0;
-
-            JsonObject targetChapter;
-            if (questChapterId > 0 && chapterByQuestId.TryGetValue(questChapterId, out JsonObject? existingChapter))
+            int revision = _published["revision"]?.GetValue<int>() ?? 0;
+            if (currentCatalog is not null && version == currentCatalog.GameVersion)
             {
-                targetChapter = existingChapter;
-            }
-            else
-            {
-                targetChapter = CreateChapterObject(
-                    questChapterId,
-                    linkedQuest?.Type,
-                    fileName,
-                    releaseVer,
-                    chapterMeta,
-                    textChs,
-                    textCht,
-                    textEn,
-                    adhocChapterByTitleKey,
-                    chaptersList,
-                    chapterByQuestId);
+                result["revision"] = currentCatalog.Revision;
+                if (JsonNode.DeepEquals(result, _cached))
+                    return (null, currentCatalog);
+                revision = Math.Max(revision, checked(currentCatalog.Revision + 1));
             }
 
-            JsonObject sceneTitles = BuildSceneTitles(
-                canonical, linkedQuest, questSceneCounts, textChs, textCht, textEn);
-            var scenesObj = targetChapter["scenes"] as JsonObject ?? new JsonObject();
-            targetChapter["scenes"] = scenesObj;
-            scenesObj[canonical] = sceneTitles;
-            seenScenes.Add(canonical);
-            addedScenesCount++;
+            result["revision"] = revision;
+            byte[] bytes = JsonSerializer.SerializeToUtf8Bytes(result, WriteJsonOptions);
+            using var stream = new MemoryStream(bytes, writable: false);
+            return (bytes, CutsceneNames.Read(stream));
         }
 
-        // 5. Compute version/revision and detect if anything materially changed vs currentCatalog.
-        bool voiceGroupsChanged = !VoiceGroupsEqual(mergedVoiceGroups, currentCatalog.VoiceGroups);
-        bool scenesAddedBeyondCurrent = candidateFiles.Keys.Any(k => !currentCatalog.Entries.ContainsKey(k));
-        bool versionIncreased = targetVersion > currentCatalog.GameVersion;
-        bool hasBuiltInUpgrade = currentCatalog.SelfMerged
-            && currentCatalog.BuiltInBaseGameVersion is { } baseVer
-            && (builtInCatalog.GameVersion > baseVer
-                || (builtInCatalog.GameVersion == baseVer && builtInCatalog.Revision > currentCatalog.BuiltInBaseRevision));
-
-        bool changed = versionIncreased || addedScenesCount > 0 || scenesAddedBeyondCurrent || voiceGroupsChanged || hasBuiltInUpgrade;
-
-        int nextRevision;
-        if (targetVersion > currentCatalog.GameVersion)
-        {
-            nextRevision = 1;
-        }
-        else if (changed)
-        {
-            nextRevision = Math.Max(currentCatalog.Revision + 1, builtInCatalog.Revision);
-        }
-        else
-        {
-            nextRevision = currentCatalog.Revision;
-        }
-
-        if (!changed)
-            return new MergeOutcome([], currentCatalog, false, sourceSummary);
-
-        // 6. Emit final self-merged CutsceneNames.json payload cleanly.
-        var mergedRoot = new JsonObject
-        {
-            ["gameVersion"] = $"{targetVersion.Major}.{targetVersion.Minor}.{Math.Max(0, targetVersion.Build)}",
-            ["revision"] = nextRevision,
-            ["selfMerged"] = true,
-            ["builtInBaseGameVersion"] = $"{builtInCatalog.GameVersion.Major}.{builtInCatalog.GameVersion.Minor}.{Math.Max(0, builtInCatalog.GameVersion.Build)}",
-            ["builtInBaseRevision"] = builtInCatalog.Revision,
-            ["questSource"] = questSourceUrl
-        };
-
-        if (builtInRoot["earlyCutsceneSource"]?.DeepClone() is JsonNode earlySource)
-            mergedRoot["earlyCutsceneSource"] = earlySource;
-        if (builtInRoot["releaseSource"]?.DeepClone() is JsonNode releaseSource)
-            mergedRoot["releaseSource"] = releaseSource;
-
-        mergedRoot["voiceSource"] = voiceSourceUrl;
-        mergedRoot["chapters"] = new JsonArray(chaptersList.ToArray<JsonNode?>());
-        mergedRoot["voiceGroups"] = voiceGroupsObj;
-
-        byte[] outputBytes;
-        using (var ms = new MemoryStream())
-        {
-            using (var writer = new Utf8JsonWriter(ms, WriteJsonOptions))
-            {
-                mergedRoot.WriteTo(writer);
-            }
-            ms.WriteByte((byte)'\n');
-            outputBytes = ms.ToArray();
-        }
-
-        using var verifyStream = new MemoryStream(outputBytes, writable: false);
-        CutsceneNameCatalog verified = CutsceneNames.Read(verifyStream);
-        return new MergeOutcome(outputBytes, verified, true, sourceSummary);
+        private static (int ChapterId, int QuestId) GetChapterKey(CutsceneVoiceQuestRef quest) =>
+            quest.ChapterId > 0 ? (quest.ChapterId, 0) : (0, quest.Id);
     }
 
-    /// <summary>
-    /// When cached self-merged catalog is newer in gameVersion than an upgraded built-in release,
-    /// overlays built-in curated chapter/scene titles and removal rules onto the active in-memory view.
-    /// </summary>
-    public static CutsceneNameCatalog OverlayBuiltInCurated(CutsceneNameCatalog cached, CutsceneNameCatalog builtIn)
+    private static Dictionary<string, VideoQuestMatch> BuildVideoQuestIndex(
+        IEnumerable<string> files, IReadOnlyList<CutsceneVoiceGroup> groups,
+        IReadOnlyDictionary<int, QuestInfo> quests, IReadOnlyDictionary<int, SubquestInfo> subquests)
     {
-        var mergedEntries = new Dictionary<string, CutsceneName>(cached.Entries, StringComparer.OrdinalIgnoreCase);
-        foreach (var (key, builtInEntry) in builtIn.Entries)
-            mergedEntries[key] = builtInEntry;
-
-        IReadOnlyDictionary<string, CutsceneVoiceGroup> voiceGroups = cached.VoiceGroups.Count > 0
-            ? cached.VoiceGroups
-            : builtIn.VoiceGroups;
-
-        return cached with
+        var resourceQuests = groups.SelectMany(group =>
+                group.Videos.SelectMany(video => group.Quests.Select(quest => (Video: video, Quest: quest))))
+            .ToLookup(link => CutsceneNames.CanonicalSceneKey(link.Video), link => link.Quest,
+                StringComparer.OrdinalIgnoreCase);
+        var listedVideos = groups.SelectMany(group => group.Videos).Select(CutsceneNames.CanonicalSceneKey)
+            .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var matches = new Dictionary<string, VideoQuestMatch>(StringComparer.OrdinalIgnoreCase);
+        foreach (string scene in files.Select(CutsceneNames.CanonicalSceneKey).Distinct(StringComparer.OrdinalIgnoreCase))
         {
-            Entries = mergedEntries,
-            VoiceGroups = voiceGroups
+            CutsceneVoiceQuestRef[] references = resourceQuests[scene].Distinct().ToArray();
+            if (FindQuestInSceneName(scene, references, listedVideos.Contains(scene), quests, subquests)
+                is { } resolved)
+            {
+                QuestInfo quest = resolved.Main;
+                matches.Add(scene, new VideoQuestMatch(new CutsceneVoiceQuestRef(quest.Id, quest.ChapterId),
+                    resolved.TitleHash, quest.TitleHash, references.Any(reference => reference.Id == quest.Id)));
+                continue;
+            }
+
+            // Shared groups can mention several chapters. Only a single resolved chapter can place a video.
+            var chapters = references.Where(quest => quest.ChapterId > 0).DistinctBy(quest => quest.ChapterId).ToArray();
+            CutsceneVoiceQuestRef? fallback = chapters.Length == 1 ? chapters[0]
+                : chapters.Length == 0 && references.Length == 1 ? references[0] : null;
+            if (fallback is not null)
+                matches.Add(scene, new VideoQuestMatch(fallback, 0, quests.GetValueOrDefault(fallback.Id)?.TitleHash ?? 0,
+                    ConfirmedByResource: false));
+        }
+        return matches;
+    }
+
+    private static (QuestInfo Main, ulong TitleHash)? FindQuestInSceneName(
+        string scene, IReadOnlyList<CutsceneVoiceQuestRef> references,
+        bool listedVideo,
+        IReadOnlyDictionary<int, QuestInfo> quests, IReadOnlyDictionary<int, SubquestInfo> subquests)
+    {
+        Match match = SceneQuestCode().Match(scene);
+        if (!match.Success)
+            return null;
+
+        string kind = match.Groups["type"].Value.ToUpperInvariant();
+        if (scene.StartsWith("CS_ACTIVITY_", StringComparison.OrdinalIgnoreCase))
+            kind = "EQ";
+        ReadOnlySpan<char> code = match.Groups["id"].ValueSpan;
+        var exact = GetQuest(code);
+        if (exact is { } named && (kind.Length > 0 || references.Any(reference => reference.Id == named.Main.Id)))
+            return exact;
+
+        // An archived resource can lack a quest in its resource group. Its typed clip name must then
+        // resolve to an exact subquest recorded in the game before accepting its trailing take number.
+        if (kind.Length > 0 && code.Length >= 7 && GetQuest(code[..^2]) is { } withTakeNumber
+            && (references.Any(reference => reference.Id == withTakeNumber.Main.Id)
+                || references.Count == 0 && listedVideo && int.TryParse(code[..^2], out int subquestId)
+                    && subquests.ContainsKey(subquestId)))
+            return withTakeNumber;
+        return null;
+
+        (QuestInfo Main, ulong TitleHash)? GetQuest(ReadOnlySpan<char> value)
+        {
+            if (!int.TryParse(value, out int id))
+                return null;
+            SubquestInfo? subquest = subquests.GetValueOrDefault(id);
+            QuestInfo? quest = quests.GetValueOrDefault(subquest?.MainId ?? id);
+            return quest is { ChapterId: > 0 }
+                && (kind.Length == 0 || string.Equals(quest.Type ?? "AQ", kind, StringComparison.OrdinalIgnoreCase))
+                ? (quest, subquest?.TitleHash ?? 0) : null;
+        }
+    }
+
+    [GeneratedRegex(@"(?:^|_)(?<type>AQ|EQ|LQ|WQ)[A-Z_]{0,6}(?<id>[0-9]{5,12})(?=$|[_-])|^CS_(?:ACTIVITY_)?(?<id>[0-9]{6,8})(?=$|[_-])",
+        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)]
+    private static partial Regex SceneQuestCode();
+
+    internal static IReadOnlyList<CutsceneVoiceGroup> BuildVoiceGroups(
+        IReadOnlyDictionary<string, ResourceCollectionEntry> resources, IEnumerable<QuestInfo> quests)
+    {
+        var questsByResource = quests.Where(quest => quest.ResId > 0)
+            .ToLookup(quest => quest.ResId.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        var groups = new List<CutsceneVoiceGroup>();
+        foreach (string groupId in resources.Keys.Concat(questsByResource.Select(group => group.Key))
+                     .Distinct(StringComparer.Ordinal).Order(StringComparer.Ordinal))
+        {
+            ResourceCollectionEntry? source = resources.GetValueOrDefault(groupId);
+            var linked = questsByResource[groupId];
+            var chapterIds = linked.Where(quest => quest.ChapterId > 0).Select(quest => quest.ChapterId).ToHashSet();
+            CutsceneVoiceQuestRef[] refs = linked.Select(quest => new CutsceneVoiceQuestRef(quest.Id,
+                quest.ChapterId > 0 ? quest.ChapterId : chapterIds.Contains(quest.Series) ? quest.Series : 0)).ToArray();
+
+            IReadOnlyList<string> packages = source?.Packages ?? [];
+            if (packages.Count == 0 && refs.Length > 0)
+            {
+                // Newer quests and hangouts may omit the paths in ResourceCollection. Only
+                // matching packages from the official installed-version manifest are used.
+                packages = GameUpdateService.VoiceLanguages.Select(language => $"{language.Directory}/{groupId}.pck").ToArray();
+            }
+
+            if (packages.Count > 0 || source?.Videos.Count > 0)
+                groups.Add(new CutsceneVoiceGroup(groupId, packages, source?.Videos ?? [], refs));
+        }
+        return groups;
+    }
+
+    private static JsonArray ToStringArray(IEnumerable<string> values) =>
+        new(values.Distinct(StringComparer.OrdinalIgnoreCase).Select(value => (JsonNode?)JsonValue.Create(value)).ToArray());
+
+    private static string? GetTitle(IReadOnlyDictionary<ulong, string>? map, ulong? hash)
+    {
+        if (map is null || hash is not > 0 || !map.TryGetValue(hash.Value, out string? text))
+            return null;
+
+        text = text.Trim();
+        return text.Length > 0 && !text.Contains("$HIDDEN", StringComparison.OrdinalIgnoreCase)
+            && !text.Contains("$UNRELEASED", StringComparison.OrdinalIgnoreCase)
+            && !text.StartsWith("(test)", StringComparison.OrdinalIgnoreCase)
+            && !text.StartsWith("（test）", StringComparison.OrdinalIgnoreCase) ? text : null;
+    }
+
+    private static string? FormatChapterTitle(
+        IReadOnlyDictionary<ulong, string>? map, ChapterMeta? chapter, CutsceneCategory category)
+    {
+        string? title = GetTitle(map, chapter?.TitleHash);
+        string? number = GetTitle(map, chapter?.NumHash);
+        if (title is null && number is null)
+            return null;
+
+        // The hangout act string already contains the character's name.
+        string? subject = category is CutsceneCategory.Archon or CutsceneCategory.Story or CutsceneCategory.Tribal
+            ? GetTitle(map, chapter?.ImageTitleHash) : null;
+        if (number is not null)
+            number = string.Join(' ', number.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+        if (subject is not null && number is not null && HasChapterSubject(number, subject))
+            subject = null;
+        return string.Join(" · ", new[] { subject, number, title }.OfType<string>().Distinct());
+    }
+
+    private static bool HasChapterSubject(string number, string subject) =>
+        subject.Length > 0 && (number.StartsWith(subject + " ", StringComparison.Ordinal)
+                              || number.StartsWith(subject + ":", StringComparison.Ordinal));
+
+    private static JsonObject GetLocalizedTitles(IReadOnlyList<Dictionary<ulong, string>> maps,
+        Func<IReadOnlyDictionary<ulong, string>?, string, string> getTitle) => new()
+    {
+        ["zh-CN"] = getTitle(maps[0], "zh-CN"),
+        ["zh-TW"] = getTitle(maps[1], "zh-TW"),
+        ["en-US"] = getTitle(maps[2], "en-US")
+    };
+
+    private static CutsceneCategory InferCategory(QuestInfo quest, ChapterMeta? chapter)
+    {
+        if (CutsceneChapter.GetCategoryOverride(quest.ChapterId) is { } category)
+            return category;
+
+        // Sunspray Summer Resort uses LQ for all four parts in the game tables.
+        if (chapter is { Id: >= 10245 and <= 10248 })
+            return CutsceneCategory.Event;
+
+        return (chapter?.QuestType ?? quest.Type) switch
+        {
+            "AQ" => CutsceneCategory.Archon,
+            "EQ" => CutsceneCategory.Event,
+            "WQ" => CutsceneCategory.World,
+            "LQ" when quest.ResId is >= 3000 and < 4000 => CutsceneCategory.Hangout,
+            "LQ" when chapter is { CityId: 6, Id: >= 2052 and <= 2073 } => CutsceneCategory.Tribal,
+            "LQ" => CutsceneCategory.Story,
+            _ when quest.ChapterId is >= 1000 and < 2000 => CutsceneCategory.Archon,
+            _ => CutsceneCategory.Other
         };
     }
 
     private static async Task<(Version? LiveVersion, HashSet<string> VideoFiles)> TryFetchLiveSophonAsync(
-        SophonBuildClient? sophonClient,
+        SophonBuildClient sophonClient,
         GameServerScheme? preferredScheme,
         CancellationToken token)
     {
         var videos = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         Version? highestVersion = null;
-        if (sophonClient is null)
-            return (null, videos);
 
         var schemes = new List<GameServerScheme>();
         if (preferredScheme is not null)
@@ -414,20 +660,23 @@ internal static class CutsceneCatalogUpdater
         if (!schemes.Any(s => s.IsOversea))
             schemes.Add(GameServerScheme.OverseaOfficialDefault);
 
+        using var lookup = CancellationTokenSource.CreateLinkedTokenSource(token);
+        lookup.CancelAfter(EndpointTimeout);
         foreach (GameServerScheme scheme in schemes)
         {
             token.ThrowIfCancellationRequested();
             try
             {
                 SophonBranchPayload payload = await sophonClient
-                    .GetBranchPayloadAsync(scheme, isPreDownload: false, token).ConfigureAwait(false);
-                if (Version.TryParse(payload.Tag, out Version? tagVer) && (highestVersion is null || tagVer > highestVersion))
+                    .GetBranchPayloadAsync(scheme, isPreDownload: false, lookup.Token).ConfigureAwait(false);
+                if (Version.TryParse(payload.Tag, out Version? tagVer)
+                    && tagVer.Build >= 0 && tagVer.Revision < 0 && (highestVersion is null || tagVer > highestVersion))
                     highestVersion = tagVer;
 
                 SophonBranchInfo branchInfo = await sophonClient
-                    .GetBranchInfoAsync(scheme, isPreDownload: false, token).ConfigureAwait(false);
+                    .GetBranchInfoAsync(scheme, isPreDownload: false, lookup.Token).ConfigureAwait(false);
                 SophonManifestProto manifest = await sophonClient
-                    .DownloadManifestAsync(branchInfo, token).ConfigureAwait(false);
+                    .DownloadManifestAsync(branchInfo, lookup.Token).ConfigureAwait(false);
 
                 foreach (AssetProperty asset in manifest.Assets)
                 {
@@ -446,14 +695,14 @@ internal static class CutsceneCatalogUpdater
             catch (Exception ex)
             {
                 DebugLog.Info(nameof(CutsceneCatalogUpdater),
-                    $"Sophon live query failed for {scheme.DisplayName}: {ex.Message}");
+                    $"Sophon live query failed for {scheme.DisplayName} ({ex.GetType().Name}).");
             }
         }
 
         return (highestVersion, videos);
     }
 
-    private static async Task<string> TryResolveUpstreamCommitAsync(HttpClient client, CancellationToken token)
+    private static async Task<string?> TryResolveUpstreamCommitAsync(HttpClient client, CancellationToken token)
     {
         try
         {
@@ -463,26 +712,26 @@ internal static class CutsceneCatalogUpdater
             request.Headers.TryAddWithoutValidation("Accept", "application/vnd.github+json");
             using HttpResponseMessage resp = await client.SendAsync(request, timeout.Token).ConfigureAwait(false);
             if (!resp.IsSuccessStatusCode)
-                return "master";
+                return null;
 
             using Stream stream = await resp.Content.ReadAsStreamAsync(timeout.Token).ConfigureAwait(false);
             using JsonDocument doc = await JsonDocument.ParseAsync(stream, cancellationToken: timeout.Token).ConfigureAwait(false);
             if (doc.RootElement.TryGetProperty("sha", out JsonElement shaProp) && shaProp.ValueKind == JsonValueKind.String)
             {
                 string? sha = shaProp.GetString();
-                if (!string.IsNullOrWhiteSpace(sha))
+                if (sha is { Length: 40 } && sha.All(char.IsAsciiHexDigit))
                     return sha;
             }
         }
-        catch
+        catch (Exception) when (!token.IsCancellationRequested)
         {
         }
 
-        return "master";
+        return null;
     }
 
-    private static async Task<byte[]> DownloadBytesWithMirrorsAsync(
-        HttpClient client, string rawUrl, int maxBytes, TimeSpan perAttemptTimeout, CancellationToken token)
+    private static async Task<T> DownloadWithMirrorsAsync<T>(
+        HttpClient client, string rawUrl, int maxBytes, Func<byte[], T> parse, CancellationToken token)
     {
         Exception? lastError = null;
         foreach (var (sourceName, url) in BuildMirrorCandidates(rawUrl))
@@ -491,7 +740,7 @@ internal static class CutsceneCatalogUpdater
             try
             {
                 using var timeout = CancellationTokenSource.CreateLinkedTokenSource(token);
-                timeout.CancelAfter(perAttemptTimeout);
+                timeout.CancelAfter(EndpointTimeout);
                 using HttpResponseMessage response = await client
                     .GetAsync(url, HttpCompletionOption.ResponseHeadersRead, timeout.Token).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
@@ -510,7 +759,7 @@ internal static class CutsceneCatalogUpdater
                             throw new InvalidDataException($"Upstream asset from {sourceName} exceeds size limit.");
                         ms.Write(buffer, 0, read);
                     }
-                    return ms.ToArray();
+                    return parse(ms.ToArray());
                 }
                 finally
                 {
@@ -524,11 +773,26 @@ internal static class CutsceneCatalogUpdater
             catch (Exception ex)
             {
                 lastError = ex;
-                DebugLog.Info(nameof(CutsceneCatalogUpdater), $"Fetch via {sourceName} failed: {ex.Message}");
+                DebugLog.Info(nameof(CutsceneCatalogUpdater), $"Fetch via {sourceName} failed ({ex.GetType().Name}).");
             }
         }
 
         throw lastError ?? new InvalidOperationException($"Failed to fetch upstream resource: {rawUrl}");
+    }
+
+    private static async Task<Dictionary<ulong, string>> FetchCatalogTextMapAsync(
+        HttpClient client, string rawBase, string language, CatalogMerge merge, IReadOnlySet<ulong> neededHashes,
+        CancellationToken token)
+    {
+        // Chapter and act names live in the Medium archive. The regular archive provides task text.
+        var texts = await TryFetchFilteredTextMapAsync(
+            client, $"{rawBase}/TextMap/TextMap_Medium{language}.json", neededHashes, token).ConfigureAwait(false);
+        var missingHashes = merge.GetNeededTextHashes(texts);
+        var fallback = await TryFetchFilteredTextMapAsync(
+            client, $"{rawBase}/TextMap/TextMap{language}.json", missingHashes, token).ConfigureAwait(false);
+        foreach (var (hash, title) in fallback)
+            texts[hash] = title;
+        return texts;
     }
 
     private static async Task<Dictionary<ulong, string>> TryFetchFilteredTextMapAsync(
@@ -559,7 +823,7 @@ internal static class CutsceneCatalogUpdater
             }
             catch (Exception ex)
             {
-                DebugLog.Info(nameof(CutsceneCatalogUpdater), $"TextMap via {sourceName} failed: {ex.Message}");
+                DebugLog.Info(nameof(CutsceneCatalogUpdater), $"TextMap via {sourceName} failed ({ex.GetType().Name}).");
             }
         }
 
@@ -682,9 +946,9 @@ internal static class CutsceneCatalogUpdater
     {
         var candidates = new List<(string Name, string Url)>
         {
+            ("GitHub", rawUrl),
             (new Uri(ApiEndpoints.GhProxyBase).Host,
-                ApiEndpoints.BuildMirrorUrl(new Uri(ApiEndpoints.GhProxyBase).Host, rawUrl)),
-            ("GitHub", rawUrl)
+                ApiEndpoints.BuildMirrorUrl(new Uri(ApiEndpoints.GhProxyBase).Host, rawUrl))
         };
 
         var mirrorConfig = new MirrorSiteProvider().LoadConfig();
@@ -703,66 +967,37 @@ internal static class CutsceneCatalogUpdater
     internal static Dictionary<string, ResourceCollectionEntry> ParseResourceCollections(byte[] jsonBytes)
     {
         using JsonDocument doc = JsonDocument.Parse(jsonBytes);
-        var result = new Dictionary<string, ResourceCollectionEntry>(StringComparer.Ordinal);
-        if (!doc.RootElement.TryGetProperty("resourceCollectionMap", out JsonElement mapProp)
-            || mapProp.ValueKind != JsonValueKind.Object)
-        {
-            return result;
-        }
+        if (!doc.RootElement.TryGetProperty("resourceCollectionMap", out JsonElement map)
+            || map.ValueKind != JsonValueKind.Object)
+            throw new InvalidDataException("Missing resource collection map.");
 
-        foreach (JsonProperty groupProp in mapProp.EnumerateObject())
-        {
-            List<string> packages = [];
-            if (groupProp.Value.TryGetProperty("audioResourceList", out JsonElement audioProp)
-                && audioProp.ValueKind == JsonValueKind.Array)
-            {
-                foreach (JsonElement item in audioProp.EnumerateArray())
-                {
-                    string? path = item.GetString()?.Replace('\\', '/').TrimStart('/');
-                    if (!string.IsNullOrWhiteSpace(path))
-                        packages.Add(path);
-                }
-            }
+        return map.EnumerateObject().ToDictionary(group => group.Name, group => new ResourceCollectionEntry(
+            ReadPaths(group.Value, "audioResourceList", ".pck").ToArray(),
+            ReadPaths(group.Value, "videoResourceList", ".usm").Select(path => Path.GetFileName(path)).ToArray()));
+    }
 
-            List<string> videos = [];
-            if (groupProp.Value.TryGetProperty("videoResourceList", out JsonElement videoProp)
-                && videoProp.ValueKind == JsonValueKind.Array)
-            {
-                foreach (JsonElement item in videoProp.EnumerateArray())
-                {
-                    string? path = item.GetString()?.Trim();
-                    if (!string.IsNullOrWhiteSpace(path))
-                        videos.Add(path);
-                }
-            }
+    private static IEnumerable<string> ReadPaths(JsonElement group, string propertyName, string extension)
+    {
+        if (!group.TryGetProperty(propertyName, out JsonElement list) || list.ValueKind != JsonValueKind.Array)
+            return [];
 
-            result[groupProp.Name] = new ResourceCollectionEntry(groupProp.Name, packages, videos);
-        }
-
-        return result;
+        return list.EnumerateArray().Where(item => item.ValueKind == JsonValueKind.String)
+            .Select(item => item.GetString()!.Trim().Replace('\\', '/').TrimStart('/'))
+            .Where(path => path.EndsWith(extension, StringComparison.OrdinalIgnoreCase));
     }
 
     internal static Dictionary<int, ChapterMeta> ParseChapterExcel(byte[] jsonBytes)
     {
         using JsonDocument doc = JsonDocument.Parse(jsonBytes);
         var result = new Dictionary<int, ChapterMeta>();
-        if (doc.RootElement.ValueKind != JsonValueKind.Array)
-            return result;
-
         foreach (JsonElement item in doc.RootElement.EnumerateArray())
         {
-            if (item.ValueKind != JsonValueKind.Object || !item.TryGetProperty("id", out JsonElement idProp)
-                || !idProp.TryGetInt32(out int id) || id <= 0)
-            {
+            int id = ReadInt(item, "id");
+            if (id <= 0)
                 continue;
-            }
-
-            ulong titleHash = TryReadUInt64(item, "chapterTitleTextMapHash");
-            ulong numHash = TryReadUInt64(item, "chapterNumTextMapHash");
-            string? questType = item.TryGetProperty("questType", out JsonElement qtProp) && qtProp.ValueKind == JsonValueKind.String
-                ? qtProp.GetString()
-                : null;
-            result[id] = new ChapterMeta(id, titleHash, numHash, questType);
+            result[id] = new ChapterMeta(id, ReadString(item, "questType"), ReadInt(item, "cityId"),
+                ReadHash(item, "chapterTitleTextMapHash"), ReadHash(item, "chapterNumTextMapHash"),
+                ReadHash(item, "chapterImageTitleTextMapHash"));
         }
 
         return result;
@@ -772,329 +1007,47 @@ internal static class CutsceneCatalogUpdater
     {
         using JsonDocument doc = JsonDocument.Parse(jsonBytes);
         var result = new List<QuestInfo>();
-        if (doc.RootElement.ValueKind != JsonValueKind.Array)
-            return result;
-
         foreach (JsonElement item in doc.RootElement.EnumerateArray())
         {
-            if (item.ValueKind != JsonValueKind.Object || !item.TryGetProperty("id", out JsonElement idProp)
-                || !idProp.TryGetInt32(out int id) || id <= 0)
-            {
-                continue;
-            }
-
-            int resId = item.TryGetProperty("resId", out JsonElement resProp) && resProp.TryGetInt32(out int r) ? r : 0;
-            if (resId <= 0)
-                continue;
-
-            int chapterId = item.TryGetProperty("chapterId", out JsonElement chProp) && chProp.TryGetInt32(out int c) ? c : 0;
-            string? type = item.TryGetProperty("type", out JsonElement typeProp) && typeProp.ValueKind == JsonValueKind.String
-                ? typeProp.GetString()
-                : null;
-            ulong titleHash = TryReadUInt64(item, "titleTextMapHash");
-            result.Add(new QuestInfo(id, resId, chapterId, type, titleHash));
+            int id = ReadInt(item, "id");
+            if (id > 0)
+                result.Add(new QuestInfo(id, ReadInt(item, "resId"), Math.Max(0, ReadInt(item, "chapterId")),
+                    ReadInt(item, "series"), ReadString(item, "type"), ReadHash(item, "titleTextMapHash")));
         }
-
         return result;
     }
 
-    private static ulong TryReadUInt64(JsonElement obj, string propertyName) =>
-        obj.TryGetProperty(propertyName, out JsonElement prop) && prop.TryGetUInt64(out ulong val) ? val : 0UL;
-
-    private static HashSet<ulong> CollectNeededTextMapHashes(
-        byte[] builtInBytes,
-        byte[]? existingCachedBytes,
-        IReadOnlySet<string> liveUsmFiles,
-        IReadOnlyDictionary<string, ResourceCollectionEntry> resourceCollections,
-        IReadOnlyList<QuestInfo> mainQuests,
-        IReadOnlyDictionary<int, ChapterMeta> chapterMeta)
+    private static Dictionary<int, SubquestInfo> ParseSubquests(byte[] jsonBytes)
     {
-        var knownScenes = new HashSet<string>(CutsceneNames.BuiltIn.Entries.Keys, StringComparer.OrdinalIgnoreCase);
-        var knownChapters = new HashSet<int>(
-            CutsceneNames.BuiltIn.Entries.Values.Where(e => e.Chapter.QuestChapterId > 0).Select(e => e.Chapter.QuestChapterId));
-
-        if (existingCachedBytes is { Length: > 0 })
+        using JsonDocument doc = JsonDocument.Parse(jsonBytes);
+        var parents = new Dictionary<int, SubquestInfo>();
+        foreach (JsonElement item in doc.RootElement.EnumerateArray())
         {
-            try
-            {
-                using var ms = new MemoryStream(existingCachedBytes, writable: false);
-                CutsceneNameCatalog cached = CutsceneNames.Read(ms);
-                foreach (var (key, val) in cached.Entries)
-                {
-                    knownScenes.Add(key);
-                    if (val.Chapter.QuestChapterId > 0)
-                        knownChapters.Add(val.Chapter.QuestChapterId);
-                }
-            }
-            catch
-            {
-            }
+            int subId = ReadInt(item, "subId");
+            int mainId = ReadInt(item, "mainId");
+            if (subId > 0 && mainId > 0)
+                parents.TryAdd(subId, new SubquestInfo(mainId, ReadHash(item, "titleTextMapHash")));
         }
-
-        var videoToGroup = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        foreach (var (gid, entry) in resourceCollections)
-        {
-            foreach (string rawVid in entry.Videos)
-                videoToGroup.TryAdd(CanonicalSceneKey(Path.GetFileName(rawVid.Replace('\\', '/'))), gid);
-        }
-
-        var questsByResId = new Dictionary<int, List<QuestInfo>>();
-        foreach (QuestInfo q in mainQuests)
-        {
-            if (!questsByResId.TryGetValue(q.ResId, out List<QuestInfo>? list))
-                questsByResId[q.ResId] = list = [];
-            list.Add(q);
-        }
-
-        IEnumerable<string> candidates = liveUsmFiles.Count > 0
-            ? liveUsmFiles
-            : resourceCollections.Values.SelectMany(v => v.Videos);
-
-        var neededHashes = new HashSet<ulong>();
-        foreach (string rawVid in candidates)
-        {
-            string fileName = Path.GetFileName(rawVid.Replace('\\', '/').Trim());
-            if (!fileName.EndsWith(".usm", StringComparison.OrdinalIgnoreCase))
-                continue;
-            string canonical = CanonicalSceneKey(fileName);
-            if (knownScenes.Contains(canonical))
-                continue;
-
-            if (TryResolvePrimaryQuest(canonical, videoToGroup, questsByResId, out QuestInfo? q) && q is not null)
-            {
-                if (q.TitleTextMapHash > 0)
-                    neededHashes.Add(q.TitleTextMapHash);
-                if (q.ChapterId > 0 && !knownChapters.Contains(q.ChapterId)
-                    && chapterMeta.TryGetValue(q.ChapterId, out ChapterMeta? meta))
-                {
-                    if (meta.TitleTextMapHash > 0) neededHashes.Add(meta.TitleTextMapHash);
-                    if (meta.NumTextMapHash > 0) neededHashes.Add(meta.NumTextMapHash);
-                }
-            }
-        }
-
-        return neededHashes;
+        return parents;
     }
 
-    private static void NormalizeAndRegisterChapter(
-        JsonObject chapterObj,
-        List<JsonObject> chaptersList,
-        HashSet<string> seenScenes,
-        Dictionary<int, JsonObject> chapterByQuestId)
-    {
-        var scenesObj = chapterObj["scenes"] as JsonObject ?? new JsonObject();
-        var filteredScenes = new JsonObject();
-        foreach (var kv in scenesObj)
-        {
-            if (!IsValidSceneKey(kv.Key) || !seenScenes.Add(kv.Key))
-                continue;
-            filteredScenes[kv.Key] = kv.Value?.DeepClone();
-        }
-        chapterObj["scenes"] = filteredScenes;
-        chaptersList.Add(chapterObj);
+    private static int ReadInt(JsonElement item, string key) =>
+        item.TryGetProperty(key, out JsonElement property) && property.ValueKind == JsonValueKind.Number
+        && property.TryGetInt32(out int value) ? value : 0;
 
-        if (chapterObj["questChapterId"]?.GetValue<int>() is int qcid and > 0)
-            chapterByQuestId.TryAdd(qcid, chapterObj);
-    }
+    private static ulong ReadHash(JsonElement item, string key) =>
+        item.TryGetProperty(key, out JsonElement property) && property.ValueKind == JsonValueKind.Number
+        && property.TryGetUInt64(out ulong value) ? value : 0;
 
-    private static void TryOverlayCachedExtras(
-        byte[] existingCachedBytes,
-        List<JsonObject> chaptersList,
-        HashSet<string> seenScenes,
-        Dictionary<int, JsonObject> chapterByQuestId)
-    {
-        try
-        {
-            JsonNode? cachedNode = JsonNode.Parse(existingCachedBytes);
-            if (cachedNode?["chapters"] is not JsonArray cachedChapters)
-                return;
+    private static string? ReadString(JsonElement item, string key) =>
+        item.TryGetProperty(key, out JsonElement property) && property.ValueKind == JsonValueKind.String
+            ? property.GetString()
+            : null;
 
-            foreach (JsonNode? chNode in cachedChapters)
-            {
-                if (chNode is not JsonObject cachedChapter || cachedChapter["scenes"] is not JsonObject cachedScenes)
-                    continue;
+    private static bool IsValidSceneKey(string key) =>
+        key.Length > 0 && key.All(c => char.IsAsciiLetterOrDigit(c) || c == '_' || c == '-');
 
-                var extraScenes = new List<(string Key, JsonNode? Value)>();
-                foreach (var kv in cachedScenes)
-                {
-                    if (IsValidSceneKey(kv.Key) && !seenScenes.Contains(kv.Key))
-                        extraScenes.Add((kv.Key, kv.Value?.DeepClone()));
-                }
-                if (extraScenes.Count == 0)
-                    continue;
-
-                int qcid = cachedChapter["questChapterId"]?.GetValue<int>() ?? 0;
-                if (qcid > 0 && chapterByQuestId.TryGetValue(qcid, out JsonObject? targetChapter))
-                {
-                    JsonObject targetScenes = targetChapter["scenes"] as JsonObject ?? new JsonObject();
-                    targetChapter["scenes"] = targetScenes;
-                    foreach (var (key, val) in extraScenes)
-                    {
-                        if (seenScenes.Add(key))
-                            targetScenes[key] = val;
-                    }
-                }
-                else
-                {
-                    JsonObject clonedChapter = cachedChapter.DeepClone().AsObject();
-                    var cleanScenes = new JsonObject();
-                    foreach (var (key, val) in extraScenes)
-                    {
-                        if (seenScenes.Add(key))
-                            cleanScenes[key] = val;
-                    }
-                    clonedChapter["scenes"] = cleanScenes;
-                    chaptersList.Add(clonedChapter);
-                    if (qcid > 0)
-                        chapterByQuestId.TryAdd(qcid, clonedChapter);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            DebugLog.Info(nameof(CutsceneCatalogUpdater), $"Ignoring cached extra chapters ({ex.GetType().Name}).");
-        }
-    }
-
-    private static bool TryResolvePrimaryQuest(
-        string canonicalSceneKey,
-        IReadOnlyDictionary<string, string> videoToGroup,
-        IReadOnlyDictionary<int, List<QuestInfo>> questsByResId,
-        out QuestInfo? quest)
-    {
-        quest = null;
-        if (!videoToGroup.TryGetValue(canonicalSceneKey, out string? gidStr) || !int.TryParse(gidStr, out int gid))
-            return false;
-        if (!questsByResId.TryGetValue(gid, out List<QuestInfo>? qList) || qList.Count == 0)
-            return false;
-
-        quest = qList.FirstOrDefault(q => q.ChapterId > 0) ?? qList[0];
-        return true;
-    }
-
-    private static JsonObject CreateChapterObject(
-        int questChapterId,
-        string? questType,
-        string fileName,
-        string releaseVersion,
-        IReadOnlyDictionary<int, ChapterMeta> chapterMeta,
-        IReadOnlyDictionary<ulong, string> textChs,
-        IReadOnlyDictionary<ulong, string> textCht,
-        IReadOnlyDictionary<ulong, string> textEn,
-        Dictionary<string, JsonObject> adhocByTitleKey,
-        List<JsonObject> chaptersList,
-        Dictionary<int, JsonObject> chapterByQuestId)
-    {
-        if (questChapterId == 0)
-        {
-            CutsceneChapter fallback = CutsceneChapter.FromFileName(fileName);
-            string cacheKey = $"{fallback.Category}|{fallback.TitleKey}|{fallback.QuestId}";
-            if (adhocByTitleKey.TryGetValue(cacheKey, out JsonObject? existingAdhoc))
-                return existingAdhoc;
-
-            string zhCnFallback = ResolveAdhocChapterTitle(fallback, "zh-CN");
-            string zhTwFallback = ResolveAdhocChapterTitle(fallback, "zh-TW");
-            string enUsFallback = ResolveAdhocChapterTitle(fallback, "en-US");
-
-            var adhocObj = new JsonObject
-            {
-                ["category"] = fallback.Category.ToString(),
-                ["releaseVersion"] = releaseVersion,
-                ["questChapterId"] = 0,
-                ["titles"] = new JsonObject
-                {
-                    ["zh-CN"] = zhCnFallback,
-                    ["zh-TW"] = zhTwFallback,
-                    ["en-US"] = enUsFallback
-                },
-                ["scenes"] = new JsonObject()
-            };
-            chaptersList.Add(adhocObj);
-            adhocByTitleKey[cacheKey] = adhocObj;
-            return adhocObj;
-        }
-
-        ChapterMeta? meta = chapterMeta.GetValueOrDefault(questChapterId);
-        string category = InferCategory(questType ?? meta?.QuestType, questChapterId);
-
-        string FormatTitle(IReadOnlyDictionary<ulong, string> map, string fallback)
-        {
-            if (meta is null)
-                return fallback;
-            string num = meta.NumTextMapHash > 0 ? map.GetValueOrDefault(meta.NumTextMapHash, string.Empty).Trim() : string.Empty;
-            string title = meta.TitleTextMapHash > 0 ? map.GetValueOrDefault(meta.TitleTextMapHash, string.Empty).Trim() : string.Empty;
-            if (num.Length > 0 && title.Length > 0)
-                return $"{num} · {title}";
-            return title.Length > 0 ? title : num.Length > 0 ? num : fallback;
-        }
-
-        string chsTitle = FormatTitle(textChs, $"章节 {questChapterId}");
-        string chtTitle = FormatTitle(textCht, chsTitle);
-        string enTitle = FormatTitle(textEn, $"Chapter {questChapterId}");
-
-        var chapterObj = new JsonObject
-        {
-            ["category"] = category,
-            ["releaseVersion"] = releaseVersion,
-            ["questChapterId"] = questChapterId,
-            ["titles"] = new JsonObject
-            {
-                ["zh-CN"] = chsTitle,
-                ["zh-TW"] = chtTitle,
-                ["en-US"] = enTitle
-            },
-            ["scenes"] = new JsonObject()
-        };
-
-        chaptersList.Add(chapterObj);
-        chapterByQuestId[questChapterId] = chapterObj;
-        return chapterObj;
-    }
-
-    private static JsonObject BuildSceneTitles(
-        string canonical,
-        QuestInfo? linkedQuest,
-        IReadOnlyDictionary<int, int> questSceneCounts,
-        IReadOnlyDictionary<ulong, string> textChs,
-        IReadOnlyDictionary<ulong, string> textCht,
-        IReadOnlyDictionary<ulong, string> textEn)
-    {
-        if (linkedQuest is { TitleTextMapHash: > 0 } q
-            && textChs.TryGetValue(q.TitleTextMapHash, out string? questZhCn)
-            && !string.IsNullOrWhiteSpace(questZhCn))
-        {
-            bool multiScenes = questSceneCounts.GetValueOrDefault(q.Id) > 1;
-            string suffix = multiScenes ? $" · {ShortSceneSuffix(canonical)}" : string.Empty;
-            string questZhTw = textCht.TryGetValue(q.TitleTextMapHash, out string? tw) && !string.IsNullOrWhiteSpace(tw)
-                ? tw
-                : questZhCn;
-            string questEn = textEn.TryGetValue(q.TitleTextMapHash, out string? en) && !string.IsNullOrWhiteSpace(en)
-                ? en
-                : canonical;
-
-            return new JsonObject
-            {
-                ["zh-CN"] = questZhCn + suffix,
-                ["zh-TW"] = questZhTw + suffix,
-                ["en-US"] = questEn + suffix
-            };
-        }
-
-        return new JsonObject
-        {
-            ["zh-CN"] = canonical,
-            ["zh-TW"] = canonical,
-            ["en-US"] = canonical
-        };
-    }
-
-    private static string ShortSceneSuffix(string canonical)
-    {
-        int idx = canonical.LastIndexOf('_');
-        return idx > 0 && idx < canonical.Length - 1 ? canonical[(idx + 1)..] : canonical;
-    }
-
-    private static string ResolveAdhocChapterTitle(CutsceneChapter chapter, string locale)
+    private static string FallbackTitle(CutsceneChapter chapter, string locale)
     {
         string baseTitle = (chapter.TitleKey, locale) switch
         {
@@ -1126,6 +1079,9 @@ internal static class CutsceneCatalogUpdater
             ("Cutscene_Category_Archon", "zh-TW") => "魔神任務",
             ("Cutscene_Category_Archon", "en-US") => "Archon Quests",
             ("Cutscene_Category_Archon", _) => "魔神任务",
+            ("Cutscene_Category_Hangout", "zh-TW") => "邀約事件",
+            ("Cutscene_Category_Hangout", "en-US") => "Hangout Events",
+            ("Cutscene_Category_Hangout", _) => "邀约事件",
             ("Cutscene_Category_Story", "zh-TW") => "傳說任務",
             ("Cutscene_Category_Story", "en-US") => "Story Quests",
             ("Cutscene_Category_Story", _) => "传说任务",
@@ -1142,54 +1098,7 @@ internal static class CutsceneCatalogUpdater
             _ => "其他"
         };
 
-        return chapter.QuestId.Length == 0 ? baseTitle : $"{baseTitle} · {chapter.QuestId}";
+        return baseTitle;
     }
 
-    private static string InferCategory(string? questType, int chapterId) => questType switch
-    {
-        "AQ" => nameof(CutsceneCategory.Archon),
-        "EQ" => nameof(CutsceneCategory.Event),
-        "WQ" => nameof(CutsceneCategory.World),
-        "LQ" => nameof(CutsceneCategory.Story),
-        _ when chapterId is >= 1000 and < 2000 => nameof(CutsceneCategory.Archon),
-        _ => nameof(CutsceneCategory.Other)
-    };
-
-    private static string CanonicalSceneKey(string fileName)
-    {
-        string stem = Path.GetFileNameWithoutExtension(fileName);
-        foreach (string suffix in TravelerSuffixes)
-        {
-            if (stem.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
-                return stem[..^suffix.Length];
-        }
-        return stem;
-    }
-
-    private static bool IsValidSceneKey(string key) =>
-        key.Length > 0 && key.All(c => char.IsAsciiLetterOrDigit(c) || c == '_' || c == '-');
-
-    private static Version MaxVersion(Version? a, Version b) =>
-        a is not null && a > b ? a : b;
-
-    private static bool VoiceGroupsEqual(
-        IReadOnlyDictionary<string, CutsceneVoiceGroup> left,
-        IReadOnlyDictionary<string, CutsceneVoiceGroup> right)
-    {
-        if (left.Count != right.Count)
-            return false;
-
-        foreach (var (gid, lg) in left)
-        {
-            if (!right.TryGetValue(gid, out CutsceneVoiceGroup? rg))
-                return false;
-            if (!lg.Packages.SequenceEqual(rg.Packages, StringComparer.Ordinal)
-                || !lg.Videos.SequenceEqual(rg.Videos, StringComparer.Ordinal)
-                || !lg.Quests.SequenceEqual(rg.Quests))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
 }

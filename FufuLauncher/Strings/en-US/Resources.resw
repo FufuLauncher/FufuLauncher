@@ -13412,16 +13412,16 @@ Continue to the project page?</value>
     <value>Update catalog</value>
   </data>
   <data name="Cutscene_CatalogUpdating" xml:space="preserve">
-    <value>Pulling official and upstream data for local catalog merge…</value>
+    <value>Getting the resource catalog…</value>
   </data>
   <data name="Cutscene_CatalogUpdated" xml:space="preserve">
-    <value>Cutscene catalog updated to {0}.</value>
+    <value>Saved resource catalog {0}.</value>
   </data>
   <data name="Cutscene_CatalogCurrent" xml:space="preserve">
-    <value>Cutscene catalog {0} is current.</value>
+    <value>Resource catalog {0} is up to date.</value>
   </data>
   <data name="Cutscene_CatalogUpdateFailed" xml:space="preserve">
-    <value>Could not update the catalog. The last valid catalog is still in use.</value>
+    <value>Could not update the resource catalog. The saved catalog is still available.</value>
   </data>
   <data name="Cutscene_VoicePacks" xml:space="preserve">
     <value>Voice packages</value>
@@ -13552,20 +13552,17 @@ Continue to the project page?</value>
   <data name="Cutscene_ChapterClipCount" xml:space="preserve">
     <value>{0} clips</value>
   </data>
-  <data name="Cutscene_SortMode" xml:space="preserve">
-    <value>Sort by</value>
-  </data>
   <data name="Cutscene_SortByRelease" xml:space="preserve">
-    <value>Release time</value>
+    <value>Release order</value>
   </data>
   <data name="Cutscene_SortDirection" xml:space="preserve">
     <value>Sort direction</value>
   </data>
   <data name="Cutscene_SortAscending" xml:space="preserve">
-    <value>Ascending</value>
+    <value>Oldest first</value>
   </data>
   <data name="Cutscene_SortDescending" xml:space="preserve">
-    <value>Descending</value>
+    <value>Newest first</value>
   </data>
   <data name="Cutscene_PendingFilter" xml:space="preserve">
     <value>Pending {0}</value>
@@ -13607,7 +13604,7 @@ Continue to the project page?</value>
     <value>The previous version’s manifest is unavailable. Removal based on version history is temporarily unavailable.</value>
   </data>
   <data name="Cutscene_NothingLoaded" xml:space="preserve">
-    <value>No cutscenes loaded</value>
+    <value>No resources to show</value>
   </data>
   <data name="Cutscene_Empty" xml:space="preserve">
     <value>No cutscenes match the filters</value>
@@ -13720,9 +13717,6 @@ Continue to the project page?</value>
   <data name="Cutscene_Region_Snezhnaya" xml:space="preserve">
     <value>Snezhnaya</value>
   </data>
-  <data name="Cutscene_OneClickCatalogUpdate" xml:space="preserve">
-    <value>One-click update</value>
-  </data>
   <data name="Cutscene_BatchMenu" xml:space="preserve">
     <value>Batch select</value>
   </data>
@@ -13733,7 +13727,7 @@ Continue to the project page?</value>
     <value>Queue traced audio by language</value>
   </data>
   <data name="Cutscene_CatalogImport" xml:space="preserve">
-    <value>Import local catalog (.json)</value>
+    <value>Import catalog</value>
   </data>
   <data name="Cutscene_LockCleaned" xml:space="preserve">
     <value>Lock cleaned files (0-byte stub)</value>
@@ -13751,19 +13745,19 @@ Continue to the project page?</value>
     <value>Clear preview cache</value>
   </data>
   <data name="Cutscene_ResourceScope" xml:space="preserve">
-    <value>Resource type filter</value>
+    <value>Resource type</value>
   </data>
   <data name="Cutscene_ScopeAll" xml:space="preserve">
-    <value>All resources (Video + Audio)</value>
+    <value>All resources</value>
   </data>
   <data name="Cutscene_ScopeVideo" xml:space="preserve">
-    <value>Cutscenes only (.usm)</value>
+    <value>Cutscenes</value>
   </data>
   <data name="Cutscene_ScopeAudio" xml:space="preserve">
-    <value>Story audio only (.pck)</value>
+    <value>Story audio</value>
   </data>
   <data name="Cutscene_AudioLanguageFilter" xml:space="preserve">
-    <value>Audio language filter</value>
+    <value>Voice language</value>
   </data>
   <data name="Cutscene_AllLanguages" xml:space="preserve">
     <value>All languages</value>
@@ -13778,10 +13772,7 @@ Continue to the project page?</value>
     <value>Replace cleaned files in StreamingAssets and Persistent with locked 0-byte read-only stubs (Deny Write/Delete ACL) so the client and launcher skip re-downloading them.</value>
   </data>
   <data name="Cutscene_CatalogStatusCached" xml:space="preserve">
-    <value>Catalog: {0} (Local merged cache)</value>
-  </data>
-  <data name="Cutscene_CatalogStatusBuiltIn" xml:space="preserve">
-    <value>Catalog: {0} (Built-in)</value>
+    <value>Resource catalog {0}</value>
   </data>
   <data name="Cutscene_HistoryBaseline" xml:space="preserve">
     <value>Baseline v{0}</value>
@@ -13805,25 +13796,25 @@ Continue to the project page?</value>
     <value>{0}, {1}.\n\nCleaned files will be replaced with locked 0-byte NTFS stubs (Deny Write/Delete) so the client and launcher verification skip re-downloading them. Continue?</value>
   </data>
   <data name="Cutscene_ConfirmSharedAudio" xml:space="preserve">
-    <value>Warning: Some selected audio packs (VoiceGroups) are shared across multiple quests or chapters. Clean them only if you have completed all linked chapters.</value>
-  </data>
-  <data name="Cutscene_CatalogUpdatedVia" xml:space="preserve">
-    <value>Catalog updated to {0} (Source: {1}).</value>
+    <value>Some selected voice packs are shared by multiple quests or chapters. Confirm that you have completed all linked chapters before removing them.</value>
   </data>
   <data name="Cutscene_CatalogImportFailed" xml:space="preserve">
-    <value>Could not import the catalog file. Verify that it is a valid JSON catalog.</value>
+    <value>Could not import the resource catalog. Select a valid catalog file.</value>
+  </data>
+  <data name="Cutscene_CatalogImportOutdated" xml:space="preserve">
+    <value>This catalog is outdated. Import a newer catalog.</value>
+  </data>
+  <data name="Cutscene_CatalogRefreshFailed" xml:space="preserve">
+    <value>The catalog was saved, but the resource list could not be refreshed. Check the game path and version, then refresh.</value>
   </data>
   <data name="Cutscene_VoicePackDetailedSummary" xml:space="preserve">
-    <value>{0} ({1} packs · {2} traced · {3} locked · {4})</value>
-  </data>
-  <data name="Cutscene_StubbedLockedShort" xml:space="preserve">
-    <value>Cleaned · 0B locked</value>
+    <value>{0} · {2} of {1} linked · {3} removed · {4}</value>
   </data>
   <data name="Cutscene_VoiceCoreProtected" xml:space="preserve">
-    <value>Core/shared voice pack (protected)</value>
+    <value>Protected voices without a quest match</value>
   </data>
   <data name="Cutscene_VoicePackTracedHint" xml:space="preserve">
-    <value>Local voice packs detected below. Traced story packs linked via cutscene VoiceGroup chains can be managed in the main list; core packs stay protected.</value>
+    <value>Browse installed voice packs by language. Shared packs list the chapters that use them.</value>
   </data>
   <data name="Cutscene_LockingCleaned" xml:space="preserve">
     <value>Applying 0-byte read-only stub locks to cleaned files…</value>
@@ -13949,25 +13940,19 @@ Continue to the project page?</value>
     <value>Cutscene</value>
   </data>
   <data name="Cutscene_AudioItemTitle" xml:space="preserve">
-    <value>Story audio ({0}) · Group {1} · {2}</value>
+    <value>Story voice pack</value>
+  </data>
+  <data name="Cutscene_QuestAudioItemTitle" xml:space="preserve">
+    <value>Quest voice pack</value>
   </data>
   <data name="Cutscene_StubbedLocked" xml:space="preserve">
     <value>Cleaned · 0-byte locked</value>
-  </data>
-  <data name="Cutscene_VoiceGroupBadge" xml:space="preserve">
-    <value>VoiceGroup {0}</value>
   </data>
   <data name="Cutscene_SharedChaptersBadge" xml:space="preserve">
     <value>Shared across {0} chapters</value>
   </data>
   <data name="Cutscene_TraceChainVideos" xml:space="preserve">
     <value>Linked videos: {0}</value>
-  </data>
-  <data name="Cutscene_TraceChainChapter" xml:space="preserve">
-    <value>Source chapter: {0}</value>
-  </data>
-  <data name="Cutscene_VoiceGroupLabel" xml:space="preserve">
-    <value>Story Group {0}</value>
   </data>
   <data name="Cutscene_VerifySkippedSlimmed" xml:space="preserve">
     <value>Skipped {0} slimmed 0-byte locked cutscene/audio stub file(s) during verification.</value>
@@ -13993,16 +13978,49 @@ Continue to the project page?</value>
   <data name="Cutscene_AutoTranscoding" xml:space="preserve">
     <value>Direct playback unsupported by system codecs. Auto-transcoding to compatible MP4…</value>
   </data>
-  <data name="Cutscene_CatalogPullSophon" xml:space="preserve">
-    <value>Querying live official Sophon build manifests…</value>
-  </data>
   <data name="Cutscene_CatalogPullUpstream" xml:space="preserve">
-    <value>Fetching upstream quest &amp; voice index (AnimeGameData)…</value>
+    <value>Downloading the catalog and quest data…</value>
   </data>
   <data name="Cutscene_CatalogPullTextMap" xml:space="preserve">
     <value>Streaming localized titles for newly discovered chapters…</value>
   </data>
   <data name="Cutscene_CatalogMerging" xml:space="preserve">
-    <value>Merging pulled data autonomously into the local catalog…</value>
+    <value>Preparing the cutscene and voice catalog…</value>
+  </data>
+  <data name="Cutscene_CatalogSetupTitle" xml:space="preserve">
+    <value>Get the resource catalog</value>
+  </data>
+  <data name="Cutscene_CatalogRequired" xml:space="preserve">
+    <value>Get the cutscene and voice catalog to start. The launcher saves it on this device for future visits.</value>
+  </data>
+  <data name="Cutscene_CatalogFetch" xml:space="preserve">
+    <value>Get catalog online</value>
+  </data>
+  <data name="Cutscene_CatalogFetchFailed" xml:space="preserve">
+    <value>Could not get the resource catalog. Check your connection and retry, or import an existing catalog.</value>
+  </data>
+  <data name="Cutscene_ShowPlaybackExport" xml:space="preserve">
+    <value>Show playback and export</value>
+  </data>
+  <data name="Cutscene_Category_Hangout" xml:space="preserve">
+    <value>Hangout Events</value>
+  </data>
+  <data name="Cutscene_UnclassifiedVoice" xml:space="preserve">
+    <value>Unclassified story audio</value>
+  </data>
+  <data name="Cutscene_Protection_Unclassified" xml:space="preserve">
+    <value>Protected · Quest association unconfirmed</value>
+  </data>
+  <data name="Cutscene_Protection_HistoryUnavailable" xml:space="preserve">
+    <value>Protected · Comparison manifest unavailable</value>
+  </data>
+  <data name="Cutscene_Protection_MissingInHistory" xml:space="preserve">
+    <value>Protected · Absent from the comparison version</value>
+  </data>
+  <data name="Cutscene_Protection_LinkedVideo" xml:space="preserve">
+    <value>Protected · A linked cutscene is protected</value>
+  </data>
+  <data name="Cutscene_Protection_CurrentChapter" xml:space="preserve">
+    <value>Protected · Belongs to a current chapter</value>
   </data>
 </root>

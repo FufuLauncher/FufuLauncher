@@ -1,5 +1,6 @@
 {
   "gameVersion": "7.2.0",
+  "revision": 5,
   "questSource": "https://github.com/DimbreathBot/AnimeGameData/tree/d54f6f0d42",
   "earlyCutsceneSource": "https://github.com/xunkong/cutscene",
   "releaseSource": "https://github.com/SuperFly233/teyvat-scriptorium/blob/main/public/data/catalog.json",
@@ -235,6 +236,17 @@
         "zh-CN": "旅人 · 第一章 第四幕 · 我们终将重逢",
         "zh-TW": "旅人 · 第一章 第四幕 · 我們終將重逢",
         "en-US": "Traveler · Chapter I: Act IV · We Will Be Reunited"
+      },
+      "scenes": {},
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "questChapterId": 1105,
+      "titles": {
+        "zh-CN": "拾枝者·戴因斯雷布",
+        "zh-TW": "拾枝者·戴因斯雷布",
+        "en-US": "Bough Keeper: Dainsleif"
       },
       "scenes": {
         "CS_WQDY1800026_MEMORIES": {
@@ -862,9 +874,9 @@
       "releaseVersion": "2.4",
       "questChapterId": 1205,
       "titles": {
-        "zh-CN": "间章 · 间章 第一幕 · 风起鹤归",
-        "zh-TW": "間章 · 間章 第一幕 · 風起鶴歸",
-        "en-US": "Interlude Chapter · Interlude Chapter: Act I · The Crane Returns on the Wind"
+        "zh-CN": "间章 第一幕 · 风起鹤归",
+        "zh-TW": "間章 第一幕 · 風起鶴歸",
+        "en-US": "Interlude Chapter: Act I · The Crane Returns on the Wind"
       },
       "scenes": {
         "CS_LQ1101502_SHENHEBATTLE": {
@@ -884,9 +896,9 @@
       "releaseVersion": "3.3",
       "questChapterId": 1307,
       "titles": {
-        "zh-CN": "间章 · 间章 第三幕 · 倾落伽蓝",
-        "zh-TW": "間章 · 間章 第三幕 · 傾落伽藍",
-        "en-US": "Interlude Chapter · Interlude Chapter: Act III · Inversion of Genesis"
+        "zh-CN": "间章 第三幕 · 倾落伽蓝",
+        "zh-TW": "間章 第三幕 · 傾落伽藍",
+        "en-US": "Interlude Chapter: Act III · Inversion of Genesis"
       },
       "scenes": {
         "CS_SUMERU_AQ_30310701_HB": {
@@ -901,9 +913,9 @@
       "releaseVersion": "2.7",
       "questChapterId": 1207,
       "titles": {
-        "zh-CN": "间章 · 间章 第二幕 · 危途疑踪",
-        "zh-TW": "間章 · 間章 第二幕 · 危途疑蹤",
-        "en-US": "Interlude Chapter · Interlude Chapter: Act II · Perilous Trail"
+        "zh-CN": "间章 第二幕 · 危途疑踪",
+        "zh-TW": "間章 第二幕 · 危途疑蹤",
+        "en-US": "Interlude Chapter: Act II · Perilous Trail"
       },
       "scenes": {
         "CS_LIYUE_LQ10310301_BREAKTHROUGHSPACE": {
@@ -923,9 +935,9 @@
       "releaseVersion": "5.6",
       "questChapterId": 1004,
       "titles": {
-        "zh-CN": "间章 · 间章 第四幕 · 悖理",
-        "zh-TW": "間章 · 間章 第四幕 · 悖理",
-        "en-US": "Interlude Chapter · Interlude Chapter: Act IV · Paralogism"
+        "zh-CN": "间章 第四幕 · 悖理",
+        "zh-TW": "間章 第四幕 · 悖理",
+        "en-US": "Interlude Chapter: Act IV · Paralogism"
       },
       "scenes": {
         "CS_MENGDE_AQ60207_BOSSCG": {
@@ -1942,6 +1954,5964 @@
           "en-US": "Pioneers · Cutscene 2"
         }
       }
+    },
+    {
+      "category": "World",
+      "titles": {
+        "zh-CN": "翠石砌玉壶·其一",
+        "zh-TW": "翠石砌玉壺·其一",
+        "en-US": "A Teapot to Call Home: Part I"
+      },
+      "scenes": {},
+      "mainQuestId": 11008
+    },
+    {
+      "category": "World",
+      "titles": {
+        "zh-CN": "无始无终的故事",
+        "zh-TW": "無始無終的故事",
+        "en-US": "Unbegun, Unending Story"
+      },
+      "scenes": {},
+      "mainQuestId": 70676
+    },
+    {
+      "category": "World",
+      "titles": {
+        "zh-CN": "台上台下",
+        "zh-TW": "臺上臺下",
+        "en-US": "On the Stage, Behind the Stage"
+      },
+      "scenes": {},
+      "mainQuestId": 71099
+    },
+    {
+      "category": "World",
+      "titles": {
+        "zh-CN": "翠石砌玉壶·其二",
+        "zh-TW": "翠石砌玉壺·其二",
+        "en-US": "A Teapot to Call Home: Part II"
+      },
+      "scenes": {},
+      "mainQuestId": 71654
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "璃月 · 第一章 第一幕 · 浮世浮生千岩间",
+        "zh-TW": "璃月 · 第一章 第一幕 · 浮世浮生千岩間",
+        "en-US": "Liyue · Chapter I: Act I · Of the Land Amidst Monoliths"
+      },
+      "scenes": {},
+      "questChapterId": 1101,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "须弥 · 第三章 第二幕 · 千朵玫瑰带来的黎明",
+        "zh-TW": "須彌 · 第三章 第二幕 · 千朵玫瑰帶來的黎明",
+        "en-US": "Sumeru · Chapter III: Act II · The Morn a Thousand Roses Brings"
+      },
+      "scenes": {},
+      "questChapterId": 1302,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "枫丹 · 第四章 第三幕 · 向深水中的晨星",
+        "zh-TW": "楓丹 · 第四章 第三幕 · 向深水中的晨星",
+        "en-US": "Fontaine · Chapter IV: Act III · To the Stars Shining in the Depths"
+      },
+      "scenes": {},
+      "questChapterId": 1403,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "旅人 · 第四章 第六幕 · 睡前故事",
+        "zh-TW": "旅人 · 第四章 第六幕 · 睡前故事",
+        "en-US": "Traveler · Chapter IV: Act VI · Bedtime Story"
+      },
+      "scenes": {},
+      "questChapterId": 1406,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "纳塔 · 第五章 第三幕 · 镜与谜烟的彼方",
+        "zh-TW": "納塔 · 第五章 第三幕 · 鏡與謎煙的彼方",
+        "en-US": "Natlan · Chapter V: Act III · Beyond the Smoke and Mirrors"
+      },
+      "scenes": {},
+      "questChapterId": 1502,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "纳塔 · 第五章 幕间 · 万火归一",
+        "zh-TW": "納塔 · 第五章 幕間 · 萬火歸一",
+        "en-US": "Natlan · Chapter V: Interlude · All Fires Fuel the Flame"
+      },
+      "scenes": {},
+      "questChapterId": 1505,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "挪德卡莱 · 空月之歌 第五幕 · 终北的夜行诗",
+        "zh-TW": "挪德卡萊 · 空月之歌 第五幕 · 終北的夜行詩",
+        "en-US": "Nod-Krai · Song of the Welkin Moon: Act V · A Nocturne of the Far North"
+      },
+      "scenes": {},
+      "questChapterId": 1605,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Archon",
+      "titles": {
+        "zh-CN": "挪德卡莱 · 空月之歌 第九幕 · 身土坏空，五蕴识转",
+        "zh-TW": "挪德卡萊 · 空月之歌 第九幕 · 身土壞空，五蘊識轉",
+        "en-US": "Nod-Krai · Song of the Welkin Moon: Act IX · As All Falls to Emptiness"
+      },
+      "scenes": {},
+      "questChapterId": 1609,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "凯亚 · 孔雀羽之章 第一幕 · 海盗秘宝",
+        "zh-TW": "凱亞 · 孔雀羽之章 第一幕 · 海盜秘寶",
+        "en-US": "Kaeya · Pavo Ocellus Chapter: Act I · Secret Pirate Treasure"
+      },
+      "scenes": {},
+      "questChapterId": 2001,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "迪卢克 · 夜枭之章 第一幕 · 暗夜英雄的不在场证明",
+        "zh-TW": "迪盧克 · 夜梟之章 第一幕 · 暗夜英雄的不在場證明",
+        "en-US": "Diluc · Noctua Chapter: Act I · Darknight Hero's Alibi"
+      },
+      "scenes": {},
+      "questChapterId": 2002,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "丽莎 · 沙漏之章 第一幕 · 麻烦的工作",
+        "zh-TW": "麗莎 · 沙漏之章 第一幕 · 麻煩的工作",
+        "en-US": "Lisa · Tempus Fugit Chapter: Act I · Troublesome Work"
+      },
+      "scenes": {},
+      "questChapterId": 2004,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "雷泽 · 小狼之章 第一幕 · 卢皮卡的意义",
+        "zh-TW": "雷澤 · 小狼之章 第一幕 · 盧皮卡的意義",
+        "en-US": "Razor · Lupus Minor Chapter: Act I · The Meaning of Lupical"
+      },
+      "scenes": {},
+      "questChapterId": 2005,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "琴 · 幼狮之章 第一幕 · 骑士团长的一日假期",
+        "zh-TW": "琴 · 幼獅之章 第一幕 · 騎士團長的一日假期",
+        "en-US": "Jean · Leo Minor Chapter: Act I · Master's Day Off"
+      },
+      "scenes": {},
+      "questChapterId": 2006,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "香菱 · 长杓之章 第一幕 · 蒙德食遇之旅",
+        "zh-TW": "香菱 · 長杓之章 第一幕 · 蒙德食遇之旅",
+        "en-US": "Xiangling · Trulla Chapter: Act I · Mondstadt Gastronomy Trip"
+      },
+      "scenes": {},
+      "questChapterId": 2007,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "行秋 · 锦织之章 第一幕 · 江湖不问出处",
+        "zh-TW": "行秋 · 錦織之章 第一幕 · 江湖不問出處",
+        "en-US": "Xingqiu · Fabulae Textile Chapter: Act I · Bookworm Swordsman"
+      },
+      "scenes": {},
+      "questChapterId": 2008,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "可莉 · 四叶草之章 第一幕 · 真正的宝物",
+        "zh-TW": "可莉 · 四葉草之章 第一幕 · 真正的寶物",
+        "en-US": "Klee · Trifolium Chapter: Act I · True Treasure"
+      },
+      "scenes": {},
+      "questChapterId": 2009,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "莫娜 · 映天之章 第一幕 · 在此世的星空之外",
+        "zh-TW": "莫娜 · 映天之章 第一幕 · 在此世的星空之外",
+        "en-US": "Mona · Astrolabos Chapter: Act I · Beyond This World's Stars"
+      },
+      "scenes": {},
+      "questChapterId": 2010,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "达达利亚 · 鲸天之章 第一幕 · 独眼小宝总动员",
+        "zh-TW": "達達利亞 · 鯨天之章 第一幕 · 獨眼小寶總動員",
+        "en-US": "Tartaglia · Monoceros Caeli Chapter: Act I · Mighty Cyclops' Adventure!"
+      },
+      "scenes": {},
+      "questChapterId": 2012,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "钟离 · 古闻之章 第一幕 · 盐花",
+        "zh-TW": "鍾離 · 古聞之章 第一幕 · 鹽花",
+        "en-US": "Zhongli · Historia Antiqua Chapter: Act I · Sal Flore"
+      },
+      "scenes": {},
+      "questChapterId": 2014,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "传说任务",
+        "zh-TW": "傳說任務",
+        "en-US": "Story Quests"
+      },
+      "scenes": {},
+      "questChapterId": 2015
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "阿贝多 · 白垩之章 第一幕 · 旅行者观察报告",
+        "zh-TW": "阿貝多 · 白堊之章 第一幕 · 旅行者觀察報告",
+        "en-US": "Albedo · Princeps Cretaceus Chapter: Act I · Traveler Observation Report"
+      },
+      "scenes": {},
+      "questChapterId": 2017,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "胡桃 · 引蝶之章 第一幕 · 奈何蝶飞去",
+        "zh-TW": "胡桃 · 引蝶之章·第一幕 · 奈何蝶飛去",
+        "en-US": "Hu Tao · Papilio Charontis Chapter: Act I · Yet the Butterfly Flutters Away"
+      },
+      "scenes": {},
+      "questChapterId": 2018,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "优菈 · 浪沫之章 第一幕 · 浪花不再归海",
+        "zh-TW": "優菈 · 浪沫之章 第一幕 · 浪花不再歸海",
+        "en-US": "Eula · Aphros Delos Chapter: Act I · The Spindrift Shall Never Return to the Sea"
+      },
+      "scenes": {},
+      "questChapterId": 2019,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "宵宫 · 琉金之章 第一幕 · 如梦如电的隽永",
+        "zh-TW": "宵宮 · 琉金之章 第一幕 · 如夢如電的雋永",
+        "en-US": "Yoimiya · Carassius Auratus Chapter: Act I · Dreamlike Timelessness"
+      },
+      "scenes": {},
+      "questChapterId": 2021,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "雷电将军 · 天下人之章 第一幕 · 影照浮世风流",
+        "zh-TW": "雷電將軍 · 天下人之章 第一幕 · 影照浮世風流",
+        "en-US": "Raiden Shogun · Imperatrix Umbrosa Chapter: Act I · Reflections of Mortality"
+      },
+      "scenes": {},
+      "questChapterId": 2023,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "珊瑚宫心海 · 眠龙之章 第一幕 · 兵戈梦去，春草如茵",
+        "zh-TW": "珊瑚宮心海 · 眠龍之章·第一幕 · 兵戈夢去，春草如茵",
+        "en-US": "Sangonomiya Kokomi · Dracaena Somnolenta Chapter: Act I · Warriors' Dreams Like Spring Grass Renewing"
+      },
+      "scenes": {},
+      "questChapterId": 2024,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "神里绫人 · 神守柏之章 第一幕 · 梧桐一叶落",
+        "zh-TW": "神里綾人 · 神守柏之章 第一幕 · 梧桐一葉落",
+        "en-US": "Kamisato Ayato · Cypressus Custos Chapter: Act I · The Firmiana Leaf Falls"
+      },
+      "scenes": {},
+      "questChapterId": 2028,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "提纳里 · 郭狐之章 第一幕 · 没有答案的课题",
+        "zh-TW": "提納里 · 廓狐之章 第一幕 · 沒有答案的課題",
+        "en-US": "Tighnari · Vulpes Zerda Chapter: Act I · The Unanswerable Problems"
+      },
+      "scenes": {},
+      "questChapterId": 2030,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "枫原万叶 · 枫红之章 第一幕 · 陌野不识故人",
+        "zh-TW": "楓原萬葉 · 楓紅之章 第一幕 · 陌野不識故人",
+        "en-US": "Kaedehara Kazuha · Acer Palmatum Chapter: Act I · A Strange and Friendless Road"
+      },
+      "scenes": {},
+      "questChapterId": 2031,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "妮露 · 睡莲之章 第一幕 · 致智慧者",
+        "zh-TW": "妮露 · 睡蓮之章 第一幕 · 致智慧者",
+        "en-US": "Nilou · Lotos Somno Chapter: Act I · To the Wise"
+      },
+      "scenes": {},
+      "questChapterId": 2033,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "纳西妲 · 智慧主之章 第一幕 · 余温",
+        "zh-TW": "納西妲 · 智慧主之章 第一幕 · 餘溫",
+        "en-US": "Nahida · Sapientia Oromasdis Chapter: Act I · Lingering Warmth"
+      },
+      "scenes": {},
+      "questChapterId": 2034,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "迪希雅 · 蝎尾鬃狮之章 第一幕 · 「狮之血」",
+        "zh-TW": "迪希雅 · 蠍尾鬃獅之章 第一幕 · 「獅之血」",
+        "en-US": "Dehya · Mantichora Chapter: Act I · Lionsblood"
+      },
+      "scenes": {},
+      "questChapterId": 2036,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「悬木人」 · 尤潘基的回火 第一幕 · 维茨特兰的神秘访客",
+        "zh-TW": "「懸木人」 · 尤潘基的回火 第一幕 · 維茨特蘭的神秘訪客",
+        "en-US": "\"Scions of the Canopy\" · Yupanqui's Turnfire: Act I · A Mysterious Visitor From Huitztlan"
+      },
+      "scenes": {},
+      "questChapterId": 2052,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「悬木人」 · 尤潘基的回火 第二幕 · 英雄的仪式",
+        "zh-TW": "「懸木人」 · 尤潘基的回火 第二幕 · 英雄的儀式",
+        "en-US": "\"Scions of the Canopy\" · Yupanqui's Turnfire: Act II · A Hero's Rite"
+      },
+      "scenes": {},
+      "questChapterId": 2053,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「流泉之众」 · 流泉所归之处 第一幕 · 寻找神秘岛的人",
+        "zh-TW": "「流泉之眾」 · 流泉所歸之處 第一幕 · 尋找神秘島的人",
+        "en-US": "\"People of the Springs\" · Where the Springs Return: Act I · Those Searching for the Mysterious Island"
+      },
+      "scenes": {},
+      "questChapterId": 2055,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「流泉之众」 · 流泉所归之处 第二幕 · 神秘岛的传说",
+        "zh-TW": "「流泉之眾」 · 流泉所歸之處 第二幕 · 神秘島的傳說",
+        "en-US": "\"People of the Springs\" · Where the Springs Return: Act II · The Legend of the Mysterious Island"
+      },
+      "scenes": {},
+      "questChapterId": 2056,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「回声之子」 · 祈祝福愿，倾告嵴锋 第一幕 · 嵴锋的异响",
+        "zh-TW": "「回聲之子」 · 祈祝福願，傾告嵴鋒 第一幕 · 嵴鋒的異響",
+        "en-US": "\"Children of Echoes\" · A Prayer for Blessings, Told to Crested Peaks: Act I · Tepetli Dissonance"
+      },
+      "scenes": {},
+      "questChapterId": 2058,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「回声之子」 · 祈祝福愿，倾告嵴锋 第二幕 · 喑哑的回声",
+        "zh-TW": "「回聲之子」 · 祈祝福願，傾告嵴鋒 第二幕 · 喑啞的回聲",
+        "en-US": "\"Children of Echoes\" · A Prayer for Blessings, Told to Crested Peaks: Act II · Hoarse Echoes"
+      },
+      "scenes": {},
+      "questChapterId": 2059,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「花羽会」 · 花之归尘，羽之将坠 第一幕 · 特拉洛坎的失翼者",
+        "zh-TW": "「花羽會」 · 花之歸塵，羽之將墜 第一幕 · 特拉洛坎的失翼者",
+        "en-US": "\"Flower-Feather Clan\" · Of Fading Flowers and Falling Feathers: Act I · The Wingless One of Tlalocan"
+      },
+      "scenes": {},
+      "questChapterId": 2061,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「花羽会」 · 花之归尘，羽之将坠 第二幕 · 试炼前夜",
+        "zh-TW": "「花羽會」 · 花之歸塵，羽之將墜 第二幕 · 試煉前夜",
+        "en-US": "\"Flower-Feather Clan\" · Of Fading Flowers and Falling Feathers: Act II · The Night Before the Trial"
+      },
+      "scenes": {},
+      "questChapterId": 2062,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「花羽会」 · 花之归尘，羽之将坠 第三幕 · 枪与翼",
+        "zh-TW": "「花羽會」 · 花之歸塵，羽之將墜 第三幕 · 槍與翼",
+        "en-US": "\"Flower-Feather Clan\" · Of Fading Flowers and Falling Feathers: Act III · Guns and Wings"
+      },
+      "scenes": {},
+      "questChapterId": 2063,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「烟谜主」 · 流淌着色彩的回忆 第一幕 · 来自烟谜主的使命",
+        "zh-TW": "「煙謎主」 · 流淌著色彩的回憶 第一幕 · 來自煙謎主的使命",
+        "en-US": "\"Masters of the Night-Wind\" · Memories Flowing With Color: Act I · Calling from the Masters of the Night-Wind"
+      },
+      "scenes": {},
+      "questChapterId": 2064,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「烟谜主」 · 流淌着色彩的回忆 第二幕 · 传说中的「色彩」",
+        "zh-TW": "「煙謎主」 · 流淌著色彩的回憶 第二幕 · 傳說中的「色彩」",
+        "en-US": "\"Masters of the Night-Wind\" · Memories Flowing With Color: Act II · Legendary \"Color\""
+      },
+      "scenes": {},
+      "questChapterId": 2065,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「沃陆之邦」 · 蘑境菌奇 第一幕 · 炽热的沃陆",
+        "zh-TW": "「沃陸之邦」 · 蘑境菌奇 第一幕 · 熾熱的沃陸",
+        "en-US": "\"Collective of Plenty\" · Mushroom Realm Mystery: Act I · Ardent Land of Plenty"
+      },
+      "scenes": {},
+      "questChapterId": 2070,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Tribal",
+      "titles": {
+        "zh-CN": "「沃陆之邦」 · 蘑境菌奇 第二幕 · 果园小憩",
+        "zh-TW": "「沃陸之邦」 · 蘑境菌奇 第二幕 · 果園小憩",
+        "en-US": "\"Collective of Plenty\" · Mushroom Realm Mystery: Act II · Orchard Repose"
+      },
+      "scenes": {},
+      "questChapterId": 2071,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Story",
+      "titles": {
+        "zh-CN": "洛恩 · 狡兔之章 第一幕 · 骑士之铭",
+        "zh-TW": "洛恩 · 狡兔之章 第一幕 · 騎士之銘",
+        "en-US": "Lohen · Lepus Miles Chapter: Act I · A Knight's Legacy"
+      },
+      "scenes": {},
+      "questChapterId": 2088,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "未归的熄星 其四 · 古星命定之地",
+        "zh-TW": "未歸的熄星 其四 · 古星命定之地",
+        "en-US": "Unreconciled Stars - IV · Where Ancient Stars Align"
+      },
+      "scenes": {
+        "CS_EQAST4111412_ASTER_LENARD": {
+          "zh-CN": "古星命定之地",
+          "zh-TW": "古星命定之地",
+          "en-US": "Where Ancient Stars Align"
+        }
+      },
+      "questChapterId": 10009,
+      "titleFromChapter": true,
+      "releaseVersion": "1.1"
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "谜境悬兵 其三 · 痴念虚错拂袖去",
+        "zh-TW": "謎境懸兵 其三 · 癡念虛錯拂袖去",
+        "en-US": "Labyrinth Warriors: Part III · Away With Obsessions and Falsehood"
+      },
+      "scenes": {
+        "CS_INAZUMA_EQ4002207_SHIKISHOGUNRECALLING": {
+          "zh-CN": "痴念虚错拂袖去",
+          "zh-TW": "癡念虛錯拂袖去",
+          "en-US": "Away With Obsessions and Falsehood"
+        }
+      },
+      "questChapterId": 10040,
+      "titleFromChapter": true,
+      "releaseVersion": "2.2"
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "韶光抚月 其二 · 六情通七仙贺八方飘香九霄得闻十分完满",
+        "zh-TW": "韶光撫月 其二 · 六情通七仙賀八方飄香九霄得聞十分完滿",
+        "en-US": "Moonlight Merriment: Part II · Three to Get Ready, and Here We Go"
+      },
+      "scenes": {
+        "CS_LIYUE_EQ4001515_LUNARITE": {
+          "zh-CN": "六情通七仙贺八方飘香九霄得闻十分完满",
+          "zh-TW": "六情通七仙賀八方飄香九霄得聞十分完滿",
+          "en-US": "Three to Get Ready, and Here We Go"
+        }
+      },
+      "questChapterId": 10043,
+      "titleFromChapter": true,
+      "releaseVersion": "2.1"
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "皑尘与雪影 第二幕 · 暗影重重",
+        "zh-TW": "皚塵與雪影 第二幕 · 暗影重重",
+        "en-US": "Shadows Amidst Snowstorms: Act II · The Shadows Deepen"
+      },
+      "scenes": {
+        "CS_MD_EQ4002802_WINTERCAMPALBEDOCONFRONT": {
+          "zh-CN": "暗影重重 · 1",
+          "zh-TW": "暗影重重 · 1",
+          "en-US": "The Shadows Deepen · 1"
+        },
+        "CS_MD_EQ4002810_WINTERCAMPALBEDOBACKSTAB": {
+          "zh-CN": "暗影重重 · 2",
+          "zh-TW": "暗影重重 · 2",
+          "en-US": "The Shadows Deepen · 2"
+        }
+      },
+      "questChapterId": 10046,
+      "titleFromChapter": true,
+      "releaseVersion": "2.3"
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "海洲逐雾",
+        "zh-TW": "海洲逐霧",
+        "en-US": "Aphotic Diffusal"
+      },
+      "scenes": {
+        "CS_INAZUMA_EQ4005111_MICHIAEMATSURI": {
+          "zh-CN": "三界路飨祭·后日谭",
+          "zh-TW": "三界路饗祭·後日譚",
+          "en-US": "Three Realms Gateway Offering: Aftermath"
+        }
+      },
+      "questChapterId": 10050,
+      "titleFromChapter": true,
+      "releaseVersion": "2.5"
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "飞彩镌流年 其三 · 飞星聚彩，愿刻华年",
+        "zh-TW": "飛彩鐫流年 其三 · 飛星聚彩，願刻華年",
+        "en-US": "Fleeting Colors in Flight: Part III · The Stars Inscribe the Year's Wishes"
+      },
+      "scenes": {
+        "CS_LIYUE_EQ4003712_HDJFIREWORKSSHOW": {
+          "zh-CN": "飞星聚彩，愿刻华年",
+          "zh-TW": "飛星聚彩，願刻華年",
+          "en-US": "The Stars Inscribe the Year's Wishes"
+        }
+      },
+      "questChapterId": 10054,
+      "titleFromChapter": true,
+      "releaseVersion": "2.4"
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "奔霄颂玉轮·尾声 · 白马闲游记",
+        "zh-TW": "奔霄頌玉輪·尾聲 · 白馬閒遊記",
+        "en-US": "A Lanternlit Ode to the Silver Moon: Epilogue · White Horse's Leisurely Journey"
+      },
+      "scenes": {},
+      "questChapterId": 10196,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "绘夏！烈日？度假村！其一 · 出发！无忧无虑的度假之旅？",
+        "zh-TW": "繪夏！烈日？度假村！其一 · 出發！無憂無慮的度假之旅？",
+        "en-US": "Sunspray Summer Resort: Part I · To a Carefree Vacation!"
+      },
+      "scenes": {},
+      "questChapterId": 10245,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "绘夏！烈日？度假村！其二 · 畅玩！举目之处皆为画布！",
+        "zh-TW": "繪夏！烈日？度假村！其二 · 暢玩！舉目之處皆為畫布！",
+        "en-US": "Sunspray Summer Resort: Part II · The World Is Your Canvas!"
+      },
+      "scenes": {},
+      "questChapterId": 10246,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "绘夏！烈日？度假村！其四 · 收幕！将夏夜染作缤纷！",
+        "zh-TW": "繪夏！烈日？度假村！其四 · 收幕！將夏夜染作繽紛！",
+        "en-US": "Sunspray Summer Resort: Part IV · A Curtain Call for a Colorful Summer Night!"
+      },
+      "scenes": {},
+      "questChapterId": 10248,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "奔霄颂玉轮 第一幕 · 在云间",
+        "zh-TW": "奔霄頌玉輪 第一幕 · 在雲間",
+        "en-US": "A Lanternlit Ode to the Silver Moon: Act I · The Realm of Clouds"
+      },
+      "scenes": {},
+      "questChapterId": 10268,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "titles": {
+        "zh-CN": "映夏！归乡？千灵节！ 第一幕 · 若我们再次相见",
+        "zh-TW": "映夏！歸鄉？千靈節！ 第一幕 · 若我們再次相見",
+        "en-US": "Sunny Summer Fontinalia: Act I · Should We Meet Again"
+      },
+      "scenes": {},
+      "questChapterId": 10271,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·芭芭拉 第一幕 · 治愈的清泉",
+        "zh-TW": "邀約事件·芭芭拉 第一幕 · 治癒的清泉",
+        "en-US": "Hangout Event: Barbara - Act I · Wellspring of Healing"
+      },
+      "scenes": {},
+      "questChapterId": 101401,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·凯亚 第一幕 · 鬼话与甜酒",
+        "zh-TW": "邀約事件·凱亞 第一幕 · 鬼話與甜酒",
+        "en-US": "Hangout Event: Kaeya - Act I · Shenanigans and Sweet Wine"
+      },
+      "scenes": {},
+      "questChapterId": 101501,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·北斗 第一幕 · 南十字闪耀时",
+        "zh-TW": "邀約事件·北斗 第一幕 · 南十字閃耀時",
+        "en-US": "Hangout Event: Beidou - Act I · When the Crux Shines Bright"
+      },
+      "scenes": {},
+      "questChapterId": 102401,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·凝光 第一幕 · 玉阁归客至",
+        "zh-TW": "邀約事件·凝光 第一幕 · 玉閣歸客至",
+        "en-US": "Hangout Event: Ningguang - Act I · The Jade Chamber's Returning Guest"
+      },
+      "scenes": {},
+      "questChapterId": 102701,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·班尼特 第一幕 · 美妙旅程",
+        "zh-TW": "邀約事件·班尼特 第一幕 · 美妙旅程",
+        "en-US": "Hangout Event: Bennett - Act I · Fantastic Voyage"
+      },
+      "scenes": {},
+      "questChapterId": 103201,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·诺艾尔 第一幕 · 骑士修行之道",
+        "zh-TW": "邀約事件·諾艾爾 第一幕 · 騎士修行之道",
+        "en-US": "Hangout Event: Noelle - Act I · Chivalric Training"
+      },
+      "scenes": {},
+      "questChapterId": 103401,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·诺艾尔 第二幕 · 骑士备考之道",
+        "zh-TW": "邀約事件·諾艾爾 第二幕 · 騎士備考之道",
+        "en-US": "Hangout Event: Noelle - Act II · Knightly Exam Prep"
+      },
+      "scenes": {},
+      "questChapterId": 103402,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·重云 第一幕 · 寻妖觅邪记",
+        "zh-TW": "邀約事件·重雲 第一幕 · 尋妖覓邪記",
+        "en-US": "Hangout Event: Chongyun - Act I · Signs of Evil"
+      },
+      "scenes": {},
+      "questChapterId": 103601,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·迪奥娜 第一幕 · 猫与特调酒",
+        "zh-TW": "邀約事件·迪奧娜 第一幕 · 貓與特調酒",
+        "en-US": "Hangout Event: Diona - Act I · The Cat and the Cocktail"
+      },
+      "scenes": {},
+      "questChapterId": 103901,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·托马 第一幕 · 家政官的日常工作",
+        "zh-TW": "邀約事件·托馬 第一幕 · 家政官的日常工作",
+        "en-US": "Hangout Event: Thoma - Act I · A Housekeeper's Daily Chores"
+      },
+      "scenes": {},
+      "questChapterId": 105001,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·早柚 第一幕 · 呜呼流·生长之术",
+        "zh-TW": "邀約事件·早柚 第一幕 · 嗚呼流·生長之術",
+        "en-US": "Hangout Event: Sayu - Act I · Yoohoo Art: Seichou no Jutsu"
+      },
+      "scenes": {},
+      "questChapterId": 105301,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·五郎 第一幕 · 犬大将的特别行动",
+        "zh-TW": "邀約事件·五郎 第一幕 · 犬大將的特別行動",
+        "en-US": "Hangout Event: Gorou- Act I · The Canine General's Special Operations"
+      },
+      "scenes": {},
+      "questChapterId": 105501,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·鹿野院平藏 第一幕 · 风暴捕物帐",
+        "zh-TW": "邀約事件·鹿野院平藏 第一幕 · 風暴捕物帳",
+        "en-US": "Hangout Event: Shikanoin Heizou - Act I · Trap 'Em by Storm"
+      },
+      "scenes": {},
+      "questChapterId": 105901,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·云堇 第一幕 · 弦歌知雅意",
+        "zh-TW": "邀約事件·雲堇 第一幕 · 弦歌知雅意",
+        "en-US": "Hangout Event: Yun Jin - Act I · A Song That Knows Grace"
+      },
+      "scenes": {},
+      "questChapterId": 106401,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·久岐忍 第一幕 · 帮派的日常事务",
+        "zh-TW": "邀約事件·久岐忍 第一幕 · 幫派的日常事務",
+        "en-US": "Hangout Event: Kuki Shinobu - Act I · The Gang's Daily Deeds"
+      },
+      "scenes": {},
+      "questChapterId": 106501,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·莱依拉 第一幕 · 星本无言",
+        "zh-TW": "邀約事件·萊依拉 第一幕 · 星本無言",
+        "en-US": "Hangout Event: Layla - Act I · Ever Silent Stars"
+      },
+      "scenes": {},
+      "questChapterId": 107401,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·珐露珊 第一幕 · 难解之结",
+        "zh-TW": "邀約事件·琺露珊 第一幕 · 難解之結",
+        "en-US": "Hangout Event: Faruzan - Act I · A Confounding Conundrum"
+      },
+      "scenes": {},
+      "questChapterId": 107601,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·卡维 第一幕 · 苦与幸的钟摆",
+        "zh-TW": "邀約事件·卡維 第一幕 · 苦與幸的鐘擺",
+        "en-US": "Hangout Event: Kaveh - Act I · The Pendulum of Weal and Woe"
+      },
+      "scenes": {},
+      "questChapterId": 108101,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Hangout",
+      "titles": {
+        "zh-CN": "邀约事件·琳妮特 第一幕 · 猫与随机数",
+        "zh-TW": "邀約事件·琳妮特 第一幕 · 貓與隨機數",
+        "en-US": "Hangout Event: Lynette - Act I · Checks & Cats"
+      },
+      "scenes": {},
+      "questChapterId": 108301,
+      "titleFromChapter": true
+    },
+    {
+      "category": "Event",
+      "releaseVersion": "1.6",
+      "titles": {
+        "zh-CN": "盛夏！海岛？大冒险！",
+        "zh-TW": "盛夏！海島？大冒險！",
+        "en-US": "Midsummer Island Adventure"
+      },
+      "scenes": {
+        "CS_4131904_HAIDAOCHUXIAN": {
+          "zh-CN": "海岛初现",
+          "zh-TW": "海島初現",
+          "en-US": "The Islands Appear"
+        }
+      }
+    },
+    {
+      "category": "Event",
+      "releaseVersion": "1.1",
+      "titles": {
+        "zh-CN": "未归的熄星",
+        "zh-TW": "未歸的熄星",
+        "en-US": "Unreconciled Stars"
+      },
+      "scenes": {
+        "CS_EQAST4101101_ASTER_OP": {
+          "zh-CN": "开场动画",
+          "zh-TW": "開場動畫",
+          "en-US": "Opening Cutscene"
+        }
+      }
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10024,
+      "titles": {
+        "zh-CN": "风花节 其四 · 风与花之梦",
+        "zh-TW": "風花節 其四 · 風與花之夢",
+        "en-US": "Windblume Festival: Part IV · Dream of Wind and Flowers"
+      },
+      "scenes": {
+        "CS_ACTIVITY_4141307_FENGHUAJIE": {
+          "zh-CN": "万花成风",
+          "zh-TW": "萬花成風",
+          "en-US": "Floral Breeze"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "1.4"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10065,
+      "titles": {
+        "zh-CN": "堇庭华彩真说 第一幕 · 翠庵酩酊疑闻",
+        "zh-TW": "堇庭華彩真說 第一幕 · 翠庵酩酊疑聞",
+        "en-US": "True Tales of the Violet Garden: Act I · The Strange Tale of Suikou's Tipsy Tincture"
+      },
+      "scenes": {
+        "CS_INAZUMA_EQ400551201_IRODORI_SUIKOU": {
+          "zh-CN": "翠庵酩酊疑闻",
+          "zh-TW": "翠庵酩酊疑聞",
+          "en-US": "The Strange Tale of Suikou's Tipsy Tincture"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.6"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10066,
+      "titles": {
+        "zh-CN": "堇庭华彩真说 第二幕 · 青花卷底残章",
+        "zh-TW": "堇庭華彩真說 第二幕 · 青花卷底殘章",
+        "en-US": "True Tales of the Violet Garden: Act II · What the Blue Flowers Left Behind"
+      },
+      "scenes": {
+        "CS_INAZUMA_EQ400560901_IRODORI_AOINOOKINA": {
+          "zh-CN": "青花卷底残章",
+          "zh-TW": "青花卷底殘章",
+          "en-US": "What the Blue Flowers Left Behind"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.6"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10067,
+      "titles": {
+        "zh-CN": "堇庭华彩真说 第三幕 · 薄墨淡朱新绘",
+        "zh-TW": "堇庭華彩真說 第三幕 · 薄墨淡朱新繪",
+        "en-US": "True Tales of the Violet Garden: Act III · A New Painting in Pale Scarlet"
+      },
+      "scenes": {
+        "CS_INAZUMA_EQ400571101_IRODORI": {
+          "zh-CN": "薄墨淡朱新绘",
+          "zh-TW": "薄墨淡朱新繪",
+          "en-US": "A New Painting in Pale Scarlet"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.6"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10089,
+      "titles": {
+        "zh-CN": "远海诗夏游纪 其二 · 春庭景如旧",
+        "zh-TW": "遠海詩夏遊紀 其二 · 春庭景如舊",
+        "en-US": "Summertime Odyssey: II · As the Courtyard in Spring Once Appeared"
+      },
+      "scenes": {
+        "CS_MD_EQ400650301_ISLANDFLASH": {
+          "zh-CN": "春庭景如旧",
+          "zh-TW": "春庭景如舊",
+          "en-US": "As the Courtyard in Spring Once Appeared"
+        },
+        "CS_MD_EQ400671001_KAZUHAMEMORY": {
+          "zh-CN": "辉金盛夏·枫原万叶",
+          "zh-TW": "輝金盛夏·楓原萬葉",
+          "en-US": "Kazuha’s Memories"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.8"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10090,
+      "titles": {
+        "zh-CN": "远海诗夏游纪 其三 · 烈火踏歌行",
+        "zh-TW": "遠海詩夏遊紀 其三 · 烈火踏歌行",
+        "en-US": "Summertime Odyssey: III · Blazin' Trails"
+      },
+      "scenes": {
+        "CS_MD_EQ400701001_XINYANPLAY": {
+          "zh-CN": "辉金盛夏·辛焱",
+          "zh-TW": "輝金盛夏·辛焱",
+          "en-US": "Xinyan’s Performance"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.8"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10091,
+      "titles": {
+        "zh-CN": "远海诗夏游纪 其四 · 幽夜默示录",
+        "zh-TW": "遠海詩夏遊紀 其四 · 幽夜默示錄",
+        "en-US": "Summertime Odyssey: IV · Immernachtreich Apokalypse"
+      },
+      "scenes": {
+        "CS_MD_EQ400731001_FISCHLFANTASY": {
+          "zh-CN": "辉金盛夏·菲谢尔",
+          "zh-TW": "輝金盛夏·菲謝爾",
+          "en-US": "Fischl’s Fantasy"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.8"
+    },
+    {
+      "category": "Event",
+      "questChapterId": 10092,
+      "titles": {
+        "zh-CN": "远海诗夏游纪 其五 · 亘古的苍星",
+        "zh-TW": "遠海詩夏遊紀 其五 · 亙古的蒼星",
+        "en-US": "Summertime Odyssey: V · The Ancient Azure Stars"
+      },
+      "scenes": {
+        "CS_MD_EQ400761001_MONADIVINATION": {
+          "zh-CN": "辉金盛夏·莫娜",
+          "zh-TW": "輝金盛夏·莫娜",
+          "en-US": "Mona’s Divination"
+        }
+      },
+      "titleFromChapter": true,
+      "releaseVersion": "2.8"
     }
-  ]
+  ],
+  "voiceSource": "https://raw.githubusercontent.com/DimbreathBot/AnimeGameData/d54f6f0d423ded9d055bb740a3e5f3aa8f2667f1/BinOutput/ResourceCollection/ConfigResourceCollection.json",
+  "voiceGroups": {
+    "1001": {
+      "packages": [
+        "Chinese/1001.pck",
+        "English(US)/1001.pck",
+        "Japanese/1001.pck",
+        "Korean/1001.pck"
+      ],
+      "videos": [
+        "ChangeWeather.usm",
+        "Cs_MDAQ018_MDCityShow.usm",
+        "Cs_MDAQ019_DragonInCity_Boy.usm",
+        "Cs_MDAQ019_DragonInCity_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 351,
+          "chapterId": 1001
+        },
+        {
+          "id": 352,
+          "chapterId": 1001
+        },
+        {
+          "id": 353,
+          "chapterId": 1001
+        },
+        {
+          "id": 355,
+          "chapterId": 1001
+        },
+        {
+          "id": 354,
+          "chapterId": 1001
+        },
+        {
+          "id": 360,
+          "chapterId": 1001
+        },
+        {
+          "id": 356,
+          "chapterId": 1001
+        },
+        {
+          "id": 357,
+          "chapterId": 1001
+        },
+        {
+          "id": 358,
+          "chapterId": 1001
+        },
+        {
+          "id": 306,
+          "chapterId": 1001
+        },
+        {
+          "id": 307,
+          "chapterId": 1001
+        },
+        {
+          "id": 308,
+          "chapterId": 1001
+        }
+      ]
+    },
+    "1002": {
+      "packages": [
+        "Chinese/1002.pck",
+        "English(US)/1002.pck",
+        "Japanese/1002.pck",
+        "Korean/1002.pck"
+      ],
+      "videos": [
+        "MDAQ041.usm",
+        "MDAQ063_ZhaiXingYaSideB_Boy.usm",
+        "MDAQ063_ZhaiXingYaSideB_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 370,
+          "chapterId": 1002
+        },
+        {
+          "id": 371,
+          "chapterId": 1002
+        },
+        {
+          "id": 372,
+          "chapterId": 1002
+        },
+        {
+          "id": 373,
+          "chapterId": 1002
+        },
+        {
+          "id": 374,
+          "chapterId": 1002
+        },
+        {
+          "id": 375,
+          "chapterId": 1002
+        },
+        {
+          "id": 376,
+          "chapterId": 1002
+        },
+        {
+          "id": 377,
+          "chapterId": 1002
+        },
+        {
+          "id": 20101,
+          "chapterId": 1002
+        },
+        {
+          "id": 379,
+          "chapterId": 1002
+        },
+        {
+          "id": 380,
+          "chapterId": 1002
+        },
+        {
+          "id": 381,
+          "chapterId": 1002
+        },
+        {
+          "id": 382,
+          "chapterId": 1002
+        },
+        {
+          "id": 383,
+          "chapterId": 1002
+        },
+        {
+          "id": 384,
+          "chapterId": 1002
+        }
+      ]
+    },
+    "1003": {
+      "packages": [
+        "Chinese/1003.pck",
+        "English(US)/1003.pck",
+        "Japanese/1003.pck",
+        "Korean/1003.pck"
+      ],
+      "videos": [
+        "Cs_MDAQ071_Davalin_Boy.usm",
+        "Cs_MDAQ071_Davalin_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 397,
+          "chapterId": 1003
+        },
+        {
+          "id": 388,
+          "chapterId": 1003
+        },
+        {
+          "id": 389,
+          "chapterId": 1003
+        },
+        {
+          "id": 390,
+          "chapterId": 1003
+        },
+        {
+          "id": 393,
+          "chapterId": 1003
+        },
+        {
+          "id": 394,
+          "chapterId": 1003
+        },
+        {
+          "id": 398,
+          "chapterId": 1003
+        },
+        {
+          "id": 396,
+          "chapterId": 1003
+        }
+      ]
+    },
+    "1004": {
+      "packages": [
+        "Chinese/1004.pck",
+        "English(US)/1004.pck",
+        "Japanese/1004.pck",
+        "Korean/1004.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 1000,
+          "chapterId": 1101
+        },
+        {
+          "id": 1002,
+          "chapterId": 1101
+        },
+        {
+          "id": 1003,
+          "chapterId": 1101
+        },
+        {
+          "id": 1008,
+          "chapterId": 1101
+        },
+        {
+          "id": 1009,
+          "chapterId": 1101
+        },
+        {
+          "id": 1018,
+          "chapterId": 1101
+        }
+      ]
+    },
+    "1005": {
+      "packages": [
+        "Chinese/1005.pck",
+        "English(US)/1005.pck",
+        "Japanese/1005.pck",
+        "Korean/1005.pck"
+      ],
+      "videos": [
+        "Cs_LYAQ107_NingGuang.usm"
+      ],
+      "quests": [
+        {
+          "id": 1010,
+          "chapterId": 1102
+        },
+        {
+          "id": 1011,
+          "chapterId": 1102
+        },
+        {
+          "id": 1012,
+          "chapterId": 1102
+        },
+        {
+          "id": 1014,
+          "chapterId": 1102
+        },
+        {
+          "id": 1013,
+          "chapterId": 1102
+        },
+        {
+          "id": 1015,
+          "chapterId": 1102
+        },
+        {
+          "id": 1016,
+          "chapterId": 1102
+        }
+      ]
+    },
+    "1006": {
+      "packages": [
+        "Chinese/1006.pck",
+        "English(US)/1006.pck",
+        "Japanese/1006.pck",
+        "Korean/1006.pck"
+      ],
+      "videos": [
+        "Cs_102106_Summon_Boy.usm",
+        "Cs_102106_Summon_Girl.usm",
+        "Cs_102203_BeforeBattle_Boy.usm",
+        "Cs_102203_BeforeBattle_Girl.usm",
+        "Cs_102205_AfterBattle_Boy.usm",
+        "Cs_102205_AfterBattle_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 1020,
+          "chapterId": 1103
+        },
+        {
+          "id": 1021,
+          "chapterId": 1103
+        },
+        {
+          "id": 1022,
+          "chapterId": 1103
+        },
+        {
+          "id": 1023,
+          "chapterId": 1103
+        },
+        {
+          "id": 1024,
+          "chapterId": 1103
+        },
+        {
+          "id": 1025,
+          "chapterId": 1103
+        }
+      ]
+    },
+    "1007": {
+      "packages": [
+        "Chinese/1007.pck",
+        "English(US)/1007.pck",
+        "Japanese/1007.pck",
+        "Korean/1007.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 8000,
+          "chapterId": 1104
+        },
+        {
+          "id": 8001,
+          "chapterId": 1104
+        },
+        {
+          "id": 8002,
+          "chapterId": 1104
+        },
+        {
+          "id": 8003,
+          "chapterId": 1104
+        }
+      ]
+    },
+    "1008": {
+      "packages": [
+        "Chinese/1008.pck",
+        "English(US)/1008.pck",
+        "Japanese/1008.pck",
+        "Korean/1008.pck"
+      ],
+      "videos": [
+        "Cs_200211_WanYeXianVideo.usm"
+      ],
+      "quests": [
+        {
+          "id": 2000,
+          "chapterId": 1201
+        },
+        {
+          "id": 2001,
+          "chapterId": 1201
+        },
+        {
+          "id": 2002,
+          "chapterId": 1201
+        }
+      ]
+    },
+    "1009": {
+      "packages": [
+        "Chinese/1009.pck",
+        "English(US)/1009.pck",
+        "Japanese/1009.pck",
+        "Korean/1009.pck"
+      ],
+      "videos": [
+        "Cs_201104_DaoQiDengdao_P2_Boy.usm",
+        "Cs_201104_DaoQiDengdao_P2_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 2003,
+          "chapterId": 1202
+        },
+        {
+          "id": 2004,
+          "chapterId": 1202
+        },
+        {
+          "id": 2005,
+          "chapterId": 1202
+        },
+        {
+          "id": 2006,
+          "chapterId": 1202
+        },
+        {
+          "id": 2007,
+          "chapterId": 1202
+        },
+        {
+          "id": 2011,
+          "chapterId": 1202
+        },
+        {
+          "id": 2012,
+          "chapterId": 1202
+        },
+        {
+          "id": 2013,
+          "chapterId": 1202
+        }
+      ]
+    },
+    "1010": {
+      "packages": [
+        "Chinese/1010.pck",
+        "English(US)/1010.pck",
+        "Japanese/1010.pck",
+        "Korean/1010.pck"
+      ],
+      "videos": [
+        "Cs_200803_ShougunBossPart1_Boy.usm",
+        "Cs_200803_ShougunBossPart1_Girl.usm",
+        "Cs_200806_ShougunBossPart2_Boy.usm",
+        "Cs_200806_ShougunBossPart2_Girl.usm",
+        "Cs_200919_SHG_Boy.usm",
+        "Cs_200919_SHG_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 2008,
+          "chapterId": 1203
+        },
+        {
+          "id": 2009,
+          "chapterId": 1203
+        }
+      ]
+    },
+    "1011": {
+      "packages": [
+        "Chinese/1011.pck",
+        "English(US)/1011.pck",
+        "Japanese/1011.pck",
+        "Korean/1011.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_AQ202004_ResistanceCharge_Boy.usm",
+        "Cs_Inazuma_AQ202004_ResistanceCharge_Girl.usm",
+        "Cs_Inazuma_AQ202004_StatueDeprivedVision_Boy.usm",
+        "Cs_Inazuma_AQ202004_StatueDeprivedVision_Girl.usm",
+        "Cs_Inazuma_AQ202005_InazumaMucha.usm",
+        "Cs_Inazuma_AQ202006_InazumaEnding.usm"
+      ],
+      "quests": [
+        {
+          "id": 2010,
+          "chapterId": 1204
+        },
+        {
+          "id": 2014,
+          "chapterId": 1204
+        },
+        {
+          "id": 2015,
+          "chapterId": 1204
+        },
+        {
+          "id": 2016,
+          "chapterId": 1204
+        },
+        {
+          "id": 2017,
+          "chapterId": 1204
+        },
+        {
+          "id": 2018,
+          "chapterId": 1204
+        },
+        {
+          "id": 2019,
+          "chapterId": 1204
+        },
+        {
+          "id": 2020,
+          "chapterId": 1204
+        },
+        {
+          "id": 2021,
+          "chapterId": 1204
+        }
+      ]
+    },
+    "1012": {
+      "packages": [
+        "Chinese/1012.pck",
+        "English(US)/1012.pck",
+        "Japanese/1012.pck",
+        "Korean/1012.pck"
+      ],
+      "videos": [
+        "Cs_LiYue_AQ80070101_StopMechanismBig_Boy.usm",
+        "Cs_LiYue_AQ80070101_StopMechanismBig_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 8004,
+          "chapterId": 1206
+        },
+        {
+          "id": 8005,
+          "chapterId": 1206
+        },
+        {
+          "id": 8006,
+          "chapterId": 1206
+        },
+        {
+          "id": 8007,
+          "chapterId": 1206
+        }
+      ]
+    },
+    "1013": {
+      "packages": [
+        "Chinese/1013.pck",
+        "English(US)/1013.pck",
+        "Japanese/1013.pck",
+        "Korean/1013.pck"
+      ],
+      "videos": [
+        "Cs_LQ1101502_ShenheBattle_Boy.usm",
+        "Cs_LQ1101502_ShenheBattle_Girl.usm",
+        "Cs_LQ1101505_YunjinOpera_Boy.usm",
+        "Cs_LQ1101505_YunjinOpera_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 11009,
+          "chapterId": 1205
+        },
+        {
+          "id": 11013,
+          "chapterId": 1205
+        },
+        {
+          "id": 11014,
+          "chapterId": 1205
+        },
+        {
+          "id": 11015,
+          "chapterId": 1205
+        }
+      ]
+    },
+    "1014": {
+      "packages": [
+        "Chinese/1014.pck",
+        "English(US)/1014.pck",
+        "Japanese/1014.pck",
+        "Korean/1014.pck"
+      ],
+      "videos": [
+        "Cs_LiYue_LQ10310301_BreakThroughSpace_Boy.usm",
+        "Cs_LiYue_LQ10310301_BreakThroughSpace_Girl.usm",
+        "Cs_LiYue_LQ10310601_FusheStory.usm"
+      ],
+      "quests": [
+        {
+          "id": 1019,
+          "chapterId": 1207
+        },
+        {
+          "id": 1028,
+          "chapterId": 1207
+        },
+        {
+          "id": 1029,
+          "chapterId": 1207
+        },
+        {
+          "id": 1030,
+          "chapterId": 1207
+        },
+        {
+          "id": 1031,
+          "chapterId": 1207
+        }
+      ]
+    },
+    "1015": {
+      "packages": [
+        "Chinese/1015.pck",
+        "English(US)/1015.pck",
+        "Japanese/1015.pck",
+        "Korean/1015.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_AQ30061401_ALPlay_Boy.usm",
+        "Cs_Sumeru_AQ30061401_ALPlay_Girl.usm",
+        "Cs_Sumeru_AQ30130101_DofFG_Boy.usm",
+        "Cs_Sumeru_AQ30130101_DofFG_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 3000,
+          "chapterId": 1301
+        },
+        {
+          "id": 3001,
+          "chapterId": 1301
+        },
+        {
+          "id": 3002,
+          "chapterId": 1301
+        },
+        {
+          "id": 3003,
+          "chapterId": 1301
+        },
+        {
+          "id": 3004,
+          "chapterId": 1301
+        },
+        {
+          "id": 3005,
+          "chapterId": 1301
+        },
+        {
+          "id": 3006,
+          "chapterId": 1301
+        },
+        {
+          "id": 3007,
+          "chapterId": 1302
+        },
+        {
+          "id": 3008,
+          "chapterId": 1302
+        },
+        {
+          "id": 3009,
+          "chapterId": 1302
+        },
+        {
+          "id": 3010,
+          "chapterId": 1302
+        },
+        {
+          "id": 3011,
+          "chapterId": 1302
+        },
+        {
+          "id": 3012,
+          "chapterId": 1302
+        },
+        {
+          "id": 3013,
+          "chapterId": 1306
+        },
+        {
+          "id": 3014,
+          "chapterId": 1302
+        }
+      ]
+    },
+    "1016": {
+      "packages": [
+        "Chinese/1016.pck",
+        "English(US)/1016.pck",
+        "Japanese/1016.pck",
+        "Korean/1016.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_AQ30161501_DT_Boy.usm",
+        "Cs_Sumeru_AQ30161501_DT_Girl.usm",
+        "Cs_Sumeru_AQ30170601_SOfS.usm",
+        "Cs_Sumeru_AQ30170602_GF_Boy.usm",
+        "Cs_Sumeru_AQ30170602_GF_Girl.usm",
+        "Cs_Sumeru_AQ302009_MOTM.usm",
+        "Cs_Sumeru_AQ302103_FOTD_Boy.usm",
+        "Cs_Sumeru_AQ302103_FOTD_Girl.usm",
+        "Cs_Sumeru_AQ302105_GOTP.usm"
+      ],
+      "quests": [
+        {
+          "id": 3016,
+          "chapterId": 1303
+        },
+        {
+          "id": 3017,
+          "chapterId": 1303
+        },
+        {
+          "id": 3018,
+          "chapterId": 1303
+        },
+        {
+          "id": 3019,
+          "chapterId": 1304
+        },
+        {
+          "id": 3020,
+          "chapterId": 1304
+        },
+        {
+          "id": 3021,
+          "chapterId": 1304
+        }
+      ]
+    },
+    "1017": {
+      "packages": [
+        "Chinese/1017.pck",
+        "English(US)/1017.pck",
+        "Japanese/1017.pck",
+        "Korean/1017.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_AQ_30280701_MS_Boy.usm",
+        "Cs_Sumeru_AQ_30280701_MS_Girl.usm",
+        "Cs_Sumeru_AQ_30280901_SKP_Boy.usm",
+        "Cs_Sumeru_AQ_30280901_SKP_Girl.usm",
+        "Cs_Sumeru_AQ_30281101_NBS_Boy.usm",
+        "Cs_Sumeru_AQ_30281101_NBS_Girl.usm",
+        "Cs_Sumeru_AQ_30281901_DM.usm",
+        "Cs_Sumeru_AQ30220701_ALC_Boy.usm",
+        "Cs_Sumeru_AQ30220701_ALC_Girl.usm",
+        "Cs_Sumeru_AQ30221401_DinA.usm"
+      ],
+      "quests": [
+        {
+          "id": 3022,
+          "chapterId": 1305
+        },
+        {
+          "id": 3024,
+          "chapterId": 1305
+        },
+        {
+          "id": 3025,
+          "chapterId": 1305
+        },
+        {
+          "id": 3026,
+          "chapterId": 1305
+        },
+        {
+          "id": 3028,
+          "chapterId": 1305
+        }
+      ]
+    },
+    "1018": {
+      "packages": [
+        "Chinese/1018.pck",
+        "English(US)/1018.pck",
+        "Japanese/1018.pck",
+        "Korean/1018.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_AQ_30310701_HB_Boy.usm",
+        "Cs_Sumeru_AQ_30310701_HB_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 3029,
+          "chapterId": 1307
+        },
+        {
+          "id": 3030,
+          "chapterId": 1307
+        },
+        {
+          "id": 3031,
+          "chapterId": 1307
+        },
+        {
+          "id": 3032,
+          "chapterId": 1307
+        }
+      ]
+    },
+    "1019": {
+      "packages": [
+        "Chinese/1019.pck",
+        "English(US)/1019.pck",
+        "Japanese/1019.pck",
+        "Korean/1019.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_AQ801211_LM_Boy.usm",
+        "Cs_Sumeru_AQ801211_LM_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 8009,
+          "chapterId": 1308
+        },
+        {
+          "id": 8010,
+          "chapterId": 1308
+        },
+        {
+          "id": 8011,
+          "chapterId": 1308
+        },
+        {
+          "id": 8012,
+          "chapterId": 1308
+        }
+      ]
+    },
+    "1020": {
+      "packages": [
+        "Chinese/1020.pck",
+        "English(US)/1020.pck",
+        "Japanese/1020.pck",
+        "Korean/1020.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "1021": {
+      "packages": [
+        "Chinese/1021.pck",
+        "English(US)/1021.pck",
+        "Japanese/1021.pck",
+        "Korean/1021.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_AQ400004_CB_Boy.usm",
+        "Cs_Fontaine_AQ400004_CB_Girl.usm",
+        "Cs_Fontaine_AQ400303_NXT_Boy.usm",
+        "Cs_Fontaine_AQ400303_NXT_Girl.usm",
+        "Cs_Fontaine_AQ40051001_MGS1_Boy.usm",
+        "Cs_Fontaine_AQ40051001_MGS1_Girl.usm",
+        "Cs_Fontaine_AQ40051002_MGS2_Boy.usm",
+        "Cs_Fontaine_AQ40051002_MGS2_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 4000,
+          "chapterId": 1402
+        },
+        {
+          "id": 4001,
+          "chapterId": 1402
+        },
+        {
+          "id": 4002,
+          "chapterId": 1402
+        },
+        {
+          "id": 4004,
+          "chapterId": 1401
+        },
+        {
+          "id": 4005,
+          "chapterId": 1401
+        },
+        {
+          "id": 4006,
+          "chapterId": 1401
+        }
+      ]
+    },
+    "1022": {
+      "packages": [
+        "Chinese/1022.pck",
+        "English(US)/1022.pck",
+        "Japanese/1022.pck",
+        "Korean/1022.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_AQ40100301_FSSDB_Boy.usm",
+        "Cs_Fontaine_AQ40100301_FSSDB_Girl.usm",
+        "Cs_Fontaine_AQ40100801_FSSR.usm",
+        "Cs_Fontaine_AQ40190601_DALW.usm"
+      ],
+      "quests": [
+        {
+          "id": 4007,
+          "chapterId": 1404
+        },
+        {
+          "id": 4008,
+          "chapterId": 1404
+        },
+        {
+          "id": 4009,
+          "chapterId": 1404
+        },
+        {
+          "id": 4010,
+          "chapterId": 1404
+        },
+        {
+          "id": 4011,
+          "chapterId": 1403
+        },
+        {
+          "id": 4012,
+          "chapterId": 1403
+        },
+        {
+          "id": 4015,
+          "chapterId": 1403
+        },
+        {
+          "id": 4018,
+          "chapterId": 1403
+        },
+        {
+          "id": 4019,
+          "chapterId": 1404
+        }
+      ]
+    },
+    "1023": {
+      "packages": [
+        "Chinese/1023.pck",
+        "English(US)/1023.pck",
+        "Japanese/1023.pck",
+        "Korean/1023.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_AQ40220801_JMC_Boy.usm",
+        "Cs_Fontaine_AQ40220801_JMC_Girl.usm",
+        "Cs_Fontaine_AQ40221001_WCO_Boy.usm",
+        "Cs_Fontaine_AQ40221001_WCO_Girl.usm",
+        "Cs_Fontaine_AQ40241201_FBH_Boy.usm",
+        "Cs_Fontaine_AQ40241201_FBH_Girl.usm",
+        "Cs_Fontaine_AQ40241601_SCBW_Boy.usm",
+        "Cs_Fontaine_AQ40241601_SCBW_Girl.usm",
+        "Cs_Fontaine_AQ40241801_FSAVE.usm"
+      ],
+      "quests": [
+        {
+          "id": 4020,
+          "chapterId": 1405
+        },
+        {
+          "id": 4021,
+          "chapterId": 1405
+        },
+        {
+          "id": 4022,
+          "chapterId": 1405
+        },
+        {
+          "id": 4023,
+          "chapterId": 1405
+        },
+        {
+          "id": 4024,
+          "chapterId": 1405
+        },
+        {
+          "id": 4025,
+          "chapterId": 1405
+        }
+      ]
+    },
+    "1024": {
+      "packages": [
+        "Chinese/1024.pck",
+        "English(US)/1024.pck",
+        "Japanese/1024.pck",
+        "Korean/1024.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "1025": {
+      "packages": [
+        "Chinese/1025.pck",
+        "English(US)/1025.pck",
+        "Japanese/1025.pck",
+        "Korean/1025.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 8019,
+          "chapterId": 1406
+        },
+        {
+          "id": 8020,
+          "chapterId": 1406
+        },
+        {
+          "id": 8021,
+          "chapterId": 1406
+        }
+      ]
+    },
+    "1026": {
+      "packages": [
+        "Chinese/1026.pck",
+        "English(US)/1026.pck",
+        "Japanese/1026.pck",
+        "Korean/1026.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_AQ50011801_KDM_Boy.usm",
+        "Cs_Natlan_AQ50011801_KDM_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 5000,
+          "chapterId": 1500
+        },
+        {
+          "id": 5001,
+          "chapterId": 1500
+        },
+        {
+          "id": 5002,
+          "chapterId": 1500
+        }
+      ]
+    },
+    "1027": {
+      "packages": [
+        "Chinese/1027.pck",
+        "English(US)/1027.pck",
+        "Japanese/1027.pck",
+        "Korean/1027.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_AQ50030601_HDD.usm",
+        "Cs_Natlan_AQ50061201_YSKJ_Boy.usm",
+        "Cs_Natlan_AQ50061201_YSKJ_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 5003,
+          "chapterId": 1501
+        },
+        {
+          "id": 5004,
+          "chapterId": 1501
+        },
+        {
+          "id": 5005,
+          "chapterId": 1501
+        },
+        {
+          "id": 5006,
+          "chapterId": 1501
+        },
+        {
+          "id": 5007,
+          "chapterId": 1501
+        }
+      ]
+    },
+    "1028": {
+      "packages": [
+        "Chinese/1028.pck",
+        "English(US)/1028.pck",
+        "Japanese/1028.pck",
+        "Korean/1028.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 5015,
+          "chapterId": 1502
+        },
+        {
+          "id": 5016,
+          "chapterId": 1502
+        },
+        {
+          "id": 5017,
+          "chapterId": 1502
+        }
+      ]
+    },
+    "1029": {
+      "packages": [
+        "Chinese/1029.pck",
+        "English(US)/1029.pck",
+        "Japanese/1029.pck",
+        "Korean/1029.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_AQ50113101_BSSU_Boy.usm",
+        "Cs_Natlan_AQ50113101_BSSU_Girl.usm",
+        "Cs_Natlan_AQ50120901_MVBT.usm",
+        "Cs_Natlan_AQ50131101_AWFN_Boy.usm",
+        "Cs_Natlan_AQ50131101_AWFN_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 5009,
+          "chapterId": 1503
+        },
+        {
+          "id": 5010,
+          "chapterId": 1503
+        },
+        {
+          "id": 5011,
+          "chapterId": 1503
+        },
+        {
+          "id": 5012,
+          "chapterId": 1503
+        },
+        {
+          "id": 5013,
+          "chapterId": 1503
+        },
+        {
+          "id": 5014,
+          "chapterId": 1503
+        }
+      ]
+    },
+    "1030": {
+      "packages": [
+        "Chinese/1030.pck",
+        "English(US)/1030.pck",
+        "Japanese/1030.pck",
+        "Korean/1030.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_AQ50280301_POFA_Boy.usm",
+        "Cs_Natlan_AQ50280301_POFA_Girl.usm",
+        "Cs_Natlan_AQ50280801_MDTS_Boy.usm",
+        "Cs_Natlan_AQ50280801_MDTS_Girl.usm",
+        "Cs_Natlan_AQ50281101_KTA_Boy.usm",
+        "Cs_Natlan_AQ50281101_KTA_Girl.usm",
+        "Cs_Natlan_AQ50290701_CBH.usm"
+      ],
+      "quests": [
+        {
+          "id": 5022,
+          "chapterId": 1504
+        },
+        {
+          "id": 5023,
+          "chapterId": 1504
+        },
+        {
+          "id": 5024,
+          "chapterId": 1504
+        },
+        {
+          "id": 5028,
+          "chapterId": 1504
+        },
+        {
+          "id": 5029,
+          "chapterId": 1504
+        }
+      ]
+    },
+    "1031": {
+      "packages": [
+        "Chinese/1031.pck",
+        "English(US)/1031.pck",
+        "Japanese/1031.pck",
+        "Korean/1031.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 5026,
+          "chapterId": 1505
+        }
+      ]
+    },
+    "2001": {
+      "packages": [
+        "Chinese/2001.pck",
+        "English(US)/2001.pck",
+        "Japanese/2001.pck",
+        "Korean/2001.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 461,
+          "chapterId": 2001
+        },
+        {
+          "id": 462,
+          "chapterId": 2001
+        },
+        {
+          "id": 463,
+          "chapterId": 2001
+        }
+      ]
+    },
+    "2002": {
+      "packages": [
+        "Chinese/2002.pck",
+        "English(US)/2002.pck",
+        "Japanese/2002.pck",
+        "Korean/2002.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 464,
+          "chapterId": 2002
+        },
+        {
+          "id": 465,
+          "chapterId": 2002
+        },
+        {
+          "id": 466,
+          "chapterId": 2002
+        }
+      ]
+    },
+    "2003": {
+      "packages": [
+        "Chinese/2003.pck",
+        "English(US)/2003.pck",
+        "Japanese/2003.pck",
+        "Korean/2003.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 481,
+          "chapterId": 2003
+        },
+        {
+          "id": 480,
+          "chapterId": 2003
+        },
+        {
+          "id": 427,
+          "chapterId": 2003
+        },
+        {
+          "id": 484,
+          "chapterId": 2003
+        },
+        {
+          "id": 485,
+          "chapterId": 2003
+        }
+      ]
+    },
+    "2004": {
+      "packages": [
+        "Chinese/2004.pck",
+        "English(US)/2004.pck",
+        "Japanese/2004.pck",
+        "Korean/2004.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 10100,
+          "chapterId": 2004
+        },
+        {
+          "id": 10101,
+          "chapterId": 2004
+        }
+      ]
+    },
+    "2005": {
+      "packages": [
+        "Chinese/2005.pck",
+        "English(US)/2005.pck",
+        "Japanese/2005.pck",
+        "Korean/2005.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 451,
+          "chapterId": 2005
+        },
+        {
+          "id": 452,
+          "chapterId": 2005
+        },
+        {
+          "id": 453,
+          "chapterId": 2005
+        },
+        {
+          "id": 454,
+          "chapterId": 2005
+        }
+      ]
+    },
+    "2006": {
+      "packages": [
+        "Chinese/2006.pck",
+        "English(US)/2006.pck",
+        "Japanese/2006.pck",
+        "Korean/2006.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 486,
+          "chapterId": 2006
+        },
+        {
+          "id": 487,
+          "chapterId": 2006
+        },
+        {
+          "id": 488,
+          "chapterId": 2006
+        },
+        {
+          "id": 489,
+          "chapterId": 2006
+        },
+        {
+          "id": 490,
+          "chapterId": 2006
+        }
+      ]
+    },
+    "2007": {
+      "packages": [
+        "Chinese/2007.pck",
+        "English(US)/2007.pck",
+        "Japanese/2007.pck",
+        "Korean/2007.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11000,
+          "chapterId": 2007
+        },
+        {
+          "id": 11001,
+          "chapterId": 2007
+        },
+        {
+          "id": 11002,
+          "chapterId": 2007
+        },
+        {
+          "id": 11003,
+          "chapterId": 2007
+        },
+        {
+          "id": 11004,
+          "chapterId": 2007
+        },
+        {
+          "id": 11005,
+          "chapterId": 2007
+        }
+      ]
+    },
+    "2008": {
+      "packages": [
+        "Chinese/2008.pck",
+        "English(US)/2008.pck",
+        "Japanese/2008.pck",
+        "Korean/2008.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 12000,
+          "chapterId": 2008
+        },
+        {
+          "id": 12001,
+          "chapterId": 2008
+        },
+        {
+          "id": 12002,
+          "chapterId": 2008
+        },
+        {
+          "id": 12003,
+          "chapterId": 2008
+        }
+      ]
+    },
+    "2009": {
+      "packages": [
+        "Chinese/2009.pck",
+        "English(US)/2009.pck",
+        "Japanese/2009.pck",
+        "Korean/2009.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 10200,
+          "chapterId": 2009
+        },
+        {
+          "id": 10201,
+          "chapterId": 2009
+        },
+        {
+          "id": 10202,
+          "chapterId": 2009
+        }
+      ]
+    },
+    "2010": {
+      "packages": [
+        "Chinese/2010.pck",
+        "English(US)/2010.pck",
+        "Japanese/2010.pck",
+        "Korean/2010.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 10500,
+          "chapterId": 2010
+        },
+        {
+          "id": 10501,
+          "chapterId": 2010
+        },
+        {
+          "id": 10502,
+          "chapterId": 2010
+        }
+      ]
+    },
+    "2011": {
+      "packages": [
+        "Chinese/2011.pck",
+        "English(US)/2011.pck",
+        "Japanese/2011.pck",
+        "Korean/2011.pck"
+      ],
+      "videos": [
+        "Cs_XLQ1110104_XiaoPersonal.usm"
+      ],
+      "quests": [
+        {
+          "id": 11100,
+          "chapterId": 2011
+        },
+        {
+          "id": 11101,
+          "chapterId": 2011
+        },
+        {
+          "id": 11102,
+          "chapterId": 2011
+        },
+        {
+          "id": 11103,
+          "chapterId": 2011
+        }
+      ]
+    },
+    "2012": {
+      "packages": [
+        "Chinese/2012.pck",
+        "English(US)/2012.pck",
+        "Japanese/2012.pck",
+        "Korean/2012.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11010,
+          "chapterId": 2012
+        },
+        {
+          "id": 11011,
+          "chapterId": 2012
+        },
+        {
+          "id": 11012,
+          "chapterId": 2012
+        }
+      ]
+    },
+    "2013": {
+      "packages": [
+        "Chinese/2013.pck",
+        "English(US)/2013.pck",
+        "Japanese/2013.pck",
+        "Korean/2013.pck"
+      ],
+      "videos": [
+        "Cs_WDLQ004_VentiLegends.usm"
+      ],
+      "quests": [
+        {
+          "id": 10110,
+          "chapterId": 2013
+        },
+        {
+          "id": 10111,
+          "chapterId": 2013
+        },
+        {
+          "id": 10112,
+          "chapterId": 2013
+        },
+        {
+          "id": 10113,
+          "chapterId": 2013
+        }
+      ]
+    },
+    "2014": {
+      "packages": [
+        "Chinese/2014.pck",
+        "English(US)/2014.pck",
+        "Japanese/2014.pck",
+        "Korean/2014.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11020,
+          "chapterId": 2014
+        },
+        {
+          "id": 11021,
+          "chapterId": 2014
+        },
+        {
+          "id": 11022,
+          "chapterId": 2014
+        },
+        {
+          "id": 11023,
+          "chapterId": 2014
+        },
+        {
+          "id": 11024,
+          "chapterId": 2014
+        }
+      ]
+    },
+    "2015": {
+      "packages": [
+        "Chinese/2015.pck",
+        "English(US)/2015.pck",
+        "Japanese/2015.pck",
+        "Korean/2015.pck"
+      ],
+      "videos": [
+        "Cs_LYAQ1112308_LongWangStroy.usm"
+      ],
+      "quests": [
+        {
+          "id": 11120,
+          "chapterId": 2020
+        },
+        {
+          "id": 11121,
+          "chapterId": 2020
+        },
+        {
+          "id": 11122,
+          "chapterId": 2020
+        },
+        {
+          "id": 11123,
+          "chapterId": 2020
+        }
+      ]
+    },
+    "2016": {
+      "packages": [
+        "Chinese/2016.pck",
+        "English(US)/2016.pck",
+        "Japanese/2016.pck",
+        "Korean/2016.pck"
+      ],
+      "videos": [
+        "Cs_GY11030_GYPersonal.usm"
+      ],
+      "quests": [
+        {
+          "id": 11030,
+          "chapterId": 2016
+        },
+        {
+          "id": 11031,
+          "chapterId": 2016
+        },
+        {
+          "id": 11032,
+          "chapterId": 2016
+        }
+      ]
+    },
+    "2017": {
+      "packages": [
+        "Chinese/2017.pck",
+        "English(US)/2017.pck",
+        "Japanese/2017.pck",
+        "Korean/2017.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11040,
+          "chapterId": 2017
+        },
+        {
+          "id": 11041,
+          "chapterId": 2017
+        },
+        {
+          "id": 11042,
+          "chapterId": 2017
+        },
+        {
+          "id": 11043,
+          "chapterId": 2017
+        },
+        {
+          "id": 11044,
+          "chapterId": 2017
+        },
+        {
+          "id": 11045,
+          "chapterId": 2017
+        }
+      ]
+    },
+    "2018": {
+      "packages": [
+        "Chinese/2018.pck",
+        "English(US)/2018.pck",
+        "Japanese/2018.pck",
+        "Korean/2018.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11110,
+          "chapterId": 2018
+        },
+        {
+          "id": 11111,
+          "chapterId": 2018
+        },
+        {
+          "id": 11112,
+          "chapterId": 2018
+        },
+        {
+          "id": 11113,
+          "chapterId": 2018
+        }
+      ]
+    },
+    "2019": {
+      "packages": [
+        "Chinese/2019.pck",
+        "English(US)/2019.pck",
+        "Japanese/2019.pck",
+        "Korean/2019.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 10120,
+          "chapterId": 2019
+        },
+        {
+          "id": 10121,
+          "chapterId": 2019
+        },
+        {
+          "id": 10122,
+          "chapterId": 2019
+        }
+      ]
+    },
+    "2020": {
+      "packages": [
+        "Chinese/2020.pck",
+        "English(US)/2020.pck",
+        "Japanese/2020.pck",
+        "Korean/2020.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 12010,
+          "chapterId": 2021
+        },
+        {
+          "id": 12011,
+          "chapterId": 2021
+        },
+        {
+          "id": 12012,
+          "chapterId": 2021
+        },
+        {
+          "id": 12013,
+          "chapterId": 2021
+        }
+      ]
+    },
+    "2021": {
+      "packages": [
+        "Chinese/2021.pck",
+        "English(US)/2021.pck",
+        "Japanese/2021.pck",
+        "Korean/2021.pck"
+      ],
+      "videos": [
+        "Cs_LQ12008_Ayaka_Boy.usm",
+        "Cs_LQ12008_Ayaka_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 12004,
+          "chapterId": 2022
+        },
+        {
+          "id": 12005,
+          "chapterId": 2022
+        },
+        {
+          "id": 12006,
+          "chapterId": 2022
+        },
+        {
+          "id": 12007,
+          "chapterId": 2022
+        },
+        {
+          "id": 12008,
+          "chapterId": 2022
+        }
+      ]
+    },
+    "2022": {
+      "packages": [
+        "Chinese/2022.pck",
+        "English(US)/2022.pck",
+        "Japanese/2022.pck",
+        "Korean/2022.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 12020,
+          "chapterId": 2024
+        },
+        {
+          "id": 12021,
+          "chapterId": 2024
+        },
+        {
+          "id": 12022,
+          "chapterId": 2024
+        },
+        {
+          "id": 12023,
+          "chapterId": 2024
+        },
+        {
+          "id": 12024,
+          "chapterId": 2024
+        }
+      ]
+    },
+    "2023": {
+      "packages": [
+        "Chinese/2023.pck",
+        "English(US)/2023.pck",
+        "Japanese/2023.pck",
+        "Korean/2023.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_LQ1203105_YaeMiko_Boy.usm",
+        "Cs_Inazuma_LQ1203105_YaeMiko_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 12028,
+          "chapterId": 2025
+        },
+        {
+          "id": 12029,
+          "chapterId": 2025
+        },
+        {
+          "id": 12030,
+          "chapterId": 2025
+        },
+        {
+          "id": 12031,
+          "chapterId": 2025
+        }
+      ]
+    },
+    "2024": {
+      "packages": [
+        "Chinese/2024.pck",
+        "English(US)/2024.pck",
+        "Japanese/2024.pck",
+        "Korean/2024.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_LQ1200905_IttoOniStroy01.usm",
+        "Cs_Inazuma_LQ1202615_IttoDungeonCrash_Boy.usm",
+        "Cs_Inazuma_LQ1202615_IttoDungeonCrash_Girl.usm",
+        "Cs_Inazuma_LQ1202618_IttoOniStroy02.usm"
+      ],
+      "quests": [
+        {
+          "id": 12009,
+          "chapterId": 2026
+        },
+        {
+          "id": 12025,
+          "chapterId": 2026
+        },
+        {
+          "id": 12026,
+          "chapterId": 2026
+        }
+      ]
+    },
+    "2025": {
+      "packages": [
+        "Chinese/2025.pck",
+        "English(US)/2025.pck",
+        "Japanese/2025.pck",
+        "Korean/2025.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 12015,
+          "chapterId": 2023
+        },
+        {
+          "id": 12016,
+          "chapterId": 2023
+        },
+        {
+          "id": 12017,
+          "chapterId": 2023
+        },
+        {
+          "id": 12018,
+          "chapterId": 2023
+        }
+      ]
+    },
+    "2026": {
+      "packages": [
+        "Chinese/2026.pck",
+        "English(US)/2026.pck",
+        "Japanese/2026.pck",
+        "Korean/2026.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_LQ1204205_IntoTheVoid_Boy.usm",
+        "Cs_Inazuma_LQ1204205_IntoTheVoid_Girl.usm",
+        "Cs_Inazuma_LQ1204208_TheSacredTree_Boy.usm",
+        "Cs_Inazuma_LQ1204208_TheSacredTree_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 12040,
+          "chapterId": 2027
+        },
+        {
+          "id": 12041,
+          "chapterId": 2027
+        },
+        {
+          "id": 12042,
+          "chapterId": 2027
+        }
+      ]
+    },
+    "2027": {
+      "packages": [
+        "Chinese/2027.pck",
+        "English(US)/2027.pck",
+        "Japanese/2027.pck",
+        "Korean/2027.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 12033,
+          "chapterId": 2028
+        },
+        {
+          "id": 12034,
+          "chapterId": 2028
+        },
+        {
+          "id": 12035,
+          "chapterId": 2028
+        }
+      ]
+    },
+    "2028": {
+      "packages": [
+        "Chinese/2028.pck",
+        "English(US)/2028.pck",
+        "Japanese/2028.pck",
+        "Korean/2028.pck"
+      ],
+      "videos": [
+        "Cs_LiYue_LQ110261501_YelanStory_Boy.usm",
+        "Cs_LiYue_LQ110261501_YelanStory_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 11018,
+          "chapterId": 2029
+        },
+        {
+          "id": 11019,
+          "chapterId": 2029
+        },
+        {
+          "id": 11026,
+          "chapterId": 2029
+        }
+      ]
+    },
+    "2029": {
+      "packages": [
+        "Chinese/2029.pck",
+        "English(US)/2029.pck",
+        "Japanese/2029.pck",
+        "Korean/2029.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 12037,
+          "chapterId": 2031
+        },
+        {
+          "id": 12038,
+          "chapterId": 2031
+        },
+        {
+          "id": 12039,
+          "chapterId": 2031
+        }
+      ]
+    },
+    "2030": {
+      "packages": [
+        "Chinese/2030.pck",
+        "English(US)/2030.pck",
+        "Japanese/2030.pck",
+        "Korean/2030.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11200,
+          "chapterId": 2015
+        },
+        {
+          "id": 11201,
+          "chapterId": 2015
+        },
+        {
+          "id": 11202,
+          "chapterId": 2015
+        }
+      ]
+    },
+    "2031": {
+      "packages": [
+        "Chinese/2031.pck",
+        "English(US)/2031.pck",
+        "Japanese/2031.pck",
+        "Korean/2031.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 13000,
+          "chapterId": 2030
+        },
+        {
+          "id": 13001,
+          "chapterId": 2030
+        },
+        {
+          "id": 13002,
+          "chapterId": 2030
+        },
+        {
+          "id": 13003,
+          "chapterId": 2030
+        }
+      ]
+    },
+    "2032": {
+      "packages": [
+        "Chinese/2032.pck",
+        "English(US)/2032.pck",
+        "Japanese/2032.pck",
+        "Korean/2032.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_LQ130111201_EnODeGa_Boy.usm",
+        "Cs_Sumeru_LQ130111201_EnODeGa_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 13009,
+          "chapterId": 2032
+        },
+        {
+          "id": 13010,
+          "chapterId": 2032
+        },
+        {
+          "id": 13011,
+          "chapterId": 2032
+        }
+      ]
+    },
+    "2033": {
+      "packages": [
+        "Chinese/2033.pck",
+        "English(US)/2033.pck",
+        "Japanese/2033.pck",
+        "Korean/2033.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 13006,
+          "chapterId": 2033
+        },
+        {
+          "id": 13007,
+          "chapterId": 2033
+        },
+        {
+          "id": 13008,
+          "chapterId": 2033
+        }
+      ]
+    },
+    "2034": {
+      "packages": [
+        "Chinese/2034.pck",
+        "English(US)/2034.pck",
+        "Japanese/2034.pck",
+        "Korean/2034.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 13013,
+          "chapterId": 2034
+        },
+        {
+          "id": 13014,
+          "chapterId": 2034
+        },
+        {
+          "id": 13015,
+          "chapterId": 2034
+        }
+      ]
+    },
+    "2035": {
+      "packages": [
+        "Chinese/2035.pck",
+        "English(US)/2035.pck",
+        "Japanese/2035.pck",
+        "Korean/2035.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_LQ130221401_NF_Boy.usm",
+        "Cs_Sumeru_LQ130221401_NF_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 13020,
+          "chapterId": 2035
+        },
+        {
+          "id": 13021,
+          "chapterId": 2035
+        },
+        {
+          "id": 13022,
+          "chapterId": 2035
+        }
+      ]
+    },
+    "2036": {
+      "packages": [
+        "Chinese/2036.pck",
+        "English(US)/2036.pck",
+        "Japanese/2036.pck",
+        "Korean/2036.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 13024,
+          "chapterId": 2036
+        },
+        {
+          "id": 13025,
+          "chapterId": 2036
+        },
+        {
+          "id": 13026,
+          "chapterId": 2036
+        }
+      ]
+    },
+    "2037": {
+      "packages": [
+        "Chinese/2037.pck",
+        "English(US)/2037.pck",
+        "Japanese/2037.pck",
+        "Korean/2037.pck"
+      ],
+      "videos": [
+        "Cs_Liyue_LQ1102907_LC.usm"
+      ],
+      "quests": [
+        {
+          "id": 11027,
+          "chapterId": 2037
+        },
+        {
+          "id": 11028,
+          "chapterId": 2037
+        },
+        {
+          "id": 11029,
+          "chapterId": 2037
+        }
+      ]
+    },
+    "2038": {
+      "packages": [
+        "Chinese/2038.pck",
+        "English(US)/2038.pck",
+        "Japanese/2038.pck",
+        "Korean/2038.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140020501_GKTS.usm"
+      ],
+      "quests": [
+        {
+          "id": 14000,
+          "chapterId": 2040
+        },
+        {
+          "id": 14001,
+          "chapterId": 2040
+        },
+        {
+          "id": 14002,
+          "chapterId": 2040
+        },
+        {
+          "id": 14003,
+          "chapterId": 2040
+        }
+      ]
+    },
+    "2039": {
+      "packages": [
+        "Chinese/2039.pck",
+        "English(US)/2039.pck",
+        "Japanese/2039.pck",
+        "Korean/2039.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_LQ1303208_KLX_Boy.usm",
+        "Cs_Sumeru_LQ1303208_KLX_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 13030,
+          "chapterId": 2038
+        },
+        {
+          "id": 13031,
+          "chapterId": 2038
+        },
+        {
+          "id": 13032,
+          "chapterId": 2038
+        }
+      ]
+    },
+    "2040": {
+      "packages": [
+        "Chinese/2040.pck",
+        "English(US)/2040.pck",
+        "Japanese/2040.pck",
+        "Korean/2040.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_LQ1302712_DCI_Boy.usm",
+        "Cs_Sumeru_LQ1302712_DCI_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 13019,
+          "chapterId": 2039
+        },
+        {
+          "id": 13027,
+          "chapterId": 2039
+        }
+      ]
+    },
+    "2041": {
+      "packages": [
+        "Chinese/2041.pck",
+        "English(US)/2041.pck",
+        "Japanese/2041.pck",
+        "Korean/2041.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140091201_SLRC_Boy.usm",
+        "Cs_Fontaine_LQ140091201_SLRC_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14007,
+          "chapterId": 2041
+        },
+        {
+          "id": 14008,
+          "chapterId": 2041
+        },
+        {
+          "id": 14009,
+          "chapterId": 2041
+        }
+      ]
+    },
+    "2042": {
+      "packages": [
+        "Chinese/2042.pck",
+        "English(US)/2042.pck",
+        "Japanese/2042.pck",
+        "Korean/2042.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140061601_SUDO_Boy.usm",
+        "Cs_Fontaine_LQ140061601_SUDO_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14004,
+          "chapterId": 2042
+        },
+        {
+          "id": 14005,
+          "chapterId": 2042
+        },
+        {
+          "id": 14006,
+          "chapterId": 2042
+        }
+      ]
+    },
+    "2043": {
+      "packages": [
+        "Chinese/2043.pck",
+        "English(US)/2043.pck",
+        "Japanese/2043.pck",
+        "Korean/2043.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LD140120801_OOF.usm"
+      ],
+      "quests": [
+        {
+          "id": 14010,
+          "chapterId": 2043
+        },
+        {
+          "id": 14011,
+          "chapterId": 2043
+        },
+        {
+          "id": 14012,
+          "chapterId": 2043
+        }
+      ]
+    },
+    "2044": {
+      "packages": [
+        "Chinese/2044.pck",
+        "English(US)/2044.pck",
+        "Japanese/2044.pck",
+        "Korean/2044.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140170701_NHL_Boy.usm",
+        "Cs_Fontaine_LQ140170701_NHL_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14015,
+          "chapterId": 2044
+        },
+        {
+          "id": 14016,
+          "chapterId": 2044
+        },
+        {
+          "id": 14017,
+          "chapterId": 2044
+        }
+      ]
+    },
+    "2045": {
+      "packages": [
+        "Chinese/2045.pck",
+        "English(US)/2045.pck",
+        "Japanese/2045.pck",
+        "Korean/2045.pck"
+      ],
+      "videos": [
+        "Cs_Liyue_LQ110350701_AA_Boy.usm",
+        "Cs_Liyue_LQ110350701_AA_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 11033,
+          "chapterId": 2045
+        },
+        {
+          "id": 11034,
+          "chapterId": 2045
+        },
+        {
+          "id": 11035,
+          "chapterId": 2045
+        }
+      ]
+    },
+    "2046": {
+      "packages": [
+        "Chinese/2046.pck",
+        "English(US)/2046.pck",
+        "Japanese/2046.pck",
+        "Korean/2046.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140220701_FFF_Boy.usm",
+        "Cs_Fontaine_LQ140220701_FFF_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14020,
+          "chapterId": 2046
+        },
+        {
+          "id": 14021,
+          "chapterId": 2046
+        },
+        {
+          "id": 14022,
+          "chapterId": 2046
+        }
+      ]
+    },
+    "2047": {
+      "packages": [
+        "Chinese/2047.pck",
+        "English(US)/2047.pck",
+        "Japanese/2047.pck",
+        "Korean/2047.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140260501_BF_Boy.usm",
+        "Cs_Fontaine_LQ140260501_BF_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14023,
+          "chapterId": 2047
+        },
+        {
+          "id": 14024,
+          "chapterId": 2047
+        },
+        {
+          "id": 14025,
+          "chapterId": 2047
+        },
+        {
+          "id": 14026,
+          "chapterId": 2047
+        }
+      ]
+    },
+    "2048": {
+      "packages": [
+        "Chinese/2048.pck",
+        "English(US)/2048.pck",
+        "Japanese/2048.pck",
+        "Korean/2048.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ1402701_SSS.usm",
+        "Cs_Fontaine_LQ1403002_SSF.usm"
+      ],
+      "quests": [
+        {
+          "id": 14027,
+          "chapterId": 2048
+        },
+        {
+          "id": 14028,
+          "chapterId": 2048
+        },
+        {
+          "id": 14029,
+          "chapterId": 2048
+        },
+        {
+          "id": 14030,
+          "chapterId": 2048
+        }
+      ]
+    },
+    "2049": {
+      "packages": [
+        "Chinese/2049.pck",
+        "English(US)/2049.pck",
+        "Japanese/2049.pck",
+        "Korean/2049.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ140340201_FN_Boy.usm",
+        "Cs_Fontaine_LQ140340201_FN_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14031,
+          "chapterId": 2050
+        },
+        {
+          "id": 14032,
+          "chapterId": 2050
+        },
+        {
+          "id": 14033,
+          "chapterId": 2050
+        },
+        {
+          "id": 14034,
+          "chapterId": 2050
+        }
+      ]
+    },
+    "2050": {
+      "packages": [
+        "Chinese/2050.pck",
+        "English(US)/2050.pck",
+        "Japanese/2050.pck",
+        "Korean/2050.pck"
+      ],
+      "videos": [
+        "Cs_Fontaine_LQ1403901_Edg_Boy.usm",
+        "Cs_Fontaine_LQ1403901_Edg_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 14037,
+          "chapterId": 2051
+        },
+        {
+          "id": 14038,
+          "chapterId": 2051
+        },
+        {
+          "id": 14039,
+          "chapterId": 2051
+        }
+      ]
+    },
+    "2051": {
+      "packages": [
+        "Chinese/2051.pck",
+        "English(US)/2051.pck",
+        "Japanese/2051.pck",
+        "Korean/2051.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15000,
+          "chapterId": 2052
+        }
+      ]
+    },
+    "2052": {
+      "packages": [
+        "Chinese/2052.pck",
+        "English(US)/2052.pck",
+        "Japanese/2052.pck",
+        "Korean/2052.pck"
+      ],
+      "videos": [
+        "Cs_Sumeru_LD130380801_TOS.usm"
+      ],
+      "quests": [
+        {
+          "id": 13035,
+          "chapterId": 2049
+        },
+        {
+          "id": 13036,
+          "chapterId": 2049
+        },
+        {
+          "id": 13037,
+          "chapterId": 2049
+        },
+        {
+          "id": 13038,
+          "chapterId": 2049
+        },
+        {
+          "id": 13039,
+          "chapterId": 2049
+        }
+      ]
+    },
+    "2053": {
+      "packages": [
+        "Chinese/2053.pck",
+        "English(US)/2053.pck",
+        "Japanese/2053.pck",
+        "Korean/2053.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15001,
+          "chapterId": 2053
+        }
+      ]
+    },
+    "2054": {
+      "packages": [
+        "Chinese/2054.pck",
+        "English(US)/2054.pck",
+        "Japanese/2054.pck",
+        "Korean/2054.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_LQ150041301_SSW_Boy.usm",
+        "Cs_Natlan_LQ150041301_SSW_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 15002,
+          "chapterId": 2054
+        },
+        {
+          "id": 15003,
+          "chapterId": 2054
+        },
+        {
+          "id": 15004,
+          "chapterId": 2054
+        }
+      ]
+    },
+    "2055": {
+      "packages": [
+        "Chinese/2055.pck",
+        "English(US)/2055.pck",
+        "Japanese/2055.pck",
+        "Korean/2055.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15005,
+          "chapterId": 2055
+        }
+      ]
+    },
+    "2056": {
+      "packages": [
+        "Chinese/2056.pck",
+        "English(US)/2056.pck",
+        "Japanese/2056.pck",
+        "Korean/2056.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15006,
+          "chapterId": 2056
+        }
+      ]
+    },
+    "2057": {
+      "packages": [
+        "Chinese/2057.pck",
+        "English(US)/2057.pck",
+        "Japanese/2057.pck",
+        "Korean/2057.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_LQ150100901_DXGS_Boy.usm",
+        "Cs_Natlan_LQ150100901_DXGS_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 15007,
+          "chapterId": 2057
+        },
+        {
+          "id": 15008,
+          "chapterId": 2057
+        },
+        {
+          "id": 15009,
+          "chapterId": 2057
+        },
+        {
+          "id": 15010,
+          "chapterId": 2057
+        }
+      ]
+    },
+    "2060": {
+      "packages": [
+        "Chinese/2060.pck",
+        "English(US)/2060.pck",
+        "Japanese/2060.pck",
+        "Korean/2060.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15012,
+          "chapterId": 2058
+        }
+      ]
+    },
+    "2061": {
+      "packages": [
+        "Chinese/2061.pck",
+        "English(US)/2061.pck",
+        "Japanese/2061.pck",
+        "Korean/2061.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15017,
+          "chapterId": 2059
+        }
+      ]
+    },
+    "2062": {
+      "packages": [
+        "Chinese/2062.pck",
+        "English(US)/2062.pck",
+        "Japanese/2062.pck",
+        "Korean/2062.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15019,
+          "chapterId": 2061
+        }
+      ]
+    },
+    "2063": {
+      "packages": [
+        "Chinese/2063.pck",
+        "English(US)/2063.pck",
+        "Japanese/2063.pck",
+        "Korean/2063.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15020,
+          "chapterId": 2062
+        }
+      ]
+    },
+    "2064": {
+      "packages": [
+        "Chinese/2064.pck",
+        "English(US)/2064.pck",
+        "Japanese/2064.pck",
+        "Korean/2064.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15021,
+          "chapterId": 2063
+        },
+        {
+          "id": 15022,
+          "chapterId": 2063
+        },
+        {
+          "id": 15023,
+          "chapterId": 2063
+        }
+      ]
+    },
+    "2065": {
+      "packages": [
+        "Chinese/2065.pck",
+        "English(US)/2065.pck",
+        "Japanese/2065.pck",
+        "Korean/2065.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15024,
+          "chapterId": 2064
+        }
+      ]
+    },
+    "2066": {
+      "packages": [
+        "Chinese/2066.pck",
+        "English(US)/2066.pck",
+        "Japanese/2066.pck",
+        "Korean/2066.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15025,
+          "chapterId": 2065
+        }
+      ]
+    },
+    "2067": {
+      "packages": [
+        "Chinese/2067.pck",
+        "English(US)/2067.pck",
+        "Japanese/2067.pck",
+        "Korean/2067.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_LQ150290201_WQL_Boy.usm",
+        "Cs_Natlan_LQ150290201_WQL_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 15026,
+          "chapterId": 2066
+        },
+        {
+          "id": 15027,
+          "chapterId": 2066
+        },
+        {
+          "id": 15028,
+          "chapterId": 2066
+        },
+        {
+          "id": 15029,
+          "chapterId": 2066
+        }
+      ]
+    },
+    "2068": {
+      "packages": [
+        "Chinese/2068.pck",
+        "English(US)/2068.pck",
+        "Japanese/2068.pck",
+        "Korean/2068.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_LQ150150801_TLZL_Boy.usm",
+        "Cs_Natlan_LQ150150801_TLZL_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 15013,
+          "chapterId": 2060
+        },
+        {
+          "id": 15014,
+          "chapterId": 2060
+        },
+        {
+          "id": 15015,
+          "chapterId": 2060
+        },
+        {
+          "id": 15016,
+          "chapterId": 2060
+        }
+      ]
+    },
+    "2069": {
+      "packages": [
+        "Chinese/2069.pck",
+        "English(US)/2069.pck",
+        "Japanese/2069.pck",
+        "Korean/2069.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_LQ1204713_Mizuki_Boy.usm",
+        "Cs_Inazuma_LQ1204713_Mizuki_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 12044,
+          "chapterId": 2069
+        },
+        {
+          "id": 12045,
+          "chapterId": 2069
+        },
+        {
+          "id": 12046,
+          "chapterId": 2069
+        },
+        {
+          "id": 12047,
+          "chapterId": 2069
+        },
+        {
+          "id": 12048,
+          "chapterId": 2069
+        }
+      ]
+    },
+    "2072": {
+      "packages": [
+        "Chinese/2072.pck",
+        "English(US)/2072.pck",
+        "Japanese/2072.pck",
+        "Korean/2072.pck"
+      ],
+      "videos": [
+        "Cs_Natlan_LQ503402_MVKF_Boy.usm",
+        "Cs_Natlan_LQ503402_MVKF_Girl.usm"
+      ],
+      "quests": [
+        {
+          "id": 5032,
+          "chapterId": 2067
+        },
+        {
+          "id": 5033,
+          "chapterId": 2067
+        },
+        {
+          "id": 5034,
+          "chapterId": 2067
+        }
+      ]
+    },
+    "4001": {
+      "packages": [
+        "Chinese/4001.pck",
+        "English(US)/4001.pck",
+        "Japanese/4001.pck",
+        "Korean/4001.pck"
+      ],
+      "videos": [
+        "Cs_EQAST4101101_ASTER_OP.usm",
+        "Cs_EQAST4111412_ASTER_Lenard.usm"
+      ],
+      "quests": []
+    },
+    "4002": {
+      "packages": [
+        "Chinese/4002.pck",
+        "English(US)/4002.pck",
+        "Japanese/4002.pck",
+        "Korean/4002.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "4003": {
+      "packages": [
+        "Chinese/4003.pck",
+        "English(US)/4003.pck",
+        "Japanese/4003.pck",
+        "Korean/4003.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "4004": {
+      "packages": [
+        "Chinese/4004.pck",
+        "English(US)/4004.pck",
+        "Japanese/4004.pck",
+        "Korean/4004.pck"
+      ],
+      "videos": [
+        "Cs_Activity_4141307_Fenghuajie_Boy.usm",
+        "Cs_Activity_4141307_Fenghuajie_Girl.usm"
+      ],
+      "quests": []
+    },
+    "4005": {
+      "packages": [
+        "Chinese/4005.pck",
+        "English(US)/4005.pck",
+        "Japanese/4005.pck",
+        "Korean/4005.pck"
+      ],
+      "videos": [
+        "Cs_4131904_HaiDaoChuXian_Boy.usm",
+        "Cs_4131904_HaiDaoChuXian_Girl.usm"
+      ],
+      "quests": []
+    },
+    "4006": {
+      "packages": [
+        "Chinese/4006.pck",
+        "English(US)/4006.pck",
+        "Japanese/4006.pck",
+        "Korean/4006.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_EQ4002207_ShikishogunRecalling_Boy.usm",
+        "Cs_Inazuma_EQ4002207_ShikishogunRecalling_Girl.usm"
+      ],
+      "quests": []
+    },
+    "4007": {
+      "packages": [
+        "Chinese/4007.pck",
+        "English(US)/4007.pck",
+        "Japanese/4007.pck",
+        "Korean/4007.pck"
+      ],
+      "videos": [
+        "Cs_MD_EQ4002802_WinterCampAlbedoConfront.usm",
+        "Cs_MD_EQ4002810_WinterCampAlbedoBackstab_Boy.usm",
+        "Cs_MD_EQ4002810_WinterCampAlbedoBackstab_Girl.usm"
+      ],
+      "quests": []
+    },
+    "4008": {
+      "packages": [
+        "Chinese/4008.pck",
+        "English(US)/4008.pck",
+        "Japanese/4008.pck",
+        "Korean/4008.pck"
+      ],
+      "videos": [
+        "Cs_LiYue_EQ4003712_HdjFireworksShow_Boy.usm",
+        "Cs_LiYue_EQ4003712_HdjFireworksShow_Girl.usm"
+      ],
+      "quests": []
+    },
+    "4009": {
+      "packages": [
+        "Chinese/4009.pck",
+        "English(US)/4009.pck",
+        "Japanese/4009.pck",
+        "Korean/4009.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "4010": {
+      "packages": [
+        "Chinese/4010.pck",
+        "English(US)/4010.pck",
+        "Japanese/4010.pck",
+        "Korean/4010.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_EQ4005111_MichiaeMatsuri.usm"
+      ],
+      "quests": []
+    },
+    "4011": {
+      "packages": [
+        "Chinese/4011.pck",
+        "English(US)/4011.pck",
+        "Japanese/4011.pck",
+        "Korean/4011.pck"
+      ],
+      "videos": [
+        "Cs_Inazuma_EQ400551201_IRODORI_Suikou.usm",
+        "Cs_Inazuma_EQ400560901_IRODORI_Aoinookina.usm",
+        "Cs_Inazuma_EQ400571101_IRODORI.usm"
+      ],
+      "quests": []
+    },
+    "4012": {
+      "packages": [
+        "Chinese/4012.pck",
+        "English(US)/4012.pck",
+        "Japanese/4012.pck",
+        "Korean/4012.pck"
+      ],
+      "videos": [
+        "Cs_LiYue_EQ4001515_Lunarite_Boy.usm",
+        "Cs_LiYue_EQ4001515_Lunarite_Girl.usm"
+      ],
+      "quests": []
+    },
+    "4013": {
+      "packages": [
+        "Chinese/4013.pck",
+        "English(US)/4013.pck",
+        "Japanese/4013.pck",
+        "Korean/4013.pck"
+      ],
+      "videos": [
+        "Cs_MD_EQ400650301_IslandFlash_Boy.usm",
+        "Cs_MD_EQ400650301_IslandFlash_Girl.usm",
+        "Cs_MD_EQ400671001_KazuhaMemory.usm",
+        "Cs_MD_EQ400701001_XinyanPlay.usm",
+        "Cs_MD_EQ400731001_FischlFantasy.usm",
+        "Cs_MD_EQ400761001_MonaDivination.usm"
+      ],
+      "quests": []
+    },
+    "4014": {
+      "packages": [
+        "Chinese/4014.pck",
+        "English(US)/4014.pck",
+        "Japanese/4014.pck",
+        "Korean/4014.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "4015": {
+      "packages": [
+        "Chinese/4015.pck",
+        "English(US)/4015.pck",
+        "Japanese/4015.pck",
+        "Korean/4015.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "5001": {
+      "packages": [
+        "Chinese/5001.pck",
+        "English(US)/5001.pck",
+        "Japanese/5001.pck",
+        "Korean/5001.pck"
+      ],
+      "videos": [
+        "Cs_WQDY1800026_Memories.usm"
+      ],
+      "quests": [
+        {
+          "id": 18000,
+          "chapterId": 1105
+        }
+      ]
+    },
+    "5002": {
+      "packages": [
+        "Chinese/5002.pck",
+        "English(US)/5002.pck",
+        "Japanese/5002.pck",
+        "Korean/5002.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 11008,
+          "chapterId": 0
+        },
+        {
+          "id": 71654,
+          "chapterId": 0
+        }
+      ]
+    },
+    "5003": {
+      "packages": [
+        "Chinese/5003.pck",
+        "English(US)/5003.pck",
+        "Japanese/5003.pck",
+        "Korean/5003.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 70676,
+          "chapterId": 0
+        }
+      ]
+    },
+    "5004": {
+      "packages": [
+        "Chinese/5004.pck",
+        "English(US)/5004.pck",
+        "Japanese/5004.pck",
+        "Korean/5004.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8001": {
+      "packages": [
+        "Chinese/8001.pck",
+        "English(US)/8001.pck",
+        "Japanese/8001.pck",
+        "Korean/8001.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 424,
+          "chapterId": 0
+        },
+        {
+          "id": 10300,
+          "chapterId": 0
+        },
+        {
+          "id": 11006,
+          "chapterId": 0
+        },
+        {
+          "id": 11007,
+          "chapterId": 0
+        },
+        {
+          "id": 4014,
+          "chapterId": 0
+        },
+        {
+          "id": 19029,
+          "chapterId": 0
+        },
+        {
+          "id": 19063,
+          "chapterId": 103401
+        },
+        {
+          "id": 19088,
+          "chapterId": 0
+        },
+        {
+          "id": 19089,
+          "chapterId": 0
+        },
+        {
+          "id": 19183,
+          "chapterId": 0
+        },
+        {
+          "id": 19186,
+          "chapterId": 0
+        }
+      ]
+    },
+    "8003": {
+      "packages": [
+        "Chinese/8003.pck",
+        "English(US)/8003.pck",
+        "Japanese/8003.pck",
+        "Korean/8003.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8004": {
+      "packages": [
+        "Chinese/8004.pck",
+        "English(US)/8004.pck",
+        "Japanese/8004.pck",
+        "Korean/8004.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8005": {
+      "packages": [
+        "Chinese/8005.pck",
+        "English(US)/8005.pck",
+        "Japanese/8005.pck",
+        "Korean/8005.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8006": {
+      "packages": [
+        "Chinese/8006.pck",
+        "English(US)/8006.pck",
+        "Japanese/8006.pck",
+        "Korean/8006.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8007": {
+      "packages": [
+        "Chinese/8007.pck",
+        "English(US)/8007.pck",
+        "Japanese/8007.pck",
+        "Korean/8007.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8008": {
+      "packages": [
+        "Chinese/8008.pck",
+        "English(US)/8008.pck",
+        "Japanese/8008.pck",
+        "Korean/8008.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8009": {
+      "packages": [
+        "Chinese/8009.pck",
+        "English(US)/8009.pck",
+        "Japanese/8009.pck",
+        "Korean/8009.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8010": {
+      "packages": [
+        "Chinese/8010.pck",
+        "English(US)/8010.pck",
+        "Japanese/8010.pck",
+        "Korean/8010.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8011": {
+      "packages": [
+        "Chinese/8011.pck",
+        "English(US)/8011.pck",
+        "Japanese/8011.pck",
+        "Korean/8011.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "8012": {
+      "packages": [
+        "Chinese/8012.pck",
+        "English(US)/8012.pck",
+        "Japanese/8012.pck",
+        "Korean/8012.pck"
+      ],
+      "videos": [],
+      "quests": []
+    },
+    "1032": {
+      "packages": [
+        "Chinese/1032.pck",
+        "English(US)/1032.pck",
+        "Japanese/1032.pck",
+        "Korean/1032.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 8016,
+          "chapterId": 1506
+        },
+        {
+          "id": 8017,
+          "chapterId": 1506
+        },
+        {
+          "id": 8018,
+          "chapterId": 1506
+        }
+      ]
+    },
+    "1033": {
+      "packages": [
+        "Chinese/1033.pck",
+        "English(US)/1033.pck",
+        "Japanese/1033.pck",
+        "Korean/1033.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 600,
+          "chapterId": 1004
+        },
+        {
+          "id": 601,
+          "chapterId": 1004
+        },
+        {
+          "id": 602,
+          "chapterId": 1004
+        }
+      ]
+    },
+    "1034": {
+      "packages": [
+        "Chinese/1034.pck",
+        "English(US)/1034.pck",
+        "Japanese/1034.pck",
+        "Korean/1034.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6004,
+          "chapterId": 1602
+        },
+        {
+          "id": 6005,
+          "chapterId": 1602
+        },
+        {
+          "id": 6006,
+          "chapterId": 1602
+        }
+      ]
+    },
+    "1035": {
+      "packages": [
+        "Chinese/1035.pck",
+        "English(US)/1035.pck",
+        "Japanese/1035.pck",
+        "Korean/1035.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6000,
+          "chapterId": 1600
+        },
+        {
+          "id": 6001,
+          "chapterId": 1600
+        },
+        {
+          "id": 6002,
+          "chapterId": 1600
+        }
+      ]
+    },
+    "1036": {
+      "packages": [
+        "Chinese/1036.pck",
+        "English(US)/1036.pck",
+        "Japanese/1036.pck",
+        "Korean/1036.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6007,
+          "chapterId": 1601
+        },
+        {
+          "id": 6008,
+          "chapterId": 1601
+        },
+        {
+          "id": 6009,
+          "chapterId": 1601
+        },
+        {
+          "id": 6010,
+          "chapterId": 1601
+        },
+        {
+          "id": 6011,
+          "chapterId": 1601
+        }
+      ]
+    },
+    "1037": {
+      "packages": [
+        "Chinese/1037.pck",
+        "English(US)/1037.pck",
+        "Japanese/1037.pck",
+        "Korean/1037.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6012,
+          "chapterId": 1603
+        },
+        {
+          "id": 6013,
+          "chapterId": 1603
+        },
+        {
+          "id": 6014,
+          "chapterId": 1603
+        }
+      ]
+    },
+    "1038": {
+      "packages": [
+        "Chinese/1038.pck",
+        "English(US)/1038.pck",
+        "Japanese/1038.pck",
+        "Korean/1038.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6018,
+          "chapterId": 1604
+        },
+        {
+          "id": 6019,
+          "chapterId": 1604
+        },
+        {
+          "id": 6020,
+          "chapterId": 1604
+        }
+      ]
+    },
+    "1039": {
+      "packages": [
+        "Chinese/1039.pck",
+        "English(US)/1039.pck",
+        "Japanese/1039.pck",
+        "Korean/1039.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6024,
+          "chapterId": 1606
+        },
+        {
+          "id": 6025,
+          "chapterId": 1605
+        },
+        {
+          "id": 6026,
+          "chapterId": 1605
+        },
+        {
+          "id": 6027,
+          "chapterId": 1606
+        },
+        {
+          "id": 6028,
+          "chapterId": 1606
+        }
+      ]
+    },
+    "1040": {
+      "packages": [
+        "Chinese/1040.pck",
+        "English(US)/1040.pck",
+        "Japanese/1040.pck",
+        "Korean/1040.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 6003,
+          "chapterId": 1607
+        },
+        {
+          "id": 6015,
+          "chapterId": 1608
+        },
+        {
+          "id": 6016,
+          "chapterId": 1608
+        },
+        {
+          "id": 6017,
+          "chapterId": 1608
+        },
+        {
+          "id": 6022,
+          "chapterId": 1607
+        },
+        {
+          "id": 6023,
+          "chapterId": 1607
+        }
+      ]
+    },
+    "1042": {
+      "packages": [
+        "Chinese/1042.pck",
+        "English(US)/1042.pck",
+        "Japanese/1042.pck",
+        "Korean/1042.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 7005,
+          "chapterId": 1701
+        },
+        {
+          "id": 7006,
+          "chapterId": 1701
+        },
+        {
+          "id": 7007,
+          "chapterId": 1701
+        },
+        {
+          "id": 7008,
+          "chapterId": 1701
+        },
+        {
+          "id": 7009,
+          "chapterId": 1701
+        }
+      ]
+    },
+    "1043": {
+      "packages": [
+        "Chinese/1043.pck",
+        "English(US)/1043.pck",
+        "Japanese/1043.pck",
+        "Korean/1043.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 3034,
+          "chapterId": 1609
+        },
+        {
+          "id": 3035,
+          "chapterId": 1609
+        },
+        {
+          "id": 3036,
+          "chapterId": 1609
+        },
+        {
+          "id": 6034,
+          "chapterId": 1611
+        },
+        {
+          "id": 6035,
+          "chapterId": 1611
+        },
+        {
+          "id": 6036,
+          "chapterId": 1611
+        },
+        {
+          "id": 6038,
+          "chapterId": 1611
+        }
+      ]
+    },
+    "1045": {
+      "packages": [
+        "Chinese/1045.pck",
+        "English(US)/1045.pck",
+        "Japanese/1045.pck",
+        "Korean/1045.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 7011,
+          "chapterId": 1700
+        },
+        {
+          "id": 7012,
+          "chapterId": 1700
+        },
+        {
+          "id": 7013,
+          "chapterId": 1700
+        },
+        {
+          "id": 7014,
+          "chapterId": 1700
+        }
+      ]
+    },
+    "1046": {
+      "packages": [
+        "Chinese/1046.pck",
+        "English(US)/1046.pck",
+        "Japanese/1046.pck",
+        "Korean/1046.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 7015,
+          "chapterId": 1702
+        },
+        {
+          "id": 7016,
+          "chapterId": 1702
+        },
+        {
+          "id": 7017,
+          "chapterId": 1702
+        }
+      ]
+    },
+    "1047": {
+      "packages": [
+        "Chinese/1047.pck",
+        "English(US)/1047.pck",
+        "Japanese/1047.pck",
+        "Korean/1047.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 7018,
+          "chapterId": 1703
+        },
+        {
+          "id": 7019,
+          "chapterId": 1703
+        },
+        {
+          "id": 7020,
+          "chapterId": 1703
+        }
+      ]
+    },
+    "1049": {
+      "packages": [
+        "Chinese/1049.pck",
+        "English(US)/1049.pck",
+        "Japanese/1049.pck",
+        "Korean/1049.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 7030,
+          "chapterId": 1704
+        },
+        {
+          "id": 7031,
+          "chapterId": 1704
+        }
+      ]
+    },
+    "1050": {
+      "packages": [
+        "Chinese/1050.pck",
+        "English(US)/1050.pck",
+        "Japanese/1050.pck",
+        "Korean/1050.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 7023,
+          "chapterId": 1705
+        },
+        {
+          "id": 7025,
+          "chapterId": 1705
+        },
+        {
+          "id": 7026,
+          "chapterId": 1705
+        },
+        {
+          "id": 7027,
+          "chapterId": 1705
+        },
+        {
+          "id": 7028,
+          "chapterId": 1705
+        },
+        {
+          "id": 7029,
+          "chapterId": 1705
+        },
+        {
+          "id": 7038,
+          "chapterId": 0
+        }
+      ]
+    },
+    "2070": {
+      "packages": [
+        "Chinese/2070.pck",
+        "English(US)/2070.pck",
+        "Japanese/2070.pck",
+        "Korean/2070.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15018,
+          "chapterId": 2070
+        }
+      ]
+    },
+    "2071": {
+      "packages": [
+        "Chinese/2071.pck",
+        "English(US)/2071.pck",
+        "Japanese/2071.pck",
+        "Korean/2071.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15033,
+          "chapterId": 2071
+        }
+      ]
+    },
+    "2073": {
+      "packages": [
+        "Chinese/2073.pck",
+        "English(US)/2073.pck",
+        "Japanese/2073.pck",
+        "Korean/2073.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15030,
+          "chapterId": 2073
+        },
+        {
+          "id": 15031,
+          "chapterId": 2073
+        },
+        {
+          "id": 15032,
+          "chapterId": 2073
+        }
+      ]
+    },
+    "2074": {
+      "packages": [
+        "Chinese/2074.pck",
+        "English(US)/2074.pck",
+        "Japanese/2074.pck",
+        "Korean/2074.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 14044,
+          "chapterId": 2074
+        },
+        {
+          "id": 14045,
+          "chapterId": 2074
+        },
+        {
+          "id": 14046,
+          "chapterId": 2074
+        }
+      ]
+    },
+    "2075": {
+      "packages": [
+        "Chinese/2075.pck",
+        "English(US)/2075.pck",
+        "Japanese/2075.pck",
+        "Korean/2075.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15034,
+          "chapterId": 2075
+        },
+        {
+          "id": 15035,
+          "chapterId": 2075
+        },
+        {
+          "id": 15036,
+          "chapterId": 2075
+        },
+        {
+          "id": 15037,
+          "chapterId": 2075
+        },
+        {
+          "id": 15038,
+          "chapterId": 2075
+        }
+      ]
+    },
+    "2076": {
+      "packages": [
+        "Chinese/2076.pck",
+        "English(US)/2076.pck",
+        "Japanese/2076.pck",
+        "Korean/2076.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 15039,
+          "chapterId": 10245
+        },
+        {
+          "id": 15040,
+          "chapterId": 10246
+        },
+        {
+          "id": 15041,
+          "chapterId": 10246
+        },
+        {
+          "id": 15042,
+          "chapterId": 10246
+        },
+        {
+          "id": 15043,
+          "chapterId": 10246
+        },
+        {
+          "id": 15044,
+          "chapterId": 10247
+        },
+        {
+          "id": 15045,
+          "chapterId": 10248
+        },
+        {
+          "id": 15047,
+          "chapterId": 10246
+        },
+        {
+          "id": 15048,
+          "chapterId": 10246
+        }
+      ]
+    },
+    "2078": {
+      "packages": [
+        "Chinese/2078.pck",
+        "English(US)/2078.pck",
+        "Japanese/2078.pck",
+        "Korean/2078.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 16000,
+          "chapterId": 2068
+        },
+        {
+          "id": 16001,
+          "chapterId": 2068
+        },
+        {
+          "id": 16002,
+          "chapterId": 2068
+        },
+        {
+          "id": 16003,
+          "chapterId": 2068
+        },
+        {
+          "id": 16004,
+          "chapterId": 2068
+        },
+        {
+          "id": 16005,
+          "chapterId": 2068
+        },
+        {
+          "id": 16006,
+          "chapterId": 2068
+        },
+        {
+          "id": 16007,
+          "chapterId": 2068
+        },
+        {
+          "id": 16008,
+          "chapterId": 2068
+        }
+      ]
+    },
+    "2079": {
+      "packages": [
+        "Chinese/2079.pck",
+        "English(US)/2079.pck",
+        "Japanese/2079.pck",
+        "Korean/2079.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 16018,
+          "chapterId": 2089
+        },
+        {
+          "id": 16019,
+          "chapterId": 2089
+        },
+        {
+          "id": 16020,
+          "chapterId": 2089
+        }
+      ]
+    },
+    "2080": {
+      "packages": [
+        "Chinese/2080.pck",
+        "English(US)/2080.pck",
+        "Japanese/2080.pck",
+        "Korean/2080.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 16009,
+          "chapterId": 2087
+        },
+        {
+          "id": 16010,
+          "chapterId": 2087
+        },
+        {
+          "id": 16011,
+          "chapterId": 2087
+        }
+      ]
+    },
+    "2081": {
+      "packages": [
+        "Chinese/2081.pck",
+        "English(US)/2081.pck",
+        "Japanese/2081.pck",
+        "Korean/2081.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 10011,
+          "chapterId": 2088
+        },
+        {
+          "id": 10012,
+          "chapterId": 2088
+        },
+        {
+          "id": 10013,
+          "chapterId": 2088
+        }
+      ]
+    },
+    "3001": {
+      "packages": [
+        "Chinese/3001.pck",
+        "English(US)/3001.pck",
+        "Japanese/3001.pck",
+        "Korean/3001.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19001,
+          "chapterId": 101401
+        },
+        {
+          "id": 19002,
+          "chapterId": 101401
+        },
+        {
+          "id": 19003,
+          "chapterId": 101401
+        },
+        {
+          "id": 19004,
+          "chapterId": 101401
+        },
+        {
+          "id": 19005,
+          "chapterId": 101401
+        },
+        {
+          "id": 19006,
+          "chapterId": 101401
+        },
+        {
+          "id": 19007,
+          "chapterId": 101401
+        },
+        {
+          "id": 19008,
+          "chapterId": 101401
+        },
+        {
+          "id": 19009,
+          "chapterId": 101401
+        }
+      ]
+    },
+    "3002": {
+      "packages": [
+        "Chinese/3002.pck",
+        "English(US)/3002.pck",
+        "Japanese/3002.pck",
+        "Korean/3002.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19061,
+          "chapterId": 103401
+        },
+        {
+          "id": 19062,
+          "chapterId": 103401
+        },
+        {
+          "id": 19064,
+          "chapterId": 103401
+        },
+        {
+          "id": 19065,
+          "chapterId": 103401
+        },
+        {
+          "id": 19066,
+          "chapterId": 103401
+        },
+        {
+          "id": 19067,
+          "chapterId": 103401
+        },
+        {
+          "id": 19068,
+          "chapterId": 103401
+        },
+        {
+          "id": 19069,
+          "chapterId": 103401
+        }
+      ]
+    },
+    "3003": {
+      "packages": [
+        "Chinese/3003.pck",
+        "English(US)/3003.pck",
+        "Japanese/3003.pck",
+        "Korean/3003.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19021,
+          "chapterId": 103601
+        },
+        {
+          "id": 19022,
+          "chapterId": 103601
+        },
+        {
+          "id": 19023,
+          "chapterId": 103601
+        },
+        {
+          "id": 19024,
+          "chapterId": 103601
+        },
+        {
+          "id": 19025,
+          "chapterId": 103601
+        },
+        {
+          "id": 19030,
+          "chapterId": 103601
+        },
+        {
+          "id": 19031,
+          "chapterId": 103601
+        },
+        {
+          "id": 19032,
+          "chapterId": 103601
+        },
+        {
+          "id": 19033,
+          "chapterId": 103601
+        },
+        {
+          "id": 19034,
+          "chapterId": 103601
+        },
+        {
+          "id": 19035,
+          "chapterId": 103601
+        }
+      ]
+    },
+    "3004": {
+      "packages": [
+        "Chinese/3004.pck",
+        "English(US)/3004.pck",
+        "Japanese/3004.pck",
+        "Korean/3004.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19041,
+          "chapterId": 103201
+        },
+        {
+          "id": 19042,
+          "chapterId": 103201
+        },
+        {
+          "id": 19043,
+          "chapterId": 103201
+        },
+        {
+          "id": 19044,
+          "chapterId": 103201
+        },
+        {
+          "id": 19045,
+          "chapterId": 103201
+        }
+      ]
+    },
+    "3005": {
+      "packages": [
+        "Chinese/3005.pck",
+        "English(US)/3005.pck",
+        "Japanese/3005.pck",
+        "Korean/3005.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19081,
+          "chapterId": 103402
+        },
+        {
+          "id": 19082,
+          "chapterId": 103402
+        },
+        {
+          "id": 19083,
+          "chapterId": 103402
+        },
+        {
+          "id": 19084,
+          "chapterId": 103402
+        },
+        {
+          "id": 19085,
+          "chapterId": 103402
+        },
+        {
+          "id": 19086,
+          "chapterId": 103402
+        },
+        {
+          "id": 19087,
+          "chapterId": 103402
+        },
+        {
+          "id": 19090,
+          "chapterId": 103402
+        },
+        {
+          "id": 19091,
+          "chapterId": 103402
+        },
+        {
+          "id": 19092,
+          "chapterId": 103402
+        }
+      ]
+    },
+    "3006": {
+      "packages": [
+        "Chinese/3006.pck",
+        "English(US)/3006.pck",
+        "Japanese/3006.pck",
+        "Korean/3006.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19101,
+          "chapterId": 103901
+        },
+        {
+          "id": 19102,
+          "chapterId": 103901
+        },
+        {
+          "id": 19103,
+          "chapterId": 103901
+        },
+        {
+          "id": 19104,
+          "chapterId": 103901
+        },
+        {
+          "id": 19105,
+          "chapterId": 103901
+        },
+        {
+          "id": 19106,
+          "chapterId": 103901
+        },
+        {
+          "id": 19107,
+          "chapterId": 103901
+        }
+      ]
+    },
+    "3007": {
+      "packages": [
+        "Chinese/3007.pck",
+        "English(US)/3007.pck",
+        "Japanese/3007.pck",
+        "Korean/3007.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19050,
+          "chapterId": 102401
+        },
+        {
+          "id": 19051,
+          "chapterId": 102401
+        },
+        {
+          "id": 19052,
+          "chapterId": 102401
+        },
+        {
+          "id": 19053,
+          "chapterId": 102401
+        },
+        {
+          "id": 19054,
+          "chapterId": 102401
+        }
+      ]
+    },
+    "3008": {
+      "packages": [
+        "Chinese/3008.pck",
+        "English(US)/3008.pck",
+        "Japanese/3008.pck",
+        "Korean/3008.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19111,
+          "chapterId": 105001
+        },
+        {
+          "id": 19112,
+          "chapterId": 105001
+        },
+        {
+          "id": 19113,
+          "chapterId": 105001
+        },
+        {
+          "id": 19114,
+          "chapterId": 105001
+        },
+        {
+          "id": 19115,
+          "chapterId": 105001
+        },
+        {
+          "id": 19116,
+          "chapterId": 105001
+        },
+        {
+          "id": 19117,
+          "chapterId": 105001
+        },
+        {
+          "id": 19118,
+          "chapterId": 105001
+        },
+        {
+          "id": 19119,
+          "chapterId": 105001
+        },
+        {
+          "id": 19121,
+          "chapterId": 105001
+        }
+      ]
+    },
+    "3009": {
+      "packages": [
+        "Chinese/3009.pck",
+        "English(US)/3009.pck",
+        "Japanese/3009.pck",
+        "Korean/3009.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19010,
+          "chapterId": 105301
+        },
+        {
+          "id": 19012,
+          "chapterId": 105301
+        },
+        {
+          "id": 19013,
+          "chapterId": 105301
+        },
+        {
+          "id": 19014,
+          "chapterId": 105301
+        },
+        {
+          "id": 19015,
+          "chapterId": 105301
+        },
+        {
+          "id": 19016,
+          "chapterId": 105301
+        }
+      ]
+    },
+    "3010": {
+      "packages": [
+        "Chinese/3010.pck",
+        "English(US)/3010.pck",
+        "Japanese/3010.pck",
+        "Korean/3010.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19018,
+          "chapterId": 105501
+        },
+        {
+          "id": 19019,
+          "chapterId": 105501
+        },
+        {
+          "id": 19020,
+          "chapterId": 105501
+        },
+        {
+          "id": 19026,
+          "chapterId": 105501
+        },
+        {
+          "id": 19027,
+          "chapterId": 105501
+        },
+        {
+          "id": 19028,
+          "chapterId": 105501
+        }
+      ]
+    },
+    "3011": {
+      "packages": [
+        "Chinese/3011.pck",
+        "English(US)/3011.pck",
+        "Japanese/3011.pck",
+        "Korean/3011.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19017,
+          "chapterId": 106401
+        },
+        {
+          "id": 19037,
+          "chapterId": 106401
+        },
+        {
+          "id": 19038,
+          "chapterId": 106401
+        },
+        {
+          "id": 19040,
+          "chapterId": 106401
+        },
+        {
+          "id": 19047,
+          "chapterId": 106401
+        }
+      ]
+    },
+    "3012": {
+      "packages": [
+        "Chinese/3012.pck",
+        "English(US)/3012.pck",
+        "Japanese/3012.pck",
+        "Korean/3012.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19131,
+          "chapterId": 102701
+        },
+        {
+          "id": 19132,
+          "chapterId": 102701
+        },
+        {
+          "id": 19133,
+          "chapterId": 102701
+        },
+        {
+          "id": 19134,
+          "chapterId": 102701
+        },
+        {
+          "id": 19135,
+          "chapterId": 102701
+        },
+        {
+          "id": 19136,
+          "chapterId": 102701
+        },
+        {
+          "id": 19137,
+          "chapterId": 102701
+        },
+        {
+          "id": 19138,
+          "chapterId": 102701
+        }
+      ]
+    },
+    "3013": {
+      "packages": [
+        "Chinese/3013.pck",
+        "English(US)/3013.pck",
+        "Japanese/3013.pck",
+        "Korean/3013.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19141,
+          "chapterId": 106501
+        },
+        {
+          "id": 19142,
+          "chapterId": 106501
+        },
+        {
+          "id": 19143,
+          "chapterId": 106501
+        },
+        {
+          "id": 19144,
+          "chapterId": 106501
+        },
+        {
+          "id": 19145,
+          "chapterId": 106501
+        },
+        {
+          "id": 19146,
+          "chapterId": 106501
+        },
+        {
+          "id": 19147,
+          "chapterId": 106501
+        },
+        {
+          "id": 19148,
+          "chapterId": 106501
+        }
+      ]
+    },
+    "3014": {
+      "packages": [
+        "Chinese/3014.pck",
+        "English(US)/3014.pck",
+        "Japanese/3014.pck",
+        "Korean/3014.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19036,
+          "chapterId": 105901
+        },
+        {
+          "id": 19039,
+          "chapterId": 105901
+        },
+        {
+          "id": 19055,
+          "chapterId": 105901
+        },
+        {
+          "id": 19056,
+          "chapterId": 105901
+        },
+        {
+          "id": 19057,
+          "chapterId": 105901
+        },
+        {
+          "id": 19060,
+          "chapterId": 105901
+        }
+      ]
+    },
+    "3015": {
+      "packages": [
+        "Chinese/3015.pck",
+        "English(US)/3015.pck",
+        "Japanese/3015.pck",
+        "Korean/3015.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19150,
+          "chapterId": 107401
+        },
+        {
+          "id": 19151,
+          "chapterId": 107401
+        },
+        {
+          "id": 19152,
+          "chapterId": 107401
+        },
+        {
+          "id": 19153,
+          "chapterId": 107401
+        },
+        {
+          "id": 19154,
+          "chapterId": 107401
+        },
+        {
+          "id": 19155,
+          "chapterId": 107401
+        },
+        {
+          "id": 19156,
+          "chapterId": 107401
+        },
+        {
+          "id": 19157,
+          "chapterId": 107401
+        },
+        {
+          "id": 19158,
+          "chapterId": 107401
+        },
+        {
+          "id": 19159,
+          "chapterId": 107401
+        },
+        {
+          "id": 19160,
+          "chapterId": 107401
+        },
+        {
+          "id": 19161,
+          "chapterId": 107401
+        },
+        {
+          "id": 19162,
+          "chapterId": 107401
+        }
+      ]
+    },
+    "3016": {
+      "packages": [
+        "Chinese/3016.pck",
+        "English(US)/3016.pck",
+        "Japanese/3016.pck",
+        "Korean/3016.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19170,
+          "chapterId": 107601
+        },
+        {
+          "id": 19171,
+          "chapterId": 107601
+        },
+        {
+          "id": 19172,
+          "chapterId": 107601
+        },
+        {
+          "id": 19173,
+          "chapterId": 107601
+        }
+      ]
+    },
+    "3017": {
+      "packages": [
+        "Chinese/3017.pck",
+        "English(US)/3017.pck",
+        "Japanese/3017.pck",
+        "Korean/3017.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19073,
+          "chapterId": 101501
+        },
+        {
+          "id": 19079,
+          "chapterId": 101501
+        },
+        {
+          "id": 19080,
+          "chapterId": 101501
+        },
+        {
+          "id": 19093,
+          "chapterId": 101501
+        },
+        {
+          "id": 19094,
+          "chapterId": 101501
+        },
+        {
+          "id": 19095,
+          "chapterId": 101501
+        },
+        {
+          "id": 19096,
+          "chapterId": 101501
+        },
+        {
+          "id": 19097,
+          "chapterId": 101501
+        },
+        {
+          "id": 19098,
+          "chapterId": 101501
+        }
+      ]
+    },
+    "3018": {
+      "packages": [
+        "Chinese/3018.pck",
+        "English(US)/3018.pck",
+        "Japanese/3018.pck",
+        "Korean/3018.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19058,
+          "chapterId": 108101
+        },
+        {
+          "id": 19059,
+          "chapterId": 108101
+        },
+        {
+          "id": 19071,
+          "chapterId": 108101
+        },
+        {
+          "id": 19072,
+          "chapterId": 108101
+        },
+        {
+          "id": 19074,
+          "chapterId": 108101
+        },
+        {
+          "id": 19075,
+          "chapterId": 108101
+        },
+        {
+          "id": 19076,
+          "chapterId": 108101
+        },
+        {
+          "id": 19077,
+          "chapterId": 108101
+        },
+        {
+          "id": 19078,
+          "chapterId": 108101
+        }
+      ]
+    },
+    "3019": {
+      "packages": [
+        "Chinese/3019.pck",
+        "English(US)/3019.pck",
+        "Japanese/3019.pck",
+        "Korean/3019.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 19180,
+          "chapterId": 108301
+        },
+        {
+          "id": 19182,
+          "chapterId": 108301
+        },
+        {
+          "id": 19184,
+          "chapterId": 108301
+        },
+        {
+          "id": 19185,
+          "chapterId": 108301
+        },
+        {
+          "id": 19187,
+          "chapterId": 108301
+        }
+      ]
+    },
+    "4020": {
+      "packages": [
+        "Chinese/4020.pck",
+        "English(US)/4020.pck",
+        "Japanese/4020.pck",
+        "Korean/4020.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 40222,
+          "chapterId": 10268
+        },
+        {
+          "id": 40223,
+          "chapterId": 10269
+        },
+        {
+          "id": 40224,
+          "chapterId": 10270
+        },
+        {
+          "id": 71162,
+          "chapterId": 10196
+        }
+      ]
+    },
+    "4021": {
+      "packages": [
+        "Chinese/4021.pck",
+        "English(US)/4021.pck",
+        "Japanese/4021.pck",
+        "Korean/4021.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 40244,
+          "chapterId": 10271
+        },
+        {
+          "id": 40245,
+          "chapterId": 10272
+        },
+        {
+          "id": 40246,
+          "chapterId": 10273
+        },
+        {
+          "id": 40247,
+          "chapterId": 10273
+        }
+      ]
+    },
+    "8002": {
+      "packages": [
+        "Chinese/8002.pck",
+        "English(US)/8002.pck",
+        "Japanese/8002.pck",
+        "Korean/8002.pck"
+      ],
+      "videos": [],
+      "quests": [
+        {
+          "id": 71099,
+          "chapterId": 0
+        }
+      ]
+    }
+  }
 }

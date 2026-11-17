@@ -3,6 +3,8 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Cryptography;
 using System.Security.Principal;
@@ -10,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using FufuLauncher.Constants;
 using FufuLauncher.Helpers;
+using Microsoft.Win32.SafeHandles;
 
 namespace FufuLauncher.Services.GameServer;
 
@@ -50,6 +53,9 @@ internal sealed record CutscenePersistentBypassReport(
 
 internal static partial class CutsceneProtectionService
 {
+    private const string BackupMarker = ".snapshot-v1";
+    private const int FileRenameInfoClass = 3;
+    private const FileSystemRights StubDenyRights = FileSystemRights.Write | FileSystemRights.Delete;
     private static readonly SecurityIdentifier EveryoneSid = new(WellKnownSidType.WorldSid, null);
     private static readonly UTF8Encoding Utf8NoBom = new(encoderShouldEmitUTF8Identifier: false);
 
@@ -118,9 +124,6 @@ internal static partial class CutsceneProtectionService
             && !string.IsNullOrEmpty(persistentRoot)
             && Directory.Exists(persistentRoot))
         {
-            string? persistentDir = Path.GetDirectoryName(persistentPath);
-            if (!string.IsNullOrEmpty(persistentDir))
-                Directory.CreateDirectory(persistentDir);
             StubAndLockFile(persistentPath);
         }
     }
@@ -134,26 +137,76 @@ internal static partial class CutsceneProtectionService
 
     public static void StubAndLockFile(string path)
     {
+        path = Path.GetFullPath(path);
         string? directory = Path.GetDirectoryName(path);
         if (string.IsNullOrEmpty(directory))
             throw new IOException("Invalid asset file path.");
         Directory.CreateDirectory(directory);
         ValidateSafePath(directory);
 
-        UnlockFile(path, deleteFile: false);
-
-        using (var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+        var target = new FileInfo(path);
+        FileAttributes originalAttributes = FileAttributes.Normal;
+        if (target.Exists)
         {
-            stream.SetLength(0);
+            originalAttributes = target.Attributes;
+            if ((originalAttributes & (FileAttributes.ReparsePoint | FileAttributes.Directory)) != 0)
+                throw new IOException("Cutscene_UnsafePath".GetLocalized());
+            if (target.Length == 0 && GetStubDenyRules(target.GetAccessControl()).Any())
+                return;
         }
 
-        // Apply ReadOnly BEFORE adding Deny Write/Delete so SetAttributes does not fail on WriteAttributes denial,
-        // and both File.Delete and overwrite attempts are blocked cleanly.
-        File.SetAttributes(path, FileAttributes.ReadOnly);
-        var info = new FileInfo(path);
-        FileSecurity security = info.GetAccessControl();
-        security.AddAccessRule(CreateDenyRule());
-        info.SetAccessControl(security);
+        string stagingPath = Path.Combine(directory, $".fufu-cutscene-{Guid.NewGuid():N}.tmp");
+        bool clearedReadOnly = false;
+        bool installed = false;
+        try
+        {
+            // The original asset can grant Modify without granting permission to edit its ACL.
+            using var staging = new FileInfo(stagingPath).Create(FileMode.CreateNew,
+                FileSystemRights.ReadData | FileSystemRights.ReadPermissions | FileSystemRights.Write
+                | FileSystemRights.ChangePermissions | FileSystemRights.Delete,
+                FileShare.Read | FileShare.Delete, 1, FileOptions.None, null);
+            File.SetAttributes(stagingPath, FileAttributes.ReadOnly);
+            FileSecurity security = staging.GetAccessControl();
+            security.AddAccessRule(new FileSystemAccessRule(EveryoneSid, StubDenyRights, AccessControlType.Deny));
+            staging.SetAccessControl(security);
+
+            if (originalAttributes.HasFlag(FileAttributes.ReadOnly))
+            {
+                File.SetAttributes(path, originalAttributes & ~FileAttributes.ReadOnly);
+                clearedReadOnly = true;
+            }
+
+            ReplaceWithLockedFile(staging.SafeFileHandle, path);
+            installed = true;
+        }
+        catch (Exception ex) when (ex is UnauthorizedAccessException or Win32Exception)
+        {
+            throw new IOException($"{Path.GetFileName(path)} ({ex.Message})", ex);
+        }
+        finally
+        {
+            if (!installed)
+            {
+                try
+                {
+                    if (clearedReadOnly)
+                        File.SetAttributes(path, originalAttributes);
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+                {
+                    DebugLog.Warn(nameof(CutsceneProtectionService), $"Could not restore original attributes: {ex.Message}");
+                }
+
+                try
+                {
+                    UnlockFile(stagingPath, deleteFile: true);
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+                {
+                    DebugLog.Warn(nameof(CutsceneProtectionService), $"Could not delete staging file: {ex.Message}");
+                }
+            }
+        }
     }
 
     public static void UnlockFile(string path, bool deleteFile = false)
@@ -166,17 +219,13 @@ internal static partial class CutsceneProtectionService
             throw new IOException("Cutscene_UnsafePath".GetLocalized());
 
         var info = new FileInfo(path);
-        try
+        if (info.Length == 0)
         {
             FileSecurity security = info.GetAccessControl();
-            if (RemoveEveryoneDenyRules(security))
-                info.SetAccessControl(security);
-        }
-        catch (UnauthorizedAccessException)
-        {
-            TryClearReadOnly(path);
-            FileSecurity security = info.GetAccessControl();
-            if (RemoveEveryoneDenyRules(security))
+            FileSystemAccessRule[] rules = GetStubDenyRules(security).ToArray();
+            foreach (FileSystemAccessRule rule in rules)
+                security.RemoveAccessRuleSpecific(rule);
+            if (rules.Length > 0)
                 info.SetAccessControl(security);
         }
 
@@ -208,7 +257,7 @@ internal static partial class CutsceneProtectionService
     {
         string persistentDir = GetPersistentDirectory(gameDir, isOversea);
         string backupDir = GetBackupDirectory(gameDir, isOversea);
-        bool hasBackup = Directory.Exists(backupDir) && Directory.EnumerateFiles(backupDir).Any();
+        bool hasBackup = HasPersistentBackup(backupDir);
         DateTimeOffset? backupTime = hasBackup ? Directory.GetLastWriteTimeUtc(backupDir) : null;
 
         var (logTag, logR, logS, logD) = TryDetectRevisionsFromPlayerLog(isOversea);
@@ -278,7 +327,7 @@ internal static partial class CutsceneProtectionService
             throw new InvalidOperationException("Cutscene_BypassInvalidNumbers".GetLocalized());
         }
 
-        await GameServerOperation.EnsureGameClosedAsync().ConfigureAwait(false);
+        using var lease = await GameServerOperation.EnterAsync(gameDir, token).ConfigureAwait(false);
         token.ThrowIfCancellationRequested();
 
         string persistentDir = GetPersistentDirectory(gameDir, isOversea);
@@ -286,10 +335,13 @@ internal static partial class CutsceneProtectionService
             throw new InvalidOperationException("Cutscene_BypassNoPersistent".GetLocalized());
         ValidateSafePath(persistentDir);
 
+        string[] metadataFiles = GetPersistentMetadataFiles(persistentDir);
         string backupDir = GetBackupDirectory(gameDir, isOversea);
-        CreatePersistentBackup(persistentDir, backupDir, token);
-
-        RemoveReadOnlyRecursive(persistentDir, token);
+        if (!HasPersistentBackup(backupDir))
+            CreatePersistentBackup(metadataFiles, backupDir, token);
+        token.ThrowIfCancellationRequested();
+        foreach (string path in metadataFiles)
+            ClearReadOnly(path);
 
         var deleted = new List<string>();
         var promoted = new List<string>();
@@ -305,14 +357,12 @@ internal static partial class CutsceneProtectionService
 
         foreach (string cacheFile in Directory.EnumerateFiles(persistentDir, "cache_versions_*", SearchOption.TopDirectoryOnly))
         {
-            token.ThrowIfCancellationRequested();
             File.Delete(cacheFile);
             deleted.Add(Path.GetFileName(cacheFile));
         }
 
         foreach (var (remoteName, persistName) in PersistentManifestPairs)
         {
-            token.ThrowIfCancellationRequested();
             string remotePath = Path.Combine(persistentDir, remoteName);
             string persistPath = Path.Combine(persistentDir, persistName);
             if (File.Exists(remotePath))
@@ -344,38 +394,45 @@ internal static partial class CutsceneProtectionService
 
     public static async Task<int> RestorePersistentBackupAsync(string gameDir, bool isOversea, CancellationToken token)
     {
-        await GameServerOperation.EnsureGameClosedAsync().ConfigureAwait(false);
+        using var lease = await GameServerOperation.EnterAsync(gameDir, token).ConfigureAwait(false);
         token.ThrowIfCancellationRequested();
 
         string persistentDir = GetPersistentDirectory(gameDir, isOversea);
         string backupDir = GetBackupDirectory(gameDir, isOversea);
-        if (!Directory.Exists(backupDir))
+        if (!HasPersistentBackup(backupDir))
             throw new InvalidOperationException("Cutscene_BypassNoBackup".GetLocalized());
 
-        string[] backupFiles = Directory.GetFiles(backupDir, "*", SearchOption.TopDirectoryOnly);
-        if (backupFiles.Length == 0)
-            throw new InvalidOperationException("Cutscene_BypassNoBackup".GetLocalized());
-
+        string[] backupFiles = GetPersistentMetadataFiles(backupDir);
+        ValidateSafePath(Path.GetDirectoryName(persistentDir)!);
         Directory.CreateDirectory(persistentDir);
         ValidateSafePath(persistentDir);
-        RemoveReadOnlyRecursive(persistentDir, token);
+        string[] currentFiles = GetPersistentMetadataFiles(persistentDir);
+        var originalNames = backupFiles.Select(Path.GetFileName).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-        int restored = 0;
         foreach (string backupFile in backupFiles)
         {
             token.ThrowIfCancellationRequested();
-            string name = Path.GetFileName(backupFile);
-            string target = Path.Combine(persistentDir, name);
+            string target = Path.Combine(persistentDir, Path.GetFileName(backupFile));
+            if (File.Exists(target))
+                ClearReadOnly(target);
             File.Copy(backupFile, target, overwrite: true);
-            File.SetAttributes(target, FileAttributes.Normal);
-            restored++;
+            File.SetAttributes(target, File.GetAttributes(backupFile));
         }
 
-        return restored;
-    }
+        foreach (string path in currentFiles)
+        {
+            token.ThrowIfCancellationRequested();
+            if (originalNames.Contains(Path.GetFileName(path)))
+                continue;
+            ClearReadOnly(path);
+            File.Delete(path);
+        }
 
-    private static FileSystemAccessRule CreateDenyRule() =>
-        new(EveryoneSid, FileSystemRights.Write | FileSystemRights.Delete, AccessControlType.Deny);
+        string restoredDir = backupDir + $".{Guid.NewGuid():N}.restored";
+        Directory.Move(backupDir, restoredDir);
+        DeleteTemporaryBackup(restoredDir);
+        return backupFiles.Length;
+    }
 
     private static bool HasEveryoneDenyWriteRule(FileInfo info)
     {
@@ -394,22 +451,48 @@ internal static partial class CutsceneProtectionService
         return false;
     }
 
-    private static bool RemoveEveryoneDenyRules(FileSecurity security)
-    {
-        bool removed = false;
-        AuthorizationRuleCollection rules = security.GetAccessRules(includeExplicit: true, includeInherited: false,
-            typeof(SecurityIdentifier));
-        foreach (FileSystemAccessRule rule in rules.OfType<FileSystemAccessRule>())
-        {
-            if (rule.AccessControlType == AccessControlType.Deny
+    private static IEnumerable<FileSystemAccessRule> GetStubDenyRules(FileSecurity security) =>
+        security.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
+            .OfType<FileSystemAccessRule>()
+            .Where(rule => rule.AccessControlType == AccessControlType.Deny
                 && rule.IdentityReference.Equals(EveryoneSid)
-                && (rule.FileSystemRights & (FileSystemRights.Write | FileSystemRights.Delete)) != 0)
+                && rule.FileSystemRights == StubDenyRights);
+
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+    private struct FileRenameInfo
+    {
+        public uint ReplaceIfExists;
+        public IntPtr RootDirectory;
+        public uint FileNameLength;
+        public char FileName;
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool SetFileInformationByHandle(SafeFileHandle file, int infoClass, IntPtr info, uint size);
+
+    private static void ReplaceWithLockedFile(SafeFileHandle staging, string destination)
+    {
+        // The handle was granted Delete before the lock was applied to the staged file.
+        byte[] name = Encoding.Unicode.GetBytes(destination + '\0');
+        int nameOffset = Marshal.OffsetOf<FileRenameInfo>(nameof(FileRenameInfo.FileName)).ToInt32();
+        int size = nameOffset + name.Length;
+        IntPtr buffer = Marshal.AllocHGlobal(size);
+        try
+        {
+            Marshal.StructureToPtr(new FileRenameInfo
             {
-                security.RemoveAccessRuleSpecific(rule);
-                removed = true;
-            }
+                ReplaceIfExists = 1,
+                FileNameLength = (uint)(name.Length - sizeof(char))
+            }, buffer, false);
+            Marshal.Copy(name, 0, buffer + nameOffset, name.Length);
+            if (!SetFileInformationByHandle(staging, FileRenameInfoClass, buffer, (uint)size))
+                throw new Win32Exception(Marshal.GetLastWin32Error());
         }
-        return removed;
+        finally
+        {
+            Marshal.FreeHGlobal(buffer);
+        }
     }
 
     private static void TryClearReadOnly(string path)
@@ -463,62 +546,82 @@ internal static partial class CutsceneProtectionService
         return Path.Combine(AppPaths.DataDir, "PersistentBackups", $"{side}_{hash}");
     }
 
-    private static void CreatePersistentBackup(string persistentDir, string backupDir, CancellationToken token)
+    private static bool HasPersistentBackup(string backupDir)
+    {
+        if (!Directory.Exists(backupDir))
+            return false;
+
+        ValidateSafePath(backupDir);
+        return File.Exists(Path.Combine(backupDir, BackupMarker)) || GetPersistentMetadataFiles(backupDir).Length > 0;
+    }
+
+    private static string[] GetPersistentMetadataFiles(string directory)
+    {
+        var names = new HashSet<string>(PersistentRevisionFiles, StringComparer.OrdinalIgnoreCase) { "base_revision" };
+        foreach (var (remote, persist) in PersistentManifestPairs)
+        {
+            names.Add(remote);
+            names.Add(persist);
+        }
+
+        string[] files = Directory.EnumerateFiles(directory)
+            .Where(path => names.Contains(Path.GetFileName(path))
+                || Path.GetFileName(path).StartsWith("cache_versions_", StringComparison.OrdinalIgnoreCase))
+            .ToArray();
+        if (files.Any(path => File.GetAttributes(path).HasFlag(FileAttributes.ReparsePoint)))
+            throw new IOException("Cutscene_UnsafePath".GetLocalized());
+        return files;
+    }
+
+    private static void CreatePersistentBackup(string[] metadataFiles, string backupDir, CancellationToken token)
     {
         string tempDir = backupDir + $".{Guid.NewGuid():N}.tmp";
         Directory.CreateDirectory(tempDir);
         try
         {
-            var targets = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "base_revision" };
-            foreach (string name in PersistentRevisionFiles)
-                targets.Add(name);
-            foreach (var (remote, persist) in PersistentManifestPairs)
-            {
-                targets.Add(remote);
-                targets.Add(persist);
-            }
-
-            foreach (string file in Directory.EnumerateFiles(persistentDir, "*", SearchOption.TopDirectoryOnly))
+            foreach (string file in metadataFiles)
             {
                 token.ThrowIfCancellationRequested();
-                string name = Path.GetFileName(file);
-                if (targets.Contains(name) || name.StartsWith("cache_versions_", StringComparison.OrdinalIgnoreCase))
-                    File.Copy(file, Path.Combine(tempDir, name), overwrite: true);
+                File.Copy(file, Path.Combine(tempDir, Path.GetFileName(file)));
             }
 
+            File.WriteAllText(Path.Combine(tempDir, BackupMarker), string.Empty);
+            token.ThrowIfCancellationRequested();
             if (Directory.Exists(backupDir))
-                Directory.Delete(backupDir, recursive: true);
-            Directory.CreateDirectory(Path.GetDirectoryName(backupDir)!);
+                Directory.Delete(backupDir);
             Directory.Move(tempDir, backupDir);
         }
         finally
         {
-            if (Directory.Exists(tempDir))
-            {
-                try { Directory.Delete(tempDir, recursive: true); } catch { }
-            }
+            DeleteTemporaryBackup(tempDir);
         }
     }
 
-    private static void RemoveReadOnlyRecursive(string directory, CancellationToken token)
+    private static void DeleteTemporaryBackup(string directory)
     {
-        var dirInfo = new DirectoryInfo(directory);
-        if (dirInfo.Attributes.HasFlag(FileAttributes.ReadOnly))
-            dirInfo.Attributes &= ~FileAttributes.ReadOnly;
-
-        foreach (string entry in Directory.EnumerateFileSystemEntries(directory, "*", SearchOption.AllDirectories))
+        if (!Directory.Exists(directory))
+            return;
+        try
         {
-            token.ThrowIfCancellationRequested();
-            try
+            foreach (string path in GetPersistentMetadataFiles(directory))
             {
-                FileAttributes attrs = File.GetAttributes(entry);
-                if (attrs.HasFlag(FileAttributes.ReadOnly))
-                    File.SetAttributes(entry, attrs & ~FileAttributes.ReadOnly);
+                ClearReadOnly(path);
+                File.Delete(path);
             }
-            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
-            {
-            }
+            File.Delete(Path.Combine(directory, BackupMarker));
+            Directory.Delete(directory);
         }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            DebugLog.Info(nameof(CutsceneProtectionService), $"Could not delete temporary backup: {ex.Message}");
+        }
+    }
+
+    private static void ClearReadOnly(string path)
+    {
+        FileAttributes attributes = File.GetAttributes(path);
+        if (attributes.HasFlag(FileAttributes.ReadOnly))
+            File.SetAttributes(path, attributes & ~FileAttributes.ReadOnly);
     }
 
     private static string? ReadRevisionValue(string path)
