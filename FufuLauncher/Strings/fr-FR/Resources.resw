@@ -13380,4 +13380,10 @@ Continuer vers la page du projet ?</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>Impossible de générer le fichier de résultats de lecture des succès.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Gestion des ressources des versions précédentes</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>Consultez, supprimez et restaurez par chapitre les cinématiques et les packs de voix de l’histoire des versions précédentes</value>
+  </data>
 </root>

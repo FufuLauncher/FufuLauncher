@@ -13394,10 +13394,10 @@ UIGF v4.x/3.0/2.x</value>
     <value>未能生成成就读取结果。</value>
   </data>
   <data name="Cutscene_Title" xml:space="preserve">
-    <value>过场动画资源管理</value>
+    <value>过往资源管理</value>
   </data>
   <data name="Cutscene_CardDescription" xml:space="preserve">
-    <value>按章节查看、清理和恢复已安装的过场动画</value>
+    <value>按章节查看、清理和恢复过往版本的过场动画和剧情语音包</value>
   </data>
   <data name="Cutscene_Search" xml:space="preserve">
     <value>搜索动画、章节、角色或文件名</value>

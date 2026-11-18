@@ -13381,4 +13381,10 @@ Los usuarios del servidor global pueden importar registros mediante «Obtener po
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>No se pudo generar el archivo de resultados de lectura de logros.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Gestión de recursos de versiones anteriores</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>Consulta, elimina y restaura por capítulos las cinemáticas y los paquetes de voces de la historia de versiones anteriores</value>
+  </data>
 </root>

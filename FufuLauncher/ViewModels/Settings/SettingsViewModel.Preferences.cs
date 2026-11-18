@@ -258,7 +258,13 @@ public partial class SettingsViewModel
             ? (NotificationPosition)Convert.ToInt32(notifPosJson)
             : NotificationPosition.BottomRight;
 
-        await InitializeNavItemsAsync();
+        if (App.MainWindow is MainWindow mainWindow)
+        {
+            var navItems = await mainWindow.GetSidebarSettingsAsync();
+            NavItems.Clear();
+            foreach (var item in navItems)
+                NavItems.Add(item);
+        }
     }
 
     private async Task LoadStartupSectionAsync()

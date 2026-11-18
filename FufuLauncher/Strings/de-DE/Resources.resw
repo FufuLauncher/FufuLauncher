@@ -13381,4 +13381,10 @@ Zur Projektseite fortfahren?</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>Ausgabedatei für den Erfolgs-Reader konnte nicht erstellt werden.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Ressourcen früherer Versionen verwalten</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>Zwischensequenzen und Story-Sprachpakete früherer Versionen nach Kapiteln anzeigen, entfernen und wiederherstellen</value>
+  </data>
 </root>

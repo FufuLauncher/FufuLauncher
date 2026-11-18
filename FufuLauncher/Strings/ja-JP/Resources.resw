@@ -13383,4 +13383,10 @@ UID {1} 用の新しいデータアーカイブを作成しますか？</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>アチーブメント読み取り結果ファイルを生成できませんでした。</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>過去バージョンのリソース管理</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>過去バージョンのカットシーンとストーリーボイスパックを章ごとに確認・削除・復元できます</value>
+  </data>
 </root>
