@@ -13381,4 +13381,10 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>Не удалось создать файл с результатами чтения достижений.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Управление ресурсами прошлых версий</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>Просматривайте, удаляйте и восстанавливайте по главам кат-сцены и пакеты сюжетной озвучки из прошлых версий</value>
+  </data>
 </root>

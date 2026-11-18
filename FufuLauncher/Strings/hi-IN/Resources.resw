@@ -13372,4 +13372,10 @@ QQ चैनलों या Miyoushe से अलग, इसका उद्�
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>उपलब्धि रीडर आउटपुट फ़ाइल जनरेट करने में विफल।</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>पिछले संस्करणों के संसाधनों का प्रबंधन</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>पिछले संस्करणों के कटसीन और कहानी के वॉइस पैक अध्याय के अनुसार देखें, हटाएँ और बहाल करें</value>
+  </data>
 </root>

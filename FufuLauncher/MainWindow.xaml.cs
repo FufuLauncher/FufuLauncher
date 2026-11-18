@@ -78,7 +78,6 @@ public sealed partial class MainWindow : WindowEx
 
     private bool _isSuspended;
 
-    private readonly Dictionary<string, bool> _navItemVisibility = new();
 
     public bool IsAgreementShowing
     {
@@ -405,11 +404,6 @@ public sealed partial class MainWindow : WindowEx
         WeakReferenceMessenger.Default.Register<MinimizeToTrayChangedMessage>(this, (_, m) =>
         {
             _minimizeToTray = m.Value;
-        });
-
-        WeakReferenceMessenger.Default.Register<NavigationVisibilityChangedMessage>(this, (_, m) =>
-        {
-            dispatcherQueue.TryEnqueue(() => ApplyNavItemVisibility(m.Value));
         });
 
         WeakReferenceMessenger.Default.Register<MinWindowSizeLimitChangedMessage>(this, (_, m) =>

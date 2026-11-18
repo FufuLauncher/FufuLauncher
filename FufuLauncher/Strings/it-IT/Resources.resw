@@ -13387,4 +13387,10 @@ Continuare verso la pagina del progetto?</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>Impossibile generare il file di output dei risultati obiettivi.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Gestione delle risorse delle versioni precedenti</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>Visualizza, rimuovi e ripristina per capitolo i filmati e i pacchetti di doppiaggio della storia delle versioni precedenti</value>
+  </data>
 </root>

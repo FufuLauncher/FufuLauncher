@@ -13379,4 +13379,10 @@ Lanjutkan ke halaman proyek?</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>Gagal membuat file keluaran pembaca pencapaian.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>Pengelolaan Sumber Daya Versi Sebelumnya</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>Lihat, hapus, dan pulihkan cutscene serta paket suara cerita dari versi sebelumnya berdasarkan bab</value>
+  </data>
 </root>

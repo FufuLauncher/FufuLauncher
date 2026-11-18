@@ -4,13 +4,13 @@ Licensed under the MIT License.
 */
 
 using System.Numerics;
-using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.Messages;
 using FufuLauncher.Models;
 using FufuLauncher.Services;
 using FufuLauncher.ViewModels;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Media.Animation;
@@ -19,6 +19,12 @@ namespace FufuLauncher;
 
 public sealed partial class MainWindow
 {
+    private const string HomeNavTag = "FufuLauncher.ViewModels.MainViewModel";
+    private const string SettingsNavTag = "FufuLauncher.ViewModels.SettingsViewModel";
+    private const string GameSettingsNavTag = "FufuLauncher.ViewModels.GameSettingsViewModel";
+    private const string ToolboxNavTag = "FufuLauncher.ViewModels.ControlPanelViewModel";
+    private Task<IReadOnlyList<NavItemConfig>>? _navItemsTask;
+
     #region Navigation & Layout
 
     private async void NavigationView_Loaded(object sender, RoutedEventArgs e)
@@ -65,7 +71,7 @@ public sealed partial class MainWindow
             await LoadMinimizeToTraySettingAsync();
             await LoadMinWindowSizeLimitSettingAsync();
             await LoadNotificationPositionAsync();
-            await LoadNavItemVisibilityAsync();
+            await GetSidebarSettingsAsync();
             var pendantSetting = await _localSettingsService.ReadSettingAsync(AccountAvatarPendant.SettingKey);
             _showAccountAvatarPendant = bool.TryParse(pendantSetting?.ToString(), out var enabled) && enabled;
             ShowMainContent();
@@ -232,7 +238,7 @@ public sealed partial class MainWindow
         {
             var viewModelTag = selectedItem.Tag?.ToString();
 
-            if (viewModelTag == "FufuLauncher.ViewModels.SettingsViewModel")
+            if (viewModelTag == SettingsNavTag)
             {
                 var anim = new DoubleAnimation
                 {
@@ -280,6 +286,7 @@ public sealed partial class MainWindow
 
     internal async void NavigateToPage(string viewModelTag, bool force = false)
     {
+        viewModelTag = GetCurrentNavTag(viewModelTag);
         if (!force && !IsNavItemVisible(viewModelTag))
         {
             ShowNotification(new NotificationMessage("HiddenFeatureTitle".GetLocalized(),
@@ -292,14 +299,12 @@ public sealed partial class MainWindow
 
         var pageType = viewModelTag switch
         {
-            "FufuLauncher.ViewModels.MainViewModel" => typeof(Views.MainPage),
-            "FufuLauncher.ViewModels.GameSettingsViewModel" or "FufuLauncher.ViewModels.BlankViewModel" =>
-                typeof(Views.GameSettingsPage),
-            "FufuLauncher.ViewModels.SettingsViewModel" => typeof(Views.SettingsPage),
+            HomeNavTag => typeof(Views.MainPage),
+            GameSettingsNavTag => typeof(Views.GameSettingsPage),
+            SettingsNavTag => typeof(Views.SettingsPage),
             "FufuLauncher.ViewModels.AccountViewModel" => typeof(Views.AccountPage),
             "FufuLauncher.ViewModels.OtherViewModel" => typeof(Views.OtherPage),
-            "FufuLauncher.ViewModels.ControlPanelViewModel" or "FufuLauncher.ViewModels.ControlPanelModel" =>
-                typeof(Views.ControlPanelPage),
+            ToolboxNavTag => typeof(Views.ControlPanelPage),
             "FufuLauncher.ViewModels.PluginViewModel" => typeof(Views.PluginPage),
             "FufuLauncher.ViewModels.PluginStoreViewModel" => typeof(Views.PluginStorePage),
             "FufuLauncher.ViewModels.PluginSettingsViewModel" => typeof(Views.PluginSettingsPage),
@@ -336,7 +341,7 @@ public sealed partial class MainWindow
             if (isMainPage)
             {
                 var mainItem = GetAllNavItems()
-                    .FirstOrDefault(i => i.Tag?.ToString() == "FufuLauncher.ViewModels.MainViewModel");
+                    .FirstOrDefault(i => i.Tag is HomeNavTag);
                 if (mainItem != null)
                     NavigationView.SelectedItem = mainItem;
             }
@@ -501,16 +506,13 @@ public sealed partial class MainWindow
         if (_isExit) return;
 
         var item = GetAllNavItems()
-            .FirstOrDefault(i =>
-                i.Tag?.ToString() == "FufuLauncher.ViewModels.GameSettingsViewModel" ||
-                i.Tag?.ToString() == "FufuLauncher.ViewModels.BlankViewModel");
+            .FirstOrDefault(i => i.Tag is GameSettingsNavTag);
 
-        if (item != null && (IsNavItemVisible("FufuLauncher.ViewModels.GameSettingsViewModel") ||
-                             IsNavItemVisible("FufuLauncher.ViewModels.BlankViewModel")))
+        if (item is { Visibility: Visibility.Visible })
         {
             if (NavigationView.SelectedItem == item)
             {
-                NavigateToPage("FufuLauncher.ViewModels.GameSettingsViewModel");
+                NavigateToPage(GameSettingsNavTag);
             }
             else
             {
@@ -520,7 +522,7 @@ public sealed partial class MainWindow
         else
         {
             NavigationView.SelectedItem = null;
-            NavigateToPage("FufuLauncher.ViewModels.GameSettingsViewModel", force: true);
+            NavigateToPage(GameSettingsNavTag, force: true);
         }
     }
 
@@ -548,55 +550,88 @@ public sealed partial class MainWindow
 
     public Task NavigateToBlankPageAsync() => NavigateToGameSettingsPageAsync();
 
-    public async Task LoadNavItemVisibilityAsync()
+    internal Task<IReadOnlyList<NavItemConfig>> GetSidebarSettingsAsync()
     {
-        var settings = App.GetService<ILocalSettingsService>();
-        var allKeys = new[]
+        if (_navItemsTask == null || _navItemsTask.IsFaulted)
         {
-            "MainViewModel", "PluginSettingsViewModel", "ControlPanelViewModel", "ControlPanelModel",
-            "GameSettingsViewModel", "BlankViewModel", "AccountViewModel", "OtherViewModel",
-            "PluginViewModel", "PluginStoreViewModel", "HelpViewModel",
-            "SettingsViewModel"
-        };
-
-        foreach (var key in allKeys)
-        {
-            var val = await settings.ReadSettingAsync($"NavVisible_{key}");
-            bool visible = val is bool b ? b : (val is string s && bool.TryParse(s, out var p) ? p : true);
-            _navItemVisibility[$"FufuLauncher.ViewModels.{key}"] = visible;
+            _navItemsTask = LoadSidebarSettingsAsync();
         }
 
+        return _navItemsTask;
+    }
 
+    private async Task<IReadOnlyList<NavItemConfig>> LoadSidebarSettingsAsync()
+    {
+        var configs = new List<NavItemConfig>();
         foreach (var item in GetAllNavItems())
         {
-            var tag = item.Tag?.ToString();
-            if (tag != null && _navItemVisibility.TryGetValue(tag, out var visible))
+            // Tags also identify buttons that open a separate window, such as Cloud Storage.
+            var key = item.Tag as string ?? item.Name;
+            if (string.IsNullOrWhiteSpace(key)) continue;
+
+            var displayName = item.Content as string ?? AutomationProperties.GetName(item);
+            var config = new NavItemConfig
             {
-                item.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
-            }
-        }
-    }
+                DisplayName = string.IsNullOrWhiteSpace(displayName) ? key : displayName,
+                IsForceVisible = key is HomeNavTag or SettingsNavTag
+            };
 
-    private bool IsNavItemVisible(string viewModelKey)
-    {
-        return _navItemVisibility.TryGetValue(viewModelKey, out var visible) ? visible : true;
-    }
-
-    internal bool CanNavigateToPage(string viewModelKey) => IsNavItemVisible(viewModelKey);
-
-    private void ApplyNavItemVisibility(NavItemConfig config)
-    {
-        _navItemVisibility[config.ViewModelKey] = config.IsUserVisible;
-
-        foreach (var item in GetAllNavItems())
-        {
-            if (item.Tag?.ToString() == config.ViewModelKey)
+            if (!config.IsForceVisible)
             {
-                item.Visibility = config.IsUserVisible ? Visibility.Visible : Visibility.Collapsed;
-                break;
+                var settingKey = GetNavVisibilitySettingKey(key);
+                var value = await _localSettingsService.ReadSettingAsync(settingKey);
+                if (value == null)
+                {
+                    // Before these pages were renamed, their visibility used these keys.
+                    var legacyKey = key switch
+                    {
+                        GameSettingsNavTag => "NavVisible_BlankViewModel",
+                        ToolboxNavTag => "NavVisible_ControlPanelModel",
+                        _ => null
+                    };
+                    if (legacyKey != null)
+                        value = await _localSettingsService.ReadSettingAsync(legacyKey);
+                }
+
+                config.IsUserVisible = bool.TryParse(value?.ToString(), out var visible)
+                    ? visible
+                    : item.Visibility == Visibility.Visible;
+                config.VisibilityChanged += async (_, _) =>
+                {
+                    var isVisible = config.IsUserVisible;
+                    item.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
+                    await _localSettingsService.SaveSettingAsync(settingKey, isVisible);
+                };
             }
+
+            item.Visibility = config.IsUserVisible ? Visibility.Visible : Visibility.Collapsed;
+            configs.Add(config);
         }
+
+        return configs;
     }
+
+    private static string GetNavVisibilitySettingKey(string tag)
+    {
+        const string viewModelPrefix = "FufuLauncher.ViewModels.";
+        var key = tag.StartsWith(viewModelPrefix, StringComparison.Ordinal) ? tag[viewModelPrefix.Length..] : tag;
+        return $"NavVisible_{key}";
+    }
+
+    private static string GetCurrentNavTag(string tag) => tag switch
+    {
+        "FufuLauncher.ViewModels.BlankViewModel" => GameSettingsNavTag,
+        "FufuLauncher.ViewModels.ControlPanelModel" => ToolboxNavTag,
+        _ => tag
+    };
+
+    private bool IsNavItemVisible(string tag)
+    {
+        var item = GetAllNavItems().FirstOrDefault(i => i.Tag as string == tag);
+        return item?.Visibility != Visibility.Collapsed;
+    }
+
+    internal bool CanNavigateToPage(string viewModelKey) => IsNavItemVisible(GetCurrentNavTag(viewModelKey));
 
     private IEnumerable<NavigationViewItem> GetAllNavItems()
     {

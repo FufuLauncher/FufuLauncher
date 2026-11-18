@@ -13394,10 +13394,10 @@ Continue to the project page?</value>
     <value>Failed to generate achievement reader output file.</value>
   </data>
   <data name="Cutscene_Title" xml:space="preserve">
-    <value>Cutscene Resource Management</value>
+    <value>Past Game Resources</value>
   </data>
   <data name="Cutscene_CardDescription" xml:space="preserve">
-    <value>View, remove, and restore installed cutscenes by chapter</value>
+    <value>Browse, remove, and restore cutscenes and story voice packs from past versions by chapter</value>
   </data>
   <data name="Cutscene_Search" xml:space="preserve">
     <value>Search by scene, chapter, character, or file name</value>

@@ -13381,4 +13381,10 @@ UID {1}용 새 데이터 아카이브를 만드시겠습니까?</value>
   <data name="Yae_ErrNoResultFile" xml:space="preserve">
     <value>업적 읽기 결과 파일을 생성하지 못했습니다.</value>
   </data>
+  <data name="Cutscene_Title" xml:space="preserve">
+    <value>이전 버전 리소스 관리</value>
+  </data>
+  <data name="Cutscene_CardDescription" xml:space="preserve">
+    <value>이전 버전의 컷신과 스토리 음성 팩을 챕터별로 확인하고 삭제하거나 복원할 수 있습니다</value>
+  </data>
 </root>
