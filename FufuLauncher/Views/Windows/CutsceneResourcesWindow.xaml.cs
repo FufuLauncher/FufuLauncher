@@ -8,11 +8,14 @@ using FufuLauncher.Helpers;
 using FufuLauncher.Models.GameServer;
 using FufuLauncher.Services;
 using FufuLauncher.Services.GameServer;
+using Microsoft.UI;
+using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Media;
 using Windows.Graphics;
+using Windows.UI;
 
 namespace FufuLauncher.Views;
 
@@ -29,19 +32,16 @@ public sealed partial class CutsceneResourcesWindow : Window
     private bool _busy;
     private bool _closed;
     private bool _batchSelection;
+    private bool _updatingFilters;
 
     private CutsceneResourcesWindow()
     {
         InitializeComponent();
-        RootGrid.RequestedTheme = App.GetService<IThemeSelectorService>().Theme;
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
-        RectInt32 area = DisplayArea.GetFromWindowId(AppWindow.Id, DisplayAreaFallback.Primary).WorkArea;
-        double scale = WindowManagerHelper.GetScaleFactor(this);
-        int width = Math.Min((int)Math.Round(1240 * scale), area.Width - 32);
-        int height = Math.Min((int)Math.Round(980 * scale), area.Height - 32);
-        AppWindow.MoveAndResize(new RectInt32(area.X + (area.Width - width) / 2, area.Y + (area.Height - height) / 2,
-            width, height));
+        ConfigureWindow();
+        ApplyThemeAndTitleBar();
+        ApplyWindowBackdrop();
         Closed += (_, _) =>
         {
             _closed = true;
@@ -53,7 +53,109 @@ public sealed partial class CutsceneResourcesWindow : Window
     internal static void Show()
     {
         _instance ??= new CutsceneResourcesWindow();
+        if (_instance.AppWindow?.Presenter is OverlappedPresenter presenter &&
+            presenter.State == OverlappedPresenterState.Minimized)
+        {
+            presenter.Restore();
+        }
         _instance.Activate();
+    }
+
+    private void ConfigureWindow()
+    {
+        try
+        {
+            var appWindow = AppWindow;
+            if (appWindow == null)
+                return;
+
+            var iconPath = Path.Combine(AppContext.BaseDirectory, "Assets", "WindowIcon.ico");
+            if (File.Exists(iconPath))
+                appWindow.SetIcon(iconPath);
+
+            RectInt32 area = DisplayArea.GetFromWindowId(appWindow.Id, DisplayAreaFallback.Primary).WorkArea;
+            double scale = WindowManagerHelper.GetScaleFactor(this);
+            int width = Math.Min((int)Math.Round(1240 * scale), area.Width - 32);
+            int height = Math.Min((int)Math.Round(900 * scale), area.Height - 32);
+            appWindow.MoveAndResize(new RectInt32(
+                area.X + (area.Width - width) / 2,
+                area.Y + (area.Height - height) / 2,
+                width,
+                height));
+
+            if (appWindow.Presenter is OverlappedPresenter presenter)
+            {
+                presenter.PreferredMinimumWidth = (int)Math.Round(960 * scale);
+                presenter.PreferredMinimumHeight = (int)Math.Round(600 * scale);
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info(nameof(CutsceneResourcesWindow), $"ConfigureWindow failed: {ex.Message}");
+        }
+    }
+
+    private void ApplyThemeAndTitleBar()
+    {
+        try
+        {
+            var theme = App.GetService<IThemeSelectorService>().Theme;
+            RootGrid.RequestedTheme = theme;
+
+            var isDark = theme == ElementTheme.Dark ||
+                         (theme == ElementTheme.Default && Application.Current.RequestedTheme == ApplicationTheme.Dark);
+            var titleBar = AppWindow?.TitleBar;
+            if (titleBar == null)
+                return;
+
+            titleBar.BackgroundColor = Colors.Transparent;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            titleBar.ButtonForegroundColor = isDark ? Colors.White : Colors.Black;
+            titleBar.ButtonInactiveForegroundColor = isDark ? Colors.White : Colors.Black;
+            titleBar.ButtonHoverForegroundColor = isDark ? Colors.White : Colors.Black;
+            titleBar.ButtonHoverBackgroundColor = isDark
+                ? Color.FromArgb(0x33, 0xFF, 0xFF, 0xFF)
+                : Color.FromArgb(0x33, 0x00, 0x00, 0x00);
+            titleBar.ButtonPressedBackgroundColor = isDark
+                ? Color.FromArgb(0x66, 0xFF, 0xFF, 0xFF)
+                : Color.FromArgb(0x66, 0x00, 0x00, 0x00);
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info(nameof(CutsceneResourcesWindow), $"ApplyTheme failed: {ex.Message}");
+        }
+    }
+
+    private void ApplyWindowBackdrop()
+    {
+        try
+        {
+            if (MicaController.IsSupported())
+            {
+                SystemBackdrop = new MicaBackdrop();
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info(nameof(CutsceneResourcesWindow), $"MicaBackdrop failed: {ex.Message}");
+        }
+
+        try
+        {
+            SystemBackdrop = new DesktopAcrylicBackdrop();
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info(nameof(CutsceneResourcesWindow), $"DesktopAcrylicBackdrop fallback failed: {ex.Message}");
+            var isDark = RootGrid.RequestedTheme == ElementTheme.Dark ||
+                         (RootGrid.RequestedTheme == ElementTheme.Default &&
+                          Application.Current.RequestedTheme == ApplicationTheme.Dark);
+            RootGrid.Background = new SolidColorBrush(isDark
+                ? Color.FromArgb(255, 32, 32, 32)
+                : Color.FromArgb(255, 243, 243, 243));
+        }
     }
 
     private async void OnLoaded(object sender, RoutedEventArgs args)
@@ -206,45 +308,51 @@ public sealed partial class CutsceneResourcesWindow : Window
 
     private void BuildFilters()
     {
-        Filters.Children.Clear();
-        CutsceneResourceRow[] scoped = GetScopeFilteredItems().ToArray();
-        var byCategory = scoped.SelectMany(row => row.Chapters.Select(chapter => (row, chapter.Category)))
-            .ToLookup(link => link.Category, link => link.row);
-        if (_category is { } category && !byCategory.Contains(category))
-            _category = null;
+        _updatingFilters = true;
+        try
+        {
+            Filters.Items.Clear();
+            CutsceneResourceRow[] scoped = GetScopeFilteredItems().ToArray();
+            var byCategory = scoped.SelectMany(row => row.Chapters.Select(chapter => (row, chapter.Category)))
+                .ToLookup(link => link.Category, link => link.row);
+            if (_category is { } category && !byCategory.Contains(category))
+                _category = null;
 
-        AddFilter(null, "Cutscene_All".GetLocalized(), scoped.Length);
-        foreach (var group in byCategory.OrderBy(group => group.Key))
-            AddFilter(group.Key, $"Cutscene_Category_{group.Key}".GetLocalized(), group.Distinct().Count());
+            SelectorBarItem? selected = AddFilter(null, "Cutscene_All".GetLocalized(), scoped.Length);
+            foreach (var group in byCategory.OrderBy(group => group.Key))
+                selected = AddFilter(group.Key, $"Cutscene_Category_{group.Key}".GetLocalized(), group.Distinct().Count()) ?? selected;
+
+            Filters.SelectedItem = selected ?? Filters.Items.FirstOrDefault();
+        }
+        finally
+        {
+            _updatingFilters = false;
+        }
     }
 
-    private void AddFilter(CutsceneCategory? category, string label, int count)
+    private SelectorBarItem? AddFilter(CutsceneCategory? category, string label, int count)
     {
-        var button = new ToggleButton
+        bool isSelected = _category == category;
+        var item = new SelectorBarItem
         {
-            IsChecked = _category == category,
+            Text = $"{label} {count}",
+            IsSelected = isSelected,
             IsEnabled = !_busy,
-            Content = $"{label} {count}",
-            CornerRadius = new CornerRadius(14),
             Tag = category
         };
-        if (category is CutsceneCategory cutsceneCategory)
-        {
-            button.Style = GetCategoryBadgeStyle(cutsceneCategory);
-            button.Template = (ControlTemplate)RootGrid.Resources["CutsceneFilterTemplate"];
-            button.FontSize = 14;
-            button.Padding = new Thickness(12, 5, 12, 5);
-            button.MinHeight = 32;
-            button.UseSystemFocusVisuals = true;
-        }
-        button.Click += (_, _) =>
-        {
-            _category = category;
-            foreach (ToggleButton filter in Filters.Children.Cast<ToggleButton>())
-                filter.IsChecked = Equals(filter.Tag, category);
-            RefreshChapters();
-        };
-        Filters.Children.Add(button);
+        Filters.Items.Add(item);
+        return isSelected ? item : null;
+    }
+
+    private void OnCategoryFilterChanged(SelectorBar sender, SelectorBarSelectionChangedEventArgs args)
+    {
+        if (_updatingFilters || sender.SelectedItem is null)
+            return;
+        CutsceneCategory? next = sender.SelectedItem.Tag is CutsceneCategory c ? c : null;
+        if (_category == next)
+            return;
+        _category = next;
+        RefreshChapters();
     }
 
     private void OnSearchChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -364,11 +472,20 @@ public sealed partial class CutsceneResourcesWindow : Window
     private void OnChapterBadgeContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
     {
         sender.Style = args.NewValue is CutsceneChapterRow row
-            ? GetCategoryBadgeStyle(row.Chapter.Category) : (Style)RootGrid.Resources["CutsceneBadgeStyle"];
+            ? GetCategoryTextStyle(row.Chapter.Category) : (Style)RootGrid.Resources["CutsceneCategoryTextStyle"];
     }
 
-    private Style GetCategoryBadgeStyle(CutsceneCategory category) =>
-        (Style)RootGrid.Resources[$"Cutscene{category}BadgeStyle"];
+    private Style GetCategoryTextStyle(CutsceneCategory category) =>
+        (Style)RootGrid.Resources[$"Cutscene{category}TextStyle"];
+
+    private void OnToggleChapterExpandClick(object sender, RoutedEventArgs args)
+    {
+        if (sender is Button { Tag: CutsceneChapterRow chapter })
+        {
+            chapter.IsExpanded = !chapter.IsExpanded;
+            UpdateExpandButton();
+        }
+    }
 
     private void OnRemoveAetherClick(object sender, RoutedEventArgs args) => SetTravelerRemoval(CutsceneTraveler.Aether);
 
@@ -458,9 +575,10 @@ public sealed partial class CutsceneResourcesWindow : Window
 
     private void UpdateExpandButton()
     {
+        bool allExpanded = _chapters.Count > 0 && _chapters.All(chapter => chapter.IsExpanded);
         ExpandButton.IsEnabled = _chapters.Count > 0 && !_busy;
-        ExpandButton.Content = (_chapters.All(chapter => chapter.IsExpanded) && _chapters.Count > 0
-            ? "Cutscene_CollapseAll" : "Cutscene_ExpandAll").GetLocalized();
+        ExpandButtonText.Text = (allExpanded ? "Cutscene_CollapseAll" : "Cutscene_ExpandAll").GetLocalized();
+        ExpandButtonIcon.Glyph = allExpanded ? "\uF2B6" : "\uF2A3";
     }
 
     private void SetKept(IEnumerable<CutsceneResourceRow> rows, bool keep)
@@ -675,7 +793,8 @@ public sealed partial class CutsceneResourcesWindow : Window
         SortDirection.IsEnabled = !busy;
         PendingOnlyButton.IsEnabled = !busy;
         StubLockProtectionCheck.IsEnabled = !busy;
-        foreach (ToggleButton filter in Filters.Children.Cast<ToggleButton>())
+        Filters.IsEnabled = !busy;
+        foreach (SelectorBarItem filter in Filters.Items)
             filter.IsEnabled = !busy;
         OperationProgress.Visibility = status is null ? Visibility.Collapsed : Visibility.Visible;
         CancelButton.Visibility = OperationProgress.Visibility;

@@ -6,11 +6,7 @@
     xmlns:views="using:FufuLauncher.Views"
     Title="{helpers:Loc Key=Cutscene_Title}">
 
-    <Window.SystemBackdrop>
-        <MicaBackdrop />
-    </Window.SystemBackdrop>
-
-    <Grid x:Name="RootGrid" RowDefinitions="Auto,Auto,*,Auto" Loaded="OnLoaded">
+    <Grid x:Name="RootGrid" Background="Transparent" Loaded="OnLoaded">
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.ThemeDictionaries>
@@ -40,162 +36,250 @@
                     </ResourceDictionary>
                 </ResourceDictionary.ThemeDictionaries>
 
-                <Style x:Key="CutsceneBadgeStyle" TargetType="ContentControl">
-                    <Setter Property="FontFamily" Value="{ThemeResource CaptionThemeFontFamily}" />
-                    <Setter Property="FontSize" Value="12" />
-                    <Setter Property="Padding" Value="8,3" />
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ContentControl">
-                                <Grid>
-                                    <Border Background="{TemplateBinding Foreground}" Opacity="0.14" CornerRadius="10" />
-                                    <ContentPresenter Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
-                                                      Padding="{TemplateBinding Padding}" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
+                <Style x:Key="SectionHeadingStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
                 </Style>
-                <Style x:Key="CutsceneArchonBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
+                <Style x:Key="RowTitleStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+                </Style>
+                <Style x:Key="RowLabelStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="FontSize" Value="13" />
+                    <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+                </Style>
+                <Style x:Key="RowCaptionStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                    <Setter Property="helpers:TrimmedToolTip.IsEnabled" Value="True" />
+                </Style>
+                <Style x:Key="HairlineDividerStyle" TargetType="Rectangle">
+                    <Setter Property="Height" Value="1" />
+                    <Setter Property="Fill" Value="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                </Style>
+                <Style x:Key="VerticalDividerStyle" TargetType="Rectangle">
+                    <Setter Property="Width" Value="1" />
+                    <Setter Property="Fill" Value="{ThemeResource DividerStrokeColorDefaultBrush}" />
+                    <Setter Property="VerticalAlignment" Value="Stretch" />
+                </Style>
+                <Style x:Key="FlatRowActionButtonStyle"
+                       TargetType="Button"
+                       BasedOn="{StaticResource DefaultButtonStyle}">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="8,5" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+                <Style x:Key="FlatChapterHeaderButtonStyle"
+                       TargetType="Button"
+                       BasedOn="{StaticResource DefaultButtonStyle}">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Padding" Value="6,6" />
+                    <Setter Property="CornerRadius" Value="4" />
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style x:Key="SectionTitleIconStyle" TargetType="FontIcon">
+                    <Setter Property="FontFamily" Value="{StaticResource FluentIconsFont}" />
+                    <Setter Property="FontSize" Value="18" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                </Style>
+                <Style x:Key="ButtonIconStyle" TargetType="FontIcon">
+                    <Setter Property="FontFamily" Value="{StaticResource FluentIconsFont}" />
+                    <Setter Property="FontSize" Value="15" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style x:Key="SmallButtonIconStyle" TargetType="FontIcon">
+                    <Setter Property="FontFamily" Value="{StaticResource FluentIconsFont}" />
+                    <Setter Property="FontSize" Value="13" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+
+                <Style x:Key="CutsceneCategoryTextStyle" TargetType="TextBlock">
+                    <Setter Property="FontFamily" Value="{StaticResource AppGlobalFont}" />
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="FontWeight" Value="SemiBold" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="TextWrapping" Value="NoWrap" />
+                    <Setter Property="Foreground" Value="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                </Style>
+                <Style x:Key="CutsceneArchonTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneCategoryTextStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneArchonBadgeBrush}" />
                 </Style>
-                <Style x:Key="CutsceneStoryBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
+                <Style x:Key="CutsceneStoryTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneCategoryTextStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneStoryBadgeBrush}" />
                 </Style>
-                <Style x:Key="CutsceneHangoutBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneStoryBadgeStyle}" />
-                <Style x:Key="CutsceneEventBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
+                <Style x:Key="CutsceneHangoutTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneStoryTextStyle}" />
+                <Style x:Key="CutsceneEventTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneCategoryTextStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneEventBadgeBrush}" />
                 </Style>
-                <Style x:Key="CutsceneTribalBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
+                <Style x:Key="CutsceneTribalTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneCategoryTextStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneTribalBadgeBrush}" />
                 </Style>
-                <Style x:Key="CutsceneWorldBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
+                <Style x:Key="CutsceneWorldTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneCategoryTextStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneWorldBadgeBrush}" />
                 </Style>
-                <Style x:Key="CutsceneOtherBadgeStyle" TargetType="ContentControl" BasedOn="{StaticResource CutsceneBadgeStyle}">
+                <Style x:Key="CutsceneOtherTextStyle" TargetType="TextBlock" BasedOn="{StaticResource CutsceneCategoryTextStyle}">
                     <Setter Property="Foreground" Value="{ThemeResource CutsceneOtherBadgeBrush}" />
                 </Style>
 
-                <Style x:Key="CutsceneMetadataBadgeStyle" TargetType="Border">
-                    <Setter Property="Height" Value="22" />
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="Background" Value="{ThemeResource SubtleFillColorSecondaryBrush}" />
-                </Style>
-
                 <DataTemplate x:Key="CutsceneDisplayOptionLabel">
-                    <TextBlock Text="{Binding}" Style="{StaticResource CaptionTextBlockStyle}"
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock Text="{Binding}"
+                               FontFamily="{StaticResource AppGlobalFont}"
+                               FontSize="12"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               TextWrapping="NoWrap" />
                 </DataTemplate>
-
-                <ControlTemplate x:Key="CutsceneFilterTemplate" TargetType="ToggleButton">
-                    <Grid x:Name="Chip" Background="Transparent" CornerRadius="{TemplateBinding CornerRadius}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="PointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="Tint.Opacity" Value="0.21" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="Tint.Opacity" Value="0.27" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="Chip.Opacity" Value="0.48" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Checked">
-                                    <VisualState.Setters>
-                                        <Setter Target="Outline.Opacity" Value="1" />
-                                        <Setter Target="Tint.Opacity" Value="0.20" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedPointerOver">
-                                    <VisualState.Setters>
-                                        <Setter Target="Outline.Opacity" Value="1" />
-                                        <Setter Target="Tint.Opacity" Value="0.25" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedPressed">
-                                    <VisualState.Setters>
-                                        <Setter Target="Outline.Opacity" Value="1" />
-                                        <Setter Target="Tint.Opacity" Value="0.29" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="CheckedDisabled">
-                                    <VisualState.Setters>
-                                        <Setter Target="Outline.Opacity" Value="1" />
-                                        <Setter Target="Chip.Opacity" Value="0.48" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="Tint" Background="{TemplateBinding Foreground}"
-                                CornerRadius="{TemplateBinding CornerRadius}" Opacity="0.14" />
-                        <Border x:Name="Outline" BorderBrush="{TemplateBinding Foreground}" BorderThickness="1.5"
-                                CornerRadius="{TemplateBinding CornerRadius}" Opacity="0" />
-                        <ContentPresenter Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
-                                          Padding="{TemplateBinding Padding}" HorizontalContentAlignment="Center"
-                                          VerticalContentAlignment="Center" />
-                    </Grid>
-                </ControlTemplate>
             </ResourceDictionary>
         </Grid.Resources>
 
-        <Grid x:Name="AppTitleBar" Height="36" Padding="16,0,140,0">
-            <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
-                <Image Source="/Assets/WindowIcon.ico" Width="16" Height="16" />
-                <TextBlock Text="{helpers:Loc Key=Cutscene_Title}" Style="{StaticResource CaptionTextBlockStyle}" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar" Grid.Row="0" Background="Transparent">
+            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" Margin="16,0,0,0">
+                <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                          Glyph="&#xF55A;"
+                          FontSize="16"
+                          Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                <TextBlock Text="{helpers:Loc Key=Cutscene_Title}" FontSize="12" VerticalAlignment="Center" />
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1" Margin="24,12,24,12" Spacing="10">
-            <StackPanel x:Name="ManagementHeader" Spacing="12" Visibility="Collapsed">
-                <Border Padding="16,12" CornerRadius="8" BorderThickness="1"
-                        Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                    <StackPanel Spacing="10">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
-                            <StackPanel Spacing="4" VerticalAlignment="Center">
-                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
-                                    <TextBlock x:Name="InstallSummary" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" />
-                                    <TextBlock x:Name="NetChangeText" Grid.Column="1" FontSize="16" FontWeight="SemiBold"
-                                               VerticalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                </Grid>
-                                <TextBlock x:Name="GameVersionText" Style="{StaticResource CaptionTextBlockStyle}"
-                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
-                            </StackPanel>
-                            <HyperlinkButton x:Name="QuickCatalogUpdateLink" Grid.Column="1"
-                                             Content="{helpers:Loc Key=Cutscene_CatalogUpdate}" Click="OnUpdateNameCatalogClick"
-                                             VerticalAlignment="Center" />
-                        </Grid>
-                        <Grid Height="7" CornerRadius="3.5" Background="{ThemeResource ControlFillColorDefaultBrush}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="RetainedColumn" Width="0*" />
-                                <ColumnDefinition x:Name="RemovalColumn" Width="0*" />
-                                <ColumnDefinition x:Name="DownloadColumn" Width="0*" />
-                                <ColumnDefinition x:Name="AbsentColumn" Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Border Background="{ThemeResource AccentFillColorDefaultBrush}" />
-                            <Border Grid.Column="1" Background="{ThemeResource SystemFillColorCriticalBrush}" />
-                            <Border Grid.Column="2" Background="{ThemeResource SystemFillColorSuccessBrush}" />
-                        </Grid>
-                    </StackPanel>
-                </Border>
+        <Grid x:Name="ManagementHeader"
+              Grid.Row="1"
+              Padding="32,16,32,0"
+              RowSpacing="14"
+              Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <Grid ColumnDefinitions="*,Auto,Auto,Auto" ColumnSpacing="8">
-                    <AutoSuggestBox x:Name="SearchBox" PlaceholderText="{helpers:Loc Key=Cutscene_Search}"
-                                    TextChanged="OnSearchChanged" AutomationProperties.Name="{helpers:Loc Key=Cutscene_Search}">
+            <StackPanel Grid.Row="0" Spacing="12">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="0" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" MinWidth="0" />
+                        </Grid.ColumnDefinitions>
+                        <FontIcon Grid.Column="0"
+                                  Style="{StaticResource SectionTitleIconStyle}"
+                                  Glyph="&#xF55A;"
+                                  FontSize="22" />
+                        <StackPanel Grid.Column="1" Spacing="3" VerticalAlignment="Center">
+                            <Grid ColumnSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="InstallSummary"
+                                           Grid.Column="0"
+                                           Style="{StaticResource SectionHeadingStyle}"
+                                           FontSize="17"
+                                           TextWrapping="Wrap" />
+                                <TextBlock x:Name="NetChangeText"
+                                           Grid.Column="1"
+                                           FontFamily="{StaticResource AppGlobalFont}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center"
+                                           Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            </Grid>
+                            <TextBlock x:Name="GameVersionText"
+                                       Style="{StaticResource RowCaptionStyle}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                        <Button x:Name="QuickCatalogUpdateLink"
+                                Click="OnUpdateNameCatalogClick">
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE38D;" />
+                                <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogUpdate}" />
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="RefreshButton"
+                                Click="OnRefreshClick"
+                                ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_Refresh}"
+                                AutomationProperties.Name="{helpers:Loc Key=Cutscene_Refresh}">
+                            <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xF13D;" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Height="6" CornerRadius="3" Background="{ThemeResource ControlFillColorDefaultBrush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="RetainedColumn" Width="0*" />
+                        <ColumnDefinition x:Name="RemovalColumn" Width="0*" />
+                        <ColumnDefinition x:Name="DownloadColumn" Width="0*" />
+                        <ColumnDefinition x:Name="AbsentColumn" Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Background="{ThemeResource AccentFillColorDefaultBrush}" />
+                    <Border Grid.Column="1" Background="{ThemeResource SystemFillColorCriticalBrush}" />
+                    <Border Grid.Column="2" Background="{ThemeResource SystemFillColorSuccessBrush}" />
+                </Grid>
+            </StackPanel>
+
+            <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+
+            <StackPanel Grid.Row="2" Spacing="10">
+                <Grid ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="0" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <AutoSuggestBox x:Name="SearchBox"
+                                    Grid.Column="0"
+                                    PlaceholderText="{helpers:Loc Key=Cutscene_Search}"
+                                    TextChanged="OnSearchChanged"
+                                    AutomationProperties.Name="{helpers:Loc Key=Cutscene_Search}">
                         <AutoSuggestBox.QueryIcon>
-                            <SymbolIcon Symbol="Find" />
+                            <FontIcon FontFamily="{StaticResource FluentIconsFont}" Glyph="&#xF68F;" />
                         </AutoSuggestBox.QueryIcon>
                     </AutoSuggestBox>
-                    <DropDownButton x:Name="TravelerButton" Grid.Column="1" Content="{helpers:Loc Key=Cutscene_BatchMenu}"
+                    <DropDownButton x:Name="TravelerButton"
+                                    Grid.Column="1"
                                     IsEnabled="False">
+                        <DropDownButton.Content>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xF4ED;" />
+                                <TextBlock Text="{helpers:Loc Key=Cutscene_BatchMenu}" />
+                            </StackPanel>
+                        </DropDownButton.Content>
                         <DropDownButton.Flyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem x:Name="RemoveAetherItem" Text="{helpers:Loc Key=Cutscene_RemoveAether}"
@@ -220,7 +304,14 @@
                             </MenuFlyout>
                         </DropDownButton.Flyout>
                     </DropDownButton>
-                    <DropDownButton x:Name="ResourceActionsButton" Grid.Column="2" Content="{helpers:Loc Key=Cutscene_ResourceActions}">
+                    <DropDownButton x:Name="ResourceActionsButton"
+                                    Grid.Column="2">
+                        <DropDownButton.Content>
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xF587;" />
+                                <TextBlock Text="{helpers:Loc Key=Cutscene_ResourceActions}" />
+                            </StackPanel>
+                        </DropDownButton.Content>
                         <DropDownButton.Flyout>
                             <MenuFlyout>
                                 <MenuFlyoutItem Text="{helpers:Loc Key=Cutscene_CatalogUpdate}" Click="OnUpdateNameCatalogClick" />
@@ -244,205 +335,470 @@
                             </MenuFlyout>
                         </DropDownButton.Flyout>
                     </DropDownButton>
-                    <Button x:Name="RefreshButton" Grid.Column="3" Click="OnRefreshClick"
-                            ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_Refresh}"
-                            AutomationProperties.Name="{helpers:Loc Key=Cutscene_Refresh}">
-                        <SymbolIcon Symbol="Refresh" />
-                    </Button>
                 </Grid>
 
-                <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto" ColumnSpacing="12">
-                    <ComboBox x:Name="ResourceScopeFilter" SelectedIndex="0" SelectionChanged="OnResourceScopeChanged"
-                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_ResourceScope}" MinWidth="150">
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" MinWidth="0" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="ResourceScopeFilter"
+                              Grid.Column="0"
+                              SelectedIndex="0"
+                              SelectionChanged="OnResourceScopeChanged"
+                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_ResourceScope}"
+                              MinWidth="150">
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAll}" Tag="All" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeVideo}" Tag="Video" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_ScopeAudio}" Tag="Audio" />
                     </ComboBox>
-                    <ComboBox x:Name="AudioLanguageFilter" Grid.Column="1" SelectedIndex="0" SelectionChanged="OnAudioLanguageChanged"
-                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_AudioLanguageFilter}" MinWidth="130">
+                    <ComboBox x:Name="AudioLanguageFilter"
+                              Grid.Column="1"
+                              SelectedIndex="0"
+                              SelectionChanged="OnAudioLanguageChanged"
+                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_AudioLanguageFilter}"
+                              MinWidth="130">
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_AllLanguages}" Tag="" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceChinese}" Tag="Chinese" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceEnglish}" Tag="English(US)" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceJapanese}" Tag="Japanese" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_VoiceKorean}" Tag="Korean" />
                     </ComboBox>
-                    <ComboBox x:Name="SortDirection" Grid.Column="2" SelectedIndex="1" SelectionChanged="OnSortChanged"
-                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_SortByRelease}" MinWidth="130">
+                    <ComboBox x:Name="SortDirection"
+                              Grid.Column="2"
+                              SelectedIndex="1"
+                              SelectionChanged="OnSortChanged"
+                              AutomationProperties.Name="{helpers:Loc Key=Cutscene_SortByRelease}"
+                              MinWidth="130">
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortAscending}" />
                         <ComboBoxItem Content="{helpers:Loc Key=Cutscene_SortDescending}" />
                     </ComboBox>
-                    <ScrollViewer Grid.Column="3" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Hidden"
+                    <ScrollViewer Grid.Column="3"
+                                  HorizontalScrollMode="Auto"
+                                  HorizontalScrollBarVisibility="Hidden"
                                   HorizontalContentAlignment="Stretch"
-                                  VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+                                  VerticalScrollMode="Disabled"
+                                  VerticalScrollBarVisibility="Disabled">
                         <StackPanel Orientation="Horizontal" Spacing="14" HorizontalAlignment="Right" VerticalAlignment="Center">
-                            <CheckBox x:Name="ShowReleaseVersion" Content="{helpers:Loc Key=Cutscene_ShowReleaseVersion}"
-                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}" MinWidth="0" MinHeight="26"
-                                      IsChecked="False" Click="OnDisplayOptionsChanged" />
-                            <CheckBox x:Name="ShowClipCount" Content="{helpers:Loc Key=Cutscene_ShowClipCount}"
-                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}" MinWidth="0" MinHeight="26"
-                                      IsChecked="False" Click="OnDisplayOptionsChanged" />
-                            <CheckBox x:Name="ShowPlaybackExport" Content="{helpers:Loc Key=Cutscene_ShowPlaybackExport}"
-                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}" MinWidth="0" MinHeight="26"
-                                      IsChecked="False" Click="OnDisplayOptionsChanged" />
+                            <CheckBox x:Name="ShowReleaseVersion"
+                                      Content="{helpers:Loc Key=Cutscene_ShowReleaseVersion}"
+                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}"
+                                      MinWidth="0"
+                                      MinHeight="26"
+                                      IsChecked="False"
+                                      Click="OnDisplayOptionsChanged" />
+                            <CheckBox x:Name="ShowClipCount"
+                                      Content="{helpers:Loc Key=Cutscene_ShowClipCount}"
+                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}"
+                                      MinWidth="0"
+                                      MinHeight="26"
+                                      IsChecked="False"
+                                      Click="OnDisplayOptionsChanged" />
+                            <CheckBox x:Name="ShowPlaybackExport"
+                                      Content="{helpers:Loc Key=Cutscene_ShowPlaybackExport}"
+                                      ContentTemplate="{StaticResource CutsceneDisplayOptionLabel}"
+                                      MinWidth="0"
+                                      MinHeight="26"
+                                      IsChecked="False"
+                                      Click="OnDisplayOptionsChanged" />
                         </StackPanel>
                     </ScrollViewer>
-                    <ToggleButton x:Name="PendingOnlyButton" Grid.Column="4" Click="OnPendingOnlyClick"
-                                  CornerRadius="14" VerticalAlignment="Center" Visibility="Collapsed" />
+                    <ToggleButton x:Name="PendingOnlyButton"
+                                  Grid.Column="4"
+                                  Click="OnPendingOnlyClick"
+                                  CornerRadius="4"
+                                  VerticalAlignment="Center"
+                                  Visibility="Collapsed" />
                 </Grid>
+            </StackPanel>
 
-                <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
-                    <StackPanel x:Name="Filters" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8" />
+            <Border Grid.Row="3"
+                    BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                    BorderThickness="0,0,0,1">
+                <ScrollViewer HorizontalScrollMode="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollMode="Disabled"
+                              VerticalScrollBarVisibility="Disabled">
+                    <SelectorBar x:Name="Filters"
+                                 SelectionChanged="OnCategoryFilterChanged" />
                 </ScrollViewer>
-            </StackPanel>
-            <InfoBar x:Name="Notice" IsOpen="False" IsClosable="True" />
-        </StackPanel>
+            </Border>
+        </Grid>
 
-        <Border x:Name="CatalogSetup" Grid.Row="2" Margin="24,16" Padding="30,26" MaxWidth="560"
-                HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10" BorderThickness="1"
-                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-            <StackPanel Spacing="12">
-                <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogSetupTitle}" Style="{StaticResource TitleTextBlockStyle}"
-                           TextWrapping="Wrap" />
-                <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogRequired}" TextWrapping="Wrap"
-                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,4,0,0">
-                    <Button x:Name="FetchCatalogButton" Style="{StaticResource AccentButtonStyle}"
-                            Content="{helpers:Loc Key=Cutscene_CatalogFetch}" Click="OnUpdateNameCatalogClick" />
-                    <Button x:Name="ImportCatalogButton" Content="{helpers:Loc Key=Cutscene_CatalogImport}"
-                            Click="OnImportCatalogClick" />
-                </StackPanel>
-            </StackPanel>
-        </Border>
+        <Grid x:Name="CatalogSetup"
+              Grid.Row="2"
+              Padding="32,24,32,20"
+              RowSpacing="20"
+              VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <Grid x:Name="ManagementList" Grid.Row="2" Margin="24,0,24,12" RowDefinitions="Auto,*" Visibility="Collapsed"
-              CornerRadius="8" BorderThickness="1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-              Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
-            <Grid Padding="12,8" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10"
-                  BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                <CheckBox x:Name="KeepVisible" MinWidth="0" VerticalAlignment="Center" Click="OnKeepVisibleClick"
-                          AutomationProperties.Name="{helpers:Loc Key=Cutscene_KeepVisible}" />
-                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
-                    <TextBlock x:Name="VisibleSummary" FontWeight="SemiBold" />
-                    <TextBlock Text="{helpers:Loc Key=Cutscene_KeepHint}" Style="{StaticResource CaptionTextBlockStyle}"
-                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+            <Grid Grid.Row="0" ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" MinWidth="0" />
+                </Grid.ColumnDefinitions>
+                <FontIcon Grid.Column="0"
+                          Style="{StaticResource SectionTitleIconStyle}"
+                          Glyph="&#xF55A;"
+                          FontSize="22" />
+                <StackPanel Grid.Column="1" Spacing="3" VerticalAlignment="Center">
+                    <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogSetupTitle}"
+                               Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogRequired}"
+                               Style="{StaticResource RowCaptionStyle}" />
                 </StackPanel>
-                <Button x:Name="ExpandButton" Grid.Column="2" VerticalAlignment="Center"
-                        Click="OnExpandClick" Content="{helpers:Loc Key=Cutscene_ExpandAll}" />
             </Grid>
 
-            <ListView Grid.Row="1" x:Name="ChapterList" SelectionMode="None"
-                      HorizontalContentAlignment="Stretch" IsItemClickEnabled="False"
+            <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10">
+                <Button x:Name="FetchCatalogButton"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Click="OnUpdateNameCatalogClick">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xE38D;" />
+                        <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogFetch}" />
+                    </StackPanel>
+                </Button>
+                <Button x:Name="ImportCatalogButton"
+                        Click="OnImportCatalogClick">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xF42E;" />
+                        <TextBlock Text="{helpers:Loc Key=Cutscene_CatalogImport}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="ManagementList"
+              Grid.Row="2"
+              Padding="32,0,32,0"
+              Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Padding="4,10" ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" MinWidth="0" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="KeepVisible"
+                          Grid.Column="0"
+                          MinWidth="0"
+                          VerticalAlignment="Center"
+                          Click="OnKeepVisibleClick"
+                          AutomationProperties.Name="{helpers:Loc Key=Cutscene_KeepVisible}" />
+                <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+                    <TextBlock x:Name="VisibleSummary"
+                               Style="{StaticResource RowTitleStyle}" />
+                    <TextBlock Text="{helpers:Loc Key=Cutscene_KeepHint}"
+                               Style="{StaticResource RowCaptionStyle}" />
+                </StackPanel>
+                <Button x:Name="ExpandButton"
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource FlatRowActionButtonStyle}"
+                        Click="OnExpandClick">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon x:Name="ExpandButtonIcon"
+                                  Style="{StaticResource SmallButtonIconStyle}"
+                                  Glyph="&#xF2A3;" />
+                        <TextBlock x:Name="ExpandButtonText"
+                                   Text="{helpers:Loc Key=Cutscene_ExpandAll}" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+
+            <Rectangle Grid.Row="1" Style="{StaticResource HairlineDividerStyle}" />
+
+            <ListView x:Name="ChapterList"
+                      Grid.Row="2"
+                      SelectionMode="None"
+                      HorizontalContentAlignment="Stretch"
+                      IsItemClickEnabled="False"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Padding" Value="0" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="MinHeight" Value="0" />
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="views:CutsceneChapterRow">
-                        <Grid Padding="12,3,12,3" ColumnDefinitions="Auto,*" ColumnSpacing="6"
-                              ToolTipService.ToolTip="{x:Bind ProtectionHint, Mode=OneWay}"
-                              BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
-                            <CheckBox IsChecked="{x:Bind IsKept, Mode=OneWay}" IsEnabled="{x:Bind CanToggle, Mode=OneWay}"
-                                      Click="OnKeepChapterClick"
-                                      MinWidth="0" VerticalAlignment="Top" Margin="0,8,0,0"
-                                      AutomationProperties.Name="{Binding Title}" />
-                            <Expander Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                      IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
-                                <Expander.Header>
-                                    <Grid ColumnDefinitions="*,Auto,Auto,Auto,84,Auto" Padding="0,4">
-                                        <TextBlock Text="{x:Bind Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
-                                                   VerticalAlignment="Center" Margin="0,0,12,0" ToolTipService.ToolTip="{x:Bind Title}" />
-                                        <Border Grid.Column="1" Margin="0,0,8,0" Padding="6,0" CornerRadius="5"
-                                                Style="{StaticResource CutsceneMetadataBadgeStyle}"
-                                                Visibility="{x:Bind ReleaseVisibility, Mode=OneWay}">
-                                            <TextBlock Text="{x:Bind ReleaseLabel}" Style="{StaticResource CaptionTextBlockStyle}"
-                                                       VerticalAlignment="Center"
-                                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                        </Border>
-                                        <ContentControl Grid.Column="2" Content="{x:Bind TypeLabel}" HorizontalAlignment="Right"
-                                                        Style="{StaticResource CutsceneBadgeStyle}"
-                                                        DataContextChanged="OnChapterBadgeContextChanged" />
-                                        <Button Grid.Column="3" Tag="{x:Bind}" Click="OnExportChapterClick"
-                                                Visibility="{x:Bind ExportChapterVisibility, Mode=OneWay}"
-                                                Margin="8,0,0,0" Padding="6,4" VerticalAlignment="Center"
-                                                ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportChapter}"
-                                                AutomationProperties.Name="{helpers:Loc Key=Cutscene_ExportChapter}">
-                                            <SymbolIcon Symbol="Save" />
-                                        </Button>
-                                        <TextBlock Grid.Column="4" Text="{x:Bind SizeLabel}" Margin="8,0,0,0" TextAlignment="Right"
-                                                   VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" FontWeight="SemiBold" />
-                                        <Border Grid.Column="5" Width="22" Margin="12,0,0,0" CornerRadius="11"
-                                                Style="{StaticResource CutsceneMetadataBadgeStyle}"
-                                                Visibility="{x:Bind CountVisibility, Mode=OneWay}" ToolTipService.ToolTip="{x:Bind CountLabel}">
-                                            <TextBlock Text="{x:Bind CountText}" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                       Style="{StaticResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                       AutomationProperties.Name="{x:Bind CountLabel}" />
-                                        </Border>
+                        <Grid ToolTipService.ToolTip="{x:Bind ProtectionHint, Mode=OneWay}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" Padding="4,6" ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox Grid.Column="0"
+                                          IsChecked="{x:Bind IsKept, Mode=OneWay}"
+                                          IsEnabled="{x:Bind CanToggle, Mode=OneWay}"
+                                          Click="OnKeepChapterClick"
+                                          MinWidth="0"
+                                          VerticalAlignment="Center"
+                                          AutomationProperties.Name="{x:Bind Title}" />
+
+                                <Button Grid.Column="1"
+                                        Tag="{x:Bind}"
+                                        Click="OnToggleChapterExpandClick"
+                                        Style="{StaticResource FlatChapterHeaderButtonStyle}"
+                                        AutomationProperties.Name="{x:Bind Title}">
+                                    <Grid ColumnSpacing="12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" MinWidth="0" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="84" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <FontIcon Grid.Column="0"
+                                                  FontFamily="{StaticResource FluentIconsFont}"
+                                                  Glyph="{x:Bind ExpandChevronGlyph, Mode=OneWay}"
+                                                  FontSize="13"
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                  VerticalAlignment="Center" />
+
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{x:Bind Title}"
+                                                   Style="{StaticResource RowTitleStyle}"
+                                                   TextWrapping="NoWrap"
+                                                   VerticalAlignment="Center"
+                                                   ToolTipService.ToolTip="{x:Bind Title}" />
+
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{x:Bind ReleaseLabel}"
+                                                   Style="{StaticResource RowCaptionStyle}"
+                                                   TextWrapping="NoWrap"
+                                                   VerticalAlignment="Center"
+                                                   Visibility="{x:Bind ReleaseVisibility, Mode=OneWay}" />
+
+                                        <TextBlock Grid.Column="3"
+                                                   Text="{x:Bind TypeLabel}"
+                                                   Style="{StaticResource CutsceneCategoryTextStyle}"
+                                                   DataContextChanged="OnChapterBadgeContextChanged" />
+
+                                        <TextBlock Grid.Column="4"
+                                                   Text="{x:Bind SizeLabel}"
+                                                   TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   FontFamily="{StaticResource AppGlobalFont}"
+                                                   FontSize="12"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+                                        <TextBlock Grid.Column="5"
+                                                   Text="{x:Bind CountLabel}"
+                                                   Style="{StaticResource RowCaptionStyle}"
+                                                   TextWrapping="NoWrap"
+                                                   VerticalAlignment="Center"
+                                                   Visibility="{x:Bind CountVisibility, Mode=OneWay}"
+                                                   ToolTipService.ToolTip="{x:Bind CountLabel}" />
                                     </Grid>
-                                </Expander.Header>
-                                <ItemsControl ItemsSource="{Binding Rows}">
+                                </Button>
+
+                                <Button Grid.Column="2"
+                                        Tag="{x:Bind}"
+                                        Click="OnExportChapterClick"
+                                        Visibility="{x:Bind ExportChapterVisibility, Mode=OneWay}"
+                                        Style="{StaticResource FlatRowActionButtonStyle}"
+                                        VerticalAlignment="Center"
+                                        ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportChapter}"
+                                        AutomationProperties.Name="{helpers:Loc Key=Cutscene_ExportChapter}">
+                                    <FontIcon Style="{StaticResource SmallButtonIconStyle}" Glyph="&#xF67F;" />
+                                </Button>
+                            </Grid>
+
+                            <Grid Grid.Row="1"
+                                  Visibility="{x:Bind RowsVisibility, Mode=OneWay}"
+                                  Margin="20,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" MinWidth="0" />
+                                </Grid.ColumnDefinitions>
+
+                                <Rectangle Grid.Column="0"
+                                           Style="{StaticResource VerticalDividerStyle}"
+                                           Margin="0,4,16,4" />
+
+                                <ItemsControl Grid.Column="1" ItemsSource="{Binding Rows}">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Grid Padding="0,5" ColumnDefinitions="Auto,Auto,*,Auto,Auto" ColumnSpacing="10">
-                                                <CheckBox MinWidth="0" VerticalAlignment="Center"
-                                                          IsChecked="{Binding IsKept, Mode=TwoWay}" IsEnabled="{Binding CanToggle}"
-                                                          AutomationProperties.Name="{Binding DisplayName}" />
-                                                <Border Grid.Column="1" Padding="6,2" CornerRadius="4"
-                                                        Background="{ThemeResource SubtleFillColorSecondaryBrush}"
-                                                        VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding KindTagText}"
-                                                               Style="{StaticResource CaptionTextBlockStyle}"
-                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                </Border>
-                                                <StackPanel Grid.Column="2" Spacing="2" VerticalAlignment="Center">
-                                                    <TextBlock Text="{Binding DisplayName}" TextTrimming="CharacterEllipsis"
-                                                               ToolTipService.ToolTip="{Binding DisplayName}" />
-                                                    <TextBlock Text="{Binding StateLabel}" Style="{StaticResource CaptionTextBlockStyle}"
-                                                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
-                                                               TextWrapping="Wrap" />
-                                                </StackPanel>
-                                                <TextBlock Grid.Column="3" Text="{Binding SizeLabel}" VerticalAlignment="Center"
-                                                           Style="{StaticResource CaptionTextBlockStyle}"
-                                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                                                <StackPanel Grid.Column="4" Orientation="Horizontal" Spacing="4"
-                                                            Visibility="{Binding LocalActionsVisibility}" VerticalAlignment="Center">
-                                                    <Button Tag="{Binding}" Click="OnPlayLocalCutsceneClick" Padding="7"
-                                                            ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayLocal}"
-                                                            AutomationProperties.Name="{helpers:Loc Key=Cutscene_PlayLocal}">
-                                                        <SymbolIcon Symbol="Play" />
-                                                    </Button>
-                                                    <Button Tag="{Binding}" Click="OnExportLocalCutsceneClick" Padding="7"
-                                                            ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportLocal}"
-                                                            AutomationProperties.Name="{helpers:Loc Key=Cutscene_ExportLocal}">
-                                                        <SymbolIcon Symbol="Save" />
-                                                    </Button>
-                                                </StackPanel>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+
+                                                <Rectangle Grid.Row="0"
+                                                           Style="{StaticResource HairlineDividerStyle}"
+                                                           Opacity="0.5" />
+
+                                                <Grid Grid.Row="1" Padding="4,8" ColumnSpacing="12">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="104" />
+                                                        <ColumnDefinition Width="*" MinWidth="0" />
+                                                        <ColumnDefinition Width="84" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <CheckBox Grid.Column="0"
+                                                              MinWidth="0"
+                                                              VerticalAlignment="Center"
+                                                              IsChecked="{Binding IsKept, Mode=TwoWay}"
+                                                              IsEnabled="{Binding CanToggle}"
+                                                              AutomationProperties.Name="{Binding DisplayName}" />
+
+                                                    <StackPanel Grid.Column="1"
+                                                                Orientation="Horizontal"
+                                                                Spacing="6"
+                                                                VerticalAlignment="Center">
+                                                        <FontIcon FontFamily="{StaticResource FluentIconsFont}"
+                                                                  Glyph="{Binding KindGlyph}"
+                                                                  FontSize="14"
+                                                                  Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                        <TextBlock Text="{Binding KindTagText}"
+                                                                   VerticalAlignment="Center"
+                                                                   FontFamily="{StaticResource AppGlobalFont}"
+                                                                   FontSize="12"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                                                    </StackPanel>
+
+                                                    <StackPanel Grid.Column="2" Spacing="2" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding DisplayName}"
+                                                                   FontFamily="{StaticResource AppGlobalFont}"
+                                                                   FontSize="13"
+                                                                   FontWeight="SemiBold"
+                                                                   TextTrimming="CharacterEllipsis"
+                                                                   ToolTipService.ToolTip="{Binding DisplayName}" />
+                                                        <TextBlock Text="{Binding StateLabel}"
+                                                                   Style="{StaticResource RowCaptionStyle}" />
+                                                    </StackPanel>
+
+                                                    <TextBlock Grid.Column="3"
+                                                               Text="{Binding SizeLabel}"
+                                                               TextAlignment="Right"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource RowCaptionStyle}" />
+
+                                                    <StackPanel Grid.Column="4"
+                                                                Orientation="Horizontal"
+                                                                Spacing="2"
+                                                                Visibility="{Binding LocalActionsVisibility}"
+                                                                VerticalAlignment="Center">
+                                                        <Button Tag="{Binding}"
+                                                                Click="OnPlayLocalCutsceneClick"
+                                                                Style="{StaticResource FlatRowActionButtonStyle}"
+                                                                Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"
+                                                                ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_PlayLocal}"
+                                                                AutomationProperties.Name="{helpers:Loc Key=Cutscene_PlayLocal}">
+                                                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                                                <FontIcon Style="{StaticResource SmallButtonIconStyle}" Glyph="&#xF605;" />
+                                                                <TextBlock Text="{helpers:Loc Key=Cutscene_PlayLocal}" />
+                                                            </StackPanel>
+                                                        </Button>
+                                                        <Button Tag="{Binding}"
+                                                                Click="OnExportLocalCutsceneClick"
+                                                                Style="{StaticResource FlatRowActionButtonStyle}"
+                                                                ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_ExportLocal}"
+                                                                AutomationProperties.Name="{helpers:Loc Key=Cutscene_ExportLocal}">
+                                                            <StackPanel Orientation="Horizontal" Spacing="4">
+                                                                <FontIcon Style="{StaticResource SmallButtonIconStyle}" Glyph="&#xF67F;" />
+                                                                <TextBlock Text="{helpers:Loc Key=Cutscene_ExportLocal}" />
+                                                            </StackPanel>
+                                                        </Button>
+                                                    </StackPanel>
+                                                </Grid>
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>
-                            </Expander>
+                            </Grid>
+
+                            <Rectangle Grid.Row="2" Style="{StaticResource HairlineDividerStyle}" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <TextBlock x:Name="EmptyText" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" Margin="18"
-                       TextWrapping="Wrap" TextAlignment="Center" Visibility="Collapsed" />
+
+            <TextBlock x:Name="EmptyText"
+                       Grid.Row="2"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       Margin="0,36,0,36"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
+                       Visibility="Collapsed" />
         </Grid>
 
-        <Border x:Name="Footer" Grid.Row="3" Padding="24,10" BorderThickness="0,1,0,0" Visibility="Collapsed"
-                BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
-                Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
+        <InfoBar x:Name="Notice"
+                 Grid.Row="3"
+                 IsOpen="False"
+                 IsClosable="True"
+                 HorizontalAlignment="Stretch"
+                 Margin="32,0,32,8" />
+
+        <Border x:Name="Footer"
+                Grid.Row="4"
+                Padding="32,12"
+                BorderThickness="0,1,0,0"
+                Visibility="Collapsed"
+                BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+                Background="Transparent">
             <StackPanel Spacing="10">
-                <Grid x:Name="ChangeActions" ColumnDefinitions="*,Auto" ColumnSpacing="16" Visibility="Collapsed">
-                    <StackPanel Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
-                        <TextBlock x:Name="RemovalText" Foreground="{ThemeResource SystemFillColorCriticalBrush}" VerticalAlignment="Center" />
-                        <TextBlock x:Name="DownloadText" Foreground="{ThemeResource SystemFillColorSuccessBrush}" VerticalAlignment="Center" />
+                <Grid x:Name="ChangeActions" ColumnSpacing="16" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="0" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="16" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                            <FontIcon Style="{StaticResource SmallButtonIconStyle}"
+                                      Glyph="&#xF34C;"
+                                      Foreground="{ThemeResource SystemFillColorCriticalBrush}" />
+                            <TextBlock x:Name="RemovalText"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="{ThemeResource SystemFillColorCriticalBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                            <FontIcon Style="{StaticResource SmallButtonIconStyle}"
+                                      Glyph="&#xF150;"
+                                      Foreground="{ThemeResource SystemFillColorSuccessBrush}" />
+                            <TextBlock x:Name="DownloadText"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="{ThemeResource SystemFillColorSuccessBrush}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <Rectangle Style="{StaticResource VerticalDividerStyle}" Margin="0,4" />
                         <CheckBox x:Name="StubLockProtectionCheck"
                                   Content="{helpers:Loc Key=Cutscene_StubLockOption}"
                                   IsChecked="True"
@@ -450,16 +806,36 @@
                                   VerticalAlignment="Center"
                                   ToolTipService.ToolTip="{helpers:Loc Key=Cutscene_StubLockOptionHint}" />
                     </StackPanel>
-                    <Button x:Name="ApplyButton" Grid.Column="1" Style="{StaticResource AccentButtonStyle}" Click="OnApplyClick"
-                            Content="{helpers:Loc Key=Cutscene_Apply}" IsEnabled="False" />
+                    <Button x:Name="ApplyButton"
+                            Grid.Column="1"
+                            Style="{StaticResource AccentButtonStyle}"
+                            Click="OnApplyClick"
+                            IsEnabled="False">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xF294;" />
+                            <TextBlock Text="{helpers:Loc Key=Cutscene_Apply}" />
+                        </StackPanel>
+                    </Button>
                 </Grid>
-                <Grid x:Name="OperationProgress" ColumnDefinitions="*,Auto" ColumnSpacing="16" Visibility="Collapsed">
-                    <StackPanel Spacing="4" VerticalAlignment="Center">
+
+                <Grid x:Name="OperationProgress" ColumnSpacing="16" Visibility="Collapsed">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" MinWidth="0" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Spacing="4" VerticalAlignment="Center">
                         <ProgressBar x:Name="WorkProgress" IsIndeterminate="True" />
-                        <TextBlock x:Name="WorkStatus" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" />
+                        <TextBlock x:Name="WorkStatus" Style="{StaticResource RowCaptionStyle}" />
                     </StackPanel>
-                    <Button x:Name="CancelButton" Grid.Column="1"
-                            Content="{helpers:Loc Key=CancelBtn}" Click="OnCancelClick" />
+                    <Button x:Name="CancelButton"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Click="OnCancelClick">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon Style="{StaticResource ButtonIconStyle}" Glyph="&#xF369;" />
+                            <TextBlock Text="{helpers:Loc Key=CancelBtn}" />
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </StackPanel>
         </Border>

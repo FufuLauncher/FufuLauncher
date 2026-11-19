@@ -63,6 +63,7 @@ internal sealed class CutsceneResourceRow : ObservableObject
     public string KindTagText => IsVideo
         ? "Cutscene_KindVideo".GetLocalized()
         : Audio!.LanguageKey.GetLocalized();
+    public string KindGlyph => IsVideo ? "\uF84C" : "\uEB42";
 
     public string DisplayName
     {
@@ -185,10 +186,20 @@ internal sealed class CutsceneChapterRow(CutsceneChapter chapter, CutsceneResour
     public string? ProtectionHint => CanToggle ? null
         : string.Join("\n", Rows.Select(row => row.ProtectionHint).Distinct());
 
+    public Visibility RowsVisibility => _isExpanded ? Visibility.Visible : Visibility.Collapsed;
+    public string ExpandChevronGlyph => _isExpanded ? "\uF2A3" : "\uF2B0";
+
     public bool IsExpanded
     {
         get => _isExpanded;
-        set => SetProperty(ref _isExpanded, value);
+        set
+        {
+            if (SetProperty(ref _isExpanded, value))
+            {
+                OnPropertyChanged(nameof(RowsVisibility));
+                OnPropertyChanged(nameof(ExpandChevronGlyph));
+            }
+        }
     }
 
     public bool? IsKept => GetKeepState(Rows);
