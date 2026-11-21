@@ -139,7 +139,12 @@ public sealed class DeviceFpService
     public async Task<MiHoYoDeviceIdentity> ResetAndRegisterAsync(CancellationToken token = default)
     {
         await _store.ResetAsync(ResolveInitialDeviceId(), token).ConfigureAwait(false);
-        await SyncOnStartupCoreAsync(token).ConfigureAwait(false);
+        var result = await SyncOnStartupCoreAsync(token).ConfigureAwait(false);
+        if (result.Outcome == FingerprintSyncOutcome.Failed)
+        {
+            throw new InvalidOperationException(result.Error ?? "DeviceFp_RequestFailed".GetLocalized());
+        }
+
         return await GetIdentityAsync(token).ConfigureAwait(false);
     }
 

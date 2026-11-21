@@ -76,7 +76,6 @@ public partial class App
 
             var activationService = GetService<IActivationService>();
             await activationService.ActivateAsync(args);
-            (MainWindow as MainWindow)?.StartMiyousheShopPlans();
 
             _ = GetService<PluginConfigGuardService>();
 
@@ -96,6 +95,10 @@ public partial class App
                                            !(MainWindow is MainWindow mw && mw.IsAgreementShowing);
             if (shouldRunBackgroundTasks)
             {
+                await RegisterOrUpdateDeviceFingerprintAsync();
+
+                (MainWindow as MainWindow)?.StartMiyousheShopPlans();
+
                 _ = Task.Run(RefreshPluginConfigBaselineAsync);
 
                 _ = Task.Run(PlayStartupSoundDelayedAsync);
@@ -114,8 +117,6 @@ public partial class App
                 _ = Task.Run(ReportAccountStorageWarningAsync);
 
                 _ = Task.Run(SyncStartupRegistrationAsync);
-
-                _ = Task.Run(RegisterOrUpdateDeviceFingerprintAsync);
 
                 ProcessStartupLaunchArguments();
             }
