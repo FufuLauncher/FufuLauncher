@@ -124,6 +124,7 @@ public partial class App
                 services.AddSingleton<Services.MiHoYo.MiHoYoDeviceStore>();
                 services.AddSingleton<Services.MiHoYo.Fingerprint.DeviceFpService>();
                 services.AddSingleton<Services.MiHoYo.AccountIdentityService>();
+                services.AddSingleton<Services.MiHoYo.Record.GameRecordWarmUpService>();
                 services.AddSingleton<Services.Miyoushe.MiyousheShopClient>();
                 services.AddSingleton<Services.Miyoushe.MiyousheShopPlans>();
                 services.AddSingleton<Services.Miyoushe.MiyousheShopExecution>();

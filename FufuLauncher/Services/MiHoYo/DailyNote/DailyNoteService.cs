@@ -12,6 +12,7 @@ using FufuLauncher.Models.MiHoYo;
 using FufuLauncher.Models.MiHoYo.Identity;
 using FufuLauncher.Models;
 using FufuLauncher.Services.MiHoYo.Networking;
+using FufuLauncher.Services.MiHoYo.Record;
 using FufuLauncher.Services.MiHoYo.Transport;
 
 namespace FufuLauncher.Services.MiHoYo.DailyNote;
@@ -20,7 +21,6 @@ public sealed class DailyNoteService
 {
     private const string RecordApiBase = ApiEndpoints.DailyNoteRecordApiBase;
 
-    private const string IndexPath = ApiEndpoints.DailyNoteIndexPath;
     private const string DailyNotePath = ApiEndpoints.DailyNotePath;
     private const string WidgetPath = ApiEndpoints.DailyNoteWidgetPath;
 
@@ -35,6 +35,7 @@ public sealed class DailyNoteService
     private readonly Func<TokenRefreshService> _createTokenRefreshService;
     private readonly AccountIdentityService _identityService;
     private readonly OverseaGameRecordClient _overseaGameRecordClient = new();
+    private readonly GameRecordWarmUpService _warmUpService = App.GetService<GameRecordWarmUpService>();
 
     public DailyNoteService() : this(SharedHttpClient, () => new TokenRefreshService())
     {
@@ -83,7 +84,7 @@ public sealed class DailyNoteService
                 return await send(ctx);
             }
 
-            await WarmUpPlayerInfoAsync(playerQuery, ctx);
+            await _warmUpService.TryWarmUpAsync(ctx, roleId, server);
 
             string json = await RequestWithRefreshAsync(context => RequestAsync(
                 $"{RecordApiBase}{DailyNotePath}?{playerQuery}", context, challenge: null));
@@ -126,19 +127,6 @@ public sealed class DailyNoteService
         finally
         {
             _semaphore.Release();
-        }
-    }
-
-    private async Task WarmUpPlayerInfoAsync(string playerQuery, AccountContext ctx)
-    {
-        try
-        {
-            string query = $"avatar_list_type=1&{playerQuery}";
-            await RequestAsync($"{RecordApiBase}{IndexPath}?{query}", ctx, challenge: null);
-        }
-        catch (Exception ex)
-        {
-            DebugLog.Info("DailyNoteService", $"[DailyNoteService] index warmup failed (ignored): {ex.Message}");
         }
     }
 

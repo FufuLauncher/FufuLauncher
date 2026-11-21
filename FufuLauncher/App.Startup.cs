@@ -60,6 +60,8 @@ public partial class App
                     {
                         await SetDefaultThemeAsync();
                         await RefreshPluginConfigBaselineAsync();
+                        _ = Task.Run(RegisterOrUpdateDeviceFingerprintAsync);
+                        (MainWindow as MainWindow)?.StartMiyousheShopPlans();
                     });
                 });
             }
@@ -95,7 +97,7 @@ public partial class App
                                            !(MainWindow is MainWindow mw && mw.IsAgreementShowing);
             if (shouldRunBackgroundTasks)
             {
-                await RegisterOrUpdateDeviceFingerprintAsync();
+                _ = Task.Run(RegisterOrUpdateDeviceFingerprintAsync);
 
                 (MainWindow as MainWindow)?.StartMiyousheShopPlans();
 
@@ -137,7 +139,7 @@ public partial class App
         try
         {
             var result = await GetService<Services.MiHoYo.Fingerprint.DeviceFpService>()
-                .SyncOnStartupAsync();
+                .WaitStartupSyncAsync();
 
             if (result.Outcome is not Services.MiHoYo.Fingerprint.DeviceFpService.FingerprintSyncOutcome.Failed)
             {

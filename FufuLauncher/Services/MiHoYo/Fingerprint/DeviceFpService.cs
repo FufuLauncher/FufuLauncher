@@ -35,6 +35,8 @@ public sealed class DeviceFpService
     private readonly MiHoYoDeviceStore _store;
     private readonly MobileDeviceService _device;
     private readonly SemaphoreSlim _gate = new(1, 1);
+    private readonly object _startupSyncLock = new();
+    private Task<FingerprintSyncResult>? _startupSync;
 
     public DeviceFpService(MiHoYoDeviceStore store, MobileDeviceService device)
     {
@@ -90,6 +92,24 @@ public sealed class DeviceFpService
             ? result with { HadFingerprint = hadFingerprint }
             : result;
     }
+
+
+    public Task<FingerprintSyncResult> BeginStartupSync()
+    {
+        if (Volatile.Read(ref _startupSync) is { } existing)
+        {
+            return existing;
+        }
+
+        lock (_startupSyncLock)
+        {
+            _startupSync ??= Task.Run(() => SyncOnStartupAsync(CancellationToken.None));
+            return _startupSync;
+        }
+    }
+
+
+    public Task<FingerprintSyncResult> WaitStartupSyncAsync() => BeginStartupSync();
 
     private async Task<FingerprintSyncResult> SyncOnStartupCoreAsync(CancellationToken token)
     {
