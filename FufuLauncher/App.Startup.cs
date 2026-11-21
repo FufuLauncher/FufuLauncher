@@ -115,6 +115,8 @@ public partial class App
 
                 _ = Task.Run(SyncStartupRegistrationAsync);
 
+                _ = Task.Run(RegisterOrUpdateDeviceFingerprintAsync);
+
                 ProcessStartupLaunchArguments();
             }
 
@@ -126,6 +128,19 @@ public partial class App
             LogException(ex, "OnLaunched (启动流程异常)");
             ShowCrashDialog("Crash_Source_AppStartup".GetLocalized(), ex);
             Environment.Exit(-1);
+        }
+    }
+
+    private static async Task RegisterOrUpdateDeviceFingerprintAsync()
+    {
+        try
+        {
+            await GetService<Services.MiHoYo.Fingerprint.DeviceFpService>()
+                .RegisterOrUpdateIfNeededAsync();
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("App.Startup", $"[DeviceFp] Startup registration/update failed: {ex.Message}");
         }
     }
 

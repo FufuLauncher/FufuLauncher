@@ -51,6 +51,13 @@ public sealed record MiHoYoDeviceIdentity
         init;
     } = "";
 
+    [JsonPropertyName("fingerprint_updated_at")]
+    public DateTimeOffset? FingerprintUpdatedAt
+    {
+        get;
+        init;
+    }
+
     [JsonIgnore] public string BbsDeviceId => NameUuidFromBytes(Encoding.UTF8.GetBytes(DeviceId)).ToString();
 
 
