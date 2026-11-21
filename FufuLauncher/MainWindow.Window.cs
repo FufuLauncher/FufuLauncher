@@ -7,9 +7,11 @@ using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Contracts.Services;
 using FufuLauncher.Helpers;
 using FufuLauncher.ViewModels;
+using Microsoft.UI.Input;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
+using Windows.Graphics;
 using Windows.UI.ViewManagement;
 
 namespace FufuLauncher;
@@ -30,6 +32,7 @@ public sealed partial class MainWindow
     {
         if (args.DidPresenterChange)
         {
+            UpdateTitleBarLayout();
             var presenter = sender.Presenter as OverlappedPresenter;
             if (presenter != null)
             {
@@ -140,8 +143,7 @@ public sealed partial class MainWindow
 
         if (_minimizeToTray)
         {
-            this.Hide();
-            _memoryOptimizationTimer.Start();
+            HideToTray();
         }
         else
         {
@@ -159,6 +161,17 @@ public sealed partial class MainWindow
             DisposeTrayIcon();
             Close();
         }
+    }
+
+    private void MinimizeToTrayButton_Click(object sender, RoutedEventArgs e)
+    {
+        HideToTray();
+    }
+
+    private void HideToTray()
+    {
+        this.Hide();
+        _memoryOptimizationTimer.Start();
     }
 
     private async Task SaveWindowSizeAsync()
@@ -258,6 +271,7 @@ public sealed partial class MainWindow
         try
         {
             SetTitleBar(AppTitleBar);
+            UpdateTitleBarLayout();
             var iconPath = Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico");
             if (File.Exists(iconPath))
                 TitleBarIcon.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri(iconPath));
@@ -268,6 +282,30 @@ public sealed partial class MainWindow
         }
 
         Activated -= OnWindowActivated;
+    }
+
+    private void AppTitleBar_Loaded(object sender, RoutedEventArgs e)
+    {
+        AppTitleBar.Loaded -= AppTitleBar_Loaded;
+        AppTitleBar.XamlRoot.Changed += (_, _) => UpdateTitleBarLayout();
+        UpdateTitleBarLayout();
+    }
+
+    private void UpdateTitleBarLayout()
+    {
+        if (AppTitleBar.XamlRoot is not { } xamlRoot)
+            return;
+
+        var titleBar = AppWindow.TitleBar;
+        double scale = xamlRoot.RasterizationScale;
+        AppTitleBar.Margin = new Thickness(80, 0, titleBar.RightInset / scale, 0);
+        MinimizeToTrayButton.Height = titleBar.Height / scale;
+
+        int width = (int)Math.Round(MinimizeToTrayButton.Width * scale);
+        int right = (int)Math.Round(xamlRoot.Size.Width * scale) - titleBar.RightInset;
+        var input = InputNonClientPointerSource.GetForWindowId(AppWindow.Id);
+        input.SetRegionRects(NonClientRegionKind.Passthrough,
+            [new RectInt32(right - width, 0, width, titleBar.Height)]);
     }
 
     private void UpdateTitleBarWithAdminStatus()
