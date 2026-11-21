@@ -135,8 +135,33 @@ public partial class App
     {
         try
         {
-            await GetService<Services.MiHoYo.Fingerprint.DeviceFpService>()
-                .RegisterOrUpdateIfNeededAsync();
+            var result = await GetService<Services.MiHoYo.Fingerprint.DeviceFpService>()
+                .SyncOnStartupAsync();
+
+            if (result.Outcome is not Services.MiHoYo.Fingerprint.DeviceFpService.FingerprintSyncOutcome.Failed)
+            {
+                return;
+            }
+
+            DebugLog.Info("App.Startup",
+                $"[DeviceFp] Startup sync failed (hadFingerprint={result.HadFingerprint}): {result.Error}");
+            var notificationService = GetService<INotificationService>();
+            if (result.HadFingerprint)
+            {
+                notificationService.Show(
+                    "DeviceFp_UpdateFailedTitle".GetLocalized(),
+                    "DeviceFp_UpdateFailedMessage".GetLocalized(),
+                    Messages.NotificationType.Warning,
+                    8000);
+            }
+            else
+            {
+                notificationService.Show(
+                    "DeviceFp_RegisterFailedTitle".GetLocalized(),
+                    "DeviceFp_RegisterFailedMessage".GetLocalized(),
+                    Messages.NotificationType.Error,
+                    8000);
+            }
         }
         catch (Exception ex)
         {
