@@ -24,7 +24,7 @@ public sealed class DeviceFpService
 
     public const string Platform = "2";
 
-    private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(15) };
+    private static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(5) };
 
     private static readonly JsonSerializerOptions _jsonOptions = new()
     {
@@ -35,6 +35,8 @@ public sealed class DeviceFpService
     private readonly MiHoYoDeviceStore _store;
     private readonly MobileDeviceService _device;
     private readonly SemaphoreSlim _gate = new(1, 1);
+    private readonly object _startupSyncLock = new();
+    private Task<FingerprintSyncResult>? _startupSync;
 
     public DeviceFpService(MiHoYoDeviceStore store, MobileDeviceService device)
     {
@@ -58,42 +60,115 @@ public sealed class DeviceFpService
     }
 
 
+    public enum FingerprintSyncOutcome
+    {
+        NotNeeded,
+        Registered,
+        Updated,
+        Failed,
+    }
+
+    public readonly record struct FingerprintSyncResult(FingerprintSyncOutcome Outcome, string? Error)
+    {
+        public bool HadFingerprint { get; init; }
+    }
+
     public async Task<MiHoYoDeviceIdentity> GetOrRegisterAsync(CancellationToken token = default)
     {
+        return await GetIdentityAsync(token).ConfigureAwait(false);
+    }
+
+    public async Task<FingerprintSyncResult> SyncOnStartupAsync(CancellationToken token = default)
+    {
         var identity = await GetIdentityAsync(token).ConfigureAwait(false);
-        if (!string.IsNullOrEmpty(identity.DeviceFp))
+        if (HasFreshFingerprint(identity))
         {
-            return identity;
+            return new FingerprintSyncResult(FingerprintSyncOutcome.NotNeeded, null);
         }
 
+        bool hadFingerprint = !string.IsNullOrEmpty(identity.DeviceFp);
+        var result = await SyncOnStartupCoreAsync(token).ConfigureAwait(false);
+        return result.Outcome == FingerprintSyncOutcome.Failed
+            ? result with { HadFingerprint = hadFingerprint }
+            : result;
+    }
+
+
+    public Task<FingerprintSyncResult> BeginStartupSync()
+    {
+        if (Volatile.Read(ref _startupSync) is { } existing)
+        {
+            if (!IsRetryable(existing))
+            {
+                return existing;
+            }
+        }
+
+        lock (_startupSyncLock)
+        {
+            if (_startupSync is { } current && !IsRetryable(current))
+            {
+                return current;
+            }
+
+            _startupSync = Task.Run(() => SyncOnStartupAsync(CancellationToken.None));
+            return _startupSync;
+        }
+    }
+
+
+    public Task<FingerprintSyncResult> WaitStartupSyncAsync() => BeginStartupSync();
+
+
+    private static bool IsRetryable(Task<FingerprintSyncResult> task)
+    {
+        if (!task.IsCompleted)
+        {
+            return false;
+        }
+
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            return true;
+        }
+
+        return task.Result.Outcome == FingerprintSyncOutcome.Failed;
+    }
+
+    private async Task<FingerprintSyncResult> SyncOnStartupCoreAsync(CancellationToken token)
+    {
         await _gate.WaitAsync(token).ConfigureAwait(false);
         try
         {
-            identity = await GetIdentityAsync(token).ConfigureAwait(false);
-            if (!string.IsNullOrEmpty(identity.DeviceFp))
+            var identity = await GetIdentityAsync(token).ConfigureAwait(false);
+            if (HasFreshFingerprint(identity))
             {
-                return identity;
+                return new FingerprintSyncResult(FingerprintSyncOutcome.NotNeeded, null);
             }
 
+            bool isUpdate = !string.IsNullOrEmpty(identity.DeviceFp);
             string? issued = await RegisterAsync(identity, token).ConfigureAwait(false);
             if (string.IsNullOrEmpty(issued))
             {
                 DebugLog.Info("DeviceFpService",
-                    "[DeviceFp] Registration returned no fingerprint, returning fingerprint-less identity");
-                return identity;
+                    $"[DeviceFp] {(isUpdate ? "Update" : "Registration")} returned no fingerprint");
+                return new FingerprintSyncResult(FingerprintSyncOutcome.Failed,
+                    "DeviceFp_RequestFailed".GetLocalized());
             }
-
 
             var updated = await _store.WithFingerprintAsync(identity.DeviceId, issued, token)
                 .ConfigureAwait(false);
             if (updated is null)
             {
-                DebugLog.Info("DeviceFpService", "[DeviceFp] Identity reset, discarding this registration result");
-                return await GetIdentityAsync(token).ConfigureAwait(false);
+                DebugLog.Info("DeviceFpService", "[DeviceFp] Identity reset, discarding stale fingerprint");
+                return new FingerprintSyncResult(FingerprintSyncOutcome.Failed,
+                    "DeviceFp_RequestFailed".GetLocalized());
             }
 
-            DebugLog.Info("DeviceFpService", $"[DeviceFp] Registration succeeded and backfilled: {issued}");
-            return updated;
+            DebugLog.Info("DeviceFpService",
+                $"[DeviceFp] {(isUpdate ? "Update" : "Registration")} succeeded at {updated.FingerprintUpdatedAt:O}");
+            return new FingerprintSyncResult(
+                isUpdate ? FingerprintSyncOutcome.Updated : FingerprintSyncOutcome.Registered, null);
         }
         finally
         {
@@ -101,10 +176,20 @@ public sealed class DeviceFpService
         }
     }
 
+    private static bool HasFreshFingerprint(MiHoYoDeviceIdentity identity) =>
+        !string.IsNullOrEmpty(identity.DeviceFp) &&
+        identity.FingerprintUpdatedAt?.LocalDateTime.Date == DateTime.Today;
+
     public async Task<MiHoYoDeviceIdentity> ResetAndRegisterAsync(CancellationToken token = default)
     {
         await _store.ResetAsync(ResolveInitialDeviceId(), token).ConfigureAwait(false);
-        return await GetOrRegisterAsync(token).ConfigureAwait(false);
+        var result = await SyncOnStartupCoreAsync(token).ConfigureAwait(false);
+        if (result.Outcome == FingerprintSyncOutcome.Failed)
+        {
+            throw new InvalidOperationException(result.Error ?? "DeviceFp_RequestFailed".GetLocalized());
+        }
+
+        return await GetIdentityAsync(token).ConfigureAwait(false);
     }
 
     public Task SaveIdentityAsync(MiHoYoDeviceIdentity identity, CancellationToken token = default) =>
@@ -118,18 +203,7 @@ public sealed class DeviceFpService
     {
         try
         {
-            var request = new DeviceFpRequest
-            {
-                DeviceId = identity.DeviceId,
-                SeedId = identity.SeedId,
-                SeedTime = identity.SeedTime,
-                Platform = Platform,
-                DeviceFp = CreatePlaceholderFingerprint(),
-                AppName = AppName,
-                ExtFields = FpExtFieldsBuilder.BuildJson(_device.CaptureSnapshot()),
-                BbsDeviceId = identity.BbsDeviceId,
-            };
-
+            var request = CreateRequest(identity);
             string bodyJson = JsonSerializer.Serialize(request, _jsonOptions);
             using var req = new HttpRequestMessage(HttpMethod.Post, GetFpUrl);
             req.Content = new StringContent(bodyJson, Encoding.UTF8, "application/json");
@@ -152,6 +226,21 @@ public sealed class DeviceFpService
             return null;
         }
     }
+
+
+    private DeviceFpRequest CreateRequest(MiHoYoDeviceIdentity identity) => new()
+    {
+        DeviceId = identity.DeviceId,
+        SeedId = identity.SeedId,
+        SeedTime = identity.SeedTime,
+        Platform = Platform,
+        DeviceFp = string.IsNullOrEmpty(identity.DeviceFp)
+            ? CreatePlaceholderFingerprint()
+            : identity.DeviceFp,
+        AppName = AppName,
+        ExtFields = FpExtFieldsBuilder.BuildJson(_device.CaptureSnapshot()),
+        BbsDeviceId = identity.BbsDeviceId,
+    };
 
 
     private static string? ParseFingerprint(string json)

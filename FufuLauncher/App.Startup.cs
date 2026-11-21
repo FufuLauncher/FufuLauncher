@@ -60,6 +60,8 @@ public partial class App
                     {
                         await SetDefaultThemeAsync();
                         await RefreshPluginConfigBaselineAsync();
+                        _ = Task.Run(RegisterOrUpdateDeviceFingerprintAsync);
+                        (MainWindow as MainWindow)?.StartMiyousheShopPlans();
                     });
                 });
             }
@@ -76,7 +78,6 @@ public partial class App
 
             var activationService = GetService<IActivationService>();
             await activationService.ActivateAsync(args);
-            (MainWindow as MainWindow)?.StartMiyousheShopPlans();
 
             _ = GetService<PluginConfigGuardService>();
 
@@ -96,6 +97,10 @@ public partial class App
                                            !(MainWindow is MainWindow mw && mw.IsAgreementShowing);
             if (shouldRunBackgroundTasks)
             {
+                _ = Task.Run(RegisterOrUpdateDeviceFingerprintAsync);
+
+                (MainWindow as MainWindow)?.StartMiyousheShopPlans();
+
                 _ = Task.Run(RefreshPluginConfigBaselineAsync);
 
                 _ = Task.Run(PlayStartupSoundDelayedAsync);
@@ -126,6 +131,44 @@ public partial class App
             LogException(ex, "OnLaunched (启动流程异常)");
             ShowCrashDialog("Crash_Source_AppStartup".GetLocalized(), ex);
             Environment.Exit(-1);
+        }
+    }
+
+    private static async Task RegisterOrUpdateDeviceFingerprintAsync()
+    {
+        try
+        {
+            var result = await GetService<Services.MiHoYo.Fingerprint.DeviceFpService>()
+                .WaitStartupSyncAsync();
+
+            if (result.Outcome is not Services.MiHoYo.Fingerprint.DeviceFpService.FingerprintSyncOutcome.Failed)
+            {
+                return;
+            }
+
+            DebugLog.Info("App.Startup",
+                $"[DeviceFp] Startup sync failed (hadFingerprint={result.HadFingerprint}): {result.Error}");
+            var notificationService = GetService<INotificationService>();
+            if (result.HadFingerprint)
+            {
+                notificationService.Show(
+                    "DeviceFp_UpdateFailedTitle".GetLocalized(),
+                    "DeviceFp_UpdateFailedMessage".GetLocalized(),
+                    Messages.NotificationType.Warning,
+                    8000);
+            }
+            else
+            {
+                notificationService.Show(
+                    "DeviceFp_RegisterFailedTitle".GetLocalized(),
+                    "DeviceFp_RegisterFailedMessage".GetLocalized(),
+                    Messages.NotificationType.Error,
+                    8000);
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog.Info("App.Startup", $"[DeviceFp] Startup registration/update failed: {ex.Message}");
         }
     }
 

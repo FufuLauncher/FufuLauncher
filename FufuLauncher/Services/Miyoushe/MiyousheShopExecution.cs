@@ -13,7 +13,8 @@ internal sealed class MiyousheShopExecution(
     MiyousheShopPlans plans,
     MiyousheShopClient client,
     AccountManager accounts,
-    AccountIdentityService identity)
+    AccountIdentityService identity,
+    FufuLauncher.Services.MiHoYo.Fingerprint.DeviceFpService deviceFingerprint)
 {
     private static readonly TimeSpan PrepareLead = TimeSpan.FromSeconds(25);
     private static readonly TimeSpan ReserveLead = TimeSpan.FromSeconds(1);
@@ -232,6 +233,7 @@ internal sealed class MiyousheShopExecution(
     private async Task<(AccountEntry Account, AccountContext Context)> GetIdentityAsync(string id, CancellationToken ct)
     {
         var account = FindAccount(id) ?? throw ShopError("MiyousheShop_LoginRequired");
+        await deviceFingerprint.WaitStartupSyncAsync().WaitAsync(ct).ConfigureAwait(false);
         var context = await identity.BuildAsync(id, ct);
         return (account, context);
     }

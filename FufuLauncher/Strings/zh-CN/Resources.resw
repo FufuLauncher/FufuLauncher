@@ -11946,7 +11946,22 @@ UIGF v4.x/3.0/2.x</value>
     <value>Cookie 文件路径超出数据目录</value>
   </data>
   <data name="Account_DeviceFpUnavailable" xml:space="preserve">
-    <value>设备指纹不可用（注册失败）</value>
+    <value>设备指纹不可用，请重启应用后重试</value>
+  </data>
+  <data name="DeviceFp_RegisterFailedTitle" xml:space="preserve">
+    <value>设备信息注册失败</value>
+  </data>
+  <data name="DeviceFp_RegisterFailedMessage" xml:space="preserve">
+    <value>未能获取设备指纹，部分社区功能暂时不可用。请检查网络后重启应用。</value>
+  </data>
+  <data name="DeviceFp_UpdateFailedTitle" xml:space="preserve">
+    <value>设备信息更新失败</value>
+  </data>
+  <data name="DeviceFp_UpdateFailedMessage" xml:space="preserve">
+    <value>设备指纹未能更新，继续使用上一次的指纹，通常不影响使用。</value>
+  </data>
+  <data name="DeviceFp_RequestFailed" xml:space="preserve">
+    <value>设备指纹请求失败</value>
   </data>
   <data name="Account_FetchRolesFailed_Format" xml:space="preserve">
     <value>获取绑定角色失败（{0}），请刷新或重新登录。</value>

@@ -11946,7 +11946,22 @@ Failed to load bio.</value>
     <value>Cookie file path is outside the data directory</value>
   </data>
   <data name="Account_DeviceFpUnavailable" xml:space="preserve">
-    <value>Device fingerprint unavailable (registration failed)</value>
+    <value>Device fingerprint unavailable. Please restart the app and try again.</value>
+  </data>
+  <data name="DeviceFp_RegisterFailedTitle" xml:space="preserve">
+    <value>Device registration failed</value>
+  </data>
+  <data name="DeviceFp_RegisterFailedMessage" xml:space="preserve">
+    <value>Could not obtain a device fingerprint, so some community features are temporarily unavailable. Check your network and restart the app.</value>
+  </data>
+  <data name="DeviceFp_UpdateFailedTitle" xml:space="preserve">
+    <value>Device info update failed</value>
+  </data>
+  <data name="DeviceFp_UpdateFailedMessage" xml:space="preserve">
+    <value>The device fingerprint was not refreshed. The previous fingerprint is still in use, which usually is fine.</value>
+  </data>
+  <data name="DeviceFp_RequestFailed" xml:space="preserve">
+    <value>Device fingerprint request failed</value>
   </data>
   <data name="Account_FetchRolesFailed_Format" xml:space="preserve">
     <value>Failed to fetch bound characters ({0}). Please refresh or log in again.</value>

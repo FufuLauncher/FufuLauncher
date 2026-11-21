@@ -92,7 +92,11 @@ public sealed class MiHoYoDeviceStore
                 return null;
             }
 
-            var updated = current with { DeviceFp = deviceFp };
+            var updated = current with
+            {
+                DeviceFp = deviceFp,
+                FingerprintUpdatedAt = DateTimeOffset.UtcNow,
+            };
             await WriteCoreAsync(updated, token).ConfigureAwait(false);
             return updated;
         }
