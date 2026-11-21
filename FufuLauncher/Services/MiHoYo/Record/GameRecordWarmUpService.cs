@@ -17,7 +17,7 @@ namespace FufuLauncher.Services.MiHoYo.Record;
 
 public sealed class GameRecordWarmUpService
 {
-    private const string RecordApiBase = ApiEndpoints.CnGameRecordApiBase;
+    private const string RecordApiBase = ApiEndpoints.DailyNoteRecordApiBase;
     private const string IndexPath = ApiEndpoints.DailyNoteIndexPath;
     private const string Page = "v6.6.1-gr-cn_#/ys";
 
@@ -185,8 +185,15 @@ public sealed class GameRecordWarmUpService
 
         using var resp = await _httpClient.SendAsync(req, token).ConfigureAwait(false);
         string json = await resp.Content.ReadAsStringAsync(token).ConfigureAwait(false);
+        int retcode = ReadRetcode(json);
         DebugLog.Info("GameRecordWarmUp",
-            $"[WarmUp] index status={(int)resp.StatusCode}, retcode={ReadRetcode(json)}");
+            $"[WarmUp] index status={(int)resp.StatusCode}, retcode={retcode}");
+
+        if (!resp.IsSuccessStatusCode || retcode != 0)
+        {
+            throw new InvalidOperationException(
+                $"Warm-up failed: status={(int)resp.StatusCode}, retcode={retcode}.");
+        }
     }
 
     private static string Key(string accountId, string roleId, string server) =>

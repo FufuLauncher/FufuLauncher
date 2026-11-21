@@ -98,18 +98,42 @@ public sealed class DeviceFpService
     {
         if (Volatile.Read(ref _startupSync) is { } existing)
         {
-            return existing;
+            if (!IsRetryable(existing))
+            {
+                return existing;
+            }
         }
 
         lock (_startupSyncLock)
         {
-            _startupSync ??= Task.Run(() => SyncOnStartupAsync(CancellationToken.None));
+            if (_startupSync is { } current && !IsRetryable(current))
+            {
+                return current;
+            }
+
+            _startupSync = Task.Run(() => SyncOnStartupAsync(CancellationToken.None));
             return _startupSync;
         }
     }
 
 
     public Task<FingerprintSyncResult> WaitStartupSyncAsync() => BeginStartupSync();
+
+
+    private static bool IsRetryable(Task<FingerprintSyncResult> task)
+    {
+        if (!task.IsCompleted)
+        {
+            return false;
+        }
+
+        if (task.IsFaulted || task.IsCanceled)
+        {
+            return true;
+        }
+
+        return task.Result.Outcome == FingerprintSyncOutcome.Failed;
+    }
 
     private async Task<FingerprintSyncResult> SyncOnStartupCoreAsync(CancellationToken token)
     {
