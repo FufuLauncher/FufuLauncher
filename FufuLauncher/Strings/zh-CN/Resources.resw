@@ -8143,7 +8143,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>加载失败: {0}</value>
   </data>
   <data name="LaunchConfig_PostLaunch_MinimizeToTray" xml:space="preserve">
-    <value>最小化到托盘</value>
+    <value>最小化至托盘</value>
   </data>
   <data name="Gacha_Pool_Weapon" xml:space="preserve">
     <value>武器活动</value>

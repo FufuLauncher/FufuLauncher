@@ -666,10 +666,12 @@
               VerticalAlignment="Top"
               Canvas.ZIndex="1000"
               Margin="80,0,140,0"
-              IsHitTestVisible="False">
+              ColumnDefinitions="*,Auto"
+              Loaded="AppTitleBar_Loaded">
 
             <Border HorizontalAlignment="Left"
                     VerticalAlignment="Center"
+                    IsHitTestVisible="False"
                     CornerRadius="8"
                     Padding="8,4,12,4"
                     Background="{ThemeResource IosGlassBrush}"
@@ -694,6 +696,22 @@
                                Visibility="Collapsed" />
                 </StackPanel>
             </Border>
+
+            <Button x:Name="MinimizeToTrayButton"
+                    Grid.Column="1"
+                    Width="46"
+                    Height="32"
+                    Padding="0"
+                    CornerRadius="0"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    Style="{StaticResource SubtleButtonStyle}"
+                    AutomationProperties.Name="{helpers:Loc Key=LaunchConfig_PostLaunch_MinimizeToTray}"
+                    ToolTipService.ToolTip="{helpers:Loc Key=LaunchConfig_PostLaunch_MinimizeToTray}"
+                    Click="MinimizeToTrayButton_Click">
+                <PathIcon Data="F0 M0,0 H12 L6,8 Z M3,1.5 H9 L6,5.5 Z" />
+            </Button>
         </Grid>
     </Grid>
 </windowex:WindowEx>

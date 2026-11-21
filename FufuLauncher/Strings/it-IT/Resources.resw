@@ -7997,7 +7997,7 @@ Dettagli: {0}</value>
     <value>Caricamento non riuscito: {0}</value>
   </data>
   <data name="LaunchConfig_PostLaunch_MinimizeToTray" xml:space="preserve">
-    <value>Riduci nella barra delle applicazioni</value>
+    <value>Riduci a icona nell’area di notifica</value>
   </data>
   <data name="Gacha_Pool_Weapon" xml:space="preserve">
     <value>Evento arma</value>
