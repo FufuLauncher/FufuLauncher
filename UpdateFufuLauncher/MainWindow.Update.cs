@@ -6,10 +6,10 @@ Licensed under the MIT License.
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json;
-using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Windows;
 using ModernWpf.Controls;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Updater;
@@ -18,8 +18,22 @@ public partial class MainWindow
 {
     #region Update Check
 
-    private sealed record UpdateConfigResponse(string? Version, string? PreReleaseVersion);
     private sealed record ReleaseVersion(string Text, Version Number);
+
+    // Json.NET checks the structure but also accepts JavaScript syntax. Require JSON
+    // strings, numbers and separators so that a malformed response triggers fallback.
+    [GeneratedRegex("""
+        \A (?>
+              [ \t\r\n]+
+            | "(?> [^"\\\x00-\x1F]+ | \\ (?: ["\\/bfnrt] | u[0-9A-Fa-f]{4} ) )*"
+            | (?: true | false | null | -?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)? )
+              (?= [ \t\r\n]* (?: [,}\]] | \z ) )
+            | [,:] (?! [ \t\r\n]* [,}\]] )
+            | \[ (?! [ \t\r\n]* , )
+            | [\]{}]
+        )* \z
+        """, RegexOptions.IgnorePatternWhitespace)]
+    private static partial Regex StandardJsonTokens();
 
     private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
@@ -87,19 +101,35 @@ public partial class MainWindow
     {
         using var response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
-        var config = await response.Content.ReadFromJsonAsync<UpdateConfigResponse>();
-        if (config?.Version == null || !TryParseVersion(config.Version, out Version stableVersion))
+        var content = await response.Content.ReadAsStringAsync();
+        if (!StandardJsonTokens().IsMatch(content))
+        {
+            throw new JsonReaderException(Strings.Get("InvalidUpdateConfigJson"));
+        }
+
+        var config = JsonConvert.DeserializeObject<JObject>(content, new JsonSerializerSettings
+        {
+            DateParseHandling = DateParseHandling.None
+        }) ?? throw new JsonReaderException(Strings.Get("InvalidUpdateConfigJson"));
+        var version = config.GetValue("Version", StringComparison.OrdinalIgnoreCase);
+        if (version is not JValue { Value: string stableText } || !TryParseVersion(stableText, out Version stableVersion))
         {
             throw new JsonException(Strings.Get("InvalidOfficialVersion"));
         }
 
-        var stable = new ReleaseVersion(config.Version.Trim(), stableVersion);
-        if (!_isPreviewMode || _isRollbackMode || string.IsNullOrWhiteSpace(config.PreReleaseVersion))
+        var preview = config.GetValue("PreReleaseVersion", StringComparison.OrdinalIgnoreCase);
+        if (preview?.Type is not (null or JTokenType.Null or JTokenType.String))
+        {
+            throw new JsonException(Strings.Get("InvalidPreviewVersion"));
+        }
+
+        var stable = new ReleaseVersion(stableText.Trim(), stableVersion);
+        var previewText = (string?)preview;
+        if (!_isPreviewMode || _isRollbackMode || string.IsNullOrWhiteSpace(previewText))
         {
             return (stable, null);
         }
 
-        string previewText = config.PreReleaseVersion;
         if (!TryParseVersion(previewText, out Version previewVersion))
         {
             throw new JsonException(Strings.Get("InvalidPreviewVersion"));

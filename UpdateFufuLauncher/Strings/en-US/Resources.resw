@@ -170,6 +170,9 @@ Error: {0}</value>
   <data name="InvalidPreviewVersion" xml:space="preserve">
     <value>The update configuration contains an invalid preview version.</value>
   </data>
+  <data name="InvalidUpdateConfigJson" xml:space="preserve">
+    <value>The update configuration contains invalid JSON.</value>
+  </data>
   <data name="InvalidOfficialVersion" xml:space="preserve">
     <value>The update configuration is missing a valid stable version.</value>
   </data>

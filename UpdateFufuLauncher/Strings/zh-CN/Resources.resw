@@ -170,6 +170,9 @@
   <data name="InvalidPreviewVersion" xml:space="preserve">
     <value>更新配置中的预览版版本号无效。</value>
   </data>
+  <data name="InvalidUpdateConfigJson" xml:space="preserve">
+    <value>更新配置的 JSON 格式无效。</value>
+  </data>
   <data name="InvalidOfficialVersion" xml:space="preserve">
     <value>更新配置中的正式版版本号缺失或无效。</value>
   </data>
