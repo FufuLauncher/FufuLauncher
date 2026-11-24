@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <InternalsVisibleTo Include="UpdateFufuLauncher.Tests" />
         <None Remove="Strings\**\*.resw" />
         <EmbeddedResource Include="Strings\zh-CN\Resources.resw" LogicalName="Updater.Strings.zh-CN.resw" />
         <EmbeddedResource Include="Strings\en-US\Resources.resw" LogicalName="Updater.Strings.en-US.resw" />

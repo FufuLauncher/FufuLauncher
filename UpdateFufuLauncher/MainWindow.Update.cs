@@ -18,7 +18,7 @@ public partial class MainWindow
 {
     #region Update Check
 
-    private sealed record ReleaseVersion(string Text, Version Number);
+    internal sealed record ReleaseVersion(string Text, Version Number);
 
     // Json.NET checks the structure but also accepts JavaScript syntax. Require JSON
     // strings, numbers and separators so that a malformed response triggers fallback.
@@ -40,17 +40,8 @@ public partial class MainWindow
         try
         {
             SetLocalizedText(SubtitleText, "RequestingUpdateConfig");
-            (ReleaseVersion Stable, ReleaseVersion? Preview) config;
-            try
-            {
-                config = await FetchUpdateConfigAsync(ApiEndpoints.UpdateJsonUrl);
-            }
-            catch (Exception ex) when (ex is HttpRequestException or JsonException
-                or OperationCanceledException { InnerException: TimeoutException })
-            {
-                SetLocalizedText(SubtitleText, "RequestingFallbackUpdateConfig");
-                config = await FetchUpdateConfigAsync(ApiEndpoints.UpdateJsonFallbackUrl);
-            }
+            var config = await LoadUpdateConfigAsync(_httpClient, _isPreviewMode, _isRollbackMode,
+                () => SetLocalizedText(SubtitleText, "RequestingFallbackUpdateConfig"));
 
             _officialVersion = config.Stable.Text;
 
@@ -97,9 +88,25 @@ public partial class MainWindow
         }
     }
 
-    private async Task<(ReleaseVersion Stable, ReleaseVersion? Preview)> FetchUpdateConfigAsync(string url)
+    internal static async Task<(ReleaseVersion Stable, ReleaseVersion? Preview)> LoadUpdateConfigAsync(
+        HttpClient client, bool isPreviewMode, bool isRollbackMode, Action onFallback)
     {
-        using var response = await _httpClient.GetAsync(url);
+        var requirePreview = isPreviewMode && !isRollbackMode;
+        try
+        {
+            return await FetchUpdateConfigAsync(client, ApiEndpoints.UpdateJsonUrl, requirePreview);
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or OperationCanceledException)
+        {
+            onFallback();
+            return await FetchUpdateConfigAsync(client, ApiEndpoints.UpdateJsonFallbackUrl, requirePreview);
+        }
+    }
+
+    private static async Task<(ReleaseVersion Stable, ReleaseVersion? Preview)> FetchUpdateConfigAsync(
+        HttpClient client, string url, bool requirePreview)
+    {
+        using var response = await client.GetAsync(url);
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         if (!StandardJsonTokens().IsMatch(content))
@@ -117,15 +124,19 @@ public partial class MainWindow
             throw new JsonException(Strings.Get("InvalidOfficialVersion"));
         }
 
+        var stable = new ReleaseVersion(stableText.Trim(), stableVersion);
+        if (!requirePreview)
+        {
+            return (stable, null);
+        }
+
         var preview = config.GetValue("PreReleaseVersion", StringComparison.OrdinalIgnoreCase);
-        if (preview?.Type is not (null or JTokenType.Null or JTokenType.String))
+        if (preview is not JValue { Value: string previewText })
         {
             throw new JsonException(Strings.Get("InvalidPreviewVersion"));
         }
 
-        var stable = new ReleaseVersion(stableText.Trim(), stableVersion);
-        var previewText = (string?)preview;
-        if (!_isPreviewMode || _isRollbackMode || string.IsNullOrWhiteSpace(previewText))
+        if (string.IsNullOrWhiteSpace(previewText))
         {
             return (stable, null);
         }
