@@ -67,14 +67,26 @@
   <data name="RequestingUpdateConfig" xml:space="preserve">
     <value>Requesting update configuration...</value>
   </data>
-  <data name="ReadingLocalUpdateConfig" xml:space="preserve">
-    <value>API request failed. Reading local update configuration...</value>
+  <data name="RequestingFallbackUpdateConfig" xml:space="preserve">
+    <value>Fetching update configuration from the backup server...</value>
+  </data>
+  <data name="UpdateInitFailedTitle" xml:space="preserve">
+    <value>Couldn't check for updates</value>
   </data>
   <data name="UpdateInitFailed" xml:space="preserve">
-    <value>Failed to initialize the update. Check your network, or download from:
-{0}
-Password: {1}
-Error: {2}</value>
+    <value>Check your network connection or download the update manually.</value>
+  </data>
+  <data name="DownloadLink" xml:space="preserve">
+    <value>Download link</value>
+  </data>
+  <data name="DownloadPassword" xml:space="preserve">
+    <value>Access code</value>
+  </data>
+  <data name="ErrorDetails" xml:space="preserve">
+    <value>Error details</value>
+  </data>
+  <data name="CopyDownloadLink" xml:space="preserve">
+    <value>Copy link</value>
   </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>Error</value>
@@ -156,12 +168,10 @@ Error: {0}</value>
     <value>No preview update has been published by the server.</value>
   </data>
   <data name="InvalidPreviewVersion" xml:space="preserve">
-    <value>The preview version number could not be recognized. Please download from the official website.
-This updater cannot continue.</value>
+    <value>The update configuration contains an invalid preview version.</value>
   </data>
   <data name="InvalidOfficialVersion" xml:space="preserve">
-    <value>The stable version number could not be recognized. Please download from the official website.
-This updater cannot continue.</value>
+    <value>The update configuration is missing a valid stable version.</value>
   </data>
   <data name="PreviewNotNewerMessage" xml:space="preserve">
     <value>The preview version is not newer than the latest stable version, so preview updates are not allowed.</value>

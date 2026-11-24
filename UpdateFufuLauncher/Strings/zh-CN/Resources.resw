@@ -67,14 +67,26 @@
   <data name="RequestingUpdateConfig" xml:space="preserve">
     <value>请求API更新配置...</value>
   </data>
-  <data name="ReadingLocalUpdateConfig" xml:space="preserve">
-    <value>API请求失败，读取本地更新配置...</value>
+  <data name="RequestingFallbackUpdateConfig" xml:space="preserve">
+    <value>正在从备用站获取更新配置...</value>
+  </data>
+  <data name="UpdateInitFailedTitle" xml:space="preserve">
+    <value>检查更新失败</value>
   </data>
   <data name="UpdateInitFailed" xml:space="preserve">
-    <value>更新初始化失败，请检查网络，或者去下面下载
-{0}
-密码:{1}
-错误详情: {2}</value>
+    <value>请检查网络连接，或通过网盘手动下载更新。</value>
+  </data>
+  <data name="DownloadLink" xml:space="preserve">
+    <value>网盘链接</value>
+  </data>
+  <data name="DownloadPassword" xml:space="preserve">
+    <value>提取码</value>
+  </data>
+  <data name="ErrorDetails" xml:space="preserve">
+    <value>错误详情</value>
+  </data>
+  <data name="CopyDownloadLink" xml:space="preserve">
+    <value>复制链接</value>
   </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>错误</value>
@@ -156,12 +168,10 @@
     <value>服务端暂未发布预览版更新</value>
   </data>
   <data name="InvalidPreviewVersion" xml:space="preserve">
-    <value>预览版版本号无法识别，请前往官网下载
-此处不提供更新</value>
+    <value>更新配置中的预览版版本号无效。</value>
   </data>
   <data name="InvalidOfficialVersion" xml:space="preserve">
-    <value>正式版版本号无法识别，请前往官网下载
-此处不提供更新</value>
+    <value>更新配置中的正式版版本号缺失或无效。</value>
   </data>
   <data name="PreviewNotNewerMessage" xml:space="preserve">
     <value>预览版版本号未高于最新正式版，无法更新预览版</value>
