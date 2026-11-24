@@ -3,11 +3,13 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 using System.Windows;
+using ModernWpf.Controls;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Updater;
@@ -16,37 +18,32 @@ public partial class MainWindow
 {
     #region Update Check
 
+    internal sealed record ReleaseVersion(string Text, Version Number);
+
+    // Json.NET checks the structure but also accepts JavaScript syntax. Require JSON
+    // strings, numbers and separators so that a malformed response triggers fallback.
+    [GeneratedRegex("""
+        \A (?>
+              [ \t\r\n]+
+            | "(?> [^"\\\x00-\x1F]+ | \\ (?: ["\\/bfnrt] | u[0-9A-Fa-f]{4} ) )*"
+            | (?: true | false | null | -?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)? )
+              (?= [ \t\r\n]* (?: [,}\]] | \z ) )
+            | [,:] (?! [ \t\r\n]* [,}\]] )
+            | \[ (?! [ \t\r\n]* , )
+            | [\]{}]
+        )* \z
+        """, RegexOptions.IgnorePatternWhitespace)]
+    private static partial Regex StandardJsonTokens();
+
     private async void Window_Loaded(object sender, RoutedEventArgs e)
     {
         try
         {
-            string localJsonPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Update.json");
             SetLocalizedText(SubtitleText, "RequestingUpdateConfig");
-            string updateContent;
-            try
-            {
-                updateContent = await _httpClient.GetStringAsync(ApiEndpoints.UpdateJsonUrl);
-            }
-            catch (HttpRequestException)
-            {
-                try
-                {
-                    updateContent = await _httpClient.GetStringAsync(ApiEndpoints.UpdateJsonFallbackUrl);
-                }
-                catch (HttpRequestException)
-                {
-                    if (!File.Exists(localJsonPath))
-                    {
-                        throw;
-                    }
+            var config = await LoadUpdateConfigAsync(_httpClient, _isPreviewMode, _isRollbackMode,
+                () => SetLocalizedText(SubtitleText, "RequestingFallbackUpdateConfig"));
 
-                    SetLocalizedText(SubtitleText, "ReadingLocalUpdateConfig");
-                    updateContent = await File.ReadAllTextAsync(localJsonPath);
-                }
-            }
-
-            JObject updateJson = JObject.Parse(updateContent);
-            _officialVersion = updateJson.GetValue("version", StringComparison.OrdinalIgnoreCase)?.ToString() ?? string.Empty;
+            _officialVersion = config.Stable.Text;
 
             if (_isRollbackMode)
             {
@@ -56,19 +53,18 @@ public partial class MainWindow
 
             if (_isPreviewMode)
             {
-                await CheckPreviewUpdateAsync(updateJson);
+                await CheckPreviewUpdateAsync(config.Stable.Number, config.Preview);
                 return;
             }
 
-            if (!TryParseVersion(_installedVersion, out Version currentVersion) ||
-                !TryParseVersion(_officialVersion, out Version remoteVersion))
+            if (!TryParseVersion(_installedVersion, out Version currentVersion))
             {
                 MessageBox.Show(Strings.Get("InvalidVersionMessage"), Strings.Get("InvalidVersionTitle"), MessageBoxButton.OK, MessageBoxImage.Error);
                 Environment.Exit(0);
                 return;
             }
 
-            if (currentVersion >= remoteVersion)
+            if (currentVersion >= config.Stable.Number)
             {
                 if (!_isTestForceUpdate)
                 {
@@ -84,13 +80,81 @@ public partial class MainWindow
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
-                Strings.Format("UpdateInitFailed", ApiEndpoints.DownloadPageUrl, ApiEndpoints.DownloadPagePassword, ex.Message),
-                Strings.Get("ErrorTitle"),
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+            LoadingPanel.Visibility = Visibility.Collapsed;
+            UpdateErrorDetailsBox.Text = ex.Message;
+            UpdateInitErrorDialog.Owner = this;
+            await UpdateInitErrorDialog.ShowAsync();
             Environment.Exit(1);
         }
+    }
+
+    internal static async Task<(ReleaseVersion Stable, ReleaseVersion? Preview)> LoadUpdateConfigAsync(
+        HttpClient client, bool isPreviewMode, bool isRollbackMode, Action onFallback)
+    {
+        var requirePreview = isPreviewMode && !isRollbackMode;
+        try
+        {
+            return await FetchUpdateConfigAsync(client, ApiEndpoints.UpdateJsonUrl, requirePreview);
+        }
+        catch (Exception ex) when (ex is HttpRequestException or JsonException or OperationCanceledException)
+        {
+            onFallback();
+            return await FetchUpdateConfigAsync(client, ApiEndpoints.UpdateJsonFallbackUrl, requirePreview);
+        }
+    }
+
+    private static async Task<(ReleaseVersion Stable, ReleaseVersion? Preview)> FetchUpdateConfigAsync(
+        HttpClient client, string url, bool requirePreview)
+    {
+        using var response = await client.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        if (!StandardJsonTokens().IsMatch(content))
+        {
+            throw new JsonReaderException(Strings.Get("InvalidUpdateConfigJson"));
+        }
+
+        var config = JsonConvert.DeserializeObject<JObject>(content, new JsonSerializerSettings
+        {
+            DateParseHandling = DateParseHandling.None
+        }) ?? throw new JsonReaderException(Strings.Get("InvalidUpdateConfigJson"));
+        var version = config.GetValue("Version", StringComparison.OrdinalIgnoreCase);
+        if (version is not JValue { Value: string stableText } || !TryParseVersion(stableText, out Version stableVersion))
+        {
+            throw new JsonException(Strings.Get("InvalidOfficialVersion"));
+        }
+
+        var stable = new ReleaseVersion(stableText.Trim(), stableVersion);
+        if (!requirePreview)
+        {
+            return (stable, null);
+        }
+
+        var preview = config.GetValue("PreReleaseVersion", StringComparison.OrdinalIgnoreCase);
+        if (preview is not JValue { Value: string previewText })
+        {
+            throw new JsonException(Strings.Get("InvalidPreviewVersion"));
+        }
+
+        if (string.IsNullOrWhiteSpace(previewText))
+        {
+            return (stable, null);
+        }
+
+        if (!TryParseVersion(previewText, out Version previewVersion))
+        {
+            throw new JsonException(Strings.Get("InvalidPreviewVersion"));
+        }
+
+        return (stable, new ReleaseVersion(previewText.Trim(), previewVersion));
+    }
+
+    private void CopyDownloadLink_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+    {
+        args.Cancel = true;
+        DownloadLinkBox.Focus();
+        DownloadLinkBox.SelectAll();
+        DownloadLinkBox.Copy();
     }
 
     private void ShowNoUpdate(string messageKey, bool showRollback = false)
@@ -411,32 +475,15 @@ public partial class MainWindow
         }
     }
 
-    private async Task CheckPreviewUpdateAsync(JObject updateJson)
+    private async Task CheckPreviewUpdateAsync(Version officialVersion, ReleaseVersion? previewVersion)
     {
-        string previewVersionStr = updateJson.GetValue("PreReleaseVersion", StringComparison.OrdinalIgnoreCase)?.ToString()?.Trim() ?? string.Empty;
-
-        if (string.IsNullOrEmpty(previewVersionStr))
+        if (previewVersion == null)
         {
             ShowNoUpdate("NoPreviewAvailable", _isInstalledPreviewBuild);
             return;
         }
 
-        if (!TryParseVersion(previewVersionStr, out Version previewVersion))
-        {
-            MessageBox.Show(Strings.Get("InvalidPreviewVersion"), Strings.Get("InvalidVersionTitle"), MessageBoxButton.OK, MessageBoxImage.Error);
-            Environment.Exit(0);
-            return;
-        }
-
-        string officialVersionStr = updateJson.GetValue("version", StringComparison.OrdinalIgnoreCase)?.ToString();
-        if (!TryParseVersion(officialVersionStr, out Version officialVersion))
-        {
-            MessageBox.Show(Strings.Get("InvalidOfficialVersion"), Strings.Get("InvalidVersionTitle"), MessageBoxButton.OK, MessageBoxImage.Error);
-            Environment.Exit(0);
-            return;
-        }
-
-        if (previewVersion <= officialVersion)
+        if (previewVersion.Number <= officialVersion)
         {
             ShowNoUpdate("PreviewNotNewerMessage", _isInstalledPreviewBuild);
             return;
@@ -447,7 +494,7 @@ public partial class MainWindow
         JArray tags = JArray.Parse(tagsResponse);
 
 
-        string previewTagName = $"{StripPreReleaseSuffix(previewVersionStr)}Pre-release";
+        string previewTagName = $"{StripPreReleaseSuffix(previewVersion.Text)}Pre-release";
         JToken matchedTag = tags.FirstOrDefault(t => string.Equals(t["name"]?.ToString(), previewTagName, StringComparison.OrdinalIgnoreCase));
 
         if (matchedTag == null)

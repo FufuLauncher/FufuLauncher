@@ -282,5 +282,30 @@
         <Grid Grid.Row="3" Margin="0,12,0,0">
             <Button x:Name="LanguageToggleBtn" Click="LanguageToggle_Click" Style="{StaticResource LanguageToggleBtnStyle}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
+
+        <ui:ContentDialog x:Name="UpdateInitErrorDialog" Grid.RowSpan="4"
+                          Title="{loc:Loc Key=UpdateInitFailedTitle}"
+                          PrimaryButtonText="{loc:Loc Key=CopyDownloadLink}"
+                          PrimaryButtonClick="CopyDownloadLink_Click"
+                          CloseButtonText="{loc:Loc Key=Close}">
+            <StackPanel>
+                <TextBlock Text="{loc:Loc Key=UpdateInitFailed}" TextWrapping="Wrap" Margin="0,0,0,16"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="DownloadLinkBox" ui:ControlHelper.Header="{loc:Loc Key=DownloadLink}"
+                             AutomationProperties.Name="{loc:Loc Key=DownloadLink}"
+                             Text="{x:Static loc:ApiEndpoints.DownloadPageUrl}" TextWrapping="Wrap" IsReadOnly="True"/>
+                    <TextBox Grid.Column="1" Margin="12,0,0,0" MinWidth="72" VerticalAlignment="Top"
+                             ui:ControlHelper.Header="{loc:Loc Key=DownloadPassword}" AutomationProperties.Name="{loc:Loc Key=DownloadPassword}"
+                             Text="{x:Static loc:ApiEndpoints.DownloadPagePassword}" IsReadOnly="True"/>
+                </Grid>
+                <TextBox x:Name="UpdateErrorDetailsBox" Margin="0,16,0,0" ui:ControlHelper.Header="{loc:Loc Key=ErrorDetails}"
+                         AutomationProperties.Name="{loc:Loc Key=ErrorDetails}" IsReadOnly="True"
+                         TextWrapping="Wrap" MaxLines="4" VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+        </ui:ContentDialog>
     </Grid>
 </Window>
