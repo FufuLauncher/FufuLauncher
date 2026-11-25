@@ -1593,6 +1593,9 @@ Por favor, confirma que seleccionaste el directorio de instalación que contiene
   <data name="NavCommunity" xml:space="preserve">
     <value>Comunidad</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Reiniciar como administrador</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Mostrar ventana principal</value>
   </data>
