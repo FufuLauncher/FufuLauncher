@@ -12,7 +12,7 @@ public static class AppRestartHelper
     private const string RestartArgument = "restart";
 
 
-    public static bool TryRestart()
+    public static bool TryRestart(bool asAdministrator = false)
     {
         try
         {
@@ -29,6 +29,7 @@ public static class AppRestartHelper
                 {
                     FileName = exePath,
                     Arguments = RestartArgument,
+                    Verb = asAdministrator ? "runas" : string.Empty,
                     UseShellExecute = true
                 }
             };
