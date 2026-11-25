@@ -4221,6 +4221,9 @@ Riscattalo in gioco tempestivamente!</value>
   <data name="TrayExit" xml:space="preserve">
     <value>Esci</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Riavvia come amministratore</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Mostra Finestra Principale</value>
   </data>
