@@ -1593,6 +1593,9 @@
   <data name="NavCommunity" xml:space="preserve">
     <value>Сообщество</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Перезапустить от имени администратора</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Показать окно</value>
   </data>

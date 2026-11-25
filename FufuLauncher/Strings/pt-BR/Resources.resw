@@ -1593,6 +1593,9 @@ Você deve reiniciar o jogo para que isso tenha efeito!</value>
   <data name="NavCommunity" xml:space="preserve">
     <value>Comunidade</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Reiniciar como administrador</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Mostrar janela principal</value>
   </data>

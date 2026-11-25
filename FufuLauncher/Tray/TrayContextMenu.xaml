@@ -159,6 +159,24 @@
                         </StackPanel>
                     </Button>
                     <Button
+                        Command="{Binding RestartAsAdministratorCommand}"
+                        Style="{StaticResource TrayActionButtonStyle}"
+                        ToolTipService.ToolTip="{helpers:Loc Key=TrayRestartAsAdministrator}">
+                        <StackPanel HorizontalAlignment="Center" Spacing="2">
+                            <FontIcon
+                                HorizontalAlignment="Center"
+                                FontFamily="{Binding TrayIconFont}"
+                                FontSize="20"
+                                Glyph="&#xEA18;" />
+                            <TextBlock
+                                MaxWidth="64"
+                                FontSize="12"
+                                Text="{helpers:Loc Key=TrayRestartAsAdministrator}"
+                                TextAlignment="Center"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Button>
+                    <Button
                         Command="{Binding McpCommand}"
                         Style="{StaticResource TrayActionButtonStyle}"
                         ToolTipService.ToolTip="{helpers:Loc Key=TrayMcp}">

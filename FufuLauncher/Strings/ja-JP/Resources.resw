@@ -1593,6 +1593,9 @@ Pull Requestを送信することは、コード開発能力を持つユーザ�
   <data name="NavCommunity" xml:space="preserve">
     <value>コミュニティ</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>管理者として再起動</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>メインウィンドウを表示</value>
   </data>

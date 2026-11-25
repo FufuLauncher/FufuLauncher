@@ -1735,6 +1735,9 @@
   <data name="NavCommunity" xml:space="preserve">
     <value>社区</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>退出并以管理员身份重启</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>显示主界面</value>
   </data>

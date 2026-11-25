@@ -1593,6 +1593,9 @@ Anda harus memulai ulang game agar perubahan berlaku!</value>
   <data name="NavCommunity" xml:space="preserve">
     <value>Komunitas</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Mulai ulang sebagai administrator</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Tampilkan Jendela Utama</value>
   </data>

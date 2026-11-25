@@ -1613,6 +1613,9 @@ You must restart the game for this to take effect!</value>
   <data name="NavCommunity" xml:space="preserve">
     <value>Community</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Restart as administrator</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Show Main Window</value>
   </data>

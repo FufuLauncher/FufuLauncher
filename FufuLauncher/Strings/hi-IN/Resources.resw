@@ -1511,6 +1511,9 @@
   <data name="NavCommunity" xml:space="preserve">
     <value>कम्युनिटी</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>व्यवस्थापक के रूप में पुनः प्रारंभ करें</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>मुख्य विंडो दिखाएँ</value>
   </data>

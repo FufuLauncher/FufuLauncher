@@ -1593,6 +1593,9 @@ Pull Request 제출은 코딩 능력이 있는 사용자가 개발 진행을 돕
   <data name="NavCommunity" xml:space="preserve">
     <value>커뮤니티</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>관리자 권한으로 다시 시작</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>메인 창 표시</value>
   </data>
