@@ -19,6 +19,9 @@ internal sealed class TrayContextMenuViewModel
         CheckinCommand = new RelayCommand(checkin);
         SwitchServerCommand = new RelayCommand(switchServer);
         McpCommand = new RelayCommand(openMcp);
+        RestartAsAdministratorCommand = new RelayCommand(
+            () => AppRestartHelper.TryRestart(asAdministrator: true),
+            () => !SystemEnvironmentHelper.IsRunningAsAdministrator());
         ExitCommand = new RelayCommand(exit);
     }
 
@@ -56,6 +59,8 @@ internal sealed class TrayContextMenuViewModel
     {
         get;
     }
+
+    public IRelayCommand RestartAsAdministratorCommand { get; }
 
     public IRelayCommand ExitCommand
     {
