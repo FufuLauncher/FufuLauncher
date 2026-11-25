@@ -24,8 +24,14 @@ public sealed partial class MainWindow
     {
         RestoreFromSuspension();
 
+        if (AppWindow.Presenter is OverlappedPresenter { State: OverlappedPresenterState.Minimized } presenter)
+        {
+            presenter.Restore();
+        }
+
         this.Show();
-        BringToFront();
+        Activate();
+        this.SetForegroundWindow();
     }
 
     private void AppWindow_Changed(AppWindow sender, AppWindowChangedEventArgs args)
