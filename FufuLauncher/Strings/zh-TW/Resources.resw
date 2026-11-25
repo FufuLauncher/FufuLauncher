@@ -1593,6 +1593,9 @@
   <data name="NavCommunity" xml:space="preserve">
     <value>社群</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>結束並以系統管理員身分重新啟動</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>顯示主介面</value>
   </data>
