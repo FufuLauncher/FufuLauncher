@@ -1593,6 +1593,9 @@ Spiel muss neu gestartet werden, damit die Änderung wirksam wird!</value>
   <data name="NavCommunity" xml:space="preserve">
     <value>Community-Forum</value>
   </data>
+  <data name="TrayRestartAsAdministrator" xml:space="preserve">
+    <value>Als Administrator neu starten</value>
+  </data>
   <data name="TrayShowWindow" xml:space="preserve">
     <value>Hauptfenster anzeigen</value>
   </data>
