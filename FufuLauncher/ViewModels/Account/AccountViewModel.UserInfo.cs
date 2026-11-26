@@ -35,7 +35,7 @@ public partial class AccountViewModel
 
             var cookies = await _accountManager.LoadCookiesAsync(activeId);
             var entry = _accountManager.GetActiveAccountEntry();
-            if (cookies == null || entry == null)
+            if (cookies == null || entry == null || entry.Id != activeId)
             {
                 DebugLog.Info("AccountViewModel.UserInfo", "[LoadUserInfo] Failed to read account data");
                 RunOnUIThread(() => StatusMessage = "Account_PleaseLogin".GetLocalized());
@@ -52,8 +52,8 @@ public partial class AccountViewModel
 
             DebugLog.Info("AccountViewModel.UserInfo", $"[LoadUserInfo] Calling remote API... (account: {entry.Id})");
 
-            var rolesTask = _userInfoService.GetUserGameRolesAsync(cookieString);
-            var userInfoTask = _userInfoService.GetUserFullInfoAsync(cookieString);
+            var rolesTask = _userInfoService.GetUserGameRolesAsync(cookieString, entry.ServerType);
+            var userInfoTask = _userInfoService.GetUserFullInfoAsync(cookieString, entry.ServerType);
             await Task.WhenAll(rolesTask, userInfoTask);
 
             var newRolesInfo = await rolesTask;

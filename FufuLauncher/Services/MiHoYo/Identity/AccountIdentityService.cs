@@ -47,7 +47,7 @@ public sealed class AccountIdentityService
         var profile = _deviceService.Device;
         var serverType = ServerTypeExtensions.ParseServerType(ExtractServerType(accountId));
         var accountIdentity = new AccountIdentity(
-            Stuid: ExtractStuid(cookies, serverType),
+            Stuid: AccountCookieIdentity.GetUid(cookies) ?? "",
             Mid: cookies.GetValueOrDefault("mid") ?? cookies.GetValueOrDefault("account_mid_v2") ??
                  cookies.GetValueOrDefault("ltmid_v2") ?? "");
 
@@ -84,23 +84,4 @@ public sealed class AccountIdentityService
         return idx > 0 ? accountId[..idx] : "cn";
     }
 
-    private static string ExtractStuid(Dictionary<string, string> cookies, ServerType serverType)
-    {
-        if (serverType == ServerType.Cn)
-        {
-            if (cookies.TryGetValue("ltuid", out var ltuid) && !string.IsNullOrEmpty(ltuid))
-                return ltuid;
-            if (cookies.TryGetValue("stuid", out var stuid) && !string.IsNullOrEmpty(stuid))
-                return stuid;
-        }
-        else
-        {
-            if (cookies.TryGetValue("ltuid_v2", out var ltuidV2) && !string.IsNullOrEmpty(ltuidV2))
-                return ltuidV2;
-            if (cookies.TryGetValue("stuid", out var stuid) && !string.IsNullOrEmpty(stuid))
-                return stuid;
-        }
-
-        return "";
-    }
 }

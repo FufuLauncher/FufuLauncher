@@ -46,7 +46,8 @@ public sealed partial class BBSWindow
             "getHTTPRequestHeaders" => GetHttpRequestHeader(),
             "getCookieInfo" => GetCookieInfoMinimal(),
             "getCookieToken" => new JsResult
-                { Data = new() { ["cookie_token"] = cookieDic.GetValueOrDefault("cookie_token") ?? "" } },
+                { Data = new() { ["cookie_token"] = cookieDic.GetValueOrDefault("cookie_token") ??
+                                                       cookieDic.GetValueOrDefault("cookie_token_v2") ?? "" } },
             "getStatusBarHeight" => new JsResult { Data = new() { ["statusBarHeight"] = 0 } },
             "getUserInfo" => GetUserInfo(),
             "getCurrentLocale" => new JsResult { Data = new() { ["language"] = "zh-cn", ["timeZone"] = "GMT+8" } },

@@ -22,8 +22,9 @@ public sealed class GameRoleService(AccountManager accounts, IUserInfoService us
 
     public async Task RefreshAsync()
     {
-        var accountId = accounts.ActiveAccountId;
-        if (accountId == null) return;
+        var account = accounts.GetActiveAccountEntry();
+        if (account == null) return;
+        var accountId = account.Id;
         await _refreshLock.WaitAsync();
         try
         {
@@ -32,7 +33,7 @@ public sealed class GameRoleService(AccountManager accounts, IUserInfoService us
             if (cookies == null || cookies.Count == 0)
                 throw new InvalidOperationException("Account_CannotReadLoginInfo".GetLocalized());
             var response = await userInfo.GetUserGameRolesAsync(
-                string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}")));
+                string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}")), account.ServerType);
             if (response.retcode != 0 || response.data?.list == null)
                 throw new InvalidOperationException(string.Format("Account_FetchRolesFailed_Format".GetLocalized(), response.retcode));
             if (accounts.ActiveAccountId != accountId) return;

@@ -49,7 +49,7 @@ public sealed class DailyNoteService
                            ?? throw new InvalidOperationException("DailyNote_NoIdentityService".GetLocalized());
     }
 
-    public async Task<DailyNoteCardData?> GetDailyNoteAsync(string roleId, string server, string? accountId = null)
+    public async Task<DailyNoteCardData> GetDailyNoteAsync(string roleId, string server, string? accountId = null)
     {
         await _semaphore.WaitAsync();
         try
@@ -200,7 +200,7 @@ public sealed class DailyNoteService
 
     private async Task<string> RequestAsync(string apiUrl, AccountContext ctx, string? challenge)
     {
-        string cookieStr = BbsRequestBuilder.BuildCookieString(ctx.Cookies, BbsRequestBuilder.CookieMode.Cookie);
+        string cookieStr = BbsRequestBuilder.BuildCookieString(ctx.Cookies, BbsRequestBuilder.CookieMode.CnWeb);
 
         using var req = new HttpRequestMessage(HttpMethod.Get, apiUrl);
         MiHoYoHeaderFactory.ApplyGameRecordHeaders(req, new GameRecordHeaderOptions(

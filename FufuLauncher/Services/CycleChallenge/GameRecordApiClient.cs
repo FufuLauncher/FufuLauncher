@@ -437,7 +437,8 @@ public sealed class GameRecordApiClient
         AccountContext context, bool isOversea, HttpMethod method, string apiName, string rawQuery, string? jsonBody,
         string challengePath, CancellationToken token)
     {
-        var primaryCookie = BbsRequestBuilder.BuildCookieString(context.Cookies, BbsRequestBuilder.CookieMode.Cookie);
+        var primaryCookie = BbsRequestBuilder.BuildCookieString(context.Cookies,
+            isOversea ? BbsRequestBuilder.CookieMode.Cookie : BbsRequestBuilder.CookieMode.CnWeb);
         var alternateCookies = BuildAlternateRecordCookieStrings(context.Cookies, primaryCookie);
         RawChallengeResponse? bestNonSuccess = null;
 
@@ -545,7 +546,7 @@ public sealed class GameRecordApiClient
     {
         string cookie = !string.IsNullOrEmpty(cookieOverride)
             ? cookieOverride
-            : BbsRequestBuilder.BuildCookieString(context.Cookies, BbsRequestBuilder.CookieMode.Cookie);
+            : BbsRequestBuilder.BuildCookieString(context.Cookies, BbsRequestBuilder.CookieMode.CnWeb);
         MiHoYoHeaderFactory.ApplyGameRecordHeaders(request, new GameRecordHeaderOptions(
             AppVersion: HeaderVersions.MobileCnLogin,
             UserAgent: context.UserAgent.Mobile,

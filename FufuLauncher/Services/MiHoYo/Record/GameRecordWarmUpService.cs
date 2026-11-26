@@ -166,7 +166,7 @@ public sealed class GameRecordWarmUpService
         string playerQuery = $"role_id={Uri.EscapeDataString(roleId)}&server={Uri.EscapeDataString(server)}";
         string query = $"avatar_list_type=1&{playerQuery}";
         string url = $"{RecordApiBase}{IndexPath}?{query}";
-        string cookieStr = BbsRequestBuilder.BuildCookieString(context.Cookies, BbsRequestBuilder.CookieMode.Cookie);
+        string cookieStr = BbsRequestBuilder.BuildCookieString(context.Cookies, BbsRequestBuilder.CookieMode.CnWeb);
 
         using var req = new HttpRequestMessage(HttpMethod.Get, url);
         MiHoYoHeaderFactory.ApplyGameRecordHeaders(req, new GameRecordHeaderOptions(

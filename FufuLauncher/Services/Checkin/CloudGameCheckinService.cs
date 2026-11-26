@@ -17,13 +17,18 @@ public class CloudGameCheckinService : ICloudGameCheckinService
 {
     private readonly HttpClient _httpClient;
 
-    public CloudGameCheckinService()
-    {
-        _httpClient = new HttpClient(new HttpClientHandler
+    public CloudGameCheckinService() : this(new HttpClient(new HttpClientHandler
         {
+            UseCookies = false,
+            AllowAutoRedirect = false,
             AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
-        });
-        _httpClient.Timeout = TimeSpan.FromSeconds(30);
+        }) { Timeout = TimeSpan.FromSeconds(30) })
+    {
+    }
+
+    internal CloudGameCheckinService(HttpClient httpClient)
+    {
+        _httpClient = httpClient;
     }
 
     public async Task<CheckinTypeResult> ExecuteCheckinAsync(string uid, string comboToken)
@@ -53,7 +58,13 @@ public class CloudGameCheckinService : ICloudGameCheckinService
                 return result;
             }
 
-            int retcode = TryGetInt(data, "retcode");
+            if (!TryReadInt(data, "retcode", out int retcode))
+            {
+                result.Success = false;
+                result.Message = "Status_RequestFailed".GetLocalized();
+                return result;
+            }
+
             if (retcode == -100)
             {
                 result.Success = false;
@@ -70,6 +81,13 @@ public class CloudGameCheckinService : ICloudGameCheckinService
             }
 
             var wallet = TryGetProperty(data, "data");
+            if (wallet is not { ValueKind: JsonValueKind.Object })
+            {
+                result.Success = false;
+                result.Message = "Status_RequestFailed".GetLocalized();
+                return result;
+            }
+
             int freeTime = GetFreeTime(wallet);
             int sendFreeTime = GetSendFreeTime(wallet);
             int gained = sendFreeTime;
@@ -130,9 +148,11 @@ public class CloudGameCheckinService : ICloudGameCheckinService
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36");
         request.Headers.Add("Referer", ApiEndpoints.AppMihoyoBase);
 
-        var response = await _httpClient.SendAsync(request);
-        var text = await response.Content.ReadAsStringAsync();
-        return JsonDocument.Parse(text).RootElement;
+        using var response = await _httpClient.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        using var stream = await response.Content.ReadAsStreamAsync();
+        using var json = await JsonDocument.ParseAsync(stream);
+        return json.RootElement.Clone();
     }
 
     private async Task<int> RetryDetectGainedTime(string comboToken, int initialFreeTime)
@@ -150,7 +170,7 @@ public class CloudGameCheckinService : ICloudGameCheckinService
             return 0;
         }
 
-        if (TryGetInt(data, "retcode") != 0) return 0;
+        if (!TryReadInt(data, "retcode", out int retcode) || retcode != 0) return 0;
 
         var wallet = TryGetProperty(data, "data");
         int nextFreeTime = GetFreeTime(wallet);
@@ -181,22 +201,18 @@ public class CloudGameCheckinService : ICloudGameCheckinService
         return string.Format("CheckinCloud_MinutesOnly".GetLocalized(), mins);
     }
 
-    private static int TryGetInt(JsonElement element, string propertyName)
+    internal static bool TryReadInt(JsonElement element, string propertyName, out int value)
     {
-        try
-        {
-            var prop = element.GetProperty(propertyName);
-            if (prop.ValueKind == JsonValueKind.Number)
-                return prop.GetInt32();
-            if (prop.ValueKind == JsonValueKind.String && int.TryParse(prop.GetString(), out var result))
-                return result;
-            return 0;
-        }
-        catch
-        {
-            return 0;
-        }
+        value = 0;
+        if (element.ValueKind != JsonValueKind.Object || !element.TryGetProperty(propertyName, out var property))
+            return false;
+        return property.ValueKind == JsonValueKind.Number
+            ? property.TryGetInt32(out value)
+            : property.ValueKind == JsonValueKind.String && int.TryParse(property.GetString(), out value);
     }
+
+    private static int TryGetInt(JsonElement element, string propertyName) =>
+        TryReadInt(element, propertyName, out int value) ? value : 0;
 
     private static string? TryGetString(JsonElement element, string propertyName)
     {

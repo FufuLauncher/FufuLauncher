@@ -49,7 +49,7 @@ public record GameRecordCardResponse(int retcode, string message, GameRecordCard
 
 public interface IUserInfoService
 {
-    Task<GameRolesResponse> GetUserGameRolesAsync(string cookie);
-    Task<UserFullInfoResponse> GetUserFullInfoAsync(string cookie);
+    Task<GameRolesResponse> GetUserGameRolesAsync(string cookie, string serverType);
+    Task<UserFullInfoResponse> GetUserFullInfoAsync(string cookie, string serverType);
     Task<GameRecordCardResponse> GetGameRecordCardAsync(string stuid, string cookie);
 }

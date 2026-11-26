@@ -17,16 +17,13 @@ public class UserInfoService : IUserInfoService
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<UserInfoService> _logger;
-    private readonly ILocalSettingsService _localSettingsService;
     private readonly IHoyolabRoleResolverService _hoyolabRoleResolverService;
 
     public UserInfoService(
         ILogger<UserInfoService> logger,
-        ILocalSettingsService localSettingsService,
         IHoyolabRoleResolverService hoyolabRoleResolverService)
     {
         _logger = logger;
-        _localSettingsService = localSettingsService;
         _hoyolabRoleResolverService = hoyolabRoleResolverService;
         _httpClient = new HttpClient(new HttpClientHandler
         {
@@ -77,26 +74,11 @@ public class UserInfoService : IUserInfoService
         return $"{t},{r},{BitConverter.ToString(c).Replace("-", "").ToLower()}";
     }
 
-    private async Task<bool> IsInternationalAsync(string cookie)
-    {
-        var hasCnFields = cookie.Contains("ltuid=", StringComparison.OrdinalIgnoreCase) ||
-                          cookie.Contains("stuid=", StringComparison.OrdinalIgnoreCase);
-        var hasOsFields = cookie.Contains("ltuid_v2=", StringComparison.OrdinalIgnoreCase) ||
-                          cookie.Contains("account_id_v2=", StringComparison.OrdinalIgnoreCase) ||
-                          cookie.Contains("cookie_token_v2=", StringComparison.OrdinalIgnoreCase);
-
-        if (hasCnFields) return false;
-        if (hasOsFields) return true;
-
-        var isOsObj = await _localSettingsService.ReadSettingAsync("IsInternationalAccount");
-        return isOsObj is bool isOs && isOs;
-    }
-
-    public async Task<GameRolesResponse> GetUserGameRolesAsync(string cookie)
+    public async Task<GameRolesResponse> GetUserGameRolesAsync(string cookie, string serverType)
     {
         try
         {
-            bool isOs = await IsInternationalAsync(cookie);
+            bool isOs = string.Equals(serverType, "os", StringComparison.OrdinalIgnoreCase);
 
             if (isOs)
             {
@@ -152,11 +134,11 @@ public class UserInfoService : IUserInfoService
     }
 
 
-    public async Task<UserFullInfoResponse> GetUserFullInfoAsync(string cookie)
+    public async Task<UserFullInfoResponse> GetUserFullInfoAsync(string cookie, string serverType)
     {
         try
         {
-            bool isOs = await IsInternationalAsync(cookie);
+            bool isOs = string.Equals(serverType, "os", StringComparison.OrdinalIgnoreCase);
             var url = isOs ? ApiEndpoints.OverseaUserFullInfoUrl : ApiEndpoints.MiyousheUserFullInfoUrl;
             using var request = new HttpRequestMessage(HttpMethod.Get, url);
             if (isOs)

@@ -10,6 +10,7 @@ using System.Text.Json;
 using FufuLauncher.Constants;
 using FufuLauncher.Constants.MiHoYo;
 using FufuLauncher.Services.MiHoYo.Passport;
+using FufuLauncher.Services.MiHoYo.Transport;
 using FufuLauncher.Helpers;
 
 namespace FufuLauncher.Services.AuthTicket;
@@ -158,36 +159,10 @@ public sealed class AuthTicketService : IAuthTicketService
             request.Headers.Add(HeaderNames.RpcAppId, AppIds.GameCombo);
             request.Headers.Add(HeaderNames.RpcClientType, "3");
 
-            string cookieStr = BuildLTokenCookie(cookies);
+            string cookieStr = BbsRequestBuilder.BuildCookieString(cookies, BbsRequestBuilder.CookieMode.CnWeb);
             if (!string.IsNullOrEmpty(cookieStr))
                 request.Headers.Add(HeaderNames.Cookie, cookieStr);
         }
-    }
-
-    private static string BuildLTokenCookie(IReadOnlyDictionary<string, string> cookies)
-    {
-        var pairs = new List<string>();
-        if (TryFirstPair(cookies, "account_id", "account_id_v2") is { } aid)
-            pairs.Add($"{aid.Key}={aid.Value}");
-        if (TryFirstPair(cookies, "cookie_token", "cookie_token_v2") is { } ct)
-            pairs.Add($"{ct.Key}={ct.Value}");
-        if (TryFirstPair(cookies, "ltoken", "ltoken_v2") is { } lt)
-            pairs.Add($"{lt.Key}={lt.Value}");
-        if (TryFirstPair(cookies, "ltuid", "ltuid_v2") is { } lu)
-            pairs.Add($"{lu.Key}={lu.Value}");
-        return string.Join(";", pairs);
-    }
-
-    private static (string Key, string Value)? TryFirstPair(IReadOnlyDictionary<string, string> dict,
-        params string[] keys)
-    {
-        foreach (var key in keys)
-        {
-            if (dict.TryGetValue(key, out var value) && !string.IsNullOrEmpty(value))
-                return (key, value);
-        }
-
-        return null;
     }
 
     private static string GetFirstNonEmpty(IReadOnlyDictionary<string, string> dict, params string[] keys)

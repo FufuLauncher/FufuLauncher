@@ -116,7 +116,7 @@ public sealed class GeetestService
 
     private async Task<string> CallCreateVerificationAsync(AccountContext ctx, string challengePath)
     {
-        string cookieStr = BbsRequestBuilder.BuildCookieString(ctx.Cookies, BbsRequestBuilder.CookieMode.Cookie);
+        string cookieStr = BbsRequestBuilder.BuildCookieString(ctx.Cookies, BbsRequestBuilder.CookieMode.CnWeb);
         string ds = MiHoYoHeaderFactory.CalculateDs2(HeaderSalts.CnX4, "is_high=true", "");
         DebugLog.Info("GeetestService", $"[GeetestService] CallCreateVerification: device_fp={ctx.Device.DeviceFp}");
 
@@ -141,7 +141,7 @@ public sealed class GeetestService
     private async Task<string> CallVerifyVerificationAsync(AccountContext ctx, string challenge, string validate,
         string challengePath)
     {
-        string cookieStr = BbsRequestBuilder.BuildCookieString(ctx.Cookies, BbsRequestBuilder.CookieMode.Cookie);
+        string cookieStr = BbsRequestBuilder.BuildCookieString(ctx.Cookies, BbsRequestBuilder.CookieMode.CnWeb);
         GeetestWebResponse body = new()
         {
             Challenge = challenge,
