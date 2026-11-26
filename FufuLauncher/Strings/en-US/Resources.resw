@@ -14116,4 +14116,7 @@ Continue to the project page?</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Failed to write configuration: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Failed to copy configuration snippet to clipboard.</value>
+  </data>
 </root>

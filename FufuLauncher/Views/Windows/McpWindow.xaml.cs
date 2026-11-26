@@ -170,7 +170,7 @@ public sealed partial class McpWindow : Window
 
     private void OnCopyTokenClick(object sender, RoutedEventArgs e)
     {
-        CopyToClipboard(ViewModel.AccessToken);
+        CopyToClipboard(ViewModel.AccessToken, excludeFromHistory: true);
     }
 
     private async void OnRegenerateTokenClick(object sender, RoutedEventArgs e)
@@ -195,8 +195,14 @@ public sealed partial class McpWindow : Window
 
     private void OnCopyClientConfigClick(object sender, RoutedEventArgs e)
     {
-        CopyToClipboard(ViewModel.ClientConfigSnippet);
-        ViewModel.NotifyClientConfigCopied();
+        if (CopyToClipboard(ViewModel.ClientConfigSnippet, excludeFromHistory: true))
+        {
+            ViewModel.NotifyClientConfigCopied();
+        }
+        else
+        {
+            ViewModel.NotifyClientConfigCopyFailed();
+        }
     }
 
     private void OnInstallClientConfigClick(object sender, RoutedEventArgs e)
@@ -204,21 +210,35 @@ public sealed partial class McpWindow : Window
         ViewModel.InstallClientConfig();
     }
 
-    private void CopyToClipboard(string? text)
+    private bool CopyToClipboard(string? text, bool excludeFromHistory = false)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
-            return;
+            return false;
         }
 
         try
         {
             var package = new DataPackage();
             package.SetText(text);
-            Clipboard.SetContent(package);
+            if (excludeFromHistory)
+            {
+                Clipboard.SetContentWithOptions(package, new ClipboardContentOptions
+                {
+                    IsAllowedInHistory = false,
+                    IsRoamable = false
+                });
+            }
+            else
+            {
+                Clipboard.SetContent(package);
+            }
+
+            return true;
         }
         catch
         {
+            return false;
         }
     }
 

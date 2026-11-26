@@ -13456,4 +13456,7 @@ QQ चैनलों या Miyoushe से अलग, इसका उद्�
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>कॉन्फ़िगरेशन लिखने में विफल: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>कॉन्फ़िगरेशन स्निपेट क्लिपबोर्ड पर कॉपी करने में विफल।</value>
+  </data>
 </root>

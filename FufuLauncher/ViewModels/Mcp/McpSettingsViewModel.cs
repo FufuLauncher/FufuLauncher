@@ -4,6 +4,7 @@ Licensed under the MIT License.
 */
 
 using System.Collections.ObjectModel;
+using System.Net;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Helpers;
 using FufuLauncher.Models;
@@ -406,6 +407,8 @@ public sealed class McpSettingsViewModel : ObservableObject
             ? Visibility.Visible
             : Visibility.Collapsed;
 
+    public bool IsClientIntegrationReady => _initialized;
+
     public async Task InitializeAsync()
     {
         if (_initialized)
@@ -444,6 +447,7 @@ public sealed class McpSettingsViewModel : ObservableObject
         }
 
         _initialized = true;
+        OnPropertyChanged(nameof(IsClientIntegrationReady));
         RaiseLayout();
         RefreshStatus();
         RefreshAuditSummary();
@@ -454,8 +458,18 @@ public sealed class McpSettingsViewModel : ObservableObject
         ShowClientActionMessage("Mcp_ClientCopied".GetLocalized(), isError: false);
     }
 
+    public void NotifyClientConfigCopyFailed()
+    {
+        ShowClientActionMessage("Mcp_ClientCopyFailed".GetLocalized(), isError: true);
+    }
+
     public void InstallClientConfig()
     {
+        if (!_initialized)
+        {
+            return;
+        }
+
         var agent = GetSelectedAgent();
         var endpointUrl = GetSelectedClientEndpoint();
         var token = _host.RequireAuth ? _host.AccessToken : null;
@@ -708,7 +722,9 @@ public sealed class McpSettingsViewModel : ObservableObject
 
         DshProfileVisibility = agent.SupportsDshProfile ? Visibility.Visible : Visibility.Collapsed;
         ClientEndpointWarningVisibility =
-            _endpointModeIndex == 1 && _host.IsLocalhostOnly ? Visibility.Visible : Visibility.Collapsed;
+            _host.IsLocalhostOnly && IsNonLoopbackEndpoint(endpointUrl)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
 
         if (!string.IsNullOrEmpty(agent.NoteKey))
         {
@@ -748,6 +764,21 @@ public sealed class McpSettingsViewModel : ObservableObject
             ClientConfigStatus = string.Format("Mcp_ClientState_InvalidFormat".GetLocalized(), ex.Message);
             ClientInstallButtonText = "Mcp_ClientInstallConfig".GetLocalized();
         }
+    }
+
+    private static bool IsNonLoopbackEndpoint(string endpointUrl)
+    {
+        if (!Uri.TryCreate(endpointUrl, UriKind.Absolute, out var uri))
+        {
+            return false;
+        }
+
+        if (IPAddress.TryParse(uri.Host, out var address))
+        {
+            return !IPAddress.IsLoopback(address);
+        }
+
+        return !string.Equals(uri.Host, "localhost", StringComparison.OrdinalIgnoreCase);
     }
 
     private void ShowClientActionMessage(string message, bool isError)

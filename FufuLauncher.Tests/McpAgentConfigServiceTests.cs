@@ -22,7 +22,7 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         _appDataDir = Path.Combine(_tempRoot, "AppData");
         Directory.CreateDirectory(_userProfileDir);
         Directory.CreateDirectory(_appDataDir);
-        _service = new McpAgentConfigService(_userProfileDir, _appDataDir);
+        _service = new McpAgentConfigService(_userProfileDir, _appDataDir, _ => null);
     }
 
     public void Dispose()
@@ -148,13 +148,18 @@ public sealed class McpAgentConfigServiceTests : IDisposable
     {
         var path = _service.ResolveConfigPath(McpAgentId.Codex);
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
-        File.WriteAllText(path, """
+        File.WriteAllText(path, """"
             # User comment
             model = "gpt-5"
             instructions = '''
             [mcp_servers.fufu-launcher]
             url = "http://not-a-section"
             '''
+            escaped_doc = """
+            prefix \"""
+            [mcp_servers.fufu-launcher]
+            url = "http://still-inside-string"
+            """
 
             [mcp_servers.cadence]
             command = 'cadence-cli.exe'
@@ -167,19 +172,20 @@ public sealed class McpAgentConfigServiceTests : IDisposable
 
             [windows]
             sandbox = "elevated"
-            """);
+            """");
 
         Assert.Equal(McpAgentInstallState.NeedsUpdate,
             _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
 
         var result = _service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token);
-        Assert.True(result.Succeeded);
+        Assert.True(result.Succeeded, result.ErrorMessage);
         Assert.Equal(McpAgentInstallState.Configured,
             _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
 
         var text = File.ReadAllText(path);
         Assert.Contains("# User comment", text);
         Assert.Contains("url = \"http://not-a-section\"", text);
+        Assert.Contains("url = \"http://still-inside-string\"", text);
         Assert.Contains("[mcp_servers.cadence]", text);
         Assert.Contains("[windows]", text);
         Assert.DoesNotContain("oldtoken", text);
@@ -195,11 +201,45 @@ public sealed class McpAgentConfigServiceTests : IDisposable
     }
 
     [Fact]
-    public void DeepSeekHarnessCordisYamlPreservesExistingEntriesAndJsTags()
+    public void CodexTomlHandlesDottedKeysAndRejectsMalformedInput()
+    {
+        var path = _service.ResolveConfigPath(McpAgentId.Codex);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, """
+            model = "gpt-5"
+            mcp_servers.fufu-launcher.url = "http://127.0.0.1:9999/mcp"
+            mcp_servers.fufu-launcher.http_headers.Authorization = "Bearer oldtoken"
+            """);
+
+        Assert.Equal(McpAgentInstallState.NeedsUpdate,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
+
+        var result = _service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token);
+        Assert.True(result.Succeeded, result.ErrorMessage);
+        Assert.Equal(McpAgentInstallState.Configured,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
+
+        var updated = File.ReadAllText(path);
+        Assert.DoesNotContain("mcp_servers.fufu-launcher.url", updated);
+        Assert.DoesNotContain("oldtoken", updated);
+        Assert.Contains("[mcp_servers.fufu-launcher]", updated);
+
+        const string malformed = "model = [\n";
+        File.WriteAllText(path, malformed);
+        Assert.Equal(McpAgentInstallState.InvalidFile,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
+        var failedInstall = _service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token);
+        Assert.False(failedInstall.Succeeded);
+        Assert.Equal(malformed, File.ReadAllText(path));
+    }
+
+    [Fact]
+    public void DeepSeekHarnessCordisYamlPreservesExistingEntriesJsTagsAndExtraDocuments()
     {
         var path = _service.ResolveConfigPath(McpAgentId.DeepSeekHarness, "custom");
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         File.WriteAllText(path, """
+            ---
             - insert:
                 - id: mcp-github
                   name: '@deepseek-ai/dsh-mcp-client'
@@ -209,13 +249,15 @@ public sealed class McpAgentConfigServiceTests : IDisposable
                     command: npx
                     env:
                       GITHUB_TOKEN: !!js process.env.GITHUB_TOKEN
+            ---
+            - note: second-document
             """);
 
         Assert.Equal(McpAgentInstallState.NotConfigured,
             _service.Inspect(McpAgentId.DeepSeekHarness, LocalUrl, Token, "custom").State);
 
         var install = _service.InstallOrUpdate(McpAgentId.DeepSeekHarness, LocalUrl, Token, "custom");
-        Assert.True(install.Succeeded);
+        Assert.True(install.Succeeded, install.ErrorMessage);
         Assert.Equal(McpAgentInstallState.Configured,
             _service.Inspect(McpAgentId.DeepSeekHarness, LocalUrl, Token, "custom").State);
 
@@ -231,26 +273,109 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Contains("mcp-github", yamlText);
         Assert.Contains("!!js", yamlText);
         Assert.Contains(updatedUrl, yamlText);
+        Assert.Contains("second-document", yamlText);
         Assert.Equal(1, CountOccurrences(yamlText, "mcp-fufu-launcher"));
         Assert.DoesNotContain("Authorization", yamlText);
     }
 
     [Fact]
-    public void DeepSeekHarnessMcpCenterUsesServersRootKey()
+    public void DeepSeekHarnessMcpCenterUsesServersArraySchemaAndPreservesEntries()
     {
+        var path = _service.ResolveConfigPath(McpAgentId.DeepSeekHarnessMcpCenter);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, """
+            {
+              "servers": [
+                {
+                  "id": "srv_other",
+                  "name": "other",
+                  "type": "stdio",
+                  "command": "npx",
+                  "enabled": true
+                },
+                {
+                  "id": "srv_custom_fufu",
+                  "name": "fufu-launcher",
+                  "type": "http",
+                  "url": "http://127.0.0.1:9999/mcp",
+                  "authMode": "none",
+                  "enabled": false
+                }
+              ]
+            }
+            """);
+
+        Assert.Equal(McpAgentInstallState.NeedsUpdate,
+            _service.Inspect(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).State);
+
         var install = _service.InstallOrUpdate(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token);
-        Assert.True(install.Succeeded);
+        Assert.True(install.Succeeded, install.ErrorMessage);
         Assert.Equal(McpAgentInstallState.Configured,
             _service.Inspect(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).State);
 
-        var root = JsonNode.Parse(File.ReadAllText(install.FilePath))!.AsObject();
-        var fufu = root["servers"]![McpAgentConfigService.ServerName]!.AsObject();
-        Assert.Equal("streamable-http", fufu["transport"]!.GetValue<string>());
+        var root = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+        var servers = root["servers"]!.AsArray();
+        Assert.Equal(2, servers.Count);
+        Assert.Equal("srv_other", servers[0]!["id"]!.GetValue<string>());
+
+        var fufu = servers[1]!.AsObject();
+        Assert.Equal("srv_custom_fufu", fufu["id"]!.GetValue<string>());
+        Assert.Equal("http", fufu["type"]!.GetValue<string>());
         Assert.Equal(LocalUrl, fufu["url"]!.GetValue<string>());
+        Assert.Equal("bearer", fufu["authMode"]!.GetValue<string>());
+        Assert.Equal(Token, fufu["token"]!.GetValue<string>());
+        Assert.False(fufu["enabled"]!.GetValue<bool>());
+
+        // Auth off switches authMode to none and strips token.
+        Assert.True(_service.InstallOrUpdate(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, null).Succeeded);
+        Assert.Equal(McpAgentInstallState.Configured,
+            _service.Inspect(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, null).State);
+        var updatedRoot = JsonNode.Parse(File.ReadAllText(path))!.AsObject();
+        var updatedFufu = updatedRoot["servers"]![1]!.AsObject();
+        Assert.Equal("none", updatedFufu["authMode"]!.GetValue<string>());
+        Assert.False(updatedFufu.ContainsKey("token"));
+
+        // Non-array servers should fail cleanly without overwriting.
+        const string invalidCenter = """{ "servers": {} }""";
+        File.WriteAllText(path, invalidCenter);
+        Assert.Equal(McpAgentInstallState.InvalidFile,
+            _service.Inspect(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).State);
+        Assert.False(_service.InstallOrUpdate(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).Succeeded);
+        Assert.Equal(invalidCenter, File.ReadAllText(path));
     }
 
     [Fact]
-    public void DiscoverDshProfilesEnumeratesFoldersAndRejectsPathTraversal()
+    public void EnvOverridesControlCodexHomeAndDshHome()
+    {
+        var customCodexHome = Path.Combine(_tempRoot, "custom-codex");
+        var customDshHome = Path.Combine(_tempRoot, "custom-dsh");
+        Directory.CreateDirectory(Path.Combine(customDshHome, "profiles", "work"));
+
+        var service = new McpAgentConfigService(
+            _userProfileDir,
+            _appDataDir,
+            name => name switch
+            {
+                "CODEX_HOME" => customCodexHome,
+                "DSH_HOME" => customDshHome,
+                _ => null
+            });
+
+        Assert.Equal(["work"], service.DiscoverDshProfiles());
+        Assert.Equal(Path.Combine(customCodexHome, "config.toml"),
+            service.ResolveConfigPath(McpAgentId.Codex));
+        Assert.Equal(Path.Combine(customDshHome, "profiles", "work", "cordis.patch.yml"),
+            service.ResolveConfigPath(McpAgentId.DeepSeekHarness, "work"));
+        Assert.Equal(Path.Combine(customDshHome, "mcp-center.json"),
+            service.ResolveConfigPath(McpAgentId.DeepSeekHarnessMcpCenter));
+
+        Assert.True(service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token).Succeeded);
+        Assert.True(File.Exists(Path.Combine(customCodexHome, "config.toml")));
+        Assert.False(File.Exists(Path.Combine(_userProfileDir, ".codex", "config.toml")));
+    }
+
+    [Fact]
+    public void DiscoverDshProfilesAndInvalidProfileInstallHandleErrorsGracefully()
     {
         Assert.Equal(["web"], _service.DiscoverDshProfiles());
 
@@ -259,19 +384,24 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Equal(["alpha", "beta"], _service.DiscoverDshProfiles());
 
         Assert.Throws<ArgumentException>(() => _service.ResolveConfigPath(McpAgentId.DeepSeekHarness, "../evil"));
+
+        var dotResult = _service.InstallOrUpdate(McpAgentId.DeepSeekHarness, LocalUrl, Token, ".");
+        Assert.False(dotResult.Succeeded);
+        Assert.False(string.IsNullOrWhiteSpace(dotResult.ErrorMessage));
     }
 
     [Theory]
-    [InlineData(McpAgentId.Antigravity, "mcpServers", "Authorization")]
-    [InlineData(McpAgentId.ClaudeCode, "\"type\": \"http\"", "Authorization")]
-    [InlineData(McpAgentId.Codex, "[mcp_servers.fufu-launcher]", "[mcp_servers.fufu-launcher.http_headers]")]
-    [InlineData(McpAgentId.ClaudeDesktop, "\"--allow-http\"", "Authorization: Bearer")]
-    [InlineData(McpAgentId.DeepSeekHarness, "@deepseek-ai/dsh-mcp-client", "Authorization")]
-    [InlineData(McpAgentId.DeepSeekHarnessMcpCenter, "\"servers\"", "Authorization")]
+    [InlineData(McpAgentId.Antigravity, "mcpServers", "Authorization", "headers")]
+    [InlineData(McpAgentId.ClaudeCode, "\"type\": \"http\"", "Authorization", "headers")]
+    [InlineData(McpAgentId.Codex, "[mcp_servers.fufu-launcher]", "[mcp_servers.fufu-launcher.http_headers]", "Authorization")]
+    [InlineData(McpAgentId.ClaudeDesktop, "\"--allow-http\"", "Authorization: Bearer", "Authorization")]
+    [InlineData(McpAgentId.DeepSeekHarness, "@deepseek-ai/dsh-mcp-client", "Authorization", "Authorization")]
+    [InlineData(McpAgentId.DeepSeekHarnessMcpCenter, "\"type\": \"http\"", "\"authMode\": \"bearer\"", "\"token\"")]
     public void BuildSnippetProducesValidAuthAndNoAuthVariantsForEveryClient(
         McpAgentId agentId,
         string expectedMarker,
-        string expectedAuthMarker)
+        string expectedAuthMarker,
+        string forbiddenNoAuthMarker)
     {
         var withAuth = _service.BuildSnippet(agentId, LocalUrl, Token);
         Assert.Contains(LocalUrl, withAuth);
@@ -283,7 +413,7 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Contains(LocalUrl, withoutAuth);
         Assert.Contains(expectedMarker, withoutAuth);
         Assert.DoesNotContain(Token, withoutAuth);
-        Assert.DoesNotContain("Authorization", withoutAuth);
+        Assert.DoesNotContain(forbiddenNoAuthMarker, withoutAuth);
     }
 
     private static int CountOccurrences(string text, string pattern)

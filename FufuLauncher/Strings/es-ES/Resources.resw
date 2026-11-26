@@ -13465,4 +13465,7 @@ Los usuarios del servidor global pueden importar registros mediante «Obtener po
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Error al escribir la configuración: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>No se pudo copiar el fragmento de configuración al portapapeles.</value>
+  </data>
 </root>

@@ -13464,4 +13464,7 @@ Continuer vers la page du projet ?</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Échec de l'écriture de la configuration : {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Impossible de copier l'extrait de configuration dans le presse-papiers.</value>
+  </data>
 </root>

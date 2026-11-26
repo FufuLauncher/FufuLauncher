@@ -13465,4 +13465,7 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Не удалось записать конфигурацию: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Не удалось скопировать фрагмент конфигурации в буфер обмена.</value>
+  </data>
 </root>

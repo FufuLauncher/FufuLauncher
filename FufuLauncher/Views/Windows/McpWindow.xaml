@@ -351,11 +351,13 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{helpers:Loc Key=Mcp_ClientTargetTitle}"
+                                <TextBlock x:Name="ClientTargetLabel"
+                                           Text="{helpers:Loc Key=Mcp_ClientTargetTitle}"
                                            Style="{StaticResource RowTitleStyle}"
                                            VerticalAlignment="Center" />
                                 <ComboBox Grid.Column="1"
                                           MinWidth="240"
+                                          AutomationProperties.LabeledBy="{x:Bind ClientTargetLabel}"
                                           ItemsSource="{x:Bind ViewModel.AgentOptions}"
                                           SelectedIndex="{x:Bind ViewModel.SelectedAgentIndex, Mode=TwoWay}">
                                     <ComboBox.ItemTemplate>
@@ -371,11 +373,13 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Text="{helpers:Loc Key=Mcp_ClientEndpointTitle}"
+                                <TextBlock x:Name="ClientEndpointLabel"
+                                           Text="{helpers:Loc Key=Mcp_ClientEndpointTitle}"
                                            Style="{StaticResource RowTitleStyle}"
                                            VerticalAlignment="Center" />
                                 <ComboBox Grid.Column="1"
                                           MinWidth="240"
+                                          AutomationProperties.LabeledBy="{x:Bind ClientEndpointLabel}"
                                           SelectedIndex="{x:Bind ViewModel.EndpointModeIndex, Mode=TwoWay}">
                                     <ComboBoxItem Content="{helpers:Loc Key=Mcp_ClientEndpointLocal}" />
                                     <ComboBoxItem Content="{helpers:Loc Key=Mcp_ClientEndpointPrimary}" />
@@ -396,7 +400,8 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Spacing="2">
-                                        <TextBlock Text="{helpers:Loc Key=Mcp_ClientDshProfileTitle}"
+                                        <TextBlock x:Name="ClientDshProfileLabel"
+                                                   Text="{helpers:Loc Key=Mcp_ClientDshProfileTitle}"
                                                    Style="{StaticResource RowTitleStyle}" />
                                         <TextBlock Text="{helpers:Loc Key=Mcp_ClientDshProfileCaption}"
                                                    Style="{StaticResource RowCaptionStyle}" />
@@ -406,6 +411,7 @@
                                              VerticalAlignment="Center"
                                              FontFamily="Consolas"
                                              FontSize="12"
+                                             AutomationProperties.LabeledBy="{x:Bind ClientDshProfileLabel}"
                                              Text="{x:Bind ViewModel.DshProfileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <TextBlock Text="{x:Bind ViewModel.DshProfilesCaption, Mode=OneWay}"
@@ -433,9 +439,11 @@
                                        Visibility="{x:Bind ViewModel.ClientNoteVisibility, Mode=OneWay}" />
 
                             <StackPanel Spacing="6">
-                                <TextBlock Text="{helpers:Loc Key=Mcp_ClientPreviewTitle}"
+                                <TextBlock x:Name="ClientPreviewLabel"
+                                           Text="{helpers:Loc Key=Mcp_ClientPreviewTitle}"
                                            Style="{StaticResource RowTitleStyle}" />
                                 <TextBox Text="{x:Bind ViewModel.ClientConfigSnippet, Mode=OneWay}"
+                                         AutomationProperties.LabeledBy="{x:Bind ClientPreviewLabel}"
                                          IsReadOnly="True"
                                          AcceptsReturn="True"
                                          TextWrapping="NoWrap"
@@ -448,9 +456,11 @@
 
                             <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
                                 <Button Content="{helpers:Loc Key=Mcp_ClientCopyConfig}"
+                                        IsEnabled="{x:Bind ViewModel.IsClientIntegrationReady, Mode=OneWay}"
                                         Click="OnCopyClientConfigClick" />
                                 <Button Style="{ThemeResource AccentButtonStyle}"
                                         Content="{x:Bind ViewModel.ClientInstallButtonText, Mode=OneWay}"
+                                        IsEnabled="{x:Bind ViewModel.IsClientIntegrationReady, Mode=OneWay}"
                                         Click="OnInstallClientConfigClick" />
                             </StackPanel>
 

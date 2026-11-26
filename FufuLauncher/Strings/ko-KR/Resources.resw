@@ -13465,4 +13465,7 @@ UID {1}용 새 데이터 아카이브를 만드시겠습니까?</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>설정을 기록하지 못했습니다: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>구성 스니펫을 클립보드에 복사하지 못했습니다.</value>
+  </data>
 </root>

@@ -13465,4 +13465,7 @@ Zur Projektseite fortfahren?</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Konfiguration konnte nicht geschrieben werden: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Konfigurations-Snippet konnte nicht in die Zwischenablage kopiert werden.</value>
+  </data>
 </root>

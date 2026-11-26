@@ -13463,4 +13463,7 @@ Lanjutkan ke halaman proyek?</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Gagal menulis konfigurasi: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Gagal menyalin cuplikan konfigurasi ke papan klip.</value>
+  </data>
 </root>

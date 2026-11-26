@@ -96,43 +96,56 @@ public sealed class McpAgentConfigService
 
     private readonly string _userProfileDir;
     private readonly string _appDataDir;
+    private readonly Func<string, string?> _getEnvironmentVariable;
 
     public McpAgentConfigService()
         : this(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            Environment.GetEnvironmentVariable)
     {
     }
 
-    public McpAgentConfigService(string userProfileDir, string appDataDir)
+    public McpAgentConfigService(
+        string userProfileDir,
+        string appDataDir,
+        Func<string, string?>? getEnvironmentVariable = null)
     {
         _userProfileDir = userProfileDir;
         _appDataDir = appDataDir;
+        _getEnvironmentVariable = getEnvironmentVariable ?? Environment.GetEnvironmentVariable;
     }
 
     public static McpAgentDescriptor GetDescriptor(McpAgentId agentId) =>
         Agents.First(agent => agent.Id == agentId);
 
     /// <summary>
-    /// Discovers existing DeepSeek Harness profile names under <c>.dsh/profiles</c>.
+    /// Discovers existing DeepSeek Harness profile names under <c>$DSH_HOME/profiles</c> or <c>~/.dsh/profiles</c>.
     /// </summary>
     public IReadOnlyList<string> DiscoverDshProfiles()
     {
-        var profilesRoot = Path.Combine(_userProfileDir, ".dsh", "profiles");
+        var profilesRoot = Path.Combine(ResolveDshHome(), "profiles");
         var discovered = new List<string>();
 
-        if (Directory.Exists(profilesRoot))
+        try
         {
-            foreach (var dir in Directory.GetDirectories(profilesRoot))
+            if (Directory.Exists(profilesRoot))
             {
-                var name = Path.GetFileName(dir);
-                if (!string.IsNullOrWhiteSpace(name))
+                foreach (var dir in Directory.GetDirectories(profilesRoot))
                 {
-                    discovered.Add(name);
+                    var name = Path.GetFileName(dir);
+                    if (!string.IsNullOrWhiteSpace(name))
+                    {
+                        discovered.Add(name);
+                    }
                 }
-            }
 
-            discovered.Sort(StringComparer.OrdinalIgnoreCase);
+                discovered.Sort(StringComparer.OrdinalIgnoreCase);
+            }
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            // Fall back to the default profile so manual entry remains available.
         }
 
         if (discovered.Count == 0)
@@ -151,11 +164,11 @@ public sealed class McpAgentConfigService
         {
             McpAgentId.Antigravity => Path.Combine(_userProfileDir, ".gemini", "config", "mcp_config.json"),
             McpAgentId.ClaudeCode => Path.Combine(_userProfileDir, ".claude.json"),
-            McpAgentId.Codex => Path.Combine(_userProfileDir, ".codex", "config.toml"),
+            McpAgentId.Codex => Path.Combine(ResolveCodexHome(), "config.toml"),
             McpAgentId.ClaudeDesktop => Path.Combine(_appDataDir, "Claude", "claude_desktop_config.json"),
-            McpAgentId.DeepSeekHarness => Path.Combine(_userProfileDir, ".dsh", "profiles",
+            McpAgentId.DeepSeekHarness => Path.Combine(ResolveDshHome(), "profiles",
                 SanitizeProfileName(dshProfile), "cordis.patch.yml"),
-            McpAgentId.DeepSeekHarnessMcpCenter => Path.Combine(_userProfileDir, ".dsh", "mcp-center.json"),
+            McpAgentId.DeepSeekHarnessMcpCenter => Path.Combine(ResolveDshHome(), "mcp-center.json"),
             _ => throw new ArgumentOutOfRangeException(nameof(agentId), agentId, null)
         };
 
@@ -168,8 +181,10 @@ public sealed class McpAgentConfigService
         return agentId switch
         {
             McpAgentId.Codex => BuildCodexTomlBlock(endpointUrl, token, "\n"),
-            McpAgentId.DeepSeekHarness => SerializeCordisYaml(new YamlSequenceNode(BuildCordisPatchBlock(endpointUrl, token))),
-            _ => MergeJsonContent(null, GetJsonMapKey(agentId), BuildJsonServerEntry(agentId, endpointUrl, token))
+            McpAgentId.DeepSeekHarness => SerializeCordisYamlStream(
+                new YamlStream(new YamlDocument(new YamlSequenceNode(BuildCordisPatchBlock(endpointUrl, token))))),
+            McpAgentId.DeepSeekHarnessMcpCenter => MergeMcpCenterJsonContent(null, endpointUrl, token),
+            _ => MergeJsonMapContent(null, "mcpServers", BuildJsonServerEntry(agentId, endpointUrl, token))
         };
     }
 
@@ -202,7 +217,8 @@ public sealed class McpAgentConfigService
             {
                 McpAgentId.Codex => InspectTomlState(content, endpointUrl, token),
                 McpAgentId.DeepSeekHarness => InspectCordisYamlState(content, endpointUrl, token),
-                _ => InspectJsonState(content, GetJsonMapKey(agentId), BuildJsonServerEntry(agentId, endpointUrl, token))
+                McpAgentId.DeepSeekHarnessMcpCenter => InspectMcpCenterJsonState(content, endpointUrl, token),
+                _ => InspectJsonMapState(content, "mcpServers", BuildJsonServerEntry(agentId, endpointUrl, token))
             };
             return new McpAgentInspection(state, path);
         }
@@ -218,19 +234,34 @@ public sealed class McpAgentConfigService
     public McpAgentInstallResult InstallOrUpdate(McpAgentId agentId, string endpointUrl, string? bearerToken,
         string? dshProfile = null)
     {
-        var path = ResolveConfigPath(agentId, dshProfile);
-        string? existing = null;
+        var path = string.Empty;
 
         try
         {
-            if (File.Exists(path))
+            path = ResolveConfigPath(agentId, dshProfile);
+            string? existing = File.Exists(path) ? File.ReadAllText(path, Encoding.UTF8) : null;
+
+            for (var attempt = 0; attempt < 2; attempt++)
             {
-                existing = File.ReadAllText(path, Encoding.UTF8);
+                var updated = MergeContent(agentId, existing, endpointUrl, bearerToken);
+
+                var currentOnDisk = File.Exists(path) ? File.ReadAllText(path, Encoding.UTF8) : null;
+                if (!string.Equals(currentOnDisk, existing, StringComparison.Ordinal))
+                {
+                    if (attempt == 0)
+                    {
+                        existing = currentOnDisk;
+                        continue;
+                    }
+
+                    throw new IOException("Configuration file changed concurrently while saving.");
+                }
+
+                WriteFileAtomically(path, updated, hadExistingFile: existing != null);
+                return new McpAgentInstallResult(true, path);
             }
 
-            var updated = MergeContent(agentId, existing, endpointUrl, bearerToken);
-            WriteFileAtomically(path, updated);
-            return new McpAgentInstallResult(true, path);
+            throw new IOException("Configuration file changed concurrently while saving.");
         }
         catch (Exception ex)
         {
@@ -246,9 +277,27 @@ public sealed class McpAgentConfigService
         {
             McpAgentId.Codex => MergeCodexTomlContent(existingContent, endpointUrl, token),
             McpAgentId.DeepSeekHarness => MergeCordisYamlContent(existingContent, endpointUrl, token),
-            _ => MergeJsonContent(existingContent, GetJsonMapKey(agentId),
+            McpAgentId.DeepSeekHarnessMcpCenter => MergeMcpCenterJsonContent(existingContent, endpointUrl, token),
+            _ => MergeJsonMapContent(existingContent, "mcpServers",
                 BuildJsonServerEntry(agentId, endpointUrl, token))
         };
+    }
+
+    private string ResolveCodexHome() =>
+        ResolveDirectoryOverride("CODEX_HOME") ?? Path.Combine(_userProfileDir, ".codex");
+
+    private string ResolveDshHome() =>
+        ResolveDirectoryOverride("DSH_HOME") ?? Path.Combine(_userProfileDir, ".dsh");
+
+    private string? ResolveDirectoryOverride(string variableName)
+    {
+        var value = _getEnvironmentVariable(variableName);
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return null;
+        }
+
+        return Path.GetFullPath(value.Trim());
     }
 
     private static string SanitizeProfileName(string? profile)
@@ -273,9 +322,6 @@ public sealed class McpAgentConfigService
     private static string? NormalizeToken(string? bearerToken) =>
         string.IsNullOrWhiteSpace(bearerToken) ? null : bearerToken.Trim();
 
-    private static string GetJsonMapKey(McpAgentId agentId) =>
-        agentId == McpAgentId.DeepSeekHarnessMcpCenter ? "servers" : "mcpServers";
-
     private static JsonObject BuildJsonServerEntry(McpAgentId agentId, string endpointUrl, string? bearerToken)
     {
         var entry = new JsonObject();
@@ -289,12 +335,6 @@ public sealed class McpAgentConfigService
 
             case McpAgentId.ClaudeCode:
                 entry["type"] = "http";
-                entry["url"] = endpointUrl;
-                AddHeadersIfNeeded(entry, bearerToken);
-                break;
-
-            case McpAgentId.DeepSeekHarnessMcpCenter:
-                entry["transport"] = "streamable-http";
                 entry["url"] = endpointUrl;
                 AddHeadersIfNeeded(entry, bearerToken);
                 break;
@@ -337,7 +377,7 @@ public sealed class McpAgentConfigService
         };
     }
 
-    private static McpAgentInstallState InspectJsonState(string content, string mapKey, JsonObject expectedEntry)
+    private static McpAgentInstallState InspectJsonMapState(string content, string mapKey, JsonObject expectedEntry)
     {
         var root = ParseJsonRoot(content);
         if (!root.TryGetPropertyValue(mapKey, out var mapNode) || mapNode == null)
@@ -360,7 +400,7 @@ public sealed class McpAgentConfigService
             : McpAgentInstallState.NeedsUpdate;
     }
 
-    private static string MergeJsonContent(string? existingContent, string mapKey, JsonObject entry)
+    private static string MergeJsonMapContent(string? existingContent, string mapKey, JsonObject entry)
     {
         var root = string.IsNullOrWhiteSpace(existingContent)
             ? new JsonObject()
@@ -382,6 +422,121 @@ public sealed class McpAgentConfigService
         }
 
         servers[ServerName] = entry;
+        return SerializeJsonRoot(root, existingContent);
+    }
+
+    private static McpAgentInstallState InspectMcpCenterJsonState(string content, string endpointUrl,
+        string? bearerToken)
+    {
+        var root = ParseJsonRoot(content);
+        if (!root.TryGetPropertyValue("servers", out var serversNode) || serversNode == null)
+        {
+            return McpAgentInstallState.NotConfigured;
+        }
+
+        if (serversNode is not JsonArray servers)
+        {
+            throw new InvalidDataException("Expected 'servers' to be a JSON array.");
+        }
+
+        var match = FindMcpCenterEntry(servers, out _);
+        if (match == null)
+        {
+            return McpAgentInstallState.NotConfigured;
+        }
+
+        var existingId = match["id"]?.GetValue<string?>();
+        var existingEnabled = match["enabled"]?.GetValue<bool?>() ?? true;
+        var expected = BuildMcpCenterServerEntry(endpointUrl, bearerToken, existingId, existingEnabled);
+        return JsonNode.DeepEquals(match, expected)
+            ? McpAgentInstallState.Configured
+            : McpAgentInstallState.NeedsUpdate;
+    }
+
+    private static string MergeMcpCenterJsonContent(string? existingContent, string endpointUrl, string? bearerToken)
+    {
+        var root = string.IsNullOrWhiteSpace(existingContent)
+            ? new JsonObject()
+            : ParseJsonRoot(existingContent);
+
+        JsonArray servers;
+        if (!root.TryGetPropertyValue("servers", out var existingServers) || existingServers == null)
+        {
+            servers = new JsonArray();
+            root["servers"] = servers;
+        }
+        else if (existingServers is JsonArray arr)
+        {
+            servers = arr;
+        }
+        else
+        {
+            throw new InvalidDataException("Expected 'servers' to be a JSON array.");
+        }
+
+        var existing = FindMcpCenterEntry(servers, out var existingIndex);
+        var preservedId = existing?["id"]?.GetValue<string?>();
+        var preservedEnabled = existing?["enabled"]?.GetValue<bool?>() ?? true;
+        var updatedEntry = BuildMcpCenterServerEntry(endpointUrl, bearerToken, preservedId, preservedEnabled);
+
+        if (existingIndex >= 0)
+        {
+            servers[existingIndex] = updatedEntry;
+        }
+        else
+        {
+            servers.Add((JsonNode)updatedEntry);
+        }
+
+        return SerializeJsonRoot(root, existingContent);
+    }
+
+    private static JsonObject? FindMcpCenterEntry(JsonArray servers, out int index)
+    {
+        for (var i = 0; i < servers.Count; i++)
+        {
+            if (servers[i] is not JsonObject obj)
+            {
+                continue;
+            }
+
+            var id = obj["id"]?.GetValue<string?>();
+            var name = obj["name"]?.GetValue<string?>();
+            if (string.Equals(id, ServerName, StringComparison.Ordinal) ||
+                string.Equals(name, ServerName, StringComparison.Ordinal))
+            {
+                index = i;
+                return obj;
+            }
+        }
+
+        index = -1;
+        return null;
+    }
+
+    private static JsonObject BuildMcpCenterServerEntry(string endpointUrl, string? bearerToken,
+        string? existingId = null, bool enabled = true)
+    {
+        var entry = new JsonObject
+        {
+            ["id"] = string.IsNullOrWhiteSpace(existingId) ? ServerName : existingId,
+            ["name"] = ServerName,
+            ["type"] = "http",
+            ["url"] = endpointUrl,
+            ["authMode"] = bearerToken != null ? "bearer" : "none"
+        };
+
+        if (bearerToken != null)
+        {
+            entry["token"] = bearerToken;
+        }
+
+        entry["enabled"] = enabled;
+        return entry;
+    }
+
+    private static string SerializeJsonRoot(JsonObject root, string? existingContent)
+    {
         var newline = DetectNewline(existingContent, "\n");
         var serialized = root.ToJsonString(JsonWriteOptions);
         return NormalizeNewline(serialized, newline) + newline;
@@ -401,17 +556,92 @@ public sealed class McpAgentConfigService
 
     private static McpAgentInstallState InspectTomlState(string content, string endpointUrl, string? bearerToken)
     {
+        var scan = ScanToml(content);
+
+        if (!scan.FoundFufuEntry)
+        {
+            return McpAgentInstallState.NotConfigured;
+        }
+
+        var urlMatches = string.Equals(scan.FoundUrl, endpointUrl, StringComparison.Ordinal);
+        var authMatches = bearerToken == null
+            ? scan.FoundAuth == null
+            : string.Equals(scan.FoundAuth, $"Bearer {bearerToken}", StringComparison.Ordinal);
+
+        return urlMatches && authMatches
+            ? McpAgentInstallState.Configured
+            : McpAgentInstallState.NeedsUpdate;
+    }
+
+    private static string MergeCodexTomlContent(string? existingContent, string endpointUrl, string? bearerToken)
+    {
+        var newline = DetectNewline(existingContent, "\n");
+        var keptLines = new List<string>();
+
+        if (!string.IsNullOrWhiteSpace(existingContent))
+        {
+            var scan = ScanToml(existingContent);
+            var lines = SplitLines(existingContent);
+            for (var i = 0; i < lines.Length; i++)
+            {
+                if (!scan.SkippedLineIndices.Contains(i))
+                {
+                    keptLines.Add(lines[i]);
+                }
+            }
+        }
+
+        while (keptLines.Count > 0 && string.IsNullOrWhiteSpace(keptLines[^1]))
+        {
+            keptLines.RemoveAt(keptLines.Count - 1);
+        }
+
+        var block = BuildCodexTomlBlock(endpointUrl, bearerToken, newline);
+        var merged = keptLines.Count == 0
+            ? block
+            : string.Join(newline, keptLines) + newline + newline + block;
+
+        ScanToml(merged);
+        return merged;
+    }
+
+    private static TomlScanResult ScanToml(string content)
+    {
+        var skippedLines = new HashSet<int>();
+        var definedTables = new HashSet<string>(StringComparer.Ordinal);
+        var currentTable = new List<string>();
+        var currentMatchKind = TomlMatchKind.None;
+        var skippingSection = false;
+        var skippingContinuation = false;
+        string? multilineQuote = null;
+        var bracketDepth = 0;
+        var braceDepth = 0;
+
+        var foundFufuEntry = false;
         string? foundUrl = null;
         string? foundAuth = null;
-        var foundSection = false;
-        var currentMatchKind = TomlMatchKind.None;
-        string? multilineQuote = null;
 
-        foreach (var rawLine in SplitLines(content))
+        var lines = SplitLines(content);
+        for (var lineIndex = 0; lineIndex < lines.Length; lineIndex++)
         {
-            if (multilineQuote != null)
+            var rawLine = lines[lineIndex];
+            if (multilineQuote != null || bracketDepth > 0 || braceDepth > 0)
             {
-                UpdateMultilineState(rawLine, ref multilineQuote);
+                if (skippingSection || skippingContinuation)
+                {
+                    skippedLines.Add(lineIndex);
+                }
+
+                if (!UpdateTomlDelimiters(rawLine, ref multilineQuote, ref bracketDepth, ref braceDepth))
+                {
+                    throw new InvalidDataException($"Malformed TOML string at line {lineIndex + 1}.");
+                }
+
+                if (multilineQuote == null && bracketDepth == 0 && braceDepth == 0)
+                {
+                    skippingContinuation = false;
+                }
+
                 continue;
             }
 
@@ -421,13 +651,30 @@ public sealed class McpAgentConfigService
                 continue;
             }
 
-            if (TryParseTomlTableHeader(stripped, out var segments, out var isArray))
+            if (stripped.StartsWith('['))
             {
-                if (!isArray && IsFufuTomlSection(segments))
+                if (!TryParseTomlTableHeader(stripped, out var segments, out var isArray))
                 {
+                    throw new InvalidDataException($"Malformed TOML table header at line {lineIndex + 1}.");
+                }
+
+                if (!isArray)
+                {
+                    var key = string.Join('\0', segments);
+                    if (!definedTables.Add(key))
+                    {
+                        throw new InvalidDataException($"Duplicate TOML table header at line {lineIndex + 1}.");
+                    }
+                }
+
+                currentTable = segments;
+                skippingSection = !isArray && IsFufuTomlSection(segments);
+                if (skippingSection)
+                {
+                    skippedLines.Add(lineIndex);
+                    foundFufuEntry = true;
                     if (segments.Count == 2)
                     {
-                        foundSection = true;
                         currentMatchKind = TomlMatchKind.Server;
                     }
                     else if (segments.Count == 3 &&
@@ -448,97 +695,50 @@ public sealed class McpAgentConfigService
                 continue;
             }
 
-            UpdateMultilineState(rawLine, ref multilineQuote);
-            if (currentMatchKind == TomlMatchKind.None)
+            if (!TryParseTomlAssignmentLine(stripped, out var keySegments, out var rawValue))
             {
-                continue;
+                throw new InvalidDataException($"Malformed TOML assignment at line {lineIndex + 1}.");
             }
 
-            if (TryParseTomlAssignment(stripped, out var key, out var value))
+            if (!UpdateTomlDelimiters(rawValue, ref multilineQuote, ref bracketDepth, ref braceDepth))
             {
-                if (currentMatchKind == TomlMatchKind.Server && key == "url")
-                {
-                    foundUrl = value;
-                }
-                else if (currentMatchKind == TomlMatchKind.Headers &&
-                         string.Equals(key, "Authorization", StringComparison.OrdinalIgnoreCase))
-                {
-                    foundAuth = value;
-                }
+                throw new InvalidDataException($"Malformed TOML value at line {lineIndex + 1}.");
             }
-        }
 
-        if (!foundSection)
-        {
-            return McpAgentInstallState.NotConfigured;
-        }
+            var fullPath = new List<string>(currentTable.Count + keySegments.Count);
+            fullPath.AddRange(currentTable);
+            fullPath.AddRange(keySegments);
 
-        var urlMatches = string.Equals(foundUrl, endpointUrl, StringComparison.Ordinal);
-        var authMatches = bearerToken == null
-            ? foundAuth == null
-            : string.Equals(foundAuth, $"Bearer {bearerToken}", StringComparison.Ordinal);
-
-        return urlMatches && authMatches
-            ? McpAgentInstallState.Configured
-            : McpAgentInstallState.NeedsUpdate;
-    }
-
-    private static string MergeCodexTomlContent(string? existingContent, string endpointUrl, string? bearerToken)
-    {
-        var newline = DetectNewline(existingContent, "\n");
-        var keptLines = new List<string>();
-
-        if (!string.IsNullOrWhiteSpace(existingContent))
-        {
-            var skippingSection = false;
-            string? multilineQuote = null;
-
-            foreach (var line in SplitLines(existingContent))
+            var isFufuLine = skippingSection || IsFufuTomlSection(fullPath);
+            if (isFufuLine)
             {
-                if (multilineQuote != null)
+                skippedLines.Add(lineIndex);
+                skippingContinuation = !skippingSection &&
+                                       (multilineQuote != null || bracketDepth > 0 || braceDepth > 0);
+                foundFufuEntry = true;
+
+                if (TryDecodeTomlScalarString(rawValue, out var scalarValue))
                 {
-                    if (!skippingSection)
+                    if (fullPath.Count == 3 && string.Equals(fullPath[2], "url", StringComparison.Ordinal))
                     {
-                        keptLines.Add(line);
+                        foundUrl = scalarValue;
                     }
-
-                    UpdateMultilineState(line, ref multilineQuote);
-                    continue;
-                }
-
-                var stripped = StripTomlComment(line).Trim();
-                if (!string.IsNullOrEmpty(stripped) &&
-                    TryParseTomlTableHeader(stripped, out var segments, out _))
-                {
-                    skippingSection = IsFufuTomlSection(segments);
-                    if (!skippingSection)
+                    else if (fullPath.Count == 4 &&
+                             string.Equals(fullPath[2], "http_headers", StringComparison.Ordinal) &&
+                             string.Equals(fullPath[3], "Authorization", StringComparison.OrdinalIgnoreCase))
                     {
-                        keptLines.Add(line);
+                        foundAuth = scalarValue;
                     }
-
-                    continue;
-                }
-
-                UpdateMultilineState(line, ref multilineQuote);
-                if (!skippingSection)
-                {
-                    keptLines.Add(line);
                 }
             }
         }
 
-        while (keptLines.Count > 0 && string.IsNullOrWhiteSpace(keptLines[^1]))
+        if (multilineQuote != null || bracketDepth != 0 || braceDepth != 0)
         {
-            keptLines.RemoveAt(keptLines.Count - 1);
+            throw new InvalidDataException("Malformed TOML: unclosed multiline string, array, or inline table.");
         }
 
-        var block = BuildCodexTomlBlock(endpointUrl, bearerToken, newline);
-        if (keptLines.Count == 0)
-        {
-            return block;
-        }
-
-        return string.Join(newline, keptLines) + newline + newline + block;
+        return new TomlScanResult(foundFufuEntry, foundUrl, foundAuth, skippedLines);
     }
 
     private static string BuildCodexTomlBlock(string endpointUrl, string? bearerToken, string newline)
@@ -593,35 +793,99 @@ public sealed class McpAgentConfigService
             inner = strippedLine[1..^1].Trim();
         }
 
-        if (string.IsNullOrEmpty(inner))
+        return TryParseTomlKeyPath(inner, out segments);
+    }
+
+    private static bool TryParseTomlAssignmentLine(string strippedLine, out List<string> keySegments,
+        out string rawValue)
+    {
+        keySegments = new List<string>();
+        rawValue = string.Empty;
+
+        var equals = FindUnquotedEquals(strippedLine);
+        if (equals <= 0)
+        {
+            return false;
+        }
+
+        var lhs = strippedLine[..equals].Trim();
+        rawValue = strippedLine[(equals + 1)..].Trim();
+        if (string.IsNullOrEmpty(rawValue))
+        {
+            return false;
+        }
+
+        return TryParseTomlKeyPath(lhs, out keySegments);
+    }
+
+    private static int FindUnquotedEquals(string line)
+    {
+        char? quote = null;
+        for (var i = 0; i < line.Length; i++)
+        {
+            var ch = line[i];
+            if (quote == null)
+            {
+                if (ch == '=')
+                {
+                    return i;
+                }
+
+                if (ch is '"' or '\'')
+                {
+                    quote = ch;
+                }
+            }
+            else
+            {
+                if (quote == '"' && ch == '\\')
+                {
+                    i++;
+                    continue;
+                }
+
+                if (ch == quote)
+                {
+                    quote = null;
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    private static bool TryParseTomlKeyPath(string keyText, out List<string> segments)
+    {
+        segments = new List<string>();
+        if (string.IsNullOrWhiteSpace(keyText))
         {
             return false;
         }
 
         var index = 0;
-        while (index < inner.Length)
+        while (index < keyText.Length)
         {
-            while (index < inner.Length && char.IsWhiteSpace(inner[index]))
+            while (index < keyText.Length && char.IsWhiteSpace(keyText[index]))
             {
                 index++;
             }
 
-            if (index >= inner.Length)
+            if (index >= keyText.Length)
             {
                 return false;
             }
 
-            if (inner[index] is '"' or '\'')
+            if (keyText[index] is '"' or '\'')
             {
-                var quote = inner[index++];
+                var quote = keyText[index++];
                 var sb = new StringBuilder();
                 var closed = false;
-                while (index < inner.Length)
+                while (index < keyText.Length)
                 {
-                    var ch = inner[index++];
-                    if (quote == '"' && ch == '\\' && index < inner.Length)
+                    var ch = keyText[index++];
+                    if (quote == '"' && ch == '\\' && index < keyText.Length)
                     {
-                        sb.Append(UnescapeTomlChar(inner[index++]));
+                        sb.Append(UnescapeTomlChar(keyText[index++]));
                         continue;
                     }
 
@@ -644,48 +908,51 @@ public sealed class McpAgentConfigService
             else
             {
                 var start = index;
-                while (index < inner.Length && inner[index] != '.' && !char.IsWhiteSpace(inner[index]))
+                while (index < keyText.Length && IsTomlBareKeyChar(keyText[index]))
                 {
                     index++;
                 }
 
-                segments.Add(inner[start..index]);
+                if (index == start)
+                {
+                    return false;
+                }
+
+                segments.Add(keyText[start..index]);
             }
 
-            while (index < inner.Length && char.IsWhiteSpace(inner[index]))
+            while (index < keyText.Length && char.IsWhiteSpace(keyText[index]))
             {
                 index++;
             }
 
-            if (index < inner.Length)
+            if (index < keyText.Length)
             {
-                if (inner[index] != '.')
+                if (keyText[index] != '.')
                 {
                     return false;
                 }
 
                 index++;
+                if (index >= keyText.Length)
+                {
+                    return false;
+                }
             }
         }
 
         return segments.Count > 0;
     }
 
-    private static bool TryParseTomlAssignment(string strippedLine, out string key, out string? value)
+    private static bool IsTomlBareKeyChar(char ch) =>
+        char.IsAsciiLetterOrDigit(ch) || ch is '_' or '-';
+
+    private static bool TryDecodeTomlScalarString(string rawValue, out string? value)
     {
-        key = string.Empty;
         value = null;
 
-        var equals = strippedLine.IndexOf('=');
-        if (equals <= 0)
-        {
-            return false;
-        }
-
-        key = strippedLine[..equals].Trim().Trim('"', '\'');
-        var rawValue = strippedLine[(equals + 1)..].Trim();
-
-        if (rawValue.Length >= 2 && rawValue[0] == '"' && rawValue[^1] == '"')
+        if (rawValue.Length >= 2 && rawValue[0] == '"' && rawValue[^1] == '"' &&
+            !rawValue.StartsWith("\"\"\"", StringComparison.Ordinal))
         {
             var sb = new StringBuilder();
             for (var i = 1; i < rawValue.Length - 1; i++)
@@ -705,7 +972,8 @@ public sealed class McpAgentConfigService
             return true;
         }
 
-        if (rawValue.Length >= 2 && rawValue[0] == '\'' && rawValue[^1] == '\'')
+        if (rawValue.Length >= 2 && rawValue[0] == '\'' && rawValue[^1] == '\'' &&
+            !rawValue.StartsWith("'''", StringComparison.Ordinal))
         {
             value = rawValue[1..^1];
             return true;
@@ -750,61 +1018,112 @@ public sealed class McpAgentConfigService
         return line;
     }
 
-    private static void UpdateMultilineState(string line, ref string? multilineQuote)
+    private static bool UpdateTomlDelimiters(string line, ref string? multilineQuote, ref int bracketDepth,
+        ref int braceDepth)
     {
         var i = 0;
-        while (i <= line.Length - 3)
+        while (i < line.Length)
         {
-            if (multilineQuote == null)
+            if (multilineQuote != null)
             {
-                if (line.AsSpan(i, 3).SequenceEqual("\"\"\""))
+                if (multilineQuote == "\"\"\"" && line[i] == '\\')
                 {
-                    multilineQuote = "\"\"\"";
+                    i += 2;
+                    continue;
+                }
+
+                if (i <= line.Length - 3 && line.AsSpan(i, 3).SequenceEqual(multilineQuote))
+                {
+                    multilineQuote = null;
                     i += 3;
                     continue;
                 }
 
-                if (line.AsSpan(i, 3).SequenceEqual("'''"))
-                {
-                    multilineQuote = "'''";
-                    i += 3;
-                    continue;
-                }
-
-                if (line[i] == '#')
-                {
-                    return;
-                }
-
-                if (line[i] is '"' or '\'')
-                {
-                    var q = line[i++];
-                    while (i < line.Length)
-                    {
-                        if (q == '"' && line[i] == '\\')
-                        {
-                            i += 2;
-                            continue;
-                        }
-
-                        if (line[i] == q)
-                        {
-                            break;
-                        }
-
-                        i++;
-                    }
-                }
+                i++;
+                continue;
             }
-            else if (line.AsSpan(i, 3).SequenceEqual(multilineQuote))
+
+            if (i <= line.Length - 3 && line.AsSpan(i, 3).SequenceEqual("\"\"\""))
             {
-                multilineQuote = null;
+                multilineQuote = "\"\"\"";
                 i += 3;
                 continue;
             }
 
+            if (i <= line.Length - 3 && line.AsSpan(i, 3).SequenceEqual("'''"))
+            {
+                multilineQuote = "'''";
+                i += 3;
+                continue;
+            }
+
+            var ch = line[i];
+            if (ch == '#')
+            {
+                return true;
+            }
+
+            if (ch is '"' or '\'')
+            {
+                var q = ch;
+                i++;
+                var closed = false;
+                while (i < line.Length)
+                {
+                    if (q == '"' && line[i] == '\\')
+                    {
+                        i += 2;
+                        continue;
+                    }
+
+                    if (line[i] == q)
+                    {
+                        closed = true;
+                        i++;
+                        break;
+                    }
+
+                    i++;
+                }
+
+                if (!closed)
+                {
+                    return false;
+                }
+
+                continue;
+            }
+
+            switch (ch)
+            {
+                case '[':
+                    bracketDepth++;
+                    break;
+                case ']':
+                    bracketDepth--;
+                    if (bracketDepth < 0)
+                    {
+                        return false;
+                    }
+
+                    break;
+                case '{':
+                    braceDepth++;
+                    break;
+                case '}':
+                    braceDepth--;
+                    if (braceDepth < 0)
+                    {
+                        return false;
+                    }
+
+                    break;
+            }
+
             i++;
         }
+
+        return true;
     }
 
     private static string FormatTomlBasicString(string value)
@@ -846,11 +1165,14 @@ public sealed class McpAgentConfigService
             return McpAgentInstallState.NotConfigured;
         }
 
-        var root = LoadCordisRootSequence(content);
-        if (root == null)
+        var stream = LoadCordisStream(content);
+        if (stream.Documents.Count == 0)
         {
             return McpAgentInstallState.NotConfigured;
         }
+
+        var root = stream.Documents[0].RootNode as YamlSequenceNode
+                   ?? throw new InvalidDataException("Expected cordis.patch.yml root to be a YAML sequence.");
 
         var existing = FindCordisPluginEntry(root);
         if (existing == null)
@@ -891,9 +1213,21 @@ public sealed class McpAgentConfigService
     private static string MergeCordisYamlContent(string? existingContent, string endpointUrl, string? bearerToken)
     {
         var newline = DetectNewline(existingContent, "\n");
-        var root = string.IsNullOrWhiteSpace(existingContent)
-            ? new YamlSequenceNode()
-            : LoadCordisRootSequence(existingContent) ?? new YamlSequenceNode();
+        var stream = string.IsNullOrWhiteSpace(existingContent)
+            ? new YamlStream()
+            : LoadCordisStream(existingContent);
+
+        YamlSequenceNode root;
+        if (stream.Documents.Count == 0)
+        {
+            root = new YamlSequenceNode();
+            stream.Add(new YamlDocument(root));
+        }
+        else
+        {
+            root = stream.Documents[0].RootNode as YamlSequenceNode
+                   ?? throw new InvalidDataException("Expected cordis.patch.yml root to be a YAML sequence.");
+        }
 
         var newEntry = BuildCordisPluginEntry(endpointUrl, bearerToken);
         var updated = false;
@@ -945,21 +1279,15 @@ public sealed class McpAgentConfigService
             }
         }
 
-        return NormalizeNewline(SerializeCordisYaml(root), newline);
+        return NormalizeNewline(SerializeCordisYamlStream(stream), newline);
     }
 
-    private static YamlSequenceNode? LoadCordisRootSequence(string content)
+    private static YamlStream LoadCordisStream(string content)
     {
         var stream = new YamlStream();
         using var reader = new StringReader(content);
         stream.Load(reader);
-        if (stream.Documents.Count == 0)
-        {
-            return null;
-        }
-
-        return stream.Documents[0].RootNode as YamlSequenceNode
-               ?? throw new InvalidDataException("Expected cordis.patch.yml root to be a YAML sequence.");
+        return stream;
     }
 
     private static YamlMappingNode BuildCordisPatchBlock(string endpointUrl, string? bearerToken) =>
@@ -1038,7 +1366,8 @@ public sealed class McpAgentConfigService
                string.Equals(serverNode.Value, ServerName, StringComparison.Ordinal);
     }
 
-    private static bool TryGetMappingChild<TNode>(YamlMappingNode mapping, string key, [NotNullWhen(true)] out TNode? node)
+    private static bool TryGetMappingChild<TNode>(YamlMappingNode mapping, string key,
+        [NotNullWhen(true)] out TNode? node)
         where TNode : YamlNode
     {
         foreach (var pair in mapping.Children)
@@ -1056,25 +1385,29 @@ public sealed class McpAgentConfigService
         return false;
     }
 
-    private static string SerializeCordisYaml(YamlNode root)
+    private static string SerializeCordisYamlStream(YamlStream stream)
     {
-        var stream = new YamlStream(new YamlDocument(root));
         using var writer = new StringWriter();
         stream.Save(writer, assignAnchors: false);
         var text = writer.ToString().Replace("\r\n", "\n");
-        if (text.EndsWith("\n...\n", StringComparison.Ordinal))
+
+        // Keep explicit document separators for multi-document streams; trim single-doc trailer.
+        if (stream.Documents.Count <= 1)
         {
-            text = text[..^4];
-        }
-        else if (text.EndsWith("...", StringComparison.Ordinal))
-        {
-            text = text[..^3];
+            if (text.EndsWith("\n...\n", StringComparison.Ordinal))
+            {
+                text = text[..^4];
+            }
+            else if (text.EndsWith("...", StringComparison.Ordinal))
+            {
+                text = text[..^3];
+            }
         }
 
         return text.TrimEnd('\n') + "\n";
     }
 
-    private static void WriteFileAtomically(string targetPath, string content)
+    private static void WriteFileAtomically(string targetPath, string content, bool hadExistingFile)
     {
         var directory = Path.GetDirectoryName(targetPath);
         if (!string.IsNullOrEmpty(directory))
@@ -1086,7 +1419,16 @@ public sealed class McpAgentConfigService
         try
         {
             File.WriteAllText(tempPath, content, Utf8NoBom);
-            File.Move(tempPath, targetPath, overwrite: true);
+
+            if (hadExistingFile && File.Exists(targetPath))
+            {
+                // File.Replace preserves the existing target file's NTFS ACL on Windows.
+                File.Replace(tempPath, targetPath, destinationBackupFileName: null, ignoreMetadataErrors: true);
+            }
+            else
+            {
+                File.Move(tempPath, targetPath, overwrite: false);
+            }
         }
         finally
         {
@@ -1119,4 +1461,10 @@ public sealed class McpAgentConfigService
         Headers,
         OtherSubtable
     }
+
+    private sealed record TomlScanResult(
+        bool FoundFufuEntry,
+        string? FoundUrl,
+        string? FoundAuth,
+        HashSet<int> SkippedLineIndices);
 }

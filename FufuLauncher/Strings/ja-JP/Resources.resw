@@ -13467,4 +13467,7 @@ UID {1} 用の新しいデータアーカイブを作成しますか？</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>設定の書き込みに失敗しました: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>設定スニペットのクリップボードへのコピーに失敗しました。</value>
+  </data>
 </root>

@@ -14087,4 +14087,7 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>寫入設定失敗：{0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>複製設定片段到剪貼簿失敗。</value>
+  </data>
 </root>

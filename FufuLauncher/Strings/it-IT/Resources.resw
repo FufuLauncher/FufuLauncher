@@ -13471,4 +13471,7 @@ Continuare verso la pagina del progetto?</value>
   <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
     <value>Scrittura della configurazione non riuscita: {0}</value>
   </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Impossibile copiare lo snippet di configurazione negli appunti.</value>
+  </data>
 </root>
