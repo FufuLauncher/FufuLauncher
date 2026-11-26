@@ -13415,7 +13415,7 @@ Los usuarios del servidor global pueden importar registros mediante «Obtener po
     <value>Perfil de DeepSeek Harness</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>Nombre del subdirectorio en ~/.dsh/profiles (por ejemplo, web o default).</value>
+    <value>Nombre del subdirectorio en $DSH_HOME/profiles (por defecto ~/.dsh/profiles, por ejemplo web o default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>Perfiles detectados: {0}</value>

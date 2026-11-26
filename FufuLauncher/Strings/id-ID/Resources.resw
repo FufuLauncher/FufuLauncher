@@ -13413,7 +13413,7 @@ Lanjutkan ke halaman proyek?</value>
     <value>Profil DeepSeek Harness</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>Nama subdirektori di ~/.dsh/profiles (misalnya web atau default).</value>
+    <value>Nama subdirektori di $DSH_HOME/profiles (default ~/.dsh/profiles, misalnya web atau default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>Profil terdeteksi: {0}</value>

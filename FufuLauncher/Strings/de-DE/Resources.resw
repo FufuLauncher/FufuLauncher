@@ -13415,7 +13415,7 @@ Zur Projektseite fortfahren?</value>
     <value>DeepSeek-Harness-Profil</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>Unterverzeichnisname unter ~/.dsh/profiles (z. B. web oder default).</value>
+    <value>Unterverzeichnisname unter $DSH_HOME/profiles (Standard: ~/.dsh/profiles, z. B. web oder default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>Erkannte Profile: {0}</value>

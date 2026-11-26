@@ -13421,7 +13421,7 @@ Continuare verso la pagina del progetto?</value>
     <value>Profilo DeepSeek Harness</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>Nome della sottocartella in ~/.dsh/profiles (ad esempio web o default).</value>
+    <value>Nome della sottocartella in $DSH_HOME/profiles (predefinito ~/.dsh/profiles, ad esempio web o default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>Profili rilevati: {0}</value>

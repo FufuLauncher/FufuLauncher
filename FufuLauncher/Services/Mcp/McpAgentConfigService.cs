@@ -82,6 +82,12 @@ public sealed class McpAgentConfigService
         CommentHandling = JsonCommentHandling.Skip
     };
 
+    private static readonly JsonDocumentOptions StrictJsonReadOptions = new()
+    {
+        AllowTrailingCommas = false,
+        CommentHandling = JsonCommentHandling.Disallow
+    };
+
     public static IReadOnlyList<McpAgentDescriptor> Agents { get; } =
     [
         new(McpAgentId.Antigravity, "Antigravity", McpConfigFormat.Json, false, null),
@@ -168,7 +174,7 @@ public sealed class McpAgentConfigService
             McpAgentId.ClaudeDesktop => Path.Combine(_appDataDir, "Claude", "claude_desktop_config.json"),
             McpAgentId.DeepSeekHarness => Path.Combine(ResolveDshHome(), "profiles",
                 SanitizeProfileName(dshProfile), "cordis.patch.yml"),
-            McpAgentId.DeepSeekHarnessMcpCenter => Path.Combine(ResolveDshHome(), "mcp-center.json"),
+            McpAgentId.DeepSeekHarnessMcpCenter => Path.Combine(_userProfileDir, ".dsh", "mcp-center.json"),
             _ => throw new ArgumentOutOfRangeException(nameof(agentId), agentId, null)
         };
 
@@ -428,7 +434,7 @@ public sealed class McpAgentConfigService
     private static McpAgentInstallState InspectMcpCenterJsonState(string content, string endpointUrl,
         string? bearerToken)
     {
-        var root = ParseJsonRoot(content);
+        var root = ParseJsonRoot(content, strict: true);
         if (!root.TryGetPropertyValue("servers", out var serversNode) || serversNode == null)
         {
             return McpAgentInstallState.NotConfigured;
@@ -457,7 +463,7 @@ public sealed class McpAgentConfigService
     {
         var root = string.IsNullOrWhiteSpace(existingContent)
             ? new JsonObject()
-            : ParseJsonRoot(existingContent);
+            : ParseJsonRoot(existingContent, strict: true);
 
         JsonArray servers;
         if (!root.TryGetPropertyValue("servers", out var existingServers) || existingServers == null)
@@ -542,14 +548,15 @@ public sealed class McpAgentConfigService
         return NormalizeNewline(serialized, newline) + newline;
     }
 
-    private static JsonObject ParseJsonRoot(string content)
+    private static JsonObject ParseJsonRoot(string content, bool strict = false)
     {
         if (string.IsNullOrWhiteSpace(content))
         {
             return new JsonObject();
         }
 
-        var parsed = JsonNode.Parse(content, null, JsonReadOptions);
+        var options = strict ? StrictJsonReadOptions : JsonReadOptions;
+        var parsed = JsonNode.Parse(content, null, options);
         return parsed as JsonObject
                ?? throw new InvalidDataException("Configuration root must be a JSON object.");
     }
@@ -609,6 +616,7 @@ public sealed class McpAgentConfigService
     {
         var skippedLines = new HashSet<int>();
         var definedTables = new HashSet<string>(StringComparer.Ordinal);
+        var definedArrayTables = new HashSet<string>(StringComparer.Ordinal);
         var currentTable = new List<string>();
         var skippingSection = false;
         var skippingContinuation = false;
@@ -657,10 +665,22 @@ public sealed class McpAgentConfigService
                     throw new InvalidDataException($"Malformed TOML table header at line {lineIndex + 1}.");
                 }
 
-                if (!isArray)
+                var key = string.Join('\0', segments);
+                if (isArray)
                 {
-                    var key = string.Join('\0', segments);
-                    if (!definedTables.Add(key))
+                    if (definedTables.Contains(key))
+                    {
+                        throw new InvalidDataException($"Conflicting TOML array header at line {lineIndex + 1}.");
+                    }
+
+                    definedArrayTables.Add(key);
+                    var subtablePrefix = key + '\0';
+                    definedTables.RemoveWhere(existingKey =>
+                        existingKey.StartsWith(subtablePrefix, StringComparison.Ordinal));
+                }
+                else
+                {
+                    if (definedArrayTables.Contains(key) || !definedTables.Add(key))
                     {
                         throw new InvalidDataException($"Duplicate TOML table header at line {lineIndex + 1}.");
                     }
@@ -691,6 +711,13 @@ public sealed class McpAgentConfigService
             fullPath.AddRange(currentTable);
             fullPath.AddRange(keySegments);
 
+            if (fullPath.Count == 1 &&
+                string.Equals(fullPath[0], "mcp_servers", StringComparison.Ordinal) &&
+                rawValue.TrimStart().StartsWith('{'))
+            {
+                throw new InvalidDataException("Inline 'mcp_servers' tables are not supported.");
+            }
+
             var isFufuLine = skippingSection || IsFufuTomlSection(fullPath);
             if (isFufuLine)
             {
@@ -712,6 +739,12 @@ public sealed class McpAgentConfigService
                         foundAuth = scalarValue;
                     }
                 }
+                else if (fullPath.Count == 3 &&
+                         string.Equals(fullPath[2], "http_headers", StringComparison.Ordinal) &&
+                         rawValue.TrimStart().StartsWith('{'))
+                {
+                    foundAuth = ExtractAuthorizationFromInlineTomlTable(rawValue) ?? string.Empty;
+                }
             }
         }
 
@@ -721,6 +754,79 @@ public sealed class McpAgentConfigService
         }
 
         return new TomlScanResult(foundFufuEntry, foundUrl, foundAuth, skippedLines);
+    }
+
+    private static string? ExtractAuthorizationFromInlineTomlTable(string rawValue)
+    {
+        var trimmed = rawValue.Trim();
+        if (!trimmed.StartsWith('{') || !trimmed.EndsWith('}'))
+        {
+            return null;
+        }
+
+        var inner = trimmed[1..^1];
+        foreach (var part in SplitTopLevelTomlCommas(inner))
+        {
+            if (TryParseTomlAssignmentLine(part.Trim(), out var keySegments, out var entryValue) &&
+                keySegments.Count == 1 &&
+                string.Equals(keySegments[0], "Authorization", StringComparison.OrdinalIgnoreCase) &&
+                TryDecodeTomlScalarString(entryValue, out var decoded))
+            {
+                return decoded;
+            }
+        }
+
+        return null;
+    }
+
+    private static IEnumerable<string> SplitTopLevelTomlCommas(string text)
+    {
+        var start = 0;
+        char? quote = null;
+        var depth = 0;
+
+        for (var i = 0; i < text.Length; i++)
+        {
+            var ch = text[i];
+            if (quote != null)
+            {
+                if (quote == '"' && ch == '\\')
+                {
+                    i++;
+                    continue;
+                }
+
+                if (ch == quote)
+                {
+                    quote = null;
+                }
+
+                continue;
+            }
+
+            if (ch is '"' or '\'')
+            {
+                quote = ch;
+            }
+            else if (ch is '{' or '[')
+            {
+                depth++;
+            }
+            else if (ch is '}' or ']')
+            {
+                depth--;
+            }
+            else if (ch == ',' && depth == 0)
+            {
+                yield return text[start..i];
+                start = i + 1;
+            }
+        }
+
+        if (start <= text.Length)
+        {
+            yield return text[start..];
+        }
     }
 
     private static string BuildCodexTomlBlock(string endpointUrl, string? bearerToken, string newline)

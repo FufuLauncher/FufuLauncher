@@ -13415,7 +13415,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>Профиль DeepSeek Harness</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>Имя подкаталога в ~/.dsh/profiles (например, web или default).</value>
+    <value>Имя подкаталога в $DSH_HOME/profiles (по умолчанию ~/.dsh/profiles, например web или default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>Обнаружены профили: {0}</value>

@@ -10,6 +10,7 @@ using FufuLauncher.ViewModels;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
@@ -208,6 +209,16 @@ public sealed partial class McpWindow : Window
     private void OnInstallClientConfigClick(object sender, RoutedEventArgs e)
     {
         ViewModel.InstallClientConfig();
+    }
+
+    private void OnPreviewCopyingToClipboard(TextBox sender, TextControlCopyingToClipboardEventArgs args)
+    {
+        var textToCopy = string.IsNullOrEmpty(sender.SelectedText) ? sender.Text : sender.SelectedText;
+        args.Handled = true;
+        if (!CopyToClipboard(textToCopy, excludeFromHistory: true))
+        {
+            ViewModel.NotifyClientConfigCopyFailed();
+        }
     }
 
     private bool CopyToClipboard(string? text, bool excludeFromHistory = false)

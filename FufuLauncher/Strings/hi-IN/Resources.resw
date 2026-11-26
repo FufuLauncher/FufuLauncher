@@ -13406,7 +13406,7 @@ QQ चैनलों या Miyoushe से अलग, इसका उद्�
     <value>DeepSeek Harness प्रोफ़ाइल</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>~/.dsh/profiles के अंतर्गत सबडायरेक्टरी नाम (उदाहरण के लिए web या default)।</value>
+    <value>$DSH_HOME/profiles के अंतर्गत सबडायरेक्टरी नाम (डिफ़ॉल्ट ~/.dsh/profiles, उदाहरण के लिए web या default)।</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>पहचानी गई प्रोफ़ाइलें: {0}</value>

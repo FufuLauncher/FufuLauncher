@@ -411,6 +411,7 @@
                                              VerticalAlignment="Center"
                                              FontFamily="Consolas"
                                              FontSize="12"
+                                             IsEnabled="{x:Bind ViewModel.IsClientIntegrationReady, Mode=OneWay}"
                                              AutomationProperties.LabeledBy="{x:Bind ClientDshProfileLabel}"
                                              Text="{x:Bind ViewModel.DshProfileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
@@ -447,6 +448,7 @@
                                          IsReadOnly="True"
                                          AcceptsReturn="True"
                                          TextWrapping="NoWrap"
+                                         CopyingToClipboard="OnPreviewCopyingToClipboard"
                                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                                          MaxHeight="190"

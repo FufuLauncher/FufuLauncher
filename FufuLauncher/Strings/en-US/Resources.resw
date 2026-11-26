@@ -14066,7 +14066,7 @@ Continue to the project page?</value>
     <value>DeepSeek Harness profile</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>Subdirectory name under ~/.dsh/profiles (for example web or default).</value>
+    <value>Subdirectory name under $DSH_HOME/profiles (defaults to ~/.dsh/profiles, for example web or default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>Detected profiles: {0}</value>

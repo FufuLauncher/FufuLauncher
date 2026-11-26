@@ -13415,7 +13415,7 @@ UID {1}용 새 데이터 아카이브를 만드시겠습니까?</value>
     <value>DeepSeek Harness 프로필</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>~/.dsh/profiles 아래의 하위 디렉터리 이름(예: web 또는 default).</value>
+    <value>$DSH_HOME/profiles 아래의 하위 디렉터리 이름(기본값 ~/.dsh/profiles, 예: web 또는 default).</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>감지된 프로필: {0}</value>

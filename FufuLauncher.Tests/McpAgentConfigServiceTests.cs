@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using FufuLauncher.Services.Mcp;
 using Xunit;
+using YamlDotNet.RepresentationModel;
 
 namespace FufuLauncher.Tests;
 
@@ -234,6 +235,75 @@ public sealed class McpAgentConfigServiceTests : IDisposable
     }
 
     [Fact]
+    public void CodexTomlAllowsRepeatedArrayOfTablesSubtables()
+    {
+        var path = _service.ResolveConfigPath(McpAgentId.Codex);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, """
+            model = "gpt-5"
+
+            [[items]]
+            name = "first"
+
+            [items.options]
+            enabled = true
+
+            [[items]]
+            name = "second"
+
+            [items.options]
+            enabled = false
+            """);
+
+        Assert.Equal(McpAgentInstallState.NotConfigured,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
+
+        var result = _service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token);
+        Assert.True(result.Succeeded, result.ErrorMessage);
+        Assert.Equal(McpAgentInstallState.Configured,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
+
+        var updated = File.ReadAllText(path);
+        Assert.Contains("name = \"first\"", updated);
+        Assert.Contains("name = \"second\"", updated);
+        Assert.Contains("[mcp_servers.fufu-launcher]", updated);
+    }
+
+    [Fact]
+    public void CodexTomlRejectsInlineMcpServersTableAndHandlesInlineHttpHeaders()
+    {
+        var path = _service.ResolveConfigPath(McpAgentId.Codex);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+
+        const string inlineMcpServers = """
+            model = "gpt-5"
+            mcp_servers = { docs = { url = "http://127.0.0.1:1234/mcp" } }
+            """;
+        File.WriteAllText(path, inlineMcpServers);
+        Assert.Equal(McpAgentInstallState.InvalidFile,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
+        var failed = _service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token);
+        Assert.False(failed.Succeeded);
+        Assert.Equal(inlineMcpServers, File.ReadAllText(path));
+
+        File.WriteAllText(path, $$"""
+            [mcp_servers.fufu-launcher]
+            url = "{{LocalUrl}}"
+            http_headers = { Authorization = "Bearer stale-token", X-Test = "1" }
+            """);
+        Assert.Equal(McpAgentInstallState.NeedsUpdate,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, null).State);
+
+        var cleaned = _service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, null);
+        Assert.True(cleaned.Succeeded, cleaned.ErrorMessage);
+        Assert.Equal(McpAgentInstallState.Configured,
+            _service.Inspect(McpAgentId.Codex, LocalUrl, null).State);
+        var updated = File.ReadAllText(path);
+        Assert.DoesNotContain("Authorization", updated);
+        Assert.DoesNotContain("stale-token", updated);
+    }
+
+    [Fact]
     public void DeepSeekHarnessCordisYamlPreservesExistingEntriesJsTagsAndExtraDocuments()
     {
         var path = _service.ResolveConfigPath(McpAgentId.DeepSeekHarness, "custom");
@@ -270,12 +340,49 @@ public sealed class McpAgentConfigServiceTests : IDisposable
             _service.Inspect(McpAgentId.DeepSeekHarness, updatedUrl, null, "custom").State);
 
         var yamlText = File.ReadAllText(path);
-        Assert.Contains("mcp-github", yamlText);
-        Assert.Contains("!!js", yamlText);
-        Assert.Contains(updatedUrl, yamlText);
-        Assert.Contains("second-document", yamlText);
-        Assert.Equal(1, CountOccurrences(yamlText, "mcp-fufu-launcher"));
-        Assert.DoesNotContain("Authorization", yamlText);
+        using var reader = new StringReader(yamlText);
+        var stream = new YamlStream();
+        stream.Load(reader);
+
+        Assert.Equal(2, stream.Documents.Count);
+
+        var doc1Sequence = Assert.IsType<YamlSequenceNode>(stream.Documents[0].RootNode);
+        var doc1RootMap = Assert.IsType<YamlMappingNode>(Assert.Single(doc1Sequence.Children));
+        var insertEntries = Assert.IsType<YamlSequenceNode>(doc1RootMap[new YamlScalarNode("insert")]);
+        Assert.Equal(2, insertEntries.Children.Count);
+
+        var githubEntry = insertEntries.Children
+            .OfType<YamlMappingNode>()
+            .Single(m => ((YamlScalarNode)m[new YamlScalarNode("id")]).Value == "mcp-github");
+        Assert.Equal("@deepseek-ai/dsh-mcp-client",
+            ((YamlScalarNode)githubEntry[new YamlScalarNode("name")]).Value);
+        var githubConfig = Assert.IsType<YamlMappingNode>(githubEntry[new YamlScalarNode("config")]);
+        Assert.Equal("github", ((YamlScalarNode)githubConfig[new YamlScalarNode("serverName")]).Value);
+        Assert.Equal("stdio", ((YamlScalarNode)githubConfig[new YamlScalarNode("transport")]).Value);
+        Assert.Equal("npx", ((YamlScalarNode)githubConfig[new YamlScalarNode("command")]).Value);
+        var githubEnv = Assert.IsType<YamlMappingNode>(githubConfig[new YamlScalarNode("env")]);
+        var githubTokenNode = Assert.IsType<YamlScalarNode>(githubEnv[new YamlScalarNode("GITHUB_TOKEN")]);
+        Assert.Equal("process.env.GITHUB_TOKEN", githubTokenNode.Value);
+
+        var githubTokenLine = Assert.Single(
+            yamlText.Split(['\r', '\n'], StringSplitOptions.RemoveEmptyEntries),
+            line => line.Contains("GITHUB_TOKEN:", StringComparison.Ordinal));
+        Assert.Contains("!!js", githubTokenLine);
+
+        var fufuEntry = insertEntries.Children
+            .OfType<YamlMappingNode>()
+            .Single(m => ((YamlScalarNode)m[new YamlScalarNode("id")]).Value == "mcp-fufu-launcher");
+        Assert.Equal("@deepseek-ai/dsh-mcp-client",
+            ((YamlScalarNode)fufuEntry[new YamlScalarNode("name")]).Value);
+        var fufuConfig = Assert.IsType<YamlMappingNode>(fufuEntry[new YamlScalarNode("config")]);
+        Assert.Equal("fufu-launcher", ((YamlScalarNode)fufuConfig[new YamlScalarNode("serverName")]).Value);
+        Assert.Equal("streamable-http", ((YamlScalarNode)fufuConfig[new YamlScalarNode("transport")]).Value);
+        Assert.Equal(updatedUrl, ((YamlScalarNode)fufuConfig[new YamlScalarNode("url")]).Value);
+        Assert.False(fufuConfig.Children.ContainsKey(new YamlScalarNode("headers")));
+
+        var doc2Sequence = Assert.IsType<YamlSequenceNode>(stream.Documents[1].RootNode);
+        var doc2Map = Assert.IsType<YamlMappingNode>(Assert.Single(doc2Sequence.Children));
+        Assert.Equal("second-document", ((YamlScalarNode)doc2Map[new YamlScalarNode("note")]).Value);
     }
 
     [Fact]
@@ -335,13 +442,20 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Equal("none", updatedFufu["authMode"]!.GetValue<string>());
         Assert.False(updatedFufu.ContainsKey("token"));
 
-        // Non-array servers should fail cleanly without overwriting.
+        // Non-array servers and trailing commas should fail cleanly without overwriting.
         const string invalidCenter = """{ "servers": {} }""";
         File.WriteAllText(path, invalidCenter);
         Assert.Equal(McpAgentInstallState.InvalidFile,
             _service.Inspect(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).State);
         Assert.False(_service.InstallOrUpdate(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).Succeeded);
         Assert.Equal(invalidCenter, File.ReadAllText(path));
+
+        const string trailingCommaCenter = """{"servers":[],}""";
+        File.WriteAllText(path, trailingCommaCenter);
+        Assert.Equal(McpAgentInstallState.InvalidFile,
+            _service.Inspect(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).State);
+        Assert.False(_service.InstallOrUpdate(McpAgentId.DeepSeekHarnessMcpCenter, LocalUrl, Token).Succeeded);
+        Assert.Equal(trailingCommaCenter, File.ReadAllText(path));
     }
 
     [Fact]
@@ -366,7 +480,7 @@ public sealed class McpAgentConfigServiceTests : IDisposable
             service.ResolveConfigPath(McpAgentId.Codex));
         Assert.Equal(Path.Combine(customDshHome, "profiles", "work", "cordis.patch.yml"),
             service.ResolveConfigPath(McpAgentId.DeepSeekHarness, "work"));
-        Assert.Equal(Path.Combine(customDshHome, "mcp-center.json"),
+        Assert.Equal(Path.Combine(_userProfileDir, ".dsh", "mcp-center.json"),
             service.ResolveConfigPath(McpAgentId.DeepSeekHarnessMcpCenter));
 
         Assert.True(service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token).Succeeded);
@@ -414,18 +528,5 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Contains(expectedMarker, withoutAuth);
         Assert.DoesNotContain(Token, withoutAuth);
         Assert.DoesNotContain(forbiddenNoAuthMarker, withoutAuth);
-    }
-
-    private static int CountOccurrences(string text, string pattern)
-    {
-        var count = 0;
-        var index = 0;
-        while ((index = text.IndexOf(pattern, index, StringComparison.Ordinal)) >= 0)
-        {
-            count++;
-            index += pattern.Length;
-        }
-
-        return count;
     }
 }

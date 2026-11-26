@@ -13417,7 +13417,7 @@ UID {1} 用の新しいデータアーカイブを作成しますか？</value>
     <value>DeepSeek Harness プロファイル</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>~/.dsh/profiles 配下のディレクトリ名（例: web や default）。</value>
+    <value>$DSH_HOME/profiles 配下のディレクトリ名（既定値 ~/.dsh/profiles、例: web や default）。</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>検出されたプロファイル: {0}</value>

@@ -14066,7 +14066,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>DeepSeek Harness 配置集 (Profile)</value>
   </data>
   <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
-    <value>~/.dsh/profiles 下的目录名（例如 web 或 default）。</value>
+    <value>$DSH_HOME/profiles 下的目录名（默认 ~/.dsh/profiles，例如 web 或 default）。</value>
   </data>
   <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
     <value>已检测到配置集：{0}</value>

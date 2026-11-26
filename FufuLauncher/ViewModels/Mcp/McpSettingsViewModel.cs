@@ -45,6 +45,7 @@ public sealed class McpSettingsViewModel : ObservableObject
     private int _selectedAgentIndex;
     private int _endpointModeIndex;
     private string _dshProfileName = McpAgentConfigService.DefaultDshProfile;
+    private bool _dshProfileEdited;
     private string _dshProfilesCaption = string.Empty;
     private string _clientConfigPath = string.Empty;
     private string _clientConfigStatus = string.Empty;
@@ -332,6 +333,11 @@ public sealed class McpSettingsViewModel : ObservableObject
                 return;
             }
 
+            if (_initialized)
+            {
+                _dshProfileEdited = true;
+            }
+
             ClearClientActionMessage();
             RefreshClientIntegration();
         }
@@ -436,8 +442,11 @@ public sealed class McpSettingsViewModel : ObservableObject
             IpRulesText = _host.IpRulesText;
 
             var discoveredProfiles = _agentConfigService.DiscoverDshProfiles();
-            _dshProfileName = discoveredProfiles[0];
-            OnPropertyChanged(nameof(DshProfileName));
+            if (!_dshProfileEdited)
+            {
+                _dshProfileName = discoveredProfiles[0];
+                OnPropertyChanged(nameof(DshProfileName));
+            }
             DshProfilesCaption = string.Format("Mcp_ClientDshProfilesDetectedFormat".GetLocalized(),
                 string.Join(", ", discoveredProfiles));
         }
