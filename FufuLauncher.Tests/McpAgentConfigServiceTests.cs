@@ -264,9 +264,27 @@ public sealed class McpAgentConfigServiceTests : IDisposable
             _service.Inspect(McpAgentId.Codex, LocalUrl, Token).State);
 
         var updated = File.ReadAllText(path);
-        Assert.Contains("name = \"first\"", updated);
-        Assert.Contains("name = \"second\"", updated);
         Assert.Contains("[mcp_servers.fufu-launcher]", updated);
+
+        var parsed = ParseSimpleToml(updated);
+        Assert.Equal("gpt-5", parsed["model"]);
+
+        var items = Assert.IsType<List<Dictionary<string, object>>>(parsed["items"]);
+        Assert.Equal(2, items.Count);
+
+        Assert.Equal("first", items[0]["name"]);
+        var firstOptions = Assert.IsType<Dictionary<string, object>>(items[0]["options"]);
+        Assert.Equal(true, firstOptions["enabled"]);
+
+        Assert.Equal("second", items[1]["name"]);
+        var secondOptions = Assert.IsType<Dictionary<string, object>>(items[1]["options"]);
+        Assert.Equal(false, secondOptions["enabled"]);
+
+        var mcpServers = Assert.IsType<Dictionary<string, object>>(parsed["mcp_servers"]);
+        var fufu = Assert.IsType<Dictionary<string, object>>(mcpServers["fufu-launcher"]);
+        Assert.Equal(LocalUrl, fufu["url"]);
+        var headers = Assert.IsType<Dictionary<string, object>>(fufu["http_headers"]);
+        Assert.Equal($"Bearer {Token}", headers["Authorization"]);
     }
 
     [Fact]
@@ -461,6 +479,7 @@ public sealed class McpAgentConfigServiceTests : IDisposable
     [Fact]
     public void EnvOverridesControlCodexHomeAndDshHome()
     {
+        var customClaudeConfigDir = Path.Combine(_tempRoot, "custom-claude");
         var customCodexHome = Path.Combine(_tempRoot, "custom-codex");
         var customDshHome = Path.Combine(_tempRoot, "custom-dsh");
         Directory.CreateDirectory(Path.Combine(customDshHome, "profiles", "work"));
@@ -470,12 +489,15 @@ public sealed class McpAgentConfigServiceTests : IDisposable
             _appDataDir,
             name => name switch
             {
+                "CLAUDE_CONFIG_DIR" => customClaudeConfigDir,
                 "CODEX_HOME" => customCodexHome,
                 "DSH_HOME" => customDshHome,
                 _ => null
             });
 
         Assert.Equal(["work"], service.DiscoverDshProfiles());
+        Assert.Equal(Path.Combine(customClaudeConfigDir, ".claude.json"),
+            service.ResolveConfigPath(McpAgentId.ClaudeCode));
         Assert.Equal(Path.Combine(customCodexHome, "config.toml"),
             service.ResolveConfigPath(McpAgentId.Codex));
         Assert.Equal(Path.Combine(customDshHome, "profiles", "work", "cordis.patch.yml"),
@@ -483,9 +505,24 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Equal(Path.Combine(_userProfileDir, ".dsh", "mcp-center.json"),
             service.ResolveConfigPath(McpAgentId.DeepSeekHarnessMcpCenter));
 
+        Assert.Equal(McpAgentInstallState.FileMissing,
+            service.Inspect(McpAgentId.ClaudeCode, LocalUrl, Token).State);
+        Assert.True(service.InstallOrUpdate(McpAgentId.ClaudeCode, LocalUrl, Token).Succeeded);
+        Assert.Equal(McpAgentInstallState.Configured,
+            service.Inspect(McpAgentId.ClaudeCode, LocalUrl, Token).State);
+        Assert.True(File.Exists(Path.Combine(customClaudeConfigDir, ".claude.json")));
+        Assert.False(File.Exists(Path.Combine(_userProfileDir, ".claude.json")));
+
         Assert.True(service.InstallOrUpdate(McpAgentId.Codex, LocalUrl, Token).Succeeded);
         Assert.True(File.Exists(Path.Combine(customCodexHome, "config.toml")));
         Assert.False(File.Exists(Path.Combine(_userProfileDir, ".codex", "config.toml")));
+
+        var blankOverrideService = new McpAgentConfigService(
+            _userProfileDir,
+            _appDataDir,
+            name => name == "CLAUDE_CONFIG_DIR" ? "   " : null);
+        Assert.Equal(Path.Combine(_userProfileDir, ".claude.json"),
+            blankOverrideService.ResolveConfigPath(McpAgentId.ClaudeCode));
     }
 
     [Fact]
@@ -528,5 +565,118 @@ public sealed class McpAgentConfigServiceTests : IDisposable
         Assert.Contains(expectedMarker, withoutAuth);
         Assert.DoesNotContain(Token, withoutAuth);
         Assert.DoesNotContain(forbiddenNoAuthMarker, withoutAuth);
+    }
+
+    private static Dictionary<string, object> ParseSimpleToml(string content)
+    {
+        var root = new Dictionary<string, object>(StringComparer.Ordinal);
+        var current = root;
+
+        foreach (var rawLine in content.Replace("\r\n", "\n").Split('\n'))
+        {
+            var line = StripTomlComment(rawLine).Trim();
+            if (string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+
+            if (line.StartsWith("[[", StringComparison.Ordinal) && line.EndsWith("]]", StringComparison.Ordinal))
+            {
+                var path = line[2..^2].Trim().Split('.', StringSplitOptions.TrimEntries);
+                var parent = NavigateTablePath(root, path[..^1]);
+                var arrayKey = path[^1];
+                if (!parent.TryGetValue(arrayKey, out var existing) ||
+                    existing is not List<Dictionary<string, object>> list)
+                {
+                    list = [];
+                    parent[arrayKey] = list;
+                }
+
+                var entry = new Dictionary<string, object>(StringComparer.Ordinal);
+                list.Add(entry);
+                current = entry;
+                continue;
+            }
+
+            if (line.StartsWith('[') && line.EndsWith(']'))
+            {
+                var path = line[1..^1].Trim().Split('.', StringSplitOptions.TrimEntries);
+                current = NavigateTablePath(root, path);
+                continue;
+            }
+
+            var eqIndex = line.IndexOf('=');
+            Assert.True(eqIndex > 0, $"Unexpected TOML line: {line}");
+            var key = line[..eqIndex].Trim();
+            var valueText = line[(eqIndex + 1)..].Trim();
+            current[key] = valueText switch
+            {
+                "true" => true,
+                "false" => false,
+                _ when valueText.StartsWith('"') && valueText.EndsWith('"') && valueText.Length >= 2 =>
+                    System.Text.Json.JsonSerializer.Deserialize<string>(valueText)!,
+                _ => valueText
+            };
+        }
+
+        return root;
+    }
+
+    private static Dictionary<string, object> NavigateTablePath(Dictionary<string, object> root, string[] path)
+    {
+        var current = root;
+        foreach (var segment in path)
+        {
+            if (!current.TryGetValue(segment, out var existing))
+            {
+                var child = new Dictionary<string, object>(StringComparer.Ordinal);
+                current[segment] = child;
+                current = child;
+            }
+            else if (existing is List<Dictionary<string, object>> array)
+            {
+                current = array[^1];
+            }
+            else
+            {
+                current = Assert.IsType<Dictionary<string, object>>(existing);
+            }
+        }
+
+        return current;
+    }
+
+    private static string StripTomlComment(string line)
+    {
+        var inString = false;
+        var escaped = false;
+        for (var i = 0; i < line.Length; i++)
+        {
+            var ch = line[i];
+            if (escaped)
+            {
+                escaped = false;
+                continue;
+            }
+
+            if (ch == '\\' && inString)
+            {
+                escaped = true;
+                continue;
+            }
+
+            if (ch == '"')
+            {
+                inString = !inString;
+                continue;
+            }
+
+            if (ch == '#' && !inString)
+            {
+                return line[..i];
+            }
+        }
+
+        return line;
     }
 }

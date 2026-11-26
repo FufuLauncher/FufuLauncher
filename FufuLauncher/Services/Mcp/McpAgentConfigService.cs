@@ -169,7 +169,7 @@ public sealed class McpAgentConfigService
         agentId switch
         {
             McpAgentId.Antigravity => Path.Combine(_userProfileDir, ".gemini", "config", "mcp_config.json"),
-            McpAgentId.ClaudeCode => Path.Combine(_userProfileDir, ".claude.json"),
+            McpAgentId.ClaudeCode => Path.Combine(ResolveClaudeConfigDir(), ".claude.json"),
             McpAgentId.Codex => Path.Combine(ResolveCodexHome(), "config.toml"),
             McpAgentId.ClaudeDesktop => Path.Combine(_appDataDir, "Claude", "claude_desktop_config.json"),
             McpAgentId.DeepSeekHarness => Path.Combine(ResolveDshHome(), "profiles",
@@ -288,6 +288,9 @@ public sealed class McpAgentConfigService
                 BuildJsonServerEntry(agentId, endpointUrl, token))
         };
     }
+
+    private string ResolveClaudeConfigDir() =>
+        ResolveDirectoryOverride("CLAUDE_CONFIG_DIR") ?? _userProfileDir;
 
     private string ResolveCodexHome() =>
         ResolveDirectoryOverride("CODEX_HOME") ?? Path.Combine(_userProfileDir, ".codex");
