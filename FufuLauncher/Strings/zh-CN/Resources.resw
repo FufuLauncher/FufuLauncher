@@ -14093,7 +14093,7 @@ UIGF v4.x/3.0/2.x</value>
     <value>已检测到配置文件，尚未添加 fufu-launcher。</value>
   </data>
   <data name="Mcp_ClientState_Configured" xml:space="preserve">
-    <value>已配置且与当前端口与令牌一致。</value>
+    <value>已配置且与当前端口和令牌一致。</value>
   </data>
   <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
     <value>已配置，但与当前端口、令牌或地址不一致。</value>

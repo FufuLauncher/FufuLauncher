@@ -13390,4 +13390,79 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Cutscene_CardDescription" xml:space="preserve">
     <value>Просматривайте, удаляйте и восстанавливайте по главам кат-сцены и пакеты сюжетной озвучки из прошлых версий</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>Интеграция клиентов</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>Сформировать фрагмент конфигурации или записать его напрямую в файл настроек ИИ-клиента.</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>Целевой клиент</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>Адрес подключения</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>Localhost (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>LAN / виртуальный IP</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>Список разрешения сейчас допускает только localhost; подключения не с loopback получат 403 Forbidden.</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>Профиль DeepSeek Harness</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>Имя подкаталога в ~/.dsh/profiles (например, web или default).</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>Обнаружены профили: {0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>Файл конфигурации</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>Фрагмент конфигурации</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>Копировать конфиг</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>Записать в конфиг</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>Обновить конфиг</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>Файл пока не найден; при записи он будет создан автоматически.</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>Файл конфигурации найден; fufu-launcher ещё не добавлен.</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>Уже настроено и соответствует текущему порту и токену.</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>Уже настроено, но порт, токен или адрес отличается.</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>Не удалось разобрать существующий файл: {0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>JSON-конфиг Claude Desktop поддерживает только stdio-команды, поэтому используется npx mcp-remote (требуется Node.js в PATH).</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>Записывает запись патча Cordis для @deepseek-ai/dsh-mcp-client в cordis.patch.yml выбранного профиля.</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>Фрагмент конфигурации скопирован в буфер обмена.</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>Конфигурация записана в {0}</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>Не удалось записать конфигурацию: {0}</value>
+  </data>
 </root>

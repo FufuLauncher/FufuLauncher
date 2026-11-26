@@ -13390,4 +13390,79 @@ Continuar para a página do projeto?</value>
   <data name="Cutscene_CardDescription" xml:space="preserve">
     <value>Veja, remova e restaure, por capítulo, as cenas e os pacotes de voz da história de versões anteriores</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>Integração de clientes</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>Gere um trecho de configuração ou grave-o diretamente no arquivo de configuração de um cliente de IA.</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>Cliente de destino</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>Endereço de conexão</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>Localhost (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>IP LAN / virtual</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>A lista de permissões só aceita localhost no momento; conexões fora de loopback receberão 403 Forbidden.</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>Perfil do DeepSeek Harness</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>Nome do subdiretório em ~/.dsh/profiles (por exemplo, web ou default).</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>Perfis detectados: {0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>Arquivo de configuração</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>Trecho de configuração</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>Copiar configuração</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>Gravar na configuração</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>Atualizar configuração</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>Arquivo ainda não encontrado; ele será criado ao gravar.</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>Arquivo de configuração encontrado; fufu-launcher ainda não foi adicionado.</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>Já configurado e atualizado.</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>Já configurado, mas porta, token ou endereço difere.</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>Não foi possível analisar o arquivo existente: {0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>A configuração JSON do Claude Desktop aceita apenas comandos stdio; por isso usa npx mcp-remote (requer Node.js no PATH).</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>Grava uma entrada de patch Cordis para @deepseek-ai/dsh-mcp-client no cordis.patch.yml do perfil selecionado.</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>Trecho de configuração copiado para a área de transferência.</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>Configuração gravada em {0}</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>Falha ao gravar configuração: {0}</value>
+  </data>
 </root>

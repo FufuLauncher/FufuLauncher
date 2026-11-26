@@ -13392,4 +13392,79 @@ UID {1} 用の新しいデータアーカイブを作成しますか？</value>
   <data name="Cutscene_CardDescription" xml:space="preserve">
     <value>過去バージョンのカットシーンとストーリーボイスパックを章ごとに確認・削除・復元できます</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>クライアント連携</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>設定スニペットを生成するか、ローカル AI クライアントの設定ファイルに直接書き込みます。</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>対象クライアント</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>接続アドレス</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>ローカルホスト (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>LAN / 仮想アダプター IP</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>現在、許可リストはローカルホストのみを許可しています。ループバック以外の接続は 403 Forbidden で拒否されます。</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>DeepSeek Harness プロファイル</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>~/.dsh/profiles 配下のディレクトリ名（例: web や default）。</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>検出されたプロファイル: {0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>設定ファイル</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>設定スニペット</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>設定をコピー</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>設定に書き込む</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>設定を更新</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>設定ファイルが見つかりません。書き込むと自動的に作成されます。</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>設定ファイルは存在しますが、fufu-launcher はまだ追加されていません。</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>設定済みで、現在のポートおよびトークンと一致しています。</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>設定済みですが、現在のポート・トークン・アドレスと一致しません。</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>既存の設定ファイルを解析できませんでした: {0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>Claude Desktop の JSON 設定は stdio コマンドのみ対応しているため、npx mcp-remote を使用します（PATH に Node.js が必要です）。</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>選択したプロファイルの cordis.patch.yml に @deepseek-ai/dsh-mcp-client の Cordis パッチ項目を書き込みます。</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>設定スニペットをクリップボードにコピーしました。</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>設定を {0} に書き込みました</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>設定の書き込みに失敗しました: {0}</value>
+  </data>
 </root>
