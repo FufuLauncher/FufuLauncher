@@ -610,7 +610,6 @@ public sealed class McpAgentConfigService
         var skippedLines = new HashSet<int>();
         var definedTables = new HashSet<string>(StringComparer.Ordinal);
         var currentTable = new List<string>();
-        var currentMatchKind = TomlMatchKind.None;
         var skippingSection = false;
         var skippingContinuation = false;
         string? multilineQuote = null;
@@ -673,23 +672,6 @@ public sealed class McpAgentConfigService
                 {
                     skippedLines.Add(lineIndex);
                     foundFufuEntry = true;
-                    if (segments.Count == 2)
-                    {
-                        currentMatchKind = TomlMatchKind.Server;
-                    }
-                    else if (segments.Count == 3 &&
-                             string.Equals(segments[2], "http_headers", StringComparison.Ordinal))
-                    {
-                        currentMatchKind = TomlMatchKind.Headers;
-                    }
-                    else
-                    {
-                        currentMatchKind = TomlMatchKind.OtherSubtable;
-                    }
-                }
-                else
-                {
-                    currentMatchKind = TomlMatchKind.None;
                 }
 
                 continue;
@@ -1453,14 +1435,6 @@ public sealed class McpAgentConfigService
 
     private static string NormalizeNewline(string text, string newline) =>
         newline == "\r\n" ? text.Replace("\r\n", "\n").Replace("\n", "\r\n") : text.Replace("\r\n", "\n");
-
-    private enum TomlMatchKind
-    {
-        None,
-        Server,
-        Headers,
-        OtherSubtable
-    }
 
     private sealed record TomlScanResult(
         bool FoundFufuEntry,
