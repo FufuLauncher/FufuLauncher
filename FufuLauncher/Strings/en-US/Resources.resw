@@ -14041,4 +14041,79 @@ Continue to the project page?</value>
   <data name="Cutscene_Protection_CurrentChapter" xml:space="preserve">
     <value>Protected · Belongs to a current chapter</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>Client integration</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>Generate a configuration snippet or write it directly into an AI client's config file.</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>Target client</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>Connection address</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>Localhost (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>LAN / Virtual IP</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>IP allow list only permits localhost right now; non-loopback connections will receive 403 Forbidden.</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>DeepSeek Harness profile</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>Subdirectory name under ~/.dsh/profiles (for example web or default).</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>Detected profiles: {0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>Config file</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>Configuration snippet</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>Copy config</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>Write to config</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>Update config</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>File not found yet; writing will create it.</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>Config file found; fufu-launcher has not been added yet.</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>Already configured and up to date.</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>Already configured, but port, token, or address differs.</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>Existing file could not be parsed: {0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>Claude Desktop's JSON config only supports stdio commands, so this uses npx mcp-remote (requires Node.js on PATH).</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>Writes a Cordis patch entry for @deepseek-ai/dsh-mcp-client into the selected profile's cordis.patch.yml.</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>Configuration snippet copied to clipboard.</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>Configuration written to {0}</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>Failed to write configuration: {0}</value>
+  </data>
 </root>

@@ -43,7 +43,9 @@ public sealed partial class McpWindow : Window
 
     public McpWindow()
     {
-        ViewModel = new McpSettingsViewModel(App.GetService<McpHostService>(),
+        ViewModel = new McpSettingsViewModel(
+            App.GetService<McpHostService>(),
+            App.GetService<McpAgentConfigService>(),
             Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread());
 
         InitializeComponent();
@@ -189,6 +191,17 @@ public sealed partial class McpWindow : Window
     private void OnOpenAuditWindowClick(object sender, RoutedEventArgs e)
     {
         McpAuditWindow.ShowOrActivate();
+    }
+
+    private void OnCopyClientConfigClick(object sender, RoutedEventArgs e)
+    {
+        CopyToClipboard(ViewModel.ClientConfigSnippet);
+        ViewModel.NotifyClientConfigCopied();
+    }
+
+    private void OnInstallClientConfigClick(object sender, RoutedEventArgs e)
+    {
+        ViewModel.InstallClientConfig();
     }
 
     private void CopyToClipboard(string? text)

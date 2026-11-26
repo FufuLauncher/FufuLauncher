@@ -16,6 +16,7 @@ namespace FufuLauncher.ViewModels;
 public sealed class McpSettingsViewModel : ObservableObject
 {
     private readonly McpHostService _host;
+    private readonly McpAgentConfigService _agentConfigService;
     private readonly DispatcherQueue? _dispatcher;
     private readonly EventHandler _hostStatusChangedHandler;
     private readonly EventHandler _auditChangedHandler;
@@ -40,14 +41,38 @@ public sealed class McpSettingsViewModel : ObservableObject
     private string _ipError = string.Empty;
     private Visibility _ipErrorVisibility = Visibility.Collapsed;
     private string _auditSummary = string.Empty;
+    private int _selectedAgentIndex;
+    private int _endpointModeIndex;
+    private string _dshProfileName = McpAgentConfigService.DefaultDshProfile;
+    private string _dshProfilesCaption = string.Empty;
+    private string _clientConfigPath = string.Empty;
+    private string _clientConfigStatus = string.Empty;
+    private string _clientConfigSnippet = string.Empty;
+    private string _clientNoteText = string.Empty;
+    private Visibility _clientNoteVisibility = Visibility.Collapsed;
+    private Visibility _clientEndpointWarningVisibility = Visibility.Collapsed;
+    private Visibility _dshProfileVisibility = Visibility.Collapsed;
+    private string _clientInstallButtonText = string.Empty;
+    private string _clientActionMessage = string.Empty;
+    private Visibility _clientActionMessageVisibility = Visibility.Collapsed;
+    private bool _clientActionIsError;
 
     public McpSettingsViewModel(McpHostService host, DispatcherQueue? dispatcher)
+        : this(host, new McpAgentConfigService(), dispatcher)
+    {
+    }
+
+    public McpSettingsViewModel(McpHostService host, McpAgentConfigService agentConfigService,
+        DispatcherQueue? dispatcher)
     {
         _host = host;
+        _agentConfigService = agentConfigService;
         _dispatcher = dispatcher;
         _hostStatusChangedHandler = (_, _) => DispatchRefreshStatus();
         _auditChangedHandler = (_, _) => DispatchRefreshAuditSummary();
     }
+
+    public IReadOnlyList<McpAgentDescriptor> AgentOptions => McpAgentConfigService.Agents;
 
     public ObservableCollection<McpToolToggleItem> PluginTools
     {
@@ -266,6 +291,121 @@ public sealed class McpSettingsViewModel : ObservableObject
             ? Visibility.Visible
             : Visibility.Collapsed;
 
+    public int SelectedAgentIndex
+    {
+        get => _selectedAgentIndex;
+        set
+        {
+            if (value < 0 || value >= AgentOptions.Count || !SetProperty(ref _selectedAgentIndex, value))
+            {
+                return;
+            }
+
+            ClearClientActionMessage();
+            RefreshClientIntegration();
+        }
+    }
+
+    public int EndpointModeIndex
+    {
+        get => _endpointModeIndex;
+        set
+        {
+            if (value < 0 || value > 1 || !SetProperty(ref _endpointModeIndex, value))
+            {
+                return;
+            }
+
+            ClearClientActionMessage();
+            RefreshClientIntegration();
+        }
+    }
+
+    public string DshProfileName
+    {
+        get => _dshProfileName;
+        set
+        {
+            if (!SetProperty(ref _dshProfileName, value))
+            {
+                return;
+            }
+
+            ClearClientActionMessage();
+            RefreshClientIntegration();
+        }
+    }
+
+    public string DshProfilesCaption
+    {
+        get => _dshProfilesCaption;
+        private set => SetProperty(ref _dshProfilesCaption, value);
+    }
+
+    public string ClientConfigPath
+    {
+        get => _clientConfigPath;
+        private set => SetProperty(ref _clientConfigPath, value);
+    }
+
+    public string ClientConfigStatus
+    {
+        get => _clientConfigStatus;
+        private set => SetProperty(ref _clientConfigStatus, value);
+    }
+
+    public string ClientConfigSnippet
+    {
+        get => _clientConfigSnippet;
+        private set => SetProperty(ref _clientConfigSnippet, value);
+    }
+
+    public string ClientNoteText
+    {
+        get => _clientNoteText;
+        private set => SetProperty(ref _clientNoteText, value);
+    }
+
+    public Visibility ClientNoteVisibility
+    {
+        get => _clientNoteVisibility;
+        private set => SetProperty(ref _clientNoteVisibility, value);
+    }
+
+    public Visibility ClientEndpointWarningVisibility
+    {
+        get => _clientEndpointWarningVisibility;
+        private set => SetProperty(ref _clientEndpointWarningVisibility, value);
+    }
+
+    public Visibility DshProfileVisibility
+    {
+        get => _dshProfileVisibility;
+        private set => SetProperty(ref _dshProfileVisibility, value);
+    }
+
+    public string ClientInstallButtonText
+    {
+        get => _clientInstallButtonText;
+        private set => SetProperty(ref _clientInstallButtonText, value);
+    }
+
+    public string ClientActionMessage
+    {
+        get => _clientActionMessage;
+        private set => SetProperty(ref _clientActionMessage, value);
+    }
+
+    public Visibility ClientActionSuccessVisibility =>
+        _clientActionMessageVisibility == Visibility.Visible && !_clientActionIsError
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
+    public Visibility ClientActionErrorVisibility =>
+        _clientActionMessageVisibility == Visibility.Visible && _clientActionIsError
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
     public async Task InitializeAsync()
     {
         if (_initialized)
@@ -291,6 +431,12 @@ public sealed class McpSettingsViewModel : ObservableObject
             IpFilterEnabled = _host.IpFilterEnabled;
             IpModeIndex = _host.IpAllowMode ? 0 : 1;
             IpRulesText = _host.IpRulesText;
+
+            var discoveredProfiles = _agentConfigService.DiscoverDshProfiles();
+            _dshProfileName = discoveredProfiles[0];
+            OnPropertyChanged(nameof(DshProfileName));
+            DshProfilesCaption = string.Format("Mcp_ClientDshProfilesDetectedFormat".GetLocalized(),
+                string.Join(", ", discoveredProfiles));
         }
         finally
         {
@@ -301,6 +447,34 @@ public sealed class McpSettingsViewModel : ObservableObject
         RaiseLayout();
         RefreshStatus();
         RefreshAuditSummary();
+    }
+
+    public void NotifyClientConfigCopied()
+    {
+        ShowClientActionMessage("Mcp_ClientCopied".GetLocalized(), isError: false);
+    }
+
+    public void InstallClientConfig()
+    {
+        var agent = GetSelectedAgent();
+        var endpointUrl = GetSelectedClientEndpoint();
+        var token = _host.RequireAuth ? _host.AccessToken : null;
+
+        var result = _agentConfigService.InstallOrUpdate(agent.Id, endpointUrl, token, DshProfileName);
+        if (result.Succeeded)
+        {
+            ShowClientActionMessage(
+                string.Format("Mcp_ClientInstallSuccessFormat".GetLocalized(), result.FilePath),
+                isError: false);
+        }
+        else
+        {
+            ShowClientActionMessage(
+                string.Format("Mcp_ClientInstallFailedFormat".GetLocalized(), result.ErrorMessage ?? "Unknown error"),
+                isError: true);
+        }
+
+        RefreshClientIntegration();
     }
 
     public async Task RegenerateTokenAsync()
@@ -514,6 +688,83 @@ public sealed class McpSettingsViewModel : ObservableObject
         }
 
         RaiseLayout();
+        RefreshClientIntegration();
+    }
+
+    private McpAgentDescriptor GetSelectedAgent()
+    {
+        var index = Math.Clamp(_selectedAgentIndex, 0, AgentOptions.Count - 1);
+        return AgentOptions[index];
+    }
+
+    private string GetSelectedClientEndpoint() =>
+        _endpointModeIndex == 0 ? _host.GetLocalEndpoint() : _host.GetPrimaryEndpoint();
+
+    private void RefreshClientIntegration()
+    {
+        var agent = GetSelectedAgent();
+        var endpointUrl = GetSelectedClientEndpoint();
+        var token = _host.RequireAuth ? _host.AccessToken : null;
+
+        DshProfileVisibility = agent.SupportsDshProfile ? Visibility.Visible : Visibility.Collapsed;
+        ClientEndpointWarningVisibility =
+            _endpointModeIndex == 1 && _host.IsLocalhostOnly ? Visibility.Visible : Visibility.Collapsed;
+
+        if (!string.IsNullOrEmpty(agent.NoteKey))
+        {
+            ClientNoteText = agent.NoteKey.GetLocalized();
+            ClientNoteVisibility = Visibility.Visible;
+        }
+        else
+        {
+            ClientNoteText = string.Empty;
+            ClientNoteVisibility = Visibility.Collapsed;
+        }
+
+        ClientConfigSnippet = _agentConfigService.BuildSnippet(agent.Id, endpointUrl, token);
+
+        try
+        {
+            var inspection = _agentConfigService.Inspect(agent.Id, endpointUrl, token, DshProfileName);
+            ClientConfigPath = inspection.FilePath;
+            ClientConfigStatus = inspection.State switch
+            {
+                McpAgentInstallState.FileMissing => "Mcp_ClientState_Missing".GetLocalized(),
+                McpAgentInstallState.NotConfigured => "Mcp_ClientState_NotConfigured".GetLocalized(),
+                McpAgentInstallState.Configured => "Mcp_ClientState_Configured".GetLocalized(),
+                McpAgentInstallState.NeedsUpdate => "Mcp_ClientState_NeedsUpdate".GetLocalized(),
+                McpAgentInstallState.InvalidFile => string.Format(
+                    "Mcp_ClientState_InvalidFormat".GetLocalized(), inspection.ErrorMessage ?? string.Empty),
+                _ => string.Empty
+            };
+
+            ClientInstallButtonText = inspection.State is McpAgentInstallState.Configured or McpAgentInstallState.NeedsUpdate
+                ? "Mcp_ClientUpdateConfig".GetLocalized()
+                : "Mcp_ClientInstallConfig".GetLocalized();
+        }
+        catch (Exception ex)
+        {
+            ClientConfigPath = string.Empty;
+            ClientConfigStatus = string.Format("Mcp_ClientState_InvalidFormat".GetLocalized(), ex.Message);
+            ClientInstallButtonText = "Mcp_ClientInstallConfig".GetLocalized();
+        }
+    }
+
+    private void ShowClientActionMessage(string message, bool isError)
+    {
+        _clientActionIsError = isError;
+        _clientActionMessageVisibility = Visibility.Visible;
+        ClientActionMessage = message;
+        OnPropertyChanged(nameof(ClientActionSuccessVisibility));
+        OnPropertyChanged(nameof(ClientActionErrorVisibility));
+    }
+
+    private void ClearClientActionMessage()
+    {
+        _clientActionMessageVisibility = Visibility.Collapsed;
+        ClientActionMessage = string.Empty;
+        OnPropertyChanged(nameof(ClientActionSuccessVisibility));
+        OnPropertyChanged(nameof(ClientActionErrorVisibility));
     }
 
     private void RefreshAuditSummary()
