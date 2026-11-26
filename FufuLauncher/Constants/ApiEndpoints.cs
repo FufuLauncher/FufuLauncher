@@ -549,7 +549,6 @@ namespace FufuLauncher.Constants
 
         public const string CloudGameWalletPath = "/hk4e_cg_cn/wallet/wallet/get";
         public const string CloudGameWalletUrl = CloudGameApiBase + CloudGameWalletPath;
-        public const string CloudGameWalletWebViewFilter = "*://" + CloudGameHost + CloudGameWalletPath + "*";
 
         public const string LunaResignInfoUrl = LunaEventApiBase + "/resign_info";
         public const string LunaResignUrl = LunaEventApiBase + "/resign";

@@ -94,9 +94,7 @@ public sealed partial class LoginQrWindow
                     return;
                 }
 
-                string serverType = cookies.ContainsKey("ltuid_v2") || cookies.ContainsKey("cookie_token_v2")
-                    ? "os"
-                    : "cn";
+                string serverType = ServerComboBox.SelectedIndex == 1 ? "os" : "cn";
                 OnLoginSuccess(cookies, serverType);
             }
             catch (Exception ex)

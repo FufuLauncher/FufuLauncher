@@ -710,7 +710,7 @@
                     AutomationProperties.Name="{helpers:Loc Key=LaunchConfig_PostLaunch_MinimizeToTray}"
                     ToolTipService.ToolTip="{helpers:Loc Key=LaunchConfig_PostLaunch_MinimizeToTray}"
                     Click="MinimizeToTrayButton_Click">
-                <PathIcon Data="F0 M0,0 H12 L6,8 Z M3,1.5 H9 L6,5.5 Z" />
+                <PathIcon Data="F0 M0,0 H12 L6,8 Z M2,1 H10 L6,6.333 Z" />
             </Button>
         </Grid>
     </Grid>

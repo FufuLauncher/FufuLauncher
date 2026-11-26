@@ -85,13 +85,6 @@ public partial class AccountManager
         {
             bytes = await File.ReadAllBytesAsync(path);
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
-        {
-            DebugLog.Info("AccountManager.Cookies",
-                $"[AccountManager] Failed to read cookie file {Path.GetFileName(path)}: {ex.Message}");
-            RemoveUnreadableCookieFile(path);
-            return null;
-        }
         catch (Exception ex)
         {
             DebugLog.Info("AccountManager.Cookies",

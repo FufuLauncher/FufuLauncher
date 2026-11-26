@@ -13,6 +13,8 @@ public sealed partial class MainPage
 {
     #region 每日提醒
 
+    private Storyboard? _dailyNoteTransition;
+
     private async void RefreshDailyNoteButton_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn)
@@ -31,6 +33,8 @@ public sealed partial class MainPage
 
     private void SyncDailyNoteState()
     {
+        _dailyNoteTransition?.Stop();
+        _dailyNoteTransition = null;
         if (DailyNoteDataPanel == null || DailyNoteEmptyText == null) return;
 
         if (ViewModel.IsDailyNoteLoaded)
@@ -49,22 +53,30 @@ public sealed partial class MainPage
         }
     }
 
-    private void AnimateDailyNoteTransition(bool isLoaded)
+    private void UpdateDailyNoteVisualState()
     {
+        if (!ViewModel.IsDailyNoteLoaded)
+        {
+            SyncDailyNoteState();
+            return;
+        }
+
         if (DailyNoteDataPanel == null || DailyNoteEmptyText == null) return;
 
+        _dailyNoteTransition?.Stop();
         var storyboard = new Storyboard();
         var duration = new Duration(TimeSpan.FromMilliseconds(300));
         var easing = new CubicEase { EasingMode = EasingMode.EaseInOut };
 
-        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteDataPanel, "Opacity", isLoaded ? 1.0 : 0.0, duration,
+        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteDataPanel, "Opacity", 1.0, duration,
             easing));
-        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteEmptyText, "Opacity", isLoaded ? 0.0 : 0.8, duration,
+        storyboard.Children.Add(CreateDoubleAnimation(DailyNoteEmptyText, "Opacity", 0.0, duration,
             easing));
 
-        DailyNoteDataPanel.IsHitTestVisible = isLoaded;
-        DailyNoteEmptyText.IsHitTestVisible = !isLoaded;
+        DailyNoteDataPanel.IsHitTestVisible = true;
+        DailyNoteEmptyText.IsHitTestVisible = false;
 
+        _dailyNoteTransition = storyboard;
         storyboard.Begin();
     }
 

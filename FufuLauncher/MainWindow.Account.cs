@@ -212,7 +212,7 @@ public sealed partial class MainWindow
             if (cookies == null || cookies.Count == 0) return;
 
             var cookieString = string.Join("; ", cookies.Select(kv => $"{kv.Key}={kv.Value}"));
-            var response = await App.GetService<IUserInfoService>().GetUserFullInfoAsync(cookieString);
+            var response = await App.GetService<IUserInfoService>().GetUserFullInfoAsync(cookieString, entry.ServerType);
             if (response is not { retcode: 0 }) return;
 
             var fetched = AccountAvatarPendant.NormalizeUrl(response.data?.user_info?.pendant);

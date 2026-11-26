@@ -115,7 +115,7 @@ public sealed partial class LoginQrWindow
 
                     bool hasLoginToken = cookieDict.ContainsKey("cookie_token") ||
                                          cookieDict.ContainsKey("cookie_token_v2");
-                    bool hasAccountId = cookieDict.ContainsKey("ltuid") || cookieDict.ContainsKey("stuid");
+                    bool hasAccountId = Services.MiHoYo.AccountCookieIdentity.GetUid(cookieDict) != null;
 
                     if (hasLoginToken && hasAccountId)
                     {
@@ -150,7 +150,7 @@ public sealed partial class LoginQrWindow
                     else if (hasLoginToken && !hasAccountId)
                     {
                         DebugLog.Info("LoginQrWindow.WebPassport",
-                            "WebView2 cookie missing account ID (ltuid/stuid), waiting for subsequent events...");
+                                "WebView2 cookies do not identify a single account, waiting for subsequent events...");
                     }
                 }
             }

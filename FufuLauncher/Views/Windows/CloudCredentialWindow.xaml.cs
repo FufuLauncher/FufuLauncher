@@ -3,6 +3,7 @@ Copyright (c) FufuLauncher Dev Team. All rights reserved.
 Licensed under the MIT License.
 */
 
+using System.Text.Json;
 using Windows.Graphics;
 using CommunityToolkit.Mvvm.Messaging;
 using FufuLauncher.Helpers;
@@ -51,10 +52,7 @@ public sealed partial class CloudCredentialWindow : Window
             CloudWebView.CoreWebView2.Settings.AreDevToolsEnabled = false;
             CloudWebView.CoreWebView2.ContextMenuRequested += CoreWebView2_ContextMenuRequested;
 
-            CloudWebView.CoreWebView2.AddWebResourceRequestedFilter(
-                ApiEndpoints.CloudGameWalletWebViewFilter,
-                CoreWebView2WebResourceContext.All);
-            CloudWebView.CoreWebView2.WebResourceRequested += CoreWebView2_WebResourceRequested;
+            CloudWebView.CoreWebView2.WebResourceResponseReceived += CoreWebView2_WebResourceResponseReceived;
 
             CloudWebView.CoreWebView2.Navigate(ApiEndpoints.CloudGamePageUrl);
         }
@@ -65,51 +63,65 @@ public sealed partial class CloudCredentialWindow : Window
         }
     }
 
-    private async void CoreWebView2_WebResourceRequested(CoreWebView2 sender,
-        CoreWebView2WebResourceRequestedEventArgs args)
+    private async void CoreWebView2_WebResourceResponseReceived(CoreWebView2 sender,
+        CoreWebView2WebResourceResponseReceivedEventArgs args)
     {
         if (_captured || _isCapturing || _isClosed) return;
+        if (!Uri.TryCreate(args.Request.Uri, UriKind.Absolute, out var uri) ||
+            uri.Scheme != Uri.UriSchemeHttps || !uri.IsDefaultPort || uri.Host != ApiEndpoints.CloudGameHost ||
+            uri.AbsolutePath != ApiEndpoints.CloudGameWalletPath || args.Response.StatusCode != 200 ||
+            !args.Request.Headers.Contains("x-rpc-combo_token")) return;
 
+        string comboToken = args.Request.Headers.GetHeader("x-rpc-combo_token");
+        if (string.IsNullOrWhiteSpace(comboToken)) return;
+
+        _isCapturing = true;
         try
         {
-            if (!args.Request.Headers.Contains("x-rpc-combo_token")) return;
-
-            var comboToken = args.Request.Headers.GetHeader("x-rpc-combo_token");
-            if (!string.IsNullOrEmpty(comboToken))
+            using var content = await args.Response.GetContentAsync();
+            if (_isClosed || content == null) return;
+            using var stream = content.AsStreamForRead();
+            using var body = await JsonDocument.ParseAsync(stream);
+            if (_isClosed) return;
+            if (!CloudGameCheckinService.TryReadInt(body.RootElement, "retcode", out int retcode) || retcode != 0 ||
+                !body.RootElement.TryGetProperty("data", out var wallet) || wallet.ValueKind != JsonValueKind.Object)
             {
-                _isCapturing = true;
-                var cookies = await sender.CookieManager.GetCookiesAsync(ApiEndpoints.CloudGamePageUrl);
-                if (_isClosed) return;
-                var accountUid = CloudCredentialIdentity.GetAccountUid(cookies.Select(cookie =>
-                    new KeyValuePair<string, string>(cookie.Name, cookie.Value)));
-                if (accountUid == null)
-                {
-                    ShowCredentialError("CloudCredential_IdentityUnavailable".GetLocalized());
-                    return;
-                }
-
-                if (!string.Equals(accountUid, _uid, StringComparison.Ordinal))
-                {
-                    ShowCredentialError(string.Format("CloudCredential_AccountMismatch".GetLocalized(), accountUid,
-                        _uid));
-                    return;
-                }
-
-                if (!await SettingsViewModel.SaveCloudCredentialAsync(_uid, comboToken, accountUid))
-                {
-                    ShowCredentialError("CloudCredential_SaveFailed".GetLocalized());
-                    return;
-                }
-
-                _captured = true;
-                if (_isClosed) return;
-                TitleText.Text = string.Format("CloudCredential_AddUidCapturedTitle_Format".GetLocalized(), _uid);
-                CredentialInfoBar.IsOpen = false;
-                WeakReferenceMessenger.Default.Send(new NotificationMessage("CloudCredential_Title".GetLocalized(), "CloudCredential_FetchSuccess".GetLocalized(),
-                    NotificationType.Success, 2000));
-                await Task.Delay(1500);
-                if (!_isClosed) Close();
+                ShowCredentialError(retcode == -100
+                    ? "CheckinCloud_TokenExpired".GetLocalized()
+                    : "Status_RequestFailed".GetLocalized());
+                return;
             }
+
+            var cookies = await sender.CookieManager.GetCookiesAsync(ApiEndpoints.CloudGamePageUrl);
+            if (_isClosed) return;
+            var accountUid = CloudCredentialIdentity.GetAccountUid(cookies.Select(cookie =>
+                new KeyValuePair<string, string>(cookie.Name, cookie.Value)));
+            if (accountUid == null)
+            {
+                ShowCredentialError("CloudCredential_IdentityUnavailable".GetLocalized());
+                return;
+            }
+
+            if (!string.Equals(accountUid, _uid, StringComparison.Ordinal))
+            {
+                ShowCredentialError(string.Format("CloudCredential_AccountMismatch".GetLocalized(), accountUid, _uid));
+                return;
+            }
+
+            if (!await SettingsViewModel.SaveCloudCredentialAsync(_uid, comboToken, accountUid))
+            {
+                ShowCredentialError("CloudCredential_SaveFailed".GetLocalized());
+                return;
+            }
+
+            _captured = true;
+            if (_isClosed) return;
+            TitleText.Text = string.Format("CloudCredential_AddUidCapturedTitle_Format".GetLocalized(), _uid);
+            CredentialInfoBar.IsOpen = false;
+            WeakReferenceMessenger.Default.Send(new NotificationMessage("CloudCredential_Title".GetLocalized(), "CloudCredential_FetchSuccess".GetLocalized(),
+                NotificationType.Success, 2000));
+            await Task.Delay(1500);
+            if (!_isClosed) Close();
         }
         catch (Exception ex)
         {
@@ -142,7 +154,7 @@ public sealed partial class CloudCredentialWindow : Window
             if (CloudWebView.CoreWebView2 != null)
             {
                 CloudWebView.CoreWebView2.ContextMenuRequested -= CoreWebView2_ContextMenuRequested;
-                CloudWebView.CoreWebView2.WebResourceRequested -= CoreWebView2_WebResourceRequested;
+                CloudWebView.CoreWebView2.WebResourceResponseReceived -= CoreWebView2_WebResourceResponseReceived;
             }
 
             CloudWebView.Close();

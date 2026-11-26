@@ -390,18 +390,17 @@ public class UnifiedCheckinService : IUnifiedCheckinService
 
                         bool success = cloudResult.Success;
                         if (!success && cloudResult.FailCount == 0) result.CloudGameResult.FailCount++;
+                        string itemMessage = success ? "Status_Completed".GetLocalized() : cloudResult.Message;
                         var cdd = result.AccountResults.FirstOrDefault(a => a.Nickname == account.Nickname);
                         if (cdd != null)
-                            cdd.Items.Add(("Checkin_CloudGameCheckin".GetLocalized(), success,
-                                success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized()));
+                            cdd.Items.Add(("Checkin_CloudGameCheckin".GetLocalized(), success, itemMessage));
                         else
                             result.AccountResults.Add(new AccountCheckinDetail
                             {
                                 Nickname = account.Nickname,
                                 Items =
                                 {
-                                    ("Checkin_CloudGameCheckin".GetLocalized(), success,
-                                        success ? "Status_Completed".GetLocalized() : "Status_Failure".GetLocalized())
+                                    ("Checkin_CloudGameCheckin".GetLocalized(), success, itemMessage)
                                 }
                             });
                     }

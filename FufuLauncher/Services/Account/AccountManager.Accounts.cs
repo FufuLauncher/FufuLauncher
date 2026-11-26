@@ -18,7 +18,8 @@ public partial class AccountManager
         await _lock.WaitAsync();
         try
         {
-            string stuid = ExtractStuid(cookies, serverType);
+            string stuid = MiHoYo.AccountCookieIdentity.GetUid(cookies)
+                           ?? throw new ArgumentException("Account_CannotExtractId".GetLocalized());
             string id = $"{serverType}_{stuid}";
 
             var existingEntry = _accountList.Accounts.FirstOrDefault(a => a.Id == id);
@@ -153,21 +154,6 @@ public partial class AccountManager
         {
             _lock.Release();
         }
-    }
-
-    private string ExtractStuid(Dictionary<string, string> cookies, string serverType)
-    {
-        if (serverType == "cn")
-        {
-            if (cookies.TryGetValue("ltuid", out var ltuid)) return ltuid;
-            if (cookies.TryGetValue("stuid", out var stuid)) return stuid;
-        }
-        else
-        {
-            if (cookies.TryGetValue("ltuid_v2", out var ltuidV2)) return ltuidV2;
-        }
-
-        throw new ArgumentException("Account_CannotExtractId".GetLocalized());
     }
 
     #endregion

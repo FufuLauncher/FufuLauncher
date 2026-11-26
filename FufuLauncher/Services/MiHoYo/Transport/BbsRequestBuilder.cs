@@ -28,12 +28,12 @@ public sealed class BbsRequestBuilder : IBbsRequestBuilder
         return scene switch
         {
             BbsRequestScene.DailyNote => BuildGameRecord(ctx, method, url, body, challenge, options,
-                dsSalt: HeaderSalts.CnX4, cookieMode: CookieMode.Cookie, acceptLanguage: true,
+                dsSalt: HeaderSalts.CnX4, cookieMode: CookieMode.CnWeb, acceptLanguage: true,
                 toolVersion: HeaderVersions.ToolVersionCn, page: Page),
             BbsRequestScene.DailyNoteWidget => BuildGameRecord(ctx, method, url, body, challenge, options,
                 dsSalt: HeaderSalts.CnX6, cookieMode: CookieMode.SToken, acceptLanguage: true),
             BbsRequestScene.Geetest => BuildGameRecord(ctx, method, url, body, challenge, options,
-                dsSalt: HeaderSalts.CnX4, cookieMode: CookieMode.Cookie, acceptLanguage: false,
+                dsSalt: HeaderSalts.CnX4, cookieMode: CookieMode.CnWeb, acceptLanguage: false,
                 defaultChallengeGame: "2"),
             BbsRequestScene.GetFpNative => BuildGetFp(ctx, method, url, body),
 
@@ -124,19 +124,39 @@ public sealed class BbsRequestBuilder : IBbsRequestBuilder
         }
 
         var full = new List<string>();
-        if (FirstPair(cookies, "account_id", "account_id_v2") is { } aid)
-            full.Add($"{aid.Key}={aid.Value}");
-        if (FirstPair(cookies, "cookie_token", "cookie_token_v2") is { } ct)
-            full.Add($"{ct.Key}={ct.Value}");
+        var aid = FirstPair(cookies, "account_id", "account_id_v2");
+        var ct = FirstPair(cookies, "cookie_token", "cookie_token_v2");
+        if (mode == CookieMode.CnWeb && (aid?.Key != "account_id" || ct?.Key != "cookie_token") &&
+            FirstPair(cookies, "account_id_v2") is { } v2Aid && FirstPair(cookies, "cookie_token_v2") is { } v2Ct)
+            (aid, ct) = (v2Aid, v2Ct);
+        if (aid is { } accountId)
+            full.Add($"{accountId.Key}={accountId.Value}");
+        if (ct is { } cookieToken)
+            full.Add($"{cookieToken.Key}={cookieToken.Value}");
+        if (mode == CookieMode.CnWeb && aid?.Key == "account_id_v2" && ct?.Key == "cookie_token_v2")
+            AddV2Mid("account_mid_v2");
+
         var lt = FirstPair(cookies, "ltoken", "ltoken_v2");
         var lu = FirstPair(cookies, "ltuid", "ltuid_v2");
+        if (mode == CookieMode.CnWeb && (lt?.Key != "ltoken" || lu?.Key != "ltuid") &&
+            FirstPair(cookies, "ltoken_v2") is { } v2Lt && FirstPair(cookies, "ltuid_v2") is { } v2Lu)
+            (lt, lu) = (v2Lt, v2Lu);
         if (lt is { } ltp && lu is { } lup)
         {
             full.Add($"{ltp.Key}={ltp.Value}");
             full.Add($"{lup.Key}={lup.Value}");
+            if (mode == CookieMode.CnWeb && ltp.Key == "ltoken_v2" && lup.Key == "ltuid_v2")
+                AddV2Mid("ltmid_v2");
         }
 
         return string.Join(";", full);
+
+        void AddV2Mid(string key)
+        {
+            string mid = FirstNonEmpty(cookies, key, "mid");
+            if (mid.Length != 0)
+                full.Add($"{key}={mid}");
+        }
     }
 
 
@@ -162,6 +182,7 @@ public sealed class BbsRequestBuilder : IBbsRequestBuilder
     internal enum CookieMode
     {
         Cookie,
-        SToken
+        SToken,
+        CnWeb
     }
 }

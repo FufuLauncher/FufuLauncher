@@ -128,8 +128,8 @@ public class TokenRefreshService : IDisposable
 
     private async Task<bool?> CheckCookieValidAsync(IReadOnlyDictionary<string, string> cookies, DeviceIdentity device)
     {
-        string? ltokenCookie = BuildCredentialCookie(cookies, "ltoken", "ltuid");
-        string? cookieTokenCookie = BuildCredentialCookie(cookies, "cookie_token", "account_id");
+        string? ltokenCookie = BuildCredentialCookie(cookies, "ltoken", "ltuid", "ltmid_v2");
+        string? cookieTokenCookie = BuildCredentialCookie(cookies, "cookie_token", "account_id", "account_mid_v2");
         if (ltokenCookie == null || cookieTokenCookie == null) return false;
 
         bool? ltokenValid = await CheckCredentialValidAsync(ApiEndpoints.MihoyoBbsAccountInfoUrl, ltokenCookie, device);
@@ -143,14 +143,19 @@ public class TokenRefreshService : IDisposable
     }
 
     private static string? BuildCredentialCookie(IReadOnlyDictionary<string, string> cookies,
-        string tokenName, string uidName)
+        string tokenName, string uidName, string midName)
     {
-        string suffix = !string.IsNullOrEmpty(cookies.GetValueOrDefault(tokenName)) ? "" : "_v2";
-        string? token = cookies.GetValueOrDefault(tokenName + suffix);
-        string? uid = cookies.GetValueOrDefault(uidName + suffix);
-        return string.IsNullOrEmpty(token) || string.IsNullOrEmpty(uid)
-            ? null
-            : $"{tokenName}{suffix}={token}; {uidName}{suffix}={uid}";
+        string? token = ReadCookie(cookies, tokenName);
+        string? uid = ReadCookie(cookies, uidName);
+        if (token != null && uid != null) return $"{tokenName}={token}; {uidName}={uid}";
+
+        token = ReadCookie(cookies, tokenName + "_v2");
+        uid = ReadCookie(cookies, uidName + "_v2");
+        if (token == null || uid == null) return null;
+
+        string header = $"{tokenName}_v2={token}; {uidName}_v2={uid}";
+        string? mid = ReadCookie(cookies, midName, "mid");
+        return mid == null ? header : $"{header}; {midName}={mid}";
     }
 
     private async Task<bool?> CheckCredentialValidAsync(string url, string cookie, DeviceIdentity device)

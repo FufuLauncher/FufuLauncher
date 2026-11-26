@@ -100,7 +100,10 @@ public sealed partial class MainPage : Page
         }
         else if (e.PropertyName == nameof(MainViewModel.IsDailyNoteLoaded))
         {
-            _ = DispatcherQueue.TryEnqueue(() => AnimateDailyNoteTransition(ViewModel.IsDailyNoteLoaded));
+            if (DispatcherQueue.HasThreadAccess)
+                UpdateDailyNoteVisualState();
+            else
+                _ = DispatcherQueue.TryEnqueue(UpdateDailyNoteVisualState);
         }
         else if (e.PropertyName == nameof(MainViewModel.IsCheckinLoaded))
         {

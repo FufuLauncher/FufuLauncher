@@ -6,6 +6,7 @@ Licensed under the MIT License.
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using FufuLauncher.Helpers;
+using FufuLauncher.Models;
 using FufuLauncher.Models.MiHoYo;
 using FufuLauncher.Services;
 using FufuLauncher.Services.MiHoYo.DailyNote;
@@ -57,23 +58,23 @@ public partial class MainViewModel
         var version = Interlocked.Increment(ref _dailyNoteVersion);
         try
         {
-            await ClearDailyNoteDataAsync(invalidate: false);
+            await ClearDailyNoteDataAsync(version);
             var roles = App.GetService<GameRoleService>();
             var selected = await roles.GetCurrentAsync();
-            if (version != _dailyNoteVersion || selected == null) return;
-            var dailyNoteData = await _dailyNoteCardService.LoadCardDataAsync(
-                selected.Role.game_uid, selected.Role.region, selected.AccountId);
-
-            if (dailyNoteData == null)
-            {
-                DebugLog.Info("MainViewModel.DailyNote",
-                    "[DailyNote] Login expired and refresh failed, skipping note update");
-                return;
-            }
+            if (version != _dailyNoteVersion) return;
+            var dailyNoteData = selected == null
+                ? null
+                : await _dailyNoteCardService.LoadCardDataAsync(
+                    selected.Role.game_uid, selected.Role.region, selected.AccountId);
 
             await UpdateUI(() =>
             {
-                if (version != _dailyNoteVersion || !roles.IsCurrent(selected)) return;
+                if (version != _dailyNoteVersion) return;
+                if (selected == null || dailyNoteData == null || !roles.IsCurrent(selected))
+                {
+                    DailyNoteStatus = "Home_NoData".GetLocalized();
+                    return;
+                }
                 CurrentResin = dailyNoteData.CurrentResin;
                 MaxResin = dailyNoteData.MaxResin;
                 FinishedTaskNum = dailyNoteData.FinishedTaskNum;
@@ -86,9 +87,8 @@ public partial class MainViewModel
                 TransformerRecoveryTime = dailyNoteData.TransformerRecoveryTime;
 
                 IsDailyNoteLoaded = true;
+                DebugLog.Info("MainViewModel.DailyNote", "[DailyNote] Note data loaded");
             });
-
-            DebugLog.Info("MainViewModel.DailyNote", "[DailyNote] Note data loaded");
         }
         catch (Exception ex)
         {
@@ -97,7 +97,8 @@ public partial class MainViewModel
             {
                 if (version == _dailyNoteVersion)
                 {
-                    DailyNoteStatus = IsReloginRequiredError(ex)
+                    DailyNoteStatus = ex is DailyNoteApiException error &&
+                                      MiyousheCheckinGame.IsLoginExpired(error.Retcode)
                         ? "DailyNote_ReloginRequired".GetLocalized()
                         : ex.Message;
                 }
@@ -105,17 +106,14 @@ public partial class MainViewModel
         }
     }
 
-    private static bool IsReloginRequiredError(Exception ex) =>
-        ex is DailyNoteApiException { Retcode: 10001 or -10001 } ||
-        ex.Message.Contains("（10001）", StringComparison.Ordinal) ||
-        ex.Message.Contains("（-10001）", StringComparison.Ordinal);
-
-    private async Task ClearDailyNoteDataAsync(bool invalidate = true)
+    private Task ClearDailyNoteDataAsync(int? loadingVersion = null)
     {
-        if (invalidate) Interlocked.Increment(ref _dailyNoteVersion);
-        await UpdateUI(() =>
+        var version = loadingVersion ?? Interlocked.Increment(ref _dailyNoteVersion);
+        return UpdateUI(() =>
         {
-            DailyNoteStatus = "Home_NoData".GetLocalized();
+            if (version != _dailyNoteVersion) return;
+            DailyNoteStatus = (loadingVersion.HasValue ? "Common_Loading" : "Home_NoData").GetLocalized();
+            IsDailyNoteLoaded = false;
             CurrentResin = 0;
             MaxResin = 0;
             FinishedTaskNum = 0;
@@ -126,7 +124,6 @@ public partial class MainViewModel
             MaxExpeditionNum = 0;
             IsTransformerObtained = false;
             TransformerRecoveryTime = "";
-            IsDailyNoteLoaded = false;
         });
     }
 
