@@ -13390,4 +13390,82 @@ UID {1}용 새 데이터 아카이브를 만드시겠습니까?</value>
   <data name="Cutscene_CardDescription" xml:space="preserve">
     <value>이전 버전의 컷신과 스토리 음성 팩을 챕터별로 확인하고 삭제하거나 복원할 수 있습니다</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>클라이언트 연동</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>구성 스니펫을 생성하거나 로컬 AI 클라이언트 설정 파일에 직접 기록합니다.</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>대상 클라이언트</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>연결 주소</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>로컬호스트 (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>LAN / 가상 어댑터 IP</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>현재 허용 목록이 로컬호스트만 허용하므로 루프백 외 연결은 403 Forbidden으로 거부됩니다.</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>DeepSeek Harness 프로필</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>$DSH_HOME/profiles 아래의 하위 디렉터리 이름(기본값 ~/.dsh/profiles, 예: web 또는 default).</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>감지된 프로필: {0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>설정 파일</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>구성 스니펫</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>구성 복사</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>설정에 쓰기</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>설정 업데이트</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>설정 파일이 아직 없습니다. 쓰기를 실행하면 자동으로 생성됩니다.</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>설정 파일이 있지만 fufu-launcher가 아직 추가되지 않았습니다.</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>이미 구성되었으며 현재 포트 및 토큰과 일치합니다.</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>이미 구성되었지만 포트, 토큰 또는 주소가 다릅니다.</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>기존 설정 파일을 구문 분석할 수 없습니다: {0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>Claude Desktop의 JSON 설정은 stdio 명령만 지원하므로 npx mcp-remote를 사용합니다(PATH에 Node.js 필요).</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>선택한 프로필의 cordis.patch.yml에 @deepseek-ai/dsh-mcp-client Cordis 패치 항목을 기록합니다.</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>구성 스니펫이 클립보드에 복사되었습니다.</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>설정을 {0}에 기록했습니다</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>설정을 기록하지 못했습니다: {0}</value>
+  </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>구성 스니펫을 클립보드에 복사하지 못했습니다.</value>
+  </data>
 </root>

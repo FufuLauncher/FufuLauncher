@@ -13388,4 +13388,82 @@ Lanjutkan ke halaman proyek?</value>
   <data name="Cutscene_CardDescription" xml:space="preserve">
     <value>Lihat, hapus, dan pulihkan cutscene serta paket suara cerita dari versi sebelumnya berdasarkan bab</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>Integrasi klien</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>Buat cuplikan konfigurasi atau tulis langsung ke berkas konfigurasi klien AI.</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>Klien target</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>Alamat koneksi</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>Localhost (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>IP LAN / virtual</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>Daftar izin saat ini hanya mengizinkan localhost; koneksi non-loopback akan menerima 403 Forbidden.</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>Profil DeepSeek Harness</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>Nama subdirektori di $DSH_HOME/profiles (default ~/.dsh/profiles, misalnya web atau default).</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>Profil terdeteksi: {0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>Berkas konfigurasi</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>Cuplikan konfigurasi</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>Salin konfigurasi</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>Tulis ke konfigurasi</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>Perbarui konfigurasi</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>Berkas belum ditemukan; menulis akan membuatnya.</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>Berkas konfigurasi ditemukan; fufu-launcher belum ditambahkan.</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>Sudah dikonfigurasi dan mutakhir.</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>Sudah dikonfigurasi, tetapi port, token, atau alamat berbeda.</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>Berkas yang ada tidak dapat diurai: {0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>Konfigurasi JSON Claude Desktop hanya mendukung perintah stdio, sehingga menggunakan npx mcp-remote (memerlukan Node.js di PATH).</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>Menulis entri patch Cordis untuk @deepseek-ai/dsh-mcp-client ke cordis.patch.yml profil yang dipilih.</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>Cuplikan konfigurasi disalin ke papan klip.</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>Konfigurasi ditulis ke {0}</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>Gagal menulis konfigurasi: {0}</value>
+  </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>Gagal menyalin cuplikan konfigurasi ke papan klip.</value>
+  </data>
 </root>

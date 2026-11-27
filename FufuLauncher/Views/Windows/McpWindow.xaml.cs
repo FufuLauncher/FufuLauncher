@@ -10,6 +10,7 @@ using FufuLauncher.ViewModels;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Graphics;
@@ -43,7 +44,9 @@ public sealed partial class McpWindow : Window
 
     public McpWindow()
     {
-        ViewModel = new McpSettingsViewModel(App.GetService<McpHostService>(),
+        ViewModel = new McpSettingsViewModel(
+            App.GetService<McpHostService>(),
+            App.GetService<McpAgentConfigService>(),
             Microsoft.UI.Dispatching.DispatcherQueue.GetForCurrentThread());
 
         InitializeComponent();
@@ -168,7 +171,7 @@ public sealed partial class McpWindow : Window
 
     private void OnCopyTokenClick(object sender, RoutedEventArgs e)
     {
-        CopyToClipboard(ViewModel.AccessToken);
+        CopyToClipboard(ViewModel.AccessToken, excludeFromHistory: true);
     }
 
     private async void OnRegenerateTokenClick(object sender, RoutedEventArgs e)
@@ -191,21 +194,62 @@ public sealed partial class McpWindow : Window
         McpAuditWindow.ShowOrActivate();
     }
 
-    private void CopyToClipboard(string? text)
+    private void OnCopyClientConfigClick(object sender, RoutedEventArgs e)
+    {
+        if (CopyToClipboard(ViewModel.ClientConfigSnippet, excludeFromHistory: true))
+        {
+            ViewModel.NotifyClientConfigCopied();
+        }
+        else
+        {
+            ViewModel.NotifyClientConfigCopyFailed();
+        }
+    }
+
+    private void OnInstallClientConfigClick(object sender, RoutedEventArgs e)
+    {
+        ViewModel.InstallClientConfig();
+    }
+
+    private void OnPreviewCopyingToClipboard(TextBox sender, TextControlCopyingToClipboardEventArgs args)
+    {
+        var textToCopy = string.IsNullOrEmpty(sender.SelectedText) ? sender.Text : sender.SelectedText;
+        args.Handled = true;
+        if (!CopyToClipboard(textToCopy, excludeFromHistory: true))
+        {
+            ViewModel.NotifyClientConfigCopyFailed();
+        }
+    }
+
+    private bool CopyToClipboard(string? text, bool excludeFromHistory = false)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
-            return;
+            return false;
         }
 
         try
         {
             var package = new DataPackage();
             package.SetText(text);
-            Clipboard.SetContent(package);
+            if (excludeFromHistory)
+            {
+                Clipboard.SetContentWithOptions(package, new ClipboardContentOptions
+                {
+                    IsAllowedInHistory = false,
+                    IsRoamable = false
+                });
+            }
+            else
+            {
+                Clipboard.SetContent(package);
+            }
+
+            return true;
         }
         catch
         {
+            return false;
         }
     }
 

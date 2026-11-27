@@ -170,6 +170,7 @@ public partial class App
                 services.AddSingleton<Services.Mcp.McpInstallJobService>();
                 services.AddSingleton<Services.Mcp.McpToolInvoker>();
                 services.AddSingleton<Services.Mcp.McpHostService>();
+                services.AddSingleton<Services.Mcp.McpAgentConfigService>();
                 services.AddSingleton<Services.PluginMirror.MirrorSiteProvider>();
                 services.AddSingleton<Services.PluginMirror.PluginMirrorDownloadService>();
                 services.AddSingleton<PluginStoreViewModel>();

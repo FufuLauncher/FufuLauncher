@@ -14041,4 +14041,82 @@ UIGF v4.x/3.0/2.x</value>
   <data name="Cutscene_Protection_CurrentChapter" xml:space="preserve">
     <value>受保护 · 属于当前版本章节</value>
   </data>
+  <data name="Mcp_ClientSection" xml:space="preserve">
+    <value>客户端接入</value>
+  </data>
+  <data name="Mcp_ClientCaption" xml:space="preserve">
+    <value>生成配置片段，或直接写入本机 AI 客户端的配置文件。</value>
+  </data>
+  <data name="Mcp_ClientTargetTitle" xml:space="preserve">
+    <value>目标客户端</value>
+  </data>
+  <data name="Mcp_ClientEndpointTitle" xml:space="preserve">
+    <value>连接地址</value>
+  </data>
+  <data name="Mcp_ClientEndpointLocal" xml:space="preserve">
+    <value>本机回环 (127.0.0.1)</value>
+  </data>
+  <data name="Mcp_ClientEndpointPrimary" xml:space="preserve">
+    <value>局域网 / 虚拟网卡地址</value>
+  </data>
+  <data name="Mcp_ClientEndpointWhitelistWarning" xml:space="preserve">
+    <value>当前允许名单仅允许本机连接，使用非本机地址将被拒绝（403）。</value>
+  </data>
+  <data name="Mcp_ClientDshProfileTitle" xml:space="preserve">
+    <value>DeepSeek Harness 配置集 (Profile)</value>
+  </data>
+  <data name="Mcp_ClientDshProfileCaption" xml:space="preserve">
+    <value>$DSH_HOME/profiles 下的目录名（默认 ~/.dsh/profiles，例如 web 或 default）。</value>
+  </data>
+  <data name="Mcp_ClientDshProfilesDetectedFormat" xml:space="preserve">
+    <value>已检测到配置集：{0}</value>
+  </data>
+  <data name="Mcp_ClientPathTitle" xml:space="preserve">
+    <value>配置文件路径</value>
+  </data>
+  <data name="Mcp_ClientPreviewTitle" xml:space="preserve">
+    <value>配置片段</value>
+  </data>
+  <data name="Mcp_ClientCopyConfig" xml:space="preserve">
+    <value>复制配置</value>
+  </data>
+  <data name="Mcp_ClientInstallConfig" xml:space="preserve">
+    <value>写入配置</value>
+  </data>
+  <data name="Mcp_ClientUpdateConfig" xml:space="preserve">
+    <value>更新配置</value>
+  </data>
+  <data name="Mcp_ClientState_Missing" xml:space="preserve">
+    <value>尚未找到配置文件，写入时将自动创建。</value>
+  </data>
+  <data name="Mcp_ClientState_NotConfigured" xml:space="preserve">
+    <value>已检测到配置文件，尚未添加 fufu-launcher。</value>
+  </data>
+  <data name="Mcp_ClientState_Configured" xml:space="preserve">
+    <value>已配置且与当前端口和令牌一致。</value>
+  </data>
+  <data name="Mcp_ClientState_NeedsUpdate" xml:space="preserve">
+    <value>已配置，但与当前端口、令牌或地址不一致。</value>
+  </data>
+  <data name="Mcp_ClientState_InvalidFormat" xml:space="preserve">
+    <value>现有配置文件无法解析：{0}</value>
+  </data>
+  <data name="Mcp_ClientNote_ClaudeDesktop" xml:space="preserve">
+    <value>Claude Desktop 的 JSON 配置仅支持 stdio 命令，因此通过 npx mcp-remote 桥接（需本机已安装 Node.js）。</value>
+  </data>
+  <data name="Mcp_ClientNote_DshCordis" xml:space="preserve">
+    <value>将 @deepseek-ai/dsh-mcp-client 插件条目写入所选 profile 的 cordis.patch.yml。</value>
+  </data>
+  <data name="Mcp_ClientCopied" xml:space="preserve">
+    <value>配置片段已复制到剪贴板。</value>
+  </data>
+  <data name="Mcp_ClientInstallSuccessFormat" xml:space="preserve">
+    <value>配置已写入 {0}</value>
+  </data>
+  <data name="Mcp_ClientInstallFailedFormat" xml:space="preserve">
+    <value>写入配置失败：{0}</value>
+  </data>
+  <data name="Mcp_ClientCopyFailed" xml:space="preserve">
+    <value>复制配置片段到剪贴板失败。</value>
+  </data>
 </root>

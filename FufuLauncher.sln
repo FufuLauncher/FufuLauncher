@@ -12,6 +12,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateFufuLauncher.Tests", "UpdateFufuLauncher.Tests\UpdateFufuLauncher.Tests.csproj", "{80C7ED8B-3895-4F3A-8372-D75F9A7FBE34}"
 EndProject
 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FufuLauncher.Tests", "FufuLauncher.Tests\FufuLauncher.Tests.csproj", "{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}"
+EndProject
+
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|arm64 = Debug|arm64
@@ -64,6 +67,18 @@ Global
 		{80C7ED8B-3895-4F3A-8372-D75F9A7FBE34}.Release|x64.Build.0 = Release|Any CPU
 		{80C7ED8B-3895-4F3A-8372-D75F9A7FBE34}.Release|x86.ActiveCfg = Release|Any CPU
 		{80C7ED8B-3895-4F3A-8372-D75F9A7FBE34}.Release|x86.Build.0 = Release|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Debug|arm64.Build.0 = Debug|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Debug|x64.Build.0 = Debug|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Debug|x86.Build.0 = Debug|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Release|arm64.ActiveCfg = Release|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Release|arm64.Build.0 = Release|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Release|x64.ActiveCfg = Release|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Release|x64.Build.0 = Release|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Release|x86.ActiveCfg = Release|Any CPU
+		{B30887F1-54E6-4E86-8A15-92C5ECE9FB4A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

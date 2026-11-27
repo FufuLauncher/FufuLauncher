@@ -541,6 +541,19 @@ public sealed class McpHostService
         return true;
     }
 
+    public string GetLocalEndpoint() => ApiEndpoints.GetMcpLocalEndpointUrl(Port);
+
+    public bool IsLocalhostOnly
+    {
+        get
+        {
+            lock (_stateLock)
+            {
+                return _ipFilterEnabled && _ipAllowMode && _ipRules.Count == 0;
+            }
+        }
+    }
+
     public string GetPrimaryEndpoint()
     {
         var lanAddresses = GetLanAddresses();
